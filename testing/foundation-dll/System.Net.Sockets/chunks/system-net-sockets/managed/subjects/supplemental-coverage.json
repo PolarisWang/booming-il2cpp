@@ -1,0 +1,82 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Net.Sockets",
+  "chunkSlug": "system-net-sockets",
+  "entries": [
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Read:System.Int32(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Write:System.Void(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetRawSocketOption:System.Int32(System.Int32,System.Int32,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Span<System.Byte>,System.Net.EndPoint)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFrom:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Net.Sockets.TransmitFileOptions)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.EndPoint)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetRawSocketOption:System.Void(System.Int32,System.Int32,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Create:System.Net.Sockets.TcpListener(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Start:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Start:System.Void(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.IPEndPoint)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.String,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UnixDomainSocketEndPoint::Create:System.Net.EndPoint(System.Net.SocketAddress)"
+    }
+  ]
+}

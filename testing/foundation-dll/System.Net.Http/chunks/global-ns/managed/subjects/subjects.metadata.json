@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Net.Http",
   "chunkSlug": "global-ns",
-  "totalMethods": 119,
+  "totalMethods": 125,
   "factMethodCount": 59,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -389,19 +389,19 @@
     {
       "index": 23,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Add:System.Void(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Add:System.Void(System.String,System.Collections.Generic.IEnumerable<System.String>)",
       "generatedMethodId": "Add_1_string_IEnumerablestring_0"
     },
     {
       "index": 24,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Add:System.Void(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Add:System.Void(System.String,System.Collections.Generic.IEnumerable<System.String>)",
       "generatedMethodId": "Add_1_string_IEnumerablestring_1"
     },
     {
       "index": 25,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Add:System.Void(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::Add:System.Void(System.String,System.Collections.Generic.IEnumerable<System.String>)",
       "generatedMethodId": "Add_1_string_IEnumerablestring_2"
     },
     {
@@ -425,49 +425,49 @@
     {
       "index": 29,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryAddWithoutValidation:System.Boolean(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryAddWithoutValidation:System.Boolean(System.String,System.Collections.Generic.IEnumerable<System.String>)",
       "generatedMethodId": "TryAddWithoutValidation_3_string_IEnumerablestring_0"
     },
     {
       "index": 30,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryAddWithoutValidation:System.Boolean(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryAddWithoutValidation:System.Boolean(System.String,System.Collections.Generic.IEnumerable<System.String>)",
       "generatedMethodId": "TryAddWithoutValidation_3_string_IEnumerablestring_1"
     },
     {
       "index": 31,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryAddWithoutValidation:System.Boolean(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryAddWithoutValidation:System.Boolean(System.String,System.Collections.Generic.IEnumerable<System.String>)",
       "generatedMethodId": "TryAddWithoutValidation_3_string_IEnumerablestring_2"
     },
     {
       "index": 32,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::GetValues:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::GetValues:System.Collections.Generic.IEnumerable<System.String>(System.String)",
       "generatedMethodId": "GetValues_4_string_0"
     },
     {
       "index": 33,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::GetValues:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::GetValues:System.Collections.Generic.IEnumerable<System.String>(System.String)",
       "generatedMethodId": "GetValues_4_string_1"
     },
     {
       "index": 34,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryGetValues:System.Boolean(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryGetValues:System.Boolean(System.String,System.Collections.Generic.IEnumerable<System.String>)",
       "generatedMethodId": "TryGetValues_5_string_IEnumerablestring_0"
     },
     {
       "index": 35,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryGetValues:System.Boolean(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryGetValues:System.Boolean(System.String,System.Collections.Generic.IEnumerable<System.String>)",
       "generatedMethodId": "TryGetValues_5_string_IEnumerablestring_1"
     },
     {
       "index": 36,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryGetValues:System.Boolean(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::TryGetValues:System.Boolean(System.String,System.Collections.Generic.IEnumerable<System.String>)",
       "generatedMethodId": "TryGetValues_5_string_IEnumerablestring_2"
     },
     {
@@ -485,7 +485,7 @@
     {
       "index": 39,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E\u003E\u003E()",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaders::GetEnumerator:System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<System.String,System.Collections.Generic.IEnumerable<System.String>>>()",
       "generatedMethodId": "GetEnumerator_7__0"
     },
     {
@@ -533,73 +533,73 @@
     {
       "index": 47,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Add:System.Void(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection<System.String>::Add:System.Void(System.String)",
       "generatedMethodId": "Add_0_string_0"
     },
     {
       "index": 48,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Add:System.Void(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection<System.String>::Add:System.Void(System.String)",
       "generatedMethodId": "Add_0_string_1"
     },
     {
       "index": 49,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::ParseAdd:System.Void(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection<System.String>::ParseAdd:System.Void(System.String)",
       "generatedMethodId": "ParseAdd_1_string_0"
     },
     {
       "index": 50,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::ParseAdd:System.Void(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection<System.String>::ParseAdd:System.Void(System.String)",
       "generatedMethodId": "ParseAdd_1_string_1"
     },
     {
       "index": 51,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::TryParseAdd:System.Boolean(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection<System.String>::TryParseAdd:System.Boolean(System.String)",
       "generatedMethodId": "TryParseAdd_2_string_0"
     },
     {
       "index": 52,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::TryParseAdd:System.Boolean(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection<System.String>::TryParseAdd:System.Boolean(System.String)",
       "generatedMethodId": "TryParseAdd_2_string_1"
     },
     {
       "index": 53,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Clear:System.Void()",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection<System.String>::Clear:System.Void()",
       "generatedMethodId": "Clear_3__0"
     },
     {
       "index": 54,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Contains:System.Boolean(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection<System.String>::Contains:System.Boolean(System.String)",
       "generatedMethodId": "Contains_4_string_0"
     },
     {
       "index": 55,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Contains:System.Boolean(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection<System.String>::Contains:System.Boolean(System.String)",
       "generatedMethodId": "Contains_4_string_1"
     },
     {
       "index": 56,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Remove:System.Boolean(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection<System.String>::Remove:System.Boolean(System.String)",
       "generatedMethodId": "Remove_5_string_0"
     },
     {
       "index": 57,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::Remove:System.Boolean(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection<System.String>::Remove:System.Boolean(System.String)",
       "generatedMethodId": "Remove_5_string_1"
     },
     {
       "index": 58,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection\u003CSystem.String\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.String\u003E()",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeaderValueCollection<System.String>::GetEnumerator:System.Collections.Generic.IEnumerator<System.String>()",
       "generatedMethodId": "GetEnumerator_6__0"
     },
     {
@@ -953,14 +953,50 @@
     {
       "index": 117,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Metrics.HttpMetricsEnrichmentContext::AddCallback:System.Void(System.Net.Http.HttpRequestMessage,System.Action\u003CSystem.Net.Http.Metrics.HttpMetricsEnrichmentContext\u003E)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Metrics.HttpMetricsEnrichmentContext::AddCallback:System.Void(System.Net.Http.HttpRequestMessage,System.Action<System.Net.Http.Metrics.HttpMetricsEnrichmentContext>)",
       "generatedMethodId": "AddCallback_1_HttpRequestMessage_System_ActionHttpMetricsEnrichmentContext_0"
     },
     {
       "index": 118,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.Metrics.HttpMetricsEnrichmentContext::AddCallback:System.Void(System.Net.Http.HttpRequestMessage,System.Action\u003CSystem.Net.Http.Metrics.HttpMetricsEnrichmentContext\u003E)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Metrics.HttpMetricsEnrichmentContext::AddCallback:System.Void(System.Net.Http.HttpRequestMessage,System.Action<System.Net.Http.Metrics.HttpMetricsEnrichmentContext>)",
       "generatedMethodId": "AddCallback_1_HttpRequestMessage_System_ActionHttpMetricsEnrichmentContext_1"
+    },
+    {
+      "index": 119,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HeaderStringValues+Enumerator::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 120,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HeaderStringValues+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 121,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HeaderStringValues::GetEnumerator:System.Net.Http.Headers.HeaderStringValues+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 122,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 123,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 124,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated::GetEnumerator:System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator()",
+      "generatedMethodId": ""
     }
   ]
 }

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.ComponentModel.TypeConverter",
   "chunkSlug": "system-componentmodel-design",
-  "totalMethods": 39,
+  "totalMethods": 70,
   "factMethodCount": 28,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -321,6 +321,192 @@
       "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.TypeDescriptionProviderService::GetProvider:System.ComponentModel.TypeDescriptionProvider(System.Type)",
       "generatedMethodId": "GetProvider_1_System_Type_0"
+    },
+    {
+      "index": 39,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ActiveDesignerEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ActiveDesignerEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 40,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ActiveDesignerEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 41,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ActiveDesignerEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ActiveDesignerEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 42,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 43,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 44,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangedEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 45,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangingEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentChangingEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 46,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangingEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 47,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangingEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentChangingEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 48,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 49,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 50,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 51,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentRenameEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentRenameEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 52,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentRenameEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 53,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentRenameEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentRenameEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 54,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.DesignerEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 55,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 56,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.DesignerEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 57,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 58,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection::GetEnumerator:System.Collections.IEnumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 59,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection::IndexOf:System.Int32(System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 60,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection::ShowDialog:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 61,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransactionCloseEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.DesignerTransactionCloseEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 62,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransactionCloseEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 63,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransactionCloseEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.DesignerTransactionCloseEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 64,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::CopyTo:System.Void(System.ComponentModel.Design.DesignerVerb[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 65,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.MenuCommand::Invoke:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 66,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.MenuCommand::Invoke:System.Void(System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 67,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceCreatorCallback::BeginInvoke:System.IAsyncResult(System.ComponentModel.Design.IServiceContainer,System.Type,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 68,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceCreatorCallback::EndInvoke:System.Object(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 69,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceCreatorCallback::Invoke:System.Object(System.ComponentModel.Design.IServiceContainer,System.Type)",
+      "generatedMethodId": ""
     }
   ]
 }

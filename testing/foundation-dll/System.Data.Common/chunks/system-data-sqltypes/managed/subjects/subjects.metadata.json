@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Data.Common",
   "chunkSlug": "system-data-sqltypes",
-  "totalMethods": 353,
+  "totalMethods": 355,
   "factMethodCount": 312,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -2833,6 +2833,18 @@
       "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlXml::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
       "generatedMethodId": "GetXsdType_1_XmlSchemaSet_0"
+    },
+    {
+      "index": 353,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Abs:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 354,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::WriteTdsValue:System.Int32(System.Span<System.UInt32>)",
+      "generatedMethodId": ""
     }
   ]
 }

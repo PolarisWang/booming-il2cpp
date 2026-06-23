@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Data.Common",
   "chunkSlug": "system-data",
-  "totalMethods": 652,
+  "totalMethods": 686,
   "factMethodCount": 350,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -1833,13 +1833,13 @@
     {
       "index": 86,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetFieldValueAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Data.Common.DbDataReader,System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetFieldValueAsync:System.Threading.Tasks.Task<System.Int32>(System.Data.Common.DbDataReader,System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "GetFieldValueAsync_12_DbDataReader_string_CancellationToken_0"
     },
     {
       "index": 87,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetFieldValueAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Data.Common.DbDataReader,System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetFieldValueAsync:System.Threading.Tasks.Task<System.Int32>(System.Data.Common.DbDataReader,System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "GetFieldValueAsync_12_DbDataReader_string_CancellationToken_1"
     },
     {
@@ -1989,13 +1989,13 @@
     {
       "index": 112,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::IsDBNullAsync:System.Threading.Tasks.Task\u003CSystem.Boolean\u003E(System.Data.Common.DbDataReader,System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::IsDBNullAsync:System.Threading.Tasks.Task<System.Boolean>(System.Data.Common.DbDataReader,System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "IsDBNullAsync_25_DbDataReader_string_CancellationToken_0"
     },
     {
       "index": 113,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::IsDBNullAsync:System.Threading.Tasks.Task\u003CSystem.Boolean\u003E(System.Data.Common.DbDataReader,System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::IsDBNullAsync:System.Threading.Tasks.Task<System.Boolean>(System.Data.Common.DbDataReader,System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "IsDBNullAsync_25_DbDataReader_string_CancellationToken_1"
     },
     {
@@ -3015,13 +3015,13 @@
     {
       "index": 283,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.IO.Stream,System.Converter\u003CSystem.Type,System.String\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.IO.Stream,System.Converter<System.Type,System.String>)",
       "generatedMethodId": "WriteXmlSchema_21_Stream_System_ConverterSystem_Typestring_0"
     },
     {
       "index": 284,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.IO.Stream,System.Converter\u003CSystem.Type,System.String\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.IO.Stream,System.Converter<System.Type,System.String>)",
       "generatedMethodId": "WriteXmlSchema_21_Stream_System_ConverterSystem_Typestring_1"
     },
     {
@@ -3039,19 +3039,19 @@
     {
       "index": 287,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.String,System.Converter\u003CSystem.Type,System.String\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.String,System.Converter<System.Type,System.String>)",
       "generatedMethodId": "WriteXmlSchema_23_string_System_ConverterSystem_Typestring_0"
     },
     {
       "index": 288,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.String,System.Converter\u003CSystem.Type,System.String\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.String,System.Converter<System.Type,System.String>)",
       "generatedMethodId": "WriteXmlSchema_23_string_System_ConverterSystem_Typestring_1"
     },
     {
       "index": 289,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.String,System.Converter\u003CSystem.Type,System.String\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.String,System.Converter<System.Type,System.String>)",
       "generatedMethodId": "WriteXmlSchema_23_string_System_ConverterSystem_Typestring_2"
     },
     {
@@ -3069,13 +3069,13 @@
     {
       "index": 292,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.IO.TextWriter,System.Converter\u003CSystem.Type,System.String\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.IO.TextWriter,System.Converter<System.Type,System.String>)",
       "generatedMethodId": "WriteXmlSchema_25_TextWriter_System_ConverterSystem_Typestring_0"
     },
     {
       "index": 293,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.IO.TextWriter,System.Converter\u003CSystem.Type,System.String\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.IO.TextWriter,System.Converter<System.Type,System.String>)",
       "generatedMethodId": "WriteXmlSchema_25_TextWriter_System_ConverterSystem_Typestring_1"
     },
     {
@@ -3087,13 +3087,13 @@
     {
       "index": 295,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.Xml.XmlWriter,System.Converter\u003CSystem.Type,System.String\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.Xml.XmlWriter,System.Converter<System.Type,System.String>)",
       "generatedMethodId": "WriteXmlSchema_27_XmlWriter_System_ConverterSystem_Typestring_0"
     },
     {
       "index": 296,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.Xml.XmlWriter,System.Converter\u003CSystem.Type,System.String\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.Xml.XmlWriter,System.Converter<System.Type,System.String>)",
       "generatedMethodId": "WriteXmlSchema_27_XmlWriter_System_ConverterSystem_Typestring_1"
     },
     {
@@ -4299,43 +4299,43 @@
     {
       "index": 497,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::AsEnumerable:System.Data.EnumerableRowCollection\u003CSystem.Data.DataRow\u003E(System.Data.DataTable)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::AsEnumerable:System.Data.EnumerableRowCollection<System.Data.DataRow>(System.Data.DataTable)",
       "generatedMethodId": "AsEnumerable_0_DataTable_0"
     },
     {
       "index": 498,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::CopyToDataTable:System.Data.DataTable(System.Collections.Generic.IEnumerable\u003CSystem.Data.DataRow\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::CopyToDataTable:System.Data.DataTable(System.Collections.Generic.IEnumerable<System.Data.DataRow>)",
       "generatedMethodId": "CopyToDataTable_1_IEnumerableDataRow_0"
     },
     {
       "index": 499,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::CopyToDataTable:System.Data.DataTable(System.Collections.Generic.IEnumerable\u003CSystem.Data.DataRow\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::CopyToDataTable:System.Data.DataTable(System.Collections.Generic.IEnumerable<System.Data.DataRow>)",
       "generatedMethodId": "CopyToDataTable_1_IEnumerableDataRow_1"
     },
     {
       "index": 500,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::CopyToDataTable:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Data.DataRow\u003E,System.Data.DataTable,System.Data.LoadOption)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::CopyToDataTable:System.Void(System.Collections.Generic.IEnumerable<System.Data.DataRow>,System.Data.DataTable,System.Data.LoadOption)",
       "generatedMethodId": "CopyToDataTable_2_IEnumerableDataRow_DataTable_LoadOption_0"
     },
     {
       "index": 501,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::CopyToDataTable:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Data.DataRow\u003E,System.Data.DataTable,System.Data.LoadOption)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::CopyToDataTable:System.Void(System.Collections.Generic.IEnumerable<System.Data.DataRow>,System.Data.DataTable,System.Data.LoadOption)",
       "generatedMethodId": "CopyToDataTable_2_IEnumerableDataRow_DataTable_LoadOption_1"
     },
     {
       "index": 502,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::CopyToDataTable:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Data.DataRow\u003E,System.Data.DataTable,System.Data.LoadOption,System.Data.FillErrorEventHandler)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::CopyToDataTable:System.Void(System.Collections.Generic.IEnumerable<System.Data.DataRow>,System.Data.DataTable,System.Data.LoadOption,System.Data.FillErrorEventHandler)",
       "generatedMethodId": "CopyToDataTable_3_IEnumerableDataRow_DataTable_LoadOption_FillErrorEventHandler_0"
     },
     {
       "index": 503,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::CopyToDataTable:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Data.DataRow\u003E,System.Data.DataTable,System.Data.LoadOption,System.Data.FillErrorEventHandler)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::CopyToDataTable:System.Void(System.Collections.Generic.IEnumerable<System.Data.DataRow>,System.Data.DataTable,System.Data.LoadOption,System.Data.FillErrorEventHandler)",
       "generatedMethodId": "CopyToDataTable_3_IEnumerableDataRow_DataTable_LoadOption_FillErrorEventHandler_1"
     },
     {
@@ -4347,7 +4347,7 @@
     {
       "index": 505,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::AsDataView:System.Data.DataView(System.Data.EnumerableRowCollection\u003CSystem.Data.DataRow\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::AsDataView:System.Data.DataView(System.Data.EnumerableRowCollection<System.Data.DataRow>)",
       "generatedMethodId": "AsDataView_5_EnumerableRowCollectionDataRow_0"
     },
     {
@@ -4965,133 +4965,133 @@
     {
       "index": 608,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollection<System.Int32>::GetEnumerator:System.Collections.Generic.IEnumerator<System.Int32>()",
       "generatedMethodId": "GetEnumerator_0__0"
     },
     {
       "index": 609,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::Where:System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::Where:System.Data.EnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Boolean>)",
       "generatedMethodId": "Where_0_EnumerableRowCollectionint_System_Funcintbool_0"
     },
     {
       "index": 610,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::Where:System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::Where:System.Data.EnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Boolean>)",
       "generatedMethodId": "Where_0_EnumerableRowCollectionint_System_Funcintbool_1"
     },
     {
       "index": 611,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>)",
       "generatedMethodId": "OrderBy_1_EnumerableRowCollectionint_System_Funcintint_0"
     },
     {
       "index": 612,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>)",
       "generatedMethodId": "OrderBy_1_EnumerableRowCollectionint_System_Funcintint_1"
     },
     {
       "index": 613,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IComparer<System.Int32>)",
       "generatedMethodId": "OrderBy_2_EnumerableRowCollectionint_System_Funcintint_IComparerint_0"
     },
     {
       "index": 614,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IComparer<System.Int32>)",
       "generatedMethodId": "OrderBy_2_EnumerableRowCollectionint_System_Funcintint_IComparerint_1"
     },
     {
       "index": 615,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>)",
       "generatedMethodId": "OrderByDescending_3_EnumerableRowCollectionint_System_Funcintint_0"
     },
     {
       "index": 616,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>)",
       "generatedMethodId": "OrderByDescending_3_EnumerableRowCollectionint_System_Funcintint_1"
     },
     {
       "index": 617,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IComparer<System.Int32>)",
       "generatedMethodId": "OrderByDescending_4_EnumerableRowCollectionint_System_Funcintint_IComparerint_0"
     },
     {
       "index": 618,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IComparer<System.Int32>)",
       "generatedMethodId": "OrderByDescending_4_EnumerableRowCollectionint_System_Funcintint_IComparerint_1"
     },
     {
       "index": 619,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenBy:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenBy:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.OrderedEnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>)",
       "generatedMethodId": "ThenBy_5_OrderedEnumerableRowCollectionint_System_Funcintint_0"
     },
     {
       "index": 620,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenBy:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenBy:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.OrderedEnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>)",
       "generatedMethodId": "ThenBy_5_OrderedEnumerableRowCollectionint_System_Funcintint_1"
     },
     {
       "index": 621,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenBy:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenBy:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.OrderedEnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IComparer<System.Int32>)",
       "generatedMethodId": "ThenBy_6_OrderedEnumerableRowCollectionint_System_Funcintint_IComparerint_0"
     },
     {
       "index": 622,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenBy:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenBy:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.OrderedEnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IComparer<System.Int32>)",
       "generatedMethodId": "ThenBy_6_OrderedEnumerableRowCollectionint_System_Funcintint_IComparerint_1"
     },
     {
       "index": 623,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenByDescending:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenByDescending:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.OrderedEnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>)",
       "generatedMethodId": "ThenByDescending_7_OrderedEnumerableRowCollectionint_System_Funcintint_0"
     },
     {
       "index": 624,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenByDescending:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenByDescending:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.OrderedEnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>)",
       "generatedMethodId": "ThenByDescending_7_OrderedEnumerableRowCollectionint_System_Funcintint_1"
     },
     {
       "index": 625,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenByDescending:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenByDescending:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.OrderedEnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IComparer<System.Int32>)",
       "generatedMethodId": "ThenByDescending_8_OrderedEnumerableRowCollectionint_System_Funcintint_IComparerint_0"
     },
     {
       "index": 626,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenByDescending:System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.OrderedEnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::ThenByDescending:System.Data.OrderedEnumerableRowCollection<System.Int32>(System.Data.OrderedEnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IComparer<System.Int32>)",
       "generatedMethodId": "ThenByDescending_8_OrderedEnumerableRowCollectionint_System_Funcintint_IComparerint_1"
     },
     {
       "index": 627,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::Select:System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::Select:System.Data.EnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>)",
       "generatedMethodId": "Select_9_EnumerableRowCollectionint_System_Funcintint_0"
     },
     {
       "index": 628,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::Select:System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::Select:System.Data.EnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection<System.Int32>,System.Func<System.Int32,System.Int32>)",
       "generatedMethodId": "Select_9_EnumerableRowCollectionint_System_Funcintint_1"
     },
     {
       "index": 629,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::Cast:System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.EnumerableRowCollection)",
+      "methodSubjectId": "System.Data.Common/System.Data.EnumerableRowCollectionExtensions::Cast:System.Data.EnumerableRowCollection<System.Int32>(System.Data.EnumerableRowCollection)",
       "generatedMethodId": "Cast_10_EnumerableRowCollection_0"
     },
     {
@@ -5127,104 +5127,308 @@
     {
       "index": 635,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Data.DataRow\u003E()",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBase<System.Data.DataRow>::GetEnumerator:System.Collections.Generic.IEnumerator<System.Data.DataRow>()",
       "generatedMethodId": "GetEnumerator_0__0"
     },
     {
       "index": 636,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E::Cast:System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E()",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBase<System.Data.DataRow>::Cast:System.Data.EnumerableRowCollection<System.Int32>()",
       "generatedMethodId": "Cast_1__0"
     },
     {
       "index": 637,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::Where:System.Data.EnumerableRowCollection\u003CSystem.Data.DataRow\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Func\u003CSystem.Data.DataRow,System.Boolean\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::Where:System.Data.EnumerableRowCollection<System.Data.DataRow>(System.Data.TypedTableBase<System.Data.DataRow>,System.Func<System.Data.DataRow,System.Boolean>)",
       "generatedMethodId": "Where_0_TypedTableBaseDataRow_System_FuncDataRowbool_0"
     },
     {
       "index": 638,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::Where:System.Data.EnumerableRowCollection\u003CSystem.Data.DataRow\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Func\u003CSystem.Data.DataRow,System.Boolean\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::Where:System.Data.EnumerableRowCollection<System.Data.DataRow>(System.Data.TypedTableBase<System.Data.DataRow>,System.Func<System.Data.DataRow,System.Boolean>)",
       "generatedMethodId": "Where_0_TypedTableBaseDataRow_System_FuncDataRowbool_1"
     },
     {
       "index": 639,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection\u003CSystem.Data.DataRow\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Func\u003CSystem.Data.DataRow,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection<System.Data.DataRow>(System.Data.TypedTableBase<System.Data.DataRow>,System.Func<System.Data.DataRow,System.Int32>)",
       "generatedMethodId": "OrderBy_1_TypedTableBaseDataRow_System_FuncDataRowint_0"
     },
     {
       "index": 640,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection\u003CSystem.Data.DataRow\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Func\u003CSystem.Data.DataRow,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection<System.Data.DataRow>(System.Data.TypedTableBase<System.Data.DataRow>,System.Func<System.Data.DataRow,System.Int32>)",
       "generatedMethodId": "OrderBy_1_TypedTableBaseDataRow_System_FuncDataRowint_1"
     },
     {
       "index": 641,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection\u003CSystem.Data.DataRow\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Func\u003CSystem.Data.DataRow,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection<System.Data.DataRow>(System.Data.TypedTableBase<System.Data.DataRow>,System.Func<System.Data.DataRow,System.Int32>,System.Collections.Generic.IComparer<System.Int32>)",
       "generatedMethodId": "OrderBy_2_TypedTableBaseDataRow_System_FuncDataRowint_IComparerint_0"
     },
     {
       "index": 642,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection\u003CSystem.Data.DataRow\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Func\u003CSystem.Data.DataRow,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderBy:System.Data.OrderedEnumerableRowCollection<System.Data.DataRow>(System.Data.TypedTableBase<System.Data.DataRow>,System.Func<System.Data.DataRow,System.Int32>,System.Collections.Generic.IComparer<System.Int32>)",
       "generatedMethodId": "OrderBy_2_TypedTableBaseDataRow_System_FuncDataRowint_IComparerint_1"
     },
     {
       "index": 643,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection\u003CSystem.Data.DataRow\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Func\u003CSystem.Data.DataRow,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection<System.Data.DataRow>(System.Data.TypedTableBase<System.Data.DataRow>,System.Func<System.Data.DataRow,System.Int32>)",
       "generatedMethodId": "OrderByDescending_3_TypedTableBaseDataRow_System_FuncDataRowint_0"
     },
     {
       "index": 644,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection\u003CSystem.Data.DataRow\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Func\u003CSystem.Data.DataRow,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection<System.Data.DataRow>(System.Data.TypedTableBase<System.Data.DataRow>,System.Func<System.Data.DataRow,System.Int32>)",
       "generatedMethodId": "OrderByDescending_3_TypedTableBaseDataRow_System_FuncDataRowint_1"
     },
     {
       "index": 645,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection\u003CSystem.Data.DataRow\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Func\u003CSystem.Data.DataRow,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection<System.Data.DataRow>(System.Data.TypedTableBase<System.Data.DataRow>,System.Func<System.Data.DataRow,System.Int32>,System.Collections.Generic.IComparer<System.Int32>)",
       "generatedMethodId": "OrderByDescending_4_TypedTableBaseDataRow_System_FuncDataRowint_IComparerint_0"
     },
     {
       "index": 646,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection\u003CSystem.Data.DataRow\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Func\u003CSystem.Data.DataRow,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::OrderByDescending:System.Data.OrderedEnumerableRowCollection<System.Data.DataRow>(System.Data.TypedTableBase<System.Data.DataRow>,System.Func<System.Data.DataRow,System.Int32>,System.Collections.Generic.IComparer<System.Int32>)",
       "generatedMethodId": "OrderByDescending_4_TypedTableBaseDataRow_System_FuncDataRowint_IComparerint_1"
     },
     {
       "index": 647,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::Select:System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Func\u003CSystem.Data.DataRow,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::Select:System.Data.EnumerableRowCollection<System.Int32>(System.Data.TypedTableBase<System.Data.DataRow>,System.Func<System.Data.DataRow,System.Int32>)",
       "generatedMethodId": "Select_5_TypedTableBaseDataRow_System_FuncDataRowint_0"
     },
     {
       "index": 648,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::Select:System.Data.EnumerableRowCollection\u003CSystem.Int32\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Func\u003CSystem.Data.DataRow,System.Int32\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::Select:System.Data.EnumerableRowCollection<System.Int32>(System.Data.TypedTableBase<System.Data.DataRow>,System.Func<System.Data.DataRow,System.Int32>)",
       "generatedMethodId": "Select_5_TypedTableBaseDataRow_System_FuncDataRowint_1"
     },
     {
       "index": 649,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::AsEnumerable:System.Data.EnumerableRowCollection\u003CSystem.Data.DataRow\u003E(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::AsEnumerable:System.Data.EnumerableRowCollection<System.Data.DataRow>(System.Data.TypedTableBase<System.Data.DataRow>)",
       "generatedMethodId": "AsEnumerable_6_TypedTableBaseDataRow_0"
     },
     {
       "index": 650,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::ElementAtOrDefault:System.Data.DataRow(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Int32)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::ElementAtOrDefault:System.Data.DataRow(System.Data.TypedTableBase<System.Data.DataRow>,System.Int32)",
       "generatedMethodId": "ElementAtOrDefault_7_TypedTableBaseDataRow_int_0"
     },
     {
       "index": 651,
       "kind": "fact",
-      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::ElementAtOrDefault:System.Data.DataRow(System.Data.TypedTableBase\u003CSystem.Data.DataRow\u003E,System.Int32)",
+      "methodSubjectId": "System.Data.Common/System.Data.TypedTableBaseExtensions::ElementAtOrDefault:System.Data.DataRow(System.Data.TypedTableBase<System.Data.DataRow>,System.Int32)",
       "generatedMethodId": "ElementAtOrDefault_7_TypedTableBaseDataRow_int_1"
+    },
+    {
+      "index": 652,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::CopyTo:System.Void(System.Data.Constraint[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 653,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DBConcurrencyException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 654,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataColumnChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataColumnChangeEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 655,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataColumnChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 656,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataColumnChangeEventHandler::Invoke:System.Void(System.Object,System.Data.DataColumnChangeEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 657,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::CopyTo:System.Void(System.Data.DataColumn[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 658,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataRowChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataRowChangeEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 659,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataRowChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 660,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataRowChangeEventHandler::Invoke:System.Void(System.Object,System.Data.DataRowChangeEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 661,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::CopyTo:System.Void(System.Data.DataRow[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 662,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 663,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 664,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTable::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 665,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTable::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 666,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableClearEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataTableClearEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 667,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableClearEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 668,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableClearEventHandler::Invoke:System.Void(System.Object,System.Data.DataTableClearEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 669,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::CopyTo:System.Void(System.Data.DataTable[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 670,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableNewRowEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataTableNewRowEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 671,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableNewRowEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 672,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableNewRowEventHandler::Invoke:System.Void(System.Object,System.Data.DataTableNewRowEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 673,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.DataViewSettingCollection::CopyTo:System.Void(System.Data.DataViewSetting[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 674,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.FillErrorEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.FillErrorEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 675,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.FillErrorEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 676,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.FillErrorEventHandler::Invoke:System.Void(System.Object,System.Data.FillErrorEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 677,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.MergeFailedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.MergeFailedEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 678,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.MergeFailedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 679,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.MergeFailedEventHandler::Invoke:System.Void(System.Object,System.Data.MergeFailedEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 680,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.StateChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.StateChangeEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 681,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.StateChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 682,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.StateChangeEventHandler::Invoke:System.Void(System.Object,System.Data.StateChangeEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 683,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.StatementCompletedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.StatementCompletedEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 684,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.StatementCompletedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 685,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Data.Common/System.Data.StatementCompletedEventHandler::Invoke:System.Void(System.Object,System.Data.StatementCompletedEventArgs)",
+      "generatedMethodId": ""
     }
   ]
 }

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Linq.Expressions",
   "chunkSlug": "global-ns",
-  "totalMethods": 752,
+  "totalMethods": 754,
   "factMethodCount": 456,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -1571,13 +1571,13 @@
     {
       "index": 9,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.BindingRestrictions::Combine:System.Dynamic.BindingRestrictions(System.Collections.Generic.IList\u003CSystem.Dynamic.DynamicMetaObject\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.BindingRestrictions::Combine:System.Dynamic.BindingRestrictions(System.Collections.Generic.IList<System.Dynamic.DynamicMetaObject>)",
       "generatedMethodId": "Combine_4_IListDynamicMetaObject_0"
     },
     {
       "index": 10,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.BindingRestrictions::Combine:System.Dynamic.BindingRestrictions(System.Collections.Generic.IList\u003CSystem.Dynamic.DynamicMetaObject\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.BindingRestrictions::Combine:System.Dynamic.BindingRestrictions(System.Collections.Generic.IList<System.Dynamic.DynamicMetaObject>)",
       "generatedMethodId": "Combine_4_IListDynamicMetaObject_1"
     },
     {
@@ -1901,25 +1901,25 @@
     {
       "index": 64,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::GetDynamicMemberNames:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E()",
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::GetDynamicMemberNames:System.Collections.Generic.IEnumerable<System.String>()",
       "generatedMethodId": "GetDynamicMemberNames_12__0"
     },
     {
       "index": 65,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObjectBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.LabelTarget)",
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObjectBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.ParameterExpression>,System.Linq.Expressions.LabelTarget)",
       "generatedMethodId": "Bind_0_System_Object_ReadOnlyCollectionParameterExpression_LabelTarget_0"
     },
     {
       "index": 66,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObjectBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.LabelTarget)",
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObjectBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.ParameterExpression>,System.Linq.Expressions.LabelTarget)",
       "generatedMethodId": "Bind_0_System_Object_ReadOnlyCollectionParameterExpression_LabelTarget_1"
     },
     {
       "index": 67,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObjectBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.LabelTarget)",
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObjectBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.ParameterExpression>,System.Linq.Expressions.LabelTarget)",
       "generatedMethodId": "Bind_0_System_Object_ReadOnlyCollectionParameterExpression_LabelTarget_2"
     },
     {
@@ -2129,7 +2129,7 @@
     {
       "index": 102,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::GetDynamicMemberNames:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E()",
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::GetDynamicMemberNames:System.Collections.Generic.IEnumerable<System.String>()",
       "generatedMethodId": "GetDynamicMemberNames_12__0"
     },
     {
@@ -2477,13 +2477,13 @@
     {
       "index": 160,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.BlockExpression::Update:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.BlockExpression::Update:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_IEnumerableParameterExpression_IEnumerableExpression_0"
     },
     {
       "index": 161,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.BlockExpression::Update:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.BlockExpression::Update:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_IEnumerableParameterExpression_IEnumerableExpression_1"
     },
     {
@@ -2507,13 +2507,13 @@
     {
       "index": 165,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Update:System.Linq.Expressions.DynamicExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Update:System.Linq.Expressions.DynamicExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_1_IEnumerableExpression_0"
     },
     {
       "index": 166,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Update:System.Linq.Expressions.DynamicExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Update:System.Linq.Expressions.DynamicExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_1_IEnumerableExpression_1"
     },
     {
@@ -2537,13 +2537,13 @@
     {
       "index": 170,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Dynamic_3_CallSiteBinder_System_Type_IEnumerableExpression_0"
     },
     {
       "index": 171,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Dynamic_3_CallSiteBinder_System_Type_IEnumerableExpression_1"
     },
     {
@@ -2573,13 +2573,13 @@
     {
       "index": 176,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "MakeDynamic_8_System_Type_CallSiteBinder_IEnumerableExpression_0"
     },
     {
       "index": 177,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "MakeDynamic_8_System_Type_CallSiteBinder_IEnumerableExpression_1"
     },
     {
@@ -2627,13 +2627,13 @@
     {
       "index": 185,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ElementInit::Update:System.Linq.Expressions.ElementInit(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ElementInit::Update:System.Linq.Expressions.ElementInit(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_IEnumerableExpression_0"
     },
     {
       "index": 186,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ElementInit::Update:System.Linq.Expressions.ElementInit(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ElementInit::Update:System.Linq.Expressions.ElementInit(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_IEnumerableExpression_1"
     },
     {
@@ -3287,13 +3287,13 @@
     {
       "index": 295,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Block_100_IEnumerableExpression_0"
     },
     {
       "index": 296,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Block_100_IEnumerableExpression_1"
     },
     {
@@ -3317,73 +3317,73 @@
     {
       "index": 300,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Block_102_System_Type_IEnumerableExpression_0"
     },
     {
       "index": 301,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Block_102_System_Type_IEnumerableExpression_1"
     },
     {
       "index": 302,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.Expression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Linq.Expressions.Expression[])",
       "generatedMethodId": "Block_103_IEnumerableParameterExpression_Expression_0"
     },
     {
       "index": 303,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.Expression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Linq.Expressions.Expression[])",
       "generatedMethodId": "Block_103_IEnumerableParameterExpression_Expression_1"
     },
     {
       "index": 304,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.Expression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Linq.Expressions.Expression[])",
       "generatedMethodId": "Block_103_IEnumerableParameterExpression_Expression_2"
     },
     {
       "index": 305,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.Expression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Linq.Expressions.Expression[])",
       "generatedMethodId": "Block_104_System_Type_IEnumerableParameterExpression_Expression_0"
     },
     {
       "index": 306,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.Expression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Linq.Expressions.Expression[])",
       "generatedMethodId": "Block_104_System_Type_IEnumerableParameterExpression_Expression_1"
     },
     {
       "index": 307,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.Expression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Linq.Expressions.Expression[])",
       "generatedMethodId": "Block_104_System_Type_IEnumerableParameterExpression_Expression_2"
     },
     {
       "index": 308,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Block_105_IEnumerableParameterExpression_IEnumerableExpression_0"
     },
     {
       "index": 309,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Block_105_IEnumerableParameterExpression_IEnumerableExpression_1"
     },
     {
       "index": 310,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Block_106_System_Type_IEnumerableParameterExpression_IEnumerableExpression_0"
     },
     {
       "index": 311,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Block:System.Linq.Expressions.BlockExpression(System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Block_106_System_Type_IEnumerableParameterExpression_IEnumerableExpression_1"
     },
     {
@@ -3509,13 +3509,13 @@
     {
       "index": 332,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ElementInit:System.Linq.Expressions.ElementInit(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ElementInit:System.Linq.Expressions.ElementInit(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "ElementInit_123_MethodInfo_IEnumerableExpression_0"
     },
     {
       "index": 333,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ElementInit:System.Linq.Expressions.ElementInit(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ElementInit:System.Linq.Expressions.ElementInit(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "ElementInit_123_MethodInfo_IEnumerableExpression_1"
     },
     {
@@ -3539,13 +3539,13 @@
     {
       "index": 337,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Dynamic_127_CallSiteBinder_System_Type_IEnumerableExpression_0"
     },
     {
       "index": 338,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Dynamic_127_CallSiteBinder_System_Type_IEnumerableExpression_1"
     },
     {
@@ -3593,13 +3593,13 @@
     {
       "index": 346,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "MakeDynamic_133_System_Type_CallSiteBinder_IEnumerableExpression_0"
     },
     {
       "index": 347,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "MakeDynamic_133_System_Type_CallSiteBinder_IEnumerableExpression_1"
     },
     {
@@ -3737,13 +3737,13 @@
     {
       "index": 370,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MakeIndex:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Reflection.PropertyInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MakeIndex:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Reflection.PropertyInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "MakeIndex_154_Expression_PropertyInfo_IEnumerableExpression_0"
     },
     {
       "index": 371,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MakeIndex:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Reflection.PropertyInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MakeIndex:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Reflection.PropertyInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "MakeIndex_154_Expression_PropertyInfo_IEnumerableExpression_1"
     },
     {
@@ -3767,13 +3767,13 @@
     {
       "index": 375,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ArrayAccess:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ArrayAccess:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "ArrayAccess_156_Expression_IEnumerableExpression_0"
     },
     {
       "index": 376,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ArrayAccess:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ArrayAccess:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "ArrayAccess_156_Expression_IEnumerableExpression_1"
     },
     {
@@ -3821,13 +3821,13 @@
     {
       "index": 384,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Property:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Reflection.PropertyInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Property:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Reflection.PropertyInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Property_159_Expression_PropertyInfo_IEnumerableExpression_0"
     },
     {
       "index": 385,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Property:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Reflection.PropertyInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Property:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Reflection.PropertyInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Property_159_Expression_PropertyInfo_IEnumerableExpression_1"
     },
     {
@@ -3881,115 +3881,115 @@
     {
       "index": 394,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])",
       "generatedMethodId": "Lambda_166_Expression_ParameterExpression_0"
     },
     {
       "index": 395,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])",
       "generatedMethodId": "Lambda_166_Expression_ParameterExpression_1"
     },
     {
       "index": 396,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])",
       "generatedMethodId": "Lambda_166_Expression_ParameterExpression_2"
     },
     {
       "index": 397,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Boolean,System.Linq.Expressions.ParameterExpression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Boolean,System.Linq.Expressions.ParameterExpression[])",
       "generatedMethodId": "Lambda_167_Expression_bool_ParameterExpression_0"
     },
     {
       "index": 398,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Boolean,System.Linq.Expressions.ParameterExpression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Boolean,System.Linq.Expressions.ParameterExpression[])",
       "generatedMethodId": "Lambda_167_Expression_bool_ParameterExpression_1"
     },
     {
       "index": 399,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Boolean,System.Linq.Expressions.ParameterExpression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Boolean,System.Linq.Expressions.ParameterExpression[])",
       "generatedMethodId": "Lambda_167_Expression_bool_ParameterExpression_2"
     },
     {
       "index": 400,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Boolean,System.Linq.Expressions.ParameterExpression[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Boolean,System.Linq.Expressions.ParameterExpression[])",
       "generatedMethodId": "Lambda_167_Expression_bool_ParameterExpression_3"
     },
     {
       "index": 401,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_168_Expression_IEnumerableParameterExpression_0"
     },
     {
       "index": 402,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_168_Expression_IEnumerableParameterExpression_1"
     },
     {
       "index": 403,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_169_Expression_bool_IEnumerableParameterExpression_0"
     },
     {
       "index": 404,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_169_Expression_bool_IEnumerableParameterExpression_1"
     },
     {
       "index": 405,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_169_Expression_bool_IEnumerableParameterExpression_2"
     },
     {
       "index": 406,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_170_Expression_string_IEnumerableParameterExpression_0"
     },
     {
       "index": 407,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_170_Expression_string_IEnumerableParameterExpression_1"
     },
     {
       "index": 408,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_170_Expression_string_IEnumerableParameterExpression_2"
     },
     {
       "index": 409,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_171_Expression_string_bool_IEnumerableParameterExpression_0"
     },
     {
       "index": 410,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_171_Expression_string_bool_IEnumerableParameterExpression_1"
     },
     {
       "index": 411,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_171_Expression_string_bool_IEnumerableParameterExpression_2"
     },
     {
       "index": 412,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_171_Expression_string_bool_IEnumerableParameterExpression_3"
     },
     {
@@ -4037,31 +4037,31 @@
     {
       "index": 420,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_174_Expression_IEnumerableParameterExpression_0"
     },
     {
       "index": 421,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_174_Expression_IEnumerableParameterExpression_1"
     },
     {
       "index": 422,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_175_Expression_bool_IEnumerableParameterExpression_0"
     },
     {
       "index": 423,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_175_Expression_bool_IEnumerableParameterExpression_1"
     },
     {
       "index": 424,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_175_Expression_bool_IEnumerableParameterExpression_2"
     },
     {
@@ -4109,109 +4109,109 @@
     {
       "index": 432,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_178_System_Type_Expression_IEnumerableParameterExpression_0"
     },
     {
       "index": 433,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_178_System_Type_Expression_IEnumerableParameterExpression_1"
     },
     {
       "index": 434,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_0"
     },
     {
       "index": 435,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_1"
     },
     {
       "index": 436,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_179_System_Type_Expression_bool_IEnumerableParameterExpression_2"
     },
     {
       "index": 437,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_180_Expression_string_IEnumerableParameterExpression_0"
     },
     {
       "index": 438,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_180_Expression_string_IEnumerableParameterExpression_1"
     },
     {
       "index": 439,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_180_Expression_string_IEnumerableParameterExpression_2"
     },
     {
       "index": 440,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_181_Expression_string_bool_IEnumerableParameterExpression_0"
     },
     {
       "index": 441,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_181_Expression_string_bool_IEnumerableParameterExpression_1"
     },
     {
       "index": 442,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_181_Expression_string_bool_IEnumerableParameterExpression_2"
     },
     {
       "index": 443,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_181_Expression_string_bool_IEnumerableParameterExpression_3"
     },
     {
       "index": 444,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_0"
     },
     {
       "index": 445,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_1"
     },
     {
       "index": 446,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.String,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_182_System_Type_Expression_string_IEnumerableParameterExpression_2"
     },
     {
       "index": 447,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_0"
     },
     {
       "index": 448,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_1"
     },
     {
       "index": 449,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Lambda:System.Linq.Expressions.LambdaExpression(System.Type,System.Linq.Expressions.Expression,System.String,System.Boolean,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Lambda_183_System_Type_Expression_string_bool_IEnumerableParameterExpression_2"
     },
     {
@@ -4325,13 +4325,13 @@
     {
       "index": 468,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListInit:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListInit:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "ListInit_190_NewExpression_IEnumerableExpression_0"
     },
     {
       "index": 469,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListInit:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListInit:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "ListInit_190_NewExpression_IEnumerableExpression_1"
     },
     {
@@ -4355,13 +4355,13 @@
     {
       "index": 473,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListInit:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListInit:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "ListInit_192_NewExpression_MethodInfo_IEnumerableExpression_0"
     },
     {
       "index": 474,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListInit:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListInit:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "ListInit_192_NewExpression_MethodInfo_IEnumerableExpression_1"
     },
     {
@@ -4385,13 +4385,13 @@
     {
       "index": 478,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListInit:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ElementInit\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListInit:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
       "generatedMethodId": "ListInit_194_NewExpression_IEnumerableElementInit_0"
     },
     {
       "index": 479,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListInit:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ElementInit\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListInit:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
       "generatedMethodId": "ListInit_194_NewExpression_IEnumerableElementInit_1"
     },
     {
@@ -4529,13 +4529,13 @@
     {
       "index": 502,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MemberInit:System.Linq.Expressions.MemberInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.MemberBinding\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MemberInit:System.Linq.Expressions.MemberInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
       "generatedMethodId": "MemberInit_210_NewExpression_IEnumerableMemberBinding_0"
     },
     {
       "index": 503,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MemberInit:System.Linq.Expressions.MemberInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.MemberBinding\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MemberInit:System.Linq.Expressions.MemberInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
       "generatedMethodId": "MemberInit_210_NewExpression_IEnumerableMemberBinding_1"
     },
     {
@@ -4559,13 +4559,13 @@
     {
       "index": 507,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListBind:System.Linq.Expressions.MemberListBinding(System.Reflection.MemberInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ElementInit\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListBind:System.Linq.Expressions.MemberListBinding(System.Reflection.MemberInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
       "generatedMethodId": "ListBind_212_MemberInfo_IEnumerableElementInit_0"
     },
     {
       "index": 508,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListBind:System.Linq.Expressions.MemberListBinding(System.Reflection.MemberInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ElementInit\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListBind:System.Linq.Expressions.MemberListBinding(System.Reflection.MemberInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
       "generatedMethodId": "ListBind_212_MemberInfo_IEnumerableElementInit_1"
     },
     {
@@ -4589,13 +4589,13 @@
     {
       "index": 512,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListBind:System.Linq.Expressions.MemberListBinding(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ElementInit\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListBind:System.Linq.Expressions.MemberListBinding(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
       "generatedMethodId": "ListBind_214_MethodInfo_IEnumerableElementInit_0"
     },
     {
       "index": 513,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListBind:System.Linq.Expressions.MemberListBinding(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ElementInit\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ListBind:System.Linq.Expressions.MemberListBinding(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
       "generatedMethodId": "ListBind_214_MethodInfo_IEnumerableElementInit_1"
     },
     {
@@ -4619,13 +4619,13 @@
     {
       "index": 517,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MemberBind:System.Linq.Expressions.MemberMemberBinding(System.Reflection.MemberInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.MemberBinding\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MemberBind:System.Linq.Expressions.MemberMemberBinding(System.Reflection.MemberInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
       "generatedMethodId": "MemberBind_216_MemberInfo_IEnumerableMemberBinding_0"
     },
     {
       "index": 518,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MemberBind:System.Linq.Expressions.MemberMemberBinding(System.Reflection.MemberInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.MemberBinding\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MemberBind:System.Linq.Expressions.MemberMemberBinding(System.Reflection.MemberInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
       "generatedMethodId": "MemberBind_216_MemberInfo_IEnumerableMemberBinding_1"
     },
     {
@@ -4649,13 +4649,13 @@
     {
       "index": 522,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MemberBind:System.Linq.Expressions.MemberMemberBinding(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.MemberBinding\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MemberBind:System.Linq.Expressions.MemberMemberBinding(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
       "generatedMethodId": "MemberBind_218_MethodInfo_IEnumerableMemberBinding_0"
     },
     {
       "index": 523,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MemberBind:System.Linq.Expressions.MemberMemberBinding(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.MemberBinding\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MemberBind:System.Linq.Expressions.MemberMemberBinding(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
       "generatedMethodId": "MemberBind_218_MethodInfo_IEnumerableMemberBinding_1"
     },
     {
@@ -4709,13 +4709,13 @@
     {
       "index": 532,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Call:System.Linq.Expressions.MethodCallExpression(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Call:System.Linq.Expressions.MethodCallExpression(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Call_225_MethodInfo_IEnumerableExpression_0"
     },
     {
       "index": 533,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Call:System.Linq.Expressions.MethodCallExpression(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Call:System.Linq.Expressions.MethodCallExpression(System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Call_225_MethodInfo_IEnumerableExpression_1"
     },
     {
@@ -4805,13 +4805,13 @@
     {
       "index": 548,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Call:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Call:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Call_232_Expression_MethodInfo_IEnumerableExpression_0"
     },
     {
       "index": 549,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Call:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Call:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Call_232_Expression_MethodInfo_IEnumerableExpression_1"
     },
     {
@@ -4835,13 +4835,13 @@
     {
       "index": 553,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ArrayIndex:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ArrayIndex:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "ArrayIndex_234_Expression_IEnumerableExpression_0"
     },
     {
       "index": 554,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ArrayIndex:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::ArrayIndex:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "ArrayIndex_234_Expression_IEnumerableExpression_1"
     },
     {
@@ -4865,13 +4865,13 @@
     {
       "index": 558,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::NewArrayInit:System.Linq.Expressions.NewArrayExpression(System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::NewArrayInit:System.Linq.Expressions.NewArrayExpression(System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "NewArrayInit_236_System_Type_IEnumerableExpression_0"
     },
     {
       "index": 559,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::NewArrayInit:System.Linq.Expressions.NewArrayExpression(System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::NewArrayInit:System.Linq.Expressions.NewArrayExpression(System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "NewArrayInit_236_System_Type_IEnumerableExpression_1"
     },
     {
@@ -4895,13 +4895,13 @@
     {
       "index": 563,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::NewArrayBounds:System.Linq.Expressions.NewArrayExpression(System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::NewArrayBounds:System.Linq.Expressions.NewArrayExpression(System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "NewArrayBounds_238_System_Type_IEnumerableExpression_0"
     },
     {
       "index": 564,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::NewArrayBounds:System.Linq.Expressions.NewArrayExpression(System.Type,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::NewArrayBounds:System.Linq.Expressions.NewArrayExpression(System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "NewArrayBounds_238_System_Type_IEnumerableExpression_1"
     },
     {
@@ -4931,43 +4931,43 @@
     {
       "index": 569,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "New_241_ConstructorInfo_IEnumerableExpression_0"
     },
     {
       "index": 570,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "New_241_ConstructorInfo_IEnumerableExpression_1"
     },
     {
       "index": 571,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Reflection.MemberInfo\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>,System.Collections.Generic.IEnumerable<System.Reflection.MemberInfo>)",
       "generatedMethodId": "New_242_ConstructorInfo_IEnumerableExpression_IEnumerableMemberInfo_0"
     },
     {
       "index": 572,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Reflection.MemberInfo\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>,System.Collections.Generic.IEnumerable<System.Reflection.MemberInfo>)",
       "generatedMethodId": "New_242_ConstructorInfo_IEnumerableExpression_IEnumerableMemberInfo_1"
     },
     {
       "index": 573,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E,System.Reflection.MemberInfo[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>,System.Reflection.MemberInfo[])",
       "generatedMethodId": "New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_0"
     },
     {
       "index": 574,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E,System.Reflection.MemberInfo[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>,System.Reflection.MemberInfo[])",
       "generatedMethodId": "New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_1"
     },
     {
       "index": 575,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E,System.Reflection.MemberInfo[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::New:System.Linq.Expressions.NewExpression(System.Reflection.ConstructorInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>,System.Reflection.MemberInfo[])",
       "generatedMethodId": "New_243_ConstructorInfo_IEnumerableExpression_MemberInfo_2"
     },
     {
@@ -5033,13 +5033,13 @@
     {
       "index": 586,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::RuntimeVariables:System.Linq.Expressions.RuntimeVariablesExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::RuntimeVariables:System.Linq.Expressions.RuntimeVariablesExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "RuntimeVariables_250_IEnumerableParameterExpression_0"
     },
     {
       "index": 587,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::RuntimeVariables:System.Linq.Expressions.RuntimeVariablesExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::RuntimeVariables:System.Linq.Expressions.RuntimeVariablesExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "RuntimeVariables_250_IEnumerableParameterExpression_1"
     },
     {
@@ -5063,13 +5063,13 @@
     {
       "index": 591,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::SwitchCase:System.Linq.Expressions.SwitchCase(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::SwitchCase:System.Linq.Expressions.SwitchCase(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "SwitchCase_252_Expression_IEnumerableExpression_0"
     },
     {
       "index": 592,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::SwitchCase:System.Linq.Expressions.SwitchCase(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::SwitchCase:System.Linq.Expressions.SwitchCase(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "SwitchCase_252_Expression_IEnumerableExpression_1"
     },
     {
@@ -5147,25 +5147,25 @@
     {
       "index": 605,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Switch:System.Linq.Expressions.SwitchExpression(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.SwitchCase\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Switch:System.Linq.Expressions.SwitchExpression(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.SwitchCase>)",
       "generatedMethodId": "Switch_257_Expression_Expression_MethodInfo_IEnumerableSwitchCase_0"
     },
     {
       "index": 606,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Switch:System.Linq.Expressions.SwitchExpression(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.SwitchCase\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Switch:System.Linq.Expressions.SwitchExpression(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.SwitchCase>)",
       "generatedMethodId": "Switch_257_Expression_Expression_MethodInfo_IEnumerableSwitchCase_1"
     },
     {
       "index": 607,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Switch:System.Linq.Expressions.SwitchExpression(System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.SwitchCase\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Switch:System.Linq.Expressions.SwitchExpression(System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.SwitchCase>)",
       "generatedMethodId": "Switch_258_System_Type_Expression_Expression_MethodInfo_IEnumerableSwitchCase_0"
     },
     {
       "index": 608,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Switch:System.Linq.Expressions.SwitchExpression(System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.SwitchCase\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::Switch:System.Linq.Expressions.SwitchExpression(System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Collections.Generic.IEnumerable<System.Linq.Expressions.SwitchCase>)",
       "generatedMethodId": "Switch_258_System_Type_Expression_Expression_MethodInfo_IEnumerableSwitchCase_1"
     },
     {
@@ -5267,13 +5267,13 @@
     {
       "index": 625,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MakeTry:System.Linq.Expressions.TryExpression(System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.CatchBlock\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MakeTry:System.Linq.Expressions.TryExpression(System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.CatchBlock>)",
       "generatedMethodId": "MakeTry_267_System_Type_Expression_Expression_Expression_IEnumerableCatchBlock_0"
     },
     {
       "index": 626,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MakeTry:System.Linq.Expressions.TryExpression(System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.CatchBlock\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression::MakeTry:System.Linq.Expressions.TryExpression(System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.CatchBlock>)",
       "generatedMethodId": "MakeTry_267_System_Type_Expression_Expression_Expression_IEnumerableCatchBlock_1"
     },
     {
@@ -5531,37 +5531,37 @@
     {
       "index": 669,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression\u003CSystem.Int32\u003E::Compile:System.Int32()",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression<System.Int32>::Compile:System.Int32()",
       "generatedMethodId": "Compile_0__0"
     },
     {
       "index": 670,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression\u003CSystem.Int32\u003E::Compile:System.Int32(System.Boolean)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression<System.Int32>::Compile:System.Int32(System.Boolean)",
       "generatedMethodId": "Compile_1_bool_0"
     },
     {
       "index": 671,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression\u003CSystem.Int32\u003E::Compile:System.Int32(System.Boolean)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression<System.Int32>::Compile:System.Int32(System.Boolean)",
       "generatedMethodId": "Compile_1_bool_1"
     },
     {
       "index": 672,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression\u003CSystem.Int32\u003E::Update:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression<System.Int32>::Update:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Update_2_Expression_IEnumerableParameterExpression_0"
     },
     {
       "index": 673,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression\u003CSystem.Int32\u003E::Update:System.Linq.Expressions.Expression\u003CSystem.Int32\u003E(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression<System.Int32>::Update:System.Linq.Expressions.Expression<System.Int32>(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Update_2_Expression_IEnumerableParameterExpression_1"
     },
     {
       "index": 674,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression\u003CSystem.Int32\u003E::Compile:System.Int32(System.Runtime.CompilerServices.DebugInfoGenerator)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.Expression<System.Int32>::Compile:System.Int32(System.Runtime.CompilerServices.DebugInfoGenerator)",
       "generatedMethodId": "Compile_3_DebugInfoGenerator_0"
     },
     {
@@ -5573,19 +5573,19 @@
     {
       "index": 676,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ExpressionVisitor::Visit:System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.Expression\u003E(System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ExpressionVisitor::Visit:System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression>(System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Visit_1_ReadOnlyCollectionExpression_0"
     },
     {
       "index": 677,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ExpressionVisitor::Visit:System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Int32\u003E(System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ExpressionVisitor::Visit:System.Collections.ObjectModel.ReadOnlyCollection<System.Int32>(System.Collections.ObjectModel.ReadOnlyCollection<System.Int32>,System.Func<System.Int32,System.Int32>)",
       "generatedMethodId": "Visit_2_ReadOnlyCollectionint_System_Funcintint_0"
     },
     {
       "index": 678,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ExpressionVisitor::Visit:System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Int32\u003E(System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ExpressionVisitor::Visit:System.Collections.ObjectModel.ReadOnlyCollection<System.Int32>(System.Collections.ObjectModel.ReadOnlyCollection<System.Int32>,System.Func<System.Int32,System.Int32>)",
       "generatedMethodId": "Visit_2_ReadOnlyCollectionint_System_Funcintint_1"
     },
     {
@@ -5603,13 +5603,13 @@
     {
       "index": 681,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ExpressionVisitor::VisitAndConvert:System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.Expression\u003E(System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.Expression\u003E,System.String)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ExpressionVisitor::VisitAndConvert:System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression>(System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression>,System.String)",
       "generatedMethodId": "VisitAndConvert_4_ReadOnlyCollectionExpression_string_0"
     },
     {
       "index": 682,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ExpressionVisitor::VisitAndConvert:System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.Expression\u003E(System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.Expression\u003E,System.String)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ExpressionVisitor::VisitAndConvert:System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression>(System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression>,System.String)",
       "generatedMethodId": "VisitAndConvert_4_ReadOnlyCollectionExpression_string_1"
     },
     {
@@ -5621,25 +5621,25 @@
     {
       "index": 684,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.IndexExpression::Update:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.IndexExpression::Update:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_Expression_IEnumerableExpression_0"
     },
     {
       "index": 685,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.IndexExpression::Update:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.IndexExpression::Update:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_Expression_IEnumerableExpression_1"
     },
     {
       "index": 686,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.InvocationExpression::Update:System.Linq.Expressions.InvocationExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.InvocationExpression::Update:System.Linq.Expressions.InvocationExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_Expression_IEnumerableExpression_0"
     },
     {
       "index": 687,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.InvocationExpression::Update:System.Linq.Expressions.InvocationExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.InvocationExpression::Update:System.Linq.Expressions.InvocationExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_Expression_IEnumerableExpression_1"
     },
     {
@@ -5681,13 +5681,13 @@
     {
       "index": 694,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ListInitExpression::Update:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ElementInit\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ListInitExpression::Update:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
       "generatedMethodId": "Update_1_NewExpression_IEnumerableElementInit_0"
     },
     {
       "index": 695,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ListInitExpression::Update:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ElementInit\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ListInitExpression::Update:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
       "generatedMethodId": "Update_1_NewExpression_IEnumerableElementInit_1"
     },
     {
@@ -5717,121 +5717,121 @@
     {
       "index": 700,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberInitExpression::Update:System.Linq.Expressions.MemberInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.MemberBinding\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberInitExpression::Update:System.Linq.Expressions.MemberInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
       "generatedMethodId": "Update_1_NewExpression_IEnumerableMemberBinding_0"
     },
     {
       "index": 701,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberInitExpression::Update:System.Linq.Expressions.MemberInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.MemberBinding\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberInitExpression::Update:System.Linq.Expressions.MemberInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
       "generatedMethodId": "Update_1_NewExpression_IEnumerableMemberBinding_1"
     },
     {
       "index": 702,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberListBinding::Update:System.Linq.Expressions.MemberListBinding(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ElementInit\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberListBinding::Update:System.Linq.Expressions.MemberListBinding(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
       "generatedMethodId": "Update_0_IEnumerableElementInit_0"
     },
     {
       "index": 703,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberListBinding::Update:System.Linq.Expressions.MemberListBinding(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ElementInit\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberListBinding::Update:System.Linq.Expressions.MemberListBinding(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
       "generatedMethodId": "Update_0_IEnumerableElementInit_1"
     },
     {
       "index": 704,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberMemberBinding::Update:System.Linq.Expressions.MemberMemberBinding(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.MemberBinding\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberMemberBinding::Update:System.Linq.Expressions.MemberMemberBinding(System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
       "generatedMethodId": "Update_0_IEnumerableMemberBinding_0"
     },
     {
       "index": 705,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberMemberBinding::Update:System.Linq.Expressions.MemberMemberBinding(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.MemberBinding\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberMemberBinding::Update:System.Linq.Expressions.MemberMemberBinding(System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
       "generatedMethodId": "Update_0_IEnumerableMemberBinding_1"
     },
     {
       "index": 706,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MethodCallExpression::Update:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MethodCallExpression::Update:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_Expression_IEnumerableExpression_0"
     },
     {
       "index": 707,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MethodCallExpression::Update:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MethodCallExpression::Update:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_Expression_IEnumerableExpression_1"
     },
     {
       "index": 708,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.NewArrayExpression::Update:System.Linq.Expressions.NewArrayExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.NewArrayExpression::Update:System.Linq.Expressions.NewArrayExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_IEnumerableExpression_0"
     },
     {
       "index": 709,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.NewArrayExpression::Update:System.Linq.Expressions.NewArrayExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.NewArrayExpression::Update:System.Linq.Expressions.NewArrayExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_IEnumerableExpression_1"
     },
     {
       "index": 710,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.NewExpression::Update:System.Linq.Expressions.NewExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.NewExpression::Update:System.Linq.Expressions.NewExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_IEnumerableExpression_0"
     },
     {
       "index": 711,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.NewExpression::Update:System.Linq.Expressions.NewExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.NewExpression::Update:System.Linq.Expressions.NewExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
       "generatedMethodId": "Update_0_IEnumerableExpression_1"
     },
     {
       "index": 712,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.RuntimeVariablesExpression::Update:System.Linq.Expressions.RuntimeVariablesExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.RuntimeVariablesExpression::Update:System.Linq.Expressions.RuntimeVariablesExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Update_0_IEnumerableParameterExpression_0"
     },
     {
       "index": 713,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.RuntimeVariablesExpression::Update:System.Linq.Expressions.RuntimeVariablesExpression(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.ParameterExpression\u003E)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.RuntimeVariablesExpression::Update:System.Linq.Expressions.RuntimeVariablesExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
       "generatedMethodId": "Update_0_IEnumerableParameterExpression_1"
     },
     {
       "index": 714,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.SwitchCase::Update:System.Linq.Expressions.SwitchCase(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E,System.Linq.Expressions.Expression)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.SwitchCase::Update:System.Linq.Expressions.SwitchCase(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>,System.Linq.Expressions.Expression)",
       "generatedMethodId": "Update_0_IEnumerableExpression_Expression_0"
     },
     {
       "index": 715,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.SwitchCase::Update:System.Linq.Expressions.SwitchCase(System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.Expression\u003E,System.Linq.Expressions.Expression)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.SwitchCase::Update:System.Linq.Expressions.SwitchCase(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>,System.Linq.Expressions.Expression)",
       "generatedMethodId": "Update_0_IEnumerableExpression_Expression_1"
     },
     {
       "index": 716,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.SwitchExpression::Update:System.Linq.Expressions.SwitchExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.SwitchCase\u003E,System.Linq.Expressions.Expression)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.SwitchExpression::Update:System.Linq.Expressions.SwitchExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.SwitchCase>,System.Linq.Expressions.Expression)",
       "generatedMethodId": "Update_0_Expression_IEnumerableSwitchCase_Expression_0"
     },
     {
       "index": 717,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.SwitchExpression::Update:System.Linq.Expressions.SwitchExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.SwitchCase\u003E,System.Linq.Expressions.Expression)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.SwitchExpression::Update:System.Linq.Expressions.SwitchExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.SwitchCase>,System.Linq.Expressions.Expression)",
       "generatedMethodId": "Update_0_Expression_IEnumerableSwitchCase_Expression_1"
     },
     {
       "index": 718,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.TryExpression::Update:System.Linq.Expressions.TryExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.CatchBlock\u003E,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.TryExpression::Update:System.Linq.Expressions.TryExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.CatchBlock>,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
       "generatedMethodId": "Update_0_Expression_IEnumerableCatchBlock_Expression_Expression_0"
     },
     {
       "index": 719,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.TryExpression::Update:System.Linq.Expressions.TryExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable\u003CSystem.Linq.Expressions.CatchBlock\u003E,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.TryExpression::Update:System.Linq.Expressions.TryExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.CatchBlock>,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
       "generatedMethodId": "Update_0_Expression_IEnumerableCatchBlock_Expression_Expression_1"
     },
     {
@@ -5855,37 +5855,37 @@
     {
       "index": 723,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.LabelTarget)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.ParameterExpression>,System.Linq.Expressions.LabelTarget)",
       "generatedMethodId": "Bind_0_System_Object_ReadOnlyCollectionParameterExpression_LabelTarget_0"
     },
     {
       "index": 724,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.LabelTarget)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.ParameterExpression>,System.Linq.Expressions.LabelTarget)",
       "generatedMethodId": "Bind_0_System_Object_ReadOnlyCollectionParameterExpression_LabelTarget_1"
     },
     {
       "index": 725,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.ParameterExpression\u003E,System.Linq.Expressions.LabelTarget)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteBinder::Bind:System.Linq.Expressions.Expression(System.Object[],System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.ParameterExpression>,System.Linq.Expressions.LabelTarget)",
       "generatedMethodId": "Bind_0_System_Object_ReadOnlyCollectionParameterExpression_LabelTarget_2"
     },
     {
       "index": 726,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteBinder::BindDelegate:System.String(System.Runtime.CompilerServices.CallSite\u003CSystem.String\u003E,System.Object[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteBinder::BindDelegate:System.String(System.Runtime.CompilerServices.CallSite<System.String>,System.Object[])",
       "generatedMethodId": "BindDelegate_1_CallSitestring_System_Object_0"
     },
     {
       "index": 727,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteBinder::BindDelegate:System.String(System.Runtime.CompilerServices.CallSite\u003CSystem.String\u003E,System.Object[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteBinder::BindDelegate:System.String(System.Runtime.CompilerServices.CallSite<System.String>,System.Object[])",
       "generatedMethodId": "BindDelegate_1_CallSitestring_System_Object_1"
     },
     {
       "index": 728,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteBinder::BindDelegate:System.String(System.Runtime.CompilerServices.CallSite\u003CSystem.String\u003E,System.Object[])",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteBinder::BindDelegate:System.String(System.Runtime.CompilerServices.CallSite<System.String>,System.Object[])",
       "generatedMethodId": "BindDelegate_1_CallSitestring_System_Object_2"
     },
     {
@@ -5903,128 +5903,140 @@
     {
       "index": 731,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::IndexOf:System.Int32(System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::IndexOf:System.Int32(System.Int32)",
       "generatedMethodId": "IndexOf_0_int_0"
     },
     {
       "index": 732,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::IndexOf:System.Int32(System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::IndexOf:System.Int32(System.Int32)",
       "generatedMethodId": "IndexOf_0_int_1"
     },
     {
       "index": 733,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Insert:System.Void(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Insert:System.Void(System.Int32,System.Int32)",
       "generatedMethodId": "Insert_1_int_int_0"
     },
     {
       "index": 734,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Insert:System.Void(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Insert:System.Void(System.Int32,System.Int32)",
       "generatedMethodId": "Insert_1_int_int_1"
     },
     {
       "index": 735,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Insert:System.Void(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Insert:System.Void(System.Int32,System.Int32)",
       "generatedMethodId": "Insert_1_int_int_2"
     },
     {
       "index": 736,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::RemoveAt:System.Void(System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::RemoveAt:System.Void(System.Int32)",
       "generatedMethodId": "RemoveAt_2_int_0"
     },
     {
       "index": 737,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::RemoveAt:System.Void(System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::RemoveAt:System.Void(System.Int32)",
       "generatedMethodId": "RemoveAt_2_int_1"
     },
     {
       "index": 738,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Add:System.Void(System.Int32)",
       "generatedMethodId": "Add_3_int_0"
     },
     {
       "index": 739,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Add:System.Void(System.Int32)",
       "generatedMethodId": "Add_3_int_1"
     },
     {
       "index": 740,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Clear:System.Void()",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Clear:System.Void()",
       "generatedMethodId": "Clear_4__0"
     },
     {
       "index": 741,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Contains:System.Boolean(System.Int32)",
       "generatedMethodId": "Contains_5_int_0"
     },
     {
       "index": 742,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Contains:System.Boolean(System.Int32)",
       "generatedMethodId": "Contains_5_int_1"
     },
     {
       "index": 743,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Remove:System.Boolean(System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Remove:System.Boolean(System.Int32)",
       "generatedMethodId": "Remove_6_int_0"
     },
     {
       "index": 744,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Remove:System.Boolean(System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Remove:System.Boolean(System.Int32)",
       "generatedMethodId": "Remove_6_int_1"
     },
     {
       "index": 745,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::GetEnumerator:System.Collections.Generic.IEnumerator<System.Int32>()",
       "generatedMethodId": "GetEnumerator_7__0"
     },
     {
       "index": 746,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Reverse:System.Void()",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Reverse:System.Void()",
       "generatedMethodId": "Reverse_8__0"
     },
     {
       "index": 747,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Reverse:System.Void(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Reverse:System.Void(System.Int32,System.Int32)",
       "generatedMethodId": "Reverse_9_int_int_0"
     },
     {
       "index": 748,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Reverse:System.Void(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Reverse:System.Void(System.Int32,System.Int32)",
       "generatedMethodId": "Reverse_9_int_int_1"
     },
     {
       "index": 749,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::Reverse:System.Void(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::Reverse:System.Void(System.Int32,System.Int32)",
       "generatedMethodId": "Reverse_9_int_int_2"
     },
     {
       "index": 750,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::ToArray:System.Int32[]()",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::ToArray:System.Int32[]()",
       "generatedMethodId": "ToArray_10__0"
     },
     {
       "index": 751,
       "kind": "fact",
-      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder\u003CSystem.Int32\u003E::ToReadOnlyCollection:System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Int32\u003E()",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.ReadOnlyCollectionBuilder<System.Int32>::ToReadOnlyCollection:System.Collections.ObjectModel.ReadOnlyCollection<System.Int32>()",
       "generatedMethodId": "ToReadOnlyCollection_11__0"
+    },
+    {
+      "index": 752,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::Create:System.Dynamic.DynamicMetaObject(System.Object,System.Linq.Expressions.Expression)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 753,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSite::Create:System.Runtime.CompilerServices.CallSite(System.Type,System.Runtime.CompilerServices.CallSiteBinder)",
+      "generatedMethodId": ""
     }
   ]
 }

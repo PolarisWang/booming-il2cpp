@@ -348,37 +348,6 @@ def _read_benchmark_metadata(ctx: ChunkContext) -> list[dict]:
         return []
 
 
-def _build_gc_info(
-    profile_data: list[dict] | None,
-    per_method_stat: dict,
-    method_index: int,
-    technology: str,
-) -> dict:
-    """Build gcInfo dict from profile data (chaos-aot) or benchmark stats (chaos-jit).
-
-    Returns a dict with fields matching the managed benchmark gcInfo format:
-    totalAllocatedBytes, and optional fastPathCount/slowPathCount for profile data.
-    Falls back to meanAllocatedBytes from the benchmark method's own measurement
-    when profile data is not available.
-    """
-    if profile_data and technology == "chaos-aot" and method_index < len(profile_data):
-        p = profile_data[method_index]
-        gc_info = {
-            "totalAllocatedBytes": p.get("nurseryAllocBytes", 0),
-            "gcPauseNs": p.get("gcPauseNs", 0),
-            "fastPathCount": p.get("fastPathCount", 0),
-            "slowPathCount": p.get("slowPathCount", 0),
-            "heapDelta": p.get("heapAfter", 0) - p.get("heapBefore", 0),
-        }
-        # Only include fields that are actually populated
-        return {k: v for k, v in gc_info.items() if v != 0}
-    # Fallback: use meanAllocatedBytes from benchmark stats
-    mean_alloc = per_method_stat.get("meanAllocatedBytes", 0)
-    if mean_alloc and mean_alloc > 0:
-        return {"totalAllocatedBytes": int(mean_alloc)}
-    return {}
-
-
 def _write_perf_store(
     per_method_stats: list[dict],
     ctx: ChunkContext,
@@ -387,31 +356,21 @@ def _write_perf_store(
     iterations: int,
     method_index_to_subject_id: dict[int, str] | None = None,
     benchmark_start_idx: int = 0,
-    profile_data: list[dict] | None = None,
 ):
     """Write benchmark-history.jsonl in dashboard-compatible format.
 
     When method_index_to_subject_id is provided, resolves methodSubjectId
     from the method table index (benchmark_start_idx + position) using the
     codegen manifest, rather than by position into metadata_methods.
-
-    When profile_data is provided (from profile stage), includes gcInfo
-    from the native profile for chaos-aot records.  Falls back to using
-    meanAllocatedBytes for chaos-jit or when profile data is unavailable.
     """
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     perf_path = _RESULTS_BASE / ctx.assembly / ctx.slug / "perf" / "benchmark-history.jsonl"
     perf_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Clean start per pipeline run: remove old file so stale data from
-    # previous runs doesn't accumulate.  Use append so benchmark_chunk
-    # and managed_benchmark can both write to the same file without
-    # one overwriting the other.
-    if not perf_path.exists():
-        # Fresh file: write header (no-op for JSONL, just create)
-        pass
-
-    with open(perf_path, "a", encoding="utf-8") as f:
+    # Always overwrite: each pipeline run produces a self-contained file.
+    # Append mode caused stale data accumulation across partial runs,
+    # mixing old net8-jit baselines with fresh chaos-aot results.
+    with open(perf_path, "w", encoding="utf-8") as f:
         for i, s in enumerate(per_method_stats):
             elapsed_ms = s.get("meanDurationMs", 0)
             ops = s.get("meanOpsPerSecond", 0)
@@ -444,9 +403,7 @@ def _write_perf_store(
                 "metrics": {
                     "elapsedMilliseconds": elapsed_ms if elapsed_ms > 0 else _MIN_ELAPSED_FLOOR,
                     "opsPerSecond": ops,
-                    "allocatedBytes": s.get("meanAllocatedBytes", 0),
                 },
-                "gcInfo": _build_gc_info(profile_data, s, i, technology),
                 "iterations": iterations,
                 "status": "completed",
                 "nativeConfig": ctx.native_config,
@@ -476,16 +433,6 @@ def _run_single_benchmark(
     method_index_to_subject_id = _load_method_index_map(ctx)
     total_method_count = _get_manifest_method_count(ctx) if method_index_to_subject_id else 0
     _ = total_method_count  # suppress unused (available for future range-mode support)
-
-    # Load profile data from profile stage (if available) for gcInfo enrichment
-    profile_data = None
-    profile_path = ctx.results_dir / "profile.json"
-    if profile_path.exists():
-        try:
-            prof = json.loads(profile_path.read_text(encoding="utf-8"))
-            profile_data = prof.get("profileData", [])
-        except (json.JSONDecodeError, OSError):
-            pass
 
     # Always use --benchmark-all (--benchmark-range is not supported by current entry.exe)
     entry_count = _get_entry_count(exe_path)
@@ -597,8 +544,7 @@ def _run_single_benchmark(
     # Phase 4: Write perf store
     _write_perf_store(per_method_stats, ctx, technology, metadata_methods, iterations,
                       method_index_to_subject_id=method_index_to_subject_id,
-                      benchmark_start_idx=0,
-                      profile_data=profile_data)
+                      benchmark_start_idx=0)
 
     return {
         "per_method_stats": per_method_stats,
@@ -613,15 +559,6 @@ def _run_single_benchmark(
 def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     """Benchmark stage: run AOT and optionally JIT entry.exes with adaptive settings."""
     start = time.perf_counter()
-
-    # Clean start: remove old benchmark-history.jsonl so this pipeline run
-    # starts fresh.  Both benchmark_chunk (chaos-aot, chaos-jit) and
-    # managed_benchmark (net8-jit, net10-jit) append to the same file.
-    perf_path = _RESULTS_BASE / ctx.assembly / ctx.slug / "perf" / "benchmark-history.jsonl"
-    if perf_path.exists():
-        perf_path.unlink()
-        print(f"  [benchmark] Cleaned old benchmark-history.jsonl")
-
     timeout = max(ctx.stage_timeout_seconds or 300, 30)
     metadata_methods = _read_benchmark_metadata(ctx)
 
@@ -703,29 +640,6 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
 
     # Write unified-format records.jsonl from primary result
     _write_records_jsonl(per_method_stats, summary, ctx, iterations)
-
-    # Write benchmark-trend.json with per-method stats for regression grading
-    trend_path = ctx.results_dir / "benchmark-trend.json"
-    try:
-        trend_data = {
-            "methodCount": method_count,
-            "technologies": [t for _, t in technologies],
-            "perMethodStats": [
-                {
-                    "entryIndex": i,
-                    "meanDurationMs": s.get("meanDurationMs", 0),
-                    "meanOpsPerSecond": s.get("meanOpsPerSecond", 0),
-                    "meanAllocatedBytes": s.get("meanAllocatedBytes", 0),
-                    "cv": s.get("cv", 0),
-                    "sampleCount": s.get("cleanedSampleCount", s.get("sampleCount", 0)),
-                }
-                for i, s in enumerate(per_method_stats)
-            ],
-            "aggregateSummary": summary,
-        }
-        trend_path.write_text(json.dumps(trend_data, indent=2), encoding="utf-8")
-    except OSError:
-        pass  # best-effort
 
     status = "passed" if method_count > 0 else "error"
 

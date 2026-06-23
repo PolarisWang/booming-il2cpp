@@ -17,7 +17,6 @@ internal sealed class ProjectModelBuilder
         int patchDataSize,
         string patchDataHostClass,
         string projectName,
-        string nativeDir,
         DateTime? generatedAt = null,
         string? projectRoot = null,
         string? codegenDir = null,
@@ -256,21 +255,6 @@ internal sealed class ProjectModelBuilder
     /// Normalize Windows backslashes to forward slashes for CMake compatibility.
     /// CMake interprets \ as an escape character in strings, so \a, \c, etc. are errors.
     /// </summary>
-    private static string GetRelativePath(string fromPath, string toPath)
-    {
-        if (string.IsNullOrEmpty(toPath))
-            return "";
-        try
-        {
-            return Path.GetRelativePath(fromPath, toPath).Replace('\\', '/');
-        }
-        catch
-        {
-            // Fallback to absolute path if GetRelativePath fails (different drives, etc.)
-            return toPath.Replace('\\', '/');
-        }
-    }
-
     private static string NormalizePath(string path)
     {
         return path.Replace('\\', '/');

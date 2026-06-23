@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Diagnostics.DiagnosticSource",
   "chunkSlug": "global-ns",
-  "totalMethods": 175,
+  "totalMethods": 177,
   "factMethodCount": 58,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -363,931 +363,931 @@
     {
       "index": 0,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32)",
       "generatedMethodId": "Add_0_int_0"
     },
     {
       "index": 1,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32)",
       "generatedMethodId": "Add_0_int_1"
     },
     {
       "index": 2,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_1_int_KeyValuePairstringobject_0"
     },
     {
       "index": 3,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_1_int_KeyValuePairstringobject_1"
     },
     {
       "index": 4,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_2_int_KeyValuePairstringobject_KeyValuePairstringobject_0"
     },
     {
       "index": 5,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_2_int_KeyValuePairstringobject_KeyValuePairstringobject_1"
     },
     {
       "index": 6,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_3_int_KeyValuePairstringobject_KeyValuePairstringobject_KeyValuePairstringobject_0"
     },
     {
       "index": 7,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_3_int_KeyValuePairstringobject_KeyValuePairstringobject_KeyValuePairstringobject_1"
     },
     {
       "index": 8,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Add_4_int_KeyValuePairstringobject_0"
     },
     {
       "index": 9,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Add_4_int_KeyValuePairstringobject_1"
     },
     {
       "index": 10,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Add_4_int_KeyValuePairstringobject_2"
     },
     {
       "index": 11,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Add_4_int_KeyValuePairstringobject_3"
     },
     {
       "index": 12,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32,System.Diagnostics.TagList)",
       "generatedMethodId": "Add_5_int_TagList_0"
     },
     {
       "index": 13,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Counter<System.Int32>::Add:System.Void(System.Int32,System.Diagnostics.TagList)",
       "generatedMethodId": "Add_5_int_TagList_1"
     },
     {
       "index": 14,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32)",
       "generatedMethodId": "Record_0_int_0"
     },
     {
       "index": 15,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32)",
       "generatedMethodId": "Record_0_int_1"
     },
     {
       "index": 16,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Record_1_int_KeyValuePairstringobject_0"
     },
     {
       "index": 17,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Record_1_int_KeyValuePairstringobject_1"
     },
     {
       "index": 18,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Record_2_int_KeyValuePairstringobject_KeyValuePairstringobject_0"
     },
     {
       "index": 19,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Record_2_int_KeyValuePairstringobject_KeyValuePairstringobject_1"
     },
     {
       "index": 20,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Record_3_int_KeyValuePairstringobject_KeyValuePairstringobject_KeyValuePairstringobject_0"
     },
     {
       "index": 21,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Record_3_int_KeyValuePairstringobject_KeyValuePairstringobject_KeyValuePairstringobject_1"
     },
     {
       "index": 22,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Record_4_int_KeyValuePairstringobject_0"
     },
     {
       "index": 23,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Record_4_int_KeyValuePairstringobject_1"
     },
     {
       "index": 24,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Record_4_int_KeyValuePairstringobject_2"
     },
     {
       "index": 25,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Record_4_int_KeyValuePairstringobject_3"
     },
     {
       "index": 26,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32,System.Diagnostics.TagList)",
       "generatedMethodId": "Record_5_int_TagList_0"
     },
     {
       "index": 27,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Gauge<System.Int32>::Record:System.Void(System.Int32,System.Diagnostics.TagList)",
       "generatedMethodId": "Record_5_int_TagList_1"
     },
     {
       "index": 28,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32)",
       "generatedMethodId": "Record_0_int_0"
     },
     {
       "index": 29,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32)",
       "generatedMethodId": "Record_0_int_1"
     },
     {
       "index": 30,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Record_1_int_KeyValuePairstringobject_0"
     },
     {
       "index": 31,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Record_1_int_KeyValuePairstringobject_1"
     },
     {
       "index": 32,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Record_2_int_KeyValuePairstringobject_KeyValuePairstringobject_0"
     },
     {
       "index": 33,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Record_2_int_KeyValuePairstringobject_KeyValuePairstringobject_1"
     },
     {
       "index": 34,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Record_3_int_KeyValuePairstringobject_KeyValuePairstringobject_KeyValuePairstringobject_0"
     },
     {
       "index": 35,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Record_3_int_KeyValuePairstringobject_KeyValuePairstringobject_KeyValuePairstringobject_1"
     },
     {
       "index": 36,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Record_4_int_KeyValuePairstringobject_0"
     },
     {
       "index": 37,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Record_4_int_KeyValuePairstringobject_1"
     },
     {
       "index": 38,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Record_4_int_KeyValuePairstringobject_2"
     },
     {
       "index": 39,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Record_4_int_KeyValuePairstringobject_3"
     },
     {
       "index": 40,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32,System.Diagnostics.TagList)",
       "generatedMethodId": "Record_5_int_TagList_0"
     },
     {
       "index": 41,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E::Record:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Histogram<System.Int32>::Record:System.Void(System.Int32,System.Diagnostics.TagList)",
       "generatedMethodId": "Record_5_int_TagList_1"
     },
     {
       "index": 42,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter<System.Int32>(System.String,System.String,System.String)",
       "generatedMethodId": "CreateCounter_0_string_string_string_0"
     },
     {
       "index": 43,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter<System.Int32>(System.String,System.String,System.String)",
       "generatedMethodId": "CreateCounter_0_string_string_string_1"
     },
     {
       "index": 44,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter<System.Int32>(System.String,System.String,System.String)",
       "generatedMethodId": "CreateCounter_0_string_string_string_2"
     },
     {
       "index": 45,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter<System.Int32>(System.String,System.String,System.String)",
       "generatedMethodId": "CreateCounter_0_string_string_string_3"
     },
     {
       "index": 46,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateCounter_1_string_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 47,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateCounter_1_string_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 48,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateCounter_1_string_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 49,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateCounter_1_string_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
       "index": 50,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateCounter:System.Diagnostics.Metrics.Counter<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateCounter_1_string_string_string_IEnumerableKeyValuePairstringobject_4"
     },
     {
       "index": 51,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge<System.Int32>(System.String)",
       "generatedMethodId": "CreateGauge_2_string_0"
     },
     {
       "index": 52,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge<System.Int32>(System.String)",
       "generatedMethodId": "CreateGauge_2_string_1"
     },
     {
       "index": 53,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateGauge_3_string_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 54,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateGauge_3_string_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 55,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateGauge_3_string_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 56,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateGauge_3_string_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
       "index": 57,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateGauge:System.Diagnostics.Metrics.Gauge<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateGauge_3_string_string_string_IEnumerableKeyValuePairstringobject_4"
     },
     {
       "index": 58,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String)",
       "generatedMethodId": "CreateHistogram_4_string_0"
     },
     {
       "index": 59,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String)",
       "generatedMethodId": "CreateHistogram_4_string_1"
     },
     {
       "index": 60,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String)",
       "generatedMethodId": "CreateHistogram_5_string_string_string_0"
     },
     {
       "index": 61,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String)",
       "generatedMethodId": "CreateHistogram_5_string_string_string_1"
     },
     {
       "index": 62,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String)",
       "generatedMethodId": "CreateHistogram_5_string_string_string_2"
     },
     {
       "index": 63,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String)",
       "generatedMethodId": "CreateHistogram_5_string_string_string_3"
     },
     {
       "index": 64,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateHistogram_6_string_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 65,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateHistogram_6_string_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 66,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateHistogram_6_string_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 67,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateHistogram_6_string_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
       "index": 68,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateHistogram_6_string_string_string_IEnumerableKeyValuePairstringobject_4"
     },
     {
       "index": 69,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Diagnostics.Metrics.InstrumentAdvice\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Diagnostics.Metrics.InstrumentAdvice<System.Int32>)",
       "generatedMethodId": "CreateHistogram_7_string_string_string_IEnumerableKeyValuePairstringobject_InstrumentAdviceint_0"
     },
     {
       "index": 70,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Diagnostics.Metrics.InstrumentAdvice\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Diagnostics.Metrics.InstrumentAdvice<System.Int32>)",
       "generatedMethodId": "CreateHistogram_7_string_string_string_IEnumerableKeyValuePairstringobject_InstrumentAdviceint_1"
     },
     {
       "index": 71,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Diagnostics.Metrics.InstrumentAdvice\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Diagnostics.Metrics.InstrumentAdvice<System.Int32>)",
       "generatedMethodId": "CreateHistogram_7_string_string_string_IEnumerableKeyValuePairstringobject_InstrumentAdviceint_2"
     },
     {
       "index": 72,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Diagnostics.Metrics.InstrumentAdvice\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Diagnostics.Metrics.InstrumentAdvice<System.Int32>)",
       "generatedMethodId": "CreateHistogram_7_string_string_string_IEnumerableKeyValuePairstringobject_InstrumentAdviceint_3"
     },
     {
       "index": 73,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Diagnostics.Metrics.InstrumentAdvice\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateHistogram:System.Diagnostics.Metrics.Histogram<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Diagnostics.Metrics.InstrumentAdvice<System.Int32>)",
       "generatedMethodId": "CreateHistogram_7_string_string_string_IEnumerableKeyValuePairstringobject_InstrumentAdviceint_4"
     },
     {
       "index": 74,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter<System.Int32>(System.String,System.String,System.String)",
       "generatedMethodId": "CreateUpDownCounter_8_string_string_string_0"
     },
     {
       "index": 75,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter<System.Int32>(System.String,System.String,System.String)",
       "generatedMethodId": "CreateUpDownCounter_8_string_string_string_1"
     },
     {
       "index": 76,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter<System.Int32>(System.String,System.String,System.String)",
       "generatedMethodId": "CreateUpDownCounter_8_string_string_string_2"
     },
     {
       "index": 77,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter<System.Int32>(System.String,System.String,System.String)",
       "generatedMethodId": "CreateUpDownCounter_8_string_string_string_3"
     },
     {
       "index": 78,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateUpDownCounter_9_string_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 79,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateUpDownCounter_9_string_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 80,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateUpDownCounter_9_string_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 81,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateUpDownCounter_9_string_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
       "index": 82,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E(System.String,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateUpDownCounter:System.Diagnostics.Metrics.UpDownCounter<System.Int32>(System.String,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateUpDownCounter_9_string_string_string_IEnumerableKeyValuePairstringobject_4"
     },
     {
       "index": 83,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String)",
       "generatedMethodId": "CreateObservableUpDownCounter_10_string_System_Funcint_string_string_0"
     },
     {
       "index": 84,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String)",
       "generatedMethodId": "CreateObservableUpDownCounter_10_string_System_Funcint_string_string_1"
     },
     {
       "index": 85,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String)",
       "generatedMethodId": "CreateObservableUpDownCounter_10_string_System_Funcint_string_string_2"
     },
     {
       "index": 86,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String)",
       "generatedMethodId": "CreateObservableUpDownCounter_10_string_System_Funcint_string_string_3"
     },
     {
       "index": 87,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableUpDownCounter_11_string_System_Funcint_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 88,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableUpDownCounter_11_string_System_Funcint_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 89,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableUpDownCounter_11_string_System_Funcint_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 90,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableUpDownCounter_11_string_System_Funcint_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
       "index": 91,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableUpDownCounter_12_string_System_FuncMeasurementint_string_string_0"
     },
     {
       "index": 92,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableUpDownCounter_12_string_System_FuncMeasurementint_string_string_1"
     },
     {
       "index": 93,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableUpDownCounter_12_string_System_FuncMeasurementint_string_string_2"
     },
     {
       "index": 94,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableUpDownCounter_12_string_System_FuncMeasurementint_string_string_3"
     },
     {
       "index": 95,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableUpDownCounter_13_string_System_FuncMeasurementint_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 96,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableUpDownCounter_13_string_System_FuncMeasurementint_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 97,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableUpDownCounter_13_string_System_FuncMeasurementint_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 98,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableUpDownCounter_13_string_System_FuncMeasurementint_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
       "index": 99,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableUpDownCounter_14_string_System_FuncIEnumerableMeasurementint_string_string_0"
     },
     {
       "index": 100,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableUpDownCounter_14_string_System_FuncIEnumerableMeasurementint_string_string_1"
     },
     {
       "index": 101,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableUpDownCounter_14_string_System_FuncIEnumerableMeasurementint_string_string_2"
     },
     {
       "index": 102,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableUpDownCounter_14_string_System_FuncIEnumerableMeasurementint_string_string_3"
     },
     {
       "index": 103,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableUpDownCounter_15_string_System_FuncIEnumerableMeasurementint_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 104,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableUpDownCounter_15_string_System_FuncIEnumerableMeasurementint_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 105,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableUpDownCounter_15_string_System_FuncIEnumerableMeasurementint_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 106,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableUpDownCounter:System.Diagnostics.Metrics.ObservableUpDownCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableUpDownCounter_15_string_System_FuncIEnumerableMeasurementint_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
       "index": 107,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String)",
       "generatedMethodId": "CreateObservableCounter_16_string_System_Funcint_string_string_0"
     },
     {
       "index": 108,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String)",
       "generatedMethodId": "CreateObservableCounter_16_string_System_Funcint_string_string_1"
     },
     {
       "index": 109,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String)",
       "generatedMethodId": "CreateObservableCounter_16_string_System_Funcint_string_string_2"
     },
     {
       "index": 110,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String)",
       "generatedMethodId": "CreateObservableCounter_16_string_System_Funcint_string_string_3"
     },
     {
       "index": 111,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableCounter_17_string_System_Funcint_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 112,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableCounter_17_string_System_Funcint_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 113,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableCounter_17_string_System_Funcint_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 114,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableCounter_17_string_System_Funcint_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
       "index": 115,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableCounter_18_string_System_FuncMeasurementint_string_string_0"
     },
     {
       "index": 116,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableCounter_18_string_System_FuncMeasurementint_string_string_1"
     },
     {
       "index": 117,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableCounter_18_string_System_FuncMeasurementint_string_string_2"
     },
     {
       "index": 118,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableCounter_18_string_System_FuncMeasurementint_string_string_3"
     },
     {
       "index": 119,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableCounter_19_string_System_FuncMeasurementint_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 120,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableCounter_19_string_System_FuncMeasurementint_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 121,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableCounter_19_string_System_FuncMeasurementint_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 122,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableCounter_19_string_System_FuncMeasurementint_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
       "index": 123,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableCounter_20_string_System_FuncIEnumerableMeasurementint_string_string_0"
     },
     {
       "index": 124,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableCounter_20_string_System_FuncIEnumerableMeasurementint_string_string_1"
     },
     {
       "index": 125,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableCounter_20_string_System_FuncIEnumerableMeasurementint_string_string_2"
     },
     {
       "index": 126,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableCounter_20_string_System_FuncIEnumerableMeasurementint_string_string_3"
     },
     {
       "index": 127,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableCounter_21_string_System_FuncIEnumerableMeasurementint_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 128,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableCounter_21_string_System_FuncIEnumerableMeasurementint_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 129,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableCounter_21_string_System_FuncIEnumerableMeasurementint_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 130,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableCounter:System.Diagnostics.Metrics.ObservableCounter<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableCounter_21_string_System_FuncIEnumerableMeasurementint_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
       "index": 131,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String)",
       "generatedMethodId": "CreateObservableGauge_22_string_System_Funcint_string_string_0"
     },
     {
       "index": 132,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String)",
       "generatedMethodId": "CreateObservableGauge_22_string_System_Funcint_string_string_1"
     },
     {
       "index": 133,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String)",
       "generatedMethodId": "CreateObservableGauge_22_string_System_Funcint_string_string_2"
     },
     {
       "index": 134,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String)",
       "generatedMethodId": "CreateObservableGauge_22_string_System_Funcint_string_string_3"
     },
     {
       "index": 135,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableGauge_23_string_System_Funcint_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 136,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableGauge_23_string_System_Funcint_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 137,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableGauge_23_string_System_Funcint_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 138,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Int32\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Int32>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableGauge_23_string_System_Funcint_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
       "index": 139,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableGauge_24_string_System_FuncMeasurementint_string_string_0"
     },
     {
       "index": 140,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableGauge_24_string_System_FuncMeasurementint_string_string_1"
     },
     {
       "index": 141,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableGauge_24_string_System_FuncMeasurementint_string_string_2"
     },
     {
       "index": 142,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableGauge_24_string_System_FuncMeasurementint_string_string_3"
     },
     {
       "index": 143,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableGauge_25_string_System_FuncMeasurementint_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 144,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableGauge_25_string_System_FuncMeasurementint_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 145,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableGauge_25_string_System_FuncMeasurementint_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 146,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Diagnostics.Metrics.Measurement<System.Int32>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableGauge_25_string_System_FuncMeasurementint_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
       "index": 147,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableGauge_26_string_System_FuncIEnumerableMeasurementint_string_string_0"
     },
     {
       "index": 148,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableGauge_26_string_System_FuncIEnumerableMeasurementint_string_string_1"
     },
     {
       "index": 149,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableGauge_26_string_System_FuncIEnumerableMeasurementint_string_string_2"
     },
     {
       "index": 150,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String)",
       "generatedMethodId": "CreateObservableGauge_26_string_System_FuncIEnumerableMeasurementint_string_string_3"
     },
     {
       "index": 151,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableGauge_27_string_System_FuncIEnumerableMeasurementint_string_string_IEnumerableKeyValuePairstringobject_0"
     },
     {
       "index": 152,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableGauge_27_string_System_FuncIEnumerableMeasurementint_string_string_IEnumerableKeyValuePairstringobject_1"
     },
     {
       "index": 153,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableGauge_27_string_System_FuncIEnumerableMeasurementint_string_string_IEnumerableKeyValuePairstringobject_2"
     },
     {
       "index": 154,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge\u003CSystem.Int32\u003E(System.String,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.Metrics.Measurement\u003CSystem.Int32\u003E\u003E\u003E,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::CreateObservableGauge:System.Diagnostics.Metrics.ObservableGauge<System.Int32>(System.String,System.Func<System.Collections.Generic.IEnumerable<System.Diagnostics.Metrics.Measurement<System.Int32>>>,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "CreateObservableGauge_27_string_System_FuncIEnumerableMeasurementint_string_string_IEnumerableKeyValuePairstringobject_3"
     },
     {
@@ -1311,7 +1311,7 @@
     {
       "index": 158,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::SetMeasurementEventCallback:System.Void(System.Diagnostics.Metrics.MeasurementCallback\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::SetMeasurementEventCallback:System.Void(System.Diagnostics.Metrics.MeasurementCallback<System.Int32>)",
       "generatedMethodId": "SetMeasurementEventCallback_2_MeasurementCallbackint_0"
     },
     {
@@ -1329,86 +1329,98 @@
     {
       "index": 161,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32)",
       "generatedMethodId": "Add_0_int_0"
     },
     {
       "index": 162,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32)",
       "generatedMethodId": "Add_0_int_1"
     },
     {
       "index": 163,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_1_int_KeyValuePairstringobject_0"
     },
     {
       "index": 164,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_1_int_KeyValuePairstringobject_1"
     },
     {
       "index": 165,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_2_int_KeyValuePairstringobject_KeyValuePairstringobject_0"
     },
     {
       "index": 166,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_2_int_KeyValuePairstringobject_KeyValuePairstringobject_1"
     },
     {
       "index": 167,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_3_int_KeyValuePairstringobject_KeyValuePairstringobject_KeyValuePairstringobject_0"
     },
     {
       "index": 168,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_3_int_KeyValuePairstringobject_KeyValuePairstringobject_KeyValuePairstringobject_1"
     },
     {
       "index": 169,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Add_4_int_KeyValuePairstringobject_0"
     },
     {
       "index": 170,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Add_4_int_KeyValuePairstringobject_1"
     },
     {
       "index": 171,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Add_4_int_KeyValuePairstringobject_2"
     },
     {
       "index": 172,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[])",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>[])",
       "generatedMethodId": "Add_4_int_KeyValuePairstringobject_3"
     },
     {
       "index": 173,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32,System.Diagnostics.TagList)",
       "generatedMethodId": "Add_5_int_TagList_0"
     },
     {
       "index": 174,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter\u003CSystem.Int32\u003E::Add:System.Void(System.Int32,System.Diagnostics.TagList)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.UpDownCounter<System.Int32>::Add:System.Void(System.Int32,System.Diagnostics.TagList)",
       "generatedMethodId": "Add_5_int_TagList_1"
+    },
+    {
+      "index": 175,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterFactoryExtensions::Create:System.Diagnostics.Metrics.Meter(System.Diagnostics.Metrics.IMeterFactory,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 176,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::Start:System.Void()",
+      "generatedMethodId": ""
     }
   ]
 }

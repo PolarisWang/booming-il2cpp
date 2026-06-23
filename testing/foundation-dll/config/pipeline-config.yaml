@@ -19,12 +19,6 @@ pipeline:
   chunks:
     numerics:
       assemblyDirs: ""
-    runtime-intrinsics:
-      assemblyDirs: ""
-    runtime-intrinsics-2:
-      assemblyDirs: ""
-    threading-tasks:
-      assemblyDirs: ""
     global-ns:
       assemblyDirs: "chunks/global-ns/managed/subjects"
     security-cryptography:

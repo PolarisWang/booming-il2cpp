@@ -133,7 +133,7 @@ internal static class ConvertToCppHandler
             NativeAotResult emitResult;
             try
             {
-                emitResult = emitter.Emit(result, outputRoot, config.Mode, subjectMethods, goldProfilePath: config.GoldProfilePath, namespaceFilter: config.NamespaceFilter);
+                emitResult = emitter.Emit(result, outputRoot, config.Mode, subjectMethods, goldProfilePath: config.GoldProfilePath);
             }
             catch (OutOfMemoryException oom)
             {
@@ -213,7 +213,7 @@ internal static class ConvertToCppHandler
             {
                 var asmOutput = result.OutputRootPath;
                 var asmEmitter = new FullAssemblyEmitter();
-                var asmEmitResult = asmEmitter.Emit(result, asmOutput, config.Mode, subjectMethods, namespaceFilter: config.NamespaceFilter);
+                var asmEmitResult = asmEmitter.Emit(result, asmOutput, config.Mode, subjectMethods);
                 totalFiles += asmEmitResult.GeneratedSources.Count;
                 emitResults.Add(asmEmitResult);
             }
@@ -324,14 +324,15 @@ internal static class ConvertToCppHandler
                 features = new
                 {
                     async_methods = true,
-                    vector_t_boxing = true,
+                    vector_t_boxing = false,
                     generic_constraints = new[] { "unmanaged", "new" },
                     max_generic_params = 4,
                 },
                 known_limitations = new[]
                 {
                     "async state machine MoveNext methods (interpreter fallback only)",
-                                        "SerializationInfo-based constructors (requires infrastructure)",
+                    "Vector<T> return types (LNK2001 for boxed MethodTable entries)",
+                    "SerializationInfo-based constructors (requires infrastructure)",
                     "MetadataLoadContext dependent type discovery",
                     "Generic constraints unsatisfied by concretization (CS0315)",
                     ".NET 9 APIs not available in net8.0 reference assemblies",

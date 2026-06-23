@@ -15,11 +15,6 @@
 #include "gc_bgc.h"
 
 #include "../core/engine_lifecycle.h"
-#include "../core/gc_alloc_stubs.h"
-#include "../module_registry.h"
-
-// Force linker to keep chaos_gc_get_allocated_bytes_for_current_thread
-#pragma comment(linker, "/include:chaos_gc_get_allocated_bytes_for_current_thread")
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -629,12 +624,7 @@ thread_local CHAOS_IL2CPP_INT64 tls_total_allocated_bytes = 0;
 
 extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_allocated_bytes_for_current_thread() noexcept
 {
-    auto _fast = static_cast<CHAOS_IL2CPP_INT64>(chaos::il2cpp::runtime_core::tls_alloc_fast_bytes);
-    auto _total = tls_total_allocated_bytes;
-    auto _sum = _total + _fast;
-    fprintf(stderr, "[GC_CNT] total=%lld fast=%lld sum=%lld\n",
-            (long long)_total, (long long)_fast, (long long)_sum);
-    return _sum;
+    return tls_total_allocated_bytes;
 }
 
 // ======================================================================
@@ -675,40 +665,4 @@ extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_wait_for_full_gc_c
 
 extern "C" bool CHAOS_RUNTIME_ABI_CALL chaos_is_gc_pointer(const void* ptr) noexcept {
     return chaos::il2cpp::runtime_core::chaos_is_gc_pointer(ptr);
-}
-
-// Stub for exception metadata helper (may not be in prebuilt lib).
-void ChaosReflectionSetExceptionMetadata_2params(
-    CHAOS_IL2CPP_INTPTR exc, CHAOS_IL2CPP_INTPTR msg, CHAOS_IL2CPP_INTPTR inner) noexcept
-{
-    (void)exc; (void)msg; (void)inner;
-}
-
-// ChaosRuntimeHelpersGetUninitializedObject — registered in ShapeRegistry
-// as SimpleForward for RuntimeHelpers.GetUninitializedObject(Type).
-// Allocates via ChaOS GC (GcAllocateFast) so TLS counters track allocation.
-extern "C" __declspec(dllexport) CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL
-ChaosRuntimeHelpersGetUninitializedObject(CHAOS_IL2CPP_INTPTR type_handle) noexcept
-{
-    if (type_handle == 0) { fprintf(stderr, "[gui] fail: null\n"); return 0; }
-
-    CHAOS_IL2CPP_INTPTR inner = 0;
-    std::memcpy(&inner, (const void*)(type_handle + 16), sizeof(inner));
-    if (inner == 0) { fprintf(stderr, "[gui] fail: inner=0\n"); return 0; }
-    fprintf(stderr, "[gui] inner=0x%llx\n", (unsigned long long)inner);
-
-    using namespace chaos::il2cpp::runtime_core;
-    auto* ti = LookupTypeInfoPtr((uint32_t)(inner >> 32), (uint32_t)(inner & 0xFFFFFFFFu));
-    if (!ti) { fprintf(stderr, "[gui] fail: no TypeInfoHot\n"); return 0; }
-    fprintf(stderr, "[gui] stable=0x%llx\n", (unsigned long long)ti->stable_id);
-
-    auto* l = GcLayoutRegistry::Instance().Lookup(ti->stable_id);
-    if (!l || l->instance_size==0) { fprintf(stderr, "[gui] fail: no layout\n"); return 0; }
-    fprintf(stderr, "[gui] size=%u\n", l->instance_size);
-
-    void* obj = GcAllocateFast(l->instance_size);
-    if (!obj) { fprintf(stderr, "[gui] fail: alloc\n"); return 0; }
-    *(const TypeInfoHot**)obj = ti;
-    fprintf(stderr, "[gui] OK obj=%p\n", obj);
-    return (CHAOS_IL2CPP_INTPTR)obj;
 }

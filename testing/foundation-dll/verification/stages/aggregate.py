@@ -124,38 +124,16 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         else:
             summary["hotupdate"] = {"status": "no_results"}
 
-        # Coverage audit results (namespace-level breakdown)
-        coverage_path = results_dir / "coverage-audit.json"
-        if coverage_path.exists():
-            try:
-                cv = json.loads(coverage_path.read_text(encoding="utf-8"))
-                summary["coverageAudit"] = {
-                    "coveragePct": cv.get("coveragePct", 100.0),
-                    "namespaceGaps": cv.get("namespaceGaps", {}),
-                    "fixableGapCount": cv.get("fixableGapCount", 0),
-                }
-            except (json.JSONDecodeError, OSError):
-                summary["coverageAudit"] = {"status": "error"}
-
         # Build status
-        # Priority: .build_status marker (from build stage) > filesystem inference
-        build_status_marker = results_dir / ".build_status"
-        if build_status_marker.exists():
-            try:
-                marker_status = build_status_marker.read_text(encoding="utf-8").strip()
-                summary["build"] = {"status": marker_status}
-            except OSError:
-                pass
+        result_files = [f.name for f in results_dir.iterdir()] if results_dir.is_dir() else []
+        if fact_path.exists():
+            summary["build"] = {"status": "passed"}
+        elif any(rf.endswith(".json") for rf in result_files):
+            summary["build"] = {"status": "passed"}
+        elif results_dir.is_dir():
+            summary["build"] = {"status": "failed"}
         else:
-            result_files = [f.name for f in results_dir.iterdir()] if results_dir.is_dir() else []
-            if fact_path.exists():
-                summary["build"] = {"status": "passed"}
-            elif any(rf.endswith(".json") for rf in result_files):
-                summary["build"] = {"status": "passed"}
-            elif results_dir.is_dir():
-                summary["build"] = {"status": "failed"}
-            else:
-                summary["build"] = {"status": "not_run"}
+            summary["build"] = {"status": "not_run"}
 
         # Profile results (AOT code size, optional)
         profile_path = results_dir / "profile.json"
@@ -311,17 +289,6 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     (latest_dir / "benchmark-summary.json").write_text(
         json.dumps(bench_summary, indent=2), encoding="utf-8")
 
-    # ── Compute aggregate memory/GC metrics ──
-    total_allocated = sum(
-        b.get("totalAllocatedBytes", 0) for b in chunks_with_benchmark
-    )
-    mean_alloc = (total_allocated / len(chunks_with_benchmark)
-                  if chunks_with_benchmark else 0)
-
-    total_fixable_gap = sum(
-        s.get("coverageAudit", {}).get("fixableGapCount", 0) for s in chunk_summaries
-    )
-
     # coverage-audit.json
     coverage_audit = {
         "assemblyName": ctx.assembly,
@@ -331,9 +298,6 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "chunksWithValueWarnings": chunks_with_value_warnings,
         "chunksWithMetaMismatch": chunks_with_meta_mismatch,
         "totalDeclaredMethods": total_fact,
-        "coveragePct": round(total_passed / total_fact * 100, 1) if total_fact else 0,
-        "fixableGapCount": total_fixable_gap,
-        "namespaceGaps": {},  # populated per-chunk; aggregate here if needed
     }
     (latest_dir / "coverage-audit.json").write_text(
         json.dumps(coverage_audit, indent=2), encoding="utf-8")
@@ -359,15 +323,6 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 "totalFailed": total_hu_failed,
                 "skipBreakdown": hotupdate_skip_statuses,
             },
-            "memory": {
-                "totalAllocatedBytes": total_allocated,
-                "meanAllocatedPerChunk": round(mean_alloc, 1),
-                "chunksWithAllocData": len(chunks_with_benchmark),
-            },
-            "coverage": {
-                "overallPct": round(total_passed / total_fact * 100, 1) if total_fact else 0,
-                "chunksWithGaps": chunks_with_meta_mismatch,
-            },
         },
     }
 
@@ -386,50 +341,15 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     (latest_dir / "dashboard.json").write_text(
         json.dumps(dashboard, indent=2), encoding="utf-8")
 
-    # History: benchmark + fact + coverage data for regression detection
+    # History: benchmark data for regression detection
     today = date.today().isoformat()
-    history_benchmark = {
+    history_entry = {
         "date": today,
         "assemblyName": ctx.assembly,
         "chunks": chunk_summaries,
     }
     (history_dir / f"benchmark-{today}.json").write_text(
-        json.dumps(history_benchmark, indent=2), encoding="utf-8")
-
-    # Fact history (for cross-day fact pass rate trend)
-    history_fact = {
-        "date": today,
-        "assemblyName": ctx.assembly,
-        "totalChunks": len(chunk_slugs),
-        "chunksWithFacts": chunks_with_fact,
-        "totalPassed": total_passed,
-        "totalFactMethods": total_fact,
-        "chunks": [
-            {"slug": s["slug"], "fact": s.get("fact")}
-            for s in chunk_summaries
-        ],
-    }
-    (history_dir / f"fact-{today}.json").write_text(
-        json.dumps(history_fact, indent=2), encoding="utf-8")
-
-    # Coverage history (for cross-day coverage gap trend)
-    total_coverage_gap = sum(
-        max(0, (s.get("fact") or {}).get("metaTotal", 0) - (s.get("fact") or {}).get("total", 0))
-        for s in chunk_summaries
-    )
-    history_coverage = {
-        "date": today,
-        "assemblyName": ctx.assembly,
-        "totalChunks": len(chunk_slugs),
-        "coveragePct": round(total_passed / total_fact * 100, 1) if total_fact else 0,
-        "fixableGapCount": total_fixable_gap,
-        "chunks": [
-            {"slug": s["slug"], "coverageAudit": s.get("coverageAudit")}
-            for s in chunk_summaries
-        ],
-    }
-    (history_dir / f"coverage-{today}.json").write_text(
-        json.dumps(history_coverage, indent=2), encoding="utf-8")
+        json.dumps(history_entry, indent=2), encoding="utf-8")
 
     duration_ms = int((time.perf_counter() - start) * 1000)
     print(f"  [aggregate] Reports written to {latest_dir}")

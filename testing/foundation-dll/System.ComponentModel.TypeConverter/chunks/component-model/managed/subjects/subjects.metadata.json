@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.ComponentModel.TypeConverter",
   "chunkSlug": "component-model",
-  "totalMethods": 568,
+  "totalMethods": 601,
   "factMethodCount": 375,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -1299,49 +1299,49 @@
     {
       "index": 25,
       "kind": "fact",
-      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList\u003CSystem.Int32\u003E::ResetBindings:System.Void()",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList<System.Int32>::ResetBindings:System.Void()",
       "generatedMethodId": "ResetBindings_0__0"
     },
     {
       "index": 26,
       "kind": "fact",
-      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList\u003CSystem.Int32\u003E::ResetItem:System.Void(System.Int32)",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList<System.Int32>::ResetItem:System.Void(System.Int32)",
       "generatedMethodId": "ResetItem_1_int_0"
     },
     {
       "index": 27,
       "kind": "fact",
-      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList\u003CSystem.Int32\u003E::ResetItem:System.Void(System.Int32)",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList<System.Int32>::ResetItem:System.Void(System.Int32)",
       "generatedMethodId": "ResetItem_1_int_1"
     },
     {
       "index": 28,
       "kind": "fact",
-      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList\u003CSystem.Int32\u003E::CancelNew:System.Void(System.Int32)",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList<System.Int32>::CancelNew:System.Void(System.Int32)",
       "generatedMethodId": "CancelNew_2_int_0"
     },
     {
       "index": 29,
       "kind": "fact",
-      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList\u003CSystem.Int32\u003E::CancelNew:System.Void(System.Int32)",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList<System.Int32>::CancelNew:System.Void(System.Int32)",
       "generatedMethodId": "CancelNew_2_int_1"
     },
     {
       "index": 30,
       "kind": "fact",
-      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList\u003CSystem.Int32\u003E::EndNew:System.Void(System.Int32)",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList<System.Int32>::EndNew:System.Void(System.Int32)",
       "generatedMethodId": "EndNew_3_int_0"
     },
     {
       "index": 31,
       "kind": "fact",
-      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList\u003CSystem.Int32\u003E::EndNew:System.Void(System.Int32)",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList<System.Int32>::EndNew:System.Void(System.Int32)",
       "generatedMethodId": "EndNew_3_int_1"
     },
     {
       "index": 32,
       "kind": "fact",
-      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList\u003CSystem.Int32\u003E::AddNew:System.Int32()",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BindingList<System.Int32>::AddNew:System.Int32()",
       "generatedMethodId": "AddNew_4__0"
     },
     {
@@ -4553,6 +4553,204 @@
       "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.UriTypeConverter::IsValid:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Object)",
       "generatedMethodId": "IsValid_4_ITypeDescriptorContext_object_0"
+    },
+    {
+      "index": 568,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AddingNewEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.AddingNewEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 569,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AddingNewEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 570,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AddingNewEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.AddingNewEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 571,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BooleanConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 572,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CancelEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.CancelEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 573,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CancelEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 574,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CancelEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.CancelEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 575,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CollectionChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.CollectionChangeEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 576,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CollectionChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 577,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CollectionChangeEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.CollectionChangeEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 578,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CultureInfoConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 579,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EnumConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 580,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.HandledEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.HandledEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 581,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.HandledEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 582,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.HandledEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.HandledEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 583,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 584,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.ListChangedEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 585,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 586,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListChangedEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.ListChangedEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 587,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 588,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ReferenceConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 589,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.RefreshEventHandler::BeginInvoke:System.IAsyncResult(System.ComponentModel.RefreshEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 590,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.RefreshEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 591,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.RefreshEventHandler::Invoke:System.Void(System.ComponentModel.RefreshEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 592,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter+StandardValuesCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 593,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter+StandardValuesCollection::GetEnumerator:System.Collections.IEnumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 594,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 595,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetConverterFromRegisteredType:System.ComponentModel.TypeConverter(System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 596,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetConverterFromRegisteredType:System.ComponentModel.TypeConverter(System.Type)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 597,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetEventsFromRegisteredType:System.ComponentModel.EventDescriptorCollection(System.Type)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 598,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetPropertiesFromRegisteredType:System.ComponentModel.PropertyDescriptorCollection(System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 599,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetPropertiesFromRegisteredType:System.ComponentModel.PropertyDescriptorCollection(System.Type)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 600,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.WarningException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
     }
   ]
 }

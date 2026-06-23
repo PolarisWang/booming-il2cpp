@@ -1,5 +1,3 @@
-#ifndef CHAOS_IL2CPP_STUB_COMMON_H_
-#define CHAOS_IL2CPP_STUB_COMMON_H_
 #pragma once
 
 #include <chaos/native_types.h>
@@ -70,4 +68,3 @@ inline uint32_t stub_xorshift32() noexcept {
     state = x;
     return x;
 }
-#endif  // CHAOS_IL2CPP_STUB_COMMON_H_

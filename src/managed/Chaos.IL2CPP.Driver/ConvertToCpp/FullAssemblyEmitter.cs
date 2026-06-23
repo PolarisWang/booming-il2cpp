@@ -13,8 +13,7 @@ internal sealed class FullAssemblyEmitter
         string outputRoot,
         CodegenMode mode = CodegenMode.Aot,
         List<string>? subjectMethods = null,
-        string? goldProfilePath = null,
-        string? namespaceFilter = null)
+        string? goldProfilePath = null)
     {
         ArgumentNullException.ThrowIfNull(closureResult);
 
@@ -29,7 +28,6 @@ internal sealed class FullAssemblyEmitter
             mode,
             subjectMethods,
             goldProfilePath: goldProfilePath,
-            namespaceFilter: namespaceFilter,
             allManagedMethods: closureResult.AllManagedMethods);
 
         foreach (var source in emitResult.GeneratedSources)

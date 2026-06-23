@@ -124,9 +124,6 @@ def main():
                         help="Chunk slug to run (e.g. 'numerics')")
     parser.add_argument("--all-chunks", action="store_true",
                         help="Run all chunks for the assembly")
-    parser.add_argument("--parallel", type=int, default=0, nargs="?",
-                        const=4,
-                        help="Run chunks in parallel (default: 4 workers, pass --parallel N for custom)")
     parser.add_argument("--stages", default="build,fact,hotupdate,coverage-audit",
                         help="Comma-separated stages to run (default: build,fact,hotupdate,coverage-audit)")
     parser.add_argument("--mode", default=None,
@@ -240,7 +237,6 @@ def main():
         "build": None,
         "fact": None,
         "profile": None,
-        "profile-range": None,
         "benchmark": None,
         "managed_benchmark": None,
         "benchmark_report": None,
@@ -259,8 +255,6 @@ def main():
     # ── Stage dependency DAG validation ──
     STAGE_DEPS: dict[str, list[str]] = {
         "fact":              ["build"],
-        "profile":           ["build"],
-        "profile-range":     ["build"],
         "benchmark":         ["build", "fact"],
         "managed_benchmark": ["build"],
         "benchmark_report":  ["benchmark", "managed_benchmark"],
@@ -285,7 +279,6 @@ def main():
     from verification.stages.build import run_build
     from verification.stages.fact_chunk import run_fact_chunk
     from verification.stages.profile import run_profile
-    from verification.stages.profile_range_chunk import run_profile_range_chunk
     from verification.stages.benchmark_chunk import run_benchmark_chunk
     from verification.stages.managed_benchmark import run_managed_benchmark
     from verification.stages.hotupdate_chunk import run_hotupdate_chunk
@@ -298,7 +291,6 @@ def main():
         "build": run_build,
         "fact": run_fact_chunk,
         "profile": run_profile,
-        "profile-range": run_profile_range_chunk,
         "benchmark": run_benchmark_chunk,
         "managed_benchmark": run_managed_benchmark,
         "hotupdate": run_hotupdate_chunk,
@@ -333,16 +325,9 @@ def main():
         chunk_mode = args.mode
     seq = 0
 
-    from concurrent.futures import ThreadPoolExecutor, as_completed
-
-    # Ensure overall_start exists for nonlocal usage
-    if "overall_start" not in dir():
-        overall_start = 0.0
-
-    def _run_chunk(chunk_slug, _seq):
-        """Run all stages for a single chunk."""
-        nonlocal overall_start
+    for chunk_slug in chunks:
         chunk_dir = foundation_dir / "chunks" / chunk_slug
+        # Read assembly dirs from pipeline-config.yaml for this chunk
         chunk_cfg = (_PIPELINE_CONFIG.get('chunks') or {}).get(chunk_slug, {})
         assembly_dirs_str = (chunk_cfg.get('assemblyDirs') or '').strip()
         assembly_dirs = []
@@ -358,6 +343,7 @@ def main():
                     assembly_dirs.append(str(resolved))
 
         # ── Run identity / provenance metadata ──
+        seq += 1
         run_id = f"fdn-{datetime.now(timezone.utc).strftime('%Y%m%d')}-{seq:03d}"
         platform_map = {"win32": "windows-x64", "linux": "linux-x64", "darwin": "macos-arm64"}
         platform = platform_map.get(sys.platform, sys.platform)
@@ -419,11 +405,6 @@ def main():
         print(f"\n  Chunk '{chunk_slug}' summary: "
               f"{sum(1 for s in stages_result.values() if s.get('status') == 'passed')}/"
               f"{len(stage_names)} passed")
-
-    # ── Execute chunks (sequential, single-threaded) ──
-    for chunk_slug in chunks:
-        seq += 1
-        _run_chunk(chunk_slug, seq)
 
     total_duration = time.perf_counter() - overall_start
     print(f"\n{'='*60}")

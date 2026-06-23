@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Security.Claims",
   "chunkSlug": "global-ns",
-  "totalMethods": 46,
+  "totalMethods": 56,
   "factMethodCount": 28,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -135,13 +135,13 @@
     {
       "index": 5,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaims:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaims:System.Void(System.Collections.Generic.IEnumerable<System.Security.Claims.Claim>)",
       "generatedMethodId": "AddClaims_2_IEnumerableClaim_0"
     },
     {
       "index": 6,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaims:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaims:System.Void(System.Collections.Generic.IEnumerable<System.Security.Claims.Claim>)",
       "generatedMethodId": "AddClaims_2_IEnumerableClaim_1"
     },
     {
@@ -159,37 +159,37 @@
     {
       "index": 9,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable<System.Security.Claims.Claim>(System.Predicate<System.Security.Claims.Claim>)",
       "generatedMethodId": "FindAll_5_System_PredicateClaim_0"
     },
     {
       "index": 10,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable<System.Security.Claims.Claim>(System.Predicate<System.Security.Claims.Claim>)",
       "generatedMethodId": "FindAll_5_System_PredicateClaim_1"
     },
     {
       "index": 11,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.String)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable<System.Security.Claims.Claim>(System.String)",
       "generatedMethodId": "FindAll_6_string_0"
     },
     {
       "index": 12,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.String)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable<System.Security.Claims.Claim>(System.String)",
       "generatedMethodId": "FindAll_6_string_1"
     },
     {
       "index": 13,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.Predicate<System.Security.Claims.Claim>)",
       "generatedMethodId": "FindFirst_7_System_PredicateClaim_0"
     },
     {
       "index": 14,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.Predicate<System.Security.Claims.Claim>)",
       "generatedMethodId": "FindFirst_7_System_PredicateClaim_1"
     },
     {
@@ -207,13 +207,13 @@
     {
       "index": 17,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.Predicate<System.Security.Claims.Claim>)",
       "generatedMethodId": "HasClaim_9_System_PredicateClaim_0"
     },
     {
       "index": 18,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.Predicate<System.Security.Claims.Claim>)",
       "generatedMethodId": "HasClaim_9_System_PredicateClaim_1"
     },
     {
@@ -249,13 +249,13 @@
     {
       "index": 24,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentities:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.ClaimsIdentity\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentities:System.Void(System.Collections.Generic.IEnumerable<System.Security.Claims.ClaimsIdentity>)",
       "generatedMethodId": "AddIdentities_1_IEnumerableClaimsIdentity_0"
     },
     {
       "index": 25,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentities:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.ClaimsIdentity\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentities:System.Void(System.Collections.Generic.IEnumerable<System.Security.Claims.ClaimsIdentity>)",
       "generatedMethodId": "AddIdentities_1_IEnumerableClaimsIdentity_1"
     },
     {
@@ -267,37 +267,37 @@
     {
       "index": 27,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable<System.Security.Claims.Claim>(System.Predicate<System.Security.Claims.Claim>)",
       "generatedMethodId": "FindAll_3_System_PredicateClaim_0"
     },
     {
       "index": 28,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable<System.Security.Claims.Claim>(System.Predicate<System.Security.Claims.Claim>)",
       "generatedMethodId": "FindAll_3_System_PredicateClaim_1"
     },
     {
       "index": 29,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.String)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable<System.Security.Claims.Claim>(System.String)",
       "generatedMethodId": "FindAll_4_string_0"
     },
     {
       "index": 30,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.String)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable<System.Security.Claims.Claim>(System.String)",
       "generatedMethodId": "FindAll_4_string_1"
     },
     {
       "index": 31,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.Predicate<System.Security.Claims.Claim>)",
       "generatedMethodId": "FindFirst_5_System_PredicateClaim_0"
     },
     {
       "index": 32,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.Predicate<System.Security.Claims.Claim>)",
       "generatedMethodId": "FindFirst_5_System_PredicateClaim_1"
     },
     {
@@ -315,13 +315,13 @@
     {
       "index": 35,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.Predicate<System.Security.Claims.Claim>)",
       "generatedMethodId": "HasClaim_7_System_PredicateClaim_0"
     },
     {
       "index": 36,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.Predicate<System.Security.Claims.Claim>)",
       "generatedMethodId": "HasClaim_7_System_PredicateClaim_1"
     },
     {
@@ -377,6 +377,66 @@
       "kind": "fact",
       "methodSubjectId": "System.Security.Claims/System.Security.Principal.GenericPrincipal::IsInRole:System.Boolean(System.String)",
       "generatedMethodId": "IsInRole_0_string_1"
+    },
+    {
+      "index": 46,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaims:System.Void(System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 47,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]](System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 48,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]](System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 49,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 50,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 51,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentities:System.Void(System.Collections.Generic.IEnumerable`1[[System.Security.Claims.ClaimsIdentity, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 52,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]](System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 53,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]](System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 54,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 55,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])",
+      "generatedMethodId": ""
     }
   ]
 }

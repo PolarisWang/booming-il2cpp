@@ -1,0 +1,19 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Data.Common",
+  "chunkSlug": "system-data-common",
+  "entries": [
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::CopyTo:System.Void(System.Data.Common.DataColumnMapping[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::CopyTo:System.Void(System.Data.Common.DataTableMapping[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbEnumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.Common.DbEnumerator::Reset:System.Void()"
+    }
+  ]
+}

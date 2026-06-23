@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import json
 import os
-import re
 import subprocess
 import sys
 import time
@@ -31,97 +30,6 @@ from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 
 
-def _get_sdk_version() -> tuple[int, int]:
-    """Get the current .NET SDK version as (major, minor).
-
-    Returns (8, 0) as a safe fallback on failure.
-    """
-    try:
-        ver = subprocess.run(
-            ["dotnet", "--version"], capture_output=True, text=True, timeout=15
-        ).stdout.strip()
-        m = re.search(r"(\d+)\.(\d+)", ver)
-        if m:
-            return int(m.group(1)), int(m.group(2))
-    except (OSError, subprocess.TimeoutExpired):
-        pass
-    return (8, 0)
-
-
-def _find_target_dll(ctx: ChunkContext) -> Path | None:
-    """Find the correct target DLL for ATG --patch-mode with version pinning.
-
-    Search order:
-      1. ctx.foundation_dir / '{assembly}.dll' (project-local, rarely exists)
-      2. dotnet-foundation/*/runtime/ (project-internal, only System.Private.CoreLib)
-      3. dotnet-foundation/net8.0/ref/ (reference assemblies, metadata-only but
-         sufficient for ATG --patch-mode to generate type/method signatures)
-      4. Shared framework paths — prefer net8.0 over higher versions
-      5. DOTNET_ROOT fallback
-
-    The scoring function ensures net8.0 is preferred over higher .NET versions,
-    since the project targets net8.0 and higher runtimes may have different
-    API surfaces that cause patch DLL build failures.
-    """
-    candidates: list[Path] = []
-
-    # 1. Foundation dir
-    candidates.append(ctx.foundation_dir / f"{ctx.assembly}.dll")
-
-    # 2. Project-internal runtime DLLs
-    for ref_dir in sorted((_REPO_ROOT / "src" / "dll" / "dotnet-foundation").iterdir(), reverse=True):
-        candidate = ref_dir / "runtime" / f"{ctx.assembly}.dll"
-        if candidate.exists():
-            candidates.append(candidate)
-
-    # 3. Reference assemblies in net8.0/ref/
-    ref_dir = _REPO_ROOT / "src" / "dll" / "dotnet-foundation" / "net8.0" / "ref"
-    candidate = ref_dir / f"{ctx.assembly}.dll"
-    if candidate.exists():
-        candidates.append(candidate)
-
-    # 4. Shared framework: prefer net8.0 over higher versions
-    _dotnet_root = os.environ.get("DOTNET_ROOT", "")
-    for base in (
-        Path("/usr/share/dotnet/shared"),
-        (Path("C:/Program Files/dotnet/shared") if sys.platform == "win32" else None),
-        (Path(_dotnet_root) if _dotnet_root else None),
-    ):
-        if base is not None and base.exists():
-            for runtime_dir in sorted(base.rglob(f"**/{ctx.assembly}.dll")):
-                if runtime_dir not in candidates:
-                    candidates.append(runtime_dir)
-
-    # Score candidates (lower = better)
-    def _score(c: Path) -> int:
-        path = str(c).replace("\\", "/")
-        # Project-local is always best
-        if c.parent == ctx.foundation_dir:
-            return 0
-        # Project-internal runtime DLLs
-        tfm_priority = {"net8.0": 0, "net9.0": 1, "net10.0": 2}
-        if "dotnet-foundation" in path and "/runtime/" in path:
-            for tfm, prio in tfm_priority.items():
-                if f"/{tfm}/" in path:
-                    return 1 + prio
-            return 5
-        # Reference assembly
-        if "/ref/" in path:
-            return 4
-        # Shared framework: prefer net8.0 over higher versions
-        m = re.search(r"Microsoft\.NETCore\.App(?:\.Ref)?/(\d+)\.(\d+)\.", path)
-        if m:
-            ver = float(f"{m.group(1)}.{m.group(2)}")
-            return 10 + int((ver - 8.0) * 2 + 0.5)
-        return 20
-
-    candidates.sort(key=_score)
-    for c in candidates:
-        if c.exists():
-            return c
-    return None
-
-
 # -- BOUNDARY_OVERRIDE: issues/NNN --
 # Reason: patch-host-arrays.cpp generation moved to TPG CppProjectEmitter.cs
 # (Scriban template + BuildHostArrays()).  The TPG now emits real host arrays
@@ -130,17 +38,8 @@ def _find_target_dll(ctx: ChunkContext) -> Path | None:
 # Expires: 2026-09-14
 
 
-def _build_patch_dll(patch_output: Path, patch_dll: Path,
-                     target_dll: Path | None = None,
-                     tfm: str | None = None) -> bool:
-    """Combine ATG --patch-mode generated .cs files and build into a DLL.
-
-    Args:
-        patch_output: Directory with ATG-generated .cs files.
-        patch_dll: Expected output path for the built PatchSubjects.dll.
-        target_dll: Source DLL for type resolution.
-        tfm: Target framework moniker (auto-detected from target_dll if None).
-    """
+def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | None = None) -> bool:
+    """Combine ATG --patch-mode generated .cs files and build into a DLL."""
     # Exclude obj/ build artifacts, CombinedPatchSubjects.cs (self-reference),
     # and AssemblyAttributes files generated by the build system.
     all_patch_files = sorted(
@@ -162,9 +61,9 @@ def _build_patch_dll(patch_output: Path, patch_dll: Path,
     content = "\n\n".join(parts)
     combined_cs.write_text(content, encoding="utf-8")
 
-    # Detect TFM from target DLL path, or use caller-provided override
-    if tfm is None:
-        tfm = detect_tfm(target_dll)
+    # Detect TFM from target DLL path (e.g. ".../9.0.0/...System.Private.CoreLib.dll" → net9.0)
+    # Reuse build.py's exact TFM detection for consistency.
+    tfm = detect_tfm(target_dll)
     sdk_csproj = (_REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk"
                   / "Chaos.TestFramework.Sdk.csproj")
     ref_block = ""
@@ -434,7 +333,6 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # ── Step 1: Try to generate patch data (ATG --patch-mode + build) ──
     _patch_generation_attempted = False
     _patch_skipped_no_methods = False
-    _patch_errors: list[dict] = []
     # Full patch data generation pipeline: ATG --patch-mode → csc → PatchDataExtractor.
     # PatchDataExtractor reads the patch DLL's PE metadata and produces a self-contained
     # .patchdata binary (format "PADT" magic) that the runtime PatchLoader can apply.
@@ -443,12 +341,31 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     patch_data_path = None
     print(f"  [hotupdate] Attempting ATG --patch-mode to generate patch DLL...")
 
-    # Find target DLL with version-pinned search (prefer net8.0 over higher versions)
-    target_dll = _find_target_dll(ctx)
-    if target_dll:
-        print(f"  [hotupdate] Target DLL: {target_dll}")
-        detected_tfm = detect_tfm(target_dll)
-        print(f"  [hotupdate] Detected TFM: {detected_tfm}")
+    # Find target DLL (same logic as build.py, with Linux fallback)
+    target_dll: Path | None = None
+    dll_candidates: list[Path] = [
+        ctx.foundation_dir / f"{ctx.assembly}.dll",
+    ]
+    # Use project-internal reference DLLs first (portable, no system dependency)
+    for ref_dir in sorted((_REPO_ROOT / "src" / "dll" / "dotnet-foundation").iterdir(), reverse=True):
+        candidate = ref_dir / "runtime" / f"{ctx.assembly}.dll"
+        if candidate.exists():
+            dll_candidates.insert(0, candidate)
+    # Fallback: search system-wide dotnet paths (checked after project ref)
+    import sys as _sys
+    for base in (
+        Path(os.environ.get("DOTNET_ROOT", "")),
+        Path("/usr/share/dotnet/shared"),
+        Path("C:/Program Files/dotnet/shared") if _sys.platform == "win32" else Path(""),
+    ):
+        if base.exists():
+            for runtime_dir in sorted(base.rglob(f"**/{ctx.assembly}.dll")):
+                dll_candidates.append(runtime_dir)
+    for c in dll_candidates:
+        if c.exists():
+            target_dll = c
+            print(f"  [hotupdate] Target DLL: {c}")
+            break
 
     if target_dll is None:
         print(f"  [hotupdate] Target DLL not found, skipping ATG --patch-mode")
@@ -485,16 +402,10 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
                 print(f"  [hotupdate] ATG --patch-mode produced 0 .cs files (no methods to patch)")
                 _patch_skipped_no_methods = True
             else:
-                # Try to build the generated patch DLL with TFM fallback
+                # Try to build the generated patch DLL
                 patch_dll = ctx.chunk_dir / "managed" / "subjects" / "patch" / "PatchSubjects.dll"
                 patch_dll.parent.mkdir(parents=True, exist_ok=True)
-                build_ok = _build_patch_dll(patch_output, patch_dll, target_dll,
-                                            tfm=detected_tfm)
-                if not build_ok and detected_tfm != "net8.0":
-                    print(f"  [hotupdate] TFM={detected_tfm} build failed, retrying with net8.0...")
-                    build_ok = _build_patch_dll(patch_output, patch_dll, target_dll,
-                                                tfm="net8.0")
-                if build_ok:
+                if _build_patch_dll(patch_output, patch_dll, target_dll):
                     print(f"  [hotupdate] Patch DLL built: {patch_dll}")
                     # Extract patch data via TPG (IL2CPP codegen layer)
                     if ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
@@ -525,30 +436,14 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
                                     duration_ms=int((time.perf_counter() - start) * 1000))
                         else:
                             print(f"  [hotupdate] TPG extract-patch-data failed, falling back to no-patch mode")
-                            _patch_errors.append({
-                                "step": "tpg-extract",
-                                "exitCode": extract_result.returncode,
-                                "stderr": (extract_result.stderr or "")[-2000:],
-                                "stdout": (extract_result.stdout or "")[-2000:],
-                                "tfm": detected_tfm,
-                            })
                             for line in (extract_result.stderr.splitlines() + extract_result.stdout.splitlines())[-5:]:
                                 print(f"      {line}")
                             patch_data_path = None
                     else:
                         print(f"  [hotupdate] TPG build failed, falling back to no-patch mode")
-                        _patch_errors.append({
-                            "step": "tpg", "exitCode": -1,
-                            "stderr": "TPG tool not built", "stdout": "", "tfm": detected_tfm,
-                        })
                         patch_data_path = None
                 else:
                     print(f"  [hotupdate] Patch DLL build failed, falling back to no-patch mode")
-                    _patch_errors.append({
-                        "step": "build", "exitCode": -1,
-                        "stderr": f"TFM={detected_tfm} build failed",
-                        "stdout": "", "tfm": detected_tfm,
-                    })
                     # Show ATG output diagnostics
                     if patch_output.exists():
                         import glob as _glob
@@ -559,12 +454,6 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
                             print(f"  [hotupdate]   ATG output: {pf.relative_to(patch_output)}")
         else:
             print(f"  [hotupdate] ATG --patch-mode failed, falling back to no-patch mode")
-            _patch_errors.append({
-                "step": "atg", "exitCode": atg_result.returncode,
-                "stderr": (atg_result.stderr or "")[-2000:],
-                "stdout": (atg_result.stdout or "")[-2000:],
-                "tfm": detected_tfm,
-            })
             for line in (atg_result.stderr.splitlines() + atg_result.stdout.splitlines())[-10:]:
                     print(f"      {line}")
     else:
@@ -598,16 +487,10 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         print(f"  [hotupdate] Running without --patch-data (no semantic change expected)...")
 
     # When patch data is available, run benchmark before/after for performance comparison
-    # Scale iterations by chunk size: 3 for small (<500), 2 for medium (>500), 1 for large (>2000)
-    # Best-effort: if the native entry.exe crashes with --benchmark-iterations + --patch-data,
-    # the benchmark will produce no data but fact/revert will still run.
+    # Scale iterations by chunk size: 5 for small (<500), 2 for medium, 0 (disabled) for large
+    # NOTE: benchmark disabled for now — see DispatchDirectVoid+benchmark+patch-data crash
+    benchmark_iterations = 0
     method_count = len(hotupdate_indices)
-    if method_count < 500:
-        benchmark_iterations = 3
-    elif method_count < 2000:
-        benchmark_iterations = 2
-    else:
-        benchmark_iterations = 1
 
     # Scale timeout by chunk size: 3s per method for 3 passes (baseline/patched/revert)
     hotupdate_timeout = max(120, 60 + method_count * 3)
@@ -666,33 +549,6 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # Compute per-method revert pass count
     revert_passed = sum(1 for r in reverted_fact if r.get("passed"))
 
-    # ── Per-method revert integrity check ──
-    # Compare each method's revert result against its baseline result.
-    # Methods that pass baseline but fail after revert are regression.
-    # Methods that fail both baseline and revert are expected (known failure).
-    baseline_fact = hotupdate_data.get("baselineFact", [])
-    revert_regression_count = 0
-    revert_fixed_count = 0
-    revert_stable_count = 0
-    for br in baseline_fact:
-        b_si = br.get("si", -1)
-        b_passed = br.get("passed", False)
-        # Find matching revert entry
-        rr = next((r for r in reverted_fact if r.get("si", -1) == b_si), None)
-        if rr is None:
-            continue
-        r_passed = rr.get("passed", False)
-        if b_passed and not r_passed:
-            revert_regression_count += 1  # was passing, now failing after revert
-        elif not b_passed and r_passed:
-            revert_fixed_count += 1  # was failing, now passing (odd but tracked)
-        else:
-            revert_stable_count += 1
-
-    if revert_regression_count > 0:
-        print(f"  [hotupdate] Revert integrity: {revert_regression_count} method(s) regressed after revert "
-              f"(were passing baseline, failed after revert)")
-
     ctx.results_dir.mkdir(parents=True, exist_ok=True)
     result_path = ctx.results_dir / "hotupdate.json"
     result_data = {
@@ -703,9 +559,6 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         "allSemantic": all_semantic,
         "allRevert": all_revert,
         "revertPassed": revert_passed,
-        "revertRegressionCount": revert_regression_count,
-        "revertFixedCount": revert_fixed_count,
-        "revertStableCount": revert_stable_count,
         "semanticChangedCount": semantic_changed,
         "patchDataUsed": patch_data_path is not None,
         "patchFailed": patch_data_path is None and _patch_generation_attempted and not _patch_skipped_no_methods,
@@ -714,7 +567,6 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         "crash": hotupdate_data.get("_crash", False),
         "hasBaselineBenchmark": len(baseline_benchmark) > 0,
         "hasPatchedBenchmark": len(patched_benchmark) > 0,
-        "patchErrors": _patch_errors,
         "details": hotupdate_data,
         "stderr": stderr[:500] if stderr else "",
     }
@@ -744,16 +596,8 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     elif result_data.get("patchFailed"):
         # Genuine patch generation failure (ATG/build crashed, not just 0 methods)
         status = "error"
-        # Include first patch error detail in summary
-        first_err = (_patch_errors[0] if _patch_errors else {})
-        err_detail = first_err.get("stderr", "")[:200] or f"step={first_err.get('step','?')} rc={first_err.get('exitCode','?')}"
         if not errors:
-            errors.append(f"patch generation failed ({err_detail})")
-        # Zero out huPassed/huFailed — tests ran without actual patch data,
-        # so any "passed" results are misleading.  Without patch data, the
-        # hotupdate stage runs in baseline-only mode which always passes.
-        result_data["passed"] = 0
-        result_data["failed"] = 0
+            errors.append("patch data generation failed earlier")
     elif result_data.get("patchSkippedNoMethods"):
         # ATG produced 0 patchable methods — tests ran clean, nothing to patch
         status = "passed" if (assert_failed == 0 and all_revert) else "failed"

@@ -227,7 +227,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                 var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                 var result = entry.Resolver(callee, paramTypes);
-                if (_dbg) System.Console.Error.WriteLine($"[SHAPE]   RESOLVER mn={entry.MethodName} prefix={entry.TypeDisplayNamePrefix} result={(result != null ? "OK:" + result[..Math.Min(50, result.Length)] : "NULL")}");
+                if (_dbg) System.Console.Error.WriteLine($"[SHAPE]   RESOLVER mn={entry.MethodName} prefix={entry.TypeDisplayNamePrefix} result={(result != null ? "OK:" + result[..Math.Min(50,result.Length)] : "NULL")}");
                 if (result != null)
                 {
                     cppExpression = result;
@@ -260,7 +260,7 @@ public sealed partial class NativeAotLoweringPlanner
             foreach (var entry in _genericDescriptors)
             {
                 if (callee.Contains("GreaterThanAny") || callee.Contains("LessThanAny"))
-                    // [GENSHAPE] debug — disabled to avoid TPG timeout on large chunks
+                    System.Console.Error.WriteLine($"[GENSHAPE] callee={callee} typeDisplayName=|{typeDisplayName}| methodName=|{methodName}| entry.MethodName=|{entry.MethodName}| entry.TypePrefix=|{entry.TypeDisplayNamePrefix}|");
 
                 if (!string.Equals(entry.MethodName, methodName, StringComparison.Ordinal))
                 {
@@ -280,10 +280,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                     // Also try <...> format (standard .NET metadata / subject ID syntax)
                     var angleStart = entry.MethodName + "<";
-                    var hasAngleGeneric = methodName.StartsWith(angleStart, StringComparison.Ordinal);
-                    // methodName may end with ">" (no params) or ">(...)" (with params like "Empty<Int32>()")
-                    var endsWithAngle = methodName.EndsWith(">") || methodName.Contains(">(");
-                    if (hasAngleGeneric && endsWithAngle)
+                    if (methodName.StartsWith(angleStart, StringComparison.Ordinal) && methodName.EndsWith(">"))
                     {
                         // BUG FIX: verify the type display name matches before matching a generic
                         // method through the angle-bracket fallback.  Without this check,
@@ -292,10 +289,7 @@ public sealed partial class NativeAotLoweringPlanner
                         // the type prefix "System.Array" does not match "System.Collections.Generic.List".
                         if (!typeDisplayName.StartsWith(entry.TypeDisplayNamePrefix, StringComparison.Ordinal))
                             continue;
-                        // Extract content between < and >; handle cases like "Empty<Int32>()" where > is not the last char
-                        var closeAngleIndex = methodName.IndexOf('>', angleStart.Length);
-                        if (closeAngleIndex < 0) continue;
-                        var inner = methodName.Substring(angleStart.Length, closeAngleIndex - angleStart.Length);
+                        var inner = methodName.Substring(angleStart.Length, methodName.Length - angleStart.Length - 1);
                         typeArgs = inner.Split(',');
                         descriptor = entry;
                         return true;
@@ -366,8 +360,8 @@ public sealed partial class NativeAotLoweringPlanner
                 return true;
             }
 
-            if (methodName == "GetHRForLastWin32Error" || methodName == "GetLastPInvokeError")
-                System.Console.Error.WriteLine($"[SHAPE_DEBUG] TryMatchGenericShape EXHAUSTED method={methodName} typeDisplayName=|{typeDisplayName}| _genericDescriptors.Count={_genericDescriptors.Count}");
+                if (methodName == "GetHRForLastWin32Error" || methodName == "GetLastPInvokeError")
+                    System.Console.Error.WriteLine($"[SHAPE_DEBUG] TryMatchGenericShape EXHAUSTED method={methodName} typeDisplayName=|{typeDisplayName}| _genericDescriptors.Count={_genericDescriptors.Count}");
 
             return false;
         }
@@ -670,12 +664,9 @@ public sealed partial class NativeAotLoweringPlanner
                     var paramSig = "CHAOS_IL2CPP_INTPTR chaos_arg_0";
                     for (int pi = 0; pi < paramTypes.Count; pi++)
                         paramSig += ", CHAOS_IL2CPP_INT32 chaos_arg_" + (pi + 1);
-                    var stubBody = paramTypes.Count > 0
-                        ? "    return ChaosArrayGetValue(chaos_arg_0, chaos_arg_1);"
-                        : "    return ChaosArrayGetValue(chaos_arg_0, 0);";
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
-                        stubBody,
+                        "    return ChaosArrayGetValue(chaos_arg_0, chaos_arg_1);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),

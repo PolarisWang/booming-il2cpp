@@ -1,0 +1,37 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Security.Claims",
+  "chunkSlug": "global-ns",
+  "entries": [
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaims:System.Void(System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])"
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]](System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])"
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]](System.String)"
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])"
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])"
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentities:System.Void(System.Collections.Generic.IEnumerable`1[[System.Security.Claims.ClaimsIdentity, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])"
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]](System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])"
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]](System.String)"
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])"
+    },
+    {
+      "methodSubjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.Predicate`1[[System.Security.Claims.Claim, System.Security.Claims, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]])"
+    }
+  ]
+}

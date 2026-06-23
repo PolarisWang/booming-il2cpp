@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Security.Cryptography",
   "chunkSlug": "system-security-cryptography-x509certificates",
-  "totalMethods": 276,
+  "totalMethods": 352,
   "factMethodCount": 167,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -625,25 +625,25 @@
     {
       "index": 10,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Nullable\u003CSystem.DateTimeOffset\u003E,System.Nullable\u003CSystem.Security.Cryptography.X509Certificates.X509RevocationReason\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Nullable<System.DateTimeOffset>,System.Nullable<System.Security.Cryptography.X509Certificates.X509RevocationReason>)",
       "generatedMethodId": "AddEntry_0_X509Certificate2_System_NullableSystem_DateTimeOffset_System_NullableX509RevocationReason_0"
     },
     {
       "index": 11,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Byte[],System.Nullable\u003CSystem.DateTimeOffset\u003E,System.Nullable\u003CSystem.Security.Cryptography.X509Certificates.X509RevocationReason\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Byte[],System.Nullable<System.DateTimeOffset>,System.Nullable<System.Security.Cryptography.X509Certificates.X509RevocationReason>)",
       "generatedMethodId": "AddEntry_1_System_Byte_System_NullableSystem_DateTimeOffset_System_NullableX509RevocationReason_0"
     },
     {
       "index": 12,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Byte[],System.Nullable\u003CSystem.DateTimeOffset\u003E,System.Nullable\u003CSystem.Security.Cryptography.X509Certificates.X509RevocationReason\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Byte[],System.Nullable<System.DateTimeOffset>,System.Nullable<System.Security.Cryptography.X509Certificates.X509RevocationReason>)",
       "generatedMethodId": "AddEntry_1_System_Byte_System_NullableSystem_DateTimeOffset_System_NullableX509RevocationReason_1"
     },
     {
       "index": 13,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Byte[],System.Nullable\u003CSystem.DateTimeOffset\u003E,System.Nullable\u003CSystem.Security.Cryptography.X509Certificates.X509RevocationReason\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Byte[],System.Nullable<System.DateTimeOffset>,System.Nullable<System.Security.Cryptography.X509Certificates.X509RevocationReason>)",
       "generatedMethodId": "AddEntry_1_System_Byte_System_NullableSystem_DateTimeOffset_System_NullableX509RevocationReason_2"
     },
     {
@@ -667,43 +667,43 @@
     {
       "index": 17,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X509Certificate2,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Nullable\u003CSystem.DateTimeOffset\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X509Certificate2,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Nullable<System.DateTimeOffset>)",
       "generatedMethodId": "Build_3_X509Certificate2_BigInteger_System_DateTimeOffset_HashAlgorithmName_RSASignaturePadding_System_NullableSystem_DateTimeOffset_0"
     },
     {
       "index": 18,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X509Certificate2,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Nullable\u003CSystem.DateTimeOffset\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X509Certificate2,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Nullable<System.DateTimeOffset>)",
       "generatedMethodId": "Build_3_X509Certificate2_BigInteger_System_DateTimeOffset_HashAlgorithmName_RSASignaturePadding_System_NullableSystem_DateTimeOffset_1"
     },
     {
       "index": 19,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Security.Cryptography.X509Certificates.X509SignatureGenerator,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension,System.Nullable\u003CSystem.DateTimeOffset\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Security.Cryptography.X509Certificates.X509SignatureGenerator,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension,System.Nullable<System.DateTimeOffset>)",
       "generatedMethodId": "Build_4_X500DistinguishedName_X509SignatureGenerator_BigInteger_System_DateTimeOffset_HashAlgorithmName_X509AuthorityKeyIdentifierExtension_System_NullableSystem_DateTimeOffset_0"
     },
     {
       "index": 20,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Security.Cryptography.X509Certificates.X509SignatureGenerator,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension,System.Nullable\u003CSystem.DateTimeOffset\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Security.Cryptography.X509Certificates.X509SignatureGenerator,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension,System.Nullable<System.DateTimeOffset>)",
       "generatedMethodId": "Build_4_X500DistinguishedName_X509SignatureGenerator_BigInteger_System_DateTimeOffset_HashAlgorithmName_X509AuthorityKeyIdentifierExtension_System_NullableSystem_DateTimeOffset_1"
     },
     {
       "index": 21,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::BuildCrlDistributionPointExtension:System.Security.Cryptography.X509Certificates.X509Extension(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Boolean)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::BuildCrlDistributionPointExtension:System.Security.Cryptography.X509Certificates.X509Extension(System.Collections.Generic.IEnumerable<System.String>,System.Boolean)",
       "generatedMethodId": "BuildCrlDistributionPointExtension_5_IEnumerablestring_bool_0"
     },
     {
       "index": 22,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::BuildCrlDistributionPointExtension:System.Security.Cryptography.X509Certificates.X509Extension(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Boolean)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::BuildCrlDistributionPointExtension:System.Security.Cryptography.X509Certificates.X509Extension(System.Collections.Generic.IEnumerable<System.String>,System.Boolean)",
       "generatedMethodId": "BuildCrlDistributionPointExtension_5_IEnumerablestring_bool_1"
     },
     {
       "index": 23,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::BuildCrlDistributionPointExtension:System.Security.Cryptography.X509Certificates.X509Extension(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Boolean)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::BuildCrlDistributionPointExtension:System.Security.Cryptography.X509Certificates.X509Extension(System.Collections.Generic.IEnumerable<System.String>,System.Boolean)",
       "generatedMethodId": "BuildCrlDistributionPointExtension_5_IEnumerablestring_bool_2"
     },
     {
@@ -913,43 +913,43 @@
     {
       "index": 58,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::EnumerateRelativeDistinguishedNames:System.Collections.Generic.IEnumerable\u003CSystem.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName\u003E(System.Boolean)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::EnumerateRelativeDistinguishedNames:System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName>(System.Boolean)",
       "generatedMethodId": "EnumerateRelativeDistinguishedNames_2_bool_0"
     },
     {
       "index": 59,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::EnumerateRelativeDistinguishedNames:System.Collections.Generic.IEnumerable\u003CSystem.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName\u003E(System.Boolean)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::EnumerateRelativeDistinguishedNames:System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName>(System.Boolean)",
       "generatedMethodId": "EnumerateRelativeDistinguishedNames_2_bool_1"
     },
     {
       "index": 60,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.String,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.String,System.String,System.Nullable<System.Formats.Asn1.UniversalTagNumber>)",
       "generatedMethodId": "Add_0_string_string_System_NullableUniversalTagNumber_0"
     },
     {
       "index": 61,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.String,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.String,System.String,System.Nullable<System.Formats.Asn1.UniversalTagNumber>)",
       "generatedMethodId": "Add_0_string_string_System_NullableUniversalTagNumber_1"
     },
     {
       "index": 62,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.String,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.String,System.String,System.Nullable<System.Formats.Asn1.UniversalTagNumber>)",
       "generatedMethodId": "Add_0_string_string_System_NullableUniversalTagNumber_2"
     },
     {
       "index": 63,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.Security.Cryptography.Oid,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.Security.Cryptography.Oid,System.String,System.Nullable<System.Formats.Asn1.UniversalTagNumber>)",
       "generatedMethodId": "Add_1_Oid_string_System_NullableUniversalTagNumber_0"
     },
     {
       "index": 64,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.Security.Cryptography.Oid,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.Security.Cryptography.Oid,System.String,System.Nullable<System.Formats.Asn1.UniversalTagNumber>)",
       "generatedMethodId": "Add_1_Oid_string_System_NullableUniversalTagNumber_1"
     },
     {
@@ -1075,31 +1075,31 @@
     {
       "index": 85,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.String)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateUris:System.Collections.Generic.IEnumerable<System.String>(System.String)",
       "generatedMethodId": "EnumerateUris_1_string_0"
     },
     {
       "index": 86,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.String)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateUris:System.Collections.Generic.IEnumerable<System.String>(System.String)",
       "generatedMethodId": "EnumerateUris_1_string_1"
     },
     {
       "index": 87,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.Security.Cryptography.Oid)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateUris:System.Collections.Generic.IEnumerable<System.String>(System.Security.Cryptography.Oid)",
       "generatedMethodId": "EnumerateUris_2_Oid_0"
     },
     {
       "index": 88,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateCAIssuersUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E()",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateCAIssuersUris:System.Collections.Generic.IEnumerable<System.String>()",
       "generatedMethodId": "EnumerateCAIssuersUris_3__0"
     },
     {
       "index": 89,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateOcspUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E()",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateOcspUris:System.Collections.Generic.IEnumerable<System.String>()",
       "generatedMethodId": "EnumerateOcspUris_4__0"
     },
     {
@@ -1177,7 +1177,7 @@
     {
       "index": 102,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension::CreateForCertificateAuthority:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension(System.Nullable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension::CreateForCertificateAuthority:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension(System.Nullable<System.Int32>)",
       "generatedMethodId": "CreateForCertificateAuthority_1_System_Nullableint_0"
     },
     {
@@ -2203,13 +2203,13 @@
     {
       "index": 273,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension::EnumerateDnsNames:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E()",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension::EnumerateDnsNames:System.Collections.Generic.IEnumerable<System.String>()",
       "generatedMethodId": "EnumerateDnsNames_1__0"
     },
     {
       "index": 274,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension::EnumerateIPAddresses:System.Collections.Generic.IEnumerable\u003CSystem.Net.IPAddress\u003E()",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension::EnumerateIPAddresses:System.Collections.Generic.IEnumerable<System.Net.IPAddress>()",
       "generatedMethodId": "EnumerateIPAddresses_2__0"
     },
     {
@@ -2217,6 +2217,462 @@
       "kind": "fact",
       "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
       "generatedMethodId": "CopyFrom_0_AsnEncodedData_0"
+    },
+    {
+      "index": 276,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::Create:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Security.Cryptography.X509Certificates.X509SignatureGenerator,System.DateTimeOffset,System.DateTimeOffset,System.Byte[])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 277,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::Create:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Security.Cryptography.X509Certificates.X509SignatureGenerator,System.DateTimeOffset,System.DateTimeOffset,System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 278,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::Create:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.X509Certificates.X509Certificate2,System.DateTimeOffset,System.DateTimeOffset,System.Byte[])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 279,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::Create:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.X509Certificates.X509Certificate2,System.DateTimeOffset,System.DateTimeOffset,System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 280,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::LoadSigningRequest:System.Security.Cryptography.X509Certificates.CertificateRequest(System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.HashAlgorithmName,System.Int32,System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions,System.Security.Cryptography.RSASignaturePadding)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 281,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::LoadSigningRequestPem:System.Security.Cryptography.X509Certificates.CertificateRequest(System.ReadOnlySpan<System.Char>,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions,System.Security.Cryptography.RSASignaturePadding)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 282,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.ReadOnlySpan<System.Byte>,System.Nullable<System.DateTimeOffset>,System.Nullable<System.Security.Cryptography.X509Certificates.X509RevocationReason>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 283,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Load:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.ReadOnlySpan<System.Byte>,System.Numerics.BigInteger,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 284,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::LoadPem:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.ReadOnlySpan<System.Char>,System.Numerics.BigInteger)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 285,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::RemoveEntry:System.Boolean(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 286,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::CreateFromSubjectPublicKeyInfo:System.Security.Cryptography.X509Certificates.PublicKey(System.ReadOnlySpan<System.Byte>,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 287,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::ExportSubjectPublicKeyInfo:System.Byte[]()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 288,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::GetCompositeMLDsaPublicKey:System.Security.Cryptography.CompositeMLDsa()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 289,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::GetMLDsaPublicKey:System.Security.Cryptography.MLDsa()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 290,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::GetMLKemPublicKey:System.Security.Cryptography.MLKem()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 291,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::GetSlhDsaPublicKey:System.Security.Cryptography.SlhDsa()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 292,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::TryExportSubjectPublicKeyInfo:System.Boolean(System.Span<System.Byte>,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 293,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::Create:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Byte[],System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Byte[])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 294,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::Create:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 295,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromIssuerNameAndSerialNumber:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 296,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromSubjectKeyIdentifier:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 297,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CopyWithPrivateKey:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.CompositeMLDsa)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 298,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CopyWithPrivateKey:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.MLDsa)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 299,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CopyWithPrivateKey:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.MLKem)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 300,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CopyWithPrivateKey:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.SlhDsa)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 301,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CreateFromEncryptedPem:System.Security.Cryptography.X509Certificates.X509Certificate2(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Char>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 302,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CreateFromEncryptedPemFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.ReadOnlySpan<System.Char>,System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 303,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CreateFromPem:System.Security.Cryptography.X509Certificates.X509Certificate2(System.ReadOnlySpan<System.Char>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 304,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CreateFromPem:System.Security.Cryptography.X509Certificates.X509Certificate2(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Char>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 305,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCertContentType:System.Security.Cryptography.X509Certificates.X509ContentType(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 306,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCompositeMLDsaPrivateKey:System.Security.Cryptography.CompositeMLDsa()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 307,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCompositeMLDsaPublicKey:System.Security.Cryptography.CompositeMLDsa()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 308,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetMLDsaPrivateKey:System.Security.Cryptography.MLDsa()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 309,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetMLDsaPublicKey:System.Security.Cryptography.MLDsa()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 310,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetMLKemPrivateKey:System.Security.Cryptography.MLKem()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 311,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetMLKemPublicKey:System.Security.Cryptography.MLKem()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 312,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetSlhDsaPrivateKey:System.Security.Cryptography.SlhDsa()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 313,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetSlhDsaPublicKey:System.Security.Cryptography.SlhDsa()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 314,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 315,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::TryExportCertificatePem:System.Boolean(System.Span<System.Char>,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 316,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::ExportPkcs12:System.Byte[](System.Security.Cryptography.PbeParameters,System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 317,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::ExportPkcs12:System.Byte[](System.Security.Cryptography.X509Certificates.Pkcs12ExportPbeParameters,System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 318,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::FindByThumbprint:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 319,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::FindByThumbprint:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Char>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 320,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::FindByThumbprint:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Security.Cryptography.HashAlgorithmName,System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 321,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 322,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Char>,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 323,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.ReadOnlySpan<System.Byte>,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 324,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.String,System.ReadOnlySpan<System.Char>,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 325,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::ImportFromPem:System.Void(System.ReadOnlySpan<System.Char>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 326,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::TryExportCertificatePems:System.Boolean(System.Span<System.Char>,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 327,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::TryExportPkcs7Pem:System.Boolean(System.Span<System.Char>,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 328,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 329,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 330,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::ExportPkcs12:System.Byte[](System.Security.Cryptography.PbeParameters,System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 331,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::ExportPkcs12:System.Byte[](System.Security.Cryptography.X509Certificates.Pkcs12ExportPbeParameters,System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 332,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 333,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::TryGetCertHash:System.Boolean(System.Security.Cryptography.HashAlgorithmName,System.Span<System.Byte>,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 334,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection+X509CertificateEnumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 335,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection+X509CertificateEnumerator::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 336,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::CopyTo:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 337,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::GetEnumerator:System.Security.Cryptography.X509Certificates.X509CertificateCollection+X509CertificateEnumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 338,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadCertificate:System.Security.Cryptography.X509Certificates.X509Certificate2(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 339,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12:System.Security.Cryptography.X509Certificates.X509Certificate2(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Char>,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 340,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12Collection:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Char>,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 341,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12CollectionFromFile:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.String,System.ReadOnlySpan<System.Char>,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 342,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12FromFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.ReadOnlySpan<System.Char>,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 343,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Chain::Create:System.Security.Cryptography.X509Certificates.X509Chain()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 344,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Chain::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 345,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainElementCollection::CopyTo:System.Void(System.Security.Cryptography.X509Certificates.X509ChainElement[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 346,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 347,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 348,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainPolicy::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 349,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ExtensionCollection::CopyTo:System.Void(System.Security.Cryptography.X509Certificates.X509Extension[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 350,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ExtensionEnumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 351,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ExtensionEnumerator::Reset:System.Void()",
+      "generatedMethodId": ""
     }
   ]
 }

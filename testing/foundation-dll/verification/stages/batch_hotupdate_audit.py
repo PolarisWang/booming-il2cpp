@@ -19,7 +19,7 @@ _FOUNDATION_DLL = Path(__file__).resolve().parents[2]
 
 # Families with entry.exe (from previous build+fact)
 HAS_EXE_FAMILIES = [
-    "System.Collections.NonGeneric",
+    "System.Collections",
     "System.Collections.Immutable",
     "System.ComponentModel.TypeConverter",
     "System.Data.Common",
@@ -48,7 +48,7 @@ HAS_EXE_FAMILIES = [
 
 # Families that already passed hotupdate (with proper patch data flow)
 ALREADY_PASSED_HOTUPDATE = {
-    "System.Collections.NonGeneric", "System.Collections.Immutable",
+    "System.Collections", "System.Collections.Immutable",
     "System.ComponentModel.TypeConverter",
     "System.Data.Common", "System.Diagnostics.DiagnosticSource",
     "System.Formats.Asn1", "System.IO.Compression.Brotli",

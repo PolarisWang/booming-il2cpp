@@ -1,0 +1,40 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Runtime.InteropServices",
+  "chunkSlug": "global-ns",
+  "entries": [
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetCustomAttributesData:System.Collections.Generic.IList`1[[System.Reflection.CustomAttributeData, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComImportInteropInterfaceDetailsStrategy::GetComExposedTypeDetails:System.Runtime.InteropServices.Marshalling.IComExposedDetails(System.RuntimeTypeHandle)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComImportInteropInterfaceDetailsStrategy::GetIUnknownDerivedDetails:System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails(System.RuntimeTypeHandle)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::Free:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::FromManaged:System.Void(System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::FromUnmanaged:System.Void(System.Runtime.InteropServices.Marshalling.ComVariant)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::ToManaged:System.Object()"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::ToUnmanaged:System.Runtime.InteropServices.Marshalling.ComVariant()"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.DefaultIUnknownInterfaceDetailsStrategy::GetComExposedTypeDetails:System.Runtime.InteropServices.Marshalling.IComExposedDetails(System.RuntimeTypeHandle)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.DefaultIUnknownInterfaceDetailsStrategy::GetIUnknownDerivedDetails:System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails(System.RuntimeTypeHandle)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo::Deconstruct:System.Void(System.Void*&,System.Void**&)"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Net.Http",
+  "chunkSlug": "system-net-http",
+  "entries": [
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpMethod::Parse:System.Net.Http.HttpMethod(System.ReadOnlySpan<System.Char>)"
+    }
+  ]
+}

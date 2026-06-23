@@ -104,8 +104,6 @@ struct alignas(32) RuntimeIntrinsicVector256Carrier {
 
 struct RuntimeIntrinsicVector512Carrier {
     CHAOS_IL2CPP_UINT8 bytes[64];
-    CHAOS_IL2CPP_UINT8& operator[](CHAOS_IL2CPP_SIZE i) noexcept { return bytes[i]; }
-    const CHAOS_IL2CPP_UINT8& operator[](CHAOS_IL2CPP_SIZE i) const noexcept { return bytes[i]; }
 };
 
 }  // namespace chaos::il2cpp::numerics_carriers

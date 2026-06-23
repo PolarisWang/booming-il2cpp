@@ -1,0 +1,25 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "chunkSlug": "global-ns",
+  "entries": [
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelFork:System.Void(System.Int32,System.Int32,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelInvokeBegin:System.Void(System.Int32,System.Int32,System.Int32,System.Threading.Tasks.ParallelEtwProvider+ForkJoinOperationType,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelInvokeEnd:System.Void(System.Int32,System.Int32,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelJoin:System.Void(System.Int32,System.Int32,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelLoopBegin:System.Void(System.Int32,System.Int32,System.Int32,System.Threading.Tasks.ParallelEtwProvider+ForkJoinOperationType,System.Int64,System.Int64)"
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelLoopEnd:System.Void(System.Int32,System.Int32,System.Int32,System.Int64)"
+    }
+  ]
+}

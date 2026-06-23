@@ -59,7 +59,6 @@ public sealed class CppProjectEmitter
             patchDataSize: 0,
             patchDataHostClass: "",
             projectName: "entry",
-            nativeDir: outputDir,
             projectRoot: projectRoot,
             codegenDir: codegenDir,
             sdkDir: sdkDir,
@@ -180,7 +179,6 @@ public sealed class CppProjectEmitter
             patchDataSize: 0,
             patchDataHostClass: "",
             projectName: isPipeline ? "chaos_entry" : "entry",
-            nativeDir: outputDir,
             projectRoot: resolvedProjectRoot,
             codegenDir: resolvedCodegenDir,
             sdkDir: resolvedSdkDir,
@@ -290,11 +288,26 @@ public sealed class CppProjectEmitter
                 + "} } }\n");
         }
 
-        // Async yield stubs — async_stubs.cpp is now compiled from the SDK
-        // runtime_stubs directory (included in the CMakeLists.txt template).
-        // Skip generation of chaos_stub_async.cpp to avoid LNK4006 duplicates.
-        // If a test project fails with unresolved async symbols, revert this and
-        // add a target_link_options /INCLUDE:chaos_async_yield_create directive.
+        // Async yield stubs — async_stubs.cpp is in the SDK runtime_stubs/ but is not
+        // compiled by the test project's CMakeLists.txt (only profile_globals.cpp is).
+        // The generated code for async methods (e.g. Task.Yield) references these symbols.
+        // Stubs return zero/success values sufficient for verification dispatch.
+        var asyncStubPath = Path.Combine(outputDir, "chaos_stub_async.cpp");
+        if (!File.Exists(asyncStubPath))
+        {
+            File.WriteAllText(asyncStubPath,
+                "// Auto-generated stubs for async runtime helpers.\n"
+                + "// The real implementations are in async_stubs.cpp (part of\n"
+                + "// chaos_runtime_core.lib) but the SDK prebuilt lib may not\n"
+                + "// include them.  Test entry points don't await, so stubs suffice.\n"
+                + "#include <chaos/native_types.h>\n"
+                + "extern \"C\" {\n"
+                + "CHAOS_IL2CPP_INTPTR chaos_async_yield_create(void) noexcept { return 0; }\n"
+                + "CHAOS_IL2CPP_INTPTR chaos_async_yield_get_awaiter(CHAOS_IL2CPP_INTPTR) noexcept { return 0; }\n"
+                + "CHAOS_IL2CPP_INT32 chaos_async_yield_get_is_completed(CHAOS_IL2CPP_INTPTR) noexcept { return 1; }\n"
+                + "void chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR) noexcept {}\n"
+                + "}\n");
+        }
 
 
         // chaos-sdk cmake files
@@ -437,44 +450,6 @@ public sealed class CppProjectEmitter
                 try { oldCmakeFiles.Delete(recursive: true); }
                 catch { /* best-effort */ }
             }
-        // ── SDK auto-sync: ensure codegen/lib/ has latest preset libs ──
-        // The codegen SDK emits libs from artifacts/presets/ at convert time, but
-        // rebuilds of the native runtime between then and cmake build leave the
-        // codegen lib dir stale.  Sync the latest .lib files from the preset output.
-        string repoRoot = Path.GetFullPath(Path.Combine(projectDir, "..", "..", "..", "..", ".."));
-        string presetBase = Path.Combine(repoRoot, "artifacts", "presets", "windows-x64-reference");
-        string codegenLibDir = Path.Combine(codegenDir, "lib");
-        if (Directory.Exists(presetBase) && Directory.Exists(codegenLibDir))
-        {
-            // Preset libs are in subdirectories: src/native/<lib>/RelWithDebInfo/<lib>.lib
-            // Also check flat lib/ layout used by some presets.
-            var presetLibDirs = new[] {
-                Path.Combine(presetBase, "src", "native", "runtime-core", "RelWithDebInfo"),
-                Path.Combine(presetBase, "src", "native", "bootstrap", "RelWithDebInfo"),
-                Path.Combine(presetBase, "src", "native", "common", "RelWithDebInfo"),
-                Path.Combine(presetBase, "lib"),
-            };
-            var synced = new System.Collections.Generic.HashSet<string>();
-            foreach (var pld in presetLibDirs)
-            {
-                if (!Directory.Exists(pld)) continue;
-                foreach (string libFile in Directory.GetFiles(pld, "*.lib"))
-                {
-                    string name = Path.GetFileName(libFile);
-                    string dst = Path.Combine(codegenLibDir, name);
-                    if (!File.Exists(dst)) continue;
-                    var srcTime = File.GetLastWriteTimeUtc(libFile);
-                    var dstTime = File.GetLastWriteTimeUtc(dst);
-                    if (srcTime > dstTime && synced.Add(name))
-                    {
-                        File.Copy(libFile, dst, overwrite: true);
-                    }
-                }
-            }
-            if (synced.Count > 0)
-                Console.Error.WriteLine($"  [build] SDK sync: updated {string.Join(", ", synced.OrderBy(x => x))}");
-        }
-
             Console.Error.WriteLine($"  [build] cmake configure (fresh)...");
             var cfgArgs = new List<string> { "-S", projectDir, "-B", buildDir.FullName };
             cfgArgs.AddRange(cmakeGeneratorArgs);
@@ -491,76 +466,7 @@ public sealed class CppProjectEmitter
             Console.Error.WriteLine($"  [build] cmake configure (cached, skip)");
         }
 
-
-        // ── Fixup: add missing chaos_valuetype_* typedefs ──
-        string vtHeaderPath = Path.Combine(projectDir, "subjects", "native-aot.generated.header.h");
-        if (File.Exists(vtHeaderPath))
-        {
-            var hdrLines = File.ReadAllLines(vtHeaderPath);
-            var existingTypes = new System.Collections.Generic.HashSet<string>(System.StringComparer.Ordinal);
-            foreach (var l in hdrLines)
-            {
-                var trimmed = l.TrimStart();
-                if (trimmed.StartsWith("typedef CHAOS_IL2CPP_INT32 chaos_valuetype_", System.StringComparison.Ordinal))
-                {
-                    var parts = trimmed.Split(' ');
-                    if (parts.Length > 0)
-                        existingTypes.Add(parts[parts.Length - 1].TrimEnd(';'));
-                }
-                // Also skip types that already have a struct definition in the header
-                // (emitted by codegen with actual fields). Adding a redundant typedef
-                // would conflict with the struct (C2371).
-                if (trimmed.StartsWith("struct chaos_valuetype_", System.StringComparison.Ordinal))
-                {
-                    var parts = trimmed.Split(' ');
-                    if (parts.Length > 1)
-                        existingTypes.Add(parts[1].TrimEnd());
-                }
-            }
-            var needed = new System.Collections.Generic.HashSet<string>(System.StringComparer.Ordinal);
-            // Also scan full header text for any struct chaos_valuetype_* definitions
-            // that may span multiple lines or have unusual formatting.  The line-by-line
-            // scan above may miss some struct definitions, and adding a redundant
-            // typedef for a type that already has a struct definition would cause C2371.
-            string fullHeaderText = System.IO.File.ReadAllText(vtHeaderPath);
-            foreach (string cppFile in System.IO.Directory.GetFiles(Path.Combine(projectDir, "subjects"), "native-aot.generated*.cpp"))
-            {
-                string cppText = System.IO.File.ReadAllText(cppFile);
-                int idx = 0;
-                while ((idx = cppText.IndexOf("chaos_valuetype_", idx, System.StringComparison.Ordinal)) >= 0)
-                {
-                    int end = idx + "chaos_valuetype_".Length;
-                    while (end < cppText.Length && (char.IsLetterOrDigit(cppText[end]) || cppText[end] == '_'))
-                        end++;
-                    if (end > idx + "chaos_valuetype_".Length)
-                    {
-                        string sym = cppText.Substring(idx, end - idx);
-                        // Skip if the header already has a struct definition for this
-                        // type (even if the line-by-line scan above missed it).  Adding
-                        // a redundant typedef would cause C2371 (redefinition; different
-                        // basic types).  Use IndexOf on the full header text as a robust
-                        // fallback for multiline or oddly formatted struct definitions.
-                        if (!existingTypes.Contains(sym) &&
-                            !fullHeaderText.Contains("struct " + sym, System.StringComparison.Ordinal))
-                            needed.Add(sym);
-                    }
-                    idx = end;
-                }
-            }
-            if (needed.Count > 0)
-            {
-                using (var writer = new System.IO.StreamWriter(vtHeaderPath, append: true))
-                {
-                    writer.WriteLine();
-                    writer.WriteLine("// Auto-fixed: missing chaos_valuetype_* typedefs");
-                    foreach (string sym in needed.OrderBy(s => s, System.StringComparer.Ordinal))
-                        writer.WriteLine($"typedef CHAOS_IL2CPP_INT32 {sym};");
-                }
-                Console.Error.WriteLine($"  [build] Added {needed.Count} missing chaos_valuetype_* typedefs");
-            }
-        }
-
-        // ── Step 2: CMake2: CMake incremental build (3 retries) ──
+        // ── Step 2: CMake incremental build (3 retries) ──
         Console.Error.WriteLine($"  [build] cmake build (incremental)...");
         var buildResult = RunProcess("cmake", ["--build", buildDir.FullName, "--config", "RelWithDebInfo", "--target", projectName], timeoutMs: 1_800_000);
         if (buildResult.ExitCode != 0)
@@ -614,6 +520,27 @@ public sealed class CppProjectEmitter
             return null;
         }
 
+        // ── Step 4b: Copy JIT data file alongside entry-jit.exe ──
+        // The generated ChaosJitRegisterAll() loads aot-core-ir.jdata via
+        // ChaosJitDataLoad("aot-core-ir.jdata", ...) at startup.  The file
+        // must be in the same directory as entry-jit.exe (CWD at runtime).
+        if (isJit)
+        {
+            var jdataSource = Path.Combine(projectDir, "codegen", "generated", "aot-core-ir.jdata");
+            var jdataTarget = Path.Combine(projectDir, "aot-core-ir.jdata");
+            if (File.Exists(jdataSource) && !File.Exists(jdataTarget))
+            {
+                try
+                {
+                    File.Copy(jdataSource, jdataTarget, overwrite: true);
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine($"  [build] JIT data copy failed: {ex.Message}");
+                }
+            }
+        }
+
         var size = new FileInfo(targetPath).Length;
         Console.Error.WriteLine($"  [build] {outputName} OK: {size} bytes -> {targetPath}");
         return targetPath;
@@ -662,6 +589,7 @@ public sealed class CppProjectEmitter
             "entry-jit.exe", // JIT binary — must survive AOT cleanup for subsequent pipeline stages
             "entry.exe",     // AOT binary — must survive JIT cleanup for subsequent pipeline stages
             "entry-aot.exe", // AOT backup — must survive JIT cleanup for restore
+            "aot-core-ir.jdata", // JIT data file — must survive cleanup for runtime ChaosJitDataLoad
             "CMakeLists.txt",       // needed by hotupdate rebuild
             "CMakePresets.json",    // needed by hotupdate rebuild
             "runtime-entry.cpp",             // needed by hotupdate cmake rebuild

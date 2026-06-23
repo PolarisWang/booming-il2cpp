@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Security.Cryptography",
   "chunkSlug": "security-cryptography-2",
-  "totalMethods": 1307,
+  "totalMethods": 1333,
   "factMethodCount": 570,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -3491,25 +3491,25 @@
     {
       "index": 144,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Security.Cryptography.HashAlgorithmName,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Security.Cryptography.HashAlgorithmName,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_HashAlgorithmName_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 145,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Security.Cryptography.HashAlgorithmName,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Security.Cryptography.HashAlgorithmName,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_HashAlgorithmName_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
       "index": 146,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Security.Cryptography.HashAlgorithmName,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Security.Cryptography.HashAlgorithmName,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_HashAlgorithmName_Stream_CancellationToken_0"
     },
     {
       "index": 147,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Security.Cryptography.HashAlgorithmName,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Security.Cryptography.HashAlgorithmName,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_HashAlgorithmName_Stream_CancellationToken_1"
     },
     {
@@ -3551,43 +3551,43 @@
     {
       "index": 154,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Security.Cryptography.HashAlgorithmName,System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Security.Cryptography.HashAlgorithmName,System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_0"
     },
     {
       "index": 155,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Security.Cryptography.HashAlgorithmName,System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Security.Cryptography.HashAlgorithmName,System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_1"
     },
     {
       "index": 156,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Security.Cryptography.HashAlgorithmName,System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Security.Cryptography.HashAlgorithmName,System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_2"
     },
     {
       "index": 157,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HmacDataAsync_7_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 158,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HmacDataAsync_7_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
       "index": 159,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HmacDataAsync_8_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_CancellationToken_0"
     },
     {
       "index": 160,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HmacDataAsync_8_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_CancellationToken_1"
     },
     {
@@ -3647,37 +3647,37 @@
     {
       "index": 170,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_6_System_Byte_int_int_CancellationToken_0"
     },
     {
       "index": 171,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_6_System_Byte_int_int_CancellationToken_1"
     },
     {
       "index": 172,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_6_System_Byte_int_int_CancellationToken_2"
     },
     {
       "index": 173,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_6_System_Byte_int_int_CancellationToken_3"
     },
     {
       "index": 174,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_6_System_Byte_int_int_CancellationToken_4"
     },
     {
       "index": 175,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::ReadAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::ReadAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_7_System_Memorybyte_CancellationToken_0"
     },
     {
@@ -3797,7 +3797,7 @@
     {
       "index": 195,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptoStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_14_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
@@ -5993,13 +5993,13 @@
     {
       "index": 561,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HashAlgorithm::ComputeHashAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HashAlgorithm::ComputeHashAsync:System.Threading.Tasks.Task<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "ComputeHashAsync_3_Stream_CancellationToken_0"
     },
     {
       "index": 562,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HashAlgorithm::ComputeHashAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HashAlgorithm::ComputeHashAsync:System.Threading.Tasks.Task<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "ComputeHashAsync_3_Stream_CancellationToken_1"
     },
     {
@@ -6221,43 +6221,43 @@
     {
       "index": 599,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0"
     },
     {
       "index": 600,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_1"
     },
     {
       "index": 601,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_0"
     },
     {
       "index": 602,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_1"
     },
     {
       "index": 603,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_2"
     },
     {
       "index": 604,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 605,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -6305,43 +6305,43 @@
     {
       "index": 613,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0"
     },
     {
       "index": 614,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_1"
     },
     {
       "index": 615,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_0"
     },
     {
       "index": 616,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_1"
     },
     {
       "index": 617,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_2"
     },
     {
       "index": 618,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 619,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -6389,43 +6389,43 @@
     {
       "index": 627,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0"
     },
     {
       "index": 628,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_1"
     },
     {
       "index": 629,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_0"
     },
     {
       "index": 630,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_1"
     },
     {
       "index": 631,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_2"
     },
     {
       "index": 632,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 633,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -6473,43 +6473,43 @@
     {
       "index": 641,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0"
     },
     {
       "index": 642,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_1"
     },
     {
       "index": 643,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_0"
     },
     {
       "index": 644,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_1"
     },
     {
       "index": 645,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_2"
     },
     {
       "index": 646,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 647,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -6557,43 +6557,43 @@
     {
       "index": 655,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0"
     },
     {
       "index": 656,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_1"
     },
     {
       "index": 657,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_0"
     },
     {
       "index": 658,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_1"
     },
     {
       "index": 659,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_2"
     },
     {
       "index": 660,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 661,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -6641,43 +6641,43 @@
     {
       "index": 669,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0"
     },
     {
       "index": 670,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_1"
     },
     {
       "index": 671,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_0"
     },
     {
       "index": 672,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_1"
     },
     {
       "index": 673,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_2"
     },
     {
       "index": 674,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 675,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -6725,43 +6725,43 @@
     {
       "index": 683,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0"
     },
     {
       "index": 684,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_1"
     },
     {
       "index": 685,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_0"
     },
     {
       "index": 686,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_1"
     },
     {
       "index": 687,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_2"
     },
     {
       "index": 688,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 689,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -6809,43 +6809,43 @@
     {
       "index": 697,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0"
     },
     {
       "index": 698,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_1"
     },
     {
       "index": 699,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_0"
     },
     {
       "index": 700,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_1"
     },
     {
       "index": 701,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_4_System_Byte_Stream_CancellationToken_2"
     },
     {
       "index": 702,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 703,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -7049,55 +7049,55 @@
     {
       "index": 737,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0"
     },
     {
       "index": 738,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1"
     },
     {
       "index": 739,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_2"
     },
     {
       "index": 740,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_3"
     },
     {
       "index": 741,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 742,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1"
     },
     {
       "index": 743,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_2"
     },
     {
       "index": 744,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 745,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_1"
     },
     {
@@ -7205,55 +7205,55 @@
     {
       "index": 763,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0"
     },
     {
       "index": 764,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1"
     },
     {
       "index": 765,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_2"
     },
     {
       "index": 766,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_3"
     },
     {
       "index": 767,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 768,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1"
     },
     {
       "index": 769,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_2"
     },
     {
       "index": 770,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 771,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_1"
     },
     {
@@ -7361,55 +7361,55 @@
     {
       "index": 789,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0"
     },
     {
       "index": 790,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1"
     },
     {
       "index": 791,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_2"
     },
     {
       "index": 792,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_3"
     },
     {
       "index": 793,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 794,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1"
     },
     {
       "index": 795,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_2"
     },
     {
       "index": 796,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 797,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_1"
     },
     {
@@ -7517,55 +7517,55 @@
     {
       "index": 815,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0"
     },
     {
       "index": 816,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1"
     },
     {
       "index": 817,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_2"
     },
     {
       "index": 818,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.Byte[],System.IO.Stream,System.Int32,System.Byte[],System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_3"
     },
     {
       "index": 819,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 820,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1"
     },
     {
       "index": 821,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_2"
     },
     {
       "index": 822,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 823,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashDataAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.IO.Stream,System.Memory<System.Byte>,System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_1"
     },
     {
@@ -7625,25 +7625,25 @@
     {
       "index": 833,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.MD5::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.MD5::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_0"
     },
     {
       "index": 834,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.MD5::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.MD5::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_1"
     },
     {
       "index": 835,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.MD5::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.MD5::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 836,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.MD5::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.MD5::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -9239,25 +9239,25 @@
     {
       "index": 1102,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA1::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA1::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_0"
     },
     {
       "index": 1103,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA1::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA1::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_1"
     },
     {
       "index": 1104,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA1::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA1::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 1105,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA1::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA1::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -9305,25 +9305,25 @@
     {
       "index": 1113,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_0"
     },
     {
       "index": 1114,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_1"
     },
     {
       "index": 1115,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 1116,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -9371,25 +9371,25 @@
     {
       "index": 1124,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_0"
     },
     {
       "index": 1125,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_1"
     },
     {
       "index": 1126,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 1127,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -9425,25 +9425,25 @@
     {
       "index": 1133,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_0"
     },
     {
       "index": 1134,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_1"
     },
     {
       "index": 1135,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 1136,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -9479,25 +9479,25 @@
     {
       "index": 1142,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_0"
     },
     {
       "index": 1143,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_1"
     },
     {
       "index": 1144,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 1145,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA3_512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -9533,25 +9533,25 @@
     {
       "index": 1151,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_0"
     },
     {
       "index": 1152,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_1"
     },
     {
       "index": 1153,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 1154,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA384::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA384::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -9599,25 +9599,25 @@
     {
       "index": 1162,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_0"
     },
     {
       "index": 1163,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_2_Stream_CancellationToken_1"
     },
     {
       "index": 1164,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 1165,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA512::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SHA512::HashDataAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
@@ -9743,31 +9743,31 @@
     {
       "index": 1186,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashDataAsync:System.Threading.Tasks.ValueTask(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashDataAsync:System.Threading.Tasks.ValueTask(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 1187,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashDataAsync:System.Threading.Tasks.ValueTask(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashDataAsync:System.Threading.Tasks.ValueTask(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
       "index": 1188,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_Stream_int_CancellationToken_0"
     },
     {
       "index": 1189,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_Stream_int_CancellationToken_1"
     },
     {
       "index": 1190,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_Stream_int_CancellationToken_2"
     },
     {
@@ -9881,31 +9881,31 @@
     {
       "index": 1209,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashDataAsync:System.Threading.Tasks.ValueTask(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashDataAsync:System.Threading.Tasks.ValueTask(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_Stream_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 1210,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashDataAsync:System.Threading.Tasks.ValueTask(System.IO.Stream,System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashDataAsync:System.Threading.Tasks.ValueTask(System.IO.Stream,System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_8_Stream_System_Memorybyte_CancellationToken_1"
     },
     {
       "index": 1211,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_Stream_int_CancellationToken_0"
     },
     {
       "index": 1212,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_Stream_int_CancellationToken_1"
     },
     {
       "index": 1213,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashDataAsync:System.Threading.Tasks.ValueTask\u003CSystem.Byte[]\u003E(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashDataAsync:System.Threading.Tasks.ValueTask<System.Byte[]>(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "HashDataAsync_9_Stream_int_CancellationToken_2"
     },
     {
@@ -10465,6 +10465,162 @@
       "kind": "fact",
       "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.TripleDESCryptoServiceProvider::CreateDecryptor:System.Security.Cryptography.ICryptoTransform(System.Byte[],System.Byte[])",
       "generatedMethodId": "CreateDecryptor_5_System_Byte_System_Byte_2"
+    },
+    {
+      "index": 1307,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveBytes:System.Byte[](System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1308,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveBytes:System.Byte[](System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Char>,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1309,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveBytes:System.Void(System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1310,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveBytes:System.Void(System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Char>,System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1311,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveKey:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1312,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveKey:System.Byte[](System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Char>,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1313,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveKey:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1314,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveKey:System.Void(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Char>,System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1315,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::AppendData:System.Void(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1316,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::GetCurrentHash:System.Void(System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1317,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::GetHashAndReset:System.Void(System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1318,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1319,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashData:System.Void(System.IO.Stream,System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1320,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashData:System.Void(System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1321,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::Read:System.Void(System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1322,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1323,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::AppendData:System.Void(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1324,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::GetCurrentHash:System.Void(System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1325,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::GetHashAndReset:System.Void(System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1326,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1327,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashData:System.Void(System.IO.Stream,System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1328,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashData:System.Void(System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1329,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::Read:System.Void(System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1330,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1331,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SlhDsaCng::GetKey:System.Security.Cryptography.CngKey()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1332,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SlhDsaOpenSsl::DuplicateKeyHandle:System.Security.Cryptography.SafeEvpPKeyHandle()",
+      "generatedMethodId": ""
     }
   ]
 }

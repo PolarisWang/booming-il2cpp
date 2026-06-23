@@ -1,0 +1,28 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Private.Xml",
+  "chunkSlug": "xml",
+  "entries": [
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttributeCollection::CopyTo:System.Void(System.Xml.XmlAttribute[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlNodeChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.XmlNodeChangedEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlNodeChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlNodeChangedEventHandler::Invoke:System.Void(System.Object,System.Xml.XmlNodeChangedEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReaderSettings::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlWriterSettings::Reset:System.Void()"
+    }
+  ]
+}

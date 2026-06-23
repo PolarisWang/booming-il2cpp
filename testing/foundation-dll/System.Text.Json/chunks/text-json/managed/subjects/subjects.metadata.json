@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Text.Json",
   "chunkSlug": "text-json",
-  "totalMethods": 329,
+  "totalMethods": 522,
   "factMethodCount": 203,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -683,13 +683,13 @@
     {
       "index": 2,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Text.Json.JsonDocumentOptions)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory<System.Byte>,System.Text.Json.JsonDocumentOptions)",
       "generatedMethodId": "Parse_2_System_ReadOnlyMemorybyte_JsonDocumentOptions_0"
     },
     {
       "index": 3,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.Buffers.ReadOnlySequence\u003CSystem.Byte\u003E,System.Text.Json.JsonDocumentOptions)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.Buffers.ReadOnlySequence<System.Byte>,System.Text.Json.JsonDocumentOptions)",
       "generatedMethodId": "Parse_3_ReadOnlySequencebyte_JsonDocumentOptions_0"
     },
     {
@@ -707,19 +707,19 @@
     {
       "index": 6,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task\u003CSystem.Text.Json.JsonDocument\u003E(System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task<System.Text.Json.JsonDocument>(System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "ParseAsync_5_Stream_JsonDocumentOptions_CancellationToken_0"
     },
     {
       "index": 7,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task\u003CSystem.Text.Json.JsonDocument\u003E(System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task<System.Text.Json.JsonDocument>(System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "ParseAsync_5_Stream_JsonDocumentOptions_CancellationToken_1"
     },
     {
       "index": 8,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory\u003CSystem.Char\u003E,System.Text.Json.JsonDocumentOptions)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory<System.Char>,System.Text.Json.JsonDocumentOptions)",
       "generatedMethodId": "Parse_6_System_ReadOnlyMemorychar_JsonDocumentOptions_0"
     },
     {
@@ -1133,7 +1133,7 @@
     {
       "index": 77,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.Text.Json.JsonDocument,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.Text.Json.JsonDocument,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_2_JsonDocument_JsonTypeInfoint_0"
     },
     {
@@ -1151,7 +1151,7 @@
     {
       "index": 80,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.Text.Json.JsonElement,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.Text.Json.JsonElement,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_6_JsonElement_JsonTypeInfoint_0"
     },
     {
@@ -1169,7 +1169,7 @@
     {
       "index": 83,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.Text.Json.Nodes.JsonNode,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.Text.Json.Nodes.JsonNode,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_10_JsonNode_JsonTypeInfoint_0"
     },
     {
@@ -1193,13 +1193,13 @@
     {
       "index": 87,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToDocument:System.Text.Json.JsonDocument(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToDocument:System.Text.Json.JsonDocument(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToDocument_14_int_JsonTypeInfoint_0"
     },
     {
       "index": 88,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToDocument:System.Text.Json.JsonDocument(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToDocument:System.Text.Json.JsonDocument(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToDocument_14_int_JsonTypeInfoint_1"
     },
     {
@@ -1223,13 +1223,13 @@
     {
       "index": 92,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToElement:System.Text.Json.JsonElement(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToElement:System.Text.Json.JsonElement(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToElement_18_int_JsonTypeInfoint_0"
     },
     {
       "index": 93,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToElement:System.Text.Json.JsonElement(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToElement:System.Text.Json.JsonElement(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToElement_18_int_JsonTypeInfoint_1"
     },
     {
@@ -1253,25 +1253,25 @@
     {
       "index": 97,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToNode_22_int_JsonTypeInfoint_0"
     },
     {
       "index": 98,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToNode_22_int_JsonTypeInfoint_1"
     },
     {
       "index": 99,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsync_24_Stream_JsonSerializerOptions_CancellationToken_0"
     },
     {
       "index": 100,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsync_24_Stream_JsonSerializerOptions_CancellationToken_1"
     },
     {
@@ -1289,13 +1289,13 @@
     {
       "index": 103,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask\u003CSystem.Object\u003E(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsync_26_Stream_System_Type_JsonSerializerOptions_CancellationToken_0"
     },
     {
       "index": 104,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask\u003CSystem.Object\u003E(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsync_26_Stream_System_Type_JsonSerializerOptions_CancellationToken_1"
     },
     {
@@ -1313,85 +1313,85 @@
     {
       "index": 107,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsync_28_Stream_JsonTypeInfoint_CancellationToken_0"
     },
     {
       "index": 108,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsync_28_Stream_JsonTypeInfoint_CancellationToken_1"
     },
     {
       "index": 109,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_29_Stream_JsonTypeInfoint_0"
     },
     {
       "index": 110,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_29_Stream_JsonTypeInfoint_1"
     },
     {
       "index": 111,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_32_Stream_JsonSerializerOptions_CancellationToken_0"
     },
     {
       "index": 112,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_32_Stream_JsonSerializerOptions_CancellationToken_1"
     },
     {
       "index": 113,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_33_Stream_bool_JsonSerializerOptions_CancellationToken_0"
     },
     {
       "index": 114,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_33_Stream_bool_JsonSerializerOptions_CancellationToken_1"
     },
     {
       "index": 115,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,System.Text.Json.JsonSerializerOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_33_Stream_bool_JsonSerializerOptions_CancellationToken_2"
     },
     {
       "index": 116,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_34_Stream_JsonTypeInfoint_CancellationToken_0"
     },
     {
       "index": 117,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_34_Stream_JsonTypeInfoint_CancellationToken_1"
     },
     {
       "index": 118,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Boolean,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_35_Stream_JsonTypeInfoint_bool_CancellationToken_0"
     },
     {
       "index": 119,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Boolean,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_35_Stream_JsonTypeInfoint_bool_CancellationToken_1"
     },
     {
       "index": 120,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Int32\u003E(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Boolean,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::DeserializeAsyncEnumerable:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)",
       "generatedMethodId": "DeserializeAsyncEnumerable_35_Stream_JsonTypeInfoint_bool_CancellationToken_2"
     },
     {
@@ -1421,13 +1421,13 @@
     {
       "index": 125,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_38_string_JsonTypeInfoint_0"
     },
     {
       "index": 126,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Int32(System.String,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Deserialize_38_string_JsonTypeInfoint_1"
     },
     {
@@ -1451,13 +1451,13 @@
     {
       "index": 130,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToUtf8Bytes_42_int_JsonTypeInfoint_0"
     },
     {
       "index": 131,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "SerializeToUtf8Bytes_42_int_JsonTypeInfoint_1"
     },
     {
@@ -1523,37 +1523,37 @@
     {
       "index": 142,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_48_Stream_int_JsonTypeInfoint_CancellationToken_0"
     },
     {
       "index": 143,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_48_Stream_int_JsonTypeInfoint_CancellationToken_1"
     },
     {
       "index": 144,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_48_Stream_int_JsonTypeInfoint_CancellationToken_2"
     },
     {
       "index": 145,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_49_Stream_int_JsonTypeInfoint_0"
     },
     {
       "index": 146,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_49_Stream_int_JsonTypeInfoint_1"
     },
     {
       "index": 147,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_49_Stream_int_JsonTypeInfoint_2"
     },
     {
@@ -1577,25 +1577,25 @@
     {
       "index": 151,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_54_int_JsonTypeInfoint_0"
     },
     {
       "index": 152,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.String(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_54_int_JsonTypeInfoint_1"
     },
     {
       "index": 153,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_56_PipeWriter_int_JsonTypeInfoint_CancellationToken_0"
     },
     {
       "index": 154,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)",
       "generatedMethodId": "SerializeAsync_56_PipeWriter_int_JsonTypeInfoint_CancellationToken_1"
     },
     {
@@ -1637,13 +1637,13 @@
     {
       "index": 161,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_62_Utf8JsonWriter_int_JsonTypeInfoint_0"
     },
     {
       "index": 162,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializer::Serialize:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)",
       "generatedMethodId": "Serialize_62_Utf8JsonWriter_int_JsonTypeInfoint_1"
     },
     {
@@ -1991,13 +1991,13 @@
     {
       "index": 220,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter<System.Byte>)",
       "generatedMethodId": "Reset_1_IBufferWriterbyte_0"
     },
     {
       "index": 221,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter<System.Byte>)",
       "generatedMethodId": "Reset_1_IBufferWriterbyte_1"
     },
     {
@@ -2567,13 +2567,13 @@
     {
       "index": 316,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence\u003CSystem.Byte\u003E,System.Boolean)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence<System.Byte>,System.Boolean)",
       "generatedMethodId": "WriteRawValue_54_ReadOnlySequencebyte_bool_0"
     },
     {
       "index": 317,
       "kind": "fact",
-      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence\u003CSystem.Byte\u003E,System.Boolean)",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence<System.Byte>,System.Boolean)",
       "generatedMethodId": "WriteRawValue_54_ReadOnlySequencebyte_bool_1"
     },
     {
@@ -2641,6 +2641,1164 @@
       "kind": "fact",
       "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt64)",
       "generatedMethodId": "WriteNumberValue_60_ulong_1"
+    },
+    {
+      "index": 329,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Net.ArrayBuffer::ClearAndReturnBuffer:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 330,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Net.ArrayBuffer::Commit:System.Void(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 331,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Net.ArrayBuffer::Discard:System.Void(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 332,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Net.ArrayBuffer::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 333,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Net.ArrayBuffer::EnsureAvailableSpace:System.Void(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 334,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.BitStack::Peek:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 335,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.BitStack::Pop:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 336,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.BitStack::PushFalse:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 337,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.BitStack::PushTrue:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 338,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.BitStack::ResetFirstBit:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 339,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.BitStack::SetFirstBit:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 340,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonCamelCaseNamingPolicy::ConvertName:System.String(System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 341,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument+MetadataDb::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 342,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument+PropertyNameSet::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 343,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument+StackRowStack::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 344,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.Buffers.ReadOnlySequence`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonDocumentOptions)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 345,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonDocumentOptions)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 346,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonDocumentOptions)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 347,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task`1[[System.Text.Json.JsonDocument, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 348,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseValue:System.Text.Json.JsonDocument(System.Text.Json.Utf8JsonReader&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 349,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::TryParseValue:System.Boolean(System.Text.Json.Utf8JsonReader&,System.Text.Json.JsonDocument&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 350,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ArrayEnumerator::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 351,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ArrayEnumerator::GetEnumerator:System.Text.Json.JsonElement+ArrayEnumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 352,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ArrayEnumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 353,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ArrayEnumerator::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 354,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ObjectEnumerator::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 355,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ObjectEnumerator::GetEnumerator:System.Text.Json.JsonElement+ObjectEnumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 356,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ObjectEnumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 357,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ObjectEnumerator::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 358,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::EnumerateArray:System.Text.Json.JsonElement+ArrayEnumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 359,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::EnumerateObject:System.Text.Json.JsonElement+ObjectEnumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 360,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetProperty:System.Text.Json.JsonElement(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 361,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetProperty:System.Text.Json.JsonElement(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 362,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Parse:System.Text.Json.JsonElement(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonDocumentOptions)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 363,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Parse:System.Text.Json.JsonElement(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonDocumentOptions)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 364,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Parse:System.Text.Json.JsonElement(System.String,System.Text.Json.JsonDocumentOptions)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 365,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ParseValue:System.Text.Json.JsonElement(System.Text.Json.Utf8JsonReader&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 366,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetByte:System.Boolean(System.Byte&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 367,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetBytesFromBase64:System.Boolean(System.Byte[]&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 368,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDateTime:System.Boolean(System.DateTime&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 369,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDateTimeOffset:System.Boolean(System.DateTimeOffset&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 370,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDecimal:System.Boolean(System.Decimal&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 371,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDouble:System.Boolean(System.Double&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 372,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetGuid:System.Boolean(System.Guid&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 373,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetInt16:System.Boolean(System.Int16&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 374,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetInt32:System.Boolean(System.Int32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 375,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetInt64:System.Boolean(System.Int64&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 376,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetProperty:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonElement&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 377,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetProperty:System.Boolean(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonElement&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 378,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetProperty:System.Boolean(System.String,System.Text.Json.JsonElement&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 379,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetSByte:System.Boolean(System.SByte&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 380,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetSingle:System.Boolean(System.Single&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 381,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetUInt16:System.Boolean(System.UInt16&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 382,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetUInt32:System.Boolean(System.UInt32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 383,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetUInt64:System.Boolean(System.UInt64&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 384,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryParseValue:System.Boolean(System.Text.Json.Utf8JsonReader&,System.Nullable`1[[System.Text.Json.JsonElement, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]]&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 385,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ValueEquals:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 386,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ValueEquals:System.Boolean(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 387,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonEncodedText::Encode:System.Text.Json.JsonEncodedText(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Encodings.Web.JavaScriptEncoder)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 388,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonEncodedText::Encode:System.Text.Json.JsonEncodedText(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Encodings.Web.JavaScriptEncoder)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 389,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 390,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonProperty::NameEquals:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 391,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonProperty::NameEquals:System.Boolean(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 392,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions+CachingContext+CacheEntry::GetResult:System.Text.Json.Serialization.Metadata.JsonTypeInfo()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 393,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions+CachingContext::Clear:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 394,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions+CachingContext::GetOrAddTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type,System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 395,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions+CachingContext::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 396,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions+OptionsBoundJsonTypeInfoResolverChain::DetachFromOptions:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 397,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 398,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 399,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::Advance:System.Void(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 400,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::CancelPendingFlush:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 401,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::Clear:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 402,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::ClearAndReturnBuffers:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 403,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::Complete:System.Void(System.Exception)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 404,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::CreateEmptyInstanceForCaching:System.Text.Json.PooledByteBufferWriter()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 405,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 406,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::FlushAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.FlushResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 407,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::GetMemory:System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 408,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::GetSpan:System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 409,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::InitializeEmptyInstance:System.Void(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 410,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::ExitPolymorphicConverter:System.Void(System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 411,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::GetTopJsonTypeInfoWithParameterizedConstructor:System.Text.Json.Serialization.Metadata.JsonTypeInfo()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 412,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::InitializePolymorphicReEntry:System.Text.Json.Serialization.JsonConverter(System.Text.Json.Serialization.Metadata.JsonTypeInfo)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 413,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::JsonPath:System.String()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 414,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::Pop:System.Void(System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 415,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::Push:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 416,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::ResumePolymorphicReEntry:System.Text.Json.Serialization.JsonConverter()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 417,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStackFrame::EndConstructorParameter:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 418,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStackFrame::EndElement:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 419,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStackFrame::EndProperty:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 420,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStackFrame::IsProcessingDictionary:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 421,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStackFrame::IsProcessingEnumerable:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 422,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStackFrame::MarkPropertyAsRead:System.Void(System.Text.Json.Serialization.Metadata.JsonPropertyInfo)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 423,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader+PartialStateForRollback::GetStartPosition:System.SequencePosition(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 424,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::CopyString:System.Int32(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 425,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::CopyString:System.Int32(System.Span`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 426,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetByte:System.Boolean(System.Byte&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 427,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetBytesFromBase64:System.Boolean(System.Byte[]&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 428,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDateTime:System.Boolean(System.DateTime&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 429,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDateTimeOffset:System.Boolean(System.DateTimeOffset&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 430,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDecimal:System.Boolean(System.Decimal&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 431,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDouble:System.Boolean(System.Double&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 432,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetGuid:System.Boolean(System.Guid&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 433,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt16:System.Boolean(System.Int16&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 434,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt32:System.Boolean(System.Int32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 435,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt64:System.Boolean(System.Int64&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 436,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetSByte:System.Boolean(System.SByte&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 437,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetSingle:System.Boolean(System.Single&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 438,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt16:System.Boolean(System.UInt16&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 439,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt32:System.Boolean(System.UInt32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 440,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt64:System.Boolean(System.UInt64&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 441,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::ValueTextEquals:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 442,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::ValueTextEquals:System.Boolean(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 443,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 444,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 445,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64String:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 446,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64String:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 447,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64String:System.Void(System.String,System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 448,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64String:System.Void(System.Text.Json.JsonEncodedText,System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 449,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64StringSegment:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 450,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64StringValue:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 451,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 452,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 453,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteCommentValue:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 454,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteCommentValue:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 455,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNull:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 456,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNull:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 457,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Decimal)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 458,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Double)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 459,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 460,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int64)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 461,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Single)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 462,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.UInt32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 463,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.UInt64)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 464,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Decimal)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 465,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Double)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 466,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 467,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int64)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 468,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Single)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 469,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.UInt32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 470,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.UInt64)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 471,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WritePropertyName:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 472,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WritePropertyName:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 473,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 474,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 475,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 476,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 477,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 478,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 479,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 480,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.DateTime)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 481,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.DateTimeOffset)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 482,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Guid)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 483,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 484,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 485,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 486,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonEncodedText)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 487,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.DateTime)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 488,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.DateTimeOffset)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 489,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Guid)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 490,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 491,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 492,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 493,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonEncodedText)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 494,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 495,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 496,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 497,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 498,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 499,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 500,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValueSegment:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 501,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValueSegment:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 502,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::AddCompletedAsyncDisposable:System.Void(System.IAsyncDisposable)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 503,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::DisposeCompletedAsyncDisposables:System.Threading.Tasks.ValueTask()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 504,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::DisposePendingDisposablesOnException:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 505,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::DisposePendingDisposablesOnExceptionAsync:System.Threading.Tasks.ValueTask()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 506,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::PeekNestedJsonTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 507,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::Pop:System.Void(System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 508,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::PropertyPath:System.String()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 509,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::Push:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 510,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::EndCollectionElement:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 511,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::EndDictionaryEntry:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 512,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::EndProperty:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 513,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::ExitPolymorphicConverter:System.Void(System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 514,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::GetNestedJsonTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 515,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::InitializePolymorphicReEntry:System.Text.Json.Serialization.JsonConverter(System.Text.Json.Serialization.Metadata.JsonTypeInfo)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 516,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::InitializePolymorphicReEntry:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type,System.Text.Json.JsonSerializerOptions)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 517,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::ResumePolymorphicReEntry:System.Text.Json.Serialization.JsonConverter()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 518,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.ValueStringBuilder::Append:System.Void(System.Char)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 519,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.ValueStringBuilder::Append:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 520,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.ValueStringBuilder::Append:System.Void(System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 521,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Text.Json/System.Text.ValueStringBuilder::Dispose:System.Void()",
+      "generatedMethodId": ""
     }
   ]
 }

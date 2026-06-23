@@ -1,0 +1,505 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Security.Cryptography",
+  "chunkSlug": "security-cryptography",
+  "entries": [
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.AesCcm::Decrypt:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.AesCcm::Encrypt:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.AesGcm::Decrypt:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.AesGcm::Encrypt:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.AsnEncodedDataCollection::CopyTo:System.Void(System.Security.Cryptography.AsnEncodedData[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.AsnEncodedDataEnumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.AsnEncodedDataEnumerator::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ChaCha20Poly1305::Decrypt:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ChaCha20Poly1305::Encrypt:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CngKey::Create:System.Security.Cryptography.CngKey(System.Security.Cryptography.CngAlgorithm)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CngKey::Create:System.Security.Cryptography.CngKey(System.Security.Cryptography.CngAlgorithm,System.String)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CngKey::Create:System.Security.Cryptography.CngKey(System.Security.Cryptography.CngAlgorithm,System.String,System.Security.Cryptography.CngKeyCreationParameters)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CompositeMLDsaCng::GetKey:System.Security.Cryptography.CngKey()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::FixedTimeEquals:System.Boolean(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HashData:System.Byte[](System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HashData:System.Int32(System.Security.Cryptography.HashAlgorithmName,System.IO.Stream,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HashData:System.Int32(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacData:System.Byte[](System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacData:System.Byte[](System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacData:System.Int32(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::HmacData:System.Int32(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::TryHashData:System.Boolean(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::TryHmacData:System.Boolean(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations::ZeroMemory:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.DSACng::ExportEncryptedPkcs8PrivateKey:System.Byte[](System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.PbeParameters)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.DSACng::ExportEncryptedPkcs8PrivateKey:System.Byte[](System.ReadOnlySpan<System.Char>,System.Security.Cryptography.PbeParameters)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.DSACng::ImportEncryptedPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.DSACng::ImportEncryptedPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.DSACng::TryExportEncryptedPkcs8PrivateKey:System.Boolean(System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.PbeParameters,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.DSACng::TryExportEncryptedPkcs8PrivateKey:System.Boolean(System.ReadOnlySpan<System.Char>,System.Security.Cryptography.PbeParameters,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.DSACng::TryExportPkcs8PrivateKey:System.Boolean(System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.DSACryptoServiceProvider::ImportEncryptedPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.DSACryptoServiceProvider::ImportEncryptedPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanCng::ExportEncryptedPkcs8PrivateKey:System.Byte[](System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.PbeParameters)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanCng::ExportEncryptedPkcs8PrivateKey:System.Byte[](System.ReadOnlySpan<System.Char>,System.Security.Cryptography.PbeParameters)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanCng::ImportEncryptedPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanCng::ImportEncryptedPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanCng::ImportPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanCng::TryExportEncryptedPkcs8PrivateKey:System.Boolean(System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.PbeParameters,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanCng::TryExportEncryptedPkcs8PrivateKey:System.Boolean(System.ReadOnlySpan<System.Char>,System.Security.Cryptography.PbeParameters,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanCng::TryExportPkcs8PrivateKey:System.Boolean(System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDsaCng::ExportEncryptedPkcs8PrivateKey:System.Byte[](System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.PbeParameters)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDsaCng::ExportEncryptedPkcs8PrivateKey:System.Byte[](System.ReadOnlySpan<System.Char>,System.Security.Cryptography.PbeParameters)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDsaCng::ImportEncryptedPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDsaCng::ImportEncryptedPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDsaCng::ImportPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDsaCng::TryExportEncryptedPkcs8PrivateKey:System.Boolean(System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.PbeParameters,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDsaCng::TryExportEncryptedPkcs8PrivateKey:System.Boolean(System.ReadOnlySpan<System.Char>,System.Security.Cryptography.PbeParameters,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDsaCng::TryExportPkcs8PrivateKey:System.Boolean(System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDsaCng::TrySignHash:System.Boolean(System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.ECDsaCng::VerifyHash:System.Boolean(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HKDF::DeriveKey:System.Void(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HKDF::Expand:System.Void(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HKDF::Extract:System.Int32(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACMD5::TryHashData:System.Boolean(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1::TryHashData:System.Boolean(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256::TryHashData:System.Boolean(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384::TryHashData:System.Boolean(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256::TryHashData:System.Boolean(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384::TryHashData:System.Boolean(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512::TryHashData:System.Boolean(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::HashData:System.Int32(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512::TryHashData:System.Boolean(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.IncrementalHash::AppendData:System.Void(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.IncrementalHash::CreateHMAC:System.Security.Cryptography.IncrementalHash(System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.IncrementalHash::GetCurrentHash:System.Int32(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.IncrementalHash::GetHashAndReset:System.Int32(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.IncrementalHash::TryGetCurrentHash:System.Boolean(System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.IncrementalHash::TryGetHashAndReset:System.Boolean(System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::AppendData:System.Void(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::GetCurrentHash:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::GetHashAndReset:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashData:System.Void(System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac128::HashData:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::AppendData:System.Void(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::GetCurrentHash:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::GetHashAndReset:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashData:System.Void(System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Kmac256::HashData:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::AppendData:System.Void(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::GetCurrentHash:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::GetHashAndReset:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashData:System.Void(System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof128::HashData:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::AppendData:System.Void(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::GetCurrentHash:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::GetHashAndReset:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Int32,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashData:System.Void(System.ReadOnlySpan<System.Byte>,System.IO.Stream,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.KmacXof256::HashData:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.MLDsaCng::GetKey:System.Security.Cryptography.CngKey()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.MLDsaOpenSsl::DuplicateKeyHandle:System.Security.Cryptography.SafeEvpPKeyHandle()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.MLKemCng::GetKey:System.Security.Cryptography.CngKey()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.MLKemOpenSsl::DuplicateKeyHandle:System.Security.Cryptography.SafeEvpPKeyHandle()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.OidCollection::CopyTo:System.Void(System.Security.Cryptography.Oid[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.OidEnumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.OidEnumerator::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.PasswordDeriveBytes::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.PemEncoding::Find:System.Security.Cryptography.PemFields(System.ReadOnlySpan<System.Char>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.PemEncoding::FindUtf8:System.Security.Cryptography.PemFields(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.PemEncoding::TryFind:System.Boolean(System.ReadOnlySpan<System.Char>,System.Security.Cryptography.PemFields)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.PemEncoding::TryFindUtf8:System.Boolean(System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.PemFields)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.PemEncoding::TryWrite:System.Boolean(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Byte>,System.Span<System.Char>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.PemEncoding::TryWriteUtf8:System.Boolean(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.PemEncoding::Write:System.Char[](System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.PemEncoding::WriteString:System.String(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.PemEncoding::WriteUtf8:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RNGCryptoServiceProvider::GetBytes:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RNGCryptoServiceProvider::GetNonZeroBytes:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACng::ExportEncryptedPkcs8PrivateKey:System.Byte[](System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.PbeParameters)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACng::ExportEncryptedPkcs8PrivateKey:System.Byte[](System.ReadOnlySpan<System.Char>,System.Security.Cryptography.PbeParameters)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACng::ImportEncryptedPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACng::ImportEncryptedPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACng::ImportPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACng::TryDecrypt:System.Boolean(System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Security.Cryptography.RSAEncryptionPadding,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACng::TryEncrypt:System.Boolean(System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Security.Cryptography.RSAEncryptionPadding,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACng::TryExportEncryptedPkcs8PrivateKey:System.Boolean(System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.PbeParameters,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACng::TryExportEncryptedPkcs8PrivateKey:System.Boolean(System.ReadOnlySpan<System.Char>,System.Security.Cryptography.PbeParameters,System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACng::TryExportPkcs8PrivateKey:System.Boolean(System.Span<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACng::TrySignHash:System.Boolean(System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACng::VerifyHash:System.Boolean(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACryptoServiceProvider::ImportEncryptedPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.RSACryptoServiceProvider::ImportEncryptedPkcs8PrivateKey:System.Void(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Rfc2898DeriveBytes::Pbkdf2:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Rfc2898DeriveBytes::Pbkdf2:System.Byte[](System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Byte>,System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Rfc2898DeriveBytes::Pbkdf2:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32,System.Security.Cryptography.HashAlgorithmName)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Rfc2898DeriveBytes::Pbkdf2:System.Void(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32,System.Security.Cryptography.HashAlgorithmName)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Rfc2898DeriveBytes::Reset:System.Void()"
+    }
+  ]
+}

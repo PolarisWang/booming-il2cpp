@@ -1,0 +1,97 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Private.Xml",
+  "chunkSlug": "system-xml-serialization",
+  "entries": [
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.UnreferencedObjectEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Serialization.UnreferencedObjectEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.UnreferencedObjectEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.UnreferencedObjectEventHandler::Invoke:System.Void(System.Object,System.Xml.Serialization.UnreferencedObjectEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::CopyTo:System.Void(System.Xml.Serialization.XmlAnyElementAttribute[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::CopyTo:System.Void(System.Xml.Serialization.XmlArrayItemAttribute[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Serialization.XmlAttributeEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeEventHandler::Invoke:System.Void(System.Object,System.Xml.Serialization.XmlAttributeEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::CopyTo:System.Void(System.Xml.Serialization.XmlElementAttribute[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Serialization.XmlElementEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementEventHandler::Invoke:System.Void(System.Object,System.Xml.Serialization.XmlElementEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlNodeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Serialization.XmlNodeEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlNodeEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlNodeEventHandler::Invoke:System.Void(System.Object,System.Xml.Serialization.XmlNodeEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaEnumerator::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaEnumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::CopyTo:System.Void(System.Xml.Schema.XmlSchema[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationCollectionFixupCallback::BeginInvoke:System.IAsyncResult(System.Object,System.Object,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationCollectionFixupCallback::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationCollectionFixupCallback::Invoke:System.Void(System.Object,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationFixupCallback::BeginInvoke:System.IAsyncResult(System.Object,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationFixupCallback::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationFixupCallback::Invoke:System.Void(System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationReadCallback::BeginInvoke:System.IAsyncResult(System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationReadCallback::EndInvoke:System.Object(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationReadCallback::Invoke:System.Object()"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationWriteCallback::BeginInvoke:System.IAsyncResult(System.Object,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationWriteCallback::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationWriteCallback::Invoke:System.Void(System.Object)"
+    }
+  ]
+}

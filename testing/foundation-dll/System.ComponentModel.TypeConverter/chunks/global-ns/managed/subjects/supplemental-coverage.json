@@ -1,0 +1,34 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.ComponentModel.TypeConverter",
+  "chunkSlug": "global-ns",
+  "entries": [
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.InstanceDescriptor::Invoke:System.Object()"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ResolveNameEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.Serialization.ResolveNameEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ResolveNameEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ResolveNameEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.Serialization.ResolveNameEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.ColorConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.ElapsedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Timers.ElapsedEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.ElapsedEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.ElapsedEventHandler::Invoke:System.Void(System.Object,System.Timers.ElapsedEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.Timer::Start:System.Void()"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Runtime.Serialization.Formatters",
   "chunkSlug": "global-ns",
-  "totalMethods": 84,
+  "totalMethods": 98,
   "factMethodCount": 51,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -681,6 +681,90 @@
       "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::RemoveSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext)",
       "generatedMethodId": "RemoveSurrogate_4_System_Type_StreamingContext_0"
+    },
+    {
+      "index": 84,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.DeserializationEventHandler::Invoke:System.Void(System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 85,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationEventHandler::BeginInvoke:System.IAsyncResult(System.Runtime.Serialization.StreamingContext,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 86,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 87,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationEventHandler::Invoke:System.Void(System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 88,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::GetCustomAttributes:System.Object[](System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 89,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::GetCustomAttributes:System.Object[](System.Type,System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 90,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::GetValue:System.Object(System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 91,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::IsDefined:System.Boolean(System.Type,System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 92,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 93,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateForCyclicalReference::GetObjectData:System.Void(System.Object,System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 94,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateForCyclicalReference::SetObjectData:System.Object(System.Object,System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 95,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::GetId:System.Int64(System.Object,System.Boolean&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 96,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::HasId:System.Int64(System.Object,System.Boolean&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 97,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector&)",
+      "generatedMethodId": ""
     }
   ]
 }

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Collections.Immutable",
   "chunkSlug": "global-ns",
-  "totalMethods": 36,
+  "totalMethods": 48,
   "factMethodCount": 16,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -85,218 +85,290 @@
     {
       "index": 0,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Int32,System.Int32>>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
       "generatedMethodId": "ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_0"
     },
     {
       "index": 1,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Int32,System.Int32>>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
       "generatedMethodId": "ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_1"
     },
     {
       "index": 2,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
       "generatedMethodId": "ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_0"
     },
     {
       "index": 3,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
       "generatedMethodId": "ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1"
     },
     {
       "index": 4,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
       "generatedMethodId": "ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0"
     },
     {
       "index": 5,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
       "generatedMethodId": "ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1"
     },
     {
       "index": 6,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E[],System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.Int32,System.Int32>[],System.Int32)",
       "generatedMethodId": "CopyTo_0_KeyValuePairintint_int_0"
     },
     {
       "index": 7,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E[],System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.Int32,System.Int32>[],System.Int32)",
       "generatedMethodId": "CopyTo_0_KeyValuePairintint_int_1"
     },
     {
       "index": 8,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E[],System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.Int32,System.Int32>[],System.Int32)",
       "generatedMethodId": "CopyTo_0_KeyValuePairintint_int_2"
     },
     {
       "index": 9,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E[],System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.Int32,System.Int32>[],System.Int32)",
       "generatedMethodId": "CopyTo_0_KeyValuePairintint_int_3"
     },
     {
       "index": 10,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::GetValueRefOrNullRef:System.Int32(System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>::GetValueRefOrNullRef:System.Int32(System.Int32)",
       "generatedMethodId": "GetValueRefOrNullRef_1_int_0"
     },
     {
       "index": 11,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::GetValueRefOrNullRef:System.Int32(System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>::GetValueRefOrNullRef:System.Int32(System.Int32)",
       "generatedMethodId": "GetValueRefOrNullRef_1_int_1"
     },
     {
       "index": 12,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::ContainsKey:System.Boolean(System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>::ContainsKey:System.Boolean(System.Int32)",
       "generatedMethodId": "ContainsKey_2_int_0"
     },
     {
       "index": 13,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::ContainsKey:System.Boolean(System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>::ContainsKey:System.Boolean(System.Int32)",
       "generatedMethodId": "ContainsKey_2_int_1"
     },
     {
       "index": 14,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>::TryGetValue:System.Boolean(System.Int32,System.Int32)",
       "generatedMethodId": "TryGetValue_3_int_int_0"
     },
     {
       "index": 15,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>::TryGetValue:System.Boolean(System.Int32,System.Int32)",
       "generatedMethodId": "TryGetValue_3_int_int_1"
     },
     {
       "index": 16,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>::TryGetValue:System.Boolean(System.Int32,System.Int32)",
       "generatedMethodId": "TryGetValue_3_int_int_2"
     },
     {
       "index": 17,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet:System.Collections.Frozen.FrozenSet<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
       "generatedMethodId": "ToFrozenSet_0_IEnumerableint_IEqualityComparerint_0"
     },
     {
       "index": 18,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet:System.Collections.Frozen.FrozenSet<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
       "generatedMethodId": "ToFrozenSet_0_IEnumerableint_IEqualityComparerint_1"
     },
     {
       "index": 19,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::Contains:System.Boolean(System.Int32)",
       "generatedMethodId": "Contains_0_int_0"
     },
     {
       "index": 20,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::Contains:System.Boolean(System.Int32)",
       "generatedMethodId": "Contains_0_int_1"
     },
     {
       "index": 21,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::TryGetValue:System.Boolean(System.Int32,System.Int32)",
       "generatedMethodId": "TryGetValue_1_int_int_0"
     },
     {
       "index": 22,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::TryGetValue:System.Boolean(System.Int32,System.Int32)",
       "generatedMethodId": "TryGetValue_1_int_int_1"
     },
     {
       "index": 23,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::TryGetValue:System.Boolean(System.Int32,System.Int32)",
       "generatedMethodId": "TryGetValue_1_int_int_2"
     },
     {
       "index": 24,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsProperSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::IsProperSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable<System.Int32>)",
       "generatedMethodId": "IsProperSubsetOf_2_IEnumerableint_0"
     },
     {
       "index": 25,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsProperSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::IsProperSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable<System.Int32>)",
       "generatedMethodId": "IsProperSubsetOf_2_IEnumerableint_1"
     },
     {
       "index": 26,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsProperSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::IsProperSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable<System.Int32>)",
       "generatedMethodId": "IsProperSupersetOf_3_IEnumerableint_0"
     },
     {
       "index": 27,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsProperSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::IsProperSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable<System.Int32>)",
       "generatedMethodId": "IsProperSupersetOf_3_IEnumerableint_1"
     },
     {
       "index": 28,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::IsSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable<System.Int32>)",
       "generatedMethodId": "IsSubsetOf_4_IEnumerableint_0"
     },
     {
       "index": 29,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::IsSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable<System.Int32>)",
       "generatedMethodId": "IsSubsetOf_4_IEnumerableint_1"
     },
     {
       "index": 30,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::IsSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable<System.Int32>)",
       "generatedMethodId": "IsSupersetOf_5_IEnumerableint_0"
     },
     {
       "index": 31,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::IsSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable<System.Int32>)",
       "generatedMethodId": "IsSupersetOf_5_IEnumerableint_1"
     },
     {
       "index": 32,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::Overlaps:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::Overlaps:System.Boolean(System.Collections.Generic.IEnumerable<System.Int32>)",
       "generatedMethodId": "Overlaps_6_IEnumerableint_0"
     },
     {
       "index": 33,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::Overlaps:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::Overlaps:System.Boolean(System.Collections.Generic.IEnumerable<System.Int32>)",
       "generatedMethodId": "Overlaps_6_IEnumerableint_1"
     },
     {
       "index": 34,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::SetEquals:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::SetEquals:System.Boolean(System.Collections.Generic.IEnumerable<System.Int32>)",
       "generatedMethodId": "SetEquals_7_IEnumerableint_0"
     },
     {
       "index": 35,
       "kind": "fact",
-      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::SetEquals:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::SetEquals:System.Boolean(System.Collections.Generic.IEnumerable<System.Int32>)",
       "generatedMethodId": "SetEquals_7_IEnumerableint_1"
+    },
+    {
+      "index": 36,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenHashTable::Create:System.Collections.Frozen.FrozenHashTable(System.Span`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 37,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenHashTable::FindMatchingEntries:System.Void(System.Int32,System.Int32&,System.Int32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 38,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.Int32FrozenSet+GSW::FindItemIndex:System.Int32(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 39,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.Int32FrozenSet+GSW::GetEnumerator:System.Collections.Frozen.FrozenSet`1+Enumerator[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 40,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.Int32FrozenSet+GSW::Store:System.Void(System.Collections.Frozen.FrozenSet`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 41,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.KeyAnalyzer+GetSpan::Invoke:System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.String,System.Int32,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 42,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.LengthBucketsFrozenSet+GSW::FindItemIndex:System.Int32(System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 43,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.LengthBucketsFrozenSet+GSW::GetEnumerator:System.Collections.Frozen.FrozenSet`1+Enumerator[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 44,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.LengthBucketsFrozenSet+GSW::Store:System.Void(System.Collections.Frozen.FrozenSet`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 45,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.OrdinalStringFrozenSet+GSW::FindItemIndex:System.Int32(System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 46,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.OrdinalStringFrozenSet+GSW::GetEnumerator:System.Collections.Frozen.FrozenSet`1+Enumerator[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 47,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.OrdinalStringFrozenSet+GSW::Store:System.Void(System.Collections.Frozen.FrozenSet`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
     }
   ]
 }

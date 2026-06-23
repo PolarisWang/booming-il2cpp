@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
@@ -441,155 +441,155 @@ public sealed partial class NativeAotLoweringPlanner
         {
             try
             {
-                using var stream = File.OpenRead(assemblyPath);
-                using var peReader = new PEReader(stream);
-                if (!peReader.HasMetadata)
+            using var stream = File.OpenRead(assemblyPath);
+            using var peReader = new PEReader(stream);
+            if (!peReader.HasMetadata)
+            {
+                continue;
+            }
+
+            var metadataReader = peReader.GetMetadataReader();
+            var assemblyName = metadataReader.GetString(metadataReader.GetAssemblyDefinition().Name);
+            var assemblyTypeEntries = Array.Empty<SupplementalMetadataTypeTemplateEntry>();
+            if (typeEntriesByAssembly.TryGetValue(assemblyName, out var resolvedAssemblyTypeEntries))
+            {
+                assemblyTypeEntries = resolvedAssemblyTypeEntries;
+                foreach (var typeEntry in assemblyTypeEntries)
                 {
-                    continue;
-                }
-
-                var metadataReader = peReader.GetMetadataReader();
-                var assemblyName = metadataReader.GetString(metadataReader.GetAssemblyDefinition().Name);
-                var assemblyTypeEntries = Array.Empty<SupplementalMetadataTypeTemplateEntry>();
-                if (typeEntriesByAssembly.TryGetValue(assemblyName, out var resolvedAssemblyTypeEntries))
-                {
-                    assemblyTypeEntries = resolvedAssemblyTypeEntries;
-                    foreach (var typeEntry in assemblyTypeEntries)
-                    {
-                        if (!seenTypeSubjectIds.Add(typeEntry.SubjectId))
-                        {
-                            continue;
-                        }
-
-                        if (!TryResolveTypeDefinitionHandleForReflectionMemberEntry(
-                                typeEntry,
-                                assemblyTypeEntries,
-                                out var typeDefinitionHandle))
-                        {
-                            continue;
-                        }
-
-                        var typeDefinition = metadataReader.GetTypeDefinition(typeDefinitionHandle);
-                        var typeName = metadataReader.GetString(typeDefinition.Name);
-                        var genericParameterCount = typeDefinition.GetGenericParameters().Count;
-                        var genericArgumentTypeSubjectIds = typeEntry.RuntimeGenericContext?.InstantiationKey.TypeArguments?.ToArray() ?? [];
-                        var metadataToken = MetadataTokens.GetToken(typeDefinitionHandle);
-                        var genericDefinitionTypeSubjectId =
-                            string.Equals(typeEntry.SubjectId, typeEntry.DefinitionSubjectId, StringComparison.Ordinal)
-                                ? (genericParameterCount > 0 ? typeEntry.SubjectId : null)
-                                : typeEntry.DefinitionSubjectId;
-                        typeEntries.Add(new ReflectionMemberTypeEntry(
-                            typeEntry.SubjectId,
-                            typeName,
-                            genericDefinitionTypeSubjectId,
-                            genericArgumentTypeSubjectIds,
-                            genericParameterCount,
-                            metadataToken));
-
-                        foreach (var fieldHandle in typeDefinition.GetFields())
-                        {
-                            var fieldDefinition = metadataReader.GetFieldDefinition(fieldHandle);
-                            var fieldName = metadataReader.GetString(fieldDefinition.Name);
-                            var fieldKey = $"{typeEntry.SubjectId}:{fieldName}";
-                            if (!seenFieldKeys.Add(fieldKey))
-                            {
-                                continue;
-                            }
-
-                            long? constantValue = null;
-                            var constantHandle = fieldDefinition.GetDefaultValue();
-                            if (!constantHandle.IsNil)
-                            {
-                                try
-                                {
-                                    var constant = metadataReader.GetConstant(constantHandle);
-                                    var blobReader = metadataReader.GetBlobReader(constant.Value);
-                                    switch ((PrimitiveTypeCode)constant.TypeCode)
-                                    {
-                                        case PrimitiveTypeCode.Boolean:
-                                            constantValue = blobReader.ReadBoolean() ? 1L : 0L;
-                                            break;
-                                        case PrimitiveTypeCode.Byte:
-                                            constantValue = blobReader.ReadByte();
-                                            break;
-                                        case PrimitiveTypeCode.SByte:
-                                            constantValue = blobReader.ReadSByte();
-                                            break;
-                                        case PrimitiveTypeCode.Int16:
-                                            constantValue = blobReader.ReadInt16();
-                                            break;
-                                        case PrimitiveTypeCode.UInt16:
-                                            constantValue = blobReader.ReadUInt16();
-                                            break;
-                                        case PrimitiveTypeCode.Char:
-                                            constantValue = blobReader.ReadChar();
-                                            break;
-                                        case PrimitiveTypeCode.Int32:
-                                            constantValue = blobReader.ReadInt32();
-                                            break;
-                                        case PrimitiveTypeCode.UInt32:
-                                            constantValue = blobReader.ReadUInt32();
-                                            break;
-                                        case PrimitiveTypeCode.Int64:
-                                            constantValue = blobReader.ReadInt64();
-                                            break;
-                                        case PrimitiveTypeCode.UInt64:
-                                            constantValue = (long)blobReader.ReadUInt64();
-                                            break;
-                                    }
-                                }
-                                catch
-                                {
-                                    // Ignore constant read failures
-                                }
-                            }
-
-                            fieldEntries.Add(new ReflectionMemberFieldEntry(
-                                typeEntry.SubjectId,
-                                fieldName,
-                                MetadataTokens.GetToken(fieldHandle),
-                                constantValue));
-                        }
-                    }
-                }
-
-                if (!methodEntriesByAssembly.TryGetValue(assemblyName, out var assemblyMethodEntries))
-                {
-                    continue;
-                }
-
-                foreach (var methodEntry in assemblyMethodEntries)
-                {
-                    if (!seenMethodSubjectIds.Add(methodEntry.SubjectId))
+                    if (!seenTypeSubjectIds.Add(typeEntry.SubjectId))
                     {
                         continue;
                     }
 
-                    if (!TryResolveMethodDefinitionForReflectionMemberEntry(
-                            metadataReader,
-                            methodEntry,
+                    if (!TryResolveTypeDefinitionHandleForReflectionMemberEntry(
+                            typeEntry,
                             assemblyTypeEntries,
-                            out var methodDefinitionHandle))
+                            out var typeDefinitionHandle))
                     {
                         continue;
                     }
 
-                    var methodDefinition = metadataReader.GetMethodDefinition(methodDefinitionHandle);
-                    var methodName = metadataReader.GetString(methodDefinition.Name);
-                    var parameterNames = methodDefinition.GetParameters()
-                        .Select(parameterHandle => metadataReader.GetParameter(parameterHandle))
-                        .Where(parameter => parameter.SequenceNumber > 0)
-                        .OrderBy(parameter => parameter.SequenceNumber)
-                        .Select(parameter => metadataReader.GetString(parameter.Name))
-                        .ToArray();
-                    methodEntries.Add(new ReflectionMemberMethodEntry(
-                        methodEntry.SubjectId,
-                        methodEntry.DeclaringTypeSubjectId,
-                        methodName,
-                        parameterNames,
-                        string.Equals(methodName, ".ctor", StringComparison.Ordinal),
-                        MetadataTokens.GetToken(methodDefinitionHandle)));
+                    var typeDefinition = metadataReader.GetTypeDefinition(typeDefinitionHandle);
+                    var typeName = metadataReader.GetString(typeDefinition.Name);
+                    var genericParameterCount = typeDefinition.GetGenericParameters().Count;
+                    var genericArgumentTypeSubjectIds = typeEntry.RuntimeGenericContext?.InstantiationKey.TypeArguments?.ToArray() ?? [];
+                    var metadataToken = MetadataTokens.GetToken(typeDefinitionHandle);
+                    var genericDefinitionTypeSubjectId =
+                        string.Equals(typeEntry.SubjectId, typeEntry.DefinitionSubjectId, StringComparison.Ordinal)
+                            ? (genericParameterCount > 0 ? typeEntry.SubjectId : null)
+                            : typeEntry.DefinitionSubjectId;
+                    typeEntries.Add(new ReflectionMemberTypeEntry(
+                        typeEntry.SubjectId,
+                        typeName,
+                        genericDefinitionTypeSubjectId,
+                        genericArgumentTypeSubjectIds,
+                        genericParameterCount,
+                        metadataToken));
+
+                    foreach (var fieldHandle in typeDefinition.GetFields())
+                    {
+                        var fieldDefinition = metadataReader.GetFieldDefinition(fieldHandle);
+                        var fieldName = metadataReader.GetString(fieldDefinition.Name);
+                        var fieldKey = $"{typeEntry.SubjectId}:{fieldName}";
+                        if (!seenFieldKeys.Add(fieldKey))
+                        {
+                            continue;
+                        }
+
+                        long? constantValue = null;
+                        var constantHandle = fieldDefinition.GetDefaultValue();
+                        if (!constantHandle.IsNil)
+                        {
+                            try
+                            {
+                                var constant = metadataReader.GetConstant(constantHandle);
+                                var blobReader = metadataReader.GetBlobReader(constant.Value);
+                                switch ((PrimitiveTypeCode)constant.TypeCode)
+                                {
+                                    case PrimitiveTypeCode.Boolean:
+                                        constantValue = blobReader.ReadBoolean() ? 1L : 0L;
+                                        break;
+                                    case PrimitiveTypeCode.Byte:
+                                        constantValue = blobReader.ReadByte();
+                                        break;
+                                    case PrimitiveTypeCode.SByte:
+                                        constantValue = blobReader.ReadSByte();
+                                        break;
+                                    case PrimitiveTypeCode.Int16:
+                                        constantValue = blobReader.ReadInt16();
+                                        break;
+                                    case PrimitiveTypeCode.UInt16:
+                                        constantValue = blobReader.ReadUInt16();
+                                        break;
+                                    case PrimitiveTypeCode.Char:
+                                        constantValue = blobReader.ReadChar();
+                                        break;
+                                    case PrimitiveTypeCode.Int32:
+                                        constantValue = blobReader.ReadInt32();
+                                        break;
+                                    case PrimitiveTypeCode.UInt32:
+                                        constantValue = blobReader.ReadUInt32();
+                                        break;
+                                    case PrimitiveTypeCode.Int64:
+                                        constantValue = blobReader.ReadInt64();
+                                        break;
+                                    case PrimitiveTypeCode.UInt64:
+                                        constantValue = (long)blobReader.ReadUInt64();
+                                        break;
+                                }
+                            }
+                            catch
+                            {
+                                // Ignore constant read failures
+                            }
+                        }
+
+                        fieldEntries.Add(new ReflectionMemberFieldEntry(
+                            typeEntry.SubjectId,
+                            fieldName,
+                            MetadataTokens.GetToken(fieldHandle),
+                            constantValue));
+                    }
                 }
+            }
+
+            if (!methodEntriesByAssembly.TryGetValue(assemblyName, out var assemblyMethodEntries))
+            {
+                continue;
+            }
+
+            foreach (var methodEntry in assemblyMethodEntries)
+            {
+                if (!seenMethodSubjectIds.Add(methodEntry.SubjectId))
+                {
+                    continue;
+                }
+
+                if (!TryResolveMethodDefinitionForReflectionMemberEntry(
+                        metadataReader,
+                        methodEntry,
+                        assemblyTypeEntries,
+                        out var methodDefinitionHandle))
+                {
+                    continue;
+                }
+
+                var methodDefinition = metadataReader.GetMethodDefinition(methodDefinitionHandle);
+                var methodName = metadataReader.GetString(methodDefinition.Name);
+                var parameterNames = methodDefinition.GetParameters()
+                    .Select(parameterHandle => metadataReader.GetParameter(parameterHandle))
+                    .Where(parameter => parameter.SequenceNumber > 0)
+                    .OrderBy(parameter => parameter.SequenceNumber)
+                    .Select(parameter => metadataReader.GetString(parameter.Name))
+                    .ToArray();
+                methodEntries.Add(new ReflectionMemberMethodEntry(
+                    methodEntry.SubjectId,
+                    methodEntry.DeclaringTypeSubjectId,
+                    methodName,
+                    parameterNames,
+                    string.Equals(methodName, ".ctor", StringComparison.Ordinal),
+                    MetadataTokens.GetToken(methodDefinitionHandle)));
+            }
             }
             catch (BadImageFormatException)
             {

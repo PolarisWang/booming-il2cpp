@@ -49,7 +49,7 @@ def main() -> int:
     ]
     # Standard: high-traffic assemblies, runs in `full` mode
     STANDARD_FAMILIES = [
-        "System.Collections.NonGeneric",
+        "System.Collections",
         "System.Collections.Immutable",
         "System.Linq",
         "System.Linq.Expressions",

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Security.Principal.Windows",
   "chunkSlug": "global-ns",
-  "totalMethods": 42,
+  "totalMethods": 49,
   "factMethodCount": 32,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -133,7 +133,7 @@
     {
       "index": 6,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Security.Principal.IdentityReference\u003E()",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::GetEnumerator:System.Collections.Generic.IEnumerator<System.Security.Principal.IdentityReference>()",
       "generatedMethodId": "GetEnumerator_4__0"
     },
     {
@@ -265,37 +265,37 @@
     {
       "index": 28,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Int32(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Int32(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func<System.Int32>)",
       "generatedMethodId": "RunImpersonated_5_SafeAccessTokenHandle_System_Funcint_0"
     },
     {
       "index": 29,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Int32(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Int32(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func<System.Int32>)",
       "generatedMethodId": "RunImpersonated_5_SafeAccessTokenHandle_System_Funcint_1"
     },
     {
       "index": 30,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func\u003CSystem.Threading.Tasks.Task\u003E)",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func<System.Threading.Tasks.Task>)",
       "generatedMethodId": "RunImpersonatedAsync_6_SafeAccessTokenHandle_System_FuncTask_0"
     },
     {
       "index": 31,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func\u003CSystem.Threading.Tasks.Task\u003E)",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func<System.Threading.Tasks.Task>)",
       "generatedMethodId": "RunImpersonatedAsync_6_SafeAccessTokenHandle_System_FuncTask_1"
     },
     {
       "index": 32,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func\u003CSystem.Threading.Tasks.Task\u003CSystem.Int32\u003E\u003E)",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task<System.Int32>(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func<System.Threading.Tasks.Task<System.Int32>>)",
       "generatedMethodId": "RunImpersonatedAsync_7_SafeAccessTokenHandle_System_FuncTaskint_0"
     },
     {
       "index": 33,
       "kind": "fact",
-      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func\u003CSystem.Threading.Tasks.Task\u003CSystem.Int32\u003E\u003E)",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task<System.Int32>(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func<System.Threading.Tasks.Task<System.Int32>>)",
       "generatedMethodId": "RunImpersonatedAsync_7_SafeAccessTokenHandle_System_FuncTaskint_1"
     },
     {
@@ -345,6 +345,48 @@
       "kind": "fact",
       "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.SecurityIdentifier)",
       "generatedMethodId": "IsInRole_3_SecurityIdentifier_0"
+    },
+    {
+      "index": 42,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityNotMappedException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 43,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::CopyTo:System.Void(System.Security.Principal.IdentityReference[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 44,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::GetEnumerator:System.Collections.Generic.IEnumerator`1[[System.Security.Principal.IdentityReference, System.Security.Principal.Windows, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 45,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceEnumerator::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 46,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceEnumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 47,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceEnumerator::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 48,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func`1[[System.Threading.Tasks.Task, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
     }
   ]
 }

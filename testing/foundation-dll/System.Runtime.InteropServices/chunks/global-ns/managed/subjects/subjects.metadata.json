@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Runtime.InteropServices",
   "chunkSlug": "global-ns",
-  "totalMethods": 38,
+  "totalMethods": 49,
   "factMethodCount": 29,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -173,7 +173,7 @@
     {
       "index": 14,
       "kind": "fact",
-      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetCustomAttributesData:System.Collections.Generic.IList\u003CSystem.Reflection.CustomAttributeData\u003E()",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetCustomAttributesData:System.Collections.Generic.IList<System.Reflection.CustomAttributeData>()",
       "generatedMethodId": "GetCustomAttributesData_8__0"
     },
     {
@@ -203,25 +203,25 @@
     {
       "index": 19,
       "kind": "fact",
-      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u003CSystem.Int32\u003E::ConvertToUnmanaged:System.Void*(System.Int32)",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller<System.Int32>::ConvertToUnmanaged:System.Void*(System.Int32)",
       "generatedMethodId": "ConvertToUnmanaged_0_int_0"
     },
     {
       "index": 20,
       "kind": "fact",
-      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u003CSystem.Int32\u003E::ConvertToUnmanaged:System.Void*(System.Int32)",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller<System.Int32>::ConvertToUnmanaged:System.Void*(System.Int32)",
       "generatedMethodId": "ConvertToUnmanaged_0_int_1"
     },
     {
       "index": 21,
       "kind": "fact",
-      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u003CSystem.Int32\u003E::ConvertToManaged:System.Int32(System.Void*)",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller<System.Int32>::ConvertToManaged:System.Int32(System.Void*)",
       "generatedMethodId": "ConvertToManaged_1_void_0"
     },
     {
       "index": 22,
       "kind": "fact",
-      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller\u003CSystem.Int32\u003E::Free:System.Void(System.Void*)",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller<System.Int32>::Free:System.Void(System.Void*)",
       "generatedMethodId": "Free_2_void_0"
     },
     {
@@ -233,19 +233,19 @@
     {
       "index": 24,
       "kind": "fact",
-      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsDefaultMarshaller\u003CSystem.Int32\u003E::ConvertToUnmanaged:System.Int32(System.Exception)",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsDefaultMarshaller<System.Int32>::ConvertToUnmanaged:System.Int32(System.Exception)",
       "generatedMethodId": "ConvertToUnmanaged_0_System_Exception_0"
     },
     {
       "index": 25,
       "kind": "fact",
-      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsHResultMarshaller\u003CSystem.Int32\u003E::ConvertToUnmanaged:System.Int32(System.Exception)",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsHResultMarshaller<System.Int32>::ConvertToUnmanaged:System.Int32(System.Exception)",
       "generatedMethodId": "ConvertToUnmanaged_0_System_Exception_0"
     },
     {
       "index": 26,
       "kind": "fact",
-      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsNaNMarshaller\u003CSystem.Double\u003E::ConvertToUnmanaged:System.Double(System.Exception)",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsNaNMarshaller<System.Double>::ConvertToUnmanaged:System.Double(System.Exception)",
       "generatedMethodId": "ConvertToUnmanaged_0_System_Exception_0"
     },
     {
@@ -257,25 +257,25 @@
     {
       "index": 28,
       "kind": "fact",
-      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u003CSystem.Int32\u003E::ConvertToUnmanaged:System.Void*(System.Int32)",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller<System.Int32>::ConvertToUnmanaged:System.Void*(System.Int32)",
       "generatedMethodId": "ConvertToUnmanaged_0_int_0"
     },
     {
       "index": 29,
       "kind": "fact",
-      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u003CSystem.Int32\u003E::ConvertToUnmanaged:System.Void*(System.Int32)",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller<System.Int32>::ConvertToUnmanaged:System.Void*(System.Int32)",
       "generatedMethodId": "ConvertToUnmanaged_0_int_1"
     },
     {
       "index": 30,
       "kind": "fact",
-      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u003CSystem.Int32\u003E::ConvertToManaged:System.Int32(System.Void*)",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller<System.Int32>::ConvertToManaged:System.Int32(System.Void*)",
       "generatedMethodId": "ConvertToManaged_1_void_0"
     },
     {
       "index": 31,
       "kind": "fact",
-      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller\u003CSystem.Int32\u003E::Free:System.Void(System.Void*)",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller<System.Int32>::Free:System.Void(System.Void*)",
       "generatedMethodId": "Free_2_void_0"
     },
     {
@@ -313,6 +313,72 @@
       "kind": "fact",
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.RuntimeEnvironment::GetSystemVersion:System.String()",
       "generatedMethodId": "GetSystemVersion_4__0"
+    },
+    {
+      "index": 38,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetCustomAttributesData:System.Collections.Generic.IList`1[[System.Reflection.CustomAttributeData, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 39,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComImportInteropInterfaceDetailsStrategy::GetComExposedTypeDetails:System.Runtime.InteropServices.Marshalling.IComExposedDetails(System.RuntimeTypeHandle)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 40,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComImportInteropInterfaceDetailsStrategy::GetIUnknownDerivedDetails:System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails(System.RuntimeTypeHandle)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 41,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::Free:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 42,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::FromManaged:System.Void(System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 43,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::FromUnmanaged:System.Void(System.Runtime.InteropServices.Marshalling.ComVariant)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 44,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::ToManaged:System.Object()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 45,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::ToUnmanaged:System.Runtime.InteropServices.Marshalling.ComVariant()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 46,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.DefaultIUnknownInterfaceDetailsStrategy::GetComExposedTypeDetails:System.Runtime.InteropServices.Marshalling.IComExposedDetails(System.RuntimeTypeHandle)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 47,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.DefaultIUnknownInterfaceDetailsStrategy::GetIUnknownDerivedDetails:System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails(System.RuntimeTypeHandle)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 48,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo::Deconstruct:System.Void(System.Void*&,System.Void**&)",
+      "generatedMethodId": ""
     }
   ]
 }
