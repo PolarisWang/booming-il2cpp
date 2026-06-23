@@ -213,11 +213,18 @@ internal sealed class InliningPlanner
     /// </summary>
     internal static string GetSectionAttribute(string sectionName)
     {
-        return sectionName switch
+        // GCC/Clang: __attribute__((hot))/((cold)) — optimization hints for
+        // the compiler to place hot/cold code in separate sections.
+        // MSVC does not support __attribute__ — it uses #pragma code_seg
+        // (handled via CMakeLists.txt) and emits C4235 for __attribute__.
+        // Wrap in #ifndef _MSC_VER so the generated C++ compiles on all platforms.
+        string attr = sectionName switch
         {
-            SectionHot => " __attribute__((hot))",
-            SectionCold => " __attribute__((cold))",
+            SectionHot => "__attribute__((hot))",
+            SectionCold => "__attribute__((cold))",
             _ => "",
         };
+        return string.IsNullOrEmpty(attr) ? "" :
+            $"#ifndef _MSC_VER\n {attr}\n#endif";
     }
 }
