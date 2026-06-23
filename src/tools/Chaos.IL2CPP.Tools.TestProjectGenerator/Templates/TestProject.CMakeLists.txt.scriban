@@ -126,6 +126,8 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 # /FORCE:MULTIPLE handles any future overlap when the lib catches up.
 set(CHAOS_PROFILE_GLOBALS
     "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc/gc_api.cpp"
 )
 set(CHAOS_ARRAY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/array_stubs.cpp"
@@ -153,6 +155,8 @@ set(CHAOS_INTEROP_STUBS
 )
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/object_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/string_stubs.cpp"
 )
 set(CHAOS_ENTRY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/entry_stubs.cpp"
