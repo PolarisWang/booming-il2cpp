@@ -233,6 +233,13 @@ public sealed partial class NativeAotLoweringPlanner
         }
         sb.AppendLine();
 
+        // ── Object equality helper extern declaration ──
+        // chaos_object_equals is defined in the page 0 object model section but
+        // called from page files via runtime helper shapes.  Without an extern
+        // declaration here, page TUs see C3861 (identifier not found).
+        sb.AppendLine("extern bool chaos_object_equals(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value) noexcept;");
+        sb.AppendLine();
+
         // ── VTable extern declarations (inside codegen namespace) ──
         // Types with vtables defined in the object model (page 0) need extern
         // declarations so that type-info-defs.generated.cpp (paged build) can

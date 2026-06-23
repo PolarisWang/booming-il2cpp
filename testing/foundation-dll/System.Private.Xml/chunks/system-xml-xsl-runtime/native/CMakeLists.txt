@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 20)
 # ── Compiler settings ──
 # /EHa needed for catch(...) to intercept C++ exceptions thrown by generated code.
 if(MSVC)
-  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /wd2374 /w42362 /wd2679 /MP /Gy /Gw)
+  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /MP /Gy /Gw)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
   # ── Precompiled header (PCH) ──────────────────────────────────
@@ -33,7 +33,7 @@ endif()
 
 # ── Config tier ──
 if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
-  set(CHAOS_IL2CPP_CONFIG_TIER "check")
+  set(CHAOS_IL2CPP_CONFIG_TIER "profile")
 endif()
 
 # ── Hephaestus Lib: pre-compiled framework cache ──
@@ -52,20 +52,20 @@ if(DEFINED CHAOS_HEPHAESTUS_DIR AND EXISTS "${CHAOS_HEPHAESTUS_DIR}")
   endif()
 endif()
 if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_PROFILE)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=2)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
   add_compile_definitions(CHAOS_IL2CPP_PROFILE_ENABLED=1)
 elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_PROFILE)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=2)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
 else()
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_PROFILE)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=2)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/test-only.h")
 endif()
 
@@ -82,9 +82,9 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.IO.Compression.ZipFile/chunks/global-ns/native/codegen")
+set(CHAOS_SDK_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Private.Xml/chunks/system-xml-xsl-runtime/native/codegen")
 set(CHAOS_PROJECT_ROOT "D:/agent/chaos-il2cpp")
-set(CHAOS_CODEGEN_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.IO.Compression.ZipFile/chunks/global-ns/native/codegen")
+set(CHAOS_CODEGEN_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Private.Xml/chunks/system-xml-xsl-runtime/native/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
@@ -99,7 +99,6 @@ file(GLOB CHAOS_CODEGEN_PER_ASM_CPP
     "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.generated.cpp"
     "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.generated.page*.cpp"
     "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.page-*.cpp"
-    "${CHAOS_CODEGEN_DIR}/generated/*/chaos_generated_module.cpp"
 )
 file(GLOB CHAOS_CODEGEN_NATIVE_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
