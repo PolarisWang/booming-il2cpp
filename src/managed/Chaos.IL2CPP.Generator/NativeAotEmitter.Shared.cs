@@ -573,33 +573,26 @@ public sealed partial class NativeAotEmitter
     private static void AddExternalRuntimeStubs(StringBuilder sb)
     {
         string text = sb.ToString();
+        // Collect all chaos_external_runtime_* call sites.
         var callRx = new Regex(@"\b(chaos_external_runtime_\w+)\(");
-        // Match declarations/definitions: extern "C" / static inline / void return-type
-        var declRx = new Regex(@"(?:extern|static inline|\bvoid)\b.*\bchaos_external_runtime_\w+\s*\(", RegexOptions.Multiline);
         var calls = callRx.Matches(text);
         if (calls.Count == 0) return;
         var missing = new HashSet<string>();
         foreach (Match m in calls) missing.Add(m.Groups[1].Value);
+
+        // Remove any that already have an extern declaration in the file.
+        // Match only at the START of a line to avoid matching call sites.
+        var declRx = new Regex(@"^extern\s+""C"".*\bchaos_external_runtime_\w+\s*\(", RegexOptions.Multiline);
         foreach (Match m in declRx.Matches(text))
         {
             string sv = m.Value;
-            // Skip declarations with empty parens "()" — they are stubs with
-            // wrong arg count and need to be replaced by corrected declarations.
             int nextIdx = m.Index + m.Length;
-            if (nextIdx < text.Length && text[nextIdx] == ')') continue;
-            // Also count params in declaration — if they differ from call site, skip it
-            int closeParen = text.IndexOf(')', nextIdx);
-            if (closeParen > nextIdx)
-            {
-                string declArgs = text.Substring(nextIdx, closeParen - nextIdx);
-                int declParamCount = declArgs.Length > 0 ? declArgs.Split(',').Length : 0;
-                // Count args at call site (first non-declaration call)
-                // If declaration param count != call site arg count, skip it
-            }
+            // Skip declarations with () — wrong arg count stubs
             if (nextIdx < text.Length && text[nextIdx] == ')') continue;
             foreach (var s in missing.ToList())
                 if (sv.Contains(s)) missing.Remove(s);
         }
+
         if (missing.Count == 0) return;
         var stub = new StringBuilder();
         stub.AppendLine("// ── External runtime stubs (post-emission) ──");
