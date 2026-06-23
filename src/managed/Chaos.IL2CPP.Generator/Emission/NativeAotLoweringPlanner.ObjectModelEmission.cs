@@ -1620,6 +1620,35 @@ public sealed partial class NativeAotLoweringPlanner
             // handled indirectly via callee-based type discovery above.
         }
 
+        // ── Supplement: add types from reflection metadata ─────────────────────
+        // Subject-only IR lowering (commit 3be973040) only includes instructions
+        // for subject methods + direct callees.  Nested types like QueueEnumerator
+        // (referenced inside e.g. Queue.Clear's inlined body) have no instructions
+        // in the IR, so the post-scan above cannot discover them.  Fall back to
+        // _reflectionMemberSupport.FieldEntries which has complete type field info
+        // for ALL types in the assembly, not just those with IR instructions.
+        if (_reflectionMemberSupport.FieldEntries is { Count: > 0 })
+        {
+            foreach (var fe in _reflectionMemberSupport.FieldEntries)
+            {
+                if (string.IsNullOrEmpty(fe.DeclaringTypeSubjectId))
+                    continue;
+                string declType = fe.DeclaringTypeSubjectId;
+                if (declType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+                    continue;
+                if (!_allEmittedTypeSubjectIds.Contains(declType))
+                {
+                    _allEmittedTypeSubjectIds.Add(declType);
+                    // Track as reference type so BuildTypeDeclarationsCode emits
+                    // a struct definition (not just forward declaration).
+                    // The field supplement at line ~558+ already populates
+                    // fieldsByDeclaringType from reflection metadata.
+                    if (!referenceTypeSubjectIds.Contains(declType))
+                        TrackReferenceType(declType, null);
+                }
+            }
+        }
+
         foreach (var m in _methodsBySubjectId.Values)
         {
             if (!m.IsStatic &&
