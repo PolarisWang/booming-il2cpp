@@ -1668,19 +1668,61 @@ public sealed partial class NativeAotLoweringPlanner
                 !declType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
                 _trackTypeRef(declType);
 
-            // 2. Return type
-            if (m.ReturnAbi?.TypeSubjectId is { Length: > 0 } retType &&
-                !retType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
-                _trackTypeRef(retType);
+            // 2. Return type: prefer ABI TypeSubjectId, fall back to raw ReturnType
+            // string when subject-only lowering left TypeSubjectId null.
+            string? retTypeId = m.ReturnAbi?.TypeSubjectId;
+            if (string.IsNullOrEmpty(retTypeId))
+                retTypeId = m.ReturnType; // "System.Threading.Tasks.ValueTask" or "!!0"
+            if (retTypeId is { Length: > 0 } &&
+                !retTypeId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
+                !retTypeId.StartsWith("!!", StringComparison.Ordinal) && // skip generic params
+                !retTypeId.StartsWith("!", StringComparison.Ordinal))
+                _trackTypeRef(retTypeId);
 
-            // 3. Parameter types
+            // 3. Parameter types: prefer ABI TypeSubjectId, fall back to raw
+            // ReturnType from _allManagedMethods for the declaring type SubjectId.
             if (m.ParameterAbis is { Count: > 0 })
-                foreach (var p in m.ParameterAbis)
-                    if (p?.TypeSubjectId is { Length: > 0 } pType &&
-                        !pType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
-                        _trackTypeRef(pType);
+                for (int paramIdx = 0; paramIdx < m.ParameterAbis.Count; paramIdx++)
+                {
+                    var p = m.ParameterAbis[paramIdx];
+                    string? pTypeId = p?.TypeSubjectId;
+                    if (string.IsNullOrEmpty(pTypeId) &&
+                        !string.IsNullOrEmpty(m.SubjectId) &&
+                        _allManagedMethods is not null &&
+                        _allManagedMethods.TryGetValue(m.SubjectId, out var mm))
+                    {
+                        if (paramIdx < mm.Parameters.Count)
+                            pTypeId = mm.Parameters[paramIdx].Type;
+                    }
+                    if (pTypeId is { Length: > 0 } &&
+                        !pTypeId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
+                        !pTypeId.StartsWith("!!", StringComparison.Ordinal) &&
+                        !pTypeId.StartsWith("!", StringComparison.Ordinal))
+                        _trackTypeRef(pTypeId);
+                }
 
-            // 4. Exception catch types
+            // 4. Also scan _allManagedMethods for concrete type strings in ReturnType
+            // and parameter types of ANY method (not just those in _methodsBySubjectId).
+            // Subject-only lowering drops many methods entirely, but _allManagedMethods
+            // has the full closure with original type strings that may include concrete
+            // types (e.g. "System.Threading.Tasks.ValueTask" instead of null).
+            if (_allManagedMethods is not null && !string.IsNullOrEmpty(m.SubjectId) &&
+                _allManagedMethods.TryGetValue(m.SubjectId, out var managedM))
+            {
+                string? rt = managedM.ReturnType;
+                if (rt is { Length: > 0 } && !rt.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
+                    !rt.StartsWith("!!", StringComparison.Ordinal) && !rt.StartsWith("!", StringComparison.Ordinal))
+                    _trackTypeRef(rt);
+                foreach (var param in managedM.Parameters)
+                {
+                    string? pt = param.Type;
+                    if (pt is { Length: > 0 } && !pt.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
+                        !pt.StartsWith("!!", StringComparison.Ordinal) && !pt.StartsWith("!", StringComparison.Ordinal))
+                        _trackTypeRef(pt);
+                }
+            }
+
+            // 5. Exception catch types
             if (m.ExceptionRegions is { Count: > 0 })
                 foreach (var e in m.ExceptionRegions)
                     if (e?.CatchTypeSubjectId is { Length: > 0 } catchType &&
