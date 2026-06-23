@@ -399,6 +399,38 @@ public sealed partial class NativeAotLoweringPlanner
                 }
                 if (targetReference.Kind != AotCoreIrReferenceKind.Field)
                 {
+                    // ── Callee-based type discovery ────────────────────────────────────
+                    // Method calls on cross-assembly types (e.g. Queue.SynchronizedQueue
+                    // constructor) encode the declaring type in instruction.Callee as
+                    // "Assembly/Type::Method:RetType()".  The main scanning loop above
+                    // catches types via TargetReference (Type/Field references), but
+                    // nested types called via method invocation only appear in the callee
+                    // string.  Without this, nested types get only a forward declaration
+                    // (struct X;) but no struct body, causing C2027/C2061 when page files
+                    // access fields via reinterpret_cast.
+                    if (instruction.Callee is { Length: > 0 })
+                    {
+                        string callee = instruction.Callee;
+                        int slashIdx = callee.IndexOf('/');
+                        if (slashIdx > 0)
+                        {
+                            string asmPart = callee.Substring(0, slashIdx);
+                            if (!string.Equals(asmPart, "CombinedSubjects", StringComparison.Ordinal))
+                            {
+                                int colonIdx = callee.IndexOf("::", slashIdx + 1, StringComparison.Ordinal);
+                                if (colonIdx > slashIdx)
+                                {
+                                    string typePart = callee.Substring(slashIdx + 1, colonIdx - slashIdx - 1);
+                                    string typeSubjectId = asmPart + "/" + typePart;
+                                    if (!referenceTypeSubjectIds.Contains(typeSubjectId) &&
+                                        !valueTypeSubjectIds.Contains(typeSubjectId))
+                                    {
+                                        TrackReferenceType(typeSubjectId, null);
+                                    }
+                                }
+                            }
+                        }
+                    }
                     continue;
                 }
                 string requiredDeclaringTypeSubjectId = GetRequiredDeclaringTypeSubjectId(targetReference);

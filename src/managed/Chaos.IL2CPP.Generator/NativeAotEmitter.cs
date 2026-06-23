@@ -383,11 +383,7 @@ public sealed partial class NativeAotEmitter
         sb.Append("    void*     args_buf,\n");
         sb.Append("    void*     ret_buf) noexcept;\n");
         sb.Append("\n#pragma warning(push)\n");
-<<<<<<< HEAD
         sb.Append("#pragma warning(disable: 4065 4244 4172 4789 4335)\n");
-=======
-        sb.Append("#pragma warning(disable: 4065 4244)\n");
->>>>>>> 1c249777ad6ff87b23760942251018553d71f7dd
         sb.Append("#ifdef __GNUC__\n");
         sb.Append("#pragma GCC diagnostic push\n");
         sb.Append("#pragma GCC diagnostic ignored \"-Wunused-variable\"\n");
