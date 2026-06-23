@@ -188,9 +188,11 @@ public sealed partial class NativeAotLoweringPlanner
     /// <summary>
     /// Max degree of parallelism for method emission. Defaults to
     /// Environment.ProcessorCount - 2 (reserve cores for GC/OS).
-    /// Set via CLI --parallelism N. Minimum 1.
+    /// Set via CLI --parallelism N. Minimum 1. Capped at 4 to prevent
+    /// stack overflow from excessive concurrent Scriban template rendering
+    /// and StructuredIR recovery on ThreadPool threads (1 MB default stack).
     /// </summary>
-    internal int _maxParallelism = Math.Max(1, Environment.ProcessorCount - 2);
+    internal int _maxParallelism = Math.Max(1, Math.Min(4, Environment.ProcessorCount - 2));
 
     /// <summary>
     /// Static field declarations (subjectId → fieldTypeSubjectId) captured during

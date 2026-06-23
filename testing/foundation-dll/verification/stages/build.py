@@ -77,6 +77,11 @@ static int RunProfileMode() {
 _PROFILE_MODE_CLI = '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\n'
 
 
+# -- BOUNDARY_OVERRIDE: issues/NNN --
+# Reason: TPG Scriban template lacks --profile CLI support even when native
+# infrastructure is compiled with CHAOS_IL2CPP_CONFIG_TIER=profile. Lower cost
+# to patch post-generation than to make the template profile-aware.
+# Expires: 2026-12-31
 def _inject_profile_mode(native_dir: Path) -> None:
     """Inject --profile mode into runtime-entry.cpp after TPG generation.
 

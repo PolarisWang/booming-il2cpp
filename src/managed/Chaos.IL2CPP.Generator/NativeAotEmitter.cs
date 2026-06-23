@@ -218,25 +218,15 @@ public sealed partial class NativeAotEmitter
         var metadataRegistrationPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.MetadataRegistration);
         var supplementalMetadataTemplatePath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.SupplementalMetadataTemplate);
 
-        AotCoreIrArtifact? aotCoreIr = null;
-        ManagedClosureManifestArtifact? closureManifest = null;
-        MetadataRegistrationArtifact? metadataRegistration = null;
-        SupplementalMetadataTemplateArtifact? supplementalMetadataTemplate = null;
-        Exception? loadException = null;
-        var loadLock = new object();
+        // Load sequentially — parallel loading (Parallel.Invoke) uses ThreadPool
+        // threads with limited stack (1 MB default) and caused STATUS_STACK_OVERFLOW
+        // during JSON deserialization for large closure artifacts.
+        var aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath);
+        var closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath);
+        var metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath);
+        var supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath);
 
-        System.Threading.Tasks.Parallel.Invoke(
-            () => { try { aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
-            () => { try { closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
-            () => { try { metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
-            () => { try { supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } });
-
-        if (loadException is not null)
-        {
-            throw new InvalidOperationException("failed to load one or more required closure artifacts", loadException);
-        }
-
-        return (aotCoreIr!, closureManifest!, metadataRegistration!, supplementalMetadataTemplate!);
+        return (aotCoreIr, closureManifest, metadataRegistration, supplementalMetadataTemplate);
     }
 
     private static string BuildGeneratedTranslationUnit(NativeAotTemplateModel templateModel)
