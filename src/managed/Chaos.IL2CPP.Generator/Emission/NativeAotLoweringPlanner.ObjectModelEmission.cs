@@ -1691,21 +1691,16 @@ public sealed partial class NativeAotLoweringPlanner
         {
             if (!_allEmittedTypeSubjectIds.Contains(typeSubjectId))
                 _allEmittedTypeSubjectIds.Add(typeSubjectId);
-            // Ensure struct definition (not just forward decl) is emitted
-            if (!referenceTypeSubjectIds.Contains(typeSubjectId))
-            {
-                // Try reference type first; if value type it goes to valueTypeSubjectIds
-                if (!valueTypeSubjectIds.Contains(typeSubjectId))
-                {
-                    // An ABI slot type could be a value type (struct) or reference type.
-                    // We don't have shape info here, so add to referenceTypeSubjectIds
-                    // which generates a struct definition. Value type ABI slots are
-                    // already tracked by TrackAbiSlotCarrier in the main scanning loop.
-                    referenceTypeSubjectIds.Add(typeSubjectId);
-                }
-            }
             if (!hashSet3.Contains(typeSubjectId))
                 hashSet3.Add(typeSubjectId);
+            // Use TrackReferenceType which resolves base type chains (Queue+QueueEnumerator
+            // -> System.Object) and propagates interfaces. Direct referenceTypeSubjectIds.Add
+            // only adds the leaf type, which produces incomplete struct definitions.
+            if (!referenceTypeSubjectIds.Contains(typeSubjectId) &&
+                !valueTypeSubjectIds.Contains(typeSubjectId))
+            {
+                TrackReferenceType(typeSubjectId, null);
+            }
         }
 
         foreach (var m in _methodsBySubjectId.Values)
