@@ -108,12 +108,12 @@ def run_coverage_audit(ctx: ChunkContext, stages: dict[str, StageResult]) -> Sta
         # ── Namespace-level coverage analysis ──
         # Compute per-namespace coverage to detect gaps that chunk-level aggregate
         # misses.  Exclude known AOT-intrinsic types (Reflection.Emit, COM interop)
-        # which the ATG cannot probe.
+        # which the ATG cannot probe.  Keep prefixes specific to avoid accidentally
+        # excluding testable methods (e.g. "System.Resources.Resource" would also
+        # exclude ResourceManager which IS testable).
         _INTRINSIC_PREFIXES = (
-            "System.Reflection.Emit",
+            "System.Reflection.Emit.",
             "System.Runtime.InteropServices.ComWrappers",
-            "System.Runtime.CompilerServices.Unsafe",
-            "System.Resources.Resource",
         )
 
         def _ns(mid: str) -> str:

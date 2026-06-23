@@ -576,9 +576,9 @@ public sealed partial class NativeAotLoweringPlanner
                     continue;
                 // Construct the field SubjectId as the codegen expects it:
                 //   {DeclaringTypeSubjectId}::{FieldName}:{FieldTypeId}()
-                // We use System.Object as a generic field type since the actual
-                // type is resolved from metadata and isn't needed for struct layout
-                // (all managed reference fields are pointer-sized).
+                // We use System.Object as a fallback.  ParseFieldTypeFromSubjectId
+                // extracts the actual type (e.g. System.Int32) to avoid wrong struct
+                // layout for value-type fields.
                 string fieldSubjectId = $"{fe.DeclaringTypeSubjectId}::{fe.FieldName}:System.Object()";
                 if (!fieldsByDeclaringType.TryGetValue(fe.DeclaringTypeSubjectId, out var flist))
                 {
@@ -587,7 +587,14 @@ public sealed partial class NativeAotLoweringPlanner
                 }
                 flist.Add(fieldSubjectId);
                 if (!fieldTypeMap.ContainsKey(fieldSubjectId))
-                    fieldTypeMap[fieldSubjectId] = null;
+                {
+                    // Try to extract the field type from the subjectId format:
+                    //   {DeclaringType}::{FieldName}:{FieldType}()
+                    // For value-type fields (int, long, struct), using INTPTR would
+                    // produce wrong struct layout offsets.
+                    string? parsedType = ParseFieldTypeFromSubjectId(fieldSubjectId);
+                    fieldTypeMap[fieldSubjectId] = parsedType;
+                }
             }
             // Re-sort each type's field list after supplements
             foreach (var list in fieldsByDeclaringType.Values)
@@ -1745,6 +1752,18 @@ public sealed partial class NativeAotLoweringPlanner
             "Struct" => 11,
             _ => 0,
         };
+    }
+
+    private static string? ParseFieldTypeFromSubjectId(string fieldSubjectId)
+    {
+        // Field subjectId format: {DeclaringType}::{FieldName}:{FieldType}()
+        // Extract the FieldType portion between the last ':' and '()'.
+        int colon = fieldSubjectId.LastIndexOf(':');
+        if (colon < 0) return null;
+        int paren = fieldSubjectId.IndexOf("()", colon, StringComparison.Ordinal);
+        if (paren < 0) return null;
+        string typeName = fieldSubjectId.Substring(colon + 1, paren - colon - 1);
+        return string.IsNullOrEmpty(typeName) ? null : typeName;
     }
 
     private static string MapFieldTypeToCppType(string? fieldTypeSubjectId)
