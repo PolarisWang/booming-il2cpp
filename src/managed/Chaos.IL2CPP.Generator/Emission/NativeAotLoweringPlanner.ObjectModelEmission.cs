@@ -1548,7 +1548,34 @@ public sealed partial class NativeAotLoweringPlanner
                 var tr = instr.TargetReference;
                 if (tr != null && !string.IsNullOrEmpty(tr.SubjectId))
                 {
-                    string tid = tr.SubjectId;
+                    // For Field kind references, extract the declaring type (not the field
+                    // SubjectId itself) — the generated page code uses reinterpret_cast on
+                    // the declaring type, and the header needs a forward declaration for it.
+                    // Nested types like Queue+QueueEnumerator are added here when accessed
+                    // via ldfld/stfld instructions on instances of those types.
+                    string tid;
+                    if (tr.Kind == AotCoreIrReferenceKind.Field && !string.IsNullOrEmpty(tr.DeclaringTypeSubjectId))
+                    {
+                        tid = tr.DeclaringTypeSubjectId;
+                    }
+                    else
+                    {
+                        tid = tr.SubjectId;
+                        // Also track DeclaringTypeSubjectId if available (catches cases
+                        // where the instruction references a field by full SubjectId but
+                        // the declaring type's nested type format differs from Callee).
+                        if (!string.IsNullOrEmpty(tr.DeclaringTypeSubjectId) &&
+                            !tr.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+                        {
+                            string declaringTypeId = tr.DeclaringTypeSubjectId;
+                            if (!_allEmittedTypeSubjectIds.Contains(declaringTypeId))
+                            {
+                                _allEmittedTypeSubjectIds.Add(declaringTypeId);
+                                if (!hashSet3.Contains(declaringTypeId))
+                                    hashSet3.Add(declaringTypeId);
+                            }
+                        }
+                    }
                     if (!_allEmittedTypeSubjectIds.Contains(tid) &&
                         !tid.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
                     {

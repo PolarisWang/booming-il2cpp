@@ -82,9 +82,9 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Linq/chunks/global-ns/native/codegen")
+set(CHAOS_SDK_DIR "codegen")
 set(CHAOS_PROJECT_ROOT "../../../../../..")
-set(CHAOS_CODEGEN_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Linq/chunks/global-ns/native/codegen")
+set(CHAOS_CODEGEN_DIR "codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
@@ -134,6 +134,7 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_ChaosFindExternalTypeDescByStableId.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_patch_loader.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/object_stubs.cpp"
 )
 
 # Runtime stubs are provided by libchaos_runtime_core.a (built from source
