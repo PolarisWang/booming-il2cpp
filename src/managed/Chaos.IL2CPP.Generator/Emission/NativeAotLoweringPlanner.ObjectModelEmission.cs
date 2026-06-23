@@ -1649,6 +1649,65 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        // ── Supplement: collect types from ALL method ABI slots ─────────────────
+        // Subject-only IR lowering (3be973040) only includes instructions for
+        // subject methods + direct callees.  Non-subject methods have no
+        // instructions in the IR, so their operand-based type discovery is lost.
+        // However, their return types, parameter types, exception catch types,
+        // and declaring types are still available via ABI metadata and are needed
+        // for complete struct definitions in the shared header.  Without this scan,
+        // nested types like Queue+QueueEnumerator that are referenced only through
+        // non-subject methods (e.g. Queue.GetEnumerator returns QueueEnumerator)
+        // have no forward declarations, causing C2061/C2039 in the generated code.
+        foreach (var m in _methodsBySubjectId.Values)
+        {
+            if (m.Identity is null) continue;
+
+            // 1. Declaring type (the type that owns this method)
+            if (m.Identity.DeclaringTypeSubjectId is { Length: > 0 } declType &&
+                !declType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+                _trackTypeRef(declType);
+
+            // 2. Return type
+            if (m.ReturnAbi?.TypeSubjectId is { Length: > 0 } retType &&
+                !retType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+                _trackTypeRef(retType);
+
+            // 3. Parameter types
+            if (m.ParameterAbis is { Count: > 0 })
+                foreach (var p in m.ParameterAbis)
+                    if (p?.TypeSubjectId is { Length: > 0 } pType &&
+                        !pType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+                        _trackTypeRef(pType);
+
+            // 4. Exception catch types
+            if (m.ExceptionRegions is { Count: > 0 })
+                foreach (var e in m.ExceptionRegions)
+                    if (e?.CatchTypeSubjectId is { Length: > 0 } catchType &&
+                        !catchType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+                        _trackTypeRef(catchType);
+        }
+        void _trackTypeRef(string typeSubjectId)
+        {
+            if (!_allEmittedTypeSubjectIds.Contains(typeSubjectId))
+                _allEmittedTypeSubjectIds.Add(typeSubjectId);
+            // Ensure struct definition (not just forward decl) is emitted
+            if (!referenceTypeSubjectIds.Contains(typeSubjectId))
+            {
+                // Try reference type first; if value type it goes to valueTypeSubjectIds
+                if (!valueTypeSubjectIds.Contains(typeSubjectId))
+                {
+                    // An ABI slot type could be a value type (struct) or reference type.
+                    // We don't have shape info here, so add to referenceTypeSubjectIds
+                    // which generates a struct definition. Value type ABI slots are
+                    // already tracked by TrackAbiSlotCarrier in the main scanning loop.
+                    referenceTypeSubjectIds.Add(typeSubjectId);
+                }
+            }
+            if (!hashSet3.Contains(typeSubjectId))
+                hashSet3.Add(typeSubjectId);
+        }
+
         foreach (var m in _methodsBySubjectId.Values)
         {
             if (!m.IsStatic &&
