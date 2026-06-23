@@ -17,6 +17,7 @@ internal sealed class ProjectModelBuilder
         int patchDataSize,
         string patchDataHostClass,
         string projectName,
+        string nativeDir,
         DateTime? generatedAt = null,
         string? projectRoot = null,
         string? codegenDir = null,
@@ -39,7 +40,7 @@ internal sealed class ProjectModelBuilder
         model["patch_data_size"] = patchDataSize;
         model["patch_data_host_class"] = patchDataHostClass;
         model["sdk_dir"] = NormalizePath(sdkDir ?? "${CMAKE_CURRENT_SOURCE_DIR}/chaos-sdk");
-        model["project_root"] = NormalizePath(projectRoot ?? "");
+        model["project_root"] = NormalizePath(GetRelativePath(nativeDir, projectRoot ?? ""));
         model["codegen_dir"] = NormalizePath(codegenDir ?? "${CMAKE_CURRENT_SOURCE_DIR}/codegen");
         model["generated_at"] = (generatedAt ?? DateTime.UtcNow).ToString("O");
 
@@ -255,6 +256,21 @@ internal sealed class ProjectModelBuilder
     /// Normalize Windows backslashes to forward slashes for CMake compatibility.
     /// CMake interprets \ as an escape character in strings, so \a, \c, etc. are errors.
     /// </summary>
+    private static string GetRelativePath(string fromPath, string toPath)
+    {
+        if (string.IsNullOrEmpty(toPath))
+            return "";
+        try
+        {
+            return Path.GetRelativePath(fromPath, toPath).Replace('\\', '/');
+        }
+        catch
+        {
+            // Fallback to absolute path if GetRelativePath fails (different drives, etc.)
+            return toPath.Replace('\\', '/');
+        }
+    }
+
     private static string NormalizePath(string path)
     {
         return path.Replace('\\', '/');
