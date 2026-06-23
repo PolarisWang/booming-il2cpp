@@ -38,7 +38,11 @@ public sealed partial class NativeAotLoweringPlanner
     /// Maximum recursion depth for EmitStructuredIRNode. When the structured IR
     /// tree exceeds this depth, the method falls back to PC-dispatch (linear)
     /// emission instead of overflowing the thread stack with recursive calls.
-    /// 10,000 levels × ~200 bytes/frame ≈ 2 MB, well within an 8 MB worker stack.
+    /// 10,000 levels × ~200 bytes/frame ≈ 2 MB, which approaches the default
+    /// 1 MB ThreadPool stack on Windows. The _maxParallelism cap (≤4) and
+    /// sequential JSON loading keep concurrent StructuredIR threads bounded.
+    /// TryEnsureSufficientExecutionStack() at depth 500 provides additional
+    /// runtime protection against near-overflow conditions.
     /// </summary>
     private const int MaxStructuredIRDepth = 10000;
 

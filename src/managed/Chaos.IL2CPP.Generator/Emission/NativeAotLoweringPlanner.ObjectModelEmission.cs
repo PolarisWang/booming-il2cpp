@@ -1428,11 +1428,33 @@ public sealed partial class NativeAotLoweringPlanner
                 _staticFieldDeclarations.TryAdd(kvp.Key, kvp.Value);
         }
         _emittedValueTypeSubjectIds = new HashSet<string>(valueTypeSubjectIds, StringComparer.Ordinal);
+        // Merge with value type symbols discovered by BuildGeneratedModuleModel's
+        // ABI slot scan and declaration-string scan (GeneratedModule.cs:205-318).
+        // Without this, value types referenced only via
+        // chaos_resolve_managed_value_pointer<T> (not via type metadata) would
+        // be missing from the shared header, causing C2065/C2672.
+        if (_emittedValueTypeSubjectIdsFromAbi is { Count: > 0 })
+            _emittedValueTypeSubjectIds.UnionWith(_emittedValueTypeSubjectIdsFromAbi);
         // Capture emitted type subject IDs for Phase 0 ModuleRegistry Tier 0 arrays
         _allEmittedTypeSubjectIds = new HashSet<string>(referenceTypeSubjectIds, StringComparer.Ordinal);
         _allEmittedTypeSubjectIds.UnionWith(interfaceTypeSubjectIds);
         _allEmittedTypeSubjectIds.UnionWith(valueTypeSubjectIds);
         _allEmittedTypeSubjectIds.UnionWith(hashSet3);
+        // Walk inheritance chains to ensure base types are included in
+        // _allEmittedTypeSubjectIds.  Without this, types like DataStorage
+        // (base of UInt16Storage) may be omitted from forward declarations
+        // in the shared header, causing C2061 when generated code does
+        // reinterpret_cast<chaos_type_DataStorage*>(ptr).
+        var _seenBaseTypes = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var _typeId in referenceTypeSubjectIds)
+        {
+            string? _current = _typeId;
+            while (referenceTypeBaseSubjectIds.TryGetValue(_current, out _current) &&
+                   !string.IsNullOrEmpty(_current) && _seenBaseTypes.Add(_current))
+            {
+                _allEmittedTypeSubjectIds.Add(_current);
+            }
+        }
         // Post-scan: ensure delegate types detected by CollectReachableDelegateTypeSubjectIds
         // (which has broader detection than the inline callvirt Invoke scanner) are tracked.
         // Without this, delegate types like System.Action used via Assert.Throws(Action) may
