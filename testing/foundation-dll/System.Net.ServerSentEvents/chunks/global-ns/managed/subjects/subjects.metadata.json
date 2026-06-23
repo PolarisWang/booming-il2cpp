@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Net.ServerSentEvents",
   "chunkSlug": "global-ns",
-  "totalMethods": 6,
+  "totalMethods": 15,
   "factMethodCount": 4,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -25,38 +25,92 @@
     {
       "index": 0,
       "kind": "fact",
-      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Net.ServerSentEvents.SseItem\u003CSystem.String\u003E\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable<System.Net.ServerSentEvents.SseItem<System.String>>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_0_IAsyncEnumerableSseItemstring_Stream_CancellationToken_0"
     },
     {
       "index": 1,
       "kind": "fact",
-      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Net.ServerSentEvents.SseItem\u003CSystem.String\u003E\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable<System.Net.ServerSentEvents.SseItem<System.String>>,System.IO.Stream,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_0_IAsyncEnumerableSseItemstring_Stream_CancellationToken_1"
     },
     {
       "index": 2,
       "kind": "fact",
-      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Net.ServerSentEvents.SseItem\u003CSystem.Int32\u003E\u003E,System.IO.Stream,System.Action\u003CSystem.Net.ServerSentEvents.SseItem\u003CSystem.Int32\u003E,System.Buffers.IBufferWriter\u003CSystem.Byte\u003E\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable<System.Net.ServerSentEvents.SseItem<System.Int32>>,System.IO.Stream,System.Action<System.Net.ServerSentEvents.SseItem<System.Int32>,System.Buffers.IBufferWriter<System.Byte>>,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_1_IAsyncEnumerableSseItemint_Stream_System_ActionSseItemintIBufferWriterbyte_CancellationToken_0"
     },
     {
       "index": 3,
       "kind": "fact",
-      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSystem.Net.ServerSentEvents.SseItem\u003CSystem.Int32\u003E\u003E,System.IO.Stream,System.Action\u003CSystem.Net.ServerSentEvents.SseItem\u003CSystem.Int32\u003E,System.Buffers.IBufferWriter\u003CSystem.Byte\u003E\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable<System.Net.ServerSentEvents.SseItem<System.Int32>>,System.IO.Stream,System.Action<System.Net.ServerSentEvents.SseItem<System.Int32>,System.Buffers.IBufferWriter<System.Byte>>,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_1_IAsyncEnumerableSseItemint_Stream_System_ActionSseItemintIBufferWriterbyte_CancellationToken_1"
     },
     {
       "index": 4,
       "kind": "fact",
-      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser\u003CSystem.Int32\u003E::Enumerate:System.Collections.Generic.IEnumerable\u003CSystem.Net.ServerSentEvents.SseItem\u003CSystem.Int32\u003E\u003E()",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser<System.Int32>::Enumerate:System.Collections.Generic.IEnumerable<System.Net.ServerSentEvents.SseItem<System.Int32>>()",
       "generatedMethodId": "Enumerate_0__0"
     },
     {
       "index": 5,
       "kind": "fact",
-      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser\u003CSystem.Int32\u003E::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSystem.Net.ServerSentEvents.SseItem\u003CSystem.Int32\u003E\u003E(System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser<System.Int32>::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable<System.Net.ServerSentEvents.SseItem<System.Int32>>(System.Threading.CancellationToken)",
       "generatedMethodId": "EnumerateAsync_1_CancellationToken_0"
+    },
+    {
+      "index": 6,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::Commit:System.Void(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 7,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::Discard:System.Void(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 8,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 9,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::EnsureAvailableSpace:System.Void(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 10,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::Advance:System.Void(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 11,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 12,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::GetMemory:System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 13,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::GetSpan:System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 14,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::Reset:System.Void()",
+      "generatedMethodId": ""
     }
   ]
 }

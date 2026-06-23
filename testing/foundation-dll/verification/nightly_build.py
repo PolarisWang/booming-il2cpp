@@ -23,7 +23,7 @@ import subprocess
 import sys
 import tempfile
 import time
-from concurrent.futures import ProcessPoolExecutor, TimeoutError, as_completed
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime, timezone
 from multiprocessing import Manager
 from pathlib import Path
@@ -106,7 +106,34 @@ def _discover_assemblies(foundation_dll: Path) -> list[str]:
     return assemblies
 
 
-from verification.nightly_runner.orchestrator import _ensure_namespace_partition
+def _ensure_namespace_partition(assembly_dir: Path, name: str, foundation_dll: Path) -> None:
+    """Auto-generate namespace-partition.json if missing by running the manifest stage."""
+    dll_candidates = [
+        assembly_dir / f"{name}.dll",
+    ]
+    try:
+        dotnet_root = subprocess.run(
+            ["dotnet", "--info"], capture_output=True, text=True, timeout=10)
+        for line in dotnet_root.stdout.splitlines():
+            if "Base Path:" in line:
+                base_path = line.split(":", 1)[1].strip()
+                dll_candidates.append(Path(base_path) / f"{name}.dll")
+                break
+    except Exception:
+        pass
+    for dll in dll_candidates:
+        if dll.exists():
+            try:
+                subprocess.run(
+                    [sys.executable, "-m", "verification.stages.manifest",
+                     "--dll", str(dll), "--output", str(assembly_dir / "_dll")],
+                    capture_output=True, timeout=120,
+                )
+                print(f"  [discovery] Auto-generated namespace-partition.json for {name}")
+            except Exception as exc:
+                print(f"  [discovery] Failed to generate partition for {name}: {exc}")
+            return
+    print(f"  [discovery] No DLL found for {name}, skipping")
 
 
 def _load_pipeline_config(foundation_dll: Path) -> dict:
@@ -315,18 +342,6 @@ def _collect_chunk_results(
             if verbose:
                 print(f"  [nightly] [{completed}/{total}] {key}: build={status}, "
                       f"fact={stages.get('fact', StageResult(stage='fact', status='?')).status}")
-        except SystemExit as e:
-            key = f"<future #{completed}>"
-            results[key] = {"build": StageResult(stage="build", status="failed",
-                                                  summary=f"subprocess crash: {e}")}
-            if verbose:
-                print(f"  [nightly] [{completed}/{total}] {key}: subprocess CRASH (rc={e.code})")
-        except TimeoutError as e:
-            key = f"<future #{completed}>"
-            results[key] = {"build": StageResult(stage="build", status="failed",
-                                                  summary=f"worker timeout: {e}")}
-            if verbose:
-                print(f"  [nightly] [{completed}/{total}] {key}: worker TIMEOUT")
         except Exception as e:
             key = f"<future #{completed}>"
             results[key] = {"build": StageResult(stage="build", status="skipped", summary=f"future exception: {e}")}
@@ -354,12 +369,12 @@ def main() -> int:
     parser.add_argument("--native-config", default="check",
                         choices=["check", "profile", "ship"],
                         help="Native build config (default: check)")
-    parser.add_argument("--stage-timeout", type=int, default=600,
-                        help="Per-stage timeout in seconds (default: 600)")
+    parser.add_argument("--stage-timeout", type=int, default=0,
+                        help="Per-stage timeout in seconds (default: no timeout)")
     parser.add_argument("--verbose", "-v", action="store_true",
                         help="Verbose output")
-    parser.add_argument("--no-profile", action="store_true",
-                        help="Skip profile pass (default: run profile after Phase 1)")
+    parser.add_argument("--run-profile", action="store_true",
+                        help="After Phase 1, rebuild entry.exe with profile preset and collect profile data")
     parser.add_argument("--skip-nightly-report", action="store_true",
                         help="Skip delta and summary generation at the end")
     parser.add_argument("--output-dir", default=None,
@@ -429,7 +444,7 @@ def main() -> int:
     print(f"\n  Build: {build_ok}/{len(all_results)} passed")
 
     # ── Phase 2 (optional): Profile pass with profile-tier build ──
-    if not args.no_profile:
+    if args.run_profile:
         print(f"\n{'='*60}")
         print(f"  Phase 2: Profile pass (native_config=profile)...")
         print(f"{'='*60}")

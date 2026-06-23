@@ -1,0 +1,25 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Net.Http",
+  "chunkSlug": "global-ns",
+  "entries": [
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HeaderStringValues+Enumerator::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HeaderStringValues+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HeaderStringValues::GetEnumerator:System.Net.Http.Headers.HeaderStringValues+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated::GetEnumerator:System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator()"
+    }
+  ]
+}

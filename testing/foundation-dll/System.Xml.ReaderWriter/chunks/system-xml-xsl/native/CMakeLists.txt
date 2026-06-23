@@ -8,23 +8,11 @@ set(CMAKE_CXX_STANDARD 20)
 # ── Compiler settings ──
 # /EHa needed for catch(...) to intercept C++ exceptions thrown by generated code.
 if(MSVC)
-  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /wd2374 /w42362 /wd2679 /MP /Gy /Gw)
+  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
-  # ── Precompiled header (PCH) ──────────────────────────────────
-  # chaos_pch.h includes all standard C headers + stable ChaOS runtime headers.
-  # CMake target_precompile_headers auto-manages /Yc /Yu flags (CMake 3.16+).
-  # Files that #include "chaos_pch.h" as first include automatically use the PCH.
-  set(CHAOS_PCH_HDR "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.h")
-  set(CHAOS_PCH_SRC "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.cpp")
-  if(EXISTS "${CHAOS_PCH_HDR}")
-    target_precompile_headers(chaos_entry PRIVATE "${CHAOS_PCH_HDR}")
-    if(EXISTS "${CHAOS_PCH_SRC}")
-      target_sources(chaos_entry PRIVATE "${CHAOS_PCH_SRC}")
-    endif()
-  endif()
 else()
-  add_compile_options(-Wall -Wextra -Wno-unused-parameter -fpermissive)
+  add_compile_options(-Wall -Wextra -Wno-unused-parameter)
   set(CHAOS_EHA_FLAG -fexceptions)
   # eager_compile.cpp is compiled locally AND present in prebuilt
   # libchaos_interpreter.a — both define EagerCompilePatchMethods.
@@ -82,9 +70,9 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Xml.ReaderWriter/chunks/system-xml-xsl/native/codegen")
-set(CHAOS_PROJECT_ROOT "D:/agent/chaos-il2cpp")
-set(CHAOS_CODEGEN_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Xml.ReaderWriter/chunks/system-xml-xsl/native/codegen")
+set(CHAOS_SDK_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Xml.ReaderWriter/chunks/system-xml-xsl/native/codegen")
+set(CHAOS_PROJECT_ROOT "/home/debian/agent/booming-il2cpp")
+set(CHAOS_CODEGEN_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Xml.ReaderWriter/chunks/system-xml-xsl/native/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
@@ -93,14 +81,6 @@ find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 # Prefer flat subjects/*.cpp (copied locally by TPG for MAX_PATH compatibility).
 # Fall back to codegen_dir/*Subjects/generated/*.cpp for in-place codegen builds.
 file(GLOB CHAOS_CODEGEN_FLAT_CPP "${CMAKE_CURRENT_SOURCE_DIR}/subjects/*.cpp")
-# Per-assembly generated files (target assemblies) in codegen/generated/*/
-# These are NOT included by the flat GLOB.  Compile them alongside the flat output.
-file(GLOB CHAOS_CODEGEN_PER_ASM_CPP
-    "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.generated.cpp"
-    "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.generated.page*.cpp"
-    "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.page-*.cpp"
-    "${CHAOS_CODEGEN_DIR}/generated/*/chaos_generated_module.cpp"
-)
 file(GLOB CHAOS_CODEGEN_NATIVE_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.page*.cpp"
@@ -115,9 +95,6 @@ file(GLOB CHAOS_CODEGEN_NATIVE_CPP
 
 if(CHAOS_CODEGEN_FLAT_CPP)
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_FLAT_CPP})
-  # Flat layout already contains all generated files in subjects/*.cpp.
-  # Per-assembly files under codegen/generated/*/ would cause C2371
-  # redefinition (chaos_type_id_* symbols) — skip them.
 else()
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_NATIVE_CPP})
 endif()
@@ -140,17 +117,12 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 # on Linux, prebuilt on Windows).  Do NOT compile them locally — the SDK
 # library already contains these symbols and compiling them again causes
 # multiple-definition linker errors.
-# profile_globals.cpp and gc_alloc_stubs.cpp are project-specific, so compile
-# them from source.  gc_alloc_stubs.cpp defines GcAllocateProfiled which is
-# referenced by chaos_jit.lib (JIT helpers).  Compiling locally ensures these
-# symbols are available even if the prebuilt runtime lib doesn't export them.
+# profile_globals.cpp is project-specific, so compile it from source.
 # array_stubs.cpp: the prebuilt lib may be stale, missing recently-added
 # DirectNativeSymbol entries (ChaosArrayCopy3, ChaosArraySortWithComparer).
 # /FORCE:MULTIPLE handles any future overlap when the lib catches up.
 set(CHAOS_PROFILE_GLOBALS
     "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc/gc_api.cpp"
 )
 set(CHAOS_ARRAY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/array_stubs.cpp"
@@ -174,19 +146,40 @@ set(CHAOS_MISC_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/misc_stubs.cpp"
 )
 set(CHAOS_INTEROP_STUBS
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/interop_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/interop_stubs.cpp"
 )
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/object_stubs.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/string_stubs.cpp"
-)
-set(CHAOS_ENTRY_STUBS
-    "${CHAOS_SDK_DIR}/runtime_stubs/entry_stubs.cpp"
 )
 set(CHAOS_CRYPTO_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
 )
+# hotpatch_table.cpp — compiled locally so the entry has the latest
+# SetPatchedBySlot (the prebuilt chaos_runtime_core.lib may be stale).
+set(CHAOS_HOTPATCH_TABLE
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/hotpatch_table.cpp"
+)
+# eager_compile.cpp — required by patch_loader.obj in chaos_runtime_core.lib
+# but defined in the interpreter project.  Compile locally since the prebuilt
+# chaos_interpreter.lib may be stale (EagerCompilePatchMethods).
+# Skipped in profile build (JIT header dependency chain).
+if(NOT CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
+  set(CHAOS_EAGER_COMPILE
+      "${CHAOS_PROJECT_ROOT}/src/native/interpreter/interp_entry/eager_compile.cpp"
+  )
+endif()
+# method_replacement.cpp — the prebuilt chaos_hot_update.lib may be stale
+# (SetPatchedBySlot signature changed — domain_id parameter added).
+set(CHAOS_METHOD_REPLACEMENT
+    "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
+)
+# profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
+# missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
+# symbols added after the SDK was last rebuilt.  Compile locally.
+set(CHAOS_PROFILE_STATS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
+)
+
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
@@ -202,9 +195,11 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_MISC_STUBS}
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}
-    ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
-    ${CHAOS_STRING_STUBS}
+    ${CHAOS_HOTPATCH_TABLE}
+    ${CHAOS_EAGER_COMPILE}
+    ${CHAOS_METHOD_REPLACEMENT}
+    ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -226,6 +221,8 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_CODEGEN_DIR}/codegen/generated"
 
     "${CMAKE_CURRENT_SOURCE_DIR}"
+    # JIT headers needed by eager_compile.cpp (compiled for all builds
+    # since the prebuilt chaos_interpreter.lib may be stale).
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
     # codegen/generated — needed for enum_metadata.generated.h and other
     # generated headers that aren't copied to subjects/ by TPG's flat layout.
@@ -234,7 +231,7 @@ set(CHAOS_ENTRY_INCLUDES
 
 add_executable(chaos_entry ${CHAOS_ENTRY_SOURCES})
 if(MSVC)
-  target_compile_options(chaos_entry PRIVATE /GS- /wd2362)
+  target_compile_options(chaos_entry PRIVATE /GS-)
 endif()
 target_include_directories(chaos_entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_compile_options(chaos_entry PRIVATE ${CHAOS_EHA_FLAG})
@@ -243,12 +240,12 @@ target_link_libraries(chaos_entry PRIVATE chaos::runtime
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${CHAOS_SDK_DIR}/lib/libchaos_pal.a>"
 )
 # MSVC: chaos_hot_update.lib references SetPatchedBySlot from
-# chaos_runtime_core.lib. Use targeted /INCLUDE instead of
-# /WHOLEARCHIVE (which would force ALL objects including the
-# old abi_reflection.obj with nullptr ABI entries, overriding
-# the locally-compiled fix).
+# chaos_runtime_core.lib. /WHOLEARCHIVE forces MSVC to include ALL
+# objects from the runtime core lib, not just those needed by the
+# first pass (MSVC processes static libs left-to-right without rescan).
 if(MSVC)
   target_link_libraries(chaos_entry PRIVATE bcrypt)
+  target_link_options(chaos_entry PRIVATE "/WHOLEARCHIVE:${CHAOS_SDK_DIR}/lib/chaos_runtime_core.lib")
 
 endif()
 # OpenSSL: needed by crypto_stubs.cpp on Linux (SHA/HMAC via libcrypto).

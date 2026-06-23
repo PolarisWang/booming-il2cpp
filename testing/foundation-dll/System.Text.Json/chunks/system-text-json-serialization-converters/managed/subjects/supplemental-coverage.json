@@ -1,0 +1,412 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Text.Json",
+  "chunkSlug": "system-text-json-serialization-converters",
+  "entries": [
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonArray::Create:System.Text.Json.Nodes.JsonArray(System.Text.Json.JsonElement,System.Nullable`1[[System.Text.Json.Nodes.JsonNodeOptions, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonArray::GetEnumerator:System.Collections.Generic.IEnumerator`1[[System.Text.Json.Nodes.JsonNode, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]]()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonArray::RemoveAll:System.Int32(System.Func`2[[System.Text.Json.Nodes.JsonNode, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51],[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonArray::RemoveRange:System.Void(System.Int32,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonObject::Add:System.Void(System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Text.Json.Nodes.JsonNode, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonObject::Create:System.Text.Json.Nodes.JsonObject(System.Text.Json.JsonElement,System.Nullable`1[[System.Text.Json.Nodes.JsonNodeOptions, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonObject::GetAt:System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Text.Json.Nodes.JsonNode, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonObject::GetEnumerator:System.Collections.Generic.IEnumerator`1[[System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Text.Json.Nodes.JsonNode, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonObject::TryAdd:System.Boolean(System.String,System.Text.Json.Nodes.JsonNode)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonObject::TryAdd:System.Boolean(System.String,System.Text.Json.Nodes.JsonNode,System.Int32&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonObject::TryGetPropertyValue:System.Boolean(System.String,System.Text.Json.Nodes.JsonNode&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonObject::TryGetPropertyValue:System.Boolean(System.String,System.Text.Json.Nodes.JsonNode&,System.Int32&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonValueOfElement::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonValueOfJsonBool::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonValueOfJsonNumber::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Nodes.JsonValueOfJsonString::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchema::CreateFalseSchema:System.Text.Json.Schema.JsonSchema()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchema::CreateTrueSchema:System.Text.Json.Schema.JsonSchema()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchema::EnsureMutable:System.Void(System.Text.Json.Schema.JsonSchema&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchema::MakeNullable:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchema::MapSchemaType:System.Text.Json.Nodes.JsonNode(System.Text.Json.Schema.JsonSchemaType)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchema::ToJsonNode:System.Text.Json.Nodes.JsonNode(System.Text.Json.Schema.JsonSchemaExporterOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter+GenerationState::CreateContext:System.Text.Json.Schema.JsonSchemaExporterContext(System.Text.Json.Serialization.Metadata.JsonTypeInfo,System.Text.Json.Serialization.Metadata.JsonPropertyInfo,System.Text.Json.Serialization.Metadata.JsonTypeInfo)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter+GenerationState::PopSchemaNode:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter+GenerationState::PushSchemaNode:System.Void(System.String)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter+GenerationState::TryGetExistingJsonPointer:System.Boolean(System.Text.Json.Schema.JsonSchemaExporterContext&,System.String&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.BooleanConverter::Read:System.Boolean(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.BooleanConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Boolean,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.ByteArrayConverter::Read:System.Byte[](System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.ByteArrayConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Byte[],System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.ByteConverter::Read:System.Byte(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.ByteConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Byte,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.CharConverter::Read:System.Char(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.CharConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Char,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.DateOnlyConverter::Read:System.DateOnly(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.DateOnlyConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.DateOnly,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.DateTimeConverter::Read:System.DateTime(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.DateTimeConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.DateTime,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.DateTimeOffsetConverter::Read:System.DateTimeOffset(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.DateTimeOffsetConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.DateTimeOffset,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.DecimalConverter::Read:System.Decimal(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.DecimalConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Decimal,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.DefaultObjectConverter::Read:System.Object(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.DoubleConverter::Read:System.Double(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.DoubleConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Double,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterFactory::CanConvert:System.Boolean(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterFactory::Create:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.Serialization.Converters.EnumConverterOptions,System.Text.Json.JsonNamingPolicy,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.FSharpTypeConverterFactory::CanConvert:System.Boolean(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.FSharpTypeConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.GuidConverter::Read:System.Guid(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.GuidConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Guid,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.HalfConverter::Read:System.Half(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.HalfConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Half,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.IEnumerableConverterFactory::CanConvert:System.Boolean(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.IEnumerableConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.Int128Converter::Read:System.Int128(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.Int128Converter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Int128,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.Int16Converter::Read:System.Int16(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.Int16Converter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Int16,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.Int32Converter::Read:System.Int32(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.Int32Converter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Int32,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.Int64Converter::Read:System.Int64(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.Int64Converter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Int64,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonArrayConverter::Read:System.Text.Json.Nodes.JsonArray(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonArrayConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.Nodes.JsonArray,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonDocumentConverter::Read:System.Text.Json.JsonDocument(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonDocumentConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonDocument,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonElementConverter::Read:System.Text.Json.JsonElement(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonElementConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonElement,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonNodeConverter::Create:System.Text.Json.Nodes.JsonNode(System.Text.Json.JsonElement,System.Nullable`1[[System.Text.Json.Nodes.JsonNodeOptions, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonNodeConverter::Read:System.Text.Json.Nodes.JsonNode(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonNodeConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.Nodes.JsonNode,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonNodeConverterFactory::CanConvert:System.Boolean(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonNodeConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonObjectConverter::Read:System.Text.Json.Nodes.JsonObject(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonObjectConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.Nodes.JsonObject,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonValueConverter::Read:System.Text.Json.Nodes.JsonValue(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.JsonValueConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.Nodes.JsonValue,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.MemoryByteConverter::Read:System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.MemoryByteConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.MemoryConverterFactory::CanConvert:System.Boolean(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.MemoryConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.NullableConverterFactory::CanConvert:System.Boolean(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.NullableConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.NullableConverterFactory::CreateValueConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.Serialization.JsonConverter)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.ObjectConverterFactory::CanConvert:System.Boolean(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.ObjectConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.ReadOnlyMemoryByteConverter::Read:System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.ReadOnlyMemoryByteConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.SByteConverter::Read:System.SByte(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.SByteConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.SByte,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.SingleConverter::Read:System.Single(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.SingleConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Single,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.SlimObjectConverter::Read:System.Object(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.StringConverter::Read:System.String(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.StringConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.String,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.TimeOnlyConverter::Read:System.TimeOnly(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.TimeOnlyConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.TimeOnly,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.TimeSpanConverter::Read:System.TimeSpan(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.TimeSpanConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.TimeSpan,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.UInt128Converter::Read:System.UInt128(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.UInt128Converter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.UInt128,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.UInt16Converter::Read:System.UInt16(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.UInt16Converter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.UInt16,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.UInt32Converter::Read:System.UInt32(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.UInt32Converter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.UInt32,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.UInt64Converter::Read:System.UInt64(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.UInt64Converter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.UInt64,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.UnsupportedTypeConverterFactory::CanConvert:System.Boolean(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.UnsupportedTypeConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.UriConverter::Read:System.Uri(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.UriConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Uri,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.VersionConverter::Read:System.Version(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Converters.VersionConverter::Write:System.Void(System.Text.Json.Utf8JsonWriter,System.Version,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.IAsyncEnumerableConverterFactory::CanConvert:System.Boolean(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.IAsyncEnumerableConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.IgnoreReferenceHandler::CreateResolver:System.Text.Json.Serialization.ReferenceResolver()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.IgnoreReferenceResolver::AddReference:System.Void(System.String,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.IgnoreReferenceResolver::GetReference:System.String(System.Object,System.Boolean&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.IgnoreReferenceResolver::ResolveReference:System.Object(System.String)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.PipeReadBufferState::Advance:System.Void(System.Int64)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.PipeReadBufferState::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.PipeReadBufferState::GetReader:System.Void(System.Text.Json.JsonReaderState,System.Text.Json.Utf8JsonReader&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.PipeReadBufferState::Read:System.Void(System.IO.Pipelines.PipeReader)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.PipeReadBufferState::ReadAsync:System.Threading.Tasks.ValueTask`1[[System.Text.Json.Serialization.PipeReadBufferState, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.IO.Pipelines.PipeReader,System.Threading.CancellationToken,System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.PreserveReferenceHandler::CreateResolver:System.Text.Json.Serialization.ReferenceResolver()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.PreserveReferenceResolver::AddReference:System.Void(System.String,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.PreserveReferenceResolver::GetReference:System.String(System.Object,System.Boolean&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.PreserveReferenceResolver::ResolveReference:System.Object(System.String)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.StreamReadBufferState::Advance:System.Void(System.Int64)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.StreamReadBufferState::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.StreamReadBufferState::GetReader:System.Void(System.Text.Json.JsonReaderState,System.Text.Json.Utf8JsonReader&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.StreamReadBufferState::Read:System.Void(System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.StreamReadBufferState::ReadAsync:System.Threading.Tasks.ValueTask`1[[System.Text.Json.Serialization.StreamReadBufferState, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.IO.Stream,System.Threading.CancellationToken,System.Boolean)"
+    }
+  ]
+}

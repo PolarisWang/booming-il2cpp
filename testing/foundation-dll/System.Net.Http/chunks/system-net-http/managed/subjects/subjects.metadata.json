@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Net.Http",
   "chunkSlug": "system-net-http",
-  "totalMethods": 107,
+  "totalMethods": 108,
   "factMethodCount": 77,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -227,325 +227,325 @@
     {
       "index": 0,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.String)",
       "generatedMethodId": "GetStringAsync_0_string_0"
     },
     {
       "index": 1,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.String)",
       "generatedMethodId": "GetStringAsync_0_string_1"
     },
     {
       "index": 2,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.Uri)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.Uri)",
       "generatedMethodId": "GetStringAsync_1_System_Uri_0"
     },
     {
       "index": 3,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "GetStringAsync_2_string_CancellationToken_0"
     },
     {
       "index": 4,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "GetStringAsync_2_string_CancellationToken_1"
     },
     {
       "index": 5,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.Uri,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.Uri,System.Threading.CancellationToken)",
       "generatedMethodId": "GetStringAsync_3_System_Uri_CancellationToken_0"
     },
     {
       "index": 6,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.String)",
       "generatedMethodId": "GetByteArrayAsync_4_string_0"
     },
     {
       "index": 7,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.String)",
       "generatedMethodId": "GetByteArrayAsync_4_string_1"
     },
     {
       "index": 8,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.Uri)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.Uri)",
       "generatedMethodId": "GetByteArrayAsync_5_System_Uri_0"
     },
     {
       "index": 9,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "GetByteArrayAsync_6_string_CancellationToken_0"
     },
     {
       "index": 10,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "GetByteArrayAsync_6_string_CancellationToken_1"
     },
     {
       "index": 11,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.Uri,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.Uri,System.Threading.CancellationToken)",
       "generatedMethodId": "GetByteArrayAsync_7_System_Uri_CancellationToken_0"
     },
     {
       "index": 12,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.String)",
       "generatedMethodId": "GetStreamAsync_8_string_0"
     },
     {
       "index": 13,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.String)",
       "generatedMethodId": "GetStreamAsync_8_string_1"
     },
     {
       "index": 14,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "GetStreamAsync_9_string_CancellationToken_0"
     },
     {
       "index": 15,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "GetStreamAsync_9_string_CancellationToken_1"
     },
     {
       "index": 16,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.Uri)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.Uri)",
       "generatedMethodId": "GetStreamAsync_10_System_Uri_0"
     },
     {
       "index": 17,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.Uri,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.Uri,System.Threading.CancellationToken)",
       "generatedMethodId": "GetStreamAsync_11_System_Uri_CancellationToken_0"
     },
     {
       "index": 18,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String)",
       "generatedMethodId": "GetAsync_12_string_0"
     },
     {
       "index": 19,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String)",
       "generatedMethodId": "GetAsync_12_string_1"
     },
     {
       "index": 20,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri)",
       "generatedMethodId": "GetAsync_13_System_Uri_0"
     },
     {
       "index": 21,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpCompletionOption)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpCompletionOption)",
       "generatedMethodId": "GetAsync_14_string_HttpCompletionOption_0"
     },
     {
       "index": 22,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpCompletionOption)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpCompletionOption)",
       "generatedMethodId": "GetAsync_14_string_HttpCompletionOption_1"
     },
     {
       "index": 23,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpCompletionOption)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpCompletionOption)",
       "generatedMethodId": "GetAsync_15_System_Uri_HttpCompletionOption_0"
     },
     {
       "index": 24,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "GetAsync_16_string_CancellationToken_0"
     },
     {
       "index": 25,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "GetAsync_16_string_CancellationToken_1"
     },
     {
       "index": 26,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Threading.CancellationToken)",
       "generatedMethodId": "GetAsync_17_System_Uri_CancellationToken_0"
     },
     {
       "index": 27,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
       "generatedMethodId": "GetAsync_18_string_HttpCompletionOption_CancellationToken_0"
     },
     {
       "index": 28,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
       "generatedMethodId": "GetAsync_18_string_HttpCompletionOption_CancellationToken_1"
     },
     {
       "index": 29,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
       "generatedMethodId": "GetAsync_19_System_Uri_HttpCompletionOption_CancellationToken_0"
     },
     {
       "index": 30,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent)",
       "generatedMethodId": "PostAsync_20_string_HttpContent_0"
     },
     {
       "index": 31,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent)",
       "generatedMethodId": "PostAsync_20_string_HttpContent_1"
     },
     {
       "index": 32,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpContent)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent)",
       "generatedMethodId": "PostAsync_21_System_Uri_HttpContent_0"
     },
     {
       "index": 33,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
       "generatedMethodId": "PostAsync_22_string_HttpContent_CancellationToken_0"
     },
     {
       "index": 34,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
       "generatedMethodId": "PostAsync_22_string_HttpContent_CancellationToken_1"
     },
     {
       "index": 35,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
       "generatedMethodId": "PostAsync_23_System_Uri_HttpContent_CancellationToken_0"
     },
     {
       "index": 36,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent)",
       "generatedMethodId": "PutAsync_24_string_HttpContent_0"
     },
     {
       "index": 37,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent)",
       "generatedMethodId": "PutAsync_24_string_HttpContent_1"
     },
     {
       "index": 38,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpContent)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent)",
       "generatedMethodId": "PutAsync_25_System_Uri_HttpContent_0"
     },
     {
       "index": 39,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
       "generatedMethodId": "PutAsync_26_string_HttpContent_CancellationToken_0"
     },
     {
       "index": 40,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
       "generatedMethodId": "PutAsync_26_string_HttpContent_CancellationToken_1"
     },
     {
       "index": 41,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
       "generatedMethodId": "PutAsync_27_System_Uri_HttpContent_CancellationToken_0"
     },
     {
       "index": 42,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent)",
       "generatedMethodId": "PatchAsync_28_string_HttpContent_0"
     },
     {
       "index": 43,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent)",
       "generatedMethodId": "PatchAsync_28_string_HttpContent_1"
     },
     {
       "index": 44,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpContent)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent)",
       "generatedMethodId": "PatchAsync_29_System_Uri_HttpContent_0"
     },
     {
       "index": 45,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
       "generatedMethodId": "PatchAsync_30_string_HttpContent_CancellationToken_0"
     },
     {
       "index": 46,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
       "generatedMethodId": "PatchAsync_30_string_HttpContent_CancellationToken_1"
     },
     {
       "index": 47,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
       "generatedMethodId": "PatchAsync_31_System_Uri_HttpContent_CancellationToken_0"
     },
     {
       "index": 48,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String)",
       "generatedMethodId": "DeleteAsync_32_string_0"
     },
     {
       "index": 49,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String)",
       "generatedMethodId": "DeleteAsync_32_string_1"
     },
     {
       "index": 50,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri)",
       "generatedMethodId": "DeleteAsync_33_System_Uri_0"
     },
     {
       "index": 51,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "DeleteAsync_34_string_CancellationToken_0"
     },
     {
       "index": 52,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "DeleteAsync_34_string_CancellationToken_1"
     },
     {
       "index": 53,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Threading.CancellationToken)",
       "generatedMethodId": "DeleteAsync_35_System_Uri_CancellationToken_0"
     },
     {
@@ -575,25 +575,25 @@
     {
       "index": 58,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Net.Http.HttpRequestMessage)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage)",
       "generatedMethodId": "SendAsync_40_HttpRequestMessage_0"
     },
     {
       "index": 59,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_41_HttpRequestMessage_CancellationToken_0"
     },
     {
       "index": 60,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption)",
       "generatedMethodId": "SendAsync_42_HttpRequestMessage_HttpCompletionOption_0"
     },
     {
       "index": 61,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_43_HttpRequestMessage_HttpCompletionOption_CancellationToken_0"
     },
     {
@@ -605,25 +605,25 @@
     {
       "index": 63,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E()",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStringAsync:System.Threading.Tasks.Task<System.String>()",
       "generatedMethodId": "ReadAsStringAsync_0__0"
     },
     {
       "index": 64,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStringAsync:System.Threading.Tasks.Task<System.String>(System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsStringAsync_1_CancellationToken_0"
     },
     {
       "index": 65,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E()",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>()",
       "generatedMethodId": "ReadAsByteArrayAsync_2__0"
     },
     {
       "index": 66,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsByteArrayAsync_3_CancellationToken_0"
     },
     {
@@ -641,13 +641,13 @@
     {
       "index": 69,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E()",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>()",
       "generatedMethodId": "ReadAsStreamAsync_6__0"
     },
     {
       "index": 70,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsStreamAsync_7_CancellationToken_0"
     },
     {
@@ -767,7 +767,7 @@
     {
       "index": 90,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpMessageInvoker::SendAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpMessageInvoker::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_1_HttpRequestMessage_CancellationToken_0"
     },
     {
@@ -785,25 +785,25 @@
     {
       "index": 93,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpRequestOptions::TryGetValue:System.Boolean(System.Net.Http.HttpRequestOptionsKey\u003CSystem.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpRequestOptions::TryGetValue:System.Boolean(System.Net.Http.HttpRequestOptionsKey<System.Int32>,System.Int32)",
       "generatedMethodId": "TryGetValue_0_HttpRequestOptionsKeyint_int_0"
     },
     {
       "index": 94,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpRequestOptions::TryGetValue:System.Boolean(System.Net.Http.HttpRequestOptionsKey\u003CSystem.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpRequestOptions::TryGetValue:System.Boolean(System.Net.Http.HttpRequestOptionsKey<System.Int32>,System.Int32)",
       "generatedMethodId": "TryGetValue_0_HttpRequestOptionsKeyint_int_1"
     },
     {
       "index": 95,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpRequestOptions::Set:System.Void(System.Net.Http.HttpRequestOptionsKey\u003CSystem.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpRequestOptions::Set:System.Void(System.Net.Http.HttpRequestOptionsKey<System.Int32>,System.Int32)",
       "generatedMethodId": "Set_1_HttpRequestOptionsKeyint_int_0"
     },
     {
       "index": 96,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpRequestOptions::Set:System.Void(System.Net.Http.HttpRequestOptionsKey\u003CSystem.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpRequestOptions::Set:System.Void(System.Net.Http.HttpRequestOptionsKey<System.Int32>,System.Int32)",
       "generatedMethodId": "Set_1_HttpRequestOptionsKeyint_int_1"
     },
     {
@@ -827,7 +827,7 @@
     {
       "index": 100,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartContent::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Net.Http.HttpContent\u003E()",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartContent::GetEnumerator:System.Collections.Generic.IEnumerator<System.Net.Http.HttpContent>()",
       "generatedMethodId": "GetEnumerator_1__0"
     },
     {
@@ -865,6 +865,12 @@
       "kind": "fact",
       "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent,System.String,System.String)",
       "generatedMethodId": "Add_2_HttpContent_string_string_2"
+    },
+    {
+      "index": 107,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Http/System.Net.Http.HttpMethod::Parse:System.Net.Http.HttpMethod(System.ReadOnlySpan<System.Char>)",
+      "generatedMethodId": ""
     }
   ]
 }

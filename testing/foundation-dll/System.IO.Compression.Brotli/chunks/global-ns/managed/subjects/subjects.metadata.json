@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.IO.Compression.Brotli",
   "chunkSlug": "global-ns",
-  "totalMethods": 49,
+  "totalMethods": 60,
   "factMethodCount": 20,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -243,7 +243,7 @@
     {
       "index": 22,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
@@ -333,37 +333,37 @@
     {
       "index": 37,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_12_System_Byte_int_int_CancellationToken_0"
     },
     {
       "index": 38,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_12_System_Byte_int_int_CancellationToken_1"
     },
     {
       "index": 39,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_12_System_Byte_int_int_CancellationToken_2"
     },
     {
       "index": 40,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_12_System_Byte_int_int_CancellationToken_3"
     },
     {
       "index": 41,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_12_System_Byte_int_int_CancellationToken_4"
     },
     {
       "index": 42,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_13_System_Memorybyte_CancellationToken_0"
     },
     {
@@ -401,6 +401,72 @@
       "kind": "fact",
       "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::SetLength:System.Void(System.Int64)",
       "generatedMethodId": "SetLength_16_long_1"
+    },
+    {
+      "index": 49,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&,System.Int32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 50,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 51,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Compress:System.Buffers.OperationStatus(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&,System.Int32&,System.Boolean)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 52,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Flush:System.Buffers.OperationStatus(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 53,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 54,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&,System.Int32,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 55,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 56,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 57,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.ValueTask`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 58,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 59,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Threading.CancellationToken)",
+      "generatedMethodId": ""
     }
   ]
 }

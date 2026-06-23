@@ -324,7 +324,7 @@ public partial class NativeAotLoweringPlanner
                 switch (reg.RegistrationKind)
                 {
                     case "method": crossModuleMethodTokenBySubjectId.TryAdd(reg.SubjectId, token); break;
-                    case "type": crossModuleTypeTokenBySubjectId.TryAdd(reg.SubjectId, token); break;
+                    case "type":   crossModuleTypeTokenBySubjectId.TryAdd(reg.SubjectId, token);   break;
                 }
             }
         }

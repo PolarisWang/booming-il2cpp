@@ -37,7 +37,7 @@ _DEFAULT_NAMESPACE_CHUNKS: dict[str, str] = {
     "System.CodeDom.Compiler": "system",
     "System.StubHelpers": "system",
     # Collections
-    "System.Collections.NonGeneric": "collections",
+    "System.Collections": "collections",
     "System.Collections.Generic": "collections-generic",
     "System.Collections.ObjectModel": "collections-generic",
     "System.Collections.Concurrent": "collections-concurrent",
@@ -142,7 +142,7 @@ def scan_dll(dll_path: str) -> dict:
     return json.loads(result.stdout)
 
 
-def build_namespace_partition(manifest: dict, max_methods_per_chunk: int = 200) -> dict:
+def build_namespace_partition(manifest: dict, max_methods_per_chunk: int = 500) -> dict:
     """Build namespace-partition.json from the manifest data."""
     methods = manifest["methods"]
     namespaces = manifest["namespaces"]

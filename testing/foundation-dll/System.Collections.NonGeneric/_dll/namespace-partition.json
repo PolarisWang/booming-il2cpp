@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "assemblyName": "System.Collections.NonGeneric",
-  "generatedAt": "2026-06-17T12:36:51.420375+00:00",
+  "generatedAt": "2026-06-23T03:24:39.858602+00:00",
   "partitionStrategy": "namespace",
   "maxMethodsPerChunk": 500,
   "totalChunks": 1,

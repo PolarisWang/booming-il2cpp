@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.IO.Pipelines",
   "chunkSlug": "system-io-pipelines",
-  "totalMethods": 33,
+  "totalMethods": 128,
   "factMethodCount": 23,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -85,19 +85,19 @@
     {
       "index": 1,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAsync:System.Threading.Tasks.ValueTask\u003CSystem.IO.Pipelines.ReadResult\u003E(System.Threading.CancellationToken)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAsync:System.Threading.Tasks.ValueTask<System.IO.Pipelines.ReadResult>(System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_1_CancellationToken_0"
     },
     {
       "index": 2,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAtLeastAsync:System.Threading.Tasks.ValueTask\u003CSystem.IO.Pipelines.ReadResult\u003E(System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAtLeastAsync:System.Threading.Tasks.ValueTask<System.IO.Pipelines.ReadResult>(System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAtLeastAsync_2_int_CancellationToken_0"
     },
     {
       "index": 3,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAtLeastAsync:System.Threading.Tasks.ValueTask\u003CSystem.IO.Pipelines.ReadResult\u003E(System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAtLeastAsync:System.Threading.Tasks.ValueTask<System.IO.Pipelines.ReadResult>(System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAtLeastAsync_2_int_CancellationToken_1"
     },
     {
@@ -145,13 +145,13 @@
     {
       "index": 11,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::OnWriterCompleted:System.Void(System.Action\u003CSystem.Exception,System.Object\u003E,System.Object)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::OnWriterCompleted:System.Void(System.Action<System.Exception,System.Object>,System.Object)",
       "generatedMethodId": "OnWriterCompleted_9_System_ActionSystem_Exceptionobject_object_0"
     },
     {
       "index": 12,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::OnWriterCompleted:System.Void(System.Action\u003CSystem.Exception,System.Object\u003E,System.Object)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::OnWriterCompleted:System.Void(System.Action<System.Exception,System.Object>,System.Object)",
       "generatedMethodId": "OnWriterCompleted_9_System_ActionSystem_Exceptionobject_object_1"
     },
     {
@@ -175,13 +175,13 @@
     {
       "index": 16,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeScheduler::Schedule:System.Void(System.Action\u003CSystem.Object\u003E,System.Object)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeScheduler::Schedule:System.Void(System.Action<System.Object>,System.Object)",
       "generatedMethodId": "Schedule_0_System_Actionobject_object_0"
     },
     {
       "index": 17,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeScheduler::Schedule:System.Void(System.Action\u003CSystem.Object\u003E,System.Object)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeScheduler::Schedule:System.Void(System.Action<System.Object>,System.Object)",
       "generatedMethodId": "Schedule_0_System_Actionobject_object_1"
     },
     {
@@ -205,19 +205,19 @@
     {
       "index": 21,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::OnReaderCompleted:System.Void(System.Action\u003CSystem.Exception,System.Object\u003E,System.Object)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::OnReaderCompleted:System.Void(System.Action<System.Exception,System.Object>,System.Object)",
       "generatedMethodId": "OnReaderCompleted_3_System_ActionSystem_Exceptionobject_object_0"
     },
     {
       "index": 22,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::OnReaderCompleted:System.Void(System.Action\u003CSystem.Exception,System.Object\u003E,System.Object)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::OnReaderCompleted:System.Void(System.Action<System.Exception,System.Object>,System.Object)",
       "generatedMethodId": "OnReaderCompleted_3_System_ActionSystem_Exceptionobject_object_1"
     },
     {
       "index": 23,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::FlushAsync:System.Threading.Tasks.ValueTask\u003CSystem.IO.Pipelines.FlushResult\u003E(System.Threading.CancellationToken)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::FlushAsync:System.Threading.Tasks.ValueTask<System.IO.Pipelines.FlushResult>(System.Threading.CancellationToken)",
       "generatedMethodId": "FlushAsync_4_CancellationToken_0"
     },
     {
@@ -235,13 +235,13 @@
     {
       "index": 26,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::GetMemory:System.Memory\u003CSystem.Byte\u003E(System.Int32)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::GetMemory:System.Memory<System.Byte>(System.Int32)",
       "generatedMethodId": "GetMemory_6_int_0"
     },
     {
       "index": 27,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::GetMemory:System.Memory\u003CSystem.Byte\u003E(System.Int32)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::GetMemory:System.Memory<System.Byte>(System.Int32)",
       "generatedMethodId": "GetMemory_6_int_1"
     },
     {
@@ -259,7 +259,7 @@
     {
       "index": 30,
       "kind": "fact",
-      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::WriteAsync:System.Threading.Tasks.ValueTask\u003CSystem.IO.Pipelines.FlushResult\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::WriteAsync:System.Threading.Tasks.ValueTask<System.IO.Pipelines.FlushResult>(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_8_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
@@ -273,6 +273,576 @@
       "kind": "fact",
       "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)",
       "generatedMethodId": "CopyToAsync_0_Stream_PipeWriter_CancellationToken_1"
+    },
+    {
+      "index": 33,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegment::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 34,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegment::ResetMemory:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 35,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegment::SetNext:System.Void(System.IO.Pipelines.BufferSegment)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 36,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegment::SetOwnedMemory:System.Void(System.Buffers.IMemoryOwner`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 37,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegment::SetOwnedMemory:System.Void(System.Byte[])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 38,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegmentStack::Push:System.Void(System.IO.Pipelines.BufferSegment)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 39,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegmentStack::TryPop:System.Boolean(System.IO.Pipelines.BufferSegment&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 40,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.InlineScheduler::Schedule:System.Void(System.Action`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 41,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::AdvanceTo:System.Void(System.SequencePosition)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 42,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::AdvanceTo:System.Void(System.SequencePosition,System.SequencePosition)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 43,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::CancelPendingRead:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 44,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::Complete:System.Void(System.Exception)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 45,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::GetResult:System.IO.Pipelines.ReadResult(System.Int16)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 46,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::GetStatus:System.Threading.Tasks.Sources.ValueTaskSourceStatus(System.Int16)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 47,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::OnCompleted:System.Void(System.Action`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object,System.Int16,System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 48,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::OnWriterCompleted:System.Void(System.Action`2[[System.Exception, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 49,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::ReadAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.ReadResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 50,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::TryRead:System.Boolean(System.IO.Pipelines.ReadResult&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 51,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::Advance:System.Void(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 52,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::CancelPendingFlush:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 53,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::Complete:System.Void(System.Exception)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 54,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::FlushAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.FlushResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 55,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::GetMemory:System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 56,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::GetResult:System.IO.Pipelines.FlushResult(System.Int16)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 57,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::GetSpan:System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 58,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::GetStatus:System.Threading.Tasks.Sources.ValueTaskSourceStatus(System.Int16)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 59,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::OnCompleted:System.Void(System.Action`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object,System.Int16,System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 60,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::OnReaderCompleted:System.Void(System.Action`2[[System.Exception, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 61,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::WriteAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.FlushResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 62,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 63,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::BeginOperation:System.Void(System.Threading.CancellationToken,System.Action`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 64,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::Cancel:System.Void(System.IO.Pipelines.CompletionData&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 65,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::CancellationTokenFired:System.Void(System.IO.Pipelines.CompletionData&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 66,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::Complete:System.Void(System.IO.Pipelines.CompletionData&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 67,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::ObserveCancellation:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 68,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::OnCompleted:System.Void(System.Action`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object,System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags,System.IO.Pipelines.CompletionData&,System.Boolean&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 69,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::ReleaseCancellationTokenRegistration:System.Threading.CancellationTokenRegistration(System.Threading.CancellationToken&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 70,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::SetUncompleted:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 71,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeCompletion::AddCallback:System.IO.Pipelines.PipeCompletionCallbacks(System.Action`2[[System.Exception, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 72,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeCompletion::IsCompletedOrThrow:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 73,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeCompletion::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 74,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeCompletion::TryComplete:System.IO.Pipelines.PipeCompletionCallbacks(System.Exception)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 75,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeCompletionCallbacks::Execute:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 76,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeOperationState::BeginRead:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 77,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeOperationState::BeginReadTentative:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 78,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeOperationState::BeginWrite:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 79,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeOperationState::EndRead:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 80,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeOperationState::EndWrite:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 81,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 82,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 83,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::EndRead:System.Int32(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 84,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::Flush:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 85,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 86,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::Read:System.Int32(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 87,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::ReadAsync:System.Threading.Tasks.Task`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 88,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::ReadAsync:System.Threading.Tasks.ValueTask`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 89,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::ReadByte:System.Int32()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 90,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 91,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::SetLength:System.Void(System.Int64)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 92,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 93,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 94,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::DisposeAsync:System.Threading.Tasks.ValueTask()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 95,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::EndWrite:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 96,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::Flush:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 97,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 98,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 99,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 100,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::SetLength:System.Void(System.Int64)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 101,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 102,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 103,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 104,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader::AdvanceTo:System.Void(System.SequencePosition)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 105,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader::AdvanceTo:System.Void(System.SequencePosition,System.SequencePosition)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 106,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader::CancelPendingRead:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 107,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader::Complete:System.Void(System.Exception)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 108,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader::ReadAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.ReadResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 109,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader::TryRead:System.Boolean(System.IO.Pipelines.ReadResult&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 110,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::AdvanceTo:System.Void(System.SequencePosition)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 111,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::AdvanceTo:System.Void(System.SequencePosition,System.SequencePosition)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 112,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::CancelPendingRead:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 113,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::Complete:System.Void(System.Exception)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 114,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::CompleteAsync:System.Threading.Tasks.ValueTask(System.Exception)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 115,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 116,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 117,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::ReadAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.ReadResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 118,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::TryRead:System.Boolean(System.IO.Pipelines.ReadResult&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 119,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::Advance:System.Void(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 120,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::CancelPendingFlush:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 121,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::Complete:System.Void(System.Exception)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 122,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::CompleteAsync:System.Threading.Tasks.ValueTask(System.Exception)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 123,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::FlushAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.FlushResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 124,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::GetMemory:System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 125,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::GetSpan:System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 126,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::WriteAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.FlushResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Threading.CancellationToken)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 127,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.ThreadPoolScheduler::Schedule:System.Void(System.Action`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object)",
+      "generatedMethodId": ""
     }
   ]
 }

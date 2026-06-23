@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.Xml",
   "chunkSlug": "system-xml-schema",
-  "totalMethods": 120,
+  "totalMethods": 135,
   "factMethodCount": 81,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -355,13 +355,13 @@
     {
       "index": 17,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::GetEntityAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Uri,System.String,System.Type)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::GetEntityAsync:System.Threading.Tasks.Task<System.Object>(System.Uri,System.String,System.Type)",
       "generatedMethodId": "GetEntityAsync_8_System_Uri_string_System_Type_0"
     },
     {
       "index": 18,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::GetEntityAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Uri,System.String,System.Type)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::GetEntityAsync:System.Threading.Tasks.Task<System.Object>(System.Uri,System.String,System.Type)",
       "generatedMethodId": "GetEntityAsync_8_System_Uri_string_System_Type_1"
     },
     {
@@ -969,6 +969,96 @@
       "kind": "fact",
       "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidator::GetExpectedAttributes:System.Xml.Schema.XmlSchemaAttribute[]()",
       "generatedMethodId": "GetExpectedAttributes_18__0"
+    },
+    {
+      "index": 120,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.ValidationEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Schema.ValidationEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 121,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.ValidationEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 122,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.ValidationEventHandler::Invoke:System.Void(System.Object,System.Xml.Schema.ValidationEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 123,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::CopyTo:System.Void(System.Xml.Schema.XmlSchema[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 124,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollectionEnumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 125,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 126,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaInferenceException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 127,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectCollection::CopyTo:System.Void(System.Xml.Schema.XmlSchemaObject[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 128,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectEnumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 129,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectEnumerator::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 130,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::CopyTo:System.Void(System.Xml.Schema.XmlSchema[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 131,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidationException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 132,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlValueGetter::BeginInvoke:System.IAsyncResult(System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 133,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlValueGetter::EndInvoke:System.Object(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 134,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlValueGetter::Invoke:System.Object()",
+      "generatedMethodId": ""
     }
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Linq.Expressions",
+  "chunkSlug": "global-ns",
+  "entries": [
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::Create:System.Dynamic.DynamicMetaObject(System.Object,System.Linq.Expressions.Expression)"
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSite::Create:System.Runtime.CompilerServices.CallSite(System.Type,System.Runtime.CompilerServices.CallSiteBinder)"
+    }
+  ]
+}

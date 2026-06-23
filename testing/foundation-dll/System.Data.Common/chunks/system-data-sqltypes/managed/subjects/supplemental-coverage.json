@@ -1,0 +1,13 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Data.Common",
+  "chunkSlug": "system-data-sqltypes",
+  "entries": [
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Abs:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::WriteTdsValue:System.Int32(System.Span<System.UInt32>)"
+    }
+  ]
+}

@@ -6,7 +6,6 @@ public sealed class TestEmitter
 {
     private readonly CSharpSerializer _serializer;
     private readonly CSharpExpressionBuilder _expressionBuilder;
-    private readonly IReadOnlySet<string>? _abstractTypeNames;
 
     // Assemblies whose methods dispatch through the external runtime stub table in
     // AOT mode.  The stubs return default values and never throw, so Assert.Throws<T>
@@ -23,11 +22,10 @@ public sealed class TestEmitter
         "System.Double", "System.Decimal", "System.Char",
     };
 
-    public TestEmitter(CSharpSerializer serializer, CSharpExpressionBuilder expressionBuilder, IReadOnlySet<string>? abstractTypeNames = null)
+    public TestEmitter(CSharpSerializer serializer, CSharpExpressionBuilder expressionBuilder)
     {
         _serializer = serializer;
         _expressionBuilder = expressionBuilder;
-        _abstractTypeNames = abstractTypeNames;
     }
 
     public string Emit(
@@ -186,21 +184,6 @@ public sealed class TestEmitter
                     ? $"<{string.Join(", ", method.GenericTypeArgs.Select(CSharpSerializer.MapToCSharpType))}>"
                     : "";
                 var instanceExpr = _expressionBuilder.GetInstanceExpression(typeFullName, method.IsStatic);
-                // The CSharpExpressionBuilder returns SubjectInstanceFactory for
-                // abstract/interface types (to avoid CS0144) and new T() for
-                // concrete types.  As a secondary override, convert any remaining
-                // SubjectInstanceFactory calls to new T() when the type is a
-                // non-abstract, non-interface, concrete type.
-                if (instanceExpr.StartsWith("SubjectInstanceFactory.Create<global::") && instanceExpr.EndsWith(">()"))
-                {
-                    var typeArg = instanceExpr["SubjectInstanceFactory.Create<global::".Length..">()".Length];
-                    // Convert to new T() for concrete types (not abstract/interface)
-                    // using DllScanner metadata (not Type.GetType which fails for target assemblies)
-                    bool isAbstract = _abstractTypeNames != null && _abstractTypeNames.Contains(typeArg);
-                    if (!isAbstract) {
-                        instanceExpr = $"new global::{typeArg}()";
-                    }
-                }
                 var callExpr = $"{instanceExpr}.{method.Name}{genericSuffix}({argsStr})";
 
                 // Task-returning methods: unwrap with GetAwaiter().GetResult() so assertions
@@ -264,10 +247,8 @@ public sealed class TestEmitter
                 {
                     sb.AppendLine();
                     sb.AppendLine("        [Benchmark]");
-                    sb.AppendLine($"        public static long Benchmark_{methodSuffix}()");
+                    sb.AppendLine($"        public static void Benchmark_{methodSuffix}()");
                     sb.AppendLine("        {");
-                    // Measure GC allocation: record before, execute, compute delta
-                    sb.AppendLine("            var before_alloc = GC.GetAllocatedBytesForCurrentThread();");
                     if (preludeStr.Length > 0)
                         sb.Append(preludeStr);
                     var benchCall = $"{instanceExpr}.{method.Name}{genericSuffix}({argsStr})";
@@ -275,7 +256,6 @@ public sealed class TestEmitter
                         sb.AppendLine($"            {benchCall};");
                     else
                         sb.AppendLine($"            _ = {benchCall};");
-                    sb.AppendLine("            return GC.GetAllocatedBytesForCurrentThread() - before_alloc;");
                     sb.AppendLine("        }");
                 }
             }
@@ -299,8 +279,7 @@ public sealed class TestEmitter
             // the stub can never throw the expected exception.
             if (isExternalAssembly)
             {
-                sb.AppendLine($"            // [AOT smoke] {result.ExceptionType} thrown by {callExpr} (external assembly stub)");
-                sb.AppendLine($"            try {{ {callExpr}; }} catch ({result.ExceptionType}) {{ /* expected - external stub */ }}");
+                sb.AppendLine($"            // [AOT smoke] {result.ExceptionType} thrown by {callExpr} (external assembly stub — skipping Throws)");
                 return;
             }
 

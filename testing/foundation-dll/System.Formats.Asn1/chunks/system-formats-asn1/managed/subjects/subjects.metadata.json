@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Formats.Asn1",
   "chunkSlug": "system-formats-asn1",
-  "totalMethods": 77,
+  "totalMethods": 164,
   "factMethodCount": 59,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -203,19 +203,19 @@
     {
       "index": 6,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekEncodedValue:System.ReadOnlyMemory\u003CSystem.Byte\u003E()",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekEncodedValue:System.ReadOnlyMemory<System.Byte>()",
       "generatedMethodId": "PeekEncodedValue_2__0"
     },
     {
       "index": 7,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekContentBytes:System.ReadOnlyMemory\u003CSystem.Byte\u003E()",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekContentBytes:System.ReadOnlyMemory<System.Byte>()",
       "generatedMethodId": "PeekContentBytes_3__0"
     },
     {
       "index": 8,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEncodedValue:System.ReadOnlyMemory\u003CSystem.Byte\u003E()",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEncodedValue:System.ReadOnlyMemory<System.Byte>()",
       "generatedMethodId": "ReadEncodedValue_4__0"
     },
     {
@@ -227,211 +227,211 @@
     {
       "index": 10,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32,System.ReadOnlyMemory<System.Byte>,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0"
     },
     {
       "index": 11,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32,System.ReadOnlyMemory<System.Byte>,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1"
     },
     {
       "index": 12,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte[](System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte[](System.Int32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadBitString_7_int_System_NullableAsn1Tag_0"
     },
     {
       "index": 13,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte[](System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte[](System.Int32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadBitString_7_int_System_NullableAsn1Tag_1"
     },
     {
       "index": 14,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBoolean:System.Boolean(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBoolean:System.Boolean(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadBoolean_8_System_NullableAsn1Tag_0"
     },
     {
       "index": 15,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedBytes:System.ReadOnlyMemory\u003CSystem.Byte\u003E(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedBytes:System.ReadOnlyMemory<System.Byte>(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadEnumeratedBytes_9_System_NullableAsn1Tag_0"
     },
     {
       "index": 16,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.DayOfWeek(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.DayOfWeek(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadEnumeratedValue_10_System_NullableAsn1Tag_0"
     },
     {
       "index": 17,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.Enum(System.Type,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.Enum(System.Type,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0"
     },
     {
       "index": 18,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadGeneralizedTime:System.DateTimeOffset(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadGeneralizedTime:System.DateTimeOffset(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadGeneralizedTime_12_System_NullableAsn1Tag_0"
     },
     {
       "index": 19,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadIntegerBytes:System.ReadOnlyMemory\u003CSystem.Byte\u003E(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadIntegerBytes:System.ReadOnlyMemory<System.Byte>(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadIntegerBytes_13_System_NullableAsn1Tag_0"
     },
     {
       "index": 20,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadInteger:System.Numerics.BigInteger(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadInteger:System.Numerics.BigInteger(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadInteger_14_System_NullableAsn1Tag_0"
     },
     {
       "index": 21,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "TryReadInt32_15_int_System_NullableAsn1Tag_0"
     },
     {
       "index": 22,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "TryReadInt32_15_int_System_NullableAsn1Tag_1"
     },
     {
       "index": 23,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "TryReadUInt32_16_uint_System_NullableAsn1Tag_0"
     },
     {
       "index": 24,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "TryReadUInt32_16_uint_System_NullableAsn1Tag_1"
     },
     {
       "index": 25,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "TryReadInt64_17_long_System_NullableAsn1Tag_0"
     },
     {
       "index": 26,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "TryReadInt64_17_long_System_NullableAsn1Tag_1"
     },
     {
       "index": 27,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "TryReadUInt64_18_ulong_System_NullableAsn1Tag_0"
     },
     {
       "index": 28,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "TryReadUInt64_18_ulong_System_NullableAsn1Tag_1"
     },
     {
       "index": 29,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.DayOfWeek(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.DayOfWeek(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadNamedBitListValue_19_System_NullableAsn1Tag_0"
     },
     {
       "index": 30,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.Enum(System.Type,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.Enum(System.Type,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0"
     },
     {
       "index": 31,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitList:System.Collections.BitArray(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitList:System.Collections.BitArray(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadNamedBitList_21_System_NullableAsn1Tag_0"
     },
     {
       "index": 32,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNull:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNull:System.Void(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadNull_22_System_NullableAsn1Tag_0"
     },
     {
       "index": 33,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadOctetString:System.Byte[](System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadOctetString:System.Byte[](System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadOctetString_23_System_NullableAsn1Tag_0"
     },
     {
       "index": 34,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlyMemory<System.Byte>,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0"
     },
     {
       "index": 35,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadObjectIdentifier:System.String(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadObjectIdentifier:System.String(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadObjectIdentifier_25_System_NullableAsn1Tag_0"
     },
     {
       "index": 36,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSequence:System.Formats.Asn1.AsnReader(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSequence:System.Formats.Asn1.AsnReader(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadSequence_26_System_NullableAsn1Tag_0"
     },
     {
       "index": 37,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadSetOf_27_System_NullableAsn1Tag_0"
     },
     {
       "index": 38,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Boolean,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadSetOf_28_bool_System_NullableAsn1Tag_0"
     },
     {
       "index": 39,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Boolean,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadSetOf_28_bool_System_NullableAsn1Tag_1"
     },
     {
       "index": 40,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveCharacterStringBytes:System.Boolean(System.Formats.Asn1.Asn1Tag,System.ReadOnlyMemory\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveCharacterStringBytes:System.Boolean(System.Formats.Asn1.Asn1Tag,System.ReadOnlyMemory<System.Byte>)",
       "generatedMethodId": "TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0"
     },
     {
       "index": 41,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadCharacterString:System.String(System.Formats.Asn1.UniversalTagNumber,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadCharacterString:System.String(System.Formats.Asn1.UniversalTagNumber,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0"
     },
     {
       "index": 42,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadUtcTime_31_System_NullableAsn1Tag_0"
     },
     {
       "index": 43,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadUtcTime_32_int_System_NullableAsn1Tag_0"
     },
     {
       "index": 44,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "ReadUtcTime_32_int_System_NullableAsn1Tag_1"
     },
     {
@@ -455,169 +455,169 @@
     {
       "index": 48,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteBoolean_3_bool_System_NullableAsn1Tag_0"
     },
     {
       "index": 49,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteBoolean_3_bool_System_NullableAsn1Tag_1"
     },
     {
       "index": 50,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.Enum,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.Enum,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteEnumeratedValue_4_System_Enum_System_NullableAsn1Tag_0"
     },
     {
       "index": 51,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.DayOfWeek,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.DayOfWeek,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteEnumeratedValue_5_System_DayOfWeek_System_NullableAsn1Tag_0"
     },
     {
       "index": 52,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.DayOfWeek,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.DayOfWeek,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteEnumeratedValue_5_System_DayOfWeek_System_NullableAsn1Tag_1"
     },
     {
       "index": 53,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteGeneralizedTime_6_System_DateTimeOffset_bool_System_NullableAsn1Tag_0"
     },
     {
       "index": 54,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteGeneralizedTime_6_System_DateTimeOffset_bool_System_NullableAsn1Tag_1"
     },
     {
       "index": 55,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteInteger_7_long_System_NullableAsn1Tag_0"
     },
     {
       "index": 56,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteInteger_7_long_System_NullableAsn1Tag_1"
     },
     {
       "index": 57,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteInteger_8_ulong_System_NullableAsn1Tag_0"
     },
     {
       "index": 58,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteInteger_8_ulong_System_NullableAsn1Tag_1"
     },
     {
       "index": 59,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteInteger_9_BigInteger_System_NullableAsn1Tag_0"
     },
     {
       "index": 60,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteInteger_9_BigInteger_System_NullableAsn1Tag_1"
     },
     {
       "index": 61,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Enum,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Enum,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteNamedBitList_10_System_Enum_System_NullableAsn1Tag_0"
     },
     {
       "index": 62,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.DayOfWeek,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.DayOfWeek,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteNamedBitList_11_System_DayOfWeek_System_NullableAsn1Tag_0"
     },
     {
       "index": 63,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.DayOfWeek,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.DayOfWeek,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteNamedBitList_11_System_DayOfWeek_System_NullableAsn1Tag_1"
     },
     {
       "index": 64,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Collections.BitArray,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Collections.BitArray,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteNamedBitList_12_BitArray_System_NullableAsn1Tag_0"
     },
     {
       "index": 65,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNull:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNull:System.Void(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteNull_13_System_NullableAsn1Tag_0"
     },
     {
       "index": 66,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopOctetString:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopOctetString:System.Void(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "PopOctetString_14_System_NullableAsn1Tag_0"
     },
     {
       "index": 67,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteObjectIdentifier_15_string_System_NullableAsn1Tag_0"
     },
     {
       "index": 68,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteObjectIdentifier_15_string_System_NullableAsn1Tag_1"
     },
     {
       "index": 69,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSequence:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSequence:System.Void(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "PopSequence_16_System_NullableAsn1Tag_0"
     },
     {
       "index": 70,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSetOf:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSetOf:System.Void(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "PopSetOf_17_System_NullableAsn1Tag_0"
     },
     {
       "index": 71,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.String,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.String,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteCharacterString_18_UniversalTagNumber_string_System_NullableAsn1Tag_0"
     },
     {
       "index": 72,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.String,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.String,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteCharacterString_18_UniversalTagNumber_string_System_NullableAsn1Tag_1"
     },
     {
       "index": 73,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteUtcTime_19_System_DateTimeOffset_System_NullableAsn1Tag_0"
     },
     {
       "index": 74,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteUtcTime_20_System_DateTimeOffset_int_System_NullableAsn1Tag_0"
     },
     {
       "index": 75,
       "kind": "fact",
-      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
       "generatedMethodId": "WriteUtcTime_20_System_DateTimeOffset_int_System_NullableAsn1Tag_1"
     },
     {
@@ -625,6 +625,528 @@
       "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/AsnWriter.Scope::Dispose:System.Void()",
       "generatedMethodId": "Dispose_0__0"
+    },
+    {
+      "index": 77,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Decode:System.Formats.Asn1.Asn1Tag(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 78,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Encode:System.Int32(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 79,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::TryDecode:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Formats.Asn1.Asn1Tag&,System.Int32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 80,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::TryEncode:System.Boolean(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 81,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder+BitStringCopyAction::Invoke:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Byte,System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 82,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekContentBytes:System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 83,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekEncodedValue:System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 84,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte[](System.Int32&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 85,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBoolean:System.Boolean(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 86,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadCharacterString:System.String(System.Formats.Asn1.UniversalTagNumber,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 87,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEncodedValue:System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 88,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedBytes:System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 89,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.Enum(System.Type,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 90,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadGeneralizedTime:System.DateTimeOffset(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 91,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadInteger:System.Numerics.BigInteger(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 92,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadIntegerBytes:System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 93,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitList:System.Collections.BitArray(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 94,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.Enum(System.Type,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 95,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNull:System.Void(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 96,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadObjectIdentifier:System.String(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 97,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadOctetString:System.Byte[](System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 98,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSequence:System.Formats.Asn1.AsnReader(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 99,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Boolean,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 100,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 101,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 102,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 103,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadBitString:System.Boolean(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&,System.Int32&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 104,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadCharacterString:System.Boolean(System.Span`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Formats.Asn1.UniversalTagNumber,System.Int32&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 105,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadCharacterStringBytes:System.Boolean(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Formats.Asn1.Asn1Tag,System.Int32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 106,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 107,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 108,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadOctetString:System.Boolean(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 109,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32&,System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 110,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveCharacterStringBytes:System.Boolean(System.Formats.Asn1.Asn1Tag,System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 111,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 112,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 113,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 114,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter+ArrayIndexSetOfValueComparer::Compare:System.Int32(System.ValueTuple`2[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ValueTuple`2[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 115,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter+Scope::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 116,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter+StackFrame::Deconstruct:System.Void(System.Formats.Asn1.Asn1Tag&,System.Int32&,System.Formats.Asn1.UniversalTagNumber&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 117,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode:System.Byte[]()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 118,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode:System.Int32(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 119,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::EncodedValueEquals:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 120,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopOctetString:System.Void(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 121,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSequence:System.Void(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 122,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSetOf:System.Void(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 123,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PushOctetString:System.Formats.Asn1.AsnWriter+Scope(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 124,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PushSequence:System.Formats.Asn1.AsnWriter+Scope(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 125,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PushSetOf:System.Formats.Asn1.AsnWriter+Scope(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 126,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 127,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::TryEncode:System.Boolean(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 128,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBitString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 129,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 130,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 131,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.String,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 132,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEncodedValue:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 133,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.Enum,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 134,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 135,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 136,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 137,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 138,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 139,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteIntegerUnsigned:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 140,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Collections.BitArray,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 141,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Enum,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 142,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNull:System.Void(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 143,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 144,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 145,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteOctetString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 146,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 147,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 148,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.BMPEncoding::GetMaxByteCount:System.Int32(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 149,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.BMPEncoding::GetMaxCharCount:System.Int32(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 150,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.SetOfValueComparer::Compare:System.Int32(System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 151,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetByteCount:System.Int32(System.Char*,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 152,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetByteCount:System.Int32(System.Char[],System.Int32,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 153,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetByteCount:System.Int32(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 154,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetByteCount:System.Int32(System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 155,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetBytes:System.Int32(System.Char*,System.Int32,System.Byte*,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 156,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetBytes:System.Int32(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 157,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetCharCount:System.Int32(System.Byte*,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 158,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetCharCount:System.Int32(System.Byte[],System.Int32,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 159,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetCharCount:System.Int32(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 160,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetChars:System.Int32(System.Byte*,System.Int32,System.Char*,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 161,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetChars:System.Int32(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 162,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetMaxByteCount:System.Int32(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 163,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetMaxCharCount:System.Int32(System.Int32)",
+      "generatedMethodId": ""
     }
   ]
 }

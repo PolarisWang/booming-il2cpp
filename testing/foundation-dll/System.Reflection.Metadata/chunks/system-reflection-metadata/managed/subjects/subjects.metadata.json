@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Reflection.Metadata",
   "chunkSlug": "system-reflection-metadata",
-  "totalMethods": 408,
+  "totalMethods": 483,
   "factMethodCount": 281,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -871,7 +871,7 @@
     {
       "index": 7,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Blob::GetBytes:System.ArraySegment\u003CSystem.Byte\u003E()",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Blob::GetBytes:System.ArraySegment<System.Byte>()",
       "generatedMethodId": "GetBytes_0__0"
     },
     {
@@ -913,25 +913,25 @@
     {
       "index": 14,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ToImmutableArray:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E()",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ToImmutableArray:System.Collections.Immutable.ImmutableArray<System.Byte>()",
       "generatedMethodId": "ToImmutableArray_4__0"
     },
     {
       "index": 15,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ToImmutableArray:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ToImmutableArray:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Int32,System.Int32)",
       "generatedMethodId": "ToImmutableArray_5_int_int_0"
     },
     {
       "index": 16,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ToImmutableArray:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ToImmutableArray:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Int32,System.Int32)",
       "generatedMethodId": "ToImmutableArray_5_int_int_1"
     },
     {
       "index": 17,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ToImmutableArray:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ToImmutableArray:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Int32,System.Int32)",
       "generatedMethodId": "ToImmutableArray_5_int_int_2"
     },
     {
@@ -1033,25 +1033,25 @@
     {
       "index": 34,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray<System.Byte>)",
       "generatedMethodId": "WriteBytes_15_ImmutableArraybyte_0"
     },
     {
       "index": 35,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E,System.Int32,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray<System.Byte>,System.Int32,System.Int32)",
       "generatedMethodId": "WriteBytes_16_ImmutableArraybyte_int_int_0"
     },
     {
       "index": 36,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E,System.Int32,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray<System.Byte>,System.Int32,System.Int32)",
       "generatedMethodId": "WriteBytes_16_ImmutableArraybyte_int_int_1"
     },
     {
       "index": 37,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E,System.Int32,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray<System.Byte>,System.Int32,System.Int32)",
       "generatedMethodId": "WriteBytes_16_ImmutableArraybyte_int_int_2"
     },
     {
@@ -1441,7 +1441,7 @@
     {
       "index": 102,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobContentId::FromHash:System.Reflection.Metadata.BlobContentId(System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobContentId::FromHash:System.Reflection.Metadata.BlobContentId(System.Collections.Immutable.ImmutableArray<System.Byte>)",
       "generatedMethodId": "FromHash_0_ImmutableArraybyte_0"
     },
     {
@@ -1465,7 +1465,7 @@
     {
       "index": 106,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobContentId::GetTimeBasedProvider:System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Reflection.Metadata.Blob\u003E,System.Reflection.Metadata.BlobContentId\u003E()",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobContentId::GetTimeBasedProvider:System.Func<System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,System.Reflection.Metadata.BlobContentId>()",
       "generatedMethodId": "GetTimeBasedProvider_2__0"
     },
     {
@@ -1759,25 +1759,25 @@
     {
       "index": 155,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ToImmutableArray:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E()",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ToImmutableArray:System.Collections.Immutable.ImmutableArray<System.Byte>()",
       "generatedMethodId": "ToImmutableArray_3__0"
     },
     {
       "index": 156,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ToImmutableArray:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ToImmutableArray:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Int32,System.Int32)",
       "generatedMethodId": "ToImmutableArray_4_int_int_0"
     },
     {
       "index": 157,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ToImmutableArray:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ToImmutableArray:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Int32,System.Int32)",
       "generatedMethodId": "ToImmutableArray_4_int_int_1"
     },
     {
       "index": 158,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ToImmutableArray:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ToImmutableArray:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Int32,System.Int32)",
       "generatedMethodId": "ToImmutableArray_4_int_int_2"
     },
     {
@@ -1837,25 +1837,25 @@
     {
       "index": 168,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray<System.Byte>)",
       "generatedMethodId": "WriteBytes_9_ImmutableArraybyte_0"
     },
     {
       "index": 169,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E,System.Int32,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray<System.Byte>,System.Int32,System.Int32)",
       "generatedMethodId": "WriteBytes_10_ImmutableArraybyte_int_int_0"
     },
     {
       "index": 170,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E,System.Int32,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray<System.Byte>,System.Int32,System.Int32)",
       "generatedMethodId": "WriteBytes_10_ImmutableArraybyte_int_int_1"
     },
     {
       "index": 171,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E,System.Int32,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray<System.Byte>,System.Int32,System.Int32)",
       "generatedMethodId": "WriteBytes_10_ImmutableArraybyte_int_int_2"
     },
     {
@@ -2251,7 +2251,7 @@
     {
       "index": 237,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomAttribute::DecodeValue:System.Reflection.Metadata.CustomAttributeValue\u003CSystem.Int32\u003E(System.Reflection.Metadata.ICustomAttributeTypeProvider\u003CSystem.Int32\u003E)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomAttribute::DecodeValue:System.Reflection.Metadata.CustomAttributeValue<System.Int32>(System.Reflection.Metadata.ICustomAttributeTypeProvider<System.Int32>)",
       "generatedMethodId": "DecodeValue_0_ICustomAttributeTypeProviderint_0"
     },
     {
@@ -2275,13 +2275,13 @@
     {
       "index": 241,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinition::DecodeSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinition::DecodeSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeSignature_0_ISignatureTypeProviderintint_int_0"
     },
     {
       "index": 242,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinition::DecodeSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinition::DecodeSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeSignature_0_ISignatureTypeProviderintint_int_1"
     },
     {
@@ -2407,25 +2407,25 @@
     {
       "index": 263,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReference::DecodeFieldSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReference::DecodeFieldSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeFieldSignature_0_ISignatureTypeProviderintint_int_0"
     },
     {
       "index": 264,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReference::DecodeFieldSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReference::DecodeFieldSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeFieldSignature_0_ISignatureTypeProviderintint_int_1"
     },
     {
       "index": 265,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReference::DecodeMethodSignature:System.Reflection.Metadata.MethodSignature\u003CSystem.Int32\u003E(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReference::DecodeMethodSignature:System.Reflection.Metadata.MethodSignature<System.Int32>(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeMethodSignature_1_ISignatureTypeProviderintint_int_0"
     },
     {
       "index": 266,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReference::DecodeMethodSignature:System.Reflection.Metadata.MethodSignature\u003CSystem.Int32\u003E(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReference::DecodeMethodSignature:System.Reflection.Metadata.MethodSignature<System.Int32>(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeMethodSignature_1_ISignatureTypeProviderintint_int_1"
     },
     {
@@ -2479,7 +2479,7 @@
     {
       "index": 275,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetBlobContent:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Reflection.Metadata.BlobHandle)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetBlobContent:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "GetBlobContent_5_BlobHandle_0"
     },
     {
@@ -2767,13 +2767,13 @@
     {
       "index": 323,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReaderProvider::FromPortablePdbImage:System.Reflection.Metadata.MetadataReaderProvider(System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReaderProvider::FromPortablePdbImage:System.Reflection.Metadata.MetadataReaderProvider(System.Collections.Immutable.ImmutableArray<System.Byte>)",
       "generatedMethodId": "FromPortablePdbImage_2_ImmutableArraybyte_0"
     },
     {
       "index": 324,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReaderProvider::FromMetadataImage:System.Reflection.Metadata.MetadataReaderProvider(System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReaderProvider::FromMetadataImage:System.Reflection.Metadata.MetadataReaderProvider(System.Collections.Immutable.ImmutableArray<System.Byte>)",
       "generatedMethodId": "FromMetadataImage_3_ImmutableArraybyte_0"
     },
     {
@@ -2875,7 +2875,7 @@
     {
       "index": 341,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodBodyBlock::GetILContent:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E()",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodBodyBlock::GetILContent:System.Collections.Immutable.ImmutableArray<System.Byte>()",
       "generatedMethodId": "GetILContent_1__0"
     },
     {
@@ -2905,13 +2905,13 @@
     {
       "index": 346,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinition::DecodeSignature:System.Reflection.Metadata.MethodSignature\u003CSystem.Int32\u003E(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinition::DecodeSignature:System.Reflection.Metadata.MethodSignature<System.Int32>(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeSignature_0_ISignatureTypeProviderintint_int_0"
     },
     {
       "index": 347,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinition::DecodeSignature:System.Reflection.Metadata.MethodSignature\u003CSystem.Int32\u003E(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinition::DecodeSignature:System.Reflection.Metadata.MethodSignature<System.Int32>(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeSignature_0_ISignatureTypeProviderintint_int_1"
     },
     {
@@ -2965,13 +2965,13 @@
     {
       "index": 356,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodSpecification::DecodeSignature:System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodSpecification::DecodeSignature:System.Collections.Immutable.ImmutableArray<System.Int32>(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeSignature_0_ISignatureTypeProviderintint_int_0"
     },
     {
       "index": 357,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodSpecification::DecodeSignature:System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodSpecification::DecodeSignature:System.Collections.Immutable.ImmutableArray<System.Int32>(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeSignature_0_ISignatureTypeProviderintint_int_1"
     },
     {
@@ -3043,13 +3043,13 @@
     {
       "index": 369,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinition::DecodeSignature:System.Reflection.Metadata.MethodSignature\u003CSystem.Int32\u003E(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinition::DecodeSignature:System.Reflection.Metadata.MethodSignature<System.Int32>(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeSignature_0_ISignatureTypeProviderintint_int_0"
     },
     {
       "index": 370,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinition::DecodeSignature:System.Reflection.Metadata.MethodSignature\u003CSystem.Int32\u003E(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinition::DecodeSignature:System.Reflection.Metadata.MethodSignature<System.Int32>(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeSignature_0_ISignatureTypeProviderintint_int_1"
     },
     {
@@ -3073,31 +3073,31 @@
     {
       "index": 374,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ReservedBlob\u003CSystem.Int32\u003E::CreateWriter:System.Reflection.Metadata.BlobWriter()",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ReservedBlob<System.Int32>::CreateWriter:System.Reflection.Metadata.BlobWriter()",
       "generatedMethodId": "CreateWriter_0__0"
     },
     {
       "index": 375,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.StandaloneSignature::DecodeMethodSignature:System.Reflection.Metadata.MethodSignature\u003CSystem.Int32\u003E(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.StandaloneSignature::DecodeMethodSignature:System.Reflection.Metadata.MethodSignature<System.Int32>(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeMethodSignature_0_ISignatureTypeProviderintint_int_0"
     },
     {
       "index": 376,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.StandaloneSignature::DecodeMethodSignature:System.Reflection.Metadata.MethodSignature\u003CSystem.Int32\u003E(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.StandaloneSignature::DecodeMethodSignature:System.Reflection.Metadata.MethodSignature<System.Int32>(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeMethodSignature_0_ISignatureTypeProviderintint_int_1"
     },
     {
       "index": 377,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.StandaloneSignature::DecodeLocalSignature:System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.StandaloneSignature::DecodeLocalSignature:System.Collections.Immutable.ImmutableArray<System.Int32>(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeLocalSignature_1_ISignatureTypeProviderintint_int_0"
     },
     {
       "index": 378,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.StandaloneSignature::DecodeLocalSignature:System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.StandaloneSignature::DecodeLocalSignature:System.Collections.Immutable.ImmutableArray<System.Int32>(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeLocalSignature_1_ISignatureTypeProviderintint_int_1"
     },
     {
@@ -3157,7 +3157,7 @@
     {
       "index": 388,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetNestedTypes:System.Collections.Immutable.ImmutableArray\u003CSystem.Reflection.Metadata.TypeDefinitionHandle\u003E()",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetNestedTypes:System.Collections.Immutable.ImmutableArray<System.Reflection.Metadata.TypeDefinitionHandle>()",
       "generatedMethodId": "GetNestedTypes_7__0"
     },
     {
@@ -3211,7 +3211,7 @@
     {
       "index": 397,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::GetGenericArguments:System.Collections.Immutable.ImmutableArray\u003CSystem.Reflection.Metadata.TypeName\u003E()",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::GetGenericArguments:System.Collections.Immutable.ImmutableArray<System.Reflection.Metadata.TypeName>()",
       "generatedMethodId": "GetGenericArguments_4__0"
     },
     {
@@ -3253,19 +3253,19 @@
     {
       "index": 404,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::MakeGenericTypeName:System.Reflection.Metadata.TypeName(System.Collections.Immutable.ImmutableArray\u003CSystem.Reflection.Metadata.TypeName\u003E)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::MakeGenericTypeName:System.Reflection.Metadata.TypeName(System.Collections.Immutable.ImmutableArray<System.Reflection.Metadata.TypeName>)",
       "generatedMethodId": "MakeGenericTypeName_10_ImmutableArrayTypeName_0"
     },
     {
       "index": 405,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeSpecification::DecodeSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeSpecification::DecodeSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeSignature_0_ISignatureTypeProviderintint_int_0"
     },
     {
       "index": 406,
       "kind": "fact",
-      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeSpecification::DecodeSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider\u003CSystem.Int32,System.Int32\u003E,System.Int32)",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeSpecification::DecodeSignature:System.Int32(System.Reflection.Metadata.ISignatureTypeProvider<System.Int32,System.Int32>,System.Int32)",
       "generatedMethodId": "DecodeSignature_0_ISignatureTypeProviderintint_int_1"
     },
     {
@@ -3273,6 +3273,456 @@
       "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeSpecification::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
       "generatedMethodId": "GetCustomAttributes_1__0"
+    },
+    {
+      "index": 408,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyDefinition::GetAssemblyNameInfo:System.Reflection.Metadata.AssemblyNameInfo()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 409,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyFileHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 410,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyFileHandleCollection::GetEnumerator:System.Reflection.Metadata.AssemblyFileHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 411,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyNameInfo::Parse:System.Reflection.Metadata.AssemblyNameInfo(System.ReadOnlySpan<System.Char>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 412,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyNameInfo::TryParse:System.Boolean(System.ReadOnlySpan<System.Char>,System.Reflection.Metadata.AssemblyNameInfo)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 413,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReference::GetAssemblyNameInfo:System.Reflection.Metadata.AssemblyNameInfo()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 414,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReferenceHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 415,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReferenceHandleCollection::GetEnumerator:System.Reflection.Metadata.AssemblyReferenceHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 416,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder+Blobs::GetEnumerator:System.Reflection.Metadata.BlobBuilder+Blobs()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 417,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder+Blobs::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 418,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder+Blobs::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 419,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::GetBlobs:System.Reflection.Metadata.BlobBuilder+Blobs()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 420,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteInt16:System.Void(System.Int16)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 421,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 422,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteInt16:System.Void(System.Int16)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 423,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomAttributeHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 424,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomAttributeHandleCollection::GetEnumerator:System.Reflection.Metadata.CustomAttributeHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 425,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomDebugInformationHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 426,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomDebugInformationHandleCollection::GetEnumerator:System.Reflection.Metadata.CustomDebugInformationHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 427,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 428,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection::GetEnumerator:System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 429,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DocumentHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 430,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DocumentHandleCollection::GetEnumerator:System.Reflection.Metadata.DocumentHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 431,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinition::GetDeclaringType:System.Reflection.Metadata.TypeDefinitionHandle()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 432,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 433,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.EventDefinitionHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 434,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ExportedTypeHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 435,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ExportedTypeHandleCollection::GetEnumerator:System.Reflection.Metadata.ExportedTypeHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 436,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 437,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.FieldDefinitionHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 438,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterConstraintHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 439,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterConstraintHandleCollection::GetEnumerator:System.Reflection.Metadata.GenericParameterConstraintHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 440,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 441,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterHandleCollection::GetEnumerator:System.Reflection.Metadata.GenericParameterHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 442,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 443,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection+Enumerator::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 444,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection::GetEnumerator:System.Reflection.Metadata.ImportDefinitionCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 445,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportScopeCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 446,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportScopeCollection::GetEnumerator:System.Reflection.Metadata.ImportScopeCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 447,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.InterfaceImplementationHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 448,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.InterfaceImplementationHandleCollection::GetEnumerator:System.Reflection.Metadata.InterfaceImplementationHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 449,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalConstantHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 450,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalConstantHandleCollection::GetEnumerator:System.Reflection.Metadata.LocalConstantHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 451,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScope::GetChildren:System.Reflection.Metadata.LocalScopeHandleCollection+ChildrenEnumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 452,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection+ChildrenEnumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 453,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 454,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection::GetEnumerator:System.Reflection.Metadata.LocalScopeHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 455,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalVariableHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 456,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalVariableHandleCollection::GetEnumerator:System.Reflection.Metadata.LocalVariableHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 457,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ManifestResourceHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 458,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ManifestResourceHandleCollection::GetEnumerator:System.Reflection.Metadata.ManifestResourceHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 459,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReferenceHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 460,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReferenceHandleCollection::GetEnumerator:System.Reflection.Metadata.MemberReferenceHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 461,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodBodyBlock::Create:System.Reflection.Metadata.MethodBodyBlock(System.Reflection.Metadata.BlobReader)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 462,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformationHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 463,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformationHandleCollection::GetEnumerator:System.Reflection.Metadata.MethodDebugInformationHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 464,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 465,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.MethodDefinitionHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 466,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodImplementationHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 467,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodImplementationHandleCollection::GetEnumerator:System.Reflection.Metadata.MethodImplementationHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 468,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ParameterHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 469,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ParameterHandleCollection::GetEnumerator:System.Reflection.Metadata.ParameterHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 470,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinition::GetDeclaringType:System.Reflection.Metadata.TypeDefinitionHandle()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 471,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 472,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.PropertyDefinitionHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 473,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 474,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection+Enumerator::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 475,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection::GetEnumerator:System.Reflection.Metadata.SequencePointCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 476,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 477,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.TypeDefinitionHandleCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 478,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::Parse:System.Reflection.Metadata.TypeName(System.ReadOnlySpan<System.Char>,System.Reflection.Metadata.TypeNameParseOptions)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 479,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::TryParse:System.Boolean(System.ReadOnlySpan<System.Char>,System.Reflection.Metadata.TypeName,System.Reflection.Metadata.TypeNameParseOptions)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 480,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::Unescape:System.String(System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 481,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeReferenceHandleCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 482,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeReferenceHandleCollection::GetEnumerator:System.Reflection.Metadata.TypeReferenceHandleCollection+Enumerator()",
+      "generatedMethodId": ""
     }
   ]
 }

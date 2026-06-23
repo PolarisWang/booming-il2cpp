@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.Xml",
   "chunkSlug": "system-xml-xsl",
-  "totalMethods": 208,
+  "totalMethods": 247,
   "factMethodCount": 126,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -561,7 +561,7 @@
     {
       "index": 22,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::GetNamespacesInScope:System.Collections.Generic.IDictionary\u003CSystem.String,System.String\u003E(System.Xml.XmlNamespaceScope)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathNavigator::GetNamespacesInScope:System.Collections.Generic.IDictionary<System.String,System.String>(System.Xml.XmlNamespaceScope)",
       "generatedMethodId": "GetNamespacesInScope_6_XmlNamespaceScope_0"
     },
     {
@@ -1673,6 +1673,240 @@
       "kind": "fact",
       "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.String,System.Xml.XmlResolver)",
       "generatedMethodId": "Load_7_string_XmlResolver_1"
+    },
+    {
+      "index": 208,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 209,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 210,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.Xml.XmlWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 211,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 212,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 213,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 214,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.XmlWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 215,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 216,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 217,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 218,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 219,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.XmlWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 220,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 221,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 222,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 223,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 224,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.String,System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 225,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.String,System.String,System.Xml.XmlResolver)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 226,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 227,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream,System.Xml.XmlResolver)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 228,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 229,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter,System.Xml.XmlResolver)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 230,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 231,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 232,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 233,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.Stream,System.Xml.XmlResolver)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 234,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 235,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter,System.Xml.XmlResolver)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 236,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 237,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 238,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Xml.XmlReader(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 239,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Xml.XmlReader(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlResolver)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 240,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Xml.XmlReader(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 241,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Xml.XmlReader(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlResolver)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 242,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltCompileException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 243,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 244,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltMessageEncounteredEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Xsl.XsltMessageEncounteredEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 245,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltMessageEncounteredEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 246,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltMessageEncounteredEventHandler::Invoke:System.Void(System.Object,System.Xml.Xsl.XsltMessageEncounteredEventArgs)",
+      "generatedMethodId": ""
     }
   ]
 }

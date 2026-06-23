@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.Xml",
   "chunkSlug": "xml",
-  "totalMethods": 1025,
+  "totalMethods": 1032,
   "factMethodCount": 489,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -3989,7 +3989,7 @@
     {
       "index": 321,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlNamespaceManager::GetNamespacesInScope:System.Collections.Generic.IDictionary\u003CSystem.String,System.String\u003E(System.Xml.XmlNamespaceScope)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlNamespaceManager::GetNamespacesInScope:System.Collections.Generic.IDictionary<System.String,System.String>(System.Xml.XmlNamespaceScope)",
       "generatedMethodId": "GetNamespacesInScope_5_XmlNamespaceScope_0"
     },
     {
@@ -5483,49 +5483,49 @@
     {
       "index": 570,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::GetValueAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E()",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::GetValueAsync:System.Threading.Tasks.Task<System.String>()",
       "generatedMethodId": "GetValueAsync_75__0"
     },
     {
       "index": 571,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsObjectAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E()",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsObjectAsync:System.Threading.Tasks.Task<System.Object>()",
       "generatedMethodId": "ReadContentAsObjectAsync_76__0"
     },
     {
       "index": 572,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E()",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsStringAsync:System.Threading.Tasks.Task<System.String>()",
       "generatedMethodId": "ReadContentAsStringAsync_77__0"
     },
     {
       "index": 573,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Type,System.Xml.IXmlNamespaceResolver)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsAsync:System.Threading.Tasks.Task<System.Object>(System.Type,System.Xml.IXmlNamespaceResolver)",
       "generatedMethodId": "ReadContentAsAsync_78_System_Type_IXmlNamespaceResolver_0"
     },
     {
       "index": 574,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsObjectAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E()",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsObjectAsync:System.Threading.Tasks.Task<System.Object>()",
       "generatedMethodId": "ReadElementContentAsObjectAsync_79__0"
     },
     {
       "index": 575,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E()",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsStringAsync:System.Threading.Tasks.Task<System.String>()",
       "generatedMethodId": "ReadElementContentAsStringAsync_80__0"
     },
     {
       "index": 576,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Type,System.Xml.IXmlNamespaceResolver)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsAsync:System.Threading.Tasks.Task<System.Object>(System.Type,System.Xml.IXmlNamespaceResolver)",
       "generatedMethodId": "ReadElementContentAsAsync_81_System_Type_IXmlNamespaceResolver_0"
     },
     {
       "index": 577,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Boolean\u003E()",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadAsync:System.Threading.Tasks.Task<System.Boolean>()",
       "generatedMethodId": "ReadAsync_82__0"
     },
     {
@@ -5537,169 +5537,169 @@
     {
       "index": 579,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBase64Async:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBase64Async:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadContentAsBase64Async_84_System_Byte_int_int_0"
     },
     {
       "index": 580,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBase64Async:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBase64Async:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadContentAsBase64Async_84_System_Byte_int_int_1"
     },
     {
       "index": 581,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBase64Async:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBase64Async:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadContentAsBase64Async_84_System_Byte_int_int_2"
     },
     {
       "index": 582,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBase64Async:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBase64Async:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadContentAsBase64Async_84_System_Byte_int_int_3"
     },
     {
       "index": 583,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBase64Async:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBase64Async:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadContentAsBase64Async_84_System_Byte_int_int_4"
     },
     {
       "index": 584,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBase64Async:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBase64Async:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadElementContentAsBase64Async_85_System_Byte_int_int_0"
     },
     {
       "index": 585,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBase64Async:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBase64Async:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadElementContentAsBase64Async_85_System_Byte_int_int_1"
     },
     {
       "index": 586,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBase64Async:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBase64Async:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadElementContentAsBase64Async_85_System_Byte_int_int_2"
     },
     {
       "index": 587,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBase64Async:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBase64Async:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadElementContentAsBase64Async_85_System_Byte_int_int_3"
     },
     {
       "index": 588,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBase64Async:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBase64Async:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadElementContentAsBase64Async_85_System_Byte_int_int_4"
     },
     {
       "index": 589,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBinHexAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBinHexAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadContentAsBinHexAsync_86_System_Byte_int_int_0"
     },
     {
       "index": 590,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBinHexAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBinHexAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadContentAsBinHexAsync_86_System_Byte_int_int_1"
     },
     {
       "index": 591,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBinHexAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBinHexAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadContentAsBinHexAsync_86_System_Byte_int_int_2"
     },
     {
       "index": 592,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBinHexAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBinHexAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadContentAsBinHexAsync_86_System_Byte_int_int_3"
     },
     {
       "index": 593,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBinHexAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadContentAsBinHexAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadContentAsBinHexAsync_86_System_Byte_int_int_4"
     },
     {
       "index": 594,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBinHexAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBinHexAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadElementContentAsBinHexAsync_87_System_Byte_int_int_0"
     },
     {
       "index": 595,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBinHexAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBinHexAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadElementContentAsBinHexAsync_87_System_Byte_int_int_1"
     },
     {
       "index": 596,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBinHexAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBinHexAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadElementContentAsBinHexAsync_87_System_Byte_int_int_2"
     },
     {
       "index": 597,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBinHexAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBinHexAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadElementContentAsBinHexAsync_87_System_Byte_int_int_3"
     },
     {
       "index": 598,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBinHexAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadElementContentAsBinHexAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadElementContentAsBinHexAsync_87_System_Byte_int_int_4"
     },
     {
       "index": 599,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadValueChunkAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Char[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadValueChunkAsync:System.Threading.Tasks.Task<System.Int32>(System.Char[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadValueChunkAsync_88_System_Char_int_int_0"
     },
     {
       "index": 600,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadValueChunkAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Char[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadValueChunkAsync:System.Threading.Tasks.Task<System.Int32>(System.Char[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadValueChunkAsync_88_System_Char_int_int_1"
     },
     {
       "index": 601,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadValueChunkAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Char[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadValueChunkAsync:System.Threading.Tasks.Task<System.Int32>(System.Char[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadValueChunkAsync_88_System_Char_int_int_2"
     },
     {
       "index": 602,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadValueChunkAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Char[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadValueChunkAsync:System.Threading.Tasks.Task<System.Int32>(System.Char[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadValueChunkAsync_88_System_Char_int_int_3"
     },
     {
       "index": 603,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadValueChunkAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Char[],System.Int32,System.Int32)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadValueChunkAsync:System.Threading.Tasks.Task<System.Int32>(System.Char[],System.Int32,System.Int32)",
       "generatedMethodId": "ReadValueChunkAsync_88_System_Char_int_int_4"
     },
     {
       "index": 604,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::MoveToContentAsync:System.Threading.Tasks.Task\u003CSystem.Xml.XmlNodeType\u003E()",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::MoveToContentAsync:System.Threading.Tasks.Task<System.Xml.XmlNodeType>()",
       "generatedMethodId": "MoveToContentAsync_89__0"
     },
     {
       "index": 605,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadInnerXmlAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E()",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadInnerXmlAsync:System.Threading.Tasks.Task<System.String>()",
       "generatedMethodId": "ReadInnerXmlAsync_90__0"
     },
     {
       "index": 606,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadOuterXmlAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E()",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReader::ReadOuterXmlAsync:System.Threading.Tasks.Task<System.String>()",
       "generatedMethodId": "ReadOuterXmlAsync_91__0"
     },
     {
@@ -5723,13 +5723,13 @@
     {
       "index": 610,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlResolver::GetEntityAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Uri,System.String,System.Type)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlResolver::GetEntityAsync:System.Threading.Tasks.Task<System.Object>(System.Uri,System.String,System.Type)",
       "generatedMethodId": "GetEntityAsync_1_System_Uri_string_System_Type_0"
     },
     {
       "index": 611,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlResolver::GetEntityAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Uri,System.String,System.Type)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlResolver::GetEntityAsync:System.Threading.Tasks.Task<System.Object>(System.Uri,System.String,System.Type)",
       "generatedMethodId": "GetEntityAsync_1_System_Uri_string_System_Type_1"
     },
     {
@@ -5765,13 +5765,13 @@
     {
       "index": 617,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlSecureResolver::GetEntityAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Uri,System.String,System.Type)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlSecureResolver::GetEntityAsync:System.Threading.Tasks.Task<System.Object>(System.Uri,System.String,System.Type)",
       "generatedMethodId": "GetEntityAsync_1_System_Uri_string_System_Type_0"
     },
     {
       "index": 618,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlSecureResolver::GetEntityAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Uri,System.String,System.Type)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlSecureResolver::GetEntityAsync:System.Threading.Tasks.Task<System.Object>(System.Uri,System.String,System.Type)",
       "generatedMethodId": "GetEntityAsync_1_System_Uri_string_System_Type_1"
     },
     {
@@ -6125,7 +6125,7 @@
     {
       "index": 677,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlTextReader::GetNamespacesInScope:System.Collections.Generic.IDictionary\u003CSystem.String,System.String\u003E(System.Xml.XmlNamespaceScope)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlTextReader::GetNamespacesInScope:System.Collections.Generic.IDictionary<System.String,System.String>(System.Xml.XmlNamespaceScope)",
       "generatedMethodId": "GetNamespacesInScope_21_XmlNamespaceScope_0"
     },
     {
@@ -6665,13 +6665,13 @@
     {
       "index": 767,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlUrlResolver::GetEntityAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Uri,System.String,System.Type)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlUrlResolver::GetEntityAsync:System.Threading.Tasks.Task<System.Object>(System.Uri,System.String,System.Type)",
       "generatedMethodId": "GetEntityAsync_1_System_Uri_string_System_Type_0"
     },
     {
       "index": 768,
       "kind": "fact",
-      "methodSubjectId": "System.Private.Xml/System.Xml.XmlUrlResolver::GetEntityAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Uri,System.String,System.Type)",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlUrlResolver::GetEntityAsync:System.Threading.Tasks.Task<System.Object>(System.Uri,System.String,System.Type)",
       "generatedMethodId": "GetEntityAsync_1_System_Uri_string_System_Type_1"
     },
     {
@@ -8209,6 +8209,48 @@
       "kind": "fact",
       "methodSubjectId": "System.Private.Xml/System.Xml.XmlWriterSettings::Clone:System.Xml.XmlWriterSettings()",
       "generatedMethodId": "Clone_0__0"
+    },
+    {
+      "index": 1025,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttributeCollection::CopyTo:System.Void(System.Xml.XmlAttribute[],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1026,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1027,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlNodeChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.XmlNodeChangedEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1028,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlNodeChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1029,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlNodeChangedEventHandler::Invoke:System.Void(System.Object,System.Xml.XmlNodeChangedEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1030,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlReaderSettings::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 1031,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Private.Xml/System.Xml.XmlWriterSettings::Reset:System.Void()",
+      "generatedMethodId": ""
     }
   ]
 }

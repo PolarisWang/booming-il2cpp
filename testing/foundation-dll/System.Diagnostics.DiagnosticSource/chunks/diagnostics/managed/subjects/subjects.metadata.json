@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Diagnostics.DiagnosticSource",
   "chunkSlug": "diagnostics",
-  "totalMethods": 144,
+  "totalMethods": 177,
   "factMethodCount": 83,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -583,43 +583,43 @@
     {
       "index": 47,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)",
       "generatedMethodId": "CreateActivity_2_string_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_0"
     },
     {
       "index": 48,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)",
       "generatedMethodId": "CreateActivity_2_string_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_1"
     },
     {
       "index": 49,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)",
       "generatedMethodId": "CreateActivity_2_string_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_2"
     },
     {
       "index": 50,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)",
       "generatedMethodId": "CreateActivity_3_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_0"
     },
     {
       "index": 51,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)",
       "generatedMethodId": "CreateActivity_3_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_1"
     },
     {
       "index": 52,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)",
       "generatedMethodId": "CreateActivity_3_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_2"
     },
     {
       "index": 53,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.Diagnostics.ActivityIdFormat)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)",
       "generatedMethodId": "CreateActivity_3_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_ActivityIdFormat_3"
     },
     {
@@ -637,55 +637,55 @@
     {
       "index": 56,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)",
       "generatedMethodId": "StartActivity_5_string_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_0"
     },
     {
       "index": 57,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)",
       "generatedMethodId": "StartActivity_5_string_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_1"
     },
     {
       "index": 58,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)",
       "generatedMethodId": "StartActivity_5_string_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_2"
     },
     {
       "index": 59,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)",
       "generatedMethodId": "StartActivity_6_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_0"
     },
     {
       "index": 60,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)",
       "generatedMethodId": "StartActivity_6_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_1"
     },
     {
       "index": 61,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)",
       "generatedMethodId": "StartActivity_6_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_2"
     },
     {
       "index": 62,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)",
       "generatedMethodId": "StartActivity_6_string_ActivityKind_string_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_3"
     },
     {
       "index": 63,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset,System.String)",
       "generatedMethodId": "StartActivity_7_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_string_0"
     },
     {
       "index": 64,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Diagnostics.ActivityLink\u003E,System.DateTimeOffset,System.String)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset,System.String)",
       "generatedMethodId": "StartActivity_7_ActivityKind_ActivityContext_IEnumerableKeyValuePairstringobject_IEnumerableActivityLink_System_DateTimeOffset_string_1"
     },
     {
@@ -727,7 +727,7 @@
     {
       "index": 71,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_1_KeyValuePairstringobject_0"
     },
     {
@@ -739,7 +739,7 @@
     {
       "index": 73,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Contains:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Contains:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Contains_3_KeyValuePairstringobject_0"
     },
     {
@@ -757,25 +757,25 @@
     {
       "index": 76,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>[],System.Int32)",
       "generatedMethodId": "CopyTo_5_KeyValuePairstringobject_int_0"
     },
     {
       "index": 77,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>[],System.Int32)",
       "generatedMethodId": "CopyTo_5_KeyValuePairstringobject_int_1"
     },
     {
       "index": 78,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>[],System.Int32)",
       "generatedMethodId": "CopyTo_5_KeyValuePairstringobject_int_2"
     },
     {
       "index": 79,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>[],System.Int32)",
       "generatedMethodId": "CopyTo_5_KeyValuePairstringobject_int_3"
     },
     {
@@ -793,7 +793,7 @@
     {
       "index": 82,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Remove_7_KeyValuePairstringobject_0"
     },
     {
@@ -835,43 +835,43 @@
     {
       "index": 89,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Func\u003CSystem.String,System.Object,System.Object,System.Boolean\u003E,System.Action\u003CSystem.Diagnostics.Activity,System.Object\u003E,System.Action\u003CSystem.Diagnostics.Activity,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Func<System.String,System.Object,System.Object,System.Boolean>,System.Action<System.Diagnostics.Activity,System.Object>,System.Action<System.Diagnostics.Activity,System.Object>)",
       "generatedMethodId": "Subscribe_2_System_IObserverKeyValuePairstringobject_System_Funcstringobjectobjectbool_System_ActionActivityobject_System_ActionActivityobject_0"
     },
     {
       "index": 90,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Func\u003CSystem.String,System.Object,System.Object,System.Boolean\u003E,System.Action\u003CSystem.Diagnostics.Activity,System.Object\u003E,System.Action\u003CSystem.Diagnostics.Activity,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Func<System.String,System.Object,System.Object,System.Boolean>,System.Action<System.Diagnostics.Activity,System.Object>,System.Action<System.Diagnostics.Activity,System.Object>)",
       "generatedMethodId": "Subscribe_2_System_IObserverKeyValuePairstringobject_System_Funcstringobjectobjectbool_System_ActionActivityobject_System_ActionActivityobject_1"
     },
     {
       "index": 91,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Predicate\u003CSystem.String\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Predicate<System.String>)",
       "generatedMethodId": "Subscribe_3_System_IObserverKeyValuePairstringobject_System_Predicatestring_0"
     },
     {
       "index": 92,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Predicate\u003CSystem.String\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Predicate<System.String>)",
       "generatedMethodId": "Subscribe_3_System_IObserverKeyValuePairstringobject_System_Predicatestring_1"
     },
     {
       "index": 93,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Func\u003CSystem.String,System.Object,System.Object,System.Boolean\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Func<System.String,System.Object,System.Object,System.Boolean>)",
       "generatedMethodId": "Subscribe_4_System_IObserverKeyValuePairstringobject_System_Funcstringobjectobjectbool_0"
     },
     {
       "index": 94,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E,System.Func\u003CSystem.String,System.Object,System.Object,System.Boolean\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Func<System.String,System.Object,System.Object,System.Boolean>)",
       "generatedMethodId": "Subscribe_4_System_IObserverKeyValuePairstringobject_System_Funcstringobjectobjectbool_1"
     },
     {
       "index": 95,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
       "generatedMethodId": "Subscribe_5_System_IObserverKeyValuePairstringobject_0"
     },
     {
@@ -1045,7 +1045,7 @@
     {
       "index": 124,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::ExtractBaggage:System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E(System.Object,DistributedContextPropagator.PropagatorGetterCallback)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::ExtractBaggage:System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.String>>(System.Object,DistributedContextPropagator.PropagatorGetterCallback)",
       "generatedMethodId": "ExtractBaggage_2_object_DistributedContextPropagator_PropagatorGetterCallback_0"
     },
     {
@@ -1081,43 +1081,43 @@
     {
       "index": 130,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Add_1_KeyValuePairstringobject_0"
     },
     {
       "index": 131,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>[],System.Int32)",
       "generatedMethodId": "CopyTo_2_KeyValuePairstringobject_int_0"
     },
     {
       "index": 132,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>[],System.Int32)",
       "generatedMethodId": "CopyTo_2_KeyValuePairstringobject_int_1"
     },
     {
       "index": 133,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>[],System.Int32)",
       "generatedMethodId": "CopyTo_2_KeyValuePairstringobject_int_2"
     },
     {
       "index": 134,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>[],System.Int32)",
       "generatedMethodId": "CopyTo_2_KeyValuePairstringobject_int_3"
     },
     {
       "index": 135,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Insert_3_int_KeyValuePairstringobject_0"
     },
     {
       "index": 136,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Insert_3_int_KeyValuePairstringobject_1"
     },
     {
@@ -1141,26 +1141,224 @@
     {
       "index": 140,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Contains:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Contains:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Contains_6_KeyValuePairstringobject_0"
     },
     {
       "index": 141,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Remove:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Remove:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "Remove_7_KeyValuePairstringobject_0"
     },
     {
       "index": 142,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E()",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::GetEnumerator:System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()",
       "generatedMethodId": "GetEnumerator_8__0"
     },
     {
       "index": 143,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::IndexOf:System.Int32(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::IndexOf:System.Int32(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
       "generatedMethodId": "IndexOf_9_KeyValuePairstringobject_0"
+    },
+    {
+      "index": 144,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 145,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::EnumerateEvents:System.Diagnostics.Activity+Enumerator<System.Diagnostics.ActivityEvent>()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 146,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::EnumerateLinks:System.Diagnostics.Activity+Enumerator<System.Diagnostics.ActivityLink>()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 147,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::EnumerateTagObjects:System.Diagnostics.Activity+Enumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 148,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Start:System.Diagnostics.Activity()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 149,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityEvent::EnumerateTagObjects:System.Diagnostics.Activity+Enumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 150,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityLink::EnumerateTagObjects:System.Diagnostics.Activity+Enumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 151,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CopyTo:System.Void(System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 152,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateFromBytes:System.Diagnostics.ActivitySpanId(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 153,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateFromString:System.Diagnostics.ActivitySpanId(System.ReadOnlySpan<System.Char>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 154,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateFromUtf8String:System.Diagnostics.ActivitySpanId(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 155,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection+Enumerator::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 156,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 157,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 158,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::GetEnumerator:System.Diagnostics.ActivityTagsCollection+Enumerator()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 159,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CopyTo:System.Void(System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 160,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateFromBytes:System.Diagnostics.ActivityTraceId(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 161,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateFromString:System.Diagnostics.ActivityTraceId(System.ReadOnlySpan<System.Char>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 162,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateFromUtf8String:System.Diagnostics.ActivityTraceId(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 163,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback::BeginInvoke:System.IAsyncResult(System.Object,System.String,System.String,System.Collections.Generic.IEnumerable<System.String>,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 164,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback::EndInvoke:System.Void(System.String,System.Collections.Generic.IEnumerable<System.String>,System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 165,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback::Invoke:System.Void(System.Object,System.String,System.String,System.Collections.Generic.IEnumerable<System.String>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 166,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback::BeginInvoke:System.IAsyncResult(System.Object,System.String,System.String,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 167,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 168,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback::Invoke:System.Void(System.Object,System.String,System.String)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 169,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ExceptionRecorder::BeginInvoke:System.IAsyncResult(System.Diagnostics.Activity,System.Exception,System.Diagnostics.TagList,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 170,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ExceptionRecorder::EndInvoke:System.Void(System.Diagnostics.TagList,System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 171,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ExceptionRecorder::Invoke:System.Void(System.Diagnostics.Activity,System.Exception,System.Diagnostics.TagList)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 172,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList+Enumerator::Dispose:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 173,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList+Enumerator::MoveNext:System.Boolean()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 174,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList+Enumerator::Reset:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 175,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][],System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 176,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Span<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
+      "generatedMethodId": ""
     }
   ]
 }

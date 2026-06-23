@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Net.Sockets",
   "chunkSlug": "system-net-sockets",
-  "totalMethods": 521,
+  "totalMethods": 546,
   "factMethodCount": 246,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -1247,37 +1247,37 @@
     {
       "index": 32,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_11_System_Byte_int_int_CancellationToken_0"
     },
     {
       "index": 33,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_11_System_Byte_int_int_CancellationToken_1"
     },
     {
       "index": 34,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_11_System_Byte_int_int_CancellationToken_2"
     },
     {
       "index": 35,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_11_System_Byte_int_int_CancellationToken_3"
     },
     {
       "index": 36,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_11_System_Byte_int_int_CancellationToken_4"
     },
     {
       "index": 37,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_12_System_Memorybyte_CancellationToken_0"
     },
     {
@@ -1313,7 +1313,7 @@
     {
       "index": 43,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_14_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
@@ -1511,37 +1511,37 @@
     {
       "index": 76,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
       "generatedMethodId": "Send_13_IListSystem_ArraySegmentbyte_0"
     },
     {
       "index": 77,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
       "generatedMethodId": "Send_13_IListSystem_ArraySegmentbyte_1"
     },
     {
       "index": 78,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_14_IListSystem_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 79,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_14_IListSystem_ArraySegmentbyte_SocketFlags_1"
     },
     {
       "index": 80,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Send_15_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_0"
     },
     {
       "index": 81,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Send_15_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_1"
     },
     {
@@ -1853,37 +1853,37 @@
     {
       "index": 133,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
       "generatedMethodId": "Receive_29_IListSystem_ArraySegmentbyte_0"
     },
     {
       "index": 134,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
       "generatedMethodId": "Receive_29_IListSystem_ArraySegmentbyte_1"
     },
     {
       "index": 135,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_30_IListSystem_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 136,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_30_IListSystem_ArraySegmentbyte_SocketFlags_1"
     },
     {
       "index": 137,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_0"
     },
     {
       "index": 138,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_1"
     },
     {
@@ -2345,25 +2345,25 @@
     {
       "index": 215,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_61_IListSystem_ArraySegmentbyte_SocketFlags_System_AsyncCallback_object_0"
     },
     {
       "index": 216,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_61_IListSystem_ArraySegmentbyte_SocketFlags_System_AsyncCallback_object_1"
     },
     {
       "index": 217,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_62_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_0"
     },
     {
       "index": 218,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_62_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_1"
     },
     {
@@ -2519,25 +2519,25 @@
     {
       "index": 244,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_72_IListSystem_ArraySegmentbyte_SocketFlags_System_AsyncCallback_object_0"
     },
     {
       "index": 245,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_72_IListSystem_ArraySegmentbyte_SocketFlags_System_AsyncCallback_object_1"
     },
     {
       "index": 246,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_73_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_0"
     },
     {
       "index": 247,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_73_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_1"
     },
     {
@@ -2783,25 +2783,25 @@
     {
       "index": 288,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.Socket\u003E()",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>()",
       "generatedMethodId": "AcceptAsync_99__0"
     },
     {
       "index": 289,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.Socket\u003E(System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.Socket>(System.Threading.CancellationToken)",
       "generatedMethodId": "AcceptAsync_100_CancellationToken_0"
     },
     {
       "index": 290,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.Socket\u003E(System.Net.Sockets.Socket)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>(System.Net.Sockets.Socket)",
       "generatedMethodId": "AcceptAsync_101_Socket_0"
     },
     {
       "index": 291,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.Socket\u003E(System.Net.Sockets.Socket,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.Socket>(System.Net.Sockets.Socket,System.Threading.CancellationToken)",
       "generatedMethodId": "AcceptAsync_102_Socket_CancellationToken_0"
     },
     {
@@ -2939,181 +2939,181 @@
     {
       "index": 314,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.ArraySegment\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>)",
       "generatedMethodId": "ReceiveAsync_112_System_ArraySegmentbyte_0"
     },
     {
       "index": 315,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "ReceiveAsync_113_System_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 316,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveAsync_114_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 317,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Memory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveAsync_115_System_Memorybyte_SocketFlags_CancellationToken_0"
     },
     {
       "index": 318,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
       "generatedMethodId": "ReceiveAsync_116_IListSystem_ArraySegmentbyte_0"
     },
     {
       "index": 319,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
       "generatedMethodId": "ReceiveAsync_116_IListSystem_ArraySegmentbyte_1"
     },
     {
       "index": 320,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "ReceiveAsync_117_IListSystem_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 321,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "ReceiveAsync_117_IListSystem_ArraySegmentbyte_SocketFlags_1"
     },
     {
       "index": 322,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.SocketReceiveFromResult\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.EndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult>(System.ArraySegment<System.Byte>,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFromAsync_118_System_ArraySegmentbyte_EndPoint_0"
     },
     {
       "index": 323,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.SocketReceiveFromResult\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFromAsync_119_System_ArraySegmentbyte_SocketFlags_EndPoint_0"
     },
     {
       "index": 324,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.SocketReceiveFromResult\u003E(System.Memory\u003CSystem.Byte\u003E,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveFromResult>(System.Memory<System.Byte>,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveFromAsync_120_System_Memorybyte_EndPoint_CancellationToken_0"
     },
     {
       "index": 325,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.SocketReceiveFromResult\u003E(System.Memory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveFromResult>(System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveFromAsync_121_System_Memorybyte_SocketFlags_EndPoint_CancellationToken_0"
     },
     {
       "index": 326,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Memory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.SocketAddress,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveFromAsync_122_System_Memorybyte_SocketFlags_SocketAddress_CancellationToken_0"
     },
     {
       "index": 327,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.SocketReceiveMessageFromResult\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.EndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult>(System.ArraySegment<System.Byte>,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveMessageFromAsync_123_System_ArraySegmentbyte_EndPoint_0"
     },
     {
       "index": 328,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.SocketReceiveMessageFromResult\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveMessageFromAsync_124_System_ArraySegmentbyte_SocketFlags_EndPoint_0"
     },
     {
       "index": 329,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.SocketReceiveMessageFromResult\u003E(System.Memory\u003CSystem.Byte\u003E,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveMessageFromResult>(System.Memory<System.Byte>,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveMessageFromAsync_125_System_Memorybyte_EndPoint_CancellationToken_0"
     },
     {
       "index": 330,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.SocketReceiveMessageFromResult\u003E(System.Memory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveMessageFromResult>(System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveMessageFromAsync_126_System_Memorybyte_SocketFlags_EndPoint_CancellationToken_0"
     },
     {
       "index": 331,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.ArraySegment\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>)",
       "generatedMethodId": "SendAsync_127_System_ArraySegmentbyte_0"
     },
     {
       "index": 332,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "SendAsync_128_System_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 333,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_129_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 334,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_130_System_ReadOnlyMemorybyte_SocketFlags_CancellationToken_0"
     },
     {
       "index": 335,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
       "generatedMethodId": "SendAsync_131_IListSystem_ArraySegmentbyte_0"
     },
     {
       "index": 336,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
       "generatedMethodId": "SendAsync_131_IListSystem_ArraySegmentbyte_1"
     },
     {
       "index": 337,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "SendAsync_132_IListSystem_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 338,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "SendAsync_132_IListSystem_ArraySegmentbyte_SocketFlags_1"
     },
     {
       "index": 339,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.EndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>,System.Net.EndPoint)",
       "generatedMethodId": "SendToAsync_133_System_ArraySegmentbyte_EndPoint_0"
     },
     {
       "index": 340,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendToAsync_134_System_ArraySegmentbyte_SocketFlags_EndPoint_0"
     },
     {
       "index": 341,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "SendToAsync_135_System_ReadOnlyMemorybyte_EndPoint_CancellationToken_0"
     },
     {
       "index": 342,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "SendToAsync_136_System_ReadOnlyMemorybyte_SocketFlags_EndPoint_CancellationToken_0"
     },
     {
       "index": 343,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.SocketAddress,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress,System.Threading.CancellationToken)",
       "generatedMethodId": "SendToAsync_137_System_ReadOnlyMemorybyte_SocketFlags_SocketAddress_CancellationToken_0"
     },
     {
@@ -3131,13 +3131,13 @@
     {
       "index": 346,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFileAsync:System.Threading.Tasks.ValueTask(System.String,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.Sockets.TransmitFileOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFileAsync:System.Threading.Tasks.ValueTask(System.String,System.ReadOnlyMemory<System.Byte>,System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.TransmitFileOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "SendFileAsync_139_string_System_ReadOnlyMemorybyte_System_ReadOnlyMemorybyte_TransmitFileOptions_CancellationToken_0"
     },
     {
       "index": 347,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFileAsync:System.Threading.Tasks.ValueTask(System.String,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.Sockets.TransmitFileOptions,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFileAsync:System.Threading.Tasks.ValueTask(System.String,System.ReadOnlyMemory<System.Byte>,System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.TransmitFileOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "SendFileAsync_139_string_System_ReadOnlyMemorybyte_System_ReadOnlyMemorybyte_TransmitFileOptions_CancellationToken_1"
     },
     {
@@ -3203,7 +3203,7 @@
     {
       "index": 358,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Memory\u003CSystem.Byte\u003E)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Memory<System.Byte>)",
       "generatedMethodId": "SetBuffer_2_System_Memorybyte_0"
     },
     {
@@ -3215,13 +3215,13 @@
     {
       "index": 360,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::AcceptAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.Socket\u003E(System.Net.Sockets.Socket)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::AcceptAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>(System.Net.Sockets.Socket)",
       "generatedMethodId": "AcceptAsync_0_Socket_0"
     },
     {
       "index": 361,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::AcceptAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.Socket\u003E(System.Net.Sockets.Socket,System.Net.Sockets.Socket)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::AcceptAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>(System.Net.Sockets.Socket,System.Net.Sockets.Socket)",
       "generatedMethodId": "AcceptAsync_1_Socket_Socket_0"
     },
     {
@@ -3347,67 +3347,67 @@
     {
       "index": 382,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "ReceiveAsync_10_Socket_System_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 383,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.Memory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Net.Sockets.Socket,System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveAsync_11_Socket_System_Memorybyte_SocketFlags_CancellationToken_0"
     },
     {
       "index": 384,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "ReceiveAsync_12_Socket_IListSystem_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 385,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "ReceiveAsync_12_Socket_IListSystem_ArraySegmentbyte_SocketFlags_1"
     },
     {
       "index": 386,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveFromAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.SocketReceiveFromResult\u003E(System.Net.Sockets.Socket,System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFromAsync_13_Socket_System_ArraySegmentbyte_SocketFlags_EndPoint_0"
     },
     {
       "index": 387,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveMessageFromAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.SocketReceiveMessageFromResult\u003E(System.Net.Sockets.Socket,System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveMessageFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveMessageFromAsync_14_Socket_System_ArraySegmentbyte_SocketFlags_EndPoint_0"
     },
     {
       "index": 388,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "SendAsync_15_Socket_System_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 389,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Net.Sockets.Socket,System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_16_Socket_System_ReadOnlyMemorybyte_SocketFlags_CancellationToken_0"
     },
     {
       "index": 390,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "SendAsync_17_Socket_IListSystem_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 391,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "SendAsync_17_Socket_IListSystem_ArraySegmentbyte_SocketFlags_1"
     },
     {
       "index": 392,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendToAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendToAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendToAsync_18_Socket_System_ArraySegmentbyte_SocketFlags_EndPoint_0"
     },
     {
@@ -3737,25 +3737,25 @@
     {
       "index": 447,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocketAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.Socket\u003E()",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocketAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>()",
       "generatedMethodId": "AcceptSocketAsync_10__0"
     },
     {
       "index": 448,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocketAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.Socket\u003E(System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocketAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.Socket>(System.Threading.CancellationToken)",
       "generatedMethodId": "AcceptSocketAsync_11_CancellationToken_0"
     },
     {
       "index": 449,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClientAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.TcpClient\u003E()",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClientAsync:System.Threading.Tasks.Task<System.Net.Sockets.TcpClient>()",
       "generatedMethodId": "AcceptTcpClientAsync_12__0"
     },
     {
       "index": 450,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClientAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.TcpClient\u003E(System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClientAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.TcpClient>(System.Threading.CancellationToken)",
       "generatedMethodId": "AcceptTcpClientAsync_13_CancellationToken_0"
     },
     {
@@ -3929,121 +3929,121 @@
     {
       "index": 479,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32)",
       "generatedMethodId": "SendAsync_14_System_Byte_int_0"
     },
     {
       "index": 480,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32)",
       "generatedMethodId": "SendAsync_14_System_Byte_int_1"
     },
     {
       "index": 481,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32)",
       "generatedMethodId": "SendAsync_14_System_Byte_int_2"
     },
     {
       "index": 482,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32)",
       "generatedMethodId": "SendAsync_14_System_Byte_int_3"
     },
     {
       "index": 483,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_15_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 484,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.String,System.Int32)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "SendAsync_16_System_Byte_int_string_int_0"
     },
     {
       "index": 485,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.String,System.Int32)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "SendAsync_16_System_Byte_int_string_int_1"
     },
     {
       "index": 486,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.String,System.Int32)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "SendAsync_16_System_Byte_int_string_int_2"
     },
     {
       "index": 487,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.String,System.Int32)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "SendAsync_16_System_Byte_int_string_int_3"
     },
     {
       "index": 488,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.String,System.Int32)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "SendAsync_16_System_Byte_int_string_int_4"
     },
     {
       "index": 489,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.String,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_17_System_ReadOnlyMemorybyte_string_int_CancellationToken_0"
     },
     {
       "index": 490,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.String,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_17_System_ReadOnlyMemorybyte_string_int_CancellationToken_1"
     },
     {
       "index": 491,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.String,System.Int32,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_17_System_ReadOnlyMemorybyte_string_int_CancellationToken_2"
     },
     {
       "index": 492,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Net.IPEndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Net.IPEndPoint)",
       "generatedMethodId": "SendAsync_18_System_Byte_int_IPEndPoint_0"
     },
     {
       "index": 493,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Net.IPEndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Net.IPEndPoint)",
       "generatedMethodId": "SendAsync_18_System_Byte_int_IPEndPoint_1"
     },
     {
       "index": 494,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Net.IPEndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Net.IPEndPoint)",
       "generatedMethodId": "SendAsync_18_System_Byte_int_IPEndPoint_2"
     },
     {
       "index": 495,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Net.IPEndPoint)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Net.IPEndPoint)",
       "generatedMethodId": "SendAsync_18_System_Byte_int_IPEndPoint_3"
     },
     {
       "index": 496,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.IPEndPoint,System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.IPEndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_19_System_ReadOnlyMemorybyte_IPEndPoint_CancellationToken_0"
     },
     {
       "index": 497,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.UdpReceiveResult\u003E()",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::ReceiveAsync:System.Threading.Tasks.Task<System.Net.Sockets.UdpReceiveResult>()",
       "generatedMethodId": "ReceiveAsync_20__0"
     },
     {
       "index": 498,
       "kind": "fact",
-      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::ReceiveAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.UdpReceiveResult\u003E(System.Threading.CancellationToken)",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::ReceiveAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.UdpReceiveResult>(System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveAsync_21_CancellationToken_0"
     },
     {
@@ -4177,6 +4177,156 @@
       "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UnixDomainSocketEndPoint::Serialize:System.Net.SocketAddress()",
       "generatedMethodId": "Serialize_0__0"
+    },
+    {
+      "index": 521,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Read:System.Int32(System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 522,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Write:System.Void(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 523,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetRawSocketOption:System.Int32(System.Int32,System.Int32,System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 524,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Span<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 525,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 526,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 527,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Span<System.Byte>,System.Net.EndPoint)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 528,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 529,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 530,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFrom:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 531,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 532,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 533,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 534,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Net.Sockets.TransmitFileOptions)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 535,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.EndPoint)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 536,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 537,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 538,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetRawSocketOption:System.Void(System.Int32,System.Int32,System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 539,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Create:System.Net.Sockets.TcpListener(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 540,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Start:System.Void()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 541,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Start:System.Void(System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 542,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.ReadOnlySpan<System.Byte>)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 543,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.IPEndPoint)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 544,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.String,System.Int32)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 545,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UnixDomainSocketEndPoint::Create:System.Net.EndPoint(System.Net.SocketAddress)",
+      "generatedMethodId": ""
     }
   ]
 }

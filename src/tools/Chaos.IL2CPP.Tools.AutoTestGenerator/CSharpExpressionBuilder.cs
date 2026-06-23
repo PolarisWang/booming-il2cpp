@@ -10,7 +10,6 @@ namespace Chaos.IL2CPP.Tools.AutoTestGenerator;
 public sealed class CSharpExpressionBuilder
 {
     private readonly CSharpSerializer _serializer;
-    private readonly IReadOnlySet<string>? _abstractTypeNames;
 
     // Types with well-known static factory instances (abstract or no default ctor)
     private static readonly Dictionary<string, string> KnownInstances = new(StringComparer.Ordinal)
@@ -190,10 +189,9 @@ public sealed class CSharpExpressionBuilder
             "new MemoryStream(new byte[] { 1, 2, 3 })"),
     };
 
-    public CSharpExpressionBuilder(CSharpSerializer serializer, IReadOnlySet<string>? abstractTypeNames = null)
+    public CSharpExpressionBuilder(CSharpSerializer serializer)
     {
         _serializer = serializer;
-        _abstractTypeNames = abstractTypeNames;
     }
 
     /// <summary>
@@ -231,28 +229,16 @@ public sealed class CSharpExpressionBuilder
                 var gaPart = qualified.Contains('<') ? qualified[qualified.IndexOf('<')..] : "";
                 return $"global::{baseName}{gaPart}{sharedSuffix}";
             }
-                        // Use new T() for concrete types with parameterless constructors,
-            // SubjectInstanceFactory for abstract/interface, default(T)! for ref structs.
+            // Use SubjectInstanceFactory for valid instances. Ref structs and
+            // unresolvable types fall back to default(T)! (ref structs can't be
+            // generic type params; unresolved types may be in unreferenced assemblies).
             try {
                 var t = Type.GetType(typeFullName, false);
-                if (t != null)
-                {
-                    if (t.IsValueType && t.IsByRefLike)
-                        return $"default(global::{qualified.Replace('+', '.')})!";
-                    // Check for parameterless constructor (same logic as unqualified path below)
-                    if (!t.IsAbstract && !t.IsInterface)
-                    {
-                        var ctors = t.GetConstructors(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-                        if (ctors.Any(c => c.GetParameters().Length == 0))
-                            return $"new global::{qualified.Replace('+', '.')}()";
-                    }
-                    // Abstract/interface or no parameterless ctor -> default(T)!
+                if (t == null || (t.IsValueType && t.IsByRefLike))
                     return $"default(global::{qualified.Replace('+', '.')})!";
-                }
-            } catch { }
-            if (_abstractTypeNames != null && _abstractTypeNames.Contains(typeFullName))
-                return $"SubjectInstanceFactory.Create<global::{qualified.Replace('+', '.')}>()";
-            return $"default(global::{qualified.Replace('+', '.')})!";        }
+            } catch { return $"default(global::{qualified.Replace('+', '.')})!"; }
+            return $"SubjectInstanceFactory.Create<global::{qualified.Replace('+', '.')}>()";
+        }
 
         // Try to find a parameterless constructor via runtime reflection
         try

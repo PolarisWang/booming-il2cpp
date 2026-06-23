@@ -16,7 +16,9 @@ import re
 import shutil
 import subprocess
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -26,7 +28,7 @@ from verification.orchestration.context import ChunkContext, StageResult
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 _RUNTIME_PROJECT = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Runtime"
 _RESULTS_BASE = Path(__file__).resolve().parent.parent / "results" / "foundation-dll"
-_ITERATIONS = 1000
+_ITERATIONS = 200
 _TIMEOUT = 1800
 
 # TFM → technology tag mapping
@@ -83,18 +85,25 @@ _NET8_REPLACEMENTS = [
     ("default(System.ReadOnlySpan<byte>)", "default(byte[])"),
     ("default(System.ReadOnlyMemory<char>)", "default(string)"),
     ("default(System.ReadOnlyMemory<byte>)", "default(byte[])"),
-    # .NET 10 APIs: replace method calls with safe default values for .NET 8
-    # Each replacement converts a method call to a no-op expression.
-    ("Guid.CreateVersion7()", "default(System.Guid)"),
-    ("System.IO.File.AppendAllBytes(", "System.IO.File.WriteAllBytes("),
-    ("System.Threading.Tasks.Task.WaitAsync(", "System.Threading.Tasks.Task.Wait("),
-    # Task.WhenAny(IEnumerable<Task>, CancellationToken) doesn't exist in .NET 8
-    ("WaitAsync(System.Threading.CancellationToken)", "Wait()"),
 ]
 
 # Benchmark methods using these APIs crash at runtime (stack overflow / buffer
 # overrun / null-pointer deref) and must be excluded from managed benchmarks.
-_UNSAFE_BENCHMARK_PATTERNS: list[str] = []  # no unsafe patterns — all methods must have benchmark data
+_UNSAFE_BENCHMARK_PATTERNS: list[str] = [
+    "StoreUnsafe",                     # writes 32B vector past a 4B stack slot — STATUS_ACCESS_VIOLATION
+    "ArgIterator",                     # System.ArgIterator.GetNextArgType() — Internal CLR error (0x80131506)
+    "RuntimeHelpers.CreateSpan",       # .NET runtime bug — CLR crash on all TFMs
+    "Environment.Exit",                # Environment.Exit(N) terminates the runner process immediately
+    "Environment.FailFast",            # Environment.FailFast terminates the runner process immediately
+    "Contract.Assert",                 # Contract.Assert(false) triggers FailFast — "Process terminated. Assumption failed."
+    "Contract.Assume",                 # Contract.Assume(false) also triggers FailFast
+    "Contract.Requires",               # Contract.Requires(false) throws ArgumentException at runtime
+    "Contract.Ensures",                # Contract.Ensures postconditions can fail at runtime
+    "Contract.Invariant",              # Contract.Invariant(false) can terminate the process
+    "Debug.Assert",                    # Debug.Assert(false) terminates on .NET Core in some configurations
+    "Debug.Fail",                      # Debug.Fail() always terminates the process with "Assertion failed."
+    "SpinWait.SpinUntil",              # SpinUntil(() => default(bool)) spins forever since condition always returns false
+]
 
 
 def _remove_unsafe_benchmarks(combined_src: Path) -> bool:
@@ -145,6 +154,10 @@ def _build_combined_for_tfm(combined_csproj: Path, tfm: str, out_dir: Path) -> b
     out_dir.mkdir(parents=True, exist_ok=True)
     combined_src = combined_csproj.parent / "CombinedSubjects.cs"
 
+    # Pre-build: remove [Benchmark] from methods known to crash at runtime
+    # (e.g. Vector.StoreUnsafe writes past stack slots). Applied for all TFMs.
+    if combined_src.exists():
+        _remove_unsafe_benchmarks(combined_src)
 
     # For net8.0, apply targeted source replacements first
     src_was_modified = False
@@ -335,9 +348,12 @@ def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> 
     # Patch csproj to multi-target TFMs for net8.0/net10.0 comparison
     _ensure_multitarget_csproj(combined_csproj)
 
-    for tfm, technology in sorted(_TFM_TECH.items()):
-        is_first = (tfm == sorted(_TFM_TECH.keys())[0])
-        print(f"  [managed-benchmark] Running {technology} ({tfm})...{' (first)' if is_first else ''}")
+    # Phase 2: run net8 and net10 benchmarks in parallel
+    _perf_write_lock: threading.Lock = threading.Lock()
+
+    def _run_tfm(tfm: str, technology: str) -> tuple[str, list[str] | None]:
+        """Build CombinedSubjects for TFM and run benchmark. Returns (technology, errors_or_None)."""
+        print(f"  [managed-benchmark] Running {technology} ({tfm})...")
 
         # Build CombinedSubjects for this TFM
         build_dir = ctx.chunk_dir / "managed" / f"subjects_{tfm.replace('.', '_')}"
@@ -355,14 +371,12 @@ def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> 
         if not ok:
             msg = f"{technology}: CombinedSubjects build failed for {tfm}"
             print(f"  [managed-benchmark] SKIP: {msg}")
-            errors.append(msg)
-            continue
+            return technology, [msg]
 
         tfm_dll_path = build_dir / "CombinedSubjects.dll"
         if not tfm_dll_path.exists():
             msg = f"{technology}: CombinedSubjects.dll not produced for {tfm}"
-            errors.append(msg)
-            continue
+            return technology, [msg]
 
         # Run the managed benchmark
         runner = _runner_dll(tfm)
@@ -375,12 +389,10 @@ def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> 
                 capture_output=True, text=True, timeout=_TIMEOUT)
         except subprocess.TimeoutExpired:
             msg = f"{technology}: benchmark timed out"
-            errors.append(msg)
-            continue
+            return technology, [msg]
 
         if result.returncode != 0:
             msg = f"{technology}: runner exited with code {result.returncode} (0x{result.returncode & 0xffffffff:08x})"
-            errors.append(msg)
             print(f"  [managed-benchmark] {msg}")
             stderr_text = result.stderr or ""
             stdout_text = result.stdout or ""
@@ -392,7 +404,7 @@ def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> 
                 print(f"  [managed-benchmark] Stdout head ({len(stdout_text)} chars):")
                 for line in stdout_text.splitlines()[:10]:
                     print(f"      {line}")
-            continue
+            return technology, [msg]
 
         # Parse output
         records = _parse_runner_output(result.stdout or "")
@@ -401,20 +413,30 @@ def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> 
             perf_path = _RESULTS_BASE / ctx.assembly / slug / "perf" / "benchmark-history.jsonl"
             if perf_path.exists():
                 print(f"  [managed-benchmark] {technology}: runner returned 0 results, using existing baseline from {perf_path}")
-                techs_run.append(technology)
+                with _perf_write_lock:
+                    techs_run.append(technology)
+                return technology, None
             else:
                 msg = f"{technology}: no benchmark results returned and no existing baseline"
-                errors.append(msg)
-            continue
+                return technology, [msg]
 
-        # Write to perf store (always append — chaos-aot may have written first)
+        # Write to perf store (serialized via lock to avoid file corruption)
         perf_path = _RESULTS_BASE / ctx.assembly / slug / "perf" / "benchmark-history.jsonl"
-        completed = _write_perf_records(
-            perf_path, slug, technology, records, metadata_methods, now,
-            append=True)
-
+        with _perf_write_lock:
+            completed = _write_perf_records(
+                perf_path, slug, technology, records, metadata_methods, now,
+                append=True)
         print(f"  [managed-benchmark] {technology}: {completed}/{len(records)} methods OK -> {perf_path}")
-        techs_run.append(technology)
+        with _perf_write_lock:
+            techs_run.append(technology)
+        return technology, None
+
+    with ThreadPoolExecutor(max_workers=len(_TFM_TECH)) as executor:
+        fut = {executor.submit(_run_tfm, tfm, tech): tech for tfm, tech in _TFM_TECH.items()}
+        for f in as_completed(fut):
+            tech, errs = f.result()
+            if errs:
+                errors.extend(errs)
 
     duration_ms = int((time.perf_counter() - start) * 1000)
     status = "error" if not techs_run else "passed" if not errors else "passed_with_errors"

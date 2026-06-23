@@ -24,18 +24,6 @@ def _fmt_pct(value: float | None, always_sign: bool = False) -> str:
     return f"{sign}{value:.1f}%"
 
 
-def _fmt_bytes(value: float | int | None) -> str:
-    """Format bytes with human-readable suffix."""
-    if value is None or value == 0:
-        return "—"
-    b = float(value)
-    for unit in ("B", "KB", "MB", "GB"):
-        if b < 1024:
-            return f"{b:.1f}{unit}"
-        b /= 1024
-    return f"{b:.1f}TB"
-
-
 def _fmt_delta(value: float | None, unit: str = "") -> str:
     if value is None:
         return "—"
@@ -79,14 +67,7 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
     lines.append(f"| Fact pass rate | {_fmt_pct(overall.get('factPassRate'))} "
                  f"{_delta_emoji(overall.get('factPassRateDelta'))} |")
     lines.append(f"| Benchmark methods | {overall.get('totalBenchmarked', 0)} |")
-    lines.append(f"| Coverage gap | {overall.get('totalCoverageGap', 0)} methods "
-                 f"({_fmt_pct(overall.get('totalCoverageGapPct'))}) |")
-    lines.append(f"| Total allocated | {_fmt_bytes(overall.get('totalAllocatedBytes', 0))} |")
-    grade = overall.get("regressionGrade", "none")
-    grade_emoji = {"none": "✅", "soft": "⚠️", "hard": "❌"}.get(grade, "—")
-    lines.append(f"| Benchmark regression | **{grade.upper()}** {grade_emoji} "
-                 f"(hard={overall.get('regressedChunks', 0)}, "
-                 f"soft={overall.get('degradedChunks', 0)}) |")
+    lines.append(f"| Coverage gap | {overall.get('totalCoverageGap', 0)} methods unverified |")
     lines.append(f"| Assemblies with history | {overall.get('assembliesWithHistory', 0)} |")
     lines.append("")
 
@@ -105,15 +86,9 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             if metric == "coverage_gap":
                 fmt_before = str(int(before)) if before is not None else "—"
                 fmt_after = str(int(after)) if after is not None else "—"
-            elif metric == "coverage_gap_pct":
-                fmt_before = f"{before:.1f}%" if before is not None else "—"
-                fmt_after = f"{after:.1f}%" if after is not None else "—"
             elif metric == "bench_duration":
                 fmt_before = f"{before:.4f}ms" if before is not None else "—"
                 fmt_after = f"{after:.4f}ms" if after is not None else "—"
-            elif metric == "memory_alloc":
-                fmt_before = _fmt_bytes(before) if before is not None else "—"
-                fmt_after = _fmt_bytes(after) if after is not None else "—"
             lines.append(f"| {r.get('assembly', '?')} | {r.get('slug', '?')} | "
                          f"{metric} | {fmt_before} | {fmt_after} | **{r.get('delta', '?'):+.1f}** |")
     else:
@@ -135,15 +110,9 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             if metric == "coverage_gap":
                 fmt_before = str(int(before)) if before is not None else "—"
                 fmt_after = str(int(after)) if after is not None else "—"
-            elif metric == "coverage_gap_pct":
-                fmt_before = f"{before:.1f}%" if before is not None else "—"
-                fmt_after = f"{after:.1f}%" if after is not None else "—"
             elif metric == "bench_duration":
                 fmt_before = f"{before:.4f}ms" if before is not None else "—"
                 fmt_after = f"{after:.4f}ms" if after is not None else "—"
-            elif metric == "memory_alloc":
-                fmt_before = _fmt_bytes(before) if before is not None else "—"
-                fmt_after = _fmt_bytes(after) if after is not None else "—"
             lines.append(f"| {r.get('assembly', '?')} | {r.get('slug', '?')} | "
                          f"{metric} | {fmt_before} | {fmt_after} | **{r.get('delta', '?'):+.1f}** |")
     else:
@@ -156,7 +125,6 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
     build_failed = []
     no_fact = []
     large_gap = []
-    large_real_gap = []
     for ck, cd in sorted(chunks.items()):
         slug = cd.get("slug", "?")
         asm_name = ck.split("/")[0] if "/" in ck else "?"
@@ -165,19 +133,13 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             build_failed.append(f"{asm_name}/{slug} ({build_st})")
         ft = cd.get("factTotal", 0)
         gap = cd.get("coverageGap")
-        fixable_gap = cd.get("fixableGapCount", gap)
-        unprobeable_gap = cd.get("unprobeableMethods", 0)
         if gap is None:
             no_fact.append(f"{asm_name}/{slug} (no fact data)")
         elif ft == 0 and gap > 0:
             no_fact.append(f"{asm_name}/{slug} (metaTotal={gap})")
         elif gap is not None and gap > 10:
             gap_pct = gap / (gap + ft) * 100
-            unprobeable_note = f" ({unprobeable_gap} unprobeable)" if unprobeable_gap > 0 else ""
-            large_gap.append(f"{asm_name}/{slug} gap={gap} ({gap_pct:.0f}%){unprobeable_note}")
-        if fixable_gap is not None and fixable_gap > 10 and (gap is None or gap > 10):
-            fixable_pct = fixable_gap / (fixable_gap + ft) * 100 if ft > 0 else 100
-            large_real_gap.append(f"{asm_name}/{slug} fixable_gap={fixable_gap} ({fixable_pct:.0f}%)")
+            large_gap.append(f"{asm_name}/{slug} gap={gap} ({gap_pct:.0f}%)")
 
     if build_failed:
         lines.append(f"#### Build Failures ❌ ({len(build_failed)})")
@@ -200,19 +162,12 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             lines.append(f"- {lg}")
         lines.append("")
 
-    if large_real_gap:
-        lines.append(f"#### Fixable Coverage Gaps 🔧 ({len(large_real_gap)})")
-        lines.append("")
-        for frg in large_real_gap[:20]:
-            lines.append(f"- {frg}")
-        lines.append("")
-
     # ── Per-Assembly Detail (full stage breakdown) ──
     lines.append("### Per-Assembly Detail")
     lines.append("")
     if assemblies:
-        lines.append("| Assembly | Build | Fact | ΔFact | Bench(ms) | ΔBench | Coverage | Alloc | Profile | MBench | HU |")
-        lines.append("|----------|-------|------|-------|-----------|--------|----------|-------|---------|--------|-----|")
+        lines.append("| Assembly | Build | Fact | ΔFact | Bench(ms) | ΔBench | Coverage | Profile | MBench | HU |")
+        lines.append("|----------|-------|------|-------|-----------|--------|----------|---------|--------|-----|")
         for a in sorted(assemblies, key=lambda x: x.get("assembly", "")):
             name = a.get("assembly", "?")
             rate = a.get("factPassRate")
@@ -221,18 +176,8 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             dur = a.get("benchComparison", {}).get("aggregate", {}).get("meanDurationMs")
             dur_str = f"{dur:.4f}" if dur else "—"
             gap = a.get("totalCoverageGap", 0)
-            gap_pct = a.get("coverageGapPct")
-            gap_str = f"{gap} ({_fmt_pct(gap_pct)})" if gap_pct is not None else str(gap)
-            alloc = a.get("totalAllocatedBytes", 0)
-            alloc_str = _fmt_bytes(alloc) if alloc else "—"
             hu = a.get("hotupdate", {})
-            revert_reg = a.get("revertRegressionCount", 0)
-            if hu.get("chunksPatchFailed", 0) > 0 or hu.get("totalFailed", 0) > 0:
-                hu_str = "❌"
-            elif revert_reg and revert_reg > 0:
-                hu_str = f"⚠️rv:{revert_reg}"
-            else:
-                hu_str = "✅"
+            hu_str = "✅" if hu.get("chunksPatchFailed", 0) == 0 and hu.get("totalFailed", 0) == 0 else "❌"
 
             # Aggregate build status across chunks
             asm_chunks = {k: v for k, v in chunks.items() if k.startswith(name + "/")}
@@ -263,7 +208,7 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
                 round(bench_delta_sum / bench_delta_count, 1) if bench_delta_count > 0 else None, "%"
             )
 
-            lines.append(f"| {name} | {build_str} | {rate_str} | {delta_str} | {dur_str} | {bench_delta_str} | {gap_str} | {alloc_str} | {prof_str} | {mb_str} | {hu_str} |")
+            lines.append(f"| {name} | {build_str} | {rate_str} | {delta_str} | {dur_str} | {bench_delta_str} | {gap} | {prof_str} | {mb_str} | {hu_str} |")
     else:
         lines.append("_No assembly data available._")
     lines.append("")

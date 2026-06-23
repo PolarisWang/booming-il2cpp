@@ -1,0 +1,106 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.ComponentModel.TypeConverter",
+  "chunkSlug": "component-model",
+  "entries": [
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AddingNewEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.AddingNewEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AddingNewEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.AddingNewEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.AddingNewEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.BooleanConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CancelEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.CancelEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CancelEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CancelEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.CancelEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CollectionChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.CollectionChangeEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CollectionChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CollectionChangeEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.CollectionChangeEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.CultureInfoConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.EnumConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.HandledEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.HandledEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.HandledEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.HandledEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.HandledEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.ListChangedEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ListChangedEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.ListChangedEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.NullableConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.ReferenceConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.RefreshEventHandler::BeginInvoke:System.IAsyncResult(System.ComponentModel.RefreshEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.RefreshEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.RefreshEventHandler::Invoke:System.Void(System.ComponentModel.RefreshEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter+StandardValuesCollection::CopyTo:System.Void(System.Array,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter+StandardValuesCollection::GetEnumerator:System.Collections.IEnumerator()"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetConverterFromRegisteredType:System.ComponentModel.TypeConverter(System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetConverterFromRegisteredType:System.ComponentModel.TypeConverter(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetEventsFromRegisteredType:System.ComponentModel.EventDescriptorCollection(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetPropertiesFromRegisteredType:System.ComponentModel.PropertyDescriptorCollection(System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor::GetPropertiesFromRegisteredType:System.ComponentModel.PropertyDescriptorCollection(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.WarningException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    }
+  ]
+}

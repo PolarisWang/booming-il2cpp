@@ -9,10 +9,8 @@ from .benchmark_chunk import run_benchmark_chunk
 from .hotupdate_chunk import run_hotupdate_chunk
 from .coverage_audit import run_coverage_audit
 from .aggregate import run_aggregate
-from .profile_range_chunk import run_profile_range_chunk
 
 __all__ = [
     "run_build", "run_fact_chunk", "run_benchmark_chunk",
     "run_hotupdate_chunk", "run_coverage_audit", "run_aggregate",
-    "run_profile_range_chunk",
 ]

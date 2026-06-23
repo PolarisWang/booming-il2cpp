@@ -170,8 +170,7 @@ def _build_method_comparison(
     total_with_net8 = 0
 
     # GC comparison accumulators
-    all_aot_alloc_ratios: list[float] = []
-    all_jit_alloc_ratios: list[float] = []
+    all_alloc_ratios: list[float] = []
     all_gc_pause_deltas: list[float] = []
     methods_with_alloc_data = 0
 
@@ -235,64 +234,42 @@ def _build_method_comparison(
                 "status": "missing_net8" if net8_rec is None else "net8_error",
             })
 
-        # ── GC comparison: all technologies' gcInfo ──
+        # ── GC comparison: net8 gcInfo vs chaos-aot profile ──
         # Runs for ALL methods (including errors) so throwing
         # methods still get gcComparison with pre-throw gcInfo.
         net8_gi = _get_gcinfo(net8_rec)
         chaos_profile = _find_profile(profile_data, msid) if profile_data else None
-        chaos_aot_gi = _get_gcinfo(techs.get("chaos-aot"))
-        chaos_jit_gi = _get_gcinfo(techs.get("chaos-jit"))
-
-        if net8_gi or chaos_aot_gi or chaos_jit_gi:
-            gc_comp = {}
-            if net8_gi:
-                gc_comp["net8AllocBytes"] = net8_gi.get("totalAllocatedBytes")
-                gc_comp["net8CollectionCount0"] = net8_gi.get("collectionCount0")
-                gc_comp["net8HeapDelta"] = net8_gi.get("heapDelta")
-
-            # Chaos AOT: prefer gcInfo from benchmark record, fall back to profile.json
-            if chaos_aot_gi:
-                gc_comp["chaosAotAllocBytes"] = chaos_aot_gi.get("totalAllocatedBytes")
-                gc_comp["chaosAotGcPauseNs"] = chaos_aot_gi.get("gcPauseNs", 0)
-                # Fast path rate from gcInfo (populated by profile stage)
-                fast = chaos_aot_gi.get("fastPathCount", 0)
-                slow = chaos_aot_gi.get("slowPathCount", 0)
-                gc_comp["chaosAotFastPathRate"] = round(fast / (fast + slow), 4) if (fast + slow) > 0 else 1.0
-                alloc_pct = _compare_alloc(
-                    net8_gi.get("totalAllocatedBytes") if net8_gi else None,
-                    chaos_aot_gi.get("totalAllocatedBytes"),
-                )
-                if alloc_pct is not None:
-                    gc_comp["aotAllocVsNet8Pct"] = alloc_pct
-                    all_aot_alloc_ratios.append(alloc_pct)
-                    methods_with_alloc_data += 1
-            elif chaos_profile:
-                # Fallback: legacy profile.json path (pre-gcInfo native benchmark)
+        if net8_gi:
+            gc_comp = {
+                "net8AllocBytes": net8_gi.get("totalAllocatedBytes"),
+                "net8CollectionCount0": net8_gi.get("collectionCount0"),
+                "net8HeapDelta": net8_gi.get("heapDelta"),
+            }
+            if chaos_profile:
                 gc_comp["chaosAotGcPauseNs"] = chaos_profile.get("gcPauseNs", 0)
                 gc_comp["chaosAotAllocBytes"] = chaos_profile.get("nurseryAllocBytes", 0)
                 gc_comp["chaosAotFastPathRate"] = _fast_path_rate(chaos_profile)
                 alloc_pct = _compare_alloc(
-                    net8_gi.get("totalAllocatedBytes") if net8_gi else None,
+                    net8_gi.get("totalAllocatedBytes"),
                     chaos_profile.get("nurseryAllocBytes"),
                 )
                 if alloc_pct is not None:
                     gc_comp["aotAllocVsNet8Pct"] = alloc_pct
-                    all_aot_alloc_ratios.append(alloc_pct)
+                    all_alloc_ratios.append(alloc_pct)
                     methods_with_alloc_data += 1
-
-            # Chaos JIT: gcInfo from benchmark record (allocatedBytes derived from benchmark stats)
-            if chaos_jit_gi:
-                gc_comp["chaosJitAllocBytes"] = chaos_jit_gi.get("totalAllocatedBytes")
-                jit_alloc_pct = _compare_alloc(
-                    net8_gi.get("totalAllocatedBytes") if net8_gi else None,
-                    chaos_jit_gi.get("totalAllocatedBytes"),
-                )
-                if jit_alloc_pct is not None:
-                    gc_comp["jitAllocVsNet8Pct"] = jit_alloc_pct
-                    all_jit_alloc_ratios.append(jit_alloc_pct)
-                    methods_with_alloc_data += 1
-
             method_entry["gcComparison"] = gc_comp
+            # Only overwrite status/pcts if not already set by the completed path above.
+            # The completed path (line 206) sets status, pcts, and increments counters;
+            # we must not null them out here. For methods without valid net8 data,
+            # the status was set in the else block (line 234) — preserve that status
+            # rather than unconditionally overwriting it to "net8_error".
+            if method_entry.get("status") != "completed":
+                method_entry.update({
+                    "net10VsNet8Pct": None,
+                    "chaosAotVsNet8Pct": None,
+                    "chaosJitVsNet8Pct": None,
+                    "status": "missing_net8" if net8_rec is None else "net8_error",
+                })
 
         methods_list.append(method_entry)
 
@@ -313,15 +290,11 @@ def _build_method_comparison(
         aggregate["net10VsNet8Pct"] = _compute_aggregate_stats(all_net10_pcts)
 
     # GC comparison aggregate
-    gc_agg = {}
-    if all_aot_alloc_ratios:
-        gc_agg["aotVsNet8Ratio"] = _compute_aggregate_stats(all_aot_alloc_ratios)
-    if all_jit_alloc_ratios:
-        gc_agg["jitVsNet8Ratio"] = _compute_aggregate_stats(all_jit_alloc_ratios)
-    if methods_with_alloc_data:
-        gc_agg["methodsWithAllocData"] = methods_with_alloc_data
-    if gc_agg:
-        aggregate["gcAllocComparison"] = gc_agg
+    if all_alloc_ratios:
+        aggregate["gcAllocComparison"] = {
+            "aotVsNet8Ratio": _compute_aggregate_stats(all_alloc_ratios),
+            "methodsWithAllocData": methods_with_alloc_data,
+        }
     if all_gc_pause_deltas:
         aggregate["gcPauseComparison"] = {
             "aotVsNet8GcPauseDelta": _compute_aggregate_stats(all_gc_pause_deltas),
@@ -479,33 +452,6 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
                     profile_data = pd
             except (json.JSONDecodeError, OSError):
                 pass
-
-        # Also load profile-range.json (--profile-range output, richer allocation data)
-        profile_range_data = None
-        pr_path = chunk_dir / "results" / "profile-range.json"
-        if pr_path.exists():
-            try:
-                pr = json.loads(pr_path.read_text(encoding="utf-8"))
-                profile_range_data = pr.get("profileData", [])
-                if profile_range_data:
-                    print(f"  [benchmark-report] Loaded {len(profile_range_data)} profile-range entries")
-            except (json.JSONDecodeError, OSError):
-                pass
-
-        # Merge profile-range data into profile_data (prefer profile-range for matching methods)
-        if profile_range_data:
-            pr_by_idx = {p.get("methodIndex"): p for p in profile_range_data if "methodIndex" in p}
-            if profile_data:
-                for p in profile_data:
-                    midx = p.get("methodIndex")
-                    if midx in pr_by_idx:
-                        pr_entry = pr_by_idx[midx]
-                        p["nurseryAllocBytes"] = pr_entry.get("nurseryAllocBytes", 0)
-                        p["fastPathCount"] = pr_entry.get("fastPathCount", 0)
-                        p["slowPathCount"] = pr_entry.get("slowPathCount", 0)
-                        p["gcPauseNs"] = pr_entry.get("gcPauseNs", 0)
-            else:
-                profile_data = profile_range_data
 
         methods_list, aggregate = _build_method_comparison(tech_map, slug, profile_data)
         if not methods_list:

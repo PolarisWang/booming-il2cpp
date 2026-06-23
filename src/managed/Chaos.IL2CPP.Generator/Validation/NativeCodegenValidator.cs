@@ -143,7 +143,7 @@ public sealed class NativeCodegenValidator
             var rawStdMatch = RawStdTypeRegex.Match(content);
             if (rawStdMatch.Success)
             {
-                result.Warnings.Add($"'{fileName}': raw std:: type '{rawStdMatch.Value}' found — prefer CHAOS_IL2CPP_* macros (found near line {EstimateLineNumber(content, rawStdMatch.Index)})");
+                result.Errors.Add($"'{fileName}': raw std:: type '{rawStdMatch.Value}' found — use CHAOS_IL2CPP_* macros instead (found near line {EstimateLineNumber(content, rawStdMatch.Index)})");
             }
         }
 

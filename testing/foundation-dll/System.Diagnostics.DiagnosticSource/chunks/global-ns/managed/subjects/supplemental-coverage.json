@@ -1,0 +1,13 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Diagnostics.DiagnosticSource",
+  "chunkSlug": "global-ns",
+  "entries": [
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterFactoryExtensions::Create:System.Diagnostics.Metrics.Meter(System.Diagnostics.Metrics.IMeterFactory,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::Start:System.Void()"
+    }
+  ]
+}

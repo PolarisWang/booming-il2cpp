@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.ComponentModel.TypeConverter",
   "chunkSlug": "global-ns",
-  "totalMethods": 80,
+  "totalMethods": 89,
   "factMethodCount": 64,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
@@ -649,6 +649,60 @@
       "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.Timer::Stop:System.Void()",
       "generatedMethodId": "Stop_3__0"
+    },
+    {
+      "index": 80,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.InstanceDescriptor::Invoke:System.Object()",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 81,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ResolveNameEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.Serialization.ResolveNameEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 82,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ResolveNameEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 83,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ResolveNameEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.Serialization.ResolveNameEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 84,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.Drawing.ColorConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 85,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.ElapsedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Timers.ElapsedEventArgs,System.AsyncCallback,System.Object)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 86,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.ElapsedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 87,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.ElapsedEventHandler::Invoke:System.Void(System.Object,System.Timers.ElapsedEventArgs)",
+      "generatedMethodId": ""
+    },
+    {
+      "index": 88,
+      "kind": "aot-coverage",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.Timers.Timer::Start:System.Void()",
+      "generatedMethodId": ""
     }
   ]
 }
