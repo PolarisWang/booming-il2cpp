@@ -384,7 +384,8 @@ public sealed partial class NativeAotLoweringPlanner
             _braceCount--;
         }
         // Fallback return for non-void: suppress MSVC C4715
-        if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
+        // Skip when wrapped in try-catch (SEH), which has its own return {} at line 395.
+        if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void && !_wrapInTryCatch)
         {
             builder.AppendLine("    return {};");
         }

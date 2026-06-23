@@ -341,6 +341,20 @@ public sealed partial class NativeAotLoweringPlanner
 		// Subject-only lowering may lose instruction-level parameter info, but the
 		// SubjectId always encodes the full parameter signature.
 		int paramCount = InferParameterCountFromSubjectId(callee);
+		// Generic methods with 0 explicit parameters (e.g. Array.Empty<T>())
+		// have a hidden RuntimeGenericContext parameter on the eval stack that
+		// is not reflected in the SubjectId's parameter list.  Add 1 so the
+		// generated C++ call site passes the correct number of arguments.
+		if (paramCount == 0 && callee.IndexOf('<') > 0 && callee.IndexOf('>') > 0)
+		{
+			int methodEnd = callee.IndexOf("::", StringComparison.Ordinal);
+			if (methodEnd >= 0)
+			{
+				int genericStart = callee.IndexOf('<', methodEnd);
+				if (genericStart >= 0)
+					paramCount = 1;
+			}
+		}
 		var paramAbis = CreateLegacyAbiParameterSlots(paramCount);
 		// Build parameter signature string for the function declaration:
 		//   CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, ...
