@@ -1182,9 +1182,34 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     int preTryDepth = _state.Value!.ActiveStructuredSlotContext?.Depth ?? 0;
                     builder.AppendLine(indentation + "CHAOS_EH_TRY");
+                    int tryBodyStart = builder.Length;
                     EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
                     if (er.CatchTypeSubjectId != null)
                         _state.Value!.ActiveStructuredSlotContext?.RestoreDepth(preTryDepth);
+                    // ── Brace balance safety net ──
+                    // The try body emission may leave open { blocks from dispatch table
+                    // guards (e.g. if (kChaosExternalRuntimeFnTable[idx] == nullptr) {).
+                    // CHAOS_EH_CATCH_BEGIN expands to } __except(...) { which expects
+                    // exactly 1 open brace (from __try {).  Count unmatched braces.
+                    string tryBodyText = builder.ToString(tryBodyStart, builder.Length - tryBodyStart);
+                    int braceDelta = 0;
+                    foreach (char c in tryBodyText)
+                    {
+                        if (c == '{') braceDelta++;
+                        else if (c == '}') braceDelta--;
+                    }
+                    // braceDelta should be 1 (the __try {).  If >1, close extras.
+                    // Also handle <0 (too many closing braces) by warning.
+                    while (braceDelta > 1)
+                    {
+                        builder.AppendLine(bodyIndent + "}");
+                        braceDelta--;
+                    }
+                    if (braceDelta != 1)
+                    {
+                        System.Console.Error.WriteLine(
+                            $"[SEH-BALANCE] WARNING: try body brace delta = {braceDelta} (expected 1)");
+                    }
                     builder.AppendLine(indentation + "CHAOS_EH_CATCH_BEGIN");
                     if (er.CatchTypeSubjectId != null)
                     {
