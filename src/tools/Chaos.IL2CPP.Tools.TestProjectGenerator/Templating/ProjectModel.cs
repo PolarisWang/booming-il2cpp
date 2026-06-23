@@ -39,11 +39,9 @@ internal sealed class ProjectModelBuilder
         model["has_patch_data"] = hasPatchData;
         model["patch_data_size"] = patchDataSize;
         model["patch_data_host_class"] = patchDataHostClass;
-        model["sdk_dir"] = NormalizePath(
-            sdkDir is not null ? GetRelativePath(nativeDir, sdkDir) : "${CMAKE_CURRENT_SOURCE_DIR}/chaos-sdk");
-        model["project_root"] = NormalizePath(GetRelativePath(nativeDir, projectRoot ?? ""));
-        model["codegen_dir"] = NormalizePath(
-            codegenDir is not null ? GetRelativePath(nativeDir, codegenDir) : "${CMAKE_CURRENT_SOURCE_DIR}/codegen");
+        model["sdk_dir"] = NormalizePath(sdkDir ?? "${CMAKE_CURRENT_SOURCE_DIR}/chaos-sdk");
+        model["project_root"] = NormalizePath(projectRoot ?? "");
+        model["codegen_dir"] = NormalizePath(codegenDir ?? "${CMAKE_CURRENT_SOURCE_DIR}/codegen");
         model["generated_at"] = (generatedAt ?? DateTime.UtcNow).ToString("O");
 
         // ── Subject metadata ──
