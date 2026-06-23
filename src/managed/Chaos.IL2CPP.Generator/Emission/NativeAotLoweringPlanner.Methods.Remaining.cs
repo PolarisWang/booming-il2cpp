@@ -241,6 +241,8 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine();
 
         // ── VTable extern declarations (inside codegen namespace) ──
+
+        // ── VTable extern declarations (inside codegen namespace) ──
         // Types with vtables defined in the object model (page 0) need extern
         // declarations so that type-info-defs.generated.cpp (paged build) can
         // reference them without C2065 undeclared identifier.
