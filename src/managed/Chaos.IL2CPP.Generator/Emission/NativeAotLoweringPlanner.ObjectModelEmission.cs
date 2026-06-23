@@ -29,7 +29,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// methods are inlined, producing direct ->field access in the generated C++.
     /// Without a struct definition, the typedef int32 fails with C2227.
     /// </summary>
-    private bool _TryFindExternalValueTypeFields(
+    private bool TryFindExternalValueTypeFields(
         string typeSubjectId,
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
         out List<string> fields)
@@ -103,12 +103,12 @@ public sealed partial class NativeAotLoweringPlanner
         return false;
     }
 
-    private string? _TryEmitOpaqueValueTypeStruct(string typeSubjectId)
+    private string? TryEmitOpaqueValueTypeStruct(string typeSubjectId)
     {
         if (typeSubjectId.Contains("System.Numerics.Vector") &&
             (typeSubjectId.Contains("`1<") || typeSubjectId.Contains("Vector_1_")))
         {
-            int size = _GetVectorSize(typeSubjectId);
+            int size = GetVectorSize(typeSubjectId);
             if (size <= 0) return null;
             var sb = new System.Text.StringBuilder(128);
             sb.Append("struct ");
@@ -125,7 +125,7 @@ public sealed partial class NativeAotLoweringPlanner
         return null;
     }
 
-    private static int _GetVectorSize(string typeSubjectId)
+    private static int GetVectorSize(string typeSubjectId)
     {
         var elStart = typeSubjectId.IndexOf('<');
         var elEnd = typeSubjectId.LastIndexOf('>');
@@ -1402,7 +1402,7 @@ public sealed partial class NativeAotLoweringPlanner
                 // External assembly value types (e.g. TagList from System.Diagnostics.DiagnosticSource)
                 // may have fields accessed via inlined method emission without being in fieldsByDeclaringType.
                 // Scan reachable instructions to discover these fields and emit a struct definition.
-                if (vtFields.Count == 0 && _TryFindExternalValueTypeFields(vtId, reachableMethods, out var discoveredFields))
+                if (vtFields.Count == 0 && TryFindExternalValueTypeFields(vtId, reachableMethods, out var discoveredFields))
                 {
                     vtFields = discoveredFields;
                     fieldsByDeclaringType[vtId] = vtFields;
@@ -1411,7 +1411,7 @@ public sealed partial class NativeAotLoweringPlanner
                 // that need a real struct definition (not typedef int32).
                 if (vtFields.Count == 0)
                 {
-                    var opaqueCode = _TryEmitOpaqueValueTypeStruct(vtId);
+                    var opaqueCode = TryEmitOpaqueValueTypeStruct(vtId);
                     if (opaqueCode != null)
                     {
                         vtSubjectIds.Add(vtId);
