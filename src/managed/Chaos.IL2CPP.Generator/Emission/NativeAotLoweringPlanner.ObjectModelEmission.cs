@@ -1699,7 +1699,22 @@ public sealed partial class NativeAotLoweringPlanner
             if (!referenceTypeSubjectIds.Contains(typeSubjectId) &&
                 !valueTypeSubjectIds.Contains(typeSubjectId))
             {
-                TrackReferenceType(typeSubjectId, null);
+                // Check if this is a value type (enum/struct with managed value semantics)
+                // vs a reference type.  Value types need typedef in the shared header;
+                // reference types need struct definitions with field access support.
+                if (IsStructuredValueTypeSubjectId(typeSubjectId))
+                {
+                    valueTypeSubjectIds.Add(typeSubjectId);
+                    // _emittedValueTypeSubjectIds was snapshotted at line 1509, before
+                    // this ABI slot scan.  Update it so BuildTypeDeclarationsCode emits
+                    // the typedef for this value type in the shared header.
+                    if (!_emittedValueTypeSubjectIds.Contains(typeSubjectId))
+                        _emittedValueTypeSubjectIds.Add(typeSubjectId);
+                }
+                else
+                {
+                    TrackReferenceType(typeSubjectId, null);
+                }
             }
         }
 
