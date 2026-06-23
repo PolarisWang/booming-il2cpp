@@ -7,10 +7,11 @@ public sealed partial class AotCoreIrLowering
 
     private static IReadOnlyList<AotCoreIrAbiSlotArtifact> ResolveParameterAbis(
         ManagedMethodModel method,
-        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes)
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, string>? displayNameToSubjectId = null)
     {
         return method.Parameters
-            .Select(parameter => ResolveAbiSlot(parameter.Type, method.AssemblyName, managedTypes))
+            .Select(parameter => ResolveAbiSlot(parameter.Type, method.AssemblyName, managedTypes, displayNameToSubjectId))
             .ToList();
     }
 
@@ -19,7 +20,8 @@ public sealed partial class AotCoreIrLowering
     private static AotCoreIrAbiSlotArtifact ResolveAbiSlot(
         string typeIdentity,
         string assemblyName,
-        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes)
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, string>? displayNameToSubjectId = null)
     {
         // Strip byref suffix (&) for underlying type resolution;
         // the caller uses CarrierKindCode to determine the native ABI type.
@@ -36,7 +38,7 @@ public sealed partial class AotCoreIrLowering
             isByRef = false;
         }
 
-        var managedType = TryResolveManagedType(innerType, assemblyName, managedTypes);
+        var managedType = TryResolveManagedType(innerType, assemblyName, managedTypes, displayNameToSubjectId);
         var resolvedTypeShape = ResolveTypeShape(managedType, innerType);
 
         // If this is a byref parameter, determine the right ByRef carrier kind
@@ -202,11 +204,23 @@ public sealed partial class AotCoreIrLowering
     private static ManagedTypeModel? TryResolveManagedType(
         string typeIdentity,
         string assemblyName,
-        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes)
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, string>? displayNameToSubjectId = null)
     {
         if (managedTypes.TryGetValue(typeIdentity, out var exactType))
         {
             return exactType;
+        }
+
+        // Fast O(1) DisplayName/Name → SubjectId lookup index.
+        // Avoids the slow O(n) fuzzy matching below for cross-assembly types
+        // where typeIdentity is a DisplayName (e.g. "System.Int64") but the
+        // managedTypes key is the SubjectId (e.g. "System.Private.CoreLib/System.Int64").
+        if (displayNameToSubjectId is not null &&
+            displayNameToSubjectId.TryGetValue(typeIdentity, out var indexedSubjectId) &&
+            managedTypes.TryGetValue(indexedSubjectId, out var indexedType))
+        {
+            return indexedType;
         }
 
         return managedTypes.Values.FirstOrDefault(type =>
