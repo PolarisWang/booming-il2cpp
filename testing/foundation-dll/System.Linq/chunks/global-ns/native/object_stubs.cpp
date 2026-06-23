@@ -50,13 +50,13 @@ CHAOS_IL2CPP_INT32 ChaosObjectGetHashCode(CHAOS_IL2CPP_INTPTR obj) noexcept
 }
 CHAOS_IL2CPP_INTPTR ChaosObjectToString(CHAOS_IL2CPP_INTPTR obj) noexcept {
     (void)obj;
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    CHAOS_IL2CPP_LOG_WARN("Stub", "ChaosObjectToString called — returning null");
+    return 0;
 }
 CHAOS_IL2CPP_INTPTR ChaosObjectGetType(CHAOS_IL2CPP_INTPTR obj) noexcept {
     (void)obj;
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    CHAOS_IL2CPP_LOG_WARN("Stub", "ChaosObjectGetType called — returning null");
+    return 0;
 }
 
 // ── MemberwiseClone ──────────────────────────────────────────────────
@@ -91,40 +91,37 @@ CHAOS_IL2CPP_INTPTR ChaosObjectMemberwiseClone(CHAOS_IL2CPP_INTPTR obj) noexcept
 
 CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetUninitializedObject(CHAOS_IL2CPP_INTPTR type_handle) noexcept
 {
-    if (type_handle == 0) { fprintf(stderr, "[getui] FAIL: null handle\n"); return 0; }
+    if (type_handle == 0) { CHAOS_IL2CPP_LOG_WARN("Stub", "GetUninitializedObject: null handle"); return 0; }
 
-    // Step 1: Read runtime_type_handle from System.Type object at offset 16.
+    // Step 1: Read runtime_type_handle from System.Type object.
+    // Header layout: [syncblock | type_info_ptr] = 2 × pointer-sized words.
+    // Offset = sizeof(CHAOS_IL2CPP_INTPTR) * 2 works on both x64 (16) and x86 (8).
     CHAOS_IL2CPP_INTPTR inner_handle = 0;
     std::memcpy(&inner_handle,
-        reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_INTPTR>(type_handle) + 16),
+        reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_INTPTR>(type_handle) + sizeof(CHAOS_IL2CPP_INTPTR) * 2),
         sizeof(inner_handle));
-    if (inner_handle == 0) { fprintf(stderr, "[getui] FAIL: inner_handle=0\n"); return 0; }
-    fprintf(stderr, "[getui] inner_handle=0x%llx\n", (unsigned long long)inner_handle);
+    if (inner_handle == 0) { CHAOS_IL2CPP_LOG_WARN("Stub", "GetUninitializedObject: inner_handle=0"); return 0; }
 
     // Step 2: Resolve TypeInfoHandle to TypeInfoHot* via module registry.
     TypeInfoHandle th = static_cast<TypeInfoHandle>(inner_handle);
     uint32_t module_id = static_cast<uint32_t>(th >> 32);
     uint32_t token = static_cast<uint32_t>(th & 0xFFFFFFFFu);
-    fprintf(stderr, "[getui] module_id=%u token=0x%x\n", module_id, token);
     auto* type_info = LookupTypeInfoPtr(module_id, token);
-    if (type_info == nullptr) { fprintf(stderr, "[getui] FAIL: type_info null\n"); return 0; }
-    fprintf(stderr, "[getui] type_info=%p stable_id=0x%llx\n", (void*)type_info, (unsigned long long)type_info->stable_id);
+    if (type_info == nullptr) { CHAOS_IL2CPP_LOG_WARN("Stub", "GetUninitializedObject: type_info null"); return 0; }
 
     // Step 3: Look up GcTypeLayout by stable_id to get instance size.
     auto& registry = GcLayoutRegistry::Instance();
     auto* layout = registry.Lookup(type_info->stable_id);
-    if (layout == nullptr) { fprintf(stderr, "[getui] FAIL: no GcLayout for stable_id\n"); return 0; }
-    if (layout->instance_size == 0) { fprintf(stderr, "[getui] FAIL: instance_size=0\n"); return 0; }
-    fprintf(stderr, "[getui] layout=%p instance_size=%u\n", (void*)layout, layout->instance_size);
+    if (layout == nullptr) { CHAOS_IL2CPP_LOG_WARN("Stub", "GetUninitializedObject: no GcLayout"); return 0; }
+    if (layout->instance_size == 0) { CHAOS_IL2CPP_LOG_WARN("Stub", "GetUninitializedObject: instance_size=0"); return 0; }
 
     // Step 4: Allocate via ChaOS GC fast path (zero-initialized).
     void* obj = GcAllocateFast(layout->instance_size);
-    if (obj == nullptr) { fprintf(stderr, "[getui] FAIL: GcAllocateFast returned null\n"); return 0; }
+    if (obj == nullptr) { CHAOS_IL2CPP_LOG_WARN("Stub", "GetUninitializedObject: GcAllocateFast failed"); return 0; }
 
     // Step 5: Set header.type_info so the object has proper type identity.
     *static_cast<const TypeInfoHot**>(obj) = type_info;
 
-    fprintf(stderr, "[getui] OK obj=%p\n", obj);
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(obj);
 }
 
