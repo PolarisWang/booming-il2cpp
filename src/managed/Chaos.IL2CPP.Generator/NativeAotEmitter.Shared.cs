@@ -694,12 +694,10 @@ public sealed partial class NativeAotEmitter
                 sb.Replace(wrongDecl, correctDecl);
             if (postText.Contains(wrongDeclC))
                 sb.Replace(wrongDeclC, correctDecl);
-            // Also handle non-INTPTR return types (e.g. CHAOS_IL2CPP_INT64)
-            var _wrongRxCatch = new System.Text.RegularExpressions.Regex(
-                System.Text.RegularExpressions.Regex.Escape("extern \"C\" ") +
-                @"\w+ " + System.Text.RegularExpressions.Regex.Escape(sym + "() noexcept;"));
-            foreach (System.Text.RegularExpressions.Match _m in _wrongRxCatch.Matches(postText))
-                sb.Replace(_m.Value, correctDecl);
+            // Also handle non-INTPTR return types (e.g. CHAOS_IL2CPP_INT64, double)
+            string _anyWrong = "extern \"C\" " + sym + "() noexcept;";
+            if (postText.Contains(_anyWrong))
+                sb.Replace(_anyWrong, correctDecl);
         }
 
     }

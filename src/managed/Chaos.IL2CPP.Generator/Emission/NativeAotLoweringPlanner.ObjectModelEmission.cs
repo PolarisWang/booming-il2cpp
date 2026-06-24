@@ -1507,6 +1507,14 @@ public sealed partial class NativeAotLoweringPlanner
                 _staticFieldDeclarations.TryAdd(kvp.Key, kvp.Value);
         }
         _emittedValueTypeSubjectIds = new HashSet<string>(valueTypeSubjectIds, StringComparer.Ordinal);
+        // Merge with value type symbols discovered by BuildGeneratedModuleModel's
+        // ABI slot scan (GeneratedModule.cs:205-318).  Value types referenced via
+        // chaos_resolve_managed_value_pointer<T> may not be in the AOT IR type
+        // metadata and thus omitted from valueTypeSubjectIds.  Without this merge,
+        // the shared header would lack chaos_valuetype_* declarations for these
+        // types, causing C2061 when generated code references them.
+        if (_emittedValueTypeSubjectIdsFromAbi is { Count: > 0 })
+            _emittedValueTypeSubjectIds.UnionWith(_emittedValueTypeSubjectIdsFromAbi);
         // Capture emitted type subject IDs for Phase 0 ModuleRegistry Tier 0 arrays
         _allEmittedTypeSubjectIds = new HashSet<string>(referenceTypeSubjectIds, StringComparer.Ordinal);
         _allEmittedTypeSubjectIds.UnionWith(interfaceTypeSubjectIds);

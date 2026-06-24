@@ -204,6 +204,8 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private HashSet<string>? _emittedValueTypeSubjectIds;
 
+    internal HashSet<string>? _emittedValueTypeSubjectIdsFromAbi;
+
     /// <summary>
     /// Full C++ struct body code for value types that have fields or _backing
     /// members, captured during EmitObjectModelDeclarations. Used by
