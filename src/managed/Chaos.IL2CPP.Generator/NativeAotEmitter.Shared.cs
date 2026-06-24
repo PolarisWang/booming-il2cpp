@@ -683,7 +683,7 @@ public sealed partial class NativeAotEmitter
             }
             string wrongDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
             string wrongDeclC = "extern \"C\" CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
-            string correctDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "(";
+            string correctDecl = "extern \"C\" CHAOS_IL2CPP_INTPTR " + sym + "(";
             for (int i = 0; i < argCount; i++)
             {
                 if (i > 0) correctDecl += ", ";
@@ -694,6 +694,12 @@ public sealed partial class NativeAotEmitter
                 sb.Replace(wrongDecl, correctDecl);
             if (postText.Contains(wrongDeclC))
                 sb.Replace(wrongDeclC, correctDecl);
+            // Also handle non-INTPTR return types (e.g. CHAOS_IL2CPP_INT64)
+            var _wrongRxCatch = new System.Text.RegularExpressions.Regex(
+                System.Text.RegularExpressions.Regex.Escape("extern \"C\" ") +
+                @"\w+ " + System.Text.RegularExpressions.Regex.Escape(sym + "() noexcept;"));
+            foreach (System.Text.RegularExpressions.Match _m in _wrongRxCatch.Matches(postText))
+                sb.Replace(_m.Value, correctDecl);
         }
 
     }

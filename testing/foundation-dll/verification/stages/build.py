@@ -738,14 +738,27 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
 
     if build_result.returncode != 0 or not subjects_dll.exists():
-        print(f"  [build] Combined build FAILED for {tfm}")
-        for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-15:]:
-            print(f"      {line}")
-        return StageResult(
-            stage="build", status="error",
-            summary="Combined subjects DLL build failed",
-            details={"buildErrors": build_result.stderr[:500]},
-            duration_ms=int((time.perf_counter() - start) * 1000))
+        # Retry with net10.0 when net9.0 fails (string constructor removed in .NET 9+).
+        # The target assembly may report net9.0 from its runtime path but the local
+        # SDK (10.0.x) ships net10.0 TFM which doesn't support net9.0 string ABI.
+        if tfm == "net9.0":
+            print(f"  [build] Retrying {tfm} with net10.0 fallback")
+            build_result = subprocess.run(
+                ["dotnet", "build", str(combined_csproj),
+                 "-f", "net10.0",
+                 f"-p:OutDir={subjects_dll.parent}",
+                 "-p:ImportDirectoryBuildProps=false",
+                 "--nologo", "-v", "quiet"],
+                capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
+        if build_result.returncode != 0 or not subjects_dll.exists():
+            print(f"  [build] Combined build FAILED for {tfm}")
+            for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-15:]:
+                print(f"      {line}")
+            return StageResult(
+                stage="build", status="error",
+                summary="Combined subjects DLL build failed",
+                details={"buildErrors": build_result.stderr[:500]},
+                duration_ms=int((time.perf_counter() - start) * 1000))
 
     print(f"  [build] Subjects DLL: {subjects_dll} ({subjects_dll.stat().st_size} bytes)")
 
