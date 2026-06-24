@@ -1722,7 +1722,31 @@ public sealed partial class NativeAotLoweringPlanner
                 }
             }
 
-            // 5. Exception catch types
+            // 5. Supplement: scan ALL _allManagedMethods for types referenced in method
+        // signatures, not just methods in _methodsBySubjectId.  Linker's
+        // IncludeFullAssemblyClosure adds dependency assembly types to the type map
+        // but those methods are not in _methodsBySubjectId.  Their ReturnType and
+        // parameter types still need forward declarations in the shared header.
+        if (_allManagedMethods is { Count: > 0 })
+        {
+            foreach (var mm in _allManagedMethods.Values)
+            {
+                if (mm.SubjectId is null) continue;
+                string? rt = mm.ReturnType;
+                if (rt is { Length: > 0 } && !rt.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
+                    !rt.StartsWith("!!", StringComparison.Ordinal) && !rt.StartsWith("!", StringComparison.Ordinal))
+                    _trackTypeRef(rt);
+                foreach (var param in mm.Parameters)
+                {
+                    string? pt = param.Type;
+                    if (pt is { Length: > 0 } && !pt.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
+                        !pt.StartsWith("!!", StringComparison.Ordinal) && !pt.StartsWith("!", StringComparison.Ordinal))
+                        _trackTypeRef(pt);
+                }
+            }
+        }
+
+        // 6. Exception catch types
             if (m.ExceptionRegions is { Count: > 0 })
                 foreach (var e in m.ExceptionRegions)
                     if (e?.CatchTypeSubjectId is { Length: > 0 } catchType &&
