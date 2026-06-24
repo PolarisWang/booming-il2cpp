@@ -370,6 +370,75 @@ public sealed partial class LoaderStage
                 projectedMethods);
         }
 
+        // ── Post-projection: project types from DemandGraph entries ──────────
+        // The TypeSpec loop above projects types only from TypeSpec metadata rows.
+        // Types that appear ONLY as generic method arguments or MemberReference
+        // declaring types are tracked in genericInstantiationDemandEntries but
+        // never have ManagedTypeModel entries created.  This pass fills the gap.
+        var existingSubjectIds = new HashSet<string>(existingTypeSubjects.Keys, StringComparer.Ordinal);
+        existingSubjectIds.UnionWith(projectedTypes.Keys);
+        foreach (var entry in genericInstantiationDemandEntries.Values)
+        {
+            string? typeSubjectId = null;
+            string? typeDefSubjectId = null;
+
+            if (string.Equals(entry.SubjectKind, "type", StringComparison.Ordinal))
+            {
+                if (existingSubjectIds.Contains(entry.SubjectId))
+                    continue;
+                // Strip generic arity from definition to get the base type SubjectId
+                // e.g. "ParallelLoopStateFlags`1" -> "ParallelLoopStateFlags"
+                typeSubjectId = entry.SubjectId;
+                typeDefSubjectId = entry.DefinitionSubjectId;
+            }
+            else if (string.Equals(entry.SubjectKind, "method", StringComparison.Ordinal))
+            {
+                // Extract the declaring type from the method SubjectId
+                // Format: "Assembly/Type::Method:Ret(Params)"
+                int sepIdx = entry.SubjectId.IndexOf("::", StringComparison.Ordinal);
+                if (sepIdx <= 0) continue;
+                string declaringType = entry.SubjectId[..sepIdx];
+                if (existingSubjectIds.Contains(declaringType))
+                    continue;
+                typeSubjectId = declaringType;
+                // For method entries, the DefinitionSubjectId is the method's definition.
+                // Extract the type portion from it if it contains ::.
+                int defSepIdx = entry.DefinitionSubjectId.IndexOf("::", StringComparison.Ordinal);
+                typeDefSubjectId = defSepIdx > 0
+                    ? entry.DefinitionSubjectId[..defSepIdx]
+                    : entry.DefinitionSubjectId;
+            }
+
+            if (typeSubjectId == null || typeDefSubjectId == null)
+                continue;
+
+            // Verify definition type exists (should always — it's the open generic definition)
+            if (!existingTypeSubjects.TryGetValue(typeDefSubjectId, out var baseDefType))
+                continue;
+
+            projectedTypes[typeSubjectId] = new ManagedTypeModel
+            {
+                AssemblyName = typeSubjectId[..typeSubjectId.IndexOf('/')],
+                NamespaceName = baseDefType.NamespaceName,
+                Name = typeSubjectId,
+                SubjectId = typeSubjectId,
+                DefinitionSubjectId = typeDefSubjectId,
+                DisplayName = typeSubjectId,
+                IsValueType = baseDefType.IsValueType,
+                IsSealed = baseDefType.IsSealed,
+                IsComImport = baseDefType.IsComImport,
+                ComInterfaceGuid = baseDefType.ComInterfaceGuid,
+                ComInterfaceTypeKind = baseDefType.ComInterfaceTypeKind,
+                BaseTypeSubjectId = baseDefType.BaseTypeSubjectId,
+                ImplementedInterfaceSubjectIds = baseDefType.ImplementedInterfaceSubjectIds,
+                MetadataToken = 0,
+                IsInterface = baseDefType.IsInterface,
+            };
+            existingSubjectIds.Add(typeSubjectId);
+            if (baseDefType.IsValueType)
+                valueTypeSubjectIds.Add(typeSubjectId);
+        }
+
         return new GenericInstantiationProjection
         {
             Types = projectedTypes.Values.ToList(),
