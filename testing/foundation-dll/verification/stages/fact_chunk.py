@@ -69,6 +69,16 @@ def _run_single_fact(exe_path: Path, tech: str) -> dict:
     passed = sum(1 for fr in fact_results if fr.get("passed"))
     total = len(fact_results)
 
+    # Detect fallback-only results: passed=true but assertCount==0 means the
+    # subject method was dispatched to ChaosExternalRuntimeFallback and returned
+    # 0 without executing any assertion.  Mark these as false positives.
+    for fr in fact_results:
+        if fr.get("passed") and fr.get("assertCount", 1) == 0:
+            fr["passed"] = False
+            fr["_fallback"] = True
+
+    passed = sum(1 for fr in fact_results if fr.get("passed"))
+
     # Parse assertion failure messages from stderr
     assert_messages: list[str] = []
     if stderr:
