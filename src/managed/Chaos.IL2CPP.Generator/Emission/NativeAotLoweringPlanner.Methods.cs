@@ -909,13 +909,16 @@ public sealed partial class NativeAotLoweringPlanner
             methodsForLowering,
             closureManifest);
         _tStaticInit = _sw.ElapsedMilliseconds;
-        var externalRuntimeHelpers = CollectExternalRuntimeHelpers(methodsForLowering, _staticInitializationSupport);
+        // CollectExternalRuntimeHelpers and CollectExternalRuntimeDispatchEntries +
+        // CollectBridgeImportThunks have no data dependency — parallelize.
+        IReadOnlyList<ExternalRuntimeHelperDefinition> externalRuntimeHelpers = null!;
+        System.Threading.Tasks.Parallel.Invoke(
+            () => { externalRuntimeHelpers = CollectExternalRuntimeHelpers(methodsForLowering, _staticInitializationSupport); },
+            () => { CollectExternalRuntimeDispatchEntries(methodsForLowering); },
+            () => { CollectBridgeImportThunks(methodsForLowering); }
+        );
         _tExtHelpers = _sw.ElapsedMilliseconds;
         _externalRuntimeHelpers = externalRuntimeHelpers;
-        CollectExternalRuntimeDispatchEntries(methodsForLowering);
-        _tExtDispatch = _sw.ElapsedMilliseconds;
-        CollectBridgeImportThunks(methodsForLowering);
-        _tBridgeThunks = _sw.ElapsedMilliseconds;
         _tPhase2 = _sw.ElapsedMilliseconds;
         var objectModelBuilder = StringBuilderPool.Rent(65536);
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
