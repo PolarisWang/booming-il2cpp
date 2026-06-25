@@ -44,6 +44,14 @@ internal sealed class ProjectModelBuilder
         model["project_root"] = NormalizePath(GetRelativePath(nativeDir, projectRoot ?? ""));
         model["codegen_dir"] = NormalizePath(
             codegenDir is not null ? GetRelativePath(nativeDir, codegenDir) : "${CMAKE_CURRENT_SOURCE_DIR}/codegen");
+        // Prepend CMAKE_CURRENT_SOURCE_DIR so all relative paths resolve
+        // correctly from cmake's working directory (build/) instead of nativeDir.
+        if (model["project_root"] is string pr && !pr.StartsWith("${", StringComparison.Ordinal) && !pr.StartsWith("/", StringComparison.Ordinal) && pr.IndexOf(':') < 0)
+            model["project_root"] = "${CMAKE_CURRENT_SOURCE_DIR}/" + pr;
+        if (model["sdk_dir"] is string sd && !sd.StartsWith("${", StringComparison.Ordinal) && !sd.StartsWith("/", StringComparison.Ordinal) && sd.IndexOf(':') < 0)
+            model["sdk_dir"] = "${CMAKE_CURRENT_SOURCE_DIR}/" + sd;
+        if (model["codegen_dir"] is string cd && !cd.StartsWith("${", StringComparison.Ordinal) && !cd.StartsWith("/", StringComparison.Ordinal) && cd.IndexOf(':') < 0)
+            model["codegen_dir"] = "${CMAKE_CURRENT_SOURCE_DIR}/" + cd;
         model["generated_at"] = (generatedAt ?? DateTime.UtcNow).ToString("O");
 
         // ── Subject metadata ──
