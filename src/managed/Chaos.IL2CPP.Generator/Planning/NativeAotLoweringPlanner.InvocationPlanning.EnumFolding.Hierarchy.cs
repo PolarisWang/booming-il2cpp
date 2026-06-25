@@ -20,7 +20,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         _typeHierarchyPtrFoldMap.Clear();
         _typeHierarchyPtrSkipIlOffsets.Clear();
-        _state.Value!.PreTryFoldInitializers = null;
+        __st!.PreTryFoldInitializers = null;
         if (_allEmittedTypeSubjectIds is not { Count: > 0 })
             return;
         int totalCalls = 0, matchedCalls = 0;

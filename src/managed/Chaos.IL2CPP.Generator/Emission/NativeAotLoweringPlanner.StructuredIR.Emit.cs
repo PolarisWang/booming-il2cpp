@@ -20,8 +20,9 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method,
         string indentation)
     {
-    __st = _state.Value!;
-        // Depth counter guard: prevents process-terminating StackOverflowException
+        // __st is set by EmitManagedMethod before entering any emission path.
+        // No re-assignment needed here — _state.Value is the same ThreadLocal
+        // instance on every call within the same thread.
         // from recursive structured IR tree emission.  This is more reliable than
         // RuntimeHelpers.TryEnsureSufficientExecutionStack() which may not work
         // correctly on threads created with custom maxStackSize.
@@ -2165,7 +2166,7 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method,
         string indentation)
     {
-    __st = _state.Value!;
+        // __st was set by EmitManagedMethod — safe to use directly
         Interlocked.Increment(ref s_pcDispatchCount);
 
         builder.AppendLine(indentation + "// pc-dispatch state machine for irreducible CFG");
