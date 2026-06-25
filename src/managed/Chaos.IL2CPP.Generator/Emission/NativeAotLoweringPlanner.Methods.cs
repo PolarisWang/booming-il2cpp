@@ -917,7 +917,7 @@ public sealed partial class NativeAotLoweringPlanner
         CollectBridgeImportThunks(methodsForLowering);
         _tBridgeThunks = _sw.ElapsedMilliseconds;
         _tPhase2 = _sw.ElapsedMilliseconds;
-        var objectModelBuilder = new StringBuilder(65536);
+        var objectModelBuilder = StringBuilderPool.Rent(65536);
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
         EmitObjectModelDeclarations(objectModelBuilder, methodsForLowering, externalRuntimeHelpers, metadataRegistration);
         // Collect static field references from hotpatchable methods not in methodsForLowering.
@@ -1074,7 +1074,8 @@ public sealed partial class NativeAotLoweringPlanner
                 .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal));
         var cryptoAotIrCode = BuildCryptoAotIrCode();
         var moduleRegistrationCode = BuildModuleRegistration();
-        var moduleRegSb = new StringBuilder(moduleRegistrationCode, 65536);
+        var moduleRegSb = StringBuilderPool.Rent(65536);
+        moduleRegSb.Append(moduleRegistrationCode);
         if (!string.IsNullOrEmpty(nameIndexCode))
         {
             moduleRegSb.Append(Environment.NewLine);
