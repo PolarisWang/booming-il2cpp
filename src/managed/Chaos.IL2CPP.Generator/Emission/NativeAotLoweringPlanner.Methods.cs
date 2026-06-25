@@ -393,6 +393,9 @@ public sealed partial class NativeAotLoweringPlanner
     /// Populated by <see cref="PrebuildExternalRuntimeDispatchTable"/> before method body emission.
     /// </summary>
     private readonly Dictionary<string, int> _externalRuntimeSubjects = new(StringComparer.Ordinal);
+    /// <summary>Set to true after first scan of aotCoreIr.Methods for external
+    /// runtime subjects.  Prevents O(N) re-scan on consecutive runs.</summary>
+    private bool _externalRuntimeSubjectsCached;
 
     /// <summary>
     /// Collects all chaos_external_runtime_* symbols referenced during method body emission.
@@ -1361,7 +1364,12 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Missing entries cause C3861 in the generated header.
         // Also collect static field declarations from all methods
         // for chaos_static_* extern declarations.
+        // Skip if we already scanned (cached flag) to avoid O(N) re-scan
+        // on every codegen run — for large chunks with 5000+ methods this
+        // saves 500K+ iterations during the registration_dispatch phase.
+        if (_externalRuntimeSubjectsCached != true)
         {
+            _externalRuntimeSubjectsCached = true;
             var _seen = new HashSet<string>(StringComparer.Ordinal);
             int _nextIdx = _externalRuntimeSubjects.Count;
             foreach (var _method in aotCoreIr.Methods)
