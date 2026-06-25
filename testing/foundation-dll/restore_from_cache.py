@@ -84,7 +84,17 @@ def restore_entry(entry_dir: Path, target_dir: Path) -> int:
 
     # Remove target for clean restore
     if target_dir.exists():
+        # Preserve build/ directory to avoid full cmake re-configure + rebuild
+        build_dir = target_dir / "build"
+        build_tmp = None
+        if build_dir.is_dir():
+            import tempfile
+            build_tmp = Path(tempfile.mkdtemp()) / "build"
+            shutil.copytree(build_dir, build_tmp, symlinks=True, dirs_exist_ok=True)
         shutil.rmtree(target_dir)
+        if build_tmp and build_tmp.exists():
+            shutil.copytree(build_tmp, build_dir, symlinks=True, dirs_exist_ok=True)
+            shutil.rmtree(build_tmp.parent, ignore_errors=True)
     target_dir.mkdir(parents=True, exist_ok=True)
 
     file_count = 0

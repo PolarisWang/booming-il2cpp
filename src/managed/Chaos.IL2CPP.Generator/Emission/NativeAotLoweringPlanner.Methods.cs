@@ -1067,12 +1067,20 @@ public sealed partial class NativeAotLoweringPlanner
         var entryBridgeArguments = fullAssemblyMode ? "" : BuildEntryBridgeArguments(entryMethod!);
 
         var abiManifestCode = BuildAbiManifest(methodsForLowering);
-        var nameIndexCode = BuildHotpatchTable(methodsForLowering, metadataRegistration);
-        var externalRuntimeTableCode = BuildExternalRuntimeDispatchTable(
-            helperSymbolBySubjectId: externalRuntimeHelpers?
-                .Where(h => !string.IsNullOrEmpty(h.TargetSymbol))
-                .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal));
+        // Parallel build for independent dispatch/registration data.
+        // BuildHotpatchTable, BuildExternalRuntimeDispatchTable, BuildGcSlotMapSection
+        // are independent of each other (no shared mutable state) and only read
+        // methodsForLowering / metadataRegistration (read-only after lowering).
         var cryptoAotIrCode = BuildCryptoAotIrCode();
+        string nameIndexCode = "", externalRuntimeTableCode = "", gcSlotMapCode = "";
+        System.Threading.Tasks.Parallel.Invoke(
+            () => { nameIndexCode = BuildHotpatchTable(methodsForLowering, metadataRegistration); },
+            () => { externalRuntimeTableCode = BuildExternalRuntimeDispatchTable(
+                helperSymbolBySubjectId: externalRuntimeHelpers?
+                    .Where(h => !string.IsNullOrEmpty(h.TargetSymbol))
+                    .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal)); },
+            () => { gcSlotMapCode = BuildGcSlotMapSection(methodsForLowering); }
+        );
         var moduleRegistrationCode = BuildModuleRegistration();
         var moduleRegSb = StringBuilderPool.Rent(65536);
         moduleRegSb.Append(moduleRegistrationCode);
@@ -1116,10 +1124,7 @@ public sealed partial class NativeAotLoweringPlanner
             moduleRegSb.Append(dispatchEntryCode);
         }
 
-        // Step 1.5: Emit GC slot map section for precise stack root scanning.
-        // Placed BEFORE CodeRegistrationV0 so the slot_map_section_begin/end
-        // symbols are defined before they're referenced.
-        var gcSlotMapCode = BuildGcSlotMapSection(methodsForLowering);
+        // Step 1.5: Emit GC slot map section (already computed in parallel above).
         if (!string.IsNullOrEmpty(gcSlotMapCode))
         {
             moduleRegSb.Append(Environment.NewLine);

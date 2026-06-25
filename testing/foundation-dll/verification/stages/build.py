@@ -791,6 +791,8 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     ]
 
     # -- 7a. Fast-path mtime check: skip TPG + cmake if entry.exe is already up to date --
+    # Also check build/CHAOS_PROJECT_ROOT exists — if native/build was cleaned, we need
+    # cmake --build to recreate it even if entry.exe seems current.
     if ctx.entry_exe_path.exists():
         exe_mtime = ctx.entry_exe_path.stat().st_mtime
         deps = [
@@ -800,7 +802,9 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         ] + _runtime_stubs + _tpg_build_deps
         deps = [d for d in deps if d is not None and d.exists()]
         stalest_dep_mtime = max(d.stat().st_mtime for d in deps)
-        if exe_mtime >= stalest_dep_mtime:
+        build_dir = ctx.native_dir / "build"
+        build_ok = build_dir.is_dir() and (build_dir / "chaos_entry.vcxproj").exists()
+        if exe_mtime >= stalest_dep_mtime and build_ok:
             exe_size = ctx.entry_exe_path.stat().st_size
             print(f"  [build] [fastpath] entry.exe is current ({exe_size} bytes, mtime={exe_mtime:.0f})")
             duration_ms = int((time.perf_counter() - start) * 1000)
