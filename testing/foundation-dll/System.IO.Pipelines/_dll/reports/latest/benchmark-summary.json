@@ -1,0 +1,64 @@
+{
+  "assemblyName": "System.IO.Pipelines",
+  "timestamp": "2026-06-18T10:05:33",
+  "totalChunks": 1,
+  "totalBenchmarkedMethods": 23,
+  "aggregatePerformance": {
+    "meanDurationMs": 1.3277869565217393,
+    "meanOpsPerSecond": 232781195.40869567,
+    "aggregateMeanCv": 0.24340204347826086,
+    "totalOutliers": 31
+  },
+  "chunkSummaries": [
+    {
+      "slug": "system-io-pipelines",
+      "fact": {
+        "passed": 23,
+        "total": 23,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 33,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 23,
+        "iterations": 4545,
+        "meanDurationMs": 1.3277869565217393,
+        "meanOpsPerSecond": 232781195.40869567,
+        "minDurationMs": 0.0115,
+        "maxDurationMs": 6.8804,
+        "totalDurationMs": 30.5391,
+        "totalAllocatedBytes": 145440.0,
+        "meanSampleCount": 8.7,
+        "totalOutliers": 31,
+        "meanCv": 0.24340204347826086,
+        "maxCv": 1.626592
+      },
+      "hotupdate": {
+        "passed": 23,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2846720,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

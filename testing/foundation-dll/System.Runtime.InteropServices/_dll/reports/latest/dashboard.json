@@ -1,0 +1,49 @@
+{
+  "assemblyName": "System.Runtime.InteropServices",
+  "timestamp": "2026-06-18T10:05:34",
+  "summary": {
+    "chunks": 1,
+    "chunksVerified": 1,
+    "chunksWithValueWarnings": 0,
+    "chunksWithMetaMismatch": 1,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 29,
+    "aggregatePerformance": {
+      "meanDurationMs": 1.098451724137931,
+      "meanOpsPerSecond": 250539519.75241378,
+      "aggregateMeanCv": 0.11703293103448276,
+      "totalOutliers": 16
+    },
+    "hotupdate": {
+      "chunksWithPatchData": 1,
+      "chunksPatchFailed": 0,
+      "chunksPatchSkippedNoMethods": 0,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 29,
+      "totalFailed": 0,
+      "skipBreakdown": {}
+    },
+    "benchmarkComparison": {
+      "methodsAnalyzed": 26,
+      "methodsWithNet8": 26,
+      "chaosAotVsNet8": {},
+      "chaosJitVsNet8": {
+        "mean": 87.62,
+        "median": 87.62,
+        "min": 87.62,
+        "max": 87.62,
+        "p25": 87.62,
+        "p75": 87.62
+      },
+      "net10VsNet8": {
+        "mean": 6.75,
+        "median": 6.75,
+        "min": 6.75,
+        "max": 6.75,
+        "p25": 6.75,
+        "p75": 6.75
+      },
+      "highValueMethods_betterThanNet8": 0.0
+    }
+  }
+}

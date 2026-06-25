@@ -1,0 +1,2498 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-18T10:05:10.3937983Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::CreateSigningRequest:System.Byte[]()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRequest",
+      "methodName": "CreateSigningRequest",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::CreateSigningRequest:System.Byte[](System.Security.Cryptography.X509Certificates.X509SignatureGenerator)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRequest",
+      "methodName": "CreateSigningRequest",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::CreateSigningRequestPem:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRequest",
+      "methodName": "CreateSigningRequestPem",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::CreateSigningRequestPem:System.String(System.Security.Cryptography.X509Certificates.X509SignatureGenerator)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRequest",
+      "methodName": "CreateSigningRequestPem",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::CreateSelfSigned:System.Security.Cryptography.X509Certificates.X509Certificate2(System.DateTimeOffset,System.DateTimeOffset)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRequest",
+      "methodName": "CreateSelfSigned",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::LoadSigningRequestPem:System.Security.Cryptography.X509Certificates.CertificateRequest(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions,System.Security.Cryptography.RSASignaturePadding)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRequest",
+      "methodName": "LoadSigningRequestPem",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::LoadSigningRequestPem:System.Security.Cryptography.X509Certificates.CertificateRequest(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions,System.Security.Cryptography.RSASignaturePadding)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRequest",
+      "methodName": "LoadSigningRequestPem",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::LoadSigningRequest:System.Security.Cryptography.X509Certificates.CertificateRequest(System.Byte[],System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions,System.Security.Cryptography.RSASignaturePadding)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRequest",
+      "methodName": "LoadSigningRequest",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::LoadSigningRequest:System.Security.Cryptography.X509Certificates.CertificateRequest(System.Byte[],System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions,System.Security.Cryptography.RSASignaturePadding)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRequest",
+      "methodName": "LoadSigningRequest",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequest::LoadSigningRequest:System.Security.Cryptography.X509Certificates.CertificateRequest(System.Byte[],System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions,System.Security.Cryptography.RSASignaturePadding)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRequest",
+      "methodName": "LoadSigningRequest",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Nullable\u003CSystem.DateTimeOffset\u003E,System.Nullable\u003CSystem.Security.Cryptography.X509Certificates.X509RevocationReason\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "AddEntry",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Byte[],System.Nullable\u003CSystem.DateTimeOffset\u003E,System.Nullable\u003CSystem.Security.Cryptography.X509Certificates.X509RevocationReason\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "AddEntry",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Byte[],System.Nullable\u003CSystem.DateTimeOffset\u003E,System.Nullable\u003CSystem.Security.Cryptography.X509Certificates.X509RevocationReason\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "AddEntry",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::AddEntry:System.Void(System.Byte[],System.Nullable\u003CSystem.DateTimeOffset\u003E,System.Nullable\u003CSystem.Security.Cryptography.X509Certificates.X509RevocationReason\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "AddEntry",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::RemoveEntry:System.Boolean(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "RemoveEntry",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::RemoveEntry:System.Boolean(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "RemoveEntry",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::RemoveEntry:System.Boolean(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "RemoveEntry",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X509Certificate2,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Nullable\u003CSystem.DateTimeOffset\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "Build",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X509Certificate2,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Nullable\u003CSystem.DateTimeOffset\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "Build",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Security.Cryptography.X509Certificates.X509SignatureGenerator,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension,System.Nullable\u003CSystem.DateTimeOffset\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "Build",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Build:System.Byte[](System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Security.Cryptography.X509Certificates.X509SignatureGenerator,System.Numerics.BigInteger,System.DateTimeOffset,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension,System.Nullable\u003CSystem.DateTimeOffset\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "Build",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::BuildCrlDistributionPointExtension:System.Security.Cryptography.X509Certificates.X509Extension(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "BuildCrlDistributionPointExtension",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::BuildCrlDistributionPointExtension:System.Security.Cryptography.X509Certificates.X509Extension(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "BuildCrlDistributionPointExtension",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::BuildCrlDistributionPointExtension:System.Security.Cryptography.X509Certificates.X509Extension(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "BuildCrlDistributionPointExtension",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Load:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.Byte[],System.Numerics.BigInteger)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "Load",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Load:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.Byte[],System.Numerics.BigInteger)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "Load",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Load:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.Byte[],System.Numerics.BigInteger)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "Load",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::Load:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.Byte[],System.Numerics.BigInteger)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "Load",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::LoadPem:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.String,System.Numerics.BigInteger)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "LoadPem",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::LoadPem:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.String,System.Numerics.BigInteger)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "LoadPem",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder::LoadPem:System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder(System.String,System.Numerics.BigInteger)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.CertificateRevocationListBuilder",
+      "methodName": "LoadPem",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.DSACertificateExtensions::GetDSAPublicKey:System.Security.Cryptography.DSA(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.DSACertificateExtensions",
+      "methodName": "GetDSAPublicKey",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.DSACertificateExtensions::GetDSAPrivateKey:System.Security.Cryptography.DSA(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.DSACertificateExtensions",
+      "methodName": "GetDSAPrivateKey",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.DSACertificateExtensions::CopyWithPrivateKey:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.DSA)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.DSACertificateExtensions",
+      "methodName": "CopyWithPrivateKey",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ECDsaCertificateExtensions::GetECDsaPublicKey:System.Security.Cryptography.ECDsa(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.ECDsaCertificateExtensions",
+      "methodName": "GetECDsaPublicKey",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ECDsaCertificateExtensions::GetECDsaPrivateKey:System.Security.Cryptography.ECDsa(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.ECDsaCertificateExtensions",
+      "methodName": "GetECDsaPrivateKey",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ECDsaCertificateExtensions::CopyWithPrivateKey:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.ECDsa)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.ECDsaCertificateExtensions",
+      "methodName": "CopyWithPrivateKey",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits::MakeReadOnly:System.Void()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits",
+      "methodName": "MakeReadOnly",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::GetRSAPublicKey:System.Security.Cryptography.RSA()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.PublicKey",
+      "methodName": "GetRSAPublicKey",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::GetDSAPublicKey:System.Security.Cryptography.DSA()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.PublicKey",
+      "methodName": "GetDSAPublicKey",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::GetECDsaPublicKey:System.Security.Cryptography.ECDsa()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.PublicKey",
+      "methodName": "GetECDsaPublicKey",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.PublicKey::GetECDiffieHellmanPublicKey:System.Security.Cryptography.ECDiffieHellman()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.PublicKey",
+      "methodName": "GetECDiffieHellmanPublicKey",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.RSACertificateExtensions::GetRSAPublicKey:System.Security.Cryptography.RSA(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.RSACertificateExtensions",
+      "methodName": "GetRSAPublicKey",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.RSACertificateExtensions::GetRSAPrivateKey:System.Security.Cryptography.RSA(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.RSACertificateExtensions",
+      "methodName": "GetRSAPrivateKey",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.RSACertificateExtensions::CopyWithPrivateKey:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.RSA)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.RSACertificateExtensions",
+      "methodName": "CopyWithPrivateKey",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddEmailAddress:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder",
+      "methodName": "AddEmailAddress",
+      "isStatic": true
+    },
+    {
+      "index": 46,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddEmailAddress:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder",
+      "methodName": "AddEmailAddress",
+      "isStatic": true
+    },
+    {
+      "index": 47,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddDnsName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder",
+      "methodName": "AddDnsName",
+      "isStatic": true
+    },
+    {
+      "index": 48,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddDnsName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder",
+      "methodName": "AddDnsName",
+      "isStatic": true
+    },
+    {
+      "index": 49,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddUri:System.Void(System.Uri)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder",
+      "methodName": "AddUri",
+      "isStatic": true
+    },
+    {
+      "index": 50,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddIpAddress:System.Void(System.Net.IPAddress)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder",
+      "methodName": "AddIpAddress",
+      "isStatic": true
+    },
+    {
+      "index": 51,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddUserPrincipalName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder",
+      "methodName": "AddUserPrincipalName",
+      "isStatic": true
+    },
+    {
+      "index": 52,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::AddUserPrincipalName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder",
+      "methodName": "AddUserPrincipalName",
+      "isStatic": true
+    },
+    {
+      "index": 53,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::Build:System.Security.Cryptography.X509Certificates.X509Extension(System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder",
+      "methodName": "Build",
+      "isStatic": true
+    },
+    {
+      "index": 54,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder::Build:System.Security.Cryptography.X509Certificates.X509Extension(System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder",
+      "methodName": "Build",
+      "isStatic": true
+    },
+    {
+      "index": 55,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::Decode:System.String(System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedName",
+      "methodName": "Decode",
+      "isStatic": true
+    },
+    {
+      "index": 56,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::Format:System.String(System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedName",
+      "methodName": "Format",
+      "isStatic": true
+    },
+    {
+      "index": 57,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::Format:System.String(System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedName",
+      "methodName": "Format",
+      "isStatic": true
+    },
+    {
+      "index": 58,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::EnumerateRelativeDistinguishedNames:System.Collections.Generic.IEnumerable\u003CSystem.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName\u003E(System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedName",
+      "methodName": "EnumerateRelativeDistinguishedNames",
+      "isStatic": true
+    },
+    {
+      "index": 59,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedName::EnumerateRelativeDistinguishedNames:System.Collections.Generic.IEnumerable\u003CSystem.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName\u003E(System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedName",
+      "methodName": "EnumerateRelativeDistinguishedNames",
+      "isStatic": true
+    },
+    {
+      "index": 60,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.String,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 61,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.String,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 62,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.String,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 63,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.Security.Cryptography.Oid,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 64,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Add:System.Void(System.Security.Cryptography.Oid,System.String,System.Nullable\u003CSystem.Formats.Asn1.UniversalTagNumber\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 65,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddEmailAddress:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddEmailAddress",
+      "isStatic": true
+    },
+    {
+      "index": 66,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddEmailAddress:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddEmailAddress",
+      "isStatic": true
+    },
+    {
+      "index": 67,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddCommonName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddCommonName",
+      "isStatic": true
+    },
+    {
+      "index": 68,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddCommonName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddCommonName",
+      "isStatic": true
+    },
+    {
+      "index": 69,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddLocalityName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddLocalityName",
+      "isStatic": true
+    },
+    {
+      "index": 70,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddLocalityName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddLocalityName",
+      "isStatic": true
+    },
+    {
+      "index": 71,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddCountryOrRegion:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddCountryOrRegion",
+      "isStatic": true
+    },
+    {
+      "index": 72,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddCountryOrRegion:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddCountryOrRegion",
+      "isStatic": true
+    },
+    {
+      "index": 73,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddOrganizationName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddOrganizationName",
+      "isStatic": true
+    },
+    {
+      "index": 74,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddOrganizationName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddOrganizationName",
+      "isStatic": true
+    },
+    {
+      "index": 75,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddOrganizationalUnitName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddOrganizationalUnitName",
+      "isStatic": true
+    },
+    {
+      "index": 76,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddOrganizationalUnitName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddOrganizationalUnitName",
+      "isStatic": true
+    },
+    {
+      "index": 77,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddStateOrProvinceName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddStateOrProvinceName",
+      "isStatic": true
+    },
+    {
+      "index": 78,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddStateOrProvinceName:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddStateOrProvinceName",
+      "isStatic": true
+    },
+    {
+      "index": 79,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddDomainComponent:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddDomainComponent",
+      "isStatic": true
+    },
+    {
+      "index": 80,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::AddDomainComponent:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "AddDomainComponent",
+      "isStatic": true
+    },
+    {
+      "index": 81,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder::Build:System.Security.Cryptography.X509Certificates.X500DistinguishedName()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500DistinguishedNameBuilder",
+      "methodName": "Build",
+      "isStatic": true
+    },
+    {
+      "index": 82,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName::GetSingleElementType:System.Security.Cryptography.Oid()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName",
+      "methodName": "GetSingleElementType",
+      "isStatic": true
+    },
+    {
+      "index": 83,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName::GetSingleElementValue:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X500RelativeDistinguishedName",
+      "methodName": "GetSingleElementValue",
+      "isStatic": true
+    },
+    {
+      "index": 84,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension",
+      "methodName": "CopyFrom",
+      "isStatic": true
+    },
+    {
+      "index": 85,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension",
+      "methodName": "EnumerateUris",
+      "isStatic": true
+    },
+    {
+      "index": 86,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension",
+      "methodName": "EnumerateUris",
+      "isStatic": true
+    },
+    {
+      "index": 87,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E(System.Security.Cryptography.Oid)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension",
+      "methodName": "EnumerateUris",
+      "isStatic": true
+    },
+    {
+      "index": 88,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateCAIssuersUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension",
+      "methodName": "EnumerateCAIssuersUris",
+      "isStatic": true
+    },
+    {
+      "index": 89,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension::EnumerateOcspUris:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityInformationAccessExtension",
+      "methodName": "EnumerateOcspUris",
+      "isStatic": true
+    },
+    {
+      "index": 90,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension",
+      "methodName": "CopyFrom",
+      "isStatic": true
+    },
+    {
+      "index": 91,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromSubjectKeyIdentifier:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension",
+      "methodName": "CreateFromSubjectKeyIdentifier",
+      "isStatic": true
+    },
+    {
+      "index": 92,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromSubjectKeyIdentifier:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension",
+      "methodName": "CreateFromSubjectKeyIdentifier",
+      "isStatic": true
+    },
+    {
+      "index": 93,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromSubjectKeyIdentifier:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension",
+      "methodName": "CreateFromSubjectKeyIdentifier",
+      "isStatic": true
+    },
+    {
+      "index": 94,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromSubjectKeyIdentifier:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension",
+      "methodName": "CreateFromSubjectKeyIdentifier",
+      "isStatic": true
+    },
+    {
+      "index": 95,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromIssuerNameAndSerialNumber:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension",
+      "methodName": "CreateFromIssuerNameAndSerialNumber",
+      "isStatic": true
+    },
+    {
+      "index": 96,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromIssuerNameAndSerialNumber:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension",
+      "methodName": "CreateFromIssuerNameAndSerialNumber",
+      "isStatic": true
+    },
+    {
+      "index": 97,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromIssuerNameAndSerialNumber:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X500DistinguishedName,System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension",
+      "methodName": "CreateFromIssuerNameAndSerialNumber",
+      "isStatic": true
+    },
+    {
+      "index": 98,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromCertificate:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension",
+      "methodName": "CreateFromCertificate",
+      "isStatic": true
+    },
+    {
+      "index": 99,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromCertificate:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension",
+      "methodName": "CreateFromCertificate",
+      "isStatic": true
+    },
+    {
+      "index": 100,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension::CreateFromCertificate:System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509AuthorityKeyIdentifierExtension",
+      "methodName": "CreateFromCertificate",
+      "isStatic": true
+    },
+    {
+      "index": 101,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension",
+      "methodName": "CopyFrom",
+      "isStatic": true
+    },
+    {
+      "index": 102,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension::CreateForCertificateAuthority:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension(System.Nullable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension",
+      "methodName": "CreateForCertificateAuthority",
+      "isStatic": true
+    },
+    {
+      "index": 103,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension::CreateForEndEntity:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension(System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension",
+      "methodName": "CreateForEndEntity",
+      "isStatic": true
+    },
+    {
+      "index": 104,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension::CreateForEndEntity:System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension(System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension",
+      "methodName": "CreateForEndEntity",
+      "isStatic": true
+    },
+    {
+      "index": 105,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::CreateFromCertFile:System.Security.Cryptography.X509Certificates.X509Certificate(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "CreateFromCertFile",
+      "isStatic": true
+    },
+    {
+      "index": 106,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::CreateFromCertFile:System.Security.Cryptography.X509Certificates.X509Certificate(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "CreateFromCertFile",
+      "isStatic": true
+    },
+    {
+      "index": 107,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::CreateFromSignedFile:System.Security.Cryptography.X509Certificates.X509Certificate(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "CreateFromSignedFile",
+      "isStatic": true
+    },
+    {
+      "index": 108,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::CreateFromSignedFile:System.Security.Cryptography.X509Certificates.X509Certificate(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "CreateFromSignedFile",
+      "isStatic": true
+    },
+    {
+      "index": 109,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Dispose:System.Void()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 110,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Export",
+      "isStatic": true
+    },
+    {
+      "index": 111,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType,System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Export",
+      "isStatic": true
+    },
+    {
+      "index": 112,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType,System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Export",
+      "isStatic": true
+    },
+    {
+      "index": 113,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType,System.Security.SecureString)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Export",
+      "isStatic": true
+    },
+    {
+      "index": 114,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetRawCertDataString:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetRawCertDataString",
+      "isStatic": true
+    },
+    {
+      "index": 115,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetCertHash:System.Byte[]()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetCertHash",
+      "isStatic": true
+    },
+    {
+      "index": 116,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetCertHash:System.Byte[](System.Security.Cryptography.HashAlgorithmName)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetCertHash",
+      "isStatic": true
+    },
+    {
+      "index": 117,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetCertHashString:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetCertHashString",
+      "isStatic": true
+    },
+    {
+      "index": 118,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetCertHashString:System.String(System.Security.Cryptography.HashAlgorithmName)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetCertHashString",
+      "isStatic": true
+    },
+    {
+      "index": 119,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetEffectiveDateString:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetEffectiveDateString",
+      "isStatic": true
+    },
+    {
+      "index": 120,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetExpirationDateString:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetExpirationDateString",
+      "isStatic": true
+    },
+    {
+      "index": 121,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetFormat:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetFormat",
+      "isStatic": true
+    },
+    {
+      "index": 122,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetPublicKeyString:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetPublicKeyString",
+      "isStatic": true
+    },
+    {
+      "index": 123,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetRawCertData:System.Byte[]()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetRawCertData",
+      "isStatic": true
+    },
+    {
+      "index": 124,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetKeyAlgorithm:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetKeyAlgorithm",
+      "isStatic": true
+    },
+    {
+      "index": 125,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetKeyAlgorithmParameters:System.Byte[]()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetKeyAlgorithmParameters",
+      "isStatic": true
+    },
+    {
+      "index": 126,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetKeyAlgorithmParametersString:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetKeyAlgorithmParametersString",
+      "isStatic": true
+    },
+    {
+      "index": 127,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetPublicKey:System.Byte[]()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetPublicKey",
+      "isStatic": true
+    },
+    {
+      "index": 128,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetSerialNumber:System.Byte[]()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetSerialNumber",
+      "isStatic": true
+    },
+    {
+      "index": 129,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetSerialNumberString:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetSerialNumberString",
+      "isStatic": true
+    },
+    {
+      "index": 130,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetName:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetName",
+      "isStatic": true
+    },
+    {
+      "index": 131,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::GetIssuerName:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "GetIssuerName",
+      "isStatic": true
+    },
+    {
+      "index": 132,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 133,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 134,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 135,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 136,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 137,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 138,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 139,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 140,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 141,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 142,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 143,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 144,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 145,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 146,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 147,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String,System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 148,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate::Import:System.Void(System.String,System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 149,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCertContentType:System.Security.Cryptography.X509Certificates.X509ContentType(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "GetCertContentType",
+      "isStatic": true
+    },
+    {
+      "index": 150,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCertContentType:System.Security.Cryptography.X509Certificates.X509ContentType(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "GetCertContentType",
+      "isStatic": true
+    },
+    {
+      "index": 151,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCertContentType:System.Security.Cryptography.X509Certificates.X509ContentType(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "GetCertContentType",
+      "isStatic": true
+    },
+    {
+      "index": 152,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCertContentType:System.Security.Cryptography.X509Certificates.X509ContentType(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "GetCertContentType",
+      "isStatic": true
+    },
+    {
+      "index": 153,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetCertContentType:System.Security.Cryptography.X509Certificates.X509ContentType(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "GetCertContentType",
+      "isStatic": true
+    },
+    {
+      "index": 154,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetNameInfo:System.String(System.Security.Cryptography.X509Certificates.X509NameType,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "GetNameInfo",
+      "isStatic": true
+    },
+    {
+      "index": 155,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetNameInfo:System.String(System.Security.Cryptography.X509Certificates.X509NameType,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "GetNameInfo",
+      "isStatic": true
+    },
+    {
+      "index": 156,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 157,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 158,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 159,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 160,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 161,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 162,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 163,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 164,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 165,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 166,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 167,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 168,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 169,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 170,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 171,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String,System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 172,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Import:System.Void(System.String,System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 173,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::Verify:System.Boolean()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "Verify",
+      "isStatic": true
+    },
+    {
+      "index": 174,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetECDiffieHellmanPublicKey:System.Security.Cryptography.ECDiffieHellman()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "GetECDiffieHellmanPublicKey",
+      "isStatic": true
+    },
+    {
+      "index": 175,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::GetECDiffieHellmanPrivateKey:System.Security.Cryptography.ECDiffieHellman()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "GetECDiffieHellmanPrivateKey",
+      "isStatic": true
+    },
+    {
+      "index": 176,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CopyWithPrivateKey:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Security.Cryptography.ECDiffieHellman)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "CopyWithPrivateKey",
+      "isStatic": true
+    },
+    {
+      "index": 177,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CreateFromPemFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "CreateFromPemFile",
+      "isStatic": true
+    },
+    {
+      "index": 178,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CreateFromPemFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "CreateFromPemFile",
+      "isStatic": true
+    },
+    {
+      "index": 179,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::CreateFromPemFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "CreateFromPemFile",
+      "isStatic": true
+    },
+    {
+      "index": 180,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::ExportCertificatePem:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "ExportCertificatePem",
+      "isStatic": true
+    },
+    {
+      "index": 181,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::MatchesHostname:System.Boolean(System.String,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "MatchesHostname",
+      "isStatic": true
+    },
+    {
+      "index": 182,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::MatchesHostname:System.Boolean(System.String,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "MatchesHostname",
+      "isStatic": true
+    },
+    {
+      "index": 183,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::MatchesHostname:System.Boolean(System.String,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "MatchesHostname",
+      "isStatic": true
+    },
+    {
+      "index": 184,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2::MatchesHostname:System.Boolean(System.String,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2",
+      "methodName": "MatchesHostname",
+      "isStatic": true
+    },
+    {
+      "index": 185,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Add:System.Int32(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 186,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 187,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 188,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 189,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2Collection)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 190,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Contains:System.Boolean(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 191,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Export",
+      "isStatic": true
+    },
+    {
+      "index": 192,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType,System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Export",
+      "isStatic": true
+    },
+    {
+      "index": 193,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Export:System.Byte[](System.Security.Cryptography.X509Certificates.X509ContentType,System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Export",
+      "isStatic": true
+    },
+    {
+      "index": 194,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Find:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Find",
+      "isStatic": true
+    },
+    {
+      "index": 195,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Find:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Find",
+      "isStatic": true
+    },
+    {
+      "index": 196,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::GetEnumerator:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 197,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 198,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 199,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 200,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 201,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 202,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 203,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 204,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 205,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 206,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 207,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 208,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Import:System.Void(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Import",
+      "isStatic": true
+    },
+    {
+      "index": 209,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Insert:System.Void(System.Int32,System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 210,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Insert:System.Void(System.Int32,System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 211,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::Remove:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 212,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::RemoveRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "RemoveRange",
+      "isStatic": true
+    },
+    {
+      "index": 213,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::RemoveRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "RemoveRange",
+      "isStatic": true
+    },
+    {
+      "index": 214,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::RemoveRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "RemoveRange",
+      "isStatic": true
+    },
+    {
+      "index": 215,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::RemoveRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2Collection)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "RemoveRange",
+      "isStatic": true
+    },
+    {
+      "index": 216,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::ImportFromPemFile:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "ImportFromPemFile",
+      "isStatic": true
+    },
+    {
+      "index": 217,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::ImportFromPemFile:System.Void(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "ImportFromPemFile",
+      "isStatic": true
+    },
+    {
+      "index": 218,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::ExportPkcs7Pem:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "ExportPkcs7Pem",
+      "isStatic": true
+    },
+    {
+      "index": 219,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Certificate2Collection::ExportCertificatePems:System.String()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Certificate2Collection",
+      "methodName": "ExportCertificatePems",
+      "isStatic": true
+    },
+    {
+      "index": 220,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::Add:System.Int32(System.Security.Cryptography.X509Certificates.X509Certificate)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateCollection",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 221,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateCollection",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 222,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateCollection",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 223,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateCollection",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 224,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509CertificateCollection)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateCollection",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 225,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::Contains:System.Boolean(System.Security.Cryptography.X509Certificates.X509Certificate)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateCollection",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 226,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::GetEnumerator:X509CertificateCollection.X509CertificateEnumerator()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 227,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::IndexOf:System.Int32(System.Security.Cryptography.X509Certificates.X509Certificate)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateCollection",
+      "methodName": "IndexOf",
+      "isStatic": true
+    },
+    {
+      "index": 228,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::Insert:System.Void(System.Int32,System.Security.Cryptography.X509Certificates.X509Certificate)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateCollection",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 229,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::Insert:System.Void(System.Int32,System.Security.Cryptography.X509Certificates.X509Certificate)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateCollection",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 230,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateCollection::Remove:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateCollection",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 231,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadCertificate:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadCertificate",
+      "isStatic": true
+    },
+    {
+      "index": 232,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadCertificate:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadCertificate",
+      "isStatic": true
+    },
+    {
+      "index": 233,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadCertificate:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[])",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadCertificate",
+      "isStatic": true
+    },
+    {
+      "index": 234,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadCertificateFromFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadCertificateFromFile",
+      "isStatic": true
+    },
+    {
+      "index": 235,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadCertificateFromFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadCertificateFromFile",
+      "isStatic": true
+    },
+    {
+      "index": 236,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12",
+      "isStatic": true
+    },
+    {
+      "index": 237,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12",
+      "isStatic": true
+    },
+    {
+      "index": 238,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12",
+      "isStatic": true
+    },
+    {
+      "index": 239,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12:System.Security.Cryptography.X509Certificates.X509Certificate2(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12",
+      "isStatic": true
+    },
+    {
+      "index": 240,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12FromFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12FromFile",
+      "isStatic": true
+    },
+    {
+      "index": 241,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12FromFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12FromFile",
+      "isStatic": true
+    },
+    {
+      "index": 242,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12FromFile:System.Security.Cryptography.X509Certificates.X509Certificate2(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12FromFile",
+      "isStatic": true
+    },
+    {
+      "index": 243,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12Collection:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12Collection",
+      "isStatic": true
+    },
+    {
+      "index": 244,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12Collection:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12Collection",
+      "isStatic": true
+    },
+    {
+      "index": 245,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12Collection:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12Collection",
+      "isStatic": true
+    },
+    {
+      "index": 246,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12Collection:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12Collection",
+      "isStatic": true
+    },
+    {
+      "index": 247,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12CollectionFromFile:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12CollectionFromFile",
+      "isStatic": true
+    },
+    {
+      "index": 248,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12CollectionFromFile:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12CollectionFromFile",
+      "isStatic": true
+    },
+    {
+      "index": 249,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509CertificateLoader::LoadPkcs12CollectionFromFile:System.Security.Cryptography.X509Certificates.X509Certificate2Collection(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags,System.Security.Cryptography.X509Certificates.Pkcs12LoaderLimits)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509CertificateLoader",
+      "methodName": "LoadPkcs12CollectionFromFile",
+      "isStatic": true
+    },
+    {
+      "index": 250,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Chain::Build:System.Boolean(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Chain",
+      "methodName": "Build",
+      "isStatic": true
+    },
+    {
+      "index": 251,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Chain::Dispose:System.Void()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Chain",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 252,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainElementCollection::GetEnumerator:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509ChainElementCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 253,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainPolicy::Clone:System.Security.Cryptography.X509Certificates.X509ChainPolicy()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509ChainPolicy",
+      "methodName": "Clone",
+      "isStatic": true
+    },
+    {
+      "index": 254,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension",
+      "methodName": "CopyFrom",
+      "isStatic": true
+    },
+    {
+      "index": 255,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Extension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Extension",
+      "methodName": "CopyFrom",
+      "isStatic": true
+    },
+    {
+      "index": 256,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ExtensionCollection::Add:System.Int32(System.Security.Cryptography.X509Certificates.X509Extension)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509ExtensionCollection",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 257,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ExtensionCollection::GetEnumerator:System.Security.Cryptography.X509Certificates.X509ExtensionEnumerator()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509ExtensionCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 258,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyUsageExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509KeyUsageExtension",
+      "methodName": "CopyFrom",
+      "isStatic": true
+    },
+    {
+      "index": 259,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SignatureGenerator::GetSignatureAlgorithmIdentifier:System.Byte[](System.Security.Cryptography.HashAlgorithmName)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509SignatureGenerator",
+      "methodName": "GetSignatureAlgorithmIdentifier",
+      "isStatic": true
+    },
+    {
+      "index": 260,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SignatureGenerator::SignData:System.Byte[](System.Byte[],System.Security.Cryptography.HashAlgorithmName)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509SignatureGenerator",
+      "methodName": "SignData",
+      "isStatic": true
+    },
+    {
+      "index": 261,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SignatureGenerator::SignData:System.Byte[](System.Byte[],System.Security.Cryptography.HashAlgorithmName)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509SignatureGenerator",
+      "methodName": "SignData",
+      "isStatic": true
+    },
+    {
+      "index": 262,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SignatureGenerator::SignData:System.Byte[](System.Byte[],System.Security.Cryptography.HashAlgorithmName)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509SignatureGenerator",
+      "methodName": "SignData",
+      "isStatic": true
+    },
+    {
+      "index": 263,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SignatureGenerator::CreateForECDsa:System.Security.Cryptography.X509Certificates.X509SignatureGenerator(System.Security.Cryptography.ECDsa)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509SignatureGenerator",
+      "methodName": "CreateForECDsa",
+      "isStatic": true
+    },
+    {
+      "index": 264,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SignatureGenerator::CreateForRSA:System.Security.Cryptography.X509Certificates.X509SignatureGenerator(System.Security.Cryptography.RSA,System.Security.Cryptography.RSASignaturePadding)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509SignatureGenerator",
+      "methodName": "CreateForRSA",
+      "isStatic": true
+    },
+    {
+      "index": 265,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::Open:System.Void(System.Security.Cryptography.X509Certificates.OpenFlags)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Store",
+      "methodName": "Open",
+      "isStatic": true
+    },
+    {
+      "index": 266,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::Add:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Store",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 267,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::AddRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2Collection)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Store",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 268,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::Remove:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Store",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 269,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::RemoveRange:System.Void(System.Security.Cryptography.X509Certificates.X509Certificate2Collection)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Store",
+      "methodName": "RemoveRange",
+      "isStatic": true
+    },
+    {
+      "index": 270,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::Dispose:System.Void()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Store",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 271,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509Store::Close:System.Void()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509Store",
+      "methodName": "Close",
+      "isStatic": true
+    },
+    {
+      "index": 272,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension",
+      "methodName": "CopyFrom",
+      "isStatic": true
+    },
+    {
+      "index": 273,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension::EnumerateDnsNames:System.Collections.Generic.IEnumerable\u003CSystem.String\u003E()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension",
+      "methodName": "EnumerateDnsNames",
+      "isStatic": true
+    },
+    {
+      "index": 274,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension::EnumerateIPAddresses:System.Collections.Generic.IEnumerable\u003CSystem.Net.IPAddress\u003E()",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509SubjectAlternativeNameExtension",
+      "methodName": "EnumerateIPAddresses",
+      "isStatic": true
+    },
+    {
+      "index": 275,
+      "kind": "fact",
+      "subjectId": "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension::CopyFrom:System.Void(System.Security.Cryptography.AsnEncodedData)",
+      "assemblyName": "System.Security.Cryptography",
+      "typeName": "System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension",
+      "methodName": "CopyFrom",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 276,
+    "factCount": 276,
+    "benchmarkCount": 0,
+    "hotUpdateCount": 0
+  }
+}

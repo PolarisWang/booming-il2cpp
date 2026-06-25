@@ -1,8 +1,0 @@
-{
-  "nativeConfig": "check",
-  "methodCount": 0,
-  "methodsWithAlloc": 0,
-  "totalNurseryAllocBytes": 0,
-  "totalGcPauseNs": 0,
-  "profileData": []
-}

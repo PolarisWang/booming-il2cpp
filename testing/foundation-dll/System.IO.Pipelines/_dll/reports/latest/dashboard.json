@@ -1,0 +1,42 @@
+{
+  "assemblyName": "System.IO.Pipelines",
+  "timestamp": "2026-06-18T10:05:33",
+  "summary": {
+    "chunks": 1,
+    "chunksVerified": 1,
+    "chunksWithValueWarnings": 0,
+    "chunksWithMetaMismatch": 1,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 23,
+    "aggregatePerformance": {
+      "meanDurationMs": 1.3277869565217393,
+      "meanOpsPerSecond": 232781195.40869567,
+      "aggregateMeanCv": 0.24340204347826086,
+      "totalOutliers": 31
+    },
+    "hotupdate": {
+      "chunksWithPatchData": 1,
+      "chunksPatchFailed": 0,
+      "chunksPatchSkippedNoMethods": 0,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 23,
+      "totalFailed": 0,
+      "skipBreakdown": {}
+    },
+    "benchmarkComparison": {
+      "methodsAnalyzed": 17,
+      "methodsWithNet8": 17,
+      "chaosAotVsNet8": {},
+      "chaosJitVsNet8": {},
+      "net10VsNet8": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "p25": 0.0,
+        "p75": 0.0
+      },
+      "highValueMethods_betterThanNet8": 0.0
+    }
+  }
+}

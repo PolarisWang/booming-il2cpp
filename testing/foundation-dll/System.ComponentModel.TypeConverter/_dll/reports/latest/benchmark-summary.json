@@ -1,0 +1,164 @@
+{
+  "assemblyName": "System.ComponentModel.TypeConverter",
+  "timestamp": "2026-06-18T10:05:33",
+  "totalChunks": 3,
+  "totalBenchmarkedMethods": 620,
+  "aggregatePerformance": {
+    "meanDurationMs": 0.3152463904430582,
+    "meanOpsPerSecond": 282447855.70576286,
+    "aggregateMeanCv": 0.1216715420531399,
+    "totalOutliers": 214
+  },
+  "chunkSummaries": [
+    {
+      "slug": "component-model",
+      "fact": {
+        "passed": 515,
+        "total": 515,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 568,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 515,
+        "iterations": 10000,
+        "meanDurationMs": 0.8730506796116505,
+        "meanOpsPerSecond": 270144702.288932,
+        "minDurationMs": 0.0299,
+        "maxDurationMs": 32.1534,
+        "totalDurationMs": 449.6211,
+        "totalAllocatedBytes": 960000.0,
+        "meanSampleCount": 9.7,
+        "totalOutliers": 155,
+        "meanCv": 0.2118004932038835,
+        "maxCv": 2.607001
+      },
+      "hotupdate": {
+        "passed": 515,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 5285888,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 74,
+        "total": 74,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 80,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 74,
+        "iterations": 10000,
+        "meanDurationMs": 0.030459459459459458,
+        "meanOpsPerSecond": 336932889.6993243,
+        "minDurationMs": 0.025,
+        "maxDurationMs": 0.0338,
+        "totalDurationMs": 2.254,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 3.3,
+        "totalOutliers": 49,
+        "meanCv": 0.06267022972972973,
+        "maxCv": 0.171645
+      },
+      "hotupdate": {
+        "passed": 74,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2859008,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-componentmodel-design",
+      "fact": {
+        "passed": 31,
+        "total": 31,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 39,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 31,
+        "iterations": 10000,
+        "meanDurationMs": 0.042229032258064514,
+        "meanOpsPerSecond": 240265975.12903225,
+        "minDurationMs": 0.038,
+        "maxDurationMs": 0.0473,
+        "totalDurationMs": 1.3091,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 3.7,
+        "totalOutliers": 10,
+        "meanCv": 0.09054390322580645,
+        "maxCv": 0.339227
+      },
+      "hotupdate": {
+        "passed": 31,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2834432,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

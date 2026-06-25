@@ -1,0 +1,9 @@
+{
+  "assemblyName": "System.Net.Sockets",
+  "timestamp": "2026-06-18T10:05:33",
+  "totalChunks": 2,
+  "chunksWithResults": 1,
+  "chunksWithValueWarnings": 0,
+  "chunksWithMetaMismatch": 1,
+  "totalDeclaredMethods": 500
+}

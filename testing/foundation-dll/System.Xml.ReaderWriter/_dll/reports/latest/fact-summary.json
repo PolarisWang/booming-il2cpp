@@ -1,0 +1,56 @@
+{
+  "assemblyName": "System.Xml.ReaderWriter",
+  "timestamp": "2026-06-18T10:05:34",
+  "totalChunks": 3,
+  "chunksWithFacts": 0,
+  "chunksWithValueWarnings": 0,
+  "totalPassed": 0,
+  "totalFactMethods": 0,
+  "chunkSummaries": [
+    {
+      "slug": "system-xml-schema",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
+      }
+    },
+    {
+      "slug": "system-xml-xsl",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
+      }
+    },
+    {
+      "slug": "xml",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
+      }
+    }
+  ]
+}

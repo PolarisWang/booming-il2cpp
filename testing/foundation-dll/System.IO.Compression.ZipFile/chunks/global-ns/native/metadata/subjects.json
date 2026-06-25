@@ -1,0 +1,608 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-18T10:04:40.6311864Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::OpenRead:System.IO.Compression.ZipArchive(System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "OpenRead",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::OpenRead:System.IO.Compression.ZipArchive(System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "OpenRead",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::Open:System.IO.Compression.ZipArchive(System.String,System.IO.Compression.ZipArchiveMode)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "Open",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::Open:System.IO.Compression.ZipArchive(System.String,System.IO.Compression.ZipArchiveMode)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "Open",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::Open:System.IO.Compression.ZipArchive(System.String,System.IO.Compression.ZipArchiveMode,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "Open",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::Open:System.IO.Compression.ZipArchive(System.String,System.IO.Compression.ZipArchiveMode,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "Open",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "CreateFromDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 46,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 47,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 48,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 49,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFile",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 50,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "CreateEntryFromFile",
+      "isStatic": true
+    },
+    {
+      "index": 51,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "CreateEntryFromFile",
+      "isStatic": true
+    },
+    {
+      "index": 52,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "CreateEntryFromFile",
+      "isStatic": true
+    },
+    {
+      "index": 53,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String,System.IO.Compression.CompressionLevel)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "CreateEntryFromFile",
+      "isStatic": true
+    },
+    {
+      "index": 54,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String,System.IO.Compression.CompressionLevel)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "CreateEntryFromFile",
+      "isStatic": true
+    },
+    {
+      "index": 55,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String,System.IO.Compression.CompressionLevel)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "CreateEntryFromFile",
+      "isStatic": true
+    },
+    {
+      "index": 56,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(System.IO.Compression.ZipArchive,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 57,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(System.IO.Compression.ZipArchive,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 58,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(System.IO.Compression.ZipArchive,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 59,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(System.IO.Compression.ZipArchive,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 60,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(System.IO.Compression.ZipArchive,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "ExtractToDirectory",
+      "isStatic": true
+    },
+    {
+      "index": 61,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(System.IO.Compression.ZipArchiveEntry,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "ExtractToFile",
+      "isStatic": true
+    },
+    {
+      "index": 62,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(System.IO.Compression.ZipArchiveEntry,System.String)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "ExtractToFile",
+      "isStatic": true
+    },
+    {
+      "index": 63,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(System.IO.Compression.ZipArchiveEntry,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "ExtractToFile",
+      "isStatic": true
+    },
+    {
+      "index": 64,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(System.IO.Compression.ZipArchiveEntry,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "ExtractToFile",
+      "isStatic": true
+    },
+    {
+      "index": 65,
+      "kind": "fact",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(System.IO.Compression.ZipArchiveEntry,System.String,System.Boolean)",
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "typeName": "System.IO.Compression.ZipFileExtensions",
+      "methodName": "ExtractToFile",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 66,
+    "factCount": 66,
+    "benchmarkCount": 0,
+    "hotUpdateCount": 0
+  }
+}

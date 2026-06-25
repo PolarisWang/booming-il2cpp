@@ -1,0 +1,64 @@
+{
+  "assemblyName": "System.Security.Principal.Windows",
+  "timestamp": "2026-06-18T10:05:34",
+  "totalChunks": 1,
+  "totalBenchmarkedMethods": 36,
+  "aggregatePerformance": {
+    "meanDurationMs": 0.030772222222222218,
+    "meanOpsPerSecond": 326351447.85833335,
+    "aggregateMeanCv": 0.17452994444444445,
+    "totalOutliers": 47
+  },
+  "chunkSummaries": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 36,
+        "total": 36,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 42,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 36,
+        "iterations": 10000,
+        "meanDurationMs": 0.030772222222222218,
+        "meanOpsPerSecond": 326351447.85833335,
+        "minDurationMs": 0.0275,
+        "maxDurationMs": 0.0344,
+        "totalDurationMs": 1.1078,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 8.7,
+        "totalOutliers": 47,
+        "meanCv": 0.17452994444444445,
+        "maxCv": 0.434433
+      },
+      "hotupdate": {
+        "passed": 36,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2831872,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

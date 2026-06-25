@@ -1,0 +1,35 @@
+{
+  "assemblyName": "System.Security.Cryptography",
+  "timestamp": "2026-06-18T10:05:34",
+  "summary": {
+    "chunks": 3,
+    "chunksVerified": 3,
+    "chunksWithValueWarnings": 0,
+    "chunksWithMetaMismatch": 3,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 2425,
+    "aggregatePerformance": {
+      "meanDurationMs": 0.17682624147635306,
+      "meanOpsPerSecond": 304957959.071209,
+      "aggregateMeanCv": 0.23501021339269865,
+      "totalOutliers": 2028
+    },
+    "hotupdate": {
+      "chunksWithPatchData": 0,
+      "chunksPatchFailed": 3,
+      "chunksPatchSkippedNoMethods": 0,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 2425,
+      "totalFailed": 0,
+      "skipBreakdown": {}
+    },
+    "benchmarkComparison": {
+      "methodsAnalyzed": 290,
+      "methodsWithNet8": 0,
+      "chaosAotVsNet8": {},
+      "chaosJitVsNet8": {},
+      "net10VsNet8": {},
+      "highValueMethods_betterThanNet8": 0
+    }
+  }
+}
