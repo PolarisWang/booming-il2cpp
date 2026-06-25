@@ -254,26 +254,26 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
     private string AllocateEvalStackTargetExpression(SlotType type = SlotType.NativeInt)
-        => _state.Value!.ActiveStructuredSlotContext is null
+        => __st.ActiveStructuredSlotContext is null
             ? "chaos_eval_stack[chaos_stack_top++]"
-            : _state.Value!.ActiveStructuredSlotContext.AllocatePushTarget(type);
+            : __st.ActiveStructuredSlotContext.AllocatePushTarget(type);
 
     private string ConsumeEvalStackValueExpression()
-        => _state.Value!.ActiveStructuredSlotContext is null
+        => __st.ActiveStructuredSlotContext is null
             ? "chaos_eval_stack[--chaos_stack_top]"
-            : _state.Value!.ActiveStructuredSlotContext.PopValue();
+            : __st.ActiveStructuredSlotContext.PopValue();
 
     private string AccessEvalStackTopExpression()
-        => _state.Value!.ActiveStructuredSlotContext is null
+        => __st.ActiveStructuredSlotContext is null
             ? "chaos_eval_stack[chaos_stack_top - 1]"
-            : _state.Value!.ActiveStructuredSlotContext.PeekValue();
+            : __st.ActiveStructuredSlotContext.PeekValue();
 
     private void EmitEvalStackPush(StringBuilder builder, string indentation, string valueExpression, SlotType type = SlotType.NativeInt)
         => builder.AppendLine($"{indentation}{AllocateEvalStackTargetExpression(type)} = {NormalizeStoredStackValueExpression(valueExpression)};");
 
     private void EmitEvalStackDiscard(StringBuilder builder, string indentation, int count = 1)
     {
-        if (_state.Value!.ActiveStructuredSlotContext is null)
+        if (__st.ActiveStructuredSlotContext is null)
         {
             if (count == 1)
             {
@@ -287,7 +287,7 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
-        _state.Value!.ActiveStructuredSlotContext.Discard(count);
+        __st.ActiveStructuredSlotContext.Discard(count);
     }
 
     private static void EmitStructuredSlotDeclarations(StringBuilder builder, int maxIntSlots, int maxFloat64Slots, int maxFloat32Slots, int maxInt64Slots, int maxWideSlots, string indentation)

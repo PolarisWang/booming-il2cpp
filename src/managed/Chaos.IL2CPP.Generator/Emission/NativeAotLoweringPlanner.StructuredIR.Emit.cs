@@ -20,16 +20,17 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method,
         string indentation)
     {
+    __st = _state.Value!;
         // Depth counter guard: prevents process-terminating StackOverflowException
         // from recursive structured IR tree emission.  This is more reliable than
         // RuntimeHelpers.TryEnsureSufficientExecutionStack() which may not work
         // correctly on threads created with custom maxStackSize.
-        _state.Value!.StructuredIrDepth++;
-        if (_state.Value!.StructuredIrDepth > MaxStructuredIRDepth)
+        __st.StructuredIrDepth++;
+        if (__st.StructuredIrDepth > MaxStructuredIRDepth)
         {
-            _state.Value!.StructuredIrDepth--;
+            __st.StructuredIrDepth--;
             throw new InvalidOperationException(
-                $"Structured IR tree too deep ({_state.Value!.StructuredIrDepth} levels) for method "
+                $"Structured IR tree too deep ({__st.StructuredIrDepth} levels) for method "
                 + $"'{SafeShortName(method)}'. Falling back to linear emission.");
         }
         try
@@ -92,7 +93,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
         finally
         {
-            _state.Value!.StructuredIrDepth--;
+            __st.StructuredIrDepth--;
         }
     }
 
@@ -113,18 +114,18 @@ public sealed partial class NativeAotLoweringPlanner
     {
         // Emit pending branch skip labels from brtrue/brfalse fallback.
         // Emitted BEFORE the next block so fallthrough path skips target body.
-        if (_state.Value!.PendingBranchSkipLabels is { Count: > 0 })
+        if (__st.PendingBranchSkipLabels is { Count: > 0 })
         {
-            foreach (var sl in _state.Value!.PendingBranchSkipLabels)
+            foreach (var sl in __st.PendingBranchSkipLabels)
                 builder.AppendLine(indentation + $"{sl}:;");
-            _state.Value!.PendingBranchSkipLabels.Clear();
+            __st.PendingBranchSkipLabels.Clear();
         }
         // When an IRBlock is emitted as a child of IRSequence or inside a
         // branch body, it may start with instructions that pop values pushed
         // by predecessor CFG blocks. Ensure the structured slot depth is
         // adequate by simulating the block's stack effect — accounting for
         // call/callvirt/newobj argument pops via TargetParameterCount.
-        if (_state.Value!.ActiveStructuredSlotContext is { } ctx)
+        if (__st.ActiveStructuredSlotContext is { } ctx)
         {
             int maxDeficit = 0;
             int simDepth = ctx.Depth;
@@ -230,8 +231,8 @@ public sealed partial class NativeAotLoweringPlanner
                     // to allow fallthrough to resume correctly.
                     // We store the skip label so the structured IR loop body emitter
                     // can emit it after the target block.
-                    _state.Value!.PendingBranchSkipLabels ??= new List<string>();
-                    _state.Value!.PendingBranchSkipLabels.Add(skipLabel);
+                    __st.PendingBranchSkipLabels ??= new List<string>();
+                    __st.PendingBranchSkipLabels.Add(skipLabel);
                 }
                 break;
 
@@ -350,7 +351,7 @@ public sealed partial class NativeAotLoweringPlanner
         int preConditionDepth = ite.PreConditionDepth;
         if (preConditionDepth == 0)
         {
-            preConditionDepth = _state.Value!.ActiveStructuredSlotContext?.Depth ?? 0;
+            preConditionDepth = __st.ActiveStructuredSlotContext?.Depth ?? 0;
         }
 
 
@@ -375,7 +376,7 @@ public sealed partial class NativeAotLoweringPlanner
         // emission, as a safety net for any edge-case opcodes not covered by
         // EstimatePushCount/EstimatePopCount (the core comparison/arithmetic opcodes
         // ARE now covered — see EstimatePopCount).
-        _state.Value!.ActiveStructuredSlotContext?.RestoreDepth(preConditionDepth);
+        __st.ActiveStructuredSlotContext?.RestoreDepth(preConditionDepth);
 
         // Scan then/else bodies for ldloc slots referenced externally. When a stloc+ldloc
         // pair in the condition writes to a slot later read by the body, the filter must
@@ -404,7 +405,7 @@ public sealed partial class NativeAotLoweringPlanner
             string _cSlot = ConsumeEvalStackValueExpression();
             ConsumeSlotType();
             // Consumed the condition operand; capture actual depth for else/post-merge body.
-            int postCondDepth = _state.Value!.ActiveStructuredSlotContext?.Depth ?? 0;
+            int postCondDepth = __st.ActiveStructuredSlotContext?.Depth ?? 0;
             string _condition = _cType switch
             {
                 SlotType.Float32 => branchOnNonZero
@@ -428,14 +429,14 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 builder.AppendLine(inner + "else");
                 builder.AppendLine(inner + "{");
-                _state.Value!.ActiveStructuredSlotContext?.RestoreDepth(postCondDepth);
+                __st.ActiveStructuredSlotContext?.RestoreDepth(postCondDepth);
                 EmitStructuredIRNode(builder, ite.ElseBody, method, bodyIndent);
                 builder.AppendLine(inner + "}");
             }
 
             if (ite.PostMergeBody != null)
             {
-                _state.Value!.ActiveStructuredSlotContext?.RestoreDepth(postCondDepth);
+                __st.ActiveStructuredSlotContext?.RestoreDepth(postCondDepth);
                 EmitStructuredIRNode(builder, ite.PostMergeBody, method, inner);
             }
 
@@ -474,7 +475,7 @@ public sealed partial class NativeAotLoweringPlanner
             string _cmpLExpr = ConsumeEvalStackValueExpression();
             ConsumeSlotType();
             // Captured actual depth after comparison + terminator consumption
-            int postCondDepth = _state.Value!.ActiveStructuredSlotContext?.Depth ?? 0;
+            int postCondDepth = __st.ActiveStructuredSlotContext?.Depth ?? 0;
             string _cmpRight = _cmpRType switch
             {
                 SlotType.Float32 => $"ChaosLoadFloat32({_cmpRExpr})",
@@ -503,14 +504,14 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 builder.AppendLine(inner + "else");
                 builder.AppendLine(inner + "{");
-                _state.Value!.ActiveStructuredSlotContext?.RestoreDepth(postCondDepth);
+                __st.ActiveStructuredSlotContext?.RestoreDepth(postCondDepth);
                 EmitStructuredIRNode(builder, ite.ElseBody, method, bodyIndent);
                 builder.AppendLine(inner + "}");
             }
 
             if (ite.PostMergeBody != null)
             {
-                _state.Value!.ActiveStructuredSlotContext?.RestoreDepth(postCondDepth);
+                __st.ActiveStructuredSlotContext?.RestoreDepth(postCondDepth);
                 EmitStructuredIRNode(builder, ite.PostMergeBody, method, inner);
             }
 
@@ -659,7 +660,7 @@ public sealed partial class NativeAotLoweringPlanner
         string bodyIndent = inner + "    ";
 
         // Induction variable detection for array bounds check elimination
-        if (_state.Value!.LoopArrayAccessSkipOffsets == null)
+        if (__st.LoopArrayAccessSkipOffsets == null)
         {
             var bodyInstrs = new List<AotCoreIrInstructionArtifact>();
             CollectInstructions(w.Body, bodyInstrs);
@@ -669,12 +670,12 @@ public sealed partial class NativeAotLoweringPlanner
                 var writtenSlots = new HashSet<int>();
                 CollectWrittenSlots(w.Body, writtenSlots);
                 writtenSlots.Add(ivSlot.Value);
-                _state.Value!.LoopArrayAccessSkipOffsets = PreScanLoopArraySkips(w.Body, ivSlot.Value, writtenSlots);
+                __st.LoopArrayAccessSkipOffsets = PreScanLoopArraySkips(w.Body, ivSlot.Value, writtenSlots);
             }
         }
 
         // ---- Loop induction variable hoisting ----
-        var prevHoistedIVs = _state.Value!.HoistedIVs;
+        var prevHoistedIVs = __st.HoistedIVs;
         int? hoistedIVSlot = null;
         if (prevHoistedIVs == null)
         {
@@ -685,7 +686,7 @@ public sealed partial class NativeAotLoweringPlanner
         if (hoistedIVSlot.HasValue)
         {
             string ivName = $"_iv_{hoistedIVSlot.Value}";
-            _state.Value!.HoistedIVs = new Dictionary<int, string> { { hoistedIVSlot.Value, ivName } };
+            __st.HoistedIVs = new Dictionary<int, string> { { hoistedIVSlot.Value, ivName } };
         }
 
         if (w.ConditionTerminator == null)
@@ -771,7 +772,7 @@ public sealed partial class NativeAotLoweringPlanner
             string _cmpLExpr = ConsumeEvalStackValueExpression();
             ConsumeSlotType();
             // Captured actual depth after comparison + terminator consumption
-            int postCondDepth = _state.Value!.ActiveStructuredSlotContext?.Depth ?? 0;
+            int postCondDepth = __st.ActiveStructuredSlotContext?.Depth ?? 0;
             string _cmpRight = _cmpRType switch
             {
                 SlotType.Float32 => $"ChaosLoadFloat32({_cmpRExpr})",
@@ -799,8 +800,8 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(inner + "}");
             builder.AppendLine(indentation + "}");
         }
-        _state.Value!.HoistedIVs = prevHoistedIVs;
-        _state.Value!.LoopArrayAccessSkipOffsets = null;
+        __st.HoistedIVs = prevHoistedIVs;
+        __st.LoopArrayAccessSkipOffsets = null;
     }
 
 
@@ -817,7 +818,7 @@ public sealed partial class NativeAotLoweringPlanner
         string bodyIndent = inner + "    ";
 
         // Induction variable detection for array bounds check elimination
-        if (_state.Value!.LoopArrayAccessSkipOffsets == null)
+        if (__st.LoopArrayAccessSkipOffsets == null)
         {
             var bodyInstrs = new List<AotCoreIrInstructionArtifact>();
             CollectInstructions(dw.Body, bodyInstrs);
@@ -829,13 +830,13 @@ public sealed partial class NativeAotLoweringPlanner
                 var writtenSlots = new HashSet<int>();
                 CollectWrittenSlots(dw.Body, writtenSlots);
                 writtenSlots.Add(ivSlot.Value);
-                _state.Value!.LoopArrayAccessSkipOffsets = PreScanLoopArraySkips(dw.Body, ivSlot.Value, writtenSlots);
+                __st.LoopArrayAccessSkipOffsets = PreScanLoopArraySkips(dw.Body, ivSlot.Value, writtenSlots);
             }
         }
 
         // ---- Loop induction variable hoisting ----
         // Promote detected IV to C++ local, eliminate chaos_locals[] traffic.
-        var prevHoistedIVs = _state.Value!.HoistedIVs;
+        var prevHoistedIVs = __st.HoistedIVs;
         int? hoistedIVSlot = null;
         if (prevHoistedIVs == null)
         {
@@ -865,14 +866,14 @@ public sealed partial class NativeAotLoweringPlanner
         if (hoistedIVSlot.HasValue)
         {
             string ivName = $"_iv_{hoistedIVSlot.Value}";
-            _state.Value!.HoistedIVs = new Dictionary<int, string> { { hoistedIVSlot.Value, ivName } };
+            __st.HoistedIVs = new Dictionary<int, string> { { hoistedIVSlot.Value, ivName } };
         }
 
         // ---- Array base pointer hoisting ----
         // Detect loop-invariant array local slots and hoist the base pointer computation
         // (reinterpret_cast + chaos_array_get_elements) outside the loop body.
-        _state.Value!.HoistedArrayBaseSlots = null;
-        _state.Value!.SlotVarToLocalSlot = null;
+        __st.HoistedArrayBaseSlots = null;
+        __st.SlotVarToLocalSlot = null;
         var bodyInstrs3 = new List<AotCoreIrInstructionArtifact>();
         CollectInstructions(dw.Body, bodyInstrs3);
         if (dw.LatchInstructions != null)
@@ -884,8 +885,8 @@ public sealed partial class NativeAotLoweringPlanner
             var invariantArraySlots = DetectInvariantArraySlots(bodyInstrs3, writtenSlots);
             if (invariantArraySlots.Count > 0)
             {
-                _state.Value!.HoistedArrayBaseSlots = invariantArraySlots;
-                _state.Value!.SlotVarToLocalSlot = new Dictionary<string, int>();
+                __st.HoistedArrayBaseSlots = invariantArraySlots;
+                __st.SlotVarToLocalSlot = new Dictionary<string, int>();
                 builder.AppendLine(bodyIndent + "{");
                 foreach (var kvp in invariantArraySlots)
                 {
@@ -898,8 +899,8 @@ public sealed partial class NativeAotLoweringPlanner
 
         // ---- Invariant local hoisting (E6) ----
         // Hoist ldloc's of slots that are never stloc'd inside the loop body.
-        var prevHoistedInvariantLocals = _state.Value!.HoistedInvariantLocals;
-        _state.Value!.HoistedInvariantLocals = null;
+        var prevHoistedInvariantLocals = __st.HoistedInvariantLocals;
+        __st.HoistedInvariantLocals = null;
         if (prevHoistedInvariantLocals == null && bodyInstrs3.Count > 0)
         {
             var readSlots = new HashSet<int>();
@@ -913,9 +914,9 @@ public sealed partial class NativeAotLoweringPlanner
             readSlots.ExceptWith(writtenSlots2);
             if (hoistedIVSlot.HasValue)
                 readSlots.Remove(hoistedIVSlot.Value);
-            if (_state.Value!.AccumulatorSlots is not null)
+            if (__st.AccumulatorSlots is not null)
             {
-                foreach (var accSlot in _state.Value!.AccumulatorSlots.Keys)
+                foreach (var accSlot in __st.AccumulatorSlots.Keys)
                     readSlots.Remove(accSlot);
             }
             if (readSlots.Count > 0)
@@ -927,20 +928,20 @@ public sealed partial class NativeAotLoweringPlanner
                     SlotType slotType;
                     string declType;
                     string loadExpr;
-                    if (_state.Value!.Int64LocalSlots is not null && _state.Value!.Int64LocalSlots.Contains(slot))
+                    if (__st.Int64LocalSlots is not null && __st.Int64LocalSlots.Contains(slot))
                     {
                         slotType = SlotType.Int64;
                         declType = "CHAOS_IL2CPP_INT64";
                         loadExpr = $"ChaosLoadInt64(chaos_locals[{slot}])";
                     }
-                    else if (_state.Value!.FloatLocalSlots is not null && _state.Value!.FloatLocalSlots.TryGetValue(slot, out var fType) && fType != SlotType.NativeInt)
+                    else if (__st.FloatLocalSlots is not null && __st.FloatLocalSlots.TryGetValue(slot, out var fType) && fType != SlotType.NativeInt)
                     {
                         slotType = fType;
                         declType = fType == SlotType.Float64 ? "double" : "float";
                         string wrapper = fType == SlotType.Float64 ? "ChaosLoadFloat64" : "ChaosLoadFloat32";
                         loadExpr = $"{wrapper}(chaos_locals[{slot}])";
                     }
-                    else if (_state.Value!.StructLocalSlots is not null && _state.Value!.StructLocalSlots.Contains(slot))
+                    else if (__st.StructLocalSlots is not null && __st.StructLocalSlots.Contains(slot))
                     {
                         slotType = SlotType.NativeInt;
                         declType = "CHAOS_IL2CPP_INTPTR";
@@ -955,13 +956,13 @@ public sealed partial class NativeAotLoweringPlanner
                     builder.AppendLine(bodyIndent + $"{declType} {varName} = {loadExpr};");
                     hoisted[slot] = (varName, slotType);
                 }
-                _state.Value!.HoistedInvariantLocals = hoisted;
+                __st.HoistedInvariantLocals = hoisted;
             }
         }
 
         // ---- Accumulator promotion (E7) ----
-        var prevAccumulatorSlots = _state.Value!.AccumulatorSlots;
-        _state.Value!.AccumulatorSlots = null;
+        var prevAccumulatorSlots = __st.AccumulatorSlots;
+        __st.AccumulatorSlots = null;
         if (prevAccumulatorSlots == null && prevHoistedIVs == null)
         {
             var accBodyInstrs = new List<AotCoreIrInstructionArtifact>();
@@ -971,7 +972,7 @@ public sealed partial class NativeAotLoweringPlanner
             var accResult = DetectAccumulatorSlots(accBodyInstrs);
             if (accResult is { Count: > 0 })
             {
-                _state.Value!.AccumulatorSlots = accResult;
+                __st.AccumulatorSlots = accResult;
                 foreach (var kvp in accResult)
                 {
                     int slot = kvp.Key;
@@ -1080,20 +1081,20 @@ public sealed partial class NativeAotLoweringPlanner
         if (hoistedIVSlot.HasValue)
             builder.AppendLine(indentation + $"chaos_locals[{hoistedIVSlot.Value}] = _iv_{hoistedIVSlot.Value};");
         // E7: Write back accumulator variables to chaos_locals after the loop
-        if (_state.Value!.AccumulatorSlots is { Count: > 0 })
+        if (__st.AccumulatorSlots is { Count: > 0 })
         {
-            foreach (var kvp in _state.Value!.AccumulatorSlots)
+            foreach (var kvp in __st.AccumulatorSlots)
                 builder.AppendLine(indentation + $"chaos_locals[{kvp.Key}] = ChaosStoreInt64({kvp.Value});");
         }
         builder.AppendLine(indentation + "} while (true);");
-        if (_state.Value!.HoistedArrayBaseSlots is { Count: > 0 })
+        if (__st.HoistedArrayBaseSlots is { Count: > 0 })
             builder.AppendLine(bodyIndent + "}");
-        _state.Value!.HoistedIVs = prevHoistedIVs;
-        _state.Value!.LoopArrayAccessSkipOffsets = null;
-        _state.Value!.HoistedArrayBaseSlots = null;
-        _state.Value!.SlotVarToLocalSlot = null;
-        _state.Value!.HoistedInvariantLocals = prevHoistedInvariantLocals;
-        _state.Value!.AccumulatorSlots = prevAccumulatorSlots;
+        __st.HoistedIVs = prevHoistedIVs;
+        __st.LoopArrayAccessSkipOffsets = null;
+        __st.HoistedArrayBaseSlots = null;
+        __st.SlotVarToLocalSlot = null;
+        __st.HoistedInvariantLocals = prevHoistedInvariantLocals;
+        __st.AccumulatorSlots = prevAccumulatorSlots;
     }
 
 
@@ -1180,12 +1181,12 @@ public sealed partial class NativeAotLoweringPlanner
         {
             case IRExceptionKind.TryCatch:
                 {
-                    int preTryDepth = _state.Value!.ActiveStructuredSlotContext?.Depth ?? 0;
+                    int preTryDepth = __st.ActiveStructuredSlotContext?.Depth ?? 0;
                     builder.AppendLine(indentation + "CHAOS_EH_TRY");
                     int tryBodyStart = builder.Length;
                     EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
                     if (er.CatchTypeSubjectId != null)
-                        _state.Value!.ActiveStructuredSlotContext?.RestoreDepth(preTryDepth);
+                        __st.ActiveStructuredSlotContext?.RestoreDepth(preTryDepth);
                     // ── Brace balance safety net ──
                     // The try body emission may leave open { blocks from dispatch table
                     // guards (e.g. if (kChaosExternalRuntimeFnTable[idx] == nullptr) {).
@@ -1702,25 +1703,25 @@ public sealed partial class NativeAotLoweringPlanner
         else
             StructuredMethodCount++;
 
-        StructuredSlotEmissionContext? previousSlotContext = _state.Value!.ActiveStructuredSlotContext;
+        StructuredSlotEmissionContext? previousSlotContext = __st.ActiveStructuredSlotContext;
         var slotContext = new StructuredSlotEmissionContext();
-        _state.Value!.ActiveStructuredSlotContext = slotContext;
-        _state.Value!.StructuredSlotTypes.Clear();
-        _state.Value!.StructLocalSlots = IdentifyStructLocalSlots(instructions);
-        _state.Value!.FloatLocalSlots = IdentifyFloatLocalSlots(instructions);
-        _state.Value!.Int64LocalSlots = IdentifyInt64LocalSlots(instructions);
-        slotContext.FloatLocalSlots = _state.Value!.FloatLocalSlots;
+        __st.ActiveStructuredSlotContext = slotContext;
+        __st.StructuredSlotTypes.Clear();
+        __st.StructLocalSlots = IdentifyStructLocalSlots(instructions);
+        __st.FloatLocalSlots = IdentifyFloatLocalSlots(instructions);
+        __st.Int64LocalSlots = IdentifyInt64LocalSlots(instructions);
+        slotContext.FloatLocalSlots = __st.FloatLocalSlots;
         try
         {
             EmitStructuredIRNode(builder, body!, method, "    ");
         }
         finally
         {
-            _state.Value!.ActiveStructuredSlotContext = previousSlotContext;
-            _state.Value!.StructuredSlotTypes.Clear();
-            _state.Value!.StructLocalSlots = null;
-            _state.Value!.FloatLocalSlots = null;
-            _state.Value!.Int64LocalSlots = null;
+            __st.ActiveStructuredSlotContext = previousSlotContext;
+            __st.StructuredSlotTypes.Clear();
+            __st.StructLocalSlots = null;
+            __st.FloatLocalSlots = null;
+            __st.Int64LocalSlots = null;
         }
         return slotContext;
     }
@@ -2164,6 +2165,7 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method,
         string indentation)
     {
+    __st = _state.Value!;
         Interlocked.Increment(ref s_pcDispatchCount);
 
         builder.AppendLine(indentation + "// pc-dispatch state machine for irreducible CFG");
@@ -2323,7 +2325,7 @@ public sealed partial class NativeAotLoweringPlanner
     private string EmitBranchConditionCpp(AotCoreIrInstructionArtifact terminator)
     {
         string op = terminator.Op;
-        var ctx = _state.Value!.ActiveStructuredSlotContext;
+        var ctx = __st.ActiveStructuredSlotContext;
         if (ctx == null)
             return "true";
 

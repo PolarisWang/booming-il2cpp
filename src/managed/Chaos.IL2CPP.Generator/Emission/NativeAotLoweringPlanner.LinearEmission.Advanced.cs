@@ -206,7 +206,7 @@ public sealed partial class NativeAotLoweringPlanner
         // A2.5: AOT-baked enum calls — pre-evaluated at codegen time.
         if (_enumAotBakeMap.Count > 0 &&
             (instruction.OpCode is InstructionOpCode.Call) &&
-            _enumAotBakeMap.TryGetValue((_state.Value!.CurrentMethodNativeSymbol ?? "", instruction.IlOffset), out var bakeEntry))
+            _enumAotBakeMap.TryGetValue((__st.CurrentMethodNativeSymbol ?? "", instruction.IlOffset), out var bakeEntry))
         {
             EmitEnumAotBakedCall(builder, instruction, bakeEntry, indentation);
             return;
@@ -230,7 +230,7 @@ public sealed partial class NativeAotLoweringPlanner
         // instead of calling ChaosReflectionGetTypeFromHandle.
         // The ltoken was already DCE'd in EmitInstruction by A2.7 skip set.
         if (_typeOfFoldMap.Count > 0 &&
-            _typeOfFoldMap.TryGetValue((_state.Value!.CurrentMethodNativeSymbol ?? "", instruction.IlOffset), out var typeOfFold))
+            _typeOfFoldMap.TryGetValue((__st.CurrentMethodNativeSymbol ?? "", instruction.IlOffset), out var typeOfFold))
         {
             builder.AppendLine(indentation + "{");
             EmitEvalStackPush(builder, indentation + "    ", typeOfFold.TypeInfoExpr);
@@ -241,7 +241,7 @@ public sealed partial class NativeAotLoweringPlanner
         // A2.8: String.get_Length inlining — bypass external runtime dispatch.
         // Emit the body inline at each call site to eliminate function call
         // overhead and enable compiler inlining of the field read.
-        if (_state.Value!.ActiveStructuredSlotContext == null &&
+        if (__st.ActiveStructuredSlotContext == null &&
             instruction.Callee is { } callee &&
             callee.IndexOf("::get_Length:", StringComparison.Ordinal) > 0 &&
             callee.IndexOf("/System.String::", StringComparison.Ordinal) > 0)
@@ -261,7 +261,7 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(indentation + "        auto* _str = reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(_str_arg);");
             builder.AppendLine(indentation + "        _len_result = _str->length;");
             builder.AppendLine(indentation + "    }");
-            if (_state.Value!.ActiveStructuredSlotContext is not null)
+            if (__st.ActiveStructuredSlotContext is not null)
                 EmitEvalStackPush(builder, indentation + "    ", "static_cast<CHAOS_IL2CPP_INTPTR>(_len_result)");
             else
                 EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>(_len_result)");
@@ -283,7 +283,7 @@ public sealed partial class NativeAotLoweringPlanner
         // The *Ptr call is emitted as a pre-try variable to avoid SEH frame overhead
         // (the call is noexcept — only compares pointers, no managed exception possible).
         if (_typeHierarchyPtrFoldMap.Count > 0 &&
-            _typeHierarchyPtrFoldMap.TryGetValue((_state.Value!.CurrentMethodNativeSymbol ?? "", instruction.IlOffset), out var hierarchyFold))
+            _typeHierarchyPtrFoldMap.TryGetValue((__st.CurrentMethodNativeSymbol ?? "", instruction.IlOffset), out var hierarchyFold))
         {
             // Build the *Ptr call expression
             string callExpr;
@@ -300,8 +300,8 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             // Emit as pre-try initialization (outside SEH frame)
-            var pretryName = $"_type_hierarchy_pretry_{_state.Value!.PreTryFoldInitializers?.Count ?? 0}";
-            (_state.Value!.PreTryFoldInitializers ??= new()).Add((pretryName, callExpr));
+            var pretryName = $"_type_hierarchy_pretry_{__st.PreTryFoldInitializers?.Count ?? 0}";
+            (__st.PreTryFoldInitializers ??= new()).Add((pretryName, callExpr));
 
             // Inside try-block: just reference the pre-computed value
             builder.AppendLine(indentation + "{");
@@ -345,8 +345,8 @@ public sealed partial class NativeAotLoweringPlanner
             // method's IL body and collapsed it to "call self; ret".  Emit
             // CHAOS_IL2CPP_FAIL instead of a hotpatch dispatch wrapper that
             // would infinite-recursion at runtime.
-            if (_state.Value!.CurrentMethodNativeSymbol != null &&
-                invocationTarget.TargetSymbol == _state.Value!.CurrentMethodNativeSymbol)
+            if (__st.CurrentMethodNativeSymbol != null &&
+                invocationTarget.TargetSymbol == __st.CurrentMethodNativeSymbol)
             {
                 builder.AppendLine($"{indentation}{{");
                 builder.AppendLine($"{indentation}    CHAOS_IL2CPP_FAIL(\"Unlowered method body: self-call from {invocationTarget.TargetSymbol}\");");

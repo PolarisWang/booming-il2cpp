@@ -81,6 +81,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     private void EmitGenericInstantiationStub(StringBuilder builder, AotCoreIrMethodArtifact method)
     {
+        __st = _state.Value!;
         string? text = TryGetInstantiationStubSymbol(method);
         if (string.IsNullOrEmpty(text))
         {
@@ -144,11 +145,12 @@ public sealed partial class NativeAotLoweringPlanner
 
     private void EmitManagedMethod(StringBuilder builder, AotCoreIrMethodArtifact method)
     {
+        __st = _state.Value!;
         ValidateMethod(method);
-        _state.Value!.LinearScratchCounter = 0;
-        _state.Value!.NextInlineId = 0;
-        _state.Value!.DispatchLabelSeq = 0;
-        _state.Value!.PreTryFoldInitializers = null;  // reset per-method
+        __st.LinearScratchCounter = 0;
+        __st.NextInlineId = 0;
+        __st.DispatchLabelSeq = 0;
+        __st.PreTryFoldInitializers = null;  // reset per-method
 
         // P/Invoke methods: emit LoadLibrary + GetProcAddress wrapper instead of IL body.
         if (method.IsPInvoke)
@@ -282,8 +284,8 @@ public sealed partial class NativeAotLoweringPlanner
         // since ComputeMaxEvalStackDepth may undercount for generic methods
         // where inlined code or StringId emission expands the effective depth.
         var bodyBuilder = new System.Text.StringBuilder();
-        _state.Value!.CurrentMethodNativeSymbol = method.NativeSymbol;
-        _state.Value!.CurrentMethodArtifact = method;
+        __st.CurrentMethodNativeSymbol = method.NativeSymbol;
+        __st.CurrentMethodArtifact = method;
         StructuredSlotEmissionContext? slotContext = null;
         try
         {
@@ -291,8 +293,8 @@ public sealed partial class NativeAotLoweringPlanner
         }
         finally
         {
-            _state.Value!.CurrentMethodNativeSymbol = null;
-            _state.Value!.CurrentMethodArtifact = null;
+            __st.CurrentMethodNativeSymbol = null;
+            __st.CurrentMethodArtifact = null;
         }
         // Use the larger of ComputeMaxEvalStackDepth and the actual peak depth
         // tracked by StructuredSlotEmissionContext (the latter may be higher for
@@ -349,10 +351,10 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine("	CHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
         }
         // Pre-try TypeInfo* fold evaluations (outside SEH frame)
-        if (_state.Value!.PreTryFoldInitializers is { Count: > 0 })
+        if (__st.PreTryFoldInitializers is { Count: > 0 })
         {
             builder.AppendLine("	// Pre-try TypeInfo* fold evaluations (outside SEH frame)");
-            foreach (var (varName, expr) in _state.Value!.PreTryFoldInitializers)
+            foreach (var (varName, expr) in __st.PreTryFoldInitializers)
                 builder.AppendLine($"	const auto {varName} = {expr};");
         }
 

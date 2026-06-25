@@ -40,7 +40,7 @@ public sealed partial class NativeAotLoweringPlanner
         if (_enumToStringFoldMap.TryGetValue(instruction.IlOffset, out var foldedFieldName))
         {
             ConsumeEvalStackValueExpression();
-            _state.Value!.PendingEnumBoxSubjectId = null;
+            __st.PendingEnumBoxSubjectId = null;
             string strHolder = "s_enum_str_" + SanitizeForCppIdent(foldedFieldName);
             builder.AppendLine($"{indentation}{{");
             builder.AppendLine($"{indentation}    static CHAOS_IL2CPP_INTPTR {strHolder} = 0;");
@@ -52,8 +52,8 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         string rawValueExpr = ConsumeEvalStackValueExpression();
-        string enumSubjectId = _state.Value!.PendingEnumBoxSubjectId!;
-        _state.Value!.PendingEnumBoxSubjectId = null;
+        string enumSubjectId = __st.PendingEnumBoxSubjectId!;
+        __st.PendingEnumBoxSubjectId = null;
 
         // A2.6: Per-enum switch — lazy-initialized static string holders.
         if (_enumValueToNameMap.TryGetValue(enumSubjectId, out var valueToName) &&
@@ -155,8 +155,8 @@ public sealed partial class NativeAotLoweringPlanner
         string genericCtxArg = "";
         if (_sharedContextSymbols.Contains(targetSymbol))
         {
-            bool callerIsShared = _state.Value!.CurrentMethodNativeSymbol != null &&
-                                  _sharedContextSymbols.Contains(_state.Value!.CurrentMethodNativeSymbol);
+            bool callerIsShared = __st.CurrentMethodNativeSymbol != null &&
+                                  _sharedContextSymbols.Contains(__st.CurrentMethodNativeSymbol);
             genericCtxArg = string.IsNullOrEmpty(argList)
                 ? (callerIsShared ? "chaos_generic_context" : "0")
                 : (callerIsShared ? ", chaos_generic_context" : ", 0");
@@ -231,8 +231,8 @@ public sealed partial class NativeAotLoweringPlanner
                 // subject methods; ChaosExternalRuntimeFallback handles null gracefully.
                 bool isSubjectExtRuntime =
                     invocationTarget.DirectNativeSymbol == null &&
-                    _state.Value!.CurrentMethodArtifact?.SubjectId is not null &&
-                    _state.Value!.CurrentMethodArtifact.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal);
+                    __st.CurrentMethodArtifact?.SubjectId is not null &&
+                    __st.CurrentMethodArtifact.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal);
                 if (!isSubjectExtRuntime)
                 {
                     builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
@@ -245,8 +245,8 @@ public sealed partial class NativeAotLoweringPlanner
             string nativeCtxArg = "";
             if (_sharedContextSymbols.Contains(nativeSymbol))
             {
-                bool callerIsShared = _state.Value!.CurrentMethodNativeSymbol != null &&
-                                      _sharedContextSymbols.Contains(_state.Value!.CurrentMethodNativeSymbol);
+                bool callerIsShared = __st.CurrentMethodNativeSymbol != null &&
+                                      _sharedContextSymbols.Contains(__st.CurrentMethodNativeSymbol);
                 nativeCtxArg = string.IsNullOrEmpty(directNativeArgs)
                     ? (callerIsShared ? "chaos_generic_context" : "0")
                     : (callerIsShared ? ", chaos_generic_context" : ", 0");
@@ -528,8 +528,8 @@ public sealed partial class NativeAotLoweringPlanner
         string hpCtxArg = "";
         if (_sharedContextSymbols.Contains(nativeTarget))
         {
-            bool callerIsShared = _state.Value!.CurrentMethodNativeSymbol != null &&
-                                  _sharedContextSymbols.Contains(_state.Value!.CurrentMethodNativeSymbol);
+            bool callerIsShared = __st.CurrentMethodNativeSymbol != null &&
+                                  _sharedContextSymbols.Contains(__st.CurrentMethodNativeSymbol);
             hpCtxArg = string.IsNullOrEmpty(hpArgList)
                 ? (callerIsShared ? "chaos_generic_context" : "0")
                 : (callerIsShared ? ", chaos_generic_context" : ", 0");
