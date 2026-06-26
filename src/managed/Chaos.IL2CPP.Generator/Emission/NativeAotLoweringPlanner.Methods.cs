@@ -385,6 +385,9 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     internal int PcDispatchCount;
     internal int CodegenFailureCount;
+    /// <summary>Backing field for atomic failure counting from
+    /// Parallel.For threads.  Read via CodegenFailureCount property.</summary>
+    internal int _CodegenFailureCountRaw;
     internal Dictionary<string, int> CodegenFailureByType = new();
     internal Dictionary<string, int> CodegenFailureByChunk = new();
 
