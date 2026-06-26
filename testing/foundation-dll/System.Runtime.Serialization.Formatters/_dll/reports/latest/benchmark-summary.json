@@ -1,0 +1,64 @@
+{
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "timestamp": "2026-06-26T05:47:49",
+  "totalChunks": 1,
+  "totalBenchmarkedMethods": 74,
+  "aggregatePerformance": {
+    "meanDurationMs": 0.16052162162162162,
+    "meanOpsPerSecond": 318932631.7891892,
+    "aggregateMeanCv": 0.11616077027027027,
+    "totalOutliers": 122
+  },
+  "chunkSummaries": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 74,
+        "total": 74,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 98,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 74,
+        "iterations": 10000,
+        "meanDurationMs": 0.16052162162162162,
+        "meanOpsPerSecond": 318932631.7891892,
+        "minDurationMs": 0.027,
+        "maxDurationMs": 3.4312,
+        "totalDurationMs": 11.8786,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 8.4,
+        "totalOutliers": 122,
+        "meanCv": 0.11616077027027027,
+        "maxCv": 0.29491
+      },
+      "hotupdate": {
+        "passed": 74,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2877952,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

@@ -158,7 +158,7 @@ public sealed partial class NativeAotLoweringPlanner
             string mtSymbol = GetNativeMethodTableSymbol(SubjectId);
             // MethodTable = chaos_mt_X (the struct itself). The first 32 bytes alias
             // as TypeInfoHot. Register the full struct range.
-            builder.AppendLine($"    registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&{mtSymbol}), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&{mtSymbol}) + sizeof({mtSymbol}));");
+            builder.AppendLine($"    registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&{mtSymbol}), reinterpret_cast<uintptr_t>(&{mtSymbol}) + sizeof({mtSymbol}));");
         }
 
         builder.AppendLine("}");

@@ -66,9 +66,22 @@ public sealed partial class NativeAotLoweringPlanner
 
         if (TryResolveDirectInvocationTarget(calleeOrTarget) is { } directInvocationTarget)
         {
+            // Catch-all external runtime helpers with 0 ParameterAbis produce C++ calls
+            // with empty () — correct only when the method has no parameters.  If the
+            // instruction has actual parameters (including hidden generic context params),
+            // fall through to the dispatch table path which computes the correct count
+            // from instruction-level metadata.  Fixes C2660 for methods like
+            // Array.Empty<T>() where InferParameterCountFromSubjectId returns 0 (no
+            // explicit params) but the call site passes hidden generic context.
+            if (directInvocationTarget.ParameterAbis is { Count: 0 } &&
+                GetRequiredTargetParameterCount(instruction) > 0)
+            {
+                goto TryDispatchTable;
+            }
             return directInvocationTarget;
         }
 
+        TryDispatchTable:
         // Check if the callee is in the external runtime dispatch table.
         // These are cross-assembly calls that would otherwise fall through to
         // chaos_external_runtime_* stubs — we dispatch via startup-time-resolved
@@ -81,29 +94,11 @@ public sealed partial class NativeAotLoweringPlanner
             if (string.IsNullOrEmpty(returnType) && !string.IsNullOrEmpty(instruction.Callee))
                 returnType = InferReturnTypeFromSubjectId(instruction.Callee);
 
-            // Use shape registry's ParameterAbis when available for precise ABI carriers,
-            // falling back to instruction metadata for methods not in the shape registry.
-            IReadOnlyList<AotCoreIrAbiSlotArtifact> earlyExtParamAbis;
-            IReadOnlySet<int>? earlyExtRawIndices;
-            if (!string.IsNullOrEmpty(tableKey) &&
-                TryCreateExternalRuntimeHelperDefinition(tableKey, out var earlyHelperDef))
-            {
-                earlyExtParamAbis = earlyHelperDef!.ParameterAbis.Count > 0
-                    ? earlyHelperDef.ParameterAbis
-                    : CreateLegacyAbiParameterSlots(GetRequiredTargetParameterCount(instruction));
-                earlyExtRawIndices = earlyHelperDef.RawArgumentIndices;
-            }
-            else
-            {
-                earlyExtParamAbis = CreateLegacyAbiParameterSlots(GetRequiredTargetParameterCount(instruction));
-                earlyExtRawIndices = EmptyRawArgumentIndices;
-            }
-
             return new InvocationTarget(
                 GetExternalRuntimeHelperSymbol(tableKey),
-                earlyExtParamAbis,
+                CreateLegacyAbiParameterSlots(GetRequiredTargetParameterCount(instruction)),
                 CreateLegacyReturnAbiSlot(returnType ?? instruction.TargetReturnType),
-                earlyExtRawIndices,
+                EmptyRawArgumentIndices,
                 ExternalRuntimeTableIndex: tableIndex);
         }
 

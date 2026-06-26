@@ -58,14 +58,14 @@ public sealed partial class NativeAotLoweringPlanner
     {
         var sb = new StringBuilder();
         sb.Append("    struct AsyncPromise_" + uid + " {\n");
-        sb.Append("        CHAOS_IL2CPP_INTPTR _h[4]; CHAOS_IL2CPP_UINT32 _magic = 0x45524F43; CHAOS_IL2CPP_INTPTR _result = 0;\n");
+        sb.Append("        CHAOS_IL2CPP_INTPTR _h[4]; uint32_t _magic = 0x45524F43; CHAOS_IL2CPP_INTPTR _result = 0;\n");
         sb.Append("        auto get_return_object() noexcept { return AsyncHandle_" + uid + "{this}; }\n");
         sb.Append("        std::suspend_always initial_suspend() noexcept { return {}; }\n");
         sb.Append("        std::suspend_always final_suspend() noexcept { return {}; }\n");
         sb.Append(hr ? "        void return_value(CHAOS_IL2CPP_INTPTR v) noexcept { _result = v; }\n" : "        void return_void() noexcept {}\n");
         sb.Append("        void unhandled_exception() noexcept {}\n");
-        sb.Append("        static void* operator new(CHAOS_IL2CPP_SIZE sz) noexcept { return CHAOS_IL2CPP_NEW_GC_PINNED(sz); }\n");
-        sb.Append("        static void operator delete(void*, CHAOS_IL2CPP_SIZE) noexcept {}\n");
+        sb.Append("        static void* operator new(std::size_t sz) noexcept { return CHAOS_IL2CPP_NEW_GC_PINNED(sz); }\n");
+        sb.Append("        static void operator delete(void*, std::size_t) noexcept {}\n");
         sb.Append("    };\n");
         sb.Append("    struct AsyncHandle_" + uid + " { AsyncPromise_" + uid + "* p; void Start() noexcept { std::coroutine_handle<AsyncPromise_" + uid + ">::from_promise(*p).resume(); } };\n");
         return sb.ToString();

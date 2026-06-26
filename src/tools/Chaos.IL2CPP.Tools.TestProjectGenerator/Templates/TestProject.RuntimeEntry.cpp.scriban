@@ -16,6 +16,10 @@
 #include <chrono>
 #include <cstdint>
 #include <cinttypes>
+
+// Extern declarations for SDK helper functions referenced by the runtime entry.
+// Defined in generated code (subjects/*.cpp) as extern "C" symbols.
+extern "C" int32_t Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_ReadAssertCount();
 #include <csignal>
 #include <chaos/pal/pal_eh.h>
 #include <csetjmp>
@@ -400,8 +404,9 @@ static int RunFactJsonMode() {
         }
 
         if (!first) printf(",");
-        printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
-               si, i, caught ? "false" : "true", caught ? result : result);
+        int ac = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_ReadAssertCount();  // extern declared above
+        printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 ",\"assertCount\":%d}",
+               si, i, caught ? "false" : "true", caught ? result : result, ac);
         first = false;
     }
     printf("]}

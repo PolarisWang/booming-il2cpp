@@ -28,7 +28,7 @@ public sealed partial class NativeAotLoweringPlanner
         // In structured mode, _dN/_fN typed slots are already float/double C++ vars -> use directly
         string _rLoad = isFloatOp
             ? (_rIsFloat
-                ? (_state.Value!.ActiveStructuredSlotContext is not null && (_rExpr.StartsWith("_d", StringComparison.Ordinal) || _rExpr.StartsWith("_f", StringComparison.Ordinal))
+                ? (__st.ActiveStructuredSlotContext is not null && (_rExpr.StartsWith("_d", StringComparison.Ordinal) || _rExpr.StartsWith("_f", StringComparison.Ordinal))
                     ? _rExpr
                     : $"ChaosLoadFloat64({_rExpr})")
                 : $"static_cast<double>({_rExpr})")
@@ -39,7 +39,7 @@ public sealed partial class NativeAotLoweringPlanner
                 : $"static_cast<CHAOS_IL2CPP_INT32>({_rExpr})";
         string _lLoad = isFloatOp
             ? (_lIsFloat
-                ? (_state.Value!.ActiveStructuredSlotContext is not null && (_lExpr.StartsWith("_d", StringComparison.Ordinal) || _lExpr.StartsWith("_f", StringComparison.Ordinal))
+                ? (__st.ActiveStructuredSlotContext is not null && (_lExpr.StartsWith("_d", StringComparison.Ordinal) || _lExpr.StartsWith("_f", StringComparison.Ordinal))
                     ? _lExpr
                     : $"ChaosLoadFloat64({_lExpr})")
                 : $"static_cast<double>({_lExpr})")
@@ -49,7 +49,7 @@ public sealed partial class NativeAotLoweringPlanner
                     : $"static_cast<CHAOS_IL2CPP_INT64>(static_cast<CHAOS_IL2CPP_INT32>({_lExpr}))")
                 : $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})";
 
-        if (_state.Value!.ActiveStructuredSlotContext is not null)
+        if (__st.ActiveStructuredSlotContext is not null)
         {
             if (isFloatOp)
             {
@@ -67,12 +67,12 @@ public sealed partial class NativeAotLoweringPlanner
             else if (isInt64Op)
             {
                 string _rLoadInt64 = _rIsInt64
-                    ? (_state.Value!.ActiveStructuredSlotContext is not null && _rExpr.StartsWith("_i", StringComparison.Ordinal)
+                    ? (__st.ActiveStructuredSlotContext is not null && _rExpr.StartsWith("_i", StringComparison.Ordinal)
                         ? _rExpr
                         : $"ChaosLoadInt64({_rExpr})")
                     : $"static_cast<CHAOS_IL2CPP_INT64>(static_cast<CHAOS_IL2CPP_INT32>({_rExpr}))";
                 string _lLoadInt64 = _lIsInt64
-                    ? (_state.Value!.ActiveStructuredSlotContext is not null && _lExpr.StartsWith("_i", StringComparison.Ordinal)
+                    ? (__st.ActiveStructuredSlotContext is not null && _lExpr.StartsWith("_i", StringComparison.Ordinal)
                         ? _lExpr
                         : $"ChaosLoadInt64({_lExpr})")
                     : $"static_cast<CHAOS_IL2CPP_INT64>(static_cast<CHAOS_IL2CPP_INT32>({_lExpr}))";
@@ -86,7 +86,7 @@ public sealed partial class NativeAotLoweringPlanner
                 // In structured mode, EmitEvalStackPush with SlotType.Int64 allocates _iN
                 // which is already CHAOS_IL2CPP_INT64 (int64_t), so no ChaosStoreInt64 wrapper needed.
                 // In pc-dispatch mode, ChaosStoreInt64 is still needed.
-                if (_state.Value!.ActiveStructuredSlotContext is not null)
+                if (__st.ActiveStructuredSlotContext is not null)
                     EmitEvalStackPush(builder, indentation, int64Expr, SlotType.Int64);
                 else
                     EmitEvalStackPush(builder, indentation, $"ChaosStoreInt64({int64Expr})", SlotType.Int64);
@@ -147,7 +147,7 @@ public sealed partial class NativeAotLoweringPlanner
         string _rExpr = ConsumeEvalStackValueExpression();
         ConsumeSlotType();
         string _lExpr = ConsumeEvalStackValueExpression();
-        if (_state.Value!.ActiveStructuredSlotContext is not null)
+        if (__st.ActiveStructuredSlotContext is not null)
         {
             EmitEvalStackPush(builder, indentation,
                 $"chaos_store_uint64(chaos_load_uint64({_lExpr}) {operation} chaos_load_uint64({_rExpr}))");
@@ -292,7 +292,7 @@ public sealed partial class NativeAotLoweringPlanner
         string _shiftExpr = ConsumeEvalStackValueExpression();
         ConsumeSlotType();
         string _valueExpr = ConsumeEvalStackValueExpression();
-        if (_state.Value!.ActiveStructuredSlotContext is not null)
+        if (__st.ActiveStructuredSlotContext is not null)
         {
             EmitEvalStackPush(builder, indentation,
                 $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}(static_cast<CHAOS_IL2CPP_INT32>({_valueExpr}), static_cast<CHAOS_IL2CPP_INT32>({_shiftExpr})))");
@@ -313,7 +313,7 @@ public sealed partial class NativeAotLoweringPlanner
     private void EmitLinearBitwiseNot(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
     {
         RequireInt32IntegralResultType(instruction);
-        if (_state.Value!.ActiveStructuredSlotContext is not null)
+        if (__st.ActiveStructuredSlotContext is not null)
         {
             string expr = AccessEvalStackTopExpression();
             builder.AppendLine($"{indentation}{expr} = static_cast<CHAOS_IL2CPP_INTPTR>(~static_cast<CHAOS_IL2CPP_INT32>({expr}));");
@@ -575,13 +575,13 @@ public sealed partial class NativeAotLoweringPlanner
     private void EmitFusedConvertCharBoxCall(System.Text.StringBuilder builder, string indentation)
     {
         // If this was an IFormatProvider overload, pop the provider null value
-        if (_state.Value!.PendingBoxHasProvider)
+        if (__st.PendingBoxHasProvider)
         {
             ConsumeEvalStackValueExpression();
-            _state.Value!.PendingBoxHasProvider = false;
+            __st.PendingBoxHasProvider = false;
         }
         string rawValueExpr = ConsumeEvalStackValueExpression();
-        string inlineExpr = _state.Value!.PendingBoxSubjectId switch
+        string inlineExpr = __st.PendingBoxSubjectId switch
         {
             "System.Byte" or "System.Char" or "System.UInt16"
                 => $"static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr})",
@@ -600,13 +600,13 @@ public sealed partial class NativeAotLoweringPlanner
         }
         else
         {
-            string nativeFn = GetConvertCharNativeFunctionName(_state.Value!.PendingBoxSubjectId!);
+            string nativeFn = GetConvertCharNativeFunctionName(__st.PendingBoxSubjectId!);
             builder.AppendLine(indentation + "{");
             builder.AppendLine(indentation + "    const auto chaos_result = " + nativeFn + "(" + rawValueExpr + ");");
             EmitEvalStackPush(builder, indentation + "    ", "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result)");
             builder.AppendLine(indentation + "}");
         }
-        _state.Value!.PendingBoxSubjectId = null;
+        __st.PendingBoxSubjectId = null;
     }
 
 

@@ -416,6 +416,7 @@ public sealed partial class NativeAotLoweringPlanner
         if (subjectId.Contains("::Benchmark_", StringComparison.Ordinal))
             return false;
 
+
         // 1. When --subject-methods is provided, ONLY exact matches are valid.
         //    The CombinedSubjects prefix fallback below would also capture SDK
         //    infrastructure methods (Assert.AreEqual, ResultToLong, etc.) from

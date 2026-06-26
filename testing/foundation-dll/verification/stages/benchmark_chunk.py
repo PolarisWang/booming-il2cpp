@@ -397,8 +397,6 @@ def _write_perf_store(
                 "timestamp": now,
                 "slug": ctx.slug,
                 "technology": technology,
-                "platform": ctx.platform or "windows-x64",
-                "device": ctx.device or {"id": "chunk-pipeline", "name": "chunk-pipeline"},
                 "methodSubjectId": method_subject_id,
                 "combinedSubjectsId": combined_subjects_id,
                 "methodIndex": i,

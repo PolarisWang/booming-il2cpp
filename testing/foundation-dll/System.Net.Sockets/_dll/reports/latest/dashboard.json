@@ -1,0 +1,48 @@
+{
+  "assemblyName": "System.Net.Sockets",
+  "timestamp": "2026-06-26T05:47:49",
+  "summary": {
+    "chunks": 2,
+    "chunksVerified": 1,
+    "chunksWithValueWarnings": 0,
+    "chunksWithMetaMismatch": 1,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 500,
+    "aggregatePerformance": {
+      "meanDurationMs": 0.030889800000000002,
+      "meanOpsPerSecond": 328415724.15929997,
+      "aggregateMeanCv": 0.044650774
+    },
+    "hotupdate": {
+      "chunksWithPatchData": 1,
+      "chunksPatchFailed": 0,
+      "chunksPatchSkippedNoMethods": 0,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 500,
+      "totalFailed": 0,
+      "skipBreakdown": {}
+    },
+    "benchmarkComparison": {
+      "methodsAnalyzed": 256,
+      "methodsWithNet8": 247,
+      "chaosAotVsNet8": {},
+      "chaosJitVsNet8": {
+        "mean": 69.57,
+        "median": 69.57,
+        "min": 69.57,
+        "max": 69.57,
+        "p25": 69.57,
+        "p75": 69.57
+      },
+      "net10VsNet8": {
+        "mean": -0.64,
+        "median": -0.64,
+        "min": -0.64,
+        "max": -0.64,
+        "p25": -0.64,
+        "p75": -0.64
+      },
+      "highValueMethods_betterThanNet8": 0.0
+    }
+  }
+}

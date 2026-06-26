@@ -336,12 +336,35 @@ public sealed partial class NativeAotLoweringPlanner
 			: CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType);
 		var failSymbol = GetExternalRuntimeHelperSymbol(callee);
 		string escapedCallee = callee.Replace("\\", "\\\\").Replace("\"", "\\\"");
-		// All catch-all fallback functions use () regardless of actual method params
-		// because call sites pass 0 args and the body uses hardcoded subject ID.
-		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, "",
+		// Compute proper parameter count from the callee SubjectId so the generated
+		// C++ function signature and call site have the correct argument list.
+		// Subject-only lowering may lose instruction-level parameter info, but the
+		// SubjectId always encodes the full parameter signature.
+		int paramCount = InferParameterCountFromSubjectId(callee);
+		// Generic methods with 0 explicit parameters (e.g. Array.Empty<T>())
+		// have a hidden RuntimeGenericContext parameter on the eval stack that
+		// is not reflected in the SubjectId's parameter list.  Add 1 so the
+		// generated C++ call site passes the correct number of arguments.
+		if (paramCount == 0 && callee.IndexOf('<') > 0 && callee.IndexOf('>') > 0)
+		{
+			int methodEnd = callee.IndexOf("::", StringComparison.Ordinal);
+			if (methodEnd >= 0)
+			{
+				int genericStart = callee.IndexOf('<', methodEnd);
+				if (genericStart >= 0)
+					paramCount = 1;
+			}
+		}
+		var paramAbis = CreateLegacyAbiParameterSlots(paramCount);
+		// Build parameter signature string for the function declaration:
+		//   CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, ...
+		string paramSignature = paramCount > 0
+			? string.Join(", ", Enumerable.Range(0, paramCount).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"))
+			: "";
+		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, paramSignature,
 			["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
-			Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
+			paramAbis, failReturnAbi, EmptyRawArgumentIndices);
 		_externalRuntimeHelperCache[callee] = helperDefinition;
 		return true;
 

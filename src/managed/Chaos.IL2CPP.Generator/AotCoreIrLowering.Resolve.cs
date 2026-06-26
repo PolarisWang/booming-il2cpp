@@ -7,10 +7,11 @@ public sealed partial class AotCoreIrLowering
 
     private static IReadOnlyList<AotCoreIrAbiSlotArtifact> ResolveParameterAbis(
         ManagedMethodModel method,
-        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes)
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, string>? displayNameToSubjectId = null)
     {
         return method.Parameters
-            .Select(parameter => ResolveAbiSlot(parameter.Type, method.AssemblyName, managedTypes))
+            .Select(parameter => ResolveAbiSlot(parameter.Type, method.AssemblyName, managedTypes, displayNameToSubjectId))
             .ToList();
     }
 
@@ -19,7 +20,8 @@ public sealed partial class AotCoreIrLowering
     private static AotCoreIrAbiSlotArtifact ResolveAbiSlot(
         string typeIdentity,
         string assemblyName,
-        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes)
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, string>? displayNameToSubjectId = null)
     {
         // Strip byref suffix (&) for underlying type resolution;
         // the caller uses CarrierKindCode to determine the native ABI type.
@@ -36,7 +38,7 @@ public sealed partial class AotCoreIrLowering
             isByRef = false;
         }
 
-        var managedType = TryResolveManagedType(innerType, assemblyName, managedTypes);
+        var managedType = TryResolveManagedType(innerType, assemblyName, managedTypes, displayNameToSubjectId);
         var resolvedTypeShape = ResolveTypeShape(managedType, innerType);
 
         // If this is a byref parameter, determine the right ByRef carrier kind
@@ -202,11 +204,67 @@ public sealed partial class AotCoreIrLowering
     private static ManagedTypeModel? TryResolveManagedType(
         string typeIdentity,
         string assemblyName,
-        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes)
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, string>? displayNameToSubjectId = null)
     {
         if (managedTypes.TryGetValue(typeIdentity, out var exactType))
         {
             return exactType;
+        }
+
+        // Fast O(1) DisplayName/Name → SubjectId lookup index.
+        // Avoids the slow O(n) fuzzy matching below for cross-assembly types
+        // where typeIdentity is a DisplayName (e.g. "System.Int64") but the
+        // managedTypes key is the SubjectId (e.g. "System.Private.CoreLib/System.Int64").
+        if (displayNameToSubjectId is not null &&
+            displayNameToSubjectId.TryGetValue(typeIdentity, out var indexedSubjectId) &&
+            managedTypes.TryGetValue(indexedSubjectId, out var indexedType))
+        {
+            return indexedType;
+        }
+
+        // Fallback: if typeIdentity itself looks like a valid SubjectId (contains '/'),
+        // try to use it directly.  This handles synthesized generic types that don't
+        // exist in linkedWorld.Types but appear in method signatures (e.g. the subject
+        // ID has its DeclaringTypeSubjectId set to the concrete generic instantiation).
+        if (typeIdentity.IndexOf('/') > 0 &&
+            managedTypes.TryGetValue(typeIdentity, out var sidMatch))
+        {
+            return sidMatch;
+        }
+
+        // Last-resort fallback: create a synthetic ManagedTypeModel for types that
+        // are genuinely not in linkedWorld.Types (e.g. generic closure types like
+        // DisplayClass43_0___0___1_ synthesized during Loader instantiation).
+        // Without this, TypeSubjectId stays null and the type gets no declaration
+        // in the shared header, causing C2061 in generated page files.
+        // Only do this for types that look like plausible SubjectIds (contain '/').
+        if (typeIdentity.IndexOf('/') > 0)
+        {
+            string asmName;
+            int asmSlash = typeIdentity.IndexOf('/');
+            asmName = asmSlash > 0 ? typeIdentity[..asmSlash] : assemblyName;
+            string shortName = typeIdentity;
+            int lastDot = typeIdentity.LastIndexOf('.');
+            if (lastDot > asmSlash)
+                shortName = typeIdentity[(lastDot + 1)..];
+            else if (lastDot > 0)
+                shortName = typeIdentity[(lastDot + 1)..];
+            return new ManagedTypeModel
+            {
+                SubjectId = typeIdentity,
+                DefinitionSubjectId = typeIdentity,
+                AssemblyName = asmName,
+                NamespaceName = null,
+                Name = shortName,
+                DisplayName = shortName,
+                IsValueType = false,
+                IsSealed = false,
+                IsComImport = false,
+                BaseTypeSubjectId = "System.Private.CoreLib/System.Object",
+                ImplementedInterfaceSubjectIds = Array.Empty<string>(),
+                MetadataToken = 0,
+            };
         }
 
         return managedTypes.Values.FirstOrDefault(type =>

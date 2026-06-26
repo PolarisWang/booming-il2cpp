@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using Chaos.IL2CPP.Generator;
@@ -196,6 +197,7 @@ internal static class ConvertToCppHandler
                 EntryPointSubjectIdOverride: config.EntryPoint,
                 AdditionalAssemblyPaths: additionalPaths);
 
+            var pipelineSw = Stopwatch.StartNew();
             var resultsResult = pipeline.ExecuteMulti(multiRequest);
             if (resultsResult.IsFailure)
             {
@@ -230,7 +232,8 @@ internal static class ConvertToCppHandler
             Console.WriteLine(" done");
 
             // Write combined report
-            WriteCombinedReport(outputRoot, config, results);
+            pipelineSw.Stop();
+            WriteCombinedReport(outputRoot, config, results, pipelineSw);
 
             // NOTE: CMakeLists.txt is NOT generated here anymore.
             // The TPG pipeline generates per-test-project CMakeLists.txt via .scriban templates.
@@ -380,13 +383,14 @@ internal static class ConvertToCppHandler
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.SupplementalMetadata), resolved);
     }
 
-    private static void WriteCombinedReport(string outputRoot, ConvertToCppConfig config, IReadOnlyList<ManagedClosureResult> results)
+    private static void WriteCombinedReport(string outputRoot, ConvertToCppConfig config, IReadOnlyList<ManagedClosureResult> results, Stopwatch? sw = null)
     {
         var report = new
         {
             assembly = string.Join(", ", config.AssemblyPaths.Select(Path.GetFileNameWithoutExtension)),
             totalAssemblies = config.AssemblyPaths.Count,
             assemblies = config.AssemblyPaths.Select(p => Path.GetFileNameWithoutExtension(p)).ToList(),
+            elapsedMs = sw?.ElapsedMilliseconds ?? 0L,
             results = results.Select(r => new
             {
                 assembly = r.ClosureManifest?.AssemblyName ?? "unknown",

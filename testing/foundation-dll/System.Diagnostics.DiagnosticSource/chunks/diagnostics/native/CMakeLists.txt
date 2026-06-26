@@ -70,9 +70,9 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Diagnostics.DiagnosticSource/chunks/diagnostics/native/codegen")
-set(CHAOS_PROJECT_ROOT "/home/debian/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Diagnostics.DiagnosticSource/chunks/diagnostics/native/codegen")
+set(CHAOS_SDK_DIR "${CMAKE_CURRENT_SOURCE_DIR}/codegen")
+set(CHAOS_PROJECT_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../..")
+set(CHAOS_CODEGEN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
@@ -111,6 +111,7 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_ChaosFindExternalTypeDescByStableId.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_patch_loader.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/object_stubs.cpp"
 )
 
 # Runtime stubs are provided by libchaos_runtime_core.a (built from source
@@ -123,6 +124,8 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 # /FORCE:MULTIPLE handles any future overlap when the lib catches up.
 set(CHAOS_PROFILE_GLOBALS
     "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc/gc_api.cpp"
 )
 set(CHAOS_ARRAY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/array_stubs.cpp"
@@ -150,6 +153,8 @@ set(CHAOS_INTEROP_STUBS
 )
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/object_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/string_stubs.cpp"
 )
 set(CHAOS_ENTRY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/entry_stubs.cpp"

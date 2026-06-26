@@ -29,7 +29,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "    for (CHAOS_IL2CPP_INT32 i = 0; i < _list->size; i++) {",
                         "        if (elems[i] == chaos_arg_1) {",
                         "            auto move_count = _list->size - i - 1;",
-                        "            if (move_count > 0) CHAOS_IL2CPP_MEMMOVE(&elems[i], &elems[i + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
+                        "            if (move_count > 0) std::memmove(&elems[i], &elems[i + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
                         "            _list->size--;",
                         "            _list->version++;",
                         "            return 1;",
@@ -68,7 +68,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "    if (hdr == nullptr || chaos_arg_1 < 0 || chaos_arg_1 >= _list->size) return;",
                         "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
                         "    auto move_count = _list->size - chaos_arg_1 - 1;",
-                        "    if (move_count > 0) CHAOS_IL2CPP_MEMMOVE(&elems[chaos_arg_1], &elems[chaos_arg_1 + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
+                        "    if (move_count > 0) std::memmove(&elems[chaos_arg_1], &elems[chaos_arg_1 + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
                         "    _list->size--;",
                         "    _list->version++;",
                     ]);

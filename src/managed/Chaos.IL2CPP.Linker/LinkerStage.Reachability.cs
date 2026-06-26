@@ -86,29 +86,37 @@ public sealed partial class LinkerStage
             return;
         }
 
+        // Include ALL types/fields/properties/methods from ALL closure assemblies
+        // (not just the entry assembly).  Without this, dependency assemblies like
+        // System.Threading.Tasks.Parallel have their types filtered out by subject-only
+        // lowering, causing missing type declarations in the generated header.
+        var closureAssemblyNames = new HashSet<string>(StringComparer.Ordinal) { ctx.SemanticWorld.Assembly.Name };
+        foreach (var asm in ctx.SemanticWorld.Assemblies)
+            closureAssemblyNames.Add(asm.Name);
+
         var pendingMethods = new Queue<ManagedMethodModel>();
         foreach (var type in ctx.SemanticWorld.Types.Where(candidate =>
-                     string.Equals(candidate.AssemblyName, ctx.SemanticWorld.Assembly.Name, StringComparison.Ordinal)))
+                     closureAssemblyNames.Contains(candidate.AssemblyName)))
         {
             ctx.ReachableTypeIds.Add(type.SubjectId);
         }
 
         foreach (var field in ctx.SemanticWorld.Fields.Where(candidate =>
-                     string.Equals(candidate.AssemblyName, ctx.SemanticWorld.Assembly.Name, StringComparison.Ordinal)))
+                     closureAssemblyNames.Contains(candidate.AssemblyName)))
         {
             ctx.ReachableFieldIds.Add(field.SubjectId);
             ctx.ReachableTypeIds.Add(field.DeclaringTypeSubjectId);
         }
 
         foreach (var property in ctx.SemanticWorld.Properties.Where(candidate =>
-                     string.Equals(candidate.AssemblyName, ctx.SemanticWorld.Assembly.Name, StringComparison.Ordinal)))
+                     closureAssemblyNames.Contains(candidate.AssemblyName)))
         {
             ctx.ReachablePropertyIds.Add(property.SubjectId);
             ctx.ReachableTypeIds.Add(property.DeclaringTypeSubjectId);
         }
 
         foreach (var method in ctx.SemanticWorld.Methods.Where(candidate =>
-                     string.Equals(candidate.AssemblyName, ctx.SemanticWorld.Assembly.Name, StringComparison.Ordinal) &&
+                     closureAssemblyNames.Contains(candidate.AssemblyName) &&
                      !ctx.ReachableMethodIds.Contains(candidate.SubjectId)))
         {
             pendingMethods.Enqueue(method);
