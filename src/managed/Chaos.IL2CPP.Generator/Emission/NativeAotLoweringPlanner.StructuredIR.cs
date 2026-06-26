@@ -65,6 +65,10 @@ public sealed partial class NativeAotLoweringPlanner
         public int MaxWideSlots => _peakWideDepth;
         public int MaxFloat32Slots => _peakFloat32Depth;
         public int MaxInt64Slots => _peakInt64Depth;
+        /// <summary>Total number of slot entries ever allocated (including
+        /// those freed by Discard).  May exceed MaxIntSlots when slots are
+        /// allocated across basic blocks in pc-dispatch mode.</summary>
+        public int ObservedSlotCount => _slotInfo.Count;
 
         public Dictionary<int, SlotType>? FloatLocalSlots { get; set; }
 

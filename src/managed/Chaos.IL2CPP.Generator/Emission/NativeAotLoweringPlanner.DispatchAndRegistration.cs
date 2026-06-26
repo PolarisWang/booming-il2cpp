@@ -407,17 +407,15 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private bool IsSubjectMethod(string subjectId)
     {
-        // 0. Benchmark_ wrappers:
-        //    - Instance methods (isStatic=false) call on SubjectInstanceFactory.Create<T>()
-        //      or default(T)! which is null for non-constructible types, causing
-        //      STATUS_ACCESS_VIOLATION in AOT native dispatch — exclude these.
-        //    - Static methods are safe to AOT compile — include them (no null this risk).
+        // 0. Always exclude Benchmark_ wrappers — they call instance methods on
+        //    null `this` without NullReferenceException handling, causing native
+        //    crashes (STATUS_ACCESS_VIOLATION or STATUS_STACK_BUFFER_OVERRUN) in
+        //    AOT dispatch.  The corresponding [Fact] variant wraps the same call
+        //    in Assert.Throws<NullReferenceException> and is the correct
+        //    correctness-verification entry point.
         if (subjectId.Contains("::Benchmark_", StringComparison.Ordinal))
-        {
-            if (_methodsBySubjectId.TryGetValue(subjectId, out var bm))
-                return bm.IsStatic;
             return false;
-        }
+
 
         // 1. When --subject-methods is provided, ONLY exact matches are valid.
         //    The CombinedSubjects prefix fallback below would also capture SDK

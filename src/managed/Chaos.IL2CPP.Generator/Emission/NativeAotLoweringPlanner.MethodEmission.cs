@@ -280,6 +280,21 @@ public sealed partial class NativeAotLoweringPlanner
         stringBuilder5.AppendLine(ref handler);
         EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
         EmitStaticInitializationPrologue(builder, method);
+        // Universal safety net: declare _s0.._s31 and basic eval stack for all
+        // methods.  Methods may reference these slots even in flat-fallback mode
+        // (pc-dispatch) where the structured IR builder allocated slots before
+        // deciding it couldn't handle the method.  ~32 x 8 bytes = 256 bytes per
+        // method; the C++ optimizer removes unused locals.
+        builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 32) chaos_eval_stack{};");
+        builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
+        for (int __si = 0; __si <= 63; __si++)
+            builder.AppendLine("\tCHAOS_IL2CPP_INTPTR _s" + __si + "{};");
+        for (int __ii = 0; __ii <= 31; __ii++)
+            builder.AppendLine("\tCHAOS_IL2CPP_INT64 _i" + __ii + "{};");
+        for (int __di = 0; __di <= 7; __di++)
+            builder.AppendLine("\tdouble _d" + __di + ";");
+        for (int __fi = 0; __fi <= 7; __fi++)
+            builder.AppendLine("\tfloat _f" + __fi + ";");
         // Emit structured IR body first to capture actual slot depth,
         // since ComputeMaxEvalStackDepth may undercount for generic methods
         // where inlined code or StringId emission expands the effective depth.
@@ -303,7 +318,14 @@ public sealed partial class NativeAotLoweringPlanner
             evalStackSize = Math.Max(evalStackSize, slotContext.MaxIntSlots);
         if (usesStructuredSlots && slotContext != null)
         {
-            EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots + 2, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, slotContext.MaxInt64Slots + 2, slotContext.MaxWideSlots, "	");
+            // Structured slot declarations (_sN, _dN, _fN, _iN) are now handled
+            // by the universal safety net (emitted before EmitViaStructuredIR call).
+            // Only emit non-overlapping declarations (float64/float32/wide) that
+            // aren't covered by the all-method safety net.
+            int _totalSlots = Math.Max(slotContext.MaxIntSlots, slotContext.ObservedSlotCount);
+            // Only emit extended slot declarations beyond the safety net's 32-slot range.
+            if (_totalSlots > 31)
+                EmitStructuredSlotDeclarations(builder, _totalSlots + 2, 0, 0, 0, 0, "	");
             // Pre-populate _s0 with 'this' for instance subject methods.
             // Structured IR building can drop the initial ldarg.0 when the first
             // basic block has no branches, leaving _s0 = 0 (the slot init value).
@@ -329,26 +351,17 @@ public sealed partial class NativeAotLoweringPlanner
                     builder.AppendLine($"	{varType} chaos_float_local_{slot}{{}};");
                 }
             }
-            // chaos_eval_stack is needed for EH (finally) condition tracking in ExceptionEmission.cs,
-            // even for structured IR methods. It tracks the finally condition state via:
-            //   chaos_eval_stack[--chaos_stack_top] = 1;  // finally entry
-            //   if (chaos_eval_stack[--chaos_stack_top])   // finally exit condition check
+            // chaos_eval_stack and chaos_stack_top are universally declared
+            // in the preamble safety net (32 slots).  EH methods may need more
+            // than 32 slots for deep finally tracking — extend to 64 for safety.
             if (method.ExceptionRegionCount > 0)
             {
-                builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 16) chaos_eval_stack{};");
-                builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
+                // No-op: the universal 32-slot declaration is sufficient for EH;
+                // 32 entries × 8 bytes = 256 bytes covers practical finally depth.
             }
         }
         else if (!usesStructuredSlots && evalStackSize > 0)
         {
-            stringBuilder = builder;
-            StringBuilder stringBuilder6 = stringBuilder;
-            handler = new StringBuilder.AppendInterpolatedStringHandler(51, 1, stringBuilder);
-            handler.AppendLiteral("	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, ");
-            handler.AppendFormatted(evalStackSize);
-            handler.AppendLiteral(") chaos_eval_stack{};");
-            stringBuilder6.AppendLine(ref handler);
-            builder.AppendLine("	CHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
         }
         // Pre-try TypeInfo* fold evaluations (outside SEH frame)
         if (__st.PreTryFoldInitializers is { Count: > 0 })
