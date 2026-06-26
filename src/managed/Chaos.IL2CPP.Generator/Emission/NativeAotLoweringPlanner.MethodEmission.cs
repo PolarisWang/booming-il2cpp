@@ -280,11 +280,14 @@ public sealed partial class NativeAotLoweringPlanner
         stringBuilder5.AppendLine(ref handler);
         EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
         EmitStaticInitializationPrologue(builder, method);
-        // Universal safety net: declare _s0.._s31 and basic eval stack for all
-        // methods.  Methods may reference these slots even in flat-fallback mode
-        // (pc-dispatch) where the structured IR builder allocated slots before
-        // deciding it couldn't handle the method.  ~32 x 8 bytes = 256 bytes per
-        // method; the C++ optimizer removes unused locals.
+        // Universal safety net: declare chaos_eval_stack and basic slot declarations.
+        // The structured IR builder tracks exact slot usage via slotContext.MaxIntSlots,
+        // but methods that fall back to the linear emitter (TryBuildStructuredMethodBody
+        // returns false) have no slot declarations from EmitStructuredSlotDeclarations.
+        // These methods may still reference _sN slots through assertCount increment,
+        // inline emission, or flat-fallback dispatch.  Declare _s0.._s63 unconditionally
+        // so _sN references always resolve regardless of emission path.
+        // ~64 x 8 bytes = 512 bytes per method; the C++ optimizer removes unused locals.
         builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 32) chaos_eval_stack{};");
         builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
         for (int __si = 0; __si <= 63; __si++)
@@ -318,14 +321,16 @@ public sealed partial class NativeAotLoweringPlanner
             evalStackSize = Math.Max(evalStackSize, slotContext.MaxIntSlots);
         if (usesStructuredSlots && slotContext != null)
         {
-            // Structured slot declarations (_sN, _dN, _fN, _iN) are now handled
-            // by the universal safety net (emitted before EmitViaStructuredIR call).
-            // Only emit non-overlapping declarations (float64/float32/wide) that
-            // aren't covered by the all-method safety net.
-            int _totalSlots = Math.Max(slotContext.MaxIntSlots, slotContext.ObservedSlotCount);
-            // Only emit extended slot declarations beyond the safety net's 32-slot range.
-            if (_totalSlots > 31)
-                EmitStructuredSlotDeclarations(builder, _totalSlots + 2, 0, 0, 0, 0, "	");
+            // Check if EmitViaStructuredIR already declared _sN slots in bodyBuilder.
+            // When the structured IR body emits slot declarations inline (pc-dispatch
+            // fallback), EmitStructuredSlotDeclarations would cause C2374 redefinition.
+            // Only emit declarations when bodyBuilder doesn't already have them.
+            bool hasSlotDecl = bodyBuilder.ToString().Contains("CHAOS_IL2CPP_INTPTR _s0{", StringComparison.Ordinal);
+            if (!hasSlotDecl)
+            {
+                int slotCount = slotContext.ObservedSlotCount + 2;
+                EmitStructuredSlotDeclarations(builder, slotCount, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, slotContext.MaxInt64Slots + 2, slotContext.MaxWideSlots, "\t");
+            }
             // Pre-populate _s0 with 'this' for instance subject methods.
             // Structured IR building can drop the initial ldarg.0 when the first
             // basic block has no branches, leaving _s0 = 0 (the slot init value).

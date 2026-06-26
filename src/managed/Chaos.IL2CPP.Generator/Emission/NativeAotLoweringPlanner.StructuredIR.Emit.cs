@@ -1693,9 +1693,23 @@ public sealed partial class NativeAotLoweringPlanner
         if (instructions.Count == 0)
             return null;
 
-        body ??= (TryBuildStructuredMethodBody(method, instructions, offsets, out var b, out _) ? b : null);
+        // When body is provided from outside (EmitOneMethod pre-builds it),
+        // we still need to rebuild to get the correct maxDepth for slot
+        // declarations.  The body tree from the first build may have a
+        // different slot depth than what slotContext tracks during emission
+        // (e.g. when inlined code or StringId emission expands effective depth).
+        // Use the external body for emission, but take maxDepth from the
+        // re-run to ensure EmitStructuredSlotDeclarations covers all _sN.
         if (body is null)
-            return null;
+        {
+            if (!TryBuildStructuredMethodBody(method, instructions, offsets, out body, out _))
+                return null;
+        }
+        else
+        {
+            // Rebuild just for maxDepth — body from caller is authoritative
+            TryBuildStructuredMethodBody(method, instructions, offsets, out _, out _);
+        }
 
         TotalMethodCount++;
 
