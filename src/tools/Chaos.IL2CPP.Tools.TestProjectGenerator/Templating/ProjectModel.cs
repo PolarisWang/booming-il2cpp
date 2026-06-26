@@ -17,6 +17,7 @@ internal sealed class ProjectModelBuilder
         int patchDataSize,
         string patchDataHostClass,
         string projectName,
+        string chunkSlug,
         string nativeDir,
         DateTime? generatedAt = null,
         string? projectRoot = null,
@@ -36,6 +37,7 @@ internal sealed class ProjectModelBuilder
         model["config_tier"] = configTier;
         model["is_windows"] = isWindows;
         model["project_name"] = projectName;
+        model["chunk_slug"] = chunkSlug;
         model["has_patch_data"] = hasPatchData;
         model["patch_data_size"] = patchDataSize;
         model["patch_data_host_class"] = patchDataHostClass;

@@ -75,7 +75,6 @@ set(CHAOS_PROJECT_ROOT "../../../../../..")
 set(CHAOS_CODEGEN_DIR "codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
-find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 
 # ── Source files ──
 # Prefer flat subjects/*.cpp (copied locally by TPG for MAX_PATH compatibility).

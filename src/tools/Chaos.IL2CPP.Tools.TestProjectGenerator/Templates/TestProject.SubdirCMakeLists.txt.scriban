@@ -51,7 +51,7 @@ set(CHAOS_CHUNK_SOURCES
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
-set(CHAOS_CHUNK_TARGET "chaos_entry_global-ns")
+set(CHAOS_CHUNK_TARGET "chaos_entry_{{ chunk_slug }}")
 
 # ── Include directories ──
 set(CHAOS_ENTRY_INCLUDES
@@ -68,7 +68,7 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
     "${CHAOS_PROJECT_ROOT}/cmake"
-
+{{ subject_cmake_include_dirs_code }}
     "${CMAKE_CURRENT_SOURCE_DIR}"
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
     "${CHAOS_CODEGEN_DIR}/generated"
@@ -86,7 +86,9 @@ target_link_libraries(${CHAOS_CHUNK_TARGET} PRIVATE chaos::runtime chaos_common_
 )
 if(MSVC)
   target_link_libraries(${CHAOS_CHUNK_TARGET} PRIVATE bcrypt)
+{{ if is_jit }}
   target_link_options(${CHAOS_CHUNK_TARGET} PRIVATE /STACK:8388608)
+{{ end }}
 endif()
 if(NOT MSVC)
   find_package(OpenSSL REQUIRED)
