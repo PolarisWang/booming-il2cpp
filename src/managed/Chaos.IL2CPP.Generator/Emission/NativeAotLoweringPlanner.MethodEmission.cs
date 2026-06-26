@@ -319,27 +319,29 @@ public sealed partial class NativeAotLoweringPlanner
         // generic methods where StringId emission or inlined code expands depth).
         if (!usesStructuredSlots && slotContext != null)
             evalStackSize = Math.Max(evalStackSize, slotContext.MaxIntSlots);
+
+        // Strip inline slot declarations from bodyBuilder to prevent C2374
+        // redefinition with the universal safety net (_s0.._s63, _i0.._i31).
+        // bodyBuilder may contain these from EmitViaStructuredIR (pc-dispatch
+        // fallback) regardless of usesStructuredSlots.
+        var cleanBody = new System.Text.StringBuilder(bodyBuilder.Length);
+        foreach (ReadOnlySpan<char> line in bodyBuilder.ToString().AsSpan().EnumerateLines())
+        {
+            var trimmed = line.TrimStart();
+            if (!trimmed.StartsWith("CHAOS_IL2CPP_INTPTR _s", StringComparison.Ordinal) &&
+                !trimmed.StartsWith("CHAOS_IL2CPP_INT64 _i", StringComparison.Ordinal) &&
+                !trimmed.StartsWith("double _d", StringComparison.Ordinal) &&
+                !trimmed.StartsWith("float _f", StringComparison.Ordinal))
+            {
+                cleanBody.Append(line);
+                cleanBody.Append('\n');
+            }
+        }
+        bodyBuilder = cleanBody;
+
         if (usesStructuredSlots && slotContext != null)
         {
-            // EmitStructuredSlotDeclarations is the single source of truth for
-            // _sN/_iN/_dN/_fN slot declarations.  Strip any inline declarations
-            // that bodyBuilder may have from EmitViaStructuredIR (pc-dispatch
-            // fallback writes them inline) to prevent C2374 redefinition.
-            var cleanBody = new System.Text.StringBuilder(bodyBuilder.Length);
-            foreach (ReadOnlySpan<char> line in bodyBuilder.ToString().AsSpan().EnumerateLines())
-            {
-                var trimmed = line.TrimStart();
-                if (!trimmed.StartsWith("CHAOS_IL2CPP_INTPTR _s", StringComparison.Ordinal) &&
-                    !trimmed.StartsWith("CHAOS_IL2CPP_INT64 _i", StringComparison.Ordinal) &&
-                    !trimmed.StartsWith("double _d", StringComparison.Ordinal) &&
-                    !trimmed.StartsWith("float _f", StringComparison.Ordinal))
-                {
-                    cleanBody.Append(line);
-                    cleanBody.Append('\n');
-                }
-            }
-
-            int slotCount = slotContext.ObservedSlotCount + 2;
+            EmitStructuredSlotDeclarations(builder, 0, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, 0, slotContext.MaxWideSlots, "\t");
             // Pre-populate _s0 with 'this' for instance subject methods.
             // Structured IR building can drop the initial ldarg.0 when the first
             // basic block has no branches, leaving _s0 = 0 (the slot init value).

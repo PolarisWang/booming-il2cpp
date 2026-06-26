@@ -1,12 +1,12 @@
 {
   "assemblyName": "System.Runtime.Intrinsics",
-  "timestamp": "2026-06-18T10:05:34",
-  "totalChunks": 1,
+  "timestamp": "2026-06-26T05:47:49",
+  "totalChunks": 2,
   "totalBenchmarkedMethods": 0,
   "aggregatePerformance": {},
   "chunkSummaries": [
     {
-      "slug": "runtime-intrinsics",
+      "slug": "global-ns",
       "fact": {
         "status": "no_results"
       },
@@ -18,6 +18,26 @@
       },
       "build": {
         "status": "not_run"
+      }
+    },
+    {
+      "slug": "runtime-intrinsics",
+      "fact": {
+        "passed": 0,
+        "total": 0,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 0,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "passed"
       }
     }
   ]

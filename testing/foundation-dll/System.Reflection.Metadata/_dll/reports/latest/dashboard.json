@@ -1,25 +1,25 @@
 {
   "assemblyName": "System.Reflection.Metadata",
-  "timestamp": "2026-06-18T10:05:34",
+  "timestamp": "2026-06-26T05:47:49",
   "summary": {
     "chunks": 3,
     "chunksVerified": 3,
     "chunksWithValueWarnings": 0,
-    "chunksWithMetaMismatch": 3,
-    "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 475,
+    "chunksWithMetaMismatch": 1,
+    "factPassRate": 98.9,
+    "totalBenchmarkedMethods": 456,
     "aggregatePerformance": {
-      "meanDurationMs": 4.409271299217974,
-      "meanOpsPerSecond": 243761897.87460852,
-      "aggregateMeanCv": 0.32377039246718536,
-      "totalOutliers": 286
+      "meanDurationMs": 2.1814771030741427,
+      "meanOpsPerSecond": 256408547.25686288,
+      "aggregateMeanCv": 0.15688761460116243,
+      "totalOutliers": 323
     },
     "hotupdate": {
       "chunksWithPatchData": 3,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 678,
+      "totalPassed": 657,
       "totalFailed": 0,
       "skipBreakdown": {}
     },

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-18T10:02:29.7816995Z",
+  "generatedAt": "2026-06-26T05:33:50.9694104Z",
   "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
   "entryExecutable": "entry",
   "subjects": [
@@ -1299,11 +1299,308 @@
       "typeName": "System.Diagnostics.TagList",
       "methodName": "IndexOf",
       "isStatic": true
+    },
+    {
+      "index": 144,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Dispose:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 145,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::EnumerateEvents:System.Diagnostics.Activity\u002BEnumerator\u003CSystem.Diagnostics.ActivityEvent\u003E()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "EnumerateEvents",
+      "isStatic": true
+    },
+    {
+      "index": 146,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::EnumerateLinks:System.Diagnostics.Activity\u002BEnumerator\u003CSystem.Diagnostics.ActivityLink\u003E()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "EnumerateLinks",
+      "isStatic": true
+    },
+    {
+      "index": 147,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::EnumerateTagObjects:System.Diagnostics.Activity\u002BEnumerator\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "EnumerateTagObjects",
+      "isStatic": true
+    },
+    {
+      "index": 148,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Start:System.Diagnostics.Activity()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.Activity",
+      "methodName": "Start",
+      "isStatic": true
+    },
+    {
+      "index": 149,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityEvent::EnumerateTagObjects:System.Diagnostics.Activity\u002BEnumerator\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityEvent",
+      "methodName": "EnumerateTagObjects",
+      "isStatic": true
+    },
+    {
+      "index": 150,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityLink::EnumerateTagObjects:System.Diagnostics.Activity\u002BEnumerator\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityLink",
+      "methodName": "EnumerateTagObjects",
+      "isStatic": true
+    },
+    {
+      "index": 151,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CopyTo:System.Void(System.Span\u003CSystem.Byte\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySpanId",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 152,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateFromBytes:System.Diagnostics.ActivitySpanId(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySpanId",
+      "methodName": "CreateFromBytes",
+      "isStatic": true
+    },
+    {
+      "index": 153,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateFromString:System.Diagnostics.ActivitySpanId(System.ReadOnlySpan\u003CSystem.Char\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySpanId",
+      "methodName": "CreateFromString",
+      "isStatic": true
+    },
+    {
+      "index": 154,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateFromUtf8String:System.Diagnostics.ActivitySpanId(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivitySpanId",
+      "methodName": "CreateFromUtf8String",
+      "isStatic": true
+    },
+    {
+      "index": 155,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection\u002BEnumerator::Dispose:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection\u002BEnumerator",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 156,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 157,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u00602[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][],System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 158,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::GetEnumerator:System.Diagnostics.ActivityTagsCollection\u002BEnumerator()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 159,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CopyTo:System.Void(System.Span\u003CSystem.Byte\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTraceId",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 160,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateFromBytes:System.Diagnostics.ActivityTraceId(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTraceId",
+      "methodName": "CreateFromBytes",
+      "isStatic": true
+    },
+    {
+      "index": 161,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateFromString:System.Diagnostics.ActivityTraceId(System.ReadOnlySpan\u003CSystem.Char\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTraceId",
+      "methodName": "CreateFromString",
+      "isStatic": true
+    },
+    {
+      "index": 162,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateFromUtf8String:System.Diagnostics.ActivityTraceId(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ActivityTraceId",
+      "methodName": "CreateFromUtf8String",
+      "isStatic": true
+    },
+    {
+      "index": 163,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator\u002BPropagatorGetterCallback::BeginInvoke:System.IAsyncResult(System.Object,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator\u002BPropagatorGetterCallback",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 164,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator\u002BPropagatorGetterCallback::EndInvoke:System.Void(System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.IAsyncResult)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator\u002BPropagatorGetterCallback",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 165,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator\u002BPropagatorGetterCallback::Invoke:System.Void(System.Object,System.String,System.String,System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator\u002BPropagatorGetterCallback",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 166,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator\u002BPropagatorSetterCallback::BeginInvoke:System.IAsyncResult(System.Object,System.String,System.String,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator\u002BPropagatorSetterCallback",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 167,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator\u002BPropagatorSetterCallback::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator\u002BPropagatorSetterCallback",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 168,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator\u002BPropagatorSetterCallback::Invoke:System.Void(System.Object,System.String,System.String)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.DistributedContextPropagator\u002BPropagatorSetterCallback",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 169,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ExceptionRecorder::BeginInvoke:System.IAsyncResult(System.Diagnostics.Activity,System.Exception,System.Diagnostics.TagList,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ExceptionRecorder",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 170,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ExceptionRecorder::EndInvoke:System.Void(System.Diagnostics.TagList,System.IAsyncResult)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ExceptionRecorder",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 171,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ExceptionRecorder::Invoke:System.Void(System.Diagnostics.Activity,System.Exception,System.Diagnostics.TagList)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.ExceptionRecorder",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 172,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList\u002BEnumerator::Dispose:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList\u002BEnumerator",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 173,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 174,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList\u002BEnumerator::Reset:System.Void()",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList\u002BEnumerator",
+      "methodName": "Reset",
+      "isStatic": true
+    },
+    {
+      "index": 175,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u00602[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][],System.Int32)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 176,
+      "kind": "fact",
+      "subjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Span\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E)",
+      "assemblyName": "System.Diagnostics.DiagnosticSource",
+      "typeName": "System.Diagnostics.TagList",
+      "methodName": "CopyTo",
+      "isStatic": true
     }
   ],
   "summary": {
-    "totalSubjects": 144,
-    "factCount": 144,
+    "totalSubjects": 177,
+    "factCount": 177,
     "benchmarkCount": 0,
     "hotUpdateCount": 0
   }

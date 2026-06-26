@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Runtime.Serialization.Formatters",
-  "timestamp": "2026-06-18T10:05:34",
+  "timestamp": "2026-06-26T05:47:49",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
@@ -9,10 +9,10 @@
     "factPassRate": 100.0,
     "totalBenchmarkedMethods": 74,
     "aggregatePerformance": {
-      "meanDurationMs": 0.22845405405405406,
-      "meanOpsPerSecond": 257561418.10405406,
-      "aggregateMeanCv": 0.41600854054054054,
-      "totalOutliers": 42
+      "meanDurationMs": 0.16052162162162162,
+      "meanOpsPerSecond": 318932631.7891892,
+      "aggregateMeanCv": 0.11616077027027027,
+      "totalOutliers": 122
     },
     "hotupdate": {
       "chunksWithPatchData": 1,

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-18T10:01:08.9648762Z",
+  "generatedAt": "2026-06-26T05:32:38.8791122Z",
   "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
   "entryExecutable": "entry",
   "subjects": [
@@ -3180,11 +3180,29 @@
       "typeName": "System.Data.SqlTypes.SqlXml",
       "methodName": "GetXsdType",
       "isStatic": true
+    },
+    {
+      "index": 353,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Abs:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.SqlTypes.SqlDecimal",
+      "methodName": "Abs",
+      "isStatic": true
+    },
+    {
+      "index": 354,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::WriteTdsValue:System.Int32(System.Span\u003CSystem.UInt32\u003E)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.SqlTypes.SqlDecimal",
+      "methodName": "WriteTdsValue",
+      "isStatic": true
     }
   ],
   "summary": {
-    "totalSubjects": 353,
-    "factCount": 353,
+    "totalSubjects": 355,
+    "factCount": 355,
     "benchmarkCount": 0,
     "hotUpdateCount": 0
   }

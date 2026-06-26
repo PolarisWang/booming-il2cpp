@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Net.ServerSentEvents",
-  "timestamp": "2026-06-18T10:05:33",
+  "timestamp": "2026-06-26T05:47:49",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
@@ -9,10 +9,9 @@
     "factPassRate": 100.0,
     "totalBenchmarkedMethods": 4,
     "aggregatePerformance": {
-      "meanDurationMs": 9.43115,
-      "meanOpsPerSecond": 133985245.6,
-      "aggregateMeanCv": 0.260265,
-      "totalOutliers": 6
+      "meanDurationMs": 4.741825,
+      "meanOpsPerSecond": 180099878.0825,
+      "aggregateMeanCv": 0.0212925
     },
     "hotupdate": {
       "chunksWithPatchData": 1,
@@ -24,7 +23,7 @@
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 6,
+      "methodsAnalyzed": 5,
       "methodsWithNet8": 2,
       "chaosAotVsNet8": {},
       "chaosJitVsNet8": {},

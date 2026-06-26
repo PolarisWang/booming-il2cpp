@@ -1,18 +1,18 @@
 {
   "assemblyName": "System.Data.Common",
-  "timestamp": "2026-06-18T10:05:33",
+  "timestamp": "2026-06-26T05:47:49",
   "summary": {
     "chunks": 4,
-    "chunksVerified": 3,
+    "chunksVerified": 4,
     "chunksWithValueWarnings": 0,
-    "chunksWithMetaMismatch": 3,
-    "factPassRate": 100.0,
+    "chunksWithMetaMismatch": 0,
+    "factPassRate": 98.0,
     "totalBenchmarkedMethods": 1180,
     "aggregatePerformance": {
-      "meanDurationMs": 1.3496568613572477,
-      "meanOpsPerSecond": 279773796.63105166,
-      "aggregateMeanCv": 0.24243460756278826,
-      "totalOutliers": 1415
+      "meanDurationMs": 1.2432908510504403,
+      "meanOpsPerSecond": 308604483.2609533,
+      "aggregateMeanCv": 0.12515353893330067,
+      "totalOutliers": 380
     },
     "hotupdate": {
       "chunksWithPatchData": 4,
@@ -24,33 +24,33 @@
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 974,
-      "methodsWithNet8": 926,
+      "methodsAnalyzed": 919,
+      "methodsWithNet8": 911,
       "chaosAotVsNet8": {
-        "mean": -492.02,
-        "median": -492.02,
-        "min": -1027.1,
-        "max": 43.06,
-        "p25": -759.56,
-        "p75": -224.48
+        "mean": 60.94,
+        "median": 60.94,
+        "min": 48.8,
+        "max": 73.08,
+        "p25": 54.87,
+        "p75": 67.01
       },
       "chaosJitVsNet8": {
-        "mean": -527.38,
-        "median": -161.89,
-        "min": -1496.96,
-        "max": 76.7,
-        "p25": -829.42,
-        "p75": -42.59
+        "mean": 71.35,
+        "median": 71.35,
+        "min": 69.41,
+        "max": 73.3,
+        "p25": 70.38,
+        "p75": 72.33
       },
       "net10VsNet8": {
-        "mean": -5.72,
-        "median": -1.05,
-        "min": -39.34,
-        "max": 18.58,
-        "p25": -18.24,
-        "p75": 11.48
+        "mean": -9.21,
+        "median": -11.76,
+        "min": -14.53,
+        "max": 1.23,
+        "p25": -12.75,
+        "p75": -8.22
       },
-      "highValueMethods_betterThanNet8": 53.2
+      "highValueMethods_betterThanNet8": 36.4
     }
   }
 }

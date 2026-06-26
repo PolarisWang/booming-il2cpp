@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-18T09:57:52.0305462Z",
+  "generatedAt": "2026-06-26T05:44:57.7521166Z",
   "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
   "entryExecutable": "entry",
   "subjects": [
@@ -1875,11 +1875,362 @@
       "typeName": "System.Xml.Xsl.XslTransform",
       "methodName": "Load",
       "isStatic": true
+    },
+    {
+      "index": 208,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.XPath.XPathException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.XPath.XPathException",
+      "methodName": "GetObjectData",
+      "isStatic": true
+    },
+    {
+      "index": 209,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 210,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.Xml.XmlWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 211,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 212,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 213,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 214,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.XmlWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 215,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 216,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 217,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 218,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 219,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.XmlWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 220,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 221,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 222,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 223,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslCompiledTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 224,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.String,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 225,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.String,System.String,System.Xml.XmlResolver)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 226,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 227,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream,System.Xml.XmlResolver)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 228,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 229,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter,System.Xml.XmlResolver)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 230,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 231,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 232,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 233,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.Stream,System.Xml.XmlResolver)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 234,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 235,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter,System.Xml.XmlResolver)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 236,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 237,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 238,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Xml.XmlReader(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 239,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Xml.XmlReader(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlResolver)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 240,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Xml.XmlReader(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 241,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Xml.XmlReader(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlResolver)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XslTransform",
+      "methodName": "Transform",
+      "isStatic": true
+    },
+    {
+      "index": 242,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XsltCompileException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XsltCompileException",
+      "methodName": "GetObjectData",
+      "isStatic": true
+    },
+    {
+      "index": 243,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XsltException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XsltException",
+      "methodName": "GetObjectData",
+      "isStatic": true
+    },
+    {
+      "index": 244,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XsltMessageEncounteredEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Xsl.XsltMessageEncounteredEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XsltMessageEncounteredEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 245,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XsltMessageEncounteredEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XsltMessageEncounteredEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 246,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Xsl.XsltMessageEncounteredEventHandler::Invoke:System.Void(System.Object,System.Xml.Xsl.XsltMessageEncounteredEventArgs)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Xsl.XsltMessageEncounteredEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
     }
   ],
   "summary": {
-    "totalSubjects": 208,
-    "factCount": 208,
+    "totalSubjects": 247,
+    "factCount": 247,
     "benchmarkCount": 0,
     "hotUpdateCount": 0
   }

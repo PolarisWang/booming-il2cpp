@@ -1,18 +1,18 @@
 {
   "assemblyName": "System.Security.Claims",
-  "timestamp": "2026-06-18T10:05:34",
+  "timestamp": "2026-06-26T05:47:49",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
-    "chunksWithMetaMismatch": 1,
+    "chunksWithMetaMismatch": 0,
     "factPassRate": 100.0,
     "totalBenchmarkedMethods": 45,
     "aggregatePerformance": {
-      "meanDurationMs": 0.03036,
-      "meanOpsPerSecond": 329030254.12222224,
-      "aggregateMeanCv": 0.1651474,
-      "totalOutliers": 52
+      "meanDurationMs": 0.03102,
+      "meanOpsPerSecond": 325067389.722,
+      "aggregateMeanCv": 0.12535937777777778,
+      "totalOutliers": 94
     },
     "hotupdate": {
       "chunksWithPatchData": 1,
@@ -24,33 +24,33 @@
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 45,
-      "methodsWithNet8": 45,
+      "methodsAnalyzed": 28,
+      "methodsWithNet8": 28,
       "chaosAotVsNet8": {
-        "mean": -146.97,
-        "median": -146.97,
-        "min": -146.97,
-        "max": -146.97,
-        "p25": -146.97,
-        "p75": -146.97
+        "mean": 67.96,
+        "median": 67.96,
+        "min": 67.96,
+        "max": 67.96,
+        "p25": 67.96,
+        "p75": 67.96
       },
       "chaosJitVsNet8": {
-        "mean": -130.37,
-        "median": -130.37,
-        "min": -130.37,
-        "max": -130.37,
-        "p25": -130.37,
-        "p75": -130.37
+        "mean": 68.13,
+        "median": 68.13,
+        "min": 68.13,
+        "max": 68.13,
+        "p25": 68.13,
+        "p75": 68.13
       },
       "net10VsNet8": {
-        "mean": -11.84,
-        "median": -11.84,
-        "min": -11.84,
-        "max": -11.84,
-        "p25": -11.84,
-        "p75": -11.84
+        "mean": -9.03,
+        "median": -9.03,
+        "min": -9.03,
+        "max": -9.03,
+        "p25": -9.03,
+        "p75": -9.03
       },
-      "highValueMethods_betterThanNet8": 8.9
+      "highValueMethods_betterThanNet8": 100.0
     }
   }
 }

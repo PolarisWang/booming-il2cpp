@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-18T09:57:28.0068554Z",
+  "generatedAt": "2026-06-26T05:44:42.3458088Z",
   "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
   "entryExecutable": "entry",
   "subjects": [
@@ -1083,11 +1083,146 @@
       "typeName": "System.Xml.Schema.XmlSchemaValidator",
       "methodName": "GetExpectedAttributes",
       "isStatic": true
+    },
+    {
+      "index": 120,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.ValidationEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Schema.ValidationEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.ValidationEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 121,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.ValidationEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.ValidationEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 122,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.ValidationEventHandler::Invoke:System.Void(System.Object,System.Xml.Schema.ValidationEventArgs)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.ValidationEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 123,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::CopyTo:System.Void(System.Xml.Schema.XmlSchema[],System.Int32)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.XmlSchemaCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 124,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollectionEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.XmlSchemaCollectionEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 125,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.XmlSchemaException",
+      "methodName": "GetObjectData",
+      "isStatic": true
+    },
+    {
+      "index": 126,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaInferenceException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.XmlSchemaInferenceException",
+      "methodName": "GetObjectData",
+      "isStatic": true
+    },
+    {
+      "index": 127,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectCollection::CopyTo:System.Void(System.Xml.Schema.XmlSchemaObject[],System.Int32)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.XmlSchemaObjectCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 128,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.XmlSchemaObjectEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 129,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectEnumerator::Reset:System.Void()",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.XmlSchemaObjectEnumerator",
+      "methodName": "Reset",
+      "isStatic": true
+    },
+    {
+      "index": 130,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::CopyTo:System.Void(System.Xml.Schema.XmlSchema[],System.Int32)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.XmlSchemaSet",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 131,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidationException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.XmlSchemaValidationException",
+      "methodName": "GetObjectData",
+      "isStatic": true
+    },
+    {
+      "index": 132,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.XmlValueGetter::BeginInvoke:System.IAsyncResult(System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.XmlValueGetter",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 133,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.XmlValueGetter::EndInvoke:System.Object(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.XmlValueGetter",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 134,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Schema.XmlValueGetter::Invoke:System.Object()",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Schema.XmlValueGetter",
+      "methodName": "Invoke",
+      "isStatic": true
     }
   ],
   "summary": {
-    "totalSubjects": 120,
-    "factCount": 120,
+    "totalSubjects": 135,
+    "factCount": 135,
     "benchmarkCount": 0,
     "hotUpdateCount": 0
   }

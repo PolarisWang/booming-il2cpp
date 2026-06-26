@@ -70,11 +70,12 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "codegen")
-set(CHAOS_PROJECT_ROOT "../../../../../..")
-set(CHAOS_CODEGEN_DIR "codegen")
+set(CHAOS_SDK_DIR "${CMAKE_CURRENT_SOURCE_DIR}/codegen")
+set(CHAOS_PROJECT_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../..")
+set(CHAOS_CODEGEN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
+find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 
 # ── Source files ──
 # Prefer flat subjects/*.cpp (copied locally by TPG for MAX_PATH compatibility).

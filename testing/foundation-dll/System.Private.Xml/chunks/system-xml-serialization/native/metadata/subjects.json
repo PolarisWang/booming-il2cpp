@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-18T09:57:45.5045788Z",
+  "generatedAt": "2026-06-26T05:44:53.9294042Z",
   "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
   "entryExecutable": "entry",
   "subjects": [
@@ -1866,11 +1866,281 @@
       "typeName": "System.Xml.Serialization.XmlSerializerNamespaces",
       "methodName": "ToArray",
       "isStatic": true
+    },
+    {
+      "index": 207,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.UnreferencedObjectEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Serialization.UnreferencedObjectEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.UnreferencedObjectEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 208,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.UnreferencedObjectEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.UnreferencedObjectEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 209,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.UnreferencedObjectEventHandler::Invoke:System.Void(System.Object,System.Xml.Serialization.UnreferencedObjectEventArgs)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.UnreferencedObjectEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 210,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::CopyTo:System.Void(System.Xml.Serialization.XmlAnyElementAttribute[],System.Int32)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAnyElementAttributes",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 211,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::CopyTo:System.Void(System.Xml.Serialization.XmlArrayItemAttribute[],System.Int32)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlArrayItemAttributes",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 212,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Serialization.XmlAttributeEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAttributeEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 213,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAttributeEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 214,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeEventHandler::Invoke:System.Void(System.Object,System.Xml.Serialization.XmlAttributeEventArgs)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAttributeEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 215,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::CopyTo:System.Void(System.Xml.Serialization.XmlElementAttribute[],System.Int32)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementAttributes",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 216,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Serialization.XmlElementEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 217,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 218,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementEventHandler::Invoke:System.Void(System.Object,System.Xml.Serialization.XmlElementEventArgs)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 219,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlNodeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Serialization.XmlNodeEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlNodeEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 220,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlNodeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlNodeEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 221,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlNodeEventHandler::Invoke:System.Void(System.Object,System.Xml.Serialization.XmlNodeEventArgs)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlNodeEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 222,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaEnumerator::Dispose:System.Void()",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaEnumerator",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 223,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 224,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::CopyTo:System.Void(System.Xml.Schema.XmlSchema[],System.Int32)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 225,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationCollectionFixupCallback::BeginInvoke:System.IAsyncResult(System.Object,System.Object,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationCollectionFixupCallback",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 226,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationCollectionFixupCallback::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationCollectionFixupCallback",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 227,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationCollectionFixupCallback::Invoke:System.Void(System.Object,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationCollectionFixupCallback",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 228,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationFixupCallback::BeginInvoke:System.IAsyncResult(System.Object,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationFixupCallback",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 229,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationFixupCallback::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationFixupCallback",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 230,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationFixupCallback::Invoke:System.Void(System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationFixupCallback",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 231,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationReadCallback::BeginInvoke:System.IAsyncResult(System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationReadCallback",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 232,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationReadCallback::EndInvoke:System.Object(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationReadCallback",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 233,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationReadCallback::Invoke:System.Object()",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationReadCallback",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 234,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationWriteCallback::BeginInvoke:System.IAsyncResult(System.Object,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationWriteCallback",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 235,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationWriteCallback::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationWriteCallback",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 236,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationWriteCallback::Invoke:System.Void(System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationWriteCallback",
+      "methodName": "Invoke",
+      "isStatic": true
     }
   ],
   "summary": {
-    "totalSubjects": 207,
-    "factCount": 207,
+    "totalSubjects": 237,
+    "factCount": 237,
     "benchmarkCount": 0,
     "hotUpdateCount": 0
   }

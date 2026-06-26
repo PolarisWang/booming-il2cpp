@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-18T09:58:11.7939937Z",
+  "generatedAt": "2026-06-26T05:45:09.0423558Z",
   "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
   "entryExecutable": "entry",
   "subjects": [
@@ -3675,11 +3675,686 @@
       "typeName": "System.Reflection.Metadata.TypeSpecification",
       "methodName": "GetCustomAttributes",
       "isStatic": true
+    },
+    {
+      "index": 408,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyDefinition::GetAssemblyNameInfo:System.Reflection.Metadata.AssemblyNameInfo()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.AssemblyDefinition",
+      "methodName": "GetAssemblyNameInfo",
+      "isStatic": true
+    },
+    {
+      "index": 409,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyFileHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.AssemblyFileHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 410,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyFileHandleCollection::GetEnumerator:System.Reflection.Metadata.AssemblyFileHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.AssemblyFileHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 411,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyNameInfo::Parse:System.Reflection.Metadata.AssemblyNameInfo(System.ReadOnlySpan\u003CSystem.Char\u003E)",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.AssemblyNameInfo",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 412,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyNameInfo::TryParse:System.Boolean(System.ReadOnlySpan\u003CSystem.Char\u003E,System.Reflection.Metadata.AssemblyNameInfo)",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.AssemblyNameInfo",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 413,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReference::GetAssemblyNameInfo:System.Reflection.Metadata.AssemblyNameInfo()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.AssemblyReference",
+      "methodName": "GetAssemblyNameInfo",
+      "isStatic": true
+    },
+    {
+      "index": 414,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReferenceHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.AssemblyReferenceHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 415,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReferenceHandleCollection::GetEnumerator:System.Reflection.Metadata.AssemblyReferenceHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.AssemblyReferenceHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 416,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder\u002BBlobs::GetEnumerator:System.Reflection.Metadata.BlobBuilder\u002BBlobs()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.BlobBuilder\u002BBlobs",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 417,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder\u002BBlobs::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.BlobBuilder\u002BBlobs",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 418,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder\u002BBlobs::Reset:System.Void()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.BlobBuilder\u002BBlobs",
+      "methodName": "Reset",
+      "isStatic": true
+    },
+    {
+      "index": 419,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::GetBlobs:System.Reflection.Metadata.BlobBuilder\u002BBlobs()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.BlobBuilder",
+      "methodName": "GetBlobs",
+      "isStatic": true
+    },
+    {
+      "index": 420,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteInt16:System.Void(System.Int16)",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.BlobBuilder",
+      "methodName": "WriteInt16",
+      "isStatic": true
+    },
+    {
+      "index": 421,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::Reset:System.Void()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.BlobReader",
+      "methodName": "Reset",
+      "isStatic": true
+    },
+    {
+      "index": 422,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteInt16:System.Void(System.Int16)",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.BlobWriter",
+      "methodName": "WriteInt16",
+      "isStatic": true
+    },
+    {
+      "index": 423,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomAttributeHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.CustomAttributeHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 424,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomAttributeHandleCollection::GetEnumerator:System.Reflection.Metadata.CustomAttributeHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.CustomAttributeHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 425,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomDebugInformationHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.CustomDebugInformationHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 426,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomDebugInformationHandleCollection::GetEnumerator:System.Reflection.Metadata.CustomDebugInformationHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.CustomDebugInformationHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 427,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 428,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection::GetEnumerator:System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 429,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DocumentHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.DocumentHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 430,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DocumentHandleCollection::GetEnumerator:System.Reflection.Metadata.DocumentHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.DocumentHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 431,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinition::GetDeclaringType:System.Reflection.Metadata.TypeDefinitionHandle()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.EventDefinition",
+      "methodName": "GetDeclaringType",
+      "isStatic": true
+    },
+    {
+      "index": 432,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinitionHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.EventDefinitionHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 433,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.EventDefinitionHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.EventDefinitionHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 434,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ExportedTypeHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.ExportedTypeHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 435,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ExportedTypeHandleCollection::GetEnumerator:System.Reflection.Metadata.ExportedTypeHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.ExportedTypeHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 436,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinitionHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.FieldDefinitionHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 437,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.FieldDefinitionHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.FieldDefinitionHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 438,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterConstraintHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.GenericParameterConstraintHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 439,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterConstraintHandleCollection::GetEnumerator:System.Reflection.Metadata.GenericParameterConstraintHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.GenericParameterConstraintHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 440,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.GenericParameterHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 441,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterHandleCollection::GetEnumerator:System.Reflection.Metadata.GenericParameterHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.GenericParameterHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 442,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.ImportDefinitionCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 443,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection\u002BEnumerator::Reset:System.Void()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.ImportDefinitionCollection\u002BEnumerator",
+      "methodName": "Reset",
+      "isStatic": true
+    },
+    {
+      "index": 444,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection::GetEnumerator:System.Reflection.Metadata.ImportDefinitionCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.ImportDefinitionCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 445,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportScopeCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.ImportScopeCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 446,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportScopeCollection::GetEnumerator:System.Reflection.Metadata.ImportScopeCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.ImportScopeCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 447,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.InterfaceImplementationHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.InterfaceImplementationHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 448,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.InterfaceImplementationHandleCollection::GetEnumerator:System.Reflection.Metadata.InterfaceImplementationHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.InterfaceImplementationHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 449,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalConstantHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.LocalConstantHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 450,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalConstantHandleCollection::GetEnumerator:System.Reflection.Metadata.LocalConstantHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.LocalConstantHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 451,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScope::GetChildren:System.Reflection.Metadata.LocalScopeHandleCollection\u002BChildrenEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.LocalScope",
+      "methodName": "GetChildren",
+      "isStatic": true
+    },
+    {
+      "index": 452,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection\u002BChildrenEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.LocalScopeHandleCollection\u002BChildrenEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 453,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.LocalScopeHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 454,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection::GetEnumerator:System.Reflection.Metadata.LocalScopeHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.LocalScopeHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 455,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalVariableHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.LocalVariableHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 456,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalVariableHandleCollection::GetEnumerator:System.Reflection.Metadata.LocalVariableHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.LocalVariableHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 457,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ManifestResourceHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.ManifestResourceHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 458,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ManifestResourceHandleCollection::GetEnumerator:System.Reflection.Metadata.ManifestResourceHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.ManifestResourceHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 459,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReferenceHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.MemberReferenceHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 460,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReferenceHandleCollection::GetEnumerator:System.Reflection.Metadata.MemberReferenceHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.MemberReferenceHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 461,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodBodyBlock::Create:System.Reflection.Metadata.MethodBodyBlock(System.Reflection.Metadata.BlobReader)",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.MethodBodyBlock",
+      "methodName": "Create",
+      "isStatic": true
+    },
+    {
+      "index": 462,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformationHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.MethodDebugInformationHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 463,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformationHandleCollection::GetEnumerator:System.Reflection.Metadata.MethodDebugInformationHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.MethodDebugInformationHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 464,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinitionHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.MethodDefinitionHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 465,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.MethodDefinitionHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.MethodDefinitionHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 466,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodImplementationHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.MethodImplementationHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 467,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodImplementationHandleCollection::GetEnumerator:System.Reflection.Metadata.MethodImplementationHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.MethodImplementationHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 468,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ParameterHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.ParameterHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 469,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ParameterHandleCollection::GetEnumerator:System.Reflection.Metadata.ParameterHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.ParameterHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 470,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinition::GetDeclaringType:System.Reflection.Metadata.TypeDefinitionHandle()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.PropertyDefinition",
+      "methodName": "GetDeclaringType",
+      "isStatic": true
+    },
+    {
+      "index": 471,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinitionHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.PropertyDefinitionHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 472,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.PropertyDefinitionHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.PropertyDefinitionHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 473,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.SequencePointCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 474,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection\u002BEnumerator::Reset:System.Void()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.SequencePointCollection\u002BEnumerator",
+      "methodName": "Reset",
+      "isStatic": true
+    },
+    {
+      "index": 475,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection::GetEnumerator:System.Reflection.Metadata.SequencePointCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.SequencePointCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 476,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinitionHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.TypeDefinitionHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 477,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.TypeDefinitionHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.TypeDefinitionHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 478,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::Parse:System.Reflection.Metadata.TypeName(System.ReadOnlySpan\u003CSystem.Char\u003E,System.Reflection.Metadata.TypeNameParseOptions)",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.TypeName",
+      "methodName": "Parse",
+      "isStatic": true
+    },
+    {
+      "index": 479,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::TryParse:System.Boolean(System.ReadOnlySpan\u003CSystem.Char\u003E,System.Reflection.Metadata.TypeName,System.Reflection.Metadata.TypeNameParseOptions)",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.TypeName",
+      "methodName": "TryParse",
+      "isStatic": true
+    },
+    {
+      "index": 480,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::Unescape:System.String(System.String)",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.TypeName",
+      "methodName": "Unescape",
+      "isStatic": true
+    },
+    {
+      "index": 481,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeReferenceHandleCollection\u002BEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.TypeReferenceHandleCollection\u002BEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 482,
+      "kind": "fact",
+      "subjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeReferenceHandleCollection::GetEnumerator:System.Reflection.Metadata.TypeReferenceHandleCollection\u002BEnumerator()",
+      "assemblyName": "System.Reflection.Metadata",
+      "typeName": "System.Reflection.Metadata.TypeReferenceHandleCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
     }
   ],
   "summary": {
-    "totalSubjects": 408,
-    "factCount": 408,
+    "totalSubjects": 483,
+    "factCount": 483,
     "benchmarkCount": 0,
     "hotUpdateCount": 0
   }

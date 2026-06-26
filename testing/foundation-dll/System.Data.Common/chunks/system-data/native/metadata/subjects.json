@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-18T10:09:52.5185216Z",
+  "generatedAt": "2026-06-26T05:32:14.0253270Z",
   "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
   "entryExecutable": "entry",
   "subjects": [
@@ -5871,11 +5871,317 @@
       "typeName": "System.Data.TypedTableBaseExtensions",
       "methodName": "ElementAtOrDefault",
       "isStatic": true
+    },
+    {
+      "index": 652,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.ConstraintCollection::CopyTo:System.Void(System.Data.Constraint[],System.Int32)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.ConstraintCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 653,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DBConcurrencyException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DBConcurrencyException",
+      "methodName": "GetObjectData",
+      "isStatic": true
+    },
+    {
+      "index": 654,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataColumnChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataColumnChangeEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataColumnChangeEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 655,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataColumnChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataColumnChangeEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 656,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataColumnChangeEventHandler::Invoke:System.Void(System.Object,System.Data.DataColumnChangeEventArgs)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataColumnChangeEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 657,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataColumnCollection::CopyTo:System.Void(System.Data.DataColumn[],System.Int32)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataColumnCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 658,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataRowChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataRowChangeEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataRowChangeEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 659,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataRowChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataRowChangeEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 660,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataRowChangeEventHandler::Invoke:System.Void(System.Object,System.Data.DataRowChangeEventArgs)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataRowChangeEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 661,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataRowCollection::CopyTo:System.Void(System.Data.DataRow[],System.Int32)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataRowCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 662,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataSet::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataSet",
+      "methodName": "GetObjectData",
+      "isStatic": true
+    },
+    {
+      "index": 663,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataSet::Reset:System.Void()",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataSet",
+      "methodName": "Reset",
+      "isStatic": true
+    },
+    {
+      "index": 664,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataTable::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataTable",
+      "methodName": "GetObjectData",
+      "isStatic": true
+    },
+    {
+      "index": 665,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataTable::Reset:System.Void()",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataTable",
+      "methodName": "Reset",
+      "isStatic": true
+    },
+    {
+      "index": 666,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataTableClearEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataTableClearEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataTableClearEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 667,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataTableClearEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataTableClearEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 668,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataTableClearEventHandler::Invoke:System.Void(System.Object,System.Data.DataTableClearEventArgs)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataTableClearEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 669,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataTableCollection::CopyTo:System.Void(System.Data.DataTable[],System.Int32)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataTableCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 670,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataTableNewRowEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataTableNewRowEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataTableNewRowEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 671,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataTableNewRowEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataTableNewRowEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 672,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataTableNewRowEventHandler::Invoke:System.Void(System.Object,System.Data.DataTableNewRowEventArgs)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataTableNewRowEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 673,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.DataViewSettingCollection::CopyTo:System.Void(System.Data.DataViewSetting[],System.Int32)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.DataViewSettingCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 674,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.FillErrorEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.FillErrorEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.FillErrorEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 675,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.FillErrorEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.FillErrorEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 676,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.FillErrorEventHandler::Invoke:System.Void(System.Object,System.Data.FillErrorEventArgs)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.FillErrorEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 677,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.MergeFailedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.MergeFailedEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.MergeFailedEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 678,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.MergeFailedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.MergeFailedEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 679,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.MergeFailedEventHandler::Invoke:System.Void(System.Object,System.Data.MergeFailedEventArgs)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.MergeFailedEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 680,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.StateChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.StateChangeEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.StateChangeEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 681,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.StateChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.StateChangeEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 682,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.StateChangeEventHandler::Invoke:System.Void(System.Object,System.Data.StateChangeEventArgs)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.StateChangeEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 683,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.StatementCompletedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.StatementCompletedEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.StatementCompletedEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 684,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.StatementCompletedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.StatementCompletedEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 685,
+      "kind": "fact",
+      "subjectId": "System.Data.Common/System.Data.StatementCompletedEventHandler::Invoke:System.Void(System.Object,System.Data.StatementCompletedEventArgs)",
+      "assemblyName": "System.Data.Common",
+      "typeName": "System.Data.StatementCompletedEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
     }
   ],
   "summary": {
-    "totalSubjects": 652,
-    "factCount": 652,
+    "totalSubjects": 686,
+    "factCount": 686,
     "benchmarkCount": 0,
     "hotUpdateCount": 0
   }

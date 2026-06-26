@@ -296,14 +296,12 @@ public sealed partial class NativeAotLoweringPlanner
 
     private static void EmitStructuredSlotDeclarations(StringBuilder builder, int maxIntSlots, int maxFloat64Slots, int maxFloat32Slots, int maxInt64Slots, int maxWideSlots, string indentation)
     {
-        for (int i = 0; i < maxIntSlots; i++)
-            builder.AppendLine($"{indentation}CHAOS_IL2CPP_INTPTR {FormatStructuredSlotName(i)}{{}};");
+        // _sN and _iN are declared by the universal safety net in EmitManagedMethod
+        // (_s0.._s63, _i0.._i31).  Only emit non-overlapping types here.
         for (int i = 0; i < maxFloat64Slots; i++)
             builder.AppendLine($"{indentation}double {FormatDoubleSlotName(i)};");
         for (int i = 0; i < maxFloat32Slots; i++)
             builder.AppendLine($"{indentation}float {FormatFloatSlotName(i)};");
-        for (int i = 0; i < maxInt64Slots; i++)
-            builder.AppendLine($"{indentation}CHAOS_IL2CPP_INT64 {FormatInt64SlotName(i)};");
         for (int i = 0; i < maxWideSlots; i++)
             builder.AppendLine($"{indentation}alignas(16) CHAOS_IL2CPP_UINT8 {FormatWideSlotName(i)}[16];");
     }
