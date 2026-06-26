@@ -321,16 +321,25 @@ public sealed partial class NativeAotLoweringPlanner
             evalStackSize = Math.Max(evalStackSize, slotContext.MaxIntSlots);
         if (usesStructuredSlots && slotContext != null)
         {
-            // Check if EmitViaStructuredIR already declared _sN slots in bodyBuilder.
-            // When the structured IR body emits slot declarations inline (pc-dispatch
-            // fallback), EmitStructuredSlotDeclarations would cause C2374 redefinition.
-            // Only emit declarations when bodyBuilder doesn't already have them.
-            bool hasSlotDecl = bodyBuilder.ToString().Contains("CHAOS_IL2CPP_INTPTR _s0{", StringComparison.Ordinal);
-            if (!hasSlotDecl)
+            // EmitStructuredSlotDeclarations is the single source of truth for
+            // _sN/_iN/_dN/_fN slot declarations.  Strip any inline declarations
+            // that bodyBuilder may have from EmitViaStructuredIR (pc-dispatch
+            // fallback writes them inline) to prevent C2374 redefinition.
+            var cleanBody = new System.Text.StringBuilder(bodyBuilder.Length);
+            foreach (ReadOnlySpan<char> line in bodyBuilder.ToString().AsSpan().EnumerateLines())
             {
-                int slotCount = slotContext.ObservedSlotCount + 2;
-                EmitStructuredSlotDeclarations(builder, slotCount, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, slotContext.MaxInt64Slots + 2, slotContext.MaxWideSlots, "\t");
+                var trimmed = line.TrimStart();
+                if (!trimmed.StartsWith("CHAOS_IL2CPP_INTPTR _s", StringComparison.Ordinal) &&
+                    !trimmed.StartsWith("CHAOS_IL2CPP_INT64 _i", StringComparison.Ordinal) &&
+                    !trimmed.StartsWith("double _d", StringComparison.Ordinal) &&
+                    !trimmed.StartsWith("float _f", StringComparison.Ordinal))
+                {
+                    cleanBody.Append(line);
+                    cleanBody.Append('\n');
+                }
             }
+
+            int slotCount = slotContext.ObservedSlotCount + 2;
             // Pre-populate _s0 with 'this' for instance subject methods.
             // Structured IR building can drop the initial ldarg.0 when the first
             // basic block has no branches, leaving _s0 = 0 (the slot init value).
