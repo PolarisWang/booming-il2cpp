@@ -987,6 +987,9 @@ public sealed partial class NativeAotLoweringPlanner
             objectModelBuilder.AppendLine($"static CHAOS_IL2CPP_INTPTR _g_bake_cache_[{_enumAotBakeCacheArraySize}] = {{}};");
             objectModelBuilder.AppendLine();
         }
+        // Ensure __st is initialized for PreTryFoldInitializers access
+        // (BuildTypeHierarchyPtrFoldTable uses __st which requires _state.Value).
+        __st = _state.Value!;
         // A2.6: Pre-scan for typeof(T).IsAssignableFrom(typeof(U)) → *Ptr direct API
         BuildTypeHierarchyPtrFoldTable(methodsForLowering);
         // A2.7: Pre-scan for typeof(const_type) → direct TypeInfo* pointer
