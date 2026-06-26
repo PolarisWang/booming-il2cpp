@@ -1,0 +1,69 @@
+{
+  "chunkSlug": "runtime-interop",
+  "declaredMethods": 323,
+  "coveredMethods": 244,
+  "missingMethods": 135,
+  "coveragePct": 75.5,
+  "namespaceGaps": {
+    "System.Private.CoreLib/System.Runtime.InteropServices.DllImportResolver": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.AnsiStringMarshaller+ManagedToUnmanagedIn": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.BStrStringMarshaller+ManagedToUnmanagedIn": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ComVariant": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.Utf8StringMarshaller+ManagedToUnmanagedIn": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Runtime.InteropServices.NFloat": {
+      "declared": 106,
+      "covered": 0,
+      "gap": 106,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal": {
+      "declared": 4,
+      "covered": 1,
+      "gap": 3,
+      "gapPct": 75.0
+    },
+    "System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+UnhandledExceptionPropagationHandler": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Runtime.InteropServices.PosixSignalRegistration": {
+      "declared": 2,
+      "covered": 1,
+      "gap": 1,
+      "gapPct": 50.0
+    }
+  }
+}

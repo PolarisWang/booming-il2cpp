@@ -10,7 +10,7 @@ Usage:
     python testing/foundation-dll/batch_manifest.py --all
 
     # Generate for specific families
-    python testing/foundation-dll/batch_manifest.py --families System.Collections.NonGeneric,System.Text.Json
+    python testing/foundation-dll/batch_manifest.py --families System.Collections,System.Text.Json
 
     # Dry run (show what would be done)
     python testing/foundation-dll/batch_manifest.py --all --dry-run
@@ -33,7 +33,7 @@ _REPO_ROOT = _FOUNDATION_DLL.parent.parent
 # ── Families that are known to have resolvable DLLs ──
 _KNOWN_FAMILIES: dict[str, str] = {
     # Key: directory name, Value: DLL name (usually same)
-    "System.Collections.NonGeneric": "System.Collections.NonGeneric",
+    "System.Collections": "System.Collections",
     "System.Collections.Immutable": "System.Collections.Immutable",
     "System.ComponentModel.TypeConverter": "System.ComponentModel.TypeConverter",
     "System.Data.Common": "System.Data.Common",

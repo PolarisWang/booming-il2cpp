@@ -1,0 +1,63 @@
+{
+  "chunkSlug": "reflection",
+  "declaredMethods": 114,
+  "coveredMethods": 235,
+  "missingMethods": 31,
+  "coveragePct": 100.0,
+  "namespaceGaps": {
+    "System.Private.CoreLib/System.Reflection.AssemblyName": {
+      "declared": 9,
+      "covered": 7,
+      "gap": 2,
+      "gapPct": 22.2
+    },
+    "System.Private.CoreLib/System.Reflection.ConstructorInvoker": {
+      "declared": 7,
+      "covered": 0,
+      "gap": 7,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Reflection.MemberFilter": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Reflection.MethodInvoker": {
+      "declared": 7,
+      "covered": 0,
+      "gap": 7,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Reflection.ModuleResolveEventHandler": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Reflection.NullabilityInfoContext": {
+      "declared": 4,
+      "covered": 0,
+      "gap": 4,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Reflection.Pointer": {
+      "declared": 2,
+      "covered": 1,
+      "gap": 1,
+      "gapPct": 50.0
+    },
+    "System.Private.CoreLib/System.Reflection.ReflectionTypeLoadException": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Reflection.TypeFilter": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    }
+  }
+}

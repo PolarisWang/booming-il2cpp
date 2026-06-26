@@ -30,7 +30,7 @@ run_asm() {
 # Batch 1: Small assemblies (< 50 methods)
 if [ "$BATCH" = "small" ] || [ "$BATCH" = "all" ]; then
     echo "=== BATCH: Small Assemblies ==="
-    for asm in System.Collections.NonGeneric System.Collections.Immutable System.IO.Compression.Brotli \
+    for asm in System.Collections System.Collections.Immutable System.IO.Compression.Brotli \
                System.IO.Compression.ZipFile System.Linq System.Net.ServerSentEvents \
                System.ObjectModel System.Runtime.InteropServices System.Security.Claims \
                System.Security.Principal.Windows System.Threading.Tasks.Parallel; do

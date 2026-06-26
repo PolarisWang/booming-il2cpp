@@ -558,7 +558,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             var msg = $"[codegen] WARNING: codegen failed for {method.SubjectId}, emitting stub. Root cause: {ex.GetType().Name}: {ex.Message}";
             Console.Error.WriteLine(msg);
-            CodegenFailureCount = Interlocked.Increment(ref _CodegenFailureCountRaw);
+            CodegenFailureCount++;
             var exType = ex.GetType().Name;
             lock (CodegenFailureByType)
             {

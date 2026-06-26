@@ -64,7 +64,7 @@ from verification.stages.aggregate import run_aggregate
 from verification.stages.reporting import run_reporting
 
 
-_DEFAULT_BUILD_WORKERS = 4
+_DEFAULT_BUILD_WORKERS = 2
 
 
 def _detect_bench_workers() -> int:

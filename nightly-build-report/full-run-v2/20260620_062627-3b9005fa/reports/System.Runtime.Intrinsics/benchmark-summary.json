@@ -1,0 +1,24 @@
+{
+  "assemblyName": "System.Runtime.Intrinsics",
+  "timestamp": "2026-06-20T06:26:26",
+  "totalChunks": 1,
+  "totalBenchmarkedMethods": 0,
+  "aggregatePerformance": {},
+  "chunkSummaries": [
+    {
+      "slug": "runtime-intrinsics",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "failed"
+      }
+    }
+  ]
+}

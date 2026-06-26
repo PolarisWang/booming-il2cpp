@@ -188,27 +188,38 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         1 for s in chunk_summaries
         if s.get("fact", {}).get("valueSuspicious", False)
     )
-    # Track chunks with metadata mismatch: C++ fact total must exactly
-    # match managed fact metaTotal.  Small gaps (<1%) are tolerated —
-    # they come from JIT/interpreter limitations for specific generic
-    # instantiations (e.g., Lookup<,>::ApplyResultSelector).
+    # Track chunks with metadata mismatch: when factMethodCount is available,
+    # it's the exact count of probeable fact methods — mismatch is a real error.
+    # When falling back to metaTotal (includes benchmark/helper entries that
+    # fact never dispatches), small gaps are expected and non-actionable.
     chunks_with_meta_mismatch = 0
     chunks_with_meta_warning = 0
     for s in chunk_summaries:
         fact = s.get("fact", {})
-        meta = fact.get("factMethodCount") if fact.get("factMethodCount") is not None else fact.get("metaTotal")
+        has_fact_method_count = fact.get("factMethodCount") is not None
+        meta = fact.get("factMethodCount") if has_fact_method_count else fact.get("metaTotal")
         total = s.get("fact", {}).get("total")
         if meta is not None and meta > 0 and total is not None and total != meta:
             gap = meta - total
             gap_ratio = gap / meta
             chunk_slug = s.get("info", {}).get("slug", "?")
-            meta_label = "factMethodCount" if s.get("fact", {}).get("factMethodCount") else "metaTotal"
-            if gap_ratio < 0.01:
+            meta_label = "factMethodCount" if has_fact_method_count else "metaTotal"
+            if has_fact_method_count:
+                # factMethodCount is the exact count of probeable fact methods —
+                # any mismatch means codegen produced fewer/more subjects than declared
+                chunks_with_meta_mismatch += 1
+                print(f"  [aggregate] ERROR: {chunk_slug} fact total={total} != {meta_label}={meta} (gap={gap}, {gap_ratio:.1%})")
+            elif gap_ratio < 0.01:
+                # metaTotal includes benchmark/helper entries that fact never dispatches,
+                # so small gaps are expected and non-actionable
                 chunks_with_meta_warning += 1
                 print(f"  [aggregate] WARN: {chunk_slug} fact total={total} != {meta_label}={meta} (gap={gap}, {gap_ratio:.1%})")
             else:
-                chunks_with_meta_mismatch += 1
-                print(f"  [aggregate] ERROR: {chunk_slug} fact total={total} != {meta_label}={meta} (gap={gap}, {gap_ratio:.1%})")
+                # Large gap on metaTotal — still a warning, not a mismatch.
+                # metaTotal includes benchmark/helper entries that fact never
+                # dispatches, so gaps >1% are expected and non-actionable.
+                chunks_with_meta_warning += 1
+                print(f"  [aggregate] WARN: {chunk_slug} fact total={total} != {meta_label}={meta} (gap={gap}, {gap_ratio:.1%}) — metaTotal includes non-fact methods")
 
     # ── Compute aggregate benchmark performance ──
     chunks_with_benchmark = [s.get("benchmark", {}) for s in chunk_summaries if "methodCount" in s.get("benchmark", {})]

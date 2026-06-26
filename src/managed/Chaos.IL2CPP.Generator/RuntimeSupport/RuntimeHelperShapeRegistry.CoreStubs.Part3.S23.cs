@@ -419,7 +419,7 @@ public sealed partial class NativeAotLoweringPlanner
                                 return """
                                     ([&]() -> CHAOS_IL2CPP_INTPTR {
                                         CHAOS_IL2CPP_INT64 _v = 0;
-                                        std::memcpy(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
+                                        CHAOS_IL2CPP_MEMCPY(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
                                         auto _cached = lookup_cached_enum_name(_v);
                                         return _cached != 0 ? _cached : ChaosEnumToString({0});
                                     })()
@@ -441,8 +441,8 @@ public sealed partial class NativeAotLoweringPlanner
                                 return """
                                     ([&]() -> CHAOS_IL2CPP_INT32 {
                                         CHAOS_IL2CPP_INT64 _v = 0, _f = 0;
-                                        std::memcpy(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
-                                        std::memcpy(&_f, reinterpret_cast<const void*>({1} + 16), sizeof(_f));
+                                        CHAOS_IL2CPP_MEMCPY(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
+                                        CHAOS_IL2CPP_MEMCPY(&_f, reinterpret_cast<const void*>({1} + 16), sizeof(_f));
                                         return (_v & _f) == _f ? 1 : 0;
                                     })()
                                     """.Replace("\r\n", "\n").Trim();
@@ -869,7 +869,7 @@ public sealed partial class NativeAotLoweringPlanner
                             {
                                 if (paramTypes.Count < 2) return null;
 
-                                // byte[]: structural comparison via memcmp
+                                // byte[]: structural comparison via __builtin_memcmp
                                 if (paramTypes[0] == "System.Byte[]" && paramTypes[1] == "System.Byte[]")
                                 {
                                     return """
@@ -879,15 +879,15 @@ public sealed partial class NativeAotLoweringPlanner
             	                                else if (({0}) == 0 || ({1}) == 0) _cae_eq = false;
             	                                else {
             	                                    auto _cae_l0 = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
-            	                                        reinterpret_cast<const uint8_t*>({0}) + 24);
+            	                                        reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({0}) + 24);
             	                                    auto _cae_l1 = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
-            	                                        reinterpret_cast<const uint8_t*>({1}) + 24);
+            	                                        reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({1}) + 24);
             	                                    if (_cae_l0 != _cae_l1) _cae_eq = false;
             	                                    else {
-            	                                        _cae_eq = std::memcmp(
-            	                                            reinterpret_cast<const void*>(reinterpret_cast<const uint8_t*>({0}) + 32),
-            	                                            reinterpret_cast<const void*>(reinterpret_cast<const uint8_t*>({1}) + 32),
-            	                                            static_cast<size_t>(_cae_l0)) == 0;
+            	                                        _cae_eq = __builtin_memcmp(
+            	                                            reinterpret_cast<const void*>(reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({0}) + 32),
+            	                                            reinterpret_cast<const void*>(reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({1}) + 32),
+            	                                            static_cast<CHAOS_IL2CPP_SIZE>(_cae_l0)) == 0;
             	                                    }
             	                                }
             	                                if (!_cae_eq) throw chaos_managed_exception{};

@@ -24,15 +24,15 @@ public sealed partial class NativeAotLoweringPlanner
     {
         ResetArrayCheckCache();
         var filtered = FilterRedundantStoreReloadPairs(instructions);
-        __st.LinearInstructionList = filtered;
+        _state.Value!.LinearInstructionList = filtered;
         for (int i = 0; i < filtered.Count; i++)
         {
-            __st.LinearInstructionIndex = i;
+            _state.Value!.LinearInstructionIndex = i;
             var instruction = filtered[i];
             var nextInstruction = (i + 1 < filtered.Count) ? filtered[i + 1] : null;
             EmitInstruction(builder, instruction, indentation, nextInstruction);
         }
-        __st.LinearInstructionList = null;
+        _state.Value!.LinearInstructionList = null;
     }
 
 
@@ -48,11 +48,11 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private void EmitInstructionLookahead(StringBuilder builder, IReadOnlyList<AotCoreIrInstructionArtifact> instructions, string indentation)
     {
-        __st.LookaheadInstructionList = instructions;
+        _state.Value!.LookaheadInstructionList = instructions;
         int _lookaheadSkipCount = 0;
         for (int i = 0; i < instructions.Count; i++)
         {
-            __st.LookaheadInstructionIndex = i;
+            _state.Value!.LookaheadInstructionIndex = i;
             var instr = instructions[i];
             var nextInstr = (i + 1 < instructions.Count) ? instructions[i + 1] : null;
             try
@@ -67,8 +67,8 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
         if (_lookaheadSkipCount > 0)
-            Console.Error.WriteLine($"[codegen] INFO: {_lookaheadSkipCount} instruction(s) skipped in {__st.CurrentMethodArtifact?.SubjectId ?? "?"} (will fall back to stub)");
-        __st.LookaheadInstructionList = null;
+            Console.Error.WriteLine($"[codegen] INFO: {_lookaheadSkipCount} instruction(s) skipped in {_state.Value!.CurrentMethodArtifact?.SubjectId ?? "?"} (will fall back to stub)");
+        _state.Value!.LookaheadInstructionList = null;
     }
 
 
@@ -83,12 +83,12 @@ public sealed partial class NativeAotLoweringPlanner
     private bool TryGetLookaheadInstruction(AotCoreIrInstructionArtifact? nextInstruction, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out AotCoreIrInstructionArtifact? result)
     {
         if (nextInstruction != null) { result = nextInstruction; return true; }
-        if (__st.LookaheadInstructionList != null)
+        if (_state.Value!.LookaheadInstructionList != null)
         {
-            int nextIdx = __st.LookaheadInstructionIndex + 1;
-            if (nextIdx < __st.LookaheadInstructionList.Count)
+            int nextIdx = _state.Value!.LookaheadInstructionIndex + 1;
+            if (nextIdx < _state.Value!.LookaheadInstructionList.Count)
             {
-                result = __st.LookaheadInstructionList[nextIdx];
+                result = _state.Value!.LookaheadInstructionList[nextIdx];
                 return true;
             }
         }
@@ -106,23 +106,23 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private bool TryGetSecondLookaheadInstruction(AotCoreIrInstructionArtifact? nextInstruction, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out AotCoreIrInstructionArtifact? result)
     {
-        // Linear path: use __st.LinearInstructionList with __st.LinearInstructionIndex
-        if (nextInstruction != null && __st.LinearInstructionList != null)
+        // Linear path: use _state.Value!.LinearInstructionList with _state.Value!.LinearInstructionIndex
+        if (nextInstruction != null && _state.Value!.LinearInstructionList != null)
         {
-            int nextIdx = __st.LinearInstructionIndex + 2;
-            if (nextIdx < __st.LinearInstructionList.Count)
+            int nextIdx = _state.Value!.LinearInstructionIndex + 2;
+            if (nextIdx < _state.Value!.LinearInstructionList.Count)
             {
-                result = __st.LinearInstructionList[nextIdx];
+                result = _state.Value!.LinearInstructionList[nextIdx];
                 return true;
             }
         }
-        // Structured IR path: use __st.LookaheadInstructionList
-        if (__st.LookaheadInstructionList != null)
+        // Structured IR path: use _state.Value!.LookaheadInstructionList
+        if (_state.Value!.LookaheadInstructionList != null)
         {
-            int nextIdx = __st.LookaheadInstructionIndex + 2;
-            if (nextIdx < __st.LookaheadInstructionList.Count)
+            int nextIdx = _state.Value!.LookaheadInstructionIndex + 2;
+            if (nextIdx < _state.Value!.LookaheadInstructionList.Count)
             {
-                result = __st.LookaheadInstructionList[nextIdx];
+                result = _state.Value!.LookaheadInstructionList[nextIdx];
                 return true;
             }
         }
@@ -212,7 +212,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     private void CompensateDceSkipForStructuredSlots(AotCoreIrInstructionArtifact instruction)
     {
-        if (__st.ActiveStructuredSlotContext == null) return;
+        if (_state.Value!.ActiveStructuredSlotContext == null) return;
         // Call instructions (GetTypeFromHandle) have net 0 stack effect.
         if (instruction.Op == "call" || instruction.Op == "callvirt") return;
         // Estimate net stack effect for other DCE-skipped instructions.
@@ -220,11 +220,11 @@ public sealed partial class NativeAotLoweringPlanner
         if (net > 0)
         {
             for (int i = 0; i < net; i++)
-                __st.ActiveStructuredSlotContext.AllocatePushTarget();
+                _state.Value!.ActiveStructuredSlotContext.AllocatePushTarget();
         }
         else if (net < 0)
         {
-            __st.ActiveStructuredSlotContext.Discard(-net);
+            _state.Value!.ActiveStructuredSlotContext.Discard(-net);
         }
     }
 
@@ -236,9 +236,9 @@ public sealed partial class NativeAotLoweringPlanner
     {
         // A2.6 DCE: Skip dead ltoken + GetTypeFromHandle when TypeInfo* fold fires.
         if (_typeHierarchyPtrSkipIlOffsets.Count > 0 &&
-            __st.CurrentMethodNativeSymbol != null &&
+            _state.Value!.CurrentMethodNativeSymbol != null &&
             (instruction.Op == "ldtoken" || instruction.Op == "call") &&
-            _typeHierarchyPtrSkipIlOffsets.TryGetValue(__st.CurrentMethodNativeSymbol, out var skipOffsets) &&
+            _typeHierarchyPtrSkipIlOffsets.TryGetValue(_state.Value!.CurrentMethodNativeSymbol, out var skipOffsets) &&
             skipOffsets.Contains(instruction.IlOffset))
         {
             CompensateDceSkipForStructuredSlots(instruction);
@@ -246,8 +246,8 @@ public sealed partial class NativeAotLoweringPlanner
         }
         // A2.6 DCE: Skip dead instructions when enum AOT bake fires.
         if (_enumAotBakeSkipIlOffsets.Count > 0 &&
-            __st.CurrentMethodNativeSymbol != null &&
-            _enumAotBakeSkipIlOffsets.TryGetValue(__st.CurrentMethodNativeSymbol, out var enumSkipOffsets) &&
+            _state.Value!.CurrentMethodNativeSymbol != null &&
+            _enumAotBakeSkipIlOffsets.TryGetValue(_state.Value!.CurrentMethodNativeSymbol, out var enumSkipOffsets) &&
             enumSkipOffsets.Contains(instruction.IlOffset))
         {
             CompensateDceSkipForStructuredSlots(instruction);
@@ -255,9 +255,9 @@ public sealed partial class NativeAotLoweringPlanner
         }
         // A2.7 DCE: Skip dead ltoken when typeof(T) compile-time fold fires.
         if (_typeOfSkipIlOffsets.Count > 0 &&
-            __st.CurrentMethodNativeSymbol != null &&
+            _state.Value!.CurrentMethodNativeSymbol != null &&
             instruction.Op == "ldtoken" &&
-            _typeOfSkipIlOffsets.TryGetValue(__st.CurrentMethodNativeSymbol, out var typeOfSkipSet) &&
+            _typeOfSkipIlOffsets.TryGetValue(_state.Value!.CurrentMethodNativeSymbol, out var typeOfSkipSet) &&
             typeOfSkipSet.Contains(instruction.IlOffset))
         {
             CompensateDceSkipForStructuredSlots(instruction);
@@ -274,7 +274,7 @@ public sealed partial class NativeAotLoweringPlanner
             case "ldc.i8":
                 {
                     string _i8lit = FormatInt64Literal(GetRequiredInt64Operand(instruction));
-                    if (__st.ActiveStructuredSlotContext is not null)
+                    if (_state.Value!.ActiveStructuredSlotContext is not null)
                         EmitEvalStackPush(builder, indentation, _i8lit, SlotType.Int64);
                     else
                         EmitEvalStackPush(builder, indentation, $"ChaosStoreInt64({_i8lit})");
@@ -309,22 +309,22 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     int ldlocSlot = GetRequiredIntOperand(instruction);
                     // E6: hoisted invariant local check (before all other branches)
-                    if (__st.HoistedInvariantLocals is not null && __st.HoistedInvariantLocals.TryGetValue(ldlocSlot, out var _hldInfo))
+                    if (_state.Value!.HoistedInvariantLocals is not null && _state.Value!.HoistedInvariantLocals.TryGetValue(ldlocSlot, out var _hldInfo))
                     {
                         EmitEvalStackPush(builder, indentation, _hldInfo.VarName, _hldInfo.SlotType);
                         PushSlotType(_hldInfo.SlotType);
                         break;
                     }
                     // E7: accumulator slot check (bypasses chaos_locals load)
-                    if (__st.AccumulatorSlots is not null && __st.AccumulatorSlots.TryGetValue(ldlocSlot, out var _accName))
+                    if (_state.Value!.AccumulatorSlots is not null && _state.Value!.AccumulatorSlots.TryGetValue(ldlocSlot, out var _accName))
                     {
                         EmitEvalStackPush(builder, indentation, _accName, SlotType.Int64);
                         PushSlotType(SlotType.Int64);
                         break;
                     }
-                    if (__st.StructLocalSlots is not null && __st.StructLocalSlots.Contains(ldlocSlot))
+                    if (_state.Value!.StructLocalSlots is not null && _state.Value!.StructLocalSlots.Contains(ldlocSlot))
                         EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[{ldlocSlot}])");
-                    else if (__st.FloatLocalSlots is not null && __st.FloatLocalSlots.TryGetValue(ldlocSlot, out var ldlocType) && ldlocType != SlotType.NativeInt)
+                    else if (_state.Value!.FloatLocalSlots is not null && _state.Value!.FloatLocalSlots.TryGetValue(ldlocSlot, out var ldlocType) && ldlocType != SlotType.NativeInt)
                     {
                         string wrapper = ldlocType switch
                         {
@@ -335,20 +335,20 @@ public sealed partial class NativeAotLoweringPlanner
                         EmitEvalStackPush(builder, indentation, $"{wrapper}(chaos_locals[{ldlocSlot}])", ldlocType);
                         PushSlotType(ldlocType);
                     }
-                    else if (__st.Int64LocalSlots is not null && __st.Int64LocalSlots.Contains(ldlocSlot))
+                    else if (_state.Value!.Int64LocalSlots is not null && _state.Value!.Int64LocalSlots.Contains(ldlocSlot))
                     {
                         EmitEvalStackPush(builder, indentation, $"ChaosLoadInt64(chaos_locals[{ldlocSlot}])", SlotType.Int64);
                         PushSlotType(SlotType.Int64);
                     }
                     else
                     {
-                        string _ldSrc = __st.HoistedIVs is not null && __st.HoistedIVs.TryGetValue(ldlocSlot, out var _ivName)
+                        string _ldSrc = _state.Value!.HoistedIVs is not null && _state.Value!.HoistedIVs.TryGetValue(ldlocSlot, out var _ivName)
                             ? _ivName
                             : $"chaos_locals[{ldlocSlot}]";
                         EmitEvalStackPush(builder, indentation, _ldSrc);
                         // Track slot variable → chaos_locals mapping for array base hoisting
-                        if (__st.SlotVarToLocalSlot is not null && __st.ActiveStructuredSlotContext is not null && _ldSrc.StartsWith("chaos_locals[", StringComparison.Ordinal))
-                            __st.SlotVarToLocalSlot[AccessEvalStackTopExpression()] = ldlocSlot;
+                        if (_state.Value!.SlotVarToLocalSlot is not null && _state.Value!.ActiveStructuredSlotContext is not null && _ldSrc.StartsWith("chaos_locals[", StringComparison.Ordinal))
+                            _state.Value!.SlotVarToLocalSlot[AccessEvalStackTopExpression()] = ldlocSlot;
                         PushSlotType(SlotType.NativeInt);
                     }
                     break;
@@ -358,37 +358,37 @@ public sealed partial class NativeAotLoweringPlanner
                 EmitLinearFieldLoad(builder, instruction, indentation);
                 break;
             case "call":
-                if (__st.PendingBoxSubjectId != null && (IsConvertToCharObjectCall(instruction) || IsConvertToCharObjectProviderCall(instruction)))
+                if (_state.Value!.PendingBoxSubjectId != null && (IsConvertToCharObjectCall(instruction) || IsConvertToCharObjectProviderCall(instruction)))
                 {
                     EmitFusedConvertCharBoxCall(builder, indentation);
                 }
-                else if (__st.PendingBoxSubjectId != null && IsEnumFormatCall(instruction))
+                else if (_state.Value!.PendingBoxSubjectId != null && IsEnumFormatCall(instruction))
                 {
                     EmitFusedEnumFormatBoxCall(builder, indentation);
-                    __st.PendingBoxSubjectId = null;
+                    _state.Value!.PendingBoxSubjectId = null;
                 }
-                else if (__st.PendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
+                else if (_state.Value!.PendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
                 {
                     EmitFusedEnumBoxToString(builder, instruction, indentation);
-                    __st.PendingEnumBoxSubjectId = null;
+                    _state.Value!.PendingEnumBoxSubjectId = null;
                 }
                 else
                     EmitLinearCall(builder, instruction, indentation);
                 break;
             case "callvirt":
-                if (__st.PendingBoxSubjectId != null && (IsConvertToCharObjectCall(instruction) || IsConvertToCharObjectProviderCall(instruction)))
+                if (_state.Value!.PendingBoxSubjectId != null && (IsConvertToCharObjectCall(instruction) || IsConvertToCharObjectProviderCall(instruction)))
                 {
                     EmitFusedConvertCharBoxCall(builder, indentation);
                 }
-                else if (__st.PendingBoxSubjectId != null && IsEnumFormatCall(instruction))
+                else if (_state.Value!.PendingBoxSubjectId != null && IsEnumFormatCall(instruction))
                 {
                     EmitFusedEnumFormatBoxCall(builder, indentation);
-                    __st.PendingBoxSubjectId = null;
+                    _state.Value!.PendingBoxSubjectId = null;
                 }
-                else if (__st.PendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
+                else if (_state.Value!.PendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
                 {
                     EmitFusedEnumBoxToString(builder, instruction, indentation);
-                    __st.PendingEnumBoxSubjectId = null;
+                    _state.Value!.PendingEnumBoxSubjectId = null;
                 }
                 else
                     EmitLinearCallVirt(builder, instruction, indentation);
@@ -480,11 +480,11 @@ public sealed partial class NativeAotLoweringPlanner
                     // If this slot is a hoisted IV, also update the C++ local
                     int _stlocSlot = GetRequiredIntOperand(instruction);
                     // E7: accumulator slot write-back
-                    if (__st.AccumulatorSlots is not null && __st.AccumulatorSlots.TryGetValue(_stlocSlot, out var _accName))
+                    if (_state.Value!.AccumulatorSlots is not null && _state.Value!.AccumulatorSlots.TryGetValue(_stlocSlot, out var _accName))
                     {
                         builder.AppendLine($"{indentation}{_accName} = {stlocValue};");
                     }
-                    if (__st.HoistedIVs is not null && __st.HoistedIVs.TryGetValue(_stlocSlot, out var _ivName))
+                    if (_state.Value!.HoistedIVs is not null && _state.Value!.HoistedIVs.TryGetValue(_stlocSlot, out var _ivName))
                         builder.AppendLine($"{indentation}{_ivName} = {storedExpr};");
                     break;
                 }
@@ -508,7 +508,7 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     string _rExpr = ConsumeEvalStackValueExpression();
                     string _lExpr = ConsumeEvalStackValueExpression();
-                    if (__st.ActiveStructuredSlotContext is not null)
+                    if (_state.Value!.ActiveStructuredSlotContext is not null)
                     {
                         EmitEvalStackPush(builder, indentation,
                             $"static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>({_lExpr}) > static_cast<CHAOS_IL2CPP_UINTPTR>({_rExpr}) ? 1 : 0)");
@@ -543,7 +543,7 @@ public sealed partial class NativeAotLoweringPlanner
                         SlotType.Float64 => $"ChaosLoadFloat64({_lExpr})",
                         _ => $"static_cast<CHAOS_IL2CPP_INTPTR>({_lExpr})",
                     };
-                    if (__st.ActiveStructuredSlotContext is not null)
+                    if (_state.Value!.ActiveStructuredSlotContext is not null)
                     {
                         EmitEvalStackPush(builder, indentation,
                             $"static_cast<CHAOS_IL2CPP_INTPTR>({_lLoad} == {_rLoad} ? 1 : 0)");
@@ -579,7 +579,7 @@ public sealed partial class NativeAotLoweringPlanner
                         SlotType.Float64 => $"ChaosLoadFloat64({_lExpr})",
                         _ => $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})",
                     };
-                    if (__st.ActiveStructuredSlotContext is not null)
+                    if (_state.Value!.ActiveStructuredSlotContext is not null)
                     {
                         EmitEvalStackPush(builder, indentation,
                             $"static_cast<CHAOS_IL2CPP_INTPTR>({_lLoad} > {_rLoad} ? 1 : 0)");
@@ -616,7 +616,7 @@ public sealed partial class NativeAotLoweringPlanner
                         SlotType.Float64 => $"ChaosLoadFloat64({_lExpr})",
                         _ => $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})",
                     };
-                    if (__st.ActiveStructuredSlotContext is not null)
+                    if (_state.Value!.ActiveStructuredSlotContext is not null)
                     {
                         EmitEvalStackPush(builder, indentation,
                             $"static_cast<CHAOS_IL2CPP_INTPTR>({_lLoad} < {_rLoad} ? 1 : 0)");
@@ -1010,7 +1010,7 @@ public sealed partial class NativeAotLoweringPlanner
                     AotCoreIrReferenceArtifact boxTargetRef = GetRequiredTargetReference(instruction);
                     if (boxTargetRef.Kind == AotCoreIrReferenceKind.Type && IsEnumRef(boxTargetRef))
                     {
-                        __st.PendingEnumBoxSubjectId = boxTargetRef.SubjectId;
+                        _state.Value!.PendingEnumBoxSubjectId = boxTargetRef.SubjectId;
                         // Skip box emission - raw value stays on eval stack,
                         // consumed by subsequent call/callvirt peephole.
                     }
@@ -1022,8 +1022,8 @@ public sealed partial class NativeAotLoweringPlanner
                             && (lookaheadInstr.Op == "call" || lookaheadInstr.Op == "callvirt")
                             && IsConvertToCharObjectCall(lookaheadInstr))
                         {
-                            __st.PendingBoxSubjectId = ExtractTypeName(boxTargetRef.SubjectId);
-                            __st.PendingBoxHasProvider = false;
+                            _state.Value!.PendingBoxSubjectId = ExtractTypeName(boxTargetRef.SubjectId);
+                            _state.Value!.PendingBoxHasProvider = false;
                         }
                         // Pattern 2: box <primitive> + ldnull + call/callvirt ToChar(Object, IFormatProvider)
                         else if (TryGetLookaheadInstruction(nextInstruction, out var ldnullInstr)
@@ -1032,8 +1032,8 @@ public sealed partial class NativeAotLoweringPlanner
                             && (providerCall.Op == "call" || providerCall.Op == "callvirt")
                             && IsConvertToCharObjectProviderCall(providerCall))
                         {
-                            __st.PendingBoxSubjectId = ExtractTypeName(boxTargetRef.SubjectId);
-                            __st.PendingBoxHasProvider = true;
+                            _state.Value!.PendingBoxSubjectId = ExtractTypeName(boxTargetRef.SubjectId);
+                            _state.Value!.PendingBoxHasProvider = true;
                             // Skip box emission; ldnull will be processed normally,
                             // and EmitFusedConvertCharBoxCall will pop the provider null.
                         }
@@ -1044,7 +1044,7 @@ public sealed partial class NativeAotLoweringPlanner
                             && (formatCall.Op == "call" || formatCall.Op == "callvirt")
                             && IsEnumFormatCall(formatCall))
                         {
-                            __st.PendingBoxSubjectId = ExtractTypeName(boxTargetRef.SubjectId);
+                            _state.Value!.PendingBoxSubjectId = ExtractTypeName(boxTargetRef.SubjectId);
                             // Skip box emission; ldstr will be processed normally,
                             // and EmitFusedEnumFormatBoxCall will handle the fused call.
                         }
@@ -1681,10 +1681,10 @@ public sealed partial class NativeAotLoweringPlanner
         SlotType _slotType = PeekSlotType();
         // In structured mode, _fN/_dN slots are already float/double C++ variables.
         // The ChaosLoadFloat* wrappers would do double->intptr truncation -> memcpy = garbage.
-        if (__st.ActiveStructuredSlotContext is not null && _slotType is SlotType.Float32 or SlotType.Float64)
+        if (_state.Value!.ActiveStructuredSlotContext is not null && _slotType is SlotType.Float32 or SlotType.Float64)
             return AccessEvalStackTopExpression();
         // In structured mode, _iN slots are already int64_t C++ variables.
-        if (__st.ActiveStructuredSlotContext is not null && _slotType is SlotType.Int64)
+        if (_state.Value!.ActiveStructuredSlotContext is not null && _slotType is SlotType.Int64)
         {
             var expr = AccessEvalStackTopExpression();
             if (expr.StartsWith("_i", StringComparison.Ordinal))
@@ -1715,8 +1715,8 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private (string? Symbol, bool IsStatic) FindThrowsTargetMethod()
     {
-        var list = __st.LinearInstructionList ?? __st.LookaheadInstructionList;
-        var idx = __st.LinearInstructionList != null ? __st.LinearInstructionIndex : __st.LookaheadInstructionIndex;
+        var list = _state.Value!.LinearInstructionList ?? _state.Value!.LookaheadInstructionList;
+        var idx = _state.Value!.LinearInstructionList != null ? _state.Value!.LinearInstructionIndex : _state.Value!.LookaheadInstructionIndex;
         if (list == null || idx < 0) return (null, true);
 
         // Scan backward from idx-1 to find newobj Action::.ctor preceded by ldftn
@@ -1775,16 +1775,16 @@ public sealed partial class NativeAotLoweringPlanner
         if (!_methodsBySubjectId.TryGetValue(calleeSubjectId, out var calleeMethod)) return false;
         if (calleeMethod.ExceptionRegionCount > 0) return false;
         if (calleeMethod.IsPInvoke) return false;
-        if (__st.CurrentMethodArtifact == null) return false;
-        if (__st.CurrentMethodNativeSymbol == null) return false;
+        if (_state.Value!.CurrentMethodArtifact == null) return false;
+        if (_state.Value!.CurrentMethodNativeSymbol == null) return false;
         if (depth > InliningPlanner.kMaxInlineDepth) return false;
-        int inlineId = __st.NextInlineId++;
+        int inlineId = _state.Value!.NextInlineId++;
 
         // Budget check via InliningPlanner
-        bool isRecursive = string.Equals(calleeMethod.NativeSymbol, __st.CurrentMethodNativeSymbol, StringComparison.Ordinal);
+        bool isRecursive = string.Equals(calleeMethod.NativeSymbol, _state.Value!.CurrentMethodNativeSymbol, StringComparison.Ordinal);
         try
         {
-            var candidate = InliningPlanner.EvaluateInline(calleeMethod.Instructions.Count, __st.CurrentMethodArtifact.Instructions.Count, isRecursive);
+            var candidate = InliningPlanner.EvaluateInline(calleeMethod.Instructions.Count, _state.Value!.CurrentMethodArtifact.Instructions.Count, isRecursive);
             if (!candidate.CanInline) return false;
 
             // Multi-BB support: scan callee instructions to find branch targets and count basic blocks.
@@ -1865,7 +1865,7 @@ public sealed partial class NativeAotLoweringPlanner
                 builder.AppendLine($"{indentation}    CHAOS_IL2CPP_INTPTR chaos_inline_retval{inlineId}{{}};");
             }
 
-            int localOffset = __st.CurrentMethodArtifact.LocalCount;
+            int localOffset = _state.Value!.CurrentMethodArtifact.LocalCount;
 
             foreach (var calleeInstruction in calleeMethod.Instructions)
             {

@@ -23,8 +23,6 @@ public sealed class CppProjectEmitter
         "TestProject.SubjectDispatch.cpp.scriban",
         "TestProject.SubjectDispatch.h.scriban",
         "TestProject.CMakeLists.txt.scriban",
-        "TestProject.SubdirCMakeLists.txt.scriban",
-        "TestProject.AggregateCMakeLists.txt.scriban",
         "TestProject.CMakePresets.json.scriban",
         "TestProject.RuntimePatchdata.cpp.scriban",
         "TestProject.chaos-config.cmake.scriban",
@@ -61,8 +59,6 @@ public sealed class CppProjectEmitter
             patchDataSize: 0,
             patchDataHostClass: "",
             projectName: "entry",
-            chunkSlug: Path.GetFileName(outputDir) ?? "unknown",
-            nativeDir: outputDir,
             projectRoot: projectRoot,
             codegenDir: codegenDir,
             sdkDir: sdkDir,
@@ -101,8 +97,7 @@ public sealed class CppProjectEmitter
         string? projectRoot = null,
         string? codegenDir = null,
         string? sdkDir = null,
-        bool verificationEnabled = true,
-        bool useSubdirCMake = false)
+        bool verificationEnabled = true)
     {
         var isPipeline = projectRoot is not null && codegenDir is not null;
 
@@ -184,8 +179,6 @@ public sealed class CppProjectEmitter
             patchDataSize: 0,
             patchDataHostClass: "",
             projectName: isPipeline ? "chaos_entry" : "entry",
-            chunkSlug: Path.GetFileName(Path.GetDirectoryName(outputDir)) ?? "unknown",
-            nativeDir: outputDir,
             projectRoot: resolvedProjectRoot,
             codegenDir: resolvedCodegenDir,
             sdkDir: resolvedSdkDir,
@@ -237,9 +230,7 @@ public sealed class CppProjectEmitter
         // RenderToFile("TestProject.SubjectDispatch.h.scriban", model, outputDir, "subjects/subject_dispatch.h");
         // RenderToFile("TestProject.SubjectDispatch.cpp.scriban", model, outputDir, "subjects/subject_dispatch.cpp");
 
-        // Select CMakeLists template: standalone (default) or subdirectory (for aggregate).
-        string cmakeTemplate = useSubdirCMake ? "TestProject.SubdirCMakeLists.txt.scriban" : "TestProject.CMakeLists.txt.scriban";
-        RenderToFile(cmakeTemplate, model, outputDir, "CMakeLists.txt");
+        RenderToFile("TestProject.CMakeLists.txt.scriban", model, outputDir, "CMakeLists.txt");
         RenderToFile("TestProject.CMakePresets.json.scriban", model, outputDir, "CMakePresets.json");
         RenderToFile("TestProject.RuntimePatchdata.cpp.scriban", model, outputDir, "runtime-patchdata.cpp");
         RenderToFile("TestProject.PatchHostArrays.cpp.scriban", model, outputDir, "patch-host-arrays.cpp");
@@ -271,9 +262,10 @@ public sealed class CppProjectEmitter
                 + "// In test environments dynamic type registration is not used,\n"
                 + "// so returning nullptr is always correct.\n"
                 + "#include \"enum_stubs.h\"\n"
+                + "#include <chaos/common.h>\n"
                 + "struct ReflectionQueryTypeDescriptor;\n"
                 + "extern \"C\" const ReflectionQueryTypeDescriptor* ChaosFindExternalTypeDescByStableId(\n"
-                + "    uint64_t /*stable_id*/) noexcept { return nullptr; }\n");
+                + "    CHAOS_IL2CPP_UINT64 /*stable_id*/) noexcept { return nullptr; }\n");
         }
 
         // ApplyPatchFromMemoryEx/Unpatch stubs — patch_loader.cpp may not be included
@@ -287,8 +279,7 @@ public sealed class CppProjectEmitter
                 + "// The real definitions are in patch_loader.cpp (part of chaos_runtime_core.lib),\n"
                 + "// but the prebuilt SDK lib may not include this file.\n"
                 + "// Test environments don't use hotpatch, so stubs are sufficient.\n"
-                + "#include <cstdint>\n"
-                + "#include <cstddef>\n"
+                + "#include <chaos/common.h>\n"
                 + "namespace chaos { namespace il2cpp { namespace runtime_core {\n"
                 + "struct PatchContext;\n"
                 + "PatchContext* ApplyPatchFromMemoryEx(const void*, size_t, const char*,\n"

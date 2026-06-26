@@ -1,0 +1,161 @@
+{
+  "exitCode": 0,
+  "passed": 5,
+  "failed": 0,
+  "assertFailed": 0,
+  "allSemantic": false,
+  "allRevert": true,
+  "revertPassed": 5,
+  "revertRegressionCount": 0,
+  "revertFixedCount": 0,
+  "revertStableCount": 5,
+  "semanticChangedCount": 0,
+  "patchDataUsed": true,
+  "patchFailed": false,
+  "patchSkippedNoMethods": false,
+  "truncated": false,
+  "crash": false,
+  "hasBaselineBenchmark": true,
+  "hasPatchedBenchmark": true,
+  "details": {
+    "baselineFact": [
+      {
+        "si": 0,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 1,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 2,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 3,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 4,
+        "passed": true,
+        "value": 42
+      }
+    ],
+    "baselineBenchmark": [
+      {
+        "methodIndex": 39,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 48,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 50,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 57,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 59,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      }
+    ],
+    "patchedFact": [
+      {
+        "si": 0,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 1,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 2,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 3,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 4,
+        "passed": true,
+        "value": 42
+      }
+    ],
+    "patchedBenchmark": [
+      {
+        "methodIndex": 39,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 48,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 50,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 57,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 59,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      }
+    ],
+    "revertedFact": [
+      {
+        "si": 0,
+        "passed": true
+      },
+      {
+        "si": 1,
+        "passed": true
+      },
+      {
+        "si": 2,
+        "passed": true
+      },
+      {
+        "si": 3,
+        "passed": true
+      },
+      {
+        "si": 4,
+        "passed": true
+      }
+    ],
+    "passedMethods": 5,
+    "failedMethods": 0,
+    "totalMethods": 5,
+    "allSemantic": false,
+    "allRevert": true,
+    "semanticChangedCount": 0,
+    "patchedAssertFailed": 0
+  },
+  "stderr": "[2026-06-20T13:01:14][INFO][GcLowMem] low-memory monitor started\n[2026-06-20T13:01:14][DEBUG][codegen] T4 VEH handler registered\n[2026-06-20T13:01:14][DEBUG][GcEvents] registered callback 0x7ff771ce29d0 at slot 0\n[2026-06-20T13:01:14][DEBUG][codegen] T4 VEH handler registered\n[2026-06-20T13:01:14][DEBUG][GcEvents] registered callback 0x7ff771ce29d0 at slot 1\n[2026-06-20T13:01:14][DEBUG][GC_API] enter_no_gc_region depth=%d\n[2026-06-20T13:01:14][DEBUG][GC_API] leave_no_gc_region depth=%d\n[2026-06-",
+  "status": "passed"
+}

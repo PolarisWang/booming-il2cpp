@@ -1,291 +1,78 @@
 {
   "assemblyName": "System.Formats.Asn1",
-<<<<<<< Updated upstream
-  "timestamp": "2026-06-16T23:15:46",
-  "totalMethods": 35,
-  "methodsWithNet8": 6,
+  "timestamp": "2026-06-23T20:24:27",
+  "totalMethods": 33,
+  "methodsWithNet8": 0,
   "aggregate": {
-    "chaosAotVsNet8Pct": {
-      "mean": -2246.6,
-      "median": -2246.6,
-      "min": -2246.6,
-      "max": -2246.6,
-      "p25": -2246.6,
-      "p75": -2246.6
-=======
-  "timestamp": "2026-06-18T18:05:09",
-  "totalMethods": 28,
-  "methodsWithNet8": 6,
-  "aggregate": {
-    "chaosJitVsNet8Pct": {
-      "mean": -5228.61,
-      "median": -5228.61,
-      "min": -5228.61,
-      "max": -5228.61,
-      "p25": -5228.61,
-      "p75": -5228.61
->>>>>>> Stashed changes
-    },
-    "chaosJitVsNet8Pct": {
-      "mean": -2648.41,
-      "median": -2648.41,
-      "min": -2648.41,
-      "max": -2648.41,
-      "p25": -2648.41,
-      "p75": -2648.41
-    },
-    "highValueMethods_betterThanNet8": 16.7
+    "highValueMethods_betterThanNet8": 0
   },
   "perChunk": [
     {
       "slug": "system-formats-asn1",
-<<<<<<< Updated upstream
-      "methodCount": 35,
-=======
-      "methodCount": 28,
->>>>>>> Stashed changes
-      "methodsWithNet8": 6,
+      "methodCount": 33,
+      "methodsWithNet8": 0,
       "aggregate": {
-        "methodsBetterThanNet8": 1,
-        "chaosAotVsNet8Pct": {
-          "mean": -2246.6,
-          "median": -1966.86,
-          "min": -5365.33,
-          "max": 99.55,
-          "p25": -3052.0,
-          "p75": -948.38
-        },
-        "highValueMethods_betterThanNet8": 20.0,
-        "chaosJitVsNet8Pct": {
-<<<<<<< Updated upstream
-          "mean": -2648.41,
-          "median": -2427.36,
-          "min": -6171.33,
-          "max": 99.55,
-          "p25": -3579.18,
-          "p75": -1163.72
-=======
-          "mean": -5228.61,
-          "median": -4758.5,
-          "min": -8308.21,
-          "max": -1774.29,
-          "p25": -6583.0,
-          "p75": -4719.05
->>>>>>> Stashed changes
-        },
-        "gcAllocComparison": {
-          "aotVsNet8Ratio": {
-            "mean": -99.64,
-            "median": -100.0,
-            "min": -100.0,
-            "max": -97.83,
-            "p25": -100.0,
-            "p75": -100.0
-          },
-          "methodsWithAllocData": 6
-        }
+        "methodsBetterThanNet8": 0
       },
       "methods": [
         {
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsConstructed:System.Formats.Asn1.Asn1Tag()",
-<<<<<<< Updated upstream
-          "net8Ms": 2.7e-05,
-          "net10Ms": null,
-          "chaosAotMs": 0.000558052,
-          "chaosJitMs": 0.000682388,
-=======
-          "net8Ms": 2e-05,
+          "net8Ms": null,
           "net10Ms": null,
           "chaosAotMs": null,
-          "chaosJitMs": 0.0009717,
->>>>>>> Stashed changes
+          "chaosJitMs": 0.003988559542381695,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
           "chaosAotVsNet8Pct": null,
-<<<<<<< Updated upstream
           "chaosJitVsNet8Pct": null,
-          "status": "net8_error",
-          "bottleneck": "dispatch_overhead",
-=======
-          "chaosJitVsNet8Pct": -4758.5,
-          "status": "completed",
-          "bottleneck": "",
->>>>>>> Stashed changes
-          "gcComparison": {
-            "net8AllocBytes": 74392,
-            "net8CollectionCount0": 0,
-            "net8HeapDelta": 82240,
-            "chaosAotGcPauseNs": 0,
-            "chaosAotAllocBytes": 1616,
-            "chaosAotFastPathRate": 1.0,
-            "aotAllocVsNet8Pct": -97.83
-          }
+          "status": "missing_net8"
         },
         {
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsPrimitive:System.Formats.Asn1.Asn1Tag()",
-<<<<<<< Updated upstream
-          "net8Ms": 2.2e-05,
-          "net10Ms": null,
-          "chaosAotMs": 1e-07,
-          "chaosJitMs": 1e-07,
-=======
-          "net8Ms": 2.1000000000000002e-05,
+          "net8Ms": null,
           "net10Ms": null,
           "chaosAotMs": null,
-          "chaosJitMs": 0.0010119999999999999,
->>>>>>> Stashed changes
+          "chaosJitMs": 0.005440093603744149,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
           "chaosAotVsNet8Pct": null,
-<<<<<<< Updated upstream
           "chaosJitVsNet8Pct": null,
-          "status": "net8_error",
-=======
-          "chaosJitVsNet8Pct": -4719.05,
-          "status": "completed",
->>>>>>> Stashed changes
-          "bottleneck": "",
-          "gcComparison": {
-            "net8AllocBytes": 73568,
-            "net8CollectionCount0": 0,
-            "net8HeapDelta": 74016,
-            "chaosAotGcPauseNs": 0,
-            "chaosAotAllocBytes": 0,
-            "chaosAotFastPathRate": 1.0,
-            "aotAllocVsNet8Pct": -100.0
-          }
+          "status": "missing_net8"
         },
         {
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::CalculateEncodedSize:System.Int32()",
-<<<<<<< Updated upstream
-          "net8Ms": 2.5e-05,
-          "net10Ms": null,
-          "chaosAotMs": 0.000788,
-          "chaosJitMs": 0.000919794,
-=======
-          "net8Ms": 2.1000000000000002e-05,
+          "net8Ms": null,
           "net10Ms": null,
           "chaosAotMs": null,
-          "chaosJitMs": 0.00140343,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.0956838273530943e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
           "chaosAotVsNet8Pct": null,
-<<<<<<< Updated upstream
           "chaosJitVsNet8Pct": null,
-          "status": "net8_error",
-          "bottleneck": "dispatch_overhead",
-=======
-          "chaosJitVsNet8Pct": -6583.0,
-          "status": "completed",
-          "bottleneck": "",
->>>>>>> Stashed changes
-          "gcComparison": {
-            "net8AllocBytes": 73584,
-            "net8CollectionCount0": 0,
-            "net8HeapDelta": 77792,
-            "chaosAotGcPauseNs": 0,
-            "chaosAotAllocBytes": 0,
-            "chaosAotFastPathRate": 1.0,
-            "aotAllocVsNet8Pct": -100.0
-          }
+          "status": "missing_net8"
         },
         {
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::HasSameClassAndValue:System.Boolean(System.Formats.Asn1.Asn1Tag)",
-<<<<<<< Updated upstream
-          "net8Ms": 1.4999999999999999e-05,
-          "net10Ms": null,
-          "chaosAotMs": 0.0008198000000000001,
-          "chaosJitMs": 0.0009406999999999999,
-=======
-          "net8Ms": 1.4e-05,
+          "net8Ms": null,
           "net10Ms": null,
           "chaosAotMs": null,
-          "chaosJitMs": 0.00117715,
->>>>>>> Stashed changes
-          "net8Error": false,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-<<<<<<< Updated upstream
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error",
-          "bottleneck": "dispatch_overhead",
-=======
-          "chaosJitVsNet8Pct": -8308.21,
-          "status": "completed",
-          "bottleneck": "",
->>>>>>> Stashed changes
-          "gcComparison": {
-            "net8AllocBytes": 73600,
-            "net8CollectionCount0": 0,
-            "net8HeapDelta": 74016,
-            "chaosAotGcPauseNs": 0,
-            "chaosAotAllocBytes": 0,
-            "chaosAotFastPathRate": 1.0,
-            "aotAllocVsNet8Pct": -100.0
-          }
-        },
-        {
-          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEncodedValue:System.ReadOnlyMemory<System.Byte>()",
-          "net8Ms": 6.7e-05,
-          "net10Ms": null,
-          "chaosAotMs": 0.000702414,
-          "chaosJitMs": 0.00084669,
+          "chaosJitMs": 2.4596983879355174e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
           "chaosAotVsNet8Pct": null,
           "chaosJitVsNet8Pct": null,
-          "status": "net8_error",
-          "bottleneck": "dispatch_overhead",
-          "gcComparison": {
-            "net8AllocBytes": 361568,
-            "net8CollectionCount0": 0,
-            "net8HeapDelta": 364608,
-            "chaosAotGcPauseNs": 0,
-            "chaosAotAllocBytes": 0,
-            "chaosAotFastPathRate": 1.0,
-            "aotAllocVsNet8Pct": -100.0
-          }
-        },
-        {
-          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
-          "net8Ms": 4.9000000000000005e-05,
-          "net10Ms": null,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": false,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error",
-          "bottleneck": "",
-          "gcComparison": {
-            "net8AllocBytes": 193592,
-            "net8CollectionCount0": 0,
-            "net8HeapDelta": 200640,
-            "chaosAotGcPauseNs": 0,
-            "chaosAotAllocBytes": 0,
-            "chaosAotFastPathRate": 1.0,
-            "aotAllocVsNet8Pct": -100.0
-          }
+          "status": "missing_net8"
         },
         {
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ThrowIfNotEmpty:System.Void()",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.00065236,
-          "chaosJitMs": 0.000749446,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.0011140100000000001,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.4284971398855952e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -297,13 +84,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekTag:System.Formats.Asn1.Asn1Tag()",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.000646842,
-          "chaosJitMs": 0.000767506,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.00123178,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.251690067602704e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -315,13 +97,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekEncodedValue:System.ReadOnlyMemory<System.Byte>()",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.000650414,
-          "chaosJitMs": 0.0007681579999999999,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.00120017,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.251690067602704e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -333,13 +110,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekContentBytes:System.ReadOnlyMemory<System.Byte>()",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.000713574,
-          "chaosJitMs": 0.0008009359999999999,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.00125631,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.0956838273530943e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -348,42 +120,24 @@
           "status": "missing_net8"
         },
         {
-<<<<<<< Updated upstream
-          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::Clone:System.Formats.Asn1.AsnReader()",
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEncodedValue:System.ReadOnlyMemory<System.Byte>()",
           "net8Ms": null,
           "net10Ms": null,
-          "chaosAotMs": 0.000706372,
-          "chaosJitMs": 0.000829462,
-=======
-          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEncodedValue:System.ReadOnlyMemory<System.Byte>()",
-          "net8Ms": 6.500000000000001e-05,
-          "net10Ms": null,
           "chaosAotMs": null,
-          "chaosJitMs": 0.00121829,
+          "chaosJitMs": 2.080083203328133e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
           "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": -1774.29,
-          "status": "completed",
-          "bottleneck": "",
-          "gcComparison": {
-            "net8AllocBytes": 361568,
-            "net8CollectionCount0": 0,
-            "net8HeapDelta": 364608,
-            "chaosAotGcPauseNs": 0,
-            "chaosAotAllocBytes": 1616,
-            "chaosAotFastPathRate": 1.0,
-            "aotAllocVsNet8Pct": -99.55
-          }
+          "chaosJitVsNet8Pct": null,
+          "status": "missing_net8"
         },
         {
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::Clone:System.Formats.Asn1.AsnReader()",
           "net8Ms": null,
           "net10Ms": null,
           "chaosAotMs": null,
-          "chaosJitMs": 0.00107372,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.0956838273530943e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -395,13 +149,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32,System.ReadOnlyMemory<System.Byte>,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.0007570140000000001,
-          "chaosJitMs": 0.000877986,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.0011497,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.0956838273530943e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -413,13 +162,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte[](System.Int32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.0007700459999999999,
-          "chaosJitMs": 0.00100354,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.0012347200000000001,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.0956838273530943e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -431,13 +175,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBoolean:System.Boolean(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.00077922,
-          "chaosJitMs": 0.001036034,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.0012425000000000001,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.251690067602704e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -449,13 +188,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedBytes:System.ReadOnlyMemory<System.Byte>(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.00077564,
-          "chaosJitMs": 0.00111304,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.0012902200000000001,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.251690067602704e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -467,13 +201,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.DayOfWeek(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.000809214,
-          "chaosJitMs": 0.00112948,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.00136206,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.251690067602704e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -485,13 +214,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.Enum(System.Type,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.000785548,
-          "chaosJitMs": 0.001047794,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.00137498,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.251690067602704e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -503,13 +227,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadGeneralizedTime:System.DateTimeOffset(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.000827514,
-          "chaosJitMs": 0.00114332,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.0012004099999999998,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.407696307852314e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -521,13 +240,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadIntegerBytes:System.ReadOnlyMemory<System.Byte>(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.00082104,
-          "chaosJitMs": 0.001006686,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.00141379,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.407696307852314e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -539,13 +253,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadInteger:System.Numerics.BigInteger(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 1e-07,
-          "chaosJitMs": 1e-07,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.00116923,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.4284971398855952e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -557,13 +266,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.000738542,
-          "chaosJitMs": 0.000874006,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.00124602,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.823712948517941e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -575,13 +279,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.0007090800000000001,
-          "chaosJitMs": 0.0009057599999999999,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.0012843400000000001,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.0956838273530943e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -593,13 +292,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.000809234,
-          "chaosJitMs": 0.0009644660000000001,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.00116771,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.0956838273530943e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -611,13 +305,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.000721634,
-          "chaosJitMs": 0.0008892199999999999,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.00155831,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.9121164846593866e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -629,13 +318,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.DayOfWeek(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.000784086,
-          "chaosJitMs": 0.000842732,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.0016370999999999998,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.0956838273530943e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -644,12 +328,11 @@
           "status": "missing_net8"
         },
         {
-<<<<<<< Updated upstream
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.Enum(System.Type,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-          "chaosAotMs": 0.0007870199999999999,
-          "chaosJitMs": 0.000877866,
+          "chaosAotMs": null,
+          "chaosJitMs": 2.0956838273530943e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -661,34 +344,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitList:System.Collections.BitArray(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-          "chaosAotMs": 0.00082498,
-          "chaosJitMs": 0.000942054,
-=======
-          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
-          "net8Ms": 5.1e-05,
-          "net10Ms": null,
           "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": false,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "completed",
-          "bottleneck": "",
-          "gcComparison": {
-            "net8AllocBytes": 193592,
-            "net8CollectionCount0": 0,
-            "net8HeapDelta": 200640
-          }
-        },
-        {
-          "methodSubjectId": "system-formats-asn1::10",
-          "net8Ms": null,
-          "net10Ms": null,
-          "chaosAotMs": null,
-          "chaosJitMs": 0.00112591,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.0956838273530943e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -700,13 +357,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNull:System.Void(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.000699114,
-          "chaosJitMs": 0.0007825400000000001,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.00114297,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.3920956838273532e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -718,9 +370,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadOctetString:System.Byte[](System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-<<<<<<< Updated upstream
-          "chaosAotMs": 0.000820586,
-          "chaosJitMs": 0.0008788800000000001,
+          "chaosAotMs": null,
+          "chaosJitMs": 2.3556942277691108e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -732,8 +383,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlyMemory<System.Byte>,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-          "chaosAotMs": 0.0007558799999999999,
-          "chaosJitMs": 0.00089569,
+          "chaosAotMs": null,
+          "chaosJitMs": 2.1164846593863754e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -745,8 +396,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadObjectIdentifier:System.String(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-          "chaosAotMs": 0.0007889,
-          "chaosJitMs": 0.0008851800000000001,
+          "chaosAotMs": null,
+          "chaosJitMs": 2.1164846593863754e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -758,8 +409,8 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSequence:System.Formats.Asn1.AsnReader(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-          "chaosAotMs": 3.714e-06,
-          "chaosJitMs": 1e-07,
+          "chaosAotMs": null,
+          "chaosJitMs": 2.1164846593863754e-05,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -771,38 +422,21 @@
           "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Nullable<System.Formats.Asn1.Asn1Tag>)",
           "net8Ms": null,
           "net10Ms": null,
-          "chaosAotMs": 0.000996286,
-          "chaosJitMs": 0.0011304000000000002,
-          "net8Error": false,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "missing_net8"
-        },
-        {
-          "methodSubjectId": "system-formats-asn1::12",
-          "net8Ms": null,
-          "net10Ms": null,
-          "chaosAotMs": 0.000741126,
-          "chaosJitMs": 0.000913134,
-          "net8Error": false,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "missing_net8"
-        },
-        {
-          "methodSubjectId": "system-formats-asn1::26",
-          "net8Ms": null,
-          "net10Ms": null,
-          "chaosAotMs": 3.44e-06,
-          "chaosJitMs": 4.27e-06,
-=======
           "chaosAotMs": null,
-          "chaosJitMs": 0.00124878,
->>>>>>> Stashed changes
+          "chaosJitMs": 2.3920956838273532e-05,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "missing_net8"
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Boolean,System.Nullable<System.Formats.Asn1.Asn1Tag>)",
+          "net8Ms": null,
+          "net10Ms": null,
+          "chaosAotMs": null,
+          "chaosJitMs": 0.006030525221008841,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,

@@ -37,7 +37,7 @@ _DEFAULT_NAMESPACE_CHUNKS: dict[str, str] = {
     "System.CodeDom.Compiler": "system",
     "System.StubHelpers": "system",
     # Collections
-    "System.Collections.NonGeneric": "collections",
+    "System.Collections": "collections",
     "System.Collections.Generic": "collections-generic",
     "System.Collections.ObjectModel": "collections-generic",
     "System.Collections.Concurrent": "collections-concurrent",

@@ -1,0 +1,105 @@
+{
+  "chunkSlug": "system-4",
+  "declaredMethods": 500,
+  "coveredMethods": 2166,
+  "missingMethods": 117,
+  "coveragePct": 100.0,
+  "namespaceGaps": {
+    "System.Private.CoreLib/System.MemoryExtensions+TryWriteInterpolatedStringHandler": {
+      "declared": 6,
+      "covered": 0,
+      "gap": 6,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.MissingMemberException": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.NotFiniteNumberException": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.ObjectDisposedException": {
+      "declared": 3,
+      "covered": 2,
+      "gap": 1,
+      "gapPct": 33.3
+    },
+    "System.Private.CoreLib/System.OperatingSystem": {
+      "declared": 23,
+      "covered": 22,
+      "gap": 1,
+      "gapPct": 4.3
+    },
+    "System.Private.CoreLib/System.OrdinalComparer": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.ResolveEventHandler": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.RuntimeFieldHandle": {
+      "declared": 3,
+      "covered": 2,
+      "gap": 1,
+      "gapPct": 33.3
+    },
+    "System.Private.CoreLib/System.RuntimeMethodHandle": {
+      "declared": 4,
+      "covered": 3,
+      "gap": 1,
+      "gapPct": 25.0
+    },
+    "System.Private.CoreLib/System.RuntimeTypeHandle": {
+      "declared": 4,
+      "covered": 3,
+      "gap": 1,
+      "gapPct": 25.0
+    },
+    "System.Private.CoreLib/System.SByte": {
+      "declared": 42,
+      "covered": 28,
+      "gap": 14,
+      "gapPct": 33.3
+    },
+    "System.Private.CoreLib/System.Single": {
+      "declared": 107,
+      "covered": 85,
+      "gap": 22,
+      "gapPct": 20.6
+    },
+    "System.Private.CoreLib/System.String": {
+      "declared": 153,
+      "covered": 137,
+      "gap": 16,
+      "gapPct": 10.5
+    },
+    "System.Private.CoreLib/System.StringNormalizationExtensions": {
+      "declared": 4,
+      "covered": 2,
+      "gap": 2,
+      "gapPct": 50.0
+    },
+    "System.Private.CoreLib/System.TimeOnly": {
+      "declared": 46,
+      "covered": 32,
+      "gap": 14,
+      "gapPct": 30.4
+    },
+    "System.Private.CoreLib/System.TimeSpan": {
+      "declared": 50,
+      "covered": 39,
+      "gap": 11,
+      "gapPct": 22.0
+    }
+  }
+}

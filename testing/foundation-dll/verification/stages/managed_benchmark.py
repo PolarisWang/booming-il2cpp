@@ -87,6 +87,378 @@ _NET8_REPLACEMENTS = [
     ("default(System.ReadOnlyMemory<byte>)", "default(byte[])"),
 ]
 
+# Net9+ API patterns that don't exist in net8.0, found in CombinedSubjects.cs.
+# Methods whose body references any of these are removed entirely for net8.0.
+# The net8.0 baseline is optional, but removing these methods lets the chunk
+# compile and still contribute valid net8.0 results for unaffected methods.
+_NET9_API_PATTERNS: list[str] = [
+    # System.Linq (net9): Enumerable.* extensions — must match fully qualified
+    "Enumerable.AggregateBy",
+    "Enumerable.CountBy",
+    "Enumerable.Index",
+    "Enumerable.LeftJoin",
+    "Enumerable.RightJoin",
+    "Enumerable.Shuffle",
+    "global::System.Linq.Enumerable.Sequence",
+    # System.Formats.Asn1 (net9): AsnWriter.Encode became generic
+    "AsnWriter)!.Encode<",
+    # System.ComponentModel (net9): TypeDescriptor.RegisterType
+    "TypeDescriptor.RegisterType",
+    # System.Diagnostics.Metrics (net9): Meter.CreateGauge, InstrumentAdvice<>
+    "CreateGauge",
+    "InstrumentAdvice<",
+    # System.Diagnostics (net9): DistributedContextPropagator.Create*
+    "DistributedContextPropagator.Create",
+    # System.Security.Cryptography (net9): post-quantum types
+    "CompositeMLDsa",
+    "Kmac128",
+    "Kmac256",
+    "KmacXof128",
+    "KmacXof256",
+    "MLKem",
+    "MLDsa",
+    "SlhDsa",
+    "GetMLKem",
+    "GetMLDsa",
+    "GetSlhDsa",
+    "GetCompositeMLDsa",
+    # System.Reflection.Metadata (net9): TypeName
+    ".Metadata.TypeName",
+    # System.Text.Json (net9): Json.Schema
+    "Text.Json.Schema",
+    # Checks for net9+ APIs that may appear in using statements (not just method bodies)
+    # These namespaces don't exist in net8.0 as part of the framework
+    "System.IO.Pipelines",
+    "System.Net.ServerSentEvents",
+    "System.Text.Json.Schema",
+    # System.Runtime.Intrinsics (net9): Vector64/128/256/512 methods added in .NET 9.
+    # Each pattern uses the fully-qualified VectorXX. prefix to avoid matching
+    # similar names in other assemblies. All 4 widths are covered for each method.
+    #
+    # Some patterns (IsFinite, Round, CopySign) look like they might exist in
+    # net8 but were added as static Vector API methods only in net9 — and the
+    # CombinedSubjects.cs calls the static VectorXX.IsFinite<T> form.
+    "Vector64.AddSaturate",
+    "Vector128.AddSaturate",
+    "Vector256.AddSaturate",
+    "Vector512.AddSaturate",
+    "Vector64.AnyWhereAllBitsSet",
+    "Vector128.AnyWhereAllBitsSet",
+    "Vector256.AnyWhereAllBitsSet",
+    "Vector512.AnyWhereAllBitsSet",
+    "Vector64.AsVector128Unsafe",
+    "Vector128.AsVector128Unsafe",
+    "Vector256.AsVector128Unsafe",
+    "Vector512.AsVector128Unsafe",
+    "Vector64.ClampNative",
+    "Vector128.ClampNative",
+    "Vector256.ClampNative",
+    "Vector512.ClampNative",
+    "Vector64.ConvertToInt32Native",
+    "Vector128.ConvertToInt32Native",
+    "Vector256.ConvertToInt32Native",
+    "Vector512.ConvertToInt32Native",
+    "Vector64.ConvertToInt64Native",
+    "Vector128.ConvertToInt64Native",
+    "Vector256.ConvertToInt64Native",
+    "Vector512.ConvertToInt64Native",
+    "Vector64.ConvertToUInt32Native",
+    "Vector128.ConvertToUInt32Native",
+    "Vector256.ConvertToUInt32Native",
+    "Vector512.ConvertToUInt32Native",
+    "Vector64.ConvertToUInt64Native",
+    "Vector128.ConvertToUInt64Native",
+    "Vector256.ConvertToUInt64Native",
+    "Vector512.ConvertToUInt64Native",
+    "Vector64.CopySign",
+    "Vector128.CopySign",
+    "Vector256.CopySign",
+    "Vector512.CopySign",
+    "Vector64.CountWhereAllBitsSet",
+    "Vector128.CountWhereAllBitsSet",
+    "Vector256.CountWhereAllBitsSet",
+    "Vector512.CountWhereAllBitsSet",
+    "Vector64.CreateSequence",
+    "Vector128.CreateSequence",
+    "Vector256.CreateSequence",
+    "Vector512.CreateSequence",
+    "Vector64.DegreesToRadians",
+    "Vector128.DegreesToRadians",
+    "Vector256.DegreesToRadians",
+    "Vector512.DegreesToRadians",
+    "Vector64.Exp",
+    "Vector128.Exp",
+    "Vector256.Exp",
+    "Vector512.Exp",
+    "Vector64.FusedMultiplyAdd",
+    "Vector128.FusedMultiplyAdd",
+    "Vector256.FusedMultiplyAdd",
+    "Vector512.FusedMultiplyAdd",
+    "Vector64.Hypot",
+    "Vector128.Hypot",
+    "Vector256.Hypot",
+    "Vector512.Hypot",
+    "Vector64.IndexOfWhereAllBitsSet",
+    "Vector128.IndexOfWhereAllBitsSet",
+    "Vector256.IndexOfWhereAllBitsSet",
+    "Vector512.IndexOfWhereAllBitsSet",
+    "Vector64.IsEvenInteger",
+    "Vector128.IsEvenInteger",
+    "Vector256.IsEvenInteger",
+    "Vector512.IsEvenInteger",
+    "Vector64.IsFinite",
+    "Vector128.IsFinite",
+    "Vector256.IsFinite",
+    "Vector512.IsFinite",
+    "Vector64.IsInfinity",
+    "Vector128.IsInfinity",
+    "Vector256.IsInfinity",
+    "Vector512.IsInfinity",
+    "Vector64.IsInteger",
+    "Vector128.IsInteger",
+    "Vector256.IsInteger",
+    "Vector512.IsInteger",
+    "Vector64.IsNaN",
+    "Vector128.IsNaN",
+    "Vector256.IsNaN",
+    "Vector512.IsNaN",
+    "Vector64.IsNegative",
+    "Vector128.IsNegative",
+    "Vector256.IsNegative",
+    "Vector512.IsNegative",
+    "Vector64.IsNormal",
+    "Vector128.IsNormal",
+    "Vector256.IsNormal",
+    "Vector512.IsNormal",
+    "Vector64.IsOddInteger",
+    "Vector128.IsOddInteger",
+    "Vector256.IsOddInteger",
+    "Vector512.IsOddInteger",
+    "Vector64.IsPositive",
+    "Vector128.IsPositive",
+    "Vector256.IsPositive",
+    "Vector512.IsPositive",
+    "Vector64.IsSubnormal",
+    "Vector128.IsSubnormal",
+    "Vector256.IsSubnormal",
+    "Vector512.IsSubnormal",
+    "Vector64.IsZero",
+    "Vector128.IsZero",
+    "Vector256.IsZero",
+    "Vector512.IsZero",
+    "Vector64.LastIndexOfWhereAllBitsSet",
+    "Vector128.LastIndexOfWhereAllBitsSet",
+    "Vector256.LastIndexOfWhereAllBitsSet",
+    "Vector512.LastIndexOfWhereAllBitsSet",
+    "Vector64.MaxMagnitude",
+    "Vector128.MaxMagnitude",
+    "Vector256.MaxMagnitude",
+    "Vector512.MaxMagnitude",
+    "Vector64.MaxMagnitudeNumber",
+    "Vector128.MaxMagnitudeNumber",
+    "Vector256.MaxMagnitudeNumber",
+    "Vector512.MaxMagnitudeNumber",
+    "Vector64.MaxNative",
+    "Vector128.MaxNative",
+    "Vector256.MaxNative",
+    "Vector512.MaxNative",
+    "Vector64.MaxNumber",
+    "Vector128.MaxNumber",
+    "Vector256.MaxNumber",
+    "Vector512.MaxNumber",
+    "Vector64.MinMagnitude",
+    "Vector128.MinMagnitude",
+    "Vector256.MinMagnitude",
+    "Vector512.MinMagnitude",
+    "Vector64.MinMagnitudeNumber",
+    "Vector128.MinMagnitudeNumber",
+    "Vector256.MinMagnitudeNumber",
+    "Vector512.MinMagnitudeNumber",
+    "Vector64.MinNative",
+    "Vector128.MinNative",
+    "Vector256.MinNative",
+    "Vector512.MinNative",
+    "Vector64.MinNumber",
+    "Vector128.MinNumber",
+    "Vector256.MinNumber",
+    "Vector512.MinNumber",
+    "Vector64.NarrowWithSaturation",
+    "Vector128.NarrowWithSaturation",
+    "Vector256.NarrowWithSaturation",
+    "Vector512.NarrowWithSaturation",
+    "Vector64.None",
+    "Vector128.None",
+    "Vector256.None",
+    "Vector512.None",
+    "Vector64.NoneWhereAllBitsSet",
+    "Vector128.NoneWhereAllBitsSet",
+    "Vector256.NoneWhereAllBitsSet",
+    "Vector512.NoneWhereAllBitsSet",
+    "Vector64.RadiansToDegrees",
+    "Vector128.RadiansToDegrees",
+    "Vector256.RadiansToDegrees",
+    "Vector512.RadiansToDegrees",
+    "Vector64.Round",
+    "Vector128.Round",
+    "Vector256.Round",
+    "Vector512.Round",
+    "Vector64.ShuffleNative",
+    "Vector128.ShuffleNative",
+    "Vector256.ShuffleNative",
+    "Vector512.ShuffleNative",
+    "Vector64.Sin",
+    "Vector128.Sin",
+    "Vector256.Sin",
+    "Vector512.Sin",
+    "Vector64.Cos",
+    "Vector128.Cos",
+    "Vector256.Cos",
+    "Vector512.Cos",
+    "Vector64.SinCos",
+    "Vector128.SinCos",
+    "Vector256.SinCos",
+    "Vector512.SinCos",
+    "Vector64.SubtractSaturate",
+    "Vector128.SubtractSaturate",
+    "Vector256.SubtractSaturate",
+    "Vector512.SubtractSaturate",
+    "Vector64.Truncate",
+    "Vector128.Truncate",
+    "Vector256.Truncate",
+    "Vector512.Truncate",
+]
+
+
+def _remove_net9_usings(combined_src: Path) -> bool:
+    """Remove using directives for namespaces that don't exist in net8.0.
+
+    Also handles implicit usings (from <ImplicitUsings>enable</ImplicitUsings>)
+    by matching namespace patterns from _NET9_API_PATTERNS against using lines.
+    """
+    src_text = combined_src.read_text(encoding="utf-8")
+    lines = src_text.splitlines(keepends=True)
+    modified = False
+
+    # Match using directives against all _NET9_API_PATTERNS
+    i = 0
+    while i < len(lines):
+        stripped = lines[i].strip()
+        if stripped.startswith("using ") and stripped.endswith(";"):
+            ns = stripped[6:-1].strip()  # extract namespace from "using X.Y.Z;"
+            for p in _NET9_API_PATTERNS:
+                if p in ns:
+                    del lines[i]
+                    modified = True
+                    break
+            else:
+                i += 1
+        else:
+            i += 1
+
+    if modified:
+        combined_src.write_text("".join(lines), encoding="utf-8")
+    return modified
+
+
+def _remove_net9_methods(combined_src: Path) -> bool:
+    """Remove entire methods whose body references net9+ APIs.
+
+    For net8.0 builds, auto-generated CombinedSubjects.cs may contain calls
+    to net9+ APIs that don't exist in net8.0. This function finds all methods
+    whose body references any _NET9_API_PATTERNS and removes them entirely,
+    including their [Benchmark]/[Fact] attributes.
+
+    Uses brace-depth matching for reliable method boundary detection.
+    Returns True if any modifications were made.
+    """
+    src_text = combined_src.read_text(encoding="utf-8")
+    lines = src_text.splitlines(keepends=True)
+    modified = False
+    line_count = len(lines)
+
+    # Collect all method spans to remove
+    removals: list[tuple[int, int]] = []
+
+    i = 0
+    while i < line_count:
+        stripped = lines[i].strip()
+        # Look for [Benchmark], [Fact], or method signature (NOT class declarations)
+        is_attr = stripped.startswith("[") and stripped.endswith("]")
+        is_method_sig = (stripped.startswith("public ") or stripped.startswith("internal ") or stripped.startswith("private ") or stripped.startswith("static ")) and "(" in stripped
+        if not (is_attr or is_method_sig):
+            i += 1
+            continue
+
+        # Found potential method start — walk forward to find the method body
+        method_start = i
+        j = i
+        has_net9_pattern = False
+
+        # Walk to find opening brace
+        while j < line_count and "{" not in lines[j]:
+            for p in _NET9_API_PATTERNS:
+                if p in lines[j]:
+                    # Skip patterns inside comments
+                    line_before_comment = lines[j].split("//")[0] if "//" in lines[j] else lines[j]
+                    if p in line_before_comment:
+                        has_net9_pattern = True
+                        break
+            j += 1
+
+        if j >= line_count:
+            i = j
+            continue
+
+        # Found opening brace at line j
+        # Scan through brace-matched method body
+        brace_depth = 0
+        body_end = j
+        while body_end < line_count:
+            for ch in lines[body_end]:
+                if ch == '{':
+                    brace_depth += 1
+                elif ch == '}':
+                    brace_depth -= 1
+            if brace_depth == 0:
+                break
+            body_end += 1
+
+        if body_end >= line_count:
+            # Unterminated method — skip
+            i = j + 1
+            continue
+
+        # Now check the entire method body for net9 patterns
+        if not has_net9_pattern:
+            for body_line in range(method_start, body_end + 1):
+                for p in _NET9_API_PATTERNS:
+                    if p in lines[body_line]:
+                        has_net9_pattern = True
+                        break
+                if has_net9_pattern:
+                    break
+
+        if has_net9_pattern:
+            removals.append((method_start, body_end))
+            # Also remove blank lines before the method for clean result
+            if method_start > 0 and lines[method_start - 1].strip() == "":
+                removals.append((method_start - 1, method_start - 1))
+            i = body_end + 1
+        else:
+            i = body_end + 1
+
+    # Apply removals (from end to start to preserve indices)
+    if removals:
+        modified = True
+        removals.sort(reverse=True)
+        for start, end in removals:
+            del lines[start:end + 1]
+
+    if modified:
+        combined_src.write_text("".join(lines), encoding="utf-8")
+
+    return modified
+
 # Benchmark methods using these APIs crash at runtime (stack overflow / buffer
 # overrun / null-pointer deref) and must be excluded from managed benchmarks.
 _UNSAFE_BENCHMARK_PATTERNS: list[str] = [
@@ -170,6 +542,10 @@ def _build_combined_for_tfm(combined_csproj: Path, tfm: str, out_dir: Path) -> b
                 src_was_modified = True
         if src_was_modified:
             combined_src.write_text(orig_src, encoding="utf-8")
+        # Remove entire methods that use net9+ APIs (avoids CS0117/CS0234 errors)
+        _remove_net9_methods(combined_src)
+        # Remove using directives for namespaces that don't exist in net8.0
+        _remove_net9_usings(combined_src)
 
     try:
         # Restore
@@ -255,6 +631,8 @@ def _write_perf_records(
     records: list[dict],
     metadata_methods: list[dict],
     now: str,
+    platform: str = "",
+    device: dict | None = None,
     append: bool = True,
 ) -> int:
     """Write benchmark records to perf store in dashboard-compatible JSONL format.
@@ -286,6 +664,8 @@ def _write_perf_records(
                 "timestamp": now,
                 "slug": slug,
                 "technology": technology,
+                "platform": platform or "windows-x64",
+                "device": device or {"id": "chunk-pipeline", "name": "chunk-pipeline"},
                 "methodSubjectId": method_subject_id,
                 "methodIndex": i,
                 "metrics": {
@@ -425,7 +805,7 @@ def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> 
         with _perf_write_lock:
             completed = _write_perf_records(
                 perf_path, slug, technology, records, metadata_methods, now,
-                append=True)
+                platform=ctx.platform, device=ctx.device, append=True)
         print(f"  [managed-benchmark] {technology}: {completed}/{len(records)} methods OK -> {perf_path}")
         with _perf_write_lock:
             techs_run.append(technology)

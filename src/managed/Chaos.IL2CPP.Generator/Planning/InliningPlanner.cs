@@ -69,7 +69,7 @@ internal sealed class InliningPlanner
     internal const int kColdCallThreshold = 10;
 
     // ── Section names ──────────────────────────────────────────────────
-    internal const string SectionHot = ".text$hot";
+    internal const string SectionHot  = ".text$hot";
     internal const string SectionWarm = ".text$warm";
     internal const string SectionCold = ".text$cold";
 
@@ -92,18 +92,18 @@ internal sealed class InliningPlanner
     {
         return opCode switch
         {
-            "call" or "callvirt" => 3,  // call site — indirect cost
-            "calli" or "cpblk"
-                or "initblk" => 4,  // expensive runtime helpers
-            "throw" or "rethrow" => 5,  // exceptional path
-            "switch" => 3,  // multi-branch
-            "newobj" or "box"
-                or "unbox" => 2,  // allocation path
-            "ldelem" or "stelem"
-                or "ldelema" => 2,  // bounds-checked access
-            "ldfld" or "stfld"
-                or "ldsfld" or "stsfld" => 1,  // simple field access
-            _ => 1,  // default weight
+            "call"       or "callvirt"   => 3,  // call site — indirect cost
+            "calli"      or "cpblk"
+                or "initblk"             => 4,  // expensive runtime helpers
+            "throw"      or "rethrow"    => 5,  // exceptional path
+            "switch"                     => 3,  // multi-branch
+            "newobj"     or "box"
+                or "unbox"               => 2,  // allocation path
+            "ldelem"     or "stelem"
+                or "ldelema"             => 2,  // bounds-checked access
+            "ldfld"      or "stfld"
+                or "ldsfld" or "stsfld"  => 1,  // simple field access
+            _                            => 1,  // default weight
         };
     }
 
@@ -213,18 +213,11 @@ internal sealed class InliningPlanner
     /// </summary>
     internal static string GetSectionAttribute(string sectionName)
     {
-        // GCC/Clang: __attribute__((hot))/((cold)) — optimization hints for
-        // the compiler to place hot/cold code in separate sections.
-        // MSVC does not support __attribute__ — it uses #pragma code_seg
-        // (handled via CMakeLists.txt) and emits C4235 for __attribute__.
-        // Wrap in #ifndef _MSC_VER so the generated C++ compiles on all platforms.
-        string attr = sectionName switch
+        return sectionName switch
         {
-            SectionHot => "__attribute__((hot))",
-            SectionCold => "__attribute__((cold))",
-            _ => "",
+            SectionHot  => " __attribute__((hot))",
+            SectionCold => " __attribute__((cold))",
+            _           => "",
         };
-        return string.IsNullOrEmpty(attr) ? "" :
-            $"#ifndef _MSC_VER\n {attr}\n#endif";
     }
 }

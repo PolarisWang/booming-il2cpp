@@ -1,0 +1,2106 @@
+{
+  "exitCode": 0,
+  "passed": 148,
+  "failed": 0,
+  "assertFailed": 0,
+  "allSemantic": true,
+  "allRevert": true,
+  "revertPassed": 148,
+  "semanticChangedCount": 2,
+  "patchDataUsed": true,
+  "patchFailed": false,
+  "patchSkippedNoMethods": false,
+  "truncated": false,
+  "crash": false,
+  "hasBaselineBenchmark": false,
+  "hasPatchedBenchmark": false,
+  "details": {
+    "baselineFact": [
+      {
+        "si": 0,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 1,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 2,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 3,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 4,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 5,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 6,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 7,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 8,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 9,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 10,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 11,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 12,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 13,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 14,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 15,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 16,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 17,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 18,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 19,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 20,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 21,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 22,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 23,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 24,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 25,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 26,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 27,
+        "passed": true,
+        "value": 2468257857872
+      },
+      {
+        "si": 28,
+        "passed": true,
+        "value": 2468257857904
+      },
+      {
+        "si": 29,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 30,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 31,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 32,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 33,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 34,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 35,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 36,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 37,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 38,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 39,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 40,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 41,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 42,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 43,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 44,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 45,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 46,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 47,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 48,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 49,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 50,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 51,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 52,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 53,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 54,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 55,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 56,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 57,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 58,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 59,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 60,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 61,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 62,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 63,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 64,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 65,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 66,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 67,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 68,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 69,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 70,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 71,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 72,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 73,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 74,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 75,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 76,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 77,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 78,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 79,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 80,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 81,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 82,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 83,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 84,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 85,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 86,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 87,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 88,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 89,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 90,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 91,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 92,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 93,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 94,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 95,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 96,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 97,
+        "passed": true,
+        "value": 2468257857872
+      },
+      {
+        "si": 98,
+        "passed": true,
+        "value": 2468257858336
+      },
+      {
+        "si": 99,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 100,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 101,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 102,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 103,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 104,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 105,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 106,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 107,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 108,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 109,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 110,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 111,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 112,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 113,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 114,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 115,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 116,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 117,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 118,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 119,
+        "passed": true,
+        "value": 861088315128
+      },
+      {
+        "si": 120,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 121,
+        "passed": true,
+        "value": 861088315128
+      },
+      {
+        "si": 122,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 123,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 124,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 125,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 126,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 127,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 128,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 129,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 130,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 131,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 132,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 133,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 134,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 135,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 136,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 137,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 138,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 139,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 140,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 141,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 142,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 143,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 144,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 145,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 146,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 147,
+        "passed": true,
+        "value": 42
+      }
+    ],
+    "patchedFact": [
+      {
+        "si": 0,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 1,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 2,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 3,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 4,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 5,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 6,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 7,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 8,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 9,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 10,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 11,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 12,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 13,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 14,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 15,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 16,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 17,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 18,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 19,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 20,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 21,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 22,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 23,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 24,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 25,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 26,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 27,
+        "passed": true,
+        "value": 2468257857872
+      },
+      {
+        "si": 28,
+        "passed": true,
+        "value": 2468257858384
+      },
+      {
+        "si": 29,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 30,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 31,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 32,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 33,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 34,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 35,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 36,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 37,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 38,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 39,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 40,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 41,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 42,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 43,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 44,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 45,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 46,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 47,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 48,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 49,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 50,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 51,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 52,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 53,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 54,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 55,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 56,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 57,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 58,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 59,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 60,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 61,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 62,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 63,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 64,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 65,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 66,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 67,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 68,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 69,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 70,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 71,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 72,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 73,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 74,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 75,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 76,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 77,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 78,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 79,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 80,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 81,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 82,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 83,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 84,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 85,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 86,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 87,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 88,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 89,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 90,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 91,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 92,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 93,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 94,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 95,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 96,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 97,
+        "passed": true,
+        "value": 2468257857872
+      },
+      {
+        "si": 98,
+        "passed": true,
+        "value": 2468257858816
+      },
+      {
+        "si": 99,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 100,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 101,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 102,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 103,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 104,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 105,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 106,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 107,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 108,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 109,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 110,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 111,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 112,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 113,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 114,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 115,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 116,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 117,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 118,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 119,
+        "passed": true,
+        "value": 861088315128
+      },
+      {
+        "si": 120,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 121,
+        "passed": true,
+        "value": 861088315128
+      },
+      {
+        "si": 122,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 123,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 124,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 125,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 126,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 127,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 128,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 129,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 130,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 131,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 132,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 133,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 134,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 135,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 136,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 137,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 138,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 139,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 140,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 141,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 142,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 143,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 144,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 145,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 146,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 147,
+        "passed": true,
+        "value": 42
+      }
+    ],
+    "revertedFact": [
+      {
+        "si": 0,
+        "passed": true
+      },
+      {
+        "si": 1,
+        "passed": true
+      },
+      {
+        "si": 2,
+        "passed": true
+      },
+      {
+        "si": 3,
+        "passed": true
+      },
+      {
+        "si": 4,
+        "passed": true
+      },
+      {
+        "si": 5,
+        "passed": true
+      },
+      {
+        "si": 6,
+        "passed": true
+      },
+      {
+        "si": 7,
+        "passed": true
+      },
+      {
+        "si": 8,
+        "passed": true
+      },
+      {
+        "si": 9,
+        "passed": true
+      },
+      {
+        "si": 10,
+        "passed": true
+      },
+      {
+        "si": 11,
+        "passed": true
+      },
+      {
+        "si": 12,
+        "passed": true
+      },
+      {
+        "si": 13,
+        "passed": true
+      },
+      {
+        "si": 14,
+        "passed": true
+      },
+      {
+        "si": 15,
+        "passed": true
+      },
+      {
+        "si": 16,
+        "passed": true
+      },
+      {
+        "si": 17,
+        "passed": true
+      },
+      {
+        "si": 18,
+        "passed": true
+      },
+      {
+        "si": 19,
+        "passed": true
+      },
+      {
+        "si": 20,
+        "passed": true
+      },
+      {
+        "si": 21,
+        "passed": true
+      },
+      {
+        "si": 22,
+        "passed": true
+      },
+      {
+        "si": 23,
+        "passed": true
+      },
+      {
+        "si": 24,
+        "passed": true
+      },
+      {
+        "si": 25,
+        "passed": true
+      },
+      {
+        "si": 26,
+        "passed": true
+      },
+      {
+        "si": 27,
+        "passed": true
+      },
+      {
+        "si": 28,
+        "passed": true
+      },
+      {
+        "si": 29,
+        "passed": true
+      },
+      {
+        "si": 30,
+        "passed": true
+      },
+      {
+        "si": 31,
+        "passed": true
+      },
+      {
+        "si": 32,
+        "passed": true
+      },
+      {
+        "si": 33,
+        "passed": true
+      },
+      {
+        "si": 34,
+        "passed": true
+      },
+      {
+        "si": 35,
+        "passed": true
+      },
+      {
+        "si": 36,
+        "passed": true
+      },
+      {
+        "si": 37,
+        "passed": true
+      },
+      {
+        "si": 38,
+        "passed": true
+      },
+      {
+        "si": 39,
+        "passed": true
+      },
+      {
+        "si": 40,
+        "passed": true
+      },
+      {
+        "si": 41,
+        "passed": true
+      },
+      {
+        "si": 42,
+        "passed": true
+      },
+      {
+        "si": 43,
+        "passed": true
+      },
+      {
+        "si": 44,
+        "passed": true
+      },
+      {
+        "si": 45,
+        "passed": true
+      },
+      {
+        "si": 46,
+        "passed": true
+      },
+      {
+        "si": 47,
+        "passed": true
+      },
+      {
+        "si": 48,
+        "passed": true
+      },
+      {
+        "si": 49,
+        "passed": true
+      },
+      {
+        "si": 50,
+        "passed": true
+      },
+      {
+        "si": 51,
+        "passed": true
+      },
+      {
+        "si": 52,
+        "passed": true
+      },
+      {
+        "si": 53,
+        "passed": true
+      },
+      {
+        "si": 54,
+        "passed": true
+      },
+      {
+        "si": 55,
+        "passed": true
+      },
+      {
+        "si": 56,
+        "passed": true
+      },
+      {
+        "si": 57,
+        "passed": true
+      },
+      {
+        "si": 58,
+        "passed": true
+      },
+      {
+        "si": 59,
+        "passed": true
+      },
+      {
+        "si": 60,
+        "passed": true
+      },
+      {
+        "si": 61,
+        "passed": true
+      },
+      {
+        "si": 62,
+        "passed": true
+      },
+      {
+        "si": 63,
+        "passed": true
+      },
+      {
+        "si": 64,
+        "passed": true
+      },
+      {
+        "si": 65,
+        "passed": true
+      },
+      {
+        "si": 66,
+        "passed": true
+      },
+      {
+        "si": 67,
+        "passed": true
+      },
+      {
+        "si": 68,
+        "passed": true
+      },
+      {
+        "si": 69,
+        "passed": true
+      },
+      {
+        "si": 70,
+        "passed": true
+      },
+      {
+        "si": 71,
+        "passed": true
+      },
+      {
+        "si": 72,
+        "passed": true
+      },
+      {
+        "si": 73,
+        "passed": true
+      },
+      {
+        "si": 74,
+        "passed": true
+      },
+      {
+        "si": 75,
+        "passed": true
+      },
+      {
+        "si": 76,
+        "passed": true
+      },
+      {
+        "si": 77,
+        "passed": true
+      },
+      {
+        "si": 78,
+        "passed": true
+      },
+      {
+        "si": 79,
+        "passed": true
+      },
+      {
+        "si": 80,
+        "passed": true
+      },
+      {
+        "si": 81,
+        "passed": true
+      },
+      {
+        "si": 82,
+        "passed": true
+      },
+      {
+        "si": 83,
+        "passed": true
+      },
+      {
+        "si": 84,
+        "passed": true
+      },
+      {
+        "si": 85,
+        "passed": true
+      },
+      {
+        "si": 86,
+        "passed": true
+      },
+      {
+        "si": 87,
+        "passed": true
+      },
+      {
+        "si": 88,
+        "passed": true
+      },
+      {
+        "si": 89,
+        "passed": true
+      },
+      {
+        "si": 90,
+        "passed": true
+      },
+      {
+        "si": 91,
+        "passed": true
+      },
+      {
+        "si": 92,
+        "passed": true
+      },
+      {
+        "si": 93,
+        "passed": true
+      },
+      {
+        "si": 94,
+        "passed": true
+      },
+      {
+        "si": 95,
+        "passed": true
+      },
+      {
+        "si": 96,
+        "passed": true
+      },
+      {
+        "si": 97,
+        "passed": true
+      },
+      {
+        "si": 98,
+        "passed": true
+      },
+      {
+        "si": 99,
+        "passed": true
+      },
+      {
+        "si": 100,
+        "passed": true
+      },
+      {
+        "si": 101,
+        "passed": true
+      },
+      {
+        "si": 102,
+        "passed": true
+      },
+      {
+        "si": 103,
+        "passed": true
+      },
+      {
+        "si": 104,
+        "passed": true
+      },
+      {
+        "si": 105,
+        "passed": true
+      },
+      {
+        "si": 106,
+        "passed": true
+      },
+      {
+        "si": 107,
+        "passed": true
+      },
+      {
+        "si": 108,
+        "passed": true
+      },
+      {
+        "si": 109,
+        "passed": true
+      },
+      {
+        "si": 110,
+        "passed": true
+      },
+      {
+        "si": 111,
+        "passed": true
+      },
+      {
+        "si": 112,
+        "passed": true
+      },
+      {
+        "si": 113,
+        "passed": true
+      },
+      {
+        "si": 114,
+        "passed": true
+      },
+      {
+        "si": 115,
+        "passed": true
+      },
+      {
+        "si": 116,
+        "passed": true
+      },
+      {
+        "si": 117,
+        "passed": true
+      },
+      {
+        "si": 118,
+        "passed": true
+      },
+      {
+        "si": 119,
+        "passed": true
+      },
+      {
+        "si": 120,
+        "passed": true
+      },
+      {
+        "si": 121,
+        "passed": true
+      },
+      {
+        "si": 122,
+        "passed": true
+      },
+      {
+        "si": 123,
+        "passed": true
+      },
+      {
+        "si": 124,
+        "passed": true
+      },
+      {
+        "si": 125,
+        "passed": true
+      },
+      {
+        "si": 126,
+        "passed": true
+      },
+      {
+        "si": 127,
+        "passed": true
+      },
+      {
+        "si": 128,
+        "passed": true
+      },
+      {
+        "si": 129,
+        "passed": true
+      },
+      {
+        "si": 130,
+        "passed": true
+      },
+      {
+        "si": 131,
+        "passed": true
+      },
+      {
+        "si": 132,
+        "passed": true
+      },
+      {
+        "si": 133,
+        "passed": true
+      },
+      {
+        "si": 134,
+        "passed": true
+      },
+      {
+        "si": 135,
+        "passed": true
+      },
+      {
+        "si": 136,
+        "passed": true
+      },
+      {
+        "si": 137,
+        "passed": true
+      },
+      {
+        "si": 138,
+        "passed": true
+      },
+      {
+        "si": 139,
+        "passed": true
+      },
+      {
+        "si": 140,
+        "passed": true
+      },
+      {
+        "si": 141,
+        "passed": true
+      },
+      {
+        "si": 142,
+        "passed": true
+      },
+      {
+        "si": 143,
+        "passed": true
+      },
+      {
+        "si": 144,
+        "passed": true
+      },
+      {
+        "si": 145,
+        "passed": true
+      },
+      {
+        "si": 146,
+        "passed": true
+      },
+      {
+        "si": 147,
+        "passed": true
+      }
+    ],
+    "passedMethods": 148,
+    "failedMethods": 0,
+    "totalMethods": 148,
+    "allSemantic": true,
+    "allRevert": true,
+    "semanticChangedCount": 2,
+    "patchedAssertFailed": 0
+  },
+  "stderr": "[2026-06-18T13:59:00][INFO][GcLowMem] low-memory monitor started\n[2026-06-18T13:59:00][DEBUG][codegen] T4 VEH handler registered\n[2026-06-18T13:59:00][DEBUG][GcEvents] registered callback 0x7ff731074a90 at slot 0\n[2026-06-18T13:59:00][DEBUG][codegen] T4 VEH handler registered\n[2026-06-18T13:59:00][DEBUG][GcEvents] registered callback 0x7ff731074a90 at slot 1\nINFO: Applied patches to 0 methods from D:\\agent\\chaos-il2cpp\\testing\\foundation-dll\\System.Private.Xml\\chunks\\system-xml-serialization\\nat",
+  "status": "passed"
+}

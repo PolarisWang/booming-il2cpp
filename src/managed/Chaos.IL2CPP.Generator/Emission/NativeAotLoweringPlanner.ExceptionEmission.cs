@@ -23,11 +23,6 @@ public sealed partial class NativeAotLoweringPlanner
         StructuredSlotTypes = new System.Collections.Generic.Stack<SlotType>(),
     });
 
-    /// <summary>Local snapshot of _state.Value for hot-path access.
-    /// Use __st instead of _state.Value! to avoid ThreadLocal access overhead.
-    /// Assigned at the top of each emission entry method before use.</summary>
-    private PerMethodState __st = null!;
-
     private static readonly HashSet<string> ToCharEligiblePrimitives = new()
     {
         "System.Byte", "System.SByte", "System.Int16", "System.Int32", "System.Int64",
