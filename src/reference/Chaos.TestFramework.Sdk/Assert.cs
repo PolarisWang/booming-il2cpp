@@ -10,15 +10,18 @@ internal class AssertionException : System.Exception
 public static class Assert
 {
     [ThreadStatic] private static int s_exitCode;
+    [ThreadStatic] private static int s_assertCount;
 
-    internal static void Reset() => s_exitCode = 0;
+    internal static void Reset() { s_exitCode = 0; s_assertCount = 0; }
     internal static void RecordFailure() => s_exitCode = 1;
-    internal static int Complete() { int c = s_exitCode; s_exitCode = 0; return c; }
+    internal static int Complete() { int c = s_exitCode; s_exitCode = 0; s_assertCount = 0; return c; }
     internal static int ExitCode => s_exitCode;
+    internal static int ReadAssertCount() { int c = s_assertCount; s_assertCount = 0; return c; }
 
     [Conditional("VERIFY")]
     public static void AreEqual(int expected, int actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected {expected}, got {actual}");
     }
@@ -26,6 +29,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(uint expected, uint actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected {expected}, got {actual}");
     }
@@ -33,6 +37,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(long expected, long actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected {expected}, got {actual}");
     }
@@ -40,6 +45,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(ulong expected, ulong actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected {expected}, got {actual}");
     }
@@ -47,6 +53,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(short expected, short actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected {expected}, got {actual}");
     }
@@ -54,6 +61,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(ushort expected, ushort actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected {expected}, got {actual}");
     }
@@ -61,6 +69,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(byte expected, byte actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected {expected}, got {actual}");
     }
@@ -68,6 +77,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(sbyte expected, sbyte actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected {expected}, got {actual}");
     }
@@ -75,6 +85,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(char expected, char actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected '{expected}', got '{actual}'");
     }
@@ -82,6 +93,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(bool expected, bool actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected {expected}, got {actual}");
     }
@@ -89,6 +101,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(float expected, float actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected {expected}, got {actual}");
     }
@@ -96,6 +109,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(double expected, double actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected {expected}, got {actual}");
     }
@@ -103,6 +117,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(decimal expected, decimal actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected {expected}, got {actual}");
     }
@@ -110,6 +125,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(string expected, string actual, string? message = null)
     {
+        s_assertCount++;
         if (expected != actual)
             Fail(message ?? $"Expected '{expected}', got '{actual}'");
     }
@@ -122,6 +138,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(object? expected, object? actual, string? message = null)
     {
+        s_assertCount++;
         if (!Equals(expected, actual))
         {
             var ex = expected?.ToString() ?? "null";
@@ -133,6 +150,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void IsNull(object? value, string? message = null)
     {
+        s_assertCount++;
         if (value != null)
             Fail(message ?? $"Expected null, got {value}");
     }
@@ -140,6 +158,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void IsNotNull(object? value, string? message = null)
     {
+        s_assertCount++;
         if (value == null)
             Fail(message ?? "Expected non-null");
     }
@@ -147,6 +166,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void IsTrue(bool condition, string? message = null)
     {
+        s_assertCount++;
         if (!condition)
             Fail(message ?? "Expected true");
     }
@@ -154,6 +174,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void IsFalse(bool condition, string? message = null)
     {
+        s_assertCount++;
         if (condition)
             Fail(message ?? "Expected false");
     }
@@ -161,6 +182,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void Throws(System.Action action)
     {
+        s_assertCount++;
         try { action(); Fail("Expected exception but none thrown"); }
         catch (AssertionException) { throw; }
         catch { }
@@ -231,6 +253,7 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual(byte[] expected, byte[] actual, string? message = null)
     {
+        s_assertCount++;
         if ((expected is null) != (actual is null)) { Fail(message ?? "Expected != actual (null mismatch)"); return; }
         if (expected is null) return;
         if (expected.Length != actual!.Length) { Fail(message ?? $"Expected length {expected.Length}, got {actual.Length}"); return; }

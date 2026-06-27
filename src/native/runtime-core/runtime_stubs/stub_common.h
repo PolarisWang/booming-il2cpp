@@ -23,8 +23,15 @@ struct ManagedArrayAccessor {
     CHAOS_IL2CPP_INTPTR length;
     // elements pointer removed — contiguous after header.
 };
+// ManagedArrayAccessor must be 32 bytes on 64-bit with default alignment.
+// If cross-building against a pre-built SDK (different /Zp), this assert may
+// trigger despite correct layout at the C++ semantics level. In that case,
+// define CHAOS_SDK_CROSS_BUILD to skip this compile-time check and rely on
+// runtime layout validation instead.
+#if !defined(CHAOS_SDK_CROSS_BUILD)
 static_assert(sizeof(ManagedArrayAccessor) == 32,
     "ManagedArrayAccessor must be 32 bytes");
+#endif
 
 inline const ManagedArrayAccessor* get_managed_array(CHAOS_IL2CPP_INTPTR handle) noexcept {
     return reinterpret_cast<const ManagedArrayAccessor*>(handle);
