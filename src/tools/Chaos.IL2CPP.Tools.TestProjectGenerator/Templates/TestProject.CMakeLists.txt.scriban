@@ -159,14 +159,6 @@ set(CHAOS_ENTRY_STUBS
 set(CHAOS_CRYPTO_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
 )
-set(CHAOS_GC_ALLOC_STUBS
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc/gc_api.cpp"
-)
-set(CHAOS_OBJECT_STUBS
-    "${CHAOS_SDK_DIR}/runtime_stubs/object_stubs.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/string_stubs.cpp"
-)
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
@@ -184,8 +176,6 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
-    ${CHAOS_GC_ALLOC_STUBS}
-    ${CHAOS_OBJECT_STUBS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -210,9 +200,6 @@ set(CHAOS_ENTRY_INCLUDES
     # codegen/generated — needed for enum_metadata.generated.h and other
     # generated headers that aren't copied to subjects/ by TPG's flat layout.
     "${CHAOS_CODEGEN_DIR}/generated"
-    # Chaos SDK include — provides runtime_stubs headers (array_stubs.h,
-    # enum_stubs.h, etc.) referenced by generated code.
-    "${CHAOS_SDK_DIR}/include"
 )
 
 add_executable({{ project_name }} ${CHAOS_ENTRY_SOURCES})
