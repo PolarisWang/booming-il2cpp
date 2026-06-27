@@ -116,9 +116,9 @@ struct ManagedThread {
     std::atomic<bool>        pending_interrupt{false}; // Thread.Interrupt pending flag
 
     // ── Thread metadata ─────────────────────────────────────────
-    bool                     is_background{false};    // Thread.IsBackground flag
-    bool                     is_threadpool{false};    // ThreadPool worker flag
-    ManagedThreadState       managed_state{ManagedThreadState::Unstarted};
+    std::atomic<bool>        is_background{false};    // Thread.IsBackground flag
+    std::atomic<bool>        is_threadpool{false};    // ThreadPool worker flag
+    std::atomic<ManagedThreadState>       managed_state{ManagedThreadState::Unstarted};
     ManagedThreadPriority    priority{ManagedThreadPriority::Normal};
 
     // ── OS handle for APC/thread ops ─────────────────────────────┐
