@@ -740,6 +740,10 @@ public sealed partial class NativeAotLoweringPlanner
                     string _loadExpr = PrepareConvOvfValue();
                     ConsumeEvalStackValueExpression();
                     ConsumeSlotType();
+                    // Safety net: if PrepareConvOvfValue returned empty (stack underflow),
+                    // emit 0 as default to avoid malformed C++ (C2059 syntax error).
+                    if (string.IsNullOrEmpty(_loadExpr))
+                        _loadExpr = "0";
                     EmitEvalStackPush(builder, indentation, $"ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>({_loadExpr}))", SlotType.Int64);
                     PushSlotType(SlotType.Int64);
                     break;

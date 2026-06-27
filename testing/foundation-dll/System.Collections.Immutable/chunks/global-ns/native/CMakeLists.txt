@@ -186,6 +186,7 @@ set(CHAOS_ENTRY_SOURCES
 set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"
     "${CHAOS_PROJECT_ROOT}/src/native/common"
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native"
@@ -203,6 +204,9 @@ set(CHAOS_ENTRY_INCLUDES
     # codegen/generated — needed for enum_metadata.generated.h and other
     # generated headers that aren't copied to subjects/ by TPG's flat layout.
     "${CHAOS_CODEGEN_DIR}/generated"
+    # codegen/include — runtime_stubs headers (array_stubs.h, enum_stubs.h, etc.)
+    # copied from the prebuilt SDK.
+    "${CHAOS_CODEGEN_DIR}/include"
 )
 
 add_executable(chaos_entry ${CHAOS_ENTRY_SOURCES})
