@@ -388,6 +388,8 @@ def _collect_chunk_results(
             build_st = stages.get("build", StageResult(stage="build", status="?")).status
         except Exception as e:
             key = f"<future #{completed}>"
+            import traceback
+            traceback.print_exc()
             results[key] = {
                 "build": StageResult(stage="build", status="skipped",
                                      summary=f"future exception: {e}")}
