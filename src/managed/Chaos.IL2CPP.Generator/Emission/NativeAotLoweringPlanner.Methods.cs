@@ -204,8 +204,6 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private HashSet<string>? _emittedValueTypeSubjectIds;
 
-    internal HashSet<string>? _emittedValueTypeSubjectIdsFromAbi;
-
     /// <summary>
     /// Full C++ struct body code for value types that have fields or _backing
     /// members, captured during EmitObjectModelDeclarations. Used by
@@ -385,9 +383,6 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     internal int PcDispatchCount;
     internal int CodegenFailureCount;
-    /// <summary>Backing field for atomic failure counting from
-    /// Parallel.For threads.  Read via CodegenFailureCount property.</summary>
-    internal int _CodegenFailureCountRaw;
     internal Dictionary<string, int> CodegenFailureByType = new();
     internal Dictionary<string, int> CodegenFailureByChunk = new();
 
@@ -396,9 +391,6 @@ public sealed partial class NativeAotLoweringPlanner
     /// Populated by <see cref="PrebuildExternalRuntimeDispatchTable"/> before method body emission.
     /// </summary>
     private readonly Dictionary<string, int> _externalRuntimeSubjects = new(StringComparer.Ordinal);
-    /// <summary>Set to true after first scan of aotCoreIr.Methods for external
-    /// runtime subjects.  Prevents O(N) re-scan on consecutive runs.</summary>
-    private bool _externalRuntimeSubjectsCached;
 
     /// <summary>
     /// Collects all chaos_external_runtime_* symbols referenced during method body emission.
@@ -912,18 +904,15 @@ public sealed partial class NativeAotLoweringPlanner
             methodsForLowering,
             closureManifest);
         _tStaticInit = _sw.ElapsedMilliseconds;
-        // CollectExternalRuntimeHelpers and CollectExternalRuntimeDispatchEntries +
-        // CollectBridgeImportThunks have no data dependency — parallelize.
-        IReadOnlyList<ExternalRuntimeHelperDefinition> externalRuntimeHelpers = null!;
-        System.Threading.Tasks.Parallel.Invoke(
-            () => { externalRuntimeHelpers = CollectExternalRuntimeHelpers(methodsForLowering, _staticInitializationSupport); },
-            () => { CollectExternalRuntimeDispatchEntries(methodsForLowering); },
-            () => { CollectBridgeImportThunks(methodsForLowering); }
-        );
+        var externalRuntimeHelpers = CollectExternalRuntimeHelpers(methodsForLowering, _staticInitializationSupport);
         _tExtHelpers = _sw.ElapsedMilliseconds;
         _externalRuntimeHelpers = externalRuntimeHelpers;
+        CollectExternalRuntimeDispatchEntries(methodsForLowering);
+        _tExtDispatch = _sw.ElapsedMilliseconds;
+        CollectBridgeImportThunks(methodsForLowering);
+        _tBridgeThunks = _sw.ElapsedMilliseconds;
         _tPhase2 = _sw.ElapsedMilliseconds;
-        var objectModelBuilder = StringBuilderPool.Rent(65536);
+        var objectModelBuilder = new StringBuilder(65536);
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
         EmitObjectModelDeclarations(objectModelBuilder, methodsForLowering, externalRuntimeHelpers, metadataRegistration);
         // Collect static field references from hotpatchable methods not in methodsForLowering.
@@ -990,9 +979,6 @@ public sealed partial class NativeAotLoweringPlanner
             objectModelBuilder.AppendLine($"static CHAOS_IL2CPP_INTPTR _g_bake_cache_[{_enumAotBakeCacheArraySize}] = {{}};");
             objectModelBuilder.AppendLine();
         }
-        // Ensure __st is initialized for PreTryFoldInitializers access
-        // (BuildTypeHierarchyPtrFoldTable uses __st which requires _state.Value).
-        __st = _state.Value!;
         // A2.6: Pre-scan for typeof(T).IsAssignableFrom(typeof(U)) → *Ptr direct API
         BuildTypeHierarchyPtrFoldTable(methodsForLowering);
         // A2.7: Pre-scan for typeof(const_type) → direct TypeInfo* pointer
@@ -1076,23 +1062,14 @@ public sealed partial class NativeAotLoweringPlanner
         var entryBridgeArguments = fullAssemblyMode ? "" : BuildEntryBridgeArguments(entryMethod!);
 
         var abiManifestCode = BuildAbiManifest(methodsForLowering);
-        // Parallel build for independent dispatch/registration data.
-        // BuildHotpatchTable, BuildExternalRuntimeDispatchTable, BuildGcSlotMapSection
-        // are independent of each other (no shared mutable state) and only read
-        // methodsForLowering / metadataRegistration (read-only after lowering).
+        var nameIndexCode = BuildHotpatchTable(methodsForLowering, metadataRegistration);
+        var externalRuntimeTableCode = BuildExternalRuntimeDispatchTable(
+            helperSymbolBySubjectId: externalRuntimeHelpers?
+                .Where(h => !string.IsNullOrEmpty(h.TargetSymbol))
+                .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal));
         var cryptoAotIrCode = BuildCryptoAotIrCode();
-        string nameIndexCode = "", externalRuntimeTableCode = "", gcSlotMapCode = "";
-        System.Threading.Tasks.Parallel.Invoke(
-            () => { nameIndexCode = BuildHotpatchTable(methodsForLowering, metadataRegistration); },
-            () => { externalRuntimeTableCode = BuildExternalRuntimeDispatchTable(
-                helperSymbolBySubjectId: externalRuntimeHelpers?
-                    .Where(h => !string.IsNullOrEmpty(h.TargetSymbol))
-                    .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal)); },
-            () => { gcSlotMapCode = BuildGcSlotMapSection(methodsForLowering); }
-        );
         var moduleRegistrationCode = BuildModuleRegistration();
-        var moduleRegSb = StringBuilderPool.Rent(65536);
-        moduleRegSb.Append(moduleRegistrationCode);
+        var moduleRegSb = new StringBuilder(moduleRegistrationCode, 65536);
         if (!string.IsNullOrEmpty(nameIndexCode))
         {
             moduleRegSb.Append(Environment.NewLine);
@@ -1133,7 +1110,10 @@ public sealed partial class NativeAotLoweringPlanner
             moduleRegSb.Append(dispatchEntryCode);
         }
 
-        // Step 1.5: Emit GC slot map section (already computed in parallel above).
+        // Step 1.5: Emit GC slot map section for precise stack root scanning.
+        // Placed BEFORE CodeRegistrationV0 so the slot_map_section_begin/end
+        // symbols are defined before they're referenced.
+        var gcSlotMapCode = BuildGcSlotMapSection(methodsForLowering);
         if (!string.IsNullOrEmpty(gcSlotMapCode))
         {
             moduleRegSb.Append(Environment.NewLine);
@@ -1237,7 +1217,7 @@ public sealed partial class NativeAotLoweringPlanner
     // Load JIT method data from {jitDataFilename} file.
     // Phase 2: switched to ABI table
     chaos_runtime_get_abi_v0()->register_hotpatch_module(chaos_il2cpp_aot_hotpatch_module);
-    uint64_t jit_data_size = 0;
+    CHAOS_IL2CPP_UINT64 jit_data_size = 0;
     void* jit_data = ChaosJitDataLoad(""{jitDataFilename}"", &jit_data_size);
     RegisterJitEntryMethods(kChaosJitEntries, kChaosJitEntryCount,
                             static_cast<const char*>(jit_data));
@@ -1379,12 +1359,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Missing entries cause C3861 in the generated header.
         // Also collect static field declarations from all methods
         // for chaos_static_* extern declarations.
-        // Skip if we already scanned (cached flag) to avoid O(N) re-scan
-        // on every codegen run — for large chunks with 5000+ methods this
-        // saves 500K+ iterations during the registration_dispatch phase.
-        if (_externalRuntimeSubjectsCached != true)
         {
-            _externalRuntimeSubjectsCached = true;
             var _seen = new HashSet<string>(StringComparer.Ordinal);
             int _nextIdx = _externalRuntimeSubjects.Count;
             foreach (var _method in aotCoreIr.Methods)

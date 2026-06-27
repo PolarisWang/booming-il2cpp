@@ -51,22 +51,6 @@ public sealed partial class AotCoreIrLowering
         // Last-wins dedup: duplicate SubjectIds from cross-assembly loading (--assembly-dir)
         var managedTypes = new Dictionary<string, ManagedTypeModel>(StringComparer.Ordinal);
         foreach (var t in linkedWorld.Types) { if (!string.IsNullOrEmpty(t.SubjectId)) managedTypes[t.SubjectId] = t; }
-        // Build a DisplayName/Name → SubjectId index for quick reverse lookup.
-        // ResolveAbiSlot receives typeIdentity as a DisplayName (e.g. "System.Int64")
-        // but managedTypes keys are SubjectIds (e.g. "System.Private.CoreLib/System.Int64").
-        // Without this index, TryResolveManagedType falls back to slow fuzzy matching
-        // which fails for cross-assembly types, leaving TypeSubjectId=null in ~99% of cases.
-        var displayNameToSubjectId = new Dictionary<string, string>(StringComparer.Ordinal);
-        foreach (var t in linkedWorld.Types)
-        {
-            if (!string.IsNullOrEmpty(t.SubjectId))
-            {
-                if (!string.IsNullOrEmpty(t.DisplayName) && !displayNameToSubjectId.ContainsKey(t.DisplayName))
-                    displayNameToSubjectId[t.DisplayName] = t.SubjectId;
-                if (!string.IsNullOrEmpty(t.Name) && !displayNameToSubjectId.ContainsKey(t.Name))
-                    displayNameToSubjectId[t.Name] = t.SubjectId;
-            }
-        }
         var managedFields = new Dictionary<string, ManagedFieldModel>(StringComparer.Ordinal);
         foreach (var f in linkedWorld.Fields) { if (!string.IsNullOrEmpty(f.SubjectId)) managedFields[f.SubjectId] = f; }
         var managedMethods = new Dictionary<string, ManagedMethodModel>(StringComparer.Ordinal);
@@ -86,8 +70,7 @@ public sealed partial class AotCoreIrLowering
                 managedFields,
                 managedMethods,
                 targetSymbols,
-                genericDemandLookup,
-                displayNameToSubjectId))
+                genericDemandLookup))
             .Where(method => method is not null)
             .Select(method => method!)
             .ToList();
@@ -130,8 +113,7 @@ public sealed partial class AotCoreIrLowering
         IReadOnlyDictionary<string, ManagedFieldModel> managedFields,
         IReadOnlyDictionary<string, ManagedMethodModel> managedMethods,
         IReadOnlyDictionary<string, string> targetSymbols,
-        IReadOnlyDictionary<string, GenericInstantiationDemandModel> genericDemandLookup,
-        IReadOnlyDictionary<string, string>? displayNameToSubjectId = null)
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel> genericDemandLookup)
     {
         var typedBlocks = typedMethod.Blocks.ToDictionary(block => block.BlockId, StringComparer.Ordinal);
         var instructions = new List<AotCoreIrInstructionArtifact>();
@@ -314,9 +296,9 @@ public sealed partial class AotCoreIrLowering
             NativeSymbol = GetRequiredNativeSymbol(targetSymbols, typedMethod.SubjectId),
             IsStatic = method.IsStatic,
             ReturnType = method.ReturnType,
-            ReturnAbi = ResolveAbiSlot(method.ReturnType, method.AssemblyName, managedTypes, displayNameToSubjectId),
+            ReturnAbi = ResolveAbiSlot(method.ReturnType, method.AssemblyName, managedTypes),
             ParameterCount = method.Parameters.Count,
-            ParameterAbis = ResolveParameterAbis(method, managedTypes, displayNameToSubjectId),
+            ParameterAbis = ResolveParameterAbis(method, managedTypes),
             LocalCount = DetermineLocalCount(instructions),
             ExceptionRegionCount = method.Body.ExceptionRegions.Count,
             ExceptionRegions = ResolveExceptionRegions(method.Body.ExceptionRegions),

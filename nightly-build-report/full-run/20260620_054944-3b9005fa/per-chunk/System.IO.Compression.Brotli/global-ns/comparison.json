@@ -1,0 +1,294 @@
+{
+  "slug": "global-ns",
+  "methods": [
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
+      "net8Ms": 1.6e-05,
+      "net10Ms": 1.9e-05,
+      "chaosAotMs": 0.00032976,
+      "chaosJitMs": 0.0003848185445563367,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": -18.75,
+      "chaosAotVsNet8Pct": -1961.0,
+      "chaosJitVsNet8Pct": -2305.12,
+      "status": "completed",
+      "bottleneck": "dispatch_overhead",
+      "gcComparison": {
+        "net8AllocBytes": 74448,
+        "net8CollectionCount0": 0,
+        "net8HeapDelta": 82240,
+        "chaosAotGcPauseNs": 0,
+        "chaosAotAllocBytes": 0,
+        "chaosAotFastPathRate": 1.0,
+        "aotAllocVsNet8Pct": -100.0
+      }
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Dispose:System.Void()",
+      "net8Ms": 1.6e-05,
+      "net10Ms": 1.9e-05,
+      "chaosAotMs": 0.000635472,
+      "chaosJitMs": 0.0007555196655899678,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": -18.75,
+      "chaosAotVsNet8Pct": -3871.7,
+      "chaosJitVsNet8Pct": -4622.0,
+      "status": "completed",
+      "bottleneck": "dispatch_overhead",
+      "gcComparison": {
+        "net8AllocBytes": 73632,
+        "net8CollectionCount0": 0,
+        "net8HeapDelta": 77792,
+        "chaosAotGcPauseNs": 0,
+        "chaosAotAllocBytes": 0,
+        "chaosAotFastPathRate": 1.0,
+        "aotAllocVsNet8Pct": -100.0
+      }
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::GetMaxCompressedLength:System.Int32(System.Int32)",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": 0.00066608,
+      "chaosJitMs": 0.0008198745962378872,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8",
+      "gcComparison": {
+        "chaosAotGcPauseNs": 0,
+        "chaosAotAllocBytes": 0,
+        "chaosAotFastPathRate": 1.0,
+        "chaosJitAllocBytes": 252624
+      }
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": 0.00163984,
+      "chaosJitMs": 0.00183532205966179,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8",
+      "gcComparison": {
+        "chaosAotGcPauseNs": 0,
+        "chaosAotAllocBytes": 0,
+        "chaosAotFastPathRate": 1.0,
+        "chaosJitAllocBytes": 252624
+      }
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteByte:System.Void(System.Byte)",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": 1.6e-07,
+      "chaosJitMs": 1.9000570017100514e-07,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8"
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": 0.000630288,
+      "chaosJitMs": 0.0007459623788713662,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8",
+      "gcComparison": {
+        "chaosAotGcPauseNs": 0,
+        "chaosAotAllocBytes": 0,
+        "chaosAotFastPathRate": 1.0,
+        "chaosJitAllocBytes": 252624
+      }
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndWrite:System.Void(System.IAsyncResult)",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": 0.0017160480000000002,
+      "chaosJitMs": 0.0018147444423332701,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8",
+      "gcComparison": {
+        "chaosAotGcPauseNs": 0,
+        "chaosAotAllocBytes": 0,
+        "chaosAotFastPathRate": 1.0,
+        "chaosJitAllocBytes": 168416
+      }
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": 0.0016518879999999998,
+      "chaosJitMs": 0.0018384381531445944,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8",
+      "gcComparison": {
+        "chaosAotGcPauseNs": 0,
+        "chaosAotAllocBytes": 0,
+        "chaosAotFastPathRate": 1.0,
+        "chaosJitAllocBytes": 168416
+      }
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+      "net8Ms": 7.3e-05,
+      "net10Ms": null,
+      "chaosAotMs": null,
+      "chaosJitMs": null,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "completed",
+      "bottleneck": "",
+      "gcComparison": {
+        "net8AllocBytes": 361608,
+        "net8CollectionCount0": 0,
+        "net8HeapDelta": 364608,
+        "chaosAotGcPauseNs": 0,
+        "chaosAotAllocBytes": 0,
+        "chaosAotFastPathRate": 1.0,
+        "aotAllocVsNet8Pct": -100.0
+      }
+    },
+    {
+      "methodSubjectId": "global-ns::4",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": 0.0015903999999999998,
+      "chaosJitMs": 0.0017683260497814933,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8"
+    },
+    {
+      "methodSubjectId": "global-ns::11",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": 1.6e-07,
+      "chaosJitMs": 1.9000570017100514e-07,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8"
+    },
+    {
+      "methodSubjectId": "global-ns::17",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": 0.001568848,
+      "chaosJitMs": 0.0017946038381151436,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8",
+      "gcComparison": {
+        "chaosJitAllocBytes": 168416
+      }
+    },
+    {
+      "methodSubjectId": "global-ns::18",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": 0.00163312,
+      "chaosJitMs": 0.0018025840775223257,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8",
+      "gcComparison": {
+        "chaosJitAllocBytes": 421040
+      }
+    },
+    {
+      "methodSubjectId": "global-ns::5",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": null,
+      "chaosJitMs": 0.0017748432452973587,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8"
+    }
+  ],
+  "aggregate": {
+    "methodCount": 14,
+    "methodsWithNet8": 3,
+    "methodsBetterThanNet8": 0,
+    "chaosAotVsNet8Pct": {
+      "mean": -2916.35,
+      "median": -2916.35,
+      "min": -3871.7,
+      "max": -1961.0,
+      "p25": -3394.02,
+      "p75": -2438.68
+    },
+    "highValueMethods_betterThanNet8": 0.0,
+    "chaosJitVsNet8Pct": {
+      "mean": -3463.56,
+      "median": -3463.56,
+      "min": -4622.0,
+      "max": -2305.12,
+      "p25": -4042.78,
+      "p75": -2884.34
+    },
+    "net10VsNet8Pct": {
+      "mean": -18.75,
+      "median": -18.75,
+      "min": -18.75,
+      "max": -18.75,
+      "p25": -18.75,
+      "p75": -18.75
+    },
+    "gcAllocComparison": {
+      "aotVsNet8Ratio": {
+        "mean": -100.0,
+        "median": -100.0,
+        "min": -100.0,
+        "max": -100.0,
+        "p25": -100.0,
+        "p75": -100.0
+      },
+      "methodsWithAllocData": 3
+    }
+  }
+}

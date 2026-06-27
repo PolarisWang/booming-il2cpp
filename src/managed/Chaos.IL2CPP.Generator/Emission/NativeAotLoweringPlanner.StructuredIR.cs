@@ -65,10 +65,6 @@ public sealed partial class NativeAotLoweringPlanner
         public int MaxWideSlots => _peakWideDepth;
         public int MaxFloat32Slots => _peakFloat32Depth;
         public int MaxInt64Slots => _peakInt64Depth;
-        /// <summary>Total number of slot entries ever allocated (including
-        /// those freed by Discard).  May exceed MaxIntSlots when slots are
-        /// allocated across basic blocks in pc-dispatch mode.</summary>
-        public int ObservedSlotCount => _slotInfo.Count;
 
         public Dictionary<int, SlotType>? FloatLocalSlots { get; set; }
 
@@ -258,26 +254,26 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
     private string AllocateEvalStackTargetExpression(SlotType type = SlotType.NativeInt)
-        => __st.ActiveStructuredSlotContext is null
+        => _state.Value!.ActiveStructuredSlotContext is null
             ? "chaos_eval_stack[chaos_stack_top++]"
-            : __st.ActiveStructuredSlotContext.AllocatePushTarget(type);
+            : _state.Value!.ActiveStructuredSlotContext.AllocatePushTarget(type);
 
     private string ConsumeEvalStackValueExpression()
-        => __st.ActiveStructuredSlotContext is null
+        => _state.Value!.ActiveStructuredSlotContext is null
             ? "chaos_eval_stack[--chaos_stack_top]"
-            : __st.ActiveStructuredSlotContext.PopValue();
+            : _state.Value!.ActiveStructuredSlotContext.PopValue();
 
     private string AccessEvalStackTopExpression()
-        => __st.ActiveStructuredSlotContext is null
+        => _state.Value!.ActiveStructuredSlotContext is null
             ? "chaos_eval_stack[chaos_stack_top - 1]"
-            : __st.ActiveStructuredSlotContext.PeekValue();
+            : _state.Value!.ActiveStructuredSlotContext.PeekValue();
 
     private void EmitEvalStackPush(StringBuilder builder, string indentation, string valueExpression, SlotType type = SlotType.NativeInt)
         => builder.AppendLine($"{indentation}{AllocateEvalStackTargetExpression(type)} = {NormalizeStoredStackValueExpression(valueExpression)};");
 
     private void EmitEvalStackDiscard(StringBuilder builder, string indentation, int count = 1)
     {
-        if (__st.ActiveStructuredSlotContext is null)
+        if (_state.Value!.ActiveStructuredSlotContext is null)
         {
             if (count == 1)
             {
@@ -291,17 +287,19 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
-        __st.ActiveStructuredSlotContext.Discard(count);
+        _state.Value!.ActiveStructuredSlotContext.Discard(count);
     }
 
     private static void EmitStructuredSlotDeclarations(StringBuilder builder, int maxIntSlots, int maxFloat64Slots, int maxFloat32Slots, int maxInt64Slots, int maxWideSlots, string indentation)
     {
-        // _sN and _iN are declared by the universal safety net in EmitManagedMethod
-        // (_s0.._s63, _i0.._i31).  Only emit non-overlapping types here.
+        for (int i = 0; i < maxIntSlots; i++)
+            builder.AppendLine($"{indentation}CHAOS_IL2CPP_INTPTR {FormatStructuredSlotName(i)}{{}};");
         for (int i = 0; i < maxFloat64Slots; i++)
             builder.AppendLine($"{indentation}double {FormatDoubleSlotName(i)};");
         for (int i = 0; i < maxFloat32Slots; i++)
             builder.AppendLine($"{indentation}float {FormatFloatSlotName(i)};");
+        for (int i = 0; i < maxInt64Slots; i++)
+            builder.AppendLine($"{indentation}CHAOS_IL2CPP_INT64 {FormatInt64SlotName(i)};");
         for (int i = 0; i < maxWideSlots; i++)
             builder.AppendLine($"{indentation}alignas(16) CHAOS_IL2CPP_UINT8 {FormatWideSlotName(i)}[16];");
     }

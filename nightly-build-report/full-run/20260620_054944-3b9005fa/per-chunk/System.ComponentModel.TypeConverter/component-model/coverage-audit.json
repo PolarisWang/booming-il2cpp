@@ -1,0 +1,69 @@
+{
+  "chunkSlug": "component-model",
+  "declaredMethods": 333,
+  "coveredMethods": 375,
+  "missingMethods": 33,
+  "coveragePct": 100.0,
+  "namespaceGaps": {
+    "System.ComponentModel.TypeConverter/System.ComponentModel.AddingNewEventHandler": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.ComponentModel.TypeConverter/System.ComponentModel.CancelEventHandler": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.ComponentModel.TypeConverter/System.ComponentModel.CollectionChangeEventHandler": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.ComponentModel.TypeConverter/System.ComponentModel.HandledEventHandler": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.ComponentModel.TypeConverter/System.ComponentModel.LicenseException": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.ComponentModel.TypeConverter/System.ComponentModel.ListChangedEventHandler": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.ComponentModel.TypeConverter/System.ComponentModel.RefreshEventHandler": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter+StandardValuesCollection": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    },
+    "System.ComponentModel.TypeConverter/System.ComponentModel.TypeDescriptor": {
+      "declared": 68,
+      "covered": 64,
+      "gap": 4,
+      "gapPct": 5.9
+    },
+    "System.ComponentModel.TypeConverter/System.ComponentModel.WarningException": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    }
+  }
+}

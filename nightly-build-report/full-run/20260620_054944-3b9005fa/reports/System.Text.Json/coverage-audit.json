@@ -1,0 +1,11 @@
+{
+  "assemblyName": "System.Text.Json",
+  "timestamp": "2026-06-20T05:49:44",
+  "totalChunks": 3,
+  "chunksWithResults": 3,
+  "chunksWithValueWarnings": 0,
+  "chunksWithMetaMismatch": 0,
+  "totalDeclaredMethods": 1230,
+  "coveragePct": 99.9,
+  "namespaceGaps": {}
+}

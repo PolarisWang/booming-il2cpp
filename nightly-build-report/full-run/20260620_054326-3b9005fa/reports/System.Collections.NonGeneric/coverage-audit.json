@@ -1,0 +1,11 @@
+{
+  "assemblyName": "System.Collections.NonGeneric",
+  "timestamp": "2026-06-20T05:43:26",
+  "totalChunks": 1,
+  "chunksWithResults": 1,
+  "chunksWithValueWarnings": 0,
+  "chunksWithMetaMismatch": 0,
+  "totalDeclaredMethods": 186,
+  "coveragePct": 100.0,
+  "namespaceGaps": {}
+}

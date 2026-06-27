@@ -1,0 +1,405 @@
+{
+  "chunkSlug": "system-reflection-metadata",
+  "declaredMethods": 345,
+  "coveredMethods": 281,
+  "missingMethods": 75,
+  "coveragePct": 81.4,
+  "namespaceGaps": {
+    "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyDefinition": {
+      "declared": 4,
+      "covered": 3,
+      "gap": 1,
+      "gapPct": 25.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyFileHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyFileHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyNameInfo": {
+      "declared": 3,
+      "covered": 1,
+      "gap": 2,
+      "gapPct": 66.7
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReference": {
+      "declared": 3,
+      "covered": 2,
+      "gap": 1,
+      "gapPct": 33.3
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReferenceHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReferenceHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder": {
+      "declared": 49,
+      "covered": 47,
+      "gap": 2,
+      "gapPct": 4.1
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder+Blobs": {
+      "declared": 3,
+      "covered": 0,
+      "gap": 3,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader": {
+      "declared": 33,
+      "covered": 32,
+      "gap": 1,
+      "gapPct": 3.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter": {
+      "declared": 43,
+      "covered": 42,
+      "gap": 1,
+      "gapPct": 2.3
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.CustomAttributeHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.CustomAttributeHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.CustomDebugInformationHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.CustomDebugInformationHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.DocumentHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.DocumentHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinition": {
+      "declared": 3,
+      "covered": 2,
+      "gap": 1,
+      "gapPct": 33.3
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinitionHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinitionHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.ExportedTypeHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.ExportedTypeHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinitionHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinitionHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterConstraintHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterConstraintHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection+Enumerator": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.ImportScopeCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.ImportScopeCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.InterfaceImplementationHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.InterfaceImplementationHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.LocalConstantHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.LocalConstantHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.LocalScope": {
+      "declared": 3,
+      "covered": 2,
+      "gap": 1,
+      "gapPct": 33.3
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection+ChildrenEnumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.LocalVariableHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.LocalVariableHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.ManifestResourceHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.ManifestResourceHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.MemberReferenceHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.MemberReferenceHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.MethodBodyBlock": {
+      "declared": 4,
+      "covered": 3,
+      "gap": 1,
+      "gapPct": 25.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformationHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformationHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinitionHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinitionHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.MethodImplementationHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.MethodImplementationHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.ParameterHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.ParameterHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinitionHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinitionHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection+Enumerator": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinitionHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinitionHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.TypeName": {
+      "declared": 14,
+      "covered": 11,
+      "gap": 3,
+      "gapPct": 21.4
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.TypeReferenceHandleCollection": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Reflection.Metadata/System.Reflection.Metadata.TypeReferenceHandleCollection+Enumerator": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    }
+  }
+}

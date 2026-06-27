@@ -1,0 +1,117 @@
+{
+  "chunkSlug": "text",
+  "declaredMethods": 367,
+  "coveredMethods": 360,
+  "missingMethods": 96,
+  "coveragePct": 98.1,
+  "namespaceGaps": {
+    "System.Private.CoreLib/System.Runtime.Serialization.DeserializationToken": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Runtime.Serialization.SerializationInfo": {
+      "declared": 35,
+      "covered": 34,
+      "gap": 1,
+      "gapPct": 2.9
+    },
+    "System.Private.CoreLib/System.Runtime.Serialization.SerializationInfoEnumerator": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Security.SecurityException": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Text.ASCIIEncoding": {
+      "declared": 21,
+      "covered": 15,
+      "gap": 6,
+      "gapPct": 28.6
+    },
+    "System.Private.CoreLib/System.Text.Ascii": {
+      "declared": 28,
+      "covered": 2,
+      "gap": 26,
+      "gapPct": 92.9
+    },
+    "System.Private.CoreLib/System.Text.DecoderReplacementFallbackBuffer": {
+      "declared": 4,
+      "covered": 3,
+      "gap": 1,
+      "gapPct": 25.0
+    },
+    "System.Private.CoreLib/System.Text.EncoderReplacementFallbackBuffer": {
+      "declared": 5,
+      "covered": 4,
+      "gap": 1,
+      "gapPct": 20.0
+    },
+    "System.Private.CoreLib/System.Text.Rune": {
+      "declared": 34,
+      "covered": 26,
+      "gap": 8,
+      "gapPct": 23.5
+    },
+    "System.Private.CoreLib/System.Text.SpanLineEnumerator": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Text.SpanRuneEnumerator": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Text.StringBuilder": {
+      "declared": 81,
+      "covered": 69,
+      "gap": 12,
+      "gapPct": 14.8
+    },
+    "System.Private.CoreLib/System.Text.StringBuilder+AppendInterpolatedStringHandler": {
+      "declared": 6,
+      "covered": 0,
+      "gap": 6,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Text.StringBuilder+ChunkEnumerator": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Text.StringRuneEnumerator": {
+      "declared": 2,
+      "covered": 1,
+      "gap": 1,
+      "gapPct": 50.0
+    },
+    "System.Private.CoreLib/System.Text.UTF8Encoding": {
+      "declared": 22,
+      "covered": 16,
+      "gap": 6,
+      "gapPct": 27.3
+    },
+    "System.Private.CoreLib/System.Text.Unicode.Utf8": {
+      "declared": 5,
+      "covered": 0,
+      "gap": 5,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Text.Unicode.Utf8+TryWriteInterpolatedStringHandler": {
+      "declared": 8,
+      "covered": 0,
+      "gap": 8,
+      "gapPct": 100.0
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "chunkSlug": "global-ns",
+  "declaredMethods": 46,
+  "coveredMethods": 23,
+  "missingMethods": 23,
+  "coveragePct": 50.0,
+  "namespaceGaps": {
+    "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile": {
+      "declared": 34,
+      "covered": 17,
+      "gap": 17,
+      "gapPct": 50.0
+    },
+    "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions": {
+      "declared": 12,
+      "covered": 6,
+      "gap": 6,
+      "gapPct": 50.0
+    }
+  }
+}

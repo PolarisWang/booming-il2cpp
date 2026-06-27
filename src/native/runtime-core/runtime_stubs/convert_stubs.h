@@ -51,47 +51,5 @@ CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INT32 ChaosConvertToInt32FromDouble(CHAOS_
     }
     return static_cast<CHAOS_IL2CPP_INT32>(std::trunc(value));
 }
-// Double→Half (IEEE 754 binary16, stored as UInt16).  Clamps to ±65504,
-// converts sign/exponent/mantissa to 16-bit format.
-CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_UINT16 ChaosConvertToInt16FromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept {
-    // Handle special cases
-    if (std::isnan(value)) return 0x7E01; // NaN in half format
-    if (!std::isfinite(value)) {
-        return value < 0.0 ? 0xFC00u : 0x7C00u; // ±Infinity
-    }
-    // Clamp to half range
-    if (value >= 65504.0) return 0x7BFF; // max finite half
-    if (value <= -65504.0) return 0xFBFF; // -max finite half
-    if (value >= -6.0e-8 && value <= 6.0e-8) return 0; // subnormal → zero
-
-    uint64_t bits;
-    std::memcpy(&bits, &value, sizeof(bits));
-    uint64_t sign = (bits >> 63) & 1;
-    int64_t exp = static_cast<int64_t>((bits >> 52) & 0x7FF) - 1023 + 15;
-    uint64_t mant = bits & 0x000FFFFFFFFFFFFFull;
-
-    if (exp <= 0) {
-        // Subnormal in half: flush to zero (too small)
-        return static_cast<CHAOS_IL2CPP_UINT16>((sign << 15));
-    }
-    if (exp > 30) {
-        // Saturated to infinity
-        return static_cast<CHAOS_IL2CPP_UINT16>((sign << 15) | 0x7C00);
-    }
-
-    // Normal: round mantissa from 52 bits to 10 bits
-    uint64_t half_mant = mant >> 42;
-    // Round-to-nearest-even on the discarded bits
-    uint64_t discard = mant & 0x3FFFFFFFFFFFull;
-    uint64_t lsb = mant >> 42;
-    if (discard > 0x1FFFFFFFFFFFFull || (discard == 0x1FFFFFFFFFFFFull && (lsb & 1))) {
-        half_mant++;
-    }
-    if (half_mant >= 1024) {
-        half_mant = 0;
-        exp++;
-    }
-    return static_cast<CHAOS_IL2CPP_UINT16>((sign << 15) | (static_cast<uint64_t>(exp) << 10) | half_mant);
-}
 // Double→Decimal conversion bridge.
 CHAOS_IL2CPP_INTPTR    ChaosDecimalFromDouble(double value) noexcept;

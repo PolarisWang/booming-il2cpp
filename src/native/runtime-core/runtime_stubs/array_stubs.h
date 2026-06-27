@@ -7,7 +7,7 @@
 #include <cstring>
 #include "runtime_stubs/stub_common.h"
 #include "gc_helpers.h"
-#include "runtime_stubs/cpu_features.h"
+#include "cpu_features.h"
 
 // MSVC doesn't have __builtin_memcpy — use std::memcpy instead.
 #if defined(_MSC_VER)

@@ -81,7 +81,6 @@ public sealed partial class NativeAotLoweringPlanner
 
     private void EmitGenericInstantiationStub(StringBuilder builder, AotCoreIrMethodArtifact method)
     {
-        __st = _state.Value!;
         string? text = TryGetInstantiationStubSymbol(method);
         if (string.IsNullOrEmpty(text))
         {
@@ -145,12 +144,11 @@ public sealed partial class NativeAotLoweringPlanner
 
     private void EmitManagedMethod(StringBuilder builder, AotCoreIrMethodArtifact method)
     {
-        __st = _state.Value!;
         ValidateMethod(method);
-        __st.LinearScratchCounter = 0;
-        __st.NextInlineId = 0;
-        __st.DispatchLabelSeq = 0;
-        __st.PreTryFoldInitializers = null;  // reset per-method
+        _state.Value!.LinearScratchCounter = 0;
+        _state.Value!.NextInlineId = 0;
+        _state.Value!.DispatchLabelSeq = 0;
+        _state.Value!.PreTryFoldInitializers = null;  // reset per-method
 
         // P/Invoke methods: emit LoadLibrary + GetProcAddress wrapper instead of IL body.
         if (method.IsPInvoke)
@@ -280,30 +278,12 @@ public sealed partial class NativeAotLoweringPlanner
         stringBuilder5.AppendLine(ref handler);
         EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
         EmitStaticInitializationPrologue(builder, method);
-        // Universal safety net: declare chaos_eval_stack and basic slot declarations.
-        // The structured IR builder tracks exact slot usage via slotContext.MaxIntSlots,
-        // but methods that fall back to the linear emitter (TryBuildStructuredMethodBody
-        // returns false) have no slot declarations from EmitStructuredSlotDeclarations.
-        // These methods may still reference _sN slots through assertCount increment,
-        // inline emission, or flat-fallback dispatch.  Declare _s0.._s63 unconditionally
-        // so _sN references always resolve regardless of emission path.
-        // ~64 x 8 bytes = 512 bytes per method; the C++ optimizer removes unused locals.
-        builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 32) chaos_eval_stack{};");
-        builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
-        for (int __si = 0; __si <= 63; __si++)
-            builder.AppendLine("\tCHAOS_IL2CPP_INTPTR _s" + __si + "{};");
-        for (int __ii = 0; __ii <= 31; __ii++)
-            builder.AppendLine("\tCHAOS_IL2CPP_INT64 _i" + __ii + "{};");
-        for (int __di = 0; __di <= 7; __di++)
-            builder.AppendLine("\tdouble _d" + __di + ";");
-        for (int __fi = 0; __fi <= 7; __fi++)
-            builder.AppendLine("\tfloat _f" + __fi + ";");
         // Emit structured IR body first to capture actual slot depth,
         // since ComputeMaxEvalStackDepth may undercount for generic methods
         // where inlined code or StringId emission expands the effective depth.
         var bodyBuilder = new System.Text.StringBuilder();
-        __st.CurrentMethodNativeSymbol = method.NativeSymbol;
-        __st.CurrentMethodArtifact = method;
+        _state.Value!.CurrentMethodNativeSymbol = method.NativeSymbol;
+        _state.Value!.CurrentMethodArtifact = method;
         StructuredSlotEmissionContext? slotContext = null;
         try
         {
@@ -311,37 +291,17 @@ public sealed partial class NativeAotLoweringPlanner
         }
         finally
         {
-            __st.CurrentMethodNativeSymbol = null;
-            __st.CurrentMethodArtifact = null;
+            _state.Value!.CurrentMethodNativeSymbol = null;
+            _state.Value!.CurrentMethodArtifact = null;
         }
         // Use the larger of ComputeMaxEvalStackDepth and the actual peak depth
         // tracked by StructuredSlotEmissionContext (the latter may be higher for
         // generic methods where StringId emission or inlined code expands depth).
         if (!usesStructuredSlots && slotContext != null)
             evalStackSize = Math.Max(evalStackSize, slotContext.MaxIntSlots);
-
-        // Strip inline slot declarations from bodyBuilder to prevent C2374
-        // redefinition with the universal safety net (_s0.._s63, _i0.._i31).
-        // bodyBuilder may contain these from EmitViaStructuredIR (pc-dispatch
-        // fallback) regardless of usesStructuredSlots.
-        var cleanBody = new System.Text.StringBuilder(bodyBuilder.Length);
-        foreach (ReadOnlySpan<char> line in bodyBuilder.ToString().AsSpan().EnumerateLines())
-        {
-            var trimmed = line.TrimStart();
-            if (!trimmed.StartsWith("CHAOS_IL2CPP_INTPTR _s", StringComparison.Ordinal) &&
-                !trimmed.StartsWith("CHAOS_IL2CPP_INT64 _i", StringComparison.Ordinal) &&
-                !trimmed.StartsWith("double _d", StringComparison.Ordinal) &&
-                !trimmed.StartsWith("float _f", StringComparison.Ordinal))
-            {
-                cleanBody.Append(line);
-                cleanBody.Append('\n');
-            }
-        }
-        bodyBuilder = cleanBody;
-
         if (usesStructuredSlots && slotContext != null)
         {
-            EmitStructuredSlotDeclarations(builder, 0, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, 0, slotContext.MaxWideSlots, "\t");
+            EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots + 2, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, slotContext.MaxInt64Slots + 2, slotContext.MaxWideSlots, "	");
             // Pre-populate _s0 with 'this' for instance subject methods.
             // Structured IR building can drop the initial ldarg.0 when the first
             // basic block has no branches, leaving _s0 = 0 (the slot init value).
@@ -367,23 +327,32 @@ public sealed partial class NativeAotLoweringPlanner
                     builder.AppendLine($"	{varType} chaos_float_local_{slot}{{}};");
                 }
             }
-            // chaos_eval_stack and chaos_stack_top are universally declared
-            // in the preamble safety net (32 slots).  EH methods may need more
-            // than 32 slots for deep finally tracking — extend to 64 for safety.
+            // chaos_eval_stack is needed for EH (finally) condition tracking in ExceptionEmission.cs,
+            // even for structured IR methods. It tracks the finally condition state via:
+            //   chaos_eval_stack[--chaos_stack_top] = 1;  // finally entry
+            //   if (chaos_eval_stack[--chaos_stack_top])   // finally exit condition check
             if (method.ExceptionRegionCount > 0)
             {
-                // No-op: the universal 32-slot declaration is sufficient for EH;
-                // 32 entries × 8 bytes = 256 bytes covers practical finally depth.
+                builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 16) chaos_eval_stack{};");
+                builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
             }
         }
         else if (!usesStructuredSlots && evalStackSize > 0)
         {
+            stringBuilder = builder;
+            StringBuilder stringBuilder6 = stringBuilder;
+            handler = new StringBuilder.AppendInterpolatedStringHandler(51, 1, stringBuilder);
+            handler.AppendLiteral("	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, ");
+            handler.AppendFormatted(evalStackSize);
+            handler.AppendLiteral(") chaos_eval_stack{};");
+            stringBuilder6.AppendLine(ref handler);
+            builder.AppendLine("	CHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
         }
         // Pre-try TypeInfo* fold evaluations (outside SEH frame)
-        if (__st.PreTryFoldInitializers is { Count: > 0 })
+        if (_state.Value!.PreTryFoldInitializers is { Count: > 0 })
         {
             builder.AppendLine("	// Pre-try TypeInfo* fold evaluations (outside SEH frame)");
-            foreach (var (varName, expr) in __st.PreTryFoldInitializers)
+            foreach (var (varName, expr) in _state.Value!.PreTryFoldInitializers)
                 builder.AppendLine($"	const auto {varName} = {expr};");
         }
 
@@ -415,8 +384,7 @@ public sealed partial class NativeAotLoweringPlanner
             _braceCount--;
         }
         // Fallback return for non-void: suppress MSVC C4715
-        // Skip when wrapped in try-catch (SEH), which has its own return {} at line 395.
-        if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void && !_wrapInTryCatch)
+        if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
         {
             builder.AppendLine("    return {};");
         }

@@ -1,0 +1,138 @@
+{
+  "slug": "global-ns",
+  "methods": [
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection<System.Int32,System.Int32>::Contains:System.Boolean(System.Int32)",
+      "net8Ms": 1.4e-05,
+      "net10Ms": 1.6e-05,
+      "chaosAotMs": 2.5e-06,
+      "chaosJitMs": 2.7e-06,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": -14.29,
+      "chaosAotVsNet8Pct": 82.14,
+      "chaosJitVsNet8Pct": 80.71,
+      "status": "completed",
+      "bottleneck": "",
+      "gcComparison": {
+        "net8AllocBytes": 74560,
+        "net8CollectionCount0": 0,
+        "net8HeapDelta": 77792,
+        "chaosAotGcPauseNs": 0,
+        "chaosAotAllocBytes": 0,
+        "chaosAotFastPathRate": 1.0,
+        "aotAllocVsNet8Pct": -100.0
+      }
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection<System.Int32,System.Int32>::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "net8Ms": 1.4e-05,
+      "net10Ms": 1.7999999999999997e-05,
+      "chaosAotMs": 3.13e-06,
+      "chaosJitMs": 3.1e-06,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": -28.57,
+      "chaosAotVsNet8Pct": 77.64,
+      "chaosJitVsNet8Pct": 77.86,
+      "status": "completed",
+      "bottleneck": "",
+      "gcComparison": {
+        "net8AllocBytes": 73760,
+        "net8CollectionCount0": 0,
+        "net8HeapDelta": 77792,
+        "chaosAotGcPauseNs": 0,
+        "chaosAotAllocBytes": 0,
+        "chaosAotFastPathRate": 1.0,
+        "aotAllocVsNet8Pct": -100.0
+      }
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection<System.Int32,System.Int32>::Remove:System.Boolean(System.Int32)",
+      "net8Ms": 1.4999999999999999e-05,
+      "net10Ms": 1.1e-05,
+      "chaosAotMs": 3.1e-06,
+      "chaosJitMs": 3.18e-06,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": 26.67,
+      "chaosAotVsNet8Pct": 79.33,
+      "chaosJitVsNet8Pct": 78.8,
+      "status": "completed",
+      "bottleneck": "",
+      "gcComparison": {
+        "net8AllocBytes": 73736,
+        "net8CollectionCount0": 0,
+        "net8HeapDelta": 77792,
+        "chaosAotGcPauseNs": 0,
+        "chaosAotAllocBytes": 0,
+        "chaosAotFastPathRate": 1.0,
+        "aotAllocVsNet8Pct": -100.0
+      }
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection<System.Int32>::Move:System.Void(System.Int32,System.Int32)",
+      "net8Ms": 1e-05,
+      "net10Ms": 1.7999999999999997e-05,
+      "chaosAotMs": 3.13e-06,
+      "chaosJitMs": 3.38e-06,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": -80.0,
+      "chaosAotVsNet8Pct": 68.7,
+      "chaosJitVsNet8Pct": 66.2,
+      "status": "completed",
+      "bottleneck": "",
+      "gcComparison": {
+        "net8AllocBytes": 73712,
+        "net8CollectionCount0": 0,
+        "net8HeapDelta": 74016,
+        "chaosAotGcPauseNs": 0,
+        "chaosAotAllocBytes": 0,
+        "chaosAotFastPathRate": 1.0,
+        "aotAllocVsNet8Pct": -100.0
+      }
+    }
+  ],
+  "aggregate": {
+    "methodCount": 4,
+    "methodsWithNet8": 4,
+    "methodsBetterThanNet8": 4,
+    "chaosAotVsNet8Pct": {
+      "mean": 76.95,
+      "median": 78.48,
+      "min": 68.7,
+      "max": 82.14,
+      "p25": 75.41,
+      "p75": 80.03
+    },
+    "highValueMethods_betterThanNet8": 100.0,
+    "chaosJitVsNet8Pct": {
+      "mean": 75.89,
+      "median": 78.33,
+      "min": 66.2,
+      "max": 80.71,
+      "p25": 74.94,
+      "p75": 79.28
+    },
+    "net10VsNet8Pct": {
+      "mean": -24.05,
+      "median": -21.43,
+      "min": -80.0,
+      "max": 26.67,
+      "p25": -41.43,
+      "p75": -4.05
+    },
+    "gcAllocComparison": {
+      "aotVsNet8Ratio": {
+        "mean": -100.0,
+        "median": -100.0,
+        "min": -100.0,
+        "max": -100.0,
+        "p25": -100.0,
+        "p75": -100.0
+      },
+      "methodsWithAllocData": 4
+    }
+  }
+}

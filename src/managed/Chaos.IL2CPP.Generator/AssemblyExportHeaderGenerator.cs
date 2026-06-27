@@ -84,7 +84,7 @@ internal sealed class AssemblyExportHeaderGenerator
             {
                 var sanitizedTypeName = SanitizeSubjectId(typeName);
                 sb.AppendLine($"struct chaos_type_{sanitizedTypeName};");
-                sb.AppendLine($"extern uint64_t chaos_type_id_{sanitizedTypeName};");
+                sb.AppendLine($"extern CHAOS_IL2CPP_UINT64 chaos_type_id_{sanitizedTypeName};");
             }
             sb.AppendLine();
         }

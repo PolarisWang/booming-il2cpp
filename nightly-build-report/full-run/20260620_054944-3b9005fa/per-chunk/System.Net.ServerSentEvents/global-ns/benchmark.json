@@ -1,0 +1,116 @@
+{
+  "exitCode": 0,
+  "technology": "chaos-aot",
+  "iterations": 9090,
+  "methodCount": 4,
+  "results": [
+    {
+      "entryIndex": 0,
+      "elapsedMilliseconds": 13.0202,
+      "opsPerSecond": 751511.0,
+      "allocatedBytes": 0.0,
+      "stddevMs": 3.2115,
+      "cv": 0.246653,
+      "sampleCount": 6,
+      "outlierCount": 0
+    },
+    {
+      "entryIndex": 1,
+      "elapsedMilliseconds": 10.5708,
+      "opsPerSecond": 884144.67,
+      "allocatedBytes": 0.0,
+      "stddevMs": 1.9016,
+      "cv": 0.179888,
+      "sampleCount": 6,
+      "outlierCount": 0
+    },
+    {
+      "entryIndex": 2,
+      "elapsedMilliseconds": 0.0254,
+      "opsPerSecond": 343617066.5,
+      "allocatedBytes": 0.0,
+      "stddevMs": 0.0008,
+      "cv": 0.147877,
+      "sampleCount": 5,
+      "outlierCount": 1
+    },
+    {
+      "entryIndex": 3,
+      "elapsedMilliseconds": 0.0267,
+      "opsPerSecond": 342213398.17,
+      "allocatedBytes": 0.0,
+      "stddevMs": 0.0027,
+      "cv": 0.100778,
+      "sampleCount": 6,
+      "outlierCount": 0
+    }
+  ],
+  "summary": {
+    "methodCount": 4,
+    "meanDurationMs": 5.910775,
+    "minDurationMs": 0.0254,
+    "maxDurationMs": 13.0202,
+    "totalDurationMs": 23.6431,
+    "meanOpsPerSecond": 171866530.085,
+    "totalAllocatedBytes": 0.0,
+    "elapsedMilliseconds": 23.6431,
+    "meanSampleCount": 5.8,
+    "totalOutliers": 1
+  },
+  "perMethodStats": [
+    {
+      "meanDurationMs": 13.0202,
+      "stddevMs": 3.2115,
+      "cv": 0.246653,
+      "meanOpsPerSecond": 751511.0,
+      "meanAllocatedBytes": 0.0,
+      "sampleCount": 6,
+      "outlierCount": 0,
+      "cleanedSampleCount": 6,
+      "minDurationMs": 8.409,
+      "maxDurationMs": 16.23
+    },
+    {
+      "meanDurationMs": 10.5708,
+      "stddevMs": 1.9016,
+      "cv": 0.179888,
+      "meanOpsPerSecond": 884144.67,
+      "meanAllocatedBytes": 0.0,
+      "sampleCount": 6,
+      "outlierCount": 0,
+      "cleanedSampleCount": 6,
+      "minDurationMs": 9.036,
+      "maxDurationMs": 14.263
+    },
+    {
+      "meanDurationMs": 0.0254,
+      "stddevMs": 0.0008,
+      "cv": 0.147877,
+      "meanOpsPerSecond": 343617066.5,
+      "meanAllocatedBytes": 0.0,
+      "sampleCount": 6,
+      "outlierCount": 1,
+      "cleanedSampleCount": 5,
+      "minDurationMs": 0.025,
+      "maxDurationMs": 0.036
+    },
+    {
+      "meanDurationMs": 0.0267,
+      "stddevMs": 0.0027,
+      "cv": 0.100778,
+      "meanOpsPerSecond": 342213398.17,
+      "meanAllocatedBytes": 0.0,
+      "sampleCount": 6,
+      "outlierCount": 0,
+      "cleanedSampleCount": 6,
+      "minDurationMs": 0.023,
+      "maxDurationMs": 0.03
+    }
+  ],
+  "sampleRounds": 6,
+  "stderr": "",
+  "technologiesRun": [
+    "chaos-aot",
+    "chaos-jit"
+  ]
+}

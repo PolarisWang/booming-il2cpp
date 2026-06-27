@@ -1,6 +1,3 @@
-#ifndef CHAOS_STUB_COMMON_H_INCLUDED
-#define CHAOS_STUB_COMMON_H_INCLUDED
-
 #pragma once
 
 #include <chaos/native_types.h>
@@ -26,12 +23,8 @@ struct ManagedArrayAccessor {
     CHAOS_IL2CPP_INTPTR length;
     // elements pointer removed — contiguous after header.
 };
-// Debug assert: ensure struct layout matches chaos_managed_array.
-// The prebuilt SDK lib may use different alignment than local cmake build,
-// so this assert can fail when mixing SDK build configs.  The struct is
-// only used for pointer arithmetic (reinterpret_cast handles it), not for
-// ABI exchange across compilation boundaries.
-// static_assert(sizeof(ManagedArrayAccessor) == 32, "ManagedArrayAccessor must be 32 bytes");
+static_assert(sizeof(ManagedArrayAccessor) == 32,
+    "ManagedArrayAccessor must be 32 bytes");
 
 inline const ManagedArrayAccessor* get_managed_array(CHAOS_IL2CPP_INTPTR handle) noexcept {
     return reinterpret_cast<const ManagedArrayAccessor*>(handle);
@@ -75,4 +68,3 @@ inline uint32_t stub_xorshift32() noexcept {
     state = x;
     return x;
 }
-#endif  // CHAOS_STUB_COMMON_H_INCLUDED

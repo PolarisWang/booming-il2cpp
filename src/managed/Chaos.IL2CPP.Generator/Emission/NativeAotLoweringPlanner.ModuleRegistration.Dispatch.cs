@@ -23,43 +23,43 @@ public sealed partial class NativeAotLoweringPlanner
                 $"attr->{fieldName} = 0;",
 
             CustomAttributeLiteralKind.Boolean =>
-                $"{{ bool __v; std::memcpy(&__v, p, 1); p += 1; attr->{fieldName} = __v; }}",
+                $"{{ bool __v; CHAOS_IL2CPP_MEMCPY(&__v, p, 1); p += 1; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Byte =>
-                $"{{ CHAOS_IL2CPP_UINT8 __v; std::memcpy(&__v, p, 1); p += 1; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_UINT8 __v; CHAOS_IL2CPP_MEMCPY(&__v, p, 1); p += 1; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.SByte =>
-                $"{{ CHAOS_IL2CPP_INT8 __v; std::memcpy(&__v, p, 1); p += 1; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_INT8 __v; CHAOS_IL2CPP_MEMCPY(&__v, p, 1); p += 1; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Int16 =>
-                $"{{ CHAOS_IL2CPP_INT16 __v; std::memcpy(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_INT16 __v; CHAOS_IL2CPP_MEMCPY(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Int32 =>
-                $"{{ CHAOS_IL2CPP_INT32 __v; std::memcpy(&__v, p, 4); p += 4; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_INT32 __v; CHAOS_IL2CPP_MEMCPY(&__v, p, 4); p += 4; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Int64 =>
-                $"{{ CHAOS_IL2CPP_INT64 __v; std::memcpy(&__v, p, 8); p += 8; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_INT64 __v; CHAOS_IL2CPP_MEMCPY(&__v, p, 8); p += 8; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.UInt16 =>
-                $"{{ CHAOS_IL2CPP_UINT16 __v; std::memcpy(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_UINT16 __v; CHAOS_IL2CPP_MEMCPY(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.UInt32 =>
-                $"{{ CHAOS_IL2CPP_UINT32 __v; std::memcpy(&__v, p, 4); p += 4; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_UINT32 __v; CHAOS_IL2CPP_MEMCPY(&__v, p, 4); p += 4; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.UInt64 =>
-                $"{{ CHAOS_IL2CPP_UINT64 __v; std::memcpy(&__v, p, 8); p += 8; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_UINT64 __v; CHAOS_IL2CPP_MEMCPY(&__v, p, 8); p += 8; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Single =>
-                $"{{ float __v; std::memcpy(&__v, p, 4); p += 4; attr->{fieldName} = __v; }}",
+                $"{{ float __v; CHAOS_IL2CPP_MEMCPY(&__v, p, 4); p += 4; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Double =>
-                $"{{ double __v; std::memcpy(&__v, p, 8); p += 8; attr->{fieldName} = __v; }}",
+                $"{{ double __v; CHAOS_IL2CPP_MEMCPY(&__v, p, 8); p += 8; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Char =>
-                $"{{ CHAOS_IL2CPP_UINT16 __v; std::memcpy(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_UINT16 __v; CHAOS_IL2CPP_MEMCPY(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.String =>
-                $"{{ CHAOS_IL2CPP_UINT16 __len; std::memcpy(&__len, p, 2); p += 2; auto* __abi = chaos_runtime_get_abi_v0(); auto* __rt = __abi ? __abi->get_current_runtime_state() : nullptr; auto* __th = __abi ? __abi->get_current_thread_state() : nullptr; attr->{fieldName} = (__abi != nullptr && __abi->string_new_utf8 != nullptr) ? reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__abi->string_new_utf8(__rt, __th, reinterpret_cast<const char*>(p), __len)) : 0; p += __len; }}",
+                $"{{ CHAOS_IL2CPP_UINT16 __len; CHAOS_IL2CPP_MEMCPY(&__len, p, 2); p += 2; auto* __abi = chaos_runtime_get_abi_v0(); auto* __rt = __abi ? __abi->get_current_runtime_state() : nullptr; auto* __th = __abi ? __abi->get_current_thread_state() : nullptr; attr->{fieldName} = (__abi != nullptr && __abi->string_new_utf8 != nullptr) ? reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__abi->string_new_utf8(__rt, __th, reinterpret_cast<const char*>(p), __len)) : 0; p += __len; }}",
 
             CustomAttributeLiteralKind.Type when value.Value is string typeSubjectId =>
                 $"{{ p += 4; attr->{fieldName} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>({GetNativeTypeInfoSymbol(typeSubjectId)}); }}",

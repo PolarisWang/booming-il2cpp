@@ -1,0 +1,57 @@
+{
+  "chunkSlug": "system-3",
+  "declaredMethods": 500,
+  "coveredMethods": 2166,
+  "missingMethods": 214,
+  "coveragePct": 100.0,
+  "namespaceGaps": {
+    "System.Private.CoreLib/System.Int128": {
+      "declared": 41,
+      "covered": 27,
+      "gap": 14,
+      "gapPct": 34.1
+    },
+    "System.Private.CoreLib/System.Int16": {
+      "declared": 42,
+      "covered": 28,
+      "gap": 14,
+      "gapPct": 33.3
+    },
+    "System.Private.CoreLib/System.Int32": {
+      "declared": 43,
+      "covered": 29,
+      "gap": 14,
+      "gapPct": 32.6
+    },
+    "System.Private.CoreLib/System.Int64": {
+      "declared": 43,
+      "covered": 29,
+      "gap": 14,
+      "gapPct": 32.6
+    },
+    "System.Private.CoreLib/System.IntPtr": {
+      "declared": 46,
+      "covered": 32,
+      "gap": 14,
+      "gapPct": 30.4
+    },
+    "System.Private.CoreLib/System.Math": {
+      "declared": 120,
+      "covered": 66,
+      "gap": 54,
+      "gapPct": 45.0
+    },
+    "System.Private.CoreLib/System.MathF": {
+      "declared": 44,
+      "covered": 34,
+      "gap": 10,
+      "gapPct": 22.7
+    },
+    "System.Private.CoreLib/System.MemoryExtensions": {
+      "declared": 52,
+      "covered": 25,
+      "gap": 27,
+      "gapPct": 51.9
+    }
+  }
+}

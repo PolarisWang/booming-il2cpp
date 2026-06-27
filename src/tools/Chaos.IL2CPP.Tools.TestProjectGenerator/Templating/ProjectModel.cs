@@ -17,8 +17,6 @@ internal sealed class ProjectModelBuilder
         int patchDataSize,
         string patchDataHostClass,
         string projectName,
-        string chunkSlug,
-        string nativeDir,
         DateTime? generatedAt = null,
         string? projectRoot = null,
         string? codegenDir = null,
@@ -37,23 +35,12 @@ internal sealed class ProjectModelBuilder
         model["config_tier"] = configTier;
         model["is_windows"] = isWindows;
         model["project_name"] = projectName;
-        model["chunk_slug"] = chunkSlug;
         model["has_patch_data"] = hasPatchData;
         model["patch_data_size"] = patchDataSize;
         model["patch_data_host_class"] = patchDataHostClass;
-        model["sdk_dir"] = NormalizePath(
-            sdkDir is not null ? GetRelativePath(nativeDir, sdkDir) : "${CMAKE_CURRENT_SOURCE_DIR}/chaos-sdk");
-        model["project_root"] = NormalizePath(GetRelativePath(nativeDir, projectRoot ?? ""));
-        model["codegen_dir"] = NormalizePath(
-            codegenDir is not null ? GetRelativePath(nativeDir, codegenDir) : "${CMAKE_CURRENT_SOURCE_DIR}/codegen");
-        // Prepend CMAKE_CURRENT_SOURCE_DIR so all relative paths resolve
-        // correctly from cmake's working directory (build/) instead of nativeDir.
-        if (model["project_root"] is string pr && !pr.StartsWith("${", StringComparison.Ordinal) && !pr.StartsWith("/", StringComparison.Ordinal) && pr.IndexOf(':') < 0)
-            model["project_root"] = "${CMAKE_CURRENT_SOURCE_DIR}/" + pr;
-        if (model["sdk_dir"] is string sd && !sd.StartsWith("${", StringComparison.Ordinal) && !sd.StartsWith("/", StringComparison.Ordinal) && sd.IndexOf(':') < 0)
-            model["sdk_dir"] = "${CMAKE_CURRENT_SOURCE_DIR}/" + sd;
-        if (model["codegen_dir"] is string cd && !cd.StartsWith("${", StringComparison.Ordinal) && !cd.StartsWith("/", StringComparison.Ordinal) && cd.IndexOf(':') < 0)
-            model["codegen_dir"] = "${CMAKE_CURRENT_SOURCE_DIR}/" + cd;
+        model["sdk_dir"] = NormalizePath(sdkDir ?? "${CMAKE_CURRENT_SOURCE_DIR}/chaos-sdk");
+        model["project_root"] = NormalizePath(projectRoot ?? "");
+        model["codegen_dir"] = NormalizePath(codegenDir ?? "${CMAKE_CURRENT_SOURCE_DIR}/codegen");
         model["generated_at"] = (generatedAt ?? DateTime.UtcNow).ToString("O");
 
         // ── Subject metadata ──
@@ -268,20 +255,6 @@ internal sealed class ProjectModelBuilder
     /// Normalize Windows backslashes to forward slashes for CMake compatibility.
     /// CMake interprets \ as an escape character in strings, so \a, \c, etc. are errors.
     /// </summary>
-    private static string GetRelativePath(string fromPath, string toPath)
-    {
-        if (string.IsNullOrEmpty(toPath))
-            return "";
-        try
-        {
-            return Path.GetRelativePath(fromPath, toPath).Replace('\\', '/');
-        }
-        catch
-        {
-            return toPath.Replace('\\', '/');
-        }
-    }
-
     private static string NormalizePath(string path)
     {
         return path.Replace('\\', '/');

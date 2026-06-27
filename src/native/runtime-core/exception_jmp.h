@@ -44,7 +44,7 @@
 
 namespace chaos::il2cpp::runtime_core {
 
-static constexpr int kMaxNestedTry = 64;
+static constexpr int kMaxNestedTry = 16;
 
 // TLS jmp_buf stack. push_exception_jmp_buf/pop_exception_jmp_buf manage it.
 extern thread_local jmp_buf g_chaos_exception_jmp_stack[kMaxNestedTry];
