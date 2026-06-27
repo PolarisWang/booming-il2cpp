@@ -28,6 +28,7 @@
 #include <chaos/config.h>
 #include <chaos/native_types.h>
 
+#include <cstdio>
 #include <cstdlib>
 
 #if defined(CHAOS_IL2CPP_EH_SETJMP)
@@ -44,7 +45,9 @@
 
 namespace chaos::il2cpp::runtime_core {
 
-static constexpr int kMaxNestedTry = 16;
+static constexpr int kMaxNestedTry = 64;
+static_assert(kMaxNestedTry >= 16 && kMaxNestedTry <= 512,
+    "kMaxNestedTry must be in [16, 512] to balance stack safety and throughput");
 
 // TLS jmp_buf stack. push_exception_jmp_buf/pop_exception_jmp_buf manage it.
 extern thread_local jmp_buf g_chaos_exception_jmp_stack[kMaxNestedTry];
@@ -56,15 +59,21 @@ extern thread_local void* volatile g_chaos_exception_obj;
 
 inline jmp_buf* push_exception_jmp_buf() noexcept {
     if (g_chaos_exception_jmp_depth >= kMaxNestedTry) {
+        std::fprintf(stderr, "[FATAL] exception_jmp: try-nest depth %d exceeds kMaxNestedTry=%d (stack corruption prevented)\n",
+            static_cast<int>(g_chaos_exception_jmp_depth), kMaxNestedTry);
+        std::fflush(stderr);
         std::abort();
     }
     return &g_chaos_exception_jmp_stack[g_chaos_exception_jmp_depth++];
 }
 
 inline void pop_exception_jmp_buf() noexcept {
-    if (g_chaos_exception_jmp_depth > 0) {
-        g_chaos_exception_jmp_depth--;
+    if (g_chaos_exception_jmp_depth <= 0) {
+        std::fprintf(stderr, "[WARN] exception_jmp: pop underflow — depth already 0 (possible push/pop mismatch)\n");
+        std::fflush(stderr);
+        return;
     }
+    g_chaos_exception_jmp_depth--;
 }
 
 [[noreturn]] inline void chaos_raise_exception(CHAOS_IL2CPP_INTPTR obj) noexcept {

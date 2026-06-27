@@ -1,6 +1,7 @@
 #ifndef CHAOS_IL2CPP_THREAD_STATE_H_
 #define CHAOS_IL2CPP_THREAD_STATE_H_
 
+#include <atomic>
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
 #include <chaos/pal/pal_sync.h>
@@ -116,9 +117,9 @@ struct ManagedThread {
     std::atomic<bool>        pending_interrupt{false}; // Thread.Interrupt pending flag
 
     // ── Thread metadata ─────────────────────────────────────────
-    bool                     is_background{false};    // Thread.IsBackground flag
-    bool                     is_threadpool{false};    // ThreadPool worker flag
-    ManagedThreadState       managed_state{ManagedThreadState::Unstarted};
+    std::atomic<bool>        is_background{false};    // Thread.IsBackground flag
+    std::atomic<bool>        is_threadpool{false};    // ThreadPool worker flag
+    std::atomic<ManagedThreadState> managed_state{ManagedThreadState::Unstarted};
     ManagedThreadPriority    priority{ManagedThreadPriority::Normal};
 
     // ── OS handle for APC/thread ops ─────────────────────────────┐
@@ -203,8 +204,8 @@ extern thread_local int32_t        tls_this_thread_id;
 /// Set thread state with debug validation.
 /// In PROFILE/SHIP, compiles to a plain assignment.
 inline void SetThreadState(ManagedThread& thread, ManagedThreadState new_state) noexcept {
-    ValidateThreadStateTransition(thread.managed_state, new_state);
-    thread.managed_state = new_state;
+    ValidateThreadStateTransition(thread.managed_state.load(std::memory_order_relaxed), new_state);
+    thread.managed_state.store(new_state, std::memory_order_relaxed);
 }
 
 /// Current thread's managed ID (1 for the main thread).
