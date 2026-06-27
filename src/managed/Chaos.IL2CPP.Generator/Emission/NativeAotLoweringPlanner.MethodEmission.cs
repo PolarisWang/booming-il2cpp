@@ -278,18 +278,6 @@ public sealed partial class NativeAotLoweringPlanner
         stringBuilder5.AppendLine(ref handler);
         EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
         EmitStaticInitializationPrologue(builder, method);
-        // Universal safety net: declare _s0.._s63 so that page files don't need
-        // per-method slot declarations via EmitStructuredSlotDeclarations (which
-        // would cause C2086 redefinition across methods in the same page file).
-        // ~64 x 8 = 512 bytes; C++ optimizer removes unused.
-        for (int __si = 0; __si <= 63; __si++)
-            builder.AppendLine("\tCHAOS_IL2CPP_INTPTR _s" + __si + "{};");
-        for (int __ii = 0; __ii <= 31; __ii++)
-            builder.AppendLine("\tCHAOS_IL2CPP_INT64 _i" + __ii + "{};");
-        for (int __di = 0; __di <= 7; __di++)
-            builder.AppendLine("\tdouble _d" + __di + ";");
-        for (int __fi = 0; __fi <= 7; __fi++)
-            builder.AppendLine("\tfloat _f" + __fi + ";");
         // Emit structured IR body first to capture actual slot depth,
         // since ComputeMaxEvalStackDepth may undercount for generic methods
         // where inlined code or StringId emission expands the effective depth.
@@ -313,22 +301,7 @@ public sealed partial class NativeAotLoweringPlanner
             evalStackSize = Math.Max(evalStackSize, slotContext.MaxIntSlots);
         if (usesStructuredSlots && slotContext != null)
         {
-            // Slot declarations for _sN/_iN are handled by the universal safety net
-            // (_s0.._s63, _i0.._i31 declared above) to avoid C2086 redefinition from
-            // overlapping declarations across methods in the same page file.
-            // If the method needs more than 63 int slots (e.g. generic methods where
-            // ComputeMaxEvalStackDepth undercounts), emit the additional slots beyond
-            // the safety net range to prevent stack corruption.
-            if (slotContext.MaxIntSlots > 63)
-            {
-                for (int __xsi = 64; __xsi <= slotContext.MaxIntSlots; __xsi++)
-                    builder.AppendLine("\tCHAOS_IL2CPP_INTPTR _s" + __xsi + "{};");
-            }
-            if (slotContext.MaxInt64Slots > 31)
-            {
-                for (int __xii = 32; __xii <= slotContext.MaxInt64Slots; __xii++)
-                    builder.AppendLine("\tCHAOS_IL2CPP_INT64 _i" + __xii + "{};");
-            }
+            EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots + 2, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, slotContext.MaxInt64Slots + 2, slotContext.MaxWideSlots, "	");
             // Pre-populate _s0 with 'this' for instance subject methods.
             // Structured IR building can drop the initial ldarg.0 when the first
             // basic block has no branches, leaving _s0 = 0 (the slot init value).

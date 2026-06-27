@@ -876,8 +876,10 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         if (!baseline_caught[si] && patched_caught) {
             patched_assert_failed++;
         }
-        // Genuine semantic change (both paths succeed but return different values)
-        if (!baseline_caught[si] && !patched_caught &&
+        // Genuine semantic change (both paths succeed but return different values).
+        // Only flag when a patch was actually applied — without patch data the
+        // return value comparison is unreliable (void methods return garbage RAX).
+        if (patch_ctx != nullptr && !baseline_caught[si] && !patched_caught &&
             baseline_value[si] != patched_value) {
             semantic_changed_count++;
         }
