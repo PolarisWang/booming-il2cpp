@@ -407,22 +407,14 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private bool IsSubjectMethod(string subjectId)
     {
-        // 0. Always exclude Benchmark_ instance wrappers — they call methods on
+        // 0. Always exclude Benchmark_ wrappers — they call instance methods on
         //    null `this` without NullReferenceException handling, causing native
         //    crashes (STATUS_ACCESS_VIOLATION or STATUS_STACK_BUFFER_OVERRUN) in
-        //    AOT dispatch.  Static Benchmark_ methods have no `this` and are safe
-        //    to AOT compile — they provide performance coverage for static methods.
-        //    The corresponding [Fact] variant wraps the same call in
-        //    Assert.Throws<NullReferenceException> for correctness verification.
+        //    AOT dispatch.  The corresponding [Fact] variant wraps the same call
+        //    in Assert.Throws<NullReferenceException> and is the correct
+        //    correctness-verification entry point.
         if (subjectId.Contains("::Benchmark_", StringComparison.Ordinal))
-        {
-            // Check _methodsBySubjectId for metadata; if found, only exclude instance methods.
-            if (_methodsBySubjectId is { Count: > 0 } &&
-                _methodsBySubjectId.TryGetValue(subjectId, out var bmMethod))
-                return bmMethod.IsStatic;
-            // Fallback: if no metadata available, exclude to be safe.
             return false;
-        }
 
         // 1. When --subject-methods is provided, ONLY exact matches are valid.
         //    The CombinedSubjects prefix fallback below would also capture SDK
