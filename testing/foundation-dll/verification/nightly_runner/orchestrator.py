@@ -454,7 +454,8 @@ class NightlyOrchestrator:
         for asm in assemblies:
             chunks = discover_chunks(asm, foundation_dir=foundation_dir / asm)
             if not chunks:
-                print(f"  WARNING: No chunks for {asm}")
+                print(f"  SKIP: {asm} (0 chunks — forwarder assembly or empty)")
+                continue
             for slug in chunks:
                 all_chunks.append((asm, slug, foundation_dir / asm))
 
@@ -562,8 +563,9 @@ class NightlyOrchestrator:
             _run_profile_pass(all_chunks, pipeline_config, bench_semaphore, config)
 
         # ── Step 3: Aggregate per-assembly ──
-        print(f"\n  Phase 3: Aggregating per-assembly...")
-        for asm in assemblies:
+        asm_with_chunks = {asm for asm, _slug, _dir in all_chunks}
+        print(f"\n  Phase 3: Aggregating per-assembly ({len(asm_with_chunks)} assemblies with chunks)...")
+        for asm in sorted(asm_with_chunks):
             fdir = foundation_dir / asm
             agg_ctx = ChunkContext(
                 slug="__aggregate__",
