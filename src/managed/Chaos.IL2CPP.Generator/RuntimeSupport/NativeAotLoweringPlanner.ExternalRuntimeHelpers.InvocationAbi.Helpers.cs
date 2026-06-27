@@ -382,8 +382,13 @@ public sealed partial class NativeAotLoweringPlanner
 
 
 
-    private static string FormatAbiInvocationArgumentList(IReadOnlyList<AotCoreIrAbiSlotArtifact> abiSlots, string? firstArgumentOverride = null)
+    private static string FormatAbiInvocationArgumentList(IReadOnlyList<AotCoreIrAbiSlotArtifact> abiSlots, string? firstArgumentOverride = null, bool skipForExternalRuntime = false)
     {
+        // External runtime functions (chaos_external_runtime_*) use () signature —
+        // ChaosExternalRuntimeFallback parses arguments from the fallback string
+        // internally.  Callers pass an empty arg list for these functions.
+        if (skipForExternalRuntime)
+            return string.Empty;
         if (abiSlots.Count == 0)
         {
             return string.Empty;
