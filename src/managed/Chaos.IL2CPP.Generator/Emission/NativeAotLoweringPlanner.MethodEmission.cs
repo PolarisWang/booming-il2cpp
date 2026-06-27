@@ -369,7 +369,25 @@ public sealed partial class NativeAotLoweringPlanner
         if (_wrapInTryCatch)
             builder.AppendLine("	try {");
 
-        builder.Append(bodyBuilder);
+        // Strip inline declarations from bodyBuilder that are already emitted
+        // by the method preamble (chaos_args, chaos_locals, chaos_eval_stack, etc.)
+        // to prevent C2086/C2374 redefinition from duplicate declarations.
+        var _rawBody = bodyBuilder.ToString();
+        var _sb = new System.Text.StringBuilder(_rawBody.Length);
+        foreach (var _line in _rawBody.Split('\n'))
+        {
+            var _t = _line.TrimStart();
+            if (_t.StartsWith("CHAOS_IL2CPP_INTPTR _s", StringComparison.Ordinal) ||
+                _t.StartsWith("CHAOS_IL2CPP_INT64 _i", StringComparison.Ordinal) ||
+                _t.StartsWith("double _d", StringComparison.Ordinal) ||
+                _t.StartsWith("float _f", StringComparison.Ordinal) ||
+                _t.StartsWith("CHAOS_IL2CPP_SIZE chaos_stack_top", StringComparison.Ordinal) ||
+                _t.StartsWith("CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR,", StringComparison.Ordinal))
+                continue;
+            _sb.Append(_line);
+            _sb.Append('\n');
+        }
+        builder.Append(_sb);
         // Safety: close any unmatched { from structured IR lowering (e.g. failed newobj)
         // to prevent C2598/C2601 cascading to subsequent functions.
         int _braceCount = 0;
