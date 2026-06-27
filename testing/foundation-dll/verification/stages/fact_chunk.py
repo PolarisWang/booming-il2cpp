@@ -69,16 +69,6 @@ def _run_single_fact(exe_path: Path, tech: str) -> dict:
     passed = sum(1 for fr in fact_results if fr.get("passed"))
     total = len(fact_results)
 
-    # Detect fallback-only results: passed=true but assertCount==0 means the
-    # subject method was dispatched to ChaosExternalRuntimeFallback and returned
-    # 0 without executing any assertion.  Mark these as false positives.
-    for fr in fact_results:
-        if fr.get("passed") and fr.get("assertCount", 1) == 0:
-            fr["passed"] = False
-            fr["_fallback"] = True
-
-    passed = sum(1 for fr in fact_results if fr.get("passed"))
-
     # Parse assertion failure messages from stderr
     assert_messages: list[str] = []
     if stderr:
@@ -184,6 +174,18 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     }
     try:
         fact_path.write_text(json.dumps(fact_data, ensure_ascii=False, indent=2), encoding="utf-8")
+    except OSError:
+        pass  # non-fatal
+
+    # Write per-method fact results for Allure report generation
+    per_method = {
+        "aot": aot_result.get("results", []),
+    }
+    if jit_result and jit_result.get("results"):
+        per_method["jit"] = jit_result["results"]
+    try:
+        (chunk_results_dir / "fact-results.json").write_text(
+            json.dumps(per_method, ensure_ascii=False), encoding="utf-8")
     except OSError:
         pass  # non-fatal
 

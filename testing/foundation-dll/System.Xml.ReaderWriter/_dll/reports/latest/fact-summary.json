@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Xml.ReaderWriter",
-  "timestamp": "2026-06-27T06:23:35",
+  "timestamp": "2026-06-26T05:47:49",
   "totalChunks": 4,
   "chunksWithFacts": 3,
   "chunksWithValueWarnings": 0,
@@ -34,17 +34,17 @@
       },
       "benchmark": {
         "methodCount": 51,
-        "iterations": 8333,
-        "meanDurationMs": 9.856774509803921,
-        "meanOpsPerSecond": 931515.3568627451,
-        "minDurationMs": 5.5778,
-        "maxDurationMs": 25.2566,
-        "totalDurationMs": 502.6955,
-        "totalAllocatedBytes": 533312.0,
-        "meanSampleCount": 4.3,
-        "totalOutliers": 35,
-        "meanCv": 0.17314049019607844,
-        "maxCv": 0.548362
+        "iterations": 10000,
+        "meanDurationMs": 11.077327450980393,
+        "meanOpsPerSecond": 1011558.8498039217,
+        "minDurationMs": 6.5857,
+        "maxDurationMs": 27.0227,
+        "totalDurationMs": 564.9437,
+        "totalAllocatedBytes": 640000.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.05283729411764706,
+        "maxCv": 0.398955
       },
       "hotupdate": {
         "passed": 51,
@@ -84,17 +84,17 @@
       },
       "benchmark": {
         "methodCount": 115,
-        "iterations": 6666,
-        "meanDurationMs": 7.99906,
-        "meanOpsPerSecond": 807518.8911578947,
+        "iterations": 7142,
+        "meanDurationMs": 8.245381739130435,
+        "meanOpsPerSecond": 839515.1857894737,
         "minDurationMs": 0,
-        "maxDurationMs": 16.1837,
-        "totalDurationMs": 919.8919,
-        "totalAllocatedBytes": 7039296.0,
+        "maxDurationMs": 15.3907,
+        "totalDurationMs": 948.2189,
+        "totalAllocatedBytes": 7541952.0,
         "meanSampleCount": 2.5,
         "totalOutliers": 0,
-        "meanCv": 0.052780957894736844,
-        "maxCv": 0.212767
+        "meanCv": 0.039431557894736846,
+        "maxCv": 0.339
       },
       "hotupdate": {
         "passed": 0,

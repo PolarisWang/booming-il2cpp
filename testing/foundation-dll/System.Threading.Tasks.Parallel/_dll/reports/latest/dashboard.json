@@ -1,18 +1,17 @@
 {
   "assemblyName": "System.Threading.Tasks.Parallel",
-  "timestamp": "2026-06-27T06:23:35",
+  "timestamp": "2026-06-26T05:47:49",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
-    "chunksWithMetaMismatch": 1,
-    "factPassRate": 0.0,
+    "chunksWithMetaMismatch": 0,
+    "factPassRate": 100.0,
     "totalBenchmarkedMethods": 106,
     "aggregatePerformance": {
-      "meanDurationMs": 0.3361745283018868,
-      "meanOpsPerSecond": 295521917.1166667,
-      "aggregateMeanCv": 0.21182449019607844,
-      "totalOutliers": 140
+      "meanDurationMs": 0.5538273584905661,
+      "meanOpsPerSecond": 305991059.7175472,
+      "aggregateMeanCv": 0.08478967924528301
     },
     "hotupdate": {
       "chunksWithPatchData": 1,

@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Xml.ReaderWriter",
-  "timestamp": "2026-06-27T06:23:35",
+  "timestamp": "2026-06-26T05:47:49",
   "summary": {
     "chunks": 4,
     "chunksVerified": 3,
@@ -9,10 +9,9 @@
     "factPassRate": 53.8,
     "totalBenchmarkedMethods": 613,
     "aggregatePerformance": {
-      "meanDurationMs": 9.681722316094223,
-      "meanOpsPerSecond": 757503.7812868799,
-      "aggregateMeanCv": 0.09853495203027175,
-      "totalOutliers": 35
+      "meanDurationMs": 10.170680542863192,
+      "meanOpsPerSecond": 794850.3771444651,
+      "aggregateMeanCv": 0.053984086670794636
     },
     "hotupdate": {
       "chunksWithPatchData": 2,

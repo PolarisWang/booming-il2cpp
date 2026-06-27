@@ -44,6 +44,7 @@ from verification.stages.benchmark_report import run_benchmark_report
 from verification.stages.coverage_audit import run_coverage_audit
 from verification.stages.aggregate import run_aggregate
 from verification.stages.reporting import run_reporting
+from verification.stages.allure_report import run_allure_report
 
 
 # ── Data types ──────────────────────────────────────────────────────────
@@ -600,6 +601,27 @@ class NightlyOrchestrator:
                 print(f"    {asm}: reporting {report_result.status}")
             except Exception as e:
                 print(f"    {asm}: reporting EXCEPTION: {e}")
+
+        # ── Step 5: Allure Report (single call, covers all assemblies) ──
+        print(f"\n  Phase 5: Allure Report...")
+        if assemblies:
+            fdir = foundation_dir / assemblies[0]
+            allure_ctx = ChunkContext(
+                slug="__allure__",
+                assembly="__all__",
+                chunk_dir=fdir / "chunks" / "__allure__",
+                foundation_dir=fdir,
+                mode="standard",
+                native_config=config.native_config,
+                verbose=config.log_level == "DEBUG",
+            )
+            try:
+                allure_result = run_allure_report(allure_ctx, {})
+                print(f"    allure {allure_result.status} ({allure_result.summary})")
+            except Exception as e:
+                print(f"    allure EXCEPTION: {e}")
+        else:
+            print(f"    (no assemblies, skipped)")
 
         result.ended_at = time.perf_counter()
         result.ended_wallclock = time.time()
