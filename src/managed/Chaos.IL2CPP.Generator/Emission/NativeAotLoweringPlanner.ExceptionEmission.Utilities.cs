@@ -149,8 +149,7 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(indentation + "        chaos_runtime_get_abi_v0()->raise_null_reference_exception();");
             builder.AppendLine(indentation + "    }");
         }
-        string argList = FormatAbiInvocationArgumentList(parameterAbis,
-            skipForExternalRuntime: targetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal));
+        string argList = FormatAbiInvocationArgumentList(parameterAbis);
         // Append hidden chaos_generic_context when calling a shared canonical body.
         // Shared callers pass their own context parameter; non-shared pass 0.
         string genericCtxArg = "";
@@ -242,9 +241,7 @@ public sealed partial class NativeAotLoweringPlanner
                     builder.AppendLine(indentation + "    }");
                 }
             }
-            string directNativeArgs = nativeSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal)
-                ? string.Empty
-                : FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
+            string directNativeArgs = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
             string nativeCtxArg = "";
             if (_sharedContextSymbols.Contains(nativeSymbol))
             {
@@ -522,11 +519,7 @@ public sealed partial class NativeAotLoweringPlanner
         if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
             _emittedExternalRuntimeSymbols[nativeTarget] = returnAbi.CarrierKindCode;
         // Append hidden chaos_generic_context for shared canonical targets.
-        // External runtime functions use () signature (ChaosExternalRuntimeFallback
-        // parses arguments from the fallback string itself), so pass no args.
-        string hpArgList = nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal)
-            ? string.Empty
-            : FormatAbiInvocationArgumentList(parameterAbis);
+        string hpArgList = FormatAbiInvocationArgumentList(parameterAbis);
         string hpCtxArg = "";
         if (_sharedContextSymbols.Contains(nativeTarget))
         {

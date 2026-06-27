@@ -155,7 +155,7 @@ def _detect_tfm(dll_path: Path) -> str:
     m = re.search(r"/net(\d+)\.(\d+)/runtime/", path)
     if m:
         return f"net{m.group(1)}.{m.group(2)}"
-    return "net8.0"
+    return "net10.0"
 
 
 def _custom_subjects_metadata(
