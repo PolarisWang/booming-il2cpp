@@ -1029,7 +1029,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 # was missing it.
                 restored_build_dir = ctx.native_dir / "build"
                 if restored_build_dir.exists():
-                    import shutil
                     shutil.rmtree(restored_build_dir, ignore_errors=True)
                     print(f"  [build] [hephaestus] Cleaned stale cmake build dir from cache")
                 duration_ms = int((time.perf_counter() - start) * 1000)
