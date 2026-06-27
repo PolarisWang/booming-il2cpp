@@ -313,9 +313,22 @@ public sealed partial class NativeAotLoweringPlanner
             evalStackSize = Math.Max(evalStackSize, slotContext.MaxIntSlots);
         if (usesStructuredSlots && slotContext != null)
         {
-            // Slot declarations are handled by the universal safety net
-            // (_s0.._s63 declared above).  Skip EmitStructuredSlotDeclarations
-            // to avoid C2086 redefinition from overlapping declarations.
+            // Slot declarations for _sN/_iN are handled by the universal safety net
+            // (_s0.._s63, _i0.._i31 declared above) to avoid C2086 redefinition from
+            // overlapping declarations across methods in the same page file.
+            // If the method needs more than 63 int slots (e.g. generic methods where
+            // ComputeMaxEvalStackDepth undercounts), emit the additional slots beyond
+            // the safety net range to prevent stack corruption.
+            if (slotContext.MaxIntSlots > 63)
+            {
+                for (int __xsi = 64; __xsi <= slotContext.MaxIntSlots; __xsi++)
+                    builder.AppendLine("\tCHAOS_IL2CPP_INTPTR _s" + __xsi + "{};");
+            }
+            if (slotContext.MaxInt64Slots > 31)
+            {
+                for (int __xii = 32; __xii <= slotContext.MaxInt64Slots; __xii++)
+                    builder.AppendLine("\tCHAOS_IL2CPP_INT64 _i" + __xii + "{};");
+            }
             // Pre-populate _s0 with 'this' for instance subject methods.
             // Structured IR building can drop the initial ldarg.0 when the first
             // basic block has no branches, leaving _s0 = 0 (the slot init value).
