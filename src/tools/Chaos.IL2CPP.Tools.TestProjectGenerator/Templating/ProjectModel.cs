@@ -40,10 +40,6 @@ internal sealed class ProjectModelBuilder
         model["patch_data_host_class"] = patchDataHostClass;
         model["sdk_dir"] = NormalizePath(sdkDir ?? "${CMAKE_CURRENT_SOURCE_DIR}/chaos-sdk");
         model["project_root"] = NormalizePath(projectRoot ?? "");
-        // For relative paths, prepend CMAKE_CURRENT_SOURCE_DIR so cmake resolves
-        // from the source directory (native/) regardless of the build dir location.
-        if (model["project_root"] is string pr && pr.Length > 0 && !pr.StartsWith("/", StringComparison.Ordinal) && pr.IndexOf(':') < 0)
-            model["project_root"] = "${CMAKE_CURRENT_SOURCE_DIR}/" + pr;
         model["codegen_dir"] = NormalizePath(codegenDir ?? "${CMAKE_CURRENT_SOURCE_DIR}/codegen");
         model["generated_at"] = (generatedAt ?? DateTime.UtcNow).ToString("O");
 

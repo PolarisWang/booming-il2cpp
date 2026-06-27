@@ -904,15 +904,13 @@ public sealed partial class NativeAotLoweringPlanner
             methodsForLowering,
             closureManifest);
         _tStaticInit = _sw.ElapsedMilliseconds;
-        IReadOnlyList<ExternalRuntimeHelperDefinition> externalRuntimeHelpers = null!;
-        System.Threading.Tasks.Parallel.Invoke(
-            () => externalRuntimeHelpers = CollectExternalRuntimeHelpers(methodsForLowering, _staticInitializationSupport),
-            () => CollectExternalRuntimeDispatchEntries(methodsForLowering),
-            () => CollectBridgeImportThunks(methodsForLowering));
-        _externalRuntimeHelpers = externalRuntimeHelpers;
+        var externalRuntimeHelpers = CollectExternalRuntimeHelpers(methodsForLowering, _staticInitializationSupport);
         _tExtHelpers = _sw.ElapsedMilliseconds;
-        _tExtDispatch = _tExtHelpers;
-        _tBridgeThunks = _tExtHelpers;
+        _externalRuntimeHelpers = externalRuntimeHelpers;
+        CollectExternalRuntimeDispatchEntries(methodsForLowering);
+        _tExtDispatch = _sw.ElapsedMilliseconds;
+        CollectBridgeImportThunks(methodsForLowering);
+        _tBridgeThunks = _sw.ElapsedMilliseconds;
         _tPhase2 = _sw.ElapsedMilliseconds;
         var objectModelBuilder = new StringBuilder(65536);
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
@@ -1063,19 +1061,12 @@ public sealed partial class NativeAotLoweringPlanner
 
         var entryBridgeArguments = fullAssemblyMode ? "" : BuildEntryBridgeArguments(entryMethod!);
 
-        // Phase 3: Parallel-build all registration data tables.
-        // BuildHotpatchTable, BuildExternalRuntimeDispatchTable, BuildGcSlotMapSection,
-        // and BuildAbiManifest are independent and can run concurrently.
-        string? nameIndexCode = null, externalRuntimeTableCode = null;
-        string? abiManifestCode = null, gcSlotMapCode = null;
-        System.Threading.Tasks.Parallel.Invoke(
-            () => abiManifestCode = BuildAbiManifest(methodsForLowering),
-            () => nameIndexCode = BuildHotpatchTable(methodsForLowering, metadataRegistration),
-            () => externalRuntimeTableCode = BuildExternalRuntimeDispatchTable(
-                helperSymbolBySubjectId: externalRuntimeHelpers?
-                    .Where(h => !string.IsNullOrEmpty(h.TargetSymbol))
-                    .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal)),
-            () => gcSlotMapCode = BuildGcSlotMapSection(methodsForLowering));
+        var abiManifestCode = BuildAbiManifest(methodsForLowering);
+        var nameIndexCode = BuildHotpatchTable(methodsForLowering, metadataRegistration);
+        var externalRuntimeTableCode = BuildExternalRuntimeDispatchTable(
+            helperSymbolBySubjectId: externalRuntimeHelpers?
+                .Where(h => !string.IsNullOrEmpty(h.TargetSymbol))
+                .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal));
         var cryptoAotIrCode = BuildCryptoAotIrCode();
         var moduleRegistrationCode = BuildModuleRegistration();
         var moduleRegSb = new StringBuilder(moduleRegistrationCode, 65536);
@@ -1122,7 +1113,7 @@ public sealed partial class NativeAotLoweringPlanner
         // Step 1.5: Emit GC slot map section for precise stack root scanning.
         // Placed BEFORE CodeRegistrationV0 so the slot_map_section_begin/end
         // symbols are defined before they're referenced.
-        // gcSlotMapCode is built in Phase 3 (Parallel.Invoke above) for concurrency.
+        var gcSlotMapCode = BuildGcSlotMapSection(methodsForLowering);
         if (!string.IsNullOrEmpty(gcSlotMapCode))
         {
             moduleRegSb.Append(Environment.NewLine);

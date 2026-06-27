@@ -374,10 +374,10 @@ def _compile_custom_subjects(
         print(f"  [build] Custom subjects build FAILED for {tfm}")
         for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-15:]:
             print(f"      {line}")
-        if tfm != "net8.0":
-            print(f"  [build] Retrying with net8.0 fallback (original TFM={tfm} failed)")
+        if tfm != "net10.0":
+            print(f"  [build] Retrying with net10.0 fallback (original TFM={tfm} failed)")
             return _compile_custom_subjects(
-                custom_cs_files, subjects_dll, "net8.0", sdk_csproj)
+                custom_cs_files, subjects_dll, "net10.0", sdk_csproj)
         return None
 
     return method_info
@@ -569,6 +569,12 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 dll_candidates.append(pack_dir)
         # Prefer Microsoft.NETCore.App.Ref over NETStandard.Library.Ref
         dll_candidates.sort(key=lambda p: 1 if "NETStandard" in str(p) else 0)
+        # Prefer .NET 10 runtime DLLs for correct API surface detection during
+        # auto-generated C# subject compilation.  .NET 8 DLLs have a smaller
+        # API surface that causes C# compilation errors when the AutoTestGenerator
+        # emits code calling net9+/net10+ APIs (TypeDescriptor.RegisterType,
+        # Enumerable.RightJoin, Meter.CreateGauge, etc.).
+        dll_candidates.sort(key=lambda p: 0 if re.search(r"10\.\d+", str(p)) else 1)
 
     target_dll: Path | None = None
     for c in dll_candidates:
@@ -911,14 +917,33 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             break
 
         if build_result.returncode != 0 or not subjects_dll.exists():
-            print(f"  [build] Combined build FAILED for {tfm}")
-            for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-15:]:
-                print(f"      {line}")
-            return StageResult(
-                stage="build", status="error",
-                summary="Combined subjects DLL build failed",
-                details={"buildErrors": build_result.stderr[:500]},
-                duration_ms=int((time.perf_counter() - start) * 1000))
+            # If the detected TFM is net8.0 and compilation fails (likely because
+            # auto-generated CombinedSubjects.cs calls net10+ APIs like
+            # TypeDescriptor.RegisterType, Enumerable.RightJoin, etc.), retry with
+            # net10.0 which has the full API surface.
+            if tfm != "net10.0" and subjects_dll.exists() is False:
+                print(f"  [build] Retrying with net10.0 (original TFM={tfm} failed)")
+                tfm = "net10.0"
+                build_result = subprocess.run(
+                    ["dotnet", "build", str(combined_csproj),
+                     "-f", tfm,
+                     f"-p:OutDir={subjects_dll.parent}",
+                     "-p:ImportDirectoryBuildProps=false",
+                     "--nologo", "-v", "quiet"],
+                    capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
+                if build_result.returncode == 0 and subjects_dll.exists():
+                    print(f"  [build] net10.0 retry SUCCEEDED")
+                else:
+                    print(f"  [build] net10.0 retry also FAILED")
+            if build_result.returncode != 0 or not subjects_dll.exists():
+                print(f"  [build] Combined build FAILED for {tfm}")
+                for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-15:]:
+                    print(f"      {line}")
+                return StageResult(
+                    stage="build", status="error",
+                    summary="Combined subjects DLL build failed",
+                    details={"buildErrors": build_result.stderr[:500]},
+                    duration_ms=int((time.perf_counter() - start) * 1000))
 
         print(f"  [build] Subjects DLL: {subjects_dll} ({subjects_dll.stat().st_size} bytes)")
 
@@ -996,6 +1021,17 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             if ctx.entry_exe_path.exists():
                 exe_size = ctx.entry_exe_path.stat().st_size
                 print(f"  [build] [hephaestus] Restored entry.exe ({exe_size} bytes)")
+                # Clean stale cmake build dir that may have been restored from
+                # cache.  CMakeCache.txt records CMAKE_HOME_DIRECTORY from the
+                # original projectDir which may differ from the current path
+                # (e.g. different Docker container, clone path changed).  The
+                # cache-miss path (below) already does this; the cache-hit path
+                # was missing it.
+                restored_build_dir = ctx.native_dir / "build"
+                if restored_build_dir.exists():
+                    import shutil
+                    shutil.rmtree(restored_build_dir, ignore_errors=True)
+                    print(f"  [build] [hephaestus] Cleaned stale cmake build dir from cache")
                 duration_ms = int((time.perf_counter() - start) * 1000)
                 # Also build JIT entry if stale or missing (non-blocking)
                 _build_jit_entry_fast(tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),

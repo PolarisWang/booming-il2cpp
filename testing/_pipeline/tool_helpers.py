@@ -69,18 +69,18 @@ def ensure_sdk(repo_root: Path | None = None) -> Path:
     lib_ext = ".a" if is_linux else ".lib"
 
     sdk_dir = repo_root / "testing" / "foundation-dll" / "sdk" / sdk_subdir
-    sdk_lib = sdk_dir / "lib" / f"chaos_runtime_core{lib_ext}"
+    sdk_lib = sdk_dir / "lib" / f"libchaos_runtime_core{lib_ext}"
     if sdk_lib.exists():
         return sdk_dir
 
     print(f"[tool_helpers] SDK ({sdk_subdir}) not found, building presets...")
     script = repo_root / "testing" / "foundation-dll" / "artifacts" / "build_presets.py"
     result = subprocess.run(
-        [sys.executable, str(script)],
+        [sys.executable, str(script), "--preset", sdk_subdir],
         capture_output=True, text=True, timeout=1200,
     )
     if result.returncode != 0:
-        print(f"[tool_helpers] SDK build FAILED (presets may not support {_platform.system()})")
+        print(f"[tool_helpers] SDK build FAILED for {sdk_subdir} (presets may not support {_platform.system()})")
         print(result.stderr[-500:])
         raise RuntimeError(f"SDK build failed: {result.stderr[-200:]}")
 
@@ -108,4 +108,4 @@ def detect_tfm(dll_path: Path) -> str:
     m = re.search(r"/net(\d+)\.(\d+)/runtime/", path)
     if m:
         return f"net{m.group(1)}.{m.group(2)}"
-    return "net8.0"
+    return "net10.0"
