@@ -100,7 +100,7 @@ def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | Non
         "    <ImplicitUsings>enable</ImplicitUsings>\n"
         "    <Nullable>enable</Nullable>\n"
         "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
-        "    <NoWarn>$(NoWarn);SYSLIB0011;CS0433;SYSLIB5006;SYSLIB5007;CA2252</NoWarn>\n"
+        "    <NoWarn>$(NoWarn);SYSLIB0011;CS0433;SYSLIB5006;SYSLIB5007;SYSLIB5008;CA2252</NoWarn>\n"
         "    <WarningsNotAsErrors>$(WarningsNotAsErrors);CS0433;SYSLIB5006;SYSLIB5007;SYSLIB5008</WarningsNotAsErrors>\n"
         "    <EnablePreviewFeatures>true</EnablePreviewFeatures>\n"
         "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"

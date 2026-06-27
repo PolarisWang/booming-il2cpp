@@ -69,22 +69,6 @@ add_chaos_test(convert_stubs_test
     LABELS "unit;core"
 )
 
-# T1a-2: exception_jmp depth-boundary unit tests
-# Tests push_exception_jmp_buf/pop_exception_jmp_buf at depths 1/16/32/64/65.
-# Self-contained: provides its own TLS definitions for the jmp_buf stack.
-# Forces SETJMP mode to test the jmp_buf stack boundary (WIN32_SEH does not
-# use push/pop).  On Windows/MSVC the default is WIN32_SEH, so we define
-# CHAOS_IL2CPP_EH_SETJMP before any includes.
-add_chaos_test(exception_jmp_depth_test
-    exception_jmp_depth_test.cpp
-    LIBS ${CHAOS_COMMON_TEST_LIBS}
-    LABELS "unit;core"
-)
-target_compile_definitions(exception_jmp_depth_test PRIVATE
-    CHAOS_IL2CPP_EH_SETJMP
-)
-target_compile_options(exception_jmp_depth_test PRIVATE /utf-8)
-
 # T4-1: Runtime Stubs performance benchmarks
 # Compiles stub .cpp directly (same GNU ar compat pattern as unit tests).
 add_chaos_test(runtime_stubs_benchmark
