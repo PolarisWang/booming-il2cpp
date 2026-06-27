@@ -301,7 +301,7 @@ public sealed partial class NativeAotLoweringPlanner
             evalStackSize = Math.Max(evalStackSize, slotContext.MaxIntSlots);
         if (usesStructuredSlots && slotContext != null)
         {
-            EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots + 2, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, slotContext.MaxInt64Slots + 2, slotContext.MaxWideSlots, "	");
+            // Slot declarations handled by method preamble.  Skip EmitStructuredSlotDeclarations.
             // Pre-populate _s0 with 'this' for instance subject methods.
             // Structured IR building can drop the initial ldarg.0 when the first
             // basic block has no branches, leaving _s0 = 0 (the slot init value).
@@ -369,7 +369,25 @@ public sealed partial class NativeAotLoweringPlanner
         if (_wrapInTryCatch)
             builder.AppendLine("	try {");
 
-        builder.Append(bodyBuilder);
+        // Strip inline decls from bodyBuilder -- preamble already emits them
+        var _rawBody = bodyBuilder.ToString();
+        var _sb = new System.Text.StringBuilder(_rawBody.Length);
+        foreach (var _line in _rawBody.Split('
+'))
+        {
+            var _t = _line.TrimStart();
+            if (_t.StartsWith("CHAOS_IL2CPP_INTPTR _s") ||
+                _t.StartsWith("CHAOS_IL2CPP_INT64 _i") ||
+                _t.StartsWith("double _d") ||
+                _t.StartsWith("float _f") ||
+                _t.StartsWith("CHAOS_IL2CPP_SIZE chaos_stack_top") ||
+                _t.StartsWith("CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR,"))
+                continue;
+            _sb.Append(_line);
+            _sb.Append('
+');
+        }
+        builder.Append(_sb);
         // Safety: close any unmatched { from structured IR lowering (e.g. failed newobj)
         // to prevent C2598/C2601 cascading to subsequent functions.
         int _braceCount = 0;
