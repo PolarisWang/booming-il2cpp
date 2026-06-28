@@ -12,11 +12,11 @@ public sealed partial class NativeAotLoweringPlanner
     /// Renders the NativeAot.GeneratedModule.h.scriban template with type group
     /// data from the methods for lowering.
     /// </summary>
-    internal string BuildGeneratedModuleHeader(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string objectModel, string assemblySuffix)
+	internal string BuildGeneratedModuleHeader(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string objectModel, string assemblySuffix, IReadOnlySet<string>? extraValuetypes = null)
     {
         return ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetGeneratedModuleHeaderTemplate(),
-            BuildGeneratedModuleModel(methodsForLowering));
+            BuildGeneratedModuleModel(methodsForLowering, extraValuetypes));
     }
 
     /// <summary>
@@ -24,14 +24,14 @@ public sealed partial class NativeAotLoweringPlanner
     /// Renders the NativeAot.GeneratedModule.cpp.scriban template with type group
     /// data and extern symbol declarations.
     /// </summary>
-    internal string BuildGeneratedModuleSource(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string objectModel, string assemblySuffix)
+	internal string BuildGeneratedModuleSource(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string objectModel, string assemblySuffix, IReadOnlySet<string>? extraValuetypes = null)
     {
         return ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetGeneratedModuleSourceTemplate(),
-            BuildGeneratedModuleModel(methodsForLowering));
+            BuildGeneratedModuleModel(methodsForLowering, extraValuetypes));
     }
 
-    private ScriptObject BuildGeneratedModuleModel(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
+    private ScriptObject BuildGeneratedModuleModel(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, IReadOnlySet<string>? extraValuetypes = null)
     {
         if (methodsForLowering.Count == 0)
         {
@@ -250,13 +250,11 @@ public sealed partial class NativeAotLoweringPlanner
                 }
             }
 
-            // Post-scan method declarations (extern "C" strings) for any
-            // chaos_valuetype_* references that ABI slot scanning missed.
-            // External value types (e.g. System.Data.CommandBehavior from
-            // System.Data.Common) are not in managedTypes during AOT IR
-            // lowering, so their ABI slots lack TypeSubjectId.  The method
-            // declarations string is the authoritative source for which
-            // chaos_valuetype_ names appear in generated C++ code.
+            // Include extra chaos_valuetype_ typedefs from method declarations
+            // (extern "C" strings).  External value types used as ABI parameters
+            // have CarrierKindCode=ValueTypeByValue with TypeSubjectId set from
+            // the AOT IR, so FormatMethodDeclaration outputs chaos_valuetype_X
+            // in the parameter list.  Scan _methodDeclarations for these names.
             var extraValuetypeNames = new HashSet<string>(StringComparer.Ordinal);
             if (_methodDeclarations != null)
             {
@@ -265,15 +263,16 @@ public sealed partial class NativeAotLoweringPlanner
                     int idx = 0;
                     while ((idx = decl.IndexOf("chaos_valuetype_", idx, StringComparison.Ordinal)) >= 0)
                     {
-                        int start = idx + 16; // after "chaos_valuetype_"
-                        int end = decl.IndexOf(' ', start);
+                        int start = idx;
+                        int end = decl.IndexOf(' ', idx + 16);
                         if (end < 0) end = decl.Length;
-                        string typeName = decl.Substring(idx, end - idx);
-                        extraValuetypeNames.Add(typeName);
+                        extraValuetypeNames.Add(decl.Substring(idx, end - idx));
                         idx = end;
                     }
                 }
             }
+            if (extraValuetypes != null)
+                extraValuetypeNames.UnionWith(extraValuetypes);
 
             var vtBuilder = new System.Text.StringBuilder();
             vtBuilder.AppendLine("// chaos_valuetype_* typedefs (opaque 32-bit managed value types)");

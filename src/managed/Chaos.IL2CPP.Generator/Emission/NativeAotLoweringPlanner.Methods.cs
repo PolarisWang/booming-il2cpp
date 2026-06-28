@@ -1425,8 +1425,8 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Build A1 typed dispatch table header + A2 dispatch wiring source.
         // These are emitted as separate files (chaos_generated_module.h/.cpp) for
         // typed dispatch via ChaosRuntimeHost. Empty when methodsForLowering is empty.
-        var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix);
-        var moduleSource = BuildGeneratedModuleSource(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix);
+        var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix, extraValuetypes);
+        var moduleSource = BuildGeneratedModuleSource(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix, extraValuetypes);
 
         // Build include list — stable runtime headers go into chaos_pch.h
         // (precompiled header). Only conditional/per-run headers are here.
@@ -1589,6 +1589,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             CodegenNamespace = SanitizeCppIdentifier(loweringPlan.AssemblyName),
             GeneratedModuleHeaderContent = moduleHeader,
             GeneratedModuleSourceContent = moduleSource,
+            ExtraValuetypeTypedefs = extraValuetypes,
         };
     }
 
