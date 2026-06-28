@@ -216,6 +216,7 @@ public sealed partial class NativeAotLoweringPlanner
             for (int mi = 0; mi < methodsForLowering.Count; mi++)
             {
                 var m = methodsForLowering[mi];
+                // ValueTypeByValue ABI slots — exact value types
                 if (m.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
                     !string.IsNullOrEmpty(m.ReturnAbi.TypeSubjectId))
                     _emittedValueTypeSubjectIds.Add(m.ReturnAbi.TypeSubjectId);
@@ -226,6 +227,48 @@ public sealed partial class NativeAotLoweringPlanner
                         if (abi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
                             !string.IsNullOrEmpty(abi.TypeSubjectId))
                             _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
+                    }
+                }
+                // NativeInt ABI slots with external type SubjectIds — these are external
+                // value types (e.g. System.Data.CommandBehavior) that could not be resolved
+                // at AOT IR lowering time (managedType == null).  The TypeSubjectId was
+                // populated by BuildExternalTypeSubjectId in ResolveAbiSlot so that
+                // GeneratedModule emits the necessary chaos_valuetype_* typedef.
+                if (m.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt &&
+                    !string.IsNullOrEmpty(m.ReturnAbi.TypeSubjectId) &&
+                    !m.ReturnAbi.TypeSubjectId.StartsWith("System.Private.CoreLib/", StringComparison.Ordinal))
+                    _emittedValueTypeSubjectIds.Add(m.ReturnAbi.TypeSubjectId);
+                if (m.ParameterAbis != null)
+                {
+                    foreach (var abi in m.ParameterAbis)
+                    {
+                        if (abi.CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt &&
+                            !string.IsNullOrEmpty(abi.TypeSubjectId) &&
+                            !abi.TypeSubjectId.StartsWith("System.Private.CoreLib/", StringComparison.Ordinal))
+                            _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
+                    }
+                }
+            }
+
+            // Post-scan method declarations (extern "C" strings) for any
+            // chaos_valuetype_* references that ABI slot scanning missed.
+            // External value types (e.g. System.Data.CommandBehavior from
+            // System.Data.Common) are not in managedTypes during AOT IR
+            // lowering, so their ABI slots lack TypeSubjectId.  The method
+            // declarations string is the authoritative source for which
+            // chaos_valuetype_ names appear in generated C++ code.
+            if (_methodDeclarations != null)
+            {
+                foreach (var decl in _methodDeclarations)
+                {
+                    int idx = 0;
+                    while ((idx = decl.IndexOf("chaos_valuetype_", idx, StringComparison.Ordinal)) >= 0)
+                    {
+                        int end = decl.IndexOf(' ', idx + 16); // space after type name
+                        if (end < 0) end = decl.Length;
+                        string typeName = decl.Substring(idx, end - idx);
+                        _emittedValueTypeSubjectIds.Add(typeName);
+                        idx = end;
                     }
                 }
             }

@@ -379,8 +379,14 @@ public sealed partial class NativeAotLoweringPlanner
             var _t = _line.TrimStart();
             if (_t.StartsWith("CHAOS_IL2CPP_INTPTR _s") ||
                 _t.StartsWith("CHAOS_IL2CPP_INT64 _i") ||
-                _t.StartsWith("double _d") ||
-                _t.StartsWith("float _f") ||
+                _t.StartsWith("double _d0") || _t.StartsWith("double _d1") ||
+                _t.StartsWith("double _d2") || _t.StartsWith("double _d3") ||
+                _t.StartsWith("double _d4") || _t.StartsWith("double _d5") ||
+                _t.StartsWith("double _d6") || _t.StartsWith("double _d7") ||
+                _t.StartsWith("float _f0") || _t.StartsWith("float _f1") ||
+                _t.StartsWith("float _f2") || _t.StartsWith("float _f3") ||
+                _t.StartsWith("float _f4") || _t.StartsWith("float _f5") ||
+                _t.StartsWith("float _f6") || _t.StartsWith("float _f7") ||
                 _t.StartsWith("CHAOS_IL2CPP_SIZE chaos_stack_top") ||
                 _t.StartsWith("CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR,"))
                 continue;
