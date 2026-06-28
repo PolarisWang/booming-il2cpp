@@ -16,19 +16,9 @@
 // Include the header under test.
 // The test lives in testing/.../runtime_stubs/ and the source header lives
 // in src/.../runtime_stubs/.  CMake adds the runtime-core include paths.
-// Compile-time reference to the source-level path.
-// convert_stubs.h lives in src/native/runtime-core/runtime_stubs/ and is on
-// the include path via CHAOS_INCLUDE_DIRS.
-// Provide a stub for RaiseManagedException (referenced by ChaosConvertToInt32FromDouble
-// in the same header, which we don't test here).
-#include <cstdio>
-namespace chaos::il2cpp::runtime_core {
-    [[noreturn]] inline void RaiseManagedException(const char*, const char*) noexcept {
-        std::fprintf(stderr, "RaiseManagedException stub called\n");
-        std::abort();
-    }
-}
-#include "../../../../src/native/runtime-core/runtime_stubs/convert_stubs.h"
+// Include the header under test.  convert_half.h is now a standalone header
+// (separated from convert_stubs.h to avoid linter merge conflicts).
+#include "../../../../src/native/runtime-core/runtime_stubs/convert_half.h"
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Half format reference (IEEE 754-2019 binary16):
