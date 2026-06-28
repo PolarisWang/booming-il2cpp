@@ -87,3 +87,12 @@ target_compile_definitions(runtime_stubs_benchmark PRIVATE
 target_compile_options(runtime_stubs_benchmark PRIVATE
     /FI"${CMAKE_CURRENT_SOURCE_DIR}/datetime_guid_test_pch.h"
 )
+
+# T1a-2b: Half conversion IEEE 754 round-to-nearest-even unit tests
+# Includes convert_stubs.h directly (ChaosConvertToInt16FromDouble is FORCEINLINE).
+add_chaos_test(half_conversion_test
+    half_conversion_test.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
+)
+target_compile_options(half_conversion_test PRIVATE /utf-8)
