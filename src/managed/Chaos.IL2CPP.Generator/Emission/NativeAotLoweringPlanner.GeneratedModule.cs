@@ -14,9 +14,14 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
 	internal string BuildGeneratedModuleHeader(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string objectModel, string assemblySuffix, IReadOnlySet<string>? extraValuetypes = null)
     {
-        return ScribanTemplateRenderer.RenderTemplate(
+        var result = ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetGeneratedModuleHeaderTemplate(),
             BuildGeneratedModuleModel(methodsForLowering, extraValuetypes));
+        // Safety net: scan generated C++ for any chaos_valuetype_* references
+        // that were not captured by _emittedValueTypeSubjectIds or extraValuetypes.
+        // This catches types that appear in Scriban template function pointer
+        // signatures but were missed by ABI slot scanning.
+        return AppendMissingValuetypeTypedefs(result);
     }
 
     /// <summary>
@@ -299,6 +304,41 @@ public sealed partial class NativeAotLoweringPlanner
             ["k_aot_method_count_value"] = totalDedupedCount,
             ["value_type_typedefs"] = valueTypeTypedefs,
         };
+    }
+
+    /// <summary>
+    /// Safety net: scan generated C++ code for any chaos_valuetype_* references
+    /// that don't have a corresponding typedef yet, and append them.
+    /// This catches types emitted by Scriban template function pointer signatures
+    /// that were missed by all other scanning paths.
+    /// </summary>
+    private static string AppendMissingValuetypeTypedefs(string headerContent)
+    {
+        var needed = new HashSet<string>(StringComparer.Ordinal);
+        int idx = 0;
+        while ((idx = headerContent.IndexOf("chaos_valuetype_", idx, StringComparison.Ordinal)) >= 0)
+        {
+            int start = idx;
+            int end = headerContent.IndexOfAny(new[] { ' ', '>', ',', ')', ';' }, idx + 16);
+            if (end < 0) end = headerContent.Length;
+            string name = headerContent.Substring(idx, end - idx);
+            if (!headerContent.Contains($"typedef CHAOS_IL2CPP_INT32 {name}", StringComparison.Ordinal))
+                needed.Add(name);
+            idx = end;
+        }
+        if (needed.Count == 0)
+            return headerContent;
+
+        var sb = new System.Text.StringBuilder(headerContent);
+        sb.AppendLine();
+        sb.AppendLine("// chaos_valuetype_* typedefs (auto-generated safety net)");
+        foreach (var name in needed.OrderBy(n => n, StringComparer.Ordinal))
+        {
+            sb.Append("typedef CHAOS_IL2CPP_INT32 ");
+            sb.Append(name);
+            sb.AppendLine(";");
+        }
+        return sb.ToString();
     }
 
     private static string SanitizeCppIdentifierLowerFirst(string name)

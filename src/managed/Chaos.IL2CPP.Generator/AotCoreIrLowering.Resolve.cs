@@ -192,11 +192,38 @@ public sealed partial class AotCoreIrLowering
         return new AotCoreIrAbiSlotArtifact
         {
             CarrierKindCode = AotCoreIrAbiCarrierKind.NativeInt,
-            TypeSubjectId = managedType?.SubjectId,
+            TypeSubjectId = managedType?.SubjectId ?? FallbackTypeSubjectId(assemblyName, innerType),
             TypeShape = resolvedTypeShape,
         };
     }
 
+    /// <summary>
+    /// Build TypeSubjectId for unresolvable external types.
+    /// When managedType is null (type not in managedTypes, e.g. external
+    /// assemblies like System.Data.Common), this constructs
+    /// "{assemblyName}/{typeIdentity}" so downstream code can generate
+    /// correct chaos_valuetype_* typedef names.
+    /// Only triggers for qualified type names (contain '.') to avoid
+    /// simple names like "int" or "string".
+    /// CarrierKindCode remains NativeInt — the type identity is used
+    /// solely by MapAbiSlotParameterType to decide whether to emit
+    /// chaos_valuetype_X vs CHAOS_IL2CPP_INTPTR.
+    /// </summary>
+    private static string? FallbackTypeSubjectId(string assemblyName, string typeIdentity)
+    {
+        if (string.IsNullOrEmpty(typeIdentity) || !typeIdentity.Contains('.'))
+            return null;
+        // Skip System.* single-level types (e.g. System.Int32, System.String)
+        // which have explicit handling in ResolveAbiSlot above.
+        if (typeIdentity.StartsWith("System.", StringComparison.Ordinal))
+        {
+            int dotCount = 0;
+            for (int i = 7; i < typeIdentity.Length; i++)
+                if (typeIdentity[i] == '.') dotCount++;
+            if (dotCount == 0) return null; // System.Int32 etc.
+        }
+        return ManagedNaming.NormalizeSubjectIdAssembly($"{assemblyName}/{typeIdentity}");
+    }
 
 
     private static ManagedTypeModel? TryResolveManagedType(
