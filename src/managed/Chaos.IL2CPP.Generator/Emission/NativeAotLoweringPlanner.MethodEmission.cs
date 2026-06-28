@@ -278,6 +278,21 @@ public sealed partial class NativeAotLoweringPlanner
         stringBuilder5.AppendLine(ref handler);
         EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
         EmitStaticInitializationPrologue(builder, method);
+        // Universal slot safety net: declare _sN/_iN/_dN/_fN before emitting
+        // the body.  The body (emitted below via EmitViaStructuredIR) also emits
+        // _sN declarations via EmitStructuredSlotDeclarations — we deduplicate
+        // those when appending the body.  This avoids C2086 redefinition from
+        // duplicate _sN declarations in methods with mixed structured/flat paths.
+        for (int __si = 0; __si <= 63; __si++)
+            builder.AppendLine("\tCHAOS_IL2CPP_INTPTR _s" + __si + "{};");
+        for (int __ii = 0; __ii <= 31; __ii++)
+            builder.AppendLine("\tCHAOS_IL2CPP_INT64 _i" + __ii + "{};");
+        builder.AppendLine("\tdouble _d0{}; double _d1{}; double _d2{}; double _d3{};");
+        builder.AppendLine("\tdouble _d4{}; double _d5{}; double _d6{}; double _d7{};");
+        builder.AppendLine("\tfloat _f0{}; float _f1{}; float _f2{}; float _f3{};");
+        builder.AppendLine("\tfloat _f4{}; float _f5{}; float _f6{}; float _f7{};");
+        builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 32) chaos_eval_stack{};");
+        builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
         // Emit structured IR body first to capture actual slot depth,
         // since ComputeMaxEvalStackDepth may undercount for generic methods
         // where inlined code or StringId emission expands the effective depth.
@@ -327,26 +342,13 @@ public sealed partial class NativeAotLoweringPlanner
                     builder.AppendLine($"	{varType} chaos_float_local_{slot}{{}};");
                 }
             }
-            // chaos_eval_stack is needed for EH (finally) condition tracking in ExceptionEmission.cs,
-            // even for structured IR methods. It tracks the finally condition state via:
-            //   chaos_eval_stack[--chaos_stack_top] = 1;  // finally entry
-            //   if (chaos_eval_stack[--chaos_stack_top])   // finally exit condition check
-            if (method.ExceptionRegionCount > 0)
-            {
-                builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 16) chaos_eval_stack{};");
-                builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
-            }
+            // chaos_eval_stack is universal (declared above in safety net).
+            // Skip here to avoid C2371 redefinition.
         }
         else if (!usesStructuredSlots && evalStackSize > 0)
         {
-            stringBuilder = builder;
-            StringBuilder stringBuilder6 = stringBuilder;
-            handler = new StringBuilder.AppendInterpolatedStringHandler(51, 1, stringBuilder);
-            handler.AppendLiteral("	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, ");
-            handler.AppendFormatted(evalStackSize);
-            handler.AppendLiteral(") chaos_eval_stack{};");
-            stringBuilder6.AppendLine(ref handler);
-            builder.AppendLine("	CHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
+            // chaos_eval_stack is universal (declared above in safety net).
+            // Skip here to avoid C2371 redefinition.
         }
         // Pre-try TypeInfo* fold evaluations (outside SEH frame)
         if (_state.Value!.PreTryFoldInitializers is { Count: > 0 })
@@ -372,8 +374,7 @@ public sealed partial class NativeAotLoweringPlanner
         // Strip inline decls from bodyBuilder - preamble already emits them
         var _rawBody = bodyBuilder.ToString();
         var _sb = new System.Text.StringBuilder(_rawBody.Length);
-        foreach (var _line in _rawBody.Split('
-'))
+        foreach (var _line in _rawBody.Split('\n'))
         {
             var _t = _line.TrimStart();
             if (_t.StartsWith("CHAOS_IL2CPP_INTPTR _s") ||
@@ -384,8 +385,7 @@ public sealed partial class NativeAotLoweringPlanner
                 _t.StartsWith("CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR,"))
                 continue;
             _sb.Append(_line);
-            _sb.Append('
-');
+            _sb.Append('\n');
         }
         builder.Append(_sb);
         // Safety: close any unmatched { from structured IR lowering (e.g. failed newobj)
