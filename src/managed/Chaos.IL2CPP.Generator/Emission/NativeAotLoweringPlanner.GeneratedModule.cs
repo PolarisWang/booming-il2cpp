@@ -257,6 +257,7 @@ public sealed partial class NativeAotLoweringPlanner
             // lowering, so their ABI slots lack TypeSubjectId.  The method
             // declarations string is the authoritative source for which
             // chaos_valuetype_ names appear in generated C++ code.
+            var extraValuetypeNames = new HashSet<string>(StringComparer.Ordinal);
             if (_methodDeclarations != null)
             {
                 foreach (var decl in _methodDeclarations)
@@ -264,10 +265,11 @@ public sealed partial class NativeAotLoweringPlanner
                     int idx = 0;
                     while ((idx = decl.IndexOf("chaos_valuetype_", idx, StringComparison.Ordinal)) >= 0)
                     {
-                        int end = decl.IndexOf(' ', idx + 16); // space after type name
+                        int start = idx + 16; // after "chaos_valuetype_"
+                        int end = decl.IndexOf(' ', start);
                         if (end < 0) end = decl.Length;
                         string typeName = decl.Substring(idx, end - idx);
-                        _emittedValueTypeSubjectIds.Add(typeName);
+                        extraValuetypeNames.Add(typeName);
                         idx = end;
                     }
                 }
@@ -279,6 +281,14 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
                 vtBuilder.Append(GetNativeValueTypeSymbol(typeId));
+                vtBuilder.AppendLine(";");
+            }
+            foreach (var vtName in extraValuetypeNames.OrderBy(n => n, StringComparer.Ordinal))
+            {
+                if (_emittedValueTypeSubjectIds.Any(id => GetNativeValueTypeSymbol(id) == vtName))
+                    continue; // already emitted from ABI slot scan
+                vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
+                vtBuilder.Append(vtName);
                 vtBuilder.AppendLine(";");
             }
             vtBuilder.AppendLine();
