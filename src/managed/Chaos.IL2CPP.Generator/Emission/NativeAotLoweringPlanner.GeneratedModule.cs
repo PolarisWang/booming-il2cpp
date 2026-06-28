@@ -12,16 +12,11 @@ public sealed partial class NativeAotLoweringPlanner
     /// Renders the NativeAot.GeneratedModule.h.scriban template with type group
     /// data from the methods for lowering.
     /// </summary>
-	internal string BuildGeneratedModuleHeader(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string objectModel, string assemblySuffix, IReadOnlySet<string>? extraValuetypes = null)
+    internal string BuildGeneratedModuleHeader(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string objectModel, string assemblySuffix)
     {
-        var result = ScribanTemplateRenderer.RenderTemplate(
+        return ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetGeneratedModuleHeaderTemplate(),
-            BuildGeneratedModuleModel(methodsForLowering, extraValuetypes));
-        // Safety net: scan generated C++ for any chaos_valuetype_* references
-        // that were not captured by _emittedValueTypeSubjectIds or extraValuetypes.
-        // This catches types that appear in Scriban template function pointer
-        // signatures but were missed by ABI slot scanning.
-        return AppendMissingValuetypeTypedefs(result);
+            BuildGeneratedModuleModel(methodsForLowering));
     }
 
     /// <summary>
@@ -29,14 +24,14 @@ public sealed partial class NativeAotLoweringPlanner
     /// Renders the NativeAot.GeneratedModule.cpp.scriban template with type group
     /// data and extern symbol declarations.
     /// </summary>
-	internal string BuildGeneratedModuleSource(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string objectModel, string assemblySuffix, IReadOnlySet<string>? extraValuetypes = null)
+    internal string BuildGeneratedModuleSource(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string objectModel, string assemblySuffix)
     {
         return ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetGeneratedModuleSourceTemplate(),
-            BuildGeneratedModuleModel(methodsForLowering, extraValuetypes));
+            BuildGeneratedModuleModel(methodsForLowering));
     }
 
-    private ScriptObject BuildGeneratedModuleModel(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, IReadOnlySet<string>? extraValuetypes = null)
+    private ScriptObject BuildGeneratedModuleModel(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
     {
         if (methodsForLowering.Count == 0)
         {
@@ -221,7 +216,6 @@ public sealed partial class NativeAotLoweringPlanner
             for (int mi = 0; mi < methodsForLowering.Count; mi++)
             {
                 var m = methodsForLowering[mi];
-                // ValueTypeByValue ABI slots — exact value types
                 if (m.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
                     !string.IsNullOrEmpty(m.ReturnAbi.TypeSubjectId))
                     _emittedValueTypeSubjectIds.Add(m.ReturnAbi.TypeSubjectId);
@@ -234,50 +228,7 @@ public sealed partial class NativeAotLoweringPlanner
                             _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
                     }
                 }
-                // NativeInt ABI slots with external type SubjectIds — these are external
-                // value types (e.g. System.Data.CommandBehavior) that could not be resolved
-                // at AOT IR lowering time (managedType == null).  The TypeSubjectId was
-                // populated by BuildExternalTypeSubjectId in ResolveAbiSlot so that
-                // GeneratedModule emits the necessary chaos_valuetype_* typedef.
-                if (m.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt &&
-                    !string.IsNullOrEmpty(m.ReturnAbi.TypeSubjectId) &&
-                    !m.ReturnAbi.TypeSubjectId.StartsWith("System.Private.CoreLib/", StringComparison.Ordinal))
-                    _emittedValueTypeSubjectIds.Add(m.ReturnAbi.TypeSubjectId);
-                if (m.ParameterAbis != null)
-                {
-                    foreach (var abi in m.ParameterAbis)
-                    {
-                        if (abi.CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt &&
-                            !string.IsNullOrEmpty(abi.TypeSubjectId) &&
-                            !abi.TypeSubjectId.StartsWith("System.Private.CoreLib/", StringComparison.Ordinal))
-                            _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
-                    }
-                }
             }
-
-            // Include extra chaos_valuetype_ typedefs from method declarations
-            // (extern "C" strings).  External value types used as ABI parameters
-            // have CarrierKindCode=ValueTypeByValue with TypeSubjectId set from
-            // the AOT IR, so FormatMethodDeclaration outputs chaos_valuetype_X
-            // in the parameter list.  Scan _methodDeclarations for these names.
-            var extraValuetypeNames = new HashSet<string>(StringComparer.Ordinal);
-            if (_methodDeclarations != null)
-            {
-                foreach (var decl in _methodDeclarations)
-                {
-                    int idx = 0;
-                    while ((idx = decl.IndexOf("chaos_valuetype_", idx, StringComparison.Ordinal)) >= 0)
-                    {
-                        int start = idx;
-                        int end = decl.IndexOf(' ', idx + 16);
-                        if (end < 0) end = decl.Length;
-                        extraValuetypeNames.Add(decl.Substring(idx, end - idx));
-                        idx = end;
-                    }
-                }
-            }
-            if (extraValuetypes != null)
-                extraValuetypeNames.UnionWith(extraValuetypes);
 
             var vtBuilder = new System.Text.StringBuilder();
             vtBuilder.AppendLine("// chaos_valuetype_* typedefs (opaque 32-bit managed value types)");
@@ -285,14 +236,6 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
                 vtBuilder.Append(GetNativeValueTypeSymbol(typeId));
-                vtBuilder.AppendLine(";");
-            }
-            foreach (var vtName in extraValuetypeNames.OrderBy(n => n, StringComparer.Ordinal))
-            {
-                if (_emittedValueTypeSubjectIds.Any(id => GetNativeValueTypeSymbol(id) == vtName))
-                    continue; // already emitted from ABI slot scan
-                vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
-                vtBuilder.Append(vtName);
                 vtBuilder.AppendLine(";");
             }
             vtBuilder.AppendLine();
@@ -304,41 +247,6 @@ public sealed partial class NativeAotLoweringPlanner
             ["k_aot_method_count_value"] = totalDedupedCount,
             ["value_type_typedefs"] = valueTypeTypedefs,
         };
-    }
-
-    /// <summary>
-    /// Safety net: scan generated C++ code for any chaos_valuetype_* references
-    /// that don't have a corresponding typedef yet, and append them.
-    /// This catches types emitted by Scriban template function pointer signatures
-    /// that were missed by all other scanning paths.
-    /// </summary>
-    private static string AppendMissingValuetypeTypedefs(string headerContent)
-    {
-        var needed = new HashSet<string>(StringComparer.Ordinal);
-        int idx = 0;
-        while ((idx = headerContent.IndexOf("chaos_valuetype_", idx, StringComparison.Ordinal)) >= 0)
-        {
-            int start = idx;
-            int end = headerContent.IndexOfAny(new[] { ' ', '>', ',', ')', ';' }, idx + 16);
-            if (end < 0) end = headerContent.Length;
-            string name = headerContent.Substring(idx, end - idx);
-            if (!headerContent.Contains($"typedef CHAOS_IL2CPP_INT32 {name}", StringComparison.Ordinal))
-                needed.Add(name);
-            idx = end;
-        }
-        if (needed.Count == 0)
-            return headerContent;
-
-        var sb = new System.Text.StringBuilder(headerContent);
-        sb.AppendLine();
-        sb.AppendLine("// chaos_valuetype_* typedefs (auto-generated safety net)");
-        foreach (var name in needed.OrderBy(n => n, StringComparer.Ordinal))
-        {
-            sb.Append("typedef CHAOS_IL2CPP_INT32 ");
-            sb.Append(name);
-            sb.AppendLine(";");
-        }
-        return sb.ToString();
     }
 
     private static string SanitizeCppIdentifierLowerFirst(string name)

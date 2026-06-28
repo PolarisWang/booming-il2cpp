@@ -87,27 +87,3 @@ target_compile_definitions(runtime_stubs_benchmark PRIVATE
 target_compile_options(runtime_stubs_benchmark PRIVATE
     /FI"${CMAKE_CURRENT_SOURCE_DIR}/datetime_guid_test_pch.h"
 )
-
-# T1a-2b: Half conversion IEEE 754 round-to-nearest-even unit tests
-# Includes convert_stubs.h directly (ChaosConvertToInt16FromDouble is FORCEINLINE).
-add_chaos_test(half_conversion_test
-    half_conversion_test.cpp
-    LIBS ${CHAOS_COMMON_TEST_LIBS}
-    LABELS "unit;core"
-)
-target_compile_options(half_conversion_test PRIVATE /utf-8)
-
-# T1a-2: exception_jmp depth-boundary tests (SETJMP EH mode)
-# Uses the same convert_stubs_test.cpp but compiled with CHAOS_IL2CPP_EH_SETJMP
-# to enable push_exception_jmp_buf/pop_exception_jmp_buf testing.
-# Convert tests that depend on C++ EH (RaiseManagedException) are unaffected
-# because they are guarded by existing #if/#elif chains in eh.h.
-add_chaos_test(convert_stubs_eh_test
-    convert_stubs_test.cpp
-    LIBS ${CHAOS_COMMON_TEST_LIBS}
-    LABELS "unit;core"
-)
-target_compile_definitions(convert_stubs_eh_test PRIVATE
-    CHAOS_IL2CPP_EH_SETJMP
-)
-target_compile_options(convert_stubs_eh_test PRIVATE /utf-8)

@@ -123,16 +123,6 @@ public sealed partial class NativeAotLoweringPlanner
                             CreateInt32AbiSlot(),
                             new HashSet<int> { 0 });
 
-                        // ── System.Convert.ToHalf(System.Double) ─────────────────────────
-                        // Half (IEEE 754 binary16) is stored as a 16-bit value;
-                        // the AOT ABI returns it as NativeInt (zero-extended).
-                        registry.Register("System.Convert", "ToHalf", ["System.Double"],
-                            ShapeKind.SimpleForward, "ChaosConvertToInt16FromDouble",
-                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
-                            CreateNativeIntAbiSlot(),
-                            new HashSet<int> { 0 });
-
                         registry.Register("System.Convert", "ToString", ["System.Int32"],
                             ShapeKind.SimpleForward, "ChaosFormatInt32",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
