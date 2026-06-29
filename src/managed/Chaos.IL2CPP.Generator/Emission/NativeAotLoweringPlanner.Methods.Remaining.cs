@@ -89,54 +89,67 @@ public sealed partial class NativeAotLoweringPlanner
             hasAnyForwardDeclarations = true;
         }
         // Emit typedef for remaining value types (enum-like, no struct definition).
-        var typedEmittedVtIds = _emittedValueTypeSubjectIds;
-        if (typedEmittedVtIds is { Count: > 0 } || extraValuetypes is { Count: > 0 })
+        var typedefNames = new HashSet<string>(StringComparer.Ordinal);
+        // Phase 1: collect from _emittedValueTypeSubjectIds (ObjectModelEmission types)
+        if (_emittedValueTypeSubjectIds is { Count: > 0 })
         {
             HashSet<string>? structSubjectIds = _valueTypeStructSubjectIds;
-            // Emit from SubjectIds (types known to ObjectModelEmission).
-            if (typedEmittedVtIds is { Count: > 0 })
+            foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
             {
-                foreach (var typeId in typedEmittedVtIds.OrderBy(id => id, StringComparer.Ordinal))
+                if (structSubjectIds?.Contains(typeId) == true)
+                    continue;
+                typedefNames.Add(GetNativeValueTypeSymbol(typeId));
+            }
+        }
+        // Phase 2: collect from extraValuetypes (method body scan)
+        if (extraValuetypes is { Count: > 0 })
+        {
+            foreach (var name in extraValuetypes)
+                typedefNames.Add(name);
+        }
+        // Phase 3: scan _methodDeclarations for chaos_valuetype_* references.
+        // Method declarations (extern "C" function signatures) are rendered into page
+        // files via Scriban templates.  They reference chaos_valuetype_* types from
+        // external assemblies (e.g. System.Data.CommandBehavior) that are NOT in
+        // _emittedValueTypeSubjectIds or extraValuetypes because they appear only as
+        // ABI parameter types in extern declarations, not in method bodies or IR slots.
+        if (_methodDeclarations is { Count: > 0 })
+        {
+            foreach (var decl in _methodDeclarations)
+            {
+                int pos = 0;
+                while ((pos = decl.IndexOf("chaos_valuetype_", pos, StringComparison.Ordinal)) >= 0)
                 {
-                    if (structSubjectIds?.Contains(typeId) == true)
-                        continue; // already has struct definition above
-                    sb.Append("typedef CHAOS_IL2CPP_INT32 ");
-                    sb.Append(GetNativeValueTypeSymbol(typeId));
-                    sb.AppendLine(";");
+                    int start = pos;
+                    int end = pos + 16;
+                    while (end < decl.Length && (char.IsLetterOrDigit(decl[end]) || decl[end] == '_'))
+                        end++;
+                    typedefNames.Add(decl.Substring(start, end - start));
+                    pos = end;
                 }
             }
-            // Emit extra names discovered by scanning method body C++ code.
-            // These are already in chaos_valuetype_<name> format (not SubjectIds).
-            if (extraValuetypes is { Count: > 0 })
+        }
+        if (typedefNames.Count > 0)
+        {
+            // Exclude names that have struct definitions in vtCode.
+            var skipNames = new HashSet<string>(StringComparer.Ordinal);
+            if (vtCode is { Length: > 0 })
             {
-                // Skip names that already have a struct definition in vtCode.
-                var existingStructNames = new HashSet<string>(StringComparer.Ordinal);
-                if (vtCode is { Length: > 0 })
+                int pos = 0;
+                while ((pos = vtCode.IndexOf("struct chaos_valuetype_", pos, StringComparison.Ordinal)) >= 0)
                 {
-                    int pos = 0;
-                    while ((pos = vtCode.IndexOf("struct chaos_valuetype_", pos, StringComparison.Ordinal)) >= 0)
-                    {
-                        int end = vtCode.IndexOfAny(new[] { ' ', '{' }, pos);
-                        if (end < 0) break;
-                        existingStructNames.Add(vtCode[pos..end]);
-                        pos = end;
-                    }
+                    int end = vtCode.IndexOfAny(new[] { ' ', '{' }, pos);
+                    if (end < 0) break;
+                    skipNames.Add(vtCode[pos..end]);
+                    pos = end;
                 }
-                // Also skip names that would be emitted from typedEmittedVtIds above.
-                var emittedSymbolNames = new HashSet<string>(StringComparer.Ordinal);
-                if (typedEmittedVtIds is { Count: > 0 })
-                {
-                    foreach (var typeId in typedEmittedVtIds)
-                        emittedSymbolNames.Add(GetNativeValueTypeSymbol(typeId));
-                }
-                foreach (var name in extraValuetypes.OrderBy(n => n, StringComparer.Ordinal))
-                {
-                    if (existingStructNames.Contains(name)) continue;
-                    if (emittedSymbolNames.Contains(name)) continue;
-                    sb.Append("typedef CHAOS_IL2CPP_INT32 ");
-                    sb.Append(name);
-                    sb.AppendLine(";");
-                }
+            }
+            foreach (var name in typedefNames.OrderBy(n => n, StringComparer.Ordinal))
+            {
+                if (skipNames.Contains(name)) continue;
+                sb.Append("typedef CHAOS_IL2CPP_INT32 ");
+                sb.Append(name);
+                sb.AppendLine(";");
             }
             hasAnyForwardDeclarations = true;
         }
