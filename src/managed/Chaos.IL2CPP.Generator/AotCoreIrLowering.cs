@@ -298,7 +298,7 @@ public sealed partial class AotCoreIrLowering
             ReturnType = method.ReturnType,
             ReturnAbi = ResolveAbiSlot(method.ReturnType, method.AssemblyName, managedTypes),
             ParameterCount = method.Parameters.Count,
-            ParameterAbis = ResolveParameterAbis(method, managedTypes),
+            ParameterAbis = ResolveParameterAbis(method, managedTypes, managedMethods, managedTypes),
             LocalCount = DetermineLocalCount(instructions),
             ExceptionRegionCount = method.Body.ExceptionRegions.Count,
             ExceptionRegions = ResolveExceptionRegions(method.Body.ExceptionRegions),

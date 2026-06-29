@@ -439,6 +439,16 @@ public sealed record AotCoreIrMethodArtifact
 
     public required IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis { get; init; }
 
+    /// <summary>
+    /// Fully-qualified type subject IDs for each managed parameter, in declaration order.
+    /// Populated during semantic world construction from the original PE metadata.
+    /// Format: "AssemblyName/Namespace.TypeName" (e.g. "System.Data.Common/System.Data.CommandBehavior").
+    /// Used by AOT IR lowering (ResolveAbiSlot) as the authoritative TypeSubjectId when
+    /// the managed type cannot be resolved in the local assembly scope.
+    /// Null when not available (legacy/manifest-only methods).
+    /// </summary>
+    public IReadOnlyList<string>? ManagedParameterTypeSubjectIds { get; init; }
+
     public required int LocalCount { get; init; }
 
     public required int ExceptionRegionCount { get; init; }
