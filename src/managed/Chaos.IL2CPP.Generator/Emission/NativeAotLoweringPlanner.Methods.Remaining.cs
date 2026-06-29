@@ -57,7 +57,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// <param name="codegenNamespace">C++ namespace for the codegen (e.g. "CombinedSubjects").
     /// Declarations are wrapped in `namespace chaos::il2cpp::codegen::{codegenNamespace}` to
     /// match the definition namespace on page 0, avoiding linker unresolved externals.</param>
-    private string BuildTypeDeclarationsCode(string codegenNamespace)
+    private string BuildTypeDeclarationsCode(string codegenNamespace, IReadOnlySet<string>? extraValuetypes = null)
     {
         if (_allEmittedTypeSubjectIds is not { Count: > 0 })
             return string.Empty;
@@ -89,16 +89,54 @@ public sealed partial class NativeAotLoweringPlanner
             hasAnyForwardDeclarations = true;
         }
         // Emit typedef for remaining value types (enum-like, no struct definition).
-        if (_emittedValueTypeSubjectIds is { Count: > 0 })
+        var typedEmittedVtIds = _emittedValueTypeSubjectIds;
+        if (typedEmittedVtIds is { Count: > 0 } || extraValuetypes is { Count: > 0 })
         {
             HashSet<string>? structSubjectIds = _valueTypeStructSubjectIds;
-            foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+            // Emit from SubjectIds (types known to ObjectModelEmission).
+            if (typedEmittedVtIds is { Count: > 0 })
             {
-                if (structSubjectIds?.Contains(typeId) == true)
-                    continue; // already has struct definition above
-                sb.Append("typedef CHAOS_IL2CPP_INT32 ");
-                sb.Append(GetNativeValueTypeSymbol(typeId));
-                sb.AppendLine(";");
+                foreach (var typeId in typedEmittedVtIds.OrderBy(id => id, StringComparer.Ordinal))
+                {
+                    if (structSubjectIds?.Contains(typeId) == true)
+                        continue; // already has struct definition above
+                    sb.Append("typedef CHAOS_IL2CPP_INT32 ");
+                    sb.Append(GetNativeValueTypeSymbol(typeId));
+                    sb.AppendLine(";");
+                }
+            }
+            // Emit extra names discovered by scanning method body C++ code.
+            // These are already in chaos_valuetype_<name> format (not SubjectIds).
+            if (extraValuetypes is { Count: > 0 })
+            {
+                // Skip names that already have a struct definition in vtCode.
+                var existingStructNames = new HashSet<string>(StringComparer.Ordinal);
+                if (vtCode is { Length: > 0 })
+                {
+                    int pos = 0;
+                    while ((pos = vtCode.IndexOf("struct chaos_valuetype_", pos, StringComparison.Ordinal)) >= 0)
+                    {
+                        int end = vtCode.IndexOfAny(new[] { ' ', '{' }, pos);
+                        if (end < 0) break;
+                        existingStructNames.Add(vtCode[pos..end]);
+                        pos = end;
+                    }
+                }
+                // Also skip names that would be emitted from typedEmittedVtIds above.
+                var emittedSymbolNames = new HashSet<string>(StringComparer.Ordinal);
+                if (typedEmittedVtIds is { Count: > 0 })
+                {
+                    foreach (var typeId in typedEmittedVtIds)
+                        emittedSymbolNames.Add(GetNativeValueTypeSymbol(typeId));
+                }
+                foreach (var name in extraValuetypes.OrderBy(n => n, StringComparer.Ordinal))
+                {
+                    if (existingStructNames.Contains(name)) continue;
+                    if (emittedSymbolNames.Contains(name)) continue;
+                    sb.Append("typedef CHAOS_IL2CPP_INT32 ");
+                    sb.Append(name);
+                    sb.AppendLine(";");
+                }
             }
             hasAnyForwardDeclarations = true;
         }
@@ -673,6 +711,16 @@ public sealed partial class NativeAotLoweringPlanner
             return postCollector;
         }
 
+        // ── Safety net: append missing chaos_valuetype_* typedefs ──
+        // TPG stubs may reference chaos_valuetype_* symbols for value types that are
+        // not part of the AOT subject methods' type closure (e.g. System.Data.Common
+        // internal enums like DataRowVersion, ConflictOption).  These types are
+        // referenced in stub method declarations but were never discovered during
+        // AOT IR lowering or ObjectModelEmission.
+        // Scan the generated header for any chaos_valuetype_* references that lack
+        // a corresponding typedef, and append them at the end.
+        AppendMissingValueTypeTypedefsForHeader(sb);
+
         return sb.ToString();
     }
 
@@ -746,6 +794,68 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
 
+
+    /// <summary>
+    /// Safety net: scan the generated header StringBuilder for any chaos_valuetype_*
+    /// references that lack a corresponding typedef and append the missing ones.
+    /// This catches value types referenced in TPG stub method declarations that are
+    /// not part of the AOT subject methods' type closure (e.g. System.Data.Common
+    /// internal enums like DataRowVersion, ConflictOption, CommandBehavior).
+    /// </summary>
+    private static void AppendMissingValueTypeTypedefsForHeader(StringBuilder sb)
+    {
+        var content = sb.ToString();
+
+        // Collect existing typedefs and struct definitions.
+        var existing = new HashSet<string>(StringComparer.Ordinal);
+        const string typedefPrefix = "typedef CHAOS_IL2CPP_INT32 chaos_valuetype_";
+        const string structPrefix = "struct chaos_valuetype_";
+        int pos = 0;
+        while ((pos = content.IndexOf(typedefPrefix, pos, StringComparison.Ordinal)) >= 0)
+        {
+            int end = content.IndexOf(';', pos);
+            if (end < 0) break;
+            existing.Add(content[pos..end].TrimEnd());
+            pos = end + 1;
+        }
+        pos = 0;
+        while ((pos = content.IndexOf(structPrefix, pos, StringComparison.Ordinal)) >= 0)
+        {
+            int end = content.IndexOfAny(new[] { ' ', '{', ';' }, pos);
+            if (end < 0) break;
+            existing.Add(content[pos..end]);
+            pos = end + 1;
+        }
+
+        // Scan for referenced chaos_valuetype_* symbols.
+        var needed = new HashSet<string>(StringComparer.Ordinal);
+        const string refPrefix = "chaos_valuetype_";
+        pos = 0;
+        while ((pos = content.IndexOf(refPrefix, pos, StringComparison.Ordinal)) >= 0)
+        {
+            int start = pos;
+            int end = start + refPrefix.Length;
+            while (end < content.Length && (char.IsLetterOrDigit(content[end]) || content[end] == '_'))
+                end++;
+            var symbol = content[start..end];
+            if (!existing.Contains(symbol))
+                needed.Add(symbol);
+            pos = end;
+        }
+
+        if (needed.Count == 0)
+            return;
+
+        sb.AppendLine();
+        sb.AppendLine("// chaos_valuetype_* typedefs (safety net: TPG stub declarations)");
+        foreach (var name in needed.OrderBy(n => n, StringComparer.Ordinal))
+        {
+            sb.Append("typedef CHAOS_IL2CPP_INT32 ");
+            sb.Append(name);
+            sb.AppendLine(";");
+        }
+        sb.AppendLine();
+    }
 
     private string BuildCryptoAotIrCode()
     {
