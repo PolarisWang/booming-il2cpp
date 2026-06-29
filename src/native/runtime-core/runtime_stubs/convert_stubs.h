@@ -51,5 +51,8 @@ CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INT32 ChaosConvertToInt32FromDouble(CHAOS_
     }
     return static_cast<CHAOS_IL2CPP_INT32>(std::trunc(value));
 }
+// Double→Half conversion lives in convert_half.h (separate header to
+// isolate from linter merge conflicts).
+#include "convert_half.h"
 // Double→Decimal conversion bridge.
 CHAOS_IL2CPP_INTPTR    ChaosDecimalFromDouble(double value) noexcept;

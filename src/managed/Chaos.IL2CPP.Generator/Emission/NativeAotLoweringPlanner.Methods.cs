@@ -1033,7 +1033,14 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
         var allMethods = new NativeAotMethodTemplateModel[emitMethods.Count];
-        if (_forceSerial)
+        // Dynamic parallelism: use serial emission for small method sets
+        // (< 16 methods) where Parallel.For overhead (partitioning + thread
+        // scheduling + ThreadLocal state restore) exceeds the parallel benefit.
+        // Measured threshold: ~0.15ms/method overhead for Parallel.For itself
+        // on a 16-core machine.  16 methods × 0.15ms = ~2.4ms overhead vs
+        // ~19ms serial = 13% gain for the parallel path at 16 methods.
+        bool useSerial = _forceSerial || emitMethods.Count < 16;
+        if (useSerial)
         {
             for (int i = 0; i < emitMethods.Count; i++)
                 allMethods[i] = EmitOneMethod(emitMethods[i], aotReachableSubjectIds);
@@ -1047,10 +1054,28 @@ public sealed partial class NativeAotLoweringPlanner
         }
         List<NativeAotMethodTemplateModel> methods = new List<NativeAotMethodTemplateModel>(allMethods);
 
+        // Scan all method bodies for chaos_valuetype_* references that were
+        // not captured by ABI slot scanning (external value types like
+        // System.Data.CommandBehavior whose CarrierKindCode is NativeInt).
+        var extraValuetypes = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var m in methods)
+        {
+            if (string.IsNullOrEmpty(m.MethodSource)) continue;
+            int idx = 0;
+            while ((idx = m.MethodSource.IndexOf("chaos_valuetype_", idx, StringComparison.Ordinal)) >= 0)
+            {
+                int start = idx;
+                int end = m.MethodSource.IndexOfAny(new[] { ' ', '>', ',', ')', ';' }, idx + 16);
+                if (end < 0) end = m.MethodSource.Length;
+                extraValuetypes.Add(m.MethodSource.Substring(idx, end - idx));
+                idx = end;
+            }
+        }
+
         _tPhase4 = _sw.ElapsedMilliseconds;
         long phase4Ms = _tPhase4 - _tPhase3;
-        if (_forceSerial)
-            System.Console.Error.WriteLine($"[PARALLEL] SERIAL mode: {emitMethods.Count} methods in {phase4Ms}ms ({phase4Ms / Math.Max(1, emitMethods.Count)} ms/method)");
+        if (useSerial)
+            System.Console.Error.WriteLine($"[PARALLEL] SERIAL mode ({emitMethods.Count} methods): {phase4Ms}ms ({phase4Ms / Math.Max(1, emitMethods.Count)} ms/method)");
         else
             System.Console.Error.WriteLine($"[PARALLEL] PARALLEL mode DOP={Math.Max(1, _maxParallelism)}: {emitMethods.Count} methods in {phase4Ms}ms ({phase4Ms / Math.Max(1, emitMethods.Count)} ms/method)");
 
@@ -1400,8 +1425,8 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Build A1 typed dispatch table header + A2 dispatch wiring source.
         // These are emitted as separate files (chaos_generated_module.h/.cpp) for
         // typed dispatch via ChaosRuntimeHost. Empty when methodsForLowering is empty.
-        var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix);
-        var moduleSource = BuildGeneratedModuleSource(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix);
+        var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix, extraValuetypes);
+        var moduleSource = BuildGeneratedModuleSource(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix, extraValuetypes);
 
         // Build include list — stable runtime headers go into chaos_pch.h
         // (precompiled header). Only conditional/per-run headers are here.
@@ -1564,6 +1589,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             CodegenNamespace = SanitizeCppIdentifier(loweringPlan.AssemblyName),
             GeneratedModuleHeaderContent = moduleHeader,
             GeneratedModuleSourceContent = moduleSource,
+            ExtraValuetypeTypedefs = extraValuetypes,
         };
     }
 

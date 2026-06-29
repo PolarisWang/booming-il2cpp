@@ -206,6 +206,14 @@ public sealed record ManagedParameterModel
 
     public required string Type { get; init; }
 
+    /// <summary>
+    /// Full type SubjectId including assembly, e.g. "System.Data.Common/System.Data.CommandBehavior".
+    /// Populated by the linker/semantic world from PE metadata.  Null when unavailable
+    /// (legacy/manifest-only methods).  Used by AOT IR lowering to correctly identify
+    /// external value types (those not in closure assemblies) for chaos_valuetype_* typedefs.
+    /// </summary>
+    public string? TypeSubjectId { get; init; }
+
     public int Attributes { get; init; }
 }
 

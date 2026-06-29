@@ -273,8 +273,7 @@ def _incremental_rebuild(ctx) -> None:
     # Touch source to ensure timestamp changes
     os.utime(str(src_file), None)
 
-    # Use cmake from PATH (Linux/macOS) or fall back to Windows default path
-    cmake = shutil.which("cmake") or r"C:\Program Files\CMake\bin\cmake.exe"
+    cmake = r"C:\Program Files\CMake\bin\cmake.exe"
     cmd = [cmake, "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "chaos_entry"]
     print(f"  [hotupdate] Incremental rebuild...")
     result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=300)

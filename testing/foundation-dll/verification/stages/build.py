@@ -1067,14 +1067,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         print(f"  [build] Cleaning stale cmake build dir: {native_build_dir}")
         shutil.rmtree(native_build_dir, ignore_errors=True)
 
-    # Also clean .native_build/output/CMakeCache.txt (SDK-level cmake project)
-    # which records CMAKE_HOME_DIRECTORY as an absolute path — if the source
-    # directory layout changed (e.g., Docker volume mount path), cmake configure
-    # will fail with "directory is different" error.
-    for native_build_cache in ctx.native_dir.rglob(".native_build/output/CMakeCache.txt"):
-        print(f"  [build] Cleaning stale sdk cmake cache: {native_build_cache}")
-        native_build_cache.unlink(missing_ok=True)
-
     # -- 8. Run TPG generate-dll --
     if not ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
         return StageResult(
