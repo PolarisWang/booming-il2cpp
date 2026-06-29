@@ -278,21 +278,22 @@ public sealed partial class NativeAotLoweringPlanner
         stringBuilder5.AppendLine(ref handler);
         EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
         EmitStaticInitializationPrologue(builder, method);
-        // Universal slot safety net: declare _sN/_iN/_dN/_fN before emitting
-        // the body.  The body (emitted below via EmitViaStructuredIR) also emits
-        // _sN declarations via EmitStructuredSlotDeclarations — we deduplicate
-        // those when appending the body.  This avoids C2086 redefinition from
-        // duplicate _sN declarations in methods with mixed structured/flat paths.
-        for (int __si = 0; __si <= 63; __si++)
-            builder.AppendLine("\tCHAOS_IL2CPP_INTPTR _s" + __si + "{};");
-        for (int __ii = 0; __ii <= 31; __ii++)
-            builder.AppendLine("\tCHAOS_IL2CPP_INT64 _i" + __ii + "{};");
-        builder.AppendLine("\tdouble _d0{}; double _d1{}; double _d2{}; double _d3{};");
-        builder.AppendLine("\tdouble _d4{}; double _d5{}; double _d6{}; double _d7{};");
-        builder.AppendLine("\tfloat _f0{}; float _f1{}; float _f2{}; float _f3{};");
-        builder.AppendLine("\tfloat _f4{}; float _f5{}; float _f6{}; float _f7{};");
-        builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 32) chaos_eval_stack{};");
-        builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
+        // Universal slot safety net: declare _sN/_iN/_dN/_fN for structured IR
+        // methods before emitting the body.  Flat (non-structured) methods manage
+        // their own slot declarations and do NOT use the safety net.
+        if (usesStructuredSlots)
+        {
+            for (int __si = 0; __si <= 63; __si++)
+                builder.AppendLine("\tCHAOS_IL2CPP_INTPTR _s" + __si + "{};");
+            for (int __ii = 0; __ii <= 31; __ii++)
+                builder.AppendLine("\tCHAOS_IL2CPP_INT64 _i" + __ii + "{};");
+            builder.AppendLine("\tdouble _d0{}; double _d1{}; double _d2{}; double _d3{};");
+            builder.AppendLine("\tdouble _d4{}; double _d5{}; double _d6{}; double _d7{};");
+            builder.AppendLine("\tfloat _f0{}; float _f1{}; float _f2{}; float _f3{};");
+            builder.AppendLine("\tfloat _f4{}; float _f5{}; float _f6{}; float _f7{};");
+            builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 32) chaos_eval_stack{};");
+            builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
+        }
         // Emit structured IR body first to capture actual slot depth,
         // since ComputeMaxEvalStackDepth may undercount for generic methods
         // where inlined code or StringId emission expands the effective depth.
@@ -371,29 +372,37 @@ public sealed partial class NativeAotLoweringPlanner
         if (_wrapInTryCatch)
             builder.AppendLine("	try {");
 
-        // Strip inline decls from bodyBuilder - preamble already emits them
-        var _rawBody = bodyBuilder.ToString();
-        var _sb = new System.Text.StringBuilder(_rawBody.Length);
-        foreach (var _line in _rawBody.Split('\n'))
+        // Strip inline decls from bodyBuilder — preamble safety net already emits them
+        // (only for structured IR methods).  Flat methods manage their own slots.
+        if (usesStructuredSlots)
         {
-            var _t = _line.TrimStart();
-            if (_t.StartsWith("CHAOS_IL2CPP_INTPTR _s") ||
-                _t.StartsWith("CHAOS_IL2CPP_INT64 _i") ||
-                _t.StartsWith("double _d0") || _t.StartsWith("double _d1") ||
-                _t.StartsWith("double _d2") || _t.StartsWith("double _d3") ||
-                _t.StartsWith("double _d4") || _t.StartsWith("double _d5") ||
-                _t.StartsWith("double _d6") || _t.StartsWith("double _d7") ||
-                _t.StartsWith("float _f0") || _t.StartsWith("float _f1") ||
-                _t.StartsWith("float _f2") || _t.StartsWith("float _f3") ||
-                _t.StartsWith("float _f4") || _t.StartsWith("float _f5") ||
-                _t.StartsWith("float _f6") || _t.StartsWith("float _f7") ||
-                _t.StartsWith("CHAOS_IL2CPP_SIZE chaos_stack_top") ||
-                _t.StartsWith("CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR,"))
-                continue;
-            _sb.Append(_line);
-            _sb.Append('\n');
+            var _rawBody = bodyBuilder.ToString();
+            var _sb = new System.Text.StringBuilder(_rawBody.Length);
+            foreach (var _line in _rawBody.Split('\n'))
+            {
+                var _t = _line.TrimStart();
+                if (_t.StartsWith("CHAOS_IL2CPP_INTPTR _s") ||
+                    _t.StartsWith("CHAOS_IL2CPP_INT64 _i") ||
+                    _t.StartsWith("double _d0") || _t.StartsWith("double _d1") ||
+                    _t.StartsWith("double _d2") || _t.StartsWith("double _d3") ||
+                    _t.StartsWith("double _d4") || _t.StartsWith("double _d5") ||
+                    _t.StartsWith("double _d6") || _t.StartsWith("double _d7") ||
+                    _t.StartsWith("float _f0") || _t.StartsWith("float _f1") ||
+                    _t.StartsWith("float _f2") || _t.StartsWith("float _f3") ||
+                    _t.StartsWith("float _f4") || _t.StartsWith("float _f5") ||
+                    _t.StartsWith("float _f6") || _t.StartsWith("float _f7") ||
+                    _t.StartsWith("CHAOS_IL2CPP_SIZE chaos_stack_top") ||
+                    _t.StartsWith("CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR,"))
+                    continue;
+                _sb.Append(_line);
+                _sb.Append('\n');
+            }
+            builder.Append(_sb);
         }
-        builder.Append(_sb);
+        else
+        {
+            builder.Append(bodyBuilder);
+        }
         // Safety: close any unmatched { from structured IR lowering (e.g. failed newobj)
         // to prevent C2598/C2601 cascading to subsequent functions.
         int _braceCount = 0;
