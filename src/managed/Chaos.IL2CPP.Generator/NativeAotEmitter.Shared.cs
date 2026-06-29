@@ -474,10 +474,112 @@ public sealed partial class NativeAotEmitter
             // No artifact ref — this is consumed internally by the verification orchestrator.
         }
 
+        // ── Post-processing: safeHeaderValuetypeTypedefs ──
+        // Scan all generated page sources for chaos_valuetype_* references that lack
+        // a corresponding typedef in the shared header (native-aot.generated.header.h).
+        // These come from extern "C" declarations in TPG Scriban templates for external
+        // runtime functions, which reference chaos_valuetype_* types not discovered by
+        // AOT IR lowering or ObjectModelEmission (e.g. System.Data.Common internal enums
+        // like DataRowVersion, ConflictOption, CommandBehavior).
+        AppendMissingVtTypedefsToHeaderPostScan(sources);
+
         return (sources, artifacts);
     }
 
+    /// <summary>
+    /// Scan all generated sources for chaos_valuetype_* references missing from the
+    /// shared header and append the needed typedefs to the header content.
+    /// This catches types referenced in TPG Scriban template extern "C" declarations
+    /// that are not part of the AOT subject methods' type closure.
+    /// </summary>
+    private static void AppendMissingVtTypedefsToHeaderPostScan(IReadOnlyList<NativeAotGeneratedSource> sources)
+    {
+        var existingVT = new HashSet<string>(StringComparer.Ordinal);
+        int headerIdx = -1;
+        string headerPath = NativeAotArtifactNames.GeneratedHeader;
+        for (int si = 0; si < sources.Count; si++)
+        {
+            if (string.Equals(sources[si].RelativePath, headerPath, StringComparison.Ordinal))
+            {
+                headerIdx = si;
+                CollectExistingValueTypeTypedefs(sources[si].Contents, existingVT);
+                break;
+            }
+        }
+        if (headerIdx < 0) return;
 
+        var missingVT = new HashSet<string>(StringComparer.Ordinal);
+        for (int si = 0; si < sources.Count; si++)
+        {
+            if (si == headerIdx) continue;
+            var text = sources[si].Contents;
+            if (string.IsNullOrEmpty(text)) continue;
+            int pos = 0;
+            while ((pos = text.IndexOf("chaos_valuetype_", pos, StringComparison.Ordinal)) >= 0)
+            {
+                int start = pos;
+                int end = pos + 16;
+                while (end < text.Length && (char.IsLetterOrDigit(text[end]) || text[end] == '_'))
+                    end++;
+                var sym = text.Substring(start, end - start);
+                if (!existingVT.Contains(sym))
+                    missingVT.Add(sym);
+                pos = end;
+            }
+        }
+        if (missingVT.Count == 0) return;
+
+        var headerSb = new System.Text.StringBuilder(sources[headerIdx].Contents);
+        headerSb.AppendLine();
+        headerSb.AppendLine("// chaos_valuetype_* typedefs (post-scan: TPG extern declarations)");
+        foreach (var name in missingVT.OrderBy(n => n, StringComparer.Ordinal))
+        {
+            headerSb.Append("typedef CHAOS_IL2CPP_INT32 ");
+            headerSb.Append(name);
+            headerSb.AppendLine(";");
+        }
+        headerSb.AppendLine();
+        var oldSrc = sources[headerIdx];
+        if (sources is IList<NativeAotGeneratedSource> mutableList)
+        {
+            mutableList[headerIdx] = new NativeAotGeneratedSource
+            {
+                RelativePath = oldSrc.RelativePath,
+                Contents = headerSb.ToString(),
+            };
+        }
+    }
+
+    /// <summary>
+    /// Collect existing chaos_valuetype_* typedef names from header content.
+    /// Matches "typedef CHAOS_IL2CPP_INT32 chaos_valuetype_XYZ;" patterns.
+    /// Also matches "struct chaos_valuetype_XYZ" definitions.
+    /// </summary>
+    private static void CollectExistingValueTypeTypedefs(string headerContent, HashSet<string> result)
+    {
+        const string typedefPrefix = "typedef CHAOS_IL2CPP_INT32 ";
+        const string valuetypePrefix = "chaos_valuetype_";
+        int pos = 0;
+        while ((pos = headerContent.IndexOf(typedefPrefix, pos, StringComparison.Ordinal)) >= 0)
+        {
+            int vtStart = pos + typedefPrefix.Length;
+            int end = headerContent.IndexOf(';', vtStart);
+            if (end < 0) break;
+            var name = headerContent.Substring(vtStart, end - vtStart).Trim();
+            if (name.StartsWith(valuetypePrefix, StringComparison.Ordinal))
+                result.Add(name);
+            pos = end + 1;
+        }
+        const string structPrefix = "struct chaos_valuetype_";
+        pos = 0;
+        while ((pos = headerContent.IndexOf(structPrefix, pos, StringComparison.Ordinal)) >= 0)
+        {
+            int end = headerContent.IndexOfAny(new[] { ' ', '{' }, pos);
+            if (end < 0) break;
+            result.Add(headerContent.Substring(pos, end - pos));
+            pos = end + 1;
+        }
+    }
 
     private static string BuildMethodSection(NativeAotMethodTemplateModel methodModel)
     {
