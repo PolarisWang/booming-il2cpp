@@ -322,7 +322,13 @@ public sealed partial class NativeAotLoweringPlanner
             int end = headerContent.IndexOfAny(new[] { ' ', '>', ',', ')', ';' }, idx + 16);
             if (end < 0) end = headerContent.Length;
             string name = headerContent.Substring(idx, end - idx);
-            if (!headerContent.Contains($"typedef CHAOS_IL2CPP_INT32 {name}", StringComparison.Ordinal))
+            // Skip names containing non-alphanumeric characters beyond underscore
+            // (e.g. "chaos_valuetype_*" from safety-net comments).
+            bool isValid = true;
+            for (int i = 16; i < name.Length; i++)
+                if (!char.IsLetterOrDigit(name[i]) && name[i] != '_')
+                { isValid = false; break; }
+            if (isValid && !headerContent.Contains($"typedef CHAOS_IL2CPP_INT32 {name}", StringComparison.Ordinal))
                 needed.Add(name);
             idx = end;
         }

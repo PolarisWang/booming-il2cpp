@@ -521,8 +521,16 @@ public sealed partial class NativeAotEmitter
                 int end = pos + 16;
                 while (end < text.Length && (char.IsLetterOrDigit(text[end]) || text[end] == '_'))
                     end++;
+                // Skip matches where no identifier characters follow "chaos_valuetype_"
+                // (e.g. matches inside "chaos_valuetype_*" comment text).
+                if (end == pos + 16) { pos = end; continue; }
                 var sym = text.Substring(start, end - start);
-                if (!existingVT.Contains(sym))
+                // Skip symbols containing non-identifier characters (safety net).
+                bool valid = true;
+                for (int i = 16; i < sym.Length && valid; i++)
+                    if (!char.IsLetterOrDigit(sym[i]) && sym[i] != '_')
+                        valid = false;
+                if (valid && !existingVT.Contains(sym))
                     missingVT.Add(sym);
                 pos = end;
             }
