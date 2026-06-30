@@ -256,11 +256,17 @@ internal sealed class SdkEmitter
         // ── Copy ALL runtime_stubs/*.h ────────────────────────────────────
         // Needed by: generated_code_compat.h (via stubs.h), chaos_runtime_host.h
         // Use glob instead of maintainable-explicit-list (20+ files with transitive deps).
+        // EXCEPT stub_common.h — it is also on the include path from the repo tree
+        // (CHAOS_PROJECT_ROOT/src/native/runtime-core/runtime_stubs), and having two
+        // copies with different file paths causes #pragma once to fail, resulting in
+        // C2011 redefinition when consumers compile with both paths in scope.
         if (Directory.Exists(srcRuntimeStubs))
         {
             foreach (var f in Directory.GetFiles(srcRuntimeStubs, "*.h"))
             {
                 var name = Path.GetFileName(f);
+                if (string.Equals(name, "stub_common.h", StringComparison.OrdinalIgnoreCase))
+                    continue;
                 File.Copy(f, Path.Combine(dstRuntimeStubs, name), overwrite: true);
                 count++;
             }
