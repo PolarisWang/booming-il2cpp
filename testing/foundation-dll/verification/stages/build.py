@@ -478,7 +478,12 @@ def _build_jit_entry(
     if result.returncode != 0:
         print(f"  [build] JIT entry build FAILED (rc={result.returncode}) — continuing")
         for line in result.stderr.splitlines():
-            print(f"      [jit:err] {line}")
+            try:
+                print(f"      [jit:err] {line}")
+            except UnicodeEncodeError:
+                safe = line.encode('utf-8', errors='replace').decode('utf-8', errors='replace')
+                safe = safe.replace('�', '?')
+                print(f"      [jit:err] {safe}")
         return False
 
     jit_exe = jit_output / "entry-jit.exe"
