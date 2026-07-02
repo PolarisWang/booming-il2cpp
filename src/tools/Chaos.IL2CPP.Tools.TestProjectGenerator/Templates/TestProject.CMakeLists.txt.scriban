@@ -162,6 +162,9 @@ set(CHAOS_CRYPTO_STUBS
 set(CHAOS_OBJECT_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/object_stubs.cpp"
 )
+set(CHAOS_GC_ALLOC_STUBS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
+)
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
@@ -180,6 +183,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
     ${CHAOS_OBJECT_STUBS}
+    ${CHAOS_GC_ALLOC_STUBS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
