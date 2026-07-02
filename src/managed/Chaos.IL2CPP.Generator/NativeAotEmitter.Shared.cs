@@ -584,7 +584,9 @@ public sealed partial class NativeAotEmitter
         {
             int end = headerContent.IndexOfAny(new[] { ' ', '{' }, pos);
             if (end < 0) break;
-            result.Add(headerContent.Substring(pos, end - pos));
+            // Store bare symbol name (strip "struct " prefix) for comparison
+            // with typedef names and references.
+            result.Add(headerContent.Substring(pos + 7, end - pos - 7));
             pos = end + 1;
         }
     }

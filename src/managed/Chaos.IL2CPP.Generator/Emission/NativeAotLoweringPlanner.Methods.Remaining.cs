@@ -113,6 +113,14 @@ public sealed partial class NativeAotLoweringPlanner
         // external assemblies (e.g. System.Data.CommandBehavior) that are NOT in
         // _emittedValueTypeSubjectIds or extraValuetypes because they appear only as
         // ABI parameter types in extern declarations, not in method bodies or IR slots.
+        // Exclude names that have struct definitions (tracked by _valueTypeStructSubjectIds).
+        HashSet<string>? structSubjectIds3 = _valueTypeStructSubjectIds;
+        var structVtNames = new HashSet<string>(StringComparer.Ordinal);
+        if (structSubjectIds3 is { Count: > 0 })
+        {
+            foreach (var sid in structSubjectIds3)
+                structVtNames.Add(GetNativeValueTypeSymbol(sid));
+        }
         if (_methodDeclarations is { Count: > 0 })
         {
             foreach (var decl in _methodDeclarations)
@@ -124,7 +132,9 @@ public sealed partial class NativeAotLoweringPlanner
                     int end = pos + 16;
                     while (end < decl.Length && (char.IsLetterOrDigit(decl[end]) || decl[end] == '_'))
                         end++;
-                    typedefNames.Add(decl.Substring(start, end - start));
+                    var name = decl.Substring(start, end - start);
+                    if (!structVtNames.Contains(name))
+                        typedefNames.Add(name);
                     pos = end;
                 }
             }
@@ -716,6 +726,12 @@ public sealed partial class NativeAotLoweringPlanner
             sb.AppendLine();
         }
 
+        // ── Safety net: append missing chaos_valuetype_* typedefs ──
+        // Must run BEFORE BuildAbiExportDeclarations (which may return a modified
+        // string and skip the rest).  Scan sb for chaos_valuetype_* references
+        // lacking a corresponding typedef and append them.
+        AppendMissingValueTypeTypedefsForHeader(sb);
+
         // Phase 1a: ChaosAbiExportCollector — ensure every chaos_external_runtime_*
         // symbol referenced in the generated header has a visible extern "C" declaration.
         string postCollector = BuildAbiExportDeclarations(sb);
@@ -723,16 +739,6 @@ public sealed partial class NativeAotLoweringPlanner
         {
             return postCollector;
         }
-
-        // ── Safety net: append missing chaos_valuetype_* typedefs ──
-        // TPG stubs may reference chaos_valuetype_* symbols for value types that are
-        // not part of the AOT subject methods' type closure (e.g. System.Data.Common
-        // internal enums like DataRowVersion, ConflictOption).  These types are
-        // referenced in stub method declarations but were never discovered during
-        // AOT IR lowering or ObjectModelEmission.
-        // Scan the generated header for any chaos_valuetype_* references that lack
-        // a corresponding typedef, and append them at the end.
-        AppendMissingValueTypeTypedefsForHeader(sb);
 
         return sb.ToString();
     }
@@ -828,7 +834,9 @@ public sealed partial class NativeAotLoweringPlanner
         {
             int end = content.IndexOf(';', pos);
             if (end < 0) break;
-            existing.Add(content[pos..end].TrimEnd());
+            var name = content.Substring(pos, end - pos).TrimEnd();
+            // Strip "typedef CHAOS_IL2CPP_INT32 " prefix to get bare symbol name
+            existing.Add(name[typedefPrefix.Length..]);
             pos = end + 1;
         }
         pos = 0;
@@ -836,7 +844,8 @@ public sealed partial class NativeAotLoweringPlanner
         {
             int end = content.IndexOfAny(new[] { ' ', '{', ';' }, pos);
             if (end < 0) break;
-            existing.Add(content[pos..end]);
+            // Strip "struct " prefix to get bare symbol name
+            existing.Add(content.Substring(pos + 7, end - pos - 7));
             pos = end + 1;
         }
 

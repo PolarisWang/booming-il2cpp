@@ -308,8 +308,13 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private static string MapNativeIntSlot(AotCoreIrAbiSlotArtifact abiSlot)
     {
+        // Only emit chaos_valuetype_* for actual value types.  Reference types
+        // (classes like System.Globalization.CompareInfo, CultureInfo) and interfaces
+        // must use CHAOS_IL2CPP_INTPTR even when they have a non-CoreLib TypeSubjectId,
+        // because they are passed by reference (pointer-sized), not by value.
         if (!string.IsNullOrEmpty(abiSlot.TypeSubjectId) &&
-            !abiSlot.TypeSubjectId.StartsWith("System.Private.CoreLib/", StringComparison.Ordinal))
+            !abiSlot.TypeSubjectId.StartsWith("System.Private.CoreLib/", StringComparison.Ordinal) &&
+            abiSlot.TypeShape == AotCoreIrTypeShapeKind.ValueType)
             return GetNativeValueTypeSymbol(abiSlot.TypeSubjectId);
         return "CHAOS_IL2CPP_INTPTR";
     }
