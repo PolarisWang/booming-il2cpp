@@ -467,6 +467,11 @@ public sealed partial class NativeAotLoweringPlanner
         // ── chaos_external_runtime_* declarations (inside codegen namespace) ──
         // These helpers are DEFINED on page 0 inside the codegen namespace, so their
         // extern declarations MUST also be inside the namespace to match.
+        // Deduplication by TargetSymbol: SanitizeSubjectId used by GetExternalRuntimeHelperSymbol
+        // is non-injective — different SubjectIds can map to the same sanitized symbol
+        // (e.g. generic instantiations).  Emitting two extern "C" declarations with
+        // the same name but different signatures causes C2733.
+        var seenTargetSymbols = new HashSet<string>(StringComparer.Ordinal);
         if (_externalRuntimeHelpers is { Count: > 0 })
         {
             sb.Append("namespace chaos::il2cpp::codegen::");
@@ -474,6 +479,13 @@ public sealed partial class NativeAotLoweringPlanner
             sb.AppendLine("{");
             foreach (var helper in _externalRuntimeHelpers)
             {
+                // Deduplicate by TargetSymbol — two different SubjectIds may
+                // sanitize to the same symbol name, and extern "C" doesn't
+                // allow overloading by parameter types (C2733).
+                if (!string.IsNullOrEmpty(helper.TargetSymbol) &&
+                    !seenTargetSymbols.Add(helper.TargetSymbol))
+                    continue;
+
                 // Extract the first line of the source (the function signature)
                 // and convert it to a declaration by appending ";".
                 var source = helper.Source;
@@ -519,10 +531,16 @@ public sealed partial class NativeAotLoweringPlanner
         // Only emit for helpers with non-empty Source (they have real signatures).
         // DirectNativeSymbol-only helpers (empty Source) get a separate minimal
         // extern "C" fallback below.
+        // Dedup by TargetSymbol (same seenTargetSymbols from Section 1).
         if (_externalRuntimeHelpers is { Count: > 0 })
         {
             foreach (var helper in _externalRuntimeHelpers)
             {
+                // Deduplicate by TargetSymbol (same set from Section 1 above).
+                if (!string.IsNullOrEmpty(helper.TargetSymbol) &&
+                    !seenTargetSymbols.Contains(helper.TargetSymbol))
+                    continue;
+
                 var source = helper.Source;
                 if (string.IsNullOrEmpty(source))
                     continue;
@@ -582,15 +600,20 @@ public sealed partial class NativeAotLoweringPlanner
                 if (helpersWithSource.Contains(kvp.Key))
                     continue;
                 var symbol = GetExternalRuntimeHelperSymbol(kvp.Key);
-                // Skip if the symbol already has an AOT declaration
-                // (from _externalRuntimeHelpers or BuildAbiExportDeclarations)
-                if (aotDeclaredSymbols.Contains(symbol))
+                // Skip if the symbol already has a declaration from any earlier section
+                // (helper template declarations or previously-processed subjects).
+                if (aotDeclaredSymbols.Contains(symbol) || !seenTargetSymbols.Add(symbol))
                     continue;
                 // Look up the correct parameter count from _emittedExternalRuntimeSymbolParams
                 // (populated during method body emission from InvocationTarget.ParameterAbis).
                 // Without this, SkipInit(ref int) → 1 ABI param gets declared as 0-param,
                 // causing C2660 when the call site passes chaos_arg_0.
-                int extParamCount = _emittedExternalRuntimeSymbolParams.TryGetValue(symbol, out var epc) ? epc : 0;
+                // Default to 1 param (CHAOS_IL2CPP_INTPTR) because ALL external runtime
+                // stubs are called with at least chaos_arg_0 (the this pointer or sole arg).
+                // Using 0-param () would conflict with AddExternalRuntimeStubs which correctly
+                // counts call-site args and emits (CHAOS_IL2CPP_INTPTR), causing C2733
+                // (extern "C" overloading disallowed) when both declarations are visible.
+                int extParamCount = _emittedExternalRuntimeSymbolParams.TryGetValue(symbol, out var epc) ? epc : 1;
                 // Generate extern "C" CHAOS_IL2CPP_INTPTR (same format as
                 // BuildAbiExportDeclarations) to avoid conflicting return type
                 // declarations at global scope.
@@ -637,6 +660,10 @@ public sealed partial class NativeAotLoweringPlanner
                 foreach (var h in _externalRuntimeHelpers)
                     declaredExtSymbols.Add(h.TargetSymbol);
             }
+            // Also consider symbols deduped by seenTargetSymbols to avoid
+            // emitting static inline stubs for symbols already declared as extern "C".
+            foreach (var s in seenTargetSymbols)
+                declaredExtSymbols.Add(s);
 
             foreach (var m in _methodsBySubjectId.Values)
             {
