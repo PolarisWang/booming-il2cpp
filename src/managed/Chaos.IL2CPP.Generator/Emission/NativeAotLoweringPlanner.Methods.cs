@@ -402,6 +402,15 @@ public sealed partial class NativeAotLoweringPlanner
     private readonly System.Collections.Concurrent.ConcurrentDictionary<string, AotCoreIrAbiCarrierKind> _emittedExternalRuntimeSymbols = new(System.StringComparer.Ordinal);
 
     /// <summary>
+    /// Parallel to _emittedExternalRuntimeSymbols: maps each symbol to its ABI parameter
+    /// slot count.  Used by <see cref="BuildTypeDeclarationsCode"/> to emit fallback
+    /// static inline declarations with the correct number of parameters, preventing
+    /// C2660 (function does not take N arguments) when the call site passes arguments
+    /// but the stub declares zero.
+    /// </summary>
+    private readonly System.Collections.Concurrent.ConcurrentDictionary<string, int> _emittedExternalRuntimeSymbolParams = new(System.StringComparer.Ordinal);
+
+    /// <summary>
     /// Cache for TryCreateExternalRuntimeHelperDefinition results (P0 optimization).
     /// External runtime helper definitions are pure functions of the normalized subjectId;
     /// caching avoids redundant shape registry matching when the same callee is called

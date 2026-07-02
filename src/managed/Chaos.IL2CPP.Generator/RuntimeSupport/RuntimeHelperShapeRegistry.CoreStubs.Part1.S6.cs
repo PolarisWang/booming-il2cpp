@@ -33,10 +33,10 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     // Unsafe.SkipInit<T>(ref T value) — no-op: leave ref uninitialized.
-                    // CHAOS_IL2CPP_INTPTR return + () params avoids C2733 with
-                    // AddExternalRuntimeStubs' separate extern declaration.
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
-                        ["    return 0;"]);
+                    // Accept the ref parameter as CHAOS_IL2CPP_INTPTR (by-ref pointer)
+                    // to match the call site which passes one argument via ABI slot.
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR", ["    return 0;"]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                             CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),

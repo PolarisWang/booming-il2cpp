@@ -586,12 +586,23 @@ public sealed partial class NativeAotLoweringPlanner
                 // (from _externalRuntimeHelpers or BuildAbiExportDeclarations)
                 if (aotDeclaredSymbols.Contains(symbol))
                     continue;
+                // Look up the correct parameter count from _emittedExternalRuntimeSymbolParams
+                // (populated during method body emission from InvocationTarget.ParameterAbis).
+                // Without this, SkipInit(ref int) → 1 ABI param gets declared as 0-param,
+                // causing C2660 when the call site passes chaos_arg_0.
+                int extParamCount = _emittedExternalRuntimeSymbolParams.TryGetValue(symbol, out var epc) ? epc : 0;
                 // Generate extern "C" CHAOS_IL2CPP_INTPTR (same format as
                 // BuildAbiExportDeclarations) to avoid conflicting return type
                 // declarations at global scope.
                 fallbackSb.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
                 fallbackSb.Append(symbol);
-                fallbackSb.AppendLine("() noexcept;");
+                fallbackSb.Append('(');
+                for (int __pi = 0; __pi < extParamCount; __pi++)
+                {
+                    if (__pi > 0) fallbackSb.Append(", ");
+                    fallbackSb.Append("CHAOS_IL2CPP_INTPTR");
+                }
+                fallbackSb.AppendLine(") noexcept;");
                 fallbackCount++;
             }
             if (fallbackCount > 0)
@@ -714,14 +725,27 @@ public sealed partial class NativeAotLoweringPlanner
                     AotCoreIrAbiCarrierKind.Float64 => "double",
                     _ => "CHAOS_IL2CPP_INTPTR",
                 };
+                // Look up the correct parameter count from _emittedExternalRuntimeSymbolParams
+                // (set at same time as _emittedExternalRuntimeSymbols from InvocationTarget).
+                // Without this, the stub declares () noexcept but the caller passes arguments,
+                // causing C2660 (function does not take N arguments).
+                int paramCount = _emittedExternalRuntimeSymbolParams.TryGetValue(kvp.Key, out var pc) ? pc : 0;
                 sb.Append("static inline ");
                 sb.Append(cppType);
                 sb.Append(' ');
                 sb.Append(kvp.Key);
+                sb.Append('(');
+                for (int __pi = 0; __pi < paramCount; __pi++)
+                {
+                    if (__pi > 0) sb.Append(", ");
+                    sb.Append("CHAOS_IL2CPP_INTPTR chaos_arg_");
+                    sb.Append(__pi);
+                }
+                sb.Append(") noexcept");
                 if (kvp.Value == AotCoreIrAbiCarrierKind.Void)
-                    sb.AppendLine("() noexcept {}");
+                    sb.AppendLine(" {}");
                 else
-                    sb.AppendLine("() noexcept { return 0; }");
+                    sb.AppendLine(" { return 0; }");
             }
             sb.AppendLine();
         }

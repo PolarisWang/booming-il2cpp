@@ -287,10 +287,17 @@ public sealed partial class NativeAotLoweringPlanner
                 builder.AppendLine("\tCHAOS_IL2CPP_INTPTR _s" + __si + "{};");
             for (int __ii = 0; __ii <= 31; __ii++)
                 builder.AppendLine("\tCHAOS_IL2CPP_INT64 _i" + __ii + "{};");
-            builder.AppendLine("\tdouble _d0{}; double _d1{}; double _d2{}; double _d3{};");
-            builder.AppendLine("\tdouble _d4{}; double _d5{}; double _d6{}; double _d7{};");
-            builder.AppendLine("\tfloat _f0{}; float _f1{}; float _f2{}; float _f3{};");
-            builder.AppendLine("\tfloat _f4{}; float _f5{}; float _f6{}; float _f7{};");
+            // Declare double/float slots 0..15 to cover numerics chunks that
+            // use _d8/_d9 etc. for Vector<double>/Vector<float> arithmetic.
+            // The safety net runs BEFORE EmitViaStructuredIR sets slotContext,
+            // so we cannot dynamically query FloatLocalSlots here.  Over-declare
+            // by a generous margin (was _d0.._d7, insufficient for numerics).
+            for (int __di = 0; __di <= 15; __di++)
+                builder.Append("\tdouble _d" + __di + "{};");
+            builder.AppendLine();
+            for (int __fi = 0; __fi <= 15; __fi++)
+                builder.Append("\tfloat _f" + __fi + "{};");
+            builder.AppendLine();
             builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 32) chaos_eval_stack{};");
             builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
         }
@@ -383,14 +390,10 @@ public sealed partial class NativeAotLoweringPlanner
                 var _t = _line.TrimStart();
                 if (_t.StartsWith("CHAOS_IL2CPP_INTPTR _s") ||
                     _t.StartsWith("CHAOS_IL2CPP_INT64 _i") ||
-                    _t.StartsWith("double _d0") || _t.StartsWith("double _d1") ||
-                    _t.StartsWith("double _d2") || _t.StartsWith("double _d3") ||
-                    _t.StartsWith("double _d4") || _t.StartsWith("double _d5") ||
-                    _t.StartsWith("double _d6") || _t.StartsWith("double _d7") ||
-                    _t.StartsWith("float _f0") || _t.StartsWith("float _f1") ||
-                    _t.StartsWith("float _f2") || _t.StartsWith("float _f3") ||
-                    _t.StartsWith("float _f4") || _t.StartsWith("float _f5") ||
-                    _t.StartsWith("float _f6") || _t.StartsWith("float _f7") ||
+                    _t.StartsWith("double _d") ||
+                    _t.StartsWith("float _f") ||
+                    _t.StartsWith("CHAOS_IL2CPP_FLOAT64 _d") ||
+                    _t.StartsWith("CHAOS_IL2CPP_FLOAT32 _f") ||
                     _t.StartsWith("CHAOS_IL2CPP_SIZE chaos_stack_top") ||
                     _t.StartsWith("CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR,"))
                     continue;
