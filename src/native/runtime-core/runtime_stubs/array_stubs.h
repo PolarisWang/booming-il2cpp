@@ -22,6 +22,7 @@
 
 extern "C" {
 
+// ── ABI exports (chaos_runtime_stubs) ──────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosArrayEmpty(void) noexcept;
 void ChaosArrayCopy(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 sourceIndex, CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INT32 destIndex, CHAOS_IL2CPP_INT32 count) noexcept;
 void ChaosArrayCopy3(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INT32 count) noexcept;
@@ -40,99 +41,65 @@ CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytes(CHAOS_IL2CPP_INTPTR unused, CHAOS_
 CHAOS_IL2CPP_INT32 ChaosBitConverterToInt32(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept;
 double ChaosBitConverterToDouble(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept;
 
-}  // extern "C"
-
-// ── Inline implementation wrappers (C++ linkage) ──
+// ── Inline implementation wrappers (extern "C" linkage) ──
 // These are used by the AOT codegen when DirectNativeSymbol resolves to
 // ChaosArrayXxx_Inline.  Their implementations are in array_stubs.cpp
 // (not inline in the header) to avoid C2084 when the header is included
 // from multiple translation units (via chaos_pch.h → chaos_runtime_host.h).
-// The linker resolves all references to the single definition in array_stubs.o.
-using chaos::il2cpp::runtime_core::GcAllocateAtomic;
+// extern "C" linkage avoids C++ name mangling, so codegen calling these from
+// any namespace (chaos::il2cpp::codegen::*) resolves correctly at link time.
 
-// ── SSE2-accelerated IndexOf for byte arrays (P6) ──────────────
+CHAOS_IL2CPP_INTPTR ChaosArrayEmpty_Inline(void) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosArrayNew1D_Inline(const TypeInfo* array_type_info, const TypeInfo* element_type_info, CHAOS_IL2CPP_UINT8 element_type_shape, CHAOS_IL2CPP_INTPTR length) noexcept;
+void ChaosArrayClear_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INT32 count) noexcept;
+
 #if defined(__x86_64__) || defined(_M_AMD64)
-extern CHAOS_IL2CPP_INT32 ChaosArrayIndexOf_Byte_Sse2(
+CHAOS_IL2CPP_INT32 ChaosArrayIndexOf_Byte_Sse2(
     const CHAOS_IL2CPP_UINT8* elements, CHAOS_IL2CPP_INTPTR len,
     CHAOS_IL2CPP_UINT8 value) noexcept;
-
-extern CHAOS_IL2CPP_INT32 ChaosArrayIndexOf_Byte_Inline(
+CHAOS_IL2CPP_INT32 ChaosArrayIndexOf_Byte_Inline(
     CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_UINT8 value) noexcept;
 #endif
 
-extern CHAOS_IL2CPP_INTPTR ChaosArrayEmpty_Inline(void) noexcept;
+void ChaosArrayCopy_Inline(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 sourceIndex, CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INT32 destIndex, CHAOS_IL2CPP_INT32 count) noexcept;
+void ChaosArrayCopy_Unsafe_Inline(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 sourceIndex, CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INT32 destIndex, CHAOS_IL2CPP_INT32 count) noexcept;
+void ChaosArrayCopy3_Inline(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INT32 count) noexcept;
+void ChaosArrayCopy3_Unsafe_Inline(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INT32 count) noexcept;
 
-extern void ChaosArrayCopy_Inline(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 sourceIndex, CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INT32 destIndex, CHAOS_IL2CPP_INT32 count) noexcept;
+CHAOS_IL2CPP_INT32 ChaosArrayBinarySearch_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_INT32 ChaosArrayBinarySearchRange_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INT32 length, CHAOS_IL2CPP_INTPTR value) noexcept;
 
-extern void ChaosArrayCopy_Unsafe_Inline(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 sourceIndex, CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INT32 destIndex, CHAOS_IL2CPP_INT32 count) noexcept;
-
-extern void ChaosArrayCopy3_Inline(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INT32 count) noexcept;
-
-extern void ChaosArrayCopy3_Unsafe_Inline(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INT32 count) noexcept;
-
-extern CHAOS_IL2CPP_INT32 ChaosArrayBinarySearch_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR value) noexcept;
-
-extern CHAOS_IL2CPP_INT32 ChaosArrayBinarySearchRange_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INT32 length, CHAOS_IL2CPP_INTPTR value) noexcept;
-
-// ── SSE2-accelerated IndexOf / LastIndexOf (P1) ─────────────
 #if defined(__x86_64__) || defined(_M_AMD64)
-extern CHAOS_IL2CPP_INT32 IndexOf_Sse2(
+CHAOS_IL2CPP_INT32 IndexOf_Sse2(
     const CHAOS_IL2CPP_INTPTR* elements, CHAOS_IL2CPP_INTPTR len, CHAOS_IL2CPP_INTPTR value) noexcept;
-
-extern CHAOS_IL2CPP_INT32 LastIndexOf_Sse2(
+CHAOS_IL2CPP_INT32 LastIndexOf_Sse2(
     const CHAOS_IL2CPP_INTPTR* elements, CHAOS_IL2CPP_INTPTR len, CHAOS_IL2CPP_INTPTR value) noexcept;
 #endif
 
-extern CHAOS_IL2CPP_INT32 ChaosArrayIndexOf_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_INT32 ChaosArrayIndexOf_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_INT32 ChaosArrayLastIndexOf_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR value) noexcept;
 
-extern CHAOS_IL2CPP_INT32 ChaosArrayLastIndexOf_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR value) noexcept;
+void ChaosArraySort_Inline(CHAOS_IL2CPP_INTPTR array) noexcept;
+void ChaosArraySortWithComparer_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR comparer) noexcept;
 
-extern void ChaosArraySort_Inline(CHAOS_IL2CPP_INTPTR array) noexcept;
+void ChaosArrayReverse_Inline(CHAOS_IL2CPP_INTPTR array) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosArrayGetValue_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index) noexcept;
 
-extern void ChaosArraySortWithComparer_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR comparer) noexcept;
-
-// ── AVX2-accelerated Reverse (P2) ──────────────────────────────
+// ── AVX2-accelerated Reverse/IndexOf/Copy (P2/P4/P5) ───────────
 #if defined(__x86_64__) || defined(_M_AMD64)
 #include <immintrin.h>
-
 #if defined(__GNUC__) || defined(__clang__)
 #define CHAOS_IL2CPP_TARGET_AVX2 __attribute__((target("avx2")))
 #else
 #define CHAOS_IL2CPP_TARGET_AVX2
 #endif
-
-CHAOS_IL2CPP_TARGET_AVX2
-extern void Reverse_Avx2_Dispatch(
-    CHAOS_IL2CPP_INTPTR* elements, CHAOS_IL2CPP_INT32 n) noexcept;
-
-CHAOS_IL2CPP_TARGET_AVX2
-extern CHAOS_IL2CPP_INT32 IndexOf_Avx2_Dispatch(
-    const CHAOS_IL2CPP_INTPTR* elements, CHAOS_IL2CPP_INTPTR len, CHAOS_IL2CPP_INTPTR value) noexcept;
-
-CHAOS_IL2CPP_TARGET_AVX2
-extern CHAOS_IL2CPP_INT32 LastIndexOf_Avx2_Dispatch(
-    const CHAOS_IL2CPP_INTPTR* elements, CHAOS_IL2CPP_INTPTR len, CHAOS_IL2CPP_INTPTR value) noexcept;
-
-CHAOS_IL2CPP_TARGET_AVX2
-extern void Avx2BlockCopy(void* dst, const void* src, CHAOS_IL2CPP_SIZE bytes) noexcept;
-
-CHAOS_IL2CPP_TARGET_AVX2
-extern void Avx2StreamCopy(void* dst, const void* src, CHAOS_IL2CPP_SIZE bytes) noexcept;
-
-CHAOS_IL2CPP_TARGET_AVX2
-extern void Avx2StreamZero(void* dst, CHAOS_IL2CPP_SIZE bytes) noexcept;
-
+CHAOS_IL2CPP_TARGET_AVX2 void Reverse_Avx2_Dispatch(CHAOS_IL2CPP_INTPTR* elements, CHAOS_IL2CPP_INT32 n) noexcept;
+CHAOS_IL2CPP_TARGET_AVX2 CHAOS_IL2CPP_INT32 IndexOf_Avx2_Dispatch(const CHAOS_IL2CPP_INTPTR* elements, CHAOS_IL2CPP_INTPTR len, CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_TARGET_AVX2 CHAOS_IL2CPP_INT32 LastIndexOf_Avx2_Dispatch(const CHAOS_IL2CPP_INTPTR* elements, CHAOS_IL2CPP_INTPTR len, CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_TARGET_AVX2 void Avx2BlockCopy(void* dst, const void* src, CHAOS_IL2CPP_SIZE bytes) noexcept;
+CHAOS_IL2CPP_TARGET_AVX2 void Avx2StreamCopy(void* dst, const void* src, CHAOS_IL2CPP_SIZE bytes) noexcept;
+CHAOS_IL2CPP_TARGET_AVX2 void Avx2StreamZero(void* dst, CHAOS_IL2CPP_SIZE bytes) noexcept;
 #undef CHAOS_IL2CPP_TARGET_AVX2
 #endif
 
-extern void ChaosArrayReverse_Inline(CHAOS_IL2CPP_INTPTR array) noexcept;
-
-extern CHAOS_IL2CPP_INTPTR ChaosArrayGetValue_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index) noexcept;
-
-extern void ChaosArrayClear_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INT32 count) noexcept;
-
-extern CHAOS_IL2CPP_INTPTR ChaosArrayNew1D_Inline(
-    const TypeInfo* array_type_info,
-    const TypeInfo* element_type_info,
-    CHAOS_IL2CPP_UINT8 element_type_shape,
-    CHAOS_IL2CPP_INTPTR length) noexcept;
+}  // extern "C"
