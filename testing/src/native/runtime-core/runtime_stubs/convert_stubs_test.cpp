@@ -1334,10 +1334,8 @@ TEST(ExceptionJmpDepth, DepthOverflow) {
 TEST(ExceptionJmpDepth, PopUnderflow) {
     using namespace chaos::il2cpp::runtime_core;
     ASSERT_EQ(g_chaos_exception_jmp_depth, 0);
-    pop_exception_jmp_buf();
-    EXPECT_EQ(g_chaos_exception_jmp_depth, 0);
-    pop_exception_jmp_buf();
-    EXPECT_EQ(g_chaos_exception_jmp_depth, 0);
+    // pop underflow is a fatal error — must abort
+    EXPECT_DEATH(pop_exception_jmp_buf(), ".*");
 }
 
 #endif // CHAOS_IL2CPP_EH_SETJMP

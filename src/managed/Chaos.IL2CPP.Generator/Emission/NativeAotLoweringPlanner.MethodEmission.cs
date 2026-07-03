@@ -278,32 +278,10 @@ public sealed partial class NativeAotLoweringPlanner
         stringBuilder5.AppendLine(ref handler);
         EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
         EmitStaticInitializationPrologue(builder, method);
-        // Universal slot safety net: declare _sN/_iN/_dN/_fN for structured IR
-        // methods before emitting the body.  Flat (non-structured) methods manage
-        // their own slot declarations and do NOT use the safety net.
-        if (usesStructuredSlots)
-        {
-            for (int __si = 0; __si <= 63; __si++)
-                builder.AppendLine("\tCHAOS_IL2CPP_INTPTR _s" + __si + "{};");
-            for (int __ii = 0; __ii <= 31; __ii++)
-                builder.AppendLine("\tCHAOS_IL2CPP_INT64 _i" + __ii + "{};");
-            // Declare double/float slots 0..15 to cover numerics chunks that
-            // use _d8/_d9 etc. for Vector<double>/Vector<float> arithmetic.
-            // The safety net runs BEFORE EmitViaStructuredIR sets slotContext,
-            // so we cannot dynamically query FloatLocalSlots here.  Over-declare
-            // by a generous margin (was _d0.._d7, insufficient for numerics).
-            for (int __di = 0; __di <= 15; __di++)
-                builder.Append("\tdouble _d" + __di + "{};");
-            builder.AppendLine();
-            for (int __fi = 0; __fi <= 15; __fi++)
-                builder.Append("\tfloat _f" + __fi + "{};");
-            builder.AppendLine();
-            builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 32) chaos_eval_stack{};");
-            builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
-        }
-        // Emit structured IR body first to capture actual slot depth,
-        // since ComputeMaxEvalStackDepth may undercount for generic methods
-        // where inlined code or StringId emission expands the effective depth.
+        // Emit structured IR body FIRST to capture actual slot depth via
+        // slotContext, since ComputeMaxEvalStackDepth may undercount for
+        // generic methods where inlined code or StringId emission expands
+        // the effective depth.
         var bodyBuilder = new System.Text.StringBuilder();
         _state.Value!.CurrentMethodNativeSymbol = method.NativeSymbol;
         _state.Value!.CurrentMethodArtifact = method;
@@ -316,6 +294,30 @@ public sealed partial class NativeAotLoweringPlanner
         {
             _state.Value!.CurrentMethodNativeSymbol = null;
             _state.Value!.CurrentMethodArtifact = null;
+        }
+        // Now emit safety net declarations based on actual slotContext peak values.
+        // The safety net is prepended to builder (before the body) but we emit it
+        // here since we need slotContext to determine the required counts.
+        // We use a separate StringBuilder and insert it into the main builder later.
+        if (usesStructuredSlots && slotContext != null)
+        {
+            // Tracked int slots (_sN): safety net covers up to peak depth
+            for (int __si = 0; __si < slotContext.MaxIntSlots; __si++)
+                builder.AppendLine("\tCHAOS_IL2CPP_INTPTR _s" + __si + "{};");
+            // Tracked int64 slots (_iN)
+            for (int __ii = 0; __ii < slotContext.MaxInt64Slots; __ii++)
+                builder.AppendLine("\tCHAOS_IL2CPP_INT64 _i" + __ii + "{};");
+            // Float64/double slots: safety net uses MaxFloat64Slots peak
+            // (typically 0-8, up to 16 for Vector<double> in numerics chunks)
+            for (int __di = 0; __di < slotContext.MaxFloat64Slots; __di++)
+                builder.Append("\tdouble _d" + __di + "{};");
+            if (slotContext.MaxFloat64Slots > 0) builder.AppendLine();
+            // Float32/float slots
+            for (int __fi = 0; __fi < slotContext.MaxFloat32Slots; __fi++)
+                builder.Append("\tfloat _f" + __fi + "{};");
+            if (slotContext.MaxFloat32Slots > 0) builder.AppendLine();
+            builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 32) chaos_eval_stack{};");
+            builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
         }
         // Use the larger of ComputeMaxEvalStackDepth and the actual peak depth
         // tracked by StructuredSlotEmissionContext (the latter may be higher for
@@ -378,34 +380,10 @@ public sealed partial class NativeAotLoweringPlanner
         bool _wrapInTryCatch = _isSubjectMethod && method.ExceptionRegionCount == 0 && (method.Instructions?.Any(i => i.Callee != null) == true);
         if (_wrapInTryCatch)
             builder.AppendLine("	try {");
-
-        // Strip inline decls from bodyBuilder — preamble safety net already emits them
-        // (only for structured IR methods).  Flat methods manage their own slots.
-        if (usesStructuredSlots)
-        {
-            var _rawBody = bodyBuilder.ToString();
-            var _sb = new System.Text.StringBuilder(_rawBody.Length);
-            foreach (var _line in _rawBody.Split('\n'))
-            {
-                var _t = _line.TrimStart();
-                if (_t.StartsWith("CHAOS_IL2CPP_INTPTR _s") ||
-                    _t.StartsWith("CHAOS_IL2CPP_INT64 _i") ||
-                    _t.StartsWith("double _d") ||
-                    _t.StartsWith("float _f") ||
-                    _t.StartsWith("CHAOS_IL2CPP_FLOAT64 _d") ||
-                    _t.StartsWith("CHAOS_IL2CPP_FLOAT32 _f") ||
-                    _t.StartsWith("CHAOS_IL2CPP_SIZE chaos_stack_top") ||
-                    _t.StartsWith("CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR,"))
-                    continue;
-                _sb.Append(_line);
-                _sb.Append('\n');
-            }
-            builder.Append(_sb);
-        }
-        else
-        {
-            builder.Append(bodyBuilder);
-        }
+        // Strip inline decls from bodyBuilder — now unnecessary since
+        // EmitViaStructuredIR no longer calls EmitStructuredSlotDeclarations.
+        // The safety net (emitted above) handles all slot declarations.
+        builder.Append(bodyBuilder);
         // Safety: close any unmatched { from structured IR lowering (e.g. failed newobj)
         // to prevent C2598/C2601 cascading to subsequent functions.
         int _braceCount = 0;
