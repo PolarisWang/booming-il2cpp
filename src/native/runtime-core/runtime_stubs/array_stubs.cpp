@@ -92,7 +92,7 @@ CHAOS_IL2CPP_INTPTR ChaosArrayCreateInstance(CHAOS_IL2CPP_INTPTR elementType, CH
     // AutoTestGenerator creates value type array test subjects via
     // Array.CreateInstance(Type, int) — e.g. System.Int32[].
     const auto elemTypeShape = static_cast<CHAOS_IL2CPP_UINT8>(type_info->type_shape);
-    return ChaosArrayNew1D_Inline(type_info->array_type_info, type_info, elemTypeShape, length);
+    return ChaosArrayNew1D_Inline(type_info, type_info, elemTypeShape, length);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosArrayCreateInstance2D(CHAOS_IL2CPP_INTPTR elementType, CHAOS_IL2CPP_INT32 length1, CHAOS_IL2CPP_INT32 length2) noexcept
@@ -101,7 +101,7 @@ CHAOS_IL2CPP_INTPTR ChaosArrayCreateInstance2D(CHAOS_IL2CPP_INTPTR elementType, 
     auto elem_type_shape = static_cast<CHAOS_IL2CPP_UINT8>(type_info->type_shape);
     auto length = static_cast<CHAOS_IL2CPP_INTPTR>(length1) * static_cast<CHAOS_IL2CPP_INTPTR>(length2);
     // 2D arrays are stored as flat 1D arrays
-    return ChaosArrayNew1D_Inline(type_info->array_type_info, type_info, elem_type_shape, length);
+    return ChaosArrayNew1D_Inline(type_info, type_info, elem_type_shape, length);
 }
 
 CHAOS_IL2CPP_INT32 ChaosArrayBinarySearch(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR value) noexcept
@@ -151,10 +151,21 @@ CHAOS_IL2CPP_INTPTR ChaosArrayNew1D(const TypeInfo* array_type_info, const TypeI
 
 CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytes(CHAOS_IL2CPP_INTPTR unused, CHAOS_IL2CPP_INT32 value) noexcept
 {
-    auto* result = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(4));
-    if (result == nullptr) return 0;
-    std::memcpy(result, &value, 4);
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result);
+    // Allocate full ManagedArrayAccessor header + 4 bytes of element data.
+    // BitConverter.GetBytes returns a byte[] that later callers (ToInt32, ToDouble
+    // etc.) access via get_managed_array/accessor_get_elements, which expect a
+    // complete ManagedArrayAccessor structure (32 bytes header + elements).
+    // GcAllocateAtomic(4) alone would cause out-of-bounds reads in callers.
+    auto* ptr = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(sizeof(ManagedArrayAccessor) + sizeof(int32_t)));
+    if (ptr == nullptr) return 0;
+    auto* arr = reinterpret_cast<ManagedArrayAccessor*>(ptr);
+    arr->header_data[0] = 0;
+    arr->element_type_shape = 0;
+    arr->element_type_info = nullptr;
+    arr->length = 1;
+    auto* elements = accessor_get_elements(arr);
+    std::memcpy(elements, &value, sizeof(value));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
 
 CHAOS_IL2CPP_INT32 ChaosBitConverterToInt32(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept
