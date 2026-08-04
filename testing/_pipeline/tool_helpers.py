@@ -69,7 +69,8 @@ def ensure_sdk(repo_root: Path | None = None) -> Path:
     lib_ext = ".a" if is_linux else ".lib"
 
     sdk_dir = repo_root / "testing" / "foundation-dll" / "sdk" / sdk_subdir
-    sdk_lib = sdk_dir / "lib" / f"libchaos_runtime_core{lib_ext}"
+    lib_name = f"libchaos_runtime_core{lib_ext}" if is_linux else f"chaos_runtime_core{lib_ext}"
+    sdk_lib = sdk_dir / "lib" / lib_name
     if sdk_lib.exists():
         return sdk_dir
 
