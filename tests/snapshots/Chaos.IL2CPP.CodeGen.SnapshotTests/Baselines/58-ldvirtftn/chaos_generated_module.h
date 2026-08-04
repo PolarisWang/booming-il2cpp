@@ -30,6 +30,11 @@
 // Forward declaration of ChaosRuntimeHost (defined in chaos_runtime_host.h).
 class ChaosRuntimeHost;
 
+// chaos_valuetype_* typedefs (opaque 32-bit managed value types)
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_LdVirtftnHelper;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Void;
+
 
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -54,7 +59,7 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } snapshotTestFixtures_MyClass;
-    int32_t method_count;
+    CHAOS_IL2CPP_INT32 method_count;
 };
 
 extern const Functions kFunctions;
@@ -79,7 +84,7 @@ struct SnapshotTestFixtures_LdVirtftnHelper {
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 1;
 };
 
 struct SnapshotTestFixtures_MyClass {
@@ -100,7 +105,7 @@ struct SnapshotTestFixtures_MyClass {
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 2;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 2;
 };
 
 

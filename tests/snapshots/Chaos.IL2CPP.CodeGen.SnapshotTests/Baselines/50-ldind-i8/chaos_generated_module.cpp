@@ -12,7 +12,7 @@
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
 extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
 extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
-extern "C" const int kAotMethodCount;
+extern "C" CHAOS_IL2CPP_INT32 kAotMethodCount;
 
 
 // extern "C" function declarations for all AOT-compiled methods

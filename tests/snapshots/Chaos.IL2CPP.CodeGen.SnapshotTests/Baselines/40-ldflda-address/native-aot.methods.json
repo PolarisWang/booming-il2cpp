@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_AddressHelper_RunAddress",
+      "subjectId": "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false
@@ -14,6 +15,7 @@
     {
       "index": 1,
       "nativeSymbol": "SnapshotTestFixtures_HasFields__ctor",
+      "subjectId": "SnapshotTestFixtures/HasFields::.ctor:System.Void()",
       "paramCount": 1,
       "params": [
         {

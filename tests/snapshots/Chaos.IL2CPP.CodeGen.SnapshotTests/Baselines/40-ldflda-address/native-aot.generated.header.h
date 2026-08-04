@@ -3,9 +3,206 @@
 
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>  // MethodTable, TypeInfoV0 (complete type)
+#include "generated_code_compat.h"  // PureTypeHeader for delegate type definitions
+#include "ChaosGeneratedRuntimePrelude.h"  // chaos_managed_array for array-compat checks
 
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_AddressHelper;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Void;
+
+struct chaos_type_SnapshotTestFixtures_HasFields
+
+{
+
+    ThinLockableHeader header{};
+
+    CHAOS_IL2CPP_INTPTR field_SnapshotTestFixtures_HasFields__instanceVal = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+    ThinLockableHeader header{};
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_Delegate : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;
+
+    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;
+
+    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;
+
+    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;
+
+    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;
+
+    CHAOS_IL2CPP_UINT32 _pad = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_MulticastDelegate : public chaos_type_System_Private_CoreLib_System_Delegate
+
+{
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
+
+{
+
+    ThinLockableHeader header{};
+
+    CHAOS_IL2CPP_INTPTR runtime_assembly_name_value = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName
+
+{
+
+    ThinLockableHeader header{};
+
+    CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_Reflection_MethodBase : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo : public chaos_type_System_Private_CoreLib_System_Reflection_MethodBase
+
+{
+
+    CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
+
+    CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
+
+    CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
+
+    CHAOS_IL2CPP_INTPTR generic_argument_type_handle = 0;
+
+    CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
+
+    CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo
+
+{
+
+    ThinLockableHeader header{};
+
+    CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
+
+    CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
+
+    CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo : public chaos_type_System_Private_CoreLib_System_Reflection_MethodBase
+
+{
+
+    CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
+
+    CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
+
+    CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
+
+    CHAOS_IL2CPP_INTPTR generic_argument_type_handle = 0;
+
+    CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
+
+    CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_String
+
+{
+
+    ThinLockableHeader header{};
+
+    CHAOS_IL2CPP_INTPTR length = 0;
+
+    const char* utf8_data = nullptr;
+
+    CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+    CHAOS_IL2CPP_INTPTR runtime_type_handle = 0;
+
+    CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
+
+    CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
+
+};
+
+
+
+
+struct chaos_type_SnapshotTestFixtures_AddressHelper;
+struct chaos_boxed_type_SnapshotTestFixtures_AddressHelper;
 struct chaos_type_SnapshotTestFixtures_HasFields;
 struct chaos_boxed_type_SnapshotTestFixtures_HasFields;
+struct chaos_type_SnapshotTestFixtures_HasFields__instanceVal;
+struct chaos_boxed_type_SnapshotTestFixtures_HasFields__instanceVal;
+struct chaos_type_SnapshotTestFixtures_HasFields__staticVal;
+struct chaos_boxed_type_SnapshotTestFixtures_HasFields__staticVal;
+struct chaos_type_System_Int32;
+struct chaos_boxed_type_System_Int32;
+struct chaos_type_System_Private_CoreLib_System_Action {
+    PureTypeHeader header{};
+    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;
+    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;
+    CHAOS_IL2CPP_UINT32 _pad = 0;
+};
+struct chaos_boxed_type_System_Private_CoreLib_System_Action;
+struct chaos_type_System_Private_CoreLib_System_Delegate;
+struct chaos_boxed_type_System_Private_CoreLib_System_Delegate;
+struct chaos_type_System_Private_CoreLib_System_MulticastDelegate;
+struct chaos_boxed_type_System_Private_CoreLib_System_MulticastDelegate;
 struct chaos_type_System_Private_CoreLib_System_Object;
 struct chaos_boxed_type_System_Private_CoreLib_System_Object;
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly;
@@ -24,8 +221,22 @@ struct chaos_type_System_Private_CoreLib_System_String;
 struct chaos_boxed_type_System_Private_CoreLib_System_String;
 struct chaos_type_System_Private_CoreLib_System_Type;
 struct chaos_boxed_type_System_Private_CoreLib_System_Type;
+struct chaos_type_System_Void;
+struct chaos_boxed_type_System_Void;
 
+struct HotpatchEntryV0;
+extern "C" HotpatchEntryV0 s_hotpatch_entries[];
+
+namespace chaos::il2cpp::codegen::SnapshotTestFixtures
+{
+extern MethodTable chaos_mt_SnapshotTestFixtures_AddressHelper;
 extern MethodTable chaos_mt_SnapshotTestFixtures_HasFields;
+extern MethodTable chaos_mt_SnapshotTestFixtures_HasFields__instanceVal;
+extern MethodTable chaos_mt_SnapshotTestFixtures_HasFields__staticVal;
+extern MethodTable chaos_mt_System_Int32;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Action;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Delegate;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_MulticastDelegate;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Object;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName;
@@ -35,24 +246,53 @@ extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_String;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Type;
+extern MethodTable chaos_mt_System_Void;
 
-extern const uint64_t chaos_type_id_SnapshotTestFixtures_HasFields;
-extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Object;
-extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly;
-extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName;
-extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo;
-extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo;
-extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Reflection_MethodBase;
-extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo;
-extern const uint64_t chaos_type_id_System_Private_CoreLib_System_String;
-extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Type;
+extern const void* chaos_vtable_SnapshotTestFixtures_HasFields[];
 
-struct HotpatchEntryV0;
-extern "C" HotpatchEntryV0 s_hotpatch_entries[];
-
-extern "C" void* kChaosExternalRuntimeFnTable[];
-
+extern CHAOS_IL2CPP_INTPTR chaos_static_SnapshotTestFixtures_HasFields;
+extern CHAOS_IL2CPP_INTPTR chaos_static_SnapshotTestFixtures_HasFields__instanceVal;
 extern CHAOS_IL2CPP_INTPTR chaos_static_SnapshotTestFixtures_HasFields__staticVal;
+
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_AddressHelper;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_HasFields;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_HasFields__instanceVal;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_HasFields__staticVal;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Int32;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Action;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Delegate;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_MulticastDelegate;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Object;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_MethodBase;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_String;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Type;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Void;
+
+extern "C" void chaos_ensure_type_initialized_SnapshotTestFixtures_AddressHelper(void);
+extern "C" void chaos_ensure_type_initialized_System_Int32(void);
+extern "C" void chaos_ensure_type_initialized_SnapshotTestFixtures_HasFields(void);
+extern "C" void chaos_ensure_type_initialized_System_Void(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_String(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Action(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_MulticastDelegate(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Delegate(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Object(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Type(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_MethodBase(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_MethodInfo(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_ConstructorInfo(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_FieldInfo(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_Assembly(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_AssemblyName(void);
+extern "C" void chaos_ensure_type_initialized_SnapshotTestFixtures_HasFields__staticVal(void);
+extern "C" void chaos_ensure_type_initialized_SnapshotTestFixtures_HasFields__instanceVal(void);
+
+CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;
 
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept;
 
@@ -61,4 +301,28 @@ void chaos_default_interpolated_string_handler_append_string(CHAOS_IL2CPP_INTPTR
 void chaos_default_interpolated_string_handler_append_int32(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INT32 chaos_value);
 CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_to_string_and_clear(CHAOS_IL2CPP_INTPTR chaos_handler_ref);
 
+} // namespace chaos::il2cpp::codegen::SnapshotTestFixtures
+
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
+namespace chaos::il2cpp::codegen::SnapshotTestFixtures
+{
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_HasFields__instanceVal() noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_HasFields__staticVal() noexcept;
+
+} // namespace chaos::il2cpp::codegen::SnapshotTestFixtures
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_HasFields__instanceVal() noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_HasFields__staticVal() noexcept;
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_HasFields___ctor_System_Void__(CHAOS_IL2CPP_INTPTR) noexcept;
+
 void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);
+
+
+// chaos_valuetype_* typedefs (safety net: TPG stub declarations)
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_AddressHelper;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Void;
+

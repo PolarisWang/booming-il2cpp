@@ -30,6 +30,11 @@
 // Forward declaration of ChaosRuntimeHost (defined in chaos_runtime_host.h).
 class ChaosRuntimeHost;
 
+// chaos_valuetype_* typedefs (opaque 32-bit managed value types)
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_LdindStindGapsHelper;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_SimpleGapsHelper;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
+
 
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -45,7 +50,7 @@ struct Functions {
                 void
         );
     } snapshotTestFixtures_SimpleGapsHelper;
-    int32_t method_count;
+    CHAOS_IL2CPP_INT32 method_count;
 };
 
 extern const Functions kFunctions;
@@ -70,7 +75,7 @@ struct SnapshotTestFixtures_SimpleGapsHelper {
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 1;
 };
 
 

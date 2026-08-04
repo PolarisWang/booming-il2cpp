@@ -52,7 +52,7 @@ public sealed class NegationTests : SnapshotTestBase
         var testProjectDir = Path.Combine(
             repoRoot, "tests", "snapshots", "Chaos.IL2CPP.CodeGen.SnapshotTests");
         var baselineFile = Path.Combine(
-            testProjectDir, "Baselines", "01-simple-add", "generated", "native-aot.generated.cpp");
+            testProjectDir, "Baselines", "01-simple-add", "native-aot.generated.cpp");
 
         Assert.True(File.Exists(baselineFile),
             "Baseline file must exist for negation test");
@@ -77,7 +77,7 @@ public sealed class NegationTests : SnapshotTestBase
                     AssertSnapshotMatches("01-simple-add"));
 
                 Assert.Equal("01-simple-add", ex.FixtureName);
-                Assert.Equal("generated/native-aot.generated.cpp", ex.SourceRelativePath);
+                Assert.Equal("native-aot.generated.cpp", ex.SourceRelativePath);
             }
             finally
             {

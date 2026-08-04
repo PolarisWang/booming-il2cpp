@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_Helper_Nop",
+      "subjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
       "paramCount": 0,
       "params": [],
       "isInstance": false
@@ -14,6 +15,7 @@
     {
       "index": 1,
       "nativeSymbol": "SnapshotTestFixtures_VoidCaller_DoNothing",
+      "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false

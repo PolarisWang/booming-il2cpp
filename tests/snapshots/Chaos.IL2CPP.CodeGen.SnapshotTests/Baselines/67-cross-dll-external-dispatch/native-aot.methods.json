@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_ExternalCaller_CallExternal",
+      "subjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false
