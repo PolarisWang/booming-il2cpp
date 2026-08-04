@@ -28,7 +28,7 @@
 |------|------|
 | [`13-MemoryDomain系统.md`](./13-MemoryDomain%E7%B3%BB%E7%BB%9F.md) | 内存域分配隔离、3 种堆策略、TLS 域栈 |
 | [`14-VTable注册表.md`](./14-VTable%E6%B3%A8%E5%86%8C%E8%A1%A8.md) | B2+ 虚方法分派架构：Per-Object VTable + 继承链 slot 自动编号 + iface_map 接口分派 |
-| [`15-泛型上下文运行时.md`](./15-%E6%B3%9B%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8C%BA%E8%BF%90%E8%A1%8C%E6%97%B6.md) | Handle-based API、ModuleGenericRegistrationV0 注册束、token→handle 解析注册、by_module hotupdate 清理、RuntimeInstantiationBridgeV0 |
+| [`15-泛型上下文运行时.md`](./15-%E6%B3%9B%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E8%BF%90%E8%A1%8C%E6%97%B6.md) | Handle-based API、ModuleGenericRegistrationV0 注册束、token→handle 解析注册、by_module hotupdate 清理、RuntimeInstantiationBridgeV0 |
 | [`16-字符串表运行时.md`](./16-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A1%A8%E8%BF%90%E8%A1%8C%E6%97%B6.md) | 运行时字符串解析、AOT 二分查找、动态注册 |
 | [`17-反射查询模型.md`](./17-%E5%8F%8D%E5%B0%84%E6%9F%A5%E8%AF%A2%E6%A8%A1%E5%9E%8B.md) | 不可变反射描述符、指针标记句柄、AOT const 数据 |
 | [`18-热更新架构.md`](./18-%E7%83%AD%E6%9B%B4%E6%96%B0%E6%9E%B6%E6%9E%84.md) | 包加载/卸载、方法替换表、MemoryDomain 关联 |
