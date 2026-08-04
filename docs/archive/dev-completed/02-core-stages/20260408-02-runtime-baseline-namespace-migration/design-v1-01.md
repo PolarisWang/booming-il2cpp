@@ -57,7 +57,7 @@
 ## 4. 非目标
 
 - 不重写 `docs/dev/completed/**`、`docs/dev/abandoned/**` 等历史归档正文
-- 不清理 `docs/discuss/**` 下历史 `roadmap-0` 讨论
+- 不清理 `docs/archive/discuss/**` 下历史 `roadmap-0` 讨论
 - 不改变现有 gate suite 名称，如 `gate/windows-reference-desktop`
 
 ## 5. 风险与控制

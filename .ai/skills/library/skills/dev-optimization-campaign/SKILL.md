@@ -27,7 +27,7 @@ Step  4: Fix & Rerun   → 修复 + 重跑（--native-config check），最多 3
 Step  5: Perf Check    → 从已有报告验证 benchmark timing > 0（不重跑 pipeline）
 Step  6: .NET 8 对比    → 跑 pipeline（--native-config profile），vs .NET 8 ≤ 20%？不满足 → 诊断 + 优化 + 重跑，最多 3 次
 Step  7: HotUpdate Check → 跑 pipeline（--native-config profile），semantic_changed > 0？overhead ≤ 100%？不满足 → 修复 + 重跑，最多 3 次
-Step  8: 文档           → 写 docs/optimize/YYYY-MM-DD-<slug>/README.md
+Step  8: 文档           → 写 docs/archive/optimize/YYYY-MM-DD-<slug>/README.md
 Step  9: Commit         → git add + git commit（含性能表）
 Step 10: Push           → git push origin claim/<slug>/<worker-id>
 Step 11: Merge → Cleanup → checkout main → merge → push → del worktree branch
@@ -68,10 +68,10 @@ git push origin claim/<slug>/<worker-id>
 ### Claim family
 
 ```bash
-mkdir -p docs/optimize/.claims
-echo "claimed-by: <worker-id>" > docs/optimize/.claims/<slug>.claim
-echo "claimed-at: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> docs/optimize/.claims/<slug>.claim
-git add docs/optimize/.claims/<slug>.claim
+mkdir -p docs/archive/optimize/.claims
+echo "claimed-by: <worker-id>" > docs/archive/optimize/.claims/<slug>.claim
+echo "claimed-at: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> docs/archive/optimize/.claims/<slug>.claim
+git add docs/archive/optimize/.claims/<slug>.claim
 git commit -m "claim: <slug> by <worker-id>"
 git push origin claim/<slug>/<worker-id>
 ```
@@ -247,7 +247,7 @@ bash testing/scripts/check-hotupdate.sh <slug>
 
 ## Step 8: 文档
 
-创建 `docs/optimize/YYYY-MM-DD-<slug>/README.md`：
+创建 `docs/archive/optimize/YYYY-MM-DD-<slug>/README.md`：
 
 ```markdown
 # 优化：<slug>
@@ -289,7 +289,7 @@ bash testing/scripts/check-hotupdate.sh <slug>
 ## Step 9: Commit
 
 ```bash
-git add docs/optimize/YYYY-MM-DD-<slug>/
+git add docs/archive/optimize/YYYY-MM-DD-<slug>/
 git add <codegen/runtime changes>
 git commit -m "$(cat <<'EOF'
 perf: optimize <slug>
@@ -337,7 +337,7 @@ git merge claim/<slug>/<worker-id> --no-edit
 #   - build/工具链文件 + docs/ + 测试数据 JSON → 保留 main 版本
 #   - testing/foundation-dll/ 下的合约、entry 文件 → 取 main 版本（claim 分支的属于临时生成）
 #   - src/native/ 下的 runtime/codegen 变更 → 取 claim 分支版本
-#   - docs/optimize/ 下的优化文档 → 取 claim 分支版本
+#   - docs/archive/optimize/ 下的优化文档 → 取 claim 分支版本
 #   - 其他文件按具体 diff 逐条确认
 # 解决方法：git checkout --ours/--theirs <path> + git add
 
@@ -403,7 +403,7 @@ optimization-campaign/
         ├── blocker.md          # 仅 abort 时产生（不提交）
         └── diagnosis.json      # Step 3 诊断输出（不提交）
 
-docs/optimize/
+docs/archive/optimize/
 ├── INDEX.md                    # 项目索引（提交）
 └── YYYY-MM-DD-<slug>/
     └── README.md               # 分析文档（提交）
@@ -439,5 +439,5 @@ docs/optimize/
 3. ✅ Step 5: 所有 benchmark timing > 0
 4. ✅ Step 6: vs .NET 8 ≤ 20%（AOT + JIT，或 blocker.md 已记录）
 5. ✅ Step 7: hotupdate semantic_changed > 0 + overhead ≤ 100%（或 blocker.md 已记录）
-6. ✅ Step 8-9: docs/optimize/ 完整 + git commit
+6. ✅ Step 8-9: docs/archive/optimize/ 完整 + git commit
 7. ✅ Step 10-12: main 已合并 + CI 已通过 + worktree 已删除 + main 已 pull

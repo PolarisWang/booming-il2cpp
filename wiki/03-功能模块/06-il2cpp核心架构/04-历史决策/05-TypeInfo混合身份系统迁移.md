@@ -1,6 +1,6 @@
 # Hybrid TypeInfo\* 类型身份系统迁移
 
-**来源**: `docs/discuss/il2cpp-mainline/20260504-typeinfo-migration`
+**来源**: `docs/archive/discuss/il2cpp-mainline/20260504-typeinfo-migration`
 
 ## 背景
 

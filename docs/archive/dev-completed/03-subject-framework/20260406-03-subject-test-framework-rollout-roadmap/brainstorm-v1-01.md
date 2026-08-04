@@ -5,7 +5,7 @@ Status: design-approved-pending-roadmap
 
 ## 1. 目标
 
-这次 brainstorm 不是重新讨论测试框架“该不该重构”，而是把已经散落在 `docs/discuss/` 下的设计结论，收成一条可以真正进入实施前评审的路线：
+这次 brainstorm 不是重新讨论测试框架“该不该重构”，而是把已经散落在 `docs/archive/discuss/` 下的设计结论，收成一条可以真正进入实施前评审的路线：
 
 - 明确推荐的实施路径
 - 明确哪些阶段可以先落
@@ -14,17 +14,17 @@ Status: design-approved-pending-roadmap
 
 ## 2. 本轮输入
 
-本轮以 `docs/discuss/` 现有结论为输入，尤其以以下文档为锚点：
+本轮以 `docs/archive/discuss/` 现有结论为输入，尤其以以下文档为锚点：
 
-- `docs/discuss/test-framework/20260406-03-test-framework-reboot-design-v1-02.md`
-- `docs/discuss/helloworldobject-windows/20260406-05-helloworldobject-windows-matrix-design-v1-01.md`
-- `docs/discuss/helloworldobject-windows/20260406-06-helloworldobject-windows-stage-worker-design-v1-01.md`
-- `docs/discuss/subject-framework/20260406-08-first-implementation-cutover-order-v1-01.md`
-- `docs/discuss/subject-framework/20260406-15-subject-manifest-schema-draft-v1-01.md`
-- `docs/discuss/subject-framework/20260406-17-planner-output-design-v1-01.md`
-- `docs/discuss/subject-framework/20260406-18-executor-stage-io-boundary-design-v1-01.md`
-- `docs/discuss/reporting/20260406-20-reporting-schema-design-v1-01.md`
-- `docs/discuss/reporting/20260406-21-event-schema-alignment-design-v1-01.md`
+- `docs/archive/discuss/test-framework/20260406-03-test-framework-reboot-design-v1-02.md`
+- `docs/archive/discuss/helloworldobject-windows/20260406-05-helloworldobject-windows-matrix-design-v1-01.md`
+- `docs/archive/discuss/helloworldobject-windows/20260406-06-helloworldobject-windows-stage-worker-design-v1-01.md`
+- `docs/archive/discuss/subject-framework/20260406-08-first-implementation-cutover-order-v1-01.md`
+- `docs/archive/discuss/subject-framework/20260406-15-subject-manifest-schema-draft-v1-01.md`
+- `docs/archive/discuss/subject-framework/20260406-17-planner-output-design-v1-01.md`
+- `docs/archive/discuss/subject-framework/20260406-18-executor-stage-io-boundary-design-v1-01.md`
+- `docs/archive/discuss/reporting/20260406-20-reporting-schema-design-v1-01.md`
+- `docs/archive/discuss/reporting/20260406-21-event-schema-alignment-design-v1-01.md`
 
 这些文档已经把对象模型基本定出来了：
 

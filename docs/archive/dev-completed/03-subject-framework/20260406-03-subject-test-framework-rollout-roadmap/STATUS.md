@@ -29,7 +29,7 @@ active: false
 ## 最近摘要
 
 - 2026-04-06 15:10:00 +08:00: 用户明确要求“并行执行，不影响当前 active 任务”，因此本任务以 `active: false` 的并行设计任务形式创建，不修改 `docs/dev/ACTIVE.md`。
-- 2026-04-06 15:10:00 +08:00: 本任务只读 `docs/discuss/` 既有设计结论，不再向 `docs/discuss/` 追加同步文档；正式输出集中在本任务目录。
+- 2026-04-06 15:10:00 +08:00: 本任务只读 `docs/archive/discuss/` 既有设计结论，不再向 `docs/archive/discuss/` 追加同步文档；正式输出集中在本任务目录。
 - 2026-04-06 15:25:00 +08:00: 基于用户已确认的边界，派生 child plan `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover`，只覆盖 `Stage A + Stage B + Stage C`。
 - 2026-04-06 15:40:00 +08:00: 父 roadmap 改为跟踪“首份 child plan 已创建”的状态，并把后续 `Stage D + Stage E` 合并计划与 `Stage F` 单独计划标记为 roadmap 中的置后计划位。
 - 2026-04-06 15:47:00 +08:00: 用户补充后续清理测试工程时，除 `HelloWorldObject` 外还要保留 `echo`；文档统一按仓库现有命名写为 `GenericEcho`，并作为后续清理阶段的保留白名单。

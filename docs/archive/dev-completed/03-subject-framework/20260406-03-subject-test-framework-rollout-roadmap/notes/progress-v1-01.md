@@ -4,7 +4,7 @@ Date: 2026-04-06 15:10:00 +08:00
 
 ## 本次完成
 
-- 基于 `docs/discuss/` 现有设计结论，创建并行任务 `20260406-03-subject-test-framework-rollout-roadmap`
+- 基于 `docs/archive/discuss/` 现有设计结论，创建并行任务 `20260406-03-subject-test-framework-rollout-roadmap`
 - 明确本任务不影响当前 `docs/dev/ACTIVE.md`
 - 写入：
   - `brainstorm-v1-01.md`

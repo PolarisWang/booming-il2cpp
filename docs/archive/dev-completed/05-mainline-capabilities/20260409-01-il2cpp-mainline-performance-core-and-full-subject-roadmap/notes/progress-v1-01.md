@@ -4,7 +4,7 @@ Date: 2026-04-09 00:05:09 +08:00
 
 ## 本轮完成
 
-- 阅读 `docs/discuss/il2cpp-mainline/INDEX.md` 及关键讨论文档，确认 `2026-04-08` 最新 governing rule 已切到 generated native performance-first。
+- 阅读 `docs/archive/discuss/il2cpp-mainline/INDEX.md` 及关键讨论文档，确认 `2026-04-08` 最新 governing rule 已切到 generated native performance-first。
 - 检查 `SemanticWorldStage`、`LinkerStage`、`CodeGenStage`、`NativeReferenceProofEmitter`，确认当前实现仍明显 sample-driven。
 - 检查现有 subjects 与 manifest，确认仓库缺少同时承接 native output、trace、perf 的完整 subject。
 - 新建父级 roadmap 任务 `20260409-01-il2cpp-mainline-performance-core-and-full-subject-roadmap`。

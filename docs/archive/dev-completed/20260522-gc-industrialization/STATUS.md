@@ -22,7 +22,7 @@ clearance_confirmed_by_user: true
 
 ## 设计摘要
 
-来源：`docs/discuss/20260522-crag-gc-industrialization-assessment.md`
+来源：`docs/archive/discuss/20260522-crag-gc-industrialization-assessment.md`
 修正：2026-05-22 实际代码审计发现原评估报告 30 项中仅 **14 项为真实差距**
 
 ### 审计修正
@@ -48,7 +48,7 @@ clearance_confirmed_by_user: true
 
 ## 关键文档
 - roadmap: `roadmap-v1-01.md`
-- 原始评估报告: `docs/discuss/20260522-crag-gc-industrialization-assessment.md`
+- 原始评估报告: `docs/archive/discuss/20260522-crag-gc-industrialization-assessment.md`
 - 审计记录: `docs/dev/completed/11-gc-industrialization/gc-p1-01-page-decommission/STATUS.md`
 
 ## 最近摘要

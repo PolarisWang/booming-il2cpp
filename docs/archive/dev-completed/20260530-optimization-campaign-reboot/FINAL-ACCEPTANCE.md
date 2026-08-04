@@ -79,7 +79,7 @@ Top 5 高相似度 families:
 
 ### 7. 优化文档完整性 (PASS)
 
-`docs/optimize/2026-06-01-enum-parsing/README.md` 存在，118 行，5763 字节，包含:
+`docs/archive/optimize/2026-06-01-enum-parsing/README.md` 存在，118 行，5763 字节，包含:
 - 优化对象与分支信息
 - 问题根因分析（P0: Per-enum codegen switch、P1: 冗余 call 消除等）
 - 优化方案与对比代码

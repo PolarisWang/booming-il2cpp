@@ -5,7 +5,7 @@ Status: active-parallel-roadmap
 
 ## 1. 目标
 
-把 `docs/discuss/` 中已经冻结的大量测试框架设计，转成一条可执行、可拆分、可进入后续 `plan` 的实施路线。
+把 `docs/archive/discuss/` 中已经冻结的大量测试框架设计，转成一条可执行、可拆分、可进入后续 `plan` 的实施路线。
 
 本 roadmap 的目标不是直接写实现 chunk，而是：
 

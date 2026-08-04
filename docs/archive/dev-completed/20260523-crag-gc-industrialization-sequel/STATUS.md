@@ -85,9 +85,9 @@ Phase E — 性能优化与高级功能（6-10 周，内部串行）
 
 ### 关键文档
 
-- 分析报告: `docs/discuss/crag-vs-coreclr-gc-comprehensive-assessment.md`
-- 工业化完成度综合评估: `docs/discuss/20260522-crag-gc-industrialization-assessment.md`
-- 风险评估报告: `docs/discuss/20260518-gc-risk-assessment-report.md`
+- 分析报告: `docs/archive/discuss/crag-vs-coreclr-gc-comprehensive-assessment.md`
+- 工业化完成度综合评估: `docs/archive/discuss/20260522-crag-gc-industrialization-assessment.md`
+- 风险评估报告: `docs/archive/discuss/20260518-gc-risk-assessment-report.md`
 
 ### 下一步入口
 

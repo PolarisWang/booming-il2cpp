@@ -1,6 +1,6 @@
 # CodeGen 输入合约与 Lowering 选择决策
 
-**来源**: `docs/discuss/il2cpp-mainline/20260408-07-*` ~ `20260408-09-*`
+**来源**: `docs/archive/discuss/il2cpp-mainline/20260408-07-*` ~ `20260408-09-*`
 
 ## CodeGen 输入消费合约（20260408-07）
 

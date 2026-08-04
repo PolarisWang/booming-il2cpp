@@ -23,7 +23,7 @@
 - BGC 线程同步从 sleep_for 改为 condition_variable 要注意虚假唤醒处理
 - thread_state.cpp 的栈扫描逻辑需要增加精确根优先的逻辑
 
-**设计文档：** `docs/discuss/20260516-memory-gc-comprehensive-evaluation.md`
+**设计文档：** `docs/archive/discuss/20260516-memory-gc-comprehensive-evaluation.md`
 
 **问题清零来源：** direct user confirmation
 

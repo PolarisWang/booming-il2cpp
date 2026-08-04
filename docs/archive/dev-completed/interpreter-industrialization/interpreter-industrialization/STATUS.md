@@ -143,4 +143,4 @@ EventPipe 核心层已完成：
 
 - `roadmap-v1-01.md` — 阶段路线图
 - `wiki/03-功能模块/06-il2cpp核心架构/21-interpreter-optimizations.md` — 现有优化
-- `docs/reports/infrastructure-comparison-vs-coreclr-unity-mono.md` — 成熟度评估
+- `docs/archive/reports/infrastructure-comparison-vs-coreclr-unity-mono.md` — 成熟度评估

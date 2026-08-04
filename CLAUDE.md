@@ -57,7 +57,7 @@ P1（性能最优）> P2（方案完美性）> P3（HotUpdate 支持）。低优
 ## 知识记录
 
 - 新翻译路径 → `wiki/03-功能模块/il2cpp-核心架构/il2cpp-核心翻译路径参考.md`
-- 设计讨论 → `docs/discuss/`
+- 设计讨论 → `docs/archive/discuss/`
 - 每个功能的 STATUS.md 必须含 `## 架构映射` 小节
 
 ## 技能调用

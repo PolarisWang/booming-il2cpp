@@ -37,7 +37,7 @@ description: 开发 il2cpp 功能前必须先查询架构路径，避免方案�
 4. 如果目标 IL 特性在表中不存在：
    - 标记为"新路径"
    - 读取 `wiki/03-功能模块/il2cpp-核心架构/il2cpp-架构约束与边界.md`，确认不会违反已知约束
-   - 在 `docs/discuss/` 创建设计讨论文档，记录翻译方案
+   - 在 `docs/archive/discuss/` 创建设计讨论文档，记录翻译方案
    - 等待设计讨论达成一致后再进入步骤 2
 
 ### 步骤 2：路径匹配与实现
@@ -57,7 +57,7 @@ description: 开发 il2cpp 功能前必须先查询架构路径，避免方案�
 2. **constraints** — 是否违反了 `il2cpp-架构约束与边界.md` 中任何已知约束？
 3. **patterns** — 是否引入了架构约束中禁止的模式（如 `IsNullOrWhiteSpace` 用于 SubjectId、`ContainsValue` O(n) 扫描等）？
 4. **new_constraints** — 是否产生了新的约束或边界？如有：
-   - 记录到 `docs/discuss/` 对应的设计讨论（或新建讨论文档）
+   - 记录到 `docs/archive/discuss/` 对应的设计讨论（或新建讨论文档）
    - 安排后续更新 `il2cpp-架构约束与边界.md` 和 `il2cpp-核心翻译路径参考.md`
 5. **snapshot_tests** — 如果修改了 emitter / planner / RuntimeSupport 输出逻辑，必须运行快照测试确认基线变更符合预期；新增 IL 模式时同时补对应夹具与基线
 
@@ -92,7 +92,7 @@ description: 开发 il2cpp 功能前必须先查询架构路径，避免方案�
 - consistency_check: [ok / issues:...]
 - snapshot_tests: [passed / baseline_updated / n/a]
 - wiki_entry: [ok / updated:<path> / needs-update:<path>]
-- design_discussion: [链接到 docs/discuss/ 的讨论文档 / n/a]
+- design_discussion: [链接到 docs/archive/discuss/ 的讨论文档 / n/a]
 ```
 
 ## 检查清单速查
@@ -100,7 +100,7 @@ description: 开发 il2cpp 功能前必须先查询架构路径，避免方案�
 步骤 1 完成后确认以下问题：
 
 - [ ] 目标 IL 特性是否在翻译路径参考表中？
-- [ ] 如果否，是否已在 docs/discuss/ 创建设计讨论？
+- [ ] 如果否，是否已在 docs/archive/discuss/ 创建设计讨论？
 - [ ] 是否读取了架构约束与边界文档？
 - [ ] 是否已知所有相关的 Planning / Emission 文件？
 

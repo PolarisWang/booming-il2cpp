@@ -56,7 +56,7 @@ Status: plan-ready
 
 ## 4.1 Reporting 閲囩敤 `B2`
 
-鐩存帴閲囩敤 `docs/discuss/reporting/20260406-20-reporting-schema-design-v1-01.md` 鐨勭粨璁猴細
+鐩存帴閲囩敤 `docs/archive/discuss/reporting/20260406-20-reporting-schema-design-v1-01.md` 鐨勭粨璁猴細
 
 - `matrices/<matrix-id>/report.json`
   - 鏄崟涓?matrix 鐨勮瘖鏂富鍏ュ彛
@@ -69,7 +69,7 @@ Status: plan-ready
 
 ## 4.2 Events 閲囩敤鏂规 `C`
 
-鐩存帴閲囩敤 `docs/discuss/reporting/20260406-21-event-schema-alignment-design-v1-01.md` 鐨勭粨璁猴細
+鐩存帴閲囩敤 `docs/archive/discuss/reporting/20260406-21-event-schema-alignment-design-v1-01.md` 鐨勭粨璁猴細
 
 - matrix events
   - canonical detailed stream

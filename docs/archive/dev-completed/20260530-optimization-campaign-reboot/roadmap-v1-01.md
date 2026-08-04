@@ -134,7 +134,7 @@
 | T-B4 | Phase 1 | blocked | — | 修复三明治模型 | T-B1 | batch-2 | verification/stages/ | 1天 |
 | T-C1 | Phase 2 | blocked | — | enum-parsing 瓶颈深潜 | T-A3, T-B3 | batch-3 | testing/foundation-dll/System.Private.CoreLib/enum-parsing/ | 2天 |
 | T-C2 | Phase 2 | blocked | — | enum-parsing 优化 Attempt 1-3 | T-C1 | batch-4 | src/managed/Chaos.IL2CPP.Generator/, src/native/ | 5天 |
-| T-C3 | Phase 2 | blocked | — | enum-parsing 回归验证 + Doc + Merge | T-C2 | batch-5 | testing/foundation-dll/System.Private.CoreLib/enum-parsing/, docs/optimize/ | 2天 |
+| T-C3 | Phase 2 | blocked | — | enum-parsing 回归验证 + Doc + Merge | T-C2 | batch-5 | testing/foundation-dll/System.Private.CoreLib/enum-parsing/, docs/archive/optimize/ | 2天 |
 | T-D1 | Phase 3 | blocked | — | 增量 Benchmark | T-A3 | batch-3 | verification/entry_points/cli.py | 2天 |
 | T-D2 | Phase 3 | blocked | — | 自动 Regression Detection | T-D1 | batch-4 | verification/analysis/perf_regression_check.py | 2天 |
 | T-D3 | Phase 3 | blocked | — | Family 依赖图分析 | T-A3 | batch-4 | verification/analysis/dependency-graph.json | 2天 |

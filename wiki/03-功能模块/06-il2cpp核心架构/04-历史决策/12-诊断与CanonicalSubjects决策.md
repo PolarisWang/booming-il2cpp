@@ -1,6 +1,6 @@
 # 诊断、CapabilityBundle、SemanticShapes 与 CanonicalSubjects 决策
 
-**来源**: `docs/discuss/il2cpp-mainline/20260408-20-*` ~ `20260408-25-*`
+**来源**: `docs/archive/discuss/il2cpp-mainline/20260408-20-*` ~ `20260408-25-*`
 
 ## SemanticWorld 诊断合约（20260408-20）
 

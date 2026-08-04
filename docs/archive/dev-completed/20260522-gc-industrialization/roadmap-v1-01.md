@@ -1,6 +1,6 @@
 # CRAG GC 工业化补齐路线图（修正版）
 
-> 基于 `docs/discuss/20260522-crag-gc-industrialization-assessment.md` 及实际代码审计修正
+> 基于 `docs/archive/discuss/20260522-crag-gc-industrialization-assessment.md` 及实际代码审计修正
 > 目标：CRAG GC 从 5.5/10 → 9.0/10 工业化评分
 
 ---

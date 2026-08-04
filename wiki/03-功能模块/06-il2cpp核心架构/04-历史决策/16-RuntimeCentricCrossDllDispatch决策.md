@@ -1,6 +1,6 @@
 # Runtime-Centric 跨 DLL 分派 + STRING_ID 完整架构决策
 
-**来源**: `docs/discuss/il2cpp-mainline/20260504-runtime-centric-method-table`
+**来源**: `docs/archive/discuss/il2cpp-mainline/20260504-runtime-centric-method-table`
 
 ## 背景
 

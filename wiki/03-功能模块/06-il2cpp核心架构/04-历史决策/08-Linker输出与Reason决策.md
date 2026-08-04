@@ -1,6 +1,6 @@
 # Linker 输出、Reason 分类法与 EmissionOrder 决策
 
-**来源**: `docs/discuss/il2cpp-mainline/20260408-02-*` ~ `20260408-06-*`
+**来源**: `docs/archive/discuss/il2cpp-mainline/20260408-02-*` ~ `20260408-06-*`
 
 ## Linker 输出合约（20260408-02）
 

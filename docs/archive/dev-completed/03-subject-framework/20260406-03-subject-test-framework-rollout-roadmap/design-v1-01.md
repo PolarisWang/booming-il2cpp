@@ -5,7 +5,7 @@ Status: design-discuss
 
 ## 1. 璁捐鐩爣
 
-鎶?`docs/discuss/` 涓凡缁忕‘瀹氱殑娴嬭瘯妗嗘灦璁捐锛屾敹鏁涙垚涓€涓彲浠ュ疄鏂界殑钀藉湴璁捐锛?
+鎶?`docs/archive/discuss/` 涓凡缁忕‘瀹氱殑娴嬭瘯妗嗘灦璁捐锛屾敹鏁涙垚涓€涓彲浠ュ疄鏂界殑钀藉湴璁捐锛?
 
 - 浠?`subject` 涓哄敮涓€姝ｅ紡娴嬭瘯瀵硅薄
 - 浠?`goal + environment-matrix + artifact-chain` 涓烘墽琛岃涔変腑杞?
@@ -13,7 +13,7 @@ Status: design-discuss
 
 ## 2. 璁捐杈撳叆
 
-鏈璁′互 `docs/discuss/test-framework/`銆乣docs/discuss/subject-framework/`銆乣docs/discuss/reporting/` 涓?`docs/discuss/roadmap-0/` 涓嬬殑杩炵画璁ㄨ涓鸿緭鍏ワ紝涓嶅彟琛屽湪 `docs/discuss/` 鐢熸垚鏂扮殑鍚屾鍓湰銆?
+鏈璁′互 `docs/archive/discuss/test-framework/`銆乣docs/archive/discuss/subject-framework/`銆乣docs/archive/discuss/reporting/` 涓?`docs/archive/discuss/roadmap-0/` 涓嬬殑杩炵画璁ㄨ涓鸿緭鍏ワ紝涓嶅彟琛屽湪 `docs/archive/discuss/` 鐢熸垚鏂扮殑鍚屾鍓湰銆?
 鍏朵腑鏈€鍏抽敭鐨勫喕缁撶偣宸茬粡鍖呮嫭锛?
 
 - `subject / goal / environment-matrix / artifact-chain`

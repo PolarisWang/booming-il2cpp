@@ -334,7 +334,7 @@
 - [x] Step 5: benchmark timing > 0
 - [x] Step 6: vs .NET 8 ≤ 20%（AOT + JIT，或 blocker.md 记录）
 - [x] Step 7: hotupdate semantic_changed > 0 + overhead ≤ 100%（或 blocker.md 记录）
-- [x] Step 8: `docs/optimize/YYYY-MM-DD-<slug>/README.md` 完整
+- [x] Step 8: `docs/archive/optimize/YYYY-MM-DD-<slug>/README.md` 完整
 - [x] Step 9-10: Commit + Push 到 claim 分支
 - [x] Step 11: Merge 到 main + 清理 worktree
 - [x] Step 12: CI 验证通过

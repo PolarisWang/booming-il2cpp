@@ -1,6 +1,6 @@
 # 依赖策略、Emitter 边界与引擎合约决策
 
-**来源**: `docs/discuss/il2cpp-mainline/20260407-07-*` ~ `20260407-11-*`
+**来源**: `docs/archive/discuss/il2cpp-mainline/20260407-07-*` ~ `20260407-11-*`
 
 ## 依赖策略合约（20260407-07）
 

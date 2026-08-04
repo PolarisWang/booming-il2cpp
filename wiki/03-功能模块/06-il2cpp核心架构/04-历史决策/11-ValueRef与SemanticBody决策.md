@@ -1,6 +1,6 @@
 # ValueRef、LiteralRef、SpanId 与 SemanticBody 决策
 
-**来源**: `docs/discuss/il2cpp-mainline/20260408-15-*` ~ `20260408-19-*`
+**来源**: `docs/archive/discuss/il2cpp-mainline/20260408-15-*` ~ `20260408-19-*`
 
 ## ValueRef 模型（20260408-15）
 

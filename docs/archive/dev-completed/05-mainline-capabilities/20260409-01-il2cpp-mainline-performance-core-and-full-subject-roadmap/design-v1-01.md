@@ -264,7 +264,7 @@ report-assemble
 本设计采用的排序是：
 
 - 前六阶段先把 IL2CPP core performance-first 主线、完整 subject、native perf 回归和 capability 补全做稳。
-- 最后一阶段再把现有 `docs/discuss/il2cpp-mainline/20260407-10` 到 `20260407-15` 的 engine binding 讨论收口成正式 child task。
+- 最后一阶段再把现有 `docs/archive/discuss/il2cpp-mainline/20260407-10` 到 `20260407-15` 的 engine binding 讨论收口成正式 child task。
 
 这样排序的原因是：
 

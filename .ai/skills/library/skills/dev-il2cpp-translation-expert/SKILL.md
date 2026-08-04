@@ -73,7 +73,7 @@ classification: domains=[翻译] mode=knowledge-inject expert=dev-il2cpp-transla
    - ❌ 未确认架构路径一致性前修改代码
    - ❌ 新翻译路径不记录到 wiki/STATUS.md
 
-2. 如果有进行中的设计讨论在 `docs/discuss/`，先了解当前共识
+2. 如果有进行中的设计讨论在 `docs/archive/discuss/`，先了解当前共识
 
 ### Step 1：架构查询（Architecture Query）
 
@@ -92,7 +92,7 @@ classification: domains=[翻译] mode=knowledge-inject expert=dev-il2cpp-transla
 3. **新路径处理**：
    - 如果目标 IL 在表中不存在 → 标记为"新路径"
    - 读取 [`03-架构约束/01-翻译层硬性约束.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/03-架构约束/01-翻译层硬性约束.md) 确认不违反已知约束
-   - 在 `docs/discuss/` 创建设计讨论文档
+   - 在 `docs/archive/discuss/` 创建设计讨论文档
    - **等待用户确认后再进入 Step 2**
 
 4. **加载相关管线文档**（根据目标 IL 指令类型选择性加载）：
@@ -144,7 +144,7 @@ classification: domains=[翻译] mode=knowledge-inject expert=dev-il2cpp-transla
 
 ```
 □ 目标 IL 特性是否在 02-翻译路径参考/ 表中？
-□ 如果否，是否已在 docs/discuss/ 创建了设计讨论？
+□ 如果否，是否已在 docs/archive/discuss/ 创建了设计讨论？
 □ 是否加载了所有相关架构约束（03-架构约束/）？
 □ 是否确认了 Planning / Emission / RuntimeSupport 文件路径？
 □ 是否检查过 codegen_bridge.h 和 runtime_abi.h 的合约边界？

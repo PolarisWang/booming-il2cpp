@@ -15,7 +15,7 @@
 - LOH compaction 可复用 old-gen 已有 compaction 框架
 - Interpreter 内存泄漏修复注意分散的三个 call site 统一处理
 
-**设计文档：** `docs/discuss/20260516-memory-gc-comprehensive-evaluation.md`
+**设计文档：** `docs/archive/discuss/20260516-memory-gc-comprehensive-evaluation.md`
 
 **问题清零来源：** direct user confirmation
 

@@ -20,7 +20,7 @@
 
 ### Step 1: EH 模式枚举与覆盖率统计
 
-**入口**: 新建 `docs/reports/exception-coverage-audit.md`
+**入口**: 新建 `docs/archive/reports/exception-coverage-audit.md`
 
 枚举所有 EH 模式，标记当前 codegen 的覆盖状态：
 

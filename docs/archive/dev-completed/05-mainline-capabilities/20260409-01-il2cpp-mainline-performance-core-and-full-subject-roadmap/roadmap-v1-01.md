@@ -194,7 +194,7 @@ Status: active-roadmap
 - `deliverables`:
   - engine binding tail-phase design/plan
   - 首批 engine binding child task
-  - 对 `docs/discuss/il2cpp-mainline/20260407-10` 到 `20260407-15` 的收口映射
+  - 对 `docs/archive/discuss/il2cpp-mainline/20260407-10` 到 `20260407-15` 的收口映射
 - `dependencies`:
   - Phase 6
 - `open_questions`:

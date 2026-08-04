@@ -25,4 +25,4 @@ Date: 2026-04-10 00:35:24 +08:00
 ## 下一步
 
 - 回写父 roadmap 状态，把 `Phase 6` 标成完成。
-- 基于 `docs/discuss/il2cpp-mainline/20260407-10` 到 `20260407-15` 的结论，派生 `Phase 7 engine binding` child 并继续执行。
+- 基于 `docs/archive/discuss/il2cpp-mainline/20260407-10` 到 `20260407-15` 的结论，派生 `Phase 7 engine binding` child 并继续执行。
