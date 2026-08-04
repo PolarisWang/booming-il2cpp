@@ -76,7 +76,7 @@ python scripts/ci_test.py --preset managed-full
 ```
 
 A unified JSON report is written to `tests/runner/test-report.json` (add
-`--junit out.xml` for CI). See [docs/tests/architecture.md](docs/tests/architecture.md)
+`--junit out.xml` for CI). See [docs/dev/tests/architecture.md](docs/dev/tests/architecture.md)
 for the pyramid, the no-skip rule, and how to add tests.
 
 ## Build Configurations
