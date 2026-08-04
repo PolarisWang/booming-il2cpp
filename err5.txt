@@ -1,2 +1,0 @@
-Before method discovery
-Methods: 5016

@@ -546,3 +546,21 @@ testing/foundation-dll/nightly-build-report/
 
 # Stale pipeline artifacts (regenerated on each run)
 testing/foundation-dll/inject_getui.py
+
+# ── Root-level one-off debug/test artifacts (never source) ──
+_crypto_fact.json
+enum_parsing_output.txt
+err[0-9].txt
+immutable_analysis.md
+linq-test.json
+min_err.txt
+min_out.txt
+out[0-9].txt
+perf.data
+bash.exe.stackdump
+runner_stderr*.txt
+runner_stdout*.txt
+tmp_dump_output.txt
+tmp_fact.json
+tmp_fix*.js
+_tmp_*.py
