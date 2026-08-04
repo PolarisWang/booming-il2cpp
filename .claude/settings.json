@@ -11,7 +11,7 @@
         "matcher": "Bash|Edit|Write|Skill|Workflow",
         "hooks": [
           {
-            "command": "python \"$(git rev-parse --show-toplevel)/.ai/skills/hooks/check_classification.py\"",
+            "command": "python D:/agent/chaos-il2cpp/.ai/skills/hooks/check_classification.py",
             "statusMessage": "Checking classification...",
             "timeout": 2,
             "type": "command"
@@ -24,7 +24,7 @@
         "matcher": "Edit|Write|Bash|Glob|Grep|Read|Skill",
         "hooks": [
           {
-            "command": "python \"$(git rev-parse --show-toplevel)/.ai/skills/hooks/hook_track_all.py\"",
+            "command": "python D:/agent/chaos-il2cpp/.ai/skills/hooks/hook_track_all.py",
             "statusMessage": "Tracking tool outcome + skill usage...",
             "timeout": 3,
             "type": "command"
@@ -37,13 +37,13 @@
         "matcher": "manual|auto",
         "hooks": [
           {
-            "command": "python \"$(git rev-parse --show-toplevel)/.ai/skills/hooks/hook_evaluate_session.py\"",
+            "command": "python D:/agent/chaos-il2cpp/.ai/skills/hooks/hook_evaluate_session.py",
             "statusMessage": "Evaluating session quality + evolution...",
             "timeout": 5,
             "type": "command"
           },
           {
-            "command": "python \"$(git rev-parse --show-toplevel)/.ai/skills/hooks/hook_track_session_outcomes.py\"",
+            "command": "python D:/agent/chaos-il2cpp/.ai/skills/hooks/hook_track_session_outcomes.py",
             "statusMessage": "Recording session outcome...",
             "timeout": 3,
             "type": "command"
