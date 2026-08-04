@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Scriban" Version="5.12.1" />
+    <PackageReference Include="Scriban" Version="7.2.6" />
     <PackageReference Include="System.Reflection.MetadataLoadContext" Version="8.0.0" />
   </ItemGroup>
 

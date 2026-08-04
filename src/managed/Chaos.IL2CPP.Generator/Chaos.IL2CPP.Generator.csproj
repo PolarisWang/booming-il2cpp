@@ -10,7 +10,7 @@
     <ProjectReference Include="..\Chaos.IL2CPP.MetadataWriter\Chaos.IL2CPP.MetadataWriter.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Scriban" Version="5.12.1" />
+    <PackageReference Include="Scriban" Version="7.2.6" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Chaos.IL2CPP.Generator.Generators\Chaos.IL2CPP.Generator.Generators.csproj"
