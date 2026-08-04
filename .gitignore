@@ -74,6 +74,12 @@ il2cpp_dist/
 
 # Auto-generated verification evidence (regenerated on every pipeline run)
 docs/verification/foundation-dll-audit/
+docs/verification/benchmark/*.html
+docs/verification/foundation-dll-audit/dashboard.html
+docs/verification/foundation-dll-audit/artifact-index.html
+docs/verification/foundation-dll-audit/artifact-index.json
+docs/verification/foundation-dll-audit/*.json
+docs/verification/foundation-dll-audit/dashboard.css
 verification/archive/
 verification/evidence/
 verification/projections/
