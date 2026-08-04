@@ -475,6 +475,9 @@ testing/foundation-dll/**/native/patch-host-arrays.cpp
 # Generated TPG CMakeLists under per-chunk native/ (regenerated each pipeline run)
 testing/foundation-dll/*/chunks/*/native/CMakeLists.txt
 
+# Generated AOT Core IR dumps (multi-MB JSON, regenerated each codegen run)
+testing/foundation-dll/**/native/aot-core-ir.jdata
+
 # Generated codegen page files (regenerated every codegen run)
 testing/foundation-dll/**/native/subjects/native-aot.generated.page*.cpp
 testing/foundation-dll/**/native/subjects/native-aot.page-*.cpp
