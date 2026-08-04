@@ -154,7 +154,7 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
             "artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/hot-update/supplemental-metadata-template.json",
             spec_text,
         )
-        self.assertIn("wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/managed-minimal-closure-v0.md", overview_text)
+        self.assertIn("docs/archive/architecture/roadmap-0/managed-minimal-closure-v0.md", overview_text)
 
     def test_driver_generates_bundle_from_selected_proof_subject(self) -> None:
         self._ensure_bundle_generated()

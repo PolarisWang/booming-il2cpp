@@ -27,4 +27,4 @@ primaryModuleId: managed-closure
 - 当前活动 proof 输入位于 `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/host-input/<subject-id>.dll`
 - 活动 analysis 落点位于 `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/`
 - `tests/proof/**` 下的 subject 资产已经全部移出活动树
-- 规格边界见 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/managed-minimal-closure-v0.md`
+- 规格边界见 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/managed-minimal-closure-v0.md`

@@ -7,7 +7,7 @@
 ## 已完成
 
 - 创建 `plan-v1-01.md`，把 Stage 4 拆成 spec、emission、runtime-core、bootstrap/support、preset 接线与验证收口六个 Chunk。
-- 创建 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/native-reference-proof-v0.md`，写清 Stage 4 当前输入、输出与 generated emission skeleton 边界。
+- 创建 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/native-reference-proof-v0.md`，写清 Stage 4 当前输入、输出与 generated emission skeleton 边界。
 - 按 TDD 新增 `tests/unit/run/test_stage4_native_reference_proof.py`，先观察 `emit-native-reference` 因缺少入口而正确 RED。
 - 在 `Chaos.IL2CPP.Contracts`、`Chaos.IL2CPP.CodeGen`、`Chaos.IL2CPP.Driver` 中补上最小实现，让 `emit-native-reference` 可以从 Stage 3 bundle 生成：
   - `artifacts/proof/native-reference/HelloWorldObject/generated/HelloWorldObject.generated.cpp`

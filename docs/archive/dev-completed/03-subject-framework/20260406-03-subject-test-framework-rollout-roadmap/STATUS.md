@@ -35,7 +35,7 @@ active: false
 - 2026-04-06 15:47:00 +08:00: 用户补充后续清理测试工程时，除 `HelloWorldObject` 外还要保留 `echo`；文档统一按仓库现有命名写为 `GenericEcho`，并作为后续清理阶段的保留白名单。
 - 2026-04-06 15:52:00 +08:00: 用户进一步明确，后续测试工程清理不再以删减为目标，而是“全部保留、全部转长期基线”；因此清理语义改为结构收敛、归档分层、命名统一与框架接线，不再讨论删除样例。
 - 2026-04-06 18:50:00 +08:00: `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover` 已完成归档，`subjects/HelloWorldObject` 真源、contract cutover、最小 execution spine 与 Windows cutover 已正式收口。
-- 2026-04-06 18:50:00 +08:00: 已新增 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/foundation-and-windows-cutover-v1.md`，把 Stage A+B+C 的长期边界从执行文档沉淀到架构文档。
+- 2026-04-06 18:50:00 +08:00: 已新增 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/foundation-and-windows-cutover-v1.md`，把 Stage A+B+C 的长期边界从执行文档沉淀到架构文档。
 - 2026-04-06 22:15:00 +08:00: 用户明确要求继续 `subject` 主线；据此派生 `20260406-08-subject-stage-d-e-reporting-and-public-cutover`，把 `Stage D + Stage E` 从 queued-later plan 升级为真实 child plan。
 - 2026-04-06 22:15:00 +08:00: 新 child plan 已固定 reporting 采用 `B2`、events 采用方案 `C`，并把 public cutover 继续限制在 `HelloWorldObject` 与既有四个 Windows matrix。
 - 2026-04-06 23:49:54 +08:00: `20260406-08-subject-stage-d-e-reporting-and-public-cutover` 在重载 Windows `PATH`、恢复 `cmake` 后，通过组合 unittest 与 `python build/scripts/verify-roadmap-0.py windows`，完成 Windows compatibility gate。

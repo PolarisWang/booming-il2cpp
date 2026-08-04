@@ -10,7 +10,7 @@
 
 **设计文档：** `docs/dev/in-progress/20260406-08-subject-stage-d-e-reporting-and-public-cutover/design-v1-01.md`
 
-**预期知识沉淀：** `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/reporting-and-public-cutover-v1.md`，并按执行结果回写 `wiki/06-测试验证/`
+**预期知识沉淀：** `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/reporting-and-public-cutover-v1.md`，并按执行结果回写 `wiki/06-测试验证/`
 
 ---
 
@@ -233,5 +233,5 @@
 
 计划执行完成后，执行阶段应优先：
 
-- [ ] 把长期边界写入 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/reporting-and-public-cutover-v1.md`
+- [ ] 把长期边界写入 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/reporting-and-public-cutover-v1.md`
 - [ ] 视 public surface 的最终形态回写 `wiki/06-测试验证/`

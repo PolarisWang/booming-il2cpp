@@ -18,8 +18,8 @@ Status: design-frozen
 
 褰撳墠 authority 宸插瓨鍦ㄤ簬锛?
 
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
 - `wiki/06-娴嬭瘯楠岃瘉/INDEX.md`
 - `wiki/06-娴嬭瘯楠岃瘉/AOT鏂癋eature鎺ュ叆鑷祴瑙勮寖.md`
 
@@ -105,8 +105,8 @@ authority 璐熻矗璇存槑闀挎湡瑙勫垯锛宑ontrol 鍙礋璐ｏ細
 
 ### 4.2 authority 鏂囨。鍒嗗伐
 
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`: 执行主线边界、长期契约、分层原则
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`: formal verification、projection 与 archive 边界
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`: 执行主线边界、长期契约、分层原则
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`: formal verification、projection 与 archive 边界
 - `wiki/06-娴嬭瘯楠岃瘉/AOT鏂癋eature鎺ュ叆鑷祴瑙勮寖.md`: onboarding 椤哄簭銆乬ate銆乸roof / benchmark obligation
 - `wiki/06-娴嬭瘯楠岃瘉/INDEX.md`: 姝ｅ紡鍏ュ彛涓庡璞″鑸?
 

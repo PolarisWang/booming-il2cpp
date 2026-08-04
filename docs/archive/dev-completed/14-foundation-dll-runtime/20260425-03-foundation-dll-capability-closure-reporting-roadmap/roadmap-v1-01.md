@@ -128,7 +128,7 @@ Status: in-progress
 - goal:
   - 完成 reporting governance 的 authority 同步和正式 refresh
 - exit_criteria:
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md` 更新
+  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md` 更新
   - `wiki/06-测试验证/INDEX.md` 同步新口径
   - `verification-v1` formal refresh 通过
   - docs/projection/archive 三层产物一致
@@ -168,7 +168,7 @@ Status: in-progress
 - `docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md`
 - `verification/catalog/programs/foundation-dll-translation-audit.program.json`
 - `build/toolchains/run/testing/foundation_dll_audit_generator.py`
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
 - `wiki/06-测试验证/INDEX.md`
 - `artifacts/subjects/SolutionCorePack/runs/*/analysis/generated/*coverage.json`
 

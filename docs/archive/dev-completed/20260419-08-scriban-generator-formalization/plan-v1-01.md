@@ -37,10 +37,10 @@
   - 浠撳簱 canonical 椤圭洰甯冨眬涓庝緷璧栧叧绯诲垏鍒?`Generator`銆?- `tests/unit/planning/test_project_workspace.py`
   - Python 宸ヤ綔鍖虹敓鎴愮敤渚嬫敼涓哄紩鐢?`Generator`銆?- `tests/unit/compatibility/**`
   - 鎵€鏈夌洿鎺ラ敋瀹?`Chaos.IL2CPP.CodeGen` 璺緞/椤圭洰鍚嶇殑鐢ㄤ緥鍒囧埌 `Generator`銆?- `docs/dev/ACTIVE.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
-  - authority 鏂囨。鏄庣‘ `Chaos.IL2CPP.Generator` 涓?IL2CPP 鏍稿績 codegen 宸ョ▼銆?- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/repo-layout.md`
-  - 褰撳墠 repo layout 鐪熺浉婧愬垏鍒?`Generator`銆?- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/ownership-map.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
+  - authority 鏂囨。鏄庣‘ `Chaos.IL2CPP.Generator` 涓?IL2CPP 鏍稿績 codegen 宸ョ▼銆?- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/runtime-baseline/repo-layout.md`
+  - 褰撳墠 repo layout 鐪熺浉婧愬垏鍒?`Generator`銆?- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/runtime-baseline/ownership-map.md`
   - ownership map 鍒囧埌 `Generator`銆?- `wiki/04-宸ュ叿涓庨泦鎴?il2cpp-core-structure-and-scriban-governance.md`
   - 鍚屾 canonical 鍚嶇О涓庘€滃Э鍔夸笉鏀寔灏辨墿灞?Generator鈥濈殑闀挎湡瑙勫垯銆?- `wiki/04-宸ュ叿涓庨泦鎴?il2cpp-generator-usage-and-codegen-governance.md`
   - 鏂板 Generator 浣跨敤涓?codegen 瑙勮寖椤点€?- `wiki/04-宸ュ叿涓庨泦鎴?INDEX.md`

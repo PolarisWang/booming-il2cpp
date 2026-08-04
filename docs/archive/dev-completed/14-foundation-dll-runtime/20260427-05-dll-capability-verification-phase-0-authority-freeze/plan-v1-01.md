@@ -23,9 +23,9 @@
 - hotupdateImpact: None
 - formalVerificationObjects:
   - `docs/dev/in-progress/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
   - `wiki/06-测试验证/AOT新Feature接入自测规范.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
 - requiredGates:
   - `collector`
   - `registry`
@@ -38,9 +38,9 @@
 **计划来源：** `roadmap-child-auto`
 
 **预期知识沉淀：**
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
 - `wiki/06-测试验证/AOT新Feature接入自测规范.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
 
 **收尾约束：** 完成后必须进入“结构告警与架构审视 -> 测试通过 -> 归档 completed -> 回写父 roadmap”固定链路。
 
@@ -48,11 +48,11 @@
 
 - `docs/dev/in-progress/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md`
   - 父级路线图与总 checklist authority
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
   - formal verification / projection / aggregate authority
 - `wiki/06-测试验证/AOT新Feature接入自测规范.md`
   - AOT / IL2CPP / proof / benchmark / hotupdate onboarding authority
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
   - solution / runner / generated project / execution entry authority
 - `verification/foundation-dll/**`
   - 本阶段只冻结目录 contract，不进入大规模内容生成

@@ -10,7 +10,7 @@
 
 **设计文档：** `docs/dev/in-progress/20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover/design-v1-01.md`
 
-**预期知识沉淀：** `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/`（按任务执行结果细分）
+**预期知识沉淀：** `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/`（按任务执行结果细分）
 
 ---
 

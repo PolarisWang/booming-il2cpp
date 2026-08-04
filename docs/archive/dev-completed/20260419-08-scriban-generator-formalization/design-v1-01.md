@@ -71,10 +71,10 @@ cutover 鍓嶅悗锛屾牳蹇冪敓鎴愰摼涓嶅彉锛?
 
 ### 6.3 蹇呮敼 authority / wiki
 
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/repo-layout.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/ownership-map.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/runtime-baseline/repo-layout.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/runtime-baseline/ownership-map.md`
 - `wiki/04-宸ュ叿涓庨泦鎴?il2cpp-core-structure-and-scriban-governance.md`
 
 ### 6.4 涓嶅缓璁洖鍐欑殑鍘嗗彶鏂囨。

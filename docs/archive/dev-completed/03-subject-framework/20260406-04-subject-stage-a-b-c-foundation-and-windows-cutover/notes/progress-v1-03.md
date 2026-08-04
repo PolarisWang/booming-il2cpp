@@ -12,8 +12,8 @@ Date: 2026-04-06 18:50:00 +08:00
   - legacy 根目录下的 `run/` 子目录。
 - 已补长期知识沉淀：
   - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/INDEX.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/foundation-and-windows-cutover-v1.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/foundation-and-windows-cutover-v1.md`
 
 ## 验证
 

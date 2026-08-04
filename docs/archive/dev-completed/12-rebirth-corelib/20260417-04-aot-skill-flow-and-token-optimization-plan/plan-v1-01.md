@@ -10,7 +10,7 @@
 
 **璁捐鏂囨。锛?* `docs/dev/in-progress/20260417-04-aot-skill-flow-and-token-optimization-plan/design-v1-01.md`
 
-**预期知识沉淀：** `wiki/02-Skill体系/`、`wiki/06-测试验证/`、`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`、`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+**预期知识沉淀：** `wiki/02-Skill体系/`、`wiki/06-测试验证/`、`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`、`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
 
 **鏀跺熬绾︽潫锛?* 鎵ц瀹屾垚鍚庡繀椤昏繘鍏モ€滃瑙嗘灦鏋勫悎鐞嗘€?-> 娴嬭瘯閫氳繃 -> 褰掓。 completed -> 鍚堝苟&鎻愪氦鈥濆浐瀹氶摼璺€?
 
@@ -32,7 +32,7 @@
   - 鏄庣‘ AOT onboarding 鏃剁殑瀵硅薄閫夋嫨涓?escalation 瑙勫垯
 - `.codex/skills/dev-test-driven-development/SKILL.md`
   - 鍙繚鐣欎笌 failure-first discipline 鐩稿叧鐨勪粨搴撶粦瀹氾紝鍘绘帀鍙敱 authority 鎵挎媴鐨勯噸澶嶈鏄?
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
   - 作为 authority，固定 execution spine / layering 的正式入口
 - `wiki/06-娴嬭瘯楠岃瘉/INDEX.md`
   - 淇濇寔姝ｅ紡楠岃瘉鍏ュ彛涓庡璞″鑸竴鑷?
@@ -48,7 +48,7 @@
 ## 璁″垝娓呭崟
 
 - [ ] Task 1: 鍐荤粨 authority matrix锛屽苟琛ラ綈 `project-test-governance` 涓?AOT onboarding 瑙勫垯涔嬮棿鐨勭湡婧愮粦瀹?
-  - 明确 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`、`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md` 与 `wiki/06-测试验证/AOT新Feature接入自测规范.md` 的职责分层
+  - 明确 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`、`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md` 与 `wiki/06-测试验证/AOT新Feature接入自测规范.md` 的职责分层
   - 璁?`project-test-governance` skill 姝ｆ枃琛ラ綈锛?
     - `subject.features.json` 鏄?owner/proof/benchmark obligation authority
     - canonical proof / benchmark / host correctness 绂佹 stdout 鍒ゅ畾

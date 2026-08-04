@@ -335,8 +335,8 @@ HybridCLR 的公开文档本质上也是这个方向：把纯 AOT runtime 扩成
 
 - `docs/dev/in-progress/20260409-01-il2cpp-mainline-performance-core-and-full-subject-roadmap/design-v1-02.md`
 - `docs/dev/in-progress/20260409-01-il2cpp-mainline-performance-core-and-full-subject-roadmap/roadmap-v1-02.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/platform-gates.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/host-verify-matrix.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/platform-gates.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/host-verify-matrix.md`
 - `src/managed/Chaos.IL2CPP.Contracts/ManagedClosureContracts.cs`
 - `src/managed/Chaos.IL2CPP.Loader/LoaderStage.cs`
 

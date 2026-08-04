@@ -289,7 +289,7 @@ Status: completed
 - authority 输入：
   - `design-v1-01.md`
   - `subject-cutover-mapping-v1-01.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
 - 当前实现入口：
   - `build/toolchains/run/run.py`
   - `build/toolchains/run/run_manifest.json`

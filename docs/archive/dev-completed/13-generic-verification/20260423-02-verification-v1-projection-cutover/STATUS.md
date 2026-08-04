@@ -11,7 +11,7 @@ current_dir: docs/dev/completed/20260423-02-verification-v1-projection-cutover
 parent_task_id: 20260423-01-verification-v1-roadmap
 source_task_id: verification-v1-projection-cutover
 source_relation: roadmap-child
-roadmap_or_plan: wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/roadmap-v1-01.md
+roadmap_or_plan: wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/roadmap-v1-01.md
 clearance_source: parent-roadmap
 active: false
 preflight_review: warn
@@ -23,9 +23,9 @@ auto_execution_decision: continue
 
 ## 关键文档
 
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/roadmap-v1-01.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/projection-and-reporting.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/cutover-and-rollout.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/roadmap-v1-01.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/projection-and-reporting.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/cutover-and-rollout.md`
 - `build/toolchains/run/testing/inventory_source.py`
 - `build/toolchains/run/testing/inventory_generator.py`
 - `build/toolchains/run/testing/benchmark_dashboard_generator.py`

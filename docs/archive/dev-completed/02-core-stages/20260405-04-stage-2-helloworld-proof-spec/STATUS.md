@@ -28,7 +28,7 @@ active: false
 - 2026-04-05 23:50:13 +08:00: 从 reboot roadmap 派生为 Stage 2 active 子任务，承接 `HelloWorld` proof spec freeze。
 - 2026-04-05 23:50:13 +08:00: 已确认当前 proof sample source 与 canonical artifact / native direct-call landing 存在偏差：`Program.cs` 仍偏向 args-driven `object-world` / `void Main`，而 contract 侧已冻结为 `Hello, World!` / `return 0` / generated direct-call landing。
 - 2026-04-05 23:50:13 +08:00: 当前默认按 parent design、`contracts/examples/v0/artifacts/*.json` 与 `contracts/native/examples/v0/bridge/direct-call-landing.cpp` 共同指向的 object-based `HelloWorld` 形状作为 Stage 2 推荐 canonical truth。
-- 2026-04-06 00:04:02 +08:00: 已新增 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/hello-world-proof-spec-v0.md`，把 canonical output、artifact 真源、shared `subjectId`、direct-call landing 与 gate 归属写成唯一长期规格。
+- 2026-04-06 00:04:02 +08:00: 已新增 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/hello-world-proof-spec-v0.md`，把 canonical output、artifact 真源、shared `subjectId`、direct-call landing 与 gate 归属写成唯一长期规格。
 - 2026-04-06 00:04:02 +08:00: 已将 `tests/proof/input/HelloWorldObject/Program.cs` 对齐到 `Hello, World!` / `return 0`，并补 unit test 锁定 `Program.Main`、proof spec 入口与 typed-il example。
 - 2026-04-06 00:04:02 +08:00: 已修复 `typed-il-ir` example / snapshot 中 `Greeter.BuildMessage()` 丢失结尾 `!` 的隐藏分叉；当前 canonical example、compatibility mirror 与 snapshots 已同步。
 

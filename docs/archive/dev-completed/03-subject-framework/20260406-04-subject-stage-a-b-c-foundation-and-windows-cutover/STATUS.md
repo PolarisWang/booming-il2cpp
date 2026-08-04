@@ -24,7 +24,7 @@ active: false
 
 - current_focus: 本任务已完成归档；Stage A+B+C 已把 `subjects/HelloWorldObject` 真源、contract cutover、planner/executor/worker 最小脊柱，以及 Windows 首批 matrix cutover 固定为新的长期实现边界。
 - why_now: 这条 child plan 的职责是把 `subject` 框架首轮基础从设计层真正落成代码与测试闭环；现在该边界已经稳定，不应继续留在执行态。
-- done_definition: 已满足；`subjects/HelloWorldObject/` 已成为正式真源，`contracts.py` 已切到 canonical `contracts/` + `tests/contracts/`，最小 planner/executor/worker 与 Windows cutover 测试已通过，`verify-roadmap-0` 已退化为 compatibility gate，并且长期知识已沉淀到 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/`。
+- done_definition: 已满足；`subjects/HelloWorldObject/` 已成为正式真源，`contracts.py` 已切到 canonical `contracts/` + `tests/contracts/`，最小 planner/executor/worker 与 Windows cutover 测试已通过，`verify-roadmap-0` 已退化为 compatibility gate，并且长期知识已沉淀到 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/`。
 
 ## 最近摘要
 
@@ -35,7 +35,7 @@ active: false
 - 2026-04-06 18:10:00 +08:00: 已按 `executing-plans` 进入正式执行，确认当前仓库无其他活动任务占用；开始按 TDD 顺序实现 `subject` 真源、contract cutover 与 Windows cutover 主线。
 - 2026-04-06 18:50:00 +08:00: 已收敛 `tests/tooling/run/test_verify_roadmap0.py` 到新的 subject-based 契约，并在 `build/scripts/verify-roadmap-0.py` 中加入 `resolve_stage4_runtime_root()` 兼容新旧 proof runtime 落点。
 - 2026-04-06 18:50:00 +08:00: 已通过 42 项受影响单测；已尝试执行 `python build/scripts/verify-roadmap-0.py windows`，但宿主环境缺少 `cmake`，因此实机 gate 只记录为环境缺口，不构成本任务代码归档阻塞。
-- 2026-04-06 18:50:00 +08:00: 已新增 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/foundation-and-windows-cutover-v1.md` 并把本任务转入 completed 归档。
+- 2026-04-06 18:50:00 +08:00: 已新增 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/foundation-and-windows-cutover-v1.md` 并把本任务转入 completed 归档。
 
 ## 下一步
 

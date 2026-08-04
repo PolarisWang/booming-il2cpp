@@ -30,8 +30,8 @@ Status: cancelled (user requested re-plan)
   - `FoundationDllTranslationSolution` subject design/plan
   - workspace artifact chain test
 - dependencies:
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
   - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/reference-assembly-and-corelib-policy.md`
 - open_questions:
   - 鏄惁绔嬪嵆鏂板鐙珛 solution銆傚綋鍓嶆帹鑽愭柊澧炪€?
@@ -211,8 +211,8 @@ Status: cancelled (user requested re-plan)
 
 ## 7. 渚濊禆
 
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
 - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/reference-assembly-and-corelib-policy.md`
 - `wiki/06-娴嬭瘯楠岃瘉/AOT鏂癋eature鎺ュ叆鑷祴瑙勮寖.md`
 - `subjects/SolutionCorePack/subject.features.json`

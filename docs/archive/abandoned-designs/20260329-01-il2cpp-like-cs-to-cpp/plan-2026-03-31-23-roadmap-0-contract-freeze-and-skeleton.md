@@ -49,8 +49,8 @@ Roadmap 0 完成后，仓库至少应新增以下类型的正式产物：
 - 创建：`codegen/README.md`
 - 创建：`build/README.md`
 - 创建：`tests/README.md`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/README.md`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/ownership-map.md`
+- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/README.md`
+- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/ownership-map.md`
 
 - [ ] **步骤 1：创建顶层目录结构**
 
@@ -68,7 +68,7 @@ Roadmap 0 完成后，仓库至少应新增以下类型的正式产物：
 
 - [ ] **步骤 3：创建 Roadmap 0 架构索引页**
 
-`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/README.md` 至少包含：
+`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/README.md` 至少包含：
 
 ```md
 # Roadmap 0 Contract Pack
@@ -84,7 +84,7 @@ Roadmap 0 完成后，仓库至少应新增以下类型的正式产物：
 
 - [ ] **步骤 4：创建 ownership map**
 
-`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/ownership-map.md` 明确：
+`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/ownership-map.md` 明确：
 - `frontend/` 未来归前端与 IR 轨
 - `analysis/` 未来归 AOT 与 manifest 轨
 - `runtime/` 未来归 runtime 轨
@@ -94,14 +94,14 @@ Roadmap 0 完成后，仓库至少应新增以下类型的正式产物：
 
 - [ ] **步骤 5：检查目录与文档落盘**
 
-运行：`Get-ChildItem frontend,analysis,runtime,codegen,build,tests,wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0`
+运行：`Get-ChildItem frontend,analysis,runtime,codegen,build,tests,wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0`
 预期：所有目标目录和 README / md 文件存在。
 
 ### 任务 2：建立契约索引、依赖顺序与 Gate 对照表
 
 **文件：**
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/contract-index.md`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/gates-and-artifacts.md`
+- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/contract-index.md`
+- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/gates-and-artifacts.md`
 
 - [ ] **步骤 1：列出所有正式契约产物**
 
@@ -148,7 +148,7 @@ Roadmap 0 完成后，仓库至少应新增以下类型的正式产物：
 - 创建：`analysis/contracts/examples/metadata-graph.min.json`
 - 创建：`analysis/contracts/examples/typed-il-ir.min.json`
 - 创建：`analysis/contracts/examples/aot-manifest.min.json`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/artifact-schemas-v0.md`
+- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/artifact-schemas-v0.md`
 - 测试：`tests/contracts/schema/metadata-graph.snapshot.json`
 - 测试：`tests/contracts/schema/typed-il-ir.snapshot.json`
 - 测试：`tests/contracts/schema/aot-manifest.snapshot.json`
@@ -226,7 +226,7 @@ Roadmap 0 完成后，仓库至少应新增以下类型的正式产物：
 - 创建：`analysis/contracts/examples/code-registration.min.json`
 - 创建：`analysis/contracts/examples/metadata-registration.min.json`
 - 创建：`analysis/contracts/examples/preserve-descriptor.min.json`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/preserve-format-v0.md`
+- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/preserve-format-v0.md`
 - 测试：`tests/contracts/schema/code-registration.snapshot.json`
 - 测试：`tests/contracts/schema/metadata-registration.snapshot.json`
 - 测试：`tests/contracts/schema/preserve-descriptor.snapshot.json`
@@ -281,7 +281,7 @@ Roadmap 0 完成后，仓库至少应新增以下类型的正式产物：
 **文件：**
 - 创建：`runtime/abi/include/boom_runtime_abi_v0.h`
 - 创建：`runtime/abi/README.md`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/runtime-abi-v0.md`
+- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/runtime-abi-v0.md`
 - 测试：`tests/contracts/abi/abi_surface_smoke.cpp`
 - 测试：`tests/contracts/abi/CMakeLists.txt`
 
@@ -336,7 +336,7 @@ void boom_thread_detach();
 **文件：**
 - 创建：`codegen/bridge/include/boom_codegen_bridge_v0.h`
 - 创建：`codegen/bridge/README.md`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/codegen-bridge-v0.md`
+- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/codegen-bridge-v0.md`
 - 测试：`tests/contracts/codegen/bridge_surface_smoke.cpp`
 - 测试：`tests/contracts/codegen/CMakeLists.txt`
 
@@ -395,7 +395,7 @@ void* boom_codegen_box_value(BoomTypeInfo* type, const void* data);
 - 创建：`build/toolchains/reference-desktop.cmake`
 - 创建：`build/toolchains/android-arm64.cmake`
 - 创建：`build/toolchains/ios-arm64.cmake`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/toolchain-matrix-v0.md`
+- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/toolchain-matrix-v0.md`
 - 测试：`build/scripts/probe-desktop-toolchain.ps1`
 - 测试：`build/scripts/probe-android-toolchain.ps1`
 - 测试：`build/scripts/probe-ios-toolchain.sh`
@@ -450,7 +450,7 @@ void* boom_codegen_box_value(BoomTypeInfo* type, const void* data);
 - 创建：`tests/mobile/ios-smoke/README.md`
 - 创建：`tests/mobile/ios-smoke/CMakeLists.txt`
 - 创建：`tests/mobile/ios-smoke/smoke_entry.mm`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/mobile-validation-matrix-v0.md`
+- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/mobile-validation-matrix-v0.md`
 
 - [ ] **步骤 1：创建移动端 smoke 目录**
 
@@ -550,7 +550,7 @@ void* boom_codegen_box_value(BoomTypeInfo* type, const void* data);
 **文件：**
 - 创建：`build/scripts/verify-roadmap-0.ps1`
 - 创建：`build/scripts/verify-roadmap-0.sh`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/local-verification.md`
+- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/local-verification.md`
 
 - [ ] **步骤 1：编写 PowerShell 验证脚本**
 

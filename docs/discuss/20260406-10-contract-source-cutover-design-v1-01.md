@@ -95,8 +95,8 @@ Status: design-discuss
 - `analysis/contracts` 已被明确标记为 compatibility mirror
 
 见：
-[schema-pack-v0.md](/E:/agent/booming-il2cpp/wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/schema-pack-v0.md#L11)
-[schema-pack-v0.md](/E:/agent/booming-il2cpp/wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/schema-pack-v0.md#L14)
+[schema-pack-v0.md](/E:/agent/booming-il2cpp/wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/schema-pack-v0.md#L11)
+[schema-pack-v0.md](/E:/agent/booming-il2cpp/wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/schema-pack-v0.md#L14)
 
 ## 4.2 trace contract
 

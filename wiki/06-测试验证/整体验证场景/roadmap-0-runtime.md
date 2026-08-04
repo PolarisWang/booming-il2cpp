@@ -42,4 +42,4 @@ objectType: guide
 
 ## 关联说明
 
-- 详细宿主准备、产物位置和失败排查，继续参考 [`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/local-verification.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/local-verification.md)。
+- 详细宿主准备、产物位置和失败排查，继续参考 [`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/local-verification.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/local-verification.md)。

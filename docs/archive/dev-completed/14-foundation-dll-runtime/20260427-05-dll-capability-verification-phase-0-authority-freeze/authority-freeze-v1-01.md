@@ -14,9 +14,9 @@
 ## 2. 正式 authority 入口
 
 - [`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/foundation-dll-capability-verification-closure-v1.md`](../../../architecture/foundation-dll-capability-verification-closure-v1.md)
-- [`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`](../../../architecture/verification-v1/spec.md)
+- [`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`](../../../architecture/verification-v1/spec.md)
 - [`wiki/06-测试验证/AOT新Feature接入自测规范.md`](../../../../wiki/06-测试验证/AOT新Feature接入自测规范.md)
-- [`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`](../../../architecture/subject-test-framework-v1/INDEX.md)
+- [`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`](../../../architecture/subject-test-framework-v1/INDEX.md)
 
 ## 3. 本阶段验收结果
 

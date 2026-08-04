@@ -35,7 +35,7 @@ active: false
 - 2026-04-06 23:45:00 +08:00: `Chunk 4-6` 完成，`subject` 已成为 registry/public command/TUI 的一等对象；`test subject` 直接调用 `subject_planner + subject_executor`，并写出 matrix report、subject summary 与 session bridge。
 - 2026-04-06 23:45:00 +08:00: 已通过组合验证 `python -m unittest tests.unit.run.test_subject_manifest_schema tests.unit.run.test_subject_planner tests.unit.run.test_subject_reporting tests.unit.run.test_events_schema tests.unit.run.test_subject_executor tests.unit.run.test_helloworld_subject_windows_cutover tests.integration.run.test_reporting_layout tests.integration.run.test_registry_scan tests.tooling.run.test_command_manifest tests.tooling.run.test_registry_command tests.tooling.run.test_subject_command tests.tooling.run.test_test_watch_summary tests.tooling.run.test_tui`。
 - 2026-04-06 23:45:00 +08:00: `python build/scripts/verify-roadmap-0.py windows` 未能进入兼容门本体，阻塞点是当前环境缺少 `cmake` 可执行文件。
-- 2026-04-06 23:45:00 +08:00: 长期知识已写入 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/reporting-and-public-cutover-v1.md` 与 `wiki/06-测试验证/subject-public-entry-and-reporting-cutover.md`。
+- 2026-04-06 23:45:00 +08:00: 长期知识已写入 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/reporting-and-public-cutover-v1.md` 与 `wiki/06-测试验证/subject-public-entry-and-reporting-cutover.md`。
 - 2026-04-06 23:49:54 +08:00: 已重载 Windows `PATH`，确认 `cmake` 解析到 `C:\Program Files\CMake\bin\cmake.exe`；随后通过组合 unittest 与 `python build/scripts/verify-roadmap-0.py windows`，清除剩余 Windows gate 阻塞。
 - 2026-04-07 00:00:58 +08:00: 本任务已完整归档到 `docs/dev/completed/20260406-08-subject-stage-d-e-reporting-and-public-cutover`，活动入口返回父 roadmap，只保留 `Stage F` follow-up 计划位。
 

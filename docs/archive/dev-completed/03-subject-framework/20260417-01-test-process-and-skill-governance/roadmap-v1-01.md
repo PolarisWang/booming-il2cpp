@@ -97,8 +97,8 @@
 - deliverables:
   - `design-v1-01.md`
   - `roadmap-v1-01.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
   - `wiki/*`
 - dependencies: 鏃?
 - open_questions:

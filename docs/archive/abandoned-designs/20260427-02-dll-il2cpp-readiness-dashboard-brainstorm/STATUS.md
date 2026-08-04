@@ -25,7 +25,7 @@ auto_execution_decision: stop
 ## 关键文档
 
 - brainstorm: `docs/dev/abandoned/20260427-02-dll-il2cpp-readiness-dashboard-brainstorm/brainstorm-v1-01.md`
-- verification_spec: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+- verification_spec: `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
 - aot_self_check: `wiki/06-测试验证/AOT新Feature接入自测规范.md`
 - source_roadmap: `docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md`
 

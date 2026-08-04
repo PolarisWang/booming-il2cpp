@@ -74,10 +74,10 @@
 ### Batch 6: 更新 active docs
 
 - [ ] **6.1** 更新 `contracts/docs/v0/overview.md`：所有 `contracts/artifacts/v0/samples` → `tests/contracts/analysis/v0/samples`，同理 snapshots
-- [ ] **6.2** 更新 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/schema-pack-v0.md`
-- [ ] **6.3** 更新 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/hello-world-proof-spec-v0.md`
-- [ ] **6.4** 更新 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/local-verification.md`
-- [ ] **6.5** 更新 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/foundation-and-windows-cutover-v1.md`
+- [ ] **6.2** 更新 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/runtime-baseline/schema-pack-v0.md`
+- [ ] **6.3** 更新 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/runtime-baseline/hello-world-proof-spec-v0.md`
+- [ ] **6.4** 更新 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/runtime-baseline/local-verification.md`
+- [ ] **6.5** 更新 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/foundation-and-windows-cutover-v1.md`
 - [ ] **6.6** 更新 `wiki/06-测试验证/模块/analysis.md`
 - [ ] **6.7** 更新 `wiki/04-工具与集成/统一测试框架.md`：替换 `tests/contract/` → `tests/contracts/`
 

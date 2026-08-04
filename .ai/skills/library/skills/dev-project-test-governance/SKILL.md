@@ -12,7 +12,7 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 
 ## Authority 边界
 
-- [`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md)
+- [`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md)
 - [`docs/archive/architecture/verification-v1/spec.md`](../../../docs/archive/architecture/verification-v1/spec.md)
 - [`wiki/06-测试验证/INDEX.md`](../../../wiki/06-测试验证/INDEX.md)
 - [`wiki/06-测试验证/AOT新Feature接入自测规范.md`](../../../wiki/06-测试验证/AOT新Feature接入自测规范.md)
@@ -120,7 +120,7 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 
 如果本次任务改变了长期规则，至少同步更新：
 
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
 - `docs/archive/architecture/verification-v1/spec.md`
 - `wiki/06-测试验证/AOT新Feature接入自测规范.md`
 - `wiki/06-测试验证/CodeGen快照测试规范.md`
