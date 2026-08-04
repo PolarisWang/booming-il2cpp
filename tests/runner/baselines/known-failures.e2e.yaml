@@ -1,0 +1,4 @@
+# Known failures for the e2e layer. See known-failures.integration.yaml header.
+# foundation-dll verification is heavyweight; record any known failures here.
+version: 1
+known: []

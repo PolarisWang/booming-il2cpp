@@ -34,7 +34,12 @@ layers:
         cmake_root: .
         cmake_build_dir: build/native
         cmake_preset: windows-x64-reference
-        # runs the 47 CTest targets under tests/contracts/native/**
+        # runs the CTest targets under tests/contracts/native/** (abi, bridge,
+        # common, engine-binding, gc, hot-update, interpreter, runtime-core)
+    # NOTE: testing/project-test/{runtime-self-test,generics-delegates,virtual-dispatch}
+    # is a manual-orchestration integration tier (CMake + codegen + hot-update) with no
+    # standalone entry script; it is driven by CI / CMake, not added as a driver group yet.
+    # Fold into the driver in Phase 3 once a stable run entry exists.
 
   e2e:
     adapter: python
@@ -51,3 +56,7 @@ layers:
   # NOT an active entry in unit: it declares [Fact]s but lacks Microsoft.NET.Test.Sdk
   # so `dotnet test` cannot actually run it. It is tracked here as a known
   # infrastructure gap (see baselines/known-issues.md) — not run, not skipped.
+
+  # test-framework support (NOT tests — excluded from the driver):
+  #   src/reference/Chaos.TestFramework.{Runtime,Sdk}
+  #   src/tools/Chaos.IL2CPP.Tools.{AutoTestGenerator,TestFramework.CollectionGen,TestProjectGenerator}

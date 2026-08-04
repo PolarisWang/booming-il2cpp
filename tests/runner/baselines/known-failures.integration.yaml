@@ -1,0 +1,9 @@
+# Known failures for the integration layer — records pre-existing failures.
+# Project rule: NO "skip". Failures are RUN and reported as FAIL, labelled
+# [KNOWN-FAIL] against this baseline. Remove an entry here once fixed; the
+# driver then fails the gate if it regresses.
+#
+# Currently a new layer (contracts-native). Populate as native/ctest runs
+# stabilize. Empty by default.
+version: 1
+known: []

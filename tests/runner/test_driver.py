@@ -89,7 +89,8 @@ def load_known_failures(layer: str) -> set:
 
 
 def run_group(layer: str, group: dict, layers_cfg: dict, opts) -> SuiteResult:
-    adapter_name = layers_cfg.get(layer, {}).get("adapter", "dotnet")
+    # a group may override the layer's adapter; else use layer default
+    adapter_name = group.get("adapter") or layers_cfg.get(layer, {}).get("adapter", "dotnet")
     run = ADAPTERS.get(adapter_name, dotnet.run)
     return run(group, timeout=opts.timeout, quick=opts.quick)
 
