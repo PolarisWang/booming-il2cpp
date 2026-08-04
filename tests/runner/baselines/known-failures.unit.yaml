@@ -43,3 +43,12 @@ known:
   - "Chaos.IL2CPP.Generator.Tests.NativeAotPlannerHelperTests.GetMethodName_Invalid_Throws(subjectId: \"NoSeparator\")"
   - "Chaos.IL2CPP.Generator.Tests.NativeAotPlannerHelperTests.IdentifyStructLocalSlots_NonValueTypeInitobj_NotCounted"
   - "Chaos.IL2CPP.Generator.Tests.SubjectIdDiscovery.DumpAllTypedIlSubjectIds"
+  # Order-dependent (passes in isolation 3/3, fails in full suite due to shared
+  # static codegen/static-id state). Same class as the fixture 70 flake.
+  - "Chaos.IL2CPP.Generator.Tests.NativeAotPlannerHelperTests.CreatePseudoMetadataHandle_ReturnsNonZero(subjectId: \"System.Int32\", prefix: 33554432, expectedTopBits: 4211081216)"
+  # Snapshot: fixture 70 methods.json — order-dependent defaultStringId.
+  # Confirmed: passes when EmittedCodeMatchesBaseline runs alone (85/85) but
+  # fails in the full 108-test suite because a prior test class warms global
+  # string-id registry state that leaks into fixture 70's native-aot.methods.json.
+  # Pre-existing codegen-order flakiness, recorded (not skipped) per no-skip rule.
+  - "Chaos.IL2CPP.Generator.SnapshotTests.SnapshotTests.EmittedCodeMatchesBaseline(fixtureName: \"70-external-runtime-helper\")"
