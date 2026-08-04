@@ -115,8 +115,8 @@ reinterpret_cast<FnType>(kChaosExternalRuntimeFnTable[idx])(args);
 
 - [Closure 精度架构](01-翻译管线/19-closure-precision-architecture.md) — D5/D1 assemblyDirs 配置
 - [32-byte ABI 修复](01-翻译管线/20-32byte-abi-fix.md) — Vector<T> pass-by-reference 及 opcode 归一化
-- [Bridge 架构审查](讨论/discuss/bridge-architecture-review-2026-06-06.md) — 方案分析全记录
-- [Bridge 重构计划](讨论/discuss/bridge-refactor-plan-2026-06-07.md) — 实施规划
+- [Bridge 架构审查](../../../docs/archive/discuss/bridge-architecture-review-2026-06-06.md) — 方案分析全记录
+- [Bridge 重构计划](../../../docs/archive/discuss/bridge-refactor-plan-2026-06-07.md) — 实施规划
 
 ## Phase 1: 禁用 BridgeAOT + Demeter Table 补全
 
