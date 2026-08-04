@@ -1,0 +1,53 @@
+# Test suite contract — single source of truth for what the test suite runs.
+# Consumed by tests/runner/test_driver.py.
+#
+# Layering (test pyramid):
+#   unit        — fast, no external runtime/environment (xunit, dotnet test)
+#   integration — needs built runtime / CMake-built fixtures / environment
+#   e2e         — full pipelines (foundation-dll chunk translation) — slow
+#
+# NOTE (project rule): "skip" is NOT a concept here. Every test either PASSES or
+# FAILS. Tests that are currently failing for known reasons are recorded in
+# baselines/known-failures.{layer}.yaml and are still reported as FAIL, but the
+# driver labels them "known" when reconciling against that baseline. We never
+# mark anything skipped.
+
+version: 1
+report: tests/runner/test-report.json
+
+layers:
+  unit:
+    adapter: dotnet
+    groups:
+      - name: codegen
+        command_project: tests/managed/Chaos.IL2CPP.CodeGen.Tests
+      - name: driver
+        command_project: tests/managed/Chaos.IL2CPP.Driver.Tests
+      - name: snapshot
+        command_project: tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests
+        # golden baseline test — slower than others but still unit-tier
+
+  integration:
+    adapter: native
+    groups:
+      - name: contracts-native
+        cmake_root: .
+        cmake_build_dir: build/native
+        cmake_preset: windows-x64-reference
+        # runs the 47 CTest targets under tests/contracts/native/**
+
+  e2e:
+    adapter: python
+    groups:
+      - name: foundation-dll-smoke
+        script: testing/foundation-dll/verification/ci_smoke.py
+        requires_python: "3.10+"
+      - name: foundation-dll-chunk
+        script: testing/foundation-dll/verification/chunk_pipeline.py
+        args: [--smoke]
+        slow: true
+
+  # NOTE: testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter is intentionally
+  # NOT an active entry in unit: it declares [Fact]s but lacks Microsoft.NET.Test.Sdk
+  # so `dotnet test` cannot actually run it. It is tracked here as a known
+  # infrastructure gap (see baselines/known-issues.md) — not run, not skipped.

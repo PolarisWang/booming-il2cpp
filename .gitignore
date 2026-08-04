@@ -564,3 +564,4 @@ tmp_dump_output.txt
 tmp_fact.json
 tmp_fix*.js
 _tmp_*.py
+tests/runner/test-report.json

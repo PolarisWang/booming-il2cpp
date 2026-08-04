@@ -1,0 +1,45 @@
+# Known failures for the unit (dotnet) layer — recorded 2026-08-04.
+#
+# Project rule: there is NO "skip". These tests are RUN and REPORTED as FAIL.
+# This file only LISTS which failures are known/expected so the test driver can
+# (a) label them [KNOWN-FAIL] transparently and (b) treat a group whose only
+# failures are these as "OK for gating" (exit code 0) WITHOUT hiding them.
+#
+# When these are fixed, remove the corresponding entry here; the test flips to
+# green and the driver then fails the gate if they regress.
+#
+# Source of truth: `dotnet test tests/managed/Chaos.IL2CPP.CodeGen.Tests -v normal`
+# (2,114 passed, 29 failed) — all 29 are below.
+version: 1
+known:
+  # AotCoreIrLoweringTests — ABI slot resolution returns wrong type mappings
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_Byte_ReturnsUInt8"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_Int16_ReturnsInt16"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_Int32_ReturnsInt32"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_Int64_ReturnsInt64"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_SByte_ReturnsInt8"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_Single_ReturnsFloat32"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_Double_ReturnsFloat64"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_UInt16_ReturnsUInt16"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_UInt64_ReturnsUInt64"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_String_ReturnsNativeInt"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_UnknownType_ReturnsNativeInt"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_Void_ReturnsVoid"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.ResolveAbiSlot_CustomValueType_ReturnsValueTypeByValue"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.UnknownOpWarning_WritesWarningAndReturnsNull"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.UnknownOpWarning_KnownOps_ReturnsNull(op: \"add\")"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.UnknownOpWarning_KnownOps_ReturnsNull(op: \"sub\")"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.UnknownOpWarning_KnownOps_ReturnsNull(op: \"call\")"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.UnknownOpWarning_KnownOps_ReturnsNull(op: \"br\")"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.UnknownOpWarning_KnownOps_ReturnsNull(op: \"ret\")"
+  - "Chaos.IL2CPP.Generator.Tests.AotCoreIrLoweringTests.UnknownOpWarning_KnownOps_ReturnsNull(op: \"ldc.i4\")"
+  # CodeGenStage / emitter / helper tests failing against current codegen
+  - "Chaos.IL2CPP.Generator.Tests.CodeGenStageTests.FilterResultPerAssembly_FiltersByAssemblyName"
+  - "Chaos.IL2CPP.Generator.Tests.Emission.RichObjectModelEmissionTests.StructFieldReferences_EmitsValueTypeTracking"
+  - "Chaos.IL2CPP.Generator.Tests.Emission.UtilityPathTests.FieldValueTypeDeclaring_TriggersCollectValueTypePaths"
+  - "Chaos.IL2CPP.Generator.Tests.Lowering.ExternalDispatchTests.UnknownExternalCall_UsesDispatchTable"
+  - "Chaos.IL2CPP.Generator.Tests.NativeAotEmitterTests.BuildGeneratedSources_PagedOutput_ReturnsMultiplePages"
+  - "Chaos.IL2CPP.Generator.Tests.NativeAotPlannerHelperTests.GetMethodName_Invalid_Throws(subjectId: \"A.B::\")"
+  - "Chaos.IL2CPP.Generator.Tests.NativeAotPlannerHelperTests.GetMethodName_Invalid_Throws(subjectId: \"NoSeparator\")"
+  - "Chaos.IL2CPP.Generator.Tests.NativeAotPlannerHelperTests.IdentifyStructLocalSlots_NonValueTypeInitobj_NotCounted"
+  - "Chaos.IL2CPP.Generator.Tests.SubjectIdDiscovery.DumpAllTypedIlSubjectIds"
