@@ -8,7 +8,7 @@
 - `system/roadmap-0-*`
 - `artifacts/verify-roadmap-0/**`
 - `build/scripts/verify-roadmap-0.*`
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/`
+- `docs/archive/architecture/roadmap-0/`
 
 这些名字在历史上成立，但在当前仓库语义里已经退化成“runtime baseline + platform gates”的验证命名空间，不再适合作为正式顶层概念继续扩张。
 

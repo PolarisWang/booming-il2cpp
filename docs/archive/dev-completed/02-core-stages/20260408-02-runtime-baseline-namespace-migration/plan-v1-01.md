@@ -39,7 +39,7 @@
   - 兼容 wrapper。
 - `tests/registry/system/**`
   - 迁移 live system scenario 目录和 manifest。
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/runtime-baseline/**`
+- `docs/archive/architecture/runtime-baseline/**`
   - 新 canonical 架构文档目录。
 - `wiki/06-测试验证/整体验证场景/**`
   - 迁移 runtime 与 gate guide。
@@ -52,7 +52,7 @@
   - `system/runtime-baseline-*`
   - `system/android-startup-gate` 等新 gate id
   - `artifacts/verify-runtime-baseline/**`
-  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/runtime-baseline/**`
+  - `docs/archive/architecture/runtime-baseline/**`
 - [ ] 为旧入口补兼容断言：
   - `prepare workflow roadmap-0 --host <host>` 仍可解析
   - `test workflow roadmap-0-<host>` 仍可解析
@@ -77,7 +77,7 @@
 
 ## Chunk 4：文档与 live knowledge
 
-- [ ] 迁移 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/` 到 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/runtime-baseline/`
+- [ ] 迁移 `docs/archive/architecture/roadmap-0/` 到 `docs/archive/architecture/runtime-baseline/`
 - [ ] 更新 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/INDEX.md`
 - [ ] 新增 / 更新 `wiki/06-测试验证/整体验证场景/runtime-baseline.md`
 - [ ] 新增 / 更新 `wiki/06-测试验证/整体验证场景/platform-gates.md`

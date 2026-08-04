@@ -11,7 +11,7 @@ Status: frozen-v1
 
 | 当前路径 | 终态路径 | 动作 | 受影响 Consumer |
 | --- | --- | --- | --- |
-| `contracts/artifacts/v0/samples/*.min.json` | `tests/contracts/analysis/v0/samples/*.min.json` | 移动 | `path_resolver.contract_roots()`, `testing/contracts.py`, `test_contract_check.py`, `test_contract_paths.py`, `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/runtime-baseline/schema-pack-v0.md` |
+| `contracts/artifacts/v0/samples/*.min.json` | `tests/contracts/analysis/v0/samples/*.min.json` | 移动 | `path_resolver.contract_roots()`, `testing/contracts.py`, `test_contract_check.py`, `test_contract_paths.py`, `docs/archive/architecture/runtime-baseline/schema-pack-v0.md` |
 | `contracts/artifacts/v0/snapshots/*.snapshot.json` | `tests/contracts/analysis/v0/snapshots/*.snapshot.json` | 移动 | `path_resolver.contract_roots()`, `testing/contracts.py`, `test_contract_snapshot_baselines_live_under_contracts_tree()` |
 
 ### 1.2 Native Samples

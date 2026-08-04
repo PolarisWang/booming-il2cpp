@@ -44,7 +44,7 @@ Status: design-discuss
 - `contracts/examples/v0/artifacts/*.min.json` 是 canonical example 根
 
 见：
-[schema-pack-v0.md](/E:/agent/booming-il2cpp/wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/schema-pack-v0.md#L7)
+[schema-pack-v0.md](/E:/agent/booming-il2cpp/docs/archive/architecture/roadmap-0/schema-pack-v0.md#L7)
 
 ### 2.2 `analysis/contracts` 只是 compatibility mirror
 
@@ -58,7 +58,7 @@ Status: design-discuss
 - `analysis/contracts/{schemas,examples}` 当前保留为 compatibility mirror
 
 见：
-[schema-pack-v0.md](/E:/agent/booming-il2cpp/wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/schema-pack-v0.md#L14)
+[schema-pack-v0.md](/E:/agent/booming-il2cpp/docs/archive/architecture/roadmap-0/schema-pack-v0.md#L14)
 
 这说明它不是长期权威位置。
 

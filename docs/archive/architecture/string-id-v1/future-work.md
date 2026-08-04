@@ -6,7 +6,7 @@
 
 ## 关联 Authority
 
-- **主 spec**：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/string-id-v1/INDEX.md`（待创建）
+- **主 spec**：`docs/archive/architecture/string-id-v1/INDEX.md`（待创建）
 - **实施 plan**：`C:\Users\haochuan.wang\.claude\plans\serene-gliding-milner.md`
 - **准入规则**：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/unsupported-feature-policy.md`
 

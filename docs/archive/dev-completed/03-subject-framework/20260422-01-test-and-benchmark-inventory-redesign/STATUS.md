@@ -29,7 +29,7 @@ auto_execution_decision: continue
 - `build/toolchains/run/testing/registry.py`
 - `build/toolchains/run/testing/benchmark_dashboard_generator.py`
 - `build/toolchains/run/testing/perf_dashboard.py`
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/managed-native-hotupdate-test-pipeline.md`
+- `docs/archive/architecture/managed-native-hotupdate-test-pipeline.md`
 - `wiki/06-测试验证/AOT新Feature接入自测规范.md`
 
 ## 当前结论
@@ -82,7 +82,7 @@ auto_execution_decision: continue
   - `docs/benchmark/overview.json`
   - subject benchmark docs payload
 - stage/gate authority:
-  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/managed-native-hotupdate-test-pipeline.md`
+  - `docs/archive/architecture/managed-native-hotupdate-test-pipeline.md`
   - `wiki/06-测试验证/AOT新Feature接入自测规范.md`
 
 ## AOT/IL2CPP/Test Governance Intake

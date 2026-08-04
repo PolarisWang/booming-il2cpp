@@ -13,8 +13,8 @@
 - 创建：`build/toolchains/android-arm64.cmake`
 - 创建：`build/toolchains/ios-arm64.cmake`
 - 创建：`build/toolchains/linux-x64.cmake`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/toolchain-matrix.md`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/reference-desktop-gates.md`
+- 创建：`docs/archive/architecture/roadmap-0/toolchain-matrix.md`
+- 创建：`docs/archive/architecture/roadmap-0/reference-desktop-gates.md`
 
 - [ ] **步骤 1：为 5 类 target 写 toolchain 描述**
 
@@ -124,7 +124,7 @@ New-Item -ItemType Directory tests/platform/android-smoke,tests/platform/ios-smo
 **文件：**
 - 创建：`build/scripts/verify-roadmap-0.ps1`
 - 创建：`build/scripts/verify-roadmap-0.sh`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/local-verification.md`
+- 创建：`docs/archive/architecture/roadmap-0/local-verification.md`
 
 - [ ] **步骤 1：让 PowerShell 版支持 host-specific matrix**
 
@@ -199,7 +199,7 @@ pwsh ./build/scripts/verify-roadmap-0.ps1 -HostProfile macos
 
 运行：
 ```bash
-git add CMakePresets.json build/toolchains build/scripts tests/platform tests/reference-desktop tests/contracts/trace wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0
+git add CMakePresets.json build/toolchains build/scripts tests/platform tests/reference-desktop tests/contracts/trace docs/archive/architecture/roadmap-0
 git commit -m "feat: add roadmap0 platform gates and verify pipeline"
 ```
 

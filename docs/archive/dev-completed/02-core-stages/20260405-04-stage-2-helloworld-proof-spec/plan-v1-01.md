@@ -12,7 +12,7 @@
 
 **预期知识沉淀：**
 
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/hello-world-proof-spec-v0.md`
+- `docs/archive/architecture/roadmap-0/hello-world-proof-spec-v0.md`
 
 ---
 
@@ -22,7 +22,7 @@
   - 维护当前阶段、关键文档、最近摘要与下一步。
 - 修改：`docs/dev/in-progress/20260405-04-stage-2-helloworld-proof-spec/notes/progress-v1-01.md`
   - 记录 spec 冻结过程中的完成项与验证结果。
-- 创建或修改：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/hello-world-proof-spec-v0.md`
+- 创建或修改：`docs/archive/architecture/roadmap-0/hello-world-proof-spec-v0.md`
   - 形成长期有效的 canonical proof spec 文档。
 - 修改：`tests/proof/input/HelloWorldObject/Program.cs`
   - 按 canonical truth 对齐 `Main` 签名、常量输入与输出语义。
@@ -42,7 +42,7 @@
 
 ## Chunk 1：写 canonical proof spec
 
-- [ ] 创建 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/hello-world-proof-spec-v0.md`。
+- [ ] 创建 `docs/archive/architecture/roadmap-0/hello-world-proof-spec-v0.md`。
 - [ ] 写明 canonical sample truth：
   - assembly：`HelloWorldObject`
   - stdout：`Hello, World!`

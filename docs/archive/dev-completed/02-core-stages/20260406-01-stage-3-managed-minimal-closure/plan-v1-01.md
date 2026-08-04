@@ -12,7 +12,7 @@
 
 **预期知识沉淀：**
 
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/managed-minimal-closure-v0.md`
+- `docs/archive/architecture/roadmap-0/managed-minimal-closure-v0.md`
 
 ---
 
@@ -22,7 +22,7 @@
   - 维护阶段、最近摘要与下一步。
 - 修改：`docs/dev/in-progress/20260406-01-stage-3-managed-minimal-closure/notes/progress-v1-01.md`
   - 记录 closure 实现进展与验证结果。
-- 创建或修改：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/managed-minimal-closure-v0.md`
+- 创建或修改：`docs/archive/architecture/roadmap-0/managed-minimal-closure-v0.md`
   - 写明 Stage 3 closure bundle 边界、输入输出和 Stage 4 消费约束。
 - 修改：`src/managed/Chaos.IL2CPP.Contracts/`
   - 增加 closure request / result / bundle model / proof-bound subject model。
@@ -52,7 +52,7 @@
 
 ## Chunk 1：定义 closure contract 与长期 spec
 
-- [ ] 创建 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/managed-minimal-closure-v0.md`。
+- [ ] 创建 `docs/archive/architecture/roadmap-0/managed-minimal-closure-v0.md`。
 - [ ] 写明 Stage 3 输入：
   - `tests/proof/input/HelloWorldObject/bin/Release/net8.0/HelloWorldObject.dll`
 - [ ] 写明 Stage 3 输出：

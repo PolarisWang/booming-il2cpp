@@ -11,7 +11,7 @@ current_dir: docs/dev/completed/20260423-03-verification-v1-wiki-cutover
 parent_task_id: 20260423-01-verification-v1-roadmap
 source_task_id: verification-v1-wiki-cutover
 source_relation: roadmap-child
-roadmap_or_plan: wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/roadmap-v1-01.md
+roadmap_or_plan: docs/archive/architecture/verification-v1/roadmap-v1-01.md
 clearance_source: parent-roadmap
 active: false
 preflight_review: pass
@@ -26,8 +26,8 @@ auto_execution_decision: continue
 - `wiki/06-测试验证/Verification-V1测试流程规范.md`
 - `wiki/06-测试验证/INDEX.md`
 - `wiki/06-测试验证/测试管线/INDEX.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/managed-native-hotupdate-test-pipeline.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
+- `docs/archive/architecture/managed-native-hotupdate-test-pipeline.md`
+- `docs/archive/architecture/verification-v1/spec.md`
 
 ## 当前结论
 
@@ -78,11 +78,11 @@ auto_execution_decision: continue
 
 - authority:
   - 长期 canonical 流程入口: `wiki/06-测试验证/Verification-V1测试流程规范.md`
-  - 执行主线 authority: `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/managed-native-hotupdate-test-pipeline.md`
+  - 执行主线 authority: `docs/archive/architecture/managed-native-hotupdate-test-pipeline.md`
 - upstream:
-  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/projection-and-reporting.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/cutover-and-rollout.md`
+  - `docs/archive/architecture/verification-v1/spec.md`
+  - `docs/archive/architecture/verification-v1/projection-and-reporting.md`
+  - `docs/archive/architecture/verification-v1/cutover-and-rollout.md`
 - downstream:
   - `wiki/06-测试验证/INDEX.md`
   - `wiki/06-测试验证/测试管线/INDEX.md`

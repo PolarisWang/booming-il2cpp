@@ -22,8 +22,8 @@ active: false
 
 - `docs/dev/completed/20260417-04-aot-skill-flow-and-token-optimization-plan/design-v1-01.md`
 - `docs/dev/completed/20260417-04-aot-skill-flow-and-token-optimization-plan/plan-v1-01.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
+- `docs/archive/architecture/subject-test-framework-v1/INDEX.md`
+- `docs/archive/architecture/verification-v1/spec.md`
 - `wiki/06-娴嬭瘯楠岃瘉/AOT鏂癋eature鎺ュ叆鑷祴瑙勮寖.md`
 - `wiki/02-Skill浣撶郴/04-璐ㄩ噺淇濋殰/project-test-governance.md`
 - `docs/dev/completed/20260417-01-test-process-and-skill-governance/STATUS.md`
@@ -31,8 +31,8 @@ active: false
 ## 褰撳墠缁撹
 
 - authority 鍒嗗伐宸插喕缁擄細
-  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md` 鎷ユ湁 execution spine / layering / contract 杈圭晫
-  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md` 鎷ユ湁 formal verification / projection / archive 杈圭晫
+  - `docs/archive/architecture/subject-test-framework-v1/INDEX.md` 鎷ユ湁 execution spine / layering / contract 杈圭晫
+  - `docs/archive/architecture/verification-v1/spec.md` 鎷ユ湁 formal verification / projection / archive 杈圭晫
   - `wiki/06-娴嬭瘯楠岃瘉/AOT鏂癋eature鎺ュ叆鑷祴瑙勮寖.md` 鎷ユ湁 capability intake銆乷wner/proof/benchmark/hotupdate obligation 涓?formal verification 椤哄簭
   - `wiki/06-娴嬭瘯楠岃瘉/INDEX.md` 鎷ユ湁姝ｅ紡楠岃瘉鍏ュ彛銆佸璞″鑸笌 completion 鍓嶅璞′紭鍏堢骇
 - `writing-plans` 宸叉妸 `capabilityFamily`銆乣capabilityItem`銆乣ownerSubjectId`銆乣proofRequired`銆乣benchmarkRequired`銆乣hotupdateImpact`銆乣formalVerificationObjects`銆乣requiredGates` 绾冲叆鏄惧紡 intake contract銆?

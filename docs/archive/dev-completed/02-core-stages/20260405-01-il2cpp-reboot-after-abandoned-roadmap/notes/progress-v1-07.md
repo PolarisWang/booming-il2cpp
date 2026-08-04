@@ -8,7 +8,7 @@
 
 - Stage 4 子任务已不再停留在 design：
   - `plan-v1-01.md` 已创建
-  - Stage 4 长期 spec `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/native-reference-proof-v0.md` 已创建
+  - Stage 4 长期 spec `docs/archive/architecture/roadmap-0/native-reference-proof-v0.md` 已创建
   - first generated C++ emission skeleton 已通过 TDD 落地
 - active 子任务当前已经从“设计审查”推进到“implementation”，下一步将进入 `runtime-core` 最小 ABI 骨架。
 

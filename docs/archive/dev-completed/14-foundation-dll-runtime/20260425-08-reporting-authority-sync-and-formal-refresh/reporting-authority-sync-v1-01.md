@@ -9,7 +9,7 @@ Parent: foundation-dll-capability-closure-reporting-roadmap
 
 Phase 0-3 定义了 foundation DLL 报告的能力闭包治理全貌。治理规则的 authority 文档（`spec.md`）和知识入口（`INDEX.md`）尚未同步。本阶段的目标：
 
-1. 把 capability-family-ledger、dual-axis 进度模型、waiver/exclusion/blocked 规则、source links 渲染规则同步到 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
+1. 把 capability-family-ledger、dual-axis 进度模型、waiver/exclusion/blocked 规则、source links 渲染规则同步到 `docs/archive/architecture/verification-v1/spec.md`
 2. 在 `wiki/06-测试验证/INDEX.md` 创建新口径的正式条目
 3. 定义 verification-v1 formal refresh 的执行计划
 4. 定义 docs/projection/archive 三层产物一致性的校验规则
@@ -193,7 +193,7 @@ python build/toolchains/run/testing/verify_projection_consistency.py \
 
 ### 6.1 spec.md 编辑
 
-在 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md` 中：
+在 `docs/archive/architecture/verification-v1/spec.md` 中：
 
 1. **§6.5 表格末尾追加**：6 行 foundation-dll-audit 投影条目（见 §2.1）
 2. **§6.5 之前插入**：§6.5.1 新节（见 §2.1）

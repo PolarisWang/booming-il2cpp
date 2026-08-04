@@ -11,7 +11,7 @@ current_dir: docs/dev/completed/20260423-01-verification-v1-roadmap
 parent_task_id:
 source_task_id:
 source_relation: formalized-from-docs-architecture-verification-v1-roadmap
-roadmap_or_plan: wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/roadmap-v1-01.md
+roadmap_or_plan: docs/archive/architecture/verification-v1/roadmap-v1-01.md
 child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
@@ -44,9 +44,9 @@ auto_execution_decision: continue
 
 ## 本轮产物
 
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/roadmap-v1-01.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/cutover-and-rollout.md`
+- `docs/archive/architecture/verification-v1/roadmap-v1-01.md`
+- `docs/archive/architecture/verification-v1/spec.md`
+- `docs/archive/architecture/verification-v1/cutover-and-rollout.md`
 - `docs/dev/completed/20260423-02-verification-v1-projection-cutover/STATUS.md`
 - `docs/dev/completed/20260423-03-verification-v1-wiki-cutover/STATUS.md`
 - `docs/dev/completed/20260423-04-verification-v1-legacy-retirement/STATUS.md`

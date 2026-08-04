@@ -331,7 +331,7 @@ Status: in-progress
 ## 8. 依赖
 
 - `docs/dev/completed/20260427-03-dll-capability-verification-closure-brainstorm/brainstorm-v1-01.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
+- `docs/archive/architecture/verification-v1/spec.md`
 - `wiki/06-测试验证/AOT新Feature接入自测规范.md`
 - `docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md`
 - 当前 foundation-dll projection / audit generator / family verification 链路

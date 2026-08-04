@@ -58,7 +58,7 @@ Status: completed
   - `tests/unit/compatibility/test_managed_closure_contract_bundle.py`
   - `tests/unit/compatibility/test_interpreter_mixed_execution_subjects.py`
 - 更新 managed closure 文档
-  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/managed-minimal-closure-v0.md`
+  - `docs/archive/architecture/roadmap-0/managed-minimal-closure-v0.md`
 
 ## 4. 验收标准
 

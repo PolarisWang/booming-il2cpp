@@ -21,7 +21,7 @@
   - 新增 `subjects/BridgeRoundtripProof/`
   - 新增 `subjects/GenericSupplementProof/`
   - 新增 `tests/unit/run/test_phase6_metadata_supplement_bridge.py`
-  - 同步 `tests/unit/run/test_managed_closure_contract_bundle.py` 与 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/managed-minimal-closure-v0.md`，把 supplemental metadata template 纳入正式 bundle 契约
+  - 同步 `tests/unit/run/test_managed_closure_contract_bundle.py` 与 `docs/archive/architecture/roadmap-0/managed-minimal-closure-v0.md`，把 supplemental metadata template 纳入正式 bundle 契约
 
 ## 验证结果
 

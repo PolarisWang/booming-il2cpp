@@ -25,7 +25,7 @@
 - 创建：`tests/contracts/schema/code-registration.snapshot.json`
 - 创建：`tests/contracts/schema/metadata-registration.snapshot.json`
 - 创建：`tests/contracts/schema/preserve-descriptor.snapshot.json`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/schema-pack-v0.md`
+- 创建：`docs/archive/architecture/roadmap-0/schema-pack-v0.md`
 
 - [ ] **步骤 1：创建 schema/example/snapshot 目录**
 
@@ -84,7 +84,7 @@ Get-ChildItem analysis/contracts/schemas/*.json,analysis/contracts/examples/*.js
 - 创建：`tests/contracts/trace/schema/warmup-trace.schema.json`
 - 创建：`tests/contracts/trace/snapshots/windows-warmup-trace.snapshot.json`
 - 创建：`tests/contracts/trace/snapshots/macos-warmup-trace.snapshot.json`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/trace-contract-v0.md`
+- 创建：`docs/archive/architecture/roadmap-0/trace-contract-v0.md`
 
 - [ ] **步骤 1：创建 trace 目录**
 
@@ -142,7 +142,7 @@ Get-ChildItem tests/contracts/trace/schema/*.json,tests/contracts/trace/snapshot
 
 运行：
 ```bash
-git add analysis/contracts tests/contracts/schema tests/contracts/trace wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0
+git add analysis/contracts tests/contracts/schema tests/contracts/trace docs/archive/architecture/roadmap-0
 git commit -m "docs: add roadmap0 schema and trace contracts"
 ```
 

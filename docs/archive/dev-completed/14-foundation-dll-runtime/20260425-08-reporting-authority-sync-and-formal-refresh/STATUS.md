@@ -21,14 +21,14 @@ active: false
 ## 目标
 
 把 Phase 0-3 定义的 foundation DLL reporting governance 同步到正式 authority 文档和 formal refresh 产物，包括：
-1. `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
+1. `docs/archive/architecture/verification-v1/spec.md`
 2. `wiki/06-测试验证/INDEX.md`
 3. `verification-v1` formal refresh
 4. docs / projection / archive 三层一致性口径
 
 ## 退出条件
 
-- [x] `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md` 更新完成
+- [x] `docs/archive/architecture/verification-v1/spec.md` 更新完成
 - [x] `wiki/06-测试验证/INDEX.md` 更新完成
 - [x] `verification-v1` formal refresh 已执行
 - [x] foundation-dll-audit projection / docs 报告已刷新
@@ -52,7 +52,7 @@ active: false
 ## 产物
 
 - `docs/dev/completed/20260425-08-reporting-authority-sync-and-formal-refresh/reporting-authority-sync-v1-01.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
+- `docs/archive/architecture/verification-v1/spec.md`
 - `wiki/06-测试验证/INDEX.md`
 - `verification/projections/foundation-dll-audit/*`
 - `docs/verification/foundation-dll-audit/*`

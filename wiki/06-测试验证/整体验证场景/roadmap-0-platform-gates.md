@@ -66,4 +66,4 @@ objectType: guide
   - 实际 trace runtime 证据改由 subject pipeline 落在 `artifacts/subjects/HostEmbeddingLite/runs/<run-id>/matrices/windows-managed-trace/runtime/trace.runtime.json`
   - 实际 trace runtime 证据改由 subject pipeline 落在 `artifacts/subjects/HostEmbeddingLite/runs/<run-id>/matrices/macos-managed-trace/runtime/trace.runtime.json`
   - 对应 matrix report 落在 `artifacts/subjects/HostEmbeddingLite/runs/<run-id>/matrices/<matrix-id>/pipeline-report/report.json`
-- 更完整的本地执行背景，继续参考 [`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/local-verification.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/local-verification.md)。
+- 更完整的本地执行背景，继续参考 [`docs/archive/architecture/roadmap-0/local-verification.md`](../../../docs/archive/architecture/roadmap-0/local-verification.md)。

@@ -58,8 +58,8 @@ active: false
 
 ## wiki
 
-- 已更新 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
-- 已更新 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
+- 已更新 `docs/archive/architecture/subject-test-framework-v1/INDEX.md`
+- 已更新 `docs/archive/architecture/verification-v1/spec.md`
 - 宸叉洿鏂?`wiki/04-宸ュ叿涓庨泦鎴?缁熶竴娴嬭瘯妗嗘灦.md`
 - 宸叉洿鏂?`wiki/06-娴嬭瘯楠岃瘉/鏂板娴嬭瘯鎺ュ叆瑙勮寖.md`
 - 宸叉洿鏂?`wiki/06-娴嬭瘯楠岃瘉/INDEX.md`

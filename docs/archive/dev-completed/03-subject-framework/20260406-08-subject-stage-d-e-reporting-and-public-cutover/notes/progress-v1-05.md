@@ -24,7 +24,7 @@ Date: 2026-04-06 23:45:00 +08:00
   - `test watch` / TUI progress screen 现在会显示 `Subjects:`
   - highlight 区域会直接导航到 `Subject summary`
 - 已写入长期知识：
-  - `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/reporting-and-public-cutover-v1.md`
+  - `docs/archive/architecture/subject-test-framework-v1/reporting-and-public-cutover-v1.md`
   - `wiki/06-测试验证/subject-public-entry-and-reporting-cutover.md`
 - 已通过组合验证：
   - `python -m unittest tests.unit.run.test_subject_manifest_schema tests.unit.run.test_subject_planner tests.unit.run.test_subject_reporting tests.unit.run.test_events_schema tests.unit.run.test_subject_executor tests.unit.run.test_helloworld_subject_windows_cutover tests.integration.run.test_reporting_layout tests.integration.run.test_registry_scan tests.tooling.run.test_command_manifest tests.tooling.run.test_registry_command tests.tooling.run.test_subject_command tests.tooling.run.test_test_watch_summary tests.tooling.run.test_tui`

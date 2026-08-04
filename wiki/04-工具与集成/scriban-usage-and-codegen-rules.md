@@ -118,6 +118,6 @@ Python 侧生成结构化文本时，优先顺序固定为：
 ## 8. 相关文档
 
 - [`il2cpp-core-structure-and-scriban-governance.md`](./il2cpp-core-structure-and-scriban-governance.md)
-- [`../../wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`](../../wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md)
+- [`../../docs/archive/architecture/subject-test-framework-v1/INDEX.md`](../../docs/archive/architecture/subject-test-framework-v1/INDEX.md)
 - [`../../docs/archive/architecture/verification-v1/spec.md`](../../docs/archive/architecture/verification-v1/spec.md)
 - [`../06-测试验证/AOT新Feature接入自测规范.md`](../06-%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81/AOT%E6%96%B0Feature%E6%8E%A5%E5%85%A5%E8%87%AA%E6%B5%8B%E8%A7%84%E8%8C%83.md)

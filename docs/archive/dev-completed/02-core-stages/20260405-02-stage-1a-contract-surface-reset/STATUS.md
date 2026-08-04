@@ -31,7 +31,7 @@ active: false
 - 2026-04-05 23:00:12 +08:00: 已补充 runtime/bridge 的 proof-boundary 文档与 generated direct-call landing 示例，并把 native pack-local 文档挂上 boundary 补充入口。
 - 2026-04-05 23:00:12 +08:00: 已通过 analysis compatibility 路径 schema/example/snapshot 校验、canonical `contracts/` JSON 解析检查，以及 canonical/compatibility mirror 一致性检查。
 - 2026-04-05 23:07:20 +08:00: 已使用 MSVC `cl.exe` 在 VS 开发命令环境下完成 `tests/contracts/native/abi` 与 `tests/contracts/native/bridge` 的 compile-only smoke，native proof-facing contract 验证闭环完成。
-- 2026-04-05 23:07:20 +08:00: 本任务无新增 wiki 沉淀；长期有效知识已直接写入 `contracts/docs/v0`、`contracts/native/docs/v0` 与 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/schema-pack-v0.md`。
+- 2026-04-05 23:07:20 +08:00: 本任务无新增 wiki 沉淀；长期有效知识已直接写入 `contracts/docs/v0`、`contracts/native/docs/v0` 与 `docs/archive/architecture/roadmap-0/schema-pack-v0.md`。
 
 ## 下一步
 - next_action: 无。若继续 reboot 主线，下一步激活 `20260405-03-stage-1b-structure-and-test-migration`。

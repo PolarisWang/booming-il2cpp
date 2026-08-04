@@ -20,8 +20,8 @@ active: false
 - `docs/dev/completed/20260417-01-test-process-and-skill-governance/brainstorm-v1-01.md`
 - `docs/dev/completed/20260417-01-test-process-and-skill-governance/design-v1-01.md`
 - `docs/dev/completed/20260417-01-test-process-and-skill-governance/roadmap-v1-01.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/verification-v1/spec.md`
+- `docs/archive/architecture/subject-test-framework-v1/INDEX.md`
+- `docs/archive/architecture/verification-v1/spec.md`
 
 ## 瀹屾垚缁撹
 

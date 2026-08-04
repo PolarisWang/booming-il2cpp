@@ -6,7 +6,7 @@
 
 ## 已完成
 
-- 新增长期规格文档 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/hello-world-proof-spec-v0.md`，固定 object-based `HelloWorld` 的 canonical truth、artifact 真源、direct-call landing 约束与 gate 归属。
+- 新增长期规格文档 `docs/archive/architecture/roadmap-0/hello-world-proof-spec-v0.md`，固定 object-based `HelloWorld` 的 canonical truth、artifact 真源、direct-call landing 约束与 gate 归属。
 - 将 `tests/proof/input/HelloWorldObject/Program.cs` 对齐到 canonical truth：`Program.Main(System.String[]) -> int`、固定 `Greeter("World")`、打印结果并 `return 0`。
 - 更新 `contracts/docs/v0/overview.md`，把 Stage 2 proof spec 纳入 canonical 阅读入口。
 - 通过 TDD 新增 `tests/unit/run/test_stage2_helloworld_proof_spec.py`，锁定 `Program.cs`、proof spec 文档和 typed-il example 的关键事实。

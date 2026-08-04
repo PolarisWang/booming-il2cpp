@@ -14,15 +14,15 @@
 - 创建：`build/README.md`
 - 创建：`tests/README.md`
 - 创建：`contracts/README.md`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/README.md`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/repo-layout.md`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/ownership-map.md`
+- 创建：`docs/archive/architecture/roadmap-0/README.md`
+- 创建：`docs/archive/architecture/roadmap-0/repo-layout.md`
+- 创建：`docs/archive/architecture/roadmap-0/ownership-map.md`
 
 - [ ] **步骤 1：创建顶层目录结构**
 
 运行：
 ```powershell
-New-Item -ItemType Directory frontend,analysis,runtime,codegen,build,tests,contracts,wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0 -Force
+New-Item -ItemType Directory frontend,analysis,runtime,codegen,build,tests,contracts,docs/archive/architecture/roadmap-0 -Force
 ```
 
 预期：目录全部存在，重复执行不报错。
@@ -51,7 +51,7 @@ New-Item -ItemType Directory frontend,analysis,runtime,codegen,build,tests,contr
 - ...
 ```
 
-- [ ] **步骤 3：写 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/README.md`**
+- [ ] **步骤 3：写 `docs/archive/architecture/roadmap-0/README.md`**
 
 至少列出：
 - repo skeleton
@@ -71,7 +71,7 @@ New-Item -ItemType Directory frontend,analysis,runtime,codegen,build,tests,contr
 
 运行：
 ```powershell
-rg --files frontend analysis runtime codegen build tests contracts wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0
+rg --files frontend analysis runtime codegen build tests contracts docs/archive/architecture/roadmap-0
 ```
 
 预期：所有 README 和架构文档都能被列出。
@@ -136,8 +136,8 @@ Get-Content .gitignore
 ### 任务 3：建立 host-specific verify matrix 框架文档
 
 **文件：**
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/host-verify-matrix.md`
-- 创建：`wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/platform-gates.md`
+- 创建：`docs/archive/architecture/roadmap-0/host-verify-matrix.md`
+- 创建：`docs/archive/architecture/roadmap-0/platform-gates.md`
 
 - [ ] **步骤 1：写 `host-verify-matrix.md`**
 
@@ -159,7 +159,7 @@ Get-Content .gitignore
 
 运行：
 ```powershell
-rg -n "Windows|macOS|Android|iOS|Linux|reference desktop" docs/booming/2026-03-31-roadmap-0-contract-freeze-and-skeleton/design-2026-04-01-03-*.md wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/*.md
+rg -n "Windows|macOS|Android|iOS|Linux|reference desktop" docs/booming/2026-03-31-roadmap-0-contract-freeze-and-skeleton/design-2026-04-01-03-*.md docs/archive/architecture/roadmap-0/*.md
 ```
 
 预期：术语和矩阵定义不冲突。
@@ -168,7 +168,7 @@ rg -n "Windows|macOS|Android|iOS|Linux|reference desktop" docs/booming/2026-03-3
 
 运行：
 ```bash
-git add frontend analysis runtime codegen build tests contracts third_party artifacts wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0 .gitignore
+git add frontend analysis runtime codegen build tests contracts third_party artifacts docs/archive/architecture/roadmap-0 .gitignore
 git commit -m "chore: scaffold roadmap0 repo layout and rules"
 ```
 

@@ -331,7 +331,7 @@ benchmark 的职责是补充成本证据，不替代 correctness 层。
 
 - [`新增测试接入规范.md`](./新增测试接入规范.md)
 - [`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md)
-- [`../../wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md`](../../wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/INDEX.md)
+- [`../../docs/archive/architecture/subject-test-framework-v1/INDEX.md`](../../docs/archive/architecture/subject-test-framework-v1/INDEX.md)
 - [`../../docs/archive/architecture/verification-v1/spec.md`](../../docs/archive/architecture/verification-v1/spec.md)
 
 ## 8. Foundation DLL Capability Verification Supplement

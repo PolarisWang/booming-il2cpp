@@ -189,7 +189,7 @@ public command 灞傞渶瑕佹柊澧烇細
 
 褰撴湰璁″垝鏈潵鎵ц闂幆鍚庯紝搴旀妸闀挎湡杈圭晫鍥炲啓鍒帮細
 
-- `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/subject-test-framework-v1/reporting-and-public-cutover-v1.md`
+- `docs/archive/architecture/subject-test-framework-v1/reporting-and-public-cutover-v1.md`
 
 骞舵寜瀹為檯 public surface 鏇存柊锛?
 

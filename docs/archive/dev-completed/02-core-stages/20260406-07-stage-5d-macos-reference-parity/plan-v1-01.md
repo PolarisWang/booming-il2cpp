@@ -10,7 +10,7 @@
 
 **设计文档：** `docs/dev/completed/20260406-07-stage-5d-macos-reference-parity/design-v1-01.md`
 
-**预期知识沉淀：** 如真正执行闭环并拿到 `macOS` 宿主证据，再回写 `wiki/03-功能模块/06-il2cpp核心架构/docs/archive/architecture/roadmap-0/reference-desktop-gates.md` 与相关本地验证文档。
+**预期知识沉淀：** 如真正执行闭环并拿到 `macOS` 宿主证据，再回写 `docs/archive/architecture/roadmap-0/reference-desktop-gates.md` 与相关本地验证文档。
 
 ---
 
