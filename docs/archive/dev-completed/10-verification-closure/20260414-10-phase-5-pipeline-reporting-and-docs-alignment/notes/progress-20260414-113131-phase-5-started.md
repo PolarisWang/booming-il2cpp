@@ -10,5 +10,5 @@
 
 ## 首轮动作
 
-- 先盘点 `build/toolchains/run/testing/**`、`build/toolchains/run/commands/benchmark.py` 与 `docs/architecture/**` 的现状。
+- 先盘点 `build/toolchains/run/testing/**`、`build/toolchains/run/commands/benchmark.py` 与 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/**` 的现状。
 - 再根据盘点结果逐项对齐 registry 输出、dashboard 布局与 architecture 文档口径。

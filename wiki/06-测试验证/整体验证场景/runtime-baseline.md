@@ -40,4 +40,4 @@ objectType: guide
 
 ## 关联说明
 
-- 本地准备、产物路径和排障说明见 [`docs/architecture/runtime-baseline/local-verification.md`](../../../docs/architecture/runtime-baseline/local-verification.md)。
+- 本地准备、产物路径和排障说明见 [`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/local-verification.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/local-verification.md)。

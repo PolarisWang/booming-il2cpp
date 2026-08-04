@@ -10,7 +10,7 @@
 
 **设计文档：** `docs/dev/in-progress/20260414-04-il2cpp-hotupdate-capability-expansion-roadmap/design-v1-01.md`
 
-**预期知识沉淀：** 先保留在本子任务目录；Phase 5/6 再同步到 `docs/architecture`
+**预期知识沉淀：** 先保留在本子任务目录；Phase 5/6 再同步到 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考`
 
 ---
 

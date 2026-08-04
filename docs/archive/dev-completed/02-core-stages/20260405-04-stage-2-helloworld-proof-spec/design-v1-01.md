@@ -71,7 +71,7 @@ Status: ready-for-plan
   - `design-v1-01.md`
   - `plan-v1-01.md`
 - 长期规格文档：
-  - `docs/architecture/roadmap-0/hello-world-proof-spec-v0.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/hello-world-proof-spec-v0.md`
 - 对齐对象：
   - `tests/proof/input/HelloWorldObject/Program.cs`
   - `tests/proof/hello-world-object/suite.manifest.json`

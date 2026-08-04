@@ -21,7 +21,7 @@ Date: 2026-04-14 01:42:47 +08:00
 - `Q5`: patch package contract 需要单独 architecture 文档
 - `Q6`: mixed execution 暂时保留单 archetype + 多 capability slice
 - `Q7`: 统一支持状态为 `supported / partial / unsupported / not-applicable`，并强制 reason code
-- `Q8`: 稳定 contract 进 `docs/architecture`，过程性迁移信息留在 dev task archive
+- `Q8`: 稳定 contract 进 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考`，过程性迁移信息留在 dev task archive
 
 ## 下一步
 

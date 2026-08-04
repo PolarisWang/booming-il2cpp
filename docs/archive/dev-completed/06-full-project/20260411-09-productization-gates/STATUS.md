@@ -69,4 +69,4 @@ active: false
 
 ## Wiki 决策
 
-- 本轮长期知识继续沉淀在 `build/toolchains/run/*`、`subjects/*`、`docs/architecture/*` 与当前任务 `notes/` 中，暂不单独写入 `wiki/`。
+- 本轮长期知识继续沉淀在 `build/toolchains/run/*`、`subjects/*`、`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/*` 与当前任务 `notes/` 中，暂不单独写入 `wiki/`。

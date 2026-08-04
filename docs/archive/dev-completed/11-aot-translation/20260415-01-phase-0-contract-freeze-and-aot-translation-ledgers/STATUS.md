@@ -18,10 +18,10 @@ active: false
 - parent_status: `docs/dev/in-progress/20260414-37-hybridclr-aligned-aot-hotupdate-development-plan/STATUS.md`
 - parent_roadmap: `docs/dev/in-progress/20260414-37-hybridclr-aligned-aot-hotupdate-development-plan/roadmap-v1-01.md`
 - parent_review: `docs/dev/in-progress/20260414-37-hybridclr-aligned-aot-hotupdate-development-plan/review-v1-01.md`
-- capability_matrix: `docs/architecture/il2cpp-hotupdate-capability-matrix.md`
-- reference_policy: `docs/architecture/reference-assembly-and-corelib-policy.md`
-- archetype_matrix: `docs/architecture/solution-archetype-matrix.md`
-- unsupported_policy: `docs/architecture/unsupported-feature-policy.md`
+- capability_matrix: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-hotupdate-capability-matrix.md`
+- reference_policy: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/reference-assembly-and-corelib-policy.md`
+- archetype_matrix: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/solution-archetype-matrix.md`
+- unsupported_policy: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/unsupported-feature-policy.md`
 - plan: `docs/dev/completed/20260415-01-phase-0-contract-freeze-and-aot-translation-ledgers/plan-v1-01.md`
 - reference_bundle_freeze: `docs/dev/completed/20260415-01-phase-0-contract-freeze-and-aot-translation-ledgers/reference-bundle-freeze-v1-01.md`
 - capability_taxonomy_freeze: `docs/dev/completed/20260415-01-phase-0-contract-freeze-and-aot-translation-ledgers/capability-taxonomy-freeze-v1-01.md`
@@ -64,4 +64,4 @@ active: false
 
 ## wiki
 
-- 本子任务先沉淀在 `docs/dev`；如 Phase 2-6 继续沿用这些口径，再择机同步回 `docs/architecture` 或 `wiki/`。
+- 本子任务先沉淀在 `docs/dev`；如 Phase 2-6 继续沿用这些口径，再择机同步回 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考` 或 `wiki/`。

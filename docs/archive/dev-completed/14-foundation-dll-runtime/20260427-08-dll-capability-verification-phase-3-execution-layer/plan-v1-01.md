@@ -40,8 +40,8 @@
 **计划来源：** `roadmap-child-auto`
 
 **预期知识沉淀：**
-- `docs/architecture/subject-test-framework-v1/INDEX.md`
-- `docs/architecture/foundation-dll-capability-verification-closure-v1.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/foundation-dll-capability-verification-closure-v1.md`
 
 **收尾约束：** 完成后必须进入“结构告警与架构审视 -> 测试通过 -> 归档 completed -> 回写父 roadmap”固定链路。
 

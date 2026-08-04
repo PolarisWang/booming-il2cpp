@@ -19,9 +19,9 @@
 
 ## 关联 Authority
 
-- [`docs/architecture/subject-test-framework-v1/INDEX.md`](../subject-test-framework-v1/INDEX.md)
+- [`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`](../subject-test-framework-v1/INDEX.md)
   - 拥有执行主线、collection/manifest/codegen 分层与 managed/native/hotupdate 宿主边界 authority。
-- [`docs/architecture/unsupported-feature-policy.md`](../unsupported-feature-policy.md)
+- [`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/unsupported-feature-policy.md`](../unsupported-feature-policy.md)
   - 拥有对外 `supportState` 词汇与 reason code 使用边界。
 - `verification/projections/testing-inventory/*`
   - 是面向人的投影视图与展示层，不是 formal verification authority。

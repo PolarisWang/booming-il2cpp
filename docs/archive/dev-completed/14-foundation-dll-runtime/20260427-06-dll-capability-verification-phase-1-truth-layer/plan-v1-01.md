@@ -22,8 +22,8 @@
 - benchmarkRequired: false
 - hotupdateImpact: None
 - formalVerificationObjects:
-  - `docs/architecture/foundation-dll-capability-verification-closure-v1.md`
-  - `docs/architecture/verification-v1/spec.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/foundation-dll-capability-verification-closure-v1.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
   - `verification/projections/foundation-dll-audit/*.json`
 - requiredGates:
   - `collector`
@@ -37,14 +37,14 @@
 **计划来源：** `roadmap-child-auto`
 
 **预期知识沉淀：**
-- `docs/architecture/verification-v1/spec.md`
-- `docs/architecture/foundation-dll-capability-verification-closure-v1.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/foundation-dll-capability-verification-closure-v1.md`
 
 **收尾约束：** 完成后必须进入“结构告警与架构审视 -> 测试通过 -> 归档 completed -> 回写父 roadmap”固定链路。
 
 ## 文件与职责
 
-- `docs/architecture/foundation-dll-capability-verification-closure-v1.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/foundation-dll-capability-verification-closure-v1.md`
   - Truth Layer authority
 - `build/toolchains/run/testing/foundation_dll/**`
   - family claim / verification kernel / future Truth Layer generators

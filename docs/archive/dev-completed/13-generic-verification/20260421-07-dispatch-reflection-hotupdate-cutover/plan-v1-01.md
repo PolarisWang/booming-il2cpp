@@ -33,7 +33,7 @@
 
 **设计文档：** `docs/dev/in-progress/20260421-02-canonical-generic-runtime-kernel-roadmap/design-v1-02.md`
 
-**预期知识沉淀：** `docs/architecture/managed-native-hotupdate-test-pipeline.md`、`wiki/06-测试验证/AOT新Feature接入自测规范.md`、`wiki/06-测试验证/INDEX.md`
+**预期知识沉淀：** `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/managed-native-hotupdate-test-pipeline.md`、`wiki/06-测试验证/AOT新Feature接入自测规范.md`、`wiki/06-测试验证/INDEX.md`
 
 **收尾约束：** 执行完成后必须进入“审视架构合理性 -> 测试通过 -> 归档 completed -> 合并&提交”固定链路；未完成 formal verification gate 前不得宣称完成。
 

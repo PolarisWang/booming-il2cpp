@@ -55,4 +55,4 @@ active: false
 ## wiki
 
 - 本子任务先不更新 `wiki/`。
-- 稳定后的 `SolutionCorePack` 结构与 capability 表达方式由父 roadmap Phase 5/6 统一沉淀到 `docs/architecture`。
+- 稳定后的 `SolutionCorePack` 结构与 capability 表达方式由父 roadmap Phase 5/6 统一沉淀到 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考`。

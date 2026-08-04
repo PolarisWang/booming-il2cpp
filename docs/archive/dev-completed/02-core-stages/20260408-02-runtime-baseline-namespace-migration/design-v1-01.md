@@ -35,7 +35,7 @@
 - `build/scripts/verify-roadmap-0.ps1` -> `build/scripts/verify-runtime-baseline.ps1`
 - `build/scripts/verify-roadmap-0.sh` -> `build/scripts/verify-runtime-baseline.sh`
 - `artifacts/verify-roadmap-0/**` -> `artifacts/verify-runtime-baseline/**`
-- `docs/architecture/roadmap-0/` -> `docs/architecture/runtime-baseline/`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/` -> `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/`
 - `wiki/06-测试验证/整体验证场景/roadmap-0-runtime.md` -> `runtime-baseline.md`
 - `wiki/06-测试验证/整体验证场景/roadmap-0-platform-gates.md` -> `platform-gates.md`
 

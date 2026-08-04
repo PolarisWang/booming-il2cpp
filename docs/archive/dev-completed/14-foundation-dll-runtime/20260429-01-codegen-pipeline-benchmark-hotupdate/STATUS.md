@@ -76,8 +76,8 @@ The Chaos.IL2CPP.CodeGen pipeline now emits real C++ method bodies for both benc
 - `build/toolchains/run/testing/foundation_dll/native_codegen_generator.py` — CMake target link fix
 - `src/native/benchmark-host/native_aot_main.cpp` — Runtime lifecycle init
 - `build/toolchains/run/testing/subject_workers.py` — CodeGen pipeline integration
-- `docs/architecture/subject-test-framework-v1/INDEX.md` — Updated architecture docs
-- `docs/architecture/verification-v1/spec.md` — Updated verification spec
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md` — Updated architecture docs
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md` — Updated verification spec
 
 ### Generated Artifacts (verification/foundation-dll/System.Private.CoreLib/)
 

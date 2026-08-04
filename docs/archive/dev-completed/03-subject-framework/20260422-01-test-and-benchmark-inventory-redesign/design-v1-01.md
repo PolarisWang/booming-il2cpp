@@ -165,7 +165,7 @@ Status: drafted
 
 来源：
 
-- `docs/architecture/managed-native-hotupdate-test-pipeline.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/managed-native-hotupdate-test-pipeline.md`
 - `wiki/06-测试验证/AOT新Feature接入自测规范.md`
 
 用于定义：

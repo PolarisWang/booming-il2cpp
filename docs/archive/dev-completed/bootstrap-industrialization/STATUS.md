@@ -20,7 +20,7 @@ phase: G
     - smoke_test: passed
 - test_result: passed
 - wiki: updated:wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/21-引导程序与引擎桥接.md
-- architecture_doc: docs/architecture/il2cpp-bootstrap-architecture.md
+- architecture_doc: wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-bootstrap-architecture.md
 - next: merge (dev-finishing-a-development-branch)
 
 ## 最终文件清单

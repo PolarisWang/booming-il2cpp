@@ -229,13 +229,13 @@ contracts/native/examples/v0/*
 以下 active 文档也需要同步改路径:
 
 - `contracts/docs/v0/codegen-bridge-proof-boundary.md`
-- `docs/architecture/roadmap-0/hello-world-proof-spec-v0.md`
-- `docs/architecture/roadmap-0/local-verification.md`
-- `docs/architecture/roadmap-0/schema-pack-v0.md`
-- `docs/architecture/runtime-baseline/hello-world-proof-spec-v0.md`
-- `docs/architecture/runtime-baseline/local-verification.md`
-- `docs/architecture/runtime-baseline/schema-pack-v0.md`
-- `docs/architecture/subject-test-framework-v1/foundation-and-windows-cutover-v1.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/hello-world-proof-spec-v0.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/local-verification.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/schema-pack-v0.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/hello-world-proof-spec-v0.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/local-verification.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/runtime-baseline/schema-pack-v0.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/foundation-and-windows-cutover-v1.md`
 
 文档需要统一成一句清楚的话:
 

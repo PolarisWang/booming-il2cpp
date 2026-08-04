@@ -25,7 +25,7 @@
 - `tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py`
 - `tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_validators.py`
 - `tests/unit/compatibility/test_full_assembly_closure_codegen_audit_plan.py`
-- `docs/architecture/managed-native-hotupdate-test-pipeline.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/managed-native-hotupdate-test-pipeline.md`
 - `wiki/06-测试验证/AOT新Feature接入自测规范.md`
 - `wiki/06-测试验证/INDEX.md`
 

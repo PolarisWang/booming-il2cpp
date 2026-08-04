@@ -26,8 +26,8 @@
 
 - 选择方案 C。
 - 本轮范围限定为：
-  - `docs/architecture/ios-distribution-policy.md`
-  - `docs/architecture/version-compatibility-matrix.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/ios-distribution-policy.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/version-compatibility-matrix.md`
   - `PackageValidator` 的版本兼容检查
   - 对应的定向测试
 - rollback、compatibility matrix runner、soak test 继续留在后续批次。

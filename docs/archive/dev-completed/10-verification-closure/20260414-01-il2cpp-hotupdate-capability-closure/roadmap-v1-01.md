@@ -281,15 +281,15 @@ Status: draft
   - 把能力设计转成长期可维护文档。
 - `structure_adjustments`
   - 新增：
-    - `docs/architecture/il2cpp-hotupdate-capability-matrix.md`
-    - `docs/architecture/solution-archetype-matrix.md`
-    - `docs/architecture/full-project-hotupdate-workflow.md`
-    - `docs/architecture/reference-assembly-and-corelib-policy.md`
-    - `docs/architecture/unsupported-feature-policy.md`
+    - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-hotupdate-capability-matrix.md`
+    - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/solution-archetype-matrix.md`
+    - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/full-project-hotupdate-workflow.md`
+    - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/reference-assembly-and-corelib-policy.md`
+    - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/unsupported-feature-policy.md`
   - 更新：
-    - `docs/architecture/INDEX.md`
-    - `docs/architecture/release-checklist.md`
-    - `docs/architecture/version-compatibility-matrix.md`
+    - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/INDEX.md`
+    - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/release-checklist.md`
+    - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/version-compatibility-matrix.md`
 - `checklist`
   - [ ] 写 capability matrix 文档
   - [ ] 写 solution archetype 文档
@@ -303,7 +303,7 @@ Status: draft
   - 仅靠文档即可回答“怎么写、怎么跑、支持到哪、边界是什么”
 - `open_questions`
   - 无。`Q8` 已冻结：
-    - 稳定 contract 文档进入 `docs/architecture`
+    - 稳定 contract 文档进入 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考`
     - 迁移顺序、阶段 checklist、一次性重命名明细保留在 dev task archive
 
 ### Phase 7

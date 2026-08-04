@@ -168,7 +168,7 @@ Phase 0 至少要产出两本台账：
 规则：
 
 - 不能因为某项能力暂不支持，就不把它写进台账。
-- `unsupported` / `partial` 项必须按 `docs/architecture/unsupported-feature-policy.md` 携带稳定 reason code。
+- `unsupported` / `partial` 项必须按 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/unsupported-feature-policy.md` 携带稳定 reason code。
 - 只有当 translation surface 已全部归档到 supported/partial/unsupported/not-applicable 范畴后，才允许声称“目标 AOT 翻译面已完整覆盖”。
 
 ## 6. reference bundle 模型

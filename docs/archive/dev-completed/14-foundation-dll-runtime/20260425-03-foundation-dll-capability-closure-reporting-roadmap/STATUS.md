@@ -73,7 +73,7 @@ clearance_confirmed_by_user: true
   - `docs/verification/foundation-dll-audit/*`
   - `verification/projections/foundation-dll-audit/*`
   - `verification/catalog/programs/foundation-dll-translation-audit.program.json`
-  - `docs/architecture/verification-v1/spec.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
   - `wiki/06-测试验证/INDEX.md`
 - requiredGates:
   - `projection-contract`

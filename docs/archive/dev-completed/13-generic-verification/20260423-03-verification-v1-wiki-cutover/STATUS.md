@@ -11,7 +11,7 @@ current_dir: docs/dev/completed/20260423-03-verification-v1-wiki-cutover
 parent_task_id: 20260423-01-verification-v1-roadmap
 source_task_id: verification-v1-wiki-cutover
 source_relation: roadmap-child
-roadmap_or_plan: docs/architecture/verification-v1/roadmap-v1-01.md
+roadmap_or_plan: wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/roadmap-v1-01.md
 clearance_source: parent-roadmap
 active: false
 preflight_review: pass
@@ -26,8 +26,8 @@ auto_execution_decision: continue
 - `wiki/06-测试验证/Verification-V1测试流程规范.md`
 - `wiki/06-测试验证/INDEX.md`
 - `wiki/06-测试验证/测试管线/INDEX.md`
-- `docs/architecture/managed-native-hotupdate-test-pipeline.md`
-- `docs/architecture/verification-v1/spec.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/managed-native-hotupdate-test-pipeline.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
 
 ## 当前结论
 
@@ -71,18 +71,18 @@ auto_execution_decision: continue
   - canonical wiki 入口已收敛到 `Verification-V1测试流程规范.md`
   - `INDEX.md` 只负责导航，不再复制一套独立规则正文
 - structure:
-  - `docs/architecture/*` 继续承载规格、schema、ownership、cutover authority
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/*` 继续承载规格、schema、ownership、cutover authority
   - `wiki/06-*` 只负责长期阅读入口、流程导航与 legacy 说明
 
 ## 权责图审核
 
 - authority:
   - 长期 canonical 流程入口: `wiki/06-测试验证/Verification-V1测试流程规范.md`
-  - 执行主线 authority: `docs/architecture/managed-native-hotupdate-test-pipeline.md`
+  - 执行主线 authority: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/managed-native-hotupdate-test-pipeline.md`
 - upstream:
-  - `docs/architecture/verification-v1/spec.md`
-  - `docs/architecture/verification-v1/projection-and-reporting.md`
-  - `docs/architecture/verification-v1/cutover-and-rollout.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/projection-and-reporting.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/cutover-and-rollout.md`
 - downstream:
   - `wiki/06-测试验证/INDEX.md`
   - `wiki/06-测试验证/测试管线/INDEX.md`

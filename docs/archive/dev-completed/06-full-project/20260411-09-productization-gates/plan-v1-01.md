@@ -24,8 +24,8 @@
 
 ### Batch 3: iOS 发行策略 + 版本管理
 
-- [x] **3.1** 编写 `docs/architecture/ios-distribution-policy.md`
-- [x] **3.2** 编写 `docs/architecture/version-compatibility-matrix.md`
+- [x] **3.1** 编写 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/ios-distribution-policy.md`
+- [x] **3.2** 编写 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/version-compatibility-matrix.md`
 - [x] **3.3** 将版本兼容性检查集成到 `PackageValidator`
 
 ### Batch 4: 长期回归 + Soak Test

@@ -94,4 +94,4 @@ active: false
 ## wiki
 
 - 本子任务当前只在 `docs/dev` 记录执行细节。
-- Phase 3 如果把 shared runtime / supplemental metadata foundation 收敛稳定，再评估同步到 `docs/architecture`。
+- Phase 3 如果把 shared runtime / supplemental metadata foundation 收敛稳定，再评估同步到 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考`。

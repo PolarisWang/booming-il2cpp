@@ -49,7 +49,7 @@ All 5 steps of the Scriban Generator Formalization completed:
 - Fixed `README.md` (dotnet test path)
 - Created `wiki/04-工具与集成/il2cpp-generator-project-structure.md`
 - Updated `wiki/04-工具与集成/INDEX.md`
-- Batch rename across wiki/ (20 files) and docs/architecture/ (3 files)
+- Batch rename across wiki/ (20 files) and wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/ (3 files)
 - Total: 991+ files updated
 
 ### Step 5: 验证 + 收尾 — Done

@@ -16,8 +16,8 @@ active: false
 ## 关键文档
 
 - reference_previous_roadmap: `docs/dev/completed/20260414-04-il2cpp-hotupdate-capability-expansion-roadmap/roadmap-v1-01.md`
-- reference_capability_matrix: `docs/architecture/il2cpp-hotupdate-capability-matrix.md`
-- reference_archetype_matrix: `docs/architecture/solution-archetype-matrix.md`
+- reference_capability_matrix: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-hotupdate-capability-matrix.md`
+- reference_archetype_matrix: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/solution-archetype-matrix.md`
 - brainstorm: `docs/dev/completed/20260414-12-il2cpp-core-capability-development-roadmap/brainstorm-v1-01.md`
 - design: `docs/dev/completed/20260414-12-il2cpp-core-capability-development-roadmap/design-v1-01.md`
 - roadmap_or_plan: `docs/dev/completed/20260414-12-il2cpp-core-capability-development-roadmap/roadmap-v1-01.md`

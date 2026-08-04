@@ -12,7 +12,7 @@
 - `docs/dev/completed/20260415-01-phase-0-contract-freeze-and-aot-translation-ledgers/stable-identity-and-body-availability-v1-01.md`
 - `docs/dev/completed/20260415-02-phase-1-subject-source-reshape-and-test-metadata-cutover/STATUS.md`
 
-**预期知识沉淀：** 如 shared contract 稳定，后续同步到 `docs/architecture`。
+**预期知识沉淀：** 如 shared contract 稳定，后续同步到 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考`。
 
 ---
 

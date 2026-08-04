@@ -10,7 +10,7 @@
 
 **设计文档：** `docs/dev/in-progress/20260406-05-stage-5b-reflection-lite-windows-reference/design-v1-01.md`
 
-**预期知识沉淀：** 按任务决定；若本轮形成稳定长期边界，再补入 `docs/architecture/roadmap-0/reflection-lite-proof-v0.md`
+**预期知识沉淀：** 按任务决定；若本轮形成稳定长期边界，再补入 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/reflection-lite-proof-v0.md`
 
 ---
 

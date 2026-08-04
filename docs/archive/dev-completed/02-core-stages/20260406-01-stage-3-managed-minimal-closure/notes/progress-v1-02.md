@@ -12,7 +12,7 @@
 - 新增 Stage 3 验证：
   - `tests/unit/run/test_stage3_managed_minimal_closure.py`
 - 落地 Stage 3 spec：
-  - `docs/architecture/roadmap-0/managed-minimal-closure-v0.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/managed-minimal-closure-v0.md`
   - `contracts/docs/v0/overview.md`
 - 实现通用 managed closure 最小闭环：
   - `Chaos.IL2CPP.Contracts`：通用 request / model / artifact contract

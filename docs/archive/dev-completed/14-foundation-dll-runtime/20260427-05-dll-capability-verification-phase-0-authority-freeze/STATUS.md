@@ -36,10 +36,10 @@ active: false
 ## 完成证据
 
 - authority_freeze:
-  - `docs/architecture/foundation-dll-capability-verification-closure-v1.md`
-  - `docs/architecture/verification-v1/spec.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/foundation-dll-capability-verification-closure-v1.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
   - `wiki/06-测试验证/AOT新Feature接入自测规范.md`
-  - `docs/architecture/subject-test-framework-v1/INDEX.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
 - structure_review: `ok`
 - verification:
   - `python -m pytest tests/unit/compatibility/test_declared_metadata_discovery_contract.py -q`

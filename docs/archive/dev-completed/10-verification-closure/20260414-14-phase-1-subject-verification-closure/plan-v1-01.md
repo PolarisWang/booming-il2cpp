@@ -7,7 +7,7 @@
 **技术栈：** Python、`pytest`、`docs/dev` 状态维护、现有 benchmark dashboard generator 与静态 JSON/HTML 产物。
 **设计文档：** `docs/dev/in-progress/20260414-12-il2cpp-core-capability-development-roadmap/design-v1-01.md`
 
-**预期知识沉淀：** 先保留在本子任务目录；若 Phase 1 结论稳定，再由父 roadmap 决定是否并入 `docs/architecture`。
+**预期知识沉淀：** 先保留在本子任务目录；若 Phase 1 结论稳定，再由父 roadmap 决定是否并入 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考`。
 
 ---
 

@@ -155,7 +155,7 @@ managed baseline 是 dashboard 的基线，native / interpreter 作为对照面�
 
 当前统一规则见：
 
-- `docs/architecture/version-compatibility-matrix.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/version-compatibility-matrix.md`
 
 ## 与其他 retained subjects 的关系
 

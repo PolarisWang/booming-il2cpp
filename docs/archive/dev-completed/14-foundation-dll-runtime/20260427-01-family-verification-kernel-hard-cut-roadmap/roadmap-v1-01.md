@@ -278,7 +278,7 @@ Status: completed
 
 - `docs/dev/completed/20260426-01-capability-family-test-code-first-pipeline/design-v1-01.md`
 - `docs/dev/completed/20260426-01-capability-family-test-code-first-pipeline/STATUS.md`
-- `docs/architecture/verification-v1/spec.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
 - `build/toolchains/run/testing/foundation_dll_audit_generator.py`
 - `build/toolchains/run/testing/foundation_dll/*`
 - `verification/projections/foundation-dll-audit/*`

@@ -10,7 +10,7 @@
 
 **设计文档：** `docs/dev/in-progress/20260414-12-il2cpp-core-capability-development-roadmap/design-v1-01.md`
 
-**预期知识沉淀：** 先留在本子任务目录；若后续长期稳定，再在 Phase 5/6 同步到 `docs/architecture`。
+**预期知识沉淀：** 先留在本子任务目录；若后续长期稳定，再在 Phase 5/6 同步到 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考`。
 
 ---
 

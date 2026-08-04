@@ -6,11 +6,11 @@
 
 **架构：** 本阶段不改运行时代码；先把后续所有实现批次都会反复引用的 owner、id、surface、unsupported reason 变成单一事实源。Phase 1 之后的代码和 subject 迁移都必须以这批 freeze 文档为边界，不再继续扩展 string 协议面。
 
-**技术栈：** Markdown、`docs/dev` 状态维护、PowerShell/本地代码事实复核、既有 `docs/architecture` 文档复用。
+**技术栈：** Markdown、`docs/dev` 状态维护、PowerShell/本地代码事实复核、既有 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考` 文档复用。
 
 **设计文档：** `docs/dev/in-progress/20260414-37-hybridclr-aligned-aot-hotupdate-development-plan/design-v1-01.md`
 
-**预期知识沉淀：** 先留在本子任务目录；后续若 Phase 2-6 证明这些口径稳定，再合并到 `docs/architecture`。
+**预期知识沉淀：** 先留在本子任务目录；后续若 Phase 2-6 证明这些口径稳定，再合并到 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考`。
 
 ---
 
@@ -56,7 +56,7 @@
   - 所有 level-1 capability family 都能映射到明确 owner subject；
   - 所有 level-2 capability item 都能映射到 family，不再依赖新增 string 协议；
   - `AOT translation surface ledger` 覆盖 language、compiler-lowered、runtime service、metadata/closure、interop/ABI 五类；
-  - `unsupported` / `partial` 条目带稳定 reason code，且 reason code 只来自 `docs/architecture/unsupported-feature-policy.md` 已冻结词汇；
+  - `unsupported` / `partial` 条目带稳定 reason code，且 reason code 只来自 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/unsupported-feature-policy.md` 已冻结词汇；
   - `reference bundle` 的 base / supplement 边界能解释当前 `ReferenceAssemblySolution`、`CoreLibReferenceSolution`、`MixedReferenceClosureSolution` 和 patch 场景。
 
 ## 状态维护

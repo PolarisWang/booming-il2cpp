@@ -33,7 +33,7 @@
   - `contracts/native/examples/v0/**/*` -> `contracts/native/v0/samples/**/*`
 - 修改：[contracts/docs/v0/overview.md](D:/agent/booming-il2cpp/contracts/docs/v0/overview.md)
   - 更新 canonical 布局描述
-- 修改：[docs/architecture/roadmap-0/schema-pack-v0.md](D:/agent/booming-il2cpp/docs/architecture/roadmap-0/schema-pack-v0.md)
+- 修改：[wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/schema-pack-v0.md](D:/agent/booming-il2cpp/wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/schema-pack-v0.md)
   - 更新 canonical sample 路径描述
 - 修改：[docs/dev/completed/20260407-03-phase-1-path-resolver-and-contract-samples-cutover/STATUS.md](D:/agent/booming-il2cpp/docs/dev/completed/20260407-03-phase-1-path-resolver-and-contract-samples-cutover/STATUS.md)
   - 持续记录状态

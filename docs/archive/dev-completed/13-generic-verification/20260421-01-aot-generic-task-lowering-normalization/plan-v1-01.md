@@ -28,7 +28,7 @@
 **设计文档：** `docs/dev/in-progress/20260421-01-aot-generic-task-lowering-normalization/design-v1-01.md`
 
 **预期知识沉淀：**
-- `docs/architecture/managed-native-hotupdate-test-pipeline.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/managed-native-hotupdate-test-pipeline.md`
 - `wiki/06-测试验证/INDEX.md`
 - 如新增长期规则，再补对应 AOT / codegen wiki
 

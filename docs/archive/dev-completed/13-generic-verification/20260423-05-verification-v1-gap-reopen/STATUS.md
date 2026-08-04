@@ -11,7 +11,7 @@ current_dir: docs/dev/completed/20260423-05-verification-v1-gap-reopen
 parent_task_id: 20260423-01-verification-v1-roadmap
 source_task_id: 20260423-01-verification-v1-roadmap
 source_relation: reopened-after-completion-review
-roadmap_or_plan: docs/architecture/verification-v1/roadmap-v1-01.md
+roadmap_or_plan: wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/roadmap-v1-01.md
 clearance_source: parent-roadmap
 child_execution_mode: auto
 auto_continue: true
@@ -27,8 +27,8 @@ auto_execution_decision: continue
 
 ## 关键文档
 
-- `docs/architecture/verification-v1/roadmap-v1-01.md`
-- `docs/architecture/verification-v1/spec.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/roadmap-v1-01.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
 - `build/toolchains/run/testing/inventory_source.py`
 - `build/toolchains/run/testing/verification_bundle.py`
 - `build/toolchains/run/testing/verification_codegen_stubs.py`

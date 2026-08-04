@@ -61,7 +61,7 @@
 - 创建：`tests/tooling/run/test_wrapper_bootstrap.sh`
 - 创建：`tests/tooling/run/test_run_cli.ps1`
 - 创建：`tests/tooling/run/test_run_cli.sh`
-- 修改：`docs/architecture/roadmap-0/local-verification.md`
+- 修改：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/local-verification.md`
 - 修改：`wiki/04-工具与集成/INDEX.md`
 - 创建：`wiki/04-工具与集成/统一入口脚本.md`
 
@@ -328,7 +328,7 @@ python -m unittest tests.tooling.run.test_prepare_scopes
 ### 任务 5：补齐使用文档与项目知识沉淀
 
 **文件：**
-- 修改：`docs/architecture/roadmap-0/local-verification.md`
+- 修改：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/local-verification.md`
 - 修改：`wiki/04-工具与集成/INDEX.md`
 - 创建：`wiki/04-工具与集成/统一入口脚本.md`
 - 如有必要修改：`docs/booming/2026-04-03-unified-run-entrypoint/design-2026-04-03-03-unified-run-entrypoint.md`

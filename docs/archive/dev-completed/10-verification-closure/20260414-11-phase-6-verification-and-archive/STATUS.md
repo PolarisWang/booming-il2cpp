@@ -53,4 +53,4 @@ active: false
 ## wiki
 
 - 本子任务未额外更新 `wiki/`。
-- 长期有效知识已收敛到 `docs/architecture` 与归档的 roadmap 文档。
+- 长期有效知识已收敛到 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考` 与归档的 roadmap 文档。

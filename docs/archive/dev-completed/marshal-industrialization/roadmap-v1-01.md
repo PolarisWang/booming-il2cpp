@@ -18,7 +18,7 @@
 
 **计划来源：** direct-roadmap (brainstorm → roadmap 分流)
 
-**预期知识沉淀：** `docs/architecture/il2cpp-marshal-architecture.md`, `wiki/03-功能模块/07-COM互操作/`, `wiki/06-测试验证/模块/interop.md`
+**预期知识沉淀：** `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-marshal-architecture.md`, `wiki/03-功能模块/07-COM互操作/`, `wiki/06-测试验证/模块/interop.md`
 
 ---
 
@@ -112,7 +112,7 @@
 |------|------|
 | **goal** | 架构文档、wiki 更新、结构告警、回归测试、合并到 main |
 | **exit_criteria** | 结构告警无 blocker、全回归测试通过、归档 completed + 合并提交 |
-| **deliverables** | docs/architecture/il2cpp-marshal-architecture.md, wiki 更新, 合并 commit |
+| **deliverables** | wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-marshal-architecture.md, wiki 更新, 合并 commit |
 | **dependencies** | Phase A-G |
 | **resolved_decisions** | 收尾使用 dev-finishing-a-development-branch |
 
@@ -135,7 +135,7 @@
 | f2-ccw-test | F | completed | CCW 创建/aggregated 测试 | a1-test-fixture | com_ccw_test.cpp | 6 tests 通过 | 中 |
 | f3-connection-point-test | F | completed | 连接点测试 | a1-test-fixture | com_connection_point_test.cpp | 4 tests 通过 | 中 |
 | g1-managed-tests | G | completed | foundation-dll pipeline 验证 — 11 个 interop 测试族, 181/181 fact tests 通过 | b1-alloc-test, b2-string-test, b3-api-basic-test, c1-struct-marshal-test, e1-custom-marshaler-test, f1-rcw-test, f2-ccw-test, f3-connection-point-test | foundation-dll pipeline 结果 | 11 族 181/181 fact tests 通过 | 大 |
-| h1-architecture-doc | H | planned | 创建架构文档 | g1-managed-tests | docs/architecture/il2cpp-marshal-architecture.md | 文档完成 | 中 |
+| h1-architecture-doc | H | planned | 创建架构文档 | g1-managed-tests | wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-marshal-architecture.md | 文档完成 | 中 |
 | h2-wiki-update | H | planned | 更新 wiki 文档 | g1-managed-tests | wiki 修改 | wiki 与实现一致 | 小 |
 | h3-structural-review-merge | H | planned | 结构告警 + 回归测试 + 合并 | h1-architecture-doc, h2-wiki-update | STATUS.md completed, merge commit | 全回归通过，合并到 main | 中 |
 

@@ -19,11 +19,11 @@ active: false
 - brainstorm: `docs/dev/completed/20260414-01-il2cpp-hotupdate-capability-closure/brainstorm-v1-01.md`
 - design: `docs/dev/completed/20260414-01-il2cpp-hotupdate-capability-closure/design-v1-01.md`
 - roadmap_or_plan: `docs/dev/completed/20260414-01-il2cpp-hotupdate-capability-closure/roadmap-v1-01.md`
-- capability_matrix: `docs/architecture/il2cpp-hotupdate-capability-matrix.md`
-- solution_archetypes: `docs/architecture/solution-archetype-matrix.md`
-- full_project_hotupdate: `docs/architecture/full-project-hotupdate-workflow.md`
-- reference_corelib_policy: `docs/architecture/reference-assembly-and-corelib-policy.md`
-- unsupported_policy: `docs/architecture/unsupported-feature-policy.md`
+- capability_matrix: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-hotupdate-capability-matrix.md`
+- solution_archetypes: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/solution-archetype-matrix.md`
+- full_project_hotupdate: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/full-project-hotupdate-workflow.md`
+- reference_corelib_policy: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/reference-assembly-and-corelib-policy.md`
+- unsupported_policy: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/unsupported-feature-policy.md`
 
 ## 当前结论
 
@@ -32,7 +32,7 @@ active: false
 - success_definition:
   - `subjects/` 顶层仅保留 `SolutionCorePack`、`HotUpdateHostPack`、`MixedExecutionFeaturePack`
   - `Chaos.TestFramework` 成为 subject 侧统一声明接口
-  - capability matrix / solution archetype / hot-update workflow 已落入 `docs/architecture`
+  - capability matrix / solution archetype / hot-update workflow 已落入 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考`
   - retained subjects proof / benchmark / archetype matrix 均有真实运行证据
   - registry refresh 与全量 `pytest` 已通过
 

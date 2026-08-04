@@ -12,11 +12,11 @@
 - `build/toolchains/run/testing/declarations.py`
 - `build/toolchains/run/testing/declared_metadata_labels.py`
 - `build/toolchains/run/testing/templates/benchmark-dashboard.html`
-- `docs/architecture/il2cpp-hotupdate-capability-matrix.md`
-- `docs/architecture/solution-archetype-matrix.md`
-- `docs/architecture/reference-assembly-and-corelib-policy.md`
-- `docs/architecture/full-project-hotupdate-workflow.md`
-- `docs/architecture/unsupported-feature-policy.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-hotupdate-capability-matrix.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/solution-archetype-matrix.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/reference-assembly-and-corelib-policy.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/full-project-hotupdate-workflow.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/unsupported-feature-policy.md`
 - `tests/integration/registry/test_registry_scan.py`
 - `tests/unit/performance/test_benchmark_dashboard_generator.py`
 - `tests/unit/performance/test_benchmark_command.py`

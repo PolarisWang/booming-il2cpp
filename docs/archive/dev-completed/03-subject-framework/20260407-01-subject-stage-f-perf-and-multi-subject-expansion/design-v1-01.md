@@ -244,7 +244,7 @@ Stage F 鐨勨€滄祴璇曞伐绋嬫暣鐞嗏€濆湪鏈疆鍙浐瀹氫
 
 褰撴湰璁″垝鏈潵鎵ц闂幆鍚庯紝搴旀妸闀挎湡杈圭晫鍥炲啓鍒帮細
 
-- `docs/architecture/subject-test-framework-v1/perf-and-multi-subject-expansion-v1.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/perf-and-multi-subject-expansion-v1.md`
 
 骞舵寜瀹為檯 perf / second-subject public surface 鏇存柊锛?
 

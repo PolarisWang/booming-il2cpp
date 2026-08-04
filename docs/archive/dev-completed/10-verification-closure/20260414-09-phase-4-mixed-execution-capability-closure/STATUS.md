@@ -55,4 +55,4 @@ active: false
 ## wiki
 
 - 本子任务先不更新 `wiki/`。
-- 稳定后的 mixed/interpreter capability 边界由父 roadmap 在 Phase 5/6 统一沉淀到 `docs/architecture`。
+- 稳定后的 mixed/interpreter capability 边界由父 roadmap 在 Phase 5/6 统一沉淀到 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考`。

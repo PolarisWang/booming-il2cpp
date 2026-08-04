@@ -17,8 +17,8 @@ active: false
 
 - parent_design: `docs/dev/in-progress/20260414-12-il2cpp-core-capability-development-roadmap/design-v1-01.md`
 - parent_roadmap: `docs/dev/in-progress/20260414-12-il2cpp-core-capability-development-roadmap/roadmap-v1-01.md`
-- capability_matrix: `docs/architecture/il2cpp-hotupdate-capability-matrix.md`
-- reference_policy: `docs/architecture/reference-assembly-and-corelib-policy.md`
+- capability_matrix: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-hotupdate-capability-matrix.md`
+- reference_policy: `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/reference-assembly-and-corelib-policy.md`
 - plan: `docs/dev/completed/20260414-13-phase-0-coverage-ledger-and-subject-verification-freeze/plan-v1-01.md`
 - coverage_ledger_freeze: `docs/dev/completed/20260414-13-phase-0-coverage-ledger-and-subject-verification-freeze/coverage-ledger-freeze-v1-01.md`
 - subject_verification_checklist: `docs/dev/completed/20260414-13-phase-0-coverage-ledger-and-subject-verification-freeze/subject-verification-checklist-v1-01.md`
@@ -58,4 +58,4 @@ active: false
 
 ## wiki
 
-- 本子任务只冻结 `docs/dev` 与 `docs/architecture` 的衔接边界，暂不改 `wiki/`。
+- 本子任务只冻结 `docs/dev` 与 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考` 的衔接边界，暂不改 `wiki/`。

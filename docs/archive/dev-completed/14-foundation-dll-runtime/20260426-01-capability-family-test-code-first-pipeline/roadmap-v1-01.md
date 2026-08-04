@@ -162,7 +162,7 @@ Status: in-progress
 
 ## 7. 依赖
 
-- `docs/architecture/verification-v1/spec.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
 - `wiki/06-测试验证/INDEX.md`
 - `build/toolchains/run/commands/foundation_dll.py`
 - `build/toolchains/run/testing/foundation_dll/*`

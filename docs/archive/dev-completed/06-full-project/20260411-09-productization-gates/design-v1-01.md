@@ -5,8 +5,8 @@
 - 为 hot update package 建立最小可执行的版本兼容规则。
 - 将规则接入 `PackageValidator`，替代当前“必须完全等于 target AOT version”的硬编码。
 - 补齐与产品发布相关的两份架构文档：
-  - `docs/architecture/ios-distribution-policy.md`
-  - `docs/architecture/version-compatibility-matrix.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/ios-distribution-policy.md`
+  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/version-compatibility-matrix.md`
 
 ## 设计约束
 

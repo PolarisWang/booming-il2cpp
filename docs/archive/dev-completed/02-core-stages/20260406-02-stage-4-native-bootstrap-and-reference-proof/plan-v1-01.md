@@ -12,7 +12,7 @@
 
 **预期知识沉淀：**
 
-- `docs/architecture/roadmap-0/native-reference-proof-v0.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/native-reference-proof-v0.md`
 
 ---
 
@@ -28,7 +28,7 @@
   - 同步进行中索引中的 Stage 4 摘要与 active 状态。
 - 新增或修改：`docs/dev/completed/20260406-02-stage-4-native-bootstrap-and-reference-proof/notes/progress-*.md`
   - 记录每个 Chunk 的验证结果、剩余风险与后续步骤。
-- 修改：`docs/architecture/roadmap-0/native-reference-proof-v0.md`
+- 修改：`wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/native-reference-proof-v0.md`
   - 写清 Stage 4 输入、输出、proof host 约束、generated emission 边界与 reference preset 接线原则。
 - 修改：`src/managed/Chaos.IL2CPP.Contracts/ManagedClosureContracts.cs`
   - 维护 Stage 4 native reference proof 所需的 request / manifest / artifact model。
@@ -62,7 +62,7 @@
 
 ## Chunk 1：收口 Stage 4 长期 spec 与 emission contract
 
-- [x] 创建 `docs/architecture/roadmap-0/native-reference-proof-v0.md`。
+- [x] 创建 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/roadmap-0/native-reference-proof-v0.md`。
 - [x] 写明 Stage 4 输入固定为 `artifacts/proof/managed-closure/HelloWorldObject/` 下的五件 bundle。
 - [x] 写明 Stage 4 第一轮输出至少包含：
   - `artifacts/proof/native-reference/HelloWorldObject/generated/`

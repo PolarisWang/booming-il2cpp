@@ -302,7 +302,7 @@ Status: design-discuss
   - engine artifact evidence/report contract
   - engine summary consumer boundary
   则在 `docs/discuss/` 新开专题文档，再回链到本骨架。
-- 当某个阶段的边界和方案已经稳定，应把结论迁移到 `docs/architecture/` 或 `docs/dev/` 的正式 roadmap / plan 文档。
+- 当某个阶段的边界和方案已经稳定，应把结论迁移到 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/` 或 `docs/dev/` 的正式 roadmap / plan 文档。
 
 ## 10. 当前建议
 

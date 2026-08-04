@@ -12,7 +12,7 @@
 
 ## 验证结论
 
-- `git diff --check -- .codex/skills docs/architecture wiki docs/dev` 通过；无 whitespace error
+- `git diff --check -- .codex/skills wiki/03-功能模块/06-il2cpp核心架构/05-架构参考 wiki docs/dev` 通过；无 whitespace error
 - obligation 字段与 formal verification 关键词链路已全部补齐
 - 热路径组合从 `18380` 字符降到 `17088` 字符，净减少 `1292` 字符
 

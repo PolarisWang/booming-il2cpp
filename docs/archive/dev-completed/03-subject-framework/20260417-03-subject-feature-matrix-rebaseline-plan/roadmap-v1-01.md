@@ -313,8 +313,8 @@ Checklist锛?
 
 Checklist锛?
 
-- 更新 `docs/architecture/subject-test-framework-v1/INDEX.md`
-- 更新 `docs/architecture/verification-v1/spec.md`
+- 更新 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/subject-test-framework-v1/INDEX.md`
+- 更新 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/verification-v1/spec.md`
 - 鏇存柊 `wiki/04-宸ュ叿涓庨泦鎴?缁熶竴娴嬭瘯妗嗘灦.md`
 - 鏇存柊 `wiki/06-娴嬭瘯楠岃瘉/鏂板娴嬭瘯鎺ュ叆瑙勮寖.md`
 - 鏇存柊 `wiki/06-娴嬭瘯楠岃瘉/AOT鏂癋eature鎺ュ叆鑷祴瑙勮寖.md`

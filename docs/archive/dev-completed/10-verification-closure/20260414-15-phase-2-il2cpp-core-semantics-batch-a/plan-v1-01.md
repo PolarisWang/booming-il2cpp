@@ -7,7 +7,7 @@
 **技术栈：** C#、`Chaos.TestFramework`、`SolutionCorePack` retained subject、Python/pytest 回归、benchmark dashboard 现有管线。
 **设计文档：** `docs/dev/completed/20260414-12-il2cpp-core-capability-development-roadmap/design-v1-01.md`
 
-**预期知识沉淀：** 先留在本子任务目录；若 Batch A 收口稳定，再同步进 `docs/architecture` capability matrix。
+**预期知识沉淀：** 先留在本子任务目录；若 Batch A 收口稳定，再同步进 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考` capability matrix。
 
 ---
 

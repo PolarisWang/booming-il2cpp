@@ -86,7 +86,7 @@ h3-structural-review-merge (已完成): 结构告警扫描 + 回归测试 + STAT
 - **Phase F**: com_rcw:11(+6skip), com_ccw:28, com_connection_point:15(+7 disabled) — 54/54 通过
 - **Phase G1**: foundation-dll pipeline 验证 — 12/12 families 通过 (181 fact tests)
 - **Phase G2**: foundation-dll pipeline 修复 — 增加 2 新增家族 (custom-marshaller-contracts, objective-c-interop)，14/14 families 通过 (185 fact tests)
-- **Phase H1** (h1-architecture-doc): 架构文档 docs/architecture/il2cpp-marshal-architecture.md (299 行)
+- **Phase H1** (h1-architecture-doc): 架构文档 wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-marshal-architecture.md (299 行)
 - **Phase H2** (h2-wiki-update): wiki 更新 — COM 测试页和 interop 模块页更新为 14 家族 185 facts
 - **Phase H3** (h3-structural-review-merge): ✅ 已完成 — 结构告警 + 回归测试 (13/13 marshal/COM native suites passed, 0 regression) + 归档
 
@@ -116,7 +116,7 @@ h3-structural-review-merge (已完成): 结构告警扫描 + 回归测试 + STAT
 
 ## 完成状态
 
-- **Phase H1** (h1-architecture-doc): ✅ 已完成 — docs/architecture/il2cpp-marshal-architecture.md
+- **Phase H1** (h1-architecture-doc): ✅ 已完成 — wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-marshal-architecture.md
 - **Phase H2** (h2-wiki-update): ✅ 已完成 — COM 测试页 + interop 模块页更新
 - **Phase H3** (h3-structural-review-merge): ✅ 已完成 — 结构告警 + 回归测试 + 归档
 

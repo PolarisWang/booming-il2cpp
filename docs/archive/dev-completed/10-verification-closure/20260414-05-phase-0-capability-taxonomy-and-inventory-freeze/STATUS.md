@@ -58,4 +58,4 @@ active: false
 ## wiki
 
 - 本子任务只冻结 dev 执行边界，不直接更新 `wiki/`。
-- 长期有效内容将在父 roadmap Phase 5/6 统一沉淀到 `docs/architecture`。
+- 长期有效内容将在父 roadmap Phase 5/6 统一沉淀到 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考`。

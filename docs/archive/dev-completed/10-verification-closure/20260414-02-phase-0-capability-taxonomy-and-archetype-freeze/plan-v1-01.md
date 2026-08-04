@@ -12,7 +12,7 @@
 
 **父 roadmap：** `docs/dev/in-progress/20260414-01-il2cpp-hotupdate-capability-closure/roadmap-v1-01.md`
 
-**预期知识沉淀：** 先沉淀在本子任务目录；阶段完成后，仅把稳定 contract 抽入 `docs/architecture/`，过程性迁移信息继续留在 dev task archive。
+**预期知识沉淀：** 先沉淀在本子任务目录；阶段完成后，仅把稳定 contract 抽入 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/`，过程性迁移信息继续留在 dev task archive。
 
 ---
 

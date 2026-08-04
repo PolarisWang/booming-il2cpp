@@ -60,4 +60,4 @@ active: false
 ## wiki
 
 - 本 roadmap 未额外更新 `wiki/`。
-- 长期有效知识已落到 `docs/architecture` 与本归档目录。
+- 长期有效知识已落到 `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考` 与本归档目录。

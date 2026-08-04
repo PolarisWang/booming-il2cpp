@@ -346,15 +346,15 @@ subjects/MixedExecutionFeaturePack/
 
 本轮能力建设完成后，至少应补齐以下文档：
 
-- `docs/architecture/il2cpp-hotupdate-capability-matrix.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/il2cpp-hotupdate-capability-matrix.md`
   - 定义能力矩阵与支持状态
-- `docs/architecture/solution-archetype-matrix.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/solution-archetype-matrix.md`
   - 定义完整 solution archetype contract
-- `docs/architecture/full-project-hotupdate-workflow.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/full-project-hotupdate-workflow.md`
   - 定义 host + patch + contracts 的标准用法
-- `docs/architecture/reference-assembly-and-corelib-policy.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/reference-assembly-and-corelib-policy.md`
   - 定义 reference/corelib 依赖来源策略
-- `docs/architecture/unsupported-feature-policy.md`
+- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/unsupported-feature-policy.md`
   - 定义“不支持/部分支持”的公开表达方式
 
 ## 9. 验收目标基线
