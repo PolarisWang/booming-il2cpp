@@ -95,7 +95,7 @@
 - `2026-04-26`：新增 Capability Closure 双轴报告治理框架；capability-family ledger 成为 foundation DLL 进度报告的正式分母 authority；completion-certification 改为 DLL 级 gate，不再混入 family workflow denominator；waiver / exclusion / platform-blocked 三类豁免必须带正式 authorityRef，不再允许引用 task STATUS.md。
 - `2026-04-26`：新增 foundation-dll-audit 投影系列的 authority 分层；`artifact/verification-catalog/projections/foundation-dll-audit/*` 成为正式 projection contract，HTML 报告从 projection JSON 派生；source links 五类（Subject / Verification / Generated / Evidence / Authority）的渲染规则固定。
 - `2026-04-26`：新增 DLL 详情页的信息架构规范；DLL 页头显示双轴进度条 + source links，正文显示 capability families 表格 + waiver records 表格 + verification projects 精简摘要。Dashboard 页头显示三轴进度条（DLL Completion / Capability Closure / Workflow Progress），DLL Matrix 新增 Closure/Progress 列和筛选器。Artifact Index 拆分到独立 artifact-index.html 次级入口。
-- `2026-04-23`：新增 [`Verification-V1测试流程规范.md`](./Verification-V1测试流程规范.md)，将 `Verification V1` 固定为新的长期 canonical 测试流程入口，并明确 formal source、覆盖模型、投影视图与旧流程退役规则。
+- `2026-04-23`：新增 [`Verification-V1测试流程规范.md`](../../docs/archive/architecture/verification-v1/INDEX.md)，将 `Verification V1` 固定为新的长期 canonical 测试流程入口，并明确 formal source、覆盖模型、投影视图与旧流程退役规则。
 - `2026-04-17`：新增 [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md)，固定 AOT 主线 feature 的 owner subject、自测顺序与 collector/registry/workspace 三层闸门。
 - `2026-04-17`：把主线升级为 `Sdk + Runtime + collector + manifest` 分层，并明确 `Assert` 下沉到 `Sdk`、native/hotupdate 分别采用各宿主和 patch/host 分离。
 - `2026-04-17`：新增测试阶段 `dotnet` 编译崩溃闸门；编译崩溃必须先查根因并修复，不能靠重试或跳过继续测试。
