@@ -23,7 +23,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         string lengthExpr = ConsumeEvalStackValueExpression();
         EmitEvalStackPush(builder, indentation,
-            $"ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, {GetRuntimeTypeInfoExpression(subjectId)}, {GetNativeTypeShapeValue(typeShape)}, {lengthExpr})");
+            $"ChaosArrayNew1D(&chaos_type_info_managed_array.hot, {GetRuntimeTypeInfoExpression(subjectId)}, {GetNativeTypeShapeValue(typeShape)}, {lengthExpr})");
 
     }
 

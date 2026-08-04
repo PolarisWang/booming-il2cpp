@@ -1287,9 +1287,133 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		    foreach (var kvp in hashSet2)
 		        _staticFieldDeclarations.TryAdd(kvp.Key, kvp.Value);
 		}
+		// ── Supplement: collect types from ALL method ABI slots ─────────────────
+		// Subject-only IR lowering only includes instructions for subject methods +
+		// direct callees.  Non-subject methods have no instructions in the IR, so
+		// their operand-based type discovery is lost.  However, their return types,
+		// parameter types, exception catch types, and declaring types are still
+		// available via ABI metadata and are needed for complete struct definitions.
+		// Without this scan, nested types like Queue+QueueEnumerator referenced only
+		// through non-subject methods (e.g. Queue.GetEnumerator returns QueueEnumerator)
+		// have no forward declarations, causing C2061/C2039 in the generated code.
+		// Initialize _allEmittedTypeSubjectIds before the scan (in case the main
+		// initialization below is updated after the scan).
+		_allEmittedTypeSubjectIds ??= new HashSet<string>(StringComparer.Ordinal);
+		void _trackTypeRef(string typeSubjectId)
+		{
+			if (!_allEmittedTypeSubjectIds.Contains(typeSubjectId))
+				_allEmittedTypeSubjectIds.Add(typeSubjectId);
+			if (!hashSet3.Contains(typeSubjectId))
+				hashSet3.Add(typeSubjectId);
+			if (!referenceTypeSubjectIds.Contains(typeSubjectId) &&
+			    !valueTypeSubjectIds.Contains(typeSubjectId))
+			{
+				if (IsStructuredValueTypeSubjectId(typeSubjectId))
+				{
+					valueTypeSubjectIds.Add(typeSubjectId);
+				}
+				else
+				{
+					TrackReferenceType(typeSubjectId, null);
+				}
+			}
+		}
+		foreach (var m in _methodsBySubjectId.Values)
+		{
+			if (m.Identity is null) continue;
+
+			// 1. Declaring type
+			if (m.Identity.DeclaringTypeSubjectId is { Length: > 0 } declType &&
+			    !declType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+				_trackTypeRef(declType);
+
+			// 2. Return type: prefer ABI TypeSubjectId, fall back to raw ReturnType
+			string? retTypeId = m.ReturnAbi?.TypeSubjectId;
+			if (string.IsNullOrEmpty(retTypeId))
+				retTypeId = m.ReturnType;
+			if (retTypeId is { Length: > 0 } &&
+			    !retTypeId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
+			    !retTypeId.StartsWith("!!", StringComparison.Ordinal) &&
+			    !retTypeId.StartsWith("!", StringComparison.Ordinal))
+				_trackTypeRef(retTypeId);
+
+			// 3. Parameter types: prefer ABI TypeSubjectId, fall back to _allManagedMethods
+			if (m.ParameterAbis is { Count: > 0 })
+				for (int paramIdx = 0; paramIdx < m.ParameterAbis.Count; paramIdx++)
+				{
+					var p = m.ParameterAbis[paramIdx];
+					string? pTypeId = p?.TypeSubjectId;
+					if (string.IsNullOrEmpty(pTypeId) &&
+					    !string.IsNullOrEmpty(m.SubjectId) &&
+					    _allManagedMethods is not null &&
+					    _allManagedMethods.TryGetValue(m.SubjectId, out var mm))
+					{
+						if (paramIdx < mm.Parameters.Count)
+							pTypeId = mm.Parameters[paramIdx].Type;
+					}
+					if (pTypeId is { Length: > 0 } &&
+					    !pTypeId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
+					    !pTypeId.StartsWith("!!", StringComparison.Ordinal) &&
+					    !pTypeId.StartsWith("!", StringComparison.Ordinal))
+						_trackTypeRef(pTypeId);
+				}
+
+			// 4. Scan _allManagedMethods for concrete type strings
+			if (_allManagedMethods is not null && !string.IsNullOrEmpty(m.SubjectId) &&
+			    _allManagedMethods.TryGetValue(m.SubjectId, out var managedM))
+			{
+				string? rt = managedM.ReturnType;
+				if (rt is { Length: > 0 } && !rt.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
+				    !rt.StartsWith("!!", StringComparison.Ordinal) && !rt.StartsWith("!", StringComparison.Ordinal))
+					_trackTypeRef(rt);
+				foreach (var param in managedM.Parameters)
+				{
+					string? pt = param.Type;
+					if (pt is { Length: > 0 } && !pt.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
+					    !pt.StartsWith("!!", StringComparison.Ordinal) && !pt.StartsWith("!", StringComparison.Ordinal))
+						_trackTypeRef(pt);
+				}
+			}
+
+			// 5. Supplement: scan ALL _allManagedMethods for types referenced in
+			// method signatures of dependency assemblies not in _methodsBySubjectId.
+			if (_allManagedMethods is { Count: > 0 })
+			{
+				foreach (var mm2 in _allManagedMethods.Values)
+				{
+					if (mm2.SubjectId is null) continue;
+					string? rt2 = mm2.ReturnType;
+					if (rt2 is { Length: > 0 } && !rt2.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
+					    !rt2.StartsWith("!!", StringComparison.Ordinal) && !rt2.StartsWith("!", StringComparison.Ordinal))
+						_trackTypeRef(rt2);
+					foreach (var param in mm2.Parameters)
+					{
+						string? pt2 = param.Type;
+						if (pt2 is { Length: > 0 } && !pt2.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
+						    !pt2.StartsWith("!!", StringComparison.Ordinal) && !pt2.StartsWith("!", StringComparison.Ordinal))
+							_trackTypeRef(pt2);
+					}
+				}
+			}
+
+			// 6. Exception catch types
+			if (m.ExceptionRegions is { Count: > 0 })
+				foreach (var e in m.ExceptionRegions)
+					if (e?.CatchTypeSubjectId is { Length: > 0 } catchType &&
+					    !catchType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+						_trackTypeRef(catchType);
+		}
+
 		_emittedValueTypeSubjectIds = new HashSet<string>(valueTypeSubjectIds, StringComparer.Ordinal);
+		// Merge with value type symbols discovered by BuildGeneratedModuleModel's
+		// ABI slot scan.  Value types referenced via chaos_resolve_managed_value_pointer<T>
+		// may not be in the AOT IR type metadata and thus omitted from valueTypeSubjectIds.
+		if (_emittedValueTypeSubjectIdsFromAbi is { Count: > 0 })
+			_emittedValueTypeSubjectIds.UnionWith(_emittedValueTypeSubjectIdsFromAbi);
 		// Capture emitted type subject IDs for Phase 0 ModuleRegistry Tier 0 arrays
-		_allEmittedTypeSubjectIds = new HashSet<string>(referenceTypeSubjectIds, StringComparer.Ordinal);
+		// Note: _allEmittedTypeSubjectIds was pre-initialized in the ABI slot scan
+		// above; do NOT use = new HashSet (which would discard ABI-scanned entries).
+		_allEmittedTypeSubjectIds.UnionWith(referenceTypeSubjectIds);
 		_allEmittedTypeSubjectIds.UnionWith(interfaceTypeSubjectIds);
 		_allEmittedTypeSubjectIds.UnionWith(valueTypeSubjectIds);
 		_allEmittedTypeSubjectIds.UnionWith(hashSet3);

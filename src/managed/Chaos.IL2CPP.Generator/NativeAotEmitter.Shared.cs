@@ -695,28 +695,41 @@ public sealed partial class NativeAotEmitter
         foreach (Match m in declRx.Matches(text))
         {
             string sv = m.Value;
-            // Skip declarations with empty parens "()" — they are stubs with
-            // wrong arg count and need to be replaced by corrected declarations.
             int nextIdx = m.Index + m.Length;
-            if (nextIdx < text.Length && text[nextIdx] == ')') continue;
-            // Also count params in declaration — if they differ from call site, skip it
-            int closeParen = text.IndexOf(')', nextIdx);
-            if (closeParen > nextIdx)
+            // Check if this match is for a () declaration (0 args) — if so,
+            // check if it's a DEFINITION (has "{") or a DECLARATION (ends with ";").
+            // Only skip declarations (they have wrong arg count).
+            if (nextIdx < text.Length && text[nextIdx] == ')')
             {
-                string declArgs = text.Substring(nextIdx, closeParen - nextIdx);
-                int declParamCount = declArgs.Length > 0 ? declArgs.Split(',').Length : 0;
-                // Count args at call site (first non-declaration call)
-                // If declaration param count != call site arg count, skip it
+                // Find end of this construct — scan up to 200 chars for ";" or "{"
+                int scanPos = nextIdx + 1;
+                bool isDefinition = false;
+                while (scanPos < text.Length && scanPos < m.Index + 200)
+                {
+                    char sc = text[scanPos];
+                    if (sc == ';') break;
+                    if (sc == '{') { isDefinition = true; break; }
+                    scanPos++;
+                }
+                if (!isDefinition)
+                    continue; // skip () declarations (wrong arg count)
             }
-            if (nextIdx < text.Length && text[nextIdx] == ')') continue;
             foreach (var s in missing.ToList())
                 if (sv.Contains(s)) missing.Remove(s);
         }
         if (missing.Count == 0) return;
-        var stub = new StringBuilder();
-        stub.AppendLine("// ── External runtime stubs (post-emission) ──");
+        // Pre-check: for each missing symbol, verify there's no existing definition
+        // with "()" in the file (from catch-all fallback helpers).  These definitions
+        // are valid (the call site also uses "()") and adding a second extern "C"
+        // declaration with a different arg count would cause C2733.
+        var symbolsToDeclare = new List<(string symbol, int argCount)>();
         foreach (var sym in missing.OrderBy(s => s))
         {
+            // Check if there's already a "()" definition for this symbol
+            var defMatch = System.Text.RegularExpressions.Regex.Match(text,
+                System.Text.RegularExpressions.Regex.Escape(sym) + "\\(\\) noexcept\\s*\\{");
+            if (defMatch.Success)
+                continue; // existing () definition, no need for declaration
             int argCount = 0;
             // Count arguments from first call site
             var callMatch = System.Text.RegularExpressions.Regex.Match(text,
@@ -743,7 +756,12 @@ public sealed partial class NativeAotEmitter
                 }
                 argCount++;
             }
+            symbolsToDeclare.Add((sym, argCount));
         }
+        if (symbolsToDeclare.Count == 0) return;
+        var stub = new StringBuilder();
+        stub.AppendLine("// ── External runtime stubs (post-emission) ──");
+        foreach (var (sym, argCount) in symbolsToDeclare)
         stub.AppendLine();
         string genSrc = sb.ToString();
         int anchor = genSrc.LastIndexOf("#include");

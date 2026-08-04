@@ -255,6 +255,11 @@ public sealed partial class NativeAotLoweringPlanner
                 }
             }
 
+            // Save ABI-scanned value types before ObjectModelEmission overwrites
+            // _emittedValueTypeSubjectIds with just AOT IR metadata types.
+            _emittedValueTypeSubjectIdsFromAbi = new HashSet<string>(
+                _emittedValueTypeSubjectIds, StringComparer.Ordinal);
+
             // Include extra chaos_valuetype_ typedefs from method declarations
             // (extern "C" strings).  External value types used as ABI parameters
             // have CarrierKindCode=ValueTypeByValue with TypeSubjectId set from
