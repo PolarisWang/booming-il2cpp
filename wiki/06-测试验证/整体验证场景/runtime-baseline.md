@@ -40,4 +40,4 @@ objectType: guide
 
 ## 关联说明
 
-- 本地准备、产物路径和排障说明见 [`docs/archive/architecture/runtime-baseline/local-verification.md`](../../../docs/archive/architecture/runtime-baseline/local-verification.md)。
+- 本地准备、产物路径和排障说明见 [`docs/archive/architecture/runtime-baseline/local-verification.md`](../../../docs/archive/architecture/roadmap-0/local-verification.md)。
