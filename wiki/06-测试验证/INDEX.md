@@ -16,6 +16,8 @@
 ## 正式主线
 
 - 统一测试框架入口：[`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md)
+- **统一测试运行入口**：[`统一测试入口.md`](./统一测试入口.md) —— 一条命令跑全部层
+  （`python tests/runner/test_driver.py --layer all --quick`；CI 走 `scripts/ci_test.py --preset <x>`；报告 `tests/runner/test-report.json`）
 - 正式 inventory 刷新入口：`run test inventory --json`
 - 审核者稳定报告入口：[`../../docs/verification/INDEX.md`](../../docs/verification/INDEX.md)
 - foundation DLL 当前总览页：[`../../docs/verification/foundation-dll-audit/dashboard.html`](../../docs/verification/foundation-dll-audit/dashboard.html)

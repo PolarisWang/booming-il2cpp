@@ -39,6 +39,10 @@ P1（性能最优）> P2（方案完美性）> P3（HotUpdate 支持）。低优
 ## 完成前自测
 
 1. **查 wiki 要求** → 2. **无要求走 TDD**（先写失败测试）→ 3. **验证管线**（跑 foundation-dll pipeline）
+2. **统一测试入口**：改码后先跑 `python tests/runner/test_driver.py --layer unit` 自测。
+   出现**非 known 的 `[FAIL]`**（`OVERALL: FAILED`）即为真实回归，须修复后再推。
+   报告见 `tests/runner/test-report.json`；CI 走 `scripts/ci_test.py --preset <x>`。
+   详见 [`wiki/06-测试验证/统一测试入口.md`](wiki/06-测试验证/统一测试入口.md)（含 no-skip 规则）。
 
 ## AI Agent Bug 修复三规则
 
