@@ -109,8 +109,8 @@ Status: archived
 
 ## 6. 依赖
 
-- `docs/dev/completed/20260415-11-phase-7-aot-core-ir-typed-il-translation-expansion-roadmap/roadmap-v1-01.md`
-- `docs/dev/completed/20260415-18-post-phase-7-deferred-aot-shape-and-entry-abi-expansion-roadmap/roadmap-v1-01.md`
+- `docs/archive/dev-completed/20260415-11-phase-7-aot-core-ir-typed-il-translation-expansion-roadmap/roadmap-v1-01.md`
+- `docs/archive/dev-completed/20260415-18-post-phase-7-deferred-aot-shape-and-entry-abi-expansion-roadmap/roadmap-v1-01.md`
 - `src/managed/Chaos.IL2CPP.Loader/LoaderStage.cs`
 - `src/managed/Chaos.IL2CPP.CodeGen/AotCoreIrLowering.cs`
 - `src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs`

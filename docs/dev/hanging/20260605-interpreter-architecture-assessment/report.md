@@ -215,7 +215,7 @@ InterpreterVM 的 2600-8900ns/op 比 T-C (FastExecute) 的 4.7ns/op 慢 3 个数
 | `wiki/.../02-翻译路径参考/10-解释器调用分发翻译表.md` | 翻译表 | 8/10 | Call/CallVirt 的完整分发路径表格 |
 | `wiki/04-工具与集成/hot-update-interpreter-vm-v1.md` | 集成 | 7/10 | Hotupdate 与解释器的交互流程 |
 | `wiki/04-工具与集成/interpreter-lowering-and-native-smoke-baseline-v1.md` | 基线 | 7/10 | IR lowering 基线 |
-| `docs/dev/completed/interpreter-industrialization/` | 完成记录 | 10/10 | 16 个子任务的完整记录 |
+| `docs/archive/dev-completed/interpreter-industrialization/` | 完成记录 | 10/10 | 16 个子任务的完整记录 |
 | `docs/dev/in-progress/20260527-interpreter-perf-optimization/STATUS.md` | 规划 | 8/10 | 有优化计划但缺少 P0 完成后的状态更新 |
 
 **缺口**: 主架构文档 (`19-解释器VM架构.md`) 未覆盖 tier 升级、OSR、5 层管线；`interpreter_entry.h`、`entry_direct.cpp`、`ir_reg_alloc.cpp` 等核心文件的架构设计缺乏 wiki 级文档。

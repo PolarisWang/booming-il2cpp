@@ -297,7 +297,7 @@ hotupdate.py (Stage 9-12)
 
 ## 附录：2026-06 架构边界清理
 
-2026-06-12 完成全量架构边界清理，覆盖 12 项违规 + AI 合规体系。涉及变更见 `docs/dev/completed/arch-boundary-fix/`。
+2026-06-12 完成全量架构边界清理，覆盖 12 项违规 + AI 合规体系。涉及变更见 `docs/archive/dev-completed/arch-boundary-fix/`。
 
 ### 清理清单
 

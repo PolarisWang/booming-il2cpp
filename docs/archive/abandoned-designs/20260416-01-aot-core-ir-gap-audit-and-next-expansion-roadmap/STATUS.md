@@ -23,9 +23,9 @@ active: false
 
 ## 关键文档
 
-- source_roadmap: `docs/dev/completed/20260415-18-post-phase-7-deferred-aot-shape-and-entry-abi-expansion-roadmap/roadmap-v1-01.md`
-- source_status: `docs/dev/completed/20260415-18-post-phase-7-deferred-aot-shape-and-entry-abi-expansion-roadmap/STATUS.md`
-- previous_core_roadmap: `docs/dev/completed/20260415-11-phase-7-aot-core-ir-typed-il-translation-expansion-roadmap/roadmap-v1-01.md`
+- source_roadmap: `docs/archive/dev-completed/20260415-18-post-phase-7-deferred-aot-shape-and-entry-abi-expansion-roadmap/roadmap-v1-01.md`
+- source_status: `docs/archive/dev-completed/20260415-18-post-phase-7-deferred-aot-shape-and-entry-abi-expansion-roadmap/STATUS.md`
+- previous_core_roadmap: `docs/archive/dev-completed/20260415-11-phase-7-aot-core-ir-typed-il-translation-expansion-roadmap/roadmap-v1-01.md`
 - successor_roadmap: `docs/dev/in-progress/20260418-01-dotnet-foundation-pack-nativeization-roadmap/roadmap-v1-01.md`
 - brainstorm: `docs/dev/abandoned/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/brainstorm-v1-01.md`
 - design: `docs/dev/abandoned/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/design-v1-01.md`

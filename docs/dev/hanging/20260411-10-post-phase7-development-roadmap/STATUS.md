@@ -15,8 +15,8 @@ active: false
 
 ## 关键文档
 
-- parent_roadmap: `docs/dev/completed/20260409-10-total-solution-and-ios-hot-update-analysis/roadmap-v1-01.md`
-- phase_architecture: `docs/dev/completed/20260409-10-total-solution-and-ios-hot-update-analysis/phase-architecture-v1-01.md`
+- parent_roadmap: `docs/archive/dev-completed/20260409-10-total-solution-and-ios-hot-update-analysis/roadmap-v1-01.md`
+- phase_architecture: `docs/archive/dev-completed/20260409-10-total-solution-and-ios-hot-update-analysis/phase-architecture-v1-01.md`
 - roadmap: `docs/dev/hanging/20260411-10-post-phase7-development-roadmap/roadmap-v1-01.md`
 - phase_b_followup: `docs/dev/hanging/20260412-05-phase-b-generic-native-aot-benchmark-backend/roadmap-v1-01.md`
 

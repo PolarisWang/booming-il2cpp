@@ -31,9 +31,9 @@
 | `authoritySnapshot.snapshotId` | string | snap-20260426-audit-confirmed-v1 |  |
 | `designPath` | string |  |  |
 | `programId` | string | foundation-dll-translation-audit |  |
-| `roadmapPath` | string | docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadm |  |
+| `roadmapPath` | string | docs/archive/dev-completed/20260427-04-dll-capability-verification-closure-roadmap/roadm |  |
 | `schemaVersion` | string | 2 |  |
-| `statusPath` | string | docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATU |  |
+| `statusPath` | string | docs/archive/dev-completed/20260427-04-dll-capability-verification-closure-roadmap/STATU |  |
 | `subjectEntry` | string | subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSo |  |
 | `summary.activeAssembly` | string | System.Private.CoreLib |  |
 | `summary.blockedCount` | string | 0 |  |

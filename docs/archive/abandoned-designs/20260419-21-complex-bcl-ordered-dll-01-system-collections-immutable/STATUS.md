@@ -35,7 +35,7 @@ active: false
 - 上游 authority：
   - `docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md`
   - `docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md`
-  - `docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md`
+  - `docs/archive/dev-completed/20260419-03-system-private-corelib-full-verification/STATUS.md`
   - `docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md`
 - 预期 subject/workspace：
   - `subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln`
@@ -68,7 +68,7 @@ active: false
 ## 阻塞链
 
 - immediate_blocker:
-  - `docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md`
+  - `docs/archive/dev-completed/20260419-03-system-private-corelib-full-verification/STATUS.md`
 - active_upstream_work:
   - `docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md`
 - current_program_views:

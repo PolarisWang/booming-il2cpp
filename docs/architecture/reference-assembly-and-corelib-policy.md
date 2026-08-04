@@ -31,7 +31,7 @@
 
 完整官方 pack 的来源、版本、diff 和资产策略，仍然以 phase0 产物为准：
 
-- `docs/dev/completed/20260418-02-phase-0-framework-pack-catalog-and-asset-policy/framework-catalog-v1-01.json`
+- `docs/archive/dev-completed/20260418-02-phase-0-framework-pack-catalog-and-asset-policy/framework-catalog-v1-01.json`
 
 换句话说：
 

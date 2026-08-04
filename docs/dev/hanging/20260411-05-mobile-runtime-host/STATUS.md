@@ -15,8 +15,8 @@ active: false
 
 ## 关键文档
 
-- parent_roadmap: `docs/dev/completed/20260409-10-total-solution-and-ios-hot-update-analysis/roadmap-v1-01.md`
-- phase_architecture: `docs/dev/completed/20260409-10-total-solution-and-ios-hot-update-analysis/phase-architecture-v1-01.md`
+- parent_roadmap: `docs/archive/dev-completed/20260409-10-total-solution-and-ios-hot-update-analysis/roadmap-v1-01.md`
+- phase_architecture: `docs/archive/dev-completed/20260409-10-total-solution-and-ios-hot-update-analysis/phase-architecture-v1-01.md`
 - brainstorm: `docs/dev/hanging/20260411-05-mobile-runtime-host/brainstorm-v1-04.md`
 - design: `docs/dev/hanging/20260411-05-mobile-runtime-host/design-v1-04.md`
 - plan: `docs/dev/hanging/20260411-05-mobile-runtime-host/plan-v1-01.md`

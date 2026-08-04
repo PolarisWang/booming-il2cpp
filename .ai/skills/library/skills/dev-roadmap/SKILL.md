@@ -29,7 +29,7 @@ roadmap 支持三种调度模式：
 
 - roadmap 派生出的 child task 是独立任务，不是只存在于 roadmap 表格里的状态行
 - child task 一旦进入终态，必须把任务目录**物理移出** `docs/dev/in-progress/`
-- `completed` -> `docs/dev/completed/`
+- `completed` -> `docs/archive/dev-completed/`
 - `hanging` -> `docs/dev/hanging/`
 - `abandoned` -> `docs/dev/abandoned/`
 - 父 roadmap 只负责同步 child mapping、摘要和下一步；不能用父任务文案替代 child task 的归档动作

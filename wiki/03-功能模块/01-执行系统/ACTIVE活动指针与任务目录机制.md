@@ -13,7 +13,7 @@
 
 - `docs/dev/in-progress/`：正在推进的任务目录
 - `docs/dev/hanging/`：可恢复的挂起任务目录
-- `docs/dev/completed/`：已完成任务目录
+- `docs/archive/dev-completed/`：已完成任务目录
 - `docs/dev/abandoned/`：已放弃任务目录
 
 ## ACTIVE.md 的职责

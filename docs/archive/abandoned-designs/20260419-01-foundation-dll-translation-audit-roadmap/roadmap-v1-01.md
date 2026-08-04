@@ -188,9 +188,9 @@ Status: cancelled (user requested re-plan)
 | `20260419-06-corelib-hotupdate-proof-normalization` | `phase-1` | `completed` | `codex` | 统一 CoreLib hotupdate proof obligation | `20260419-05` |
 | `20260419-07-corelib-dll-boundary-native-codegen-implementation` | `phase-1` | `completed` | `codex` | 完成窄边界 runtime-skeleton widening 与 subject review bundle 主链接线 | `20260419-06` |
 | `20260419-20-corelib-supplemental-full-closure-audit-integration` | `phase-1` | `completed` | `codex` | 已把真实 `System.Private.CoreLib.dll` supplemental full-assembly-closure artifacts 接入当前 canonical proof/audit 链路，并把 truth boundary 推进到 `narrow-proof-packet-plus-supplemental-full-closure-evidence` | `20260419-07` |
-| `20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening` | `phase-1` | `completed` | `codex` | CoreLib widening 完成：54863/59942 发射，常规 managed 方法全覆盖。物理目录已移入 `docs/dev/completed/` | `20260419-20` |
+| `20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening` | `phase-1` | `completed` | `codex` | CoreLib widening 完成：54863/59942 发射，常规 managed 方法全覆盖。物理目录已移入 `docs/archive/dev-completed/` | `20260419-20` |
 | `20260425-03-foundation-dll-capability-closure-reporting-roadmap` | `cross-cutting` | `completed` | `codex` | 冻结 foundation DLL 报告的 capability-closure denominator、workflow-progress 口径、DLL completed 规则与 source-links / projection contract | `20260419-20` |
-| `20260430-01-ldind-stind-full-series` | `phase-1` | `completed` | `codex` | ldind/stind 全系列补齐（C++ 模板 + 参数化 C# 发射器）。物理目录已移入 `docs/dev/completed/` | `20260419-07` |
+| `20260430-01-ldind-stind-full-series` | `phase-1` | `completed` | `codex` | ldind/stind 全系列补齐（C++ 模板 + 参数化 C# 发射器）。物理目录已移入 `docs/archive/dev-completed/` | `20260419-07` |
 | `20260430-02-closure-corelib-resolution` | `phase-1` | `superseded` | `codex` | CoreLib closure 解析方案（已废弃，被 Reference Assembly 架构取代）。已归档 | `20260419-07` |
 | `20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable` | `phase-2` | `planned` | `codex` | 验证 `System.Collections.Immutable`，CoreLib full verification 已完成，阻塞已解除 | `20260419-03` |
 | `20260419-22-complex-bcl-ordered-dll-02-system-formats-asn1` | `phase-2` | `planned` | `codex` | 验证 `System.Formats.Asn1` | `20260419-21` |

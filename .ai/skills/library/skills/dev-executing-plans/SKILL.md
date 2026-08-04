@@ -259,7 +259,7 @@ description: 当你有一个已写好的实现计划，需要在当前会话中�
 6. 满足后：
    - 更新 `STATUS.md` 为 `completed`
    - 如当前任务此前已使用 `notes/progress-*.md`，或确有必要沉淀最终失败决策，再追加最终进展记录
-   - 将任务目录移动到 `docs/dev/completed/`
+   - 将任务目录移动到 `docs/archive/dev-completed/`
    - 删除 `docs/dev/ACTIVE.md`
    - 更新索引文件
    - 如果存在 `parent_task_id`：回写父任务的 child mapping、`latest_stop_point`、下一步与对应索引
