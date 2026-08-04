@@ -60,6 +60,25 @@ dotnet build src/managed/Chaos.IL2CPC.Pipeline
 dotnet test tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests
 ```
 
+## Testing
+
+One command runs the whole suite (unit → integration → e2e):
+
+```bash
+# Full suite
+python tests/runner/test_driver.py --layer all --quick
+
+# Fast unit tier only (~50s)
+python tests/runner/test_driver.py --layer unit
+
+# CI wrapper (same engine, preset selection)
+python scripts/ci_test.py --preset managed-full
+```
+
+A unified JSON report is written to `tests/runner/test-report.json` (add
+`--junit out.xml` for CI). See [docs/tests/architecture.md](docs/tests/architecture.md)
+for the pyramid, the no-skip rule, and how to add tests.
+
 ## Build Configurations
 
 | Preset | Log Level | Trace | Assert | Profile | Use Case |
