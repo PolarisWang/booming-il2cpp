@@ -5,6 +5,7 @@
       "title": "workflow",
       "summary": "需求澄清、计划拆分、执行推进与调试/TDD 相关技能。",
       "selection_hint": "需要开始、拆解、推进或调试实现任务时先读取本域 registry。",
+      "expert_registry_domains": [],
       "order": 10
     },
     {
@@ -12,6 +13,7 @@
       "title": "quality",
       "summary": "代码审查、验证、trace 强制和完成前质量门技能。",
       "selection_hint": "需要审查代码、验证结果或在完成前补证据时读取本域 registry。",
+      "expert_registry_domains": [],
       "order": 20
     },
     {
@@ -19,6 +21,7 @@
       "title": "git",
       "summary": "本地分支、worktree 与开发分支收口技能。",
       "selection_hint": "需要创建/切换 worktree、提交本地改动或收口开发分支时读取本域 registry。",
+      "expert_registry_domains": [],
       "order": 30
     },
     {
@@ -26,6 +29,7 @@
       "title": "knowledge",
       "summary": "长期知识沉淀与 wiki 维护技能。",
       "selection_hint": "任务产出需要写入 wiki 或维护知识索引时读取本域 registry。",
+      "expert_registry_domains": [],
       "order": 40
     },
     {
@@ -33,6 +37,7 @@
       "title": "testing",
       "summary": "测试治理、测试代码生成与 foundation-dll 测试技能。",
       "selection_hint": "任务涉及测试框架、subject 定义、测试生成或测试治理时读取本域 registry。",
+      "expert_registry_domains": [5],
       "order": 50
     },
     {
@@ -40,6 +45,7 @@
       "title": "il2cpp",
       "summary": "il2cpp 核心翻译路径与架构约束技能。",
       "selection_hint": "需要开发 il2cpp 翻译逻辑或查询架构路径时读取本域 registry。",
+      "expert_registry_domains": [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12],
       "order": 60
     },
     {
@@ -47,6 +53,7 @@
       "title": "skilling",
       "summary": "技能发现、创建、自学习与治理技能。",
       "selection_hint": "需要判断该用哪些 skill，或要新建/改造 skill 体系时读取本域 registry。",
+      "expert_registry_domains": [],
       "order": 70
     }
   ]

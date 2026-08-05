@@ -1,6 +1,6 @@
 {
   "kind": "project",
-  "domain": "testing",
+  "domain": "il2cpp",
   "name": "dev-il2cpp-simd-expert",
   "summary": "SIMD 实现专家 — System.Numerics 软件回退、跨平台 SSE/NEON/Generic 实现、IEEE 754 精度、边缘情况处理",
   "trigger_signals": [
