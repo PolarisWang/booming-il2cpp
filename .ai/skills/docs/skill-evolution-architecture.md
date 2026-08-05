@@ -64,9 +64,9 @@
 
 | 目录 | 用途 |
 |------|------|
-| `skills/lifecycle/telemetry/health/` | 健康指标快照 |
-| `skills/lifecycle/evolution/proposals/` | 进化提案 |
-| `skills/lifecycle/evolution/lineage/` | 版本谱系记录 |
+| `.ai/skills/lifecycle/telemetry/health/` | 健康指标快照 |
+| `.ai/skills/lifecycle/evolution/proposals/` | 进化提案 |
+| `.ai/skills/lifecycle/evolution/lineage/` | 版本谱系记录 |
 
 ## 相关技能
 

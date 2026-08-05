@@ -199,10 +199,10 @@ Hook 注册在 `.claude/settings.json`，每次 Claude Code 会话自动运行�
 
 ```powershell
 # 检查 usage 数据
-cat skills/lifecycle/telemetry/usage.jsonl
+cat .ai/skills/lifecycle/telemetry/usage.jsonl
 
 # 检查工具调用结果
-cat skills/lifecycle/telemetry/tool_outcomes.jsonl
+cat .ai/skills/lifecycle/telemetry/tool_outcomes.jsonl
 
 # 仅在有真实会话数据时显示内容；新部署时为空属正常状态
 ```

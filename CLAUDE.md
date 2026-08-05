@@ -30,7 +30,7 @@ P1（性能最优）> P2（方案完美性）> P3（HotUpdate 支持）。低优
   - 根因横跨 ≥2 域（如 CodeGen + 运行时 + 构建）
   - 当前 Agent 连续 3 次尝试未取得进展
 
-详见 `skills/discovery/routing-rules.md`。
+详见 `.ai/skills/discovery/routing-rules.md`。
 
 ## 架构优先开发
 
