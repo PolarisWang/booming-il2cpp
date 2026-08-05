@@ -115,7 +115,7 @@ def estimate_session_completed(repo_root: Path) -> dict:
                 ["git", "-C", str(repo_root), "diff", "--name-only", "--since=1 hour ago"],
                 capture_output=True, text=True, timeout=10,
             )
-            has_skill_edit = "skills/library/skills/" in output.stdout
+            has_skill_edit = ".ai/skills/library/skills/" in output.stdout
         except Exception:
             pass
 

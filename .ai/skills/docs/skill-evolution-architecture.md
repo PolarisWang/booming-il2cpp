@@ -46,19 +46,19 @@
 
 | 文件 | 用途 |
 |------|------|
-| `skills/hooks/hook_track_tool_outcomes.py` | PostToolUse: 记录工具调用成败 |
-| `skills/hooks/hook_track_session_outcomes.py` | Stop: 记录会话完成状态 |
-| `skills/tooling/learning/health_engine.py` | 计算 per-skill 健康指标 |
-| `skills/tooling/learning/evolve.py` | 进化触发引擎 (FIX/DERIVED/CAPTURED) |
+| `.ai/skills/hooks/hook_track_tool_outcomes.py` | PostToolUse: 记录工具调用成败 |
+| `.ai/skills/hooks/hook_track_session_outcomes.py` | Stop: 记录会话完成状态 |
+| `.ai/skills/tooling/learning/health_engine.py` | 计算 per-skill 健康指标 |
+| `.ai/skills/tooling/learning/evolve.py` | 进化触发引擎 (FIX/DERIVED/CAPTURED) |
 
 ## 修改文件索引
 
 | 文件 | 变更 |
 |------|------|
-| `skills/tooling/learning/skill_learn.py` | 新增 4 子命令: evolve-benchmark, evolve-review, evolve-promote, evolve-history |
-| `skills/tooling/catalog/generate_skill_catalog.py` | registry 增加 version 列 |
+| `.ai/skills/tooling/learning/skill_learn.py` | 新增 4 子命令: evolve-benchmark, evolve-review, evolve-promote, evolve-history |
+| `.ai/skills/tooling/catalog/generate_skill_catalog.py` | registry 增加 version 列 |
 | `.claude/settings.json` | 新增 2 个 hooks |
-| `skills/library/skills/*/skill.manifest.json` | 增加 version_history + evolution_lineage 字段 |
+| `.ai/skills/library/skills/*/skill.manifest.json` | 增加 version_history + evolution_lineage 字段 |
 
 ## 新目录索引
 
@@ -70,6 +70,6 @@
 
 ## 相关技能
 
-- `dev-using-booming` — 入口路由器，不直接关联但进化系统依赖其选择逻辑
+- `dev-il2cpp`（原 dev-using-booming） — 入口路由器，不直接关联但进化系统依赖其选择逻辑
 - `dev-writing-skills` — 新建 skill 的规范与进化系统互补
 - `dev-verification-before-completion` — 进化后验证 gate

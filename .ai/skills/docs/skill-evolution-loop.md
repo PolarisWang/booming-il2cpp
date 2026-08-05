@@ -1,6 +1,6 @@
 # Skill 自进化闭环
 
-本文定义 `skills/` 的完整自学习闭环：从 telemetry 采集 → 健康度量 → 进化触发（FIX/DERIVED/CAPTURED）→ benchmark → review → promote → 正式发布。
+本文定义 `.ai/skills/` 的完整自学习闭环：从 telemetry 采集 → 健康度量 → 进化触发（FIX/DERIVED/CAPTURED）→ benchmark → review → promote → 正式发布。
 
 ## 正式加载链
 
@@ -65,12 +65,12 @@ BENCHMARK/REVIEW/PROMOTE 层
 
 ```powershell
 # 一键自检（推荐日常使用）
-python skills/tooling/learning/health_engine.py check --window 30
+python .ai/skills/tooling/learning/health_engine.py check --window 30
 
 # 分步执行
-python skills/tooling/learning/health_engine.py compute --all --window 30
-python skills/tooling/learning/health_engine.py report --window 30
-python skills/tooling/learning/health_engine.py trend --all
+python .ai/skills/tooling/learning/health_engine.py compute --all --window 30
+python .ai/skills/tooling/learning/health_engine.py report --window 30
+python .ai/skills/tooling/learning/health_engine.py trend --all
 ```
 
 > `check` 子命令依次执行：compute → report → evolve.py propose，一条命令完成日常健康检查。
@@ -89,15 +89,15 @@ python skills/tooling/learning/health_engine.py trend --all
 
 ```powershell
 # Dry-run 预览
-python skills/tooling/learning/evolve.py propose
+python .ai/skills/tooling/learning/evolve.py propose
 
 # 执行进化
-python skills/tooling/learning/evolve.py auto-evolve
+python .ai/skills/tooling/learning/evolve.py auto-evolve
 
 # 单 skill 操作
-python skills/tooling/learning/evolve.py auto-evolve-fix --skill dev-executing-plans
-python skills/tooling/learning/evolve.py auto-evolve-derive --skill dev-brainstorm
-python skills/tooling/learning/evolve.py auto-evolve-capture
+python .ai/skills/tooling/learning/evolve.py auto-evolve-fix --skill dev-executing-plans
+python .ai/skills/tooling/learning/evolve.py auto-evolve-derive --skill dev-brainstorm
+python .ai/skills/tooling/learning/evolve.py auto-evolve-capture
 ```
 
 ### FIX 模式
@@ -121,10 +121,10 @@ python skills/tooling/learning/evolve.py auto-evolve-capture
 ## 阶段四：准入与合入
 
 ```powershell
-python skills/tooling/learning/skill_learn.py evolve-benchmark <proposal-id>
-python skills/tooling/learning/skill_learn.py evolve-review <proposal-id>
-python skills/tooling/learning/skill_learn.py evolve-promote <proposal-id> --dry-run
-python skills/tooling/learning/skill_learn.py evolve-promote <proposal-id>
+python .ai/skills/tooling/learning/skill_learn.py evolve-benchmark <proposal-id>
+python .ai/skills/tooling/learning/skill_learn.py evolve-review <proposal-id>
+python .ai/skills/tooling/learning/skill_learn.py evolve-promote <proposal-id> --dry-run
+python .ai/skills/tooling/learning/skill_learn.py evolve-promote <proposal-id>
 ```
 
 Promote 后自动执行管线验证（首选 `verify-skill-pipeline.ps1`，不可用时降级为 Python 版 `verify_skill_pipeline.py`）：
@@ -149,15 +149,15 @@ Promote 后自动执行管线验证（首选 `verify-skill-pipeline.ps1`，不�
 
 ```powershell
 # 查看特定 skill 的进化历史
-python skills/tooling/learning/skill_learn.py evolve-history --skill dev-brainstorm
+python .ai/skills/tooling/learning/skill_learn.py evolve-history --skill dev-brainstorm
 
 # 查看所有有历史记录的 skill
-python skills/tooling/learning/skill_learn.py evolve-history
+python .ai/skills/tooling/learning/skill_learn.py evolve-history
 
 # 系统级观察
-python skills/tooling/learning/skill_learn.py observe
-python skills/tooling/learning/skill_learn.py auto-assess
-python skills/tooling/learning/skill_learn.py auto-report
+python .ai/skills/tooling/learning/skill_learn.py observe
+python .ai/skills/tooling/learning/skill_learn.py auto-assess
+python .ai/skills/tooling/learning/skill_learn.py auto-report
 ```
 
 ## 版本策略
@@ -187,10 +187,10 @@ python skills/tooling/learning/skill_learn.py auto-report
 
 ```powershell
 # Python 版管线验证（跨平台）
-python skills/tooling/verification/verify_skill_pipeline.py
+python .ai/skills/tooling/verification/verify_skill_pipeline.py
 
 # 同时运行 bootstrap（可选）
-python skills/tooling/verification/verify_skill_pipeline.py --bootstrap
+python .ai/skills/tooling/verification/verify_skill_pipeline.py --bootstrap
 ```
 
 ## HOOK 验证

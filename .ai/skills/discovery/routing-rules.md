@@ -1,6 +1,6 @@
 # 路由规则（Routing Rules）
 
-> 本文定义路由**流程与策略**。所有域/Expert/关键词的**数据定义**统一在 `skills/discovery/expert-registry.json` 中，
+> 本文定义路由**流程与策略**。所有域/Expert/关键词的**数据定义**统一在 `.ai/skills/discovery/expert-registry.json` 中，
 > 本文不重复定义。
 
 ---
@@ -122,7 +122,7 @@ Expert 的知识通过以下路径加载：
 ```
 1. dev-il2cpp 入口桩加载 library SKILL.md（读取路由协议）
 2. 分类声明后，从 expert-registry.json 匹配 Expert 名
-3. 读取 skills/library/skills/{expert}/SKILL.md
+3. 读取 .ai/skills/library/skills/{expert}/SKILL.md
 4. 按 SKILL.md 指令执行，不走通用回复
 ```
 
@@ -130,7 +130,7 @@ Expert 的知识通过以下路径加载：
 
 `Skill("dev-xxx-expert")` **不可用**（Claude Code 不支持子技能），所有 Expert 知识通过读 SKILL.md 注入。
 
-Expert 注册表（唯一权威数据源）: `skills/discovery/expert-registry.json`
+Expert 注册表（唯一权威数据源）: `.ai/skills/discovery/expert-registry.json`
 
 ---
 

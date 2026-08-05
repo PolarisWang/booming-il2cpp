@@ -20,7 +20,7 @@ export const meta = {
 }
 
 // ── 域→Expert 映射 ──────────────────────────────────────────────
-// ⚠️ 必须与 skills/discovery/expert-registry.json 保持同步！
+// ⚠️ 必须与 .ai/skills/discovery/expert-registry.json 保持同步！
 //    新增/重命名 Expert 时请同时更新本映射。
 //    检查项：domains[1-12].defaultExpert + cross_cutting[].name
 const DOMAIN_EXPERT = {

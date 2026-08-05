@@ -21,7 +21,7 @@ from pathlib import Path
 
 
 RESOLVED_REPO_ROOT: Path | None = None
-SKILL_PATH_PATTERN = re.compile(r"skills/library/skills/[^/]+/SKILL\.md", re.IGNORECASE)
+SKILL_PATH_PATTERN = re.compile(r"\.ai/skills/library/skills/[^/]+/SKILL\.md", re.IGNORECASE)
 EXPERT_PATTERN = re.compile(r"dev-il2cpp-[-a-z]+|dev-project-[-a-z]+", re.IGNORECASE)
 
 
@@ -74,7 +74,7 @@ def _rotate_jsonl_if_needed(path: Path) -> None:
 
 
 def extract_skill_name(file_path: str) -> str | None:
-    m = re.search(r"skills/library/skills/([^/]+)/SKILL\.md", file_path.replace("\\", "/"))
+    m = re.search(r"\.ai/skills/library/skills/([^/]+)/SKILL\.md", file_path.replace("\\", "/"))
     return m.group(1) if m else None
 
 

@@ -4,9 +4,9 @@
 
 ## 当前加载链
 
-1. 技能唯一可信源为 `skills/library/skills/`。`.claude/skills/dev-il2cpp/SKILL.md` 包含最小路由桩，加载后立即读取 library 版本。
-2. 启动时 Agent 可通过 `skills/discovery/skill-index.md` 查阅完整技能目录。
-3. 命中领域后读取 `skills/discovery/registries/<domain>.md`。
+1. 技能唯一可信源为 `.ai/skills/library/skills/`。`.claude/skills/dev-il2cpp/SKILL.md` 包含最小路由桩，加载后立即读取 library 版本。
+2. 启动时 Agent 可通过 `.ai/skills/discovery/skill-index.md` 查阅完整技能目录。
+3. 命中领域后读取 `.ai/skills/discovery/registries/<domain>.md`。
 4. 最后按需读取 `.ai/skills/library/skills/<name>/SKILL.md`，以及 `references/` / `scripts/` / `assets/`。
 
 ## 目录职责

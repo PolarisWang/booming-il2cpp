@@ -2,7 +2,7 @@
     "kind": "project",
     "domain": "skilling",
     "name": "dev-skill-registry",
-    "summary": "技能注册中心：索引 skills/library/skills/ 下所有技能的目录、领域和用途。用户请求 /dev-<skill> 时通过本 registry 定位并加载对应 SKILL.md。",
+    "summary": "技能注册中心：索引 .ai/skills/library/skills/ 下所有技能的目录、领域和用途。用户请求 /dev-<skill> 时通过本 registry 定位并加载对应 SKILL.md。",
     "trigger_signals": [
         "用户请求 /dev-<skill> 时需要定位技能路径和领域"
     ],

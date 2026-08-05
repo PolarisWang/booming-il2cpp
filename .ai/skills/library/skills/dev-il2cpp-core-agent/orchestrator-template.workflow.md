@@ -185,7 +185,7 @@ const EXPERT_RESULT_SCHEMA = {
 ```
 请使用 Workflow 工具，args 传递任务描述：
 {
-    scriptPath: "skills/library/skills/dev-il2cpp-core-agent/orchestrator.workflow.js",
+    scriptPath: ".ai/skills/library/skills/dev-il2cpp-core-agent/orchestrator.workflow.js",
     args: {
         task: "翻译新 IL calli + 改 runtime helper + 加 GC 写屏障",
         domains: ["translation", "runtime", "gc"]
