@@ -1,35 +1,11 @@
-# chaos_runtime_core.lib carries instantiation_engine.obj duplicating runtime_core.obj
-# symbols (pulled transitively via chaos_hot_update/chaos_interpreter); /FORCE:MULTIPLE
-# tolerates it (same as add_chaos_test).
-if(MSVC)
-    add_link_options(/FORCE:MULTIPLE)
+# Hot-Update contracts targets — factory (cmake/chaos_native_test.cmake) provides
+# the runtime lib set, /FORCE:MULTIPLE + /utf-8 flags, include dirs, and the
+# codegen-symbol stub.
+
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/method_replacement_smoke.cpp")
+    chaos_native_add_test(chaos_method_replacement_smoke method_replacement_smoke.cpp)
 endif()
 
-add_executable(chaos_method_replacement_smoke
-    method_replacement_smoke.cpp)
-
-target_compile_features(chaos_method_replacement_smoke PRIVATE cxx_std_17)
-target_link_libraries(
-    chaos_method_replacement_smoke
-    PRIVATE
-        chaos_hot_update
-        chaos_interpreter
-        chaos_runtime_core
-        chaos_bootstrap
-        chaos_common
-        chaos_support
-        chaos_fmt
-        chaos_codegen)
-
-add_executable(chaos_hotupdate_verification_test
-    hotupdate_verification_test.cpp)
-
-target_compile_features(chaos_hotupdate_verification_test PRIVATE cxx_std_17)
-if(MSVC)
-    target_compile_options(chaos_hotupdate_verification_test PRIVATE /utf-8)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/hotupdate_verification_test.cpp")
+    chaos_native_add_test(chaos_hotupdate_verification_test hotupdate_verification_test.cpp)
 endif()
-target_link_libraries(
-    chaos_hotupdate_verification_test
-    PRIVATE
-        chaos_hot_update
-        chaos_bootstrap)

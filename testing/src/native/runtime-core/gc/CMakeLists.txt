@@ -520,18 +520,11 @@ set_tests_properties(test_gc_atomic_alloc PROPERTIES LABELS "unit;gc")
 # symbols (g_chaos_gc_stats_ptr, etc.) that are in the prebuilt
 # chaos_runtime_core.lib which uses GNU ar format that MSVC link.exe cannot
 # search for COMDAT resolution.
-add_executable(test_gc_debug_contract
+chaos_native_add_test(test_gc_debug_contract
     gc_debug_contract_test.cpp
-    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_debug_contract.cpp)
-target_compile_features(test_gc_debug_contract PRIVATE cxx_std_17)
-target_compile_definitions(test_gc_debug_contract PRIVATE _CRT_SECURE_NO_WARNINGS)
-target_compile_options(test_gc_debug_contract PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
-target_include_directories(test_gc_debug_contract PRIVATE ${CHAOS_INCLUDE_DIRS}
-    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
-target_link_libraries(test_gc_debug_contract PRIVATE gtest chaos_runtime_core chaos_common chaos_fmt)
-target_link_options(test_gc_debug_contract PRIVATE /FORCE:MULTIPLE)
-add_test(NAME test_gc_debug_contract COMMAND test_gc_debug_contract)
-set_tests_properties(test_gc_debug_contract PROPERTIES LABELS "unit;gc")
+    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_debug_contract.cpp"
+    LABELS "unit;gc"
+)
 
 # gc_satb_stress_test — Multithreaded SATB buffer overflow stress test
 add_executable(test_gc_satb_stress

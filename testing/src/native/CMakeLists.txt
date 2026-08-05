@@ -129,56 +129,19 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../config/sanitize
 include(asan)
 include(rtc)
 
-# Convenience: create gtest executable with chaos library support
-function(add_chaos_test name)
-    cmake_parse_arguments(ARG "" "SANITIZE" "LIBS;INCLUDES;LABELS" ${ARGN})
-    add_executable(${name} ${ARG_UNPARSED_ARGUMENTS})
-    if(MSVC)
-        target_link_libraries(${name} PRIVATE gtest_main ${ARG_LIBS})
-        target_link_options(${name} PRIVATE /FORCE:MULTIPLE)
-    else()
-        # Linux: wrap chaos static libs in --start-group/--end-group to resolve
-        # circular dependencies between chaos_interpreter, chaos_bootstrap,
-        # chaos_runtime_core, and chaos_debugger.
-        target_link_libraries(${name} PRIVATE
-            gtest_main
-            -Wl,--start-group
-            ${ARG_LIBS}
-            -Wl,--end-group)
-        # Allow duplicate TLS definitions from test stubs
-        target_link_options(${name} PRIVATE -Wl,--allow-multiple-definition)
-        # Force JitRecompileToTier1 to resolve circular dep between
-        # chaos_runtime_core (tier_manager) and chaos_jit (jit_precode)
-        target_link_options(${name} PRIVATE -Wl,--undefined=JitRecompileToTier1)
-    endif()
-    target_include_directories(${name} PRIVATE ${CHAOS_INCLUDE_DIRS} ${ARG_INCLUDES})
-    add_test(NAME ${name} COMMAND ${name})
-    if(ARG_LABELS)
-        set_tests_properties(${name} PROPERTIES LABELS "${ARG_LABELS}")
-    endif()
-    # Apply per-target sanitizer config
+# Convenience: create gtest executable with chaos library support.
+# MACRO (not function) so ARGN flows through verbatim to the shared factory
+# chaos_native_add_test() (cmake/chaos_native_test.cmake) without a second
+# cmake_parse_arguments pass. SANITIZE is handled here (not in the shared module).
+macro(add_chaos_test name)
+    set(_argn ${ARGN})
+    chaos_native_add_test(${name} ${_argn})
     if(ARG_SANITIZE STREQUAL "asan")
         chaos_enable_asan(${name})
     elseif(ARG_SANITIZE STREQUAL "rtc")
         chaos_enable_rtc(${name})
     endif()
-    # Global USE_ASAN still applies (legacy path)
-    if(USE_ASAN AND CHAOS_ASAN_DLL)
-        add_custom_command(TARGET ${name} POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                "${CHAOS_ASAN_DLL}" "$<TARGET_FILE_DIR:${name}>/"
-            COMMENT "Copy ASan DLL to $<TARGET_FILE_DIR:${name}>"
-        )
-    endif()
-    if(USE_ASAN)
-        add_custom_command(TARGET ${name} POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                "${CMAKE_BINARY_DIR}/asan-suppressions.txt"
-                "$<TARGET_FILE_DIR:${name}>/"
-            COMMENT "Copy asan-suppressions.txt to $<TARGET_FILE_DIR:${name}>"
-        )
-    endif()
-endfunction()
+endmacro()
 
 # Subdirectories
 add_subdirectory(support)

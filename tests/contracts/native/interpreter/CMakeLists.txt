@@ -1,115 +1,31 @@
-# chaos_interpreter.lib and chaos_runtime_core.lib both carry compiled copies of
-# instantiation_engine symbols; linking them together (with chaos_codegen) otherwise
-# fails with LNK2005. /FORCE:MULTIPLE tolerates the duplicates like add_chaos_test.
-if(MSVC)
-    add_link_options(/FORCE:MULTIPLE)
+# Interpreter contracts targets — factory (cmake/chaos_native_test.cmake) provides
+# the runtime lib set, /FORCE:MULTIPLE + /utf-8 flags, include dirs (incl.
+# src/native/interpreter/generated and src/native/hot-update), and the codegen-symbol stub.
+
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/interpreter_smoke.cpp")
+    chaos_native_add_test(chaos_interpreter_smoke interpreter_smoke.cpp)
 endif()
 
-add_executable(chaos_interpreter_smoke
-    interpreter_smoke.cpp)
-
-target_compile_features(chaos_interpreter_smoke PRIVATE cxx_std_17)
-target_link_libraries(
-    chaos_interpreter_smoke
-    PRIVATE
-        chaos_interpreter
-        chaos_codegen)
-
-add_executable(chaos_interpreter_new_features_test
-    interpreter_new_features_test.cpp)
-
-target_compile_features(chaos_interpreter_new_features_test PRIVATE cxx_std_17)
-target_link_libraries(
-    chaos_interpreter_new_features_test
-    PRIVATE
-        chaos_interpreter
-        chaos_runtime_core
-        chaos_codegen)
-
-add_executable(chaos_interpreter_integration
-    interpreter_integration.cpp
-    method_replacement_test.cpp)
-
-target_compile_features(chaos_interpreter_integration PRIVATE cxx_std_17)
-target_compile_options(chaos_interpreter_integration PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
-target_include_directories(chaos_interpreter_integration PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/hot-update)
-target_link_libraries(
-    chaos_interpreter_integration
-    PRIVATE
-        chaos_interpreter
-        chaos_bootstrap
-        chaos_fmt
-        chaos_common
-        chaos_support
-        chaos_hot_update
-        chaos_codegen)
-
-add_executable(chaos_interpreter_bridge_test
-    interpreter_bridge_test.cpp)
-
-target_compile_features(chaos_interpreter_bridge_test PRIVATE cxx_std_17)
-if(MSVC)
-    target_compile_options(chaos_interpreter_bridge_test PRIVATE /utf-8)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/interpreter_new_features_test.cpp")
+    chaos_native_add_test(chaos_interpreter_new_features_test interpreter_new_features_test.cpp)
 endif()
-target_link_libraries(
-    chaos_interpreter_bridge_test
-    PRIVATE
-        chaos_interpreter
-        chaos_runtime_core
-        chaos_bootstrap
-        chaos_codegen
-        chaos_common
-        chaos_support
-        chaos_fmt)
 
-add_executable(chaos_interpreter_entry_test
-    interpreter_entry_test.cpp)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/interpreter_integration.cpp")
+    chaos_native_add_test(chaos_interpreter_integration interpreter_integration.cpp method_replacement_test.cpp)
+endif()
 
-target_compile_features(chaos_interpreter_entry_test PRIVATE cxx_std_17)
-target_include_directories(chaos_interpreter_entry_test PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/interpreter/generated)
-target_link_libraries(
-    chaos_interpreter_entry_test
-    PRIVATE
-        chaos_runtime_core
-        chaos_interpreter
-        chaos_bootstrap
-        chaos_fmt
-        chaos_common
-        chaos_support
-        chaos_codegen)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/interpreter_bridge_test.cpp")
+    chaos_native_add_test(chaos_interpreter_bridge_test interpreter_bridge_test.cpp)
+endif()
 
-add_executable(chaos_interpreter_profile_test
-    interpreter_profile_test.cpp)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/interpreter_entry_test.cpp")
+    chaos_native_add_test(chaos_interpreter_entry_test interpreter_entry_test.cpp)
+endif()
 
-target_compile_features(chaos_interpreter_profile_test PRIVATE cxx_std_17)
-target_include_directories(chaos_interpreter_profile_test PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/interpreter/generated)
-target_link_libraries(
-    chaos_interpreter_profile_test
-    PRIVATE
-        chaos_runtime_core
-        chaos_interpreter
-        chaos_bootstrap
-        chaos_fmt
-        chaos_common
-        chaos_support
-        chaos_codegen)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/interpreter_profile_test.cpp")
+    chaos_native_add_test(chaos_interpreter_profile_test interpreter_profile_test.cpp)
+endif()
 
-add_executable(chaos_tiering_benchmark
-    tiering_benchmark.cpp)
-
-target_compile_features(chaos_tiering_benchmark PRIVATE cxx_std_17)
-target_include_directories(chaos_tiering_benchmark PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/interpreter/generated)
-target_link_libraries(
-    chaos_tiering_benchmark
-    PRIVATE
-        chaos_runtime_core
-        chaos_interpreter
-        chaos_bootstrap
-        chaos_fmt
-        chaos_common
-        chaos_support
-        chaos_codegen)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tiering_benchmark.cpp")
+    chaos_native_add_test(chaos_tiering_benchmark tiering_benchmark.cpp)
+endif()
