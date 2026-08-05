@@ -60,27 +60,18 @@ static CHAOS_IL2CPP_INTPTR make_empty_string() noexcept {
 }
 
 /// Allocate a managed array of CHAOS_IL2CPP_INTPTR elements (for JoinSs).
-/// Uses ManagedArrayAccessor layout (48B header + separate element buffer)
-/// matching get_managed_array() in stub_common.h.
+/// Uses the ManagedArrayAccessor contiguous layout (header + inline elements)
+/// matching get_managed_array()/accessor_get_elements() in stub_common.h.
 static CHAOS_IL2CPP_INTPTR make_test_array(CHAOS_IL2CPP_INTPTR* elems,
                                             CHAOS_IL2CPP_UINTPTR count) noexcept {
     auto* arr = static_cast<ManagedArrayAccessor*>(
-        std::malloc(sizeof(ManagedArrayAccessor)));
+        std::malloc(sizeof(ManagedArrayAccessor)
+                    + count * sizeof(CHAOS_IL2CPP_INTPTR)));
     if (arr == nullptr) return 0;
     std::memset(arr, 0, sizeof(ManagedArrayAccessor));
     arr->length = static_cast<CHAOS_IL2CPP_INTPTR>(count);
-    if (count > 0) {
-        auto* element_data = static_cast<CHAOS_IL2CPP_INTPTR*>(
-            std::malloc(count * sizeof(CHAOS_IL2CPP_INTPTR)));
-        if (element_data == nullptr) {
-            std::free(arr);
-            return 0;
-        }
-        for (CHAOS_IL2CPP_UINTPTR i = 0; i < count; ++i) element_data[i] = elems[i];
-        arr->elements = element_data;
-    } else {
-        arr->elements = nullptr;
-    }
+    auto* element_data = accessor_get_elements(arr);
+    for (CHAOS_IL2CPP_UINTPTR i = 0; i < count; ++i) element_data[i] = elems[i];
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
 
@@ -102,7 +93,6 @@ static CHAOS_IL2CPP_INTPTR make_inline_array(CHAOS_IL2CPP_INTPTR* elems,
 static void free_test_array(CHAOS_IL2CPP_INTPTR handle) noexcept {
     if (handle == 0) return;
     auto* arr = reinterpret_cast<ManagedArrayAccessor*>(handle);
-    std::free(arr->elements);
     std::free(arr);
 }
 

@@ -482,8 +482,8 @@ TEST_F(JitBench, Dp1a_TransferCost) {
             auto state = dummy_state.load(std::memory_order_acquire);
             if (state == 2) {
                 // Simulated atomic transfer on a dummy local (not consuming real jit)
-                void* tmp = reinterpret_cast<void*>(0xDEAD);
-                __atomic_exchange_n(&tmp, nullptr, __ATOMIC_ACQUIRE);
+                std::atomic<void*> tmp{reinterpret_cast<void*>(0xDEAD)};
+                tmp.exchange(nullptr, std::memory_order_acquire);
                 entry.direct_ptr = jit->code;
                 side_map.erase(it);
                 side_map[&entry] = &entry;
