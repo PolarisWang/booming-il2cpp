@@ -124,8 +124,11 @@ def main():
                         help="Chunk slug to run (e.g. 'numerics')")
     parser.add_argument("--all-chunks", action="store_true",
                         help="Run all chunks for the assembly")
-    parser.add_argument("--stages", default="build,fact,hotupdate,coverage-audit",
-                        help="Comma-separated stages to run (default: build,fact,hotupdate,coverage-audit)")
+    parser.add_argument("--stages", default=None,
+                        help="Comma-separated stages to run (default: build,fact,hotupdate,coverage-audit; or build,fact,coverage-audit with --smoke)")
+    parser.add_argument("--smoke", action="store_true",
+                        help="Smoke mode: run only fast verification stages (build,fact,coverage-audit) "
+                             "and, with --all-chunks, only the first --smoke-chunks chunks.")
     parser.add_argument("--mode", default=None,
                         choices=["standard", "strict"],
                         help="Verification mode: standard (default) or strict (coverage fails if >5%% methods missing)")
@@ -136,6 +139,8 @@ def main():
                         help="Verbose output")
     parser.add_argument("--skip-probe", action="store_true",
                         help="Skip probe phase in AutoTestGenerator")
+    parser.add_argument("--smoke-chunks", type=int, default=1,
+                        help="In smoke mode with --all-chunks, limit to this many chunks (default 1)")
 
     # ── Hephaestus cache management subcommand ──
     subparsers = parser.add_subparsers(dest="hephaestus_cmd",
@@ -159,6 +164,12 @@ def main():
                            help="Maximum entries to keep")
 
     args = parser.parse_args()
+
+    # ── Smoke mode: default to fast stages and a limited chunk set ──
+    if args.smoke:
+        if args.stages is None:
+            args.stages = "build,fact,coverage-audit"
+        print("[chunk-pipeline] SMOKE mode: stages=[" + args.stages + "]")
 
     # ── Hephaestus cache management ──
     if args.hephaestus_cmd:
@@ -226,6 +237,9 @@ def main():
         if not chunks:
             print(f"ERROR: No chunks found for {assembly}")
             return 1
+        if args.smoke and len(chunks) > args.smoke_chunks:
+            print(f"[chunk-pipeline] SMOKE: limiting {len(chunks)} chunks to first {args.smoke_chunks}")
+            chunks = chunks[:args.smoke_chunks]
     elif args.chunk:
         chunks = [args.chunk]
     else:
@@ -246,6 +260,8 @@ def main():
         "reporting": None,
     }
 
+    if args.stages is None:
+        args.stages = "build,fact,hotupdate,coverage-audit"
     stage_names = [s.strip() for s in args.stages.split(",")]
     for s in stage_names:
         if s not in stage_functions:

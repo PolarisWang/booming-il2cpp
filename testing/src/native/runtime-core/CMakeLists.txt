@@ -1,4 +1,11 @@
 # Build smoke test + GC core tests + interpreter tests + threading tests + metadata tests + runtime_stubs tests
+
+# Matrix test sources embed non-ASCII strings and include fmt headers; MSVC needs
+# /utf-8 to compile them (same convention as testing/src/native/runtime-core/gc).
+if(MSVC)
+    add_compile_options(/utf-8)
+endif()
+
 add_subdirectory(gc)
 add_subdirectory(interpreter)
 add_subdirectory(threading)

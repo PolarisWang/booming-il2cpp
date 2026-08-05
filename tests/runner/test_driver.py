@@ -92,7 +92,10 @@ def run_group(layer: str, group: dict, layers_cfg: dict, opts) -> SuiteResult:
     # a group may override the layer's adapter; else use layer default
     adapter_name = group.get("adapter") or layers_cfg.get(layer, {}).get("adapter", "dotnet")
     run = ADAPTERS.get(adapter_name, dotnet.run)
-    return run(group, timeout=opts.timeout, quick=opts.quick)
+    # per-group timeout override (heavyweight e2e pipelines run longer than
+    # the driver default); falls back to the global --timeout
+    timeout = group.get("timeout", opts.timeout)
+    return run(group, timeout=timeout, quick=opts.quick)
 
 
 def main() -> int:

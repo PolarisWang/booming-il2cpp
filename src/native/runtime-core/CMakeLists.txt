@@ -68,6 +68,7 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/threadpool_events.cpp
     runtime_stubs/convert_stubs.cpp
     runtime_stubs/interop_stubs.cpp
+    runtime_stubs/crypto_stubs.cpp
     runtime_stubs/collection_stubs.cpp
     runtime_stubs/vector_stubs.cpp
     runtime_stubs/async_stubs.cpp

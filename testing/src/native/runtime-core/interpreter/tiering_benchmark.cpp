@@ -1941,7 +1941,7 @@ int main() {
 
     // Dump per-opcode FastExecute frequency histogram before PROFILE dump.
     // This shows which opcodes were executed most across all benchmark scenarios.
-    DumpFastExecuteOpcodeHistogram();
+    chaos::il2cpp::runtime_core::DumpFastExecuteOpcodeHistogram();
 
     CHAOS_IL2CPP_PROFILE_DUMP();
 

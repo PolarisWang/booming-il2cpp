@@ -32,7 +32,7 @@ layers:
     groups:
       - name: contracts-native
         cmake_root: .
-        cmake_build_dir: build/native
+        cmake_build_dir: artifacts/presets/windows-x64-reference
         cmake_preset: windows-x64-reference
         # runs the CTest targets under tests/contracts/native/** (abi, bridge,
         # common, engine-binding, gc, hot-update, interpreter, runtime-core)
@@ -47,10 +47,14 @@ layers:
       - name: foundation-dll-smoke
         script: testing/foundation-dll/verification/ci_smoke.py
         requires_python: "3.10+"
+        # smoke drives the full System.Private.CoreLib chunk pipeline; allow a
+        # long budget (cold build+fact+coverage can exceed the 30min default).
+        timeout: 7200
       - name: foundation-dll-chunk
         script: testing/foundation-dll/verification/chunk_pipeline.py
         args: [--smoke]
         slow: true
+        timeout: 5400
 
   # NOTE: testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter is intentionally
   # NOT an active entry in unit: it declares [Fact]s but lacks Microsoft.NET.Test.Sdk
