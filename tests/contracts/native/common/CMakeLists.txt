@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.20)
 
 project(chaos_log_system_test LANGUAGES CXX)
 
+# chaos_runtime_core.lib carries instantiation_engine.obj duplicating runtime_core.obj
+# symbols; /FORCE:MULTIPLE tolerates it (same as add_chaos_test).
+if(MSVC)
+    add_link_options(/FORCE:MULTIPLE)
+endif()
+
 get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../../.." ABSOLUTE)
 set(ARTIFACT_ROOT "${REPO_ROOT}/artifacts/native-common-test")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
@@ -28,4 +34,11 @@ target_link_libraries(
     chaos_log_system_test
     PRIVATE
         chaos_common
-        chaos_runtime_core)
+        chaos_runtime_core
+        chaos_bootstrap
+        chaos_interpreter
+        chaos_jit
+        chaos_hot_update
+        chaos_support
+        chaos_fmt
+        chaos_codegen)

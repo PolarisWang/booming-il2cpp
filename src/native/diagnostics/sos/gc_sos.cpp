@@ -87,29 +87,29 @@ static constexpr int kGcBucketCount  = 6;
 // DbgEng interface pointers
 // ══════════════════════════════════════════════════════════════════════════
 
-IDebugClient*    g_client   = nullptr;
-IDebugControl*   g_control  = nullptr;
-IDebugSymbols*   g_symbols  = nullptr;
-IDebugDataSpaces* g_data    = nullptr;
+IDebugClient*    g_sos_client   = nullptr;
+IDebugControl*   g_sos_control  = nullptr;
+IDebugSymbols*   g_sos_symbols  = nullptr;
+IDebugDataSpaces* g_sos_data    = nullptr;
 
 // ══════════════════════════════════════════════════════════════════════════
 // Helpers
 // ══════════════════════════════════════════════════════════════════════════
 
 void SosPrint(PCSTR fmt, ...) noexcept {
-    if (!g_control) return;
+    if (!g_sos_control) return;
     char buf[4096];
     va_list args;
     va_start(args, fmt);
     vsnprintf(buf, sizeof(buf), fmt, args);
     va_end(args);
-    g_control->Output(DEBUG_OUTPUT_NORMAL, "%s", buf);
+    g_sos_control->Output(DEBUG_OUTPUT_NORMAL, "%s", buf);
 }
 
 bool SosReadTarget(ULONG64 offset, void* buf, ULONG size) noexcept {
-    if (!g_data) return false;
+    if (!g_sos_data) return false;
     ULONG bytes_read = 0;
-    return SUCCEEDED(g_data->ReadVirtual(offset, buf, size, &bytes_read))
+    return SUCCEEDED(g_sos_data->ReadVirtual(offset, buf, size, &bytes_read))
            && bytes_read == size;
 }
 
@@ -118,7 +118,7 @@ bool SosReadTarget(ULONG64 offset, void* buf, ULONG size) noexcept {
 /// 2. ReadVirtual to get the pointer value stored in the variable
 ULONG64 SosResolvePointer(PCSTR name) noexcept {
     ULONG64 var_addr = 0;
-    if (!SUCCEEDED(g_symbols->GetOffsetByName(name, &var_addr))) {
+    if (!SUCCEEDED(g_sos_symbols->GetOffsetByName(name, &var_addr))) {
         return 0;
     }
     ULONG64 ptr_val = 0;
@@ -136,21 +136,21 @@ extern "C" HRESULT CALLBACK
 DebugExtensionInitialize(PDEBUG_CLIENT pDebugClient, void*, void*) {
     if (!pDebugClient) return E_FAIL;
     pDebugClient->AddRef();
-    g_client = pDebugClient;
+    g_sos_client = pDebugClient;
 
-    HRESULT hr = g_client->QueryInterface(
+    HRESULT hr = g_sos_client->QueryInterface(
         __uuidof(IDebugControl),
-        reinterpret_cast<void**>(&g_control));
+        reinterpret_cast<void**>(&g_sos_control));
     if (FAILED(hr)) return hr;
 
-    hr = g_client->QueryInterface(
+    hr = g_sos_client->QueryInterface(
         __uuidof(IDebugSymbols),
-        reinterpret_cast<void**>(&g_symbols));
+        reinterpret_cast<void**>(&g_sos_symbols));
     if (FAILED(hr)) return hr;
 
-    hr = g_client->QueryInterface(
+    hr = g_sos_client->QueryInterface(
         __uuidof(IDebugDataSpaces),
-        reinterpret_cast<void**>(&g_data));
+        reinterpret_cast<void**>(&g_sos_data));
     if (FAILED(hr)) return hr;
 
     SosPrint("CRAG GC SOS extension loaded. Use !gc.help for commands.\n");
@@ -162,10 +162,10 @@ DebugExtensionNotify(ULONG, ULONG) {}
 
 extern "C" void CALLBACK
 DebugExtensionUninitialize() {
-    if (g_data)    { g_data->Release();    g_data    = nullptr; }
-    if (g_symbols) { g_symbols->Release(); g_symbols = nullptr; }
-    if (g_control) { g_control->Release(); g_control = nullptr; }
-    if (g_client)  { g_client->Release();  g_client  = nullptr; }
+    if (g_sos_data)    { g_sos_data->Release();    g_sos_data    = nullptr; }
+    if (g_sos_symbols) { g_sos_symbols->Release(); g_sos_symbols = nullptr; }
+    if (g_sos_control) { g_sos_control->Release(); g_sos_control = nullptr; }
+    if (g_sos_client)  { g_sos_client->Release();  g_sos_client  = nullptr; }
 }
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -337,7 +337,7 @@ events(PDEBUG_CLIENT, PCSTR) {
     // Read ring size from target.
     ULONG64 size_var_addr = 0;
     int32_t ring_size = kGcRingSize;
-    if (SUCCEEDED(g_symbols->GetOffsetByName("g_chaos_gc_event_ring_size",
+    if (SUCCEEDED(g_sos_symbols->GetOffsetByName("g_chaos_gc_event_ring_size",
                                              &size_var_addr))) {
         SosReadTarget(size_var_addr, &ring_size, sizeof(ring_size));
     }
@@ -411,7 +411,7 @@ histogram(PDEBUG_CLIENT, PCSTR) {
     // Read bucket count from target.
     int32_t bucket_count = kGcBucketCount;
     ULONG64 count_var_addr = 0;
-    if (SUCCEEDED(g_symbols->GetOffsetByName("g_chaos_gc_pause_bucket_count",
+    if (SUCCEEDED(g_sos_symbols->GetOffsetByName("g_chaos_gc_pause_bucket_count",
                                              &count_var_addr))) {
         SosReadTarget(count_var_addr, &bucket_count, sizeof(bucket_count));
     }

@@ -38,7 +38,7 @@ public:
         for (CHAOS_IL2CPP_SIZE s = start_slot; s < end_slot; ) {
             CHAOS_IL2CPP_SIZE byte_idx = s / 8;
             int bit_off = static_cast<int>(s % 8);
-            int bits_here = std::min(8 - bit_off, static_cast<int>(end_slot - s));
+            int bits_here = (std::min)(8 - bit_off, static_cast<int>(end_slot - s));
             unsigned char mask = static_cast<unsigned char>(((1u << bits_here) - 1) << bit_off);
         #if defined(_MSC_VER) && !defined(__clang__)
             auto prev = _InterlockedOr8(reinterpret_cast<volatile char*>(&data_[byte_idx]),
@@ -105,7 +105,7 @@ public:
         for (CHAOS_IL2CPP_SIZE s = start_slot; s < end_slot; ) {
             CHAOS_IL2CPP_SIZE byte_idx = s / 8;
             int bit_off = static_cast<int>(s % 8);
-            int bits_here = std::min(8 - bit_off, static_cast<int>(end_slot - s));
+            int bits_here = (std::min)(8 - bit_off, static_cast<int>(end_slot - s));
             unsigned char mask = static_cast<unsigned char>(((1u << bits_here) - 1) << bit_off);
             data_[byte_idx] &= ~mask;
             s += bits_here;

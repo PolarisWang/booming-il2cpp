@@ -1,3 +1,10 @@
+# chaos_interpreter.lib and chaos_runtime_core.lib both carry compiled copies of
+# instantiation_engine symbols; linking them together (with chaos_codegen) otherwise
+# fails with LNK2005. /FORCE:MULTIPLE tolerates the duplicates like add_chaos_test.
+if(MSVC)
+    add_link_options(/FORCE:MULTIPLE)
+endif()
+
 add_executable(chaos_interpreter_smoke
     interpreter_smoke.cpp)
 
@@ -42,6 +49,9 @@ add_executable(chaos_interpreter_bridge_test
     interpreter_bridge_test.cpp)
 
 target_compile_features(chaos_interpreter_bridge_test PRIVATE cxx_std_17)
+if(MSVC)
+    target_compile_options(chaos_interpreter_bridge_test PRIVATE /utf-8)
+endif()
 target_link_libraries(
     chaos_interpreter_bridge_test
     PRIVATE

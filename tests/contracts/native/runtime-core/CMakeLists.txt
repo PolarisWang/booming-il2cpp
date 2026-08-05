@@ -2,6 +2,14 @@ cmake_minimum_required(VERSION 3.20)
 
 project(chaos_method_aot_map_test LANGUAGES CXX)
 
+# chaos_runtime_core.lib carries instantiation_engine.obj alongside runtime_core.obj,
+# which define the same runtime_instantiation bridge symbols. Every contract target
+# linking that lib would otherwise fail with LNK2005; /FORCE:MULTIPLE tolerates the
+# duplicates the same way add_chaos_test does in testing/src/native/.
+if(MSVC)
+    add_link_options(/FORCE:MULTIPLE)
+endif()
+
 get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../../.." ABSOLUTE)
 set(ARTIFACT_ROOT "${REPO_ROOT}/artifacts/native-runtime-core-test")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
@@ -429,11 +437,14 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
                 "${REPO_ROOT}/contracts/native/v0"
                 "${REPO_ROOT}/src/native/common"
                 "${REPO_ROOT}/src/native/runtime-core")
+        # Link the full runtime lib set: chaos_runtime_core transitively references
+        # chaos_interpreter/jit/bootstrap/codegen (InterpreterEntryDirect,
+        # FindNativeCodeByAddress, GetCodegenBridgeV0, InterpreterValue, ...); the
+        # minimal runtime_core+common set leaves those unresolved (LNK2019).
         target_link_libraries(
             chaos_execution_context_smoke
             PRIVATE
-                chaos_runtime_core
-                chaos_common)
+                ${CHAOS_GC_COMMON_LIBS})
     endif()
 
     # synchronization_smoke — SemaphoreSlim, RWLock, WaitHandle, TimerQueue
