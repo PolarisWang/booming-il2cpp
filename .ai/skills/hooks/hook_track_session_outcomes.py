@@ -34,21 +34,35 @@ def _rotate_jsonl_if_needed(path: Path) -> None:
 RESOLVED_REPO_ROOT: Path | None = None
 
 
-def resolve_repo_root() -> Path | None:
-    global RESOLVED_REPO_ROOT
-    if RESOLVED_REPO_ROOT is not None:
-        return RESOLVED_REPO_ROOT
+def _derive_repo_root() -> Path | None:
+    """Derive repo root from script location — no git subprocess fork.
+
+    This file lives at <repo>/.ai/skills/hooks/... (4 levels below repo root).
+    Falls back to a git query only if hooks are not deployed under the repo tree.
+    """
+    p = Path(__file__).resolve()
+    for _ in range(4):
+        p = p.parent
+        if (p / ".git").exists() or (p / ".gitignore").exists():
+            return p
     try:
         script_dir = Path(__file__).resolve().parent
         output = subprocess.run(
             ["git", "-C", str(script_dir), "rev-parse", "--show-toplevel"],
-            capture_output=True, text=True, timeout=10,
+            capture_output=True, text=True, timeout=5,
         )
         root = output.stdout.strip()
-        RESOLVED_REPO_ROOT = Path(root).resolve() if root else None
-        return RESOLVED_REPO_ROOT
+        return Path(root).resolve() if root else None
     except Exception:
         return None
+
+
+def resolve_repo_root() -> Path | None:
+    """"""  # noqa: D204 — A1: no git fork on the hot path; cached at module scope.
+    global RESOLVED_REPO_ROOT
+    if RESOLVED_REPO_ROOT is None:
+        RESOLVED_REPO_ROOT = _derive_repo_root()
+    return RESOLVED_REPO_ROOT
 
 
 def load_jsonl(path: Path, max_records: int = 0) -> list[dict]:
@@ -68,7 +82,7 @@ def load_jsonl(path: Path, max_records: int = 0) -> list[dict]:
 
 def get_active_skill_path(repo_root: Path) -> str | None:
     """Read the most recent skill from usage.jsonl."""
-    usage_path = repo_root / "skills" / "lifecycle" / "telemetry" / "usage.jsonl"
+    usage_path = repo_root / ".ai" / "skills" / "lifecycle" / "telemetry" / "usage.jsonl"
     if not usage_path.exists():
         return None
     try:
@@ -94,7 +108,7 @@ def estimate_session_completed(repo_root: Path) -> dict:
         pass
 
     has_skill_edit = False
-    skill_library = repo_root / "skills" / "library" / "skills"
+    skill_library = repo_root / ".ai" / "skills" / "library" / "skills"
     if skill_library.exists():
         try:
             output = subprocess.run(
@@ -121,7 +135,7 @@ def extract_success_pattern(repo_root: Path, skill_path: str | None) -> dict | N
     sequence of tools used, the ratio of edits to reads, and common file targets.
     This becomes the 'success pattern' record that FIX/CAPTURE can learn from.
     """
-    telemetry_dir = repo_root / "skills" / "lifecycle" / "telemetry"
+    telemetry_dir = repo_root / ".ai" / "skills" / "lifecycle" / "telemetry"
     tool_path = telemetry_dir / "tool_outcomes.jsonl"
 
     tools = load_jsonl(tool_path, 200)
@@ -201,7 +215,7 @@ def main() -> int:
     skill_path = get_active_skill_path(repo_root)
     outcome = estimate_session_completed(repo_root)
 
-    telemetry_dir = repo_root / "skills" / "lifecycle" / "telemetry"
+    telemetry_dir = repo_root / ".ai" / "skills" / "lifecycle" / "telemetry"
     telemetry_dir.mkdir(parents=True, exist_ok=True)
 
     # Always write session outcome

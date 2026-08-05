@@ -24,6 +24,40 @@ RESOLVED_REPO_ROOT: Path | None = None
 SKILL_PATH_PATTERN = re.compile(r"skills/library/skills/[^/]+/SKILL\.md", re.IGNORECASE)
 EXPERT_PATTERN = re.compile(r"dev-il2cpp-[-a-z]+|dev-project-[-a-z]+", re.IGNORECASE)
 
+
+def _derive_repo_root() -> Path | None:
+    """Derive repo root from script location — no git subprocess fork.
+
+    This file lives at <repo>/.ai/skills/hooks/... (4 levels below repo root),
+    so the root is 4 `.parent` hops up. Resolution uses `.resolve()` (realpath)
+    so it is robust to symlinked deployments.
+    """
+    p = Path(__file__).resolve()
+    for _ in range(4):
+        p = p.parent
+        if (p / ".git").exists() or (p / ".gitignore").exists():
+            return p
+    # Fallback: legacy git query (rare — only if hooks are not under repo root)
+    try:
+        script_dir = Path(__file__).resolve().parent
+        output = subprocess.run(
+            ["git", "-C", str(script_dir), "rev-parse", "--show-toplevel"],
+            capture_output=True, text=True, timeout=5,
+        )
+        root = output.stdout.strip()
+        return Path(root).resolve() if root else None
+    except Exception:
+        return None
+
+
+def resolve_repo_root() -> Path | None:
+    """"""  # noqa: D204 — A1: no git fork on the hot path; cached at module scope.
+    global RESOLVED_REPO_ROOT
+    if RESOLVED_REPO_ROOT is None:
+        RESOLVED_REPO_ROOT = _derive_repo_root()
+    return RESOLVED_REPO_ROOT
+
+
 # R8: JSONL 文件大小上限 10MB，超出后自动轮转
 _MAX_JSONL_BYTES = 10 * 1024 * 1024
 
@@ -39,23 +73,6 @@ def _rotate_jsonl_if_needed(path: Path) -> None:
             pass  # Best-effort; swallow to never break the hook
 
 
-def resolve_repo_root() -> Path | None:
-    global RESOLVED_REPO_ROOT
-    if RESOLVED_REPO_ROOT is not None:
-        return RESOLVED_REPO_ROOT
-    try:
-        script_dir = Path(__file__).resolve().parent
-        output = subprocess.run(
-            ["git", "-C", str(script_dir), "rev-parse", "--show-toplevel"],
-            capture_output=True, text=True, timeout=10,
-        )
-        root = output.stdout.strip()
-        RESOLVED_REPO_ROOT = Path(root).resolve() if root else None
-        return RESOLVED_REPO_ROOT
-    except Exception:
-        return None
-
-
 def extract_skill_name(file_path: str) -> str | None:
     m = re.search(r"skills/library/skills/([^/]+)/SKILL\.md", file_path.replace("\\", "/"))
     return m.group(1) if m else None
@@ -66,8 +83,28 @@ def detect_expert_from_input(raw: str) -> str | None:
     return names[-1] if names else None
 
 
+def _extract_declared_expert(class_file: Path) -> str | None:
+    """Read the loaded_expert line from .classified and return the expert name.
+
+    Format: `loaded_expert:dev-il2cpp→dev-il2cpp-codegen-expert`
+    Returns the expert after the arrow (or after the colon if no arrow).
+    """
+    try:
+        for line in class_file.read_text(encoding="utf-8", errors="replace").splitlines():
+            if "loaded_expert:" not in line:
+                continue
+            val = line.split("loaded_expert:", 1)[-1].strip()
+            # Split on arrow (UTF-8 or ASCII variants) or comma; take the LAST
+            # entry — the most-specific routed expert (mirrors check_classification.py).
+            parts = [p.strip() for p in re.split(r"→|->|=>|,", val) if p.strip()]
+            return parts[-1] if parts else None
+        return None
+    except (OSError, UnicodeDecodeError):
+        return None
+
+
 def record_skill_usage(repo_root: Path, skill_path: str, source: str) -> None:
-    telemetry_dir = repo_root / "skills" / "lifecycle" / "telemetry"
+    telemetry_dir = repo_root / ".ai" / "skills" / "lifecycle" / "telemetry"
     telemetry_dir.mkdir(parents=True, exist_ok=True)
     record = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -82,12 +119,18 @@ def record_skill_usage(repo_root: Path, skill_path: str, source: str) -> None:
 
 
 def record_tool_outcome(repo_root: Path, tool_call: dict, skill_path: str | None = None) -> None:
-    telemetry_dir = repo_root / "skills" / "lifecycle" / "telemetry"
+    telemetry_dir = repo_root / ".ai" / "skills" / "lifecycle" / "telemetry"
     telemetry_dir.mkdir(parents=True, exist_ok=True)
 
     tool_name = tool_call.get("tool", tool_call.get("tool_name", "unknown"))
     success = tool_call.get("success", True)
     error_msg = tool_call.get("error", "") or tool_call.get("stderr", "")
+
+    # A2: drop the noisy majority — pure-success records with no skill attribution
+    # add ~0 signal (the evolution pipeline filters tool outcomes by skill_path,
+    # see extract_success_pattern). Failures and skill-attributed successes stay.
+    if success and not skill_path:
+        return 0
 
     record = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -112,6 +155,7 @@ def record_tool_outcome(repo_root: Path, tool_call: dict, skill_path: str | None
         _rotate_jsonl_if_needed(failure_path)
         with open(failure_path, "a", encoding="utf-8") as f:
             f.write(json.dumps(failure, ensure_ascii=False) + "\n")
+    return 0
 
 
 def main() -> int:
@@ -152,11 +196,14 @@ def main() -> int:
         if skill_path:
             source = "expert_detected"
 
-    # Method 4: Classification marker fallback
+    # Method 4: Classification marker fallback — read the ACTUAL declared expert
+    # from .classified instead of a generic "engineering" tag, so per-skill
+    # attribution stays meaningful for the evolution/retirement pipeline.
     if not skill_path:
         class_file = repo_root / ".claude" / ".classified"
         if class_file.exists():
-            skill_path = "engineering"
+            declared = _extract_declared_expert(class_file)
+            skill_path = declared if declared else "engineering"
             source = "classification"
 
     # ── Always record tool outcome (with skill_path if detected) ──

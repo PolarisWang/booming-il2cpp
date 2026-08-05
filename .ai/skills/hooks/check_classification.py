@@ -21,17 +21,18 @@ def _get_repo_root() -> Path | None:
     global _RESOLVED_REPO_ROOT
     if _RESOLVED_REPO_ROOT is not None:
         return _RESOLVED_REPO_ROOT
-    # R9: try multiple fallback strategies
-    strategies = [
-        lambda: Path(__file__).resolve().parent,   # script dir
-        lambda: Path.cwd(),                          # cwd
-        None,
-    ]
-    for get_dir in strategies:
-        if get_dir is None:
-            break
+    # A1: derive from script location first — no git subprocess fork on the hot path.
+    # This file lives at <repo>/.ai/skills/hooks/... (4 levels below repo root).
+    p = Path(__file__).resolve()
+    for _ in range(4):
+        p = p.parent
+        if (p / ".git").exists() or (p / ".gitignore").exists():
+            _RESOLVED_REPO_ROOT = p
+            return p
+    # R9: fallback — try multiple strategies only if hooks aren't under the repo tree
+    strategies = [Path(__file__).resolve().parent, Path.cwd()]
+    for d in strategies:
         try:
-            d = get_dir()
             output = subprocess.run(
                 ["git", "-C", str(d), "rev-parse", "--show-toplevel"],
                 capture_output=True, text=True, timeout=5,
@@ -45,13 +46,13 @@ def _get_repo_root() -> Path | None:
     return None
 
 
-# R9: 多级 claude_dir 候选
-_claude_candidates: list[Path] = [
-    Path(__file__).resolve().parent.parent.parent / ".claude",
-]
+# R9: 多级 claude_dir 候选（主线：repo root/.claude）
+_claude_candidates: list[Path] = []
 repo_root = _get_repo_root()
 if repo_root:
     _claude_candidates.append(repo_root / ".claude")
+else:
+    _claude_candidates.append(Path(__file__).resolve().parent.parent.parent / ".claude")
 _claude_candidates.append(Path.cwd() / ".claude")
 
 _claude_dir = _claude_candidates[0]
