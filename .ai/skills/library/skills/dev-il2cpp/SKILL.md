@@ -100,11 +100,16 @@ dev-il2cpp（.claude/skills/ 唯一入口）
 ```
 分类命中域 1-8
   │
-  ├── 读取 .ai/skills/discovery/registries/il2cpp.md 找到 dev-il2cpp-core-agent
+  ├── (Hot-first) 检查 .claude/.hot_skills：
+  │      目标 Expert ∈ hot → 直接读 .ai/skills/library/skills/<expert>/SKILL.md（1 步，跳过发现链）
+  │
+  ├── 未命中 hot → 读取 .ai/skills/discovery/registries/il2cpp.md 找到 dev-il2cpp-core-agent
   ├── 读取 .ai/skills/discovery/expert-registry.json 获取域名对应 Expert 名
   ├── 读取 .ai/skills/library/skills/<expert_name>/SKILL.md
   └── 按 SKILL.md 指令执行，不走通用回复
 ```
+
+> 🔴 Hot-first 为强制：热列表内 Expert 不得走完整发现链。`.claude/.hot_skills` 是唯一权威源（`.claude/dot-claude/.hot_skills` 已废弃）。
 
 > 也可使用确定性查询工具替代手动读 JSON：
 > ```bash

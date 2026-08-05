@@ -50,8 +50,8 @@ Dispatcher 接收任务
    P1（最高）= 性能最优 > P2 = 方案完美性 > P3 = HotUpdate 支持
 
 2. 健康自检（断路器）:
-   a. 列出 skills/library/skills/ 下所有 dev-il2cpp-*-expert 目录
-   b. 与 <code>skills/discovery/expert-registry.json</code> 对比，检查是否有 Expert 存在但未注册
+   a. 列出 .ai/skills/library/skills/ 下所有 dev-il2cpp-*-expert 目录
+   b. 与 <code>.ai/skills/discovery/expert-registry.json</code> 对比，检查是否有 Expert 存在但未注册
    c. 检查 registry 中 domains 字段是否为空或只有退化条目
    d. 结果:
       - ✅ 正常 → 继续
@@ -101,7 +101,7 @@ while todo 非空:
   if domains == 1:
     ── 单域: 当前 Agent 自行实现
     expert = 从 expert-registry.json 匹配 Expert 名
-    skill_md = 读取 skills/library/skills/{expert}/SKILL.md
+    skill_md = 读取 .ai/skills/library/skills/{expert}/SKILL.md
 
     // 注入领域知识到当前上下文
     读取 SKILL.md → 提取领域边界、已知约束、执行流程
@@ -139,7 +139,7 @@ MAX_ROUNDS = 5（默认）
 #### 检测与触发
 
 ```
-registry 无匹配 → 记录到 skills/.unknown-domains.json:
+registry 无匹配 → 记录到 .ai/skills/.unknown-domains.json:
   {
     "domain": "ci-cd",
     "first_seen": "2026-06-11",
@@ -181,9 +181,9 @@ Step 2: 3 个独立 Jury Agent 并行审查（Workflow 委托）
 Step 3: 汇总裁决
 
   ≥2/3 PASS → 注册:
-    1. 写 skills/library/skills/dev-il2cpp-{domain}-expert/SKILL.md
-    2. 更新 expert-registry.json（追加新行）
-    3. 更新 skills/.unknown-domains.json → status=registered
+    1. 写 .ai/skills/library/skills/dev-il2cpp-{domain}-expert/SKILL.md
+    2. 更新 .ai/skills/discovery/expert-registry.json（追加新行）
+    3. 更新 .ai/skills/.unknown-domains.json → status=registered
     4. 当前轮继续用新 skill 处理子任务
 
   <2/3 PASS → 拒绝:
@@ -235,7 +235,7 @@ L3（完整 — 翻译路径变更/AOT 输出变更/ABI 修改/多域修改）:
 
 ## Expert 路由
 
-域编号 → Expert 名、关键词 → Expert 名、子控制器分组的**完整映射**统一在 `skills/discovery/expert-registry.json` 中定义，本文不重复。
+域编号 → Expert 名、关键词 → Expert 名、子控制器分组的**完整映射**统一在 `.ai/skills/discovery/expert-registry.json` 中定义，本文不重复。
 
 拓扑结构（完整映射见 expert-registry.json）：
 

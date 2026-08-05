@@ -206,15 +206,15 @@ assert not failures, failures
 
 ## 进化系统健康检查（新增）
 
-如果本轮改动触及 skills/ 下的技能内容或进化系统，完成前运行以下检查：
+如果本轮改动触及 `.ai/skills/` 下的技能内容或进化系统，完成前运行以下检查：
 
 ```
 ## 进化系统验证清单
-[ ] python skills/tooling/learning/health_engine.py report --window 30
+[ ] python .ai/skills/tooling/learning/health_engine.py report --window 30
      — 确认无异常指标（LOW-TOOL、HIGH-FALLBACK 等）
-[ ] python skills/tooling/learning/evolve.py propose --dry-run
+[ ] python .ai/skills/tooling/learning/evolve.py propose --dry-run
      — 确认无意外进化提案
-[ ] python skills/tooling/verification/verify_skill_pipeline.py
+[ ] python .ai/skills/tooling/verification/verify_skill_pipeline.py
      — 确认入口桩、manifest、catalog、evolution 目录一致
 ```
 
@@ -222,16 +222,16 @@ assert not failures, failures
 
 ```powershell
 # 计算健康指标
-python skills/tooling/learning/health_engine.py compute --all --window 30
+python .ai/skills/tooling/learning/health_engine.py compute --all --window 30
 
 # 生成报告
-python skills/tooling/learning/health_engine.py report --window 30
+python .ai/skills/tooling/learning/health_engine.py report --window 30
 
 # 预览进化提案
-python skills/tooling/learning/evolve.py propose --dry-run
+python .ai/skills/tooling/learning/evolve.py propose --dry-run
 
 # 执行进化（需要 review 后 promote）
-python skills/tooling/learning/evolve.py auto-evolve
+python .ai/skills/tooling/learning/evolve.py auto-evolve
 ```
 
 ## Dashboard 数据约束检查（新增）

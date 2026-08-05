@@ -1,19 +1,19 @@
 ---
 name: dev-skill-registry
-description: 技能注册中心 — 索引 skills/library/skills/ 下所有技能的目录、领域和用途
+description: 技能注册中心 — 索引 .ai/skills/library/skills/ 下所有技能的目录、领域和用途
 ---
 
 # dev-skill-registry
 
 > ⚠️ **已弃用**：本 registry 是手工维护的旧版本，不再保证与发现系统同步。
-> 请使用自动生成的 `skills/discovery/skill-index.md` + `skills/discovery/registries/<domain>.md` 作为权威来源。
+> 请使用自动生成的 `.ai/skills/discovery/skill-index.md` + `.ai/skills/discovery/registries/<domain>.md` 作为权威来源。
 >
-> 自动生成命令: `python skills/tooling/catalog/generate_skill_catalog.py`
-> 注册表文件: `skills/discovery/registries/` (7 个域)
+> 自动生成命令: `python .ai/skills/tooling/catalog/generate_skill_catalog.py`
+> 注册表文件: `.ai/skills/discovery/registries/` (7 个域)
 
 ## 用途
 
-技能注册中心，索引 `skills/library/skills/` 下所有技能的目录、领域和用途。
+技能注册中心，索引 `.ai/skills/library/skills/` 下所有技能的目录、领域和用途。
 
 当用户请求 `/dev-<name>` 时，Agent 通过此 registry 查找技能并加载对应的 `SKILL.md`。
 
@@ -83,10 +83,10 @@ description: 技能注册中心 — 索引 skills/library/skills/ 下所有技�
 
 ## 注册表维护
 
-技能列表与 `skills/library/skills/` 目录保持同步。新增/删除技能时：
+技能列表与 `.ai/skills/library/skills/` 目录保持同步。新增/删除技能时：
 
-1. 在 `skills/library/skills/<name>/` 下创建 SKILL.md + skill.manifest.json
-2. 更新 `skills/discovery/skill-index.md`（运行 `python build/generate_skill_index.py`）
+1. 在 `.ai/skills/library/skills/<name>/` 下创建 SKILL.md + skill.manifest.json
+2. 更新 `.ai/skills/discovery/skill-index.md`（运行 `python .ai/skills/tooling/catalog/generate_skill_catalog.py`）
 3. 更新此注册表的 markdown 表格
 
-> **注意**：`.claude/skills/` 现在是 `skills/library/skills/` 的符号链接，无需手动同步。
+> **注意**：`.claude/skills/` 现在是 `.ai/skills/library/skills/` 的符号链接，无需手动同步。

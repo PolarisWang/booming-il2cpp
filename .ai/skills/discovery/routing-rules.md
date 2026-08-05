@@ -142,24 +142,30 @@ Expert 注册表（唯一权威数据源）: `skills/discovery/expert-registry.j
 
 ---
 
-## 9. Hot Expert 缓存
+## 9. Hot Expert 缓存（🔴 强制优先）
 
 常用 Expert 可直接引用 `.claude/.hot_skills`，跳过发现链（3 步 → 1 步）。
 
+**Hot-first 硬规则**：目标 Expert 若在 `.claude/.hot_skills` 中，**必须**直接读取其 SKILL.md 加载知识，**不得**先走 skill-index → registry 的完整发现链。只有热列表外的冷 Expert 才走完整发现链。
+
 ```
-.hot_skills 中列出的 Expert 可直接读取其 SKILL.md 加载知识，
-无需走 skill-index.md → registry → SKILL.md 的发现流程。
+路由协议（Hot-first）
+1. 目标 Expert ∈ .hot_skills → 直接读 SKILL.md（1 步）
+2. 目标 Expert ∉ .hot_skills → skill-index → registry → SKILL.md（3 步）
+3. meta 类技能（kind=meta）永不进 hot 列表，仅经显式养护任务进入
 ```
 
 > ⚠️ `dev-il2cpp` 为固定首加载，使用 Hot Expert 前必须先走 dev-il2cpp 路由协议。Hot Expert 仅加速「找到入口后→读具体 Expert」这一步。
 
-当前 Hot Expert：
+当前 Hot Expert（顶层 `.claude/.hot_skills` 权威源，此处仅列参考）：
 - `dev-il2cpp`（入口技能，始终首加载）
 - `dev-il2cpp-runtime-expert`
 - `dev-il2cpp-codegen-expert`
 - `dev-il2cpp-gc-expert`
 - `dev-il2cpp-translation-expert`
 - `dev-il2cpp-build-fixer`
+
+> 顶层 `.claude/.hot_skills` 是唯一权威源；`.claude/dot-claude/.hot_skills` 为旧架构残留，已被废弃，禁止引用。
 
 ---
 

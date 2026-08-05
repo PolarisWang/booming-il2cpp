@@ -51,17 +51,17 @@ description: Use when running skill health checks, reviewing evolution proposals
 
 | 命令 | 用途 |
 |------|------|
-| `python skills/tooling/learning/health_engine.py check --window 30` | 一键自检（推荐日常使用） |
-| `python skills/tooling/learning/health_engine.py compute --all --window 30` | 仅计算健康快照 |
-| `python skills/tooling/learning/health_engine.py report --window 30` | 仅生成健康报告 |
-| `python skills/tooling/learning/evolve.py propose` | 预览进化提案 |
-| `python skills/tooling/learning/evolve.py auto-evolve` | 执行进化（生成提案） |
-| `python skills/tooling/learning/skill_learn.py evolve-benchmark <id>` | 提案准入检查 |
-| `python skills/tooling/learning/skill_learn.py evolve-review <id>` | 提案审查 |
-| `python skills/tooling/learning/skill_learn.py evolve-promote <id>` | 晋升提案到正式库 |
-| `python skills/tooling/learning/skill_learn.py evolve-history --skill <name>` | 查看版本谱系 |
-| `python skills/tooling/learning/skill_learn.py auto-cleanup --dry-run` | 预览自动退役 |
-| `python skills/tooling/verification/verify_skill_pipeline.py` | 管线一致性验证 |
+| `python .ai/skills/tooling/learning/health_engine.py check --window 30` | 一键自检（推荐日常使用） |
+| `python .ai/skills/tooling/learning/health_engine.py compute --all --window 30` | 仅计算健康快照 |
+| `python .ai/skills/tooling/learning/health_engine.py report --window 30` | 仅生成健康报告 |
+| `python .ai/skills/tooling/learning/evolve.py propose` | 预览进化提案 |
+| `python .ai/skills/tooling/learning/evolve.py auto-evolve` | 执行进化（生成提案） |
+| `python .ai/skills/tooling/learning/skill_learn.py evolve-benchmark <id>` | 提案准入检查 |
+| `python .ai/skills/tooling/learning/skill_learn.py evolve-review <id>` | 提案审查 |
+| `python .ai/skills/tooling/learning/skill_learn.py evolve-promote <id>` | 晋升提案到正式库 |
+| `python .ai/skills/tooling/learning/skill_learn.py evolve-history --skill <name>` | 查看版本谱系 |
+| `python .ai/skills/tooling/learning/skill_learn.py auto-cleanup --dry-run` | 预览自动退役 |
+| `python .ai/skills/tooling/verification/verify_skill_pipeline.py` | 管线一致性验证 |
 
 ## 进化类型
 

@@ -26,7 +26,7 @@ description: 跨平台 ABI 调用约定专家 — Windows x64/Linux x64/ARM64、
 
 ## ABI 速查参考
 
-> 完整跨平台 ABI 参考见 `skills/knowledge/abi/abi-rules-reference.md`
+> 完整跨平台 ABI 参考见 `.ai/skills/knowledge/abi/abi-rules-reference.md`
 
 | 平台 | 整数参数寄存器 | 浮点参数寄存器 | 整数返回值 | 浮点返回值 | struct ≤16B |
 |------|--------------|--------------|-----------|-----------|------------|
