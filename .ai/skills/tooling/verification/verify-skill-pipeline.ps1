@@ -2,7 +2,7 @@
 
 $ErrorActionPreference = 'Continue'
 $repoRoot = git -C $PSScriptRoot rev-parse --show-toplevel
-$chapterRoot = Join-Path $repoRoot 'skills'
+$chapterRoot = Join-Path $repoRoot '.ai/skills'
 $formalSkillsDir = Join-Path $chapterRoot 'library/skills'
 $bootstrapScript = Join-Path $chapterRoot 'runtime/bootstrap-skills.ps1'
 $catalogScript = Join-Path $chapterRoot 'tooling/catalog/generate_skill_catalog.py'
@@ -78,7 +78,7 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 # Step 4: Verify routing stub
 Write-Host "[skill-verify] Checking routing stub..."
 $entryStubPath = Join-Path $repoRoot '.claude/skills/dev-il2cpp/SKILL.md'
-$libraryEntry  = Join-Path $repoRoot 'skills/library/skills/dev-il2cpp/SKILL.md'
+$libraryEntry  = Join-Path $repoRoot '.ai/skills/library/skills/dev-il2cpp/SKILL.md'
 $stubErrors = @()
 
 if (-not (Test-Path -LiteralPath $entryStubPath)) {

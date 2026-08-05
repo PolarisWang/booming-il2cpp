@@ -8,13 +8,21 @@
     "stage 执行顺序错误或超时",
     "结果收集/聚合失败（JSON 解析、JSONL 写入）",
     "Hephaestus 缓存 miss/过期判定异常",
-    "cross-stage 数据传递断裂（build→fact→benchmark 链）",
-    "管线 preflight 检测到层边界违规",
-    "新 stage 需要接入编排流程"
+    "cross-stage 数据传递断裂（build→fact→benchmark 链）"
   ],
   "owner": "00-skills-maintainers",
   "status": "active",
   "version": "1.0.0",
   "startup_visible": false,
-  "token_budget": "medium"
+  "token_budget": "medium",
+  "version_history": [
+    { "version": "1.0.0", "date": "2026-06-11", "type": "created" }
+  ],
+  "evolution_lineage": {
+    "parent": null,
+    "derived_from": null,
+    "derived_to": [],
+    "fixes": [],
+    "captured_from": null
+  }
 }

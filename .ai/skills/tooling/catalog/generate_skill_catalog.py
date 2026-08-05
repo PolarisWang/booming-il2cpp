@@ -166,7 +166,7 @@ def generate_skill_index(domains: list[dict], project_entries: list[dict]) -> st
         "- 新增 skill 时，必须先创建 `skill.manifest.json` 并选择唯一 domain。",
         "- formal `library/skills/` 只保留正式内容；draft 应停留在 `lifecycle/incubator/`。",
         "- registry 由生成脚本刷新，不手工维护长表。",
-        "- 所有修改需在 `skills/library/skills/` 中完成，`.claude/skills/` 和 `.codex/skills/` 由工具自动同步。",
+        "- 所有修改需在 `.ai/skills/library/skills/` 中完成，`.claude/skills/` 和 `.codex/skills/` 由工具自动同步。",
         "",
     ])
     return "\n".join(lines)

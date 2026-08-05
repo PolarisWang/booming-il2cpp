@@ -18,8 +18,17 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+# File lives at <repo>/.ai/skills/tooling/learning/auto_evolve.py → repo root = 4 parents up
+_THIS = Path(__file__).resolve()
+REPO_ROOT = next(
+    (_THIS.parents[i] for i in range(1, 5)
+     if (_THIS.parents[i] / ".git").exists() or (_THIS.parents[i] / ".gitignore").exists()),
+    _THIS.parents[4],
+)
 PYTHON = sys.executable or "python"
+
+# Prefix for tooling/learning script invocations under .ai/skills
+TOOLING_ROOT = REPO_ROOT / ".ai" / "skills" / "tooling"
 
 
 def run(cmd: list[str], timeout: int = 120) -> subprocess.CompletedProcess:
@@ -31,25 +40,25 @@ def main() -> int:
 
     # Step 1: Health check
     print("[auto-evolve] Step 1: Health check...")
-    result = run([PYTHON, "skills/tooling/learning/health_engine.py", "check", "--window", "30"])
+    result = run([PYTHON, str(TOOLING_ROOT / "learning" / "health_engine.py"), "check", "--window", "30"])
     if result.returncode != 0:
         print(f"[auto-evolve] Health check warning: {result.stderr[:200]}")
     print(result.stdout[-500:] if len(result.stdout) > 500 else result.stdout)
 
     # Step 2: Check if there are evolution candidates
     print("[auto-evolve] Step 2: Checking evolution proposals...")
-    result = run([PYTHON, "skills/tooling/learning/evolve.py", "propose"])
+    result = run([PYTHON, str(TOOLING_ROOT / "learning" / "evolve.py"), "propose"])
     print(result.stdout[-500:] if len(result.stdout) > 500 else result.stdout)
 
     # Step 3: Auto-evolve (generate proposals if thresholds met)
     print("[auto-evolve] Step 3: Auto-evolve...")
-    result = run([PYTHON, "skills/tooling/learning/evolve.py", "auto-evolve"], timeout=300)
+    result = run([PYTHON, str(TOOLING_ROOT / "learning" / "evolve.py"), "auto-evolve"], timeout=300)
     if result.returncode != 0:
         print(f"[auto-evolve] Auto-evolve skipped or had no candidates: {result.stderr[:200]}")
     print(result.stdout[-500:] if len(result.stdout) > 500 else result.stdout)
 
     # Step 4: Check for pending proposals and try to process them
-    proposals_dir = REPO_ROOT / "skills" / "lifecycle" / "evolution" / "proposals"
+    proposals_dir = REPO_ROOT / ".ai" / "skills" / "lifecycle" / "evolution" / "proposals"
     if proposals_dir.exists():
         proposals = sorted(proposals_dir.iterdir()) if proposals_dir.is_dir() else []
         if proposals:
@@ -59,19 +68,19 @@ def main() -> int:
                 print(f"  Processing: {prop_id}")
 
                 # Benchmark
-                result = run([PYTHON, "skills/tooling/learning/skill_learn.py", "evolve-benchmark", prop_id], timeout=300)
+                result = run([PYTHON, str(TOOLING_ROOT / "learning" / "skill_learn.py"), "evolve-benchmark", prop_id], timeout=300)
                 if result.returncode != 0:
                     print(f"  Benchmark failed for {prop_id}, skipping promote")
                     continue
 
                 # Review
-                result = run([PYTHON, "skills/tooling/learning/skill_learn.py", "evolve-review", prop_id], timeout=120)
+                result = run([PYTHON, str(TOOLING_ROOT / "learning" / "skill_learn.py"), "evolve-review", prop_id], timeout=120)
                 if result.returncode != 0:
                     print(f"  Review failed for {prop_id}, skipping promote")
                     continue
 
                 # Promote
-                result = run([PYTHON, "skills/tooling/learning/skill_learn.py", "evolve-promote", prop_id], timeout=120)
+                result = run([PYTHON, str(TOOLING_ROOT / "learning" / "skill_learn.py"), "evolve-promote", prop_id], timeout=120)
                 if result.returncode == 0:
                     print(f"  ✅ Promoted: {prop_id}")
                 else:

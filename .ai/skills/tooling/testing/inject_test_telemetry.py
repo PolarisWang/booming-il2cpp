@@ -2,7 +2,7 @@
 """Inject test telemetry data to verify the skill self-evolution pipeline end-to-end.
 
 Usage:
-  python skills/tooling/testing/inject_test_telemetry.py
+  python .ai/skills/tooling/testing/inject_test_telemetry.py
 
 This generates synthetic data for 3 evolution scenarios:
   - FIX:     dev-brainstorm (completion_rate=0, sessions>=3)
@@ -26,7 +26,7 @@ After injection, run these commands in order:
   python -m skills.tooling.learning.evolve status
 
 To clean up test artifacts after verification:
-  python skills/tooling/testing/inject_test_telemetry.py --clean
+  python .ai/skills/tooling/testing/inject_test_telemetry.py --clean
 """
 
 from __future__ import annotations
@@ -73,13 +73,13 @@ def inject() -> None:
     for i in range(5):
         usage.append({
             "timestamp": ts(i),
-            "skill_path": "skills/library/skills/dev-brainstorm/SKILL.md",
+            "skill_path": ".ai/skills/library/skills/dev-brainstorm/SKILL.md",
             "event": "skill_read",
         })
     for i in range(15):
         usage.append({
             "timestamp": ts(i // 2),
-            "skill_path": "skills/library/skills/dev-architecture-first-development/SKILL.md",
+            "skill_path": ".ai/skills/library/skills/dev-architecture-first-development/SKILL.md",
             "event": "skill_read",
         })
     write_jsonl(TELEMETRY_DIR / "usage.jsonl", usage)
@@ -94,7 +94,7 @@ def inject() -> None:
             "tool_name": "Read" if i % 2 == 0 else "Edit",
             "success": True,
             "error_type": None,
-            "skill_path": "skills/library/skills/dev-brainstorm/SKILL.md",
+            "skill_path": ".ai/skills/library/skills/dev-brainstorm/SKILL.md",
             "event": "tool_outcome",
         })
     for i in range(40):
@@ -103,7 +103,7 @@ def inject() -> None:
             "tool_name": ["Read", "Edit", "Bash"][i % 3],
             "success": i < 38,
             "error_type": None if i < 38 else "TimeoutError",
-            "skill_path": "skills/library/skills/dev-architecture-first-development/SKILL.md",
+            "skill_path": ".ai/skills/library/skills/dev-architecture-first-development/SKILL.md",
             "event": "tool_outcome",
         })
     write_jsonl(TELEMETRY_DIR / "tool_outcomes.jsonl", tools)
@@ -115,7 +115,7 @@ def inject() -> None:
     for i in range(5):
         sessions.append({
             "timestamp": ts(i),
-            "skill_path": "skills/library/skills/dev-brainstorm/SKILL.md",
+            "skill_path": ".ai/skills/library/skills/dev-brainstorm/SKILL.md",
             "completed": False,
             "signals": {"has_recent_commit": False, "has_skill_edit": False},
             "event": "session_outcome",
@@ -123,7 +123,7 @@ def inject() -> None:
     for i in range(12):
         sessions.append({
             "timestamp": ts(i // 2),
-            "skill_path": "skills/library/skills/dev-architecture-first-development/SKILL.md",
+            "skill_path": ".ai/skills/library/skills/dev-architecture-first-development/SKILL.md",
             "completed": i < 10,
             "signals": {"has_recent_commit": i < 10, "has_skill_edit": False},
             "event": "session_outcome",

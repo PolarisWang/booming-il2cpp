@@ -87,7 +87,7 @@ def rotate_all_jsonl(repo_root: Path) -> None:
 def resolve_repo_root() -> Path | None:
     try:
         script_dir = Path(__file__).resolve().parent
-        # Walk up to find skills/tooling/learning/ -> skills/ -> repo root
+        # Walk up to find .ai/skills/tooling/learning/ -> .ai/skills/tooling -> .ai/skills -> repo root
         for parent in [script_dir, script_dir.parent, script_dir.parent.parent]:
             git_root = subprocess.run(
                 ["git", "-C", str(parent), "rev-parse", "--show-toplevel"],

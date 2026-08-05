@@ -8,8 +8,7 @@
         "寄存器分配溢出、SEH 异常处理错误",
         "Unwind info 编码错误（STATUS_INVALID_CRUNTIME_PARAMETER）",
         "Tier 升级/降级逻辑故障",
-        "OSR deopt 崩溃",
-        "ARM64 JIT 支持"
+        "OSR deopt 崩溃"
     ],
     "owner": "00-skills-maintainers",
     "status": "active",

@@ -14,5 +14,15 @@
   "status": "active",
   "version": "1.0.0",
   "startup_visible": false,
-  "token_budget": "small"
+  "token_budget": "small",
+  "version_history": [
+    { "version": "1.0.0", "date": "2026-06-11", "type": "created" }
+  ],
+  "evolution_lineage": {
+    "parent": null,
+    "derived_from": null,
+    "derived_to": [],
+    "fixes": [],
+    "captured_from": null
+  }
 }

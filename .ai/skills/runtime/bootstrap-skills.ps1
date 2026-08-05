@@ -8,8 +8,8 @@ if (-not $RepoRoot) {
     $RepoRoot = git -C $PSScriptRoot rev-parse --show-toplevel
 }
 
-$sourceDir       = Join-Path $RepoRoot 'skills/library/skills'
-$catalogScript   = Join-Path $RepoRoot 'skills/tooling/catalog/generate_skill_catalog.py'
+$sourceDir       = Join-Path $RepoRoot '.ai/skills/library/skills'
+$catalogScript   = Join-Path $RepoRoot '.ai/skills/tooling/catalog/generate_skill_catalog.py'
 $entryStubPath   = Join-Path $RepoRoot '.claude/skills/dev-il2cpp/SKILL.md'
 $libraryEntry    = Join-Path $sourceDir 'dev-il2cpp/SKILL.md'
 

@@ -8,8 +8,7 @@
         "fact 失败诊断与路由到 codegen/build-fixer/debug",
         "skip-list 维护（_KNOWN_FACT_FAILURES / fact_skip_indices）",
         "ATG/TPG 质量审查与回归验证",
-        "codegen 输出审查（native-aot.generated.cpp / aot-core-ir.json）",
-        "value_suspicious / shutdown-AV 分析"
+        "codegen 输出审查（native-aot.generated.cpp / aot-core-ir.json）"
     ],
     "owner": "00-skills-maintainers",
     "status": "active",

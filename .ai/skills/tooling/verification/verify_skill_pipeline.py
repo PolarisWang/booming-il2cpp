@@ -5,8 +5,8 @@ Equivalent to verify-skill-pipeline.ps1 — pure Python, no PowerShell required.
 Used by skill_learn.py evolve-promote as fallback when pwsh is unavailable.
 
 Usage:
-    python skills/tooling/verification/verify_skill_pipeline.py          # all checks
-    python skills/tooling/verification/verify_skill_pipeline.py --bootstrap  # also run bootstrap
+    python .ai/skills/tooling/verification/verify_skill_pipeline.py          # all checks
+    python .ai/skills/tooling/verification/verify_skill_pipeline.py --bootstrap  # also run bootstrap
 """
 
 from __future__ import annotations
@@ -35,7 +35,7 @@ def check_routing_stub(repo_root: Path) -> list[str]:
     """Verify the routing stub exists and points to the library version."""
     errors: list[str] = []
     stub_path = repo_root / ".claude" / "skills" / "dev-il2cpp" / "SKILL.md"
-    library_path = repo_root / "skills" / "library" / "skills" / "dev-il2cpp" / "SKILL.md"
+    library_path = repo_root / ".ai" / "skills" / "library" / "skills" / "dev-il2cpp" / "SKILL.md"
 
     if not stub_path.exists():
         errors.append(f"Routing stub missing: {stub_path}")
@@ -67,7 +67,7 @@ def main() -> int:
         return 1
 
     errors: list[str] = []
-    chapter_root = repo_root / "skills"
+    chapter_root = repo_root / ".ai" / "skills"
     formal_skills_dir = chapter_root / "library" / "skills"
     bootstrap_script = chapter_root / "runtime" / "bootstrap-skills.ps1"
     catalog_script = chapter_root / "tooling" / "catalog" / "generate_skill_catalog.py"
