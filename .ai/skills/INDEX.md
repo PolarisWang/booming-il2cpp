@@ -40,7 +40,7 @@ skills/
 
 ## 核心原则
 
-1. **唯一可信源**: `skills/library/skills/` 是唯一编辑点，`.claude/skills/dev-il2cpp/SKILL.md` 包含最小路由桩指向 library。
+1. **唯一可信源**: `.ai/skills/library/skills/` 是唯一编辑点，`.claude/skills/dev-il2cpp/SKILL.md` 包含最小路由桩指向 library。
 2. **自动发现**: 每个技能必须有 `skill.manifest.json`，目录由脚本自动生成
 3. **自学习闭环**: 埋点 → 信号 → 聚类 → 晋升 → 进化 → 版本谱系
 4. **Git 提交**: 所有修改都在 `skills/` 下完成，无需分别提交到 `.claude/skills/` 和 `.codex/skills/`
