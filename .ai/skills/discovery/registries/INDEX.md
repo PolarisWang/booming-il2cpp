@@ -1,6 +1,6 @@
 # Skill Registries
 
-> 本页由 `skills/tooling/catalog/generate_skill_catalog.py` 自动生成。修改 `skill.manifest.json` 或 `discovery/domain-catalog.json` 后重新生成。
+> 本页由 `.ai/skills/tooling/catalog/generate_skill_catalog.py` 自动生成。修改 `skill.manifest.json` 或 `discovery/domain-catalog.json` 后重新生成。
 
 | 领域 | 范围 | 页面 | skill 数量 |
 | ---- | ---- | ---- | --------- |
@@ -8,6 +8,6 @@
 | `quality` | 代码审查、验证、trace 强制和完成前质量门技能。 | [quality](./quality.md) | 4 |
 | `git` | 本地分支、worktree 与开发分支收口技能。 | [git](./git.md) | 2 |
 | `knowledge` | 长期知识沉淀与 wiki 维护技能。 | [knowledge](./knowledge.md) | 1 |
-| `testing` | 测试治理、测试代码生成与 foundation-dll 测试技能。 | [testing](./testing.md) | 2 |
-| `il2cpp` | il2cpp 核心翻译路径与架构约束技能。 | [il2cpp](./il2cpp.md) | 18 |
-| `skilling` | 技能发现、创建、自学习与治理技能。 | [skilling](./skilling.md) | 3 |
+| `testing` | 测试治理、测试代码生成与 foundation-dll 测试技能。 | [testing](./testing.md) | 6 |
+| `il2cpp` | il2cpp 核心翻译路径与架构约束技能。 | [il2cpp](./il2cpp.md) | 19 |
+| `skilling` | 技能发现、创建、自学习与治理技能。 | [skilling](./skilling.md) | 4 |

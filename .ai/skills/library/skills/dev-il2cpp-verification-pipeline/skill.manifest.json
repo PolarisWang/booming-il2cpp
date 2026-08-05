@@ -1,12 +1,9 @@
 {
-  "name": "dev-il2cpp-verification-pipeline",
-  "description": "验证管线总编排专家 — 覆盖 foundation-dll 全 13 stage，只做编排和结果收集，零后处理",
-  "version": "1.0.0",
-  "owner": "00-skills-maintainers",
-  "budget": "medium",
-  "status": "active",
+  "kind": "project",
   "domain": "testing",
-  "triggers": [
+  "name": "dev-il2cpp-verification-pipeline",
+  "summary": "验证管线总编排专家 — 覆盖 foundation-dll 全 13 stage，只做编排和结果收集，零后处理",
+  "trigger_signals": [
     "foundation-dll pipeline stage 执行失败",
     "stage 执行顺序错误或超时",
     "结果收集/聚合失败（JSON 解析、JSONL 写入）",
@@ -14,5 +11,10 @@
     "cross-stage 数据传递断裂（build→fact→benchmark 链）",
     "管线 preflight 检测到层边界违规",
     "新 stage 需要接入编排流程"
-  ]
+  ],
+  "owner": "00-skills-maintainers",
+  "status": "active",
+  "version": "1.0.0",
+  "startup_visible": false,
+  "token_budget": "medium"
 }

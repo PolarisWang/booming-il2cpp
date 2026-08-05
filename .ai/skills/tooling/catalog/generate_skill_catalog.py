@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 GENERATED_NOTICE = (
-    "> 本页由 `skills/tooling/catalog/generate_skill_catalog.py` 自动生成。"
+    "> 本页由 `.ai/skills/tooling/catalog/generate_skill_catalog.py` 自动生成。"
     "修改 `skill.manifest.json` 或 `discovery/domain-catalog.json` 后重新生成。"
 )
 
@@ -273,7 +273,7 @@ def main() -> int:
     args = parser.parse_args()
 
     repo_root = resolve_repo_root(args.repo_root)
-    chapter_root = repo_root / "skills"
+    chapter_root = repo_root / ".ai" / "skills"
 
     domain_catalog = load_json(chapter_root / "discovery" / "domain-catalog.json")
     domains = sorted(domain_catalog["domains"], key=lambda item: item["order"])
