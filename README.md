@@ -1,10 +1,10 @@
-# booming-il2cpp
+# chaos-il2cpp
 
 A high-performance C++ IL2CPP runtime for .NET applications, designed with hot-update support, precise generational GC, and NativeAOT code generation.
 
 ## Overview
 
-booming-il2cpp translates .NET IL code to native C++ via a custom codegen pipeline, then compiles it into native binaries. It features:
+chaos-il2cpp translates .NET IL code to native C++ via a custom codegen pipeline, then compiles it into native binaries. It features:
 
 - **NativeAOT Code Generation** — IL-to-C++ translation with lowering optimization
 - **Precise Generational GC** — Bump-allocated young generation + mark-compact old generation
@@ -25,21 +25,27 @@ src/
 │   ├── hot-update/     — Method replacement infrastructure
 │   ├── support/        — Runtime support layer
 │   └── engine-bridge/  — Game engine integration bridge
-├── dll/                — Foundation DLL test infrastructure
-├── mobile/             — Android/iOS platform support
-└── reference/          — Test framework SDK and runner
+├── tools/              — Test project generator (TPG), build helpers
+└── dll/                — Foundation DLL test source
 
-contracts/              — Native ABI contracts (v0)
-tests/                  — Snapshot tests, integration tests, verification suites
-verification/           — Foundation DLL verification pipeline
-wiki/                   — Project wiki and architecture documentation
-third_party/            — External dependencies (fmt, mono.cecil, scriban)
+contracts/              — Native ABI contract headers + engine interface (v0)
+tests/                  — Snapshot / integration / e2e test suites + runner
+testing/                — Foundation-DLL verification pipeline (build → fact → benchmark)
+tools/                  — Pipeline / benchmark / profile helper scripts
+wiki/                   — Project wiki: architecture, function modules, skill system
+docs/                   — Design docs, assessments, and archived historical records
+scripts/                — CI and build orchestration scripts
+cmake/                  — Shared CMake configuration (incl. native test factory)
+third_party/            — External dependencies (fmt, mono.cecil, scriban, unordered_dense)
+.ai/                    — Agent skill system (discovery, registry, hook runtime)
+.claude/                — Claude Code harness configuration, skill routing stub, worktrees
+schemas/                — JSON schemas for pipeline/codegen artifacts
 ```
 
 ## Prerequisites
 
 - Windows 10+ (primary target) / Linux x64 / Android arm64
-- CMake 3.15+
+- CMake 3.20+
 - .NET 10 SDK
 - Visual Studio 2022+ (Windows) or clang 15+ (Linux)
 - Python 3.10+
@@ -47,14 +53,14 @@ third_party/            — External dependencies (fmt, mono.cecil, scriban)
 ## Quick Start
 
 ```bash
-# Clone and configure
+# Configure
 cmake --preset debug
 
 # Build native runtime
 cmake --build artifacts/presets/debug --target chaos_runtime_core
 
 # Build managed codegen
-dotnet build src/managed/Chaos.IL2CPC.Pipeline
+dotnet build src/managed/Chaos.IL2CPP.Generator
 
 # Run snapshot tests
 dotnet test tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests

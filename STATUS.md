@@ -1,6 +1,6 @@
 # Chaos IL2CPP — 项目状态
 
-> 最后更新: 2026-06-14
+> 最后更新: 2026-08-06
 
 ---
 
@@ -12,7 +12,7 @@
 |------|------|----------|
 | Codegen (C#) | IL→C++ 翻译、Planner、Emission | `src/managed/Chaos.IL2CPP.Generator/` |
 | TPG (C#) | 测试项目生成、entry 模板 | `src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/` |
-| Python 管线 | 构建、验证、部署编排 | `Testing/foundation-dll/verification/` |
+| Python 管线 | 构建、验证、部署编排 | `testing/foundation-dll/verification/` |
 | Native C++ | 运行时核心、解释器、GC、JIT | `src/native/runtime-core/`, `src/native/interpreter/` |
 
 ### 翻译路径
@@ -172,29 +172,36 @@
 
 ---
 
-## 技能系统 & 管线治理 (2026-06-14)
+## 技能系统 & 管线治理 (2026-06-14 ~ 2026-08-06)
 
-### 技能系统审查（6 轮）
+### 技能系统审查（多轮，含仓储级终局核查）
 
-| 轮次 | 重点 | 关键修复 |
+| 阶段 | 重点 | 关键修复 |
 |------|------|---------|
-| 1 | 加载机制 | CLAUDE.md 执行协议加步骤 0（强制 Skill 加载），hook 强制 dev-il2cpp 为首位 |
-| 2 | 全流程风险 | routing-rules.md 重复表清理、core-agent 域编号修正、.hot_skills 补 dev-il2cpp、typo 修复、loaded_skills_cache 会话缓存 |
-| 3 | 数据源统一 | expert-registry.json 重写为唯一权威源（v1→v2），CLAUDE.md/routing-rules/core-agent/子控制器全部精简为引用 JSON |
-| 4 | 外部一致性 | hook 正则修正（捕获正确 Expert 名）、registries/il2cpp.md 补 4 个缺失 Expert（10→14→18）、skill-index 数量同步 |
-| 5 | 内部一致性 | 路径前缀 .ai/skills/ vs skills/ 统一、架构图与路由协议对齐、verification-before-completion 加入关联技能、ATG 关键词扩充 |
-| 6 | 执行时序 | Hook 竞态修复（CLAUDE 步骤 0/1 交换顺序 + loaded_expert 提前写入）、步骤 5 sed 替代覆盖写入、manifest 版本 2.0.0→2.1.0 |
+| 1-6 (6/14) | 加载机制/全流程/数据源/外部/内部一致性/执行时序 | expert-registry v1→v2 唯一权威源、hook 强约束、.hot_skills、manifest 2.1.0 |
+| 7 (7/x) | **路径前缀统一** | `.ai/skills/` vs 旧 `skills/` 全网归一（hooks/docs/生成器/orchestrator/自检工具），删除孤儿 `skills/` 目录 |
+| 8 (7/x) | **manifest schema + 生成器** | 45 manifest 迁移至新 schema、catalog generator 修复 `.ai/skills` 路径并重生成 |
+| 9 (8/6) | **双 taxonomy + 自检工具** | simd-expert 域修正、catalog↔expert-registry 显式映射表、`verify_skill_pipeline` 修复并全绿 |
 
 ### Expert 路由
 
 - **单一权威源**: `.ai/skills/discovery/expert-registry.json` (v2)
-  - 12 domains / 19 experts with keywords / 3 sub-controllers / 5 cross-cutting
-  - 域 6 修正: `codegen-expert` → `translation-expert`
-  - 删除 workflow_group（统一用 expert_sub_controller）
+  - 12 domains / 17+ experts with keywords / 3 sub-controllers / 4 cross-cutting
+  - catalog(7域) ↔ expert-registry(12域) 显式映射已建立（`domain-catalog.json.expert_registry_domains`）
 - **自动化工具**: `testing/foundation-dll/verification/tools/expert_lookup.py`
   - `--domain N` / `--keyword X` / `--list-domains` / `--controller`
 - **会话缓存**: `.claude/.loaded_skills_cache` — 同域连续轮次跳过重读
 - **Hook 防护**: PreToolUse 验证 loaded_expert 首位=dev-il2cpp，阻断未分类的工具调用
+- **自检**: `python .ai/skills/tooling/verification/verify_skill_pipeline.py` — All checks passed
+
+### 仓库卫生（2026-08-06）
+
+| 项 | 状态 |
+|----|------|
+| 陈旧 worktree (22G+237M) | ✅ 已移除（分支归档至 `refs/archive/`，回收 ~22G 磁盘） |
+| 根级运行产物提交 | ✅ `git rm --cached` build_log/test_all_/benchmark-*.json |
+| gitignore 缺口 | ✅ 补 build/ results/ optimization-campaign/ 根日志/--probe-mode |
+| README | ✅ 已更新（chaos-il2cpp 名字 + 真实目录结构） |
 
 ### 管线优化
 
