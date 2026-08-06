@@ -591,3 +591,10 @@ benchmark-scan-report.json
 build_log.txt
 test_all_err.txt
 test_all_out.txt
+
+# Test run-output captures (stdout/stderr/trace dumps from test executions)
+**/aot_output.txt
+**/aot_stderr.txt
+**/runtime-self-test/**/stdout.txt
+**/runtime-self-test/**/stderr.txt
+**/runtime-self-test/**/trace_output.txt
