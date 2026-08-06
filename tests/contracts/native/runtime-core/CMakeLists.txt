@@ -82,8 +82,9 @@ endif()
 # NOTE: codegen_native_test + unwind_info_test are EXCLUDED from the build.
 # They #include code_generator.h / unwind_info.h from a "Phase 3d" JIT/codegen
 # module that does not exist in this source tree (placeholder for an unmerged,
-# milestone-level feature). Tracked in tests/runner/baselines/known-failures.integration.yaml;
-# re-enable when that module lands. DO NOT delete the .cpp files — they capture intent.
+# milestone-level feature). NOT in known-failures.integration.yaml (excluded,
+# not built/run); re-enable when that module lands. DO NOT delete the .cpp
+# files — they capture intent.
 #
 # if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
 #     chaos_native_add_test(chaos_codegen_native_test codegen_native_test.cpp CXX_STANDARD 20)

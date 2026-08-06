@@ -157,8 +157,9 @@ add_chaos_test(com_typelib com_typelib_test.cpp
 
 # NOTE: com_dispatch is EXCLUDED from the build. It references
 # chaos::il2cpp::com_ccw::CcwDispatchMethodInvoke (declared com_ccw.h:160) which is
-# NOT implemented in com_ccw.cpp — a missing COM CCW dispatch feature. Tracked in
-# tests/runner/baselines/known-failures.unit.yaml; re-enable when the fn is implemented.
+# NOT implemented in com_ccw.cpp — a missing COM CCW dispatch feature. It is NOT
+# in known-failures.unit.yaml (it is excluded, not built/run); re-enable when the
+# fn is implemented.
 #
 # F7 — COM Dispatch test
 # add_chaos_test(com_dispatch com_dispatch_test.cpp
