@@ -76,6 +76,8 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     # Windows only: imports prebuilt .lib files, uses MSVC-specific flags.
     if(MSVC)
         add_subdirectory(testing)
+        # Migrated native CTest unit-suite root (native gtest tree under tests/unit/runtime-native)
+        add_subdirectory(tests/unit/runtime-native)
     endif()
 
     # ── Architecture check targets ─────────────────────────────────────

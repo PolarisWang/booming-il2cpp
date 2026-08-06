@@ -144,7 +144,6 @@ macro(add_chaos_test name)
 endmacro()
 
 # Subdirectories
-add_subdirectory(support)
 add_subdirectory(abi)
 add_subdirectory(common)
 add_subdirectory(bootstrap)

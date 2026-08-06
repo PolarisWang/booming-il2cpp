@@ -3,13 +3,13 @@
 # Target home for the native gtest unit suites currently under testing/src/native/
 # (+ the contracts/native CTest layer). Built through the unified
 # chaos_native_add_test() factory (cmake/chaos_native_test.cmake). The factory
-# supplies the runtime-lib set, include dirs, /utf-8 + /FORCE:MSibling flags, and
+# supplies the runtime-lib set, include dirs, /utf-8 + /FORCE:MULTIPLE flags, and
 # the codegen-symbol stub, so moved test trees do not re-implement link/flag logic.
 #
-# Populated incrementally by the migration plan (loop tasks): subdomains are added
-# as subdirectories as they move in. Empty until then.
-if(NOT TARGET chaos_test_libs_v0)
-    # Ensure the factory's aggregate lib target exists when this tree is built
-    # standalone (before the root include of chaos_native_test.cmake is reached).
-    add_library(chaos_test_libs_v0 INTERFACE)
-endif()
+# Subdomains are added as subdirectories as they migrate in from testing/src/native.
+
+# Bring in the unified native-test factory + its constants (lib set, includes, stub).
+include("${CMAKE_CURRENT_LIST_DIR}/../../../cmake/chaos_native_test.cmake")
+
+# ── Migrated native subdomains (from testing/src/native) ──
+add_subdirectory(support)
