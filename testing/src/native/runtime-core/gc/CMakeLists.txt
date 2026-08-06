@@ -295,6 +295,7 @@ add_chaos_test(test_gc_heap_limit
 # gc_stress_scenarios — Multi-threaded GC stress tests (Scenario S)
 add_chaos_test(test_gc_stress
     gc_stress_scenarios.cpp ${CHAOS_GC_BASE}
+    RESOURCE_LOCK bgc
 )
 set_tests_properties(test_gc_stress PROPERTIES LABELS "stress;gc")
 
@@ -390,6 +391,7 @@ add_chaos_test(test_gc_bgc_smoke
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_layout.cpp
+    RESOURCE_LOCK bgc
 )
 target_include_directories(test_gc_bgc_smoke PRIVATE
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
@@ -399,6 +401,7 @@ set_tests_properties(test_gc_bgc_smoke PROPERTIES LABELS "stress;gc")
 # gc_bgc_root_scan_test — Young-to-old root scan during BGC
 add_chaos_test(test_gc_bgc_root_scan
     gc_bgc_root_scan_test.cpp ${CHAOS_GC_BASE}
+    RESOURCE_LOCK bgc
 )
 target_link_options(test_gc_bgc_root_scan PRIVATE /FORCE:MULTIPLE)
 set_tests_properties(test_gc_bgc_root_scan PROPERTIES LABELS "stress;gc")
@@ -411,6 +414,7 @@ add_chaos_test(test_gc_bgc_unit
     gc_bgc_unit_test.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_bgc.cpp
     LABELS "stress;gc"
+    RESOURCE_LOCK bgc
 )
 target_include_directories(test_gc_bgc_unit PRIVATE
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
@@ -419,6 +423,7 @@ target_link_options(test_gc_bgc_unit PRIVATE /FORCE:MULTIPLE)
 # gc_bgc_stress_test — BGC concurrent stress, work-stealing, graph mutation
 add_chaos_test(test_gc_bgc_stress
     gc_bgc_stress_test.cpp ${CHAOS_GC_BASE}
+    RESOURCE_LOCK bgc
 )
 target_link_options(test_gc_bgc_stress PRIVATE /FORCE:MULTIPLE)
 set_tests_properties(test_gc_bgc_stress PROPERTIES LABELS "stress;gc")

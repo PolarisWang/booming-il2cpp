@@ -14,6 +14,13 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
 # Special targets are declared explicitly below; additionally the sources below
 # are EXCLUDED because they aren't standalone tests (helpers / stubs / not-ready).
 chaos_native_glob_add_tests(chaos "gc_*.cpp"
+    RESOURCE_LOCK bgc
+    LOCK_SOURCES
+        gc_bgc_smoke
+        gc_bgc_race_test
+        gc_bgc_root_scan_test
+        gc_bgc_stress_test
+        gc_stress_test
     EXCLUDE
         gc_root_scanner_test.cpp  # wants CXX_STANDARD 20 (kept explicit below)
         gc_test_stubs.cpp         # codegen-symbol stub source, NOT a test

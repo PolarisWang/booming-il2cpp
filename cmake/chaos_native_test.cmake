@@ -84,7 +84,7 @@ endif()
 # Registers a CTest target with the standard MSVC/Linux flags and include dirs.
 function(chaos_native_add_test name)
     cmake_parse_arguments(ARG "WITHOUT_GTEST;WITHOUT_CODEGEN_STUB;WITHOUT_UTF8;GTEST_LIB_ONLY"
-                          "CXX_STANDARD" "LIBS;INCLUDES;LABELS;DEFINITIONS" ${ARGN})
+                          "CXX_STANDARD" "LIBS;INCLUDES;LABELS;DEFINITIONS;RESOURCE_LOCK" ${ARGN})
 
     set(_sources ${ARG_UNPARSED_ARGUMENTS})
     if(NOT ARG_WITHOUT_CODEGEN_STUB AND CHAOS_CODEGEN_STUB_EXISTS)
@@ -146,6 +146,12 @@ function(chaos_native_add_test name)
     if(ARG_LABELS)
         set_tests_properties(${name} PROPERTIES LABELS "${ARG_LABELS}")
     endif()
+    if(ARG_RESOURCE_LOCK)
+        # Serialize tests that share the same lock (e.g. heavy background-GC /
+        # multi-worker GC tests) so they never run concurrently and starve each
+        # other's internal phase-wait windows (avoids contention-driven timeouts).
+        set_tests_properties(${name} PROPERTIES RESOURCE_LOCK "${ARG_RESOURCE_LOCK}")
+    endif()
 endfunction()
 
 # ── Auto-discovery helper ──
@@ -158,7 +164,7 @@ endfunction()
 # callers can keep special targets (custom CXX_STANDARD / extra sources) explicit.
 # Returns the created target names in a caller variable `CHACREATED`.
 function(chaos_native_glob_add_tests prefix pattern)
-    cmake_parse_arguments(A "" "" "EXCLUDE" "" ${ARGN})
+    cmake_parse_arguments(A "" "RESOURCE_LOCK" "EXCLUDE;LOCK_SOURCES" ${ARGN})
     file(GLOB_RECURSE _srcs CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${pattern}")
     foreach(_src IN LISTS _srcs)
         get_filename_component(_name_we ${_src} NAME_WE)
@@ -171,7 +177,20 @@ function(chaos_native_glob_add_tests prefix pattern)
             endif()
         endforeach()
         if(NOT _skip)
-            chaos_native_add_test(${prefix}_${_name_we} ${_src})
+            set(_lock)
+            if(A_LOCK_SOURCES)
+                foreach(_lwe IN LISTS A_LOCK_SOURCES)
+                    if(_name_we STREQUAL _lwe)
+                        set(_lock "${A_RESOURCE_LOCK}")
+                        break()
+                    endif()
+                endforeach()
+            endif()
+            if(_lock)
+                chaos_native_add_test(${prefix}_${_name_we} ${_src} RESOURCE_LOCK ${_lock})
+            else()
+                chaos_native_add_test(${prefix}_${_name_we} ${_src})
+            endif()
         endif()
     endforeach()
 endfunction()

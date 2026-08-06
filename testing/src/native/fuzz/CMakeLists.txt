@@ -30,6 +30,7 @@ set(CHAOS_FUZZ_LIBS
 add_chaos_test(test_fuzz_il
     fuzz_il_test.cpp
     LIBS ${CHAOS_FUZZ_LIBS}
+    RESOURCE_LOCK bgc
     LABELS "fuzz;interpreter"
 )
 set_tests_properties(test_fuzz_il PROPERTIES TIMEOUT 120)
@@ -37,6 +38,7 @@ set_tests_properties(test_fuzz_il PROPERTIES TIMEOUT 120)
 add_chaos_test(test_fuzz_gc
     ${CHAOS_FUZZ_GC_SRC}
     LIBS ${CHAOS_FUZZ_LIBS}
+    RESOURCE_LOCK bgc
     LABELS "fuzz;gc"
 )
 target_include_directories(test_fuzz_gc PRIVATE

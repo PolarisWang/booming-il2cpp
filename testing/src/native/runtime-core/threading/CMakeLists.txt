@@ -45,6 +45,7 @@ add_chaos_test(test_queue_backpressure
 # threading_stress_test — Multi-threaded stress tests (T2-STRESS)
 add_chaos_test(test_threading_stress
     threading_stress_test.cpp
+    RESOURCE_LOCK bgc
     LABELS "unit;threading"
 )
 
