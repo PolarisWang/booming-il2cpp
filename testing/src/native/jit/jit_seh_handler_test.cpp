@@ -371,7 +371,6 @@ TEST_F(T4SehHandlerTest, ReclaimDemotedCode_ClearsAllEntries) {
 
     // All entries should be cleared.
     EXPECT_EQ(g_pending_free.size(), 0u);
-    }
 }
 
 TEST_F(T4SehHandlerTest, EnqueueDemotedCode_LargeNumberOfRegionsWorks) {

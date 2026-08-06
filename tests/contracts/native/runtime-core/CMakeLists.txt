@@ -79,9 +79,15 @@ endif()
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
     chaos_native_add_test(chaos_capacity_stress_test capacity_stress_test.cpp)
 endif()
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
-    chaos_native_add_test(chaos_codegen_native_test codegen_native_test.cpp CXX_STANDARD 20)
-endif()
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unwind_info_test.cpp")
-    chaos_native_add_test(chaos_unwind_info_test unwind_info_test.cpp)
-endif()
+# NOTE: codegen_native_test + unwind_info_test are EXCLUDED from the build.
+# They #include code_generator.h / unwind_info.h from a "Phase 3d" JIT/codegen
+# module that does not exist in this source tree (placeholder for an unmerged,
+# milestone-level feature). Tracked in tests/runner/baselines/known-failures.integration.yaml;
+# re-enable when that module lands. DO NOT delete the .cpp files — they capture intent.
+#
+# if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
+#     chaos_native_add_test(chaos_codegen_native_test codegen_native_test.cpp CXX_STANDARD 20)
+# endif()
+# if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unwind_info_test.cpp")
+#     chaos_native_add_test(chaos_unwind_info_test unwind_info_test.cpp)
+# endif()
