@@ -116,7 +116,7 @@ if(USE_ASAN)
         message(STATUS "ASan DLL found: ${CHAOS_ASAN_DLL}")
         # Also copy suppressions file to build root for ASAN_OPTIONS
         configure_file(
-            "${CMAKE_CURRENT_SOURCE_DIR}/../../asan-suppressions.txt"
+            "${CMAKE_CURRENT_SOURCE_DIR}/../../../cmake/sanitizers/asan-suppressions.txt"
             "${CMAKE_CURRENT_BINARY_DIR}/asan-suppressions.txt"
             COPYONLY)
     else()
@@ -124,8 +124,8 @@ if(USE_ASAN)
     endif()
 endif()
 
-# Include sanitizer config modules
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../config/sanitizers")
+# Include sanitizer config modules (moved to repo cmake/sanitizers)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../cmake/sanitizers")
 include(asan)
 include(rtc)
 
