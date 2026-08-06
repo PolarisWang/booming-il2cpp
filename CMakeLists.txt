@@ -38,6 +38,10 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1)
     include(cmake/config-tier.cmake)
     include(cmake/chaos_native_test.cmake)
+    # Register CTest for the native test targets (contracts/native + testing/src/native).
+    # Must be at this scope before add_subdirectory so the root CTestTestfile.cmake is
+    # generated and ctest --test-dir finds the subdir tests.
+    enable_testing()
     find_package(Python3 QUIET)
 
     add_subdirectory(third_party/fmt fmt_build)

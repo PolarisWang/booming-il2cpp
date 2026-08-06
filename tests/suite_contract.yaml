@@ -34,8 +34,10 @@ layers:
         cmake_root: .
         cmake_build_dir: artifacts/presets/windows-x64-reference
         cmake_preset: windows-x64-reference
-        # runs the CTest targets under tests/contracts/native/** (abi, bridge,
-        # common, engine-binding, gc, hot-update, interpreter, runtime-core)
+        # runs the CTest targets under contracts/native + testing/src/native (unit/
+        # deterministic only; benchmark/stress/soak excluded by the -LE in native.py).
+        # Allow a long budget: ~200 deterministic native tests.
+        timeout: 3600
     # NOTE: testing/project-test/{runtime-self-test,generics-delegates,virtual-dispatch}
     # is a manual-orchestration integration tier (CMake + codegen + hot-update) with no
     # standalone entry script; it is driven by CI / CMake, not added as a driver group yet.

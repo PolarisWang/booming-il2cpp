@@ -51,7 +51,13 @@ def run(group: dict, timeout: int = 1800, quick: bool = False) -> SuiteResult:
         return res
 
     # 3) ctest
-    rc, out = _run(cwd, ["ctest", "--test-dir", build_dir, "--output-on-failure"], timeout)
+    # Visual Studio is a multi-config generator; ctest needs -C to select the
+    # configuration the executables were built with (default Debug).
+    # -LE excludes long-running benchmark/stress/soak tests (hours each) which are
+    # not appropriate for a standard gating run; a user can run them separately.
+    exclude = "benchmark|stress|soak"
+    rc, out = _run(cwd, ["ctest", "--test-dir", build_dir, "-C", "Debug",
+                         "-LE", exclude, "--output-on-failure"], timeout)
     res.duration_s = time.time() - t0
 
     if rc == 124:
