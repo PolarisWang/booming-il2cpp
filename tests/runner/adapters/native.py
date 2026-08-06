@@ -55,9 +55,12 @@ def run(group: dict, timeout: int = 1800, quick: bool = False) -> SuiteResult:
     # configuration the executables were built with (default Debug).
     # -LE excludes long-running benchmark/stress/soak tests (hours each) which are
     # not appropriate for a standard gating run; a user can run them separately.
+    # -j runs independent native test processes in parallel (huge wall-clock win for
+    # ~200 tests); --timeout 600 caps any single runaway test at 10 min.
     exclude = "benchmark|stress|soak"
     rc, out = _run(cwd, ["ctest", "--test-dir", build_dir, "-C", "Debug",
-                         "-LE", exclude, "--output-on-failure"], timeout)
+                         "-LE", exclude, "-j", "8", "--timeout", "600",
+                         "--output-on-failure"], timeout)
     res.duration_s = time.time() - t0
 
     if rc == 124:
