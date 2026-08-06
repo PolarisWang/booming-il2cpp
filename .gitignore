@@ -532,6 +532,10 @@ testing/foundation-dll/fix_*.py
 testing/foundation-dll/D:*_stderr.txt
 testing/foundation-dll/D:*_stdout.txt
 
+# Root-level one-off fixer/scratch scripts under testing/ (tracked accidentally)
+/testing/fix_*.py
+/testing/replace_eh_block.py
+
 # Root-level native build artifacts
 native-build/
 
