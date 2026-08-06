@@ -48,13 +48,13 @@ extern "C" void* kChaosExternalRuntimeFnTable[] = { nullptr };
 extern "C" int32_t kChaosExternalRuntimeCount = 0;
 
 // CHAOS_IL2CPP_STRING_TYPE layout (from generated_code_compat.h).
-// ThinLockableHeader is 16B (type_info + sync_state), so length is at offset 16.
+// ThinLockableHeader is now 8B (type_info only; sync_state moved to ThinLockTable),
+// so length is at offset 8. Matches chaos_managed_string.
 struct TestManagedString {
-    const void* type_info = nullptr;   // ThinLockableHeader [0] (8B)
-    uint64_t    sync_state = 0;        // ThinLockableHeader [8] (8B)
-    CHAOS_IL2CPP_INT32 length = 0;     // [16]
-    const char* utf8_data = nullptr;   // [24]
-    CHAOS_IL2CPP_UINT64 string_id = 0u; // [32]
+    const void* type_info = nullptr;    // ThinLockableHeader [0] (8B)
+    CHAOS_IL2CPP_INT32 length = 0;      // [8]
+    const char* utf8_data = nullptr;    // [16]
+    CHAOS_IL2CPP_UINT64 string_id = 0u; // [24]
 };
 
 namespace gc = chaos::il2cpp::runtime_core;
