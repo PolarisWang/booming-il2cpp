@@ -3,7 +3,7 @@
 #
 # Runs:
 #   1. build/check_arch.py on staged native C++ files
-#   2. build/check_foundation_dll_pipeline.py when test generator/ledger files change
+#   2. testing/.../preflight/check_layer_boundaries.py on staged Python (4-layer compliance)
 #   3. CHAOS_IL2CPP_LOG_TRACE() / CHAOS_IL2CPP_LOG_*() coverage check on staged .cpp files (advisory)
 #
 # To install: git config core.hooksPath .githooks
