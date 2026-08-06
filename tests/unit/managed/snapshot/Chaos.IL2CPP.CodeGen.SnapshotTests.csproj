@@ -18,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\managed\Chaos.IL2CPP.Generator\Chaos.IL2CPP.Generator.csproj" />
+    <ProjectReference Include="..\..\..\..\src\managed\Chaos.IL2CPP.Generator\Chaos.IL2CPP.Generator.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\..\..\src\managed\Chaos.IL2CPP.Generator\Templates\**\*.scriban" Link="Templates\%(RecursiveDir)%(Filename)%(Extension)">
+    <Content Include="..\..\..\..\src\managed\Chaos.IL2CPP.Generator\Templates\**\*.scriban" Link="Templates\%(RecursiveDir)%(Filename)%(Extension)">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

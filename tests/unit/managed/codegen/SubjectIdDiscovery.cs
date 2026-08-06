@@ -20,7 +20,7 @@ public sealed class SubjectIdDiscovery
 
             return Path.GetFullPath(Path.Combine(
                 repoRoot,
-                "tests", "managed", "Chaos.IL2CPP.CodeGen.Tests",
+                "tests", "unit", "managed", "codegen",
                 "StubAssembly", "bin", "Release", "net8.0",
                 "StubAssembly.dll"));
         }

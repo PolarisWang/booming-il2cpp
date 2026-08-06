@@ -8,7 +8,7 @@
 # When these are fixed, remove the corresponding entry here; the test flips to
 # green and the driver then fails the gate if they regress.
 #
-# Source of truth: `dotnet test tests/managed/Chaos.IL2CPP.CodeGen.Tests -v normal`
+# Source of truth: `dotnet test tests/unit/managed/codegen -v normal`
 # (2,114 passed, 29 failed) — all 29 are below.
 version: 1
 known:

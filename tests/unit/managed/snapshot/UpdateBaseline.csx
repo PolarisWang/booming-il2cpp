@@ -5,7 +5,7 @@ using Chaos.IL2CPP.Generator;
 
 var repoRoot = FindRepoRoot();
 var fixtureName = "54-throw-rethrow";
-var testProjectDir = Path.Combine(repoRoot, "tests", "snapshots", "Chaos.IL2CPP.Generator.SnapshotTests");
+var testProjectDir = Path.Combine(repoRoot, "tests", "unit", "managed", "snapshot");
 var fixtureDir = Path.Combine(testProjectDir, "Fixtures", fixtureName);
 var baselineDir = Path.Combine(testProjectDir, "Baselines", fixtureName);
 

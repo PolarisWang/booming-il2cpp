@@ -20,11 +20,11 @@ layers:
     adapter: dotnet
     groups:
       - name: codegen
-        command_project: tests/managed/Chaos.IL2CPP.CodeGen.Tests
+        command_project: tests/unit/managed/codegen
       - name: driver
-        command_project: tests/managed/Chaos.IL2CPP.Driver.Tests
+        command_project: tests/unit/managed/driver
       - name: snapshot
-        command_project: tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests
+        command_project: tests/unit/managed/snapshot
         # golden baseline test — slower than others but still unit-tier
 
   integration:

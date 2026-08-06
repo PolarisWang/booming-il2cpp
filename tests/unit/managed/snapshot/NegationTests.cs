@@ -50,7 +50,7 @@ public sealed class NegationTests : SnapshotTestBase
     {
         var repoRoot = LocateRepoRoot();
         var testProjectDir = Path.Combine(
-            repoRoot, "tests", "snapshots", "Chaos.IL2CPP.CodeGen.SnapshotTests");
+            repoRoot, "tests", "unit", "managed", "snapshot");
         var baselineFile = Path.Combine(
             testProjectDir, "Baselines", "01-simple-add", "native-aot.generated.cpp");
 
@@ -100,7 +100,7 @@ public sealed class NegationTests : SnapshotTestBase
     {
         var repoRoot = LocateRepoRoot();
         var testProjectDir = Path.Combine(
-            repoRoot, "tests", "snapshots", "Chaos.IL2CPP.CodeGen.SnapshotTests");
+            repoRoot, "tests", "unit", "managed", "snapshot");
         var fixtureDir = Path.Combine(
             testProjectDir, "Fixtures", "__nonexistent__negation_test");
 

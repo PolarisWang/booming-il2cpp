@@ -65,7 +65,7 @@ jobs:
       - name: Restore .NET dependencies
         run: |
           dotnet restore src/managed/Chaos.IL2CPP.Generator/
-          dotnet restore tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
+          dotnet restore tests/unit/managed/snapshot/
 
       - name: Cache NuGet packages
         uses: actions/cache@v4
@@ -81,7 +81,7 @@ jobs:
         run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
 
       - name: Run Snapshot Tests
-        run: dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/ --configuration Release --no-restore -v n
+        run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n
 
       # Native build
       - name: Configure CMake

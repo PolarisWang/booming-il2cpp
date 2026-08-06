@@ -73,7 +73,7 @@ jobs:
       - name: Restore .NET dependencies
         run: |
           dotnet restore src/managed/Chaos.IL2CPP.Generator/
-          dotnet restore tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
+          dotnet restore tests/unit/managed/snapshot/
           dotnet restore testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/
 
       - name: Cache NuGet packages
@@ -102,7 +102,7 @@ jobs:
         run: dotnet build testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore
 
       - name: Run Snapshot Tests
-        run: dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/ --configuration Release --no-restore -v n
+        run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n
 
       - name: Run MetadataWriter Tests
         run: dotnet test testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore -v n

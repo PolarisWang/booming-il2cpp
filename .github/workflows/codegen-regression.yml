@@ -51,7 +51,7 @@ jobs:
       - name: Restore .NET dependencies
         run: |
           dotnet restore src/managed/Chaos.IL2CPP.Generator/
-          dotnet restore tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
+          dotnet restore tests/unit/managed/snapshot/
           dotnet restore testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/
 
       - name: Build Chaos.IL2CPP.Generator
@@ -64,7 +64,7 @@ jobs:
         run: dotnet build testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore
 
       - name: Run Snapshot Tests
-        run: dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/ --configuration Release --no-restore -v n
+        run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n
 
       - name: Run MetadataWriter Tests
         run: dotnet test testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore -v n
@@ -86,9 +86,9 @@ jobs:
 
       - name: Code Coverage Collection
         run: |
-          dotnet test tests/managed/Chaos.IL2CPP.CodeGen.Tests/Chaos.IL2CPP.CodeGen.Tests.csproj `
+          dotnet test tests/unit/managed/codegen/Chaos.IL2CPP.CodeGen.Tests.csproj `
             --configuration Release `
-            --settings tests/managed/Chaos.IL2CPP.CodeGen.Tests/coverlet.runsettings `
+            --settings tests/unit/managed/codegen/coverlet.runsettings `
             /p:CollectCoverage=true `
             /p:CoverletOutputFormat=cobertura `
             /p:CoverletOutput=coverage-results/coverage.cobertura.xml

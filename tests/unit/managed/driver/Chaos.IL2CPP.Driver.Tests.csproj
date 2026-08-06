@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\managed\Chaos.IL2CPP.Driver\Chaos.IL2CPP.Driver.csproj" />
-    <ProjectReference Include="..\..\..\src\managed\Chaos.IL2CPP.Pipeline\Chaos.IL2CPP.Pipeline.csproj" />
-    <ProjectReference Include="..\Chaos.IL2CPP.CodeGen.Tests\StubAssembly\StubAssembly.csproj">
+    <ProjectReference Include="..\..\..\..\src\managed\Chaos.IL2CPP.Driver\Chaos.IL2CPP.Driver.csproj" />
+    <ProjectReference Include="..\..\..\..\src\managed\Chaos.IL2CPP.Pipeline\Chaos.IL2CPP.Pipeline.csproj" />
+    <ProjectReference Include="..\codegen\StubAssembly\StubAssembly.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
     </ProjectReference>
