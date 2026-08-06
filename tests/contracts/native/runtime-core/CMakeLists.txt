@@ -79,16 +79,19 @@ endif()
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
     chaos_native_add_test(chaos_capacity_stress_test capacity_stress_test.cpp)
 endif()
-# NOTE: codegen_native_test + unwind_info_test are EXCLUDED from the build.
-# They #include code_generator.h / unwind_info.h from a "Phase 3d" JIT/codegen
-# module that does not exist in this source tree (placeholder for an unmerged,
-# milestone-level feature). NOT in known-failures.integration.yaml (excluded,
-# not built/run); re-enable when that module lands. DO NOT delete the .cpp
-# files — they capture intent.
+# NOTE: codegen_native_test is EXCLUDED. It #includes code_generator.h from a
+# "Phase 3d" JIT/codegen module that does not exist in this source tree
+# (placeholder for an unmerged milestone-level feature). NOT in
+# known-failures.integration.yaml (excluded, not built/run). DO NOT delete the
+# .cpp — it captures intent; re-enable when that module lands.
 #
-# if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
-#     chaos_native_add_test(chaos_codegen_native_test codegen_native_test.cpp CXX_STANDARD 20)
-# endif()
-# if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unwind_info_test.cpp")
-#     chaos_native_add_test(chaos_unwind_info_test unwind_info_test.cpp)
-# endif()
+# unwind_info_test is ENABLED: it now exercises the real
+# chaos::il2cpp::jit::EmitUnwindInfo (src/native/jit/jit_unwind.h), which is in
+# CHAOS_NATIVE_INCLUDE_DIRS. Replaced the old speculative codegen:: binding.
+#
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
+    # codegen_native_test.cpp EXCLUDED (needs code_generator.h, not present)
+endif()
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unwind_info_test.cpp")
+    chaos_native_add_test(chaos_unwind_info_test unwind_info_test.cpp)
+endif()
