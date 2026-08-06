@@ -83,7 +83,7 @@ endif()
 #                         [WITHOUT_CODEGEN_STUB]) # don't link the codegen stub
 # Registers a CTest target with the standard MSVC/Linux flags and include dirs.
 function(chaos_native_add_test name)
-    cmake_parse_arguments(ARG "WITHOUT_GTEST;WITHOUT_CODEGEN_STUB;WITHOUT_UTF8"
+    cmake_parse_arguments(ARG "WITHOUT_GTEST;WITHOUT_CODEGEN_STUB;WITHOUT_UTF8;GTEST_LIB_ONLY"
                           "CXX_STANDARD" "LIBS;INCLUDES;LABELS;DEFINITIONS" ${ARGN})
 
     set(_sources ${ARG_UNPARSED_ARGUMENTS})
@@ -107,8 +107,12 @@ function(chaos_native_add_test name)
     if(NOT _libs)
         set(_libs chaos_test_libs_v0)
     endif()
-    if(NOT ARG_WITHOUT_GTEST)
-        set(_libs gtest_main ${_libs})
+    if(ARG_WITHOUT_GTEST)
+        # no gtest at all (bare executable)
+    elseif(ARG_GTEST_LIB_ONLY)
+        set(_libs gtest ${_libs})          # custom main() tests: link gtest lib only
+    else()
+        set(_libs gtest_main ${_libs})     # default GoogleTest entry point
     endif()
 
     if(MSVC)
