@@ -13,6 +13,7 @@
 #include <mutex>
 
 #include "gc_scheduler.h"
+#include "gc_stats.h"   // GcRecordAlloc (global allocation accounting)
 #include "gc_young_gen.h"
 #include "thread_state.h"
 
@@ -161,6 +162,11 @@ inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
         std::memset(ptr, 0, size);
         tls_alloc_since_last_gc += size;
         tls_total_allocated_bytes += size;
+        // Account into the global GC stats (reported by GcGetSnapshot/GcMemoryInfo).
+        // The slow path and old-gen already record; the TLAB bump-pointer fast path
+        // was missing this, so alloc_total/alloc_bytes were under-counted for the
+        // common allocation traffic.
+        GcRecordAlloc(size, false);
         if (threading::SafepointRequested()) [[unlikely]] {
             // SPB: thread is at a safe point (object initialized).  Ack the
             // safepoint so GC doesn't wait for this thread, then continue
@@ -232,6 +238,11 @@ inline void* NurseryAllocateAtomic(CHAOS_IL2CPP_SIZE size) noexcept {
         std::memset(ptr, 0, size);
         tls_alloc_since_last_gc += size;
         tls_total_allocated_bytes += size;
+        // Account into the global GC stats (reported by GcGetSnapshot/GcMemoryInfo).
+        // The slow path and old-gen already record; the TLAB bump-pointer fast path
+        // was missing this, so alloc_total/alloc_bytes were under-counted for the
+        // common allocation traffic.
+        GcRecordAlloc(size, false);
         if (threading::SafepointRequested()) [[unlikely]] {
             // SPB: thread is at a safe point (object initialized).  Ack the
             // safepoint so GC doesn't wait for this thread, then continue
