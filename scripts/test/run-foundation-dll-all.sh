@@ -35,7 +35,7 @@ for asm in ledger.get('assemblies', []):
     echo "============================================"
     echo "  Running: $slug ($assembly)"
     echo "============================================"
-    bash "$REPO_ROOT/testing/scripts/run-foundation-dll-family.sh" "$slug" --assembly "$assembly" $MODE || true
+    bash "$REPO_ROOT/scripts/test/run-foundation-dll-family.sh" "$slug" --assembly "$assembly" $MODE || true
 done
 
 echo ""
