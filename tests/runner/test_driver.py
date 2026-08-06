@@ -45,33 +45,172 @@ def load_contract() -> dict:
 def _load_yaml(path: Path) -> dict:
     # tiny YAML subset (layers -> groups). No third-party dependency so the
     # driver runs anywhere. Only the structure we emit is supported.
+    text = path.read_text(encoding="utf-8")
     try:
         import yaml  # type: ignore
-        return yaml.safe_load(path.read_text(encoding="utf-8"))
+        parsed = yaml.safe_load(text)
     except Exception:
-        return _fallback_yaml(path.read_text(encoding="utf-8"))
+        return _fallback_yaml(text)
+    # Consistency guard: when the full yaml lib is present, make sure the
+    # no-dependency fallback does not silently diverge from it (P3 fix). If the
+    # fallback drops any field, we want a loud failure now, not a silent one on
+    # a machine without PyYAML.
+    fallback = _fallback_yaml(text)
+    if _contract_shape(fallback) != _contract_shape(parsed):
+        raise RuntimeError(
+            "contract fallback parser diverged from yaml.safe_load — update "
+            "_fallback_yaml to parse every field the contract currently uses; "
+            f"fallback keys={_contract_shape(fallback)} safe_load={_contract_shape(parsed)}"
+        )
+    return parsed
+
+
+def _contract_shape(node) -> str:
+    """Compact canonical signature of the contract's field structure, used to
+    prove the fallback and safe_load agree on every (nested) key and list length.
+    Dict keys are sorted so key ORDER never reports a false divergence."""
+    if isinstance(node, dict):
+        body = ",".join(
+            f"{k}:{_contract_shape(node[k])}"
+            for k in sorted(node.keys())
+        )
+        return "{" + body + "}"
+    if isinstance(node, list):
+        return "[" + ",".join(_contract_shape(v) for v in node) + "]"
+    return type(node).__name__
+
+
+def _parse_scalar(raw: str):
+    """Coerce a YAML scalar token to int/bool/str, approximating safe_load.
+
+    Also strips a trailing inline ` # comment` (YAML spec: a comment after a
+    space) so values like `ctest_timeout: 3600  # cap` parse to int 3600.
+    """
+    s = raw.strip()
+    # cut an inline comment (space before #), if present
+    if " #" in s:
+        s = s.split(" #", 1)[0].rstrip()
+    s = s.strip("'\"")
+    if s.isdigit():
+        return int(s)
+    if s in ("true", "True"):
+        return True
+    if s in ("false", "False"):
+        return False
+    return s
+
+
+def _parse_inline_list(raw: str):
+    """Parse an inline `[a, b, c]` list. Returns list of scalar tokens."""
+    s = raw.strip()
+    s = s.strip("[]")
+    if not s:
+        return []
+    return [_parse_scalar(t) for t in s.split(',') if t.strip()]
 
 
 def _fallback_yaml(text: str) -> dict:
-    # minimal parser for our well-formed contract; avoids hard yaml dep
-    layers: dict = {}
-    cur_layer = None
+    """Indentation-aware minimal YAML parser for our well-formed contract.
+
+    Requires no third-party dependency (so the driver runs anywhere), but unlike
+    the prior version it preserves the FULL contract structure — nested group
+    blocks and every scalar field (command_project / cmake_* / timeout / script /
+    args / slow ...), plus inline `[a, b]` lists — instead of dropping everything
+    below `- name:`. `_load_yaml` cross-checks the result against yaml.safe_load
+    and raises loudly if any field diverges.
+    """
+    # 1) build an indentation tree of explicit nodes: (indent, content)
+    node_lines = []  # list of (indent:int, key:str|None, is_seq:bool, text:str)
     for raw in text.splitlines():
         line = raw.rstrip()
-        if not line or line.lstrip().startswith("#"):
+        if not line.strip() or line.lstrip().startswith("#"):
             continue
         indent = len(line) - len(line.lstrip())
         s = line.strip()
-        if indent == 0 and s.endswith(":") and "  " not in s:
-            cur_layer = s[:-1]
-            layers[cur_layer] = {"adapter": None, "groups": []}
-        elif cur_layer and s.startswith("adapter:"):
-            layers[cur_layer]["adapter"] = s.split(":", 1)[1].strip()
-        elif cur_layer and s.startswith("name:") and layers[cur_layer].get("_g"):
-            pass
-        elif cur_layer and s.startswith("- name:"):
-            layers[cur_layer]["groups"].append({"name": s.split(":", 1)[1].strip()})
-    return {"layers": layers, "version": 1}
+        if s.startswith("- "):
+            body = s[2:].strip()
+            # "- key: value" or "- bare"
+            if ":" in body:
+                k, _, v = body.partition(":")
+                node_lines.append((indent, k.strip(), True, v.strip()))
+            else:
+                node_lines.append((indent, None, True, body))
+        elif ":" in s:
+            k, _, v = s.partition(":")
+            node_lines.append((indent, k.strip(), False, v.strip()))
+        else:
+            node_lines.append((indent, None, False, s))
+
+    def build(start: int, end: int, base_indent: int):
+        """Build a dict/list from node_lines[start:end] whose known parents are
+        at base_indent. Nodes with indent <= base_indent terminate this block."""
+        node = {}
+        i = start
+        while i < end:
+            ind, key, is_seq, val = node_lines[i]
+            # find extent of this node's children
+            j = i + 1
+            while j < end and node_lines[j][0] > ind:
+                j += 1
+            chunk = node_lines[i + 1:j] if j > i + 1 else []
+            if is_seq:
+                # a sequence item: - name: X  -> dict with its keys; collect
+                # consecutive seq items at same indent into a list
+                seq_items = []
+                m = i
+                while m < end and node_lines[m][0] == ind and node_lines[m][2] is True:
+                    _, k2, _, v2 = node_lines[m]
+                    item_end = m + 1
+                    while item_end < end and node_lines[item_end][0] > ind:
+                        item_end += 1
+                    child = build(m + 1, item_end, ind) if item_end > m + 1 else {}
+                    if key is not None:
+                        # inline key on the dash line: "- name: codegen"
+                        if v2.startswith("["):
+                            child[k2] = _parse_inline_list(v2)
+                        elif v2:
+                            child[k2] = _parse_scalar(v2)
+                        seq_items.append(child)
+                    else:
+                        seq_items.append(_parse_scalar(val) if v2 else child)
+                    m = item_end
+                i = m
+                # attach the sequence to its parent key (seq items carry no key
+                # at the parent level in our contract: they live under groups:)
+                node.setdefault("_SEQ_", []).extend(seq_items)
+            else:
+                if val:
+                    # scalar or inline list
+                    node[key] = _parse_inline_list(val) if val.startswith("[") else _parse_scalar(val)
+                else:
+                    # nested block: build from chunk
+                    node[key] = build(i + 1, j, ind) if chunk else {}
+                i = j
+        return node
+
+    root = build(0, len(node_lines), -1)
+
+    # 2) promote the parent-key `_SEQ_` markers into real "groups" lists
+    def promote(node):
+        if isinstance(node, list):
+            return [promote(v) for v in node]
+        if not isinstance(node, dict):
+            return node
+        out = {}
+        had_seq = False
+        for k, v in node.items():
+            if k == "_SEQ_":
+                had_seq = True
+                out["groups"] = [promote(x) for x in v]
+            else:
+                out[k] = promote(v)
+        # a node whose entire value is a sequence (e.g. the `groups:` block)
+        # flattens to just the list, otherwise we'd get {"groups":{"groups":[...]}}
+        if had_seq and len(out) == 1 and "groups" in out:
+            return out["groups"]
+        return out
+
+    return promote(root)
 
 
 def load_known_failures(layer: str) -> set:
@@ -106,6 +245,9 @@ def main() -> int:
     ap.add_argument("--timeout", type=int, default=1800)
     ap.add_argument("--json", default="")
     ap.add_argument("--junit", default="")
+    ap.add_argument("--cases", action="store_true",
+                    help="include per-case pass/fail detail in the JSON report "
+                         "(default off: native ~200 cases, dotnet can be thousands)")
     args = ap.parse_args()
 
     contract = load_contract()
@@ -137,28 +279,53 @@ def main() -> int:
             known_in_run = [c for c in res.cases if c.name in known]
             known_found += len(known_in_run)
 
-            kf = {}
             # we don't drop known failures; we annotate them
             for c in res.cases:
                 if c.name in known:
                     c.message = ("[KNOWN-FAIL] " + (c.message or "")).strip()
 
-            group_ok = res.ok
-            # if every failure is a known one, the group counts as OK for gating
-            if res.failed and known_in_run and len(known_in_run) == res.failed:
-                group_ok = True
+            # P4: explicit regression gate. A group is OK if the adapter ran
+            # without an infra error (error is None, total > 0) AND every failure
+            # is baseline-known. `unexpected` is the set of NEW failures (not in
+            # the known baseline) — the thing that must flip the gate red.
+            # NOTE: we deliberately do NOT use SuiteResult.ok here, because it
+            # already returns False when ANY failure exists (known or not), which
+            # would defeat the known-failure reconciliation (baseline-known
+            # failures are expected and must not turn the gate red).
+            ran_ok = res.error is None and res.total > 0
+            unexpected = [c for c in res.cases if not c.passed and c.name not in known]
+            group_ok = ran_ok and not unexpected
+
+            # P4: stale-known diagnostic — baseline lists a name as known-fail
+            # but it PASSED this run. That entry is now doing nothing useful
+            # (the test has recovered); surface it so the baseline can be pruned
+            # and the gate re-armed for that name.
+            passed_names = {c.name for c in res.cases if c.passed}
+            stale_known = sorted(known & passed_names)
 
             grand_total += res.total
             grand_pass += res.passed
             grand_fail += res.failed
 
-            report["layers"][layer_name]["groups"][gname] = {
+            group_entry = {
                 "ok": group_ok, "passed": res.passed, "failed": res.failed,
                 "total": res.total, "error": res.error, "duration_s": res.duration_s,
                 "known": len(known_in_run),
+                "unexpected": [c.name for c in unexpected],
+                "stale_known": stale_known,
                 "failures": [{"name": c.name, "msg": (c.message or "")[:500]}
                              for c in res.cases if not c.passed],
             }
+            # P5: optional per-case detail (off by default — native ~200 cases,
+            # dotnet can be thousands). With --cases this lets a later run diff
+            # exactly which tests passed/failed for regression triage.
+            if args.cases:
+                group_entry["cases"] = [
+                    {"name": c.name, "passed": c.passed, "duration_s": round(c.duration_s, 3),
+                     **({"msg": (c.message or "")[:500]} if c.message else {})}
+                    for c in res.cases
+                ]
+            report["layers"][layer_name]["groups"][gname] = group_entry
             if not group_ok:
                 overall_ok = False
 
@@ -184,6 +351,10 @@ def _print_human(report: dict) -> None:
             print(f"  [{flag}] {layer}/{gname}: pass={g['passed']} fail={g['failed']} known={g['known']} {g['duration_s']}s")
             if g["error"]:
                 print(f"        infra error: {g['error'][:300]}")
+            for u in g.get("unexpected", []):
+                print(f"        UNEXPECTED-FAIL {u}")
+            for s in g.get("stale_known", []):
+                print(f"        STALE-KNOWN (now passing, prune baseline): {s}")
             for f in g["failures"]:
                 print(f"        FAIL {f['name']}\n             {f['msg'][:200]}")
     t = report["total"]

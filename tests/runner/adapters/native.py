@@ -60,9 +60,17 @@ def run(group: dict, timeout: int = 1800, quick: bool = False) -> SuiteResult:
     # group so it never runs concurrently and starves its 30s phase-wait windows.
     # --timeout is a per-test cap: the heavy-but-legit GC/BGC/fuzz group can exceed
     # 600s once serialized (no contention), so budget generously.
-    exclude = "benchmark|stress|soak"
-    rc, out = _run(cwd, ["ctest", "--test-dir", build_dir, "-C", "Debug",
-                         "-LE", exclude, "-j", "8", "--timeout", "1800",
+    #
+    # These four knobs are contract-driven (P1/P2) — they come from the group's
+    # ctest_* fields in suite_contract.yaml so tuning an integration group never
+    # requires touching this adapter; the defaults preserve the historical values.
+    ctest_config = str(group.get("ctest_config", "Debug"))
+    ctest_exclude = str(group.get("ctest_exclude", "benchmark|stress|soak"))
+    ctest_parallel = int(group.get("cmake_parallel", 8))
+    ctest_timeout = int(group.get("ctest_timeout", 3600))
+    rc, out = _run(cwd, ["ctest", "--test-dir", build_dir, "-C", ctest_config,
+                         "-LE", ctest_exclude, "-j", str(ctest_parallel),
+                         "--timeout", str(ctest_timeout),
                          "--output-on-failure"], timeout)
     res.duration_s = time.time() - t0
 

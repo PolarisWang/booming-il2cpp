@@ -34,6 +34,12 @@ layers:
         cmake_root: .
         cmake_build_dir: artifacts/presets/windows-x64-reference
         cmake_preset: windows-x64-reference
+        # ctest driver knobs (contract-driven; native.py reads these via group.get
+        # so tuning does not require editing the adapter):
+        ctest_config: Debug       # -C <config> for multi-config VS generator
+        ctest_exclude: benchmark|stress|soak   # -LE label regex
+        cmake_parallel: 8         # -j independent native test processes
+        ctest_timeout: 3600       # --timeout per-test cap (serialized GC can exceed 1800s)
         # runs the CTest targets under contracts/native + testing/src/native (unit/
         # deterministic only; benchmark/stress/soak excluded by the -LE in native.py).
         # Allow a long budget: ~200 deterministic native tests.
