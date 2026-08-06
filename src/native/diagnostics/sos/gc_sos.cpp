@@ -132,6 +132,10 @@ ULONG64 SosResolvePointer(PCSTR name) noexcept {
 // Standard DbgEng Extension Exports
 // ══════════════════════════════════════════════════════════════════════════
 
+// Forward decl — DebugExtensionInitialize's FAILED-QI path releases acquired
+// references via DebugExtensionUninitialize, which is defined below.
+extern "C" void CALLBACK DebugExtensionUninitialize();
+
 extern "C" HRESULT CALLBACK
 DebugExtensionInitialize(PDEBUG_CLIENT pDebugClient, void*, void*) {
     if (!pDebugClient) return E_FAIL;
@@ -141,20 +145,25 @@ DebugExtensionInitialize(PDEBUG_CLIENT pDebugClient, void*, void*) {
     HRESULT hr = g_sos_client->QueryInterface(
         __uuidof(IDebugControl),
         reinterpret_cast<void**>(&g_sos_control));
-    if (FAILED(hr)) return hr;
+    if (FAILED(hr)) goto fail;
 
     hr = g_sos_client->QueryInterface(
         __uuidof(IDebugSymbols),
         reinterpret_cast<void**>(&g_sos_symbols));
-    if (FAILED(hr)) return hr;
+    if (FAILED(hr)) goto fail;
 
     hr = g_sos_client->QueryInterface(
         __uuidof(IDebugDataSpaces),
         reinterpret_cast<void**>(&g_sos_data));
-    if (FAILED(hr)) return hr;
+    if (FAILED(hr)) goto fail;
 
     SosPrint("CRAG GC SOS extension loaded. Use !gc.help for commands.\n");
     return S_OK;
+
+fail:
+    // Release whatever was AddRef'd so far (an early FAILED QI must not leak).
+    DebugExtensionUninitialize();
+    return hr;
 }
 
 extern "C" void CALLBACK

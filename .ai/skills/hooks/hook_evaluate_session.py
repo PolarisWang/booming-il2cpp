@@ -59,7 +59,11 @@ def _derive_repo_root() -> Path | None:
 
 
 def resolve_repo_root() -> Path | None:
-    """"""  # noqa: D204 — A1: no git fork on the hot path; cached at module scope.
+    """Resolve the repository root once, caching it at module scope.
+
+    Uses _derive_repo_root() (git rev-parse) on first call and reuses the result
+    afterwards, so the git subprocess is never spawned on the per-record hot path.
+    """
     global _REPO_ROOT
     if _REPO_ROOT is None:
         _REPO_ROOT = _derive_repo_root()

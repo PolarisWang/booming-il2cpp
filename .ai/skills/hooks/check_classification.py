@@ -21,15 +21,20 @@ def _get_repo_root() -> Path | None:
     global _RESOLVED_REPO_ROOT
     if _RESOLVED_REPO_ROOT is not None:
         return _RESOLVED_REPO_ROOT
-    # A1: derive from script location first — no git subprocess fork on the hot path.
-    # This file lives at <repo>/.ai/skills/hooks/... (4 levels below repo root).
-    p = Path(__file__).resolve()
-    for _ in range(4):
-        p = p.parent
+    # Derive from script location first — no git subprocess fork on the hot path.
+    # Walk up from the script's directory until we find a repo marker (.git/.gitignore),
+    # without assuming a specific nesting depth (works however the script is deployed,
+    # e.g. .ai/skills/hooks/ vs a vendored/ symlinked copy).
+    p = Path(__file__).resolve().parent
+    while True:
         if (p / ".git").exists() or (p / ".gitignore").exists():
             _RESOLVED_REPO_ROOT = p
             return p
-    # R9: fallback — try multiple strategies only if hooks aren't under the repo tree
+        parent = p.parent
+        if parent == p:  # reached filesystem root without finding a repo marker
+            break
+        p = parent
+    # R9: fallback — git rev-parse when the script isn't under a repo tree.
     strategies = [Path(__file__).resolve().parent, Path.cwd()]
     for d in strategies:
         try:

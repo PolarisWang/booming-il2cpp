@@ -481,9 +481,10 @@ TEST_F(JitBench, Dp1a_TransferCost) {
         if (it != side_map.end()) {
             auto state = dummy_state.load(std::memory_order_acquire);
             if (state == 2) {
-                // Simulated atomic transfer on a dummy local (not consuming real jit)
-                std::atomic<void*> tmp{reinterpret_cast<void*>(0xDEAD)};
-                tmp.exchange(nullptr, std::memory_order_acquire);
+                // NOTE: no dummy atomic ops here — a simulated exchange in the measured
+                // window would add cross-platform atomic overhead to Dp1a_TransferCost
+                // and pollute the result. The transfer is represented by the cache
+                // update + side_map mutation below.
                 entry.direct_ptr = jit->code;
                 side_map.erase(it);
                 side_map[&entry] = &entry;
