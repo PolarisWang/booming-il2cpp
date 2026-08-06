@@ -13,3 +13,4 @@ include("${CMAKE_CURRENT_LIST_DIR}/../../../cmake/chaos_native_test.cmake")
 
 # ── Migrated native subdomains (from testing/src/native) ──
 add_subdirectory(support)
+add_subdirectory(abi)
