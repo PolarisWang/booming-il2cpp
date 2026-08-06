@@ -575,3 +575,19 @@ tmp_fact.json
 tmp_fix*.js
 _tmp_*.py
 tests/runner/test-report.json
+
+# ── Root-level build/runtime artifacts (not source; stop committing these) ──
+build/
+results/
+optimization-campaign/
+il2cpp_dist/logs/
+tmp/
+--probe-mode
+pipeline.log
+pipeline_full_run.log
+ci-small-results-*.log
+benchmark-full-report.json
+benchmark-scan-report.json
+build_log.txt
+test_all_err.txt
+test_all_out.txt
