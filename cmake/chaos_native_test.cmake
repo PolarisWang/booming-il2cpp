@@ -33,6 +33,13 @@ set(CHAOS_RUNTIME_LIBS
     chaos_codegen
     chaos_debugger)
 
+# INTERFACE aggregate so test CMakeLists never list individual lib targets.
+# Tries the real/imported target; if absent (e.g. some configs) it's a no-op list.
+if(NOT TARGET chaos_test_libs_v0)
+    add_library(chaos_test_libs_v0 INTERFACE)
+endif()
+target_link_libraries(chaos_test_libs_v0 INTERFACE ${CHAOS_RUNTIME_LIBS})
+
 # ── Unified include set (single source; mirrors the old per-tree CHAOS_INCLUDE_DIRS) ──
 set(CHAOS_NATIVE_INCLUDE_DIRS
     "${CHAOS_CMAKE_ROOT}/src/native"
@@ -98,7 +105,7 @@ function(chaos_native_add_test name)
 
     set(_libs ${ARG_LIBS})
     if(NOT _libs)
-        set(_libs ${CHAOS_RUNTIME_LIBS})
+        set(_libs chaos_test_libs_v0)
     endif()
     if(NOT ARG_WITHOUT_GTEST)
         set(_libs gtest_main ${_libs})
@@ -135,4 +142,32 @@ function(chaos_native_add_test name)
     if(ARG_LABELS)
         set_tests_properties(${name} PROPERTIES LABELS "${ARG_LABELS}")
     endif()
+endfunction()
+
+# ── Auto-discovery helper ──
+#   chaos_native_glob_add_tests(TARGET_PREFIX GLOB_PATTERN
+#                               [EXCLUDE a.cpp b.cpp] [EXTRA_NAME_WE ...])
+#
+# file(GLOB)s sources matching GLOB_PATTERN (CONFIGURE_DEPENDS) and creates one
+# standard chaos_native_add_test per file:  <prefix>_<name_we> from <name_we>.cpp.
+# Sources listed under EXCLUDE (multi-file, GLOB-relative to the dir) are skipped so
+# callers can keep special targets (custom CXX_STANDARD / extra sources) explicit.
+# Returns the created target names in a caller variable `CHACREATED`.
+function(chaos_native_glob_add_tests prefix pattern)
+    cmake_parse_arguments(A "" "" "EXCLUDE" "" ${ARGN})
+    file(GLOB_RECURSE _srcs CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${pattern}")
+    foreach(_src IN LISTS _srcs)
+        get_filename_component(_name_we ${_src} NAME_WE)
+        set(_skip FALSE)
+        foreach(_ex IN LISTS A_EXCLUDE)
+            get_filename_component(_ex_we ${_ex} NAME_WE)
+            if(_name_we STREQUAL _ex_we)
+                set(_skip TRUE)
+                break()
+            endif()
+        endforeach()
+        if(NOT _skip)
+            chaos_native_add_test(${prefix}_${_name_we} ${_src})
+        endif()
+    endforeach()
 endfunction()
