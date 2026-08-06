@@ -175,3 +175,15 @@ function(chaos_native_glob_add_tests prefix pattern)
         endif()
     endforeach()
 endfunction()
+
+# ── Compile-only ABI/build smoke helper ──
+#   chaos_compile_only_smoke(name source [include_dir ...])
+#
+# Builds header/ABI contract checkers as OBJECT libraries (no link, no CTest) —
+# the pattern used by tests/contracts/native/{abi,engine-binding,bridge}. Removes
+# the duplicated REPO_ROOT / ARTIFACT_ROOT / cxx_std_17 / include-dir boilerplate.
+function(chaos_compile_only_smoke name source)
+    add_library(${name} OBJECT ${source})
+    target_compile_features(${name} PRIVATE cxx_std_17)
+    target_include_directories(${name} PRIVATE ${ARGN})
+endfunction()
