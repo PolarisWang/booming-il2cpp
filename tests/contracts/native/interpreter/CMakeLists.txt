@@ -27,5 +27,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/interpreter_profile_test.cpp")
 endif()
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tiering_benchmark.cpp")
-    chaos_native_add_test(chaos_tiering_benchmark tiering_benchmark.cpp)
+    chaos_native_add_test(chaos_tiering_benchmark tiering_benchmark.cpp
+    LABELS "benchmark")
 endif()

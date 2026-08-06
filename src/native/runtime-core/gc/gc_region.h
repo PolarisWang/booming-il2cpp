@@ -165,7 +165,9 @@ inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
         // Account into the global GC stats (reported by GcGetSnapshot/GcMemoryInfo).
         // The slow path and old-gen already record; the TLAB bump-pointer fast path
         // was missing this, so alloc_total/alloc_bytes were under-counted for the
-        // common allocation traffic.
+        // common allocation traffic. Cost on the hot path is acceptable: GcRecordAlloc
+        // is inline, noexcept, lock-free (two relaxed atomic fetch_add), and does not
+        // recurse into the allocator, so it composes safely with the Safepoint check.
         GcRecordAlloc(size, false);
         if (threading::SafepointRequested()) [[unlikely]] {
             // SPB: thread is at a safe point (object initialized).  Ack the
@@ -241,7 +243,9 @@ inline void* NurseryAllocateAtomic(CHAOS_IL2CPP_SIZE size) noexcept {
         // Account into the global GC stats (reported by GcGetSnapshot/GcMemoryInfo).
         // The slow path and old-gen already record; the TLAB bump-pointer fast path
         // was missing this, so alloc_total/alloc_bytes were under-counted for the
-        // common allocation traffic.
+        // common allocation traffic. Cost on the hot path is acceptable: GcRecordAlloc
+        // is inline, noexcept, lock-free (two relaxed atomic fetch_add), and does not
+        // recurse into the allocator, so it composes safely with the Safepoint check.
         GcRecordAlloc(size, false);
         if (threading::SafepointRequested()) [[unlikely]] {
             // SPB: thread is at a safe point (object initialized).  Ack the

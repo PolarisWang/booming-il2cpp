@@ -359,38 +359,46 @@ TypeInfoHot g_char_ti = [] {
 }();
 }  // namespace
 
-CHAOS_IL2CPP_INTPTR make_boxed_tochar_object(CHAOS_IL2CPP_INTPTR payload) {
-    struct Box { uintptr_t type_info; CHAOS_IL2CPP_INTPTR value; };
-    static Box box{ reinterpret_cast<uintptr_t>(&g_char_ti), 0 };
-    box.value = payload;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&box);
+/// Build a boxed char object into @a storage (a per-call Box on the caller's
+/// stack), returning a pointer that lives as long as @a storage. Avoids a shared
+/// static buffer (non-thread-safe, sequential writes) so each test gets its own
+/// isolated boxed object.
+struct CharBox { uintptr_t type_info; CHAOS_IL2CPP_INTPTR value; };
+CHAOS_IL2CPP_INTPTR make_boxed_tochar_object(CharBox* storage, CHAOS_IL2CPP_INTPTR payload) {
+    storage->type_info = reinterpret_cast<uintptr_t>(&g_char_ti);
+    storage->value = payload;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
 }
 
 TEST(convert_test, ToChar_Object_Valid) {
-    EXPECT_EQ(chaos_convert_tochar_object(make_boxed_tochar_object(65)),
+    CharBox box{};
+    EXPECT_EQ(chaos_convert_tochar_object(make_boxed_tochar_object(&box, 65)),
               static_cast<CHAOS_IL2CPP_UINT16>('A'));
 }
 
 TEST(convert_test, ToChar_Object_Provider_Valid) {
-    EXPECT_EQ(chaos_convert_tochar_object_provider(make_boxed_tochar_object(65), 0),
+    CharBox box{};
+    EXPECT_EQ(chaos_convert_tochar_object_provider(make_boxed_tochar_object(&box, 65), 0),
               static_cast<CHAOS_IL2CPP_UINT16>('A'));
 }
 
 TEST(convert_test, ToChar_Object_Zero) {
-    EXPECT_EQ(chaos_convert_tochar_object(make_boxed_tochar_object(0)), 0);
+    CharBox box{};
+    EXPECT_EQ(chaos_convert_tochar_object(make_boxed_tochar_object(&box, 0)), 0);
 }
 
-TEST_F(ConvertOverflowTest, ToChar_Object_Overflow_Throws) {
-    // payload 0x10000 > 0xFFFF -> the Char handler masks to 0 (no overflow for a 16-bit
-    // payload slot), or the object path raises via kToCharHandlerIndex. We just assert
-    // it returns without crashing on a valid boxed value-type.
-    auto ptr = make_boxed_tochar_object(0x10000);
+TEST_F(ConvertOverflowTest, ToChar_Object_Overflow_Masks) {
+    // System.Char boxed payload goes through the Char handler which casts to
+    // uint16_t (masks the upper bits) — it does NOT throw for a 16-bit-overflowing
+    // INTPTR payload. Verify the real semantic (0x100000000 -> 0) rather than a
+    // made-up throw expectation.
+    CharBox box{};
+    auto ptr = make_boxed_tochar_object(&box, 0x100000000);  // > 16-bit; masks to 0
+    uint16_t result = 0;
     if (setjmp(s_eh_jmp) == 0) {
-        chaos_convert_tochar_object(ptr);
+        result = chaos_convert_tochar_object(ptr);
     }
-    // no crash is the pass criterion (values > 0xFFFF for a raw INTPTR payload are
-    // masked, not an object-conversion overflow)
-    SUCCEED();
+    EXPECT_EQ(result, 0u);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
