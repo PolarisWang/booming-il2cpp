@@ -65,7 +65,7 @@ CHAOS_IL2CPP_FLOAT64  ChaosMathPow(CHAOS_IL2CPP_FLOAT64 x, CHAOS_IL2CPP_FLOAT64 
 CHAOS_IL2CPP_FLOAT64  ChaosMathSin(CHAOS_IL2CPP_FLOAT64 x) noexcept;
 CHAOS_IL2CPP_FLOAT64  ChaosMathCos(CHAOS_IL2CPP_FLOAT64 x) noexcept;
 CHAOS_IL2CPP_INT64    ChaosMathBigMul(CHAOS_IL2CPP_INT32 a, CHAOS_IL2CPP_INT32 b) noexcept;
-CHAOS_IL2CPP_INT64    ChaosMathSqrt(CHAOS_IL2CPP_INT64 value) noexcept;
+CHAOS_IL2CPP_FLOAT64  ChaosMathSqrt(CHAOS_IL2CPP_FLOAT64 value) noexcept;
 }  // extern "C"
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -321,23 +321,10 @@ TEST(MathStubs, BigMul_Negative) {
 }
 
 TEST(MathStubs, Sqrt_FromDouble) {
-    // ChaosMathSqrt takes INT64 which is a NaN-boxed double.
-    // Pass a double through memcpy to simulate the codegen ABI.
-    double input = 9.0;
-    CHAOS_IL2CPP_INT64 boxed;
-    std::memcpy(&boxed, &input, sizeof(boxed));
-    CHAOS_IL2CPP_INT64 result_raw = ChaosMathSqrt(boxed);
-    double result;
-    std::memcpy(&result, &result_raw, sizeof(result));
-    EXPECT_DOUBLE_EQ(result, 3.0);
+    // Real stub signature is FLOAT64(double), same as Pow/Sin/Cos.
+    EXPECT_DOUBLE_EQ(ChaosMathSqrt(9.0), 3.0);
 }
 
 TEST(MathStubs, Sqrt_FromDoubleZero) {
-    double input = 0.0;
-    CHAOS_IL2CPP_INT64 boxed;
-    std::memcpy(&boxed, &input, sizeof(boxed));
-    CHAOS_IL2CPP_INT64 result_raw = ChaosMathSqrt(boxed);
-    double result;
-    std::memcpy(&result, &result_raw, sizeof(result));
-    EXPECT_DOUBLE_EQ(result, 0.0);
+    EXPECT_DOUBLE_EQ(ChaosMathSqrt(0.0), 0.0);
 }
