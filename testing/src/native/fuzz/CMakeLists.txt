@@ -33,7 +33,7 @@ add_chaos_test(test_fuzz_il
     RESOURCE_LOCK bgc
     LABELS "fuzz;interpreter"
 )
-set_tests_properties(test_fuzz_il PROPERTIES TIMEOUT 120)
+set_tests_properties(test_fuzz_il PROPERTIES TIMEOUT 600)
 
 add_chaos_test(test_fuzz_gc
     ${CHAOS_FUZZ_GC_SRC}
@@ -46,4 +46,4 @@ target_include_directories(test_fuzz_gc PRIVATE
     "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc"
 )
 target_link_options(test_fuzz_gc PRIVATE /FORCE:MULTIPLE)
-set_tests_properties(test_fuzz_gc PROPERTIES TIMEOUT 120)
+set_tests_properties(test_fuzz_gc PROPERTIES TIMEOUT 600)

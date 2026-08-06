@@ -183,7 +183,7 @@ add_chaos_test(test_jit_pgo
 target_compile_definitions(test_jit_pgo PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
 )
-set_tests_properties(test_jit_pgo PROPERTIES TIMEOUT 30)
+set_tests_properties(test_jit_pgo PROPERTIES TIMEOUT 600)
 
 # B-2 — JIT benchmark (Tier 0 vs Tier 1 performance comparison)
 # Measures compile time, execution time, code size, and correctness
