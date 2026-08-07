@@ -64,9 +64,13 @@ tests/unit/runtime-native/
 | 任务 | 状态 | 说明 |
 |------|------|------|
 | L5 全部子域 | ✅ 完成 | support/abi/bootstrap/common/engine-bridge/hot-update/diagnostics/runtime-core/jit/fuzz |
-| L6+L7 | ⛔ 主体待定（需专门会话） | foundation-dll e2e（P1，引擎+29族联合）。✅ 已修 per-dll 驱动链（`d183e8c4c`）：REPO_ROOT 深度 bug + family 脚本误用不存在的 `verification.entry_points.cli`（真实入口 `python -m verification.chunk_pipeline`），`--strict/--skip/--assembly` 映射已验证。**决定性耦合分析**：L6 引擎 + L7 族为**不可分割的整体**——3 个 anchor 不变量：① `_pipeline/` 在 `testing/_pipeline/`（6 文件），被 5 个 verification 文件 import；② `chunk_pipeline._TESTING_DIR=_HERE.parent.parent` 必须 = `testing/`（含 `_pipeline` 与族假设）；③ `_FOUNDATION_DLL=_HERE.parent` 必须含 `config/`+28 `System.*` 族。移动 `verification/` 单独到 `tests/e2e/verification/` 深度守恒（`_REPO_ROOT` 仍对）但 `_TESTING_DIR→tests/`（断 `_pipeline`）、`_FOUNDATION_DLL→tests/e2e/`（无族/config）。**故引擎+族+`_pipeline` 必须同步迁移** + 用户硬约束「迁后必须实际跑通一个 dll 生成+验证（ATG→dll→fact）」（需重型 native 构建）。高度 code-coupled + 重型验证 → 需 human-supervised 专门会话，loop 内勿盲 mv。 |
-| L10 | 并入 L11 | gate 是冗余 wrapper，platform-hosts 已就位 |
-| L11 | 待定 | 删 testing/ 根（阻塞于 L6+L7 迁出；L5 已全部迁出） |
+| L9 (IL fixtures) | ✅ 完成 | commit `318125649` 清理 testing/data/il 已弃原点（永久家 tests/fixtures/il/ 已在 e3f20127a） |
+| L6+L7 | ⛔ 主体待定（需专门会话） | foundation-dll e2e（P1，引擎+29族联合）。✅ 已修 per-dll 驱动链（`d183e8c4c`）。**决定性耦合分析**：L6 引擎 + L7 族为**不可分割整体**（`_pipeline`@`testing/_pipeline`、`_TESTING_DIR`=testing/、`_FOUNDATION_DLL` 含 config/+28 族，3 anchor 不变量）。实测：smoke run 确实触达重型 native AOT 构建（System.Private.CoreLib，8214 dispatch），迁后须重跑 dll 需数十 min/族。→ 需 human-supervised 专门会话，loop 勿盲 mv。 |
+| L10 | 并入 L11 | gate 是冗余 wrapper，platform-hosts 已就位；CMake-coupled，随 L11 重连 |
+| L11 | ⏸ 阻塞 | 删 testing/ 根（现仅 L6+L7 迁出后可行；L5+L9 已迁出） |
+
+> **Loop 停止建议**：L5/L8/L9(+IL) 及驱动链修复已全部完成；剩余 L6/L7（不可分割+重型 dll 验证）与 L10/L11（CMake 联动）均需 human-supervised 专门会话，连续多轮无进展，符合「连续 2 轮无进展→终止需人工介入」路由。建议停止自动 loop，转交专门会话。
+
 
 ## 未提交的工作树残留（非我的改动）
 
