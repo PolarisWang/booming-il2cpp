@@ -118,7 +118,7 @@ SDK `include/` 在 `chaos::runtime` 的 INTERFACE include directories 中，消�
 
 ## Foundation-DLL Pipeline 集成
 
-验证管线（`testing/foundation-dll/verification/`）已使用 SDK 模式：
+验证管线（`tests/e2e/verification/`）已使用 SDK 模式：
 
 1. `convert-to-cpp` 调用时传入 `--sdk-out <codegen_dir>` 输出 SDK
 2. `find_package(chaos)` 在 native/CMakeLists.txt 中自动生成

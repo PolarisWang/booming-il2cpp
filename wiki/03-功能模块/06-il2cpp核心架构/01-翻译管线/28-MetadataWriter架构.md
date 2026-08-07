@@ -211,7 +211,7 @@ sealed record SupplementalMetadataTemplateArtifact {
 1. 检查覆盖率报告 artifact 中的各模块行覆盖明细
 2. 如果新增了 MetadataWriterStage.cs 的逻辑但未加对应测试，补充测试
 3. 如果新增代码在被排除的目录中（如 `**/obj/**`），确认排除配置正确
-4. 阈值可在 `testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/coverlet.runsettings` 中调整
+4. 阈值可在 `tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/coverlet.runsettings` 中调整
 
 ---
 

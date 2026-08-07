@@ -105,7 +105,7 @@ graph TD
 │    职责: 提供 linker 所需的公共 stub 符号                    │
 ├────────────────────────────────────────────────────────────┤
 │ 5. Python Pipeline                                          │
-│    路径: testing/foundation-dll/verification/               │
+│    路径: tests/e2e/verification/               │
 │    核心文件:                                                 │
 │      stages/build.py          — 编排 codegen + TPG + cmake  │
 │      stages/fact_chunk.py     — 事实验证阶段                 │
@@ -267,7 +267,7 @@ C# Codegen 工具（`ConvertToCppHandler.cs`）不再生成 `CMakeLists.txt`。�
 
 HotUpdate patch data 生成逻辑已从 `pipeline_native_aot_runner.py` 提取到独立的 `hotupdate_build.py` 模块：
 
-- **新模块**：`testing/foundation-dll/verification/stages/hotupdate_build.py`
+- **新模块**：`tests/e2e/verification/stages/hotupdate_build.py`
   - `generate_patch_data(family_slug, verification)` — 完整 patch data 生成管线
   - `write_sentinel_patch_data(family_dir)` — sentinel 回退（空 patch data）
 - **Stage 编排**：`hotupdate.py` 保持 Stage 9-12（hotupdate_fact, hotupdate_aot_bench, hotupdate_jit_fact, hotupdate_jit_bench）

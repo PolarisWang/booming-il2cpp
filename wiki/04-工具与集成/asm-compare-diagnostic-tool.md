@@ -407,19 +407,19 @@ chaos-il2cpp asm-compare <dll> \
 ```bash
 # 单方法
 chaos-il2cpp asm-compare \
-  testing/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll \
+  tests/e2e/translation/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll \
   --method ConvertCharSubjects::Subject_0
 
 # 批量模式（用于 foundation-dll 管线集成）
 chaos-il2cpp asm-compare \
-  testing/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll \
+  tests/e2e/translation/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll \
   --methods Subject_0,Subject_1,Subject_2 \
   --method-subject-ids "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean),System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32),System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)" \
   --format json \
   --sections metrics,analysis
   
 # 通过 Python 验证管线自动调用（batch + cache）
-# 新管线: testing/foundation-dll/verification/orchestration/engine.py
+# 新管线: tests/e2e/verification/orchestration/engine.py
 # 运行方式: python -m verification.orchestration.main --family convert-char --skip hotupdate ...
 ```
 
@@ -429,7 +429,7 @@ chaos-il2cpp asm-compare \
 
 ```bash
 chaos-il2cpp asm-compare \
-  testing/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll \
+  tests/e2e/translation/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll \
   --method ConvertCharSubjects::Run \
   --sections header,metrics,analysis
 ```

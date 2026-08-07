@@ -47,19 +47,19 @@ chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path> [--aot-cor
 ```bash
 # 1. 生成入口点 DLL（由新管线 verification pipeline 自动完成）
 #    旧: python build/toolchains/run/testing/foundation_dll/family_entrypoint_generator.py ...
-#    新: 由 testing/foundation-dll/verification/stages/codegen.py 自动编排
+#    新: 由 tests/e2e/verification/stages/codegen.py 自动编排
 #    手动触发:
 python -m verification.entry_points.cli <family-slug> --skip <stages>
 
 # 2. 生成 .patchdata
 chaos-il2cpp emit-patch-data \
-    testing/foundation-dll/System.Private.CoreLib/convert-char/il2cpp_dist/entrypoint-patch/build-output/ConvertCharPatchEntry.dll \
-    testing/foundation-dll/System.Private.CoreLib/convert-char/il2cpp_dist/patch/patchdata/convert-char.patchdata \
-    --aot-core-ir testing/foundation-dll/System.Private.CoreLib/convert-char/il2cpp_dist/entrypoint-patch/closure-sp/analysis/aot-core-ir.json
+    tests/e2e/translation/System.Private.CoreLib/convert-char/il2cpp_dist/entrypoint-patch/build-output/ConvertCharPatchEntry.dll \
+    tests/e2e/translation/System.Private.CoreLib/convert-char/il2cpp_dist/patch/patchdata/convert-char.patchdata \
+    --aot-core-ir tests/e2e/translation/System.Private.CoreLib/convert-char/il2cpp_dist/entrypoint-patch/closure-sp/analysis/aot-core-ir.json
 
 # 3. 验证生成的 .patchdata
 chaos-il2cpp emit-patch-data dump \
-    testing/foundation-dll/System.Private.CoreLib/convert-char/il2cpp_dist/patch/patchdata/convert-char.patchdata
+    tests/e2e/translation/System.Private.CoreLib/convert-char/il2cpp_dist/patch/patchdata/convert-char.patchdata
 ```
 
 ---

@@ -32,7 +32,7 @@ Profile Stage 需要 `cmake --preset profile` 构建的 `entry.exe`：
 
 ```bash
 # 在 chunk native 目录中
-cd testing/foundation-dll/System.Private.CoreLib/chunks/{slug}/native
+cd tests/e2e/translation/System.Private.CoreLib/chunks/{slug}/native
 cmake --preset profile -B build
 cmake --build build --config RelWithDebInfo
 ```
@@ -52,7 +52,7 @@ Profile 构建自动启用：
 
 ```bash
 # 单 chunk profile
-cd testing/foundation-dll
+cd tests/e2e/translation
 python -m verification.chunk_pipeline \
   --assembly System.Private.CoreLib \
   --chunk numerics \
@@ -212,7 +212,7 @@ python -m verification.analysis.regression_report System.Private.CoreLib --slug 
 
 ```bash
 # 运行 managed benchmark（自动采集 gcInfo）
-cd testing/foundation-dll
+cd tests/e2e/translation
 python -m verification.chunk_pipeline \
   --assembly System.Private.CoreLib \
   --chunk buffers \

@@ -40,7 +40,7 @@ pipeline:
 
 ## 配置参考
 
-`pipeline-config.yaml` 位于 `testing/foundation-dll/config/`：
+`pipeline-config.yaml` 位于 `tests/e2e/translation/config/`：
 
 ```yaml
 pipeline:

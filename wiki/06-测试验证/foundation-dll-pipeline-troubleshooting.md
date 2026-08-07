@@ -7,7 +7,7 @@
 **症状：** `StageResult.status == "failed"`，摘要包含 "Contract not found" 或 "No methodSubjectIds"
 
 **常见原因：**
-1. `contract.json` 不存在 — 检查 `testing/foundation-dll/<Assembly>/<slug>/contract.json`
+1. `contract.json` 不存在 — 检查 `tests/e2e/translation/<Assembly>/<slug>/contract.json`
 2. `contract.json` JSON 格式错误 — 用 `python -m json.tool contract.json` 验证
 3. `methodSubjectIds` 为空数组 — 至少需要 1 个 method subject
 4. `methodSubjectIds` key 缺失 — schema 要求必须包含该字段

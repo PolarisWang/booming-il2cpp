@@ -373,15 +373,15 @@ Annotations should prefer enum-backed attributes. String should be kept only for
 
 Per family, fixed directories are:
 
-- `testing/foundation-dll/<assembly>/<family>/handwritten/` — **READ ONLY** handwrite partial class `.cs` 源（管线只读不写）
-- `testing/foundation-dll/<assembly>/<family>/src/` — handwrite managed source（legacy，已弃用，新 family 用 handwritten/）
-- `testing/foundation-dll/<assembly>/<family>/src/patch/` — handwrite patch source
-- `testing/foundation-dll/<assembly>/<family>/managed_test/tests/` — managed xunit tests
-- `testing/foundation-dll/<assembly>/<family>/managed_test/benchmarks/` — managed benchmarks
-- `testing/foundation-dll/<assembly>/<family>/il2cpp_dist/` — generated il2cpp output (not committed)
-- `testing/foundation-dll/<assembly>/<family>/native_test/benchmark/` — native benchmark entry (committed)
-- `testing/foundation-dll/<assembly>/<family>/native_test/hotupdate/` — native hotupdate skeleton (committed)
-- `testing/foundation-dll/<assembly>/<family>/reports/` — test reports (not committed)
+- `tests/e2e/translation/<assembly>/<family>/handwritten/` — **READ ONLY** handwrite partial class `.cs` 源（管线只读不写）
+- `tests/e2e/translation/<assembly>/<family>/src/` — handwrite managed source（legacy，已弃用，新 family 用 handwritten/）
+- `tests/e2e/translation/<assembly>/<family>/src/patch/` — handwrite patch source
+- `tests/e2e/translation/<assembly>/<family>/managed_test/tests/` — managed xunit tests
+- `tests/e2e/translation/<assembly>/<family>/managed_test/benchmarks/` — managed benchmarks
+- `tests/e2e/translation/<assembly>/<family>/il2cpp_dist/` — generated il2cpp output (not committed)
+- `tests/e2e/translation/<assembly>/<family>/native_test/benchmark/` — native benchmark entry (committed)
+- `tests/e2e/translation/<assembly>/<family>/native_test/hotupdate/` — native hotupdate skeleton (committed)
+- `tests/e2e/translation/<assembly>/<family>/reports/` — test reports (not committed)
 
 **`handwritten/` 保护规则**：
 - 管线只从该目录读 `.cs` 文件，从不写入

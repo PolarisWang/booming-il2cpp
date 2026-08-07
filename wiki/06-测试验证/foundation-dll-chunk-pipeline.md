@@ -7,7 +7,7 @@
 ## 目录结构
 
 ```
-testing/foundation-dll/
+tests/e2e/translation/
 ├── System.Private.CoreLib/
 │   ├── _dll/
 │   │   ├── dll-method-manifest.json   ← DLL 全部方法清单
@@ -42,7 +42,7 @@ testing/foundation-dll/
 ## 使用方式
 
 ```bash
-cd testing/foundation-dll
+cd tests/e2e/translation
 
 # 对单个 chunk 运行 coverage-audit
 python -m verification.chunk_pipeline --chunk numerics --stages coverage-audit

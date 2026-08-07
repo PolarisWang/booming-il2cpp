@@ -262,7 +262,7 @@ CallVirt 进入
 
 ```bash
 # 运行全部回归测试
-cd testing/foundation-dll/.../native/build/Release
+cd tests/e2e/translation/.../native/build/Release
 ./entry.exe                    # fact: Passed 16/16
 ./entry.exe --stress 4 5000   # stress 4 threads
 ./entry.exe --stress 8 5000   # stress 8 threads

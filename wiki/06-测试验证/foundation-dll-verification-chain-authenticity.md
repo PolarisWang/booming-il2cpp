@@ -19,7 +19,7 @@ C# Subject → dotnet build → IL DLL
 
 `Chaos.IL2CPP.Driver` 执行完整 il2cpp 管线：IL 降低 → AotCoreIR → Scriban C++ 模板发射。与生产级 il2cpp 使用相同管道。**无桩无模拟。**
 
-生成的文件如 `testing/foundation-dll/System.Private.CoreLib/garbage-collection/codegen/generated/generated/native-aot.generated.cpp`，AOT 模式下 `ChaosJitRegisterAll()` 为空 no-op：
+生成的文件如 `tests/e2e/translation/System.Private.CoreLib/garbage-collection/codegen/generated/generated/native-aot.generated.cpp`，AOT 模式下 `ChaosJitRegisterAll()` 为空 no-op：
 
 ```cpp
 extern "C" void ChaosJitRegisterAll() {}
@@ -82,7 +82,7 @@ entry-aot.exe (AOT 构建)
   → 恢复 entry.exe = entry-aot.exe
 ```
 
-新管线 `testing/foundation-dll/verification/stages/codegen.py`（`run_jit_codegen`）：
+新管线 `tests/e2e/verification/stages/codegen.py`（`run_jit_codegen`）：
 
 ```python
 build_ok = _build_entry_exe(family_slug, ..., output_name="entry-jit.exe", is_jit=True)
@@ -172,12 +172,12 @@ JIT 构建额外包含：
 
 | 职责 | 路径 |
 |------|------|
-| 统一 CLI 入口 | `testing/foundation-dll/verification/__main__.py`（`python -m verification [flags]`） |
-| 单 family 入口 | `testing/foundation-dll/verification/entry_points/cli.py` |
-| Batch 入口 | `testing/foundation-dll/verification/entry_points/batch.py` |
-| CI smoke 入口 | `testing/foundation-dll/verification/entry_points/ci_smoke.py` |
-| 验证编排 | `testing/foundation-dll/verification/orchestration/engine.py` |
-| Native AOT runner | `testing/foundation-dll/verification/stages/pipeline_native_aot_runner.py` |
+| 统一 CLI 入口 | `tests/e2e/verification/__main__.py`（`python -m verification [flags]`） |
+| 单 family 入口 | `tests/e2e/verification/entry_points/cli.py` |
+| Batch 入口 | `tests/e2e/verification/entry_points/batch.py` |
+| CI smoke 入口 | `tests/e2e/verification/entry_points/ci_smoke.py` |
+| 验证编排 | `tests/e2e/verification/orchestration/engine.py` |
+| Native AOT runner | `tests/e2e/verification/stages/pipeline_native_aot_runner.py` |
 | Codegen JIT 发射 | `src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs` |
 | JitEntry 注册表发射 | `src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.ModuleRegistration.cs` |
 | JIT 注册头文件 | `src/native/runtime-core/jit_registration.h` |
@@ -188,7 +188,7 @@ JIT 构建额外包含：
 ### 统一入口用法
 
 ```bash
-cd testing/foundation-dll
+cd tests/e2e/translation
 python -m verification --slug convert-char          # 单 family（默认）
 python -m verification --batch                      # 全量 batch
 python -m verification --ci                         # CI quick（4 families × 6 stage）

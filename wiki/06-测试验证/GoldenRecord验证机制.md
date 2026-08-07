@@ -109,6 +109,6 @@ preflight → codegen → jit_codegen → managed_fact → managed_record → cr
 
 | 文件 | 说明 |
 |------|------|
-| `testing/foundation-dll/verification/stages/managed_subject_record.py` | managed_record 阶段（新建） |
-| `testing/foundation-dll/verification/stages/fact.py` | cross_verify 增强（修改） |
-| `testing/foundation-dll/verification/orchestration/engine.py` | 管线集成（修改） |
+| `tests/e2e/verification/stages/managed_subject_record.py` | managed_record 阶段（新建） |
+| `tests/e2e/verification/stages/fact.py` | cross_verify 增强（修改） |
+| `tests/e2e/verification/orchestration/engine.py` | 管线集成（修改） |

@@ -46,7 +46,7 @@
 
 1. `cmake --build build/native --target chaos_runtime_core --config RelWithDebInfo` — 编译通过
 2. `cmake --build build/native --target chaos_interpreter --config RelWithDebInfo` — 编译通过
-3. `testing/foundation-dll` 全家桶验证（需重新生成 codegen DLL 后运行）
+3. `tests/e2e/translation` 全家桶验证（需重新生成 codegen DLL 后运行）
 
 ## 经验教训
 

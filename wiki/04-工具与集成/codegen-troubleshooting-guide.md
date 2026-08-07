@@ -282,10 +282,10 @@ $env:SNAPSHOT_UPDATE=1
 dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
 
 # 验证 foundation-dll family
-cd testing/foundation-dll && python -m _core.cli verify-family System.Private.CoreLib/garbage-collection
+cd tests/e2e/translation && python -m _core.cli verify-family System.Private.CoreLib/garbage-collection
 
 # 查看 codegen metrics
-cat testing/foundation-dll/System.Private.CoreLib/garbage-collection/codegen/native-aot.codegen-metrics.json
+cat tests/e2e/translation/System.Private.CoreLib/garbage-collection/codegen/native-aot.codegen-metrics.json
 ```
 
 ---
