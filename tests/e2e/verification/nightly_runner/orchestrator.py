@@ -19,7 +19,15 @@ from typing import Any
 # Ensure testing/ and testing/foundation-dll/ are on sys.path so
 # _pipeline.tool_helpers and verification.* imports resolve correctly.
 _HERE = Path(__file__).resolve().parent                           # verification/nightly_runner/
-from verification._path import foundation_root
+import sys as _b_sys
+from pathlib import Path as _b_Path
+for _b_d in _b_Path(__file__).resolve().parents:
+    if (_b_d / "_path.py").exists():
+        if str(_b_d) not in _b_sys.path:
+            _b_sys.path.insert(0, str(_b_d))
+        break
+from _path import foundation_root
+
 _FOUNDATION_DLL = foundation_root()# testing/foundation-dll/
 _TESTING_DIR = _FOUNDATION_DLL.parent                              # testing/
 _REPO_ROOT = _TESTING_DIR.parent                                   # repo root

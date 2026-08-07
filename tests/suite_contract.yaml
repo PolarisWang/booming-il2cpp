@@ -44,7 +44,7 @@ layers:
         # deterministic only; benchmark/stress/soak excluded by the -LE in native.py).
         # Allow a long budget: ~200 deterministic native tests.
         timeout: 3600
-    # NOTE: testing/project-test/{runtime-self-test,generics-delegates,virtual-dispatch}
+    # NOTE: tests/e2e/trust/project-test/{runtime-self-test,generics-delegates,virtual-dispatch}
     # is a manual-orchestration integration tier (CMake + codegen + hot-update) with no
     # standalone entry script; it is driven by CI / CMake, not added as a driver group yet.
     # Fold into the driver in Phase 3 once a stable run entry exists.
@@ -53,13 +53,13 @@ layers:
     adapter: python
     groups:
       - name: foundation-dll-smoke
-        script: testing/foundation-dll/verification/ci_smoke.py
+        script: tests/e2e/verification/ci_smoke.py
         requires_python: "3.10+"
         # smoke drives the full System.Private.CoreLib chunk pipeline; allow a
         # long budget (cold build+fact+coverage can exceed the 30min default).
         timeout: 7200
       - name: foundation-dll-chunk
-        script: testing/foundation-dll/verification/chunk_pipeline.py
+        script: tests/e2e/verification/chunk_pipeline.py
         args: [--smoke]
         slow: true
         timeout: 5400

@@ -30,8 +30,15 @@ fi
 FAMILY_SLUG="$1"
 shift
 
-PYTHONPATH="$REPO_ROOT/testing/foundation-dll:$REPO_ROOT/testing/foundation-dll/verification:$REPO_ROOT/build/toolchains/run"
+PYTHONPATH="$REPO_ROOT/tests/e2e:$REPO_ROOT/tests/e2e/verification:$REPO_ROOT/build/toolchains/run"
 export PYTHONPATH
+
+# The verification engine now lives at tests/e2e/verification (decoupled from the
+# family tree). Point it at where the 28-family tree + config/pipeline-config.yaml
+# (CHAOS_FOUNDATION_DLL) and the shared _pipeline support package (CHAOS_TESTING_DIR)
+# currently live.
+export CHAOS_FOUNDATION_DLL="$REPO_ROOT/testing/foundation-dll"
+export CHAOS_TESTING_DIR="$REPO_ROOT/testing"
 
 MODE_ARGS=()
 ASSEMBLY_ARGS=()

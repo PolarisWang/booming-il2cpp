@@ -22,7 +22,15 @@ import sys
 import time
 from pathlib import Path
 
-from verification._path import foundation_root
+import sys as _b_sys
+from pathlib import Path as _b_Path
+for _b_d in _b_Path(__file__).resolve().parents:
+    if (_b_d / "_path.py").exists():
+        if str(_b_d) not in _b_sys.path:
+            _b_sys.path.insert(0, str(_b_d))
+        break
+from _path import foundation_root
+
 
 
 def main() -> int:

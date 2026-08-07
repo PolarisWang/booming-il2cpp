@@ -33,7 +33,14 @@ from pathlib import Path
 # sys.path. Roots are resolved through the central _path resolver so the engine is
 # location-independent (env overrides CHAOS_FOUNDATION_DLL / CHAOS_TESTING_DIR; else
 # marker-walk / parent inference).
-from verification._path import foundation_root, testing_tree_root
+import sys as _b_sys
+from pathlib import Path as _b_Path
+for _b_d in _b_Path(__file__).resolve().parents:
+    if (_b_d / "_path.py").exists():
+        if str(_b_d) not in _b_sys.path:
+            _b_sys.path.insert(0, str(_b_d))
+        break
+from _path import foundation_root, testing_tree_root
 
 _FOUNDATION_DLL = foundation_root()
 _TESTING_DIR = testing_tree_root()

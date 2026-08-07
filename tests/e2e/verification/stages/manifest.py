@@ -19,7 +19,15 @@ from pathlib import Path
 # ── Paths ──
 _SCRIPT_DIR = Path(__file__).resolve().parent
 _VERIFICATION_ROOT = _SCRIPT_DIR.parent  # verification/
-from verification._path import foundation_root
+import sys as _b_sys
+from pathlib import Path as _b_Path
+for _b_d in _b_Path(__file__).resolve().parents:
+    if (_b_d / "_path.py").exists():
+        if str(_b_d) not in _b_sys.path:
+            _b_sys.path.insert(0, str(_b_d))
+        break
+from _path import foundation_root
+
 _FOUNDATION_DLL = foundation_root()  # testing/foundation-dll/
 _TOOLS_DIR = Path(__file__).resolve().parents[4] / "src" / "tools"
 _TOOL_PROJECT = _TOOLS_DIR / "Chaos.IL2CPP.Tools.DllManifest" / "Chaos.IL2CPP.Tools.DllManifest.csproj"
