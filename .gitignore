@@ -540,3 +540,6 @@ tests/e2e/translation/**/cmake_install.cmake
 tests/e2e/translation/**/*.o
 tests/e2e/translation/**/*.lib
 tests/e2e/translation/**/*.a
+
+# Coverage reports (generated outputs — not source)
+tests/**/coverage.cobertura.xml
