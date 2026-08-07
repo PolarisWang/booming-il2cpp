@@ -38,7 +38,7 @@ export PYTHONPATH
 # tests/e2e/translation (point CHAOS_FOUNDATION_DLL there). CHAOS_TESTING_DIR is
 # where the shared _pipeline support package lives.
 export CHAOS_FOUNDATION_DLL="$REPO_ROOT/tests/e2e/translation"
-export CHAOS_TESTING_DIR="$REPO_ROOT/testing"
+export CHAOS_TESTING_DIR="$REPO_ROOT/tests/e2e/verification"
 
 MODE_ARGS=()
 ASSEMBLY_ARGS=()
