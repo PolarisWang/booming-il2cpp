@@ -65,12 +65,13 @@ tests/unit/runtime-native/
 |------|------|------|
 | L5 全部子域 | ✅ 完成 | support/abi/bootstrap/common/engine-bridge/hot-update/diagnostics/runtime-core/jit/fuzz |
 | L9 (IL fixtures) | ✅ 完成 | commit `318125649` 清理 testing/data/il 已弃原点（永久家 tests/fixtures/il/ 已在 e3f20127a） |
-| L6 (引擎) | ✅ 完成 | foundation-dll verification 引擎已迁 `tests/e2e/verification/`（`323e8c279`，72 文件）。中心 resolver + 驱动链 + suite_contract 更新。e2e 实跑 buffers chunk build+fact+coverage 3/4（55s）。33 引擎单测移后 PASS。 |
-| L7 (29 族) | ✅ 完成 | 族根已迁 `tests/e2e/translation/`（`a78df896d`，1351 文件）：29 System.* 族 + config/pipeline-config.yaml + _contracts/ledger 全部 git mv。引擎经 `CHAOS_FOUNDATION_DLL→tests/e2e/translation` 指向（family 脚本已改）。e2e 验证：移动后 chain 对 System.Private.CoreLib buffers chunk 跑通真实 pipeline（6387 方法、3/4 passed、56s，与迁移前一致=行为保持）；33 引擎单测 PASS。**连带**：`testing/foundation-dll` 剩 34 tracked 文件（crypto-refs/scratch 脚本/lib），非活链。 |
-| L10 | 并入 L11 | gate 是冗余 wrapper，platform-hosts 已就位；CMake-coupled，随 L11 重连 |
-| L11 | ⏸ 近可解 | 删 testing/ 根（L5+L8+L9+L6 引擎+L7 族 已全迁出；`testing/foundation-dll` 仅余 34 tracked scratch）。还须：清 `testing/_pipeline`+`src` 归属、核对 scripts/debug hardcoded 旧路径、删根 + 菜单重连） |
+| L6 (引擎) | ✅ 完成 | foundation-dll verification 引擎已迁 `tests/e2e/verification/`（`323e8c279`，72 文件）。中心 resolver + 驱动链 + suite_contract 更新。e2e 实跑 buffers chunk。33 引擎单测移后 PASS。 |
+| L7 (29 族) | ✅ 完成 | 族根已迁 `tests/e2e/translation/`（`a78df896d`，1351 文件）。引擎经 `CHAOS_FOUNDATION_DLL→tests/e2e/translation` 指向。e2e 验证 3/4 passed，33 引擎单测 PASS。 |
+| L10 | ✅ 完成 | 并入 L11 一并处理：googletest 改由根 CMake 供给（`6e29fe8df`）、`_pipeline` co-locate 引擎（`d9ec21616`）、src/managed→tests/unit/managed、CI batch runners→tests/e2e/translation、全部 workflow 重指 tests/unit/runtime-native（`611953afe`+`84ec33f0d`） |
+| L11 | ✅ 完成 | 删 `testing/` 根（`20a8375bb` + 物理 rm）。单 tests/ 树达成——tests/{unit,e2e,authority,fixtures,integration,...} 为唯一测试根，testing/ 已不存在。cmake config 绿、引擎 chain 正常。142 条 dead testing/ gitignore 规则留待后续清理（惰性无害）。 |
 
-> **Loop 状态**：L5/L8/L9(+IL)/L6(引擎)/L7(族) 全部完成——foundation-dll 两大 code-coupled 迁移均已交付并 e2e 验证。剩 L10+L11（删 testing/ 根 + CMake 重连）。
+> **Loop 状态：全部 L 任务完成 ✅**。L1-L11（测试根单根化 + foundation-dll 引擎/族迁移 + testing/ 删除）已全部交付并验证。`docs/dev/test-migration-loop-status.md` 使命完成。
+
 
 
 ## 未提交的工作树残留（非我的改动）
