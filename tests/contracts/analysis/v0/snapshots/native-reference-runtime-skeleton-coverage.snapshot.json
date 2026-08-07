@@ -1,0 +1,9 @@
+{
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "planKind": "assembly-full-closure-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 3,
+  "emittedMethodCount": 2,
+  "uncoveredMethodCount": 1,
+  "uncoveredMethodSubjectIds": ["subject.one"]
+}

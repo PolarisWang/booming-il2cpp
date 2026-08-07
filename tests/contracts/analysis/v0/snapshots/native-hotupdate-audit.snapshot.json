@@ -1,0 +1,8 @@
+{
+  "nativeGeneration": {
+    "generatedSourcePaths": ["a.cpp", "b.cpp"],
+    "translationUnitMethodCount": 3,
+    "runtimeSkeletonUncoveredMethodCount": 1
+  },
+  "hotupdateRuntime": { "outputLines": ["corelib-reference-hotupdate: done"] }
+}
