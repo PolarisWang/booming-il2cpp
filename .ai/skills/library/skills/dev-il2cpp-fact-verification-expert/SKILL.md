@@ -175,12 +175,12 @@ fact result = error / partial → 诊断:
 
 | 文件 | 说明 |
 |------|------|
-| `testing/foundation-dll/verification/stages/fact_chunk.py` | fact 流程主逻辑 |
-| `testing/foundation-dll/verification/stages/build.py` | ATG → subjects DLL → TPG → entry.exe |
-| `testing/foundation-dll/verification/stages/benchmark_chunk.py` | benchmark 阶段 |
-| `testing/foundation-dll/verification/stages/hotupdate_chunk.py` | hotupdate 阶段 |
-| `testing/foundation-dll/verification/stages/subject_correctness_audit.py` | subject 审计 |
-| `testing/foundation-dll/verification/orchestration/context.py` | ChunkContext / StageResult 定义 |
+| `tests/e2e/verification/stages/fact_chunk.py` | fact 流程主逻辑 |
+| `tests/e2e/verification/stages/build.py` | ATG → subjects DLL → TPG → entry.exe |
+| `tests/e2e/verification/stages/benchmark_chunk.py` | benchmark 阶段 |
+| `tests/e2e/verification/stages/hotupdate_chunk.py` | hotupdate 阶段 |
+| `tests/e2e/verification/stages/subject_correctness_audit.py` | subject 审计 |
+| `tests/e2e/verification/orchestration/context.py` | ChunkContext / StageResult 定义 |
 | `src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/` | ATG 源码 |
 | `src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/` | TPG 源码 |
 | `src/managed/Chaos.IL2CPP.Generator/` | CodeGen 源码（审查用） |

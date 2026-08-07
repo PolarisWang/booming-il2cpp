@@ -3,7 +3,7 @@
 #
 # Runs:
 #   1. build/check_arch.py on staged native C++ files
-#   2. testing/.../preflight/check_layer_boundaries.py on staged Python (4-layer compliance)
+#   2. tests/e2e/verification/preflight/check_layer_boundaries.py on staged Python (4-layer compliance)
 #   3. CHAOS_IL2CPP_LOG_TRACE() / CHAOS_IL2CPP_LOG_*() coverage check on staged .cpp files (advisory)
 #
 # To install: git config core.hooksPath .githooks
@@ -63,7 +63,7 @@ if [ -z "$STAGED_PY" ]; then
     echo "=== [layer-boundary] No Python files staged, skipping ==="
 else
     # Run the boundary check script
-    BOUNDARY_OUTPUT=$(python testing/foundation-dll/verification/preflight/check_layer_boundaries.py 2>&1 | cat)
+    BOUNDARY_OUTPUT=$(python tests/e2e/verification/preflight/check_layer_boundaries.py 2>&1 | cat)
     echo "$BOUNDARY_OUTPUT"
     if echo "$BOUNDARY_OUTPUT" | grep -q "FAIL"; then
         echo ""

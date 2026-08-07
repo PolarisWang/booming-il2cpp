@@ -335,7 +335,7 @@ git merge claim/<slug>/<worker-id> --no-edit
 
 # 如果 merge 失败 → 按文件类型分层解决冲突：
 #   - build/工具链文件 + docs/ + 测试数据 JSON → 保留 main 版本
-#   - testing/foundation-dll/ 下的合约、entry 文件 → 取 main 版本（claim 分支的属于临时生成）
+#   - tests/e2e/translation/ 下的合约、entry 文件 → 取 main 版本（claim 分支的属于临时生成）
 #   - src/native/ 下的 runtime/codegen 变更 → 取 claim 分支版本
 #   - docs/archive/optimize/ 下的优化文档 → 取 claim 分支版本
 #   - 其他文件按具体 diff 逐条确认

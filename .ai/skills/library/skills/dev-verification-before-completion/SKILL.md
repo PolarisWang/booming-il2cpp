@@ -108,7 +108,7 @@ assert not failures, failures
   - `docs/verification/foundation-dll-audit/family-verification-claims.json`
   - `docs/verification/foundation-dll-audit/family-verification.json`
 - 典型命中点包括：
-  - `testing/foundation-dll/verification/tooling/derive.py`
+  - `tests/e2e/verification/tooling/derive.py`
   - `build/toolchains/run/testing/foundation_dll_audit_generator.py`
   - `Native Proof Detail`、family progress、tooltip detail
 - 命中时，默认需要执行 `run test inventory --json`，而不是只改 HTML 或局部 JSON
@@ -239,7 +239,7 @@ python .ai/skills/tooling/learning/evolve.py auto-evolve
 如果本轮改动触及以下任一文件，完成前必须运行 dashboard 数据约束检查：
 
 - `build/toolchains/run/testing/foundation_dll_audit_generator.py`
-- `testing/foundation-dll/verification/tooling/derive.py`
+- `tests/e2e/verification/tooling/derive.py`
 
 命中时执行以下检查：
 

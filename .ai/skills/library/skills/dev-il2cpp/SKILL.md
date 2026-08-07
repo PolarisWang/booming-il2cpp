@@ -113,8 +113,8 @@ dev-il2cpp（.claude/skills/ 唯一入口）
 
 > 也可使用确定性查询工具替代手动读 JSON：
 > ```bash
-> python testing/foundation-dll/verification/tools/expert_lookup.py --domain <N>
-> python testing/foundation-dll/verification/tools/expert_lookup.py --keyword "<描述关键词>"
+> python tests/e2e/verification/tools/expert_lookup.py --domain <N>
+> python tests/e2e/verification/tools/expert_lookup.py --keyword "<描述关键词>"
 > ```
 
 此路由在分类声明后、任何工具使用前执行。所有 il2cpp 域的任务必须先经此门。
