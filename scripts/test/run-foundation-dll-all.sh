@@ -3,7 +3,7 @@
 # Usage: bash scripts/run-foundation-dll-all.sh [--strict]
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$REPO_ROOT"
 
 MODE="${1:---skip}"
