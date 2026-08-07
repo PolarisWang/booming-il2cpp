@@ -75,7 +75,7 @@ tests/unit/runtime-native/
 > **遗留完结（2026-08-07 终审后）**：
 > - ✅ `tests/verification/unit/` 死测试子树已精确清理（`ba5d9719e`）：21 个全死测试文件 + 2 个空孤儿包移除；4 个有 14 个存活测试的文件保留。子树 31→8 文件，活跃入口不受影响。
 > - ✅ 测试入口人机双友好（`b4c187f2c` rich help+`--dry-run`；`06863ca6c` `--contract`/`--machine`）。
-> - ⏭ **CI 双轨统一（推荐 CI 专项）**：`ci_test.py`（统一入口，已验证 OK）未被任何 workflow 引用；7 个 workflow 用 19 处 raw `dotnet test`/`ctest`。映射已验证（见 memory），CI 环境执行时按 mapping 把 raw 步骤换 `ci_test.py --preset <x>` 即可，不在 loop 内盲改 prod YAML。
+> - ⏭ **CI 双轨统一（推荐 CI 专项）**：`ci_test.py`（统一入口，已验证 OK）未被任何 workflow 引用；7 个 workflow 用 19 处 raw `dotnet test`/`ctest`。映射已落档 docs/dev/ci-test-unification.md；CI 环境执行时按映射逐个 workflow 替换，不在 loop 内盲改 prod YAML。
 > - ⏭ 惰性项：已清 dead gitignore（83de9feac）；剩 settings 权限旧路径（foreign/本地）、引擎 Windows SDK 自动构建 presets 弱路径——均 inert 不阻塞。
 
 
