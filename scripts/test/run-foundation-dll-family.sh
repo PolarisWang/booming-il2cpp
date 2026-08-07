@@ -33,11 +33,11 @@ shift
 PYTHONPATH="$REPO_ROOT/tests/e2e:$REPO_ROOT/tests/e2e/verification:$REPO_ROOT/build/toolchains/run"
 export PYTHONPATH
 
-# The verification engine now lives at tests/e2e/verification (decoupled from the
-# family tree). Point it at where the 28-family tree + config/pipeline-config.yaml
-# (CHAOS_FOUNDATION_DLL) and the shared _pipeline support package (CHAOS_TESTING_DIR)
-# currently live.
-export CHAOS_FOUNDATION_DLL="$REPO_ROOT/testing/foundation-dll"
+# The verification engine lives at tests/e2e/verification; the 28-family tree +
+# config/pipeline-config.yaml + _contracts ledger relocated to
+# tests/e2e/translation (point CHAOS_FOUNDATION_DLL there). CHAOS_TESTING_DIR is
+# where the shared _pipeline support package lives.
+export CHAOS_FOUNDATION_DLL="$REPO_ROOT/tests/e2e/translation"
 export CHAOS_TESTING_DIR="$REPO_ROOT/testing"
 
 MODE_ARGS=()
