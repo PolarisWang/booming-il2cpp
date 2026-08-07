@@ -77,6 +77,7 @@ tests/unit/runtime-native/
 > - ✅ 测试入口人机双友好（`b4c187f2c` rich help+`--dry-run`；`06863ca6c` `--contract`/`--machine`）。
 > - ⏭ **CI 双轨统一（推荐 CI 专项）**：`ci_test.py`（统一入口，已验证 OK）未被任何 workflow 引用；7 个 workflow 用 19 处 raw `dotnet test`/`ctest`。映射已落档 docs/dev/ci-test-unification.md；CI 环境执行时按映射逐个 workflow 替换，不在 loop 内盲改 prod YAML。
 > - ⏭ 惰性项：已清 dead gitignore（83de9feac）；settings 权限路径已核：.claude/settings.json 的 4 个 chaos 路径是活 hooks 不可清；dot-claude 的 booming-il2cpp 是真实存在的外仓路径（D:/agent/booming-il2cpp），非本仓库遗留。均无可清理项。
+> - ⏭ 覆盖率上报（.NET 专项）：当前无覆盖率机制。实测阻塞：dotnet 10 CLI 在 --no-restore 后无法解析 /p:CollectCoverage（coverlet.msbuild）；项目缺 coverlet.collector（XPlat 收集器不可用）；unit 项目覆盖配置不一致。需 .NET 环境统一后接入 dotnet.py，非盲改。
 
 
 
