@@ -44,6 +44,22 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     enable_testing()
     find_package(Python3 QUIET)
 
+    # ── GoogleTest (self-contained; the legacy "testing" CMake root that used to
+    #    own this FetchContent on the default path is being removed, L11) ─────────
+    # Every chaos_native_add_test() target links gtest_main/gtest, so provision
+    # googletest here before the native contracts/runtime-native trees.
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.tar.gz
+    )
+    if(MSVC)
+        set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    else()
+        set(gtest_force_shared_crt OFF CACHE BOOL "" FORCE)
+    endif()
+    FetchContent_MakeAvailable(googletest)
+
     add_subdirectory(third_party/fmt fmt_build)
     add_subdirectory(third_party/unordered_dense unordered_dense_build)
     add_subdirectory(src/native/pal)
@@ -75,8 +91,8 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     # ── Native testing suite (GoogleTest-based unit/stress/benchmark) ─────
     # Windows only: imports prebuilt .lib files, uses MSVC-specific flags.
     if(MSVC)
-        add_subdirectory(testing)
-        # Migrated native CTest unit-suite root (native gtest tree under tests/unit/runtime-native)
+        # GoogleTest is provisioned at root (L11); the legacy "testing" CMake root
+        # is removed. Native gtest suites live under tests/unit/runtime-native.
         add_subdirectory(tests/unit/runtime-native)
     endif()
 
@@ -144,7 +160,8 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference")
     # ── Native testing suite (GoogleTest-based unit/stress/benchmark) ─────
     # Windows only: imports prebuilt .lib files, uses MSVC-specific flags.
     if(MSVC OR UNIX)
-        add_subdirectory(testing)
+        # Legacy "testing" CMake root removed (L11); GoogleTest provisioned at root.
+        add_subdirectory(tests/unit/runtime-native)
     endif()
 
     # ── Architecture check targets ─────────────────────────────────────
@@ -405,8 +422,8 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-native")
             "${CMAKE_CURRENT_SOURCE_DIR}/contracts/native/v0"
             "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include"
             "${CMAKE_CURRENT_SOURCE_DIR}/third_party/unordered_dense/include"
-            "${CMAKE_CURRENT_SOURCE_DIR}/testing/src/native/runtime-core/gc"
-            "${CMAKE_CURRENT_SOURCE_DIR}/testing")
+            "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/runtime-native/runtime-core/gc"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/runtime-native")
         target_link_libraries(chaos_arm64_jit_exec PRIVATE
             "-Wl,--start-group"
             chaos_jit
@@ -455,8 +472,8 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-native")
 
         function(add_arm64_jit_test name source_file)
             add_executable(chaos_arm64_jit_${name}
-                testing/${source_file}
-                testing/src/native/runtime-core/gc/gc_test_stubs.cpp)
+                ${source_file}
+                tests/unit/runtime-native/runtime-core/gc/gc_test_stubs.cpp)
             target_compile_features(chaos_arm64_jit_${name} PRIVATE cxx_std_17)
             target_include_directories(chaos_arm64_jit_${name} PRIVATE
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/native/jit"
@@ -471,7 +488,7 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-native")
                 "${CMAKE_CURRENT_SOURCE_DIR}/contracts/native/v0"
                 "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include"
                 "${CMAKE_CURRENT_SOURCE_DIR}/third_party/unordered_dense/include"
-                "${CMAKE_CURRENT_SOURCE_DIR}/testing")
+                "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/runtime-native")
             target_link_libraries(chaos_arm64_jit_${name} PRIVATE
                 gtest_main
                 "-Wl,--start-group"
@@ -501,33 +518,33 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-native")
             endif()
         endfunction()
 
-        add_arm64_jit_test(il_smoke     src/native/jit/jit_il_smoke_test.cpp)
+        add_arm64_jit_test(il_smoke     tests/unit/runtime-native/jit/jit_il_smoke_test.cpp)
         set_tests_properties(chaos_arm64_jit_il_smoke PROPERTIES TIMEOUT 120)
 
-        add_arm64_jit_test(simd         src/native/jit/jit_simd_test.cpp)
+        add_arm64_jit_test(simd         tests/unit/runtime-native/jit/jit_simd_test.cpp)
         set_tests_properties(chaos_arm64_jit_simd PROPERTIES TIMEOUT 60)
 
-        add_arm64_jit_test(abi          src/native/jit/jit_abi_test.cpp)
+        add_arm64_jit_test(abi          tests/unit/runtime-native/jit/jit_abi_test.cpp)
 
-        add_arm64_jit_test(gc_slot_map  src/native/jit/jit_gc_slot_map_test.cpp)
+        add_arm64_jit_test(gc_slot_map  tests/unit/runtime-native/jit/jit_gc_slot_map_test.cpp)
         set_tests_properties(chaos_arm64_jit_gc_slot_map PROPERTIES TIMEOUT 30)
 
-        add_arm64_jit_test(osr          src/native/jit/jit_osr_test.cpp)
+        add_arm64_jit_test(osr          tests/unit/runtime-native/jit/jit_osr_test.cpp)
         set_tests_properties(chaos_arm64_jit_osr PROPERTIES TIMEOUT 30)
 
-        add_arm64_jit_test(binary_ir    src/native/jit/jit_binary_ir_test.cpp)
+        add_arm64_jit_test(binary_ir    tests/unit/runtime-native/jit/jit_binary_ir_test.cpp)
         set_tests_properties(chaos_arm64_jit_binary_ir PROPERTIES TIMEOUT 30)
 
-        add_arm64_jit_test(mode         src/native/jit/jit_mode_test.cpp)
+        add_arm64_jit_test(mode         tests/unit/runtime-native/jit/jit_mode_test.cpp)
         set_tests_properties(chaos_arm64_jit_mode PROPERTIES TIMEOUT 30)
 
-        add_arm64_jit_test(pgo          src/native/jit/jit_pgo_test.cpp)
+        add_arm64_jit_test(pgo          tests/unit/runtime-native/jit/jit_pgo_test.cpp)
         set_tests_properties(chaos_arm64_jit_pgo PROPERTIES TIMEOUT 30)
 
-        add_arm64_jit_test(debug_info   src/native/jit/jit_debug_info_test.cpp)
+        add_arm64_jit_test(debug_info   tests/unit/runtime-native/jit/jit_debug_info_test.cpp)
         set_tests_properties(chaos_arm64_jit_debug_info PROPERTIES TIMEOUT 30)
 
-        add_arm64_jit_test(bench src/native/jit/bench_jit_vs_aot.cpp)
+        add_arm64_jit_test(bench tests/unit/runtime-native/jit/bench_jit_vs_aot.cpp)
         set_tests_properties(chaos_arm64_jit_bench PROPERTIES TIMEOUT 120)
 
         message(STATUS "ARM64 JIT: 10 architecture-neutral test targets registered")
@@ -621,8 +638,8 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-smoke")
             "${CMAKE_CURRENT_SOURCE_DIR}/contracts/native/v0"
             "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include"
             "${CMAKE_CURRENT_SOURCE_DIR}/third_party/unordered_dense/include"
-            "${CMAKE_CURRENT_SOURCE_DIR}/testing/src/native/runtime-core/gc"
-            "${CMAKE_CURRENT_SOURCE_DIR}/testing")
+            "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/runtime-native/runtime-core/gc"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/runtime-native")
         target_link_libraries(chaos_arm64_jit_exec PRIVATE
             "-Wl,--start-group"
             chaos_jit
@@ -673,8 +690,8 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-smoke")
         # Helper: create ARM64 JIT test executable + register CTest
         function(add_arm64_jit_test name source_file)
             add_executable(chaos_arm64_jit_${name}
-                testing/${source_file}
-                testing/src/native/runtime-core/gc/gc_test_stubs.cpp)
+                ${source_file}
+                tests/unit/runtime-native/runtime-core/gc/gc_test_stubs.cpp)
             target_compile_features(chaos_arm64_jit_${name} PRIVATE cxx_std_17)
             target_include_directories(chaos_arm64_jit_${name} PRIVATE
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/native/jit"
@@ -689,7 +706,7 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-smoke")
                 "${CMAKE_CURRENT_SOURCE_DIR}/contracts/native/v0"
                 "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include"
                 "${CMAKE_CURRENT_SOURCE_DIR}/third_party/unordered_dense/include"
-                "${CMAKE_CURRENT_SOURCE_DIR}/testing")
+                "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/runtime-native")
             target_link_libraries(chaos_arm64_jit_${name} PRIVATE
                 gtest_main
                 "-Wl,--start-group"
@@ -720,34 +737,34 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-smoke")
         endfunction()
 
         # ── Architecture-neutral JIT tests (9 targets — unwind is Win64-only) ──
-        add_arm64_jit_test(il_smoke     src/native/jit/jit_il_smoke_test.cpp)
+        add_arm64_jit_test(il_smoke     tests/unit/runtime-native/jit/jit_il_smoke_test.cpp)
         set_tests_properties(chaos_arm64_jit_il_smoke PROPERTIES TIMEOUT 120)
 
-        add_arm64_jit_test(simd         src/native/jit/jit_simd_test.cpp)
+        add_arm64_jit_test(simd         tests/unit/runtime-native/jit/jit_simd_test.cpp)
         set_tests_properties(chaos_arm64_jit_simd PROPERTIES TIMEOUT 60)
 
-        add_arm64_jit_test(abi          src/native/jit/jit_abi_test.cpp)
+        add_arm64_jit_test(abi          tests/unit/runtime-native/jit/jit_abi_test.cpp)
 
-        add_arm64_jit_test(gc_slot_map  src/native/jit/jit_gc_slot_map_test.cpp)
+        add_arm64_jit_test(gc_slot_map  tests/unit/runtime-native/jit/jit_gc_slot_map_test.cpp)
         set_tests_properties(chaos_arm64_jit_gc_slot_map PROPERTIES TIMEOUT 30)
 
-        add_arm64_jit_test(osr          src/native/jit/jit_osr_test.cpp)
+        add_arm64_jit_test(osr          tests/unit/runtime-native/jit/jit_osr_test.cpp)
         set_tests_properties(chaos_arm64_jit_osr PROPERTIES TIMEOUT 30)
 
-        add_arm64_jit_test(binary_ir    src/native/jit/jit_binary_ir_test.cpp)
+        add_arm64_jit_test(binary_ir    tests/unit/runtime-native/jit/jit_binary_ir_test.cpp)
         set_tests_properties(chaos_arm64_jit_binary_ir PROPERTIES TIMEOUT 30)
 
-        add_arm64_jit_test(mode         src/native/jit/jit_mode_test.cpp)
+        add_arm64_jit_test(mode         tests/unit/runtime-native/jit/jit_mode_test.cpp)
         set_tests_properties(chaos_arm64_jit_mode PROPERTIES TIMEOUT 30)
 
-        add_arm64_jit_test(pgo          src/native/jit/jit_pgo_test.cpp)
+        add_arm64_jit_test(pgo          tests/unit/runtime-native/jit/jit_pgo_test.cpp)
         set_tests_properties(chaos_arm64_jit_pgo PROPERTIES TIMEOUT 30)
 
-        add_arm64_jit_test(debug_info   src/native/jit/jit_debug_info_test.cpp)
+        add_arm64_jit_test(debug_info   tests/unit/runtime-native/jit/jit_debug_info_test.cpp)
         set_tests_properties(chaos_arm64_jit_debug_info PROPERTIES TIMEOUT 30)
 
         # ── JIT benchmark: Tier 0 vs Tier 1 (compile time, exec time, code size) ──
-        add_arm64_jit_test(bench src/native/jit/bench_jit_vs_aot.cpp)
+        add_arm64_jit_test(bench tests/unit/runtime-native/jit/bench_jit_vs_aot.cpp)
         set_tests_properties(chaos_arm64_jit_bench PROPERTIES TIMEOUT 120)
 
         message(STATUS "ARM64 JIT: 10 architecture-neutral test targets registered")
