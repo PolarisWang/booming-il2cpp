@@ -35,7 +35,7 @@ jobs:
           cmake --preset windows-x64-reference
           cmake --build --preset windows-x64-reference
       - name: Run Small Batch
-        working-directory: testing/foundation-dll
+        working-directory: tests/e2e/translation
         run: |
           bash ci-run-all.sh "build,fact" "small"
       - name: Upload Reports
@@ -43,4 +43,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: reports-small
-          path: testing/foundation-dll/*/_dll/reports/latest/
+          path: tests/e2e/translation/*/_dll/reports/latest/

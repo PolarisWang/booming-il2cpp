@@ -1,6 +1,6 @@
 #!/bin/bash
 # CI Pipeline — Foundation-DLL Full Verification
-# Run from: testing/foundation-dll/
+# Run from: tests/e2e/translation/ (relocated L6/L7)
 # Usage: bash ci-run-all.sh [--stages build,fact] [--batch small|medium|large]
 #
 # Prerequisites:
@@ -9,7 +9,9 @@
 #   3. At least 16GB RAM, 8+ CPU cores recommended
 
 set -e
-cd "$(dirname "$0")"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"   # tests/e2e/translation/
+REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+cd "$SCRIPT_DIR"
 
 STAGES="${1:-build,fact,benchmark,managed_benchmark,benchmark_report,aggregate,reporting}"
 BATCH="${2:-small}"
@@ -21,7 +23,10 @@ run_asm() {
     local asm="$1"
     echo ""
     echo "=== $asm ==="
-    timeout 1800 python verification/chunk_pipeline.py \
+    # Relocated engine lives at $REPO_ROOT/tests/e2e/verification; families here.
+    export PYTHONPATH="$REPO_ROOT/tests/e2e:$REPO_ROOT/tests/e2e/verification"
+    export CHAOS_FOUNDATION_DLL="$REPO_ROOT/tests/e2e/translation"
+    timeout 1800 python -m verification.chunk_pipeline \
         --assembly "$asm" --all-chunks --stages "$STAGES" \
         2>&1 | grep -E "Stage|passed|failed|error|Done|reporting"
     echo "Exit: $?"
