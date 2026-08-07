@@ -64,7 +64,7 @@ tests/unit/runtime-native/
 | 任务 | 状态 | 说明 |
 |------|------|------|
 | L5 全部子域 | ✅ 完成 | support/abi/bootstrap/common/engine-bridge/hot-update/diagnostics/runtime-core/jit/fuzz |
-| L6+L7 | 待定 | foundation-dll e2e（P1，引擎+29族联合，per-dll 脚本链验证） |
+| L6+L7 | 待定 | foundation-dll e2e（P1，引擎+29族联合）。⚠️ 分析已做：`scripts/test/run-foundation-dll-family.sh` 的 PYTHONPATH 硬 ref `$REPO_ROOT/testing/foundation-dll` + `/verification` + `python -m verification.entry_points.cli`；`verification/_path.py` parent-depth anchor；全库 229 处 hardcoded `testing/foundation-dll` 字符串（~49 driver 文件）。高度 code-coupled，需方法化会话，勿盲 mv。 |
 | L10 | 并入 L11 | gate 是冗余 wrapper，platform-hosts 已就位 |
 | L11 | 待定 | 删 testing/ 根（阻塞于 L6+L7 迁出；L5 已全部迁出） |
 
