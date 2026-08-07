@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Foundation DLL Codegen Review v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "assemblyName", "sourceInputs", "dllBoundaryInventory",
+    "generatedFiles", "nativeDispatchManifest", "hotupdateBindingManifest",
+    "runtimeHelpers", "coverage", "findings", "finalStatus"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "assemblyName": { "type": "string" },
+    "sourceInputs": { "type": "object" },
+    "dllBoundaryInventory": { "type": "object" },
+    "generatedFiles": { "type": "array" },
+    "nativeDispatchManifest": { "type": "object" },
+    "hotupdateBindingManifest": { "type": "object" },
+    "runtimeHelpers": { "type": "object" },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["publicMembersTotal", "publicMembersCodegenCovered", "uncoveredMembers"],
+      "properties": {
+        "publicMembersTotal": { "type": "integer", "minimum": 0 },
+        "publicMembersCodegenCovered": { "type": "integer", "minimum": 0 },
+        "uncoveredMembers": { "type": "array" }
+      }
+    },
+    "findings": { "type": "array" },
+    "finalStatus": { "type": "string", "enum": ["pending", "completed", "blocked"] }
+  }
+}
