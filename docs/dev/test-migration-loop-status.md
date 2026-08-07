@@ -72,9 +72,11 @@ tests/unit/runtime-native/
 
 > **Loop 状态：全部 L 任务完成 ✅**。L1-L11（测试根单根化 + foundation-dll 引擎/族迁移 + testing/ 删除）已全部交付并验证。`docs/dev/test-migration-loop-status.md` 使命完成。
 >
-> **已知惰性遗留（非阻塞，活跃测试入口不受影响——`--layer unit` OVERALL OK pass=2248）**：
-> - `tests/verification/unit/`（31 文件）+ `foundation_dll_audit_generator.py`（`build/toolchains/run/testing/`）是**旧 verification 管线的残留**：旧管线已于 **2026-05-29 commit `6521a5e66`**（早于本 L 系列数月）主动退役——删除 `build/toolchains/run/testing/foundation_dll/`（105 个旧管线文件）。这些测试 `load_module` 的 `foundation_dll/*.py` 已不存在 → 测试必死（实测 `FileNotFoundError`）。**独立于 L 清理（非 L11 删 testing/ 所致）**，未接入 driver groups（不在 suite_contract）。属独立的"退役管线死测试清理"任务，超出 L-迁移 loop 范围，非本 loop 的遗留项。
-> - `build/toolchains/run/` 下生成的 audit 骨架 + 惰性 `.gitignore` testing/ 规则（142 条）+ settings*.json 权限路径（foreign/本地）——均 inert。
+> **遗留完结（2026-08-07 终审后）**：
+> - ✅ `tests/verification/unit/` 死测试子树已精确清理（`ba5d9719e`）：21 个全死测试文件 + 2 个空孤儿包移除；4 个有 14 个存活测试的文件保留。子树 31→8 文件，活跃入口不受影响。
+> - ✅ 测试入口人机双友好（`b4c187f2c` rich help+`--dry-run`；`06863ca6c` `--contract`/`--machine`）。
+> - ⏭ **CI 双轨统一（推荐 CI 专项）**：`ci_test.py`（统一入口，已验证 OK）未被任何 workflow 引用；7 个 workflow 用 19 处 raw `dotnet test`/`ctest`。映射已验证（见 memory），CI 环境执行时按 mapping 把 raw 步骤换 `ci_test.py --preset <x>` 即可，不在 loop 内盲改 prod YAML。
+> - ⏭ 惰性项：142 条 dead `.gitignore` testing/ 规则、settings 权限旧路径（foreign/本地）、引擎 Windows SDK 自动构建 presets 弱路径——均 inert 不阻塞。
 
 
 
