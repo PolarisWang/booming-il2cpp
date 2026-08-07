@@ -77,10 +77,12 @@ def run(group: dict, timeout: int = 1800, quick: bool = False) -> SuiteResult:
     if rc == 124:
         res.error = "TIMEOUT ctest"; return res
 
-    # CTest output lines: "Test #N: name ............................   Passed  1.23 sec"
+    # CTest output lines: "N/M Test #nn: name ....................  Passed  1.23 sec"
+    # The N/M run-progress prefix (1/1, 2/5, ...) precedes "Test #nn:", so use
+    # search (not match) — match anchors at line start and would drop every line.
     started = False
     for line in out.splitlines():
-        m = re.match(r"Test\s+#\d+:\s+(\S+).*?(Passed|Failed|\*\*\*Failed)", line)
+        m = re.search(r"Test\s+#\d+:\s+(\S+).*?(Passed|Failed|\*\*\*Failed)", line)
         if not m:
             continue
         name, status = m.group(1), m.group(2)
