@@ -65,12 +65,12 @@ tests/unit/runtime-native/
 |------|------|------|
 | L5 全部子域 | ✅ 完成 | support/abi/bootstrap/common/engine-bridge/hot-update/diagnostics/runtime-core/jit/fuzz |
 | L9 (IL fixtures) | ✅ 完成 | commit `318125649` 清理 testing/data/il 已弃原点（永久家 tests/fixtures/il/ 已在 e3f20127a） |
-| L6 (引擎) | ✅ 完成 | foundation-dll verification 引擎已迁 `tests/e2e/verification/`（`323e8c279`，72 文件）。✅ 中心 resolver（`4e3b0ed93`+`223185861`+`d3ede965b`+`c3d595e32`）；✅ 驱动链改写（PYTHONPATH→`tests/e2e`，`CHAOS_FOUNDATION_DLL`/`CHAOS_TESTING_DIR`）；✅ suite_contract script 路径更新。**e2e 实跑验证**：经 family 脚本对 System.Private.CoreLib `buffers` chunk 跑通 build+fact+coverage-audit（6387 方法，3/4 passed，55s；1 fail 为覆盖度缺口非迁移问题）——满足「迁后跑通一个 dll」。33 引擎单测移后 PASS。 |
-| L7 (29 族) | 待定 | 族仍在 `testing/foundation-dll/System.*`（+config/_pipeline 也留原处）。引擎已通过 env 覆盖指向。迁移族→`tests/e2e/translation/` 需逐个重连 `_pipeline`/config/驱动，重型，需专门会话。 |
+| L6 (引擎) | ✅ 完成 | foundation-dll verification 引擎已迁 `tests/e2e/verification/`（`323e8c279`，72 文件）。中心 resolver + 驱动链 + suite_contract 更新。e2e 实跑 buffers chunk build+fact+coverage 3/4（55s）。33 引擎单测移后 PASS。 |
+| L7 (29 族) | ✅ 完成 | 族根已迁 `tests/e2e/translation/`（`a78df896d`，1351 文件）：29 System.* 族 + config/pipeline-config.yaml + _contracts/ledger 全部 git mv。引擎经 `CHAOS_FOUNDATION_DLL→tests/e2e/translation` 指向（family 脚本已改）。e2e 验证：移动后 chain 对 System.Private.CoreLib buffers chunk 跑通真实 pipeline（6387 方法、3/4 passed、56s，与迁移前一致=行为保持）；33 引擎单测 PASS。**连带**：`testing/foundation-dll` 剩 34 tracked 文件（crypto-refs/scratch 脚本/lib），非活链。 |
 | L10 | 并入 L11 | gate 是冗余 wrapper，platform-hosts 已就位；CMake-coupled，随 L11 重连 |
-| L11 | ⏸ 阻塞 | 删 testing/ 根（L5+L9+L6 引擎已迁出；还差 L7 族 迁出才可整体删） |
+| L11 | ⏸ 近可解 | 删 testing/ 根（L5+L8+L9+L6 引擎+L7 族 已全迁出；`testing/foundation-dll` 仅余 34 tracked scratch）。还须：清 `testing/_pipeline`+`src` 归属、核对 scripts/debug hardcoded 旧路径、删根 + 菜单重连） |
 
-> **Loop 状态**：L5/L8/L9(+IL) 完成；L6 引擎锚点已架构解耦（驱动链也已修复），物理迁移+重型 e2e 验证为机械但耗时的工作，适合专门会话收尾——不再因「不可分割」而阻塞。
+> **Loop 状态**：L5/L8/L9(+IL)/L6(引擎)/L7(族) 全部完成——foundation-dll 两大 code-coupled 迁移均已交付并 e2e 验证。剩 L10+L11（删 testing/ 根 + CMake 重连）。
 
 
 ## 未提交的工作树残留（非我的改动）
