@@ -64,7 +64,7 @@ tests/unit/runtime-native/
 | 任务 | 状态 | 说明 |
 |------|------|------|
 | L5 全部子域 | ✅ 完成 | support/abi/bootstrap/common/engine-bridge/hot-update/diagnostics/runtime-core/jit/fuzz |
-| L6+L7 | ⚠️ 部分推进 · 主体待定 | foundation-dll e2e（P1，引擎+29族联合）。✅ 已修 per-dll 驱动链（commit `d183e8c4c`）：`run-foundation-dll-family.sh`/`-all.sh` 的 REPO_ROOT 深度 bug（Phase-30 移入 scripts/test/ 后少一级 → `scripts/` 而非仓库根）+ family 脚本误调用不存在的 `verification.entry_points.cli`（真实入口 `python -m verification.chunk_pipeline --chunk <slug>`）已全部修复并验证（`--strict`→`--mode strict`、`--skip`→stage 过滤、`--assembly` 透传）。仍待：verification 引擎（69 py）+ 28 System.* 族整体迁移 + 全库 229 处 hardcoded `testing/foundation-dll` 字符串（~49 driver 文件）+ parent-depth anchor 修正。高度 code-coupled，需方法化会话，勿盲 mv。 |
+| L6+L7 | ⛔ 主体待定（需专门会话） | foundation-dll e2e（P1，引擎+29族联合）。✅ 已修 per-dll 驱动链（`d183e8c4c`）：REPO_ROOT 深度 bug + family 脚本误用不存在的 `verification.entry_points.cli`（真实入口 `python -m verification.chunk_pipeline`），`--strict/--skip/--assembly` 映射已验证。**决定性耦合分析**：L6 引擎 + L7 族为**不可分割的整体**——3 个 anchor 不变量：① `_pipeline/` 在 `testing/_pipeline/`（6 文件），被 5 个 verification 文件 import；② `chunk_pipeline._TESTING_DIR=_HERE.parent.parent` 必须 = `testing/`（含 `_pipeline` 与族假设）；③ `_FOUNDATION_DLL=_HERE.parent` 必须含 `config/`+28 `System.*` 族。移动 `verification/` 单独到 `tests/e2e/verification/` 深度守恒（`_REPO_ROOT` 仍对）但 `_TESTING_DIR→tests/`（断 `_pipeline`）、`_FOUNDATION_DLL→tests/e2e/`（无族/config）。**故引擎+族+`_pipeline` 必须同步迁移** + 用户硬约束「迁后必须实际跑通一个 dll 生成+验证（ATG→dll→fact）」（需重型 native 构建）。高度 code-coupled + 重型验证 → 需 human-supervised 专门会话，loop 内勿盲 mv。 |
 | L10 | 并入 L11 | gate 是冗余 wrapper，platform-hosts 已就位 |
 | L11 | 待定 | 删 testing/ 根（阻塞于 L6+L7 迁出；L5 已全部迁出） |
 
