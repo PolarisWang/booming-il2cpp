@@ -439,8 +439,11 @@ def main() -> int:
             }
             # P5: optional per-case detail (off by default — native ~200 cases,
             # dotnet can be thousands). With --cases this lets a later run diff
-            # exactly which tests passed/failed for regression triage.
-            if args.cases:
+            # exactly which tests passed/failed for regression triage. --junit also
+            # needs the full case list to emit one <testcase> per test, so a JUnit
+            # consumer isn't handed an inconsistent testsuite (tests=N but only
+            # failure testcases present).
+            if args.cases or args.junit:
                 group_entry["cases"] = [
                     {"name": c.name, "passed": c.passed, "duration_s": round(c.duration_s, 3),
                      **({"msg": (c.message or "")[:500]} if c.message else {})}
@@ -494,9 +497,21 @@ def _write_junit(report: dict, path: str) -> None:
                 "name": f"{layer}.{gname}", "tests": str(g["total"]),
                 "failures": str(g["failed"]), "errors": "0" if not g["error"] else "1",
             })
-            for f in g["failures"]:
-                tc = ET.SubElement(ts, "testcase", {"name": f["name"], "classname": gname})
-                ET.SubElement(tc, "failure", {"message": f["msg"]})
+            # Emit one <testcase> per test. Passing cases carry no <failure> child;
+            # failing/skipped-folded cases carry one. --junit implies full case detail
+            # (else the suite would declare tests=N but emit only the failure testcases,
+            # under-reporting passes to any JUnit consumer).
+            cases = g.get("cases")
+            if cases:
+                for c in cases:
+                    tc = ET.SubElement(ts, "testcase", {"name": c["name"], "classname": gname})
+                    if not c["passed"]:
+                        ET.SubElement(tc, "failure", {"message": c.get("msg", "")[:500]})
+            else:
+                # Fallback when no per-case detail (unexpected): emit failures only.
+                for f in g["failures"]:
+                    tc = ET.SubElement(ts, "testcase", {"name": f["name"], "classname": gname})
+                    ET.SubElement(tc, "failure", {"message": f["msg"]})
     ET.ElementTree(root).write(path, encoding="utf-8")
 
 

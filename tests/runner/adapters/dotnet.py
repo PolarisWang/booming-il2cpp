@@ -57,6 +57,22 @@ def _trx_failures(trx_path: str) -> list[str]:
         return []
 
 
+def _trx_cases(trx_path: str) -> list[tuple[str, bool]]:
+    """All trx outcomes as (name, passed). Used to emit a complete JUnit (one
+    <testcase> per test) and to give the report full per-case detail. A Skipped
+    outcome is folded as failed (project rule: no skip)."""
+    try:
+        tree = ET.parse(trx_path)
+        ns = "http://microsoft.com/schemas/VisualStudio/TeamTest/2010"
+        out = []
+        for u in tree.getroot().iter("{%s}UnitTestResult" % ns):
+            oc = u.get("outcome")
+            out.append((u.get("testName"), oc == "Passed"))
+        return out
+    except Exception:
+        return []
+
+
 def run(group: dict, timeout: int = 900, quick: bool = False) -> SuiteResult:
     project = group["command_project"]
     res = SuiteResult(layer="unit", group=group.get("name", project))
@@ -94,8 +110,11 @@ def run(group: dict, timeout: int = 900, quick: bool = False) -> SuiteResult:
         res.passed = summary.get("passed", 0)
         res.failed = summary.get("failed", 0) + summary.get("skipped", 0)
 
-        failures = _trx_failures(trx)
-        res.cases = [CaseResult(name=n, passed=False) for n in failures]
+        # Enumerate ALL trx outcomes (pass+fail) so the report/JUnit carry a full
+        # per-case list (one <testcase> per test) instead of only failures. Skipped
+        # is folded as failed. Fall back to failures-only/rollup if trx parse fails.
+        cases = _trx_cases(trx)
+        res.cases = [CaseResult(name=n, passed=p) for n, p in cases]
         if not res.cases and res.failed:
             res.cases = [CaseResult(name="<rollup>", passed=False)]
         if res.total == 0:
