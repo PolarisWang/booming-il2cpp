@@ -145,6 +145,5 @@ endmacro()
 
 # Subdirectories
 add_subdirectory(jit)
-add_subdirectory(hot-update)
 add_subdirectory(runtime-core)
 add_subdirectory(fuzz)
