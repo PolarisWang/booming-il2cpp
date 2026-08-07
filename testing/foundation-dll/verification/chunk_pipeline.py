@@ -39,7 +39,12 @@ _HERE = Path(__file__).resolve().parent  # verification/
 # independently without re-deriving sibling-depth assumptions).
 import os as _os
 _FOUNDATION_DLL = Path(_os.environ.get("CHAOS_FOUNDATION_DLL") or (_HERE.parent))
-_TESTING_DIR = _HERE.parent.parent  # testing/
+
+# The "test tree" dir put on sys.path to make `_pipeline` (and any shared
+# test-support package) importable as a top-level module. Defaults to the
+# current layout (parent of the foundation-dll root). Override with
+# CHAOS_TESTING_DIR when _pipeline relocates alongside the engine.
+_TESTING_DIR = Path(_os.environ.get("CHAOS_TESTING_DIR") or (_HERE.parent.parent))
 if str(_FOUNDATION_DLL) not in sys.path:
     sys.path.insert(0, str(_FOUNDATION_DLL))
 if str(_TESTING_DIR) not in sys.path:
