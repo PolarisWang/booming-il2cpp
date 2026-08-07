@@ -324,17 +324,27 @@ def _dry_run(args, contract: dict, layers: dict) -> int:
 
 
 def main() -> int:
+    # Load the contract first so --layer choices and --help reflect new layers in
+    # suite_contract.yaml (e.g. a pytest layer). On parse error still allow --help
+    # and --contract to work.
+    try:
+        contract = load_contract()
+        layer_choices = list(contract.get("layers", {}).keys()) + ["all"]
+    except Exception:
+        contract = None
+        layer_choices = ["unit", "integration", "e2e", "pytest", "all"]
     ap = argparse.ArgumentParser(
         description="Chaos IL2CPP unified test driver — runs the suite defined by "
                     "tests/suite_contract.yaml (single source of truth).",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=_HELP_EPILOG,
     )
-    ap.add_argument("--layer", default="all", choices=["unit", "integration", "e2e", "all"],
+    ap.add_argument("--layer", default="all", choices=layer_choices,
                     help="which pyramid layer(s) to run (default: all). "
                          "unit=fast dotnet (tests/unit/managed/*); "
                          "integration=native CTest (tests/unit/runtime-native, needs cmake built); "
-                         "e2e=foundation-dll engine (tests/e2e/verification, slow).")
+                         "e2e=foundation-dll engine (tests/e2e/verification, slow); "
+                         "pytest=authority/integration pytest subset.")
     ap.add_argument("--group", default="",
                     help="run only the named group within the selected layer(s) "
                          "(e.g. --layer unit --group codegen)")
@@ -367,7 +377,8 @@ def main() -> int:
         print(JSON_SCHEMA)
         return 0
 
-    contract = load_contract()
+    if contract is None:
+        contract = load_contract()
     layers = contract.get("layers", {})
     if not layers:
         raise SystemExit("contract has no layers — check suite_contract.yaml")

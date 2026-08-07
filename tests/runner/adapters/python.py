@@ -47,22 +47,34 @@ def _resolve_group_env(cwd: str, raw: dict) -> dict:
 
 def run(group: dict, timeout: int = 3600, quick: bool = False) -> SuiteResult:
     cwd = repo_root()
-    script = group["script"]
-    args = group.get("args", [])
     env = _resolve_group_env(cwd, group.get("env", {}))
-    res = SuiteResult(layer="e2e", group=group.get("name", script))
+    res = SuiteResult(layer="e2e", group=group.get("name", group.get("script", "pytest")))
 
-    cmd = ["python", script] + list(args)
+    # Convenience: a group may declare `pytest_paths: [dir/…, file.py]` to run a set of
+    # pytest files/roots as one gate (used for the untested authority/integration trees
+    # being folded into the unified entry). Falls back to a script invocation otherwise.
+    pytest_paths = group.get("pytest_paths")
+    if pytest_paths:
+        script = "pytest"
+        cmd = ["python", "-m", "pytest"] + list(pytest_paths) + ["-q"]
+    else:
+        script = group["script"]
+        args = group.get("args", [])
+        cmd = ["python", script] + list(args)
+
     try:
         t0 = time.time()
-        p = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, cwd=cwd, env=env)
+        p = subprocess.run(cmd, capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", timeout=timeout, cwd=cwd, env=env)
         res.duration_s = time.time() - t0
         out = (p.stdout or "") + "\n" + (p.stderr or "")
         passed = p.returncode == 0
         res.total = 1
         res.passed = 1 if passed else 0
         res.failed = 0 if passed else 1
-        res.cases.append(CaseResult(name=script, passed=passed, message=None if passed else out[-1500:], duration_s=res.duration_s))
+        res.cases.append(CaseResult(name=" ".join(pytest_paths) if pytest_paths else script,
+                                    passed=passed, message=None if passed else out[-1500:],
+                                    duration_s=res.duration_s))
     except subprocess.TimeoutExpired:
         res.error = "TIMEOUT: " + script
         res.total = 1

@@ -78,6 +78,35 @@ layers:
         slow: true
         timeout: 5400
 
+  # pytest layer — the pre-existing authority/integration unit tests that were never
+  # wired into the driver (they only ran via bare `pytest`). The subset below is the
+  # env-independent, consistently-green slice, folded into the unified entry. The
+  # artifact/build-dependent remainder (audit-packet checks needing generated CoreLib
+  # audit output, integration tests needing subject build output) is NOT yet wired —
+  # those need artifact provisioning, tracked as a follow-up.
+  pytest:
+    adapter: python
+    groups:
+      - name: authority-integration-green
+        pytest_paths:
+          - tests/authority/contracts/test_dual_mode_identity.py
+          - tests/integration/registry/test_case_discovery.py
+          - tests/integration/registry/test_catalog_scan.py
+          - tests/integration/registry/test_registry_scan_system_plans.py
+          - tests/integration/run/test_command_manifest.py
+          - tests/integration/run/test_dotnet_bootstrap.py
+          - tests/integration/run/test_interactive_session.py
+          - tests/integration/run/test_json_output.py
+          - tests/integration/run/test_prepare_scopes.py
+          - tests/integration/run/test_reporting_layout.py
+          - tests/integration/run/test_runtime_manifest.py
+          - tests/integration/run/test_stage_execution.py
+          - tests/integration/run/test_tui_routing.py
+          - tests/integration/run/test_unified_test_command.py
+        env:
+          PYTHONPATH: "tests/e2e"
+        timeout: 600
+
   # NOTE: tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter is intentionally
   # NOT an active entry in unit: it declares [Fact]s but lacks Microsoft.NET.Test.Sdk
   # so `dotnet test` cannot actually run it. It is tracked here as a known
