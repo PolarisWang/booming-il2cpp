@@ -68,7 +68,7 @@ tests/unit/runtime-native/
 | L6 (引擎) | ✅ 完成 | foundation-dll verification 引擎已迁 `tests/e2e/verification/`（`323e8c279`，72 文件）。中心 resolver + 驱动链 + suite_contract 更新。e2e 实跑 buffers chunk。33 引擎单测移后 PASS。 |
 | L7 (29 族) | ✅ 完成 | 族根已迁 `tests/e2e/translation/`（`a78df896d`，1351 文件）。引擎经 `CHAOS_FOUNDATION_DLL→tests/e2e/translation` 指向。e2e 验证 3/4 passed，33 引擎单测 PASS。 |
 | L10 | ✅ 完成 | 并入 L11 一并处理：googletest 改由根 CMake 供给（`6e29fe8df`）、`_pipeline` co-locate 引擎（`d9ec21616`）、src/managed→tests/unit/managed、CI batch runners→tests/e2e/translation、全部 workflow 重指 tests/unit/runtime-native（`611953afe`+`84ec33f0d`） |
-| L11 | ✅ 完成 | 删 `testing/` 根（`20a8375bb` + 物理 rm）。单 tests/ 树达成——tests/{unit,e2e,authority,fixtures,integration,...} 为唯一测试根，testing/ 已不存在。cmake config 绿、引擎 chain 正常。142 条 dead testing/ gitignore 规则留待后续清理（惰性无害）。 |
+| L11 | ✅ 完成 | 删 `testing/` 根（`20a8375bb` + 物理 rm）。单 tests/ 树达成——tests/{unit,e2e,authority,fixtures,integration,...} 为唯一测试根，testing/ 已不存在。cmake config 绿、引擎 chain 正常。104 条 dead testing/ gitignore 规则已清（83de9feac）；剩惰性项：settings 权限旧路径。 |
 
 > **Loop 状态：全部 L 任务完成 ✅**。L1-L11（测试根单根化 + foundation-dll 引擎/族迁移 + testing/ 删除）已全部交付并验证。`docs/dev/test-migration-loop-status.md` 使命完成。
 >
@@ -76,7 +76,7 @@ tests/unit/runtime-native/
 > - ✅ `tests/verification/unit/` 死测试子树已精确清理（`ba5d9719e`）：21 个全死测试文件 + 2 个空孤儿包移除；4 个有 14 个存活测试的文件保留。子树 31→8 文件，活跃入口不受影响。
 > - ✅ 测试入口人机双友好（`b4c187f2c` rich help+`--dry-run`；`06863ca6c` `--contract`/`--machine`）。
 > - ⏭ **CI 双轨统一（推荐 CI 专项）**：`ci_test.py`（统一入口，已验证 OK）未被任何 workflow 引用；7 个 workflow 用 19 处 raw `dotnet test`/`ctest`。映射已验证（见 memory），CI 环境执行时按 mapping 把 raw 步骤换 `ci_test.py --preset <x>` 即可，不在 loop 内盲改 prod YAML。
-> - ⏭ 惰性项：142 条 dead `.gitignore` testing/ 规则、settings 权限旧路径（foreign/本地）、引擎 Windows SDK 自动构建 presets 弱路径——均 inert 不阻塞。
+> - ⏭ 惰性项：已清 dead gitignore（83de9feac）；剩 settings 权限旧路径（foreign/本地）、引擎 Windows SDK 自动构建 presets 弱路径——均 inert 不阻塞。
 
 
 
