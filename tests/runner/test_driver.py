@@ -237,14 +237,86 @@ def run_group(layer: str, group: dict, layers_cfg: dict, opts) -> SuiteResult:
     return run(group, timeout=timeout, quick=opts.quick)
 
 
+_HELP_EPILOG = """\
+Layers (test pyramid, defined in tests/suite_contract.yaml):
+  unit         fast dotnet xunit  -> tests/unit/managed/{codegen,driver,snapshot}
+  integration  native CTest        -> tests/unit/runtime-native (needs cmake --preset first)
+  e2e          foundation-dll      -> tests/e2e/verification engine (slow, heavy native builds)
+
+Examples:
+  python tests/runner/test_driver.py --layer unit --quick      # fast dotnet suite (prebuilt)
+  python tests/runner/test_driver.py --dry-run                 # preview every layer/group, run nothing
+  python tests/runner/test_driver.py --layer e2e --group foundation-dll-chunk  # one e2e group
+  python tests/runner/test_driver.py --layer all --json out.json   # everything, machine report
+
+Exit code:
+  0 = OVERALL OK (every group ran; no UNEXPECTED failure — KNOWN-FAIL baseline failures are
+      reported as FAIL but do NOT fail the gate)
+  1 = FAILED (an infra error or at least one UNEXPECTED failure not in the known baseline)
+
+Agents: consume --json (stable schema: layers.*.groups.*.ok/passed/failed/known/unexpected)
+rather than parsing stdout; use --dry-run to inspect the suite without running it.
+Known-failure reconciliation: baselines/known-failures.{layer}.yaml.
+"""
+
+
+def _dry_run(args, contract: dict, layers: dict) -> int:
+    """Preview what the suite would run (per layer/group) — execute nothing."""
+    print("=== Dry run: test-driver would run the following ===")
+    for layer_name, layer_cfg in layers.items():
+        if args.layer != "all" and layer_name != args.layer:
+            continue
+        adapter = layer_cfg.get("adapter")
+        print(f"\n[{layer_name}] adapter={adapter}")
+        for g in layer_cfg.get("groups", []):
+            gname = g.get("name", "")
+            if args.group and gname != args.group:
+                continue
+            if adapter == "dotnet":
+                target = g.get("command_project", g.get("script", "?"))
+                scale = "dotnet test project"
+            elif adapter == "native":
+                target = g.get("cmake_build_dir", "build/native")
+                scale = f"ctest -LE {g.get('ctest_exclude', 'benchmark|stress|soak')}"
+            else:  # python
+                target = g.get("script", "?")
+                scale = f"{' '.join(g.get('args', [])) or '<no args>'}"
+            timeout = g.get("timeout", args.timeout)
+            print(f"  - {gname}: {target}")
+            print(f"      {scale}   (timeout {timeout}s)")
+    print("\n(Dry run only — nothing executed.)")
+    return 0
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Chaos IL2CPP unified test driver")
-    ap.add_argument("--layer", default="all", choices=["unit", "integration", "e2e", "all"])
-    ap.add_argument("--group", default="")
-    ap.add_argument("--quick", action="store_true", help="assume prebuilt; skip configure")
-    ap.add_argument("--timeout", type=int, default=1800)
-    ap.add_argument("--json", default="")
-    ap.add_argument("--junit", default="")
+    ap = argparse.ArgumentParser(
+        description="Chaos IL2CPP unified test driver — runs the suite defined by "
+                    "tests/suite_contract.yaml (single source of truth).",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=_HELP_EPILOG,
+    )
+    ap.add_argument("--layer", default="all", choices=["unit", "integration", "e2e", "all"],
+                    help="which pyramid layer(s) to run (default: all). "
+                         "unit=fast dotnet (tests/unit/managed/*); "
+                         "integration=native CTest (tests/unit/runtime-native, needs cmake built); "
+                         "e2e=foundation-dll engine (tests/e2e/verification, slow).")
+    ap.add_argument("--group", default="",
+                    help="run only the named group within the selected layer(s) "
+                         "(e.g. --layer unit --group codegen)")
+    ap.add_argument("--quick", action="store_true",
+                    help="assume prebuilt; skip configure")
+    ap.add_argument("--timeout", type=int, default=1800,
+                    help="per-group timeout in seconds (default 1800; integration suite "
+                         "also honors group ctest_timeout in suite_contract)")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="do NOT run anything — print what each layer/group would run "
+                         "(adapter, target, group timeout) and exit 0. Use this to preview "
+                         "or to answer 'what does the suite contain?'")
+    ap.add_argument("--json", default="",
+                    help="write a stable machine-readable report (default "
+                         "tests/runner/test-report.json); agents should parse --json, not stdout")
+    ap.add_argument("--junit", default="",
+                    help="also write a JUnit XML report to this path (CI integration)")
     ap.add_argument("--cases", action="store_true",
                     help="include per-case pass/fail detail in the JSON report "
                          "(default off: native ~200 cases, dotnet can be thousands)")
@@ -254,6 +326,10 @@ def main() -> int:
     layers = contract.get("layers", {})
     if not layers:
         raise SystemExit("contract has no layers — check suite_contract.yaml")
+
+    if args.dry_run:
+        return _dry_run(args, contract, layers)
+
     t0 = time.time()
 
     report = {"version": 1, "generated_at": _now(), "layers": {}, "total": {}, "ok": True}
