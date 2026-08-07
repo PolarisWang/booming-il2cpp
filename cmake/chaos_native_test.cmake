@@ -31,7 +31,8 @@ set(CHAOS_RUNTIME_LIBS
     chaos_hot_update
     chaos_fmt
     chaos_codegen
-    chaos_debugger)
+    chaos_debugger
+    chaos_engine_bridge)
 
 # INTERFACE aggregate so test CMakeLists never list individual lib targets.
 # Tries the real/imported target; if absent (e.g. some configs) it's a no-op list.
