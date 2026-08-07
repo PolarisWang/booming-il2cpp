@@ -74,8 +74,8 @@ jobs:
       - name: Configure Native Tests
         shell: bash
         run: |
-          cd testing
-          cmake -S src/native -B artifacts/run/native-test-build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          # L11: native CTest suites live at tests/unit/runtime-native (googletest from root CMake).
+          cmake -S tests/unit/runtime-native -B tests/unit/runtime-native/build -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
       - name: Build Native Tests
         run: cmake --build tests/unit/runtime-native/build --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
