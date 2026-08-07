@@ -5,7 +5,6 @@ import tempfile
 from datetime import date, timedelta
 from pathlib import Path
 
-sys.path.insert(0, "unused/old-root")
 
 passed = 0
 failed = 0

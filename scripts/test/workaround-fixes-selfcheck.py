@@ -3,7 +3,6 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, "unused/old-root")  # makes verification. importable
 
 passed = 0
 failed = 0
