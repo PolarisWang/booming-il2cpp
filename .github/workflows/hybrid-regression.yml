@@ -12,18 +12,12 @@ on:
       - 'src/native/jit/**'
       - 'src/native/runtime-core/hybrid_precode.h'
       - 'src/native/runtime-core/hybrid_precode.cpp'
-      - 'tests/unit/runtime-native/jit/test_jit_hybrid_mode.cpp'
-      - 'tests/unit/runtime-native/jit/test_hybrid_e2e.cpp'
-      - 'tests/unit/runtime-native/jit/test_hybrid_race.cpp'
   push:
     branches: [main]
     paths:
       - 'src/native/jit/**'
       - 'src/native/runtime-core/hybrid_precode.h'
       - 'src/native/runtime-core/hybrid_precode.cpp'
-      - 'tests/unit/runtime-native/jit/test_hybrid_mode.cpp'
-      - 'tests/unit/runtime-native/jit/test_hybrid_e2e.cpp'
-      - 'tests/unit/runtime-native/jit/test_hybrid_race.cpp'
   workflow_dispatch:
 
 jobs:
