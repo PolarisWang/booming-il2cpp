@@ -1,6 +1,0 @@
-[{
-    "opcode": 0x0a,
-    "name": "ldnull",
-    "size": 1,
-    "description": "Push null reference"
-}]
