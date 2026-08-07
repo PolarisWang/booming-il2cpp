@@ -87,10 +87,14 @@ def review(diff: str) -> dict:
         }
     prompt = claude_prompt(diff)
     try:
+        # Pass the prompt via stdin, NOT as an argv element: on Windows a single
+        # argv exceeding ~32KB raises WinError 206, and a meta-review --stat of a
+        # huge push can easily blow past that. `claude -p` reads stdin when no
+        # prompt argument is given.
         proc = subprocess.run(
-            ["claude", "-p", prompt, "--output-format", "text"],
-            capture_output=True, text=True, encoding="utf-8", errors="replace",
-            cwd=".", timeout=CLAUDE_TIMEOUT,
+            ["claude", "-p", "--output-format", "text"],
+            input=prompt, capture_output=True, text=True,
+            encoding="utf-8", errors="replace", cwd=".", timeout=CLAUDE_TIMEOUT,
         )
     except Exception as exc:  # subprocess-level failure (timeout, spawn error)
         return {
