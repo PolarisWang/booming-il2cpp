@@ -73,7 +73,7 @@ tests/unit/runtime-native/
 > **Loop 状态：全部 L 任务完成 ✅**。L1-L11（测试根单根化 + foundation-dll 引擎/族迁移 + testing/ 删除）已全部交付并验证。`docs/dev/test-migration-loop-status.md` 使命完成。
 >
 > **已知惰性遗留（非阻塞，活跃测试入口不受影响——`--layer unit` OVERALL OK pass=2248）**：
-> - `foundation_dll_audit_generator.py`（`build/toolchains/run/testing/`，tracked）+ 3 个 `tests/verification/unit/...` 消费测试，import 的 `foundation_dll` 包模块（case_index_loader.py 等）已随 `testing/` 删除 → **孤儿 legacy 审计工具**，未接入 driver groups（不在 suite_contract），无需复活。
+> - `tests/verification/unit/`（31 文件）+ `foundation_dll_audit_generator.py`（`build/toolchains/run/testing/`）是**旧 verification 管线的残留**：旧管线已于 **2026-05-29 commit `6521a5e66`**（早于本 L 系列数月）主动退役——删除 `build/toolchains/run/testing/foundation_dll/`（105 个旧管线文件）。这些测试 `load_module` 的 `foundation_dll/*.py` 已不存在 → 测试必死（实测 `FileNotFoundError`）。**独立于 L 清理（非 L11 删 testing/ 所致）**，未接入 driver groups（不在 suite_contract）。属独立的"退役管线死测试清理"任务，超出 L-迁移 loop 范围，非本 loop 的遗留项。
 > - `build/toolchains/run/` 下生成的 audit 骨架 + 惰性 `.gitignore` testing/ 规则（142 条）+ settings*.json 权限路径（foreign/本地）——均 inert。
 
 
