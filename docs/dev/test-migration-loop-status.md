@@ -19,8 +19,12 @@
 | L5-abi | native abi 子域 | `tests/unit/runtime-native/abi/` | `a195a64be` | test_abi_method_table 8/8 PASS |
 | L5-bootstrap | native bootstrap 子域 | `tests/unit/runtime-native/bootstrap/` | `1600ea889` | test_bootstrap_smoke 7/7 PASS |
 | L5-common | native common 子域 (34 cpp, 32 targets) | `tests/unit/runtime-native/common/` | `58817d63d` | test_common_checked_conv 4/4 PASS |
+| L5-engine-bridge | native engine-bridge 子域 (2 cpp) | `tests/unit/runtime-native/engine-bridge/` | `76212ea21` | test_engine_bridge_smoke 24/24 PASS |
+| L5-hot-update | native hot-update 子域 (14 cpp) | `tests/unit/runtime-native/hot-update/` | `3e5038ad2` | 6/7 PASS (1 预存并发测试 bug) |
+| L5-diagnostics | native diagnostics 子域 (14 cpp) | `tests/unit/runtime-native/diagnostics/` | `48793e94b` | 13/13 PASS |
+| L5-runtime-core+jit+fuzz | native 三大子域 (172 cpp) | `tests/unit/runtime-native/{runtime-core,jit,fuzz}/` | `c59dfe538` | 150+ PASS；全部失败预存/偶发，pre/post 一致 |
 
-## 当前 `tests/unit/runtime-native/` 已迁移子域
+## 当前 `tests/unit/runtime-native/` 已迁移子域（L5 全部完成 ✅）
 
 ```
 tests/unit/runtime-native/
@@ -28,19 +32,17 @@ tests/unit/runtime-native/
 ├── support/                # ✅ test_log_system 9/9
 ├── abi/                    # ✅ test_abi_method_table 8/8
 ├── bootstrap/              # ✅ test_bootstrap_smoke 7/7
-└── common/                 # ✅ test_common_checked_conv 4/4
+├── common/                 # ✅ test_common_checked_conv 4/4
+├── engine-bridge/          # ✅ test_engine_bridge_smoke 24/24
+├── hot-update/             # ✅ 6/7（1 预存并发 bug）
+├── diagnostics/            # ✅ 13/13（eventpipe 已入工厂；test_ep_receiver 预存 stale 弃用）
+├── runtime-core/           # ✅ gc/interpreter/threading/metadata/runtime_stubs + flat（153 cpp）
+├── jit/                    # ✅ 17 cpp
+└── fuzz/                   # ✅ 2 cpp
 ```
 
-## L5 剩余待迁移子域（从 `testing/src/native/`）
-
-| 子域 | .cpp 数 | 备注 |
-|------|---------|------|
-| `jit` | 17 | 含 TIMEOUT 属性 |
-| `engine-bridge` | 2 | 小 |
-| `hot-update` | 14 | |
-| `runtime-core` | 153 | 最大块（含 gc/threading/interpreter/metadata/runtime_stubs 子目录） |
-| `fuzz` | 2 | 小 |
-| `diagnostics` | 14 | |
+> `testing/src/native/` 现已无任何子域（仅 googletest/imported-lib/macro 基础设施 + crt_stubs.cpp 留存）。
+> 所有迁移失败均与迁移前逐项一致（com_ccw SEH、gc_*、jit_*、fuzz TIMEOUT、hot-update 并发），非回归。`test_gc_max_promote` 偶发且在两种构建下一致闪现。
 
 ## 迁移模式（已验证可重复）
 
@@ -48,12 +50,12 @@ tests/unit/runtime-native/
 1. git mv testing/src/native/<子域> tests/unit/runtime-native/<子域>
 2. 重写 CMakeLists: add_chaos_test → chaos_native_add_test
    - 丢弃显式 LIBS（工厂默认全套）
-   - 如有自有 stubs: 加 WITHOUT_CODEGEN_STUB
-   - 保留 TIMEOUT/LABELS 属性
+   - 子域内共享 test source 用相对 ../runtime-core/... 引用（runtime-core 需先落位）
+   - 保留 TIMEOUT/LABELS/RESOURCE_LOCK/GTEST_LIB_ONLY 属性
    - 修外部源路径: CHAOS_PROJECT_ROOT → CMAKE_SOURCE_DIR
 3. tests/unit/runtime-native/CMakeLists.txt: add_subdirectory(<子域>)
 4. testing/src/native/CMakeLists.txt: 删 add_subdirectory(<子域>)
-5. cmake --preset + build + run 验证
+5. cmake --preset + build + run 验证（重定向对比 pre-mig exe 确认非回归）
 6. commit
 ```
 
@@ -61,10 +63,10 @@ tests/unit/runtime-native/
 
 | 任务 | 状态 | 说明 |
 |------|------|------|
-| L5 剩余子域 | 进行中 | 按上述模式逐个迁移 |
+| L5 全部子域 | ✅ 完成 | support/abi/bootstrap/common/engine-bridge/hot-update/diagnostics/runtime-core/jit/fuzz |
 | L6+L7 | 待定 | foundation-dll e2e（P1，引擎+29族联合，per-dll 脚本链验证） |
 | L10 | 并入 L11 | gate 是冗余 wrapper，platform-hosts 已就位 |
-| L11 | 待定 | 删 testing/ 根（阻塞于 L5+L6+L7 迁出） |
+| L11 | 待定 | 删 testing/ 根（阻塞于 L6+L7 迁出；L5 已全部迁出） |
 
 ## 未提交的工作树残留（非我的改动）
 
