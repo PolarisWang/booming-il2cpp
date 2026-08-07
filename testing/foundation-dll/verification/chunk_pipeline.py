@@ -29,22 +29,14 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-# Ensure foundation-dll/ is on sys.path
-_HERE = Path(__file__).resolve().parent  # verification/
+# Ensure foundation-dll/ (family root) + the testing tree (_pipeline holder) are on
+# sys.path. Roots are resolved through the central _path resolver so the engine is
+# location-independent (env overrides CHAOS_FOUNDATION_DLL / CHAOS_TESTING_DIR; else
+# marker-walk / parent inference).
+from verification._path import foundation_root, testing_tree_root
 
-# Foundation-dll root — the dir holding config/, _pipeline/, and the System.*
-# family outputs. Defaults to the parent of verification/ (current layout), but
-# MAY be overridden with CHAOS_FOUNDATION_DLL so the engine can find the families
-# wherever they live (enables the L6/L7 relocate: engine + families can move
-# independently without re-deriving sibling-depth assumptions).
-import os as _os
-_FOUNDATION_DLL = Path(_os.environ.get("CHAOS_FOUNDATION_DLL") or (_HERE.parent))
-
-# The "test tree" dir put on sys.path to make `_pipeline` (and any shared
-# test-support package) importable as a top-level module. Defaults to the
-# current layout (parent of the foundation-dll root). Override with
-# CHAOS_TESTING_DIR when _pipeline relocates alongside the engine.
-_TESTING_DIR = Path(_os.environ.get("CHAOS_TESTING_DIR") or (_HERE.parent.parent))
+_FOUNDATION_DLL = foundation_root()
+_TESTING_DIR = testing_tree_root()
 if str(_FOUNDATION_DLL) not in sys.path:
     sys.path.insert(0, str(_FOUNDATION_DLL))
 if str(_TESTING_DIR) not in sys.path:
