@@ -71,7 +71,10 @@ layers:
           PYTHONPATH: "tests/e2e:tests/e2e/verification"
           CHAOS_FOUNDATION_DLL: "tests/e2e/translation"
           CHAOS_TESTING_DIR: "tests/e2e/verification"
-        args: [--smoke]
+        # --all-chunks + --smoke gives the pipeline a target: smoke runs the fast
+        # build/fact/coverage-audit stages on the first chunk of the default
+        # assembly (System.Private.CoreLib), so it does not print-usage-and-exit.
+        args: [--smoke, --all-chunks, --skip-probe]
         slow: true
         timeout: 5400
 

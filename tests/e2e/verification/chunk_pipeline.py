@@ -49,9 +49,13 @@ if str(_FOUNDATION_DLL) not in sys.path:
 if str(_TESTING_DIR) not in sys.path:
     sys.path.insert(0, str(_TESTING_DIR))
 
-# SDK auto-build: ensure prebuilt native runtime libs are available
-from _pipeline.tool_helpers import ensure_sdk
-_REPO_ROOT = _TESTING_DIR.parent  # repo root
+# SDK auto-build: ensure prebuilt native runtime libs are available.
+# _REPO_ROOT is resolved robustly (tool_helpers walks up to the .git dir) rather
+# than derived from _TESTING_DIR.parent — after the L6/L7 relocate, _TESTING_DIR may
+# point at tests/e2e (not the repo-root child tests/), which would double-path the
+# SDK/build_presets lookup.
+from _pipeline.tool_helpers import ensure_sdk, _repo_root as _engine_repo_root
+_REPO_ROOT = _engine_repo_root()
 try:
     ensure_sdk(_REPO_ROOT)
     print("[chunk-pipeline] SDK ready")

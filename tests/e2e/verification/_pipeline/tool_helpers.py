@@ -10,8 +10,15 @@ from pathlib import Path
 
 
 def _repo_root() -> Path:
-    """Repository root (parent of the testing/ directory)."""
-    return Path(__file__).resolve().parent.parent.parent
+    """Repository root (dir holding .git). Walks up so it is robust to where the
+    _pipeline package is relocated (engine moved to tests/e2e/verification in L6;
+    root is 4 dirs up from _pipeline/)."""
+    cur = Path(__file__).resolve().parent
+    while cur != cur.parent:
+        if (cur / ".git").exists() or (cur / "tests" / "runner").is_dir():
+            return cur
+        cur = cur.parent
+    return cur
 
 
 def _tool_dir(tool_name: str) -> Path:
