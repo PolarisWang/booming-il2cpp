@@ -20,7 +20,10 @@ from .dotnet import repo_root
 
 def _run(cwd, args, timeout):
     try:
-        p = subprocess.run(args, capture_output=True, text=True, timeout=timeout, cwd=cwd)
+        # utf-8 with errors=replace — the Windows default (GBK) decode crashes on
+        # UTF-8 output (e.g. ctest emitting non-ASCII method names / paths).
+        p = subprocess.run(args, capture_output=True, text=True, timeout=timeout, cwd=cwd,
+                           encoding="utf-8", errors="replace")
         return p.returncode, (p.stdout or "") + "\n" + (p.stderr or "")
     except subprocess.TimeoutExpired:
         return 124, "TIMEOUT after {}s".format(timeout)

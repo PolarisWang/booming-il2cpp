@@ -1,9 +1,25 @@
-# Known failures for the integration layer — records pre-existing failures.
+# Known failures for the integration (native CTest) layer.
+#
 # Project rule: NO "skip". Failures are RUN and reported as FAIL, labelled
 # [KNOWN-FAIL] against this baseline. Remove an entry here once fixed; the
 # driver then fails the gate if it regresses.
 #
-# Currently a new layer (contracts-native). Populate as native/ctest runs
-# stabilize. Empty by default.
+# Recorded 2026-08-07 from ctest -LE benchmark|stress|soak on the reference build.
+# These are PRE-EXISTING native runtime failures (verified identical pre/post the
+# L5 native migration; src/native untouched by the L-series) — NOT regressions.
+# They are surfaced (not hidden) but do not flip the integration gate red.
 version: 1
-known: []
+known:
+  # JIT codegen correctness (pre-existing T4 bugs; test_jit_native 39/68 in-suite fails)
+  - "test_jit_native"
+  - "test_jit_il_smoke"
+  - "test_jit_unwind"
+  - "test_jit_mode"
+  - "test_jit_pgo"
+  # Interpreter bridge smoke (pre-existing)
+  - "chaos_interpreter_bridge_test"
+  # COM CCW (pre-existing SEH crash) + stress cluster
+  - "com_ccw"
+  - "com_ccw_stress"
+  # BGC root scan (pre-existing, very slow ~392s)
+  - "chaos_gc_bgc_root_scan_test"
