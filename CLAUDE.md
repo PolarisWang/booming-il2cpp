@@ -98,7 +98,7 @@ Phase 3 — 按方案逐域修复
 | **TPG** | `src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/` | `.cpp`, `.h` (via Scriban), `.cmake` | 不得修改 `.generated.*` |
 | **Python** | `testing/foundation-dll/verification/` | `.py`, `.json`, `.yaml` | 不得 `write_text` 写入 `.cpp`/`.h` |
 
-跨层写入必须加 `# BOUNDARY_OVERRIDE: issues/NNN` + `Reason:` + `Expires:`。参见 `testing/foundation-dll/verification/preflight/check_layer_boundaries.py`。
+跨层写入必须加 `# BOUNDARY_OVERRIDE: issues/NNN` + `Reason:` + `Expires:`。参见 `tests/e2e/verification/preflight/check_layer_boundaries.py`。
 
 ## 编码规范（wiki 链接）
 
