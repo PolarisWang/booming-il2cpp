@@ -624,3 +624,23 @@ test_all_out.txt
 **/runtime-self-test/**/stdout.txt
 **/runtime-self-test/**/stderr.txt
 **/runtime-self-test/**/trace_output.txt
+
+# ── Relocated foundation-dll family tree (tests/e2e/translation) — generated artifacts ──
+# The 29-family tree moved from testing/foundation-dll to tests/e2e/translation (L7).
+# Its build/codegen/cache outputs are generated and untracked; these rules mirror
+# the old testing/foundation-dll/** ignores for the new home.
+tests/e2e/translation/**/.hephaestus-cache/
+tests/e2e/translation/**/_dll/
+tests/e2e/translation/**/chunks/
+tests/e2e/translation/**/native/build*/
+tests/e2e/translation/**/build_jit*/
+tests/e2e/translation/**/build_jit_output/
+tests/e2e/translation/**/codegen/
+tests/e2e/translation/**/managed/**/build-output/
+tests/e2e/translation/**/results/
+tests/e2e/translation/**/Makefile
+tests/e2e/translation/**/CTestTestfile.cmake
+tests/e2e/translation/**/cmake_install.cmake
+tests/e2e/translation/**/*.o
+tests/e2e/translation/**/*.lib
+tests/e2e/translation/**/*.a
