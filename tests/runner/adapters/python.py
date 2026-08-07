@@ -26,6 +26,11 @@ def _resolve_group_env(cwd: str, raw: dict) -> dict:
     env = dict(os.environ)
     sep = os.pathsep  # ";" on Windows, ":" on POSIX
     for k, v in raw.items():
+        if v is None or v == "":
+            # YAML null / empty template var → leave inherited env alone (do NOT
+            # coerce to the literal string "None"/empty, which would point the
+            # engine at a bogus path).
+            continue
         if k == "PYTHONPATH":
             # A `;`/`:`-separated list of repo-relative paths → resolve each, then
             # prepend to the inherited PYTHONPATH so the engine package root wins.
