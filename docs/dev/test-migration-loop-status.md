@@ -71,6 +71,10 @@ tests/unit/runtime-native/
 | L11 | ✅ 完成 | 删 `testing/` 根（`20a8375bb` + 物理 rm）。单 tests/ 树达成——tests/{unit,e2e,authority,fixtures,integration,...} 为唯一测试根，testing/ 已不存在。cmake config 绿、引擎 chain 正常。142 条 dead testing/ gitignore 规则留待后续清理（惰性无害）。 |
 
 > **Loop 状态：全部 L 任务完成 ✅**。L1-L11（测试根单根化 + foundation-dll 引擎/族迁移 + testing/ 删除）已全部交付并验证。`docs/dev/test-migration-loop-status.md` 使命完成。
+>
+> **已知惰性遗留（非阻塞，活跃测试入口不受影响——`--layer unit` OVERALL OK pass=2248）**：
+> - `foundation_dll_audit_generator.py`（`build/toolchains/run/testing/`，tracked）+ 3 个 `tests/verification/unit/...` 消费测试，import 的 `foundation_dll` 包模块（case_index_loader.py 等）已随 `testing/` 删除 → **孤儿 legacy 审计工具**，未接入 driver groups（不在 suite_contract），无需复活。
+> - `build/toolchains/run/` 下生成的 audit 骨架 + 惰性 `.gitignore` testing/ 规则（142 条）+ settings*.json 权限路径（foreign/本地）——均 inert。
 
 
 
