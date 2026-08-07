@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Foundation DLL Translation Audit Packet v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "assemblyName", "inputManifest", "surfaceLedger",
+    "semanticLedger", "dllBoundaryInventory", "nativeizationPlan",
+    "managedProofReport", "nativeProofReport", "hotupdateProofReport",
+    "benchmarkReport", "codegenReviewJson", "codegenReviewMarkdown",
+    "completionReport", "finalStatus"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "assemblyName": { "type": "string" },
+    "inputManifest": { "type": "object" },
+    "surfaceLedger": { "type": "object" },
+    "semanticLedger": { "type": "object" },
+    "dllBoundaryInventory": { "type": "object" },
+    "nativeizationPlan": { "type": "object" },
+    "managedProofReport": { "type": "object" },
+    "nativeProofReport": { "type": "object" },
+    "hotupdateProofReport": { "type": "object" },
+    "benchmarkReport": { "type": "object" },
+    "codegenReviewJson": { "type": "object" },
+    "codegenReviewMarkdown": { "type": "object" },
+    "completionReport": { "type": "object" },
+    "finalStatus": { "type": "string", "enum": ["pending", "completed", "blocked"] }
+  }
+}
