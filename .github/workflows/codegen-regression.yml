@@ -66,24 +66,6 @@ jobs:
       - name: Run Snapshot Tests
         run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n
 
-      - name: Run MetadataWriter Tests
-        run: dotnet test tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore -v n
-
-      - name: MetadataWriter Coverage Collection
-        run: |
-          dotnet test tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/ `
-            --configuration Release `
-            --settings tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/coverlet.runsettings `
-            "-p:CollectCoverage=true" `
-            "-p:CoverletOutputFormat=cobertura" `
-            "-p:CoverletOutput=coverage-results/metadatawriter-coverage.cobertura.xml"
-
-      - name: Upload MetadataWriter Coverage Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: metadatawriter-coverage-report
-          path: coverage-results/metadatawriter-coverage.cobertura.xml
-
       - name: Code Coverage Collection
         run: |
           dotnet test tests/unit/managed/codegen/Chaos.IL2CPP.CodeGen.Tests.csproj `

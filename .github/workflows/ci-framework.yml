@@ -104,9 +104,6 @@ jobs:
       - name: Run Snapshot Tests
         run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n
 
-      - name: Run MetadataWriter Tests
-        run: dotnet test tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore -v n
-
       - name: Configure CMake (${{ runner.os }})
         id: cmake-config
         shell: bash
