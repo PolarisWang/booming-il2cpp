@@ -15,7 +15,7 @@ on:
       - 'src/native/**'
       - 'src/managed/Chaos.IL2CPP.Generator/**'
       - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
-      - 'testing/foundation-dll/**'
+      - 'tests/e2e/translation/**'
       - 'testing/snapshots/**'
       - 'contracts/native/v0/**'
   push:
@@ -24,7 +24,7 @@ on:
       - 'src/native/**'
       - 'src/managed/Chaos.IL2CPP.Generator/**'
       - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
-      - 'testing/foundation-dll/**'
+      - 'tests/e2e/translation/**'
       - 'testing/snapshots/**'
       - 'contracts/native/v0/**'
   workflow_dispatch:
@@ -102,11 +102,11 @@ jobs:
       - name: Configure Native Tests
         shell: bash
         run: |
-          cd testing
-          cmake -S src/native -B artifacts/run/native-test-build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          # L11: native CTest suites live under tests/unit/runtime-native (factory via root CMake).
+          cmake --preset windows-x64-reference 2>/dev/null || cmake -S . -B build/native-test -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
       - name: Build Native Tests
-        run: cmake --build testing/artifacts/run/native-test-build --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
+        run: cmake --build build/native-test --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
 
       # Foundation-DLL execution
       - name: Determine CI Mode
@@ -127,8 +127,10 @@ jobs:
         shell: bash
         id: pipeline
         run: |
-          cd testing/foundation-dll
-          python verification/ci_smoke.py --mode=${{ steps.ci-mode.outputs.mode }} ${{ steps.ci-mode.outputs.check-regression }} 2>&1 | tee pipeline_output.txt
+          # L6/L7: engine at tests/e2e/verification, families at tests/e2e/translation.
+          export PYTHONPATH="$GITHUB_WORKSPACE/tests/e2e:$GITHUB_WORKSPACE/tests/e2e/verification"
+          export CHAOS_FOUNDATION_DLL="$GITHUB_WORKSPACE/tests/e2e/translation"
+          python -m verification.ci_smoke --mode=${{ steps.ci-mode.outputs.mode }} ${{ steps.ci-mode.outputs.check-regression }} 2>&1 | tee pipeline_output.txt
           echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
 
       - name: Upload Foundation-DLL Results
@@ -137,8 +139,8 @@ jobs:
         with:
           name: foundation-dll-results-${{ matrix.os }}-${{ github.sha }}
           path: |
-            testing/foundation-dll/results/
-            testing/foundation-dll/pipeline_output.txt
+            tests/e2e/translation/results/
+            pipeline_output.txt
 
       - name: Post PR Comment (on failure or regression)
         if: (failure() || steps.pipeline.outputs.exit_code != '0') && github.event_name == 'pull_request'
@@ -149,7 +151,7 @@ jobs:
             const path = require('path');
             let pipelineOutput = '';
             try {
-              pipelineOutput = fs.readFileSync('testing/foundation-dll/pipeline_output.txt', 'utf8');
+              pipelineOutput = fs.readFileSync('pipeline_output.txt', 'utf8');
             } catch(e) { pipelineOutput = '(could not read pipeline output)'; }
 
             // Extract failure/regression details from the pipeline output

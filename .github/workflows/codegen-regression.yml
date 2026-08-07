@@ -9,9 +9,9 @@ on:
       - 'src/native/interpreter/**'
       - 'src/native/common/**'
       - 'testing/snapshots/**'
-      - 'testing/src/native/**'
+      - 'tests/unit/runtime-native/**'
       - 'tests/unit/managed/**'
-      - 'testing/foundation-dll/**'
+      - 'tests/e2e/translation/**'
       - 'contracts/native/v0/**'
   push:
     branches: [main]
@@ -22,9 +22,9 @@ on:
       - 'src/native/interpreter/**'
       - 'src/native/common/**'
       - 'testing/snapshots/**'
-      - 'testing/src/native/**'
+      - 'tests/unit/runtime-native/**'
       - 'tests/unit/managed/**'
-      - 'testing/foundation-dll/**'
+      - 'tests/e2e/translation/**'
       - 'contracts/native/v0/**'
 
 jobs:
@@ -114,25 +114,27 @@ jobs:
           cmake -S src/native -B artifacts/run/native-test-build -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
       - name: Build Native Tests
-        run: cmake --build testing/artifacts/run/native-test-build --config RelWithDebInfo
+        run: cmake --build tests/unit/runtime-native/build --config RelWithDebInfo
 
       - name: Run Codegen Native Tests
         run: |
-          ctest --test-dir testing/artifacts/run/native-test-build -R "test_jit_native|test_jit_abi|test_jit_il_smoke|test_jit_gc_slot_map|test_jit_osr|test_jit_seh|test_jit_unwind|test_jit_binary_ir|test_jit_mode|test_jit_pgo" --output-on-failure -V 2>&1 | tee jit-native-output.txt
+          ctest --test-dir tests/unit/runtime-native/build -R "test_jit_native|test_jit_abi|test_jit_il_smoke|test_jit_gc_slot_map|test_jit_osr|test_jit_seh|test_jit_unwind|test_jit_binary_ir|test_jit_mode|test_jit_pgo" --output-on-failure -V 2>&1 | tee jit-native-output.txt
 
       - name: Run Common Native Tests
-        run: ctest --test-dir testing/artifacts/run/native-test-build -R "test_common" --output-on-failure
+        run: ctest --test-dir tests/unit/runtime-native/build -R "test_common" --output-on-failure
 
       - name: Foundation-DLL CI Smoke
         run: |
-          cd testing/foundation-dll
-          python _core/python/ci_smoke.py
+          # L6/L7: engine at tests/e2e/verification, families at tests/e2e/translation.
+          export PYTHONPATH="$GITHUB_WORKSPACE/tests/e2e:$GITHUB_WORKSPACE/tests/e2e/verification"
+          export CHAOS_FOUNDATION_DLL="$GITHUB_WORKSPACE/tests/e2e/translation"
+          python -m verification.ci_smoke
 
       # ── JIT Performance Baseline ─────────────────────────────────────
       - name: Run JIT Benchmarks
         continue-on-error: true
         run: |
-          ctest --test-dir testing/artifacts/run/native-test-build -R "test_jit_bench" -C RelWithDebInfo --output-on-failure > jit-bench-output.txt 2>&1
+          ctest --test-dir tests/unit/runtime-native/build -R "test_jit_bench" -C RelWithDebInfo --output-on-failure > jit-bench-output.txt 2>&1
 
       - name: Collect JIT Metrics
         continue-on-error: true

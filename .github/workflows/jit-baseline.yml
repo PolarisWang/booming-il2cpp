@@ -15,7 +15,7 @@ on:
       - 'src/native/interpreter/**'
       - 'src/native/runtime-core/**'
       - 'src/native/common/**'
-      - 'testing/src/native/**'
+      - 'tests/unit/runtime-native/**'
   push:
     branches: [main]
     paths:
@@ -23,7 +23,7 @@ on:
       - 'src/native/interpreter/**'
       - 'src/native/runtime-core/**'
       - 'src/native/common/**'
-      - 'testing/src/native/**'
+      - 'tests/unit/runtime-native/**'
   workflow_dispatch:
     inputs:
       update_baseline:
@@ -91,18 +91,18 @@ jobs:
           cmake -S src/native -B artifacts/run/native-test-build -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
       - name: Build Native Tests
-        run: cmake --build testing/artifacts/run/native-test-build --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
+        run: cmake --build tests/unit/runtime-native/build --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
 
       - name: Run JIT Regression Tests
         run: |
-          ctest --test-dir testing/artifacts/run/native-test-build \
+          ctest --test-dir tests/unit/runtime-native/build \
             -R "test_jit_native|test_jit_abi|test_jit_il_smoke|test_jit_gc_slot_map|test_jit_osr|test_jit_seh|test_jit_unwind|test_jit_binary_ir|test_jit_mode|test_jit_pgo" \
             --output-on-failure -V 2>&1 | tee jit-native-output.txt
 
       - name: Run JIT Benchmarks
         continue-on-error: true
         run: |
-          ctest --test-dir testing/artifacts/run/native-test-build \
+          ctest --test-dir tests/unit/runtime-native/build \
             -R "test_jit_bench" -C RelWithDebInfo \
             --output-on-failure > jit-bench-output.txt 2>&1
 

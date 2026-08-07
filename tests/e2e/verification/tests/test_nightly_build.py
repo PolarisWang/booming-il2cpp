@@ -5,7 +5,7 @@ import tempfile
 from datetime import date, timedelta
 from pathlib import Path
 
-sys.path.insert(0, "testing/foundation-dll")
+sys.path.insert(0, "unused/old-root")
 
 passed = 0
 failed = 0
@@ -25,9 +25,9 @@ def check(name, condition, detail=""):
 print("=== Syntax ===")
 import py_compile
 for f in [
-    "testing/foundation-dll/verification/nightly_build.py",
-    "testing/foundation-dll/verification/nightly_delta.py",
-    "testing/foundation-dll/verification/nightly_summary.py",
+    "tests/e2e/verification/nightly_build.py",
+    "tests/e2e/verification/nightly_delta.py",
+    "tests/e2e/verification/nightly_summary.py",
 ]:
     py_compile.compile(f, doraise=True)
     check(f, True)

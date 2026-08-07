@@ -3,7 +3,7 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, "testing/foundation-dll")  # makes verification. importable
+sys.path.insert(0, "unused/old-root")  # makes verification. importable
 
 passed = 0
 failed = 0
@@ -23,13 +23,13 @@ def check(name, condition, detail=""):
 print("=== Syntax check ===")
 import py_compile
 for f in [
-    "testing/foundation-dll/verification/stages/build.py",
-    "testing/foundation-dll/verification/stages/fact_chunk.py",
-    "testing/foundation-dll/verification/stages/aggregate.py",
-    "testing/foundation-dll/verification/stages/hephaestus_cache.py",
-    "testing/foundation-dll/verification/stages/benchmark_chunk.py",
-    "testing/foundation-dll/verification/reporting/dashboard.py",
-    "testing/foundation-dll/verification/analysis/code_size_tracker.py",
+    "tests/e2e/verification/stages/build.py",
+    "tests/e2e/verification/stages/fact_chunk.py",
+    "tests/e2e/verification/stages/aggregate.py",
+    "tests/e2e/verification/stages/hephaestus_cache.py",
+    "tests/e2e/verification/stages/benchmark_chunk.py",
+    "tests/e2e/verification/reporting/dashboard.py",
+    "tests/e2e/verification/analysis/code_size_tracker.py",
     ".ai/skills/tooling/learning/skill_learn.py",
 ]:
     try:
@@ -75,10 +75,10 @@ with tempfile.TemporaryDirectory() as tmp:
 # ── 3. Created chunk.json files exist and are valid ──
 print("\n=== chunk.json file consistency ===")
 chunk_configs = [
-    ("System.Private.CoreLib/security-cryptography",     "testing/foundation-dll/System.Private.CoreLib/chunks/security-cryptography/chunk.json"),
-    ("System.Security.Cryptography/security-cryptography","testing/foundation-dll/System.Security.Cryptography/chunks/security-cryptography/chunk.json"),
-    ("System.Linq/global-ns",                            "testing/foundation-dll/System.Linq/chunks/global-ns/chunk.json"),
-    ("System.Linq.Expressions/global-ns",                "testing/foundation-dll/System.Linq.Expressions/chunks/global-ns/chunk.json"),
+    ("System.Private.CoreLib/security-cryptography",     "tests/e2e/translation/System.Private.CoreLib/chunks/security-cryptography/chunk.json"),
+    ("System.Security.Cryptography/security-cryptography","tests/e2e/translation/System.Security.Cryptography/chunks/security-cryptography/chunk.json"),
+    ("System.Linq/global-ns",                            "tests/e2e/translation/System.Linq/chunks/global-ns/chunk.json"),
+    ("System.Linq.Expressions/global-ns",                "tests/e2e/translation/System.Linq.Expressions/chunks/global-ns/chunk.json"),
 ]
 for label, path_str in chunk_configs:
     p = Path(path_str)
@@ -102,7 +102,7 @@ for label, path_str in chunk_configs:
 
 # ── 4. Verify no hardcoded crypto slug matching in build.py ──
 print("\n=== No stale slug matching ===")
-with open("testing/foundation-dll/verification/stages/build.py", encoding="utf-8") as f:
+with open("tests/e2e/verification/stages/build.py", encoding="utf-8") as f:
     content = f.read()
 # The new code should have the slug match inside 'else:' fallback, not as primary
 has_slug_fallback = 'any(x in ctx.slug for x in ("security-cryptography", "x509"))' in content
@@ -117,7 +117,7 @@ check("config-driven path comes before slug fallback", idx_config < idx_slug)
 
 # ── 5. Verify hephaestus cache changes ──
 print("\n=== Hephaestus cache ===")
-with open("testing/foundation-dll/verification/stages/hephaestus_cache.py", encoding="utf-8") as f:
+with open("tests/e2e/verification/stages/hephaestus_cache.py", encoding="utf-8") as f:
     content = f.read()
 check("manifest corrupt prints ERROR (not WARNING)",
       'ERROR: Corrupt manifest' in content)
@@ -127,7 +127,7 @@ check("prune cleans stale entries",
 
 # ── 6. Verify benchmark calibration WARNING ──
 print("\n=== Benchmark calibration ===")
-with open("testing/foundation-dll/verification/stages/benchmark_chunk.py", encoding="utf-8") as f:
+with open("tests/e2e/verification/stages/benchmark_chunk.py", encoding="utf-8") as f:
     content = f.read()
 check("probe fail calls _log_calibration_failure",
       '_log_calibration_failure' in content)
@@ -137,7 +137,7 @@ check("all-fast calls _log_calibration_failure",
 
 # ── 7. Verify DOTNET_ROOT has no hardcoded paths ──
 print("\n=== DOTNET_ROOT ===")
-with open("testing/foundation-dll/verification/stages/build.py", encoding="utf-8") as f:
+with open("tests/e2e/verification/stages/build.py", encoding="utf-8") as f:
     content = f.read()
 check("no hardcoded /usr/share/dotnet paths",
       "/usr/share/dotnet" not in content)
@@ -147,7 +147,7 @@ check("dotnet --info fallback present",
 
 # ── 8. Verify aggregate meta-mismatch is hard error ──
 print("\n=== Aggregate meta-mismatch ===")
-with open("testing/foundation-dll/verification/stages/aggregate.py", encoding="utf-8") as f:
+with open("tests/e2e/verification/stages/aggregate.py", encoding="utf-8") as f:
     content = f.read()
 check("meta-mismatch sets status=error",
       'aggregate_status = "error"' in content)
@@ -159,7 +159,7 @@ check("any mismatch is error (not partial)",
 
 # ── 9. Verify value_suspicious appends to errors ──
 print("\n=== Value suspicious ===")
-with open("testing/foundation-dll/verification/stages/fact_chunk.py", encoding="utf-8") as f:
+with open("tests/e2e/verification/stages/fact_chunk.py", encoding="utf-8") as f:
     content = f.read()
 check("value_suspicious appends to errors",
       'errors.append(f"{value_warnings}' in content)
@@ -169,7 +169,7 @@ check("value_suspicious no longer sets partial",
 
 # ── 10. Verify JIT config-driven check ──
 print("\n=== JIT config-driven ===")
-with open("testing/foundation-dll/verification/stages/fact_chunk.py", encoding="utf-8") as f:
+with open("tests/e2e/verification/stages/fact_chunk.py", encoding="utf-8") as f:
     content = f.read()
 check("_is_jit_enabled exists", "_is_jit_enabled" in content)
 check("jitEnabled error if exe missing",

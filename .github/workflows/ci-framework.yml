@@ -88,7 +88,7 @@ jobs:
         with:
           path: |
             build/native
-            testing/artifacts
+            tests/unit/runtime-native/build
           key: cmake-${{ runner.os }}-${{ inputs.build_config }}-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
           restore-keys: cmake-${{ runner.os }}-${{ inputs.build_config }}-
 
@@ -131,16 +131,14 @@ jobs:
       - name: Configure Native Tests
         shell: bash
         run: |
-          cd testing
-          cmake -S src/native -B artifacts/run/native-test-build -DCMAKE_BUILD_TYPE=${{ inputs.build_config }}
-
-      - name: Build Native Tests
-        run: cmake --build testing/artifacts/run/native-test-build --config ${{ inputs.build_config }} -j$(nproc 2>/dev/null || echo 4)
+          # L11: native CTest suites live at tests/unit/runtime-native (factory + root googletest).
+          cmake -S tests/unit/runtime-native -B tests/unit/runtime-native/build -DCMAKE_BUILD_TYPE=${{ inputs.build_config }}
+          cmake --build tests/unit/runtime-native/build --config ${{ inputs.build_config }} -j$(nproc 2>/dev/null || echo 4)
 
       - name: Run Codegen Native Tests
         if: inputs.run_jit_tests
         run: |
-          ctest --test-dir testing/artifacts/run/native-test-build \
+          ctest --test-dir tests/unit/runtime-native/build \
             -R "test_jit_native|test_jit_abi|test_jit_il_smoke|test_jit_gc_slot_map|test_jit_osr|test_jit_seh|test_jit_unwind|test_jit_binary_ir|test_jit_mode|test_jit_pgo" \
             --output-on-failure -V 2>&1 | tee jit-native-output.txt
 
@@ -153,13 +151,15 @@ jobs:
 
       - name: Run Common Native Tests
         if: inputs.run_jit_tests
-        run: ctest --test-dir testing/artifacts/run/native-test-build -R "test_common" --output-on-failure
+        # L11: ctest against the relocated runtime-native build.
+        run: ctest --test-dir tests/unit/runtime-native/build -R "test_common" --output-on-failure
 
       - name: Foundation-DLL CI Smoke
         if: inputs.run_fd_smoke
         run: |
-          cd testing/foundation-dll
-          python verification/ci_smoke.py
+          export PYTHONPATH="$GITHUB_WORKSPACE/tests/e2e:$GITHUB_WORKSPACE/tests/e2e/verification"
+          export CHAOS_FOUNDATION_DLL="$GITHUB_WORKSPACE/tests/e2e/translation"
+          python -m verification.ci_smoke
 
       - name: AOT Smoke Check
         if: inputs.run_aot_smoke
@@ -170,7 +170,7 @@ jobs:
         if: inputs.run_benchmarks
         continue-on-error: true
         run: |
-          ctest --test-dir testing/artifacts/run/native-test-build \
+          ctest --test-dir tests/unit/runtime-native/build \
             -R "test_jit_bench" -C ${{ inputs.build_config }} \
             --output-on-failure > jit-bench-output.txt 2>&1
 

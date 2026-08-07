@@ -12,18 +12,18 @@ on:
       - 'src/native/jit/**'
       - 'src/native/runtime-core/hybrid_precode.h'
       - 'src/native/runtime-core/hybrid_precode.cpp'
-      - 'testing/src/native/jit/test_jit_hybrid_mode.cpp'
-      - 'testing/src/native/jit/test_hybrid_e2e.cpp'
-      - 'testing/src/native/jit/test_hybrid_race.cpp'
+      - 'tests/unit/runtime-native/jit/test_jit_hybrid_mode.cpp'
+      - 'tests/unit/runtime-native/jit/test_hybrid_e2e.cpp'
+      - 'tests/unit/runtime-native/jit/test_hybrid_race.cpp'
   push:
     branches: [main]
     paths:
       - 'src/native/jit/**'
       - 'src/native/runtime-core/hybrid_precode.h'
       - 'src/native/runtime-core/hybrid_precode.cpp'
-      - 'testing/src/native/jit/test_hybrid_mode.cpp'
-      - 'testing/src/native/jit/test_hybrid_e2e.cpp'
-      - 'testing/src/native/jit/test_hybrid_race.cpp'
+      - 'tests/unit/runtime-native/jit/test_hybrid_mode.cpp'
+      - 'tests/unit/runtime-native/jit/test_hybrid_e2e.cpp'
+      - 'tests/unit/runtime-native/jit/test_hybrid_race.cpp'
   workflow_dispatch:
 
 jobs:
@@ -84,17 +84,17 @@ jobs:
           cmake -S src/native -B artifacts/run/native-test-build -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
       - name: Build Native Tests
-        run: cmake --build testing/artifacts/run/native-test-build --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
+        run: cmake --build tests/unit/runtime-native/build --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
 
       - name: Run Hybrid Mode Tests
         run: |
-          ctest --test-dir testing/artifacts/run/native-test-build \
+          ctest --test-dir tests/unit/runtime-native/build \
             -R "test_jit_hybrid_mode|test_hybrid_e2e|test_hybrid_race" \
             --output-on-failure -V 2>&1 | tee hybrid-test-output.txt
 
       - name: Run Full JIT Regression (sanity check)
         run: |
-          ctest --test-dir testing/artifacts/run/native-test-build \
+          ctest --test-dir tests/unit/runtime-native/build \
             -R "test_jit_native|test_jit_abi|test_jit_il_smoke" \
             --output-on-failure -V
 

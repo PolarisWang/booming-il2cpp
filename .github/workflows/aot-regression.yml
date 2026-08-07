@@ -12,7 +12,7 @@ on:
       - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
       - 'src/managed/Chaos.IL2CPP.Driver/**'
       - 'testing/snapshots/**'
-      - 'testing/foundation-dll/System.Private.CoreLib/**'
+      - 'tests/e2e/translation/System.Private.CoreLib/**'
       - 'contracts/native/v0/**'
   push:
     branches: [main]
@@ -21,7 +21,7 @@ on:
       - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
       - 'src/managed/Chaos.IL2CPP.Driver/**'
       - 'testing/snapshots/**'
-      - 'testing/foundation-dll/System.Private.CoreLib/**'
+      - 'tests/e2e/translation/System.Private.CoreLib/**'
       - 'contracts/native/v0/**'
   workflow_dispatch:
 

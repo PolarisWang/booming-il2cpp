@@ -3,7 +3,7 @@ import sys
 import json
 import re
 
-sys.path.insert(0, "testing/foundation-dll/verification")
+sys.path.insert(0, "tests/e2e/verification")
 
 passed = 0
 failed = 0
