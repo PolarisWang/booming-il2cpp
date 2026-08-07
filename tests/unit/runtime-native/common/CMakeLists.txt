@@ -1,151 +1,151 @@
 # Common library tests (chaos_common module)
 
-add_chaos_test(test_common_checked_conv
+chaos_native_add_test(test_common_checked_conv
     common_checked_conv_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_collection
+chaos_native_add_test(test_common_collection
     common_collection_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_json_reader
+chaos_native_add_test(test_common_json_reader
     common_json_reader_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_format
+chaos_native_add_test(test_common_format
     common_format_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_async
+chaos_native_add_test(test_common_async
     common_async_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_async_extended
+chaos_native_add_test(test_common_async_extended
     common_async_extended_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_thread
+chaos_native_add_test(test_common_thread
     common_thread_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_monitor
+chaos_native_add_test(test_common_monitor
     common_monitor_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_profile
+chaos_native_add_test(test_common_profile
     common_profile_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_span
+chaos_native_add_test(test_common_span
     common_span_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_native_types
+chaos_native_add_test(test_common_native_types
     common_native_types_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_arithmetic
+chaos_native_add_test(test_common_arithmetic
     common_arithmetic_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_checked_conv_ext
+chaos_native_add_test(test_common_checked_conv_ext
     common_checked_conv_test_ext.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_type_info
+chaos_native_add_test(test_common_type_info
     common_type_info_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_config
+chaos_native_add_test(test_common_config
     common_config_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_log
+chaos_native_add_test(test_common_log
     common_log_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_trace
+chaos_native_add_test(test_common_trace
     common_trace_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_eh
+chaos_native_add_test(test_common_eh
     common_eh_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_compiler_hints
+chaos_native_add_test(test_common_compiler_hints
     common_compiler_hints_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_load_store
+chaos_native_add_test(test_common_load_store
     common_load_store_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_ptr_tag
+chaos_native_add_test(test_common_ptr_tag
     common_ptr_tag_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_finally
+chaos_native_add_test(test_common_finally
     common_finally_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_static_init
+chaos_native_add_test(test_common_static_init
     common_static_init_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_status
+chaos_native_add_test(test_common_status
     common_status_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_tls_buffer
+chaos_native_add_test(test_common_tls_buffer
     common_tls_buffer_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_log_stress
+chaos_native_add_test(test_common_log_stress
     common_log_stress_test.cpp
     LABELS "stress;common"
 )
 
-add_chaos_test(test_common_trace_stress
+chaos_native_add_test(test_common_trace_stress
     common_trace_stress_test.cpp
     LABELS "stress;common"
 )
 
-add_chaos_test(test_common_async_stress
+chaos_native_add_test(test_common_async_stress
     common_async_stress_test.cpp
     LABELS "stress;common"
 )
 
-add_chaos_test(test_common_monitor_stress
+chaos_native_add_test(test_common_monitor_stress
     common_monitor_stress_test.cpp
     LABELS "stress;common"
 )
 
-add_chaos_test(test_common_json_reader_fuzz
+chaos_native_add_test(test_common_json_reader_fuzz
     common_json_reader_fuzz_test.cpp
     LABELS "fuzz;common"
 )
@@ -154,12 +154,12 @@ add_chaos_test(test_common_json_reader_fuzz
 # Phase F — Special module tests
 # ═══════════════════════════════════════════════════════════════════════════
 
-add_chaos_test(test_common_asan
+chaos_native_add_test(test_common_asan
     common_asan_test.cpp
     LABELS "unit;common"
 )
 
-add_chaos_test(test_common_unordered_dense
+chaos_native_add_test(test_common_unordered_dense
     common_unordered_dense_test.cpp
     LABELS "unit;common"
 )
@@ -167,7 +167,7 @@ add_chaos_test(test_common_unordered_dense
 # profile_enabled needs CHAOS_IL2CPP_PROFILE_ENABLED=1 and profile_globals.cpp
 chaos_native_add_test(test_common_profile_enabled
     common_profile_enabled_test.cpp
-    "${CHAOS_PROJECT_ROOT}/../src/native/common/chaos/profile_globals.cpp"
+    "${CMAKE_SOURCE_DIR}/src/native/common/chaos/profile_globals.cpp"
     DEFINITIONS CHAOS_IL2CPP_PROFILE_ENABLED=1
     LABELS "unit;common"
 )

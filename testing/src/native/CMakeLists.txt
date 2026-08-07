@@ -144,7 +144,6 @@ macro(add_chaos_test name)
 endmacro()
 
 # Subdirectories
-add_subdirectory(common)
 add_subdirectory(jit)
 add_subdirectory(engine-bridge)
 add_subdirectory(hot-update)
