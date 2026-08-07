@@ -65,7 +65,7 @@ tests/unit/runtime-native/
 |------|------|------|
 | L5 全部子域 | ✅ 完成 | support/abi/bootstrap/common/engine-bridge/hot-update/diagnostics/runtime-core/jit/fuzz |
 | L9 (IL fixtures) | ✅ 完成 | commit `318125649` 清理 testing/data/il 已弃原点（永久家 tests/fixtures/il/ 已在 e3f20127a） |
-| L6+L7 | ✅ 架构解耦 · 物理迁移待专门会话 | foundation-dll e2e（P1，引擎+29族联合）。✅ 已修 per-dll 驱动链（`d183e8c4c`）；✅ **已解耦引擎锚点**（`4e3b0ed93`+`223185861`）：`chunk_pipeline.py` 现支持 `CHAOS_FOUNDATION_DLL`（族根）+ `CHAOS_TESTING_DIR`（`_pipeline` holder）两个 env 覆盖，默认不变，`_REPO_ROOT` 由 test-tree parent 推导。→ 之前「引擎+族+_pipeline 不可分割」的 3 anchor 不变量已打破，引擎可独立于 28 族与 `_pipeline` 迁移（`__main__`/`ci_smoke` 自动继承）。**剩余**：物理 `git mv verification/`→`tests/e2e/verification/` + 重接线脚本 env + 迁后重跑一个 dll e2e（重型 native build，数十 min/族）。机械但需专门会话完成。 |
+| L6+L7 | ✅ 引擎入口可迁移 · 余留 13 辅助文件+物理 mv | foundation-dll e2e（P1，引擎+29族联合）。✅ per-dll 驱动链已修（`d183e8c4c`）；✅ 引擎根解耦（`4e3b0ed93`+`223185861`+`d3ede965b`）：`_path.py` 现为根解析单一真源（`foundation_root()`/`testing_tree_root()`，env 覆盖 `CHAOS_FOUNDATION_DLL`/`CHAOS_TESTING_DIR` 或 marker-walk），`chunk_pipeline.py`（入口，`__main__`/`ci_smoke` 继承）已接入 → `python -m verification` 位置无关可迁。**余留**：① 13 个辅助文件（analysis/nightly_*/stages/*）仍自算 `_FOUNDATION_DLL`，须改接 resolver；② 物理 `git mv verification/`→`tests/e2e/verification/`；③ 重接线脚本 env；④ 迁后重跑一个 dll e2e（重型 native build）。机械但需专门会话收尾。 |
 | L10 | 并入 L11 | gate 是冗余 wrapper，platform-hosts 已就位；CMake-coupled，随 L11 重连 |
 | L11 | ⏸ 阻塞 | 删 testing/ 根（现 L6 引擎可拆迁后大幅简化；L7 族+L6 物理迁移完成才可删） |
 
