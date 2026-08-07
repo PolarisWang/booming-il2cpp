@@ -65,7 +65,7 @@ tests/unit/runtime-native/
 |------|------|------|
 | L5 全部子域 | ✅ 完成 | support/abi/bootstrap/common/engine-bridge/hot-update/diagnostics/runtime-core/jit/fuzz |
 | L9 (IL fixtures) | ✅ 完成 | commit `318125649` 清理 testing/data/il 已弃原点（永久家 tests/fixtures/il/ 已在 e3f20127a） |
-| L6+L7 | ✅ 引擎入口可迁移 · 余留 13 辅助文件+物理 mv | foundation-dll e2e（P1，引擎+29族联合）。✅ per-dll 驱动链已修（`d183e8c4c`）；✅ 引擎根解耦（`4e3b0ed93`+`223185861`+`d3ede965b`）：`_path.py` 现为根解析单一真源（`foundation_root()`/`testing_tree_root()`，env 覆盖 `CHAOS_FOUNDATION_DLL`/`CHAOS_TESTING_DIR` 或 marker-walk），`chunk_pipeline.py`（入口，`__main__`/`ci_smoke` 继承）已接入 → `python -m verification` 位置无关可迁。**余留**：① 13 个辅助文件（analysis/nightly_*/stages/*）仍自算 `_FOUNDATION_DLL`，须改接 resolver；② 物理 `git mv verification/`→`tests/e2e/verification/`；③ 重接线脚本 env；④ 迁后重跑一个 dll e2e（重型 native build）。机械但需专门会话收尾。 |
+| L6+L7 | ✅ 引擎全文件 resolver 化 · 余留物理 mv+脚本+e2e | foundation-dll e2e（P1，引擎+29族联合）。✅ per-dll 驱动链已修（`d183e8c4c`）；✅ **全部 14 个引擎文件已接中心 resolver**（`4e3b0ed93`+`223185861`+`d3ede965b`+`c3d595e32`）：`_path.py`=根解析单一真源（`foundation_root()`/`testing_tree_root()`，env 覆盖或 marker-walk），`chunk_pipeline`（入口）+ 13 个辅助文件全部改接 → 引擎完全 relocation-ready，33 引擎单测 PASS。**余留**（纯机械）：① `git mv verification/`→`tests/e2e/verification/`（须处理 `verification` 包在新位置的 import 解析）；② 重接线 `run-foundation-dll-*.sh` PYTHONPATH + `CHAOS_FOUNDATION_DLL`/`CHAOS_TESTING_DIR`；③ 迁后重跑一个 dll e2e（重型 native build）。重型验证需专门会话收尾。 |
 | L10 | 并入 L11 | gate 是冗余 wrapper，platform-hosts 已就位；CMake-coupled，随 L11 重连 |
 | L11 | ⏸ 阻塞 | 删 testing/ 根（现 L6 引擎可拆迁后大幅简化；L7 族+L6 物理迁移完成才可删） |
 
