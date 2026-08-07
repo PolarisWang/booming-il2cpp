@@ -1,9 +1,9 @@
 import json
 
-chunk_dir = "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Private.CoreLib/chunks/numerics"
+chunk_dir = "tests/e2e/translation/System.Private.CoreLib/chunks/numerics"
 meta = json.load(open(f"{chunk_dir}/managed/subjects/subjects.metadata.json"))
 
-partition = json.load(open("D:/agent/chaos-il2cpp/testing/foundation-dll/System.Private.CoreLib/_dll/namespace-partition.json"))
+partition = json.load(open("tests/e2e/translation/System.Private.CoreLib/_dll/namespace-partition.json"))
 numerics_chunk = [c for c in partition["chunks"] if c["slug"] == "numerics"][0]
 chunk_methods = set(m["methodSubjectId"] for m in numerics_chunk["methods"])
 covered = set(m["methodSubjectId"] for m in meta["methods"])

@@ -9,7 +9,7 @@ Generates an HTML dashboard showing:
 
 Usage:
     # Generate dashboard from latest results
-    python scripts/ci/dashboard_enhanced.py --results-dir=testing/foundation-dll/results --output=dashboard.html
+    python scripts/ci/dashboard_enhanced.py --results-dir=tests/e2e/translation/results --output=dashboard.html
 
     # Historical mode: compare against baseline history
     python scripts/ci/dashboard_enhanced.py --results-dir=testing/results/verification-history --history --output=trend-dashboard.html
@@ -217,7 +217,7 @@ def _generate_trend_bars(results: dict[str, Any]) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate enhanced CI dashboard")
-    parser.add_argument("--results-dir", default="testing/foundation-dll/results",
+    parser.add_argument("--results-dir", default="tests/e2e/translation/results",
                         help="Directory containing verification results")
     parser.add_argument("--output", default="ci-dashboard.html",
                         help="Output HTML file path")

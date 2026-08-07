@@ -16,7 +16,7 @@ fi
 
 echo "=== Foundation DLL Verification: All Imported Families ==="
 
-LEDGER="$REPO_ROOT/testing/foundation-dll/_contracts/ledger.json"
+LEDGER="$REPO_ROOT/tests/e2e/translation/_contracts/ledger.json"
 if [ ! -f "$LEDGER" ]; then
     echo "ERROR: Ledger not found at $LEDGER"
     exit 1
