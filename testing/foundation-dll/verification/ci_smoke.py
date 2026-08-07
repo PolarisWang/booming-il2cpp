@@ -22,6 +22,8 @@ import sys
 import time
 from pathlib import Path
 
+from verification._path import foundation_root
+
 
 def main() -> int:
     import argparse
@@ -37,7 +39,7 @@ def main() -> int:
     args = parser.parse_args()
 
     _HERE = Path(__file__).resolve().parent
-    _FOUNDATION_DLL = _HERE.parent
+    _FOUNDATION_DLL = foundation_root()
     os.chdir(str(_FOUNDATION_DLL))
     if str(_FOUNDATION_DLL) not in sys.path:
         sys.path.insert(0, str(_FOUNDATION_DLL))

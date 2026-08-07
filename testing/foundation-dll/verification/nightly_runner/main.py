@@ -20,7 +20,8 @@ from pathlib import Path
 
 # Ensure testing/foundation-dll is on sys.path
 _HERE = Path(__file__).resolve().parent
-_FOUNDATION_DLL = _HERE.parent
+from verification._path import foundation_root
+_FOUNDATION_DLL = foundation_root()
 if str(_FOUNDATION_DLL) not in sys.path:
     sys.path.insert(0, str(_FOUNDATION_DLL))
 

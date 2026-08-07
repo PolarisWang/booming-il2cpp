@@ -8,7 +8,8 @@ import tempfile
 # Ensure foundation-dll is on sys.path
 _HERE = Path(__file__).resolve().parent  # verification/tests/
 _VERIFICATION = _HERE.parent  # verification/
-_FOUNDATION_DLL = _VERIFICATION.parent  # testing/foundation-dll/
+from verification._path import foundation_root
+_FOUNDATION_DLL = foundation_root()# testing/foundation-dll/
 if str(_FOUNDATION_DLL) not in sys.path:
     sys.path.insert(0, str(_FOUNDATION_DLL))
 

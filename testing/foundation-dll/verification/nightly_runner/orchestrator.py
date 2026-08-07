@@ -19,7 +19,8 @@ from typing import Any
 # Ensure testing/ and testing/foundation-dll/ are on sys.path so
 # _pipeline.tool_helpers and verification.* imports resolve correctly.
 _HERE = Path(__file__).resolve().parent                           # verification/nightly_runner/
-_FOUNDATION_DLL = _HERE.parent.parent                              # testing/foundation-dll/
+from verification._path import foundation_root
+_FOUNDATION_DLL = foundation_root()# testing/foundation-dll/
 _TESTING_DIR = _FOUNDATION_DLL.parent                              # testing/
 _REPO_ROOT = _TESTING_DIR.parent                                   # repo root
 if str(_FOUNDATION_DLL) not in sys.path:

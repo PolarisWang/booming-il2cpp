@@ -19,7 +19,8 @@ from pathlib import Path
 # ── Paths ──
 _SCRIPT_DIR = Path(__file__).resolve().parent
 _VERIFICATION_ROOT = _SCRIPT_DIR.parent  # verification/
-_FOUNDATION_DLL = _VERIFICATION_ROOT.parent  # testing/foundation-dll/
+from verification._path import foundation_root
+_FOUNDATION_DLL = foundation_root()  # testing/foundation-dll/
 _TOOLS_DIR = Path(__file__).resolve().parents[4] / "src" / "tools"
 _TOOL_PROJECT = _TOOLS_DIR / "Chaos.IL2CPP.Tools.DllManifest" / "Chaos.IL2CPP.Tools.DllManifest.csproj"
 _TOOL_DLL = _TOOLS_DIR / "Chaos.IL2CPP.Tools.DllManifest" / "bin" / "Debug" / "net8.0" / "Chaos.IL2CPP.Tools.DllManifest.dll"

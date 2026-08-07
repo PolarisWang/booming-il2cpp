@@ -15,7 +15,8 @@ import sys
 import time
 from pathlib import Path
 
-_FOUNDATION_DLL = Path(__file__).resolve().parents[2]
+from verification._path import foundation_root
+_FOUNDATION_DLL = foundation_root()
 
 # Families with entry.exe (from previous build+fact)
 HAS_EXE_FAMILIES = [

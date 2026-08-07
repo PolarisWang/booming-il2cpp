@@ -23,7 +23,8 @@ import sys
 from pathlib import Path
 
 _HERE = Path(__file__).resolve().parent  # verification/
-_FOUNDATION_DLL = _HERE.parent  # testing/foundation-dll/
+from verification._path import foundation_root
+_FOUNDATION_DLL = foundation_root()# testing/foundation-dll/
 
 
 def main():

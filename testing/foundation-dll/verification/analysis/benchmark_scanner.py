@@ -14,7 +14,8 @@ import json
 import time
 from pathlib import Path
 
-_FOUNDATION_DLL = Path(__file__).resolve().parent.parent.parent
+from verification._path import foundation_root
+_FOUNDATION_DLL = foundation_root()
 
 
 def _find_all_chunks() -> list[tuple[str, str]]:
