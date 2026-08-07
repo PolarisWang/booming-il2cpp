@@ -65,11 +65,11 @@ tests/unit/runtime-native/
 |------|------|------|
 | L5 全部子域 | ✅ 完成 | support/abi/bootstrap/common/engine-bridge/hot-update/diagnostics/runtime-core/jit/fuzz |
 | L9 (IL fixtures) | ✅ 完成 | commit `318125649` 清理 testing/data/il 已弃原点（永久家 tests/fixtures/il/ 已在 e3f20127a） |
-| L6+L7 | ⛔ 主体待定（需专门会话） | foundation-dll e2e（P1，引擎+29族联合）。✅ 已修 per-dll 驱动链（`d183e8c4c`）。**决定性耦合分析**：L6 引擎 + L7 族为**不可分割整体**（`_pipeline`@`testing/_pipeline`、`_TESTING_DIR`=testing/、`_FOUNDATION_DLL` 含 config/+28 族，3 anchor 不变量）。实测：smoke run 确实触达重型 native AOT 构建（System.Private.CoreLib，8214 dispatch），迁后须重跑 dll 需数十 min/族。→ 需 human-supervised 专门会话，loop 勿盲 mv。 |
+| L6+L7 | ✅ 架构解耦 · 物理迁移待专门会话 | foundation-dll e2e（P1，引擎+29族联合）。✅ 已修 per-dll 驱动链（`d183e8c4c`）；✅ **已解耦引擎锚点**（`4e3b0ed93`+`223185861`）：`chunk_pipeline.py` 现支持 `CHAOS_FOUNDATION_DLL`（族根）+ `CHAOS_TESTING_DIR`（`_pipeline` holder）两个 env 覆盖，默认不变，`_REPO_ROOT` 由 test-tree parent 推导。→ 之前「引擎+族+_pipeline 不可分割」的 3 anchor 不变量已打破，引擎可独立于 28 族与 `_pipeline` 迁移（`__main__`/`ci_smoke` 自动继承）。**剩余**：物理 `git mv verification/`→`tests/e2e/verification/` + 重接线脚本 env + 迁后重跑一个 dll e2e（重型 native build，数十 min/族）。机械但需专门会话完成。 |
 | L10 | 并入 L11 | gate 是冗余 wrapper，platform-hosts 已就位；CMake-coupled，随 L11 重连 |
-| L11 | ⏸ 阻塞 | 删 testing/ 根（现仅 L6+L7 迁出后可行；L5+L9 已迁出） |
+| L11 | ⏸ 阻塞 | 删 testing/ 根（现 L6 引擎可拆迁后大幅简化；L7 族+L6 物理迁移完成才可删） |
 
-> **Loop 停止建议**：L5/L8/L9(+IL) 及驱动链修复已全部完成；剩余 L6/L7（不可分割+重型 dll 验证）与 L10/L11（CMake 联动）均需 human-supervised 专门会话，连续多轮无进展，符合「连续 2 轮无进展→终止需人工介入」路由。建议停止自动 loop，转交专门会话。
+> **Loop 状态**：L5/L8/L9(+IL) 完成；L6 引擎锚点已架构解耦（驱动链也已修复），物理迁移+重型 e2e 验证为机械但耗时的工作，适合专门会话收尾——不再因「不可分割」而阻塞。
 
 
 ## 未提交的工作树残留（非我的改动）
