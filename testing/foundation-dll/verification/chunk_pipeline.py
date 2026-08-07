@@ -31,7 +31,14 @@ from pathlib import Path
 
 # Ensure foundation-dll/ is on sys.path
 _HERE = Path(__file__).resolve().parent  # verification/
-_FOUNDATION_DLL = _HERE.parent  # testing/foundation-dll/
+
+# Foundation-dll root — the dir holding config/, _pipeline/, and the System.*
+# family outputs. Defaults to the parent of verification/ (current layout), but
+# MAY be overridden with CHAOS_FOUNDATION_DLL so the engine can find the families
+# wherever they live (enables the L6/L7 relocate: engine + families can move
+# independently without re-deriving sibling-depth assumptions).
+import os as _os
+_FOUNDATION_DLL = Path(_os.environ.get("CHAOS_FOUNDATION_DLL") or (_HERE.parent))
 _TESTING_DIR = _HERE.parent.parent  # testing/
 if str(_FOUNDATION_DLL) not in sys.path:
     sys.path.insert(0, str(_FOUNDATION_DLL))
