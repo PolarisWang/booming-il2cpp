@@ -1,0 +1,23 @@
+# Chaos IL2CPP 项目红线（review 用，来自 CLAUDE.md 摘要）
+
+## 4 层架构（ATG/Codegen/TPG/Python）
+- ATG: src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/  → .cs/.csproj/.json（不得生成 C++）
+- Codegen: src/managed/Chaos.IL2CPP.Generator/ → .generated.cpp/.generated.h/.json（必须自包含）
+- TPG: src/tools/...TestProjectGenerator/ → .cpp/.h(Scriban)/.cmake（不得改 .generated.*）
+- Python: tests/e2e/verification/ → .py/.json/.yaml（不得 write_text 写 .cpp/.h）
+- 跨层写必须 # BOUNDARY_OVERRIDE: issues/NNN + Reason: + Expires:
+
+## no-skip / 测试语义
+- 测试**无 skip 状态**，每个要么 PASS 要么 FAIL；known-failure 只是标注不是跳过。
+- 统一测试入口：python tests/runner/test_driver.py（CI: scripts/ci_test.py --preset）。
+
+## 统一内存分配（强制）
+- codegen 输出必须用 CHAOS_IL2CPP_ 宏（NEW_GC / MALLOC）。
+- 禁止全局 operator new/delete 重载。
+- 禁止跨域分配/free 不匹配：GC→GC 回收、Domain→heap->Destroy()、Raw→free。
+
+## 提交 message（AI 修复时）
+- 含 root_cause / fix_strategy / regression_check 三段。
+
+## 合法依赖（勿删）
+- src/dll/dotnet-foundation/（System.Private.CoreLib 等）、crypto-refs/、third_party/mono.cecil/ 的 .dll 是被构建引用的合法依赖。

@@ -74,4 +74,44 @@ else
     echo "=== [layer-boundary] All staged files pass layer boundary checks ==="
 fi
 
+echo "=== [gate] Deterministic severe-issue gates (secrets / artifacts / large files) ==="
+
+GATE_FAILED=0
+
+# (a) secrets / credentials accidentally staged
+SECRET_HITS=$(git diff --cached | grep -iE \
+    'AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{35}|sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{36,}|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|password[[:space:]]*[=:][[:space:]]*["'"'"'][^"'"'"']{6,}' | head -5)
+if [ -n "$SECRET_HITS" ]; then
+    echo "ERROR: possible secret/credential staged:"
+    echo "$SECRET_HITS"
+    GATE_FAILED=1
+fi
+
+# (b) build artifacts accidentally staged (4-layer redline: only legit referenced
+#     .dll under src/dll, crypto-refs, third_party/mono.cecil are allowed)
+ARTIFACTS=$(git diff --cached --name-only --diff-filter=ACMR \
+    | grep -E '\.(dll|o|obj|a|lib|pdb|so|ilk|exe)$' \
+    | grep -vE '^src/dll/|^tests/e2e/translation/crypto-refs/|^third_party/mono\.cecil/' || true)
+if [ -n "$ARTIFACTS" ]; then
+    echo "ERROR: build artifacts staged (4-layer redline):"
+    echo "$ARTIFACTS"
+    GATE_FAILED=1
+fi
+
+# (c) large file (>5MB) staged — likely accidental binary
+for f in $(git diff --cached --name-only --diff-filter=ACMR); do
+    size=$(git cat-file -s :"$f" 2>/dev/null || echo 0)
+    if [ "$size" -gt 5242880 ]; then
+        echo "ERROR: $f is $((size/1048576))MB (>5MB) — likely shouldn't be committed"
+        GATE_FAILED=1
+    fi
+done
+
+if [ "$GATE_FAILED" -ne 0 ]; then
+    echo ""
+    echo "ERROR: severe-issue gate failed. Fix the above or use 'git commit --no-verify' to bypass (not recommended)."
+    exit 1
+fi
+echo "=== [gate] Deterministic gates passed ==="
+
 exit 0
