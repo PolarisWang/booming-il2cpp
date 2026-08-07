@@ -1,0 +1,46 @@
+#!/bin/sh
+# Chaos IL2CPP — Pre-push hook: deep LLM review of outgoing changes.
+#
+# Runs review_runner.py with the diff of the commits being pushed (range
+# origin/<default>..HEAD). Blocks the push when the review verdict is "block"
+# (≥1 L1/L2 severe issue in review_rubric.md).
+#
+# - Requires `claude` CLI; if absent, review_runner degrades to allow+warning
+#   (deterministic pre-commit gates still guard objective P0/P1).
+# - Bypass: git push --no-verify  (NOT recommended — the review is mandatory in
+#   spirit; --no-verify opts out and should be deliberate).
+#
+# Install: git config core.hooksPath .githooks
+
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
+
+echo "=== [review] Deep review of outgoing changes (L1/L2 blocks) ==="
+
+# Determine remote default branch robustly, falling back to origin/main.
+if git symbolic-ref -q refs/remotes/origin/HEAD >/dev/null 2>&1; then
+    REMOTE_DEFAULT=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null)
+    REMOTE_DEFAULT=${REMOTE_DEFAULT#origin/}
+else
+    REMOTE_DEFAULT="main"
+fi
+
+OUTGOING_RANGE="origin/$REMOTE_DEFAULT..HEAD"
+
+DIFF=$(git diff "$OUTGOING_RANGE" 2>/dev/null || git diff "origin/main..HEAD" 2>/dev/null || true)
+
+if [ -z "$DIFF" ] || [ "$(printf '%s' "$DIFF" | wc -c)" -eq 0 ]; then
+    echo "=== [review] No outgoing changes against $OUTGOING_RANGE, skipping ==="
+    exit 0
+fi
+
+printf '%s' "$DIFF" | python "$REPO_ROOT/.githooks/review_runner.py"
+RC=$?
+
+if [ "$RC" -ne 0 ]; then
+    echo ""
+    echo "ERROR: Deep review found L1/L2 (severe) issues."
+    echo "Fix them, then commit the fix and push again. Use 'git push --no-verify' only to deliberately bypass."
+    exit 1
+fi
+
+exit 0
