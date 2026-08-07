@@ -64,7 +64,7 @@ tests/unit/runtime-native/
 | 任务 | 状态 | 说明 |
 |------|------|------|
 | L5 全部子域 | ✅ 完成 | support/abi/bootstrap/common/engine-bridge/hot-update/diagnostics/runtime-core/jit/fuzz |
-| L6+L7 | 待定 | foundation-dll e2e（P1，引擎+29族联合）。⚠️ 分析已做：`scripts/test/run-foundation-dll-family.sh` 的 PYTHONPATH 硬 ref `$REPO_ROOT/testing/foundation-dll` + `/verification` + `python -m verification.entry_points.cli`；`verification/_path.py` parent-depth anchor；全库 229 处 hardcoded `testing/foundation-dll` 字符串（~49 driver 文件）。高度 code-coupled，需方法化会话，勿盲 mv。 |
+| L6+L7 | ⚠️ 部分推进 · 主体待定 | foundation-dll e2e（P1，引擎+29族联合）。✅ 已修 per-dll 驱动链（commit `d183e8c4c`）：`run-foundation-dll-family.sh`/`-all.sh` 的 REPO_ROOT 深度 bug（Phase-30 移入 scripts/test/ 后少一级 → `scripts/` 而非仓库根）+ family 脚本误调用不存在的 `verification.entry_points.cli`（真实入口 `python -m verification.chunk_pipeline --chunk <slug>`）已全部修复并验证（`--strict`→`--mode strict`、`--skip`→stage 过滤、`--assembly` 透传）。仍待：verification 引擎（69 py）+ 28 System.* 族整体迁移 + 全库 229 处 hardcoded `testing/foundation-dll` 字符串（~49 driver 文件）+ parent-depth anchor 修正。高度 code-coupled，需方法化会话，勿盲 mv。 |
 | L10 | 并入 L11 | gate 是冗余 wrapper，platform-hosts 已就位 |
 | L11 | 待定 | 删 testing/ 根（阻塞于 L6+L7 迁出；L5 已全部迁出） |
 
