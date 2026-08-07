@@ -47,7 +47,10 @@ def _trx_failures(trx_path: str) -> list[str]:
         ns = "http://microsoft.com/schemas/VisualStudio/TeamTest/2010"
         out = []
         for u in tree.getroot().iter("{%s}UnitTestResult" % ns):
-            if u.get("outcome") == "Failed":
+            # Project rule: no skip. A Skipped outcome is folded into failures so it
+            # is surfaced (never hidden) and reaches `unexpected` in the gate — matching
+            # res.failed = failed + skipped in run().
+            if u.get("outcome") in ("Failed", "Skipped"):
                 out.append(u.get("testName"))
         return out
     except Exception:
