@@ -40,7 +40,7 @@ layers:
         ctest_exclude: benchmark|stress|soak   # -LE label regex
         cmake_parallel: 8         # -j independent native test processes
         ctest_timeout: 3600       # --timeout per-test cap (serialized GC can exceed 1800s)
-        # runs the CTest targets under contracts/native + testing/src/native (unit/
+        # runs the CTest targets under contracts/native + tests/unit/runtime-native (unit/
         # deterministic only; benchmark/stress/soak excluded by the -LE in native.py).
         # Allow a long budget: ~200 deterministic native tests.
         timeout: 3600
@@ -54,12 +54,23 @@ layers:
     groups:
       - name: foundation-dll-smoke
         script: tests/e2e/verification/ci_smoke.py
+        # Relocated engine (tests/e2e/verification) must be told where the family
+        # tree (tests/e2e/translation) + _pipeline live — the engine resolves these
+        # via env overrides; the adapter resolves `tests/...` here to absolute paths.
+        env:
+          PYTHONPATH: "tests/e2e:tests/e2e/verification"
+          CHAOS_FOUNDATION_DLL: "tests/e2e/translation"
+          CHAOS_TESTING_DIR: "tests/e2e/verification"
         requires_python: "3.10+"
         # smoke drives the full System.Private.CoreLib chunk pipeline; allow a
         # long budget (cold build+fact+coverage can exceed the 30min default).
         timeout: 7200
       - name: foundation-dll-chunk
         script: tests/e2e/verification/chunk_pipeline.py
+        env:
+          PYTHONPATH: "tests/e2e:tests/e2e/verification"
+          CHAOS_FOUNDATION_DLL: "tests/e2e/translation"
+          CHAOS_TESTING_DIR: "tests/e2e/verification"
         args: [--smoke]
         slow: true
         timeout: 5400
