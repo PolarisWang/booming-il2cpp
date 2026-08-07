@@ -64,7 +64,7 @@ layers:
         slow: true
         timeout: 5400
 
-  # NOTE: testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter is intentionally
+  # NOTE: tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter is intentionally
   # NOT an active entry in unit: it declares [Fact]s but lacks Microsoft.NET.Test.Sdk
   # so `dotnet test` cannot actually run it. It is tracked here as a known
   # infrastructure gap (see baselines/known-issues.md) — not run, not skipped.

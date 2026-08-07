@@ -26,13 +26,13 @@ done
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd -W)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd -W)"
-REPORT_DIR="$REPO_ROOT/testing/foundation-dll/System.Private.CoreLib/$SLUG"
+REPORT_DIR="$REPO_ROOT/tests/e2e/translation/System.Private.CoreLib/$SLUG"
 MULTI_RUN="$REPORT_DIR/multi-run/multi-run-report.json"
 REPORT="$REPORT_DIR/unified-verification-report.json"
 
 if [ ! -f "$MULTI_RUN" ]; then
     # fallback
-    REPORT_DIR="$REPO_ROOT/testing/results/foundation-dll/System.Private.CoreLib/$SLUG"
+    REPORT_DIR="$REPO_ROOT/tests/e2e/translation/System.Private.CoreLib/$SLUG"
     MULTI_RUN="$REPORT_DIR/multi-run/multi-run-report.json"
     REPORT="$REPORT_DIR/unified-verification-report.json"
 fi

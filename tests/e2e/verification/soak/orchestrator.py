@@ -27,8 +27,8 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[4]
 
 def _find_config() -> Path:
     candidates = [
-        _PROJECT_ROOT / "testing" / "foundation-dll" / "config" / "soak-config.yaml",
-        Path("testing/foundation-dll/config/soak-config.yaml"),
+        _PROJECT_ROOT / "tests" / "e2e" / "translation" / "config" / "soak-config.yaml",
+        Path("tests/e2e/translation/config/soak-config.yaml"),
     ]
     for c in candidates:
         if c.exists():
@@ -280,7 +280,7 @@ def main() -> int:
             print(f"ERROR: phase '{args.phase}' not found in config")
             return 1
 
-    report_base = Path(args.report_dir) if args.report_dir else _PROJECT_ROOT / config.get("output_dir", "testing/results/soak")
+    report_base = Path(args.report_dir) if args.report_dir else _PROJECT_ROOT / config.get("output_dir", "tests/e2e/translation/results/soak")
 
     orchestrator = SoakOrchestrator(config, report_base, duration_min=args.minutes)
     return orchestrator.run()

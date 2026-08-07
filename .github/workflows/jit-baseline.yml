@@ -60,7 +60,7 @@ jobs:
         run: |
           dotnet restore src/managed/Chaos.IL2CPP.Generator/
           dotnet restore tests/unit/managed/snapshot/
-          dotnet restore testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/
+          dotnet restore tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/
 
       - name: Build Chaos.IL2CPP.Generator
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore

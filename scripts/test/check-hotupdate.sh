@@ -16,13 +16,13 @@ if [ "${2:-}" = "--verbose" ]; then VERBOSE=1; fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd -W)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd -W)"
-REPORT_DIR="$REPO_ROOT/testing/foundation-dll/System.Private.CoreLib/$SLUG"
+REPORT_DIR="$REPO_ROOT/tests/e2e/translation/System.Private.CoreLib/$SLUG"
 HU_REPORT="$REPORT_DIR/hotupdate-verification-report.json"
 REPORT="$REPORT_DIR/unified-verification-report.json"
 
 if [ ! -f "$HU_REPORT" ]; then
     # fallback
-    REPORT_DIR="$REPO_ROOT/testing/results/foundation-dll/System.Private.CoreLib/$SLUG"
+    REPORT_DIR="$REPO_ROOT/tests/e2e/translation/System.Private.CoreLib/$SLUG"
     HU_REPORT="$REPORT_DIR/hotupdate-verification-report.json"
     REPORT="$REPORT_DIR/unified-verification-report.json"
 fi

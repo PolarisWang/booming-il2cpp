@@ -74,7 +74,7 @@ jobs:
         run: |
           dotnet restore src/managed/Chaos.IL2CPP.Generator/
           dotnet restore tests/unit/managed/snapshot/
-          dotnet restore testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/
+          dotnet restore tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/
 
       - name: Cache NuGet packages
         uses: actions/cache@v4
@@ -99,13 +99,13 @@ jobs:
         run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
 
       - name: Build MetadataWriter Tests
-        run: dotnet build testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore
+        run: dotnet build tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore
 
       - name: Run Snapshot Tests
         run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n
 
       - name: Run MetadataWriter Tests
-        run: dotnet test testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore -v n
+        run: dotnet test tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore -v n
 
       - name: Configure CMake (${{ runner.os }})
         id: cmake-config

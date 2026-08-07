@@ -10,7 +10,7 @@ on:
       - 'src/native/common/**'
       - 'testing/snapshots/**'
       - 'testing/src/native/**'
-      - 'testing/src/managed/**'
+      - 'tests/unit/managed/**'
       - 'testing/foundation-dll/**'
       - 'contracts/native/v0/**'
   push:
@@ -23,7 +23,7 @@ on:
       - 'src/native/common/**'
       - 'testing/snapshots/**'
       - 'testing/src/native/**'
-      - 'testing/src/managed/**'
+      - 'tests/unit/managed/**'
       - 'testing/foundation-dll/**'
       - 'contracts/native/v0/**'
 
@@ -52,7 +52,7 @@ jobs:
         run: |
           dotnet restore src/managed/Chaos.IL2CPP.Generator/
           dotnet restore tests/unit/managed/snapshot/
-          dotnet restore testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/
+          dotnet restore tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/
 
       - name: Build Chaos.IL2CPP.Generator
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
@@ -61,19 +61,19 @@ jobs:
         run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
 
       - name: Build MetadataWriter Tests
-        run: dotnet build testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore
+        run: dotnet build tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore
 
       - name: Run Snapshot Tests
         run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n
 
       - name: Run MetadataWriter Tests
-        run: dotnet test testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore -v n
+        run: dotnet test tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore -v n
 
       - name: MetadataWriter Coverage Collection
         run: |
-          dotnet test testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ `
+          dotnet test tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/ `
             --configuration Release `
-            --settings testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/coverlet.runsettings `
+            --settings tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/coverlet.runsettings `
             "-p:CollectCoverage=true" `
             "-p:CoverletOutputFormat=cobertura" `
             "-p:CoverletOutput=coverage-results/metadatawriter-coverage.cobertura.xml"

@@ -16,14 +16,14 @@ if [ "${2:-}" = "--verbose" ]; then VERBOSE=1; fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd -W)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd -W)"
-REPORT_DIR="$REPO_ROOT/testing/foundation-dll/System.Private.CoreLib/$SLUG"
+REPORT_DIR="$REPO_ROOT/tests/e2e/translation/System.Private.CoreLib/$SLUG"
 REPORT="$REPORT_DIR/unified-verification-report.json"
 MULTI_RUN="$REPORT_DIR/multi-run/multi-run-report.json"
 
 if [ ! -f "$REPORT" ]; then
     echo "ERROR: Report not found: $REPORT"
     # fallback to testing/results/ path
-    REPORT2="$REPO_ROOT/testing/results/foundation-dll/System.Private.CoreLib/$SLUG/unified-verification-report.json"
+    REPORT2="$REPO_ROOT/tests/e2e/translation/System.Private.CoreLib/$SLUG/unified-verification-report.json"
     if [ -f "$REPORT2" ]; then
         REPORT="$REPORT2"
         REPORT_DIR="$(dirname "$REPORT2")"

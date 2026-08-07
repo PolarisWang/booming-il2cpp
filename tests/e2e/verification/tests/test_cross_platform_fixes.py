@@ -21,7 +21,7 @@ def check(name, condition, detail=""):
 # ── Test #11: DOTNET_ROOT auto-detection (build.py) ──
 print("[#11] DOTNET_ROOT auto-detection")
 
-with open("testing/foundation-dll/verification/stages/build.py", encoding="utf-8") as f:
+with open("tests/e2e/verification/stages/build.py", encoding="utf-8") as f:
     content = f.read()
 
 check("no hardcoded C:/ path", "C:/Program Files" not in content)
