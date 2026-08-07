@@ -9,6 +9,15 @@
 # To install: git config core.hooksPath .githooks
 # You can skip this check with: git commit --no-verify
 
+# Audit log (NOT committed to the repo): each hook invocation is recorded with a
+# timestamp + result to .git/chaos-hooks.log so you can audit which runs happened.
+GIT_DIR=$(git rev-parse --git-dir 2>/dev/null || echo .git)
+HOOK_LOG="$GIT_DIR/chaos-hooks.log"
+PRE_COMMIT_RC=0
+hook_log() { printf '%s  pre-commit  %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >> "$HOOK_LOG" 2>/dev/null || true; }
+trap 'hook_log "exit=$?"' 0
+
+hook_log "start: $(git log -1 --format=%h 2>/dev/null || echo none)"
 echo "=== [check_arch] Checking native architecture compliance ==="
 
 STAGED_CPP=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^src/native/.*\.(cpp|h)$' || true)

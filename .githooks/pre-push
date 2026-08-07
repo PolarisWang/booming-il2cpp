@@ -13,8 +13,12 @@
 # Install: git config core.hooksPath .githooks
 
 REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
-
-echo "=== [review] Deep review of outgoing changes (L1/L2 blocks) ==="
+# Audit log (NOT committed to the repo): each push gate run is recorded to
+# .git/chaos-hooks.log so you can audit triggers + verdicts.
+GIT_DIR=$(git rev-parse --git-dir 2>/dev/null || echo "$REPO_ROOT/.git")
+HOOK_LOG="$GIT_DIR/chaos-hooks.log"
+hook_log() { printf '%s  pre-push    %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >> "$HOOK_LOG" 2>/dev/null || true; }
+trap 'hook_log "exit=$?"' 0
 
 # Determine remote default branch robustly, falling back to origin/main.
 if git symbolic-ref -q refs/remotes/origin/HEAD >/dev/null 2>&1; then
@@ -24,22 +28,30 @@ else
     REMOTE_DEFAULT="main"
 fi
 
+hook_log "start: range=origin/$REMOTE_DEFAULT..HEAD"
+
+echo "=== [review] Deep review of outgoing changes (L1/L2 blocks) ==="
+
 OUTGOING_RANGE="origin/$REMOTE_DEFAULT..HEAD"
 
 DIFF=$(git diff "$OUTGOING_RANGE" 2>/dev/null || git diff "origin/main..HEAD" 2>/dev/null || true)
 
 if [ -z "$DIFF" ] || [ "$(printf '%s' "$DIFF" | wc -c)" -eq 0 ]; then
     echo "=== [review] No outgoing changes against $OUTGOING_RANGE, skipping ==="
+    hook_log "result=skip (no outgoing changes)"
     exit 0
 fi
 
-printf '%s' "$DIFF" | python "$REPO_ROOT/.githooks/review_runner.py"
+RESULT=$(printf '%s' "$DIFF" | python "$REPO_ROOT/.githooks/review_runner.py" 2>&1)
 RC=$?
+printf '%s\n' "$RESULT"   # echo the review output to the terminal
+hook_log "result=${RC}-ok verdict=$(printf '%s' "$RESULT" | grep -oE '\[review\] [A-Z]+' | head -1 || true)"
 
 if [ "$RC" -ne 0 ]; then
     echo ""
     echo "ERROR: Deep review found L1/L2 (severe) issues."
     echo "Fix them, then commit the fix and push again. Use 'git push --no-verify' only to deliberately bypass."
+    hook_log "result=BLOCK by deep review"
     exit 1
 fi
 
