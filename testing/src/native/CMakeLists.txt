@@ -144,6 +144,6 @@ macro(add_chaos_test name)
 endmacro()
 
 # Subdirectories
-add_subdirectory(jit)
-add_subdirectory(runtime-core)
-add_subdirectory(fuzz)
+# All native CTest subdomains have migrated to tests/unit/runtime-native/.
+# This file remains as the googletest + imported-lib + add_chaos_test macro
+# infrastructure provider for the "testing" tree (still added from root).

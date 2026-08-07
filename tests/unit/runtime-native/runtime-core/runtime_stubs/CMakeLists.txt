@@ -7,11 +7,10 @@
 # the lib uses GNU ar format (GCC/Clang) which MSVC link.exe cannot reliably
 # resolve for extern "C" symbols.  We also supply stub GC/threading symbols
 # via gc_stubs_for_string_tests.cpp.
-add_chaos_test(string_stubs_test
+chaos_native_add_test(string_stubs_test
     string_stubs_test.cpp
     gc_stubs_for_string_tests.cpp
-    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/string_stubs.cpp"
-    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/string_stubs.cpp"
     LABELS "unit;core"
 )
 
@@ -19,11 +18,10 @@ add_chaos_test(string_stubs_test
 # NOTE: enum_stubs.cpp is compiled directly because the prebuilt lib
 # uses GNU ar format which MSVC cannot reliably resolve even with
 # extern "C" linkage.  GC stubs from gc_stubs_for_string_tests.cpp.
-add_chaos_test(enum_stubs_test
+chaos_native_add_test(enum_stubs_test
     enum_stubs_test.cpp
     gc_stubs_for_string_tests.cpp
-    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/enum_stubs.cpp"
-    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/enum_stubs.cpp"
     LABELS "unit;core"
 )
 
@@ -31,13 +29,12 @@ add_chaos_test(enum_stubs_test
 # NOTE: datetime_stubs.cpp and guid_stubs.cpp are compiled directly (same GNU
 # ar issue).  GC stubs from gc_stubs_for_string_tests.cpp for GcAllocateAtomic.
 # math_stubs.cpp has no GC dependency but is compiled directly for consistency.
-add_chaos_test(datetime_guid_math_test
+chaos_native_add_test(datetime_guid_math_test
     datetime_guid_math_test.cpp
     gc_stubs_for_string_tests.cpp
-    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/datetime_stubs.cpp"
-    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
-    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/math_stubs.cpp"
-    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/datetime_stubs.cpp"
+    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
+    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/math_stubs.cpp"
     LABELS "unit;core"
 )
 # datetime/guid need NOMINMAX + WIN32_LEAN_AND_MEAN because the stub .cpp files
@@ -53,32 +50,29 @@ target_compile_options(datetime_guid_math_test PRIVATE
 # NOTE: collection_stubs.cpp is compiled directly (same GNU ar issue as
 # string_stubs).  GC stubs from gc_stubs_for_string_tests.cpp are reused
 # since CollectionListToArray calls GcAllocateAtomic.
-add_chaos_test(collection_stubs_test
+chaos_native_add_test(collection_stubs_test
     collection_stubs_test.cpp
     gc_stubs_for_string_tests.cpp
-    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/collection_stubs.cpp"
-    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/collection_stubs.cpp"
     LABELS "unit;core"
 )
 
 # T1a-1: convert/parse/decimal stubs unit tests
 # Uses self-contained test-harness implementations matching parse_convert.cpp.
-add_chaos_test(convert_stubs_test
+chaos_native_add_test(convert_stubs_test
     convert_stubs_test.cpp
-    LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "unit;core"
 )
 
 # T4-1: Runtime Stubs performance benchmarks
 # Compiles stub .cpp directly (same GNU ar compat pattern as unit tests).
-add_chaos_test(runtime_stubs_benchmark
+chaos_native_add_test(runtime_stubs_benchmark
     runtime_stubs_benchmark.cpp
     gc_stubs_for_string_tests.cpp
-    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/string_stubs.cpp"
-    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/datetime_stubs.cpp"
-    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
-    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/math_stubs.cpp"
-    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/string_stubs.cpp"
+    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/datetime_stubs.cpp"
+    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
+    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/math_stubs.cpp"
     LABELS "benchmark;core"
 )
 target_compile_definitions(runtime_stubs_benchmark PRIVATE
@@ -90,9 +84,8 @@ target_compile_options(runtime_stubs_benchmark PRIVATE
 
 # T1a-2b: Half conversion IEEE 754 round-to-nearest-even unit tests
 # Includes convert_stubs.h directly (ChaosConvertToInt16FromDouble is FORCEINLINE).
-add_chaos_test(half_conversion_test
+chaos_native_add_test(half_conversion_test
     half_conversion_test.cpp
-    LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "unit;core"
 )
 target_compile_options(half_conversion_test PRIVATE /utf-8)
@@ -102,9 +95,8 @@ target_compile_options(half_conversion_test PRIVATE /utf-8)
 # to enable push_exception_jmp_buf/pop_exception_jmp_buf testing.
 # Convert tests that depend on C++ EH (RaiseManagedException) are unaffected
 # because they are guarded by existing #if/#elif chains in eh.h.
-add_chaos_test(convert_stubs_eh_test
+chaos_native_add_test(convert_stubs_eh_test
     convert_stubs_test.cpp
-    LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "unit;core"
 )
 target_compile_definitions(convert_stubs_eh_test PRIVATE
