@@ -237,6 +237,40 @@ def run_group(layer: str, group: dict, layers_cfg: dict, opts) -> SuiteResult:
     return run(group, timeout=timeout, quick=opts.quick)
 
 
+JSON_SCHEMA = """\
+Stable machine contract for --json / --machine output (version: 1)
+
+Top level:
+  version        int     = 1
+  generated_at   str     ISO-8601 timestamp
+  ok             bool    True iff every group had no infra error AND no UNEXPECTED failure
+  duration_s     float   wall-clock seconds for the whole run
+  total          object  { passed: int, failed: int, total: int }
+  known          int     number of failing cases annotated as KNOWN-FAIL (baseline)
+  layers         object  keyed by layer name ("unit"|"integration"|"e2e")
+                         value: { adapter: str, groups: <groups> }
+
+groups (layers.<layer>.groups.<group>):
+  ok             bool    True iff ran without infra error AND unexpected is empty
+  passed         int
+  failed         int
+  total          int
+  error          str|null
+  duration_s     float
+  known          int     failing cases matched by baselines/known-failures.<layer>.yaml
+  unexpected     [str]   NEW failures (not in the known baseline) — an empty list is required
+                         for the gate to be green
+  stale_known    [str]   names the baseline lists as known-fail but which PASSED this run
+                         (baseline should be pruned)
+  failures       [{ name, msg }]   every failing case (known or not), msg truncated to 500
+  cases           — only present with --cases: [{ name, passed, duration_s, msg? }]
+
+Gate: report.ok == False  <=>  exit code 1.  This happens iff some group's
+`unexpected` is non-empty (or it infra-errored). KNOWN-FAIL cases are reported under
+`failures` but do NOT flip ok→False.
+"""
+
+
 _HELP_EPILOG = """\
 Layers (test pyramid, defined in tests/suite_contract.yaml):
   unit         fast dotnet xunit  -> tests/unit/managed/{codegen,driver,snapshot}
@@ -254,8 +288,9 @@ Exit code:
       reported as FAIL but do NOT fail the gate)
   1 = FAILED (an infra error or at least one UNEXPECTED failure not in the known baseline)
 
-Agents: consume --json (stable schema: layers.*.groups.*.ok/passed/failed/known/unexpected)
-rather than parsing stdout; use --dry-run to inspect the suite without running it.
+Agents: consume --json (or --machine for a fixed path) — parse the JSON, not stdout.
+  `python tests/runner/test_driver.py --contract` prints the exact JSON schema (stable
+  machine contract). Use --dry-run to inspect the suite without running it.
 Known-failure reconciliation: baselines/known-failures.{layer}.yaml.
 """
 
@@ -315,12 +350,22 @@ def main() -> int:
     ap.add_argument("--json", default="",
                     help="write a stable machine-readable report (default "
                          "tests/runner/test-report.json); agents should parse --json, not stdout")
+    ap.add_argument("--machine", action="store_true",
+                    help="same as --json but always to the fixed contract path "
+                         "tests/runner/test-report.json (a stable location agents can rely on)")
+    ap.add_argument("--contract", action="store_true",
+                    help="print the stable --json report schema (machine contract) and exit — "
+                         "use this to fetch the exact JSON shape an agent should parse")
     ap.add_argument("--junit", default="",
                     help="also write a JUnit XML report to this path (CI integration)")
     ap.add_argument("--cases", action="store_true",
                     help="include per-case pass/fail detail in the JSON report "
                          "(default off: native ~200 cases, dotnet can be thousands)")
     args = ap.parse_args()
+
+    if args.contract:
+        print(JSON_SCHEMA)
+        return 0
 
     contract = load_contract()
     layers = contract.get("layers", {})
@@ -410,7 +455,9 @@ def main() -> int:
     report["known"] = known_found
     report["duration_s"] = round(time.time() - t0, 2)
 
-    json_path = args.json or str(ROOT / "tests" / "runner" / "test-report.json")
+    # --machine forces the fixed contract path so agents can rely on one location.
+    json_path = args.json or (str(ROOT / "tests" / "runner" / "test-report.json")
+                              if args.machine else str(ROOT / "tests" / "runner" / "test-report.json"))
     Path(json_path).write_text(json.dumps(report, indent=2), encoding="utf-8")
     if args.junit:
         _write_junit(report, args.junit)
