@@ -26,7 +26,7 @@ python tests/runner/test_driver.py --layer unit
 1. Follow the skill-system routing (CLAUDE.md's classification gate) for the domain you touch.
 2. Keep the repository hygienic: don't commit run artifacts (build logs, test stdout, probe output).
 3. Run the self-check tooling: `python .ai/skills/tooling/verification/verify_skill_pipeline.py`.
-4. The `.githooks/pre-commit` gate (arch + trace + layer-boundary) runs automatically; use `--no-verify` only when justified.
+4. Activate the git hooks once per checkout so the quality gates run: `./scripts/setup-hooks.sh`. This sets `core.hooksPath = .githooks` (a local, per-clone setting — **a fresh clone does NOT get it automatically**). After setup, the `.githooks/pre-commit` gate (arch + trace + layer-boundary + secret/artifact) and `.githooks/pre-push` (LLM deep review) run; use `--no-verify` only when justified.
 
 ## Commits
 
