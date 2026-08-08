@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# ═══════════════════════════════════════════════════════════════════════════════
-# ci_run.sh — self-contained, portable test-run entry for this repository.
+# ===============================================================================
+# ci_run.sh - self-contained, portable test-run entry for this repository.
 #
 # WHY: the repo must be able to run its full test suite with NO dependency on
 # GitHub, the gh CLI, or any CI service. This script wraps the single unified
-# driver (tests/runner/test_driver.py) which already drives all five layers —
+# driver (tests/runner/test_driver.py) which already drives all five layers -
 # unit (dotnet), integration (native CTest, auto cmake-configured), e2e
 # (foundation-dll engine, env from suite_contract), pytest (authority/integration)
-# — and reports through the same machine-readable test-report.json.
+# - and reports through the same machine-readable test-report.json.
 #
 # This is the canonical "run the tests" entry. Older scripts that baked in stale
 # pre-L-migration paths (scripts/test/run-all.sh) or that depend on GitHub
@@ -21,7 +21,7 @@
 #
 # Exit: 0 if every layer is OK (known failures surfaced but don't fail the gate);
 #       1 if any layer had an UNEXPECTED (non-known) failure.
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 
 set -euo pipefail
 
@@ -53,7 +53,7 @@ if ! command -v python >/dev/null 2>&1; then
 fi
 
 echo "============================================================"
-echo "  Chaos IL2CPP — unified test run  (layer=${LAYER}${QUICK:+ quick})"
+echo "  Chaos IL2CPP - unified test run  (layer=${LAYER}${QUICK:+ quick})"
 echo "  repo: ${REPO_ROOT}"
 echo "============================================================"
 
@@ -69,9 +69,10 @@ set -e
 echo ""
 echo "============================================================"
 if [ $RC -eq 0 ]; then
-    echo "  [ci_run] OVERALL OK — all layers gate-clean (known failures surfaced)."
+    echo "  [ci_run] OVERALL OK - all layers gate-clean (known failures surfaced)."
 else
-    echo "  [ci_run] FAILED (rc=$RC) — see test-report.json / output above."
+    echo "  [ci_run] FAILED (rc=$RC) - see test-report.json / output above."
 fi
 echo "============================================================"
 exit $RC
+
