@@ -93,3 +93,38 @@ def test_classify_bottleneck_alloc_hot_uses_pct_threshold() -> None:
     # high_variance dominates
     assert c(chaos_aot_ms=16.0, net8_ms=10.0, high_variance=True,
              gc_comparison={"aotAllocVsNet8Pct": 250.0}) == "unstable"
+
+
+def test_aggregate_no_false_meta_mismatch_on_sampling_gap(tmp_path: Path) -> None:
+    """Regression: real fact dispatch may cover fewer methods than declared.
+
+    AutoTestGenerator samples a subset of declared methods, so a chunk can have
+    fact.json with factMethodCount=4 (actually dispatched+passed) while
+    metaTotal=15 (declared). aggregate must compare against *factMethodCount*,
+    not fall back to metaTotal and emit a false 73% meta-mismatch ERROR (which
+    failed the whole pipeline). See aggregate.py summary-building fix.
+    """
+    from verification.orchestration.context import ChunkContext, StageResult
+    from verification.stages.aggregate import run_aggregate
+
+    foundation = tmp_path / "System.Sample"
+    chunk = foundation / "chunks" / "global-ns"
+    (chunk / "results").mkdir(parents=True)
+    (chunk / "results" / "fact.json").write_text(json.dumps({
+        "passed": 4, "total": 4, "valueSuspicious": False, "valueWarnings": 0,
+        "factMethodCount": 4, "metaTotal": 15,
+    }), encoding="utf-8")
+    (chunk / "results" / "benchmark.json").write_text(json.dumps({
+        "methodCount": 4, "results": [{"methodIndex": i} for i in range(4)],
+    }), encoding="utf-8")
+
+    ctx = ChunkContext(
+        slug="global-ns", assembly="System.Sample",
+        chunk_dir=chunk, foundation_dir=foundation,
+    )
+    result = run_aggregate(ctx, {})
+
+    # Before the fix this was status="error" with "(1 meta-mismatch)".
+    assert result.status == "passed", f"aggregate returned {result.status!r}: {result.summary}"
+    assert "meta-mismatch" not in result.summary
+
