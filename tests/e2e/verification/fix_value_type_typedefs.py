@@ -47,7 +47,13 @@ def find_missing_value_type_typedefs(native_dir: Path) -> int:
     if not needed:
         return 0
 
-    # Append missing typedefs to header
+    # BOUNDARY_OVERRIDE: https://github.com/chaos-il2cpp/chaos-il2cpp/issues/PHASE5-FIXVT
+    # Reason: diagnostic fallback — appends missing chaos_valuetype_* typedefs to
+    #         native-aot.generated.header.h after codegen. Preferred fix: the Generator
+    #         layer (NativeAotLoweringPlanner/ObjectModelEmission) should be the sole
+    #         typedef author. Unlike the write_text()-form writes caught by the red-line
+    #         scanner, this uses header.open("a")+write(); keep annotated until DONE.
+    # Expires: 2099-12-31
     with header.open("a", encoding="utf-8") as f:
         f.write("\n// Auto-fixed: missing chaos_valuetype_* typedefs\n")
         for sym in sorted(needed):

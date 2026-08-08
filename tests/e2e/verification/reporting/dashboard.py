@@ -21,6 +21,16 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
+# Self-bootstrap so _path is importable whether run as a module or a script.
+import sys as _b_sys
+from pathlib import Path as _b_Path
+for _b_d in _b_Path(__file__).resolve().parents:
+    if (_b_d / "_path.py").exists():
+        if str(_b_d) not in _b_sys.path:
+            _b_sys.path.insert(0, str(_b_d))
+        break
+from _path import results_base  # noqa: E402
+
 # ──────────────────────────────────────────────────────────────────────
 # Module A: Chinese semantic description database
 # ──────────────────────────────────────────────────────────────────────
@@ -465,12 +475,17 @@ def scan_results_directory(results_root: Path | None = None) -> dict[str, Any]:
 # Benchmark performance comparison (reads perf store JSONL)
 # ──────────────────────────────────────────────────────────────────────
 
-_RESULTS_BASE = Path(__file__).resolve().parents[2] / "results" / "foundation-dll" / "System.Private.CoreLib"
+_RESULTS_BASE = results_base()  # foundation-rooted (not package-local, not single-assembly)
 
 
-def _perf_store_path(slug: str) -> Path:
-    """Return the path to benchmark-history.jsonl for a given family slug."""
-    return _RESULTS_BASE / slug / "perf" / "benchmark-history.jsonl"
+def _perf_store_path(slug: str, assembly: str = "System.Private.CoreLib") -> Path:
+    """Return the path to benchmark-history.jsonl for a family slug + assembly.
+
+    Assembly is parameterized (default keeps legacy CoreLib behavior); earlier
+    this was hardcoded to System.Private.CoreLib, so other assemblies' benchmark
+    data was never readable by the dashboard.
+    """
+    return _RESULTS_BASE / assembly / slug / "perf" / "benchmark-history.jsonl"
 
 
 def _load_perf_jsonl(slug: str, stages_data: dict[str, Any] | None = None) -> list[dict[str, Any]]:

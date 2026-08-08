@@ -94,25 +94,45 @@ def _inject_profile_mode(native_dir: Path) -> None:
 
     # 1. Inject #include <profile_stats.h> after last #include <chaos/...>
     if '#include <profile_stats.h>' not in content:
-        content = content.replace(
-            '#include <gc/gc_api.h>',
-            '#include <gc/gc_api.h>\n#include <profile_stats.h>')
-        print(f"  [build] [profile-inject] added #include <profile_stats.h>")
+        anchor = '#include <gc/gc_api.h>'
+        if anchor not in content:
+            print(f"  [build] [profile-inject] WARNING: anchor {anchor!r} not found — "
+                  f"#include <profile_stats.h> NOT injected (TPG output may have drifted)")
+        else:
+            content = content.replace(
+                anchor,
+                f'{anchor}\n#include <profile_stats.h>')
+            print(f"  [build] [profile-inject] added #include <profile_stats.h>")
 
     # 2. Inject RunProfileMode() before int main()
     if 'RunProfileMode' not in content:
-        content = content.replace(
-            'int main(int argc, char* argv[]) {',
-            _PROFILE_MODE_FUNC + 'int main(int argc, char* argv[]) {')
-        print(f"  [build] [profile-inject] added RunProfileMode()")
+        anchor_main = 'int main(int argc, char* argv[]) {'
+        if anchor_main not in content:
+            print(f"  [build] [profile-inject] WARNING: anchor {anchor_main!r} not found — "
+                  f"RunProfileMode() NOT injected")
+        else:
+            content = content.replace(
+                anchor_main,
+                _PROFILE_MODE_FUNC + anchor_main)
+            print(f"  [build] [profile-inject] added RunProfileMode()")
 
     # 3. Inject --profile CLI handler before Unknown flag
     if '--profile' not in content:
-        content = content.replace(
-            'printf("Unknown flag: %s\\n", argv[1]);',
-            '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\n    printf("Unknown flag: %s\\n", argv[1]);')
-        print(f"  [build] [profile-inject] added --profile CLI handler")
+        anchor_unknown = 'printf("Unknown flag: %s\\n", argv[1]);'
+        if anchor_unknown not in content:
+            print(f"  [build] [profile-inject] WARNING: anchor {anchor_unknown!r} not found — "
+                  f"--profile CLI handler NOT injected")
+        else:
+            content = content.replace(
+                anchor_unknown,
+                '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\n    printf("Unknown flag: %s\\n", argv[1]);')
+            print(f"  [build] [profile-inject] added --profile CLI handler")
 
+    # BOUNDARY_OVERRIDE: https://github.com/chaos-il2cpp/chaos-il2cpp/issues/PHASE5-PROFILE
+    # Reason: TPG's runtime-entry.cpp.scriban has no --profile mode support; Python
+    #         injects RunProfileMode()/CLI handler into the generated native entry.
+    #         Preferred fix: add --profile to the TPG scriban template. Keep until DONE.
+    # Expires: 2099-12-31
     entry_path.write_text(content, encoding="utf-8")
 
 def _chaos_sdk_csproj() -> Path:

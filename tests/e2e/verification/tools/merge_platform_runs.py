@@ -49,12 +49,18 @@ def merge_runs(run_files: list[Path]) -> dict[str, Any]:
                     for chunk in asm_data.get("chunks", []):
                         slug = chunk.get("slug", "")
                         for f_entry in chunk.get("fact", {}).get("failures", []):
+                            # Prefer methodSubjectId (stable across platforms),
+                            # falling back to methodIndex. Docstring promised
+                            # methodSubjectId alignment but the code keyed on
+                            # methodIndex only.
+                            msid = f_entry.get("methodSubjectId") or f_entry.get("methodIndex")
                             mi = f_entry.get("methodIndex", 0)
-                            key = f"{asm_name}/{slug}/method-{mi}"
+                            key = f"{asm_name}/{slug}/method-{msid}"
                             if key not in failures_by_key:
                                 failures_by_key[key] = {
                                     "assembly": asm_name,
                                     "slug": slug,
+                                    "methodSubjectId": msid,
                                     "methodIndex": mi,
                                     "platforms": {},
                                 }

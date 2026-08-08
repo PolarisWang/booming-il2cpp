@@ -191,7 +191,8 @@ def _print_report(
     if details["regressed"]:
         print(f"  Regressed ({summary['regressed']}):")
         for r in details["regressed"]:
-            msid_short = r["methodSubjectId"][:90]
+            label = r.get("methodSubjectId") or r.get("slug", "?")
+            msid_short = str(label)[:90]
             print(f"    🔴 {msid_short}")
             print(f"       {r['baselinePct']}% -> {r['targetPct']}%  ({r['delta']:+.2f}pp)")
         print()
@@ -199,7 +200,8 @@ def _print_report(
     if details["improved"]:
         print(f"  Improved ({summary['improved']}):")
         for r in details["improved"][:10]:  # Show top 10 only
-            msid_short = r["methodSubjectId"][:90]
+            label = r.get("methodSubjectId") or r.get("slug", "?")
+            msid_short = str(label)[:90]
             print(f"    🟢 {msid_short}")
             print(f"       {r['baselinePct']}% -> {r['targetPct']}%  ({r['delta']:+.2f}pp)")
         if len(details["improved"]) > 10:

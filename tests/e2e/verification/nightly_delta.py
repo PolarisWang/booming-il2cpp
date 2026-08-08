@@ -133,11 +133,13 @@ def compute_assembly_delta(
         else:
             delta["factDelta"] = None
 
-        # Coverage gap: metaTotal - total
+        # Coverage gap: metaTotal - total. When total==0 but metaTotal exists, the
+        # whole meta set is unverified so the gap IS metaTotal (don't collapse to
+        # None, which masked the true gap).
         t_meta = tf.get("metaTotal") if tf.get("metaTotal") is not None else None
-        t_gap = max(0, t_meta - t_total) if t_meta is not None and t_total > 0 else None
+        t_gap = max(0, t_meta - t_total) if t_meta is not None else None
         p_meta = pf.get("metaTotal") if pf.get("metaTotal") is not None else None
-        p_gap = max(0, p_meta - p_total) if p_meta is not None and p_total > 0 else None
+        p_gap = max(0, p_meta - p_total) if p_meta is not None else None
         delta["coverageGap"] = t_gap
         if delta["status"] == "compared" and t_gap is not None and p_gap is not None:
             delta["coverageGapDelta"] = t_gap - p_gap

@@ -181,8 +181,42 @@ class PipelineRunReport:
 
     @staticmethod
     def load_from_file(path: Path) -> PipelineRunReport | None:
+        """Load a PipelineRunReport, reconstructing nested dataclasses.
+
+        ``PipelineRunReport(**data)`` only rebuilds the outer dataclass; the nested
+        ChunkReport/FactSummary/BenchmarkEntry/etc. came back as plain dicts, so
+        attribute access like ``chunk.fact.passRate`` raised AttributeError. This
+        rebuilds the full object tree.
+        """
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
-            return PipelineRunReport(**data)
-        except (OSError, json.JSONDecodeError, TypeError):
+        except (OSError, json.JSONDecodeError):
+            return None
+
+        chunks: list[ChunkReport] = []
+        for cd in data.get("chunks") or []:
+            fact_raw = cd.get("fact")
+            fact: FactSummary | None = None
+            if isinstance(fact_raw, dict):
+                fact = FactSummary(
+                    **{k: v for k, v in fact_raw.items() if k != "failures"},
+                )
+                fact.failures = [
+                    FactFailure(**f) for f in (fact_raw.get("failures") or [])
+                    if isinstance(f, dict)
+                ]
+            chunks.append(ChunkReport(
+                slug=cd.get("slug", ""),
+                assembly=cd.get("assembly", ""),
+                fact=fact,
+                benchmark=[BenchmarkEntry(**b) for b in (cd.get("benchmark") or [])
+                           if isinstance(b, dict)],
+                hotupdate=[HotupdateEntry(**h) for h in (cd.get("hotupdate") or [])
+                           if isinstance(h, dict)],
+                duration_ms=cd.get("duration_ms", 0),
+            ))
+
+        try:
+            return PipelineRunReport(**{**data, "chunks": chunks})
+        except TypeError:
             return None

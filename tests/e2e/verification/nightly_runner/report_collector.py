@@ -29,7 +29,7 @@ for _b_d in _b_Path(__file__).resolve().parents:
         if str(_b_d) not in _b_sys.path:
             _b_sys.path.insert(0, str(_b_d))
         break
-from _path import foundation_root
+from _path import foundation_root, results_base
 
 _FOUNDATION_DLL = foundation_root()
 if str(_FOUNDATION_DLL) not in sys.path:
@@ -172,13 +172,16 @@ class ReportCollector:
     def _copy_benchmark_history(self):
         """Copy benchmark-history.jsonl → benchmark-history/<asm>/<slug>.jsonl."""
         target = self.run_dir / "benchmark-history"
-        results_base = Path(__file__).resolve().parent.parent / "results" / "foundation-dll"
+        # Use the unified foundation-rooted results base (same tree the benchmark
+        # writers write to). A __file__-derived path resolved to verification/
+        # and silently mismatched the writers' real output. (was "never copied")
+        results_base_path = results_base()
 
         copied = 0
-        if results_base.exists():
+        if results_base_path.exists():
             assemblies = self.config.assemblies or discover_assemblies(self.config.foundation_dir)
             for asm in assemblies:
-                asm_dir = results_base / asm
+                asm_dir = results_base_path / asm
                 if not asm_dir.exists():
                     continue
                 for slug_dir in asm_dir.iterdir():

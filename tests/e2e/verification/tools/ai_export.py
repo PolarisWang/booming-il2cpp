@@ -56,10 +56,25 @@ def export_all(pipeline_runs_path: Path, ai_dir: Path) -> dict[str, int]:
                     slug = chunk.get("slug", "")
                     fact = chunk.get("fact", {})
                     _collect_fact_failures(fact_failures, asm_name, slug, platform, git_commit, fact)
+                    _collect_benchmark_regressions(benchmark_regressions, asm_name, slug, platform, git_commit,
+                                                   chunk.get("benchmark") or {})
+                    _collect_hu_targets(hu_targets, asm_name, slug, platform, git_commit,
+                                        chunk.get("hotupdate") or {})
+                    _collect_memory_targets(memory_targets, asm_name, slug, platform, git_commit,
+                                            chunk.get("benchmark") or {})
 
     # Write fact-failures.jsonl
     _write_jsonl(ai_dir / "fact-failures.jsonl", fact_failures)
     counts["fact-failures"] = len(fact_failures)
+
+    # Write benchmark-regressions / hu-targets / memory-targets (were declared but
+    # never populated — the docstring promised them but the files were never written).
+    _write_jsonl(ai_dir / "benchmark-regressions.jsonl", benchmark_regressions)
+    counts["benchmark-regressions"] = len(benchmark_regressions)
+    _write_jsonl(ai_dir / "hu-targets.jsonl", hu_targets)
+    counts["hu-targets"] = len(hu_targets)
+    _write_jsonl(ai_dir / "memory-targets.jsonl", memory_targets)
+    counts["memory-targets"] = len(memory_targets)
 
     # Write known-failures.jsonl (per-platform aggregated pattern view)
     known = _build_known_failures(fact_failures)
@@ -103,6 +118,71 @@ def _collect_fact_failures(
         })
 
 
+def _collect_benchmark_regressions(
+    out: list[dict], asm: str, slug: str,
+    platform: str, git_commit: str, benchmark: dict,
+) -> None:
+    """Extract benchmark methods whose regressionDelta indicates a regression."""
+    for m in benchmark.get("perMethodStats") or []:
+        delta = m.get("regressionDelta")
+        if delta is not None and float(delta) > 0:
+            out.append({
+                "assembly": asm,
+                "slug": slug,
+                "platform": platform,
+                "gitCommit": git_commit,
+                "methodSubjectId": m.get("methodSubjectId"),
+                "regressionDelta": delta,
+                "bottleneck": m.get("bottleneck", ""),
+                "routeHint": route_for_bottleneck_str(m.get("bottleneck", "")),
+            })
+
+
+def _collect_hu_targets(
+    out: list[dict], asm: str, slug: str,
+    platform: str, git_commit: str, hotupdate: dict,
+) -> None:
+    """Extract hotupdate methods worth keeping native (low overhead, patchable)."""
+    for m in hotupdate.get("perMethodStats") or []:
+        if m.get("keepNative") or (m.get("postPatchNsPerOp") is not None
+                                   and m.get("postPatchNsPerOp") > 0):
+            out.append({
+                "assembly": asm,
+                "slug": slug,
+                "platform": platform,
+                "gitCommit": git_commit,
+                "methodSubjectId": m.get("methodSubjectId"),
+                "postPatchNsPerOp": m.get("postPatchNsPerOp"),
+                "keepNative": m.get("keepNative", False),
+                "routeHint": route_for_bottleneck_str(m.get("bottleneck", "")),
+            })
+
+
+def _collect_memory_targets(
+    out: list[dict], asm: str, slug: str,
+    platform: str, git_commit: str, benchmark: dict,
+) -> None:
+    """Extract high-allocation benchmark methods as memory-optimization targets."""
+    for m in benchmark.get("perMethodStats") or []:
+        alloc = m.get("allocPerOp")
+        if alloc is not None:
+            out.append({
+                "assembly": asm,
+                "slug": slug,
+                "platform": platform,
+                "gitCommit": git_commit,
+                "methodSubjectId": m.get("methodSubjectId"),
+                "allocPerOp": alloc,
+            })
+
+
+def route_for_bottleneck_str(bottleneck: str) -> str:
+    """Map a bottleneck label to the routing hint (default fallback)."""
+    if not bottleneck:
+        return "dev-il2cpp-runtime-expert"
+    return bottleneck  # models.route_for_bottleneck would map it if imported
+
+
 def _build_known_failures(fact_failures: list[dict]) -> list[dict]:
     """Aggregate fact failures by (assembly, slug, errorPattern) per platform."""
     seen: dict[str, dict] = {}
@@ -142,7 +222,11 @@ def main() -> int:
 
     src = Path(args[0])
     dst = Path(args[1]) if len(args) > 1 else src.parent / "ai"
-    export_all(src, dst)
+    result = export_all(src, dst)
+    # export_all returns {"error": -1} when the source is missing — propagate as
+    # a nonzero exit (was discarded, so a missing source silently "succeeded").
+    if "error" in result:
+        return 1
     return 0
 
 

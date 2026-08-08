@@ -65,7 +65,7 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
     lines.append(f"| Assemblies | {overall.get('totalAssemblies', 0)} |")
     lines.append(f"| Chunks | {overall.get('chunksVerified', 0)} / {overall.get('totalChunks', 0)} verified |")
     lines.append(f"| Fact pass rate | {_fmt_pct(overall.get('factPassRate'))} "
-                 f"{_delta_emoji(overall.get('factPassRateDelta'))} |")
+                 f"{_delta_emoji(overall.get('factPassRateDelta'), good_is_positive=True)} |")
     lines.append(f"| Benchmark methods | {overall.get('totalBenchmarked', 0)} |")
     lines.append(f"| Coverage gap | {overall.get('totalCoverageGap', 0)} methods unverified |")
     lines.append(f"| Assemblies with history | {overall.get('assembliesWithHistory', 0)} |")
