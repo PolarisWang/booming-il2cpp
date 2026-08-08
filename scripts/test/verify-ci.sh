@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# ⚠️ DEPENDS ON GITHUB — only relevant if CI runs on GitHub (polls gh for a workflow
+# run conclusion). The repo is GitHub-independent; use `./scripts/ci_run.sh` for the
+# portable, self-contained test entry that does not require gh or any CI service.
+# Guarded below with `gh` existence checks; retained for the GitHub-hosting case only.
 # Wait for CI to pass after a push to main.
 # Usage: bash scripts/verify-ci.sh [--timeout 10] [--branch main]
 # Returns 0 if CI passes within timeout, 1 on failure, 2 on timeout.

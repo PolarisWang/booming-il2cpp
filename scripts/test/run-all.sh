@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# ⚠️ DEPRECATED — superseded by scripts/ci_run.sh (portable, GitHub-free wrapper
+# over tests/runner/test_driver.py). This older script drives stale pre-L-migration
+# paths (src/managed/all, src/native/build/native-testing, src/python). You almost
+# certainly want `./scripts/ci_run.sh` instead.
 set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO_ROOT"
