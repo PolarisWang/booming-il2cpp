@@ -169,6 +169,14 @@ def _build_method_comparison(
     all_net10_pcts: list[float] = []
     total_better_than_net8 = 0
     total_with_net8 = 0
+    # Coverage-asymmetry counters for the harness diagnostic: which methods each
+    # runtime actually benchmarked. When AOT and managed benchmark disjoint sets
+    # (family-specific: e.g. SseFormatter throws on .NET, SseParser isn't AOT-
+    # dispatchable), chaosAotVsNet8 is legitimately empty — the harness needs to
+    # SEE that asymmetry, not a silent {}.
+    method_aot_covered = 0    # chaos-aot produced timing for this method
+    method_net_covered = 0    # net8/net10 (managed) produced timing
+    method_overlap = 0        # both sides have timing for the SAME method
 
     # GC comparison accumulators
     all_alloc_ratios: list[float] = []
@@ -189,6 +197,14 @@ def _build_method_comparison(
         net10_ms = _get_elapsed(techs.get("net10-jit"))
         chaos_aot_ms = _get_elapsed(techs.get("chaos-aot"))
         chaos_jit_ms = _get_elapsed(techs.get("chaos-jit"))
+
+        # Coverage-asymmetry bookkeeping (for the harness diagnostic).
+        if chaos_aot_ms is not None:
+            method_aot_covered += 1
+        if net8_ms is not None and net8_ms > 0:
+            method_net_covered += 1
+        if chaos_aot_ms is not None and net8_ms is not None and net8_ms > 0:
+            method_overlap += 1
 
         method_entry: dict[str, Any] = {
             "methodSubjectId": msid,
@@ -289,12 +305,24 @@ def _build_method_comparison(
         "methodCount": len(methods_list),
         "methodsWithNet8": total_with_net8,
         "methodsBetterThanNet8": total_better_than_net8,
+        # Coverage-asymmetry diagnostic: AOT vs managed (net8/net10) benchmark
+        # populations may be disjoint for a family. Exposing these lets the
+        # harness see WHY chaosAotVsNet8 is empty (no method has BOTH AOT and
+        # managed timing) instead of a silent {}.
+        "coverage": {
+            "aotCoveredMethods": method_aot_covered,
+            "managedCoveredMethods": method_net_covered,
+            "overlappingMethods": method_overlap,
+            "noAotNet8Overlap": method_overlap == 0,
+        },
     }
     if all_chaos_aot_pcts:
         aggregate["chaosAotVsNet8Pct"] = _compute_aggregate_stats(all_chaos_aot_pcts)
         aggregate["highValueMethods_betterThanNet8"] = round(
             total_better_than_net8 / len(all_chaos_aot_pcts) * 100, 1
         ) if all_chaos_aot_pcts else 0
+    elif method_aot_covered == 0:
+        aggregate["noAotData"] = True
     if all_chaos_jit_pcts:
         aggregate["chaosJitVsNet8Pct"] = _compute_aggregate_stats(all_chaos_jit_pcts)
     if all_net10_pcts:
@@ -442,6 +470,11 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
     total_methods = 0
     total_with_net8 = 0
     total_better_than_net8 = 0
+    # Accumulated coverage-asymmetry counters (promoted to top-level aggregate so
+    # the dashboard can surface WHY chaosAotVsNet8 may be empty).
+    cov_aot = 0
+    cov_net = 0
+    cov_overlap = 0
 
     for slug in chunk_slugs:
         jsonl_path = _RESULTS_BASE / assembly / slug / "perf" / "benchmark-history.jsonl"
@@ -489,6 +522,13 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
         }
         all_chunk_comparisons.append(chunk_comparison)
 
+        # Accumulate per-chunk coverage-asymmetry counters for the top-level
+        # aggregate + dashboard diagnostic.
+        cov = aggregate.get("coverage") or {}
+        cov_aot += cov.get("aotCoveredMethods", 0)
+        cov_net += cov.get("managedCoveredMethods", 0)
+        cov_overlap += cov.get("overlappingMethods", 0)
+
         # Write per-chunk comparison.json
         if results_dir.exists():
             comp_path = results_dir / "comparison.json"
@@ -534,6 +574,17 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
     cross_chunk_aggregate["highValueMethods_betterThanNet8"] = round(
         total_better_than_net8 / max(total_with_net8, 1) * 100, 1
     ) if total_with_net8 else 0
+
+    # Promoted coverage-asymmetry diagnostic: expose WHY chaosAotVsNet8 may be
+    # empty (AOT and managed benchmarked disjoint method sets).
+    cross_chunk_aggregate["coverage"] = {
+        "aotCoveredMethods": cov_aot,
+        "managedCoveredMethods": cov_net,
+        "overlappingMethods": cov_overlap,
+        "noAotNet8Overlap": cov_overlap == 0,
+    }
+    if cov_aot == 0:
+        cross_chunk_aggregate["noAotData"] = True
 
     comparison_summary = {
         "assemblyName": assembly,

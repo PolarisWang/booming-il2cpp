@@ -29,6 +29,11 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+# ── Root cause fix: GBK-console crash on emoji (✅/❌/⚠️/…) prints ───────
+# Force UTF-8 on stdout/stderr so emoji prints never crash on a GBK console.
+# See _encoding.py for rationale (shared across all engine entry points).
+from verification import _encoding as _console_encoding  # noqa: E402
+
 # Ensure foundation-dll/ (family root) + the testing tree (_pipeline holder) are on
 # sys.path. Roots are resolved through the central _path resolver so the engine is
 # location-independent (env overrides CHAOS_FOUNDATION_DLL / CHAOS_TESTING_DIR; else
@@ -124,6 +129,74 @@ def _load_pipeline_config() -> dict:
 
 
 _PIPELINE_CONFIG = _load_pipeline_config()
+
+
+def _toposort_stages(stage_names: list, stage_deps: dict) -> list:
+    """Return stage_names reordered so every dependency precedes its dependent.
+
+    DFS-based topological sort restricted to the requested stage set. Used so the
+    pipeline no longer depends on the caller listing --stages in dependency order
+    (e.g. "--stages reporting,aggregate" is automatically corrected). The DAG is
+    acyclic by construction (STAGE_DEPS), so no cycle detection needed here.
+    """
+    ordered: list[str] = []
+    visited: set[str] = set()
+    requested = set(stage_names)
+
+    def _visit(node: str) -> None:
+        if node in visited or node not in requested:
+            return
+        visited.add(node)
+        for dep in stage_deps.get(node, []):
+            _visit(dep)
+        ordered.append(node)
+
+    for s in stage_names:
+        _visit(s)
+    return ordered
+
+
+def _write_provenance(ctx, stages_result: dict, stage_names: list | None = None) -> None:
+    """Persist per-chunk build/run provenance to <chunk>/results/provenance.json.
+
+    The build StageResult carries details.fastpath / details.hephaestus
+    (cache_hit|miss) / details.cacheKey. These are the only trustworthy
+    cache-vs-fresh markers produced at runtime, but chunk_pipeline dropped them
+    after the build stage. Aggregate re-reads this file to expose them in
+    fact-summary.json / dashboard.json, so a harness can tell fresh builds from
+    reused (possibly stale) cache/fastpath intermediates.
+
+    Called immediately after the build stage (not after all stages) so aggregate
+    (a later stage in the same invocation) sees a populated file.
+    """
+    try:
+        import json
+        ctx.results_dir.mkdir(parents=True, exist_ok=True)
+        build_details = (stages_result.get("build") or {}).get("details", {})
+
+        provenance = {
+            "slug": ctx.slug,
+            "assembly": ctx.assembly,
+            "runId": ctx.run_id,
+            "platform": ctx.platform,
+            "deviceId": (ctx.device or {}).get("id", ""),
+            "gitCommit": ctx.git_commit,
+            "gitBranch": ctx.git_branch,
+            "nativeConfig": ctx.native_config,
+            "mode": ctx.mode,
+            "stagesRun": list(stage_names) if stage_names else None,
+            "build": {
+                "status": (stages_result.get("build") or {}).get("status"),
+                "fastpath": build_details.get("fastpath", False),
+                "cacheProvenance": build_details.get("hephaestus"),
+                "cacheKey": build_details.get("cacheKey"),
+                "cachedAt": build_details.get("cachedAt"),
+            },
+        }
+        (ctx.results_dir / "provenance.json").write_text(
+            json.dumps(provenance, indent=2), encoding="utf-8")
+    except Exception as e:  # non-fatal: provenance is an enhancement
+        print(f"  [provenance] WARNING: could not persist provenance: {e}")
 
 
 def main():
@@ -288,12 +361,19 @@ def main():
     STAGE_DEPS: dict[str, list[str]] = {
         "fact":              ["build"],
         "benchmark":         ["build", "fact"],
-        "managed_benchmark": ["build"],
+        # P1-A: managed_benchmark appends net8/net10 to the SAME perf store that
+        # benchmark_chunk writes with "w". Must run AFTER benchmark or its "w"
+        # would erase the AOT+JIT records. Enforcing the dep fixes the ordering.
+        "managed_benchmark": ["build", "benchmark"],
         "benchmark_report":  ["benchmark", "managed_benchmark"],
         "hotupdate":         ["build", "fact"],
         "coverage-audit":    ["build", "fact"],
         "profile":           ["build"],
-        "aggregate":         ["build", "fact", "coverage-audit"],
+        # P1-C: aggregate reads comparison.json (benchmark_report), hotupdate.json,
+        # benchmark.json — all produced AFTER build/fact/coverage-audit. Enforce the
+        # real producers so a single-assembly CLI run can't read stale/empty inputs.
+        "aggregate":         ["build", "fact", "coverage-audit", "benchmark",
+                              "hotupdate", "benchmark_report"],
         "reporting":         ["aggregate"],
     }
     stage_set = set(stage_names)
@@ -306,6 +386,15 @@ def main():
     if missing_deps:
         print(f"  Hint: typical pipeline is --stages build,fact,coverage-audit")
         return 1
+
+    # Topologically reorder stages so dependencies run before dependents,
+    # regardless of the order the caller listed them. This removes the earlier
+    # implicit requirement that --stages be listed in dependency order.
+    reordered = _toposort_stages(stage_names, STAGE_DEPS)
+    if reordered != stage_names:
+        print(f"[chunk-pipeline] Reordered stages by dependency: "
+              f"{', '.join(reordered)}")
+    stage_names = reordered
 
     # Import stage functions
     from verification.stages.build import run_build
@@ -440,6 +529,20 @@ def main():
                 if sr.errors:
                     for err in sr.errors:
                         print(f"       Error: {err}")
+            elif sr.status == "warning" and overall_status != "failed":
+                # Strict non-silent warnings (e.g. chaos-aot produced no data)
+                # downgrade the run to "warning" (still exit 0 / non-fatal) but
+                # are surfaced in the final status — never silently swallowed.
+                overall_status = "warning"
+                print(f"       [warning] {sr.summary}")
+
+            # Persist per-chunk provenance right after build so the aggregate
+            # stage (which runs later in the SAME invocation and re-reads the
+            # chunk results dir) sees a populated provenance.json. Writing it
+            # only after ALL stages ran meant aggregate read results before the
+            # file existed (cacheProvenance/cachedAt came back null).
+            if stage_name == "build":
+                _write_provenance(ctx, stages_result)
 
         print(f"\n  Chunk '{chunk_slug}' summary: "
               f"{sum(1 for s in stages_result.values() if s.get('status') == 'passed')}/"
@@ -451,7 +554,23 @@ def main():
     print(f"Duration: {total_duration:.0f}s")
     print(f"{'='*60}")
 
-    return 0 if overall_status == "passed" else 1
+    # Exit semantics: 0=passed, 2=warning (non-fatal, harness can detect a
+    # strict non-silent warning without failing the run), 1=failed.
+    return _exit_code_for_status(overall_status)
+
+
+def _exit_code_for_status(overall_status: str) -> int:
+    """Map an aggregated pipeline status to a process exit code.
+
+    0 = passed, 1 = failed/error, 2 = warning (non-fatal but surfaced so a
+    harness can detect a strict non-silent warning without failing the run).
+    """
+    if overall_status == "passed":
+        return 0
+    if overall_status == "warning":
+        print("[chunk-pipeline] WARNING: pipeline completed with warnings (exit 2)")
+        return 2
+    return 1
 
 
 if __name__ == "__main__":

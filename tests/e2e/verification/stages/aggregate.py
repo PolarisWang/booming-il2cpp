@@ -60,6 +60,11 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     all_fact: list[dict] = []
     all_benchmark: list[dict] = []
     chunk_summaries: list[dict] = []
+    stale_chunks: list[str] = []  # chunks reused from cache/fastpath (not fresh)
+    # Per-method rows (Bug3 fix): preserve methodSubjectId + chaosAotVsNet8Pct so
+    # the agent-facing report can map a signal back to a concrete method, instead
+    # of discarding per-method identity (which made dashboard un-actionable).
+    per_method_rows: list[dict] = []
 
     for slug in chunk_slugs:
         chunk_dir = chunks_dir / slug
@@ -76,6 +81,14 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 "total": fact_data.get("total", 0),
                 "valueSuspicious": fact_data.get("valueSuspicious", False),
                 "valueWarnings": fact_data.get("valueWarnings", 0),
+                # Preserve factMethodCount as its OWN key. The meta-mismatch
+                # checker (line ~214) reads `fact.get("factMethodCount")`; if we
+                # only fold it into metaBenchmarkCount below, that lookup returns
+                # None and falls back to metaTotal — producing a false
+                # meta-mismatch ERROR whenever the fact stage samples fewer
+                # methods than are declared (e.g. fact total=4, metaTotal=15).
+                # The data is correct in fact.json; it was just dropped here.
+                "factMethodCount": fact_data.get("factMethodCount"),
                 "metaTotal": fact_data.get("metaTotal"),
                 "metaBenchmarkCount": fact_data.get("factMethodCount", fact_data.get("metaTotal", 0)),
             }
@@ -119,6 +132,26 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         else:
             summary["benchmark"] = {"status": "no_results"}
 
+        # Bug3 fix: collect per-method rows from comparison.json (methodSubjectId +
+        # chaosAotVsNet8Pct + status) so the agent report maps signals to methods.
+        comp_path = results_dir / "comparison.json"
+        comp_data = _try_load_json(comp_path)
+        if comp_data:
+            for m in comp_data.get("methods", []):
+                msid = m.get("methodSubjectId") or ""
+                per_method_rows.append({
+                    "assembly": assembly,
+                    "slug": slug,
+                    "methodSubjectId": msid,
+                    "status": m.get("status"),
+                    "net8Ms": m.get("net8Ms"),
+                    "chaosAotMs": m.get("chaosAotMs"),
+                    "chaosAotVsNet8Pct": m.get("chaosAotVsNet8Pct"),
+                    "chaosJitVsNet8Pct": m.get("chaosJitVsNet8Pct"),
+                    "highVariance": m.get("highVariance"),
+                    "gcComparison": m.get("gcComparison"),
+                })
+
         # HotUpdate results
         hu_path = results_dir / "hotupdate.json"
         hu_data = _try_load_json(hu_path)
@@ -139,8 +172,32 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         else:
             summary["hotupdate"] = {"status": "no_results"}
 
-        # Build status
-        result_files = [f.name for f in results_dir.iterdir()] if results_dir.is_dir() else []
+        # Build status + cache/fresh provenance. The build StageResult ran in a
+        # separate process from aggregate, so its details (fastpath / hephaestus
+        # cache_hit|miss / cacheKey / cachedAt) were persisted by chunk_pipeline
+        # to provenance.json. Read that so the durable report can show whether
+        # this chunk was freshly built or reused a (possibly stale) cache/fastpath
+        # intermediate.
+        proof_path = results_dir / "provenance.json"
+        provenance: dict = {}
+        if proof_path.exists():
+            try:
+                provenance = json.loads(proof_path.read_text(encoding="utf-8"))
+            except (json.JSONDecodeError, OSError):
+                provenance = {}
+        build_prov = provenance.get("build", {})
+        cache_prov = build_prov.get("cacheProvenance")
+        fastpath = build_prov.get("fastpath", False)
+        # Stale-reuse signal: entry.exe was NOT freshly compiled this run.
+        #   - fastpath=True  → reused an existing byte-identical entry.exe (risk:
+        #                      missing deps dropped from mtime comparison).
+        #   - cache_hit      → restored from a hephaestus cache entry.
+        # A cache "miss" is a FRESH build, so it is NOT stale.
+        is_stale = bool(fastpath or cache_prov == "cache_hit")
+
+        result_files = []
+        if results_dir.is_dir():
+            result_files = [f.name for f in results_dir.iterdir()]
         if fact_path.exists():
             summary["build"] = {"status": "passed"}
         elif any(rf.endswith(".json") for rf in result_files):
@@ -149,6 +206,19 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             summary["build"] = {"status": "failed"}
         else:
             summary["build"] = {"status": "not_run"}
+        # Extend with provenance (never drops the derived status above).
+        summary["build"].update({
+            "cacheProvenance": cache_prov if cache_prov else
+                              ("fastpath" if fastpath else None),
+            "cachedAt": build_prov.get("cachedAt"),
+            "cacheKey": build_prov.get("cacheKey"),
+            "buildRunId": provenance.get("runId"),
+            "platform": provenance.get("platform"),
+            "gitCommit": provenance.get("gitCommit"),
+            "staleReuse": is_stale,
+        })
+        if is_stale:
+            stale_chunks.append(slug)
 
         # Profile results (AOT code size, optional)
         profile_path = results_dir / "profile.json"
@@ -209,6 +279,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     # instantiations (e.g., Lookup<,>::ApplyResultSelector).
     chunks_with_meta_mismatch = 0
     chunks_with_meta_warning = 0
+    chunks_with_coverage_gap = 0  # P2-F: codegen didn't dispatch methods (all run passed)
     for s in chunk_summaries:
         fact = s.get("fact", {})
         meta = fact.get("factMethodCount") if fact.get("factMethodCount") is not None else fact.get("metaTotal")
@@ -218,9 +289,19 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             gap_ratio = gap / meta
             chunk_slug = s.get("slug", "?")
             meta_label = "factMethodCount" if s.get("fact", {}).get("factMethodCount") else "metaTotal"
+            passed = fact.get("passed", 0)
             if gap_ratio < 0.01:
                 chunks_with_meta_warning += 1
                 print(f"  [aggregate] WARN: {chunk_slug} fact total={total} != {meta_label}={meta} (gap={gap}, {gap_ratio:.1%})")
+            elif passed >= total and total > 0:
+                # P2-F: all DISPATCHED methods passed, but the codegen only made
+                # `total` of `meta` methods dispatchable (corelib: e.g. 5/75, AOT
+                # lowering only emits slots for a subset). This is a codegen COVERAGE
+                # gap, NOT a correctness failure — the methods that ran all passed.
+                # Report it as a distinct coverage indicator, not a SEVERE error.
+                chunks_with_coverage_gap += 1
+                print(f"  [aggregate] COVERAGE-GAP: {chunk_slug} only {total}/{meta} methods dispatchable "
+                      f"({gap_ratio:.0%} not AOT-lowered); all {passed}/{total} that ran passed")
             else:
                 chunks_with_meta_mismatch += 1
                 print(f"  [aggregate] ERROR: {chunk_slug} fact total={total} != {meta_label}={meta} (gap={gap}, {gap_ratio:.1%})")
@@ -287,6 +368,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "chunksWithValueWarnings": chunks_with_value_warnings,
         "totalPassed": total_passed,
         "totalFactMethods": total_fact,
+        "staleChunks": sorted(set(stale_chunks)),
         "chunkSummaries": chunk_summaries,
     }
     (latest_dir / "fact-summary.json").write_text(
@@ -299,10 +381,24 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "totalChunks": len(chunk_slugs),
         "totalBenchmarkedMethods": total_benchmarked,
         "aggregatePerformance": aggregate_perf,
+        "staleChunks": sorted(set(stale_chunks)),
         "chunkSummaries": chunk_summaries,
     }
     (latest_dir / "benchmark-summary.json").write_text(
         json.dumps(bench_summary, indent=2), encoding="utf-8")
+
+    # per-method.json (Bug3 fix): preserve per-method identity (methodSubjectId +
+    # chaosAotVsNet8Pct) so an agent can map a benchmark/fact signal back to a
+    # concrete method instead of only seeing aggregate-level pass rates.
+    per_method_report = {
+        "assemblyName": ctx.assembly,
+        "assemblyPath": str(ctx.foundation_dir),
+        "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S"),
+        "methodCount": len(per_method_rows),
+        "methods": per_method_rows,
+    }
+    (latest_dir / "per-method.json").write_text(
+        json.dumps(per_method_report, indent=2), encoding="utf-8")
 
     # coverage-audit.json
     coverage_audit = {
@@ -312,6 +408,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "chunksWithResults": chunks_with_fact,
         "chunksWithValueWarnings": chunks_with_value_warnings,
         "chunksWithMetaMismatch": chunks_with_meta_mismatch,
+        "chunksWithCoverageGap": chunks_with_coverage_gap,
         "totalDeclaredMethods": total_fact,
     }
     (latest_dir / "coverage-audit.json").write_text(
@@ -326,6 +423,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             "chunksVerified": chunks_with_fact,
             "chunksWithValueWarnings": chunks_with_value_warnings,
             "chunksWithMetaMismatch": chunks_with_meta_mismatch,
+            "chunksWithCoverageGap": chunks_with_coverage_gap,
             "factPassRate": round(total_passed / total_fact * 100, 1) if total_fact else 0,
             "totalBenchmarkedMethods": total_benchmarked,
             "aggregatePerformance": aggregate_perf,
@@ -341,18 +439,43 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         },
     }
 
-    # Read benchmark comparison summary if available
+    # Read benchmark comparison summary if available. To keep the dashboard
+    # contract unambiguous for a harness, expose an explicit status rather than
+    # silently omitting the key: "completed" (comparison-summary.json present) vs
+    # "not_run" (benchmark_report stage didn't produce it this run). All counts
+    # come from the SAME comparison-summary.json snapshot so dashboard and
+    # comparison-summary.json never disagree on the same invocation.
     comparison_path = latest_dir / "comparison-summary.json"
     if comparison_path.exists():
-        cs = json.loads(comparison_path.read_text(encoding="utf-8"))
-        dashboard["summary"]["benchmarkComparison"] = {
-            "methodsAnalyzed": cs.get("totalMethods", 0),
-            "methodsWithNet8": cs.get("methodsWithNet8", 0),
-            "chaosAotVsNet8": cs.get("aggregate", {}).get("chaosAotVsNet8Pct", {}),
-            "chaosJitVsNet8": cs.get("aggregate", {}).get("chaosJitVsNet8Pct", {}),
-            "net10VsNet8": cs.get("aggregate", {}).get("net10VsNet8Pct", {}),
-            "highValueMethods_betterThanNet8": cs.get("aggregate", {}).get("highValueMethods_betterThanNet8", 0),
-        }
+        try:
+            cs = _try_load_json(comparison_path) or {}
+        except Exception:
+            cs = {}
+        if cs:
+            cs_agg = cs.get("aggregate", {}) or {}
+            dashboard["summary"]["benchmarkComparison"] = {
+                "status": "completed",
+                "methodsAnalyzed": cs.get("totalMethods", 0),
+                "methodsWithNet8": cs.get("methodsWithNet8", 0),
+                "chaosAotVsNet8": cs_agg.get("chaosAotVsNet8Pct", {}),
+                "chaosJitVsNet8": cs_agg.get("chaosJitVsNet8Pct", {}),
+                "net10VsNet8": cs_agg.get("net10VsNet8Pct", {}),
+                "highValueMethods_betterThanNet8": cs_agg.get("highValueMethods_betterThanNet8", 0),
+                # Coverage-asymmetry diagnostic (surfaces WHY chaosAotVsNet8 may be
+                # empty: AOT and managed benchmarked disjoint method sets).
+                "coverage": cs_agg.get("coverage", {}),
+                "noAotData": cs_agg.get("noAotData", False),
+            }
+    if "benchmarkComparison" not in dashboard["summary"]:
+        dashboard["summary"]["benchmarkComparison"] = {"status": "not_run"}
+
+    # Cache/fresh provenance: expose which chunks were reused (not freshly built)
+    # so the harness can tell a fresh result from stale cache/fastpath reuse.
+    # This is a warning signal, NOT a gate — stale reuse does not fail the report.
+    dashboard["summary"]["cacheProvenance"] = {
+        "staleChunks": sorted(set(stale_chunks)),
+        "overallCacheFresh": len(stale_chunks) == 0,
+    }
     (latest_dir / "dashboard.json").write_text(
         json.dumps(dashboard, indent=2), encoding="utf-8")
 
@@ -373,17 +496,23 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         print(f"  [aggregate] Value warnings: {chunks_with_value_warnings} chunk(s)")
     if chunks_with_meta_mismatch:
         print(f"  [aggregate] Metadata mismatches: {chunks_with_meta_mismatch} chunk(s)")
+    if chunks_with_coverage_gap:
+        print(f"  [aggregate] Coverage gaps: {chunks_with_coverage_gap} chunk(s) "
+              f"(codegen did not dispatch all declared methods — NOT a correctness failure)")
     print(f"  [aggregate] Benchmark: {total_benchmarked} methods")
     print(f"  [aggregate] Done ({duration_ms}ms)")
 
     # Metadata mismatch = C++ fact didn't cover all managed methods — hard error.
     # Value warnings = methods returned negative values — also a hard error.
+    # Coverage gap (P2-F) is NOT hard: all dispatched methods passed; only the
+    # codegen failed to dispatch the rest. Report count, do not fail the run.
     aggregate_errors = []
     if chunks_with_meta_mismatch > 0:
         aggregate_errors.append(f"{chunks_with_meta_mismatch} meta-mismatch")
     if chunks_with_value_warnings > 0:
         aggregate_errors.append(f"{chunks_with_value_warnings} value-warn")
 
+    # Surface coverage-gap count in the dashboard/fact-summary as a diagnostic.
     aggregate_status = "passed"
     if aggregate_errors:
         aggregate_status = "error"

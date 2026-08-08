@@ -187,10 +187,100 @@ def _enrich_with_chunk_facts(asm_data: dict, chunks_dir: Path) -> None:
                 "passed": fact_data.get("passed", 0),
                 "total": fact_data.get("total", 0),
                 "truncated": fact_data.get("truncated", False),
+                # Schema drift fix: ai_export reads fact.metadataMismatch to emit a
+                # synthetic metadata_mismatch entry. Populate it from fact.json's
+                # factMethodCount vs total so the AI export isn't silently empty.
+                "metadataMismatch": (
+                    fact_data.get("metaTotal") is not None
+                    and fact_data.get("factMethodCount") is not None
+                    and fact_data.get("factMethodCount", 0) != fact_data.get("metaTotal")
+                ),
                 "failures": failures,
             },
+            # Schema drift fix: ai_export collects benchmark.perMethodStats and
+            # hotupdate.perMethodStats (for benchmark-regressions/hu-targets/
+            # memory-targets.jsonl). The run record previously omitted these,
+            # so those exports were always empty. Load them from the per-chunk
+            # comparison.json + hotupdate.json artifacts here.
+            "benchmark": _load_benchmark_per_method(chunk_dir),
+            "hotupdate": _load_hotupdate_per_method(chunk_dir),
         }
         asm_data.setdefault("chunks", []).append(chunk_entry)
+
+
+def _load_benchmark_per_method(chunk_dir: Path) -> dict:
+    """Load per-method benchmark comparison data for the AI exporters.
+
+    Reads the per-chunk comparison.json (methodSubjectId, chaosAotVsNet8Pct,
+    chaosJitVsNet8Pct, alloc data) and surface it as `perMethodStats` so
+    ai_export can build benchmark-regressions.jsonl / memory-targets.jsonl
+    (previously always empty because the run record lacked this field).
+
+    regressionDelta: positive = AOT slower than net8 (a regression worth flagging);
+    derived from chaosAotVsNet8Pct. bottleneck: derived from the pct + variance via
+    the same classifier benchmark_report uses, so the emitted routeHint is real.
+    """
+    comp_path = chunk_dir / "results" / "comparison.json"
+    if not comp_path.exists():
+        return {}
+    try:
+        data = json.loads(comp_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+    per_method = []
+    for m in data.get("methods", []):
+        pct_vs_net8 = m.get("chaosAotVsNet8Pct")
+        # Convention: chaosAotVsNet8Pct = (net8-aot)/net8*100; positive = AOT FASTER.
+        # A regression (AOT slower than net8) is pct<0. ai_export flags delta>0 as a
+        # regression, so report regressionDelta = abs(pct) only for the slower case.
+        regressed = isinstance(pct_vs_net8, (int, float)) and pct_vs_net8 < 0
+        delta = round(abs(pct_vs_net8), 2) if regressed else None
+        if regressed:
+            high_var = bool(m.get("highVariance"))
+            bottleneck = "unstable" if high_var else (
+                "dispatch_overhead" if abs(pct_vs_net8) >= 50 else "alloc_hot")
+        else:
+            bottleneck = ""
+        per_method.append({
+            "methodSubjectId": m.get("methodSubjectId"),
+            "methodIndex": -1,
+            "regressionDelta": delta,
+            "bottleneck": bottleneck,
+            "status": m.get("status"),
+            "aotSlowerThanNet8Pct": abs(pct_vs_net8) if regressed else None,
+        })
+    return {"perMethodStats": per_method}
+
+
+def _load_hotupdate_per_method(chunk_dir: Path) -> dict:
+    """Load per-method hotupdate data for the hu-targets exporter.
+
+    Note: hotupdate.json currently carries only aggregate fact-pass booleans +
+    baselineFact/patchedFact (si/passed/value), NOT per-method post-patch timing.
+    So hu-targets.jsonl has no timing source to emit keepNative targets — this
+    returns the aggregate pass state honestly; the per-method timing model is a
+    separate unimplemented feature (not a schema-drift fix).
+    """
+    path = chunk_dir / "results" / "hotupdate.json"
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+    # Aggregate per-method pass from baselineFact (si-based) so the exporter has
+    # something meaningful; per-method timing (postPatchNsPerOp) isn't produced yet.
+    per_method = []
+    for rec in (data.get("details") or {}).get("baselineFact", []) or []:
+        per_method.append({
+            "methodSubjectId": "",
+            "si": rec.get("si"),
+            "prePatchPassed": rec.get("passed", False),
+            "value": rec.get("value"),
+        })
+    return {"perMethodStats": per_method, "aggregatePassed": data.get("passed"),
+            "aggregateFailed": data.get("failed")}
 
 
 def _extract_fact_failures(assemblies: dict[str, dict]) -> list[dict]:

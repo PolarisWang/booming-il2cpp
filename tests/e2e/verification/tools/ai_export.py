@@ -96,6 +96,9 @@ def _collect_fact_failures(
             "slug": slug,
             "platform": platform,
             "gitCommit": git_commit,
+            # P2-E: carry methodSubjectId so this matches reporting.py's fact-failures
+            # writer (which includes it). Both writers now have the identity field.
+            "methodSubjectId": f_entry.get("methodSubjectId"),
             "methodIndex": f_entry.get("methodIndex"),
             "value": f_entry.get("value"),
             "message": f_entry.get("message"),
@@ -177,10 +180,20 @@ def _collect_memory_targets(
 
 
 def route_for_bottleneck_str(bottleneck: str) -> str:
-    """Map a bottleneck label to the routing hint (default fallback)."""
-    if not bottleneck:
-        return "dev-il2cpp-runtime-expert"
-    return bottleneck  # models.route_for_bottleneck would map it if imported
+    """Map a bottleneck label to the routing hint (default fallback).
+
+    Delegates to models.route_for_bottleneck so the emitted routeHint is a real
+    expert-skill name (dev-il2cpp-gc-expert / dev-il2cpp-codegen-expert / etc.)
+    instead of the raw bottleneck string (e.g. "gc_pause", which no skill is
+    named). Fixes the bug where the "AI-ready" export produced non-routable hints.
+    """
+    try:
+        from reporting.models import route_for_bottleneck
+        return route_for_bottleneck(bottleneck)
+    except ImportError:
+        # Fall back to the shared mapping table if models is unreachable.
+        from verification.reporting.models import route_for_bottleneck as _rb
+        return _rb(bottleneck)
 
 
 def _build_known_failures(fact_failures: list[dict]) -> list[dict]:

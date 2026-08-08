@@ -442,6 +442,24 @@ def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> 
     if errors:
         summary += f"; errors: {'; '.join(errors[:3])}"
 
+    # P1-B fix: write managed_benchmark.json to the chunk results dir. aggregate.py
+    # reads chunks/<slug>/results/managed_benchmark.json (aggregate.py:237) but no
+    # stage wrote it — the branch was a dead orphan read. Actually persisting it
+    # lets aggregate reflect the managed (.NET) benchmark outcome.
+    ctx.results_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        (ctx.results_dir / "managed_benchmark.json").write_text(
+            json.dumps({
+                "passed": len(techs_run),
+                "total": len(_TFM_TECH),
+                "mode": ctx.mode,
+                "status": status,
+                "errors": errors[:3],
+                "technologiesRun": techs_run,
+            }, indent=2), encoding="utf-8")
+    except OSError:
+        pass  # non-fatal
+
     print(f"  [managed-benchmark] Done ({duration_ms}ms): {summary}")
 
     return StageResult(

@@ -551,6 +551,20 @@ def _build_jit_entry_fast(
                             native_config, assembly_dirs)
 
 
+def _cache_entry_cached_at(cache, cache_key: str) -> str:
+    """Return the cached_at ISO timestamp for a cache entry, or "" if unknown.
+
+    The Hephaestus cache stores cached_at on its CacheEntry; exposing it in the
+    StageResult lets aggregate write real cache-vintage provenance into the
+    durable reports instead of only the aggregation-time clock.
+    """
+    try:
+        entry = cache.lookup(cache_key)
+        return (entry.cached_at or "") if entry is not None else ""
+    except Exception:
+        return ""
+
+
 def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     """Build stage: AutoTestGenerator -> subjects DLL -> TPG -> entry.exe."""
     start = time.perf_counter()
@@ -1022,7 +1036,8 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 stage="build", status="passed",
                 summary=f"[FASTPATH] {total_subjects} subjects -> entry.exe ({duration_ms}ms)",
                 details={"chunkSlug": ctx.slug, "totalSubjects": total_subjects,
-                         "tfm": tfm, "durationMs": duration_ms, "fastpath": True},
+                         "tfm": tfm, "platform": ctx.platform, "durationMs": duration_ms,
+                         "fastpath": True},
                 duration_ms=duration_ms)
 
     # -- 7b. Hephaestus cache lookup: skip TPG if unchanged input --
@@ -1068,9 +1083,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                         "chunkSlug": ctx.slug,
                         "totalSubjects": total_subjects,
                         "tfm": tfm,
+                        "platform": ctx.platform,
                         "durationMs": duration_ms,
                         "hephaestus": "cache_hit",
                         "cacheKey": cache_key,
+                        "cachedAt": _cache_entry_cached_at(cache, cache_key),
                     },
                     duration_ms=duration_ms)
             else:
@@ -1189,9 +1206,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             "chunkSlug": ctx.slug,
             "totalSubjects": total_subjects,
             "tfm": tfm,
+            "platform": ctx.platform,
             "durationMs": duration_ms,
             "hephaestus": cache_status,
             "cacheKey": cache_key,
+            "cachedAt": _cache_entry_cached_at(cache, cache_key),
             "jitSkipped": not jit_built,
         },
         duration_ms=duration_ms)

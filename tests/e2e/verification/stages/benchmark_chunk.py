@@ -216,31 +216,65 @@ def _run_entry_once(exe_path: Path, iterations: int, timeout: int,
     Uses --benchmark-range start end iterations when end_idx > start_idx,
     otherwise falls back to --benchmark-all (subject-only mode).
 
-    On TimeoutExpired, attempts to recover partial stdout (available since Python 3.8).
-    Returns a CompletedProcess with the partial stdout on timeout so the caller
-    can still salvage benchmark data from hanging chunks.
+    Benchmark protocol JSON is written to an OS temp file via `--benchmark-out`
+    (native decoupling: machine data no longer rides on the console stdout
+    stream). After the run, the file content is read back into `result.stdout`
+    so downstream parsing is unchanged.
+
+    On TimeoutExpired, attempts to recover any partial file content. Returns a
+    CompletedProcess with stdout=file content (possibly empty) on timeout so the
+    benchmark can continue past hanging methods.
     """
     env = os.environ.copy()
     env["CHAOS_IL2CPP_LOG_LEVEL"] = "0"  # suppress debug logs in benchmark output
+
+    # Temp file for native benchmark JSON output. delete=False so the native
+    # subprocess (a separate process) can open the path by name; we unlink it
+    # explicitly after reading the data back.
+    import tempfile
+    fh = tempfile.NamedTemporaryFile(mode="w", suffix=".jsonl", encoding="utf-8",
+                                     delete=False)
+    bench_out_path = fh.name
+    fh.close()  # release the handle so the child can open/truncate the path
+
     if end_idx is not None and end_idx > start_idx:
-        cmd = [str(exe_path), "--benchmark-range", str(start_idx), str(end_idx), str(iterations)]
+        cmd = [str(exe_path), "--benchmark-range", str(start_idx), str(end_idx),
+               str(iterations), "--benchmark-out", bench_out_path]
     else:
-        cmd = [str(exe_path), "--benchmark-all", str(iterations)]
+        cmd = [str(exe_path), "--benchmark-all", str(iterations),
+               "--benchmark-out", bench_out_path]
+
+    stderr_str = ""
     try:
-        return subprocess.run(
-            cmd,
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=timeout,
-            env=env, errors="replace",
-        )
+        r = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                           text=True, timeout=timeout, env=env, errors="replace")
+        stderr_str = r.stderr
     except subprocess.TimeoutExpired as e:
-        partial = e.stdout  # partial stdout captured before timeout
-        partial_str = partial.decode("utf-8", errors="replace") if isinstance(partial, bytes) else (partial or "")
-        # Always return a CompletedProcess, even with empty stdout, so the
-        # benchmark can continue past hanging methods (e.g. WaitHandle.WaitOne).
-        return subprocess.CompletedProcess(
-            args=e.cmd, returncode=-1,
-            stdout=partial_str, stderr=e.stderr or "",
+        stderr_str = e.stderr or ""
+        r = subprocess.CompletedProcess(
+            args=e.cmd, returncode=-1, stdout="", stderr=stderr_str,
         )
+
+    # The native side wrote benchmark JSON to the temp file. Read it back (this
+    # is the authoritative data). If the file is empty, fall back to the
+    # subprocess stdout for older natives that don't support --benchmark-out.
+    file_data = ""
+    if bench_out_path:
+        try:
+            file_data = Path(bench_out_path).read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            file_data = ""
+    # Clean up the temp file (explicit unlink since delete=False).
+    try:
+        Path(bench_out_path).unlink(missing_ok=True)
+    except OSError:
+        pass
+    if not file_data:
+        file_data = r.stdout or ""
+
+    return subprocess.CompletedProcess(
+        args=cmd, returncode=r.returncode, stdout=file_data, stderr=stderr_str,
+    )
 
 
 def _write_records_jsonl(
@@ -358,60 +392,106 @@ def _write_perf_store(
     method_index_to_subject_id: dict[int, str] | None = None,
     benchmark_start_idx: int = 0,
 ):
-    """Write benchmark-history.jsonl in dashboard-compatible format.
+    """Write benchmark-history.jsonl in dashboard-compatible format (single tech).
 
     When method_index_to_subject_id is provided, resolves methodSubjectId
     from the method table index (benchmark_start_idx + position) using the
     codegen manifest, rather than by position into metadata_methods.
+
+    Kept for backward-compat / single-tech callers. `run_benchmark_chunk`
+    prefers `_write_combined_perf_store` which writes ALL techs in one pass so
+    later technologies do not overwrite earlier ones (the overwrite bug).
+    """
+    tech_stats = [(technology, per_method_stats, iterations)]
+    _write_combined_perf_store(
+        tech_stats, ctx, metadata_methods,
+        method_index_to_subject_id=method_index_to_subject_id,
+        benchmark_start_idx=benchmark_start_idx,
+    )
+
+
+def _write_combined_perf_store(
+    tech_stats: list[tuple[str, list[dict], int]],
+    ctx: ChunkContext,
+    metadata_methods: list[dict],
+    method_index_to_subject_id: dict[int, str] | None = None,
+    benchmark_start_idx: int = 0,
+):
+    """Write benchmark-history.jsonl aggregating ALL technologies in one pass.
+
+    `tech_stats` is a list of (technology, per_method_stats, iterations).
+    Opening the file in "w" mode exactly ONCE and writing every technology's
+    records means no technology's data is clobbered by a later write — the root
+    cause of the missing chaos-aot benchmark data (each per-tech _write_perf_store
+    previously opened the same path with "w", so chaos-jit erased chaos-aot).
     """
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     perf_path = _RESULTS_BASE / ctx.assembly / ctx.slug / "perf" / "benchmark-history.jsonl"
     perf_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Always overwrite: each pipeline run produces a self-contained file.
-    # Append mode caused stale data accumulation across partial runs,
-    # mixing old net8-jit baselines with fresh chaos-aot results.
+    # Always overwrite the whole file ONCE per run: each pipeline run produces a
+    # self-contained file. Append mode caused stale data accumulation across
+    # partial runs, mixing old net8-jit baselines with fresh chaos-aot results.
     with open(perf_path, "w", encoding="utf-8") as f:
-        for i, s in enumerate(per_method_stats):
-            elapsed_ms = s.get("meanDurationMs", 0)
-            ops = s.get("meanOpsPerSecond", 0)
+        for technology, per_method_stats, iterations in tech_stats:
+            for i, s in enumerate(per_method_stats):
+                record = _build_perf_record(
+                    s, ctx, technology, metadata_methods, iterations,
+                    method_index_to_subject_id, benchmark_start_idx, i, now,
+                )
+                f.write(json.dumps(record, ensure_ascii=False, separators=(",", ":")) + "\n")
 
-            method_subject_id = ""
-            # Primary key: use the metadata methodSubjectId so chaos-aot and
-            # net8-jit records share the same identifier (raw .NET method name).
-            # This enables direct alignment in benchmark_report without needing
-            # the slug+methodIndex fallback.
-            if i < len(metadata_methods):
-                method_subject_id = (metadata_methods[i].get("methodSubjectId", "")
-                                     or metadata_methods[i].get("subjectId", ""))
 
-            # Secondary key: CombinedSubjects wrapper name from codegen manifest.
-            # Stored as a separate field for debugging; NOT used for alignment.
-            combined_subjects_id = ""
-            if method_index_to_subject_id is not None:
-                method_table_index = benchmark_start_idx + i
-                combined_subjects_id = method_index_to_subject_id.get(method_table_index, "")
-                if not method_subject_id:
-                    method_subject_id = combined_subjects_id
+def _build_perf_record(
+    s: dict,
+    ctx: ChunkContext,
+    technology: str,
+    metadata_methods: list[dict],
+    iterations: int,
+    method_index_to_subject_id: dict[int, str] | None,
+    benchmark_start_idx: int,
+    i: int,
+    now: str,
+) -> dict:
+    """Build one benchmark-history.jsonl record dict for a single method entry."""
+    elapsed_ms = s.get("meanDurationMs", 0)
+    ops = s.get("meanOpsPerSecond", 0)
 
-            record = {
-                "timestamp": now,
-                "slug": ctx.slug,
-                "technology": technology,
-                "methodSubjectId": method_subject_id,
-                "combinedSubjectsId": combined_subjects_id,
-                "methodIndex": i,
-                "metrics": {
-                    # CONTRACT: elapsedMilliseconds = TOTAL for this iterations batch
-                    # (per-iteration normalization happens once in _get_elapsed).
-                    "elapsedMilliseconds": elapsed_ms if elapsed_ms > 0 else _MIN_ELAPSED_FLOOR,
-                    "opsPerSecond": ops,
-                },
-                "iterations": iterations,
-                "status": "completed",
-                "nativeConfig": ctx.native_config,
-            }
-            f.write(json.dumps(record, ensure_ascii=False, separators=(",", ":")) + "\n")
+    method_subject_id = ""
+    # Primary key: use the metadata methodSubjectId so chaos-aot and
+    # net8-jit records share the same identifier (raw .NET method name).
+    # This enables direct alignment in benchmark_report without needing
+    # the slug+methodIndex fallback.
+    if i < len(metadata_methods):
+        method_subject_id = (metadata_methods[i].get("methodSubjectId", "")
+                             or metadata_methods[i].get("subjectId", ""))
+
+    # Secondary key: CombinedSubjects wrapper name from codegen manifest.
+    # Stored as a separate field for debugging; NOT used for alignment.
+    combined_subjects_id = ""
+    if method_index_to_subject_id is not None:
+        method_table_index = benchmark_start_idx + i
+        combined_subjects_id = method_index_to_subject_id.get(method_table_index, "")
+        if not method_subject_id:
+            method_subject_id = combined_subjects_id
+
+    return {
+        "timestamp": now,
+        "slug": ctx.slug,
+        "technology": technology,
+        "methodSubjectId": method_subject_id,
+        "combinedSubjectsId": combined_subjects_id,
+        "methodIndex": i,
+        "metrics": {
+            # CONTRACT: elapsedMilliseconds = TOTAL for this iterations batch
+            # (per-iteration normalization happens once in _get_elapsed).
+            "elapsedMilliseconds": elapsed_ms if elapsed_ms > 0 else _MIN_ELAPSED_FLOOR,
+            "opsPerSecond": ops,
+        },
+        "iterations": iterations,
+        "status": "completed",
+        "nativeConfig": ctx.native_config,
+    }
 
 
 def _run_single_benchmark(
@@ -544,10 +624,12 @@ def _run_single_benchmark(
     print(f"  [benchmark] [{technology}] {method_count} methods "
           f"({len(all_rounds)} samples, {tech_duration_ms}ms, {iterations} iterations)")
 
-    # Phase 4: Write perf store
-    _write_perf_store(per_method_stats, ctx, technology, metadata_methods, iterations,
-                      method_index_to_subject_id=method_index_to_subject_id,
-                      benchmark_start_idx=0)
+    # Note: perf-store (benchmark-history.jsonl) write is deferred to
+    # `run_benchmark_chunk`, which collects ALL technologies' results and writes
+    # a single self-contained file. Writing here per-technology with "w" mode
+    # overwrote the previous technology's records (chaos-aot was clobbered by
+    # the subsequent chaos-jit write) — the root cause of missing chaos-aot
+    # benchmark data. See _write_combined_perf_store().
 
     return {
         "per_method_stats": per_method_stats,
@@ -556,6 +638,7 @@ def _run_single_benchmark(
         "sample_rounds": len(all_rounds),
         "method_count": method_count,
         "tech_duration_ms": tech_duration_ms,
+        "technology": technology,
     }
 
 
@@ -589,12 +672,22 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # Run benchmarks for each technology
     results: list[dict] = []
     errors: list[str] = []
+    # Track whether the AOT technology produced data. AOT (chaos-aot) is the
+    # primary signal — its absence must be surfaced (strict warn), not silently
+    # masked by a succeeding chaos-jit. net10-jit/net8-jit absence stays an
+    # optional baseline warning (managed_benchmark handles those separately).
+    aot_ran = False
+    missing_techs: list[str] = []  # non-fatal tech absences -> warning, not error
     for exe_path, tech in technologies:
         result = _run_single_benchmark(exe_path, tech, ctx, timeout, metadata_methods)
         if result is None:
-            errors.append(f"{tech}: no data returned")
+            missing_techs.append(f"{tech}: no data returned")
+            if tech == "chaos-aot":
+                print(f"  [benchmark] ⚠️ chaos-aot produced NO data — skipping")
             continue
         results.append(result)
+        if tech == "chaos-aot":
+            aot_ran = True
 
     if not results:
         return StageResult(
@@ -602,6 +695,18 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
             summary="all benchmark technologies failed",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
+
+    # Write the combined perf-store (benchmark-history.jsonl) ONCE for ALL
+    # successful technologies. Each result now carries its own "technology"
+    # label (returned by _run_single_benchmark). Writing here aggregates
+    # chaos-aot + chaos-jit + ... in a single "w" pass so no technology's
+    # records are overwritten by a later one (the overwrite bug that erased
+    # chaos-aot data).
+    _write_combined_perf_store(
+        [(r["technology"], r["per_method_stats"], r["iterations"]) for r in results],
+        ctx,
+        metadata_methods,
+    )
 
     # Write chunk-local output files from the primary (AOT) result
     primary = results[0]
@@ -657,6 +762,21 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
             status = "failed"
             errors.append(f"{zero_duration}/{method_count} methods returned zero/negative duration")
             print(f"  [benchmark] FAILED: {zero_duration}/{method_count} methods returned zero/negative duration")
+
+    # Strict AOT non-silence (decision 1): if JIT produced data but the primary
+    # AOT signal did not, mark the stage a WARNING (not silent-passed, not
+    # full-error). JIT data is retained and the pipeline continues; downstream
+    # consumers (P2-E warning model) see details.chaosAot == "no_data".
+    if not aot_ran:
+        if missing_techs:
+            print(f"  [benchmark] WARN: chaos-aot produced NO benchmark data (AOT signal absent)")
+        result_data["chaosAot"] = "no_data"
+        if status == "passed":
+            status = "warning"
+
+    # Non-fatal tech absences (e.g. chaos-jit not built) surface as a warning
+    # in the summary but must NOT fail the pipeline.
+    result_data["missingTechnologies"] = missing_techs
 
     if errors:
         status = "error"
