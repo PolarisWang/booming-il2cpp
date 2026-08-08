@@ -144,6 +144,12 @@ extern "C" void RunMicrobench();
 // Hotupdate benchmark iteration count (set by --benchmark-iterations in main)
 static int g_benchmark_iterations = 0;
 
+// Benchmark protocol output stream. Defaults to stdout (back-compat); when the
+// harness passes --benchmark-out <file>, benchmark JSON is written to that
+// file instead of stdout so the protocol data is decoupled from the process's
+// console stream (logs go to stderr; machine data can go to a file).
+static FILE* g_benchmark_out = stdout;
+
 {{ if is_jit }}
 extern "C" void ChaosJitRegisterAll();
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
@@ -592,9 +598,9 @@ static int RunBenchmarkAllMode(int iterations) {
             }
 
             if (crashed) {
-                printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n",
+                fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n",
                        i);
-                fflush(stdout);
+                fflush(g_benchmark_out);
 #if defined(_WIN32)
                 __leave;
 #else
@@ -625,27 +631,27 @@ static int RunBenchmarkAllMode(int iterations) {
             chaos::il2cpp::runtime_core::chaos_gc_leave_no_gc_region();
 
             if (crashed) {
-                printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
+                fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
                        i, alloc_after - alloc_before);
             } else {
                 double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
                 double ops_per_sec = elapsed_ms > 0.0 ? (iterations / elapsed_ms) * 1000.0 : 0.0;
-                printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
+                fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
                        i, elapsed_ms, ops_per_sec, iterations, (long long)(alloc_after - alloc_before));
             }
-            fflush(stdout);
+            fflush(g_benchmark_out);
 #if defined(_WIN32)
         } __except(EXCEPTION_EXECUTE_HANDLER) {
             // Process-level crash caught (e.g. AV in no_gc_region, stack overflow).
             // Record the failure and continue with the next method.
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"fatal crash\"}\n",
+            fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"fatal crash\"}\n",
                    i);
-            fflush(stdout);
+            fflush(g_benchmark_out);
         }
 #endif
     }
-    printf("{\"summary\":{\"methodCount\":%d}}\n", kCount);
-    fflush(stdout);
+    fprintf(g_benchmark_out, "{\"summary\":{\"methodCount\":%d}}\n", kCount);
+    fflush(g_benchmark_out);
     return 0;
 }
 
@@ -674,9 +680,9 @@ static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
         }
 
         if (crashed) {
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n",
+            fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n",
                    i);
-            fflush(stdout);
+            fflush(g_benchmark_out);
             continue;
         }
 
@@ -703,18 +709,18 @@ static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
         chaos::il2cpp::runtime_core::chaos_gc_leave_no_gc_region();
 
         if (crashed) {
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
+            fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
                    i, alloc_after - alloc_before);
         } else {
             double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
             double ops_per_sec = elapsed_ms > 0.0 ? (iterations / elapsed_ms) * 1000.0 : 0.0;
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
+            fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
                    i, elapsed_ms, ops_per_sec, iterations, (long long)(alloc_after - alloc_before));
         }
-        fflush(stdout);
+        fflush(g_benchmark_out);
     }
-    printf("{\"summary\":{\"methodCount\":%d}}\n", end_idx - start_idx);
-    fflush(stdout);
+    fprintf(g_benchmark_out, "{\"summary\":{\"methodCount\":%d}}\n", end_idx - start_idx);
+    fflush(g_benchmark_out);
     return 0;
 }
 
@@ -1063,6 +1069,22 @@ int main(int argc, char* argv[]) {
         if (std::strcmp(argv[ai], "--benchmark-iterations") == 0 && ai + 1 < argc) {
             g_benchmark_iterations = atoi(argv[ai + 1]);
             if (g_benchmark_iterations < 0) g_benchmark_iterations = 0;
+            break;
+        }
+    }
+
+    // --benchmark-out <file>: route benchmark protocol JSON to a file instead of
+    // stdout (decouples machine data from the console stream). Closes any prior
+    // handle if present; on failure falls back to stdout (non-fatal).
+    for (int ai = 1; ai < argc; ai++) {
+        if (std::strcmp(argv[ai], "--benchmark-out") == 0 && ai + 1 < argc) {
+            FILE* f = std::fopen(argv[ai + 1], "w");
+            if (f != nullptr) {
+                if (g_benchmark_out != stdout) std::fclose(g_benchmark_out);
+                g_benchmark_out = f;
+            } else {
+                std::fprintf(stderr, "WARN: cannot open --benchmark-out %s; using stdout\n", argv[ai + 1]);
+            }
             break;
         }
     }
