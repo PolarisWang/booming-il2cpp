@@ -87,10 +87,13 @@ class NightlyResult:
 
     @property
     def build_passed(self) -> int:
+        # Only "passed" counts as a successful build. "skipped" covers chunks
+        # that never actually ran (init/future exceptions set build=skipped);
+        # counting them as passed would let a fully-failed nightly report
+        # exit code 0 (false green).
         return sum(
             1 for r in self.chunk_results.values()
-            if r.get("build", StageResult(stage="build", status="?")).status
-               in ("passed", "skipped")
+            if r.get("build", StageResult(stage="build", status="?")).status == "passed"
         )
 
     @property
@@ -533,8 +536,14 @@ class NightlyOrchestrator:
             with ProcessPoolExecutor(max_workers=config.max_workers) as executor:
                 futures = []
                 for asm, slug, fdir in passed_chunks:
+                    # Phase B worker: _run_single_chunk (handles log capture +
+                    # accepts stages_filter). _run_chunk_stages does NOT accept
+                    # capture_logs/keep_console/report_dir — submitting to it
+                    # raised TypeError and silently marked every Phase B chunk
+                    # as build=skipped (which then overwrote Phase A's passed
+                    # build via merge). Use the log-aware wrapper instead.
                     future = executor.submit(
-                        _run_chunk_stages,
+                        NightlyOrchestrator._run_single_chunk,
                         assembly=asm, slug=slug, foundation_dir=fdir,
                         pipeline_config=pipeline_config,
                         bench_semaphore=bench_semaphore,
@@ -553,12 +562,16 @@ class NightlyOrchestrator:
                     verbose=config.log_level == "DEBUG",
                     phase_label="B:bench+coverage",
                 )
-                # Merge Phase B results (don't overwrite Phase A build/fact results)
+                # Merge Phase B results into the SAME chunk key WITHOUT
+                # overwriting Phase A's build/fact. Only apply the Phase B
+                # stage keys so a worker that (erroneously) produced a build
+                # result can't clobber the passed build status from Phase A.
+                phase_b_set = set(phase_b_stages)
                 for key, stages in phase_b_results.items():
-                    if key in result.chunk_results:
-                        result.chunk_results[key].update(stages)
-                    else:
-                        result.chunk_results[key] = stages
+                    target = result.chunk_results.setdefault(key, {})
+                    for stage_key, stage_res in stages.items():
+                        if stage_key in phase_b_set:
+                            target[stage_key] = stage_res
         else:
             print("\n  Phase B skipped: no chunks passed build in Phase A")
 
@@ -653,6 +666,8 @@ class NightlyOrchestrator:
         native_config: str = "check",
         verbose: bool = False,
         stage_timeout: int = 0,
+        stages_filter: list[str] | None = None,
+        profile_pass: bool = False,
     ) -> tuple[str, dict[str, StageResult]]:
         """Run chunk with log capture, meant for ProcessPoolExecutor workers.
 
@@ -679,6 +694,8 @@ class NightlyOrchestrator:
                 native_config=native_config,
                 verbose=verbose,
                 stage_timeout=stage_timeout,
+                stages_filter=stages_filter,
+                profile_pass=profile_pass,
             )
         return result
 

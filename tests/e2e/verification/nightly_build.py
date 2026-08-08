@@ -446,9 +446,11 @@ def main() -> int:
         all_results = _collect_chunk_results(futures, len(all_chunks), verbose=args.verbose)
 
     # Count successes/failures
+    # Only "passed" counts. "skipped" covers chunks that never actually ran;
+    # counting them would under-report failures and yield a false-green exit 0.
     build_ok = sum(
         1 for r in all_results.values()
-        if r.get("build", StageResult(stage="build", status="?")).status in ("passed", "skipped")
+        if r.get("build", StageResult(stage="build", status="?")).status == "passed"
     )
     print(f"\n  Build: {build_ok}/{len(all_results)} passed")
 
