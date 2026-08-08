@@ -541,5 +541,15 @@ tests/e2e/translation/**/*.o
 tests/e2e/translation/**/*.lib
 tests/e2e/translation/**/*.a
 
+# ── Chaos.TestFramework.Sdk — stray legacy build artifacts ──
+# A couple of L-series-era chunks/…/subjects_net*/ build outputs were once committed
+# under src/reference/Chaos.TestFramework.Sdk. Removed from tracking (git rm --cached,
+# kept on disk). These rules keep any regenerated equivalents out of the index.
+src/reference/Chaos.TestFramework.Sdk/**/chunks/
+src/reference/Chaos.TestFramework.Sdk/**/subjects_net*/
+src/reference/Chaos.TestFramework.Sdk/**/*.deps.json
+src/reference/Chaos.TestFramework.Sdk/**/bin/
+src/reference/Chaos.TestFramework.Sdk/**/obj/
+
 # Coverage reports (generated outputs — not source)
 tests/**/coverage.cobertura.xml
