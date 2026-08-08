@@ -1,0 +1,6 @@
+# Known failures for the pytest layer (authority + integration + verification-engine unit tests).
+# The python adapter aggregates a pytest subprocess as a single case keyed by the joined
+# pytest_paths; record any known failures here so a flaky/env-dependent failure does not
+# spontaneously turn the gate red. Currently the fold-in slice is documented green.
+version: 1
+known: []

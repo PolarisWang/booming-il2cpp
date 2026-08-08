@@ -408,7 +408,11 @@ def main() -> int:
 
             # reconcile known failures
             known = load_known_failures(layer_name)
-            known_in_run = [c for c in res.cases if c.name in known]
+            # Count only FAILED cases that are baseline-known. Previously this
+            # counted every named-known case regardless of pass/fail, which
+            # inflated "known" with stale (already-recovered) entries and made
+            # `known` disagree with the number of actual known failures.
+            known_in_run = [c for c in res.cases if not c.passed and c.name in known]
             known_found += len(known_in_run)
 
             # we don't drop known failures; we annotate them
