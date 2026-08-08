@@ -307,6 +307,6 @@ cat tests/e2e/translation/System.Private.CoreLib/garbage-collection/codegen/nati
 | `src/native/runtime-core/gc/gc_root_scanner.cpp` | GC slot map 注册与扫描 |
 | `src/native/common/chaos/eh.h` | CHAOS_EH_TRY/CATCH/END 宏定义 |
 | `contracts/native/v0/codegen_bridge.h` | GcSlotMapV0、CodegenBridgeV0 ABI 合约 |
-| `testing/src/native/codegen/codegen_native_test.cpp` | JIT 原生代码生成测试 |
-| `testing/src/native/codegen/codegen_abi_test.cpp` | Codegen ABI 合约测试 |
-| `testing/src/native/codegen/codegen_il_smoke_test.cpp` | IL 冒烟测试 |
+| `tests/unit/runtime-native/jit/codegen_native_test.cpp` | JIT 原生代码生成测试 |
+| `tests/unit/runtime-native/jit/codegen_abi_test.cpp` | Codegen ABI 合约测试 |
+| `tests/unit/runtime-native/jit/codegen_il_smoke_test.cpp` | IL 冒烟测试 |

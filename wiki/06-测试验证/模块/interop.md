@@ -43,7 +43,7 @@ primaryModuleId: interop
 
 ### Native 测试
 
-位于 `testing/src/native/runtime-core/`，通过 ctest -L marshal 运行：
+位于 `tests/unit/runtime-native/runtime-core/`，通过 ctest -L marshal 运行：
 
 | 测试目标 | 测试数 | 标签 |
 |---------|--------|------|

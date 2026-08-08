@@ -122,7 +122,7 @@ void* val = AsanReadPtrNoCheck(
 
 ### Suppressions 管理
 
-当 ASan 假阳性无法通过代码规避时，注册 suppression。当前活跃 suppression（`testing/asan-suppressions.txt`）：
+当 ASan 假阳性无法通过代码规避时，注册 suppression。当前活跃 suppression（`cmake/sanitizers/asan-suppressions.txt`）：
 
 ```
 interceptor_via_fun:DomainArenaAlloc
@@ -133,7 +133,7 @@ interceptor_via_fun:MarkSweepOldGen::Collect
 #### 添加新 suppression
 
 1. 从 ASan 报告中获取函数名（`interceptor_via_fun:<function_name>`）
-2. 添加到 `testing/asan-suppressions.txt`
+2. 添加到 `cmake/sanitizers/asan-suppressions.txt`
 3. 在 suppression 旁加注释说明原因
 
 #### Suppression 查找策略
@@ -142,7 +142,7 @@ ASan 按以下顺序查找 suppressions 文件：
 1. `ASAN_OPTIONS=suppressions=<path>` 指定的路径（相对路径基于 CWD）
 2. 文件必须存在于测试可执行文件的工作目录中
 
-项目中通过 CMake `configure_file` 将 `testing/asan-suppressions.txt` 复制到 `testing/build/`，再通过 `POST_BUILD` 复制到每个测试输出目录。
+项目中通过 CMake `configure_file` 将 `cmake/sanitizers/asan-suppressions.txt` 复制到 `testing/build/`，再通过 `POST_BUILD` 复制到每个测试输出目录。
 
 ## 已知限制
 
@@ -219,7 +219,7 @@ ASan 约 2x 性能开销。Stress 测试（`_stress` 后缀）在 ASan 下可能
 ### CMakeLists.txt 中的 ASan 配置
 
 ```cmake
-# testing/src/native/CMakeLists.txt
+# tests/unit/runtime-native/CMakeLists.txt
 if(USE_ASAN)
     add_compile_options(/fsanitize=address)
     add_link_options(/fsanitize=address /FORCE:MULTIPLE)
@@ -244,7 +244,7 @@ add_chaos_test(test_my_feature
 
 | 文件 | 作用 |
 |------|------|
-| `testing/asan-suppressions.txt` | 全局 ASan suppression 配置 |
+| `cmake/sanitizers/asan-suppressions.txt` | 全局 ASan suppression 配置 |
 | `src/native/common/chaos/asan_interface.h` | ASan 抽象层（Unpoison/Poison/ReadPtrNoCheck） |
-| `testing/src/native/CMakeLists.txt` | ASan 构建基础设施 |
+| `tests/unit/runtime-native/CMakeLists.txt` | ASan 构建基础设施 |
 | `CMakePresets.json` | ASan preset 定义 |

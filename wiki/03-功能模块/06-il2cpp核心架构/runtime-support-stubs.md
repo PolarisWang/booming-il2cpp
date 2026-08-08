@@ -124,7 +124,7 @@ src/native/runtime-core/runtime_stubs/
 ├── stubs.h              # 聚合头文件
 ├── *.h                  # 每个域的独立声明
 ├── *.cpp                # 实现（每个文件一个域）
-testing/src/native/runtime-core/runtime_stubs/
+tests/unit/runtime-native/runtime-core/runtime_stubs/
 ├── CMakeLists.txt       # 测试注册
 ├── *_test.cpp           # 测试文件
 ├── runtime_stubs_benchmark.cpp  # 基准测试

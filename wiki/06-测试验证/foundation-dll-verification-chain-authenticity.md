@@ -197,7 +197,7 @@ python -m verification --slug X --mode strict       # strict mode（15 stages）
 python -m verification --batch --skip benchmark,hotupdate  # 跳过耗时 stage
 ```
 
-老入口（`python -m verification.entry_points.batch --family X`）仍然可用。`testing/scripts/robust-batch.py` 和 `run-batch-verification.py` 已删除（功能由 `--skip` 参数覆盖）。
+老入口（`python -m verification.entry_points.batch --family X`）仍然可用。`scripts/test/robust-batch.py` 和 `run-batch-verification.py` 已删除（功能由 `--skip` 参数覆盖）。
 
 ---
 

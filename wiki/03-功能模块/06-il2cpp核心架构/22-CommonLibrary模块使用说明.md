@@ -269,7 +269,7 @@ CHAOS_IL2CPP_UNORDERED_DENSE_SET(int) s;
 
 ## 测试
 
-所有模块的单元测试位于 `testing/src/native/common/`，使用 GoogleTest 框架：
+所有模块的单元测试位于 `tests/unit/runtime-native/common/`，使用 GoogleTest 框架：
 
 ```bash
 # 运行全部 common 测试
