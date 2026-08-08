@@ -96,7 +96,7 @@ Phase 3 — 按方案逐域修复
 | **ATG** | `src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/` | `.cs`, `.csproj`, `.json` | 不得生成 C++ |
 | **Codegen** | `src/managed/Chaos.IL2CPP.Generator/` | `.generated.cpp`, `.generated.h`, `.json` | 产出必须自包含 |
 | **TPG** | `src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/` | `.cpp`, `.h` (via Scriban), `.cmake` | 不得修改 `.generated.*` |
-| **Python** | `testing/foundation-dll/verification/` | `.py`, `.json`, `.yaml` | 不得 `write_text` 写入 `.cpp`/`.h` |
+| **Python** | `tests/e2e/verification/` | `.py`, `.json`, `.yaml` | 不得 `write_text` 写入 `.cpp`/`.h` |
 
 跨层写入必须加 `# BOUNDARY_OVERRIDE: issues/NNN` + `Reason:` + `Expires:`。参见 `tests/e2e/verification/preflight/check_layer_boundaries.py`。
 
