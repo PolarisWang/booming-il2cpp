@@ -148,16 +148,35 @@ def _enrich_with_chunk_facts(asm_data: dict, chunks_dir: Path) -> None:
         except (json.JSONDecodeError, OSError):
             continue
 
-        results = fact_data.get("results", [])
+        # Per-method fact outcome lives in fact-results.json ({"aot":[…],"jit":[…]});
+        # fact.json only carries aggregates (passed/total/factMethodCount) and never a
+        # "results" key, so reading it here always yielded [] and fact-failures.jsonl
+        # was never published. Prefer the aot tech results (authoritative); fall back
+        # to jit when aot is absent.
+        per_method_path = chunk_dir / "results" / "fact-results.json"
+        per_method_records: list[dict] = []
+        if per_method_path.exists():
+            try:
+                per_method = json.loads(per_method_path.read_text(encoding="utf-8"))
+                aot = per_method.get("aot") or []
+                jit = per_method.get("jit") or []
+                per_method_records = aot or jit
+                tech = "aot" if aot else "jit"
+            except (json.JSONDecodeError, OSError):
+                per_method_records = []
+                tech = "unknown"
+
         failures = []
-        for r in results:
+        for r in per_method_records:
             if not r.get("passed", True):
                 from verification.reporting.models import classify_failure, route_for_error
                 pattern = classify_failure(r.get("message", ""), r.get("value"))
                 failures.append({
                     "methodIndex": r.get("methodIndex", 0),
+                    "methodSubjectId": r.get("methodSubjectId"),
                     "value": r.get("value"),
                     "message": r.get("message", ""),
+                    "tech": tech,
                     "errorPattern": pattern,
                     "routeHint": route_for_error(pattern),
                 })

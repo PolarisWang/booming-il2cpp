@@ -53,7 +53,14 @@ def run_coverage_audit(ctx: ChunkContext, stages: dict[str, StageResult]) -> Sta
             summary=f"namespace-partition.json not found: {partition_path}",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
-    partition = json.loads(partition_path.read_text(encoding="utf-8"))
+    try:
+        partition = json.loads(partition_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as e:
+        return StageResult(
+            stage="coverage-audit", status="error",
+            summary=f"namespace-partition.json unreadable/corrupt: {e}",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
     chunks = partition.get("chunks", [])
     chunk_def = next((c for c in chunks if c["slug"] == ctx.slug), None)
     if chunk_def is None:
@@ -71,7 +78,11 @@ def run_coverage_audit(ctx: ChunkContext, stages: dict[str, StageResult]) -> Sta
     if not metadata_path.exists():
         errors.append(f"subjects.metadata.json not found: {metadata_path}")
     else:
-        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        try:
+            metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError) as e:
+            errors.append(f"subjects.metadata.json unreadable/corrupt: {e}")
+            metadata = {}
         subject_methods = metadata.get("methods", [])
         subject_method_ids = {m["methodSubjectId"] for m in subject_methods}
         print(f"  [coverage-audit] Subjects metadata: {len(subject_method_ids)} subjects")

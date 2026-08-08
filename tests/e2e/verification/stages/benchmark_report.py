@@ -207,11 +207,11 @@ def _build_method_comparison(
             method_entry["status"] = "completed"
             total_with_net8 += 1
 
-            # ── Bottleneck classification ──
+            # ── Bottleneck classification (time-based only; alloc_hot/gc_pause
+            #    are added after gc_comp is computed, see below) ──
             method_entry["bottleneck"] = _classify_bottleneck(
                 chaos_aot_ms=chaos_aot_ms, net8_ms=net8_ms,
-                high_variance=net8_high_var,
-                gc_comparison=gc_comparison if 'gc_comparison' in dir() else None)
+                high_variance=net8_high_var)
 
             pct = method_entry.get("chaosAotVsNet8Pct")
             if pct is not None:
@@ -271,6 +271,16 @@ def _build_method_comparison(
                     "chaosJitVsNet8Pct": None,
                     "status": "missing_net8" if net8_rec is None else "net8_error",
                 })
+            # Promote to alloc_hot now that the per-method allocation comparison is
+            # available (at bottleneck-classification time, before gc_comp, it was
+            # not). Only override an empty classification — dispatch_overhead/unstable
+            # stay as-is.
+            if not method_entry.get("bottleneck") and net8_gi:
+                method_entry["bottleneck"] = _classify_bottleneck(
+                    chaos_aot_ms=chaos_aot_ms, net8_ms=net8_ms,
+                    high_variance=net8_high_var,
+                    gc_comparison=gc_comp,
+                )
 
         methods_list.append(method_entry)
 
@@ -330,8 +340,11 @@ def _classify_bottleneck(
     if ratio > 2.0:
         return "dispatch_overhead"
     if ratio > 1.5 and gc_comparison:
-        alloc_ratio = gc_comparison.get("aotVsNet8Ratio", 1.0)
-        if alloc_ratio and alloc_ratio > 2.0:
+        # gcComparison stores AOT-vs-NET8 allocation delta as a percentage
+        # (aotAllocVsNet8Pct, e.g. 150 = +150%); flag alloc_hot when AOT
+        # allocates >200% more than NET8.
+        alloc_ratio_pct = gc_comparison.get("aotAllocVsNet8Pct")
+        if alloc_ratio_pct is not None and alloc_ratio_pct > 200.0:
             return "alloc_hot"
     return ""
 
@@ -451,8 +464,9 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
                         if i < len(meta_methods):
                             m["methodSubjectId"] = meta_methods[i].get("methodSubjectId", f"method-{i}")
                     profile_data = pd
-            except (json.JSONDecodeError, OSError):
-                pass
+            except (json.JSONDecodeError, OSError) as e:
+                print(f"  [benchmark-report] WARNING: could not load profile data "
+                      f"for {slug}: {e} (GC comparison skipped)")
 
         methods_list, aggregate = _build_method_comparison(tech_map, slug, profile_data)
         if not methods_list:

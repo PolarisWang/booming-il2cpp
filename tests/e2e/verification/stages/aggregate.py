@@ -19,6 +19,21 @@ from pathlib import Path
 from verification.orchestration.context import ChunkContext, StageResult
 
 
+def _try_load_json(path: Path) -> dict | None:
+    """Load a JSON file, returning None (with a warning) if unreadable/corrupt.
+
+    A corrupt per-chunk result file should degrade that chunk's summary, not
+    crash the whole aggregate stage with an uncaught JSONDecodeError.
+    """
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"  [aggregate] WARNING: unreadable/corrupt {path.name}: {e}")
+        return None
+
+
 def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     """Aggregate stage: collect all chunk results into _dll/reports/."""
     start = time.perf_counter()
@@ -54,15 +69,15 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
 
         # Fact results
         fact_path = results_dir / "fact.json"
-        if fact_path.exists():
-            fact_data = json.loads(fact_path.read_text(encoding="utf-8"))
+        fact_data = _try_load_json(fact_path)
+        if fact_data:
             summary["fact"] = {
                 "passed": fact_data.get("passed", 0),
                 "total": fact_data.get("total", 0),
                 "valueSuspicious": fact_data.get("valueSuspicious", False),
                 "valueWarnings": fact_data.get("valueWarnings", 0),
                 "metaTotal": fact_data.get("metaTotal"),
-                "metaBenchmarkCount": fact_data.get("metaBenchmarkCount", 0),
+                "metaBenchmarkCount": fact_data.get("factMethodCount", fact_data.get("metaTotal", 0)),
             }
             all_fact.append({
                 "chunk": slug,
@@ -73,8 +88,8 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
 
         # Benchmark results — collect both counts and performance metrics
         bench_path = results_dir / "benchmark.json"
-        if bench_path.exists():
-            bench_data = json.loads(bench_path.read_text(encoding="utf-8"))
+        bench_data = _try_load_json(bench_path)
+        if bench_data:
             results_list = bench_data.get("results", [])
             method_count = bench_data.get("methodCount", len(results_list))
             chunk_benchmark = {
@@ -106,8 +121,8 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
 
         # HotUpdate results
         hu_path = results_dir / "hotupdate.json"
-        if hu_path.exists():
-            hu_data = json.loads(hu_path.read_text(encoding="utf-8"))
+        hu_data = _try_load_json(hu_path)
+        if hu_data:
             summary["hotupdate"] = {
                 "passed": hu_data.get("passed", 0),
                 "failed": hu_data.get("failed", 0),
@@ -201,7 +216,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         if meta is not None and meta > 0 and total is not None and total != meta:
             gap = meta - total
             gap_ratio = gap / meta
-            chunk_slug = s.get("info", {}).get("slug", "?")
+            chunk_slug = s.get("slug", "?")
             meta_label = "factMethodCount" if s.get("fact", {}).get("factMethodCount") else "metaTotal"
             if gap_ratio < 0.01:
                 chunks_with_meta_warning += 1
