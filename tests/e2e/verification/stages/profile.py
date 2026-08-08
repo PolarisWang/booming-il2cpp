@@ -21,8 +21,10 @@ from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
 from verification.analysis.code_size_tracker import CodeSizeTracker
+from verification.analysis.perf_baseline import PerfBaseline
+from verification._path import results_base
 
-_RESULTS_BASE = Path(__file__).resolve().parent.parent / "results" / "foundation-dll"
+_RESULTS_BASE = results_base()
 
 
 def _parse_profile_output(stdout: str) -> list[dict]:
@@ -170,6 +172,19 @@ def run_profile(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResul
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    # Profile data is only meaningful under a `profile` native build. Under
+    # check/ship configs entry.exe --profile emits stub-zero data that would
+    # pollute the perf baseline / regression chain, so refuse to run and record
+    # the reason instead of silently producing a fake all-zero profile.json.
+    # (Checked first — it is a precondition independent of entry count.)
+    if ctx.native_config != "profile":
+        return StageResult(
+            stage="profile", status="skipped",
+            summary=f"profile stage requires --native-config profile "
+                    f"(got '{ctx.native_config}'); refusing to create stub baseline",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
     entry_count = _get_entry_count(exe_path)
     if entry_count == 0:
         return StageResult(
@@ -239,6 +254,24 @@ def run_profile(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResul
 
     # Write JSONL records
     _write_records_jsonl(profile_data, summary, ctx, section_sizes)
+
+    # Establish/refresh the perf baseline from this run's profile data so the
+    # regression_report chain has something to compare future runs against.
+    # (Previously PerfBaseline.establish was never called by any stage, so no
+    # baseline.json existed and regression always reported "no_baseline".)
+    try:
+        baseline_mgr = PerfBaseline()
+        baseline_path = baseline_mgr.establish(
+            ctx.assembly, ctx.slug, profile_data, section_sizes,
+            metadata={
+                "nativeConfig": ctx.native_config,
+                "gitCommit": ctx.git_commit or "",
+                "entryCount": entry_count,
+            },
+        )
+        print(f"  [profile]   Baseline: {baseline_path}")
+    except Exception as e:  # pragma: no cover - baseline is best-effort
+        print(f"  [profile]   WARNING: could not establish perf baseline: {e}")
 
     # Print summary
     duration_ms = int((time.perf_counter() - start) * 1000)

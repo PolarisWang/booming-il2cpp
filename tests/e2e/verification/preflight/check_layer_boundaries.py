@@ -24,7 +24,7 @@ from pathlib import Path
 
 # ── Constants ────────────────────────────────────────────────────────────
 
-_REPO_ROOT = Path(__file__).resolve().parents[3]
+_REPO_ROOT = Path(__file__).resolve().parents[4]  # repo root (file lives under tests/e2e/verification/preflight/)
 
 # 各层允许写入的文件类型
 LAYER_PERMISSIONS: dict[str, set[str]] = {
@@ -111,7 +111,10 @@ def check_python_writes_cpp(files: list[Path], verbose: bool) -> list[str]:
     """
     violations = []
     # Scan all Python files in verification/ for write_text calls
-    _verification_dir = _REPO_ROOT / "testing" / "foundation-dll" / "verification"
+    # NOTE: engine relocated testing/foundation-dll/verification → tests/e2e/verification
+    # (L6 migration). The old path no longer exists, so `is_dir()` was silently
+    # False and this red-line scan never ran. Point at the live engine root.
+    _verification_dir = _REPO_ROOT / "tests" / "e2e" / "verification"
     if _verification_dir.is_dir():
         for py_file in sorted(_verification_dir.rglob("*.py")):
             if not py_file.exists():

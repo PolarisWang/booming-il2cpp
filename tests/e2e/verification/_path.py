@@ -56,3 +56,16 @@ def testing_tree_root() -> Path:
     if override:
         return Path(override)
     return foundation_root().parent
+
+
+def results_base() -> Path:
+    """Single source of truth for the profile/perf results tree.
+
+    All benchmark/profile/baseline artifacts hang off this root. It is anchored
+    under the foundation root (so it travels with the family tree via
+    CHAOS_FOUNDATION_DLL) rather than at package-local ``verification/results``,
+    which stranded baselines/regression on a path the pipeline never read.
+
+    Layout: <foundation_root>/results/foundation-dll/{assembly}/{slug}/perf/…
+    """
+    return foundation_root() / "results" / "foundation-dll"

@@ -20,8 +20,9 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
+from verification._path import results_base
 
-_RESULTS_BASE = Path(__file__).resolve().parent.parent / "results" / "foundation-dll"
+_RESULTS_BASE = results_base()
 
 
 def _median(sorted_vals: list[float]) -> float:

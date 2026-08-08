@@ -21,8 +21,9 @@ from verification.analysis.gc_check import check_profile, print_report as gc_pri
 from verification.analysis.perf_baseline import PerfBaseline
 from verification.analysis.perf_compare import compare_profiles, print_comparison
 from verification.analysis.code_size_tracker import CodeSizeTracker
+from verification._path import results_base
 
-_RESULTS_BASE = Path(__file__).resolve().parent.parent / "results" / "foundation-dll"
+_RESULTS_BASE = results_base()
 
 
 def generate_report(

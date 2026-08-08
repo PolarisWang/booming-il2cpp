@@ -21,8 +21,9 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
+from verification._path import results_base
 
-_RESULTS_BASE = Path(__file__).resolve().parent.parent / "results" / "foundation-dll"
+_RESULTS_BASE = results_base()
 
 # Benchmark calibration defaults
 _CALIB_TARGET_MS = 10.0          # target duration per method for iteration scaling

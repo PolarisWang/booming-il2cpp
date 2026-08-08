@@ -24,10 +24,11 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
+from verification._path import results_base
 
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 _RUNTIME_PROJECT = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Runtime"
-_RESULTS_BASE = Path(__file__).resolve().parent.parent / "results" / "foundation-dll"
+_RESULTS_BASE = results_base()
 _ITERATIONS = 200
 _TIMEOUT = 1800
 
