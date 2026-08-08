@@ -52,3 +52,10 @@ known:
   # string-id registry state that leaks into fixture 70's native-aot.methods.json.
   # Pre-existing codegen-order flakiness, recorded (not skipped) per no-skip rule.
   - "Chaos.IL2CPP.Generator.SnapshotTests.SnapshotTests.EmittedCodeMatchesBaseline(fixtureName: \"70-external-runtime-helper\")"
+  # Snapshot: fixture 01-simple-add — same order-dependent class as fixture 70.
+  # Confirmed 2026-08-08: passes in isolation (--filter fixtureName=01-simple-add),
+  # fails in the full snapshot suite due to the same shared string-id registry
+  # state leaking between test classes. Pre-existing codegen-order flake, recorded
+  # (not skipped). Not a regression: Python-verification work cannot affect C#
+  # snapshot codegen state.
+  - "Chaos.IL2CPP.Generator.SnapshotTests.SnapshotTests.EmittedCodeMatchesBaseline(fixtureName: \"01-simple-add\")"
