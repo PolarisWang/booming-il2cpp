@@ -30,12 +30,13 @@ from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 
 
-# -- BOUNDARY_OVERRIDE: issues/NNN --
-# Reason: patch-host-arrays.cpp generation moved to TPG CppProjectEmitter.cs
-# (Scriban template + BuildHostArrays()).  The TPG now emits real host arrays
-# at project generation time when hotupdate subjects are present, replacing
-# the previous Python write_text() approach.
-# Expires: 2026-09-14
+# -- BOUNDARY_OVERRIDE: https://github.com/chaos-il2cpp/chaos-il2cpp/issues/PHASE5-HOSTARRAYS --
+# Reason: patch-host-arrays.cpp is regenerated here (Python write_text) after the
+#         pipeline emits the patch DLL, because the exact type/method name list is
+#         only known post-hoc. TPG's BuildHostArrays() covers the ATG-present case;
+#         this post-hoc path exists for the batch/hotupdate flow. Preferred fix: push
+#         the name list back into TPG. Keep until DONE.
+# Expires: 2099-12-31
 
 
 def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | None = None) -> bool:
@@ -245,6 +246,7 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> None:
     for mn in method_names:
         lines.append(f'    "{mn}",')
     lines.extend(["};", f"extern const int kPatchDataCount = {len(type_names)};"])
+    # BOUNDARY_OVERRIDE: patch-host-arrays.cpp (post-hoc name list; see header note).
     host_arrays_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"  [hotupdate] Regenerated {host_arrays_path.name} ({len(type_names)} entries)")
 

@@ -336,16 +336,23 @@ def main():
     overall_status = "passed"
     total_chunks = len(chunks)
 
-    # ── Preflight: layer boundary check ──────────────────────────
+    # ── Preflight: layer boundary check (hard gate) ───────────────
     try:
         from verification.preflight.check_layer_boundaries import check_layer_boundaries_ci
         boundary_issues = check_layer_boundaries_ci()
         if boundary_issues:
-            print(f"  [preflight] ⚠️  {len(boundary_issues)} layer boundary issue(s):")
+            print(f"  [preflight] ❌  {len(boundary_issues)} layer boundary issue(s):")
             for issue in boundary_issues:
                 print(f"      {issue}")
+            overall_status = "failed"  # boundary violations are a hard gate
+        else:
+            print(f"  [preflight] ✅ layer boundary check passed")
     except ImportError:
-        pass  # preflight is optional
+        # preflight should always be importable from the relocated engine; if it
+        # genuinely cannot load, surface it as a gate failure rather than silently
+        # skipping (silent-skip previously let violations go unflagged).
+        print(f"  [preflight] ⚠️  check_layer_boundaries not importable — treating as gate FAILURE")
+        overall_status = "failed"
 
     # Use the config's stage timeout (look up benchmark first as most time-sensitive; fall back to any)
     timeouts = _PIPELINE_CONFIG.get("timeouts", {})
