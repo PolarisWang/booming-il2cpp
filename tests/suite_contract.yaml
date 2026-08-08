@@ -107,6 +107,18 @@ layers:
           PYTHONPATH: "tests/e2e"
         timeout: 600
 
+      # verification-engine-unit — the foundation-dll engine's own fast pytest
+      # unit tests (orchestration context/discovery, benchmark_diff, profile
+      # baseline chain, nightly orchestrator). Previously orphans (only runnable
+      # via bare `pytest`), now folded into the unified entry as a fast,
+      # artifact-free gate (33+ tests, <1s).
+      - name: verification-engine-unit
+        pytest_paths:
+          - tests/e2e/verification/tests
+        env:
+          PYTHONPATH: "tests/e2e:tests/e2e/verification"
+        timeout: 300
+
   # NOTE: tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter is intentionally
   # NOT an active entry in unit: it declares [Fact]s but lacks Microsoft.NET.Test.Sdk
   # so `dotnet test` cannot actually run it. It is tracked here as a known

@@ -80,6 +80,7 @@ def _load_pipeline_config() -> dict:
 
     text = path.read_text(encoding="utf-8")
     current_section: str | None = None
+    current_subsection: str | None = None
     timeouts: dict[str, int] = {}
 
     for line in text.splitlines():
