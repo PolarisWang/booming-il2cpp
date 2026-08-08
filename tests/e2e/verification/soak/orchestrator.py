@@ -190,6 +190,11 @@ class SoakOrchestrator:
             phase_start = start_time
 
             for phase in self.phases:
+                # duration_min is required; a missing key should bail this phase with a
+                # clear warning instead of crashing the whole soak run with KeyError.
+                if "duration_min" not in phase:
+                    print(f"    [WARN] phase {phase.get('name', '?')} missing 'duration_min' — skipping")
+                    continue
                 phase_duration = phase["duration_min"] * 60
                 label = phase.get("test_label", "stress")
                 phase_name = phase["name"]
@@ -240,8 +245,10 @@ class SoakOrchestrator:
                 for metric in ("rss_mb", "vms_mb", "tests_failed"):
                     check = compute_degradation(self._snapshots, metric)
                     report.write_degradation(check)
-                    if not check.passed:
-                        print(f"    [DEGRADATION] {check.warning}")
+                    if not check.sufficient:
+                        print(f"    [WARN] {metric}: insufficient samples — not enough to judge")
+                    elif not check.passed:
+                        print(f"    [DEGRADATION] {metric}: {check.warning}")
                         degraded = True
                     else:
                         print(f"    [{metric}] slope={check.slope:.3f} — ok")

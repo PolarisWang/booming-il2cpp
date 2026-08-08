@@ -33,6 +33,7 @@ class DegradationCheck:
     metric: str = ""
     slope: float = 0.0
     warning: str = ""
+    sufficient: bool = True   # False when too few samples to judge
 
 
 class SoakReport:
@@ -77,7 +78,10 @@ class SoakReport:
 
 def compute_degradation(snapshots: list[SoakSnapshot], metric: str) -> DegradationCheck:
     if len(snapshots) < 6:
-        return DegradationCheck(passed=True, metric=metric, warning="insufficient samples")
+        # Too few samples to judge — mark insufficient (NOT passed) so callers
+        # don't report "no degradation / OK" off an empty signal.
+        return DegradationCheck(passed=False, metric=metric, warning="insufficient samples",
+                                sufficient=False)
 
     recent = snapshots[-6:]
     xs = list(range(len(recent)))

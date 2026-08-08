@@ -154,7 +154,14 @@ def run_profile_range(
 
 
 def run_profile_range_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
-    """Profile-range stage: run --profile-range and write results."""
+    """Profile-range stage: run --profile-range and write results.
+
+    NOTE: This stage is NOT registered in chunk_pipeline's stage registry
+    (stage_functions/STAGE_DEPS/runners), so '--stages ...profile-range' reports
+    an Unknown-stage error. It is a niche experimental path kept separate from
+    the main 'profile' stage. It is not wired in on purpose — do not invoke it
+    through chunk_pipeline until it is explicitly registered and validated.
+    """
     start = time.perf_counter()
 
     exe_path = ctx.entry_exe_path

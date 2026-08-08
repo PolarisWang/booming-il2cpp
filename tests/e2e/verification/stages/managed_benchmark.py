@@ -410,16 +410,13 @@ def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> 
         # Parse output
         records = _parse_runner_output(result.stdout or "")
         if not records:
-            # No benchmark results from runner — use existing baseline data if available
-            perf_path = _RESULTS_BASE / ctx.assembly / slug / "perf" / "benchmark-history.jsonl"
-            if perf_path.exists():
-                print(f"  [managed-benchmark] {technology}: runner returned 0 results, using existing baseline from {perf_path}")
-                with _perf_write_lock:
-                    techs_run.append(technology)
-                return technology, None
-            else:
-                msg = f"{technology}: no benchmark results returned and no existing baseline"
-                return technology, [msg]
+            # No benchmark results from runner — this is a REAL failure, not a
+            # success reusing a stale baseline. Previously it silently declared
+            # success and kept the old benchmark-history.jsonl, which masked the
+            # failure and let stale numbers stand as "fresh".
+            msg = (f"{technology}: runner returned 0 benchmark results"
+                   + (" (existing baseline NOT reused)" if (_RESULTS_BASE / ctx.assembly / slug / "perf" / "benchmark-history.jsonl").exists() else ""))
+            return technology, [msg]
 
         # Write to perf store (serialized via lock to avoid file corruption)
         perf_path = _RESULTS_BASE / ctx.assembly / slug / "perf" / "benchmark-history.jsonl"

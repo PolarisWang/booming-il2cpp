@@ -209,7 +209,7 @@ def run_profile(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResul
     except subprocess.TimeoutExpired:
         return StageResult(
             stage="profile", status="error",
-            summary="profile timed out after 600s",
+            summary="profile timed out after 300s",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 

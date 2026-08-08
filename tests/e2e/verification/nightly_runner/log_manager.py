@@ -26,6 +26,13 @@ import threading
 from pathlib import Path
 
 
+def _as_text(data) -> str:
+    """Return str from bytes-or-str subprocess output (decodes bytes losslessly)."""
+    if isinstance(data, bytes):
+        return data.decode("utf-8", errors="replace")
+    return data or ""
+
+
 class TeeStream:
     """A write-only stream that tees to both a file and the original stream.
 
@@ -165,12 +172,12 @@ class ChunkLogManager:
                 with open(log_path, "a", encoding="utf-8", buffering=1) as f:
                     f.write(f"--- cmd: {' '.join(str(a) for a in cmd_args)}\n")
                     if result.stdout:
-                        f.write(result.stdout if result.stdout.endswith("\n")
-                                else result.stdout + "\n")
+                        _out = _as_text(result.stdout)
+                        f.write(_out if _out.endswith("\n") else _out + "\n")
                     if result.stderr:
                         f.write("--- stderr ---\n")
-                        f.write(result.stderr if result.stderr.endswith("\n")
-                                else result.stderr + "\n")
+                        _err = _as_text(result.stderr)
+                        f.write(_err if _err.endswith("\n") else _err + "\n")
             except OSError:
                 pass
             return result
@@ -303,14 +310,16 @@ def save_subprocess_output(stage_name: str,
         with open(log_path, "a", encoding="utf-8") as f:
             if cmd:
                 f.write(f"\n--- command: {cmd}\n")
-            if stdout:
-                f.write(stdout)
-                if not stdout.endswith("\n"):
+            _stdout = _as_text(stdout)
+            if _stdout:
+                f.write(_stdout)
+                if not _stdout.endswith("\n"):
                     f.write("\n")
-            if stderr:
+            _stderr = _as_text(stderr)
+            if _stderr:
                 f.write("--- stderr ---\n")
-                f.write(stderr)
-                if not stderr.endswith("\n"):
+                f.write(_stderr)
+                if not _stderr.endswith("\n"):
                     f.write("\n")
             f.flush()
     except OSError:
@@ -352,12 +361,12 @@ def logged_subprocess(stage_name: str):
                 if args:
                     f.write(f"--- cmd: {' '.join(str(a) for a in args[0])}\n")
                 if result.stdout:
-                    f.write(result.stdout if result.stdout.endswith("\n")
-                            else result.stdout + "\n")
+                    _out = _as_text(result.stdout)
+                    f.write(_out if _out.endswith("\n") else _out + "\n")
                 if result.stderr:
                     f.write("--- stderr ---\n")
-                    f.write(result.stderr if result.stderr.endswith("\n")
-                            else result.stderr + "\n")
+                    _err = _as_text(result.stderr)
+                    f.write(_err if _err.endswith("\n") else _err + "\n")
         except OSError:
             pass
         return result
