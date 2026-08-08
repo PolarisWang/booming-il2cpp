@@ -402,6 +402,8 @@ def _write_perf_store(
                 "combinedSubjectsId": combined_subjects_id,
                 "methodIndex": i,
                 "metrics": {
+                    # CONTRACT: elapsedMilliseconds = TOTAL for this iterations batch
+                    # (per-iteration normalization happens once in _get_elapsed).
                     "elapsedMilliseconds": elapsed_ms if elapsed_ms > 0 else _MIN_ELAPSED_FLOOR,
                     "opsPerSecond": ops,
                 },

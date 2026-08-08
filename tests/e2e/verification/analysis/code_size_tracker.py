@@ -66,6 +66,17 @@ class CodeSizeTracker:
             if result["source"] == "none":
                 result["source"] = "dumpbin"
 
+        # The last function in a .map-derived list has no next symbol to bound it,
+        # so it was stubbed to 0. Use the .text section size (from dumpbin, the
+        # authoritative source) as its upper bound so per-function code-size data
+        # is complete rather than silently under-reporting the tail.
+        funcs = result.get("functionSizes")
+        if funcs and len(funcs) >= 2:
+            text_size = result["sectionSizes"].get("text", 0)
+            last = funcs[-1]
+            if last.get("textSize", 0) == 0 and text_size > 0 and last.get("offset", 0) > 0:
+                last["textSize"] = max(text_size - last["offset"], 0)
+
         return result
 
     def _parse_map_file(self, map_path: Path) -> list[dict]:

@@ -94,7 +94,7 @@ def scan_all(output_path: str | None = None) -> list[dict]:
 
         if bm:
             s = bm.get("summary", {})
-            pms = bm.get("perMethodStats", [])
+            pms = bm.get("perMethodStats") or []  # JSON null -> must not flow to sorted()
             entry["bench_methods"] = bm.get("methodCount", 0)
             entry["bench_total_ms"] = s.get("elapsedMilliseconds", 0) or 0
             entry["bench_mean_ms"] = s.get("meanDurationMs", 0) or 0

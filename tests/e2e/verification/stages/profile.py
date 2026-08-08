@@ -56,7 +56,10 @@ def _compute_summary(profile_data: list[dict]) -> dict[str, Any]:
     total_fast_path = sum(m.get("fastPathCount", 0) for m in profile_data)
     total_slow_path = sum(m.get("slowPathCount", 0) for m in profile_data)
     total_path = total_fast_path + total_slow_path
-    fast_path_rate = round(total_fast_path / total_path, 4) if total_path > 0 else 1.0
+    # 0.0 (not 1.0) when there is no path data — 1.0 would fabricate a "perfect
+    # fast path" that hides a probe/collection failure. pathObservations lets
+    # downstream distinguish a real 0% from "no data".
+    fast_path_rate = round(total_fast_path / total_path, 4) if total_path > 0 else 0.0
 
     # GC pause distribution
     methods_with_gc = sum(1 for m in profile_data if m.get("gcPauseCount", 0) > 0)
@@ -73,6 +76,7 @@ def _compute_summary(profile_data: list[dict]) -> dict[str, Any]:
         "totalNurseryAllocBytes": total_nursery_bytes,
         "totalAllocCount": total_alloc_count,
         "fastPathRate": fast_path_rate,
+        "pathObservations": total_path,
         "methodsWithGc": methods_with_gc,
         "methodsWithAlloc": methods_with_alloc,
         "codeTextBytes": code_text_bytes,

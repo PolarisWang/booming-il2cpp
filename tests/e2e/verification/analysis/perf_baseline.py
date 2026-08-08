@@ -62,7 +62,9 @@ class PerfBaseline:
         total_fast = sum(fast_path_values)
         total_slow = sum(slow_path_values)
         total_path = total_fast + total_slow
-        fast_path_rate = round(total_fast / total_path, 4) if total_path > 0 else 1.0
+        # 0.0 (not 1.0) when there is no path data — never fabricate a perfect
+        # fast path from an empty sample.
+        fast_path_rate = round(total_fast / total_path, 4) if total_path > 0 else 0.0
 
         baseline = {
             "assembly": assembly,

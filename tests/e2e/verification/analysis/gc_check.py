@@ -168,11 +168,13 @@ def print_report(result: dict[str, Any]) -> None:
     summary = result.get("summary", {})
     status = result.get("status", "unknown")
     issues = result.get("issues", [])
+    by_sev = result.get("bySeverity", {})
 
     print(f"  [gc-check] Status: {status}")
     print(f"  [gc-check] Issues: {result.get('issueCount', 0)} "
-          f"(error={summary.get('methodsWithGcPause', 0)}, "
-          f"warning={summary.get('methodsWithAllocation', 0)})")
+          f"(error={by_sev.get('error', 0)}, "
+          f"warning={by_sev.get('warning', 0)}, "
+          f"info={by_sev.get('info', 0)})")
 
     if issues:
         # Group by severity

@@ -352,9 +352,13 @@ def _classify_bottleneck(
 def _get_elapsed(rec: dict | None) -> float | None:
     """Extract elapsedMilliseconds per iteration from a record.
 
-    Normalizes by iteration count so records with different iteration
-    counts can be compared fairly. AOT benchmark uses calibrated
-    iterations (~50ms target), managed benchmark uses fixed 1000 iters.
+    CONTRACT: all writers (benchmark_chunk / managed_benchmark) store
+    ``elapsedMilliseconds`` as the TOTAL wall-time for the record's iteration
+    batch, with the batch size in ``iterations``. This function is the single
+    place that normalizes total → per-iteration so records with different
+    iteration counts compare fairly (AOT uses calibrated ~50ms-target iters;
+    managed uses a fixed 1000). Do NOT pre-normalize at the writers — that
+    would cause this function to double-divide and corrupt the comparison.
     """
     if rec is None:
         return None
@@ -383,7 +387,8 @@ def _fast_path_rate(profile: dict) -> float:
     fast = profile.get("fastPathCount", 0)
     slow = profile.get("slowPathCount", 0)
     total = fast + slow
-    return round(fast / total, 4) if total > 0 else 1.0
+    # 0.0 (not 1.0) when there is no path data — don't fabricate a perfect fast path.
+    return round(fast / total, 4) if total > 0 else 0.0
 
 
 def _get_gcinfo(rec: dict | None) -> dict | None:

@@ -600,11 +600,18 @@ def _extract_benchmark_from_stages(stages_data: dict[str, Any], slug: str = "") 
 
 
 def _geometric_mean(values: list[float]) -> float:
-    """Compute geometric mean of a list of positive values."""
-    if not values:
+    """Compute geometric mean of a list of positive values.
+
+    Non-positive values are excluded from BOTH the product and the count;
+    previously only the product excluded them while dividing by the full
+    `len(values)`, which under-estimated the mean whenever a non-positive
+    value was present.
+    """
+    positive = [v for v in values if v > 0]
+    if not positive:
         return 0.0
-    log_sum = sum(math.log(v) for v in values if v > 0)
-    return math.exp(log_sum / len(values)) if log_sum else 0.0
+    log_sum = sum(math.log(v) for v in positive)
+    return math.exp(log_sum / len(positive))
 
 
 def _compute_benchmark_comparisons(slug: str, stages_data: dict[str, Any] | None = None) -> dict[str, Any]:
