@@ -22,6 +22,11 @@ import sys
 import time
 from pathlib import Path
 
+# ── Root cause fix: GBK-console crash on emoji (✅/❌/⚠️/…) prints ───────
+# Force UTF-8 on stdout/stderr so emoji prints never crash on a GBK console.
+# See _encoding.py for rationale (shared across all engine entry points).
+from verification import _encoding as _console_encoding  # noqa: E402
+
 import sys as _b_sys
 from pathlib import Path as _b_Path
 for _b_d in _b_Path(__file__).resolve().parents:

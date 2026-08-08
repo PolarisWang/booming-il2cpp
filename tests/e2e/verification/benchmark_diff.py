@@ -24,6 +24,9 @@ import sys
 from pathlib import Path
 from typing import Any
 
+# Root-cause fix: GBK-console crash on emoji prints. See _encoding.py.
+from verification import _encoding as _console_encoding  # noqa: E402
+
 
 def _load_comparison(path: Path) -> dict[str, Any]:
     """Load a comparison-*.json history file."""

@@ -16,6 +16,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+# Root-cause fix: GBK-console crash on emoji prints. See _encoding.py.
+from verification import _encoding as _console_encoding  # noqa: E402
+
 
 def _fmt_pct(value: float | None, always_sign: bool = False) -> str:
     if value is None:
