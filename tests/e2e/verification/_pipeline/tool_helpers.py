@@ -59,6 +59,27 @@ def ensure_tool_built(tool_name: str) -> bool:
     return True
 
 
+# ── SDK root — single authoritative definition ──────────────────────────────
+# The native SDK output location is owned here so every consumer (ensure_sdk,
+# build_presets.py, and any caller) resolves the same canonical path. Before L11
+# this was duplicated as `testing/foundation-dll/sdk` in build_presets.py and
+# `tests/e2e/translation/sdk` here; the split drifted when the engine was
+# relocated. Keeping one authoritative resolver prevents that recurrence.
+
+def sdk_root(repo_root: Path | None = None) -> Path:
+    """Canonical native SDK staging root (contains one subdir per preset)."""
+    if repo_root is None:
+        repo_root = _repo_root()
+    return repo_root / "tests" / "e2e" / "translation" / "sdk"
+
+
+def build_presets_script(repo_root: Path | None = None) -> Path:
+    """Canonical path to the SDK build script (owned alongside the SDK root)."""
+    if repo_root is None:
+        repo_root = _repo_root()
+    return repo_root / "tests" / "e2e" / "translation" / "artifacts" / "build_presets.py"
+
+
 def ensure_sdk(repo_root: Path | None = None) -> Path:
     """Ensure the native SDK is built, building it if needed.
 
@@ -75,14 +96,14 @@ def ensure_sdk(repo_root: Path | None = None) -> Path:
     sdk_subdir = "linux-x64-profile" if is_linux else "windows-x64-reference"
     lib_ext = ".a" if is_linux else ".lib"
 
-    sdk_dir = repo_root / "tests" / "e2e" / "translation" / "sdk" / sdk_subdir
+    sdk_dir = sdk_root(repo_root) / sdk_subdir
     lib_name = f"libchaos_runtime_core{lib_ext}" if is_linux else f"chaos_runtime_core{lib_ext}"
     sdk_lib = sdk_dir / "lib" / lib_name
     if sdk_lib.exists():
         return sdk_dir
 
     print(f"[tool_helpers] SDK ({sdk_subdir}) not found, building presets...")
-    script = repo_root / "tests" / "e2e" / "translation" / "artifacts" / "build_presets.py"
+    script = build_presets_script(repo_root)
     result = subprocess.run(
         [sys.executable, str(script), "--preset", sdk_subdir],
         capture_output=True, text=True, timeout=1200,

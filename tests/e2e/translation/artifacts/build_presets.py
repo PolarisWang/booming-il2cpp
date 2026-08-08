@@ -2,22 +2,22 @@
 """Build native runtime SDK from source.
 
 Builds all native C++ runtime libraries via cmake presets, then collects
-the resulting .lib/.a files into testing/foundation-dll/sdk/<preset-name>/.
+the resulting .lib/.a files into tests/e2e/translation/sdk/<preset-name>/.
 
 Usage:
-    python testing/foundation-dll/artifacts/build_presets.py
-    python testing/foundation-dll/artifacts/build_presets.py --preset windows-x64-reference
-    python testing/foundation-dll/artifacts/build_presets.py --preset linux-x64-profile
-    python testing/foundation-dll/artifacts/build_presets.py --check  # dry-run: check if up-to-date
+    python tests/e2e/translation/artifacts/build_presets.py
+    python tests/e2e/translation/artifacts/build_presets.py --preset windows-x64-reference
+    python tests/e2e/translation/artifacts/build_presets.py --preset linux-x64-profile
+    python tests/e2e/translation/artifacts/build_presets.py --check  # dry-run: check if up-to-date
 
 Output:
-    testing/foundation-dll/sdk/windows-x64-reference/
+    tests/e2e/translation/sdk/windows-x64-reference/
         ├── chaos_runtime_core.lib
         ├── chaos_bootstrap.lib
         ├── ...
-    testing/foundation-dll/sdk/linux-x64-profile/
-        ├── chaos_runtime_core.a
-        ├── chaos_bootstrap.a
+    tests/e2e/translation/sdk/linux-x64-profile/
+        ├── libchaos_runtime_core.a
+        ├── libchaos_bootstrap.a
         ├── ...
 """
 
@@ -30,9 +30,20 @@ import subprocess
 import sys
 from pathlib import Path
 
-_REPO_ROOT = Path(__file__).resolve().parents[3]
+# The SDK root and repo root are owned by _pipeline.tool_helpers (the single
+# authority). Delegating here keeps both sides in sync: before L11 the root
+# was hand-computed as `parents[3]` (correct at `testing/foundation-dll/...`,
+# depth 3) and the SDK was staged at `testing/foundation-dll/sdk`. Relocating
+# to `tests/e2e/...` grew the depth by one and split the two SDK paths, which
+# is exactly the drift this import prevents.
+_VERIFICATION_ROOT = Path(__file__).resolve().parents[2] / "verification"
+if str(_VERIFICATION_ROOT) not in sys.path:
+    sys.path.insert(0, str(_VERIFICATION_ROOT))
+from _pipeline import tool_helpers  # noqa: E402  (repo root + SDK root authority)
+
+_REPO_ROOT = tool_helpers._repo_root()
 _PRESETS_DIR = _REPO_ROOT / "artifacts" / "presets"
-_SDK_ROOT = _REPO_ROOT / "testing" / "foundation-dll" / "sdk"
+_SDK_ROOT = tool_helpers.sdk_root(_REPO_ROOT)
 _NATIVE_ROOT = _REPO_ROOT / "src" / "native"
 
 # ── Presets that need to be built ──
