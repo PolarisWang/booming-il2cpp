@@ -130,50 +130,50 @@ class TestSubjectCommandInventory(SubjectCommandTestSupport):
             )
 
             self.assertEqual("ok", result.status)
-            self.assertIn("verification/archive/master/result-master.json", result.payload["artifacts"])
+            self.assertIn("artifact/verification-catalog/archive/master/result-master.json", result.payload["artifacts"])
             self.assertTrue(
-                (repo_root / "verification" / "archive" / "master" / "result-master.json").is_file()
+                (repo_root / "artifact" / "verification-catalog" / "archive" / "master" / "result-master.json").is_file()
             )
             self.assertTrue(result.payload["validated"])
             self.assertEqual(
-                "verification/archive/latest/result-snapshot.json",
+                "artifact/verification-catalog/archive/latest/result-snapshot.json",
                 result.payload["verificationData"]["latestResultPath"],
             )
             self.assertEqual(
-                "verification/archive/master/result-master.json",
+                "artifact/verification-catalog/archive/master/result-master.json",
                 result.payload["verificationData"]["masterResultPath"],
             )
             self.assertEqual(
-                "verification/archive/reports/completed/testing-inventory/summary.md",
+                "artifact/verification-catalog/archive/reports/completed/testing-inventory/summary.md",
                 result.payload["verificationData"]["reportSummaryPath"],
             )
             self.assertEqual(0, result.payload["sourceSummary"]["codegenStubCount"])
             self.assertEqual([], result.payload["verificationData"]["codegenStubPaths"])
 
             benchmark_inventory_text = (
-                repo_root / "verification" / "projections" / "testing-inventory" / "benchmark-inventory.json"
+                repo_root / "artifact" / "verification-catalog" / "projections" / "testing-inventory" / "benchmark-inventory.json"
             ).read_text(encoding="utf-8")
             self.assertIn(
-                "verification/archive/master/evidence-claims-master.json",
+                "artifact/verification-catalog/archive/master/evidence-claims-master.json",
                 benchmark_inventory_text,
             )
             self.assertNotIn("docs/benchmark/overview.json", benchmark_inventory_text)
             self.assertNotIn("docs/benchmark/subjects", benchmark_inventory_text)
 
             source_payload = json.loads(
-                (repo_root / "verification" / "projections" / "testing-inventory" / "inventory-source.json").read_text(encoding="utf-8")
+                (repo_root / "artifact" / "verification-catalog" / "projections" / "testing-inventory" / "inventory-source.json").read_text(encoding="utf-8")
             )
             evidence_paths = {
                 str(item.get("sourceSubjectPath") or "")
                 for item in list(source_payload.get("benchmarkEvidence") or [])
             }
             self.assertEqual(
-                {f".artifact/verification/benchmark-records/{fixture['subjectId']}/records.jsonl"},
+                {f"artifact/verification/benchmark-records/{fixture['subjectId']}/records.jsonl"},
                 evidence_paths,
             )
-            verification_index = (repo_root / "verification" / "INDEX.md").read_text(encoding="utf-8")
+            verification_index = (repo_root / "artifact" / "verification-catalog" / "INDEX.md").read_text(encoding="utf-8")
             verification_manifest = json.loads(
-                (repo_root / "verification" / "verification.manifest.json").read_text(encoding="utf-8")
+                (repo_root / "artifact" / "verification-catalog" / "verification.manifest.json").read_text(encoding="utf-8")
             )
             self.assertIn("python build/toolchains/run/run.py test inventory --json", verification_index)
             self.assertIn("python build/toolchains/run/run.py generate project all --json", verification_index)

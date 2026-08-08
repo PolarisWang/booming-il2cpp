@@ -119,12 +119,13 @@ class TestVerificationBundle(unittest.TestCase):
                 scope_code="testing-inventory",
             )
 
-            latest_root = repo_root / "verification" / "archive" / "latest"
-            master_root = repo_root / "verification" / "archive" / "master"
-            report_root = repo_root / "verification" / "archive" / "reports" / "completed" / "testing-inventory"
+            latest_root = repo_root / "artifact" / "verification-catalog" / "archive" / "latest"
+            master_root = repo_root / "artifact" / "verification-catalog" / "archive" / "master"
+            report_root = repo_root / "artifact" / "verification-catalog" / "archive" / "reports" / "completed" / "testing-inventory"
             stub_index_path = (
                 repo_root
-                / "verification"
+                / "artifact"
+                / "verification-catalog"
                 / "evidence"
                 / "owners"
                 / "FixtureSubject"
@@ -161,12 +162,12 @@ class TestVerificationBundle(unittest.TestCase):
             self.assertEqual("capability/7/31", stub_index["capabilityId"])
             self.assertEqual("native", stub_index["routeCode"])
             self.assertEqual("windows-native-check", stub_index["profileCode"])
-            self.assertIn("verification/archive/latest/evidence-claims-snapshot.json", payload["artifacts"])
-            self.assertIn("verification/archive/master/evidence-claims-master.json", payload["artifacts"])
-            self.assertIn("verification/archive/latest/result-snapshot.json", payload["artifacts"])
-            self.assertIn("verification/archive/reports/completed/testing-inventory/summary.md", payload["artifacts"])
+            self.assertIn("artifact/verification-catalog/archive/latest/evidence-claims-snapshot.json", payload["artifacts"])
+            self.assertIn("artifact/verification-catalog/archive/master/evidence-claims-master.json", payload["artifacts"])
+            self.assertIn("artifact/verification-catalog/archive/latest/result-snapshot.json", payload["artifacts"])
+            self.assertIn("artifact/verification-catalog/archive/reports/completed/testing-inventory/summary.md", payload["artifacts"])
             self.assertIn(
-                "verification/evidence/owners/FixtureSubject/codegen-stubs/capability/7/31/native-windows-native-check/stub-index.json",
+                "artifact/verification-catalog/evidence/owners/FixtureSubject/codegen-stubs/capability/7/31/native-windows-native-check/stub-index.json",
                 payload["artifacts"],
             )
         finally:

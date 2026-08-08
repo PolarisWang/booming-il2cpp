@@ -315,7 +315,8 @@ class TestVerificationFormalContracts(unittest.TestCase):
 
             self.assertEqual(
                 repo_root
-                / "verification"
+                / "artifact"
+                / "verification-catalog"
                 / "evidence"
                 / "owners"
                 / "SolutionCorePack"

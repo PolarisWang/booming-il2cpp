@@ -65,7 +65,7 @@ class TestTestingInventorySource(TestingInventoryTestSupport):
             evidence = payload["benchmarkEvidence"][0]
             self.assertEqual(fixture["deviceId"], evidence["deviceId"])
             self.assertEqual(
-                f".artifact/verification/benchmark-records/{fixture['subjectId']}/records.jsonl",
+                f"artifact/verification/benchmark-records/{fixture['subjectId']}/records.jsonl",
                 evidence["sourceSubjectPath"],
             )
             self.assertEqual("recorded", evidence["modeStatus"]["managed"]["status"])
@@ -77,7 +77,7 @@ class TestTestingInventorySource(TestingInventoryTestSupport):
             self.assertEqual("native", stub["routeCode"])
             self.assertEqual("windows-native-check", stub["profileCode"])
             self.assertEqual(
-                f"verification/evidence/owners/{subject_id}/codegen-stubs/windows-native-check",
+                f"artifact/verification-catalog/evidence/owners/{subject_id}/codegen-stubs/windows-native-check",
                 stub["stubRefs"][0]["path"],
             )
         finally:
@@ -186,7 +186,7 @@ class TestTestingInventorySource(TestingInventoryTestSupport):
         fixture = inventory_fixture()
         repo_root = make_temp_repo_root("testing-inventory", "source-legacy-perf")
         write_inventory_fixture_repo(repo_root, fixture)
-        records_path = repo_root / ".artifact" / "verification" / "benchmark-records" / fixture["subjectId"] / "records.jsonl"
+        records_path = repo_root / "artifact" / "verification" / "benchmark-records" / fixture["subjectId"] / "records.jsonl"
         records_path.unlink()
         write_legacy_subject_perf_run(
             repo_root,

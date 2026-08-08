@@ -15,6 +15,11 @@ except ImportError:
     def trace(*args, **kwargs):
         pass
 
+# The foundation_dll verification-kernel subpackage was retired and removed
+# (commit 6521a5e66). These modules are imported defensively: when unavailable
+# the audit features degrade gracefully (audit payload emits no family
+# verification snapshot) instead of aborting the whole "test inventory" command
+# with a hard ImportError. See write_foundation_dll_audit_outputs guard.
 try:
     from .foundation_dll import case_index_loader as case_index_loader_module
     from ..core.common import write_json
@@ -24,13 +29,39 @@ try:
     from . import verification_layout as verification_layout_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
-    sys.path.insert(0, str(root))
-    from testing.foundation_dll import case_index_loader as case_index_loader_module
-    from core.common import write_json
-    from testing.foundation_dll import family_verification_claims as family_verification_claims_module
-    from testing.foundation_dll import truth_contracts as truth_contracts_module
-    from testing.foundation_dll import verification_kernel as verification_kernel_module
-    from testing import verification_layout as verification_layout_module
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+    try:
+        from testing.foundation_dll import case_index_loader as case_index_loader_module
+        from core.common import write_json
+        from testing.foundation_dll import family_verification_claims as family_verification_claims_module
+        from testing.foundation_dll import truth_contracts as truth_contracts_module
+        from testing.foundation_dll import verification_kernel as verification_kernel_module
+        from testing import verification_layout as verification_layout_module
+    except ImportError:
+        # foundation_dll package removed — degrade gracefully.
+        case_index_loader_module = None
+        family_verification_claims_module = None
+        truth_contracts_module = None
+        verification_kernel_module = None
+
+        from build.toolchains.run.testing import verification_layout as verification_layout_module
+        from build.toolchains.run.core.common import write_json
+
+
+def foundation_dll_kernel_available() -> bool:
+    """True when the (retired) foundation_dll verification-kernel is importable.
+
+    The kernel package was removed; when it is unavailable we degrade the audit
+    projection (skip family/case verification snapshots) instead of crashing the
+    whole "test inventory" command with a hard ImportError/AttributeError.
+    """
+    return all(m is not None for m in (
+        case_index_loader_module,
+        family_verification_claims_module,
+        truth_contracts_module,
+        verification_kernel_module,
+    ))
 
 
 PROGRAM_MANIFEST_RELATIVE_PATH = (
@@ -806,7 +837,7 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
             dll_record["dllState"] = _string(override.get("dllState")) or dll_record["dllState"]
             dll_record["currentProject"] = _string(override.get("currentProject")) or dll_record["currentProject"]
             dll_record["blockingReason"] = _string(override.get("blockingReason")) or dll_record["blockingReason"]
-        if has_ledger:
+        if has_ledger and foundation_dll_kernel_available():
             ledger_entry = ledger_lookup.get(assembly_name)
             families = list((ledger_entry or {}).get("families") or [])
             family_source = ""
