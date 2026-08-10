@@ -69,24 +69,42 @@ completed_batches: []
 ## 最近摘要
 
 - 2026-08-10：创建本 roadmap（v1-01）。分析了 `D:\OpenSource\dotnet\runtime\src\coreclr\gc\`（~79,400 行）与 CRAG GC（~18,750 行）的核心差异，识别 12 项欠缺功能，按 P0/P1/区域化重构排列为 6 阶段 16 子任务。
-- 2026-08-10：**GC-B1 已完成**。按用户要求移除 GC 核心 `CHAOS_GC_STRESS` 测试宏（对齐 CoreCLR「GC 核心零 stress」）：删 8 处热路径 `GcStressShouldTrigger()` + `gc_stress.h/cpp`(2 文件删除) + CMake option + features 文档行；因原 `gc_stress.h` 传递提供 `chaos_gc_collect` 声明，补直连 `#include "gc_helpers.h"` 到 `gc_region.cpp`。验证：`chaos_runtime_core` Debug 编译通过，`chaos_gc_region_test`(4/4) + `chaos_gc_atomic_alloc_test`(5/5) 运行 0 失败。`tests/` 压力测试用例全部保留（`gc_stress_test`/`gc_bgc_stress_test`/`gc_satb_stress_test` 等），不依赖已删符号。
+- 2026-08-10：**Phase 1 三项全部完成并提交**：
+  - **GC-B1**（`6659812d4`）：移除 GC 核心 CHAOS_GC_STRESS 测试宏（对齐 CoreCLR 零 stress）。
+  - **GC-A1**（`e4dae1f97`）：young GC 全线程精确根扫描（修跨线程 UAF，`g_heap_base`→`IsInNursery`，Phase 0 全线程 hybrid）。
+  - **GC-C1**（`f7850324e`）：并行标记声明式终止对齐（last-worker 收敛复查 + 重扫至稳定）。
+  - **两个 pre-existing 测试问题修复**：young_collector SUB-2（`f5ceb0072`）+ gen1 5 失败（`b9311d2e9`）。
+  - 验证：22 项确定性 GC 单测全部 0 失败。
 
 ## latest_stop_point
 
-- GC-B1 已完成并验证。roadmap 其余子任务未派生。
+- **Phase 1 完成**（GC-B1/A1/C1 + 两个测试修复全部提交）。worktree 干净。GC-C1 已对齐声明式终止。
 
 ## 下一步
 
-- 启动 `recommended_next_child = GC-A1`（young GC 全根集扫描，修 UAF）。
-- 派生子任务前，按用户要求先做 GC-A1 的架构优先检查（读 `24-CRAG-GC架构参考.md`，确认全根集扫描方案与既有 CRAG 架构一致）。
+- **Phase 2**：GC-D1（OOM 逐级降级链）+ GC-E1（配置旋钮体系）。
+  - GC-D1 对齐 CoreCLR `allocation.cpp:2055`：CRAG 已有 全GC重试 → emergency reserve → 逐页 decommit → OOM，缺 **provisional mode**（内存极紧时调度器优雅降级）与 **半量预算**（oom_budget 缩放 gen 预算）。涉及调度器，需专门会话聚焦。
+  - GC-E1 对齐 `gcconfig.h` 72 旋钮：先做 GCHeapHardLimit/Concurrent/ConserveMemory 等几个 core 旋钮。
 
 ## recommended_next_child
 
-- `GC-A1` — young GC 全根集扫描修复（正确性 P0，风险最高且独立）
+- `GC-D1` — OOM 逐级降级链（Phase 2，独立可验证）
 
 ## 关键文档
 
 - `docs/dev/in-progress/gc-align-coreclr/roadmap-v1-01.md`
+- 子任务：`gc-a1-rootset/`、`gc-c1-mark-termination/`
+
+## 进度（截至 2026-08-10）
+
+| 阶段 | 子任务 | 状态 |
+|------|--------|------|
+| Phase 1 | GC-B1 / GC-A1 / GC-C1 | ✅ 完成 |
+| Phase 2 | GC-D1 / GC-E1 | ⬜ 待做（GC-D1 需专门会话） |
+| Phase 3 | GC-H1 / GC-F1 / GC-G1 | ⬜ |
+| Phase 4 | GC-J1 | ⬜ |
+| Phase 5 | GC-K1..K4（区域化重构） | ⬜（最高风险，跨多会话） |
+| Phase 6 | GC-L1 / GC-L2 | ⬜ |
 
 ---
 
