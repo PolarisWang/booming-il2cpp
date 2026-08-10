@@ -209,6 +209,40 @@ TreeBuildResult TreeBuilder::Build(const interpreter::RegisterInstruction* instr
             has_unsupported_ = true;
             break;
         }
+        else if (opc == interpreter::IROpCode::Dup) {
+            // Copy instruction: dst is an alias of src1's node.  Without this,
+            // Dup maps to kNop and is dropped, so a later use of dst resolves to
+            // an uninitialized live-in leaf instead of the copied value.
+            if (ri.has_src1()) {
+                if (uint8_t s1r = ri.src1_reg(); ri.has_dst() && s1r < 64) {
+                    ExprNode* src_node = ResolveVReg(s1r, 0);
+                    uint8_t dst = ri.dst_reg();
+                    vreg_to_node_[dst] = src_node;
+                    // Preserve the source VN so CSE dedups dst with its source.
+                    if (src_node) vn_.SetComputed(src_node->vn_id());
+                }
+            }
+            is_root = false;
+            node = nullptr;
+        }
+        else if (opc == interpreter::IROpCode::Box || opc == interpreter::IROpCode::Unbox) {
+            // Box/Unbox value passthrough for non-escaping boxed values.
+            // Without this, Box/Unbox map to kNop and are dropped, so a later use
+            // of the unbox dst resolves to an uninitialized live-in leaf.  By
+            // aliasing the boxed value to its source (Box) / the boxed value
+            // (Unbox), a Box-of-constant immediately consumed by Unbox folds to
+            // the constant itself — matching the linear optimizer's Unbox-elim.
+            if (ri.has_src1() && ri.has_dst() && ri.src1_reg() < 64) {
+                uint8_t box_dst = ri.dst_reg();
+                uint8_t box_src = ri.src1_reg();
+                // Register src as a leaf first so the value is resolvable.
+                ExprNode* val_node = ResolveVReg(box_src, 0);
+                vreg_to_node_[box_dst] = val_node;
+                if (val_node) vn_.SetComputed(val_node->vn_id());
+            }
+            is_root = (opc == interpreter::IROpCode::Box);  // Box has an allocation side effect
+            node = nullptr;
+        }
         else if (opc == interpreter::IROpCode::Ret) {
             // Return: root with optional value child
             ExprNode* val = ri.has_src1() ? ResolveVReg(ri.src1_reg(), 0) : nullptr;

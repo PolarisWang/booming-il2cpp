@@ -356,14 +356,28 @@ static void DumpCode(const uint8_t* code, uint32_t size) {
     if (size > 256) std::printf("      ... (%u more bytes)\n", size - 256);
 }
 
+#if defined(_WIN64)
+// t4_jit_call.asm — invokes a T4-compiled entry with the JIT register
+// convention (RBX=args_buf/RSI=ret_buf) rather than the Win64 C ABI.
+extern "C" void T4CallNative(const void* entry, void* args, void* ret);
+#endif
+
 static uint64_t ExecuteNative(void* entry, uint64_t* args = nullptr) {
     uint64_t args_buf[8] = {};
     uint64_t ret_buf[2] = {};
     if (args) std::memcpy(args_buf, args, 8 * sizeof(uint64_t));
+#if defined(_WIN64)
+    // T4 entries use RBX=args_buf/RSI=ret_buf (JIT convention), not the Win64
+    // C ABI.  t4_jit_call.asm re-binds these before invoking the compiled code
+    // so the return value lands in the caller's ret_buf as the test expects.
+    std::printf("    calling entry=%p\n", entry);
+    T4CallNative(entry, args_buf, ret_buf);
+#else
     using NativeEntry = void (*)(void*, void*);
     auto native_entry = reinterpret_cast<NativeEntry>(entry);
     std::printf("    calling entry=%p\n", entry);
     native_entry(args_buf, ret_buf);
+#endif
     std::printf("    after call\n");
     return ret_buf[0];
 }

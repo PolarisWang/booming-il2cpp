@@ -30,6 +30,11 @@
 
 #include <gc_scheduler.h>
 #include <gc/gc_young_gen.h>
+#if defined(_WIN64)
+// T4 entries use RBX=args/RSI=ret (JIT conv); t4_jit_call.asm re-binds them.
+extern "C" void T4CallNative(const void* entry, void* args, void* ret);
+#endif
+
 
 // ── Namespace aliases ──────────────────────────────────────────────
 using chaos::il2cpp::interpreter::IROpCode;
@@ -86,9 +91,13 @@ struct CodegenIlSmokeTest : public ::testing::Test {
 static uint64_t ExecuteNative(void* entry) {
     uint64_t args_buf[8] = {};
     uint64_t ret_buf[2] = {};
+#if defined(_WIN64)
+    T4CallNative(entry, args_buf, ret_buf);
+#else
     using NativeEntry = void (*)(void*, void*);
     auto native_entry = reinterpret_cast<NativeEntry>(entry);
     native_entry(args_buf, ret_buf);
+#endif
     return ret_buf[0];
 }
 

@@ -13,6 +13,17 @@ set(CHAOS_CODEGEN_LIBS
     chaos_debugger
 )
 
+# T4-compiled entries use the JIT register convention (RBX=args_buf, RSI=ret_buf)
+# rather than the Win64 C ABI.  Tests that invoke a compiled entry through their
+# own ExecuteNative() (rather than through JitStubDispatch) link this x64 thunk
+# to re-bind RBX/RSI so the return value lands in the caller's ret_buf.
+set(CHAOS_T4_THUNK_ASM
+    ${CMAKE_SOURCE_DIR}/tests/contracts/native/runtime-core/t4_jit_call.asm)
+if(MSVC AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+    enable_language(ASM_MASM)
+    set_source_files_properties(${CHAOS_T4_THUNK_ASM} PROPERTIES LANGUAGE ASM_MASM)
+endif()
+
 # N2 — Codegen native test (x64)
 # CHAOS_IL2CPP_JIT_TEST_ACTIVE=1 suppresses the codegen stubs in
 # gc_test_stubs.cpp so the real implementations from chaos_jit.lib
@@ -22,10 +33,13 @@ chaos_native_add_test(test_jit_native
     jit_native_test.cpp
     ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_bgc.cpp
     ${CMAKE_SOURCE_DIR}/src/native/jit/jit_helpers.cpp
+    ${CHAOS_T4_THUNK_ASM}
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit"
 )
+# T4-compiled entries use the JIT register convention (RBX=args, RSI=ret); the
+# x64 asm thunk re-binds these before invoking a compiled entry (see CHAOS_T4_THUNK_ASM).
 target_compile_definitions(test_jit_native PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
 )
@@ -39,6 +53,7 @@ set_tests_properties(test_jit_native PROPERTIES TIMEOUT 120)
 # kChaosExternalRuntime*) normally supplied by codegen output.
 chaos_native_add_test(test_jit_il_smoke
     jit_il_smoke_test.cpp
+    ${CHAOS_T4_THUNK_ASM}
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit"
@@ -53,6 +68,7 @@ target_compile_definitions(test_jit_il_smoke PRIVATE
 # element types and sub-operations.
 chaos_native_add_test(test_jit_simd
     jit_simd_test.cpp
+    ${CHAOS_T4_THUNK_ASM}
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit"
@@ -162,6 +178,7 @@ set_tests_properties(test_jit_binary_ir PROPERTIES TIMEOUT 30)
 # trampoline allocation, and the full T4 JIT dispatch pipeline.
 chaos_native_add_test(test_jit_mode
     jit_mode_test.cpp
+    ${CHAOS_T4_THUNK_ASM}
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit"
@@ -176,6 +193,7 @@ set_tests_properties(test_jit_mode PROPERTIES TIMEOUT 30)
 # behavior with enable_pgo=true/false.
 chaos_native_add_test(test_jit_pgo
     jit_pgo_test.cpp
+    ${CHAOS_T4_THUNK_ASM}
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit;pgo"
@@ -192,6 +210,7 @@ set_tests_properties(test_jit_pgo PROPERTIES TIMEOUT 600)
 # by codegen output (needed because bootstrap.lib references them).
 chaos_native_add_test(test_jit_bench
     bench_jit_vs_aot.cpp
+    ${CHAOS_T4_THUNK_ASM}
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit;bench"

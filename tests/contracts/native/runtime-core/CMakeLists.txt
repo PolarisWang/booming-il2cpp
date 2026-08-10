@@ -88,18 +88,33 @@ endif()
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
     chaos_native_add_test(chaos_capacity_stress_test capacity_stress_test.cpp LABELS "stress")
 endif()
-# NOTE: codegen_native_test is EXCLUDED. It #includes code_generator.h from a
-# "Phase 3d" JIT/codegen module that does not exist in this source tree
-# (placeholder for an unmerged milestone-level feature). NOT in
-# known-failures.integration.yaml (excluded, not built/run). DO NOT delete the
-# .cpp — it captures intent; re-enable when that module lands.
+# NOTE: codegen_native_test was EXCLUDED because it #included code_generator.h
+# from a "Phase 3d" JIT/codegen module that was renamed codegen/ -> jit/ without
+# migrating this test.  It has now been re-rewritten to the current jit API
+# (jit_engine.h / Compile() / JitMethod / RegisterNativeCodeSection etc.) so it
+# compiles again, and is re-enabled here.  T4 code uses the JIT register
+# convention (RBX=args, RSI=ret) rather than the Win64 C ABI, so the target
+# links t4_jit_call.asm to invoke compiled entries with the correct thunk.
 #
 # unwind_info_test is ENABLED: it now exercises the real
 # chaos::il2cpp::jit::EmitUnwindInfo (src/native/jit/jit_unwind.h), which is in
 # CHAOS_NATIVE_INCLUDE_DIRS. Replaced the old speculative codegen:: binding.
 #
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
-    # codegen_native_test.cpp EXCLUDED (needs code_generator.h, not present)
+    if(MSVC AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+        # x64 Windows: T4 thunk requires an x64 assembly shim (ASM_MASM).
+        enable_language(ASM_MASM)
+        set_source_files_properties(
+            "${CMAKE_CURRENT_SOURCE_DIR}/t4_jit_call.asm"
+            PROPERTIES LANGUAGE ASM_MASM)
+        chaos_native_add_test(chaos_codegen_native_test
+            codegen_native_test.cpp
+            "${CMAKE_CURRENT_SOURCE_DIR}/t4_jit_call.asm")
+    else()
+        # Non-x64 / non-MSVC: T4 thunk assembly is x64-only; still compile the
+        # C++ test, but without native codegen execution coverage.
+        chaos_native_add_test(chaos_codegen_native_test codegen_native_test.cpp)
+    endif()
 endif()
 # unwind_info_test asserts x86-64 UWOP/RBP/mov-rax-imm64 byte layout — only valid
 # on x64. On non-x64 (arm64) the bytes don't exist, so exclude the target there.
