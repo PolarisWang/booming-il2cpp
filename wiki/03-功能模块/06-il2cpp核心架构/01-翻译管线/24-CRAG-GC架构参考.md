@@ -104,6 +104,29 @@
 - **ClearAllCards**：O(allocated_segments) 而非 O(64K)，通过 tracked segment list
 - **ScanDirtyCards**：模板化范围扫描，用于 young GC Phase 1
 
+### 世代感知 region 写屏障 (GC-K2, 2026-08-10)
+
+对齐 CoreCLR `map_region_to_generation` / `JitHelpers_FastWriteBarriers` region 写屏障，补 2026-08 区域化重构引入：
+
+```
+region→gen 表 (skewed):  GetRegionGen(addr) = g_region_to_gen[addr >> 22] & 0x3
+  - NURSERY / GEN1 → young(0)      (young GC Phase 2 精确扫，无需卡)
+  - TENURED/LOH/DOMAIN/POH → old(2)
+双参屏障: chaos_gc_dirty_card_dst_ref(dst, ref)
+  - dst.gen == young(0) → 不设卡
+  - ref == null → 不设卡
+  - ref.gen >= dst.gen → 不设卡 (非老→幼)
+  - 否则 DirtyCard(dst)
+card bundle: 1bit/2MB 粗卡 (kCardBundleShift=21)
+  - DirtyCard 设卡顺带着色 bundle
+  - ScanDirtyCards 先检 bundle，clean 整 segment 跳过
+```
+
+- **文件**：`gc_region.h` (kRegionGenShift/GetRegionGen/SetRegionGen)、`gc_card_table.h/cpp` (chaos_gc_dirty_card_dst_ref/CardBundle*)、`NativeAotLoweringPlanner.*` codegen (发射 `_dst_ref`)。
+- **效果**：gen0→gen0 / 同代成熟写不设卡（省热路径设卡）。
+- **跨平台**：纯 C++（`addr>>22` 查表 + 位移），无 asm/OS 调用。
+- **BOUNDARY_OVERRIDE**：issues/GC-K2c（codegen 层产生 C++ 调用新 GC API）。
+
 ### 并行标记 (Parallel Mark) — DrainMarkStackParallel
 
 | 参数 | 值 |
