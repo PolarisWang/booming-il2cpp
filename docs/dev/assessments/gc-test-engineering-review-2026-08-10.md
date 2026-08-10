@@ -111,9 +111,16 @@ CI 全量 unit + ASAN        ←── B2 (nightly)
 4. **A3**：`--stress-only` 压力独立入口。
 5. **B2**：ASAN nightly；**B1 剩余**（D1/E1 单测）随补。
 
-## 五、结论
+## 六、执行状态（2026-08-10 补测落地）
 
-- **最致命**：GC 单测零 CI 执行（A1）。
-- **最易漏的坑**：bgc_smoke 已知失败会因 A1 变 red（A2 前置）。
-- **最高 ROI 补测**：K2b 双参屏障（正确性敏感，P0）。
-- 压力已按 label 独立分类，只差 `--stress-only` 入口。
+| 方案项 | commit | 状态 |
+|--------|--------|------|
+| **P0-1 K2b 双参屏障单测**（正确性敏感，3 短路） | `64c016bb3`+`244f1cf2c` | ✅ card_table_ext 6/6 确定性（dst/ref 分 region cell） |
+| **P0-2 K2a region-gen 单测 + bounds-guard 修复** | `f825cf3a4` | ✅ region_test 5/5；修复 GetRegionGen 越界 OOB 读 |
+| **P0-3 GC unit 进 CI** | `fb6556464` | ✅ 新增 gc-ci.yml（-R chaos_gc_ -LE benchmark|stress|soak） |
+| **P1-1 bgc_smoke root-cause 修复** | `e511ebd05` | ✅ phase-independent BGC-YoungGC pause ack（非记录 baseline，根因修复） |
+| **P1-2 --stress-only 压力独立入口** | `162515604` | ✅ test_driver 加 --stress-only；native.py -L 反选 |
+| **P2 D1 provisional + E1 config 单测** | `3e718a5de`+`774daf521` | ✅ scheduler_test 10/10 |
+| **nightly** | — | ✅ 按用户指示**去除**（不做定时档） |
+
+最终验证：11 项 GC 确定性单测全部 0 失败（含新增 K2a/K2b/D1/E1）。worktree 干净。
