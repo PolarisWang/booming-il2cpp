@@ -28,6 +28,34 @@
 
 #include <chaos/pal/pal_mem.h>
 
+namespace chaos::il2cpp::runtime_core {
+
+// ── Region-to-generation skewed table (GC-K2a) ───────────────────────
+// Global so the inline GetRegionGen() (write-path fast lookup) can read it
+// without invoking RegionManager.  Lazy-grown to cover the highest seen
+// region address.  Guarded by RegionManager::mutex_ (allocated under it).
+uint8_t* g_region_to_gen = nullptr;
+static CHAOS_IL2CPP_SIZE s_region_gen_high_idx = 0;   // highest covered index (inclusive)
+
+/// Ensure g_region_to_gen covers index = @a addr >> kRegionGenShift.
+/// Called under RegionManager::mutex_ from AllocateRegion.  Grows by doubling.
+static void EnsureRegionGenCoverage(uintptr_t addr) {
+    CHAOS_IL2CPP_SIZE idx = addr >> kRegionGenShift;
+    if (idx <= s_region_gen_high_idx) return;
+    CHAOS_IL2CPP_SIZE need = idx + 1;
+    CHAOS_IL2CPP_SIZE cap = (s_region_gen_high_idx == 0) ? 1024 : s_region_gen_high_idx + 1;
+    while (cap < need) cap *= 2;
+    auto* new_tab = static_cast<uint8_t*>(std::realloc(g_region_to_gen, cap));
+    if (new_tab == nullptr) return;  // keep old coverage (fail-safe conservative)
+    // Preserve existing entries; default new entries to kRegionGenOld (so an
+    // uncovered region 查表 returns "old" → conservative card marking).
+    for (CHAOS_IL2CPP_SIZE i = s_region_gen_high_idx + 1; i < cap; i++) new_tab[i] = kRegionGenOld;
+    g_region_to_gen = new_tab;
+    s_region_gen_high_idx = cap - 1;
+}
+
+}  // namespace chaos::il2cpp::runtime_core
+
 #include <cstdlib>
 
 // ── Large page allocation helpers ──────────────────────────────────
@@ -820,6 +848,15 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
             reinterpret_cast<uintptr_t>(r->begin),
             reinterpret_cast<uintptr_t>(r->end));
     }
+
+    // GC-K2a: initialize the region's generation.  Nursery → young(0);
+    // everything mature (tenured/LOH/Domain/POH/Gen1-eligible) → old(2).
+    // Keep the skewed region→gen table in sync for O(1) write-barrier lookups.
+    uint8_t region_gen = (kind == RegionKind::REGION_NURSERY) ? kRegionGenYoung : kRegionGenOld;
+    r->gen = region_gen & kRegionGenMask;
+    EnsureRegionGenCoverage(reinterpret_cast<uintptr_t>(r->begin));
+    EnsureRegionGenCoverage(reinterpret_cast<uintptr_t>(r->end) - 1);
+    SetRegionGen(reinterpret_cast<uintptr_t>(r->begin), region_gen);
 
     total_allocated_bytes_.fetch_add(region_size, std::memory_order_relaxed);
     return r;

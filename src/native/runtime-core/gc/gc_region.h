@@ -75,7 +75,36 @@ struct Region {
     Region*         next;           // free-list / GC work-set link
     Region*         poh_next;       // POH region linked list (O(1) iteration)
 
+    uint8_t         gen;            // GC-K2: generation of this region (0/1/2),
+                                    // aligned to CoreCLR region_info's low 2 bits.
 };
+
+/// Low 2 bits carry the region's current generation (align CoreCLR RI_GEN_MASK).
+static constexpr uint8_t kRegionGenMask   = 0x3u;
+/// Generation value for a nursery (youngest) region.
+static constexpr uint8_t kRegionGenYoung  = 0u;
+/// Generation value for a mature (old / tenured / LOH-like) region.
+static constexpr uint8_t kRegionGenOld    = 2u;
+
+/// Region-to-generation skewed table (align CoreCLR map_region_to_generation_skewed).
+/// 1 byte per basic region; base is pre-offset so a write barrier can index with
+/// raw `addr >> kRegionGenShift` (no watermark subtraction).  Populated by
+/// RegionManager::Init / region allocation; read-only after init on the hot path.
+/// kRegionGenShift = log2(4MB) = 22 (largest region size class from K1).
+static constexpr CHAOS_IL2CPP_SIZE kRegionGenShift = 22;
+extern uint8_t* g_region_to_gen;          // = table_base - (lowest_addr >> kRegionGenShift)
+
+/// O(1) skewed lookup of a region's generation from any address.
+inline uint8_t GetRegionGen(uintptr_t addr) noexcept {
+    if (g_region_to_gen == nullptr) return kRegionGenOld;  // uninitialized → conservative
+    return g_region_to_gen[addr >> kRegionGenShift] & kRegionGenMask;
+}
+
+/// Update the skewed table entry for the region covering @a addr to @a gen.
+inline void SetRegionGen(uintptr_t addr, uint8_t gen) noexcept {
+    if (g_region_to_gen == nullptr) return;
+    g_region_to_gen[addr >> kRegionGenShift] = gen & kRegionGenMask;
+}
 
 // ── Forward declarations ──────────────────────────────────────
 class RegionManager;
