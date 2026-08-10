@@ -187,6 +187,26 @@ void FlushPending(MarkWorkerState* worker) {
     worker->pending.word_index = 0;
 }
 
+/// True if ANY worker's deque still holds a chunk (or a pending accumulator
+/// that hasn't been flushed yet).  Used by the last idle worker to perform a
+/// final convergence re-check before declaring termination — aligning with
+/// CoreCLR's declarative "re-scan until stable" mark termination.
+/// Each deque is read under its steal_mutex so an in-flight PushChunk
+/// (which locks the same mutex) is never missed.
+static bool AnyWorkRemaining(ParallelMarkContext* ctx) {
+    for (int i = 0; i < ctx->worker_count; i++) {
+        auto& w = ctx->workers[i];
+        std::lock_guard<std::mutex> lock(w.steal_mutex);
+        if (!w.deque.empty()) return true;
+        // Also consider an un-flushed pending accumulator as pending work:
+        // the owning worker may be about to flush it, but if that worker is
+        // idle-waiting it must not be lost across termination.
+        if (w.has_pending && w.pending.bitmap != 0) return true;
+    }
+    return false;
+}
+
+
 // ======================================================================
 // Chunk processing
 // ======================================================================
@@ -352,7 +372,21 @@ void ParallelMarkWorkerLoop(ParallelMarkContext* ctx, int worker_idx) {
         work_found = false;
         int prev = ctx->active_workers.fetch_sub(1, std::memory_order_acq_rel);
         if (prev <= 1) {
-            // We are the LAST worker to go idle. Signal done.
+            // We are the LAST worker to go idle.  Align with CoreCLR's
+            // declarative mark termination (mark_phase.cpp:3107): before
+            // declaring parallel_done, do a final convergence re-check across
+            // ALL workers' deques + pending accumulators.  This catches work
+            // produced by another worker whose ProcessChunk flushed between
+            // that worker's last pop and this one's decrement — guaranteeing
+            // termination is provably convergent, not timing-dependent.
+            if (AnyWorkRemaining(ctx)) {
+                // Some chunk remains (e.g., in-flight flush we cannot see as
+                // empty yet).  We (the last worker) re-increment and resume
+                // to drain it rather than relying on another worker waking.
+                ctx->active_workers.fetch_add(1, std::memory_order_relaxed);
+                work_found = true;
+                continue;  // back to outer loop: pop/steal + (re)flush
+            }
             ctx->parallel_done.store(true, std::memory_order_release);
             break;
         }

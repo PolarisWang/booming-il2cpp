@@ -135,7 +135,7 @@ Phase6: L1 <─ L2（依赖 K 区域化完成 + E1 旋钮 + D1 降级）
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | GC-A1 | 1 | planned | — | 修 young GC 根集不完整(UAF) | — | — | 跨线程引用存活 proof + hotupdate proof | `gc_young_collector.cpp` | 全根集扫描；stress 无丢对象 | `src/native/runtime-core/gc/` | M |
 | GC-B1 | 1 | completed | — | 移除 GC 核心 CHAOS_GC_STRESS 测试宏（对齐 CoreCLR 零 stress） | — | — | 编译 + 分配路径测试 proof | `gc_alloc_stubs.*`/`gc_region.cpp`/删 `gc_stress.*`/CMake | 核心无 stress，0 失败 | `src/native/runtime-core/gc/`+`core/` | S |
-| GC-C1 | 1 | planned | — | 声明式 mark 终止 | GC-A1 | — | 高并发 stress proof | `gc_parallel_mark.cpp` | 无终止竞态 | `gc_parallel_mark.*` | M |
+| GC-C1 | 1 | completed | — | 声明式 mark 终止（收敛复查硬化） | GC-A1 | — | 高并发 stress proof | `gc_parallel_mark.cpp` + `gc-c1-mark-termination/` | 无终止竞态 + 证明收敛 | `gc_parallel_mark.*` | M |
 | GC-D1 | 2 | planned | — | OOM 逐级降级链 | — | — | 内存耗尽降级 proof | `gc_old_gen.cpp`/`gc_region.cpp` | 逐级降级非直接 fail | `gc_old_gen.*`/`gc_region.*` | M |
 | GC-E1 | 2 | planned | — | 配置旋钮体系(首批 20) | — | — | env 调参 proof | `gcconfig.cpp/.h` 等价 | 无需重编译调参 | `src/native/runtime-core/` | M |
 | GC-F1 | 3 | planned | — | handle 分代剪枝 | GC-E1 | — | 按代扫描 proof | `engine_lifecycle.cpp` | 只扫 condemned 代 | `engine_lifecycle.*` | L |
@@ -175,7 +175,7 @@ Phase6: L1 <─ L2（依赖 K 区域化完成 + E1 旋钮 + D1 降级）
 
 ## 9. 当前建议推进顺序
 
-串行优先，前阶段做完再做后阶段（强依赖）。**Phase 1 三项是最高优先且独立**，建议 **GC-B1（已完成，移除核心 stress）→ GC-A1 → GC-C1**。
+串行优先，前阶段做完再做后阶段（强依赖）。**Phase 1 三项均已完成**（GC-B1 移除 stress → GC-A1 全根集 → GC-C1 声明式终止）。下一步进入 **Phase 2**（GC-D1 OOM 降级 + GC-E1 配置旋钮）。
 
 本轮 roadmap 创建后，`recommended_next_child = GC-A1`。
 
