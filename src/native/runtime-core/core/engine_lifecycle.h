@@ -25,6 +25,10 @@ struct GcHandleEntry {
     bool track_resurrection;  // WeakTrackResurrection: defer nullification
                               // until after finalization can resurrect
     bool async_pinned;        // AsyncPinned: strong + pinned for async ops
+    bool points_to_nursery;   // Cached: object_instance's region is the nursery.
+                              // Maintained by GcSetHandleTarget / creation /
+                              // weak forwarding so generation-aware scans can
+                              // prune WITHOUT re-querying RegionManager.
 };
 
 // ABI constants at runtime_core namespace scope (shared across core files).

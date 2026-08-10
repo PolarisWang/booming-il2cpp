@@ -169,9 +169,12 @@ void GcIterateTenuredHandles(void (*callback)(void* object, void* user_data),
         for (auto& kv : s_gc_handle_shards[s]) {
             void* obj = kv.second.object_instance;
             if (obj == nullptr) continue;
-            if (!RegionManager::Instance().IsNurseryPointer(obj)) {
-                callback(obj, user_data);
-            }
+            // Generation-aware prune (align CoreCLR handletable clump pruning):
+            // skip nursery-pointing handles using the cached bit, avoiding a
+            // RegionManager re-query per handle.  The bit is maintained on
+            // creation / GcSetHandleTarget / weak forwarding.
+            if (kv.second.points_to_nursery) continue;
+            callback(obj, user_data);
         }
     }
 }
@@ -188,8 +191,8 @@ void GcProcessWeakHandlesAfterYoungGC() noexcept {
         void* obj = kv.second.object_instance;
         if (obj == nullptr) continue;
 
-        // Only process objects that were in the nursery.
-        if (!RegionManager::Instance().IsNurseryPointer(obj)) continue;
+        // Only process objects that were in the nursery (cached gen-prune).
+        if (!kv.second.points_to_nursery) continue;
 
         // If the nursery object was forwarded (promoted), update the handle
         // to point to the tenured copy.  Otherwise, null the handle (the
@@ -200,8 +203,10 @@ void GcProcessWeakHandlesAfterYoungGC() noexcept {
         if ((first_word & 1u) != 0) {
             void* tenured = reinterpret_cast<void*>(first_word & ~1ull);
             kv.second.object_instance = tenured;
+            kv.second.points_to_nursery = false;  // promoted to old-gen/LOH
         } else {
             kv.second.object_instance = nullptr;
+            kv.second.points_to_nursery = false;
         }
     }
     }
@@ -217,7 +222,8 @@ CHAOS_IL2CPP_UINT64 GcCreateStrongHandle(void* object_instance) noexcept {
     auto* shard_map = &s_gc_handle_shards[HandleShardIndex(handle)];
     auto* shard_mutex = &s_gc_handle_shard_mutexes[HandleShardIndex(handle)];
     std::lock_guard<std::mutex> lock(*shard_mutex);
-    (*shard_map)[handle] = GcHandleEntry{ object_instance, false, false, false, false };
+    (*shard_map)[handle] = GcHandleEntry{ object_instance, false, false, false, false,
+        RegionManager::Instance().IsNurseryPointer(object_instance) };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     return handle;
 }
@@ -228,7 +234,8 @@ CHAOS_IL2CPP_UINT64 GcCreateWeakHandle(void* object_instance) noexcept {
     auto& shard_map = HandleShardMap(handle);
     auto& shard_mutex = HandleShardMutex(handle);
     std::lock_guard<std::mutex> lock(shard_mutex);
-    shard_map[handle] = GcHandleEntry{ object_instance, false, true, false, false };
+    shard_map[handle] = GcHandleEntry{ object_instance, false, true, false, false,
+        RegionManager::Instance().IsNurseryPointer(object_instance) };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     return handle;
 }
@@ -239,7 +246,8 @@ CHAOS_IL2CPP_UINT64 GcCreateLongWeakHandle(void* object_instance) noexcept {
     auto& shard_map = HandleShardMap(handle);
     auto& shard_mutex = HandleShardMutex(handle);
     std::lock_guard<std::mutex> lock(shard_mutex);
-    shard_map[handle] = GcHandleEntry{ object_instance, false, true, true, false };
+    shard_map[handle] = GcHandleEntry{ object_instance, false, true, true, false,
+        RegionManager::Instance().IsNurseryPointer(object_instance) };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     return handle;
 }
@@ -250,7 +258,8 @@ CHAOS_IL2CPP_UINT64 GcCreatePinnedHandle(void* object_instance) noexcept {
     auto& shard_map = HandleShardMap(handle);
     auto& shard_mutex = HandleShardMutex(handle);
     std::lock_guard<std::mutex> lock(shard_mutex);
-    shard_map[handle] = GcHandleEntry{ object_instance, true, false, false, false };
+    shard_map[handle] = GcHandleEntry{ object_instance, true, false, false, false,
+        RegionManager::Instance().IsNurseryPointer(object_instance) };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     GcAddPinnedObject(object_instance);
     return handle;
@@ -262,7 +271,8 @@ CHAOS_IL2CPP_UINT64 GcCreateAsyncPinnedHandle(void* object_instance) noexcept {
     auto& shard_map = HandleShardMap(handle);
     auto& shard_mutex = HandleShardMutex(handle);
     std::lock_guard<std::mutex> lock(shard_mutex);
-    shard_map[handle] = GcHandleEntry{ object_instance, true, false, false, true };
+    shard_map[handle] = GcHandleEntry{ object_instance, true, false, false, true,
+        RegionManager::Instance().IsNurseryPointer(object_instance) };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     GcAddPinnedObject(object_instance);
     return handle;
@@ -308,6 +318,7 @@ void GcSetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id, void* new_target) noexcept
     BgcSatbPreWriteBarrier(&it->second.object_instance);
     BgcRecordRootChange(&it->second.object_instance, old_target);
     it->second.object_instance = new_target;
+    it->second.points_to_nursery = RegionManager::Instance().IsNurseryPointer(new_target);
     if (it->second.pinned && new_target != nullptr) {
         GcAddPinnedObject(new_target);
     }
