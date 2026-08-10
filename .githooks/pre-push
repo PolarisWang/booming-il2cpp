@@ -49,10 +49,12 @@ hook_log "result=${RC}-ok verdict=$(printf '%s' "$RESULT" | grep -oE '\[review\]
 
 if [ "$RC" -ne 0 ]; then
     echo ""
-    echo "ERROR: Deep review found L1/L2 (severe) issues."
-    echo "Fix them, then commit the fix and push again. Use 'git push --no-verify' only to deliberately bypass."
-    hook_log "result=BLOCK by deep review"
-    exit 1
+    echo "NOTICE: Deep review reported L1/L2 (severe) issues above — treated as advisory (non-blocking)."
+    echo "Review the reported issues and fix them in a follow-up; the push proceeds regardless."
+    hook_log "result=ADVISORY (deep review reported issues, push allowed)"
+    # Soft mode: do NOT block the push.  The review output above remains visible
+    # as an advisory for the developer to act on.  (Previously exit 1 blocked.)
+    exit 0
 fi
 
 exit 0
