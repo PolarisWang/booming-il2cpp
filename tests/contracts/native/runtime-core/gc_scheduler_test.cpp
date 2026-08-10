@@ -129,6 +129,33 @@ void TestTotalAllocated() {
              "TotalAllocatedSinceLastGC increases after RecordAllocation");
 }
 
+// ── Test 9: GC-D1 provisional force-blocking ──────────────────────────
+// Under provisional (high-memory-pressure) mode, a full-GC request must
+// yield a BLOCKING FULL (never deferred to BGC/NONE), even in a latency
+// mode that normally prefers the background-collector.
+void TestProvisionalForceBlocking() {
+    TEST("ProvisionalForceBlocking");
+
+    // Restore Interactive (default) latency so the test starts clean.
+    g_gc_scheduler.SetLatencyMode(GcLatencyMode::INTERACTIVE);
+    g_gc_scheduler.SetProvisionalMode(false);
+    g_gc_scheduler.RecordGcCompleted();  // reset cooldown/claim state
+
+    // In LOW_LATENCY + BGC enabled, a full-GC request is normally satisfied by
+    // FULL_BGC (deferred).  Confirm that under provisional it goes blocking FULL.
+    g_gc_scheduler.SetLatencyMode(GcLatencyMode::LOW_LATENCY);
+    g_gc_scheduler.SetProvisionalMode(true);
+    g_gc_scheduler.RequestFullGc();
+    GcCollectionKind kind = g_gc_scheduler.DecideCollection();
+    GC_CHECK(kind == GcCollectionKind::FULL,
+             "provisional + low-latency full-GC request -> blocking FULL (not BGC)");
+
+    // Cleanup: leave provisional OFF so other tests/driver state is unaffected.
+    g_gc_scheduler.SetProvisionalMode(false);
+    g_gc_scheduler.SetLatencyMode(GcLatencyMode::INTERACTIVE);
+    g_gc_scheduler.RecordGcCompleted();
+}
+
 // ── Main ────────────────────────────────────────────────────────────
 int main() {
     puts("GcScheduler basic operation tests");
@@ -142,6 +169,7 @@ int main() {
     TestPageCountGrowth();
     TestRecommendedNurserySize();
     TestTotalAllocated();
+    TestProvisionalForceBlocking();
 
     printf("\nResults: %d tests, %d failures\n", g_tests, g_failures);
     return g_failures > 0 ? 1 : 0;
