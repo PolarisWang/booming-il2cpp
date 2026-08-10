@@ -37,6 +37,7 @@ chaos_native_add_test(test_jit_native
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit"
+    RESOURCE_LOCK jit
 )
 # T4-compiled entries use the JIT register convention (RBX=args, RSI=ret); the
 # x64 asm thunk re-binds these before invoking a compiled entry (see CHAOS_T4_THUNK_ASM).
@@ -100,6 +101,7 @@ chaos_native_add_test(test_jit_gc_slot_map
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit"
+    RESOURCE_LOCK jit
 )
 target_compile_definitions(test_jit_gc_slot_map PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
@@ -113,6 +115,7 @@ chaos_native_add_test(test_jit_osr
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit"
+    RESOURCE_LOCK jit
 )
 target_compile_definitions(test_jit_osr PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
@@ -141,6 +144,7 @@ chaos_native_add_test(test_jit_seh
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit"
+    RESOURCE_LOCK jit
 )
 target_compile_definitions(test_jit_seh PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
@@ -182,6 +186,7 @@ chaos_native_add_test(test_jit_mode
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit"
+    RESOURCE_LOCK jit
 )
 target_compile_definitions(test_jit_mode PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
@@ -197,6 +202,7 @@ chaos_native_add_test(test_jit_pgo
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit;pgo"
+    RESOURCE_LOCK jit
 )
 target_compile_definitions(test_jit_pgo PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
@@ -214,6 +220,7 @@ chaos_native_add_test(test_jit_bench
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit;bench"
+    RESOURCE_LOCK jit
 )
 target_compile_definitions(test_jit_bench PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
@@ -228,6 +235,7 @@ chaos_native_add_test(test_jit_debug_info
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit"
+    RESOURCE_LOCK jit
 )
 target_compile_definitions(test_jit_debug_info PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
