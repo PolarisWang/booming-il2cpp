@@ -12,7 +12,6 @@
 
 #include "gc_region.h"
 #include "gc_stats.h"
-#include "gc_stress.h"
 #include "gc_alloc_stubs.h"
 #include "profile_stats.h"
 
@@ -45,13 +44,6 @@ void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) { return GcAllocateAtomicProfiled
 void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateProfiled");
 
-    // GC Stress mode: force a full GC before allocation.
-    if (GcStressShouldTrigger()) [[unlikely]] {
-        tls_in_gc_stress = true;
-        chaos_gc_collect();
-        tls_in_gc_stress = false;
-    }
-
     void* ptr = NurseryAllocate(size);
     if (ptr) {
         GcRecordAlloc(size, size > kMaxTlabAlloc);
@@ -66,13 +58,6 @@ void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size) {
 
 void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateAtomicProfiled");
-
-    // GC Stress mode: force a full GC before allocation.
-    if (GcStressShouldTrigger()) [[unlikely]] {
-        tls_in_gc_stress = true;
-        chaos_gc_collect();
-        tls_in_gc_stress = false;
-    }
 
     void* ptr = NurseryAllocateAtomic(size);
     if (ptr) {

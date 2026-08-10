@@ -19,7 +19,6 @@
 
 #include "gc/gc_region.h"
 #include "gc/gc_stats.h"
-#include "gc/gc_stress.h"
 #include "profile_stats.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -34,12 +33,6 @@ extern thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_bytes;
 /// No PROFILE_SCOPE, no global atomics, no ETW — pure TLAB bump + zero-init.
 /// ~30ns/alloc (SHIP) vs ~78ns old out-of-line path.
 CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFast(CHAOS_IL2CPP_SIZE size) {
-    if (GcStressShouldTrigger()) [[unlikely]] {
-        tls_in_gc_stress = true;
-        chaos_gc_collect();
-        tls_in_gc_stress = false;
-    }
-
     void* ptr = NurseryAllocate(size);
     if (ptr) {
         tls_alloc_fast_count++;
@@ -55,12 +48,6 @@ CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFast(CHAOS_IL2CPP_SIZE size) {
 
 /// Fast-path GcAllocateAtomic — same as GcAllocateFast but for pointer-free data.
 CHAOS_IL2CPP_FORCEINLINE void* GcAllocateAtomicFast(CHAOS_IL2CPP_SIZE size) {
-    if (GcStressShouldTrigger()) [[unlikely]] {
-        tls_in_gc_stress = true;
-        chaos_gc_collect();
-        tls_in_gc_stress = false;
-    }
-
     void* ptr = NurseryAllocateAtomic(size);
     if (ptr) {
         tls_alloc_fast_count++;
@@ -77,12 +64,6 @@ CHAOS_IL2CPP_FORCEINLINE void* GcAllocateAtomicFast(CHAOS_IL2CPP_SIZE size) {
 /// Fast-path GcAllocate WITHOUT zero-init — for callers that immediately
 /// write every byte (e.g., CHAOS_IL2CPP_MALLOC_GC for array allocations).
 CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFastNoZero(CHAOS_IL2CPP_SIZE size) {
-    if (GcStressShouldTrigger()) [[unlikely]] {
-        tls_in_gc_stress = true;
-        chaos_gc_collect();
-        tls_in_gc_stress = false;
-    }
-
     void* ptr = NurseryAllocateNoZero(size);
     if (ptr) {
         tls_alloc_fast_count++;
@@ -98,12 +79,6 @@ CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFastNoZero(CHAOS_IL2CPP_SIZE size) {
 
 /// Fast-path GcAllocateAtomic WITHOUT zero-init (atomic/pointer-free variant).
 CHAOS_IL2CPP_FORCEINLINE void* GcAllocateAtomicFastNoZero(CHAOS_IL2CPP_SIZE size) {
-    if (GcStressShouldTrigger()) [[unlikely]] {
-        tls_in_gc_stress = true;
-        chaos_gc_collect();
-        tls_in_gc_stress = false;
-    }
-
     void* ptr = NurseryAllocateAtomicNoZero(size);
     if (ptr) {
         tls_alloc_fast_count++;

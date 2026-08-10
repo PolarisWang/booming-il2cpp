@@ -11,3 +11,4 @@
 | [20260525-hotupdate-dml-pipeline](20260525-hotupdate-dml-pipeline/STATUS.md) | roadmap | planning | 2026-05-25 | 修复 foundation-dll hotupdate DML 管线 — 使 hotupdate 验证走真实 interpreter 路径 | true |
 | [foundation-dll-phase-1-corelib](foundation-dll-phase-1-corelib/STATUS.md) | plan | in-progress | 2026-05-05 | Phase 1 System.Private.CoreLib 全量 il2cpp 开发 | false |
 | [runtime-external-reflection-type](runtime-external-reflection-type/STATUS.md) | plan | completed | 2026-05-05 | Runtime External 依赖实现 — Reflection/Type + Exception | false |
+| [gc-align-coreclr](gc-align-coreclr/STATUS.md) | roadmap | roadmap | 2026-08-10 | 代码级对齐 CoreCLR GC；next=GC-A1(young GC 全根集扫描) | true |

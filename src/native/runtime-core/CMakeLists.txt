@@ -162,8 +162,6 @@ add_library(chaos_runtime_core STATIC
     gc/gc_gen1.cpp
     gc/gc_stats.h
     gc/gc_stats.cpp
-    gc/gc_stress.h
-    gc/gc_stress.cpp
     gc/gc_worker_pool.h
     gc/gc_worker_pool.cpp
     gc/gc_bgc.h
@@ -233,7 +231,6 @@ endif()
 option(CHAOS_IL2CPP_GC_BGC          "Enable Background GC (BGC) concurrent mark-sweep"     ON)
 option(CHAOS_IL2CPP_GC_PARALLEL_MARK "Enable parallel marking in GC"                        ON)
 option(CHAOS_IL2CPP_GC_EVENTS       "Enable GC event tracing and callbacks"                 ON)
-option(CHAOS_IL2CPP_GC_STRESS       "Enable GC stress testing mode (debug/validation only)" OFF)
 option(CHAOS_IL2CPP_GC_LARGE_PAGES  "Enable large page (2MB) support (requires SeLockMemoryPrivilege)" ON)
 option(CHAOS_IL2CPP_GC_SERVER      "Enable Server GC mode with per-NUMA-node heaps"              ON)
 
@@ -252,9 +249,6 @@ if(CHAOS_IL2CPP_GC_PARALLEL_MARK)
 endif()
 if(CHAOS_IL2CPP_GC_EVENTS)
     target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_EVENTS=1)
-endif()
-if(CHAOS_IL2CPP_GC_STRESS)
-    target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_STRESS=1)
 endif()
 if(CHAOS_IL2CPP_GC_LARGE_PAGES)
     target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_LARGE_PAGES=1)

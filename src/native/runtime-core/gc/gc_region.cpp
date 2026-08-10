@@ -18,8 +18,8 @@
 #include "gc_loh.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
-#include "gc_stress.h"
 #include "gc_api.h"
+#include "gc_helpers.h"
 #include "gc_young_collector.h"
 #include "memory_domain.h"
 #include "thread_state.h"
@@ -89,13 +89,6 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
 
     if (size > kMaxTlabAlloc) {
         ProfileRecordLargeObjAlloc(static_cast<int64_t>(size));
-    }
-
-    // GC Stress mode: force a full GC every kStressInterval allocations.
-    if (GcStressShouldTrigger()) [[unlikely]] {
-        tls_in_gc_stress = true;
-        chaos_gc_collect();
-        tls_in_gc_stress = false;
     }
 
     // Flush TLS allocation counter to scheduler before making any GC decision.
@@ -302,13 +295,6 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
 
     if (size > kMaxTlabAlloc) {
         ProfileRecordLargeObjAlloc(static_cast<int64_t>(size));
-    }
-
-    // GC Stress mode: force a full GC.
-    if (GcStressShouldTrigger()) [[unlikely]] {
-        tls_in_gc_stress = true;
-        chaos_gc_collect();
-        tls_in_gc_stress = false;
     }
 
     FlushTlsAllocCounter();
