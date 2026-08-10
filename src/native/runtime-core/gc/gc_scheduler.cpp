@@ -297,6 +297,15 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
                        mode == GcLatencyMode::SUSTAINED_LOW_LATENCY);
     auto& bgc = BgcController::Instance();
 
+    // Provisional (high-memory-pressure) mode: align CoreCLR's provisional
+    // degradation (gcpriv.h:4324) — under memory pressure never defer to BGC
+    // or NONE; force a blocking STOP-THE-WORLD FULL so memory is reclaimed
+    // promptly instead of waiting on the concurrent background mark.
+    bool provisional = provisional_mode_.load(std::memory_order_acquire);
+    if (provisional) {
+        prefer_bgc = false;
+    }
+
     // 1. Full GC requested by another thread?
     if (full_gc_requested_.load(std::memory_order_acquire)) {
         if (prefer_bgc && g_bgc_enabled && !bgc.IsBusy()) {
@@ -308,10 +317,10 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
     // 2. Page count growth threshold exceeded?
     // Catches rapid page allocation bursts before the byte-based trigger reacts.
     if (page_count_growth_.load(std::memory_order_relaxed) >= kMaxPageGrowthThreshold) {
-        if (g_bgc_enabled && !bgc.IsBusy()) {
+        if (g_bgc_enabled && !bgc.IsBusy() && !provisional) {
             return GcCollectionKind::FULL_BGC;
         }
-        if (prefer_bgc) {
+        if (prefer_bgc && !provisional) {
             return GcCollectionKind::NONE;  // wait for BGC rather than STW
         }
         return GcCollectionKind::FULL;

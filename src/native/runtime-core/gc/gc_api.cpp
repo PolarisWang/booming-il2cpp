@@ -92,8 +92,10 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
         void* ptr = retry_alloc(retry_context);
         if (ptr != nullptr) {
             // Allocation succeeded — memory is available again; clear the
-            // attribution flag so subsequent OOMs are not miscategorised.
+            // attribution flag and leave provisional mode so subsequent
+            // allocations resume the low-latency/deferred shape.
             s_recent_gc_mem_failure.store(false, std::memory_order_relaxed);
+            G_Scheduler().SetProvisionalMode(false);
             CHAOS_IL2CPP_LOG_INFO("GC_API", "OOM recovery: allocation succeeded after full GC");
             tls_in_oom_handler = false;
             return ptr;
@@ -105,17 +107,18 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
         void* reserve_ptr = G_OldGen().AllocateFromEmergencyReserve(size);
         if (reserve_ptr != nullptr) {
             s_recent_gc_mem_failure.store(false, std::memory_order_relaxed);
+            G_Scheduler().SetProvisionalMode(false);
             CHAOS_IL2CPP_LOG_INFO("GC_API", "OOM recovery: allocated from emergency reserve");
             tls_in_oom_handler = false;
             return reserve_ptr;
         }
     }
 
-    // Step 4: All attempts failed — fire OOM event.
-    // Mark this as a TRUE memory-exhaustion (we genuinely could not obtain any
-    // memory after GC + emergency reserve), and report the failure size clamped
-    // to a half-budget for a stable/expected OOM magnitude (CoreCLR oom_budget).
+    // Step 4: All attempts failed — fire OOM event.  Enter provisional mode:
+    // subsequent GCs are forced blocking (never deferred to BGC) so memory is
+    // reclaimed promptly under pressure (align CoreCLR provisional degradation).
     s_recent_gc_mem_failure.store(true, std::memory_order_relaxed);
+    G_Scheduler().SetProvisionalMode(true);
     CHAOS_IL2CPP_SIZE report_size =
         (size > kOomReportHalfBudget) ? kOomReportHalfBudget : size;
     CHAOS_IL2CPP_LOG_ERROR_M("GC_API",

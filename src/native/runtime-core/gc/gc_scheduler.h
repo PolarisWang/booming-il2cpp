@@ -316,6 +316,18 @@ public:
         soft_limit_.store(bytes, std::memory_order_release);
     }
 
+    /// Whether provisional (high-memory-pressure) degradation mode is active.
+    bool InProvisionalMode() const noexcept {
+        return provisional_mode_.load(std::memory_order_acquire);
+    }
+
+    /// Enter/leave provisional (high-memory-pressure) degradation mode.
+    /// When active, GC degrades to forced-blocking + no old-gen expansion
+    /// (align CoreCLR gcpriv.h:4324 provisional mode).
+    void SetProvisionalMode(bool on) noexcept {
+        provisional_mode_.store(on, std::memory_order_release);
+    }
+
     /// Check whether allocating @a additional_bytes would exceed the hard limit.
     /// Returns true if the hard limit is set and would be exceeded.
     bool ExceedsHardLimit(CHAOS_IL2CPP_SIZE additional_bytes = 0) const noexcept {
@@ -535,8 +547,6 @@ private:
     /// Accumulated by AddMemoryPressure, decremented by RemoveMemoryPressure.
     std::atomic<CHAOS_IL2CPP_INT64> external_memory_pressure_{0};
 
-    // ── Hard / soft memory limit state ─────────────────────────
-
     /// Hard memory limit in bytes (0 = disabled).
     /// Set from CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB at startup.
     std::atomic<CHAOS_IL2CPP_SIZE> hard_limit_{0};
@@ -544,6 +554,14 @@ private:
     /// Soft memory limit in bytes (0 = disabled).
     /// Set from CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB at startup.
     std::atomic<CHAOS_IL2CPP_SIZE> soft_limit_{0};
+
+    /// Provisional (high-memory-pressure) degradation flag — aligns CoreCLR's
+    /// "provisional mode" (gcpriv.h:4324).  When set, the GC degrades to a
+    /// predictable, memory-conserving shape: collections are forced toward
+    /// blocking (not deferred to BGC) and old-gen expansion is suppressed.
+    /// Entered when the hard limit is breached; exits when memory recovers.
+    /// Settable via public InProvisionalMode()/SetProvisionalMode().
+    std::atomic<bool> provisional_mode_{false};
 
     /// Minimum absolute threshold for external memory pressure triggering.
     /// Below this, external pressure alone won't trigger a full GC.
