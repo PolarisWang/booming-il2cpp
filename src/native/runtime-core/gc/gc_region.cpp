@@ -849,10 +849,15 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
             reinterpret_cast<uintptr_t>(r->end));
     }
 
-    // GC-K2a: initialize the region's generation.  Nursery → young(0);
-    // everything mature (tenured/LOH/Domain/POH/Gen1-eligible) → old(2).
+    // GC-K2a + K3: initialize the region's generation.  Nursery AND Gen1
+    // (survivor) are YOUNG-side regions — young GC scans them precisely
+    // (Phase 2 covers nursery; Gen1's cross-gen refs are rescanned), so the
+    // write barrier must treat them as gen0 (skip card: contents are scanned
+    // wholesale).  Everything mature (tenured/LOH/Domain/POH) → old(2).
     // Keep the skewed region→gen table in sync for O(1) write-barrier lookups.
-    uint8_t region_gen = (kind == RegionKind::REGION_NURSERY) ? kRegionGenYoung : kRegionGenOld;
+    uint8_t region_gen = (kind == RegionKind::REGION_NURSERY ||
+                          kind == RegionKind::REGION_GEN1)
+                             ? kRegionGenYoung : kRegionGenOld;
     r->gen = region_gen & kRegionGenMask;
     EnsureRegionGenCoverage(reinterpret_cast<uintptr_t>(r->begin));
     EnsureRegionGenCoverage(reinterpret_cast<uintptr_t>(r->end) - 1);
