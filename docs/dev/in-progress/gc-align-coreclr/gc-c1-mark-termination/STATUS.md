@@ -45,7 +45,7 @@ created_by: main-agent
 
 ## 已提交
 
-- commit 待填（本文件随代码提交后回填）
+- commit `f7850324e`（fix(gc): declarative parallel-mark termination）
 
 ## Exit Criteria
 
