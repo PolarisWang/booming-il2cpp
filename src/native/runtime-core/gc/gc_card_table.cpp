@@ -48,6 +48,37 @@ extern "C" void chaos_gc_dirty_card(const void* obj) noexcept {
     DirtyCard(obj);
 }
 
+// GC-K2b: generation-aware write barrier.  Faithfully replicates CoreCLR's
+// region write-barrier short-circuits (JitHelpers_FastWriteBarriers.asm
+// Region64): only set a card when dst is non-gen0 AND the stored ref is in a
+// strictly-younger (older-generation writing younger, or gen0 ref into old)
+// region than dst.  Reading both operands' region generation lets gen0->gen0
+// and same/mature-generation writes skip the card entirely — the core saving
+// of the region-based barrier.  Cross-platform: pure C++ (addr>>shift + bit
+// ops), no asm, no OS calls.  The legacy single-arg chaos_gc_dirty_card(dst)
+// remains for callers without a ref operand (conservative: non-gen0 always
+// mark).  ref==nullptr is a degenerate store and never needs a card.
+extern "C" void chaos_gc_dirty_card_dst_ref(const void* dst, const void* ref) noexcept {
+    if (dst == nullptr) return;
+    uintptr_t dst_addr = reinterpret_cast<uintptr_t>(dst);
+    uint8_t dst_gen = GetRegionGen(dst_addr);
+    // 1. dst in gen0: young-generation contents are scanned wholesale — no card
+    //    needed, regardless of what is written into them.
+    if (dst_gen == kRegionGenYoung) return;
+    // 2. ref outside managed/NULL: not a managed pointer store — no cross-gen
+    //    reference to record.  (GetRegionGen of an unmapped addr returns the
+    //    conservative default kRegionGenOld, so an out-of-heap ref is treated
+    //    as mature → the ref_gen>=dst_gen test below skips — matching CoreCLR's
+    //    out-of-range early-out.)
+    if (ref == nullptr) return;
+    uint8_t ref_gen = GetRegionGen(reinterpret_cast<uintptr_t>(ref));
+    // 3. Faithful CoreCLR condition: ref.gen < dst.gen (an older region wrote a
+    //    young-object reference into dst).  Same-mature (ref.gen >= dst.gen)
+    //    writes need no card.
+    if (ref_gen >= dst_gen) return;
+    DirtyCard(dst);
+}
+
 void GcRegisterHeapRange(uintptr_t start, uintptr_t end) {
     if (start >= end) return;
 
