@@ -1,5 +1,6 @@
 #include "gc_stats.h"
 #include "gc_region.h"
+#include "gc_heap.h"
 #include "core/gc_alloc_stubs.h"
 
 #include <chaos/log.h>
@@ -55,6 +56,7 @@ GcSnapshot GcGetSnapshot() noexcept {
     // GC sequence number and last generation.
     snap.gc_index = g_gc_stats.gc_index.load(std::memory_order_acquire);
     snap.last_gc_generation = g_gc_stats.last_gc_generation.load(std::memory_order_acquire);
+    snap.last_trigger_reason = static_cast<int32_t>(G_Scheduler().LastTriggerReason());
 
     // Derived pause totals.
     snap.young_pause_ns_total = g_gc_stats.young_pause_ns.load(std::memory_order_acquire);

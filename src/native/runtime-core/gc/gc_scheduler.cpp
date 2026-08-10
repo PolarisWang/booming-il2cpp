@@ -308,6 +308,8 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
 
     // 1. Full GC requested by another thread?
     if (full_gc_requested_.load(std::memory_order_acquire)) {
+        SetLastTriggerReason(
+            provisional ? GcTriggerReason::PROVISIONAL : GcTriggerReason::EXPLICIT_REQUEST);
         if (prefer_bgc && g_bgc_enabled && !bgc.IsBusy()) {
             return GcCollectionKind::FULL_BGC;
         }
@@ -317,6 +319,8 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
     // 2. Page count growth threshold exceeded?
     // Catches rapid page allocation bursts before the byte-based trigger reacts.
     if (page_count_growth_.load(std::memory_order_relaxed) >= kMaxPageGrowthThreshold) {
+        SetLastTriggerReason(
+            provisional ? GcTriggerReason::PROVISIONAL : GcTriggerReason::PAGE_GROWTH);
         if (g_bgc_enabled && !bgc.IsBusy() && !provisional) {
             return GcCollectionKind::FULL_BGC;
         }
@@ -378,6 +382,13 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
         if (prefer_bgc) {
             return GcCollectionKind::NONE;
         }
+        // External pressure triggering full GC?
+        bool ext_triggered = (ext_pressure > 0 && heap_est > 0 &&
+            static_cast<CHAOS_IL2CPP_INT64>(alloc_full) > ext_pressure);
+        SetLastTriggerReason(
+            ext_triggered
+                ? (provisional ? GcTriggerReason::PROVISIONAL : GcTriggerReason::EXTERNAL_PRESSURE)
+                : (provisional ? GcTriggerReason::PROVISIONAL : GcTriggerReason::ALLOC_PRESSURE));
         return GcCollectionKind::FULL;
     }
 

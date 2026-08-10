@@ -90,6 +90,18 @@ enum class GcCollectionKind {
     FULL_BGC = 3,   // Background concurrent mark (low-latency)
 };
 
+/// Why a full GC was triggered — aligns CoreCLR gcrecord.h per-GC reason
+/// tracking so tooling can attribute pause/latency to the trigger.
+enum class GcTriggerReason : uint8_t {
+    NONE = 0,             // Unknown / nominal triggering
+    ALLOC_PRESSURE = 1,   // Allocation exceeded full-GC threshold
+    PAGE_GROWTH = 2,      // Rapid page-count growth burst
+    EXPLICIT_REQUEST = 3, // GC.Collect() / RequestFullGc from another thread
+    HARD_LIMIT = 4,       // Hard-memory-limit breached
+    EXTERNAL_PRESSURE = 5,// External (unmanaged) memory pressure
+    PROVISIONAL = 6,      // Provisional (high-memory) degradation
+};
+
 class GcScheduler {
 public:
     GcScheduler() = default;
@@ -328,6 +340,16 @@ public:
         provisional_mode_.store(on, std::memory_order_release);
     }
 
+    /// Reason the most recent full GC was triggered (diagnostics/tooling).
+    GcTriggerReason LastTriggerReason() const noexcept {
+        return static_cast<GcTriggerReason>(last_trigger_reason_.load(std::memory_order_acquire));
+    }
+
+    /// Record the reason a full GC was triggered (DecideCollection, const).
+    void SetLastTriggerReason(GcTriggerReason r) const noexcept {
+        last_trigger_reason_.store(static_cast<uint8_t>(r), std::memory_order_release);
+    }
+
     /// Check whether allocating @a additional_bytes would exceed the hard limit.
     /// Returns true if the hard limit is set and would be exceeded.
     bool ExceedsHardLimit(CHAOS_IL2CPP_SIZE additional_bytes = 0) const noexcept {
@@ -512,6 +534,11 @@ private:
 
     // Full GC request flag (set by any thread, checked at safepoint).
     std::atomic<bool> full_gc_requested_{false};
+
+    /// Last full-GC trigger reason (diagnostics; see GcTriggerReason).  Stored
+    /// as an integral (some ABIs reject std::atomic over enum class).  Mutable
+    /// so DecideCollection (const) can record it atomically.
+    mutable std::atomic<uint8_t> last_trigger_reason_{ static_cast<uint8_t>(GcTriggerReason::NONE) };
 
     // Estimated heap size (updated after full GC).
     std::atomic<CHAOS_IL2CPP_SIZE> estimated_heap_size_{kDefaultNurserySize};

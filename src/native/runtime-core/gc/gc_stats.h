@@ -160,6 +160,9 @@ struct GcSnapshot {
     uint64_t gc_index;
     int32_t last_gc_generation;
 
+    /// Reason the most recent full GC was triggered (see GcTriggerReason).
+    int32_t last_trigger_reason;
+
     // Histogram
     uint64_t pause_histogram[kGcPauseBucketCount];
 };
