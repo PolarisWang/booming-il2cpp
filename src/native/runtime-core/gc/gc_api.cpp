@@ -44,6 +44,18 @@ namespace {
 /// Set to true while HandleOomCondition is executing, checked on entry.
 thread_local bool tls_in_oom_handler = false;
 
+/// Align CoreCLR allocation.cpp:2063-2070 (OOOM attribution): distinguishes a
+/// TRUE memory-exhaustion OOM (a reserve/commit genuinely failed during this
+/// OOM escalation) from a transient/budget misreport.  Set when the emergency
+/// reserve also fails (i.e. we truly could not obtain memory), cleared on any
+/// successful allocation within the ladder.  Read-only in Step 4.
+static std::atomic<bool> s_recent_gc_mem_failure{false};
+
+/// Half-budget clamp for the OOM failure report (align CoreCLR
+/// allocation.cpp:2058-2061 oom_budget: reported size = min_alloc_budget/2).
+/// CRAG analog of dd_min_size(gen0)/2 uses the nursery minimum (64 KB) / 2.
+static constexpr CHAOS_IL2CPP_SIZE kOomReportHalfBudget = (64 * 1024) / 2;  // 32 KB
+
 void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
                          CHAOS_IL2CPP_SIZE size) noexcept {
     // Re-entrancy guard: if called from within a GC promotion path,
@@ -79,6 +91,9 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
     if (retry_alloc) {
         void* ptr = retry_alloc(retry_context);
         if (ptr != nullptr) {
+            // Allocation succeeded — memory is available again; clear the
+            // attribution flag so subsequent OOMs are not miscategorised.
+            s_recent_gc_mem_failure.store(false, std::memory_order_relaxed);
             CHAOS_IL2CPP_LOG_INFO("GC_API", "OOM recovery: allocation succeeded after full GC");
             tls_in_oom_handler = false;
             return ptr;
@@ -89,6 +104,7 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
     if (gc_ran) {
         void* reserve_ptr = G_OldGen().AllocateFromEmergencyReserve(size);
         if (reserve_ptr != nullptr) {
+            s_recent_gc_mem_failure.store(false, std::memory_order_relaxed);
             CHAOS_IL2CPP_LOG_INFO("GC_API", "OOM recovery: allocated from emergency reserve");
             tls_in_oom_handler = false;
             return reserve_ptr;
@@ -96,8 +112,16 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
     }
 
     // Step 4: All attempts failed — fire OOM event.
-    CHAOS_IL2CPP_LOG_ERROR_M("GC_API", "OOM: all recovery attempts failed for size={0}",
-        static_cast<unsigned long long>(size));
+    // Mark this as a TRUE memory-exhaustion (we genuinely could not obtain any
+    // memory after GC + emergency reserve), and report the failure size clamped
+    // to a half-budget for a stable/expected OOM magnitude (CoreCLR oom_budget).
+    s_recent_gc_mem_failure.store(true, std::memory_order_relaxed);
+    CHAOS_IL2CPP_SIZE report_size =
+        (size > kOomReportHalfBudget) ? kOomReportHalfBudget : size;
+    CHAOS_IL2CPP_LOG_ERROR_M("GC_API",
+        "OOM: all recovery attempts failed (<true-mem-exhaustion> requested={0} reported={1})",
+        static_cast<unsigned long long>(size),
+        static_cast<unsigned long long>(report_size));
     GcEtwFireGcOom();
     tls_in_oom_handler = false;
     return nullptr;
