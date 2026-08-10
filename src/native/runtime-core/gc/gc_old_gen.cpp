@@ -3215,7 +3215,14 @@ void MarkSweepOldGen::BgcSweep() {
         {
             static constexpr int kMinPagesPerPoolNode = 4;
             auto total = static_cast<int>(page_pool_.size());
-            if (total > kMaxPoolSize) {
+            // Under provisional (high-memory-pressure) mode, aggressively return
+            // pooled pages to the OS instead of holding the committed pool
+            // (align CoreCLR regions_segments.cpp:1386-1450 memory-pressure
+            // decommit).  Effective cap drops to 0 so all unlinked 100%-free
+            // pages are released.  Safe because this runs at a STW safepoint
+            // and the pool pages are already unlinked from page_array_.
+            int effective_cap = G_Scheduler().InProvisionalMode() ? 0 : kMaxPoolSize;
+            if (total > effective_cap) {
                 // Count pages per NUMA node.
                 std::unordered_map<int, int> per_node;
                 for (auto& e : page_pool_) {
@@ -3231,9 +3238,9 @@ void MarkSweepOldGen::BgcSweep() {
                     per_node_keep[node] = keep;
                     total_keep += keep;
                 }
-                // If total_keep > kMaxPoolSize, cap proportionally.
-                if (total_keep > kMaxPoolSize) {
-                    float ratio = static_cast<float>(kMaxPoolSize) / total_keep;
+                // If total_keep > effective_cap, cap proportionally.
+                if (effective_cap > 0 && total_keep > effective_cap) {
+                    float ratio = static_cast<float>(effective_cap) / total_keep;
                     total_keep = 0;
                     for (auto& [node, count] : per_node) {
                         int keep = std::max(kMinPagesPerPoolNode,
@@ -3242,7 +3249,7 @@ void MarkSweepOldGen::BgcSweep() {
                         total_keep += keep;
                     }
                 }
-                int to_remove = total - kMaxPoolSize;
+                int to_remove = total - effective_cap;
                 int removed = 0;
 
                 // Remove excess: iterate pool from back, skipping kept pages.
