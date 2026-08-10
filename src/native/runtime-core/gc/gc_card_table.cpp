@@ -28,17 +28,21 @@ std::atomic<size_t> g_card_bundle_size{0};
 /// Bytes needed = (seg_count * kBytesPerSegment) >> kCardBundleShift, /8.
 /// Called under the card-table lock from GcRegisterHeapRange.
 static void EnsureCardBundleCoverage(size_t seg_count) noexcept {
+    // Pre-allocate the bundle ONCE to a fixed, generous capacity and never
+    // reallocate afterwards.  1 bit covers 2 MB, so covering a large heap is
+    // tiny (e.g. 64 GB -> 64 GB / 2 MB / 8 = 4 KB).  Keeping g_card_bundle a
+    // stable pointer after init is critical: CardBundleSet runs on the hot
+    // DirtyCard write path and may be concurrent with GC/setup — a realloc
+    // under that traffic would be a use-after-free.
+    if (g_card_bundle != nullptr) return;   // already allocated once; never realloc
     size_t covered_bytes = seg_count * kSegmentCoverage;    // kSegmentCoverage = 64KB
     size_t bundle_bits  = (covered_bytes >> kCardBundleShift) + 1;
     size_t need_bytes   = (bundle_bits + 7) >> 3;
-    size_t have_bytes   = g_card_bundle_size.load(std::memory_order_relaxed);
-    if (need_bytes <= have_bytes) return;
-    size_t cap = have_bytes == 0 ? 256 : have_bytes;
-    while (cap < need_bytes) cap *= 2;
-    auto* nb = static_cast<uint8_t*>(std::realloc(g_card_bundle, cap));
-    if (nb == nullptr) return;
-    if (have_bytes < cap) std::memset(nb + have_bytes, 0, cap - have_bytes);
-    g_card_bundle = nb;
+    // Round up to a comfortable, fixed floor (covers growth without realloc).
+    size_t cap = need_bytes;
+    if (cap < 4096) cap = 4096;   // ≥ 4 KB => covers ≥ 64 GB of heap
+    g_card_bundle = static_cast<uint8_t*>(std::calloc(1, cap));
+    if (g_card_bundle == nullptr) return;
     g_card_bundle_size.store(cap, std::memory_order_release);
 }
 
