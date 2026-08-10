@@ -415,35 +415,36 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
         }
     }
 
-    // ── Phase 0: Conservative stack root scan ──
-    // Scan only the current thread's stack for nursery pointers to fix up
-    // stack-local GC handles after promotion.  This runs inline with the
-    // mutator thread that triggered the allocation (not at a STW safepoint),
-    // so only the current thread's stack is guaranteed consistent.
-    // We do NOT use GcScanAllThreadRoots here because that function applies
-    // a g_heap_base filter that may not cover nursery region addresses —
-    // nursery is allocated via RegionManager with separate ranges that can
-    // fall below the old-gen heap base.
+    // ── Phase 0: All-thread conservative + precise stack root scan ──
+    // Scan the stacks of ALL suspended threads for nursery pointers and
+    // promote them, fixing up stack-local references after promotion.
+    //
+    // GcYoungCollection is always invoked under a global STW safepoint
+    // (all callers in gc_region.cpp:201/217/362 + gc_api.cpp + gc_coordinator
+    // acquire RequestGlobalSafepoint first), so every managed thread's stack
+    // is frozen and consistent here.  Previous versions scanned only the
+    // current thread's stack — other suspended threads' stacks holding
+    // nursery references were invisible, so their objects could be collected
+    // while still referenced -> use-after-free.  We now scan all threads via
+    // GcScanAllThreadRoots (which both conservatively scans every stack AND
+    // precisely scans registered T4 frames via GcSlotMap), promoting any
+    // nursery pointer found and writing the tenured target back into the slot.
     {
-        CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase0_StackRoots");
-        auto* current_thread = threading::GetCurrentThread();
-        if (current_thread != nullptr) {
-            char* scan_start = static_cast<char*>(current_thread->stack_limit);
-            char* scan_end   = static_cast<char*>(current_thread->stack_base);
-            uintptr_t start_aligned = (reinterpret_cast<uintptr_t>(scan_start) + sizeof(void*) - 1)
-                & ~static_cast<uintptr_t>(sizeof(void*) - 1);
-            uintptr_t end_aligned = reinterpret_cast<uintptr_t>(scan_end)
-                & ~static_cast<uintptr_t>(sizeof(void*) - 1);
-            for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
-                void* val = *reinterpret_cast<void**>(slot);
+        CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase0_AllThreadStackRoots");
+        struct RootScavengeCtx { YoungCollectionResult* result; } scavenge_ctx{ &result };
+        threading::GcScanAllThreadRoots(
+            [](void* root_addr, bool /*is_interior*/, void* user_data) {
+                auto* slot = static_cast<void**>(root_addr);
+                void* val = *slot;
                 if (val != nullptr && IsInNursery(val)) {
-                    void* tenured = GcScavengeObjectKnownNursery(val, &result);
+                    auto* r = static_cast<RootScavengeCtx*>(user_data)->result;
+                    void* tenured = GcScavengeObjectKnownNursery(val, r);
                     if (tenured != nullptr && tenured != val) {
-                        *reinterpret_cast<void**>(slot) = tenured;
+                        *slot = tenured;
                     }
                 }
-            }
-        }
+            },
+            &scavenge_ctx);
     }
 
     // ── Phase 1: Scan dirty cards for old→young cross-gen references ──

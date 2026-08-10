@@ -13,6 +13,7 @@
 #include "gc_static_roots.h"
 #include "gc_card_table.h"
 #include "gc_heap_manager.h"
+#include "gc_young_collector.h"
 #include "generated_code_compat.h"  // chaos_managed_exception for Thread.Abort throw
 
 #include "forbid_suspend.h"
@@ -625,12 +626,19 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
             & ~static_cast<uintptr_t>(sizeof(void*) - 1);
 
         // ── Phase 1: Full-stack conservative scan ─────────────────
+        // Pre-filter candidates: keep the cheap old-gen-base fast path, but
+        // ALSO accept nursery pointers that fall below g_heap_base (old-gen
+        // base is NOT the whole-heap lower bound — nursery regions are
+        // allocated separately via RegionManager and can sit below it).
+        // The mark phase caller performs the authoritative GC-heap-membership
+        // test, so this pre-filter only decides "worth reporting as a candidate".
         for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
             auto* val_ptr = reinterpret_cast<void**>(slot);
             if (auto* read = static_cast<void*>(
                     chaos::il2cpp::common::AsanReadPtrNoCheck(val_ptr));
                 read != nullptr &&
-                reinterpret_cast<uintptr_t>(read) >= g_heap_base) {
+                (reinterpret_cast<uintptr_t>(read) >= g_heap_base ||
+                 IsInNursery(read))) {
                 s_callback(reinterpret_cast<void*>(slot), /*is_interior=*/false, s_user_data);
             }
         }
