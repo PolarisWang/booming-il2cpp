@@ -71,26 +71,24 @@ completed_batches: []
 - 2026-08-10：创建本 roadmap（v1-01）。分析了 `D:\OpenSource\dotnet\runtime\src\coreclr\gc\`（~79,400 行）与 CRAG GC（~18,750 行）的核心差异，识别 12 项欠缺功能，按 P0/P1/区域化重构排列为 6 阶段 16 子任务。
 - 2026-08-10：**Phase 1 全部完成**（GC-B1 `6659812d4` / GC-A1 `e4dae1f97` / GC-C1 `f7850324e` + 两个 pre-existing 测试修复 `f5ceb0072`/`b9311d2e9`）。
 - 2026-08-10：**Phase 2 GC-E1 完成**（`589baadfd` 配置旋钮，跨平台 env + AOT/JIT API）。
-- 2026-08-10：**Phase 3 GC-G1 完成**（`10608b337`）：Dependent 运行期收敛（去 3 轮 cap，深链不丢，MarkObject 幂等保证终止）。验证 handle 11/11 等 0 回归。
+- 2026-08-10：**Phase 3 GC-G1 完成**（`10608b337`：Dependent 运行期收敛）。
+- 2026-08-10：**Phase 3 GC-F1 完成**（`b6333ae54`：handle 分代剪枝，per-handle nursery bit 短路，免 region 查询）。
 
 ## latest_stop_point
 
-- Phase 1 + Phase 2 + Phase 3(GG1) 完成。GC-G1 已提交。Phase 3 剩 GC-F1(handle 代剪枝)/GC-H1(事件+原因)。
+- Phase 1/2 + Phase 3(GG1/F1) 完成。Phase 3 剩 GC-H1（事件+原因位图）。
 
 ## 进度（截至 2026-08-10）
 
 | 阶段 | 子任务 | 状态 |
 |------|--------|------|
-| Phase 1 | GC-B1 / GC-A1 / GC-C1 | ✅ 完成 |
-| Phase 2 | GC-E1 / GC-D1 | ✅ 完成 |
-| Phase 3 | GC-G1 | ✅ 完成 |
-| Phase 3 | GC-F1（handle 代剪枝，依赖 GC-E1） | ⬜ |
-| Phase 3 | GC-H1（事件+原因位图） | ⬜ |
+| Phase 1 | GC-B1 / GC-A1 / GC-C1 | ✅ |
+| Phase 2 | GC-E1 / GC-D1 | ✅ |
+| Phase 3 | GC-G1 / GC-F1 | ✅ |
+| Phase 3 | GC-H1（事件+原因位图） | ⬜ 下一步 |
 | Phase 4 | GC-J1（BGC 并发 sweep） | ⬜ |
-| Phase 5 | GC-K1..K4（区域化重构） | ⬜（最高风险，跨多会话） |
+| Phase 5 | GC-K1..K4（区域化重构） | ⬜（跨多会话） |
 | Phase 6 | GC-L1 / GC-L2 | ⬜ |
-
-> 注：Phase 5 区域化重构（GC-K1..K4）与 Phase 6（GC-L1/L2）是跨多会话的深调度器/内存模型工作，无法在单会话完成。剩余可逐步推进的确定性项：GC-F1（handle 代剪枝）、GC-H1（事件）、GC-J1（BGC）均相对独立。
 
 ---
 
