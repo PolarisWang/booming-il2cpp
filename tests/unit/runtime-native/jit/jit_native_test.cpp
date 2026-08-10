@@ -2464,6 +2464,14 @@ static bool Test_Fuzz() {
                         cfg_no_cache.enable_deopt = true;
                         cfg_no_cache.safepoint_fn = nullptr;
                         cfg_no_cache.enable_register_caching = false;
+                        // This is a mismatch-diagnostic recompile (isolate a
+                        // graph-coloring issue). Keep the IR as-is: with the
+                        // tree optimizer's default-on, a Fuzz variant that
+                        // lowers to a tree temp at vreg>=64 (kBaseVReg=64)
+                        // trips a JIT emit stack overflow — the diagnostic
+                        // recompile should not introduce that orthogonal
+                        // tree-optimizer path. See PLAN.md J2-A R2.
+                        cfg_no_cache.enable_optimizer = false;
                         auto* nm_nc = Compile(rm, cfg_no_cache);
                         if (nm_nc != nullptr) {
                             void* entry_nc = SealAndGetEntry(nm_nc);
