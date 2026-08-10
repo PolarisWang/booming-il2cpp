@@ -108,18 +108,31 @@ static void RunCrossGenRefStoreStress() {
     // must point at valid GC-managed memory (nursery or old-gen).  A dangling
     // pointer (not in nursery and not in old-gen) indicates the barrier missed a
     // cross-gen edge and the young object was freed while still referenced.
+    // (Diagnostics previously confirmed: the old slot is region_gen==2 the
+    //  barrier sets the card, the ref is region_gen==0, yet under multi-threaded
+    //  writes the young-GC rescan does not always preserve every cross-gen edge.)
     int valid = 0, dangling = 0;
+    void* first_dangle = nullptr;
+    int last_dangle_t = -1;
     for (int t = 0; t < kThreads; t++) {
         for (int i = 0; i < kObjsPerThread; i++) {
             void* ref = g_old_slot[t]->nursery_slot[i];
             if (ref == nullptr) continue;
             RegionManager& mgr = RegionManager::Instance();
-            if (mgr.IsNurseryPointer(ref) || G_OldGen().IsInOldGen(ref)) valid++;
-            else dangling++;
+            if (mgr.IsNurseryPointer(ref)) { valid++; continue; }
+            if (G_OldGen().IsInOldGen(ref)) { valid++; continue; }
+            dangling++;
+            last_dangle_t = t;
+            if (first_dangle == nullptr) first_dangle = ref;
         }
     }
+    if (dangling > 0) {
+        printf("  [STRESS] cross-gen dangling=%d / %d slots (first=%p, thread=%d)\n",
+               dangling, kThreads * kObjsPerThread, first_dangle, last_dangle_t);
+    }
     GC_CHECK(dangling == 0, "cross-gen barrier: 0 dangling references after GC");
-    GC_CHECK(valid >= 0, "cross-gen reference set recorded");
+    GC_CHECK(valid >= 0, "recorded cross-gen references");
+    GC_CHECK(dangling == 0, "cross-gen barrier: 0 dangling references after GC");
 
     threading::UnregisterThread();
 }
