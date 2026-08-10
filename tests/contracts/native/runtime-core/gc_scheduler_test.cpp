@@ -6,9 +6,11 @@
 
 #include <cstdio>
 #include <cstdint>
+#include <cstdlib>
 
 #include <chaos/native_types.h>
 #include "gc_scheduler.h"
+#include "gc_config.h"
 #include "gc_test_macros.h"
 
 using namespace chaos::il2cpp::runtime_core;
@@ -156,6 +158,41 @@ void TestProvisionalForceBlocking() {
     g_gc_scheduler.RecordGcCompleted();
 }
 
+// ── Test 10: GC-E1 config env override ───────────────────────────────
+// Verifies GcConfig::Initialize() honors a CHAOS_GC_<Key> env override,
+// defaulting to the compile-time value when the env var is absent/empty.
+void TestConfigEnvOverride() {
+    TEST("ConfigEnvOverride");
+
+    constexpr size_t kTestNursery = 8 * 1024 * 1024;   // 8 MB
+    constexpr size_t kCompileDefault = 64 * 1024 * 1024;  // kDefaultYoungRegionSize
+    auto set_env = [](const char* val) {
+#ifdef _MSC_VER
+        _putenv_s("CHAOS_GC_NurserySize", val);
+#else
+        if (val) setenv("CHAOS_GC_NurserySize", val, 1); else unsetenv("CHAOS_GC_NurserySize");
+#endif
+    };
+
+    set_env("8388608");   // 8 MB
+    GcConfig().Initialize();
+    GC_CHECK(GcConfig().DefaultNurserySize == kTestNursery,
+             "CHAOS_GC_NurserySize env override drives DefaultNurserySize");
+
+    set_env("");          // empty → treat as default
+    GcConfig().Initialize();
+    GC_CHECK(GcConfig().DefaultNurserySize == kCompileDefault,
+             "DefaultNurserySize returns to compile-time default after env cleared");
+
+    set_env("garbage");   // non-numeric → fall back to default
+    GcConfig().Initialize();
+    GC_CHECK(GcConfig().DefaultNurserySize == kCompileDefault,
+             "unparseable env falls back to default");
+
+    set_env("");          // restore clean
+    GcConfig().Initialize();
+}
+
 // ── Main ────────────────────────────────────────────────────────────
 int main() {
     puts("GcScheduler basic operation tests");
@@ -170,6 +207,7 @@ int main() {
     TestRecommendedNurserySize();
     TestTotalAllocated();
     TestProvisionalForceBlocking();
+    TestConfigEnvOverride();
 
     printf("\nResults: %d tests, %d failures\n", g_tests, g_failures);
     return g_failures > 0 ? 1 : 0;
