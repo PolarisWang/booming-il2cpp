@@ -154,3 +154,8 @@ auto_stop_policy: blocking-only
 
 - **Phase 0（命名卫生）✅ `18fe80ae6`**：清除落地代码 `GC-K2b/K2d/K1b/K2a/J1/K2/K3` 代号注释，保留功能描述；`grep "GC-[A-Z][0-9]" src/` 清零；compile 通过。
 - **Phase 1a（世代写屏障 regen 验证）✅**：foundation-dll pipeline regen 跑通（`CHAOS_FOUNDATION_DLL=translation` + `PYTHONPATH`），System.ObjectModel build 生成 AOT `entry.exe`(2.8MB) + JIT `entry-jit.exe`，**AOT 10/10 + JIT 10/10 编译链接通过**；`chaos_gc_dirty_card_dst_ref` 声明已进生成 build headers（link-ready）。注：System.ObjectModel IL 无 gc-ref field-write 形状，生成函数体未实际调 `_dst_ref`，但符号 link-ready + 整体编译过（K2c 发射不会破坏生成代码）。
+- **Phase 1b（世代写屏障压力场景）🟠 已建，暴露疑点待根因**：新增
+  `gc_region_barrier_stress_test.cpp`（多线程 old->nursery ref-store + 协调
+  young GC），CMake glob 注册为 stress。**结果间歇性**：1 次 run 报 1 dangling
+  reference、1 次 run 0 failures。非确定性——疑为(a)并发屏障竞态 or(b)测试自身
+  多线程 bump 竞争 artifact。**已记入风险，需根因调查**（非"通过"结论）。
