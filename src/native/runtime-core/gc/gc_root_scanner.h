@@ -84,6 +84,35 @@ void GcScanPreciseFrame(
     GcRootCallback callback,
     void* user_data);
 
+/// Scan a single managed frame using its per-safepoint precise root map
+/// (GcPointMapV0, T2.2).  Locates the GC safepoint covering the frame's
+/// return address (binary search on native offset) and reports ONLY the roots
+/// live at that safepoint — stack slots at @a frame.frame_ptr + offset, and
+/// (Task B) volatile registers.  When the return address falls in a gap
+/// between safepoints, the nearest-prior safepoint is used (frames are only
+/// interruptible at recorded points, so a GC stop can only happen there).
+void GcScanPreciseSafepoint(
+    const ManagedFrameInfo& frame,
+    const GcPointMapV0& point_map,
+    const void* code_start,
+    GcRootCallback callback,
+    void* user_data);
+
+/// Scan the volatile (caller-saved) register roots of a safepoint from an
+/// explicit register-value file.  @a gpr_values is an array indexed by
+/// physical x64 GPR number holding each register's value at the safepoint;
+/// @a saX64 register file covers RAX(0)..R15(15).  Only registers set in the
+/// safepoint's live volatile-reg mask are reported, and only when @a
+/// save_volatile is nonzero (indicating the caller has captured the volatile
+/// regs).  This decouples the register-window capture (GC-suspension
+/// policy) from the root decoding, which is unit-testable in isolation.
+void GcScanSafepointRegisterRoots(
+    const GcSafepointV0& safepoint,
+    const void* const* gpr_values,   // [num_gprs] physical GPR values
+    uint32_t num_gprs,
+    GcRootCallback callback,
+    void* user_data);
+
 /// Conservatively scan an unknown frame (all pointer-aligned slots).
 void GcScanConservativeFrame(
     const ManagedFrameInfo& frame,

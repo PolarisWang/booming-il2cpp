@@ -178,11 +178,11 @@ typedef struct MetadataRegistrationV0 {
  *   bits [12]   — kind (0 = object reference, 1 = interior/byref pointer)
  *   bits [13:31] — reserved (must be 0)
  */
-#define CHAOS_GC_SLOT_OFFSET_MASK   0xFFFu
-#define CHAOS_GC_SLOT_KIND_OFFSET   12u
-#define CHAOS_GC_SLOT_KIND_MASK     (1u << 12)
+#define CHAOS_GC_SLOT_OFFSET_MASK   0x7FFFFFFFu
+#define CHAOS_GC_SLOT_KIND_OFFSET   31u
+#define CHAOS_GC_SLOT_KIND_MASK     (1u << 31)
 #define CHAOS_GC_SLOT_KIND_OBJECT   0u          /* exact object reference */
-#define CHAOS_GC_SLOT_KIND_INTERIOR (1u << 12)  /* interior/byref pointer */
+#define CHAOS_GC_SLOT_KIND_INTERIOR (1u << 31)  /* interior/byref pointer */
 
 #define CHAOS_GC_SLOT_ENCODE(offset, kind) \
     (((offset) & CHAOS_GC_SLOT_OFFSET_MASK) | ((kind) & CHAOS_GC_SLOT_KIND_MASK))
@@ -193,6 +193,40 @@ typedef struct GcSlotMapV0 {
     uint32_t num_gc_slots;       /* number of GC root slots in this frame */
     uint32_t slots[];            /* variable-length array of slot encodings */
 } GcSlotMapV0;
+
+/// Register encoding for a live GC root at a safepoint (volatile/caller-saved
+/// register holding an object reference or interior/byref).  Bit 0-5 = physical
+/// x64 register index (0-15); bit 12 = interior/byref.  Mirrors the slot
+/// encoding kind bit so both share the GcRootKind mask.
+#define CHAOS_GC_REG_MASK           0x3Fu
+#define CHAOS_GC_REG_KIND_OFFSET    12u
+#define CHAOS_GC_REG_ENCODE(reg, kind) ((((uint32_t)(reg)) & CHAOS_GC_REG_MASK) | ((kind) & CHAOS_GC_SLOT_KIND_MASK))
+
+/// Per-safepoint precise GC root description (T2.2).
+/// One of these per GC/interruptible point, giving the exact set of live
+/// object references — both stack slots and volatile registers — at that
+/// native offset.  This is the per-safepoint precision that CoreCLR encodes
+/// in its GcInfo: the whole-method union GcSlotMapV0 above is the conservative
+/// fallback; when a GcPointMapV0 is registered, the scanner reports only the
+/// live roots for the exact return offset instead of the union.
+typedef struct GcSafepointV0 {
+    uint32_t native_offset;     /* byte offset within the method at which GC may be active */
+    uint32_t num_gc_slots;      /* number of live stack slots at this safepoint */
+    uint32_t num_live_regs;     /* number of live volatile (caller-saved) registers holding refs */
+    uint32_t slots[];           /* [num_gc_slots] stack-slot encodings, then [num_live_regs] register encodings */
+} GcSafepointV0;
+
+/// Precise per-safepoint GC root map, serialized alongside the union
+/// GcSlotMapV0.  Header followed by a contiguous blob holding num_safepoints
+/// GcSafepointV0 entries, each self-described via its num_gc_slots /
+/// num_live_regs counts (so the decoder walks by advancing each entry's
+/// variable length).  Entries are sorted by native_offset for binary search.
+typedef struct GcPointMapV0 {
+    uint32_t code_size;         /* method code size in bytes (bounds the native_offset search) */
+    uint32_t num_safepoints;    /* number of precise safepoints */
+    uint32_t num_gprs;          /* number of physical GPRs on this platform (16 x64 / 31 ARM64) */
+    uint8_t  safepoints[];      /* contiguous byte blob of GcSafepointV0 entries (variable length) */
+} GcPointMapV0;
 
 /// Per-entry header in the .gc_slot_maps section.
 /// Each entry is: [GcSlotMapSectionEntryHdrV0][GcSlotMapV0 body][slots data].

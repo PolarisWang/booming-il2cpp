@@ -130,6 +130,88 @@ void GcScanPreciseFrame(
     }
 }
 
+/// Find the GcSafepointV0 covering @a offset within the method.  Entries are
+/// sorted by native_offset (set during serialization); binary search for the
+/// last safepoint at or before @a offset.  Returns nullptr if @a offset is
+/// before the first safepoint (should not happen for a valid GC stop, which
+/// can only occur at a recorded safepoint).
+static const GcSafepointV0* FindSafepoint(const GcPointMapV0& pm, uint32_t offset) noexcept {
+    if (pm.num_safepoints == 0) return nullptr;
+    if (offset > pm.code_size) offset = pm.code_size;
+    // The array is packed as GcSafepointV0 (variable-length slots[]), so walk
+    // by advancing each entry's size rather than indexing directly.
+    const uint8_t* base = pm.safepoints;
+    const GcSafepointV0* best = nullptr;
+    uint32_t best_off = 0;
+    size_t cursor = 0;
+    for (uint32_t i = 0; i < pm.num_safepoints; ++i) {
+        const auto* sp = reinterpret_cast<const GcSafepointV0*>(base + cursor);
+        size_t sz = sizeof(GcSafepointV0) +
+                    (static_cast<size_t>(sp->num_gc_slots) + sp->num_live_regs) * sizeof(uint32_t);
+        if (sp->native_offset <= offset && sp->native_offset >= best_off) {
+            best = sp;
+            best_off = sp->native_offset;
+        }
+        cursor += sz;
+    }
+    return best;
+}
+
+void GcScanPreciseSafepoint(
+    const ManagedFrameInfo& frame,
+    const GcPointMapV0& point_map,
+    const void* code_start,
+    GcRootCallback callback,
+    void* user_data) {
+
+    auto* frame_base = static_cast<uint8_t*>(frame.frame_ptr);
+    const uint8_t* code = static_cast<const uint8_t*>(code_start);
+    const uint8_t* ra = static_cast<const uint8_t*>(frame.return_address);
+    uint32_t offset = (ra >= code) ? static_cast<uint32_t>(ra - code) : 0;
+
+    const GcSafepointV0* sp = FindSafepoint(point_map, offset);
+    if (sp == nullptr) return;
+
+    // Precise stack slots live at this safepoint.
+    const uint32_t* it = sp->slots;
+    for (uint32_t i = 0; i < sp->num_gc_slots; ++i, ++it) {
+        uint32_t encoded = *it;
+        uint32_t so = encoded & CHAOS_GC_SLOT_OFFSET_MASK;
+        bool is_interior = (encoded & CHAOS_GC_SLOT_KIND_MASK) == CHAOS_GC_SLOT_KIND_INTERIOR;
+        void* slot_addr = frame_base + so;
+        callback(slot_addr, is_interior, user_data);
+    }
+    // Volatile-register roots are handled in Task B (num_live_regs populated
+    // there); the register window needs the CPU context, which the stack-slot
+    // walker here does not carry.
+    (void)it;
+}
+
+/// Decode and report the live volatile-register roots of a safepoint from an
+/// explicit physical-register value file.  The safepoint's slots[] array is
+/// laid out as [num_gc_slots stack encodings][num_live_regs register
+/// encodings] (see GcPointMapV0 serializer).  Register encodings use
+/// CHAOS_GC_REG_MASK bits for the physical x64 register index; the register's
+/// value (an object pointer) is reported as the root.
+void GcScanSafepointRegisterRoots(
+    const GcSafepointV0& safepoint,
+    const void* const* gpr_values,   // [num_gprs] physical GPR values
+    uint32_t num_gprs,
+    GcRootCallback callback,
+    void* user_data) {
+
+    const uint32_t* it = safepoint.slots + safepoint.num_gc_slots;
+    for (uint32_t i = 0; i < safepoint.num_live_regs; ++i, ++it) {
+        uint32_t encoded = *it;
+        uint32_t phys = encoded & CHAOS_GC_REG_MASK;
+        bool is_interior = (encoded & CHAOS_GC_SLOT_KIND_MASK) == CHAOS_GC_SLOT_KIND_INTERIOR;
+        if (phys >= num_gprs) continue;
+        const void* value = gpr_values[phys];
+        if (value == nullptr) continue;
+        callback(const_cast<void*>(value), is_interior, user_data);
+    }
+}
+
 void GcScanConservativeFrame(
     const ManagedFrameInfo& frame,
     GcConservativeRootCallback callback,

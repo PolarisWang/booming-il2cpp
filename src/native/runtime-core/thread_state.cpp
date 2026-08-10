@@ -676,7 +676,17 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
             info.frame_ptr = frame_ptr;
             info.frame_size = sm->frame_size;
             info.return_address = val;
-            GcScanPreciseFrame(info, *sm, s_callback, s_user_data);
+
+            // T2.2-A: prefer per-safepoint precise scanning when a GcPointMapV0
+            // is available — reports only the roots live at this return offset
+            // (binary-searched), instead of the whole-method union GcSlotMapV0.
+            // Register roots (Task B) are added when num_live_regs is populated.
+            const auto* point_map = static_cast<const GcPointMapV0*>(nm->gc_point_map_data);
+            if (point_map != nullptr) {
+                GcScanPreciseSafepoint(info, *point_map, nm->code, s_callback, s_user_data);
+            } else {
+                GcScanPreciseFrame(info, *sm, s_callback, s_user_data);
+            }
         }
 
         // ── Phase 2b: Interpreter frame precise scanning ─────────

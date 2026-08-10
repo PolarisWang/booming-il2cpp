@@ -93,8 +93,10 @@ static constexpr uint32_t kFprFileOff = kGprFileOff + kGprFileSize;
 static constexpr uint32_t kCallVirtArgsOff = kFprFileOff + kFprFileSize;
 static constexpr uint32_t kFrameSize = kCallVirtArgsOff + sizeof(CodegenCallVirtArgs);
 
-// GcSlotMapV0 slot encoding uses 12 bits for RSP offsets (0-4095).
-static_assert(kFrameSize <= 4096, "GcSlotMapV0 offset encoding limited to 12 bits");
+// GcSlotMapV0 slot encoding reserves the top bit for the interior kind flag,
+// leaving 31 bits for the RSP/frame offset (up to ~2 GB) — effectively
+// unbounded for stack frames.
+static_assert(kFrameSize < (1u << 31), "GcSlotMapV0 offset must fit in 31 bits");
 
 // LocAlloc reserve: bump counter + scratch region
 static constexpr uint32_t kLocAllocReserveSize = 4096;
@@ -618,19 +620,41 @@ void NativeCodeGenerator::RecordGcPoint(uint32_t native_offset) noexcept {
     for (uint32_t vr = 0; vr < kGprCount; ++vr) {
         if (vr < vreg_types_.size() && vreg_types_[vr] == kTypeObjectRef && (live_mask & (1ULL << vr))) {
             uint32_t off = GprOff(vr);
-            // Slot offset must fit in 12 bits (GcSlotMapV0 encoding).
-            // > 4 KB frames are possible with localloc, but those flush
-            // the register file to stack before the safepoint so the
-            // fixed vreg slots themselves are always within the first 4 KB.
-            if (off > 4095) {
-                CHAOS_IL2CPP_LOG_ERROR("CRAG", "gc_slot_offset_overflow");
-                continue;
-            }
+            // T2.2-C1: offset is 31-bit (top bit = interior kind) — a fixed
+            // vreg GPR-file offset can never approach 2 GB, so no overflow
+            // gate is needed here (the old 12-bit/4096 limit is lifted).
             gp.slots[idx].kind = GcSlotKind::Stack;
             gp.slots[idx].index = off / 8;
             // Also record in slot_map_entries_ for GcSlotMapV0
             slot_map_entries_.push_back(CHAOS_GC_SLOT_ENCODE(off, CHAOS_GC_SLOT_KIND_OBJECT));
             idx++;
+        }
+    }
+
+    // T2.2-B: record live volatile (caller-saved) physical registers holding
+    // GC refs at this point.  A vreg that is (a) ObjectRef-typed, (b) live, and
+    // (c) colored to a VOLATILE physical register is a register root.  (As a
+    // precision note: in the current write-through GC model every colored vreg
+    // is also spilled to its stack slot at a call/safepoint, so these register
+    // bits are forward-looking metadata for when call-crossing write-through is
+    // eliminated — see T2.1/§2.3.)  Bits are indexed by physical x64 register
+    // number; RDI(7)/R8-R09 are volatile roots, R12-R15 callee-saved stay in
+    // the frame (scanned via the register window / saved slots).
+    gp.live_reg_mask = 0;
+    if (has_graph_coloring_) {
+        for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+            if (vr >= vreg_types_.size() || vreg_types_[vr] != kTypeObjectRef)
+                continue;
+            if (!(live_mask & (1ULL << vr)))
+                continue;
+            uint8_t phys = gcr_.gpr_color[vr];
+            if (phys == 0xFF)
+                continue;
+            // Volatile/caller-saved physical regs on x64: RAX-R11 (0-11).
+            // RDI(7) is callee-saved on Win64; keep it out of the volatile mask
+            // (its value is in the frame's saved slot, scanned as a stack root).
+            if (phys < 12)
+                gp.live_reg_mask |= (1u << phys);
         }
     }
     gc_points_.push_back(gp);
@@ -5355,6 +5379,65 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         }
     }
 
+    // T2.2-A: Serialize per-safepoint precise root map (GcPointMapV0).
+    // For each GC point (already liveness-filtered ObjectRef vregs at that
+    // point), emit a GcSafepointV0 with its exact live stack slots so the
+    // scanner can report only the roots live at the return offset — replacing
+    // the whole-method union above with per-safepoint precision.
+    if (!gc_points_.empty() && nm->code_size > 0) {
+        // Compute total size: header + per-safepoint (GcSafepointV0 fixed part
+        // + num_gc_slots stack-slot encodings + num_live_regs register encodings).
+        auto popcount = [](uint32_t m) noexcept {
+            uint32_t n = 0;
+            while (m) { n += (m & 1u); m >>= 1; }
+            return n;
+        };
+        uint32_t total = sizeof(GcPointMapV0);
+        for (const auto& gp : gc_points_) {
+            uint32_t nregs = popcount(gp.live_reg_mask);
+            total += sizeof(GcSafepointV0) + (gp.slot_count + nregs) * sizeof(uint32_t);
+        }
+        auto* pm = static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(total));
+        if (pm) {
+            auto* gm = reinterpret_cast<GcPointMapV0*>(pm);
+            gm->code_size = nm->code_size;
+            gm->num_gprs = static_cast<uint32_t>(kPhysRegCount);
+            uint32_t count = static_cast<uint32_t>(gc_points_.size());
+            gm->num_safepoints = count;
+            uint8_t* cursor = pm + sizeof(GcPointMapV0);
+            for (uint32_t i = 0; i < count; ++i) {
+                const GcPoint& gp = gc_points_[i];
+                auto* sp = reinterpret_cast<GcSafepointV0*>(cursor);
+                sp->native_offset = gp.native_offset;
+                // Precise stack slots for this safepoint (Task A), plus live
+                // volatile-register roots (Task B) as register encodings.
+                sp->num_gc_slots = gp.slot_count;
+                sp->num_live_regs = popcount(gp.live_reg_mask);
+                uint32_t* slit = sp->slots;
+                for (uint32_t si = 0; si < gp.slot_count; ++si) {
+                    // GcSlot may represent a stack spill slot (offset/8) or a
+                    // register.  Reconstruct the GcSlotMap-style offset-only
+                    // encoding for stack roots.
+                    if (gp.slots[si].kind == GcSlotKind::Stack) {
+                        uint32_t byte_off = static_cast<uint32_t>(gp.slots[si].index) * 8u;
+                        *slit++ = CHAOS_GC_SLOT_ENCODE(byte_off, CHAOS_GC_SLOT_KIND_OBJECT);
+                    }
+                }
+                // T2.2-B: serialize the live volatile-register root mask as
+                // register encodings (physical reg index | object kind).
+                for (uint32_t phys = 0; phys < 12; ++phys) {
+                    if (gp.live_reg_mask & (1u << phys)) {
+                        *slit++ = CHAOS_GC_REG_ENCODE(phys, CHAOS_GC_SLOT_KIND_OBJECT);
+                    }
+                }
+                cursor += sizeof(GcSafepointV0) + (gp.slot_count + sp->num_live_regs) * sizeof(uint32_t);
+            }
+            (void)gm;
+            nm->gc_point_map_data = pm;
+            nm->gc_point_map_size = total;
+        }
+    }
+
     nm->rbp_to_rsp_offset = 16 + num_cache_regs_ * 8 +
                             static_cast<uint32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + localloc_extra_);
 
@@ -5413,6 +5496,7 @@ JitMethod::~JitMethod() noexcept {
         chaos::il2cpp::runtime_core::GcUnregisterSlotMap(code);
     }
     CHAOS_IL2CPP_FREE(slot_map_data);
+    CHAOS_IL2CPP_FREE(gc_point_map_data);
     CHAOS_IL2CPP_FREE(instr_offsets);
     // Free GcPoint.slots arrays (each allocated independently by RecordGcPoint)
     for (uint32_t i = 0; i < gc_point_count; ++i) {

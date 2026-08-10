@@ -64,6 +64,12 @@ struct GcPoint {
     uint32_t   native_offset;       // byte offset from code entry
     uint32_t   slot_count;          // number of GcSlots at this point
     GcSlot*    slots;               // array of slot_count GcSlot entries
+    // T2.2-B: live volatile (caller-saved) registers holding GC refs at this
+    // point, as a physical-register bitmask (bit i = physical GPR i is a live
+    // object-ref root).  Kept as metadata for precise register-root scanning;
+    // in the current write-through GC model these refs are always also spilled
+    // to stack at the safepoint, so the mask is informational/forward-looking.
+    uint32_t   live_reg_mask = 0;   // bit i set → physical GPR i holds a ref
     // Slot map entries for precise root scanning (GcSlotMapV0).
 };
 
@@ -126,6 +132,14 @@ struct JitMethod {
     // GcSlotMapV0: precise GC root map for stack scanning
     void*         slot_map_data   = nullptr;   // serialized GcSlotMapV0 blob
     uint32_t      slot_map_size   = 0;
+
+    // T2.2: per-safepoint precise root map (GcPointMapV0).  Unlike the union
+    // GcSlotMapV0 above, this carries the exact live stack+register roots for
+    // EACH GC point, so the scanner reports only the refs live at the return
+    // offset (binary-searched), not the whole-method union.  When null, the
+    // scanner falls back to the union map / conservative scan.
+    void*         gc_point_map_data = nullptr; // serialized GcPointMapV0 blob
+    uint32_t      gc_point_map_size = 0;
 
     // OSR entry point: byte offset from code start for the OSR entry stub.
     // The OSR entry copies a RegisterFile to the stack frame and jumps to
