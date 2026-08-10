@@ -139,7 +139,7 @@ Phase6: L1 <─ L2（依赖 K 区域化完成 + E1 旋钮 + D1 降级）
 | GC-D1 | 2 | completed | — | OOM 降级链：半量预算+归因+provisional force-blocking+压力 decommit | — | — | 内存耗尽降级 proof | `gc_api.cpp`+`gc_scheduler.*`+`gc_old_gen.cpp` (`gc_d1-oom/`) | 四级降级+半量+归因+压力强制blocking+decommit | `gc_api.*`,`gc_scheduler.*`,`gc_old_gen.*` | M |
 | GC-E1 | 2 | completed | — | 配置旋钮体系(env + native API) | — | — | env 调参 proof | `gc_config.h/.cpp` + `InitYoungGeneration` | env 生效 + 0 回归 | `src/native/runtime-core/gc/` | M |
 | GC-F1 | 3 | planned | — | handle 分代剪枝 | GC-E1 | — | 按代扫描 proof | `engine_lifecycle.cpp` | 只扫 condemned 代 | `engine_lifecycle.*` | L |
-| GC-G1 | 3 | planned | — | Dependent 运行期收敛 | — | — | 深链 Ephemeron proof | `engine_lifecycle.cpp` | >3 层不丢 | `engine_lifecycle.*` | S |
+| GC-G1 | 3 | completed | — | Dependent 运行期收敛（去 3 轮 cap，深链不丢） | — | — | 深链 Ephemeron proof | `engine_lifecycle.cpp` (`gc-g1-dependent/`) | 运行期收敛 + 0 回归 | `engine_lifecycle.*` | S |
 | GC-H1 | 3 | planned | — | 完整事件+原因位图 | GC-E1 | — | 事件 proof | `gc_events.*`/`gc_stats.*` | >40 事件+原因 | `gc_events.*`/`gc_stats.*` | L |
 | GC-J1 | 4 | planned | — | BGC 并发 sweep+分相 | GC-C1 | — | BGC 并发 proof | `gc_bgc.cpp` | mark+sweep 并发 | `gc_bgc.*` | L |
 | GC-K1 | 5 | planned | — | Region 框架引入 | GC-E1 | — | region 分配 proof | `gc_region.*` 新 region_allocator | region 路径跑通 | `gc_region.*` | XL |

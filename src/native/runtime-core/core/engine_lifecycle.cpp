@@ -403,15 +403,21 @@ void GcProcessDependentHandlesAfterYoungGC() noexcept {
 /// Process dependent handles after a full GC (fixed-point iteration).
 /// For each (primary, secondary) pair:
 ///   - If primary is marked alive in old-gen, secondary is also kept alive.
-///   - Fixed-point: repeat up to 3 rounds until the reachable set stabilizes.
+///   - Fixed-point: repeat until the reachable set stabilizes (no new
+///     secondary kept in a round).  MarkObject is idempotent (returns false
+///     for already-marked objects), so the loop provably terminates.
 /// Returns the number of secondary objects kept alive by this pass.
 int GcProcessDependentHandlesAfterFullGC() noexcept {
     std::lock_guard<std::mutex> lock(s_dep_handle_mutex);
     int total_kept = 0;
 
-    // Fixed-point iteration: up to 3 rounds (CoreCLR-aligned).
-    constexpr int kMaxFixedPointRounds = 3;
-    for (int round = 0; round < kMaxFixedPointRounds; round++) {
+    // Runtime convergence (align CoreCLR objecthandle.cpp:1203-1265 do-while
+    // "re-scan until no unpromoted-primary && no newly-promoted-secondary").
+    // NO fixed round cap: a chain of dependent handles deeper than the old
+    // kMaxFixedPointRounds=3 would otherwise lose a secondary.  Convergence is
+    // guaranteed because G_OldGen().MarkObject / G_Loh().MarkObject return
+    // false once an object is already marked, so kept_this_round must reach 0.
+    for (;;) {
         int kept_this_round = 0;
 
         for (auto& kv : s_dep_handle_table) {
