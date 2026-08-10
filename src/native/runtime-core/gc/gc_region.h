@@ -353,6 +353,33 @@ public:
     Region* AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_size,
                            CHAOS_IL2CPP_UINT32 domain_id = 0);
 
+    /// Select an adaptive region size for @a kind given @a min_size.
+    /// Aligns CRAG toward CoreCLR's region-size classes (interface.cpp:455
+    /// 4/2/1MB).  Nursery/POH/Domain/Gen1 keep their fixed historical sizes
+    /// (behaviour-preserving); TENURED / oversized allocations use the
+    /// 4/2/1MB classes so large tenured regions scale with object size.
+    static CHAOS_IL2CPP_SIZE SelectRegionSize(RegionKind kind,
+                                              CHAOS_IL2CPP_SIZE min_size) noexcept {
+        switch (kind) {
+        case RegionKind::REGION_NURSERY:
+            return kDefaultRegionSize;
+        case RegionKind::REGION_GEN1:
+            return kDefaultYoungRegionSize;
+        case RegionKind::REGION_DOMAIN:
+            return kDomainRegionSize;
+        case RegionKind::REGION_POH:
+            return kPohRegionSize;
+        case RegionKind::REGION_TENURED:
+        default: {
+            // CoreCLR-style basic-region classes: 4/2/1 MB.
+            CHAOS_IL2CPP_SIZE size = kTenuredRegionSize;  // 1 MB
+            if (min_size > (2 * 1024 * 1024)) size = 4 * 1024 * 1024;   // 4 MB
+            else if (min_size > (1 * 1024 * 1024)) size = 2 * 1024 * 1024;  // 2 MB
+            return (min_size > size) ? min_size : size;
+        }
+        }
+    }
+
     /// Return a region to the free pool.
     void FreeRegion(RegionId id);
 

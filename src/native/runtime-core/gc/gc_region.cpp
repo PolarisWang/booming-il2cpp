@@ -705,10 +705,10 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
     switch (kind) {
     case RegionKind::REGION_NURSERY: region_size = kDefaultRegionSize; break;
     case RegionKind::REGION_GEN1:    region_size = kDefaultYoungRegionSize; break;
-    case RegionKind::REGION_TENURED: region_size = kTenuredRegionSize; break;
+    case RegionKind::REGION_TENURED: region_size = SelectRegionSize(kind, min_size); break;
     case RegionKind::REGION_DOMAIN:  region_size = kDomainRegionSize;  break;
     case RegionKind::REGION_POH:     region_size = kPohRegionSize;     break;
-    default:                  region_size = kDefaultRegionSize; break;
+    default:                  region_size = SelectRegionSize(kind, min_size); break;
     }
     if (min_size > region_size) region_size = min_size;
 
