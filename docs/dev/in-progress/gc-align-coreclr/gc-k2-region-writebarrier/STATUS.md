@@ -29,10 +29,20 @@ created_by: main-agent
 - `EnsureRegionGenCoverage` 懒增长；`AllocateRegion` NURSERY→young(0)/其余→old(2)。
 
 ### K2b（双参世代写屏障）✅ `53246252f`
-- `chaos_gc_dirty_card_dst_ref(dst,ref)`：忠实复刻 CoreCLR 3 短路（dst.gen==0 / ref==null / ref.gen>=dst.gen），否则 `DirtyCard(dst)`。
-- 用 K2a `GetRegionGen` 表；纯 C++ 跨平台。
-- 保留单参兼容入口。
+- `chaos_gc_dirty_card_dst_ref(dst,ref)`：忠实复刻 CoreCLR 3 短路，否则 `DirtyCard(dst)`。用 K2a `GetRegionGen` 表。
 
-## 待续（K2c-e）
+### K2c（codegen 发射双参屏障）✅ `4f59836d1`
+- 4 个可取 ref 的发射点升级 `_dst_ref`：value-type stfld / ref stfld / stind.ref / stelem.ref。
+- 保留 cpobj 拷贝路径单参保守（无单 ref）。
+- `chaos_gc_dirty_card_dst_ref` 声明加入 gc_helpers.h + gc_card_table.h。
+- # BOUNDARY_OVERRIDE: issues/GC-K2c（Codegen 层产生 C++ 调用新 GC API）。
+- 验证：runtime 编译链接 + Generator 0 error。
 
-- **K2c：codegen 升级发射双参屏障**（🔴 高风险，触碰 codegen 边界，需 BOUNDARY_OVERRIDE）。将 stfld/stobj/stelem.ref 发射点从 `chaos_gc_dirty_card(dst)` 升级为 `_dst_ref(dst,ref)`，让 gen0→gen0 真实省卡。需验证 AOT + JIT + 热更新兼容。
+## 待续（K2d/e）
+
+- **K2d：card bundle 2MB 粗卡 + ScanDirtyCards gen 过滤**（低/中风险，独立）。
+- **K2e：mark 扫脏卡 gen>condemned 过滤**（中风险）。
+
+## 完整验证注
+
+K2c 完整 foundation-dll 管线 regen（生成 native 编译）为后续验证项（本会话做了源级 + runtime 链接级验证）。
