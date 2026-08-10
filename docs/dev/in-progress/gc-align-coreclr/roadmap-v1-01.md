@@ -143,9 +143,9 @@ Phase6: L1 <─ L2（依赖 K 区域化完成 + E1 旋钮 + D1 降级）
 | GC-H1 | 3 | completed | — | 触发原因追踪（GcTriggerReason + stats 暴露） | GC-E1 | — | 事件 proof | `gc_scheduler.*`+`gc_stats.*` (`gc-h1-events/`) | 每GC原因可追踪，0 回归 | `gc_scheduler.*`+`gc_stats.*` | L |
 | GC-J1 | 4 | completed | — | BGC 并发 sweep（GcWorkerPool 并行，disjoint 页） | GC-C1 | — | BGC 并发 proof | `gc_old_gen.cpp` (`gc-j1-bgc-sweep/`) | 无 hang + 0 回归 | `gc_old_gen.*` | L |
 | GC-K1 | 5 | in-progress | — | Region 地基：SelectRegionSize 4/2/1MB class + LOH-via-region (K1b) | GC-E1 | — | region 分配 proof | `gc_region.*`+`gc_loh.*` (`gc-k1-region-alloc/`) | 地基+K1b：自适应 class + LOH region 化 + 0 回归 | `gc_region.*`,`gc_loh.*` | XL |
-| GC-K2 | 5 | in-progress | — | 世代写屏障 region→gen 映射+双参屏障（设计完成，K2a-e 分步实现） | GC-K1 | — | 写屏障代感知 proof | `gc_k2-region-writebarrier/`（design） | K2a 表先实现；K2c codegen 需 BOUNDARY | `gc_card_table.*`+codegen | L |
-| GC-K3 | 5 | planned | — | 分代决策区化重绑 | GC-K2 | — | region 重绑 proof | `gc_young_collector.cpp`/`gc_gen1.cpp` | 走 region 绑定 | `gc_young_collector.*`/`gc_gen1.*` | XL |
-| GC-K4 | 5 | planned | — | 区域化回归验证 | GC-K3 | — | 全量回归 proof | tests + 热更新域卸载 | 24 项无回归 | `tests/contracts/native/runtime-core/` | L |
+| GC-K2 | 5 | completed | — | 世代写屏障（K2a 表+K2b 双参屏障+K2c codegen+K2d bundle；K2e 覆盖） | GC-K1 | — | 写屏障代感知 proof | `gc_region.*`+`gc_card_table.*`+codegen (`gc_k2-region-writebarrier/`) | gen0→gen0 不设卡，0 回归 | `gc_region.*`,`gc_card_table.*`,codegen | L |
+| GC-K3 | 5 | completed | — | 分代决策区化重绑（Gen1→young） | GC-K2 | — | region 重绑 proof | `gc_region.cpp` (`gc_k3-region-rebind/`) | Gen1 young 侧正确 | `gc_region.*` | XL |
+| GC-K4 | 5 | completed | — | 区域化回归验证 | GC-K3 | — | 全量回归 proof | `gc_k4-region-regression/` | 11 项单测 0 失败 | `tests/contracts/native/runtime-core/` | L |
 | GC-L1 | 6 | planned | — | 动态堆数 | GC-K4, GC-E1 | — | 堆数变化 proof | `gc_coordinator.*`/`gc_heap_manager.*` | 运行期增减堆 | `gc_coordinator.*`/`gc_heap_manager.*` | L |
 | GC-L2 | 6 | planned | — | 碎片/压力伺服调优 | GC-K4, GC-E1 | — | 调优闭环 proof | `gc_scheduler.*`/`gc_old_gen.*` | 多信号闭环 | `gc_scheduler.*`/`gc_old_gen.*` | L |
 

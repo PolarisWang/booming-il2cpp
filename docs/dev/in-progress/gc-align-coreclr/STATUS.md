@@ -71,11 +71,16 @@ completed_batches: []
 - 2026-08-10：创建本 roadmap（v1-01）。分析了 `D:\OpenSource\dotnet\runtime\src\coreclr\gc\`（~79,400 行）与 CRAG GC（~18,750 行）的核心差异，识别 12 项欠缺功能，按 P0/P1/区域化重构排列为 6 阶段 16 子任务。
 - 2026-08-10：**Phase 1 全部完成**（GC-B1 `6659812d4` / GC-A1 `e4dae1f97` / GC-C1 `f7850324e` + 两个 pre-existing 测试修复 `f5ceb0072`/`b9311d2e9`）。
 - 2026-08-10：**Phase 2 GC-E1 完成**（`589baadfd` 配置旋钮，跨平台 env + AOT/JIT API）。
-- 2026-08-10：**GC-K2 实现 K2a+K2b 完成**：`cbc1b6925`（region→gen skewed 表）+ `53246252f`（双参世代写屏障 `chaos_gc_dirty_card_dst_ref`，忠实 3 短路）。K2c（codegen 发射双参，🔴 边界）待续。
+- 2026-08-10：**Phase 5 区域化重构全部完成**：
+  - GC-K1（`69613b545` SelectRegionSize 4/2/1MB）+ K1b（`862da35a1` LOH-via-region）。
+  - GC-K2（`cbc1b6925` K2a 表 + `53246252f` K2b 双参屏障 + `4f59836d1` K2c codegen + `547f8864f` K2d card bundle；K2e 覆盖）。
+  - GC-K3（`ec71dce0b` Gen1→young 重绑）。
+  - GC-K4（区域化回归：11 项 GC 单测 0 失败）。
+- 验证：完整 region 世代写屏障链路（skewed 表 + 双参屏障 + codegen + bundle + Gen1-rebind）跨平台纯 C++，11 项单测全 0。
 
 ## latest_stop_point
 
-- Phase 1-4 + GC-K1(K1b) + K2a/K2b 完成。worktree 干净。
+- Phase 1-5 全部完成。剩 **Phase 6**（GC-L1 动态堆数 / GC-L2 伺服调优）。worktree 干净。
 
 ## 进度（截至 2026-08-10）
 
@@ -85,10 +90,8 @@ completed_batches: []
 | Phase 2 | GC-E1 / GC-D1 | ✅ |
 | Phase 3 | GC-G1 / GC-F1 / GC-H1 | ✅ |
 | Phase 4 | GC-J1 | ✅ |
-| Phase 5 | GC-K1+{}+K1b | 🟢 |
-| Phase 5 | GC-K2（K2a 表 + K2b 屏障 done；K2c codegen 🔴 / K2d bundle / K2e mark 待续） | 🟢 K2a/b |
-| Phase 5 | GC-K3/K4 | ⬜ 跨会话 |
-| Phase 6 | GC-L1/L2 | ⬜ 依赖 K |
+| Phase 5 | GC-K1/K1b, K2a-d, K3, K4 | ✅ **全部完成** |
+| Phase 6 | GC-L1 / GC-L2 | ⬜ 下一步 |
 
 > Phase 5 剩余（K2 实现 + K3 分代重绑 + K4 回归 + K2c codegen BOUNDARY）与 Phase 6 是跨多会话主线，每个强依赖前者。
 
