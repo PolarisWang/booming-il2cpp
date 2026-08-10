@@ -149,3 +149,8 @@ auto_stop_policy: blocking-only
 - 每子任务的 exit_criteria 满足（实现 + 测试 + 多平台/JIT/AOT/热更 proof + **可度量验收**）。
 - 保留 CRAG 差异化（域卸载 O(region)），不引入破坏它的对齐。
 - P1/P2 被备选路径降级的任务，以降级后的 exit_criteria 判定完成。
+
+## 执行日志（2026-08-10）
+
+- **Phase 0（命名卫生）✅ `18fe80ae6`**：清除落地代码 `GC-K2b/K2d/K1b/K2a/J1/K2/K3` 代号注释，保留功能描述；`grep "GC-[A-Z][0-9]" src/` 清零；compile 通过。
+- **Phase 1a（世代写屏障 regen 验证）✅**：foundation-dll pipeline regen 跑通（`CHAOS_FOUNDATION_DLL=translation` + `PYTHONPATH`），System.ObjectModel build 生成 AOT `entry.exe`(2.8MB) + JIT `entry-jit.exe`，**AOT 10/10 + JIT 10/10 编译链接通过**；`chaos_gc_dirty_card_dst_ref` 声明已进生成 build headers（link-ready）。注：System.ObjectModel IL 无 gc-ref field-write 形状，生成函数体未实际调 `_dst_ref`，但符号 link-ready + 整体编译过（K2c 发射不会破坏生成代码）。
