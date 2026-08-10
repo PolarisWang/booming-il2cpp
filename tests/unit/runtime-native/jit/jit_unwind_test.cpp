@@ -66,34 +66,37 @@ TEST(CodegenUnwind, EmitUnwindInfoSmallAlloc) {
     // ── Verify header ──────────────────────────────────────────────────
     // Offset 0: version_flags (Version=1, Flags=0)
     EXPECT_EQ(buf.Peek(unwind_start + 0), 0x01);
-    // Offset 1: size_of_prolog (24/16=1.5, rounded up to 2)
-    EXPECT_EQ(buf.Peek(unwind_start + 1), 2);
-    // Offset 2: count_of_codes = 4
+    // Offset 1: size_of_prolog — EmitUnwindInfo hard-codes 255 (see impl note:
+    // a crash IP is always past the prologue, so the unwinder applies all
+    // codes unconditionally; 255 also satisfies ntdll's byte-range validation).
+    EXPECT_EQ(buf.Peek(unwind_start + 1), 0xFF);
+    // Offset 2: count_of_codes = 4 (num_push_regs=2 + SET_FPREG + ALLOC_SMALL)
     EXPECT_EQ(buf.Peek(unwind_start + 2), 4);
-    // Offset 3: frame_reg (5=RBP, 0=offset) — stored as raw register number
-    EXPECT_EQ(buf.Peek(unwind_start + 3), 5);
+    // Offset 3: FrameOffset<<4 | FrameRegister. RBP=5, FrameOffset=1 (CFA=RBP+16)
+    EXPECT_EQ(buf.Peek(unwind_start + 3), 0x15);
 
     // ── Verify UNWIND_CODE entries (4 entries × 2 bytes = 8 bytes) ─────
+    // UNWIND_CODE layout (Win64): [code_offset][FrameInfo|OperationInfo<<4 | UnwindOpCode]
+    // i.e. the 4-bit opcode is the low nibble, operation info is the high nibble.
 
     // Entry 1: ALLOC_SMALL at offset 21, op_info = (0x40/8 - 1) = 7
     EXPECT_EQ(buf.Peek(unwind_start + 4), 21);      // code_offset
-    EXPECT_EQ(buf.Peek(unwind_start + 5), 0x27);    // (UWOP_ALLOC_SMALL=2)<<4 | 7
+    EXPECT_EQ(buf.Peek(unwind_start + 5), 0x72);    // (7<<4) | UWOP_ALLOC_SMALL(=2)
 
-    // Entry 2: PUSH_NONVOL RBX at offset 14
+    // Entry 2: PUSH_NONVOL RBX at offset 14 (reverse push order)
     EXPECT_EQ(buf.Peek(unwind_start + 6), 14);      // code_offset
-    EXPECT_EQ(buf.Peek(unwind_start + 7), 0x03);    // (UWOP_PUSH_NONVOL=0)<<4 | 3
+    EXPECT_EQ(buf.Peek(unwind_start + 7), 0x30);    // (RBX=3 <<4) | UWOP_PUSH_NONVOL(=0)
 
-    // Entry 3: SET_FPREG at offset 7
-    EXPECT_EQ(buf.Peek(unwind_start + 8), 7);       // code_offset
-    EXPECT_EQ(buf.Peek(unwind_start + 9), 0x30);    // (UWOP_SET_FPREG=3)<<4 | 0
+    // Entry 3: PUSH_NONVOL RBP at offset 0 (frame-register push)
+    EXPECT_EQ(buf.Peek(unwind_start + 8), 0);       // code_offset
+    EXPECT_EQ(buf.Peek(unwind_start + 9), 0x50);    // (RBP=5 <<4) | UWOP_PUSH_NONVOL(=0)
 
-    // Entry 4: PUSH_NONVOL RBP at offset 0
-    EXPECT_EQ(buf.Peek(unwind_start + 10), 0);      // code_offset
-    EXPECT_EQ(buf.Peek(unwind_start + 11), 0x05);   // (UWOP_PUSH_NONVOL=0)<<4 | 5
+    // Entry 4: SET_FPREG at offset 7 (must immediately follow PUSH_NONVOL RBP)
+    EXPECT_EQ(buf.Peek(unwind_start + 10), 7);      // code_offset
+    EXPECT_EQ(buf.Peek(unwind_start + 11), 0x03);   // UWOP_SET_FPREG(=3), info=0
 
     // ── Verify padding to 4-byte boundary ─────────────────────────────
     // 4 codes × 2 bytes = 8 bytes, already aligned. No padding needed.
-    // With no SEH flag, next is... actually verify the expected total size.
     // Header(4) + UNWIND_CODE(8) = 12 bytes, already 4-byte aligned.
     uint32_t expected_total = unwind_start + 12;
     EXPECT_EQ(buf.pos(), expected_total);
@@ -150,23 +153,26 @@ TEST(CodegenUnwind, EmitUnwindInfoAllocLarge) {
 
     // ── Verify header ──────────────────────────────────────────────────
     EXPECT_EQ(buf.Peek(unwind_start + 0), 0x01);  // Version=1, no flags
-    // num_push_regs=1 + 1(SET_FPREG) + 2(ALLOC_LARGE) = 4 codes
+    EXPECT_EQ(buf.Peek(unwind_start + 1), 0xFF);  // size_of_prolog hard-coded 255
+    // code_count = num_push_regs=1 + SET_FPREG + ALLOC_LARGE(2 codes) = 4
     EXPECT_EQ(buf.Peek(unwind_start + 2), 4);
+    // FrameOffset<<4 | FrameRegister (RBP=5, FrameOffset=1)
+    EXPECT_EQ(buf.Peek(unwind_start + 3), 0x15);
 
-    // Entry 1: ALLOC_LARGE at offset 7, OpInfo=0
-    //   ALLOC_LARGE with OpInfo=0: 2 more bytes for scaled size (0x20100/8 = 0x4020)
+    // Entry 1: ALLOC_LARGE at offset 7, OpInfo=1 (scaled by 8)
+    //   ALLOC_LARGE OpInfo=1: 2 more bytes for scaled size (0x20100/8 = 0x4020)
     EXPECT_EQ(buf.Peek(unwind_start + 4), 7);      // code_offset
-    EXPECT_EQ(buf.Peek(unwind_start + 5), 0x10);   // (UWOP_ALLOC_LARGE=1)<<4 | 0
+    EXPECT_EQ(buf.Peek(unwind_start + 5), 0x11);   // (OpInfo=1 <<4) | UWOP_ALLOC_LARGE(=1)
     EXPECT_EQ(buf.Peek(unwind_start + 6), 0x20);   // scaled & 0xFF = 0x20
     EXPECT_EQ(buf.Peek(unwind_start + 7), 0x40);   // (scaled >> 8) & 0xFF = 0x40
 
-    // Entry 2: SET_FPREG at offset 0
+    // Entry 2: PUSH_NONVOL RBP at offset 0 (frame-register push)
     EXPECT_EQ(buf.Peek(unwind_start + 8), 0);      // code_offset
-    EXPECT_EQ(buf.Peek(unwind_start + 9), 0x30);   // (UWOP_SET_FPREG=3)<<4 | 0
+    EXPECT_EQ(buf.Peek(unwind_start + 9), 0x50);   // (RBP=5 <<4) | UWOP_PUSH_NONVOL(=0)
 
-    // Entry 3: PUSH_NONVOL RBP at offset 0
+    // Entry 3: SET_FPREG at offset 0 (must follow PUSH_NONVOL RBP)
     EXPECT_EQ(buf.Peek(unwind_start + 10), 0);      // code_offset
-    EXPECT_EQ(buf.Peek(unwind_start + 11), 0x05);   // (UWOP_PUSH_NONVOL=0)<<4 | 5
+    EXPECT_EQ(buf.Peek(unwind_start + 11), 0x03);   // UWOP_SET_FPREG(=3), info=0
 
     // Total: header(4) + codes(4×2+2 extra=10) padded to 4 bytes = 12
     // buf.pos() is 12, not 16, because the ALLOC_LARGE extra 2 bytes are
