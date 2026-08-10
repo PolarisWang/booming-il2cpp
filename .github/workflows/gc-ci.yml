@@ -1,0 +1,79 @@
+# gc-ci.yml — GC unit-test CI gate
+#
+# Runs the deterministic GC unit tests (contracts/native/runtime-core) in CI.
+#
+# Only unit tests run here: pressure/benchmark/soak are EXCLUDED via
+# `ctest -LE benchmark|stress|soak` (matches tests/suite_contract.yaml:40 and the
+# native.py adapter).  Pressure tests are a separate manual/nightly concern, not
+# part of this fast unit gate.
+#
+# Excluded-by-label here:
+#   - chaos_gc_bgc_stress_test, chaos_gc_stress_test,
+#     chaos_gc_satb_stress_test, chaos_gc_loh_stress_test,
+#     chaos_gc_oversized_stress_test, chaos_gc_finalizer_stress_test
+#   - chaos_gc_gen1_benchmark (benchmark)
+#
+# Known/slow unit targets included here:
+#   - chaos_gc_bgc_smoke (Test3 BGC-YoungGC root-caused; See gc-ci known note)
+#   - chaos_gc_bgc_root_scan_test (slow ~392s; recorded in known-failures baseline)
+
+name: GC Unit Tests
+
+on:
+  push:
+    paths:
+      - 'src/native/runtime-core/gc/**'
+      - 'src/native/runtime-core/core/**'
+      - 'tests/contracts/native/runtime-core/**'
+      - 'src/managed/Chaos.IL2CPP.Generator/**'
+      - 'CMakeLists.txt'
+      - 'tests/suite_contract.yaml'
+  pull_request:
+    paths:
+      - 'src/native/runtime-core/gc/**'
+      - 'src/native/runtime-core/core/**'
+      - 'tests/contracts/native/runtime-core/**'
+      - 'src/managed/Chaos.IL2CPP.Generator/**'
+      - 'CMakeLists.txt'
+      - 'tests/suite_contract.yaml'
+  workflow_dispatch:
+
+jobs:
+  gc-unit:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        config: [Debug]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Configure CMake
+        run: |
+          cmake -S . -B artifacts/presets/windows-x64-reference \
+            -G "Visual Studio 17 2022" \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
+            -DROADMAP0_PRESET_TARGET=windows-x64-reference
+
+      - name: Build Native Runtime + GC tests
+        run: |
+          cmake --build artifacts/presets/windows-x64-reference --config ${{ matrix.config }} -j 8
+
+      - name: Run GC Unit Tests (exclude stress/benchmark/soak)
+        shell: bash
+        run: |
+          ctest --test-dir artifacts/presets/windows-x64-reference \
+            -C ${{ matrix.config }} \
+            -R "chaos_gc_" \
+            -LE "benchmark|stress|soak" \
+            --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-unit-output.txt
+
+      - name: Upload GC test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-unit-output-${{ matrix.config }}
+          path: gc-unit-output.txt
