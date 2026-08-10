@@ -14,6 +14,7 @@
 #include "gc_heap.h"
 #include "gc_layout.h"
 #include "gc_numa.h"
+#include "gc_config.h"
 #include "gc_old_gen.h"
 #include "gc_loh.h"
 #include "gc_scheduler.h"
@@ -506,24 +507,45 @@ void TeardownTlsPoh() noexcept {
 // ======================================================================
 
 void InitYoungGeneration() noexcept {
-    // Initialize scheduler memory limits from compile-time configuration.
+    // Initialize the GC config singleton (env overrides + programmatic knobs).
+    GcConfig().Initialize();
+
+    // Initialize scheduler memory limits from config (env-driven, replaces the
+    // former compile-time #if CHAOS_IL2CPP_GC_HEAP_*_LIMIT_MB only).
+    CHAOS_IL2CPP_SIZE hard_limit_mb = GcConfig().HeapHardLimitMB;
+    if (hard_limit_mb > 0) {
+        G_Scheduler().SetHardLimit(hard_limit_mb * 1024 * 1024);
+    }
 #if defined(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB) && CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB > 0
-    G_Scheduler().SetHardLimit(
-        static_cast<CHAOS_IL2CPP_SIZE>(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB) * 1024 * 1024);
+    if (hard_limit_mb == 0) {  // fall back to compile-time when no env knob
+        G_Scheduler().SetHardLimit(
+            static_cast<CHAOS_IL2CPP_SIZE>(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB) * 1024 * 1024);
+    }
 #endif
+    CHAOS_IL2CPP_SIZE soft_limit_mb = GcConfig().HeapSoftLimitMB;
+    if (soft_limit_mb > 0) {
+        G_Scheduler().SetSoftLimit(soft_limit_mb * 1024 * 1024);
+    }
 #if defined(CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB) && CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB > 0
-    G_Scheduler().SetSoftLimit(
-        static_cast<CHAOS_IL2CPP_SIZE>(CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB) * 1024 * 1024);
+    if (soft_limit_mb == 0) {  // fall back to compile-time when no env knob
+        G_Scheduler().SetSoftLimit(
+            static_cast<CHAOS_IL2CPP_SIZE>(CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB) * 1024 * 1024);
+    }
 #endif
+
+    // Nursery / Gen1 sizes from config (env-tunable, no recompile).
+    CHAOS_IL2CPP_SIZE nursery_size = GcConfig().DefaultNurserySize;
+    CHAOS_IL2CPP_SIZE gen1_size = GcConfig().DefaultGen1Size > 0
+        ? GcConfig().DefaultGen1Size : nursery_size;
 
     // Allocate an independent nursery region (no longer split 50/50 with survivor).
     auto* nursery = RegionManager::Instance().AllocateRegion(
-        RegionKind::REGION_NURSERY, kDefaultYoungRegionSize);
+        RegionKind::REGION_NURSERY, nursery_size);
     g_young_gen.region.store(nursery, std::memory_order_release);
 
     // Allocate an independent Gen1 survivor region.
     auto* gen1 = RegionManager::Instance().AllocateRegion(
-        RegionKind::REGION_GEN1, kDefaultYoungRegionSize);
+        RegionKind::REGION_GEN1, gen1_size);
     g_young_gen.gen1_region.store(gen1, std::memory_order_release);
 
     if (nursery && gen1) {
