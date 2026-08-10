@@ -21,39 +21,47 @@ created_by: main-agent
 
 引入 CoreCLR 式 region size class（4/2/1MB），作为区域化重构的地基。**非一次性完成整个区域化**（LOH-via-region / 世代写屏障 region→gen 映射 / 分代重绑为后续 K2/K3）。
 
-## 实现（gc_region.h/.cpp）
+## 实现（gc_region.h/.cpp + gc_loh.h/.cpp）
 
+### 地基（SelectRegionSize）
 - **`RegionManager::SelectRegionSize(kind, min_size)`** 自适应 helper：
   - NURSERY/GEN1/DOMAIN/POH 保持固定大小（不破坏行为）。
   - TENURED/default 按 CoreCLR class：min>2MB→4MB，>1MB→2MB，否则 1MB。
 - **接入 `AllocateRegion`**：TENURED/default 路径用 `SelectRegionSize`，NURSERY/GEN1/DOMAIN/POH 不变。
+
+### K1b（LOH-via-region）
+- `LohSegment` 加 `region_id` 字段（RegionId）。
+- `LargeObjectHeap::AllocateSegment`：改用 `REGION_FOH` region（`RegionManager::AllocateRegion`，用 K1 的 SelectRegionSize 自适应类），替代裸 `PalVirtualAlloc`。
+- `LargeObjectHeap::FreeSegment`：`region_id` 有效 → `FreeRegion`；否则回退 raw `VirtualFreePage`（兼容）。
+- 保留 LOH 的 segment-list / sweep / compact 逻辑，仅改内存后台。
 
 ## 对比 CoreCLR
 
 | CoreCLR | CRAG |
 |---------|------|
 | basic region 4/2/1MB 自适应（interface.cpp:455） | ✅ SelectRegionSize 4/2/1MB class |
-| large region for UOH | ⬜ LOH-via-region 后续 |
+| large region for UOH（region_allocator.cpp:19） | ✅ K1b LOH 走 REGION_FOH region |
 
 ## 验证
 
 | 项 | 结果 |
 |----|------|
 | `chaos_runtime_core` Debug 编译 | ✅ |
-| GC 单测：region 4/4、atomic 5/5、young_collector 5/5、gen1 11/11、loh 8/8、old_gen 6/6、poh 10/10、scheduler 8/8 | ✅ 全部 0 |
+| GC 单测：region 4/4、atomic 5/5、young_collector 5/5、gen1 11/11、**loh 8/8**、old_gen 6/6、poh 10/10、scheduler 8/8 | ✅ 全部 0（LOH region-backed 正常） |
 
 ## 已提交
 
-- commit（填）
+- 地基：`69613b545`
+- K1b（LOH-via-region）：（填）
 
-## Exit Criteria（地基已满足）
+## Exit Criteria（K1 地基 + K1b 已满足）
 
 - [x] SelectRegionSize 4/2/1MB 自适应 + 接入 TENURED
+- [x] LOH 走 REGION_FOH region（大对象 region 化），FreeRegion 释放
 - [x] 既有 kind 大小不变 + 无回归
 
 ## 后续（跨会话，记录）
 
-- K1b：LOH-via-region（大对象走 region 而非独立 VirtualAlloc segment）。
 - K2：世代写屏障 region→gen 映射 + card bundle。
 - K3：分代决策区化重绑。
 - K4：区域化回归。

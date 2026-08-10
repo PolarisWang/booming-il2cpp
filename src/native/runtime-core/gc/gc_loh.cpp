@@ -5,6 +5,7 @@
 #include "gc_api.h"
 #include "gc_card_table.h"
 #include "gc_heap.h"
+#include "gc_region.h"
 
 #include <chaos/pal/pal_mem.h>
 
@@ -62,21 +63,34 @@ LohSegment* LargeObjectHeap::AllocateSegment(CHAOS_IL2CPP_SIZE min_size) {
     CHAOS_IL2CPP_SIZE seg_size = (min_size + kLohSegmentSize - 1) & ~(kLohSegmentSize - 1);
     if (seg_size < kLohSegmentSize) seg_size = kLohSegmentSize;
 
-    CHAOS_IL2CPP_SIZE total_size = sizeof(LohSegment) + seg_size;
-    auto* mem = static_cast<LohSegment*>(VirtualAllocPage(total_size));
-    if (mem == nullptr) return nullptr;
+    // GC-K1b: back LOH segments with a REGION_FOH region (align CoreCLR
+    // region_allocator.cpp large-region-for-UOH) instead of a raw VirtualAlloc.
+    // RegionManager::AllocateRegion uses SelectRegionSize (4/2/1MB classes)
+    // from K1.  The LOH segment header is placed at the region base; the
+    // payload follows.  FreeSegment releases the region via FreeRegion.
+    RegionKind loh_kind = RegionKind::REGION_FOH;
+    auto* region = RegionManager::Instance().AllocateRegion(loh_kind, seg_size);
+    if (region == nullptr) return nullptr;
 
+    auto* mem = reinterpret_cast<LohSegment*>(region->begin);
     mem->next = nullptr;
     mem->payload_size = seg_size;
     mem->in_use.store(true, std::memory_order_release);
     mem->marked.store(false, std::memory_order_relaxed);
+    mem->region_id = region->id;  // track for region-backed free
 
     return mem;
 }
 
 void LargeObjectHeap::FreeSegment(LohSegment* seg) {
     if (seg == nullptr) return;
-    VirtualFreePage(seg, sizeof(LohSegment) + seg->payload_size);
+    // Release the backing region (region-backed LOH from K1b).  If region_id
+    // is invalid (legacy raw-VirtualAlloc segment), fall back to VirtualFree.
+    if (seg->region_id != kRegionIdInvalid) {
+        RegionManager::Instance().FreeRegion(seg->region_id);
+    } else {
+        VirtualFreePage(seg, sizeof(LohSegment) + seg->payload_size);
+    }
 }
 
 LohSegment* LargeObjectHeap::FindSegment(const void* ptr) const {

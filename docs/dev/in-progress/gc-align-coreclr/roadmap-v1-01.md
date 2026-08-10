@@ -142,7 +142,7 @@ Phase6: L1 <─ L2（依赖 K 区域化完成 + E1 旋钮 + D1 降级）
 | GC-G1 | 3 | completed | — | Dependent 运行期收敛（去 3 轮 cap，深链不丢） | — | — | 深链 Ephemeron proof | `engine_lifecycle.cpp` (`gc-g1-dependent/`) | 运行期收敛 + 0 回归 | `engine_lifecycle.*` | S |
 | GC-H1 | 3 | completed | — | 触发原因追踪（GcTriggerReason + stats 暴露） | GC-E1 | — | 事件 proof | `gc_scheduler.*`+`gc_stats.*` (`gc-h1-events/`) | 每GC原因可追踪，0 回归 | `gc_scheduler.*`+`gc_stats.*` | L |
 | GC-J1 | 4 | completed | — | BGC 并发 sweep（GcWorkerPool 并行，disjoint 页） | GC-C1 | — | BGC 并发 proof | `gc_old_gen.cpp` (`gc-j1-bgc-sweep/`) | 无 hang + 0 回归 | `gc_old_gen.*` | L |
-| GC-K1 | 5 | in-progress | — | Region 地基：SelectRegionSize 4/2/1MB class（区域化第一步，跨会话） | GC-E1 | — | region 分配 proof | `gc_region.*` (`gc-k1-region-alloc/`) | 地基 {0}：自适应 class 接入 + 0 回归 | `gc_region.*` | XL |
+| GC-K1 | 5 | in-progress | — | Region 地基：SelectRegionSize 4/2/1MB class + LOH-via-region (K1b) | GC-E1 | — | region 分配 proof | `gc_region.*`+`gc_loh.*` (`gc-k1-region-alloc/`) | 地基+K1b：自适应 class + LOH region 化 + 0 回归 | `gc_region.*`,`gc_loh.*` | XL |
 | GC-K2 | 5 | planned | — | 世代感知写屏障 + card bundle | GC-K1 | — | 写屏障代感知 proof | `gc_card_table.*`/codegen | gen0→gen0 不设卡 | `gc_card_table.*` | L |
 | GC-K3 | 5 | planned | — | 分代决策区化重绑 | GC-K2 | — | region 重绑 proof | `gc_young_collector.cpp`/`gc_gen1.cpp` | 走 region 绑定 | `gc_young_collector.*`/`gc_gen1.*` | XL |
 | GC-K4 | 5 | planned | — | 区域化回归验证 | GC-K3 | — | 全量回归 proof | tests + 热更新域卸载 | 24 项无回归 | `tests/contracts/native/runtime-core/` | L |
