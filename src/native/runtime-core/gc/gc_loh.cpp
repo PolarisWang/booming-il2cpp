@@ -63,7 +63,7 @@ LohSegment* LargeObjectHeap::AllocateSegment(CHAOS_IL2CPP_SIZE min_size) {
     CHAOS_IL2CPP_SIZE seg_size = (min_size + kLohSegmentSize - 1) & ~(kLohSegmentSize - 1);
     if (seg_size < kLohSegmentSize) seg_size = kLohSegmentSize;
 
-    // GC-K1b: back LOH segments with a REGION_FOH region (align CoreCLR
+    // back LOH segments with a REGION_FOH region (align CoreCLR
     // region_allocator.cpp large-region-for-UOH) instead of a raw VirtualAlloc.
     // RegionManager::AllocateRegion uses SelectRegionSize (4/2/1MB classes)
     // from K1.  The LOH segment header is placed at the region base; the

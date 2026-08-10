@@ -39,7 +39,7 @@ struct LohSegment {
     CHAOS_IL2CPP_SIZE payload_size;          ///< Usable payload bytes
     std::atomic<bool> in_use;                ///< true = segment actively used
     std::atomic<bool> marked;                ///< true = object in this segment is marked live
-    RegionId region_id;                      ///< Backing region (GC-K1b); kRegionIdInvalid if raw
+    RegionId region_id;                      ///< Backing region ; kRegionIdInvalid if raw
 };
 
 /// Large Object Heap — mark-sweep with optional compaction.

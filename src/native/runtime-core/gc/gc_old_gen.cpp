@@ -3138,7 +3138,7 @@ void MarkSweepOldGen::BgcSweep() {
     // clear_bitmap=false preserves the mark bitmap for DecideCompactMode which
     // runs later in BgcCompact().
     //
-    // GC-J1: re-introduce true parallel sweep (align CoreCLR background_sweep).
+    // re-introduce true parallel sweep (align CoreCLR background_sweep).
     // Pages are strided across workers so each worker owns a DISJOINT subset of
     // pages — no shared page is swept by two workers concurrently.  The worker
     // pool run is a bounded join (thread-safe, no safepoint interaction because

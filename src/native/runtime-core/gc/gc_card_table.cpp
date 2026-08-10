@@ -18,7 +18,7 @@ std::unique_ptr<std::atomic<CardSegment*>[]> g_card_l1(
     new std::atomic<CardSegment*>[kCardL1Entries]());
 std::atomic<size_t> g_card_l1_size{kCardL1Entries};
 
-// ── Card bundle (GC-K2d): 1 bit per 2MB heap chunk, upper sparse index ──
+// ── Card bundle : 1 bit per 2MB heap chunk, upper sparse index ──
 // Sized to cover g_card_l1_size segments (each segment = 64KB).  One bundle
 // bit covers 2MB = 32 card segments.  Grown alongside the L1 table.
 uint8_t* g_card_bundle = nullptr;
@@ -72,7 +72,7 @@ extern "C" void chaos_gc_dirty_card(const void* obj) noexcept {
     DirtyCard(obj);
 }
 
-// GC-K2b: generation-aware write barrier.  Faithfully replicates CoreCLR's
+// generation-aware write barrier.  Faithfully replicates CoreCLR's
 // region write-barrier short-circuits (JitHelpers_FastWriteBarriers.asm
 // Region64): only set a card when dst is non-gen0 AND the stored ref is in a
 // strictly-younger (older-generation writing younger, or gen0 ref into old)
@@ -215,7 +215,7 @@ void ClearAllCards() noexcept {
         std::memset(node->segment->cards, 0, sizeof(node->segment->cards));
         node = node->next;
     }
-    // GC-K2d: keep the bundle in sync (clear it; cards are now all clean).
+    // keep the bundle in sync (clear it; cards are now all clean).
     CardBundleClearAll();
 }
 

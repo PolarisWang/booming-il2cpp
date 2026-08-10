@@ -70,7 +70,7 @@ struct CardSegment {
 extern std::unique_ptr<std::atomic<CardSegment*>[]> g_card_l1;
 extern std::atomic<size_t> g_card_l1_size;
 
-/// Card bundle (GC-K2d, align CoreCLR card_bundle): a sparse 1-bit-per-2MB
+/// Card bundle (align CoreCLR card_bundle): a sparse 1-bit-per-2MB
 /// upper index over the card table.  Set alongside a card write; ScanDirtyCards
 /// checks it first to skip entire clean 2MB chunks without touching L2 cards.
 /// size = (max_covered_bytes >> kCardBundleShift + 7) / 8 bytes.
@@ -149,7 +149,7 @@ inline void DirtyCard(const void* obj) noexcept {
         // traffic for repeated writes to the same 512-byte card.
         if (seg->cards[card_idx] != 0xFF) {
             seg->cards[card_idx] = 0xFF;
-            // GC-K2d: also set the 2MB bundle bit so ScanDirtyCards can fast-skip
+            // also set the 2MB bundle bit so ScanDirtyCards can fast-skip
             // clean chunks (align CoreCLR card_bundle_set).
             CardBundleSet(CardBundleBit(idx));
         }
@@ -162,7 +162,7 @@ inline void DirtyCard(const void* obj) noexcept {
 /// The codegen includes this header via <gc/gc_card_table.h>.
 extern "C" void chaos_gc_dirty_card(const void* obj) noexcept;
 
-/// GC-K2b generation-aware write barrier (dst + stored ref) — codegen emits
+/// generation-aware write barrier (dst + stored ref) — codegen emits
 /// this at stfld / stelem.ref / stobj where the stored reference is available
 /// to skip gen0→gen0 / same-mature card marking (faithful to CoreCLR region
 /// write barrier).  Fallback to chaos_gc_dirty_card(dst) when ref is unknown.
@@ -252,7 +252,7 @@ inline void ScanDirtyCards(uintptr_t start, uintptr_t end, Fn&& callback) noexce
         auto* seg = g_card_l1[si].load(std::memory_order_acquire);
         if (seg == nullptr) continue;
 
-        // GC-K2d: card-bundle fast skip (align CoreCLR find_card_dword).  If
+        // card-bundle fast skip (align CoreCLR find_card_dword).  If
         // this segment's 2MB bundle bit is CLEAR, no card in the entire chunk
         // was dirtied — skip the whole segment without touching L2 cards.
         uintptr_t global_card_for_seg = si * kCardsPerSegment;

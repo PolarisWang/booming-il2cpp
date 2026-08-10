@@ -75,7 +75,7 @@ struct Region {
     Region*         next;           // free-list / GC work-set link
     Region*         poh_next;       // POH region linked list (O(1) iteration)
 
-    uint8_t         gen;            // GC-K2: generation of this region (0/1/2),
+    uint8_t         gen;            // generation of this region (0/1/2),
                                     // aligned to CoreCLR region_info's low 2 bits.
 };
 
