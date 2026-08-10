@@ -92,18 +92,26 @@ static constexpr uint8_t kRegionGenOld    = 2u;
 /// RegionManager::Init / region allocation; read-only after init on the hot path.
 /// kRegionGenShift = log2(4MB) = 22 (largest region size class from K1).
 static constexpr CHAOS_IL2CPP_SIZE kRegionGenShift = 22;
-extern uint8_t* g_region_to_gen;          // = table_base - (lowest_addr >> kRegionGenShift)
+extern uint8_t* g_region_to_gen;          // = table base (skewed by RegionManager)
+extern CHAOS_IL2CPP_SIZE g_region_gen_bytes;  // table size in bytes (for bounds guard)
 
 /// O(1) skewed lookup of a region's generation from any address.
+/// Bounds-guarded: addresses outside the covered table range conservatively
+/// report old(2) so the write barrier never OOB-reads for an out-of-heap value.
 inline uint8_t GetRegionGen(uintptr_t addr) noexcept {
     if (g_region_to_gen == nullptr) return kRegionGenOld;  // uninitialized → conservative
-    return g_region_to_gen[addr >> kRegionGenShift] & kRegionGenMask;
+    CHAOS_IL2CPP_SIZE idx = addr >> kRegionGenShift;
+    if (idx >= g_region_gen_bytes) return kRegionGenOld;   // out of covered range → conservative
+    return g_region_to_gen[idx] & kRegionGenMask;
 }
 
 /// Update the skewed table entry for the region covering @a addr to @a gen.
+/// No-op if the table isn't initialized or @a addr is out of covered range.
 inline void SetRegionGen(uintptr_t addr, uint8_t gen) noexcept {
     if (g_region_to_gen == nullptr) return;
-    g_region_to_gen[addr >> kRegionGenShift] = gen & kRegionGenMask;
+    CHAOS_IL2CPP_SIZE idx = addr >> kRegionGenShift;
+    if (idx >= g_region_gen_bytes) return;
+    g_region_to_gen[idx] = gen & kRegionGenMask;
 }
 
 // ── Forward declarations ──────────────────────────────────────

@@ -35,6 +35,7 @@ namespace chaos::il2cpp::runtime_core {
 // without invoking RegionManager.  Lazy-grown to cover the highest seen
 // region address.  Guarded by RegionManager::mutex_ (allocated under it).
 uint8_t* g_region_to_gen = nullptr;
+CHAOS_IL2CPP_SIZE g_region_gen_bytes = 0;                 // table size in bytes (bounds guard)
 static CHAOS_IL2CPP_SIZE s_region_gen_high_idx = 0;   // highest covered index (inclusive)
 
 /// Ensure g_region_to_gen covers index = @a addr >> kRegionGenShift.
@@ -51,6 +52,7 @@ static void EnsureRegionGenCoverage(uintptr_t addr) {
     // uncovered region 查表 returns "old" → conservative card marking).
     for (CHAOS_IL2CPP_SIZE i = s_region_gen_high_idx + 1; i < cap; i++) new_tab[i] = kRegionGenOld;
     g_region_to_gen = new_tab;
+    g_region_gen_bytes = cap;
     s_region_gen_high_idx = cap - 1;
 }
 
