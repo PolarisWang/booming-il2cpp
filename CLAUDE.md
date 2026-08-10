@@ -106,7 +106,7 @@ Phase 3 — 按方案逐域修复
 
 | 规范 | wiki 路径 |
 |------|----------|
-| Native 调试/LOG/PROFILE_SCOPE | `wiki/调试与性能分析规范.md` |
-| 命名空间/Include/extern C | `wiki/C++编码规范.md` |
-| `unordered_map` 选型 | `wiki/unordered_map选型规则.md` |
-| SDK/TPG 输出边界 | `wiki/SDK-TPG边界约束.md` |
+| **Native 编码规范 v1**（命名空间/Include/extern C/命名/注释/格式/内存/宏） | `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/native-coding-conventions-v1.md` |
+| Native 调试/LOG/PROFILE_SCOPE | `wiki/03-功能模块/06-il2cpp核心架构/24-DAP调试器使用说明.md` + 上述 v1 §5 日志节 |
+| `unordered_map` 选型 | 见 v1 规范 §5 内存/宏 + `wiki/04-工具与集成/chaos-sdk-usage.md` |
+| SDK/TPG 输出边界（四层架构红线） | `wiki/01-项目总览/codegen-tpg-python-module-boundaries.md` |
