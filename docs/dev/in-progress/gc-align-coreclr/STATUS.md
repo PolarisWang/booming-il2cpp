@@ -71,26 +71,25 @@ completed_batches: []
 - 2026-08-10：创建本 roadmap（v1-01）。分析了 `D:\OpenSource\dotnet\runtime\src\coreclr\gc\`（~79,400 行）与 CRAG GC（~18,750 行）的核心差异，识别 12 项欠缺功能，按 P0/P1/区域化重构排列为 6 阶段 16 子任务。
 - 2026-08-10：**Phase 1 全部完成**（GC-B1 `6659812d4` / GC-A1 `e4dae1f97` / GC-C1 `f7850324e` + 两个 pre-existing 测试修复 `f5ceb0072`/`b9311d2e9`）。
 - 2026-08-10：**Phase 2 GC-E1 完成**（`589baadfd` 配置旋钮，跨平台 env + AOT/JIT API）。
-- 2026-08-10：**Phase 3 全部完成**：
-  - GC-G1（`10608b337`）：Dependent 运行期收敛。
-  - GC-F1（`b6333ae54`）：handle 分代剪枝。
-  - GC-H1（`007e57e96`）：per-GC 触发原因追踪（GcTriggerReason + stats）。
-- 验证：Phase 3 三项后 GC 单测全部 0 回归。
+- 2026-08-10：**Phase 4 GC-J1 完成**（`76be683f4`：BGC 并发 sweep，GcWorkerPool 并行 disjoint 页）。
+- 验证：Phases 1-4 后 GC 单测全部 0 回归，BGC 长跑测试完成无 hang。
 
 ## latest_stop_point
 
-- Phase 1/2/3 全部完成。进入 Phase 4（GC-J1 BGC 并发 sweep）。
+- Phase 1/2/3/4 全部完成。剩 Phase 5（区域化重构 K1-K4）与 Phase 6（L1/L2）。
 
 ## 进度（截至 2026-08-10）
 
 | 阶段 | 子任务 | 状态 |
 |------|--------|------|
-| Phase 1 | GC-B1 / GC-A1 / GC-C1 | ✅ |
-| Phase 2 | GC-E1 / GC-D1 | ✅ |
+| Phase 1 | GC-B1 / GC-A1 / GC-C1 | ✅ 完成 |
+| Phase 2 | GC-E1 / GC-D1 | ✅ 完成 |
 | Phase 3 | GC-G1 / GC-F1 / GC-H1 | ✅ 完成 |
-| Phase 4 | GC-J1（BGC 并发 sweep） | ⬜ 下一步 |
-| Phase 5 | GC-K1..K4（区域化重构） | ⬜（跨多会话） |
-| Phase 6 | GC-L1 / GC-L2 | ⬜ |
+| Phase 4 | GC-J1 | ✅ 完成 |
+| Phase 5 | GC-K1..K4（**区域化重构**） | ⬜ **最高风险，跨多会话** |
+| Phase 6 | GC-L1 / GC-L2 | ⬜ 依赖 K |
+
+> **Phase 5 区域化重构（K1-K4）是超大型工作**：重构 GC 内存模型到 CoreCLR region-based（region allocator / 世代写屏障 / 分代重绑），涉及 64MB segment → 4MB region、codegen 边界、热更新域卸载交互。必须留给专门的多会话聚焦，无法在本会话完成。Phase 6 依赖 K。
 
 ---
 
