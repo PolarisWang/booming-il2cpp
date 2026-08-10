@@ -3133,22 +3133,53 @@ void MarkSweepOldGen::BgcSweep() {
     }
 
     // Parallel sweep via GcWorkerPool.
-    // Restored after BGC hang investigation — see git log for details.
     // Each page has independent free_lists and bitmap; SweepPage + CoalescePage
-    // are thread-safe on disjoint pages. clear_bitmap=false preserves mark
-    // bitmap for DecideCompactMode which runs later in BgcCompact().
+    // are thread-safe on disjoint pages (guarded by per-page sweep_lock), and
+    // clear_bitmap=false preserves the mark bitmap for DecideCompactMode which
+    // runs later in BgcCompact().
+    //
+    // GC-J1: re-introduce true parallel sweep (align CoreCLR background_sweep).
+    // Pages are strided across workers so each worker owns a DISJOINT subset of
+    // pages — no shared page is swept by two workers concurrently.  The worker
+    // pool run is a bounded join (thread-safe, no safepoint interaction because
+    // these are GC worker threads with their own stack, not mutators).
     {
         int total_pages = static_cast<int>(pages.size());
+        int active = 0;
         for (auto* page : pages) {
-            if (!page->in_use.load(std::memory_order_acquire)) continue;
-            SweepPage(page, false);
-            CoalescePage(page);
+            if (page->in_use.load(std::memory_order_acquire)) active++;
+        }
+        if (active > 8) {
+            // Enough work to justify parallel dispatch.
+            int worker_count = std::min<int>(active / 32 + 1, 8);
+            int target_workers = std::min(worker_count, active);
+            std::atomic<int> shared_slice{0};
+            GcWorkerPool::Instance().RunWorkers(target_workers, [&](int /*idx*/) {
+                // Each worker takes the next-disjoint page from the shared
+                // counter; page->sweep_lock in SweepPage guards against any
+                // residual contention.
+                for (;;) {
+                    int p = shared_slice.fetch_add(1, std::memory_order_relaxed);
+                    if (p >= total_pages) break;
+                    auto* page = pages[p];
+                    if (!page->in_use.load(std::memory_order_acquire)) continue;
+                    SweepPage(page, false);
+                    CoalescePage(page);
+                }
+            });
+        } else {
+            // Small sweep — serial (avoids worker-pool startup overhead).
+            for (auto* page : pages) {
+                if (!page->in_use.load(std::memory_order_acquire)) continue;
+                SweepPage(page, false);
+                CoalescePage(page);
 
-            // Time-slice: yield after exceeding budget to let mutators run.
-            auto elapsed = std::chrono::steady_clock::now() - sweep_slice_start;
-            if (elapsed >= kSweepSliceBudget) {
-                sweep_slice_start = std::chrono::steady_clock::now();
-                std::this_thread::sleep_for(kSweepSliceInterval);
+                // Time-slice: yield after exceeding budget to let mutators run.
+                auto elapsed = std::chrono::steady_clock::now() - sweep_slice_start;
+                if (elapsed >= kSweepSliceBudget) {
+                    sweep_slice_start = std::chrono::steady_clock::now();
+                    std::this_thread::sleep_for(kSweepSliceInterval);
+                }
             }
         }
     }
