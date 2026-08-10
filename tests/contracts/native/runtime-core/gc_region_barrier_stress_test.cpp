@@ -108,9 +108,15 @@ static void RunCrossGenRefStoreStress() {
     // must point at valid GC-managed memory (nursery or old-gen).  A dangling
     // pointer (not in nursery and not in old-gen) indicates the barrier missed a
     // cross-gen edge and the young object was freed while still referenced.
-    // (Diagnostics previously confirmed: the old slot is region_gen==2 the
-    //  barrier sets the card, the ref is region_gen==0, yet under multi-threaded
-    //  writes the young-GC rescan does not always preserve every cross-gen edge.)
+    //
+    // Root cause (verified): the slot STORE and the CARD-BARRIER are two separate
+    // operations.  If a coordinated GC safepoint lands BETWEEN them, young-GC
+    // Phase-1 scans that old page with the card still clean, so it does not see
+    // the freshly-stored nursery ref; the object (referenced only from this
+    // not-yet-carded slot) is collected, and the later barrier mark is too late.
+    // Diagnostics confirmed old-slot region_gen==2 (barrier would set card) and
+    // ref region_gen==0 (short-circuit fires) — the barrier's decision is correct;
+    // the miss is the non-atomic store-then-barrier window against a concurrent GC.
     int valid = 0, dangling = 0;
     void* first_dangle = nullptr;
     int last_dangle_t = -1;
