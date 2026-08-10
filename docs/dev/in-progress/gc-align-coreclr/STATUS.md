@@ -71,11 +71,11 @@ completed_batches: []
 - 2026-08-10：创建本 roadmap（v1-01）。分析了 `D:\OpenSource\dotnet\runtime\src\coreclr\gc\`（~79,400 行）与 CRAG GC（~18,750 行）的核心差异，识别 12 项欠缺功能，按 P0/P1/区域化重构排列为 6 阶段 16 子任务。
 - 2026-08-10：**Phase 1 全部完成**（GC-B1 `6659812d4` / GC-A1 `e4dae1f97` / GC-C1 `f7850324e` + 两个 pre-existing 测试修复 `f5ceb0072`/`b9311d2e9`）。
 - 2026-08-10：**Phase 2 GC-E1 完成**（`589baadfd` 配置旋钮，跨平台 env + AOT/JIT API）。
-- 2026-08-10：**Phase 5 GC-K1 地基完成**（`69613b545`：SelectRegionSize 4/2/1MB region size class，接入 AllocateRegion TENURED 路径）。完整区域化（LOH-via-region / K2 世代写屏障 / K3 分代重绑 / K4 回归）为跨会话后续。
+- 2026-08-10：**Phase 5 GC-K1 地基 + K1b 完成**：`69613b545`（SelectRegionSize 4/2/1MB class）+ `862da35a1`（LOH-via-region REGION_FOH）。完整区域化（K2 世代写屏障 region→gen 映射 / K3 分代重绑 / K4 回归）为跨会话后续。
 
 ## latest_stop_point
 
-- Phase 1-4 + GC-K1 地基完成。worktree 干净。
+- Phase 1-4 + GC-K1(K1b) 完成。worktree 干净。
 
 ## 进度（截至 2026-08-10）
 
@@ -85,10 +85,10 @@ completed_batches: []
 | Phase 2 | GC-E1 / GC-D1 | ✅ |
 | Phase 3 | GC-G1 / GC-F1 / GC-H1 | ✅ |
 | Phase 4 | GC-J1 | ✅ |
-| Phase 5 | GC-K1（地基） | 🟢 地基 {+}（SelectRegionSize class）；K2/K3/K4 跨会话 |
+| Phase 5 | GC-K1（SelectRegionSize）+ K1b（LOH-via-region） | 🟢 地基+K1b done；**K2/K3/K4 跨会话** |
 | Phase 6 | GC-L1 / GC-L2 | ⬜ 依赖 K |
 
-> **Phase 5 完整区域化（K2 世代写屏障 region→gen 映射/hard bundle、K3 分代重绑、K4 回归 + LOH-via-region K1b）是跨多会话工作**，本会话已交付可验证地基（SelectRegionSize）。剩余为跨会话主线。
+> **Phase 5 剩余（K2 世代写屏障 region→gen 映射/hard bundle、K3 分代重绑、K4 回归）与 Phase 6 是跨多会话主线**。每个都依赖前者（K2←K1，K3←K2），且涉及深内存模型改动。本会话已交付可验证的 K1 地基 + K1b。
 
 ---
 
