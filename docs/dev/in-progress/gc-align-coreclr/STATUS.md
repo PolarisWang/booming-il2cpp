@@ -69,20 +69,13 @@ completed_batches: []
 ## 最近摘要
 
 - 2026-08-10：创建本 roadmap（v1-01）。分析了 `D:\OpenSource\dotnet\runtime\src\coreclr\gc\`（~79,400 行）与 CRAG GC（~18,750 行）的核心差异，识别 12 项欠缺功能，按 P0/P1/区域化重构排列为 6 阶段 16 子任务。
-- 2026-08-10：**Phase 1 三项全部完成并提交**：
-  - **GC-B1**（`6659812d4`）：移除 GC 核心 CHAOS_GC_STRESS 测试宏。
-  - **GC-A1**（`e4dae1f97`）：young GC 全线程精确根扫描（修 UAF）。
-  - **GC-C1**（`f7850324e`）：并行标记声明式终止对齐。
-  - **两个 pre-existing 测试问题修复**：young_collector SUB-2（`f5ceb0072`）+ gen1 5 失败（`b9311d2e9`）。
-- 2026-08-10：**Phase 2 GC-E1 已完成**（`589baadfd`）：配置旋钮体系对齐 CoreCLR gcconfig —— `gc_config.h/.cpp` `CHAOS_GC_CONFIGURATION_KEYS` 宏表 + `std::getenv` env 覆盖（跨平台）+ `chaos_gc_config_*` native API（AOT/JIT 可链） + 接线 `InitYoungGeneration`（nursery/gen1 大小 + 硬软限）。验证：`CHAOS_GC_NurserySize` 生效（64MB→16MB）、GC 单测 0 回归。
+- 2026-08-10：**Phase 1 全部完成**（GC-B1 `6659812d4` / GC-A1 `e4dae1f97` / GC-C1 `f7850324e` + 两个 pre-existing 测试修复 `f5ceb0072`/`b9311d2e9`）。
+- 2026-08-10：**Phase 2 GC-E1 完成**（`589baadfd` 配置旋钮，跨平台 env + AOT/JIT API）。
+- 2026-08-10：**Phase 2 GC-D1 增量1 完成**（`5dc595cf7`）：OOM 终态对齐 CoreCLR handle_oom —— 半量预算 clamp（`kOomReportHalfBudget`=32KB）+ OOM 归因升级（`s_recent_gc_mem_failure` 真OOM/误报区分）。验证：GC 单测 0 回归 + stress Scenario B OOM 阶梯 emergency reserve 恢复。
 
 ## latest_stop_point
 
-- **Phase 1 完成** + **Phase 2 GC-E1 完成**。worktree 干净。
-
-## 下一步
-
-- **Phase 2 GC-D1**：OOM 逐级降级链（对齐 CoreCLR `allocation.cpp:2055`）。CRAG 已有 全GC重试→emergency reserve→逐页 decommit→OOM，缺 **provisional mode**（内存极紧时调度器优雅降级）与 **半量预算**（oom_budget 缩放 gen 预算）。涉及调度器，需专门会话聚焦。**GC-D1 尚未完成。**
+- Phase 1 + GC-E1 + GC-D1 增量1 完成。GC-D1 增量2（provisional mode + 记忆压力 decommit）待续。
 
 ## 进度（截至 2026-08-10）
 
@@ -90,7 +83,7 @@ completed_batches: []
 |------|--------|------|
 | Phase 1 | GC-B1 / GC-A1 / GC-C1 | ✅ 完成 |
 | Phase 2 | GC-E1 | ✅ 完成 |
-| Phase 2 | GC-D1 | ⬜ 待做（需调度器专门会话） |
+| Phase 2 | GC-D1 | 🟠 增量1 done；增量2(provisional/decommit) 待续 |
 | Phase 3 | GC-H1 / GC-F1 / GC-G1 | ⬜ |
 | Phase 4 | GC-J1 | ⬜ |
 | Phase 5 | GC-K1..K4（区域化重构） | ⬜（最高风险，跨多会话） |
