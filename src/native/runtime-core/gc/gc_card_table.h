@@ -70,6 +70,38 @@ struct CardSegment {
 extern std::unique_ptr<std::atomic<CardSegment*>[]> g_card_l1;
 extern std::atomic<size_t> g_card_l1_size;
 
+/// Card bundle (GC-K2d, align CoreCLR card_bundle): a sparse 1-bit-per-2MB
+/// upper index over the card table.  Set alongside a card write; ScanDirtyCards
+/// checks it first to skip entire clean 2MB chunks without touching L2 cards.
+/// size = (max_covered_bytes >> kCardBundleShift + 7) / 8 bytes.
+/// kCardBundleShift = 21 → 2 MB per bundle bit.  Non-atomic: grown under the
+/// card-table mutex alongside g_card_l1; bits written via relaxed stores.
+static constexpr CHAOS_IL2CPP_SIZE kCardBundleShift = 21;
+extern uint8_t* g_card_bundle;
+extern std::atomic<size_t> g_card_bundle_size;
+
+/// Get the bundle bit for @a heap_offset_idx (card-index space → 2MB units).
+inline uintptr_t CardBundleBit(uintptr_t card_global_idx) noexcept {
+    return (card_global_idx >> (kCardBundleShift - kCardShift));
+}
+/// Test whether a bundle bit is dirty.
+inline bool CardBundleTest(uintptr_t bundle_bit) noexcept {
+    if (g_card_bundle == nullptr || bundle_bit >= g_card_bundle_size.load(std::memory_order_relaxed) * 8)
+        return true;  // out of coverage → conservatively "possibly dirty"
+    return (g_card_bundle[bundle_bit >> 3] & (uint8_t)(1u << (bundle_bit & 7))) != 0;
+}
+/// Set a bundle bit (relaxed; called alongside DirtyCard).
+inline void CardBundleSet(uintptr_t bundle_bit) noexcept {
+    if (g_card_bundle == nullptr || bundle_bit >= g_card_bundle_size.load(std::memory_order_relaxed) * 8)
+        return;
+    g_card_bundle[bundle_bit >> 3] |= (uint8_t)(1u << (bundle_bit & 7));
+}
+/// Clear all bundle bits (called alongside ClearAllCards).
+inline void CardBundleClearAll() noexcept {
+    if (g_card_bundle == nullptr) return;
+    std::memset(g_card_bundle, 0, g_card_bundle_size.load(std::memory_order_relaxed));
+}
+
 /// Base address of the managed heap.  Set once at startup via GcSetHeapBase().
 extern uintptr_t g_heap_base;
 
@@ -117,6 +149,9 @@ inline void DirtyCard(const void* obj) noexcept {
         // traffic for repeated writes to the same 512-byte card.
         if (seg->cards[card_idx] != 0xFF) {
             seg->cards[card_idx] = 0xFF;
+            // GC-K2d: also set the 2MB bundle bit so ScanDirtyCards can fast-skip
+            // clean chunks (align CoreCLR card_bundle_set).
+            CardBundleSet(CardBundleBit(idx));
         }
     }
 }
@@ -216,6 +251,14 @@ inline void ScanDirtyCards(uintptr_t start, uintptr_t end, Fn&& callback) noexce
     for (uintptr_t si = first_seg; si <= last_seg && si < g_card_l1_size.load(std::memory_order_acquire); si++) {
         auto* seg = g_card_l1[si].load(std::memory_order_acquire);
         if (seg == nullptr) continue;
+
+        // GC-K2d: card-bundle fast skip (align CoreCLR find_card_dword).  If
+        // this segment's 2MB bundle bit is CLEAR, no card in the entire chunk
+        // was dirtied — skip the whole segment without touching L2 cards.
+        uintptr_t global_card_for_seg = si * kCardsPerSegment;
+        if (!CardBundleTest(CardBundleBit(global_card_for_seg))) {
+            continue;
+        }
 
         uintptr_t seg_first_card = (si == first_seg) ? (first % kCardsPerSegment) : 0;
         uintptr_t seg_last_card  = (si == last_seg)  ? (last  % kCardsPerSegment) : (kCardsPerSegment - 1);

@@ -18,6 +18,30 @@ std::unique_ptr<std::atomic<CardSegment*>[]> g_card_l1(
     new std::atomic<CardSegment*>[kCardL1Entries]());
 std::atomic<size_t> g_card_l1_size{kCardL1Entries};
 
+// ── Card bundle (GC-K2d): 1 bit per 2MB heap chunk, upper sparse index ──
+// Sized to cover g_card_l1_size segments (each segment = 64KB).  One bundle
+// bit covers 2MB = 32 card segments.  Grown alongside the L1 table.
+uint8_t* g_card_bundle = nullptr;
+std::atomic<size_t> g_card_bundle_size{0};
+
+/// Ensure the card bundle bitset covers @a seg_count card-table segments.
+/// Bytes needed = (seg_count * kBytesPerSegment) >> kCardBundleShift, /8.
+/// Called under the card-table lock from GcRegisterHeapRange.
+static void EnsureCardBundleCoverage(size_t seg_count) noexcept {
+    size_t covered_bytes = seg_count * kSegmentCoverage;    // kSegmentCoverage = 64KB
+    size_t bundle_bits  = (covered_bytes >> kCardBundleShift) + 1;
+    size_t need_bytes   = (bundle_bits + 7) >> 3;
+    size_t have_bytes   = g_card_bundle_size.load(std::memory_order_relaxed);
+    if (need_bytes <= have_bytes) return;
+    size_t cap = have_bytes == 0 ? 256 : have_bytes;
+    while (cap < need_bytes) cap *= 2;
+    auto* nb = static_cast<uint8_t*>(std::realloc(g_card_bundle, cap));
+    if (nb == nullptr) return;
+    if (have_bytes < cap) std::memset(nb + have_bytes, 0, cap - have_bytes);
+    g_card_bundle = nb;
+    g_card_bundle_size.store(cap, std::memory_order_release);
+}
+
 // ── Tracked segment list for O(allocated) ClearAllCards ───────
 struct CardSegmentNode {
     CardSegment* segment;
@@ -125,6 +149,7 @@ void GcRegisterHeapRange(uintptr_t start, uintptr_t end) {
         g_card_l1.swap(new_table);
         g_card_l1_size.store(new_size, std::memory_order_release);
         g_heap_base = start;
+        EnsureCardBundleCoverage(new_size);
     }
 
     // ── Compute segment range relative to (possibly updated) base ──
@@ -149,7 +174,10 @@ void GcRegisterHeapRange(uintptr_t start, uintptr_t end) {
         g_card_l1.swap(new_table);
         g_card_l1_size.store(new_size, std::memory_order_release);
         current_size = new_size;
+        EnsureCardBundleCoverage(new_size);
     }
+    // Ensure the bundle covers even the initial L1 size on first registration.
+    EnsureCardBundleCoverage(g_card_l1_size.load(std::memory_order_acquire));
 
     // ── Allocate L2 segments for any null entries ──────────────────
     for (uintptr_t si = first_seg; si <= last_seg; si++) {
@@ -187,6 +215,8 @@ void ClearAllCards() noexcept {
         std::memset(node->segment->cards, 0, sizeof(node->segment->cards));
         node = node->next;
     }
+    // GC-K2d: keep the bundle in sync (clear it; cards are now all clean).
+    CardBundleClearAll();
 }
 
 void ClearCardRange(uintptr_t start, uintptr_t end) noexcept {
