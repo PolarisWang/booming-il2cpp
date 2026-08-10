@@ -5,15 +5,45 @@
 ```yaml
 task_id: gc-align-coreclr
 task_type: roadmap
-phase: roadmap
-roadmap_or_plan: docs/dev/in-progress/gc-align-coreclr/roadmap-v1-01.md
+phase: roadmap-v2
+roadmap_or_plan: docs/dev/in-progress/gc-align-coreclr/roadmap-v2-01.md
 created: 2026-08-10
 created_by: main-agent
-source: 用户要求（比对 dotnet 源码后产出代码级对齐 CoreCLR 的开发计划）
+source: 用户要求 - 按优先级逐项对齐 CoreCLR GC 全部剩余功能
 blocking_questions: []
 question_clearance: cleared
 clearance_confirmed_by_user: true
 ```
+
+## 用户确认门（2026-08-10）
+
+| 决策 | 内容 |
+|------|------|
+| 对齐深度 | 全部完成（roadmap-v2 覆盖 P0/P1/P2 全部剩余功能域） |
+| 约束 | 多平台 + JIT/AOT + 热更友好 |
+| 形态 | 正式 roadmap（roadmap-v2-01.md，可执行） |
+| 保留 | CRAG 热更新差异化（域卸载 O(region)） |
+
+## 进度（截至 2026-08-10）
+
+| 阶段 | 子任务 | 状态 |
+|------|--------|------|
+| Phase 1-5 | GC-A1..K4（13 子任务） | ✅ 已完成 |
+| Phase 6 | GC-L1/L2 | ⬜ 纳入 v2 Phase 8 (M6/M3B) |
+| **Phase 7** | GC-M1(M2(M3A)（P0 生产必须） | ⬜ 下一步：M1 |
+| **Phase 8** | GC-M3B..M10（P1 能力） | ⬜ |
+| **Phase 9** | GC-M11..M15（P2 工程） | ⬜ |
+
+## 下一步
+
+- 启动 `recommended_next_child = GC-M1`（K2c 世代写屏障管线 regen 验证，最高优先）。
+- 约束满足方式：每子任务按 roadmap 三约束原则（多平台纯 C++ / JIT-AOT 同符号 / 热更兼容入口）+ 架构优先前置（读 CoreCLR 原文）。
+
+## 关键文档
+
+- `docs/dev/in-progress/gc-align-coreclr/roadmap-v2-01.md`
+- `docs/dev/assessments/gc-vs-coreclr-remaining-features-2026-08-10.md`（26 项功能域输入）
+- 子任务：gc-a1..gc-k4（Phase 1-5 已提交）
 
 ## 用户确认门（2026-08-10）
 
