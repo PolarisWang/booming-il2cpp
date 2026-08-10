@@ -71,11 +71,11 @@ completed_batches: []
 - 2026-08-10：创建本 roadmap（v1-01）。分析了 `D:\OpenSource\dotnet\runtime\src\coreclr\gc\`（~79,400 行）与 CRAG GC（~18,750 行）的核心差异，识别 12 项欠缺功能，按 P0/P1/区域化重构排列为 6 阶段 16 子任务。
 - 2026-08-10：**Phase 1 全部完成**（GC-B1 `6659812d4` / GC-A1 `e4dae1f97` / GC-C1 `f7850324e` + 两个 pre-existing 测试修复 `f5ceb0072`/`b9311d2e9`）。
 - 2026-08-10：**Phase 2 GC-E1 完成**（`589baadfd` 配置旋钮，跨平台 env + AOT/JIT API）。
-- 2026-08-10：**Phase 5 GC-K2 架构设计完成**（`755656a32`）：忠实对齐 CoreCLR region 世代写屏障设计（region_info 1字节表 / skewed 查表 / 3 条件短路 barrier / card bundle / mark 过滤 / StompWriteBarrier→函数指针切换）+ 跨平台 + AOT/JIT 适配。K2a-e 分步实现后续。
+- 2026-08-10：**GC-K2 实现 K2a+K2b 完成**：`cbc1b6925`（region→gen skewed 表）+ `53246252f`（双参世代写屏障 `chaos_gc_dirty_card_dst_ref`，忠实 3 短路）。K2c（codegen 发射双参，🔴 边界）待续。
 
 ## latest_stop_point
 
-- Phase 1-4 + GC-K1(K1b) 完成；GC-K2 架构设计完成（实现 K2a-e 待续）。worktree 干净。
+- Phase 1-4 + GC-K1(K1b) + K2a/K2b 完成。worktree 干净。
 
 ## 进度（截至 2026-08-10）
 
@@ -86,7 +86,7 @@ completed_batches: []
 | Phase 3 | GC-G1 / GC-F1 / GC-H1 | ✅ |
 | Phase 4 | GC-J1 | ✅ |
 | Phase 5 | GC-K1+{}+K1b | 🟢 |
-| Phase 5 | GC-K2（设计完成，K2a-e 实现待续） | 🟢 设计 done；实现分步 |
+| Phase 5 | GC-K2（K2a 表 + K2b 屏障 done；K2c codegen 🔴 / K2d bundle / K2e mark 待续） | 🟢 K2a/b |
 | Phase 5 | GC-K3/K4 | ⬜ 跨会话 |
 | Phase 6 | GC-L1/L2 | ⬜ 依赖 K |
 
