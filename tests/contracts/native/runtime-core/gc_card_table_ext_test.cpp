@@ -149,55 +149,61 @@ void TestScanDirtyPartial() {
 // Verifies chaos_gc_dirty_card_dst_ref's three short-circuits (faithful to
 // CoreCLR region write barrier): gen0 dst skips; ref==null skips;
 // same/mature ref.gen >= dst.gen skips; only old->young marks.
-// Uses real regions from RegionManager so the region→gen skewed table
-// (g_region_to_gen) is populated and SetRegionGen/GetRegionGen are
-// deterministic.
+// Deterministic: use a calloc heap (like the other tests) and drive the
+// region→gen table explicitly via SetRegionGen on that heap, after growing
+// the table once with a real region so g_region_to_gen is non-null.
 void TestK2bDoubleArgBarrier() {
     TEST("K2b GenAwareBarrier");
 
-    // Create a young (nursery) region and an old (tenured) region so
-    // AllocateRegion sets their region gen (young=0 / old=2) in the table.
-    Region* young = RegionManager::Instance().AllocateRegion(
-        RegionKind::REGION_NURSERY, 64 * 1024);
-    Region* old = RegionManager::Instance().AllocateRegion(
-        RegionKind::REGION_TENURED, 64 * 1024);
-    if (young == nullptr || old == nullptr) { GC_FAIL("region alloc failed"); return; }
-    uintptr_t young_base = reinterpret_cast<uintptr_t>(young->begin);
-    uintptr_t old_base   = reinterpret_cast<uintptr_t>(old->begin);
-    auto young_obj = reinterpret_cast<void*>(young_base + 64);
-    auto old_obj   = reinterpret_cast<void*>(old_base + 64);
+    // Grow g_region_to_gen once via a real region alloc, then free it so the
+    // table is non-null and SetRegionGen below is deterministic.
+    Region* grow = RegionManager::Instance().AllocateRegion(RegionKind::REGION_TENURED, 64 * 1024);
+    if (grow == nullptr) { GC_FAIL("grow region alloc failed"); return; }
+    auto grow_base = reinterpret_cast<uintptr_t>(grow->begin);
+    RegionManager::Instance().FreeRegion(grow->id);
+    if (GetRegionGen(grow_base) != kRegionGenOld) { GC_FAIL("grow region table non-null"); return; }
 
-    // Register both region ranges with the card table so DirtyCard finds the
-    // L2 segments (AllocateRegion does not register card coverage itself).
-    GcRegisterHeapRange(young_base, young_base + young->end - young->begin);
-    GcRegisterHeapRange(old_base,   old_base   + old->end   - old->begin);
+    // Use a large calloc heap so dst and ref land in DIFFERENT 4MB regions
+    // (the region→gen table is keyed by addr>>22), letting SetRegionGen assign
+    // each its own generation deterministically.
+    void* heap = std::calloc(1, 8 * 1024 * 1024);
+    if (!heap) { GC_FAIL("heap alloc failed"); std::free(heap); return; }
+    GcSetHeapBase(heap);
+    GcRegisterHeapRange(reinterpret_cast<uintptr_t>(heap),
+                        reinterpret_cast<uintptr_t>(heap) + 8 * 1024 * 1024);
+    auto base = reinterpret_cast<uintptr_t>(heap);
+    auto dst  = reinterpret_cast<void*>(base + 64);               // region cell 0
+    auto ref  = reinterpret_cast<void*>(base + 4 * 1024 * 1024 + 64);  // region cell 1
 
-    // Sanity: region→gen table reflects young vs old.
-    GC_CHECK(GetRegionGen(young_base) == kRegionGenYoung, "nursery region is young(0)");
-    GC_CHECK(GetRegionGen(old_base)   == kRegionGenOld,   "tenured region is old(2)");
-
-    // (1) young dst -> no card regardless of ref (young GC scans whole nursery).
+    // (1) dst gen0 (young) -> no card regardless of ref.
     ClearAllCards();
-    chaos_gc_dirty_card_dst_ref(young_obj, old_obj);   // dst gen0
-    GC_CHECK(!IsDirty(young_obj), "K2b: gen0 dest skips card (always scanned)");
+    SetRegionGen(base + 64,  kRegionGenYoung);
+    SetRegionGen(base + 4 * 1024 * 1024 + 64, kRegionGenOld);
+    chaos_gc_dirty_card_dst_ref(dst, ref);
+    GC_CHECK(!IsDirty(dst), "K2b: gen0 dest skips card (always scanned)");
 
-    // (2) old dst + young ref -> marks card (old→young cross-gen ref).
+    // (2) old dst + young ref (ref.gen 0 < dst.gen 2) -> marks card.
     ClearAllCards();
-    chaos_gc_dirty_card_dst_ref(old_obj, young_obj);   // ref.gen 0 < dst.gen 2
-    GC_CHECK(IsDirty(old_obj), "K2b: old->young marks card");
+    SetRegionGen(base + 64,  kRegionGenOld);
+    SetRegionGen(base + 4 * 1024 * 1024 + 64, kRegionGenYoung);
+    chaos_gc_dirty_card_dst_ref(dst, ref);
+    GC_CHECK(IsDirty(dst), "K2b: old->young marks card");
 
     // (3) old dst + old ref (same/mature gen) -> no card.
     ClearAllCards();
-    chaos_gc_dirty_card_dst_ref(old_obj, reinterpret_cast<void*>(old_base + 4096));
-    GC_CHECK(!IsDirty(old_obj), "K2b: same/mature generation skips card");
+    SetRegionGen(base + 64,  kRegionGenOld);
+    SetRegionGen(base + 4 * 1024 * 1024 + 64, kRegionGenOld);
+    chaos_gc_dirty_card_dst_ref(dst, ref);
+    GC_CHECK(!IsDirty(dst), "K2b: same/mature generation skips card");
 
     // (4) ref == null -> no card.
     ClearAllCards();
-    chaos_gc_dirty_card_dst_ref(old_obj, nullptr);
-    GC_CHECK(!IsDirty(old_obj), "K2b: null ref skips card");
+    SetRegionGen(base + 64, kRegionGenOld);
+    chaos_gc_dirty_card_dst_ref(dst, nullptr);
+    GC_CHECK(!IsDirty(dst), "K2b: null ref skips card");
 
-    RegionManager::Instance().FreeRegion(young->id);
-    RegionManager::Instance().FreeRegion(old->id);
+    ClearAllCards();
+    std::free(heap);
 }
 
 // ── Main ────────────────────────────────────────────────────────────
