@@ -2371,7 +2371,14 @@ static bool Test_Fuzz() {
         }  // end for each instruction
 
         // Add landing pad Ret instructions for branch targets
-        uint8_t ret_src = written_count > 0 ? pick_written() : static_cast<uint8_t>(0);
+        // Ret source must be defined on EVERY path reaching the landing pad,
+        // including an unconditional Br that jumps straight here (skipping
+        // later writes). Use written_regs[0] — the first forced LdcI4's dst,
+        // defined at method entry on all paths — instead of pick_written(),
+        // which can pick a vreg a Br path never defines. Reading an undefined
+        // vreg is UB: T4 leaves stack slots uninitialized (garbage) while
+        // RegisterExecute zero-inits, so the two diverge on such IR.
+        uint8_t ret_src = written_count > 0 ? written_regs[0] : static_cast<uint8_t>(0);
         uint32_t landing_base = static_cast<uint32_t>(instrs.size());
         for (uint32_t lp = 0; lp < kLandingPads; ++lp) {
             instrs.push_back(InstrRet(ret_src));
