@@ -107,6 +107,14 @@ extern "C" void chaos_gc_keepalive(CHAOS_IL2CPP_INTPTR obj) noexcept;
 /// Used by codegen stfld/stelem.ref/stobj to keep the card table consistent.
 extern "C" void chaos_gc_dirty_card(const void* obj) noexcept;
 
+/// GC-K2b generation-aware write barrier.  Given both the destination (@a dst)
+/// and the stored reference (@a ref), only marks the card when the write is
+/// a true old→young cross-generation reference (dst non-gen0 AND ref.gen <
+/// dst.gen).  gen0→gen0 and same-mature writes skip the card, saving the hot
+/// path.  Faithful to CoreCLR's region write-barrier short-circuit.  Emitted
+/// by codegen at stfld / stelem.ref / stobj where the stored ref is available.
+extern "C" void chaos_gc_dirty_card_dst_ref(const void* dst, const void* ref) noexcept;
+
 /// Suppress finalization for @a obj (System.GC.SuppressFinalize).
 /// Called from managed code when an object's Dispose() has run.
 extern "C" void chaos_gc_suppress_finalize(CHAOS_IL2CPP_INTPTR obj) noexcept;

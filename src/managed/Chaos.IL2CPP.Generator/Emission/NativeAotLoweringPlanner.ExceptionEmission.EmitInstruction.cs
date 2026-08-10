@@ -1215,7 +1215,7 @@ public sealed partial class NativeAotLoweringPlanner
                         {
                             builder.AppendLine($"{indentation}    if (chaos_is_gc_pointer(chaos_value_owner))");
                             builder.AppendLine($"{indentation}    {{");
-                            builder.AppendLine($"{indentation}        chaos_gc_dirty_card(chaos_value_owner);");
+                            builder.AppendLine($"{indentation}        chaos_gc_dirty_card_dst_ref(chaos_value_owner, chaos_value);");
                             builder.AppendLine($"{indentation}    }}");
                         }
                     }
@@ -1231,7 +1231,7 @@ public sealed partial class NativeAotLoweringPlanner
                         builder.AppendLine($"{indentation}    chaos_object->{GetNativeFieldMemberName(targetRef.SubjectId)} = chaos_value;");
                         if (fieldTypeId == null || !(PrimitiveValueTypeSubjectIds.Contains(fieldTypeId) || PrimitiveValueTypeSubjectIds.Contains("System.Private.CoreLib/" + fieldTypeId)))
                         {
-                            builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_object);");
+                            builder.AppendLine($"{indentation}    chaos_gc_dirty_card_dst_ref(chaos_object, chaos_value);");
                         }
                     }
 

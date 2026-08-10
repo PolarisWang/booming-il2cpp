@@ -127,6 +127,12 @@ inline void DirtyCard(const void* obj) noexcept {
 /// The codegen includes this header via <gc/gc_card_table.h>.
 extern "C" void chaos_gc_dirty_card(const void* obj) noexcept;
 
+/// GC-K2b generation-aware write barrier (dst + stored ref) — codegen emits
+/// this at stfld / stelem.ref / stobj where the stored reference is available
+/// to skip gen0→gen0 / same-mature card marking (faithful to CoreCLR region
+/// write barrier).  Fallback to chaos_gc_dirty_card(dst) when ref is unknown.
+extern "C" void chaos_gc_dirty_card_dst_ref(const void* dst, const void* ref) noexcept;
+
 /// Check whether the card covering @a obj is dirty.
 inline bool IsDirty(const void* obj) noexcept {
     uintptr_t addr = reinterpret_cast<uintptr_t>(obj);
