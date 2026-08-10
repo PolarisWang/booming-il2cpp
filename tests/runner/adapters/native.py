@@ -10,6 +10,7 @@ For the contracts-native group this:
 from __future__ import annotations
 
 import re
+import os
 import subprocess
 import time
 from pathlib import Path
@@ -71,8 +72,17 @@ def run(group: dict, timeout: int = 1800, quick: bool = False) -> SuiteResult:
     ctest_exclude = str(group.get("ctest_exclude", "benchmark|stress|soak"))
     ctest_parallel = int(group.get("cmake_parallel", 8))
     ctest_timeout = int(group.get("ctest_timeout", 3600))
+    # P1-2: stress/soak/benchmark as an INDEPENDENT run tier.  By default the
+    # adapter excludes them (-LE) so the unit/CI gate stays fast.  Setting
+    # CHAOS_GC_TEST_STRESS_ONLY=1 flips to -L "stress|soak|benchmark" so ONLY the
+    # pressure tests run (drive the test_driver --stress-only flag).
+    label_arg = None
+    if os.environ.get("CHAOS_GC_TEST_STRESS_ONLY", "") in ("1", "true", "yes"):
+        label_arg = ["-L", "stress|soak|benchmark"]
+    else:
+        label_arg = ["-LE", ctest_exclude]
     rc, out = _run(cwd, ["ctest", "--test-dir", build_dir, "-C", ctest_config,
-                         "-LE", ctest_exclude, "-j", str(ctest_parallel),
+                         *label_arg, "-j", str(ctest_parallel),
                          "--timeout", str(ctest_timeout),
                          "--output-on-failure"], timeout)
     res.duration_s = time.time() - t0

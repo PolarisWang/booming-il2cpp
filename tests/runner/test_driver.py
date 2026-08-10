@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -312,7 +313,10 @@ def _dry_run(args, contract: dict, layers: dict) -> int:
                 scale = "dotnet test project"
             elif adapter == "native":
                 target = g.get("cmake_build_dir", "build/native")
-                scale = f"ctest -LE {g.get('ctest_exclude', 'benchmark|stress|soak')}"
+                if os.environ.get("CHAOS_GC_TEST_STRESS_ONLY", "") in ("1", "true", "yes"):
+                    scale = "ctest -L 'stress|soak|benchmark'  (--stress-only pressure tier)"
+                else:
+                    scale = f"ctest -LE {g.get('ctest_exclude', 'benchmark|stress|soak')}"
             else:  # python
                 target = g.get("script", "?")
                 scale = f"{' '.join(g.get('args', [])) or '<no args>'}"
@@ -350,6 +354,10 @@ def main() -> int:
                          "(e.g. --layer unit --group codegen)")
     ap.add_argument("--quick", action="store_true",
                     help="assume prebuilt; skip configure")
+    ap.add_argument("--stress-only", action="store_true",
+                    help="run ONLY the pressure/benchmark/soak tests (independent tier) "
+                         "instead of the fast unit set — sets CHAOS_GC_TEST_STRESS_ONLY; "
+                         "the native adapter then uses ctest -L 'stress|soak|benchmark')")
     ap.add_argument("--timeout", type=int, default=1800,
                     help="per-group timeout in seconds (default 1800; integration suite "
                          "also honors group ctest_timeout in suite_contract)")
@@ -372,6 +380,11 @@ def main() -> int:
                     help="include per-case pass/fail detail in the JSON report "
                          "(default off: native ~200 cases, dotnet can be thousands)")
     args = ap.parse_args()
+
+    # P1-2: --stress-only flips the native adapter to run the independent
+    # pressure tier via ctest -L 'stress|soak|benchmark' instead of -LE exclude.
+    if getattr(args, "stress_only", False):
+        os.environ["CHAOS_GC_TEST_STRESS_ONLY"] = "1"
 
     if args.contract:
         print(JSON_SCHEMA)
