@@ -71,23 +71,23 @@ completed_batches: []
 - 2026-08-10：创建本 roadmap（v1-01）。分析了 `D:\OpenSource\dotnet\runtime\src\coreclr\gc\`（~79,400 行）与 CRAG GC（~18,750 行）的核心差异，识别 12 项欠缺功能，按 P0/P1/区域化重构排列为 6 阶段 16 子任务。
 - 2026-08-10：**Phase 1 全部完成**（GC-B1 `6659812d4` / GC-A1 `e4dae1f97` / GC-C1 `f7850324e` + 两个 pre-existing 测试修复 `f5ceb0072`/`b9311d2e9`）。
 - 2026-08-10：**Phase 2 GC-E1 完成**（`589baadfd` 配置旋钮，跨平台 env + AOT/JIT API）。
-- 2026-08-10：**Phase 2 GC-D1 增量1+增量2 完成**：
-  - 增量1（`5dc595cf7`）：OOM 终态对齐 handle_oom —— 半量预算 clamp + OOM 归因升级（真OOM/误报）。
-  - 增量2（`226990998`）：provisional force-blocking —— 高记忆压力下 GC 强制 blocking（不 defer BGC），OOM 进入/恢复退出。
-  - 验证：GC 单测 0 回归 + stress OOM 阶梯正常。
+- 2026-08-10：**Phase 2 GC-D1 全部完成**（三增量）：
+  - 增量1（`5dc595cf7`）：OOM 终态对齐 handle_oom —— 半量预算 clamp + 归因升级。
+  - 增量2（`226990998`）：provisional force-blocking —— 压力下 GC 强制 blocking。
+  - 增量3（`6eeeed4b9`）：记忆压力 decommit —— provisional 下 pooled pages 积极归还 OS。
+  - 验证：GC 单测 0 回归。
 
 ## latest_stop_point
 
-- Phase 1 + GC-E1 + GC-D1（增量1+2）完成。GC-D1 记忆压力 decommit 待续。
+- Phase 1 + Phase 2（GC-E1 + GC-D1）全部完成。worktree 干净。进入 Phase 3。
 
 ## 进度（截至 2026-08-10）
 
 | 阶段 | 子任务 | 状态 |
 |------|--------|------|
 | Phase 1 | GC-B1 / GC-A1 / GC-C1 | ✅ 完成 |
-| Phase 2 | GC-E1 | ✅ 完成 |
-| Phase 2 | GC-D1 | 🟠 增量1(半量+归因)+增量2(provisional force-blocking) done；decommit 待续 |
-| Phase 3 | GC-H1 / GC-F1 / GC-G1 | ⬜ |
+| Phase 2 | GC-E1 / GC-D1 | ✅ 完成 |
+| Phase 3 | GC-H1 / GC-F1 / GC-G1 | ⬜ 下一步：GC-G1(Dependent 收敛) 最独立 |
 | Phase 4 | GC-J1 | ⬜ |
 | Phase 5 | GC-K1..K4（区域化重构） | ⬜（最高风险，跨多会话） |
 | Phase 6 | GC-L1 / GC-L2 | ⬜ |

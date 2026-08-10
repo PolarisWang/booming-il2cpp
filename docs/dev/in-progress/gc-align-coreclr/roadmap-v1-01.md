@@ -175,7 +175,7 @@ Phase6: L1 <─ L2（依赖 K 区域化完成 + E1 旋钮 + D1 降级）
 
 ## 9. 当前建议推进顺序
 
-串行优先，前阶段做完再做后阶段（强依赖）。**Phase 1 三项 + Phase 2 GC-E1 已完成**（GC-B1 移除 stress → GC-A1 全根集 → GC-C1 声明式终止 → GC-E1 配置旋钮）。下一步进入 **Phase 2 GC-D1**（OOM 逐级降级链，涉及调度器，需专门会话）。
+串行优先，前阶段做完再做后阶段（强依赖）。**Phase 1 三项 + Phase 2（GC-E1 + GC-D1）已完成**。下一步进入 **Phase 3**（GC-G1 Dependent 收敛最独立，先做；GC-F1 handle 代剪枝 依赖 GC-E1; GC-H1 事件+原因）。
 
 本轮 roadmap 创建后，`recommended_next_child = GC-A1`。
 
