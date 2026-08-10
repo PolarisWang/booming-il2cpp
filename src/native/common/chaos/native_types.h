@@ -369,13 +369,13 @@ namespace chaos { namespace il2cpp { namespace common {
     ::new (CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(T))) T{__VA_ARGS__}
 
 // ========== Raw domain — temp / non-GC structures ==========
-// Existing macros — unchanged semantics, std::malloc/free/realloc.
+// Existing macros: NEW/NEW_ARRAY/CALLOC only.  MALLOC/FREE/REALLOC are defined
+// once above (unified allocation section) — DO NOT redefine here (a silent
+// re-definition of identical replacement was removed; keep a single source of
+// truth for the raw allocator macros).
 #define CHAOS_IL2CPP_NEW(T)          new T
 #define CHAOS_IL2CPP_NEW_ARRAY(T, N) new T[N]
-#define CHAOS_IL2CPP_MALLOC(s)     std::malloc(s)
 #define CHAOS_IL2CPP_CALLOC(n,s)   std::calloc(n, s)
-#define CHAOS_IL2CPP_FREE(p)       std::free(p)
-#define CHAOS_IL2CPP_REALLOC(p,s)  std::realloc(p, s)
 
 // ── Numeric limits ─────────────────────────────────────────
 // Parentheses around min/max prevent collision with Windows macros (NOMINMAX not guaranteed).
