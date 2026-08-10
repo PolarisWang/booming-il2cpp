@@ -282,20 +282,20 @@ TEST_F(T4SehHandlerTest,
 
     UnregisterNativeCodeSection(fake_code);
 
-    // Entry should no longer be findable.
-    EXPECT_EQ(FindNativeCodeByAddress(fake_code), nullptr);
+    // T2.3-C 方案3: the demoted code is NOT freed and its address is never
+    // reused, so the entry stays findable — an in-flight old frame's return
+    // address remains GC/SEH-resolvable (no missed root / UAF).  The entry is
+    // only marked externally-managed.
+    EXPECT_EQ(FindNativeCodeByAddress(fake_code), &nm);
+    EXPECT_TRUE(nm.code_managed_externally);
 
-    // Verify the code was enqueued in the pending-free table.
-    bool found = false;
+    // And the code is NOT enqueued for a pending free (nothing is reclaimed).
     for (const auto& region : g_pending_free) {
-        if (region.active &&
-            region.code_start == fake_code) {
-            found = true;
-            EXPECT_EQ(region.code_size, sizeof(fake_code));
+        if (region.active && region.code_start == fake_code) {
+            ADD_FAILURE() << "Demoted code must NOT be enqueued for free (方案3)";
             break;
         }
     }
-    EXPECT_TRUE(found) << "Demoted code should be in pending-free table";
 }
 
 TEST_F(T4SehHandlerTest, UnregisterNativeCodeSection_NullCodeStartReturnsSafely) {
@@ -338,29 +338,28 @@ TEST_F(T4SehHandlerTest, DoubleRegisterSameAddressDoesNotCrash) {
 
 TEST_F(T4SehHandlerTest,
        EnqueueDemotedCode_DeduplicatesSameAddressEnqueuedTwice) {
+    // 方案3: UnregisterNativeCodeSection no longer enqueues code for a free,
+    // so this exercises the raw EnqueueDemotedCode helper's dedup on the
+    // retained pending-free bookkeeping directly.
     uint8_t fake_code[64] = {};
     JitMethod nm;
     nm.code      = fake_code;
     nm.code_size = sizeof(fake_code);
 
-    RegisterNativeCodeSection(nm.code, nm.code_size, &nm);
-    UnregisterNativeCodeSection(fake_code);
-    uint32_t count_after_first = static_cast<uint32_t>(g_pending_free.size());
-
-    // Unregister again (second time through a different test path).
-    // Since the entry's nm is already nullptr, UnregisterNativeCodeSection won't
-    // find it in the code registry.  We test deduplication by calling
-    // EnqueueDemotedCode directly.
     EnqueueDemotedCode(fake_code, sizeof(fake_code));
+    uint32_t count_after_first = static_cast<uint32_t>(g_pending_free.size());
+    ASSERT_GT(count_after_first, 0u);
 
-    // Count should not increase because the address is already tracked.
+    // Enqueue the same address again — should not duplicate.
+    EnqueueDemotedCode(fake_code, sizeof(fake_code));
     EXPECT_EQ(g_pending_free.size(), count_after_first);
 }
 
 TEST_F(T4SehHandlerTest, ReclaimDemotedCode_ClearsAllEntries) {
-    // Enqueue several fake regions (addresses won't be valid for VirtualFree,
-    // but ReclaimDemotedCode handles that gracefully — the entries are still
-    // cleared).
+    // T2.3-C 方案3: ReclaimDemotedCode now RETAINS the regions instead of
+    // freeing them — demoted code is a process-lifetime allocation whose
+    // address is never reused (no use-after-free; old frames stay
+    // GC/SEH-resolvable).  So reclaim must NOT clear g_pending_free / free.
     uint8_t a[16], b[16], c[16];
     EnqueueDemotedCode(a, sizeof(a));
     EnqueueDemotedCode(b, sizeof(b));
@@ -369,8 +368,8 @@ TEST_F(T4SehHandlerTest, ReclaimDemotedCode_ClearsAllEntries) {
 
     ReclaimDemotedCode();
 
-    // All entries should be cleared.
-    EXPECT_EQ(g_pending_free.size(), 0u);
+    // 方案3: regions are retained for the process lifetime — NOT cleared.
+    EXPECT_EQ(g_pending_free.size(), 3u);
 }
 
 TEST_F(T4SehHandlerTest, EnqueueDemotedCode_LargeNumberOfRegionsWorks) {
@@ -412,11 +411,17 @@ TEST_F(T4SehHandlerTest, DemoteT4ByToken_DemotesMatchingEntries) {
     RegisterNativeCodeSection(fake_a, 64, &nm_a, /*token=*/100);
     RegisterNativeCodeSection(fake_b, 64, &nm_b, /*token=*/200);
 
-    // Demote by token 100 — only entry A should be cleared.
+    // Demote by token 100 — 方案3: entry A is marked externally-managed but
+    // REMAINS registered, so an in-flight old frame's return address (in A's
+    // code) is still GC/SEH-resolvable (no missed root), and its code is not
+    // freed/reused (no UAF).  B is untouched.
     uint32_t demoted = DemoteJittedMethod(100);
     EXPECT_EQ(demoted, 1u);
-    EXPECT_EQ(FindNativeCodeByAddress(fake_a), nullptr);
+    // 方案3: old entry A stays findable (it must root in-flight old frames).
+    EXPECT_EQ(FindNativeCodeByAddress(fake_a), &nm_a);
+    EXPECT_TRUE(nm_a.code_managed_externally);
     EXPECT_EQ(FindNativeCodeByAddress(fake_b), &nm_b);
+    EXPECT_FALSE(nm_b.code_managed_externally);
 }
 
 TEST_F(T4SehHandlerTest, DemoteT4ByToken_ZeroTokenReturnsZero) {
@@ -730,8 +735,9 @@ TEST_F(T4SehHandlerTest, UnregisterNativeCodeSection_InvalidatesLookupCache) {
 
     // Generation should be bumped.
     EXPECT_GT(g_t4_lookup_generation, gen_before);
-    // Next lookup should fail (entry cleared).
-    EXPECT_EQ(FindNativeCodeByAddress(fake_code), nullptr);
+    // T2.3-C 方案3: entry REMAINS findable after unregister (demoted code kept
+    // alive, address never reused), so old frames stay GC/SEH-resolvable.
+    EXPECT_EQ(FindNativeCodeByAddress(fake_code), &nm);
 }
 
 }  // namespace

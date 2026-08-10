@@ -200,14 +200,13 @@ void WinSehHandler::UnregisterCode(void* code_start) noexcept {
         JitRegistryLockGuard lock(this);
         for (auto& entry : entries_) {
             if (entry.code_start == code_start) {
+                // T2.3-C 方案3: keep the entry + code alive (see
+                // ReclaimDemoted).  We only mark the JitMethod as externally
+                // managed so teardown does not double-free it; the code itself
+                // stays mapped and GC/SEH-resolvable for the process lifetime.
                 if (entry.nm != nullptr) {
                     const_cast<JitMethod*>(entry.nm)->code_managed_externally = true;
                 }
-                EnqueueDemotedCode(
-                    const_cast<void*>(entry.code_start),
-                    entry.code_size);
-                entry.nm = nullptr;
-                entry.code_start = nullptr;
                 break;
             }
         }
@@ -343,13 +342,21 @@ uint32_t WinSehHandler::DemoteByCallSiteToken(uint32_t method_token) noexcept {
 }
 
 void WinSehHandler::ReclaimDemoted() noexcept {
-    for (auto& region : pending_free_) {
-        if (!region.active) continue;
-
-        chaos::il2cpp::pal::PalVirtualFree(
-            region.code_start, region.code_size);
-    }
-    pending_free_.clear();
+    // T2.3-C 方案3: NEVER reclaim (free) demoted code.  Demoted/jit code is
+    // moved to a process-lifetime allocation and its address is never reused,
+    // so:
+    //   (a) a thread still executing demoted code (its return address /
+    //       saved registers point into the old region) can never run on freed
+    //       memory (no use-after-free), and
+    //   (b) an old stack frame's return address can never be re-matched to a
+    //       recycled address that belongs to a different method's GC map.
+    // This is the deliberate memory-for-safety tradeoff: old code + its root
+    // maps stay live until process exit (bounded by the number of hot
+    // updates, not by time).  The pending_free_ bookkeeping is retained so
+    // the demotion accounting stays intact; nothing is VirtualFree'd here.
+    CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+        "ReclaimDemoted: {} demoted region(s) retained for process lifetime (T2.3-C 方案3)",
+        static_cast<unsigned>(pending_free_.size()));
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

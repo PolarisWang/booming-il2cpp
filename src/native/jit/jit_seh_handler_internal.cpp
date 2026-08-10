@@ -132,19 +132,15 @@ void EnqueueDemotedCode(void* code_start, uint32_t code_size) noexcept {
 }
 
 // ── ReclaimDemotedCode ────────────────────────────────────────────────────────
-// Frees all demoted code regions in the pending-free table.
+// T2.3-C 方案3: does NOT free demoted code.  Demoted/jit code regions stay
+// live (process-lifetime allocation, address never reused) so no thread can
+// run on freed memory and old frames stay GC/SEH-resolvable.  The pending
+// table is retained for accounting; nothing is VirtualFree'd/munmap'd.
 
 void ReclaimDemotedCode() noexcept {
-    for (auto& region : g_pending_free) {
-        if (!region.active) continue;
-
-#if defined(_WIN64)
-        VirtualFree(region.code_start, 0, MEM_RELEASE);
-#elif defined(__linux__)
-        munmap(region.code_start, region.code_size);
-#endif
-    }
-    g_pending_free.clear();
+    // Retained for process lifetime per 方案3 (see class handler docs); the
+    // pending table is kept for accounting, nothing is freed here.
+    (void)g_pending_free;
 }
 
 // ── FindNativeCodeByAddress ───────────────────────────────────────────────────
@@ -209,13 +205,13 @@ void UnregisterNativeCodeSection(void* code_start) noexcept {
     AcquireCodeLock();
     for (auto& entry : g_t4_code_entries) {
         if (entry.code_start == code_start) {
+            // T2.3-C 方案3: keep the entry + code alive.  Demoted code is never
+            // freed and its address never reused, so an in-flight old frame's
+            // return address stays GC/SEH-resolvable; we only mark the JitMethod
+            // externally-managed so teardown does not double-free it.
             if (entry.nm != nullptr) {
                 const_cast<JitMethod*>(entry.nm)->code_managed_externally = true;
             }
-            EnqueueDemotedCode(const_cast<void*>(entry.code_start),
-                               entry.code_size);
-            entry.nm         = nullptr;
-            entry.code_start = nullptr;
             break;
         }
     }
@@ -233,12 +229,16 @@ uint32_t DemoteJittedMethod(uint32_t method_token) noexcept {
     for (auto& entry : g_t4_code_entries) {
         if (entry.patch_method_token == method_token &&
             entry.nm != nullptr) {
+            // T2.3-C 方案3: do NOT null the entry or enqueue the code for
+            // free.  Demoted old code stays alive and address-registered for
+            // the process lifetime, and its root maps (GcSlotMapV0 /
+            // GcPointMapV0) stay registered, so an in-flight old frame's
+            // return address still resolves to the old JitMethod and its GC
+            // maps — no missed root, and ReclaimDemoted never frees it (no
+            // use-after-free).  New calls are redirected by direct_ptr on
+            // recompile; the registry is only consulted by GC/SEH.
             const_cast<JitMethod*>(entry.nm)->code_managed_externally = true;
-            EnqueueDemotedCode(const_cast<void*>(entry.code_start),
-                               entry.code_size);
-            entry.nm         = nullptr;
-            entry.code_start = nullptr;
-            count++;
+            ++count;
         }
     }
     ReleaseCodeLock();
@@ -261,12 +261,11 @@ uint32_t DemoteT4ByCallSiteToken(uint32_t method_token) noexcept {
         if (nm == nullptr) continue;
         for (uint32_t j = 0; j < nm->call_site_count; j++) {
             if (nm->call_sites[j].method_token == method_token) {
+                // T2.3-C 方案3: keep the caller's entry + code alive (see
+                // DemoteJittedMethod).  Old frames in this caller remain
+                // GC/SEH-resolvable; nothing is enqueued for free.
                 const_cast<JitMethod*>(nm)->code_managed_externally = true;
-                EnqueueDemotedCode(const_cast<void*>(entry.code_start),
-                                   entry.code_size);
-                entry.nm         = nullptr;
-                entry.code_start = nullptr;
-                count++;
+                ++count;
                 break;
             }
         }

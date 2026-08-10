@@ -201,13 +201,12 @@ void LinuxSehHandler::UnregisterCode(void* code_start) noexcept {
         JitRegistryLockGuard lock(this);
         for (auto& entry : entries_) {
             if (entry.code_start == code_start) {
+                // T2.3-C 方案3: keep entry + code alive (see ReclaimDemoted).
+                // Mark externally-managed so teardown does not double-free;
+                // code stays mapped and GC/SEH-resolvable for process lifetime.
                 if (entry.nm != nullptr) {
                     const_cast<JitMethod*>(entry.nm)->code_managed_externally = true;
                 }
-                EnqueueDemotedCode(
-                    const_cast<void*>(entry.code_start),
-                    entry.code_size);
-                entry.nm = nullptr;
                 break;
             }
         }
@@ -321,16 +320,14 @@ uint32_t LinuxSehHandler::DemoteByCallSiteToken(uint32_t method_token) noexcept 
 }
 
 void LinuxSehHandler::ReclaimDemoted() noexcept {
-    for (auto& region : pending_free_) {
-        if (!region.active) continue;
-        int ret = munmap(region.code_start, region.code_size);
-        if (ret != 0) {
-            CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-                "ReclaimDemoted: munmap({}, {}) failed",
-                region.code_start, region.code_size);
-        }
-    }
-    pending_free_.clear();
+    // T2.3-C 方案3: NEVER reclaim (munmap) demoted code.  Demoted/jit code is
+    // a process-lifetime allocation whose address is never reused, so a thread
+    // still executing demoted code can never run on freed memory, and an old
+    // frame's return address can never be re-matched to a recycled address
+    // holding a different method's GC map. Deliberate memory-for-safety.
+    CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+        "ReclaimDemoted: {} demoted region(s) retained for process lifetime (T2.3-C 方案3)",
+        static_cast<unsigned>(pending_free_.size()));
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
