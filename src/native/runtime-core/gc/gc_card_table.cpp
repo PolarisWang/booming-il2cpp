@@ -40,7 +40,7 @@ static void EnsureCardBundleCoverage(size_t seg_count) noexcept {
     size_t need_bytes   = (bundle_bits + 7) >> 3;
     // Round up to a comfortable, fixed floor (covers growth without realloc).
     size_t cap = need_bytes;
-    if (cap < 4096) cap = 4096;   // ≥ 4 KB => covers ≥ 64 GB of heap
+    if (cap < 65536) cap = 65536;   // ≥ 64 KB => covers ≥ 1 TB of heap at 2 MB/bit
     g_card_bundle = static_cast<uint8_t*>(std::calloc(1, cap));
     if (g_card_bundle == nullptr) return;
     g_card_bundle_size.store(cap, std::memory_order_release);
