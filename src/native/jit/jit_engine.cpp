@@ -373,6 +373,16 @@ private:
     // (V0-V7 on ARM64). EmitCallWithSpill reloads after each call.
     uint64_t caller_fpr_colored_mask_ = 0;
 
+    // True if any IR instruction in the method can clobber caller-saved
+    // registers at runtime: a managed/runtime call (Call/CallVirt/CallBridge/
+    // Calli), a safepoint poll (enable_safepoint_polls), or an overflow-checked
+    // op (AddOvf/SubOvf/MulOvf/ConvOvf*) whose deopt path reads caller-colored
+    // vreg stack slots.  When false, caller-colored vregs never need the
+    // write-through in StoreGpr/StoreFpr — their value stays purely in the
+    // colored register (caller-saved) across the whole call-free method,
+    // eliminating the per-op stack roundtrip (T2.1 A1).
+    bool has_caller_clobber_ = true;
+
     // LocAlloc: extra frame bytes (bump counter + reserve) when method uses LocAlloc.
     uint32_t localloc_extra_ = 0;
 
@@ -466,7 +476,10 @@ void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
             // Caller-colored vregs: write through to stack so the stack slot
             // holds the correct value even if argument setup clobbers the
             // colored register before EmitCallWithSpill's pre-call spill.
-            if (caller_colored_mask_ & (1ULL << vreg))
+            // T2.1 A1: on a call-free method (no calls, no safepoints, no
+            // overflow-check deopt sites), nothing can clobber the caller-saved
+            // register, so the value stays purely resident — skip the store.
+            if ((caller_colored_mask_ & (1ULL << vreg)) && has_caller_clobber_)
                 enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(GprOff(vreg)), colored_x64);
             return;
         }
@@ -529,7 +542,8 @@ void NativeCodeGenerator::StoreFpr(uint8_t xmm_reg, uint32_t vreg) noexcept {
                 // Caller-colored FPRs: write through to stack so the stack slot
                 // holds the correct value even if argument setup clobbers the
                 // colored register before EmitCallWithSpill's pre-call spill.
-                if (caller_fpr_colored_mask_ & (1ULL << fi))
+                // T2.1 A1: skip on a call-free method (no caller-clobber sites).
+                if ((caller_fpr_colored_mask_ & (1ULL << fi)) && has_caller_clobber_)
                     enc_.EmitMovdqaMR(AT::kStackReg, static_cast<int32_t>(FprOff(vreg)), colored_xmm);
                 return;
             }
@@ -4286,12 +4300,51 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // Pre-scan: count managed call instructions to reserve slot table entries.
     // slot_count_ = number of Call/CallBridge instructions (not Calli, not CallVirt).
     slot_count_ = 0;
+    // T2.1 A1: determine whether any instruction can clobber caller-saved
+    // registers (and thus require the caller-colored write-through in
+    // StoreGpr/StoreFpr).  A managed/runtime helper call, an enabled safepoint
+    // poll, an overflow-checked op (deopt), or ANY object/heap/memory op
+    // (allocation, field/element access, box/cast, write barrier — all of
+    // which either emit a runtime helper call, can trigger a GC that scans the
+    // frame, or write through a write barrier) can clobber/require caller-saved
+    // values on the stack.  Only a strictly scalar, call-free method (pure
+    // arithmetic/bitwise/shift/compare/convert on Int32/Int64/Float) is safe
+    // to keep purely register-resident.
+    bool can_clobber_caller =
+        config_.enable_safepoint_polls && config_.safepoint_fn != nullptr;
     for (const auto& instr : rm_.instructions) {
         auto opc = instr.op_code();
-        if (opc == IROpCode::Call || opc == IROpCode::CallBridge) {
-            slot_count_++;
+        if (opc == IROpCode::Call || opc == IROpCode::CallBridge ||
+            opc == IROpCode::CallVirt || opc == IROpCode::Calli) {
+            slot_count_ += (opc == IROpCode::Call || opc == IROpCode::CallBridge);
+            can_clobber_caller = true;
+            continue;
+        }
+        // Whitelist of ops that are pure scalar (Int/FP) register-resident
+        // safe: no heap, no GC, no call, no overflow-deopt, no memory RMW.
+        switch (opc) {
+        case IROpCode::LdcI4: case IROpCode::LdcI8:
+        case IROpCode::LdcR4: case IROpCode::LdcR8:
+        case IROpCode::Add: case IROpCode::Sub: case IROpCode::Mul:
+        case IROpCode::Div: case IROpCode::Rem:
+        case IROpCode::DivUn: case IROpCode::RemUn:
+        case IROpCode::Neg: case IROpCode::Not:
+        case IROpCode::And: case IROpCode::Or: case IROpCode::Xor:
+        case IROpCode::Shl: case IROpCode::Shr: case IROpCode::ShrUn:
+        case IROpCode::Ceq: case IROpCode::Clt: case IROpCode::Cgt:
+        case IROpCode::Conv_I4: case IROpCode::Conv_I8:
+        case IROpCode::ConvI: case IROpCode::ConvU:
+        case IROpCode::Conv_R4: case IROpCode::Conv_R8:
+        case IROpCode::ConvRUn:
+        case IROpCode::Abs: case IROpCode::Min: case IROpCode::Max:
+        case IROpCode::Dup: case IROpCode::Pop: case IROpCode::Ret:
+            break;  // safe; keep resident
+        default:
+            can_clobber_caller = true;  // object/heap/call/memory/br — not resident-safe
+            break;
         }
     }
+    has_caller_clobber_ = can_clobber_caller;
     slot_patches_.reserve(slot_count_);
     slot_count_used_ = 0;
 

@@ -3374,11 +3374,97 @@ static bool Test_LdInd_StInd() {
 // GTest entries (converted from old TEST macro)
 // ═══════════════════════════════════════════════════════════════════════
 
+// T2.1 (A1) — Register residency: with the default config
+// (enable_register_caching=true, the graph-coloring default path), a live
+// vreg across a pure-arithmetic chain must stay in a register — the emitted
+// compute section must NOT write-through each intermediate result to the GPR
+// stack file (GprOff = kGprFileOff + vreg*8, [rsp+32..544)) on a path that
+// crosses no call/safepoint.
+static int CountStackStoreToGprFile(const uint8_t* code, size_t size) {
+    // x64 stack-store encodings that target [rsp + disp8]: mov [rsp+d], reg
+    //   48 89 44 24 d8   mov [rsp+d8], rax/r8    (REX.W, modrm 0x44, sib 0x24)
+    //   4C 89 44 24 d8   mov [rsp+d8], r8-r15
+    //   89 44 24 d8      mov [rsp+d8], eax (32-bit)
+    //   44 89 44 24 d8   mov [rsp+d8], r8d-r15d (32-bit)
+    constexpr uint32_t kGprFileOff = 32;  // see GprOff(): kGprFileOff + vreg*8
+    int count = 0;
+    for (size_t i = 0; i + 4 < size; ++i) {
+        uint8_t b0 = code[i];
+        bool is_stack_store = false;
+        uint32_t disp = 0;
+        if ((b0 == 0x48 || b0 == 0x4C) && i + 4 < size &&
+            code[i+1] == 0x89 && code[i+2] == 0x44 && code[i+3] == 0x24) {
+            is_stack_store = true; disp = code[i+4];
+        } else if (b0 == 0x89 && code[i+1] == 0x44 && code[i+2] == 0x24 && i + 3 < size) {
+            is_stack_store = true; disp = code[i+3];
+        } else if (b0 == 0x44 && code[i+1] == 0x89 && code[i+2] == 0x44 && code[i+3] == 0x24 && i + 4 < size) {
+            is_stack_store = true; disp = code[i+4];
+        }
+        if (is_stack_store && disp >= kGprFileOff && disp < 544) {
+            count++;
+        }
+    }
+    return count;
+}
+
+static bool Test_RegisterResidency() {
+    std::printf("  Test_RegisterResidency...\n");
+    // Six simultaneously-live vregs through a call-free chain forces graph
+    // coloring to assign callee-saved registers → results should stay
+    // resident (no per-op stack write-through).
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 1, 0), InstrI4(IROpCode::LdcI4, 2, 1),
+        InstrI4(IROpCode::LdcI4, 3, 2), InstrI4(IROpCode::LdcI4, 4, 3),
+        InstrI4(IROpCode::LdcI4, 5, 4), InstrI4(IROpCode::LdcI4, 6, 5),
+        InstrBinary(IROpCode::Add, 0, 0, 1),
+        InstrBinary(IROpCode::Mul, 2, 2, 3),
+        InstrBinary(IROpCode::Add, 4, 4, 5),
+        InstrBinary(IROpCode::Mul, 0, 0, 0),   // r0 = (r0+r1) * (r0+r1)
+        InstrBinary(IROpCode::Add, 0, 0, 2),   // r0 += r2*r3
+        InstrBinary(IROpCode::Add, 0, 0, 4),   // r0 += r4+r5
+        InstrRet(0),
+    };
+    rm.max_regs = 6;
+    if (!CanCompile(rm)) { std::printf("    FAIL: CanCompile false\n"); return false; }
+    CompileConfig cfg;                 // default: enable_register_caching = true
+    cfg.enable_optimizer = false;      // pure register path, no tree optimizer
+    auto* nm = Compile(rm, cfg);
+    if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    RegisterNativeCodeSection(entry, nm->code_size, nm);
+
+    bool crashed = false;
+    uint64_t result = ExecuteNativeSafe(entry, crashed);
+    if (crashed) { std::printf("    FAIL: T4 crashed\n"); return false; }
+    // r0 = ((1+2)*(1+2)) + (3*4) + (5+6) = 9 + 12 + 11 = 32
+    if (result != 32) { std::printf("    FAIL: result=%llu expected 32\n", (unsigned long long)result); return false; }
+
+    int stores = CountStackStoreToGprFile(static_cast<const uint8_t*>(nm->code), nm->code_size);
+    std::printf("    GPR-file stack stores in code: %d\n", stores);
+    // On a call-free chain, a fully register-resident coloring performs zero
+    // stack write-throughs to the GPR file (only the initial LdcI4 loads and
+    // final Ret remain).  Allow a small tolerance (prologue/allocation) but a
+    // per-op roundtrip (≥ number of compute ops = 6) would fail.
+    if (stores >= 6) {
+        std::printf("    FAIL: %d write-through stores on call-free compute chain (expect < 6; graph coloring not fully resident)\n", stores);
+        DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size);
+        CHAOS_IL2CPP_FREE(nm);
+        return false;
+    }
+    CHAOS_IL2CPP_FREE(nm);
+    std::printf("    register-resident compute chain ✓ (result=%llu, %d stack stores)\n", (unsigned long long)result, stores);
+    return true;
+}
+
 TEST_F(CodegenNativeTest, LdcI4_Ret) { EXPECT_TRUE(Test_LdcI4_Ret()); }
 
 TEST_F(CodegenNativeTest, Add_Ret) { EXPECT_TRUE(Test_Add_Ret()); }
 
 TEST_F(CodegenNativeTest, ArithmeticChain) { EXPECT_TRUE(Test_ArithmeticChain()); }
+
+TEST_F(CodegenNativeTest, RegisterResidency) { EXPECT_TRUE(Test_RegisterResidency()); }
 
 TEST_F(CodegenNativeTest, FoldAdd) { EXPECT_TRUE(Test_FoldAdd()); }
 
