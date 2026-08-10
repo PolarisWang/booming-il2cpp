@@ -30,20 +30,21 @@ namespace chaos::il2cpp::jit {
 //   b   → extends ModRM.rm or SIB.base by 1 bit
 
 inline uint8_t REX(bool w, uint8_t r, uint8_t x, uint8_t b) noexcept {
-    return static_cast<uint8_t>(0x40 | (w ? 8 : 0) | ((r & 8) ? 4 : 0) |
-                                ((x & 8) ? 2 : 0) | ((b & 8) ? 1 : 0));
+    return static_cast<uint8_t>(0x40 | (w ? 8 : 0) | ((r & 8) ? 4 : 0) | ((x & 8) ? 2 : 0) | ((b & 8) ? 1 : 0));
 }
 
 /// Emit REX prefix for a reg, rm operation.
 inline void EmitREX(CodeBuffer& buf, bool w, uint8_t reg, uint8_t rm) noexcept {
     uint8_t rex = REX(w, reg, 0, rm);
-    if (rex != 0x40) buf.EmitByte(rex);
+    if (rex != 0x40)
+        buf.EmitByte(rex);
 }
 
 /// Emit REX prefix with b-only (for opcodes that encode reg in the opcode byte).
 inline void EmitREXB(CodeBuffer& buf, bool w, uint8_t rm) noexcept {
     uint8_t rex = REX(w, 0, 0, rm);
-    if (rex != 0x40) buf.EmitByte(rex);
+    if (rex != 0x40)
+        buf.EmitByte(rex);
 }
 
 // ── ModRM byte ─────────────────────────────────────────────────────────────
@@ -128,7 +129,8 @@ inline void EmitMovMI32(CodeBuffer& buf, uint8_t base, int32_t disp, uint32_t im
     // C7 /0 id: C7 + ModRM(reg=0, rm=base) + disp + imm32
     // No REX.W = 32-bit operand; REX.B for extended base regs.
     uint8_t rex = REX(false, 0, 0, base);
-    if (rex != 0x40) buf.EmitByte(rex);  // REX.B if base > 7
+    if (rex != 0x40)
+        buf.EmitByte(rex); // REX.B if base > 7
     buf.EmitByte(0xC7);
     EmitMR(buf, 0, base, disp);
     buf.Emit32(imm);
@@ -153,13 +155,14 @@ inline void EmitLeaRM(CodeBuffer& buf, uint8_t dst, uint8_t base, int32_t disp) 
 inline void EmitLeaRipRel(CodeBuffer& buf, uint8_t dst, int32_t disp) noexcept {
     EmitREX(buf, true, dst, 0);
     buf.EmitByte(0x8D);
-    buf.EmitByte(ModRM(0, dst, 5));  // rm=5 with mod=00 = RIP-relative
+    buf.EmitByte(ModRM(0, dst, 5)); // rm=5 with mod=00 = RIP-relative
     buf.Emit32(static_cast<uint32_t>(disp));
 }
 
 /// mov r64, r64       (register-to-register)
 inline void EmitMovRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    if (dst == src) return;  // nop
+    if (dst == src)
+        return; // nop
     // Opcode 89 = MOV r/m64, r64: reg field = SOURCE (r64), r/m field = DESTINATION (r/m64).
     EmitREX(buf, true, src, dst);
     buf.EmitByte(0x89);
@@ -219,7 +222,8 @@ inline void EmitAddRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
 
 /// add r/m64, imm32
 inline void EmitAddRI(CodeBuffer& buf, uint8_t dst, int32_t imm) noexcept {
-    if (imm == 0) return;
+    if (imm == 0)
+        return;
     if (imm >= -128 && imm <= 127) {
         // 83 /0 id8
         EmitREX(buf, true, 0, dst);
@@ -237,9 +241,10 @@ inline void EmitAddRI(CodeBuffer& buf, uint8_t dst, int32_t imm) noexcept {
 
 /// sub r/m64, imm32
 inline void EmitSubRI(CodeBuffer& buf, uint8_t dst, int32_t imm) noexcept {
-    if (imm == 0) return;
+    if (imm == 0)
+        return;
     if (imm >= -128 && imm <= 127) {
-        EmitREX(buf, true, 5, dst);  // /5 = sub opcode extension
+        EmitREX(buf, true, 5, dst); // /5 = sub opcode extension
         buf.EmitByte(0x83);
         buf.EmitByte(ModRM(3, 5, dst));
         buf.EmitByte(static_cast<uint8_t>(imm));
@@ -381,14 +386,14 @@ inline void EmitXorZR(CodeBuffer& buf, uint8_t reg) noexcept {
 
 /// neg r/m64
 inline void EmitNeg(CodeBuffer& buf, uint8_t reg) noexcept {
-    EmitREX(buf, true, 3, reg);  // /3 = neg
+    EmitREX(buf, true, 3, reg); // /3 = neg
     buf.EmitByte(0xF7);
     buf.EmitByte(ModRM(3, 3, reg));
 }
 
 /// not r/m64
 inline void EmitNot(CodeBuffer& buf, uint8_t reg) noexcept {
-    EmitREX(buf, true, 2, reg);  // /2 = not
+    EmitREX(buf, true, 2, reg); // /2 = not
     buf.EmitByte(0xF7);
     buf.EmitByte(ModRM(3, 2, reg));
 }
@@ -397,7 +402,7 @@ inline void EmitNot(CodeBuffer& buf, uint8_t reg) noexcept {
 
 /// shl r/m64, imm8
 inline void EmitShlRI(CodeBuffer& buf, uint8_t reg, uint8_t imm) noexcept {
-    EmitREX(buf, true, 4, reg);  // /4 = shl
+    EmitREX(buf, true, 4, reg); // /4 = shl
     buf.EmitByte(0xC1);
     buf.EmitByte(ModRM(3, 4, reg));
     buf.EmitByte(imm);
@@ -405,7 +410,7 @@ inline void EmitShlRI(CodeBuffer& buf, uint8_t reg, uint8_t imm) noexcept {
 
 /// shr r/m64, imm8
 inline void EmitShrRI(CodeBuffer& buf, uint8_t reg, uint8_t imm) noexcept {
-    EmitREX(buf, true, 5, reg);  // /5 = shr
+    EmitREX(buf, true, 5, reg); // /5 = shr
     buf.EmitByte(0xC1);
     buf.EmitByte(ModRM(3, 5, reg));
     buf.EmitByte(imm);
@@ -413,7 +418,7 @@ inline void EmitShrRI(CodeBuffer& buf, uint8_t reg, uint8_t imm) noexcept {
 
 /// sar r/m64, imm8 (arithmetic)
 inline void EmitSarRI(CodeBuffer& buf, uint8_t reg, uint8_t imm) noexcept {
-    EmitREX(buf, true, 7, reg);  // /7 = sar
+    EmitREX(buf, true, 7, reg); // /7 = sar
     buf.EmitByte(0xC1);
     buf.EmitByte(ModRM(3, 7, reg));
     buf.EmitByte(imm);
@@ -574,8 +579,8 @@ inline void EmitCallReg(CodeBuffer& buf, uint8_t reg) noexcept {
 /// ModRM.mod=00 with ModRM.rm=101 encodes RIP-relative addressing in x64.
 /// reg field = 2 (opcode extension for call).
 inline void EmitCallRipRel(CodeBuffer& buf, int32_t disp) noexcept {
-    buf.EmitByte(0xFF);               // opcode for call r/m64
-    buf.EmitByte(ModRM(0, 2, 5));     // mod=00, reg=2(call), rm=101(RIP-rel)
+    buf.EmitByte(0xFF);           // opcode for call r/m64
+    buf.EmitByte(ModRM(0, 2, 5)); // mod=00, reg=2(call), rm=101(RIP-rel)
     buf.Emit32(static_cast<uint32_t>(disp));
 }
 
@@ -753,14 +758,14 @@ inline void EmitDivSSRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
 
 /// vaddps xmm_dest, xmm_src1, xmm_src2 (packed single)
 inline void EmitVAddpsRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_0F(dest, src2, src1);  // VEX.0F.0F (pp=00)
+    buf.EmitVEX_0F(dest, src2, src1); // VEX.0F.0F (pp=00)
     buf.EmitByte(0x58);
     buf.EmitByte(ModRM(3, dest, src2));
 }
 
 /// vaddpd xmm_dest, xmm_src1, xmm_src2 (packed double)
 inline void EmitVAddpdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src2, src1);  // VEX.66.0F (pp=01)
+    buf.EmitVEX_66_0F(dest, src2, src1); // VEX.66.0F (pp=01)
     buf.EmitByte(0x58);
     buf.EmitByte(ModRM(3, dest, src2));
 }
@@ -1011,9 +1016,8 @@ inline void EmitXorpsRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
 // Encoding: C4 + [~R:1][~X:1][~B:1][mmmmm:5] + [W:1][~vvvv:4][L:1][pp:2]
 
 /// Emit 3-byte VEX prefix. For the common VEX.66.0F.WIG (pp=01, mmmmm=1, W=0).
-inline void EmitVEX(CodeBuffer& buf, uint8_t pp, uint8_t mmmmm, bool L,
-                    uint8_t r, uint8_t x, uint8_t b,
-                    uint8_t vvvv, bool W) noexcept {
+inline void EmitVEX(CodeBuffer& buf, uint8_t pp, uint8_t mmmmm, bool L, uint8_t r, uint8_t x, uint8_t b, uint8_t vvvv,
+                    bool W) noexcept {
     buf.EmitByte(0xC4);
     // Byte 2: [~R(1)][~X(1)][~B(1)][0(1)][mmmmm(4)] → top 3 bits inverted, bottom 5 = mmmmm
     uint8_t nr = static_cast<uint8_t>(~((r >> 3) & 1) & 1);
@@ -1026,20 +1030,17 @@ inline void EmitVEX(CodeBuffer& buf, uint8_t pp, uint8_t mmmmm, bool L,
 }
 
 /// Emit 3-byte VEX with VEX.66.0F (SSE2 map), WIG (W=0), 128-bit (L=0).
-inline void EmitVEX_66_0F(CodeBuffer& buf, uint8_t r, uint8_t b,
-                           uint8_t vvvv) noexcept {
+inline void EmitVEX_66_0F(CodeBuffer& buf, uint8_t r, uint8_t b, uint8_t vvvv) noexcept {
     EmitVEX(buf, 1, 0x01, false, r, 0, b, vvvv, false);
 }
 
 /// Emit 3-byte VEX with VEX.66.0F38 (SSSE3/SSE4.1 map), WIG, 128-bit.
-inline void EmitVEX_66_0F38(CodeBuffer& buf, uint8_t r, uint8_t b,
-                             uint8_t vvvv) noexcept {
+inline void EmitVEX_66_0F38(CodeBuffer& buf, uint8_t r, uint8_t b, uint8_t vvvv) noexcept {
     EmitVEX(buf, 1, 0x02, false, r, 0, b, vvvv, false);
 }
 
 /// Emit 3-byte VEX with VEX.66.0F3A (SSE4.1 imm8 map), WIG, 128-bit.
-inline void EmitVEX_66_0F3A(CodeBuffer& buf, uint8_t r, uint8_t b,
-                             uint8_t vvvv) noexcept {
+inline void EmitVEX_66_0F3A(CodeBuffer& buf, uint8_t r, uint8_t b, uint8_t vvvv) noexcept {
     EmitVEX(buf, 1, 0x03, false, r, 0, b, vvvv, false);
 }
 
@@ -1047,20 +1048,20 @@ inline void EmitVEX_66_0F3A(CodeBuffer& buf, uint8_t r, uint8_t b,
 // These match the SSE2 packed integer ops but with AVX 3-operand encoding.
 // ModRM.reg = dest, ModRM.rm = src2, VEX.vvvv = src1.
 
-#define CHAOS_VEX3_0F(name, opcode) \
+#define CHAOS_VEX3_0F(name, opcode)      \
     buf.EmitVEX_66_0F(dest, src2, src1); \
-    buf.EmitByte(opcode); \
+    buf.EmitByte(opcode);                \
     buf.EmitByte(ModRM(3, dest, src2))
 
-#define CHAOS_VEX3_0F38(name, opcode) \
+#define CHAOS_VEX3_0F38(name, opcode)      \
     buf.EmitVEX_66_0F38(dest, src2, src1); \
-    buf.EmitByte(opcode); \
+    buf.EmitByte(opcode);                  \
     buf.EmitByte(ModRM(3, dest, src2))
 
 #define CHAOS_VEX3_0F3A(name, opcode, imm) \
     buf.EmitVEX_66_0F3A(dest, src2, src1); \
-    buf.EmitByte(opcode); \
-    buf.EmitByte(ModRM(3, dest, src2)); \
+    buf.EmitByte(opcode);                  \
+    buf.EmitByte(ModRM(3, dest, src2));    \
     buf.EmitByte(imm)
 
 /// vpaddb xmm_dest, xmm_src1, xmm_src2 (packed byte add, 3-operand)
@@ -1165,7 +1166,7 @@ inline void EmitVPshufdRR(CodeBuffer& buf, uint8_t dest, uint8_t src, uint8_t im
 
 /// vpabsb xmm_dest, xmm_src (2-operand, but uses VEX encoding)
 inline void EmitVPabsbRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
-    buf.EmitVEX_66_0F38(dest, src, dest);  // vvvv = dest (src1 = dest for 2-op form)
+    buf.EmitVEX_66_0F38(dest, src, dest); // vvvv = dest (src1 = dest for 2-op form)
     buf.EmitByte(0x1C);
     buf.EmitByte(ModRM(3, dest, src));
 }
@@ -1203,71 +1204,109 @@ inline void EmitVPshufbRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t s
 
 // ── SSE2: unpack low — VEX.66.0F.WIG ────────────────────────────────
 inline void EmitVPunpcklbwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x60); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0x60);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPunpcklwdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x61); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0x61);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPunpckldqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x62); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0x62);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPunpcklqdqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x63); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0x63);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 
 // ── SSE2: unpack high — VEX.66.0F.WIG ───────────────────────────────
 inline void EmitVPunpckhbwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x68); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0x68);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPunpckhwdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x69); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0x69);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPunpckhdqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x6A); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0x6A);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPunpckhqdqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x6B); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0x6B);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 
 // ── SSE2: pack with signed saturation — VEX.66.0F.WIG ───────────────
 inline void EmitVPacksswbRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x63); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0x63);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPackssdwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x6B); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0x6B);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPackuswbRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x67); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0x67);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 
 // ── SSE2: packed shift left — VEX.66.0F.WIG ─────────────────────────
 inline void EmitVPsllwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xF1); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0xF1);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPslldRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xF2); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0xF2);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPsllqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xF3); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0xF3);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 
 // ── SSE2: packed shift right logical — VEX.66.0F.WIG ────────────────
 inline void EmitVPsrlwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xD1); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0xD1);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPsrldRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xD2); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0xD2);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPsrlqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xD3); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0xD3);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 
 // ── SSE2: packed shift right arithmetic — VEX.66.0F.WIG ─────────────
 inline void EmitVPsrawRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xE1); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0xE1);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 inline void EmitVPsradRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
-    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xE2); buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0xE2);
+    buf.EmitByte(ModRM(3, dest, src2));
 }
 
 // ── SSE4.1: Extract (element → GPR) — VEX.66.0F3A.WIG ──────────────
@@ -1354,9 +1393,9 @@ inline void EmitVCmppdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t sr
 // ═══════════════════════════════════════════════════════════════════════════
 // VEX.3-operand mapping: ModRM.reg=acc, VEX.vvvv=src1, ModRM.rm=src2
 // Semantics (231 form): acc = src1 * src2 + acc (or -/+ variants)
-#define CHAOS_FMA3_0F38(name, opcode) \
+#define CHAOS_FMA3_0F38(name, opcode)     \
     buf.EmitVEX_66_0F38(acc, src2, src1); \
-    buf.EmitByte(opcode); \
+    buf.EmitByte(opcode);                 \
     buf.EmitByte(ModRM(3, acc, src2))
 
 inline void EmitVfmadd231psRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
@@ -1392,78 +1431,100 @@ inline void EmitVfnmsub231pdRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8
 
 /// paddb xmm1, xmm2 (packed byte add)
 inline void EmitPaddbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xFC);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xFC);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// paddw xmm1, xmm2 (packed 16-bit add)
 inline void EmitPaddwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xFD);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xFD);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// paddd xmm1, xmm2 (packed 32-bit add)
 inline void EmitPadddRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xFE);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xFE);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// paddq xmm1, xmm2 (packed 64-bit add)
 inline void EmitPaddqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xD4);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xD4);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// psubb xmm1, xmm2 (packed byte subtract)
 inline void EmitPsubbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xF8);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xF8);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// psubw xmm1, xmm2 (packed 16-bit subtract)
 inline void EmitPsubwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xF9);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xF9);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// psubd xmm1, xmm2 (packed 32-bit subtract)
 inline void EmitPsubdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xFA);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xFA);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// psubq xmm1, xmm2 (packed 64-bit subtract)
 inline void EmitPsubqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xFB);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xFB);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pmullw xmm1, xmm2 (packed 16-bit multiply, low)
 inline void EmitPmullwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xD5);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xD5);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pmuludq xmm1, xmm2 (packed 32-bit → 64-bit unsigned multiply)
 inline void EmitPmuludqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xF4);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xF4);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pmaddwd xmm1, xmm2 (packed multiply-add, word→dword)
 inline void EmitPmaddwdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xF5);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xF5);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
@@ -1473,22 +1534,28 @@ inline void EmitPmaddwdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
 
 /// pand xmm1, xmm2 (packed bitwise AND)
 inline void EmitPandRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xDB);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xDB);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// por xmm1, xmm2 (packed bitwise OR)
 inline void EmitPorRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xEB);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xEB);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pandn xmm1, xmm2 (packed AND NOT: dst = ~dst & src)
 inline void EmitPandnRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xDF);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xDF);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
@@ -1498,57 +1565,75 @@ inline void EmitPandnRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
 
 /// pcmpeqb xmm1, xmm2 (packed byte compare equal)
 inline void EmitPcmpeqbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x74);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x74);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pcmpeqw xmm1, xmm2 (packed 16-bit compare equal)
 inline void EmitPcmpeqwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x75);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x75);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pcmpeqd xmm1, xmm2 (packed 32-bit compare equal)
 inline void EmitPcmpeqdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x76);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x76);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pcmpeqq xmm1, xmm2 (packed 64-bit compare equal, SSE4.1)
 inline void EmitPcmpeqqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x38); buf.EmitByte(0x29);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x38);
+    buf.EmitByte(0x29);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pcmpgtb xmm1, xmm2 (packed byte signed compare greater)
 inline void EmitPcmpgtbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x64);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x64);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pcmpgtw xmm1, xmm2 (packed 16-bit signed compare greater)
 inline void EmitPcmpgtwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x65);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x65);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pcmpgtd xmm1, xmm2 (packed 32-bit signed compare greater)
 inline void EmitPcmpgtdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x66);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x66);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pcmpgtq xmm1, xmm2 (packed 64-bit signed compare greater, SSE4.1)
 inline void EmitPcmpgtqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x38); buf.EmitByte(0x37);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x38);
+    buf.EmitByte(0x37);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
@@ -1558,57 +1643,73 @@ inline void EmitPcmpgtqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
 
 /// psllw xmm1, xmm2 (packed 16-bit shift left logical, by count in xmm2)
 inline void EmitPsllwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xF1);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xF1);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pslld xmm1, xmm2 (packed 32-bit shift left logical)
 inline void EmitPslldRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xF2);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xF2);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// psllq xmm1, xmm2 (packed 64-bit shift left logical)
 inline void EmitPsllqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xF3);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xF3);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// psrlw xmm1, xmm2 (packed 16-bit shift right logical)
 inline void EmitPsrlwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xD1);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xD1);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// psrld xmm1, xmm2 (packed 32-bit shift right logical)
 inline void EmitPsrldRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xD2);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xD2);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// psrlq xmm1, xmm2 (packed 64-bit shift right logical)
 inline void EmitPsrlqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xD3);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xD3);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// psraw xmm1, xmm2 (packed 16-bit shift right arithmetic)
 inline void EmitPsrawRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xE1);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xE1);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// psrad xmm1, xmm2 (packed 32-bit shift right arithmetic)
 inline void EmitPsradRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xE2);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xE2);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
@@ -1618,78 +1719,100 @@ inline void EmitPsradRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
 
 /// punpcklbw xmm1, xmm2 (unpack low bytes)
 inline void EmitPunpcklbwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x60);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x60);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// punpcklwd xmm1, xmm2 (unpack low 16-bit)
 inline void EmitPunpcklwdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x61);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x61);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// punpckldq xmm1, xmm2 (unpack low 32-bit)
 inline void EmitPunpckldqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x62);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x62);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// punpcklqdq xmm1, xmm2 (unpack low 64-bit)
 inline void EmitPunpcklqdqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x6C);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x6C);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// punpckhbw xmm1, xmm2 (unpack high bytes)
 inline void EmitPunpckhbwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x68);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x68);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// punpckhwd xmm1, xmm2 (unpack high 16-bit)
 inline void EmitPunpckhwdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x69);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x69);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// punpckhdq xmm1, xmm2 (unpack high 32-bit)
 inline void EmitPunpckhdqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x6A);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x6A);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// punpckhqdq xmm1, xmm2 (unpack high 64-bit)
 inline void EmitPunpckhqdqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x6D);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x6D);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// packsswb xmm1, xmm2 (pack signed 16-bit → byte with signed saturation)
 inline void EmitPacksswbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x63);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x63);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// packssdw xmm1, xmm2 (pack signed 32-bit → 16-bit with signed saturation)
 inline void EmitPackssdwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x6B);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x6B);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// packuswb xmm1, xmm2 (pack signed 16-bit → byte with unsigned saturation)
 inline void EmitPackuswbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x67);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x67);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
@@ -1699,37 +1822,51 @@ inline void EmitPackuswbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
 
 /// pshufd xmm1, xmm2, imm8 (packed 32-bit shuffle)
 inline void EmitPshufdRR(CodeBuffer& buf, uint8_t dst, uint8_t src, uint8_t imm) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x70);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x70);
     buf.EmitByte(ModRM(3, dst, src));
     buf.EmitByte(imm);
 }
 
 /// pshufb xmm1, xmm2 (packed shuffle bytes, SSSE3)
 inline void EmitPshufbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x38); buf.EmitByte(0x00);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x38);
+    buf.EmitByte(0x00);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pabsb xmm1, xmm2 (packed byte absolute value, SSSE3)
 inline void EmitPabsbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x38); buf.EmitByte(0x1C);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x38);
+    buf.EmitByte(0x1C);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pabsw xmm1, xmm2 (packed 16-bit absolute value, SSSE3)
 inline void EmitPabswRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x38); buf.EmitByte(0x1D);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x38);
+    buf.EmitByte(0x1D);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// pabsd xmm1, xmm2 (packed 32-bit absolute value, SSSE3)
 inline void EmitPabsdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x38); buf.EmitByte(0x1E);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x38);
+    buf.EmitByte(0x1E);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
@@ -1739,48 +1876,64 @@ inline void EmitPabsdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
 
 /// pinsrw xmm, r32, imm8 (insert 16-bit from GPR, SSE2)
 inline void EmitPinsrwRR(CodeBuffer& buf, uint8_t xmm, uint8_t reg, uint8_t imm) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, xmm, reg);
-    buf.EmitByte(0x0F); buf.EmitByte(0xC4);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, xmm, reg);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xC4);
     buf.EmitByte(ModRM(3, xmm, reg));
     buf.EmitByte(imm);
 }
 
 /// pextrw r32, xmm, imm8 (extract 16-bit to GPR, SSE2)
 inline void EmitPextrwRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm, uint8_t imm) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, reg, xmm);
-    buf.EmitByte(0x0F); buf.EmitByte(0xC5);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, reg, xmm);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xC5);
     buf.EmitByte(ModRM(3, reg, xmm));
     buf.EmitByte(imm);
 }
 
 /// pinsrb xmm, r32, imm8 (insert byte from GPR, SSE4.1)
 inline void EmitPinsrbRR(CodeBuffer& buf, uint8_t xmm, uint8_t reg, uint8_t imm) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, xmm, reg);
-    buf.EmitByte(0x0F); buf.EmitByte(0x3A); buf.EmitByte(0x20);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, xmm, reg);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x3A);
+    buf.EmitByte(0x20);
     buf.EmitByte(ModRM(3, xmm, reg));
     buf.EmitByte(imm);
 }
 
 /// pinsrd xmm, r32, imm8 (insert 32-bit from GPR, SSE4.1)
 inline void EmitPinsrdRR(CodeBuffer& buf, uint8_t xmm, uint8_t reg, uint8_t imm) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, xmm, reg);
-    buf.EmitByte(0x0F); buf.EmitByte(0x3A); buf.EmitByte(0x22);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, xmm, reg);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x3A);
+    buf.EmitByte(0x22);
     buf.EmitByte(ModRM(3, xmm, reg));
     buf.EmitByte(imm);
 }
 
 /// pextrb r32, xmm, imm8 (extract byte to GPR, SSE4.1)
 inline void EmitPextrbRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm, uint8_t imm) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, reg, xmm);
-    buf.EmitByte(0x0F); buf.EmitByte(0x3A); buf.EmitByte(0x14);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, reg, xmm);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x3A);
+    buf.EmitByte(0x14);
     buf.EmitByte(ModRM(3, reg, xmm));
     buf.EmitByte(imm);
 }
 
 /// pextrd r32, xmm, imm8 (extract 32-bit to GPR, SSE4.1)
 inline void EmitPextrdRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm, uint8_t imm) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, reg, xmm);
-    buf.EmitByte(0x0F); buf.EmitByte(0x3A); buf.EmitByte(0x16);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, reg, xmm);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x3A);
+    buf.EmitByte(0x16);
     buf.EmitByte(ModRM(3, reg, xmm));
     buf.EmitByte(imm);
 }
@@ -1788,7 +1941,8 @@ inline void EmitPextrdRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm, uint8_t imm)
 /// pmovmskb r32, xmm (move byte mask to GPR, SSE2)
 inline void EmitPmovmskbRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm) noexcept {
     EmitREX(buf, false, reg, xmm);
-    buf.EmitByte(0x0F); buf.EmitByte(0xD7);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xD7);
     buf.EmitByte(ModRM(3, reg, xmm));
 }
 
@@ -1798,22 +1952,28 @@ inline void EmitPmovmskbRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm) noexcept {
 
 /// movdqa xmm1, xmm2 (aligned 128-bit register-to-register)
 inline void EmitMovdqaRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0x6F);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x6F);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// movdqa [mem], xmm (aligned 128-bit store)
 inline void EmitMovdqaMR(CodeBuffer& buf, uint8_t base, int32_t disp, uint8_t src) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, src, base);
-    buf.EmitByte(0x0F); buf.EmitByte(0x7F);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, src, base);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x7F);
     EmitMR(buf, src, base, disp);
 }
 
 /// movdqa xmm, [mem] (aligned 128-bit load)
 inline void EmitMovdqaRM(CodeBuffer& buf, uint8_t dst, uint8_t base, int32_t disp) noexcept {
-    buf.EmitByte(0x66); EmitREX(buf, false, dst, base);
-    buf.EmitByte(0x0F); buf.EmitByte(0x6F);
+    buf.EmitByte(0x66);
+    EmitREX(buf, false, dst, base);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0x6F);
     EmitMR(buf, dst, base, disp);
 }
 
@@ -1823,15 +1983,19 @@ inline void EmitMovdqaRM(CodeBuffer& buf, uint8_t dst, uint8_t base, int32_t dis
 
 /// popcnt r64, r/m64 (population count)
 inline void EmitPopcntRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0xF3); EmitREX(buf, true, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xB8);
+    buf.EmitByte(0xF3);
+    EmitREX(buf, true, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xB8);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// lzcnt r64, r/m64 (leading zero count)
 inline void EmitLzcntRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitByte(0xF3); EmitREX(buf, true, dst, src);
-    buf.EmitByte(0x0F); buf.EmitByte(0xBD);
+    buf.EmitByte(0xF3);
+    EmitREX(buf, true, dst, src);
+    buf.EmitByte(0x0F);
+    buf.EmitByte(0xBD);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
@@ -1842,70 +2006,67 @@ inline void EmitLzcntRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
 // They mirror the 128-bit VP* functions above but operate on 256-bit lanes.
 
 /// Emit 3-byte VEX with VEX.66.0F (SSE2 map), WIG (W=0), 256-bit (L=1).
-inline void EmitVEX_66_0F_256(CodeBuffer& buf, uint8_t r, uint8_t b,
-                               uint8_t vvvv) noexcept {
+inline void EmitVEX_66_0F_256(CodeBuffer& buf, uint8_t r, uint8_t b, uint8_t vvvv) noexcept {
     EmitVEX(buf, 1, 0x01, false, r, 0, b, vvvv, true);
 }
 
 /// Emit 3-byte VEX with VEX.66.0F38 (SSSE3/SSE4.1 map), WIG, 256-bit (L=1).
-inline void EmitVEX_66_0F38_256(CodeBuffer& buf, uint8_t r, uint8_t b,
-                                 uint8_t vvvv) noexcept {
+inline void EmitVEX_66_0F38_256(CodeBuffer& buf, uint8_t r, uint8_t b, uint8_t vvvv) noexcept {
     EmitVEX(buf, 1, 0x02, false, r, 0, b, vvvv, true);
 }
 
 /// Emit 3-byte VEX with VEX.66.0F3A (SSE4.1 imm8 map), WIG, 256-bit (L=1).
-inline void EmitVEX_66_0F3A_256(CodeBuffer& buf, uint8_t r, uint8_t b,
-                                 uint8_t vvvv) noexcept {
+inline void EmitVEX_66_0F3A_256(CodeBuffer& buf, uint8_t r, uint8_t b, uint8_t vvvv) noexcept {
     EmitVEX(buf, 1, 0x03, false, r, 0, b, vvvv, true);
 }
 
 // ── YMM VEX 3-operand macros (L=1) ─────────────────────────────────────
-#define CHAOS_YMM_VEX3_0F(name, opcode) \
+#define CHAOS_YMM_VEX3_0F(name, opcode)      \
     buf.EmitVEX_66_0F_256(dest, src2, src1); \
-    buf.EmitByte(opcode); \
+    buf.EmitByte(opcode);                    \
     buf.EmitByte(ModRM(3, dest, src2))
 
-#define CHAOS_YMM_VEX3_0F38(name, opcode) \
+#define CHAOS_YMM_VEX3_0F38(name, opcode)      \
     buf.EmitVEX_66_0F38_256(dest, src2, src1); \
-    buf.EmitByte(opcode); \
+    buf.EmitByte(opcode);                      \
     buf.EmitByte(ModRM(3, dest, src2))
 
 #define CHAOS_YMM_VEX3_0F3A(name, opcode, imm) \
     buf.EmitVEX_66_0F3A_256(dest, src2, src1); \
-    buf.EmitByte(opcode); \
-    buf.EmitByte(ModRM(3, dest, src2)); \
+    buf.EmitByte(opcode);                      \
+    buf.EmitByte(ModRM(3, dest, src2));        \
     buf.EmitByte(imm)
 
 // ── YMM packed arithmetic (VEX.66.0F, L=1) ─────────────────────────────
 
-#define CHAOS_YMM_VEX3_OP(name, opcode) \
+#define CHAOS_YMM_VEX3_OP(name, opcode)                                                                  \
     inline void EmitVYmm##name##RR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept { \
-        CHAOS_YMM_VEX3_0F(name, opcode); \
+        CHAOS_YMM_VEX3_0F(name, opcode);                                                                 \
     }
 
-CHAOS_YMM_VEX3_OP(Paddb,  0xFC)
-CHAOS_YMM_VEX3_OP(Paddw,  0xFD)
-CHAOS_YMM_VEX3_OP(Paddd,  0xFE)
-CHAOS_YMM_VEX3_OP(Paddq,  0xD4)
-CHAOS_YMM_VEX3_OP(Psubb,  0xF8)
-CHAOS_YMM_VEX3_OP(Psubw,  0xF9)
-CHAOS_YMM_VEX3_OP(Psubd,  0xFA)
-CHAOS_YMM_VEX3_OP(Psubq,  0xFB)
+CHAOS_YMM_VEX3_OP(Paddb, 0xFC)
+CHAOS_YMM_VEX3_OP(Paddw, 0xFD)
+CHAOS_YMM_VEX3_OP(Paddd, 0xFE)
+CHAOS_YMM_VEX3_OP(Paddq, 0xD4)
+CHAOS_YMM_VEX3_OP(Psubb, 0xF8)
+CHAOS_YMM_VEX3_OP(Psubw, 0xF9)
+CHAOS_YMM_VEX3_OP(Psubd, 0xFA)
+CHAOS_YMM_VEX3_OP(Psubq, 0xFB)
 CHAOS_YMM_VEX3_OP(Pmullw, 0xD5)
-CHAOS_YMM_VEX3_OP(Pmuludq,0xF4)
-CHAOS_YMM_VEX3_OP(Pand,   0xDB)
-CHAOS_YMM_VEX3_OP(Por,    0xEB)
-CHAOS_YMM_VEX3_OP(Pxor,   0xEF)
-CHAOS_YMM_VEX3_OP(Pandn,  0xDF)
+CHAOS_YMM_VEX3_OP(Pmuludq, 0xF4)
+CHAOS_YMM_VEX3_OP(Pand, 0xDB)
+CHAOS_YMM_VEX3_OP(Por, 0xEB)
+CHAOS_YMM_VEX3_OP(Pxor, 0xEF)
+CHAOS_YMM_VEX3_OP(Pandn, 0xDF)
 
 // ── YMM packed compare (VEX.66.0F, L=1) ───────────────────────────────
 
-CHAOS_YMM_VEX3_OP(Pcmpeqb,  0x74)
-CHAOS_YMM_VEX3_OP(Pcmpeqw,  0x75)
-CHAOS_YMM_VEX3_OP(Pcmpeqd,  0x76)
-CHAOS_YMM_VEX3_OP(Pcmpgtb,  0x64)
-CHAOS_YMM_VEX3_OP(Pcmpgtw,  0x65)
-CHAOS_YMM_VEX3_OP(Pcmpgtd,  0x66)
+CHAOS_YMM_VEX3_OP(Pcmpeqb, 0x74)
+CHAOS_YMM_VEX3_OP(Pcmpeqw, 0x75)
+CHAOS_YMM_VEX3_OP(Pcmpeqd, 0x76)
+CHAOS_YMM_VEX3_OP(Pcmpgtb, 0x64)
+CHAOS_YMM_VEX3_OP(Pcmpgtw, 0x65)
+CHAOS_YMM_VEX3_OP(Pcmpgtd, 0x66)
 
 // pcmpgtq (SSE4.1, requires 0F38 map)
 inline void EmitVYmmPcmpgtqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
@@ -1925,17 +2086,17 @@ CHAOS_YMM_VEX3_OP(Psrad, 0xE2)
 
 // ── YMM unpack & pack (VEX.66.0F, L=1) ───────────────────────────────
 
-CHAOS_YMM_VEX3_OP(Punpcklbw,  0x60)
-CHAOS_YMM_VEX3_OP(Punpcklwd,  0x61)
-CHAOS_YMM_VEX3_OP(Punpckldq,  0x62)
+CHAOS_YMM_VEX3_OP(Punpcklbw, 0x60)
+CHAOS_YMM_VEX3_OP(Punpcklwd, 0x61)
+CHAOS_YMM_VEX3_OP(Punpckldq, 0x62)
 CHAOS_YMM_VEX3_OP(Punpcklqdq, 0x6C)
-CHAOS_YMM_VEX3_OP(Punpckhbw,  0x68)
-CHAOS_YMM_VEX3_OP(Punpckhwd,  0x69)
-CHAOS_YMM_VEX3_OP(Punpckhdq,  0x6A)
+CHAOS_YMM_VEX3_OP(Punpckhbw, 0x68)
+CHAOS_YMM_VEX3_OP(Punpckhwd, 0x69)
+CHAOS_YMM_VEX3_OP(Punpckhdq, 0x6A)
 CHAOS_YMM_VEX3_OP(Punpckhqdq, 0x6D)
-CHAOS_YMM_VEX3_OP(Packsswb,   0x63)
-CHAOS_YMM_VEX3_OP(Packssdw,   0x6B)
-CHAOS_YMM_VEX3_OP(Packuswb,   0x67)
+CHAOS_YMM_VEX3_OP(Packsswb, 0x63)
+CHAOS_YMM_VEX3_OP(Packssdw, 0x6B)
+CHAOS_YMM_VEX3_OP(Packuswb, 0x67)
 
 // ── YMM shuffle (VEX.66.0F, L=1, with imm8) ──────────────────────────
 
@@ -1955,9 +2116,9 @@ inline void EmitVYmmPcmpeqqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8
 // ── YMM absolute value (VEX.66.0F38, L=1, 2-operand form) ────────────
 
 // For 2-operand YMM abs: ModRM.reg = dest = src1, VEX.vvvv = dest (tied)
-#define CHAOS_YMM_ABS_0F38(name, opcode) \
+#define CHAOS_YMM_ABS_0F38(name, opcode)      \
     buf.EmitVEX_66_0F38_256(dest, src, dest); \
-    buf.EmitByte(opcode); \
+    buf.EmitByte(opcode);                     \
     buf.EmitByte(ModRM(3, dest, src))
 
 inline void EmitVYmmPabsbRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
@@ -1982,9 +2143,9 @@ inline void EmitVYmmPshufbRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcep
 // ── YMM FMA (VEX.66.0F38, L=1, 3-operand 231 form) ───────────────────
 // Semantics (231 form): dst = src1 * src2 + dst (acc = src1 * src2 + acc)
 
-#define CHAOS_YMM_FMA_0F38(name, opcode) \
+#define CHAOS_YMM_FMA_0F38(name, opcode)      \
     buf.EmitVEX_66_0F38_256(acc, src2, src1); \
-    buf.EmitByte(opcode); \
+    buf.EmitByte(opcode);                     \
     buf.EmitByte(ModRM(3, acc, src2))
 
 inline void EmitVYmmVfmadd231psRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
@@ -2023,14 +2184,14 @@ inline void EmitVYmmVfnmsub231pdRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, u
 
 /// vmovdqa ymm1, ymm2 (aligned 256-bit register-to-register)
 inline void EmitVYmmMovdqaRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
-    buf.EmitVEX_66_0F_256(dst, src, 0);  // vvvv=0 (unused for 2-operand)
+    buf.EmitVEX_66_0F_256(dst, src, 0); // vvvv=0 (unused for 2-operand)
     buf.EmitByte(0x6F);
     buf.EmitByte(ModRM(3, dst, src));
 }
 
 /// vmovdqa [mem], ymm (aligned 256-bit store)
 inline void EmitVYmmMovdqaMR(CodeBuffer& buf, uint8_t base, int32_t disp, uint8_t src) noexcept {
-    buf.EmitVEX_66_0F_256(src, base, 0);  // vvvv=0
+    buf.EmitVEX_66_0F_256(src, base, 0); // vvvv=0
     buf.EmitByte(0x7F);
     EmitMR(buf, src, base, disp);
 }
@@ -2042,6 +2203,6 @@ inline void EmitVYmmMovdqaRM(CodeBuffer& buf, uint8_t dst, uint8_t base, int32_t
     EmitMR(buf, dst, base, disp);
 }
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_CODEGEN_X64_ENCODER_H_
+#endif // CHAOS_IL2CPP_CODEGEN_X64_ENCODER_H_

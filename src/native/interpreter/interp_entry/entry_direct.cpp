@@ -32,12 +32,12 @@ void RegisterInterpFrameScanner() noexcept;
 
 // ── Tier hit counters (profile instrumentation) ─────────────────────────
 struct TierCounters {
-    std::atomic<uint64_t> step_1c       = 0;
-    std::atomic<uint64_t> step_reg      = 0;
-    std::atomic<uint64_t> step_fast     = 0;
-    std::atomic<uint64_t> step_vm       = 0;
-    std::atomic<uint64_t> step_native   = 0;
-    std::atomic<uint64_t> deopt_t4      = 0;
+    std::atomic<uint64_t> step_1c = 0;
+    std::atomic<uint64_t> step_reg = 0;
+    std::atomic<uint64_t> step_fast = 0;
+    std::atomic<uint64_t> step_vm = 0;
+    std::atomic<uint64_t> step_native = 0;
+    std::atomic<uint64_t> deopt_t4 = 0;
 };
 
 static TierCounters& GetTierCounters() {
@@ -50,9 +50,11 @@ static TierCounters& GetTierCounters() {
 // TypeInfoHot* via module registry scan, walks parent chain.
 static bool TypedCatchCheck(void* exc_obj, uint32_t class_token) noexcept {
     using namespace chaos::il2cpp::runtime_core;
-    if (exc_obj == nullptr) return false;
+    if (exc_obj == nullptr)
+        return false;
     const TypeInfoHot* exc_type = *static_cast<const TypeInfoHot* const*>(exc_obj);
-    if (exc_type == nullptr) return false;
+    if (exc_type == nullptr)
+        return false;
 
     // Scan all registered modules for the target type by class_token.
     const TypeInfoHot* target_type = nullptr;
@@ -61,7 +63,8 @@ static bool TypedCatchCheck(void* exc_obj, uint32_t class_token) noexcept {
     uint32_t module_count = GetModuleCount();
     for (uint32_t mi = 0; mi < module_count; ++mi) {
         const auto* mod = GetModuleByIndex(mi);
-        if (mod == nullptr || mod->type_info_ptrs == nullptr || mod->image == nullptr) continue;
+        if (mod == nullptr || mod->type_info_ptrs == nullptr || mod->image == nullptr)
+            continue;
         if (type_index < mod->type_count) {
             const auto* desc = mod->image->types[type_index];
             if (desc != nullptr && desc->metadata_token == class_token) {
@@ -70,12 +73,14 @@ static bool TypedCatchCheck(void* exc_obj, uint32_t class_token) noexcept {
             }
         }
     }
-    if (target_type == nullptr) return false;
+    if (target_type == nullptr)
+        return false;
 
     // Walk parent chain.
     const TypeInfoHot* current = exc_type;
     while (current != nullptr) {
-        if (current == target_type) return true;
+        if (current == target_type)
+            return true;
         current = current->parent;
     }
     return false;
@@ -84,36 +89,34 @@ static bool TypedCatchCheck(void* exc_obj, uint32_t class_token) noexcept {
 // ── InterpreterEntryDirect ──────────────────────────────────────────────
 
 static void CacheSignature(PatchMethod* patch_method) noexcept;
-static interpreter::InterpreterValue ReadTypedArg(
-    ArgBuffer& reader, interpreter::ValueTag tag) noexcept;
+static interpreter::InterpreterValue ReadTypedArg(ArgBuffer& reader, interpreter::ValueTag tag) noexcept;
 static void WriteTypedRet(void* ret_buf, const interpreter::ExecutionResult& result,
-                           interpreter::ValueTag ret_tag) noexcept;
+                          interpreter::ValueTag ret_tag) noexcept;
 
-void InlineLeafCallees(
-    interpreter::IRMethod& ir,
-    PatchMethod& patch_method) noexcept;
+void InlineLeafCallees(interpreter::IRMethod& ir, PatchMethod& patch_method) noexcept;
 
 // ── Tier 2 IR re-optimization helpers ─────────────────────────────────────
 
 static interpreter::IRMethod CloneIRMethod(const interpreter::IRMethod& src) noexcept {
     interpreter::IRMethod dst;
     dst.instructions = src.instructions;
-    dst.seh_clauses  = src.seh_clauses;
+    dst.seh_clauses = src.seh_clauses;
     return dst;
 }
 
 struct FusionStats {
-    uint32_t dead_pops_removed    = 0;
-    uint32_t dup_pop_cancelled    = 0;
-    uint32_t redundant_locals     = 0;
-    uint32_t ldnull_stloc_fused   = 0;
-    uint32_t ldc_add_fused        = 0;
+    uint32_t dead_pops_removed = 0;
+    uint32_t dup_pop_cancelled = 0;
+    uint32_t redundant_locals = 0;
+    uint32_t ldnull_stloc_fused = 0;
+    uint32_t ldc_add_fused = 0;
 };
 
 static FusionStats FusePass(interpreter::IRMethod& ir) noexcept {
     FusionStats stats;
     auto& instrs = ir.instructions;
-    if (instrs.size() < 2) return stats;
+    if (instrs.size() < 2)
+        return stats;
 
     std::vector<interpreter::IRInstruction> fused;
     fused.reserve(instrs.size());
@@ -123,33 +126,36 @@ static FusionStats FusePass(interpreter::IRMethod& ir) noexcept {
 
         if (op.op_code == interpreter::IROpCode::Pop) {
             size_t j = i;
-            while (j < instrs.size() &&
-                   instrs[j].op_code == interpreter::IROpCode::Pop) ++j;
-            if (j < instrs.size() &&
-                instrs[j].op_code == interpreter::IROpCode::Ret) {
+            while (j < instrs.size() && instrs[j].op_code == interpreter::IROpCode::Pop)
+                ++j;
+            if (j < instrs.size() && instrs[j].op_code == interpreter::IROpCode::Ret) {
                 stats.dead_pops_removed += static_cast<uint32_t>(j - i);
-                i = j - 1; continue;
+                i = j - 1;
+                continue;
             }
-            fused.push_back(op); continue;
+            fused.push_back(op);
+            continue;
         }
 
-        if (op.op_code == interpreter::IROpCode::Dup &&
-            i + 1 < instrs.size() &&
+        if (op.op_code == interpreter::IROpCode::Dup && i + 1 < instrs.size() &&
             instrs[i + 1].op_code == interpreter::IROpCode::Pop) {
-            ++stats.dup_pop_cancelled; ++i; continue;
+            ++stats.dup_pop_cancelled;
+            ++i;
+            continue;
         }
 
-        if (op.op_code == interpreter::IROpCode::LdLoc &&
-            i + 1 < instrs.size() &&
-            instrs[i + 1].op_code == interpreter::IROpCode::StLoc &&
-            op.operand_index == instrs[i + 1].operand_index) {
-            ++stats.redundant_locals; ++i; continue;
+        if (op.op_code == interpreter::IROpCode::LdLoc && i + 1 < instrs.size() &&
+            instrs[i + 1].op_code == interpreter::IROpCode::StLoc && op.operand_index == instrs[i + 1].operand_index) {
+            ++stats.redundant_locals;
+            ++i;
+            continue;
         }
 
         fused.push_back(op);
     }
 
-    if (fused.size() < instrs.size()) instrs.swap(fused);
+    if (fused.size() < instrs.size())
+        instrs.swap(fused);
     return stats;
 }
 
@@ -157,35 +163,40 @@ static void FuseInstructions(interpreter::IRMethod& ir) noexcept {
     FusionStats total;
     for (int pass = 0; pass < 4; ++pass) {
         auto stats = FusePass(ir);
-        total.dead_pops_removed  += stats.dead_pops_removed;
-        total.dup_pop_cancelled  += stats.dup_pop_cancelled;
-        total.redundant_locals   += stats.redundant_locals;
+        total.dead_pops_removed += stats.dead_pops_removed;
+        total.dup_pop_cancelled += stats.dup_pop_cancelled;
+        total.redundant_locals += stats.redundant_locals;
         total.ldnull_stloc_fused += stats.ldnull_stloc_fused;
-        if (stats.dead_pops_removed == 0 &&
-            stats.dup_pop_cancelled == 0 &&
-            stats.redundant_locals == 0) break;
+        if (stats.dead_pops_removed == 0 && stats.dup_pop_cancelled == 0 && stats.redundant_locals == 0)
+            break;
     }
-    CHAOS_IL2CPP_LOG_DEBUG_M("tier", "FuseInstructions: removed {} dead Pops, "
-                           "{} Dup+Pop pairs, {} redundant LdLoc+StLoc",
-                           total.dead_pops_removed, total.dup_pop_cancelled, total.redundant_locals);
+    CHAOS_IL2CPP_LOG_DEBUG_M("tier",
+                             "FuseInstructions: removed {} dead Pops, "
+                             "{} Dup+Pop pairs, {} redundant LdLoc+StLoc",
+                             total.dead_pops_removed, total.dup_pop_cancelled, total.redundant_locals);
 }
 
 bool OptimizeToTier2(PatchMethod* pm) noexcept {
-    if (pm == nullptr) return false;
+    if (pm == nullptr)
+        return false;
     auto* orig_ir = static_cast<interpreter::IRMethod*>(pm->cached_ir);
-    if (orig_ir == nullptr) return false;
-    if (!orig_ir->seh_clauses.empty()) return false;
-    if (orig_ir->instructions.size() <= 2) return false;
+    if (orig_ir == nullptr)
+        return false;
+    if (!orig_ir->seh_clauses.empty())
+        return false;
+    if (orig_ir->instructions.size() <= 2)
+        return false;
 
     auto cloned_ir = CloneIRMethod(*orig_ir);
     InlineLeafCallees(cloned_ir, *pm);
     FuseInstructions(cloned_ir);
     auto optimized_rm = interpreter::AllocateRegisters(cloned_ir);
-    if (optimized_rm.instructions.empty()) return false;
+    if (optimized_rm.instructions.empty())
+        return false;
 
-    auto* storage = static_cast<interpreter::RegisterMethod*>(
-        CHAOS_IL2CPP_MALLOC(sizeof(interpreter::RegisterMethod)));
-    if (storage == nullptr) return false;
+    auto* storage = static_cast<interpreter::RegisterMethod*>(CHAOS_IL2CPP_MALLOC(sizeof(interpreter::RegisterMethod)));
+    if (storage == nullptr)
+        return false;
     ::new (storage) interpreter::RegisterMethod(std::move(optimized_rm));
     pm->cached_optimized_reg_method = storage;
     return true;
@@ -197,25 +208,34 @@ static uint32_t CountCallVirtInstructions(const interpreter::RegisterMethod& rm)
     uint32_t count = 0;
     for (const auto& instr : rm.instructions) {
         if (instr.op_code() == interpreter::IROpCode::CallVirt ||
-            instr.op_code() == interpreter::IROpCode::CallVirtConstrained) ++count;
+            instr.op_code() == interpreter::IROpCode::CallVirtConstrained)
+            ++count;
     }
     return count;
 }
 
 bool EnsureCallSiteProfiles(PatchMethod* pm) noexcept {
-    if (pm == nullptr) return false;
-    if (pm->call_site_profiles != nullptr) return true;
+    if (pm == nullptr)
+        return false;
+    if (pm->call_site_profiles != nullptr)
+        return true;
     auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
-    if (rm == nullptr) return false;
+    if (rm == nullptr)
+        return false;
     uint32_t callvirt_count = CountCallVirtInstructions(*rm);
-    if (callvirt_count == 0) return false;
+    if (callvirt_count == 0)
+        return false;
     auto* profiles = static_cast<CallSiteProfile*>(std::calloc(callvirt_count, sizeof(CallSiteProfile)));
-    if (profiles == nullptr) return false;
+    if (profiles == nullptr)
+        return false;
     uint32_t prof_idx = 0;
     for (uint32_t i = 0; i < static_cast<uint32_t>(rm->instructions.size()); ++i) {
         if (rm->instructions[i].op_code() == interpreter::IROpCode::CallVirt ||
             rm->instructions[i].op_code() == interpreter::IROpCode::CallVirtConstrained) {
-            if (prof_idx < callvirt_count) { profiles[prof_idx].instruction_idx = i; ++prof_idx; }
+            if (prof_idx < callvirt_count) {
+                profiles[prof_idx].instruction_idx = i;
+                ++prof_idx;
+            }
         }
     }
     pm->call_site_profiles = profiles;
@@ -224,15 +244,20 @@ bool EnsureCallSiteProfiles(PatchMethod* pm) noexcept {
 }
 
 void SampleCallVirtProfile(PatchMethod* pm, uint32_t instruction_idx, uint64_t receiver_type_token) noexcept {
-    if (pm == nullptr || pm->call_site_profiles == nullptr) return;
+    if (pm == nullptr || pm->call_site_profiles == nullptr)
+        return;
     auto* profiles = static_cast<CallSiteProfile*>(pm->call_site_profiles);
     uint32_t count = pm->call_site_profile_count;
     for (uint32_t i = 0; i < count; ++i) {
-        if (profiles[i].instruction_idx != instruction_idx) continue;
+        if (profiles[i].instruction_idx != instruction_idx)
+            continue;
         auto& prof = profiles[i];
         ++prof.sample_count;
         for (uint32_t j = 0; j < prof.type_count; ++j) {
-            if (prof.type_tokens[j] == receiver_type_token) { ++prof.type_hit_counts[j]; return; }
+            if (prof.type_tokens[j] == receiver_type_token) {
+                ++prof.type_hit_counts[j];
+                return;
+            }
         }
         if (prof.type_count < 4) {
             prof.type_tokens[prof.type_count] = receiver_type_token;
@@ -241,7 +266,8 @@ void SampleCallVirtProfile(PatchMethod* pm, uint32_t instruction_idx, uint64_t r
         } else {
             uint32_t min_idx = 0;
             for (uint32_t j = 1; j < 4; ++j) {
-                if (prof.type_hit_counts[j] < prof.type_hit_counts[min_idx]) min_idx = j;
+                if (prof.type_hit_counts[j] < prof.type_hit_counts[min_idx])
+                    min_idx = j;
             }
             prof.type_tokens[min_idx] = receiver_type_token;
             prof.type_hit_counts[min_idx] = 1;
@@ -251,15 +277,20 @@ void SampleCallVirtProfile(PatchMethod* pm, uint32_t instruction_idx, uint64_t r
 }
 
 bool GeneratePICData(PatchMethod* pm) noexcept {
-    if (pm == nullptr || pm->call_site_profiles == nullptr) return false;
-    if (pm->pic_dispatch_data != nullptr) return true;
+    if (pm == nullptr || pm->call_site_profiles == nullptr)
+        return false;
+    if (pm->pic_dispatch_data != nullptr)
+        return true;
     auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
-    if (rm == nullptr) return false;
+    if (rm == nullptr)
+        return false;
     auto* profiles = static_cast<CallSiteProfile*>(pm->call_site_profiles);
     uint32_t count = pm->call_site_profile_count;
-    if (count == 0) return false;
+    if (count == 0)
+        return false;
     uint8_t* alloc_base = static_cast<uint8_t*>(std::calloc(1, sizeof(uint32_t) + count * sizeof(PicDispatchChain)));
-    if (alloc_base == nullptr) return false;
+    if (alloc_base == nullptr)
+        return false;
     *reinterpret_cast<uint32_t*>(alloc_base) = count;
     auto* chains = reinterpret_cast<PicDispatchChain*>(alloc_base + sizeof(uint32_t));
     uint32_t instruct_count = static_cast<uint32_t>(rm->instructions.size());
@@ -277,28 +308,41 @@ bool GeneratePICData(PatchMethod* pm) noexcept {
     uint64_t current_gen = g_patch_generation.load(std::memory_order_relaxed);
     for (uint32_t i = 0; i < count; ++i) {
         const auto& prof = profiles[i];
-        if (prof.sample_count < 4) continue;
+        if (prof.sample_count < 4)
+            continue;
         uint32_t total = 0;
-        for (uint32_t j = 0; j < prof.type_count; ++j) total += prof.type_hit_counts[j];
-        if (total == 0) continue;
+        for (uint32_t j = 0; j < prof.type_count; ++j)
+            total += prof.type_hit_counts[j];
+        if (total == 0)
+            continue;
         uint64_t sorted_tokens[4] = {};
         uint32_t sorted_hits[4] = {};
-        for (uint32_t j = 0; j < prof.type_count; ++j) { sorted_tokens[j] = prof.type_tokens[j]; sorted_hits[j] = prof.type_hit_counts[j]; }
+        for (uint32_t j = 0; j < prof.type_count; ++j) {
+            sorted_tokens[j] = prof.type_tokens[j];
+            sorted_hits[j] = prof.type_hit_counts[j];
+        }
         for (uint32_t a = 0; a < prof.type_count; ++a)
             for (uint32_t b = a + 1; b < prof.type_count; ++b)
-                if (sorted_hits[b] > sorted_hits[a]) { std::swap(sorted_tokens[a], sorted_tokens[b]); std::swap(sorted_hits[a], sorted_hits[b]); }
+                if (sorted_hits[b] > sorted_hits[a]) {
+                    std::swap(sorted_tokens[a], sorted_tokens[b]);
+                    std::swap(sorted_hits[a], sorted_hits[b]);
+                }
         auto& chain = chains[i];
         chain.generation = static_cast<uint32_t>(current_gen);
         chain.instruction_idx = prof.instruction_idx;
         chain.method_token = (prof.instruction_idx < instruct_count) ? inst_method_tokens[prof.instruction_idx] : 0;
         float top1_ratio = static_cast<float>(sorted_hits[0]) / static_cast<float>(total);
         uint32_t slots_to_fill = 0;
-        if (top1_ratio > 0.90f) slots_to_fill = 1;
+        if (top1_ratio > 0.90f)
+            slots_to_fill = 1;
         else {
             uint32_t cumulative = sorted_hits[0];
             for (uint32_t s = 1; s < prof.type_count && s < 3; ++s) {
                 cumulative += sorted_hits[s];
-                if (static_cast<float>(cumulative) / static_cast<float>(total) > 0.95f) { slots_to_fill = s + 1; break; }
+                if (static_cast<float>(cumulative) / static_cast<float>(total) > 0.95f) {
+                    slots_to_fill = s + 1;
+                    break;
+                }
             }
         }
         for (uint32_t s = 0; s < slots_to_fill && s < 3; ++s) {
@@ -309,33 +353,44 @@ bool GeneratePICData(PatchMethod* pm) noexcept {
         }
         ++generated_count;
     }
-    if (generated_count == 0) { std::free(alloc_base); return false; }
+    if (generated_count == 0) {
+        std::free(alloc_base);
+        return false;
+    }
     pm->pic_dispatch_data = alloc_base;
     return true;
 }
 
 void RebuildCallCacheForT3(PatchMethod* pm) noexcept {
-    if (pm == nullptr) return;
+    if (pm == nullptr)
+        return;
     auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
-    if (rm == nullptr) return;
+    if (rm == nullptr)
+        return;
     uint32_t instr_count = static_cast<uint32_t>(rm->instructions.size());
-    if (instr_count == 0) return;
+    if (instr_count == 0)
+        return;
     auto* cc = static_cast<runtime_instantiation::CachedCallInfo*>(
         CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(instr_count * sizeof(runtime_instantiation::CachedCallInfo)));
-    if (cc == nullptr) return;
+    if (cc == nullptr)
+        return;
     for (uint32_t i = 0; i < instr_count; ++i) {
         const auto& ri = rm->instructions[i];
         auto op_int = static_cast<int>(ri.op_code());
         switch (op_int) {
-        case static_cast<int>(interpreter::IROpCode::Call):
-        case static_cast<int>(interpreter::IROpCode::Calli):
-        case static_cast<int>(interpreter::IROpCode::CallVirt):
-        case static_cast<int>(interpreter::IROpCode::CallBridge):
-        case static_cast<int>(interpreter::IROpCode::CallVirtConstrained):
-            cc[i] = (ri.imm.ptr != nullptr) ? runtime_instantiation::PrecacheCallTarget(ri.imm.ptr) : runtime_instantiation::CachedCallInfo{};
-            if (ri.imm.ptr == nullptr) cc[i].ret_tag = 0xFF;
-            break;
-        default: cc[i].ret_tag = 0xFF; break;
+            case static_cast<int>(interpreter::IROpCode::Call):
+            case static_cast<int>(interpreter::IROpCode::Calli):
+            case static_cast<int>(interpreter::IROpCode::CallVirt):
+            case static_cast<int>(interpreter::IROpCode::CallBridge):
+            case static_cast<int>(interpreter::IROpCode::CallVirtConstrained):
+                cc[i] = (ri.imm.ptr != nullptr) ? runtime_instantiation::PrecacheCallTarget(ri.imm.ptr)
+                                                : runtime_instantiation::CachedCallInfo {};
+                if (ri.imm.ptr == nullptr)
+                    cc[i].ret_tag = 0xFF;
+                break;
+            default:
+                cc[i].ret_tag = 0xFF;
+                break;
         }
     }
     pm->call_cache = cc;
@@ -347,17 +402,24 @@ void RebuildCallCacheForT3(PatchMethod* pm) noexcept {
 }
 
 static void FreeCallSiteProfiles(PatchMethod* pm) noexcept {
-    if (pm == nullptr) return;
-    std::free(pm->call_site_profiles); pm->call_site_profiles = nullptr; pm->call_site_profile_count = 0;
+    if (pm == nullptr)
+        return;
+    std::free(pm->call_site_profiles);
+    pm->call_site_profiles = nullptr;
+    pm->call_site_profile_count = 0;
 }
 static void FreePICData(PatchMethod* pm) noexcept {
-    if (pm == nullptr) return;
-    std::free(pm->pic_dispatch_data); pm->pic_dispatch_data = nullptr;
+    if (pm == nullptr)
+        return;
+    std::free(pm->pic_dispatch_data);
+    pm->pic_dispatch_data = nullptr;
 }
 
 void PromoteToTier3(PatchMethod* pm) noexcept {
-    if (pm == nullptr) return;
-    if (GeneratePICData(pm)) { }
+    if (pm == nullptr)
+        return;
+    if (GeneratePICData(pm)) {
+    }
     FreeCallSiteProfiles(pm);
 }
 
@@ -375,12 +437,11 @@ static void RegisterTier3CallbackFn() noexcept {
 // Entry_direct-specific: populates PIC data, dispatch_ctx, call_cache,
 // arg_type_tags in the CompileConfig, and sets dispatch_entry->direct_ptr
 // for the Step A0/QuickJit dispatch path.
-static void CompileAndCacheEntry(
-    PatchMethod* pm,
-    runtime_instantiation::InterpreterDispatchContext* dispatch_ctx) noexcept {
-
+static void CompileAndCacheEntry(PatchMethod* pm,
+                                 runtime_instantiation::InterpreterDispatchContext* dispatch_ctx) noexcept {
     auto* reg_m = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
-    if (reg_m == nullptr) reg_m = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
+    if (reg_m == nullptr)
+        reg_m = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
     if (reg_m == nullptr || !jit::CanCompile(*reg_m)) {
         ++pm->codegen_fail_count;
         if (pm->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {
@@ -402,19 +463,16 @@ static void CompileAndCacheEntry(
     if (cfg.pic_dispatch_data != nullptr && cfg.per_instr_pic_count > 0) {
         const auto* data_ptr = static_cast<const uint8_t*>(cfg.pic_dispatch_data);
         uint32_t chain_count = *reinterpret_cast<const uint32_t*>(data_ptr);
-        const auto* chains = reinterpret_cast<const PicDispatchChain*>(
-            data_ptr + sizeof(uint32_t));
-        auto* pic_arr = static_cast<PerInstrPicData*>(
-            std::calloc(cfg.per_instr_pic_count, sizeof(PerInstrPicData)));
+        const auto* chains = reinterpret_cast<const PicDispatchChain*>(data_ptr + sizeof(uint32_t));
+        auto* pic_arr = static_cast<PerInstrPicData*>(std::calloc(cfg.per_instr_pic_count, sizeof(PerInstrPicData)));
         for (uint32_t ci = 0; ci < chain_count; ++ci) {
             uint32_t ii = chains[ci].instruction_idx;
-            if (ii >= cfg.per_instr_pic_count) continue;
+            if (ii >= cfg.per_instr_pic_count)
+                continue;
             auto& pd = pic_arr[ii];
             for (uint32_t s = 0; s < 3; ++s) {
-                if (chains[ci].slots[s].type_token != 0 &&
-                    chains[ci].slots[s].direct_fn != nullptr) {
-                    pd.expected_type_tokens[s] = static_cast<uint32_t>(
-                        chains[ci].slots[s].type_token);
+                if (chains[ci].slots[s].type_token != 0 && chains[ci].slots[s].direct_fn != nullptr) {
+                    pd.expected_type_tokens[s] = static_cast<uint32_t>(chains[ci].slots[s].type_token);
                     pd.direct_fns[s] = chains[ci].slots[s].direct_fn;
                     pd.slot_count = s + 1;
                 }
@@ -443,8 +501,7 @@ static void CompileAndCacheEntry(
             GcUnregisterSlotMap(old_nm->code);
         }
         if (nm->slot_map_data != nullptr) {
-            GcRegisterSlotMap(nm->code,
-                static_cast<const GcSlotMapV0*>(nm->slot_map_data));
+            GcRegisterSlotMap(nm->code, static_cast<const GcSlotMapV0*>(nm->slot_map_data));
         }
         ::chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm, pm->token);
         // Sync to dispatch entry for Step A0/QuickJit direct dispatch.
@@ -472,12 +529,11 @@ static void CompileAndCacheEntry(
 // JitMethod is cached in cached_native_method and the entry point is set
 // as dispatch_entry->direct_ptr so subsequent calls go directly to native code.
 // Thread-safety: caller already won the CAS for kQuickJitted.
-static void QuickJitAndCacheEntry(
-    PatchMethod* pm,
-    runtime_instantiation::InterpreterDispatchContext* dispatch_ctx) noexcept {
-
+static void QuickJitAndCacheEntry(PatchMethod* pm,
+                                  runtime_instantiation::InterpreterDispatchContext* dispatch_ctx) noexcept {
     auto* reg_m = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
-    if (reg_m == nullptr || reg_m->instructions.empty()) return;
+    if (reg_m == nullptr || reg_m->instructions.empty())
+        return;
 
     jit::CompileConfig cfg;
     cfg.enable_safepoint_polls = true;
@@ -492,19 +548,19 @@ static void QuickJitAndCacheEntry(
     cfg.arg_type_count = pm->cached_arg_count;
     cfg.method_token = pm->token;
     cfg.method_module_id = pm->module_id;
-    cfg.enable_pgo = true;          // PGO for Quick JIT -> Tier 1 upgrade
+    cfg.enable_pgo = true; // PGO for Quick JIT -> Tier 1 upgrade
     if (reg_m->seh_clauses.empty()) {
-        cfg.compile_tier = jit::CompileTier::kQuick;  // True Quick JIT: stack-only, no regalloc/liveness/deopt/SEH/unwind
+        cfg.compile_tier =
+            jit::CompileTier::kQuick; // True Quick JIT: stack-only, no regalloc/liveness/deopt/SEH/unwind
     } else {
-        cfg.enable_optimizer = false;  // SEH: full tier, skip optimizer
+        cfg.enable_optimizer = false; // SEH: full tier, skip optimizer
     }
 
     auto* jit = jit::Compile(*reg_m, cfg);
     pm->cached_native_method = jit;
     if (jit != nullptr) {
         if (jit->slot_map_data != nullptr) {
-            GcRegisterSlotMap(jit->code,
-                static_cast<const GcSlotMapV0*>(jit->slot_map_data));
+            GcRegisterSlotMap(jit->code, static_cast<const GcSlotMapV0*>(jit->slot_map_data));
         }
         ::chaos::il2cpp::jit::RegisterNativeCodeSection(jit->code, jit->code_size, jit, pm->token);
 
@@ -513,9 +569,8 @@ static void QuickJitAndCacheEntry(
         auto* entry = static_cast<HotpatchEntryV0*>(pm->dispatch_entry);
         if (entry == nullptr) {
             // Fallback: resolve via registry (method not from SetPatchedBySlot).
-            entry = GetHotpatchNameRegistry()
-                .GetDispatchEntryBySlot(pm->module_id,
-                    GetHotpatchNameRegistry().TokenToSlot(pm->module_id, pm->token));
+            entry = GetHotpatchNameRegistry().GetDispatchEntryBySlot(
+                pm->module_id, GetHotpatchNameRegistry().TokenToSlot(pm->module_id, pm->token));
         }
         if (entry != nullptr) {
             entry->direct_ptr = jit->code;
@@ -539,48 +594,44 @@ static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
     auto action = TierManager::EvaluateTierPromotion(patch_method, call_count);
 
     switch (action) {
-    case TierManager::PromotionAction::kQuickJit:
+        case TierManager::PromotionAction::kQuickJit:
 #if CHAOS_IL2CPP_ENABLE_JIT
-        if (::chaos::il2cpp::pal::PalCanJit()) {
-            QuickJitAndCacheEntry(patch_method, dispatch_ctx);
-            break;
-        }
+            if (::chaos::il2cpp::pal::PalCanJit()) {
+                QuickJitAndCacheEntry(patch_method, dispatch_ctx);
+                break;
+            }
 #endif
-        // JIT not available — stay at kStackInterpreted
-        break;
+            // JIT not available — stay at kStackInterpreted
+            break;
 
-    case TierManager::PromotionAction::kPromoteToTier2:
-        OptimizeToTier2(patch_method);
-        patch_method->tier_state.store(PatchMethod::kRegisterMapped, std::memory_order_release);
-        break;
-
-    case TierManager::PromotionAction::kPromoteToTier3:
-        if (!TierManager::Get().EnqueueOptimization(patch_method)) {
+        case TierManager::PromotionAction::kPromoteToTier2:
+            OptimizeToTier2(patch_method);
             patch_method->tier_state.store(PatchMethod::kRegisterMapped, std::memory_order_release);
-        }
-        break;
-
-    case TierManager::PromotionAction::kCompileToNative:
-#if CHAOS_IL2CPP_ENABLE_JIT
-        if (::chaos::il2cpp::pal::PalCanJit()) {
-            CompileAndCacheEntry(patch_method, dispatch_ctx);
             break;
-        }
-#endif
-        // JIT not available — permanently skip so we never retry
-        patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
-        break;
 
-    default:
-        break;
+        case TierManager::PromotionAction::kPromoteToTier3:
+            if (!TierManager::Get().EnqueueOptimization(patch_method)) {
+                patch_method->tier_state.store(PatchMethod::kRegisterMapped, std::memory_order_release);
+            }
+            break;
+
+        case TierManager::PromotionAction::kCompileToNative:
+#if CHAOS_IL2CPP_ENABLE_JIT
+            if (::chaos::il2cpp::pal::PalCanJit()) {
+                CompileAndCacheEntry(patch_method, dispatch_ctx);
+                break;
+            }
+#endif
+            // JIT not available — permanently skip so we never retry
+            patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
+            break;
+
+        default:
+            break;
     }
 }
 
-void InterpreterEntryDirect(
-    uintptr_t method_key,
-    void*     args_buf,
-    void*     ret_buf) noexcept {
-
+void InterpreterEntryDirect(uintptr_t method_key, void* args_buf, void* ret_buf) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect");
     std::call_once(g_tier3_cb_once, RegisterTier3CallbackFn);
     // Register the interpreter frame scanner for precise GC root scanning.
@@ -596,27 +647,29 @@ void InterpreterEntryDirect(
         // DBG-PM (removed)
     }
 
-    CHAOS_IL2CPP_ASSERT(threading::tls_this_thread != nullptr
-        && "InterpreterEntryDirect: thread TLS not attached");
-    CHAOS_IL2CPP_ASSERT(threading::tls_this_thread_id > 0
-        && "InterpreterEntryDirect: invalid thread ID");
-    CHAOS_IL2CPP_ASSERT(threading::tls_this_thread->gc_mode.load(std::memory_order_relaxed) == kGcModeCooperative
-        && "InterpreterEntryDirect: thread not in cooperative mode");
+    CHAOS_IL2CPP_ASSERT(threading::tls_this_thread != nullptr && "InterpreterEntryDirect: thread TLS not attached");
+    CHAOS_IL2CPP_ASSERT(threading::tls_this_thread_id > 0 && "InterpreterEntryDirect: invalid thread ID");
+    CHAOS_IL2CPP_ASSERT(threading::tls_this_thread->gc_mode.load(std::memory_order_relaxed) == kGcModeCooperative &&
+                        "InterpreterEntryDirect: thread not in cooperative mode");
 
     auto* patch_method = reinterpret_cast<PatchMethod*>(method_key);
     CHAOS_IL2CPP_LOG_INFO("interpreter", "InterpreterEntryDirect entered");
 
-    { CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.Step1_LowerIR");
-      PatchMethodLowerIR(method_key); }
+    {
+        CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.Step1_LowerIR");
+        PatchMethodLowerIR(method_key);
+    }
 
     auto* ir = static_cast<interpreter::IRMethod*>(patch_method->cached_ir);
     if (ir == nullptr) {
-        std::fprintf(stderr, "[INTERP-SILENT] null IR after lowering for method_key=%p\n", reinterpret_cast<void*>(method_key));
+        std::fprintf(stderr, "[INTERP-SILENT] null IR after lowering for method_key=%p\n",
+                     reinterpret_cast<void*>(method_key));
         std::fflush(stderr);
         return;
     }
     if (ir->instructions.empty()) {
-        std::fprintf(stderr, "[INTERP-SILENT] empty IR instructions for method_key=%p\n", reinterpret_cast<void*>(method_key));
+        std::fprintf(stderr, "[INTERP-SILENT] empty IR instructions for method_key=%p\n",
+                     reinterpret_cast<void*>(method_key));
         std::fflush(stderr);
         return;
     }
@@ -632,8 +685,7 @@ void InterpreterEntryDirect(
     // Genuine 1-instr methods (e.g. empty void stubs with no reg_method)
     // still return fast at this point.
     if (instr_count == 1) {
-        auto* reg_m = static_cast<interpreter::RegisterMethod*>(
-            patch_method->cached_reg_method);
+        auto* reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_reg_method);
         if (reg_m == nullptr || reg_m->instructions.empty()) {
             return;
         }
@@ -647,19 +699,31 @@ void InterpreterEntryDirect(
         const auto& op1 = ir->instructions[1];
         if (op1.op_code == interpreter::IROpCode::Ret) {
             GetTierCounters().step_1c.fetch_add(1, std::memory_order_relaxed);
-            if (!patch_method->cached_sig_valid) CacheSignature(patch_method);
+            if (!patch_method->cached_sig_valid)
+                CacheSignature(patch_method);
             // [Full 2-instr fast path follows; kept minimal here for clarity]
             if (op0.op_code == interpreter::IROpCode::LdArg) {
                 if (ret_buf != nullptr) {
-                    ArgBuffer args(args_buf); ArgBuffer ret(ret_buf);
+                    ArgBuffer args(args_buf);
+                    ArgBuffer ret(ret_buf);
                     if (patch_method->cached_sig_valid) {
                         auto ret_tag = static_cast<interpreter::ValueTag>(patch_method->cached_ret_tag);
                         switch (ret_tag) {
-                        case interpreter::ValueTag::Int32: ret.WriteI32(args.ReadI32()); return;
-                        case interpreter::ValueTag::Int64: ret.WriteI64(args.ReadI64()); return;
-                        case interpreter::ValueTag::Float32: ret.WriteF32(args.ReadF32()); return;
-                        case interpreter::ValueTag::Float64: ret.WriteF64(args.ReadF64()); return;
-                        default: ret.WritePtr(args.ReadPtr()); return;
+                            case interpreter::ValueTag::Int32:
+                                ret.WriteI32(args.ReadI32());
+                                return;
+                            case interpreter::ValueTag::Int64:
+                                ret.WriteI64(args.ReadI64());
+                                return;
+                            case interpreter::ValueTag::Float32:
+                                ret.WriteF32(args.ReadF32());
+                                return;
+                            case interpreter::ValueTag::Float64:
+                                ret.WriteF64(args.ReadF64());
+                                return;
+                            default:
+                                ret.WritePtr(args.ReadPtr());
+                                return;
                         }
                     }
                     ret.WritePtr(args.ReadPtr());
@@ -667,11 +731,17 @@ void InterpreterEntryDirect(
                 return;
             }
             if (op0.op_code == interpreter::IROpCode::LdcI4) {
-                if (ret_buf != nullptr) { ArgBuffer ret(ret_buf); ret.WriteI32(op0.immediate_i4); }
+                if (ret_buf != nullptr) {
+                    ArgBuffer ret(ret_buf);
+                    ret.WriteI32(op0.immediate_i4);
+                }
                 return;
             }
             if (op0.op_code == interpreter::IROpCode::LdNull) {
-                if (ret_buf != nullptr) { ArgBuffer ret(ret_buf); ret.WritePtr(nullptr); }
+                if (ret_buf != nullptr) {
+                    ArgBuffer ret(ret_buf);
+                    ret.WritePtr(nullptr);
+                }
                 return;
             }
         }
@@ -707,15 +777,13 @@ void InterpreterEntryDirect(
         void* replacement = method_replacement::Resolve(patch_method->token);
         if (replacement != nullptr) {
             CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.MethodReplace");
-            ::chaos::il2cpp::interpreter::VmProfileScope profiler_scope(
-                static_cast<uintptr_t>(patch_method->token));
+            ::chaos::il2cpp::interpreter::VmProfileScope profiler_scope(static_cast<uintptr_t>(patch_method->token));
             using ReplacementFn = void (*)(void*, void*);
             auto repl_fn = reinterpret_cast<ReplacementFn>(replacement);
             repl_fn(args_buf, ret_buf);
             return;
         }
     }
-
 
 
     // ── Native dispatch (consolidated, Phase D) ──────────────────────────
@@ -763,7 +831,8 @@ void InterpreterEntryDirect(
                 }
                 // Fall through to interpreter (deopt recovery)
             } else {
-                if (patch_method->deopt_count > 0) --patch_method->deopt_count;
+                if (patch_method->deopt_count > 0)
+                    --patch_method->deopt_count;
                 return;
             }
         }
@@ -798,29 +867,25 @@ void InterpreterEntryDirect(
     }
 #endif
     {
-        auto* reg_m = static_cast<interpreter::RegisterMethod*>(
-            patch_method->cached_reg_method);
+        auto* reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_reg_method);
         if (reg_m != nullptr &&
-            ::chaos::il2cpp::jit::g_jit_deopt_state.instr_pc <
-                static_cast<uint32_t>(reg_m->stack_map.entries.size()))
-        {
-            auto& stack_entry =
-                reg_m->stack_map.entries[::chaos::il2cpp::jit::g_jit_deopt_state.instr_pc];
+            ::chaos::il2cpp::jit::g_jit_deopt_state.instr_pc < static_cast<uint32_t>(reg_m->stack_map.entries.size())) {
+            auto& stack_entry = reg_m->stack_map.entries[::chaos::il2cpp::jit::g_jit_deopt_state.instr_pc];
 
             interpreter::OsrState osr;
-            interpreter::CaptureNativeFrame(osr,
-                ::chaos::il2cpp::jit::g_jit_deopt_state.gpr_file,
-                ::chaos::il2cpp::jit::g_jit_deopt_state.fpr_file,
-                stack_entry,
-                patch_method->cached_arg_count,
-                interpreter::OsrState::kMaxLocals,
-                ::chaos::il2cpp::jit::g_jit_deopt_state.gpr_tags);
+            interpreter::CaptureNativeFrame(osr, ::chaos::il2cpp::jit::g_jit_deopt_state.gpr_file,
+                                            ::chaos::il2cpp::jit::g_jit_deopt_state.fpr_file, stack_entry,
+                                            patch_method->cached_arg_count, interpreter::OsrState::kMaxLocals,
+                                            ::chaos::il2cpp::jit::g_jit_deopt_state.gpr_tags);
             osr.pc = ::chaos::il2cpp::jit::g_jit_deopt_state.instr_pc;
 
             FastFrame* ff = tls_frame_pool.Acquire();
             FastFrame ff_fallback;
             bool using_pool = (ff != nullptr);
-            if (!using_pool) { ff = &ff_fallback; memset(ff, 0, sizeof(*ff)); }
+            if (!using_pool) {
+                ff = &ff_fallback;
+                memset(ff, 0, sizeof(*ff));
+            }
 
             void* a5_prev_frame = threading::GetCurrentInterpFrame();
             ff->prev_frame = a5_prev_frame;
@@ -833,59 +898,62 @@ void InterpreterEntryDirect(
                 a5_dispatch_ctx.runtime_state = rs;
                 a5_dispatch_ctx.thread_state = ts;
                 SetupFastFrame(ff, patch_method, args_buf, ir,
-                    reinterpret_cast<void*>(runtime_instantiation::InterpreterDispatch),
-                    &a5_dispatch_ctx);
+                               reinterpret_cast<void*>(runtime_instantiation::InterpreterDispatch), &a5_dispatch_ctx);
             }
 
             threading::SetCurrentInterpFrame(ff);
-            bool ok = FastExecute(*ff,
-                ir->instructions.data(),
-                static_cast<uint32_t>(ir->instructions.size()));
+            bool ok = FastExecute(*ff, ir->instructions.data(), static_cast<uint32_t>(ir->instructions.size()));
 
             if (ok && ff->has_ret && ret_buf != nullptr) {
                 auto ret_tag = static_cast<interpreter::ValueTag>(ff->ret_tag);
                 ArgBuffer ret_writer(ret_buf);
                 switch (ret_tag) {
-                case interpreter::ValueTag::Int32:
-                    ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val));
-                    if (using_pool) tls_frame_pool.Release(ff);
-                    ::chaos::il2cpp::jit::g_jit_deopt_state = {};
-                    threading::SetCurrentInterpFrame(a5_prev_frame);
-                    return;
-                case interpreter::ValueTag::Int64:
-                    ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val));
-                    if (using_pool) tls_frame_pool.Release(ff);
-                    ::chaos::il2cpp::jit::g_jit_deopt_state = {};
-                    threading::SetCurrentInterpFrame(a5_prev_frame);
-                    return;
-                case interpreter::ValueTag::Float32: {
-                    float v;
-                    std::memcpy(&v, &ff->ret_val, sizeof(float));
-                    ret_writer.WriteF32(v);
-                    if (using_pool) tls_frame_pool.Release(ff);
-                    ::chaos::il2cpp::jit::g_jit_deopt_state = {};
-                    threading::SetCurrentInterpFrame(a5_prev_frame);
-                    return;
-                }
-                case interpreter::ValueTag::Float64: {
-                    double v;
-                    std::memcpy(&v, &ff->ret_val, sizeof(double));
-                    ret_writer.WriteF64(v);
-                    if (using_pool) tls_frame_pool.Release(ff);
-                    ::chaos::il2cpp::jit::g_jit_deopt_state = {};
-                    threading::SetCurrentInterpFrame(a5_prev_frame);
-                    return;
-                }
-                default:
-                    ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val));
-                    if (using_pool) tls_frame_pool.Release(ff);
-                    ::chaos::il2cpp::jit::g_jit_deopt_state = {};
-                    threading::SetCurrentInterpFrame(a5_prev_frame);
-                    return;
+                    case interpreter::ValueTag::Int32:
+                        ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val));
+                        if (using_pool)
+                            tls_frame_pool.Release(ff);
+                        ::chaos::il2cpp::jit::g_jit_deopt_state = {};
+                        threading::SetCurrentInterpFrame(a5_prev_frame);
+                        return;
+                    case interpreter::ValueTag::Int64:
+                        ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val));
+                        if (using_pool)
+                            tls_frame_pool.Release(ff);
+                        ::chaos::il2cpp::jit::g_jit_deopt_state = {};
+                        threading::SetCurrentInterpFrame(a5_prev_frame);
+                        return;
+                    case interpreter::ValueTag::Float32: {
+                        float v;
+                        std::memcpy(&v, &ff->ret_val, sizeof(float));
+                        ret_writer.WriteF32(v);
+                        if (using_pool)
+                            tls_frame_pool.Release(ff);
+                        ::chaos::il2cpp::jit::g_jit_deopt_state = {};
+                        threading::SetCurrentInterpFrame(a5_prev_frame);
+                        return;
+                    }
+                    case interpreter::ValueTag::Float64: {
+                        double v;
+                        std::memcpy(&v, &ff->ret_val, sizeof(double));
+                        ret_writer.WriteF64(v);
+                        if (using_pool)
+                            tls_frame_pool.Release(ff);
+                        ::chaos::il2cpp::jit::g_jit_deopt_state = {};
+                        threading::SetCurrentInterpFrame(a5_prev_frame);
+                        return;
+                    }
+                    default:
+                        ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val));
+                        if (using_pool)
+                            tls_frame_pool.Release(ff);
+                        ::chaos::il2cpp::jit::g_jit_deopt_state = {};
+                        threading::SetCurrentInterpFrame(a5_prev_frame);
+                        return;
                 }
             }
 
-            if (using_pool) tls_frame_pool.Release(ff);
+            if (using_pool)
+                tls_frame_pool.Release(ff);
             threading::SetCurrentInterpFrame(a5_prev_frame);
             // Fall through to RegisterExecute (t_deopt_state preserved for Step B)
         }
@@ -894,13 +962,13 @@ void InterpreterEntryDirect(
 
     CHAOS_IL2CPP_LOG_DEBUG("diag", "Step B (RegisterExecute) entering");
     // ── Step B: RegisterExecute path (Layer R) ─────────────────────────
-    auto* reg_method = static_cast<interpreter::RegisterMethod*>(
-        patch_method->cached_reg_method);
+    auto* reg_method = static_cast<interpreter::RegisterMethod*>(patch_method->cached_reg_method);
     bool can_reg = reg_method != nullptr && !reg_method->instructions.empty();
     if (can_reg) {
         GetTierCounters().step_reg.fetch_add(1, std::memory_order_relaxed);
         CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.RegisterExecute");
-        if (!patch_method->cached_sig_valid) CacheSignature(patch_method);
+        if (!patch_method->cached_sig_valid)
+            CacheSignature(patch_method);
 
         interpreter::RegisterFrame rf = {};
         rf.seh_clauses = ir->seh_clauses.data();
@@ -909,11 +977,13 @@ void InterpreterEntryDirect(
         rf.catch_handler_count = static_cast<uint32_t>(reg_method->catch_handler_entries.size());
         rf.typed_catch_check = TypedCatchCheck;
         auto* runtime_state = GetCurrentRuntimeState();
-        auto* thread_state  = GetCurrentThreadState();
-        rf.args = args_buf; rf.arg_count = patch_method->cached_sig_valid ? patch_method->cached_arg_count : 0;
+        auto* thread_state = GetCurrentThreadState();
+        rf.args = args_buf;
+        rf.arg_count = patch_method->cached_sig_valid ? patch_method->cached_arg_count : 0;
         rf.dispatch_fn = reinterpret_cast<void*>(runtime_instantiation::InterpreterDispatch);
         runtime_instantiation::InterpreterDispatchContext reg_dispatch_ctx;
-        reg_dispatch_ctx.runtime_state = runtime_state; reg_dispatch_ctx.thread_state = thread_state;
+        reg_dispatch_ctx.runtime_state = runtime_state;
+        reg_dispatch_ctx.thread_state = thread_state;
         rf.dispatch_ctx = &reg_dispatch_ctx;
         rf.call_cache = patch_method->call_cache;
         rf.call_count = static_cast<uint32_t>(instr_count);
@@ -925,7 +995,8 @@ void InterpreterEntryDirect(
         uint32_t exec_instr_count = static_cast<uint32_t>(reg_method->instructions.size());
 
         // T3 optimized instruction swap (when available from background promotion)
-        {   auto tier = patch_method->tier_state.load(std::memory_order_acquire);
+        {
+            auto tier = patch_method->tier_state.load(std::memory_order_acquire);
             if (tier >= PatchMethod::kRegisterMapped && patch_method->cached_optimized_reg_method != nullptr) {
                 auto* opt = static_cast<interpreter::RegisterMethod*>(patch_method->cached_optimized_reg_method);
                 exec_instrs = opt->instructions.data();
@@ -945,30 +1016,53 @@ void InterpreterEntryDirect(
             // access in RegisterExecute.  On mismatch, restart from PC 0.
             auto deopt_pc = ::chaos::il2cpp::jit::g_jit_deopt_state.instr_pc;
             if (CHAOS_IL2CPP_UNLIKELY(deopt_pc >= exec_instr_count)) {
-                CHAOS_IL2CPP_LOG_WARN_M("jit", "Step B: deopt PC %u out of bounds "
-                    "(max %u), restarting from PC 0", deopt_pc, exec_instr_count);
+                CHAOS_IL2CPP_LOG_WARN_M("jit",
+                                        "Step B: deopt PC %u out of bounds "
+                                        "(max %u), restarting from PC 0",
+                                        deopt_pc, exec_instr_count);
                 rf.pc = 0;
             } else {
                 rf.pc = deopt_pc;
             }
-            rf.osr_reenable = true;  // trigger immediate OSR on first backedge
+            rf.osr_reenable = true; // trigger immediate OSR on first backedge
             ::chaos::il2cpp::jit::g_jit_deopt_state = {};
         }
 
         CHAOS_IL2CPP_LOG_DEBUG("diag", "Step-B: before RegisterExecute");
         bool ok = interpreter::RegisterExecute(rf, reg_method->instructions.data(),
-            static_cast<uint32_t>(reg_method->instructions.size()));
+                                               static_cast<uint32_t>(reg_method->instructions.size()));
         CHAOS_IL2CPP_LOG_DEBUG_M("diag", "Step-B: RegisterExecute ok=%d", ok);
         if (ok) {
             if (rf.has_ret && ret_buf != nullptr) {
                 auto ret_tag = static_cast<interpreter::ValueTag>(rf.ret_tag);
                 ArgBuffer ret_writer(ret_buf);
                 switch (ret_tag) {
-                case interpreter::ValueTag::Int32: ret_writer.WriteI32(static_cast<int32_t>(rf.ret_val)); threading::SetCurrentInterpFrame(rf.prev_frame); return;
-                case interpreter::ValueTag::Int64: ret_writer.WriteI64(static_cast<int64_t>(rf.ret_val)); threading::SetCurrentInterpFrame(rf.prev_frame); return;
-                case interpreter::ValueTag::Float32: { float v; std::memcpy(&v, &rf.ret_val, sizeof(float)); ret_writer.WriteF32(v); threading::SetCurrentInterpFrame(rf.prev_frame); return; }
-                case interpreter::ValueTag::Float64: { double v; std::memcpy(&v, &rf.ret_val, sizeof(double)); ret_writer.WriteF64(v); threading::SetCurrentInterpFrame(rf.prev_frame); return; }
-                default: ret_writer.WritePtr(reinterpret_cast<void*>(rf.ret_val)); threading::SetCurrentInterpFrame(rf.prev_frame); return;
+                    case interpreter::ValueTag::Int32:
+                        ret_writer.WriteI32(static_cast<int32_t>(rf.ret_val));
+                        threading::SetCurrentInterpFrame(rf.prev_frame);
+                        return;
+                    case interpreter::ValueTag::Int64:
+                        ret_writer.WriteI64(static_cast<int64_t>(rf.ret_val));
+                        threading::SetCurrentInterpFrame(rf.prev_frame);
+                        return;
+                    case interpreter::ValueTag::Float32: {
+                        float v;
+                        std::memcpy(&v, &rf.ret_val, sizeof(float));
+                        ret_writer.WriteF32(v);
+                        threading::SetCurrentInterpFrame(rf.prev_frame);
+                        return;
+                    }
+                    case interpreter::ValueTag::Float64: {
+                        double v;
+                        std::memcpy(&v, &rf.ret_val, sizeof(double));
+                        ret_writer.WriteF64(v);
+                        threading::SetCurrentInterpFrame(rf.prev_frame);
+                        return;
+                    }
+                    default:
+                        ret_writer.WritePtr(reinterpret_cast<void*>(rf.ret_val));
+                        threading::SetCurrentInterpFrame(rf.prev_frame);
+                        return;
                 }
             }
             threading::SetCurrentInterpFrame(rf.prev_frame);
@@ -982,45 +1076,89 @@ void InterpreterEntryDirect(
     if (patch_method->reg_ir_data == nullptr && !ir->instructions.empty()) {
         GetTierCounters().step_fast.fetch_add(1, std::memory_order_relaxed);
         CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.FastExecute");
-        if (!patch_method->cached_sig_valid) CacheSignature(patch_method);
+        if (!patch_method->cached_sig_valid)
+            CacheSignature(patch_method);
 
         FastFrame* ff = tls_frame_pool.Acquire();
         FastFrame ff_fallback;
         bool using_pool = true;
-        if (ff == nullptr) { ff = &ff_fallback; memset(ff, 0, sizeof(*ff)); using_pool = false; }
+        if (ff == nullptr) {
+            ff = &ff_fallback;
+            memset(ff, 0, sizeof(*ff));
+            using_pool = false;
+        }
         ff->prev_frame = threading::GetCurrentInterpFrame();
         ff->ir_instrs = ir->instructions.data();
         ff->instr_count = static_cast<uint32_t>(ir->instructions.size());
         threading::SetCurrentInterpFrame(ff);
         void* step_c_prev_frame = ff->prev_frame;
 
-        { CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.SetupFrame");
-          auto* runtime_state = GetCurrentRuntimeState(); auto* thread_state = GetCurrentThreadState();
-          runtime_instantiation::InterpreterDispatchContext dispatch_ctx;
-          dispatch_ctx.runtime_state = runtime_state; dispatch_ctx.thread_state = thread_state;
-          SetupFastFrame(ff, patch_method, args_buf, ir,
-                         reinterpret_cast<void*>(runtime_instantiation::InterpreterDispatch), &dispatch_ctx); }
+        {
+            CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.SetupFrame");
+            auto* runtime_state = GetCurrentRuntimeState();
+            auto* thread_state = GetCurrentThreadState();
+            runtime_instantiation::InterpreterDispatchContext dispatch_ctx;
+            dispatch_ctx.runtime_state = runtime_state;
+            dispatch_ctx.thread_state = thread_state;
+            SetupFastFrame(ff, patch_method, args_buf, ir,
+                           reinterpret_cast<void*>(runtime_instantiation::InterpreterDispatch), &dispatch_ctx);
+        }
 
         bool ok;
-        { CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.FastExecuteCall");
-          ok = FastExecute(*ff, ir->instructions.data(), static_cast<uint32_t>(ir->instructions.size())); }
+        {
+            CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.FastExecuteCall");
+            ok = FastExecute(*ff, ir->instructions.data(), static_cast<uint32_t>(ir->instructions.size()));
+        }
         if (ok) {
             if (ff->has_ret && ret_buf != nullptr) {
                 auto ret_tag = static_cast<interpreter::ValueTag>(ff->ret_tag);
                 ArgBuffer ret_writer(ret_buf);
                 switch (ret_tag) {
-                case interpreter::ValueTag::Int32: ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); threading::SetCurrentInterpFrame(step_c_prev_frame); return;
-                case interpreter::ValueTag::Int64: ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); threading::SetCurrentInterpFrame(step_c_prev_frame); return;
-                case interpreter::ValueTag::Float32: { float v; std::memcpy(&v, &ff->ret_val, sizeof(float)); ret_writer.WriteF32(v); if (using_pool) tls_frame_pool.Release(ff); threading::SetCurrentInterpFrame(step_c_prev_frame); return; }
-                case interpreter::ValueTag::Float64: { double v; std::memcpy(&v, &ff->ret_val, sizeof(double)); ret_writer.WriteF64(v); if (using_pool) tls_frame_pool.Release(ff); threading::SetCurrentInterpFrame(step_c_prev_frame); return; }
-                default: ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); threading::SetCurrentInterpFrame(step_c_prev_frame); return;
+                    case interpreter::ValueTag::Int32:
+                        ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val));
+                        if (using_pool)
+                            tls_frame_pool.Release(ff);
+                        threading::SetCurrentInterpFrame(step_c_prev_frame);
+                        return;
+                    case interpreter::ValueTag::Int64:
+                        ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val));
+                        if (using_pool)
+                            tls_frame_pool.Release(ff);
+                        threading::SetCurrentInterpFrame(step_c_prev_frame);
+                        return;
+                    case interpreter::ValueTag::Float32: {
+                        float v;
+                        std::memcpy(&v, &ff->ret_val, sizeof(float));
+                        ret_writer.WriteF32(v);
+                        if (using_pool)
+                            tls_frame_pool.Release(ff);
+                        threading::SetCurrentInterpFrame(step_c_prev_frame);
+                        return;
+                    }
+                    case interpreter::ValueTag::Float64: {
+                        double v;
+                        std::memcpy(&v, &ff->ret_val, sizeof(double));
+                        ret_writer.WriteF64(v);
+                        if (using_pool)
+                            tls_frame_pool.Release(ff);
+                        threading::SetCurrentInterpFrame(step_c_prev_frame);
+                        return;
+                    }
+                    default:
+                        ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val));
+                        if (using_pool)
+                            tls_frame_pool.Release(ff);
+                        threading::SetCurrentInterpFrame(step_c_prev_frame);
+                        return;
                 }
             }
-            if (using_pool) tls_frame_pool.Release(ff);
+            if (using_pool)
+                tls_frame_pool.Release(ff);
             threading::SetCurrentInterpFrame(step_c_prev_frame);
             return;
         }
-        if (using_pool) tls_frame_pool.Release(ff);
+        if (using_pool)
+            tls_frame_pool.Release(ff);
         threading::SetCurrentInterpFrame(step_c_prev_frame);
     }
 
@@ -1028,7 +1166,8 @@ void InterpreterEntryDirect(
     // ── Step D: InterpreterVM (slow path) ──────────────────────────────
     CHAOS_IL2CPP_UINT32 arg_count = 0;
     bool type_aware_args = false;
-    if (!patch_method->cached_sig_valid) CacheSignature(patch_method);
+    if (!patch_method->cached_sig_valid)
+        CacheSignature(patch_method);
     if (patch_method->cached_sig_valid) {
         arg_count = patch_method->cached_arg_count;
         type_aware_args = true;
@@ -1039,8 +1178,8 @@ void InterpreterEntryDirect(
     if (type_aware_args) {
         for (CHAOS_IL2CPP_UINT32 i = 0; i < arg_count; ++i) {
             auto tag = (i < patch_method->cached_arg_capacity)
-                ? static_cast<interpreter::ValueTag>(patch_method->cached_arg_types[i])
-                : interpreter::ValueTag::ObjectRef;
+                         ? static_cast<interpreter::ValueTag>(patch_method->cached_arg_types[i])
+                         : interpreter::ValueTag::ObjectRef;
             frame.arguments.push_back(ReadTypedArg(arg_reader, tag));
         }
     } else {
@@ -1052,16 +1191,18 @@ void InterpreterEntryDirect(
     frame.stack.reserve(64);
     frame.locals.reserve(8);
     auto* runtime_state = GetCurrentRuntimeState();
-    auto* thread_state  = GetCurrentThreadState();
+    auto* thread_state = GetCurrentThreadState();
     runtime_instantiation::InterpreterDispatchContext dispatch_ctx;
-    dispatch_ctx.runtime_state = runtime_state; dispatch_ctx.thread_state = thread_state;
+    dispatch_ctx.runtime_state = runtime_state;
+    dispatch_ctx.thread_state = thread_state;
     frame.dispatch_fn = runtime_instantiation::InterpreterDispatch;
     frame.dispatch_context = &dispatch_ctx;
     GetTierCounters().step_vm.fetch_add(1, std::memory_order_relaxed);
     interpreter::ExecutionResult result;
     CHAOS_IL2CPP_LOG_INFO("interpreter", "InterpreterVM::Execute entering");
     try {
-        interpreter::InterpreterVM vm; result = vm.Execute(*ir, &frame);
+        interpreter::InterpreterVM vm;
+        result = vm.Execute(*ir, &frame);
     } catch (...) {
         CHAOS_IL2CPP_LOG_ERROR("interpreter", "InterpreterVM::Execute threw (unknown exception)");
         throw;
@@ -1070,11 +1211,12 @@ void InterpreterEntryDirect(
         CHAOS_IL2CPP_INTPTR exc_val = 0;
         if (result.exception_value.tag == interpreter::ValueTag::ObjectRef)
             exc_val = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result.exception_value.obj);
-        throw chaos_managed_exception{exc_val};
+        throw chaos_managed_exception {exc_val};
     }
     if (ret_buf != nullptr && result.has_return_value) {
         auto ret_tag = (type_aware_args && patch_method->cached_sig_valid)
-            ? static_cast<interpreter::ValueTag>(patch_method->cached_ret_tag) : interpreter::ValueTag::Void;
+                         ? static_cast<interpreter::ValueTag>(patch_method->cached_ret_tag)
+                         : interpreter::ValueTag::Void;
         WriteTypedRet(ret_buf, result, ret_tag);
     }
 }
@@ -1085,4 +1227,4 @@ void InterpreterEntryDirectFast(uintptr_t method_key) noexcept {
     InterpreterEntryDirect(method_key, __chaos_args, __chaos_ret);
 }
 
-}  // namespace chaos::il2cpp::runtime_core
+} // namespace chaos::il2cpp::runtime_core

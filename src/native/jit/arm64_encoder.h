@@ -27,28 +27,28 @@
 namespace chaos::il2cpp::jit {
 
 // ── ARM64 register aliases ───────────────────────────────────────────────
-static constexpr uint8_t kARM64_SP  = 31;  // SP (stack pointer)
-static constexpr uint8_t kARM64_LR  = 30;  // X30 (link register)
-static constexpr uint8_t kARM64_FP  = 29;  // X29 (frame pointer)
+static constexpr uint8_t kARM64_SP = 31; // SP (stack pointer)
+static constexpr uint8_t kARM64_LR = 30; // X30 (link register)
+static constexpr uint8_t kARM64_FP = 29; // X29 (frame pointer)
 
 // ── ARM64 condition codes ────────────────────────────────────────────────
 // These map to the 4-bit cond field in B.cond / CSEL / CSET / etc.
 // Bits: [3:1] = condition, [0] = invert
-static constexpr uint8_t kARM64_EQ = 0;   // Equal (Z set)
-static constexpr uint8_t kARM64_NE = 1;   // Not equal (Z clear)
-static constexpr uint8_t kARM64_CS = 2;   // Carry set / unsigned >= (C set)
-static constexpr uint8_t kARM64_CC = 3;   // Carry clear / unsigned < (C clear)
-static constexpr uint8_t kARM64_MI = 4;   // Minus / negative (N set)
-static constexpr uint8_t kARM64_PL = 5;   // Plus / non-negative (N clear)
-static constexpr uint8_t kARM64_VS = 6;   // Overflow (V set)
-static constexpr uint8_t kARM64_VC = 7;   // No overflow (V clear)
-static constexpr uint8_t kARM64_HI = 8;   // Unsigned > (C set, Z clear)
-static constexpr uint8_t kARM64_LS = 9;   // Unsigned <= (C clear, Z set)
-static constexpr uint8_t kARM64_GE = 10;  // Signed >= (N == V)
-static constexpr uint8_t kARM64_LT = 11;  // Signed < (N != V)
-static constexpr uint8_t kARM64_GT = 12;  // Signed > (Z clear, N == V)
-static constexpr uint8_t kARM64_LE = 13;  // Signed <= (Z set, N != V)
-static constexpr uint8_t kARM64_AL = 14;  // Always (unconditional)
+static constexpr uint8_t kARM64_EQ = 0;  // Equal (Z set)
+static constexpr uint8_t kARM64_NE = 1;  // Not equal (Z clear)
+static constexpr uint8_t kARM64_CS = 2;  // Carry set / unsigned >= (C set)
+static constexpr uint8_t kARM64_CC = 3;  // Carry clear / unsigned < (C clear)
+static constexpr uint8_t kARM64_MI = 4;  // Minus / negative (N set)
+static constexpr uint8_t kARM64_PL = 5;  // Plus / non-negative (N clear)
+static constexpr uint8_t kARM64_VS = 6;  // Overflow (V set)
+static constexpr uint8_t kARM64_VC = 7;  // No overflow (V clear)
+static constexpr uint8_t kARM64_HI = 8;  // Unsigned > (C set, Z clear)
+static constexpr uint8_t kARM64_LS = 9;  // Unsigned <= (C clear, Z set)
+static constexpr uint8_t kARM64_GE = 10; // Signed >= (N == V)
+static constexpr uint8_t kARM64_LT = 11; // Signed < (N != V)
+static constexpr uint8_t kARM64_GT = 12; // Signed > (Z clear, N == V)
+static constexpr uint8_t kARM64_LE = 13; // Signed <= (Z set, N != V)
+static constexpr uint8_t kARM64_AL = 14; // Always (unconditional)
 
 // ── ARM64 instruction encoding ───────────────────────────────────────────
 
@@ -261,14 +261,11 @@ inline void EmitMovn64(CodeBuffer& buf, uint8_t rd, uint16_t imm16, uint8_t shif
 
 /// Load 64-bit immediate into a register using MOVZ + MOVK sequence (up to 4 instructions).
 inline void EmitLoadImm64(CodeBuffer& buf, uint8_t rd, uint64_t imm) noexcept {
-    uint16_t chunks[4] = {
-        static_cast<uint16_t>(imm & 0xFFFF),
-        static_cast<uint16_t>((imm >> 16) & 0xFFFF),
-        static_cast<uint16_t>((imm >> 32) & 0xFFFF),
-        static_cast<uint16_t>((imm >> 48) & 0xFFFF)
-    };
+    uint16_t chunks[4] = {static_cast<uint16_t>(imm & 0xFFFF), static_cast<uint16_t>((imm >> 16) & 0xFFFF),
+                          static_cast<uint16_t>((imm >> 32) & 0xFFFF), static_cast<uint16_t>((imm >> 48) & 0xFFFF)};
     int first = 3;
-    while (first >= 0 && chunks[first] == 0) --first;
+    while (first >= 0 && chunks[first] == 0)
+        --first;
     if (first < 0) {
         EmitMovz64(buf, rd, 0, 0);
         return;
@@ -515,32 +512,32 @@ inline void EmitCset32(CodeBuffer& buf, uint8_t rd, uint8_t cond) noexcept {
 
 /// 64-bit LSL Xd, Xn, Xm (logical shift left by variable)
 inline void EmitLsl64Var(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x9AC02000u | (rm << 16) | (rn << 5) | rd);  // LSLV
+    EmitArm64(buf, 0x9AC02000u | (rm << 16) | (rn << 5) | rd); // LSLV
 }
 
 /// 32-bit LSL Wd, Wn, Wm
 inline void EmitLsl32Var(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x1AC02000u | (rm << 16) | (rn << 5) | rd);  // LSLV
+    EmitArm64(buf, 0x1AC02000u | (rm << 16) | (rn << 5) | rd); // LSLV
 }
 
 /// 64-bit LSR Xd, Xn, Xm (logical shift right by variable)
 inline void EmitLsr64Var(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x9AC02400u | (rm << 16) | (rn << 5) | rd);  // LSRV
+    EmitArm64(buf, 0x9AC02400u | (rm << 16) | (rn << 5) | rd); // LSRV
 }
 
 /// 32-bit LSR Wd, Wn, Wm
 inline void EmitLsr32Var(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x1AC02400u | (rm << 16) | (rn << 5) | rd);  // LSRV
+    EmitArm64(buf, 0x1AC02400u | (rm << 16) | (rn << 5) | rd); // LSRV
 }
 
 /// 64-bit ASR Xd, Xn, Xm (arithmetic shift right by variable)
 inline void EmitAsr64Var(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x9AC02800u | (rm << 16) | (rn << 5) | rd);  // ASRV
+    EmitArm64(buf, 0x9AC02800u | (rm << 16) | (rn << 5) | rd); // ASRV
 }
 
 /// 32-bit ASR Wd, Wn, Wm
 inline void EmitAsr32Var(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint8_t rm) noexcept {
-    EmitArm64(buf, 0x1AC02800u | (rm << 16) | (rn << 5) | rd);  // ASRV
+    EmitArm64(buf, 0x1AC02800u | (rm << 16) | (rn << 5) | rd); // ASRV
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1458,6 +1455,6 @@ inline void EmitDmb(CodeBuffer& buf) noexcept {
     EmitArm64(buf, 0xD50330BFu);
 }
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_ARM64_ENCODER_H_
+#endif // CHAOS_IL2CPP_ARM64_ENCODER_H_

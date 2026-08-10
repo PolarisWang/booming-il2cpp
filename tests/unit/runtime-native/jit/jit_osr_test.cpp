@@ -23,12 +23,12 @@
 // OsrResolveLoopHeader is extern "C" — declare it here for direct calls.
 extern "C" void* OsrResolveLoopHeader() noexcept;
 
-using chaos::il2cpp::jit::g_jit_deopt_state;
 using chaos::il2cpp::jit::DeoptTlsState;
+using chaos::il2cpp::jit::FindNativeCodeByAddress;
+using chaos::il2cpp::jit::g_jit_deopt_state;
+using chaos::il2cpp::jit::JitMethod;
 using chaos::il2cpp::jit::RegisterNativeCodeSection;
 using chaos::il2cpp::jit::UnregisterNativeCodeSection;
-using chaos::il2cpp::jit::FindNativeCodeByAddress;
-using chaos::il2cpp::jit::JitMethod;
 
 namespace {
 
@@ -38,11 +38,8 @@ namespace {
 // so ~JitMethod() won't free stack/heap pointers twice.
 class NativeMethodGuard {
 public:
-    NativeMethodGuard(void* code, uint32_t code_size,
-                      uint32_t* instr_offsets = nullptr,
-                      uint32_t instr_count = 0)
-        : nm_(new JitMethod())
-        , code_(code) {
+    NativeMethodGuard(void* code, uint32_t code_size, uint32_t* instr_offsets = nullptr, uint32_t instr_count = 0)
+        : nm_(new JitMethod()), code_(code) {
         std::memset(nm_, 0, sizeof(JitMethod));
         nm_->code = code;
         nm_->code_size = code_size;
@@ -56,9 +53,8 @@ public:
         delete nm_;
     }
     JitMethod* get() { return nm_; }
-    void register_t4(uint32_t token = 0) {
-        RegisterNativeCodeSection(code_, nm_->code_size, nm_, token);
-    }
+    void register_t4(uint32_t token = 0) { RegisterNativeCodeSection(code_, nm_->code_size, nm_, token); }
+
 private:
     JitMethod* nm_;
     void* code_;
@@ -84,7 +80,7 @@ TEST(CodegenOsr, DeoptTlsStateSetAndClear) {
     EXPECT_EQ(g_jit_deopt_state.instr_pc, 100u);
     EXPECT_TRUE(g_jit_deopt_state.deopt_happened);
 
-    g_jit_deopt_state = DeoptTlsState{};
+    g_jit_deopt_state = DeoptTlsState {};
     EXPECT_EQ(g_jit_deopt_state.osr_resume_pc, 0u);
     EXPECT_EQ(g_jit_deopt_state.instr_pc, 0u);
     EXPECT_FALSE(g_jit_deopt_state.deopt_happened);
@@ -98,8 +94,13 @@ TEST(CodegenOsr, RegisterThenUnregisterEntry) {
     RegisterNativeCodeSection(fake_code, sizeof(fake_code), nmg.get(), /*token=*/0);
     EXPECT_NE(FindNativeCodeByAddress(fake_code), nullptr);
 
+    // T2.3-C 方案3: demoted/Unregistered code stays alive and address-registered
+    // (never reused), so an in-flight old frame's return address stays
+    // GC/SEH-resolvable.  Unregister marks it externally-managed but does NOT
+    // remove it from the lookup registry.
     UnregisterNativeCodeSection(fake_code);
-    EXPECT_EQ(FindNativeCodeByAddress(fake_code), nullptr);
+    EXPECT_NE(FindNativeCodeByAddress(fake_code), nullptr);
+    EXPECT_TRUE(nmg.get()->code_managed_externally);
 }
 
 TEST(CodegenOsr, OsrResumePcBoundsCheckUt) {
@@ -110,7 +111,7 @@ TEST(CodegenOsr, OsrResumePcBoundsCheckUt) {
     nmg.register_t4(/*token=*/0);
     EXPECT_NE(FindNativeCodeByAddress(fake_code), nullptr);
 
-    g_jit_deopt_state = DeoptTlsState{};
+    g_jit_deopt_state = DeoptTlsState {};
 }
 
-}  // namespace
+} // namespace

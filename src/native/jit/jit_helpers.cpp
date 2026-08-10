@@ -14,7 +14,7 @@
 #include <gc/gc_helpers.h>
 
 #if defined(_MSC_VER)
-#include <intrin.h>  // _ReturnAddress(), __readgsqword
+#include <intrin.h> // _ReturnAddress(), __readgsqword
 #else
 // _ReturnAddress via __builtin_return_address works on all GCC/Clang targets
 // (no x86intrin.h needed — that header is x86-only and breaks ARM64 cross-compile).
@@ -45,12 +45,13 @@ thread_local DeoptTlsState g_jit_deopt_state;
 // via the gc headers included above.  Only the extern declaration is needed.
 namespace chaos::il2cpp::runtime_core {
 extern thread_local TLAB tls_tlab;
-}  // namespace chaos::il2cpp::runtime_core
+} // namespace chaos::il2cpp::runtime_core
 
 extern "C" uint64_t CodegenLdFld(void* obj, uint32_t field_idx) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdFld");
     using namespace chaos::il2cpp::interpreter;
-    if (obj == nullptr) return 0;
+    if (obj == nullptr)
+        return 0;
     auto* io = static_cast<InterpreterObject*>(obj);
     if (field_idx >= io->fields.size()) {
         io->fields.resize(field_idx + 1u);
@@ -59,22 +60,22 @@ extern "C" uint64_t CodegenLdFld(void* obj, uint32_t field_idx) noexcept {
     // Return the raw 64-bit representation regardless of tag.
     // The union ensures i32, i64, f32, f64, and obj all occupy the same bits.
     switch (iv.tag) {
-    case ValueTag::Int32:
-        return static_cast<uint64_t>(iv.i32);
-    case ValueTag::Int64:
-        return static_cast<uint64_t>(iv.i64);
-    case ValueTag::Float32: {
-        uint64_t val;
-        std::memcpy(&val, &iv.f32, sizeof(float));
-        return val;
-    }
-    case ValueTag::Float64: {
-        uint64_t val;
-        std::memcpy(&val, &iv.f64, sizeof(double));
-        return val;
-    }
-    default:
-        return reinterpret_cast<uint64_t>(iv.obj);
+        case ValueTag::Int32:
+            return static_cast<uint64_t>(iv.i32);
+        case ValueTag::Int64:
+            return static_cast<uint64_t>(iv.i64);
+        case ValueTag::Float32: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f32, sizeof(float));
+            return val;
+        }
+        case ValueTag::Float64: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f64, sizeof(double));
+            return val;
+        }
+        default:
+            return reinterpret_cast<uint64_t>(iv.obj);
     }
 }
 
@@ -82,7 +83,8 @@ extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StFld");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
-    if (obj == nullptr) return;
+    if (obj == nullptr)
+        return;
     auto* io = static_cast<InterpreterObject*>(obj);
     if (field_idx >= io->fields.size()) {
         io->fields.resize(field_idx + 1u);
@@ -109,7 +111,8 @@ extern "C" void CodegenStFldNoBarrier(void* obj, uint32_t field_idx, uint64_t va
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StFldNoBarrier");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
-    if (obj == nullptr) return;
+    if (obj == nullptr)
+        return;
     auto* io = static_cast<InterpreterObject*>(obj);
     if (field_idx >= io->fields.size()) {
         io->fields.resize(field_idx + 1u);
@@ -126,17 +129,18 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
     using namespace chaos::il2cpp::runtime_core;
     using namespace chaos::il2cpp::runtime_instantiation;
 
-    if (args == nullptr) return 0;
+    if (args == nullptr)
+        return 0;
     uint64_t* gpr_base = args->gpr_base;
-    if (gpr_base == nullptr) return 0;
+    if (gpr_base == nullptr)
+        return 0;
 
     // ── PIC fast path ────────────────────────────────────────────────────
     // Walk pic_dispatch_data for a chain matching this instruction index.
     if (args->pic_data != nullptr) {
         auto* pic_base = static_cast<const uint8_t*>(args->pic_data);
         uint32_t chain_count = *reinterpret_cast<const uint32_t*>(pic_base);
-        auto* chains = reinterpret_cast<const PicDispatchChain*>(
-            pic_base + sizeof(uint32_t));
+        auto* chains = reinterpret_cast<const PicDispatchChain*>(pic_base + sizeof(uint32_t));
 
         uint64_t receiver_val = gpr_base[args->first_arg_reg];
         if (receiver_val != 0) {
@@ -145,36 +149,31 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
 
             for (uint32_t ci = 0; ci < chain_count; ++ci) {
                 const auto& chain = chains[ci];
-                if (chain.instruction_idx != args->instruction_idx) continue;
-                if (chain.generation != g_patch_generation.load(
-                        std::memory_order_acquire)) break;
+                if (chain.instruction_idx != args->instruction_idx)
+                    continue;
+                if (chain.generation != g_patch_generation.load(std::memory_order_acquire))
+                    break;
 
                 // Check PIC slots
                 for (uint32_t si = 0; si < 3; ++si) {
                     const auto& slot = chain.slots[si];
-                    if (slot.type_token == 0) break;  // sentinel
+                    if (slot.type_token == 0)
+                        break; // sentinel
                     if (slot.type_token == receiver_token && slot.direct_fn != nullptr) {
                         // PIC hit — call direct_fn with args from register file.
-                        auto fn = reinterpret_cast<uint64_t (*)(
-                            uint64_t, uint64_t, uint64_t, uint64_t,
-                            uint64_t, uint64_t, uint64_t, uint64_t)>(
-                            slot.direct_fn);
+                        auto fn = reinterpret_cast<uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t, uint64_t,
+                                                                uint64_t, uint64_t, uint64_t)>(slot.direct_fn);
 
                         uint32_t ac = args->arg_count;
                         uint32_t base = args->first_arg_reg;
-                        uint64_t result = fn(
-                            (ac > 0) ? gpr_base[base]     : 0,
-                            (ac > 1) ? gpr_base[base + 1] : 0,
-                            (ac > 2) ? gpr_base[base + 2] : 0,
-                            (ac > 3) ? gpr_base[base + 3] : 0,
-                            (ac > 4) ? gpr_base[base + 4] : 0,
-                            (ac > 5) ? gpr_base[base + 5] : 0,
-                            (ac > 6) ? gpr_base[base + 6] : 0,
-                            (ac > 7) ? gpr_base[base + 7] : 0);
+                        uint64_t result = fn((ac > 0) ? gpr_base[base] : 0, (ac > 1) ? gpr_base[base + 1] : 0,
+                                             (ac > 2) ? gpr_base[base + 2] : 0, (ac > 3) ? gpr_base[base + 3] : 0,
+                                             (ac > 4) ? gpr_base[base + 4] : 0, (ac > 5) ? gpr_base[base + 5] : 0,
+                                             (ac > 6) ? gpr_base[base + 6] : 0, (ac > 7) ? gpr_base[base + 7] : 0);
                         return result;
                     }
                 }
-                break;  // matched chain but no slot hit → fall through
+                break; // matched chain but no slot hit → fall through
             }
         }
     }
@@ -189,24 +188,17 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
             auto* obj = reinterpret_cast<InterpreterObject*>(receiver_val);
             uint32_t type_token = obj->type_token;
             if (type_token != 0) {
-                void* resolved_fn = chaos::il2cpp::vtable_registry::
-                    ResolveVirtualMethodPointer(type_token, args->method_token);
+                void* resolved_fn =
+                    chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(type_token, args->method_token);
                 if (resolved_fn != nullptr) {
-                    auto fn = reinterpret_cast<uint64_t (*)(
-                        uint64_t, uint64_t, uint64_t, uint64_t,
-                        uint64_t, uint64_t, uint64_t, uint64_t)>(
-                        resolved_fn);
+                    auto fn = reinterpret_cast<uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t, uint64_t, uint64_t,
+                                                            uint64_t, uint64_t)>(resolved_fn);
                     uint32_t ac = args->arg_count;
                     uint32_t base = args->first_arg_reg;
-                    uint64_t result = fn(
-                        (ac > 0) ? gpr_base[base]     : 0,
-                        (ac > 1) ? gpr_base[base + 1] : 0,
-                        (ac > 2) ? gpr_base[base + 2] : 0,
-                        (ac > 3) ? gpr_base[base + 3] : 0,
-                        (ac > 4) ? gpr_base[base + 4] : 0,
-                        (ac > 5) ? gpr_base[base + 5] : 0,
-                        (ac > 6) ? gpr_base[base + 6] : 0,
-                        (ac > 7) ? gpr_base[base + 7] : 0);
+                    uint64_t result = fn((ac > 0) ? gpr_base[base] : 0, (ac > 1) ? gpr_base[base + 1] : 0,
+                                         (ac > 2) ? gpr_base[base + 2] : 0, (ac > 3) ? gpr_base[base + 3] : 0,
+                                         (ac > 4) ? gpr_base[base + 4] : 0, (ac > 5) ? gpr_base[base + 5] : 0,
+                                         (ac > 6) ? gpr_base[base + 6] : 0, (ac > 7) ? gpr_base[base + 7] : 0);
                     return result;
                 }
             }
@@ -223,12 +215,10 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
         using namespace chaos::il2cpp::jit;
 
         // Copy all 64 GPR values from the register file directly.
-        std::memcpy(g_jit_deopt_state.gpr_file, gpr_base,
-                    64 * sizeof(uint64_t));
+        std::memcpy(g_jit_deopt_state.gpr_file, gpr_base, 64 * sizeof(uint64_t));
 
         // Copy all 32 FPR values (starting after GPRs in the register file).
-        std::memcpy(g_jit_deopt_state.fpr_file, gpr_base + 64,
-                    32 * sizeof(double));
+        std::memcpy(g_jit_deopt_state.fpr_file, gpr_base + 64, 32 * sizeof(double));
 
         // Extract type tags from the DeoptEntry for this call site.
         // The return address points to the instruction after the call to
@@ -238,16 +228,13 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
         const JitMethod* nm = FindNativeCodeByAddress(ret_addr);
         if (nm != nullptr && nm->deopt_values != nullptr) {
             uint64_t code_base = reinterpret_cast<uint64_t>(nm->code);
-            uint32_t native_off = static_cast<uint32_t>(
-                reinterpret_cast<uint64_t>(ret_addr) - code_base);
+            uint32_t native_off = static_cast<uint32_t>(reinterpret_cast<uint64_t>(ret_addr) - code_base);
             const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_off);
             if (entry != nullptr) {
                 // Initialize all GPR tags to Int64, then overwrite with
                 // actual tags from the DeoptValue entries.
-                std::memset(g_jit_deopt_state.gpr_tags,
-                    static_cast<int>(ValueTag::Int64), 64);
-                std::memset(g_jit_deopt_state.fpr_tags,
-                    static_cast<int>(ValueTag::Float64), 32);
+                std::memset(g_jit_deopt_state.gpr_tags, static_cast<int>(ValueTag::Int64), 64);
+                std::memset(g_jit_deopt_state.fpr_tags, static_cast<int>(ValueTag::Float64), 32);
                 for (uint32_t i = 0; i < entry->num_values; ++i) {
                     const auto& dv = nm->deopt_values[entry->values_offset + i];
                     if (dv.reg_index < 64) {
@@ -290,15 +277,16 @@ extern "C" void* CodegenGetTlab() noexcept {
 extern "C" uint32_t __tls_index = 0;
 
 namespace {
-    // Cached values, computed once during InitTlsTlabInfo().
-    uint32_t g_cached_tls_index = 0;
-    uint32_t g_cached_tls_tlab_offset = 0;
-}
+// Cached values, computed once during InitTlsTlabInfo().
+uint32_t g_cached_tls_index = 0;
+uint32_t g_cached_tls_tlab_offset = 0;
+} // namespace
 
 #if defined(_WIN32) || defined(_WIN64)
 
 void chaos::il2cpp::jit::InitTlsTlabInfo() noexcept {
-    if (g_cached_tls_index != 0) return;  // already initialized
+    if (g_cached_tls_index != 0)
+        return; // already initialized
 
     g_cached_tls_index = __tls_index;
 
@@ -307,10 +295,8 @@ void chaos::il2cpp::jit::InitTlsTlabInfo() noexcept {
     uintptr_t tls_array = __readgsqword(0x58);
     uintptr_t tls_base = reinterpret_cast<uintptr_t*>(tls_array)[g_cached_tls_index];
 
-    uintptr_t tls_tlab_addr = reinterpret_cast<uintptr_t>(
-        &chaos::il2cpp::runtime_core::tls_tlab);
-    g_cached_tls_tlab_offset = static_cast<uint32_t>(
-        tls_tlab_addr - tls_base);
+    uintptr_t tls_tlab_addr = reinterpret_cast<uintptr_t>(&chaos::il2cpp::runtime_core::tls_tlab);
+    g_cached_tls_tlab_offset = static_cast<uint32_t>(tls_tlab_addr - tls_base);
 }
 
 void chaos::il2cpp::jit::EmitLoadTlsTlab(CodeBuffer& buf) noexcept {
@@ -322,8 +308,8 @@ void chaos::il2cpp::jit::EmitLoadTlsTlab(CodeBuffer& buf) noexcept {
     buf.EmitByte(0x65);
     buf.EmitByte(0x48);
     buf.EmitByte(0x8B);
-    buf.EmitByte(0x04);  // ModRM
-    buf.EmitByte(0x25);  // SIB
+    buf.EmitByte(0x04); // ModRM
+    buf.EmitByte(0x25); // SIB
     buf.Emit32(0x58);
 
     // mov ecx, g_cached_tls_index — load module TLS slot index
@@ -354,14 +340,14 @@ void chaos::il2cpp::jit::EmitLoadTlsTlab(CodeBuffer& buf) noexcept {
 #elif defined(__linux__) && defined(__aarch64__)
 
 void chaos::il2cpp::jit::InitTlsTlabInfo() noexcept {
-    if (g_cached_tls_tlab_offset != 0) return;  // already initialized
+    if (g_cached_tls_tlab_offset != 0)
+        return; // already initialized
 
     // On Linux ARM64, __builtin_thread_pointer() expands to:
     //   MRS X0, TPIDR_EL0
     // which returns the thread-pointer (TLS block base address).
     uintptr_t tp = reinterpret_cast<uintptr_t>(__builtin_thread_pointer());
-    uintptr_t tls_tlab_addr = reinterpret_cast<uintptr_t>(
-        &chaos::il2cpp::runtime_core::tls_tlab);
+    uintptr_t tls_tlab_addr = reinterpret_cast<uintptr_t>(&chaos::il2cpp::runtime_core::tls_tlab);
     g_cached_tls_tlab_offset = static_cast<uint32_t>(tls_tlab_addr - tp);
 }
 
@@ -378,7 +364,7 @@ void chaos::il2cpp::jit::EmitLoadTlsTlab(CodeBuffer& buf) noexcept {
     }
 }
 
-#endif  // _WIN32/WIN64 / __linux__+__aarch64__
+#endif // _WIN32/WIN64 / __linux__+__aarch64__
 
 extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Box");
@@ -387,26 +373,34 @@ extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) no
     // Use GcAllocateAtomic: BoxedValue has no interior pointers (just an
     // InterpreterValue union), so the GC does not need to scan it.
     auto* boxed = static_cast<BoxedValue*>(GcAllocateAtomic(sizeof(BoxedValue)));
-    if (boxed == nullptr) return nullptr;
+    if (boxed == nullptr)
+        return nullptr;
     // GcAllocateAtomic already zeroes memory — InterpreterValue tag defaults
     // to Void (0), which is correct.  No placement new needed.
     // Manually init the value from the raw bits.
     ValueTag vt = static_cast<ValueTag>(tag);
     switch (vt) {
-    case ValueTag::Int32:
-        boxed->value = InterpreterValue::from_i32(static_cast<int32_t>(value)); break;
-    case ValueTag::Int64:
-        boxed->value = InterpreterValue::from_i64(static_cast<int64_t>(value)); break;
-    case ValueTag::Float32: {
-        float fv; std::memcpy(&fv, &value, sizeof(float));
-        boxed->value = InterpreterValue::from_f32(fv); break;
-    }
-    case ValueTag::Float64: {
-        double dv; std::memcpy(&dv, &value, sizeof(double));
-        boxed->value = InterpreterValue::from_f64(dv); break;
-    }
-    default:
-        boxed->value = InterpreterValue::from_obj(reinterpret_cast<void*>(value)); break;
+        case ValueTag::Int32:
+            boxed->value = InterpreterValue::from_i32(static_cast<int32_t>(value));
+            break;
+        case ValueTag::Int64:
+            boxed->value = InterpreterValue::from_i64(static_cast<int64_t>(value));
+            break;
+        case ValueTag::Float32: {
+            float fv;
+            std::memcpy(&fv, &value, sizeof(float));
+            boxed->value = InterpreterValue::from_f32(fv);
+            break;
+        }
+        case ValueTag::Float64: {
+            double dv;
+            std::memcpy(&dv, &value, sizeof(double));
+            boxed->value = InterpreterValue::from_f64(dv);
+            break;
+        }
+        default:
+            boxed->value = InterpreterValue::from_obj(reinterpret_cast<void*>(value));
+            break;
     }
     return boxed;
 }
@@ -418,7 +412,8 @@ extern "C" void* CodegenNewObj(uint32_t type_token, uint32_t field_count) noexce
     // Allocate through the GC heap so the object is tracked for GC scanning
     // and compaction.  GcAllocateProfiled returns zeroed memory.
     auto* obj = static_cast<InterpreterObject*>(GcAllocateProfiled(sizeof(InterpreterObject)));
-    if (obj == nullptr) return nullptr;
+    if (obj == nullptr)
+        return nullptr;
     // Manual init: GcAllocate zeroes everything, so we only need to point
     // fields_ptr_ to the inline buffer and set type_token.
     // Do NOT call placement new (no vector construction on GC memory).
@@ -434,7 +429,8 @@ extern "C" void* CodegenNewObj(uint32_t type_token, uint32_t field_count) noexce
 extern "C" int32_t CodegenLdLen(void* arr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdLen");
     using namespace chaos::il2cpp::interpreter;
-    if (arr == nullptr) return 0;
+    if (arr == nullptr)
+        return 0;
     auto* as = static_cast<ArrayStorage*>(arr);
     return static_cast<int32_t>(as->elements.size());
 }
@@ -453,22 +449,22 @@ extern "C" uint64_t CodegenLdSFld(uint32_t field_offset) noexcept {
     }
     const auto& iv = g_static_fields[field_offset];
     switch (iv.tag) {
-    case ValueTag::Int32:
-        return static_cast<uint64_t>(iv.i32);
-    case ValueTag::Int64:
-        return static_cast<uint64_t>(iv.i64);
-    case ValueTag::Float32: {
-        uint64_t val;
-        std::memcpy(&val, &iv.f32, sizeof(float));
-        return val;
-    }
-    case ValueTag::Float64: {
-        uint64_t val;
-        std::memcpy(&val, &iv.f64, sizeof(double));
-        return val;
-    }
-    default:
-        return reinterpret_cast<uint64_t>(iv.obj);
+        case ValueTag::Int32:
+            return static_cast<uint64_t>(iv.i32);
+        case ValueTag::Int64:
+            return static_cast<uint64_t>(iv.i64);
+        case ValueTag::Float32: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f32, sizeof(float));
+            return val;
+        }
+        case ValueTag::Float64: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f64, sizeof(double));
+            return val;
+        }
+        default:
+            return reinterpret_cast<uint64_t>(iv.obj);
     }
 }
 
@@ -479,9 +475,8 @@ extern "C" void CodegenStSFld(uint32_t field_offset, uint64_t value) noexcept {
         g_static_fields.resize(field_offset + 1u);
     }
     JitSatbPreWriteBarrier(reinterpret_cast<void**>(&g_static_fields[field_offset].obj));
-    chaos::il2cpp::runtime_core::BgcRecordRootChange(
-        reinterpret_cast<void**>(&g_static_fields[field_offset].obj),
-        g_static_fields[field_offset].obj);
+    chaos::il2cpp::runtime_core::BgcRecordRootChange(reinterpret_cast<void**>(&g_static_fields[field_offset].obj),
+                                                     g_static_fields[field_offset].obj);
     g_static_fields[field_offset] = InterpreterValue::from_i64(static_cast<int64_t>(value));
 }
 
@@ -498,7 +493,8 @@ extern "C" void* CodegenNewArr(int32_t length) noexcept {
     // TODO(Phase 3.4): Replace std::vector with GC-allocated buffer to
     // eliminate the hidden C++ heap allocation and enable full GC tracking.
     auto* arr = static_cast<ArrayStorage*>(GcAllocateProfiled(sizeof(ArrayStorage)));
-    if (arr == nullptr) return nullptr;
+    if (arr == nullptr)
+        return nullptr;
     // GcAllocate zeroes memory — vector is empty.  No placement new needed.
     arr->elements.resize(static_cast<size_t>(length > 0 ? length : 0));
     return arr;
@@ -508,7 +504,8 @@ extern "C" void* CodegenNewArrTlab(void* mem, int32_t length) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::NewArrTlab");
     using namespace chaos::il2cpp::interpreter;
     auto* arr = static_cast<ArrayStorage*>(mem);
-    if (arr == nullptr) return nullptr;
+    if (arr == nullptr)
+        return nullptr;
     ::new (arr) ArrayStorage();
     arr->elements.resize(static_cast<size_t>(length > 0 ? length : 0));
     return arr;
@@ -517,34 +514,37 @@ extern "C" void* CodegenNewArrTlab(void* mem, int32_t length) noexcept {
 extern "C" uint64_t CodegenLdElem(void* arr, int32_t index) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdElem");
     using namespace chaos::il2cpp::interpreter;
-    if (arr == nullptr) return 0;
+    if (arr == nullptr)
+        return 0;
     auto* as = static_cast<ArrayStorage*>(arr);
-    if (index < 0 || static_cast<size_t>(index) >= as->elements.size()) return 0;
+    if (index < 0 || static_cast<size_t>(index) >= as->elements.size())
+        return 0;
     const auto& iv = as->elements[static_cast<size_t>(index)];
     switch (iv.tag) {
-    case ValueTag::Int32:
-        return static_cast<uint64_t>(iv.i32);
-    case ValueTag::Int64:
-        return static_cast<uint64_t>(iv.i64);
-    case ValueTag::Float32: {
-        uint64_t val;
-        std::memcpy(&val, &iv.f32, sizeof(float));
-        return val;
-    }
-    case ValueTag::Float64: {
-        uint64_t val;
-        std::memcpy(&val, &iv.f64, sizeof(double));
-        return val;
-    }
-    default:
-        return reinterpret_cast<uint64_t>(iv.obj);
+        case ValueTag::Int32:
+            return static_cast<uint64_t>(iv.i32);
+        case ValueTag::Int64:
+            return static_cast<uint64_t>(iv.i64);
+        case ValueTag::Float32: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f32, sizeof(float));
+            return val;
+        }
+        case ValueTag::Float64: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f64, sizeof(double));
+            return val;
+        }
+        default:
+            return reinterpret_cast<uint64_t>(iv.obj);
     }
 }
 
 extern "C" void CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StElem");
     using namespace chaos::il2cpp::interpreter;
-    if (arr == nullptr) return;
+    if (arr == nullptr)
+        return;
     auto* as = static_cast<ArrayStorage*>(arr);
     auto idx = static_cast<size_t>(index >= 0 ? index : 0);
     if (idx >= as->elements.size()) {
@@ -565,22 +565,22 @@ extern "C" uint64_t CodegenLdElemNoCheck(void* arr, int32_t index) noexcept {
     auto idx = static_cast<size_t>(index >= 0 ? index : 0);
     const auto& iv = as->elements[idx];
     switch (iv.tag) {
-    case ValueTag::Int32:
-        return static_cast<uint64_t>(iv.i32);
-    case ValueTag::Int64:
-        return static_cast<uint64_t>(iv.i64);
-    case ValueTag::Float32: {
-        uint64_t val;
-        std::memcpy(&val, &iv.f32, sizeof(float));
-        return val;
-    }
-    case ValueTag::Float64: {
-        uint64_t val;
-        std::memcpy(&val, &iv.f64, sizeof(double));
-        return val;
-    }
-    default:
-        return reinterpret_cast<uint64_t>(iv.obj);
+        case ValueTag::Int32:
+            return static_cast<uint64_t>(iv.i32);
+        case ValueTag::Int64:
+            return static_cast<uint64_t>(iv.i64);
+        case ValueTag::Float32: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f32, sizeof(float));
+            return val;
+        }
+        case ValueTag::Float64: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f64, sizeof(double));
+            return val;
+        }
+        default:
+            return reinterpret_cast<uint64_t>(iv.obj);
     }
 }
 
@@ -603,7 +603,8 @@ extern "C" void CodegenStElemNoCheck(void* arr, int32_t index, uint64_t value) n
 extern "C" void* CodegenCastClass(void* obj, uint32_t target_token) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::CastClass");
     using namespace chaos::il2cpp::interpreter;
-    if (obj == nullptr) return nullptr;
+    if (obj == nullptr)
+        return nullptr;
     auto* io = static_cast<InterpreterObject*>(obj);
     return (io->type_token == target_token) ? obj : nullptr;
 }
@@ -611,7 +612,8 @@ extern "C" void* CodegenCastClass(void* obj, uint32_t target_token) noexcept {
 extern "C" void* CodegenIsInst(void* obj, uint32_t target_token) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::IsInst");
     using namespace chaos::il2cpp::interpreter;
-    if (obj == nullptr) return nullptr;
+    if (obj == nullptr)
+        return nullptr;
     auto* io = static_cast<InterpreterObject*>(obj);
     return (io->type_token == target_token) ? obj : nullptr;
 }
@@ -621,28 +623,29 @@ extern "C" void* CodegenIsInst(void* obj, uint32_t target_token) noexcept {
 extern "C" uint64_t CodegenUnbox(void* obj) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Unbox");
     using namespace chaos::il2cpp::interpreter;
-    if (obj == nullptr) return 0;
+    if (obj == nullptr)
+        return 0;
     // BoxedValue layout: single InterpreterValue (ECMA Box/Unbox semantics).
     // Both the TLAB inline path and CodegenBox create BoxedValue, not
     // InterpreterObject, so we must read the value field directly.
     const auto& iv = static_cast<BoxedValue*>(obj)->value;
     switch (iv.tag) {
-    case ValueTag::Int32:
-        return static_cast<uint64_t>(iv.i32);
-    case ValueTag::Int64:
-        return static_cast<uint64_t>(iv.i64);
-    case ValueTag::Float32: {
-        uint64_t val;
-        std::memcpy(&val, &iv.f32, sizeof(float));
-        return val;
-    }
-    case ValueTag::Float64: {
-        uint64_t val;
-        std::memcpy(&val, &iv.f64, sizeof(double));
-        return val;
-    }
-    default:
-        return reinterpret_cast<uint64_t>(iv.obj);
+        case ValueTag::Int32:
+            return static_cast<uint64_t>(iv.i32);
+        case ValueTag::Int64:
+            return static_cast<uint64_t>(iv.i64);
+        case ValueTag::Float32: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f32, sizeof(float));
+            return val;
+        }
+        case ValueTag::Float64: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f64, sizeof(double));
+            return val;
+        }
+        default:
+            return reinterpret_cast<uint64_t>(iv.obj);
     }
 }
 
@@ -650,20 +653,22 @@ extern "C" uint64_t CodegenUnbox(void* obj) noexcept {
 
 extern "C" void* CodegenLdVirtFtn(void* obj, uint32_t method_token) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdVirtFtn");
-    if (obj == nullptr) return nullptr;
+    if (obj == nullptr)
+        return nullptr;
     using namespace chaos::il2cpp::interpreter;
     auto* io = static_cast<InterpreterObject*>(obj);
     uint32_t type_token = io->type_token;
-    if (type_token == 0 || method_token == 0) return nullptr;
-    return chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
-        type_token, method_token);
+    if (type_token == 0 || method_token == 0)
+        return nullptr;
+    return chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(type_token, method_token);
 }
 
 // ── InitObj helper ─────────────────────────────────────────────────────────
 
 extern "C" void CodegenInitObj(void* ptr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::InitObj");
-    if (ptr == nullptr) return;
+    if (ptr == nullptr)
+        return;
     // 16-byte zero fill — two uint64_t stores instead of std::memset.
     // InterpreterValue is 16 bytes (tag + pad + struct_size + union).
     auto* p = static_cast<uint64_t*>(ptr);
@@ -677,7 +682,8 @@ extern "C" void CodegenStObj(void* ptr, uint64_t value) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StObj");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
-    if (ptr == nullptr) return;
+    if (ptr == nullptr)
+        return;
     auto* iv = static_cast<InterpreterValue*>(ptr);
     // SATB pre-write barrier: record old value before overwriting.
     // Guard with heap check: stack-allocated value type slots don't
@@ -695,7 +701,8 @@ extern "C" void CodegenStObj(void* ptr, uint64_t value) noexcept {
 
 extern "C" void CodegenCpblk(void* dst, const void* src, uint32_t count) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Cpblk");
-    if (dst == nullptr || src == nullptr || count == 0) return;
+    if (dst == nullptr || src == nullptr || count == 0)
+        return;
     std::memcpy(dst, src, count);
 }
 
@@ -703,7 +710,8 @@ extern "C" void CodegenCpblk(void* dst, const void* src, uint32_t count) noexcep
 
 extern "C" void CodegenInitBlk(void* dst, uint32_t value, uint32_t count) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::InitBlk");
-    if (dst == nullptr || count == 0) return;
+    if (dst == nullptr || count == 0)
+        return;
     std::memset(dst, static_cast<int>(value & 0xFF), count);
 }
 
@@ -712,25 +720,26 @@ extern "C" void CodegenInitBlk(void* dst, uint32_t value, uint32_t count) noexce
 extern "C" uint64_t CodegenLdObj(void* ptr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdObj");
     using namespace chaos::il2cpp::interpreter;
-    if (ptr == nullptr) return 0;
+    if (ptr == nullptr)
+        return 0;
     auto* iv = static_cast<InterpreterValue*>(ptr);
     switch (iv->tag) {
-    case ValueTag::Int32:
-        return static_cast<uint64_t>(iv->i32);
-    case ValueTag::Int64:
-        return static_cast<uint64_t>(iv->i64);
-    case ValueTag::Float32: {
-        uint64_t val;
-        std::memcpy(&val, &iv->f32, sizeof(float));
-        return val;
-    }
-    case ValueTag::Float64: {
-        uint64_t val;
-        std::memcpy(&val, &iv->f64, sizeof(double));
-        return val;
-    }
-    default:
-        return reinterpret_cast<uint64_t>(iv->obj);
+        case ValueTag::Int32:
+            return static_cast<uint64_t>(iv->i32);
+        case ValueTag::Int64:
+            return static_cast<uint64_t>(iv->i64);
+        case ValueTag::Float32: {
+            uint64_t val;
+            std::memcpy(&val, &iv->f32, sizeof(float));
+            return val;
+        }
+        case ValueTag::Float64: {
+            uint64_t val;
+            std::memcpy(&val, &iv->f64, sizeof(double));
+            return val;
+        }
+        default:
+            return reinterpret_cast<uint64_t>(iv->obj);
     }
 }
 
@@ -757,7 +766,8 @@ extern "C" void* CodegenLocAlloc(uint32_t size, void* base, uint32_t* bump) noex
     // GcAllocateAtomic returns zeroed memory.
     using namespace chaos::il2cpp::runtime_core;
     void* mem = GcAllocateAtomic(size);
-    if (mem == nullptr) return nullptr;
+    if (mem == nullptr)
+        return nullptr;
     // GcAllocateAtomic already zeroes memory.
     return mem;
 }
@@ -769,7 +779,8 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
     using namespace chaos::il2cpp::jit;
     using namespace chaos::il2cpp::interpreter;
 
-    if (codegen_rsp == 0) return;
+    if (codegen_rsp == 0)
+        return;
 
     // Get the return address — points to the instruction after the CALL
     // to DeoptSaveFrameState in the generated code.
@@ -777,33 +788,29 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
 
     // Find the JitMethod covering this code address.
     const JitMethod* nm = FindNativeCodeByAddress(ret_addr);
-    if (nm == nullptr) return;
+    if (nm == nullptr)
+        return;
 
     uint64_t code_base = reinterpret_cast<uint64_t>(nm->code);
-    uint32_t native_off = static_cast<uint32_t>(
-        reinterpret_cast<uint64_t>(ret_addr) - code_base);
+    uint32_t native_off = static_cast<uint32_t>(reinterpret_cast<uint64_t>(ret_addr) - code_base);
 
     // Batch-copy all 64 GPR values from stack frame spill slots.
     // GPR file starts at codegen_rsp + kGprFileOff (= codegen_rsp + 32).
     for (uint32_t vr = 0; vr < 64; ++vr) {
-        g_jit_deopt_state.gpr_file[vr] = *reinterpret_cast<const uint64_t*>(
-            codegen_rsp + 32 + vr * 8);
+        g_jit_deopt_state.gpr_file[vr] = *reinterpret_cast<const uint64_t*>(codegen_rsp + 32 + vr * 8);
     }
 
     // Batch-copy all 32 FPR values from stack frame spill slots.
     // FPR file starts at codegen_rsp + kFprFileOff (= codegen_rsp + 544).
     for (uint32_t vr = 0; vr < 32; ++vr) {
-        g_jit_deopt_state.fpr_file[vr] = *reinterpret_cast<const double*>(
-            codegen_rsp + 544 + vr * 8);
+        g_jit_deopt_state.fpr_file[vr] = *reinterpret_cast<const double*>(codegen_rsp + 544 + vr * 8);
     }
 
     // Look up type tags from the DeoptEntry for this native offset.
     const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_off);
     if (entry != nullptr && nm->deopt_values != nullptr) {
-        std::memset(g_jit_deopt_state.gpr_tags,
-            static_cast<int>(ValueTag::Int64), 64);
-        std::memset(g_jit_deopt_state.fpr_tags,
-            static_cast<int>(ValueTag::Float64), 32);
+        std::memset(g_jit_deopt_state.gpr_tags, static_cast<int>(ValueTag::Int64), 64);
+        std::memset(g_jit_deopt_state.fpr_tags, static_cast<int>(ValueTag::Float64), 32);
         for (uint32_t i = 0; i < entry->num_values; ++i) {
             const auto& dv = nm->deopt_values[entry->values_offset + i];
             if (dv.reg_index < 64) {
@@ -825,13 +832,16 @@ extern "C" void* OsrResolveLoopHeader() noexcept {
     using namespace chaos::il2cpp::jit;
     void* ret_addr = _ReturnAddress();
     const JitMethod* nm = FindNativeCodeByAddress(ret_addr);
-    if (nm == nullptr) return nullptr;
-    if (nm->instr_offsets == nullptr) return nullptr;
-    if (nm->instr_offset_count == 0) return nullptr;
+    if (nm == nullptr)
+        return nullptr;
+    if (nm->instr_offsets == nullptr)
+        return nullptr;
+    if (nm->instr_offset_count == 0)
+        return nullptr;
 
     uint32_t resume_pc = g_jit_deopt_state.osr_resume_pc;
     if (resume_pc >= nm->instr_offset_count) {
-        resume_pc = 0;  // fall back to instruction 0
+        resume_pc = 0; // fall back to instruction 0
     }
     uint32_t native_off = nm->instr_offsets[resume_pc];
     return static_cast<uint8_t*>(nm->code) + native_off;
@@ -843,7 +853,8 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::DeoptTrapEntry");
     using namespace chaos::il2cpp::jit;
 
-    if (ctx == nullptr) return;
+    if (ctx == nullptr)
+        return;
 
     // 1. Get the return address within the trampoline — this is the address
     //    that the CALL to DeoptTrapEntry pushed.
@@ -857,20 +868,12 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
 
     // 3. Compute native offset from the code entry point.
     uint64_t code_base = reinterpret_cast<uint64_t>(nm->code);
-    uint32_t native_offset = static_cast<uint32_t>(
-        reinterpret_cast<uint64_t>(ret_addr) - code_base);
+    uint32_t native_offset = static_cast<uint32_t>(reinterpret_cast<uint64_t>(ret_addr) - code_base);
 
     // 4. Deoptimize: reconstruct register file from stack frame spill slots.
     const NativeContext* nctx = static_cast<const NativeContext*>(ctx);
-    DeoptRuntime::DeoptTrap(
-        const_cast<JitMethod*>(nm),
-        native_offset,
-        *nctx,
-        codegen_rsp,
-        g_jit_deopt_state.gpr_file,
-        g_jit_deopt_state.fpr_file,
-        g_jit_deopt_state.gpr_tags,
-        g_jit_deopt_state.fpr_tags);
+    DeoptRuntime::DeoptTrap(const_cast<JitMethod*>(nm), native_offset, *nctx, codegen_rsp, g_jit_deopt_state.gpr_file,
+                            g_jit_deopt_state.fpr_file, g_jit_deopt_state.gpr_tags, g_jit_deopt_state.fpr_tags);
 
     // 5. Find the DeoptEntry to get the instruction pc.
     const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_offset);

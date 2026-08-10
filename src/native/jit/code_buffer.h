@@ -22,7 +22,7 @@ namespace chaos::il2cpp::jit {
 // Default buffer size (4KB — fits most small-to-medium methods).
 static constexpr uint32_t kCodeBufferInitSize = 4096;
 // Max buffer size (64MB — safety limit for large generated methods).
-static constexpr uint32_t kCodeBufferMaxSize  = 64u * 1024 * 1024;
+static constexpr uint32_t kCodeBufferMaxSize = 64u * 1024 * 1024;
 
 class CodeBuffer {
 public:
@@ -37,14 +37,16 @@ public:
 
     /// Emit a single byte.
     void EmitByte(uint8_t b) noexcept {
-        if (failed_) return;
+        if (failed_)
+            return;
         Ensure(kMinGrow);
         data_[pos_++] = b;
     }
 
     /// Emit a 2-byte little-endian value.
     void Emit16(uint16_t v) noexcept {
-        if (failed_) return;
+        if (failed_)
+            return;
         Ensure(2);
         data_[pos_++] = static_cast<uint8_t>(v);
         data_[pos_++] = static_cast<uint8_t>(v >> 8);
@@ -52,7 +54,8 @@ public:
 
     /// Emit a 4-byte little-endian value.
     void Emit32(uint32_t v) noexcept {
-        if (failed_) return;
+        if (failed_)
+            return;
         Ensure(4);
         data_[pos_++] = static_cast<uint8_t>(v);
         data_[pos_++] = static_cast<uint8_t>(v >> 8);
@@ -62,7 +65,8 @@ public:
 
     /// Emit a 8-byte little-endian value.
     void Emit64(uint64_t v) noexcept {
-        if (failed_) return;
+        if (failed_)
+            return;
         Ensure(8);
         data_[pos_++] = static_cast<uint8_t>(v);
         data_[pos_++] = static_cast<uint8_t>(v >> 8);
@@ -76,7 +80,8 @@ public:
 
     /// Emit a range of bytes.
     void EmitBytes(const void* src, uint32_t len) noexcept {
-        if (failed_) return;
+        if (failed_)
+            return;
         Ensure(len);
         std::memcpy(data_ + pos_, src, len);
         pos_ += len;
@@ -84,7 +89,8 @@ public:
 
     /// Reserve space and return writable pointer (for fixups).
     uint8_t* Reserve(uint32_t len) noexcept {
-        if (failed_) return nullptr;
+        if (failed_)
+            return nullptr;
         Ensure(len);
         uint8_t* p = data_ + pos_;
         pos_ += len;
@@ -93,7 +99,8 @@ public:
 
     /// Patch a 4-byte value at a given offset (for branch fixups).
     void Patch32(uint32_t offset, uint32_t v) noexcept {
-        if (offset + 4 > pos_) return;
+        if (offset + 4 > pos_)
+            return;
         data_[offset + 0] = static_cast<uint8_t>(v);
         data_[offset + 1] = static_cast<uint8_t>(v >> 8);
         data_[offset + 2] = static_cast<uint8_t>(v >> 16);
@@ -103,16 +110,16 @@ public:
     /// Read a 4-byte value at a given offset (for branch fixups on ARM64,
     /// where we need to reconstruct the instruction with new imm19/imm26).
     uint32_t Load32(uint32_t offset) const noexcept {
-        if (offset + 4 > pos_) return 0;
-        return static_cast<uint32_t>(data_[offset])
-             | (static_cast<uint32_t>(data_[offset + 1]) << 8)
-             | (static_cast<uint32_t>(data_[offset + 2]) << 16)
-             | (static_cast<uint32_t>(data_[offset + 3]) << 24);
+        if (offset + 4 > pos_)
+            return 0;
+        return static_cast<uint32_t>(data_[offset]) | (static_cast<uint32_t>(data_[offset + 1]) << 8) |
+               (static_cast<uint32_t>(data_[offset + 2]) << 16) | (static_cast<uint32_t>(data_[offset + 3]) << 24);
     }
 
     /// Patch a 1-byte value at a given offset.
     void Patch8(uint32_t offset, uint8_t v) noexcept {
-        if (offset < pos_) data_[offset] = v;
+        if (offset < pos_)
+            data_[offset] = v;
     }
 
     /// Seal the buffer: make it executable (RX) and return entry point.
@@ -129,7 +136,8 @@ public:
     /// Read a byte from the buffer at a given offset (for testing).
     /// Returns 0 if offset is past the current write position.
     uint8_t Peek(uint32_t offset) const noexcept {
-        if (offset >= pos_) return 0;
+        if (offset >= pos_)
+            return 0;
         return data_[offset];
     }
 
@@ -202,13 +210,13 @@ private:
     bool AllocPlatform(uint32_t size) noexcept;
     bool ProtectPlatform(bool executable) noexcept;
 
-    uint8_t*  data_     = nullptr;
-    uint32_t  pos_      = 0;
-    uint32_t  capacity_ = 0;
-    uint32_t  alloc_size_ = 0;  // Actual allocation size (page-rounded)
-    bool      failed_   = false;  // Set on allocation failure; suppresses further writes
+    uint8_t* data_ = nullptr;
+    uint32_t pos_ = 0;
+    uint32_t capacity_ = 0;
+    uint32_t alloc_size_ = 0; // Actual allocation size (page-rounded)
+    bool failed_ = false;     // Set on allocation failure; suppresses further writes
 };
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_CODEGEN_CODE_BUFFER_H_
+#endif // CHAOS_IL2CPP_CODEGEN_CODE_BUFFER_H_

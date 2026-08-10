@@ -24,9 +24,9 @@ struct JitMethod;
 /// A single call-site entry in the reverse map.
 /// Records that `caller` has a call slot at `slot_index` targeting `callee_token`.
 struct SlotEntry {
-    JitMethod* caller;        // JitMethod containing the call slot
-    uint32_t   slot_index;    // index into caller->call_site_slots[]
-    uint32_t   callee_token;  // metadata token of the callee (for verification)
+    JitMethod* caller;     // JitMethod containing the call slot
+    uint32_t slot_index;   // index into caller->call_site_slots[]
+    uint32_t callee_token; // metadata token of the callee (for verification)
 };
 
 /// Reverse mapping from callee metadata token to all JIT callers.
@@ -42,12 +42,13 @@ public:
 
     /// Remove all entries for a given caller (called when JitMethod is freed).
     void RemoveAll(JitMethod* caller) noexcept {
-        for (auto it = map_.begin(); it != map_.end(); ) {
+        for (auto it = map_.begin(); it != map_.end();) {
             auto& entries = it->second;
-            entries.erase(
-                std::remove_if(entries.begin(), entries.end(),
-                    [caller](const SlotEntry& e) { return e.caller == caller; }),
-                entries.end());
+            entries.erase(std::remove_if(entries.begin(), entries.end(),
+                                         [caller](const SlotEntry& e) {
+                                             return e.caller == caller;
+                                         }),
+                          entries.end());
             if (entries.empty())
                 it = map_.erase(it);
             else
@@ -62,18 +63,15 @@ public:
     /// same page are handled in one call.
     void UpdateAll(uint32_t callee_token, void* new_direct_ptr) noexcept {
         auto it = map_.find(callee_token);
-        if (it == map_.end()) return;
+        if (it == map_.end())
+            return;
         for (auto& entry : it->second) {
-            if (entry.caller->call_site_slots &&
-                entry.slot_index < entry.caller->call_site_slot_count) {
+            if (entry.caller->call_site_slots && entry.slot_index < entry.caller->call_site_slot_count) {
                 void* addr = &entry.caller->call_site_slots[entry.slot_index];
-                chaos::il2cpp::pal::PalVirtualProtect(addr, sizeof(void*),
-                    chaos::il2cpp::pal::kPalMemReadWrite);
+                chaos::il2cpp::pal::PalVirtualProtect(addr, sizeof(void*), chaos::il2cpp::pal::kPalMemReadWrite);
                 entry.caller->call_site_slots[entry.slot_index] = new_direct_ptr;
-                if (!chaos::il2cpp::pal::PalVirtualProtect(addr, sizeof(void*),
-                        chaos::il2cpp::pal::kPalMemReadExec)) {
-                    CHAOS_IL2CPP_LOG_ERROR_M("jit",
-                        "slot_map: failed to re-protect call slot to RX");
+                if (!chaos::il2cpp::pal::PalVirtualProtect(addr, sizeof(void*), chaos::il2cpp::pal::kPalMemReadExec)) {
+                    CHAOS_IL2CPP_LOG_ERROR_M("jit", "slot_map: failed to re-protect call slot to RX");
                 }
             }
         }
@@ -94,6 +92,6 @@ private:
 /// Global singleton — defined in jit_engine.cpp.
 extern ReverseSlotMap g_reverse_slot_map;
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_JIT_SLOT_MAP_H_
+#endif // CHAOS_IL2CPP_JIT_SLOT_MAP_H_

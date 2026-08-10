@@ -28,25 +28,26 @@ namespace chaos::il2cpp::interpreter {
 
 // ── Constants ────────────────────────────────────────────────────────────
 static constexpr uint32_t kMaxProfiledMethods = 4096;
-static constexpr uint32_t kProfilerHashSize   = 4096;  // must be power of 2
+static constexpr uint32_t kProfilerHashSize = 4096; // must be power of 2
 
 // ── Per-method profiling slot ────────────────────────────────────────────
 struct alignas(64) ProfiledMethodSlot {
-    std::atomic<uintptr_t> method_key{0};    // method address / identifier (0 = empty)
-    std::atomic<uint64_t>  call_count{0};    // number of invocations
-    std::atomic<uint64_t>  total_cycles{0};  // accumulated RDTSC cycles
-    std::atomic<uint64_t>  gc_alloc_bytes{0}; // GC bytes allocated by this method
+    std::atomic<uintptr_t> method_key {0};    // method address / identifier (0 = empty)
+    std::atomic<uint64_t> call_count {0};     // number of invocations
+    std::atomic<uint64_t> total_cycles {0};   // accumulated RDTSC cycles
+    std::atomic<uint64_t> gc_alloc_bytes {0}; // GC bytes allocated by this method
 };
 
 // ── Global profiler state ────────────────────────────────────────────────
 struct VmProfilerState {
     ProfiledMethodSlot slots[kMaxProfiledMethods];
-    std::atomic<uint32_t> slot_count{0};
+    std::atomic<uint32_t> slot_count {0};
 
     /// Find or create a slot for the given method_key.
     /// Returns the slot index on success, or -1 if full.
     int32_t FindOrCreateSlot(uintptr_t method_key) noexcept {
-        if (method_key == 0) return -1;
+        if (method_key == 0)
+            return -1;
 
         // Linear probing hash
         uint32_t idx = static_cast<uint32_t>(method_key ^ (method_key >> 16)) & (kProfilerHashSize - 1);
@@ -55,8 +56,8 @@ struct VmProfilerState {
             uintptr_t expected = 0;
             // Try to claim empty slot
             if (slots[slot].method_key.load(std::memory_order_acquire) == 0) {
-                if (slots[slot].method_key.compare_exchange_weak(expected, method_key,
-                        std::memory_order_release, std::memory_order_acquire)) {
+                if (slots[slot].method_key.compare_exchange_weak(expected, method_key, std::memory_order_release,
+                                                                 std::memory_order_acquire)) {
                     slot_count.fetch_add(1, std::memory_order_relaxed);
                     return static_cast<int32_t>(slot);
                 }
@@ -66,13 +67,13 @@ struct VmProfilerState {
                 return static_cast<int32_t>(slot);
             }
         }
-        return -1;  // full
+        return -1; // full
     }
 
     /// Record one call with its cycle count.
-    void RecordCall(int32_t slot_idx, uint64_t cycles,
-                    uint64_t gc_bytes = 0) noexcept {
-        if (slot_idx < 0) return;
+    void RecordCall(int32_t slot_idx, uint64_t cycles, uint64_t gc_bytes = 0) noexcept {
+        if (slot_idx < 0)
+            return;
         slots[slot_idx].call_count.fetch_add(1, std::memory_order_relaxed);
         slots[slot_idx].total_cycles.fetch_add(cycles, std::memory_order_relaxed);
         if (gc_bytes > 0) {
@@ -84,16 +85,20 @@ struct VmProfilerState {
     void DumpAll() noexcept {
         // Collect non-empty slots
         uint32_t count = 0;
-        struct Entry { uintptr_t key; uint64_t calls; uint64_t cycles; uint64_t gc_bytes; };
+        struct Entry {
+            uintptr_t key;
+            uint64_t calls;
+            uint64_t cycles;
+            uint64_t gc_bytes;
+        };
         Entry entries[kMaxProfiledMethods];
 
         for (uint32_t i = 0; i < kProfilerHashSize; ++i) {
             uintptr_t key = slots[i].method_key.load(std::memory_order_acquire);
             if (key != 0) {
-                entries[count++] = { key,
-                    slots[i].call_count.load(std::memory_order_relaxed),
-                    slots[i].total_cycles.load(std::memory_order_relaxed),
-                    slots[i].gc_alloc_bytes.load(std::memory_order_relaxed) };
+                entries[count++] = {key, slots[i].call_count.load(std::memory_order_relaxed),
+                                    slots[i].total_cycles.load(std::memory_order_relaxed),
+                                    slots[i].gc_alloc_bytes.load(std::memory_order_relaxed)};
             }
         }
 
@@ -109,15 +114,11 @@ struct VmProfilerState {
         }
 
         std::fprintf(stderr, "── VM Profiler (top %u methods) ──\n", count);
-        std::fprintf(stderr, "%-20s %12s %14s %14s\n",
-                     "Method", "Calls", "Cycles", "GC Bytes");
-        std::fprintf(stderr, "%-20s %12s %14s %14s\n",
-                     "------", "-----", "------", "--------");
+        std::fprintf(stderr, "%-20s %12s %14s %14s\n", "Method", "Calls", "Cycles", "GC Bytes");
+        std::fprintf(stderr, "%-20s %12s %14s %14s\n", "------", "-----", "------", "--------");
         for (uint32_t i = 0; i < count; ++i) {
-            std::fprintf(stderr, "0x%016llx %12llu %14llu %14llu\n",
-                         (unsigned long long)entries[i].key,
-                         (unsigned long long)entries[i].calls,
-                         (unsigned long long)entries[i].cycles,
+            std::fprintf(stderr, "0x%016llx %12llu %14llu %14llu\n", (unsigned long long)entries[i].key,
+                         (unsigned long long)entries[i].calls, (unsigned long long)entries[i].cycles,
                          (unsigned long long)entries[i].gc_bytes);
         }
     }
@@ -141,15 +142,13 @@ extern VmProfilerState g_vm_profiler;
 // ── RAII profiler scope for per-method tracking ──────────────────────────
 class VmProfileScope {
 public:
-    VmProfileScope(uintptr_t method_key) noexcept
-        : slot_idx_(-1)
-        , start_cycles_(0) {
+    VmProfileScope(uintptr_t method_key) noexcept : slot_idx_(-1), start_cycles_(0) {
 #if CHAOS_IL2CPP_VM_PROFILER_ENABLED
-        // ARM64 not yet supported for VM profiler (no __rdtsc).
-        // Use CHAOS_IL2CPP_PROFILE_SCOPE instead for ARM64 profiling.
-        #if !defined(__x86_64__) && !defined(__i386__) && !defined(_M_AMD64)
-        #error "register_vm_profiler.h: CHAOS_IL2CPP_VM_PROFILER_ENABLED requires x86 RDTSC"
-        #endif
+// ARM64 not yet supported for VM profiler (no __rdtsc).
+// Use CHAOS_IL2CPP_PROFILE_SCOPE instead for ARM64 profiling.
+#if !defined(__x86_64__) && !defined(__i386__) && !defined(_M_AMD64)
+#error "register_vm_profiler.h: CHAOS_IL2CPP_VM_PROFILER_ENABLED requires x86 RDTSC"
+#endif
         if (method_key != 0) {
             slot_idx_ = g_vm_profiler.FindOrCreateSlot(method_key);
             start_cycles_ = __rdtsc();
@@ -170,7 +169,7 @@ public:
     VmProfileScope& operator=(const VmProfileScope&) = delete;
 
 private:
-    int32_t  slot_idx_;
+    int32_t slot_idx_;
     uint64_t start_cycles_;
 };
 
@@ -180,6 +179,6 @@ void DumpProfilerToFile(const char* path) noexcept;
 /// Reset all profiler counters to zero.
 void ResetProfiler() noexcept;
 
-}  // namespace chaos::il2cpp::interpreter
+} // namespace chaos::il2cpp::interpreter
 
-#endif  // CHAOS_IL2CPP_REGISTER_VM_PROFILER_H_
+#endif // CHAOS_IL2CPP_REGISTER_VM_PROFILER_H_

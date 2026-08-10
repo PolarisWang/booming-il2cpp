@@ -1031,9 +1031,11 @@ void NativeCodeGenerator::EmitShift(IROpCode opc, uint32_t dst, uint32_t src1, u
     }
 #if defined(__aarch64__)
     if (src2 != UINT32_MAX) {
-        if (!load_src1_first) LoadGpr(AT::kScratchB, src2);
+        if (!load_src1_first)
+            LoadGpr(AT::kScratchB, src2);
         LoadGpr(op_reg, src1);
-        if (load_src1_first) LoadGpr(AT::kScratchB, src2);
+        if (load_src1_first)
+            LoadGpr(AT::kScratchB, src2);
         if (opc == IROpCode::Shl) {
             enc_.EmitShlRCL(op_reg);
         } else if (opc == IROpCode::Shr) {
@@ -1053,9 +1055,11 @@ void NativeCodeGenerator::EmitShift(IROpCode opc, uint32_t dst, uint32_t src1, u
     }
 #else
     if (src2 != UINT32_MAX) {
-        if (!load_src1_first) LoadGpr(AT::kScratchB, src2);
+        if (!load_src1_first)
+            LoadGpr(AT::kScratchB, src2);
         LoadGpr(op_reg, src1);
-        if (load_src1_first) LoadGpr(AT::kScratchB, src2);
+        if (load_src1_first)
+            LoadGpr(AT::kScratchB, src2);
         EmitREXB(buf_, false, op_reg); // REX.B for extended destination register
         if (opc == IROpCode::Shl) {
             buf_.EmitByte(0xD3);
@@ -1681,8 +1685,8 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
                 enc_.EmitMovUPRM(callee_xmm_regs_[si], AT::kStackReg, off);
             }
 #if defined(__aarch64__)
-            enc_.EmitAddRI(AT::kStackReg,
-                           static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
+            enc_.EmitAddRI(AT::kStackReg, static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ +
+                                                               xmm_save_size_ + localloc_extra_));
             for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
                 EmitLdp64Post(buf_, callee_saved_regs_[slot - 1], 0, kARM64_SP,
                               16);                    // LDP Xreg, X0, [SP], #16 (X0=scratch, never XZR)
@@ -1690,8 +1694,8 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             EmitLdp64Post(buf_, AT::kFrameReg, 30, kARM64_SP, 16); // LDP X29, X30, [SP], #16
             enc_.EmitRet();
 #else
-            enc_.EmitAddRI(AT::kStackReg,
-                           static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
+            enc_.EmitAddRI(AT::kStackReg, static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ +
+                                                               xmm_save_size_ + localloc_extra_));
             for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
                 enc_.EmitPop(callee_saved_regs_[slot - 1]);
             enc_.EmitPop(kRDI);
@@ -2989,11 +2993,13 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             if (localloc_extra_ > 0) {
                 // Stack allocation from pre-allocated frame reserve.
                 // RDX = base address of localloc reserve.
-                enc_.EmitLeaRM(AT::kScratchC, AT::kStackReg,
-                               static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + 8));
+                enc_.EmitLeaRM(
+                    AT::kScratchC, AT::kStackReg,
+                    static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + 8));
                 // R8 = bump counter pointer (8 bytes, at kFrameSize + align_adj + xmm_save).
-                enc_.EmitLeaRM(AT::kExtraScratch0, AT::kStackReg,
-                               static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_));
+                enc_.EmitLeaRM(
+                    AT::kExtraScratch0, AT::kStackReg,
+                    static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_));
                 EmitRuntimeHelperCall(reinterpret_cast<void*>(::CodegenLocAlloc));
             } else {
                 // Fallback: heap allocation (no stack reserve — rare edge case).
@@ -4334,12 +4340,11 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // values on the stack.  Only a strictly scalar, call-free method (pure
     // arithmetic/bitwise/shift/compare/convert on Int32/Int64/Float) is safe
     // to keep purely register-resident.
-    bool can_clobber_caller =
-        config_.enable_safepoint_polls && config_.safepoint_fn != nullptr;
+    bool can_clobber_caller = config_.enable_safepoint_polls && config_.safepoint_fn != nullptr;
     for (const auto& instr : rm_.instructions) {
         auto opc = instr.op_code();
-        if (opc == IROpCode::Call || opc == IROpCode::CallBridge ||
-            opc == IROpCode::CallVirt || opc == IROpCode::Calli) {
+        if (opc == IROpCode::Call || opc == IROpCode::CallBridge || opc == IROpCode::CallVirt ||
+            opc == IROpCode::Calli) {
             slot_count_ += (opc == IROpCode::Call || opc == IROpCode::CallBridge);
             can_clobber_caller = true;
             continue;
@@ -4347,25 +4352,45 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         // Whitelist of ops that are pure scalar (Int/FP) register-resident
         // safe: no heap, no GC, no call, no overflow-deopt, no memory RMW.
         switch (opc) {
-        case IROpCode::LdcI4: case IROpCode::LdcI8:
-        case IROpCode::LdcR4: case IROpCode::LdcR8:
-        case IROpCode::Add: case IROpCode::Sub: case IROpCode::Mul:
-        case IROpCode::Div: case IROpCode::Rem:
-        case IROpCode::DivUn: case IROpCode::RemUn:
-        case IROpCode::Neg: case IROpCode::Not:
-        case IROpCode::And: case IROpCode::Or: case IROpCode::Xor:
-        case IROpCode::Shl: case IROpCode::Shr: case IROpCode::ShrUn:
-        case IROpCode::Ceq: case IROpCode::Clt: case IROpCode::Cgt:
-        case IROpCode::Conv_I4: case IROpCode::Conv_I8:
-        case IROpCode::ConvI: case IROpCode::ConvU:
-        case IROpCode::Conv_R4: case IROpCode::Conv_R8:
-        case IROpCode::ConvRUn:
-        case IROpCode::Abs: case IROpCode::Min: case IROpCode::Max:
-        case IROpCode::Dup: case IROpCode::Pop: case IROpCode::Ret:
-            break;  // safe; keep resident
-        default:
-            can_clobber_caller = true;  // object/heap/call/memory/br — not resident-safe
-            break;
+            case IROpCode::LdcI4:
+            case IROpCode::LdcI8:
+            case IROpCode::LdcR4:
+            case IROpCode::LdcR8:
+            case IROpCode::Add:
+            case IROpCode::Sub:
+            case IROpCode::Mul:
+            case IROpCode::Div:
+            case IROpCode::Rem:
+            case IROpCode::DivUn:
+            case IROpCode::RemUn:
+            case IROpCode::Neg:
+            case IROpCode::Not:
+            case IROpCode::And:
+            case IROpCode::Or:
+            case IROpCode::Xor:
+            case IROpCode::Shl:
+            case IROpCode::Shr:
+            case IROpCode::ShrUn:
+            case IROpCode::Ceq:
+            case IROpCode::Clt:
+            case IROpCode::Cgt:
+            case IROpCode::Conv_I4:
+            case IROpCode::Conv_I8:
+            case IROpCode::ConvI:
+            case IROpCode::ConvU:
+            case IROpCode::Conv_R4:
+            case IROpCode::Conv_R8:
+            case IROpCode::ConvRUn:
+            case IROpCode::Abs:
+            case IROpCode::Min:
+            case IROpCode::Max:
+            case IROpCode::Dup:
+            case IROpCode::Pop:
+            case IROpCode::Ret:
+                break; // safe; keep resident
+            default:
+                can_clobber_caller = true; // object/heap/call/memory/br — not resident-safe
+                break;
         }
     }
     has_caller_clobber_ = can_clobber_caller;
@@ -4529,7 +4554,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
                      -16); // STP Xreg, X0, [SP, #-16]! (X0=scratch, never XZR)
     }
     prologue_sub_rsp_offset_ = buf_.pos();
-    prologue_sub_rsp_size_ = static_cast<uint32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + localloc_extra_);
+    prologue_sub_rsp_size_ =
+        static_cast<uint32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + localloc_extra_);
     enc_.EmitSubRI(AT::kStackReg, static_cast<int32_t>(prologue_sub_rsp_size_));
     enc_.EmitAddRI(AT::kArgsBuf, AT::kStackReg, static_cast<int32_t>(kGprFileOff)); // X3 = SP + GPR file
     enc_.EmitAddRI(AT::kRetBuf, AT::kStackReg, static_cast<int32_t>(kGprFileOff));  // X4 = SP + GPR file
@@ -4554,7 +4580,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
         prologue_push_offsets_[4 + slot] = buf_.pos(), enc_.EmitPush(callee_saved_regs_[slot]);
     prologue_sub_rsp_offset_ = buf_.pos();
-    prologue_sub_rsp_size_ = static_cast<uint32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + localloc_extra_);
+    prologue_sub_rsp_size_ =
+        static_cast<uint32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + localloc_extra_);
     enc_.EmitSubRI(AT::kStackReg, static_cast<int32_t>(prologue_sub_rsp_size_));
     // Set up register convention: RBX = args_buf, RSI = ret_buf.
     // Both point to the GPR file in the local frame (not from caller RCX/RDX),
@@ -4600,7 +4627,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 
     // Zero the localloc bump pointer (RAX is still 0 from xor above)
     if (localloc_extra_ > 0) {
-        enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_),
+        enc_.EmitMovMR(AT::kStackReg,
+                       static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_),
                        AT::kScratchA);
     }
 
@@ -4681,9 +4709,12 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
                 {
                     uint32_t opt_max = kGprCount;
                     for (const auto& ri : opt_instrs) {
-                        if (ri.has_dst() && ri.dst_reg() > opt_max) opt_max = ri.dst_reg();
-                        if (ri.has_src1() && ri.src1_reg() > opt_max) opt_max = ri.src1_reg();
-                        if (ri.has_src2() && ri.src2_reg() > opt_max) opt_max = ri.src2_reg();
+                        if (ri.has_dst() && ri.dst_reg() > opt_max)
+                            opt_max = ri.dst_reg();
+                        if (ri.has_src1() && ri.src1_reg() > opt_max)
+                            opt_max = ri.src1_reg();
+                        if (ri.has_src2() && ri.src2_reg() > opt_max)
+                            opt_max = ri.src2_reg();
                     }
                     opt_max = std::max(opt_max + 1, static_cast<uint32_t>(kGprCount));
                     if (opt_max > vreg_types_.size())
@@ -4696,9 +4727,12 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
                 {
                     uint32_t max_vreg = kGprCount - 1;
                     for (const auto& ri : opt_instrs) {
-                        if (ri.has_dst() && ri.dst_reg() > max_vreg) max_vreg = ri.dst_reg();
-                        if (ri.has_src1() && ri.src1_reg() > max_vreg) max_vreg = ri.src1_reg();
-                        if (ri.has_src2() && ri.src2_reg() > max_vreg) max_vreg = ri.src2_reg();
+                        if (ri.has_dst() && ri.dst_reg() > max_vreg)
+                            max_vreg = ri.dst_reg();
+                        if (ri.has_src1() && ri.src1_reg() > max_vreg)
+                            max_vreg = ri.src1_reg();
+                        if (ri.has_src2() && ri.src2_reg() > max_vreg)
+                            max_vreg = ri.src2_reg();
                     }
                     uint32_t gpr_bytes = static_cast<uint32_t>(max_vreg + 1) * 8;
                     if (gpr_bytes > kFrameSize)
@@ -4842,9 +4876,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         if (!removed_mask.empty() && removed_mask[i])
             continue;
         {
-            fprintf(stderr, "[DBG]   E[%u] op=%u dst=%u src1=%u src2=%u\n",
-                i, (unsigned)instr.op_code(), (unsigned)instr.dst_reg(),
-                (unsigned)instr.src1_reg(), (unsigned)instr.src2_reg());
+            fprintf(stderr, "[DBG]   E[%u] op=%u dst=%u src1=%u src2=%u\n", i, (unsigned)instr.op_code(),
+                    (unsigned)instr.dst_reg(), (unsigned)instr.src1_reg(), (unsigned)instr.src2_reg());
         }
         if (!EmitInstruction(instr)) {
             CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "Compile: unsupported opcode {} at pc={}, emitting deopt",
@@ -4895,8 +4928,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         enc_.EmitMovUPRM(callee_xmm_regs_[si], AT::kStackReg, off);
     }
 #if defined(__aarch64__)
-    enc_.EmitAddRI(AT::kStackReg,
-                   static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
+    enc_.EmitAddRI(AT::kStackReg, static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ +
+                                                       xmm_save_size_ + localloc_extra_));
     for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
         EmitLdp64Post(buf_, callee_saved_regs_[slot - 1], 0, kARM64_SP,
                       16);                                 // LDP Xreg, X0, [SP], #16 (X0=scratch, never XZR)
@@ -4904,8 +4937,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     EmitLdp64Post(buf_, AT::kFrameReg, 30, kARM64_SP, 16); // LDP X29, X30, [SP], #16
     enc_.EmitRet();
 #else
-    enc_.EmitAddRI(AT::kStackReg,
-                   static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
+    enc_.EmitAddRI(AT::kStackReg, static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ +
+                                                       xmm_save_size_ + localloc_extra_));
     for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
         enc_.EmitPop(callee_saved_regs_[slot - 1]);
     enc_.EmitPop(kRDI);
@@ -5064,12 +5097,13 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
                 enc_.EmitPush(callee_saved_regs_[slot]);
 #endif
-            enc_.EmitSubRI(AT::kStackReg,
-                           static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
+            enc_.EmitSubRI(AT::kStackReg, static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ +
+                                                               xmm_save_size_ + localloc_extra_));
             // Zero the localloc bump pointer for OSR entry
             if (localloc_extra_ > 0) {
                 enc_.EmitXorRR(AT::kScratchA, AT::kScratchA);
-                enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_),
+                enc_.EmitMovMR(AT::kStackReg,
+                               static_cast<int32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_),
                                AT::kScratchA);
             }
             // using rep movsq (RSI=source, RDI=dest, RCX=count)
@@ -5389,7 +5423,10 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         // + num_gc_slots stack-slot encodings + num_live_regs register encodings).
         auto popcount = [](uint32_t m) noexcept {
             uint32_t n = 0;
-            while (m) { n += (m & 1u); m >>= 1; }
+            while (m) {
+                n += (m & 1u);
+                m >>= 1;
+            }
             return n;
         };
         uint32_t total = sizeof(GcPointMapV0);
@@ -5438,8 +5475,9 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         }
     }
 
-    nm->rbp_to_rsp_offset = 16 + num_cache_regs_ * 8 +
-                            static_cast<uint32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + localloc_extra_);
+    nm->rbp_to_rsp_offset =
+        16 + num_cache_regs_ * 8 +
+        static_cast<uint32_t>(kFrameSize + frame_size_extra_ + frame_align_adj_ + xmm_save_size_ + localloc_extra_);
 
     // ── Allocate Win64 RUNTIME_FUNCTION for .pdata registration ─────────
 #if defined(_WIN64)

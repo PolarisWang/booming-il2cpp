@@ -24,16 +24,20 @@ void DumpProfilerToFile(const char* path) noexcept {
     }
     // Collect and sort entries (same logic as DumpAll but to file)
     uint32_t count = 0;
-    struct Entry { uintptr_t key; uint64_t calls; uint64_t cycles; uint64_t gc_bytes; };
+    struct Entry {
+        uintptr_t key;
+        uint64_t calls;
+        uint64_t cycles;
+        uint64_t gc_bytes;
+    };
     Entry entries[kMaxProfiledMethods];
 
     for (uint32_t i = 0; i < kProfilerHashSize; ++i) {
         uintptr_t key = g_vm_profiler.slots[i].method_key.load(std::memory_order_acquire);
         if (key != 0) {
-            entries[count++] = { key,
-                g_vm_profiler.slots[i].call_count.load(std::memory_order_relaxed),
-                g_vm_profiler.slots[i].total_cycles.load(std::memory_order_relaxed),
-                g_vm_profiler.slots[i].gc_alloc_bytes.load(std::memory_order_relaxed) };
+            entries[count++] = {key, g_vm_profiler.slots[i].call_count.load(std::memory_order_relaxed),
+                                g_vm_profiler.slots[i].total_cycles.load(std::memory_order_relaxed),
+                                g_vm_profiler.slots[i].gc_alloc_bytes.load(std::memory_order_relaxed)};
         }
     }
 
@@ -49,15 +53,11 @@ void DumpProfilerToFile(const char* path) noexcept {
     }
 
     std::fprintf(fp, "── VM Profiler (top %u methods) ──\n", count);
-    std::fprintf(fp, "%-20s %12s %14s %14s\n",
-                 "Method", "Calls", "Cycles", "GC Bytes");
-    std::fprintf(fp, "%-20s %12s %14s %14s\n",
-                 "------", "-----", "------", "--------");
+    std::fprintf(fp, "%-20s %12s %14s %14s\n", "Method", "Calls", "Cycles", "GC Bytes");
+    std::fprintf(fp, "%-20s %12s %14s %14s\n", "------", "-----", "------", "--------");
     for (uint32_t i = 0; i < count; ++i) {
-        std::fprintf(fp, "0x%016llx %12llu %14llu %14llu\n",
-                     (unsigned long long)entries[i].key,
-                     (unsigned long long)entries[i].calls,
-                     (unsigned long long)entries[i].cycles,
+        std::fprintf(fp, "0x%016llx %12llu %14llu %14llu\n", (unsigned long long)entries[i].key,
+                     (unsigned long long)entries[i].calls, (unsigned long long)entries[i].cycles,
                      (unsigned long long)entries[i].gc_bytes);
     }
 
@@ -69,4 +69,4 @@ void ResetProfiler() noexcept {
     g_vm_profiler.Reset();
 }
 
-}  // namespace chaos::il2cpp::interpreter
+} // namespace chaos::il2cpp::interpreter

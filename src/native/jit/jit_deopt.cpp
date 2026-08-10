@@ -8,7 +8,7 @@
 #include <cstring>
 
 #if defined(_MSC_VER)
-#include <intrin.h>  // _AddressOfReturnAddress()
+#include <intrin.h> // _AddressOfReturnAddress()
 #else
 #include <cstdint>
 // GCC/Clang: _AddressOfReturnAddress() via __builtin_return_address
@@ -22,10 +22,7 @@ uint64_t DeoptRuntime::ReadSpillSlot(uint64_t codegen_rsp, int16_t spill_offset)
     return *addr;
 }
 
-const DeoptEntry* DeoptRuntime::FindEntry(
-    const JitMethod* nm,
-    uint32_t native_offset) noexcept {
-
+const DeoptEntry* DeoptRuntime::FindEntry(const JitMethod* nm, uint32_t native_offset) noexcept {
     if (nm == nullptr || nm->deopt_entries == nullptr || nm->deopt_entry_count == 0) {
         return nullptr;
     }
@@ -50,16 +47,11 @@ const DeoptEntry* DeoptRuntime::FindEntry(
     return nullptr;
 }
 
-void DeoptRuntime::ReconstructRegisterFile(
-    uint64_t* out_regs,
-    double*   fpr_file,
-    uint8_t*  gpr_tags,
-    uint8_t*  fpr_tags,
-    const NativeContext& ctx,
-    const DeoptEntry& entry,
-    const DeoptValue* values) noexcept {
-
-    if (out_regs == nullptr || fpr_file == nullptr || values == nullptr) return;
+void DeoptRuntime::ReconstructRegisterFile(uint64_t* out_regs, double* fpr_file, uint8_t* gpr_tags, uint8_t* fpr_tags,
+                                           const NativeContext& ctx, const DeoptEntry& entry,
+                                           const DeoptValue* values) noexcept {
+    if (out_regs == nullptr || fpr_file == nullptr || values == nullptr)
+        return;
 
     for (uint32_t i = 0; i < entry.num_values; ++i) {
         const auto& v = values[entry.values_offset + i];
@@ -86,18 +78,11 @@ void DeoptRuntime::ReconstructRegisterFile(
     }
 }
 
-void DeoptRuntime::DeoptTrap(
-    JitMethod* nm,
-    uint32_t      return_address,
-    NativeContext ctx,
-    uint64_t      codegen_rsp,
-    uint64_t*     out_gpr_file,
-    double*       out_fpr_file,
-    uint8_t*      out_gpr_tags,
-    uint8_t*      out_fpr_tags) noexcept {
-
-    CHAOS_IL2CPP_LOG_DEBUG_M("deopt", "DeoptTrap entered: nm=%p, ret_addr=0x%x",
-                              static_cast<void*>(nm), return_address);
+void DeoptRuntime::DeoptTrap(JitMethod* nm, uint32_t return_address, NativeContext ctx, uint64_t codegen_rsp,
+                             uint64_t* out_gpr_file, double* out_fpr_file, uint8_t* out_gpr_tags,
+                             uint8_t* out_fpr_tags) noexcept {
+    CHAOS_IL2CPP_LOG_DEBUG_M("deopt", "DeoptTrap entered: nm=%p, ret_addr=0x%x", static_cast<void*>(nm),
+                             return_address);
 
     if (codegen_rsp == 0) {
         void* ret_addr_loc = _AddressOfReturnAddress();
@@ -106,39 +91,31 @@ void DeoptRuntime::DeoptTrap(
 
     if (out_gpr_file != nullptr) {
         for (uint32_t vr = 0; vr < 64; ++vr) {
-            out_gpr_file[vr] = ReadSpillSlot(codegen_rsp,
-                static_cast<int16_t>(32 + static_cast<int32_t>(vr * 8)));
+            out_gpr_file[vr] = ReadSpillSlot(codegen_rsp, static_cast<int16_t>(32 + static_cast<int32_t>(vr * 8)));
         }
     }
 
     if (out_fpr_file != nullptr) {
         for (uint32_t vr = 0; vr < 32; ++vr) {
-            out_fpr_file[vr] = *reinterpret_cast<const double*>(
-                codegen_rsp + 544 + vr * 8);
+            out_fpr_file[vr] = *reinterpret_cast<const double*>(codegen_rsp + 544 + vr * 8);
         }
     }
 
     auto* entry = FindEntry(nm, return_address);
     if (entry == nullptr) {
-        CHAOS_IL2CPP_LOG_ERROR_M("deopt",
-            "DeoptTrap: no deopt entry for ret_addr=0x%x, entry_count=%u",
-            return_address, nm ? nm->deopt_entry_count : 0);
+        CHAOS_IL2CPP_LOG_ERROR_M("deopt", "DeoptTrap: no deopt entry for ret_addr=0x%x, entry_count=%u", return_address,
+                                 nm ? nm->deopt_entry_count : 0);
         return;
     }
 
-    ReconstructRegisterFile(out_gpr_file ? out_gpr_file : nullptr,
-                            out_fpr_file ? out_fpr_file : nullptr,
-                            out_gpr_tags,
-                            out_fpr_tags,
-                            ctx, *entry, nm->deopt_values);
+    ReconstructRegisterFile(out_gpr_file ? out_gpr_file : nullptr, out_fpr_file ? out_fpr_file : nullptr, out_gpr_tags,
+                            out_fpr_tags, ctx, *entry, nm->deopt_values);
 
-    CHAOS_IL2CPP_LOG_DEBUG_M("deopt",
-        "DeoptTrap: reconstructed register file at pc=%d, %u values",
-        entry->instr_pc, entry->num_values);
+    CHAOS_IL2CPP_LOG_DEBUG_M("deopt", "DeoptTrap: reconstructed register file at pc=%d, %u values", entry->instr_pc,
+                             entry->num_values);
 
-    CHAOS_IL2CPP_LOG_DEBUG_M("deopt",
-        "DeoptTrap: deoptimization at pc=%d complete, returning to interpreter",
-        entry->instr_pc);
+    CHAOS_IL2CPP_LOG_DEBUG_M("deopt", "DeoptTrap: deoptimization at pc=%d complete, returning to interpreter",
+                             entry->instr_pc);
 }
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit

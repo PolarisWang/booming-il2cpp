@@ -1,15 +1,15 @@
 // ir_reg_alloc.cpp — Convert stack-based IR to register-based IR + register execution
 #include "ir_reg_alloc.h"
 
-#include "patch_loader.h"  // PatchMethod, PicDispatchChain, g_patch_generation
+#include "patch_loader.h" // PatchMethod, PicDispatchChain, g_patch_generation
 
-#include "instantiation_engine.h"  // runtime-core: CachedCallInfo, InterpreterDispatchRaw
-#include <thread_state.h>  // SafepointPoll (for cfg.safepoint_fn assignment)
+#include "instantiation_engine.h" // runtime-core: CachedCallInfo, InterpreterDispatchRaw
+#include <thread_state.h>         // SafepointPoll (for cfg.safepoint_fn assignment)
 namespace ri = chaos::il2cpp::runtime_instantiation;
 
-#include "jit_engine.h"  // Compile, JitMethod, CompileConfig
-#include "jit_seh.h"  // RegisterNativeCodeSection, FindNativeCodeByAddress
-#include "../jit/jit_helpers.h"  // CodegenLdVirtFtn
+#include "jit_engine.h"         // Compile, JitMethod, CompileConfig
+#include "jit_seh.h"            // RegisterNativeCodeSection, FindNativeCodeByAddress
+#include "../jit/jit_helpers.h" // CodegenLdVirtFtn
 
 #include <chaos/profile.h>
 #include <chaos/log.h>
@@ -44,8 +44,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
     uint32_t catch_entry_count = 0;
     for (size_t ci = 0; ci < ir_method.seh_clauses.size() && catch_entry_count < 16; ++ci) {
         auto flags = static_cast<uint32_t>(ir_method.seh_clauses[ci].flags);
-        if (flags == static_cast<uint32_t>(SEHFlags::Exception) ||
-            flags == static_cast<uint32_t>(SEHFlags::Filter)) {
+        if (flags == static_cast<uint32_t>(SEHFlags::Exception) || flags == static_cast<uint32_t>(SEHFlags::Filter)) {
             catch_entry_pc[catch_entry_count++] = static_cast<uint32_t>(ir_method.seh_clauses[ci].handler_start_idx);
         }
     }
@@ -54,7 +53,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
     // Fixed-size array avoids heap allocation from std::vector.
     uint32_t virt_stack[256];
     uint32_t virt_sp = 0;
-    uint32_t next_vreg = 16;  // first free virtual register
+    uint32_t next_vreg = 16; // first free virtual register
 
     const auto& instrs = ir_method.instructions;
     result.instructions.reserve(instrs.size());
@@ -75,16 +74,15 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
                         break;
                     }
                 }
-                result.catch_handler_entries.push_back(
-                    {static_cast<uint32_t>(i), exc_reg, ct});
+                result.catch_handler_entries.push_back({static_cast<uint32_t>(i), exc_reg, ct});
                 break;
             }
         }
 
         // ── Snapshot virtual stack state for RegStackMap ─────────────────
         RegStackMapEntry map_entry;
-        map_entry.stack_depth = static_cast<uint8_t>(
-            virt_sp > RegStackMapEntry::kMaxSlots ? RegStackMapEntry::kMaxSlots : virt_sp);
+        map_entry.stack_depth =
+            static_cast<uint8_t>(virt_sp > RegStackMapEntry::kMaxSlots ? RegStackMapEntry::kMaxSlots : virt_sp);
         for (uint32_t si = 0; si < map_entry.stack_depth; ++si) {
             map_entry.slot_regs[si] = static_cast<int8_t>(virt_stack[si]);
         }
@@ -116,466 +114,590 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         uint32_t calli_func_ptr_vreg = 0;
 
         switch (ir.op_code) {
-        // ── No operands: just use virt_stack ──────────────────────────
+            // ── No operands: just use virt_stack ──────────────────────────
 
-        // ── Binary ops: pop 2, push 1 (Add, Sub, Mul, Div, Rem, etc.) ──
-        case IROpCode::Add: case IROpCode::Sub: case IROpCode::Mul:
-        case IROpCode::Div: case IROpCode::Rem:
-        case IROpCode::DivUn: case IROpCode::RemUn:
-        case IROpCode::And: case IROpCode::Or: case IROpCode::Xor:
-        case IROpCode::Shl: case IROpCode::Shr: case IROpCode::ShrUn:
-        case IROpCode::AddOvf: case IROpCode::SubOvf: case IROpCode::MulOvf:
-        case IROpCode::Ceq: case IROpCode::Clt: case IROpCode::Cgt:
-        case IROpCode::LdElem:    // array[index]
-        case IROpCode::LdElemA:   // same as LdElem in interpreter (loads element value)
-        case IROpCode::LdElemNoChk:
-        case IROpCode::LdElemANoChk:
-        case IROpCode::Abs: case IROpCode::Min: case IROpCode::Max:
-        {
-            // Pop src2, src1
-            if (virt_sp >= 2) {
-                src2_reg = virt_stack[--virt_sp];
-                src1_reg = virt_stack[--virt_sp];
+            // ── Binary ops: pop 2, push 1 (Add, Sub, Mul, Div, Rem, etc.) ──
+            case IROpCode::Add:
+            case IROpCode::Sub:
+            case IROpCode::Mul:
+            case IROpCode::Div:
+            case IROpCode::Rem:
+            case IROpCode::DivUn:
+            case IROpCode::RemUn:
+            case IROpCode::And:
+            case IROpCode::Or:
+            case IROpCode::Xor:
+            case IROpCode::Shl:
+            case IROpCode::Shr:
+            case IROpCode::ShrUn:
+            case IROpCode::AddOvf:
+            case IROpCode::SubOvf:
+            case IROpCode::MulOvf:
+            case IROpCode::Ceq:
+            case IROpCode::Clt:
+            case IROpCode::Cgt:
+            case IROpCode::LdElem:  // array[index]
+            case IROpCode::LdElemA: // same as LdElem in interpreter (loads element value)
+            case IROpCode::LdElemNoChk:
+            case IROpCode::LdElemANoChk:
+            case IROpCode::Abs:
+            case IROpCode::Min:
+            case IROpCode::Max: {
+                // Pop src2, src1
+                if (virt_sp >= 2) {
+                    src2_reg = virt_stack[--virt_sp];
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                // Push dst
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                has_src1 = true;
+                has_src2 = true;
+                break;
             }
-            // Push dst
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true; has_src1 = true; has_src2 = true;
-            break;
-        }
 
-        // ── Unary ops: pop 1, push 1 (Neg, Not, Conv_*) ──────────────
-        case IROpCode::Neg: case IROpCode::Not:
-        case IROpCode::Popcnt: case IROpCode::Lzcnt:
-        case IROpCode::Conv_I4: case IROpCode::Conv_I8:
-        case IROpCode::Conv_R4: case IROpCode::Conv_R8:
-        case IROpCode::ConvRUn: case IROpCode::ConvI: case IROpCode::ConvU:
-        case IROpCode::ConvOvfI: case IROpCode::ConvOvfI4: case IROpCode::ConvOvfI8:
-        case IROpCode::ConvOvfU: case IROpCode::ConvOvfU4: case IROpCode::ConvOvfU8:
-        case IROpCode::LdLen:
-        case IROpCode::LdInd:
-        case IROpCode::LdObj:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── Unary ops: pop 1, push 1 (Neg, Not, Conv_*) ──────────────
+            case IROpCode::Neg:
+            case IROpCode::Not:
+            case IROpCode::Popcnt:
+            case IROpCode::Lzcnt:
+            case IROpCode::Conv_I4:
+            case IROpCode::Conv_I8:
+            case IROpCode::Conv_R4:
+            case IROpCode::Conv_R8:
+            case IROpCode::ConvRUn:
+            case IROpCode::ConvI:
+            case IROpCode::ConvU:
+            case IROpCode::ConvOvfI:
+            case IROpCode::ConvOvfI4:
+            case IROpCode::ConvOvfI8:
+            case IROpCode::ConvOvfU:
+            case IROpCode::ConvOvfU4:
+            case IROpCode::ConvOvfU8:
+            case IROpCode::LdLen:
+            case IROpCode::LdInd:
+            case IROpCode::LdObj: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                has_src1 = true;
+                break;
             }
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true; has_src1 = true;
-            break;
-        }
 
-        // ── Dup: copy from virt_stack top ──
-        case IROpCode::Dup:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[virt_sp - 1];
+            // ── Dup: copy from virt_stack top ──
+            case IROpCode::Dup: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[virt_sp - 1];
+                }
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                has_src1 = true;
+                break;
             }
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true; has_src1 = true;
-            break;
-        }
 
-        // ── LdcI4/8/R4/R8: push constant ──
-        case IROpCode::LdcI4: case IROpCode::LdcI8:
-        case IROpCode::LdcR4: case IROpCode::LdcR8:
-        {
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true;
-            break;
-        }
+            // ── LdcI4/8/R4/R8: push constant ──
+            case IROpCode::LdcI4:
+            case IROpCode::LdcI8:
+            case IROpCode::LdcR4:
+            case IROpCode::LdcR8: {
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                break;
+            }
 
-        // ── LdNull/LdStr/LdToken/LdFtn/SizeOf: push value ──
-        case IROpCode::LdNull: case IROpCode::LdStr:
-        case IROpCode::LdToken: case IROpCode::LdFtn:
-        case IROpCode::SizeOf:
-        case IROpCode::LdArgA: case IROpCode::LdLocA:
-        {
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true;
-            break;
-        }
+            // ── LdNull/LdStr/LdToken/LdFtn/SizeOf: push value ──
+            case IROpCode::LdNull:
+            case IROpCode::LdStr:
+            case IROpCode::LdToken:
+            case IROpCode::LdFtn:
+            case IROpCode::SizeOf:
+            case IROpCode::LdArgA:
+            case IROpCode::LdLocA: {
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                break;
+            }
 
-        // ── LdArg/LdLoc: push from arg/local ──
-        case IROpCode::LdArg:
-        {
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true;
-            break;
-        }
-        case IROpCode::LdLoc:
-        {
-            // Read from local's dedicated register r8+N
-            src1_reg = static_cast<uint8_t>(8u + static_cast<uint32_t>(ir.operand_index));
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true; has_src1 = true;
-            break;
-        }
+            // ── LdArg/LdLoc: push from arg/local ──
+            case IROpCode::LdArg: {
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                break;
+            }
+            case IROpCode::LdLoc: {
+                // Read from local's dedicated register r8+N
+                src1_reg = static_cast<uint8_t>(8u + static_cast<uint32_t>(ir.operand_index));
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                has_src1 = true;
+                break;
+            }
 
-        // ── StLoc: pop value, write to local's dedicated register ──
-        case IROpCode::StLoc:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── StLoc: pop value, write to local's dedicated register ──
+            case IROpCode::StLoc: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                // Write to local's dedicated register r8+N
+                dst_reg = static_cast<uint8_t>(8u + static_cast<uint32_t>(ir.operand_index));
+                has_src1 = true;
+                has_dst = true;
+                break;
             }
-            // Write to local's dedicated register r8+N
-            dst_reg = static_cast<uint8_t>(8u + static_cast<uint32_t>(ir.operand_index));
-            has_src1 = true; has_dst = true;
-            break;
-        }
 
-        // ── StArg: pop value only, no dst ──
-        case IROpCode::StArg:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── StArg: pop value only, no dst ──
+            case IROpCode::StArg: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                has_src1 = true;
+                break;
             }
-            has_src1 = true;
-            break;
-        }
 
-        // ── LdFld: pop obj, push field ──
-        case IROpCode::LdFld:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── LdFld: pop obj, push field ──
+            case IROpCode::LdFld: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                has_src1 = true;
+                break;
             }
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true; has_src1 = true;
-            break;
-        }
 
-        // ── StFld: pop value, pop obj ──
-        case IROpCode::StFld: case IROpCode::StFldBarrier:
-        {
-            if (virt_sp >= 1) {
-                src1_reg = virt_stack[--virt_sp];  // value (top)
+            // ── StFld: pop value, pop obj ──
+            case IROpCode::StFld:
+            case IROpCode::StFldBarrier: {
+                if (virt_sp >= 1) {
+                    src1_reg = virt_stack[--virt_sp]; // value (top)
+                }
+                if (virt_sp >= 1) {
+                    src2_reg = virt_stack[--virt_sp]; // obj (second)
+                }
+                has_src1 = true;
+                has_src2 = true;
+                break;
             }
-            if (virt_sp >= 1) {
-                src2_reg = virt_stack[--virt_sp];  // obj (second)
-            }
-            has_src1 = true;
-            has_src2 = true;
-            break;
-        }
 
-        // ── LdSFld: push static field ──
-        case IROpCode::LdSFld:
-        {
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true;
-            break;
-        }
+            // ── LdSFld: push static field ──
+            case IROpCode::LdSFld: {
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                break;
+            }
 
-        // ── StSFld: pop value ──
-        case IROpCode::StSFld:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── StSFld: pop value ──
+            case IROpCode::StSFld: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                has_src1 = true;
+                break;
             }
-            has_src1 = true;
-            break;
-        }
 
-        // ── Call/CallVirt/CallBridge/CallVirtConstrained: pop args, push ret ──
-        case IROpCode::Call: case IROpCode::CallVirt:
-        case IROpCode::CallBridge: case IROpCode::CallVirtConstrained:
-        {
-            uint32_t ac = ir.arg_count;
-            // Record arg0 register (args are in consecutive registers from arg0)
-            if (ac > 0 && virt_sp >= ac) {
-                src1_reg = virt_stack[virt_sp - ac];
+            // ── Call/CallVirt/CallBridge/CallVirtConstrained: pop args, push ret ──
+            case IROpCode::Call:
+            case IROpCode::CallVirt:
+            case IROpCode::CallBridge:
+            case IROpCode::CallVirtConstrained: {
+                uint32_t ac = ir.arg_count;
+                // Record arg0 register (args are in consecutive registers from arg0)
+                if (ac > 0 && virt_sp >= ac) {
+                    src1_reg = virt_stack[virt_sp - ac];
+                }
+                // Pop args in reverse: args[ac-1] .. args[0]
+                for (uint32_t ai = 0; ai < ac && !virt_sp == 0; ++ai) {
+                    --virt_sp;
+                }
+                // Push return value
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                if (ac > 0)
+                    has_src1 = true;
+                break;
             }
-            // Pop args in reverse: args[ac-1] .. args[0]
-            for (uint32_t ai = 0; ai < ac && !virt_sp == 0; ++ai) {
-                --virt_sp;
-            }
-            // Push return value
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true;
-            if (ac > 0) has_src1 = true;
-            break;
-        }
 
-        // ── Calli: pop func_ptr + args, push ret ──
-        // IL stack layout: ..., arg0, arg1, ..., argN, func_ptr
-        case IROpCode::Calli:
-        {
-            uint32_t ac = ir.arg_count;
-            // Pop func_ptr from top of stack
-            if (!virt_sp == 0) {
-                calli_func_ptr_vreg = virt_stack[--virt_sp];
+            // ── Calli: pop func_ptr + args, push ret ──
+            // IL stack layout: ..., arg0, arg1, ..., argN, func_ptr
+            case IROpCode::Calli: {
+                uint32_t ac = ir.arg_count;
+                // Pop func_ptr from top of stack
+                if (!virt_sp == 0) {
+                    calli_func_ptr_vreg = virt_stack[--virt_sp];
+                }
+                // Record first arg register (args are just below func_ptr on stack)
+                if (ac > 0 && virt_sp >= ac) {
+                    src1_reg = virt_stack[virt_sp - ac];
+                }
+                // Pop ac args
+                for (uint32_t ai = 0; ai < ac && !virt_sp == 0; ++ai) {
+                    --virt_sp;
+                }
+                // Push return value
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                if (ac > 0)
+                    has_src1 = true;
+                break;
             }
-            // Record first arg register (args are just below func_ptr on stack)
-            if (ac > 0 && virt_sp >= ac) {
-                src1_reg = virt_stack[virt_sp - ac];
-            }
-            // Pop ac args
-            for (uint32_t ai = 0; ai < ac && !virt_sp == 0; ++ai) {
-                --virt_sp;
-            }
-            // Push return value
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true;
-            if (ac > 0) has_src1 = true;
-            break;
-        }
 
-        // ── NewObj: pop ctor args, push obj ref ──
-        case IROpCode::NewObj:
-        {
-            uint32_t ac = ir.arg_count;
-            for (uint32_t ai = 0; ai < ac && !virt_sp == 0; ++ai) {
-                --virt_sp;
+            // ── NewObj: pop ctor args, push obj ref ──
+            case IROpCode::NewObj: {
+                uint32_t ac = ir.arg_count;
+                for (uint32_t ai = 0; ai < ac && !virt_sp == 0; ++ai) {
+                    --virt_sp;
+                }
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                break;
             }
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true;
-            break;
-        }
 
-        // ── Box: pop value, push obj ──
-        case IROpCode::Box:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── Box: pop value, push obj ──
+            case IROpCode::Box: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                has_src1 = true;
+                break;
             }
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true; has_src1 = true;
-            break;
-        }
 
-        // ── Unbox/CastClass/IsInst: pop obj, push result ──
-        case IROpCode::Unbox: case IROpCode::CastClass: case IROpCode::IsInst:
-        case IROpCode::LdVirtFtn:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── Unbox/CastClass/IsInst: pop obj, push result ──
+            case IROpCode::Unbox:
+            case IROpCode::CastClass:
+            case IROpCode::IsInst:
+            case IROpCode::LdVirtFtn: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                has_src1 = true;
+                break;
             }
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true; has_src1 = true;
-            break;
-        }
 
-        // ── NewArr: pop length, push array ref ──
-        case IROpCode::NewArr:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── NewArr: pop length, push array ref ──
+            case IROpCode::NewArr: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                has_src1 = true;
+                break;
             }
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true; has_src1 = true;
-            break;
-        }
 
-        // ── StElem: pop value, pop index, pop array ──
-        case IROpCode::StElem: case IROpCode::StElemNoChk:
-        {
-            if (virt_sp >= 1) {
-                src1_reg = virt_stack[--virt_sp];  // value (top)
+            // ── StElem: pop value, pop index, pop array ──
+            case IROpCode::StElem:
+            case IROpCode::StElemNoChk: {
+                if (virt_sp >= 1) {
+                    src1_reg = virt_stack[--virt_sp]; // value (top)
+                }
+                if (virt_sp >= 1) {
+                    src2_reg = virt_stack[--virt_sp]; // index
+                }
+                if (virt_sp >= 1) {
+                    src3_reg = virt_stack[--virt_sp]; // array
+                }
+                has_src1 = true;
+                has_src2 = true;
+                has_src3 = true;
+                break;
             }
-            if (virt_sp >= 1) {
-                src2_reg = virt_stack[--virt_sp];  // index
-            }
-            if (virt_sp >= 1) {
-                src3_reg = virt_stack[--virt_sp];  // array
-            }
-            has_src1 = true;
-            has_src2 = true;
-            has_src3 = true;
-            break;
-        }
 
-        // ── Pop: discard ──
-        case IROpCode::Pop:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── Pop: discard ──
+            case IROpCode::Pop: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                has_src1 = true;
+                break;
             }
-            has_src1 = true;
-            break;
-        }
 
-        // ── Throw/EndFilter/InitObj/StObj: pop value, no dst ──
-        case IROpCode::Throw: case IROpCode::EndFilter:
-        case IROpCode::InitObj:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── Throw/EndFilter/InitObj/StObj: pop value, no dst ──
+            case IROpCode::Throw:
+            case IROpCode::EndFilter:
+            case IROpCode::InitObj: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                has_src1 = true;
+                break;
             }
-            has_src1 = true;
-            break;
-        }
 
-        // ── StObj: pop value, pop ptr ──
-        case IROpCode::StObj:
-        {
-            if (!virt_sp == 0) --virt_sp;  // value
-            if (!virt_sp == 0) --virt_sp;  // ptr
-            has_src1 = true;
-            break;
-        }
-
-        // ── StInd: pop value, pop addr ──
-        case IROpCode::StInd:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];  // value (top of stack)
+            // ── StObj: pop value, pop ptr ──
+            case IROpCode::StObj: {
+                if (!virt_sp == 0)
+                    --virt_sp; // value
+                if (!virt_sp == 0)
+                    --virt_sp; // ptr
+                has_src1 = true;
+                break;
             }
-            if (!virt_sp == 0) {
-                src2_reg = virt_stack[--virt_sp];  // addr
-            }
-            has_src1 = true;
-            has_src2 = true;
-            break;
-        }
 
-        // ── Switch: pop index ──
-        case IROpCode::Switch:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── StInd: pop value, pop addr ──
+            case IROpCode::StInd: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp]; // value (top of stack)
+                }
+                if (!virt_sp == 0) {
+                    src2_reg = virt_stack[--virt_sp]; // addr
+                }
+                has_src1 = true;
+                has_src2 = true;
+                break;
             }
-            has_src1 = true;
-            break;
-        }
 
-        // ── LocAlloc: pop size, push ptr ──
-        case IROpCode::LocAlloc:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── Switch: pop index ──
+            case IROpCode::Switch: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                has_src1 = true;
+                break;
             }
-            dst_reg = next_vreg++; virt_stack[virt_sp++] = dst_reg;
-            has_dst = true; has_src1 = true;
-            break;
-        }
 
-        // ── BrTrue/BrFalse/BneUn/Beq/Blt/Bgt/Ble/Bge/BneUn/BgeUn/BgtUn/BleUn/BltUn: pop compare ──
-        case IROpCode::BrTrue: case IROpCode::BrFalse:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[--virt_sp];
+            // ── LocAlloc: pop size, push ptr ──
+            case IROpCode::LocAlloc: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                dst_reg = next_vreg++;
+                virt_stack[virt_sp++] = dst_reg;
+                has_dst = true;
+                has_src1 = true;
+                break;
             }
-            has_src1 = true;
-            break;
-        }
-        case IROpCode::Beq: case IROpCode::Blt: case IROpCode::Bgt:
-        case IROpCode::Ble: case IROpCode::Bge:
-        case IROpCode::BneUn: case IROpCode::BgeUn: case IROpCode::BgtUn:
-        case IROpCode::BleUn: case IROpCode::BltUn:
-        {
-            if (virt_sp >= 2) {
-                src2_reg = virt_stack[--virt_sp];
-                src1_reg = virt_stack[--virt_sp];
+
+            // ── BrTrue/BrFalse/BneUn/Beq/Blt/Bgt/Ble/Bge/BneUn/BgeUn/BgtUn/BleUn/BltUn: pop compare ──
+            case IROpCode::BrTrue:
+            case IROpCode::BrFalse: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                has_src1 = true;
+                break;
             }
-            has_src1 = true; has_src2 = true;
-            break;
-        }
-
-        // ── Cpblk: pop size, pop src, pop dst ═══ (memcpy to memory) ──
-        case IROpCode::Cpblk:
-        {
-            // Stack (bottom→top): dst, src, size
-            if (virt_sp >= 1) { src1_reg = virt_stack[--virt_sp]; }  // size (top)
-            if (virt_sp >= 1) { src2_reg = virt_stack[--virt_sp]; }  // src
-            if (virt_sp >= 1) { src3_reg = virt_stack[--virt_sp]; }  // dst
-            has_src1 = true; has_src2 = true; has_src3 = true;
-            break;
-        }
-        // ── InitBlk: pop size, pop value, pop addr ═══ (memset to memory) ──
-        case IROpCode::InitBlk:
-        {
-            // Stack (bottom→top): addr, value, size
-            if (virt_sp >= 1) { src1_reg = virt_stack[--virt_sp]; }  // size (top)
-            if (virt_sp >= 1) { src2_reg = virt_stack[--virt_sp]; }  // value
-            if (virt_sp >= 1) { src3_reg = virt_stack[--virt_sp]; }  // addr
-            has_src1 = true; has_src2 = true; has_src3 = true;
-            break;
-        }
-
-        // ── Ret: read return value ──
-        case IROpCode::Ret:
-        {
-            if (!virt_sp == 0) {
-                src1_reg = virt_stack[virt_sp - 1];  // don't pop — keep for callee
+            case IROpCode::Beq:
+            case IROpCode::Blt:
+            case IROpCode::Bgt:
+            case IROpCode::Ble:
+            case IROpCode::Bge:
+            case IROpCode::BneUn:
+            case IROpCode::BgeUn:
+            case IROpCode::BgtUn:
+            case IROpCode::BleUn:
+            case IROpCode::BltUn: {
+                if (virt_sp >= 2) {
+                    src2_reg = virt_stack[--virt_sp];
+                    src1_reg = virt_stack[--virt_sp];
+                }
+                has_src1 = true;
+                has_src2 = true;
+                break;
             }
-            has_src1 = true;
-            break;
-        }
 
-        // ── No-stack opcodes ──
-        case IROpCode::Br: case IROpCode::Leave:
-        case IROpCode::Rethrow: case IROpCode::EndFinally:
-        case IROpCode::Break:
-        default:
-            break;
+            // ── Cpblk: pop size, pop src, pop dst ═══ (memcpy to memory) ──
+            case IROpCode::Cpblk: {
+                // Stack (bottom→top): dst, src, size
+                if (virt_sp >= 1) {
+                    src1_reg = virt_stack[--virt_sp];
+                } // size (top)
+                if (virt_sp >= 1) {
+                    src2_reg = virt_stack[--virt_sp];
+                } // src
+                if (virt_sp >= 1) {
+                    src3_reg = virt_stack[--virt_sp];
+                } // dst
+                has_src1 = true;
+                has_src2 = true;
+                has_src3 = true;
+                break;
+            }
+            // ── InitBlk: pop size, pop value, pop addr ═══ (memset to memory) ──
+            case IROpCode::InitBlk: {
+                // Stack (bottom→top): addr, value, size
+                if (virt_sp >= 1) {
+                    src1_reg = virt_stack[--virt_sp];
+                } // size (top)
+                if (virt_sp >= 1) {
+                    src2_reg = virt_stack[--virt_sp];
+                } // value
+                if (virt_sp >= 1) {
+                    src3_reg = virt_stack[--virt_sp];
+                } // addr
+                has_src1 = true;
+                has_src2 = true;
+                has_src3 = true;
+                break;
+            }
+
+            // ── Ret: read return value ──
+            case IROpCode::Ret: {
+                if (!virt_sp == 0) {
+                    src1_reg = virt_stack[virt_sp - 1]; // don't pop — keep for callee
+                }
+                has_src1 = true;
+                break;
+            }
+
+            // ── No-stack opcodes ──
+            case IROpCode::Br:
+            case IROpCode::Leave:
+            case IROpCode::Rethrow:
+            case IROpCode::EndFinally:
+            case IROpCode::Break:
+            default:
+                break;
         }
 
         // ── Build RegisterInstruction header ───────────────────────────
         uint8_t flags = 0;
-        if (has_dst)  flags |= kRegHasDst;
-        if (has_src1) flags |= kRegHasSrc1;
-        if (has_src2) flags |= kRegHasSrc2;
-        if (has_src3) flags |= kRegHasSrc3;
+        if (has_dst)
+            flags |= kRegHasDst;
+        if (has_src1)
+            flags |= kRegHasSrc1;
+        if (has_src2)
+            flags |= kRegHasSrc2;
+        if (has_src3)
+            flags |= kRegHasSrc3;
 
         // Check for call-like, branch, store opcodes
         switch (ir.op_code) {
-        case IROpCode::Call: case IROpCode::CallVirt:
-        case IROpCode::CallBridge: case IROpCode::CallVirtConstrained:
-        case IROpCode::Calli:
-        case IROpCode::NewObj: case IROpCode::Box:
-            flags |= kRegHasImm | kRegIsCall;
-            break;
-        case IROpCode::Br: case IROpCode::BrTrue: case IROpCode::BrFalse:
-        case IROpCode::Beq: case IROpCode::Blt: case IROpCode::Bgt:
-        case IROpCode::Ble: case IROpCode::Bge: case IROpCode::Leave:
-        case IROpCode::BneUn: case IROpCode::BgeUn: case IROpCode::BgtUn:
-        case IROpCode::BleUn: case IROpCode::BltUn:
-        case IROpCode::Switch:
-            flags |= kRegIsBranch;
-            break;
-        case IROpCode::StFld: case IROpCode::StSFld: case IROpCode::StFldBarrier:
-        case IROpCode::StLoc: case IROpCode::StArg:
-        case IROpCode::StElem: case IROpCode::StElemNoChk: case IROpCode::StInd: case IROpCode::StObj:
-        case IROpCode::InitObj: case IROpCode::Cpblk: case IROpCode::InitBlk:
-            flags |= kRegIsStore;
-            break;
-        default:
-            break;
+            case IROpCode::Call:
+            case IROpCode::CallVirt:
+            case IROpCode::CallBridge:
+            case IROpCode::CallVirtConstrained:
+            case IROpCode::Calli:
+            case IROpCode::NewObj:
+            case IROpCode::Box:
+                flags |= kRegHasImm | kRegIsCall;
+                break;
+            case IROpCode::Br:
+            case IROpCode::BrTrue:
+            case IROpCode::BrFalse:
+            case IROpCode::Beq:
+            case IROpCode::Blt:
+            case IROpCode::Bgt:
+            case IROpCode::Ble:
+            case IROpCode::Bge:
+            case IROpCode::Leave:
+            case IROpCode::BneUn:
+            case IROpCode::BgeUn:
+            case IROpCode::BgtUn:
+            case IROpCode::BleUn:
+            case IROpCode::BltUn:
+            case IROpCode::Switch:
+                flags |= kRegIsBranch;
+                break;
+            case IROpCode::StFld:
+            case IROpCode::StSFld:
+            case IROpCode::StFldBarrier:
+            case IROpCode::StLoc:
+            case IROpCode::StArg:
+            case IROpCode::StElem:
+            case IROpCode::StElemNoChk:
+            case IROpCode::StInd:
+            case IROpCode::StObj:
+            case IROpCode::InitObj:
+            case IROpCode::Cpblk:
+            case IROpCode::InitBlk:
+                flags |= kRegIsStore;
+                break;
+            default:
+                break;
         }
 
         // Check if this opcode carries an immediate operand
         switch (ir.op_code) {
-        case IROpCode::LdcI4: case IROpCode::LdcI8: case IROpCode::LdcR4: case IROpCode::LdcR8:
-        case IROpCode::LdStr: case IROpCode::LdArg: case IROpCode::LdLoc: case IROpCode::StLoc:
-        case IROpCode::StArg: case IROpCode::NewObj: case IROpCode::Box: case IROpCode::Unbox:
-        case IROpCode::CastClass: case IROpCode::IsInst: case IROpCode::NewArr:
-        case IROpCode::LdToken: case IROpCode::InitObj: case IROpCode::SizeOf:
-        case IROpCode::LdFtn: case IROpCode::LdVirtFtn: case IROpCode::LdArgA:
-        case IROpCode::LdLocA: case IROpCode::LocAlloc:
-        case IROpCode::Call: case IROpCode::CallVirt: case IROpCode::CallBridge:
-        case IROpCode::CallVirtConstrained:
-        case IROpCode::LdFld: case IROpCode::StFld:
-        case IROpCode::LdSFld: case IROpCode::StSFld:
-        case IROpCode::LdInd: case IROpCode::StInd:
-        case IROpCode::Switch: case IROpCode::LdObj: case IROpCode::StObj:
-        case IROpCode::LdElem: case IROpCode::StElem: case IROpCode::LdElemA:
-        case IROpCode::LdElemNoChk: case IROpCode::StElemNoChk: case IROpCode::LdElemANoChk:
-        case IROpCode::Simd: case IROpCode::SimdFma:
-        case IROpCode::Popcnt: case IROpCode::Lzcnt:
-        case IROpCode::Br: case IROpCode::BrTrue: case IROpCode::BrFalse:
-        case IROpCode::Beq: case IROpCode::Blt: case IROpCode::Bgt:
-        case IROpCode::Ble: case IROpCode::Bge: case IROpCode::Leave:
-        case IROpCode::BneUn: case IROpCode::BgeUn: case IROpCode::BgtUn:
-        case IROpCode::BleUn: case IROpCode::BltUn:
-            flags |= kRegHasImm;
-            break;
-        default:
-            break;
+            case IROpCode::LdcI4:
+            case IROpCode::LdcI8:
+            case IROpCode::LdcR4:
+            case IROpCode::LdcR8:
+            case IROpCode::LdStr:
+            case IROpCode::LdArg:
+            case IROpCode::LdLoc:
+            case IROpCode::StLoc:
+            case IROpCode::StArg:
+            case IROpCode::NewObj:
+            case IROpCode::Box:
+            case IROpCode::Unbox:
+            case IROpCode::CastClass:
+            case IROpCode::IsInst:
+            case IROpCode::NewArr:
+            case IROpCode::LdToken:
+            case IROpCode::InitObj:
+            case IROpCode::SizeOf:
+            case IROpCode::LdFtn:
+            case IROpCode::LdVirtFtn:
+            case IROpCode::LdArgA:
+            case IROpCode::LdLocA:
+            case IROpCode::LocAlloc:
+            case IROpCode::Call:
+            case IROpCode::CallVirt:
+            case IROpCode::CallBridge:
+            case IROpCode::CallVirtConstrained:
+            case IROpCode::LdFld:
+            case IROpCode::StFld:
+            case IROpCode::LdSFld:
+            case IROpCode::StSFld:
+            case IROpCode::LdInd:
+            case IROpCode::StInd:
+            case IROpCode::Switch:
+            case IROpCode::LdObj:
+            case IROpCode::StObj:
+            case IROpCode::LdElem:
+            case IROpCode::StElem:
+            case IROpCode::LdElemA:
+            case IROpCode::LdElemNoChk:
+            case IROpCode::StElemNoChk:
+            case IROpCode::LdElemANoChk:
+            case IROpCode::Simd:
+            case IROpCode::SimdFma:
+            case IROpCode::Popcnt:
+            case IROpCode::Lzcnt:
+            case IROpCode::Br:
+            case IROpCode::BrTrue:
+            case IROpCode::BrFalse:
+            case IROpCode::Beq:
+            case IROpCode::Blt:
+            case IROpCode::Bgt:
+            case IROpCode::Ble:
+            case IROpCode::Bge:
+            case IROpCode::Leave:
+            case IROpCode::BneUn:
+            case IROpCode::BgeUn:
+            case IROpCode::BgtUn:
+            case IROpCode::BleUn:
+            case IROpCode::BltUn:
+                flags |= kRegHasImm;
+                break;
+            default:
+                break;
         }
 
-        header |= (static_cast<uint64_t>(dst_reg)    << 16);
-        header |= (static_cast<uint64_t>(src1_reg)   << 24);
-        header |= (static_cast<uint64_t>(src2_reg)   << 32);
-        header |= (static_cast<uint64_t>(flags)      << 40);
+        header |= (static_cast<uint64_t>(dst_reg) << 16);
+        header |= (static_cast<uint64_t>(src1_reg) << 24);
+        header |= (static_cast<uint64_t>(src2_reg) << 32);
+        header |= (static_cast<uint64_t>(flags) << 40);
         if (flags & kRegHasSrc3) {
             header |= (static_cast<uint64_t>(src3_reg) << 48);
         }
@@ -598,10 +720,10 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
             // Generic path: write 8-byte fields first, then 4-byte.
             // r8 is the last 8-byte write (overwrites i8 bytes 0-7).
             // i4 is the last 4-byte write (final value for bytes 0-3).
-            ri.imm.i8       = ir.immediate_i8;
-            ri.imm.r8       = ir.immediate_r8;
+            ri.imm.i8 = ir.immediate_i8;
+            ri.imm.r8 = ir.immediate_r8;
             ri.imm.arg_count = ir.arg_count;
-            ri.imm.i4       = ir.immediate_i4;
+            ri.imm.i4 = ir.immediate_i4;
         }
 
         // Opcode-specific fields (overwrite union after generic writes).
@@ -612,22 +734,21 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
             ri.header = header;
         } else if (ir.op_code == IROpCode::Calli) {
             ri.imm.operand_index = static_cast<uint32_t>(calli_func_ptr_vreg);
-            ri.imm.ptr          = ir.call_target;     // must be LAST write — overwrites all 8 union bytes
+            ri.imm.ptr = ir.call_target; // must be LAST write — overwrites all 8 union bytes
         } else if (ir.op_code == IROpCode::Call || ir.op_code == IROpCode::CallVirt ||
                    ir.op_code == IROpCode::CallBridge || ir.op_code == IROpCode::CallVirtConstrained) {
-            ri.imm.operand_index  = static_cast<uint32_t>(ir.operand_index);
+            ri.imm.operand_index = static_cast<uint32_t>(ir.operand_index);
             // Use call_target if available; fall back to direct_fn for Tier 3
             // cross-assembly calls (e.g. String::Concat, Console::WriteLine).
             // direct_fn uses the same managed calling convention fn(a0...a7),
             // compatible with the MIC path in InterpreterDispatchRaw.
-            ri.imm.ptr           = ir.call_target ? ir.call_target : ir.direct_fn;
+            ri.imm.ptr = ir.call_target ? ir.call_target : ir.direct_fn;
         }
 
         // operand_index for non-call opcodes that need it (arg/local index, field count).
         // Must NOT overwrite LdcI4's i4, so this is separate from the ptr write above.
-        if (ir.op_code == IROpCode::LdArg || ir.op_code == IROpCode::LdLoc ||
-            ir.op_code == IROpCode::StLoc || ir.op_code == IROpCode::StArg ||
-            ir.op_code == IROpCode::LdArgA || ir.op_code == IROpCode::LdLocA ||
+        if (ir.op_code == IROpCode::LdArg || ir.op_code == IROpCode::LdLoc || ir.op_code == IROpCode::StLoc ||
+            ir.op_code == IROpCode::StArg || ir.op_code == IROpCode::LdArgA || ir.op_code == IROpCode::LdLocA ||
             ir.op_code == IROpCode::NewObj) {
             ri.imm.operand_index = static_cast<uint32_t>(ir.operand_index);
         }
@@ -639,20 +760,17 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
 
 
         // Branch target
-        if (ir.op_code == IROpCode::Br || ir.op_code == IROpCode::BrTrue ||
-            ir.op_code == IROpCode::BrFalse || ir.op_code == IROpCode::Leave ||
-            ir.op_code == IROpCode::Beq || ir.op_code == IROpCode::Blt ||
-            ir.op_code == IROpCode::Bgt || ir.op_code == IROpCode::Ble ||
-            ir.op_code == IROpCode::Bge || ir.op_code == IROpCode::BneUn ||
-            ir.op_code == IROpCode::BgeUn || ir.op_code == IROpCode::BgtUn ||
+        if (ir.op_code == IROpCode::Br || ir.op_code == IROpCode::BrTrue || ir.op_code == IROpCode::BrFalse ||
+            ir.op_code == IROpCode::Leave || ir.op_code == IROpCode::Beq || ir.op_code == IROpCode::Blt ||
+            ir.op_code == IROpCode::Bgt || ir.op_code == IROpCode::Ble || ir.op_code == IROpCode::Bge ||
+            ir.op_code == IROpCode::BneUn || ir.op_code == IROpCode::BgeUn || ir.op_code == IROpCode::BgtUn ||
             ir.op_code == IROpCode::BleUn || ir.op_code == IROpCode::BltUn) {
             ri.imm.branch_target = static_cast<uint32_t>(ir.branch_target);
         }
 
         // Pack call_arg_count and is_instance_call into reserved header bits [63:48]
-        if (ir.op_code == IROpCode::Call || ir.op_code == IROpCode::CallVirt ||
-            ir.op_code == IROpCode::CallBridge || ir.op_code == IROpCode::CallVirtConstrained ||
-            ir.op_code == IROpCode::Calli) {
+        if (ir.op_code == IROpCode::Call || ir.op_code == IROpCode::CallVirt || ir.op_code == IROpCode::CallBridge ||
+            ir.op_code == IROpCode::CallVirtConstrained || ir.op_code == IROpCode::Calli) {
             header |= (static_cast<uint64_t>(ir.arg_count & 0x7FFF) << 48);
             if (ir.is_instance_call) {
                 header |= (1ULL << 63);
@@ -677,8 +795,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
 // Each handler reads src regs from RegisterFile, writes dst reg.
 // No implicit push/pop — every instruction names its registers explicitly.
 
-using RegOpHandler = void (*)(RegisterFrame& frame,
-                              const RegisterInstruction& instr) noexcept;
+using RegOpHandler = void (*)(RegisterFrame& frame, const RegisterInstruction& instr) noexcept;
 
 // ── Handler implementations ─────────────────────────────────────────────
 
@@ -691,8 +808,7 @@ static void Reg_LdcI4(RegisterFrame& frame, const RegisterInstruction& instr) no
 
 static void Reg_LdcI8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdcI8");
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(instr.imm.i8),
-                       static_cast<uint8_t>(ValueTag::Int64));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(instr.imm.i8), static_cast<uint8_t>(ValueTag::Int64));
     ++frame.pc;
 }
 
@@ -703,8 +819,7 @@ static void Reg_LdcR4(RegisterFrame& frame, const RegisterInstruction& instr) no
     std::memcpy(&v, &bits, sizeof(bits));
     uint64_t val;
     std::memcpy(&val, &v, sizeof(v));
-    frame.regs.set_reg(instr.dst_reg(), val,
-                       static_cast<uint8_t>(ValueTag::Float32));
+    frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32));
     ++frame.pc;
 }
 
@@ -712,23 +827,20 @@ static void Reg_LdcR8(RegisterFrame& frame, const RegisterInstruction& instr) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdcR8");
     uint64_t val;
     std::memcpy(&val, &instr.imm.r8, sizeof(val));
-    frame.regs.set_reg(instr.dst_reg(), val,
-                       static_cast<uint8_t>(ValueTag::Float64));
+    frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64));
     ++frame.pc;
 }
 
 static void Reg_LdStr(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdStr");
-    frame.regs.set_reg(instr.dst_reg(),
-                       reinterpret_cast<uint64_t>(instr.imm.ptr),
+    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(instr.imm.ptr),
                        static_cast<uint8_t>(ValueTag::ObjectRef));
     ++frame.pc;
 }
 
 static void Reg_LdNull(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdNull");
-    frame.regs.set_reg(instr.dst_reg(), 0,
-                       static_cast<uint8_t>(ValueTag::Null));
+    frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
     ++frame.pc;
 }
 
@@ -736,12 +848,10 @@ static void Reg_LdArg(RegisterFrame& frame, const RegisterInstruction& instr) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdArg");
     uint32_t idx = instr.imm.operand_index;
     if (idx >= frame.arg_count || frame.args == nullptr) {
-        frame.regs.set_reg(instr.dst_reg(), 0,
-                           static_cast<uint8_t>(ValueTag::Int32));
+        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Int32));
     } else {
         const auto* arg_base = static_cast<const uint64_t*>(frame.args);
-        frame.regs.set_reg(instr.dst_reg(), arg_base[idx],
-                           static_cast<uint8_t>(ValueTag::ObjectRef));
+        frame.regs.set_reg(instr.dst_reg(), arg_base[idx], static_cast<uint8_t>(ValueTag::ObjectRef));
     }
     ++frame.pc;
 }
@@ -752,9 +862,7 @@ static void Reg_LdLoc(RegisterFrame& frame, const RegisterInstruction& instr) no
     // For RegLdLoc/RegStLoc the operand_index maps to a fixed register
     // allocated during register allocation.
     // The value is already in the reg file — just copy to dst.
-    frame.regs.set_reg(instr.dst_reg(),
-                       frame.regs.reg(instr.src1_reg()),
-                       frame.regs.reg_tag(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), frame.regs.reg(instr.src1_reg()), frame.regs.reg_tag(instr.src1_reg()));
     ++frame.pc;
 }
 
@@ -762,9 +870,7 @@ static void Reg_StLoc(RegisterFrame& frame, const RegisterInstruction& instr) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StLoc");
     // Copy src1 to the local's dedicated register
     // operand_index = local index maps to fixed local reg
-    frame.regs.set_reg(instr.dst_reg(),
-                       frame.regs.reg(instr.src1_reg()),
-                       frame.regs.reg_tag(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), frame.regs.reg(instr.src1_reg()), frame.regs.reg_tag(instr.src1_reg()));
     ++frame.pc;
 }
 
@@ -887,8 +993,7 @@ static void Reg_Ceq(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Ceq");
     uint64_t r = frame.regs.reg(instr.src2_reg());
     uint64_t l = frame.regs.reg(instr.src1_reg());
-    frame.regs.set_reg(instr.dst_reg(), (l == r) ? 1u : 0u,
-                       static_cast<uint8_t>(ValueTag::Int32));
+    frame.regs.set_reg(instr.dst_reg(), (l == r) ? 1u : 0u, static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
@@ -896,8 +1001,7 @@ static void Reg_Clt(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Clt");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), (l < r) ? 1u : 0u,
-                       static_cast<uint8_t>(ValueTag::Int32));
+    frame.regs.set_reg(instr.dst_reg(), (l < r) ? 1u : 0u, static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
@@ -905,8 +1009,7 @@ static void Reg_Cgt(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Cgt");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), (l > r) ? 1u : 0u,
-                       static_cast<uint8_t>(ValueTag::Int32));
+    frame.regs.set_reg(instr.dst_reg(), (l > r) ? 1u : 0u, static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
@@ -982,8 +1085,7 @@ static void Reg_Conv_I4(RegisterFrame& frame, const RegisterInstruction& instr) 
 static void Reg_Conv_I8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Conv_I8");
     int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
-                       static_cast<uint8_t>(ValueTag::Int64));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v), static_cast<uint8_t>(ValueTag::Int64));
     ++frame.pc;
 }
 
@@ -992,8 +1094,7 @@ static void Reg_Conv_R4(RegisterFrame& frame, const RegisterInstruction& instr) 
     float v = static_cast<float>(static_cast<int32_t>(frame.regs.reg(instr.src1_reg())));
     uint64_t val;
     std::memcpy(&val, &v, sizeof(v));
-    frame.regs.set_reg(instr.dst_reg(), val,
-                       static_cast<uint8_t>(ValueTag::Float32));
+    frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32));
     ++frame.pc;
 }
 
@@ -1002,8 +1103,7 @@ static void Reg_Conv_R8(RegisterFrame& frame, const RegisterInstruction& instr) 
     double v = static_cast<double>(static_cast<int32_t>(frame.regs.reg(instr.src1_reg())));
     uint64_t val;
     std::memcpy(&val, &v, sizeof(v));
-    frame.regs.set_reg(instr.dst_reg(), val,
-                       static_cast<uint8_t>(ValueTag::Float64));
+    frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64));
     ++frame.pc;
 }
 
@@ -1012,15 +1112,14 @@ static void Reg_Pop(RegisterFrame& frame, const RegisterInstruction& instr) noex
     // Register-based: Pop is a no-op (result register is simply not read).
     // In the register-based model, the register allocator eliminates
     // dead register writes. This handler exists for completeness.
-    (void)frame; (void)instr;
+    (void)frame;
+    (void)instr;
     ++frame.pc;
 }
 
 static void Reg_Dup(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Dup");
-    frame.regs.set_reg(instr.dst_reg(),
-                       frame.regs.reg(instr.src1_reg()),
-                       frame.regs.reg_tag(instr.src1_reg()));
+    frame.regs.set_reg(instr.dst_reg(), frame.regs.reg(instr.src1_reg()), frame.regs.reg_tag(instr.src1_reg()));
     ++frame.pc;
 }
 
@@ -1029,7 +1128,8 @@ static void Reg_Ret(RegisterFrame& frame, const RegisterInstruction& instr) noex
     if (instr.has_src1()) {
         uint8_t src = instr.src1_reg();
         // std::fprintf(stderr, "[diag:Ret] has_src1 src=%u\n", src);
-        uint64_t rv = 0; uint8_t rt = 0;
+        uint64_t rv = 0;
+        uint8_t rt = 0;
         if (src < 64) {
             rv = frame.regs.gpr[src];
             rt = frame.regs.gpr_tags[src];
@@ -1055,7 +1155,10 @@ static void Reg_Unsupported(RegisterFrame& frame, const RegisterInstruction&) no
 // ── StArg: store value to argument slot ─────────────────────────────────
 static void Reg_StArg(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StArg");
-    if (!instr.has_src1() || frame.args == nullptr) { ++frame.pc; return; }
+    if (!instr.has_src1() || frame.args == nullptr) {
+        ++frame.pc;
+        return;
+    }
     uint32_t idx = instr.imm.operand_index;
     auto* arg_base = static_cast<uint64_t*>(const_cast<void*>(frame.args));
     if (idx < frame.arg_count) {
@@ -1074,23 +1177,29 @@ static void Reg_LdSFld(RegisterFrame& frame, const RegisterInstruction& instr) n
     }
     const auto& iv = sfields[offset];
     switch (iv.tag) {
-    case ValueTag::Int32:
-        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv.i32)),
-                           static_cast<uint8_t>(ValueTag::Int32)); break;
-    case ValueTag::Int64:
-        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64),
-                           static_cast<uint8_t>(ValueTag::Int64)); break;
-    case ValueTag::Float32: {
-        uint64_t val; std::memcpy(&val, &iv.f32, sizeof(float));
-        frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32)); break;
-    }
-    case ValueTag::Float64: {
-        uint64_t val; std::memcpy(&val, &iv.f64, sizeof(double));
-        frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64)); break;
-    }
-    default:
-        frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
-                           static_cast<uint8_t>(ValueTag::ObjectRef)); break;
+        case ValueTag::Int32:
+            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv.i32)),
+                               static_cast<uint8_t>(ValueTag::Int32));
+            break;
+        case ValueTag::Int64:
+            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64), static_cast<uint8_t>(ValueTag::Int64));
+            break;
+        case ValueTag::Float32: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f32, sizeof(float));
+            frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32));
+            break;
+        }
+        case ValueTag::Float64: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f64, sizeof(double));
+            frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64));
+            break;
+        }
+        default:
+            frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
+                               static_cast<uint8_t>(ValueTag::ObjectRef));
+            break;
     }
     ++frame.pc;
 }
@@ -1105,20 +1214,27 @@ static void Reg_StSFld(RegisterFrame& frame, const RegisterInstruction& instr) n
     uint8_t tag = frame.regs.reg_tag(instr.src1_reg());
     uint64_t val = frame.regs.reg(instr.src1_reg());
     switch (static_cast<ValueTag>(tag)) {
-    case ValueTag::Int32:
-        sfields[offset] = InterpreterValue::from_i32(static_cast<int32_t>(val)); break;
-    case ValueTag::Int64:
-        sfields[offset] = InterpreterValue::from_i64(static_cast<int64_t>(val)); break;
-    case ValueTag::Float32: {
-        float fv; std::memcpy(&fv, &val, sizeof(float));
-        sfields[offset] = InterpreterValue::from_f32(fv); break;
-    }
-    case ValueTag::Float64: {
-        double dv; std::memcpy(&dv, &val, sizeof(double));
-        sfields[offset] = InterpreterValue::from_f64(dv); break;
-    }
-    default:
-        sfields[offset] = InterpreterValue::from_obj(reinterpret_cast<void*>(val)); break;
+        case ValueTag::Int32:
+            sfields[offset] = InterpreterValue::from_i32(static_cast<int32_t>(val));
+            break;
+        case ValueTag::Int64:
+            sfields[offset] = InterpreterValue::from_i64(static_cast<int64_t>(val));
+            break;
+        case ValueTag::Float32: {
+            float fv;
+            std::memcpy(&fv, &val, sizeof(float));
+            sfields[offset] = InterpreterValue::from_f32(fv);
+            break;
+        }
+        case ValueTag::Float64: {
+            double dv;
+            std::memcpy(&dv, &val, sizeof(double));
+            sfields[offset] = InterpreterValue::from_f64(dv);
+            break;
+        }
+        default:
+            sfields[offset] = InterpreterValue::from_obj(reinterpret_cast<void*>(val));
+            break;
     }
     ++frame.pc;
 }
@@ -1142,15 +1258,17 @@ static void Reg_NewArr(RegisterFrame& frame, const RegisterInstruction& instr) n
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_NewArr");
     uint32_t len = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
     auto* arr = static_cast<ArrayStorage*>(CHAOS_IL2CPP_MALLOC(sizeof(ArrayStorage)));
-    if (arr == nullptr) { Reg_Unsupported(frame, instr); return; }
+    if (arr == nullptr) {
+        Reg_Unsupported(frame, instr);
+        return;
+    }
     ::new (arr) ArrayStorage();
     frame.Track(arr, RegFreeArrayStorage);
     arr->type_token = static_cast<uint32_t>(instr.imm.i4);
 
     // Check for flat typed array (same logic as fast-dispatch Handle_NewArr).
     if (instr.imm.ptr != nullptr) {
-        auto type_handle = static_cast<TypeInfoHandle>(
-            reinterpret_cast<uintptr_t>(instr.imm.ptr));
+        auto type_handle = static_cast<TypeInfoHandle>(reinterpret_cast<uintptr_t>(instr.imm.ptr));
         auto* type_desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryTypeHandle(type_handle);
         if (type_desc != nullptr && type_desc->name_utf8 != nullptr) {
             auto elem_info = GetFlatArrayElementInfo(type_desc->name_utf8);
@@ -1162,7 +1280,8 @@ static void Reg_NewArr(RegisterFrame& frame, const RegisterInstruction& instr) n
                 if (len > 0) {
                     arr->flat_data = CHAOS_IL2CPP_MALLOC(static_cast<size_t>(len) * elem_info.size);
                     if (arr->flat_data == nullptr) {
-                        Reg_Unsupported(frame, instr); return;
+                        Reg_Unsupported(frame, instr);
+                        return;
                     }
                     std::memset(arr->flat_data, 0, static_cast<size_t>(len) * elem_info.size);
                 }
@@ -1175,8 +1294,7 @@ static void Reg_NewArr(RegisterFrame& frame, const RegisterInstruction& instr) n
     }
 
     arr->elements.resize(len);
-    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(arr),
-                       static_cast<uint8_t>(ValueTag::ObjectRef));
+    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(arr), static_cast<uint8_t>(ValueTag::ObjectRef));
     ++frame.pc;
 }
 
@@ -1187,51 +1305,56 @@ static void Reg_LdElem(RegisterFrame& frame, const RegisterInstruction& instr) n
     auto* arr = reinterpret_cast<ArrayStorage*>(frame.regs.reg(instr.src1_reg()));
     if (arr == nullptr) {
         frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
-        ++frame.pc; return;
+        ++frame.pc;
+        return;
     }
 
     if (arr->is_flat) {
         if (index >= arr->flat_length) {
             frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
-            ++frame.pc; return;
+            ++frame.pc;
+            return;
         }
         void* elem_ptr = static_cast<char*>(arr->flat_data) + index * arr->flat_element_size;
         switch (arr->flat_element_size) {
-        case 1:
-            frame.regs.set_reg(instr.dst_reg(),
-                static_cast<uint64_t>(static_cast<uint32_t>(*static_cast<int8_t*>(elem_ptr))),
-                static_cast<uint8_t>(ValueTag::Int32));
-            break;
-        case 2:
-            frame.regs.set_reg(instr.dst_reg(),
-                static_cast<uint64_t>(static_cast<uint32_t>(*static_cast<int16_t*>(elem_ptr))),
-                static_cast<uint8_t>(ValueTag::Int32));
-            break;
-        case 4:
-            if (arr->flat_element_tag == static_cast<uint8_t>(ValueTag::Float32)) {
-                float v; std::memcpy(&v, elem_ptr, sizeof(float));
-                uint64_t rv; std::memcpy(&rv, &v, sizeof(float));
-                frame.regs.set_reg(instr.dst_reg(), rv, static_cast<uint8_t>(ValueTag::Float32));
-            } else {
+            case 1:
                 frame.regs.set_reg(instr.dst_reg(),
-                    static_cast<uint64_t>(static_cast<uint32_t>(*static_cast<int32_t*>(elem_ptr))),
-                    static_cast<uint8_t>(ValueTag::Int32));
-            }
-            break;
-        case 8:
-            if (arr->flat_element_tag == static_cast<uint8_t>(ValueTag::Float64)) {
-                double v; std::memcpy(&v, elem_ptr, sizeof(double));
-                uint64_t rv; std::memcpy(&rv, &v, sizeof(double));
-                frame.regs.set_reg(instr.dst_reg(), rv, static_cast<uint8_t>(ValueTag::Float64));
-            } else {
+                                   static_cast<uint64_t>(static_cast<uint32_t>(*static_cast<int8_t*>(elem_ptr))),
+                                   static_cast<uint8_t>(ValueTag::Int32));
+                break;
+            case 2:
                 frame.regs.set_reg(instr.dst_reg(),
-                    static_cast<uint64_t>(*static_cast<int64_t*>(elem_ptr)),
-                    static_cast<uint8_t>(ValueTag::Int64));
-            }
-            break;
-        default:
-            frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
-            break;
+                                   static_cast<uint64_t>(static_cast<uint32_t>(*static_cast<int16_t*>(elem_ptr))),
+                                   static_cast<uint8_t>(ValueTag::Int32));
+                break;
+            case 4:
+                if (arr->flat_element_tag == static_cast<uint8_t>(ValueTag::Float32)) {
+                    float v;
+                    std::memcpy(&v, elem_ptr, sizeof(float));
+                    uint64_t rv;
+                    std::memcpy(&rv, &v, sizeof(float));
+                    frame.regs.set_reg(instr.dst_reg(), rv, static_cast<uint8_t>(ValueTag::Float32));
+                } else {
+                    frame.regs.set_reg(instr.dst_reg(),
+                                       static_cast<uint64_t>(static_cast<uint32_t>(*static_cast<int32_t*>(elem_ptr))),
+                                       static_cast<uint8_t>(ValueTag::Int32));
+                }
+                break;
+            case 8:
+                if (arr->flat_element_tag == static_cast<uint8_t>(ValueTag::Float64)) {
+                    double v;
+                    std::memcpy(&v, elem_ptr, sizeof(double));
+                    uint64_t rv;
+                    std::memcpy(&rv, &v, sizeof(double));
+                    frame.regs.set_reg(instr.dst_reg(), rv, static_cast<uint8_t>(ValueTag::Float64));
+                } else {
+                    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(*static_cast<int64_t*>(elem_ptr)),
+                                       static_cast<uint8_t>(ValueTag::Int64));
+                }
+                break;
+            default:
+                frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
+                break;
         }
         ++frame.pc;
         return;
@@ -1239,65 +1362,81 @@ static void Reg_LdElem(RegisterFrame& frame, const RegisterInstruction& instr) n
 
     if (index >= arr->elements.size()) {
         frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
-        ++frame.pc; return;
+        ++frame.pc;
+        return;
     }
     const auto& iv = arr->elements[index];
     switch (iv.tag) {
-    case ValueTag::Int32:
-        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv.i32)),
-                           static_cast<uint8_t>(ValueTag::Int32)); break;
-    case ValueTag::Int64:
-        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64),
-                           static_cast<uint8_t>(ValueTag::Int64)); break;
-    case ValueTag::Float32: {
-        uint64_t val; std::memcpy(&val, &iv.f32, sizeof(float));
-        frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32)); break;
-    }
-    case ValueTag::Float64: {
-        uint64_t val; std::memcpy(&val, &iv.f64, sizeof(double));
-        frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64)); break;
-    }
-    default:
-        frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
-                           static_cast<uint8_t>(ValueTag::ObjectRef)); break;
+        case ValueTag::Int32:
+            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv.i32)),
+                               static_cast<uint8_t>(ValueTag::Int32));
+            break;
+        case ValueTag::Int64:
+            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64), static_cast<uint8_t>(ValueTag::Int64));
+            break;
+        case ValueTag::Float32: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f32, sizeof(float));
+            frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32));
+            break;
+        }
+        case ValueTag::Float64: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f64, sizeof(double));
+            frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64));
+            break;
+        }
+        default:
+            frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
+                               static_cast<uint8_t>(ValueTag::ObjectRef));
+            break;
     }
     ++frame.pc;
 }
 
 static void Reg_StElem(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StElem");
-    uint64_t val   = frame.regs.reg(instr.src1_reg());
+    uint64_t val = frame.regs.reg(instr.src1_reg());
     uint32_t index = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
     auto* arr = reinterpret_cast<ArrayStorage*>(frame.regs.reg(instr.src3_reg()));
-    if (arr == nullptr) { ++frame.pc; return; }
+    if (arr == nullptr) {
+        ++frame.pc;
+        return;
+    }
 
     if (arr->is_flat) {
-        if (index >= arr->flat_length) { ++frame.pc; return; }
+        if (index >= arr->flat_length) {
+            ++frame.pc;
+            return;
+        }
         void* elem_ptr = static_cast<char*>(arr->flat_data) + index * arr->flat_element_size;
         switch (arr->flat_element_size) {
-        case 1:
-            *static_cast<int8_t*>(elem_ptr) = static_cast<int8_t>(val);
-            break;
-        case 2:
-            *static_cast<int16_t*>(elem_ptr) = static_cast<int16_t>(val);
-            break;
-        case 4:
-            if (arr->flat_element_tag == static_cast<uint8_t>(ValueTag::Float32)) {
-                float fv; std::memcpy(&fv, &val, sizeof(float));
-                std::memcpy(elem_ptr, &fv, sizeof(float));
-            } else {
-                std::memcpy(elem_ptr, &val, sizeof(int32_t));
-            }
-            break;
-        case 8:
-            if (arr->flat_element_tag == static_cast<uint8_t>(ValueTag::Float64)) {
-                double dv; std::memcpy(&dv, &val, sizeof(double));
-                std::memcpy(elem_ptr, &dv, sizeof(double));
-            } else {
-                std::memcpy(elem_ptr, &val, sizeof(int64_t));
-            }
-            break;
-        default: break;
+            case 1:
+                *static_cast<int8_t*>(elem_ptr) = static_cast<int8_t>(val);
+                break;
+            case 2:
+                *static_cast<int16_t*>(elem_ptr) = static_cast<int16_t>(val);
+                break;
+            case 4:
+                if (arr->flat_element_tag == static_cast<uint8_t>(ValueTag::Float32)) {
+                    float fv;
+                    std::memcpy(&fv, &val, sizeof(float));
+                    std::memcpy(elem_ptr, &fv, sizeof(float));
+                } else {
+                    std::memcpy(elem_ptr, &val, sizeof(int32_t));
+                }
+                break;
+            case 8:
+                if (arr->flat_element_tag == static_cast<uint8_t>(ValueTag::Float64)) {
+                    double dv;
+                    std::memcpy(&dv, &val, sizeof(double));
+                    std::memcpy(elem_ptr, &dv, sizeof(double));
+                } else {
+                    std::memcpy(elem_ptr, &val, sizeof(int64_t));
+                }
+                break;
+            default:
+                break;
         }
         ++frame.pc;
         return;
@@ -1308,20 +1447,27 @@ static void Reg_StElem(RegisterFrame& frame, const RegisterInstruction& instr) n
     }
     uint8_t tag = frame.regs.reg_tag(instr.src1_reg());
     switch (static_cast<ValueTag>(tag)) {
-    case ValueTag::Int32:
-        arr->elements[index] = InterpreterValue::from_i32(static_cast<int32_t>(val)); break;
-    case ValueTag::Int64:
-        arr->elements[index] = InterpreterValue::from_i64(static_cast<int64_t>(val)); break;
-    case ValueTag::Float32: {
-        float fv; std::memcpy(&fv, &val, sizeof(float));
-        arr->elements[index] = InterpreterValue::from_f32(fv); break;
-    }
-    case ValueTag::Float64: {
-        double dv; std::memcpy(&dv, &val, sizeof(double));
-        arr->elements[index] = InterpreterValue::from_f64(dv); break;
-    }
-    default:
-        arr->elements[index] = InterpreterValue::from_obj(reinterpret_cast<void*>(val)); break;
+        case ValueTag::Int32:
+            arr->elements[index] = InterpreterValue::from_i32(static_cast<int32_t>(val));
+            break;
+        case ValueTag::Int64:
+            arr->elements[index] = InterpreterValue::from_i64(static_cast<int64_t>(val));
+            break;
+        case ValueTag::Float32: {
+            float fv;
+            std::memcpy(&fv, &val, sizeof(float));
+            arr->elements[index] = InterpreterValue::from_f32(fv);
+            break;
+        }
+        case ValueTag::Float64: {
+            double dv;
+            std::memcpy(&dv, &val, sizeof(double));
+            arr->elements[index] = InterpreterValue::from_f64(dv);
+            break;
+        }
+        default:
+            arr->elements[index] = InterpreterValue::from_obj(reinterpret_cast<void*>(val));
+            break;
     }
     ++frame.pc;
 }
@@ -1334,9 +1480,7 @@ static void Reg_LdLen(RegisterFrame& frame, const RegisterInstruction& instr) no
         frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Int32));
     } else {
         uint32_t len = arr->is_flat ? arr->flat_length : static_cast<uint32_t>(arr->elements.size());
-        frame.regs.set_reg(instr.dst_reg(),
-                           static_cast<uint64_t>(len),
-                           static_cast<uint8_t>(ValueTag::Int32));
+        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(len), static_cast<uint8_t>(ValueTag::Int32));
     }
     ++frame.pc;
 }
@@ -1366,7 +1510,8 @@ static void Reg_ConvRUn(RegisterFrame& frame, const RegisterInstruction& instr) 
     // IL conv.r.un: uint32 → float64.  Match T4 codegen (cvtsi2sd → double).
     uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
     double dv = static_cast<double>(v);
-    uint64_t val; std::memcpy(&val, &dv, sizeof(double));
+    uint64_t val;
+    std::memcpy(&val, &dv, sizeof(double));
     frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64));
     ++frame.pc;
 }
@@ -1384,8 +1529,7 @@ static void Reg_ConvU(RegisterFrame& frame, const RegisterInstruction& instr) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvU");
     // ConvU: native unsigned int — treat as uint32 (32-bit host)
     uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
-                       static_cast<uint8_t>(ValueTag::Int32));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v), static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
@@ -1399,8 +1543,7 @@ static void Reg_LdInd(RegisterFrame& frame, const RegisterInstruction& instr) no
         // Read based on type tag from the instruction's immediate field:
         // This is a simplified version — for the interpreter sandbox, we
         // treat LdInd as reading a uint64_t from the given address.
-        frame.regs.set_reg(instr.dst_reg(), *static_cast<uint64_t*>(ptr),
-                           static_cast<uint8_t>(ValueTag::Int64));
+        frame.regs.set_reg(instr.dst_reg(), *static_cast<uint64_t*>(ptr), static_cast<uint8_t>(ValueTag::Int64));
     }
     ++frame.pc;
 }
@@ -1424,15 +1567,18 @@ static void Reg_LdObj(RegisterFrame& frame, const RegisterInstruction& instr) no
     if (ptr != nullptr) {
         auto* iv = static_cast<InterpreterValue*>(ptr);
         switch (iv->tag) {
-        case ValueTag::Int32:
-            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv->i32)),
-                               static_cast<uint8_t>(ValueTag::Int32)); break;
-        case ValueTag::Int64:
-            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv->i64),
-                               static_cast<uint8_t>(ValueTag::Int64)); break;
-        default:
-            frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv->obj),
-                               static_cast<uint8_t>(ValueTag::ObjectRef)); break;
+            case ValueTag::Int32:
+                frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv->i32)),
+                                   static_cast<uint8_t>(ValueTag::Int32));
+                break;
+            case ValueTag::Int64:
+                frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv->i64),
+                                   static_cast<uint8_t>(ValueTag::Int64));
+                break;
+            default:
+                frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv->obj),
+                                   static_cast<uint8_t>(ValueTag::ObjectRef));
+                break;
         }
     } else {
         frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
@@ -1524,10 +1670,12 @@ static void Reg_LocAlloc(RegisterFrame& frame, const RegisterInstruction& instr)
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LocAlloc");
     uint32_t size = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
     void* mem = CHAOS_IL2CPP_MALLOC(size);
-    if (mem == nullptr) { Reg_Unsupported(frame, instr); return; }
+    if (mem == nullptr) {
+        Reg_Unsupported(frame, instr);
+        return;
+    }
     std::memset(mem, 0, size);
-    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(mem),
-                       static_cast<uint8_t>(ValueTag::ObjectRef));
+    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(mem), static_cast<uint8_t>(ValueTag::ObjectRef));
     ++frame.pc;
 }
 
@@ -1540,23 +1688,30 @@ static void Reg_Unbox(RegisterFrame& frame, const RegisterInstruction& instr) no
     } else {
         const auto& iv = obj->fields[0];
         switch (iv.tag) {
-        case ValueTag::Int32:
-            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i32),
-                               static_cast<uint8_t>(ValueTag::Int32)); break;
-        case ValueTag::Int64:
-            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64),
-                               static_cast<uint8_t>(ValueTag::Int64)); break;
-        case ValueTag::Float32: {
-            uint64_t val; std::memcpy(&val, &iv.f32, sizeof(float));
-            frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32)); break;
-        }
-        case ValueTag::Float64: {
-            uint64_t val; std::memcpy(&val, &iv.f64, sizeof(double));
-            frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64)); break;
-        }
-        default:
-            frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
-                               static_cast<uint8_t>(ValueTag::ObjectRef)); break;
+            case ValueTag::Int32:
+                frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i32),
+                                   static_cast<uint8_t>(ValueTag::Int32));
+                break;
+            case ValueTag::Int64:
+                frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64),
+                                   static_cast<uint8_t>(ValueTag::Int64));
+                break;
+            case ValueTag::Float32: {
+                uint64_t val;
+                std::memcpy(&val, &iv.f32, sizeof(float));
+                frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32));
+                break;
+            }
+            case ValueTag::Float64: {
+                uint64_t val;
+                std::memcpy(&val, &iv.f64, sizeof(double));
+                frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64));
+                break;
+            }
+            default:
+                frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
+                                   static_cast<uint8_t>(ValueTag::ObjectRef));
+                break;
         }
     }
     ++frame.pc;
@@ -1601,7 +1756,7 @@ static void Reg_Switch(RegisterFrame& frame, const RegisterInstruction& instr) n
     if (targets != nullptr && index >= 0 && static_cast<uint32_t>(index) < target_count) {
         frame.pc = targets[index];
     } else if (targets != nullptr) {
-        frame.pc = targets[target_count];  // default target
+        frame.pc = targets[target_count]; // default target
     } else {
         ++frame.pc;
     }
@@ -1704,57 +1859,62 @@ static void Reg_ConvOvfI8(RegisterFrame& frame, const RegisterInstruction& instr
 static void Reg_ConvOvfU(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfU");
     uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
-                       static_cast<uint8_t>(ValueTag::Int32));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v), static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_ConvOvfU4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfU4");
     uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
-                       static_cast<uint8_t>(ValueTag::Int32));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v), static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
 }
 
 static void Reg_ConvOvfU8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfU8");
     uint64_t v = frame.regs.reg(instr.src1_reg());
-    frame.regs.set_reg(instr.dst_reg(), v,
-                       static_cast<uint8_t>(ValueTag::Int64));
+    frame.regs.set_reg(instr.dst_reg(), v, static_cast<uint8_t>(ValueTag::Int64));
     ++frame.pc;
 }
 
 // ── Box: wrap value in interpreter object ───────────────────────────────
 static void Reg_Box(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Box");
-    auto* boxed = static_cast<InterpreterObject*>(
-        CHAOS_IL2CPP_MALLOC(sizeof(InterpreterObject)));
-    if (boxed == nullptr) { Reg_Unsupported(frame, instr); return; }
+    auto* boxed = static_cast<InterpreterObject*>(CHAOS_IL2CPP_MALLOC(sizeof(InterpreterObject)));
+    if (boxed == nullptr) {
+        Reg_Unsupported(frame, instr);
+        return;
+    }
     ::new (boxed) InterpreterObject();
     frame.Track(boxed, frame.Dtor<InterpreterObject>);
     boxed->fields.resize(1);
     uint8_t tag = frame.regs.reg_tag(instr.src1_reg());
     uint64_t val = frame.regs.reg(instr.src1_reg());
     switch (static_cast<ValueTag>(tag)) {
-    case ValueTag::Int32:
-        boxed->fields[0] = InterpreterValue::from_i32(static_cast<int32_t>(val)); break;
-    case ValueTag::Int64:
-        boxed->fields[0] = InterpreterValue::from_i64(static_cast<int64_t>(val)); break;
-    case ValueTag::Float32: {
-        float fv; std::memcpy(&fv, &val, sizeof(float));
-        boxed->fields[0] = InterpreterValue::from_f32(fv); break;
-    }
-    case ValueTag::Float64: {
-        double dv; std::memcpy(&dv, &val, sizeof(double));
-        boxed->fields[0] = InterpreterValue::from_f64(dv); break;
-    }
-    default:
-        boxed->fields[0] = InterpreterValue::from_obj(reinterpret_cast<void*>(val)); break;
+        case ValueTag::Int32:
+            boxed->fields[0] = InterpreterValue::from_i32(static_cast<int32_t>(val));
+            break;
+        case ValueTag::Int64:
+            boxed->fields[0] = InterpreterValue::from_i64(static_cast<int64_t>(val));
+            break;
+        case ValueTag::Float32: {
+            float fv;
+            std::memcpy(&fv, &val, sizeof(float));
+            boxed->fields[0] = InterpreterValue::from_f32(fv);
+            break;
+        }
+        case ValueTag::Float64: {
+            double dv;
+            std::memcpy(&dv, &val, sizeof(double));
+            boxed->fields[0] = InterpreterValue::from_f64(dv);
+            break;
+        }
+        default:
+            boxed->fields[0] = InterpreterValue::from_obj(reinterpret_cast<void*>(val));
+            break;
     }
     boxed->type_token = static_cast<uint32_t>(instr.imm.i4);
-    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(boxed),
-                       static_cast<uint8_t>(ValueTag::ObjectRef));
+    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(boxed), static_cast<uint8_t>(ValueTag::ObjectRef));
     ++frame.pc;
 }
 
@@ -1763,22 +1923,27 @@ static void Reg_Call(RegisterFrame& frame, const RegisterInstruction& instr) noe
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Call");
     uint32_t ac = instr.call_arg_count();
     void* call_target = instr.imm.ptr;
-    if (call_target == nullptr) { ++frame.pc; return; }
+    if (call_target == nullptr) {
+        ++frame.pc;
+        return;
+    }
 
     // Build raw_args/raw_tags from consecutive registers starting at src1_reg
     // arg0 = regs[src1_reg], arg1 = regs[src1_reg+1], ...
     uint32_t base = instr.src1_reg();
 
     uint64_t raw_args_stack[8];
-    uint8_t  raw_tags_stack[8];
-    auto* raw_args = (ac <= 8) ? raw_args_stack
-        : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
-    auto* raw_tags = (ac <= 8) ? raw_tags_stack
-        : static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
+    uint8_t raw_tags_stack[8];
+    auto* raw_args = (ac <= 8) ? raw_args_stack : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
+    auto* raw_tags = (ac <= 8) ? raw_tags_stack : static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
 
     if (raw_args == nullptr || raw_tags == nullptr) {
-        if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
-        ++frame.pc; return;
+        if (ac > 8) {
+            CHAOS_IL2CPP_FREE(raw_args);
+            CHAOS_IL2CPP_FREE(raw_tags);
+        }
+        ++frame.pc;
+        return;
     }
 
     for (uint32_t i = 0; i < ac; ++i) {
@@ -1795,13 +1960,13 @@ static void Reg_Call(RegisterFrame& frame, const RegisterInstruction& instr) noe
         }
     }
 
-    auto dret = ri::InterpreterDispatchRaw(
-        call_target, raw_args, raw_tags, ac,
-        instr.is_instance_call(),
-        frame.dispatch_ctx,
-        cache_info);
+    auto dret = ri::InterpreterDispatchRaw(call_target, raw_args, raw_tags, ac, instr.is_instance_call(),
+                                           frame.dispatch_ctx, cache_info);
 
-    if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+    if (ac > 8) {
+        CHAOS_IL2CPP_FREE(raw_args);
+        CHAOS_IL2CPP_FREE(raw_tags);
+    }
 
     if (dret.threw_exception) {
         frame.threw_exception = true;
@@ -1811,12 +1976,11 @@ static void Reg_Call(RegisterFrame& frame, const RegisterInstruction& instr) noe
     }
 
     if (dret.has_value && instr.has_dst()) {
-        if (dret.tag == static_cast<uint8_t>(ValueTag::Struct) &&
-            dret.struct_data != nullptr) {
-            frame.regs.set_reg(instr.dst_reg(),
-                               reinterpret_cast<uint64_t>(dret.struct_data),
-                               dret.tag);
-            frame.Track(dret.struct_data, [](void* p) noexcept { std::free(p); });
+        if (dret.tag == static_cast<uint8_t>(ValueTag::Struct) && dret.struct_data != nullptr) {
+            frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(dret.struct_data), dret.tag);
+            frame.Track(dret.struct_data, [](void* p) noexcept {
+                std::free(p);
+            });
         } else {
             frame.regs.set_reg(instr.dst_reg(), dret.value, dret.tag);
         }
@@ -1831,18 +1995,23 @@ static void Reg_Calli(RegisterFrame& frame, const RegisterInstruction& instr) no
     // Function pointer vreg is stored in imm.operand_index by the allocator
     uint32_t func_ptr_vreg = instr.imm.operand_index;
     void* call_target = reinterpret_cast<void*>(frame.regs.reg(func_ptr_vreg));
-    if (call_target == nullptr) { ++frame.pc; return; }
+    if (call_target == nullptr) {
+        ++frame.pc;
+        return;
+    }
 
     uint32_t base = instr.src1_reg();
     uint64_t raw_args_stack[8];
-    uint8_t  raw_tags_stack[8];
-    auto* raw_args = (ac <= 8) ? raw_args_stack
-        : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
-    auto* raw_tags = (ac <= 8) ? raw_tags_stack
-        : static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
+    uint8_t raw_tags_stack[8];
+    auto* raw_args = (ac <= 8) ? raw_args_stack : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
+    auto* raw_tags = (ac <= 8) ? raw_tags_stack : static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
     if (raw_args == nullptr || raw_tags == nullptr) {
-        if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
-        ++frame.pc; return;
+        if (ac > 8) {
+            CHAOS_IL2CPP_FREE(raw_args);
+            CHAOS_IL2CPP_FREE(raw_tags);
+        }
+        ++frame.pc;
+        return;
     }
 
     for (uint32_t i = 0; i < ac; ++i) {
@@ -1853,18 +2022,21 @@ static void Reg_Calli(RegisterFrame& frame, const RegisterInstruction& instr) no
     const ri::CachedCallInfo* cache_info = nullptr;
     if (frame.call_cache != nullptr && frame.pc < frame.call_count) {
         const auto* cc = static_cast<const ri::CachedCallInfo*>(frame.call_cache);
-        if (cc[frame.pc].ret_tag != 0xFF) cache_info = &cc[frame.pc];
+        if (cc[frame.pc].ret_tag != 0xFF)
+            cache_info = &cc[frame.pc];
     }
 
-    auto dret = ri::InterpreterDispatchRaw(
-        call_target, raw_args, raw_tags, ac,
-        instr.is_instance_call(),
-        frame.dispatch_ctx,
-        cache_info);
+    auto dret = ri::InterpreterDispatchRaw(call_target, raw_args, raw_tags, ac, instr.is_instance_call(),
+                                           frame.dispatch_ctx, cache_info);
 
-    if (ac > 8) { CHAOS_IL2CPP_FREE(raw_args); CHAOS_IL2CPP_FREE(raw_tags); }
+    if (ac > 8) {
+        CHAOS_IL2CPP_FREE(raw_args);
+        CHAOS_IL2CPP_FREE(raw_tags);
+    }
     if (dret.threw_exception) {
-        frame.threw_exception = true; frame.exception_obj = dret.exception_obj; frame.pc = 9999;
+        frame.threw_exception = true;
+        frame.exception_obj = dret.exception_obj;
+        frame.pc = 9999;
         return;
     }
     if (dret.has_value && instr.has_dst()) {
@@ -1883,7 +2055,6 @@ static void Reg_CallVirt(RegisterFrame& frame, const RegisterInstruction& instr)
         if (pm->tier_state.load(std::memory_order_acquire) ==
                 chaos::il2cpp::runtime_core::PatchMethod::kOptimizedRegister &&
             pm->pic_dispatch_data != nullptr) {
-
             uint32_t pc = frame.pc;
             uint32_t ac = instr.call_arg_count();
             uint32_t base = instr.src1_reg();
@@ -1897,55 +2068,55 @@ static void Reg_CallVirt(RegisterFrame& frame, const RegisterInstruction& instr)
                 // Parse PIC chain header: [uint32_t count][PicDispatchChain[count]]
                 auto* pic_base = static_cast<const uint8_t*>(pm->pic_dispatch_data);
                 uint32_t chain_count = *reinterpret_cast<const uint32_t*>(pic_base);
-                auto* chains = reinterpret_cast<const chaos::il2cpp::runtime_core::PicDispatchChain*>(
-                    pic_base + sizeof(uint32_t));
+                auto* chains =
+                    reinterpret_cast<const chaos::il2cpp::runtime_core::PicDispatchChain*>(pic_base + sizeof(uint32_t));
 
                 for (uint32_t ci = 0; ci < chain_count; ++ci) {
                     const auto& chain = chains[ci];
-                    if (chain.instruction_idx != pc) continue;
-                    if (chain.generation != chaos::il2cpp::runtime_core::g_patch_generation.load(
-                            std::memory_order_acquire)) break;
+                    if (chain.instruction_idx != pc)
+                        continue;
+                    if (chain.generation !=
+                        chaos::il2cpp::runtime_core::g_patch_generation.load(std::memory_order_acquire))
+                        break;
 
                     // Check PIC slots
                     for (uint32_t si = 0; si < 3; ++si) {
                         const auto& slot = chain.slots[si];
-                        if (slot.type_token == 0) break;  // sentinel
+                        if (slot.type_token == 0)
+                            break; // sentinel
                         if (slot.type_token == receiver_token && slot.direct_fn != nullptr) {
                             // PIC hit — call direct_fn
                             uint64_t raw_args_stack[8];
-                            auto* raw_args = (ac <= 8) ? raw_args_stack
-                                : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
-                            if (raw_args == nullptr) break;
+                            auto* raw_args = (ac <= 8)
+                                               ? raw_args_stack
+                                               : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
+                            if (raw_args == nullptr)
+                                break;
 
                             for (uint32_t ai = 0; ai < ac; ++ai) {
                                 raw_args[ai] = frame.regs.reg(base + ai);
                             }
 
                             // Use CallDirectVoidPtr-like direct call
-                            using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
-                                                          uint64_t, uint64_t, uint64_t, uint64_t);
+                            using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t, uint64_t, uint64_t,
+                                                          uint64_t, uint64_t);
                             auto fn = reinterpret_cast<DirectFn>(slot.direct_fn);
-                            uint64_t result = fn(
-                                (ac > 0) ? raw_args[0] : 0,
-                                (ac > 1) ? raw_args[1] : 0,
-                                (ac > 2) ? raw_args[2] : 0,
-                                (ac > 3) ? raw_args[3] : 0,
-                                (ac > 4) ? raw_args[4] : 0,
-                                (ac > 5) ? raw_args[5] : 0,
-                                (ac > 6) ? raw_args[6] : 0,
-                                (ac > 7) ? raw_args[7] : 0);
+                            uint64_t result =
+                                fn((ac > 0) ? raw_args[0] : 0, (ac > 1) ? raw_args[1] : 0, (ac > 2) ? raw_args[2] : 0,
+                                   (ac > 3) ? raw_args[3] : 0, (ac > 4) ? raw_args[4] : 0, (ac > 5) ? raw_args[5] : 0,
+                                   (ac > 6) ? raw_args[6] : 0, (ac > 7) ? raw_args[7] : 0);
 
-                            if (ac > 8) CHAOS_IL2CPP_FREE(raw_args);
+                            if (ac > 8)
+                                CHAOS_IL2CPP_FREE(raw_args);
 
                             if (instr.has_dst()) {
-                                frame.regs.set_reg(instr.dst_reg(), result,
-                                    static_cast<uint8_t>(ValueTag::Int64));
+                                frame.regs.set_reg(instr.dst_reg(), result, static_cast<uint8_t>(ValueTag::Int64));
                             }
                             ++frame.pc;
                             return;
                         }
                     }
-                    break;  // matched chain but no slot hit → fall through
+                    break; // matched chain but no slot hit → fall through
                 }
             }
         }
@@ -1962,17 +2133,19 @@ static void Reg_CallBridge(RegisterFrame& frame, const RegisterInstruction& inst
 // ── NewObj: allocate interpreter object ─────────────────────────────────
 static void Reg_NewObj(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_NewObj");
-    auto* storage = static_cast<InterpreterObject*>(
-        CHAOS_IL2CPP_MALLOC(sizeof(InterpreterObject)));
-    if (storage == nullptr) { Reg_Unsupported(frame, instr); return; }
+    auto* storage = static_cast<InterpreterObject*>(CHAOS_IL2CPP_MALLOC(sizeof(InterpreterObject)));
+    if (storage == nullptr) {
+        Reg_Unsupported(frame, instr);
+        return;
+    }
     ::new (storage) InterpreterObject();
     frame.Track(storage, frame.Dtor<InterpreterObject>);
     uint32_t field_count = instr.imm.operand_index;
-    if (field_count == 0) field_count = 1;
+    if (field_count == 0)
+        field_count = 1;
     storage->fields.resize(field_count);
     storage->type_token = static_cast<uint32_t>(instr.imm.i4);
-    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(storage),
-                       static_cast<uint8_t>(ValueTag::ObjectRef));
+    frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(storage), static_cast<uint8_t>(ValueTag::ObjectRef));
     ++frame.pc;
 }
 
@@ -1982,7 +2155,8 @@ static void Reg_LdFld(RegisterFrame& frame, const RegisterInstruction& instr) no
     auto* obj = reinterpret_cast<InterpreterObject*>(frame.regs.reg(instr.src1_reg()));
     if (obj == nullptr) {
         frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
-        ++frame.pc; return;
+        ++frame.pc;
+        return;
     }
     uint32_t idx = instr.imm.field_offset;
     if (idx >= obj->fields.size()) {
@@ -1990,23 +2164,29 @@ static void Reg_LdFld(RegisterFrame& frame, const RegisterInstruction& instr) no
     }
     const auto& iv = obj->fields[idx];
     switch (iv.tag) {
-    case ValueTag::Int32:
-        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv.i32)),
-                           static_cast<uint8_t>(ValueTag::Int32)); break;
-    case ValueTag::Int64:
-        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64),
-                           static_cast<uint8_t>(ValueTag::Int64)); break;
-    case ValueTag::Float32: {
-        uint64_t val; std::memcpy(&val, &iv.f32, sizeof(float));
-        frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32)); break;
-    }
-    case ValueTag::Float64: {
-        uint64_t val; std::memcpy(&val, &iv.f64, sizeof(double));
-        frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64)); break;
-    }
-    default:
-        frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
-                           static_cast<uint8_t>(ValueTag::ObjectRef)); break;
+        case ValueTag::Int32:
+            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv.i32)),
+                               static_cast<uint8_t>(ValueTag::Int32));
+            break;
+        case ValueTag::Int64:
+            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64), static_cast<uint8_t>(ValueTag::Int64));
+            break;
+        case ValueTag::Float32: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f32, sizeof(float));
+            frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32));
+            break;
+        }
+        case ValueTag::Float64: {
+            uint64_t val;
+            std::memcpy(&val, &iv.f64, sizeof(double));
+            frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64));
+            break;
+        }
+        default:
+            frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
+                               static_cast<uint8_t>(ValueTag::ObjectRef));
+            break;
     }
     ++frame.pc;
 }
@@ -2017,26 +2197,36 @@ static void Reg_StFld(RegisterFrame& frame, const RegisterInstruction& instr) no
     uint64_t val = frame.regs.reg(instr.src1_reg());
     uint8_t tag = frame.regs.reg_tag(instr.src1_reg());
     auto* obj = reinterpret_cast<InterpreterObject*>(frame.regs.reg(instr.src2_reg()));
-    if (obj == nullptr) { ++frame.pc; return; }
+    if (obj == nullptr) {
+        ++frame.pc;
+        return;
+    }
     uint32_t idx = instr.imm.field_offset;
     if (idx >= obj->fields.size()) {
         obj->fields.resize(idx + 1u);
     }
     switch (static_cast<ValueTag>(tag)) {
-    case ValueTag::Int32:
-        obj->fields[idx] = InterpreterValue::from_i32(static_cast<int32_t>(val)); break;
-    case ValueTag::Int64:
-        obj->fields[idx] = InterpreterValue::from_i64(static_cast<int64_t>(val)); break;
-    case ValueTag::Float32: {
-        float fv; std::memcpy(&fv, &val, sizeof(float));
-        obj->fields[idx] = InterpreterValue::from_f32(fv); break;
-    }
-    case ValueTag::Float64: {
-        double dv; std::memcpy(&dv, &val, sizeof(double));
-        obj->fields[idx] = InterpreterValue::from_f64(dv); break;
-    }
-    default:
-        obj->fields[idx] = InterpreterValue::from_obj(reinterpret_cast<void*>(val)); break;
+        case ValueTag::Int32:
+            obj->fields[idx] = InterpreterValue::from_i32(static_cast<int32_t>(val));
+            break;
+        case ValueTag::Int64:
+            obj->fields[idx] = InterpreterValue::from_i64(static_cast<int64_t>(val));
+            break;
+        case ValueTag::Float32: {
+            float fv;
+            std::memcpy(&fv, &val, sizeof(float));
+            obj->fields[idx] = InterpreterValue::from_f32(fv);
+            break;
+        }
+        case ValueTag::Float64: {
+            double dv;
+            std::memcpy(&dv, &val, sizeof(double));
+            obj->fields[idx] = InterpreterValue::from_f64(dv);
+            break;
+        }
+        default:
+            obj->fields[idx] = InterpreterValue::from_obj(reinterpret_cast<void*>(val));
+            break;
     }
     ++frame.pc;
 }
@@ -2103,15 +2293,14 @@ static void Reg_Throw(RegisterFrame& frame, const RegisterInstruction& instr) no
     int32_t catch_idx = -1;
     for (int32_t i = static_cast<int32_t>(frame.seh_clause_count) - 1; i >= 0; --i) {
         const auto& clause = frame.seh_clauses[i];
-        if (frame.pc < clause.try_start_idx || frame.pc >= clause.try_end_idx) continue;
+        if (frame.pc < clause.try_start_idx || frame.pc >= clause.try_end_idx)
+            continue;
         auto flags = static_cast<uint32_t>(clause.flags);
-        if (flags == static_cast<uint32_t>(SEHFlags::Exception) ||
-            flags == static_cast<uint32_t>(SEHFlags::Filter)) {
+        if (flags == static_cast<uint32_t>(SEHFlags::Exception) || flags == static_cast<uint32_t>(SEHFlags::Filter)) {
             // Check typed catch matching.
-            if ((flags & static_cast<uint32_t>(SEHFlags::Typed)) != 0 &&
-                frame.typed_catch_check != nullptr &&
+            if ((flags & static_cast<uint32_t>(SEHFlags::Typed)) != 0 && frame.typed_catch_check != nullptr &&
                 !frame.typed_catch_check(exc_obj, clause.class_token)) {
-                continue;  // Type doesn't match — keep scanning outward.
+                continue; // Type doesn't match — keep scanning outward.
             }
             catch_idx = i;
             break;
@@ -2130,14 +2319,13 @@ static void Reg_Throw(RegisterFrame& frame, const RegisterInstruction& instr) no
     const auto& catch_clause = frame.seh_clauses[catch_idx];
     frame.unwind_finally_count = 0;
     for (int32_t i = 0; i < static_cast<int32_t>(frame.seh_clause_count); ++i) {
-        if (i == catch_idx) continue;
+        if (i == catch_idx)
+            continue;
         const auto& clause = frame.seh_clauses[i];
         auto flags = static_cast<uint32_t>(clause.flags);
-        if ((flags == static_cast<uint32_t>(SEHFlags::Finally) ||
-             flags == static_cast<uint32_t>(SEHFlags::Fault)) &&
+        if ((flags == static_cast<uint32_t>(SEHFlags::Finally) || flags == static_cast<uint32_t>(SEHFlags::Fault)) &&
             frame.pc >= clause.try_start_idx && frame.pc < clause.try_end_idx &&
-            clause.try_start_idx >= catch_clause.try_start_idx &&
-            clause.try_end_idx <= catch_clause.try_end_idx &&
+            clause.try_start_idx >= catch_clause.try_start_idx && clause.try_end_idx <= catch_clause.try_end_idx &&
             frame.unwind_finally_count < RegisterFrame::kMaxUnwindDepth) {
             frame.unwind_finally_list[frame.unwind_finally_count++] = i;
         }
@@ -2160,8 +2348,7 @@ static void Reg_Throw(RegisterFrame& frame, const RegisterInstruction& instr) no
     uint32_t handler_start = static_cast<uint32_t>(catch_clause.handler_start_idx);
     for (uint32_t ei = 0; ei < frame.catch_handler_count; ++ei) {
         if (frame.catch_handler_entries[ei].handler_start_idx == handler_start) {
-            frame.regs.set_reg(frame.catch_handler_entries[ei].exception_reg,
-                               reinterpret_cast<uint64_t>(exc_obj),
+            frame.regs.set_reg(frame.catch_handler_entries[ei].exception_reg, reinterpret_cast<uint64_t>(exc_obj),
                                static_cast<uint8_t>(ValueTag::ObjectRef));
             break;
         }
@@ -2184,14 +2371,14 @@ static void Reg_Rethrow(RegisterFrame& frame, const RegisterInstruction& instr) 
     // Scan backward for innermost catch/filter handler outside the current one.
     int32_t catch_idx = -1;
     for (int32_t i = static_cast<int32_t>(frame.seh_clause_count) - 1; i >= 0; --i) {
-        if (i == frame.active_handler_clause) continue;
+        if (i == frame.active_handler_clause)
+            continue;
         const auto& clause = frame.seh_clauses[i];
-        if (frame.pc < clause.try_start_idx || frame.pc >= clause.try_end_idx) continue;
+        if (frame.pc < clause.try_start_idx || frame.pc >= clause.try_end_idx)
+            continue;
         auto flags = static_cast<uint32_t>(clause.flags);
-        if (flags == static_cast<uint32_t>(SEHFlags::Exception) ||
-            flags == static_cast<uint32_t>(SEHFlags::Filter)) {
-            if ((flags & static_cast<uint32_t>(SEHFlags::Typed)) != 0 &&
-                frame.typed_catch_check != nullptr &&
+        if (flags == static_cast<uint32_t>(SEHFlags::Exception) || flags == static_cast<uint32_t>(SEHFlags::Filter)) {
+            if ((flags & static_cast<uint32_t>(SEHFlags::Typed)) != 0 && frame.typed_catch_check != nullptr &&
                 !frame.typed_catch_check(exc_obj, clause.class_token)) {
                 continue;
             }
@@ -2210,14 +2397,13 @@ static void Reg_Rethrow(RegisterFrame& frame, const RegisterInstruction& instr) 
     const auto& catch_clause = frame.seh_clauses[catch_idx];
     frame.unwind_finally_count = 0;
     for (int32_t i = 0; i < static_cast<int32_t>(frame.seh_clause_count); ++i) {
-        if (i == catch_idx || i == frame.active_handler_clause) continue;
+        if (i == catch_idx || i == frame.active_handler_clause)
+            continue;
         const auto& clause = frame.seh_clauses[i];
         auto flags = static_cast<uint32_t>(clause.flags);
-        if ((flags == static_cast<uint32_t>(SEHFlags::Finally) ||
-             flags == static_cast<uint32_t>(SEHFlags::Fault)) &&
+        if ((flags == static_cast<uint32_t>(SEHFlags::Finally) || flags == static_cast<uint32_t>(SEHFlags::Fault)) &&
             frame.pc >= clause.try_start_idx && frame.pc < clause.try_end_idx &&
-            clause.try_start_idx >= catch_clause.try_start_idx &&
-            clause.try_end_idx <= catch_clause.try_end_idx &&
+            clause.try_start_idx >= catch_clause.try_start_idx && clause.try_end_idx <= catch_clause.try_end_idx &&
             frame.unwind_finally_count < RegisterFrame::kMaxUnwindDepth) {
             frame.unwind_finally_list[frame.unwind_finally_count++] = i;
         }
@@ -2239,8 +2425,7 @@ static void Reg_Rethrow(RegisterFrame& frame, const RegisterInstruction& instr) 
     uint32_t handler_start = static_cast<uint32_t>(catch_clause.handler_start_idx);
     for (uint32_t ei = 0; ei < frame.catch_handler_count; ++ei) {
         if (frame.catch_handler_entries[ei].handler_start_idx == handler_start) {
-            frame.regs.set_reg(frame.catch_handler_entries[ei].exception_reg,
-                               reinterpret_cast<uint64_t>(exc_obj),
+            frame.regs.set_reg(frame.catch_handler_entries[ei].exception_reg, reinterpret_cast<uint64_t>(exc_obj),
                                static_cast<uint8_t>(ValueTag::ObjectRef));
             break;
         }
@@ -2323,46 +2508,46 @@ static void Reg_Break(RegisterFrame& frame, const RegisterInstruction& instr) no
 #define UNSUP Reg_Unsupported
 
 static constexpr RegOpHandler kRegHandlers[100] = {
-    /*  0 */ R(LdcI4),         /*  1 */ R(LdcI8),         /*  2 */ R(LdcR4),
-    /*  3 */ R(LdcR8),         /*  4 */ R(LdStr),          /*  5 */ R(LdNull),
-    /*  6 */ R(LdArg),         /*  7 */ R(LdLoc),          /*  8 */ R(StLoc),
-    /*  9 */ R(StArg),         /* 10 */ R(LdFld),          /* 11 */ R(StFld),
-    /* 12 */ R(LdSFld),        /* 13 */ R(StSFld),         /* 14 */ R(Call),
-    /* 15 */ R(CallVirt),      /* 16 */ R(CallBridge),       /* 17 */ R(Br),
-    /* 18 */ R(BrTrue),        /* 19 */ R(BrFalse),        /* 20 */ R(Beq),
-    /* 21 */ R(Blt),           /* 22 */ R(Bgt),            /* 23 */ R(Ble),
-    /* 24 */ R(Bge),           /* 25 */ R(Add),            /* 26 */ R(Sub),
-    /* 27 */ R(Mul),           /* 28 */ R(Div),            /* 29 */ R(Rem),
-    /* 30 */ R(Neg),           /* 31 */ R(Ceq),            /* 32 */ R(Clt),
-    /* 33 */ R(Cgt),           /* 34 */ R(NewObj),         /* 35 */ R(Box),
-    /* 36 */ R(Unbox),         /* 37 */ R(CastClass),      /* 38 */ R(IsInst),
-    /* 39 */ R(Conv_I4),       /* 40 */ R(Conv_I8),        /* 41 */ R(Conv_R4),
-    /* 42 */ R(Conv_R8),       /* 43 */ R(NewArr),         /* 44 */ R(LdElem),
-    /* 45 */ R(StElem),        /* 46 */ R(LdLen),          /* 47 */ R(Pop),
-    /* 48 */ R(Throw),         /* 49 */ R(Rethrow),        /* 50 */ R(Leave),
-    /* 51 */ R(EndFinally),    /* 52 */ R(EndFilter),      /* 53 */ R(Ret),
-    /* 54 */ R(Dup),           /* 55 */ R(DivUn),          /* 56 */ R(RemUn),
-    /* 57 */ R(And),           /* 58 */ R(Or),             /* 59 */ R(Xor),
-    /* 60 */ R(Not),           /* 61 */ R(Shl),            /* 62 */ R(Shr),
-    /* 63 */ R(ShrUn),         /* 64 */ R(ConvRUn),        /* 65 */ R(ConvI),
-    /* 66 */ R(ConvU),         /* 67 */ R(LdInd),          /* 68 */ R(StInd),
-    /* 69 */ R(Switch),        /* 70 */ R(LdToken),        /* 71 */ R(InitObj),
-    /* 72 */ R(SizeOf),        /* 73 */ R(LdFtn),          /* 74 */ R(LdVirtFtn),
-    /* 75 */ R(LdArgA),        /* 76 */ R(LdLocA),         /* 77 */ R(LocAlloc),
-    /* 78 */ R(Break),         /* 79 */ R(BneUn),          /* 80 */ R(BgeUn),
-    /* 81 */ R(BgtUn),         /* 82 */ R(BleUn),          /* 83 */ R(BltUn),
-    /* 84 */ R(AddOvf),        /* 85 */ R(SubOvf),         /* 86 */ R(MulOvf),
-    /* 87 */ R(ConvOvfI),      /* 88 */ R(ConvOvfI4),      /* 89 */ R(ConvOvfI8),
-    /* 90 */ R(ConvOvfU),      /* 91 */ R(ConvOvfU4),      /* 92 */ R(ConvOvfU8),
-    /* 93 */ R(LdObj),         /* 94 */ R(StObj),          /* 95 */ R(LdElem),      // LdElemA maps to LdElem
-    /* 96 */ R(Cpblk),         /* 97 */ R(InitBlk),        /* 98 */ R(CallVirtConstrained),
+    /*  0 */ R(LdcI4),      /*  1 */ R(LdcI8),      /*  2 */ R(LdcR4),
+    /*  3 */ R(LdcR8),      /*  4 */ R(LdStr),      /*  5 */ R(LdNull),
+    /*  6 */ R(LdArg),      /*  7 */ R(LdLoc),      /*  8 */ R(StLoc),
+    /*  9 */ R(StArg),      /* 10 */ R(LdFld),      /* 11 */ R(StFld),
+    /* 12 */ R(LdSFld),     /* 13 */ R(StSFld),     /* 14 */ R(Call),
+    /* 15 */ R(CallVirt),   /* 16 */ R(CallBridge), /* 17 */ R(Br),
+    /* 18 */ R(BrTrue),     /* 19 */ R(BrFalse),    /* 20 */ R(Beq),
+    /* 21 */ R(Blt),        /* 22 */ R(Bgt),        /* 23 */ R(Ble),
+    /* 24 */ R(Bge),        /* 25 */ R(Add),        /* 26 */ R(Sub),
+    /* 27 */ R(Mul),        /* 28 */ R(Div),        /* 29 */ R(Rem),
+    /* 30 */ R(Neg),        /* 31 */ R(Ceq),        /* 32 */ R(Clt),
+    /* 33 */ R(Cgt),        /* 34 */ R(NewObj),     /* 35 */ R(Box),
+    /* 36 */ R(Unbox),      /* 37 */ R(CastClass),  /* 38 */ R(IsInst),
+    /* 39 */ R(Conv_I4),    /* 40 */ R(Conv_I8),    /* 41 */ R(Conv_R4),
+    /* 42 */ R(Conv_R8),    /* 43 */ R(NewArr),     /* 44 */ R(LdElem),
+    /* 45 */ R(StElem),     /* 46 */ R(LdLen),      /* 47 */ R(Pop),
+    /* 48 */ R(Throw),      /* 49 */ R(Rethrow),    /* 50 */ R(Leave),
+    /* 51 */ R(EndFinally), /* 52 */ R(EndFilter),  /* 53 */ R(Ret),
+    /* 54 */ R(Dup),        /* 55 */ R(DivUn),      /* 56 */ R(RemUn),
+    /* 57 */ R(And),        /* 58 */ R(Or),         /* 59 */ R(Xor),
+    /* 60 */ R(Not),        /* 61 */ R(Shl),        /* 62 */ R(Shr),
+    /* 63 */ R(ShrUn),      /* 64 */ R(ConvRUn),    /* 65 */ R(ConvI),
+    /* 66 */ R(ConvU),      /* 67 */ R(LdInd),      /* 68 */ R(StInd),
+    /* 69 */ R(Switch),     /* 70 */ R(LdToken),    /* 71 */ R(InitObj),
+    /* 72 */ R(SizeOf),     /* 73 */ R(LdFtn),      /* 74 */ R(LdVirtFtn),
+    /* 75 */ R(LdArgA),     /* 76 */ R(LdLocA),     /* 77 */ R(LocAlloc),
+    /* 78 */ R(Break),      /* 79 */ R(BneUn),      /* 80 */ R(BgeUn),
+    /* 81 */ R(BgtUn),      /* 82 */ R(BleUn),      /* 83 */ R(BltUn),
+    /* 84 */ R(AddOvf),     /* 85 */ R(SubOvf),     /* 86 */ R(MulOvf),
+    /* 87 */ R(ConvOvfI),   /* 88 */ R(ConvOvfI4),  /* 89 */ R(ConvOvfI8),
+    /* 90 */ R(ConvOvfU),   /* 91 */ R(ConvOvfU4),  /* 92 */ R(ConvOvfU8),
+    /* 93 */ R(LdObj),      /* 94 */ R(StObj),      /* 95 */ R(LdElem), // LdElemA maps to LdElem
+    /* 96 */ R(Cpblk),      /* 97 */ R(InitBlk),    /* 98 */ R(CallVirtConstrained),
     /* 99 */ R(Calli),
 };
 
 #undef R
 #undef UNSUP
 
-#endif  // !defined(__GNUC__) && !defined(__clang__) — MSVC dispatch table
+#endif // !defined(__GNUC__) && !defined(__clang__) — MSVC dispatch table
 
 // ── OSR: hot loop → T4 native code promotion ──────────────────────────────
 // V1 "promote on re-entry": when RegisterExecute detects a hot loop backward
@@ -2371,10 +2556,9 @@ static constexpr RegOpHandler kRegHandlers[100] = {
 
 static constexpr uint32_t kOsrLoopThreshold = 100;
 
-static void TryOsrPromotion(RegisterFrame& frame,
-                             const RegisterInstruction* instrs,
-                             uint32_t instr_count) noexcept {
-    if (frame.patch_method == nullptr) return;
+static void TryOsrPromotion(RegisterFrame& frame, const RegisterInstruction* instrs, uint32_t instr_count) noexcept {
+    if (frame.patch_method == nullptr)
+        return;
     auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
     using PM = chaos::il2cpp::runtime_core::PatchMethod;
 
@@ -2384,20 +2568,21 @@ static void TryOsrPromotion(RegisterFrame& frame,
         // re-enter T4 via OSR directly.  This handles the deopt→T4
         // re-promotion loop: after deoptimization, the tier_state is still
         // kJitted and the cached JitMethod is still valid.
-        auto* existing_nm = static_cast<chaos::il2cpp::jit::JitMethod*>(
-            pm->cached_native_method);
+        auto* existing_nm = static_cast<chaos::il2cpp::jit::JitMethod*>(pm->cached_native_method);
         if (existing_nm != nullptr && existing_nm->osr_entry_offset != 0) {
             // Set OSR resume PC to loop header (frame.pc is the backward branch
             // target after the branch handler executed).
             chaos::il2cpp::jit::g_jit_deopt_state.osr_resume_pc = frame.pc;
 
             using OsrEntry = void (*)(void*, void*);
-            auto osr_entry = reinterpret_cast<OsrEntry>(
-                static_cast<uint8_t*>(existing_nm->code) + existing_nm->osr_entry_offset);
+            auto osr_entry =
+                reinterpret_cast<OsrEntry>(static_cast<uint8_t*>(existing_nm->code) + existing_nm->osr_entry_offset);
             uint64_t osr_ret_buf[2] = {};
-            CHAOS_IL2CPP_LOG_DEBUG_M("osr", "TryOsrPromotion: re-promote osr_entry at offset={}", existing_nm->osr_entry_offset);
+            CHAOS_IL2CPP_LOG_DEBUG_M("osr", "TryOsrPromotion: re-promote osr_entry at offset={}",
+                                     existing_nm->osr_entry_offset);
             osr_entry(&frame.regs, osr_ret_buf);
-            CHAOS_IL2CPP_LOG_DEBUG_M("osr", "TryOsrPromotion: re-promote osr_entry returned, ret_val=0x{:x}", osr_ret_buf[0]);
+            CHAOS_IL2CPP_LOG_DEBUG_M("osr", "TryOsrPromotion: re-promote osr_entry returned, ret_val=0x{:x}",
+                                     osr_ret_buf[0]);
             frame.ret_val = osr_ret_buf[0];
             frame.has_ret = true;
             frame.pc = 0xFFffFFffu;
@@ -2407,49 +2592,49 @@ static void TryOsrPromotion(RegisterFrame& frame,
 
     // RegisterMethod should already be cached from T3 lowering.
     auto* rm = static_cast<RegisterMethod*>(pm->cached_reg_method);
-    if (rm == nullptr) return;
+    if (rm == nullptr)
+        return;
 
 #if CHAOS_IL2CPP_ENABLE_JIT
     // Generate native code with full deopt support.
-        chaos::il2cpp::jit::CompileConfig cfg;
-        cfg.enable_deopt = true;
-        cfg.enable_liveness = true;
-        cfg.safepoint_fn = reinterpret_cast<void*>
-            (&chaos::il2cpp::runtime_core::threading::SafepointPoll);
+    chaos::il2cpp::jit::CompileConfig cfg;
+    cfg.enable_deopt = true;
+    cfg.enable_liveness = true;
+    cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
 
-        auto* nm = chaos::il2cpp::jit::Compile(*rm, cfg);
-        if (nm == nullptr) return;
+    auto* nm = chaos::il2cpp::jit::Compile(*rm, cfg);
+    if (nm == nullptr)
+        return;
 
-        // OSR V2: if the generated code has an OSR entry, transfer execution
-        // to native code mid-stream with the current register file.
-        if (nm->osr_entry_offset != 0) {
-            // Set tier state BEFORE calling OSR entry so future calls also hit T4.
-            pm->cached_native_method = nm;
-            pm->tier_state.store(PM::kJitted, std::memory_order_release);
-            chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm);
-
-            // Set OSR resume PC to loop header before calling OSR entry.
-            chaos::il2cpp::jit::g_jit_deopt_state.osr_resume_pc = frame.pc;
-
-            using OsrEntry = void (*)(void*, void*);
-            auto osr_entry = reinterpret_cast<OsrEntry>(
-                static_cast<uint8_t*>(nm->code) + nm->osr_entry_offset);
-            uint64_t osr_ret_buf[2] = {};
-            CHAOS_IL2CPP_LOG_DEBUG_M("osr", "TryOsrPromotion: calling osr_entry at offset={}", nm->osr_entry_offset);
-            osr_entry(&frame.regs, osr_ret_buf);
-            CHAOS_IL2CPP_LOG_DEBUG_M("osr", "TryOsrPromotion: osr_entry returned, ret_val=0x{:x}", osr_ret_buf[0]);
-
-            // Native code completed — capture return value and exit RegisterExecute
-            frame.ret_val = osr_ret_buf[0];
-            frame.has_ret = true;
-            frame.pc = 0xFFffFFffu;
-            return;
-        }
-
-        // V1 fallback: cache for re-entry on next call
+    // OSR V2: if the generated code has an OSR entry, transfer execution
+    // to native code mid-stream with the current register file.
+    if (nm->osr_entry_offset != 0) {
+        // Set tier state BEFORE calling OSR entry so future calls also hit T4.
         pm->cached_native_method = nm;
         pm->tier_state.store(PM::kJitted, std::memory_order_release);
         chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm);
+
+        // Set OSR resume PC to loop header before calling OSR entry.
+        chaos::il2cpp::jit::g_jit_deopt_state.osr_resume_pc = frame.pc;
+
+        using OsrEntry = void (*)(void*, void*);
+        auto osr_entry = reinterpret_cast<OsrEntry>(static_cast<uint8_t*>(nm->code) + nm->osr_entry_offset);
+        uint64_t osr_ret_buf[2] = {};
+        CHAOS_IL2CPP_LOG_DEBUG_M("osr", "TryOsrPromotion: calling osr_entry at offset={}", nm->osr_entry_offset);
+        osr_entry(&frame.regs, osr_ret_buf);
+        CHAOS_IL2CPP_LOG_DEBUG_M("osr", "TryOsrPromotion: osr_entry returned, ret_val=0x{:x}", osr_ret_buf[0]);
+
+        // Native code completed — capture return value and exit RegisterExecute
+        frame.ret_val = osr_ret_buf[0];
+        frame.has_ret = true;
+        frame.pc = 0xFFffFFffu;
+        return;
+    }
+
+    // V1 fallback: cache for re-entry on next call
+    pm->cached_native_method = nm;
+    pm->tier_state.store(PM::kJitted, std::memory_order_release);
+    chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm);
 #endif
 }
 
@@ -2459,43 +2644,45 @@ static void TryOsrPromotion(RegisterFrame& frame,
 //            from the dispatch loop. Each label calls the handler directly.
 // MSVC:      function-pointer dispatch via kRegHandlers[100] table.
 
-bool RegisterExecute(RegisterFrame& frame,
-                     const RegisterInstruction* instrs,
-                     uint32_t instr_count) noexcept {
+bool RegisterExecute(RegisterFrame& frame, const RegisterInstruction* instrs, uint32_t instr_count) noexcept {
     frame.pc = 0;
 
 #if defined(__GNUC__) || defined(__clang__)
     // ── Computed-goto dispatch (GCC/Clang) ─────────────────────────────
     static const void* kRegDispatchTable[100] = {
-        &&op_LdcI4, &&op_LdcI8, &&op_LdcR4, &&op_LdcR8,
-        &&op_LdStr, &&op_LdNull, &&op_LdArg, &&op_LdLoc,
-        &&op_StLoc, &&op_StArg, &&op_LdFld, &&op_StFld,
-        &&op_LdSFld, &&op_StSFld, &&op_Call, &&op_CallVirt,
-        &&op_CallBridge, &&op_Br, &&op_BrTrue, &&op_BrFalse,
-        &&op_Beq, &&op_Blt, &&op_Bgt, &&op_Ble,
-        &&op_Bge, &&op_Add, &&op_Sub, &&op_Mul,
-        &&op_Div, &&op_Rem, &&op_Neg, &&op_Ceq,
-        &&op_Clt, &&op_Cgt, &&op_NewObj, &&op_Box,
-        &&op_Unbox, &&op_CastClass, &&op_IsInst,
-        &&op_Conv_I4, &&op_Conv_I8, &&op_Conv_R4, &&op_Conv_R8,
-        &&op_NewArr, &&op_LdElem, &&op_StElem, &&op_LdLen,
-        &&op_Pop, &&op_Throw, &&op_Rethrow, &&op_Leave,
-        &&op_EndFinally, &&op_EndFilter, &&op_Ret,
-        &&op_Dup, &&op_DivUn, &&op_RemUn,
-        &&op_And, &&op_Or, &&op_Xor, &&op_Not,
-        &&op_Shl, &&op_Shr, &&op_ShrUn,
-        &&op_ConvRUn, &&op_ConvI, &&op_ConvU,
-        &&op_LdInd, &&op_StInd,
-        &&op_Switch, &&op_LdToken, &&op_InitObj, &&op_SizeOf,
-        &&op_LdFtn, &&op_LdVirtFtn,
-        &&op_LdArgA, &&op_LdLocA, &&op_LocAlloc,
-        &&op_Break, &&op_BneUn, &&op_BgeUn,
-        &&op_BgtUn, &&op_BleUn, &&op_BltUn,
-        &&op_AddOvf, &&op_SubOvf, &&op_MulOvf,
-        &&op_ConvOvfI, &&op_ConvOvfI4, &&op_ConvOvfI8,
-        &&op_ConvOvfU, &&op_ConvOvfU4, &&op_ConvOvfU8,
-        &&op_LdObj, &&op_StObj, &&op_LdElem,  // LdElemA → LdElem
-        &&op_Cpblk, &&op_InitBlk, &&op_CallVirtConstrained,
+        &&op_LdcI4,      &&op_LdcI8,      &&op_LdcR4,
+        &&op_LdcR8,      &&op_LdStr,      &&op_LdNull,
+        &&op_LdArg,      &&op_LdLoc,      &&op_StLoc,
+        &&op_StArg,      &&op_LdFld,      &&op_StFld,
+        &&op_LdSFld,     &&op_StSFld,     &&op_Call,
+        &&op_CallVirt,   &&op_CallBridge, &&op_Br,
+        &&op_BrTrue,     &&op_BrFalse,    &&op_Beq,
+        &&op_Blt,        &&op_Bgt,        &&op_Ble,
+        &&op_Bge,        &&op_Add,        &&op_Sub,
+        &&op_Mul,        &&op_Div,        &&op_Rem,
+        &&op_Neg,        &&op_Ceq,        &&op_Clt,
+        &&op_Cgt,        &&op_NewObj,     &&op_Box,
+        &&op_Unbox,      &&op_CastClass,  &&op_IsInst,
+        &&op_Conv_I4,    &&op_Conv_I8,    &&op_Conv_R4,
+        &&op_Conv_R8,    &&op_NewArr,     &&op_LdElem,
+        &&op_StElem,     &&op_LdLen,      &&op_Pop,
+        &&op_Throw,      &&op_Rethrow,    &&op_Leave,
+        &&op_EndFinally, &&op_EndFilter,  &&op_Ret,
+        &&op_Dup,        &&op_DivUn,      &&op_RemUn,
+        &&op_And,        &&op_Or,         &&op_Xor,
+        &&op_Not,        &&op_Shl,        &&op_Shr,
+        &&op_ShrUn,      &&op_ConvRUn,    &&op_ConvI,
+        &&op_ConvU,      &&op_LdInd,      &&op_StInd,
+        &&op_Switch,     &&op_LdToken,    &&op_InitObj,
+        &&op_SizeOf,     &&op_LdFtn,      &&op_LdVirtFtn,
+        &&op_LdArgA,     &&op_LdLocA,     &&op_LocAlloc,
+        &&op_Break,      &&op_BneUn,      &&op_BgeUn,
+        &&op_BgtUn,      &&op_BleUn,      &&op_BltUn,
+        &&op_AddOvf,     &&op_SubOvf,     &&op_MulOvf,
+        &&op_ConvOvfI,   &&op_ConvOvfI4,  &&op_ConvOvfI8,
+        &&op_ConvOvfU,   &&op_ConvOvfU4,  &&op_ConvOvfU8,
+        &&op_LdObj,      &&op_StObj,      &&op_LdElem, // LdElemA → LdElem
+        &&op_Cpblk,      &&op_InitBlk,    &&op_CallVirtConstrained,
         &&op_Calli,
     };
 
@@ -2508,33 +2695,39 @@ bool RegisterExecute(RegisterFrame& frame,
 
     // ── Dispatch loop top ────────────────────────────────────────────────
 dispatch_loop:
-    if (frame.pc >= instr_count) goto done;
+    if (frame.pc >= instr_count)
+        goto done;
     prev_pc = frame.pc;
     {
         uint32_t op_val = static_cast<uint32_t>(instrs[prev_pc].op_code());
-        if (op_val > 99) { frame.threw_exception = true; goto done; }
+        if (op_val > 99) {
+            frame.threw_exception = true;
+            goto done;
+        }
         goto* kRegDispatchTable[op_val];
     }
 
     // ── Post-handler: OSR check + exit detection ─────────────────────────
 dispatch_next:
     // Check exit conditions set by handlers (Ret → 0xFFffFFffu, unhandled Throw → 9999).
-    if (frame.pc == 0xFFffFFffu) goto done;
-    if (frame.threw_exception && frame.pc == 9999) goto done;
+    if (frame.pc == 0xFFffFFffu)
+        goto done;
+    if (frame.threw_exception && frame.pc == 9999)
+        goto done;
 
     // OSR: detect hot loop backward branch.
     if (frame.pc < prev_pc) {
         uint32_t threshold = kOsrLoopThreshold;
         if (frame.osr_reenable) {
             auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
-            threshold = (pm != nullptr && pm->deopt_count > 0)
-                ? (kOsrLoopThreshold << std::min(pm->deopt_count, 5u))
-                : 1u;
+            threshold =
+                (pm != nullptr && pm->deopt_count > 0) ? (kOsrLoopThreshold << std::min(pm->deopt_count, 5u)) : 1u;
             frame.osr_reenable = false;
         }
         if (++loop_counter >= threshold) {
             TryOsrPromotion(frame, instrs, instr_count);
-            if (frame.pc == 0xFFffFFffu) goto done;  // OSR took over
+            if (frame.pc == 0xFFffFFffu)
+                goto done; // OSR took over
         }
     }
     goto dispatch_loop;
@@ -2545,52 +2738,49 @@ dispatch_next:
     // indirect function-call dispatch overhead vs. the MSVC function-pointer
     // path while keeping handler code in separate (testable) functions.
 
-#define CG_HANDLER(name)  op_##name: { Reg_##name(frame, instrs[prev_pc]); goto dispatch_next; }
-#define CG_EXIT(name)     op_##name: { Reg_##name(frame, instrs[prev_pc]); goto done; }
+#define CG_HANDLER(name)                    \
+    op_##name : {                           \
+        Reg_##name(frame, instrs[prev_pc]); \
+        goto dispatch_next;                 \
+    }
+#define CG_EXIT(name)                       \
+    op_##name : {                           \
+        Reg_##name(frame, instrs[prev_pc]); \
+        goto done;                          \
+    }
 
-    CG_HANDLER(LdcI4)           CG_HANDLER(LdcI8)           CG_HANDLER(LdcR4)
-    CG_HANDLER(LdcR8)           CG_HANDLER(LdStr)           CG_HANDLER(LdNull)
-    CG_HANDLER(LdArg)           CG_HANDLER(LdLoc)           CG_HANDLER(StLoc)
-    CG_HANDLER(StArg)           CG_HANDLER(LdFld)           CG_HANDLER(StFld)
-    CG_HANDLER(LdSFld)          CG_HANDLER(StSFld)          CG_HANDLER(Call)
-    CG_HANDLER(CallVirt)        CG_HANDLER(CallBridge)      CG_HANDLER(Br)
-    CG_HANDLER(BrTrue)          CG_HANDLER(BrFalse)         CG_HANDLER(Beq)
-    CG_HANDLER(Blt)             CG_HANDLER(Bgt)             CG_HANDLER(Ble)
-    CG_HANDLER(Bge)             CG_HANDLER(Add)             CG_HANDLER(Sub)
-    CG_HANDLER(Mul)             CG_HANDLER(Div)             CG_HANDLER(Rem)
-    CG_HANDLER(Neg)             CG_HANDLER(Ceq)             CG_HANDLER(Clt)
-    CG_HANDLER(Cgt)             CG_HANDLER(NewObj)          CG_HANDLER(Box)
-    CG_HANDLER(Unbox)           CG_HANDLER(CastClass)       CG_HANDLER(IsInst)
-    CG_HANDLER(Conv_I4)         CG_HANDLER(Conv_I8)         CG_HANDLER(Conv_R4)
-    CG_HANDLER(Conv_R8)         CG_HANDLER(NewArr)          CG_HANDLER(LdElem)
-    CG_HANDLER(StElem)          CG_HANDLER(LdLen)           CG_HANDLER(Pop)
-    CG_HANDLER(Throw)           CG_HANDLER(Rethrow)         CG_HANDLER(Leave)
-    CG_HANDLER(EndFinally)      CG_HANDLER(EndFilter)       CG_HANDLER(Ret)
-    CG_HANDLER(Dup)             CG_HANDLER(DivUn)           CG_HANDLER(RemUn)
-    CG_HANDLER(And)             CG_HANDLER(Or)              CG_HANDLER(Xor)
-    CG_HANDLER(Not)             CG_HANDLER(Shl)             CG_HANDLER(Shr)
-    CG_HANDLER(ShrUn)           CG_HANDLER(ConvRUn)         CG_HANDLER(ConvI)
-    CG_HANDLER(ConvU)           CG_HANDLER(LdInd)           CG_HANDLER(StInd)
-    CG_HANDLER(Switch)          CG_HANDLER(LdToken)         CG_HANDLER(InitObj)
-    CG_HANDLER(SizeOf)          CG_HANDLER(LdFtn)           CG_HANDLER(LdVirtFtn)
-    CG_HANDLER(LdArgA)          CG_HANDLER(LdLocA)          CG_HANDLER(LocAlloc)
-    CG_HANDLER(Break)           CG_HANDLER(BneUn)           CG_HANDLER(BgeUn)
-    CG_HANDLER(BgtUn)           CG_HANDLER(BleUn)           CG_HANDLER(BltUn)
-    CG_HANDLER(AddOvf)          CG_HANDLER(SubOvf)          CG_HANDLER(MulOvf)
-    CG_HANDLER(ConvOvfI)        CG_HANDLER(ConvOvfI4)       CG_HANDLER(ConvOvfI8)
-    CG_HANDLER(ConvOvfU)        CG_HANDLER(ConvOvfU4)       CG_HANDLER(ConvOvfU8)
-    CG_HANDLER(LdObj)           CG_HANDLER(StObj)
-    CG_HANDLER(Cpblk)           CG_HANDLER(InitBlk)         CG_HANDLER(CallVirtConstrained)
-    CG_HANDLER(Calli)
+    CG_HANDLER(LdcI4)
+    CG_HANDLER(LdcI8) CG_HANDLER(LdcR4) CG_HANDLER(LdcR8) CG_HANDLER(LdStr) CG_HANDLER(LdNull) CG_HANDLER(
+        LdArg) CG_HANDLER(LdLoc) CG_HANDLER(StLoc) CG_HANDLER(StArg) CG_HANDLER(LdFld) CG_HANDLER(StFld)
+        CG_HANDLER(LdSFld) CG_HANDLER(StSFld) CG_HANDLER(Call) CG_HANDLER(CallVirt) CG_HANDLER(CallBridge) CG_HANDLER(
+            Br) CG_HANDLER(BrTrue) CG_HANDLER(BrFalse) CG_HANDLER(Beq) CG_HANDLER(Blt) CG_HANDLER(Bgt) CG_HANDLER(Ble)
+            CG_HANDLER(Bge) CG_HANDLER(Add) CG_HANDLER(Sub) CG_HANDLER(Mul) CG_HANDLER(Div) CG_HANDLER(Rem) CG_HANDLER(
+                Neg) CG_HANDLER(Ceq) CG_HANDLER(Clt) CG_HANDLER(Cgt) CG_HANDLER(NewObj) CG_HANDLER(Box)
+                CG_HANDLER(Unbox) CG_HANDLER(CastClass) CG_HANDLER(IsInst) CG_HANDLER(Conv_I4) CG_HANDLER(Conv_I8)
+                    CG_HANDLER(Conv_R4) CG_HANDLER(Conv_R8) CG_HANDLER(NewArr) CG_HANDLER(LdElem) CG_HANDLER(StElem)
+                        CG_HANDLER(LdLen) CG_HANDLER(Pop) CG_HANDLER(Throw) CG_HANDLER(Rethrow) CG_HANDLER(Leave)
+                            CG_HANDLER(EndFinally) CG_HANDLER(EndFilter) CG_HANDLER(Ret) CG_HANDLER(Dup) CG_HANDLER(
+                                DivUn) CG_HANDLER(RemUn) CG_HANDLER(And) CG_HANDLER(Or) CG_HANDLER(Xor) CG_HANDLER(Not)
+                                CG_HANDLER(Shl) CG_HANDLER(Shr) CG_HANDLER(ShrUn) CG_HANDLER(ConvRUn) CG_HANDLER(ConvI)
+                                    CG_HANDLER(ConvU) CG_HANDLER(LdInd) CG_HANDLER(StInd) CG_HANDLER(Switch) CG_HANDLER(
+                                        LdToken) CG_HANDLER(InitObj) CG_HANDLER(SizeOf) CG_HANDLER(LdFtn)
+                                        CG_HANDLER(LdVirtFtn) CG_HANDLER(LdArgA) CG_HANDLER(LdLocA) CG_HANDLER(LocAlloc)
+                                            CG_HANDLER(Break) CG_HANDLER(BneUn) CG_HANDLER(BgeUn) CG_HANDLER(BgtUn)
+                                                CG_HANDLER(BleUn) CG_HANDLER(BltUn) CG_HANDLER(AddOvf)
+                                                    CG_HANDLER(SubOvf) CG_HANDLER(MulOvf) CG_HANDLER(ConvOvfI)
+                                                        CG_HANDLER(ConvOvfI4) CG_HANDLER(ConvOvfI8) CG_HANDLER(ConvOvfU)
+                                                            CG_HANDLER(ConvOvfU4) CG_HANDLER(ConvOvfU8)
+                                                                CG_HANDLER(LdObj) CG_HANDLER(StObj) CG_HANDLER(Cpblk)
+                                                                    CG_HANDLER(InitBlk) CG_HANDLER(CallVirtConstrained)
+                                                                        CG_HANDLER(Calli)
 
 #undef CG_HANDLER
 #undef CG_EXIT
 
-done:
-    frame.CleanupTracked();
+                                                                            done : frame.CleanupTracked();
     return !frame.threw_exception;
 
-#else   // MSVC — function-pointer dispatch
+#else  // MSVC — function-pointer dispatch
     // ── MSVC fallback: original function-pointer dispatch ──────────────
     CHAOS_IL2CPP_PROFILE_SCOPE("RegisterExecute");
     uint32_t loop_counter = 0;
@@ -2610,14 +2800,14 @@ done:
             uint32_t threshold = kOsrLoopThreshold;
             if (frame.osr_reenable) {
                 auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
-                threshold = (pm != nullptr && pm->deopt_count > 0)
-                    ? (kOsrLoopThreshold << std::min(pm->deopt_count, 5u))
-                    : 1u;
+                threshold =
+                    (pm != nullptr && pm->deopt_count > 0) ? (kOsrLoopThreshold << std::min(pm->deopt_count, 5u)) : 1u;
                 frame.osr_reenable = false;
             }
             if (++loop_counter >= threshold) {
                 TryOsrPromotion(frame, instrs, instr_count);
-                if (frame.pc == 0xFFffFFffu) continue;
+                if (frame.pc == 0xFFffFFffu)
+                    continue;
             }
         }
 
@@ -2634,7 +2824,7 @@ done:
 
     frame.CleanupTracked();
     return true;
-#endif  // defined(__GNUC__) || defined(__clang__)
+#endif // defined(__GNUC__) || defined(__clang__)
 }
 
-}  // namespace chaOS_IL2CPP_INTERPRETER_H_
+} // namespace chaos::il2cpp::interpreter

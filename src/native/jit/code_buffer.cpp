@@ -16,7 +16,8 @@ CodeBuffer::~CodeBuffer() noexcept {
 }
 
 CodeBuffer::CodeBuffer(CodeBuffer&& other) noexcept
-    : data_(other.data_), pos_(other.pos_), capacity_(other.capacity_), alloc_size_(other.alloc_size_), failed_(other.failed_) {
+    : data_(other.data_), pos_(other.pos_), capacity_(other.capacity_), alloc_size_(other.alloc_size_),
+      failed_(other.failed_) {
     other.data_ = nullptr;
     other.pos_ = 0;
     other.capacity_ = 0;
@@ -42,16 +43,18 @@ CodeBuffer& CodeBuffer::operator=(CodeBuffer&& other) noexcept {
 }
 
 void CodeBuffer::Ensure(uint32_t needed) noexcept {
-    if (failed_) return;
+    if (failed_)
+        return;
     if (pos_ + needed > capacity_) {
         uint32_t new_cap = capacity_ * 2;
-        if (new_cap < kCodeBufferInitSize) new_cap = kCodeBufferInitSize;
-        if (new_cap > kCodeBufferMaxSize) new_cap = kCodeBufferMaxSize;
+        if (new_cap < kCodeBufferInitSize)
+            new_cap = kCodeBufferInitSize;
+        if (new_cap > kCodeBufferMaxSize)
+            new_cap = kCodeBufferMaxSize;
         if (pos_ + needed > new_cap) {
             new_cap = pos_ + needed + kCodeBufferInitSize;
             if (new_cap > kCodeBufferMaxSize) {
-                CHAOS_IL2CPP_LOG_ERROR_M("codegen", "CodeBuffer: would exceed max size {}",
-                                         kCodeBufferMaxSize);
+                CHAOS_IL2CPP_LOG_ERROR_M("codegen", "CodeBuffer: would exceed max size {}", kCodeBufferMaxSize);
                 failed_ = true;
                 return;
             }
@@ -63,9 +66,8 @@ void CodeBuffer::Ensure(uint32_t needed) noexcept {
 }
 
 bool CodeBuffer::Grow(uint32_t min_capacity) noexcept {
-    uint32_t new_alloc = (min_capacity + 4095) & ~4095u;  // Round up to page
-    uint8_t* new_data = static_cast<uint8_t*>(
-        chaos::il2cpp::pal::PalVirtualAlloc(new_alloc));
+    uint32_t new_alloc = (min_capacity + 4095) & ~4095u; // Round up to page
+    uint8_t* new_data = static_cast<uint8_t*>(chaos::il2cpp::pal::PalVirtualAlloc(new_alloc));
 
     if (new_data == nullptr) {
         CHAOS_IL2CPP_LOG_ERROR_M("codegen", "CodeBuffer: failed to allocate {} bytes", new_alloc);
@@ -89,15 +91,14 @@ bool CodeBuffer::Grow(uint32_t min_capacity) noexcept {
 }
 
 void* CodeBuffer::Seal() noexcept {
-    if (data_ == nullptr || pos_ == 0 || failed_) return nullptr;
+    if (data_ == nullptr || pos_ == 0 || failed_)
+        return nullptr;
 
     // Trim to actual size (round up to page)
     uint32_t needed = (pos_ + 4095) & ~4095u;
     if (needed < alloc_size_) {
         // Free the excess pages
-        chaos::il2cpp::pal::PalVirtualDecommit(
-            static_cast<uint8_t*>(data_) + needed,
-            alloc_size_ - needed);
+        chaos::il2cpp::pal::PalVirtualDecommit(static_cast<uint8_t*>(data_) + needed, alloc_size_ - needed);
     }
 
     if (!ProtectPlatform(true)) {
@@ -119,7 +120,8 @@ void* CodeBuffer::Seal() noexcept {
 }
 
 void CodeBuffer::FreePlatform() noexcept {
-    if (data_ == nullptr) return;
+    if (data_ == nullptr)
+        return;
     chaos::il2cpp::pal::PalVirtualFree(data_, alloc_size_);
     data_ = nullptr;
     capacity_ = 0;
@@ -129,9 +131,9 @@ void CodeBuffer::FreePlatform() noexcept {
 
 bool CodeBuffer::AllocPlatform(uint32_t size) noexcept {
     uint32_t alloc = (size + 4095) & ~4095u;
-    data_ = static_cast<uint8_t*>(
-        chaos::il2cpp::pal::PalVirtualAlloc(alloc));
-    if (data_ == nullptr) return false;
+    data_ = static_cast<uint8_t*>(chaos::il2cpp::pal::PalVirtualAlloc(alloc));
+    if (data_ == nullptr)
+        return false;
     capacity_ = size;
     alloc_size_ = alloc;
     pos_ = 0;
@@ -139,11 +141,10 @@ bool CodeBuffer::AllocPlatform(uint32_t size) noexcept {
 }
 
 bool CodeBuffer::ProtectPlatform(bool executable) noexcept {
-    if (data_ == nullptr) return false;
-    auto prot = executable
-        ? chaos::il2cpp::pal::kPalMemReadExec
-        : chaos::il2cpp::pal::kPalMemReadWrite;
+    if (data_ == nullptr)
+        return false;
+    auto prot = executable ? chaos::il2cpp::pal::kPalMemReadExec : chaos::il2cpp::pal::kPalMemReadWrite;
     return chaos::il2cpp::pal::PalVirtualProtect(data_, alloc_size_, prot);
 }
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit

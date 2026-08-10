@@ -19,7 +19,7 @@
 #include "ISehHandler.h"
 #include "jit_method.h"
 #include "jit_helpers.h"
-#include "../interpreter/ir_reg_alloc.h"  // RegisterMethod, RegisterInstruction
+#include "../interpreter/ir_reg_alloc.h" // RegisterMethod, RegisterInstruction
 
 #include <cstdint>
 #include <cstddef>
@@ -31,7 +31,7 @@ namespace chaos::il2cpp::jit {
 /// no liveness, no deopt metadata, no SEH).  Tier 1 is the full pipeline with
 /// graph coloring, optimizer, liveness analysis, deopt, SEH, and OSR.
 enum class CompileTier : uint8_t {
-    kQuick = 0,  // Quick JIT (<50µs target): stack-only, no optimizer/liveness/deopt/SEH
+    kQuick = 0, // Quick JIT (<50µs target): stack-only, no optimizer/liveness/deopt/SEH
     kFull = 1,  // Standard JIT: full pipeline with graph coloring + optimizations
 };
 
@@ -81,7 +81,7 @@ struct CompileConfig {
     // hotpatch tracking.  Indexed by current_instr_index_.
     // nullptr = no call cache available (T4 test paths without PatchMethod).
     const void* call_cache = nullptr;
-    uint32_t    call_cache_count = 0;
+    uint32_t call_cache_count = 0;
 
     // This method's own AOT metadata token.
     // Used by RegisterNativeCodeSection to associate the generated code with its token
@@ -95,20 +95,20 @@ struct CompileConfig {
     // ObjectRef, enabling precise GC slot maps for method arguments.
     // Indexed by `RegisterInstruction::imm::operand_index`.
     const uint8_t* arg_type_tags = nullptr;
-    uint32_t       arg_type_count = 0;
+    uint32_t arg_type_count = 0;
 
     // ── Precise GC: field type tags by field token (indexed by token value) ─
     // When non-null, LdFld/LdSFld type inference uses the per-field tag
     // instead of conservative ObjectRef, enabling precise GC slot maps.
     const uint8_t* field_type_tags = nullptr;
-    uint32_t       field_type_count = 0;
+    uint32_t field_type_count = 0;
 
     // ── Precise GC: method return type tags by instruction index ──────────
     // When non-null, Call/CallVirt/CallBridge/Calli type inference uses the
     // per-instruction return tag as a fallback when call_cache ret_tag is
     // unavailable.  Indexed by current_instr_index_.
     const uint8_t* method_ret_tags = nullptr;
-    uint32_t       method_ret_tag_count = 0;
+    uint32_t method_ret_tag_count = 0;
 
     // ── Per-instruction PIC data for inline monomorphic cache ──────────
     // Populated by entry_direct.cpp from the first PIC chain slot for each
@@ -117,7 +117,7 @@ struct CompileConfig {
     // monomorphic check + direct call instead of going through CodegenCallVirt.
     // Indexed by current_instr_index_.
     const PerInstrPicData* per_instr_pic = nullptr;
-    uint32_t               per_instr_pic_count = 0;
+    uint32_t per_instr_pic_count = 0;
 
     /// Compilation tier.  kFull (full pipeline) by default.
     CompileTier compile_tier = CompileTier::kFull;
@@ -153,15 +153,12 @@ struct CompileConfig {
 ///
 /// @return JitMethod containing the generated code + metadata,
 ///         or nullptr on failure (unsupported opcodes, allocation error).
-JitMethod* Compile(
-    const interpreter::RegisterMethod& rm,
-    const CompileConfig& config = CompileConfig()) noexcept;
+JitMethod* Compile(const interpreter::RegisterMethod& rm, const CompileConfig& config = CompileConfig()) noexcept;
 
 /// Check if Compile can handle this RegisterMethod.
 /// Returns false if the method contains unsupported opcodes.
-bool CanCompile(
-    const interpreter::RegisterMethod& rm) noexcept;
+bool CanCompile(const interpreter::RegisterMethod& rm) noexcept;
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_CODEGEN_CODE_GENERATOR_H_
+#endif // CHAOS_IL2CPP_CODEGEN_CODE_GENERATOR_H_

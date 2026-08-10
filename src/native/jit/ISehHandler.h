@@ -12,8 +12,7 @@ public:
     virtual ~ISehHandler() = default;
 
     /// Register a range of T4-generated code for VEH/signal lookup.
-    virtual void RegisterCode(void* code_start, uint32_t code_size,
-                              const JitMethod* nm,
+    virtual void RegisterCode(void* code_start, uint32_t code_size, const JitMethod* nm,
                               uint32_t patch_method_token = 0) noexcept = 0;
 
     /// Unregister a T4 code range.
@@ -46,6 +45,6 @@ public:
 /// Returns WinSehHandler on Windows, LinuxSehHandler on Linux.
 ISehHandler& GetSehHandler() noexcept;
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_ISEHHANDLER_H_
+#endif // CHAOS_IL2CPP_ISEHHANDLER_H_

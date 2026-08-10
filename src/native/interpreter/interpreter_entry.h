@@ -37,11 +37,11 @@ public:
     explicit ArgBuffer(void* buffer) noexcept;
 
     // Read methods (advance offset)
-    CHAOS_IL2CPP_INT32   ReadI32() noexcept;
-    CHAOS_IL2CPP_INT64   ReadI64() noexcept;
+    CHAOS_IL2CPP_INT32 ReadI32() noexcept;
+    CHAOS_IL2CPP_INT64 ReadI64() noexcept;
     CHAOS_IL2CPP_FLOAT32 ReadF32() noexcept;
     CHAOS_IL2CPP_FLOAT64 ReadF64() noexcept;
-    void*                ReadPtr() noexcept;
+    void* ReadPtr() noexcept;
 
     // Write methods (advance offset)
     void WriteI32(CHAOS_IL2CPP_INT32 value) noexcept;
@@ -57,7 +57,7 @@ public:
     size_t Offset() const noexcept { return offset_; }
 
 private:
-    void*  buffer_;
+    void* buffer_;
     size_t offset_ = 0;
 };
 
@@ -71,10 +71,7 @@ private:
 // This function is the value of every dispatch entry's interrupt_ptr.
 // All patched methods share the same entry point; the PatchMethod*
 // (extracted from method_key) identifies which method to execute.
-void InterpreterEntryDirect(
-    uintptr_t method_key,
-    void*     args_buf,
-    void*     ret_buf) noexcept;
+void InterpreterEntryDirect(uintptr_t method_key, void* args_buf, void* ret_buf) noexcept;
 
 // ── InterpreterEntryDirectFast ─────────────────────────────────────────────
 // Fast-path entry point that internally allocates args/ret buffers without
@@ -89,17 +86,13 @@ void InterpreterEntryDirect(
 //   - Return value is written to internal ret_buf, then discarded
 //
 // Thread safety: same as InterpreterEntryDirect — lock-free after first call.
-void InterpreterEntryDirectFast(
-    uintptr_t method_key) noexcept;
+void InterpreterEntryDirectFast(uintptr_t method_key) noexcept;
 
 // ── Register direct function table ─────────────────────────────────────────
 // Called by generated code to register kAotDirectFnTable/SubjectIds/Count.
 // Avoids linker errors when chaos_runtime_core.lib doesn't have family-specific
 // extern symbols.
-extern "C" void ChaosRegisterDirectFnTable(
-    const char* const* subjects,
-    const void* const* table,
-    int count) noexcept;
+extern "C" void ChaosRegisterDirectFnTable(const char* const* subjects, const void* const* table, int count) noexcept;
 
 // ── PatchMethod lazy IR lowering (declared for use by InterpreterEntryDirect) ─
 // Lower a PatchMethod's IL to IR if not already cached.
@@ -122,6 +115,6 @@ void ReapplyInlining(PatchMethod* methods, uint32_t method_count) noexcept;
 // Implementation in eager_compile.cpp (interpreter links against JIT).
 void EagerCompilePatchMethods(PatchMethod* methods, uint32_t method_count) noexcept;
 
-}  // namespace chaos::il2cpp::runtime_core
+} // namespace chaos::il2cpp::runtime_core
 
-#endif  // CHAOS_IL2CPP_INTERPRETER_ENTRY_H_
+#endif // CHAOS_IL2CPP_INTERPRETER_ENTRY_H_

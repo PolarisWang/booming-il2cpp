@@ -29,7 +29,7 @@ using ObjectStorage = InterpreterObject;
 /// The vast majority of managed methods have < 8 parameters.
 static constexpr CHAOS_IL2CPP_UINT32 kMaxCallArgs = 8u;
 
-}  // anonymous namespace
+} // anonymous namespace
 
 /// Definition of the process-global static fields vector.
 /// Extern declaration in fast_dispatch.cpp.
@@ -127,8 +127,7 @@ static int FindEnclosingFinally(const IRMethod& method, CHAOS_IL2CPP_SIZE idx) {
         const auto& clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(i)];
         if (idx >= clause.try_start_idx && idx < clause.try_end_idx) {
             const auto flags = static_cast<uint32_t>(clause.flags);
-            if (flags == static_cast<uint32_t>(SEHFlags::Finally) ||
-                flags == static_cast<uint32_t>(SEHFlags::Fault)) {
+            if (flags == static_cast<uint32_t>(SEHFlags::Finally) || flags == static_cast<uint32_t>(SEHFlags::Fault)) {
                 return i;
             }
         }
@@ -151,7 +150,7 @@ static int FindEnclosingCatch(const IRMethod& method, CHAOS_IL2CPP_SIZE idx) {
     return -1;
 }
 
-}  // namespace
+} // namespace
 
 // ── InterpreterValue lifecycle ──────────────────────────────────────────
 
@@ -163,10 +162,7 @@ void InterpreterValue::FreeStruct() {
     }
 }
 
-InterpreterValue::InterpreterValue(const InterpreterValue& other)
-    : tag(other.tag)
-    , struct_size(other.struct_size)
-{
+InterpreterValue::InterpreterValue(const InterpreterValue& other) : tag(other.tag), struct_size(other.struct_size) {
     if (tag == ValueTag::Struct && other.obj != nullptr) {
         // Deep-copy struct data.
         obj = CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(struct_size);
@@ -277,9 +273,15 @@ InterpreterValue InterpreterValue::null_val() {
 
 ExecutionFrame::~ExecutionFrame() {
     // Free struct data in all stored values.
-    for (auto& v : arguments) { v.FreeStruct(); }
-    for (auto& v : locals)    { v.FreeStruct(); }
-    for (auto& v : stack)     { v.FreeStruct(); }
+    for (auto& v : arguments) {
+        v.FreeStruct();
+    }
+    for (auto& v : locals) {
+        v.FreeStruct();
+    }
+    for (auto& v : stack) {
+        v.FreeStruct();
+    }
     // Free localloc allocations.
     for (auto* block : localloc_blocks) {
         CHAOS_IL2CPP_FREE(block);
@@ -294,17 +296,17 @@ CHAOS_IL2CPP_SIZE InterpreterVM::GetBranchTarget(const IRMethod& method, CHAOS_I
     return target;
 }
 
-void InterpreterVM::EnsureLocal(CHAOS_IL2CPP_VECTOR(InterpreterValue)* locals, CHAOS_IL2CPP_SIZE index) {
+void InterpreterVM::EnsureLocal(CHAOS_IL2CPP_VECTOR(InterpreterValue) * locals, CHAOS_IL2CPP_SIZE index) {
     if (locals == nullptr) {
         throw CHAOS_IL2CPP_INVALID_ARGUMENT("locals");
     }
 
     if (locals->size() <= index) {
-        locals->resize(index + 1u, InterpreterValue{});
+        locals->resize(index + 1u, InterpreterValue {});
     }
 }
 
-InterpreterValue InterpreterVM::Pop(CHAOS_IL2CPP_VECTOR(InterpreterValue)* stack) {
+InterpreterValue InterpreterVM::Pop(CHAOS_IL2CPP_VECTOR(InterpreterValue) * stack) {
     if (stack == nullptr || stack->empty()) {
         throw CHAOS_IL2CPP_RUNTIME_ERROR("evaluation stack underflow");
     }
@@ -323,19 +325,19 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
     CHAOS_IL2CPP_SIZE instruction_index = 0;
 
     // SEH execution state.
-    bool        in_handler              = false;
-    bool        pending_leave           = false;
+    bool in_handler = false;
+    bool pending_leave = false;
     CHAOS_IL2CPP_SIZE pending_leave_target = 0u;
-    int32_t     active_handler_clause   = -1;
+    int32_t active_handler_clause = -1;
 
     // Two-phase exception state.
-    bool        exception_in_flight     = false;
-    InterpreterValue exception_obj      = {};
-    int32_t     unwind_catch_clause     = -1;
+    bool exception_in_flight = false;
+    InterpreterValue exception_obj = {};
+    int32_t unwind_catch_clause = -1;
     static constexpr int kMaxUnwindDepth = 8;
-    int32_t     unwind_finally_list[kMaxUnwindDepth] = {};
-    int32_t     unwind_finally_count    = 0;
-    int32_t     unwind_finally_current  = 0;
+    int32_t unwind_finally_list[kMaxUnwindDepth] = {};
+    int32_t unwind_finally_count = 0;
+    int32_t unwind_finally_current = 0;
 
     // ── Filter evaluation state ───────────────────────────────────────────
     // When a Filter clause is encountered during exception search, we transfer
@@ -346,10 +348,10 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
     //
     // filter_evaluating is true while the filter expression is running.
     // Original throw point (filter_throw_ip) is saved for the resume scan.
-    bool        filter_evaluating       = false;
-    int32_t     filter_active_clause    = -1;
-    int32_t     filter_search_resume_idx = 0;          // next clause idx (exclusive end) to scan
-    CHAOS_IL2CPP_SIZE filter_throw_ip   = 0u;
+    bool filter_evaluating = false;
+    int32_t filter_active_clause = -1;
+    int32_t filter_search_resume_idx = 0; // next clause idx (exclusive end) to scan
+    CHAOS_IL2CPP_SIZE filter_throw_ip = 0u;
 
     // ── SEH helper lambdas (capture locals by reference) ──────────────────
 
@@ -362,12 +364,9 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
     // Default (size of seh_clauses) means "scan all clauses".  When resuming
     // after a filter rejected the exception, this is set to the rejected
     // clause index, so we skip it and any inner clauses already considered.
-    auto findCatchHandler = [&](CHAOS_IL2CPP_SIZE ip,
-                                const InterpreterValue* exc_val = nullptr,
+    auto findCatchHandler = [&](CHAOS_IL2CPP_SIZE ip, const InterpreterValue* exc_val = nullptr,
                                 int start_idx_excl = -1) -> int {
-        const int upper = (start_idx_excl < 0)
-            ? static_cast<int>(method.seh_clauses.size())
-            : start_idx_excl;
+        const int upper = (start_idx_excl < 0) ? static_cast<int>(method.seh_clauses.size()) : start_idx_excl;
         for (int i = upper - 1; i >= 0; --i) {
             const auto& clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(i)];
             if (ip >= clause.try_start_idx && ip < clause.try_end_idx) {
@@ -382,7 +381,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                         const auto ptr_as_int = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(exc_val->obj);
                         if (ptr_as_int < 0 && ptr_as_int >= kManagedExceptionComFailure) {
                             const bool is_typed = (flags & static_cast<uint32_t>(SEHFlags::Typed)) != 0;
-                            if (is_typed) continue;  // Skip typed catch for sentinels.
+                            if (is_typed)
+                                continue; // Skip typed catch for sentinels.
                         }
                     }
                     return i;
@@ -398,16 +398,14 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
         unwind_finally_count = 0;
         const auto& catch_clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(catch_idx)];
         for (int i = 0; i < static_cast<int>(method.seh_clauses.size()); ++i) {
-            if (i == catch_idx) continue;
+            if (i == catch_idx)
+                continue;
             const auto& clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(i)];
             const auto flags = static_cast<uint32_t>(clause.flags);
-            if (flags == static_cast<uint32_t>(SEHFlags::Finally) ||
-                flags == static_cast<uint32_t>(SEHFlags::Fault)) {
-                if (ip >= clause.try_start_idx &&
-                    ip < clause.try_end_idx &&
+            if (flags == static_cast<uint32_t>(SEHFlags::Finally) || flags == static_cast<uint32_t>(SEHFlags::Fault)) {
+                if (ip >= clause.try_start_idx && ip < clause.try_end_idx &&
                     clause.try_start_idx >= catch_clause.try_start_idx &&
-                    clause.try_end_idx <= catch_clause.try_end_idx &&
-                    unwind_finally_count < kMaxUnwindDepth) {
+                    clause.try_end_idx <= catch_clause.try_end_idx && unwind_finally_count < kMaxUnwindDepth) {
                     unwind_finally_list[unwind_finally_count++] = i;
                 }
             }
@@ -441,7 +439,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             // commits (handler) or rejects (resume search).
             filter_evaluating = true;
             filter_active_clause = catch_idx;
-            filter_search_resume_idx = catch_idx;     // exclude this clause on reject
+            filter_search_resume_idx = catch_idx; // exclude this clause on reject
             filter_throw_ip = instruction_index;
             frame->stack.push_back(exception_obj);
             instruction_index = clause.handler_start_idx;
@@ -456,8 +454,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             exception_in_flight = true;
             unwind_catch_clause = catch_idx;
             unwind_finally_current = 0;
-            instruction_index = method.seh_clauses[
-                static_cast<CHAOS_IL2CPP_SIZE>(unwind_finally_list[0])].handler_start_idx;
+            instruction_index =
+                method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(unwind_finally_list[0])].handler_start_idx;
             in_handler = true;
             active_handler_clause = unwind_finally_list[0];
         } else {
@@ -506,20 +504,18 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
 
 #if CHAOS_IL2CPP_DEBUGGER
         // Debugger breakpoint/stepping check at each instruction boundary.
-        if (diagnostics::DbgShouldPause(frame->method_token,
-                                        static_cast<uint32_t>(instruction_index), 0)) {
+        if (diagnostics::DbgShouldPause(frame->method_token, static_cast<uint32_t>(instruction_index), 0)) {
             // Capture frame snapshot (top frame only; RegisterExecute doesn't
             // have prev_frame chain access.  The FastExecute path captures the
             // full chain for FastFrames.)
             diagnostics::DbgClearFrameSnapshot();
             auto& snap = diagnostics::DbgGetFrameSnapshot();
             snap.frames[0].method_token = frame->method_token;
-            snap.frames[0].il_offset   = static_cast<uint32_t>(instruction_index);
+            snap.frames[0].il_offset = static_cast<uint32_t>(instruction_index);
             snap.frame_count = 1;
             snap.local_count = 0;
 
-            diagnostics::DbgNotifyPaused(frame->method_token,
-                                         static_cast<uint32_t>(instruction_index));
+            diagnostics::DbgNotifyPaused(frame->method_token, static_cast<uint32_t>(instruction_index));
         }
 #endif
 
@@ -587,8 +583,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 auto& slot = g_static_fields[instruction.field_offset];
                 using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
                 BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&slot.obj));
-                chaos::il2cpp::runtime_core::BgcRecordRootChange(
-                    reinterpret_cast<void**>(&slot.obj), slot.obj);
+                chaos::il2cpp::runtime_core::BgcRecordRootChange(reinterpret_cast<void**>(&slot.obj), slot.obj);
                 slot = Pop(&frame->stack);
                 break;
             }
@@ -708,8 +703,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 const InterpreterValue right = Pop(&frame->stack);
                 const InterpreterValue left = Pop(&frame->stack);
                 const bool equal = left.tag == ValueTag::ObjectRef || left.tag == ValueTag::Null
-                    ? left.obj == right.obj
-                    : ReadFloat64(left) == ReadFloat64(right);
+                                     ? left.obj == right.obj
+                                     : ReadFloat64(left) == ReadFloat64(right);
                 frame->stack.push_back(InterpreterValue::from_i32(equal ? 1 : 0));
                 break;
             }
@@ -742,7 +737,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             case IROpCode::NewObj: {
                 auto* storage = static_cast<ObjectStorage*>(CHAOS_IL2CPP_MALLOC(sizeof(ObjectStorage)));
-                if (storage == nullptr) break;
+                if (storage == nullptr)
+                    break;
                 ::new (storage) ObjectStorage();
                 storage->fields.resize(instruction.secondary_index == 0u ? 1u : instruction.secondary_index);
                 // Type token is set by the token resolver (or test) via immediate_i4.
@@ -753,7 +749,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             case IROpCode::NewArr: {
                 const CHAOS_IL2CPP_SIZE length = static_cast<CHAOS_IL2CPP_SIZE>(ReadInt32(Pop(&frame->stack)));
                 auto* storage = static_cast<ArrayStorage*>(CHAOS_IL2CPP_MALLOC(sizeof(ArrayStorage)));
-                if (storage == nullptr) break;
+                if (storage == nullptr)
+                    break;
                 ::new (storage) ArrayStorage();
                 storage->elements.resize(length);
                 frame->stack.push_back(InterpreterValue::from_obj(storage));
@@ -764,7 +761,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 if (instance.tag == ValueTag::Struct) {
                     // Struct field access: read bytes at field_offset.
                     // field_size comes from immediate_i4 (set by the codegen emitter).
-                    const CHAOS_IL2CPP_SIZE offset   = static_cast<CHAOS_IL2CPP_SIZE>(instruction.field_offset);
+                    const CHAOS_IL2CPP_SIZE offset = static_cast<CHAOS_IL2CPP_SIZE>(instruction.field_offset);
                     const CHAOS_IL2CPP_SIZE field_sz = static_cast<CHAOS_IL2CPP_SIZE>(instruction.immediate_i4);
                     if (instance.obj != nullptr && offset + field_sz <= instance.struct_size) {
                         const void* src = static_cast<const char*>(instance.obj) + offset;
@@ -773,7 +770,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                             CHAOS_IL2CPP_INT64 raw = 0;
                             std::memcpy(&raw, src, field_sz);
                             if (field_sz <= 4) {
-                                frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(raw)));
+                                frame->stack.push_back(
+                                    InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(raw)));
                             } else {
                                 frame->stack.push_back(InterpreterValue::from_i64(raw));
                             }
@@ -806,8 +804,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                         const CHAOS_IL2CPP_SIZE remaining = instance.struct_size - offset;
                         if (value.tag == ValueTag::Struct && value.obj != nullptr) {
                             // Large struct field: copy full struct data (clamped to remaining space).
-                            const CHAOS_IL2CPP_SIZE copy_size = (value.struct_size < remaining)
-                                ? value.struct_size : remaining;
+                            const CHAOS_IL2CPP_SIZE copy_size =
+                                (value.struct_size < remaining) ? value.struct_size : remaining;
                             std::memcpy(dst, value.obj, copy_size);
                         } else {
                             // Small field: read from scalar value.
@@ -819,9 +817,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                             } else {
                                 raw = reinterpret_cast<CHAOS_IL2CPP_INT64>(value.obj);
                             }
-                            const CHAOS_IL2CPP_SIZE write_size = (remaining < sizeof(void*))
-                                ? remaining
-                                : sizeof(void*);
+                            const CHAOS_IL2CPP_SIZE write_size =
+                                (remaining < sizeof(void*)) ? remaining : sizeof(void*);
                             std::memcpy(dst, &raw, write_size);
                         }
                     }
@@ -862,7 +859,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::LdLen: {
                 auto* array = RequireArray(Pop(&frame->stack));
-                frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(array->elements.size())));
+                frame->stack.push_back(
+                    InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(array->elements.size())));
                 break;
             }
             case IROpCode::Pop:
@@ -870,7 +868,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             case IROpCode::Box: {
                 auto* boxed = static_cast<BoxedValue*>(CHAOS_IL2CPP_MALLOC(sizeof(BoxedValue)));
-                if (boxed == nullptr) break;
+                if (boxed == nullptr)
+                    break;
                 ::new (boxed) BoxedValue();
                 boxed->value = Pop(&frame->stack);
                 frame->stack.push_back(InterpreterValue::from_obj(boxed));
@@ -933,18 +932,23 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 // Interface compatibility check: scan implemented interfaces
                 if (!compatible) {
                     const auto* target_vtable = chaos::il2cpp::vtable_registry::TryGetTypeVTable(target_type_token);
-                    if (target_vtable != nullptr && target_vtable->type_shape == chaos::il2cpp::common::chaos_type_shape_interface) {
+                    if (target_vtable != nullptr &&
+                        target_vtable->type_shape == chaos::il2cpp::common::chaos_type_shape_interface) {
                         // Target is an interface — check if instance type implements it.
                         // Walk instance type's interface map (through all ancestors).
                         CHAOS_IL2CPP_UINT32 scan_token = obj_type_token;
                         while (scan_token != 0u && !compatible) {
                             const auto* scan_vtable = chaos::il2cpp::vtable_registry::TryGetTypeVTable(scan_token);
-                            if (scan_vtable == nullptr) break;
+                            if (scan_vtable == nullptr)
+                                break;
                             if (scan_vtable->iface_map != nullptr && scan_vtable->iface_count > 0u) {
-                                const auto* iface_entries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(scan_vtable->iface_map);
+                                const auto* iface_entries =
+                                    static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(
+                                        scan_vtable->iface_map);
                                 for (CHAOS_IL2CPP_UINT32 ifi = 0u; ifi < scan_vtable->iface_count; ++ifi) {
                                     // Compare stable_id against target's stable_id.
-                                    const auto* target_vt2 = chaos::il2cpp::vtable_registry::TryGetTypeVTable(target_type_token);
+                                    const auto* target_vt2 =
+                                        chaos::il2cpp::vtable_registry::TryGetTypeVTable(target_type_token);
                                     if (target_vt2 != nullptr &&
                                         iface_entries[ifi].iface_stable_id == target_vt2->stable_id) {
                                         compatible = true;
@@ -955,9 +959,12 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                             // Also check runtime_iface_map (hot-update interface additions).
                             if (!compatible && scan_vtable->runtime_iface_map != nullptr &&
                                 scan_vtable->runtime_iface_count > 0u) {
-                                const auto* runtime_entries = static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(scan_vtable->runtime_iface_map);
+                                const auto* runtime_entries =
+                                    static_cast<const chaos::il2cpp::common::InterfaceMapEntry*>(
+                                        scan_vtable->runtime_iface_map);
                                 for (CHAOS_IL2CPP_UINT32 ifi = 0u; ifi < scan_vtable->runtime_iface_count; ++ifi) {
-                                    const auto* target_vt2 = chaos::il2cpp::vtable_registry::TryGetTypeVTable(target_type_token);
+                                    const auto* target_vt2 =
+                                        chaos::il2cpp::vtable_registry::TryGetTypeVTable(target_type_token);
                                     if (target_vt2 != nullptr &&
                                         runtime_entries[ifi].iface_stable_id == target_vt2->stable_id) {
                                         compatible = true;
@@ -999,21 +1006,21 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     for (CHAOS_IL2CPP_SIZE ai = ac; ai > 0u && ai <= 8; --ai) {
                         const auto& val = frame->stack.back();
                         switch (val.tag) {
-                        case ValueTag::Int32:
-                            raw_args[ai - 1u] = static_cast<uint64_t>(static_cast<uint32_t>(val.i32));
-                            break;
-                        case ValueTag::Int64:
-                            raw_args[ai - 1u] = static_cast<uint64_t>(val.i64);
-                            break;
-                        case ValueTag::Float32:
-                            std::memcpy(&raw_args[ai - 1u], &val.f32, sizeof(float));
-                            break;
-                        case ValueTag::Float64:
-                            std::memcpy(&raw_args[ai - 1u], &val.f64, sizeof(double));
-                            break;
-                        default:
-                            raw_args[ai - 1u] = reinterpret_cast<uint64_t>(val.obj);
-                            break;
+                            case ValueTag::Int32:
+                                raw_args[ai - 1u] = static_cast<uint64_t>(static_cast<uint32_t>(val.i32));
+                                break;
+                            case ValueTag::Int64:
+                                raw_args[ai - 1u] = static_cast<uint64_t>(val.i64);
+                                break;
+                            case ValueTag::Float32:
+                                std::memcpy(&raw_args[ai - 1u], &val.f32, sizeof(float));
+                                break;
+                            case ValueTag::Float64:
+                                std::memcpy(&raw_args[ai - 1u], &val.f64, sizeof(double));
+                                break;
+                            default:
+                                raw_args[ai - 1u] = reinterpret_cast<uint64_t>(val.obj);
+                                break;
                         }
                         frame->stack.pop_back();
                     }
@@ -1027,15 +1034,15 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     // The shaped chaos_external_runtime_* functions may throw
                     // chaos_managed_exception (e.g. InvalidCastException).
                     // Catch and propagate through the VM's SEH mechanism.
-                    using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
-                                                  uint64_t, uint64_t, uint64_t, uint64_t);
+                    using DirectFn =
+                        uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t, uint64_t, uint64_t, uint64_t, uint64_t);
                     auto fn = reinterpret_cast<DirectFn>(instruction.direct_fn);
                     uint64_t raw_ret = 0;
                     bool direct_fn_threw = false;
                     uint64_t direct_fn_exception_obj = 0;
-                    bool pal_caught = chaos::il2cpp::pal::PalTryCallNoExcept(
-                        fn, raw_args[0], raw_args[1], raw_args[2], raw_args[3],
-                        raw_args[4], raw_args[5], raw_args[6], raw_args[7], raw_ret);
+                    bool pal_caught = chaos::il2cpp::pal::PalTryCallNoExcept(fn, raw_args[0], raw_args[1], raw_args[2],
+                                                                             raw_args[3], raw_args[4], raw_args[5],
+                                                                             raw_args[6], raw_args[7], raw_ret);
                     if (pal_caught) {
                         direct_fn_threw = true;
                         direct_fn_exception_obj = 0;
@@ -1046,40 +1053,40 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                         DispatchResult dret;
                         if (direct_fn_threw) {
                             dret.threw_exception = true;
-                            dret.exception_value = InterpreterValue::from_obj(
-                                reinterpret_cast<void*>(direct_fn_exception_obj));
+                            dret.exception_value =
+                                InterpreterValue::from_obj(reinterpret_cast<void*>(direct_fn_exception_obj));
                         } else if (ret_tag != static_cast<uint8_t>(ValueTag::Void)) {
                             dret.has_value = true;
                             switch (static_cast<ValueTag>(ret_tag)) {
-                            case ValueTag::Int32:
-                                dret.value = InterpreterValue::from_i32(
-                                    static_cast<int32_t>(raw_ret & 0xFFFFFFFFu));
-                                break;
-                            case ValueTag::Int64:
-                                dret.value = InterpreterValue::from_i64(
-                                    static_cast<int64_t>(raw_ret));
-                                break;
-                            case ValueTag::Float32: {
-                                float f;
-                                std::memcpy(&f, &raw_ret, sizeof(float));
-                                dret.value = InterpreterValue::from_f32(f);
-                                break;
-                            }
-                            case ValueTag::Float64: {
-                                double d;
-                                std::memcpy(&d, &raw_ret, sizeof(double));
-                                dret.value = InterpreterValue::from_f64(d);
-                                break;
-                            }
-                            default:
-                                dret.value = InterpreterValue::from_obj(
-                                    reinterpret_cast<void*>(raw_ret));
-                                break;
+                                case ValueTag::Int32:
+                                    dret.value =
+                                        InterpreterValue::from_i32(static_cast<int32_t>(raw_ret & 0xFFFFFFFFu));
+                                    break;
+                                case ValueTag::Int64:
+                                    dret.value = InterpreterValue::from_i64(static_cast<int64_t>(raw_ret));
+                                    break;
+                                case ValueTag::Float32: {
+                                    float f;
+                                    std::memcpy(&f, &raw_ret, sizeof(float));
+                                    dret.value = InterpreterValue::from_f32(f);
+                                    break;
+                                }
+                                case ValueTag::Float64: {
+                                    double d;
+                                    std::memcpy(&d, &raw_ret, sizeof(double));
+                                    dret.value = InterpreterValue::from_f64(d);
+                                    break;
+                                }
+                                default:
+                                    dret.value = InterpreterValue::from_obj(reinterpret_cast<void*>(raw_ret));
+                                    break;
                             }
                         }
                         const DispatchAction da = handleDispatchResult(dret);
-                        if (da == DispatchAction::Return) return result;
-                        if (da == DispatchAction::Continue) continue;
+                        if (da == DispatchAction::Return)
+                            return result;
+                        if (da == DispatchAction::Continue)
+                            continue;
                     }
                     break;
                 }
@@ -1090,26 +1097,27 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     // Inline dispatch via callback (Phase 4+).
                     // Stack-allocate for small arg counts (common case).
                     InterpreterValue local_buf[kMaxCallArgs];
-                    auto* arg_buf = (arg_count <= kMaxCallArgs)
-                        ? local_buf
-                        : static_cast<InterpreterValue*>(CHAOS_IL2CPP_MALLOC(
-                            sizeof(InterpreterValue) * arg_count));
+                    auto* arg_buf =
+                        (arg_count <= kMaxCallArgs)
+                            ? local_buf
+                            : static_cast<InterpreterValue*>(CHAOS_IL2CPP_MALLOC(sizeof(InterpreterValue) * arg_count));
 
                     for (CHAOS_IL2CPP_SIZE ai = arg_count; ai > 0u; --ai) {
                         arg_buf[ai - 1u] = Pop(&frame->stack);
                     }
 
-                    DispatchResult dret = frame->dispatch_fn(
-                        instruction.call_target, arg_buf,
-                        static_cast<CHAOS_IL2CPP_UINT32>(arg_count),
-                        instruction.is_instance_call,
-                        frame->dispatch_context);
+                    DispatchResult dret = frame->dispatch_fn(instruction.call_target, arg_buf,
+                                                             static_cast<CHAOS_IL2CPP_UINT32>(arg_count),
+                                                             instruction.is_instance_call, frame->dispatch_context);
 
-                    if (arg_count > kMaxCallArgs) CHAOS_IL2CPP_FREE(arg_buf);
+                    if (arg_count > kMaxCallArgs)
+                        CHAOS_IL2CPP_FREE(arg_buf);
 
                     const DispatchAction da = handleDispatchResult(dret);
-                    if (da == DispatchAction::Return) return result;
-                    if (da == DispatchAction::Continue) continue;
+                    if (da == DispatchAction::Return)
+                        return result;
+                    if (da == DispatchAction::Continue)
+                        continue;
                     break;
                 }
 
@@ -1130,10 +1138,10 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
 
                 // Collect call args (needed by both paths).
                 InterpreterValue local_buf[kMaxCallArgs];
-                auto* cv_args = (cv_arg_count <= kMaxCallArgs)
-                    ? local_buf
-                    : static_cast<InterpreterValue*>(CHAOS_IL2CPP_MALLOC(
-                        sizeof(InterpreterValue) * cv_arg_count));
+                auto* cv_args =
+                    (cv_arg_count <= kMaxCallArgs)
+                        ? local_buf
+                        : static_cast<InterpreterValue*>(CHAOS_IL2CPP_MALLOC(sizeof(InterpreterValue) * cv_arg_count));
                 for (CHAOS_IL2CPP_SIZE ai = cv_arg_count; ai > 0u; --ai) {
                     cv_args[ai - 1u] = Pop(&frame->stack);
                 }
@@ -1161,17 +1169,19 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 }
 
                 if (frame->dispatch_fn != nullptr) {
-                    DispatchResult dret = frame->dispatch_fn(
-                        resolved_target, cv_args,
-                        static_cast<CHAOS_IL2CPP_UINT32>(cv_arg_count),
-                        true, /* CallVirtConstrained is always instance */
-                        frame->dispatch_context);
+                    DispatchResult dret =
+                        frame->dispatch_fn(resolved_target, cv_args, static_cast<CHAOS_IL2CPP_UINT32>(cv_arg_count),
+                                           true, /* CallVirtConstrained is always instance */
+                                           frame->dispatch_context);
 
-                    if (cv_arg_count > kMaxCallArgs) CHAOS_IL2CPP_FREE(cv_args);
+                    if (cv_arg_count > kMaxCallArgs)
+                        CHAOS_IL2CPP_FREE(cv_args);
 
                     const DispatchAction da_cv = handleDispatchResult(dret);
-                    if (da_cv == DispatchAction::Return) return result;
-                    if (da_cv == DispatchAction::Continue) continue;
+                    if (da_cv == DispatchAction::Return)
+                        return result;
+                    if (da_cv == DispatchAction::Continue)
+                        continue;
                     break;
                 }
 
@@ -1181,7 +1191,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 for (CHAOS_IL2CPP_SIZE ai = 0u; ai < cv_arg_count; ++ai) {
                     result.call_args[ai] = cv_args[ai];
                 }
-                if (cv_arg_count > kMaxCallArgs) CHAOS_IL2CPP_FREE(cv_args);
+                if (cv_arg_count > kMaxCallArgs)
+                    CHAOS_IL2CPP_FREE(cv_args);
                 result.call_target = resolved_target;
                 result.needs_external_dispatch = true;
                 return result;
@@ -1191,10 +1202,10 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
 
                 // Collect call args.
                 InterpreterValue local_buf_v[kMaxCallArgs];
-                auto* cv_args_v = (arg_count_v <= kMaxCallArgs)
-                    ? local_buf_v
-                    : static_cast<InterpreterValue*>(CHAOS_IL2CPP_MALLOC(
-                        sizeof(InterpreterValue) * arg_count_v));
+                auto* cv_args_v =
+                    (arg_count_v <= kMaxCallArgs)
+                        ? local_buf_v
+                        : static_cast<InterpreterValue*>(CHAOS_IL2CPP_MALLOC(sizeof(InterpreterValue) * arg_count_v));
                 for (CHAOS_IL2CPP_SIZE ai = arg_count_v; ai > 0u; --ai) {
                     cv_args_v[ai - 1u] = Pop(&frame->stack);
                 }
@@ -1221,17 +1232,19 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 }
 
                 if (frame->dispatch_fn != nullptr) {
-                    DispatchResult dret_v = frame->dispatch_fn(
-                        resolved_target_v, cv_args_v,
-                        static_cast<CHAOS_IL2CPP_UINT32>(arg_count_v),
-                        true, /* CallVirt is always instance */
-                        frame->dispatch_context);
+                    DispatchResult dret_v =
+                        frame->dispatch_fn(resolved_target_v, cv_args_v, static_cast<CHAOS_IL2CPP_UINT32>(arg_count_v),
+                                           true, /* CallVirt is always instance */
+                                           frame->dispatch_context);
 
-                    if (arg_count_v > kMaxCallArgs) CHAOS_IL2CPP_FREE(cv_args_v);
+                    if (arg_count_v > kMaxCallArgs)
+                        CHAOS_IL2CPP_FREE(cv_args_v);
 
                     const DispatchAction da_v = handleDispatchResult(dret_v);
-                    if (da_v == DispatchAction::Return) return result;
-                    if (da_v == DispatchAction::Continue) continue;
+                    if (da_v == DispatchAction::Return)
+                        return result;
+                    if (da_v == DispatchAction::Continue)
+                        continue;
                     break;
                 }
 
@@ -1241,7 +1254,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 for (CHAOS_IL2CPP_SIZE ai = 0u; ai < arg_count_v; ++ai) {
                     result.call_args[ai] = cv_args_v[ai];
                 }
-                if (arg_count_v > kMaxCallArgs) CHAOS_IL2CPP_FREE(cv_args_v);
+                if (arg_count_v > kMaxCallArgs)
+                    CHAOS_IL2CPP_FREE(cv_args_v);
                 result.call_target = resolved_target_v;
                 result.needs_external_dispatch = true;
                 return result;
@@ -1299,7 +1313,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 if (!filter_evaluating) {
                     // Defensive: stray EndFilter outside any in-flight filter.
                     // Drop the result if present and continue sequentially.
-                    if (!frame->stack.empty()) frame->stack.pop_back();
+                    if (!frame->stack.empty())
+                        frame->stack.pop_back();
                     in_handler = false;
                     active_handler_clause = -1;
                     break;
@@ -1334,8 +1349,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                         exception_in_flight = true;
                         unwind_catch_clause = active;
                         unwind_finally_current = 0;
-                        instruction_index = method.seh_clauses[
-                            static_cast<CHAOS_IL2CPP_SIZE>(unwind_finally_list[0])].handler_start_idx;
+                        instruction_index = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(unwind_finally_list[0])]
+                                                .handler_start_idx;
                         in_handler = true;
                         active_handler_clause = unwind_finally_list[0];
                     } else {
@@ -1363,12 +1378,14 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     unwind_finally_current++;
                     if (unwind_finally_current < unwind_finally_count) {
                         const int next_finally = unwind_finally_list[unwind_finally_current];
-                        instruction_index = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(next_finally)].handler_start_idx;
+                        instruction_index =
+                            method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(next_finally)].handler_start_idx;
                         active_handler_clause = next_finally;
                         continue;
                     } else {
                         // All finally/fault handlers done — transfer to catch.
-                        const auto& catch_clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(unwind_catch_clause)];
+                        const auto& catch_clause =
+                            method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(unwind_catch_clause)];
                         instruction_index = catch_clause.handler_start_idx;
                         in_handler = true;
                         active_handler_clause = unwind_catch_clause;
@@ -1399,31 +1416,31 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::DivUn: {
                 const CHAOS_IL2CPP_UINT32 right = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
-                const CHAOS_IL2CPP_UINT32 left  = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_UINT32 left = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
                 frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(left / right)));
                 break;
             }
             case IROpCode::RemUn: {
                 const CHAOS_IL2CPP_UINT32 right = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
-                const CHAOS_IL2CPP_UINT32 left  = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_UINT32 left = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
                 frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(left % right)));
                 break;
             }
             case IROpCode::And: {
                 const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT32 left  = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(left & right));
                 break;
             }
             case IROpCode::Or: {
                 const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT32 left  = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(left | right));
                 break;
             }
             case IROpCode::Xor: {
                 const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT32 left  = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(left ^ right));
                 break;
             }
@@ -1434,20 +1451,21 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::Shl: {
                 const CHAOS_IL2CPP_INT32 amount = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT32 value  = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 value = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(value << (amount & 0x1F)));
                 break;
             }
             case IROpCode::Shr: {
                 const CHAOS_IL2CPP_INT32 amount = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT32 value  = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 value = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(value >> (amount & 0x1F)));
                 break;
             }
             case IROpCode::ShrUn: {
                 const CHAOS_IL2CPP_INT32 amount = ReadInt32(Pop(&frame->stack));
                 const CHAOS_IL2CPP_UINT32 value = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
-                frame->stack.push_back(InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(value >> (amount & 0x1F))));
+                frame->stack.push_back(
+                    InterpreterValue::from_i32(static_cast<CHAOS_IL2CPP_INT32>(value >> (amount & 0x1F))));
                 break;
             }
             case IROpCode::ConvRUn: {
@@ -1468,21 +1486,25 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 // ldind.* dereferences a pointer. In the stack-based interpreter
                 // model, we reinterpret the value according to the type discriminator.
                 switch (instruction.immediate_i4) {
-                    case 0: case 1: case 2: case 3:  // i1, u1, i2, u2
-                    case 4: case 5:  // i4, u4
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3: // i1, u1, i2, u2
+                    case 4:
+                    case 5: // i4, u4
                     default:
                         frame->stack.push_back(InterpreterValue::from_i32(ReadInt32(addr_val)));
                         break;
-                    case 6:  // i8
+                    case 6: // i8
                         frame->stack.push_back(InterpreterValue::from_i64(ReadInt64(addr_val)));
                         break;
-                    case 7:  // i (native int)
+                    case 7: // i (native int)
                         frame->stack.push_back(InterpreterValue::from_i32(ReadInt32(addr_val)));
                         break;
-                    case 8:  // r4
+                    case 8: // r4
                         frame->stack.push_back(InterpreterValue::from_f32(ReadFloat32(addr_val)));
                         break;
-                    case 9:  // r8
+                    case 9: // r8
                         frame->stack.push_back(InterpreterValue::from_f64(ReadFloat64(addr_val)));
                         break;
                     case 10: // ref
@@ -1498,18 +1520,40 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 // Determine write size from type discriminator (immediate_i4).
                 CHAOS_IL2CPP_SIZE stind_write_size = sizeof(void*);
                 switch (instruction.immediate_i4) {
-                    case 0: case 1: stind_write_size = 1; break;  // i1, u1
-                    case 2: case 3: stind_write_size = 2; break;  // i2, u2
-                    case 4: case 5: stind_write_size = 4; break;  // i4, u4
-                    case 6:          stind_write_size = 8; break;  // i8
-                    case 7:          stind_write_size = sizeof(void*); break; // i
-                    case 8:          stind_write_size = 4; break;  // r4
-                    case 9:          stind_write_size = 8; break;  // r8
-                    case 10:         stind_write_size = sizeof(void*); break; // ref
-                    default:         stind_write_size = sizeof(void*); break;
+                    case 0:
+                    case 1:
+                        stind_write_size = 1;
+                        break; // i1, u1
+                    case 2:
+                    case 3:
+                        stind_write_size = 2;
+                        break; // i2, u2
+                    case 4:
+                    case 5:
+                        stind_write_size = 4;
+                        break; // i4, u4
+                    case 6:
+                        stind_write_size = 8;
+                        break; // i8
+                    case 7:
+                        stind_write_size = sizeof(void*);
+                        break; // i
+                    case 8:
+                        stind_write_size = 4;
+                        break; // r4
+                    case 9:
+                        stind_write_size = 8;
+                        break; // r8
+                    case 10:
+                        stind_write_size = sizeof(void*);
+                        break; // ref
+                    default:
+                        stind_write_size = sizeof(void*);
+                        break;
                 }
                 void* stind_dst = (stind_addr.tag == ValueTag::Struct || stind_addr.tag == ValueTag::ObjectRef)
-                    ? stind_addr.obj : nullptr;
+                                    ? stind_addr.obj
+                                    : nullptr;
                 if (stind_dst != nullptr) {
                     CHAOS_IL2CPP_INT64 stind_raw = 0;
                     if (stind_val.tag == ValueTag::Int32 || stind_val.tag == ValueTag::Float32) {
@@ -1579,8 +1623,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     static_cast<CHAOS_IL2CPP_UINT32>(instruction.secondary_index);
                 void* resolved = nullptr;
                 if (inst_type_token != 0u && decl_method_token != 0u) {
-                    resolved = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
-                        inst_type_token, decl_method_token);
+                    resolved =
+                        chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(inst_type_token, decl_method_token);
                 }
                 if (resolved != nullptr) {
                     frame->stack.push_back(InterpreterValue::from_obj(resolved));
@@ -1645,7 +1689,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 break;
             case IROpCode::BneUn: {
                 const CHAOS_IL2CPP_UINT32 right = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
-                const CHAOS_IL2CPP_UINT32 left  = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_UINT32 left = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
                 if (left != right) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
                     continue;
@@ -1654,7 +1698,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::BgeUn: {
                 const CHAOS_IL2CPP_UINT32 right = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
-                const CHAOS_IL2CPP_UINT32 left  = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_UINT32 left = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
                 if (left >= right) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
                     continue;
@@ -1663,7 +1707,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::BgtUn: {
                 const CHAOS_IL2CPP_UINT32 right = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
-                const CHAOS_IL2CPP_UINT32 left  = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_UINT32 left = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
                 if (left > right) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
                     continue;
@@ -1672,7 +1716,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::BleUn: {
                 const CHAOS_IL2CPP_UINT32 right = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
-                const CHAOS_IL2CPP_UINT32 left  = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_UINT32 left = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
                 if (left <= right) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
                     continue;
@@ -1681,7 +1725,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::BltUn: {
                 const CHAOS_IL2CPP_UINT32 right = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
-                const CHAOS_IL2CPP_UINT32 left  = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
+                const CHAOS_IL2CPP_UINT32 left = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
                 if (left < right) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
                     continue;
@@ -1690,10 +1734,10 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::AddOvf: {
                 const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT32 left  = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 // Promote to 64-bit to detect signed overflow.
-                const CHAOS_IL2CPP_INT64 result_64 = static_cast<CHAOS_IL2CPP_INT64>(left) +
-                    static_cast<CHAOS_IL2CPP_INT64>(right);
+                const CHAOS_IL2CPP_INT64 result_64 =
+                    static_cast<CHAOS_IL2CPP_INT64>(left) + static_cast<CHAOS_IL2CPP_INT64>(right);
                 if (result_64 > static_cast<CHAOS_IL2CPP_INT64>(INT32_MAX) ||
                     result_64 < static_cast<CHAOS_IL2CPP_INT64>(INT32_MIN)) {
                     throw CHAOS_IL2CPP_RUNTIME_ERROR("OverflowException: arithmetic overflow in add.ovf");
@@ -1703,9 +1747,9 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::SubOvf: {
                 const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT32 left  = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT64 result_64 = static_cast<CHAOS_IL2CPP_INT64>(left) -
-                    static_cast<CHAOS_IL2CPP_INT64>(right);
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT64 result_64 =
+                    static_cast<CHAOS_IL2CPP_INT64>(left) - static_cast<CHAOS_IL2CPP_INT64>(right);
                 if (result_64 > static_cast<CHAOS_IL2CPP_INT64>(INT32_MAX) ||
                     result_64 < static_cast<CHAOS_IL2CPP_INT64>(INT32_MIN)) {
                     throw CHAOS_IL2CPP_RUNTIME_ERROR("OverflowException: arithmetic overflow in sub.ovf");
@@ -1715,7 +1759,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             }
             case IROpCode::MulOvf: {
                 const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
-                const CHAOS_IL2CPP_INT32 left  = ReadInt32(Pop(&frame->stack));
+                const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 // Use compiler builtin for overflow-checked multiplication.
                 CHAOS_IL2CPP_INT32 mul_result = 0;
 #if defined(__GNUC__) || defined(__clang__)
@@ -1724,8 +1768,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 }
 #else
                 // MSVC fallback: promote to 64-bit and check range.
-                const CHAOS_IL2CPP_INT64 mul_64 = static_cast<CHAOS_IL2CPP_INT64>(left) *
-                    static_cast<CHAOS_IL2CPP_INT64>(right);
+                const CHAOS_IL2CPP_INT64 mul_64 =
+                    static_cast<CHAOS_IL2CPP_INT64>(left) * static_cast<CHAOS_IL2CPP_INT64>(right);
                 if (mul_64 > static_cast<CHAOS_IL2CPP_INT64>(INT32_MAX) ||
                     mul_64 < static_cast<CHAOS_IL2CPP_INT64>(INT32_MIN)) {
                     throw CHAOS_IL2CPP_RUNTIME_ERROR("OverflowException: arithmetic overflow in mul.ovf");
@@ -1805,7 +1849,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     chaos_gc_dirty_card(stobj_addr.obj);
                 } else {
                     void* stobj_dst = (stobj_addr.tag == ValueTag::Struct || stobj_addr.tag == ValueTag::ObjectRef)
-                        ? stobj_addr.obj : nullptr;
+                                        ? stobj_addr.obj
+                                        : nullptr;
                     if (stobj_dst != nullptr) {
                         CHAOS_IL2CPP_SIZE stobj_write_size = sizeof(void*);
                         const void* stobj_src = nullptr;
@@ -1845,8 +1890,10 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 const CHAOS_IL2CPP_UINT32 cp_size = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
                 const InterpreterValue src_val = Pop(&frame->stack);
                 const InterpreterValue dst_val = Pop(&frame->stack);
-                void* dst_ptr = (dst_val.tag == ValueTag::Struct || dst_val.tag == ValueTag::ObjectRef) ? dst_val.obj : nullptr;
-                void* src_ptr = (src_val.tag == ValueTag::Struct || src_val.tag == ValueTag::ObjectRef) ? src_val.obj : nullptr;
+                void* dst_ptr =
+                    (dst_val.tag == ValueTag::Struct || dst_val.tag == ValueTag::ObjectRef) ? dst_val.obj : nullptr;
+                void* src_ptr =
+                    (src_val.tag == ValueTag::Struct || src_val.tag == ValueTag::ObjectRef) ? src_val.obj : nullptr;
                 if (dst_ptr != nullptr && src_ptr != nullptr) {
                     std::memcpy(dst_ptr, src_ptr, cp_size);
                 }
@@ -1856,7 +1903,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 const CHAOS_IL2CPP_UINT32 init_size = static_cast<CHAOS_IL2CPP_UINT32>(ReadInt32(Pop(&frame->stack)));
                 const CHAOS_IL2CPP_INT32 init_value = ReadInt32(Pop(&frame->stack));
                 const InterpreterValue addr_val = Pop(&frame->stack);
-                void* ptr = (addr_val.tag == ValueTag::Struct || addr_val.tag == ValueTag::ObjectRef) ? addr_val.obj : nullptr;
+                void* ptr =
+                    (addr_val.tag == ValueTag::Struct || addr_val.tag == ValueTag::ObjectRef) ? addr_val.obj : nullptr;
                 if (ptr != nullptr) {
                     std::memset(ptr, init_value, init_size);
                 }
@@ -1872,4 +1920,4 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
     return result;
 }
 
-}  // namespace chaos::il2cpp::interpreter
+} // namespace chaos::il2cpp::interpreter

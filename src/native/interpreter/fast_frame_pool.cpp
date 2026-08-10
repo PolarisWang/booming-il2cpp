@@ -18,7 +18,8 @@ FastFramePool::FastFramePool() noexcept {
 }
 
 FastFrame* FastFramePool::Acquire() noexcept {
-    if (free_head_ == 0) return nullptr;
+    if (free_head_ == 0)
+        return nullptr;
     --free_head_;
     return &frames_[free_list_[free_head_]];
 }
@@ -32,11 +33,7 @@ void FastFramePool::Release(FastFrame* frame) noexcept {
 
 // ── SetupFastFrame ────────────────────────────────────────────────────────
 
-void SetupFastFrame(FastFrame* ff,
-                    const void* patch_method,
-                    const void* args_buf,
-                    const void* ir,
-                    void* dispatch_fn,
+void SetupFastFrame(FastFrame* ff, const void* patch_method, const void* args_buf, const void* ir, void* dispatch_fn,
                     void* dispatch_ctx) noexcept {
     // Reset runtime state (cheaper than memset of 416 bytes).
     ff->sp = 0;
@@ -46,7 +43,7 @@ void SetupFastFrame(FastFrame* ff,
     ff->ret_tag = 0;
     ff->threw_exception = false;
     ff->exception_obj_val = 0;
-    ff->tracked_cnt = 0;  // CleanupTracked already freed all objects
+    ff->tracked_cnt = 0; // CleanupTracked already freed all objects
     ff->tracked_overflow = nullptr;
 
     // OSR state: reset backedge counter, wire patch_method for tier access.
@@ -67,8 +64,8 @@ void SetupFastFrame(FastFrame* ff,
         ff->arg_type_tags = nullptr;
         if (pm->signature_blob != nullptr && pm->signature_len > 1) {
             // ECMA-335 II.23.2.12: compressed unsigned integer encoding.
-            constexpr uint8_t kSigMaxOneByte  = 0x7F;
-            constexpr uint8_t kSigMaxTwoByte  = 0xBF;
+            constexpr uint8_t kSigMaxOneByte = 0x7F;
+            constexpr uint8_t kSigMaxTwoByte = 0xBF;
             constexpr uint8_t kSigTwoByteMask = 0x3F;
             constexpr uint8_t kSigHasThisFlag = 0x20;
             const uint8_t* sig = pm->signature_blob;
@@ -77,8 +74,7 @@ void SetupFastFrame(FastFrame* ff,
             if (count_byte <= kSigMaxOneByte) {
                 ff->arg_count = count_byte;
             } else if (count_byte <= kSigMaxTwoByte) {
-                ff->arg_count = static_cast<uint32_t>(
-                    ((count_byte & kSigTwoByteMask) << 8) | sig_data[2]);
+                ff->arg_count = static_cast<uint32_t>(((count_byte & kSigTwoByteMask) << 8) | sig_data[2]);
             }
             if ((sig_data[0] & kSigHasThisFlag) == kSigHasThisFlag) {
                 ff->arg_count += 1;
@@ -107,4 +103,4 @@ void SetupFastFrame(FastFrame* ff,
     ff->pending_leave_target = 0;
 }
 
-}  // namespace chaos::il2cpp::runtime_core
+} // namespace chaos::il2cpp::runtime_core

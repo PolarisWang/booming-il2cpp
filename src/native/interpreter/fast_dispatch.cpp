@@ -15,4 +15,4 @@
 #include "fast_dispatch_object.inc"
 #include "fast_dispatch_type.inc"
 #include "fast_dispatch_execute.inc"
-}  // namespace chaos::il2cpp::runtime_core
+} // namespace chaos::il2cpp::runtime_core

@@ -11,4 +11,4 @@
 
 #include "ir_reg_alloc.h"
 
-#endif  // CHAOS_IL2CPP_REGISTER_VM_H_
+#endif // CHAOS_IL2CPP_REGISTER_VM_H_

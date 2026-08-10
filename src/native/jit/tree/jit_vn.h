@@ -27,8 +27,8 @@ namespace chaos::il2cpp::jit::tree {
 // ── VNKey: descriptor for value numbering ──────────────────────────────
 // Encodes (kind, vn1, vn2, imm_lo32) into two 64-bit words.
 struct VNKey {
-    uint64_t word0;  // kind(8) : vn1(24) : vn2(24) : reserved(8)
-    uint64_t word1;  // immediate value (full 64 bits, 0 for most ops)
+    uint64_t word0; // kind(8) : vn1(24) : vn2(24) : reserved(8)
+    uint64_t word1; // immediate value (full 64 bits, 0 for most ops)
 
     static VNKey Leaf(NodeKind kind, int64_t imm = 0) noexcept {
         VNKey k;
@@ -39,25 +39,20 @@ struct VNKey {
 
     static VNKey Unary(NodeKind kind, uint32_t vn_src) noexcept {
         VNKey k;
-        k.word0 = static_cast<uint64_t>(kind) |
-                  (static_cast<uint64_t>(vn_src & 0xFFFFFF) << 8);
+        k.word0 = static_cast<uint64_t>(kind) | (static_cast<uint64_t>(vn_src & 0xFFFFFF) << 8);
         k.word1 = 0;
         return k;
     }
 
-    static VNKey Binary(NodeKind kind, uint32_t vn1, uint32_t vn2,
-                         uint32_t imm32 = 0) noexcept {
+    static VNKey Binary(NodeKind kind, uint32_t vn1, uint32_t vn2, uint32_t imm32 = 0) noexcept {
         VNKey k;
-        k.word0 = static_cast<uint64_t>(kind) |
-                  (static_cast<uint64_t>(vn1 & 0xFFFFFF) << 8) |
+        k.word0 = static_cast<uint64_t>(kind) | (static_cast<uint64_t>(vn1 & 0xFFFFFF) << 8) |
                   (static_cast<uint64_t>(vn2 & 0xFFFFFF) << 32);
         k.word1 = imm32;
         return k;
     }
 
-    bool operator==(const VNKey& o) const noexcept {
-        return word0 == o.word0 && word1 == o.word1;
-    }
+    bool operator==(const VNKey& o) const noexcept { return word0 == o.word0 && word1 == o.word1; }
 };
 
 static_assert(sizeof(VNKey) == 16, "VNKey should be 16 bytes");
@@ -94,7 +89,8 @@ public:
     /// replace a redundant sub-expression with a reference to the earlier
     /// computation's result register.
     bool IsComputed(uint32_t vn_id) const noexcept {
-        if (vn_id >= computed_.size()) return false;
+        if (vn_id >= computed_.size())
+            return false;
         return computed_[vn_id];
     }
 
@@ -107,9 +103,7 @@ public:
     }
 
     /// Check if a VN is known at all (has been created).
-    bool HasVN(uint32_t vn_id) const noexcept {
-        return vn_id < next_vn_;
-    }
+    bool HasVN(uint32_t vn_id) const noexcept { return vn_id < next_vn_; }
 
     /// Total number of distinct value numbers created.
     uint32_t Count() const noexcept { return next_vn_; }
@@ -125,10 +119,10 @@ private:
     using Map = ankerl::unordered_dense::map<VNKey, uint32_t, VNKeyHash>;
     Map map_;
 
-    uint32_t next_vn_ = 1;  // 0 reserved for "unassigned"
-    std::vector<bool> computed_;  // indexed by vn_id
+    uint32_t next_vn_ = 1;       // 0 reserved for "unassigned"
+    std::vector<bool> computed_; // indexed by vn_id
 };
 
-}  // namespace chaos::il2cpp::jit::tree
+} // namespace chaos::il2cpp::jit::tree
 
-#endif  // CHAOS_IL2CPP_JIT_VN_H_
+#endif // CHAOS_IL2CPP_JIT_VN_H_

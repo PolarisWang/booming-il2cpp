@@ -10,8 +10,8 @@
 #ifndef CHAOS_IL2CPP_JIT_PRECODE_H_
 #define CHAOS_IL2CPP_JIT_PRECODE_H_
 
-#include "jit_engine.h"        // Compile, CompileConfig
-#include "ir_reg_alloc.h"      // RegisterMethod
+#include "jit_engine.h"   // Compile, CompileConfig
+#include "ir_reg_alloc.h" // RegisterMethod
 
 #include <atomic>
 #include <cstdint>
@@ -24,8 +24,8 @@ namespace chaos::il2cpp::jit {
 
 // ── Constants ───────────────────────────────────────────────────────────
 static constexpr uint32_t kPrecodeUncompiled = 0;
-static constexpr uint32_t kPrecodeCompiling  = 1;
-static constexpr uint32_t kPrecodeCompiled   = 2;
+static constexpr uint32_t kPrecodeCompiling = 1;
+static constexpr uint32_t kPrecodeCompiled = 2;
 
 /// Threshold for triggering JIT compilation after warmup calls.
 /// Value 30 is a common JIT warmup detection constant matching the
@@ -46,13 +46,13 @@ static constexpr uint32_t kPgoFullJitThreshold = 100;
 //                                                   |
 //                                            Compile(ir) → patch entry
 struct JitPrecode {
-    std::atomic<uint32_t> state{kPrecodeUncompiled};  // 0/1/2 state machine
-    interpreter::RegisterMethod  ir;                   // owned copy of the IR
-    CompileConfig                config;               // compilation config
-    JitMethod*                   compiled   = nullptr; // result of Compile()
-    HotpatchEntryV0*             entry      = nullptr; // back-pointer to patch entry
-    void*                        trampoline = nullptr; // executable trampoline code
-    void*                        original_direct_ptr = nullptr; // saved AOT code pointer
+    std::atomic<uint32_t> state {kPrecodeUncompiled}; // 0/1/2 state machine
+    interpreter::RegisterMethod ir;                   // owned copy of the IR
+    CompileConfig config;                             // compilation config
+    JitMethod* compiled = nullptr;                    // result of Compile()
+    HotpatchEntryV0* entry = nullptr;                 // back-pointer to patch entry
+    void* trampoline = nullptr;                       // executable trampoline code
+    void* original_direct_ptr = nullptr;              // saved AOT code pointer
 
     // ── RCU retire list (Tier 1 recompilation safety) ────────────────────
     // JitRecompileToTier1 cannot delete precode->compiled immediately because
@@ -63,8 +63,8 @@ struct JitPrecode {
     JitMethod* retired = nullptr;
 
     // ── PGO fields (only used when config.enable_pgo is true) ───────────────
-    std::atomic<uint32_t> pgo_call_count{0};   // Call count for PGO-driven Tier 1 upgrade
-    bool                  tier1_enqueued{false}; // True once Tier 1 recompilation is queued
+    std::atomic<uint32_t> pgo_call_count {0}; // Call count for PGO-driven Tier 1 upgrade
+    bool tier1_enqueued {false};              // True once Tier 1 recompilation is queued
 };
 
 // ── PrecodeArena: allocates trampolines from a shared executable page ───
@@ -83,19 +83,20 @@ public:
 private:
     /// A single RWX page holding trampolines + shared entries.
     struct Page {
-        uint8_t* base;       // RWX virtual address
-        uint32_t pos;        // next free offset
-        uint32_t capacity;   // total page size
-        void*    runtime_function; // Win64 RUNTIME_FUNCTION[1] for the page's shared entry .pdata (heap-allocated, freed in ~PrecodeArena)
+        uint8_t* base;          // RWX virtual address
+        uint32_t pos;           // next free offset
+        uint32_t capacity;      // total page size
+        void* runtime_function; // Win64 RUNTIME_FUNCTION[1] for the page's shared entry .pdata (heap-allocated, freed
+                                // in ~PrecodeArena)
     };
 
     void EnsurePage() noexcept;
     void EmitJitSharedEntry() noexcept;
 
     std::vector<Page> pages_;
-    bool              entries_emitted_      = false;
-    uint32_t          jit_entry_offset_     = 0;
-    uint32_t          jit_entry_size_       = 0;
+    bool entries_emitted_ = false;
+    uint32_t jit_entry_offset_ = 0;
+    uint32_t jit_entry_size_ = 0;
 };
 
 // ── JitStubDispatchImpl: JIT mode dispatch ─────────────────────────────
@@ -114,6 +115,6 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept;
 // (the method continues running Tier 0 code).
 extern "C" void* JitRecompileToTier1(JitPrecode* precode) noexcept;
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_JIT_PRECODE_H_
+#endif // CHAOS_IL2CPP_JIT_PRECODE_H_

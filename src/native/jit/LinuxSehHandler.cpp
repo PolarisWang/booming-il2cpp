@@ -1,5 +1,5 @@
 #include "LinuxSehHandler.h"
-#include "WinSehHandler.h"   // for GetWinSehHandler, shared TLS defs
+#include "WinSehHandler.h" // for GetWinSehHandler, shared TLS defs
 #include "jit_seh.h"
 #include "jit_registry_lock_guard.h"
 
@@ -7,7 +7,7 @@
 
 #include <jit_demotion.h>
 #include <gc_events.h>
-#include <memory_domain.h>   // DomainId / CurrentDomain for JIT code domain tracking
+#include <memory_domain.h> // DomainId / CurrentDomain for JIT code domain tracking
 
 #include <atomic>
 #include <cstdint>
@@ -62,9 +62,9 @@ namespace chaos::il2cpp::jit {
 
 // ── TLS Lookup Cache ────────────────────────────────────────────────────────
 static thread_local struct {
-    uintptr_t         page_base   = 0;
-    const JitMethod*  nm          = nullptr;
-    uint32_t          generation  = 0;
+    uintptr_t page_base = 0;
+    const JitMethod* nm = nullptr;
+    uint32_t generation = 0;
 } g_jit_lookup_cache;
 
 // ── TLS Exception State ────────────────────────────────────────────────────
@@ -89,8 +89,8 @@ static constexpr uint32_t kJitGprFileOffset = 32;
 // Thread-local owner and recursion counter for reentrancy.
 // pthread_t is an opaque type; zero-initialized is not a valid thread ID
 // on any POSIX implementation, so g_lock_owner == {} means "not owned."
-static thread_local pthread_t g_lock_owner{};
-static thread_local uint32_t  g_lock_recursion = 0;
+static thread_local pthread_t g_lock_owner {};
+static thread_local uint32_t g_lock_recursion = 0;
 
 void LinuxSehHandler::AcquireLock() noexcept {
     pthread_t self = pthread_self();
@@ -100,10 +100,10 @@ void LinuxSehHandler::AcquireLock() noexcept {
     }
     uint32_t spins = 0;
     while (lock_.exchange(1, std::memory_order_acquire) != 0) {
-        if (++spins % 64 == 0) sched_yield();
+        if (++spins % 64 == 0)
+            sched_yield();
         if (spins > kSpinLimitHard) {
-            CHAOS_IL2CPP_LOG_WARN_M("codegen",
-                "LinuxSehHandler: spinning for {} iterations", spins);
+            CHAOS_IL2CPP_LOG_WARN_M("codegen", "LinuxSehHandler: spinning for {} iterations", spins);
             spins = 0;
         }
     }
@@ -112,7 +112,8 @@ void LinuxSehHandler::AcquireLock() noexcept {
 }
 
 void LinuxSehHandler::ReleaseLock() noexcept {
-    if (--g_lock_recursion > 0) return;
+    if (--g_lock_recursion > 0)
+        return;
     g_lock_owner = {};
     lock_.store(0, std::memory_order_release);
 }
@@ -122,15 +123,17 @@ void LinuxSehHandler::ReleaseLock() noexcept {
 // ═══════════════════════════════════════════════════════════════════════════
 
 void LinuxSehHandler::EnqueueDemotedCode(void* code_start, uint32_t code_size) noexcept {
-    if (code_start == nullptr || code_size == 0) return;
+    if (code_start == nullptr || code_size == 0)
+        return;
     for (auto& region : pending_free_) {
-        if (region.active && region.code_start == code_start) return;
+        if (region.active && region.code_start == code_start)
+            return;
     }
     for (auto& region : pending_free_) {
         if (!region.active) {
             region.code_start = code_start;
-            region.code_size  = code_size;
-            region.active     = true;
+            region.code_size = code_size;
+            region.active = true;
             return;
         }
     }
@@ -147,15 +150,15 @@ void LinuxSehHandler::InvalidateLookupCache() noexcept {
 
 LinuxSehHandler::~LinuxSehHandler() noexcept {}
 
-void LinuxSehHandler::RegisterCode(void* code_start, uint32_t code_size,
-                                    const JitMethod* nm,
-                                    uint32_t patch_method_token) noexcept {
-    if (code_start == nullptr || code_size == 0 || nm == nullptr) return;
+void LinuxSehHandler::RegisterCode(void* code_start, uint32_t code_size, const JitMethod* nm,
+                                   uint32_t patch_method_token) noexcept {
+    if (code_start == nullptr || code_size == 0 || nm == nullptr)
+        return;
 
     JitCodeEntry entry;
     entry.code_start = code_start;
-    entry.code_size  = code_size;
-    entry.nm         = nm;
+    entry.code_size = code_size;
+    entry.nm = nm;
     entry.patch_method_token = patch_method_token;
     {
         auto* domain = chaos::il2cpp::memory_domain::CurrentDomain();
@@ -181,22 +184,21 @@ void LinuxSehHandler::RegisterCode(void* code_start, uint32_t code_size,
         }
     }
 
-    CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-        "RegisterCode: code={} size={} seh_offset={} token={}",
-        code_start, code_size, nm->seh_table_offset, patch_method_token);
+    CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "RegisterCode: code={} size={} seh_offset={} token={}", code_start, code_size,
+                             nm->seh_table_offset, patch_method_token);
 
     // Register DWARF .eh_frame for libgcc stack unwinding (Linux only).
     if (nm->eh_frame_offset > 0) {
         const void* eh_frame = static_cast<const uint8_t*>(code_start) + nm->eh_frame_offset;
         __register_frame(eh_frame);
         const_cast<JitMethod*>(nm)->eh_frame_registered = true;
-        CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-            "RegisterCode: registered .eh_frame at offset {}", nm->eh_frame_offset);
+        CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "RegisterCode: registered .eh_frame at offset {}", nm->eh_frame_offset);
     }
 }
 
 void LinuxSehHandler::UnregisterCode(void* code_start) noexcept {
-    if (code_start == nullptr) return;
+    if (code_start == nullptr)
+        return;
     {
         JitRegistryLockGuard lock(this);
         for (auto& entry : entries_) {
@@ -219,15 +221,15 @@ const JitMethod* LinuxSehHandler::FindCodeByAddress(const void* address) noexcep
     uintptr_t page = addr_val >> 12;
 
     uint32_t gen = lookup_generation_.load(std::memory_order_acquire);
-    if (g_jit_lookup_cache.nm != nullptr &&
-        g_jit_lookup_cache.page_base == page &&
+    if (g_jit_lookup_cache.nm != nullptr && g_jit_lookup_cache.page_base == page &&
         g_jit_lookup_cache.generation == gen) {
         return g_jit_lookup_cache.nm;
     }
 
     for (const auto& entry : entries_) {
         const uint8_t* start = static_cast<const uint8_t*>(entry.code_start);
-        if (start == nullptr) continue;
+        if (start == nullptr)
+            continue;
         const uint8_t* end = start + entry.code_size;
         const uint8_t* addr = static_cast<const uint8_t*>(address);
         if (addr >= start && addr < end) {
@@ -241,17 +243,15 @@ const JitMethod* LinuxSehHandler::FindCodeByAddress(const void* address) noexcep
 }
 
 uint32_t LinuxSehHandler::DemoteByToken(uint32_t method_token) noexcept {
-    if (method_token == 0) return 0;
+    if (method_token == 0)
+        return 0;
     uint32_t count = 0;
     {
         JitRegistryLockGuard lock(this);
         for (auto& entry : entries_) {
-            if (entry.patch_method_token == method_token &&
-                entry.nm != nullptr) {
+            if (entry.patch_method_token == method_token && entry.nm != nullptr) {
                 const_cast<JitMethod*>(entry.nm)->code_managed_externally = true;
-                EnqueueDemotedCode(
-                    const_cast<void*>(entry.code_start),
-                    entry.code_size);
+                EnqueueDemotedCode(const_cast<void*>(entry.code_start), entry.code_size);
                 entry.nm = nullptr;
                 count++;
             }
@@ -259,24 +259,21 @@ uint32_t LinuxSehHandler::DemoteByToken(uint32_t method_token) noexcept {
     }
     if (count > 0) {
         InvalidateLookupCache();
-        CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-            "DemoteByToken: token={} demoted {} entries", method_token, count);
+        CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "DemoteByToken: token={} demoted {} entries", method_token, count);
     }
     return count;
 }
 
 uint32_t LinuxSehHandler::DemoteByDomainId(uint32_t domain_id) noexcept {
-    if (domain_id == 0) return 0;  // core domain, never unloaded
+    if (domain_id == 0)
+        return 0; // core domain, never unloaded
     uint32_t count = 0;
     {
         JitRegistryLockGuard lock(this);
         for (auto& entry : entries_) {
-            if (entry.domain_id == domain_id &&
-                entry.nm != nullptr) {
+            if (entry.domain_id == domain_id && entry.nm != nullptr) {
                 const_cast<JitMethod*>(entry.nm)->code_managed_externally = true;
-                EnqueueDemotedCode(
-                    const_cast<void*>(entry.code_start),
-                    entry.code_size);
+                EnqueueDemotedCode(const_cast<void*>(entry.code_start), entry.code_size);
                 entry.nm = nullptr;
                 count++;
             }
@@ -284,26 +281,25 @@ uint32_t LinuxSehHandler::DemoteByDomainId(uint32_t domain_id) noexcept {
     }
     if (count > 0) {
         InvalidateLookupCache();
-        CHAOS_IL2CPP_LOG_INFO_M("codegen",
-            "DemoteByDomainId: domain={} demoted {} entries", domain_id, count);
+        CHAOS_IL2CPP_LOG_INFO_M("codegen", "DemoteByDomainId: domain={} demoted {} entries", domain_id, count);
     }
     return count;
 }
 
 uint32_t LinuxSehHandler::DemoteByCallSiteToken(uint32_t method_token) noexcept {
-    if (method_token == 0) return 0;
+    if (method_token == 0)
+        return 0;
     uint32_t count = 0;
     {
         JitRegistryLockGuard lock(this);
         for (auto& entry : entries_) {
             const auto* nm = entry.nm;
-            if (nm == nullptr) continue;
+            if (nm == nullptr)
+                continue;
             for (uint32_t j = 0; j < nm->call_site_count; j++) {
                 if (nm->call_sites[j].method_token == method_token) {
                     const_cast<JitMethod*>(nm)->code_managed_externally = true;
-                    EnqueueDemotedCode(
-                        const_cast<void*>(entry.code_start),
-                        entry.code_size);
+                    EnqueueDemotedCode(const_cast<void*>(entry.code_start), entry.code_size);
                     entry.nm = nullptr;
                     count++;
                     break;
@@ -313,8 +309,7 @@ uint32_t LinuxSehHandler::DemoteByCallSiteToken(uint32_t method_token) noexcept 
     }
     if (count > 0) {
         InvalidateLookupCache();
-        CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-            "DemoteByCallSiteToken: token={} demoted {} entries", method_token, count);
+        CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "DemoteByCallSiteToken: token={} demoted {} entries", method_token, count);
     }
     return count;
 }
@@ -326,8 +321,8 @@ void LinuxSehHandler::ReclaimDemoted() noexcept {
     // frame's return address can never be re-matched to a recycled address
     // holding a different method's GC map. Deliberate memory-for-safety.
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-        "ReclaimDemoted: {} demoted region(s) retained for process lifetime (T2.3-C 方案3)",
-        static_cast<unsigned>(pending_free_.size()));
+                             "ReclaimDemoted: {} demoted region(s) retained for process lifetime (T2.3-C 方案3)",
+                             static_cast<unsigned>(pending_free_.size()));
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -335,11 +330,10 @@ void LinuxSehHandler::ReclaimDemoted() noexcept {
 // ═══════════════════════════════════════════════════════════════════════════
 
 /// Find the innermost catch/filter clause covering code_offset.
-static bool FindSehCatchHandler(const JitMethod* nm,
-                                 uint32_t code_offset,
-                                 uint32_t* out_handler_offset,
-                                 uint32_t* out_clause_idx) noexcept {
-    if (nm->seh_table_offset == 0) return false;
+static bool FindSehCatchHandler(const JitMethod* nm, uint32_t code_offset, uint32_t* out_handler_offset,
+                                uint32_t* out_clause_idx) noexcept {
+    if (nm->seh_table_offset == 0)
+        return false;
 
     const uint8_t* code = static_cast<const uint8_t*>(nm->code);
     const uint8_t* table = code + nm->seh_table_offset;
@@ -351,16 +345,17 @@ static bool FindSehCatchHandler(const JitMethod* nm,
         uint32_t idx = i - 1;
         const uint8_t* entry = clauses + idx * kSehClauseEntrySize;
         uint32_t cflags, ctry_start, ctry_end;
-        std::memcpy(&cflags,    entry + 0, sizeof(cflags));
+        std::memcpy(&cflags, entry + 0, sizeof(cflags));
         std::memcpy(&ctry_start, entry + 4, sizeof(ctry_start));
-        std::memcpy(&ctry_end,  entry + 8, sizeof(ctry_end));
+        std::memcpy(&ctry_end, entry + 8, sizeof(ctry_end));
 
-        if ((cflags == 0 || cflags == 1) &&
-            code_offset >= ctry_start && code_offset < ctry_end) {
+        if ((cflags == 0 || cflags == 1) && code_offset >= ctry_start && code_offset < ctry_end) {
             uint32_t handler_st;
             std::memcpy(&handler_st, entry + 12, sizeof(handler_st));
-            if (out_handler_offset) *out_handler_offset = handler_st;
-            if (out_clause_idx) *out_clause_idx = idx;
+            if (out_handler_offset)
+                *out_handler_offset = handler_st;
+            if (out_clause_idx)
+                *out_clause_idx = idx;
             return true;
         }
     }
@@ -368,10 +363,9 @@ static bool FindSehCatchHandler(const JitMethod* nm,
 }
 
 /// Collect finally/fault clauses nested within the catch clause's try range.
-static void BuildUnwindList(const JitMethod* nm,
-                             uint32_t catch_clause_idx,
-                             uint32_t throw_offset) noexcept {
-    if (nm->seh_table_offset == 0) return;
+static void BuildUnwindList(const JitMethod* nm, uint32_t catch_clause_idx, uint32_t throw_offset) noexcept {
+    if (nm->seh_table_offset == 0)
+        return;
 
     const uint8_t* code = static_cast<const uint8_t*>(nm->code);
     const uint8_t* table = code + nm->seh_table_offset;
@@ -382,19 +376,23 @@ static void BuildUnwindList(const JitMethod* nm,
     const uint8_t* catch_entry = clauses + catch_clause_idx * kSehClauseEntrySize;
     uint32_t catch_try_start, catch_try_end;
     std::memcpy(&catch_try_start, catch_entry + 4, sizeof(catch_try_start));
-    std::memcpy(&catch_try_end,   catch_entry + 8, sizeof(catch_try_end));
+    std::memcpy(&catch_try_end, catch_entry + 8, sizeof(catch_try_end));
 
     for (uint32_t i = 0; i < count; i++) {
         const uint8_t* entry = clauses + i * kSehClauseEntrySize;
         uint32_t cflags, ctry_start, ctry_end;
-        std::memcpy(&cflags,    entry + 0, sizeof(cflags));
+        std::memcpy(&cflags, entry + 0, sizeof(cflags));
         std::memcpy(&ctry_start, entry + 4, sizeof(ctry_start));
-        std::memcpy(&ctry_end,  entry + 8, sizeof(ctry_end));
+        std::memcpy(&ctry_end, entry + 8, sizeof(ctry_end));
 
-        if ((cflags != 2 && cflags != 4)) continue;
-        if (ctry_start < catch_try_start) continue;
-        if (ctry_start >= catch_try_end) continue;
-        if (ctry_start > throw_offset) continue;
+        if ((cflags != 2 && cflags != 4))
+            continue;
+        if (ctry_start < catch_try_start)
+            continue;
+        if (ctry_start >= catch_try_end)
+            continue;
+        if (ctry_start > throw_offset)
+            continue;
 
         if (g_jit_unwind.unwind_count < kMaxUnwindDepth) {
             for (uint32_t j = g_jit_unwind.unwind_count; j > 0; --j) {
@@ -407,9 +405,9 @@ static void BuildUnwindList(const JitMethod* nm,
 }
 
 /// Reverse-search for the innermost finally covering code_offset.
-static uint32_t FindInnermostFinally(const JitMethod* nm,
-                                      uint32_t code_offset) noexcept {
-    if (nm->seh_table_offset == 0) return UINT32_MAX;
+static uint32_t FindInnermostFinally(const JitMethod* nm, uint32_t code_offset) noexcept {
+    if (nm->seh_table_offset == 0)
+        return UINT32_MAX;
 
     const uint8_t* code = static_cast<const uint8_t*>(nm->code);
     const uint8_t* table = code + nm->seh_table_offset;
@@ -421,12 +419,11 @@ static uint32_t FindInnermostFinally(const JitMethod* nm,
         uint32_t idx = i - 1;
         const uint8_t* entry = clauses + idx * kSehClauseEntrySize;
         uint32_t cflags, ctry_start, ctry_end;
-        std::memcpy(&cflags,    entry + 0, sizeof(cflags));
+        std::memcpy(&cflags, entry + 0, sizeof(cflags));
         std::memcpy(&ctry_start, entry + 4, sizeof(ctry_start));
-        std::memcpy(&ctry_end,  entry + 8, sizeof(ctry_end));
+        std::memcpy(&ctry_end, entry + 8, sizeof(ctry_end));
 
-        if (cflags == 2 &&
-            code_offset >= ctry_start && code_offset < ctry_end) {
+        if (cflags == 2 && code_offset >= ctry_start && code_offset < ctry_end) {
             return idx;
         }
     }
@@ -434,11 +431,9 @@ static uint32_t FindInnermostFinally(const JitMethod* nm,
 }
 
 /// Read handler start byte offset for a clause index.
-static uint32_t GetClauseHandlerOffset(const JitMethod* nm,
-                                        uint32_t clause_idx) noexcept {
+static uint32_t GetClauseHandlerOffset(const JitMethod* nm, uint32_t clause_idx) noexcept {
     const uint8_t* code = static_cast<const uint8_t*>(nm->code);
-    const uint8_t* entry = code + nm->seh_table_offset + sizeof(uint32_t)
-                           + clause_idx * kSehClauseEntrySize + 12;
+    const uint8_t* entry = code + nm->seh_table_offset + sizeof(uint32_t) + clause_idx * kSehClauseEntrySize + 12;
     uint32_t val;
     std::memcpy(&val, entry, sizeof(val));
     return val;
@@ -475,7 +470,8 @@ static void JitSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept 
     auto& self = GetLinuxSehHandler();
     auto* ctx = static_cast<ucontext_t*>(ucontext);
 
-    if (ctx == nullptr) return;
+    if (ctx == nullptr)
+        return;
 
     // Determine the faulting address.
     void* fault_addr = nullptr;
@@ -485,17 +481,19 @@ static void JitSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept 
 
     // For managed exceptions, the return address is in TLS.
     // For hardware exceptions, use the instruction pointer from the context.
-    void* code_addr = (sig == kManagedExceptionSignal)
-        ? g_jit_throw_ret_addr
-        : reinterpret_cast<void*>(
+    void* code_addr = (sig == kManagedExceptionSignal) ? g_jit_throw_ret_addr
+                                                       : reinterpret_cast<void*>(
 #if defined(__aarch64__)
-            ctx->uc_mcontext.pc
+                                                             ctx->uc_mcontext.pc
 #else
-            ctx->uc_mcontext.gregs[REG_RIP]
+                                                             ctx->uc_mcontext.gregs[REG_RIP]
 #endif
-        );
+                                                         );
 
-	if (code_addr == nullptr) { ChainSignalToPrev(sig, info, ucontext); return; }
+    if (code_addr == nullptr) {
+        ChainSignalToPrev(sig, info, ucontext);
+        return;
+    }
 
     const JitMethod* nm = self.FindCodeByAddress(code_addr);
     if (nm == nullptr || nm->seh_table_offset == 0) {
@@ -505,15 +503,12 @@ static void JitSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept 
     }
 
     const uint8_t* code_base = static_cast<const uint8_t*>(nm->code);
-    uint32_t code_offset = static_cast<uint32_t>(
-        static_cast<const uint8_t*>(code_addr) - code_base);
+    uint32_t code_offset = static_cast<uint32_t>(static_cast<const uint8_t*>(code_addr) - code_base);
 
     // Find matching catch/filter handler.
     uint32_t catch_handler_offset_val = 0;
     uint32_t catch_clause_idx = 0;
-    bool has_catch = FindSehCatchHandler(nm, code_offset,
-                                          &catch_handler_offset_val,
-                                          &catch_clause_idx);
+    bool has_catch = FindSehCatchHandler(nm, code_offset, &catch_handler_offset_val, &catch_clause_idx);
 
     // Build finally/fault unwind list.
     ResetUnwindState();
@@ -532,8 +527,7 @@ static void JitSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept 
             std::memcpy(&cf, ent + 0, sizeof(cf));
             std::memcpy(&ts, ent + 4, sizeof(ts));
             std::memcpy(&te, ent + 8, sizeof(te));
-            if ((cf == 2 || cf == 4) &&
-                code_offset >= ts && code_offset < te &&
+            if ((cf == 2 || cf == 4) && code_offset >= ts && code_offset < te &&
                 g_jit_unwind.unwind_count < kMaxUnwindDepth) {
                 g_jit_unwind.unwind_list[g_jit_unwind.unwind_count++] = i;
             }
@@ -553,8 +547,8 @@ static void JitSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept 
 
     // Write exception object into all GPR register file slots (for managed throws).
     if (sig == kManagedExceptionSignal && g_jit_frame_rsp != nullptr) {
-        uint64_t* regfile = reinterpret_cast<uint64_t*>(
-            reinterpret_cast<uint8_t*>(g_jit_frame_rsp) + kJitGprFileOffset);
+        uint64_t* regfile =
+            reinterpret_cast<uint64_t*>(reinterpret_cast<uint8_t*>(g_jit_frame_rsp) + kJitGprFileOffset);
         uint64_t ex_val = reinterpret_cast<uint64_t>(g_jit_exception_obj);
         for (uint32_t i = 0; i < kJitGprFileOffset / sizeof(uint64_t); i++) {
             regfile[i] = ex_val;
@@ -601,15 +595,13 @@ static void JitSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept 
 extern "C" void ChaosJitRaiseException(void* exception_obj) noexcept {
     g_jit_exception_obj = exception_obj;
     g_jit_throw_ret_addr = __builtin_return_address(0);
-    g_jit_frame_rsp = reinterpret_cast<void*>(
-        reinterpret_cast<uintptr_t>(__builtin_frame_address(0)) + 16);
+    g_jit_frame_rsp = reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(__builtin_frame_address(0)) + 16);
 
     // Send ourselves SIGUSR1 — the signal handler will process the exception.
     pthread_t self = pthread_self();
     pthread_kill(self, kManagedExceptionSignal);
 
-    CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-        "ChaosJitRaiseException: no handler found, returning to INT3");
+    CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "ChaosJitRaiseException: no handler found, returning to INT3");
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -671,8 +663,7 @@ extern "C" void* JitEndFinallyHelper() noexcept {
 // JitLeaveHelper (Linux implementation)
 // ═══════════════════════════════════════════════════════════════════════════
 
-extern "C" void* JitLeaveHelper(uint32_t target_instr_idx,
-                                uint32_t current_instr_idx) noexcept {
+extern "C" void* JitLeaveHelper(uint32_t target_instr_idx, uint32_t current_instr_idx) noexcept {
     auto& self = GetLinuxSehHandler();
 
     void* ret_addr = __builtin_return_address(0);
@@ -681,16 +672,14 @@ extern "C" void* JitLeaveHelper(uint32_t target_instr_idx,
         return nullptr;
     }
 
-    uint32_t current_offset = (current_instr_idx < nm->instr_offset_count)
-        ? nm->instr_offsets[current_instr_idx] : 0;
+    uint32_t current_offset = (current_instr_idx < nm->instr_offset_count) ? nm->instr_offsets[current_instr_idx] : 0;
 
     uint32_t finally_idx = FindInnermostFinally(nm, current_offset);
     if (finally_idx == UINT32_MAX) {
         return nullptr;
     }
 
-    uint32_t target_offset = (target_instr_idx < nm->instr_offset_count)
-        ? nm->instr_offsets[target_instr_idx] : 0;
+    uint32_t target_offset = (target_instr_idx < nm->instr_offset_count) ? nm->instr_offsets[target_instr_idx] : 0;
 
     ResetUnwindState();
     g_jit_unwind.pending_leave = true;
@@ -704,8 +693,7 @@ extern "C" void* JitLeaveHelper(uint32_t target_instr_idx,
 // ═══════════════════════════════════════════════════════════════════════════
 
 // GC event callback for deferred memory reclamation.
-static void OnGcSafepoint(chaos::il2cpp::runtime_core::GcEvent /*event*/,
-                           void* /*user_data*/) noexcept {
+static void OnGcSafepoint(chaos::il2cpp::runtime_core::GcEvent /*event*/, void* /*user_data*/) noexcept {
     GetLinuxSehHandler().ReclaimDemoted();
 }
 
@@ -721,7 +709,7 @@ void LinuxSehHandler::Initialize() noexcept {
 
     // Hardware exceptions that may occur in T4 code.
     sigaction(SIGSEGV, &sa, &s_prev_segv);
-    sigaction(SIGBUS,  &sa, &s_prev_bus);
+    sigaction(SIGBUS, &sa, &s_prev_bus);
 
     // Managed exceptions raised by T4 code (ChaosJitRaiseException).
     sigaction(kManagedExceptionSignal, &sa, nullptr);
@@ -732,8 +720,7 @@ void LinuxSehHandler::Initialize() noexcept {
     chaos::il2cpp::runtime_core::GcRegisterEventCallback(OnGcSafepoint, nullptr);
 
     // Register T4 demotion callbacks.
-    chaos::il2cpp::runtime_core::RegisterJitDemotionCallbacks(
-        DemoteJittedMethod, DemoteJittedCallSite);
+    chaos::il2cpp::runtime_core::RegisterJitDemotionCallbacks(DemoteJittedMethod, DemoteJittedCallSite);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -746,4 +733,4 @@ ISehHandler& GetSehHandler() noexcept {
 }
 #endif
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit

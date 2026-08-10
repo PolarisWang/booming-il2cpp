@@ -23,81 +23,81 @@ namespace chaos::il2cpp::jit::tree {
 // ── Node kind enumeration ───────────────────────────────────────────────
 enum NodeKind : uint8_t {
     // Leaf nodes (no children)
-    kNop       = 0,   // no-op
-    kLdcI4     = 1,   // int32 constant
-    kLdcI8     = 2,   // int64 constant
-    kLdcR4     = 3,   // float constant
-    kLdcR8     = 4,   // double constant
-    kLdNull    = 5,   // null reference
-    kLdArg     = 6,   // method argument by index
-    kLdLoc     = 7,   // local variable by vreg
-    kLdStr     = 8,   // string constant (pointer)
+    kNop = 0,    // no-op
+    kLdcI4 = 1,  // int32 constant
+    kLdcI8 = 2,  // int64 constant
+    kLdcR4 = 3,  // float constant
+    kLdcR8 = 4,  // double constant
+    kLdNull = 5, // null reference
+    kLdArg = 6,  // method argument by index
+    kLdLoc = 7,  // local variable by vreg
+    kLdStr = 8,  // string constant (pointer)
 
     // Unary nodes (1 child)
-    kNeg       = 16,  // arithmetic negate
-    kNot       = 17,  // bitwise not
-    kConvI4    = 18,  // convert to int32
-    kConvI8    = 19,  // convert to int64
-    kConvR4    = 20,  // convert to float
-    kConvR8    = 21,  // convert to double
-    kConvU4    = 22,  // unsigned to int32
-    kConvU8    = 23,  // unsigned to int64
-    kLdLen     = 24,  // array length
-    kBox       = 25,  // box value type
-    kUnbox     = 26,  // unbox to value type
+    kNeg = 16,    // arithmetic negate
+    kNot = 17,    // bitwise not
+    kConvI4 = 18, // convert to int32
+    kConvI8 = 19, // convert to int64
+    kConvR4 = 20, // convert to float
+    kConvR8 = 21, // convert to double
+    kConvU4 = 22, // unsigned to int32
+    kConvU8 = 23, // unsigned to int64
+    kLdLen = 24,  // array length
+    kBox = 25,    // box value type
+    kUnbox = 26,  // unbox to value type
 
     // Binary nodes (2 children)
-    kAdd       = 32,
-    kSub       = 33,
-    kMul       = 34,
-    kDiv       = 35,
-    kRem       = 36,
-    kAnd       = 37,
-    kOr        = 38,
-    kXor       = 39,
-    kShl       = 40,
-    kShr       = 41,
-    kShrUn     = 42,
-    kCeq       = 43,  // compare equal → int32
-    kClt       = 44,  // compare less-than (signed) → int32
-    kCgt       = 45,  // compare greater-than (signed) → int32
-    kCltUn     = 46,  // compare less-than (unsigned) → int32
-    kCgtUn     = 47,  // compare greater-than (unsigned) → int32
+    kAdd = 32,
+    kSub = 33,
+    kMul = 34,
+    kDiv = 35,
+    kRem = 36,
+    kAnd = 37,
+    kOr = 38,
+    kXor = 39,
+    kShl = 40,
+    kShr = 41,
+    kShrUn = 42,
+    kCeq = 43,   // compare equal → int32
+    kClt = 44,   // compare less-than (signed) → int32
+    kCgt = 45,   // compare greater-than (signed) → int32
+    kCltUn = 46, // compare less-than (unsigned) → int32
+    kCgtUn = 47, // compare greater-than (unsigned) → int32
 
     // Ternary / special nodes
-    kLdFld     = 48,  // instance field load: (object, field_offset)
-    kLdSFld    = 49,  // static field load: (field_offset, unused)
-    kCall      = 50,  // method call: (method_token, args[])
-    kCallVirt  = 51,  // virtual call: (method_token, this, args[])
+    kLdFld = 48,    // instance field load: (object, field_offset)
+    kLdSFld = 49,   // static field load: (field_offset, unused)
+    kCall = 50,     // method call: (method_token, args[])
+    kCallVirt = 51, // virtual call: (method_token, this, args[])
 
     // Intrinsic nodes (Gap 3)
-    kAbs       = 52,  // absolute value (unary, int32)
-    kMin       = 53,  // minimum (binary, int32)
-    kMax       = 54,  // maximum (binary, int32)
+    kAbs = 52, // absolute value (unary, int32)
+    kMin = 53, // minimum (binary, int32)
+    kMax = 54, // maximum (binary, int32)
 
     // Array access nodes
-    kLdElem    = 55,  // array element load: (array, index) → value
-    kLdElemA   = 56,  // array element address: (array, index) → managed_ptr
+    kLdElem = 55,  // array element load: (array, index) → value
+    kLdElemA = 56, // array element address: (array, index) → managed_ptr
 
     // SIMD + bit manipulation nodes
-    kSimd      = 57,  // SIMD operation (sub-op + element type in operand_index)
-    kPopcnt    = 58,  // population count (unary, GPR)
-    kLzcnt     = 59,  // leading zero count (unary, GPR)
+    kSimd = 57,   // SIMD operation (sub-op + element type in operand_index)
+    kPopcnt = 58, // population count (unary, GPR)
+    kLzcnt = 59,  // leading zero count (unary, GPR)
 
     // Store / side-effect nodes (roots in the DAG)
-    kStLoc     = 64,  // local store: (value, local_vreg)
-    kStFld     = 65,  // field store: (object, value, field_offset)
-    kStElem    = 66,  // array element store: (array, index, value)
-    kReturn    = 67,  // return: (value or null)
+    kStLoc = 64,  // local store: (value, local_vreg)
+    kStFld = 65,  // field store: (object, value, field_offset)
+    kStElem = 66, // array element store: (array, index, value)
+    kReturn = 67, // return: (value or null)
 };
 
 // ── Type tag (mirrors ValueTag from interpreter) ────────────────────────
 enum TypeTag : uint8_t {
-    kVoid     = 0,
-    kInt32    = 1,
-    kInt64    = 2,
-    kFloat32  = 3,
-    kFloat64  = 4,
+    kVoid = 0,
+    kInt32 = 1,
+    kInt64 = 2,
+    kFloat32 = 3,
+    kFloat64 = 4,
     kObjectRef = 5,
     kManagedPtr = 6,
 };
@@ -105,43 +105,43 @@ enum TypeTag : uint8_t {
 // ── SIMD sub-operation identifiers ─────────────────────────────────────
 // Encoded in ExprNode::operand_index for kSimd nodes (bits [0..7]).
 enum SimdSubOperation : uint8_t {
-    kSimdInvalid   = 0,
-    kSimdAdd       = 1,   // paddb/w/d/q (element type distinguishes width)
-    kSimdSub       = 2,   // psubb/w/d/q
-    kSimdMul       = 3,   // pmullw / pmuludq
-    kSimdAnd       = 4,   // pand
-    kSimdOr        = 5,   // por
-    kSimdXor       = 6,   // pxor
-    kSimdAndNot    = 7,   // pandn
-    kSimdEq        = 8,   // pcmpeqb/w/d/q
-    kSimdGt        = 9,   // pcmpgtb/w/d/q
-    kSimdShuffle   = 10,  // pshufd (imm8 in simd_imm)
-    kSimdShuffleB  = 11,  // pshufb
-    kSimdUnpackLo  = 12,  // punpckl*
-    kSimdUnpackHi  = 13,  // punpckh*
-    kSimdPackS     = 14,  // packss* / packus*
-    kSimdAbs       = 15,  // pabsb/w/d
-    kSimdShl       = 16,  // psllw/d/q
-    kSimdShr       = 17,  // psrlw/d/q (logical)
-    kSimdSar       = 18,  // psraw/d (arithmetic)
-    kSimdExtract   = 19,  // pextrb/w/d (extract element to GPR)
-    kSimdInsert    = 20,  // pinsrb/w/d (insert scalar from GPR)
-    kSimdMoveMask  = 21,  // pmovmskb
-    kSimdLoad      = 22,  // movdqa/movdqu from memory
-    kSimdStore     = 23,  // movdqa/movdqu to memory
-    kSimdZero      = 24,  // pxor-self (zero XMM)
-    kSimdMin       = 25,  // min (float: fmin, int: pmin)
-    kSimdMax       = 26,  // max (float: fmax, int: pmax)
-    kSimdDiv       = 27,  // div (float: divps/divpd; no packed int div)
+    kSimdInvalid = 0,
+    kSimdAdd = 1,       // paddb/w/d/q (element type distinguishes width)
+    kSimdSub = 2,       // psubb/w/d/q
+    kSimdMul = 3,       // pmullw / pmuludq
+    kSimdAnd = 4,       // pand
+    kSimdOr = 5,        // por
+    kSimdXor = 6,       // pxor
+    kSimdAndNot = 7,    // pandn
+    kSimdEq = 8,        // pcmpeqb/w/d/q
+    kSimdGt = 9,        // pcmpgtb/w/d/q
+    kSimdShuffle = 10,  // pshufd (imm8 in simd_imm)
+    kSimdShuffleB = 11, // pshufb
+    kSimdUnpackLo = 12, // punpckl*
+    kSimdUnpackHi = 13, // punpckh*
+    kSimdPackS = 14,    // packss* / packus*
+    kSimdAbs = 15,      // pabsb/w/d
+    kSimdShl = 16,      // psllw/d/q
+    kSimdShr = 17,      // psrlw/d/q (logical)
+    kSimdSar = 18,      // psraw/d (arithmetic)
+    kSimdExtract = 19,  // pextrb/w/d (extract element to GPR)
+    kSimdInsert = 20,   // pinsrb/w/d (insert scalar from GPR)
+    kSimdMoveMask = 21, // pmovmskb
+    kSimdLoad = 22,     // movdqa/movdqu from memory
+    kSimdStore = 23,    // movdqa/movdqu to memory
+    kSimdZero = 24,     // pxor-self (zero XMM)
+    kSimdMin = 25,      // min (float: fmin, int: pmin)
+    kSimdMax = 26,      // max (float: fmax, int: pmax)
+    kSimdDiv = 27,      // div (float: divps/divpd; no packed int div)
 };
 
 // ── SIMD element type ──────────────────────────────────────────────────
 // Encoded in ExprNode::operand_index for kSimd nodes (bits [8..15]).
 enum SimdElementType : uint8_t {
-    kElemInt8    = 0,
-    kElemInt16   = 1,
-    kElemInt32   = 2,
-    kElemInt64   = 3,
+    kElemInt8 = 0,
+    kElemInt16 = 1,
+    kElemInt32 = 2,
+    kElemInt64 = 3,
     kElemFloat32 = 4,
     kElemFloat64 = 5,
 };
@@ -158,24 +158,24 @@ enum SimdElementType : uint8_t {
 //  offset 16: child1 (8 bytes)
 struct ExprNode {
     // Packed header: kind in bits [0..7], vn_id in bits [8..31]
-    uint32_t kind_vn;     // kind:8 | vn_id:24
-    uint8_t  type_tag;    // TypeTag
-    uint8_t  child_count; // number of children (0, 1, or 2)
-    uint8_t  flags;       // reserved for future use
-    uint8_t  padding_;    // explicit padding
+    uint32_t kind_vn;    // kind:8 | vn_id:24
+    uint8_t type_tag;    // TypeTag
+    uint8_t child_count; // number of children (0, 1, or 2)
+    uint8_t flags;       // reserved for future use
+    uint8_t padding_;    // explicit padding
 
     // Child pointers / payload (mutually exclusive with children)
     union {
         // When child_count == 0: payload is the leaf value
-        int32_t  i4;        // LdcI4
-        int64_t  i8;        // LdcI8
-        float    r4;        // LdcR4
-        double   r8;        // LdcR8
-        uint32_t operand_index;  // LdArg(index), LdLoc(vreg)
-        uint32_t field_offset;   // LdFld/StFld offset
-        uint32_t method_token;   // Call token
-        uint32_t module_id;      // Call module id
-        void*    ptr;            // LdStr: string pointer
+        int32_t i4;             // LdcI4
+        int64_t i8;             // LdcI8
+        float r4;               // LdcR4
+        double r8;              // LdcR8
+        uint32_t operand_index; // LdArg(index), LdLoc(vreg)
+        uint32_t field_offset;  // LdFld/StFld offset
+        uint32_t method_token;  // Call token
+        uint32_t module_id;     // Call module id
+        void* ptr;              // LdStr: string pointer
 
         // For nodes with children
         ExprNode* child0;
@@ -190,65 +190,49 @@ struct ExprNode {
 
     union {
         ExprNode* child1;   // second child (binary nodes)
-        uint32_t  arg_count; // Call argument count (if child_count > 2)
+        uint32_t arg_count; // Call argument count (if child_count > 2)
     };
 
     // ── Accessors ────────────────────────────────────────────────────
-    inline NodeKind kind() const noexcept {
-        return static_cast<NodeKind>(kind_vn & 0xFF);
-    }
-    inline uint32_t vn_id() const noexcept {
-        return kind_vn >> 8;
-    }
-    inline void set_kind(NodeKind k) noexcept {
-        kind_vn = (kind_vn & 0xFFFFFF00) | static_cast<uint32_t>(k);
-    }
-    inline void set_vn_id(uint32_t id) noexcept {
-        kind_vn = (kind_vn & 0xFF) | (id << 8);
-    }
+    inline NodeKind kind() const noexcept { return static_cast<NodeKind>(kind_vn & 0xFF); }
+    inline uint32_t vn_id() const noexcept { return kind_vn >> 8; }
+    inline void set_kind(NodeKind k) noexcept { kind_vn = (kind_vn & 0xFFFFFF00) | static_cast<uint32_t>(k); }
+    inline void set_vn_id(uint32_t id) noexcept { kind_vn = (kind_vn & 0xFF) | (id << 8); }
 
     // ── SIMD accessors (for kSimd nodes only) ────────────────────────
     /// SIMD sub-operation encoded in operand_index bits [0..7].
-    inline uint8_t simd_op() const noexcept {
-        return static_cast<uint8_t>(operand_index & 0xFF);
-    }
+    inline uint8_t simd_op() const noexcept { return static_cast<uint8_t>(operand_index & 0xFF); }
     /// SIMD element type encoded in operand_index bits [8..15].
-    inline uint8_t simd_elem_type() const noexcept {
-        return static_cast<uint8_t>((operand_index >> 8) & 0xFF);
-    }
+    inline uint8_t simd_elem_type() const noexcept { return static_cast<uint8_t>((operand_index >> 8) & 0xFF); }
     /// SIMD immediate (shuffle mask, insert/extract index) in bits [16..31].
-    inline uint16_t simd_imm() const noexcept {
-        return static_cast<uint16_t>((operand_index >> 16) & 0xFFFF);
-    }
+    inline uint16_t simd_imm() const noexcept { return static_cast<uint16_t>((operand_index >> 16) & 0xFFFF); }
     /// Set all SIMD metadata in operand_index at once.
     inline void set_simd_meta(uint8_t op, uint8_t elem, uint16_t imm) noexcept {
-        operand_index = static_cast<uint32_t>(op) |
-                       (static_cast<uint32_t>(elem) << 8) |
-                       (static_cast<uint32_t>(imm) << 16);
+        operand_index =
+            static_cast<uint32_t>(op) | (static_cast<uint32_t>(elem) << 8) | (static_cast<uint32_t>(imm) << 16);
     }
 };
 
-static_assert(sizeof(ExprNode) <= 24,
-    "ExprNode should fit in 24 bytes for cache efficiency");
+static_assert(sizeof(ExprNode) <= 24, "ExprNode should fit in 24 bytes for cache efficiency");
 
 static_assert(sizeof(ExprNode::call_method_token) + sizeof(ExprNode::call_arg0_vreg) <= 8,
-    "call_method_token + call_arg0_vreg should fit in the 8-byte child0 union slot");
+              "call_method_token + call_arg0_vreg should fit in the 8-byte child0 union slot");
 
 // ── Node flags (ExprNode::flags) ──────────────────────────────────────────
-static constexpr uint8_t kFlagNoBoundsCheck = 0x01;  // BCE determined check is safe to skip
-static constexpr uint8_t kFlagNonNullArray  = 0x02;  // array ref proven non-null
+static constexpr uint8_t kFlagNoBoundsCheck = 0x01; // BCE determined check is safe to skip
+static constexpr uint8_t kFlagNonNullArray = 0x02;  // array ref proven non-null
 
 // ── Factory helpers (used by TreeBuilder) ──────────────────────────────
 
 /// Allocate an uninitialized ExprNode from the arena.
 /// Caller must fill kind/type_tag/payload after allocation.
-inline ExprNode* AllocNode(uint8_t*& arena_pos, uint8_t* arena_end,
-                           NodeKind kind, TypeTag type_tag,
+inline ExprNode* AllocNode(uint8_t*& arena_pos, uint8_t* arena_end, NodeKind kind, TypeTag type_tag,
                            ExprNode* c0 = nullptr, ExprNode* c1 = nullptr) noexcept {
-    if (arena_pos + sizeof(ExprNode) > arena_end) return nullptr;
+    if (arena_pos + sizeof(ExprNode) > arena_end)
+        return nullptr;
     auto* n = reinterpret_cast<ExprNode*>(arena_pos);
     arena_pos += sizeof(ExprNode);
-    n->kind_vn = static_cast<uint32_t>(kind);  // vn_id = 0 initially
+    n->kind_vn = static_cast<uint32_t>(kind); // vn_id = 0 initially
     n->type_tag = static_cast<uint8_t>(type_tag);
     n->flags = 0;
     n->padding_ = 0;
@@ -259,50 +243,47 @@ inline ExprNode* AllocNode(uint8_t*& arena_pos, uint8_t* arena_end,
 }
 
 /// Allocate a leaf node with an int32 payload.
-inline ExprNode* LeafI4(uint8_t*& pos, uint8_t* end,
-                         int32_t val, TypeTag tag = kInt32) noexcept {
+inline ExprNode* LeafI4(uint8_t*& pos, uint8_t* end, int32_t val, TypeTag tag = kInt32) noexcept {
     auto* n = AllocNode(pos, end, kLdcI4, tag);
-    if (n) n->i4 = val;
+    if (n)
+        n->i4 = val;
     return n;
 }
 
 /// Allocate a leaf node with an int64 payload.
-inline ExprNode* LeafI8(uint8_t*& pos, uint8_t* end,
-                         int64_t val, TypeTag tag = kInt64) noexcept {
+inline ExprNode* LeafI8(uint8_t*& pos, uint8_t* end, int64_t val, TypeTag tag = kInt64) noexcept {
     auto* n = AllocNode(pos, end, kLdcI8, tag);
-    if (n) n->i8 = val;
+    if (n)
+        n->i8 = val;
     return n;
 }
 
 /// Allocate a leaf node referencing an argument or local vreg.
-inline ExprNode* LeafArg(uint8_t*& pos, uint8_t* end,
-                          uint32_t idx, TypeTag tag = kInt32) noexcept {
+inline ExprNode* LeafArg(uint8_t*& pos, uint8_t* end, uint32_t idx, TypeTag tag = kInt32) noexcept {
     auto* n = AllocNode(pos, end, kLdArg, tag);
-    if (n) n->operand_index = idx;
+    if (n)
+        n->operand_index = idx;
     return n;
 }
 
-inline ExprNode* LeafLoc(uint8_t*& pos, uint8_t* end,
-                          uint32_t vreg, TypeTag tag = kInt32) noexcept {
+inline ExprNode* LeafLoc(uint8_t*& pos, uint8_t* end, uint32_t vreg, TypeTag tag = kInt32) noexcept {
     auto* n = AllocNode(pos, end, kLdLoc, tag);
-    if (n) n->operand_index = vreg;
+    if (n)
+        n->operand_index = vreg;
     return n;
 }
 
 /// Allocate a unary node.
-inline ExprNode* Unary(uint8_t*& pos, uint8_t* end,
-                        NodeKind kind, ExprNode* src,
-                        TypeTag tag = kInt32) noexcept {
+inline ExprNode* Unary(uint8_t*& pos, uint8_t* end, NodeKind kind, ExprNode* src, TypeTag tag = kInt32) noexcept {
     return AllocNode(pos, end, kind, tag, src);
 }
 
 /// Allocate a binary node.
-inline ExprNode* Binary(uint8_t*& pos, uint8_t* end,
-                         NodeKind kind, ExprNode* s1, ExprNode* s2,
-                         TypeTag tag = kInt32) noexcept {
+inline ExprNode* Binary(uint8_t*& pos, uint8_t* end, NodeKind kind, ExprNode* s1, ExprNode* s2,
+                        TypeTag tag = kInt32) noexcept {
     return AllocNode(pos, end, kind, tag, s1, s2);
 }
 
-}  // namespace chaos::il2cpp::jit::tree
+} // namespace chaos::il2cpp::jit::tree
 
-#endif  // CHAOS_IL2CPP_JIT_TREE_NODE_H_
+#endif // CHAOS_IL2CPP_JIT_TREE_NODE_H_

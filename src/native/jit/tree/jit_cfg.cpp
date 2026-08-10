@@ -4,7 +4,7 @@
 // natural loop identification.
 
 #include "tree/jit_cfg.h"
-#include "interpreter/ir_reg_alloc.h"        // RegisterInstruction
+#include "interpreter/ir_reg_alloc.h" // RegisterInstruction
 #include "interpreter/generated/ir_opcodes.h"
 
 #include <cstdint>
@@ -16,9 +16,7 @@ namespace chaos::il2cpp::jit::tree {
 
 // ── Helpers: instruction index → BB index map ──────────────────────────
 // Builds a lookup table: instruction_index → bb_index.
-static std::vector<uint32_t> BuildInstToBbMap(
-    const std::vector<BBRange>& bbs, uint32_t total_instrs) noexcept
-{
+static std::vector<uint32_t> BuildInstToBbMap(const std::vector<BBRange>& bbs, uint32_t total_instrs) noexcept {
     std::vector<uint32_t> map(total_instrs, UINT32_MAX);
     for (uint32_t bi = 0; bi < bbs.size(); ++bi) {
         for (uint32_t i = bbs[bi].lo; i < bbs[bi].hi; ++i)
@@ -29,13 +27,9 @@ static std::vector<uint32_t> BuildInstToBbMap(
 
 // ── Determine successors for a basic block ─────────────────────────────
 // Scans the terminator of the BB and fills succs with successor block IDs.
-static void FindBlockSuccessors(
-    uint32_t bb_id, const BBRange& bb,
-    const interpreter::RegisterInstruction* instrs,
-    const std::vector<uint32_t>& inst_to_bb,
-    uint32_t total_bbs,
-    std::vector<uint32_t>& succs) noexcept
-{
+static void FindBlockSuccessors(uint32_t bb_id, const BBRange& bb, const interpreter::RegisterInstruction* instrs,
+                                const std::vector<uint32_t>& inst_to_bb, uint32_t total_bbs,
+                                std::vector<uint32_t>& succs) noexcept {
     succs.clear();
 
     // Last instruction in the BB is the terminator (or fall-through).
@@ -44,79 +38,79 @@ static void FindBlockSuccessors(
     const auto& ri = instrs[last_idx];
 
     switch (opc) {
-    case interpreter::IROpCode::Br:
-    case interpreter::IROpCode::Leave: {
-        // Unconditional branch to branch_target
-        uint32_t target = ri.imm.branch_target;
-        if (target < inst_to_bb.size()) {
-            uint32_t target_bb = inst_to_bb[target];
-            if (target_bb != UINT32_MAX)
-                succs.push_back(target_bb);
+        case interpreter::IROpCode::Br:
+        case interpreter::IROpCode::Leave: {
+            // Unconditional branch to branch_target
+            uint32_t target = ri.imm.branch_target;
+            if (target < inst_to_bb.size()) {
+                uint32_t target_bb = inst_to_bb[target];
+                if (target_bb != UINT32_MAX)
+                    succs.push_back(target_bb);
+            }
+            break;
         }
-        break;
-    }
 
-    case interpreter::IROpCode::BrTrue:
-    case interpreter::IROpCode::BrFalse:
-    case interpreter::IROpCode::Beq:
-    case interpreter::IROpCode::BneUn:
-    case interpreter::IROpCode::Blt:
-    case interpreter::IROpCode::BltUn:
-    case interpreter::IROpCode::Bgt:
-    case interpreter::IROpCode::BgtUn:
-    case interpreter::IROpCode::Ble:
-    case interpreter::IROpCode::BleUn:
-    case interpreter::IROpCode::Bge:
-    case interpreter::IROpCode::BgeUn: {
-        // Conditional branch: branch_target + fall-through to next BB
-        uint32_t target = ri.imm.branch_target;
-        if (target < inst_to_bb.size()) {
-            uint32_t target_bb = inst_to_bb[target];
-            if (target_bb != UINT32_MAX)
-                succs.push_back(target_bb);
+        case interpreter::IROpCode::BrTrue:
+        case interpreter::IROpCode::BrFalse:
+        case interpreter::IROpCode::Beq:
+        case interpreter::IROpCode::BneUn:
+        case interpreter::IROpCode::Blt:
+        case interpreter::IROpCode::BltUn:
+        case interpreter::IROpCode::Bgt:
+        case interpreter::IROpCode::BgtUn:
+        case interpreter::IROpCode::Ble:
+        case interpreter::IROpCode::BleUn:
+        case interpreter::IROpCode::Bge:
+        case interpreter::IROpCode::BgeUn: {
+            // Conditional branch: branch_target + fall-through to next BB
+            uint32_t target = ri.imm.branch_target;
+            if (target < inst_to_bb.size()) {
+                uint32_t target_bb = inst_to_bb[target];
+                if (target_bb != UINT32_MAX)
+                    succs.push_back(target_bb);
+            }
+            // Fall-through to next BB
+            if (bb_id + 1 < total_bbs)
+                succs.push_back(bb_id + 1);
+            break;
         }
-        // Fall-through to next BB
-        if (bb_id + 1 < total_bbs)
-            succs.push_back(bb_id + 1);
-        break;
-    }
 
-    case interpreter::IROpCode::Switch: {
-        // Switch: read target table from imm.ptr (uint32_t array)
-        // + fall-through to next BB (for out-of-range / default)
-        if (ri.imm.ptr != nullptr) {
-            auto* targets = static_cast<const uint32_t*>(ri.imm.ptr);
-            // Read target count from first element (or use known convention)
-            // The standard encoding: ptr points to [count, target1, target2, ...]
-            uint32_t count = targets[0];
-            for (uint32_t ti = 0; ti < count; ++ti) {
-                uint32_t t = targets[1 + ti];
-                if (t < inst_to_bb.size()) {
-                    uint32_t tb = inst_to_bb[t];
-                    if (tb != UINT32_MAX)
-                        succs.push_back(tb);
+        case interpreter::IROpCode::Switch: {
+            // Switch: read target table from imm.ptr (uint32_t array)
+            // + fall-through to next BB (for out-of-range / default)
+            if (ri.imm.ptr != nullptr) {
+                auto* targets = static_cast<const uint32_t*>(ri.imm.ptr);
+                // Read target count from first element (or use known convention)
+                // The standard encoding: ptr points to [count, target1, target2, ...]
+                uint32_t count = targets[0];
+                for (uint32_t ti = 0; ti < count; ++ti) {
+                    uint32_t t = targets[1 + ti];
+                    if (t < inst_to_bb.size()) {
+                        uint32_t tb = inst_to_bb[t];
+                        if (tb != UINT32_MAX)
+                            succs.push_back(tb);
+                    }
                 }
             }
+            // Fall-through to next BB (default case or out-of-range)
+            if (bb_id + 1 < total_bbs)
+                succs.push_back(bb_id + 1);
+            break;
         }
-        // Fall-through to next BB (default case or out-of-range)
-        if (bb_id + 1 < total_bbs)
-            succs.push_back(bb_id + 1);
-        break;
-    }
 
-    case interpreter::IROpCode::Ret:
-    case interpreter::IROpCode::Throw:
-    case interpreter::IROpCode::Rethrow:
-    case interpreter::IROpCode::EndFinally:
-    case interpreter::IROpCode::EndFilter:
-        // No successors (exit blocks)
-        break;
+        case interpreter::IROpCode::Ret:
+        case interpreter::IROpCode::Throw:
+        case interpreter::IROpCode::Rethrow:
+        case interpreter::IROpCode::EndFinally:
+        case interpreter::IROpCode::EndFilter:
+            // No successors (exit blocks)
+            break;
 
-    default:
-        // Not a terminator: fall-through to next BB
-        if (bb_id + 1 < total_bbs)
-            succs.push_back(bb_id + 1);
-        break;
+        default:
+            // Not a terminator: fall-through to next BB
+            if (bb_id + 1 < total_bbs)
+                succs.push_back(bb_id + 1);
+            break;
     }
 }
 
@@ -124,28 +118,23 @@ static void FindBlockSuccessors(
 // Standard algorithm O(N log N).
 
 struct LtData {
-    uint32_t n;                     // number of blocks
-    std::vector<uint32_t> semi;     // semi-dominator number
-    std::vector<uint32_t> parent;   // DFS tree parent
-    std::vector<uint32_t> ancestor; // union-find ancestor
-    std::vector<uint32_t> best;     // vertex with minimal semi on path
-    std::vector<uint32_t> idom;     // immediate dominator
-    std::vector<uint32_t> dfs_order; // vertex → DFS number
-    std::vector<uint32_t> vertex;    // DFS number → vertex
+    uint32_t n;                                // number of blocks
+    std::vector<uint32_t> semi;                // semi-dominator number
+    std::vector<uint32_t> parent;              // DFS tree parent
+    std::vector<uint32_t> ancestor;            // union-find ancestor
+    std::vector<uint32_t> best;                // vertex with minimal semi on path
+    std::vector<uint32_t> idom;                // immediate dominator
+    std::vector<uint32_t> dfs_order;           // vertex → DFS number
+    std::vector<uint32_t> vertex;              // DFS number → vertex
     std::vector<std::vector<uint32_t>> bucket; // semi-dominator buckets
     uint32_t dfs_clock = 0;
 
     explicit LtData(uint32_t n) noexcept
-        : n(n), semi(n, UINT32_MAX), parent(n, UINT32_MAX),
-          ancestor(n, UINT32_MAX), best(n, UINT32_MAX),
-          idom(n, UINT32_MAX),
-          dfs_order(n, UINT32_MAX), vertex(n, UINT32_MAX),
-          bucket(n) {}
+        : n(n), semi(n, UINT32_MAX), parent(n, UINT32_MAX), ancestor(n, UINT32_MAX), best(n, UINT32_MAX),
+          idom(n, UINT32_MAX), dfs_order(n, UINT32_MAX), vertex(n, UINT32_MAX), bucket(n) {}
 };
 
-static void LtDfs(uint32_t v, const std::vector<CfgBlock>& blocks,
-                  LtData& lt) noexcept
-{
+static void LtDfs(uint32_t v, const std::vector<CfgBlock>& blocks, LtData& lt) noexcept {
     lt.semi[v] = lt.dfs_clock;
     lt.dfs_order[v] = lt.dfs_clock;
     lt.vertex[lt.dfs_clock] = v;
@@ -184,9 +173,10 @@ static void LtLink(uint32_t v, uint32_t w, LtData& lt) noexcept {
 
 static void ComputeDominators(std::vector<CfgBlock>& blocks) noexcept {
     uint32_t n = static_cast<uint32_t>(blocks.size());
-    if (n == 0) return;
+    if (n == 0)
+        return;
     if (n == 1) {
-        blocks[0].idom = -1;  // entry has no idom
+        blocks[0].idom = -1; // entry has no idom
         return;
     }
 
@@ -202,7 +192,8 @@ static void ComputeDominators(std::vector<CfgBlock>& blocks) noexcept {
         uint32_t w = lt.vertex[i - 1];
         // Compute semi-dominator from predecessors
         for (uint32_t v : blocks[w].preds) {
-            if (lt.dfs_order[v] == UINT32_MAX) continue;
+            if (lt.dfs_order[v] == UINT32_MAX)
+                continue;
             uint32_t u = LtEval(v, lt);
             if (lt.semi[u] < lt.semi[w])
                 lt.semi[w] = lt.semi[u];
@@ -228,7 +219,7 @@ static void ComputeDominators(std::vector<CfgBlock>& blocks) noexcept {
     // Step 5: Write idom back to CfgBlock (idom[w] = vertex ID)
     // Only process reachable blocks (dfs_clock of them); unreachable
     // blocks have vertex[i] == UINT32_MAX and must be skipped.
-    blocks[0].idom = -1;  // entry
+    blocks[0].idom = -1; // entry
     for (uint32_t i = 1; i < lt.dfs_clock; ++i) {
         uint32_t w = lt.vertex[i];
         blocks[w].idom = static_cast<int32_t>(lt.idom[w]);
@@ -238,17 +229,17 @@ static void ComputeDominators(std::vector<CfgBlock>& blocks) noexcept {
 // ── Natural loop detection ─────────────────────────────────────────────
 // For each back-edge (a→b where b dominates a):
 //   header = b, loop blocks = {a} ∪ path from a up to b in dom tree
-static void DetectNaturalLoops(std::vector<CfgBlock>& blocks,
-                               std::vector<NaturalLoop>& loops) noexcept
-{
+static void DetectNaturalLoops(std::vector<CfgBlock>& blocks, std::vector<NaturalLoop>& loops) noexcept {
     uint32_t n = static_cast<uint32_t>(blocks.size());
     loops.clear();
 
     for (uint32_t a = 0; a < n; ++a) {
         for (uint32_t b : blocks[a].succs) {
             // back-edge: a→b where b dominates a
-            if (b >= n) continue;
-            if (blocks[a].idom < 0) continue;  // entry has no idom
+            if (b >= n)
+                continue;
+            if (blocks[a].idom < 0)
+                continue; // entry has no idom
 
             // Check if b dominates a by walking up idom chain from a
             bool dominates = false;
@@ -260,14 +251,15 @@ static void DetectNaturalLoops(std::vector<CfgBlock>& blocks,
                 }
                 cur = blocks[cur].idom;
             }
-            if (!dominates) continue;
+            if (!dominates)
+                continue;
 
             // Natural loop: header = b, blocks = path from a up to b
             NaturalLoop loop;
             loop.header = b;
             loop.back_edge_from = a;
-            loop.blocks.push_back(b);  // header
-            loop.blocks.push_back(a);  // back-edge source
+            loop.blocks.push_back(b); // header
+            loop.blocks.push_back(a); // back-edge source
 
             // Walk idom chain from a up to b
             cur = static_cast<int32_t>(a);
@@ -291,9 +283,7 @@ static void DetectNaturalLoops(std::vector<CfgBlock>& blocks,
 
 // ── Assign loop depths ─────────────────────────────────────────────────
 // Outer loops first: depth 0 → 1 → ...  For nested loops, child depth = parent depth + 1.
-static void AssignLoopDepths(std::vector<CfgBlock>& blocks,
-                             std::vector<NaturalLoop>& loops) noexcept
-{
+static void AssignLoopDepths(std::vector<CfgBlock>& blocks, std::vector<NaturalLoop>& loops) noexcept {
     // Reset all depths
     for (auto& blk : blocks)
         blk.loop_depth = 0;
@@ -304,7 +294,8 @@ static void AssignLoopDepths(std::vector<CfgBlock>& blocks,
     for (auto& loop : loops) {
         uint32_t depth = 0;
         for (const auto& other : loops) {
-            if (&other == &loop) continue;
+            if (&other == &loop)
+                continue;
             // Check if this loop's header is inside another loop
             for (uint32_t b : other.blocks) {
                 if (b == loop.header) {
@@ -312,7 +303,8 @@ static void AssignLoopDepths(std::vector<CfgBlock>& blocks,
                     break;
                 }
             }
-            if (depth > 0) break;
+            if (depth > 0)
+                break;
         }
         loop.depth = depth;
     }
@@ -328,12 +320,11 @@ static void AssignLoopDepths(std::vector<CfgBlock>& blocks,
 
 // ── BuildCfg entry point ───────────────────────────────────────────────
 
-LoopAnalysis BuildCfg(const std::vector<BBRange>& bbs,
-                      const interpreter::RegisterInstruction* instrs) noexcept
-{
+LoopAnalysis BuildCfg(const std::vector<BBRange>& bbs, const interpreter::RegisterInstruction* instrs) noexcept {
     LoopAnalysis result;
     uint32_t n = static_cast<uint32_t>(bbs.size());
-    if (n == 0) return result;
+    if (n == 0)
+        return result;
 
     // Determine total instruction count for inst→bb map
     uint32_t total_instrs = 0;
@@ -375,4 +366,4 @@ LoopAnalysis BuildCfg(const std::vector<BBRange>& bbs,
     return result;
 }
 
-}  // namespace chaos::il2cpp::jit::tree
+} // namespace chaos::il2cpp::jit::tree

@@ -39,12 +39,9 @@ namespace chaos::il2cpp::jit::tree {
 // Scans the original instruction sequence and records which BB (by index in
 // `bbs`) defines each vreg.  vregs with no definition in the scanned range
 // are left as UINT32_MAX (unknown / live-in).
-static void BuildVRegDefBlocks(
-    const std::vector<interpreter::RegisterInstruction>& instrs,
-    const std::vector<BBRange>& bbs,
-    uint32_t max_vreg,
-    std::vector<uint32_t>& out_def_blocks) noexcept
-{
+static void BuildVRegDefBlocks(const std::vector<interpreter::RegisterInstruction>& instrs,
+                               const std::vector<BBRange>& bbs, uint32_t max_vreg,
+                               std::vector<uint32_t>& out_def_blocks) noexcept {
     out_def_blocks.assign(max_vreg, UINT32_MAX);
 
     // For each BB, scan its instructions and record dst_reg definitions
@@ -97,14 +94,16 @@ static bool IsPureArithmetic(interpreter::IROpCode opc) noexcept {
 
 // ── Helper: check if a vreg is loop-invariant ──────────────────────
 // Returns true if vreg's defining block is outside the loop.
-static bool IsLoopInvariantVReg(uint32_t vreg,
-                                 const std::vector<uint32_t>& vreg_def_blocks,
-                                 const NaturalLoop& loop) noexcept {
-    if (vreg >= vreg_def_blocks.size()) return false;
+static bool IsLoopInvariantVReg(uint32_t vreg, const std::vector<uint32_t>& vreg_def_blocks,
+                                const NaturalLoop& loop) noexcept {
+    if (vreg >= vreg_def_blocks.size())
+        return false;
     uint32_t def_block = vreg_def_blocks[vreg];
-    if (def_block == UINT32_MAX) return false;  // unknown → assume variant
+    if (def_block == UINT32_MAX)
+        return false; // unknown → assume variant
     for (uint32_t b : loop.blocks) {
-        if (b == def_block) return false;
+        if (b == def_block)
+            return false;
     }
     return true;
 }
@@ -121,15 +120,11 @@ static bool IsLoopInvariantVReg(uint32_t vreg,
 //
 // Operates on the linearized output instruction stream.
 // bb_starts[i] = first instruction index in out_instrs belonging to BB i.
-static void LicmHoist(
-    std::vector<interpreter::RegisterInstruction>& out_instrs,
-    const std::vector<uint32_t>& bb_starts,
-    const std::vector<uint32_t>& bb_ends,
-    const LoopAnalysis& analysis,
-    const std::vector<uint32_t>& vreg_def_blocks,
-    uint32_t& next_vreg) noexcept
-{
-    if (!analysis.has_loops) return;
+static void LicmHoist(std::vector<interpreter::RegisterInstruction>& out_instrs, const std::vector<uint32_t>& bb_starts,
+                      const std::vector<uint32_t>& bb_ends, const LoopAnalysis& analysis,
+                      const std::vector<uint32_t>& vreg_def_blocks, uint32_t& next_vreg) noexcept {
+    if (!analysis.has_loops)
+        return;
 
     for (const auto& loop : analysis.loops) {
         uint32_t header = loop.header;
@@ -141,16 +136,20 @@ static void LicmHoist(
         for (uint32_t pred : header_block.preds) {
             bool in_loop = false;
             for (uint32_t b : loop.blocks) {
-                if (b == pred) { in_loop = true; break; }
+                if (b == pred) {
+                    in_loop = true;
+                    break;
+                }
             }
             if (!in_loop) {
                 pre_header = pred;
                 break;
             }
         }
-        if (pre_header == UINT32_MAX) continue;  // no pre-header found
+        if (pre_header == UINT32_MAX)
+            continue; // no pre-header found
 
-        uint32_t insert_point = bb_ends[pre_header];  // end of pre-header in out_instrs
+        uint32_t insert_point = bb_ends[pre_header]; // end of pre-header in out_instrs
 
         // Track hoisted replacements: original vreg → hoisted vreg
         struct HoistInfo {
@@ -161,14 +160,16 @@ static void LicmHoist(
 
         // Scan each body block for hoistable instructions
         for (uint32_t bb_id : loop.blocks) {
-            if (bb_id == header) continue;  // skip header (it may be the pre-header entry)
+            if (bb_id == header)
+                continue; // skip header (it may be the pre-header entry)
 
             uint32_t start = bb_starts[bb_id];
-            uint32_t end   = bb_ends[bb_id];
+            uint32_t end = bb_ends[bb_id];
 
             for (uint32_t i = start; i < end; ++i) {
                 auto& ri = out_instrs[i];
-                if (!IsPureArithmetic(ri.op_code())) continue;
+                if (!IsPureArithmetic(ri.op_code()))
+                    continue;
 
                 // Count src vregs and check invariance for each
                 uint32_t src_count = 0;
@@ -186,7 +187,8 @@ static void LicmHoist(
                                 break;
                             }
                         }
-                        if (!was_hoisted) all_srcs_invariant = false;
+                        if (!was_hoisted)
+                            all_srcs_invariant = false;
                     }
                 }
                 if (ri.has_src2()) {
@@ -200,12 +202,15 @@ static void LicmHoist(
                                 break;
                             }
                         }
-                        if (!was_hoisted) all_srcs_invariant = false;
+                        if (!was_hoisted)
+                            all_srcs_invariant = false;
                     }
                 }
 
-                if (!all_srcs_invariant || src_count == 0) continue;
-                if (!ri.has_dst()) continue;
+                if (!all_srcs_invariant || src_count == 0)
+                    continue;
+                if (!ri.has_dst())
+                    continue;
 
                 uint32_t dst_vreg = ri.dst_reg();
 
@@ -215,8 +220,7 @@ static void LicmHoist(
                 // Build instruction for pre-header (same opcode, new dst vreg)
                 interpreter::RegisterInstruction hoisted_ri = ri;
                 // Remap dst to new_vreg
-                hoisted_ri.header = (hoisted_ri.header & ~(0xFFull << 16)) |
-                    (static_cast<uint64_t>(new_vreg) << 16);
+                hoisted_ri.header = (hoisted_ri.header & ~(0xFFull << 16)) | (static_cast<uint64_t>(new_vreg) << 16);
 
                 // Insert at insert_point
                 out_instrs.insert(out_instrs.begin() + insert_point, hoisted_ri);
@@ -224,8 +228,8 @@ static void LicmHoist(
                 // Replace in-loop instruction with LdLoc reading hoisted value
                 ri.header = 0;
                 ri.header |= static_cast<uint64_t>(interpreter::IROpCode::LdLoc) & 0xFFFF;
-                ri.header |= static_cast<uint64_t>(dst_vreg) << 16;  // dst
-                ri.header |= static_cast<uint64_t>(new_vreg) << 24;  // src1 = hoisted vreg
+                ri.header |= static_cast<uint64_t>(dst_vreg) << 16; // dst
+                ri.header |= static_cast<uint64_t>(new_vreg) << 24; // src1 = hoisted vreg
                 ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst | interpreter::kRegHasSrc1) << 40;
                 ri.imm.operand_index = new_vreg;
 
@@ -237,8 +241,8 @@ static void LicmHoist(
         }
 
         if (!hoisted.empty()) {
-            CHAOS_IL2CPP_LOG_DEBUG_M("jit", "LICM: hoisted %zu instructions from loop header=%u",
-                                   hoisted.size(), header);
+            CHAOS_IL2CPP_LOG_DEBUG_M("jit", "LICM: hoisted %zu instructions from loop header=%u", hoisted.size(),
+                                     header);
         }
     }
 }
@@ -256,14 +260,11 @@ static void LicmHoist(
 // P5 scope: only handles step=1 IVs with small constant multipliers (< 256).
 // The transformation inserts into out_instrs, shifting bb_starts/bb_ends,
 // so all analysis uses local indices within each loop body region.
-static void IvStrengthReduce(
-    std::vector<interpreter::RegisterInstruction>& out_instrs,
-    const std::vector<uint32_t>& bb_starts,
-    const std::vector<uint32_t>& bb_ends,
-    const LoopAnalysis& analysis,
-    uint32_t& next_vreg) noexcept
-{
-    if (!analysis.has_loops) return;
+static void IvStrengthReduce(std::vector<interpreter::RegisterInstruction>& out_instrs,
+                             const std::vector<uint32_t>& bb_starts, const std::vector<uint32_t>& bb_ends,
+                             const LoopAnalysis& analysis, uint32_t& next_vreg) noexcept {
+    if (!analysis.has_loops)
+        return;
 
     for (const auto& loop : analysis.loops) {
         uint32_t header = loop.header;
@@ -274,43 +275,49 @@ static void IvStrengthReduce(
         for (uint32_t pred : header_block.preds) {
             bool in_loop = false;
             for (uint32_t b : loop.blocks) {
-                if (b == pred) { in_loop = true; break; }
+                if (b == pred) {
+                    in_loop = true;
+                    break;
+                }
             }
             if (!in_loop) {
                 pre_header = pred;
                 break;
             }
         }
-        if (pre_header == UINT32_MAX) continue;
+        if (pre_header == UINT32_MAX)
+            continue;
 
         // Phase 1: identify IVs in loop body
         struct IvInfo {
             uint32_t iv_vreg;
             uint32_t step;
-            int32_t  initial_value;  // -1 if unknown
-            uint32_t inc_instr_idx;  // index in out_instrs of Add instruction
+            int32_t initial_value;  // -1 if unknown
+            uint32_t inc_instr_idx; // index in out_instrs of Add instruction
         };
         std::vector<IvInfo> ivs;
 
         for (uint32_t bb_id : loop.blocks) {
             uint32_t start = bb_starts[bb_id];
-            uint32_t end   = bb_ends[bb_id];
+            uint32_t end = bb_ends[bb_id];
 
             for (uint32_t i = start; i < end; ++i) {
                 const auto& ri = out_instrs[i];
-                if (ri.op_code() != interpreter::IROpCode::Add) continue;
-                if (!ri.has_dst() || !ri.has_src1() || !ri.has_src2()) continue;
+                if (ri.op_code() != interpreter::IROpCode::Add)
+                    continue;
+                if (!ri.has_dst() || !ri.has_src1() || !ri.has_src2())
+                    continue;
 
                 // Check: src1 == dst (i.e., vreg = vreg + something)
-                if (ri.src1_reg() != ri.dst_reg()) continue;
+                if (ri.src1_reg() != ri.dst_reg())
+                    continue;
 
                 // Check src2 is a constant via LdcI4
                 uint32_t src2 = ri.src2_reg();
                 int32_t step = 0;
                 for (int32_t j = static_cast<int32_t>(i) - 1; j >= static_cast<int32_t>(start); --j) {
                     const auto& prev = out_instrs[j];
-                    if (prev.has_dst() && prev.dst_reg() == src2 &&
-                        prev.op_code() == interpreter::IROpCode::LdcI4) {
+                    if (prev.has_dst() && prev.dst_reg() == src2 && prev.op_code() == interpreter::IROpCode::LdcI4) {
                         step = prev.imm.i4;
                         break;
                     }
@@ -337,7 +344,8 @@ static void IvStrengthReduce(
             }
         }
 
-        if (ivs.empty()) continue;
+        if (ivs.empty())
+            continue;
 
         // Phase 2: for each IV, scan for MUL in loop body and replace with accumulator
         uint32_t insert_point = bb_ends[pre_header];
@@ -345,12 +353,14 @@ static void IvStrengthReduce(
         for (const auto& iv : ivs) {
             for (uint32_t bb_id : loop.blocks) {
                 uint32_t start = bb_starts[bb_id];
-                uint32_t end   = bb_ends[bb_id];
+                uint32_t end = bb_ends[bb_id];
 
                 for (uint32_t i = start; i < end; ++i) {
                     auto& ri = out_instrs[i];
-                    if (ri.op_code() != interpreter::IROpCode::Mul) continue;
-                    if (!ri.has_dst() || !ri.has_src1() || !ri.has_src2()) continue;
+                    if (ri.op_code() != interpreter::IROpCode::Mul)
+                        continue;
+                    if (!ri.has_dst() || !ri.has_src1() || !ri.has_src2())
+                        continue;
 
                     // Check if either source is the IV
                     uint32_t other_src;
@@ -379,7 +389,8 @@ static void IvStrengthReduce(
                         }
                     }
 
-                    if (!found_const || const_k == 0 || const_k >= 256) continue;
+                    if (!found_const || const_k == 0 || const_k >= 256)
+                        continue;
 
                     // ── Perform IV strength reduction ──
                     // Create accumulator vreg
@@ -409,10 +420,12 @@ static void IvStrengthReduce(
                     // Mul acc, init, const_k
                     interpreter::RegisterInstruction mul_ri = {};
                     mul_ri.header = static_cast<uint64_t>(interpreter::IROpCode::Mul);
-                    mul_ri.header |= static_cast<uint64_t>(acc_vreg) << 16;    // dst
-                    mul_ri.header |= static_cast<uint64_t>(init_vreg) << 24;   // src1
-                    mul_ri.header |= static_cast<uint64_t>(k_vreg) << 32;      // src2
-                    mul_ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst | interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2) << 40;
+                    mul_ri.header |= static_cast<uint64_t>(acc_vreg) << 16;  // dst
+                    mul_ri.header |= static_cast<uint64_t>(init_vreg) << 24; // src1
+                    mul_ri.header |= static_cast<uint64_t>(k_vreg) << 32;    // src2
+                    mul_ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst | interpreter::kRegHasSrc1 |
+                                                           interpreter::kRegHasSrc2)
+                                  << 40;
 
                     // Insert at insert_point (end of pre-header in out_instrs)
                     // Insert in reverse order so they appear in correct sequence
@@ -427,8 +440,8 @@ static void IvStrengthReduce(
                     // Replace the MUL with LdLoc reading the accumulator
                     ri.header = 0;
                     ri.header |= static_cast<uint64_t>(interpreter::IROpCode::LdLoc) & 0xFFFF;
-                    ri.header |= static_cast<uint64_t>(ri.dst_reg()) << 16;    // dst (same as original MUL)
-                    ri.header |= static_cast<uint64_t>(acc_vreg) << 24;        // src1 = acc_vreg (as LdLoc operand)
+                    ri.header |= static_cast<uint64_t>(ri.dst_reg()) << 16; // dst (same as original MUL)
+                    ri.header |= static_cast<uint64_t>(acc_vreg) << 24;     // src1 = acc_vreg (as LdLoc operand)
                     ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst | interpreter::kRegHasSrc1) << 40;
                     ri.imm.operand_index = acc_vreg;
 
@@ -438,17 +451,19 @@ static void IvStrengthReduce(
 
                     interpreter::RegisterInstruction inc_ri = {};
                     inc_ri.header = static_cast<uint64_t>(interpreter::IROpCode::Add);
-                    inc_ri.header |= static_cast<uint64_t>(acc_vreg) << 16;    // dst = acc
-                    inc_ri.header |= static_cast<uint64_t>(acc_vreg) << 24;    // src1 = acc
-                    inc_ri.header |= static_cast<uint64_t>(k_vreg) << 32;      // src2 = k
-                    inc_ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst | interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2) << 40;
+                    inc_ri.header |= static_cast<uint64_t>(acc_vreg) << 16; // dst = acc
+                    inc_ri.header |= static_cast<uint64_t>(acc_vreg) << 24; // src1 = acc
+                    inc_ri.header |= static_cast<uint64_t>(k_vreg) << 32;   // src2 = k
+                    inc_ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst | interpreter::kRegHasSrc1 |
+                                                           interpreter::kRegHasSrc2)
+                                  << 40;
 
                     // Insert after the IV's Add instruction
                     out_instrs.insert(out_instrs.begin() + actual_inc_idx + 1, inc_ri);
 
                     CHAOS_IL2CPP_LOG_DEBUG_M("jit",
-                        "IV strength reduction: vreg=%u * %d → acc=vreg=%u (loop header=%u)",
-                        iv.iv_vreg, const_k, acc_vreg, header);
+                                             "IV strength reduction: vreg=%u * %d → acc=vreg=%u (loop header=%u)",
+                                             iv.iv_vreg, const_k, acc_vreg, header);
                 }
             }
         }
@@ -462,27 +477,25 @@ static void IvStrengthReduce(
 //
 // P5 scope: single-BB loops (header is also latch) with trip count < 64.
 // Factor = 2.  Only unrolls when trip count % factor == 0.
-static void UnrollLoops(
-    std::vector<interpreter::RegisterInstruction>& out_instrs,
-    const std::vector<uint32_t>& bb_starts,
-    const std::vector<uint32_t>& bb_ends,
-    const LoopAnalysis& analysis,
-    uint32_t& next_vreg,
-    uint32_t unroll_factor = 4) noexcept
-{
-    if (!analysis.has_loops) return;
+static void UnrollLoops(std::vector<interpreter::RegisterInstruction>& out_instrs,
+                        const std::vector<uint32_t>& bb_starts, const std::vector<uint32_t>& bb_ends,
+                        const LoopAnalysis& analysis, uint32_t& next_vreg, uint32_t unroll_factor = 4) noexcept {
+    if (!analysis.has_loops)
+        return;
 
     for (const auto& loop : analysis.loops) {
         // Only handle single-BB loops (header = latch, body = header)
-        if (loop.blocks.size() != 1) continue;
+        if (loop.blocks.size() != 1)
+            continue;
 
         uint32_t header = loop.header;
         uint32_t start = bb_starts[header];
-        uint32_t end   = bb_ends[header];
+        uint32_t end = bb_ends[header];
 
         // Count instructions in the loop header
         uint32_t body_len = end - start;
-        if (body_len < 4) continue;  // too small to unroll
+        if (body_len < 4)
+            continue; // too small to unroll
 
         // Identify the back-edge branch at the end of the header
         int32_t be_idx = -1;
@@ -493,8 +506,7 @@ static void UnrollLoops(
             const auto& ri = out_instrs[i];
             auto oc = ri.op_code();
 
-            if (oc == interpreter::IROpCode::Br ||
-                oc == interpreter::IROpCode::BrTrue ||
+            if (oc == interpreter::IROpCode::Br || oc == interpreter::IROpCode::BrTrue ||
                 oc == interpreter::IROpCode::BrFalse) {
                 if (ri.has_imm()) {
                     be_idx = i;
@@ -504,16 +516,11 @@ static void UnrollLoops(
                         break;
                     be_idx = -1;
                 }
-            } else if (oc == interpreter::IROpCode::Blt ||
-                       oc == interpreter::IROpCode::Ble ||
-                       oc == interpreter::IROpCode::Bgt ||
-                       oc == interpreter::IROpCode::Bge ||
-                       oc == interpreter::IROpCode::Beq ||
-                       oc == interpreter::IROpCode::BneUn ||
-                       oc == interpreter::IROpCode::BltUn ||
-                       oc == interpreter::IROpCode::BleUn ||
-                       oc == interpreter::IROpCode::BgtUn ||
-                       oc == interpreter::IROpCode::BgeUn) {
+            } else if (oc == interpreter::IROpCode::Blt || oc == interpreter::IROpCode::Ble ||
+                       oc == interpreter::IROpCode::Bgt || oc == interpreter::IROpCode::Bge ||
+                       oc == interpreter::IROpCode::Beq || oc == interpreter::IROpCode::BneUn ||
+                       oc == interpreter::IROpCode::BltUn || oc == interpreter::IROpCode::BleUn ||
+                       oc == interpreter::IROpCode::BgtUn || oc == interpreter::IROpCode::BgeUn) {
                 if (ri.has_imm()) {
                     be_idx = i;
                     be_target = ri.imm.branch_target;
@@ -525,18 +532,21 @@ static void UnrollLoops(
             }
         }
 
-        if (be_idx < 0) continue;
+        if (be_idx < 0)
+            continue;
 
         // The body is from start to end, excluding back-edge instructions
         uint32_t body_start = start;
         uint32_t body_end = static_cast<uint32_t>(be_idx);
 
         uint32_t body_instr_count = body_end - body_start;
-        if (body_instr_count < 2) continue;
+        if (body_instr_count < 2)
+            continue;
 
         // Safety: skip if total unrolled size exceeds threshold
         // (200 instructions max after unrolling)
-        if (body_instr_count * unroll_factor > 200) continue;
+        if (body_instr_count * unroll_factor > 200)
+            continue;
 
         // Determine the effective max vreg referenced in the body
         uint32_t body_max_vreg = 0;
@@ -554,7 +564,8 @@ static void UnrollLoops(
         }
         // +1 because vregs are 0-based
         uint32_t map_size = body_max_vreg + 1;
-        if (map_size < 256) map_size = 256;
+        if (map_size < 256)
+            map_size = 256;
 
         // Insert unrolled body copies before the back-edge branch
         uint32_t copy_insert_point = static_cast<uint32_t>(be_idx);
@@ -574,8 +585,7 @@ static void UnrollLoops(
                     }
                 }
                 // Also remap LdLoc operand_index if it references a def
-                if (ri.op_code() == interpreter::IROpCode::LdLoc ||
-                    ri.op_code() == interpreter::IROpCode::StLoc) {
+                if (ri.op_code() == interpreter::IROpCode::LdLoc || ri.op_code() == interpreter::IROpCode::StLoc) {
                     uint32_t op = static_cast<uint32_t>(ri.imm.operand_index);
                     if (op < map_size && vreg_map[op] == -1) {
                         vreg_map[op] = static_cast<int32_t>(next_vreg++);
@@ -594,7 +604,7 @@ static void UnrollLoops(
                     int32_t new_dst = (old_dst < map_size) ? vreg_map[old_dst] : -1;
                     if (new_dst > 0)
                         copy_ri.header = (copy_ri.header & ~(0xFFull << 16)) |
-                            (static_cast<uint64_t>(static_cast<uint8_t>(new_dst)) << 16);
+                                         (static_cast<uint64_t>(static_cast<uint8_t>(new_dst)) << 16);
                 }
 
                 // Remap src1
@@ -603,7 +613,7 @@ static void UnrollLoops(
                     int32_t new_src1 = (old_src1 < map_size) ? vreg_map[old_src1] : -1;
                     if (new_src1 > 0)
                         copy_ri.header = (copy_ri.header & ~(0xFFull << 24)) |
-                            (static_cast<uint64_t>(static_cast<uint8_t>(new_src1)) << 24);
+                                         (static_cast<uint64_t>(static_cast<uint8_t>(new_src1)) << 24);
                 }
 
                 // Remap src2
@@ -612,7 +622,7 @@ static void UnrollLoops(
                     int32_t new_src2 = (old_src2 < map_size) ? vreg_map[old_src2] : -1;
                     if (new_src2 > 0)
                         copy_ri.header = (copy_ri.header & ~(0xFFull << 32)) |
-                            (static_cast<uint64_t>(static_cast<uint8_t>(new_src2)) << 32);
+                                         (static_cast<uint64_t>(static_cast<uint8_t>(new_src2)) << 32);
                 }
 
                 // Remap operand_index (LdLoc/StLoc vreg reference)
@@ -628,19 +638,16 @@ static void UnrollLoops(
             }
         }
 
-        CHAOS_IL2CPP_LOG_DEBUG_M("jit",
-            "Unrolled loop: header=%u body=%u instrs factor=%u (trip count analysis not available)",
-            header, body_instr_count, unroll_factor);
+        CHAOS_IL2CPP_LOG_DEBUG_M(
+            "jit", "Unrolled loop: header=%u body=%u instrs factor=%u (trip count analysis not available)", header,
+            body_instr_count, unroll_factor);
     }
 }
 
 // ── BB range helpers ───────────────────────────────────────────────────
 // Build bb_starts array from per-BB linearization progress.
-static void UpdateBbRanges(
-    const std::vector<interpreter::RegisterInstruction>& out_instrs,
-    std::vector<uint32_t>& bb_starts,
-    uint32_t bb_count) noexcept
-{
+static void UpdateBbRanges(const std::vector<interpreter::RegisterInstruction>& out_instrs,
+                           std::vector<uint32_t>& bb_starts, uint32_t bb_count) noexcept {
     // bb_starts is populated during the per-BB loop; compute ends here
     // by taking next BB's start (or out_instrs size for the last BB).
     // No action needed if bb_starts is already populated by the caller.
@@ -661,14 +668,15 @@ static void UpdateBbRanges(
 // Phase 2: forward propagate — replace LdLoc with LdcI4/I8 when the
 // src vreg is known-constant; fold pure arithmetic with constant operands.
 // Repeats until no changes (typically 1-2 iterations).
-static bool ConstPropagate(
-    std::vector<interpreter::RegisterInstruction>& out_instrs,
-    uint32_t max_vreg) noexcept
-{
-    if (out_instrs.empty() || max_vreg == 0) return false;
+static bool ConstPropagate(std::vector<interpreter::RegisterInstruction>& out_instrs, uint32_t max_vreg) noexcept {
+    if (out_instrs.empty() || max_vreg == 0)
+        return false;
 
     enum ConstKind : uint8_t { kUnknown, kInt32, kInt64 };
-    struct ConstVal { ConstKind kind = ConstKind::kUnknown; int64_t value = 0; };
+    struct ConstVal {
+        ConstKind kind = ConstKind::kUnknown;
+        int64_t value = 0;
+    };
 
     std::vector<ConstVal> const_vals(max_vreg);
     bool any_propagated = false;
@@ -677,26 +685,29 @@ static bool ConstPropagate(
     for (uint32_t iter = 0; iter < 4; ++iter) {
         // Reset const table each iteration (can't trust stale values
         // after propagation changes instructions)
-        for (auto& cv : const_vals) cv = ConstVal{};
+        for (auto& cv : const_vals)
+            cv = ConstVal {};
 
         // Phase 1: scan all instructions, record constants
         for (uint32_t i = 0; i < out_instrs.size(); ++i) {
             const auto& ri = out_instrs[i];
-            if (!ri.has_dst()) continue;
+            if (!ri.has_dst())
+                continue;
             uint32_t dst = ri.dst_reg();
-            if (dst >= max_vreg) continue;
+            if (dst >= max_vreg)
+                continue;
 
             switch (ri.op_code()) {
-            case interpreter::IROpCode::LdcI4:
-                const_vals[dst] = {kInt32, ri.imm.i4};
-                break;
-            case interpreter::IROpCode::LdcI8:
-                const_vals[dst] = {kInt64, ri.imm.i8};
-                break;
-            default:
-                // Any other defining instruction → not a known constant
-                const_vals[dst] = {};
-                break;
+                case interpreter::IROpCode::LdcI4:
+                    const_vals[dst] = {kInt32, ri.imm.i4};
+                    break;
+                case interpreter::IROpCode::LdcI8:
+                    const_vals[dst] = {kInt64, ri.imm.i8};
+                    break;
+                default:
+                    // Any other defining instruction → not a known constant
+                    const_vals[dst] = {};
+                    break;
             }
         }
 
@@ -708,18 +719,17 @@ static bool ConstPropagate(
             // Case A: LdLoc → LdcI4/I8 when src vreg is known constant
             if (ri.op_code() == interpreter::IROpCode::LdLoc && ri.has_src1()) {
                 uint32_t src = ri.src1_reg();
-                if (src >= max_vreg) continue;
+                if (src >= max_vreg)
+                    continue;
                 const auto& cv = const_vals[src];
                 if (cv.kind == kInt32) {
-                    ri.header = (ri.header & ~(0xFFFFull)) |
-                        static_cast<uint64_t>(interpreter::IROpCode::LdcI4);
+                    ri.header = (ri.header & ~(0xFFFFull)) | static_cast<uint64_t>(interpreter::IROpCode::LdcI4);
                     ri.imm.i4 = static_cast<int32_t>(cv.value);
                     const_vals[ri.dst_reg()] = cv;
                     changed = true;
                     any_propagated = true;
                 } else if (cv.kind == kInt64) {
-                    ri.header = (ri.header & ~(0xFFFFull)) |
-                        static_cast<uint64_t>(interpreter::IROpCode::LdcI8);
+                    ri.header = (ri.header & ~(0xFFFFull)) | static_cast<uint64_t>(interpreter::IROpCode::LdcI8);
                     ri.imm.i8 = cv.value;
                     const_vals[ri.dst_reg()] = cv;
                     changed = true;
@@ -729,10 +739,13 @@ static bool ConstPropagate(
             }
 
             // Case B: fold pure arithmetic with constant operands
-            if (!IsPureArithmetic(ri.op_code())) continue;
-            if (!ri.has_dst()) continue;
+            if (!IsPureArithmetic(ri.op_code()))
+                continue;
+            if (!ri.has_dst())
+                continue;
             uint32_t dst = ri.dst_reg();
-            if (dst >= max_vreg) continue;
+            if (dst >= max_vreg)
+                continue;
 
             // Collect src values
             bool has_src1 = ri.has_src1();
@@ -756,9 +769,11 @@ static bool ConstPropagate(
             }
 
             // For binary ops: both srcs must be known
-            if (has_src1 && has_src2 && !(c1_known && c2_known)) continue;
+            if (has_src1 && has_src2 && !(c1_known && c2_known))
+                continue;
             // For unary ops (Neg, Not, Conv*): src1 must be known
-            if (has_src1 && !has_src2 && !c1_known) continue;
+            if (has_src1 && !has_src2 && !c1_known)
+                continue;
 
             // Determine result type: i64 if either operand is i64
             bool use_i64 = (ck1 == kInt64) || (ck2 == kInt64);
@@ -767,81 +782,113 @@ static bool ConstPropagate(
             bool foldable = true;
 
             switch (ri.op_code()) {
-            // Binary arithmetic
-            case interpreter::IROpCode::Add: result = v1 + v2; break;
-            case interpreter::IROpCode::Sub: result = v1 - v2; break;
-            case interpreter::IROpCode::Mul: result = v1 * v2; break;
-            case interpreter::IROpCode::And: result = v1 & v2; break;
-            case interpreter::IROpCode::Or:  result = v1 | v2; break;
-            case interpreter::IROpCode::Xor: result = v1 ^ v2; break;
-            case interpreter::IROpCode::Shl:
-                result = use_i64 ? (v1 << (v2 & 0x3F)) : (static_cast<int32_t>(v1) << (v2 & 0x1F));
-                break;
-            case interpreter::IROpCode::Shr:
-                result = use_i64 ? (v1 >> (v2 & 0x3F)) : (static_cast<int32_t>(v1) >> (v2 & 0x1F));
-                break;
-            case interpreter::IROpCode::ShrUn:
-                result = use_i64 ? (static_cast<uint64_t>(v1) >> (v2 & 0x3F))
-                                 : (static_cast<uint32_t>(static_cast<int32_t>(v1)) >> (v2 & 0x1F));
-                break;
-            case interpreter::IROpCode::Ceq:  result = (v1 == v2) ? 1 : 0; use_i64 = false; break;
-            case interpreter::IROpCode::Clt:  result = (v1 <  v2) ? 1 : 0; use_i64 = false; break;
-            case interpreter::IROpCode::Cgt:  result = (v1 >  v2) ? 1 : 0; use_i64 = false; break;
+                // Binary arithmetic
+                case interpreter::IROpCode::Add:
+                    result = v1 + v2;
+                    break;
+                case interpreter::IROpCode::Sub:
+                    result = v1 - v2;
+                    break;
+                case interpreter::IROpCode::Mul:
+                    result = v1 * v2;
+                    break;
+                case interpreter::IROpCode::And:
+                    result = v1 & v2;
+                    break;
+                case interpreter::IROpCode::Or:
+                    result = v1 | v2;
+                    break;
+                case interpreter::IROpCode::Xor:
+                    result = v1 ^ v2;
+                    break;
+                case interpreter::IROpCode::Shl:
+                    result = use_i64 ? (v1 << (v2 & 0x3F)) : (static_cast<int32_t>(v1) << (v2 & 0x1F));
+                    break;
+                case interpreter::IROpCode::Shr:
+                    result = use_i64 ? (v1 >> (v2 & 0x3F)) : (static_cast<int32_t>(v1) >> (v2 & 0x1F));
+                    break;
+                case interpreter::IROpCode::ShrUn:
+                    result = use_i64 ? (static_cast<uint64_t>(v1) >> (v2 & 0x3F))
+                                     : (static_cast<uint32_t>(static_cast<int32_t>(v1)) >> (v2 & 0x1F));
+                    break;
+                case interpreter::IROpCode::Ceq:
+                    result = (v1 == v2) ? 1 : 0;
+                    use_i64 = false;
+                    break;
+                case interpreter::IROpCode::Clt:
+                    result = (v1 < v2) ? 1 : 0;
+                    use_i64 = false;
+                    break;
+                case interpreter::IROpCode::Cgt:
+                    result = (v1 > v2) ? 1 : 0;
+                    use_i64 = false;
+                    break;
 
-            // Unary
-            case interpreter::IROpCode::Neg: result = use_i64 ? -v1 : -static_cast<int32_t>(v1); break;
-            case interpreter::IROpCode::Not: result = use_i64 ? ~v1 : ~static_cast<int32_t>(v1); break;
+                // Unary
+                case interpreter::IROpCode::Neg:
+                    result = use_i64 ? -v1 : -static_cast<int32_t>(v1);
+                    break;
+                case interpreter::IROpCode::Not:
+                    result = use_i64 ? ~v1 : ~static_cast<int32_t>(v1);
+                    break;
 
-            // Conversions
-            case interpreter::IROpCode::Conv_I4: result = static_cast<int32_t>(v1); use_i64 = false; break;
-            case interpreter::IROpCode::Conv_I8: result = v1; use_i64 = true; break;
-            case interpreter::IROpCode::ConvI:
-                result = static_cast<int32_t>(v1);
-                use_i64 = false;
-                break;
-            case interpreter::IROpCode::ConvU:
-                result = static_cast<uint32_t>(v1);
-                use_i64 = false;
-                break;
-            case interpreter::IROpCode::ConvRUn:
-                // Fold to LdcI4 (the truncated int result)
-                result = static_cast<int32_t>(v1);
-                use_i64 = false;
-                break;
+                // Conversions
+                case interpreter::IROpCode::Conv_I4:
+                    result = static_cast<int32_t>(v1);
+                    use_i64 = false;
+                    break;
+                case interpreter::IROpCode::Conv_I8:
+                    result = v1;
+                    use_i64 = true;
+                    break;
+                case interpreter::IROpCode::ConvI:
+                    result = static_cast<int32_t>(v1);
+                    use_i64 = false;
+                    break;
+                case interpreter::IROpCode::ConvU:
+                    result = static_cast<uint32_t>(v1);
+                    use_i64 = false;
+                    break;
+                case interpreter::IROpCode::ConvRUn:
+                    // Fold to LdcI4 (the truncated int result)
+                    result = static_cast<int32_t>(v1);
+                    use_i64 = false;
+                    break;
 
-            // LdLen — can't fold at linear level (runtime value)
-            case interpreter::IROpCode::LdLen:
-                foldable = false; break;
+                // LdLen — can't fold at linear level (runtime value)
+                case interpreter::IROpCode::LdLen:
+                    foldable = false;
+                    break;
 
-            default:
-                foldable = false; break;
+                default:
+                    foldable = false;
+                    break;
             }
 
-            if (!foldable) continue;
+            if (!foldable)
+                continue;
 
             // Replace with LdcI4 or LdcI8
             if (use_i64) {
-                ri.header = (ri.header & ~(0xFFFFull)) |
-                    static_cast<uint64_t>(interpreter::IROpCode::LdcI8);
+                ri.header = (ri.header & ~(0xFFFFull)) | static_cast<uint64_t>(interpreter::IROpCode::LdcI8);
                 ri.imm.i8 = result;
                 const_vals[dst] = {kInt64, result};
             } else {
-                ri.header = (ri.header & ~(0xFFFFull)) |
-                    static_cast<uint64_t>(interpreter::IROpCode::LdcI4);
+                ri.header = (ri.header & ~(0xFFFFull)) | static_cast<uint64_t>(interpreter::IROpCode::LdcI4);
                 ri.imm.i4 = static_cast<int32_t>(result);
                 const_vals[dst] = {kInt32, result};
             }
             // Clear src flags (LdcI4/I8 has no srcs)
-            ri.header &= ~(static_cast<uint64_t>(0xFF) << 24);  // clear src1
-            ri.header &= ~(static_cast<uint64_t>(0xFF) << 32);  // clear src2
-            ri.header &= ~(static_cast<uint64_t>(
-                interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2) << 40);
+            ri.header &= ~(static_cast<uint64_t>(0xFF) << 24); // clear src1
+            ri.header &= ~(static_cast<uint64_t>(0xFF) << 32); // clear src2
+            ri.header &= ~(static_cast<uint64_t>(interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2) << 40);
 
             changed = true;
             any_propagated = true;
         }
 
-        if (!changed) break;
+        if (!changed)
+            break;
     }
 
     return any_propagated;
@@ -849,18 +896,15 @@ static bool ConstPropagate(
 
 // ── OptimizeWithTreeIR ─────────────────────────────────────────────────
 
-bool OptimizeWithTreeIR(
-    const std::vector<interpreter::RegisterInstruction>& instrs,
-    std::vector<interpreter::RegisterInstruction>& out_instrs,
-    bool has_seh,
-    uint32_t max_vreg,
-    bool enable_inlining,
-    InlineResultBuffer* inline_results) noexcept
-{
+bool OptimizeWithTreeIR(const std::vector<interpreter::RegisterInstruction>& instrs,
+                        std::vector<interpreter::RegisterInstruction>& out_instrs, bool has_seh, uint32_t max_vreg,
+                        bool enable_inlining, InlineResultBuffer* inline_results) noexcept {
     uint32_t n = static_cast<uint32_t>(instrs.size());
-    if (n == 0) return false;
+    if (n == 0)
+        return false;
 
-    if (has_seh) return false;
+    if (has_seh)
+        return false;
 
     if (max_vreg == 0) {
         for (const auto& ri : instrs) {
@@ -871,7 +915,8 @@ bool OptimizeWithTreeIR(
     }
 
     auto bbs = FindBasicBlocks(instrs.data(), n);
-    if (bbs.empty()) return false;
+    if (bbs.empty())
+        return false;
 
     // [P5] Phase 1: Build CFG for multi-BB methods
     LoopAnalysis loop_analysis = {};
@@ -908,11 +953,9 @@ bool OptimizeWithTreeIR(
 
         // Inline eligible kCall nodes
         if (enable_inlining) {
-            Inliner inliner(InlineConfig{}, 0, max_vreg);
+            Inliner inliner(InlineConfig {}, 0, max_vreg);
             // Set loop nesting depth for loop-aware inline cost model
-            uint32_t bb_loop_depth = loop_analysis.blocks.empty()
-                                         ? 0
-                                         : loop_analysis.blocks[bi].loop_depth;
+            uint32_t bb_loop_depth = loop_analysis.blocks.empty() ? 0 : loop_analysis.blocks[bi].loop_depth;
             inliner.set_bb_loop_depth(bb_loop_depth);
             inliner.InlineRoots(result.roots, result.root_count, 128u);
             if (inliner.new_max_vreg() > max_vreg)
@@ -931,9 +974,7 @@ bool OptimizeWithTreeIR(
         uint8_t* arena_end = arena_pos + builder.kArenaSize;
 
         // Intrinsic expansion (after inlining, before const-folding)
-        IntrinsicMutator intrinsic_mut(arena_pos, arena_end,
-                                        kIntrinsicTable, kIntrinsicTableSize,
-                                        &builder);
+        IntrinsicMutator intrinsic_mut(arena_pos, arena_end, kIntrinsicTable, kIntrinsicTableSize, &builder);
         for (uint32_t ri = 0; ri < result.root_count; ++ri)
             result.roots[ri] = intrinsic_mut.Mutate(result.roots[ri]);
 
@@ -978,12 +1019,10 @@ bool OptimizeWithTreeIR(
         ConstPropagate(out_instrs, max_vreg);
 
         // 2a. LICM: hoist loop-invariant arithmetic out of loops
-        LicmHoist(out_instrs, bb_starts, bb_ends, loop_analysis,
-                   vreg_def_blocks, max_vreg);
+        LicmHoist(out_instrs, bb_starts, bb_ends, loop_analysis, vreg_def_blocks, max_vreg);
 
         // 2b. IV strength reduction
-        IvStrengthReduce(out_instrs, bb_starts, bb_ends, loop_analysis,
-                          max_vreg);
+        IvStrengthReduce(out_instrs, bb_starts, bb_ends, loop_analysis, max_vreg);
 
         // 2c. Loop unrolling (factor 4, or 8 for very small bodies)
         {
@@ -992,7 +1031,10 @@ bool OptimizeWithTreeIR(
             for (const auto& l : loop_analysis.loops) {
                 if (l.blocks.size() == 1) {
                     uint32_t est = bb_ends[l.header] - bb_starts[l.header];
-                    if (est < 8) { factor = 8; break; }
+                    if (est < 8) {
+                        factor = 8;
+                        break;
+                    }
                 }
             }
             UnrollLoops(out_instrs, bb_starts, bb_ends, loop_analysis, max_vreg, factor);
@@ -1002,4 +1044,4 @@ bool OptimizeWithTreeIR(
     return any_optimized;
 }
 
-}  // namespace chaos::il2cpp::jit::tree
+} // namespace chaos::il2cpp::jit::tree

@@ -49,31 +49,27 @@ extern TokenToPrecodeMap g_token_to_precode;
 // ── InlineConfig ────────────────────────────────────────────────────────────
 // Heuristics thresholds for inline decision-making.
 struct InlineConfig {
-    uint32_t max_callee_nodes  = 25;   // max ExprNode count in callee
-    uint32_t max_inline_depth  = 2;    // max nesting depth of inlined calls
-    int32_t  loop_bonus        = 3;    // subtract from node count per loop level
-    int32_t  return_used_bonus = 5;    // add to node count if return value used
+    uint32_t max_callee_nodes = 25; // max ExprNode count in callee
+    uint32_t max_inline_depth = 2;  // max nesting depth of inlined calls
+    int32_t loop_bonus = 3;         // subtract from node count per loop level
+    int32_t return_used_bonus = 5;  // add to node count if return value used
 };
 
 // ── InlineDecision ─────────────────────────────────────────────────────────
 struct InlineDecision {
-    bool     should_inline       = false;
-    uint32_t callee_token        = 0;
-    uint32_t callee_module_id    = 0;
-    uint32_t snapshot_version    = 0;  // HotpatchEntryV0.version at decision time
-    uint32_t callee_max_vreg     = 0;  // for vreg remap range
-    uint32_t callee_instr_count  = 0;  // for diagnostics
+    bool should_inline = false;
+    uint32_t callee_token = 0;
+    uint32_t callee_module_id = 0;
+    uint32_t snapshot_version = 0;   // HotpatchEntryV0.version at decision time
+    uint32_t callee_max_vreg = 0;    // for vreg remap range
+    uint32_t callee_instr_count = 0; // for diagnostics
     const interpreter::RegisterMethod* callee_rm = nullptr;
 };
 
 // ── EvaluateInline ─────────────────────────────────────────────────────────
 // Evaluate heuristics for a potential inline of `call_node` targeting `callee_token`.
-InlineDecision EvaluateInline(
-    uint32_t callee_token,
-    uint32_t caller_depth,
-    bool     return_value_used,
-    uint32_t loop_depth,
-    const InlineConfig& cfg) noexcept;
+InlineDecision EvaluateInline(uint32_t callee_token, uint32_t caller_depth, bool return_value_used, uint32_t loop_depth,
+                              const InlineConfig& cfg) noexcept;
 
 // ── Inliner ────────────────────────────────────────────────────────────────
 // Per-BB inliner: grafts callee expression trees into caller's root set.
@@ -86,9 +82,7 @@ InlineDecision EvaluateInline(
 //   // (Inliner dtor after Linearizer — callee arenas stay alive)
 class Inliner {
 public:
-    explicit Inliner(const InlineConfig& cfg,
-                     uint32_t inline_depth = 0,
-                     uint32_t caller_max_vreg = 0) noexcept;
+    explicit Inliner(const InlineConfig& cfg, uint32_t inline_depth = 0, uint32_t caller_max_vreg = 0) noexcept;
 
     /// Try to inline eligible kCall nodes in the given root set.
     /// Replaces kCall nodes IN-PLACE with callee return expression.
@@ -98,9 +92,7 @@ public:
     /// @param root_count   In/Out: number of roots
     /// @param max_roots    Capacity of roots array
     /// @returns Number of successful inlines
-    uint32_t InlineRoots(tree::ExprNode** roots,
-                         uint32_t& root_count,
-                         uint32_t max_roots) noexcept;
+    uint32_t InlineRoots(tree::ExprNode** roots, uint32_t& root_count, uint32_t max_roots) noexcept;
 
     /// Set loop nesting depth for the current basic block.
     /// Used by EvaluateInline cost model to prioritize inlining inside loops.
@@ -114,9 +106,7 @@ public:
     uint32_t inlined_count() const noexcept { return inlined_count_; }
 
     /// Access inlined callee info array (size = inlined_count()).
-    const InlineDecision* inlined_decisions() const noexcept {
-        return inlined_decisions_;
-    }
+    const InlineDecision* inlined_decisions() const noexcept { return inlined_decisions_; }
 
 private:
     struct CalleeArena {
@@ -126,23 +116,21 @@ private:
 
     struct InlineCandidate {
         tree::ExprNode* call_node;
-        uint32_t        callee_token;
-        uint32_t        first_arg_vreg;
-        uint32_t        arg_count;
-        InlineDecision  decision;
+        uint32_t callee_token;
+        uint32_t first_arg_vreg;
+        uint32_t arg_count;
+        InlineDecision decision;
     };
 
-    bool TryInline(InlineCandidate& candidate,
-                   tree::ExprNode** roots,
-                   uint32_t& root_count,
+    bool TryInline(InlineCandidate& candidate, tree::ExprNode** roots, uint32_t& root_count,
                    uint32_t max_roots) noexcept;
 
     InlineConfig cfg_;
-    uint32_t     inline_depth_;
-    uint32_t     bb_loop_depth_ = 0;
-    uint32_t     new_max_vreg_ = 0;
-    uint32_t     inlined_count_ = 0;
-    InlineDecision inlined_decisions_[8];  // max inlines per BB
+    uint32_t inline_depth_;
+    uint32_t bb_loop_depth_ = 0;
+    uint32_t new_max_vreg_ = 0;
+    uint32_t inlined_count_ = 0;
+    InlineDecision inlined_decisions_[8]; // max inlines per BB
 
     // Keep callee TreeBuilders alive during BB processing
     std::vector<CalleeArena> callee_arenas_;
@@ -170,6 +158,6 @@ private:
 
 extern InlineReverseMap g_inline_reverse_map;
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_JIT_INLINE_H_
+#endif // CHAOS_IL2CPP_JIT_INLINE_H_

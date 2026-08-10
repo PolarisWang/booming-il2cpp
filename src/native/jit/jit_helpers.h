@@ -24,13 +24,13 @@ static constexpr uint64_t kDeoptMagic = 0xDE0D7FA57A11ULL;
 /// the deopt trampoline in generated native code), read by
 /// InterpreterEntryDirect to reconstruct RegisterFrame state.
 struct DeoptTlsState {
-    uint64_t gpr_file[64] = {};   // Reconstructed GPR register file
-    double   fpr_file[32] = {};   // Reconstructed FPR register file
-    uint8_t  gpr_tags[64] = {};   // Per-register ValueTag for GPRs
-    uint8_t  fpr_tags[32] = {};   // Per-register ValueTag for FPRs
-    uint32_t instr_pc     = 0;    // RegisterInstruction pc to resume at
-    uint32_t osr_resume_pc = 0;   // OSR resume PC (loop header). 0 = instruction 0.
-    bool     deopt_happened = false; // Set to true when deopt trampoline fires
+    uint64_t gpr_file[64] = {};  // Reconstructed GPR register file
+    double fpr_file[32] = {};    // Reconstructed FPR register file
+    uint8_t gpr_tags[64] = {};   // Per-register ValueTag for GPRs
+    uint8_t fpr_tags[32] = {};   // Per-register ValueTag for FPRs
+    uint32_t instr_pc = 0;       // RegisterInstruction pc to resume at
+    uint32_t osr_resume_pc = 0;  // OSR resume PC (loop header). 0 = instruction 0.
+    bool deopt_happened = false; // Set to true when deopt trampoline fires
 };
 
 extern thread_local DeoptTlsState g_jit_deopt_state;
@@ -47,7 +47,7 @@ inline void EmitLoadTlsTlab(CodeBuffer&) noexcept {}
 inline void InitTlsTlabInfo() noexcept {}
 #endif
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
 // ── LdFld / StFld helpers ──────────────────────────────────────────────
 // InterpreterObject::fields is a std::vector<InterpreterValue>, so field
@@ -57,29 +57,29 @@ inline void InitTlsTlabInfo() noexcept {}
 // StFldHelper: stores value into fields[idx] with tag = Int64 (bit-preserving).
 
 extern "C" uint64_t CodegenLdFld(void* obj, uint32_t field_idx) noexcept;
-extern "C" void     CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noexcept;
+extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noexcept;
 
 // StFld variant without SATB pre-write barrier. Used when g_bgc_is_marking is
 // false (steady-state, no concurrent GC marking in progress).  Bypassing the
 // SATB barrier when marking is inactive avoids the function call and atomic
 // read overhead, making the common case ~2x faster for StFld paths.
-extern "C" void     CodegenStFldNoBarrier(void* obj, uint32_t field_idx, uint64_t value) noexcept;
+extern "C" void CodegenStFldNoBarrier(void* obj, uint32_t field_idx, uint64_t value) noexcept;
 
 // ── CallVirt helper (PIC dispatch + fallback) ──────────────────────────
 // Called by T4-generated native code for CallVirt instructions.
 // Walks PIC chains for a fast direct call; falls back to InterpreterDispatchRaw.
 struct CodegenCallVirtArgs {
-    uint64_t* gpr_base;         // 0: pointer to register file [RSP + kGprFileOff]
-    const void* pic_data;       // 8: pm->pic_dispatch_data (or null)
-    void* dispatch_ctx;         // 16: dispatch context for InterpreterDispatchRaw
-    uint32_t instruction_idx;   // 24: current instruction index (for PIC chain lookup)
-    uint32_t arg_count;         // 28: number of arguments
-    uint32_t first_arg_reg;     // 32: src1_reg (first argument register)
-    uint32_t method_token;      // 36: method token for vtable fallback (was padding)
-    void* call_target;          // 40: instr.imm.ptr (method handle for fallback)
-    uint32_t has_dst;           // 48: whether instruction has a dst register
-    uint32_t is_instance_call;  // 52: from header bit 63
-    void* ret_buf;              // 56: ret_buf pointer (written with kDeoptMagic on PIC miss)
+    uint64_t* gpr_base;        // 0: pointer to register file [RSP + kGprFileOff]
+    const void* pic_data;      // 8: pm->pic_dispatch_data (or null)
+    void* dispatch_ctx;        // 16: dispatch context for InterpreterDispatchRaw
+    uint32_t instruction_idx;  // 24: current instruction index (for PIC chain lookup)
+    uint32_t arg_count;        // 28: number of arguments
+    uint32_t first_arg_reg;    // 32: src1_reg (first argument register)
+    uint32_t method_token;     // 36: method token for vtable fallback (was padding)
+    void* call_target;         // 40: instr.imm.ptr (method handle for fallback)
+    uint32_t has_dst;          // 48: whether instruction has a dst register
+    uint32_t is_instance_call; // 52: from header bit 63
+    void* ret_buf;             // 56: ret_buf pointer (written with kDeoptMagic on PIC miss)
 };
 // Total: 64 bytes (aligns to 8)
 
@@ -90,9 +90,9 @@ struct CodegenCallVirtArgs {
 /// slot_count = 0 means "no inline data available" (fall back to the full
 /// CodegenCallVirt path).
 struct PerInstrPicData {
-    uint32_t expected_type_tokens[3] = {};  // type tokens, sorted by hotness
-    void*    direct_fns[3] = {};            // pre-resolved AOT function pointers
-    uint32_t slot_count = 0;                // 0 = no data, 1-3 = active slots
+    uint32_t expected_type_tokens[3] = {}; // type tokens, sorted by hotness
+    void* direct_fns[3] = {};              // pre-resolved AOT function pointers
+    uint32_t slot_count = 0;               // 0 = no data, 1-3 = active slots
 };
 
 // Returns the uint64_t result value (0 if no return).
@@ -104,7 +104,7 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept;
 // Returns &tls_tlab for the current thread — enables T4 code to access
 // the Thread-Local Allocation Buffer inline for bump-pointer allocation.
 // Return value is a pointer to TLAB (see gc_young_gen.h for struct layout).
-extern "C" void*   CodegenGetTlab() noexcept;
+extern "C" void* CodegenGetTlab() noexcept;
 
 /// Emit inline x64 TLS access sequence to load &tls_tlab into RAX.
 ///
@@ -121,36 +121,36 @@ extern "C" void*   CodegenGetTlab() noexcept;
 // ── Box / NewObj helpers ─────────────────────────────────────────────────
 // Box: wrap a raw value (uint64_t + tag) into an InterpreterObject.
 // Returns pointer to the allocated object.
-extern "C" void*    CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) noexcept;
+extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) noexcept;
 
 // NewObj: allocate an InterpreterObject with initial field count.
 // Returns pointer to the allocated object.
-extern "C" void*    CodegenNewObj(uint32_t type_token, uint32_t field_count) noexcept;
+extern "C" void* CodegenNewObj(uint32_t type_token, uint32_t field_count) noexcept;
 
 // LdLen: get length of an interpreter array.
-extern "C" int32_t  CodegenLdLen(void* arr) noexcept;
+extern "C" int32_t CodegenLdLen(void* arr) noexcept;
 
 // ── Static field helpers ───────────────────────────────────────────────────
 extern "C" uint64_t CodegenLdSFld(uint32_t field_offset) noexcept;
-extern "C" void     CodegenStSFld(uint32_t field_offset, uint64_t value) noexcept;
+extern "C" void CodegenStSFld(uint32_t field_offset, uint64_t value) noexcept;
 
 // ── Array helpers ──────────────────────────────────────────────────────────
-extern "C" void*    CodegenNewArr(int32_t length) noexcept;
-extern "C" void*    CodegenNewArrTlab(void* mem, int32_t length) noexcept;
+extern "C" void* CodegenNewArr(int32_t length) noexcept;
+extern "C" void* CodegenNewArrTlab(void* mem, int32_t length) noexcept;
 extern "C" uint64_t CodegenLdElem(void* arr, int32_t index) noexcept;
-extern "C" void     CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept;
+extern "C" void CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept;
 
 // Bounds-check-free variants (used by BCE when safety is proven at compile time)
 extern "C" uint64_t CodegenLdElemNoCheck(void* arr, int32_t index) noexcept;
-extern "C" void     CodegenStElemNoCheck(void* arr, int32_t index, uint64_t value) noexcept;
+extern "C" void CodegenStElemNoCheck(void* arr, int32_t index, uint64_t value) noexcept;
 
 // ── Type check helpers ─────────────────────────────────────────────────────
 // These follow the same convention as FastExecute (no-op cast, no type check):
 // CastClass returns obj unchanged, IsInst returns obj unchanged.
 // Full type checking requires throwing InvalidCastException which is handled
 // in the InterpreterVM path.
-extern "C" void*    CodegenCastClass(void* obj, uint32_t target_token) noexcept;
-extern "C" void*    CodegenIsInst(void* obj, uint32_t target_token) noexcept;
+extern "C" void* CodegenCastClass(void* obj, uint32_t target_token) noexcept;
+extern "C" void* CodegenIsInst(void* obj, uint32_t target_token) noexcept;
 
 // ── Unbox helper ───────────────────────────────────────────────────────────
 // Extracts fields[0] from a boxed InterpreterObject.
@@ -217,4 +217,4 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept;
 /// Returns the absolute address to jump to, or code_base on failure.
 extern "C" void* OsrResolveLoopHeader() noexcept;
 
-#endif  // CHAOS_IL2CPP_CODEGEN_HELPERS_H_
+#endif // CHAOS_IL2CPP_CODEGEN_HELPERS_H_

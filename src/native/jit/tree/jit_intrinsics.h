@@ -50,12 +50,12 @@ enum class IntrinsicId : uint8_t {
 
 // ── Intrinsic table entry ──────────────────────────────────────────────
 struct IntrinsicEntry {
-    uint32_t     method_token;    // callee metadata token to match
-    IntrinsicId  id;              // unique intrinsic identifier
-    NodeKind     target_kind;     // target NodeKind after replacement
-    uint8_t      arg_count;       // expected argument count
-    TypeTag      result_tag;      // result type tag
-    uint8_t      simd_elem_type;  // SIMD element type (SimdElementType), for kSimd targets
+    uint32_t method_token;  // callee metadata token to match
+    IntrinsicId id;         // unique intrinsic identifier
+    NodeKind target_kind;   // target NodeKind after replacement
+    uint8_t arg_count;      // expected argument count
+    TypeTag result_tag;     // result type tag
+    uint8_t simd_elem_type; // SIMD element type (SimdElementType), for kSimd targets
 };
 
 // ── IntrinsicMutator — Tree IR pass ────────────────────────────────────
@@ -67,12 +67,9 @@ struct IntrinsicEntry {
 // correctly wire argument expressions as children of the new nodes.
 class IntrinsicMutator : public Mutator {
 public:
-    IntrinsicMutator(uint8_t*& arena_pos, uint8_t* arena_end,
-                     const IntrinsicEntry* table, uint32_t table_size,
+    IntrinsicMutator(uint8_t*& arena_pos, uint8_t* arena_end, const IntrinsicEntry* table, uint32_t table_size,
                      const TreeBuilder* builder) noexcept
-        : table_(table), table_size_(table_size),
-          arena_pos_(arena_pos), arena_end_(arena_end),
-          builder_(builder) {}
+        : table_(table), table_size_(table_size), arena_pos_(arena_pos), arena_end_(arena_end), builder_(builder) {}
 
 protected:
     /// Pre-order: intercept kCall nodes matching intrinsic patterns.
@@ -80,10 +77,10 @@ protected:
 
 private:
     const IntrinsicEntry* table_;
-    uint32_t              table_size_;
-    uint8_t*&             arena_pos_;
-    uint8_t*              arena_end_;
-    const TreeBuilder*    builder_;
+    uint32_t table_size_;
+    uint8_t*& arena_pos_;
+    uint8_t* arena_end_;
+    const TreeBuilder* builder_;
 };
 
 // ── Built-in intrinsic table ───────────────────────────────────────────
@@ -97,6 +94,6 @@ private:
 extern const IntrinsicEntry kIntrinsicTable[];
 extern const uint32_t kIntrinsicTableSize;
 
-}  // namespace chaos::il2cpp::jit::tree
+} // namespace chaos::il2cpp::jit::tree
 
-#endif  // CHAOS_IL2CPP_JIT_INTRINSICS_H_
+#endif // CHAOS_IL2CPP_JIT_INTRINSICS_H_

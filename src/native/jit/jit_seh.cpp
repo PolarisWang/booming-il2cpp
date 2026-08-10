@@ -46,9 +46,8 @@
 
 namespace chaos::il2cpp::jit {
 
-void RegisterNativeCodeSection(void* code_start, uint32_t code_size,
-                    const JitMethod* nm,
-                    uint32_t patch_method_token) noexcept {
+void RegisterNativeCodeSection(void* code_start, uint32_t code_size, const JitMethod* nm,
+                               uint32_t patch_method_token) noexcept {
     GetSehHandler().RegisterCode(code_start, code_size, nm, patch_method_token);
 
     // Sync debug mirror for SOS extension.
@@ -88,8 +87,7 @@ void RegisterJitSehHandler() noexcept {
     // dispatching into JIT code that references freed domain metadata.
     // Safe during STW: ReclaimDemoted is called inline.
     memory_domain::MemoryDomainRegisterEventCallback(
-        [](memory_domain::MemoryDomainEvent event,
-           const memory_domain::MemoryDomainEventData* data,
+        [](memory_domain::MemoryDomainEvent event, const memory_domain::MemoryDomainEventData* data,
            void* /*user_data*/) noexcept {
             if (event == memory_domain::MemoryDomainEvent::DOMAIN_UNLOADED) {
                 uint32_t demoted = GetSehHandler().DemoteByDomainId(data->domain_id);
@@ -99,12 +97,12 @@ void RegisterJitSehHandler() noexcept {
                     GetSehHandler().ReclaimDemoted();
                 }
             }
-        }, nullptr);
+        },
+        nullptr);
 
     // Prime the debug contract metadata registry pointer so SOS extension
     // can resolve method names via the unified registry interface.
-    JitDebugContractInitMetadataRegistry(
-        runtime_core::MetadataRegistry::Get().GetUnifiedRegistry());
+    JitDebugContractInitMetadataRegistry(runtime_core::MetadataRegistry::Get().GetUnifiedRegistry());
 }
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
