@@ -208,14 +208,25 @@ static void test_young_collection() {
     PASS();
 
     SUBTEST("normal collection resets nursery and clears cards");
-    // Dirty a card first, then collect.
-    DirtyCard(p);
+    // Young GC Phase 4 calls ClearCardRange(nursery_begin, nursery_used) to
+    // clear the nursery-range cards.  DirtyCard() fast-skips nursery pointers
+    // by design (young GC scans the nursery precisely), so to observe the
+    // clear we must dirty a card in the nursery range directly (bypassing the
+    // barrier), then verify young GC clears it.
+    // Compute the nursery-range card index for p and force it dirty.
+    uintptr_t p_addr = reinterpret_cast<uintptr_t>(p);
+    uintptr_t card_idx = (p_addr - g_heap_base) >> kCardShift;
+    uintptr_t seg_idx = card_idx / kCardsPerSegment;
+    uintptr_t card_off = card_idx % kCardsPerSegment;
+    auto* card_seg = g_card_l1[seg_idx].load(std::memory_order_relaxed);
+    if (card_seg == nullptr) { FAIL("card segment not allocated for nursery"); return; }
+    card_seg->cards[card_off] = 0xFF;
     if (!IsDirty(p)) { FAIL("card should be dirty before collect"); return; }
 
     YoungCollectionResult r2 = GcYoungCollection();
     // Nursery should be reset.
     if (g_young_gen.bump.load(std::memory_order_acquire) != nursery->begin) { FAIL("nursery not reset after collect"); return; }
-    // Cards should be cleared.
+    // Cards in the nursery range should be cleared.
     if (IsDirty(p)) { FAIL("card still dirty after collect"); return; }
     PASS();
 
