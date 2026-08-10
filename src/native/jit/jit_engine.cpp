@@ -977,10 +977,25 @@ void NativeCodeGenerator::EmitShift(IROpCode opc, uint32_t dst, uint32_t src1, u
         if (c != 0xFF)
             op_reg = c;
     }
-    LoadGpr(op_reg, src1);
+    // Collision guard (mirrors EmitGprArithmetic): a variable shift computes
+    // "dst = src1 << src2", where src2 is the shift-count vreg that must land
+    // in CL (AT::kScratchB).  When src2's graph color equals op_reg
+    // (e.g. in-place "dst = src1 << dst", where dst and src2 are the same vreg
+    // and therefore share a color), loading src1 into op_reg first would
+    // clobber src2's value before the shift count is captured into CL.  Load
+    // the shift count into CL FIRST, then load src1 into op_reg, so the count
+    // is read from the true src2 value, not from the just-loaded src1.
+    bool load_src1_first = true;
+    if (has_graph_coloring_ && src2 != UINT32_MAX && src2 < interpreter::kGPRegisters) {
+        uint8_t src2_color = gcr_.gpr_color[src2];
+        if (src2_color != 0xFF && src2_color == op_reg)
+            load_src1_first = false;
+    }
 #if defined(__aarch64__)
     if (src2 != UINT32_MAX) {
-        LoadGpr(AT::kScratchB, src2);
+        if (!load_src1_first) LoadGpr(AT::kScratchB, src2);
+        LoadGpr(op_reg, src1);
+        if (load_src1_first) LoadGpr(AT::kScratchB, src2);
         if (opc == IROpCode::Shl) {
             enc_.EmitShlRCL(op_reg);
         } else if (opc == IROpCode::Shr) {
@@ -1000,7 +1015,9 @@ void NativeCodeGenerator::EmitShift(IROpCode opc, uint32_t dst, uint32_t src1, u
     }
 #else
     if (src2 != UINT32_MAX) {
-        LoadGpr(AT::kScratchB, src2);
+        if (!load_src1_first) LoadGpr(AT::kScratchB, src2);
+        LoadGpr(op_reg, src1);
+        if (load_src1_first) LoadGpr(AT::kScratchB, src2);
         EmitREXB(buf_, false, op_reg); // REX.B for extended destination register
         if (opc == IROpCode::Shl) {
             buf_.EmitByte(0xD3);
