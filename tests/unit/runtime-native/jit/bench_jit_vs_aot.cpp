@@ -360,11 +360,16 @@ TEST_F(JitBench, CompileTime_Tier1_LoopSum) {
 TEST_F(JitBench, ExecTime_Tier0_vs_Tier1) {
     // Compare execution time of Tier 0 vs Tier 1 code for an accumulate method.
     // Tier 1 should be faster due to register allocation.
-    auto rm = MakeAccumulateMethod(100);
+    // Use MakeLoopSumMethod (max_regs=4, legal vreg range) instead of
+    // MakeAccumulateMethod(n>63): the latter emits one vreg per addend, so
+    // n=100 pushes vregs past the 64-GPR architecture limit (kGprCount=64).
+    // Graph coloring correctly treats those >64 vregs as out-of-range (spill),
+    // so a high-vreg method is not a valid tier-1 test; the loop form is.
+    auto rm = MakeLoopSumMethod(101);  // sum(0..100) = 5050
 
     auto* tier0_jm = Compile(rm, MakeTier0Config());
     ASSERT_NE(tier0_jm, nullptr);
-    EXPECT_EQ(ExecuteNative(tier0_jm->code), 5050ULL);  // sum(1..100) = 5050
+    EXPECT_EQ(ExecuteNative(tier0_jm->code), 5050ULL);  // sum(0..100) = 5050
 
     auto* tier1_jm = Compile(rm, MakeTier1Config());
     ASSERT_NE(tier1_jm, nullptr);
