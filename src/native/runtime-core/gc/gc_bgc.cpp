@@ -833,6 +833,23 @@ void BgcController::BgcThreadMain() {
     bgc_thread_started_.store(true, std::memory_order_release);
 
     while (bgc_running_.load(std::memory_order_acquire)) {
+        // ── Phase-independent BGC-YoungGC pause interception (GC fix) ──
+        // The inner CONCURRENT_MARK loop also acks bgc_pause_requested_, but
+        // that check only runs while the BGC thread is actively marking.  If a
+        // young GC requests a pause while the BGC thread is between phases
+        // (waiting for start, in sweep/compact, etc.), it would never be acked
+        // and young GC would spin on bgc_paused_ forever (or race old-gen
+        // pages).  Ack it here at the top of EVERY outer iteration so the
+        // pause is honored regardless of which phase the BGC is in.
+        if (bgc_pause_requested_.load(std::memory_order_acquire)) {
+            bgc_paused_.store(true, std::memory_order_release);
+            while (bgc_pause_requested_.load(std::memory_order_acquire)) {
+                std::this_thread::yield();
+            }
+            bgc_paused_.store(false, std::memory_order_release);
+            CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_released(phase-independent)");
+        }
+
         // Wait for a start request.  Uses condition_variable for event-driven
         // wake-up (P1-4: replaces sleep_for polling).
         {
