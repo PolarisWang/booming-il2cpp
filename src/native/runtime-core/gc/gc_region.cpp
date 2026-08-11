@@ -8,6 +8,7 @@
 #include "core/gc_alloc_stubs.h"
 #include "gc_bgc.h"
 #include "gc_coordinator.h"
+#include "gc_diagnostics.h"
 #include "gc_etw.h"
 #include "gc_events.h"
 #include "gc_gen1.h"
@@ -80,6 +81,21 @@ static void* GcTryAllocLargePages(CHAOS_IL2CPP_SIZE alloc_size) noexcept {
 #include <cstring>
 
 namespace chaos::il2cpp::runtime_core {
+
+/// Mark every 4MB region-gen byte covering [@a start, @a end) as OLD.  See the
+/// header comment for rationale.  Called by old-gen / LOH page allocation under
+/// their commit lock so updates are serialized with concurrent SetRegionGen
+/// (nursery/Gen1 region creation).
+void GcMarkRangeOld(uintptr_t start, uintptr_t end) noexcept {
+    if (start >= end) return;
+    EnsureRegionGenCoverage(start);
+    EnsureRegionGenCoverage(end - 1);
+    static constexpr CHAOS_IL2CPP_SIZE kRegionSize = CHAOS_IL2CPP_SIZE{1} << kRegionGenShift;
+    uintptr_t a = start & ~(kRegionSize - 1);
+    for (; a < end; a += kRegionSize) {
+        SetRegionGen(a, kRegionGenOld);
+    }
+}
 
 // ── Shared young generation + TLAB ──────────────────────────────
 YoungGeneration g_young_gen;
@@ -861,9 +877,19 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
                           kind == RegionKind::REGION_GEN1)
                              ? kRegionGenYoung : kRegionGenOld;
     r->gen = region_gen & kRegionGenMask;
+    // Mark EVERY 4MB region-gen chunk the region spans (not just begin).  A
+    // nursery/gen1 region is large (e.g. 64MB = 16 chunks); without this the
+    // chunks beyond begin default to OLD(2), so a young object in the middle/end
+    // of the nursery reads region-gen 2 → the write barrier treats it as mature
+    // and skips carding a young→old edge, and a gen>condemned filter drops it.
+    // This is the CoreCLR set_region_gen_num per-segment marking analog.
     EnsureRegionGenCoverage(reinterpret_cast<uintptr_t>(r->begin));
     EnsureRegionGenCoverage(reinterpret_cast<uintptr_t>(r->end) - 1);
-    SetRegionGen(reinterpret_cast<uintptr_t>(r->begin), region_gen);
+    constexpr CHAOS_IL2CPP_SIZE kRgSize = CHAOS_IL2CPP_SIZE{1} << kRegionGenShift;
+    uintptr_t a = reinterpret_cast<uintptr_t>(r->begin) & ~(kRgSize - 1);
+    for (; a < reinterpret_cast<uintptr_t>(r->end); a += kRgSize) {
+        SetRegionGen(a, region_gen);
+    }
 
     total_allocated_bytes_.fetch_add(region_size, std::memory_order_relaxed);
     return r;
@@ -1358,6 +1384,7 @@ extern "C" void chaos_gc_collect() noexcept {
     GcCoordinator::Instance().RequestGlobalGc();
 #else
     CHAOS_IL2CPP_LOG_DEBUG("CRAG", "chaos_gc_collect requested");
+    GcVerifyHeap();   // entry self-check (HeapVerify level > 0)
 
     // Step 1: Young collection on the shared young generation (if any).
     // Uses g_young_gen.bump to determine if there are live nursery objects,
@@ -1400,6 +1427,8 @@ extern "C" void chaos_gc_collect() noexcept {
 
     // Step 3: Run pending finalizers.
     G_OldGen().RunFinalizers();
+
+    GcVerifyHeap();   // exit self-check (HeapVerify level > 0)
 
 #endif  // CHAOS_IL2CPP_GC_SERVER
 }

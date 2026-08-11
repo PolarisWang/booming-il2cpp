@@ -132,6 +132,10 @@ public:
     /// caller can fix up references (e.g., via GlobalRelocate-style walk).
     CHAOS_IL2CPP_SIZE Compact(std::vector<std::pair<void*, void*>>& out_relocations);
 
+    /// Diagnostics accessor for the active segment list (GCVerify / tooling).
+    /// Returns the head of segment_list_ (may be null).  Not for mutation.
+    LohSegment* SegmentListForDiag() const noexcept { return segment_list_; }
+
 private:
     /// Allocate a new segment from the OS.
     LohSegment* AllocateSegment(CHAOS_IL2CPP_SIZE min_size);

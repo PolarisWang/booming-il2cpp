@@ -33,7 +33,8 @@ namespace chaos::il2cpp::runtime_core {
     INT_CONFIG(LohThreshold,         "LOHThreshold",     85 * 1024,        "large-object-heap threshold (bytes)")    \
     INT_CONFIG(ParallelMarkWorkers,  "ParallelMarkWorkers", 8,             "max parallel-mark workers")              \
     INT_CONFIG(HeapHardLimitMB,      "HeapHardLimitMB",  0,                "hard heap limit (MB, 0=disabled)")        \
-    INT_CONFIG(HeapSoftLimitMB,      "HeapSoftLimitMB",  0,                "soft heap limit (MB, 0=disabled)")
+    INT_CONFIG(HeapSoftLimitMB,      "HeapSoftLimitMB",  0,                "soft heap limit (MB, 0=disabled)")         \
+    INT_CONFIG(HeapVerify,           "HeapVerify",       0,                "GC self-verify level (0=off,1=region-gen,2=full)")
 
 // ── Internal config accessor ───────────────────────────────────────────
 // A single struct populated once at init from env (or compile-time defaults).

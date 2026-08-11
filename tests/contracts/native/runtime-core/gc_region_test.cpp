@@ -287,6 +287,27 @@ static void test_region_gen() {
     uintptr_t unmapped = static_cast<uintptr_t>(UINTPTR_MAX) ^ 4u;  // far from real regions
     if (GetRegionGen(unmapped) != kRegionGenOld) FAIL("GetRegionGen(uncovered) != old conservative");
 
+    // (4) GcMarkRangeOld marks a raw (non-Region, old-gen/LOH-like) VA range OLD.
+    // This is the layer-1 fix: old-gen/LOH pages are allocated by a separate
+    // allocator and would otherwise read a stale/clobbered byte; marking the
+    // range OLD makes the generation-aware barrier card them (CoreCLR
+    // set_region_gen_num analog).  Using a range on a fake heap aligned to +16MB
+    // guarantees it maps to dedicated (non-nursery) 4MB chunks.
+    void* raw = calloc(1, 16 * 1024 * 1024);
+    if (raw == nullptr) { FAIL("raw calloc failed"); return; }
+    uintptr_t rawb = reinterpret_cast<uintptr_t>(raw) & ~(static_cast<uintptr_t>(1) << kRegionGenShift);
+    rawb += (static_cast<uintptr_t>(1) << kRegionGenShift);  // 4MB-aligned, clear of low cells
+    uintptr_t raw_end = rawb + 1024 * 1024;                  // 1MB range
+    SetRegionGen(rawb, kRegionGenYoung);                     // simulate a prior young clobber
+    if (GetRegionGen(rawb) != kRegionGenYoung) FAIL("pre-mark: not young");
+    GcMarkRangeOld(rawb, raw_end);
+    bool all_old = true;
+    for (uintptr_t a = rawb; a < raw_end; a += (static_cast<uintptr_t>(1) << kRegionGenShift)) {
+        if (GetRegionGen(a) != kRegionGenOld) { all_old = false; break; }
+    }
+    if (!all_old) FAIL("GcMarkRangeOld did not mark all covered 4MB chunks OLD");
+    std::free(raw);
+
     mgr.FreeRegion(nursery->id);
     mgr.FreeRegion(gen1->id);
     mgr.FreeRegion(tenured->id);

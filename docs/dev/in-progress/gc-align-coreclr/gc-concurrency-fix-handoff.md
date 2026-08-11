@@ -52,3 +52,37 @@ run:  artifacts/native-runtime-core-test/Debug/chaos_gc_region_barrier_stress_te
 - 全量 GC 单测无回归。
 - 多平台指针语义（`std::atomic`/barrier 内存序）无平台差异；JIT/AOT 两态验证。
 - 热更（解释器路径）不受影响；域卸载仍 0-reg 语义。
+
+---
+
+## ⚠️ 修正：专门会话 2026-08-10 实测发现"store-then-barrier"诊断不完整
+
+本专门会话复现并逐层分离，发现**真正根因与上方"store-then-barrier 竞态"不同**（该假设已被
+实验否定），已回滚所有代码改动（复现器保持 HEAD 已知失败状态）。证据链：
+
+1. **HEAD 基线**被证明确实失败：5/10，悬挂数随机（53 / 212），thread 不一定（多为 7）。
+2. **DIAG-ALLOC（分配后立即）**：8 个 old-gen message 对象 `region_gen=2`（正确）；
+   **workers 跑 30ms 后**：4 个（old[0-3]）`region_gen=0(young!)`、`IsDirty=0`。
+   → 屏障 `if dst_gen==0 return` **跳过 carding** → 这些 old→nursery 边永不进卡 → young-GC
+   Phase-1 漏扫 → 被引用对象被收集 → dangling。
+3. **region-gen 字节踩踏**：`SetRegionGen` 用 4MB 粒度(`kRegionGenShift=22`)；旧代页(VirtualAlloc
+   独立池)与 nursery/Gen1 Region 落在同一 4MB chunk → nursery `SetRegionGen(r->begin, young=0)`
+   覆盖旧代字节 → 我的 `GcMarkRangeOld` 被后续覆盖回 0。**不是屏障逻辑错，是"4MB region-gen 粒度
+   碰撞 + 旧代页不归 RegionManager 管理"**。
+4. **修复尝试**：`GcMarkRangeOld`(alloc 标记 OLd) + 屏障改 `RegionManager::IsNurseryPointer`
+   （精确实时 nursery range，非 4MB 字节）→ 悬挂从随机(53/212) 变成 **确定性 212/thread=7 恒定**。
+   → **证明还藏一层：即便屏障正确 card 所有 old-gen，young-GC 扫描/晋升仍系统性漏掉 thread-7 的
+   引用（或晋升后 `IsInOldGen(tenured)` 判定为 false 计为 dangling）。** 需继续查
+   `gc_young_collector.cpp` Phase-1/2 对 thread-7（最后写的）old 页的扫描覆盖与晋升路径。
+5. **SPB 假设被否定**：worker 在 store+barrier 前加 blocking `SafepointPoll()` 仍确定性 212/thread=7
+   → 不是 SPB ack-and-conting 真并发，而是**确定性 GC 扫描/晋升缺陷**。
+
+## 下一步（专门会话继续时）
+
+- 追 `gc_young_collector.cpp` Phase-1：thread-7 的 old-gen message 页是否真被
+  `ScanDirtyCardsInPagesBatched` 扫到（`page_list_`/`in_use`/扫到的 card cell 数）。
+- 追晋升（`GcScavengeObjectKnownNursery`）后 slot 是否更新为 tenured 地址、`IsInOldGen(tenured)`
+  判定。`cards=8` 扫描 vs 8 message 对象 × ~3 card cell 的预期 ~24，倾向"扫描覆盖不全"。
+- 修复方向建议：a) 旧代页归属原生 region 或改用精确 nursery-range 判定（已实验）；b) Phase-1 扫描
+  覆盖 thread-7 页；c) 晋升 slot 回写 + IsInOldGen 一致。**三选一或组合，需设计拍板。**
+

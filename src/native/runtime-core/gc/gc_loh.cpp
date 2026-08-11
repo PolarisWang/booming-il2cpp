@@ -185,6 +185,11 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
     GcRegisterHeapRange(
         reinterpret_cast<uintptr_t>(payload),
         reinterpret_cast<uintptr_t>(payload) + seg->payload_size);
+    // Mark LOH payload region-gen bytes OLD so the generation-aware barrier
+    // cards cross-gen stores into LOH objects (mirror old-gen pages).
+    GcMarkRangeOld(
+        reinterpret_cast<uintptr_t>(payload),
+        reinterpret_cast<uintptr_t>(payload) + seg->payload_size);
     std::memset(payload, 0, seg->payload_size);
     return payload;
 }

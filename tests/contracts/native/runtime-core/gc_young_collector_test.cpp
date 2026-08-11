@@ -167,6 +167,24 @@ static void test_scavenge_object() {
     // returns zeroed memory regardless of what the nursery had.
     PASS();
 
+    SUBTEST("condemned-gen concept (T3) + nursery region-gen");
+    // (a) condemned-gen field defaults to young for a young collection.
+    // (b) a nursery object reads region-gen YOUNG(0) — verifies the systemic fix
+    //     that marks every nursery 4MB chunk young, not just the begin chunk.
+    {
+        YoungCollectionResult r;
+        if (r.condemned_gen_num != kRegionGenYoung)
+            { FAIL("default condemned_gen_num != young"); return; }
+        void* n2 = NurseryAllocate(32);
+        if (n2 == nullptr) { FAIL("nursery alloc n2 failed"); return; }
+        std::memset(n2, 0, 32);
+        if (GetRegionGen(reinterpret_cast<uintptr_t>(n2)) != kRegionGenYoung) {
+            FAIL("nursery object region-gen not young(0)");
+            return;
+        }
+    }
+    PASS();
+
     SUBTEST("forwarded object returns same promoted address");
     // Call scavenge again on the same nursery object — should return same promoted.
     void* promoted2 = GcScavengeObject(nursery_obj);

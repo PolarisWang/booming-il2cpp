@@ -86,6 +86,12 @@ extern "C" void chaos_gc_dirty_card(const void* obj) noexcept {
 // ops), no asm, no OS calls.  The legacy single-arg chaos_gc_dirty_card(dst)
 // remains for callers without a ref operand (conservative: non-gen0 always
 // mark).  ref==nullptr is a degenerate store and never needs a card.
+//
+// The region→gen table (GetRegionGen) is keyed by addr>>22 (4MB).  It must be
+// correctly populated for every old-gen/LOH page: see GcMarkRangeOld, which
+// old-gen/LOH page allocation now calls so their 4MB bytes are OLD (gen 2) and
+// a co-located nursery/Gen1 SetRegionGen(.., young) cannot mislabel an old page
+// as gen0 (which would skip carding → dropped old→nursery edges).
 extern "C" void chaos_gc_dirty_card_dst_ref(const void* dst, const void* ref) noexcept {
     if (dst == nullptr) return;
     uintptr_t dst_addr = reinterpret_cast<uintptr_t>(dst);

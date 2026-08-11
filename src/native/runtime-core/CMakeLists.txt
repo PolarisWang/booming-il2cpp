@@ -133,6 +133,8 @@ add_library(chaos_runtime_core STATIC
     gc/gc_scheduler.cpp
     gc/gc_region.h
     gc/gc_region.cpp
+    gc/gc_diagnostics.h
+    gc/gc_diagnostics.cpp
     gc/gc_root_change.h
     gc/gc_root_change.cpp
     gc/gc_card_table.h

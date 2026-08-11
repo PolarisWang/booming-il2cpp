@@ -114,6 +114,23 @@ inline void SetRegionGen(uintptr_t addr, uint8_t gen) noexcept {
     g_region_to_gen[idx] = gen & kRegionGenMask;
 }
 
+/// Mark every 4MB region-gen byte covering [@a start, @a end) as OLD (gen 2).
+/// Old-gen / LOH pages are allocated by their own (non-Region) allocators and
+/// are registered only with the card table; call this when such a page is
+/// committed so the generation-aware write barrier (chaos_gc_dirty_card_dst_ref)
+/// treats the page as mature and dirty-cards cross-gen stores into it.
+///
+/// Rationale (CoreCLR-aligned): CoreCLR's single region allocator calls
+/// set_region_gen_num on every region, so each basic region's gen byte is owned
+/// by that region and never collides across allocators.  Chaos's old-gen/LOH
+/// pages are a separate VA pool; without this marking, a co-located nursery/Gen1
+/// SetRegionGen(..., young) can overwrite an old page's 4MB chunk byte to 0, and
+/// the barrier will read gen0 and skip carding → dropped old→nursery edges.
+///
+/// Thread-safe when called under the same lock that serializes page commits
+/// (old-gen / LOH allocation).  Declared here; implemented in gc_region.cpp.
+void GcMarkRangeOld(uintptr_t start, uintptr_t end) noexcept;
+
 // ── Forward declarations ──────────────────────────────────────
 class RegionManager;
 

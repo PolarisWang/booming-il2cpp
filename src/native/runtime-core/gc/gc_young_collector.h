@@ -35,6 +35,13 @@ struct YoungCollectionResult {
     CHAOS_IL2CPP_SIZE dirty_cards_scanned; // Cards scanned for cross-gen refs
     bool              timed_out;           // True if kMaxPromoteObjects was reached
 
+    /// Condemned generation for this collection (align CoreCLR gc_mark's
+    /// condemned_gen, mark_phase.cpp:1393).  Objects whose region generation is
+    /// NEWER than this are not promoted/marked in this collection (their contents
+    /// are handled by a younger collection / never need the older-gen treatment).
+    /// For a young (nursery) collection this is kRegionGenYoung (0).
+    uint8_t condemned_gen_num{kRegionGenYoung};
+
     /// Cheney BFS worklist: tenured addresses of promoted objects, to be
     /// scanned in Phase 3 for transitive closure.  The array is pre-allocated
     /// by the caller (GcYoungCollection) and filled by GcScavengeObject.

@@ -146,6 +146,9 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
     if (obj == nullptr) return nullptr;
     if (!IsInNursery(obj)) {
         // Already in tenured — no copy needed.
+        // (The IsInNursery gate IS the condemned filter for a young collection:
+        //  only nursery refs are promoted.  condemned_gen_num is tracked for
+        //  deeper Gen1/old collections but the young path uses the precise range.)
         return obj;
     }
     if (IsForwarded(obj)) {
@@ -245,6 +248,8 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
 void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
     if (obj == nullptr) return nullptr;
     // Caller already verified obj is in nursery — skip IsInNursery check.
+    // (condemned_gen_num is tracked for deeper collections; the young path
+    //  relies on the caller's IsInNursery gate, not the region-gen byte.)
     if (IsForwarded(obj)) {
         return GetForwardingAddress(obj);
     }
