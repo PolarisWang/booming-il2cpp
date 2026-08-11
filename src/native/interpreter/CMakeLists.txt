@@ -18,7 +18,6 @@ add_library(chaos_interpreter STATIC
     interp_frame_scanner.cpp
     osr_state.cpp
     osr_state.h
-    register_vm.h
     register_vm_profiler.cpp
     register_vm_profiler.h
     )
