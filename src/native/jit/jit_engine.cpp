@@ -425,8 +425,8 @@ private:
     void StoreFpr(uint8_t xmm_reg, uint32_t vreg) noexcept;
     void EmitSafepointPoll() noexcept;
     void EmitInlineDirtyCard(uint8_t obj_reg) noexcept;
-    void EmitGprArithmetic(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept;
-    void EmitFprArithmetic(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept;
+    void EmitIntegerArithmetic(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept;
+    void EmitFloatingArithmetic(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept;
     void EmitBitwise(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept;
     void EmitShift(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2, int32_t imm) noexcept;
     void ResolveBranches() noexcept;
@@ -845,8 +845,8 @@ void NativeCodeGenerator::PropagateTypes(const interpreter::RegisterInstruction&
     }
 }
 
-void NativeCodeGenerator::EmitGprArithmetic(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept {
-    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitGprArithmetic");
+void NativeCodeGenerator::EmitIntegerArithmetic(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitIntegerArithmetic");
     // Div/Rem have implicit eax/edx/ecx register requirements.
     bool has_implicit =
         (opc == IROpCode::Div || opc == IROpCode::Rem || opc == IROpCode::DivUn || opc == IROpCode::RemUn);
@@ -938,8 +938,8 @@ void NativeCodeGenerator::EmitGprArithmetic(IROpCode opc, uint32_t dst, uint32_t
     StoreGpr(op_reg, dst);
 }
 
-void NativeCodeGenerator::EmitFprArithmetic(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept {
-    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitFprArithmetic");
+void NativeCodeGenerator::EmitFloatingArithmetic(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitFloatingArithmetic");
     // Pick the working XMM register: prefer src1's colored reg, else XMM0.
     uint8_t op_xmm = 0;
     if (has_graph_coloring_ && src1 >= kGprCount) {
@@ -984,7 +984,7 @@ void NativeCodeGenerator::EmitBitwise(IROpCode opc, uint32_t dst, uint32_t src1,
                 src2_reg = c;
         }
     }
-    // Same collision guard as EmitGprArithmetic: when op_reg and src2_reg
+    // Same collision guard as EmitIntegerArithmetic: when op_reg and src2_reg
     // share a color and src1 != src2, load src2 into a scratch register first.
     bool src2_loaded = false;
     if (has_graph_coloring_ && op_reg == src2_reg && src1 != src2) {
@@ -1029,7 +1029,7 @@ void NativeCodeGenerator::EmitShift(IROpCode opc, uint32_t dst, uint32_t src1, u
         if (c != 0xFF)
             op_reg = c;
     }
-    // Collision guard (mirrors EmitGprArithmetic): a variable shift computes
+    // Collision guard (mirrors EmitIntegerArithmetic): a variable shift computes
     // "dst = src1 << src2", where src2 is the shift-count vreg that must land
     // in CL (AT::kScratchB).  When src2's graph color equals op_reg
     // (e.g. in-place "dst = src1 << dst", where dst and src2 are the same vreg
@@ -1732,10 +1732,10 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             if (!instr.has_src1() || !instr.has_dst())
                 return false;
             if (instr.src1_reg() < vreg_types_.size() && vreg_types_[instr.src1_reg()] >= kTypeFloat32)
-                EmitFprArithmetic(opc, instr.dst_reg(), instr.src1_reg(),
+                EmitFloatingArithmetic(opc, instr.dst_reg(), instr.src1_reg(),
                                   instr.has_src2() ? instr.src2_reg() : UINT32_MAX);
             else
-                EmitGprArithmetic(opc, instr.dst_reg(), instr.src1_reg(),
+                EmitIntegerArithmetic(opc, instr.dst_reg(), instr.src1_reg(),
                                   instr.has_src2() ? instr.src2_reg() : UINT32_MAX);
             return true;
         }

@@ -115,17 +115,19 @@ TEST(CodegenAbi, GcSlotEncodeInterior) {
 }
 
 TEST(CodegenAbi, GcSlotEncodeMaxOffset) {
-    // Maximum offset should fit in 12 bits
-    uint32_t encoded = CHAOS_GC_SLOT_ENCODE(0xFFF, CHAOS_GC_SLOT_KIND_OBJECT);
-    EXPECT_EQ(encoded & CHAOS_GC_SLOT_OFFSET_MASK, 0xFFFu);
+    // Maximum offset fits in the 31-bit offset field (top bit = interior kind).
+    uint32_t encoded = CHAOS_GC_SLOT_ENCODE(0x7FFFFFFF, CHAOS_GC_SLOT_KIND_OBJECT);
+    EXPECT_EQ(encoded & CHAOS_GC_SLOT_OFFSET_MASK, 0x7FFFFFFFu);
 }
 
 TEST(CodegenAbi, GcSlotMasks) {
-    EXPECT_EQ(CHAOS_GC_SLOT_OFFSET_MASK, 0xFFFu);
-    EXPECT_EQ(CHAOS_GC_SLOT_KIND_OFFSET, 12u);
-    EXPECT_EQ(CHAOS_GC_SLOT_KIND_MASK, 0x1000u);
+    // T2.2-C1: slot offset widened from 12-bit (4096) to 31-bit, with the
+    // interior kind flag moved to the top bit (bit 31).
+    EXPECT_EQ(CHAOS_GC_SLOT_OFFSET_MASK, 0x7FFFFFFFu);
+    EXPECT_EQ(CHAOS_GC_SLOT_KIND_OFFSET, 31u);
+    EXPECT_EQ(CHAOS_GC_SLOT_KIND_MASK, 0x80000000u);
     EXPECT_EQ(CHAOS_GC_SLOT_KIND_OBJECT, 0u);
-    EXPECT_EQ(CHAOS_GC_SLOT_KIND_INTERIOR, 0x1000u);
+    EXPECT_EQ(CHAOS_GC_SLOT_KIND_INTERIOR, 0x80000000u);
 }
 
 TEST(CodegenAbi, GcSlotMapHdrSize) {
