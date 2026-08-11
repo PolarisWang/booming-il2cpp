@@ -116,6 +116,13 @@ inline uint32_t FprOff(uint32_t vreg) noexcept {
     return kFprFileOff + (vreg - kGprCount) * kFprSlotSize;
 }
 
+// Register convention constants (mirrors ir_reg_alloc.h convention)
+// r0-r7   = argument registers (mapped from LdArg operand_index)
+// r8-r15  = local variable registers (mapped from LdLoc/StLoc operand_index)
+// r16+    = evaluation stack virtual registers
+static constexpr uint32_t kArgRegCount = 8;
+static constexpr uint32_t kLocalRegBase = 8;
+
 /// Compilation tier for JIT code generation.
 /// Tier 0 produces code quickly with no optimizations (stack-only register access,
 /// no liveness, no deopt metadata, no SEH).  Tier 1 is the full pipeline with
