@@ -52,27 +52,6 @@ namespace chaos::il2cpp::jit {
 // Used by the hotpatch callback to update RX slot tables when a method is patched.
 ReverseSlotMap g_reverse_slot_map;
 
-// ARM64: patch a forward B.cond instruction (local forward jump).
-// On ARM64, B.cond has a 19-bit imm19 field (±1MB).  For forward jumps
-// within the same basic block (always < 1MB), reconstruct the instruction
-// with the correct imm19 encoding.
-#if defined(__aarch64__)
-inline void PatchArm64Bcond(CodeBuffer& buf, uint32_t patch_pos, uint32_t target_pos) noexcept {
-    int32_t disp = static_cast<int32_t>(target_pos - (patch_pos + 4));
-    uint32_t instr = buf.Load32(patch_pos);
-    uint32_t imm19 = (static_cast<uint32_t>(disp) >> 2) & 0x7FFFF;
-    buf.Patch32(patch_pos, (instr & 0xFF00001Fu) | (imm19 << 5));
-}
-/// ARM64: patch a forward B (unconditional) instruction.
-/// B has a 26-bit imm26 field (±128MB), sufficient for any method-local jump.
-inline void PatchArm64B(CodeBuffer& buf, uint32_t patch_pos, uint32_t target_pos) noexcept {
-    int32_t disp = static_cast<int32_t>(target_pos - (patch_pos + 4));
-    uint32_t instr = buf.Load32(patch_pos);
-    uint32_t imm26 = (static_cast<uint32_t>(disp) >> 2) & 0x3FFFFFF;
-    buf.Patch32(patch_pos, (instr & 0xFC000000u) | imm26);
-}
-#endif
-
 // ── Codename glossary (expansion for the terse tags used below) ─────────
 // V1 : the original register-CACHING allocator (fixed kCacheableRegs, freq-based
 //      hit tracking, write-through to the GPR stack file on spill).
