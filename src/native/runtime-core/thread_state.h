@@ -150,24 +150,20 @@ struct ManagedThread {
     /// Set to true when this thread is preemptively suspended (POSIX SIGUSR2).
     std::atomic<bool> preemptive_suspended{false};
 
-    /// ucontext_t pointer captured by the SA_SIGINFO signal handler during
-    /// preemptive suspend.  Provides access to the interrupted thread's
-    /// register state (RIP, RSP, RBP on x64) for precise root scanning and
-    /// optional RIP redirect (thread hijacking trampoline).
-    ///
-    /// Written by PreemptiveSuspendHandler from PalPreemptGetUcontext(),
-    /// cleared after safepoint release.  Valid only on POSIX (Linux) when
-    /// SA_SIGINFO is active; always nullptr on other platforms and outside
-    /// preemptive suspend context.
-    std::atomic<const void*> preempt_ucontext{nullptr};
+    /// PAL capture-slot index for this thread's captured register state (Phase 2
+    /// C).  Set by the target thread itself in the preemptive-suspend callback
+    /// (PalGetCaptureSlot()) and read cross-thread by the GC.  -1 = no reliable
+    /// capture on this platform (Windows APC-park).  The ucontext itself is owned
+    /// by the PAL (PalSetPreemptContext / PalCaptureThreadContext), not here.
+    int gc_capture_slot{-1};
 
     // ── Phase 2: GC register window ─────────────────────────────────
     /// Captured physical-GPR value file for this thread at GC suspension,
-    /// indexed by physical x64 register number (RAX=0..R15=15).  Populated by
-    /// the suspend path (Windows: GetThreadContext on os_handle; Linux: ucontext
-    /// gregs) and read by GcScanAllThreadRoots to report safepoint register
-    /// roots.  gc_num_gprs==0 (or array zeros) means no window is available and
-    /// register-root reporting is skipped (stack slots remain the scan source).
+    /// indexed by physical x64 register number (RAX=0..R15=15).  Filled by
+    /// CaptureThreadRegisterWindow from the PAL capture slot, read by
+    /// GcScanAllThreadRoots to report safepoint register roots.  gc_num_gprs==0
+    /// means no window is available and register-root reporting is skipped
+    /// (stack slots remain the scan source).
     uint64_t gc_reg_file[16]{};
     uint32_t gc_num_gprs{0};
 

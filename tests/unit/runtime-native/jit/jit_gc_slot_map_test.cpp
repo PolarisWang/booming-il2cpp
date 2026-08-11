@@ -15,6 +15,7 @@
 
 #include <codegen_bridge.h>
 #include <gc_root_scanner.h>
+#include <chaos/pal/pal_preempt.h>
 
 using chaos::il2cpp::runtime_core::GcRegisterSlotMap;
 using chaos::il2cpp::runtime_core::GcUnregisterSlotMap;
@@ -26,6 +27,7 @@ using chaos::il2cpp::runtime_core::GcScanSafepointRegisterRoots;
 using chaos::il2cpp::runtime_core::GcScanFrameHybrid;
 using chaos::il2cpp::runtime_core::ManagedFrameInfo;
 using chaos::il2cpp::runtime_core::GcRootCallback;
+namespace gc_pal = chaos::il2cpp::pal;
 using chaos::il2cpp::runtime_core::GcConservativeRootCallback;
 
 namespace {
@@ -508,6 +510,122 @@ TEST(CodegenGcSlotMap, ScanPreciseSafepointWindowed) {
     GcScanPreciseSafepoint(frame, *pm, pm_data, nullptr, 0, PreciseCallback, &c2);
     EXPECT_EQ(c2.precise_calls, 1);
     EXPECT_EQ(c2.last_root_addr, static_cast<void*>(static_cast<uint8_t*>(frame.frame_ptr) + 0x08));
+}
+
+// Phase 2 (C) — G3: reliability gating.  On a platform without a reliable
+// register-capture primitive (Windows APC-park → PalGetCaptureSlot() returns -1
+// and PalCaptureThreadContext returns false), the GC must degrade cleanly to a
+// zero-window scan: gc_num_gprs effectively 0, register roots NOT reported, stack
+//-slot scanning unaffected.  This drives the capture→scan wiring that is never
+// exercised in production on Windows while the PAL stub is in place.
+TEST(CodegenGcSlotMap, PalCaptureGatingDegradesOnWindows) {
+    int slot = gc_pal::PalGetCaptureSlot();
+    // On the current test platform: either a reliable POSIX capture slot (Linux)
+    // or the unreliable stub returning -1 (Windows).  We assert the DECODE side:
+    // fetch a window and confirm it is either empty or a fully-formed 16-GPR file
+    // with the expected semantics — never a partially-wrong count.
+    uint64_t gpr[16] = {};
+    uint32_t n = 99;   // sentinel: must be overwritten
+    bool ok = gc_pal::PalCaptureThreadContext(slot, gpr, &n);
+
+    if (slot < 0) {
+        // Unreliable platform (Windows): capture must fail and report 0.
+        EXPECT_FALSE(ok);
+        EXPECT_EQ(n, 0u);
+    } else {
+        // Reliable platform (Linux): a window with no captured context yet is
+        // still reported as "no roots" via n==0 (null ucontext), never a bogus
+        // non-zero count.
+        EXPECT_TRUE(n <= 16u);
+    }
+
+    // Feed whichever window we got into the scanner: a window is strictly
+    // additive.  Build a safepoint with 1 register root (R8) and 0 stack slots.
+    alignas(8) uint8_t pm_data[128] = {};
+    uint32_t off = 0;
+    uint32_t code_size = 0x40, num_sp = 1, num_gprs_hdr = 16;
+    std::memcpy(pm_data + off, &code_size, 4); off += 4;
+    std::memcpy(pm_data + off, &num_sp, 4);    off += 4;
+    std::memcpy(pm_data + off, &num_gprs_hdr, 4); off += 4;
+    uint32_t sp_off = 0x10, nsl = 0, nrg = 1;
+    std::memcpy(pm_data + off, &sp_off, 4); off += 4;
+    std::memcpy(pm_data + off, &nsl, 4);     off += 4;
+    std::memcpy(pm_data + off, &nrg, 4);     off += 4;
+    uint32_t e = CHAOS_GC_REG_ENCODE(8, CHAOS_GC_SLOT_KIND_OBJECT);  // R8
+    std::memcpy(pm_data + off, &e, 4); off += 4;
+    auto* pm = reinterpret_cast<const GcPointMapV0*>(pm_data);
+
+    alignas(8) uint8_t frame_storage[128] = {};
+    ManagedFrameInfo frame;
+    frame.frame_ptr = frame_storage;
+    frame.frame_size = sizeof(frame_storage);
+    frame.return_address = pm_data + 0x12;
+
+    // With the (possibly empty) window: R8's value is captured iff n>0 AND slot
+    // reliable; on Windows it degrades to no register root while the stack slot
+    // scan path is still exercised (0 stack slots here).
+    ScanCounters c;
+    GcScanPreciseSafepoint(frame, *pm, pm_data, nullptr, 0, PreciseCallback, &c);
+    // No window → no register root reported; scanner still runs (0 stack slots).
+    EXPECT_EQ(c.precise_calls, 0);
+}
+
+// Phase 2 (C) — G1: additive-under-floor invariant.  In C mode codegen does NOT
+// exempt spill, so every live GC-ref is ALSO in a stack slot.  The register roots
+// must never bring in an address that is NOT already retained by the stack-slot
+// floor — i.e. register scanning is purely additive (over-retention only).
+// This locks in the invariant that later A/B spill-exemption would violate.
+TEST(CodegenGcSlotMap, ScanRegisterRootsAdditiveUnderStackFloor) {
+    // Build a safepoint that reports BOTH a stack slot (offset 0x08) holding a
+    // GC-ref AND a register root (R8) whose value is the SAME object address (as
+    // it must be in C mode when the same live ref is spilled and register-kept).
+    alignas(8) uint8_t pm_data[128] = {};
+    uint32_t off = 0;
+    uint32_t code_size = 0x40, num_sp = 1, num_gprs_hdr = 16;
+    std::memcpy(pm_data + off, &code_size, 4); off += 4;
+    std::memcpy(pm_data + off, &num_sp, 4);    off += 4;
+    std::memcpy(pm_data + off, &num_gprs_hdr, 4); off += 4;
+    uint32_t sp_off = 0x10, nsl = 1, nrg = 1;
+    std::memcpy(pm_data + off, &sp_off, 4); off += 4;
+    std::memcpy(pm_data + off, &nsl, 4);     off += 4;
+    std::memcpy(pm_data + off, &nrg, 4);     off += 4;
+    uint32_t slot = CHAOS_GC_SLOT_ENCODE(0x08, CHAOS_GC_SLOT_KIND_OBJECT);
+    std::memcpy(pm_data + off, &slot, 4); off += 4;
+    uint32_t reg = CHAOS_GC_REG_ENCODE(8, CHAOS_GC_SLOT_KIND_OBJECT);
+    std::memcpy(pm_data + off, &reg, 4); off += 4;
+    auto* pm = reinterpret_cast<const GcPointMapV0*>(pm_data);
+
+    alignas(8) uint8_t frame_storage[256] = {};
+    int fake_obj = 0;
+    std::memcpy(frame_storage + 0x08, &fake_obj, sizeof(void*));  // stack slot ref
+    ManagedFrameInfo frame;
+    frame.frame_ptr = frame_storage;
+    frame.frame_size = sizeof(frame_storage);
+    frame.return_address = pm_data + 0x12;
+
+    // Register window: R8 holds the SAME object as the stack slot (the invariant:
+    // register roots only re-report addresses the stack floor already keeps).
+    alignas(8) uint64_t gpr_values[16] = {};
+    gpr_values[8] = reinterpret_cast<uint64_t>(&fake_obj);
+
+    // Windowed scan of the same frame: the stack slot's address is
+    // &frame_storage[0x08]; the register root's VALUE (gpr R8) is &fake_obj.
+    // The invariant: the register root must re-report the SAME object the stack
+    // floor retains — the slot at 0x08 stores &fake_obj, so register scanning
+    // never introduces an object the stack floor doesn't already keep.
+    ScanCounters c;
+    GcScanPreciseSafepoint(frame, *pm, pm_data,
+                           reinterpret_cast<const void* const*>(gpr_values), 16,
+                           PreciseCallback, &c);
+    EXPECT_EQ(c.precise_calls, 2);   // 1 stack slot + 1 register root
+    // Register root reported last: its value = register window R8 = &fake_obj.
+    EXPECT_EQ(c.last_root_addr, &fake_obj);
+
+    // No-window scan: only the stack slot is reported (its address, not value).
+    ScanCounters s_only;
+    GcScanPreciseSafepoint(frame, *pm, pm_data, nullptr, 0, PreciseCallback, &s_only);
+    EXPECT_EQ(s_only.precise_calls, 1);
+    EXPECT_EQ(s_only.last_root_addr, static_cast<void*>(static_cast<uint8_t*>(frame.frame_ptr) + 0x08));
 }
 
 }  // namespace

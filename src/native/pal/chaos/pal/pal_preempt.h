@@ -75,4 +75,33 @@ void PalPreemptiveSuspendAck(uint64_t epoch, PalEvent* suspend_event,
 /// of the current callback invocation.
 const void* PalPreemptGetUcontext() noexcept;
 
+/// ── Phase 2 (C): cross-platform register-window capture ────────────────
+/// Pure PAL ownership of per-thread captured register state, so the GC can read
+/// a suspended thread's physical GPRs without reaching into runtime-core state.
+///
+/// Every thread is allocated a lazy, permanent capture slot (index into a PAL
+/// slot pool) via PalGetCaptureSlot().  The suspend callback stores the captured
+/// ucontext under the thread's OWN slot (PalSetPreemptContext); the GC reads it
+/// cross-thread via the SAME slot index (which the runtime persists on
+/// ManagedThread::gc_slot), then PalCaptureThreadContext fills the 16 GPRs.
+///
+/// Reliability gate: a platform/thread without a reliable capture returns
+/// false / -1, and the GC must then keep gc_num_gprs==0 (skip register-root
+/// scanning, keep the stack-slot floor).  The window is ALWAYS additive to stack
+/// slots — never the sole retention mechanism (never under-retains).
+
+/// Lazy per-thread capture-slot index; -1 when this platform/thread doesn't
+/// support reliable register capture (e.g. Windows APC-park architecture).
+int  PalGetCaptureSlot() noexcept;
+
+/// Store (non-null) or clear (null) the captured context for a thread's slot.
+/// Called by the target thread's suspend/clear path.  Uses release ordering so
+/// the cross-thread GC read (acquire) sees the stored pointer.
+void PalSetPreemptContext(int slot, const void* ucontext) noexcept;
+
+/// Fill @a gpr_values[16] (RAX=0..R15=15, x64) from @a slot's captured context.
+/// Returns true only when a reliable capture is present; sets *out_num_gprs=0
+/// and returns false when the platform/thread has no reliable window.
+bool PalCaptureThreadContext(int slot, uint64_t gpr_values[16], uint32_t* out_num_gprs) noexcept;
+
 }  // namespace chaos::il2cpp::pal

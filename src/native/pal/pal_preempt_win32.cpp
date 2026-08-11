@@ -42,4 +42,19 @@ void PalPreemptiveSuspendAck(uint64_t epoch, PalEvent* suspend_event,
     }
 }
 
+// ── Phase 2 (C): register-window capture (Win64) ───────────────────────
+// Reliability gate: under the current QueueUserAPC + PalEventWait suspend,
+// the suspended thread parks inside the APC/wait — GetThreadContext would return
+// the suspend machinery's frame, NOT the interrupted JIT-safepoint registers.
+// So capture is marked unreliable: PalGetCaptureSlot()=-1 and capture returns
+// false, which keeps the GC at gc_num_gprs=0 (register-root scanning skipped,
+// stack-slot floor preserved — never under-retains).  The real primitive
+// (SuspendThread + GetThreadContext) is a separate effort (plan 2b/B).
+int  PalGetCaptureSlot() noexcept { return -1; }
+void PalSetPreemptContext(int /*slot*/, const void* /*ucontext*/) noexcept {}
+bool PalCaptureThreadContext(int /*slot*/, uint64_t /*gpr_values*/[16], uint32_t* out_num) noexcept {
+    if (out_num) *out_num = 0;
+    return false;
+}
+
 }  // namespace chaos::il2cpp::pal

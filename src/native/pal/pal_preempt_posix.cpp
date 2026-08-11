@@ -80,4 +80,66 @@ const void* PalPreemptGetUcontext() noexcept {
     return tls_preempt_ucontext;
 }
 
+// ── Phase 2 (C): register-window capture (POSIX/x86-64) ─────────────────
+// Pure-PAL per-thread slot pool.  Each thread lazily allocates a slot index;
+// the signal handler stores its ucontext under that slot; the GC reads it
+// cross-thread via the SAME slot (persisted on ManagedThread::gc_slot).
+namespace {
+// Fixed slot pool sized for concurrently-suspended threads.  A thread is only
+// suspended during an STW safepoint, so a modest bound covers housekeeping + a
+// few managed threads; slots are reused across safepoints.
+static constexpr int kMaxCaptureSlots = 256;
+struct CapturedCtx { std::atomic<const void*> ucontext{nullptr}; };
+CapturedCtx g_captured[kMaxCaptureSlots];
+std::atomic<int> g_capture_slot_next{0};
+thread_local int t_capture_slot = -1;   // lazy per-thread slot index
+}  // namespace
+
+int PalGetCaptureSlot() noexcept {
+    if (t_capture_slot >= 0)
+        return t_capture_slot;
+    // Allocate the next free slot (spinning past the bound reuses slot 0; a
+    // thread is only captured during STW so collisions cannot overlap).
+    int slot = g_capture_slot_next.fetch_add(1, std::memory_order_relaxed);
+    if (slot >= kMaxCaptureSlots)
+        slot = slot % kMaxCaptureSlots;
+    t_capture_slot = slot;
+    return slot;
+}
+
+void PalSetPreemptContext(int slot, const void* ucontext) noexcept {
+    if (slot >= 0 && slot < kMaxCaptureSlots)
+        g_captured[slot].ucontext.store(ucontext, std::memory_order_release);
+}
+
+bool PalCaptureThreadContext(int slot, uint64_t gpr_values[16], uint32_t* out_num) noexcept {
+    if (out_num) *out_num = 0;
+    if (slot < 0 || slot >= kMaxCaptureSlots)
+        return false;
+    const void* uctx = g_captured[slot].ucontext.load(std::memory_order_acquire);
+    if (uctx == nullptr)
+        return false;
+    const auto* uc = static_cast<const ucontext_t*>(uctx);
+    const greg_t* g = uc->uc_mcontext.gregs;
+    // glibc gregs[] index -> physical x86-64 register (RAX=0..R15=15).
+    // glibc: REG_RAX=13 REG_RCX=14 REG_RDX=12 REG_RBX=11 REG_RSI=9 REG_RDI=8
+    //        REG_R8=0 REG_R9=1 REG_R10=2 REG_R11=3 REG_R12=4 REG_R13=5
+    //        REG_R14=6 REG_R15=7.
+    // x64-only for now (G7): ARM64 uses a different GPR count/layout.
+    gpr_values[0]  = static_cast<uint64_t>(g[REG_RAX]);
+    gpr_values[1]  = static_cast<uint64_t>(g[REG_RCX]);
+    gpr_values[2]  = static_cast<uint64_t>(g[REG_RDX]);
+    gpr_values[3]  = static_cast<uint64_t>(g[REG_RBX]);
+    gpr_values[8]  = static_cast<uint64_t>(g[REG_R8]);
+    gpr_values[9]  = static_cast<uint64_t>(g[REG_R9]);
+    gpr_values[10] = static_cast<uint64_t>(g[REG_R10]);
+    gpr_values[11] = static_cast<uint64_t>(g[REG_R11]);
+    gpr_values[12] = static_cast<uint64_t>(g[REG_R12]);
+    gpr_values[13] = static_cast<uint64_t>(g[REG_R13]);
+    gpr_values[14] = static_cast<uint64_t>(g[REG_R14]);
+    gpr_values[15] = static_cast<uint64_t>(g[REG_R15]);
+    if (out_num) *out_num = 16;
+    return true;
+}
+
 }  // namespace chaos::il2cpp::pal

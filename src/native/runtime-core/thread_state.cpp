@@ -329,13 +329,18 @@ static void PreemptiveSuspendHandler(uint64_t epoch) noexcept {
     if (thread == nullptr) return;
 
     // Capture ucontext from the PAL signal handler (only available
-    // on POSIX with SA_SIGINFO).  The GC coordinator reads this via
-    // GetPreemptSuspendUcontext() during the safepoint wait loop.
+    // on POSIX with SA_SIGINFO).  Phase 2 C: the ucontext is owned by PAL and
+    // keyed by this thread's capture slot (persisted so the GC can read it
+    // cross-thread).  The GC coordinator reads the register window via
+    // PalCaptureThreadContext during the safepoint wait loop.
+    // Defaults are safe on non-POSIX: slot -1 makes PalSetPreemptContext a no-op
+    // and PalCaptureThreadContext return false → GC keeps gc_num_gprs=0.
+    int cap_slot = -1;
+    const void* uctx = nullptr;
 #if !defined(_MSC_VER)
-    const void* uctx = chaos::il2cpp::pal::PalPreemptGetUcontext();
-    if (uctx != nullptr) {
-        thread->preempt_ucontext.store(uctx, std::memory_order_release);
-    }
+    uctx = chaos::il2cpp::pal::PalPreemptGetUcontext();
+    thread->gc_capture_slot = chaos::il2cpp::pal::PalGetCaptureSlot();
+    cap_slot = thread->gc_capture_slot;
 
     // Cooperative mode: redirect to trampoline instead of spin-waiting
     // on the signal stack.  The trampoline calls SafepointPoll() on the
@@ -373,19 +378,25 @@ static void PreemptiveSuspendHandler(uint64_t epoch) noexcept {
                 &thread->suspend_seq, &thread->suspend_ack);
         }
 
-        // Clear ucontext — the trampoline handles the actual wait.
-        thread->preempt_ucontext.store(nullptr, std::memory_order_release);
+        // Clear ucontext — the trampoline handles the actual wait.  Cooperative
+        // mode redirects RIP/RSP, so the saved ucontext is NOT a reliable JIT
+        // register window (G5): clear it so the GC sees no window for this thread.
+        chaos::il2cpp::pal::PalSetPreemptContext(cap_slot, nullptr);
         return;
     }
 #endif // !defined(_MSC_VER)
 
-    // Preemptive mode: standard ack + spin-wait on signal stack.
+    // Preemptive mode: standard ack + spin-wait on signal stack.  Expose the
+    // captured ucontext as this thread's register window so the GC reads it
+    // cross-thread during the safepoint (release ordering pairs with the GC's
+    // acquire on PalCaptureThreadContext).
+    chaos::il2cpp::pal::PalSetPreemptContext(cap_slot, uctx);
     chaos::il2cpp::pal::PalPreemptiveSuspendAck(
         epoch, thread->suspend_event,
         &thread->suspend_seq, &thread->suspend_ack);
 
-    // Clear ucontext after the safepoint is released.
-    thread->preempt_ucontext.store(nullptr, std::memory_order_release);
+    // Clear ucontext after the safepoint is released (the GC has scanned by now).
+    chaos::il2cpp::pal::PalSetPreemptContext(cap_slot, nullptr);
 }
 
 /// One-time initialization of the preemptive suspend subsystem.
@@ -588,45 +599,29 @@ extern "C" void ReleaseGlobalSafepoint(uint32_t /*epoch*/) noexcept {
     s_safepoint_depth = 0;
 }
 
-/// Phase 2: populate @a thread's register window (gc_reg_file[16],
-/// gc_num_gprs) from the capture mechanism available on this platform at GC
-/// suspension.  Indexed by physical x64 GPR (RAX=0..R15=15), matching the
-/// register encodings in GcSafepointV0.
-///   - POSIX/x86_64: derived from the preemptively-suspended thread's saved
-///     ucontext (uc_mcontext.gregs).  Only reliable for preemptive-suspended
-///     threads — cooperative/trampoline-redirected ones clear it.
-///   - Windows: populated by PalCaptureThreadContext (Phase 2b); until then
-///     gc_num_gprs stays 0 → register-root reporting is skipped (no window).
-/// A window is strictly additive to stack-slot scanning (never under-retains).
+/// Phase 2 (C): populate @a thread's register window (gc_reg_file[16],
+/// gc_num_gprs) via the cross-platform PAL capture primitive, from the thread's
+/// own capture slot (set in PreemptiveSuspendHandler).  Indexed by physical x64
+/// GPR (RAX=0..R15=15), matching the register encodings in GcSafepointV0.
+///   - Reliability gate: only a preemptively-suspended thread with a PAL-captured
+///     context yields a window.  Cooperative/trampoline-redirected threads and
+///     Windows (no reliable capture) leave gc_num_gprs=0 → register-root
+///     reporting is skipped (stack-slot floor preserved, never under-retains).
 static void CaptureThreadRegisterWindow(ManagedThread* thread) noexcept {
     thread->gc_num_gprs = 0;
-#if !defined(_MSC_VER) && defined(__x86_64__)
-    const void* uctx = thread->preempt_ucontext.load(std::memory_order_acquire);
-    // Only a preemptively-suspended thread has a reliable saved ucontext;
-    // cooperative threads have it redirected+cleared by the trampoline.
-    if (uctx == nullptr || !thread->preemptive_suspended.load(std::memory_order_acquire))
+    // Runtime-mode gate: only a preemptively-suspended thread is parked at its
+    // own JIT safepoint (cooperative threads are trampoline-redirected/cleared).
+    if (!thread->preemptive_suspended.load(std::memory_order_acquire))
         return;
-    const auto* uc = static_cast<const ucontext_t*>(uctx);
-    const greg_t* g = uc->uc_mcontext.gregs;
-    // glibc gregs[] index → physical x86-64 register number (RAX=0..R15=15).
-    // glibc: REG_RAX=13, REG_RCX=14, REG_RDX=12, REG_RBX=11, REG_RSI=9,
-    //        REG_RDI=8, REG_R8=0, REG_R9=1, REG_R10=2, REG_R11=3,
-    //        REG_R12=4, REG_R13=5, REG_R14=6, REG_R15=7.
-    uint64_t* regfile = thread->gc_reg_file;
-    regfile[0]  = static_cast<uint64_t>(g[REG_RAX]);
-    regfile[1]  = static_cast<uint64_t>(g[REG_RCX]);
-    regfile[2]  = static_cast<uint64_t>(g[REG_RDX]);
-    regfile[3]  = static_cast<uint64_t>(g[REG_RBX]);
-    regfile[8]  = static_cast<uint64_t>(g[REG_R8]);
-    regfile[9]  = static_cast<uint64_t>(g[REG_R9]);
-    regfile[10] = static_cast<uint64_t>(g[REG_R10]);
-    regfile[11] = static_cast<uint64_t>(g[REG_R11]);
-    regfile[12] = static_cast<uint64_t>(g[REG_R12]);
-    regfile[13] = static_cast<uint64_t>(g[REG_R13]);
-    regfile[14] = static_cast<uint64_t>(g[REG_R14]);
-    regfile[15] = static_cast<uint64_t>(g[REG_R15]);
-    thread->gc_num_gprs = 16;
-#endif  // !_MSC_VER && __x86_64__
+    // Platform gate: PAL returns false when no reliable capture exists for this
+    // slot (Windows APC-park) → gc_num_gprs stays 0.
+    uint64_t tmp[16];
+    uint32_t n = 0;
+    if (chaos::il2cpp::pal::PalCaptureThreadContext(thread->gc_capture_slot, tmp, &n) &&
+        n > 0) {
+        std::memcpy(thread->gc_reg_file, tmp, n * sizeof(uint64_t));
+        thread->gc_num_gprs = n;
+    }
 }
 
 void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, void* user_data), void* user_data) noexcept {
