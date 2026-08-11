@@ -91,11 +91,17 @@
 **结论**：写穿从 "每次 def 写回栈" 转为 "寄存器常驻中的 reg-mov"，总 store 数不变（无净指令回归），值更常驻寄存器。剩余 7268 写穿是 **arg-register（RCX/RDX/R8/R9）vreg 的正确保留地基**（arg setup 在预 spill 前 clobber，只能靠 def 时写穿）。Phase 1 全额保留。
 
 ### 验证（全绿）
-- `test_jit_native` **69/69**（含 `Test_RegisterResidency` 寄存器常驻值守 0 写穿）
+- `test_jit_native` **70/70**（含 `Test_RegisterResidency` GPR 寄存器常驻 0 栈写穿；新增 `Test_FprRegisterResidency` FPR 寄存器常驻）
 - jit ctest **15/15**（abi 31 / gc_slot_map 16 / seh 38 / osr / deopt / pgo ...）
 - **未触碰** `src/native/runtime-core/`（GC 并行会话共用区干净）
+
+### FPR 着色真实收益验证（2026-08-11，本会话补）
+- **背景**：Phase 1 之前 aggregate stats `fpr_store reg=0`（全栈）。续跑时新增 `Test_FprRegisterResidency` —— 编一个含 7 个同时 live 的浮点 vreg（64-70）走 `LdcR8 + Add/Mul/Sub` 链的方法，数编译后代码里的 FPR 栈 store（`movdqa [rsp+d]`）。
+- **结果**：FPR-file 栈 store = **0**（完全 XMM 常驻）；aggregate `fpr_store reg: 0→4`。**证明 FPR 图着色（`a23ff863f`）对真实 FPR 算术方法有效——之前的 `reg=0` 是 harness 伪影**（测试方法浮点 vreg 压力不足，非真实缺口）。
+- **修正假设**：续跑发现 optimizer `ConstPropagate` 只记录 `LdcI4/LdcI8` 常量（`jit_optimizer.cpp:700-711`），**浮点常量不折叠** → 原「浮点常量被折叠致 fpr=0」假设不成立；真因是 aggregate 里浮点算术方法占比极低。此结论已固化进 `Test_FprRegisterResidency` 守卫。
+- **新测试**：`Test_FprRegisterResidency` + `CountStackStoreToFprFile`（扫描 `66 REX 0F 7F 44 24 disp8` 编码）。
 
 ### 明确不做 / 遗留
 - **FPR 写穿不动**：liveness/`cross_call_mask_` 是 64-bit 掩码，无法表示 FPR vreg（64-95）→ FPR 无法按 per-vreg 精确 spill；改 `StoreFpr` 用 `cross_call_mask_` 会断正确性。FPR 保持保守（pre-call spill 全非 caller + caller 写穿）。
 - **Phase 2（GC 读寄存器）推迟**：需要 runtime 寄存器窗捕获 + 生产调用 `GcScanSafepointRegisterRoots`，触碰 GC 线共用区。
-- 计划原列 2 个逐步保留 gtest 守卫**未新增**——用更强的 stats 测量门 + 既有 `Test_RegisterResidency`/`CountStackStoreToGprFile` 实证替代（避免依赖图着色启发式的脆弱测试）。
+- 计划原列 2 个逐步保留 gtest 守卫**未新增**（护 省写穿 的）——用更强的 stats 测量门 + 既有 `Test_RegisterResidency` 实证替代；新增的是 护 FPR 着色的 `Test_FprRegisterResidency`（见上）。

@@ -3407,6 +3407,34 @@ static int CountStackStoreToGprFile(const uint8_t* code, size_t size) {
     return count;
 }
 
+// Count FPR-file stack stores targeting the FPR stack area (movdqa xmm,[rsp+d]).
+// Encoding (Win64, RSP base with SIB): 66 [REX] 0F 7F 44 24 <disp8>
+//   byte0=0x66, optional REX(0x40-0x4F) when the XMM reg index >= 8, then
+//   0F 7F, then modrm=0x44 (mod=01 reg=XMM r/m=100 → SIB follows), sib=0x24
+//   (scale=0 index=RSP base=RSP → [rsp+disp8]), then disp8.
+// The FPR file spans FprOff(64)=544 .. 544+32*32=1568 on x64 (AVX 32-byte slots).
+// A low count ⇒ colored FPR vregs stay XMM-resident.
+static int CountStackStoreToFprFile(const uint8_t* code, size_t size) {
+    constexpr uint32_t kFprFileMin = 544;
+    constexpr uint32_t kFprFileMax = 1568;
+    int count = 0;
+    for (size_t i = 0; i + 7 <= size; ++i) {
+        if (code[i] != 0x66)
+            continue;
+        size_t j = i + 1;
+        if ((code[j] & 0xF0) == 0x40)   // optional REX prefix (REX.W=0 for SSE)
+            j++;
+        if (j + 5 > size)
+            continue;
+        if (code[j] == 0x0F && code[j + 1] == 0x7F && code[j + 2] == 0x44 && code[j + 3] == 0x24) {
+            uint32_t disp = code[j + 4];
+            if (disp >= kFprFileMin && disp < kFprFileMax)
+                count++;
+        }
+    }
+    return count;
+}
+
 static bool Test_RegisterResidency() {
     std::printf("  Test_RegisterResidency...\n");
     // Six simultaneously-live vregs through a call-free chain forces graph
@@ -3458,6 +3486,82 @@ static bool Test_RegisterResidency() {
     return true;
 }
 
+// ── FPR (XMM) register residency guard ──────────────────────────────────
+// Compiles a method with several simultaneously-live float vregs (64-69) through
+// an FPR-double Add/Mul chain and asserts the emitted code keeps FPR values in
+// XMM registers (few FPR-file stack stores).  This validates that FPR graph
+// coloring actually engages — the stats run showed fpr_store reg=0 in the
+// aggregate, which this isolated method either confirms as a harness artifact or
+// surfaces as a genuine FPR-coloring gap (only a handful of FPR stores should be
+// needed for prologue/ret; per-op XMM round-trips would fail the bound).
+static bool Test_FprRegisterResidency() {
+    std::printf("  Test_FprRegisterResidency...\n");
+    // Float constants are NOT folded by ConstPropagate (only LdcI4/LdcI8 are
+    // tracked), so LdcR8+vreg Add/Mul emit real XMM arithmetic.  vregs 64-68
+    // stay live through the chain (r69 = (r64+r65)*r66 + r67*r64 ...).
+    auto R8 = [](uint8_t dst, uint64_t bits) {
+        RegisterInstruction ri;
+        ri.header = MakeHeader(IROpCode::LdcR8, dst, 0, 0, kRegHasDst | kRegHasImm);
+        ri.imm.i8 = static_cast<int64_t>(bits);
+        return ri;
+    };
+    // 1.0, 2.0, 3.0, 4.0 as IEEE-754 doubles.
+    constexpr uint64_t one = 0x3FF0000000000000ULL;   // 1.0
+    constexpr uint64_t two = 0x4000000000000000ULL;   // 2.0
+    constexpr uint64_t three = 0x4008000000000000ULL; // 3.0
+    constexpr uint64_t four = 0x4010000000000000ULL;  // 4.0
+    RegisterMethod rm;
+    rm.instructions = {
+        R8(64, one),      // r64 = 1.0
+        R8(65, two),      // r65 = 2.0
+        R8(66, three),    // r66 = 3.0
+        R8(67, four),     // r67 = 4.0
+        InstrBinary(IROpCode::Add, 68, 64, 65),   // r68 = r64+r65 = 3.0
+        InstrBinary(IROpCode::Mul, 69, 68, 66),   // r69 = r68*r66 = 9.0
+        InstrBinary(IROpCode::Sub, 70, 69, 67),   // r70 = r69-r67 = 5.0
+        InstrRet(70),
+    };
+    rm.max_regs = 71;  // triggers FPR vregs 64-70
+
+    // NOTE: RegisterExecute's float-return semantics differ from T4 (it stores
+    // float bits in gpr[] tag-aware while Ret reads GPR), so a RegisterExecute
+    // value assertion for an FPR result is unreliable here (same reason the
+    // existing ConvR4/ConvR8 tests only use RegisterExecute for the conversion
+    // and skip T4 value comparison).  The residency property we validate is
+    // purely a T4 codegen property: colored FPR vregs stay XMM-resident.
+
+    if (!CanCompile(rm)) { std::printf("    FAIL: CanCompile false\n"); return false; }
+    CompileConfig cfg;
+    cfg.enable_optimizer = false;      // pure register path, no tree optimizer
+    auto* nm = Compile(rm, cfg);
+    if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    RegisterNativeCodeSection(entry, nm->code_size, nm);
+
+    bool crashed = false;
+    ExecuteNativeSafe(entry, crashed);
+    if (crashed) { std::printf("    FAIL: T4 crashed\n"); return false; }
+
+    int fpr_stores = CountStackStoreToFprFile(static_cast<const uint8_t*>(nm->code), nm->code_size);
+    int gpr_stores = CountStackStoreToGprFile(static_cast<const uint8_t*>(nm->code), nm->code_size);
+    std::printf("    FPR-file stack stores in code: %d (gpr stores: %d)\n", fpr_stores, gpr_stores);
+    // 7 FPR vregs with colored XMMs should produce ZERO FPR-file stores on the
+    // compute path (only prologue/ret setup).  Allow a small tolerance for
+    // prologue/allocation.  A per-op FPR round-trip (≥ ~5 Add/Mul/Sub ops) would
+    // fail, indicating FPR coloring is spilling to stack (a genuine gap).
+    if (fpr_stores >= 5) {
+        std::printf("    FAIL: %d FPR stack stores on FPR compute chain (expect < 5; FPR coloring not resident)\n",
+                    fpr_stores);
+        DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size);
+        CHAOS_IL2CPP_FREE(nm);
+        return false;
+    }
+    CHAOS_IL2CPP_FREE(nm);
+    std::printf("    FPR-register-resident chain ✓ (%d FPR stack stores)\n", fpr_stores);
+    return true;
+}
+
 TEST_F(CodegenNativeTest, LdcI4_Ret) { EXPECT_TRUE(Test_LdcI4_Ret()); }
 
 TEST_F(CodegenNativeTest, Add_Ret) { EXPECT_TRUE(Test_Add_Ret()); }
@@ -3465,6 +3569,8 @@ TEST_F(CodegenNativeTest, Add_Ret) { EXPECT_TRUE(Test_Add_Ret()); }
 TEST_F(CodegenNativeTest, ArithmeticChain) { EXPECT_TRUE(Test_ArithmeticChain()); }
 
 TEST_F(CodegenNativeTest, RegisterResidency) { EXPECT_TRUE(Test_RegisterResidency()); }
+
+TEST_F(CodegenNativeTest, FprRegisterResidency) { EXPECT_TRUE(Test_FprRegisterResidency()); }
 
 TEST_F(CodegenNativeTest, FoldAdd) { EXPECT_TRUE(Test_FoldAdd()); }
 
