@@ -10,6 +10,7 @@
 #include "gc_bgc.h"
 #include "gc_bit_utils.h"
 #include "gc_card_table.h"
+#include "gc_static_roots.h"
 #include "gc_demotion.h"
 #include "gc_events.h"
 #include "gc_etw.h"
@@ -2533,6 +2534,25 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 if (val != nullptr && G_Loh().IsInLOH(val)) {
                     G_Loh().MarkObject(val);
                 }
+            },
+            this);
+        if (mark_stack_.size() > before_roots) {
+            has_roots = true;
+        }
+    }
+
+    // Scan registered static/ALC root ranges as roots (P1-A2b / repo-wide fix).
+    // Objects referenced only from a registered static root (ALC static fields,
+    // or the test's OldMessage[] backing store) were previously invisible to the
+    // full-GC mark → they (and transitively their referenced old-gen objects)
+    // were swept → use-after-free.  CoreCLR scans all registered roots during
+    // mark; this closes that gap.
+    {
+        size_t before_roots = mark_stack_.size();
+        GcScanStaticRoots(
+            [](void* root_addr, bool /*is_interior*/, void* user_data) {
+                auto* self = static_cast<MarkSweepOldGen*>(user_data);
+                self->TryMarkRoot(root_addr);
             },
             this);
         if (mark_stack_.size() > before_roots) {

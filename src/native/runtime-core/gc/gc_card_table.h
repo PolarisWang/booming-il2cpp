@@ -8,6 +8,9 @@
 #include <cstdint>
 #include <cstring>
 #include <memory>
+#if defined(_MSC_VER)
+#include <intrin.h>
+#endif
 
 #include "gc_bit_utils.h"
 #include "gc_region.h"
@@ -90,11 +93,24 @@ inline bool CardBundleTest(uintptr_t bundle_bit) noexcept {
         return true;  // out of coverage → conservatively "possibly dirty"
     return (g_card_bundle[bundle_bit >> 3] & (uint8_t)(1u << (bundle_bit & 7))) != 0;
 }
-/// Set a bundle bit (relaxed; called alongside DirtyCard).
+/// Set a bundle bit (atomic RMW; called alongside DirtyCard).
+/// Multiple mutators may set different bundle bits in the same byte
+/// concurrently — a non-atomic read-modify-write (|=) could lose a bit →
+/// a dirty card's bundle is skipped → cross-gen edge dropped in the
+/// ScanDirtyCards fast-path.  Use a platform atomic Or (CoreCLR
+/// Interlocked::Or / __atomic_fetch_or analog) so no bit is ever lost.
 inline void CardBundleSet(uintptr_t bundle_bit) noexcept {
     if (g_card_bundle == nullptr || bundle_bit >= g_card_bundle_size.load(std::memory_order_relaxed) * 8)
         return;
-    g_card_bundle[bundle_bit >> 3] |= (uint8_t)(1u << (bundle_bit & 7));
+    uint8_t* byte = &g_card_bundle[bundle_bit >> 3];
+    uint8_t mask = static_cast<uint8_t>(1u << (bundle_bit & 7));
+#if defined(_MSC_VER)
+    _InterlockedOr8(reinterpret_cast<volatile char*>(byte), static_cast<char>(mask));
+#elif defined(__GNUC__) || defined(__clang__)
+    __atomic_fetch_or(byte, mask, __ATOMIC_RELAXED);
+#else
+    #error "CardBundleSet: no atomic Or intrinsic on this platform"
+#endif
 }
 /// Clear all bundle bits (called alongside ClearAllCards).
 inline void CardBundleClearAll() noexcept {

@@ -5,6 +5,8 @@
 
 namespace chaos::il2cpp::runtime_core {
 
+struct YoungCollectionResult;  // fwd — gc_young_collector.h
+
 /// VerifyHeap level (mirrors CoreCLR GCConfig HeapVerify level — authored here
 /// as GC_HEAP_VERIFY_LEVEL; inject into CHAOS_GC_CONFIGURATION_KEYS).
 enum class HeapVerifyLevel : uint8_t {
@@ -26,6 +28,13 @@ void GcVerifyRegionToGenerationMap() noexcept;
 /// Full VerifyHeap entry — call at GC boundaries (start/end of
 /// chaos_gc_collect / GcYoungCollection) when HeapVerifyLevel != kOff.
 void GcVerifyHeap() noexcept;
+
+/// Verify that every object promoted by a young collection lies in a tracked
+/// old-gen page (IsInOldGen) and its 4MB region-gen is OLD.  This guards the
+/// A2-class regression where a promoted object's page is later untracked /
+/// unsweep-coherent — a dangling risk when an old slot still references it.
+/// Called after GcYoungCollection with the result.  Only active at kFull.
+void GcVerifyPromotedTracked(const YoungCollectionResult& result) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

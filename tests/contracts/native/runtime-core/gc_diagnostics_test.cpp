@@ -18,6 +18,7 @@
 #include "gc_config.h"
 #include "gc_diagnostics.h"
 #include "gc_region.h"
+#include "gc_young_collector.h"
 
 #include "gc_test_macros.h"
 
@@ -71,12 +72,21 @@ static void TestMarkRangeConsistency() {
     PASS();
 }
 
+static void TestPromotedTracked() {
+    TEST("GcVerifyPromotedTracked (P1-A3)");
+    // Empty worklist → verifier is a safe no-op (no OOB, no error).
+    YoungCollectionResult r{};
+    GcVerifyPromotedTracked(r);
+    PASS();
+}
+
 int main() {
     puts("CRAG GC self-verification (gc_diagnostics) tests");
     puts("════════════════════════════════════════════════════\n");
     TestVerifyLevel();
     TestUninitializedVerify();
     TestMarkRangeConsistency();
+    TestPromotedTracked();
     printf("\nResults: %d tests, %d failures\n", g_tests, g_failures);
     return g_failures > 0 ? 1 : 0;
 }

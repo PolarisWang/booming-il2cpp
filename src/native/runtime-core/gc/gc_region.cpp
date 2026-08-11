@@ -1066,6 +1066,7 @@ CHAOS_IL2CPP_SIZE RegionManager::PromoteNursery(Region* nursery) {
     //
     // The return value is the total bytes promoted from this nursery.
     YoungCollectionResult result = GcYoungCollection();
+    GcVerifyPromotedTracked(result);   // HeapVerify kFull: promoted objects in tracked old-gen
 
     if (result.objects_promoted > 0) {
         CHAOS_IL2CPP_LOG_DEBUG_M("CRAG", "promote_nursery objects={0} bytes={1}",

@@ -11,13 +11,16 @@
 
 `executing`（已验证增量已提交 branch `fix/gc-crossgen-region-gen-and-verify` commit `8904326a0`；A2b/B2 深项待专门）
 
-## 当前结论（plan-v3-01）
+## 当前结论（plan-v5-01，落地导向）
 
-- **已提交 `8904326a0`**：层1 GcMarkRangeOld + **系统性 region-gen 全 chunk 标记**（stress 47%→75%）+ T2 VerifyHeap
-  （`gc_diagnostics` + HeapVerify 旋钮）+ T3 condemned 字段 + 文档（plan-v2/v3, review, design, handoff）。
-- **A2a 负结果**：page_array_ 一致；晋升页被真释放。A2b（旧代 mark 不跟进 raw-struct message 引用）= 残余 ~25% 真根因，
-  深 GC 手术，跨会话。K2a 测试 flake 为 pre-existing（改动前后都 fail）。
-- **裁决原则**：方案有疑问一律选对齐 CoreCLR。
+- **已提交 `e4d765d79`**：层1 + 系统性 region-gen（stress 75%）+ VerifyHeap + condemned + 文档。
+- **plan-v5 落地计划**（P1..P4 编号推进）：P1 主线A(A3/A4/A2b，stress 20x 绿) → P2 B1(M1/M3A/M10) → P3 B2(M9→M8→M7；M5→M4；M3B/M6) → P4 B3(M11/12/13/15；M14 降优)。每项含实施步骤/测试/完成判据。
+- CoreCLR 存在性已核实（plan-v4）：A2b 非 CoreCLR 功能→降 bug；M14 ProvStress 弱存在→降优。
+- 完整见 `plan-v5-01.md`。
+
+## phase
+
+`executing`（已验证增量已提交；按 plan-v5 P1 推进，里程碑式）
 
 
 ## blocking_questions

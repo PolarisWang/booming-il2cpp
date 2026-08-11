@@ -7,6 +7,7 @@
 #include "gc_loh.h"
 #include "gc_old_gen.h"
 #include "gc_region.h"
+#include "gc_young_collector.h"
 #include "gc_young_gen.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -66,6 +67,23 @@ void GcVerifyHeap() noexcept {
     GcVerifyRegionToGenerationMap();
     // kFull: (future) referenced-allocation walk — region-gen consistency is the
     // highest-value, lowest-risk check and guards the known cross-gen edge bug.
+}
+
+void GcVerifyPromotedTracked(const YoungCollectionResult& result) noexcept {
+    if (GcGetHeapVerifyLevel() < HeapVerifyLevel::kFull) return;
+    for (int i = 0; i < result.bfs_worklist_count; ++i) {
+        void* p = result.bfs_worklist[i];
+        if (p == nullptr) continue;
+        if (!G_OldGen().IsInOldGen(p)) {
+            CHAOS_IL2CPP_LOG_ERROR_M("GCVerify",
+                "promoted object not in tracked old-gen page: {0}", (void*)p);
+        }
+        if (GetRegionGen(reinterpret_cast<uintptr_t>(p)) != kRegionGenOld) {
+            CHAOS_IL2CPP_LOG_ERROR_M("GCVerify",
+                "promoted object region-gen not OLD: {0} gen={1}", (void*)p,
+                (unsigned)GetRegionGen(reinterpret_cast<uintptr_t>(p)));
+        }
+    }
 }
 
 }  // namespace chaos::il2cpp::runtime_core

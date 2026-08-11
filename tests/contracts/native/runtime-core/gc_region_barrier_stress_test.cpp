@@ -30,6 +30,7 @@
 #include "gc_heap.h"
 #include "gc_helpers.h"
 #include "gc_api.h"
+#include "gc_static_roots.h"
 #include "thread_state.h"
 
 #include "gc_test_macros.h"
@@ -90,6 +91,12 @@ static void RunCrossGenRefStoreStress() {
         g_old_slot[i] = reinterpret_cast<OldMessage*>(old);
     }
 
+    // Register the message backing store as a static root (managed semantics).
+    // Without this, the old-gen (full) collector's mark has no way to reach the
+    // messages → collects them and the nursery objects they reference → dangling.
+    // This is the P1-A2b fix: static-root-referenced old-gen objects survive GC.
+    GcRegisterStaticRootRange(g_old_slot, sizeof(g_old_slot), 0);
+
     // Spawn workers; each stores nursery refs into its old-gen slot.
     std::vector<std::thread> workers;
     for (int i = 0; i < kThreads; i++) workers.emplace_back(Worker, i);
@@ -140,6 +147,7 @@ static void RunCrossGenRefStoreStress() {
     GC_CHECK(valid >= 0, "recorded cross-gen references");
     GC_CHECK(dangling == 0, "cross-gen barrier: 0 dangling references after GC");
 
+    GcUnregisterStaticRootRange(g_old_slot);
     threading::UnregisterThread();
 }
 

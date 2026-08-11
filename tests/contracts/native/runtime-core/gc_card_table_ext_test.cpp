@@ -10,6 +10,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <atomic>
+#include <thread>
 
 #include <chaos/native_types.h>
 #include "gc_card_table.h"
@@ -206,6 +208,44 @@ void TestK2bDoubleArgBarrier() {
     std::free(heap);
 }
 
+// ── Test 6 (P1-A4): CardBundleSet concurrent — no lost bundle bit ──────
+// Multiple threads set DIFFERENT bundle bits in the SAME byte.  A non-atomic
+// read-modify-write would lose bits → dirty card skipped in ScanDirtyCards
+// fast-path → cross-gen edge dropped.  Atomic RMW must set all bits.
+static void TestCardBundleConcurrent() {
+    TEST("CardBundleConcurrentNoLostBit");
+
+    // Ensure a card table + bundle exist via a heap range registration.
+    void* heap = std::calloc(1, 16 * 1024 * 1024);
+    if (!heap) { GC_FAIL("heap alloc failed"); return; }
+    GcSetHeapBase(heap);
+    GcRegisterHeapRange(reinterpret_cast<uintptr_t>(heap),
+                        reinterpret_cast<uintptr_t>(heap) + 16 * 1024 * 1024);
+
+    // 8 distinct bundle bits that alias to bundle byte 0.  Concurrent sets must
+    // all survive (no lost bit).
+    constexpr int kBits = 8;
+    std::atomic<bool> start{false};
+    std::thread workers[kBits];
+    for (int b = 0; b < kBits; ++b) {
+        workers[b] = std::thread([b, &start]() {
+            while (!start.load(std::memory_order_acquire)) {}
+            CardBundleSet(static_cast<uintptr_t>(b));
+        });
+    }
+    start.store(true, std::memory_order_release);
+    for (int b = 0; b < kBits; ++b) workers[b].join();
+
+    bool all_set = true;
+    for (int b = 0; b < kBits; ++b) {
+        if (!CardBundleTest(static_cast<uintptr_t>(b))) { all_set = false; break; }
+    }
+    if (!all_set) { GC_FAIL("lost bundle bit under concurrency"); }
+
+    ClearAllCards();
+    std::free(heap);
+}
+
 // ── Main ────────────────────────────────────────────────────────────
 int main() {
     puts("Card table edge case tests");
@@ -217,6 +257,7 @@ int main() {
     TestScanDirtyEmpty();
     TestScanDirtyPartial();
     TestK2bDoubleArgBarrier();
+    TestCardBundleConcurrent();
 
     printf("\nResults: %d tests, %d failures\n", g_tests, g_failures);
     return g_failures > 0 ? 1 : 0;
