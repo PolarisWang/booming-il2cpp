@@ -3,6 +3,7 @@ get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
 add_library(chaos_jit STATIC
     code_buffer.cpp
     jit_engine.cpp
+    jit_codegen_arith.cpp
     jit_helpers.cpp
     jit_inline.cpp
     jit_deopt.cpp

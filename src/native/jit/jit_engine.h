@@ -22,6 +22,8 @@
 #include "jit_reg_alloc.h"               // GraphColoringResult
 #include "code_buffer.h"                 // CodeBuffer
 #include "codegen_bridge.h"              // CodegenCallVirtArgs
+#include "ArchTraits.h"                  // ArchTraits, Arch
+#include <chaos/profile.h>               // CHAOS_IL2CPP_PROFILE_SCOPE
 #include "../interpreter/ir_reg_alloc.h" // RegisterMethod, RegisterInstruction
 #if defined(__aarch64__)
 #include "Arm64Encoder.h" // Arm64Encoder
@@ -34,6 +36,75 @@
 #include <vector>
 
 namespace chaos::il2cpp::jit {
+
+// Architecture register-file alias (AT), shared by the codegen TUs split out
+// of jit_engine.cpp (T2.4): maps AT::kScratchA/B/C etc. to the concrete
+// ArchTraits specialization for the target architecture.
+#if defined(__aarch64__)
+using AT = ArchTraits<Arch::kARM64>;
+#else
+using AT = ArchTraits<Arch::kX64>;
+#endif
+
+// ── Stack frame layout (shared by the codegen TUs).  Moved from
+// jit_engine.cpp during the T2.4 monolith split; all jit_codegen_*.cpp files
+// reference these offsets/frame-size constants.
+
+// ── Frame layout constants ─────────────────────────────────────────────────
+// Stack frame (relative to RSP/SP):
+//
+// x64 layout:
+//   [rsp + 0 .. 32)       = Win64 shadow space (for callee calls)
+//   [rsp + 32 .. 544)     = GPR file (virtual register 0..63, 512 bytes)
+//   [rsp + 544 .. 1568)   = FPR file (virtual register 64..95, 1024 bytes, 32-byte YMM slots)
+//   [rsp + 1568 .. 1632)  = CallVirtArgs struct
+//   Total: 1632 bytes
+//
+// ARM64 layout:
+//   [sp + 0 .. 512)       = GPR file (virtual register 0..63, 512 bytes)
+//   [sp + 512 .. 1024)    = FPR file (virtual register 64..95, 512 bytes, 16-byte Q slots)
+//   [sp + 1024 .. 1088)   = CallVirtArgs struct
+//   Total: 1088 bytes
+//
+// When LocAlloc is used, an additional reserve region is appended:
+//   [rsp + base_frame_end .. +8)       = localloc_bump (uint32_t counter)
+//   [rsp + base_frame_end+8 .. +4008)  = localloc_reserve (4KB scratch)
+//   localloc_extra = 4008 bytes
+
+#if defined(__aarch64__)
+static constexpr uint32_t kShadowSize = 0;   // No shadow space on ARM64
+static constexpr uint32_t kFprSlotSize = 16; // 128-bit NEON Q registers
+#else
+static constexpr uint32_t kShadowSize = 32;  // Win64 shadow space
+static constexpr uint32_t kFprSlotSize = 32; // YMM 256-bit slots (AVX)
+#endif
+
+static constexpr uint32_t kGprCount = interpreter::kGPRegisters; // 64
+static constexpr uint32_t kFprCount = interpreter::kFPRegisters; // 32
+static constexpr uint32_t kGprFileSize = kGprCount * 8;          // 512 bytes
+static constexpr uint32_t kFprFileSize = kFprCount * kFprSlotSize;
+static constexpr uint32_t kGprFileOff = kShadowSize;
+static constexpr uint32_t kFprFileOff = kGprFileOff + kGprFileSize;
+static constexpr uint32_t kCallVirtArgsOff = kFprFileOff + kFprFileSize;
+static constexpr uint32_t kFrameSize = kCallVirtArgsOff + sizeof(CodegenCallVirtArgs);
+
+// GcSlotMapV0 slot encoding reserves the top bit for the interior kind flag,
+// leaving 31 bits for the RSP/frame offset (up to ~2 GB) — effectively
+// unbounded for stack frames.
+static_assert(kFrameSize < (1u << 31), "GcSlotMapV0 offset must fit in 31 bits");
+
+// LocAlloc reserve: bump counter + scratch region
+static constexpr uint32_t kLocAllocReserveSize = 4096;
+static constexpr uint32_t kLocAllocBumpAndReserve = 8 + kLocAllocReserveSize; // 4104
+static constexpr uint32_t kMaxTlabInlineSize = 2048;                          // max bytes per TLAB inline allocation
+
+// VEX/AVX encoding toggle: true → use VEX 3-operand encoding for SIMD ops
+// ARM64 NEON does not use VEX — all operations are true 3-operand via arm64_encoder.h.
+#if defined(__aarch64__)
+static constexpr bool kUseVexEncoding = false;
+#else
+static constexpr bool kUseVexEncoding = true;
+#endif
 
 /// Compilation tier for JIT code generation.
 /// Tier 0 produces code quickly with no optimizations (stack-only register access,
