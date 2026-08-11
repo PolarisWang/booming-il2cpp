@@ -161,6 +161,16 @@ struct ManagedThread {
     /// preemptive suspend context.
     std::atomic<const void*> preempt_ucontext{nullptr};
 
+    // ── Phase 2: GC register window ─────────────────────────────────
+    /// Captured physical-GPR value file for this thread at GC suspension,
+    /// indexed by physical x64 register number (RAX=0..R15=15).  Populated by
+    /// the suspend path (Windows: GetThreadContext on os_handle; Linux: ucontext
+    /// gregs) and read by GcScanAllThreadRoots to report safepoint register
+    /// roots.  gc_num_gprs==0 (or array zeros) means no window is available and
+    /// register-root reporting is skipped (stack slots remain the scan source).
+    uint64_t gc_reg_file[16]{};
+    uint32_t gc_num_gprs{0};
+
     /// OS thread ID for pthread_kill-based preemptive suspend (Linux).
     /// Populated by PalGetCurrentThreadId().  Used on Linux (non-Apple,
     /// non-Android) for SIGUSR2-based preemptive suspend.

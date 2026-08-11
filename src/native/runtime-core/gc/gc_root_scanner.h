@@ -91,10 +91,17 @@ void GcScanPreciseFrame(
 /// (Task B) volatile registers.  When the return address falls in a gap
 /// between safepoints, the nearest-prior safepoint is used (frames are only
 /// interruptible at recorded points, so a GC stop can only happen there).
+/// @a gpr_values (may be null) is an optional [num_gprs] physical-GPR value
+/// file captured at GC suspension; when non-null, the safepoint's live
+/// volatile-register roots are also reported (Phase 2).  Stack-slot reporting
+/// is always the primary path (never under-retains); register roots are added
+/// on top when the window is available.
 void GcScanPreciseSafepoint(
     const ManagedFrameInfo& frame,
     const GcPointMapV0& point_map,
     const void* code_start,
+    const void* const* gpr_values,   // optional [num_gprs]; null = no register roots
+    uint32_t num_gprs,
     GcRootCallback callback,
     void* user_data);
 

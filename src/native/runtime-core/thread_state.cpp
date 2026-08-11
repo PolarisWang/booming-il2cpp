@@ -588,6 +588,47 @@ extern "C" void ReleaseGlobalSafepoint(uint32_t /*epoch*/) noexcept {
     s_safepoint_depth = 0;
 }
 
+/// Phase 2: populate @a thread's register window (gc_reg_file[16],
+/// gc_num_gprs) from the capture mechanism available on this platform at GC
+/// suspension.  Indexed by physical x64 GPR (RAX=0..R15=15), matching the
+/// register encodings in GcSafepointV0.
+///   - POSIX/x86_64: derived from the preemptively-suspended thread's saved
+///     ucontext (uc_mcontext.gregs).  Only reliable for preemptive-suspended
+///     threads — cooperative/trampoline-redirected ones clear it.
+///   - Windows: populated by PalCaptureThreadContext (Phase 2b); until then
+///     gc_num_gprs stays 0 → register-root reporting is skipped (no window).
+/// A window is strictly additive to stack-slot scanning (never under-retains).
+static void CaptureThreadRegisterWindow(ManagedThread* thread) noexcept {
+    thread->gc_num_gprs = 0;
+#if !defined(_MSC_VER) && defined(__x86_64__)
+    const void* uctx = thread->preempt_ucontext.load(std::memory_order_acquire);
+    // Only a preemptively-suspended thread has a reliable saved ucontext;
+    // cooperative threads have it redirected+cleared by the trampoline.
+    if (uctx == nullptr || !thread->preemptive_suspended.load(std::memory_order_acquire))
+        return;
+    const auto* uc = static_cast<const ucontext_t*>(uctx);
+    const greg_t* g = uc->uc_mcontext.gregs;
+    // glibc gregs[] index → physical x86-64 register number (RAX=0..R15=15).
+    // glibc: REG_RAX=13, REG_RCX=14, REG_RDX=12, REG_RBX=11, REG_RSI=9,
+    //        REG_RDI=8, REG_R8=0, REG_R9=1, REG_R10=2, REG_R11=3,
+    //        REG_R12=4, REG_R13=5, REG_R14=6, REG_R15=7.
+    uint64_t* regfile = thread->gc_reg_file;
+    regfile[0]  = static_cast<uint64_t>(g[REG_RAX]);
+    regfile[1]  = static_cast<uint64_t>(g[REG_RCX]);
+    regfile[2]  = static_cast<uint64_t>(g[REG_RDX]);
+    regfile[3]  = static_cast<uint64_t>(g[REG_RBX]);
+    regfile[8]  = static_cast<uint64_t>(g[REG_R8]);
+    regfile[9]  = static_cast<uint64_t>(g[REG_R9]);
+    regfile[10] = static_cast<uint64_t>(g[REG_R10]);
+    regfile[11] = static_cast<uint64_t>(g[REG_R11]);
+    regfile[12] = static_cast<uint64_t>(g[REG_R12]);
+    regfile[13] = static_cast<uint64_t>(g[REG_R13]);
+    regfile[14] = static_cast<uint64_t>(g[REG_R14]);
+    regfile[15] = static_cast<uint64_t>(g[REG_R15]);
+    thread->gc_num_gprs = 16;
+#endif  // !_MSC_VER && __x86_64__
+}
+
 void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, void* user_data), void* user_data) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("GcScanAllThreadRoots");
 
@@ -614,6 +655,15 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
 
         // If the current thread is calling this, skip self.
 
+
+        // Phase 2: capture this thread's register window (physical GPR values
+        // at GC suspension) for safepoint register-root reporting.  Populated
+        // from the ucontext (Linux) or GetThreadContext (Windows, 2b).  When no
+        // window is available (gc_num_gprs==0) register roots are skipped and
+        // stack-slot scanning remains the sole source — never under-retains.
+        CaptureThreadRegisterWindow(thread);
+        const void* const* gpr_window =
+            (thread->gc_num_gprs > 0) ? reinterpret_cast<const void* const*>(thread->gc_reg_file) : nullptr;
 
         // Conservatively scan the full stack range.
         char* scan_start = static_cast<char*>(thread->stack_limit);
@@ -683,7 +733,12 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
             // Register roots (Task B) are added when num_live_regs is populated.
             const auto* point_map = static_cast<const GcPointMapV0*>(nm->gc_point_map_data);
             if (point_map != nullptr) {
-                GcScanPreciseSafepoint(info, *point_map, nm->code, s_callback, s_user_data);
+                // Phase 2 (2a): pass this thread's captured register window so a
+                // safepoint's live volatile-register roots are also scanned
+                // (additive to the stack slots below).  gpr_window is nullptr
+                // when no window was captured (no under-retain).
+                GcScanPreciseSafepoint(info, *point_map, nm->code, gpr_window,
+                                       thread->gc_num_gprs, s_callback, s_user_data);
             } else {
                 GcScanPreciseFrame(info, *sm, s_callback, s_user_data);
             }

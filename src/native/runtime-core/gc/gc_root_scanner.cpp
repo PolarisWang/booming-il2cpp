@@ -161,6 +161,8 @@ void GcScanPreciseSafepoint(
     const ManagedFrameInfo& frame,
     const GcPointMapV0& point_map,
     const void* code_start,
+    const void* const* gpr_values,
+    uint32_t num_gprs,
     GcRootCallback callback,
     void* user_data) {
 
@@ -181,10 +183,13 @@ void GcScanPreciseSafepoint(
         void* slot_addr = frame_base + so;
         callback(slot_addr, is_interior, user_data);
     }
-    // Volatile-register roots are handled in Task B (num_live_regs populated
-    // there); the register window needs the CPU context, which the stack-slot
-    // walker here does not carry.
-    (void)it;
+    // Phase 2 (2a): report the live volatile-register roots when a register
+    // window was captured at GC suspension.  This is additive — stack-slot
+    // reporting above always runs, so having a register window never
+    // under-retains (the window only adds roots the stack slots may miss when
+    // the mutator keeps a GC-ref in a register across a call without spilling).
+    if (gpr_values != nullptr)
+        GcScanSafepointRegisterRoots(*sp, gpr_values, num_gprs, callback, user_data);
 }
 
 /// Decode and report the live volatile-register roots of a safepoint from an

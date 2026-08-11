@@ -325,14 +325,14 @@ TEST(CodegenGcSlotMap, ScanPreciseSafepointPerOffset) {
 
     // Return within sp[0] range (offset 0x12 → after 0x10 safepoint).
     frame.return_address = static_cast<uint8_t*>(code_start) + 0x12;
-    GcScanPreciseSafepoint(frame, *pm, code_start, PreciseCallback, &c1);
+    GcScanPreciseSafepoint(frame, *pm, code_start, nullptr, 0, PreciseCallback, &c1);
     // sp[0] has 2 live slots.
     EXPECT_EQ(c1.precise_calls, 2);
     EXPECT_EQ(c1.last_root_addr, static_cast<void*>(static_cast<uint8_t*>(frame.frame_ptr) + 0x18));
 
     // Return within sp[1] range (offset 0x42 → after 0x40 safepoint).
     frame.return_address = static_cast<uint8_t*>(code_start) + 0x42;
-    GcScanPreciseSafepoint(frame, *pm, code_start, PreciseCallback, &c2);
+    GcScanPreciseSafepoint(frame, *pm, code_start, nullptr, 0, PreciseCallback, &c2);
     // sp[1] has 1 live slot — NOT the union of both.
     EXPECT_EQ(c2.precise_calls, 1);
     EXPECT_EQ(c2.last_root_addr, static_cast<void*>(static_cast<uint8_t*>(frame.frame_ptr) + 0x50));
@@ -341,7 +341,7 @@ TEST(CodegenGcSlotMap, ScanPreciseSafepointPerOffset) {
     // interruptible).
     ScanCounters c0;
     frame.return_address = code_start;
-    GcScanPreciseSafepoint(frame, *pm, code_start, PreciseCallback, &c0);
+    GcScanPreciseSafepoint(frame, *pm, code_start, nullptr, 0, PreciseCallback, &c0);
     EXPECT_EQ(c0.precise_calls, 0);
 }
 
@@ -447,13 +447,67 @@ TEST(CodegenGcSlotMap, ScanPreciseSubsetOfUnion) {
 
     ScanCounters union_c, precise_c;
     GcScanPreciseFrame(frame, *sm, PreciseCallback, &union_c);
-    GcScanPreciseSafepoint(frame, *pm, code_start, PreciseCallback, &precise_c);
+    GcScanPreciseSafepoint(frame, *pm, code_start, nullptr, 0, PreciseCallback, &precise_c);
 
     // Precise must not report more roots than the conservative union.
     EXPECT_LE(precise_c.precise_calls, union_c.precise_calls);
     // And the precise live slot (0x08) is a true subset member.
     EXPECT_EQ(precise_c.precise_calls, 1);
     EXPECT_EQ(precise_c.last_root_addr, static_cast<void*>(static_cast<uint8_t*>(frame.frame_ptr) + 0x08));
+}
+
+// Phase 2 (2a): windowed precise scan.  When a register-value file is passed,
+// GcScanPreciseSafepoint must report BOTH the stack slots AND the live register
+// roots at the safepoint — never losing the stack slots (no under-retain when a
+// window is present), and adding the register root reported by
+// GcScanSafepointRegisterRoots.
+TEST(CodegenGcSlotMap, ScanPreciseSafepointWindowed) {
+    // Point map: one safepoint at offset 0x10 with 1 stack slot (0x08) + 1
+    // register root (physical R8).  num_gc_slots=1, num_live_regs=1.
+    alignas(8) uint8_t pm_data[128] = {};
+    uint32_t off = 0;
+    uint32_t code_size = 0x60, num_sp = 1, num_gprs_hdr = 16;
+    std::memcpy(pm_data + off, &code_size, 4); off += 4;
+    std::memcpy(pm_data + off, &num_sp, 4);    off += 4;
+    std::memcpy(pm_data + off, &num_gprs_hdr, 4); off += 4;
+    uint32_t sp_off = 0x10, nsl = 1, nrg = 1;
+    std::memcpy(pm_data + off, &sp_off, 4); off += 4;
+    std::memcpy(pm_data + off, &nsl, 4);     off += 4;
+    std::memcpy(pm_data + off, &nrg, 4);     off += 4;
+    uint32_t e = CHAOS_GC_SLOT_ENCODE(0x08, CHAOS_GC_SLOT_KIND_OBJECT);
+    std::memcpy(pm_data + off, &e, 4); off += 4;
+    e = CHAOS_GC_REG_ENCODE(8, CHAOS_GC_SLOT_KIND_OBJECT);   // R8 holds a ref
+    std::memcpy(pm_data + off, &e, 4); off += 4;
+    auto* pm = reinterpret_cast<const GcPointMapV0*>(pm_data);
+
+    alignas(8) uint8_t frame_storage[256] = {};
+    ManagedFrameInfo frame;
+    frame.frame_ptr = frame_storage;
+    frame.frame_size = sizeof(frame_storage);
+    frame.return_address = pm_data + 0x12;   // offset 0x12 ≥ 0x10 safepoint
+
+    // A register window where R8 (index 8) holds a fake object pointer.
+    alignas(8) uint64_t gpr_values[16] = {};
+    int fake_obj = 0;
+    gpr_values[8] = reinterpret_cast<uint64_t>(&fake_obj);
+
+    // Windowed scan must report stack slot + register root.
+    ScanCounters c1;
+    GcScanPreciseSafepoint(frame, *pm, pm_data,
+                           reinterpret_cast<const void* const*>(gpr_values), 16,
+                           PreciseCallback, &c1);
+    // 1 stack slot + 1 register root = 2 roots total.
+    EXPECT_EQ(c1.precise_calls, 2);
+    // Register roots are reported after stack slots, so the last root is BOTH
+    // the register root (R8's fake object) — verifying the window is applied.
+    EXPECT_EQ(c1.last_root_addr, &fake_obj);
+
+    // No-window scan (nullptr, 0) must report ONLY the stack slot — the window
+    // is strictly additive, never removing stack slots.
+    ScanCounters c2;
+    GcScanPreciseSafepoint(frame, *pm, pm_data, nullptr, 0, PreciseCallback, &c2);
+    EXPECT_EQ(c2.precise_calls, 1);
+    EXPECT_EQ(c2.last_root_addr, static_cast<void*>(static_cast<uint8_t*>(frame.frame_ptr) + 0x08));
 }
 
 }  // namespace
