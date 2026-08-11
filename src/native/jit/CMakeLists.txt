@@ -7,6 +7,7 @@ add_library(chaos_jit STATIC
     jit_codegen_branch.cpp
     jit_codegen_deopt.cpp
     jit_codegen_gc.cpp
+    jit_codegen_memory.cpp
     jit_helpers.cpp
     jit_inline.cpp
     jit_deopt.cpp
