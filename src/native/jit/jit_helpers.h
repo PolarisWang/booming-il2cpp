@@ -17,7 +17,19 @@ namespace chaos::il2cpp::jit {
 
 /// Magic value written to ret_buf[0] by the deopt trampoline to signal that
 /// deoptimization occurred.  InterpreterEntryDirect checks for this value
-/// after the JIT native call returns.
+/// after the JIT native call returns.  The value 0xDE0D7FA57A11 is the ASCII
+/// bytes "DEAD FISH" read as a little-endian uint64 — a mnemonic sentinel,
+/// not a real object pointer or return value.  It is deliberately chosen to be
+/// unrealistically large (above any valid heap/generated-code address) and
+/// never producible by ordinary arithmetic, so the caller can safely
+/// distinguish "deoptimized" from any genuine computed result.
+///
+/// Path: an Ovf op (AddOvf/SubOvf/MulOvf/ConvOvf*) overflows, or a helper
+/// determines the method should fall back to the interpreter → emitted code
+/// stores kDeoptMagic into ret_buf[0] (see EmitDeoptSequence) and returns →
+/// InterpreterEntryDirect sees ret_buf[0]==kDeoptMagic → reconstructs the
+/// RegisterFrame from DeoptRuntime::DeoptTrap and redirects to the
+/// interpreter loop at the recorded instruction PC (deopt entry).
 static constexpr uint64_t kDeoptMagic = 0xDE0D7FA57A11ULL;
 
 /// Thread-local deoptimization state: written by DeoptTrapEntry (called from

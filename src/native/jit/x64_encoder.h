@@ -33,14 +33,22 @@ inline uint8_t REX(bool w, uint8_t r, uint8_t x, uint8_t b) noexcept {
     return static_cast<uint8_t>(0x40 | (w ? 8 : 0) | ((r & 8) ? 4 : 0) | ((x & 8) ? 2 : 0) | ((b & 8) ? 1 : 0));
 }
 
-/// Emit REX prefix for a reg, rm operation.
+/// Emit the x86-64 REX prefix for an instruction whose REX.R field extends
+/// the ModRM.reg field (the 8 high GPRs r8-r15 encoded as low 3 bits + REX.R).
+/// @param w     REX.W bit — 1 selects 64-bit operand size, 0 = 32-bit.
+/// @param reg   the GPR encoded in ModRM.reg (0-15); high bit moves to REX.R.
+/// @param rm    the GPR/operand encoded in ModRM.rm (0-15); high bit → REX.B.
 inline void EmitREX(CodeBuffer& buf, bool w, uint8_t reg, uint8_t rm) noexcept {
     uint8_t rex = REX(w, reg, 0, rm);
     if (rex != 0x40)
         buf.EmitByte(rex);
 }
 
-/// Emit REX prefix with b-only (for opcodes that encode reg in the opcode byte).
+/// Emit the REX prefix with only the B bit active, for opcodes that encode
+/// the register in the opcode byte itself (e.g. mov r64, imm: 0xB8+rd) rather
+/// than in ModRM — the register's high bit is carried in REX.B.
+/// @param w   REX.W bit (1 = 64-bit operand size).
+/// @param rm  the register encoded in the opcode byte (0-15); high bit → REX.B.
 inline void EmitREXB(CodeBuffer& buf, bool w, uint8_t rm) noexcept {
     uint8_t rex = REX(w, 0, 0, rm);
     if (rex != 0x40)

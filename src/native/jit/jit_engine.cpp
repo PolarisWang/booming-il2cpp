@@ -153,6 +153,20 @@ inline void PatchArm64B(CodeBuffer& buf, uint32_t patch_pos, uint32_t target_pos
 }
 #endif
 
+// ── Codename glossary (expansion for the terse tags used below) ─────────
+// V1 : the original register-CACHING allocator (fixed kCacheableRegs, freq-based
+//      hit tracking, write-through to the GPR stack file on spill).
+// V2 : the Chaitin-Briggs GRAPH-COLORING allocator (jit_reg_alloc.h) that
+//      replaces V1 when enable_register_caching is active; unchanged on tiers.
+// A1 : T2.1 increment that eliminated the caller-colored write-through for
+//      scalar-only, call-free methods (has_caller_clobber_ gate).
+// T2.x : roadmap milestone tags (T2.1 register-residency, T2.2 precise
+//      per-safepoint GC root maps, T2.3 spill/deopt contract + hot-update).
+// T4 : the fully-JIT-compiled native code tier (JIT Tier 4), as opposed to
+//      the interpreter (T1-T3 lowering).  "T4 code" = the emitted native
+//      machine code; "T4 frame" = a stack frame running it.
+// kQuick : CompileTier::kQuick — the quick (no-optimizer) compile tier.
+
 // Internal class that drives code generation.
 class NativeCodeGenerator {
 public:
