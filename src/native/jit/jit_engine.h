@@ -529,7 +529,6 @@ private:
     bool EmitSimd(const interpreter::RegisterInstruction& instr, uint8_t simd_op, uint8_t elem_type,
                   uint16_t simd_imm) noexcept;
     void EmitDeoptSequence(uint32_t instr_pc, uint32_t osr_resume_pc = 0) noexcept;
-    void DumpCode() noexcept;
     void RecordGcPoint(uint32_t native_offset) noexcept;
 
     /// Returns true when an OOM or other unrecoverable error has occurred.

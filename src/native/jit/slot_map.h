@@ -5,7 +5,7 @@
 // (for non-inlined calls) or their JitMethod invalidated (for inlined calls).
 //
 // Thread safety: all access happens under the global HotpatchNameRegistry lock.
-// The singleton instance g_reverse_slot_map is defined in jit_registration.cpp.
+// The singleton instance g_reverse_slot_map is defined in jit_engine.cpp.
 
 #ifndef CHAOS_IL2CPP_JIT_SLOT_MAP_H_
 #define CHAOS_IL2CPP_JIT_SLOT_MAP_H_
