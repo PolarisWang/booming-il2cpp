@@ -1,5 +1,5 @@
-#ifndef CHAOS_IL2CPP_CODEGEN_UNWIND_INFO_H_
-#define CHAOS_IL2CPP_CODEGEN_UNWIND_INFO_H_
+#ifndef CHAOS_IL2CPP_JIT_UNWIND_H_
+#define CHAOS_IL2CPP_JIT_UNWIND_H_
 
 // ── Win64 .pdata/.xdata unwind info helpers ──────────────────────────────────
 //
@@ -137,4 +137,4 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset, uint32_t code_body_s
 
 } // namespace chaos::il2cpp::jit
 
-#endif // CHAOS_IL2CPP_CODEGEN_UNWIND_INFO_H_
+#endif // CHAOS_IL2CPP_JIT_UNWIND_H_

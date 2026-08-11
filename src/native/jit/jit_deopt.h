@@ -1,5 +1,5 @@
-#ifndef CHAOS_IL2CPP_CODEGEN_DEOPT_RUNTIME_H_
-#define CHAOS_IL2CPP_CODEGEN_DEOPT_RUNTIME_H_
+#ifndef CHAOS_IL2CPP_JIT_DEOPT_H_
+#define CHAOS_IL2CPP_JIT_DEOPT_H_
 
 // ── Deoptimization runtime for generated native code ──────────────────────
 //
@@ -73,4 +73,4 @@ public:
 
 } // namespace chaos::il2cpp::jit
 
-#endif // CHAOS_IL2CPP_CODEGEN_DEOPT_RUNTIME_H_
+#endif // CHAOS_IL2CPP_JIT_DEOPT_H_

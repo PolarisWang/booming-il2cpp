@@ -4850,12 +4850,10 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         // Activate liveness filtering in RecordGcPoint
         use_liveness_ = true;
         liveness_computed_ = true;
-        std::printf("[DBG] Liveness done: n_instrs=%u\n", n_instrs);
         CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "Liveness computed for %u instructions, use_liveness=%d", n_instrs,
                                  (int)use_liveness_);
     }
 
-    std::printf("[DBG] Pre-alloc JitMethod\n");
     // Pre-allocate JitMethod early so instruction emission can embed
     // the address of its stale flag for HotUpdate inline PIC checking.
     auto* nm = static_cast<JitMethod*>(CHAOS_IL2CPP_MALLOC(sizeof(JitMethod)));
@@ -4866,19 +4864,12 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     stale_flag_ptr_ = &nm->stale;
 
     // Emit instructions
-    {
-        fprintf(stderr, "[DBG] Starting emit loop: n_instrs=%u\n", n_instrs);
-    }
     for (uint32_t i = 0; i < n_instrs; ++i) {
         instr_offsets_[i] = buf_.pos();
         current_instr_index_ = i;
         const auto& instr = opt_instrs[i];
         if (!removed_mask.empty() && removed_mask[i])
             continue;
-        {
-            fprintf(stderr, "[DBG]   E[%u] op=%u dst=%u src1=%u src2=%u\n", i, (unsigned)instr.op_code(),
-                    (unsigned)instr.dst_reg(), (unsigned)instr.src1_reg(), (unsigned)instr.src2_reg());
-        }
         if (!EmitInstruction(instr)) {
             CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "Compile: unsupported opcode {} at pc={}, emitting deopt",
                                      static_cast<int>(instr.op_code()), i);

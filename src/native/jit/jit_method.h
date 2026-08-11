@@ -1,5 +1,5 @@
-#ifndef CHAOS_IL2CPP_CODEGEN_NATIVE_METHOD_H_
-#define CHAOS_IL2CPP_CODEGEN_NATIVE_METHOD_H_
+#ifndef CHAOS_IL2CPP_JIT_METHOD_H_
+#define CHAOS_IL2CPP_JIT_METHOD_H_
 
 // ── JitMethod: metadata for a generated native code method ──────────────
 //
@@ -212,4 +212,4 @@ struct JitMethod {
 
 } // namespace chaos::il2cpp::jit
 
-#endif // CHAOS_IL2CPP_CODEGEN_NATIVE_METHOD_H_
+#endif // CHAOS_IL2CPP_JIT_METHOD_H_

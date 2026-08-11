@@ -1,5 +1,5 @@
-#ifndef CHAOS_IL2CPP_CODEGEN_CODE_GENERATOR_H_
-#define CHAOS_IL2CPP_CODEGEN_CODE_GENERATOR_H_
+#ifndef CHAOS_IL2CPP_JIT_ENGINE_H_
+#define CHAOS_IL2CPP_JIT_ENGINE_H_
 
 // ── x64 native code generator ──────────────────────────────────────────────
 //
@@ -161,4 +161,4 @@ bool CanCompile(const interpreter::RegisterMethod& rm) noexcept;
 
 } // namespace chaos::il2cpp::jit
 
-#endif // CHAOS_IL2CPP_CODEGEN_CODE_GENERATOR_H_
+#endif // CHAOS_IL2CPP_JIT_ENGINE_H_

@@ -3,8 +3,8 @@
 // These helpers are called by JIT-generated x64 native code to perform
 // operations that are too complex to inline (vector access, GC allocation, etc.).
 // They are extern "C" for stable ABI from generated code.
-#ifndef CHAOS_IL2CPP_CODEGEN_HELPERS_H_
-#define CHAOS_IL2CPP_CODEGEN_HELPERS_H_
+#ifndef CHAOS_IL2CPP_JIT_HELPERS_H_
+#define CHAOS_IL2CPP_JIT_HELPERS_H_
 
 #include <cstdint>
 #include "code_buffer.h"
@@ -217,4 +217,4 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept;
 /// Returns the absolute address to jump to, or code_base on failure.
 extern "C" void* OsrResolveLoopHeader() noexcept;
 
-#endif // CHAOS_IL2CPP_CODEGEN_HELPERS_H_
+#endif // CHAOS_IL2CPP_JIT_HELPERS_H_

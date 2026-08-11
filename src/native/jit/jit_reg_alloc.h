@@ -1,5 +1,5 @@
-#ifndef CHAOS_IL2CPP_CODEGEN_REG_ALLOC_GRAPH_COLORING_H_
-#define CHAOS_IL2CPP_CODEGEN_REG_ALLOC_GRAPH_COLORING_H_
+#ifndef CHAOS_IL2CPP_JIT_REG_ALLOC_H_
+#define CHAOS_IL2CPP_JIT_REG_ALLOC_H_
 
 // ── Graph-Coloring Register Allocator ──────────────────────────────────────
 //
@@ -711,4 +711,4 @@ inline GraphColoringResult AllocateRegistersGraphColoring(const interpreter::Reg
 
 } // namespace chaos::il2cpp::jit
 
-#endif // CHAOS_IL2CPP_CODEGEN_REG_ALLOC_GRAPH_COLORING_H_
+#endif // CHAOS_IL2CPP_JIT_REG_ALLOC_H_
