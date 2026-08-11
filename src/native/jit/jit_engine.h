@@ -106,6 +106,16 @@ static constexpr bool kUseVexEncoding = false;
 static constexpr bool kUseVexEncoding = true;
 #endif
 
+// Helper: RSP offset for a virtual GPR (shared by the codegen TUs).
+inline uint32_t GprOff(uint32_t vreg) noexcept {
+    return kGprFileOff + vreg * 8;
+}
+
+// Helper: RSP offset for a virtual FPR (vreg 64+; shared by the codegen TUs).
+inline uint32_t FprOff(uint32_t vreg) noexcept {
+    return kFprFileOff + (vreg - kGprCount) * kFprSlotSize;
+}
+
 /// Compilation tier for JIT code generation.
 /// Tier 0 produces code quickly with no optimizations (stack-only register access,
 /// no liveness, no deopt metadata, no SEH).  Tier 1 is the full pipeline with
