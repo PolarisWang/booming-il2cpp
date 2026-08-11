@@ -23,6 +23,7 @@
 #include "code_buffer.h"                 // CodeBuffer
 #include "codegen_bridge.h"              // CodegenCallVirtArgs
 #include "ArchTraits.h"                  // ArchTraits, Arch
+#include "jit_codegen_stats.h"           // CodegenStats diagnostics (CHAOS_IL2CPP_CODEGEN_STATS gate)
 #include <chaos/profile.h>               // CHAOS_IL2CPP_PROFILE_SCOPE
 #include "../interpreter/ir_reg_alloc.h" // RegisterMethod, RegisterInstruction
 #if defined(__aarch64__)
@@ -477,6 +478,14 @@ private:
 
     // Error tracking: set by early-exit helpers; causes Generate() to return nullptr.
     bool failed_ = false;
+
+    // ── Allocation-quality diagnostics (CHAOS_IL2CPP_CODEGEN_STATS gate) ────
+    // Cached once at Generate(); hot accessors read this single bool (always
+    // false in production) so the instrumentation is a predictable no-taken
+    // branch.  current_opc_ is the IROpCode being emitted by EmitInstruction,
+    // used to attribute stack traffic to the responsible opcode.
+    bool collect_stats_ = false;
+    uint32_t current_opc_ = 0;
 
     // Bitmask of vregs colored by allocator but filtered (caller-saved).
     // These vregs fall through to stack I/O, so the prologue zeros

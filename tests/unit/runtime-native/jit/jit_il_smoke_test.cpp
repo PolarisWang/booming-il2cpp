@@ -14,7 +14,12 @@
 #include "jit_engine.h"
 #include "jit_method.h"
 #include "jit_helpers.h"
+#include "jit_codegen_stats.h" // CHAOS_IL2CPP_CODEGEN_STATS allocation-quality diagnostics
 #include "ir_reg_alloc.h"
+
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -415,4 +420,68 @@ TEST_F(CodegenIlSmokeTest, MultiInstrChain) {
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
     EXPECT_EQ(ExecuteNative(entry), 85ULL);
+}
+
+// ── Allocation-quality diagnostics (jit_codegen_stats.h) ─────────────────
+// Verifies the CHAOS_IL2CPP_CODEGEN_STATS gate: off → no JSON file is
+// produced and DumpCodegenStatsJson returns -1; on → a parseable JSON with
+// the expected keys is written.
+TEST_F(CodegenIlSmokeTest, AllocStats_GateOff_NoFile) {
+    // Gate-off is the production default (env unset).
+    const char* cur = std::getenv("CHAOS_IL2CPP_CODEGEN_STATS");
+    if (cur && cur[0] != '\0')
+        GTEST_SKIP() << "CHAOS_IL2CPP_CODEGEN_STATS is already set in this environment";
+
+    const char* path = "jit_stats_gateoff.json";
+    std::remove(path);
+    // Force a compile through the default (kFull) path so the accessors run.
+    RegisterMethod method;
+    method.max_regs = 2;
+    method.instructions.push_back(InstrI4(IROpCode::LdcI4, 7, 0, 0));
+    method.instructions.push_back(InstrI4(IROpCode::LdcI4, 9, 1, 0));
+    method.instructions.push_back(InstrBinary(IROpCode::Add, 2, 0, 1));
+    method.instructions.push_back(InstrRet(2));
+    ASSERT_TRUE(CanCompile(method));
+    JitMethod* nm = Compile(method);
+    ASSERT_NE(nm, nullptr);
+
+    EXPECT_EQ(chaos::il2cpp::jit::DumpCodegenStatsJson(path), -1) << "gate off must not dump";
+    std::remove(path);
+}
+
+TEST_F(CodegenIlSmokeTest, AllocStats_GateOn_DumpsJson) {
+    // Reading a process-wide global; if another test enabled it the gate is
+    // already on, which is fine — we only assert the on-path contract.
+    // Temporarily set the env var so DumpCodegenStatsJson writes the file.
+    const char* path = "jit_stats_gateon.json";
+    std::remove(path);
+
+    RegisterMethod method;
+    method.max_regs = 3;
+    method.instructions.push_back(InstrI4(IROpCode::LdcI4, 1, 0, 0));
+    method.instructions.push_back(InstrI4(IROpCode::LdcI4, 2, 1, 0));
+    method.instructions.push_back(InstrBinary(IROpCode::Add, 2, 0, 1));
+    method.instructions.push_back(InstrRet(2));
+    ASSERT_TRUE(CanCompile(method));
+
+#ifdef _WIN32
+    _putenv_s("CHAOS_IL2CPP_CODEGEN_STATS", "1");
+#else
+    setenv("CHAOS_IL2CPP_CODEGEN_STATS", "1", 1);
+#endif
+    int rc = chaos::il2cpp::jit::DumpCodegenStatsJson(path);
+    EXPECT_EQ(rc, 0) << "gate on must dump";
+    if (rc == 0) {
+        FILE* f = std::fopen(path, "r");
+        ASSERT_NE(f, nullptr);
+        char buf[512] = {};
+        size_t n = std::fread(buf, 1, sizeof(buf) - 1, f);
+        std::fclose(f);
+        std::remove(path);
+        EXPECT_GT(n, 0u);
+        EXPECT_NE(std::strstr(buf, "\"methods_compiled\""), nullptr);
+    } else {
+        std::remove(path);
+        GTEST_SKIP() << "Environment disallows setting the gate env var";
+    }
 }

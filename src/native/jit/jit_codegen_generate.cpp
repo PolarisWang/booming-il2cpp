@@ -719,6 +719,12 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         return nullptr;
     instr_offsets_.resize(n_instrs, 0);
 
+    // Cache the diagnostics gate once.  When off (production), every accessor
+    // sees the same false bool → a single never-taken branch, no env lookup.
+    collect_stats_ = CodegenStatsEnabled();
+    if (collect_stats_)
+        current_opc_ = 0;
+
     // Initialize type inference state for all GPR vregs
     vreg_types_.assign(kGprCount, kTypeVoid);
 
@@ -1887,6 +1893,29 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 
     CHAOS_IL2CPP_LOG_INFO_M("codegen", "Generate: method compiled, code_size={}, code={:p}, slots={}", nm->code_size,
                             static_cast<void*>(nm->code), slot_count_used_);
+
+    if (collect_stats_) {
+        // Per-method allocation-quality record.  vregs not colored are 0xFF
+        // (spilled through) — approximate "spilled" as = the 0xFF count.
+        CodegenMethodStats ms;
+        ms.n_instrs = n_instrs;
+        ms.gpr_vreg_total = kGprCount;
+        for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+            if (gcr_.gpr_color[vr] == 0xFF)
+                ++ms.gpr_vreg_spilled;
+            else
+                ++ms.gpr_vreg_colored;
+        }
+        for (uint32_t fi = 0; fi < kFprCount; ++fi) {
+            if (gcr_.fpr_color[fi] == 0xFF)
+                ++ms.fpr_vreg_spilled;
+            else
+                ++ms.fpr_vreg_colored;
+        }
+        RecordMethodStats(ms);
+        // Write the aggregated report once (idempotent — regenerates the file).
+        DumpCodegenStatsJson("jit_allocation_stats.json");
+    }
     return nm;
 }
 

@@ -26,6 +26,7 @@ namespace chaos::il2cpp::jit {
 void NativeCodeGenerator::LoadGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LoadGpr");
     if (vreg >= interpreter::kGPRegisters) {
+        if (collect_stats_) RecordGprAccess(true, true, false, current_opc_);
         enc_.EmitMovRM(x64_reg, AT::kStackReg, static_cast<int32_t>(GprOff(vreg)));
         return;
     }
@@ -34,6 +35,7 @@ void NativeCodeGenerator::LoadGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
     if (has_graph_coloring_) {
         uint8_t colored_x64 = gcr_.gpr_color[vreg];
         if (colored_x64 != 0xFF) {
+            if (collect_stats_) RecordGprAccess(true, false, false, current_opc_);
             if (x64_reg != colored_x64)
                 enc_.EmitMovRR(x64_reg, colored_x64);
             return;
@@ -43,18 +45,21 @@ void NativeCodeGenerator::LoadGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
     if (config_.enable_register_caching) {
         uint8_t cached = cached_x64_for_vreg_[vreg];
         if (cached != kNotCached) {
+            if (collect_stats_) RecordGprAccess(true, false, false, current_opc_);
             if (x64_reg != cached)
                 enc_.EmitMovRR(x64_reg, cached);
             return;
         }
     }
     // Load from stack
+    if (collect_stats_) RecordGprAccess(true, true, false, current_opc_);
     enc_.EmitMovRM(x64_reg, AT::kStackReg, static_cast<int32_t>(GprOff(vreg)));
 }
 
 void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StoreGpr");
     if (vreg >= interpreter::kGPRegisters) {
+        if (collect_stats_) RecordGprAccess(false, true, false, current_opc_);
         enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(GprOff(vreg)), x64_reg);
         return;
     }
@@ -71,7 +76,10 @@ void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
             // T2.1 A1: on a call-free method (no calls, no safepoints, no
             // overflow-check deopt sites), nothing can clobber the caller-saved
             // register, so the value stays purely resident — skip the store.
-            if ((caller_colored_mask_ & (1ULL << vreg)) && has_caller_clobber_)
+            bool write_through = (caller_colored_mask_ & (1ULL << vreg)) && has_caller_clobber_;
+            if (collect_stats_)
+                RecordGprAccess(false, write_through, write_through, current_opc_);
+            if (write_through)
                 enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(GprOff(vreg)), colored_x64);
             return;
         }
@@ -80,6 +88,7 @@ void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
     if (config_.enable_register_caching) {
         uint8_t cached = cached_x64_for_vreg_[vreg];
         if (cached != kNotCached && num_cache_regs_ > 0) {
+            if (collect_stats_) RecordGprAccess(false, false, false, current_opc_);
             if (cached == x64_reg) {
                 uint32_t slot = 0;
                 for (; slot < kMaxCacheRegs; ++slot) {
@@ -102,6 +111,7 @@ void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
         }
     }
     // Not cached/spilled: write through to stack
+    if (collect_stats_) RecordGprAccess(false, true, false, current_opc_);
     enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(GprOff(vreg)), x64_reg);
 }
 
@@ -112,6 +122,7 @@ void NativeCodeGenerator::LoadFpr(uint8_t xmm_reg, uint32_t vreg) noexcept {
         if (fi < 32) {
             uint8_t colored_xmm = gcr_.fpr_color[fi];
             if (colored_xmm != 0xFF) {
+                if (collect_stats_) RecordFprAccess(true, false, false, current_opc_);
                 if (xmm_reg != colored_xmm)
                     enc_.EmitMovdqaRR(xmm_reg, colored_xmm);
                 return;
@@ -119,6 +130,7 @@ void NativeCodeGenerator::LoadFpr(uint8_t xmm_reg, uint32_t vreg) noexcept {
         }
     }
     // Fallback: load 128-bit from stack via movdqa
+    if (collect_stats_) RecordFprAccess(true, true, false, current_opc_);
     enc_.EmitMovdqaRM(xmm_reg, AT::kStackReg, static_cast<int32_t>(FprOff(vreg)));
 }
 
@@ -135,13 +147,17 @@ void NativeCodeGenerator::StoreFpr(uint8_t xmm_reg, uint32_t vreg) noexcept {
                 // holds the correct value even if argument setup clobbers the
                 // colored register before EmitCallWithSpill's pre-call spill.
                 // T2.1 A1: skip on a call-free method (no caller-clobber sites).
-                if ((caller_fpr_colored_mask_ & (1ULL << fi)) && has_caller_clobber_)
+                bool write_through = (caller_fpr_colored_mask_ & (1ULL << fi)) && has_caller_clobber_;
+                if (collect_stats_)
+                    RecordFprAccess(false, write_through, write_through, current_opc_);
+                if (write_through)
                     enc_.EmitMovdqaMR(AT::kStackReg, static_cast<int32_t>(FprOff(vreg)), colored_xmm);
                 return;
             }
         }
     }
     // Fallback: write 128-bit to stack via movdqa
+    if (collect_stats_) RecordFprAccess(false, true, false, current_opc_);
     enc_.EmitMovdqaMR(AT::kStackReg, static_cast<int32_t>(FprOff(vreg)), xmm_reg);
 }
 

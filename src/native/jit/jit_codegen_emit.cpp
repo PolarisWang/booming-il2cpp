@@ -36,6 +36,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitInstruction");
     using IROpCode = interpreter::IROpCode;
     auto opc = instr.op_code();
+    if (collect_stats_) current_opc_ = static_cast<uint32_t>(opc);
     auto& _buf = this->buf_;
     auto& _instr = instr;
     auto& _config = this->config_;
