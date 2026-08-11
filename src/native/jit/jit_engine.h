@@ -262,6 +262,15 @@ bool CanCompile(const interpreter::RegisterMethod& rm) noexcept;
 // member state) lives here so the generated-code TUs (jit_codegen_*.cpp)
 // can share it; method definitions remain in jit_engine.cpp (and split
 // into per-module files during T2.4).
+//
+// ⚠️ Codegen-TU invariant (regression guard, T2.4): every identifier a
+// jit_codegen_*.cpp TU references that is NOT a class member MUST be
+// visible via this header (or an explicit include in that TU).  In
+// particular, any free `inline` helper used by more than one codegen TU
+// (e.g. PatchArm64Bcond/PatchArm64B in arm64_encoder.h) must live in a
+// header — an `inline` function defined in one .cpp and called from
+// another silently fails to compile on ARM64 only (undeclared identifier),
+// which x64 CI cannot catch.  Put shared inline helpers in a header.
 
 class NativeCodeGenerator {
 public:
