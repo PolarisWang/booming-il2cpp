@@ -4,6 +4,7 @@ add_library(chaos_jit STATIC
     code_buffer.cpp
     jit_engine.cpp
     jit_codegen_arith.cpp
+    jit_codegen_branch.cpp
     jit_helpers.cpp
     jit_inline.cpp
     jit_deopt.cpp
