@@ -18,6 +18,7 @@
 #include "gc_config.h"
 #include "gc_old_gen.h"
 #include "gc_loh.h"
+#include "gc_parallel_mark.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
 #include "gc_api.h"
@@ -555,6 +556,17 @@ void TeardownTlsPoh() noexcept {
 void InitYoungGeneration() noexcept {
     // Initialize the GC config singleton (env overrides + programmatic knobs).
     GcConfig().Initialize();
+
+    // Latch config-driven hot-path knobs once, so the allocation / LOH / mark
+    // hot paths read a plain machine load (the latched values) instead of
+    // consulting the config singleton per allocation.  kMaxTlabAlloc /
+    // kLohThreshold / kMaxParallelMarkWorkers were converted from constexpr to
+    // inline mutable values (defaulting to the historical constants); this
+    // overwrites them from the env/API CHAOS_GC_* knobs so they actually drive
+    // real behavior (not just the init log).
+    kMaxTlabAlloc = GcConfig().MaxTlabAlloc;
+    kLohThreshold = GcConfig().LohThreshold;
+    kMaxParallelMarkWorkers = static_cast<int>(GcConfig().ParallelMarkWorkers);
 
     // Initialize scheduler memory limits from config (env-driven, replaces the
     // former compile-time #if CHAOS_IL2CPP_GC_HEAP_*_LIMIT_MB only).

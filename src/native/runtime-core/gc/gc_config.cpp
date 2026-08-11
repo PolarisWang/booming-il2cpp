@@ -71,17 +71,26 @@ void GcConfigImpl::Initialize() noexcept {
     CHAOS_GC_CONFIGURATION_KEYS
 #undef INT_CONFIG
 
-    (void)ParsePositiveFloat;  // (reserved for future float knobs)
+    // Primarily float knobs (stored fp*1000) for future/hot-path tunables.
+    (void)ParsePositiveFloat;
+
     CHAOS_IL2CPP_LOG_DEBUG_M("GCConfig",
-        "default_nursery=%llu default_gen1=%llu max_tlab_alloc=%llu "
-        "loh_threshold=%llu parallel_mark_workers=%llu hard_limit_mb=%llu soft_limit_mb=%llu",
+        "nursery={0} gen1={1} max_tlab={2} loh={3} mark_workers={4} "
+        "hard_mb={5} soft_mb={6} young_mult={7} full_mult={8} cooldown={9} "
+        "min_gc_ms={10} bgc_workers={11} mark_slice_us={12}",
         static_cast<unsigned long long>(DefaultNurserySize),
         static_cast<unsigned long long>(DefaultGen1Size),
         static_cast<unsigned long long>(MaxTlabAlloc),
         static_cast<unsigned long long>(LohThreshold),
         static_cast<unsigned long long>(ParallelMarkWorkers),
         static_cast<unsigned long long>(HeapHardLimitMB),
-        static_cast<unsigned long long>(HeapSoftLimitMB));
+        static_cast<unsigned long long>(HeapSoftLimitMB),
+        static_cast<unsigned long long>(YoungTriggerMultiplierFP),
+        static_cast<unsigned long long>(FullTriggerMultiplierFP),
+        static_cast<unsigned long long>(CooldownAllocations),
+        static_cast<unsigned long long>(MinGcIntervalMs),
+        static_cast<unsigned long long>(BgcWorkers),
+        static_cast<unsigned long long>(MarkSliceBudgetUs));
 }
 
 }  // namespace chaos::il2cpp::runtime_core

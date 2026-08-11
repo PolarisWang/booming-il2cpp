@@ -10,6 +10,7 @@
 #include "gc_gen1.h"
 #include "gc_layout.h"
 #include "gc_loh.h"
+#include "gc_config.h"
 #include "gc_numa.h"
 #include "gc_old_gen.h"
 #include "gc_region.h"
@@ -938,7 +939,8 @@ void BgcController::BgcThreadMain() {
                     // yield CPU to mutators by sleeping for the interval.
                     // NotifyBgc() from SATB flushes will wake us early.
                     auto slice_elapsed = std::chrono::steady_clock::now() - slice_start;
-                    if (slice_elapsed >= kMarkSliceBudget) {
+                    const auto slice_budget = std::chrono::microseconds(GcConfig().MarkSliceBudgetUs);
+                    if (slice_elapsed >= slice_budget) {
                         slice_start = std::chrono::steady_clock::now();
                         std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
                         bgc_cv_.wait_for(lock, kMarkSliceInterval);
@@ -1328,7 +1330,11 @@ void BgcController::DrainNurseryFromWorkDeques() noexcept {
 
 int BgcController::SpawnParallelMarkWorkers() {
     int hw = static_cast<int>(std::thread::hardware_concurrency());
-    int n_workers = std::min(hw, kMaxBgcWorkers);
+    // Cap by both the compile-time array bound (kMaxBgcWorkers) and the
+    // config-driven CHAOS_GC_BgcWorkers knob (env/API tunable).
+    int cfg_workers = static_cast<int>(GcConfig().BgcWorkers);
+    int n_workers = (std::min)(hw, kMaxBgcWorkers);
+    n_workers = (std::min)(n_workers, cfg_workers > 0 ? cfg_workers : kMaxBgcWorkers);
     if (n_workers < 2) return 1;  // No benefit from parallel.
 
     // Initialize per-worker deques (worker 0 = BGC thread).

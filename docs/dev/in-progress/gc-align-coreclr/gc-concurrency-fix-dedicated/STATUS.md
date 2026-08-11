@@ -20,11 +20,20 @@
 - GC 测试全绿、构建 exit 0；`gc_diagnostics_test` 4/4、`gc_card_table_ext_test` 7/7。
 - **stress 改善至 14/20**（HEAD~50% → 系统性 region-gen + static-root 修复）。残余 **young-GC 晋升** 深因（known-issue，见 memory `gc-crossgen-fix-implementation-status`）。
 
+### ✅ 已结算：M11（M5 P2 工程，commit 待填）
+- **GC 配置旋钮扩展 + 死旋钮接线**（plan-v5 M11，务实扩展，用户确认范围）。
+  - 接线 3 个死旋钮到真实热路径：`MaxTlabAlloc`→gc_region 分配路径、`LohThreshold`→gc_loh/gc_old_gen 分类、`ParallelMarkWorkers`→gc_parallel_mark + BGC worker（`kMaxTlabAlloc`/`kLohThreshold`/`kMaxParallelMarkWorkers` 从 `static constexpr` 改为 `inline` 可变值，`InitYoungGeneration` 一次性 latch，热路径仅 1 次机器 load）。
+  - 扩展宏表至 24 旋钮：新增调度自适应（trigger 乘数 fp*1000 / cooldown / min-GC 间隔 / promote age / nursery-gen1 上下界）、BGC（BgcWorkers / MarkSliceBudgetUs）、旧代（CrossPageFragThresholdFP / EmergencyReserveSize），全部接线到真实读取点。
+  - `GcConfigImpl` 字段改为**构造期即初始化为 DEFAULT**（非 0），消除「Initialize() 前读到 0」整族 bug（修复 scheduler 触发/尺寸的早读回归）。
+  - 新增 `gc_config_test.cpp`（24 旋钮全量 env-override 读取 + hot-path latch 传播 + C-API get 可达）：**0 failures**。
+  - 验证：`ctest -R "gc_" -L unit` 28/29（唯一 FAIL=`gc_finalizer_integration_test`，HEAD 既有与本改动无关）；affected GC 单测 region/loh/parallel_mark/young_collector/scheduler 全 0；构建 exit 0。
+  - **已知非回归**：`bgc_race_test` 在 baseline 与改动后都悬挂（BGC 并发-mark 相变死锁，pre-existing，非 unit 绿基线，RESOURCE_LOCK bgc 组）。`test_driver.py --layer unit` OVERALL 因 managed CodeGen snapshot 基线不匹配（52-stind-wide/23-instance-fields，CodeGen 域，pority 与本 GC 改动无关）。
+
 ### ⬜ 剩余里程碑（跨会话，每里程碑独立验证+测试全绿再进）
-- **M2 主线 B1**：P2-M1(GC-M1 K2c regen，foundation-dll 集成) / P2-M3A(Server GC 多堆) / P2-M10(gen>condemned，M9 后)。
+- **M2 主线 B1**：P2-M1(GC-M1 K2c regen，foundation-dll 集成，本会话评估 blocked-on-pipeline) / P2-M3A(Server GC 多堆) / P2-M10(gen>condemned，M9 后)。
 - **M3 主线 B2 三代链**：M9 三代 → M8 plan-gen → M7 demotion（XL，拆 A/B）。
 - **M4 主线 B2 并发**：M5 BGC 分相 → M4 provisional；M3B/M6。
-- **M5 主线 B3**：M11/12/13/15（并行）；M14 ProvStress 降优。
+- **M5 主线 B3 剩余**：M12 GCHandle 类型 / M13 事件集 / M15 oom_budget（M11 已完结；M14 ProvStress 降优）。
 - 完整规格/步骤/测试/判据见 `plan-v5-01.md`。
 
 ## blocking_questions

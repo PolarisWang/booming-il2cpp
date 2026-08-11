@@ -17,6 +17,7 @@
 #include "gc_helpers.h"
 #include "gc_layout.h"
 #include "gc_loh.h"
+#include "gc_config.h"
 #include "gc_region.h"
 #include "gc_numa.h"
 #include "gc_parallel_mark.h"
@@ -1642,7 +1643,9 @@ MarkSweepOldGen::CompactMode MarkSweepOldGen::DecideCompactMode() {
         ? 1.0f - (static_cast<float>(total_live) / static_cast<float>(total_payload))
         : 0.0f;
 
-    if (global_frag > kCrossPageFragThreshold || candidate_pages >= total_pages / 2) {
+    const float cross_frag =
+        static_cast<float>(GcConfig().CrossPageFragThresholdFP) / 1000.0f;
+    if (global_frag > cross_frag || candidate_pages >= total_pages / 2) {
         return CompactMode::CROSS_PAGE;
     }
 
@@ -2225,7 +2228,7 @@ void MarkSweepOldGen::CrossPageCompact() {
     for (auto* p = page_list_; p != nullptr; p = p->next) {
         if (!p->in_use.load(std::memory_order_acquire) || p->is_oversized) continue;
         float frag = PageFragmentation(p);
-        if (frag > kCrossPageFragThreshold) {
+        if (frag > static_cast<float>(GcConfig().CrossPageFragThresholdFP) / 1000.0f) {
             candidates.push_back({p, frag});
         }
     }
@@ -3416,23 +3419,28 @@ void MarkSweepOldGen::BgcCompact() {
 bool MarkSweepOldGen::InitEmergencyReserve() noexcept {
     if (emergency_reserve_base_ != nullptr) return true;  // Already initialized.
 
-    auto* mem = static_cast<char*>(GcNumaVirtualAlloc(kEmergencyReserveSize, 0));
+    // Emergency reserve size is config-tunable (CHAOS_GC_EmergencyReserveSize);
+    // fall back to the compile-time constant if the config value is unreasonable.
+    CHAOS_IL2CPP_SIZE reserve_size = GcConfig().EmergencyReserveSize;
+    if (reserve_size < 4 * 1024) reserve_size = kEmergencyReserveSize;
+
+    auto* mem = static_cast<char*>(GcNumaVirtualAlloc(reserve_size, 0));
     if (mem == nullptr) {
         // Non-fatal: finalizer OOM protection is best-effort.
         return false;
     }
 
     // Zero the reserved memory.
-    std::memset(mem, 0, kEmergencyReserveSize);
+    std::memset(mem, 0, reserve_size);
 
     emergency_reserve_base_ = mem;
-    emergency_reserve_size_ = kEmergencyReserveSize;
+    emergency_reserve_size_ = reserve_size;
     emergency_reserve_current_.store(mem, std::memory_order_release);
     emergency_reserve_activated_.store(false, std::memory_order_release);
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "emergency_reserve_allocated base=0x{0} size={1}",
         reinterpret_cast<uintptr_t>(mem),
-        static_cast<unsigned long long>(kEmergencyReserveSize));
+        static_cast<unsigned long long>(reserve_size));
     return true;
 }
 

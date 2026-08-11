@@ -35,7 +35,9 @@ namespace chaos::il2cpp::runtime_core {
 // ======================================================================
 
 /// Maximum parallel workers (bound to prevent oversubscription).
-static constexpr int kMaxParallelMarkWorkers = 8;
+/// Runtime-latchable from GcConfig().ParallelMarkWorkers during GC init so the
+/// CHAOS_GC_ParallelMarkWorkers knob drives the real mark worker count.
+inline int kMaxParallelMarkWorkers = 8;
 
 /// Chunk representing up to 64 objects on the same page.
 struct MarkChunk {
