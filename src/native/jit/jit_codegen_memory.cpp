@@ -77,8 +77,15 @@ void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
             // range crosses a call/safepoint (cross_call_mask_) needs the write —
             // it's live across the call and will be reloaded.  A vreg live only in
             // call-free code stays purely register-resident (no stack write).
+            // 省写穿 (Phase 1): additionally, ONLY an arg-register-colored caller
+            // vreg (RCX/RDX/R8/R9) keeps the write-through — argument setup writes
+            // those registers BEFORE the pre-call spill, so their stack slot must be
+            // current from def time.  Non-arg caller-saved vregs (RAX/R10/R11) are
+            // now preserved by SpillLiveColoredForCall at the call site and stay
+            // purely register-resident between calls (no write-through store).
             bool write_through = (caller_colored_mask_ & (1ULL << vreg)) &&
-                                 (cross_call_mask_ & (1ULL << vreg));
+                                 (cross_call_mask_ & (1ULL << vreg)) &&
+                                 IsGprArgReg(gcr_.gpr_color[vreg]);
             if (collect_stats_)
                 RecordGprAccess(false, write_through, write_through, current_opc_);
             if (write_through)
@@ -260,21 +267,16 @@ void NativeCodeGenerator::EmitCallWithSpill(uint8_t reg) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitCallWithSpill");
     if (config_.enable_register_caching && cached_slots_used_)
         SpillCachedRegs();
-    // Spill colored GPRs — StoreGpr with graph coloring skips the stack write,
-    // so stack slots (read by deopt metadata, GC scanning, CodegenCallVirt)
-    // hold stale values.  Write all colored vregs to their stack slots.
-    // Caller-colored vregs are excluded: StoreGpr already keeps their stack
-    // slots up-to-date (write-through), and argument setup may have clobbered
-    // the colored register making a pre-call spill capture a stale value.
+    // 省写穿 (Phase 1): spill the caller-colored GPRs that are live at this call
+    // point to their fixed stack slots (in addition to the callee-colored ones),
+    // so their stack slots are current for the call.  Arg-register-colored vregs
+    // are excluded (kept current by write-through — see SpillLiveColoredForCall),
+    // because at a helper call site argument setup has already written RCX/RDX/
+    // R8/R9 before this spill runs.  FPRs stay conservative: spill all
+    // non-caller-colored FPRs, keep caller-colored FPRs on write-through.
+    if (has_graph_coloring_)
+        SpillLiveColoredForCall(false);
     if (has_graph_coloring_) {
-        for (uint32_t vr = 0; vr < kGprCount; ++vr) {
-            uint8_t colored_x64 = gcr_.gpr_color[vr];
-            if (colored_x64 != 0xFF) {
-                if (caller_colored_mask_ & (1ULL << vr))
-                    continue;
-                enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(GprOff(vr)), colored_x64);
-            }
-        }
         // Spill colored FPRs (same logic: StoreFpr with graph coloring skips
         // the stack write).  Caller-colored FPRs are excluded — StoreFpr
         // already does write-through for them.
@@ -333,15 +335,16 @@ uint32_t NativeCodeGenerator::EmitRuntimeHelperCallImpl(void* target_fn) noexcep
     // R9 stays in R9 (SysV arg6 = R9, same as Win64 arg4 — no 4-arg helpers currently)
 #endif
 
+    // 省写穿 (Phase 1): spill caller-colored GPRs live at this helper call to
+    // their fixed stack slots (not write-through on every def).  Arg-register-
+    // colored vregs (RCX/RDX/R8/R9) are excluded — argument setup has already
+    // written them before this spill; they keep write-through (see
+    // SpillLiveColoredForCall).  The SysV arg fixup above moves args into
+    // RDI/RSI/RDX; on Win64 (our test path) those aren't Win64 arg regs so this
+    // is safe there.  FPRs stay conservative (spill all non-caller-colored).
+    if (has_graph_coloring_)
+        SpillLiveColoredForCall(false);
     if (has_graph_coloring_) {
-        for (uint32_t vr = 0; vr < kGprCount; ++vr) {
-            uint8_t colored_x64 = gcr_.gpr_color[vr];
-            if (colored_x64 != 0xFF) {
-                if (caller_colored_mask_ & (1ULL << vr))
-                    continue;
-                enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(GprOff(vr)), colored_x64);
-            }
-        }
         // Spill colored FPRs (same logic: StoreFpr skips stack write).
         for (uint32_t fi = 0; fi < 32; ++fi) {
             uint8_t colored_xmm = gcr_.fpr_color[fi];
@@ -356,8 +359,13 @@ uint32_t NativeCodeGenerator::EmitRuntimeHelperCallImpl(void* target_fn) noexcep
     enc_.EmitCallRipRel(0);
     slot_patches_.push_back({call_start + kSlotPatchDispOff, UINT32_MAX, target_fn});
     slot_count_used_++;
-    if (has_graph_coloring_ && caller_colored_mask_) {
-        uint64_t mask = caller_colored_mask_;
+    // Post-call reload: restore caller-saved colored GPRs that are live across a
+    // call (cross_call_mask_), matching EmitCallWithSpill / Call.  Both
+    // arg-register (kept current by write-through) and non-arg (spilled by
+    // SpillLiveColoredForCall above) caller-colored vregs lived at this site
+    // have a current slot to reload from.
+    if (has_graph_coloring_ && (caller_colored_mask_ & cross_call_mask_)) {
+        uint64_t mask = caller_colored_mask_ & cross_call_mask_;
         for (uint32_t vr = 0; mask; ++vr) {
             if (mask & 1) {
                 uint8_t colored_x64 = gcr_.gpr_color[vr];

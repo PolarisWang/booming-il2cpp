@@ -32,21 +32,15 @@ void NativeCodeGenerator::EmitSafepointPoll() noexcept {
     // Non-GC ref values stay in registers across safepoints — GC only needs object refs on stack.
     if (config_.enable_register_caching && cached_slots_used_)
         SpillGcRefCachedRegs();
-    // Spill colored GPRs holding ObjectRef values — StoreGpr with graph coloring
-    // skips stack writes, so stack slots are stale for GC scanning.
-    // Caller-colored vregs are excluded: StoreGpr already keeps their stack
-    // slots up-to-date (write-through), and the colored register may have
-    // been clobbered since the last StoreGpr.
-    if (has_graph_coloring_) {
-        for (uint32_t vr = 0; vr < kGprCount; ++vr) {
-            uint8_t colored_x64 = gcr_.gpr_color[vr];
-            if (colored_x64 != 0xFF && vr < vreg_types_.size() && vreg_types_[vr] == kTypeObjectRef) {
-                if (caller_colored_mask_ & (1ULL << vr))
-                    continue;
-                enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(GprOff(vr)), colored_x64);
-            }
-        }
-    }
+    // 省写穿 (Phase 1): spill the live ObjectRef-typed colored GPRs that are live
+    // at this safepoint to their frame slots so GC scanning finds them.  Arg-
+    // register-colored vregs (RCX/RDX/R8/R9) are excluded by
+    // SpillLiveColoredForCall and rely on write-through (which StoreGpr still
+    // emits for them); non-arg caller-colored vregs whose write-through was
+    // removed are covered here.  This closes the gap those non-arg vregs would
+    // otherwise have at a safepoint (previously the routine skipped ALL
+    // caller-colored vregs, depending on write-through for every one of them).
+    SpillLiveColoredForCall(true);
 #if !defined(__aarch64__)
     enc_.EmitSubRI(AT::kStackReg, 32);
 #endif
@@ -61,6 +55,53 @@ void NativeCodeGenerator::EmitSafepointPoll() noexcept {
 #if !defined(__aarch64__)
     enc_.EmitAddRI(AT::kStackReg, 32);
 #endif
+}
+
+void NativeCodeGenerator::SpillLiveColoredForCall(bool object_only) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::SpillLiveColoredForCall");
+    // 省写穿 (Phase 1): converge the store-side write-through onto this
+    // call/clobber site by spilling to their frame slots the GPR vregs actually
+    // live at the current instruction (current_instr_index_), instead of spilling
+    // caller-colored vregs via write-through on every def.
+    //
+    // Arg-register-colored vregs (RCX/RDX/R8/R9 on Win64) are NOT spilled here:
+    // at helper-call sites the arg setup has ALREADY written those registers
+    // (which is why the write-through exists — it records the value while the
+    // register still holds it).  Spilling the (now-clobbered) register here would
+    // overwrite their correct write-through slot.  They keep write-through.
+    //
+    // object_only=true  → spill only ObjectRef-typed live colored GPRs (GC
+    //                     safepoint poll: GC scans stack slots only).
+    // object_only=false → spill every live colored, non-arg-register GPR so the
+    //                     deopt reconstructor (reads codegen_rsp+GprOff) and GC
+    //                     can rebuild/count on the stack slot being current.
+    //
+    // FPR vregs (64-95) are deliberately NOT handled: liveness is a 64-bit mask
+    // (live_in_/cross_call_mask_), so vreg >= 64 cannot be represented — FPR call
+    // spill stays conservative in the existing pre-call loops; caller-colored
+    // FPRs keep write-through.
+
+    uint64_t live_mask = ~0ULL;
+    if (liveness_computed_ && current_instr_index_ < live_in_.size())
+        live_mask = live_in_[current_instr_index_];
+
+    if (has_graph_coloring_) {
+        for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+            uint8_t colored_x64 = gcr_.gpr_color[vr];
+            if (colored_x64 == 0xFF)
+                continue;
+            // Arg-register-colored vregs keep write-through (see comment above).
+            if (IsGprArgReg(colored_x64))
+                continue;
+            // Only vregs live at this point need a current stack slot.
+            if (!(live_mask & (1ULL << vr)))
+                continue;
+            // object_only: skip non-ref vregs (GC only needs refs on stack).
+            if (object_only && !(vr < vreg_types_.size() && vreg_types_[vr] == kTypeObjectRef))
+                continue;
+            enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(GprOff(vr)), colored_x64);
+        }
+    }
 }
 
 void NativeCodeGenerator::RecordGcPoint(uint32_t native_offset) noexcept {

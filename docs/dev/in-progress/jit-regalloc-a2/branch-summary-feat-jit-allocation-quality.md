@@ -48,13 +48,54 @@
 
 ## 4. 下一步候选（重启后接续）
 
+> **更新（2026-08-11 本会话）**：已交付 **Phase 1「省写穿」codegen 侧收敛**（见 §5），把 "GC 读寄存器省写穿" 的 codegen 上半场做掉了；余下纯 runtime 寄存器窗捕获是 Phase 2，留给 GC 线协调。
+
 按 `jit-regalloc-a2-continuation-roadmap.md` §5 启动表 + 本分支已验证成果，剩余可推进：
 
 | 优先级 | 任务 | 说明 |
 |---|---|---|
-| 🔴 高 | **扩持久寄存器预算**（当前 x64 仅 R12-R15 4 个在 prologue save/restore）| 提升图着色可用寄存器数，减少 spill。需同步 unwind/SEH/GC slot |
-| 🔴 高 | **GC 读寄存器省写穿**（CoreCLR `GetRegisterSlot` 读物理寄存器）| 需 GcInfo 支持 per-safepoint 寄存器根；可进一步消除 GC-ref 写穿 |
+| 🔴 高 | **GC 读寄存器（Phase 2）**：省掉 pre-call spill 本身 | 需 runtime 寄存器窗捕获（Windows CONTEXT 现状无 / Linux ucontext）＋ 在生产 `GcScanAllThreadRoots` 调用 `GcScanSafepointRegisterRoots`（已写但仅单测调用）。触碰 `gc_root_scanner.cpp`/`thread_state.cpp`（与并行 GC 会话共用区，需协调）|
+| 🔴 高 | **扩持久寄存器预算**（当前 x64 仅 R12-R15 4 个在 prologue save/restore）| 提升图着色可用寄存器数。本会话数据表明 spill 仅 620+637、load 命中 97.5%，非主导成本；优先级下调 |
 | 🟡 中 | test_jit_native 浮点常量被 optimizer 折叠 → fpr total=0（harness 伪影）| 补非折叠 float 测试验证 FPR 真实收益 |
 | 🟡 中 | 分支清理：GC 平行线提交是否要留在本分支 | 按需 rebase/分离 |
 
 **重启入口**：读本文件 + `jit-regalloc-a2/TASK-HANDOFF.md` + `jit-regalloc-a2-continuation-roadmap.md` + memory `jit-graphcoloring-allocation-quality-report.md`、`jit-writethrough-elimination-coreclr-analysis.md`。确认分支 + 工作区，从 §4 表中选高优项启动。
+
+---
+
+## 5. Phase 1「省写穿」codegen 侧收敛（2026-08-11 本会话完成）
+
+> 范围：仅 `src/native/jit/`。目标：把「caller-colored 且跨 call 的 vreg 在**每次 def 写穿**」收敛为「**每个 call/clobber 点 spill-before-arg-setup，仅实际 live 的 vreg**」。
+
+### 根因（3 个读者驱动写穿）
+1. **arg-setup clobber 顺序缺陷**：`Call`/`CallBridge`（emit.cpp:1540）先 mov 实参进 RCX/RDX/R8/R9（正是 caller-colored 池寄存器），再跑 pre-call spill，且 spill 循环 `if (caller_colored_mask_) continue` 跳过它们 → 写穿是唯一保命机制。
+2. **deopt 重建只读栈槽**（`enable_deopt=true` 默认，从 `codegen_rsp+GprOff` 读回）。
+3. **GC safepoint 只扫栈槽**（`EmitSafepointPoll` 跳过 caller-colored + `RecordGcPoint` 只记 Stack slot）。
+
+### 改动（4 文件，+124/-55，`src/native/jit/`）
+- **`jit_codegen_gc.cpp`**：新增 `SpillLiveColoredForCall(object_only)` —— 按 `live_in_[current_instr_index_]` 精确 spill 当前 call/safepoint 点 live 的彩色 GPR（非 arg-register；arg-register 因 arg setup 已 clobber 故留给写穿）。`EmitSafepointPoll` 改用 `SpillLiveColoredForCall(true)`（补上原被跳过的 caller-colored GC-ref 上栈缺口）。
+- **`jit_codegen_emit.cpp`**：`Call`/`CallBridge` 把 spill 挪到 arg setup **之前**，GPR 用 helper（只 live）、FPR 保守照旧。
+- **`jit_codegen_memory.cpp`**：`StoreGpr` 写穿条件收紧为 `&& IsGprArgReg(gcr_.gpr_color[vreg])`（只 arg-register 保留写穿）；`EmitCallWithSpill`/`EmitRuntimeHelperCallImpl` GPR spill 换 helper；helper post-call reload 对齐 `& cross_call_mask_`（修另类不对称）。
+- **`jit_engine.h`**：新增 `IsGprArgReg(phys)`（RCX/RDX/R8/R9）static helper + `SpillLiveColoredForCall` 声明。
+
+### 净收益（`CHAOS_IL2CPP_CODEGEN_STATS` 复跑 test_jit_native, 1090 方法）
+
+| 指标 | 基线 | Phase 1 后 | Δ |
+|---|---|---|---|
+| gpr_store.writethrough | 14595 | **7268** | **-50.2%**（↓7327）|
+| gpr_store.reg | 2305 | 9632 | +7327（写穿→register-resident mov）|
+| gpr_store.total | 17520 | 17520 | **0（无指令回归）** |
+| gpr_load 命中 | 97.5% | 97.5% | 不降 |
+| 栈 spill（stack） | 620 | 620 | 不增 |
+
+**结论**：写穿从 "每次 def 写回栈" 转为 "寄存器常驻中的 reg-mov"，总 store 数不变（无净指令回归），值更常驻寄存器。剩余 7268 写穿是 **arg-register（RCX/RDX/R8/R9）vreg 的正确保留地基**（arg setup 在预 spill 前 clobber，只能靠 def 时写穿）。Phase 1 全额保留。
+
+### 验证（全绿）
+- `test_jit_native` **69/69**（含 `Test_RegisterResidency` 寄存器常驻值守 0 写穿）
+- jit ctest **15/15**（abi 31 / gc_slot_map 16 / seh 38 / osr / deopt / pgo ...）
+- **未触碰** `src/native/runtime-core/`（GC 并行会话共用区干净）
+
+### 明确不做 / 遗留
+- **FPR 写穿不动**：liveness/`cross_call_mask_` 是 64-bit 掩码，无法表示 FPR vreg（64-95）→ FPR 无法按 per-vreg 精确 spill；改 `StoreFpr` 用 `cross_call_mask_` 会断正确性。FPR 保持保守（pre-call spill 全非 caller + caller 写穿）。
+- **Phase 2（GC 读寄存器）推迟**：需要 runtime 寄存器窗捕获 + 生产调用 `GcScanSafepointRegisterRoots`，触碰 GC 线共用区。
+- 计划原列 2 个逐步保留 gtest 守卫**未新增**——用更强的 stats 测量门 + 既有 `Test_RegisterResidency`/`CountStackStoreToGprFile` 实证替代（避免依赖图着色启发式的脆弱测试）。

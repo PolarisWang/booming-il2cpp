@@ -532,8 +532,28 @@ private:
     uint32_t frame_size_extra_ = 0;
 
     void SelectCacheableRegs() noexcept;
+    // True when the physical GPR is a call-argument register: such a vreg's
+    // register is written by argument setup at a call site BEFORE the pre-call
+    // spill can run, so it must rely on store-side write-through (its stack slot
+    // records the value while the register still holds it).  Non-arg caller-
+    // saved vregs are preserved by SpillLiveColoredForCall and skip write-through.
+    static bool IsGprArgReg(uint8_t phys) noexcept {
+#if defined(__aarch64__)
+        return phys <= 7; // X0-X7
+#else
+        return phys == 1 || phys == 2 || phys == 8 || phys == 9; // RCX/RDX/R8/R9 (Win64)
+#endif
+    }
     void SpillCachedRegs() noexcept;
     void SpillGcRefCachedRegs() noexcept;
+    // 省写穿 (Phase 1): spill the colored GPRs actually live at the current
+    // call/clobber site to their fixed stack slots.  Arg-register-colored vregs
+    // (RCX/RDX/R8/R9) are excluded — argument setup has already written them,
+    // so they keep store-side write-through (see IsGprArgReg).  object_only=true
+    // spills just the ObjectRef-typed live vregs (for GC safepoint polling);
+    // false spills every live, non-arg colored vreg so deopt/GC can rebuild
+    // from the stack slot.  FPRs are not handled (64-bit liveness mask limit).
+    void SpillLiveColoredForCall(bool object_only) noexcept;
     void EmitCallWithSpill(uint8_t reg) noexcept;
     template <typename T>
     uint32_t EmitRuntimeHelperCall(T* target_fn) noexcept {

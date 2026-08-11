@@ -1537,24 +1537,20 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             static constexpr uint8_t kArgRegs[] = {AT::kScratchB, AT::kScratchC, AT::kExtraScratch0,
                                                    AT::kExtraScratch1};
             uint32_t max_scratch = arg_count < 4 ? arg_count : 4;
-            for (uint32_t i = 0; i < max_scratch; ++i)
-                LoadGpr(kArgRegs[i], first_arg_reg + i);
-            for (uint32_t i = 4; i < arg_count; ++i) {
-                LoadGpr(AT::kScratchA, first_arg_reg + i);
-                enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>((i - 4) * 8), AT::kScratchA);
-            }
-            // Spill cached/colored registers before call (same as EmitCallWithSpill preamble)
+            // 省写穿 (Phase 1): spill cached + live colored regs BEFORE argument
+            // setup.  Arg setup moves args into RCX/RDX/R8/R9, which ARE caller-
+            // colored pool registers — doing it before this spill would clobber a
+            // live caller-colored vreg's value before it could be preserved in its
+            // stack slot.  SpillLiveColoredForCall(false) spills the caller-colored
+            // live GPRs that StoreGpr used to write-through on every def, so the
+            // stack slot is current before arg setup clobbers the register.  FPRs
+            // stay conservative (spill all non-caller-colored) — liveness is a
+            // 64-bit mask and cannot represent FPR vregs (64-95).
             if (config_.enable_register_caching && cached_slots_used_)
                 SpillCachedRegs();
+            if (has_graph_coloring_)
+                SpillLiveColoredForCall(false);
             if (has_graph_coloring_) {
-                for (uint32_t vr = 0; vr < kGprCount; ++vr) {
-                    uint8_t colored_x64 = gcr_.gpr_color[vr];
-                    if (colored_x64 != 0xFF) {
-                        if (caller_colored_mask_ & (1ULL << vr))
-                            continue;
-                        enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>(GprOff(vr)), colored_x64);
-                    }
-                }
                 // Spill colored FPRs (same logic: StoreFpr skips stack write).
                 for (uint32_t fi = 0; fi < 32; ++fi) {
                     uint8_t colored_xmm = gcr_.fpr_color[fi];
@@ -1564,6 +1560,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
                         enc_.EmitMovdqaMR(AT::kStackReg, static_cast<int32_t>(FprOff(kGprCount + fi)), colored_xmm);
                     }
                 }
+            }
+            for (uint32_t i = 0; i < max_scratch; ++i)
+                LoadGpr(kArgRegs[i], first_arg_reg + i);
+            for (uint32_t i = 4; i < arg_count; ++i) {
+                LoadGpr(AT::kScratchA, first_arg_reg + i);
+                enc_.EmitMovMR(AT::kStackReg, static_cast<int32_t>((i - 4) * 8), AT::kScratchA);
             }
             // Slot-based call: emit call [rip+0] placeholder, record SlotPatch.
             // The slot table is emitted after all instructions, before buf_.Seal().
