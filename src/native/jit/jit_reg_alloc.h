@@ -262,21 +262,38 @@ inline GraphColoringResult AllocateRegistersGraphColoring(const interpreter::Reg
     uint64_t live_out[2048] = {};
     uint64_t def[2048] = {};
     uint64_t use[2048] = {};
+    // Parallel FPR liveness (float vregs 64-95).  live_in/live_out/def/use are
+    // uint64_t and cannot represent vregs >= 64, so FPR vregs are tracked in a
+    // separate 32-bit bitmap where bit k = FPR vreg (64 + k).
+    uint32_t fpr_def[2048] = {};
+    uint32_t fpr_use[2048] = {};
 
     // Pass 1: compute def/use for each instruction.
     for (uint32_t i = 0; i < n_instrs; ++i) {
         const auto& inst = instrs[i];
-        if (inst.has_dst() && inst.dst_reg() < interpreter::kGPRegisters)
+        const auto fpr_bit = [](uint8_t r) -> bool { return r >= interpreter::kGPRegisters && r < interpreter::kTotalRegisters; };
+        if (inst.has_dst() && inst.dst_reg() < interpreter::kGPRegisters) {
             def[i] |= (1ULL << inst.dst_reg());
-        if (inst.has_src1() && inst.src1_reg() < interpreter::kGPRegisters)
+        } else if (inst.has_dst() && fpr_bit(inst.dst_reg())) {
+            fpr_def[i] |= (1u << (inst.dst_reg() - interpreter::kGPRegisters));
+        }
+        if (inst.has_src1() && inst.src1_reg() < interpreter::kGPRegisters) {
             use[i] |= (1ULL << inst.src1_reg());
-        if (inst.has_src2() && inst.src2_reg() < interpreter::kGPRegisters)
+        } else if (inst.has_src1() && fpr_bit(inst.src1_reg())) {
+            fpr_use[i] |= (1u << (inst.src1_reg() - interpreter::kGPRegisters));
+        }
+        if (inst.has_src2() && inst.src2_reg() < interpreter::kGPRegisters) {
             use[i] |= (1ULL << inst.src2_reg());
+        } else if (inst.has_src2() && fpr_bit(inst.src2_reg())) {
+            fpr_use[i] |= (1u << (inst.src2_reg() - interpreter::kGPRegisters));
+        }
         // Third source operand (StElem, StObj, Cpblk, InitBlk)
         if (inst.flags() & interpreter::kRegHasSrc3) {
             uint8_t src3 = inst.src3_reg();
             if (src3 < interpreter::kGPRegisters)
                 use[i] |= (1ULL << src3);
+            else if (fpr_bit(src3))
+                fpr_use[i] |= (1u << (src3 - interpreter::kGPRegisters));
         }
         // Calli: func_ptr vreg in imm.operand_index is an implicit source
         if (inst.op_code() == interpreter::IROpCode::Calli && inst.imm.operand_index < interpreter::kGPRegisters) {
@@ -364,6 +381,27 @@ inline GraphColoringResult AllocateRegistersGraphColoring(const interpreter::Reg
             ubits &= ubits - 1;
             if (u < interpreter::kGPRegisters)
                 last_use_idx[u] = i;
+        }
+    }
+
+    // ── FPR first_def / last_use (floats 64-95, compact bit k = 64+k) ────
+    uint32_t fpr_first_def[32];
+    uint32_t fpr_last_use[32];
+    std::memset(fpr_first_def, 0xFF, sizeof(fpr_first_def));
+    std::memset(fpr_last_use, 0xFF, sizeof(fpr_last_use));
+    for (uint32_t i = 0; i < n_instrs; ++i) {
+        uint32_t fb = fpr_def[i];
+        while (fb) {
+            uint32_t f = static_cast<uint32_t>(Ctz32(fb));
+            fb &= fb - 1;
+            if (fpr_first_def[f] == UINT32_MAX)
+                fpr_first_def[f] = i;
+        }
+        uint32_t ub = fpr_use[i];
+        while (ub) {
+            uint32_t u = static_cast<uint32_t>(Ctz32(ub));
+            ub &= ub - 1;
+            fpr_last_use[u] = i;
         }
     }
 
@@ -572,55 +610,66 @@ inline GraphColoringResult AllocateRegistersGraphColoring(const interpreter::Reg
     }
 
     // ── FPR Allocation (XMM0-XMM15) ────────────────────────────────────────
-    // Map FPR vregs (64-95) to indices 0-31.
+    // Float vregs 64-95 are mapped to compact slots 0-31 (slot k = vreg 64+k).
+    // Interference is built from conservative live ranges (first_def → last_use,
+    // tracked in the parallel fpr_def/fpr_use/fpr_first_def/fpr_last_use) — the
+    // GPR-only live_in/live_out bitmaps cannot represent vregs >= 64, which is
+    // why the original FPR pass (reading live_in for bits >= 64) never colored.
     uint64_t fpr_adj[32] = {};
-
+    uint32_t fpr_cons_live = 0;
     for (uint32_t i = 0; i < n_instrs; ++i) {
-        // Extract FPR vregs from the live_in bitmask.
-        uint64_t fpr_live = 0;
-        uint64_t bits = live_in[i];
-        while (bits) {
-            uint32_t r = static_cast<uint32_t>(Ctz64(bits));
-            bits &= bits - 1;
-            if (r >= interpreter::kGPRegisters && r < interpreter::kTotalRegisters) {
-                uint32_t fi = r - interpreter::kGPRegisters;
-                if (fi < 32)
-                    fpr_live |= (1ULL << fi);
-            }
+        // Add FPR vregs first defined at this instruction (conservative live).
+        uint32_t cbits = fpr_def[i];
+        uint32_t new_fdefs = 0;
+        while (cbits) {
+            uint32_t f = static_cast<uint32_t>(Ctz32(cbits));
+            cbits &= cbits - 1;
+            if (fpr_first_def[f] == i)
+                new_fdefs |= (1u << f);
+        }
+        fpr_cons_live |= new_fdefs;
+
+        // Transitive interference: every FPR vreg live-here interferes with
+        // every other (mirrors the GPR live_in transitive closure).  This is
+        // what makes a dst interfere with its still-live sources at the same
+        // instruction (e.g. Add v66 = v64 + v65: v66 must not reuse v64/v65's
+        // XMM).  Without it, only the def×cons rule below runs and the exclude-
+        // sources clause drops the very edge the dst needs.
+        uint64_t live_c = fpr_cons_live;
+        while (live_c) {
+            uint32_t fi = static_cast<uint32_t>(Ctz64(live_c));
+            live_c &= live_c - 1;
+            fpr_adj[fi] |= fpr_cons_live;
+            fpr_adj[fi] &= ~(1ULL << fi);
         }
 
-        // Transitive interference among live FPRs.
-        uint64_t fb = fpr_live;
-        while (fb) {
-            uint32_t fi = static_cast<uint32_t>(Ctz64(fb));
-            fb &= fb - 1;
-            if (fi < 32) {
-                fpr_adj[fi] |= fpr_live;
-                fpr_adj[fi] &= ~(1ULL << fi);
-            }
-        }
-
-        // FPR def → live-out interference (same bug fix as GPR above).
-        // A defined FPR vreg interferes with all FPR vregs that are live across i.
-        const auto& inst = instrs[i];
-        uint32_t fdst = (inst.has_dst() && inst.dst_reg() >= interpreter::kGPRegisters &&
-                         inst.dst_reg() < interpreter::kTotalRegisters)
-                          ? inst.dst_reg() - interpreter::kGPRegisters
-                          : UINT32_MAX;
-        if (fdst < 32) {
-            uint64_t fpr_live_out = 0;
-            uint64_t obits = live_out[i];
-            while (obits) {
-                uint32_t r = static_cast<uint32_t>(Ctz64(obits));
-                obits &= obits - 1;
-                if (r >= interpreter::kGPRegisters && r < interpreter::kTotalRegisters) {
-                    uint32_t fi_lo = r - interpreter::kGPRegisters;
-                    if (fi_lo < 32)
-                        fpr_live_out |= (1ULL << fi_lo);
+        // Bidirectional interference: each defined FPR vreg interferes with the
+        // conservative-live FPR set (excl. itself + its sources, which are read
+        // before the dst is written in three-address code).
+        uint32_t fbits = fpr_def[i];
+        while (fbits) {
+            uint32_t fdst = static_cast<uint32_t>(Ctz32(fbits));
+            fbits &= fbits - 1;
+            uint32_t exclude = (1u << fdst) | fpr_use[i];
+            uint32_t interfere = fpr_cons_live & ~exclude;
+            if (interfere) {
+                fpr_adj[fdst] |= interfere;
+                uint32_t ibits = interfere;
+                while (ibits) {
+                    uint32_t iv = static_cast<uint32_t>(Ctz32(ibits));
+                    ibits &= ibits - 1;
+                    fpr_adj[iv] |= (1ULL << fdst);
                 }
             }
-            fpr_adj[fdst] |= fpr_live_out;
-            fpr_adj[fdst] &= ~(1ULL << fdst);
+        }
+
+        // Remove FPR vregs that had their last use at this instruction.
+        uint32_t ub = fpr_use[i];
+        while (ub) {
+            uint32_t u = static_cast<uint32_t>(Ctz32(ub));
+            ub &= ub - 1;
+            if (fpr_last_use[u] == i)
+                fpr_cons_live &= ~(1u << u);
         }
     }
 

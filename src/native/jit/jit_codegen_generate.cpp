@@ -829,6 +829,16 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
                 phys_to_colored_vreg_[x64r] = static_cast<uint8_t>(vr);
             }
         }
+        // has_graph_coloring_ was set true above only if a GPR got a color.
+        // A pure-float method has all-GPR-spilled but valid FPR colors, which
+        // still need the filter + prologue/epilogue machinery and must set the
+        // accessor gate.  Re-derive from ANY surviving color now.
+        for (uint32_t fc2 = 0; fc2 < kFprCount; ++fc2) {
+            if (gcr_.fpr_color[fc2] != 0xFF) {
+                has_graph_coloring_ = true;
+                break;
+            }
+        }
         if (has_graph_coloring_) {
             // Print final coloring after filter for diagnostics
             std::printf("    [GC] %u GPR callee colors (%u instrs):", num_cache_regs_, n_instrs);
