@@ -512,6 +512,15 @@ private:
     // eliminating the per-op stack roundtrip (T2.1 A1).
     bool has_caller_clobber_ = true;
 
+    // Bitmask of GPR vregs whose live range crosses a call or safepoint.
+    // A caller-colored vreg in this mask must keep its stack slot current
+    // (write-through in StoreGpr) so EmitCallWithSpill can reload it and GC can
+    // scan it at the safepoint.  A caller-colored vreg NOT in this mask has a
+    // live range contained within call-free code: it can stay purely in the
+    // colored register with no stack write and no reload (per-vreg refinement
+    // of the coarse method-wide has_caller_clobber_ — CoreCLR LSRA-equivalent).
+    uint64_t cross_call_mask_ = 0;
+
     // LocAlloc: extra frame bytes (bump counter + reserve) when method uses LocAlloc.
     uint32_t localloc_extra_ = 0;
 

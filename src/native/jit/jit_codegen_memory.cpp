@@ -73,10 +73,12 @@ void NativeCodeGenerator::StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
             // Caller-colored vregs: write through to stack so the stack slot
             // holds the correct value even if argument setup clobbers the
             // colored register before EmitCallWithSpill's pre-call spill.
-            // T2.1 A1: on a call-free method (no calls, no safepoints, no
-            // overflow-check deopt sites), nothing can clobber the caller-saved
-            // register, so the value stays purely resident — skip the store.
-            bool write_through = (caller_colored_mask_ & (1ULL << vreg)) && has_caller_clobber_;
+            // T2.1 A1 / per-vreg refinement: only a caller-colored vreg whose live
+            // range crosses a call/safepoint (cross_call_mask_) needs the write —
+            // it's live across the call and will be reloaded.  A vreg live only in
+            // call-free code stays purely register-resident (no stack write).
+            bool write_through = (caller_colored_mask_ & (1ULL << vreg)) &&
+                                 (cross_call_mask_ & (1ULL << vreg));
             if (collect_stats_)
                 RecordGprAccess(false, write_through, write_through, current_opc_);
             if (write_through)
@@ -287,11 +289,13 @@ void NativeCodeGenerator::EmitCallWithSpill(uint8_t reg) noexcept {
     }
     enc_.EmitCallReg(reg);
     // Post-call reload: restore caller-saved colored vregs (R8-R11, colors 1-4)
-    // that were clobbered by the call.  Only reload vregs that are still alive
-    // at this point — the conservative approach reloads all caller-colored
-    // vregs from their stack slots (spilled before the call above).
-    if (has_graph_coloring_ && caller_colored_mask_) {
-        uint64_t mask = caller_colored_mask_;
+    // that were clobbered by the call.  Only reload caller-colored vregs that are
+    // live across a call (cross_call_mask_) — those are the only ones kept current
+    // via write-through.  Vregs not in cross_call_mask_ have call-free live ranges
+    // and must NOT be reloaded (their stack slots are stale); their registers stay
+    // valid because no call overlaps their def→use.
+    if (has_graph_coloring_) {
+        uint64_t mask = caller_colored_mask_ & cross_call_mask_;
         for (uint32_t vr = 0; mask; ++vr) {
             if (mask & 1) {
                 uint8_t colored_x64 = gcr_.gpr_color[vr];

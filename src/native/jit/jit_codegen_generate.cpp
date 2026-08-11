@@ -865,7 +865,10 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
                     // ARM64 callee-saved: X19-X28
                     bool is_callee = (x64r >= 19 && x64r <= 28);
 #else
-                    // x64 callee-saved: R12-R15 (SysV — RDI is caller-saved)
+                    // x64 callee-saved: R12-R15 for the coloring pool.  RDI is
+                    // ABI-callee-saved on Win64 but is operationally RESERVED as
+                    // the frame-init scratch (REP STOSQ in the prologue), so it
+                    // must remain caller-colored to avoid clobbering vreg values.
                     bool is_callee = (x64r >= 12 && x64r <= 15);
 #endif
                     if (is_callee) {
@@ -1274,6 +1277,54 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "Liveness computed for %u instructions, use_liveness=%d", n_instrs,
                                  (int)use_liveness_);
     }
+
+    // ── cross_call_mask_: vregs live across any call / safepoint ──────────
+    // A caller-colored vreg only needs its stack write-through (and the post-call
+    // reload) if its live range crosses a call/safepoint.  A call/safepoint is any
+    // managed/runtime call (Call/CallBridge/CallVirt/Calli) or an allocation/poll
+    // op that can trigger a GC or clobber caller-saved regs (NewObj/Box/NewArr/
+    // LdFld/StFld/LdSFld/StSFld/StElem/StObj/Cpblk/CastClass/IsInst/Throw/Rethrow
+    // — all either emit a runtime helper call or can hit a safepoint).  Values
+    // live-before such an instruction are live across it.  This is the per-vreg
+    // refinement of the coarse method-wide has_caller_clobber_.
+    cross_call_mask_ = 0;
+    if (liveness_computed_) {
+        for (uint32_t i = 0; i < n_instrs && i < live_in_.size(); ++i) {
+            const auto& inst = opt_instrs[i];
+            auto opc = inst.op_code();
+            const bool is_branch = (opc == IROpCode::Br || opc == IROpCode::BrTrue || opc == IROpCode::BrFalse ||
+                                    opc == IROpCode::Beq || opc == IROpCode::BneUn || opc == IROpCode::Blt ||
+                                    opc == IROpCode::BltUn || opc == IROpCode::Bgt || opc == IROpCode::BgtUn ||
+                                    opc == IROpCode::Ble || opc == IROpCode::BleUn || opc == IROpCode::Bge ||
+                                    opc == IROpCode::BgeUn || opc == IROpCode::Switch || opc == IROpCode::Leave);
+            const bool is_callish = (opc == IROpCode::Call || opc == IROpCode::CallBridge ||
+                                     opc == IROpCode::CallVirt || opc == IROpCode::Calli ||
+                                     opc == IROpCode::NewObj || opc == IROpCode::NewArr ||
+                                     opc == IROpCode::Box || opc == IROpCode::Unbox ||
+                                     opc == IROpCode::LdFld || opc == IROpCode::StFld ||
+                                     opc == IROpCode::LdSFld || opc == IROpCode::StSFld ||
+                                     opc == IROpCode::LdElem || opc == IROpCode::StElem ||
+                                     opc == IROpCode::LdElemA || opc == IROpCode::StObj ||
+                                     opc == IROpCode::CastClass || opc == IROpCode::IsInst ||
+                                     opc == IROpCode::Throw || opc == IROpCode::Rethrow ||
+                                     // Overflow-checked ops: their deopt path
+                                     // reconstructs the register file from vreg
+                                     // stack slots, so live vregs must be current.
+                                     opc == IROpCode::AddOvf || opc == IROpCode::SubOvf ||
+                                     opc == IROpCode::MulOvf || opc == IROpCode::ConvOvfI ||
+                                     opc == IROpCode::ConvOvfI4 || opc == IROpCode::ConvOvfI8 ||
+                                     opc == IROpCode::ConvOvfU || opc == IROpCode::ConvOvfU4 ||
+                                     opc == IROpCode::ConvOvfU8);
+            // Branches host safepoint polls (EmitSafepointPoll at Br/BrTrue/
+            // BrFalse), so a GC can scan the frame there too.
+            if (is_callish || (is_branch && config_.enable_safepoint_polls))
+                cross_call_mask_ |= live_in_[i];
+        }
+    }
+    // Fallback (liveness not computed, e.g. Tier 0): keep the coarse gate so
+    // correctness is preserved for any caller-colored GC-ref the GC may scan.
+    if (!liveness_computed_)
+        cross_call_mask_ = ~0ULL;
 
     // Pre-allocate JitMethod early so instruction emission can embed
     // the address of its stale flag for HotUpdate inline PIC checking.

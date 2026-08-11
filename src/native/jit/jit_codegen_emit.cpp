@@ -1577,9 +1577,11 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             // ARM64 ABI returns values in X0, but StoreGpr below expects kScratchA (X9).
             enc_.EmitMovRR(AT::kScratchA, 0); // MOV X9, X0
 #endif
-            // Post-call reload (same as EmitCallWithSpill postamble)
-            if (has_graph_coloring_ && caller_colored_mask_) {
-                uint64_t mask = caller_colored_mask_;
+            // Post-call reload (same as EmitCallWithSpill postamble).  Only reload
+            // caller-colored vregs live across a call (cross_call_mask_); non-mask
+            // vregs have call-free live ranges and must not read stale stack slots.
+            if (has_graph_coloring_) {
+                uint64_t mask = caller_colored_mask_ & cross_call_mask_;
                 for (uint32_t vr = 0; mask; ++vr) {
                     if (mask & 1) {
                         uint8_t colored_x64 = gcr_.gpr_color[vr];
