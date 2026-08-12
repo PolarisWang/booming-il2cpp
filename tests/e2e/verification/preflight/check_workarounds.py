@@ -76,10 +76,18 @@ def _git_files(cmd: list[str]) -> list[Path]:
         r = subprocess.run(cmd, capture_output=True, text=True, timeout=30,
                            cwd=_REPO_ROOT, encoding="utf-8", errors="replace")
         if r.returncode != 0:
-            return []
+            raise RuntimeError(f"git exited {r.returncode}: {' '.join(cmd)}")
         return [_REPO_ROOT / f for f in r.stdout.strip().splitlines() if f]
-    except (subprocess.TimeoutExpired, OSError):
-        return []
+    except (subprocess.TimeoutExpired, OSError, RuntimeError) as e:
+        # Fail-CLOSED (pre-push review 2026-08-12): a gate that silently returns no
+        # files (→ trivial pass) on git failure would let workaround/override
+        # violations through undetected.  Signal the failure instead so the gate
+        # blocks until the environment is healthy — never fail-open on infra error.
+        raise GateInfeasible(f"could not collect changed files: {e}")
+
+
+class GateInfeasible(Exception):
+    """Raised when the gate cannot determine its inputs (git unavailable)."""
 
 
 def _changed_py(ci_mode: bool) -> list[Path]:
@@ -273,10 +281,14 @@ def main() -> int:
     parser.add_argument("--verbose", "-v", action="store_true")
     args = parser.parse_args()
 
-    py_files = _changed_py(args.ci)
+    try:
+        py_files = _changed_py(args.ci)
+    except GateInfeasible as e:
+        # Fail-closed: cannot collect inputs → gate blocks (never trivial-pass).
+        print(f"[FAIL] workaround-gate infeasible: {e}")
+        return 1
     if args.verbose:
         print(f"  [workaround-gate] scanning {len(py_files)} Python files")
-
     violations: list[str] = []
     warnings: list[str] = []
     for f in py_files:
