@@ -64,6 +64,16 @@ chaos_native_add_test(convert_stubs_test
     LABELS "unit;core"
 )
 
+# P0-B A2: Unsafe / RuntimeHelpers pointer-intrinsic execute-body tests
+# Compiles unsafe_stubs.cpp directly (same GNU ar compat pattern as the other
+# stub tests). unsafe_stubs.cpp is self-contained (no GC/threading dependency),
+# so no gc_stubs_for_string_tests.cpp is needed.
+chaos_native_add_test(unsafe_stubs_test
+    unsafe_stubs_test.cpp
+    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/unsafe_stubs.cpp"
+    LABELS "unit;core"
+)
+
 # T4-1: Runtime Stubs performance benchmarks
 # Compiles stub .cpp directly (same GNU ar compat pattern as unit tests).
 chaos_native_add_test(runtime_stubs_benchmark
