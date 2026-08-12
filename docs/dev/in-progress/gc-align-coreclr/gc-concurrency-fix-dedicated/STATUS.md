@@ -124,3 +124,4 @@
 - P1：2参 barrier 非绝对 hot path，加 `IsNurseryPointer` 查询代价可接受；单参 `DirtyCard` 不变。
 - P2：旧代页标 OLD + 精确 range 判定，对齐 CoreCLR region 语义，架构一致。
 - P3：解释器单参路径不受影响；热更/域卸载不变。低优先级让位于 #1 高性能→保持升+精确。
+  - **M5-1 已落地（commit `faf020b3a`）**：修 BGC-YoungGC 暂停死锁——concurrent-mark 完成时 ack 挂起 pause + phase-wait 改 pause-servicing 循环 + PauseForYoungGc/Resume 通知 CV。`bgc_race_test` 完成率 ~0%→~75%（8 次跑 6 完成；残余 2 次为更深的 pre-existing mutator-driven phase 自推进问题）。`bgc_smoke` 6/0。
