@@ -94,3 +94,19 @@
 1. 补跑 8 个超时 chunk，补全清单（提高 timeout 或分批）。
 2. 选 **A2-1（Unsafe + Numerics Vector，28 个最热 intrinsic）** 作为方向 A 首批：语义最清晰（intrinsic），修一个带动一片，能证明" fallback→native"收益真实。
 3. 跑完后重跑 fact，确认该批缺口从 `passed=false` → `passed=true`。
+
+---
+
+## 8. A0 补跑结果（2026-08-12）
+
+对 A1 超时的 8 个 System.Private.CoreLib 大 chunk（runtime-intrinsics*/system*）用
+`a0_inventory.py --timeout 180/240` 补跑，**全部 NO_PARSE / 无输出**：
+- 180s 内全部 NO_PARSE（regex 未匹配到 factResults JSON）。
+- `system-8 --fact-json` 关 log 后 240s 内 **stdout 无任何 fact 输出**（exit=0）。
+
+**结论**：这 8 个 CoreLib 大 chunk 的 `--fact-json` 在本环境**不实际可跑**（方法数千/或卡死），
+缺口无法实测。**A1 的 111 缺口是下界**——这 8 个未覆盖 chunk（CoreLib 的 intrinsics/system 核心区）
+隐含更多缺口。a0_inventory.py 已入库供未来扩容。
+
+**不做范围外判断**：这可能是 (a) 方法数过大需分钟级 timeout（不切实际），或 (b) 某方法卡死
+（需逐 chunk 二分定位）。留给 fd-verification 线/更有耐心的环境。
