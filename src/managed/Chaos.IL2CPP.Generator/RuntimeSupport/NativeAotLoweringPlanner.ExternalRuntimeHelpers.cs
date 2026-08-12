@@ -237,6 +237,17 @@ public sealed partial class NativeAotLoweringPlanner
 		// Canonicalize assembly prefix so matching is assembly-agnostic
 		callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
 
+		// A2-1 (§15/§17): Vector2/3/4 exact non-generic `_All` reducers MUST match here,
+		// BEFORE the generic "System.Numerics.Vector<T>" shape (RegisterVectorReduction).
+		// That generic shape's TypeDisplayNamePrefix "System.Numerics.Vector" prefix-matches
+		// Vector2/3/4 and routes them to the Vector<T> 256-bit helper (wrong carrier ABI →
+		// runtime throw).  Vector2/3/4 need the carrier-specific lane-reducer helper.
+		if (TryCreateVectorAllComparerHelper(callee, out helperDefinition))
+		{
+							_externalRuntimeHelperCache[callee] = helperDefinition;
+			return true;
+		}
+
 		// === Generic shape dispatch via Registry (check BEFORE _methodsBySubjectId) ===
 		// NormalizeSubjectIdAssembly may change System.Numerics.Vectors -> System.Private.CoreLib,
 		// making the method appear in _methodsBySubjectId with instructions.  Generic shape
