@@ -301,6 +301,14 @@ public sealed partial class NativeAotLoweringPlanner
 								_externalRuntimeHelperCache[callee] = helperDefinition;
 					return true;
 		}
+		// A2-1 (§15): Vector2/3/4 non-generic `_All` reducers route through the external
+		// table → fallback → interpreter/throwing.  Emit a native helper that unpacks the
+		// two INTPTR-encoded carriers and calls the runtime lane-reducer → returns 1/0.
+		if (TryCreateVectorAllComparerHelper(callee, out helperDefinition))
+		{
+							_externalRuntimeHelperCache[callee] = helperDefinition;
+			return true;
+		}
 		// Catch-all: generate ChaosExternalRuntimeFallback stub for any unmatched callee.
 		// Prevents undefined-chaos_external_runtime_* C++ symbol errors and CHAOS_IL2CPP_FAIL.
 		// Returns type-appropriate defaults (0/nullptr) via the runtime fallback function.
@@ -345,6 +353,47 @@ public sealed partial class NativeAotLoweringPlanner
 		_externalRuntimeHelperCache[callee] = helperDefinition;
 		return true;
 
+	}
+
+	private bool TryCreateVectorAllComparerHelper(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
+	{
+		helperDefinition = null;
+		// Match: System.Numerics.Vectors/System.Numerics.Vector[234]::</MethodName>:
+		//   System.Boolean(System.Numerics.Vector[234],System.Numerics.Vector[234])
+		// Detect the numerics carrier + reduce method.
+		string carrier;      // RuntimeNumericsVector2Carrier
+		string nativeFn;     // Vector2GreaterThanAll
+		var m = System.Text.RegularExpressions.Regex.Match(
+			callee, @"System\.Numerics\.Vector([234])::(GreaterThanAll|GreaterThanOrEqualAll|LessThanAll|LessThanOrEqualAll):");
+		if (!m.Success)
+			return false;
+		var dim = m.Groups[1].Value;
+		var method = m.Groups[2].Value;
+		carrier = dim switch { "2" => "RuntimeNumericsVector2Carrier", "3" => "RuntimeNumericsVector3Carrier", _ => "RuntimeNumericsVector4Carrier" };
+		nativeFn = $"Vector{dim}{method}";     // e.g. Vector2GreaterThanAll — landed in numerics_vectors.cpp
+
+		var symbol = GetExternalRuntimeHelperSymbol(callee);
+		// body: two INTPTR args point at carriers (call-site passes vector by value → boxed;
+		// we reinterpret the first float X as the carrier or read via carrier pointer).
+		// A2-1: unpack via pointer-to-carrier, call the native reducer, return 1/0.
+		var src = RenderSimpleExternalRuntimeHelper(
+			"CHAOS_IL2CPP_INT32", symbol,
+			"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+			new[]
+			{
+				$"    const auto* chaos_a = reinterpret_cast<const chaos::il2cpp::runtime_core::{carrier}*>(chaos_arg_0);",
+				$"    const auto* chaos_b = reinterpret_cast<const chaos::il2cpp::runtime_core::{carrier}*>(chaos_arg_1);",
+				$"    return chaos::il2cpp::runtime_core::{nativeFn}(*chaos_a, *chaos_b);",
+			});
+		helperDefinition = new ExternalRuntimeHelperDefinition(callee, symbol, src,
+			new AotCoreIrAbiSlotArtifact[]
+			{
+				CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType),
+				CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType),
+			},
+			CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType),
+			EmptyRawArgumentIndices);
+		return true;
 	}
 
 	private ExternalRuntimeHelperDefinition CreateDefinitionFromShapeEntry(

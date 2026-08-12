@@ -223,3 +223,25 @@ rebuild Debug 的 TPG（依赖传播），不然一切验证都是 stale。
 `System.Numerics.Vector2/3/4::GreaterThanAll/...(Vector,Vector→bool)` 生成 native helper——
 body 里把 2 个 INTPTR param 各自 reinterpret 成 `RuntimeNumericsVector2Carrier*` 解出 x/y,
 调已 land 的 `Vector2GreaterThanAll` → 返回 1/0。这绕开 by-value 表 ABI 限制(用 pointer→carrier 解包)。
+
+### 16. A2 验证基础设施屏障（2026-08-12，决定性）
+
+**实现已完成**：`TryCreateVectorAllComparerHelper`（ExternalRuntimeHelpers.cs）为 Vector2/3/4
+`_All` 生成 helper——2 个 INTPTR param reinterpret 成 carrier*，调已 land native，返回 1/0。
+Generator Release 编译 0 error；regex 对实际 subjectId（`System.Numerics.Vectors/System.Numerics.Vector2::GreaterThanAll:Boolean(...)`）匹配验证通过。
+
+**但验证被基础设施阻塞（关键）**：
+1. **hephaestus cache 忽略源码变化**：`compute_key(subjects_dll, metadata, chunk)` 不含
+   Generator/native 源码帧指纹 → 改 codegen/stub 后 `compute_context_fingerprint` 未含这些
+   路径 → 永远 stale-restore AOT entry（5835264B 旧体），native 重建被 cache 覆盖。
+   `is_context_fresh` 存在但 build stage 未用。
+2. **JIT convert 可能用不同的 Generator DLL**（release vs debug；代码库 4 份 Generator.dll）——
+   我 rebuild Debug TPG，但 convert-to-cpp 或许用 Release Driver/Pipeline 的副本。
+   证据：Fresh JIT entry-jit.exe 也 16 失败、生成代码无 Vector2GreaterThanAll → 新 codegen
+   未达任何生成路径。
+
+**下步（新任务）**：修 A2 验证基础设施：
+- 把 Generator/native stub 源码 mtime 纳入 `compute_context_fingerprint`（build.py extra_source_paths 传
+  Generator + interop_stubs），cache key 变化 → 自动重建。
+- 或加 `--no-hephaestus-cache` 强制真 convert+CMake。
+- 确认 convert-to-cpp 用哪个 Generator DLL（确保 rebuild 正确的那个）。
