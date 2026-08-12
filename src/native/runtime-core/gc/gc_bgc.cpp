@@ -1061,6 +1061,26 @@ void BgcController::BgcThreadMain() {
             // Signal parallel workers to stop and join them.
             StopParallelMarkWorkers();
 
+            // M5-1: Ack any pending young-GC pause BEFORE leaving concurrent mark.
+            // If a young GC requested a pause exactly as concurrent mark completed,
+            // the BGC would otherwise break out of the mark loop and park in the
+            // REMARK_NEEDED wait without acking bgc_paused_ — leaving the young GC
+            // spinning forever in PauseForYoungGc (pre-existing phase-6/round-N race
+            // in gc_bgc_race_test).  Ack + drain deques, then wait for the pause to
+            // be lifted before proceeding to the phase transition.
+            if (bgc_pause_requested_.load(std::memory_order_acquire)) [[unlikely]] {
+                // Any work left in deques after workers stopped and dumps.
+                for (int i = 0; i < kMaxBgcWorkers; i++) {
+                    DrainWorkerDeque(i, 0);
+                }
+                bgc_paused_.store(true, std::memory_order_release);
+                while (bgc_pause_requested_.load(std::memory_order_acquire)) {
+                    std::this_thread::yield();
+                }
+                bgc_paused_.store(false, std::memory_order_release);
+                CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_acked_at_mark_complete");
+            }
+
             // Safety drain: any work left in deques after workers stopped.
             for (int i = 0; i < n_workers; i++) {
                 DrainWorkerDeque(i, 0);
@@ -1077,13 +1097,38 @@ void BgcController::BgcThreadMain() {
         // BGC thread waits while STW re-mark happens (executed by the
         // requesting thread under safepoint).  The phase will be set to
         // CONCURRENT_SWEEP or FINISHED by the scheduler after re-mark.
+        // M5-1: loop servicing pending young-GC pauses.  PauseForYoungGc now
+        // wakes us via bgc_cv_ even while parked here; if a pause is pending we
+        // ack it and wait for resume, then re-evaluate the phase (so we do NOT
+        // fall through to Finish on a pause wake).
         {
-            std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
-            bgc_cv_.wait(lock, [this]() {
-                auto p = phase_.load(std::memory_order_acquire);
-                return p != BgcPhase::REMARK_NEEDED ||
-                       !bgc_running_.load(std::memory_order_acquire);
-            });
+            bool pause_serviced = false;
+            while (!pause_serviced) {
+                {
+                    std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
+                    bgc_cv_.wait(lock, [this]() {
+                        auto p = phase_.load(std::memory_order_acquire);
+                        return p != BgcPhase::REMARK_NEEDED ||
+                               bgc_pause_requested_.load(std::memory_order_acquire) ||
+                               !bgc_running_.load(std::memory_order_acquire);
+                    });
+                }
+                if (bgc_pause_requested_.load(std::memory_order_acquire)) {
+                    // Ack the pause and wait for the young GC to resume.
+                    bgc_paused_.store(true, std::memory_order_release);
+                    while (bgc_pause_requested_.load(std::memory_order_acquire)) {
+                        std::this_thread::yield();
+                    }
+                    bgc_paused_.store(false, std::memory_order_release);
+                    CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_serviced_in_remark_wait");
+                    // Re-evaluate: if the phase still hasn't advanced, re-wait.
+                    if (phase_.load(std::memory_order_acquire) == BgcPhase::REMARK_NEEDED &&
+                        bgc_running_.load(std::memory_order_acquire)) {
+                        continue;
+                    }
+                }
+                pause_serviced = true;
+            }
         }
 
         // ── Phase 3: Concurrent Sweep ─────────────────────────────
@@ -1120,12 +1165,35 @@ void BgcController::BgcThreadMain() {
         }
 
         {
-            std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
-            bgc_cv_.wait(lock, [this]() {
-                auto p = phase_.load(std::memory_order_acquire);
-                return p != BgcPhase::COMPACT_NEEDED ||
-                       !bgc_running_.load(std::memory_order_acquire);
-            });
+            // M5-1: same pause-servicing loop as the REMARK_NEEDED wait — a
+            // young-GC pause requested while parked here is acked and serviced,
+            // then we re-evaluate the COMPACT_NEEDED phase (never falling through
+            // to Finish on a pause wake).
+            bool pause_serviced = false;
+            while (!pause_serviced) {
+                {
+                    std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
+                    bgc_cv_.wait(lock, [this]() {
+                        auto p = phase_.load(std::memory_order_acquire);
+                        return p != BgcPhase::COMPACT_NEEDED ||
+                               bgc_pause_requested_.load(std::memory_order_acquire) ||
+                               !bgc_running_.load(std::memory_order_acquire);
+                    });
+                }
+                if (bgc_pause_requested_.load(std::memory_order_acquire)) {
+                    bgc_paused_.store(true, std::memory_order_release);
+                    while (bgc_pause_requested_.load(std::memory_order_acquire)) {
+                        std::this_thread::yield();
+                    }
+                    bgc_paused_.store(false, std::memory_order_release);
+                    CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_serviced_in_compact_wait");
+                    if (phase_.load(std::memory_order_acquire) == BgcPhase::COMPACT_NEEDED &&
+                        bgc_running_.load(std::memory_order_acquire)) {
+                        continue;
+                    }
+                }
+                pause_serviced = true;
+            }
         }
 
         // ── Finish ────────────────────────────────────────────────
@@ -1293,6 +1361,10 @@ void BgcController::WaitForFinalizerDrain() noexcept {
 void BgcController::PauseForYoungGc() noexcept {
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_requested");
     bgc_pause_requested_.store(true, std::memory_order_release);
+    // M5-1: wake the BGC so it can ack even if it is parked in a phase-wait
+    // (REMARK_NEEDED / COMPACT_NEEDED) — otherwise the wait predicate never
+    // re-evaluates and the young GC spins on bgc_paused_ forever.
+    bgc_cv_.notify_all();
     // Wait for BGC thread to acknowledge (bgc_paused_ == true).
     while (!bgc_paused_.load(std::memory_order_acquire)) {
         std::this_thread::yield();
@@ -1305,6 +1377,9 @@ void BgcController::PauseForYoungGc() noexcept {
 void BgcController::ResumeAfterYoungGc() noexcept {
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_resume");
     bgc_pause_requested_.store(false, std::memory_order_release);
+    // M5-1: wake the BGC so it can clear its pause-ack and continue, even if it
+    // is parked in a phase-wait.
+    bgc_cv_.notify_all();
     // Wait for BGC thread to clear bgc_paused_ (acknowledge resume).
     while (bgc_paused_.load(std::memory_order_acquire)) {
         std::this_thread::yield();
