@@ -143,3 +143,13 @@ adaptive + outlier + FP-12 零时长守卫 + `_MIN_ELAPSED_FLOOR` + perf-store o
 **真实修复方向（下一 session）**：在 **ShapeRegistry / `TryCreateExternalRuntimeHelperDefinition`** 补 `System.Numerics.Vector2/3/4::GreaterThanAll/GreaterThanOrEqualAll/LessThanAll/LessThanOrEqualAll`(Vector,Vector→bool) 的 **SimpleForward** 条目 → 映射到已 land 的 native `Vector2/3/4{GreaterThan,LessThan,...}All`（commit 23e355b5f）。照 `RuntimeHelpers::InitializeArray`（S10.cs:156）的 Register pattern：`registry.Register("System.Numerics.Vector2","GreaterThanAll",["System.Numerics.Vector2","System.Numerics.Vector2"], SimpleForward, "Vector2GreaterThanAll", [Vector2-carrier ABI, Vector2-carrier ABI], bool ABI)`. carrier-by-value 需核对 ABI slot(2 floats)。之后重建 numerics + fact 验证。
 
 **注意**：该 fallback 对 `EqualsAll/LessThanOrEqualAll` 等返回硬编码 1（interop_stubs.cpp:756-762），是"零输入巧合正确"的伪通过。真修复让全部 `_All` 走真实 native 计算，既修 GreaterThanAll/LessThanAll 的错返回，也消除伪通过。
+
+### 11. A2-1 ABI 卡点裁决（2026-08-12）
+
+核查 `AotCoreIrAbiCarrierKind`：存在 `ValueTypeByValue(3)` + `ByRefToValueType(14)` kinds，说明 dispatch 模型**概念上支持** by-value 结构传参。但 ShapeRegistry 的 `CollectBridgeImportThunks`/`Dispatch.Interface` 对 param 统一用 `CreateNativeIntAbiSlot()`（native int，8 字节），**无法承载 16 字节 `RuntimeNumericsVector2Carrier`**（2×float）。
+
+∴ **SimpleForward 路线不可行**（carrier 无法经 INTPTR slot 传递）。正确路线回到 **vector-kernel numerics 路径**（`TryResolveNumericsFromArtifact` 已建 carrier=`RuntimeNumericsVector2Carrier`），但需确认为何：
+1. kernel 改动重建后未生效（疑：AOT entry.exe 未用新 codegen 重建，只重建了 JIT entry-jit.exe）。
+2. `Vector2::GreaterThanAll` 是否经 Phase-1 numerics 还是外部表派发。
+
+**下一 session 第一件事**：核实重建命令是否对 AOT entry.exe 也用新 codegen（build stage 的 aot vs jit 产物差异），否则 kernel 修复永远不会在 fact 里可见。确认后再回到 `MapOperationKindToSemanticId`+Vector2/3/4 分支（该 ABI 路线正确，只是上轮验证方式错了）。
