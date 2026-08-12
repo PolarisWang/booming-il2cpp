@@ -127,3 +127,6 @@
   - **M5-1 已落地（commit `faf020b3a`）**：修 BGC-YoungGC 暂停死锁——concurrent-mark 完成时 ack 挂起 pause + phase-wait 改 pause-servicing 循环 + PauseForYoungGc/Resume 通知 CV。`bgc_race_test` 完成率 ~0%→~75%（8 次跑 6 完成；残余 2 次为更深的 pre-existing mutator-driven phase 自推进问题）。`bgc_smoke` 6/0。
   - **M3A-1 已落地（commit `18f3b8693`）**：接线 `GcHeapManager::Initialize()` 到 InitYoungGeneration + CMake GC_SERVER 默认 OFF（对齐 gc_features.h 文档；cache 需显式 `-DCHAOS_IL2CPP_GC_SERVER=OFF`）。WKS 默认构建全绿。
   - **M3A-2/3 未落地（诚实 frontier）**：M3A-2 需 `GC_SERVER=1` 独立构建矩阵（`tests/unit` gtest 树），M3A-3 需 `G_*()` accessor 路由（bare-global 分配点）+ 域卸载 per-heap——体量大、需 server CI 验证，遇环境/架构阻塞。
+  - **M3A-3 已落地（commit `0bd49649f`）**：gc_gen1/gc_old_gen 的 bare `g_old_gen.` → `G_OldGen()` accessor（12 sites），使 Server 下路由 per-heap。WKS 无差异，gen1 14/0 + 全 GC 测试绿。`gc_young_gen.h:166` bare g_gc_scheduler 留待 server CI 再动（hot-path header）。
+  - **M4 provisional 已大体在**：`SetProvisionalMode`/`GcTriggerReason::PROVISIONAL`/force-blocking 已有 + `TestProvisionalForceBlocking` 覆盖。M4 剩余「gen1 强制 compact + NGC2 排队」依赖 M3B(动态堆数，依附 server 路径)，WKS 不可验证。
+  - **M3B/M6/M2-M1**：M3B/M6 依赖 server 多堆运行时（需 server CI 矩阵）；M2-M1 blocked on foundation-dll CI 管线。
