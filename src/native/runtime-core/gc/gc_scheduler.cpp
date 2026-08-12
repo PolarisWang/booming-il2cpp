@@ -318,6 +318,21 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
         return GcCollectionKind::FULL;
     }
 
+    // 0d. M3/T5 FIX-1: many normal (non-oversized) frees have piled up since the
+    // last collection without a sweep to reclaim them.  Each normal Free only
+    // memsets the block; the containing page is pooled only when SweepPage sees
+    // it 100%-free.  Nudge a background sweep so those fully-free pages return
+    // to the pool and release physical memory.  Not provisional → prefer BGC
+    // (non-blocking); threshold ~ one 64KB page of 32-byte blocks.
+    constexpr CHAOS_IL2CPP_SIZE kFreelistReleaseTrigger = 2048;
+    if (G_OldGen().FreelistReleaseCount() >= kFreelistReleaseTrigger) {
+        SetLastTriggerReason(GcTriggerReason::PAGE_GROWTH);
+        if (g_bgc_enabled && !bgc.IsBusy() && !provisional) {
+            return GcCollectionKind::FULL_BGC;
+        }
+        return GcCollectionKind::FULL;
+    }
+
     // 0. NGC2 queue (M4/M3B): a mandated gen2 collection was queued (provisional
     // entry / high memory pressure / high fragmentation).  Discharge it at the
     // next GC decision by forcing a blocking FULL once (never BGC/NONE), then

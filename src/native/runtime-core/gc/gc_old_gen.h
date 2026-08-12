@@ -310,6 +310,18 @@ public:
         return page_pool_.size() > static_cast<size_t>(kMaxPoolSize);
     }
 
+    /// Monotonic count of Non-oversized Free() calls since the last Reset/
+    /// read.  Used by DecideCollection to nudge a sweep when many normal frees
+    /// have not yet been swept back into the reusable pool (M3/T5 FIX-1).
+    CHAOS_IL2CPP_SIZE FreelistReleaseCount() const noexcept {
+        return freelist_release_count_.load(std::memory_order_relaxed);
+    }
+
+    /// Reset the normal-free counter (called when a collection reclaims pages).
+    void ResetFreelistReleaseCount() noexcept {
+        freelist_release_count_.store(0, std::memory_order_relaxed);
+    }
+
     // ── Page index (sorted array for O(log n) lookup) ───────────
 
     /// Sorted page array for O(log n) FindPage/IsInOldGen.
@@ -588,6 +600,11 @@ public:
     };
     static constexpr int kMaxPoolSize = 16;
     std::vector<PoolEntry> page_pool_;
+
+    // Monotonic count of normal (non-oversized) Free() calls.  Read by the
+    // scheduler (M3/T5 FIX-1) to decide when to nudge a sweep so fully-free
+    // pages get pooled; reset when a collection reclaims them.
+    std::atomic<CHAOS_IL2CPP_SIZE> freelist_release_count_{0};
 
     // Pool pages (100%-free normal pages) deferred from BgcSweep Phase 4b
     // to BgcCompact (STW safepoint).  BgcSweep runs concurrently with

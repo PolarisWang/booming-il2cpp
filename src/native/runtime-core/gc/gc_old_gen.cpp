@@ -914,6 +914,12 @@ void MarkSweepOldGen::Free(void* ptr) {
     // accidental pointer retention through the mark phase.  Full-page
     // memset happens at page carve time.
     std::memset(ptr, 0, 64);
+
+    // M3/T5 FIX-1: record that a normal free happened.  The page itself is not
+    // pooled yet (only SweepPage can reclaim it), but if many normal frees pile
+    // up without a sweep, DecideCollection nudges a BGC/FULL so fully-free
+    // pages get swept back into the pool and their physical memory is released.
+    freelist_release_count_.fetch_add(1, std::memory_order_relaxed);
 }
 
 void* MarkSweepOldGen::AllocatePinned(CHAOS_IL2CPP_SIZE size) noexcept {
@@ -2744,6 +2750,11 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         deferred_free_pages_.clear();
     }
     RebuildPageArray();
+
+    // M3/T5 FIX-1: a full collection has now swept 100%-free normal pages into
+    // the pool; reset the normal-free counter that DecideCollection reads to
+    // signal "reclaimable pages may exist".
+    ResetFreelistReleaseCount();
 
     // Fire SWEEP_DONE event.
     GcFireEvent(GcEvent::SWEEP_DONE);

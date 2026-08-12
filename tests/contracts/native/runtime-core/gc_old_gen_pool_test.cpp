@@ -115,12 +115,37 @@ void TestReallocBoundary() {
     GC_CHECK(page != nullptr, "reallocated object resolves to a page");
 }
 
+// ── Test 4: M3/T5 FIX-1 — normal Free() increments the reclaim counter ─
+// Free() of a non-oversized block increments FreelistReleaseCount(); Reset
+// zeroes it.  This locks the "normal frees nudge a sweep" signal that
+// DecideCollection consumes.
+void TestFreelistReleaseCounter() {
+    TEST("FreelistRelease counter (FIX-1)");
+
+    auto before = g_old_gen.FreelistReleaseCount();
+    std::vector<void*> objs;
+    for (int i = 0; i < 8; i++) {
+        void* p = g_old_gen.Allocate(32, true);
+        if (p != nullptr) objs.push_back(p);
+    }
+    for (void* p : objs) g_old_gen.Free(p);
+    auto after = g_old_gen.FreelistReleaseCount();
+    GC_CHECK(after > before,
+             "Free() of normal blocks increments FreelistReleaseCount");
+
+    // Reset must zero the counter.
+    g_old_gen.ResetFreelistReleaseCount();
+    GC_CHECK(g_old_gen.FreelistReleaseCount() == 0,
+             "ResetFreelistReleaseCount() zeroes the counter");
+}
+
 int main() {
     puts("CRAG old-gen page pool + FindPage boundary tests");
     puts("══════════════════════════════════════════════════\n");
     TestFindPageBoundaries();
     TestPoolAccessors();
     TestReallocBoundary();
+    TestFreelistReleaseCounter();
     printf("\nResults: %d tests, %d failures\n", g_tests, g_failures);
     return g_failures > 0 ? 1 : 0;
 }
