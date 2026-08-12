@@ -566,3 +566,4 @@ tests/**/coverage.cobertura.xml
 /jit_allocation_stats.json
 /tests/e2e/verification/a1_fact_inventory.json
 /testing/
+/tests/e2e/verification/a0_inventory.json
