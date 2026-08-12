@@ -81,6 +81,15 @@ RuntimeNumericsVector2Carrier Vector2Lerp(RuntimeNumericsVector2Carrier l, Runti
 RuntimeNumericsVector2Carrier Vector2Reflect(RuntimeNumericsVector2Carrier v, RuntimeNumericsVector2Carrier n) { return Vector2Subtract(v, Vector2MultiplyScalar(n, 2.0f * Vector2Dot(v, n))); }
 RuntimeNumericsVector2Carrier Vector2Negate(RuntimeNumericsVector2Carrier v) { return MakeVector2(-v.x, -v.y); }
 bool Vector2Equals(RuntimeNumericsVector2Carrier l, RuntimeNumericsVector2Carrier r) { return l.x == r.x && l.y == r.y; }
+// A2-1: Vector2 lane-wise compare reducer — all-lanes satisfy predicate.
+// GreaterThanAll/LessThanAll/... are the SIMD _All operators: true iff every
+// component of l strictly satisfies the relation against the corresponding
+// component of r.  Bool is returned as CHAOS_IL2CPP_INT32 (1/0) matching the
+// fact-contract bool→Int64 subject encoding.
+CHAOS_IL2CPP_INT32 Vector2GreaterThanAll(RuntimeNumericsVector2Carrier l, RuntimeNumericsVector2Carrier r) { return (l.x > r.x) && (l.y > r.y) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector2GreaterThanOrEqualAll(RuntimeNumericsVector2Carrier l, RuntimeNumericsVector2Carrier r) { return (l.x >= r.x) && (l.y >= r.y) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector2LessThanAll(RuntimeNumericsVector2Carrier l, RuntimeNumericsVector2Carrier r) { return (l.x < r.x) && (l.y < r.y) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector2LessThanOrEqualAll(RuntimeNumericsVector2Carrier l, RuntimeNumericsVector2Carrier r) { return (l.x <= r.x) && (l.y <= r.y) ? 1 : 0; }
 CHAOS_IL2CPP_INT32 Vector2GetHashCode(RuntimeNumericsVector2Carrier v) { return HashCodeCombine2(SingleGetHashCodeValue(v.x), SingleGetHashCodeValue(v.y)); }
 float Vector2Length(RuntimeNumericsVector2Carrier v) { return CHAOS_IL2CPP_SQRT(Vector2LengthSquared(v)); }
 float Vector2Dot(RuntimeNumericsVector2Carrier l, RuntimeNumericsVector2Carrier r) { return (l.x * r.x) + (l.y * r.y); }
@@ -122,6 +131,10 @@ RuntimeNumericsVector3Carrier Vector3Reflect(RuntimeNumericsVector3Carrier v, Ru
 RuntimeNumericsVector3Carrier Vector3Cross(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return MakeVector3((l.y * r.z) - (l.z * r.y), (l.z * r.x) - (l.x * r.z), (l.x * r.y) - (l.y * r.x)); }
 RuntimeNumericsVector3Carrier Vector3Negate(RuntimeNumericsVector3Carrier v) { return MakeVector3(-v.x, -v.y, -v.z); }
 bool Vector3Equals(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return l.x == r.x && l.y == r.y && l.z == r.z; }
+CHAOS_IL2CPP_INT32 Vector3GreaterThanAll(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return (l.x > r.x) && (l.y > r.y) && (l.z > r.z) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector3GreaterThanOrEqualAll(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return (l.x >= r.x) && (l.y >= r.y) && (l.z >= r.z) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector3LessThanAll(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return (l.x < r.x) && (l.y < r.y) && (l.z < r.z) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector3LessThanOrEqualAll(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return (l.x <= r.x) && (l.y <= r.y) && (l.z <= r.z) ? 1 : 0; }
 CHAOS_IL2CPP_INT32 Vector3GetHashCode(RuntimeNumericsVector3Carrier v) { return HashCodeCombine3(SingleGetHashCodeValue(v.x), SingleGetHashCodeValue(v.y), SingleGetHashCodeValue(v.z)); }
 float Vector3Length(RuntimeNumericsVector3Carrier v) { return CHAOS_IL2CPP_SQRT(Vector3LengthSquared(v)); }
 float Vector3Dot(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return (l.x * r.x) + (l.y * r.y) + (l.z * r.z); }
@@ -160,6 +173,10 @@ RuntimeNumericsVector4Carrier Vector4Normalize(RuntimeNumericsVector4Carrier v) 
 RuntimeNumericsVector4Carrier Vector4Lerp(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r, float a) { return Vector4Add(l, Vector4MultiplyScalar(Vector4Subtract(r, l), a)); }
 RuntimeNumericsVector4Carrier Vector4Negate(RuntimeNumericsVector4Carrier v) { return MakeVector4(-v.x, -v.y, -v.z, -v.w); }
 bool Vector4Equals(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r) { return l.x == r.x && l.y == r.y && l.z == r.z && l.w == r.w; }
+CHAOS_IL2CPP_INT32 Vector4GreaterThanAll(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r) { return (l.x > r.x) && (l.y > r.y) && (l.z > r.z) && (l.w > r.w) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector4GreaterThanOrEqualAll(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r) { return (l.x >= r.x) && (l.y >= r.y) && (l.z >= r.z) && (l.w >= r.w) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector4LessThanAll(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r) { return (l.x < r.x) && (l.y < r.y) && (l.z < r.z) && (l.w < r.w) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector4LessThanOrEqualAll(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r) { return (l.x <= r.x) && (l.y <= r.y) && (l.z <= r.z) && (l.w <= r.w) ? 1 : 0; }
 CHAOS_IL2CPP_INT32 Vector4GetHashCode(RuntimeNumericsVector4Carrier v) { return HashCodeCombine4(SingleGetHashCodeValue(v.x), SingleGetHashCodeValue(v.y), SingleGetHashCodeValue(v.z), SingleGetHashCodeValue(v.w)); }
 float Vector4Length(RuntimeNumericsVector4Carrier v) { return CHAOS_IL2CPP_SQRT(Vector4LengthSquared(v)); }
 float Vector4Dot(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r) { return (l.x * r.x) + (l.y * r.y) + (l.z * r.z) + (l.w * r.w); }
