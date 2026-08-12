@@ -125,3 +125,5 @@
 - P2：旧代页标 OLD + 精确 range 判定，对齐 CoreCLR region 语义，架构一致。
 - P3：解释器单参路径不受影响；热更/域卸载不变。低优先级让位于 #1 高性能→保持升+精确。
   - **M5-1 已落地（commit `faf020b3a`）**：修 BGC-YoungGC 暂停死锁——concurrent-mark 完成时 ack 挂起 pause + phase-wait 改 pause-servicing 循环 + PauseForYoungGc/Resume 通知 CV。`bgc_race_test` 完成率 ~0%→~75%（8 次跑 6 完成；残余 2 次为更深的 pre-existing mutator-driven phase 自推进问题）。`bgc_smoke` 6/0。
+  - **M3A-1 已落地（commit `18f3b8693`）**：接线 `GcHeapManager::Initialize()` 到 InitYoungGeneration + CMake GC_SERVER 默认 OFF（对齐 gc_features.h 文档；cache 需显式 `-DCHAOS_IL2CPP_GC_SERVER=OFF`）。WKS 默认构建全绿。
+  - **M3A-2/3 未落地（诚实 frontier）**：M3A-2 需 `GC_SERVER=1` 独立构建矩阵（`tests/unit` gtest 树），M3A-3 需 `G_*()` accessor 路由（bare-global 分配点）+ 域卸载 per-heap——体量大、需 server CI 验证，遇环境/架构阻塞。
