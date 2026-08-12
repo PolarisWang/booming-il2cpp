@@ -83,6 +83,12 @@ struct Region {
 static constexpr uint8_t kRegionGenMask   = 0x3u;
 /// Generation value for a nursery (youngest) region.
 static constexpr uint8_t kRegionGenYoung  = 0u;
+/// Generation value for a Gen1 survivor region (M9: distinct 3rd-gen value).
+/// The 2-bit mask (0x3) already admits this value, but GEN1 regions previously
+/// shared kRegionGenYoung (0).  Distinguishing them lets the write barrier /
+/// scavenge treat gen1 as its own generation (Cross-coreCLR HNDTYPE).
+
+static constexpr uint8_t kRegionGenGen1   = 1u;
 /// Generation value for a mature (old / tenured / LOH-like) region.
 static constexpr uint8_t kRegionGenOld    = 2u;
 

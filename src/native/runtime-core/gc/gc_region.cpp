@@ -885,9 +885,15 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
     // write barrier must treat them as gen0 (skip card: contents are scanned
     // wholesale).  Everything mature (tenured/LOH/Domain/POH) → old(2).
     // Keep the skewed region→gen table in sync for O(1) write-barrier lookups.
-    uint8_t region_gen = (kind == RegionKind::REGION_NURSERY ||
-                          kind == RegionKind::REGION_GEN1)
-                             ? kRegionGenYoung : kRegionGenOld;
+    //
+    // M9-A1 (3-gen): GEN1 now gets a DISTINCT generation value (kRegionGenGen1=1)
+    // instead of sharing kRegionGenYoung(0) with the nursery.  The write barrier
+    // still treats both gen0 and gen1 as "young" for the wholesale-scan skip (via
+    // `dst_gen <= kRegionGenGen1`), so this tag makes gen1's identity observable
+    // without changing the young-scan semantics.
+    uint8_t region_gen = (kind == RegionKind::REGION_NURSERY)  ? kRegionGenYoung
+                       : (kind == RegionKind::REGION_GEN1)     ? kRegionGenGen1
+                       : kRegionGenOld;
     r->gen = region_gen & kRegionGenMask;
     // Mark EVERY 4MB region-gen chunk the region spans (not just begin).  A
     // nursery/gen1 region is large (e.g. 64MB = 16 chunks); without this the
