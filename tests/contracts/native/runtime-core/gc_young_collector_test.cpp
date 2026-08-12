@@ -153,6 +153,15 @@ static void test_scavenge_object() {
     if (promoted == nursery_obj) { FAIL("promoted same as nursery (not copied)"); return; }
     if (IsInNursery(promoted)) { FAIL("promoted still in nursery"); return; }
 
+    // M8 (plan-gen): the promoted destination's region-gen must reflect its NEW
+    // generation — either gen1 (copied to the gen1 survivor region) or old(2)
+    // (if it fell through to old-gen).  Never the stale young(0) of its nursery
+    // origin.  This guards the write-barrier correctness after promotion.
+    uint8_t dst_gen = GetRegionGen(reinterpret_cast<uintptr_t>(promoted));
+    if (dst_gen != kRegionGenGen1 && dst_gen != kRegionGenOld) {
+        FAIL("promoted object region-gen is not gen1/old (plan-gen rebind)"); return;
+    }
+
     // Verify content was copied.  The nursery object's first word has been
     // overwritten by the forwarding pointer, so we check the promoted copy
     // directly for the expected values.
