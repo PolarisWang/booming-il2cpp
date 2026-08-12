@@ -308,6 +308,18 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
         prefer_bgc = false;
     }
 
+    // 0. NGC2 queue (M4/M3B): a mandated gen2 collection was queued (provisional
+    // entry / high memory pressure / high fragmentation).  Discharge it at the
+    // next GC decision by forcing a blocking FULL once (never BGC/NONE), then
+    // clear so it fires exactly once.
+    if (ngc2_queued_.load(std::memory_order_acquire)) {
+        ngc2_queued_.store(false, std::memory_order_relaxed);
+        SetLastTriggerReason(provisional
+                             ? GcTriggerReason::PROVISIONAL
+                             : GcTriggerReason::EXPLICIT_REQUEST);
+        return GcCollectionKind::FULL;
+    }
+
     // 1. Full GC requested by another thread?
     if (full_gc_requested_.load(std::memory_order_acquire)) {
         SetLastTriggerReason(

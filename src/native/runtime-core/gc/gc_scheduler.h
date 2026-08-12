@@ -335,9 +335,33 @@ public:
 
     /// Enter/leave provisional (high-memory-pressure) degradation mode.
     /// When active, GC degrades to forced-blocking + no old-gen expansion
-    /// (align CoreCLR gcpriv.h:4324 provisional mode).
+    /// (align CoreCLR gcpriv.h:4324 provisional mode).  Entering provisional also
+    /// queues an NGC2 (mandated gen2 collection) so the next GC is a required
+    /// blocking full collection once.
     void SetProvisionalMode(bool on) noexcept {
         provisional_mode_.store(on, std::memory_order_release);
+        if (on) {
+            ngc2_queued_.store(true, std::memory_order_release);
+        }
+    }
+
+    // ── NGC2 queue (M4/M3B: mandated gen2 collection) ──────────────
+    /// Whether a gen2 (NGC2) collection is queued/required at the next
+    /// GC decision (align CoreCLR NGC2 queued).  Set by provisional entry or
+    /// high memory pressure; consumed once by DecideCollection (forces a
+    /// blocking FULL) then cleared.
+    bool IsNgc2Queued() const noexcept {
+        return ngc2_queued_.load(std::memory_order_acquire);
+    }
+
+    /// Explicitly queue a mandated gen2 collection.
+    void QueueNgc2() noexcept {
+        ngc2_queued_.store(true, std::memory_order_release);
+    }
+
+    /// Clear the NGC2 queue (after it has been discharged by a full GC).
+    void ClearNgc2() noexcept {
+        ngc2_queued_.store(false, std::memory_order_release);
     }
 
     /// Reason the most recent full GC was triggered (diagnostics/tooling).
@@ -589,6 +613,14 @@ private:
     /// Entered when the hard limit is breached; exits when memory recovers.
     /// Settable via public InProvisionalMode()/SetProvisionalMode().
     std::atomic<bool> provisional_mode_{false};
+
+    /// NGC2 queued flag (align CoreCLR "NGC2 queued" — a gen2 collection is
+    /// mandated to run at the next safepoint/GC opportunity).  A provisional /
+    /// high-fragmentation entry queues NGC2 so the next DecideCollection forces
+    /// a blocking gen2 (full) collection once, then clears.  This is M4/M3B's
+    /// "NGC2 排队" — the gen2-queue mechanism, scheduler-level (not server-bound).
+    /// Mutable so the const DecideCollection can discharge (clear) it.
+    mutable std::atomic<bool> ngc2_queued_{false};
 
     /// Minimum absolute threshold for external memory pressure triggering.
     /// Below this, external pressure alone won't trigger a full GC.

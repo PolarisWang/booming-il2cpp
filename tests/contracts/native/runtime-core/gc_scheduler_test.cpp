@@ -149,6 +149,40 @@ void TestFragServo() {
     GC_CHECK(true, "frag servo reset ok");
 }
 
+// ── Test 7c (M4/M3B): NGC2 queue — mandated gen2 collection ─────────
+// QueueNgc2() / provisional entry must force a blocking FULL (gen2) at the next
+// DecideCollection, exactly once, then clear.  This is the "NGC2 排队" — the
+// gen2-queue mechanism that provisional / high-fragmentation uses to mandate a
+// blocking gen2 collection.
+void TestNgc2Queue() {
+    TEST("Ngc2Queue: mandated gen2 collection fires once");
+
+    // Baseline: no queue → not queued.
+    GC_CHECK(!g_gc_scheduler.IsNgc2Queued(), "NGC2 not queued by default");
+
+    // Queue explicitly → DecideCollection returns blocking FULL, then cleared.
+    g_gc_scheduler.QueueNgc2();
+    GC_CHECK(g_gc_scheduler.IsNgc2Queued(), "NGC2 queued after QueueNgc2()");
+    auto kind = g_gc_scheduler.DecideCollection();
+    GC_CHECK(kind == GcCollectionKind::FULL,
+             "queued NGC2 → DecideCollection forces blocking FULL");
+    GC_CHECK(!g_gc_scheduler.IsNgc2Queued(),
+             "NGC2 cleared after one discharge");
+
+    // Provisional entry also queues NGC2 → next decide is FULL.
+    g_gc_scheduler.SetProvisionalMode(true);
+    GC_CHECK(g_gc_scheduler.IsNgc2Queued(),
+             "SetProvisionalMode(true) queues NGC2");
+    kind = g_gc_scheduler.DecideCollection();
+    GC_CHECK(kind == GcCollectionKind::FULL,
+             "provisional+ngc2 → blocking FULL (not BGC/NONE)");
+    GC_CHECK(!g_gc_scheduler.IsNgc2Queued(), "NGC2 cleared after discharge");
+
+    // Cleanup: leave provisional off.
+    g_gc_scheduler.SetProvisionalMode(false);
+    GC_CHECK(true, "NGC2 queue (M4/M3B) lifecycle OK");
+}
+
 // ── Test 8: TotalAllocatedSinceLastGC ───────────────────────────────
 void TestTotalAllocated() {
     TEST("TotalAllocatedSinceLastGC");
@@ -235,6 +269,7 @@ int main() {
     TestPageCountGrowth();
     TestRecommendedNurserySize();
     TestFragServo();
+    TestNgc2Queue();
     TestTotalAllocated();
     TestProvisionalForceBlocking();
     TestConfigEnvOverride();
