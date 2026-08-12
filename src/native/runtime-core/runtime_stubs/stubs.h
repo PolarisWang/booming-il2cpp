@@ -43,5 +43,6 @@ extern "C" {
 #include "web_stubs.h"
 #include "interop_stubs.h"
 #include "simd_stubs.h"
+#include "xml_nametable_stubs.h"
 
 }  // extern "C"

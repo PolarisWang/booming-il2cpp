@@ -177,6 +177,50 @@ StringId Intern(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count)
     return result;
 }
 
+StringId Find(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count)
+{
+    if (utf8_data == nullptr || byte_count == 0u)
+    {
+        return kStringIdNull;
+    }
+
+    // Same FNV-1a hash as Register/Intern/chaos_constexpr_string_hash, so a
+    // runtime-computed or compile-time-produced StringId maps to the same value.
+    StringId id = 14695981039346656037ULL;
+    for (CHAOS_IL2CPP_UINT32 i = 0u; i < byte_count; ++i)
+    {
+        id ^= static_cast<unsigned char>(utf8_data[i]);
+        id *= 1099511628211ULL;
+    }
+    id |= 1u;
+    id &= ~(1ULL << 63);
+
+    // 1. Read-only AOT table (compiler-string pool) — no lock needed.
+    if (g_aot_entries != nullptr && g_aot_entry_count > 0u)
+    {
+        const auto* begin = g_aot_entries;
+        const auto* end = g_aot_entries + g_aot_entry_count;
+        const auto* result = CHAOS_IL2CPP_LOWER_BOUND(
+            begin, end, id,
+            [](const StringEntry& entry, StringId value) { return entry.id < value; });
+        if (result != end && result->id == id)
+        {
+            return id;
+        }
+    }
+
+    // 2. Dynamic map — mutex-protected, query-only (no insert).
+    {
+        CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_dynamic_mutex);
+        if (g_dynamic_entries.find(id) != g_dynamic_entries.end())
+        {
+            return id;
+        }
+    }
+
+    return kStringIdNull;
+}
+
 void UnregisterDomain(CHAOS_IL2CPP_UINT32 domain_id)
 {
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_dynamic_mutex);

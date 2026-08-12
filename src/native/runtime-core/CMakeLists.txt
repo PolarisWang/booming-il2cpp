@@ -58,6 +58,7 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/random_stubs.cpp
     runtime_stubs/stream_stubs.cpp
     runtime_stubs/hashcode_stubs.cpp
+    runtime_stubs/xml_nametable_stubs.cpp
     runtime_stubs/interlocked_stubs.cpp
     runtime_stubs/string_stubs.cpp
     runtime_stubs/exception_stubs.cpp
