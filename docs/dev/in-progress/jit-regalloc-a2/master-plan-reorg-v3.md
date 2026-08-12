@@ -205,3 +205,21 @@ rebuild Debug 的 TPG（依赖传播），不然一切验证都是 stale。
 - 这证实方向 A 的价值远超最初的 111 缺口估算——凡是落 fallback 的方法都可能未真执行。
 
 **TEMP 诊断已测完，将 revert interop_stubs.cpp 的 fprintf**（不留 debug 残留）。
+
+### 15. 派发链最终定位（2026-08-12，决定性）
+
+`Vector2::GreaterThanAll` 等 124 个 Vector 方法**在 `kChaosExternalRuntimeSubjects` 外部表内**
+(native-aot.generated.cpp:8681 的字符串数组)。∴ codegen 把它们当**外部 runtime 方法**处理，
+生成的 call site → `kChaosExternalRuntimeFnTable` → fallback → 解释器/异常。
+
+**∴ 真修复位置 = `TryCreateExternalRuntimeHelperDefinition`**（外部 helper 生成），**不是 vector kernel**
+（这些方法不经过它）。kernel 路径(VectorFixed* semanticId + FixedPlans 分支)是编译通过但派发不达, 非正解。
+
+**为何 SimpleForward 难**：表条目以 `Chaos*` 函数指针被调，ABI 是函数自身签名；而生成端 call site
+以 `CHAOS_IL2CPP_INTPTR` 传参。Vector2 carrier(2×float, 16B) 无法经 INTPTR slot → 需 helper 内
+"从 INTPTR 解出 carrier" 或用 kernel 的 by-value carrier emit 路径。
+
+**下一 session 精确入口**：在 `TryCreateExternalRuntimeHelperDefinition` 对
+`System.Numerics.Vector2/3/4::GreaterThanAll/...(Vector,Vector→bool)` 生成 native helper——
+body 里把 2 个 INTPTR param 各自 reinterpret 成 `RuntimeNumericsVector2Carrier*` 解出 x/y,
+调已 land 的 `Vector2GreaterThanAll` → 返回 1/0。这绕开 by-value 表 ABI 限制(用 pointer→carrier 解包)。
