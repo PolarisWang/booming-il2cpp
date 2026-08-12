@@ -25,6 +25,7 @@
 #include "ArchTraits.h"                  // ArchTraits, Arch
 #include "jit_codegen_stats.h"           // CodegenStats diagnostics (CHAOS_IL2CPP_CODEGEN_STATS gate)
 #include <chaos/profile.h>               // CHAOS_IL2CPP_PROFILE_SCOPE
+#include <chaos/pal/pal_preempt.h>       // PalCaptureReliable (register-window reliability gate)
 #include "../interpreter/ir_reg_alloc.h" // RegisterMethod, RegisterInstruction
 #if defined(__aarch64__)
 #include "Arm64Encoder.h" // Arm64Encoder
@@ -544,6 +545,21 @@ private:
         return phys == 1 || phys == 2 || phys == 8 || phys == 9; // RCX/RDX/R8/R9 (Win64)
 #endif
     }
+    // 方案3/方案1 (cross-platform unify): cache the PAL's register-window
+    // capture-reliability gate.  True only on platforms where a preemptively
+    // suspended thread's registers can be captured reliably (Linux SA_SIGINFO);
+    // false on Windows (APC-park → no reliable window) and Apple/Android.
+    //
+    // When true, the codegen may SKIP the pre-call spill for GC-ref registers
+    // whose live value is recoverable from the register window — GC reads the
+    // physical registers via PalCaptureThreadContext instead of the stack slot.
+    // When false, the stack-slot flood is the floor and never under-retains.
+    // Cached once so the per-spill-decision hot path is a single load, not a
+    // call into the PAL.
+    static bool kReliableRegisterCapture() noexcept {
+        static const bool kReliable = chaos::il2cpp::pal::PalCaptureReliable();
+        return kReliable;
+    }
     void SpillCachedRegs() noexcept;
     void SpillGcRefCachedRegs() noexcept;
     // 省写穿 (Phase 1): spill the colored GPRs actually live at the current
@@ -576,6 +592,12 @@ private:
     bool EmitSimd(const interpreter::RegisterInstruction& instr, uint8_t simd_op, uint8_t elem_type,
                   uint16_t simd_imm) noexcept;
     void EmitDeoptSequence(uint32_t instr_pc, uint32_t osr_resume_pc = 0) noexcept;
+    // 精确 spill (T2.3): append DeoptValues for the GPR vregs LIVE at instr_pc
+    // and osr_resume_pc (if set) to deopt_values_, returning the value-count
+    // contributed.  Dead vregs are never read by the interpreter continuation,
+    // so their DeoptValue entries are omitted (shrinks the deopt table; FPR
+    // vregs >=64 stay conservative — unrepresentable in the 64-bit liveness mask).
+    uint32_t RecordDeoptValues(uint32_t instr_pc, uint32_t osr_resume_pc = 0) noexcept;
     void RecordGcPoint(uint32_t native_offset) noexcept;
 
     /// Returns true when an OOM or other unrecoverable error has occurred.

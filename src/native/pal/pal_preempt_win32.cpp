@@ -51,6 +51,7 @@ void PalPreemptiveSuspendAck(uint64_t epoch, PalEvent* suspend_event,
 // stack-slot floor preserved — never under-retains).  The real primitive
 // (SuspendThread + GetThreadContext) is a separate effort (plan 2b/B).
 int  PalGetCaptureSlot() noexcept { return -1; }
+bool PalCaptureReliable() noexcept { return false; }
 void PalSetPreemptContext(int /*slot*/, const void* /*ucontext*/) noexcept {}
 bool PalCaptureThreadContext(int /*slot*/, uint64_t /*gpr_values*/[16], uint32_t* out_num) noexcept {
     if (out_num) *out_num = 0;

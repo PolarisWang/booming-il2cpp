@@ -29,26 +29,7 @@ void NativeCodeGenerator::EmitDeoptSequence(uint32_t instr_pc, uint32_t osr_resu
             SpillCachedRegs();
 
         uint32_t val_start = static_cast<uint32_t>(deopt_values_.size());
-        for (uint32_t vr = 0; vr < kGprCount; ++vr) {
-            DeoptValue dv;
-            dv.reg_index = vr;
-            // Use inferred type from vreg_types_ (kType* constants match ValueTag exactly)
-            dv.value_tag = (vr < static_cast<uint32_t>(vreg_types_.size()))
-                             ? vreg_types_[vr]
-                             : static_cast<uint8_t>(interpreter::ValueTag::Int64);
-            dv.is_spilled = true;
-            dv.spill_offset = static_cast<int16_t>(GprOff(vr));
-            deopt_values_.push_back(dv);
-        }
-        for (uint32_t vr = kGprCount; vr < kGprCount + kFprCount; ++vr) {
-            DeoptValue dv;
-            dv.reg_index = vr;
-            dv.value_tag = static_cast<uint8_t>(interpreter::ValueTag::Float64);
-            dv.is_spilled = true;
-            dv.spill_offset = static_cast<int16_t>(FprOff(vr));
-            deopt_values_.push_back(dv);
-        }
-        uint32_t n_vals = static_cast<uint32_t>(deopt_values_.size()) - val_start;
+        uint32_t n_vals = RecordDeoptValues(instr_pc, osr_resume_pc);
         DeoptEntry entry;
         entry.native_offset = deopt_pos;
         entry.instr_pc = instr_pc;
@@ -81,5 +62,48 @@ void NativeCodeGenerator::EmitDeoptSequence(uint32_t instr_pc, uint32_t osr_resu
     uint32_t patch_off = buf_.pos() + 1;
     enc_.EmitJmpRel32(0);
     deopt_jump_patches_.push_back({patch_off});
+}
+
+uint32_t NativeCodeGenerator::RecordDeoptValues(uint32_t instr_pc, uint32_t osr_resume_pc) noexcept {
+    uint32_t val_start = static_cast<uint32_t>(deopt_values_.size());
+    // 精确 spill (T2.3, cross-platform-unify §8): only append DeoptValues for the
+    // GPR vregs LIVE at the deopt point (instr_pc) and, for an OSR continuation,
+    // the resume loop header (osr_resume_pc) whose live set can differ from the
+    // deopt point's.  Dead vregs are never read by the interpreter continuation,
+    // so omitting their DeoptValue entry (and their stack slot from
+    // reconstruction) is safe — it shrinks the serialized deopt table and avoids
+    // recording values that can never be consumed.  FPR vregs (>=64) cannot be
+    // filtered: liveness is a 64-bit mask and vreg >=64 is unrepresentable, so
+    // they stay conservative (always recorded), matching the existing FPR policy.
+    uint64_t keep = ~0ULL;
+    if (liveness_computed_) {
+        keep = 0;
+        if (instr_pc < live_in_.size())
+            keep |= live_in_[instr_pc];
+        if (osr_resume_pc != 0 && osr_resume_pc < live_in_.size())
+            keep |= live_in_[osr_resume_pc];
+    }
+    for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+        if (keep != ~0ULL && !(keep & (1ULL << vr)))
+            continue; // dead at both deopt and OSR-resume: no DeoptValue needed
+        DeoptValue dv;
+        dv.reg_index = vr;
+        // Use inferred type from vreg_types_ (kType* constants match ValueTag exactly)
+        dv.value_tag = (vr < static_cast<uint32_t>(vreg_types_.size()))
+                         ? vreg_types_[vr]
+                         : static_cast<uint8_t>(interpreter::ValueTag::Int64);
+        dv.is_spilled = true;
+        dv.spill_offset = static_cast<int16_t>(GprOff(vr));
+        deopt_values_.push_back(dv);
+    }
+    for (uint32_t vr = kGprCount; vr < kGprCount + kFprCount; ++vr) {
+        DeoptValue dv;
+        dv.reg_index = vr;
+        dv.value_tag = static_cast<uint8_t>(interpreter::ValueTag::Float64);
+        dv.is_spilled = true;
+        dv.spill_offset = static_cast<int16_t>(FprOff(vr));
+        deopt_values_.push_back(dv);
+    }
+    return static_cast<uint32_t>(deopt_values_.size()) - val_start;
 }
 } // namespace chaos::il2cpp::jit

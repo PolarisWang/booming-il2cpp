@@ -1616,25 +1616,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             RecordGcPoint(call_pos);
             if (config_.enable_deopt) {
                 uint32_t val_start = static_cast<uint32_t>(deopt_values_.size());
-                for (uint32_t vr = 0; vr < kGprCount; ++vr) {
-                    DeoptValue dv;
-                    dv.reg_index = vr;
-                    dv.value_tag = (vr < static_cast<uint32_t>(vreg_types_.size()))
-                                     ? vreg_types_[vr]
-                                     : static_cast<uint8_t>(interpreter::ValueTag::Int64);
-                    dv.is_spilled = true;
-                    dv.spill_offset = static_cast<int16_t>(GprOff(vr));
-                    deopt_values_.push_back(dv);
-                }
-                for (uint32_t vr = kGprCount; vr < kGprCount + kFprCount; ++vr) {
-                    DeoptValue dv;
-                    dv.reg_index = vr;
-                    dv.value_tag = static_cast<uint8_t>(interpreter::ValueTag::Float64);
-                    dv.is_spilled = true;
-                    dv.spill_offset = static_cast<int16_t>(FprOff(vr));
-                    deopt_values_.push_back(dv);
-                }
-                uint32_t n_vals = static_cast<uint32_t>(deopt_values_.size()) - val_start;
+                uint32_t n_vals = RecordDeoptValues(current_instr_index_);
                 DeoptEntry entry;
                 entry.native_offset = call_pos;
                 entry.instr_pc = current_instr_index_;
@@ -1697,25 +1679,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
             if (config_.enable_deopt) {
                 uint32_t val_start = static_cast<uint32_t>(deopt_values_.size());
-                for (uint32_t vr = 0; vr < kGprCount; ++vr) {
-                    DeoptValue dv;
-                    dv.reg_index = vr;
-                    dv.value_tag = (vr < static_cast<uint32_t>(vreg_types_.size()))
-                                     ? vreg_types_[vr]
-                                     : static_cast<uint8_t>(interpreter::ValueTag::Int64);
-                    dv.is_spilled = true;
-                    dv.spill_offset = static_cast<int16_t>(GprOff(vr));
-                    deopt_values_.push_back(dv);
-                }
-                for (uint32_t vr = kGprCount; vr < kGprCount + kFprCount; ++vr) {
-                    DeoptValue dv;
-                    dv.reg_index = vr;
-                    dv.value_tag = static_cast<uint8_t>(interpreter::ValueTag::Float64);
-                    dv.is_spilled = true;
-                    dv.spill_offset = static_cast<int16_t>(FprOff(vr));
-                    deopt_values_.push_back(dv);
-                }
-                uint32_t n_vals = static_cast<uint32_t>(deopt_values_.size()) - val_start;
+                uint32_t n_vals = RecordDeoptValues(current_instr_index_);
                 DeoptEntry entry;
                 entry.native_offset = call_pos;
                 entry.instr_pc = current_instr_index_;
@@ -1811,25 +1775,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
                     // Deoptimization metadata for inline path
                     if (config_.enable_deopt) {
                         uint32_t val_start = static_cast<uint32_t>(deopt_values_.size());
-                        for (uint32_t vr = 0; vr < kGprCount; ++vr) {
-                            DeoptValue dv;
-                            dv.reg_index = vr;
-                            dv.value_tag = (vr < static_cast<uint32_t>(vreg_types_.size()))
-                                             ? vreg_types_[vr]
-                                             : static_cast<uint8_t>(interpreter::ValueTag::Int64);
-                            dv.is_spilled = true;
-                            dv.spill_offset = static_cast<int16_t>(GprOff(vr));
-                            deopt_values_.push_back(dv);
-                        }
-                        for (uint32_t vr = kGprCount; vr < kGprCount + kFprCount; ++vr) {
-                            DeoptValue dv;
-                            dv.reg_index = vr;
-                            dv.value_tag = static_cast<uint8_t>(interpreter::ValueTag::Float64);
-                            dv.is_spilled = true;
-                            dv.spill_offset = static_cast<int16_t>(FprOff(vr));
-                            deopt_values_.push_back(dv);
-                        }
-                        uint32_t n_vals = static_cast<uint32_t>(deopt_values_.size()) - val_start;
+                        uint32_t n_vals = RecordDeoptValues(current_instr_index_);
                         DeoptEntry entry;
                         entry.native_offset = call_pos;
                         entry.instr_pc = current_instr_index_;
@@ -1972,25 +1918,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             // for the register file at this call site.
             if (config_.enable_deopt) {
                 uint32_t val_start = static_cast<uint32_t>(deopt_values_.size());
-                for (uint32_t vr = 0; vr < kGprCount; ++vr) {
-                    DeoptValue dv;
-                    dv.reg_index = vr;
-                    dv.value_tag = (vr < static_cast<uint32_t>(vreg_types_.size()))
-                                     ? vreg_types_[vr]
-                                     : static_cast<uint8_t>(interpreter::ValueTag::Int64);
-                    dv.is_spilled = true;
-                    dv.spill_offset = static_cast<int16_t>(GprOff(vr));
-                    deopt_values_.push_back(dv);
-                }
-                for (uint32_t vr = kGprCount; vr < kGprCount + kFprCount; ++vr) {
-                    DeoptValue dv;
-                    dv.reg_index = vr;
-                    dv.value_tag = static_cast<uint8_t>(interpreter::ValueTag::Float64);
-                    dv.is_spilled = true;
-                    dv.spill_offset = static_cast<int16_t>(FprOff(vr));
-                    deopt_values_.push_back(dv);
-                }
-                uint32_t n_vals = static_cast<uint32_t>(deopt_values_.size()) - val_start;
+                uint32_t n_vals = RecordDeoptValues(current_instr_index_);
                 DeoptEntry entry;
                 entry.native_offset = call_pos;
                 entry.instr_pc = current_instr_index_;

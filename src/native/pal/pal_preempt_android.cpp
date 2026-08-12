@@ -14,6 +14,12 @@ void PalPreemptInit(PalPreemptCallback /*callback*/) noexcept {
     // No-op: signal handling is managed by the Android platform.
 }
 
+bool PalCaptureReliable() noexcept {
+    // Android manages signal handling itself (ART); no reliable register
+    // window is captured for its threads.
+    return false;
+}
+
 bool PalPreemptRequest(void* /*os_handle*/, uint64_t /*os_thread_id*/,
                         uint64_t /*epoch*/) noexcept {
     return false;

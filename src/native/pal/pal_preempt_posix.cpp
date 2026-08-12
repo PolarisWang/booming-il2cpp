@@ -107,6 +107,12 @@ int PalGetCaptureSlot() noexcept {
     return slot;
 }
 
+bool PalCaptureReliable() noexcept {
+    // Linux: SA_SIGINFO installs a handler that captures the interrupted
+    // thread's registers via ucontext_t — reliable register-window capture.
+    return true;
+}
+
 void PalSetPreemptContext(int slot, const void* ucontext) noexcept {
     if (slot >= 0 && slot < kMaxCaptureSlots)
         g_captured[slot].ucontext.store(ucontext, std::memory_order_release);

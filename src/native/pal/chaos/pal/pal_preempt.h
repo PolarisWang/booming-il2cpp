@@ -90,6 +90,23 @@ const void* PalPreemptGetUcontext() noexcept;
 /// scanning, keep the stack-slot floor).  The window is ALWAYS additive to stack
 /// slots — never the sole retention mechanism (never under-retains).
 
+/// Query whether this platform supports RELIABLE register-window capture for
+/// preemptively-suspended threads.  Centralizes the cross-platform reliability
+/// gate that previously lived as scattered #ifdefs / a Win32 stub returning -1.
+///
+/// - POSIX (Linux): true — SA_SIGINFO captures the interrupted thread's
+///   registers via ucontext_t (PalCaptureThreadContext returns them).
+/// - Windows: false under the QueueUserAPC + PalEventWait suspend — the park
+///   happens inside the APC/wait, so GetThreadContext would return the suspend
+///   machinery's frame, not the interrupted JIT-safepoint registers.  Adding
+///   SuspendThread (plan 2b/B) would flip this to true.
+/// - Apple/Android: false — no reliable delivery.
+///
+/// Consumers (JIT codegen exemption, GC register-root scan) must gate on this
+/// ONE query instead of platform macros.  When it is false, the window is
+/// ALWAYS additive to the stack-slot floor (never under-retains).
+bool PalCaptureReliable() noexcept;
+
 /// Lazy per-thread capture-slot index; -1 when this platform/thread doesn't
 /// support reliable register capture (e.g. Windows APC-park architecture).
 int  PalGetCaptureSlot() noexcept;
