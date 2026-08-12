@@ -157,17 +157,22 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
-        // Skip compiler-generated display class constructors (<>c::.cctor/<>c::.ctor)
+        // Compiler-generated display class constructors (<>c::.cctor/<>c::.ctor)
         // — their newobj instructions cannot be lowered properly by the structured IR
-        // emitter, producing malformed C++ (auto chaos_value = return).
+        // emitter, producing malformed C++ (auto chaos_value = return).  Route them to
+        // the interpreter fallback instead of emitting CHAOS_IL2CPP_FAIL() so the
+        // runtime dispatches through kChaosExternalRuntimeFnTable → InterpreterEntryDirect
+        // (when IL data is embedded) or returns the graceful fallback default (when not).
+        // Emitting FAIL here would crash any compiled caller that direct-calls the
+        // display-class constructor.
         if (method.SubjectId is not null && method.SubjectId.Contains("<>c::", StringComparison.Ordinal))
         {
-            builder.AppendLine("// AOT-unreachable stub: " + method.SubjectId);
+            builder.AppendLine("// Interpreter-dispatch stub (display-class): " + method.SubjectId);
             var _fnDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
             builder.AppendLine(_fnDecl.Length > 0 && _fnDecl[^1] == ";"[0] ? _fnDecl[..^1] : _fnDecl);
             builder.AppendLine("{");
-            builder.AppendLine("    CHAOS_IL2CPP_FAIL();");
-            // Suppress MSVC C4715: CHAOS_IL2CPP_FAIL is not noreturn in CHECK config
+            builder.AppendLine("    (void)ChaosExternalRuntimeFallback(\"" + EscapeCppStringLiteral(method.SubjectId) + "\");");
+            // Suppress MSVC C4715 for non-void return carriers (FAIL is not noreturn in CHECK config).
             if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
             {
                 builder.AppendLine("    return {};");
@@ -203,7 +208,27 @@ public sealed partial class NativeAotLoweringPlanner
         {
             AsyncMethodCount++;
             var ak = ClassifyAsyncMethod(method);
-            if (ak == AsyncMethodKind.Complex) { AsyncInterpreterFallbackCount++; builder.AppendLine("// Complex async"); var fd = FormatMethodDeclaration(method, _sharedContextSymbols); builder.AppendLine(fd.Length > 0 && fd[^1] == ";"[0] ? fd[..^1] : fd); builder.AppendLine("{ CHAOS_IL2CPP_FAIL(); }"); return; }
+            if (ak == AsyncMethodKind.Complex)
+            {
+                // State machine whose resume graph cannot be lowered to a structured
+                // coroutine (no lowered awaiter pattern).  Route it to the interpreter
+                // fallback so it executes through kChaosExternalRuntimeFnTable →
+                // InterpreterEntryDirect instead of emitting CHAOS_IL2CPP_FAIL() (which
+                // would crash the matching async entry when its coroutine is resumed).
+                AsyncInterpreterFallbackCount++;
+                builder.AppendLine("// Complex async (interpreter-dispatch stub): " + method.SubjectId);
+                var fd = FormatMethodDeclaration(method, _sharedContextSymbols);
+                builder.AppendLine(fd.Length > 0 && fd[^1] == ";"[0] ? fd[..^1] : fd);
+                builder.AppendLine("{");
+                // IsAsyncStateMachineMoveNext guarantees SubjectId is non-null here.
+                builder.AppendLine("    (void)ChaosExternalRuntimeFallback(\"" + EscapeCppStringLiteral(method.SubjectId!) + "\");");
+                if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
+                {
+                    builder.AppendLine("    return {};");
+                }
+                builder.AppendLine("}");
+                return;
+            }
             AsyncCoroutineMethodCount++;
             var abody = BuildAsyncStructuredBody(method);
             var uid = GetAsyncUid(method);
