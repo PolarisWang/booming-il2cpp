@@ -659,6 +659,36 @@ static void TestGen1OomFallback() {
              "promotion succeeded (no OOM in test environment)");
 }
 
+// ── M9: Gen1 region carries its own generation tag ─────────────────
+// After InitYoungGeneration (in main), the independent Gen1 survivor region
+// must be tagged kRegionGenGen1 (1), distinct from the nursery (gen0=0).  This
+// validates the 3-gen model in a non-flaky context (the 16MB gen1 region spans
+// distinct 4MB gen-chunks, unlike the tiny shared-chunk regions in region_test).
+static void TestGen1RegionGenerationTag() {
+    GC_TEST("Gen1 region generation tag");
+    ++g_sub; GC_SUBTEST("gen1 region tagged gen1(1), not young(0)");
+
+    Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    GC_CHECK(gen1 != nullptr && gen1->begin != nullptr, "Gen1 region exists");
+    if (!gen1 || !gen1->begin) { GC_FAIL("no gen1 region"); return; }
+
+    // The region struct field and the skewed region->gen table must both report
+    // the distinct gen1 value (not young).
+    uintptr_t gb = reinterpret_cast<uintptr_t>(gen1->begin);
+    GC_CHECK(gen1->gen == kRegionGenGen1,
+             "gen1->gen == kRegionGenGen1 (M9 3-gen)");
+    GC_CHECK(GetRegionGen(gb) == kRegionGenGen1,
+             "GetRegionGen(gen1_begin) == kRegionGenGen1 (M9 3-gen)");
+
+    // Nursery must still read young(0) — gen1 tag does not disturb gen0.
+    Region* nursery = g_young_gen.region.load(std::memory_order_acquire);
+    if (nursery && nursery->begin) {
+        uintptr_t nb = reinterpret_cast<uintptr_t>(nursery->begin);
+        GC_CHECK(GetRegionGen(nb) == kRegionGenYoung,
+                 "GetRegionGen(nursery) still young(0)");
+    }
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // Main
 // ═══════════════════════════════════════════════════════════════════════════
@@ -702,6 +732,7 @@ int main() {
     TestGen1FragmentationCompaction();
     TestGen1HighSurvivalRate();
     TestGen1OomFallback();
+    TestGen1RegionGenerationTag();
 
     // ── Teardown ─────────────────────────────────────────────────────
     threading::UnregisterThread();
