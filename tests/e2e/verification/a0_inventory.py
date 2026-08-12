@@ -27,15 +27,19 @@ def run_fact(entry: Path, timeout: int):
                            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                            text=True, timeout=timeout, errors="replace",
                            env={**__import__("os").environ, "CHAOS_IL2CPP_LOG_LEVEL": "1"})
-    except subprocess.TimeoutExpired:
-        return None, "TIMEOUT"
-    m = re.search(r"\{.*\"factResults\"\s*:\s*\[\s*\{(?:.*?)\}\s*\]\s*\}", r.stdout, re.S)
+    except subprocess.TimeoutExpired as e:
+        return None, f"TIMEOUT({timeout}s)"
+    stdout = r.stdout or ""
+    stderr_tail = (r.stderr or "")[-200:]
+    if not stdout.strip():
+        return None, f"EMPTY_STDOUT rc={r.returncode} stderr={stderr_tail!r}"
+    m = re.search(r"\{.*\"factResults\"\s*:\s*\[\s*\{(?:.*?)\}\s*\]\s*\}", stdout, re.S)
     if not m:
-        return None, "NO_PARSE"
+        return None, f"NO_PARSE rc={r.returncode} stdout_len={len(stdout)} tail={stdout[-120:]!r}"
     try:
-        return json.loads(m.group(0)).get("factResults", []), ""
-    except json.JSONDecodeError:
-        return None, "BAD_JSON"
+        return json.loads(m.group(0)).get("factResults", []), "OK"
+    except json.JSONDecodeError as e:
+        return None, f"BAD_JSON({e})"
 
 
 def main():
