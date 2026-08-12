@@ -1993,6 +1993,48 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::ParallelCompactPages() {
         }
     }
 
+    // Phase 4b: relocate remaining roots (thread stacks + static roots + GC
+    // handles) for COMPACT mode (CoreCLR-aligned).  ParallelCompactPages used to
+    // only fix page-internal + POH slots, leaving roots pointing at evacuated
+    // pages stale.  Reuse the addr_map built above.
+    if (!addr_map.empty()) {
+        threading::GcScanAllThreadRoots(
+            [](void* root_addr, bool /*is_interior*/, void* user_data) {
+                if (root_addr == nullptr) return;
+                auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
+                uintptr_t val = *static_cast<uintptr_t*>(root_addr);
+                if (val == 0) return;
+                auto it = std::lower_bound(map.begin(), map.end(), val,
+                    [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
+                if (it != map.end() && it->old_addr == val) {
+                    *static_cast<void**>(root_addr) = reinterpret_cast<void*>(it->new_addr);
+                }
+            },
+            &addr_map);
+
+        GcScanStaticRoots(
+            [](void* root_addr, bool /*is_interior*/, void* user_data) {
+                if (root_addr == nullptr) return;
+                auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
+                uintptr_t val = *static_cast<uintptr_t*>(root_addr);
+                if (val == 0) return;
+                auto it = std::lower_bound(map.begin(), map.end(), val,
+                    [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
+                if (it != map.end() && it->old_addr == val) {
+                    *static_cast<void**>(root_addr) = reinterpret_cast<void*>(it->new_addr);
+                }
+            },
+            &addr_map);
+
+        std::vector<std::pair<void*, void*>> handle_relocs;
+        handle_relocs.reserve(addr_map.size());
+        for (auto& ap : addr_map) {
+            handle_relocs.emplace_back(reinterpret_cast<void*>(ap.old_addr),
+                                       reinterpret_cast<void*>(ap.new_addr));
+        }
+        GcRelocateHandles(handle_relocs);
+    }
+
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "parallel_compact_done pages={0} objects={1} saved={2}",
         total_compact,
         static_cast<unsigned long long>(addr_map.size()),
@@ -2218,6 +2260,35 @@ void MarkSweepOldGen::RelocateRoots(const std::vector<CompactPlanEntry>& entries
             *val_ptr = reinterpret_cast<void*>(it->new_addr);
         }
     }
+
+    // Relocate registered static roots (CoreCLR-aligned: compaction must
+    // re-address ALL roots, including static/global, not just thread stacks).
+    // Without this, a static root pointing at a compacted old-gen object holds a
+    // stale address → barrier cards the OLD page, Phase-1 scans the NEW page →
+    // no cross-gen edge → the referenced young object is collected → dangling.
+    GcScanStaticRoots(
+        [](void* root_addr, bool /*is_interior*/, void* user_data) {
+            if (root_addr == nullptr) return;
+            auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
+            uintptr_t val = *static_cast<uintptr_t*>(root_addr);
+            if (val == 0) return;
+            auto it = std::lower_bound(map.begin(), map.end(), val,
+                [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
+            if (it != map.end() && it->old_addr == val) {
+                *static_cast<void**>(root_addr) = reinterpret_cast<void*>(it->new_addr);
+            }
+        },
+        &addr_map);
+
+    // Relocate GC handles (strong / pinned / dependent) that point at compacted
+    // old-gen objects (CoreCLR-aligned: GcScanHandles during relocate phase).
+    std::vector<std::pair<void*, void*>> handle_relocs;
+    handle_relocs.reserve(entries.size());
+    for (auto* it = addr_map.data(); it != addr_map.data() + addr_map.size(); ++it) {
+        handle_relocs.emplace_back(reinterpret_cast<void*>(it->old_addr),
+                                   reinterpret_cast<void*>(it->new_addr));
+    }
+    GcRelocateHandles(handle_relocs);
 }
 
 void MarkSweepOldGen::CrossPageCompact() {
