@@ -295,3 +295,24 @@ execute these methods (they are hardware SIMD)"，且仅对 **default(zero) 输�
 generic shape 未产出该 native 调用（生成代码无引用，§18）。= 与 Vector2/3/4 同类的"generic
 shape 未正确 emit 真实 native"问题。需查为何 RegisterVectorReduction 的 GenericShape 对
 `Vector<int>::GreaterThanAll` 未进生成代码。
+
+### 18c. Vector<T> 泛型 kernel 路径存在但派发不达（2026-08-12 深挖）
+
+kernel（RuntimeSkeletonVectorKernelCore）**有** Vector<T> 泛型 plumbing：
+- Descriptors 表含 `/System.Numerics.Vector<` + `Vector`1::` 的 vector-fixed-comparison（line 131/133）。
+- `TryResolveBySubjectId` 用 subjectId.Contains(descriptor.SubjectIdPrefix) 匹配（line 291-293）——
+  `System.Numerics.Vectors/System.Numerics.Vector<System.Int32>::GreaterThanAll...` 应命中
+  `/System.Numerics.Vector<`。
+- `GreaterThanAll` → VectorFixedComparison → TryCreateFixedComparisonPlan 的 GreaterThanAll 分支
+  生成 VectorFixedCompareGreaterThan + AllLanesNonZero（真 SIMD）。
+
+**但生成代码无引用 + fact 走 fallback fake-stub** ⇒ 这些 method 的 call 未达
+TryResolveBySubjectId 或被 CollectExternalRuntimeDispatchEntries 抢先路由为外部。疑点：
+- `ClassifyIntrinsicsType` 只分类 System.Runtime.Intrinsics.Vector*，**不分类 System.Numerics.Vector<T>**
+  （非 intrinsics family）→ 若 dispatch 先走 ClassifyNumericsType/ClassifyIntrinsicsType 而非
+  TryResolveBySubjectId 的 Descriptors.FirstOrDefault，则 Vector<T> 被 kernel 完全跳过。
+
+**下一步**：确认 codegen 主派发是否调用 TryResolveBySubjectId（Descriptors 表）for
+`Vector<T>::GreaterThanAll`，还是先被 external-runtime 收集（_externalRuntimeSubjects）。二选一:
+(a) 确保 kernel 派发在 external 之前，(b) 或在 TryCreateExternalRuntimeHelperDefinition 为泛型
+Vector<T> _All 补 false（引 native chaos_vector_*）。
