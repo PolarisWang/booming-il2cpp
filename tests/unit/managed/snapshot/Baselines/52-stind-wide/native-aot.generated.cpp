@@ -3917,7 +3917,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StindWideHelper_RunStindWide(
 		chaos_store_indirect<CHAOS_IL2CPP_INTPTR>(chaos_address, chaos_value);
 
 
-		chaos_gc_dirty_card(reinterpret_cast<void*>(chaos_address));
+		chaos_gc_dirty_card_dst_ref(reinterpret_cast<void*>(chaos_address), chaos_value);
 
 
 	}

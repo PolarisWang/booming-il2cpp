@@ -4155,7 +4155,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_InstanceFieldHelper_CreateAnd
 		chaos_object->field_SnapshotTestFixtures_HasInstanceFields__Value = chaos_value;
 
 
-		chaos_gc_dirty_card(chaos_object);
+		chaos_gc_dirty_card_dst_ref(chaos_object, chaos_value);
 
 
 	}
