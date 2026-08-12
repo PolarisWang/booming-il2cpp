@@ -125,3 +125,11 @@ adaptive + outlier + FP-12 零时长守卫 + `_MIN_ELAPSED_FLOOR` + perf-store o
 **A2-1 剩余（Vector SIMD，现可验证）**：numerics 重建后失败集中在 `Vector2/3/4::GreaterThanAll/LessThanAll/...`（`_All` 算子，value=0 或 32/64 部分match）。实现正确 `_All` 语义需先确认 Vector2/3/4 在该 codegen 的内存布局（X/Y/Z 分量存储 + bool 返回编码）。验证：重建 numerics + fact passed=false→true。
 
 **后续 A2/A3 均可用此环验证**：Interop GCHandle/SafeBuffer、Xml importers、PipeReader、NameTable。
+
+### 9. A2-1 Vector SIMD 实施进度（2026-08-12）
+
+**已落地（commit 23e355b5f）**：runtime 新增 Vector2/3/4 的 `GreaterThanAll/GreaterThanOrEqualAll/LessThanAll/LessThanOrEqualAll` 12 个 native 算子（numerics_vectors.cpp + runtime_core.h 声明），逐 lane 比较 + AND 归约，bool→CHAOS_IL2CPP_INT32 1/0 匹配 fact 契约。chaos_runtime_core 编译 0 error。
+
+**精确定位的 codegen 缺口（下一步）**：`RuntimeSkeletonVectorKernelCore.FixedPlans.cs:111 TryCreateFixedComparisonPlan` 的 `_All` 分支（line 210/250）只匹配**泛型 `Vector<T>`** 签名（`managedVectorTypeName<scalarManagedType>`，carrier = RuntimeIntrinsicVector256Carrier）。而 `Vector2/3/4::GreaterThanAll(Vector2,Vector2)` 是**非泛型具名**签名，不匹配 → `TryExtractClosedIntrinsicScalarManagedType` 失败 → return false → 落外部 fallback return-0（A1 的 12 个 numerics 缺口）。
+
+**修复方向**：在 comparison planner 加 `System.Numerics.Vector2/3/4` (non-generic) 具名分支，carrier = `RuntimeNumericsVector2/3/4Carrier`，emit 调 `Vector2/3/4{GreaterThanAll,LessThanAll,...}(request->arg0, request->arg1)` → 我的新 native 符号。之后重建 numerics + fact 验证 passed=false→true。
