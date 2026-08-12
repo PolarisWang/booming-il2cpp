@@ -248,8 +248,17 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
 void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
     if (obj == nullptr) return nullptr;
     // Caller already verified obj is in nursery — skip IsInNursery check.
-    // (condemned_gen_num is tracked for deeper collections; the young path
-    //  relies on the caller's IsInNursery gate, not the region-gen byte.)
+    // M9-A2: activate the condemned-generation filter.  A GC condemns every
+    // gen <= condemned_gen_num; objects with region_gen NEWER than the condemned
+    // gen are not promoted/marked here (they belong to an older-gen collection).
+    // For a young GC condemned=gen1(1), so nursery(0)/gen1(1) are processed and
+    // only an out-of-scope newer object (gen2+) is skipped — a safety net that
+    // also makes the gen1 tag meaningful.
+    if (result != nullptr && result->condemned_gen_num > 0) {
+        if (GetRegionGen(reinterpret_cast<uintptr_t>(obj)) > result->condemned_gen_num) {
+            return obj;  // newer than condemned — leave for the appropriate collection
+        }
+    }
     if (IsForwarded(obj)) {
         return GetForwardingAddress(obj);
     }
@@ -271,13 +280,15 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
         }
     }
 
-    // ── Age tenuring: determine destination based on current location ──
-    // Objects in Gen1 (survivor area) have survived at least one young GC.
-    // With dynamic threshold, they may stay in Gen1 for more cycles
-    // before promotion (threshold > 1 → copy back to Gen1).
-    // Objects in Gen0 (young half) always copy to Gen1 (first survival).
+    // ── Age tenuring: determine destination based on source generation ──
+    // M9-A2: consult the region-generation tag (not just location) so the gen1
+    // value drives the destination.  A gen0 (nursery, region_gen=0) object always
+    // promotes to gen1 (first survival).  A gen1 (region_gen=1) object has
+    // survived: with the dynamic threshold > 1 it stays in gen1, else it promotes
+    // to gen2 (old).  gen2 (old) objects never reach this scavenge.
+    const uint8_t src_gen = GetRegionGen(reinterpret_cast<uintptr_t>(obj));
     void* target;
-    if (IsInGen1(obj)) {
+    if (src_gen == kRegionGenGen1 || IsInGen1(obj)) {  // gen1 (survivor)
         int threshold = G_YoungGen().promotion_age_threshold_.load(
             std::memory_order_acquire);
         if (threshold > 1) {
@@ -288,7 +299,7 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
         } else {
             target = G_OldGen().Allocate(obj_size, true);
         }
-    } else {
+    } else {                                          // gen0 (nursery) → gen1
         target = TryAllocateInGen1(obj_size);
         if (target == nullptr) {
             target = G_OldGen().Allocate(obj_size, true);
