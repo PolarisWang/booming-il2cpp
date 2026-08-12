@@ -282,3 +282,16 @@ carrier−helper 问题。需查 StructuredIR/lowering 对 `Vector<T>::GreaterTh
 独立 follow-up, 与 Vector2/3/4 修复无关。
 
 **A2-1 现状**：Vector2/3/4 12/12 修复(fact 164→176)。Vector<T> 泛型 4 个待 StructuredIR 路径。
+
+### 18b. Vector<T> 泛型 _All 真正根因（2026-08-12，补充）
+
+`_TryExecuteViaSimdStub`（interop_stubs.cpp:713-719）对 `Vector::LessThanAll/Any`、
+`GreaterThanAll/Any` **硬编码 `out_value=0`**（OrEqual→1）。注释自认 "The Interpreter cannot
+execute these methods (they are hardware SIMD)"，且仅对 **default(zero) 输入** 成立。但 idx535
+等测试用**非零向量** → 0/1 是错值 → fact 失败。
+
+**修复方向**：`Vector<T>::GreaterThanAll` 应调真 native `chaos_vector_greater_than_all_i32`
+（存在，vector_stubs.cpp 宏生成），而非 fake 常量。但 codegen 的 `RegisterVectorReduction`
+generic shape 未产出该 native 调用（生成代码无引用，§18）。= 与 Vector2/3/4 同类的"generic
+shape 未正确 emit 真实 native"问题。需查为何 RegisterVectorReduction 的 GenericShape 对
+`Vector<int>::GreaterThanAll` 未进生成代码。
