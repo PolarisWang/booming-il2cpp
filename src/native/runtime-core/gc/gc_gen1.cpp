@@ -242,7 +242,7 @@ Gen1CollectionResult GcGen1Collection() {
                     obj_size = static_cast<CHAOS_IL2CPP_SIZE>(layout->instance_size);
                 }
             }
-            void* gen2_addr = g_old_gen.Allocate(obj_size, true);
+            void* gen2_addr = G_OldGen().Allocate(obj_size, true);
             if (gen2_addr != nullptr) {
                 std::memcpy(gen2_addr, tiny_cur, obj_size);
                 result.objects_promoted++;
@@ -313,7 +313,7 @@ Gen1CollectionResult GcGen1Collection() {
                         sz2 = static_cast<CHAOS_IL2CPP_SIZE>(l2->instance_size);
                     }
                 }
-                void* gen2_addr = g_old_gen.Allocate(sz2, true);
+                void* gen2_addr = G_OldGen().Allocate(sz2, true);
                 if (gen2_addr != nullptr) {
                     std::memcpy(gen2_addr, ec2_cur, sz2);
                     result.objects_promoted++;
@@ -378,7 +378,7 @@ Gen1CollectionResult GcGen1Collection() {
                     obj_size = static_cast<CHAOS_IL2CPP_SIZE>(layout->instance_size);
                 }
             }
-            void* gen2_addr = g_old_gen.Allocate(obj_size, true);
+            void* gen2_addr = G_OldGen().Allocate(obj_size, true);
             if (gen2_addr != nullptr) {
                 std::memcpy(gen2_addr, drain_cur, obj_size);
                 result.objects_promoted++;
@@ -467,7 +467,7 @@ Gen1CollectionResult GcGen1Collection() {
     // 3b: Scan Gen2 dirty cards for pointers into Gen1.
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("Gen1_Root_DirtyCards");
-        g_old_gen.ScanDirtyCardsInPages(
+        G_OldGen().ScanDirtyCardsInPages(
             [&](uintptr_t /*card_idx*/, uintptr_t card_start, uintptr_t card_end) {
                 for (uintptr_t slot = card_start; slot < card_end; slot += sizeof(void*)) {
                     void* val = *reinterpret_cast<void**>(slot);
@@ -558,7 +558,7 @@ Gen1CollectionResult GcGen1Collection() {
                         obj_size = static_cast<CHAOS_IL2CPP_SIZE>(layout->instance_size);
                     }
                 }
-                void* gen2_addr = g_old_gen.Allocate(obj_size, true);
+                void* gen2_addr = G_OldGen().Allocate(obj_size, true);
                 if (gen2_addr != nullptr) {
                     std::memcpy(gen2_addr, drain_cur, obj_size);
                     local_promoted_count++;
@@ -610,7 +610,7 @@ Gen1CollectionResult GcGen1Collection() {
                         batch_buf[batch_count++] = {s_cur, obj_size};
                     } else {
                         // Batch overflow: promote directly.
-                        void* gen2_addr = g_old_gen.Allocate(obj_size, true);
+                        void* gen2_addr = G_OldGen().Allocate(obj_size, true);
                         if (gen2_addr != nullptr) {
                             std::memcpy(gen2_addr, s_cur, obj_size);
                             local_promoted_count++;
@@ -636,7 +636,7 @@ Gen1CollectionResult GcGen1Collection() {
 
         // ── Phase 4c: Promote batched old objects to Gen2 ──
         for (int i = 0; i < batch_count && !local_failed; i++) {
-            void* gen2_addr = g_old_gen.Allocate(batch_buf[i].size, true);
+            void* gen2_addr = G_OldGen().Allocate(batch_buf[i].size, true);
             if (gen2_addr != nullptr) {
                 std::memcpy(gen2_addr, batch_buf[i].src, batch_buf[i].size);
                 local_promoted_count++;

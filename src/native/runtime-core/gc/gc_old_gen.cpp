@@ -770,7 +770,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
             Ctx ctx{size, scanning_required};
             return HandleOomCondition([](void* c) -> void* {
                 auto* p = static_cast<Ctx*>(c);
-                return g_old_gen.Allocate(p->s, p->scan);
+                return G_OldGen().Allocate(p->s, p->scan);
             }, &ctx, size);
         }
 
@@ -806,7 +806,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
             Ctx ctx{size, scanning_required};
             return HandleOomCondition([](void* c) -> void* {
                 auto* p = static_cast<Ctx*>(c);
-                return g_old_gen.Allocate(p->s, p->scan);
+                return G_OldGen().Allocate(p->s, p->scan);
             }, &ctx, size);
         }
         sc_idx = SizeClassIndex(size);
@@ -840,7 +840,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
         Ctx ctx{size, scanning_required};
         return HandleOomCondition([](void* c) -> void* {
             auto* p = static_cast<Ctx*>(c);
-            return g_old_gen.Allocate(p->s, p->scan);
+            return G_OldGen().Allocate(p->s, p->scan);
         }, &ctx, size);
     }
 
@@ -2494,7 +2494,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 if (young_region == nullptr) return true;
                 void* cur = G_YoungGen().bump.load(std::memory_order_acquire);
                 if (cur > young_region->begin) {
-                    g_old_gen.ScanRangeForRoots(
+                    G_OldGen().ScanRangeForRoots(
                         young_region->begin, cur);
                 }
 
@@ -2505,7 +2505,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 if (gen1 != nullptr) {
                     char* s_end = G_YoungGen().gen1_bump.load(std::memory_order_acquire);
                     if (s_end > gen1->begin) {
-                        g_old_gen.ScanRangeForRoots(gen1->begin, s_end);
+                        G_OldGen().ScanRangeForRoots(gen1->begin, s_end);
                     }
                 }
                 return true;
