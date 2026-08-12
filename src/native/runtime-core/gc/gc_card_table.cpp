@@ -97,12 +97,17 @@ extern "C" void chaos_gc_dirty_card_dst_ref(const void* dst, const void* ref) no
     if (dst == nullptr) return;
     uintptr_t dst_addr = reinterpret_cast<uintptr_t>(dst);
     uint8_t dst_gen = GetRegionGen(dst_addr);
-    // 1. dst in gen0 OR gen1 (M9-A1): young-generation contents are scanned
-    //    wholesale — no card needed, regardless of what is written into them.
-    //    NURSERY=0 and GEN1=1 both satisfy `dst_gen <= kRegionGenGen1`; tagging
-    //    gen1 as 1 (distinct from nursery 0) keeps this skip intact while making
-    //    the gen1 identity observable to the ref_gen>=dst_gen comparison below.
-    if (dst_gen <= kRegionGenGen1) return;
+    // 1. dst in gen0 (nursery): young-generation contents are scanned wholesale
+    //    — no card needed regardless of what is written into them.
+    //
+    //    R3/CoreCLR-aligned: we skip carding ONLY for true gen0 (nursery) here,
+    //    NOT gen1.  CoreCLR's region barrier (JIT_WriteBarrier_Byte_Region64)
+    //    skips only dst.gen==0 and still cards old→gen1 stores of younger refs.
+    //    Chaos previously skipped gen1 too (dst_gen <= kRegionGenGen1), so a
+    //    gen1→nursery store was never carded, yet young-GC Phase-2b scans gen1
+    //    dirty cards for exactly those gen1→nursery edges — a self-contradiction
+    //    that silently dropped the cross-gen edge.
+    if (dst_gen == kRegionGenYoung) return;
     // 2. ref outside managed/NULL: not a managed pointer store — no cross-gen
     //    reference to record.  (GetRegionGen of an unmapped addr returns the
     //    conservative default kRegionGenOld, so an out-of-heap ref is treated
