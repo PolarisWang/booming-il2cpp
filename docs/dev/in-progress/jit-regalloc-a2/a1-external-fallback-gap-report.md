@@ -110,3 +110,57 @@
 
 **不做范围外判断**：这可能是 (a) 方法数过大需分钟级 timeout（不切实际），或 (b) 某方法卡死
 （需逐 chunk 二分定位）。留给 fd-verification 线/更有耐心的环境。
+
+---
+
+## 9. P0-B native stub 清扫进度（2026-08-12）
+
+任务：stub-clearing-native（只改 native，`src/native/runtime-core/runtime_stubs/interop_stubs.cpp`）。
+
+### 9.1 D 类已修（解释器成功执行但 return 0 → 传播真实返回值）
+
+原 `ChaosExternalRuntimeFallback` 两条走 `InterpreterEntryDirect` 的路径，方法**真实执行**但结果被丢弃、
+返回硬编码 0。现改为把解释器 `ret` 缓冲的 word-0（标量/指针返回）作为 fallback 返回值传出
+（与 `interpreter_vm.cpp` 的 `ret_tag` 消费契约一致：Int32 取低 32 位、Int64/Pointer 取全 64 位）：
+
+- **IL-data 路径**（原 `_TryExecuteViaIlData` 成功 → `return 0`）：`_TryExecuteViaIlData(subject_id, il_ret)`
+  新增 `uint64_t& out_ret`，JSON 解释执行后 `out_ret = ret[0]`；fallback 返回 `il_ret`。
+- **dispatch-table 路径**（原 `_TryInvoke` 成功 → `return 0`）：`_TryInvoke(subject_id, invoke_ret)` via
+  `_TryInvokeInterpreterSafe(method_key, out_ret)` 新增结果传出；fallback 返回 `invoke_ret`。
+
+禁止"方法整体 return 0"——这两条路径是被真实调用且真实执行的核心，现传播真值。
+
+### 9.2 B 类已修（硬编码 return 0 → 给真实 native 语义，单一 native 改动）
+
+- `ChaosNativeLibraryGetMainProgramHandle`（原 `return 0`）：改为返回主程序 OS 句柄
+  （Windows `GetModuleHandleW(nullptr)`；非 Windows `dlopen(nullptr, RTLD_LAZY)`），
+  并添加对应平台头（`windows.h` / `dlfcn.h`）。
+
+### 9.3 保持不动的合法 guard（有具体条件的防御 stub，非无条件 return 常量）
+
+- `ChaosMarshalGetExceptionCode/GetExceptionPointers` — AOT 无活动 SEH handler，返回 0/空是真实语义。
+- `ChaosMarshalAreComObjectsAvailableForCleanup` — AOT 无 COM，返回 false 是真实语义。
+- `ChaosComWrappers*`（5 个）— AOT 无 COM，返回 0/null 是真实语义。
+- `_TryExecuteViaSimdStub` 及 `ChaosExternalRuntimeFallback` 内联 SIMD 段 — 硬件 SIMD intrinsic
+  解释器不可执行，按 zero-input 返回 0/1 是已验收的合法短路（A2-1 已通过）。
+
+### 9.4 验证明细
+
+- 配置：`cmake -S . -B build/native -DROADMAP0_PRESET_TARGET=windows-x64-reference`（Windows x64 参考）
+- 编译：`chaos_runtime_core` 静态库含 `interop_stubs.cpp`，构建通过。
+- ctest 通过：
+  - `numerics_vectors_test`（A2-1 SIMD 回归）
+  - `marshal_api_basic`
+  - `test_interpreter_entry` + `test_interpreter_mixed_execution`（InterpreterEntryDirect/dispatch 机制）
+  - 4/4 全绿。
+
+### 9.5 remaining（诚实边界）
+
+- **BCrypt/CNG P/Invoke 路由**（`_TryExecuteViaPInvoke`，`interop_stubs.cpp:~818-856`）：该路径仅
+  "识别方法名→return true"，实际执行依赖 codegen 直连符号（`interpreter_vm.cpp` 的 `direct_fn` 路径）。
+  fallback 此分支 return 0 属"未在此处执行"哨兵。要在此处真正执行 stub 并传播结果需接入完整
+  arg/ret 传递 + BCrypt 原生分派，超出"单一 native 层改动"范围，**留 A3**（后续轨道）。
+- **PipeReader::TryRead 特例 → return 1**（`interop_stubs.cpp`）：重托管异步流式（A3 类），
+  现有 null-`this` 场景返回 1 是已存在的条件 guard，不属本任务硬塞 return 0。留 A3 判断编译闭包。
+- **Xml importers / NameTable**：需托管 string interning + 反射，明确 **A3**，本任务不做。
+- **_TryExecuteViaPInvoke 的 30+ BCrypt/NCrypt 方法名清单**：均为重型原生 crypto 分派，留 A3。

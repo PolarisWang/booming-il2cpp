@@ -13,6 +13,13 @@
 #include "patch_loader.h"
 #include <chaos/pal/pal_eh.h>
 
+// Platform headers for ChaosNativeLibraryGetMainProgramHandle.
+#if defined(_WIN32)
+#include <windows.h>
+#else
+#include <dlfcn.h>
+#endif
+
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 
@@ -410,7 +417,15 @@ CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetExport(CHAOS_IL2CPP_INTPTR handle, CHAO
 
 CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept
 {
-    return 0;  // Not supported in AOT mode
+    // AOT: the main program is the running executable itself.  Return the
+    // OS handle for the main module so callers can recover its exports.
+#if defined(_WIN32)
+    auto* handle = ::GetModuleHandleW(nullptr);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(handle);
+#else
+    void* handle = dlopen(nullptr, RTLD_LAZY);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(handle);
+#endif
 }
 
 // ── External runtime fallback stub ──────────────────────────
@@ -484,21 +499,27 @@ static void _ParseSubjectId(const char* sid,
 // SEH-safe wrapper around InterpreterEntryDirect for use inside _TryInvoke.
 // _TryInvoke has C++ objects (std::string) which prevent __try inside its body.
 // This helper has no C++ objects so __try is legal.
-static bool _TryInvokeInterpreterSafe(uintptr_t method_key) noexcept {
+// On success, out_ret receives the interpreter's scalar/pointer return value
+// (word 0 of the ret buffer) so the caller can propagate the real result
+// instead of a hardcoded fallback constant.  This is the D-class fix: a method
+// that genuinely executes through the interpreter must not return 0.
+static bool _TryInvokeInterpreterSafe(uintptr_t method_key, uint64_t& out_ret) noexcept {
     uint64_t args[4] = {}; uint64_t ret[2] = {};
 #if defined(_MSC_VER)
     __try {
         InterpreterEntryDirect(method_key, args, ret);
     } __except(EXCEPTION_EXECUTE_HANDLER) {
+        out_ret = 0;
         return false;
     }
 #else
     InterpreterEntryDirect(method_key, args, ret);
 #endif
+    out_ret = ret[0];
     return true;
 }
 
-static bool _TryInvoke(const char* sid) noexcept
+static bool _TryInvoke(const char* sid, uint64_t& out_ret) noexcept
 {
     if (sid == nullptr) return false;
     std::string ns, tn, mn;
@@ -515,14 +536,17 @@ static bool _TryInvoke(const char* sid) noexcept
     auto* en = reg.GetDispatchEntryBySlot(mi, sl);
     if (en == nullptr) return false;
     if (en->method_key == 0) return false;
-    return _TryInvokeInterpreterSafe(en->method_key);
+    return _TryInvokeInterpreterSafe(en->method_key, out_ret);
 }
 
 /// Try to execute a crypto method via embedded IL data (kChaosExternalRuntimeIlData[]).
 /// Returns true if the method was found and dispatched.
 /// Uses exact subject_id matching via strcmp (not strstr) to avoid false positives.
 /// The PatchMethod is cached in entry.patch_method to avoid leaks and repeated allocation.
-static bool _TryExecuteViaIlData(const char* subject_id) noexcept
+/// On success, out_ret receives the interpreter's scalar/pointer return value
+/// (word 0 of the ret buffer).  D-class fix: a successfully dispatched method
+/// must propagate its real result, not a hardcoded fallback 0.
+static bool _TryExecuteViaIlData(const char* subject_id, uint64_t& out_ret) noexcept
 {
     if (subject_id == nullptr || *subject_id == 0) return false;
     auto* table = s_chaos_external_runtime_il_data;
@@ -555,6 +579,7 @@ static bool _TryExecuteViaIlData(const char* subject_id) noexcept
             uint64_t args[4] = {};
             uint64_t ret[2] = {};
             InterpreterEntryDirect(reinterpret_cast<uintptr_t>(pm), args, ret);
+            out_ret = ret[0];
             return true;
         }
 
@@ -564,6 +589,7 @@ static bool _TryExecuteViaIlData(const char* subject_id) noexcept
         // (void)entry.il_data; (void)entry.il_size;
         break;
     }
+    out_ret = 0;
     return false;
 }
 
@@ -782,8 +808,12 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
     // the interpreter without requiring dispatch table entries or hotpatch
     // registration.  This path is checked FIRST so crypto methods work even
     // when they have no dispatch table presence.
-    if (_TryExecuteViaIlData(subject_id))
-        return 0;
+    // D-class: propagate the interpreter's real return value (not a hardcoded 0).
+    {
+        uint64_t il_ret = 0;
+        if (_TryExecuteViaIlData(subject_id, il_ret))
+            return static_cast<CHAOS_IL2CPP_INTPTR>(il_ret);
+    }
 
     // ── Phase 1.5: Try BCrypt/CNG P/Invoke stub routing ─────────────────
     // When the interpreter encounters a DllImport call to bcrypt.dll or
@@ -815,8 +845,12 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
                 continue;
             if (static_cast<int32_t>(cmp_result) != 0)
                 continue;
-            if (_TryInvoke(kChaosExternalRuntimeSubjects[i]))
-                return 0;
+            // D-class: propagate the interpreter's real return value.
+            {
+                uint64_t invoke_ret = 0;
+                if (_TryInvoke(kChaosExternalRuntimeSubjects[i], invoke_ret))
+                    return static_cast<CHAOS_IL2CPP_INTPTR>(invoke_ret);
+            }
 
             // Found in dispatch table but unresolvable — codegen/metadata mismatch.
             // Return sentinel 0 instead of crashing (safe for fact verification:
