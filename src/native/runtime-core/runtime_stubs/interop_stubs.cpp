@@ -593,86 +593,6 @@ static bool _TryExecuteViaIlData(const char* subject_id, uint64_t& out_ret) noex
     return false;
 }
 
-/// Check if a subject_id is a BCrypt/CNG P/Invoke interop call.
-/// These are DllImport methods from System.Private.CoreLib/Interop+BCrypt
-/// or System.Security.Cryptography/Interop+BCrypt that call bcrypt.dll.
-/// The interpreter encounters them as external runtime methods when AOT IR
-/// bodies are not available -- route them to the native BCrypt stubs.
-static inline bool _IsBCryptPInvoke(const char* subject_id) noexcept
-{
-    if (subject_id == nullptr) return false;
-    return std::strstr(subject_id, "Interop+BCrypt") != nullptr ||
-           std::strstr(subject_id, "Interop+NCrypt") != nullptr;
-}
-
-/// Try to execute a BCrypt/CNG P/Invoke call via the native ChaosBCrypt* stubs.
-/// Returns true if the subject_id was matched (stub exists and execution can proceed).
-/// The stub functions in crypto_stubs.cpp accept raw CHAOS_IL2CPP_INTPTR arguments
-/// and route to the actual BCrypt/CNG API.
-/// For now, all recognized BCrypt Interop subjects return true -- the actual
-/// dispatch relies on the stub's native function pointers being linked.
-static bool _TryExecuteViaPInvoke(const char* subject_id) noexcept
-{
-    if (subject_id == nullptr || !_IsBCryptPInvoke(subject_id))
-        return false;
-
-    // All recognized Interop+BCrypt / Interop+NCrypt stubs are available
-    // via crypto_stubs.cpp (Windows: bcrypt.dll; Linux: OpenSSL stubs).
-    // The managed code calls these with flat ABI (IntPtr args), which
-    // matches the ChaosBCrypt* signature.
-    //
-    // Subject format: "Assembly/Interop+BCrypt::MethodName:ReturnType(Params)"
-    // Match the method name via std::strstr on "::MethodName":
-    if (std::strstr(subject_id, "::BCryptOpenAlgorithmProvider") != nullptr)  return true;
-    if (std::strstr(subject_id, "::BCryptCloseAlgorithmProvider") != nullptr) return true;
-    if (std::strstr(subject_id, "::BCryptCreateHash") != nullptr)             return true;
-    if (std::strstr(subject_id, "::BCryptDestroyHash") != nullptr)            return true;
-    if (std::strstr(subject_id, "::BCryptHashData") != nullptr)               return true;
-    if (std::strstr(subject_id, "::BCryptFinishHash") != nullptr)             return true;
-    if (std::strstr(subject_id, "::BCryptHash") != nullptr)                   return true;
-    if (std::strstr(subject_id, "::BCryptGenerateSymmetricKey") != nullptr)   return true;
-    if (std::strstr(subject_id, "::BCryptDestroyKey") != nullptr)             return true;
-    if (std::strstr(subject_id, "::BCryptEncrypt") != nullptr)                return true;
-    if (std::strstr(subject_id, "::BCryptDecrypt") != nullptr)                return true;
-    if (std::strstr(subject_id, "::BCryptImportKey") != nullptr)              return true;
-    if (std::strstr(subject_id, "::BCryptExportKey") != nullptr)              return true;
-    if (std::strstr(subject_id, "::BCryptGetProperty") != nullptr)            return true;
-    if (std::strstr(subject_id, "::BCryptSetProperty") != nullptr)            return true;
-    if (std::strstr(subject_id, "::BCryptGenerateKeyPair") != nullptr)        return true;
-    if (std::strstr(subject_id, "::BCryptFinalizeKeyPair") != nullptr)        return true;
-    if (std::strstr(subject_id, "::BCryptImportKeyPair") != nullptr)          return true;
-    if (std::strstr(subject_id, "::BCryptSignHash") != nullptr)               return true;
-    if (std::strstr(subject_id, "::BCryptVerifySignature") != nullptr)        return true;
-    if (std::strstr(subject_id, "::BCryptSecretAgreement") != nullptr)        return true;
-    if (std::strstr(subject_id, "::BCryptDestroySecret") != nullptr)          return true;
-    if (std::strstr(subject_id, "::BCryptDeriveKey") != nullptr)              return true;
-    if (std::strstr(subject_id, "::BCryptKeyDerivation") != nullptr)          return true;
-    if (std::strstr(subject_id, "::BCryptGenRandom") != nullptr)              return true;
-
-    // NCrypt key storage functions
-    if (std::strstr(subject_id, "::NCryptOpenStorageProvider") != nullptr)    return true;
-    if (std::strstr(subject_id, "::NCryptOpenKey") != nullptr)               return true;
-    if (std::strstr(subject_id, "::NCryptGetProperty") != nullptr)           return true;
-    if (std::strstr(subject_id, "::NCryptSetProperty") != nullptr)           return true;
-    if (std::strstr(subject_id, "::NCryptCreatePersistedKey") != nullptr)     return true;
-    if (std::strstr(subject_id, "::NCryptFinalizeKey") != nullptr)           return true;
-    if (std::strstr(subject_id, "::NCryptDeleteKey") != nullptr)             return true;
-    if (std::strstr(subject_id, "::NCryptFreeObject") != nullptr)            return true;
-    if (std::strstr(subject_id, "::NCryptEncrypt") != nullptr)               return true;
-    if (std::strstr(subject_id, "::NCryptDecrypt") != nullptr)               return true;
-    if (std::strstr(subject_id, "::NCryptSignHash") != nullptr)              return true;
-    if (std::strstr(subject_id, "::NCryptVerifySignature") != nullptr)       return true;
-    if (std::strstr(subject_id, "::NCryptExportKey") != nullptr)             return true;
-    if (std::strstr(subject_id, "::NCryptImportKey") != nullptr)             return true;
-    if (std::strstr(subject_id, "::NCryptIsAlgSupported") != nullptr)        return true;
-    if (std::strstr(subject_id, "::NCryptEnumAlgorithms") != nullptr)        return true;
-    if (std::strstr(subject_id, "::NCryptEnumKeys") != nullptr)              return true;
-    if (std::strstr(subject_id, "::NCryptEnumStorageProviders") != nullptr)  return true;
-
-    return false;
-}
-
-
 // ── SIMD stub routing ──────────────────────────────────────────────
 // SIMD semantics for System.Numerics.Vector2/3/4 (and the Vector<T>
 // generic kernel variants) with default(zero) inputs are supplied by the
@@ -711,7 +631,7 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
     // two double operands — so a truthful IEEE754 totalOrder result cannot be
     // produced here.  A hardcoded return 0 would ignore the real (x, y) and lie.
     // Instead it flows through the real execution paths below (Phase 1 IL data,
-    // Phase 1.5 P/Invoke, Phase 2 dispatch table).  The managed AOT body for
+    // Phase 2 dispatch table).  The managed AOT body for
     // TotalOrderIeee754Comparer.Default.Compare is a self-contained scalar
     // compare; Track B/codegen lowering delivers it.  No subject-only stub.
 
@@ -734,15 +654,16 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
             return static_cast<CHAOS_IL2CPP_INTPTR>(il_ret);
     }
 
-    // ── Phase 1.5: Try BCrypt/CNG P/Invoke stub routing ─────────────────
-    // When the interpreter encounters a DllImport call to bcrypt.dll or
-    // ncrypt.dll (Interop+BCrypt / Interop+NCrypt managed methods), route
-    // it via the native ChaosBCrypt* stub functions defined in crypto_stubs.cpp.
-    // The stubs handle Windows BCrypt API calls and provide OpenSSL-based
-    // fallback on non-Windows platforms.
-    if (_TryExecuteViaPInvoke(subject_id))
-        return 0;
-
+    // (Phase 1.5 removed) BCrypt/CNG P/Invoke methods do not use a subject-level
+    // fallback.  The codegen ShapeRegistry (RuntimeHelperShapeRegistry.CoreStubs
+    // Part1.cs RegisterBCryptStub) generates direct native wrappers to the real
+    // cross-platform ChaosBCrypt* stubs (crypto_stubs.cpp: Windows bcrypt.dll,
+    // non-Windows OpenSSL), returning real NTSTATUS.  A former _TryExecuteViaPInvoke
+    // here only name-matched and returned a hardcoded 0 — that fabricated success
+    // for methods that either were already handled correctly upstream or (NCrypt,
+    // which has no native stub) genuinely have no body.  Removing it lets properly
+    // wired methods execute via ShapeRegistry and genuinely-unwired ones surface as
+    // unresolved (honest) rather than a silent 0.
 
     // ── Phase 2: Scan the external runtime dispatch table ───────────────
     if (kChaosExternalRuntimeCount > 0) {
@@ -782,10 +703,11 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
     // ── Phase 3: Not found in dispatch table ────────────────────────────
     // Crypto methods are NOT consigned to a blanket return-0 here.  Genuine
     // crypto execution already had priority above: Phase 1 (_TryExecuteViaIlData,
-    // executes AOT Core IR JSON), Phase 1.5 (_TryExecuteViaPInvoke, BCrypt/CNG
-    // stubs), and Phase 2 (dispatch table).  If all of those failed to execute,
-    // the subject reaches this point genuinely unresolved and flows to the
-    // documented sentinel catch-all below (not a per-crypto-class lie).
+    // executes AOT Core IR JSON) and Phase 2 (dispatch table).  BCrypt/CNG stubs
+    // are handled by codegen ShapeRegistry direct wrappers (not the fallback).
+    // If all of those failed to execute, the subject reaches this point genuinely
+    // unresolved and flows to the documented sentinel catch-all below (not a
+    // per-crypto-class lie).
 
    return 0;
 }
