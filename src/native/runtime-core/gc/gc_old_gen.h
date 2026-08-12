@@ -292,6 +292,15 @@ public:
     }
     CHAOS_IL2CPP_SIZE TotalPages() const { return page_count_; }
 
+    /// Number of decommissioned 100%-free pages currently held in the reusable
+    /// pool.  Read-only diagnostic accessor (locks mutex_); never valid while a
+    /// collection is in progress.  Used by tests to lock pool recycle/trim
+    /// behavior (plan-v6 M3/T5).
+    int PoolPageCount() const {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return static_cast<int>(page_pool_.size());
+    }
+
     // ── Page index (sorted array for O(log n) lookup) ───────────
 
     /// Sorted page array for O(log n) FindPage/IsInOldGen.
