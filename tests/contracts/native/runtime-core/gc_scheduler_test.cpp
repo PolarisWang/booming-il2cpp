@@ -120,6 +120,35 @@ void TestRecommendedNurserySize() {
              "RecommendedNurserySize <= 4MB (sanity bound)");
 }
 
+// ── Test 7b (M6): Fragmentation-to-gen-budget servo ─────────────────
+// The scheduler serves old-gen fragmentation into the nursery/gen1 budget
+// (gc_scheduler.cpp RecommendedNurserySize frag-discount): higher fragmentation
+// must shrink the recommended nursery so old gen gets collection cycles to
+// compact before new survivors arrive.  Closes the "frag → gen budget" loop.
+void TestFragServo() {
+    TEST("FragServo: old-gen frag discounts nursery budget");
+
+    auto baseline = g_gc_scheduler.RecommendedNurserySize();
+    GC_CHECK(baseline > 0, "baseline nursery budget > 0");
+
+    // Moderate fragmentation (30-50%) → 0.75x discount.
+    g_gc_scheduler.SetOldGenFragmentation(0.40f);
+    auto mod = g_gc_scheduler.RecommendedNurserySize();
+    GC_CHECK(mod <= baseline,
+             "frag=0.40 → nursery budget does not grow vs baseline");
+    GC_CHECK(mod > 0, "frag=0.40 → discounted nursery still > 0");
+
+    // High fragmentation (>50%) → stronger 0.50x discount.
+    g_gc_scheduler.SetOldGenFragmentation(0.60f);
+    auto high = g_gc_scheduler.RecommendedNurserySize();
+    GC_CHECK(high <= mod,
+             "frag=0.60 → nursery budget shrinks further vs frag=0.40");
+
+    // Reset so other tests are unaffected.
+    g_gc_scheduler.SetOldGenFragmentation(0.0f);
+    GC_CHECK(true, "frag servo reset ok");
+}
+
 // ── Test 8: TotalAllocatedSinceLastGC ───────────────────────────────
 void TestTotalAllocated() {
     TEST("TotalAllocatedSinceLastGC");
@@ -205,6 +234,7 @@ int main() {
     TestTryClaimGcSlot();
     TestPageCountGrowth();
     TestRecommendedNurserySize();
+    TestFragServo();
     TestTotalAllocated();
     TestProvisionalForceBlocking();
     TestConfigEnvOverride();
