@@ -8,6 +8,7 @@
 
 #include "gc_bgc.h"
 #include "gc_api.h"
+#include "gc_config.h"
 #include "gc_gen1.h"
 #include "gc_young_gen.h"
 #include "gc_heap.h"
@@ -34,7 +35,7 @@ void GcScheduler::RecordAllocation(CHAOS_IL2CPP_SIZE bytes) noexcept {
 
 void GcScheduler::RecordGcCompleted() noexcept {
     // Set cooldown to skip ShouldTriggerGc for the next N allocations.
-    gc_cooldown_skips_.store(kCooldownAllocations, std::memory_order_release);
+    gc_cooldown_skips_.store(static_cast<int>(GcConfig().CooldownAllocations), std::memory_order_release);
 
     // Record completion timestamp for TryClaimGcSlot rate limiting.
     auto now = std::chrono::steady_clock::now();
@@ -59,7 +60,7 @@ bool GcScheduler::TryClaimGcSlot() noexcept {
     // If no GC has ever completed, or enough time has passed since the last one,
     // try to claim the slot atomically.  Only one thread succeeds.
     if (last_ns == 0 || (now_ns >= last_ns &&
-        (now_ns - last_ns) >= kMinGcIntervalNs)) {
+        (now_ns - last_ns) >= GcConfig().MinGcIntervalMs * 1000ULL * 1000ULL)) {
         // CAS: claim the slot by writing now_ns.  If last_ns changed between
         // our load and CAS (another thread claimed), CAS fails gracefully.
         if (last_gc_completion_ns_.compare_exchange_strong(last_ns, now_ns,
@@ -191,10 +192,10 @@ void GcScheduler::RecordGen1Collection(CHAOS_IL2CPP_SIZE bytes_promoted,
     //     there longer for efficient filtering before Gen2 promotion.
     double gen1_survival = BitsToDouble(
         gen1_survival_rate_bits_.load(std::memory_order_relaxed));
-    int threshold = kGen1MinPromotionAge;
+    int threshold = static_cast<int>(GcConfig().Gen1MinPromotionAge);
 
     if (gen1_survival > 0.60) {
-        threshold = kGen1MinPromotionAge;  // 1 — promote fast
+        threshold = static_cast<int>(GcConfig().Gen1MinPromotionAge);  // promote fast
     } else if (gen1_survival > 0.20) {
         threshold = 2;  // moderate filtering
     } else {
@@ -209,9 +210,10 @@ void GcScheduler::RecordGen1Collection(CHAOS_IL2CPP_SIZE bytes_promoted,
         gen1_total_promoted_bytes_.load(std::memory_order_relaxed);
     if (total_promoted > 0 && total_pause > 0) {
         uint64_t ns_per_byte = total_pause / total_promoted;
-        if (ns_per_byte > kGen1MaxNsPerByte) {
+        if (ns_per_byte > GcConfig().Gen1MaxNsPerByte) {
             // High pause cost: increase threshold, capped at max.
-            threshold = std::min(threshold + 1, kGen1MaxPromotionAge);
+            threshold = std::min(threshold + 1,
+                static_cast<int>(GcConfig().Gen1MaxPromotionAge));
         }
     }
 
@@ -363,14 +365,15 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
         }
     }
 
+    float full_trigger_mult = static_cast<float>(GcConfig().FullTriggerMultiplierFP) / 1000.0f;
     // Compute memory pressure ratio: how full the heap is relative to
     // the full-GC trigger.  >1.0 means we've exceeded the normal full GC
     // threshold but the BGC might be busy or deferred.
     float pressure_ratio = (heap_est > 0)
-        ? static_cast<float>(alloc_full) / (static_cast<float>(heap_est) * kFullTriggerMultiplier)
+        ? static_cast<float>(alloc_full) / (static_cast<float>(heap_est) * full_trigger_mult)
         : 0.0f;
 
-    if (heap_est > 0 && alloc_full > static_cast<CHAOS_IL2CPP_SIZE>(heap_est * kFullTriggerMultiplier)) {
+    if (heap_est > 0 && alloc_full > static_cast<CHAOS_IL2CPP_SIZE>(heap_est * full_trigger_mult)) {
         // Full collection threshold exceeded.  Prefer BGC over STW when:
         //   - BGC thread is running
         //   - BGC is not already busy with a cycle
@@ -402,10 +405,12 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
     // Scale young threshold by pressure: at pressure_ratio=1.0 (normal),
     // use kYoungTriggerMultiplier=2.0.  At pressure_ratio=2.0 (very high),
     // tighten to 1.0× for aggressive young GC pacing.
-    float scaled_young_multiplier = kYoungTriggerMultiplier;
+    const float young_trigger_mult =
+        static_cast<float>(GcConfig().YoungTriggerMultiplierFP) / 1000.0f;
+    float scaled_young_multiplier = young_trigger_mult;
     if (pressure_ratio > 0.5f) {
         // Linear scale from 2.0× at 0.5 pressure to 1.0× at 2.0 pressure.
-        scaled_young_multiplier = kYoungTriggerMultiplier * (1.5f - pressure_ratio * 0.5f);
+        scaled_young_multiplier = young_trigger_mult * (1.5f - pressure_ratio * 0.5f);
         if (scaled_young_multiplier < 1.0f) scaled_young_multiplier = 1.0f;
     }
 
@@ -417,8 +422,10 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
     // cumulative allocation since last full GC has grown beyond
     // kHighPressureTriggerMultiplier × heap.  Pre-emptively trigger
     // a young GC to slow the accumulation.
+    const float high_pressure_mult =
+        static_cast<float>(GcConfig().HighPressureTriggerMultiplierFP) / 1000.0f;
     if (heap_est > 0 &&
-        alloc_full > static_cast<CHAOS_IL2CPP_SIZE>(heap_est * kHighPressureTriggerMultiplier) &&
+        alloc_full > static_cast<CHAOS_IL2CPP_SIZE>(heap_est * high_pressure_mult) &&
         alloc > last_nursery * 0.5f) {
         return GcCollectionKind::YOUNG;
     }
@@ -528,9 +535,16 @@ CHAOS_IL2CPP_SIZE GcScheduler::RecommendedNurserySize() const noexcept {
         size = static_cast<CHAOS_IL2CPP_SIZE>(size * 0.75);
     }
 
-    // Clamp to [kMinNurserySize, kMaxNurserySize].
-    if (size < kMinNurserySize) size = kMinNurserySize;
-    if (size > kMaxNurserySize) size = kMaxNurserySize;
+    // Clamp to [kMinNurserySize, kMaxNurserySize] (config-tunable).  Fall back
+    // to the compile-time scheduler bounds when config is uninitialized (0):
+    // this keeps sizing correct for tests / early callers that never ran
+    // GcConfig().Initialize().
+    CHAOS_IL2CPP_SIZE min_nursery = GcConfig().MinNurserySize;
+    CHAOS_IL2CPP_SIZE max_nursery = GcConfig().MaxNurserySize;
+    if (min_nursery == 0) min_nursery = kMinNurserySize;
+    if (max_nursery == 0) max_nursery = kMaxNurserySize;
+    if (size < min_nursery) size = min_nursery;
+    if (size > max_nursery) size = max_nursery;
 
     // Round up to page size (4 KB) for aligned VirtualAlloc.
     constexpr CHAOS_IL2CPP_SIZE kPageSize = 4 * 1024;
@@ -571,9 +585,14 @@ CHAOS_IL2CPP_SIZE GcScheduler::RecommendedGen1Size() const noexcept {
     CHAOS_IL2CPP_SIZE size = static_cast<CHAOS_IL2CPP_SIZE>(base);
     size = (size + kGen1Align - 1) & ~(kGen1Align - 1);
 
-    // Clamp to [kMinGen1Size, kMaxGen1Size].
-    if (size < kMinGen1Size) size = kMinGen1Size;
-    if (size > kMaxGen1Size) size = kMaxGen1Size;
+    // Clamp to [kMinGen1Size, kMaxGen1Size] (config-tunable).  Fall back to the
+    // compile-time scheduler bounds when config is uninitialized (0).
+    CHAOS_IL2CPP_SIZE min_gen1 = GcConfig().MinGen1Size;
+    CHAOS_IL2CPP_SIZE max_gen1 = GcConfig().MaxGen1Size;
+    if (min_gen1 == 0) min_gen1 = kMinGen1Size;
+    if (max_gen1 == 0) max_gen1 = kMaxGen1Size;
+    if (size < min_gen1) size = min_gen1;
+    if (size > max_gen1) size = max_gen1;
 
     return size;
 }

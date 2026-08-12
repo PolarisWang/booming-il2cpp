@@ -36,11 +36,14 @@ struct YoungCollectionResult {
     bool              timed_out;           // True if kMaxPromoteObjects was reached
 
     /// Condemned generation for this collection (align CoreCLR gc_mark's
-    /// condemned_gen, mark_phase.cpp:1393).  Objects whose region generation is
-    /// NEWER than this are not promoted/marked in this collection (their contents
-    /// are handled by a younger collection / never need the older-gen treatment).
-    /// For a young (nursery) collection this is kRegionGenYoung (0).
-    uint8_t condemned_gen_num{kRegionGenYoung};
+    /// condemned_gen, mark_phase.cpp:1393).  A GC condemns every generation
+    /// YOUNGER than or equal to this value; objects whose region generation is
+    /// NEWER (numerically greater) than this are not promoted/marked in this
+    /// collection (handled by an older-gen collection).  For a young GC that
+    /// collects nursery (gen0) + survivor (gen1), the condemned gen is gen1
+    /// (kRegionGenGen1=1); gen0/gen1 objects (region_gen <= 1) are processed,
+    /// gen2/old objects (region_gen > 1) are left untouched.
+    uint8_t condemned_gen_num{kRegionGenGen1};
 
     /// Cheney BFS worklist: tenured addresses of promoted objects, to be
     /// scanned in Phase 3 for transitive closure.  The array is pre-allocated

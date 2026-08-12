@@ -26,22 +26,55 @@ namespace chaos::il2cpp::runtime_core {
 // Each key:  KIND_CONFIG(Name, EnvSuffix, Default, Doc)
 //   INT/BOOL kinds supported.  Internal defaults mirror the historical
 //   compile-time constants; env override (CHAOS_GC_<EnvSuffix>) wins.
+//
+// Every key MUST be consumed by a real runtime path (read at init / GC-decision
+// time, or latched into a hot-path cache).  Dead keys are not permitted — if a
+// knob no longer drives any behavior it is removed, not left as a no-op.
+//
+// Note on float knobs: fractional tunables (trigger multipliers, fragmentation
+// thresholds) are stored as fixed-point *1000 CHAOS_IL2CPP_SIZE to keep the
+// config struct INT-only (mirrors GcScheduler::SetOldGenFragmentation fp*1000).
 #define CHAOS_GC_CONFIGURATION_KEYS \
-    INT_CONFIG(DefaultNurserySize,   "NurserySize",      64 * 1024 * 1024, "nursery region size (bytes)")            \
-    INT_CONFIG(DefaultGen1Size,      "Gen1Size",         0,                "gen1 survivor size (0=default=nursery)")  \
-    INT_CONFIG(MaxTlabAlloc,         "MaxTlabAlloc",     32 * 1024,        "largest in-TLAB allocation (bytes)")     \
-    INT_CONFIG(LohThreshold,         "LOHThreshold",     85 * 1024,        "large-object-heap threshold (bytes)")    \
-    INT_CONFIG(ParallelMarkWorkers,  "ParallelMarkWorkers", 8,             "max parallel-mark workers")              \
-    INT_CONFIG(HeapHardLimitMB,      "HeapHardLimitMB",  0,                "hard heap limit (MB, 0=disabled)")        \
-    INT_CONFIG(HeapSoftLimitMB,      "HeapSoftLimitMB",  0,                "soft heap limit (MB, 0=disabled)")         \
-    INT_CONFIG(HeapVerify,           "HeapVerify",       0,                "GC self-verify level (0=off,1=region-gen,2=full)")
+    /* ── existing core knobs (wired in InitYoungGeneration / diagnostics) ── */ \
+    INT_CONFIG(DefaultNurserySize,      "NurserySize",          64 * 1024 * 1024, "nursery region size (bytes)")         \
+    INT_CONFIG(DefaultGen1Size,         "Gen1Size",             0,               "gen1 survivor size (0=default=nursery)") \
+    INT_CONFIG(MaxTlabAlloc,            "MaxTlabAlloc",         32 * 1024,       "largest in-TLAB allocation (bytes)")    \
+    INT_CONFIG(LohThreshold,            "LOHThreshold",         85 * 1024,       "large-object-heap threshold (bytes)")   \
+    INT_CONFIG(ParallelMarkWorkers,     "ParallelMarkWorkers",  8,               "max parallel-mark workers")             \
+    INT_CONFIG(HeapHardLimitMB,         "HeapHardLimitMB",      0,               "hard heap limit (MB, 0=disabled)")       \
+    INT_CONFIG(HeapSoftLimitMB,         "HeapSoftLimitMB",      0,               "soft heap limit (MB, 0=disabled)")        \
+    INT_CONFIG(HeapVerify,              "HeapVerify",           0,               "GC self-verify level (0=off,1=region-gen,2=full)") \
+    /* ── scheduler adaptive sizing (read at GC-decision time) ── */ \
+    INT_CONFIG(YoungTriggerMultiplierFP, "YoungTriggerMultiplier", 2000,         "young-GC trigger mult (fp*1000; 2000=2.0x)/ last nursery") \
+    INT_CONFIG(FullTriggerMultiplierFP,  "FullTriggerMultiplier",  2000,         "full-GC trigger mult (fp*1000; 2000=2.0x)/ est heap")   \
+    INT_CONFIG(HighPressureTriggerMultiplierFP, "HighPressureTriggerMultiplier", 3000, "high-pressure trigger mult (fp*1000)") \
+    INT_CONFIG(CooldownAllocations,     "CooldownAllocations",  256,             "alloc cooldown skips after each GC")      \
+    INT_CONFIG(MinGcIntervalMs,         "MinGcIntervalMs",      50,              "min interval between GC completions (ms)") \
+    INT_CONFIG(Gen1MinPromotionAge,     "Gen1MinPromotionAge",  1,               "min gen1 promotion age threshold")        \
+    INT_CONFIG(Gen1MaxPromotionAge,     "Gen1MaxPromotionAge",  12,              "max gen1 promotion age threshold")         \
+    INT_CONFIG(Gen1MaxNsPerByte,        "Gen1MaxNsPerByte",     10,              "max ns per promoted byte before age+nudge") \
+    INT_CONFIG(MinNurserySize,          "MinNurserySize",       64 * 1024,       "adaptive nursery size floor (bytes)")     \
+    INT_CONFIG(MaxNurserySize,          "MaxNurserySize",       4 * 1024 * 1024, "adaptive nursery size cap (bytes)")       \
+    INT_CONFIG(MinGen1Size,             "MinGen1Size",          4 * 1024 * 1024, "adaptive gen1 size floor (bytes)")        \
+    INT_CONFIG(MaxGen1Size,             "MaxGen1Size",          32 * 1024 * 1024,"adaptive gen1 size cap (bytes)")          \
+    /* ── BGC concurrent marking ── */ \
+    INT_CONFIG(BgcWorkers,              "BgcWorkers",           8,               "max background-GC worker threads")        \
+    INT_CONFIG(MarkSliceBudgetUs,       "MarkSliceBudgetUs",    2000,            "BGC mark slice budget (us)")              \
+    /* ── old-gen compaction / reserve ── */ \
+    INT_CONFIG(CrossPageFragThresholdFP,"CrossPageFragThreshold", 300,           "old-gen cross-page evacuate frag (fp*1000)") \
+    INT_CONFIG(EmergencyReserveSize,    "EmergencyReserveSize", 64 * 1024,       "emergency reserve for OOM (bytes)")
 
 // ── Internal config accessor ───────────────────────────────────────────
 // A single struct populated once at init from env (or compile-time defaults).
 // Avoids macro-generated method baggage while keeping the mental model of a
 // key table.  Values are plain scalars (const after Initialize).
 struct GcConfigImpl {
-#define INT_CONFIG(NAME, ENV, DEFAULT, DOC) CHAOS_IL2CPP_SIZE NAME;
+    // Fields are value-initialized to their DEFAULT at construction (not 0), so
+    // reads before GcConfig().Initialize() still return the correct baked-in
+    // default rather than a spurious 0.  This keeps consumers (scheduler sizing,
+    // trigger logic, allocator latches) correct even when a code path reads
+    // config before the GC is fully initialized.
+#define INT_CONFIG(NAME, ENV, DEFAULT, DOC) CHAOS_IL2CPP_SIZE NAME = (DEFAULT);
     CHAOS_GC_CONFIGURATION_KEYS
 #undef INT_CONFIG
 

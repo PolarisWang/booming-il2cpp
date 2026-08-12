@@ -30,7 +30,10 @@ namespace chaos::il2cpp::runtime_core {
 // [LOHSegment header | mark_bit (1 byte) | payload (size aligned to segment)]
 // ======================================================================
 
-static constexpr CHAOS_IL2CPP_SIZE kLohThreshold = 85 * 1024;     // 85 KB
+// Runtime-latchable (not constexpr): defaults to the historical 85 KB but is
+// overwritten from GcConfig().LohThreshold during GC init so the
+// CHAOS_GC_LOHThreshold knob drives the real LOH classification path.
+inline CHAOS_IL2CPP_SIZE kLohThreshold = 85 * 1024;    // 85 KB
 static constexpr CHAOS_IL2CPP_SIZE kLohSegmentSize = 64 * 1024;   // 64 KB min segment
 
 /// LOH segment header (at the start of each VirtualAlloc'd block).

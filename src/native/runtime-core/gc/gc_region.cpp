@@ -13,11 +13,13 @@
 #include "gc_events.h"
 #include "gc_gen1.h"
 #include "gc_heap.h"
+#include "gc_heap_manager.h"   // M3A-1: per-heap manager lifecycle
 #include "gc_layout.h"
 #include "gc_numa.h"
 #include "gc_config.h"
 #include "gc_old_gen.h"
 #include "gc_loh.h"
+#include "gc_parallel_mark.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
 #include "gc_api.h"
@@ -556,6 +558,24 @@ void InitYoungGeneration() noexcept {
     // Initialize the GC config singleton (env overrides + programmatic knobs).
     GcConfig().Initialize();
 
+    // M3A-1: initialize the per-heap manager.  Under the WKS default
+    // (GC_SERVER=0) this is a no-op; when GC_SERVER=1 it allocates the per-heap
+    // GcHeapContext array and per-heap old-gen, so Server-GC multi-heap is
+    // actually prepared instead of crashing on a null/empty array (the previous
+    // zero-production-call gap).
+    GcHeapManager::Instance().Initialize();
+
+    // Latch config-driven hot-path knobs once, so the allocation / LOH / mark
+    // hot paths read a plain machine load (the latched values) instead of
+    // consulting the config singleton per allocation.  kMaxTlabAlloc /
+    // kLohThreshold / kMaxParallelMarkWorkers were converted from constexpr to
+    // inline mutable values (defaulting to the historical constants); this
+    // overwrites them from the env/API CHAOS_GC_* knobs so they actually drive
+    // real behavior (not just the init log).
+    kMaxTlabAlloc = GcConfig().MaxTlabAlloc;
+    kLohThreshold = GcConfig().LohThreshold;
+    kMaxParallelMarkWorkers = static_cast<int>(GcConfig().ParallelMarkWorkers);
+
     // Initialize scheduler memory limits from config (env-driven, replaces the
     // former compile-time #if CHAOS_IL2CPP_GC_HEAP_*_LIMIT_MB only).
     CHAOS_IL2CPP_SIZE hard_limit_mb = GcConfig().HeapHardLimitMB;
@@ -873,9 +893,15 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
     // write barrier must treat them as gen0 (skip card: contents are scanned
     // wholesale).  Everything mature (tenured/LOH/Domain/POH) → old(2).
     // Keep the skewed region→gen table in sync for O(1) write-barrier lookups.
-    uint8_t region_gen = (kind == RegionKind::REGION_NURSERY ||
-                          kind == RegionKind::REGION_GEN1)
-                             ? kRegionGenYoung : kRegionGenOld;
+    //
+    // M9-A1 (3-gen): GEN1 now gets a DISTINCT generation value (kRegionGenGen1=1)
+    // instead of sharing kRegionGenYoung(0) with the nursery.  The write barrier
+    // still treats both gen0 and gen1 as "young" for the wholesale-scan skip (via
+    // `dst_gen <= kRegionGenGen1`), so this tag makes gen1's identity observable
+    // without changing the young-scan semantics.
+    uint8_t region_gen = (kind == RegionKind::REGION_NURSERY)  ? kRegionGenYoung
+                       : (kind == RegionKind::REGION_GEN1)     ? kRegionGenGen1
+                       : kRegionGenOld;
     r->gen = region_gen & kRegionGenMask;
     // Mark EVERY 4MB region-gen chunk the region spans (not just begin).  A
     // nursery/gen1 region is large (e.g. 64MB = 16 chunks); without this the

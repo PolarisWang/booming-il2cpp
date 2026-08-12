@@ -39,6 +39,13 @@ void GetPlatformMemoryStatus(MemoryStatusData& out) noexcept;
 void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
                          CHAOS_IL2CPP_SIZE size) noexcept;
 
+/// Get the gen-scaled OOM report budget (align CoreCLR allocation.cpp
+/// oom_budget = dd_min_size(gen0)/2).  CRAG derives it from the config-tunable
+/// gen0/nursery minimum budget (GcConfig().MinNurserySize, default 64 KB) / 2,
+/// so it scales with the configured gen0 budget.  Used to clamp the requested
+/// size in the OOM failure report.
+CHAOS_IL2CPP_SIZE GcGetOomReportBudget() noexcept;
+
 // ── Managed GC API (System.GC) ─────────────────────────────────────
 
 /// Returns the total number of bytes currently thought to be allocated

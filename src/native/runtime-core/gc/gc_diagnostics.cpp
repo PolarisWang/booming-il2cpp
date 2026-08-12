@@ -36,7 +36,8 @@ inline void CheckRegionGen(uintptr_t addr, uint8_t expect, const char* what) noe
 }  // namespace
 
 void GcVerifyRegionToGenerationMap() noexcept {
-    // Nursery + Gen1 regions must be young (gen0) — young GC scans them wholesale.
+    // Nursery = young (gen0); Gen1 = its own gen (gen1, M9) — young GC scans the
+    // young side (gen0+gen1) wholesale.
     auto* nursery = G_YoungGen().region.load(std::memory_order_acquire);
     if (nursery != nullptr && nursery->begin != nullptr) {
         CheckRegionGen(reinterpret_cast<uintptr_t>(nursery->begin), kRegionGenYoung, "nursery");
@@ -44,7 +45,7 @@ void GcVerifyRegionToGenerationMap() noexcept {
     }
     auto* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
     if (gen1 != nullptr && gen1->begin != nullptr) {
-        CheckRegionGen(reinterpret_cast<uintptr_t>(gen1->begin), kRegionGenYoung, "gen1");
+        CheckRegionGen(reinterpret_cast<uintptr_t>(gen1->begin), kRegionGenGen1, "gen1");
     }
 
     // Old-gen pages must be OLD (gen2) — GcMarkRangeOld sets this at AllocatePage.

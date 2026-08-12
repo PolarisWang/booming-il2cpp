@@ -236,7 +236,7 @@ option(CHAOS_IL2CPP_GC_BGC          "Enable Background GC (BGC) concurrent mark-
 option(CHAOS_IL2CPP_GC_PARALLEL_MARK "Enable parallel marking in GC"                        ON)
 option(CHAOS_IL2CPP_GC_EVENTS       "Enable GC event tracing and callbacks"                 ON)
 option(CHAOS_IL2CPP_GC_LARGE_PAGES  "Enable large page (2MB) support (requires SeLockMemoryPrivilege)" ON)
-option(CHAOS_IL2CPP_GC_SERVER      "Enable Server GC mode with per-NUMA-node heaps"              ON)
+option(CHAOS_IL2CPP_GC_SERVER      "Enable Server GC mode with per-NUMA-node heaps"              OFF)
 
 option(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB
     "Hard memory limit in MB (0=disabled). Allocation exceeding this fails."

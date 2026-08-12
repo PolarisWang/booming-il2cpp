@@ -20,11 +20,56 @@
 - GC 测试全绿、构建 exit 0；`gc_diagnostics_test` 4/4、`gc_card_table_ext_test` 7/7。
 - **stress 改善至 14/20**（HEAD~50% → 系统性 region-gen + static-root 修复）。残余 **young-GC 晋升** 深因（known-issue，见 memory `gc-crossgen-fix-implementation-status`）。
 
+### ✅ 已结算：M11（M5 P2 工程，commit 待填）
+- **GC 配置旋钮扩展 + 死旋钮接线**（plan-v5 M11，务实扩展，用户确认范围）。
+  - 接线 3 个死旋钮到真实热路径：`MaxTlabAlloc`→gc_region 分配路径、`LohThreshold`→gc_loh/gc_old_gen 分类、`ParallelMarkWorkers`→gc_parallel_mark + BGC worker（`kMaxTlabAlloc`/`kLohThreshold`/`kMaxParallelMarkWorkers` 从 `static constexpr` 改为 `inline` 可变值，`InitYoungGeneration` 一次性 latch，热路径仅 1 次机器 load）。
+  - 扩展宏表至 24 旋钮：新增调度自适应（trigger 乘数 fp*1000 / cooldown / min-GC 间隔 / promote age / nursery-gen1 上下界）、BGC（BgcWorkers / MarkSliceBudgetUs）、旧代（CrossPageFragThresholdFP / EmergencyReserveSize），全部接线到真实读取点。
+  - `GcConfigImpl` 字段改为**构造期即初始化为 DEFAULT**（非 0），消除「Initialize() 前读到 0」整族 bug（修复 scheduler 触发/尺寸的早读回归）。
+  - 新增 `gc_config_test.cpp`（24 旋钮全量 env-override 读取 + hot-path latch 传播 + C-API get 可达）：**0 failures**。
+  - 验证：`ctest -R "gc_" -L unit` 28/29（唯一 FAIL=`gc_finalizer_integration_test`，HEAD 既有与本改动无关）；affected GC 单测 region/loh/parallel_mark/young_collector/scheduler 全 0；构建 exit 0。
+  - **已知非回归**：`bgc_race_test` 在 baseline 与改动后都悬挂（BGC 并发-mark 相变死锁，pre-existing，非 unit 绿基线，RESOURCE_LOCK bgc 组）。`test_driver.py --layer unit` OVERALL 因 managed CodeGen snapshot 基线不匹配（52-stind-wide/23-instance-fields，CodeGen 域，pority 与本 GC 改动无关）。
+
+### ✅ 已结算：M12（M5 P2 工程，commit 待填）
+- **GCHandle 内部类型：REFCOUNTED + WEAK_INTERIOR_POINTER**（plan-v5 M12，对齐 CoreCLR `HNDTYPE_REFCOUNTED=5` / `HNDTYPE_WEAK_INTERIOR_POINTER=10`）。在独立 worktree `chaos-gc-m12` 推进。
+  - `GcHandleEntry` 扩字段：`refcounted`(bool) / `refcount`(int32) / `interior_offset`(size)——尾插新字段，10 处既有聚合初始化兼容（缺省值初始化 0/false）。
+  - 新增 4 个 C-API：`GcCreateRefCountedHandle`(refcount=1) / `GcAddRefHandle`(±1) / `GcReleaseHandle`(到 0 释放=等效 GcFreeHandle，含 pinned 清理) / `GcCreateWeakInteriorHandle`(weak+offset)。实现于 `engine_lifecycle.cpp` 分片锁模式内。
+  - `GcGetHandleTarget` 对 WEAK_INTERIOR（offset≠0）返回 `object+offset`（内部指针解析）。
+  - REFCOUNTED 是 `weak=false` → 弱清空路径(young+full GC)天然免疫；WEAK_INTERIOR 弱清空只 null `object_instance`、**保留 offset**（可重建）。即**无需改弱清空函数**。
+  - `gc_handle_test.cpp` 增 `TestRefCountedHandle`(create→addref→GC 存活→release→free) + `TestWeakInteriorHandle`(offset 解析 + content)：**11 tests 0 failures**。
+  - 回归：config/region/loh/parallel_mark/young_collector/scheduler/card_table/diagnostics/sanity/handle 10 测试全 0 failures；构建 exit 0。
+  - **已知独立**：`gc_atomic_alloc_test.cpp:108` constexpr 求值失败（pre-existing，该测试文件本体的 C2131，与 M12 无关）。
+
+### ✅ 已结算：M13（M5 P2 工程，commit 待填）
+- **GC 事件集 ETW 覆盖测试**（plan-v5 M13，eventtrace → ETW/EventPipe 测试角度）。
+  - `gc_events_test.cpp` 增 2 测：`TestEtwInitializeShutdown`（provider 幂等 init/shutdown/重 init/double-shutdown 安全）+ `TestEtwFireFunctions`（全部 `GcEtwFire*` 事件——GcStart/End/Young/Full/Oom/Gen1Collect/AllocationTick——无 provider 时安全 no-op、跨 init/shutdown 可调不崩溃）。
+  - include `gc_etw.h`，接入既有事件测试 (`chaos_runtime_core` 已链 `gc_etw.cpp`)。
+  - `gc_events_test` 5 → 7 tests：**7 tests 0 failures**。
+  - 回归：config/handle/scheduler/region 全 0 failures；构建 exit 0。
+
+### ✅ 已结算：M15（M5 P2 工程，commit 待填）
+- **oom_budget gen 级缩放**（plan-v5 M15，allocation.cpp → CRAG 对应 `gc_api.cpp`）。
+  - `kOomReportHalfBudget`（硬编码 32KB）替换为 `GcGetOomReportBudget()`（公开 API）：从 config 驱动的 gen0/nursery 最小预算 `GcConfig().MinNurserySize / 2` 派生，对齐 CoreCLR `allocation.cpp oom_budget = dd_min_size(gen0)/2`。默认 64KB/2=32KB（行为不变），配置可缩放。
+  - `gc_api.cpp` include `gc_config.h`；`gc_api.h` 公开 `GcGetOomReportBudget`。
+  - `gc_config_test.cpp` 增 `TestOomReportBudgetScaled`（默认 32KB / override 128KB→64KB / clamp ≤ min）：config test **4 groups 0 failures**。
+  - 回归：handle/events/scheduler/region 全 0 failures；构建 exit 0。
+
 ### ⬜ 剩余里程碑（跨会话，每里程碑独立验证+测试全绿再进）
-- **M2 主线 B1**：P2-M1(GC-M1 K2c regen，foundation-dll 集成) / P2-M3A(Server GC 多堆) / P2-M10(gen>condemned，M9 后)。
-- **M3 主线 B2 三代链**：M9 三代 → M8 plan-gen → M7 demotion（XL，拆 A/B）。
-- **M4 主线 B2 并发**：M5 BGC 分相 → M4 provisional；M3B/M6。
-- **M5 主线 B3**：M11/12/13/15（并行）；M14 ProvStress 降优。
+- **M5 主线 B2 并发**：M5 BGC 分相 → M4 provisional；M3B/M6。
+  - **M5-A 已落地（commit 待填）**：`StwRemark` 两快照 clear-as-scan — 重扫旧代卡 + Gen1 卡时 mark+ClearCard 消费，使 remark 幂等不重复 mark。验证 `bgc_race_test` 由 M11 期 round-3 悬挂推进到 5 轮全过（残余 phase-6 COMPACT_NEEDED wait 为 pre-existing，与 baseline 相同）。`bgc_smoke` 6/0 无回归。
+
+### ⬜ 剩余里程碑（跨会话，每里程碑独立验证+测试全绿再进）
+- **M2 主线 B1**：P2-M1(GC-M1 K2c regen，foundation-dll 集成，本会话评估 blocked-on-pipeline) / P2-M3A(Server GC 多堆) / P2-M10(gen>condemned，M9 后)。
+  - M3A Server：**scaffold 未跑通**（`GcHeapManager::Initialize()` 零生产调用；GC_SERVER=1 崩空 heap 数组；CMake 默认 ON vs 文档 OFF 不一致）。**未在本会话落地**，体量大，需独立里程碑 + CI 构建矩阵。
+  - M10 gen>condemned：**本会话已落地**（见下 M9 链）。
+- **M3 主线 B2 三代链**：M9/M10/M8/M7-A **本会话已落地**。
+  - **M9**（A1 gen1 标 + A2 激活 condemned + gen-aware scavenge + gen1 tag 测试）：完结。
+  - **M10**（gen>condemned 过滤实激活 + 测试）：完结。
+  - **M8**（plan-gen 重绑验证）：完结。
+  - **M7-A**（region demotion region-gen 验证，CoreCLR `set_region_plan_gen_num` demotion 对齐）：完结。`gc_gen1_test` 13/0。
+  - **M7-B**（age-based evacuation + 域卸载不碎片）**未落地**：net-new 深 GC 手术，跨会话。
+- **M4 主线 B2 并发**：M5 BGC 两快照 → M4 provisional；M3B/M6。
+  - **M5-A** clear-as-scan 已落地；M5 完整两快照纪律 + M4/M3B/M6 未落地。
+- **M5 主线 B3 全部完结**：M11/M12/M13/M15 已完成（M14 ProvStress 降优后置）。
 - 完整规格/步骤/测试/判据见 `plan-v5-01.md`。
 
 ## blocking_questions
@@ -79,3 +124,9 @@
 - P1：2参 barrier 非绝对 hot path，加 `IsNurseryPointer` 查询代价可接受；单参 `DirtyCard` 不变。
 - P2：旧代页标 OLD + 精确 range 判定，对齐 CoreCLR region 语义，架构一致。
 - P3：解释器单参路径不受影响；热更/域卸载不变。低优先级让位于 #1 高性能→保持升+精确。
+  - **M5-1 已落地（commit `faf020b3a`）**：修 BGC-YoungGC 暂停死锁——concurrent-mark 完成时 ack 挂起 pause + phase-wait 改 pause-servicing 循环 + PauseForYoungGc/Resume 通知 CV。`bgc_race_test` 完成率 ~0%→~75%（8 次跑 6 完成；残余 2 次为更深的 pre-existing mutator-driven phase 自推进问题）。`bgc_smoke` 6/0。
+  - **M3A-1 已落地（commit `18f3b8693`）**：接线 `GcHeapManager::Initialize()` 到 InitYoungGeneration + CMake GC_SERVER 默认 OFF（对齐 gc_features.h 文档；cache 需显式 `-DCHAOS_IL2CPP_GC_SERVER=OFF`）。WKS 默认构建全绿。
+  - **M3A-2/3 未落地（诚实 frontier）**：M3A-2 需 `GC_SERVER=1` 独立构建矩阵（`tests/unit` gtest 树），M3A-3 需 `G_*()` accessor 路由（bare-global 分配点）+ 域卸载 per-heap——体量大、需 server CI 验证，遇环境/架构阻塞。
+  - **M3A-3 已落地（commit `0bd49649f`）**：gc_gen1/gc_old_gen 的 bare `g_old_gen.` → `G_OldGen()` accessor（12 sites），使 Server 下路由 per-heap。WKS 无差异，gen1 14/0 + 全 GC 测试绿。`gc_young_gen.h:166` bare g_gc_scheduler 留待 server CI 再动（hot-path header）。
+  - **M4 provisional 已大体在**：`SetProvisionalMode`/`GcTriggerReason::PROVISIONAL`/force-blocking 已有 + `TestProvisionalForceBlocking` 覆盖。M4 剩余「gen1 强制 compact + NGC2 排队」依赖 M3B(动态堆数，依附 server 路径)，WKS 不可验证。
+  - **M3B/M6/M2-M1**：M3B/M6 依赖 server 多堆运行时（需 server CI 矩阵）；M2-M1 blocked on foundation-dll CI 管线。

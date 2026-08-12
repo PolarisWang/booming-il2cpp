@@ -266,15 +266,16 @@ static void test_region_gen() {
     Region* tenured = mgr.AllocateRegion(RegionKind::REGION_TENURED, 64 * 1024);
     if (!nursery || !gen1 || !tenured) { FAIL("region alloc failed"); return; }
 
-    // (1) Nursery → young(0); Gen1(survivor, K3) → young(0); tenured → old(2).
+    // (1) Nursery → young(0); Gen1(survivor, K3) → gen1(1, M9 3-gen);
+    //     tenured → old(2).
     uintptr_t nb = reinterpret_cast<uintptr_t>(nursery->begin);
     uintptr_t gb = reinterpret_cast<uintptr_t>(gen1->begin);
     uintptr_t tb = reinterpret_cast<uintptr_t>(tenured->begin);
     if (nursery->gen != kRegionGenYoung) FAIL("nursery.gen != young");
-    if (gen1->gen    != kRegionGenYoung) FAIL("gen1.gen != young (K3)");
+    if (gen1->gen    != kRegionGenGen1)  FAIL("gen1.gen != gen1 (M9 3-gen)");
     if (tenured->gen != kRegionGenOld)   FAIL("tenured.gen != old");
     if (GetRegionGen(nb) != kRegionGenYoung) FAIL("GetRegionGen(nursery) != young");
-    if (GetRegionGen(gb) != kRegionGenYoung) FAIL("GetRegionGen(gen1) != young");
+    if (GetRegionGen(gb) != kRegionGenGen1)  FAIL("GetRegionGen(gen1) != gen1 (M9)");
     if (GetRegionGen(tb) != kRegionGenOld)   FAIL("GetRegionGen(tenured) != old");
 
     // (2) SetRegionGen updates + skewness: same addr read back reflects new gen.

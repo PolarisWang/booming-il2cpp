@@ -300,7 +300,13 @@ void* GcGetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id) noexcept {
     std::lock_guard<std::mutex> lock(shard_mutex);
     auto it = shard_map.find(handle_id);
     if (it == shard_map.end()) return nullptr;
-    return it->second.object_instance;
+    void* obj = it->second.object_instance;
+    if (obj == nullptr) return nullptr;
+    // WeakInterior handles point to an interior offset of the object.
+    if (it->second.interior_offset != 0) {
+        return static_cast<char*>(obj) + it->second.interior_offset;
+    }
+    return obj;
 }
 
 void GcSetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id, void* new_target) noexcept {
@@ -322,6 +328,71 @@ void GcSetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id, void* new_target) noexcept
     if (it->second.pinned && new_target != nullptr) {
         GcAddPinnedObject(new_target);
     }
+}
+
+// ======================================================================
+// M12: RefCounted + WeakInterior handle API (CoreCLR-aligned internal types)
+//   HNDTYPE_REFCOUNTED         = 5   — runtime-managed ref lifetime
+//   HNDTYPE_WEAK_INTERIOR_POINTER = 10 — weak interior-pointing handle
+// ======================================================================
+
+CHAOS_IL2CPP_UINT64 GcCreateRefCountedHandle(void* object_instance) noexcept {
+    if (object_instance == nullptr) return 0;
+    CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
+    auto* shard_map = &s_gc_handle_shards[HandleShardIndex(handle)];
+    auto* shard_mutex = &s_gc_handle_shard_mutexes[HandleShardIndex(handle)];
+    std::lock_guard<std::mutex> lock(*shard_mutex);
+    (*shard_map)[handle] = GcHandleEntry{ object_instance, false, false, false, false,
+        RegionManager::Instance().IsNurseryPointer(object_instance),
+        /* M12 */ true, 1, 0 };
+    s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
+    return handle;
+}
+
+CHAOS_IL2CPP_INT32 GcAddRefHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept {
+    if (handle_id == 0) return 0;
+    auto& shard_mutex = HandleShardMutex(handle_id);
+    auto& shard_map = HandleShardMap(handle_id);
+    std::lock_guard<std::mutex> lock(shard_mutex);
+    auto it = shard_map.find(handle_id);
+    if (it == shard_map.end() || !it->second.refcounted) return 0;
+    it->second.refcount = static_cast<CHAOS_IL2CPP_INT32>(it->second.refcount + 1);
+    return it->second.refcount;
+}
+
+CHAOS_IL2CPP_INT32 GcReleaseHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept {
+    if (handle_id == 0) return 0;
+    auto& shard_mutex = HandleShardMutex(handle_id);
+    auto& shard_map = HandleShardMap(handle_id);
+    std::lock_guard<std::mutex> lock(shard_mutex);
+    auto it = shard_map.find(handle_id);
+    if (it == shard_map.end() || !it->second.refcounted) return 0;
+    CHAOS_IL2CPP_INT32 new_ref = static_cast<CHAOS_IL2CPP_INT32>(it->second.refcount - 1);
+    if (new_ref <= 0) {
+        // Refcount reached 0: free the handle (equivalent to GcFreeHandle).
+        if (it->second.pinned || it->second.async_pinned) {
+            GcRemovePinnedObject(it->second.object_instance);
+        }
+        shard_map.erase(it);
+        s_gc_handle_count.fetch_sub(1, std::memory_order_relaxed);
+        return 0;
+    }
+    it->second.refcount = new_ref;
+    return new_ref;
+}
+
+CHAOS_IL2CPP_UINT64 GcCreateWeakInteriorHandle(void* object_instance,
+                                               CHAOS_IL2CPP_SIZE offset) noexcept {
+    if (object_instance == nullptr) return 0;
+    CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
+    auto* shard_map = &s_gc_handle_shards[HandleShardIndex(handle)];
+    auto* shard_mutex = &s_gc_handle_shard_mutexes[HandleShardIndex(handle)];
+    std::lock_guard<std::mutex> lock(*shard_mutex);
+    (*shard_map)[handle] = GcHandleEntry{ object_instance, false, true, false, false,
+        RegionManager::Instance().IsNurseryPointer(object_instance),
+        /* M12 */ false, 0, offset };
+    s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
+    return handle;
 }
 
 // ======================================================================
