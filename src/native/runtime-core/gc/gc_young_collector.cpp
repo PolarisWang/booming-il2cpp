@@ -16,6 +16,7 @@
 #include "gc_scheduler.h"
 #include "gc_stats.h"
 #include "gc_heap.h"
+#include "gc_diagnostics.h"
 #include <thread_state.h>
 
 #include <chrono>
@@ -929,6 +930,13 @@ phase3:
     if (bgc_was_paused) {
         BgcController::Instance().ResumeAfterYoungGc();
     }
+
+    // M3/T8: verify every promoted BFS-worklist target landed in a legal
+    // generation (OLD→old-gen page, Gen1→gen1 range).  Only at kFull (debug/CI);
+    // cost is O(worklist) which is tiny next to the collection itself.  This makes
+    // the previously-dead P1-A3 assertion actually run on the production young-GC
+    // path instead of only the legacy PromoteNursery entry point.
+    GcVerifyPromotedTracked(result);
 
     return result;
 }
