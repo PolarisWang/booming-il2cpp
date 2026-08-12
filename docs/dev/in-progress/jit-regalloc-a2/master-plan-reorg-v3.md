@@ -133,3 +133,13 @@ adaptive + outlier + FP-12 零时长守卫 + `_MIN_ELAPSED_FLOOR` + perf-store o
 **精确定位的 codegen 缺口（下一步）**：`RuntimeSkeletonVectorKernelCore.FixedPlans.cs:111 TryCreateFixedComparisonPlan` 的 `_All` 分支（line 210/250）只匹配**泛型 `Vector<T>`** 签名（`managedVectorTypeName<scalarManagedType>`，carrier = RuntimeIntrinsicVector256Carrier）。而 `Vector2/3/4::GreaterThanAll(Vector2,Vector2)` 是**非泛型具名**签名，不匹配 → `TryExtractClosedIntrinsicScalarManagedType` 失败 → return false → 落外部 fallback return-0（A1 的 12 个 numerics 缺口）。
 
 **修复方向**：在 comparison planner 加 `System.Numerics.Vector2/3/4` (non-generic) 具名分支，carrier = `RuntimeNumericsVector2/3/4Carrier`，emit 调 `Vector2/3/4{GreaterThanAll,LessThanAll,...}(request->arg0, request->arg1)` → 我的新 native 符号。之后重建 numerics + fact 验证 passed=false→true。
+
+### 10. A2-1 真实修复方向确认（2026-08-12，修正 kernel 误径）
+
+**实证否决 kernel 路径**：把 `_All` 映射进 `TryCreateFixedComparisonPlan`（补 semanticId + Vector2/3/4 分支）后重建 numerics，fact 仍 16 失败——生成的 subject body 里**没有引用新 native 符号** (`Vector2GreaterThanAll`)。原因是：`Vector2/3/4::GreaterThanAll` 是 **managed CoreLib 方法**，经 subject→managed-method **外部 dispatch**（`ChaosExternalRuntimeFallback` 的硬编码 SIMD 常量 `interop_stubs.cpp:753`）落它，**不经 vector kernel**。kernel 只处理 `Vector<T>`/intrinsics。
+
+**已 revert**：补 `MapOperationKindToSemanticId` mapping + FixedPlans Vector2/3/4 分支（编译通过但 dead code，已 `git checkout HEAD` 清掉，避免误导）。
+
+**真实修复方向（下一 session）**：在 **ShapeRegistry / `TryCreateExternalRuntimeHelperDefinition`** 补 `System.Numerics.Vector2/3/4::GreaterThanAll/GreaterThanOrEqualAll/LessThanAll/LessThanOrEqualAll`(Vector,Vector→bool) 的 **SimpleForward** 条目 → 映射到已 land 的 native `Vector2/3/4{GreaterThan,LessThan,...}All`（commit 23e355b5f）。照 `RuntimeHelpers::InitializeArray`（S10.cs:156）的 Register pattern：`registry.Register("System.Numerics.Vector2","GreaterThanAll",["System.Numerics.Vector2","System.Numerics.Vector2"], SimpleForward, "Vector2GreaterThanAll", [Vector2-carrier ABI, Vector2-carrier ABI], bool ABI)`. carrier-by-value 需核对 ABI slot(2 floats)。之后重建 numerics + fact 验证。
+
+**注意**：该 fallback 对 `EqualsAll/LessThanOrEqualAll` 等返回硬编码 1（interop_stubs.cpp:756-762），是"零输入巧合正确"的伪通过。真修复让全部 `_All` 走真实 native 计算，既修 GreaterThanAll/LessThanAll 的错返回，也消除伪通过。
