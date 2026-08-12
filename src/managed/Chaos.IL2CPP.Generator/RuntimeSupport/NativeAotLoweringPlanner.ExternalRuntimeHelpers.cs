@@ -369,24 +369,66 @@ public sealed partial class NativeAotLoweringPlanner
 	private bool TryCreateVectorAllComparerHelper(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
 	{
 		helperDefinition = null;
-		// Match: System.Numerics.Vectors/System.Numerics.Vector[234]::</MethodName>:
-		//   System.Boolean(System.Numerics.Vector[234],System.Numerics.Vector[234])
-		// Detect the numerics carrier + reduce method.
-		string carrier;      // RuntimeNumericsVector2Carrier
-		string nativeFn;     // Vector2GreaterThanAll
-		var m = System.Text.RegularExpressions.Regex.Match(
+		// Match two forms reaching the external table:
+		//  (A) named:  System.Numerics.Vectors/System.Numerics.Vector[234]::GreaterThanAll:...
+		//  (B) generic: System.Numerics.Vectors/System.Numerics.Vector<System.Int32>::GreaterThanAll:...
+		// Detect the carried reduce method and pick the correct native lane-reducer.
+		string? carrier = null;      // RuntimeNumericsVector{2,3,4}Carrier  (named form)
+		string? nativeFn = null;     // Vector2GreaterThanAll  (named)  or  chaos_vector_greater_than_all_i32  (generic)
+		string? methodKey = null;    // GreaterThanAll / GreaterThanOrEqualAll / LessThanAll / LessThanOrEqualAll
+		string? elemType = null;     // generic element type ("System.Int32" → "i32") when generic form
+
+		var mNamed = System.Text.RegularExpressions.Regex.Match(
 			callee, @"System\.Numerics\.Vector([234])::(GreaterThanAll|GreaterThanOrEqualAll|LessThanAll|LessThanOrEqualAll):");
-		if (!m.Success)
+		var mGeneric = System.Text.RegularExpressions.Regex.Match(
+			callee, @"System\.Numerics\.Vector<([^>]+)>::(GreaterThanAll|GreaterThanOrEqualAll|LessThanAll|LessThanOrEqualAll):");
+
+		if (mNamed.Success)
+		{
+			var dim = mNamed.Groups[1].Value;
+			methodKey = mNamed.Groups[2].Value;
+			carrier = dim switch { "2" => "RuntimeNumericsVector2Carrier", "3" => "RuntimeNumericsVector3Carrier", _ => "RuntimeNumericsVector4Carrier" };
+			nativeFn = $"Vector{dim}{methodKey}";     // Vector2GreaterThanAll — landed in numerics_vectors.cpp
+		}
+		else if (mGeneric.Success)
+		{
+			elemType = mGeneric.Groups[1].Value.Trim();
+			methodKey = mGeneric.Groups[2].Value;
+			// Map element type → native stub suffix (matches vector_stubs.cpp VECTOR_REDUCTION_STUBS).
+			var suffix = elemType switch
+			{
+				var t when t.Contains("System.Int64") => "i64",
+				var t when t.Contains("System.UInt64") => "u64",
+				var t when t.Contains("System.UInt32") => "u32",
+				var t when t.Contains("System.Single") => "f",
+				var t when t.Contains("System.Double") => "d",
+				var t when t.Contains("System.Int16") => "i16",
+				var t when t.Contains("System.UInt16") => "u16",
+				var t when t.Contains("System.Byte") => "u8",
+				var t when t.Contains("System.SByte") => "i8",
+				_ => "i32",   // default incl System.Int32
+			};
+			// chaos_vector_<methodsnake>_<suffix>(INTPTR,INTPTR) — Vector256 carrier by pointer.
+			var snake = methodKey switch
+			{
+				"GreaterThanAll" => "greater_than_all",
+				"GreaterThanOrEqualAll" => "greater_than_or_equal_all",
+				"LessThanAll" => "less_than_all",
+				_ => "less_than_or_equal_all",
+			};
+			nativeFn = $"chaos_vector_{snake}_{suffix}";
+			carrier = "RuntimeIntrinsicVector256Carrier";
+		}
+		if (nativeFn == null || carrier == null)
 			return false;
-		var dim = m.Groups[1].Value;
-		var method = m.Groups[2].Value;
-		carrier = dim switch { "2" => "RuntimeNumericsVector2Carrier", "3" => "RuntimeNumericsVector3Carrier", _ => "RuntimeNumericsVector4Carrier" };
-		nativeFn = $"Vector{dim}{method}";     // e.g. Vector2GreaterThanAll — landed in numerics_vectors.cpp
 
 		var symbol = GetExternalRuntimeHelperSymbol(callee);
-		// body: two INTPTR args point at carriers (call-site passes vector by value → boxed;
-		// we reinterpret the first float X as the carrier or read via carrier pointer).
-		// A2-1: unpack via pointer-to-carrier, call the native reducer, return 1/0.
+		// body: two INTPTR args point at carriers.  Unpack → call native lane-reducer → 1/0.
+		// Named form (Vector2/3/4): native takes carrier by value → deref the INTPTR.
+		// Generic form (Vector<T>): chaos_vector_*_suffix takes INTPTR pointers → pass through.
+		var callExpr = (mNamed.Success)
+			? $"chaos::il2cpp::runtime_core::{nativeFn}(*chaos_a, *chaos_b)"
+			: $"chaos::il2cpp::runtime_core::{nativeFn}(chaos_arg_0, chaos_arg_1)";
 		var src = RenderSimpleExternalRuntimeHelper(
 			"CHAOS_IL2CPP_INT32", symbol,
 			"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
@@ -394,7 +436,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				$"    const auto* chaos_a = reinterpret_cast<const chaos::il2cpp::runtime_core::{carrier}*>(chaos_arg_0);",
 				$"    const auto* chaos_b = reinterpret_cast<const chaos::il2cpp::runtime_core::{carrier}*>(chaos_arg_1);",
-				$"    return chaos::il2cpp::runtime_core::{nativeFn}(*chaos_a, *chaos_b);",
+				$"    return {callExpr};",
 			});
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, symbol, src,
 			new AotCoreIrAbiSlotArtifact[]

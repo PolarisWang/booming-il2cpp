@@ -316,3 +316,18 @@ TryResolveBySubjectId 或被 CollectExternalRuntimeDispatchEntries 抢先路由�
 `Vector<T>::GreaterThanAll`，还是先被 external-runtime 收集（_externalRuntimeSubjects）。二选一:
 (a) 确保 kernel 派发在 external 之前，(b) 或在 TryCreateExternalRuntimeHelperDefinition 为泛型
 Vector<T> _All 补 false（引 native chaos_vector_*）。
+
+### 18d. Vector<T> 泛型 _All：helper 不达，结论固化（2026-08-12）
+
+把 `TryCreateVectorAllComparerHelper` 泛化以处理 `Vector<T>` 泛型（`Vector<System.Int32>::GreaterThanAll`
+→ `chaos_vector_greater_than_all_i32`，命名 vs 泛型 carrier 调用约定分离）+ runtime_core 无改动。
+**结果**：Generator 编译 OK，但 numerics fact 仍 176/180（泛型 4 未动），生成代码无
+`Vector<System.Int32>::GreaterThanAll` 引用 → **确认 codegen 根本不把泛型 `Vector<T>` `_All`
+送进 `TryCreateExternalRuntimeHelperDefinition`**。它走的是 type-load fallback →
+`_TryExecuteViaSimdStub` fake 常量（非 helper 机制）。泛型 helper 分支正确但未达 => 保留为
+正确意图，路由缺口才是真问题。
+
+**结论**：`Vector<T>` 泛型 `_All` 的修复锚点不在 external-helper（未被调用），而在
+`CollectExternalRuntimeDispatchEntries`/`TryCreateExternalRuntimeHelperDefinition` 对泛型形式上
+出现前，让 kernel（`TryResolveBySubjectId`/Descriptors 表有 Vector<T>）或 StructuredIR 内联
+先接住。这是 deep lowering 层问题，非 helpers 层单点。Vector2/3/4（非泛型命名）已修 12/12。
