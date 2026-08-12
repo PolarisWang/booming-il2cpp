@@ -111,3 +111,17 @@ adaptive + outlier + FP-12 零时长守卫 + `_MIN_ELAPSED_FLOOR` + perf-store o
 **执行任务 A1（定盘点法）**——用现有 20 个预编译 entry 跑 `--fact-json`，盘点所有「返回 0 但预期非 0」的方法。这一步不需要改任何代码、立即能做、直接决定方向 A 的工作量。跑完后给你一份带真实规模的缺口报告，再定 A2/A3 怎么排。
 
 要我现在执行 A1 吗？
+
+---
+
+## 8. A2 验证能力打通（2026-08-12，关键 enablement）
+
+**重建-验证环已验证可用**：设 `CHAOS_FOUNDATION_DLL=D:\agent\chaos-il2cpp\tests\e2e\translation` 重定向，`chunk_pipeline --chunk <c> --stages build,fact` 能：
+1. 从源码重建 chunk 的 entry.exe（numerics 实测 ~29s，Convert→TPG→CMake→entry）
+2. 对重建产物跑 fact 验证（numerics 重建后 16 失败，mostly Vector _All）
+
+**已落地**：`fix(codegen) Unsafe.As passthrough`（commit `d0d101236`）—— 把 Unsafe.As 从 FAIL stub 改为 `return chaos_arg_0` 透传地址。Generator Release 编译 0 error（未重建验证，因 Unsafe 不在 numerics chunk 内）。
+
+**A2-1 剩余（Vector SIMD，现可验证）**：numerics 重建后失败集中在 `Vector2/3/4::GreaterThanAll/LessThanAll/...`（`_All` 算子，value=0 或 32/64 部分match）。实现正确 `_All` 语义需先确认 Vector2/3/4 在该 codegen 的内存布局（X/Y/Z 分量存储 + bool 返回编码）。验证：重建 numerics + fact passed=false→true。
+
+**后续 A2/A3 均可用此环验证**：Interop GCHandle/SafeBuffer、Xml importers、PipeReader、NameTable。
