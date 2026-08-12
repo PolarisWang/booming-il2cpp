@@ -245,3 +245,22 @@ Generator Release 编译 0 error；regex 对实际 subjectId（`System.Numerics.
   Generator + interop_stubs），cache key 变化 → 自动重建。
 - 或加 `--no-hephaestus-cache` 强制真 convert+CMake。
 - 确认 convert-to-cpp 用哪个 Generator DLL（确保 rebuild 正确的那个）。
+
+### 17. A2-1 验证成功（2026-08-12，12/16 Vector _All 修复）
+
+**A5 验证基础设施打通**：根因 = chunk 链接**本地 codegen/lib/chaos_runtime_core.lib(Jun 19 stale)**，
+非共享 SDK。修复：(1) `build_presets.py --preset windows-x64-reference` 重建 SDK(11 libs,
+含我的 Vector funcs)；(2) `cp` 刷新 chunk codegen/lib from SDK。此后 numerics fact **164→176/180**，
+**12 个 Vector2/3/4::GreaterThanAll/LessThanAll/OrEqualAll 全部修复**(此前抛托管异常)。
+
+**关键修复**：`TryCreateVectorAllComparerHelper` 移到 `TryMatchGenericShape` **之前**——原因为在
+RegisterVectorReduction 的 generic shape TypeDisplayNamePrefix="System.Numerics.Vector" 前缀匹配
+Vector2/3/4 → 路由到 Vector<T> 256-bit helper(错 ABI)→抛异常。移前+精确 Vector[234]:: 匹配后,
+Vector2/3/4 走 carrier 专属 helper→真 native 归约。+ runtime_core.h 补 Vector3/4 _All 声明
+(此前漏, LNK2019)。
+
+**剩 4 失败 = Vector<T> 泛型**(VectorTests::GreaterThanAll_9_Vectorint, idx 535/537/545/547)—
+独立 carrier 语义(Vector256 element-path), 非 Vector2/3/4 问题, 留 kernel/Vector<T> 路径。
+
+**A5 待修**：build stage 应在源码变化时自动刷新 chunk codegen/lib + SDK(而非手工 cp); 建议把
+runtime/numerics 源码 mtime 纳入 cache fingerprint 或强制 --no-cache。
