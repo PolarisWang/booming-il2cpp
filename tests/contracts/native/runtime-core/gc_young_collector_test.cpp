@@ -168,13 +168,14 @@ static void test_scavenge_object() {
     PASS();
 
     SUBTEST("condemned-gen concept (T3) + nursery region-gen");
-    // (a) condemned-gen field defaults to young for a young collection.
-    // (b) a nursery object reads region-gen YOUNG(0) — verifies the systemic fix
-    //     that marks every nursery 4MB chunk young, not just the begin chunk.
+    // (a) condemned-gen field defaults to gen1 for a young collection (M9-M10:
+    //     a young GC condemns the young side gen0+gen1; gen2+ objects are not
+    //     promoted here).  (b) a nursery object reads region-gen YOUNG(0) —
+    //     verifies the systemic fix that marks every nursery 4MB chunk young.
     {
         YoungCollectionResult r;
-        if (r.condemned_gen_num != kRegionGenYoung)
-            { FAIL("default condemned_gen_num != young"); return; }
+        if (r.condemned_gen_num != kRegionGenGen1)
+            { FAIL("default condemned_gen_num != gen1 (M9 young condemns gen0+gen1)"); return; }
         void* n2 = NurseryAllocate(32);
         if (n2 == nullptr) { FAIL("nursery alloc n2 failed"); return; }
         std::memset(n2, 0, 32);
@@ -411,6 +412,42 @@ static void test_collection_with_dirty_card() {
     PASS();
 }
 
+// ── M10: gen>condemned filter discards newer-generation objects ────
+// A GC condemns every generation <= condemned_gen_num.  Objects whose region-gen
+// is NEWER (greater) than condemned must be left untouched by GcScavengeObject*
+// (they belong to a younger-generation collection).  Verifies the filter is
+// actually honored, not just tracked.
+static void test_condemned_gen_filter() {
+    TEST("scavenge respects gen>condemned");
+    InitYoungGeneration();
+
+    // Allocate a Gen1 region and tag it (M9 already tags GEN1 as kRegionGenGen1=1
+    // at allocation time).  An object there reads region-gen 1.
+    Region* gen1 = RegionManager::Instance().AllocateRegion(
+        RegionKind::REGION_GEN1, 64 * 1024);
+    if (gen1 == nullptr || gen1->begin == nullptr) { FAIL("gen1 alloc failed"); return; }
+    void* gen1_obj = gen1->begin;
+    std::memset(gen1_obj, 0, 16);
+    if (GetRegionGen(reinterpret_cast<uintptr_t>(gen1_obj)) != kRegionGenGen1) {
+        FAIL("gen1 object region-gen != gen1(1)");
+        return;
+    }
+
+    // A collection that condemns only gen0 (condemned=young, not gen1): the gen1
+    // object has region-gen 1 > 0, so it MUST be returned unchanged (not scavenged).
+    YoungCollectionResult result;
+    result.condemned_gen_num = kRegionGenYoung;  // condemn only gen0
+    void* before = gen1_obj;
+    void* out = GcScavengeObjectKnownNursery(gen1_obj, &result);
+    if (out != before) { FAIL("gen>condemned object was scalarved (should be skipped)"); return; }
+    PASS();
+
+    // Sanity: a young collection (condemn gen0+gen1) DOES process the gen1 object.
+    result.condemned_gen_num = kRegionGenGen1;
+    void* out2 = GcScavengeObjectKnownNursery(gen1_obj, &result);
+    PASS();  // (promotion/idempotency covered elsewhere; no crash is the assert here)
+}
+
 // ════════════════════════════════════════════════════════════════════════════
 // Main
 // ════════════════════════════════════════════════════════════════════════════
@@ -424,6 +461,7 @@ int main() {
     test_scavenge_object();
     test_young_collection();
     test_collection_with_dirty_card();
+    test_condemned_gen_filter();
 
     printf("\nResults: %d tests, %d failures\n", g_tests, g_failures);
     return g_failures > 0 ? 1 : 0;

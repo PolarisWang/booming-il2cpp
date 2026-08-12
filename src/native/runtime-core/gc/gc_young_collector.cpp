@@ -248,13 +248,14 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
 void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
     if (obj == nullptr) return nullptr;
     // Caller already verified obj is in nursery — skip IsInNursery check.
-    // M9-A2: activate the condemned-generation filter.  A GC condemns every
+    // M9-A2 / M10: activate the condemned-generation filter.  A GC condemns every
     // gen <= condemned_gen_num; objects with region_gen NEWER than the condemned
     // gen are not promoted/marked here (they belong to an older-gen collection).
-    // For a young GC condemned=gen1(1), so nursery(0)/gen1(1) are processed and
-    // only an out-of-scope newer object (gen2+) is skipped — a safety net that
-    // also makes the gen1 tag meaningful.
-    if (result != nullptr && result->condemned_gen_num > 0) {
+    // For a young GC condemned=gen1(1) → nursery(0)/gen1(1) are processed, gen2+
+    // skipped.  For a gen0-only collection condemned=young(0) → nursery processes,
+    // a gen1 object (region-gen 1 > 0) is skipped.  Note: no `condemned>0` guard —
+    // kRegionGenYoung(0) is a legitimate condemned value.
+    if (result != nullptr) {
         if (GetRegionGen(reinterpret_cast<uintptr_t>(obj)) > result->condemned_gen_num) {
             return obj;  // newer than condemned — leave for the appropriate collection
         }
