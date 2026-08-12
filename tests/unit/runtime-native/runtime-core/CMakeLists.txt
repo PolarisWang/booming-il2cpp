@@ -17,6 +17,13 @@ chaos_native_add_test(smoke_test smoke_test.cpp
     LABELS "smoke;core"
 )
 
+# A2-1: Vector2/3/4 _All lane-reducer regression (numerics_vectors.cpp).
+# Locks the native greater/less/or-equal all-lanes semantics so a regression
+# back to the external-runtime fallback (hardcoded 0/constant) is caught here.
+chaos_native_add_test(numerics_vectors_test numerics_vectors_test.cpp
+    LABELS "unit;core;numerics"
+)
+
 chaos_native_add_test(capacity_stress_test capacity_stress_test.cpp
     LABELS "stress;core"
 )
