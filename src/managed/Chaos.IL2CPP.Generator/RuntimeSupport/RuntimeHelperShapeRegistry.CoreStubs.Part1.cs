@@ -61,6 +61,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterCustomAttributeMemberInfoIsDefined(registry);
             RegisterInterpolatedStringHandler(registry);
             RegisterRuntimeHelpers(registry);
+            RegisterXmlNameTableStubs(registry);
             RegisterMonitor(registry);
             RegisterThread(registry);
             RegisterThreadSleep(registry);
@@ -521,6 +522,65 @@ public sealed partial class NativeAotLoweringPlanner
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots),
                 returnAbi,
                 rawIndices);
+        }
+
+        /// <summary>
+        /// Register System.Xml.NameTable / XmlNameTable Add(string)/Get(string) as
+        /// SimpleForward stubs routing to the native interned-string implementations
+        /// ChaosXmlNameTableAddString / ChaosXmlNameTableGetString (xml_nametable_stubs.
+        /// {h,cpp}).
+        ///
+        /// ABI (both):
+        ///   ChaosXmlNameTable*(IntPtr this, IntPtr name) -> IntPtr
+        ///   returns a managed String pointer (tagged StringId) or 0 (null) — matches
+        ///   the stubs' contract (see xml_nametable_stubs.h).
+        ///
+        /// Honesty note: only the concrete NameTable.Add(System.String) and
+        /// NameTable.Get(System.String) subject IDs (System.Private.Xml/System.Xml.NameTable)
+        /// are wired here. The abstract XmlNameTable.Add/Get are virtual and are dispatched
+        /// through the base-typed XmlNameTable subject ID (System.Xml.XmlNameTable), which is
+        /// NOT registered → those calls fall through to the existing interpreter/IR path.
+        /// The concrete NameTable overloads that can be statically dispatched (statically
+        /// NameTable-typed `this`) resolve to these native stubs. The Add(System.Char[],...)
+        /// char-array overloads are also out of scope (no native stub) and stay on the
+        /// interpreter/IR path.
+        /// </summary>
+        private static void RegisterXmlNameTableStubs(RuntimeHelperShapeRegistry registry)
+        {
+            var stringRefAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+            var thisAbi = CreateNativeIntAbiSlot(
+                "System.Private.Xml/System.Xml.NameTable", AotCoreIrTypeShapeKind.ReferenceType);
+            var stringRetAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+
+            // Concrete NameTable.Add(string) -> string  → ChaosXmlNameTableAddString
+            registry.Register(
+                "System.Xml.NameTable",
+                "Add",
+                new[] { "System.String" },
+                ShapeKind.SimpleForward, "ChaosXmlNameTableAddString",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    thisAbi,
+                    stringRefAbi,
+                }),
+                stringRetAbi,
+                new HashSet<int> { 0, 1 });
+
+            // Concrete NameTable.Get(string) -> string?  → ChaosXmlNameTableGetString
+            registry.Register(
+                "System.Xml.NameTable",
+                "Get",
+                new[] { "System.String" },
+                ShapeKind.SimpleForward, "ChaosXmlNameTableGetString",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    thisAbi,
+                    stringRefAbi,
+                }),
+                stringRetAbi,
+                new HashSet<int> { 0, 1 });
         }
 
     }

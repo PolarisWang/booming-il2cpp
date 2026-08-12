@@ -452,10 +452,12 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_TYPE_MAKEGENERICTYPE_SYSTEM_TYPE__ = 0x326178A7u,
     SHAPE_SYSTEM_TYPE_MAKEPOINTERTYPE = 0xDBA001CEu,
     SHAPE_SYSTEM_TYPE_OP_INEQUALITY_SYSTEM_TYPE_SYSTEM_TYPE = 0xDF8CE938u,
+    SHAPE_SYSTEM_XML_NAMETABLE_ADD_SYSTEM_STRING = 0x6A659892u,
+    SHAPE_SYSTEM_XML_NAMETABLE_GET_SYSTEM_STRING = 0xEBC1470Bu,
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 441u,
+    SHAPE_COUNT = 443u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -1481,6 +1483,14 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosTypeInequality(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_XML_NAMETABLE_ADD_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosXmlNameTableAddString(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_XML_NAMETABLE_GET_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosXmlNameTableGetString(args...));
+    }
     else {
         static_assert(S != S, "Unhandled shape ID in DispatchNativeInt");
         return 0;
@@ -2184,7 +2194,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 441u,
+static_assert(SHAPE_COUNT == 443u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)
