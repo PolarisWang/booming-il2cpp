@@ -148,3 +148,21 @@ Step 4: 方案 2 — Windows SuspendThread 补全捕获（远期，独立 owners
 - Task#2（方案 1）→ 从"跳过 spill"重构为"精确 spill 收敛"（并入 T2.3），或标记 blocked。
 - Task#3（方案 4/T2.3）→ 主骨架，保留。
 - **验收以 `test_jit_native` + jit ctest 全绿为准**；任何"省 spill"改动必须证明 GC 扫描仍覆盖所有存活 ref（不欠保留）。
+
+---
+
+## 9. 性能线推进记录（2026-08-12，转 T4.1 / 3.1）
+
+### 9.1 寄存器分配已达硬件极限（数据确认）
+`CHAOS_IL2CPP_CODEGEN_STATS` 实测 1091 方法：GPR load 命中 97.5%、spill 623、writethrough 7268(arg-reg 基线)。x64 持久池=仅 R12-R15(Win64 加 RDI)，RAX/RCX/RDX 隐式被 Div/Mul/Shift clobber、RBX/RSI/RBP 架构保留不可动 → **扩持久寄存器预算无 x64 余量且非主导成本**（已放弃，Task#4 关闭方向）。真实余量在 ARM64(12 vs allocator 10)，但测试盲区。
+
+### 9.2 T4.1 基准可信度 — 已由既有 harness 覆盖（Task#5 完成）
+核查确认：benchmark_report.py 已有 mean/median/coverage-asymmetry/GC-comp 与 GC-overwrite bug 已修(commit 前)；benchmark_chunk.py 已有 adaptive+outlier+FP-12 零时长守卫+`_MIN_ELAPSED_FLOOR`+`_write_combined_perf_store`(修 overwrite)。native 侧计时真实循环 iterations 调 `ChaosDispatchMethodBenchDirect`→direct_ptr，非短路。**残余验证需跑真实 foundation-dll chunk pipeline（环境依赖）**，无新增伪影修复待做。
+
+### 9.3 消除中间层 dispatch（Task#6 in_progress，需 profile）
+已定位中间层：`ExceptionEmission.Linear.cs:717/721` + `ExceptionEmission.Utilities.cs:342/346` 生成 `kChaosExternalRuntimeFnTable[idx](params)` 间接调用，用于「callee 无 shape-matching ExternalRuntimeHelper 定义、函数符号链接期不存在」的跨 assembly 方法。直接替代 = `TargetSymbol(params)`。**关键判断**：间接调用仅 1-3 cyc，不足以解释 2.5-30× —— 真相更可能是 kChaosExternalRuntimeFnTable 路径让 callee **落 interpreter/reflection 而非 native 码**。需 benchmark profile 定真因（indirect vs interpreter-fallback）后针改。范围大（跨 assembly call-site generation + 符号 link 可用性架构），需完整 build+pipeline 验证。
+
+### 9.4 后续建议
+- Task#6 先跑一次真实 benchmark profile（chaos-aot vs net8 各方法的 bottleneck 分类来自 benchmark_report 的 `dispatch_overhead`/`alloc_hot`），确认 2.5-30× 是真.interpreter-fallback 还是间接调用。
+- 若 interpreter-fallback：修复方向=让跨 assembly 符号可链接（外部导出/准直接符号），非压榨间接调用。
+- 依赖：需 foundation-dll chunk pipeline 可用（fd-verification 线）。
