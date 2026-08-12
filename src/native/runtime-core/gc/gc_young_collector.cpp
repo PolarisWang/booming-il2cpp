@@ -469,41 +469,27 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase1_DirtyCards");
         result.dirty_cards_scanned = 0;
-        // Batched scan: groups consecutive dirty cards into ranges,
-        // reducing per-card callback overhead (common when large object
-        // arrays span multiple cards).
-        // Scan old-gen pages for Gen2→nursery references.
-        G_OldGen().ScanDirtyCardsInPagesBatched(
-            &result.dirty_cards_scanned,
-            [&](uintptr_t range_start, uintptr_t range_end) {
-                for (uintptr_t slot = range_start; slot < range_end; slot += sizeof(void*)) {
-                    auto* ptr_slot = reinterpret_cast<void**>(slot);
-                    void* val = *ptr_slot;
-                    if (val != nullptr && IsInNursery(val)) {
-                        void* tenured = GcScavengeObjectKnownNursery(val, &result);
-                        if (tenured != nullptr) {
-                            *ptr_slot = tenured;
-                        }
+        // CoreCLR-aligned scan source: iterate REGISTERED L2 card segments (the
+        // write barrier only writes into registered segments), so every card the
+        // barrier recorded is reachable.  The prior allocator-page + LOH-segment
+        // driven scans could miss a barrier-written card (page's L2 segment not
+        // registered, or page range not covering the card index) → old→nursery
+        // edge dropped → young object collected → dangling.
+        auto phase1_scan_cb = [](uintptr_t range_start, uintptr_t range_end, void* ud) {
+            auto* scav = static_cast<YoungCollectionResult*>(ud);
+            for (uintptr_t slot = range_start; slot < range_end; slot += sizeof(void*)) {
+                auto* ptr_slot = reinterpret_cast<void**>(slot);
+                void* val = *ptr_slot;
+                if (val != nullptr && IsInNursery(val)) {
+                    void* tenured = GcScavengeObjectKnownNursery(val, scav);
+                    if (tenured != nullptr) {
+                        *ptr_slot = tenured;
                     }
                 }
-            });
-        // Scan LOH segments for LOH→nursery references.
-        // LOH segments are registered with the card table, so DirtyCard()
-        // tracks all pointer writes into LOH objects during the mutator phase.
-        G_Loh().ScanDirtyCardsInSegmentsBatched(
-            &result.dirty_cards_scanned,
-            [&](uintptr_t range_start, uintptr_t range_end) {
-                for (uintptr_t slot = range_start; slot < range_end; slot += sizeof(void*)) {
-                    auto* ptr_slot = reinterpret_cast<void**>(slot);
-                    void* val = *ptr_slot;
-                    if (val != nullptr && IsInNursery(val)) {
-                        void* tenured = GcScavengeObjectKnownNursery(val, &result);
-                        if (tenured != nullptr) {
-                            *ptr_slot = tenured;
-                        }
-                    }
-                }
-            });
+            }
+        };
+        ScanDirtyCardsInRegisteredSegments(&result.dirty_cards_scanned,
+                                            phase1_scan_cb, &result);
     }
     pt.phase1_ns = static_cast<uint64_t>(std::chrono::duration_cast<
         std::chrono::nanoseconds>(std::chrono::steady_clock::now() - pause_start).count());

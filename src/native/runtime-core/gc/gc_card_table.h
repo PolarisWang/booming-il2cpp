@@ -232,6 +232,18 @@ void GcSetCardTableNurseryRange(uintptr_t begin, uintptr_t end) noexcept;
 /// concurrent DirtyCard reads on other threads).
 void GcRegisterHeapRange(uintptr_t start, uintptr_t end);
 
+/// Scan every REGISTERED L2 card segment for dirty cards (CoreCLR-aligned: the
+/// scan set is the registered/committed segment set, so every card the write
+/// barrier ever recorded is reachable).  This is the authoritative cross-gen
+/// scan source — callers that previously drove the scan from an allocator
+/// page/segment list could miss a barrier-written card if the page's L2 segment
+/// wasn't registered or the page range didn't cover the written card index.
+/// @param dirty_card_count  Optional accumulator.
+/// @param range_cb  Callback (range_start, range_end, user_data) per dirty batch.
+void ScanDirtyCardsInRegisteredSegments(CHAOS_IL2CPP_SIZE* dirty_card_count,
+                                         void (*range_cb)(uintptr_t, uintptr_t, void*),
+                                         void* user_data) noexcept;
+
 /// Unregister a heap range [start, end) from the card table.
 /// Sets L1 entries to null and frees the corresponding L2 segments.
 /// Thread-safe: uses CAS and is safe against concurrent DirtyCard reads

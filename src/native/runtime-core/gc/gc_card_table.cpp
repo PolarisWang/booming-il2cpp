@@ -49,6 +49,7 @@ static void EnsureCardBundleCoverage(size_t seg_count) noexcept {
 // ── Tracked segment list for O(allocated) ClearAllCards ───────
 struct CardSegmentNode {
     CardSegment* segment;
+    uintptr_t    seg_idx;   // L1 index → covered address range = base + seg_idx*64KB
     CardSegmentNode* next;
 };
 
@@ -212,6 +213,7 @@ void GcRegisterHeapRange(uintptr_t start, uintptr_t end) {
             auto* node = static_cast<CardSegmentNode*>(CHAOS_IL2CPP_MALLOC(sizeof(CardSegmentNode)));
             if (node != nullptr) {
                 node->segment = seg;
+                node->seg_idx = si;
                 node->next = g_card_segment_list;
                 g_card_segment_list = node;
             }
@@ -230,6 +232,29 @@ void ClearAllCards() noexcept {
     }
     // keep the bundle in sync (clear it; cards are now all clean).
     CardBundleClearAll();
+}
+
+// Scan every REGISTERED L2 card segment for dirty cards (CoreCLR-aligned).
+// The write barrier (DirtyCard) only ever writes into a registered L2 segment
+// (it no-ops when seg==nullptr).  Iterating the registered-segment set is a
+// SUPERSET of any card the barrier wrote — the authoritative scan source.
+// Prior page/segment-chain-driven scans could miss a barrier-written card if
+// the page's L2 segment wasn't registered or the page range didn't cover the
+// written card index (the cross-gen-edge-dropping root cause).
+void ScanDirtyCardsInRegisteredSegments(CHAOS_IL2CPP_SIZE* dirty_card_count,
+                                         void (*range_cb)(uintptr_t, uintptr_t, void*),
+                                         void* user_data) noexcept {
+    if (range_cb == nullptr || g_heap_base == 0) return;
+    std::lock_guard<std::mutex> lock(g_card_segment_list_mutex);
+    for (auto* node = g_card_segment_list; node != nullptr; node = node->next) {
+        uintptr_t seg_start = g_heap_base + (node->seg_idx * kSegmentCoverage);
+        uintptr_t seg_end   = seg_start + kSegmentCoverage;
+        ScanDirtyCardsBatched(
+            seg_start, seg_end, dirty_card_count,
+            [range_cb, user_data](uintptr_t rs, uintptr_t re) {
+                range_cb(rs, re, user_data);
+            });
+    }
 }
 
 void ClearCardRange(uintptr_t start, uintptr_t end) noexcept {
