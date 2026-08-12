@@ -37,6 +37,12 @@ void* GcGetDependentHandleSecondary(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
 void GcSetDependentHandleSecondary(CHAOS_IL2CPP_UINT64 handle_id, void* secondary) noexcept;
 void GcFreeDependentHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
 void* GcGetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
+// M12: RefCounted + WeakInterior internal handle types.
+CHAOS_IL2CPP_UINT64 GcCreateRefCountedHandle(void* object_instance) noexcept;
+CHAOS_IL2CPP_INT32 GcAddRefHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
+CHAOS_IL2CPP_INT32 GcReleaseHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
+CHAOS_IL2CPP_UINT64 GcCreateWeakInteriorHandle(void* object_instance,
+                                              CHAOS_IL2CPP_SIZE offset) noexcept;
 }}}
 
 using namespace chaos::il2cpp::runtime_core;
@@ -481,6 +487,74 @@ void TestHandleTableGrowth() {
     CHECK(true, "Handle table growth + free completed without crash");
 }
 
+// ── Test 10: RefCounted handle lifecycle ─────────────────────────────
+// CoreCLR HNDTYPE_REFCOUNTED: object stays alive while refcount > 0.  The
+// handle is freed when the refcount reaches 0 via GcReleaseHandle.
+void TestRefCountedHandle() {
+    printf("\n── Test 10: RefCounted handle lifecycle ──\n");
+
+    void* obj = NurseryAllocate(64);
+    CHECK(obj != nullptr, "Allocate obj for refcounted test");
+
+    CHAOS_IL2CPP_UINT64 h = GcCreateRefCountedHandle(obj);
+    CHECK(h != 0, "GcCreateRefCountedHandle OK");
+
+    // Initial refcount = 1.
+    CHECK(GcGetHandleTarget(h) == obj,
+          "RefCounted handle resolves target before GC");
+
+    // Refcount incremented by AddRef.
+    CHECK(GcAddRefHandle(h) == 2, "GcAddRefHandle -> refcount 2");
+
+    // A refcounted handle is NOT a weak handle: it should survive GC while
+    // refcount > 0.  Use a strong local to keep the object address meaningful,
+    // then run collection pressure.  The handle stays non-null.
+    g_old_gen.Collect(nullptr, nullptr);
+    CHECK(GcGetHandleTarget(h) != nullptr,
+          "RefCounted handle survives GC while refcount > 0");
+
+    // Release to 1 (still alive), then to 0 (frees).
+    CHECK(GcReleaseHandle(h) == 1, "GcReleaseHandle -> refcount 1");
+    CHECK(GcGetHandleTarget(h) != nullptr,
+          "RefCounted handle alive at refcount 1");
+    CHECK(GcReleaseHandle(h) == 0, "GcReleaseHandle to 0 frees handle");
+
+    // After Release to 0, the handle is gone.
+    GcFreeHandle(h);  // no-op (already freed)
+    CHECK(true, "RefCounted handle released to 0 without crash");
+}
+
+// ── Test 11: WeakInterior handle ─────────────────────────────────────
+// CoreCLR HNDTYPE_WEAK_INTERIOR_POINTER: the target is object + offset (an
+// interior pointer).  On collection the interior pointer is nulled; the offset
+// is retained (recreatable).
+void TestWeakInteriorHandle() {
+    printf("\n── Test 11: WeakInterior handle (offset-preserved weak) ──\n");
+
+    void* obj = NurseryAllocate(128);           // has room for an interior offset
+    CHECK(obj != nullptr, "Allocate obj for weak-interior test");
+    const CHAOS_IL2CPP_SIZE kOffset = 8;        // interior offset into the object
+
+    // Write a marker at the interior offset so a live read is meaningful.
+    *reinterpret_cast<unsigned char*>(static_cast<char*>(obj) + kOffset) = 0xAB;
+
+    CHAOS_IL2CPP_UINT64 h = GcCreateWeakInteriorHandle(obj, kOffset);
+    CHECK(h != 0, "GcCreateWeakInteriorHandle OK");
+
+    // Live interior pointer == base + offset.
+    void* target = GcGetHandleTarget(h);
+    CHECK(target == static_cast<char*>(obj) + kOffset,
+          "WeakInterior target resolves to object + offset");
+    if (target) {
+        CHECK(*static_cast<unsigned char*>(target) == 0xAB,
+              "WeakInterior target content correct");
+    }
+
+    // Free (no GC semantics assertion in standalone mode beyond lifecycle).
+    GcFreeHandle(h);
+    CHECK(true, "WeakInterior handle create + free OK");
+}
+
 int main() {
     // Set stdout to unbuffered for real-time output.
     setvbuf(stdout, NULL, _IONBF, 0);
@@ -517,6 +591,8 @@ int main() {
     TestConcurrentPinnedHandles();
     TestLongWeakHandle();
     TestHandleTableGrowth();
+    TestRefCountedHandle();
+    TestWeakInteriorHandle();
 
     printf("\n══ Results: %d tests, %d failures ══\n",
            11 - (g_failures > 0 ? 1 : 0), g_failures);

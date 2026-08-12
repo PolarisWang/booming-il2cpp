@@ -29,6 +29,13 @@ struct GcHandleEntry {
                               // Maintained by GcSetHandleTarget / creation /
                               // weak forwarding so generation-aware scans can
                               // prune WITHOUT re-querying RegionManager.
+    // ── M12: internal handle types (CoreCLR HNDTYPE_REFCOUNTED /
+    //       HNDTYPE_WEAK_INTERIOR_POINTER) ──
+    bool refcounted;          // RefCounted: runtime-managed ref lifetime.
+    CHAOS_IL2CPP_INT32 refcount;   // RefCounted reference count (>0 keeps alive).
+    CHAOS_IL2CPP_SIZE interior_offset;  // WeakInterior: byte offset into the
+                              // object (0 = base). Weak target is nulled on
+                              // collection but the offset is retained.
 };
 
 // ABI constants at runtime_core namespace scope (shared across core files).
@@ -70,6 +77,31 @@ CHAOS_IL2CPP_UINT64 GcCreatePinnedHandle(void* object_instance) noexcept;
 /// object is kept alive and will not be moved.  Returns a nonzero handle
 /// ID on success, 0 on failure.
 CHAOS_IL2CPP_UINT64 GcCreateAsyncPinnedHandle(void* object_instance) noexcept;
+
+// ── M12: internal handle types (align CoreCLR HNDTYPE_REFCOUNTED /
+//       HNDTYPE_WEAK_INTERIOR_POINTER). Not exposed as managed GCHandleType. ──
+
+/// Create a reference-counted handle (CoreCLR HNDTYPE_REFCOUNTED): the object
+/// stays alive while the refcount is > 0.  Initial refcount = 1.  Call
+/// GcReleaseHandle to decrement; when it reaches 0 the handle is freed.
+/// Returns a nonzero handle ID on success, 0 on failure.
+CHAOS_IL2CPP_UINT64 GcCreateRefCountedHandle(void* object_instance) noexcept;
+
+/// Increment the refcount of a reference-counted handle.  Returns the new
+/// refcount, or 0 if the handle is invalid / not reference-counted.
+CHAOS_IL2CPP_INT32 GcAddRefHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
+
+/// Decrement the refcount of a reference-counted handle.  When it reaches 0 the
+/// handle is freed (equivalent to GcFreeHandle).  Returns the new refcount
+/// (0 = freed).
+CHAOS_IL2CPP_INT32 GcReleaseHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
+
+/// Create a weak interior-pointer handle (CoreCLR HNDTYPE_WEAK_INTERIOR_POINTER):
+/// the target is object_instance + offset (interior pointer).  The object can be
+/// collected (weak); when collected the interior pointer is nulled but the
+/// offset is retained (recreatable).  Returns a nonzero handle ID on success.
+CHAOS_IL2CPP_UINT64 GcCreateWeakInteriorHandle(void* object_instance,
+                                               CHAOS_IL2CPP_SIZE offset) noexcept;
 
 /// Free a handle created by any of the above.
 void GcFreeHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept;

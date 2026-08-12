@@ -29,11 +29,21 @@
   - 验证：`ctest -R "gc_" -L unit` 28/29（唯一 FAIL=`gc_finalizer_integration_test`，HEAD 既有与本改动无关）；affected GC 单测 region/loh/parallel_mark/young_collector/scheduler 全 0；构建 exit 0。
   - **已知非回归**：`bgc_race_test` 在 baseline 与改动后都悬挂（BGC 并发-mark 相变死锁，pre-existing，非 unit 绿基线，RESOURCE_LOCK bgc 组）。`test_driver.py --layer unit` OVERALL 因 managed CodeGen snapshot 基线不匹配（52-stind-wide/23-instance-fields，CodeGen 域，pority 与本 GC 改动无关）。
 
+### ✅ 已结算：M12（M5 P2 工程，commit 待填）
+- **GCHandle 内部类型：REFCOUNTED + WEAK_INTERIOR_POINTER**（plan-v5 M12，对齐 CoreCLR `HNDTYPE_REFCOUNTED=5` / `HNDTYPE_WEAK_INTERIOR_POINTER=10`）。在独立 worktree `chaos-gc-m12` 推进。
+  - `GcHandleEntry` 扩字段：`refcounted`(bool) / `refcount`(int32) / `interior_offset`(size)——尾插新字段，10 处既有聚合初始化兼容（缺省值初始化 0/false）。
+  - 新增 4 个 C-API：`GcCreateRefCountedHandle`(refcount=1) / `GcAddRefHandle`(±1) / `GcReleaseHandle`(到 0 释放=等效 GcFreeHandle，含 pinned 清理) / `GcCreateWeakInteriorHandle`(weak+offset)。实现于 `engine_lifecycle.cpp` 分片锁模式内。
+  - `GcGetHandleTarget` 对 WEAK_INTERIOR（offset≠0）返回 `object+offset`（内部指针解析）。
+  - REFCOUNTED 是 `weak=false` → 弱清空路径(young+full GC)天然免疫；WEAK_INTERIOR 弱清空只 null `object_instance`、**保留 offset**（可重建）。即**无需改弱清空函数**。
+  - `gc_handle_test.cpp` 增 `TestRefCountedHandle`(create→addref→GC 存活→release→free) + `TestWeakInteriorHandle`(offset 解析 + content)：**11 tests 0 failures**。
+  - 回归：config/region/loh/parallel_mark/young_collector/scheduler/card_table/diagnostics/sanity/handle 10 测试全 0 failures；构建 exit 0。
+  - **已知独立**：`gc_atomic_alloc_test.cpp:108` constexpr 求值失败（pre-existing，该测试文件本体的 C2131，与 M12 无关）。
+
 ### ⬜ 剩余里程碑（跨会话，每里程碑独立验证+测试全绿再进）
 - **M2 主线 B1**：P2-M1(GC-M1 K2c regen，foundation-dll 集成，本会话评估 blocked-on-pipeline) / P2-M3A(Server GC 多堆) / P2-M10(gen>condemned，M9 后)。
 - **M3 主线 B2 三代链**：M9 三代 → M8 plan-gen → M7 demotion（XL，拆 A/B）。
 - **M4 主线 B2 并发**：M5 BGC 分相 → M4 provisional；M3B/M6。
-- **M5 主线 B3 剩余**：M12 GCHandle 类型 / M13 事件集 / M15 oom_budget（M11 已完结；M14 ProvStress 降优）。
+- **M5 主线 B3 剩余**：M13 事件集 / M15 oom_budget（M11、M12 已完结；M14 ProvStress 降优）。
 - 完整规格/步骤/测试/判据见 `plan-v5-01.md`。
 
 ## blocking_questions
