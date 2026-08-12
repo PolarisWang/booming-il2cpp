@@ -264,3 +264,21 @@ Vector2/3/4 走 carrier 专属 helper→真 native 归约。+ runtime_core.h 补
 
 **A5 待修**：build stage 应在源码变化时自动刷新 chunk codegen/lib + SDK(而非手工 cp); 建议把
 runtime/numerics 源码 mtime 纳入 cache fingerprint 或强制 --no-cache。
+
+### 18. Vector<T> 泛型 _All 失败诊断（2026-08-12，idx 535/537/545/547）
+
+**现象**：`Vector<T>::GreaterThanAll/LessThanAll` 泛型（`_Vectorint`, `Vector<int>`）fact 返回 0
+失败，但 Vector2/3/4（12个）已修。
+
+**发现**：
+- `chaos_vector_greater_than_all_i32` 等 native stub **存在**（vector_stubs.cpp 宏定义 + suffix 实例化
+  i32/u32/i64/f/d/i16/u16/u8/i8 + 无后缀别名 aliases）。
+- 但**生成代码里没有任何对该 native 符号的引用**——subject 调 `Vector<int>::GreaterThanAll` 既
+  不 emit stub 调用，也无 `chaos_external_runtime_*` wrapper。
+
+**结论**：`Vector<T>` 泛型 `_All` 走**不同于 Vector2/3/4 的更低层路径**（疑为 StructuredIR 内联
+向量运算 或 `_TryExecuteViaIlData` 解释 IL-data），且当前产出错误结果(0)。非 Vector2/3/4 的
+carrier−helper 问题。需查 StructuredIR/lowering 对 `Vector<T>::GreaterThanAll` 的 emit——
+独立 follow-up, 与 Vector2/3/4 修复无关。
+
+**A2-1 现状**：Vector2/3/4 12/12 修复(fact 164→176)。Vector<T> 泛型 4 个待 StructuredIR 路径。
