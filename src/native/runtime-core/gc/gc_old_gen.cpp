@@ -387,6 +387,33 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
 
 void MarkSweepOldGen::FreePage(OldGenPage* page) {
     if (page == nullptr) return;
+    // R4/CoreCLR-aligned: freeing a page must pair with unregistering its card
+    // range so "registered segments == committed pages" holds (no segment leak,
+    // no stale cards for freed memory).  Guard: only unregister segments that no
+    // OTHER live page maps into — a 64KB-old-gen page usually owns its 64KB
+    // segment 1:1, but if a segment is shared with a sibling page, freeing it
+    // would leave the sibling's DirtyCard writing to freed segment memory (UAF).
+    uintptr_t start = reinterpret_cast<uintptr_t>(page);
+    uintptr_t end   = start + page->page_size;
+    bool shared = false;
+    {
+        // Compute the segment range this page maps to.
+        uintptr_t first_idx = (start - g_heap_base) >> kCardShift;
+        uintptr_t last_idx  = (end - 1 - g_heap_base) >> kCardShift;
+        uintptr_t first_seg = first_idx / kCardsPerSegment;
+        uintptr_t last_seg  = last_idx / kCardsPerSegment;
+        for (auto* p = page_list_; p != nullptr; p = p->next) {
+            if (p == page || !p->in_use.load(std::memory_order_acquire)) continue;
+            uintptr_t ps = reinterpret_cast<uintptr_t>(p);
+            uintptr_t pe = ps + p->page_size;
+            uintptr_t ps_seg = ((ps - g_heap_base) >> kCardShift) / kCardsPerSegment;
+            uintptr_t pe_seg = ((pe - 1 - g_heap_base) >> kCardShift) / kCardsPerSegment;
+            if ((ps_seg <= last_seg && pe_seg >= first_seg)) { shared = true; break; }
+        }
+    }
+    if (!shared) {
+        GcUnregisterHeapRange(start, end);
+    }
     VirtualFreePage(page, page->page_size);
 }
 
