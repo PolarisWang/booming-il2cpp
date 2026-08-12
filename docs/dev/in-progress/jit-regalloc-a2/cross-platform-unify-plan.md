@@ -166,3 +166,6 @@ Step 4: 方案 2 — Windows SuspendThread 补全捕获（远期，独立 owners
 - Task#6 先跑一次真实 benchmark profile（chaos-aot vs net8 各方法的 bottleneck 分类来自 benchmark_report 的 `dispatch_overhead`/`alloc_hot`），确认 2.5-30× 是真.interpreter-fallback 还是间接调用。
 - 若 interpreter-fallback：修复方向=让跨 assembly 符号可链接（外部导出/准直接符号），非压榨间接调用。
 - 依赖：需 foundation-dll chunk pipeline 可用（fd-verification 线）。
+
+### 9.5 Task6 符号前置调研完成（文档交付）
+见 `dispatch-intermediate-layer-research.md`。**真因确认**：2.5-30× 非间接调用开销，而是 `kChaosExternalRuntimeFnTable` 路由的跨 assembly / 无 shape callee **落解释器**（`InterpreterEntryDirect`），无 native AOT 码。正确修复=让这些 callee 有 native 码，方向 A(InternalCall 编译期符号解析, 代码注释预定的 future enhancement) 优先。待 benchmark profile 定覆盖优先级后实施。
