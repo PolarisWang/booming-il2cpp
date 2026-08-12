@@ -65,6 +65,8 @@ description: 编译失败与 codegen stub 修复专家。严格分层诊断（AT
 | dotnet build: CombinedSubjects.csproj 编译错 | net9.0+ API 不兼容 | _sanitize_for_net8_retry() |
 | CMake: CHAOS_PROJECT_ROOT 路径 | Scriban 模板引了仓库路径 | 改 Templates/*.scriban，用 CHAOS_SDK_DIR |
 | CMake: 找不到 .cmake 配置 | SDK 输出不完整 | 检查 SdkEmitter |
+| CMake: "Could not read presets from <路径>" 或配置 cwd 错位 | 某文件手写 `parents[N]` 深度错误（搬迁最常见病根） | 先走 Step 1.5 一致性前置，核对 parents[N]==真实层级深度 |
+| SDK: "SDK built but <lib> not found" / 双路径打架 | build_presets.py 输出 与 ensure_sdk() 读取 不同一 `sdk_root()` | 先走 Step 1.5，收敛到单一权威根（tool_helpers.sdk_root()） |
 
 ---
 
@@ -92,6 +94,31 @@ classification: domains=[构建] mode=knowledge-inject expert=dev-il2cpp-build-f
 ### Step 1：症状分类
 
 对照"已知故障模式"表定位症状类型
+
+### Step 1.5：一致性前置（先于分层诊断 — 强制）
+
+在走"哪一层"之前，先自问：**某个资源路径 / 常量是否在多处被以不同目标定义？** 这类不是"某层错"，而是"跨文件打架"，若直接进分层诊断会被误判到 CMake/CodeGen 层。
+
+以下症状出现任意一种时，**必须**执行本步（典型 LNK/路径漂移家族）：
+
+```
+- CMake: "Could not read presets from <某路径>" 或配置 cwd 错位
+- SDK: "SDK built but <lib> not found" / SDK 出现在两个不同路径
+- 手指向资源 A，报错却指向路径 B 找不到
+- 早期症状 + "presets may not support <平台>" 这类误导性信息
+```
+
+逐项确认两端是否解析到**同一目标**：
+
+```
+□ repo 根：各文件 _repo_root()/parents[N] → 是否同一目录？
+   出现手写 parents[N] 的，先验证 N == 本文件的真实层级深度（搬迁最常见病根）
+□ SDK 根：build_presets.py 的输出 与 ensure_sdk() 的读取 → 是否同一 sdk_root()？
+□ 构建脚本 / verification 引擎根 / artifact 目录等的路径常量 → 多处是否同值
+□ .gitignore 的忽略/取消忽略 → 与真实文件位置是否一致
+```
+
+确认不一致 → **先修路径一致**（通常与"哪一层"无关）；修复后再回到 Step 2 分层诊断。
 
 ### Step 2：分层诊断
 
@@ -142,6 +169,7 @@ classification: domains=[构建] mode=knowledge-inject expert=dev-il2cpp-build-f
 ```
 □ 获取完整错误输出
 □ 症状分类：LNK/C++编译/CS/stub/CMake/Python？
+□ 一致性前置：若症状是路径/常量类 → 先核对 multiple 处是否同值（Step 1.5）
 □ 分层诊断：ATG/TPG/CodeGen/Python 哪一层？
 □ 检查 stale 文件（bridge-redirect, hephaestus-cache）
 □ 检查最近 git 变更

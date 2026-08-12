@@ -83,6 +83,20 @@ else
     echo "=== [layer-boundary] All staged files pass layer boundary checks ==="
 fi
 
+echo "=== [workaround-gate] Checking workaround / override bans (方案 B) ==="
+WRO_OUTPUT=$(python tests/e2e/verification/preflight/check_workarounds.py 2>&1 | cat)
+echo "$WRO_OUTPUT"
+if echo "$WRO_OUTPUT" | grep -q "FAIL"; then
+    echo ""
+    echo "ERROR: workaround/override gate FAILED. Root-fix the masked workaround, or"
+    echo "annotate a harmless robustness fallback (# FALLBACK_KIND: robust) or a"
+    echo "temporary capped workaround (# FALLBACK_KIND: workaround + # WRO: EXPIRES)."
+    echo "Permanent workarounds and masked-success returns are banned."
+    echo "Use 'git commit --no-verify' to bypass (not recommended)."
+    exit 1
+fi
+echo "=== [workaround-gate] All staged files pass workaround/override checks ==="
+
 echo "=== [gate] Deterministic severe-issue gates (secrets / artifacts / large files) ==="
 
 GATE_FAILED=0
