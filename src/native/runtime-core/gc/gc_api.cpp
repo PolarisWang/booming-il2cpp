@@ -10,6 +10,7 @@
 #include "gc_old_gen.h"
 #include "gc_region.h"
 #include "gc_scheduler.h"
+#include "gc_config.h"
 #include "gc_stats.h"
 #include "gc_young_collector.h"
 #include "gc_bgc.h"
@@ -53,8 +54,15 @@ static std::atomic<bool> s_recent_gc_mem_failure{false};
 
 /// Half-budget clamp for the OOM failure report (align CoreCLR
 /// allocation.cpp:2058-2061 oom_budget: reported size = min_alloc_budget/2).
-/// CRAG analog of dd_min_size(gen0)/2 uses the nursery minimum (64 KB) / 2.
-static constexpr CHAOS_IL2CPP_SIZE kOomReportHalfBudget = (64 * 1024) / 2;  // 32 KB
+/// CRAG analog of dd_min_size(gen0)/2: derived from the (config-tunable)
+/// gen0/nursery minimum budget (GcConfig().MinNurserySize, default 64 KB) / 2,
+/// so the reported OOM size scales with the configured gen0 budget rather than
+/// a hardcoded constant.  Exposed as GcGetOomReportBudget() for testability.
+CHAOS_IL2CPP_SIZE GcGetOomReportBudget() noexcept {
+    CHAOS_IL2CPP_SIZE min_nursery = GcConfig().MinNurserySize;
+    if (min_nursery == 0) min_nursery = 64 * 1024;  // fallback: default gen0 min
+    return min_nursery / 2;
+}
 
 void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
                          CHAOS_IL2CPP_SIZE size) noexcept {
@@ -120,7 +128,7 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
     s_recent_gc_mem_failure.store(true, std::memory_order_relaxed);
     G_Scheduler().SetProvisionalMode(true);
     CHAOS_IL2CPP_SIZE report_size =
-        (size > kOomReportHalfBudget) ? kOomReportHalfBudget : size;
+        (size > GcGetOomReportBudget()) ? GcGetOomReportBudget() : size;
     CHAOS_IL2CPP_LOG_ERROR_M("GC_API",
         "OOM: all recovery attempts failed (<true-mem-exhaustion> requested={0} reported={1})",
         static_cast<unsigned long long>(size),

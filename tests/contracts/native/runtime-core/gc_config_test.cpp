@@ -26,6 +26,7 @@
 #include "gc_young_gen.h"  // kMaxTlabAlloc (inline latched variable)
 #include "gc_loh.h"        // kLohThreshold
 #include "gc_parallel_mark.h"  // kMaxParallelMarkWorkers
+#include "gc_api.h"        // GcGetOomReportBudget (M15 gen-scaled OOM budget)
 #include "gc_test_macros.h"
 
 using namespace chaos::il2cpp::runtime_core;
@@ -176,6 +177,35 @@ void TestNativeApiGet() {
              "chaos_gc_config_get_nursery_size() reflects config singleton");
 }
 
+// ── M15: gen-scaled OOM report budget ────────────────────────────────
+// GcGetOomReportBudget() aligns CoreCLR allocation.cpp oom_budget
+// (= dd_min_size(gen0)/2): derived from the config-driven gen0/nursery min
+// budget (GcConfig().MinNurserySize) / 2, so it scales with the configured
+// gen0 budget rather than a hardcoded constant.
+void TestOomReportBudgetScaled() {
+    TEST("OomReportBudgetScaled");
+
+    // Default: MinNurserySize = 64 KB → budget = 32 KB.
+    GcConfig().Initialize();
+    const CHAOS_IL2CPP_SIZE kDefaultMinNursery = 64 * 1024;
+    GC_CHECK(GcGetOomReportBudget() == kDefaultMinNursery / 2,
+             "GcGetOomReportBudget default == MinNurserySize/2 (32 KB)");
+
+    // Scaled: override MinNurserySize to 128 KB → budget scales to 64 KB.
+    SetGcEnv("MinNurserySize", "131072");   // 128 KB
+    GcConfig().Initialize();
+    GC_CHECK(GcGetOomReportBudget() == 128 * 1024 / 2,
+             "GcGetOomReportBudget scales with MinNurserySize override (64 KB)");
+
+    // Clamp sanity: budget is always <= MinNurserySize (never exceeds half budget).
+    GC_CHECK(GcGetOomReportBudget() <= GcConfig().MinNurserySize,
+             "GcGetOomReportBudget is <= MinNurserySize");
+
+    // Restore default.
+    SetGcEnv("MinNurserySize", "");
+    GcConfig().Initialize();
+}
+
 // ── Main ────────────────────────────────────────────────────────────
 int main() {
     puts("GC config knob env-override read tests (M11)");
@@ -184,6 +214,7 @@ int main() {
     TestAllKnobsEnvOverride();
     TestHotPathLatchPropagation();
     TestNativeApiGet();
+    TestOomReportBudgetScaled();
 
     printf("\nResults: %d test groups, %d failures\n", g_tests, g_failures);
     return g_failures == 0 ? 0 : 1;

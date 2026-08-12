@@ -46,11 +46,18 @@
   - `gc_events_test` 5 → 7 tests：**7 tests 0 failures**。
   - 回归：config/handle/scheduler/region 全 0 failures；构建 exit 0。
 
+### ✅ 已结算：M15（M5 P2 工程，commit 待填）
+- **oom_budget gen 级缩放**（plan-v5 M15，allocation.cpp → CRAG 对应 `gc_api.cpp`）。
+  - `kOomReportHalfBudget`（硬编码 32KB）替换为 `GcGetOomReportBudget()`（公开 API）：从 config 驱动的 gen0/nursery 最小预算 `GcConfig().MinNurserySize / 2` 派生，对齐 CoreCLR `allocation.cpp oom_budget = dd_min_size(gen0)/2`。默认 64KB/2=32KB（行为不变），配置可缩放。
+  - `gc_api.cpp` include `gc_config.h`；`gc_api.h` 公开 `GcGetOomReportBudget`。
+  - `gc_config_test.cpp` 增 `TestOomReportBudgetScaled`（默认 32KB / override 128KB→64KB / clamp ≤ min）：config test **4 groups 0 failures**。
+  - 回归：handle/events/scheduler/region 全 0 failures；构建 exit 0。
+
 ### ⬜ 剩余里程碑（跨会话，每里程碑独立验证+测试全绿再进）
 - **M2 主线 B1**：P2-M1(GC-M1 K2c regen，foundation-dll 集成，本会话评估 blocked-on-pipeline) / P2-M3A(Server GC 多堆) / P2-M10(gen>condemned，M9 后)。
 - **M3 主线 B2 三代链**：M9 三代 → M8 plan-gen → M7 demotion（XL，拆 A/B）。
 - **M4 主线 B2 并发**：M5 BGC 分相 → M4 provisional；M3B/M6。
-- **M5 主线 B3 剩余**：M15 oom_budget（M11、M12、M13 已完结；M14 ProvStress 降优）。
+- **M5 主线 B3 全部完结**：M11/M12/M13/M15 已完成（M14 ProvStress 降优后置）。
 - 完整规格/步骤/测试/判据见 `plan-v5-01.md`。
 
 ## blocking_questions
