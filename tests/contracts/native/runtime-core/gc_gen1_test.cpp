@@ -160,6 +160,56 @@ static void TestSingleLiveObject() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// M7-A: region demotion — a survivor promoted to Gen2 (demotion boundary crossed)
+//       is reflected in a non-empty promotion count + reset Gen1; a demoted
+//       (kept-in-Gen1) object keeps region-gen GEN1(1).
+// ═══════════════════════════════════════════════════════════════════════════
+
+static void TestGen1DemotionRegionGen() {
+    GC_TEST("Gen1 demotion region-gen");
+
+    // ── (a) Promoted survivor → Gen2 (demotion boundary crossed) ──
+    {
+        GcGen1Collection();  // ensure clean gen1
+
+        void* gen0_ref = NurseryAllocate(64);
+        if (!gen0_ref) { GC_FAIL("nursery alloc failed"); return; }
+        std::memset(gen0_ref, 0, 64);
+
+        void* gen1_obj = TryAllocateInGen1(64);
+        if (!gen1_obj) { GC_FAIL("gen1 alloc failed"); return; }
+        GC_CHECK(IsInGen1(gen1_obj), "promote candidate in gen1");
+        InitGen1Object(gen1_obj, 0xFEEDFACE);
+        std::memcpy(static_cast<char*>(gen0_ref) + 8, &gen1_obj, sizeof(void*));
+        volatile void* stack_ref = gen1_obj;
+        (void)stack_ref;
+
+        Gen1CollectionResult r = GcGen1Collection();
+
+        // A live gen1 object with a retained (stack/root) reference must promote
+        // to Gen2 — the demotion boundary is crossed, Gen1 drains.
+        GC_CHECK(r.objects_in_gen1 == 1, "one survivor scanned in gen1");
+        GC_CHECK(r.objects_promoted >= 1, "live survivor promoted to Gen2 (demotion crossed)");
+
+        // After promotion, Gen1 is reset (empty) — survivors escaped to Gen2.
+        char* gen1_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+        Region* gen1_reg = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        GC_CHECK(gen1_reg == nullptr || gen1_bump == gen1_reg->begin,
+                 "gen1 drained after promotion (demotion crossed)");
+    }
+
+    // ── (b) Demoted (kept in Gen1) object keeps region-gen GEN1(1) ──
+    {
+        Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        GC_CHECK(gen1 != nullptr && gen1->begin != nullptr, "gen1 region exists (demoted)");
+        if (gen1 && gen1->begin) {
+            GC_CHECK(GetRegionGen(reinterpret_cast<uintptr_t>(gen1->begin)) == kRegionGenGen1,
+                     "demoted Gen1 region-gen == GEN1(1)");
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // Test 3: Single dead object → reclaimed
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -733,6 +783,7 @@ int main() {
     TestGen1HighSurvivalRate();
     TestGen1OomFallback();
     TestGen1RegionGenerationTag();
+    TestGen1DemotionRegionGen();
 
     // ── Teardown ─────────────────────────────────────────────────────
     threading::UnregisterThread();
