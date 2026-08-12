@@ -153,3 +153,20 @@ adaptive + outlier + FP-12 零时长守卫 + `_MIN_ELAPSED_FLOOR` + perf-store o
 2. `Vector2::GreaterThanAll` 是否经 Phase-1 numerics 还是外部表派发。
 
 **下一 session 第一件事**：核实重建命令是否对 AOT entry.exe 也用新 codegen（build stage 的 aot vs jit 产物差异），否则 kernel 修复永远不会在 fact 里可见。确认后再回到 `MapOperationKindToSemanticId`+Vector2/3/4 分支（该 ABI 路线正确，只是上轮验证方式错了）。
+
+### 12. A2-1 验证断联根因 + kernel 仍未路由（2026-08-12 确认）
+
+**验证断联根因（关键）**：pipeline 的 `tool_helpers.tool_dll()` 用 **Debug** 构建
+（`src/tools/.../bin/Debug/net8.0/`），而我此前 `dotnet build -c Release` 只更新了
+Release Generator DLL → pipeline codegen 从未加载我的改动（Unsafe.As / kernel 全没生效）。
+修复：`dotnet build TestProjectGenerator.csproj`(Debug) 让 Debug Generator 依赖吸收
+source 改动 → pipeline 才用上新 codegen。
+
+**但 kernel 修复后重建 numerics 仍 164/180**：即使 Debug codegen 含改动，`Vector2::GreaterThanAll`
+仍落 fallback。结论：`Vector2::GreaterThanAll` **不经 numerics kernel 派发**（可能走外部表
+subject→managed-method 路径，或 `TryResolveNumericsFromArtifact` 对 这些 subject 压根未触发）。
+需在 kernel `TryResolveNumericsFromArtifact` 加 debug 日志，确认 `Vector2Tests::GreaterThanAll_9`
+(外部 subject) 内部调 `Vector2::GreaterThanAll` 时是否到达 numerics 解析——下一 session 第一事。
+
+**教训**：代码库有 4 份 Generator DLL，pipeline 只用 Debug 那份；改 Generator source 必须
+rebuild Debug 的 TPG（依赖传播），不然一切验证都是 stale。
