@@ -210,6 +210,64 @@ static void TestGen1DemotionRegionGen() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// M7-B-1: age-based evacuation demotion — the promotion_age_threshold drives
+//   whether a gen1 survivor is DEMOTED (kept in gen1, region-gen GEN1(1)) or
+//   PROMOTED (crossed to gen2, region-gen OLD(2)).  This is CRAG's demotion
+//   decision, aligned with CoreCLR's age-based decide_on_demotion_pin_surv.
+// ═══════════════════════════════════════════════════════════════════════════
+
+static void TestAgeBasedDemotionRegionGen() {
+    GC_TEST("Age-based demotion region-gen");
+
+    // A rooted gen1 object that OCCUPIES the survivor - we verify its destination
+    // region-gen under each threshold by scavenging it.
+    auto allocate_rooted_gen1 = [&](int tag) -> void* {
+        GcGen1Collection();  // clean gen1 (resets boundary + drain)
+        void* gen0_ref = NurseryAllocate(64);
+        if (!gen0_ref) return nullptr;
+        std::memset(gen0_ref, 0, 64);
+        void* gen1_obj = TryAllocateInGen1(64);
+        if (!gen1_obj) return nullptr;
+        InitGen1Object(gen1_obj, static_cast<uint32_t>(0xCAFEB000u + tag));
+        // Root it via a gen0 slot so scavenge/collect can find it.
+        std::memcpy(static_cast<char*>(gen0_ref) + 8, &gen1_obj, sizeof(void*));
+        volatile void* stack_ref = gen1_obj;
+        (void)stack_ref;
+        return gen1_obj;
+    };
+
+    // ── (a) HIGH threshold: demote → survivor stays in Gen1 (region-gen 1) ──
+    {
+        g_young_gen.promotion_age_threshold_.store(4, std::memory_order_release);
+        void* obj = allocate_rooted_gen1(1);
+        GC_CHECK(obj != nullptr, "high-threshold demote: rooted gen1 obj alloc");
+        if (!obj) { GC_FAIL("no obj"); return; }
+
+        GcGen1Collection();
+
+        // With a high threshold, the survivor is demoted: it stays within the Gen1
+        // address range (region-gen 1), not crossed to Old.
+        GC_CHECK(IsInGen1(obj) || GetRegionGen(reinterpret_cast<uintptr_t>(obj)) == kRegionGenGen1,
+                 "high-threshold: survivor demoted (kept Gen1, region-gen 1)");
+    }
+
+    // ── (b) LOW threshold: promote → survivor crosses to Gen2 (region-gen OLD) ──
+    {
+        g_young_gen.promotion_age_threshold_.store(1, std::memory_order_release);
+        void* obj = allocate_rooted_gen1(2);
+        GC_CHECK(obj != nullptr, "low-threshold promote: rooted gen1 obj alloc");
+        if (!obj) { GC_FAIL("no obj"); return; }
+
+        Gen1CollectionResult r = GcGen1Collection();
+        GC_CHECK(r.objects_promoted >= 1,
+                 "low-threshold: survivor demotion crossed -> promoted to Gen2");
+
+        // Reset threshold to the default.
+        g_young_gen.promotion_age_threshold_.store(2, std::memory_order_release);
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // Test 3: Single dead object → reclaimed
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -784,6 +842,7 @@ int main() {
     TestGen1OomFallback();
     TestGen1RegionGenerationTag();
     TestGen1DemotionRegionGen();
+    TestAgeBasedDemotionRegionGen();
 
     // ── Teardown ─────────────────────────────────────────────────────
     threading::UnregisterThread();
