@@ -218,6 +218,9 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
     // from concurrent mark phase that aren't captured by SATB alone
     // (e.g., a nursery object allocated during concurrent mark that points
     // to an unmarked old-gen object via a new field write).
+    // M5 (two-snapshot): clear each scanned card as it is consumed ("clear-as-
+    // you-scan"), so the remark is idempotent — a later young GC / next remark
+    // does not re-mark the same old-gen refs from a consumed card.
     CHAOS_IL2CPP_SIZE cards_dirty = 0;
     G_OldGen().ScanDirtyCardsInPages(
         [&](uintptr_t /*card_idx*/, uintptr_t card_start, uintptr_t card_end) {
@@ -237,6 +240,8 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
                     }
                 }
             }
+            // Consume the card (two-snapshot: clear-as-scan).
+            ClearCard(reinterpret_cast<const void*>(card_start));
         });
 
     // Drain again after dirty cards.
@@ -271,6 +276,8 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
                                 }
                             }
                         }
+                        // Consume the Gen1 card (two-snapshot clear-as-scan).
+                        ClearCard(reinterpret_cast<const void*>(card_start));
                     });
             }
         }
