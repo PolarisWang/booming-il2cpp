@@ -555,6 +555,51 @@ void TestWeakInteriorHandle() {
     CHECK(true, "WeakInterior handle create + free OK");
 }
 
+// ── M7-B-2: Handle relocation (no dangling handle after compaction) ──
+// After a domain unload / compaction moves objects, GcRelocateHandles must
+// rewrite every handle target from the old address to the new one, so no handle
+// dangles at a freed address (the "不碎片" handle-correctness guarantee).
+static void TestRelocateHandles() {
+    printf("\n── Test: Handle relocation after compaction (M7-B-2) ──\n");
+
+    void* objA = NurseryAllocate(64);
+    CHECK(objA != nullptr, "alloc objA for relocation test");
+    void* objB = NurseryAllocate(64);
+    CHECK(objB != nullptr, "alloc objB for relocation test");
+
+    CHAOS_IL2CPP_UINT64 h1 = GcCreateStrongHandle(objA);
+    CHAOS_IL2CPP_UINT64 h2 = GcCreateStrongHandle(objB);
+    CHAOS_IL2CPP_UINT64 h_unrelated = GcCreateStrongHandle(objA);  // should also relocate
+    CHECK(h1 != 0 && h2 != 0 && h_unrelated != 0, "created 3 handles for relocation");
+
+    // Verify initial targets.
+    CHECK(GcGetHandleTarget(h1) == objA, "h1 → objA before relocate");
+    CHECK(GcGetHandleTarget(h2) == objB, "h2 → objB before relocate");
+
+    // Compaction relocates objA → newA, objB → newB.
+    void* newA = NurseryAllocate(64);
+    void* newB = NurseryAllocate(64);
+    std::vector<std::pair<void*, void*>> relocs = {
+        {objA, newA},
+        {objB, newB},
+    };
+    GcRelocateHandles(relocs);
+
+    // All handles pointing to relocated objects must now target the new address.
+    CHECK(GcGetHandleTarget(h1) == newA, "h1 relocated → newA");
+    CHECK(GcGetHandleTarget(h_unrelated) == newA, "h_unrelated relocated → newA");
+    CHECK(GcGetHandleTarget(h2) == newB, "h2 relocated → newB");
+
+    // A handle whose object was NOT relocated stays unchanged.
+    void* objC = NurseryAllocate(64);
+    CHAOS_IL2CPP_UINT64 h3 = GcCreateStrongHandle(objC);
+    CHECK(GcGetHandleTarget(h3) == objC, "h3 (non-relocated) unchanged after relocate");
+
+    // Cleanup.
+    GcFreeHandle(h1); GcFreeHandle(h2); GcFreeHandle(h3); GcFreeHandle(h_unrelated);
+    CHECK(true, "Handle relocation (M7-B-2) create+relocate+free OK");
+}
+
 int main() {
     // Set stdout to unbuffered for real-time output.
     setvbuf(stdout, NULL, _IONBF, 0);
@@ -593,6 +638,7 @@ int main() {
     TestHandleTableGrowth();
     TestRefCountedHandle();
     TestWeakInteriorHandle();
+    TestRelocateHandles();
 
     printf("\n══ Results: %d tests, %d failures ══\n",
            11 - (g_failures > 0 ? 1 : 0), g_failures);
