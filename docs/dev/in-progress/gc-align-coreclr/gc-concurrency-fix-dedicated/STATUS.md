@@ -61,10 +61,12 @@
 - **M2 主线 B1**：P2-M1(GC-M1 K2c regen，foundation-dll 集成，本会话评估 blocked-on-pipeline) / P2-M3A(Server GC 多堆) / P2-M10(gen>condemned，M9 后)。
   - M3A Server：**scaffold 未跑通**（`GcHeapManager::Initialize()` 零生产调用；GC_SERVER=1 崩空 heap 数组；CMake 默认 ON vs 文档 OFF 不一致）。**未在本会话落地**，体量大，需独立里程碑 + CI 构建矩阵。
   - M10 gen>condemned：**本会话已落地**（见下 M9 链）。
-- **M3 主线 B2 三代链**：M9/M10/M8 **本会话已落地**（见下）；M7 demotion **未落地**（XL，age-based evacuation + 域卸载不碎片）。
+- **M3 主线 B2 三代链**：M9/M10/M8/M7-A **本会话已落地**。
   - **M9**（A1 gen1 标 + A2 激活 condemned + gen-aware scavenge + gen1 tag 测试）：完结。
   - **M10**（gen>condemned 过滤实激活 + 测试）：完结。
   - **M8**（plan-gen 重绑验证）：完结。
+  - **M7-A**（region demotion region-gen 验证，CoreCLR `set_region_plan_gen_num` demotion 对齐）：完结。`gc_gen1_test` 13/0。
+  - **M7-B**（age-based evacuation + 域卸载不碎片）**未落地**：net-new 深 GC 手术，跨会话。
 - **M4 主线 B2 并发**：M5 BGC 两快照 → M4 provisional；M3B/M6。
   - **M5-A** clear-as-scan 已落地；M5 完整两快照纪律 + M4/M3B/M6 未落地。
 - **M5 主线 B3 全部完结**：M11/M12/M13/M15 已完成（M14 ProvStress 降优后置）。
