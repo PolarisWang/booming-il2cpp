@@ -13,6 +13,7 @@
 #include "gc_events.h"
 #include "gc_gen1.h"
 #include "gc_heap.h"
+#include "gc_heap_manager.h"   // M3A-1: per-heap manager lifecycle
 #include "gc_layout.h"
 #include "gc_numa.h"
 #include "gc_config.h"
@@ -556,6 +557,13 @@ void TeardownTlsPoh() noexcept {
 void InitYoungGeneration() noexcept {
     // Initialize the GC config singleton (env overrides + programmatic knobs).
     GcConfig().Initialize();
+
+    // M3A-1: initialize the per-heap manager.  Under the WKS default
+    // (GC_SERVER=0) this is a no-op; when GC_SERVER=1 it allocates the per-heap
+    // GcHeapContext array and per-heap old-gen, so Server-GC multi-heap is
+    // actually prepared instead of crashing on a null/empty array (the previous
+    // zero-production-call gap).
+    GcHeapManager::Instance().Initialize();
 
     // Latch config-driven hot-path knobs once, so the allocation / LOH / mark
     // hot paths read a plain machine load (the latched values) instead of
