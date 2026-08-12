@@ -186,3 +186,22 @@ rebuild Debug 的 TPG（依赖传播），不然一切验证都是 stale。
 3. fallback 既非纯 slow 也非纯 correct——是 **correctness/robustness/perf 三合一热点**，集中在"无 C++ body 或无 native stub 被真实调用"的方法。
 
 **结论**：方向 A（定点让这些方法有真 native 体）同时修三类后果（throw→正确执行、伪执行→真计算、慢尾→native 速度）。这是把"解析器问题"展开后的精确画像。
+
+### 14. fallback 实际拦截规模：124 个 Numerics 方法（TEMP-DIAG 实测，2026-08-12）
+
+在 `ChaosExternalRuntimeFallback` 加临时 `[fallback-diag]` 打印 subject_id，rebuild numerics
+后跑 `--benchmark-all 100`：
+- **124 个唯一 System.Numerics subject** 落入 fallback（去重）——远超 fact 的 16 失败。
+- 巨量调用的方法：`StoreUnsafe`(1600) `Widen`(1400) `ToScalar`(800) `Store`/`StoreAligned`/
+  `GetElement`/`ExtractMostSignificantBits` 各 800/600，加 `Vector2/3/4::All/EqualsAll/...` 各 200。
+- 这些**多数 fact passed**——因 fallback 对 `Store→0`/`GetElement→0`/`EqualsAll→1` 等返回
+  硬编码常量，恰好匹配 subject checksum（**伪执行：没真跑，但 checksum 对**）。
+- `GreaterThanAll/LessThanAll` 也入 fallback，但**抛托管异常**（elapsed -1.0）。
+
+**对"解析器问题"的最终定性（大幅扩展）**：
+- fallback 拦截 **≥124 个 Numerics 方法**，不是 16。16 只是"checksum 抓到的显性失败"；
+  其余 ~108 个是"checksum 掩盖的伪执行"（返回硬编码常量真值恰好对）。
+- 真实代价分布：throw（16）+ 伪执行（~108）+ 真解释器慢尾。
+- 这证实方向 A 的价值远超最初的 111 缺口估算——凡是落 fallback 的方法都可能未真执行。
+
+**TEMP 诊断已测完，将 revert interop_stubs.cpp 的 fprintf**（不留 debug 残留）。
