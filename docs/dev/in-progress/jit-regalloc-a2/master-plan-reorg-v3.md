@@ -170,3 +170,19 @@ subject→managed-method 路径，或 `TryResolveNumericsFromArtifact` 对 这�
 
 **教训**：代码库有 4 份 Generator DLL，pipeline 只用 Debug 那份；改 Generator source 必须
 rebuild Debug 的 TPG（依赖传播），不然一切验证都是 stale。
+
+### 13. 解析器问题实测量化（2026-08-12，展开用户质疑）
+
+**真实数据（numerics chunk, --benchmark-all 100 iters）**：
+- 180 benchmarkable 方法：**16 throw**(elapsed=-1.0 managed exception, 全为 Vector _All 归约) + 30 计为 0.000ms(可疑即时/伪执行) + 134 非零。
+- 非零耗时：中位 0.003ms，max 0.145ms，p95 0.095ms → **max/中位 ≈ 30-45×**。
+
+**修正"解析器问题"的定性**：
+1. 不是"解析器均匀比 native 慢 10×"这种干净描述。而是**三类真实后果**：
+   - **throw**（16/180=8.9%，Vector _All 等落 fallback→InterpreterEntryDirect→托管异常）：最严重，真实 workload 会异常。
+   - **伪执行**（30 计 0.000ms，fallback 硬编码常数 return 0/1 或短路）：基准不可信、掩盖真实缺失。
+   - **解释器慢尾**（慢至 0.145ms = 中位 45×）：真走解释器的方法确实慢一个量级+。
+2. 与 roadmap 的 2.5-30× 吻合且更糟（尾部 45×）。
+3. fallback 既非纯 slow 也非纯 correct——是 **correctness/robustness/perf 三合一热点**，集中在"无 C++ body 或无 native stub 被真实调用"的方法。
+
+**结论**：方向 A（定点让这些方法有真 native 体）同时修三类后果（throw→正确执行、伪执行→真计算、慢尾→native 速度）。这是把"解析器问题"展开后的精确画像。
