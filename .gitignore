@@ -559,3 +559,10 @@ src/reference/Chaos.TestFramework.Sdk/**/obj/
 
 # Coverage reports (generated outputs — not source)
 tests/**/coverage.cobertura.xml
+
+# ── Session artifacts (debug dumps / generated / large inventories) ──
+/arith_block.txt
+/cls_err.txt
+/jit_allocation_stats.json
+/tests/e2e/verification/a1_fact_inventory.json
+/testing/
