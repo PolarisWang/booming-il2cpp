@@ -331,3 +331,15 @@ Vector<T> _All 补 false（引 native chaos_vector_*）。
 `CollectExternalRuntimeDispatchEntries`/`TryCreateExternalRuntimeHelperDefinition` 对泛型形式上
 出现前，让 kernel（`TryResolveBySubjectId`/Descriptors 表有 Vector<T>）或 StructuredIR 内联
 先接住。这是 deep lowering 层问题，非 helpers 层单点。Vector2/3/4（非泛型命名）已修 12/12。
+
+### 19. A2-1 收尾（2026-08-12，验收通过）
+
+**Vector2/3/4 `_All` 修复验收**：
+- AOT fact：numerics 164→176/180（12 个 `Vector2/3/4::_All` 修复，从抛托管异常→真 native 归约）。
+- **新增 `numerics_vectors_test.cpp`（gtest 5 TEST）**：直接调 `Vector2/3/4{GreaterThan,GreaterThanOrEqual,LessThan,LessThanOrEqual}All`，
+  逐 lane 断言语义含 equal-lanes 边界（not strictly, or-equal true），**5/5 PASS**（commit d55effac8）。
+- 无回归：`test_jit_native` 70/70 PASS。
+
+**A2-1 任务状态**：✅ 完成。锁定的交付：native 12 算子 + `TryCreateVectorAllComparerHelper`（移到
+generic-shape 前）+ runtime_core.h 补 Vector3/4 声明 + unit 回归测试。`Vector<T>` 泛型 4 个为独立
+deep-lowering 问题（§18d），不阻塞 A2-1 收尾。
