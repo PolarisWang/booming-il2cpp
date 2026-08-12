@@ -65,7 +65,7 @@ chaos_native_add_test(test_dbg_integration
 # ── SOS extension unit tests ─────────────────────────────────────────
 # Unity-build: sos_test.cpp includes gc_sos.cpp directly.
 # CHAOS_SOS_UNIT_TEST is defined to exclude DbgEng-dependent code.
-set(SOS_DIR "${CMAKE_SOURCE_DIR}/src/native/diagnostics/sos")
+set(SOS_DIR "${CHAOS_CMAKE_ROOT}/src/native/diagnostics/sos")
 chaos_native_add_test(test_sos
     sos_test.cpp
     LABELS "unit;diagnostics;sos"
@@ -73,7 +73,7 @@ chaos_native_add_test(test_sos
 target_compile_definitions(test_sos PRIVATE CHAOS_SOS_UNIT_TEST)
 target_include_directories(test_sos PRIVATE
     "${SOS_DIR}"
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core"
 )
 
 # ── EventPipe negative/edge tests (P3-G) ────────────────────────────────

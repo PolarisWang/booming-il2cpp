@@ -167,7 +167,7 @@ chaos_native_add_test(test_common_unordered_dense
 # profile_enabled needs CHAOS_IL2CPP_PROFILE_ENABLED=1 and profile_globals.cpp
 chaos_native_add_test(test_common_profile_enabled
     common_profile_enabled_test.cpp
-    "${CMAKE_SOURCE_DIR}/src/native/common/chaos/profile_globals.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/common/chaos/profile_globals.cpp"
     DEFINITIONS CHAOS_IL2CPP_PROFILE_ENABLED=1
     LABELS "unit;common"
 )

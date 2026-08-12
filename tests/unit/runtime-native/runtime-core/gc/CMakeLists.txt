@@ -162,14 +162,14 @@ chaos_native_add_test(test_gc_tlab
 # search for COMDAT resolution. Include path is set via target_include.
 chaos_native_add_test(test_gc_young_collector
     gc_young_collector_test.cpp ${CHAOS_GC_BASE}
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_young_collector.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_scheduler.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_card_table.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_layout.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_young_collector.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_scheduler.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_card_table.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_layout.cpp
     LABELS "unit;gc"
 )
 target_include_directories(test_gc_young_collector PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc)
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
 # gc_young_collector.cpp symbols are also in chaos_runtime_core.lib (GNU ar
 # format that MSVC link.exe cannot search for COMDAT).  /FORCE:MULTIPLE lets
 # the directly-compiled symbols override the archive copies.
@@ -198,28 +198,28 @@ chaos_native_add_test(test_gc_finalizer
 # (same /FORCE:MULTIPLE pattern).
 chaos_native_add_test(test_gc_finalizer_integration
     gc_finalizer_integration_test.cpp ${CHAOS_GC_BASE}
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_young_collector.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_scheduler.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_card_table.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_layout.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_young_collector.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_scheduler.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_card_table.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_layout.cpp
     LABELS "unit;gc"
 )
 target_include_directories(test_gc_finalizer_integration PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc)
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
 target_link_options(test_gc_finalizer_integration PRIVATE /FORCE:MULTIPLE)
 
 # gc_max_promote_test — kMaxPromoteObjects guard verification
 # NOTE: gc_young_collector.cpp + gc_layout.cpp compiled directly.
 chaos_native_add_test(test_gc_max_promote
     gc_max_promote_test.cpp ${CHAOS_GC_BASE}
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_young_collector.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_scheduler.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_card_table.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_layout.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_young_collector.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_scheduler.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_card_table.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_layout.cpp
     LABELS "unit;gc"
 )
 target_include_directories(test_gc_max_promote PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc)
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
 target_link_options(test_gc_max_promote PRIVATE /FORCE:MULTIPLE)
 
 # gc_full_gc_test — Full GC collection channel tests
@@ -234,16 +234,16 @@ chaos_native_add_test(test_gc_full_gc
 # cannot search for COMDAT resolution.
 chaos_native_add_test(test_gc_managed_api
     gc_managed_api_test.cpp ${CHAOS_GC_BASE}
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_api.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_young_collector.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_scheduler.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_card_table.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_stats.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_layout.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_api.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_young_collector.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_scheduler.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_card_table.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_stats.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_layout.cpp
     LABELS "unit;gc"
 )
 target_include_directories(test_gc_managed_api PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc)
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
 target_link_options(test_gc_managed_api PRIVATE /FORCE:MULTIPLE)
 
 # gc_safepoint_test — Safepoint protocol unit tests
@@ -348,13 +348,13 @@ set_tests_properties(test_gc_mini_stress PROPERTIES LABELS "stress;gc")
 # link.exe cannot search for COMDAT resolution.
 chaos_native_add_test(test_gc_monitor_stress
     gc_monitor_stress_test.cpp ${CHAOS_GC_BASE}
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_young_collector.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_scheduler.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_card_table.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_layout.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_young_collector.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_scheduler.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_card_table.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_layout.cpp
 )
 target_include_directories(test_gc_monitor_stress PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc)
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
 target_link_options(test_gc_monitor_stress PRIVATE /FORCE:MULTIPLE)
 set_tests_properties(test_gc_monitor_stress PROPERTIES LABELS "stress;gc")
 
@@ -387,14 +387,14 @@ set_tests_properties(test_gc_oversized_stress PROPERTIES LABELS "stress;gc")
 # gc_bgc_smoke_test — BGC cycle lifecycle + young-GC interop
 chaos_native_add_test(test_gc_bgc_smoke
     gc_bgc_smoke_test.cpp ${CHAOS_GC_BASE}
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_young_collector.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_scheduler.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_card_table.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_layout.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_young_collector.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_scheduler.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_card_table.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_layout.cpp
     RESOURCE_LOCK bgc
 )
 target_include_directories(test_gc_bgc_smoke PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc)
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
 target_link_options(test_gc_bgc_smoke PRIVATE /FORCE:MULTIPLE)
 set_tests_properties(test_gc_bgc_smoke PROPERTIES LABELS "stress;gc")
 
@@ -412,12 +412,12 @@ set_tests_properties(test_gc_bgc_root_scan PROPERTIES LABELS "stress;gc")
 # cannot search for COMDAT resolution.
 chaos_native_add_test(test_gc_bgc_unit
     gc_bgc_unit_test.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_bgc.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_bgc.cpp
     LABELS "stress;gc"
     RESOURCE_LOCK bgc
 )
 target_include_directories(test_gc_bgc_unit PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc)
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
 target_link_options(test_gc_bgc_unit PRIVATE /FORCE:MULTIPLE)
 
 # gc_bgc_stress_test — BGC concurrent stress, work-stealing, graph mutation
@@ -474,14 +474,14 @@ chaos_native_add_test(test_gc_atomic_alloc
 # search for COMDAT resolution.
 chaos_native_add_test(test_gc_debug_contract
     gc_debug_contract_test.cpp
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_debug_contract.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_debug_contract.cpp"
     LABELS "unit;gc"
 )
 
 # gc_satb_stress_test — Multithreaded SATB buffer overflow stress test
 chaos_native_add_test(test_gc_satb_stress
     gc_satb_stress_test.cpp
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_bgc.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_bgc.cpp"
     GTEST_LIB_ONLY
     LABELS "stress;gc"
 )
@@ -517,9 +517,9 @@ target_link_options(test_gc_heap_manager PRIVATE /FORCE:MULTIPLE)
 # format that MSVC link.exe cannot search for COMDAT resolution.
 chaos_native_add_test(test_gc_root_change
     gc_root_change_test.cpp ${CHAOS_GC_BASE}
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_root_change.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_root_change.cpp
     LABELS "unit;gc"
 )
 target_include_directories(test_gc_root_change PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc)
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
 target_link_options(test_gc_root_change PRIVATE /FORCE:MULTIPLE)

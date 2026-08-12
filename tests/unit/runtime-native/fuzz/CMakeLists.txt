@@ -9,11 +9,11 @@ set(CHAOS_FUZZ_GC_SRC
     fuzz_gc_test.cpp
     "${CMAKE_CURRENT_SOURCE_DIR}/../runtime-core/gc/gc_test_base.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/../runtime-core/gc/gc_test_stubs.cpp"
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_young_collector.cpp"
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_scheduler.cpp"
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_card_table.cpp"
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_api.cpp"
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_region.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_young_collector.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_scheduler.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_card_table.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_api.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_region.cpp"
 )
 
 set(CHAOS_FUZZ_LIBS
@@ -43,7 +43,7 @@ chaos_native_add_test(test_fuzz_gc
 )
 target_include_directories(test_fuzz_gc PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../runtime-core/gc"
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc"
 )
 target_link_options(test_fuzz_gc PRIVATE /FORCE:MULTIPLE)
 set_tests_properties(test_fuzz_gc PROPERTIES TIMEOUT 600)

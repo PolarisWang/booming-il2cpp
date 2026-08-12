@@ -18,7 +18,7 @@ set(CHAOS_CODEGEN_LIBS
 # own ExecuteNative() (rather than through JitStubDispatch) link this x64 thunk
 # to re-bind RBX/RSI so the return value lands in the caller's ret_buf.
 set(CHAOS_T4_THUNK_ASM
-    ${CMAKE_SOURCE_DIR}/tests/contracts/native/runtime-core/t4_jit_call.asm)
+    ${CHAOS_CMAKE_ROOT}/tests/contracts/native/runtime-core/t4_jit_call.asm)
 if(MSVC AND CMAKE_SIZEOF_VOID_P EQUAL 8)
     enable_language(ASM_MASM)
     set_source_files_properties(${CHAOS_T4_THUNK_ASM} PROPERTIES LANGUAGE ASM_MASM)
@@ -31,8 +31,8 @@ endif()
 # gc_test_stubs.cpp is referenced via relative path from runtime-core/gc/
 chaos_native_add_test(test_jit_native
     jit_native_test.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc/gc_bgc.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/jit/jit_helpers.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc/gc_bgc.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/jit/jit_helpers.cpp
     ${CHAOS_T4_THUNK_ASM}
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
@@ -45,7 +45,7 @@ target_compile_definitions(test_jit_native PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
 )
 target_include_directories(test_jit_native PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/gc)
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
 set_tests_properties(test_jit_native PROPERTIES TIMEOUT 120)
 
 # B-1 — Codegen IL smoke test

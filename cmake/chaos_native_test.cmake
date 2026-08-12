@@ -15,7 +15,11 @@
 include_guard(GLOBAL)
 
 # ── Path anchors (self-contained: anchor to the repo root, not to tree-private vars) ──
-set(CHAOS_CMAKE_ROOT "${CMAKE_SOURCE_DIR}")
+# This module lives at <repo>/cmake/chaos_native_test.cmake. Anchor CHAOS_CMAKE_ROOT
+# to the repo root from the module's own location so it is correct regardless of
+# which top-level source dir configured the build (repo root via `cmake -S .`,
+# or a standalone native tree via `cmake -S tests/unit/runtime-native`).
+get_filename_component(CHAOS_CMAKE_ROOT "${CMAKE_CURRENT_LIST_DIR}/.." ABSOLUTE)
 
 # ── Unified runtime link-lib set (replaces the repeated per-tree vars:
 #    CHAOS_GC_COMMON_LIBS / CHAOS_FULL_LIBS / CHAOS_THREADING_LIBS / CHAOS_COMMON_TEST_LIBS) ──

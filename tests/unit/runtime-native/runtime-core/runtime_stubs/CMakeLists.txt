@@ -10,7 +10,7 @@
 chaos_native_add_test(string_stubs_test
     string_stubs_test.cpp
     gc_stubs_for_string_tests.cpp
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/string_stubs.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/string_stubs.cpp"
     LABELS "unit;core"
 )
 
@@ -21,7 +21,7 @@ chaos_native_add_test(string_stubs_test
 chaos_native_add_test(enum_stubs_test
     enum_stubs_test.cpp
     gc_stubs_for_string_tests.cpp
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/enum_stubs.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/enum_stubs.cpp"
     LABELS "unit;core"
 )
 
@@ -32,9 +32,9 @@ chaos_native_add_test(enum_stubs_test
 chaos_native_add_test(datetime_guid_math_test
     datetime_guid_math_test.cpp
     gc_stubs_for_string_tests.cpp
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/datetime_stubs.cpp"
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/math_stubs.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/datetime_stubs.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/math_stubs.cpp"
     LABELS "unit;core"
 )
 # datetime/guid need NOMINMAX + WIN32_LEAN_AND_MEAN because the stub .cpp files
@@ -53,7 +53,7 @@ target_compile_options(datetime_guid_math_test PRIVATE
 chaos_native_add_test(collection_stubs_test
     collection_stubs_test.cpp
     gc_stubs_for_string_tests.cpp
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/collection_stubs.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/collection_stubs.cpp"
     LABELS "unit;core"
 )
 
@@ -70,7 +70,7 @@ chaos_native_add_test(convert_stubs_test
 # so no gc_stubs_for_string_tests.cpp is needed.
 chaos_native_add_test(unsafe_stubs_test
     unsafe_stubs_test.cpp
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/unsafe_stubs.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/unsafe_stubs.cpp"
     LABELS "unit;core"
 )
 
@@ -79,10 +79,10 @@ chaos_native_add_test(unsafe_stubs_test
 chaos_native_add_test(runtime_stubs_benchmark
     runtime_stubs_benchmark.cpp
     gc_stubs_for_string_tests.cpp
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/string_stubs.cpp"
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/datetime_stubs.cpp"
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
-    "${CMAKE_SOURCE_DIR}/src/native/runtime-core/runtime_stubs/math_stubs.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/string_stubs.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/datetime_stubs.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/math_stubs.cpp"
     LABELS "benchmark;core"
 )
 target_compile_definitions(runtime_stubs_benchmark PRIVATE

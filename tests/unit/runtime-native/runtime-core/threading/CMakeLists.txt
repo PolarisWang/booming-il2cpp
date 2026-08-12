@@ -32,7 +32,7 @@ chaos_native_add_test(test_async_integration_smoke
 # Compiles execution_context.cpp directly to avoid stale prebuilt lib issues.
 chaos_native_add_test(test_execution_context_smoke
     execution_context_smoke_test.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/execution_context.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/execution_context.cpp
     LABELS "unit;threading"
 )
 
@@ -60,7 +60,7 @@ chaos_native_add_test(test_hc_cpu_feedback
 # GC_TRANSITION, SafepointPoll, and thread state symbols.
 chaos_native_add_test(test_rwlock_upgrade
     rwlock_upgrade_test.cpp
-    ${CMAKE_SOURCE_DIR}/src/native/runtime-core/synchronization.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/synchronization.cpp
     LABELS "unit;threading"
 )
 
