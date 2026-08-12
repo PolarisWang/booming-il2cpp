@@ -375,13 +375,13 @@ public sealed partial class NativeAotLoweringPlanner
 		// Detect the carried reduce method and pick the correct native lane-reducer.
 		string? carrier = null;      // RuntimeNumericsVector{2,3,4}Carrier  (named form)
 		string? nativeFn = null;     // Vector2GreaterThanAll  (named)  or  chaos_vector_greater_than_all_i32  (generic)
-		string? methodKey = null;    // GreaterThanAll / GreaterThanOrEqualAll / LessThanAll / LessThanOrEqualAll
+		string? methodKey = null;    // GreaterThanAll / GreaterThanOrEqualAll / LessThanAll / LessThanOrEqualAll / EqualsAll / EqualsAny
 		string? elemType = null;     // generic element type ("System.Int32" → "i32") when generic form
 
 		var mNamed = System.Text.RegularExpressions.Regex.Match(
-			callee, @"System\.Numerics\.Vector([234])::(GreaterThanAll|GreaterThanOrEqualAll|LessThanAll|LessThanOrEqualAll):");
+			callee, @"System\.Numerics\.Vector([234])::(GreaterThanAll|GreaterThanOrEqualAll|LessThanAll|LessThanOrEqualAll|EqualsAll|EqualsAny):");
 		var mGeneric = System.Text.RegularExpressions.Regex.Match(
-			callee, @"System\.Numerics\.Vector<([^>]+)>::(GreaterThanAll|GreaterThanOrEqualAll|LessThanAll|LessThanOrEqualAll):");
+			callee, @"System\.Numerics\.Vector<([^>]+)>::(GreaterThanAll|GreaterThanOrEqualAll|LessThanAll|LessThanOrEqualAll|EqualsAll|EqualsAny):");
 
 		if (mNamed.Success)
 		{
@@ -414,6 +414,8 @@ public sealed partial class NativeAotLoweringPlanner
 				"GreaterThanAll" => "greater_than_all",
 				"GreaterThanOrEqualAll" => "greater_than_or_equal_all",
 				"LessThanAll" => "less_than_all",
+				"EqualsAll" => "equals_all",
+				"EqualsAny" => "equals_any",
 				_ => "less_than_or_equal_all",
 			};
 			nativeFn = $"chaos_vector_{snake}_{suffix}";

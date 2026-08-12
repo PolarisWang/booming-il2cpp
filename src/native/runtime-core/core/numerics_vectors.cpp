@@ -90,6 +90,8 @@ CHAOS_IL2CPP_INT32 Vector2GreaterThanAll(RuntimeNumericsVector2Carrier l, Runtim
 CHAOS_IL2CPP_INT32 Vector2GreaterThanOrEqualAll(RuntimeNumericsVector2Carrier l, RuntimeNumericsVector2Carrier r) { return (l.x >= r.x) && (l.y >= r.y) ? 1 : 0; }
 CHAOS_IL2CPP_INT32 Vector2LessThanAll(RuntimeNumericsVector2Carrier l, RuntimeNumericsVector2Carrier r) { return (l.x < r.x) && (l.y < r.y) ? 1 : 0; }
 CHAOS_IL2CPP_INT32 Vector2LessThanOrEqualAll(RuntimeNumericsVector2Carrier l, RuntimeNumericsVector2Carrier r) { return (l.x <= r.x) && (l.y <= r.y) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector2EqualsAll(RuntimeNumericsVector2Carrier l, RuntimeNumericsVector2Carrier r) { return (l.x == r.x) && (l.y == r.y) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector2EqualsAny(RuntimeNumericsVector2Carrier l, RuntimeNumericsVector2Carrier r) { return (l.x == r.x) || (l.y == r.y) ? 1 : 0; }
 CHAOS_IL2CPP_INT32 Vector2GetHashCode(RuntimeNumericsVector2Carrier v) { return HashCodeCombine2(SingleGetHashCodeValue(v.x), SingleGetHashCodeValue(v.y)); }
 float Vector2Length(RuntimeNumericsVector2Carrier v) { return CHAOS_IL2CPP_SQRT(Vector2LengthSquared(v)); }
 float Vector2Dot(RuntimeNumericsVector2Carrier l, RuntimeNumericsVector2Carrier r) { return (l.x * r.x) + (l.y * r.y); }
@@ -135,6 +137,8 @@ CHAOS_IL2CPP_INT32 Vector3GreaterThanAll(RuntimeNumericsVector3Carrier l, Runtim
 CHAOS_IL2CPP_INT32 Vector3GreaterThanOrEqualAll(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return (l.x >= r.x) && (l.y >= r.y) && (l.z >= r.z) ? 1 : 0; }
 CHAOS_IL2CPP_INT32 Vector3LessThanAll(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return (l.x < r.x) && (l.y < r.y) && (l.z < r.z) ? 1 : 0; }
 CHAOS_IL2CPP_INT32 Vector3LessThanOrEqualAll(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return (l.x <= r.x) && (l.y <= r.y) && (l.z <= r.z) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector3EqualsAll(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return (l.x == r.x) && (l.y == r.y) && (l.z == r.z) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector3EqualsAny(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return (l.x == r.x) || (l.y == r.y) || (l.z == r.z) ? 1 : 0; }
 CHAOS_IL2CPP_INT32 Vector3GetHashCode(RuntimeNumericsVector3Carrier v) { return HashCodeCombine3(SingleGetHashCodeValue(v.x), SingleGetHashCodeValue(v.y), SingleGetHashCodeValue(v.z)); }
 float Vector3Length(RuntimeNumericsVector3Carrier v) { return CHAOS_IL2CPP_SQRT(Vector3LengthSquared(v)); }
 float Vector3Dot(RuntimeNumericsVector3Carrier l, RuntimeNumericsVector3Carrier r) { return (l.x * r.x) + (l.y * r.y) + (l.z * r.z); }
@@ -177,6 +181,8 @@ CHAOS_IL2CPP_INT32 Vector4GreaterThanAll(RuntimeNumericsVector4Carrier l, Runtim
 CHAOS_IL2CPP_INT32 Vector4GreaterThanOrEqualAll(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r) { return (l.x >= r.x) && (l.y >= r.y) && (l.z >= r.z) && (l.w >= r.w) ? 1 : 0; }
 CHAOS_IL2CPP_INT32 Vector4LessThanAll(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r) { return (l.x < r.x) && (l.y < r.y) && (l.z < r.z) && (l.w < r.w) ? 1 : 0; }
 CHAOS_IL2CPP_INT32 Vector4LessThanOrEqualAll(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r) { return (l.x <= r.x) && (l.y <= r.y) && (l.z <= r.z) && (l.w <= r.w) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector4EqualsAll(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r) { return (l.x == r.x) && (l.y == r.y) && (l.z == r.z) && (l.w == r.w) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 Vector4EqualsAny(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r) { return (l.x == r.x) || (l.y == r.y) || (l.z == r.z) || (l.w == r.w) ? 1 : 0; }
 CHAOS_IL2CPP_INT32 Vector4GetHashCode(RuntimeNumericsVector4Carrier v) { return HashCodeCombine4(SingleGetHashCodeValue(v.x), SingleGetHashCodeValue(v.y), SingleGetHashCodeValue(v.z), SingleGetHashCodeValue(v.w)); }
 float Vector4Length(RuntimeNumericsVector4Carrier v) { return CHAOS_IL2CPP_SQRT(Vector4LengthSquared(v)); }
 float Vector4Dot(RuntimeNumericsVector4Carrier l, RuntimeNumericsVector4Carrier r) { return (l.x * r.x) + (l.y * r.y) + (l.z * r.z) + (l.w * r.w); }

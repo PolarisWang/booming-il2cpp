@@ -593,14 +593,6 @@ static bool _TryExecuteViaIlData(const char* subject_id, uint64_t& out_ret) noex
     return false;
 }
 
-/// Check if a subject_id belongs to a crypto method (System.Security.Cryptography)
-/// by looking for the assembly prefix in the subject_id string.
-static inline bool _IsCryptoMethod(const char* subject_id) noexcept
-{
-    if (subject_id == nullptr) return false;
-    return std::strstr(subject_id, "System.Security.Cryptography/") != nullptr;
-}
-
 /// Check if a subject_id is a BCrypt/CNG P/Invoke interop call.
 /// These are DllImport methods from System.Private.CoreLib/Interop+BCrypt
 /// or System.Security.Cryptography/Interop+BCrypt that call bcrypt.dll.
@@ -682,88 +674,12 @@ static bool _TryExecuteViaPInvoke(const char* subject_id) noexcept
 
 
 // ── SIMD stub routing ──────────────────────────────────────────────
-// System.Numerics.Vector2/3/4, Matrix3x2/4x4, Plane, Quaternion, and
-// Vector<T> methods with zero/default inputs return well-defined results.
-// The Interpreter cannot execute these methods (they are hardware SIMD
-// intrinsics), so we short-circuit with the correct zero/default result.
-// Returns true if the subject was handled (result set in out_value).
-static bool _TryExecuteViaSimdStub(const char* subject_id,
-                                   CHAOS_IL2CPP_INTPTR& out_value) noexcept
-{
-    if (subject_id == nullptr) return false;
-    out_value = 0;
-
-    // ── Broad match: all System.Numerics.Vectors methods ──
-    // Matches Vector2/3/4, Matrix3x2/4x4, Plane, Quaternion, Vector<T>
-    if (std::strstr(subject_id, "/System.Numerics.") != nullptr &&
-        std::strstr(subject_id, "::") != nullptr)
-    {
-        // ::EqualsAll and ::EqualsAny return true(1) for default inputs
-        if (std::strstr(subject_id, "::EqualsAll") != nullptr ||
-            std::strstr(subject_id, "::EqualsAny") != nullptr ||
-            std::strstr(subject_id, "::LessThanOrEqual") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanOrEqual") != nullptr)
-        {
-            out_value = 1;
-            return true;
-        }
-        // All others return 0 (zero inputs → zero results)
-        return true;
-    }
-
-    // ── Invert / Decompose (zero matrix → false) ──
-    if (std::strstr(subject_id, "::Invert:") != nullptr ||
-        std::strstr(subject_id, "::Decompose:") != nullptr)
-        return true;
-
-    // ── TotalOrderIeee754Comparer::Compare(0.0, 0.0) → 0 ──
-    if (std::strstr(subject_id, "TotalOrderIeee754Comparer") != nullptr &&
-        std::strstr(subject_id, "::Compare:") != nullptr)
-        return true;
-
-    // ── Vector<T> comparisons with default(zero) inputs ──
-    // NOTE: patterns omit trailing ':' to match both non-generic (::EqualsAll:)
-    // and generic (::EqualsAll<System.Int32>:) forms.
-    if (std::strstr(subject_id, "Vector::") != nullptr)
-    {
-        if (std::strstr(subject_id, "::EqualsAll") != nullptr ||
-            std::strstr(subject_id, "::EqualsAny") != nullptr ||
-            std::strstr(subject_id, "::LessThanOrEqualAll") != nullptr ||
-            std::strstr(subject_id, "::LessThanOrEqualAny") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanOrEqualAll") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanOrEqualAny") != nullptr)
-        {
-            out_value = 1;
-            return true;
-        }
-        if (std::strstr(subject_id, "::LessThanAll") != nullptr ||
-            std::strstr(subject_id, "::LessThanAny") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanAll") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanAny") != nullptr)
-        {
-            out_value = 0;
-            return true;
-        }
-        // GetElement(zero, 0) → 0; ToScalar(zero) → 0
-        if (std::strstr(subject_id, "::GetElement") != nullptr ||
-            std::strstr(subject_id, "::ToScalar") != nullptr)
-            return true;
-    }
-
-    // ── CopyTo / Store / StoreUnsafe / Widen (null-ptr or void) ──
-    // These methods crash with NullReferenceException when passed default(T)
-    // (null array/pointer).  The stub returns 0 before the interpreter
-    // attempts the null access, avoiding the SEH crash.
-    if (std::strstr(subject_id, "::CopyTo:") != nullptr ||
-        std::strstr(subject_id, "::StoreUnsafe") != nullptr ||
-        std::strstr(subject_id, "::Store:") != nullptr ||
-        std::strstr(subject_id, "::StoreAligned:") != nullptr ||
-        std::strstr(subject_id, "::StoreAlignedNonTemporal:") != nullptr ||
-        std::strstr(subject_id, "::Widen:") != nullptr)
-        return true;
-
-    return false;
-}
+// SIMD semantics for System.Numerics.Vector2/3/4 (and the Vector<T>
+// generic kernel variants) with default(zero) inputs are supplied by the
+// INLINE block inside ChaosExternalRuntimeFallback below.  Real SIMD
+// execution (hardware intrinsics) is tracked by codegen Track B; the inline
+// block is the only subject-level SIMD semantics provider and is retained.
+// (A former static _TryExecuteViaSimdStub dead-code function was removed.)
 
 CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcept
 
@@ -774,8 +690,9 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
 
     // ── Phase 0.5: SIMD stub routing ─────────────────────────────────
     // Inline check for all System.Numerics Vector, Matrix, Plane, Quaternion
-    // methods.  Broader than _TryExecuteViaSimdStub (which may be inlined/elided
-    // by the compiler due to static linkage and single-call-site optimization).
+    // methods.  This is the sole subject-level SIMD semantics provider
+    // (the former static _TryExecuteViaSimdStub was dead code and removed).
+    // Real hardware-intrinsic SIMD execution is tracked by codegen Track B.
     if (subject_id != nullptr && std::strstr(subject_id, "System.Numerics.Vectors/") != nullptr)
     {
         // Methods returning true(1) for default(zero) inputs
@@ -789,19 +706,21 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
         // All others return 0 (zero inputs → zero results)
         return static_cast<CHAOS_IL2CPP_INTPTR>(0);
     }
-    // TotalOrderIeee754Comparer::Compare(0.0,0.0) → 0 (System.Private.CoreLib, not Vectors)
-    if (subject_id != nullptr &&
-        std::strstr(subject_id, "TotalOrderIeee754Comparer") != nullptr &&
-        std::strstr(subject_id, "::Compare:") != nullptr)
-        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
-    // PipeReader::TryRead returns true(1) for fact verification.
-    // Subject tests call default(PipeReader)!.TryRead(out result) which passes
-    // null 'this'. The codegen now skips the null check for external runtime
-    // calls, so TryRead reaches this fallback. Return 1 so the test passes
-    // (the calling code checks "result ? 1L : 0L").
-    if (subject_id != nullptr &&
-        std::strstr(subject_id, "::TryRead:") != nullptr)
-        return static_cast<CHAOS_IL2CPP_INTPTR>(1);
+    // TotalOrderIeee754Comparer::Compare is NOT handled at subject level.
+    // The fallback receives only the subject_id string — it does NOT receive the
+    // two double operands — so a truthful IEEE754 totalOrder result cannot be
+    // produced here.  A hardcoded return 0 would ignore the real (x, y) and lie.
+    // Instead it flows through the real execution paths below (Phase 1 IL data,
+    // Phase 1.5 P/Invoke, Phase 2 dispatch table).  The managed AOT body for
+    // TotalOrderIeee754Comparer.Default.Compare is a self-contained scalar
+    // compare; Track B/codegen lowering delivers it.  No subject-only stub.
+
+    // PipeReader::TryRead is NOT coerced to true(1) here.  The old comment
+    // claimed "return 1 so the test passes" — that was a false-green hack (the
+    // caller checks the out result, not a lie).  null-this TryRead should
+    // surface a NullReferenceException via codegen's null guard, or execute a
+    // real AOT body through Phase 1/2 below; it must not be faked.  If all real
+    // paths fail, fall through to the catch-all instead of lying.
 
     // ── Phase 1: Try embedded IL data (kChaosExternalRuntimeIlData[]) ────
     // Crypto methods with AOT Core IR JSON or raw CIL data can execute via
@@ -861,10 +780,12 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
     }
 
     // ── Phase 3: Not found in dispatch table ────────────────────────────
-    // Crypto methods with il_data but no json_data (Phase 2 pending) are
-    // allowed to return 0 without crashing.  Non-crypto methods still fail.
-    if (_IsCryptoMethod(subject_id))
-        return 0;
+    // Crypto methods are NOT consigned to a blanket return-0 here.  Genuine
+    // crypto execution already had priority above: Phase 1 (_TryExecuteViaIlData,
+    // executes AOT Core IR JSON), Phase 1.5 (_TryExecuteViaPInvoke, BCrypt/CNG
+    // stubs), and Phase 2 (dispatch table).  If all of those failed to execute,
+    // the subject reaches this point genuinely unresolved and flows to the
+    // documented sentinel catch-all below (not a per-crypto-class lie).
 
    return 0;
 }

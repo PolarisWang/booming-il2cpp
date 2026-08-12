@@ -61,6 +61,18 @@ extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_all_##suffix(CHAOS
     auto& rv = *reinterpret_cast<const TCarrier*>(right); \
     auto mask = VectorFixedCompareLessThanOrEqual<scalar, scalar, TCarrier>(lv, rv); \
     return VectorFixedAllLanesNonZero<scalar, TCarrier>(mask) ? 1 : 0; \
+} \
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_equals_all_##suffix(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right) { \
+    auto& lv = *reinterpret_cast<const TCarrier*>(left); \
+    auto& rv = *reinterpret_cast<const TCarrier*>(right); \
+    auto mask = VectorFixedCompareEqual<scalar, scalar, TCarrier>(lv, rv); \
+    return VectorFixedAllLanesNonZero<scalar, TCarrier>(mask) ? 1 : 0; \
+} \
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_equals_any_##suffix(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right) { \
+    auto& lv = *reinterpret_cast<const TCarrier*>(left); \
+    auto& rv = *reinterpret_cast<const TCarrier*>(right); \
+    auto mask = VectorFixedCompareEqual<scalar, scalar, TCarrier>(lv, rv); \
+    return VectorFixedAnyLaneNonZero<TCarrier>(mask) ? 1 : 0; \
 }
 
 // Generate stubs for all Vector<T> element types
@@ -94,6 +106,10 @@ extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_any(CHAOS_IL2CPP_I
     { return chaos_vector_less_than_or_equal_any_i32(left, right); }
 extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right)
     { return chaos_vector_less_than_or_equal_all_i32(left, right); }
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_equals_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right)
+    { return chaos_vector_equals_all_i32(left, right); }
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_equals_any(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right)
+    { return chaos_vector_equals_any_i32(left, right); }
 
 // ── Backward-compatible aliases (existing codegen output uses non-suffixed names) ──
 // The i32 variants serve as the default for old generated code.
@@ -105,3 +121,5 @@ extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_all(CHAOS_IL2CPP_I
 #pragma comment(linker, "/alternatename:chaos_vector_less_than_all=chaos_vector_less_than_all_i32")
 #pragma comment(linker, "/alternatename:chaos_vector_less_than_or_equal_any=chaos_vector_less_than_or_equal_any_i32")
 #pragma comment(linker, "/alternatename:chaos_vector_less_than_or_equal_all=chaos_vector_less_than_or_equal_all_i32")
+#pragma comment(linker, "/alternatename:chaos_vector_equals_all=chaos_vector_equals_all_i32")
+#pragma comment(linker, "/alternatename:chaos_vector_equals_any=chaos_vector_equals_any_i32")

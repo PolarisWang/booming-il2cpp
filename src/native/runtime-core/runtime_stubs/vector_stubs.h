@@ -16,7 +16,9 @@ extern "C" CHAOS_IL2CPP_INT32 chaos_vector_greater_than_or_equal_all_##suffix(CH
 extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_any_##suffix(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right); \
 extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_all_##suffix(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right); \
 extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_any_##suffix(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right); \
-extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_all_##suffix(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_all_##suffix(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right); \
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_equals_all_##suffix(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right); \
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_equals_any_##suffix(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
 
 CHAOS_VECTOR_REDUCTION_DECLS(i32)
 CHAOS_VECTOR_REDUCTION_DECLS(u32)
@@ -40,5 +42,7 @@ extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_any(CHAOS_IL2CPP_INTPTR lef
 extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
 extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_any(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
 extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_equals_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_equals_any(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
 
 #endif
