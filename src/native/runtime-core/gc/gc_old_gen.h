@@ -301,6 +301,15 @@ public:
         return static_cast<int>(page_pool_.size());
     }
 
+    /// True if the reusable page pool is over its capacity cap
+    /// (kMaxPoolSize = 16).  Under provisional (high memory-pressure) mode the
+    /// scheduler forces a collection so a sweep trims the pool back to cap and
+    /// releases retained physical memory instead of letting it sit idle.
+    bool IsPoolOversized() const {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return page_pool_.size() > static_cast<size_t>(kMaxPoolSize);
+    }
+
     // ── Page index (sorted array for O(log n) lookup) ───────────
 
     /// Sorted page array for O(log n) FindPage/IsInOldGen.

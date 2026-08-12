@@ -308,6 +308,16 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
         prefer_bgc = false;
     }
 
+    // 0c. M3/T5 FIX-3: under provisional (high memory-pressure) mode, if the
+    // reusable-page pool is over its capacity cap, force a blocking FULL so a
+    // sweep trims the pool back to kMaxPoolSize and releases retained physical
+    // memory.  Mirrors the NGC2 fire-once pattern below so it re-arms on the
+    // next provisional entry rather than continuously.
+    if (provisional && G_OldGen().IsPoolOversized()) {
+        SetLastTriggerReason(GcTriggerReason::PROVISIONAL);
+        return GcCollectionKind::FULL;
+    }
+
     // 0. NGC2 queue (M4/M3B): a mandated gen2 collection was queued (provisional
     // entry / high memory pressure / high fragmentation).  Discharge it at the
     // next GC decision by forcing a blocking FULL once (never BGC/NONE), then

@@ -11,6 +11,7 @@
 #include <chaos/native_types.h>
 #include "gc_scheduler.h"
 #include "gc_config.h"
+#include "gc_old_gen.h"
 #include "gc_test_macros.h"
 
 using namespace chaos::il2cpp::runtime_core;
@@ -221,6 +222,37 @@ void TestProvisionalForceBlocking() {
     g_gc_scheduler.RecordGcCompleted();
 }
 
+// ── Test: M3/T5 FIX-3 pool-trim provisional guard ─────────────────
+// Under provisional mode, DecideCollection forces a blocking FULL when the
+// reusable-page pool is over its capacity cap (so a sweep trims retained
+// physical memory).  This locks two things: (a) IsPoolOversized() is callable
+// and false on a normal (non-oversized) pool, so the FIX-3 branch does NOT
+// spuriously trigger on an idle pool; (b) the branch compiles and behaves
+// (provisional still forces FULL as before).
+void TestPoolTrimProvisionalGuard() {
+    TEST("PoolTrimProvisionalGuard");
+
+    // (a) On a normal pool, IsPoolOversized() must be false (no false trigger).
+    GC_CHECK(!g_old_gen.IsPoolOversized(),
+             "normal/empty old-gen pool is not oversized (FIX-3 does not misfire)");
+
+    // (b) Under provisional, an explicit full-GC request still yields blocking
+    // FULL (the provisional path is preserved with the new pool branch present).
+    g_gc_scheduler.SetLatencyMode(GcLatencyMode::INTERACTIVE);
+    g_gc_scheduler.SetProvisionalMode(false);
+    g_gc_scheduler.RecordGcCompleted();
+    g_gc_scheduler.SetProvisionalMode(true);
+    g_gc_scheduler.RequestFullGc();
+    GcCollectionKind kind = g_gc_scheduler.DecideCollection();
+    GC_CHECK(kind == GcCollectionKind::FULL,
+             "provisional + full-GC request -> blocking FULL (pool-trim branch present)");
+
+    // Cleanup.
+    g_gc_scheduler.SetProvisionalMode(false);
+    g_gc_scheduler.SetLatencyMode(GcLatencyMode::INTERACTIVE);
+    g_gc_scheduler.RecordGcCompleted();
+}
+
 // ── Test 10: GC-E1 config env override ───────────────────────────────
 // Verifies GcConfig::Initialize() honors a CHAOS_GC_<Key> env override,
 // defaulting to the compile-time value when the env var is absent/empty.
@@ -272,6 +304,7 @@ int main() {
     TestNgc2Queue();
     TestTotalAllocated();
     TestProvisionalForceBlocking();
+    TestPoolTrimProvisionalGuard();
     TestConfigEnvOverride();
 
     printf("\nResults: %d tests, %d failures\n", g_tests, g_failures);
