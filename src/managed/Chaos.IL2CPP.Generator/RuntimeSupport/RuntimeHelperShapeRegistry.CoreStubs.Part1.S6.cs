@@ -19,9 +19,14 @@ public sealed partial class NativeAotLoweringPlanner
                 Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    // Unsafe.As<U>(ref T source) → reinterpret the same address as U.
+                    // Semantically a no-op pointer reinterpretation: the source ref's
+                    // address is passed through unchanged.  A2-1 (cross-platform-unify):
+                    // replaces the previous CHAOS_IL2CPP_FAIL() stub which forced every
+                    // Unsafe.As call to the fallback return-0 (A1 gap: UnsafeTests::As*).
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                        ["    (void)chaos_arg_0;", "    CHAOS_IL2CPP_FAIL();", "    return 0;"]);
+                        ["    return chaos_arg_0;"]);
                     return new GenericShapeResolution(src, symbol,
                         new AotCoreIrAbiSlotArtifact[] { CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType) },
                         CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType), EmptyRawArgumentIndices);
