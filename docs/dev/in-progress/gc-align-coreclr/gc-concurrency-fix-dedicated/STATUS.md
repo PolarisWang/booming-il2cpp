@@ -39,11 +39,18 @@
   - 回归：config/region/loh/parallel_mark/young_collector/scheduler/card_table/diagnostics/sanity/handle 10 测试全 0 failures；构建 exit 0。
   - **已知独立**：`gc_atomic_alloc_test.cpp:108` constexpr 求值失败（pre-existing，该测试文件本体的 C2131，与 M12 无关）。
 
+### ✅ 已结算：M13（M5 P2 工程，commit 待填）
+- **GC 事件集 ETW 覆盖测试**（plan-v5 M13，eventtrace → ETW/EventPipe 测试角度）。
+  - `gc_events_test.cpp` 增 2 测：`TestEtwInitializeShutdown`（provider 幂等 init/shutdown/重 init/double-shutdown 安全）+ `TestEtwFireFunctions`（全部 `GcEtwFire*` 事件——GcStart/End/Young/Full/Oom/Gen1Collect/AllocationTick——无 provider 时安全 no-op、跨 init/shutdown 可调不崩溃）。
+  - include `gc_etw.h`，接入既有事件测试 (`chaos_runtime_core` 已链 `gc_etw.cpp`)。
+  - `gc_events_test` 5 → 7 tests：**7 tests 0 failures**。
+  - 回归：config/handle/scheduler/region 全 0 failures；构建 exit 0。
+
 ### ⬜ 剩余里程碑（跨会话，每里程碑独立验证+测试全绿再进）
 - **M2 主线 B1**：P2-M1(GC-M1 K2c regen，foundation-dll 集成，本会话评估 blocked-on-pipeline) / P2-M3A(Server GC 多堆) / P2-M10(gen>condemned，M9 后)。
 - **M3 主线 B2 三代链**：M9 三代 → M8 plan-gen → M7 demotion（XL，拆 A/B）。
 - **M4 主线 B2 并发**：M5 BGC 分相 → M4 provisional；M3B/M6。
-- **M5 主线 B3 剩余**：M13 事件集 / M15 oom_budget（M11、M12 已完结；M14 ProvStress 降优）。
+- **M5 主线 B3 剩余**：M15 oom_budget（M11、M12、M13 已完结；M14 ProvStress 降优）。
 - 完整规格/步骤/测试/判据见 `plan-v5-01.md`。
 
 ## blocking_questions
