@@ -100,6 +100,22 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         RegisterInstruction ri = {};
         uint32_t op_val = static_cast<uint32_t>(ir.op_code);
 
+        // RegisterVM dispatch covers opcodes 0-99 only.  The codegen "no-check"
+        // / barrier variants (103-106) fault on the Register tier (`op_val > 99`)
+        // while FastExecute implements them.  Rewrite them to their checked ≤99
+        // equivalent here (in the emitted header) so a method carrying
+        // StFldBarrier/LdElemNoChk/StElemNoChk/LdElemANoChk executes identically
+        // on both tiers instead of spuriously faulting.  Classification switches
+        // below still `case ir.op_code` (unchanged) and already group these
+        // variants with their checked counterparts for flags/imm.
+        switch (op_val) {
+            case 103: op_val = 11; break;  // StFldBarrier  → StFld   (interpreter does its own barrier)
+            case 104: op_val = 44; break;  // LdElemNoChk   → LdElem  (adds bounds check, cf. Reg_LdElem)
+            case 105: op_val = 45; break;  // StElemNoChk   → StElem
+            case 106: op_val = 95; break;  // LdElemANoChk  → LdElemA
+            default:  break;
+        }
+
         // Pack header: op_code | dst_reg | src1_reg | src2_reg | flags
         uint64_t header = op_val & 0xFFFF;
         uint8_t src3_reg = 0;

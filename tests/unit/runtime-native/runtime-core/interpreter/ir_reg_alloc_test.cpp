@@ -1022,4 +1022,54 @@ TEST(IR_RegAlloc, RegisterExecuteDivInt32MinMinus1Wraps) {
     EXPECT_EQ(static_cast<int32_t>(frame.ret_val), INT32_MIN);
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// NoChk / barrier opcode rewriting (P1 cross-tier)
+// ═══════════════════════════════════════════════════════════════════════════
+// RegisterVM dispatch covers opcodes 0-99; the codegen no-check/barrier variants
+// (StFldBarrier=103, LdElemNoChk=104, StElemNoChk=105, LdElemANoChk=106) would
+// spuriously fault (`op_val > 99`) while FastExecute implements them.  The
+// allocator must rewrite them to their checked ≤99 equivalent in the emitted
+// header so the Register tier executes the same IL as FastExecute.
+TEST(IR_RegAlloc, RewritesNoChkAndBarrierOpcodes) {
+    // A method using the no-check / barrier variants from the codegen path.
+    IRInstruction sfb;  sfb.op_code = IROpCode::StFldBarrier;
+    IRInstruction le_nc; le_nc.op_code = IROpCode::LdElemNoChk;
+    IRInstruction se_nc; se_nc.op_code = IROpCode::StElemNoChk;
+    IRInstruction lea_nc; lea_nc.op_code = IROpCode::LdElemANoChk;
+    IRInstruction ret;   ret.op_code = IROpCode::Ret;
+
+    auto rm = AllocateRegisters(MakeIRMethod({sfb, le_nc, se_nc, lea_nc, ret}));
+
+    // Every emitted register instruction must carry a ≤99 dispatchable opcode.
+    for (const auto& ins : rm.instructions) {
+        uint32_t op = static_cast<uint32_t>(ins.op_code());
+        EXPECT_LE(op, 99u) << "opcode " << op << " is not dispatchable by RegisterVM";
+    }
+
+    // And the no-check/barrier variants must be mapped to their checked form.
+    // (We can't rely on exact positional expectations since the allocator may
+    // reorder/assign src regs, but at minimum the emitted set contains the
+    // checked equivalents — StFld, LdElem, StElem — and never 103-106.)
+    bool saw_stfld = false, saw_ldelem = false, saw_stelem = false;
+    for (const auto& ins : rm.instructions) {
+        switch (ins.op_code()) {
+            case IROpCode::StFld:    saw_stfld = true;  break;
+            case IROpCode::LdElem:   saw_ldelem = true; break;
+            case IROpCode::StElem:   saw_stelem = true; break;
+            case IROpCode::StFldBarrier:
+            case IROpCode::LdElemNoChk:
+            case IROpCode::StElemNoChk:
+            case IROpCode::LdElemANoChk:
+                ADD_FAILURE() << "no-check/barrier opcode " << static_cast<int>(ins.op_code())
+                              << " leaked into the register method";
+                break;
+            default: break;
+        }
+    }
+    EXPECT_TRUE(saw_stfld)  << "StFldBarrier should be rewritten to StFld";
+    EXPECT_TRUE(saw_ldelem) << "LdElemNoChk/ANoChk should be rewritten to LdElem";
+    EXPECT_TRUE(saw_stelem) << "StElemNoChk should be rewritten to StElem";
+}
+
+
 
