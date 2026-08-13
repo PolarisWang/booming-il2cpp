@@ -5,6 +5,7 @@
 
 #include "instantiation_engine.h" // runtime-core: CachedCallInfo, InterpreterDispatchRaw
 #include <thread_state.h>         // SafepointPoll (for cfg.safepoint_fn assignment)
+#include "generated_code_compat.h" // chaos_managed_exception (Step 2.2 in-band safepoint)
 namespace ri = chaos::il2cpp::runtime_instantiation;
 
 #include "jit_engine.h"         // Compile, JitMethod, CompileConfig
@@ -2794,6 +2795,22 @@ dispatch_next:
 
         uint32_t prev_pc = frame.pc;
         kRegHandlers[op_val](frame, instrs[frame.pc]);
+
+        // In-band safepoint (Step 2.2, scheme B): loop back-edge is a
+        // frame-consistent deterministic point; drain GC suspension for
+        // long-running RegisterExecute loops (else relies on signal hijack).
+        if (frame.pc != prev_pc + 1 && frame.pc < prev_pc) {
+            auto* sp_thr = chaos::il2cpp::runtime_core::threading::tls_this_thread;
+            if (sp_thr != nullptr &&
+                sp_thr->suspend_seq.load(std::memory_order_acquire) != 0) {
+                try {
+                    chaos::il2cpp::runtime_core::threading::SafepointPoll();
+                } catch (const chaos_managed_exception&) {
+                    frame.pc = 9999;
+                    frame.threw_exception = true;
+                }
+            }
+        }
 
         // OSR: Detect hot loop backward branch.
         if (frame.pc != prev_pc + 1 && frame.pc < prev_pc) {

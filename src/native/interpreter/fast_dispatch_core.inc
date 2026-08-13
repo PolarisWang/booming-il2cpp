@@ -25,6 +25,7 @@ namespace vr = chaos::il2cpp::vtable_registry;
 
 #include <eventpipe/ep_exception_bridge.h>
 #include <diagnostics/debugger/dbg_runtime.h>
+#include "generated_code_compat.h"  // chaos_managed_exception (Step 2.2 in-band safepoint)
 
 // Forward declarations from entry_direct.cpp
 namespace chaos::il2cpp::runtime_core {

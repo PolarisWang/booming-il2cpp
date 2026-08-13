@@ -450,6 +450,25 @@ bool FastExecute(FastFrame& frame,
     // ═══════════════════════════════════════════════════════════════════
 
     kOp_Epilogue: {
+        // In-band safepoint (Step 2.2, scheme B): at a loop back-edge the frame is
+        // guaranteed consistent (branch handler completed, tags settled), so this is
+        // a safe, deterministic point to drain pending GC suspension for long-running
+        // interpreted loops — without relying on external signal/APC hijack alone.
+        // Cheap-fast-path first (suspend_seq atomic load); only enter the C++ try/catch
+        // (throwing path) when a safepoint is actually active.
+        if (frame.pc < frame.last_pc) {
+            auto* sp_thr = threading::tls_this_thread;
+            if (sp_thr != nullptr &&
+                CHAOS_IL2CPP_UNLIKELY(sp_thr->suspend_seq.load(std::memory_order_acquire) != 0)) {
+                try {
+                    threading::SafepointPoll();
+                } catch (const chaos_managed_exception&) {
+                    frame.threw_exception = true;
+                    frame.pc = 9999;
+                    goto kOp_Terminate;
+                }
+            }
+        }
         // OSR: detect hot-loop backward branch via frame.last_pc (set by branch handlers).
         if (frame.pc < frame.last_pc) {
             uint32_t threshold = kFastOsrLoopThreshold;
@@ -651,6 +670,22 @@ bool FastExecute(FastFrame& frame,
             default:
                 Handle_Unsupported(frame, instrs[frame.pc]);
                 break;
+        }
+
+        // In-band safepoint (Step 2.2, scheme B) — mirror computed-goto epilogue.
+        if (frame.pc < frame.last_pc) {
+            auto* sp_thr = threading::tls_this_thread;
+            if (sp_thr != nullptr &&
+                CHAOS_IL2CPP_UNLIKELY(sp_thr->suspend_seq.load(std::memory_order_acquire) != 0)) {
+                try {
+                    threading::SafepointPoll();
+                } catch (const chaos_managed_exception&) {
+                    frame.threw_exception = true;
+                    frame.pc = 9999;
+                    frame.last_pc = 0;
+                    AccumulatePgoCounters(frame); frame.CleanupTracked(); return false;
+                }
+            }
         }
 
         if (frame.pc < frame.last_pc) {
