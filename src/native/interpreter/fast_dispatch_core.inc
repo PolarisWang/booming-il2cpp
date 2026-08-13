@@ -10,6 +10,7 @@
 #include "instantiation_engine.h"
 #include "vtable_registry.h"
 #include "reflection_query_model.h"
+#include "register_vm_profiler.h"
 namespace ri = chaos::il2cpp::runtime_instantiation;
 namespace vr = chaos::il2cpp::vtable_registry;
 

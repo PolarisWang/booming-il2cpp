@@ -1047,6 +1047,10 @@ void InterpreterEntryDirect(uintptr_t method_key, void* args_buf, void* ret_buf)
         }
 
         CHAOS_IL2CPP_LOG_DEBUG("diag", "Step-B: before RegisterExecute");
+        // Register-VM per-method cycle profiler (D1 anchor).  Body compiles out
+        // entirely unless CHAOS_IL2CPP_VM_PROFILER_ENABLED=1, so the Step-B hot
+        // path pays nothing in default/optimized builds.
+        ::chaos::il2cpp::interpreter::VmProfileScope stepb_prof(static_cast<uintptr_t>(patch_method->token));
         bool ok = interpreter::RegisterExecute(rf, reg_method->instructions.data(),
                                                static_cast<uint32_t>(reg_method->instructions.size()));
         CHAOS_IL2CPP_LOG_DEBUG_M("diag", "Step-B: RegisterExecute ok=%d", ok);

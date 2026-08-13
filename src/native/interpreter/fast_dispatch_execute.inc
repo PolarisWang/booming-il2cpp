@@ -110,6 +110,12 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
             }
             osr.tracked_cnt = 0;
 
+            // ── Register-VM per-method cycle profiler (D1 anchor) ────────
+            // Scoped only in PROFILE builds (CHAOS_IL2CPP_VM_PROFILER_ENABLED=1);
+            // body compiles out entirely in default/optimized builds, so this
+            // OSR hot path pays nothing unless profiling is explicitly enabled.
+            ::chaos::il2cpp::interpreter::VmProfileScope osr_prof(static_cast<uintptr_t>(pm->token));
+
             bool reg_ok = interpreter::RegisterExecute(
                 rf, rm->instructions.data(),
                 static_cast<uint32_t>(rm->instructions.size()));

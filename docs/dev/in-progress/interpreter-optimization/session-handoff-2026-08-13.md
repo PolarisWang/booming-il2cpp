@@ -57,10 +57,15 @@
 - 问题：非 flat `ArrayStorage.elements` vector resize、`SmallFieldArray`>2 字段 malloc（Box/NewObj）、RegisterVM Call/Calli >8 参数 **malloc/free×2/次**。
 - **低风险**，可独立做。改 call>8 用池 / SmallFieldArray 预分配。测试：分配计数断言。
 
-### 🟢 D1(P3)：解释器 ns/op 锚 + profiler 接线 —— **前置基建，建议最先做**
+### 🟢 D1(P3)：解释器 ns/op 锚 + profiler 接线 —— **代码已落地 + 回归绿，PROFILE 输出验证待跑**
 - 问题：`register_vm_profiler`（`CHAOS_IL2CPP_VM_PROFILER_ENABLED` 默认 0，只 method-replacement 分支）+ `DumpFastExecuteOpcodeHistogram`（PROFILE 宏门控）都无调用者/默认关；唯一完整 ns/op 目标是 `tiering_benchmark`。
-- **已做部分**：上轮 `ae93376a4` 已在 entry Scriban shutdown 加双 profiling hook（宏门控）。
-- **剩余**：把 `VmProfileScope` 接到 RegisterExecute 热路径 + `DumpProfilerToFile` 接线到可执行入口，用 PROFILE build 出真实 opcode 直方图。**所有性能改动（C2/C3）的量化的前置。**
+- **已做部分（上轮 `ae93376a4`）**：entry Scriban shutdown 加双 profiling hook（`DumpFastExecuteOpcodeHistogram` + `DumpProfilerToFile` + `ResetProfiler`，宏门控）。
+- **本轮落地（commit 待打）**：
+  1. `VmProfileScope` 接入 **RegisterExecute 热路径两处**：`entry_direct.cpp` Step-B + `fast_dispatch_execute.inc` OSR promotion（key=patch_method->token）。
+  2. `register_vm_profiler.h`：`CHAOS_IL2CPP_VM_PROFILER_ENABLED` 挂到 **PROFILE tier**（`CHAOS_IL2CPP_CONFIG_PROFILE` 时自动 =1），使单个 profile 构建同时产出 opcode 直方图 + per-method RDTSC/GC 锚；debug/ship tier 仍全编译出（热路径零开销）。
+  3. `fast_dispatch_core.inc` 加 `#include "register_vm_profiler.h"`（preamble，供 execute.inc 解析）。
+- **验证（本轮，debug tier）**：`chaos_interpreter` 编译绿；`test_interpreter_profile` 3/3、`cross_tier` 6/6、`osr_state` 15/15、`ir_reg_alloc` 46/46、`smoke` 1/1；`test_driver --layer unit` **OVERALL OK 2249/2277（known=28）**。
+- **剩余（待 profile 构建专项）**：`--preset profile`（`artifacts/presets/profile`，`CHAOS_IL2CPP_CONFIG_TIER=profile`）构建后跑 `entry --benchmark / tiering_benchmark`，落盘全 tier ns/op 基线 + opcode 直方图。**所有性能改动（C2/C3）的量化的前置。**
 
 ---
 
@@ -84,7 +89,7 @@
 
 ## 五、推荐新 session 执行顺序
 
-1. **D1（最优先，性能量化的前置）**：接 VmProfileScope 到 RegisterExecute + 接线 DumpProfilerToFile，PROFILE build 出 opcode 直方图 → ns/op 锚。
+1. **D1（性能量化前置，代码已落地 + 回归绿）**：VmProfileScope 已接入 RegisterExecute 热路径 + VM_PROFILER 挂 PROFILE tier。**剩余**：profile 构建专项（`--preset profile`）跑 `entry --benchmark` 落盘 ns/op 锚 + opcode 直方图 → 量化 C2/C3。
 2. **C3 + C4（低风险独立）**：QuickJIT 阈值评估 + 热路径堆分配消除，用 D1 锚量化。
 3. **B4（已闭合）**：文档确认 + 统一注释，无代码。
 4. **C2（架构）**：先 4A（扁平存器文件+内联+验证 deopt/OSR reg 恢复），4B 作后续。

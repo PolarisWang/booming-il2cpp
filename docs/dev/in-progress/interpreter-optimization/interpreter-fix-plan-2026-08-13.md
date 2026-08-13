@@ -23,7 +23,7 @@
 | | C2 | RegisterVM 每 op 函数调用+分支存器文件 | P3 | ir_reg_alloc.cpp:2665, ir_reg_alloc.h:108 | tiering_benchmark 前后对比 |
 | | C3 | QuickJIT call count=1 触发 | P3 | tier_manager kQuickJitThreshold=1 | 短生命周期方法升温 |
 | | C4 | 热路径隐藏堆分配 | P3 | ArrayStorage vector / SmallFieldArray>2 / call>8 | 分配计数断言 |
-| **D 基建/测试** | D1 | 解释器 ns/op 锚未落地 | — | tiering_benchmark 唯一 / histogram 默认关 | 接通 PROFILE build + 接线 |
+| **D 基建/测试** | D1 | 解释器 ns/op 锚未落地 | — | tiering_benchmark 唯一 / histogram 默认关 | ✅ 接通 PROFILE build + 接线（VmProfileScope 接入 RegisterExecute + VM_PROFILER 挂 PROFILE tier） |
 | | D2 | 跨层一致性门禁 | — | — | 同 IL 三层行为一致测试 |
 
 ---

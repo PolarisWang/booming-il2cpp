@@ -22,8 +22,17 @@
 namespace chaos::il2cpp::interpreter {
 
 // ── Compile-time toggle ──────────────────────────────────────────────────
+// Explicitly given on the command line.  Falls back to enabled in a PROFILE
+// tier build (CHAS_IL2CPP_CONFIG_PROFILE) so a single profile build yields
+// both the FastExecute opcode histogram and the per-method RDTSC cycle/GC
+// anchor (D1).  Default (debug/ship tiers) is disabled: the VmProfileScope
+// constructor/destructor bodies compile out entirely, so hot paths pay nothing.
 #ifndef CHAOS_IL2CPP_VM_PROFILER_ENABLED
-#define CHAOS_IL2CPP_VM_PROFILER_ENABLED 0
+#  if defined(CHAOS_IL2CPP_CONFIG_PROFILE)
+#    define CHAOS_IL2CPP_VM_PROFILER_ENABLED 1
+#  else
+#    define CHAOS_IL2CPP_VM_PROFILER_ENABLED 0
+#  endif
 #endif
 
 // ── Constants ────────────────────────────────────────────────────────────
