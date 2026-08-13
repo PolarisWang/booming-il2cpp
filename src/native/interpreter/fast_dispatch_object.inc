@@ -289,9 +289,18 @@ static void Handle_LdFtn(FastFrame& frame, const interpreter::IRInstruction& ins
     ++frame.pc;
 }
 
+extern "C" void* CodegenLdVirtFtn(void* obj, uint32_t method_token) noexcept;
+
 static void Handle_LdVirtFtn(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
-    // Complex — needs virtual dispatch resolution. Fallback.
-    Handle_Unsupported(frame, instr);
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdVirtFtn");
+    if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
+    // ldvirtftn: pop `this`, resolve the virtual slot method pointer for this
+    // receiver (Step 4.2), push the function pointer as ObjectRef.
+    void* obj = reinterpret_cast<void*>(frame.stack[--frame.sp]);
+    uint32_t method_token = static_cast<uint32_t>(instr.field_offset);
+    void* func_ptr = CodegenLdVirtFtn(obj, method_token);
+    frame.PushObj_NC(func_ptr);
+    ++frame.pc;
 }
 
 static void Handle_LdArgA(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
