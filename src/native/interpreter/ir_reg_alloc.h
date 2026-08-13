@@ -17,6 +17,7 @@
 // model changes: instead of implicit evaluation stack, each instruction
 // explicitly names its dst/src registers.
 
+#include <cstddef>
 #include <cstdint>
 #include <cstring>
 #include "interpreter_vm.h" // for IROpCode, ValueTag, SEHClause, etc.
@@ -317,6 +318,23 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept;
 // Similar to FastExecute but reads/writes RegisterFile directly.
 // Returns true on normal completion, false on unsupported opcode fallback.
 bool RegisterExecute(RegisterFrame& frame, const RegisterInstruction* instrs, uint32_t instr_count) noexcept;
+
+// ── Coalesced >8 call-arg / call-tag buffer layout (C4) ──────────────────
+// A call with more than 8 arguments currently needs a dynamic buffer for the
+// raw uint64 arg values and their uint8 tags.  To halve the per-call
+// malloc+free count, both arrays share one allocation: uint64 args[ac] occupy
+// [0, 8*ac) and the uint8 tags[ac] start at byte (8*ac).  This header-only
+// layout helper is the single source of truth so Reg_Call/Reg_Calli and their
+// unit tests agree on the exact arithmetic.
+struct CoalescedCallArgsLayout {
+    size_t tag_offset = 0; // byte offset of the uint8 tags array
+    size_t total_size = 0; // bytes of the single coalesced block
+};
+inline CoalescedCallArgsLayout CoalescedCallArgs(uint32_t ac) noexcept {
+    const size_t arg_bytes = sizeof(uint64_t) * static_cast<size_t>(ac);
+    return { arg_bytes, arg_bytes + sizeof(uint8_t) * static_cast<size_t>(ac) };
+}
+
 
 // Check if RegisterExecute can handle this method.
 // SEH-containing methods are accepted too — RegisterExecute executes flat

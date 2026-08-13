@@ -1952,17 +1952,18 @@ static void Reg_Call(RegisterFrame& frame, const RegisterInstruction& instr) noe
 
     uint64_t raw_args_stack[8];
     uint8_t raw_tags_stack[8];
-    auto* raw_args = (ac <= 8) ? raw_args_stack : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
-    auto* raw_tags = (ac <= 8) ? raw_tags_stack : static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
-
-    if (raw_args == nullptr || raw_tags == nullptr) {
-        if (ac > 8) {
-            CHAOS_IL2CPP_FREE(raw_args);
-            CHAOS_IL2CPP_FREE(raw_tags);
-        }
+    // Coalesced single block for >8 args: uint64 args[] followed by uint8 tags[]
+    // (layout from CoalescedCallArgs).  Halves the malloc+free count per call
+    // vs the prior two separate allocations (C4).  Stack arrays used when <=8.
+    const auto cc_layout = CoalescedCallArgs(ac);
+    uint64_t* raw_args = (ac <= 8) ? raw_args_stack
+        : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(cc_layout.total_size));
+    if (ac > 8 && raw_args == nullptr) {
         ++frame.pc;
         return;
     }
+    uint8_t* raw_tags = (ac <= 8) ? raw_tags_stack
+        : reinterpret_cast<uint8_t*>(raw_args) + cc_layout.tag_offset;
 
     for (uint32_t i = 0; i < ac; ++i) {
         raw_args[i] = frame.regs.reg(base + i);
@@ -1983,7 +1984,6 @@ static void Reg_Call(RegisterFrame& frame, const RegisterInstruction& instr) noe
 
     if (ac > 8) {
         CHAOS_IL2CPP_FREE(raw_args);
-        CHAOS_IL2CPP_FREE(raw_tags);
     }
 
     if (dret.threw_exception) {
@@ -2021,16 +2021,18 @@ static void Reg_Calli(RegisterFrame& frame, const RegisterInstruction& instr) no
     uint32_t base = instr.src1_reg();
     uint64_t raw_args_stack[8];
     uint8_t raw_tags_stack[8];
-    auto* raw_args = (ac <= 8) ? raw_args_stack : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
-    auto* raw_tags = (ac <= 8) ? raw_tags_stack : static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
-    if (raw_args == nullptr || raw_tags == nullptr) {
-        if (ac > 8) {
-            CHAOS_IL2CPP_FREE(raw_args);
-            CHAOS_IL2CPP_FREE(raw_tags);
-        }
+    // Coalesced single block for >8 args: uint64 args[] followed by uint8 tags[]
+    // (layout from CoalescedCallArgs).  Halves the malloc+free count per call
+    // vs the prior two separate allocations (C4).  Stack arrays used when <=8.
+    const auto cc_layout = CoalescedCallArgs(ac);
+    uint64_t* raw_args = (ac <= 8) ? raw_args_stack
+        : static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(cc_layout.total_size));
+    if (ac > 8 && raw_args == nullptr) {
         ++frame.pc;
         return;
     }
+    uint8_t* raw_tags = (ac <= 8) ? raw_tags_stack
+        : reinterpret_cast<uint8_t*>(raw_args) + cc_layout.tag_offset;
 
     for (uint32_t i = 0; i < ac; ++i) {
         raw_args[i] = frame.regs.reg(base + i);
@@ -2049,7 +2051,6 @@ static void Reg_Calli(RegisterFrame& frame, const RegisterInstruction& instr) no
 
     if (ac > 8) {
         CHAOS_IL2CPP_FREE(raw_args);
-        CHAOS_IL2CPP_FREE(raw_tags);
     }
     if (dret.threw_exception) {
         frame.threw_exception = true;

@@ -33,6 +33,7 @@ using chaos::il2cpp::interpreter::kRegHasSrc2;
 using chaos::il2cpp::interpreter::kRegHasImm;
 using chaos::il2cpp::interpreter::kRegIsBranch;
 using chaos::il2cpp::interpreter::kRegIsStore;
+using chaos::il2cpp::interpreter::CoalescedCallArgs;
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Helpers
@@ -921,3 +922,41 @@ TEST(IR_RegAlloc, StackMapMaxRegsBound) {
         }
     }
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// C4: coalesced >8 call-arg buffer layout
+// ═══════════════════════════════════════════════════════════════════════════
+// A >8-arg Call/Calli used to pay two separate CHAOS_IL2CPP_MALLOC + two FREE
+// per call (one uint64[] for args, one uint8[] for tags).  C4 coalesces these
+// into a single block: uint64 args[ac] at [0, 8*ac), uint8 tags[ac] starting at
+// byte 8*ac — halving the malloc+free count.  Pin the exact layout so the
+// handlers (Reg_Call/Reg_Calli) and this test agree: disjoint, in-bounds,
+// alignment-safe regions and a single matching owner for the block head.
+TEST(IR_RegAlloc, CoalescedCallArgsLayout) {
+    EXPECT_EQ(CoalescedCallArgs(0).tag_offset, sizeof(uint64_t) * 0);
+    EXPECT_EQ(CoalescedCallArgs(0).total_size, sizeof(uint64_t) * 0 + sizeof(uint8_t) * 0);
+
+    // Boundary: exactly 8 args is still the stack path; layout must stay valid.
+    EXPECT_EQ(CoalescedCallArgs(8).tag_offset, sizeof(uint64_t) * 8);
+    EXPECT_EQ(CoalescedCallArgs(8).total_size, sizeof(uint64_t) * 8 + sizeof(uint8_t) * 8);
+
+    // The >8 path that pays the heap allocation.  Pick 10 (and a prime, 13) to
+    // span more than one 8-arg boundary.
+    for (uint32_t ac : {9u, 10u, 13u, 64u}) {
+        const auto l = CoalescedCallArgs(ac);
+        const size_t arg_bytes = sizeof(uint64_t) * static_cast<size_t>(ac);
+        const size_t tag_bytes = sizeof(uint8_t) * static_cast<size_t>(ac);
+
+        EXPECT_EQ(l.tag_offset, arg_bytes) << "tags must start right after args for ac=" << ac;
+        EXPECT_EQ(l.total_size, arg_bytes + tag_bytes) << "total block size for ac=" << ac;
+
+        // Disjoint & in-bounds: args region fully before tags, tags fully inside block.
+        EXPECT_GE(l.tag_offset, arg_bytes);
+        EXPECT_LE(l.tag_offset + tag_bytes, l.total_size);
+
+        // Alignment: args (uint64*) needs 8-byte alignment; tag_offset (8*ac) is a
+        // multiple of 8, so tags stay 8-aligned too — safe to reinterpret the head.
+        EXPECT_EQ(l.tag_offset % alignof(uint64_t), 0u);
+    }
+}
+
