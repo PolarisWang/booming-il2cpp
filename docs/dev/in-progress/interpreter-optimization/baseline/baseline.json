@@ -1,0 +1,936 @@
+{
+  "meta": {
+    "created": "2026-08-13",
+    "commit": "46a417b23",
+    "purpose": "解释器优化 Phase 0 基线 — 后续 8 项(P0-P3)逐一 diff 的锚",
+    "note": "性能基线为 entry.exe --benchmark-all(iter=1000) 的 numerics subject 入口耗时, 主要反映 AOT keep-native 直调与解释器混合; 纯解释器专属性能场景缺失(entry.exe --microbench 是 stub) — 见 known_gaps"
+  },
+  "correctness": {
+    "unit_suite": {
+      "status": "OVERALL: OK",
+      "pass": 2248,
+      "known_fail": 29,
+      "total": 2277
+    },
+    "unit_driver": {
+      "pass": 26,
+      "known": 0
+    },
+    "unit_snapshot": {
+      "pass": 108,
+      "known": 0
+    },
+    "numerics_fact": {
+      "aot": "180/180",
+      "jit": "180/180"
+    }
+  },
+  "known_gaps": {
+    "interpreter_specific_perf_scenario": "缺失 — entry.exe --microbench 是 stub; 若要量化每项解释器改动(T1/T3 ns/op)需先补解释器专属微基准",
+    "gc_bytes_per_histogram": "register_vm_profiler 有 per-method RDTSC/GC bytes 计数器但未归一化到 benchmark-all 输出"
+  },
+  "perf_ops_per_sec_1000_iters": {
+    "119": {
+      "ops_per_sec": 400000000,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.003
+    },
+    "121": {
+      "ops_per_sec": 400000000,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.003
+    },
+    "123": {
+      "ops_per_sec": 357142857,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.003
+    },
+    "125": {
+      "ops_per_sec": 357142857,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.003
+    },
+    "127": {
+      "ops_per_sec": 357142857,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.003
+    },
+    "129": {
+      "ops_per_sec": 357142857,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.003
+    },
+    "161": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "163": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "165": {
+      "ops_per_sec": 277777778,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "135": {
+      "ops_per_sec": 270270270,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "131": {
+      "ops_per_sec": 277777778,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "133": {
+      "ops_per_sec": 277777778,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "137": {
+      "ops_per_sec": 270270270,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "139": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "141": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "167": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "169": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "171": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "173": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "175": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "177": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "143": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "146": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "149": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "152": {
+      "ops_per_sec": 277777778,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "155": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "158": {
+      "ops_per_sec": 263157895,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "107": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "110": {
+      "ops_per_sec": 285714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "113": {
+      "ops_per_sec": 277777778,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "116": {
+      "ops_per_sec": 277777778,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "189": {
+      "ops_per_sec": 37037037,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.027
+    },
+    "185": {
+      "ops_per_sec": 1153004,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.867
+    },
+    "186": {
+      "ops_per_sec": 1109016,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.902
+    },
+    "197": {
+      "ops_per_sec": 27472527,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.036
+    },
+    "202": {
+      "ops_per_sec": 35714286,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.028
+    },
+    "198": {
+      "ops_per_sec": 1117318,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.895
+    },
+    "199": {
+      "ops_per_sec": 1112223,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.899
+    },
+    "206": {
+      "ops_per_sec": 1930875,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.518
+    },
+    "207": {
+      "ops_per_sec": 1982161,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.504
+    },
+    "211": {
+      "ops_per_sec": 1087903,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.919
+    },
+    "212": {
+      "ops_per_sec": 1081900,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.924
+    },
+    "217": {
+      "ops_per_sec": 1799856,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.556
+    },
+    "431": {
+      "ops_per_sec": 28409091,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "433": {
+      "ops_per_sec": 26809651,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.037
+    },
+    "434": {
+      "ops_per_sec": 28409091,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "436": {
+      "ops_per_sec": 28409091,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "519": {
+      "ops_per_sec": 26954178,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.037
+    },
+    "521": {
+      "ops_per_sec": 28490028,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "522": {
+      "ops_per_sec": 133333333,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.007
+    },
+    "523": {
+      "ops_per_sec": 92592593,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "533": {
+      "ops_per_sec": 28409091,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "535": {
+      "ops_per_sec": 192307692,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.005
+    },
+    "536": {
+      "ops_per_sec": 91743119,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "537": {
+      "ops_per_sec": 133333333,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.007
+    },
+    "538": {
+      "ops_per_sec": 92592593,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "539": {
+      "ops_per_sec": 28490028,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "541": {
+      "ops_per_sec": 28490028,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "542": {
+      "ops_per_sec": 26809651,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.037
+    },
+    "544": {
+      "ops_per_sec": 28409091,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "545": {
+      "ops_per_sec": 188679245,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.005
+    },
+    "546": {
+      "ops_per_sec": 92592593,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "547": {
+      "ops_per_sec": 133333333,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.007
+    },
+    "548": {
+      "ops_per_sec": 91743119,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "549": {
+      "ops_per_sec": 28409091,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "551": {
+      "ops_per_sec": 28328612,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "552": {
+      "ops_per_sec": 28490028,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "556": {
+      "ops_per_sec": 28409091,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "560": {
+      "ops_per_sec": 26737968,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.037
+    },
+    "564": {
+      "ops_per_sec": 28248588,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.035
+    },
+    "566": {
+      "ops_per_sec": 26666667,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.037
+    },
+    "584": {
+      "ops_per_sec": 30395137,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "588": {
+      "ops_per_sec": 23809524,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.042
+    },
+    "589": {
+      "ops_per_sec": 23809524,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.042
+    },
+    "590": {
+      "ops_per_sec": 22271715,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.045
+    },
+    "591": {
+      "ops_per_sec": 23866348,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.042
+    },
+    "592": {
+      "ops_per_sec": 23752969,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.042
+    },
+    "593": {
+      "ops_per_sec": 23809524,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.042
+    },
+    "594": {
+      "ops_per_sec": 23809524,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.042
+    },
+    "524": {
+      "ops_per_sec": 30487805,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "527": {
+      "ops_per_sec": 1919754,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.521
+    },
+    "553": {
+      "ops_per_sec": 32786885,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.03
+    },
+    "557": {
+      "ops_per_sec": 30487805,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "561": {
+      "ops_per_sec": 30487805,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "569": {
+      "ops_per_sec": 30303030,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "571": {
+      "ops_per_sec": 29850746,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.034
+    },
+    "585": {
+      "ops_per_sec": 1960400,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.51
+    },
+    "525": {
+      "ops_per_sec": 29498525,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.034
+    },
+    "529": {
+      "ops_per_sec": 1953888,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.512
+    },
+    "554": {
+      "ops_per_sec": 32679739,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "558": {
+      "ops_per_sec": 30487805,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "562": {
+      "ops_per_sec": 30487805,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "574": {
+      "ops_per_sec": 30030030,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "576": {
+      "ops_per_sec": 29850746,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.034
+    },
+    "586": {
+      "ops_per_sec": 1914975,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.522
+    },
+    "526": {
+      "ops_per_sec": 30395137,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "531": {
+      "ops_per_sec": 1967342,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.508
+    },
+    "555": {
+      "ops_per_sec": 18416206,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.054
+    },
+    "559": {
+      "ops_per_sec": 30487805,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "563": {
+      "ops_per_sec": 30487805,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "579": {
+      "ops_per_sec": 30211480,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "581": {
+      "ops_per_sec": 30030030,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "587": {
+      "ops_per_sec": 1922707,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.52
+    },
+    "427": {
+      "ops_per_sec": 39062500,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.026
+    },
+    "221": {
+      "ops_per_sec": 32154341,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "223": {
+      "ops_per_sec": 32679739,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "224": {
+      "ops_per_sec": 32258065,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "226": {
+      "ops_per_sec": 32467532,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "264": {
+      "ops_per_sec": 32258065,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "266": {
+      "ops_per_sec": 32573290,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "267": {
+      "ops_per_sec": 1868460,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.535
+    },
+    "268": {
+      "ops_per_sec": 232558140,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "269": {
+      "ops_per_sec": 222222222,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "270": {
+      "ops_per_sec": 232558140,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "271": {
+      "ops_per_sec": 92592593,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "272": {
+      "ops_per_sec": 222222222,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "273": {
+      "ops_per_sec": 92592593,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "274": {
+      "ops_per_sec": 32258065,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "276": {
+      "ops_per_sec": 32362460,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "277": {
+      "ops_per_sec": 30303030,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "279": {
+      "ops_per_sec": 30581040,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "282": {
+      "ops_per_sec": 232558140,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "283": {
+      "ops_per_sec": 92592593,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "284": {
+      "ops_per_sec": 222222222,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "285": {
+      "ops_per_sec": 92592593,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "286": {
+      "ops_per_sec": 32258065,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "288": {
+      "ops_per_sec": 32679739,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "261": {
+      "ops_per_sec": 1707067,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.586
+    },
+    "280": {
+      "ops_per_sec": 1015435,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.985
+    },
+    "281": {
+      "ops_per_sec": 1015847,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.984
+    },
+    "290": {
+      "ops_per_sec": 32258065,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "292": {
+      "ops_per_sec": 32467532,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "293": {
+      "ops_per_sec": 32258065,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "295": {
+      "ops_per_sec": 32467532,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "332": {
+      "ops_per_sec": 32154341,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "334": {
+      "ops_per_sec": 32573290,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "335": {
+      "ops_per_sec": 222222222,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "336": {
+      "ops_per_sec": 232558140,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "337": {
+      "ops_per_sec": 222222222,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "338": {
+      "ops_per_sec": 91743119,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "339": {
+      "ops_per_sec": 232558140,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "340": {
+      "ops_per_sec": 92592593,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "341": {
+      "ops_per_sec": 32362460,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "343": {
+      "ops_per_sec": 32679739,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "344": {
+      "ops_per_sec": 30303030,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "346": {
+      "ops_per_sec": 30487805,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "349": {
+      "ops_per_sec": 227272727,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "350": {
+      "ops_per_sec": 93457944,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "351": {
+      "ops_per_sec": 232558140,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.004
+    },
+    "352": {
+      "ops_per_sec": 92592593,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "353": {
+      "ops_per_sec": 32258065,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "355": {
+      "ops_per_sec": 32679739,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "329": {
+      "ops_per_sec": 1725626,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.58
+    },
+    "347": {
+      "ops_per_sec": 923788,
+      "allocated_bytes": 0,
+      "elapsed_ms": 1.083
+    },
+    "348": {
+      "ops_per_sec": 914411,
+      "allocated_bytes": 0,
+      "elapsed_ms": 1.094
+    },
+    "357": {
+      "ops_per_sec": 32051282,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "359": {
+      "ops_per_sec": 32362460,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "360": {
+      "ops_per_sec": 31746032,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.032
+    },
+    "362": {
+      "ops_per_sec": 32362460,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "399": {
+      "ops_per_sec": 32051282,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "401": {
+      "ops_per_sec": 32573290,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "402": {
+      "ops_per_sec": 123456790,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.008
+    },
+    "403": {
+      "ops_per_sec": 136986301,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.007
+    },
+    "404": {
+      "ops_per_sec": 138888889,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.007
+    },
+    "405": {
+      "ops_per_sec": 92592593,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "406": {
+      "ops_per_sec": 123456790,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.008
+    },
+    "407": {
+      "ops_per_sec": 92592593,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "408": {
+      "ops_per_sec": 32362460,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "410": {
+      "ops_per_sec": 32573290,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "411": {
+      "ops_per_sec": 30120482,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "413": {
+      "ops_per_sec": 30395137,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.033
+    },
+    "416": {
+      "ops_per_sec": 140845070,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.007
+    },
+    "417": {
+      "ops_per_sec": 92592593,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "418": {
+      "ops_per_sec": 125000000,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.008
+    },
+    "419": {
+      "ops_per_sec": 91743119,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.011
+    },
+    "420": {
+      "ops_per_sec": 32258065,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "422": {
+      "ops_per_sec": 32467532,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.031
+    },
+    "396": {
+      "ops_per_sec": 1532332,
+      "allocated_bytes": 0,
+      "elapsed_ms": 0.653
+    },
+    "414": {
+      "ops_per_sec": 873668,
+      "allocated_bytes": 0,
+      "elapsed_ms": 1.145
+    },
+    "415": {
+      "ops_per_sec": 873591,
+      "allocated_bytes": 0,
+      "elapsed_ms": 1.145
+    },
+    "_count": 180,
+    "_nonzero_ops": 180
+  }
+}
