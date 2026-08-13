@@ -122,8 +122,16 @@ TEST_F(ComRcwStressTest, FindOrCreateRcwNullDoesNotCrash) {
 }
 
 #else
-// On Win32, skip stress tests that need real COM pointers.
+// On Win32, the RCW stress tests here are skipped with justification, NOT
+// silently: they use ARBITRARY-INTEGER table keys (0x10000000+t*0x100000+i,
+// 0x20000000+i, 0xDEADBEEF) as pseudo "COM object addresses".  That works on
+// non-Win32 because PalComAddRef/Release are no-ops there.  On Win32 those
+// dereference the pointer's vtable (void*** → slot 1/2), so each key must be a
+// REAL object with a vtable — the tests issue thousands of distinct keys, an
+// impractical fake-object pool.  (The unit-test suite com_rcw_test.cpp uses a
+// small bounded set and IS enabled on Win32 via a self-contained FakeIUnknown;
+// these stress tests' unbounded key space is the legit exception.)
 TEST(ComRcwStressTest, SkippedOnWin32) {
-    GTEST_SKIP() << "RCW stress tests skipped on Win32 (needs real COM pointers)";
+    GTEST_SKIP() << "RCW stress tests skipped on Win32 (need real COM pointers; arbitrary-integer keys not dereferable as vtables)";
 }
 #endif  // !_WIN32

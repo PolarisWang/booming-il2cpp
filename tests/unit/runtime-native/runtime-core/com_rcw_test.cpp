@@ -33,6 +33,32 @@ protected:
     }
 };
 
+// ════════════════════════════════════════════════════════════════════════════
+// Fake COM IUnknown — lets the Win32 PalComAddRef/Release/QueryInterface (which
+// deref `unknown` as a vtable: [0]=QI, [1]=AddRef, [2]=Release) run in unit
+// tests WITHOUT a registered real COM class.  A self-contained 3-slot vtable of
+// stubs over a real refcount int; passing THIS as the RCW's IUnknown exercises
+// the real Win32 COM ABI path instead of the previous GTEST_SKIP on _WIN32.
+// ════════════════════════════════════════════════════════════════════════════
+struct FakeIUnknown {
+    const void* const* vtbl;   // IUnknown layout: vtbl pointer first
+    int32_t refcount;
+};
+int32_t FakeIUnknownQueryInterface(void*, const void*, void**) { return /*E_NOINTERFACE*/ 0x80004002; }
+uint32_t FakeIUnknownAddRef(void* self) noexcept { return static_cast<uint32_t>(++static_cast<FakeIUnknown*>(self)->refcount); }
+uint32_t FakeIUnknownRelease(void* self) noexcept {
+    int32_t r = --static_cast<FakeIUnknown*>(self)->refcount;
+    return r <= 0 ? 0u : static_cast<uint32_t>(r);
+}
+namespace {
+inline const void* const kFakeIUnknownVtbl[3] = {
+    reinterpret_cast<const void*>(&FakeIUnknownQueryInterface),
+    reinterpret_cast<const void*>(&FakeIUnknownAddRef),
+    reinterpret_cast<const void*>(&FakeIUnknownRelease),
+};
+inline FakeIUnknown MakeFakeIUnknown() { return FakeIUnknown{kFakeIUnknownVtbl, 1}; }
+}
+
 TEST_F(ComRcwTest, IsComRcwHandleNull) {
     EXPECT_FALSE(IsComRcwHandle(0));
 }
@@ -65,24 +91,25 @@ TEST_F(ComRcwTest, FindOrCreateRcwNull) {
 }
 
 TEST_F(ComRcwTest, FindOrCreateRcwValid) {
-#if defined(_WIN32)
-    // On Win32, FindOrCreateRcw calls AddRef on the COM pointer, which
-    // requires a real COM object. Skip this test without real COM.
-    GTEST_SKIP() << "Skipping on Win32 (needs real COM pointer)";
-#else
-    // On non-Win32, FindOrCreateRcw still allocates a ComRcwNative
-    // but skips AddRef (no-op). The RCW should have correct magic.
-    void* fake_com_ptr = reinterpret_cast<void*>(static_cast<uintptr_t>(0x1234));
-    auto* rcw = FindOrCreateRcw(fake_com_ptr);
+    // A real (fake-but-valid) IUnknown: FindOrCreateRcw calls AddRef on the
+    // COM pointer on ALL platforms via PalComAddRef, which needs a dereferable
+    // vtable — FakeIUnknown provides one (previously skipped on Win32).
+    FakeIUnknown fake = MakeFakeIUnknown();
+    auto* rcw = FindOrCreateRcw(&fake);
     ASSERT_NE(rcw, nullptr);
     EXPECT_EQ(rcw->magic, kComRcwMagic);
-    EXPECT_EQ(rcw->identity_unknown, fake_com_ptr);
+    EXPECT_EQ(rcw->identity_unknown, static_cast<void*>(&fake));
     EXPECT_EQ(rcw->wrapper_refcount, 1u);
+#if defined(_WIN32)
+    // Only Win32 PalComAddRef actually increments the COM object's refcount
+    // (vtable call); posix is a no-op, so assert only where it is real.
+    EXPECT_EQ(fake.refcount, 2);  // initial 1 + PalComAddRef
+#endif
 
-    // Cleanup: set refcount to 1 and release
+    // Cleanup: set refcount to 1 and release (Release calls PalComRelease).
     rcw->wrapper_refcount = 1;
     ReleaseRcw(rcw);
-#endif
+    SUCCEED();
 }
 
 TEST_F(ComRcwTest, ReleaseRcwNull) {
@@ -92,25 +119,19 @@ TEST_F(ComRcwTest, ReleaseRcwNull) {
 }
 
 TEST_F(ComRcwTest, ReleaseRcwRefcountNotZero) {
-#if defined(_WIN32)
-    GTEST_SKIP() << "Skipping on Win32 (needs real COM pointer)";
-#else
-    // Releasing once on a refcount=2 RCW should decrement but not free.
-    void* fake_com_ptr = reinterpret_cast<void*>(static_cast<uintptr_t>(0x5678));
-    auto* rcw = FindOrCreateRcw(fake_com_ptr);
+    FakeIUnknown fake = MakeFakeIUnknown();
+    auto* rcw = FindOrCreateRcw(&fake);
     ASSERT_NE(rcw, nullptr);
 
-    // Call ReleaseRcw — wrapper_refcount goes from 1 to 0, should free.
-    // But we want to test non-zero case, so increment first.
-    // Actually, we can just test that calling ReleaseRcw twice frees it.
+    // Calling ReleaseRcw on wrapper_refcount=2 should decrement, not free.
     rcw->wrapper_refcount = 2;
-    ReleaseRcw(rcw);  // 2 -> 1, not freed
+    ReleaseRcw(rcw);  // 2 -> 1, not freed (RCW still in cache table)
     SUCCEED();
 
-    // Release the second ref
+    // Release the second ref: 1 -> 0, freed and erased from table.
     rcw->wrapper_refcount = 1;
     ReleaseRcw(rcw);  // 1 -> 0, freed
-#endif
+    SUCCEED();
 }
 
 TEST_F(ComRcwTest, QueryInterfaceCachedNullRcw) {
@@ -128,29 +149,25 @@ TEST_F(ComRcwTest, QueryInterfaceCachedNullIid) {
 }
 
 TEST_F(ComRcwTest, QueryInterfaceCachedEmptyCache) {
-#if defined(_WIN32)
-    GTEST_SKIP() << "Skipping on Win32 (needs real COM pointer)";
-#else
-    // RCW with cache_count=0 should fall through to QueryInterface.
-    // On non-Win32, this returns nullptr (no-op).
+    // RCW with cache_count=0 should fall through to QueryInterface on the
+    // identity IUnknown.  FakeIUnknown gives that vtable a dereferable QI stub
+    // (no cache hit → returns the stub QI result, nullptr for an E_NOINTERFACE).
+    FakeIUnknown fake = MakeFakeIUnknown();
     auto* rcw = CreateMinimalRcwBuffer();
     ASSERT_NE(rcw, nullptr);
     rcw->cache_count = 0;
+    rcw->identity_unknown = &fake;
 
     const CHAOS_IL2CPP_UINT8 iid[16] = {0};
     EXPECT_EQ(QueryInterfaceCached(rcw, iid), nullptr);
 
     std::free(rcw);
-#endif
 }
 
 TEST_F(ComRcwTest, IsComRcwHandleAfterFindOrCreate) {
-#if defined(_WIN32)
-    GTEST_SKIP() << "Skipping on Win32 (needs real COM pointer)";
-#else
-    // Verify that a real RCW from FindOrCreateRcw passes IsComRcwHandle.
-    void* fake_com_ptr = reinterpret_cast<void*>(static_cast<uintptr_t>(0x9ABC));
-    auto* rcw = FindOrCreateRcw(fake_com_ptr);
+    // A real RCW from FindOrCreateRcw must pass IsComRcwHandle.
+    FakeIUnknown fake = MakeFakeIUnknown();
+    auto* rcw = FindOrCreateRcw(&fake);
     ASSERT_NE(rcw, nullptr);
 
     EXPECT_TRUE(IsComRcwHandle(
@@ -158,31 +175,35 @@ TEST_F(ComRcwTest, IsComRcwHandleAfterFindOrCreate) {
             reinterpret_cast<uintptr_t>(rcw))));
 
     ReleaseRcw(rcw);  // refcount was 1, now 0 — freed
-#endif
+    SUCCEED();
 }
 
 TEST_F(ComRcwTest, FindOrCreateRcwReturnsSameRcw) {
-#if defined(_WIN32)
-    GTEST_SKIP() << "Skipping on Win32 (needs real COM pointer)";
-#else
     // FindOrCreateRcw for the same IUnknown pointer should return the
     // same RCW (cached in global table) and increment refcount.
-    void* fake_com_ptr = reinterpret_cast<void*>(static_cast<uintptr_t>(0xDEF0));
-    auto* rcw1 = FindOrCreateRcw(fake_com_ptr);
+    FakeIUnknown fake = MakeFakeIUnknown();
+    // outer fake owns the low refcount the table keys on; AddRef bumps it.
+    auto* rcw1 = FindOrCreateRcw(&fake);
     ASSERT_NE(rcw1, nullptr);
     EXPECT_EQ(rcw1->wrapper_refcount, 1u);
 
-    auto* rcw2 = FindOrCreateRcw(fake_com_ptr);
+    auto* rcw2 = FindOrCreateRcw(&fake);
     ASSERT_NE(rcw2, nullptr);
     EXPECT_EQ(rcw1, rcw2);             // same pointer
     EXPECT_EQ(rcw2->wrapper_refcount, 2u);  // incremented
+#if defined(_WIN32)
+    // Only the FIRST FindOrCreate (cache miss) calls PalComAddRef on the COM
+    // object (posix is a no-op); cache hits bump the RCW count but not the COM
+    // refcount, so Win32 sees one AddRef → 1 + 1 = 2.
+    EXPECT_EQ(fake.refcount, 2);       // one PalComAddRef
+#endif
 
     // Release both refs
     rcw2->wrapper_refcount = 2;
     ReleaseRcw(rcw2);  // 2 -> 1
     rcw2->wrapper_refcount = 1;
     ReleaseRcw(rcw2);  // 1 -> 0, freed
-#endif
+    SUCCEED();
 }
 
 TEST_F(ComRcwTest, ReleaseRcwRefcountAlreadyZero) {
@@ -209,29 +230,26 @@ TEST_F(ComRcwTest, IsComRcwHandleRandomPointer) {
 // ── QueryInterfaceCached cache hit / full-cache paths ────────────────────
 
 TEST_F(ComRcwTest, QueryInterfaceCachedCacheFullNoAdd) {
-#if defined(_WIN32)
-    GTEST_SKIP() << "Skipping on Win32 (needs real COM pointer)";
-#else
     // Use FindOrCreateRcw to get a properly allocated RCW, then manually
-    // fill the cache to capacity. This avoids malloc-only struct issues.
-    void* fake_com_ptr = reinterpret_cast<void*>(static_cast<uintptr_t>(0xCAFE));
-    auto* rcw = FindOrCreateRcw(fake_com_ptr);
+    // fill the cache to capacity.  FakeIUnknown gives release a valid vtable.
+    FakeIUnknown fake = MakeFakeIUnknown();
+    auto* rcw = FindOrCreateRcw(&fake);
     ASSERT_NE(rcw, nullptr);
 
     // Fill all kMaxInterfaceCache entries with distinct IID data.
-    // Each entry points to a local array that is valid for the call.
+    // Each entry points to a valid FakeIUnknown so ReleaseRcw's per-entry
+    // PalComRelease is safe (a bare integer 0x7000+i would AV on Win32).
     CHAOS_IL2CPP_UINT8 iid_data[kMaxInterfaceCache][16];
     std::memset(iid_data, 0, sizeof(iid_data));
     for (CHAOS_IL2CPP_SIZE i = 0; i < kMaxInterfaceCache; ++i) {
         iid_data[i][0] = static_cast<CHAOS_IL2CPP_UINT8>(i + 1);
         rcw->interface_cache[i].iid = iid_data[i];
-        rcw->interface_cache[i].interface_ptr =
-            reinterpret_cast<void*>(static_cast<uintptr_t>(0x7000 + i));
+        rcw->interface_cache[i].interface_ptr = &fake;   // valid vtable for Release
         rcw->interface_cache[i].refcount = 1;
     }
     rcw->cache_count = kMaxInterfaceCache;
 
-    // Non-matching IID — cache is full, so returns nullptr on non-Win32.
+    // Non-matching IID — cache is full, so returns nullptr (no QI fall-through).
     const CHAOS_IL2CPP_UINT8 query_iid[16] = {0xFF, 0, 0, 0};
     void* result = QueryInterfaceCached(rcw, query_iid);
     EXPECT_EQ(result, nullptr);
@@ -243,7 +261,7 @@ TEST_F(ComRcwTest, QueryInterfaceCachedCacheFullNoAdd) {
 
     rcw->wrapper_refcount = 1;
     ReleaseRcw(rcw);
-#endif
+    SUCCEED();
 }
 
 TEST_F(ComRcwTest, QueryInterfaceCachedCacheHit) {
