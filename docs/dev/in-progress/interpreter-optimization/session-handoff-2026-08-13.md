@@ -72,9 +72,22 @@
 
 ## 三、已确认的既有 bug（非本次引入，单独立项）
 
-1. **`Interpreter_Stress.MixedOpcode` 单测崩溃（EXIT=3）**：单帧 FastFrame 50000 次循环，`BrFalse` 回边 + 无 `RegisterThread`。**已用临时 worktree 在 c7605b19a（无 A1/A3）确认既有**，非 A1/A3 引入。修复需另立专项（可能未初始化 TLS/并发残留）。
+1. **`Interpreter_Stress.MixedOpcode` 单测崩溃（EXIT=3）**：~~单帧 FastFrame 50000 次循环~~ **✅ 已修（commit `817ba761a`）**：根因=复用单 `FastFrame` 跨 50000 迭代，帧内 eval-stack `sp` 残留进下次调用 → 非平衡 opcode 序列(BrFalse 回边)逐轮漂移 → OOB → 硬件崩溃。修复=每轮新建帧（对齐 StressWorker/LoopBackedge）。验证 MixedOpcode 5 万次 0 错 EXIT=0。
 2. **`SimdFma`(110) 表越界空指针**：上轮 `4b2900225` 已补 110-127 为 `kOp_Unsupported`，**已闭合**。
 3. **寄存器层 `Reg_LdElem`/`Reg_StElem` null/越界原静默**：上轮 `4b2900225` 已对齐抛异常，**已闭合**。
+
+### 三.1（本轮 review，2026-08-13 round-3）新发现的真缺口 — 已修 2 项，剩 4 项待做
+
+**✅ 已修（commit `f6e3a3335`）**：
+1. **RegisterVM div/rem 无守卫（P1）**：`Reg_Div/Rem/DivUn/RemUn`（ir_reg_alloc.cpp:905-922,1525-1550）对 `r==0`/`INT32_MIN/-1` 无守卫 → 硬件 #DE/SIGFPE + UB，FastExecute 已 fault/wrap。已镜像守卫(`r==0`→fault; INT32_MIN/-1→wrap)；新增 `RegisterExecuteDivByZeroFaultsNoCrash` + `RegisterExecuteDivInt32MinMinus1Wraps`（直接跑 RegisterExecute 证明）。
+2. **RegisterFile reg/set_reg 无越界防护（P1）**：`reg/reg_tag/set_reg/reg_f32/reg_f64` 无 `kTotalRegisters` 边界，≥88 局部方法 RegisterVM 静默 OOB 腐化相邻帧（FastExecute 会 fault）。加 `idx>=96` 越界返 0/no-op 防御性地板。
+
+**⏳ 剩（已验证，待专项）**：
+- **P1 无Chk/barier opcode 103-106 层不一致**：allocator 发射 `StFldBarrier/LdElemNoChk/StElemNoChk/LdElemANoChk`，RegisterVM dispatch 表只到 99 → `op>99` fault；FastExecute 全实现。修=AllocateRegisters 改写或扩 register 表。
+- **P1 Reg_StInd/StObj 缺 GC 写屏障**：`Reg_StInd/StObj`（ir_reg_alloc.cpp:1570-1620）裸 `*ptr=val`，无 SATB/card/BarrierCriticalSection；FastExecute 有。`stobj/stind` 写 GC ptr → 未跟踪 → UAF。镜像 Handle_StInd/StObj 守卫。
+- **P2 Reg_LdArgA/LdLocA 返回 null ManagedPtr**：地址语义丢失，`out/ref`/struct-by-ref 分歧。
+- **P2② D1 per-method 锚无 in-tree caller**：`DumpProfilerToFile` 只在 Scriban(TestProject.RuntimeEntry.cpp.scriban) 调，不在原生树；`tiering_benchmark` 只调 `DumpFastExecuteOpcodeHistogram`。需在 tiering_benchmark 加 PROFILE/VM_PROFILER 宏 dump。
+- **P3 测试缺口**：>8arg call / NoChk / 高本地 / stobj GC-ptr 端到端无测试（div 已有新测试补）。
 
 ---
 
