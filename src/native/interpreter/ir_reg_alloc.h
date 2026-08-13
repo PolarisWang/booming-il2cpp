@@ -106,13 +106,22 @@ struct RegisterFile {
     uint8_t fpr_tags[kFPRegisters] = {}; // ValueTag per register
 
     // Read a register value by index (gpr if index < kGPRegisters, else fpr).
+    // Bounds-guarded against kTotalRegisters so a runaway idx (>= 88 locals /
+    // deep eval stack) can never index past the fpr array — the same protective
+    // fault FastExecute enforces.  OOB reads return 0 / no-op writes.
     inline uint64_t reg(uint32_t idx) const noexcept {
+        if (idx >= kTotalRegisters)
+            return 0;
         return (idx < kGPRegisters) ? gpr[idx] : fpr[idx - kGPRegisters];
     }
     inline uint8_t reg_tag(uint32_t idx) const noexcept {
+        if (idx >= kTotalRegisters)
+            return 0;
         return (idx < kGPRegisters) ? gpr_tags[idx] : fpr_tags[idx - kGPRegisters];
     }
     inline void set_reg(uint32_t idx, uint64_t val, uint8_t tag) noexcept {
+        if (idx >= kTotalRegisters)
+            return; // no-op: prevent OOB write past fpr array
         if (idx < kGPRegisters) {
             gpr[idx] = val;
             gpr_tags[idx] = tag;
@@ -127,13 +136,15 @@ struct RegisterFile {
     inline int32_t reg_i32(uint32_t idx) const noexcept { return static_cast<int32_t>(reg(idx)); }
     inline int64_t reg_i64(uint32_t idx) const noexcept { return static_cast<int64_t>(reg(idx)); }
     inline float reg_f32(uint32_t idx) const noexcept {
-        float v;
-        std::memcpy(&v, &gpr[idx], sizeof(v));
+        float v = 0;
+        if (idx < kGPRegisters)
+            std::memcpy(&v, &gpr[idx], sizeof(v));
         return v;
     }
     inline double reg_f64(uint32_t idx) const noexcept {
-        double v;
-        std::memcpy(&v, &gpr[idx], sizeof(v));
+        double v = 0;
+        if (idx < kGPRegisters)
+            std::memcpy(&v, &gpr[idx], sizeof(v));
         return v;
     }
     inline void* reg_ptr(uint32_t idx) const noexcept { return reinterpret_cast<void*>(reg(idx)); }

@@ -34,6 +34,9 @@ using chaos::il2cpp::interpreter::kRegHasImm;
 using chaos::il2cpp::interpreter::kRegIsBranch;
 using chaos::il2cpp::interpreter::kRegIsStore;
 using chaos::il2cpp::interpreter::CoalescedCallArgs;
+using chaos::il2cpp::interpreter::RegisterFrame;
+using chaos::il2cpp::interpreter::RegisterExecute;
+using chaos::il2cpp::interpreter::ValueTag;
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Helpers
@@ -959,4 +962,64 @@ TEST(IR_RegAlloc, CoalescedCallArgsLayout) {
         EXPECT_EQ(l.tag_offset % alignof(uint64_t), 0u);
     }
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Div/Rem fault guards (P1 cross-tier correctness)
+// ═══════════════════════════════════════════════════════════════════════════
+// Reg_Div/Reg_Rem were unguarded: a div/rem by zero or INT32_MIN/-1 caused a
+// hardware SIGFPE/UB on the Register tier while FastExecute faults/wraps.  This
+// directly builds a Div/Rem RegisterInstruction and runs it through the real
+// RegisterExecute to prove the fault is raised (not a crash) and the
+// INT32_MIN/-1 wraparound matches FastExecute.
+
+// Build a 2-operand Reg handler instruction (Div/Rem share this shape).
+static RegisterInstruction MakeRegBinOp(IROpCode op, uint8_t dst, uint8_t s1, uint8_t s2) {
+    uint64_t hdr = (static_cast<uint64_t>(op) & 0xFFFF)
+                 | (static_cast<uint64_t>(dst) << 16)
+                 | (static_cast<uint64_t>(s1)  << 24)
+                 | (static_cast<uint64_t>(s2)  << 32)
+                 | (static_cast<uint64_t>(kRegHasDst | kRegHasSrc1 | kRegHasSrc2) << 40);
+    RegisterInstruction r;
+    r.header = hdr;
+    r.imm.ptr = nullptr;
+    return r;
+}
+
+TEST(IR_RegAlloc, RegisterExecuteDivByZeroFaultsNoCrash) {
+    // Div r10 = r8 / r9 where r9 = 0 → Reg_Div must raise (threw_exception, pc 9999)
+    // instead of executing a hardware divide-by-zero.
+    RegisterInstruction instrs[] = {
+        MakeRegBinOp(IROpCode::Div, 10, 8, 9),
+        { /* Ret src1=r10 */ { (static_cast<uint64_t>(IROpCode::Ret) & 0xFFFF)
+                          | (static_cast<uint64_t>(10) << 24)
+                          | (static_cast<uint64_t>(kRegHasSrc1) << 40) }, { .ptr = nullptr } },
+    };
+    RegisterFrame frame = {};
+    frame.regs.set_reg(8, 42, static_cast<uint8_t>(ValueTag::Int32));
+    frame.regs.set_reg(9, 0, static_cast<uint8_t>(ValueTag::Int32));
+
+    bool ok = RegisterExecute(frame, instrs, 2);
+    EXPECT_FALSE(ok) << "div-by-zero must fault (RegisterExecute returns false)";
+    EXPECT_TRUE(frame.threw_exception);
+    // No crash means the guard worked; the fault is a graceful exception, not SEH.
+}
+
+TEST(IR_RegAlloc, RegisterExecuteDivInt32MinMinus1Wraps) {
+    // INT32_MIN / -1 → must NOT SIGFPE; push INT32_MIN (matches FastExecute).
+    RegisterInstruction instrs[] = {
+        MakeRegBinOp(IROpCode::Div, 10, 8, 9),
+        { /* Ret src1=r10 */ { (static_cast<uint64_t>(IROpCode::Ret) & 0xFFFF)
+                          | (static_cast<uint64_t>(10) << 24)
+                          | (static_cast<uint64_t>(kRegHasSrc1) << 40) }, { .ptr = nullptr } },
+    };
+    RegisterFrame frame = {};
+    frame.regs.set_reg(8, INT32_MIN, static_cast<uint8_t>(ValueTag::Int32));
+    frame.regs.set_reg(9, static_cast<uint32_t>(static_cast<int32_t>(-1)), static_cast<uint8_t>(ValueTag::Int32));
+
+    bool ok = RegisterExecute(frame, instrs, 2);
+    EXPECT_TRUE(ok) << "INT32_MIN/-1 must compute (wrap), not fault";
+    EXPECT_FALSE(frame.threw_exception);
+    EXPECT_EQ(static_cast<int32_t>(frame.ret_val), INT32_MIN);
+}
+
 

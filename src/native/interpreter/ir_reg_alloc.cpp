@@ -906,6 +906,16 @@ static void Reg_Div(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Div");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    // Mirror FastExecute Handle_Div: fault on div-by-zero, and avoid the x86
+    // idiv overflow (SIGFPE / C++ UB) for INT32_MIN / -1 by pushing the
+    // wraparound result rather than computing it.
+    if (r == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
+    if (l == INT32_MIN && r == -1) {
+        frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(INT32_MIN)),
+                           static_cast<uint8_t>(ValueTag::Int32));
+        ++frame.pc;
+        return;
+    }
     frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l / r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
@@ -915,6 +925,14 @@ static void Reg_Rem(RegisterFrame& frame, const RegisterInstruction& instr) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Rem");
     int32_t r = static_cast<int32_t>(frame.regs.reg(instr.src2_reg()));
     int32_t l = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    // Mirror FastExecute Handle_Rem: fault on div-by-zero, and avoid the x86
+    // idiv overflow for INT32_MIN % -1 by pushing 0 instead of computing it.
+    if (r == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
+    if (l == INT32_MIN && r == -1) {
+        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Int32));
+        ++frame.pc;
+        return;
+    }
     frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l % r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
@@ -1508,6 +1526,9 @@ static void Reg_DivUn(RegisterFrame& frame, const RegisterInstruction& instr) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_DivUn");
     uint32_t r = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
     uint32_t l = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    // Mirror FastExecute Handle_DivUn: fault on div-by-zero (avoid hardware
+    // #DE / C++ UB on the Register tier, where FastExecute faults cleanly).
+    if (r == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
     frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l / r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
@@ -1517,6 +1538,8 @@ static void Reg_RemUn(RegisterFrame& frame, const RegisterInstruction& instr) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_RemUn");
     uint32_t r = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
     uint32_t l = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
+    // Mirror FastExecute Handle_RemUn: fault on div-by-zero.
+    if (r == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
     frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(l % r)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;

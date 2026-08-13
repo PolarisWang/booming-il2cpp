@@ -143,6 +143,23 @@ TEST(CrossTierConsistency, ArithArgSubMul) {
         args, 2);
 }
 
+// ── Arithmetic fault edges that previously diverged across tiers ─────────
+// RegisterVM's Reg_Div/Reg_Rem were unguarded (hardware #DE / C++ UB on x/0 and
+// INT32_MIN/-1) while FastExecute faulted/wrapped.  The RegisterVM div/rem
+// guards are proven by the direct RegisterExecute tests in ir_reg_alloc_test.cpp
+// (a raised fault vs SEH is not cleanly observable through this value-returning
+// gate — the harness's exception path surfaces as a hardware SEH rather than a
+// managed signal here).  This keeps only the INT32_MIN/-1 wraparound case, whose
+// observable result (a value, not a fault) IS comparable across tiers.
+TEST(CrossTierConsistency, ArithDivInt32MinMinus1) {
+    // ldarg.0; ldarg.1; div; ret  (6,6,28,53) with 0x80000000 / -1.
+    // FastExecute wraps to INT32_MIN; RegisterVM must match (no SIGFPE).
+    uint64_t args[2] = { 0x80000000ull, 0xFFFFFFFFFFFFFFFFull /* -1 */ };
+    ExpectCrossTierSame(
+        R"({"instructions":[{"opCode":6,"ilOffset":0,"operand":0},{"opCode":6,"ilOffset":1,"operand":1},{"opCode":28,"ilOffset":2},{"opCode":53,"ilOffset":3}]})",
+        args, 2);
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // Local variable read/write — StLoc/LdLoc must round-trip identically
 // ═══════════════════════════════════════════════════════════════════════════
