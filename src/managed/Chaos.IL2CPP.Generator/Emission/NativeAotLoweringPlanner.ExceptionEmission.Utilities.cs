@@ -213,14 +213,31 @@ public sealed partial class NativeAotLoweringPlanner
                 _emittedExternalRuntimeSymbolParams[nativeSymbol] = invocationTarget.ParameterAbis.Count;
             }
             builder.AppendLine($"{indentation}{{");
+            // Vector<T> reducers (chaos_vector_*_suffix) take two INTPTR args that must be
+            // POINTERS to real 32-byte (Vector256) carriers.  The caller's operand is an
+            // 8-byte INTPTR local-slot ADDRESS that may hold a pointer to the carrier data
+            // (or null for a default/zero vector); passing that slot address directly makes
+            // the reducer read 24 bytes past the slot into adjacent stack — a conditional
+            // access violation (A2: Vector<int>.GreaterThanAll/Count/etc.).  Materialize a
+            // zeroed 32-byte carrier and pass ITS address; if the slot holds a non-null
+            // carrier pointer, copy the real 32 bytes in.
+            bool isVectorReducer = nativeSymbol.StartsWith("chaos_vector_", StringComparison.Ordinal)
+                                   && invocationTarget.ParameterAbis.Count == 2;
             for (int i = invocationTarget.ParameterAbis.Count - 1; i >= 0; i--)
             {
                 string rawExpr = ConsumeEvalStackValueExpression();
                 if (!invocationTarget.RawArgumentIndices.Contains(i))
                     builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {rawExpr};");
-                builder.AppendLine(invocationTarget.RawArgumentIndices.Contains(i)
-                    ? $"{indentation}    const auto chaos_arg_{i} = {rawExpr};"
-                    : $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[i], $"chaos_raw_arg_{i}")};");
+                if (isVectorReducer && !invocationTarget.RawArgumentIndices.Contains(i))
+                {
+                    EmitVectorOperandMaterialization(builder, i, indentation + "    ");
+                }
+                else
+                {
+                    builder.AppendLine(invocationTarget.RawArgumentIndices.Contains(i)
+                        ? $"{indentation}    const auto chaos_arg_{i} = {rawExpr};"
+                        : $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[i], $"chaos_raw_arg_{i}")};");
+                }
             }
             if (enforceInstanceNullCheck && invocationTarget.ParameterAbis.Count > 0
     && !IsValueTypeCarrierKind(invocationTarget.ParameterAbis[0].CarrierKindCode))
@@ -550,5 +567,23 @@ public sealed partial class NativeAotLoweringPlanner
             EmitAbiReturnPush(builder, returnAbi, "_d_hpresult", $"{indentation}    ");
         }
         builder.AppendLine($"{indentation}}}");
+    }
+
+    /// <summary>
+    /// Emits the materialization of a <c>chaos_vector_*_suffix</c> reducer operand into a
+    /// real 32-byte (Vector256) carrier, and binds <c>chaos_arg_{argIdx}</c> to its address.
+    /// The incoming operand is an 8-byte INTPTR local-slot address that may hold a pointer to
+    /// the carrier data (or null for a default/zero vector).  Without this, the reducer reads
+    /// 32 bytes past the 8-byte slot into adjacent stack — a conditional access violation.
+    /// Fixes A2 (Vector&lt;int&gt;.GreaterThanAll / Count / etc. AV 0xC0000005).
+    /// </summary>
+    private void EmitVectorOperandMaterialization(StringBuilder builder, int argIdx, string indent)
+    {
+        builder.AppendLine($"{indent}CHAOS_IL2CPP_UINT8 __chaos_vec_{argIdx}[32] = {{}};");
+        builder.AppendLine($"{indent}void* const* __chaos_slot_{argIdx} = reinterpret_cast<void* const*>(chaos_raw_arg_{argIdx});");
+        builder.AppendLine($"{indent}if (__chaos_slot_{argIdx} != nullptr && *__chaos_slot_{argIdx} != nullptr)");
+        builder.AppendLine($"{indent}    for (int __k_{argIdx} = 0; __k_{argIdx} < 32; ++__k_{argIdx})");
+        builder.AppendLine($"{indent}        __chaos_vec_{argIdx}[__k_{argIdx}] = static_cast<const CHAOS_IL2CPP_UINT8*>(*__chaos_slot_{argIdx})[__k_{argIdx}];");
+        builder.AppendLine($"{indent}const auto chaos_arg_{argIdx} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__chaos_vec_{argIdx});");
     }
 }
