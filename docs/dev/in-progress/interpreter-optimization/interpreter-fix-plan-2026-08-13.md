@@ -42,15 +42,17 @@
 
 ---
 
-### 决策 2：interpreted→native 无 preemptive 转换（A2）—— 3 方案
+### 决策 2：interpreted→native 无 preemptive 转换（A2）—— **调查后重新分类为"非缺口"**
 
-**背景**：解释器路径（`precache_dispatch_raw.cpp:277-295`）直接调 native `direct_fn`，不发 `GC_TRANSITION_TO_PREEMPTIVE`；只有 T4/JIT 路径（`entry_direct.cpp:808-811`）有 `GcTransitionGuard`。blocking native 调用期间 GC 无法挂起 → 死锁/延迟窗。
+**背景**：性能 agent 曾判"解释器路径调 native 无 GC_TRANSITION_TO_PREEMPTIVE"。深查（Explore agent 全链追踪）**推翻此前提**：
+- `instr.direct_fn`/`direct_ptr` = `&native_symbol`（codegen 发射的**函数体/stub**），**不是任意 raw native 指针**。
+- 对 **P/Invoke**：`direct_ptr` = `EmitPInvokeMethod` 发射的 stub，该 stub **内建** `GC_TRANSITION_TO_PREEMPTIVE/COOPERATIVE`（`MethodEmission.PInvoke.cs:121` `needsGcTransition = !IsSuppressGCTransition`）。
+- 对 **managed**：`direct_ptr` = AOT managed 体（应 stay COOPERATIVE，有内部 safepoint）。
+- **No runtime flag** 标记 "native-ness"（`IsPInvoke`/`IsSuppressGCTransition` 仅在 codegen 存在）。
+- **盲包所有 direct_fn 会破坏 managed 语义**（preemptive 后 managed 内部 safepoint 语义失效 → GC 根丢失）。
 
-- **方案 2A（推荐 · 对齐 T4）**：在解释器调 native/P/Invoke 的边界包 `GcTransitionGuard`（进入 preemptive → 调用 → 回 cooperative），对齐 T4。改 `precache_dispatch_raw.cpp` 的直调点 + `fast_dispatch_call.inc` 的 native 分支。成本 0.5-1d。风险中（需确认 native 调用返回后必回 cooperative，否则 GC 停不了）。
-- **方案 2B（stub 自转）**：codegen 生成的 P/Invoke stub 内部自带转换（已有 POSIX trampoline/Windows APC 说法）。但解释器路径不走这些 stub——是解释器调 native 的缺口，不是 stub 缺口。不适用。
-- **方案 2C（统一转换点）**：在 `InterpreterDispatchRaw`/`precache_dispatch_raw` 顶层统一包转换（一旦进入 native 调用就 preemptive）。改动集中但影响所有 native 调用。成本 1d。与 2A 类似但更集中。
+**结论**：默认 P/Invoke stub **已正确 self-transitioning**；唯一缺 `transition` 的是 `[DllImport(SuppressGCTransition=true)]`——那是**开发者显式选择**（pin 引用快速调用，调用方保证无 GC/不阻塞），非 bug。**A2 重新分类为"非缺口"**，不改代码。防御性可选：thread 一个 `is_native` 位供运行时监督（低优先，不做）。
 
-**决策（推荐 2A）**：在解释器 native 调用边界包 `GcTransitionGuard`。注意：`GcTransitionGuard` 必须 RAII（scope exit 还原），否则异常路径泄漏 cooperative 态。测试：blocking native stub + 挂起断言。
 
 ---
 
