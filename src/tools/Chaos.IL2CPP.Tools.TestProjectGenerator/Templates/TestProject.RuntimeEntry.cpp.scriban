@@ -1294,6 +1294,29 @@ int main(int argc, char* argv[]) {
     ret = 1;
 
 shutdown:
+    // ── Interpreter profiling hook (项8 基建) ─────────────────────────────
+    // Dump the FastExecute opcode-frequency histogram + register-VM per-method
+    // cycles so an entry.exe --benchmark / --benchmark-all run in a profile
+    // build (CHAOS_IL2CPP_CONFIG_PROFILE → CHAOS_IL2CPP_PROFILE_ENABLED=1, or
+    // the separate CHAOS_IL2CPP_VM_PROFILER_ENABLED=1) exposes the interpreter's
+    // per-opcode distribution — the interpreter perf anchor the 2026-08-13
+    // review flagged as missing.  Fully compiled out unless a macro is on, so
+    // default/optimized builds are unaffected.  Declarations kept local/named
+    // to link against chaos_interpreter without pulling <fast_dispatch.h>.
+#if CHAOS_IL2CPP_PROFILE_ENABLED
+    {
+        extern void chaos::il2cpp::runtime_core::DumpFastExecuteOpcodeHistogram() noexcept;
+        chaos::il2cpp::runtime_core::DumpFastExecuteOpcodeHistogram();
+    }
+#endif
+#if CHAOS_IL2CPP_VM_PROFILER_ENABLED
+    {
+        extern void chaos::il2cpp::interpreter::DumpProfilerToFile(const char* path) noexcept;
+        extern void chaos::il2cpp::interpreter::ResetProfiler() noexcept;
+        chaos::il2cpp::interpreter::DumpProfilerToFile(nullptr);  // nullptr → DumpAll() to stderr
+        chaos::il2cpp::interpreter::ResetProfiler();
+    }
+#endif
     std::fflush(stdout);
 #if defined(_WIN32)
     TerminateProcess(GetCurrentProcess(), static_cast<DWORD>(ret));
