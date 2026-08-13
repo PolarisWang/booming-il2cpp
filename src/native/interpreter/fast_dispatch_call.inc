@@ -33,8 +33,12 @@ static void Handle_Call_DoAotDirect(FastFrame& frame,
     if (CHAOS_IL2CPP_UNLIKELY(instr.safe_to_direct_call)) {
         result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
     } else {
-        bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
+        uint64_t caught_exc_obj = 0;
+        bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7,
+                                         result, &caught_exc_obj);
         if (caught) {
+            if (caught_exc_obj != 0)
+                frame.exception_obj_val = reinterpret_cast<void*>(caught_exc_obj);
             frame.threw_exception = true;
             frame.pc = 9999;
             return;
@@ -252,8 +256,12 @@ static void Handle_Call_DirectInline(FastFrame& frame, const interpreter::IRInst
     if (CHAOS_IL2CPP_UNLIKELY(instr.safe_to_direct_call)) {
         result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
     } else {
-        bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
+        uint64_t caught_exc_obj = 0;
+        bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7,
+                                         result, &caught_exc_obj);
         if (caught) {
+            if (caught_exc_obj != 0)
+                frame.exception_obj_val = reinterpret_cast<void*>(caught_exc_obj);
             frame.threw_exception = true;
             frame.pc = 9999;
             return;
