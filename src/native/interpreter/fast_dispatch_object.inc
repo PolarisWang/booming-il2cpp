@@ -104,10 +104,16 @@ static void Handle_StElemNoChk(FastFrame& frame, const interpreter::IRInstructio
         default: break;
         }
     } else {
-        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
-        arr->elements[index] = val;
-        chaos_gc_dirty_card(arr);
+        // Non-GC interpreter ArrayStorage — no GC write barrier needed unless
+        // the array itself is a real GC-managed object (mirrors Handle_StInd).
+        if (chaos_is_gc_pointer(arr)) {
+            using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+            BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
+            arr->elements[index] = val;
+            chaos_gc_dirty_card(arr);
+        } else {
+            arr->elements[index] = val;
+        }
     }
     ++frame.pc;
 }
@@ -148,11 +154,16 @@ static void Handle_StElem(FastFrame& frame, const interpreter::IRInstruction&) n
         if (index >= arr->elements.size()) {
             arr->elements.resize(index + 1u);
         }
-        // SATB pre-write barrier: record old obj pointer before overwriting.
-        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
-        arr->elements[index] = val;
-        chaos_gc_dirty_card(arr);
+        // Non-GC interpreter ArrayStorage — no GC write barrier unless the array
+        // is a real GC-managed object (mirrors Handle_StInd).
+        if (chaos_is_gc_pointer(arr)) {
+            using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+            BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
+            arr->elements[index] = val;
+            chaos_gc_dirty_card(arr);
+        } else {
+            arr->elements[index] = val;
+        }
     }
     ++frame.pc;
 }
@@ -337,11 +348,16 @@ static void Handle_StObj(FastFrame& frame, const interpreter::IRInstruction&) no
     auto* iv = static_cast<interpreter::InterpreterValue*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
     if (iv != nullptr) {
-        // SATB pre-write barrier: record old obj pointer before overwriting.
-        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
-        *iv = val;
-        chaos_gc_dirty_card(iv);
+        // Non-GC interpreter slot — no GC write barrier unless the destination
+        // is a real GC-managed InterpreterValue (mirrors Handle_StInd).
+        if (chaos_is_gc_pointer(iv)) {
+            using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+            BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
+            *iv = val;
+            chaos_gc_dirty_card(iv);
+        } else {
+            *iv = val;
+        }
     }
     ++frame.pc;
 }

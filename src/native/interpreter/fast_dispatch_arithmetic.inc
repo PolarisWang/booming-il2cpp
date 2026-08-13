@@ -442,9 +442,12 @@ static void Handle_StFld(FastFrame& frame, const interpreter::IRInstruction& ins
     if (obj == nullptr) { ++frame.pc; return; }
     auto* storage = static_cast<interpreter::InterpreterObject*>(obj);
     uint32_t idx = static_cast<uint32_t>(instr.field_offset);
-    // SATB pre-write barrier: record old obj pointer before overwriting.
-    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&storage->fields[idx].obj));
+    // Non-GC interpreter object — no GC write barrier unless it is a real
+    // GC-managed object (mirrors the guarded Handle_StInd idiom).
+    if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(obj)) {
+        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&storage->fields[idx].obj));
+    }
     // Fast path: skip bounds check when field is within current allocation.
     if (idx < storage->fields.size()) {
         storage->fields[idx] = val;
@@ -452,7 +455,9 @@ static void Handle_StFld(FastFrame& frame, const interpreter::IRInstruction& ins
         storage->fields.resize(idx + 1);
         storage->fields[idx] = val;
     }
-    chaos_gc_dirty_card(obj);
+    if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(obj)) {
+        chaos_gc_dirty_card(obj);
+    }
     ++frame.pc;
 }
 

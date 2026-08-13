@@ -13,6 +13,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_root_change.h>
 #include <gc/gc_helpers.h>
+#include <gc/gc_api.h>
 #include <chaos/pal/pal_eh.h>
 
 #if CHAOS_IL2CPP_DEBUGGER
@@ -827,15 +828,24 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                         }
                     }
                 } else {
-                    // Object field access — pre-write barrier (SATB) + post-write barrier (card dirty).
+                    // Object field access. The interpreter object is normally a
+                    // non-GC InterpreterObject (not tracked by GcScanStaticRoots);
+                    // only emit SATB+card when the destination is a real GC-managed
+                    // object (mirrors the guarded Handle_StInd idiom). For non-GC
+                    // containers the slot is caller-owned interp scalar storage and
+                    // needs no GC write barrier.
                     auto* object = RequireObject(instance);
                     if (object->fields.size() <= instruction.field_offset) {
                         object->fields.resize(instruction.field_offset + 1u);
                     }
-                    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-                    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&object->fields[instruction.field_offset].obj));
-                    object->fields[instruction.field_offset] = value;
-                    chaos_gc_dirty_card(object);
+                    if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(object)) {
+                        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+                        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&object->fields[instruction.field_offset].obj));
+                        object->fields[instruction.field_offset] = value;
+                        chaos_gc_dirty_card(object);
+                    } else {
+                        object->fields[instruction.field_offset] = value;
+                    }
                 }
                 break;
             }
@@ -855,10 +865,15 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 if (index >= array->elements.size()) {
                     throw CHAOS_IL2CPP_OUT_OF_RANGE("array_index");
                 }
-                using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-                BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&array->elements[index].obj));
-                array->elements[index] = value;
-                chaos_gc_dirty_card(array);
+                if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(array)) {
+                    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+                    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&array->elements[index].obj));
+                    array->elements[index] = value;
+                    chaos_gc_dirty_card(array);
+                } else {
+                    // Non-GC interpreter ArrayStorage — no GC write barrier needed.
+                    array->elements[index] = value;
+                }
                 break;
             }
             case IROpCode::LdLen: {
@@ -1567,13 +1582,12 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     } else {
                         stind_raw = reinterpret_cast<CHAOS_IL2CPP_INT64>(stind_val.obj);
                     }
-                    // Write barrier for reference stores (immediate_i4 == 10)
-                    if (instruction.immediate_i4 == 10) {
-                        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-                        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(stind_dst));
-                    }
                     std::memcpy(stind_dst, &stind_raw, stind_write_size);
-                    if (instruction.immediate_i4 == 10) {
+                    // Write barrier for reference stores only when the destination
+                    // is a real GC-managed object (mirrors Handle_StInd). For non-GC
+                    // interpreter slots the store needs no GC card/SATB.
+                    if (instruction.immediate_i4 == 10 &&
+                        chaos::il2cpp::runtime_core::chaos_is_gc_pointer(stind_dst)) {
                         chaos_gc_dirty_card(stind_dst);
                     }
                 }
@@ -1847,10 +1861,15 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 // Managed pointer (from LdArgA/LdLocA): write through to InterpreterValue slot.
                 if (stobj_addr.tag == ValueTag::ManagedPtr && stobj_addr.obj != nullptr) {
                     auto* iv_slot = static_cast<InterpreterValue*>(stobj_addr.obj);
-                    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-                    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv_slot->obj));
-                    *iv_slot = stobj_val;
-                    chaos_gc_dirty_card(stobj_addr.obj);
+                    if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(iv_slot)) {
+                        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+                        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv_slot->obj));
+                        *iv_slot = stobj_val;
+                        chaos_gc_dirty_card(stobj_addr.obj);
+                    } else {
+                        // Non-GC interpreter slot — no GC write barrier needed.
+                        *iv_slot = stobj_val;
+                    }
                 } else {
                     void* stobj_dst = (stobj_addr.tag == ValueTag::Struct || stobj_addr.tag == ValueTag::ObjectRef)
                                         ? stobj_addr.obj
