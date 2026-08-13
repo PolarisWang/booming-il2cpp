@@ -24,13 +24,38 @@ static const CHAOS_IL2CPP_UINT8 kIidIUnknown[16] = {0};
 /// Identity pointers are &ComCcwInterfaceEntry::vtable (the address of the vtable field).
 /// Uses the back-pointer stored in entry->ccw_ptr at registration time.
 inline ComCcw* ResolveCcw(void* self) noexcept {
-    auto* entry = reinterpret_cast<ComCcwInterfaceEntry*>(
-        static_cast<char*>(self) - offsetof(ComCcwInterfaceEntry, vtable));
-    if (entry->ccw_ptr != nullptr) {
-        return static_cast<ComCcw*>(entry->ccw_ptr);
+    if (self == nullptr) return nullptr;
+
+    // Two distinct `self` forms reach the CCW IUnknown methods:
+    //   1. Direct ComCcw*  — the COM identity (IUnknown) pointer.  QI for IUnknown
+    //      returns the CCW object itself (com_ccw.cpp `*ppv = ccw`), so self IS the
+    //      struct base.
+    //   2. Interface identity — `&ComCcwInterfaceEntry::vtable` for a registered
+    //      non-IUnknown interface.  Its owner is entry->ccw_ptr (at self + 8).
+    //
+    // The legacy code ALWAYS treated self as form #2, doing
+    // `self - offsetof(vtable)` then reading entry->ccw_ptr (= *(self + 8)).
+    // For a form-#1 direct pointer, self + 8 is the CCW's `refcount` field (a
+    // small counter), which was mis-read as an owner ComCcw* and dereferenced →
+    // 0xC0000005.  We must distinguish forms safely, WITHOUT dereferencing an
+    // unvalidated `entry->ccw_ptr`.
+    //
+    // Safe discriminator: read self + 8 as a raw integer (in-bounds for a direct
+    // ComCcw* — it is refcount; in-bounds for an interface entry — it is ccw_ptr).
+    // A real owner back-pointer is a 8-aligned Domain pointer well above the small
+    // counter range that refcount exposes.  Only if it looks pointer-like do we
+    // treat self as an interface identity and return it.
+    const uintptr_t back = *reinterpret_cast<const uintptr_t*>(
+        static_cast<char*>(self) - offsetof(ComCcwInterfaceEntry, vtable) +
+        offsetof(ComCcwInterfaceEntry, ccw_ptr));
+    constexpr uintptr_t kPtrMask = sizeof(void*) - 1;
+    if (back != 0 && (back & kPtrMask) == 0 && back > 0x10000u) {
+        return static_cast<ComCcw*>(reinterpret_cast<void*>(back));
     }
+    // Direct CCW pointer: self IS the ComCcw.
     return static_cast<ComCcw*>(self);
 }
+
 
 CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwQueryInterface(
     void* self, const void* iid, void** ppv) noexcept {

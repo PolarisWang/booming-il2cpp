@@ -10,11 +10,6 @@
 # They are surfaced (not hidden) but do not flip the integration gate red.
 version: 1
 known:
-  # COM CCW (pre-existing SEH crash) + stress cluster — verified 2026-08-13:
-  #   com_ccw         → 13 FAILED tests (AggregatedCcw*, NonAggregatedCcwDoNotDelegate*)
-  #   com_ccw_stress  → SEGFAULT (0xC0000005) during ConcurrentAddRefRelease
-  - "com_ccw"
-  - "com_ccw_stress"
   # BGC root scan (pre-existing, very slow ~392s; verified still-hanging / not passing)
   - "chaos_gc_bgc_root_scan_test"
   # Cross-gen write-barrier stress (A2b) — REMOVED 2026-08-13: the "dangling"
@@ -32,4 +27,5 @@ known:
   # ── Removed 2026-08-13 (verified passing, stale pre-07 baseline) ──
   #   test_jit_native (71/71)  test_jit_il_smoke (18+1skip)  test_jit_unwind (5/5)
   #   test_jit_mode (12/12)    test_jit_pgo (6/6)            chaos_interpreter_bridge_test (exit 0)
+  #   com_ccw (28/28, ResolveCcw direct-vs-identity fixed)   com_ccw_stress (4/4, same fix, was SEGFAULT)
 
