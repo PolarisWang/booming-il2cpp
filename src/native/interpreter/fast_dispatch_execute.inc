@@ -463,25 +463,10 @@ bool FastExecute(FastFrame& frame,
     // ═══════════════════════════════════════════════════════════════════
 
     kOp_Epilogue: {
-        // In-band safepoint (Step 2.2, scheme B): at a loop back-edge the frame is
-        // guaranteed consistent (branch handler completed, tags settled), so this is
-        // a safe, deterministic point to drain pending GC suspension for long-running
-        // interpreted loops — without relying on external signal/APC hijack alone.
-        // Cheap-fast-path first (suspend_seq atomic load); only enter the C++ try/catch
-        // (throwing path) when a safepoint is actually active.
-        if (frame.pc < frame.last_pc) {
-            auto* sp_thr = threading::tls_this_thread;
-            if (sp_thr != nullptr &&
-                CHAOS_IL2CPP_UNLIKELY(sp_thr->suspend_seq.load(std::memory_order_acquire) != 0)) {
-                try {
-                    threading::SafepointPoll();
-                } catch (const chaos_managed_exception&) {
-                    frame.threw_exception = true;
-                    frame.pc = 9999;
-                    goto kOp_Terminate;
-                }
-            }
-        }
+        // The per-backedge safepoint probe was retired (C1) — GC cooperative
+        // suspension is now drained uniformly at the kOp_Next decimated cadence
+        // (every 64 ops), so straight-line code also cooperates (A3).  Only OSR
+        // hot-loop detection remains here.
         // OSR: detect hot-loop backward branch via frame.last_pc (set by branch handlers).
         if (frame.pc < frame.last_pc) {
             uint32_t threshold = kFastOsrLoopThreshold;
@@ -513,7 +498,14 @@ bool FastExecute(FastFrame& frame,
         if (frame.pc == 9999 || frame.threw_exception) { AccumulatePgoCounters(frame); frame.CleanupTracked(); return false; }
         if (frame.pc >= instr_count) { AccumulatePgoCounters(frame); frame.CleanupTracked(); return true; }
 
-        // Decimated interrupt check — every 64 instructions.
+        // Decimated safepoint + interrupt check — every 64 instructions.
+        // Single cadence drains both (a) abort/interrupt signals and (b) a
+        // GC-requested cooperative safepoint (suspend_seq), so a straight-line
+        // interpreted method with no backward branches still cooperatively
+        // participates in GC at least every 64 ops — closing the back-edge-only
+        // safepoint gap (A3) and letting the per-backedge probe (C1) be retired.
+        // SafepointPoll throws chaos_managed_exception on abort/interrupt;
+        // translate to the frame's threw_exception convention.
         if ((++check_counter & kCheckMask) == 0 && thread != nullptr) {
             if (CHAOS_IL2CPP_UNLIKELY(
                     thread->pending_abort.load(std::memory_order_relaxed) ||
@@ -522,6 +514,21 @@ bool FastExecute(FastFrame& frame,
                 AccumulatePgoCounters(frame);
                 frame.CleanupTracked();
                 return false;
+            }
+            // GC cooperative safepoint: drain any in-progress suspension even in
+            // straight-line code (no back-edge).  Reuses the same throwing-handling
+            // as the former per-backedge probe (moved to the decimated slot).
+            if (CHAOS_IL2CPP_UNLIKELY(
+                    thread->suspend_seq.load(std::memory_order_acquire) != 0)) {
+                try {
+                    threading::SafepointPoll();
+                } catch (const chaos_managed_exception&) {
+                    frame.threw_exception = true;
+                    frame.pc = 9999;
+                    AccumulatePgoCounters(frame);
+                    frame.CleanupTracked();
+                    return false;
+                }
             }
         }
 
