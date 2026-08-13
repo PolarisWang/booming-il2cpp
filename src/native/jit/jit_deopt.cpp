@@ -1,5 +1,6 @@
 #include "jit_deopt.h"
 #include "jit_method.h"
+#include "jit_engine.h" // kGprFileOff / kFprFileOff / kFprSlotSize / kGprCount / kFprCount
 #include "../interpreter/ir_reg_alloc.h"
 #include "../interpreter/osr_state.h"
 
@@ -90,14 +91,19 @@ void DeoptRuntime::DeoptTrap(JitMethod* nm, uint32_t return_address, NativeConte
     }
 
     if (out_gpr_file != nullptr) {
-        for (uint32_t vr = 0; vr < 64; ++vr) {
-            out_gpr_file[vr] = ReadSpillSlot(codegen_rsp, static_cast<int16_t>(32 + static_cast<int32_t>(vr * 8)));
+        for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+            out_gpr_file[vr] = ReadSpillSlot(codegen_rsp, static_cast<int16_t>(kGprFileOff + static_cast<int32_t>(vr * 8)));
         }
     }
 
     if (out_fpr_file != nullptr) {
-        for (uint32_t vr = 0; vr < 32; ++vr) {
-            out_fpr_file[vr] = *reinterpret_cast<const double*>(codegen_rsp + 544 + vr * 8);
+        // FPR spill slots are kFprSlotSize bytes apart (FprOff(vreg) layout),
+        // NOT 8 bytes.  A stride-8 read desyncs vregs >= 65 (reads the tail of
+        // the previous slot).  Matches StoreFpr (movejdqa → FprOff) and the
+        // ReadFpr fallback in jit_codegen_memory.cpp.
+        for (uint32_t vr = 0; vr < kFprCount; ++vr) {
+            out_fpr_file[vr] =
+                *reinterpret_cast<const double*>(codegen_rsp + kFprFileOff + vr * kFprSlotSize);
         }
     }
 

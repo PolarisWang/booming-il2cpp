@@ -1,6 +1,7 @@
 // jit_helpers.cpp — Runtime helper implementations for JIT generated code
 
 #include "jit_helpers.h"
+#include "jit_engine.h" // kGprFileOff / kFprFileOff / kFprSlotSize / kGprCount / kFprCount
 #include "jit_deopt.h"
 #include "jit_seh.h"
 
@@ -847,14 +848,19 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
 
     // Batch-copy all 64 GPR values from stack frame spill slots.
     // GPR file starts at codegen_rsp + kGprFileOff (= codegen_rsp + 32).
-    for (uint32_t vr = 0; vr < 64; ++vr) {
-        g_jit_deopt_state.gpr_file[vr] = *reinterpret_cast<const uint64_t*>(codegen_rsp + 32 + vr * 8);
+    for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+        g_jit_deopt_state.gpr_file[vr] = *reinterpret_cast<const uint64_t*>(codegen_rsp + kGprFileOff + vr * 8);
     }
 
     // Batch-copy all 32 FPR values from stack frame spill slots.
-    // FPR file starts at codegen_rsp + kFprFileOff (= codegen_rsp + 544).
-    for (uint32_t vr = 0; vr < 32; ++vr) {
-        g_jit_deopt_state.fpr_file[vr] = *reinterpret_cast<const double*>(codegen_rsp + 544 + vr * 8);
+    // FPR file starts at codegen_rsp + kFprFileOff.  Each virtual FPR occupies
+    // a kFprSlotSize-byte slot (32 on x64 / 16 on ARM64) as laid out by
+    // FprOff()/StoreFpr — must read with that stride, NOT 8, or vregs >= 65
+    // desync (Producer writes stride 32, a stride-8 read re-reads the tail of
+    // the previous slot).  Verified vs StoreFpr movejdqa → FprOff(vreg).
+    for (uint32_t vr = 0; vr < kFprCount; ++vr) {
+        g_jit_deopt_state.fpr_file[vr] =
+            *reinterpret_cast<const double*>(codegen_rsp + kFprFileOff + vr * kFprSlotSize);
     }
 
     // Look up type tags from the DeoptEntry for this native offset.
