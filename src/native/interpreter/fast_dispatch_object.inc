@@ -45,13 +45,16 @@ static void Handle_LdElem(FastFrame& frame, const interpreter::IRInstruction& in
     uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
     auto* arr = static_cast<interpreter::ArrayStorage*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
-    if (arr == nullptr) { frame.PushNull_NC(); ++frame.pc; return; }
+    // Step 3.1: null array / out-of-bounds must raise, not silently push null,
+    // per ECMA-335 (NullReferenceException / IndexOutOfRangeException).  Mirror
+    // the interpreter's existing null-throw convention (threw_exception + pc=9999).
+    if (arr == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
 
     if (arr->is_flat) {
-        if (index >= arr->flat_length) { frame.PushNull_NC(); ++frame.pc; return; }
+        if (index >= arr->flat_length) { frame.threw_exception = true; frame.pc = 9999; return; }
         PushFlatArrayElement(frame, arr, index);
     } else {
-        if (index >= arr->elements.size()) { frame.PushNull_NC(); ++frame.pc; return; }
+        if (index >= arr->elements.size()) { frame.threw_exception = true; frame.pc = 9999; return; }
         frame.PushIV(arr->elements[index]);
     }
     ++frame.pc;
@@ -125,7 +128,9 @@ static void Handle_StElem(FastFrame& frame, const interpreter::IRInstruction&) n
     uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
     auto* arr = static_cast<interpreter::ArrayStorage*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
-    if (arr == nullptr) { ++frame.pc; return; }
+    // Step 3.1: null array store must raise NullReferenceException, not silently
+    // skip (ECMA-335). Mirror the null-throw convention.
+    if (arr == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
 
     if (arr->is_flat) {
         if (index >= arr->flat_length) {
@@ -395,13 +400,15 @@ static void Handle_LdElemA(FastFrame& frame, const interpreter::IRInstruction&) 
     uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
     auto* arr = static_cast<interpreter::ArrayStorage*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
-    if (arr == nullptr) { frame.PushNull_NC(); ++frame.pc; return; }
+    // Step 3.1: null / OOB must raise (NullReferenceException /
+    // IndexOutOfRangeException), not silently push null.
+    if (arr == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
 
     if (arr->is_flat) {
-        if (index >= arr->flat_length) { frame.PushNull_NC(); ++frame.pc; return; }
+        if (index >= arr->flat_length) { frame.threw_exception = true; frame.pc = 9999; return; }
         PushFlatArrayElement(frame, arr, index);
     } else {
-        if (index >= arr->elements.size()) { frame.PushNull_NC(); ++frame.pc; return; }
+        if (index >= arr->elements.size()) { frame.threw_exception = true; frame.pc = 9999; return; }
         frame.PushIV(arr->elements[index]);
     }
     ++frame.pc;
