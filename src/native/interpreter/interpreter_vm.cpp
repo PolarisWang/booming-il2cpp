@@ -581,9 +581,13 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     g_static_fields.resize(instruction.field_offset + 1u);
                 }
                 auto& slot = g_static_fields[instruction.field_offset];
-                using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-                BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&slot.obj));
-                chaos::il2cpp::runtime_core::BgcRecordRootChange(reinterpret_cast<void**>(&slot.obj), slot.obj);
+                // NO GC write barrier / root registration on this slot:
+                // g_static_fields is a plain non-GC vector (excluded from
+                // GcRegisterStaticRootRange / GcScanStaticRoots) holding non-GC
+                // InterpreterObject* values. Treating it as a registered root
+                // would make BgcRecordRootChange re-mark an interpreter-heap
+                // pointer as a managed object at BGC re-mark — memory corruption.
+                // Mirrors the barrier-free Reg_StSFld path in ir_reg_alloc.cpp.
                 slot = Pop(&frame->stack);
                 break;
             }

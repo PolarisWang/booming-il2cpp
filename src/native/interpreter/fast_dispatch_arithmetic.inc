@@ -307,11 +307,11 @@ static void Handle_StSFld(FastFrame& frame, const interpreter::IRInstruction& in
     if (sfields.size() <= instr.field_offset) {
         sfields.resize(instr.field_offset + 1u);
     }
-    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&sfields[instr.field_offset].obj));
-    chaos::il2cpp::runtime_core::BgcRecordRootChange(
-        reinterpret_cast<void**>(&sfields[instr.field_offset].obj),
-        sfields[instr.field_offset].obj);
+    // NO GC write barrier / root registration on this slot: g_static_fields is
+    // a plain non-GC vector (not registered via GcRegisterStaticRootRange) holding
+    // non-GC InterpreterObject* values. Root-registering it would make
+    // BgcRecordRootChange re-mark an interpreter-heap pointer as a managed object
+    // at BGC re-mark — memory corruption. Mirrors barrier-free Reg_StSFld.
     sfields[instr.field_offset] = frame.PopIV();
     ++frame.pc;
 }
