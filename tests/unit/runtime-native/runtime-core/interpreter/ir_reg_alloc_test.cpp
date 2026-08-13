@@ -1071,5 +1071,31 @@ TEST(IR_RegAlloc, RewritesNoChkAndBarrierOpcodes) {
     EXPECT_TRUE(saw_stelem) << "StElemNoChk should be rewritten to StElem";
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// StInd/StObj write-barrier (P1 GC) — non-GC destination path
+// ═══════════════════════════════════════════════════════════════════════════
+// Reg_StInd/Reg_StObj now mirror FastExecute's guarded write barrier: a stack-local
+// (non-GC) destination must take the plain-store path (chaos_is_gc_pointer=false)
+// and round-trip correctly.  A live GC-nursery destination can't be built in this
+// sandbox test, but the non-GC branch proves the refactor didn't break stores.
+TEST(IR_RegAlloc, StIndStackLocalRoundTrips) {
+    uint64_t dst = 0;
+    RegisterInstruction instrs[] = {
+        // StInd: src1 = value (r8), src2 = address-of-dst (r9)
+        MakeRegBinOp(IROpCode::StInd, 0, 8, 9),
+    };
+    RegisterFrame frame = {};
+    frame.regs.set_reg(8, 0xDEADBEEFCAFEBABEull, static_cast<uint8_t>(ValueTag::Int64));
+    frame.regs.set_reg(9, reinterpret_cast<uint64_t>(&dst), static_cast<uint8_t>(ValueTag::ManagedPtr));
+
+    // Run just the StInd instruction (count 1).  dst is a stack local so
+    // chaos_is_gc_pointer is false → plain store path.
+    bool ok = RegisterExecute(frame, instrs, 1);
+    EXPECT_TRUE(ok) << "StInd to a stack-local must not fault";
+    EXPECT_FALSE(frame.threw_exception);
+    EXPECT_EQ(dst, 0xDEADBEEFCAFEBABEull) << "StInd non-GC path must store the value";
+}
+
+
 
 

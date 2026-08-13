@@ -8,6 +8,15 @@
 #include "generated_code_compat.h" // chaos_managed_exception (Step 2.2 in-band safepoint)
 namespace ri = chaos::il2cpp::runtime_instantiation;
 
+// GC write-barrier primitives for Reg_StInd/Reg_StObj (mirror FastExecute):
+// chaos_is_gc_pointer (gc_api.h, in namespace chaos::il2cpp::runtime_core),
+// BgcSatbPreWriteBarrier (gc_bgc_inline.h), chaos_gc_dirty_card (gc_card_table.h),
+// BarrierCriticalSectionScope (forbid_suspend.h).
+#include <gc/gc_api.h>
+#include <gc/gc_bgc_inline.h>
+#include <gc/gc_card_table.h>
+#include <forbid_suspend.h>
+
 #include "jit_engine.h"         // Compile, JitMethod, CompileConfig
 #include "jit_seh.h"            // RegisterNativeCodeSection, FindNativeCodeByAddress
 #include "../jit/jit_helpers.h" // CodegenLdVirtFtn
@@ -1611,7 +1620,24 @@ static void Reg_StInd(RegisterFrame& frame, const RegisterInstruction& instr) no
     uint64_t val = frame.regs.reg(instr.src1_reg());
     void* ptr = reinterpret_cast<void*>(frame.regs.reg(instr.src2_reg()));
     if (ptr != nullptr) {
-        *static_cast<uint64_t*>(ptr) = val;
+        // Mirror FastExecute Handle_StInd: when the destination is a GC-managed
+        // pointer, emit the SATB pre-write barrier + dirty the card under the
+        // barrier critical section (store→card atomic).  Otherwise the stored
+        // GC ref would be un-tracked → premature collection / missing card
+        // mark → UAF that the FastExecute tier doesn't have.
+        const bool is_gc = chaos::il2cpp::runtime_core::chaos_is_gc_pointer(ptr);
+        if (is_gc) {
+            using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+            BgcSatbPreWriteBarrier(reinterpret_cast<void**>(ptr));
+        }
+        if (is_gc) {
+            using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
+            BarrierCriticalSectionScope barrier;
+            *static_cast<uint64_t*>(ptr) = val;
+            chaos_gc_dirty_card(ptr);
+        } else {
+            *static_cast<uint64_t*>(ptr) = val;
+        }
     }
     ++frame.pc;
 }
@@ -1652,8 +1678,24 @@ static void Reg_StObj(RegisterFrame& frame, const RegisterInstruction& instr) no
     void* ptr = reinterpret_cast<void*>(frame.regs.reg(instr.src2_reg()));
     if (ptr != nullptr) {
         auto* iv = static_cast<InterpreterValue*>(ptr);
-        iv->tag = static_cast<ValueTag>(tag);
-        iv->i64 = static_cast<int64_t>(val);
+        // Mirror FastExecute Handle_StObj: when the destination is a real
+        // GC-managed InterpreterValue, emit the SATB pre-write barrier on the
+        // object slot + store→card under the barrier critical section, so the
+        // written GC ref is tracked (no un-tracked write → UAF).
+        if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(iv)) {
+            using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+            using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
+            BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
+            {
+                BarrierCriticalSectionScope barrier;
+                iv->tag = static_cast<ValueTag>(tag);
+                iv->i64 = static_cast<int64_t>(val);
+                chaos_gc_dirty_card(iv);
+            }
+        } else {
+            iv->tag = static_cast<ValueTag>(tag);
+            iv->i64 = static_cast<int64_t>(val);
+        }
     }
     ++frame.pc;
 }
