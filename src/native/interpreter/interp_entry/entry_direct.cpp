@@ -701,6 +701,17 @@ void InterpreterEntryDirect(uintptr_t method_key, void* args_buf, void* ret_buf)
             GetTierCounters().step_1c.fetch_add(1, std::memory_order_relaxed);
             if (!patch_method->cached_sig_valid)
                 CacheSignature(patch_method);
+            // +call_count (B6): this 2-instr fast path RETURNS early, bypassing the
+            // unified tier_upgrade call_count.fetch_add below.  Without counting here
+            // a hot getter (ldc.i4;ret / ldarg;ret / ldnull;ret) would sit forever at
+            // T1 and never promote.  Only count when op0 is one of the fast-path ops
+            // (so non-fast op0 falls through to the unified check exactly once).
+            bool is_fast_path_op = (op0.op_code == interpreter::IROpCode::LdArg) ||
+                                   (op0.op_code == interpreter::IROpCode::LdcI4) ||
+                                   (op0.op_code == interpreter::IROpCode::LdNull);
+            if (is_fast_path_op) {
+                patch_method->call_count.fetch_add(1, std::memory_order_relaxed);
+            }
             // [Full 2-instr fast path follows; kept minimal here for clarity]
             if (op0.op_code == interpreter::IROpCode::LdArg) {
                 if (ret_buf != nullptr) {
