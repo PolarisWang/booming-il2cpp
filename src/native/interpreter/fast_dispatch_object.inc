@@ -111,9 +111,14 @@ static void Handle_StElemNoChk(FastFrame& frame, const interpreter::IRInstructio
         // the array itself is a real GC-managed object (mirrors Handle_StInd).
         if (chaos_is_gc_pointer(arr)) {
             using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+            using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
             BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
-            arr->elements[index] = val;
-            chaos_gc_dirty_card(arr);
+            // store→card in one non-preemptible critical section (A2b close).
+            {
+                BarrierCriticalSectionScope barrier;
+                arr->elements[index] = val;
+                chaos_gc_dirty_card(arr);
+            }
         } else {
             arr->elements[index] = val;
         }
@@ -163,9 +168,14 @@ static void Handle_StElem(FastFrame& frame, const interpreter::IRInstruction&) n
         // is a real GC-managed object (mirrors Handle_StInd).
         if (chaos_is_gc_pointer(arr)) {
             using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+            using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
             BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
-            arr->elements[index] = val;
-            chaos_gc_dirty_card(arr);
+            // store→card in one non-preemptible critical section (A2b close).
+            {
+                BarrierCriticalSectionScope barrier;
+                arr->elements[index] = val;
+                chaos_gc_dirty_card(arr);
+            }
         } else {
             arr->elements[index] = val;
         }
@@ -236,12 +246,20 @@ static void Handle_StInd(FastFrame& frame, const interpreter::IRInstruction&) no
     uint64_t val = frame.stack[--frame.sp];
     void* ptr = reinterpret_cast<void*>(frame.stack[--frame.sp]);
     if (ptr != nullptr) {
-        if (chaos_is_gc_pointer(ptr)) {
+        const bool is_gc = chaos_is_gc_pointer(ptr);
+        if (is_gc) {
             using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
             BgcSatbPreWriteBarrier(reinterpret_cast<void**>(ptr));
         }
-        *static_cast<uint64_t*>(ptr) = val;
-        chaos_gc_dirty_card(ptr);
+        if (is_gc) {
+            using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
+            // store→card in one non-preemptible critical section (A2b close).
+            BarrierCriticalSectionScope barrier;
+            *static_cast<uint64_t*>(ptr) = val;
+            chaos_gc_dirty_card(ptr);
+        } else {
+            *static_cast<uint64_t*>(ptr) = val;
+        }
     }
     ++frame.pc;
 }
@@ -366,9 +384,14 @@ static void Handle_StObj(FastFrame& frame, const interpreter::IRInstruction&) no
         // is a real GC-managed InterpreterValue (mirrors Handle_StInd).
         if (chaos_is_gc_pointer(iv)) {
             using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+            using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
             BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
-            *iv = val;
-            chaos_gc_dirty_card(iv);
+            // store→card in one non-preemptible critical section (A2b close).
+            {
+                BarrierCriticalSectionScope barrier;
+                *iv = val;
+                chaos_gc_dirty_card(iv);
+            }
         } else {
             *iv = val;
         }

@@ -12,6 +12,7 @@
 #include <gc/gc_root_change.h>
 #include <gc/gc_api.h>
 #include <gc/gc_helpers.h>
+#include <forbid_suspend.h>
 
 #if defined(_MSC_VER)
 #include <intrin.h> // _ReturnAddress(), __readgsqword
@@ -83,22 +84,30 @@ extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StFld");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
+    using namespace chaos::il2cpp::runtime_core::threading;
     if (obj == nullptr)
         return;
     auto* io = static_cast<InterpreterObject*>(obj);
     if (field_idx >= io->fields.size()) {
-        io->fields.resize(field_idx + 1u);
+        io->fields.resize(field_idx + 1u);      // C++ heap alloc — outside barrier scope
     } else {
         // SATB pre-write barrier: record old value before overwriting.
         // Guard with heap check: stack-allocated value type slots don't
         // need SATB recording (stack is conservatively scanned by BGC).
+        // SATB stays OUTSIDE the barrier scope — it can allocate (emergency
+        // GC) and must not be made non-preemptible.
         if (chaos_is_gc_pointer(obj)) {
             JitSatbPreWriteBarrier(reinterpret_cast<void**>(&io->fields[field_idx].obj));
         }
     }
-    io->fields[field_idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
-    if (chaos_is_gc_pointer(obj)) {
-        chaos_gc_dirty_card(obj);
+    bool is_gc = chaos_is_gc_pointer(obj);
+    // store→card in one non-preemptible critical section (A2b close).
+    {
+        BarrierCriticalSectionScope barrier;
+        io->fields[field_idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
+        if (is_gc) {
+            chaos_gc_dirty_card(obj);
+        }
     }
 }
 
@@ -111,15 +120,21 @@ extern "C" void CodegenStFldNoBarrier(void* obj, uint32_t field_idx, uint64_t va
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StFldNoBarrier");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
+    using namespace chaos::il2cpp::runtime_core::threading;
     if (obj == nullptr)
         return;
     auto* io = static_cast<InterpreterObject*>(obj);
     if (field_idx >= io->fields.size()) {
-        io->fields.resize(field_idx + 1u);
+        io->fields.resize(field_idx + 1u);      // C++ heap alloc — outside barrier scope
     }
-    io->fields[field_idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
-    if (chaos_is_gc_pointer(obj)) {
-        chaos_gc_dirty_card(obj);
+    bool is_gc = chaos_is_gc_pointer(obj);
+    // store→card in one non-preemptible critical section (A2b close).
+    {
+        BarrierCriticalSectionScope barrier;
+        io->fields[field_idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
+        if (is_gc) {
+            chaos_gc_dirty_card(obj);
+        }
     }
 }
 
@@ -543,17 +558,24 @@ extern "C" uint64_t CodegenLdElem(void* arr, int32_t index) noexcept {
 extern "C" void CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StElem");
     using namespace chaos::il2cpp::interpreter;
+    using namespace chaos::il2cpp::runtime_core;
+    using namespace chaos::il2cpp::runtime_core::threading;
     if (arr == nullptr)
         return;
     auto* as = static_cast<ArrayStorage*>(arr);
     auto idx = static_cast<size_t>(index >= 0 ? index : 0);
     if (idx >= as->elements.size()) {
-        as->elements.resize(idx + 1u);
+        as->elements.resize(idx + 1u);      // C++ heap alloc — outside barrier scope
     }
-    JitSatbPreWriteBarrier(reinterpret_cast<void**>(&as->elements[idx].obj));
-    as->elements[idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
-    if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(as)) {
-        chaos_gc_dirty_card(as);
+    JitSatbPreWriteBarrier(reinterpret_cast<void**>(&as->elements[idx].obj));  // SATB — outside scope (can allocate)
+    bool is_gc = chaos_is_gc_pointer(as);
+    // store→card in one non-preemptible critical section (A2b close).
+    {
+        BarrierCriticalSectionScope barrier;
+        as->elements[idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
+        if (is_gc) {
+            chaos_gc_dirty_card(as);
+        }
     }
 }
 
@@ -588,13 +610,19 @@ extern "C" void CodegenStElemNoCheck(void* arr, int32_t index, uint64_t value) n
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StElemNoCheck");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
+    using namespace chaos::il2cpp::runtime_core::threading;
     // Skip NULL check and bounds check — BCE has proven safety
     auto* as = static_cast<ArrayStorage*>(arr);
     auto idx = static_cast<size_t>(index >= 0 ? index : 0);
-    JitSatbPreWriteBarrier(reinterpret_cast<void**>(&as->elements[idx].obj));
-    as->elements[idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
-    if (chaos_is_gc_pointer(as)) {
-        chaos_gc_dirty_card(as);
+    JitSatbPreWriteBarrier(reinterpret_cast<void**>(&as->elements[idx].obj));  // SATB — outside scope (can allocate)
+    bool is_gc = chaos_is_gc_pointer(as);
+    // store→card in one non-preemptible critical section (A2b close).
+    {
+        BarrierCriticalSectionScope barrier;
+        as->elements[idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
+        if (is_gc) {
+            chaos_gc_dirty_card(as);
+        }
     }
 }
 
@@ -682,18 +710,26 @@ extern "C" void CodegenStObj(void* ptr, uint64_t value) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StObj");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
+    using namespace chaos::il2cpp::runtime_core::threading;
     if (ptr == nullptr)
         return;
     auto* iv = static_cast<InterpreterValue*>(ptr);
     // SATB pre-write barrier: record old value before overwriting.
     // Guard with heap check: stack-allocated value type slots don't
     // need SATB recording (stack is conservatively scanned by BGC).
+    // SATB stays OUTSIDE the barrier scope — it can allocate and must not
+    // be made non-preemptible.
     if (chaos_is_gc_pointer(ptr)) {
         JitSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
     }
-    *iv = InterpreterValue::from_i64(static_cast<int64_t>(value));
-    if (chaos_is_gc_pointer(ptr)) {
-        chaos_gc_dirty_card(ptr);
+    bool is_gc = chaos_is_gc_pointer(ptr);
+    // store→card in one non-preemptible critical section (A2b close).
+    {
+        BarrierCriticalSectionScope barrier;
+        *iv = InterpreterValue::from_i64(static_cast<int64_t>(value));
+        if (is_gc) {
+            chaos_gc_dirty_card(ptr);
+        }
     }
 }
 

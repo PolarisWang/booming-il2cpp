@@ -444,19 +444,24 @@ static void Handle_StFld(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t idx = static_cast<uint32_t>(instr.field_offset);
     // Non-GC interpreter object — no GC write barrier unless it is a real
     // GC-managed object (mirrors the guarded Handle_StInd idiom).
-    if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(obj)) {
+    const bool is_gc = chaos::il2cpp::runtime_core::chaos_is_gc_pointer(obj);
+    if (is_gc) {
         using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
         BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&storage->fields[idx].obj));
     }
     // Fast path: skip bounds check when field is within current allocation.
-    if (idx < storage->fields.size()) {
-        storage->fields[idx] = val;
-    } else {
+    // resize is a C++ heap alloc — do it OUTSIDE the barrier scope.
+    if (idx >= storage->fields.size()) {
         storage->fields.resize(idx + 1);
-        storage->fields[idx] = val;
     }
-    if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(obj)) {
+    // store→card in one non-preemptible critical section (A2b close).
+    if (is_gc) {
+        using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
+        BarrierCriticalSectionScope barrier;
+        storage->fields[idx] = val;
         chaos_gc_dirty_card(obj);
+    } else {
+        storage->fields[idx] = val;
     }
     ++frame.pc;
 }

@@ -491,6 +491,16 @@ extern "C" uint32_t RequestGlobalSafepoint() noexcept {
                 if (t == tls_this_thread) return true;
                 if (t->suspend_ack.load(std::memory_order_acquire) != s_confirm_epoch)
                     ++s_remaining;
+                // A thread in a write-barrier store→card critical section has
+                // acked-but-continued (tls_forbid_suspend_depth>0 makes
+                // SafepointPoll ack without blocking).  suspend_ack is therefore
+                // NOT sufficient to conclude the thread is at a safe point: it may
+                // still be between the store and the card-dirty.  Wait for
+                // barrier_inflight to reach 0 too, so young-GC Phase-1 never scans
+                // an old page whose just-stored nursery edge has a still-clean card
+                // (the A2b cross-gen UAF window).
+                if (t->barrier_inflight.load(std::memory_order_acquire) != 0)
+                    ++s_remaining;
                 return true;
             });
             if (s_remaining == 0) break;
@@ -760,4 +770,26 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
     // Phase 3: Scan registered static root ranges (ALC-isolated static fields).
     GcScanStaticRoots(s_callback, s_user_data);
 }}
+
+// ── extern "C" write-barrier critical-section bridge (generated AOT code) ──
+// The managed Codegen emitter cannot see forbid_suspend.h / thread_state.h, so
+// it emits these two pairing calls around a store→card sequence instead of the
+// native RAII scope.  Same semantics as BarrierCriticalSectionScope: enter
+// BEFORE the object store (ack-and-continue + barrier_inflight=1), exit AFTER
+// the card is dirtied (release clear of barrier_inflight=0).  The safepoint
+// coordinator waits for barrier_inflight to reach 0 before young-GC Phase-1.
+extern "C" void chaos_barrier_enter() noexcept {
+    using namespace chaos::il2cpp::runtime_core::threading;
+    ++tls_forbid_suspend_depth;                      // anti-deadlock: ack-and-continue
+    if (auto* t = tls_this_thread; t != nullptr)
+        t->barrier_inflight.store(1, std::memory_order_relaxed);
+}
+
+extern "C" void chaos_barrier_exit() noexcept {
+    using namespace chaos::il2cpp::runtime_core::threading;
+    if (auto* t = tls_this_thread; t != nullptr)
+        t->barrier_inflight.store(0, std::memory_order_release);
+    --tls_forbid_suspend_depth;
+}
+
 

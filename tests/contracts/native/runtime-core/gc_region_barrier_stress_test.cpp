@@ -32,6 +32,7 @@
 #include "gc_api.h"
 #include "gc_static_roots.h"
 #include "thread_state.h"
+#include "forbid_suspend.h"
 
 #include "gc_test_macros.h"
 
@@ -60,6 +61,11 @@ void Worker(int id) {
     for (int i = 0; i < kObjsPerThread; i++) {
         void* nursery_obj = NurseryAllocate(128);
         if (nursery_obj != nullptr) {
+            // A2b contract: the store and the card-dirty must appear atomic to the
+            // safepoint coordinator (young-GC Phase-1 must never scan an old page
+            // with a just-stored nursery ref on a still-clean card).  This is the
+            // same BarrierCriticalSectionScope that production write sites hold.
+            threading::BarrierCriticalSectionScope barrier;
             g_old_slot[id]->nursery_slot[i] = nursery_obj;
             // Record the old->nursery cross-gen reference via the generation-aware
             // barrier.  This both dirty-cards the old object (so young GC rescans

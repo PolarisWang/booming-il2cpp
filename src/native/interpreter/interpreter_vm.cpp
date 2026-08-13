@@ -14,6 +14,7 @@
 #include <gc/gc_root_change.h>
 #include <gc/gc_helpers.h>
 #include <gc/gc_api.h>
+#include <forbid_suspend.h>
 #include <chaos/pal/pal_eh.h>
 
 #if CHAOS_IL2CPP_DEBUGGER
@@ -840,9 +841,14 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     }
                     if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(object)) {
                         using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+                        using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
                         BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&object->fields[instruction.field_offset].obj));
-                        object->fields[instruction.field_offset] = value;
-                        chaos_gc_dirty_card(object);
+                        // store→card in one non-preemptible critical section (A2b close).
+                        {
+                            BarrierCriticalSectionScope barrier;
+                            object->fields[instruction.field_offset] = value;
+                            chaos_gc_dirty_card(object);
+                        }
                     } else {
                         object->fields[instruction.field_offset] = value;
                     }
@@ -867,9 +873,14 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 }
                 if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(array)) {
                     using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+                    using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
                     BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&array->elements[index].obj));
-                    array->elements[index] = value;
-                    chaos_gc_dirty_card(array);
+                    // store→card in one non-preemptible critical section (A2b close).
+                    {
+                        BarrierCriticalSectionScope barrier;
+                        array->elements[index] = value;
+                        chaos_gc_dirty_card(array);
+                    }
                 } else {
                     // Non-GC interpreter ArrayStorage — no GC write barrier needed.
                     array->elements[index] = value;
@@ -1582,13 +1593,21 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     } else {
                         stind_raw = reinterpret_cast<CHAOS_IL2CPP_INT64>(stind_val.obj);
                     }
-                    std::memcpy(stind_dst, &stind_raw, stind_write_size);
-                    // Write barrier for reference stores only when the destination
-                    // is a real GC-managed object (mirrors Handle_StInd). For non-GC
-                    // interpreter slots the store needs no GC card/SATB.
-                    if (instruction.immediate_i4 == 10 &&
-                        chaos::il2cpp::runtime_core::chaos_is_gc_pointer(stind_dst)) {
+                    // A2b close: for a GC reference store (immediate 10 = ref into a
+                    // GC-managed destination), the store (memcpy) and the card-dirty
+                    // must appear atomic to the safepoint coordinator.  Hold the barrier
+                    // critical section around BOTH so young-GC Phase-1 never scans the
+                    // slot between the write and the card (dropped cross-gen edge).  For
+                    // non-GC / non-ref stind the store needs no GC barrier.
+                    const bool stind_is_gc_ref = (instruction.immediate_i4 == 10 &&
+                                                  chaos::il2cpp::runtime_core::chaos_is_gc_pointer(stind_dst));
+                    if (stind_is_gc_ref) {
+                        using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
+                        BarrierCriticalSectionScope barrier;
+                        std::memcpy(stind_dst, &stind_raw, stind_write_size);
                         chaos_gc_dirty_card(stind_dst);
+                    } else {
+                        std::memcpy(stind_dst, &stind_raw, stind_write_size);
                     }
                 }
                 break;
@@ -1863,9 +1882,14 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     auto* iv_slot = static_cast<InterpreterValue*>(stobj_addr.obj);
                     if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(iv_slot)) {
                         using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+                        using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
                         BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv_slot->obj));
-                        *iv_slot = stobj_val;
-                        chaos_gc_dirty_card(stobj_addr.obj);
+                        // store→card in one non-preemptible critical section (A2b close).
+                        {
+                            BarrierCriticalSectionScope barrier;
+                            *iv_slot = stobj_val;
+                            chaos_gc_dirty_card(stobj_addr.obj);
+                        }
                     } else {
                         // Non-GC interpreter slot — no GC write barrier needed.
                         *iv_slot = stobj_val;

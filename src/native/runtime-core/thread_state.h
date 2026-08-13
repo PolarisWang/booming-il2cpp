@@ -101,6 +101,16 @@ struct ManagedThread {
     /// Read (and cleared at release) by the safepoint initiator.
     std::atomic<uint32_t>    suspend_ack{0};
 
+    /// Nonzero while this thread is inside a write-barrier store→card critical
+    /// section.  Set BEFORE the object store, cleared AFTER the card table is
+    /// dirtied.  Written by the owning thread (relaxed set / release clear);
+    /// read cross-thread by the safepoint coordinator (acquire).  Pairs with
+    /// tls_forbid_suspend_depth: the thread acks-and-continues (no deadlock)
+    /// inside the scope, yet the coordinator still waits for barrier_inflight==0
+    /// before starting young-GC Phase-1, so a store can never be observed with
+    /// its card still clean — closes the A2b cross-gen UAF window.
+    std::atomic<uint32_t>    barrier_inflight{0};
+
     /// Event handle for event-based safepoint wait (infinite wait,
     /// zero CPU).  Created in RegisterThread, closed in UnregisterThread.
     /// Set by ReleaseGlobalSafepoint to wake all waiting threads.

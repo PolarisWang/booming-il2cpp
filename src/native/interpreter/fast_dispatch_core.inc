@@ -19,6 +19,7 @@ namespace vr = chaos::il2cpp::vtable_registry;
 #include <jit_engine.h>
 #include <jit_seh.h>
 #include <jit_helpers.h>
+#include <forbid_suspend.h>
 
 #include <memory_domain.h>
 #include <patch_loader.h>

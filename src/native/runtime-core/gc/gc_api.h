@@ -108,6 +108,14 @@ static inline bool chaos_is_gc_pointer(const void* ptr) noexcept {
     // card table, covering old-gen and nursery.  Stack-allocated value
     // types live far below this address.
     if (addr >= g_heap_base) [[likely]] return true;
+    // Nursery regions are allocated separately via RegionManager and may sit
+    // BELOW g_heap_base (g_heap_base is not the whole-heap lower bound; see
+    // the conservative scan filter in thread_state.cpp:674-678).  Mirror the
+    // DirtyCard nursery check so a true GC nursery object below base is not
+    // mistaken for a stack address — otherwise the write barrier would skip
+    // carding an old→nursery store → dropped cross-gen edge → UAF.
+    if (addr >= g_nursery_range_begin && addr < g_nursery_range_end) [[likely]]
+        return true;
     // POH regions are independently VirtualAlloc'd and may be below
     // g_heap_base (the card table does not cover POH).  Check via the
     // lock-free POH slot array.

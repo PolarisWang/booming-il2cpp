@@ -7,6 +7,11 @@
 #include <chrono>
 #include <cstdint>
 
+// Pull in tls_this_thread / ManagedThread for the write-barrier critical
+// section scope below.  thread_state.h does not include this header, so there
+// is no include cycle.
+#include "thread_state.h"
+
 namespace chaos::il2cpp::runtime_core::threading {
 
 /// Thread-local depth counter for ForbidSuspendScope.
@@ -78,6 +83,41 @@ private:
         return std::chrono::duration_cast<std::chrono::milliseconds>(
             now.time_since_epoch()).count();
     }
+};
+
+/// RAII guard that makes a store→card write-barrier critical section
+/// non-preemptible from the safepoint coordinator's perspective.
+///
+/// Aligns CRAG's write barrier with CoreCLR's poll-free-leaf semantics: the
+/// safepoint coordinator must observe store+card as one atomic step.  This
+/// scope (entered BEFORE the object store, exited AFTER the card is dirtied):
+///   1. increments tls_forbid_suspend_depth — so SafepointPoll acks-and-
+///      continues (no deadlock) instead of PalEventWait-blocking mid-window;
+///   2. publishes cross-thread ManagedThread::barrier_inflight=1 on entry and
+///      0 (release) on exit — the coordinator waits for 0 before Phase-1, so a
+///      store is never scanned with its card still clean.
+///
+/// CRITICAL: only the store + card-table-dirty go inside this scope.  Do NOT
+/// wrap the SATB pre-write barrier (BgcSatbPreWriteBarrier can allocate via
+/// AllocateSatbBuffer / flush, which may request an emergency full GC) or any
+/// C++ heap allocation (resize) inside it — allocation can trigger a safepoint.
+class BarrierCriticalSectionScope {
+public:
+    BarrierCriticalSectionScope() noexcept {
+        ++tls_forbid_suspend_depth;                       // anti-deadlock: ack-and-continue
+        if (auto* t = tls_this_thread; t != nullptr)
+            t->barrier_inflight.store(1, std::memory_order_relaxed);
+    }
+    ~BarrierCriticalSectionScope() noexcept {
+        if (auto* t = tls_this_thread; t != nullptr)
+            t->barrier_inflight.store(0, std::memory_order_release);  // release orders the card-set
+        --tls_forbid_suspend_depth;
+    }
+
+    BarrierCriticalSectionScope(const BarrierCriticalSectionScope&) = delete;
+    BarrierCriticalSectionScope& operator=(const BarrierCriticalSectionScope&) = delete;
+    BarrierCriticalSectionScope(BarrierCriticalSectionScope&&) = delete;
+    BarrierCriticalSectionScope& operator=(BarrierCriticalSectionScope&&) = delete;
 };
 
 }  // namespace chaos::il2cpp::runtime_core::threading
