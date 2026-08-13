@@ -280,12 +280,18 @@ TEST(Interpreter_Stress, MixedOpcode) {
     constexpr uint32_t kIterations = 50000;
 
     uint64_t args[5] = {};
-    FastFrame frame = {};
-    frame.args = args;
-    frame.arg_count = 0;
-    frame.local_count = 0;
 
     for (uint32_t i = 0; i < kIterations; ++i) {
+        // Re-arms the frame for this invocation (zeroes pc/sp/stack/tags).  The
+        // other stress tests (StressWorker, LoopBackedge) do the same.  Reusing
+        // a single FastFrame across iterations leaks stale eval-stack state
+        // into the next call and, over 50k unbalanced-opcode iterations, drives
+        // the frame's sp out of range → OOB → hard crash (EXIT=3).
+        FastFrame frame = {};
+        frame.args = args;
+        frame.arg_count = 0;
+        frame.local_count = 0;
+
         bool ok = FastExecute(frame,
             method.instructions.data(),
             static_cast<uint32_t>(method.instructions.size()));
