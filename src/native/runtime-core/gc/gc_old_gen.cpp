@@ -1058,7 +1058,42 @@ bool MarkSweepOldGen::MarkObject(void* obj) {
     if (type_info_ptr == nullptr) return false;
 
     auto& layout_registry = GcLayoutRegistry::Instance();
-    if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) return false;
+    if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) {
+        // ── Conservative fallback (A2b-raw-object fix) ─────────────────────
+        // A raw `scanning=true` object (e.g. the stress test's OldMessage, a
+        // plain struct of pointers allocated via G_OldGen().Allocate(size,
+        // scanning=true)) has NO TypeInfo in its first word — its first word is
+        // payload data (a nursery pointer).  IsValidTypeInfoPointer therefore
+        // rejects it, so it is never marked and the full-GC sweep reclaims it
+        // even when a registered static root still references it → the root
+        // dangles (reads freed-and-reused memory).
+        //
+        // Mark a bounded span conservatively, mirroring DrainMarkStack's
+        // TypeInfo-less fallback (:1104-1123): cap at the largest size-class
+        // and the remaining page payload.  This keeps every slot of the raw
+        // block's span alive across the sweep.  The transitive contents (the
+        // nursery refs inside the raw block) are then walked by DrainMarkStack
+        // (via its own conservative fallback) and by the card-driven page scan.
+        //
+        // Guard: only do this for objects in a valid in-use *scanning* page.
+        // FindPage already succeeded above; sniff the scanning/oversized nature
+        // of the page to avoid marking arbitrary aligned stack/heap garbage.
+        CHAOS_IL2CPP_SIZE raw_num_slots = 1;
+        if (page->in_use.load(std::memory_order_acquire)) {
+            CHAOS_IL2CPP_SIZE payload_remaining = page->payload_size - offset;
+            CHAOS_IL2CPP_SIZE max_bytes = kOldGenSizeClasses[kOldGenNumSizeClasses - 1];
+            if (payload_remaining < max_bytes) max_bytes = payload_remaining;
+            raw_num_slots = (max_bytes + sizeof(void*) - 1) / sizeof(void*);
+            if (raw_num_slots < 1) raw_num_slots = 1;
+        }
+        CHAOS_IL2CPP_SIZE raw_slot_idx = offset / sizeof(void*);
+        bool raw_newly_set = GcMarkBitmap(page->MarkBitmap(), page->bitmap_bytes)
+                                 .MarkRange(raw_slot_idx, raw_num_slots);
+        if (raw_newly_set) {
+            marked_count_.fetch_add(1, std::memory_order_relaxed);
+        }
+        return raw_newly_set;
+    }
 
     uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
     if (stable_id == 0) return false;
@@ -3038,10 +3073,24 @@ bool MarkSweepOldGen::TryMarkRoot(void* addr) {
     // FindPage before IsValidManagedObject: FindPage is safe for arbitrary
     // values (numeric range comparison only, no pointer dereference).
     auto* page = FindPage(val);
-    if (page == nullptr || !page->in_use.load(std::memory_order_acquire)) return false;
+    if (page == nullptr || !page->in_use.load(std::memory_order_acquire)) {
+        return false;
+    }
 
-    // Now safe to read the first word (memory is within a valid heap page).
-    if (!IsValidManagedObject(val)) return false;
+    // Now safe to read inside the page.  A root may point at (a) a normal
+    // managed object whose first word is a valid TypeInfo, or (b) a raw
+    // `scanning=true` object (e.g. the stress OldMessage) whose first word is
+    // payload data with NO TypeInfo.  Historically this checked only
+    // IsValidManagedObject (TypeInfo gate), so TypeInfo-less raw objects were
+    // never marked and the sweep reclaimed them even while still root-
+    // referenced → dangling (A2b true root cause).  Defer the TypeInfo decision
+    // to MarkObject, which now conservatively marks raw objects on a scanning
+    // page.  Keep a floor sanity check: only attempt when the page is a
+    // scanning page (it is expected to hold pointer-bearing objects), so we do
+    // not conservatively mark arbitrary aligned values on non-scanning pages.
+    if (!page->scanning) {
+        return false;
+    }
 
     if (MarkObject(val)) {
         mark_stack_.push_back(val);
@@ -3068,8 +3117,12 @@ void MarkSweepOldGen::ScanRangeForRoots(void* range_begin, void* range_end) {
         auto* page = FindPage(val);
         if (page == nullptr || !page->in_use.load(std::memory_order_acquire)) continue;
 
-        // Now safe to read the first word (memory is within a valid heap page).
-        if (!IsValidManagedObject(val)) continue;
+        // Defer the TypeInfo decision to MarkObject (see TryMarkRoot): a raw
+        // scanning=true object has no TypeInfo first word but is still a live
+        // root reference and must be conservatively marked.  Only gate on the
+        // page being a scanning page so we don't conservatively mark arbitrary
+        // aligned values on non-scanning pages.
+        if (!page->scanning) continue;
 
         if (MarkObject(val)) {
             mark_stack_.push_back(val);

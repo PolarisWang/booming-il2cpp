@@ -328,6 +328,25 @@ static void PreemptiveSuspendHandler(uint64_t epoch) noexcept {
     auto* thread = tls_this_thread;
     if (thread == nullptr) return;
 
+    // ── Barrier critical-section guard (A2b leaf, applies to ALL platforms) ──
+    // If this thread is inside a write-barrier store→card critical section
+    // (BarrierCriticalSectionScope raised tls_forbid_suspend_depth and set
+    // barrier_inflight), it MUST ack-and-continue and NOT park.  Parking here
+    // (PalEventWait / signal-stack spin / trampoline redirect) would strand the
+    // thread mid-window with barrier_inflight still 1 — the coordinator blocks on
+    // barrier_inflight==0 and eventually force-releases at the hard timeout, then
+    // scans with the store's card still clean → A2b cross-gen UAF.  Acking-and-
+    // continuing lets the thread finish the store + card-dirty and exit the scope
+    // (barrier_inflight→0, release), satisfying the coordinator's drain wait; the
+    // NEXT SafepointPoll (after the scope exits) properly parks if the safepoint
+    // is still active.
+    uint32_t seq = thread->suspend_seq.load(std::memory_order_acquire);
+    thread->suspend_ack.store(seq, std::memory_order_release);
+    if (tls_forbid_suspend_depth > 0 ||
+        thread->barrier_inflight.load(std::memory_order_acquire) != 0) [[unlikely]] {
+        return;   // ack-and-continue; coordinator waits on barrier_inflight==0
+    }
+
     // Capture ucontext from the PAL signal handler (only available
     // on POSIX with SA_SIGINFO).  Phase 2 C: the ucontext is owned by PAL and
     // keyed by this thread's capture slot (persisted so the GC can read it
@@ -347,9 +366,7 @@ static void PreemptiveSuspendHandler(uint64_t epoch) noexcept {
     // thread's normal stack, which handles the actual safepoint wait.
     if (thread->gc_mode.load(std::memory_order_acquire) == kGcModeCooperative) {
         // Acknowledge the safepoint so the coordinator sees our response.
-        uint32_t seq = thread->suspend_seq.load(std::memory_order_acquire);
-        thread->suspend_ack.store(seq, std::memory_order_release);
-
+        // (seq already loaded + acked at function top by the barrier guard.)
         // Redirect RIP to the trampoline via ucontext modification.
         // This runs on the signal stack but writes to the normal stack
         // (original_rsp - 8) — both are in the same address space.
