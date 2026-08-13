@@ -76,18 +76,18 @@
 2. **`SimdFma`(110) 表越界空指针**：上轮 `4b2900225` 已补 110-127 为 `kOp_Unsupported`，**已闭合**。
 3. **寄存器层 `Reg_LdElem`/`Reg_StElem` null/越界原静默**：上轮 `4b2900225` 已对齐抛异常，**已闭合**。
 
-### 三.1（本轮 review，2026-08-13 round-3）新发现的真缺口 — 已修 2 项，剩 4 项待做
+### 三.1（本轮 review，2026-08-13 round-3 + round-4）新发现的真缺口 — 全部 P1/P2 已修
 
-**✅ 已修（commit `f6e3a3335`）**：
-1. **RegisterVM div/rem 无守卫（P1）**：`Reg_Div/Rem/DivUn/RemUn`（ir_reg_alloc.cpp:905-922,1525-1550）对 `r==0`/`INT32_MIN/-1` 无守卫 → 硬件 #DE/SIGFPE + UB，FastExecute 已 fault/wrap。已镜像守卫(`r==0`→fault; INT32_MIN/-1→wrap)；新增 `RegisterExecuteDivByZeroFaultsNoCrash` + `RegisterExecuteDivInt32MinMinus1Wraps`（直接跑 RegisterExecute 证明）。
-2. **RegisterFile reg/set_reg 无越界防护（P1）**：`reg/reg_tag/set_reg/reg_f32/reg_f64` 无 `kTotalRegisters` 边界，≥88 局部方法 RegisterVM 静默 OOB 腐化相邻帧（FastExecute 会 fault）。加 `idx>=96` 越界返 0/no-op 防御性地板。
+**✅ 已修（5 commit，全部回归绿）**：
+1. **RegisterVM div/rem 无守卫（P1，`f6e3a3335`）**：`Reg_Div/Rem/DivUn/RemUn` 对 `r==0`/`INT32_MIN/-1` 无守卫 → 硬件 #DE/SIGFPE + UB。已镜像 FastExecute 守卫(`r==0`→fault; INT32_MIN/-1→wrap)；新增 `RegisterExecuteDivByZeroFaultsNoCrash` + `RegisterExecuteDivInt32MinMinus1Wraps` 探针。
+2. **RegisterFile reg/set_reg 无越界防护（P1，`f6e3a3335`）**：`reg/reg_tag/set_reg/reg_f32/f64` 无 `kTotalRegisters` 边界，≥88 局部方法 OOB 腐化相邻帧。加 `idx>=96` 越界返 0/no-op 地板。
+3. **NoChk/barrier opcode 103-106 层不一致（P1，`b13116729`）**：allocator 发射 `StFldBarrier/LdElemNoChk/StElemNoChk/LdElemANoChk`，RegisterVM dispatch 表只到 99→`op>99` fault；FastExecute 有。已在 AllocateRegisters 发射前改写为 checked ≤99 等价(103→StFld, 104/106→LdElem, 105→StElem)；新增 `RewritesNoChkAndBarrierOpcodes` 测试。
+4. **Reg_StInd/StObj 缺 GC 写屏障（P1，`b9653cb5d`）**：裸 `*ptr=val` 无 SATB/card/BarrierCriticalSection。镜像 Handle_StInd/StObj：`chaos_is_gc_pointer` 守卫 + `BgcSatbPreWriteBarrier(&slot)` + 临界区 store→`dirty_card`；新增 `StIndStackLocalRoundTrips` 证明非 GC plain-store 未破坏。
+5. **Reg_LdArgA/LdLocA null stub（P2，`1ffa775a3`）**：`Reg_LdArgA` 现返回 `&args[idx]` 真地址（镜像 Handle_LdArgA）；`LdLocA`（局部在 register file 不可寻址）→ `AllocateRegisters` 预扫拒该 method（空返回）路由 FastExecute（其 `Handle_LdLocA` 正确）→ 更新原 LdLocA 单测为新拒绝语义；新增 `LdArgAReturnsRealAddress` + `LdLocARejectsToFastExecute`。
 
-**⏳ 剩（已验证，待专项）**：
-- **P1 无Chk/barier opcode 103-106 层不一致**：allocator 发射 `StFldBarrier/LdElemNoChk/StElemNoChk/LdElemANoChk`，RegisterVM dispatch 表只到 99 → `op>99` fault；FastExecute 全实现。修=AllocateRegisters 改写或扩 register 表。
-- **P1 Reg_StInd/StObj 缺 GC 写屏障**：`Reg_StInd/StObj`（ir_reg_alloc.cpp:1570-1620）裸 `*ptr=val`，无 SATB/card/BarrierCriticalSection；FastExecute 有。`stobj/stind` 写 GC ptr → 未跟踪 → UAF。镜像 Handle_StInd/StObj 守卫。
-- **P2 Reg_LdArgA/LdLocA 返回 null ManagedPtr**：地址语义丢失，`out/ref`/struct-by-ref 分歧。
-- **P2② D1 per-method 锚无 in-tree caller**：`DumpProfilerToFile` 只在 Scriban(TestProject.RuntimeEntry.cpp.scriban) 调，不在原生树；`tiering_benchmark` 只调 `DumpFastExecuteOpcodeHistogram`。需在 tiering_benchmark 加 PROFILE/VM_PROFILER 宏 dump。
-- **P3 测试缺口**：>8arg call / NoChk / 高本地 / stobj GC-ptr 端到端无测试（div 已有新测试补）。
+**⏳ 剩（非 P1/P2 推理/done 边界）**：
+- **P2② D1 per-method 锚无 in-tree caller**：`DumpProfilerToFile` 只在 Scriban(TestProject.RuntimeEntry.cpp.scriban，codegen 不在原生树) 调；`tiering_benchmark` 只调 `DumpFastExecuteOpcodeHistogram`。需在 tiering_benchmark 加 PROFILE/VM_PROFILER 宏 dump（待 profile 构建专项一起）。
+- **P3 测试缺口**：>8arg call / 高本地 ≥96 / stobj 写 GC-ptr 端到端（div/NoChk/LdArgA 已有 Probe 补）。跨层 D2 门禁已含 div/INT32_MIN。
 
 ---
 
