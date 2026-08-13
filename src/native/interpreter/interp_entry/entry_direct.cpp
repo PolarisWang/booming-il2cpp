@@ -851,10 +851,17 @@ void InterpreterEntryDirect(uintptr_t method_key, void* args_buf, void* ret_buf)
 
     if (t4_tier == PatchMethod::kQuickJitted) {
         auto* qj_entry = static_cast<HotpatchEntryV0*>(patch_method->dispatch_entry);
-        if (qj_entry != nullptr && qj_entry->direct_ptr != nullptr) {
+        // Acquire-load direct_ptr (B1): pairs with the release-store side in
+        // tier_manager (JitRecompileToTier1) so a recompiled Tier-1 code pointer
+        // is correctly published even on weak-memory (ARM64).  x64 is atomic by
+        // single-load, but ordering is needed on ARM64.
+        void* qj_fn = (qj_entry != nullptr)
+            ? std::atomic_ref<void*>(qj_entry->direct_ptr).load(std::memory_order_acquire)
+            : nullptr;
+        if (qj_fn != nullptr) {
             GetTierCounters().step_native.fetch_add(1, std::memory_order_relaxed);
             using NativeEntry = void (*)(void*, void*);
-            auto native_entry = reinterpret_cast<NativeEntry>(qj_entry->direct_ptr);
+            auto native_entry = reinterpret_cast<NativeEntry>(qj_fn);
             native_entry(args_buf, ret_buf);
             return;
         }
