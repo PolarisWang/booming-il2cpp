@@ -129,7 +129,9 @@ TEST_F(YoungCollectorTest, YoungCollectionEmpty) {
     uintptr_t card_idx = idx % kCardsPerSegment;
     auto* seg = g_card_l1[seg_idx].load(std::memory_order_relaxed);
     ASSERT_NE(seg, nullptr);
-    seg->cards[card_idx] = 0xFF;
+    // R6/CoreCLR-aligned bit-per-word card layout: CardSegment.words packs 32
+    // cards per uint32.  Set the card bit covering @a p.
+    seg->words[card_idx / kCardsPerWord] |= (1u << (card_idx % kCardsPerWord));
     ASSERT_TRUE(IsDirty(p));
 
     YoungCollectionResult r2 = GcYoungCollection();

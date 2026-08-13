@@ -105,7 +105,7 @@ void TestOversizedAtomicAlloc() {
 
     // Allocate objects larger than kMaxTlabAlloc (32KB).
     // These should route to NurseryAllocateAtomicSlow → old-gen.
-    constexpr size_t kOversizedSize = kMaxTlabAlloc + 128;  // 32896 bytes
+    const size_t kOversizedSize = kMaxTlabAlloc + 128;  // 32896 bytes (kMaxTlabAlloc is runtime-mutable)
 
     void* p1 = NurseryAllocateAtomic(kOversizedSize);
     CHECK(p1 != nullptr, "oversized atomic alloc returned non-null");
