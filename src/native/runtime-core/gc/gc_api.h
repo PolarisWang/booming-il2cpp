@@ -110,12 +110,22 @@ static inline bool chaos_is_gc_pointer(const void* ptr) noexcept {
     if (addr >= g_heap_base) [[likely]] return true;
     // Nursery regions are allocated separately via RegionManager and may sit
     // BELOW g_heap_base (g_heap_base is not the whole-heap lower bound; see
-    // the conservative scan filter in thread_state.cpp:674-678).  Mirror the
-    // DirtyCard nursery check so a true GC nursery object below base is not
-    // mistaken for a stack address — otherwise the write barrier would skip
-    // carding an old→nursery store → dropped cross-gen edge → UAF.
+    // the conservative scan filter in thread_state.cpp:674-678).  Fast path
+    // first: the DirtyCard nursery window covers the single main nursery, so
+    // a true GC nursery object below base is not mistaken for a stack address
+    // — otherwise the write barrier would skip carding an old→nursery store →
+    // dropped cross-gen edge → UAF.
     if (addr >= g_nursery_range_begin && addr < g_nursery_range_end) [[likely]]
         return true;
+    // Authoritative nursery test: g_nursery_range_begin/end only tracks the
+    // single main nursery published by InitYoungGeneration.  RegionManager
+    // may hold additional nursery ranges (secondary/multi-nursery or a
+    // recycled nursery re-published via AddNurseryRange) that sit below
+    // g_heap_base yet are NOT reflected in that one fast window.  Route
+    // through the full lock-free RegionManager::IsNurseryPointer (its own
+    // O(1) global-bounds fast path returns false cheaply for out-of-range
+    // addresses) so no live nursery object is missed.
+    if (RegionManager::Instance().IsNurseryPointer(ptr)) return true;
     // POH regions are independently VirtualAlloc'd and may be below
     // g_heap_base (the card table does not cover POH).  Check via the
     // lock-free POH slot array.

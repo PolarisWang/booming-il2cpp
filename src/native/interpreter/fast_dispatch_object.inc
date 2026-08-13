@@ -139,8 +139,9 @@ static void Handle_StElem(FastFrame& frame, const interpreter::IRInstruction&) n
 
     if (arr->is_flat) {
         if (index >= arr->flat_length) {
-            // Flat arrays don't support dynamic resize — bounds error, skip.
-            ++frame.pc; return;
+            // Out-of-bounds array store must raise IndexOutOfRangeException, not
+            // silently skip (ECMA-335).  Consistent with Reg_StElem and LdElem.
+            frame.threw_exception = true; frame.pc = 9999; return;
         }
         void* elem_ptr = static_cast<char*>(arr->flat_data) + index * arr->flat_element_size;
         switch (arr->flat_element_size) {
@@ -162,7 +163,9 @@ static void Handle_StElem(FastFrame& frame, const interpreter::IRInstruction&) n
         }
     } else {
         if (index >= arr->elements.size()) {
-            arr->elements.resize(index + 1u);
+            // Out-of-bounds reference-array store must raise IOORR, not silently
+            // grow the array (a real .NET array store past the end throws).
+            frame.threw_exception = true; frame.pc = 9999; return;
         }
         // Non-GC interpreter ArrayStorage — no GC write barrier unless the array
         // is a real GC-managed object (mirrors Handle_StInd).

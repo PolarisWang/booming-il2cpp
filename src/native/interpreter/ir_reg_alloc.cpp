@@ -1304,16 +1304,21 @@ static void Reg_LdElem(RegisterFrame& frame, const RegisterInstruction& instr) n
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdElem");
     uint32_t index = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
     auto* arr = reinterpret_cast<ArrayStorage*>(frame.regs.reg(instr.src1_reg()));
+    // Step 3.1: null array / out-of-bounds must raise (NullReferenceException /
+    // IndexOutOfRangeException per ECMA-335), not silently push null.  Mirror the
+    // FastExecute layer's convention (threw_exception + pc=9999, see
+    // fast_dispatch_object.inc Handle_LdElem) so the two interpreted tiers behave
+    // identically for the same illegal IL.
     if (arr == nullptr) {
-        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
-        ++frame.pc;
+        frame.threw_exception = true;
+        frame.pc = 9999;
         return;
     }
 
     if (arr->is_flat) {
         if (index >= arr->flat_length) {
-            frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
-            ++frame.pc;
+            frame.threw_exception = true;
+            frame.pc = 9999;
             return;
         }
         void* elem_ptr = static_cast<char*>(arr->flat_data) + index * arr->flat_element_size;
@@ -1354,6 +1359,9 @@ static void Reg_LdElem(RegisterFrame& frame, const RegisterInstruction& instr) n
                 }
                 break;
             default:
+                // Large (>8B) flat element loading is not supported by this tier;
+                // leave the result null (no fault: this is a coverage gap, not an
+                // illegal access).  OOB/null are faulted above.
                 frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
                 break;
         }
@@ -1362,8 +1370,8 @@ static void Reg_LdElem(RegisterFrame& frame, const RegisterInstruction& instr) n
     }
 
     if (index >= arr->elements.size()) {
-        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
-        ++frame.pc;
+        frame.threw_exception = true;
+        frame.pc = 9999;
         return;
     }
     const auto& iv = arr->elements[index];
@@ -1400,14 +1408,19 @@ static void Reg_StElem(RegisterFrame& frame, const RegisterInstruction& instr) n
     uint64_t val = frame.regs.reg(instr.src1_reg());
     uint32_t index = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
     auto* arr = reinterpret_cast<ArrayStorage*>(frame.regs.reg(instr.src3_reg()));
+    // Step 3.1: null array / out-of-bounds must raise (NullReferenceException /
+    // IndexOutOfRangeException per ECMA-335), not silently skip or auto-resize.
+    // Aligns the Register tier with the FastExecute layer's LdElem/StElem.
     if (arr == nullptr) {
-        ++frame.pc;
+        frame.threw_exception = true;
+        frame.pc = 9999;
         return;
     }
 
     if (arr->is_flat) {
         if (index >= arr->flat_length) {
-            ++frame.pc;
+            frame.threw_exception = true;
+            frame.pc = 9999;
             return;
         }
         void* elem_ptr = static_cast<char*>(arr->flat_data) + index * arr->flat_element_size;
@@ -1444,7 +1457,11 @@ static void Reg_StElem(RegisterFrame& frame, const RegisterInstruction& instr) n
     }
 
     if (index >= arr->elements.size()) {
-        arr->elements.resize(index + 1u);
+        // Out-of-bounds reference-array store must raise IOORR, not silently
+        // grow the array (a real .NET array store past the end throws).
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
     }
     uint8_t tag = frame.regs.reg_tag(instr.src1_reg());
     switch (static_cast<ValueTag>(tag)) {

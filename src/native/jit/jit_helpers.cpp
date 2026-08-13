@@ -489,9 +489,24 @@ extern "C" void CodegenStSFld(uint32_t field_offset, uint64_t value) noexcept {
     if (field_offset >= g_static_fields.size()) {
         g_static_fields.resize(field_offset + 1u);
     }
-    JitSatbPreWriteBarrier(reinterpret_cast<void**>(&g_static_fields[field_offset].obj));
-    chaos::il2cpp::runtime_core::BgcRecordRootChange(reinterpret_cast<void**>(&g_static_fields[field_offset].obj),
-                                                     g_static_fields[field_offset].obj);
+    // g_static_fields is a plain non-GC vector (not registered via
+    // GcRegisterStaticRootRange).  Its slots hold interpreter-sandbox
+    // InterpreterValue / InterpreterObject* values in the common case, so
+    // reverse-registering them as GC roots would make BgcRecordRootChange
+    // re-mark an interpreter-heap pointer as a managed object at BGC re-mark
+    // — memory corruption.  Consistent with the barrier-free Reg_StSFld /
+    // Handle_StSFld paths (fix e6ea531e7).
+    //
+    // Only when the stored value is actually a GC-managed pointer do we emit
+    // the SATB / root-change barrier, so a real GC→static GC edge is never
+    // dropped.  Non-GC values skip it, exactly matching the other two paths.
+    void* obj = reinterpret_cast<void*>(static_cast<uint64_t>(value));
+    if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(obj)) {
+        JitSatbPreWriteBarrier(reinterpret_cast<void**>(&g_static_fields[field_offset].obj));
+        chaos::il2cpp::runtime_core::BgcRecordRootChange(
+            reinterpret_cast<void**>(&g_static_fields[field_offset].obj),
+            g_static_fields[field_offset].obj);
+    }
     g_static_fields[field_offset] = InterpreterValue::from_i64(static_cast<int64_t>(value));
 }
 

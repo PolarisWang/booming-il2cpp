@@ -230,8 +230,20 @@ bool FastExecute(FastFrame& frame,
         &&kOp_StFldBarrier,                                              // 103
         &&kOp_LdElemNoChk, &&kOp_StElemNoChk, &&kOp_LdElemANoChk,        // 104-106
         &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 107-109
+        &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 110-112 (110=SimdFma)
+        &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 113-115
+        &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 116-118
+        &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 119-121
+        &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 122-124
+        &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 125-127
     };
-    // Entries 110-127 default to nullptr (caught by bounds check below).
+    // Entries 128+ cannot be indexed: the _op > 127 bounds check redirects
+    // any out-of-range opcode to threw_exception.  Entries 110-127 are filled
+    // above with kOp_Unsupported (not nullptr) so a not-yet-implemented opcode
+    // such as SimdFma(110) hits the real handler — logging + threw_exception —
+    // instead of a null that `goto *nullptr` would crash on.  (Previously the
+    // comment claimed the bounds check caught 110-127, but `_op > 127` does not
+    // — index 110 was a dangling null → latent crash if ever emitted.)
 
     // First dispatch: enter the first instruction's handler.
     {
