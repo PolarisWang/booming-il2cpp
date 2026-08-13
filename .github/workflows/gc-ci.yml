@@ -87,11 +87,12 @@ jobs:
 
   # ── Nightly pressure tier ────────────────────────────────────────────────
   # Runs the stress/soak/benchmark targets (excluded from the fast unit gate) on
-  # a schedule.  The A2b `chaos_gc_region_barrier_stress_test` is a KNOWN-FAIL in
-  # the integration baseline, so its (residual) failure is surfaced without redding
-  # the gate; the driver's stale_known logic flips the gate if it ever passes (the
-  # fix-watch).  A REGRESSION (dangling back to the freed-garbage regime, or a
-  # crash) still fails the run.
+  # a schedule.  The A2b `chaos_gc_region_barrier_stress_test` was removed from
+  # known-failures (2026-08-13): its "dangling" was a test-validity-check gap
+  # (GEN1/Survivor omitted), now fixed → it runs here as PASS and reds the gate
+  # if the concurrent barrier or the complete check ever regresses.  Other
+  # still-known-fail entries surface their residual without redding the gate via
+  # the driver's stale_known logic.
   gc-stress-nightly:
     runs-on: windows-latest
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'

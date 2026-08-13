@@ -23,14 +23,15 @@ known:
   - "com_ccw_stress"
   # BGC root scan (pre-existing, very slow ~392s)
   - "chaos_gc_bgc_root_scan_test"
-  # Cross-gen write-barrier stress (A2b).  NOT the store-then-barrier race the
-  # symbol suggests — TRUE root cause (2026-08-13): the full-GC mark path swept
-  # TypeInfo-less `scanning=true` raw objects (OldMessage) despite static-root
-  # registration.  A MarkObject conservative-mark fix eliminated the dominant
-  # freed-garbage danglings (~32-117 → dominant ~1).  Residual: a separate
-  # demotion-phase mis-sizing (gc_demotion.cpp fallback clears a contiguous
-  # marked run as 8-byte objects) + cross-gen promotion counters.  KNOWN-FAIL
-  # here so a nightly `--stress-only` run surfaces it (red if it regresses,
-  # stale_known when the residual is finally fixed).  Stale-removable when
-  # `chaos_gc_region_barrier_stress_test` runs 20x PASS.
-  - "chaos_gc_region_barrier_stress_test"
+  # Cross-gen write-barrier stress (A2b) — REMOVED 2026-08-13: the "dangling"
+  # residual was a TEST-VALIDITY-CHECK GAP, not a real UAF.  The post-check only
+  # recognized nursery+old-gen (IsNurseryPointer / IsInOldGen), omitting GEN1
+  # (Survivor) where young-GC promotes 128-byte nursery objects.  Every reported
+  # "dangling" pointer was a live, correctly-referenced Gen1 object (classified
+  # via GetRegionGen: all managed-gen, 0 unknown).  Fixed the check to accept
+  # young(0)/gen1(1)/old(2) region generations → 16/16 PASS (8 detailed + 8
+  # exit-code).  The cf0609cd5 conservative-mark fix (TypeInfo-less raw scanning)
+  # plus the complete validity check now keep the concurrent barrier green;
+  # regression of either re-opens this.  Re-add here if dangling returns.
+  # (Stress-tier tiering is intentional: it stays `stress`-labeled, so the fast
+  #  `-LE benchmark|stress|soak` gate excludes it; the nightly stress tier runs it as PASS.)

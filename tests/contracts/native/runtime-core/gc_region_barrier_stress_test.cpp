@@ -137,12 +137,22 @@ static void RunCrossGenRefStoreStress() {
         for (int i = 0; i < kObjsPerThread; i++) {
             void* ref = g_old_slot[t]->nursery_slot[i];
             if (ref == nullptr) continue;
-            RegionManager& mgr = RegionManager::Instance();
-            if (mgr.IsNurseryPointer(ref)) { valid++; continue; }
-            if (G_OldGen().IsInOldGen(ref)) { valid++; continue; }
-            dangling++;
-            last_dangle_t = t;
-            if (first_dangle == nullptr) first_dangle = ref;
+            // A slot reference is valid iff it still points into GC-managed
+            // memory (nursery, Gen1 survivor, or old-gen).  We classify by the
+            // region-generation table (GetRegionGen) rather than the nursery+old
+            // predicates alone: young-GC promotes 128-byte nursery objects to
+            // REGION_GEN1 (Survivor), whose addresses IsNurseryPointer() /
+            // IsInOldGen() do NOT recognize — checking only those two would
+            // falsely report every promoted-but-alive Gen1 object as "dangling".
+            uint8_t gen = GetRegionGen(reinterpret_cast<uintptr_t>(ref));
+            if (gen == kRegionGenYoung || gen == kRegionGenGen1 || gen == kRegionGenOld) {
+                valid++;
+            } else {
+                // Pointer in NO managed region — genuinely freed / unmanaged.
+                dangling++;
+                last_dangle_t = t;
+                if (first_dangle == nullptr) first_dangle = ref;
+            }
         }
     }
     if (dangling > 0) {
