@@ -248,7 +248,7 @@ static void test_young_collection() {
     uintptr_t card_off = card_idx % kCardsPerSegment;
     auto* card_seg = g_card_l1[seg_idx].load(std::memory_order_relaxed);
     if (card_seg == nullptr) { FAIL("card segment not allocated for nursery"); return; }
-    card_seg->cards[card_off] = 0xFF;
+    card_seg->words[card_off / kCardsPerWord] |= (1u << (card_off % kCardsPerWord));
     if (!IsDirty(p)) { FAIL("card should be dirty before collect"); return; }
 
     YoungCollectionResult r2 = GcYoungCollection();

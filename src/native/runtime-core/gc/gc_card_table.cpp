@@ -208,7 +208,7 @@ void GcRegisterHeapRange(uintptr_t start, uintptr_t end) {
             CHAOS_IL2CPP_LOG_ERROR_M("CardTable", "OOM allocating segment {0}", si);
             return;
         }
-        std::memset(seg->cards, 0, sizeof(seg->cards));
+        std::memset(seg->words, 0, sizeof(seg->words));
 
         if (!g_card_l1[si].compare_exchange_strong(existing, seg,
                 std::memory_order_release, std::memory_order_acquire)) {
@@ -232,7 +232,7 @@ void ClearAllCards() noexcept {
     std::lock_guard<std::mutex> lock(g_card_segment_list_mutex);
     auto* node = g_card_segment_list;
     while (node != nullptr) {
-        std::memset(node->segment->cards, 0, sizeof(node->segment->cards));
+        std::memset(node->segment->words, 0, sizeof(node->segment->words));
         node = node->next;
     }
     // keep the bundle in sync (clear it; cards are now all clean).
@@ -277,13 +277,15 @@ void ClearCardRange(uintptr_t start, uintptr_t end) noexcept {
         auto* seg = g_card_l1[si].load(std::memory_order_acquire);
         if (seg == nullptr) continue;
 
-        // Determine which card bytes within this segment to clear.
+        // Determine which cards within this segment to clear.
         uintptr_t seg_first_card = (si == first_seg) ? (first_idx % kCardsPerSegment) : 0;
         uintptr_t seg_last_card  = (si == last_seg)  ? (last_idx  % kCardsPerSegment) : (kCardsPerSegment - 1);
 
-        // Clear the overlapping card range with a single memset.
-        uintptr_t len = seg_last_card - seg_first_card + 1;
-        std::memset(&seg->cards[seg_first_card], 0, len);
+        // Clear the overlapping card bits (bit-per-word).
+        for (uintptr_t ci = seg_first_card; ci <= seg_last_card; ci++) {
+            uint32_t bit_mask = 1u << (ci % kCardsPerWord);
+            seg->words[ci / kCardsPerWord] &= ~bit_mask;
+        }
     }
 }
 
