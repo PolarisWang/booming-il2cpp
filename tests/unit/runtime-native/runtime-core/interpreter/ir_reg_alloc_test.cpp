@@ -512,15 +512,20 @@ TEST(IR_RegAlloc, LdArgA) {
     EXPECT_EQ(rm.instructions[0].imm.operand_index, 1u);
 }
 
-TEST(IR_RegAlloc, LdLocA) {
+TEST(IR_RegAlloc, LdLocARejectsToFallback) {
+    // LdLocA needs a real address for a local slot, but the register VM keeps
+    // locals in the register file (not addressable memory).  AllocateRegisters
+    // must reject such methods (empty result) so the caller routes them to
+    // FastExecute, whose Handle_LdLocA returns a genuine local address.
+    // (Previously the allocator kept LdLocA and Reg_LdLocA returned a null
+    //  ManagedPtr → address-0 deref when the caller dereferenced it.)
     IRInstruction ll; ll.op_code = IROpCode::LdLocA; ll.operand_index = 2;
     IRInstruction ret; ret.op_code = IROpCode::Ret;
 
     auto rm = AllocateRegisters(MakeIRMethod({ll, ret}));
 
-    EXPECT_EQ(rm.instructions[0].op_code(), IROpCode::LdLocA);
-    EXPECT_TRUE(rm.instructions[0].has_dst());
-    EXPECT_EQ(rm.instructions[0].imm.operand_index, 2u);
+    EXPECT_TRUE(rm.instructions.empty())
+        << "AllocateRegisters must reject LdLocA methods (return empty → FastExecute)";
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1095,6 +1100,52 @@ TEST(IR_RegAlloc, StIndStackLocalRoundTrips) {
     EXPECT_FALSE(frame.threw_exception);
     EXPECT_EQ(dst, 0xDEADBEEFCAFEBABEull) << "StInd non-GC path must store the value";
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// LdArgA / LdLocA address semantics (P2 cross-tier)
+// ═══════════════════════════════════════════════════════════════════════════
+// Reg_LdArgA previously returned a null ManagedPtr (address-0 deref on use).
+// It must now return the real arg address (mirroring FastExecute Handle_LdArgA).
+// And AllocateRegisters must reject methods using LdLocA (locals live in the
+// register file, not addressable memory) so they route to FastExecute, whose
+// Handle_LdLocA returns a real local address.
+TEST(IR_RegAlloc, LdArgAReturnsRealAddress) {
+    uint64_t args[1] = { 0 };
+    RegisterFrame frame = {};
+    frame.args = args;
+    frame.arg_count = 1;
+
+    // LdArgA: dst=16, src1=0 (operand_index in imm).  Build header manually with
+    // operand_index (imm.i4) for arg 0.
+    RegisterInstruction ldarga = MakeRegBinOp(IROpCode::LdArgA, 16, 0, 0);
+    ldarga.imm.operand_index = 0;
+    RegisterInstruction instrs[] = { ldarga };
+    ASSERT_TRUE(RegisterExecute(frame, instrs, 1));
+    EXPECT_FALSE(frame.threw_exception);
+    uint64_t addr = frame.regs.reg(16);
+    EXPECT_EQ(addr, reinterpret_cast<uint64_t>(&args[0]))
+        << "LdArgA must return the real address of arg slot, not null";
+    EXPECT_EQ(static_cast<uint8_t>(frame.regs.reg_tag(16)),
+              static_cast<uint8_t>(ValueTag::ManagedPtr));
+}
+
+TEST(IR_RegAlloc, LdLocARejectsToFastExecute) {
+    // A method containing LdLocA must be rejected by AllocateRegisters (empty
+    // result) so the caller routes it to FastExecute (correct Handle_LdLocA).
+    IRInstruction ldloc;
+    ldloc.op_code = IROpCode::LdLoc;
+    ldloc.immediate_i4 = 0;
+    IRInstruction ldloca;
+    ldloca.op_code = IROpCode::LdLocA;
+    ldloca.immediate_i4 = 0;
+    IRInstruction ret;
+    ret.op_code = IROpCode::Ret;
+
+    auto rm = AllocateRegisters(MakeIRMethod({ldloc, ldloca, ret}));
+    EXPECT_TRUE(rm.instructions.empty())
+        << "AllocateRegisters must reject LdLocA methods (return empty → FastExecute)";
+}
+
 
 
 

@@ -47,7 +47,21 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
     RegisterMethod result;
     result.seh_clauses = ir_method.seh_clauses;
 
-    // ── Phase 0: Build catch handler entry map ──────────────────────────
+    // ── Phase 0: reject ldloca methods ───────────────────────────────────
+    // The register VM keeps locals in the register file (r8-r15), not in
+    // addressable memory, so it cannot produce a real address for `ldloca`
+    // (Reg_LdLocA previously returned a null ManagedPtr → address-0 deref /
+    // spurious fault vs FastExecute's Handle_LdLocA).  Route such methods to
+    // FastExecute (which has memory-backed locals + correct Handle_LdLocA) by
+    // returning an empty RegisterMethod — the caller (entry_direct etc.) falls
+    // back to Step-C/Step-D as if allocation failed.
+    for (const auto& inst : ir_method.instructions) {
+        if (inst.op_code == IROpCode::LdLocA) {
+            return result; // empty instructions → caller routes to FastExecute
+        }
+    }
+
+    // ── Phase 0b: Build catch handler entry map ─────────────────────────
     // Pre-scan SEH clauses to find catch handler start indices where the
     // allocator must push a synthetic exception vreg onto the virtual stack.
     uint32_t catch_entry_pc[16];
@@ -1703,9 +1717,19 @@ static void Reg_StObj(RegisterFrame& frame, const RegisterInstruction& instr) no
 // ── LdArgA / LdLocA: address of arg/local slot ─────────────────────────
 static void Reg_LdArgA(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdArgA");
-    // LdArgA: push address of arg slot. In register model, we can't take address
-    // of a register, so return null managed pointer (causes fallback when dereferenced).
-    frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::ManagedPtr));
+    // LdArgA: push address of the arg slot.  Args live in the addressable
+    // frame.args buffer (cf. Reg_LdArg), so mirror FastExecute Handle_LdArgA
+    // and return a real address instead of the old null stub (which caused a
+    // spurious fault / address-0 write when dereferenced → cross-tier divergence
+    // for out/ref params).
+    uint32_t idx = instr.imm.operand_index;
+    if (idx < frame.arg_count && frame.args != nullptr) {
+        auto* arg_base = static_cast<const uint64_t*>(frame.args);
+        frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(&arg_base[idx]),
+                           static_cast<uint8_t>(ValueTag::ManagedPtr));
+    } else {
+        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::ManagedPtr));
+    }
     ++frame.pc;
 }
 
