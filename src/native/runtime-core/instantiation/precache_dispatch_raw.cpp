@@ -284,13 +284,16 @@ RawDispatchResult InterpreterDispatchRaw(
             uint64_t a6 = (arg_count > 6) ? raw_args[6] : 0;
             uint64_t a7 = (arg_count > 7) ? raw_args[7] : 0;
             uint64_t ret_scalar = 0;
+            uint64_t seh_exc = 0;
+            // B3: pass out_exception_object so a callee-thrown managed exception's
+            // identity survives the RegisterExecute MIC boundary (mirrors DoMIC fix).
             bool seh_caught = chaos::il2cpp::pal::PalTryCallNoExcept(
                 reinterpret_cast<DirectFn>(cache_info->direct_ptr),
-                a0, a1, a2, a3, a4, a5, a6, a7, ret_scalar);
+                a0, a1, a2, a3, a4, a5, a6, a7, ret_scalar, &seh_exc);
             if (seh_caught) {
                 --ctx->recursion_depth;
                 result.threw_exception = true;
-                result.exception_obj = nullptr;
+                result.exception_obj = seh_exc ? reinterpret_cast<void*>(seh_exc) : nullptr;
                 return result;
             }
 
