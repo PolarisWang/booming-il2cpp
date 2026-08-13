@@ -32,20 +32,56 @@ def tool_dll(tool_name: str) -> Path:
             / "bin" / "Debug" / "net8.0" / f"{tool_name}.dll")
 
 
-def ensure_tool_built(tool_name: str) -> bool:
-    """Rebuild the tool DLL if the source has changed since last build.
+def _referenced_projects(proj: Path, _seen: set | None = None) -> set[Path]:
+    """Resolve the transitive set of .csproj files this project references via
+    <ProjectReference>.  Used so a tool rebuild fires when an upstream project
+    it depends on (e.g. TPG -> Driver -> Generator) changes, not just the tool's
+    own source.  Without this, a modified Generator leaves a stale bundled
+    Generator.dll inside the tool's bin, silently running old codegen."""
+    if _seen is None:
+        _seen = set()
+    _seen.add(proj)
+    try:
+        text = proj.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return _seen
+    import re as _re
+    for ref in _re.finditer(r'<ProjectReference\s+Include="([^"]+)"', text):
+        ref_path = (proj.parent / ref.group(1)).resolve()
+        if ref_path.suffix == ".csproj" and ref_path not in _seen:
+            _seen.add(ref_path)
+            _referenced_projects(ref_path, _seen)
+    return _seen
 
-    Uses source timestamp comparison for incremental builds.
+
+def _project_sources(proj: Path) -> list[Path]:
+    """All .cs files under a project, plus the project file itself (used to detect
+    csproj edits, e.g. new ProjectReference includes)."""
+    return list(proj.parent.rglob("*.cs")) + [proj]
+
+
+def ensure_tool_built(tool_name: str) -> bool:
+    """Rebuild the tool DLL if the source (own OR transitively-referenced) has
+    changed since the last build.
+
+    Uses source timestamp comparison for incremental builds.  The transitive
+    reference scan stops fast-path invalidation regressions where editing an
+    upstream project (Generator) would otherwise leave a stale bundled copy in
+    the tool's bin/Debug, causing the pipeline to run old generated code.
     """
     proj = _tool_dir(tool_name) / f"{tool_name}.csproj"
     dll = tool_dll(tool_name)
     if dll.exists() and proj.exists():
-        # Check if any source file is newer than the DLL
-        src_files = list(proj.parent.rglob("*.cs"))
-        if src_files:
-            src_time = max(p.stat().st_mtime for p in src_files if p.is_file())
-        else:
-            src_time = proj.stat().st_mtime
+        # Newest source across the tool AND its transitive project references.
+        src_time = 0.0
+        for p in _referenced_projects(proj):
+            for s in _project_sources(p):
+                try:
+                    m = s.stat().st_mtime
+                    if m > src_time:
+                        src_time = m
+                except OSError:
+                    pass
         if src_time <= dll.stat().st_mtime:
             return True
     # Rebuild
@@ -99,18 +135,23 @@ def ensure_sdk(repo_root: Path | None = None) -> Path:
     sdk_dir = sdk_root(repo_root) / sdk_subdir
     lib_name = f"libchaos_runtime_core{lib_ext}" if is_linux else f"chaos_runtime_core{lib_ext}"
     sdk_lib = sdk_dir / "lib" / lib_name
-    if sdk_lib.exists():
-        return sdk_dir
 
-    print(f"[tool_helpers] SDK ({sdk_subdir}) not found, building presets...")
+    # Delegate freshness to build_presets.py (the single authority over the SDK
+    # fingerprint). It self-short-circuits via its own .source_hash check, so a
+    # fresh SDK returns immediately ("up-to-date") while a stale SDK — one whose
+    # lib exists but predates the current native source — is rebuilt.  The old
+    # existence-only fast-path here returned a stale lib whenever the file was
+    # present, silently masking source changes (e.g. P0-B batch-2 SIMD reducers
+    # never linked because the prebuilt lib was several hours older than the
+    # current numerics_vectors.cpp).  Delegating here fixes that whole class.
     script = build_presets_script(repo_root)
     result = subprocess.run(
         [sys.executable, str(script), "--preset", sdk_subdir],
-        capture_output=True, text=True, timeout=1200,
+        capture_output=True, text=True, timeout=1800,
     )
     if result.returncode != 0:
         print(f"[tool_helpers] SDK build FAILED for {sdk_subdir} (presets may not support {_platform.system()})")
-        print(result.stderr[-500:])
+        print(result.stderr[-600:])
         raise RuntimeError(f"SDK build failed: {result.stderr[-200:]}")
 
     if not sdk_lib.exists():
