@@ -6,6 +6,18 @@
 
 ---
 
+## 交付状态（2026-08-13 复核后已落地，提交链见 §七）
+
+**本 doc 识别的问题多数已修复并提交**（见 §七 提交链）。简要对照：
+- `chaos_is_gc_pointer` below-base 盲点 → 已补 `RegionManager::IsNurseryPointer()` 段（防御加固，`4b2900225`）。
+- `CodegenStSFld` 反向 root 注册 → 已加 `chaos_is_gc_pointer` guard（齐三层 StSFld，`4b2900225`）。
+- null/越界 Register 层静默 → 已对齐两层抛异常 NRE/IOORR、移除 ref OOB auto-resize（`4b2900225`）。
+- `SimdFma`(110) 表越界空指针 → 已补 110-127 为 `kOp_Unsupported`（`4b2900225`）。
+- 解释器 perf 锚缺失 → entry 已接线 opcode/VM 直方图（宏门控，`ae93376a4`）。
+- 并行 GC 线 A2b 真实根因（FULL-GC 扫 TypeInfo-less raw 对象）→ 已修复 + 归档 + CI（`cf0609cd5`/`25a62fbdb`/`e45c042f0`/`5308b82f2`）。
+
+
+
 ## 〇、复核要点：几条"已交付修复"的真实状态
 
 | 原评估项 | 评估时的断言 | 现行实测 | 判定 |
@@ -114,3 +126,20 @@ FastExecute 各 handler（越界、除零 `fast_dispatch_arithmetic.inc:60,79`�
 - safepoint 根因/选项：`interpreter-inband-safepoint-rootcause-options-2026-08-13.md`
 - 专项交付/测量缺口：`docs/dev/in-progress/interpreter-optimization/DELIVERY-2026-08-13.md` + `baseline/README.md`
 - 证据 agent：opcode/性能首读 + GC/线程正确性首读（`chaos_is_gc_pointer` gate + `CodegenStSFld` + safepoint 覆盖 + frame scanner）
+
+---
+
+## 六、提交链（2026-08-13 复核落地）
+
+**解释器复核修复**：
+- `4b2900225` fix(interpreter): GC写屏障闸(IsNurseryPointer) + CodegenStSFld guard + StElem越界 + SimdFma表越界 —— 本 doc §一 P0-P1/P2/P3 的两条 + null/越界层对齐。
+- `ae93376a4` feat(interpreter): entry 接 opcode/VM 直方图 → --benchmark 暴露解释器 per-op 锚（项8基建，宏门控）。
+
+**并行 GC 线 A2b 真实根因**（§一 P0-P1 的 cod域更深处，本线翻案）：
+- `cf0609cd5` fix(gc): MarkObject/TryMarkRoot 对 TypeInfo-less raw scanning 对象保守标记防 FULL-GC 悬挂 root + thread_state barrier 临界区 guard + `chaos_gc_fullgc_raw_scanning_object_test`（2/2）。
+- `25a62fbdb` chore(nightly): `chaos_gc_region_barrier_stress_test` 归档 KNOWN-FAIL。
+- `e45c042f0` ci(gc): nightly 压力层 `gc-stress-nightly` + A2b stress 夜间调度。
+- `5308b82f2` docs(gc): plan-v6 STATUS 记录 A2b 根因翻案链（ack-and-continue/SafepointPoll/硬STW 全证伪 → FULL-GC 扫 TypeInfo-less 根因）+ 残余诚实留档。
+
+**验证**：`chaos_jit/runtime_core/interpreter` 三库编译过；`test_ir_reg_alloc` 46/46、`test_gc_demotion` 6/6、`test_interpreter_entry` 5/5、`chaos_gc_fullgc_raw_scanning_object_test` 2/2；unit driver `OVERALL OK`(2249/2277 全既有)。
+
