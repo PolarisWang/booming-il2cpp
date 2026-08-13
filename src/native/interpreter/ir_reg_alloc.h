@@ -212,6 +212,7 @@ struct RegisterFrame {
     static constexpr uint32_t kMaxTracked = 8;
     void* tracked_objs[kMaxTracked] {};
     void (*tracked_dtors[kMaxTracked])(void*) {};
+    bool tracked_is_pool[kMaxTracked] {};
     uint32_t tracked_cnt = 0;
 
     template <typename T>
@@ -223,6 +224,20 @@ struct RegisterFrame {
         if (tracked_cnt < kMaxTracked) {
             tracked_objs[tracked_cnt] = ptr;
             tracked_dtors[tracked_cnt] = dtor;
+            tracked_is_pool[tracked_cnt] = false;  // heap-managed by default
+            ++tracked_cnt;
+        }
+    }
+
+    /// Track a pool-allocated object.  CleanupTracked calls the dtor (which is
+    /// expected to return the object to its pool, e.g. ReturnBoxToPool) but
+    /// SKIPS the CHAOS_IL2CPP_FREE.  Used when an OSR cross-tier transfer pulls
+    /// in a FastFrame pooled object whose dtor returns it to the caller pool.
+    void TrackPool(void* ptr, void (*dtor)(void*)) noexcept {
+        if (tracked_cnt < kMaxTracked) {
+            tracked_objs[tracked_cnt] = ptr;
+            tracked_dtors[tracked_cnt] = dtor;
+            tracked_is_pool[tracked_cnt] = true;
             ++tracked_cnt;
         }
     }
@@ -230,7 +245,9 @@ struct RegisterFrame {
     void CleanupTracked() noexcept {
         for (uint32_t i = 0; i < tracked_cnt; ++i) {
             tracked_dtors[i](tracked_objs[i]);
-            CHAOS_IL2CPP_FREE(tracked_objs[i]);
+            if (!tracked_is_pool[i]) {
+                CHAOS_IL2CPP_FREE(tracked_objs[i]);
+            }
         }
         tracked_cnt = 0;
     }

@@ -13,6 +13,7 @@
 
 #include <cstdint>
 #include <cstring>
+#include <chaos/native_types.h>   // CHAOS_IL2CPP_FREE (Cleanup releases heap tracked objects)
 
 namespace chaos::il2cpp::runtime_core {
 struct FastFrame;
@@ -42,6 +43,7 @@ struct OsrState {
     // Tracked interpreter-heap objects (InterpreterObject / ArrayStorage).
     void* tracked_objs[kMaxTracked] {};
     void (*tracked_dtors[kMaxTracked])(void*) {};
+    bool tracked_is_pool[kMaxTracked] {};   // true → dtor returns to pool, skip FREE
     uint32_t tracked_cnt = 0;
 
     ~OsrState() noexcept { Cleanup(); }
@@ -65,6 +67,12 @@ struct OsrState {
     void Cleanup() noexcept {
         for (uint32_t i = 0; i < tracked_cnt; ++i) {
             tracked_dtors[i](tracked_objs[i]);
+            // Pool objects' dtor (e.g. ReturnBoxToPool) already returns them to
+            // their caller pool — do NOT CHAOS_IL2CPP_FREE those.  Heap objects
+            // whose dtor is a plain destructor still need an explicit FREE.
+            if (!tracked_is_pool[i]) {
+                CHAOS_IL2CPP_FREE(tracked_objs[i]);
+            }
         }
         tracked_cnt = 0;
     }
@@ -82,6 +90,7 @@ private:
         std::memcpy(local_tags, other.local_tags, sizeof(local_tags));
         std::memcpy(tracked_objs, other.tracked_objs, sizeof(tracked_objs));
         std::memcpy(tracked_dtors, other.tracked_dtors, sizeof(tracked_dtors));
+        std::memcpy(tracked_is_pool, other.tracked_is_pool, sizeof(tracked_is_pool));
 
         other.tracked_cnt = 0; // Ownership transferred — don't double-free.
     }

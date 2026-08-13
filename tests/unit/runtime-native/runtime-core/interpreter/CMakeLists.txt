@@ -78,3 +78,12 @@ chaos_native_add_test(test_ir_reg_alloc
     ir_reg_alloc_test.cpp
     LABELS "unit;interpreter"
 )
+
+# ── Cross-tier execution consistency gate (step-D2) ────────────────────────
+# Guards against interpreter layer-drift: drives the SAME IL through FastExecute
+# (computed-goto) and RegisterExecute (registerVM) and asserts identical results.
+# Any future per-layer fix that does not propagate to all tiers is caught here.
+chaos_native_add_test(test_cross_tier_consistency
+    cross_tier_consistency_test.cpp
+    LABELS "unit;interpreter"
+)

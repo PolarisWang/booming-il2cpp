@@ -105,6 +105,7 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
                  i < interpreter::RegisterFrame::kMaxTracked; ++i) {
                 rf.tracked_objs[rf.tracked_cnt] = osr.tracked_objs[i];
                 rf.tracked_dtors[rf.tracked_cnt] = osr.tracked_dtors[i];
+                rf.tracked_is_pool[rf.tracked_cnt] = osr.tracked_is_pool[i];
                 ++rf.tracked_cnt;
             }
             osr.tracked_cnt = 0;

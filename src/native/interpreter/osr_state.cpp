@@ -149,10 +149,12 @@ void CaptureFastFrame(OsrState& osr, const runtime_core::FastFrame& frame) noexc
     memcpy(osr.locals, frame.locals, sizeof(osr.locals));
     memcpy(osr.local_tags, frame.local_tags, sizeof(osr.local_tags));
 
-    // Transfer tracked object ownership.
+    // Transfer tracked object ownership (including pool-vs-heap flags so the
+    // resulting Cleanup does not FREE a pool object through the wrong allocator).
     osr.tracked_cnt = frame.tracked_cnt;
     memcpy(osr.tracked_objs, frame.tracked_objs, sizeof(osr.tracked_objs));
     memcpy(osr.tracked_dtors, frame.tracked_dtors, sizeof(osr.tracked_dtors));
+    memcpy(osr.tracked_is_pool, frame.tracked_is_pool, sizeof(osr.tracked_is_pool));
 }
 
 // ── RestoreOsrToVmFrame ───────────────────────────────────────────────────
@@ -211,10 +213,12 @@ void CaptureRegisterFrame(OsrState& osr, const RegisterFrame& frame, const RegSt
         }
     }
 
-    // Transfer tracked object ownership.
+    // Transfer tracked object ownership (including pool-vs-heap flags so the
+    // resulting Cleanup does not FREE a pool object through the wrong allocator).
     osr.tracked_cnt = frame.tracked_cnt;
     memcpy(osr.tracked_objs, frame.tracked_objs, sizeof(osr.tracked_objs));
     memcpy(osr.tracked_dtors, frame.tracked_dtors, sizeof(osr.tracked_dtors));
+    memcpy(osr.tracked_is_pool, frame.tracked_is_pool, sizeof(osr.tracked_is_pool));
 }
 
 // ── RestoreOsrToRegisterFrame ─────────────────────────────────────────────
