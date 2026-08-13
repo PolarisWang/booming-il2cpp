@@ -172,3 +172,22 @@ A2b 归档转战后，T7/B2 组合方案 C 的**第一部分 B 已落地**：
 - **接主路径**：gc_young_collector.cpp GcYoungCollection 出口 kFull-gated 调 GcVerifyPromotedTracked(result)，使 P1-A3 断言真实运行。
 - 验证：diagnostics 4/4；chaos_gc_young_collector 6/6（+kFull 5 连过）。
 - **⚠️ 发现**：`tests/unit/runtime-native` 的 test_gc_young_collector gtest 有 2 测试（YoungCollectionEmpty/ConservativeSweepSelfRefs）**baseline 上就失败**（已 revert 到基准验证），= 已知 A2b 晋升不稳，非本次改动；contracts chaos_* 对应测试全绿。此为 A2b(M1 known-hard) 同一根因的遗留，非 T8 引入。
+
+### 🔬 执行期系统性诊断翻案：A2b 真实根因 ≠ 写屏障竞态（2026-08-13）
+
+**启动"逐个阶段执行"后，系统性调试（dev-systematic-debugging）推翻 store-then-barrier 叙事**，实证链：
+
+1. ack-and-continue（handler 跳过 barrier 临界区）：dangling 32-117 原样 → 非 store/card parking。
+2. worker 每 barrier 加 SafepointPoll（强制停安全点）：dangling 32-117 原样 → **非 worker 扫描期继续写**。硬 STW 停线程非修复。
+3. `never-alloc` 诊断：全部 dangling slot 值**从未被 NurseryAllocate 返回过**（0x7ff7…模块码区/0x1c17…复用堆）→ **读 freed-and-reused 内存的垃圾**，非被回收的 nursery 对象。
+4. `inOldGen=0`：全部 8 个 `g_old_slot[]` OldMessage 被 FULL GC **扫掉**。
+5. 单对象确定性测试 + mapping agent：`MarkObject`/`TryMarkRoot` 以 `IsValidTypeInfoPointer`(首字须 TypeInfo) 为硬门；raw `Allocate(size,true)` 对象（OldMessage=plain struct）**无 TypeInfo** → 永不标记 → sweep 回收仍 static-root 引用的活对象 → root 悬垂。
+6. **`carded=1024` 但 `scanned_dirty=4`**：barrier 实写 512 卡，扫描只找到 4 → 附加的跨代 promote 计数缺口并存。
+
+**修复（cf0609cd5/25a62fbdb/e45c042f0，auto-commit 自洽快照）**：
+- `MarkObject` 保守 fallback：TypeInfo-less raw scanning 对象在 scanning page 内 MarkRange bounded span；`TryMarkRoot`/`ScanRangeForRoots` 延迟 TypeInfo 判定到 MarkObject，仅 gate `page->scanning`。
+- `thread_state` PreemptiveSuspendHandler：barrier 临界区 guard（ack-and-continue 不 park）。
+- 新 `chaos_gc_fullgc_raw_scanning_object_test.cpp`（2/2 绿）。
+- **stress：dominant 32-117 freed-garbage → dominant ~1**（真实改进）。card_table 7/7、dirty_card、young_collector 回归绿。
+
+**残余（未修，诚实留档）**：`gc_demotion.cpp` TypeInfo-less fallback 把我的 MarkObject 连续 marked run 逐个当 8-byte 对象 demote+ClearRange（清 mark → 页 empty → pooled）。**尝试改跳过破坏性 demote 会 segfault 139**（根因未彻底定位），three-rule 停线。连同残余 cross-gen promote 计数为专门会话。stress 已归档 known-fail（nightly 02:37 跑，stale_known 转绿告警）。
