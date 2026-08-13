@@ -1,0 +1,101 @@
+# 解释器修复计划 — Session 交接文档
+
+> **交接日期**：2026-08-13 ｜ **交接 commit**：`cbe842a50`（main, 工作区干净）
+> **承接前置**：`docs/dev/in-progress/interpreter-optimization/interpreter-fix-plan-2026-08-13.md`（主计划文档）+ `docs/dev/assessments/interpreter-deep-analysis-2026-08-13.md`（4 维度发现）
+> **本文档目的**：让新 session 无缝承接剩余任务清单，避免重读全部源码。
+
+---
+
+## 〇、任务框架（为什么做这些）
+
+用户要求"review 解析器 → 修复所有问题 + 补测试"（依据 4 维度深度分析产出的 `interpreter-deep-analysis-2026-08-13.md`）。计划分轨道：**正确性 P1 → P2 → 性能 → 基建**。所有修复在共享工作区 main 上，但**该工作区被并行线（jit/gc）实时编辑**——commit 时务必只 stage 自己的文件（见 §四 环境坑）。
+
+---
+
+## 一、已完成并提交（9 个 commit，全部编译 + 单测验证绿）
+
+| commit | 任务 | 修复内容 | 验证 |
+|--------|------|---------|------|
+| `300125cde` | **D2** | 跨层一致性门禁：新 `cross_tier_consistency_test.cpp` 驱动同 IL 走 FastExecute vs RegisterExecute 断言一致（防层间漂移） | cross_tier 6/6 |
+| `300125cde` | **A1(P1)** | OSR 跨层 pool-flag 丢失→错配 free：`OsrState`+`RegisterFrame` 加 `tracked_is_pool[]`，CleanupTracked 按位 skip FREE；CaptureFastFrame/CaptureRegisterFrame/TryFastOsrPromotion 拷 pool 位 | osr_state 15/15, ir_reg 46/46 |
+| `d9c7a296d` | **A3+C1(P1)** | back-edge-only safepoint 缺口 + 回边税：把 `suspend_seq` 检查并入 kOp_Next **每 64 指令 decimated 槽**，撤回边 probe | profile 3/3, cross_tier 6/6 |
+| `a1ce897de` | **B6(P2)** | T1 2-instr fast path 不递增 call_count：op0 是 LdArg/LdcI4/LdNull 时补 fetch_add | profile 3/3 |
+| `16b7e58c3` | **B2(P2)** | LdLoc/StLoc 无 `idx<kMaxLocals` 越界：加 bound-check fault（>32 局部方法防越界写） | cross_tier 6/6 |
+| `f0068e380` | **B1(P2)** | direct_ptr 后台 recompile 跨平台内存序：`JitRecompileToTier1` release-store + dispatch kQuickJitted acquire-load（std::atomic_ref） | cross_tier 6/6 |
+| `494cd2f8d` | **B3(P2)** | SEH 异常对象丢跨 DoMIC/RegisterExecute：`PalTryCallNoExcept` 传 `out_exception_object`，caught 填 `frame.exception_obj_val`/`result.exception_obj` | profile 3/3 |
+| `0611480a3` | 文档 | 更新修复计划进度 + A2 重新分类 | — |
+
+### A2 的**重要方向修正**（调查推翻原前提）
+原判"解释器调 raw native `direct_fn` 无 GC transition"。**调查发现前提错误**：`direct_ptr` = codegen 发射的函数体/stub，**不是 raw native**。P/Invoke 的 `direct_ptr` 是 `EmitPInvokeMethod` 发射的 stub，该 stub **内建** `GC_TRANSITION_TO_PREEMPTIVE/COOPERATIVE`（`needsGcTransition = !IsSuppressGCTransition`，`MethodEmission.PInvoke.cs:121`）。managed 的 `direct_ptr` 是 AOT managed 体（应 stay COOPERATIVE）。**盲包所有 direct_fn 会破坏 managed 语义**。唯一真缺 transition 的是 `[DllImport(SuppressGCTransition=true)]`——那是开发者显式选择，非 bug。**A2 重新分类为"非缺口"，不改代码。**
+
+---
+
+## 二、剩余任务 —— 精确状态与决策点
+
+### 🔴 B4(P2)：g_static_fields 双策略 —— **基本已闭合**，只需验证 + 文档确认
+- 问题：interpreter 三层 StSFld barrier-free（假设非 GC `InterpreterObject*`）vs `CodegenStSFld`（jit_helpers）带 SATB/root-change，同一 `g_static_fields` 槽跨模式不一致。
+- **已部分闭合**：上一轮 `4b2900225` 已给 `CodegenStSFld` 加 `chaos_is_gc_pointer` guard（只有真 GC 值才发 barrier）→ 与三层在"非 GC 值不发 barrier"上一致。
+- **剩余动作**：无代码改动。**可选防御**：把 `g_static_fields` 语义固化为"非 GC"并注释统一三层 + codegen（减少未来误用）。**依赖决策**：若未来做对象模型统一（用户已中止 1.2），此双策略需按新模型重审。
+- **建议**：标记为「已由 4b2900225 闭合，文档确认即可」，不再改代码。
+
+### 🔴 B5(P2)：double-ack 竞态（thread_state 信号 + in-band poll 同线程）
+- 问题：cooperative 线程已 in-band `PalEventWait` parked 时，100ms 超时信号 handler 又 re-ack + RIP 重定向到 trampoline → double-ack + RSP 改写冲突。
+- **复杂度**：高并发敏感改动，涉及 `thread_state.cpp:261/344/373-389`，与并行 GC 线的 A2b barrier critical-section guard 交互。仓库已有 `ack-and-continue`（barrier_inflight guard）。**需 GC-stress 验证圆型**（长 straight-line 已由 A3 覆盖，但 double-ack 需并发 GC 周期测试）。
+- **建议**：**需要专门 session + GC-stress 验证环境**，不宜在无 stress 环境盲改。改法参考 `thread_state.cpp` `PreemptiveSuspendHandler`：分离"already-parked"（in-band wait 中）与"hijacked-mid-run"，避免重复 ack + RSP 改写。
+
+### 🟠 C2(P3)：RegisterVM 性能 —— **架构级重构，需专门专项**
+- 问题：RegisterExecute 每 op 独立函数调用 + 分支存器文件（`reg()/set_reg()` 64-bound 分支 ×3/算术 op），对小型方法比 FastExecute 慢。
+- 方案：(a) 扁平单索引数组（去 bounds 分支）+ 内联高频 op + 复用 LazyBox（中风险）; (b) FastExecute 接管 T2、RegisterVM 降级 SEH-only（架构级，需重定义 tier 语义，2-3d）; (c) 4A+4C 组合。
+- **需先做 D1**（ns/op 锚）才能量化收益/风险。**依赖已确认**：RegisterVM 是核心 tier 路径（`kTerminalTier=kOptimizedRegister`），不能随便删。
+- **建议**：**待 D1 建锚后**做，优先 4A（扁平存器文件+内联），4B 作 long-term。改 reg 布局**需连带验证 deopt/OSR 的 reg 恢复**（CaptureNativeFrame 靠 reg index）。
+
+### 🟠 C3(P3)：QuickJIT 升温经济学
+- 问题：`kQuickJitThreshold=1`（首调即编译），单调用方法付全量编译；到 T4 稳定前最多 5 次编译。
+- **建议**：评估 interpret-first（提升 threshold）或"仅真 hot 才 QuickJIT"。低风险试验性改动，可独立做，但需 D1 锚量化"短生命周期方法"收益。
+
+### 🟠 C4(P3)：热路径隐藏堆分配
+- 问题：非 flat `ArrayStorage.elements` vector resize、`SmallFieldArray`>2 字段 malloc（Box/NewObj）、RegisterVM Call/Calli >8 参数 **malloc/free×2/次**。
+- **低风险**，可独立做。改 call>8 用池 / SmallFieldArray 预分配。测试：分配计数断言。
+
+### 🟢 D1(P3)：解释器 ns/op 锚 + profiler 接线 —— **前置基建，建议最先做**
+- 问题：`register_vm_profiler`（`CHAOS_IL2CPP_VM_PROFILER_ENABLED` 默认 0，只 method-replacement 分支）+ `DumpFastExecuteOpcodeHistogram`（PROFILE 宏门控）都无调用者/默认关；唯一完整 ns/op 目标是 `tiering_benchmark`。
+- **已做部分**：上轮 `ae93376a4` 已在 entry Scriban shutdown 加双 profiling hook（宏门控）。
+- **剩余**：把 `VmProfileScope` 接到 RegisterExecute 热路径 + `DumpProfilerToFile` 接线到可执行入口，用 PROFILE build 出真实 opcode 直方图。**所有性能改动（C2/C3）的量化的前置。**
+
+---
+
+## 三、已确认的既有 bug（非本次引入，单独立项）
+
+1. **`Interpreter_Stress.MixedOpcode` 单测崩溃（EXIT=3）**：单帧 FastFrame 50000 次循环，`BrFalse` 回边 + 无 `RegisterThread`。**已用临时 worktree 在 c7605b19a（无 A1/A3）确认既有**，非 A1/A3 引入。修复需另立专项（可能未初始化 TLS/并发残留）。
+2. **`SimdFma`(110) 表越界空指针**：上轮 `4b2900225` 已补 110-127 为 `kOp_Unsupported`，**已闭合**。
+3. **寄存器层 `Reg_LdElem`/`Reg_StElem` null/越界原静默**：上轮 `4b2900225` 已对齐抛异常，**已闭合**。
+
+---
+
+## 四、环境坑（必须注意）
+
+1. **共享工作区被并行线（jit & gc）实时编辑**：session 期间 `jit_deopt.cpp`/`jit_helpers.cpp`/`git_osr_test.cpp`（jit 线）、`gc_card_table`/`thread_state`/`gc_old_gen`（gc 线, A2b demo）被并发改。**commit 前务必 `git status` 确认只 stage 自己的文件**，勿 `git add -A` 打包并行线的工作。当前工作区干净（`git status` 空）。
+2. **`fast_dispatch_*.inc` 是"源"非生成**：`fast_dispatch.cpp` 只有 18 行聚合器 `#include` inc 文件。头部"Auto-extracted from fast_dispatch.cpp"注释**过时**，直接 edit inc 是对的（不会被覆盖）。但 `fast_dispatch_seh.inc` 头部真说"Do NOT edit, run split_fast_dispatch.py"——**只有 seh.inc 是生成需注意**。
+3. **禁 `git stash`**（项目规则）：切换验证用**临时 worktree** 或显式提交。MixedOpcode 验证用的 `/tmp/chaos-baseline` worktree 已用 `git worktree remove --force` 清理。
+4. **构建命令**：`cd build/native && cmake --build . --target <target>`。增量编译若遇 MSB6003 tlog 冲突（git checkout 切换文件后），用 `-- /t:Rebuild` 清缓存。workspace cwd 常被 git 命令切到仓库根，build 前确认 cwd。
+5. **测试运行**：解释器单测在 `build/native/tests/unit/runtime-native/runtime-core/interpreter/Debug/*.exe`。全量门禁：`python tests/runner/test_driver.py --layer unit`（OVERALL OK 基线 2249/2277）。
+
+---
+
+## 五、推荐新 session 执行顺序
+
+1. **D1（最优先，性能量化的前置）**：接 VmProfileScope 到 RegisterExecute + 接线 DumpProfilerToFile，PROFILE build 出 opcode 直方图 → ns/op 锚。
+2. **C3 + C4（低风险独立）**：QuickJIT 阈值评估 + 热路径堆分配消除，用 D1 锚量化。
+3. **B4（已闭合）**：文档确认 + 统一注释，无代码。
+4. **C2（架构）**：先 4A（扁平存器文件+内联+验证 deopt/OSR reg 恢复），4B 作后续。
+5. **B5（高并发，需专门验证）**：分离 already-parked vs hijacked-mid-run，需要 GC-stress 环境。**建议独立 session 深做**。
+6. 全程可跑 `test_cross_tier_consistency`（D2 门禁）回归，防层间漂移。
+
+---
+
+## 六、关联文档链
+- 主计划（含每项方案/测试策略）：`docs/dev/in-progress/interpreter-optimization/interpreter-fix-plan-2026-08-13.md`
+- 4 维度发现：`docs/dev/assessments/interpreter-deep-analysis-2026-08-13.md`
+- 现行态复核（上轮已修）：`docs/dev/assessments/interpreter-review-current-2026-08-13.md`
+- 峰平谷总评：`docs/dev/assessments/interpreter-capability-peak-plateau-valley-2026-08-13.md`
+- memory：`interpreter-review-current-findings`（复核洞：chaos_is_gc_pointer 盲点/CodegenStSFld 等，均已修已记录）
