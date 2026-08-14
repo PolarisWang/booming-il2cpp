@@ -169,6 +169,21 @@ void GcRegisterHeapRange(uintptr_t start, uintptr_t end) {
         g_card_l1_size.store(new_size, std::memory_order_release);
         g_heap_base = start;
         EnsureCardBundleCoverage(new_size);
+
+        // Re-key the tracked segment list's seg_idx so ScanDirtyCardsIn
+        // RegisteredSegments stays consistent with the shifted L1 table.
+        // Each L2 segment that was previously at L1 index `i` now lives at
+        // L1 index `i + extra_segs`; its card bits guard the SAME physical
+        // addresses, so its physical range `g_heap_base + seg_idx*64KB`
+        // must follow the lowered base.  Without this, stored seg_idx go
+        // stale after a below-base expansion and cross-gen card scanning
+        // targets the wrong address range (dropping old->young edges).
+        {
+            std::lock_guard<std::mutex> lock(g_card_segment_list_mutex);
+            for (auto* node = g_card_segment_list; node != nullptr; node = node->next) {
+                node->seg_idx += extra_segs;
+            }
+        }
     }
 
     // ── Compute segment range relative to (possibly updated) base ──

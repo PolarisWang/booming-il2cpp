@@ -23,6 +23,71 @@ struct YoungCollectorTest : GcUnitTestBase {
     }
 };
 
+TEST_F(YoungCollectorTest, OldGenToNurseryRefFixedUpViaDirtyCard) {
+    // Regression: an old-gen object holding a reference to a nursery object
+    // must have that slot rewritten to the promoted address during young GC.
+    // The old->young edge is only discoverable through the dirty-card scan
+    // (Phase 1); if the card-table base is corrupted by a late g_heap_base
+    // override (historic GcSetHeapBase(page) in old-gen page allocation),
+    // Phase 1 scans the wrong address range and the slot keeps a stale
+    // pointer to collected nursery memory (cross-gen use-after-free).
+    //
+    // Use a REAL managed old-gen object (g_old_gen.Allocate) so registration
+    // with the card table exercises the same path as production mutation.
+    Region* nursery = g_young_gen.region.load(std::memory_order_acquire);
+    ASSERT_NE(nursery, nullptr);
+    Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+
+    // Anchor the card-table base to the nursery through GcRegisterHeapRange —
+    // the production base-maintenance path (NOT the raw GcSetHeapBase override,
+    // which is precisely the corruption this test guards against).  When the
+    // nursery sits below any previously-registered base, GcRegisterHeapRange
+    // lowers g_heap_base AND re-keys every tracked segment (gc_card_table.cpp
+    // below-base path), so DirtyCard / IsDirty / ScanDirtyCardsInRegistered
+    // Segments all stay consistent with the old-gen pages this test mutates,
+    // independent of prior tests' global-base pollution.
+    GcRegisterHeapRange(reinterpret_cast<uintptr_t>(nursery->begin),
+                        reinterpret_cast<uintptr_t>(nursery->end));
+    if (gen1 != nullptr) {
+        GcRegisterHeapRange(reinterpret_cast<uintptr_t>(gen1->begin),
+                            reinterpret_cast<uintptr_t>(gen1->end));
+    }
+    GcSetCardTableNurseryRange(reinterpret_cast<uintptr_t>(nursery->begin),
+                               reinterpret_cast<uintptr_t>(nursery->end));
+
+    void* old_block = g_old_gen.Allocate(64, true);
+    ASSERT_NE(old_block, nullptr);
+    std::memset(old_block, 0, 64);
+
+    void* nursery_obj = NurseryAllocate(64);
+    ASSERT_NE(nursery_obj, nullptr);
+    std::memset(nursery_obj, 0, 64);
+    *static_cast<const void**>(nursery_obj) = test_type_info_64();
+    ASSERT_TRUE(IsInNursery(nursery_obj));
+
+    // Old-gen object field at offset 8 references the nursery object.
+    std::memcpy(static_cast<uint8_t*>(old_block) + 8, &nursery_obj, sizeof(void*));
+    DirtyCard(static_cast<uint8_t*>(old_block) + 8);
+
+    YoungCollectionResult r = GcYoungCollection();
+
+    // The old-gen slot must no longer point into the (now-collected) nursery.
+    void* slot_after = nullptr;
+    std::memcpy(&slot_after, static_cast<uint8_t*>(old_block) + 8, sizeof(void*));
+    EXPECT_FALSE(IsInNursery(slot_after));
+
+    // The rewritten value must be a live tenured object, not a forwarding-
+    // stamped address left pointing at collected nursery memory (the UAF).
+    ASSERT_NE(slot_after, nullptr);
+    auto first_word = *static_cast<const uintptr_t*>(slot_after);
+    EXPECT_EQ(first_word & 1u, 0u) << "slot points at a forwarding-stamped (stale) address";
+
+    // The old-gen field should now equal the tenured copy of the object that
+    // Phase 0 promoted from the stack root (both must agree).
+    void* promoted = nursery_obj;   // stack root was fixed up to the tenured addr
+    EXPECT_EQ(slot_after, promoted) << "old-gen slot not fixed to the promoted object";
+}
+
 TEST_F(YoungCollectorTest, ForwardingProtocol) {
     // kForwardingTag = 1, lowest bit set
     // TypeInfoHot* is at least 4-byte aligned, so bit 0 is always 0 for valid ptrs.

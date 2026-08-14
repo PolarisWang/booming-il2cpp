@@ -370,8 +370,17 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
 
         if (heap_base_ == 0) {
             heap_base_ = reinterpret_cast<uintptr_t>(mem);
-            // Align card table heap_base to the actual first page address.
-            GcSetHeapBase(reinterpret_cast<void*>(heap_base_));
+            // NOTE: The card table's g_heap_base is NOT overridden here (the
+            // historic GcSetHeapBase(page) call was removed).  g_heap_base
+            // must remain the MINIMUM address registered with the card table
+            // so the (addr - g_heap_base) >> kCardShift index math in the
+            // write barrier, IsDirty, ClearCardRange and ScanDirtyCards* stay
+            // consistent with every registered segment's stored seg_idx.  The
+            // GcRegisterHeapRange() below is the single owner of base
+            // maintenance: when this page sits below the current base it
+            // lowers g_heap_base and re-keys the L1 table (see below-base
+            // path in gc_card_table.cpp); otherwise it registers segments at
+            // their real indices without perturbing the base.
         }
 
         // Register page with the two-level card table so write barriers
