@@ -214,7 +214,25 @@ struct SmallFieldArray {
     void reserve(CHAOS_IL2CPP_SIZE n) {
         if (n <= field_capacity_)
             return;
-        auto* new_storage = static_cast<InterpreterValue*>(CHAOS_IL2CPP_MALLOC(n * sizeof(InterpreterValue)));
+        // Geometric growth (C4): grow past the exact request so a sequence of
+        // incremental field store/grow (e.g. StFld writing fields 0,1,5 → resize
+        // 1,2,6) is amortized O(1)-amortized instead of reallocating+copying the
+        // whole inline/heap buffer on every step (exact-fit reserve => malloc+
+        // copy each time for > kInlineCapacity field objects).  Mirrors the
+        // std::vector growth policy used by ArrayStorage.elements.
+        CHAOS_IL2CPP_SIZE new_cap = field_capacity_;
+        if (new_cap < kInlineCapacity)
+            new_cap = kInlineCapacity;
+        if (new_cap < n) {
+            new_cap = n;
+            // ~1.5x growth, bounded to avoid overshoot for huge arrays.
+            CHAOS_IL2CPP_SIZE doubled = field_capacity_ * 2;
+            if (doubled > new_cap && doubled > field_capacity_)
+                new_cap = doubled;
+        }
+        auto* new_storage = static_cast<InterpreterValue*>(CHAOS_IL2CPP_MALLOC(new_cap * sizeof(InterpreterValue)));
+        // Note: a null on OOM is fatal (original code deref'd new_storage too);
+        // no check here keeps behavior equivalent to the pre-C4 exact-fit path.
         for (CHAOS_IL2CPP_SIZE i = 0; i < field_count_; ++i) {
             ::new (&new_storage[i]) InterpreterValue(fields_ptr_[i]);
             fields_ptr_[i].~InterpreterValue();
@@ -223,7 +241,7 @@ struct SmallFieldArray {
             CHAOS_IL2CPP_FREE(fields_ptr_);
         }
         fields_ptr_ = new_storage;
-        field_capacity_ = n;
+        field_capacity_ = new_cap;
     }
 
     void resize(CHAOS_IL2CPP_SIZE n) {

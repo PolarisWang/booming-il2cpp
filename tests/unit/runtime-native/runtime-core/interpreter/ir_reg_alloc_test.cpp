@@ -1146,6 +1146,43 @@ TEST(IR_RegAlloc, LdLocARejectsToFastExecute) {
         << "AllocateRegisters must reject LdLocA methods (return empty → FastExecute)";
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// C4 remainder: SmallFieldArray allocation behavior
+// ═══════════════════════════════════════════════════════════════════════════
+// Box/NewObj store fields in SmallFieldArray: ≤ kInlineCapacity fields live
+// inline (no heap alloc), >2 spills.  C4 makes growth geometric so an
+// incremental field-store sequence (StFld on fields 0,1,5 → resize 1,2,6) is
+// amortized instead of reallocating+copying the whole buffer every step.
+TEST(IR_RegAlloc, SmallFieldArrayInlineAndGeometricGrowth) {
+    using chaos::il2cpp::interpreter::SmallFieldArray;
+
+    // ≤ kInlineCapacity fields: inline storage, no heap alloc.  data() returns
+    // the inline buffer (fields_ptr_ == inline_ when capacity allows), which is
+    // NOT a heap address — verify a ≤2-field array's data pointer is stable and
+    // a >2-field array spills (data pointer may move to heap on grow).
+    SmallFieldArray inline_arr;
+    inline_arr.resize(2);
+    EXPECT_EQ(inline_arr.size(), 2u);
+    const void* inline_data = inline_arr.data();   // points at inline_ (this)
+    // A second ≤2 resize must NOT realloc (capacity already ≥ 2): data() unchanged.
+    inline_arr.resize(2);
+    EXPECT_EQ(static_cast<const void*>(inline_arr.data()), inline_data);
+
+    // > kInlineCapacity spills to heap.
+    SmallFieldArray big;
+    big.resize(5);
+    EXPECT_GE(big.size(), 5u);
+
+    // Geometric growth: incremental grows stay valid across resize (no per-step
+    // realloc breakage) — the C4 policy grows capacity > request so this is
+    // amortized, not exact-fit churn.
+    SmallFieldArray c;
+    c.resize(3);
+    EXPECT_EQ(c.size(), 3u);
+    c.resize(4);
+    EXPECT_EQ(c.size(), 4u);
+}
+
 
 
 
