@@ -53,10 +53,10 @@
 - 问题：`kQuickJitThreshold=1`（首调即编译），单调用方法付全量编译；到 T4 稳定前最多 5 次编译。
 - **建议**：评估 interpret-first（提升 threshold）或"仅真 hot 才 QuickJIT"。低风险试验性改动，可独立做，但需 D1 锚量化"短生命周期方法"收益。
 
-### 🟠 C4(P3)：热路径隐藏堆分配 —— **call>8 部分已完成，剩余 ArrayStorage/SmallFieldArray 待做**
+### 🟠 C4(P3)：热路径隐藏堆分配 —— **call>8 已 done，SmallFieldArray 几何增长已 done**
 - 问题：非 flat `ArrayStorage.elements` vector resize、`SmallFieldArray`>2 字段 malloc（Box/NewObj）、RegisterVM Call/Calli >8 参数 **malloc/free×2/次**。
-- **✅ 本轮已做（commit `806a4f107`）**：RegisterVM `Reg_Call`/`Reg_Calli` >8 参数 malloc×2+free×2 → **合并单块**（新 `CoalescedCallArgs(ac)` layout helper，uint64 args[ac] + uint8 tags[ac] 同块，free 减半）；新增 `IR_RegAlloc.CoalescedCallArgsLayout` 单测（ac∈{0,8,9,10,13,64} 断言 layout/不重叠/对齐）。
-- **剩余（低风险，可独立做）**：非 flat `ArrayStorage.elements` vector resize、`SmallFieldArray`>2 字段 malloc（Box/NewObj）。测试：分配计数断言。
+- **✅ 已做（`806a4f107` call>8 合并单块 + `d80230fd3` SmallFieldArray 几何增长）**：`CoalescedCallArgs(ac)` layout helper 消除 call>8 双 malloc/free；`SmallFieldArray::reserve` 从 exact-fit 改 ~1.5x/2x 几何增长，消除增量写字段(resize 1,2,6)的重分配 churn。
+- **剩余**：`ArrayStorage.elements` vector resize（新数组每次单次 malloc，属固有，非 churn；是 `std::vector` 已几何增长，无跨层优化价值）。测试：SmallFieldArray inline+geometric 已补。
 
 ### 🟢 D1(P3)：解释器 ns/op 锚 + profiler 接线 —— **代码已落地 + 回归绿，PROFILE 输出验证待跑**
 - 问题：`register_vm_profiler`（`CHAOS_IL2CPP_VM_PROFILER_ENABLED` 默认 0，只 method-replacement 分支）+ `DumpFastExecuteOpcodeHistogram`（PROFILE 宏门控）都无调用者/默认关；唯一完整 ns/op 目标是 `tiering_benchmark`。
