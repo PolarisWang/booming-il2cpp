@@ -128,6 +128,21 @@ VmProfileScope 埋点 ✓ → g_vm_profiler 累积 ✓ → DumpProfilerToFile �
 4. **PDB 冲突修复**：`ir_reg_alloc.cpp` 编译遇 C1041 PDB 竞争（并行构建）→ 重跑即可。
 5. **`chaos_is_gc_pointer`** 在 `chaos::il2cpp::runtime_core` namespace，且 `gc_helpers.h` 不 include `gc_api.h` —— 跨 TU 用需显式 `<gc/gc_api.h>` + 全限定。
 
+## 八、本轮 session 落地修正（2026-08-14 验证后补）
+
+> 新 session 直接采信以下实测结论，勿再踩以下三个坑。均已在本 session 修复并验证。
+
+1. **build 配方更正**：`--preset profile` 单独跑会 `FATAL_ERROR: Unsupported ROADMAP0_PRESET_TARGET=''`（`CMakeLists.txt:775`）。顶楼 CMakeLists 完全按 `ROADMAP0_PRESET_TARGET` 分流，`profile`/`debug`/`ship`/`asan` 预设都**不设**该变量。正确配方（Windows x64 桌面）：
+   ```
+   cmake --preset profile -DROADMAP0_PRESET_TARGET=windows-x64-reference
+   cmake --build artifacts/presets/profile --config Debug --target chaos_tiering_benchmark -j 4
+   ```
+   （VS 多配置生成器必须 `--config`；MSB8029 temp-dir 警告无害；`artifacts/` git-ignored。）
+2. **`register_vm_profiler.h` 缺 `__rdtsc` include（P1 修复）**：PROFILE build 下 `CHAOS_IL2CPP_VM_PROFILER_ENABLED=1` 激活 `VmProfileScope`，但头文件只 include `<cstdint>/<cstdio>/<atomic>/<cstring>`，**没有 `<intrin.h>`/`<x86intrin.h>`** → `C3861 '__rdtsc'` 编译失败。已按 `common/chaos/profile.h:50-58` 的守卫式 include 修复。
+3. **方案 A 已落地并实测产出**：`tiering_benchmark.cpp` 加入 `#include "register_vm_profiler.h"`（line 25）+ 在 `CHAOS_IL2CPP_PROFILE_DUMP()` 后（main 尾部）加 `#if CHAOS_IL2CPP_VM_PROFILER_ENABLED` 包住的 `DumpProfilerToFile(nullptr); ResetProfiler();`。**probe 实测**：`VmProfileScope` → `DumpProfilerToFile` 正确 dump 出按 call_count 排序的 per-method cycles/calls 表；GC Bytes 恒 0（印证 B3 缺口）。benchmark TU 在 profile 预设下干净编译链接成 exe。
+   > ⚠️ **Debug+PROFILE 下跑完整 benchmark 极慢**（`/Od` + per-call profiler，12+ scenarios 超出会话时长）。要快速看到 dump，直接跑 unit probe 或改用 `--config Release`。真实基线仍须用 Release/PROFILE。
+4. **`vm_profiler_test.cpp` 也在 in-tree 调 `DumpProfilerToFile`**（不止 Scriban），修正文档 §〇/§一 "只在 Scriban" 的措辞。
+
 ---
 
 ## 七、关联文档链

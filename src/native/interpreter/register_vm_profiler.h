@@ -19,6 +19,16 @@
 #include <atomic>
 #include <cstring>
 
+// __rdtsc is required by VmProfileScope (CHAOS_IL2CPP_VM_PROFILER_ENABLED).
+// Mirror the guarded include in common/chaos/profile.h so this header compiles
+// standalone in a PROFILE build on MSVC/clang x86-64.
+#if defined(_MSC_VER) && (defined(__x86_64__) || defined(_M_AMD64))
+#include <intrin.h>
+#pragma intrinsic(__rdtsc)
+#elif defined(__x86_64__) || defined(__i386__)
+#include <x86intrin.h>
+#endif
+
 namespace chaos::il2cpp::interpreter {
 
 // ── Compile-time toggle ──────────────────────────────────────────────────
