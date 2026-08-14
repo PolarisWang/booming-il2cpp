@@ -143,6 +143,23 @@ VmProfileScope 埋点 ✓ → g_vm_profiler 累积 ✓ → DumpProfilerToFile �
    > ⚠️ **Debug+PROFILE 下跑完整 benchmark 极慢**（`/Od` + per-call profiler，12+ scenarios 超出会话时长）。要快速看到 dump，直接跑 unit probe 或改用 `--config Release`。真实基线仍须用 Release/PROFILE。
 4. **`vm_profiler_test.cpp` 也在 in-tree 调 `DumpProfilerToFile`**（不止 Scriban），修正文档 §〇/§一 "只在 Scriban" 的措辞。
 
+### 九、⚠️ Release/PROFILE 全量 benchmark 的 `-1` 正确性 bug（2026-08-14 实测，D1 基线阻断点）
+
+> **这是当前 D1 全量基线无法产出的真正阻断**，需独立 systematic-debugging session，与 profiler 本身无关（profiler dump 在 main 末尾，根本走不到）。
+
+**现象**：`Release/PROFILE` 构建跑 `chaos_tiering_benchmark.exe`，多数 scenario 方法返回 **`-1`**（= `InterpreterEntryDirect` 未写 `ret_val`，即方法 **fault/无返回值**），非 timing：
+- `bench_arithmetic`：`FAIL: warmup expected=60 got=-1`、`MISMATCH expected=162 got=-1`
+- `bench_register_10` / `bench_native`(expected=30) / `bench_multi_alu_t4`(60) / `bench_loc_storm_t4`(40) / `bench_branches_t4`(42) 全 FAIL
+- **`bench_callvirt_pic` PASS**（同 profile 构建、同 `VmProfileScope` 激活下）
+
+**为何排除"我改的 profiler"**：① `callvirt_pic` 在 profiler 激活下通过（profiler 非 blanket 腐化）；② profiler dump 在 main 末尾，fail 早于它；③ `VmProfileScope` 只是局部 `uint64` RAII + RDTSC + 全局原子 CAS，不 touch 调用者 `RegisterFrame`，无法 fault 方法；④ 失败是方法级 `-1`=fault，与特定 opcode 路径相关。
+
+**为何像 pre-existing Release-only bug**：`bench_arithmetic` 用 `ldarg(6)/add(25)/ret(53)`，我近轮改的 div/rem、NoChk、StInd/StObj barriier、LdArgA/LdLocA、reg 越界都**不触这些 opcode**。Debug/PROFILE（§8 probe 跑通）vs Release 差异 → 像 **-O2 下解释器/JIT 的 UB**，非新增回归。
+
+**下一步（新 session/systematic-debugging）**：定位哪个 tier/opcode 在 -O2 下 fault。线索：`bench_callvirt_pic` 过、纯算术/存器/直调 T4 fail → 优先查 `RegisterExecute` 与 T4 原生在 Release/PROFILE 的 `-O2` 行为（可能 `g_jit_deopt_state`/`RegisterFrame` 未初始化/跨 -O2 排序）。修好后即可产出 D1 全量基线。
+
+
+
 ---
 
 ## 七、关联文档链
