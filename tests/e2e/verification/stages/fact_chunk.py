@@ -101,19 +101,15 @@ def _tech_status(tech_result: dict, meta_total: int | None) -> str:
     passed = tech_result["passed"]
     total = tech_result["total"]
     rc = tech_result["returncode"]
-    is_clean = rc == 0
-    if is_clean and passed == total and total > 0:
-        return "passed"
     if total == 0:
         return "error"
-    if rc != 0 and passed < total:
-        return "partial" if passed > 0 else "error"
+    if rc == 0 and passed == total:
+        return "passed"
     if rc != 0 and passed == total:
-        return "partial"  # truncated JSON - incomplete data
-    if rc == 0 and passed < total:
-        return "partial"
-    return "passed"
-
+        return "partial"  # all parsed passed but non-zero exit: truncated JSON
+    # passed < total (any rc): at least one subject genuinely failed or was
+    # never dispatched. A real coverage/assertion failure must be fatal.
+    return "failed"
 
 def _write_fact_history(ctx: ChunkContext, aot_result: dict, jit_result: dict | None) -> None:
     """Append fact results to _dll/reports/history/fact-YYYY-MM-DD.jsonl."""
@@ -239,7 +235,16 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
             md = json.loads(meta_path.read_text(encoding="utf-8"))
             meta_total = md.get("totalMethods")
             meta_fact_count = md.get("factMethodCount")
+            # Unique fact generatedMethodIds — the authoritative dispatch
+            # expectation. Dispatching fewer than this means at least one fact
+            # subject silently dropped out of the slot map (coverage regression).
+            fact_gids: set[str] = {
+                e.get("generatedMethodId") for e in md.get("methods", [])
+                if e.get("kind") == "fact" and e.get("generatedMethodId")
+            }
+            meta_unique_fact = len(fact_gids) if fact_gids else None
         except (json.JSONDecodeError, OSError):
+            meta_unique_fact = None
             print(f"  [fact] WARNING: corrupt or unreadable metadata at {meta_path}")
 
     # Run AOT
@@ -309,7 +314,7 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     # (which includes helper/benchmark-only subjects that don't need fact dispatch).
     # This avoids false SEVERE failures when non-fact subjects (closures, compiler-
     # generated helpers, hotupdate-only entries) aren't dispatched by the codegen.
-    expected = meta_fact_count if meta_fact_count is not None else (meta_total or 0)
+    expected = meta_unique_fact if meta_unique_fact is not None else meta_fact_count
     aot_dropped = max(0, (expected or 0) - aot_result['total']) if expected else 0
     if aot_dropped > 0 and expected and expected > 0:
         drop_ratio = aot_dropped / expected
