@@ -18,6 +18,29 @@ crypto 的 "88% (1077/1222)" 数字被证明是 **06-14/06-17 的过期 AOT 快�
 | sec 重建 subject slot | —（同 sec-2 同源） | **1178**（--fact-json 1178/1178 passed） |
 | 历史 x509 12 failures | 06-19 产物 773/785 | 当前 HEAD **不可复现** |
 
+
+## 99.8% 数字的精确出处（已定位）
+
+- 来源：nightly-build-report/full-run/20260620_054326-3b9005fa/
+  reports/System.Security.Cryptography/fact-summary.json（06-20 归档，非 06-14/06-17）。
+- 分 chunk：sec 2403/2403，sec-2 2403/2403，x509 773/785。
+  **剩余 12 项全部在 x509**（06-20 归档产物，已不可复现）。
+- 06-20 归档本身与当日每 chunk fact.json 汇总一致：aot 233 全过、
+  jit 233 全过；archive 合计数 785 > 当日实测 233 是因为归档含 history/
+  多次运行的**累计去重合并**，并非单次运行失败集。
+- 12 项失败在 current HEAD 重建产物上不存在（fresh builds 272/272 全过）。
+
+## NuGet 损坏根因（本 shell 环境，已定位）
+
+- 现象：dotnet nuget list source / restore 报 "Value cannot be null (Parameter path1)"。
+- 根因：**harness 剥离了 USERPROFILE/APPDATA/HOME/ProgramFiles 等环境变量**，
+  NuGet 的 XPlatMachineWideSetting 构造时 Path.Combine(null, ...) 抛异常。
+  不是 NuGet.Config 内容问题（real user 的 config 完好）。
+- 修复：spawn 时补回 real-user env（USERPROFILE=C:\Users\haochuan.wang 等）即恢复；
+  已用 .tmp-combination-test 验证 CombinationSubjects.dll 可正常 build 成功（0 errors），
+  仅 NU1900 脆弱性告警（离线环境正常）。
+- 对验证的影响：此前用 TPG dotnet exec generate-dll 绕过；现在标准 combination 路径
+  在本 shell 也可用，完整 fact 管线可实跑（下一步验证归档）。
 ## 根因（为什么旧快照失真）
 
 1. **ATG 每次重生成**（a22a798d5）与 **metadata reconcile**（afe0060ce）在 HEAD 已合入，
