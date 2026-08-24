@@ -73,6 +73,12 @@ struct CardSegment {
 /// Initial size: 64K entries (512 KB), auto-grows for heaps > 4 GB.
 /// Uses unique_ptr<T[]> because std::atomic is not copyable (MSVC).
 /// Size tracked separately in g_card_l1_size (atomic for lock-free read).
+/// Lifetime policy (GC-N5): the OLD array is NEVER freed on grow/rebase —
+/// it is retired into a process-lifetime list (gc_card_table.cpp), because
+/// DirtyCard reads the array pointer lock-free and a freed array would be a
+/// use-after-free for concurrent barriers.  Retired memory is bounded
+/// (~512 KB per growth step; growth is rare, heaps > 4 GB or below-base
+/// allocations).
 extern std::unique_ptr<std::atomic<CardSegment*>[]> g_card_l1;
 extern std::atomic<size_t> g_card_l1_size;
 

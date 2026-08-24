@@ -56,6 +56,23 @@ struct CardSegmentNode {
 static CardSegmentNode* g_card_segment_list = nullptr;
 static std::mutex g_card_segment_list_mutex;
 
+// ── Retired L1 tables (GC-N5: never free the old array) ───────
+// GcRegisterHeapRange grows/rebase the L1 table by swapping in a larger
+// array (`g_card_l1.swap(new_table)`).  DirtyCard reads the L1 array
+// lock-free on the hot path (relaxed load), so the OLD array must NEVER be
+// freed — a concurrent barrier indexing a freed array is a use-after-free.
+// Retired arrays are held for process lifetime; growth only happens for
+// heaps > 4 GB (64K entries) or below-base allocations, so retained memory
+// is bounded (~512 KB per growth step).  This mirrors the g_card_bundle
+// "allocate once, never realloc" policy (EnsureCardBundleCoverage) applied
+// to the L1 table.
+//
+// Fixed-size slot array (no allocation, no exceptions on the retire path;
+// retire is serialized by the old-gen allocator mutex in practice).
+static constexpr int kMaxRetiredL1Tables = 16;
+static void* g_card_l1_retired[kMaxRetiredL1Tables];
+static int g_card_l1_retired_count = 0;
+
 // ── Heap base (set once at startup) ────────────────────────────
 uintptr_t g_heap_base = 0;
 
@@ -166,6 +183,13 @@ void GcRegisterHeapRange(uintptr_t start, uintptr_t end) {
         // already zero-initialized by the unique_ptr allocator.
 
         g_card_l1.swap(new_table);
+        // new_table now owns the OLD L1 array.  Retire it (never free) so
+        // concurrent lock-free DirtyCard readers on the old array stay safe.
+        if (g_card_l1_retired_count < kMaxRetiredL1Tables) {
+            g_card_l1_retired[g_card_l1_retired_count++] = new_table.release();
+        } else {
+            new_table.release();  // capacity exhausted: leak (safe) instead of free
+        }
         g_card_l1_size.store(new_size, std::memory_order_release);
         g_heap_base = start;
         EnsureCardBundleCoverage(new_size);
@@ -206,6 +230,12 @@ void GcRegisterHeapRange(uintptr_t start, uintptr_t end) {
                                std::memory_order_relaxed);
         }
         g_card_l1.swap(new_table);
+        // Retire the old array (never free) — see the retired-list note above.
+        if (g_card_l1_retired_count < kMaxRetiredL1Tables) {
+            g_card_l1_retired[g_card_l1_retired_count++] = new_table.release();
+        } else {
+            new_table.release();
+        }
         g_card_l1_size.store(new_size, std::memory_order_release);
         current_size = new_size;
         EnsureCardBundleCoverage(new_size);
