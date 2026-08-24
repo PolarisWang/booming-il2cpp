@@ -112,30 +112,33 @@ extern "C" void chaos_gc_dirty_card(const void* obj) noexcept {
 // as gen0 (which would skip carding → dropped old→nursery edges).
 extern "C" void chaos_gc_dirty_card_dst_ref(const void* dst, const void* ref) noexcept {
     if (dst == nullptr) return;
-    uintptr_t dst_addr = reinterpret_cast<uintptr_t>(dst);
-    uint8_t dst_gen = GetRegionGen(dst_addr);
-    // 1. dst in gen0 (nursery): young-generation contents are scanned wholesale
-    //    — no card needed regardless of what is written into them.
-    //
-    //    R3/CoreCLR-aligned: we skip carding ONLY for true gen0 (nursery) here,
-    //    NOT gen1.  CoreCLR's region barrier (JIT_WriteBarrier_Byte_Region64)
-    //    skips only dst.gen==0 and still cards old→gen1 stores of younger refs.
-    //    Chaos previously skipped gen1 too (dst_gen <= kRegionGenGen1), so a
-    //    gen1→nursery store was never carded, yet young-GC Phase-2b scans gen1
-    //    dirty cards for exactly those gen1→nursery edges — a self-contradiction
-    //    that silently dropped the cross-gen edge.
-    if (dst_gen == kRegionGenYoung) return;
+    // Precise destination test (GC-N6 finding, 2026-08-25): a card MUST be set
+    // for any store into a non-nursery object.  The 4MB region-gen chunk tag
+    // is NOT a reliable destination classifier: when the nursery tail and an
+    // old-gen page share one 4MB chunk (nursery ends at N, an old-gen object
+    // sits at N+64KB inside the same [N & ~4MB, +4MB) chunk), the nursery's
+    // SetRegionGen(..., young) tags the OLD-GEN addresses as young too — the
+    // old `dst_gen == kRegionGenYoung` test then skipped the card and dropped
+    // the old→nursery edge (the referenced young object was collected → UAF).
+    // Exposed by gc_region_barrier_stress_test's content-liveness check:
+    // card_dirty=0 on a slot whose object was collected while referenced.
+    // RegionManager::IsNurseryPointer is precise (per-region range test with
+    // an O(1) out-of-range fast path) — cheap on this slow barrier path.
+    if (RegionManager::Instance().IsNurseryPointer(dst)) return;
     // 2. ref outside managed/NULL: not a managed pointer store — no cross-gen
     //    reference to record.  (GetRegionGen of an unmapped addr returns the
     //    conservative default kRegionGenOld, so an out-of-heap ref is treated
-    //    as mature → the ref_gen>=dst_gen test below skips — matching CoreCLR's
+    //    as mature → the ref_gen >= old test below skips — matching CoreCLR's
     //    out-of-range early-out.)
     if (ref == nullptr) return;
     uint8_t ref_gen = GetRegionGen(reinterpret_cast<uintptr_t>(ref));
-    // 3. Faithful CoreCLR condition: ref.gen < dst.gen (an older region wrote a
-    //    young-object reference into dst).  Same-mature (ref.gen >= dst.gen)
-    //    writes need no card.
-    if (ref_gen >= dst_gen) return;
+    // 3. Conservative CoreCLR condition: only a strictly-younger reference
+    //    stored into a non-nursery destination needs a card.  A mature (old)
+    //    ref — ref_gen >= old — creates no cross-gen edge.  Note dst's own
+    //    chunk tag is deliberately NOT consulted (collision hazard above);
+    //    gen1→gen1 stores are conservatively carded (extra scan work, never a
+    //    correctness miss).
+    if (ref_gen >= kRegionGenOld) return;
     DirtyCard(dst);
 }
 
