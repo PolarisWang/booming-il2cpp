@@ -68,7 +68,7 @@
 | RegisterExecute (Layer R) | ✅ 完成 | Register-allocated IL |
 | InterpreterVM (Layer D) | ✅ 完成 | 完整 ExecutionFrame |
 | InterpreterEntryDirect | ✅ 完成 | 5 级 dispatch (Step1→A0→B→C→D) |
-| Crypto interpreter routing | ✅ IL data emission fixed | x509: 88.8% → 预期接近100%；Core crypto: 需P/Invoke路由方案 |
+| Crypto interpreter routing | ✅ IL data emission fixed | Latest fact-summary 99.8%; fresh native rebuilds x509 272/272, sec-2 1178/1178 passed, 0 failed |
 
 ### 热更新
 
@@ -108,7 +108,7 @@
 | System.Runtime.Intrinsics | 2 | ✅ Passed |
 | System.Runtime.Serialization.Formatters | 1 | ✅ Passed |
 | System.Security.Claims | 1 | ✅ Passed |
-| System.Security.Cryptography | 4 | ✅ 88% (1077/1222) AOT/JIT aligned |
+| System.Security.Cryptography | 4 | ✅ 99.8% latest; fresh native rebuild (reconcile+codegen) x509 233→272, sec-2 1096→1178 subjects, all fact passed |
 | System.Security.Principal.Windows | 1 | ✅ Passed |
 | System.Text.Json | 1 | ✅ Passed |
 | System.Threading.Tasks.Parallel | 1 | ✅ Passed |
@@ -130,7 +130,7 @@
 	| 2 | G-2: FindPage 索引化 | ✅ 已实现 (2026-06-11) | PageArray 排序数组 + 二分查找 O(log n) |
 	| 3 | G-3: BGC-YoungGC 交互 segfault | ✅ 已修复 (2026-06-11) | Phase 3 coordinated pause 协议：atomic flag 握手 + nursery drain + Phase 3d re-rooting |
 	| 4 | Server GC crash | ✅ DrainMarkStackParallel fix + chaos_jit MSVC build fix | Worker pool re-entrancy + GCC atomics on MSVC |
-	| 5 | Cryptography 360 failures | ✅ 88% (1077/1222) passed | BCrypt P/Invoke stubs + routing chain complete. AOT/JIT behavior aligned |
+	| 5 | Cryptography 360 failures | ✅ resolved via reconcile+rebuild. Latest 99.8%; fresh native builds x509 272/272, sec-2 1178/1178 passed (old 88%/12-fail artifacts predate a22a798d5/afe0060ce, no longer reproducible) |
 	| 6 | SIMD V256_Mul_I32 overload rename | ✅ 已修复 (2026-06-11) | CRLF→LF + .gitattributes 强制 LF |
 	| 7 | RunFactMode SEH longjmp gap | ✅ 已修复 (2026-06-10) | g_chaos_fail_hook longjmp to uninitialized jmp_buf |
 
