@@ -191,11 +191,13 @@ public sealed class NativeAotPlannerHelperTests
     [Theory]
     [InlineData("NoSeparator")]
     [InlineData("A.B::")]
-    public void GetMethodName_Invalid_Throws(string subjectId)
+    public void GetMethodName_Malformed_ReturnsEmpty(string subjectId)
     {
+        // Intentional contract change: malformed SubjectIds (e.g. from BridgeAOT)
+        // now return string.Empty instead of throwing, so callers can detect and skip.
         var method = s_plannerType.GetMethod("GetMethodName", s_static, new[] { typeof(string) })!;
-        var ex = Assert.Throws<TargetInvocationException>(() => method.Invoke(null, new object[] { subjectId }));
-        Assert.Contains("failed to extract method name", ex.InnerException!.Message);
+        var result = (string)method.Invoke(null, new object[] { subjectId })!;
+        Assert.Equal(string.Empty, result);
     }
 
     // ── GetTypeDisplayName ────────────────────────────────────────────
@@ -352,10 +354,34 @@ public sealed class NativeAotPlannerHelperTests
     [InlineData("", 33554432u, 0x83000000u)]
     public void CreatePseudoMetadataHandle_ReturnsNonZero(string subjectId, uint prefix, uint expectedTopBits)
     {
+        // Order-dependence fix: CreatePseudoMetadataHandle resolves FNV-1a hash
+        // collisions against a shared static ConcurrentDictionary (_usedPseudoMetadataHandles)
+        // that accumulates entries from prior test classes in the same process. Clear that
+        // shared state (via reflection) so this assertion is deterministic regardless of
+        // execution order.
+        ResetPseudoMetadataState();
+
         var method = s_plannerType.GetMethod("CreatePseudoMetadataHandle", s_static, new[] { typeof(string), typeof(uint) })!;
         var result = (uint)method.Invoke(null, new object[] { subjectId, prefix })!;
         Assert.NotEqual(0u, result);
         Assert.Equal(expectedTopBits, result & 0xFF000000u);
+    }
+
+    /// <summary>Clear the shared pseudo-metadata-handle static caches so
+    /// CreatePseudoMetadataHandle is order-independent.</summary>
+    private static void ResetPseudoMetadataState()
+    {
+        foreach (var field in new[]
+                 {
+                     "_pseudoMetadataHandleCache",
+                     "_usedPseudoMetadataHandles",
+                 })
+        {
+            var f = s_plannerType.GetField(field, s_static);
+            var value = f?.GetValue(null);
+            var clear = value?.GetType().GetMethod("Clear");
+            clear?.Invoke(value, null);
+        }
     }
 
     // ── IsStructuredValueTypeSubjectId ────────────────────────────────
@@ -907,8 +933,12 @@ public sealed class NativeAotPlannerHelperTests
     }
 
     [Fact]
-    public void IdentifyStructLocalSlots_NonValueTypeInitobj_NotCounted()
+    public void IdentifyStructLocalSlots_InitobjCounted_RegardlessOfTypeShape()
     {
+        // Intentional contract change: the typeShape check was removed because
+        // initobj only operates on value types per IL spec, and generic value types
+        // (e.g. Vector128<T>) may carry an incorrect ReferenceType typeShape in AOT
+        // core IR. So a preceding ldloca+initobj always identifies a struct local.
         var method = s_plannerType.GetMethod("IdentifyStructLocalSlots", s_static,
             new[] { typeof(IReadOnlyList<AotCoreIrInstructionArtifact>) })!;
         var instructions = new List<AotCoreIrInstructionArtifact>
@@ -923,7 +953,7 @@ public sealed class NativeAotPlannerHelperTests
             }},
         };
         var result = (HashSet<int>)method.Invoke(null, new object[] { instructions })!;
-        Assert.Empty(result); // ReferenceType, not ValueType
+        Assert.Equal([0], result); // counted regardless of typeShape (initobj = value type)
     }
 
     // ── FilterRedundantStoreReloadPairs (ExceptionEmission.cs) ────────

@@ -128,8 +128,13 @@ public sealed partial class NativeAotEmitter
             var dedupedMethods = new List<NativeAotMethodTemplateModel>(totalMethods);
             var seenNs = new HashSet<string>(StringComparer.Ordinal);
             foreach (var m in allMethods)
-                if (!string.IsNullOrEmpty(m.NativeSymbol) && seenNs.Add(m.NativeSymbol))
+            {
+                // Keep every method; only dedup non-empty NativeSymbol collisions.
+                // Methods with an empty/absent NativeSymbol (e.g. unit-test subjects)
+                // must not be dropped, or paging silently emits zero pages.
+                if (string.IsNullOrEmpty(m.NativeSymbol) || seenNs.Add(m.NativeSymbol))
                     dedupedMethods.Add(m);
+            }
             allMethods = dedupedMethods;
             totalMethods = allMethods.Count;
 

@@ -411,7 +411,9 @@ public sealed class AotCoreIrLoweringTests
     [InlineData("br")]
     public void UnknownOpWarning_KnownOps_ReturnsNull(string op)
     {
-        var method = s_t.GetMethod("UnknownOpWarning", s_flags,
+        // The original method was renamed to MapUnknownOp during a refactor;
+        // this retargets the stale test to the current implementation.
+        var method = s_t.GetMethod("MapUnknownOp", s_flags,
             new[] { typeof(string) })!;
         var result = method.Invoke(null, new object[] { op });
         Assert.Null(result);
@@ -536,8 +538,11 @@ public sealed class AotCoreIrLoweringTests
 
     private static object InvokeResolveAbiSlot(string typeIdentity, IReadOnlyDictionary<string, ManagedTypeModel>? managedTypes = null)
     {
-        var method = s_t.GetMethod("ResolveAbiSlot", s_flags, new[] { typeof(string), typeof(string), typeof(IReadOnlyDictionary<string, ManagedTypeModel>) })!;
-        return method.Invoke(null, new object[] { typeIdentity, "TestAssembly", managedTypes ?? new Dictionary<string, ManagedTypeModel>() })!;
+        // ResolveAbiSlot has an optional 4th parameter (fullTypeSubjectId, default null).
+        // Reflection GetMethod with explicit Type[] requires the exact arity, so we must
+        // pass all 4 parameter types here.
+        var method = s_t.GetMethod("ResolveAbiSlot", s_flags, new[] { typeof(string), typeof(string), typeof(IReadOnlyDictionary<string, ManagedTypeModel>), typeof(string) })!;
+        return method.Invoke(null, new object[] { typeIdentity, "TestAssembly", managedTypes ?? new Dictionary<string, ManagedTypeModel>(), null })!;
     }
 
     private static AotCoreIrAbiCarrierKind GetCarrierKind(object artifact)
@@ -690,7 +695,8 @@ public sealed class AotCoreIrLoweringTests
     {
         var stderr = new StringWriter();
         Console.SetError(stderr);
-        var method = s_t.GetMethod("UnknownOpWarning", s_flags, new[] { typeof(string) })!;
+        // Original method renamed to MapUnknownOp; retarget stale test.
+        var method = s_t.GetMethod("MapUnknownOp", s_flags, new[] { typeof(string) })!;
         var result = method.Invoke(null, new object[] { "bogus_op" });
         Assert.Null(result);
         Assert.Contains("bogus_op", stderr.ToString());

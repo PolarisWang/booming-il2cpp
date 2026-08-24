@@ -388,13 +388,18 @@ public sealed class CodeGenStageTests
         };
 
     [Fact]
-    public void FilterResultPerAssembly_FiltersByAssemblyName()
+    public void FilterResultPerAssembly_MultipleAssemblies_FlatMerges()
     {
+        // Intentional contract change (G11): when >1 assembly is provided the result is
+        // flat-merged into a single entry (not split per-assembly) to avoid symbol
+        // conflicts (hotpatch table, code registration, type IDs) when multiple
+        // assemblies compile into one executable (entry.exe).
         var result = MakeResult(M("Asm1/T::M()"), M("Asm2/T::M()"));
         var filtered = new CodeGenStage().FilterResultPerAssembly(result, ["Asm1.dll", "Asm2.dll"]);
-        Assert.Equal(2, filtered.Count);
+        Assert.Equal(1, filtered.Count);
+        Assert.Equal(2, filtered[0].AotCoreIr.Methods.Count);
         Assert.Equal("Asm1/T::M()", filtered[0].AotCoreIr.Methods[0].SubjectId);
-        Assert.Equal("Asm2/T::M()", filtered[1].AotCoreIr.Methods[0].SubjectId);
+        Assert.Equal("Asm2/T::M()", filtered[0].AotCoreIr.Methods[1].SubjectId);
     }
 
     [Fact]

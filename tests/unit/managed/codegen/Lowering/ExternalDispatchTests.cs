@@ -111,13 +111,13 @@ public sealed class ExternalDispatchTests : IDisposable
     }
 
     /// <summary>
-    /// Unknown/unregistered external calls should fall through to the external
-    /// runtime dispatch table (kChaosExternalRuntimeFnTable).
-    /// Push a value on the eval stack before the call so the structured IR
-    /// builder can pop it as the argument.
+    /// Unknown/unregistered external calls now emit a direct chaos_external_runtime_*
+    /// stub call (the dispatch table / kChaosExternalRuntimeFnTable is reserved for the
+    /// EH thunk paths). Push a value on the eval stack before the call so the structured
+    /// IR builder can pop it as the argument.
     /// </summary>
     [Fact]
-    public void UnknownExternalCall_UsesDispatchTable()
+    public void UnknownExternalCall_EmitsExternalRuntimeStub()
     {
         var method = ModelFactory.CreateMethod(
             "TestModule.TestClass::TestUnknownCall",
@@ -136,8 +136,10 @@ public sealed class ExternalDispatchTests : IDisposable
 
         var source = _fixture.RunPlannerSingleMethod(method);
 
-        // Should reference the external runtime dispatch table
-        AssertExtensions.UsesExternalDispatchTable(source);
+        // Should emit a direct chaos_external_runtime_* stub call for the
+        // unknown/unregistered external method.
+        AssertExtensions.ContainsCode("chaos_external_runtime_", source);
+        AssertExtensions.ContainsCode("Some_Unknown__UnregisteredMethod", source);
     }
 
     /// <summary>

@@ -893,10 +893,14 @@ public sealed partial class NativeAotLoweringPlanner
         pos = 0;
         while ((pos = content.IndexOf(structPrefix, pos, StringComparison.Ordinal)) >= 0)
         {
-            int end = content.IndexOfAny(new[] { ' ', '{', ';' }, pos);
-            if (end < 0) break;
-            // Strip "struct " prefix to get bare symbol name
-            existing.Add(content.Substring(pos + 7, end - pos - 7));
+            // The struct symbol name follows the full structPrefix ("struct chaos_valuetype_").
+            // Search for the first terminator AFTER the prefix; the prefix itself contains a
+            // space, so we must not use IndexOfAny from pos (it would match inside the keyword).
+            int nameStart = pos + structPrefix.Length;
+            int end = content.IndexOfAny(new[] { ' ', '{', ';' }, nameStart);
+            if (end < 0) end = content.Length;
+            if (end <= nameStart) { pos = end + 1; continue; }
+            existing.Add(content.Substring(nameStart, end - nameStart));
             pos = end + 1;
         }
 
