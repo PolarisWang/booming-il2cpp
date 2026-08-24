@@ -13,7 +13,7 @@ crypto 的 "88% (1077/1222)" 数字被证明是 **06-14/06-17 的过期 AOT 快�
 | 指标 | 旧快照值 | 当前 HEAD 实测 |
 |------|---------|---------------|
 | full fact-summary | 88% (1077/1222) | **99.8% (5579/5591)** |
-| x509 重建 subject slot | 233 | **272**（--fact-json 272/272 passed） |
+| x509 重建 subject slot | 233 | **274**（--fact-json 274/274 passed，fresh） |
 | sec-2 重建 subject slot | 1096 | **1178**（--fact-json 1178/1178 passed） |
 | sec 重建 subject slot | —（同 sec-2 同源） | **1178**（--fact-json 1178/1178 passed） |
 | 历史 x509 12 failures | 06-19 产物 773/785 | 当前 HEAD **不可复现** |
@@ -28,7 +28,8 @@ crypto 的 "88% (1077/1222)" 数字被证明是 **06-14/06-17 的过期 AOT 快�
 - 06-20 归档本身与当日每 chunk fact.json 汇总一致：aot 233 全过、
   jit 233 全过；archive 合计数 785 > 当日实测 233 是因为归档含 history/
   多次运行的**累计去重合并**，并非单次运行失败集。
-- 12 项失败在 current HEAD 重建产物上不存在（fresh builds 272/272 全过）。
+- 12 项失败在 current HEAD 重建产物上不存在（fresh builds 274/274 全过；
+  早期记录的 272/272 含陈旧 pageN.cpp 参与编译，清理后 274/274 为纯 fresh 结果）。
 
 ## NuGet 损坏根因（本 shell 环境，已定位）
 
@@ -80,19 +81,47 @@ crypto 的 "88% (1077/1222)" 数字被证明是 **06-14/06-17 的过期 AOT 快�
   因此不存在"哨兵 0 未走通"的存活项。
 - --fact-json 1178 全 passed 侧面确认：无 P/Invoke 解析失败导致的 subject 失败。
 
-## 环境限制（诚实边界）
+## 环境限制与标准管线回填（2026-08-24 晚，本 shell 已完成）
 
-- 本 shell 的 NuGet 全局损坏（dotnet nuget locals 报 value cannot be null path1），
-  完整 pipeline 的 combination/dotnet build 阶段不可用；验证走
-  **TPG dotnet exec generate-dll 全量原生构建**（cmake+MSVC，与 pipeline
-  build 阶段同机制）。CI 的 foundation-dll e2e 组会走标准 combination 路径。
+- NuGet 全局损坏已修复（根因=harness 剥离 APPDATA/ProgramFiles 等 real-user 环境变量，
+  NuGet 的 Path.Combine(null) 崩溃；最小充分集=APPDATA+ProgramFiles，spawn 补回 real-user env 后
+  标准 combination/dotnet build 0 errors，CombinedSubjects.dll 136192B）。
+- 在**修复后的 real-user env** 下用标准管线（build+fact+coverage-audit）重跑了
+  security-cryptography 与 security-cryptography-2：**均为 3/3 passed**，fresh 全量构建
+  （entry.exe mtime 2026-08-24 19:36/19:35，非 hephaestus cache-hit）。
+  - sec: declared=500, covered=825 (165%)；sec2: declared=85, covered=688 (809%)；
+    两 chunk fact 均 1287/1287 passed（aot 与 jit 一致，jitEnabled 按 chunk.json 执行）。
+  - 该结论合入后 fact-summary 上下限：1239 (aot-only) / 1240 (jit+entry) / 2408 (双 exe)，
+    **12 项缺口无存活项**（详见上文 99.8% 出处 + P/Invoke 哨兵 0 项两节）。
+- 标准管线曾出现 TPG 链接失败（LNK2019 PalTryCallNoExcept），根因=**chunk 本地
+  codegen/lib 的 lib 快照陈旧**（chaos_pal.lib 等 2026-06-15/06-19，旧 9 参签名）与
+  SDK lib（sdk/windows-x64-reference，2026-08-24 重建，新 10 参签名含 extra runtime arg）
+  不同步；scriban/interop_stubs 已按新签名调用，链接旧 lib → unresolved external。
+  修复=同步 SDK 11 个 lib 进 chunk codegen/lib（chunk 本地产物 chaos_codegen.lib 除外），
+  或依赖 build.py 的 deps-hash/hephaestus 失效机制 refresh。x509 的同款缓存疑点
+  （旧 entry.exe mtime=06-19）已在下方 C2660 小节坐实并 fresh 复核。
 - sec-2 首次全量构建遇 MSB4018 OOM（巨大 generated TU），
   设 CMAKE_BUILD_PARALLEL_LEVEL=2 后成功——环境资源限制，非代码缺陷。
 
+- **x509 缓存疑点被坐实并复核**：x509 fresh 重建首跑（不同步前）在 TPG cmake build 失败
+   C2660（GetUninitializedObject 0参调用 vs 1参声明），且 fact 阶段仍显示 aot 233/233
+   ——确认此前归档的 "233/233" 实为 hephaestus CACHE-HIT 使用 06-19 旧 entry.exe 的产物。
+   C2660 根因=**chunk 本地 subjects/ 残留 06-19 旧 pageN.cpp**（0参旧签名）被 cmake glob
+   （subjects/*.cpp）编入 fresh build，与新版 1参声明冲突。清掉陈旧 pageN.cpp 后
+   fresh 全量重建通过。
+   - x509 fresh 结果（entry.exe mtime 2026-08-24 19:57，entry-jit 20:02）：
+     fact aot 274/274、jit 274/274 passed，coverage declared=238 covered=246 (103%)，
+     Pipeline complete: 3/3 passed。dropped 23 methods vs metadata(297)，
+    为覆盖 360 方法补充 super-set 的差异，非活缺口。
+- 结论：**sec / sec-2 / x509 三 chunk 均在修复后的 real-user env 下走通标准管线
+  （build+fact+coverage-audit）并 3/3 passed，fresh 全量构建（非 cache-hit）**，
+  NuGet + 陈旧 lib/page 两类环境问题均已在标准路径闭环；12 项缺口归档对比无存活项。
+
 ## 后续建议（非必做）
 
-- 在 NuGet 健康环境跑 --layer e2e foundation-dll-* 得到标准 combination 路径
-  的正式 fact-summary 归档。
+- 若后续 SDK lib 再次刷新，需确保 chunk codegen/lib 同步机制进入 CI（目前是
+  build.py deps 失效 + 人工同步兜底）；建议在 pipeline 中对 codegen/lib 的
+  chaos_pal.lib 等做 SDK 版本指纹校验。
 
 ## 架构映射
 
