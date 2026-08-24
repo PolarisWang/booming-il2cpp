@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "gc_events.h"
+#include "gc_card_table.h"   // DirtyCard (Phase 2.5 re-card)
 #include "gc_young_gen.h"
 #include "gc_gen1.h"
 #include "gc_layout.h"
@@ -222,6 +223,19 @@ void DemotionRelocate(const std::vector<DemotionEntry>& entries,
                 *static_cast<uintptr_t*>(root_addr) = it->new_addr;
             }
         }, &addr_map);
+
+    // Phase 2.5: Re-set the card table for each demoted object's NEW address.
+    // GC-N6 finding (2026-08-25): demotion relocates old-gen objects — which
+    // may hold interior cross-gen (old->nursery) references — into Gen1, but
+    // the write barrier never carded the NEW Gen1 addresses.  The young GC's
+    // Phase-2b Gen1 dirty-card scan therefore cannot see the demoted objects'
+    // nursery references; the referenced nursery objects are collected while
+    // still referenced (stale slots; exposed by the content-liveness check in
+    // gc_region_barrier_stress_test).  Re-set the card for each new address so
+    // Phase-2b rescans the demoted content (DirtyCard is lock-free).
+    for (const auto& e : entries) {
+        DirtyCard(e.new_addr);
+    }
 
     // Phase 3: Relocate GCHandles.
     // Build a vector of {old, new} pairs in the format GcRelocateHandles expects.
