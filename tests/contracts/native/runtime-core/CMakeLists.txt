@@ -31,6 +31,20 @@ chaos_native_glob_add_tests(chaos "gc_*.cpp"
         gc_soak_test.cpp          # not part of the contracts set
 )
 
+# ── A2b cross-gen write-barrier test → FAST gate (not just nightly stress) ──
+# The A2b concurrent barrier test is the single highest-value correctness test
+# for the generational write barrier (old->nursery edges under coordinated
+# young GC).  It is lightweight (~seconds: 8 threads x 128 objs x 8 GC cycles)
+# and stable (20/20 + 3/3 local runs after the 33697f00d validity-check fix and
+# the cf0a69aec g_heap_base root-cause fix), so it must run in the fast unit
+# gate — not only the nightly stress tier.  The name-derived "stress" label
+# (chaos_native_test.cmake) is overridden to "unit"; RESOURCE_LOCK bgc
+# serializes it against the other background-GC tests in parallel runs.
+if(TARGET chaos_gc_region_barrier_stress_test)
+    set_tests_properties(chaos_gc_region_barrier_stress_test
+        PROPERTIES LABELS "unit" RESOURCE_LOCK bgc)
+endif()
+
 # ── Explicit (non-uniform / special) targets ─────────────────────────────────
 # gc_root_scanner_test uses C++20 features.
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_root_scanner_test.cpp")

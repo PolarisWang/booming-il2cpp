@@ -1,15 +1,15 @@
-# STATUS — GC 代码级对齐 CoreCLR
+# STATUS — GC 代码级对齐 CoreCLR + 工业化落地三批次
 
 ## 元信息
 
 ```yaml
 task_id: gc-align-coreclr
 task_type: roadmap
-phase: roadmap-v2
-roadmap_or_plan: docs/dev/in-progress/gc-align-coreclr/roadmap-v2-01.md
+phase: roadmap-v3
+roadmap_or_plan: docs/dev/in-progress/gc-align-coreclr/roadmap-v3-01.md
 created: 2026-08-10
 created_by: main-agent
-source: 用户要求 - 按优先级逐项对齐 CoreCLR GC 全部剩余功能
+source: 用户要求 - 按优先级逐项对齐 CoreCLR GC 全部剩余功能；2026-08-14 用户确认按 1+2+3 三批次推进工业化落地（gc-industrialization-gap-analysis-2026-08-14.md）
 blocking_questions: []
 question_clearance: cleared
 clearance_confirmed_by_user: true
@@ -24,20 +24,22 @@ clearance_confirmed_by_user: true
 | 形态 | 正式 roadmap（roadmap-v2-01.md，可执行） |
 | 保留 | CRAG 热更新差异化（域卸载 O(region)） |
 
-## 进度（截至 2026-08-10）
+## 进度（截至 2026-08-14）
 
 | 阶段 | 子任务 | 状态 |
 |------|--------|------|
 | Phase 1-5 | GC-A1..K4（13 子任务） | ✅ 已完成 |
 | Phase 6 | GC-L1/L2 | ⬜ 纳入 v2 Phase 8 (M6/M3B) |
-| **Phase 7** | GC-M1(M2(M3A)（P0 生产必须） | ⬜ 下一步：M1 |
-| **Phase 8** | GC-M3B..M10（P1 能力） | ⬜ |
-| **Phase 9** | GC-M11..M15（P2 工程） | ⬜ |
+| Phase 7-9 | GC-M1..M15（v2 功能对齐） | ⬜ M1 部分完成（regen link-ready），M2 已建测试暴露疑点后闭环 |
+| **Phase 10（批次 1）** | GC-N1..N4（P0 护网闭合） | 🔄 GC-N1 ✅ / N3 ✅ / N4 ✅（CI 配置）；GC-N2 由并行线承接 |
+| **Phase 11（批次 2）** | GC-N5..N8（P1 工程闭环） | ⬜ 下一步：GC-N5 |
+| **Phase 12（批次 3）** | GC-N9..N12（P2 能力拉平） | ⬜ |
 
 ## 下一步
 
-- 启动 `recommended_next_child = GC-M1`（K2c 世代写屏障管线 regen 验证，最高优先）。
-- 约束满足方式：每子任务按 roadmap 三约束原则（多平台纯 C++ / JIT-AOT 同符号 / 热更兼容入口）+ 架构优先前置（读 CoreCLR 原文）。
+- 批次 1：GC-N1/N3/N4 已落地（本地验证通过，待 CI 实跑确认）；GC-N2 由并行 GC 调试线承接（勿重复启动）。
+- 批次 2 启动 `recommended_next_child = GC-N5`（L1 卡表 realloc 并发读稳定化，纯 C++，风险可控）。
+- 约束满足方式：每子任务按 roadmap 三约束原则（多平台纯 C++ / JIT-AOT 同符号 / 热更兼容入口）+ 架构优先前置。
 
 ## 关键文档
 
@@ -110,7 +112,7 @@ completed_batches: []
 
 ## latest_stop_point
 
-- Phase 1-5 全部完成。剩 **Phase 6**（GC-L1 动态堆数 / GC-L2 伺服调优）。worktree 干净。
+- Phase 1-5 完成；v2 M1 部分完成。**批次 1（GC-N1/N3/N4）已落地**：barrier 测试进快 gate（本地 `-LE`/`-L` 验证）、Server GC 冒烟 job、ASAN nightly job、夜间去 `|| true`。GC-N2 由并行 GC 调试线承接。下一步批次 2 GC-N5（L1 卡表并发读稳定化）。worktree 干净（除并行线未提交文件）。
 
 ## 进度（截至 2026-08-10）
 

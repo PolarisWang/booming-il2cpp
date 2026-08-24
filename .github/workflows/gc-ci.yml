@@ -1,11 +1,18 @@
 # gc-ci.yml — GC unit-test CI gate
 #
-# Runs the deterministic GC unit tests (contracts/native/runtime-core) in CI.
+# Runs the deterministic GC unit tests in CI.  Two native test trees are
+# covered (see tests/suite_contract.yaml contracts-native-gc for the same
+# regex): the legacy contracts tree (chaos_gc_*) and the GoogleTest tree
+# (test_gc_*).  The A2b cross-gen write-barrier test
+# (chaos_gc_region_barrier_stress_test) is promoted into this fast gate
+# (labels overridden to "unit" in tests/contracts/native/runtime-core/
+# CMakeLists.txt) — it is the highest-value concurrent correctness test and
+# must red the gate if the barrier or the complete validity check regresses.
 #
-# Only unit tests run here: pressure/benchmark/soak are EXCLUDED via
+# Only unit-tier tests run here: pressure/benchmark/soak are EXCLUDED via
 # `ctest -LE benchmark|stress|soak` (matches tests/suite_contract.yaml:40 and the
-# native.py adapter).  Pressure tests are a separate manual/nightly concern, not
-# part of this fast unit gate.
+# native.py adapter).  Pressure tests are a separate nightly tier, not part of
+# this fast unit gate.
 #
 # Excluded-by-label here:
 #   - chaos_gc_bgc_stress_test, chaos_gc_stress_test,
@@ -74,7 +81,7 @@ jobs:
         run: |
           ctest --test-dir artifacts/presets/windows-x64-reference \
             -C ${{ matrix.config }} \
-            -R "chaos_gc_" \
+            -R "chaos_gc_|test_gc_" \
             -LE "benchmark|stress|soak" \
             --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-unit-output.txt
 
@@ -85,14 +92,114 @@ jobs:
           name: gc-unit-output-${{ matrix.config }}
           path: gc-unit-output.txt
 
+  # ── Server GC smoke ───────────────────────────────────────────────────────
+  # First CI coverage of the CHAOS_IL2CPP_GC_SERVER=ON path (previously default
+  # OFF with ZERO CI execution).  Configures a dedicated build with the server
+  # feature flag ON and runs the coordinator / heap-manager unit tests (their
+  # `#if CHAOS_IL2CPP_GC_SERVER` branches compile and execute only here).  A
+  # build or test failure in this job is the first honest signal that the server
+  # path is (or is not) production-usable — the job REDS on it (no `|| true`).
+  gc-server-smoke:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Configure CMake (Server GC ON)
+        run: |
+          cmake -S . -B artifacts/presets/windows-x64-reference-server \
+            -G "Visual Studio 17 2022" \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
+            -DROADMAP0_PRESET_TARGET=windows-x64-reference \
+            -DCHAOS_IL2CPP_GC_SERVER=ON
+
+      - name: Build Native Runtime + GC tests
+        run: |
+          cmake --build artifacts/presets/windows-x64-reference-server --config Debug -j 8
+
+      - name: Run Server GC coordinator/heap-manager tests
+        shell: bash
+        run: |
+          ctest --test-dir artifacts/presets/windows-x64-reference-server \
+            -C Debug \
+            -R "test_gc_coordinator|test_gc_heap_manager" \
+            --timeout 3600 --output-on-failure 2>&1 | tee gc-server-output.txt
+
+      - name: Upload Server GC test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-server-output
+          path: gc-server-output.txt
+
+  # ── ASAN nightly (AddressSanitizer) ─────────────────────────────────────
+  # GC is the most memory-safety-critical module; ASAN coverage of the GC unit
+  # tree was previously zero (cmake/sanitizers/asan.cmake existed but had no CI
+  # consumer).  This nightly job instruments the whole build with MSVC ASAN
+  # (/fsanitize=address), runs the fast-gate GC unit regex, and REDS on any
+  # failure (no `|| true`).  Nightly-only (schedule + manual) so the slower ASAN
+  # build does not gate every PR.
+  gc-asan-nightly:
+    runs-on: windows-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Configure CMake (ASAN)
+        run: |
+          cmake -S . -B artifacts/presets/windows-x64-reference-asan \
+            -G "Visual Studio 17 2022" \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
+            -DROADMAP0_PRESET_TARGET=windows-x64-reference \
+            -DCMAKE_CXX_FLAGS="/fsanitize=address" \
+            -DCMAKE_EXE_LINKER_FLAGS="/fsanitize=address"
+
+      - name: Build Native Runtime + GC tests
+        run: |
+          cmake --build artifacts/presets/windows-x64-reference-asan --config Debug -j 8
+
+      - name: Locate & copy ASan runtime DLL
+        shell: bash
+        run: |
+          dll=$(find "/c/Program Files/Microsoft Visual Studio/2022" -iname "clang_rt.asan_dynamic-x86_64.dll" 2>/dev/null | head -1)
+          if [ -z "$dll" ]; then echo "::error::clang_rt.asan_dynamic-x86_64.dll not found under VS 2022"; exit 1; fi
+          echo "ASan DLL: $dll"
+          # Multi-config Debug output dirs (new tree exes) + the contracts-tree
+          # absolute output dir (tests/contracts/native/runtime-core/CMakeLists.txt).
+          find artifacts/presets/windows-x64-reference-asan -type d -name Debug -exec cp "$dll" {} \; 2>/dev/null || true
+          mkdir -p artifacts/native-runtime-core-test/Debug
+          cp "$dll" artifacts/native-runtime-core-test/Debug/
+
+      - name: Run GC Unit Tests under ASAN
+        shell: bash
+        run: |
+          ctest --test-dir artifacts/presets/windows-x64-reference-asan \
+            -C Debug \
+            -R "chaos_gc_|test_gc_" \
+            -LE "benchmark|stress|soak" \
+            --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-asan-output.txt
+
+      - name: Upload ASAN test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-asan-output
+          path: gc-asan-output.txt
+
   # ── Nightly pressure tier ────────────────────────────────────────────────
   # Runs the stress/soak/benchmark targets (excluded from the fast unit gate) on
-  # a schedule.  The A2b `chaos_gc_region_barrier_stress_test` was removed from
-  # known-failures (2026-08-13): its "dangling" was a test-validity-check gap
-  # (GEN1/Survivor omitted), now fixed → it runs here as PASS and reds the gate
-  # if the concurrent barrier or the complete check ever regresses.  Other
-  # still-known-fail entries surface their residual without redding the gate via
-  # the driver's stale_known logic.
+  # a schedule.  Failures RED the gate (no `|| true`): a regression in any
+  # stress/soak target must be visible.  The A2b
+  # `chaos_gc_region_barrier_stress_test` was promoted to the fast unit gate
+  # (2026-08-14) and runs there as PASS; the nightly tier still covers the
+  # remaining stress targets (gc_stress / bgc_stress / loh_stress /
+  # finalizer_stress / satb_stress / ...).  Still-known-fail entries surface
+  # their residual without redding the gate via the driver's stale_known logic.
   gc-stress-nightly:
     runs-on: windows-latest
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
@@ -118,7 +225,7 @@ jobs:
         run: |
           CHAOS_GC_TEST_STRESS_ONLY=1 \
             python tests/runner/test_driver.py --layer integration --group contracts-native --quick \
-            2>&1 | tee gc-stress-output.txt || true
+            2>&1 | tee gc-stress-output.txt
 
       - name: Upload GC stress output
         if: always()
