@@ -32,13 +32,13 @@ clearance_confirmed_by_user: true
 | Phase 6 | GC-L1/L2 | ⬜ 纳入 v2 Phase 8 (M6/M3B) |
 | Phase 7-9 | GC-M1..M15（v2 功能对齐） | ⬜ M1 部分完成（regen link-ready），M2 已建测试暴露疑点后闭环 |
 | **Phase 10（批次 1）** | GC-N1..N4（P0 护网闭合） | ✅ GC-N1/N3/N4 已提交；GC-N2 由并行线承接 |
-| **Phase 11（批次 2）** | GC-N5..N8（P1 工程闭环） | 🔄 GC-N5 ✅ 已提交；下一步 GC-N6 |
+| **Phase 11（批次 2）** | GC-N5..N8（P1 工程闭环） | 🔄 GC-N5 ✅ 已提交；GC-N6 发现 2 个真实缺陷（屏障已修 `ef0012d49`，gen1↔old-gen 重叠升级 P0 专项）；下一步 GC-N7 |
 | **Phase 12（批次 3）** | GC-N9..N12（P2 能力拉平） | ⬜ |
 
 ## 下一步
 
 - 批次 1：GC-N1/N3/N4 已提交（待 CI 实跑确认）；GC-N2 由并行 GC 调试线承接。
-- 批次 2：GC-N5 已提交（L1 卡表 UAF 修复，3 项测试全绿）；`recommended_next_child = GC-N6`（世代写屏障压力确定性化）。
+- 批次 2：GC-N5 已提交（L1 卡表 UAF）；GC-N6 发现已固化——**发现 2（gen1 region ↔ old-gen 页重叠破坏）为新的 P0 专项**（`notes/gc-n6-liveness-findings-2026-08-25.md`），建议优先于 GC-N7 处理；`recommended_next_child = GC-N6-专项（gen1 重叠）或 GC-N7（Release 基准）`。
 - 约束满足方式：每子任务按 roadmap 三约束原则（多平台纯 C++ / JIT-AOT 同符号 / 热更兼容入口）+ 架构优先前置。
 
 ## 关键文档

@@ -97,4 +97,8 @@ auto_stop_policy: blocking-only
 - 2026-08-25：**GC-N3 ✅ 完成（CI 配置）**：gc-ci.yml 新增 `gc-server-smoke` job（`-DCHAOS_IL2CPP_GC_SERVER=ON` 独立构建 + `test_gc_coordinator|test_gc_heap_manager`）。首次覆盖 Server 路径（此前零 CI 执行）。
 - 2026-08-25：**GC-N4 ✅ 完成（CI 配置）**：gc-ci.yml 新增 `gc-asan-nightly` job（MSVC `/fsanitize=address` 全构建 + GC 单测 + ASan DLL 拷贝 + 失败红门）。
 - 2026-08-25：**GC-N2 协调记录**：工作区存在并行 GC 调试线（未提交改动 `gc_worker_pool.cpp`/`gc_bgc_smoke.cpp`/`gc_stress_test.cpp` + cdb 诊断产物，8/24-8/25 活跃），正在处理 BGC root-scan 相关调试；其已自行创建 `.github/workflows/gc-stress-nightly.yml`（未提交）。**GC-N2 由并行线承接，本 roadmap 不重复启动；待其收敛后复核 known-fail 摘除。** 并行线文件不触碰、不 stage、不 commit。
+- 2026-08-25：**GC-N6 🔄 发现已固化，测试强化待专项**：内容存活校验原型（magic stamp + 双重断言）暴露**两个真实运行时缺陷**——
+  (1) ✅ 已修复 `ef0012d49`：世代屏障 `_dst_ref` 用 4MB chunk 标签判 dst，nursery 尾部与 old-gen 页共享 chunk 时误判 young → 跳卡 → 跨代 UAF（`IsNurseryPointer` 精确判定替代；barrier/card_table_ext/region 全绿）；
+  (2) 🔴 OPEN P0：gen1 region ↔ old-gen 页虚拟地址重叠 → gen1 collection 清扫落在其区间内的 old-gen 对象（槽出现"magic 当指针"）——**升级为独立专项**，见 `notes/gc-n6-liveness-findings-2026-08-25.md`。
+  测试本体已回滚至 HEAD（快 gate 保持绿）；发现 2 修复后重新启用内容校验版。
 - 2026-08-25：**GC-N5 ✅ 完成**：`gc_card_table.cpp` 两处 `g_card_l1.swap` 后旧数组被释放 → 并发 `DirtyCard` 无锁读 UAF；改为 retire-not-free（`g_card_l1_retired` 固定槽位数组，永不释放，512KB/次增长步骤，镜像 g_card_bundle 一次性分配策略）。验证：barrier stress 3/3、test_gc_card_table_ext 5/5、test_gc_region 18/18 全绿（含 L1AutoGrowth 路径）。已知残余：并发 rebase 下 reader 的 base/seg_idx 快照竞态（极窄窗口，仅 below-base 分配触发，已注释记录）。
