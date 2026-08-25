@@ -122,9 +122,27 @@ crypto 的 "88% (1077/1222)" 数字被证明是 **06-14/06-17 的过期 AOT 快�
   post-build copy 被 0xC000013A 中断；已加 salvage 机制让标准管线直接用 fresh
   entry-jit（1287/1287，与 AOT 一致），旧 06-20 entry-jit 已退役；
   NuGet + 陈旧 lib/page 两类环境问题均已在标准路径闭环；12 项缺口归档对比无存活项。**
-- 若后续 SDK lib 再次刷新，需确保 chunk codegen/lib 同步机制进入 CI（目前是
-  build.py deps 失效 + 人工同步兜底）；建议在 pipeline 中对 codegen/lib 的
-  chaos_pal.lib 等做 SDK 版本指纹校验。
+
+## 后续建议（非必做）— 执行记录 (2026-08-25)
+
+- **[H1] chunk codegen/lib 与 SDK lib 的版本指纹校验进 CI（防 LNK2019）— OPEN**
+  根因来自本轮 LNK2019：chunk 本地 codegen/lib 的 lib（chaos_pal.lib 等）
+  是 06-15/06-19 旧 9 参签名，SDK sdk/windows-x64-reference 是 08-24 新 10 参；
+  build.py deps 失效 + 人工同步只是兜底，hephaestus cache key 不含 chunk 本地 lib。
+  建议：TPG emit 时对 codegen/lib 的 chaos_pal.lib 等与 SDK lib 做 mtime/哈希指纹比对，
+  不一致则强制 refresh。当前未实现，仍靠人工/文档兜底。
+- **[H2] codegen/lib + subjects/ 陈旧 pageN.cpp 清理机制进 build 前置（防 C2660）— OPEN**
+  本轮 x509 的 C2660 根因=subjects/ 残留 06-19 旧 pageN.cpp 被 cmake glob 编入 fresh build，
+  与新版 1 参声明冲突；人工删除后通过。建议 build.py 在 subjects 重建后清掉
+  subjects/*.generated.pageN.cpp 中 mtime 早于本次 codegen 的陈旧分页文件。当前未实现。
+- **[H3] JIT post-build salvage 机制 — DONE（653dcfbf9）**
+  build.py 新增 _finalize_jit_copy：TPG rc!=0 但从 cmake 产出了 fresh chaos_entry.exe +
+  jdata 时，回收进 native_dir 而非回退 06-20 stale exe。sec2 fresh JIT 1287/1287 验证通过。
+- **[H4] NuGet real-user env 要求 — DONE（本轮）+ 备注**
+  harness 剥离 APPDATA/ProgramFiles，NuGet XPlatMachineWideSetting 崩溃（Path.Combine(null)）；
+  已在 spawn 补回 real-user env。属安全边界要求，归档即可，非代码改动。
+
+## 架构映射
 
 ## 架构映射
 
