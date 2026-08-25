@@ -13,6 +13,8 @@
 #include "gc_young_gen.h"
 #include "gc_heap.h"
 
+#include <chaos/pal/pal_mem.h>
+
 namespace chaos::il2cpp::runtime_core {
 
 // ── Global instance ────────────────────────────────────────────────
@@ -154,6 +156,19 @@ void GcScheduler::RecordFullCollection(CHAOS_IL2CPP_SIZE total_heap_bytes, uint6
 
     // Clear the full-GC request flag.
     full_gc_requested_.store(false, std::memory_order_relaxed);
+
+    // GC-N8 Phase-1: sample system memory-load at collection time (cheap,
+    // not on the allocation hot path).  High ratio = high memory pressure.
+    pal::PalMemoryStatus mst;
+    pal::PalGetMemoryStatus(mst);
+    if (mst.total_phys > 0) {
+        double avail_fraction = static_cast<double>(mst.avail_phys) /
+                                static_cast<double>(mst.total_phys);
+        double load = 1.0 - avail_fraction;   // 0 (plenty free) .. ~1 (pressure)
+        if (load < 0.0) load = 0.0;
+        if (load > 1.0) load = 1.0;
+        SetMemoryLoad(static_cast<float>(load));
+    }
 }
 
 void GcScheduler::RecordPageCountGrowth(int delta) noexcept {

@@ -461,8 +461,45 @@ public:
             old_gen_fragmentation_fp_.load(std::memory_order_acquire)) / 1000.0f;
     }
 
+    // ── GC-N8 dynamic_tuning signals (Phase-1 采集) ──────────────
+    // Empty-slot accumulation first; the servo decision loop that consumes
+    // these is wired in a later phase (roadmap risk guardrail: "先加多信号
+    // 采集，再逐步接决策").  All use the same atomic fixed-point (*1000) idiom
+    // as OldGenFragmentation so the eventual servo can read them lock-free.
+
+    /// Old-gen free-list reuse rate [0.0, 1.0] — fraction of old-gen
+    /// allocations served from existing page free-lists (vs fresh page carve).
+    /// High reuse → allocator is recycling dead blocks cheaply (low pressure);
+    /// low reuse → allocations keep carving fresh pages (pressure to compact).
+    void SetFreeListReuseRate(float rate) noexcept {
+        uint32_t fp = static_cast<uint32_t>(rate * 1000.0f);
+        if (fp > 1000) fp = 1000;
+        free_list_reuse_rate_fp_.store(fp, std::memory_order_release);
+    }
+    float FreeListReuseRate() const noexcept {
+        return static_cast<float>(
+            free_list_reuse_rate_fp_.load(std::memory_order_acquire)) / 1000.0f;
+    }
+
+    /// System memory-load ratio [0.0, 1.0] — 1.0 = high scheduled-memory
+    /// pressure (little available physical memory), 0.0 = plenty free.
+    /// Fed from PalGetMemoryStatus; lets the servo prefer compaction / full
+    /// GC under genuine system pressure rather than reacting to inside-heap
+    /// signals alone (CoreCLR dynamic_tuning.cpp).
+    void SetMemoryLoad(float load) noexcept {
+        uint32_t fp = static_cast<uint32_t>(load * 1000.0f);
+        if (fp > 1000) fp = 1000;
+        memory_load_fp_.store(fp, std::memory_order_release);
+    }
+    float MemoryLoad() const noexcept {
+        return static_cast<float>(
+            memory_load_fp_.load(std::memory_order_acquire)) / 1000.0f;
+    }
+
 private:
     std::atomic<uint32_t> old_gen_fragmentation_fp_{0};
+    std::atomic<uint32_t> free_list_reuse_rate_fp_{0};
+    std::atomic<uint32_t> memory_load_fp_{0};
 
     // ── Constants ────────────────────────────────────────────────
 

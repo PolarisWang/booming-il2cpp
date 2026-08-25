@@ -863,12 +863,14 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     // Try free lists.
     auto* ptr = TryAllocateFromFreeLists(size, sc_idx);
     if (ptr != nullptr) {
+        free_list_hits_.fetch_add(1, std::memory_order_relaxed);
         GcRecordAlloc(size, false);
         memory_domain::GcTrackDomainAlloc(size);
         return ptr;
     }
 
     // Miss: allocate a new page
+    free_list_carves_.fetch_add(1, std::memory_order_relaxed);
     auto* page = AllocatePage(kOldGenPageSize, scanning_required, sc_idx);
     if (page == nullptr) {
         CHAOS_IL2CPP_LOG_ERROR_M("OldGen", "AllocatePage failed sc_idx={0} scanning={1}",
@@ -904,6 +906,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     // Fallback: retry free list walk (should be rare — new page was just carved).
     ptr = TryAllocateFromFreeLists(size, sc_idx);
     if (ptr != nullptr) {
+        free_list_hits_.fetch_add(1, std::memory_order_relaxed);
         GcRecordAlloc(size, false);
         memory_domain::GcTrackDomainAlloc(size);
     }
@@ -3012,6 +3015,16 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     // Record into scheduler with actual heap size for full GC trigger decisions.
     G_Scheduler().RecordFullCollection(total_heap_bytes, pause_ns);
+
+    // GC-N8 Phase-1: sample free-list reuse rate since the last collection and
+    // feed the scheduler signal.  High reuse = allocator recycling dead blocks
+    // cheaply (low pressure); low reuse = constant fresh page carves (pressure).
+    // Drains the counters so each sample reflects only the inter-GC window.
+    const uint64_t hits   = free_list_hits_.exchange(0, std::memory_order_relaxed);
+    const uint64_t carves = free_list_carves_.exchange(0, std::memory_order_relaxed);
+    const uint64_t total  = hits + carves;
+    const float reuse = (total > 0) ? static_cast<float>(hits) / static_cast<float>(total) : 0.0f;
+    G_Scheduler().SetFreeListReuseRate(reuse);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_dbg AFTER_SWEEP page_count={0}",
         static_cast<unsigned long long>(page_count_));

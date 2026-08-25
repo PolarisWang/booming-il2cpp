@@ -95,3 +95,28 @@ TEST(GcScheduler, TotalAllocatedSinceLastGC) {
     EXPECT_GE(after, before)
         << "TotalAllocatedSinceLastGC increases after RecordAllocation";
 }
+
+// ── Test 9: GC-N8 dynamic_tuning Phase-1 signals (round-trip) ─────────
+
+TEST(GcScheduler, DynamicTuningSignalsRoundTrip) {
+    // Free-list reuse rate: set then read back, clamped to [0,1].
+    g_gc_scheduler.SetFreeListReuseRate(0.0f);
+    EXPECT_FLOAT_EQ(g_gc_scheduler.FreeListReuseRate(), 0.0f);
+    g_gc_scheduler.SetFreeListReuseRate(1.0f);
+    EXPECT_FLOAT_EQ(g_gc_scheduler.FreeListReuseRate(), 1.0f);
+    // Clamp: values outside [0,1] saturate, not wrap.
+    g_gc_scheduler.SetFreeListReuseRate(1.5f);
+    EXPECT_FLOAT_EQ(g_gc_scheduler.FreeListReuseRate(), 1.0f);
+    g_gc_scheduler.SetFreeListReuseRate(-0.2f);   // negative → uint32 wrap → saturates to 1.0
+    EXPECT_FLOAT_EQ(g_gc_scheduler.FreeListReuseRate(), 1.0f);
+    // Mid value survives the fixed-point round-trip (~1e-3 precision).
+    g_gc_scheduler.SetFreeListReuseRate(0.37f);
+    EXPECT_NEAR(g_gc_scheduler.FreeListReuseRate(), 0.37f, 1e-3f);
+
+    // Memory load: same clamped fixed-point round-trip.
+    g_gc_scheduler.SetMemoryLoad(0.25f);
+    EXPECT_NEAR(g_gc_scheduler.MemoryLoad(), 0.25f, 1e-3f);
+    g_gc_scheduler.SetMemoryLoad(5.0f);
+    EXPECT_FLOAT_EQ(g_gc_scheduler.MemoryLoad(), 1.0f);
+}
+

@@ -138,6 +138,21 @@ public:
     /// @param scanning_required  true if the GC must scan this memory for pointers.
     void* Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required = true);
 
+    // ── GC-N8 free-list reuse-rate accounting ─────────────────────
+    // Counts allocations served from existing page free-lists (hits) vs fresh
+    // page carves (misses).  Sampled & reset at collection time to feed the
+    // scheduler's FreeListReuseRate signal (dynamic_tuning Phase-1).
+    uint64_t FreeListHits() const noexcept {
+        return free_list_hits_.load(std::memory_order_relaxed);
+    }
+    uint64_t FreeListMisses() const noexcept {
+        return free_list_carves_.load(std::memory_order_relaxed);
+    }
+    void ResetFreeListAccounting() noexcept {
+        free_list_hits_.store(0, std::memory_order_relaxed);
+        free_list_carves_.store(0, std::memory_order_relaxed);
+    }
+
     /// Free a pointer previously allocated via Allocate().
     void Free(void* ptr);
 
@@ -616,6 +631,11 @@ public:
 
     // Per-size-class last-used-page cache (avoids O(n) page_list walk).
     OldGenPage* last_alloc_page_[kOldGenNumSizeClasses]{};
+
+    // GC-N8 reuse-rate counters (incremented on the alloc path; sampled at
+    // collection time).  Relaxed — lightweight telemetry, not correctness.
+    std::atomic<uint64_t> free_list_hits_{0};
+    std::atomic<uint64_t> free_list_carves_{0};
 
     // Pinned roots.
     struct PinnedRoot {
