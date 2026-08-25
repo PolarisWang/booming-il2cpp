@@ -119,7 +119,21 @@ GC3: Phase 2 扫描 scan_ptr 读到未映射 → AV
    是否经 resize 残留的旧 gen1 segment 扫到垃圾区并写坏 nursery local；是否 `page_list_` 在 Sweep/Coalesce 中被破坏。
 4. GC-N7 Release 基准在缺陷 2 修复前暂用 gen1_benchmark + throughput 前三项（NurseryAllocate/OldGen/BgcLatency）数据。
 
-## 六、本地重建能力（本 session 固化）
+## 六、回归验证（本轮补充，确认 `904114c3d` 无回归）
+
+RelWithDebInfo 重建 + 跑 GC 单测套件（对比 Aug 14 pre-change Debug 基线）：
+
+| 套件 | pre-change (Debug) | post-change (RelWithDebInfo) | 结论 |
+|------|------|------|------|
+| `test_gc_card_table_ext` | — | **5/5 PASS** | ✅ |
+| `test_gc_old_gen` | — | **6/6 PASS** | ✅ |
+| `test_gc_region` | 18/18 (N6 基线) | **18/18 PASS** | ✅ 无回归 |
+| `test_gc_gen1` | 13 pass / `SingleLiveObject` FAIL (pre-existing) | **13 pass / 1 flaky FAIL**（run 间为 `SingleLiveObject`/`ThenNurseryAlloc`/`OccupancyBased` 波动） | ✅ 与 pre-change 一致，`904114c3d` 无新增回归；`SingleLiveObject` 为**既有**失败 |
+
+**确证**：`Gen1Test.SingleLiveObject` 在 Aug 14 pre-change Debug 二进制上同样 FAIL（`objects_in_gen1=0`），
+非 `904114c3d` 引入。gen1 套件 run 间失败项波动 → 与残余非确定性堆破坏同源（gen1 偶发表现为空）。
+
+## 七、本地重建能力（本 session 固化）
 
 非 VS 环境需：`vcvars64.bat` 直连 + `msbuild` 全路径。见 `/tmp` 下的 build batch（后续 session 可复用）：
 ```
