@@ -1,6 +1,6 @@
 # GC-N7 Release 基准调查 — YoungGcPauseUnderLoad SEH 崩溃 + gen1 基准 teardown AV
 
-> 日期：2026-08-25 | 状态：2 个独立缺陷确认（1 已修 / 1 深度根因待 systematic-debugging 专项）
+> 日期：2026-08-25 | 状态：2 个代码级真 bug 已提交（`904114c3d`）；残余 crash 为**非确定性堆破坏**，频率随环境剧烈波动（同代码 8%~73%），本沙箱无法 page-heap 定字节，升级真实机器专项
 > 关联：GC-N7（Release 构建 GC 基准）、GC-N6（内容存活校验）、A2b
 
 ---
@@ -8,24 +8,37 @@
 ## 一、背景
 
 GC-N7 目标：用 **RelWithDebInfo** 构建跑 GC 基准（分配吞吐 + young/gen1 GC 暂停），替换 Debug 数值。
-本 session 构建完成后，`test_gc_throughput_benchmark` 的 `YoungGcPauseUnderLoad` **稳定失败**（SEH 0xc0000005），
+本 session 构建完成后，`test_gc_throughput_benchmark` 的 `YoungGcPauseUnderLoad` **不稳定失败**（SEH 0xc0000005 / teardown `c0000374`），
 gen1 benchmark 也在 teardown AV。这阻断了 GC-N7 产出 Release 基准。
 
-## 〇、修复进度（2026-08-25 本轮）
+## 〇、修复进度 —— 诚实复核（2026-08-25 第二轮，重要修正）
 
-| 缺陷 | 状态 | 效果 |
+> ⚠️ **第一版记录高估了修复效果**。逐项构建 + 大样本复测后，除 `904114c3d` 的两个 bug 外，
+> A/B/C（subagent + 本 session 新拟）**均未能稳定改善，已全部 revert**，恢复至 `904114c3d` 基线。
+
+| 项 | 状态 | 结论 |
 |------|------|------|
-| 1. 析构 FreePage UAF | ✅ 已改 `gc_old_gen.cpp`（`~MarkSweepOldGen` unlink-before-free） | throughput teardown AV 消失 |
-| 4. `ResizeGen1Region` 清空新 gen1 | ✅ 已改 `gc_region.cpp`（先 FreeRegion(old) 再发布 new） | gen1 不再被静默禁用；crash 率 ~80% → ~5-10% |
-| 2. Phase 2 scan_ptr 越界 | 🔴 **残余**（同上 crash `gc_young_collector.cpp:537`，~5% 复现） | 12 跑后仍偶发；根因跨域待专项 |
+| **1. 析构 FreePage UAF** | ✅ **已提交** `904114c3d` `gc_old_gen.cpp`（unlink-before-free） | 代码级确证真 bug（析构 FreePage 内层扫读已 VirtualFree 兄弟节点）。修复正确，保留。 |
+| **4. `ResizeGen1Region` 清空新 gen1** | ✅ **已提交** `904114c3d` `gc_region.cpp`（先 FreeRegion 再发布 new） | 代码级确证真 bug（FreeRegion 无条件清 gen1 指针）。修复正确，保留。 |
+| **A. 旧 gen1 卡表 segment 未注销**（ResizeGen1Region 后 `GcUnregisterHeapRange` 旧范围） | 🔴 **已 revert** | 概念合理但复测未稳定改善；引入/伴随 teardown `c0000374`，无法在此沙箱验证，不提交。 |
+| **B. 回收 region 保留原 begin/end**（`AllocateRegion` 回收路径重置 end + 重标 region-gen） | 🔴 **已 revert** | 同上，未验证为净正。 |
+| **C. Phase 0 保守扫跳过 self（补空守卫）** | 🔴 **已 revert** | 修复了 `reclaimed` 下溢（skip-self 后 `promoted=0`、`reclaimed` 正常），但**当前线程 mutator roots 丢失 → 诱发 teardown heap corruption**，net 更差。保守扫 self 本有存留作用，不能盲目跳过。 |
 
-**信号**：残余偶发 crash 仍是 `GcYoungCollection+0xaa3`（:537 `first_word = *obj`，obj=scan_ptr 未映射）。
-年轻 GC Phase 2 的 `scan_ptr` 偶发到达未提交地址 -> `nursery_used`(bump) 与已提交区域的同步问题，
-跨 gen1-active young GC + page_list_ 生命周期。已按三次修复规则停止本轮手动迭代，升级专项。
+### 关键实证（同代码 `904114c3d` 基线大样本）
+- `reclaimed`**下溢恒在**（passing run 也出现 `reclaimed=18446744073575202880` 大负值）→ `nursery_used<nursery_begin` 是**常态**，并非崩溃直接因。
+- crash 频率同代码在 8%~73% 间剧烈波动 → **非确定性**（ASLR/堆布局/BGC 线程竞态相关），单次"改善"多为采样噪声。
+- 崩溃形态：in-test `GcYoungCollection:537` Phase 2 扫越界 AV（~8%） **和** teardown `~MarkSweepOldGen:127` `c0000374`（堆破坏检测），两者并存，root 同源（运行期某处堆缓冲区越界/写坏）。
+
+### 结论（诚实）
+`904114c3d` 的两个修复是**代码级确证的正确性 bug**（与 crash 率无关，值得保留）。
+残余是一个**非确定性、跨 young-GC/old-gen/gen1/BGC 的堆破坏**，需：
+1. **真实机器开启 page-heap**（`gflags /p /enable <exe> /full`）定位确切越界字节（本沙箱注册表写被拒，无法启用）。
+2. 专项 systematic-debugging 排查 BGC 线程并发 + 堆写越界（非保守扫 self 一条路）。
+GC-N7 Release 基准在残余修复前无法产出可信数值。
 
 ---
 
-## 二、缺陷 1（✅ 已修）：`~MarkSweepOldGen` 析构 FreePage 读已释放页
+## 二、缺陷 1（✅ 已提交）：`~MarkSweepOldGen` 析构 FreePage 读已释放页
 
 ### 证据（cdb 栈，gen1 benchmark + throughput benchmark 均复现）
 ```
