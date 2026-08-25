@@ -68,7 +68,7 @@
 | RegisterExecute (Layer R) | ✅ 完成 | Register-allocated IL |
 | InterpreterVM (Layer D) | ✅ 完成 | 完整 ExecutionFrame |
 | InterpreterEntryDirect | ✅ 完成 | 5 级 dispatch (Step1→A0→B→C→D) |
-| Crypto interpreter routing | ✅ IL data emission fixed | Latest fact-summary 99.8% (5579/5591); 标准管线刷新三 chunk 3/3 passed: x509 274/274, sec 1287/1287 (aot+jit), sec-2 aot 1287/1287 (jit 旧 exe 1096/1096, fresh JIT build 资源 OOM), coverage sec 825/500 sec2 688/85 x509 246/238 |
+| Crypto interpreter routing | ✅ IL data emission fixed | Latest fact-summary 99.8% (5579/5591); 标准管线三 chunk 3/3 passed: x509 274/274, sec 1287/1287, sec-2 1287/1287 (aot+jit 均 fresh, JIT salvage 机制已入 build.py), coverage sec 825/500 sec2 688/85 x509 246/238 |
 
 ### 热更新
 
@@ -108,7 +108,7 @@
 | System.Runtime.Intrinsics | 2 | ✅ Passed |
 | System.Runtime.Serialization.Formatters | 1 | ✅ Passed |
 | System.Security.Claims | 1 | ✅ Passed |
-| System.Security.Cryptography | 4 | ✅ 99.8% (5579/5591); 标准管线刷新 x509 233→274, sec/sec-2 aot→1287 全 through, 三 chunk 3/3 passed; sec2 JIT 用旧 exe 1096/1096 (fresh JIT build 资源 OOM, 非代码缺陷) |
+| System.Security.Cryptography | 4 | ✅ 99.8% (5579/5591); 标准管线 x509 233→274, sec/sec-2 →1287 全 through, 三 chunk 3/3 passed; sec2 JIT fresh 1287/1287 (post-build copy 0xC000013A 由 salvage 机制回收, 非代码缺陷) |
 | System.Security.Principal.Windows | 1 | ✅ Passed |
 | System.Text.Json | 1 | ✅ Passed |
 | System.Threading.Tasks.Parallel | 1 | ✅ Passed |
@@ -130,7 +130,7 @@
 	| 2 | G-2: FindPage 索引化 | ✅ 已实现 (2026-06-11) | PageArray 排序数组 + 二分查找 O(log n) |
 	| 3 | G-3: BGC-YoungGC 交互 segfault | ✅ 已修复 (2026-06-11) | Phase 3 coordinated pause 协议：atomic flag 握手 + nursery drain + Phase 3d re-rooting |
 	| 4 | Server GC crash | ✅ DrainMarkStackParallel fix + chaos_jit MSVC build fix | Worker pool re-entrancy + GCC atomics on MSVC |
-	| 5 | Cryptography 360 failures | ✅ resolved via reconcile+rebuild; 标准管线 fresh 重建 x509 274/274, sec 1287/1287, sec-2 1287/1287 全通过 (old 88%/12-fail artifacts predate a22a798d5/afe0060ce, no longer reproducible) |
+	| 5 | Cryptography 360 failures | ✅ resolved via reconcile+rebuild; 标准管线 three chunk 3/3: x509 274/274, sec 1287/1287, sec-2 1287/1287 (aot+jit fresh, salvage 机制); old 88%/12-fail artifacts predate a22a798d5/afe0060ce, no longer reproducible |
 	| 6 | SIMD V256_Mul_I32 overload rename | ✅ 已修复 (2026-06-11) | CRLF→LF + .gitattributes 强制 LF |
 	| 7 | RunFactMode SEH longjmp gap | ✅ 已修复 (2026-06-10) | g_chaos_fail_hook longjmp to uninitialized jmp_buf |
 

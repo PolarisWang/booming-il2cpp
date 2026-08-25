@@ -539,6 +539,36 @@ def _merge_supplemental_coverage(metadata_path: Path, chunk_dir: Path) -> None:
     print(f"  [build]   Merged {len(new_entries)}/{len(supp_entries)} supplemental coverage entries "
           f"(total methods now {metadata['totalMethods']})")
 
+def _finalize_jit_copy(jit_output: Path, native_dir: Path) -> bool:
+    """Copy a fresh JIT entry binary + jdata from jit_output into native_dir.
+
+    TPG may exit non-zero *after* its cmake build succeeded (e.g. a post-build
+    copy/cleanup step crashed with a Ctrl+C/access-violation signal), leaving a
+    valid build_jit/RelWithDebInfo/chaos_entry.exe + fresh aot-core-ir.jdata that
+    never reached native_dir.  This helper completes that copy so the pipeline
+    uses the fresh JIT artifacts instead of silently falling back to a stale
+    entry-jit.exe.  Returns True if a fresh JIT entry was installed, else False.
+    """
+    cands = [jit_output / "entry-jit.exe",
+             jit_output / "build_jit" / "RelWithDebInfo" / "chaos_entry.exe"]
+    best = None
+    for cand in cands:
+        if not cand.exists():
+            continue
+        if best is None or cand.stat().st_mtime > best.stat().st_mtime:
+            best = cand
+    if best is None:
+        return False
+    dest = native_dir / "entry-jit.exe"
+    shutil.copy2(best, dest)
+    print(f"  [build] JIT entry-jit.exe: {dest} ({best.stat().st_size} bytes)")
+    jdata_src = jit_output / "codegen" / "generated" / "aot-core-ir.jdata"
+    if jdata_src.exists():
+        shutil.copy2(jdata_src, native_dir / "aot-core-ir.jdata")
+        print(f"  [build] JIT data: {native_dir / 'aot-core-ir.jdata'} ({jdata_src.stat().st_size} bytes)")
+    else:
+        print(f"  [build] JIT data not found at {jdata_src} — continuing")
+    return True
 
 def _build_jit_entry(
     tpg_dll: Path,
@@ -588,6 +618,11 @@ def _build_jit_entry(
                 safe = line.encode('utf-8', errors='replace').decode('utf-8', errors='replace')
                 safe = safe.replace('�', '?')
                 print(f"      [jit:err] {safe}")
+        # TPG may have produced a valid cmake build then crashed in post-copy;
+        # salvage the fresh JIT entry so the pipeline doesn't use a stale exe.
+        if _finalize_jit_copy(jit_output, native_dir):
+            print("  [build] JIT entry build rc!=0 but fresh artifacts installed — continuing")
+            return True
         return False
 
     jit_exe = jit_output / "entry-jit.exe"

@@ -90,10 +90,10 @@ crypto 的 "88% (1077/1222)" 数字被证明是 **06-14/06-17 的过期 AOT 快�
   security-cryptography 与 security-cryptography-2：**均为 3/3 passed**，fresh 全量构建
   （entry.exe mtime 2026-08-24 19:36/19:35，非 hephaestus cache-hit）。
   - sec: declared=500, covered=825 (165%)；fact aot+jit 均 1287/1287（entry-jit fresh 08-24 19:39）；
-    sec2: declared=85, covered=688 (809%)，fact aot 1287/1287；jit 走 06-20 旧 entry-jit
-    （fresh JIT 重建 crash rc=0xC000013A，sec2 大 TU 资源耗尽同 MSB4018 OOM 类）
-    → jit 1096/1096 passed（旧 exe，fact 仍绿）。
-  - 该结论合入后 fact-summary 上下限：1239 (aot-only) / 1240 (jit+entry) / 2408 (双 exe)，
+    sec2: declared=85, covered=688 (809%)，fact aot+jit 均 1287/1287；
+    （fresh JIT 重建输出实为 1287/1287，与 AOT 精确一致——先前的 1096 系 06-20
+     pre-reconcile 旧 subject 集的产物；本次 crash=TPG post-build copy 阶段被
+     0xC000013A 终止，非 OOM，已加 salvage 机制回收 fresh 产物）
     **12 项缺口无存活项**（详见上文 99.8% 出处 + P/Invoke 哨兵 0 项两节）。
 - 标准管线曾出现 TPG 链接失败（LNK2019 PalTryCallNoExcept），根因=**chunk 本地
   codegen/lib 的 lib 快照陈旧**（chaos_pal.lib 等 2026-06-15/06-19，旧 9 参签名）与
@@ -118,9 +118,10 @@ crypto 的 "88% (1077/1222)" 数字被证明是 **06-14/06-17 的过期 AOT 快�
 - 结论：**sec / sec-2 / x509 三 chunk 均在修复后的 real-user env 下走通标准管线
   （build+fact+coverage-audit）并 3/3 passed**；AOT 三 chunk 均为 fresh 全量构建
   （entry.exe 08-24，非 cache-hit）；sec/x509 的 JIT 亦 fresh（08-24）；sec2 JIT
-  fresh 重建受资源限制 crash（0xC000013A，同 MSB4018 OOM 类），其 jit fact 用 06-20
-  旧 entry-jit 1096/1096 passed（非新代码缺陷）；NuGet + 陈旧 lib/page 两类环境问题
-  均已在标准路径闭环；12 项缺口归档对比无存活项。**
+  fresh 产物充足（build_jit/RelWithDebInfo/chaos_entry.exe 08-25 06:08），仅 TPG
+  post-build copy 被 0xC000013A 中断；已加 salvage 机制让标准管线直接用 fresh
+  entry-jit（1287/1287，与 AOT 一致），旧 06-20 entry-jit 已退役；
+  NuGet + 陈旧 lib/page 两类环境问题均已在标准路径闭环；12 项缺口归档对比无存活项。**
 - 若后续 SDK lib 再次刷新，需确保 chunk codegen/lib 同步机制进入 CI（目前是
   build.py deps 失效 + 人工同步兜底）；建议在 pipeline 中对 codegen/lib 的
   chaos_pal.lib 等做 SDK 版本指纹校验。
