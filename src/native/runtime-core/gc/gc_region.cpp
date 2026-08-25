@@ -675,7 +675,15 @@ void ResizeGen1Region(CHAOS_IL2CPP_SIZE new_size) {
         return;
     }
 
-    // Publish new region atomically.
+    // Free the old Gen1 region (Gen1 is empty after collection, no migration
+    // needed).  MUST happen BEFORE publishing the new pointer + bump: FreeRegion()
+    // of a REGION_GEN1 unconditionally clears g_young_gen.{gen1_region,gen1_end,
+    // gen1_bump} (gc_region.cpp:946-950).  If we published the new region first,
+    // that clear would wipe it, silently disabling Gen1 for the rest of the
+    // process (every subsequent survivor falls straight to old-gen).
+    RegionManager::Instance().FreeRegion(old_gen1->id);
+
+    // Publish new region atomically (after the old region is gone).
     g_young_gen.gen1_region.store(new_gen1, std::memory_order_release);
     g_young_gen.gen1_bump.store(new_gen1->begin, std::memory_order_release);
     g_young_gen.gen1_end = new_gen1->end;
@@ -686,9 +694,6 @@ void ResizeGen1Region(CHAOS_IL2CPP_SIZE new_size) {
     GcRegisterHeapRange(
         reinterpret_cast<uintptr_t>(new_gen1->begin),
         reinterpret_cast<uintptr_t>(new_gen1->end));
-
-    // Free the old Gen1 region (Gen1 is empty after collection, no migration needed).
-    RegionManager::Instance().FreeRegion(old_gen1->id);
 }
 
 TLAB TlabClaimFromYoungGen() noexcept {

@@ -86,6 +86,11 @@ MarkSweepOldGen::~MarkSweepOldGen() {
     auto* page = page_list_;
     while (page != nullptr) {
         auto* next = page->next;
+        // Unlink the head BEFORE freeing it.  FreePage()'s segment-sharing
+        // check walks page_list_ and reads each node's in_use flag; if the
+        // previously-freed page were left in the list, the next FreePage()
+        // would dereference an already VirtualFree'd node (AV on Release).
+        page_list_ = next;
         FreePage(page);
         page = next;
     }
