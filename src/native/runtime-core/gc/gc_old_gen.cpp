@@ -1806,6 +1806,13 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::PlanPageCompaction(OldGenPage* page,
                 }
             }
 
+            // Skip IN-PLACE demoted objects -- gen1-owned (CoreCLR-aligned in-place
+            // demotion).  They must stay at their original address; compacting them
+            // would move a gen1-owned object and stale the page's demoted set.
+            if (page->DemotedContains(obj)) {
+                continue;
+            }
+
             marked.push_back({obj, obj_size});
         }
         slot = (w + 1) * 64;
