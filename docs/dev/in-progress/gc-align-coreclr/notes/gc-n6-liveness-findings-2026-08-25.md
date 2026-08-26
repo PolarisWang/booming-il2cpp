@@ -11,6 +11,24 @@ GC-N6 目标：把 `chaos_gc_region_barrier_stress_test` 的断言从"位置合�
 
 原型实现（本轮编写，测试本体已回滚保持快 gate 绿）：每个 nursery 对象 offset 0 写注册 TypeInfo（精确尺寸）、offset +8 写唯一 magic；GC 周期后校验每个 old-gen 槽位目标对象的 magic。**内容校验原型成功发现 3 个运行时缺陷**——"位置校验"版测试全部掩盖。
 
+## 五、内容校验升级决定性复现跨代 UAF（2026-08-26，A2b 现形）
+
+重载内容校验原型（nursery 对象 typed：TypeInfo@0 + self-pointer@8 + 确定性 magic@16；老 old-gen slot 存 ref），
+多线程 coordinator + 8 worker，**4/4 稳定复现 `magic-miss=142/1024`，`region-invalid=0`**（连跑一致）。
+
+- **`region-invalid=0`**：所有 dangling slot 的 ref 地址仍被 region-gen 分类为 managed——**位置校验版全绿**。
+- **`magic-miss=142`**：地址上对象已是**他物**（目标被回收、地址被复用）→ **真实跨代 UAF**，位置校验掩盖。
+- **per-thread 分布 `[15,64,15,6,15,6,15,6]`**（奇偶不对称、thread1=64）：**非均匀、时机依赖** → 指向
+  **A2b store-then-barrier 竞态**：coordinated GC safepoint 落在 worker 的 slot-store 与 card-barrier 之间 →
+  Phase-1 旧页干净卡 → 跨代边丢 → 目标被回收 → slot 过期。
+
+**结论**：内容校验升级成功把"A2b 竞态导致的跨代 UAF"从"位置校验掩盖"变成**确定性可复现（4/4）**——这正是
+GC-N6 的价值主张，也为 A2b 提供一个可靠 reproducer（此前 A2b 调查"复现 4/5 被 -LE 排除"）。**该 UAF 是
+真实、尚存的生产性正确性 bug**（与 GC-N7 残余同源——丢跨代引用→堆破坏）。
+
+**处置**：内容校验测试暴露真 bug → **不可进快 gate**（会红）；保留为 A2b 专项的确定性 reproducer 依据。
+位置校验版保持快 gate 绿。
+
 ## 二、发现 1（✅ 已修复提交 `ef0012d49`）：世代屏障 4MB region-gen chunk 碰撞 → 漏卡 → UAF
 
 ### 证据链（诊断输出，10/10 复现）
