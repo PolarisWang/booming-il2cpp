@@ -25,6 +25,15 @@ void GcWorkerPool::Initialize(int count) noexcept {
 
     int spawned = 0;
 
+    // Reset the ready counter to 0 BEFORE spawning this batch.  ready_count_ is a
+    // process-global accumulator (each WorkerLoop bumps it once at thread entry);
+    // reusing an exited slot also keeps its OLD thread's bump.  Using
+    // `ready_count_.load() + spawned` as the target would therefore double-count
+    // reused slots (their old bump survives) and hang Initialize forever.  Reset
+    // here so this batch's new threads each contribute exactly one bump from a
+    // clean baseline, and wait for ready == spawned.
+    ready_count_.store(0, std::memory_order_release);
+
     // Phase 1: reuse exited worker slots (inactive, thread has returned).
     for (int i = 0; i < created_count_ && deficit > 0; i++) {
         if (!active_[i].load(std::memory_order_acquire)) {
@@ -54,9 +63,14 @@ void GcWorkerPool::Initialize(int count) noexcept {
                               need, active_count, max_slots, deficit);
     }
 
-    // Spin until all newly spawned threads have parked in cv_.wait().
+    // Spin until all newly spawned threads have announced themselves (bump
+    // ready_count_ at thread entry, below).  ready_count_ was reset to 0 above,
+    // so each newly-spawned thread contributes exactly one bump → wait for ==
+    // spawned.  Using a cumulative target (prior ready + spawned) would
+    // double-count reused slots whose old thread's bump already accumulated and
+    // deadlock Initialize forever.
     if (spawned > 0) {
-        int target = ready_count_.load(std::memory_order_acquire) + spawned;
+        int target = spawned;
         while (ready_count_.load(std::memory_order_acquire) < target) {
             std::this_thread::yield();
         }
@@ -112,8 +126,16 @@ void GcWorkerPool::Shutdown() noexcept {
 
 void GcWorkerPool::WorkerLoop(int worker_idx) noexcept {
     int slot = worker_idx - 1;
-    bool first_park = true;
     int observed = round_.load(std::memory_order_acquire);
+
+    // Declare this worker "ready" as soon as the thread starts, NOT only on its
+    // first park.  Initialize() spins on ready_count_ until every spawned worker
+    // has announced itself; a worker whose first loop iteration takes the
+    // fast-path (round_ changed before it parked) would otherwise execute work_fn_
+    // and continue, never reaching the first_park branch, leaving ready_count_
+    // short forever and deadlocking Initialize() in an infinite spin.  Bumping
+    // once at thread entry guarantees the spin always completes.
+    ready_count_.fetch_add(1, std::memory_order_release);
 
     while (!shutdown_.load(std::memory_order_acquire)) {
         // Fast-path: if round_ already changed while we weren't holding the
@@ -132,10 +154,6 @@ void GcWorkerPool::WorkerLoop(int worker_idx) noexcept {
 
         {
             std::unique_lock<std::mutex> lock(mtx_);
-            if (first_park) {
-                ready_count_.fetch_add(1, std::memory_order_release);
-                first_park = false;
-            }
 
             // Double-check after acquiring the mutex: another thread may have
             // bumped round_ between the fast-path check and the lock acquisition.
