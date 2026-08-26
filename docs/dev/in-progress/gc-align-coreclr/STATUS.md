@@ -32,7 +32,7 @@ clearance_confirmed_by_user: true
 | Phase 6 | GC-L1/L2 | ⬜ 纳入 v2 Phase 8 (M6/M3B) |
 | Phase 7-9 | GC-M1..M15（v2 功能对齐） | ⬜ M1 部分完成（regen link-ready），M2 已建测试暴露疑点后闭环 |
 | **Phase 10（批次 1）** | GC-N1..N4（P0 护网闭合） | ✅ GC-N1/N3/N4 已提交；GC-N2 由并行线承接 |
-| **Phase 11（批次 2）** | GC-N5..N8（P1 工程闭环） | 🔄 GC-N5 ✅；GC-N6 发现 2 缺陷（屏障 `ef0012d49` 已修，gen1↔old-gen 重叠专项）；**GC-N7 2 真bug `904114c3d` + 回归验证 `c226c3d08`；GC-N8 Phase-1 多信号采集 `bf1b83503`**（残余堆破坏待真机 page-heap） |
+| **Phase 11（批次 2）** | GC-N5..N8（P1 工程闭环） | 🔄 GC-N5 ✅；GC-N6 发现 2 缺陷（屏障 `ef0012d49` 已修，gen1↔old-gen 重叠专项）；**GC-N7 2 真bug `904114c3d` + 回归验证 `c226c3d08`；GC-N8 完成 `bf1b83503`(采集) + `048b9f15c`(伺服)**（残余堆破坏待真机 page-heap） |
 | **Phase 12（批次 3）** | GC-N9..N12（P2 能力拉平） | ⬜ |
 
 ## 下一步
