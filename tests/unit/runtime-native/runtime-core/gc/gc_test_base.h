@@ -17,8 +17,10 @@
 #ifndef CHAOS_IL2CPP_GC_TEST_BASE_H_
 #define CHAOS_IL2CPP_GC_TEST_BASE_H_
 
+#include <algorithm>
 #include <atomic>
 #include <cstdint>
+#include <cstdio>
 #include <functional>
 #include <thread>
 #include <vector>
@@ -363,6 +365,39 @@ struct GcStressTestBase : GcUnitTestBase {
 struct GcBenchTestBase : GcUnitTestBase {
     /// Record a named metric and print to stdout.
     static void RecordMetric(const char* name, uint64_t value_ns);
+
+    /// Emit a machine-parseable benchmark line for a set of pause/latency
+    /// samples (in ns) as `BENCH,<scenario>,P50=..,P95=..,P99=..,AVG=..,N=..`.
+    /// Optional p95_only/p95p99_only restrict emission to the fields the
+    /// gc.perf.yaml baseline declares for that scenario (loh_sweep: P95 only;
+    /// bgc_mark_slice: P95,P99 only).  Header-inline `static` so every TU that
+    /// instantiates a benchmark (linked with /FORCE:MULTIPLE) gets its own
+    /// copy — no ODR collision.
+    static void EmitPercentiles(const char* scenario,
+                                const std::vector<uint64_t>& samples_ns,
+                                bool p95_only = false,
+                                bool p95p99_only = false) {
+        if (samples_ns.empty()) return;
+        std::vector<uint64_t> v = samples_ns;
+        std::sort(v.begin(), v.end());
+        const size_t n = v.size();
+        uint64_t s = 0;
+        for (auto x : v) s += x;
+        const double avg = static_cast<double>(s) / static_cast<double>(n);
+        // Mirror collect-jit-metrics.py:104-111 percentile indexing.
+        const double p50 = v[n * 50 / 100];
+        const double p95 = v[n * 95 / 100];
+        const double p99 = v[n * 99 / 100];
+        if (p95_only) {
+            printf("BENCH,%s,P95=%.3f,N=%zu\n", scenario, p95, n);
+        } else if (p95p99_only) {
+            printf("BENCH,%s,P95=%.3f,P99=%.3f,N=%zu\n", scenario, p95, p99, n);
+        } else {
+            printf("BENCH,%s,P50=%.3f,P95=%.3f,P99=%.3f,AVG=%.3f,N=%zu\n",
+                   scenario, p50, p95, p99, avg, n);
+        }
+        fflush(stdout);
+    }
 };
 
 }}}  // namespace chaos::il2cpp::runtime_core

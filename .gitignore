@@ -567,3 +567,16 @@ tests/**/coverage.cobertura.xml
 /tests/e2e/verification/a1_fact_inventory.json
 /testing/
 /tests/e2e/verification/a0_inventory.json
+
+# ── GC/native debugging scratch (CDB/WinDbg dumps, PID files, err captures) ──
+# Leftover from windows-debug CDB sessions: heap/PID dumps must never enter git.
+*.err
+*_pid.txt
+*.pid
+/cdb*.txt
+/cdbmem.txt
+/cdbw.txt
+/diag*.txt
+/prec.err
+/r[0-9].txt
+/w.err

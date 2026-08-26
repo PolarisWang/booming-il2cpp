@@ -29,6 +29,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <algorithm>
+#include <vector>
 
 using namespace chaos::il2cpp::runtime_core;
 
@@ -229,6 +231,27 @@ static void PrintMeasurement(const Measurement& m) {
            m.objects_promoted);
 }
 
+/// Emit a machine-parseable `BENCH,gen1,P50=..,P95=..,P99=..,AVG=..,N=..`
+/// line (JIT-collector-compatible; feeds gc.perf.yaml `gen1`).  `gen1_us`
+/// samples are in microseconds → converted to ns for consistency with the
+/// collector (which divides by 1e9 to seconds).
+static void EmitGen1Percentiles(const std::vector<uint64_t>& gen1_us) {
+    if (gen1_us.empty()) return;
+    std::vector<uint64_t> ns;
+    ns.reserve(gen1_us.size());
+    for (auto us : gen1_us) ns.push_back(us * 1000u);
+    std::sort(ns.begin(), ns.end());
+    const size_t n = ns.size();
+    uint64_t sum = 0;
+    for (auto x : ns) sum += x;
+    const double avg = static_cast<double>(sum) / static_cast<double>(n);
+    const double p50 = static_cast<double>(ns[n * 50 / 100]);
+    const double p95 = static_cast<double>(ns[n * 95 / 100]);
+    const double p99 = static_cast<double>(ns[n * 99 / 100]);
+    printf("BENCH,gen1,P50=%.3f,P95=%.3f,P99=%.3f,AVG=%.3f,N=%zu\n",
+           p50, p95, p99, avg, n);
+}
+
 // ═══════════════════════════════════════════════════════════════════════
 // Drain Comparison: Mark-Sweep vs Promote-All
 // ═══════════════════════════════════════════════════════════════════════
@@ -416,11 +439,16 @@ int main() {
     (void)warmup_objs;
     GcGen1Collection();
 
+    std::vector<uint64_t> gen1_us_samples;
+    gen1_us_samples.reserve(sizeof(levels) / sizeof(levels[0]) *
+                            sizeof(survivals) / sizeof(survivals[0]));
+
     for (auto& level : levels) {
         for (double surv : survivals) {
             Measurement m = RunOne(
                 nullptr, level.pct, level.bytes, surv);
             PrintMeasurement(m);
+            gen1_us_samples.push_back(m.gen1_us);
 
             // Extra newline between occupancy groups for readability.
         }
@@ -429,6 +457,10 @@ int main() {
 
     // ── Drain Comparison Table ──
     RunDrainComparison(capacity);
+
+    // Machine-parseable Gen1 pause percentiles for the gc.perf.yaml `gen1`
+    // baseline (P50/P95/P99, tol 50%).
+    EmitGen1Percentiles(gen1_us_samples);
 
     // ── Teardown ──
     threading::UnregisterThread();

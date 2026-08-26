@@ -51,6 +51,25 @@ using Clock = std::chrono::high_resolution_clock;
     printf("BENCH|%s|%s|%lld|%s\n",                                      \
            (name), (metric), static_cast<long long>(value), (unit))
 
+/// Emit a machine-parseable `BENCH,<scenario>,P50=..,P95=..,P99=..,AVG=..,N=..`
+/// line (JIT-collector-compatible; feeds the gc.perf.yaml baseline).  Samples in
+/// ns -> P50/P95/P99 in ns.  Percentile indexing mirrors
+/// scripts/ci/collect-jit-metrics.py.
+static void EmitBenchPercentiles(const char* scenario,
+                                 std::vector<uint64_t> samples) {
+    if (samples.empty()) return;
+    std::sort(samples.begin(), samples.end());
+    const size_t n = samples.size();
+    uint64_t sum = 0;
+    for (auto s : samples) sum += s;
+    const double avg = static_cast<double>(sum) / static_cast<double>(n);
+    const double p50 = static_cast<double>(samples[n * 50 / 100]);
+    const double p95 = static_cast<double>(samples[n * 95 / 100]);
+    const double p99 = static_cast<double>(samples[n * 99 / 100]);
+    printf("BENCH,%s,P50=%.3f,P95=%.3f,P99=%.3f,AVG=%.3f,N=%zu\n",
+           scenario, p50, p95, p99, avg, n);
+}
+
 /// Allocate a nursery object and zero its memory.
 static void* BenchAlloc(size_t size) {
     void* p = NurseryAllocate(size);
@@ -167,11 +186,58 @@ void BenchFullGcPause() {
         BENCH("FullGcPause", "avg_ns", avg, "ns");
         BENCH("FullGcPause", "median_ns", median, "ns");
 
+        // Machine-parseable percentile line for the gc.perf.yaml `full_gc_small`
+        // baseline (P50/P95/P99, tol 50%).
+        EmitBenchPercentiles("full_gc_small", pauses);
+
         GC_CHECK(avg > 0, "Full GC avg pause: %lld ns (%lld samples)",
                  static_cast<long long>(avg),
                  static_cast<long long>(pauses.size()));
     } else {
         GC_CHECK(false, "Full GC pause samples collected");
+    }
+}
+
+// ── Benchmark 3b: Parallel full-GC pause on a ~100MB heap ─────────────
+// Fills old gen to ~100MB and measures the full GC (parallel-mark) pause.
+// Feeds the gc.perf.yaml `full_gc_parallel_100mb` baseline (P50/P95/P99, tol 50%).
+void BenchFullGcParallel100mb() {
+    printf("\n── Benchmark 3b: FullGcParallel100mb ──\n");
+
+    constexpr int kGcs = 5;
+    constexpr size_t kObjSize = 1024;
+    constexpr size_t kTargetBytes = 100u * 1024u * 1024u;  // ~100 MB
+    std::vector<uint64_t> pauses;
+    pauses.reserve(kGcs);
+
+    // Allocate until the ~100MB target is reached or the old-gen heap fills up
+    // (Allocate returns null).  Keeping the objects alive across the measured
+    // Collect() gives a realistic parallel-mark pause on a large live set.
+    for (int g = 0; g < kGcs; g++) {
+        size_t filled = 0;
+        for (size_t i = 0; i < 100u * 1024u; i++) {   // 100MB / 1KB
+            void* p = BenchAllocOldGen(kObjSize);
+            if (p == nullptr) break;                  // heap full
+            filled++;
+            if (filled * kObjSize >= kTargetBytes) break;
+        }
+
+        uint64_t before = chaos_gc_get_total_pause_duration();
+        g_old_gen.Collect(nullptr, nullptr);
+        uint64_t after = chaos_gc_get_total_pause_duration();
+        uint64_t pause_ns = after - before;
+        if (pause_ns > 0) {
+            pauses.push_back(pause_ns);
+        }
+    }
+
+    if (!pauses.empty()) {
+        EmitBenchPercentiles("full_gc_parallel_100mb", pauses);
+        GC_CHECK(pauses.size() > 0,
+                 "Full GC parallel 100MB avg pause over %zu samples",
+                 pauses.size());
+    } else {
+        GC_CHECK(false, "Full GC parallel 100MB pause samples collected");
     }
 }
 
@@ -361,6 +427,7 @@ int main() {
     BenchAllocationThroughput();
     BenchYoungGcPause();
     BenchFullGcPause();
+    BenchFullGcParallel100mb();
     BenchMixedAllocPattern();
     BenchGen1Pause();
     BenchMultiThreadAlloc();

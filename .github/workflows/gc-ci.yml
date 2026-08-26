@@ -192,44 +192,14 @@ jobs:
           path: gc-asan-output.txt
 
   # ── Nightly pressure tier ────────────────────────────────────────────────
-  # Runs the stress/soak/benchmark targets (excluded from the fast unit gate) on
-  # a schedule.  Failures RED the gate (no `|| true`): a regression in any
-  # stress/soak target must be visible.  The A2b
-  # `chaos_gc_region_barrier_stress_test` was promoted to the fast unit gate
-  # (2026-08-14) and runs there as PASS; the nightly tier still covers the
-  # remaining stress targets (gc_stress / bgc_stress / loh_stress /
-  # finalizer_stress / satb_stress / ...).  Still-known-fail entries surface
+  # The heavy GC stress/soak/benchmark tiers are run by the standalone
+  # gc-stress-nightly.yml workflow (schedule 0 3), which builds the same root
+  # reference preset and drives the pressure tier through test_driver --stress-only
+  # (reconciling against known-failures.integration.yaml).  A duplicate
+  # gc-stress-nightly job previously lived here at 02:37; it was consolidated into
+  # that workflow so the stress tier runs ONCE nightly instead of twice.  The
+  # schedule cron above (:53) still gates the gc-asan-nightly job (:146).
+  #
+  # Refs: A2b `chaos_gc_region_barrier_stress_test` was promoted to the fast unit
+  # gate (2026-08-14) and runs there as PASS.  Still-known-fail entries surface
   # their residual without redding the gate via the driver's stale_known logic.
-  gc-stress-nightly:
-    runs-on: windows-latest
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Build Generator
-        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
-
-      - name: Configure CMake
-        run: |
-          cmake -S . -B artifacts/presets/windows-x64-reference \
-            -G "Visual Studio 17 2022" \
-            --toolchain build/toolchains/windows-x64-reference.cmake \
-            -DROADMAP0_PRESET_TARGET=windows-x64-reference
-
-      - name: Build Native Runtime + GC tests
-        run: |
-          cmake --build artifacts/presets/windows-x64-reference --config Debug -j 8
-
-      - name: Run GC Stress Tier (-L stress|soak|benchmark, via CHAOS_GC_TEST_STRESS_ONLY)
-        shell: bash
-        run: |
-          CHAOS_GC_TEST_STRESS_ONLY=1 \
-            python tests/runner/test_driver.py --layer integration --group contracts-native --quick \
-            2>&1 | tee gc-stress-output.txt
-
-      - name: Upload GC stress output
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: gc-stress-output
-          path: gc-stress-output.txt

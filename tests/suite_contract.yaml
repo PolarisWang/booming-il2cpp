@@ -44,6 +44,21 @@ layers:
         # deterministic only; benchmark/stress/soak excluded by the -LE in native.py).
         # Allow a long budget: ~200 deterministic native tests.
         timeout: 3600
+      # contracts-native-gc: deterministic GC-only correctness gate (labels unit;gc,
+      # or the named stress/benchmark GC targets when run via --preset gc-stress).
+      # Uses the SAME build dir as contracts-native; narrows to GC targets with -R.
+      # This is what --preset native-gc drives on every PR; the heavy GC stress tiers
+      # are excluded here (kept for the nightly gc-stress preset instead).
+      - name: contracts-native-gc
+        cmake_root: .
+        cmake_build_dir: artifacts/presets/windows-x64-reference
+        cmake_preset: windows-x64-reference
+        ctest_config: Debug
+        ctest_exclude: benchmark|stress|soak
+        ctest_regex: chaos_gc|test_gc|chaos_bgc|test_gc_bgc
+        cmake_parallel: 8
+        ctest_timeout: 3600
+        timeout: 3600
     # NOTE: tests/e2e/trust/project-test/{runtime-self-test,generics-delegates,virtual-dispatch}
     # is a manual-orchestration integration tier (CMake + codegen + hot-update) with no
     # standalone entry script; it is driven by CI / CMake, not added as a driver group yet.

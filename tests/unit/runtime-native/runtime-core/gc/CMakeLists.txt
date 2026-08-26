@@ -90,6 +90,21 @@ chaos_native_add_test(test_gc_scheduler
     LABELS "unit;gc"
 )
 
+# gc_observability_test — production-observability assertions (plan D): heap size,
+# collection count, per-thread allocated bytes, total pause, memory pressure, OS
+# memory status.  Uses only stable extern-C gc_api.h entry points.  NEW additive.
+chaos_native_add_test(test_gc_observability
+    gc_observability_test.cpp
+    LABELS "unit;gc"
+)
+
+# gc_semantics_test — .NET semantics oracle (plan C): GCHandle / DependentHandle /
+# Ephemeron / pinned-object semantics via the verified gc_events.h API.  NEW additive.
+chaos_native_add_test(test_gc_semantics
+    semantics/gc_semantics_test.cpp
+    LABELS "unit;gc"
+)
+
 # gc_memory_domain_test — MemoryDomain lifecycle, tagged allocation, usage limits
 chaos_native_add_test(test_gc_memory_domain
     memory_domain_test.cpp

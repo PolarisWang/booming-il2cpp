@@ -227,6 +227,10 @@ TEST_F(ThroughputBenchTest, YoungGcPauseUnderLoad) {
            static_cast<unsigned long long>(min_ns),
            static_cast<unsigned long long>(max_ns),
            static_cast<unsigned long long>(avg_ns));
+
+    // Machine-parseable percentile line for the gc.perf.yaml `young_gc_wks`
+    // baseline (pause_seconds.young_gc_wks → P50/P95/P99, tol 50%).
+    EmitPercentiles("young_gc_wks", pauses_ns);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -316,6 +320,13 @@ TEST_F(ThroughputBenchTest, BgcLatency) {
 
     RecordMetric("BgcLatency/IdleAvg", idle_avg);
     RecordMetric("BgcLatency/ConcurrentMarkAvg", concurrent_avg);
+
+    // Machine-parseable concurrent-mark latency percentiles for the
+    // gc.perf.yaml `bgc_mark_slice` baseline (P95/P99 only, tol 50%).  The
+    // per-allocation latency during the concurrent-mark phase is the practical
+    // proxy for the concurrent-mark slice cost on this workload.
+    EmitPercentiles("bgc_mark_slice", concurrent_latencies, /*p95_only=*/false,
+                    /*p95p99_only=*/true);
 
     // The concurrent-mark path may be slightly slower (extra barrier work),
     // but should not be pathological.

@@ -3,6 +3,7 @@
 #include <chaos/asan_interface.h>
 #include <chaos/log.h>
 #include <chaos/profile.h>
+#include <chaos/pal/pal_mem.h>      // PalVirtualAllocIsValid (committed-page probe, GC stack scan)
 #include <chaos/pal/pal_sync.h>
 #include <chaos/pal/pal_thread.h>
 #include <chaos/pal/pal_preempt.h>

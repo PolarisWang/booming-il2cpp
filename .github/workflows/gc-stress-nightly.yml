@@ -1,0 +1,123 @@
+# GC Stress Nightly — plan B3 reliability gate (on-demand + nightly).
+#
+# The SINGLE nightly stress authority for the GC heavy tiers (stress/soak/benchmark).
+# Per-PR GC correctness is served by `--preset native-gc` / the gc-ci.yml` fast gate
+# (unit;gc labels); this workflow is the slow pressure tier, deliberately NOT a per-PR
+# gate: `workflow_dispatch` (on-demand) + a nightly `schedule`.
+#
+# Runs the pressure tiers THROUGH the test_driver contract (like the gc-ci.yml
+# gc-stress-nightly job that previously lived here): `--stress-only` flips the native
+# adapter to ctest -L "stress|soak|benchmark" AND reconciles against
+# tests/runner/baselines/known-failures.integration.yaml (stale_known auto-reds when a
+# known-fail is fixed).  This obsoleted the separate gc-ci.yml gc-stress-nightly job,
+# which duplicated the same tier every night at 02:37.
+#
+# Wiring theme: "压力独立门禁，基线可复现，报告落本仓库" — it reuses the existing
+# native factory (`chaos_native_add_test`) and the gc_stress report-path fix
+# (report now written to <repo>/artifacts/native-runtime-core-test/reports/).
+
+name: GC Stress Nightly
+
+on:
+  workflow_dispatch:        # manual on-demand stress run
+  schedule:
+    - cron: "0 3 * * *"    # every night 03:00 UTC
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  gc-stress:
+    runs-on: windows-latest    # reference platform: x64; matches windows-x64-reference
+    env:
+      CHAOS_GC_TEST_STRESS_ONLY: "1"
+      CHAOS_IL2CPP_ARTIFACTS_ROOT: ${{ github.workspace }}/artifacts
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      # The driver's `contracts-native` group points at the ROOT reference preset
+      # (artifacts/presets/windows-x64-reference, per suite_contract.yaml), so the
+      # stress tier must build that same tree — not just tests/unit/runtime-native.
+      - name: Configure native (windows-x64-reference root preset)
+        shell: bash
+        run: |
+          cmake -S . -B artifacts/presets/windows-x64-reference \
+            -G "Visual Studio 17 2022" \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
+            -DROADMAP0_PRESET_TARGET=windows-x64-reference
+
+      - name: Build Native Runtime + GC tests
+        run: |
+          cmake --build artifacts/presets/windows-x64-reference --config Debug -j 8
+
+      - name: Run GC stress/soak/benchmark tiers (driver, stress-only)
+        shell: bash
+        run: |
+          python tests/runner/test_driver.py --layer integration --group contracts-native \
+            --stress-only --cases --json gc-stress-report.json \
+            2>&1 | tee gc-stress-output.txt
+
+      - name: Upload GC stress output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-stress-output
+          path: gc-stress-output.txt
+
+      - name: Upload GC stress JSON report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-stress-report
+          path: gc-stress-report.json
+
+      - name: Upload GC stress reports (gc_stress_report_*.json)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-stress-reports
+          path: artifacts/native-runtime-core-test/reports/*.json
+
+      - name: Collect GC perf metrics (BENCH, lines -> current + baseline + thresholds)
+        shell: bash
+        run: |
+          python scripts/ci/collect-gc-metrics.py \
+            --ctest-output=gc-stress-output.txt \
+            --gc-perf-yaml=tests/runner/baselines/gc.perf.yaml \
+            --output=gc-metrics-current.json \
+            --baseline-output=gc-baseline.json \
+            --thresholds=gc-thresholds.json
+
+      - name: Compare GC perf against baseline (perf advisory, not a hard red)
+        continue-on-error: true
+        shell: bash
+        run: |
+          python scripts/ci/compare-baseline.py \
+            --baseline=gc-baseline.json \
+            --current=gc-metrics-current.json \
+            --thresholds=gc-thresholds.json
+
+      - name: Upload current GC metrics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-metrics-current
+          path: gc-metrics-current.json
+
+      - name: Upload GC thresholds/baseline (for inspection)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-perf-support
+          path: |
+            gc-thresholds.json
+            gc-baseline.json

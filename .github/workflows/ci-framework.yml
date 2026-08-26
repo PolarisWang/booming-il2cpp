@@ -36,6 +36,8 @@ on:
         description: "GC server mode (ON|OFF, or empty for default)"
         default: ""
         type: string
+      dotnet_version:
+        description: ".NET SDK version for setup-dotnet"
         default: "8.0.x"
         type: string
 

@@ -72,6 +72,23 @@ PRESETS = {
     # python e2e smoke (foundation-dll)
     "foundation-smoke": [("driver", ["--layer", "e2e", "--group", "foundation-dll-smoke"],
                           "e2e/smoke")],
+    # native GC gate: the deterministic GC unit/integration group (labels unit;gc),
+    # excluding the heavy stress/benchmark/soak tiers.  Wire the group via
+    # suite_contract.yaml's contracts-native group + a ctest -LE filter that drops
+    # only the long tiers so GC correctness is gated on every PR.
+    "native-gc": [
+        ("driver", ["--layer", "integration", "--group", "contracts-native-gc", "--quick", "--cases"],
+         "integration/contracts-native-gc"),
+    ],
+    # GC stress/nightly gate: runs ONLY the stress|soak|benchmark tiers of the
+    # native integration group.  --stress-only is REQUIRED here: it makes the driver
+    # set CHAOS_GC_TEST_STRESS_ONLY=1, which flips the native adapter from ctest -LE
+    # (exclude) to -L "stress|soak|benchmark" (only these).  Without this flag the
+    # preset would silently run the fast excluded set instead of the stress tier.
+    # Long-running; this is the nightly / on-demand reliability gate, never per-PR.
+    "gc-stress": [("driver", ["--layer", "integration", "--group", "contracts-native",
+                              "--stress-only"],
+                   "integration/contracts-native stress")],
 }
 
 

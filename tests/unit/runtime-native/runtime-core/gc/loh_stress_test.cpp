@@ -260,3 +260,38 @@ TEST_F(LohStressTest, L5_MixedPressure) {
     ASSERT_FALSE(failed.load()) << "mixed pressure failed";
     SUCCEED();
 }
+
+// ── Benchmark: LOH sweep pause (gc.perf.yaml `loh_sweep`, P95 only) ────
+// Fills the LOH, marks a survivor set, and times repeated Sweep() calls.
+// Reaches the nightly `gc-stress` tier (labelled stress;gc).  Emits the
+// machine-parseable `BENCH,loh_sweep,P95=...,N=...` line.
+TEST_F(LohStressTest, L6_SweepPauseBench) {
+    static constexpr int kIterations = 20;
+    static constexpr CHAOS_IL2CPP_SIZE kAllocSize = 96 * 1024;
+
+    std::vector<uint64_t> sweep_ns;
+    sweep_ns.reserve(kIterations);
+
+    for (int it = 0; it < kIterations; it++) {
+        // Fill the LOH with objects, keeping every other one alive.
+        std::vector<void*> survivors;
+        for (int i = 0; i < 40; i++) {
+            void* obj = g_loh.Allocate(kAllocSize);
+            if (!obj) break;
+            std::memset(obj, 0, kAllocSize);
+            if (i % 2 == 0) survivors.push_back(obj);
+        }
+        for (auto* r : survivors) g_loh.MarkObject(r);
+
+        uint64_t t0 = Rdtsc();
+        g_loh.Sweep();
+        uint64_t t1 = Rdtsc();
+        sweep_ns.push_back(RdtscToNs(t1 - t0));
+    }
+
+    ASSERT_FALSE(sweep_ns.empty()) << "no LOH sweep samples collected";
+    // P95-only per gc.perf.yaml's loh_sweep field contract.
+    GcBenchTestBase::EmitPercentiles("loh_sweep", sweep_ns,
+                                     /*p95_only=*/true, /*p95p99_only=*/false);
+    SUCCEED();
+}

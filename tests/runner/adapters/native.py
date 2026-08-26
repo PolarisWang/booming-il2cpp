@@ -72,6 +72,10 @@ def run(group: dict, timeout: int = 1800, quick: bool = False) -> SuiteResult:
     ctest_exclude = str(group.get("ctest_exclude", "benchmark|stress|soak"))
     ctest_parallel = int(group.get("cmake_parallel", 8))
     ctest_timeout = int(group.get("ctest_timeout", 3600))
+    # Optional ctest -R regex to narrow a group to a subset of targets (e.g. a
+    # GC-only correctness gate).  When set, it is ANDed with the label selection
+    # below.  Same contract-driven philosophy as ctest_config/ctest_exclude.
+    ctest_regex = str(group.get("ctest_regex", ""))
     # P1-2: stress/soak/benchmark as an INDEPENDENT run tier.  By default the
     # adapter excludes them (-LE) so the unit/CI gate stays fast.  Setting
     # CHAOS_GC_TEST_STRESS_ONLY=1 flips to -L "stress|soak|benchmark" so ONLY the
@@ -81,10 +85,13 @@ def run(group: dict, timeout: int = 1800, quick: bool = False) -> SuiteResult:
         label_arg = ["-L", "stress|soak|benchmark"]
     else:
         label_arg = ["-LE", ctest_exclude]
-    rc, out = _run(cwd, ["ctest", "--test-dir", build_dir, "-C", ctest_config,
-                         *label_arg, "-j", str(ctest_parallel),
-                         "--timeout", str(ctest_timeout),
-                         "--output-on-failure"], timeout)
+    cmd = ["ctest", "--test-dir", build_dir, "-C", ctest_config,
+           *label_arg, "-j", str(ctest_parallel),
+           "--timeout", str(ctest_timeout),
+           "--output-on-failure"]
+    if ctest_regex:
+        cmd += ["-R", ctest_regex]
+    rc, out = _run(cwd, cmd, timeout)
     res.duration_s = time.time() - t0
 
     if rc == 124:
