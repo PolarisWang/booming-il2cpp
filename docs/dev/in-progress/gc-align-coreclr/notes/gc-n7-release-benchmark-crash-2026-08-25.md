@@ -5,6 +5,40 @@
 
 ---
 
+## 〇、ASAN 定位突破（2026-08-26 第二轮）——残余堆破坏根因精确定位
+
+> 用 **ASAN 构建**（`build/asan-native`, `-DCMAKE_CXX_FLAGS=/fsanitize=address`，无需 page-heap 注册表）
+> 跑 `YoungGcPauseUnderLoad`，**首跑即精确定位**残余堆破坏根因：
+
+```
+==ERROR: AddressSanitizer: stack-buffer-underflow on address 0x...e3b0
+READ of size 8 at thread_state.cpp:709
+  GcScanAllThreadRoots 保守全栈扫描 lambda  → BGC 线程栈（BgcController::BgcThreadMain gc_bgc.cpp:838）
+Addr ...e3b0 located in stack of thread T1(BGC) at offset 0
+```
+
+### 根因（ASAN 确证）
+**`GcScanAllThreadRoots` 的保守全栈扫描对"线程栈下界"判断错误 → 读越界（stack-buffer-underflow）→ 把越界区的垃圾"nursery 指针"当根晋升并 `*slot=tenured` 写回 → 堆/栈破坏**（manifest：`:537` 跑飞扫描 + teardown `c0000374`）。
+
+两条越界源：
+1. **BGC / finalizer 线程**：其 `stack_limit` 在线程入口（`RegisterThread` 时栈尚浅）捕获后固化，后续扫描时线程栈已加深 → 旧 limit 越界 → 读到未提交栈区的垃圾根。
+2. **当前（collector/main）线程**：同因，且保守扫本来就是自扫——读到自己 AT/阿到 SP 的越界区（ASAN 帧边界也标）。
+
+### 已尝试修复（逐项复测后 REVERT，未破坏基线）
+- **skip GC-internal（BGC/finalizer）线程**（加 `is_gc_thread` 标志 + `MarkCurrentThreadAsGcInternal()`，需在 `RegisterThread` 之后调用，否则 `tls_this_thread` 未设）——消掉 BGC 越界，但 Release 整体反而变差（84% 崩）。
+- **self 线程用 `_AddressOfReturnAddress()`/`PalGetStackBounds` 活读下界**——ASAN 仍标 self 帧边界越界（保守扫读 caller 栈是必需，ASAN 严格栈检查在帧界标）。
+
+### 结论（诚实）
+ASAN **已把根因精确定位到 `GcScanAllThreadRoots` 的保守栈扫描读越界并晋升垃圾**（这是决定性进展）。
+但干净修复需**重新设计 self 线程保守扫 vs 精确扫的边界**——原生 collector 调用者帧（TestBody，无 GcSlotMap）必须靠保守扫保活，而保守扫读栈必到帧界/越界。这是设计决策（非一行的 band-aid）：
+- 方案 A：只对**已注册 GcSlotMap 的 JIT 帧**精确扫，native 帧根通过"暂挂线程的寄存器窗+显式栈根 API"提供（大改根路径）。
+- 方案 B：保守扫下界用**当前线程 live RSP + 页对齐 + guard-page 探针**，只读已提交页（读页前 PalVirtualQuery 验提交）。
+- 建议真机 + ASAN 完成方案 B（最小改动）并回量 Release 崩溃率是否归零。
+
+---
+
+## 二、缺陷 1（✅ 已提交）：`~MarkSweepOldGen` 析构 FreePage 读已释放页
+
 ## 一、背景
 
 GC-N7 目标：用 **RelWithDebInfo** 构建跑 GC 基准（分配吞吐 + young/gen1 GC 暂停），替换 Debug 数值。
