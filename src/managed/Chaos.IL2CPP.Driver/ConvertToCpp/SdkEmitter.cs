@@ -501,8 +501,13 @@ internal sealed class SdkEmitter
         {
             var targetPath = Path.Combine(libDir, platform.GetStaticLibFileName(targetName));
 
-            // Skip if the target already exists (e.g. built from source on Linux)
-            if (File.Exists(targetPath))
+            // On source-built Linux, a locally-built lib is authoritative and must win;
+            // skip copying so we don't clobber it.  On Windows (prebuilt presets), the
+            // preset is always the authoritative source — a pre-existing target is a
+            // STALE artifact from an earlier run (preserved across builds by TPG --clean)
+            // and MUST be overwritten, or the chunk links against libs compiled against an
+            // older pal_eh.h/signature (→ LNK2019).  Do NOT short-circuit here on prebuilt.
+            if (!platform.HasPrebuiltLibraries && File.Exists(targetPath))
             {
                 copiedCount++;
                 continue;
