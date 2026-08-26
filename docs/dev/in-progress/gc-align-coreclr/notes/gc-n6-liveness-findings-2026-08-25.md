@@ -56,21 +56,28 @@ nursery_begin=0x214B5160048
 
 **状态**：已实现（含 `#include "gc_card_table.h"`），**验证被发现 3 的 young-GC 无限循环挂起阻断**——布局版测试当前无法完成一轮，需先解决发现 3。
 
-## 四、发现 3（🟢 根因已修 `200c7dd88`，验证待重载内容校验测试）：typed young-GC 无限循环挂起
+## 四、发现 3（🟡 部分处理：补了一处一致 guard `200c7dd88`；若真根（Phase-3 BFS）仍 OPEN）：typed young-GC 无限循环挂起
 
-> 2026-08-26 更新：根因定位为 **Phase-2 typed 扫描 `instance_size==0 → scan_ptr+=0` 死循环**，已修并提交。
+> 2026-08-26 诚实更正：`200c7dd88` 修的是 **Phase-2 walk 缺 instance_size==0 guard**（对齐 PreciseObjectSize/gc_gen1，属正确的健壮性提升），
+> 但原始挂起用的是 **128B 合法布局（instance_size=128≠0）**，故该 guard **未必是发现3的真正根因**。
+> 真正根因更可能是原 finding 建议的 **Phase-3 BFS worklist_count 无限增长**（`GcScavengeObjectKnownNursery` 无限打日志
+> 发生在 Phase 0/1/2b/3 promotion 路径，非 Phase-2 walk）。**尚未定位确认。**
 
 ### 症状
 
 布局版测试（注册 TypeInfo 的 128B nursery 对象 + 屏障修复 + demotion 修复）**首个 young GC 即挂起**：`scavenge_object_known_nursery` 无限打日志（45s+ 不间断），无 `young trace` 完成行。位置校验版（raw 对象）无此问题。复现率：本会话 3/3 触发（含仅屏障修复、屏障+demotion 修复两种组合）。
 
-### 根因（已修，`200c7dd88`）
+### 已做（健壮性，非确证根因 —— `200c7dd88`）
 
-`gc_young_collector.cpp` Phase-2 精确遍历：`uint32_t obj_size = layout->instance_size; ... scan_ptr += obj_size;`
-只对 `layout==nullptr` 走 `EstimateObjectSize` 回退；**若布局 `instance_size==0`，`scan_ptr += 0` 不前进 → 同一对象无限循环**。
-`PreciseObjectSize` 与所有 `gc_gen1.cpp` walk 均已 `guard instance_size>0`，唯 Phase-2 缺同 guard。
+`gc_young_collector.cpp` Phase-2 精确遍历：`obj_size = layout->instance_size`，只对 `layout==nullptr` 回退；`instance_size==0` 时
+`scan_ptr+=0` 可死循环。已加 `instance_size==0 → EstimateObjectSize` 回退（对齐 PreciseObjectSize 与 gc_gen1 各 walk）。
+验证：old_gen 6/6、region 18/18、card_table 5/5 全绿；gen1 基线一致。**此为正确健壮性 guard，但非发现3确证根因。**
 
-**修复**：`layout==nullptr || instance_size==0` → `EstimateObjectSize` 回退。验证：old_gen 6/6、region 18/18、card_table 5/5 全绿；gen1 基线一致（13/13 + 既有 flaky `SingleLiveObject`）。
+### 待定位（发现3 真根）
+
+**Phase-3 BFS 无限增长**：`GcScavengeObjectKnownNursery` 对 128B typed 对象无限打日志，符合 BFS worklist 循环追加
+（`result->bfs_worklist[bfs_worklist_count++] = target;` 若对象图含自环/交错引用且 `IsInNursery` 判因被误判为
+"未晋升需再 BFS"，可无限增长）。待：重载内容校验测试 → cdb 抓栈确认 `bfs_worklist_count` 是否单调增 → 定位循环追加条件。
 
 ### 已知事实
 
