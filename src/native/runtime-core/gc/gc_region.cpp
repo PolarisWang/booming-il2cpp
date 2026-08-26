@@ -122,6 +122,14 @@ uint8_t GcGetRegionGenPhysical(uintptr_t addr) noexcept {
             return kRegionGenGen1;
         }
     }
+    // In-place demotion (CoreCLR-aligned, GC-N6 #10): a gen1-owned object that
+    // physically resides in an old-gen page (not the gen1 bump region) classifies
+    // as gen1 so the write barrier's ref-gen, the scavenger's condemned filter,
+    // and age tenuring treat it consistently.  Without this, it would read OLD
+    // (the 4MB chunk byte) and the barrier would drop an old->demoted edge.
+    if (IsInDemotedSet(reinterpret_cast<const void*>(addr))) {
+        return kRegionGenGen1;
+    }
     return kRegionGenInvalid;
 }
 

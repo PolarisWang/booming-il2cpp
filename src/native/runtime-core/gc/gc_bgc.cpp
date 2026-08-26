@@ -287,6 +287,28 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
                     });
             }
         }
+
+        // ── In-place demoted objects as BGC roots ───────────────
+        // A gen1-owned object physically resident in an old-gen page is NOT in
+        // the gen1 region whose cards are scanned above, so the concurrent BGC
+        // sweep would otherwise reclaim it.  Re-mark every demoted object (and
+        // its transitive graph via the worker deque) so BGC sweep preserves it
+        // while it is gen1-owned (CoreCLR-aligned in-place demotion, GC-N6 #10).
+        {
+            auto& ctrl = BgcController::Instance();
+            std::lock_guard<std::mutex> lock(G_OldGen().PageMutex());
+            for (auto* page = G_OldGen().PageList(); page != nullptr; page = page->next) {
+                if (!page->in_use.load(std::memory_order_acquire)) continue;
+                for (int32_t i = 0; i < page->demoted_count.load(std::memory_order_acquire); i++) {
+                    char* obj = page->demoted[i].addr;
+                    if (obj == nullptr) continue;
+                    if (G_OldGen().BgcTryMark(obj)) {
+                        std::lock_guard<std::mutex> dl(ctrl.bgc_workers_[0].steal_mutex);
+                        ctrl.bgc_workers_[0].deque.push_back(obj);
+                    }
+                }
+            }
+        }
     }
 
     // Drain again after Gen1 re-scan.

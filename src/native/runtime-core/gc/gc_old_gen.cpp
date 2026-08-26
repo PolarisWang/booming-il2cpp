@@ -291,6 +291,9 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
             recycled->preferred_sc_idx = (preferred_sc_idx >= 0 && preferred_sc_idx < kOldGenNumSizeClasses)
                 ? static_cast<int8_t>(preferred_sc_idx) : static_cast<int8_t>(-1);
             recycled->in_use.store(true, std::memory_order_release);
+            // Demoted set is page-header-stale after recommit (Windows zeroes the
+            // page).  Reset explicitly for clarity/safety.
+            recycled->demoted_count.store(0, std::memory_order_release);
 
             // Clear bitmap (page_size/payload_size/bitmap_bytes were restored
             // from PoolEntry after recommit — Windows zeroes the entire page
@@ -323,6 +326,7 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
     mem->bitmap_bytes = bitmap_bytes;
     mem->scanning = scanning;
     mem->in_use.store(true, std::memory_order_release);
+    mem->demoted_count.store(0, std::memory_order_release);  // in-place demotion set starts empty
 
     // Mark oversized pages so sweep handles them differently.
     // A page is oversized only when holding a single large object (>32KB).
@@ -618,6 +622,14 @@ bool MarkSweepOldGen::IsInOldGen(const void* ptr) const {
         }
     }
     return false;
+}
+
+bool IsInDemotedSet(const void* ptr) {
+    if (ptr == nullptr) return false;
+    // Demoted objects live in old-gen pages; locate the page then scan its
+    // inline demoted array.  Muted only at STW safepoint; read-only here.
+    auto* page = G_OldGen().FindPage(ptr);
+    return page != nullptr && page->DemotedContains(ptr);
 }
 
 uint64_t MarkSweepOldGen::DiagCountOxFFBytes() const {
@@ -2195,6 +2207,14 @@ void MarkSweepOldGen::PlanPageEvacuation(OldGenPage* page, CompactPlan& out_plan
                 if (is_pinned) continue;
             }
 
+            // Skip IN-PLACE demoted objects -- gen1-owned (CoreCLR-aligned in-place
+            // demotion), must stay at their original address.  Owned by the gen1
+            // collection and tracked in the page's demoted set; evacuating them
+            // would move a gen1-owned object and stale the set.
+            if (page->DemotedContains(obj)) {
+                continue;
+            }
+
             // Allocate target space in old-gen (under STW, no concurrent frees).
             // This is safe during Phase 4b because sweep already ran and
             // free lists are populated.
@@ -2664,6 +2684,16 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                         G_OldGen().ScanRangeForRoots(gen1->begin, s_end);
                     }
                 }
+
+                // Scan IN-PLACE demoted objects as roots.  A demoted object is a
+                // live gen1-owned object physically resident in an old-gen page
+                // (GC-N6 #10, CoreCLR-aligned in-place demotion).  Because its
+                // mark bit is cleared at the start of this full-GC mark phase
+                // (like every page's bitmap), it must be re-rooted here or the
+                // sweep would reclaim a still-gen1-owned object.  Rooting it (and
+                // closing over its transitive graph via the mark stack) keeps it
+                // and everything it references alive across the full collection.
+                G_OldGen().ScanInPlaceDemotedRoots();
                 return true;
             });
         if (mark_stack_.size() > before_roots) {
@@ -2964,9 +2994,11 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     }
 
     // Phase 4a: Relocate references for demoted objects (Gen2 → Gen1).
-    // Must happen after sweep (old pages are still valid for slot scanning)
-    // but before compaction (which would invalidate page layout).
-    if (!demotion_entries.empty()) {
+    // IN-PLACE (CoreCLR-aligned, GC-N6 #10): demotion no longer moves objects, so
+    // there are no addresses to rewrite — DemotionRelocate (old→old) is a no-op.
+    // Skip it to avoid the wasteful full old-gen/gen1/root walk.  (The historical
+    // moving demotion needed this to fix the stale-ref window that SEGFAULTed.)
+    if (!demotion_entries.empty() && demotion_entries[0].new_addr != demotion_entries[0].old_addr) {
         DemotionRelocate(demotion_entries, *this);
     }
 
@@ -3156,6 +3188,27 @@ void MarkSweepOldGen::ScanRangeForRoots(void* range_begin, void* range_end) {
 
         if (MarkObject(val)) {
             mark_stack_.push_back(val);
+        }
+    }
+    DrainMarkStack();
+}
+
+void MarkSweepOldGen::ScanInPlaceDemotedRoots() {
+    // Walk every old-gen page's inline demoted set and mark each gen1-owned
+    // object as a root.  Because its mark bit is cleared at the start of the
+    // full-GC mark phase (bitmaps.Clear), this keeps a demoted (gen1-owned)
+    // object alive across the full collection; DrainMarkStack closes its
+    // transitive graph.  PageList_ is stable under the STW safepoint + the
+    // PageMutex held by the caller (Collect's root scan).
+    std::lock_guard<std::mutex> lock(mutex_);
+    for (auto* page = page_list_; page != nullptr; page = page->next) {
+        if (!page->in_use.load(std::memory_order_acquire)) continue;
+        for (int32_t i = 0; i < page->demoted_count.load(std::memory_order_acquire); i++) {
+            char* obj = page->demoted[i].addr;
+            if (obj == nullptr) continue;
+            if (MarkObject(obj)) {
+                mark_stack_.push_back(obj);
+            }
         }
     }
     DrainMarkStack();

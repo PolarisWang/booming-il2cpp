@@ -76,6 +76,24 @@ struct OldGenPage {
     // Free-list heads (one per size class, indexed by kOldGenSizeClasses).
     OldGenFreeBlock* free_lists[kOldGenNumSizeClasses];
 
+    // ── In-place demotion (CoreCLR-aligned, GC-N6 #10) ──
+    // A "demoted" object is a live gen1-owned object that stays resident in this
+    // OLD-GEN page (not copied to the gen1 region).  It keeps its old-gen page
+    // mark-bit SET (so sweep/BGC preserve it) while being tracked here so the
+    // gen1 collection can scan it, the full GC can root it, and GetRegionGen can
+    // classify it as gen1.  This replaces the fragile physically-moving demotion
+    // whose DemotionRelocate could leave a stale ref → SEGFAULT.
+    // Fixed inline array (worst-case a fragmented 64KB page holds at most a few
+    // dozen live objects) — allocation-free, no lifetime/lock-free-array hazards.
+    struct DemotedObj {
+        char* addr;                // object start within Payload()
+        CHAOS_IL2CPP_SIZE size;    // instance size (bytes)
+        bool  must_promote;        // survived >=1 gen1 collection (age)
+    };
+    static constexpr int kMaxDemotedPerPage = 128;
+    DemotedObj demoted[kMaxDemotedPerPage];
+    std::atomic<int32_t> demoted_count{0};
+
     // Mark bitmap follows immediately after the header at offset sizeof(OldGenPage).
     unsigned char* MarkBitmap() {
         return reinterpret_cast<unsigned char*>(this) + sizeof(OldGenPage);
@@ -97,7 +115,56 @@ struct OldGenPage {
     /// containing object by backward bitmap scan + TypeInfo validation.
     /// Returns nullptr if no valid containing object is found.
     void* FindObjectContaining(const void* interior_ptr) const;
+
+    // ── In-place demotion helpers (async/reused by gen1 collection + full GC) ──
+    /// Add a gen1-owned object resident on this page (addr within Payload()).
+    /// Entry is fully written BEFORE demoted_count is published so a concurrent
+    /// reader that observes the new count sees a valid entry.  Writers are STW.
+    /// Returns false if the inline array is full (demotion is best-effort).
+    bool DemoteInPlace(char* addr, CHAOS_IL2CPP_SIZE size, bool must_promote = false) {
+        int32_t n = demoted_count.load(std::memory_order_acquire);
+        if (n >= kMaxDemotedPerPage) return false;
+        demoted[n] = {addr, size, must_promote};
+        demoted_count.store(n + 1, std::memory_order_release);
+        return true;
+    }
+    /// Remove the gen1-owned object at exactly @a addr (idempotent).  Returns the
+    /// removed entry (addr==nullptr if none).  STW.
+    DemotedObj DemoteRemove(char* addr) {
+        DemotedObj none{nullptr, 0, false};
+        int32_t n = demoted_count.load(std::memory_order_acquire);
+        for (int32_t i = 0; i < n; i++) {
+            if (demoted[i].addr == addr) {
+                DemotedObj e = demoted[i];
+                demoted[i] = demoted[n - 1];
+                demoted_count.store(n - 1, std::memory_order_release);
+                return e;
+            }
+        }
+        return none;
+    }
+    /// Is @a addr (or an interior pointer into) a gen1-owned object on this page?
+    /// Concurrent-safe: reads count once, then only valid entries [0,count).
+    bool DemotedContains(const void* ptr) const {
+        const auto* cp = static_cast<const char*>(ptr);
+        int32_t n = demoted_count.load(std::memory_order_acquire);
+        for (int32_t i = 0; i < n; i++) {
+            const DemotedObj& e = demoted[i];
+            if (e.addr != nullptr && cp >= e.addr &&
+                cp <  e.addr + static_cast<ptrdiff_t>(e.size)) {
+                return true;
+            }
+        }
+        return false;
+    }
 };
+
+/// Is @a ptr a gen1-owned object physically resident in an old-gen page (i.e. in
+/// this mark-sweep old gen's in-place demoted set)?  O(log n) via FindPage +
+/// per-page demoted-array scan.  Used to extend gen1-ness / classification for
+/// addresses that are not in the gen1 bump region but are demoted-old-gen.  Only
+/// meaningful when @a ptr is inside an old-gen page.
+bool IsInDemotedSet(const void* ptr);
 
 // Finalizer table entry: maps object -> finalizer callback.
 struct FinalizerEntry {
@@ -243,6 +310,13 @@ public:
     /// and mark any found objects as reachable roots for the next collection.
     /// Runs DrainMarkStack() after scanning.
     void ScanRangeForRoots(void* range_begin, void* range_end);
+
+    /// Mark every in-place-demoted object (gen1-owned, physically resident in an
+    /// old-gen page) as a root so a full GC never sweeps a still-gen1-owned object.
+    /// CoreCLR-aligned in-place demotion (GC-N6 #10).  Runs during the full-GC
+    /// mark root phase, then DrainMarkStack() closes over each demoted object's
+    /// transitive graph.
+    void ScanInPlaceDemotedRoots();
 
     /// Scan dirty cards across all old-gen pages for young GC.
     /// Calls @a callback(card_index, card_start, card_end) for each dirty card

@@ -281,3 +281,79 @@ nursery_begin=0x214B5160048
   demote 破坏性 bug（A2b memory 的 gc_demotion TypeInfo-less fallback 担忧现形，因 hang 修好后可达）。task#10。
 - gen1_test teardown SEGFAULT（atoexit GcDumpStats/全局析构与后台线程 race，cdb 下不复现）。
 
+
+## 八、随修 #10：mode2 cycle1 CrossPageCompact 崩（demotion 移动性 + CoreCLR 对照）
+
+**崩溃点**（marker 定位）：probe mode2 cycle1 的 full collect 到 `CrossPageCompact`（`pages=1 objects=20` 日志后、
+`cross_page_compact_done` 前）崩，`READ_ADDRESS=0xffffffffffffffff`（读 `-1`/0xFF 引用）。DemotionRelocate 各 phase
+与 DecideCompactMode 都完成，崩在 GlobalRelocate/compaction 读到一个 stale/0xFF 引用。
+
+**根因类别**：**Chaos 物理移动式 demotion**（`gc_demotion.cpp` gen2→gen1 `memcpy`）+ **手动 blanket lower_bound 修复引用**
+（`DemotionRelocate` / `CrossPageCompact::GlobalRelocate`），极易漏/误读引用 → 移动后旧地址 0xFF/回收 → 下次访问读 `-1`。
+
+**CoreCLR 对照**（`D:\OpenSource\dotnet\runtime\src\coreclr\gc\`，USE_REGIONS 版，由 subagent 调研）：
+- **CoreCLR demotion 不物理移动 gen2 对象**。demoted 对象留原地址，只 `set_region_plan_gen_num` 降代 + **保持 card 不清理**
+  （`card_table.cpp:1081` 跳过 `clear_gen1_cards` 当 `settings.demotion`），gen1 重扫即可。`relocate_compact.cpp:620-663`
+  `check_demotion_helper` 只 `set_card`，不改子地址 → **无 "移动后修全部引用" 的脆弱性问题**。
+- 任何被移对象（真 compact/evacuation）统一走 `relocate_address`（`relocate_compact.cpp:482-578`，brick+tree，不遗漏），
+  且所有引用（stack/root/handle/interior/跨代）都过同一函数。
+- verify_heap 遇 0xFF 引用会 `FATAL_GC_ERROR`（`vm/object.cpp` Validate→SanityCheck）；stale ref 只有在引到已释放再
+  0xFF/复用内存时才崩——即 **被移动对象的引用没被更新** 这一不变量被打破。
+
+**结论**：Chaos 的移动式 demotion + 手动 reloc 是设计脆弱点（正踩中 A2b memory 的 "gc_demotion TypeInfo-less fallback
+破坏性" 预警）。CoreCLR 用 **原地 demotion + 保持 card** 从根本上消除这类 bug。
+
+**修复方向（提案，待用户选）**：
+- **方案 A（CoreCLR 对齐，推荐）**：demotion 改「原地 + 保卡」，不 `memcpy` gen2→gen1；对象留 old-gen 原位，
+  `SetRegionGen(→gen1)` 重标记 + 清 old-gen mark bit（不回收页）→ 后续 gen1 collection 把 old-gen 页里的 gen1 对象当
+  survivor 扫；消除「移动后修引用」。改动大（demotion 语义 + gen1 collection 对跨页 gen1 对象的处理），需重点回归。
+- **方案 B（保守）**：只修 `DemotionRelocate` / `CrossPageCompact` 的漏引用点（具体是 cycle1 CrossPageCompact 读到
+  的 `-1` 来源）。改动小但治标 — 仍保留移动式 demotion 的脆弱性，且需精确定位 `-1` 出处。
+
+**方案 A 落地验证结果（修正）**：把 moving-demotion 直接 disabled（no-op）**回归**了 `chaos_gc_region_barrier_stress_test`
+（SEGFAULT，exit 139）—— demotion 在该测试是 **load-bearing**（full-collect/CrossPageCompact 依赖它把对象搬离碎片页）。
+所以"直接禁用 demotion"不可行。mode3 仍绿（magic-miss=0），但 full-collect 路径崩。
+
+**修正结论**：方案 A 的"就地标 gen1"在 Chaos 的 `IsInGen1`（gen1=独立 bump region，仅区间检查）模型下不可行；"禁用"又回归
+stress test。真正可行的只有：
+- **方案 B**（保留 moving-demotion，修 DemotionRelocate/CrossPageCompact 的漏引用）——demotion 是 load-bearing，需
+  精确定位 probe mode2 cycle1 CrossPageCompact 读到的 `-1` 来源（疑似 page_list_/free-list 在 demotion+sweep 后
+  写入 -1，非简单漏引用）。改动小、风险可控，贴合"demotion 保留但不再崩"。
+- **完整方案 A**：重写 gen1 collection 以扫描 old-gen 页里标 gen1 的对象（跨页 gen1 模型，对标 CoreCLR regions）。
+  架构改动大、风险高。
+
+===#10 现状===：根因=移动式 demotion 的 relocation 缺口；方案 A"禁用"回归 stress test 已撤销（demotion 已恢复，stress
+green）。待用户在新认知下重选：B（修 relocation 缺口，推荐）vs 完整 A（重写 gen1 模型）。
+
+### 方案A Phase-1 实现状态（2026-08-26）——in-place demotion 核心已落地，但暴露 cascades
+
+已实现（Phase 1.1-1.6 + compaction-skip）：
+- `OldGenPage` 加固定内联 demoted set（`DemotedObj[128]` + count），page 复用/新页清零。
+- `CollectDemotionCandidates` 改 in-place：不 memcpy、不清 mark bit，记录进 page demoted set（log 实测 "in-place
+  gen1-owned in old-gen pages"，384+264 对象）。
+- `DemotionRelocate` gate 掉（entries old==new 时不跑，log 消失）→ **原 moving-demotion stale-ref bug 消除**。
+- full-GC `ScanInPlaceDemotedRoots`（demoted 对象当 root，避免被 sweep 回收）。
+- `GcGetRegionGenPhysical` 查 demoted set → gen1。
+- BGC STW gen1 re-mark 加 demoted scan。
+- `PlanPageEvacuation` 跳过 demoted 对象（不 evacuate gen1-owned）。
+
+**但 mode2 实测暴露 2 个 cascade 问题（未解）**：
+1. **cycle0 full collect 60 秒**（`pause_ns=60016704300`）—— in-place demoted 对象与 full-GC compaction/relocation
+   交互产生病态性能（疑似 demoted 地址在 relocation/global_relocate 被反复读/写，或 compaction 计划含 demoted 引发
+   O(n^2)/死循环）。compaction-skip 已把 `pages=4 objects=80`（从 391 降），但仍秒级慢。
+2. **cycle1-entry 崩**（pre-cycle1 后、collect 前）——与 demotion-disabled 时同一第二崩溃，独立于 demotion bug，
+   Task#10 之外。
+
+**诚实结论**：full 方案 A 是极深、cascading 的多 session 重构（正踩中 plan 的 "highest-risk interactions"：compaction、
+perf、连环崩溃）。Phase 1 in-place core 已验证生效（demotion 不再移、不再 stale-ref），但 full-GC compaction 与
+in-place demoted 的交互（60s perf + 后续崩）需要额外专项。当前工作树有未提交的 Phase 1 改动。
+
+**Phase 1 收敛（死磕后）**：
+- in-place demotion 已实现 + 确定性绿（mode3 magic-miss=0、region/young/card/old_gen 全绿、barrier stress 1/1）。
+- demoted set 改 atomic demoted_count（barrier 热路径并发读安全：entry 先写后 release count；remove swap + store）。
+- **原始 demotion stale-ref crash（task#10 主因）已消除**（DemotionRelocate gated，mode3/suite/stress 确定性绿）。
+- **mode2 仍崩（确定性 4/4），但定位到 post-Collect 尾部**（marker：`COLLECT_END` 后、`RunFinalizers` 附近，读 -1）——
+  **独立于 demotion**（demotion-disabled 时同样崩），是 Collect 尾部/finalizer 的 pre-existing bug，非本 task 根因。
+- cdb 无法稳定捕获（debugger 改时序），崩溃对 instrumentation 敏感（flaky/timing）。
+- 结论：task#10 主因（demotion stale-ref）已由 in-place Phase 1 修复；mode2 尾部崩是另一个独立 bug（finalizer/
+  后处理），建议独立 session 专攻。Phase 1 改动未提交（工作树）。

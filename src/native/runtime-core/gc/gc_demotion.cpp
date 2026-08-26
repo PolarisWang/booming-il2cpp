@@ -103,22 +103,23 @@ std::vector<DemotionEntry> CollectDemotionCandidates(
             // Compute the slot range for this object.
             CHAOS_IL2CPP_SIZE obj_slots = (obj_size + sizeof(void*) - 1) / sizeof(void*);
 
-            // Try to allocate in Gen1.
-            void* gen1_addr = TryAllocateInGen1(obj_size);
-            if (gen1_addr == nullptr) {
-                // Gen1 is full — skip demotion for this object, keep in Gen2.
+            // IN-PLACE demotion (CoreCLR-aligned, GC-N6 #10): DO NOT move the
+            // object to the gen1 region.  It stays resident in this old-gen page
+            // at its original address, tracked in the page's demoted set so gen1
+            // collection can scan it, full GC can root it, and classification
+            // (GetRegionGen) reports it as gen1.  Its old-gen mark bit is KEPT SET
+            // so old-gen sweep / BGC preserve it while it is gen1-owned.  Because
+            // the address never changes, no external reference fix-up is needed —
+            // eliminating the stale-reference class that crashed (probe mode2).
+            // The old physically-moving demotion memcpy'd to TryAllocateInGen1 and
+            // cleared the mark bit (bm.ClearRange), leaving a stale ref risk.
+            if (!page->DemoteInPlace(static_cast<char*>(obj_addr), obj_size, /*must_promote=*/false)) {
+                // Page's inline demoted array is full — skip this object (demotion
+                // is best-effort; the object stays a normal gen2 object).
                 s += obj_slots;
                 continue;
             }
-
-            // Copy the object payload to Gen1.
-            std::memcpy(gen1_addr, obj_addr, obj_size);
-
-            // Clear mark bitmap bits so sweep reclaims the old Gen2 space.
-            bm.ClearRange(s, obj_slots);
-
-            // Record relocation.
-            entries.push_back({obj_addr, gen1_addr, obj_size});
+            entries.push_back({obj_addr, obj_addr, obj_size});
             total_demoted += obj_size;
 
             // Advance past this object.
@@ -128,7 +129,7 @@ std::vector<DemotionEntry> CollectDemotionCandidates(
 
     if (!entries.empty()) {
         CHAOS_IL2CPP_LOG_INFO_M("CRAG",
-            "demotion: {0} objects, {1} bytes relocated to Gen1",
+            "demotion: {0} objects, {1} bytes (in-place gen1-owned in old-gen pages)",
             static_cast<unsigned long>(entries.size()),
             static_cast<unsigned long long>(total_demoted));
     }
