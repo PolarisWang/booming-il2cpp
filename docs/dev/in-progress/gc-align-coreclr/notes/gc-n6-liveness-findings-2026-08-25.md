@@ -357,3 +357,18 @@ in-place demoted 的交互（60s perf + 后续崩）需要额外专项。当前�
 - cdb 无法稳定捕获（debugger 改时序），崩溃对 instrumentation 敏感（flaky/timing）。
 - 结论：task#10 主因（demotion stale-ref）已由 in-place Phase 1 修复；mode2 尾部崩是另一个独立 bug（finalizer/
   后处理），建议独立 session 专攻。Phase 1 改动未提交（工作树）。
+
+## 十、residual flakiness 专项（task#16，未根治 — 诚实状态）
+
+试图用 ASan/gflags 抓取 GC residual flakiness（stress 间歇 crash/hang；young_collector 'plan-gen rebind' ~1/3）：
+- **尝试的 fix（GcGetRegionGenPhysical 加 old-gen→OLD 物理权威）**：修好了 young_collector（0/12），但**让 stress 恶化到 9/10 crash**（barrier/scavenge 分类反转）→ 已回滚。**两个 flakiness 根因对立/交互，naive 分类 fix 方向错误**。
+- **ASan 树**：obj 编译产出，但 contract test exe 未 link/emitted（ASan 运行库加载/链接问题），无法本环境抓取。
+- marker/cdb 都会避开 flakiness（timing 敏感），无法可靠复现。
+- **结论**：这是 pre-existing 类 timing-dependent race（in-place demotion 交叠暴露），需要**专门的 sanitizer/时序 session**（先修好 ASan 树），非盲修量级。当前 8 个 fix commit 是确定性测试上的正确改进，但不能宣称 stress 稳定；未 push（用户选先根治再推）。
+
+### residual flakiness 专项 — 追加（task#16 未根治，诚实收尾）
+- 关键混淆澄清：`build/native` 与 `build/asan-native` **共享 `artifacts/native-runtime-core-test/Debug/` 输出目录 → 互相覆盖 exe**。早期跑的 stress 有时是 ASan-instrumented 版（行为/崩点/时序大不同），造成"flakiness 程度"误判。
+- 用**正常 Debug 版**重启基线：stress 7/10 pass、3/10 HANG(124)（+偶发早崩 139）——真实 flakiness 存在，但没我之前看到的 9/10 那么惨（那是 ASan exe）。
+- cdb 每 attempt 70s 都避开（更改时序，不崩）；marker 也避开；ASan exe link 但 ASan runtime 环境未就绪。
+- **结论**：stress crash/hang 是真实 pre-existing/hard timing race，工具墙（cdb/marker/ASan-未就绪/共享输出目录混淆）。**盲试已到递减点**。根治需独立 session：先隔离 asan 树输出目录 + 修好 ASan runtime，再跑 stress 抓 exact 内存错误。
+- 交接：8 个 fix commit 是确定性正确改进，未 push；stress flakiness 单独 track。
