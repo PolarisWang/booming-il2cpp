@@ -35,6 +35,20 @@ ASAN **已把根因精确定位到 `GcScanAllThreadRoots` 的保守栈扫描读�
 - 方案 B：保守扫下界用**当前线程 live RSP + 页对齐 + guard-page 探针**，只读已提交页（读页前 PalVirtualQuery 验提交）。
 - 建议真机 + ASAN 完成方案 B（最小改动）并回量 Release 崩溃率是否归零。
 
+### 方案 A 实测（用户选定，2026-08-26，已 REVERT）
+按"采用方案 A"指令实施方案 A 落地形态，逐项实证均未稳定改善，已回滚基线：
+| 实现 | 结果 |
+|------|------|
+| **纯删保守扫**（方案A核心，留 T4/解释器精确扫） | Release `YoungGcPauseUnderLoad` **88% 崩**（22/25）—原生 TestBody 帧（无 GcSlotMap）丢根 under-retention。**证伪"直接弃保守扫"。** |
+| **skip GC-internal(BGC/finalizer) + self 活取下界** | Release 84% 崩。 |
+| **方案A落地：保留保守扫 + self live-RSP起点 + 每线程页提交钳位(`PalVirtualAllocIsValid`)** | ASAN 仍 100% 标 `stack-buffer-underflow`。**关键发现**：ASAN 把"读活帧以下 **已提交**栈"也标栈越界（ASAN 对栈 buffer 的模型=活帧，非整段保留栈）→ 保守扫读深栈在 ASAN 模型下必然标，**该 underflow 部分是 ASAN 模型限制，非内存非法的直接证据**。Release 崩溃率不受此钳位改善。 |
+
+### 最终判定（诚实）
+- **保守扫读深栈**是 ASAN 热点，但**不能仅凭它判定为 Release `c0000374` 的唯一根因**——确切坏字节需真机 page-heap（`gflags /p /full`）归因，沙箱注册表写被拒。
+- **沙箱内无任何补丁（A/B 各种形态）能稳定归零 Release 崩溃率**（基线 30-60% 波动）。
+- 按三次修复规则，**停止沙箱内迭代**。真机路径 = 开 page-heap → 复现定坏字节 → 据确切越界点修复（届时 A/B 取舍得当）。
+- 所有已提交代码（`904114c3d` 双真bug + GC-N8/N9/N10/N11）保持有效、基线干净。
+
 ---
 
 ## 二、缺陷 1（✅ 已提交）：`~MarkSweepOldGen` 析构 FreePage 读已释放页
