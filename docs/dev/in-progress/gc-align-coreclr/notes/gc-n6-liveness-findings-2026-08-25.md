@@ -1,6 +1,6 @@
 # GC-N6 调查记录 — 内容存活校验暴露的运行时缺陷
 
-> 日期：2026-08-25 | 状态：3 个发现（1 已修复提交 / 1 已实现待验证 / 1 挂起专项）
+> 日期：2026-08-25 | 状态：3 个发现（2 已修复提交 `ef0012d49`+`200c7dd88` / 1 已实现待验证 / 内容校验测试重载中）
 > 关联：GC-N6（世代写屏障压力确定性化）、A2b 跨代引用链
 
 ---
@@ -56,11 +56,21 @@ nursery_begin=0x214B5160048
 
 **状态**：已实现（含 `#include "gc_card_table.h"`），**验证被发现 3 的 young-GC 无限循环挂起阻断**——布局版测试当前无法完成一轮，需先解决发现 3。
 
-## 四、发现 3（🔴 OPEN，升级专项）：young GC 对布局版（typed）对象的无限循环挂起
+## 四、发现 3（🟢 根因已修 `200c7dd88`，验证待重载内容校验测试）：typed young-GC 无限循环挂起
+
+> 2026-08-26 更新：根因定位为 **Phase-2 typed 扫描 `instance_size==0 → scan_ptr+=0` 死循环**，已修并提交。
 
 ### 症状
 
 布局版测试（注册 TypeInfo 的 128B nursery 对象 + 屏障修复 + demotion 修复）**首个 young GC 即挂起**：`scavenge_object_known_nursery` 无限打日志（45s+ 不间断），无 `young trace` 完成行。位置校验版（raw 对象）无此问题。复现率：本会话 3/3 触发（含仅屏障修复、屏障+demotion 修复两种组合）。
+
+### 根因（已修，`200c7dd88`）
+
+`gc_young_collector.cpp` Phase-2 精确遍历：`uint32_t obj_size = layout->instance_size; ... scan_ptr += obj_size;`
+只对 `layout==nullptr` 走 `EstimateObjectSize` 回退；**若布局 `instance_size==0`，`scan_ptr += 0` 不前进 → 同一对象无限循环**。
+`PreciseObjectSize` 与所有 `gc_gen1.cpp` walk 均已 `guard instance_size>0`，唯 Phase-2 缺同 guard。
+
+**修复**：`layout==nullptr || instance_size==0` → `EstimateObjectSize` 回退。验证：old_gen 6/6、region 18/18、card_table 5/5 全绿；gen1 基线一致（13/13 + 既有 flaky `SingleLiveObject`）。
 
 ### 已知事实
 
