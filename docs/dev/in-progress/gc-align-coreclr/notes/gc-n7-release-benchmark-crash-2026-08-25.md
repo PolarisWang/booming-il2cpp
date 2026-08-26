@@ -49,6 +49,24 @@ ASAN **已把根因精确定位到 `GcScanAllThreadRoots` 的保守栈扫描读�
 - 按三次修复规则，**停止沙箱内迭代**。真机路径 = 开 page-heap → 复现定坏字节 → 据确切越界点修复（届时 A/B 取舍得当）。
 - 所有已提交代码（`904114c3d` 双真bug + GC-N8/N9/N10/N11）保持有效、基线干净。
 
+### CoreCLR 权威做法（用户指引 D:\OpenSource\dotnet，2026-08-26 研读定稿）
+CoreCLR（`coreclr/vm/gcenv.ee.cpp ScanStackRoots` + `siginfo.cpp PromoteCarefully`）**完全不裸扫 `[stack_limit, stack_base)`**：
+
+1. **低界 = 活帧 top-of-stack，不用陈旧 thread-entry limit**：
+   `topStack = pThread->GetFrame()`（InlinedCallFrame 取 `GetCallSiteSP()`），`sc->stack_limit = topStack`，
+   扫描只从活 SP 向上走。
+2. **主路径是精确根映射**：`pThread->StackWalkFrames(GcStackCrawlCallBack)` 按 JIT 方法逐帧用精确 GCInfo
+   报活指针槽。**`FEATURE_CONSERVATIVE_GC` 保守扫是可选 debug 配置**（`GetGCConservative()`），默认 OFF。
+3. **保守扫（opt-in）只扫活帧之上 + 全 pinned/interior**：`bottomStack=GetCachedStackBase()`，
+   `for(walk=topStack; walk<bottomStack; walk++)`——从 live SP 起，绝不读其下；报 `GC_CALL_INTERIOR|PINNED` 不写回。
+4. **`PromoteCarefully` 晋升前校验**：`IsAddressInStack(*ppObj) && *ppObj >= sc->stack_limit` 才晋升，
+   从根上挡掉"越界区垃圾指针"被误晋升。
+
+→ 本 repo 的缺位正是这四点：裸扫陈旧 `stack_limit`（无活帧低界）、保守扫为默认、晋升无 `PromoteCarefully` 校验。
+我已按 CoreCLR 思路逐项落地（self 活 RSP 低界 + 提交页钳位 + 预览），但 **Intel 基准的原生 TestBody 帧无 GCInfo，
+repo 又缺原生帧根协议**，纯精确扫必 under-retain（实验 88% 崩）。CoreCLR 能这么做是因为它有完整 JIT GCInfo +
+原生互操作根协议。**完整迁移需先补这两块基建** = 真机大改，非沙箱可收口。
+
 ---
 
 ## 二、缺陷 1（✅ 已提交）：`~MarkSweepOldGen` 析构 FreePage 读已释放页
