@@ -120,3 +120,42 @@ TEST(GcScheduler, DynamicTuningSignalsRoundTrip) {
     EXPECT_FLOAT_EQ(g_gc_scheduler.MemoryLoad(), 1.0f);
 }
 
+// ── Test 10: GC-N8 dynamic_tuning Phase-2 servo tension ──────────────
+
+TEST(GcScheduler, DynamicTuningTensionIsBoundedPureFunction) {
+    // Healthy allocator → tension ≈ 0 (never tightens GC).
+    {
+        g_gc_scheduler.SetOldGenFragmentation(0.0f);
+        g_gc_scheduler.SetFreeListReuseRate(1.0f);
+        g_gc_scheduler.SetMemoryLoad(0.0f);
+        EXPECT_NEAR(g_gc_scheduler.DynamicTension(), 0.0f, 0.02f);
+    }
+    // Stressed allocator → high tension (> 0.5): fragmented, no free-list
+    // reuse, system memory pressure.
+    {
+        g_gc_scheduler.SetOldGenFragmentation(1.0f);
+        g_gc_scheduler.SetFreeListReuseRate(0.0f);
+        g_gc_scheduler.SetMemoryLoad(1.0f);
+        EXPECT_GT(g_gc_scheduler.DynamicTension(), 0.5f);
+        // Bounded to ~1.0 (can't exceed the normalized input range).
+        EXPECT_LE(g_gc_scheduler.DynamicTension(), 1.0f);
+    }
+    // Tension stays in [0,1] across mixed inputs.
+    for (int f = 0; f <= 5; f++) {
+        g_gc_scheduler.SetOldGenFragmentation(static_cast<float>(f) / 5.0f);
+        g_gc_scheduler.SetFreeListReuseRate(0.5f);
+        g_gc_scheduler.SetMemoryLoad(0.5f);
+        EXPECT_GE(g_gc_scheduler.DynamicTension(), 0.0f);
+        EXPECT_LE(g_gc_scheduler.DynamicTension(), 1.0f);
+    }
+    // Higher reuse (all else equal) must LOWER tension (negative feedback).
+    g_gc_scheduler.SetOldGenFragmentation(0.5f);
+    g_gc_scheduler.SetMemoryLoad(0.3f);
+    g_gc_scheduler.SetFreeListReuseRate(0.1f);
+    const float t_low_reuse = g_gc_scheduler.DynamicTension();
+    g_gc_scheduler.SetFreeListReuseRate(0.9f);
+    const float t_high_reuse = g_gc_scheduler.DynamicTension();
+    EXPECT_LT(t_high_reuse, t_low_reuse)
+        << "higher free-list reuse lowers dynamic tuning tension";
+}
+

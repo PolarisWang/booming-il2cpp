@@ -496,6 +496,23 @@ public:
             memory_load_fp_.load(std::memory_order_acquire)) / 1000.0f;
     }
 
+    // ── GC-N8 Phase-2: dynamic_tuning tension (servo 决策信号) ─────
+    /// Combine the three Phase-1 signals into a single [0, 1] "tension"
+    /// factor, CoreCLR dynamic_tuning style (fragmentation counter + free-list
+    /// rate + memory load).  High tension → old-gen is fragmented / not
+    /// reusing free memory / under system memory pressure → GC should be more
+    /// aggressive.  Called from the young-trigger path in DecideCollection to
+    /// tighten pacing closed-loop.  Pure function of the stored signals.
+    float DynamicTension() const noexcept {
+        const float frag = OldGenFragmentation();      // [0,1], higher = emptier/fragmented
+        const float reuse = FreeListReuseRate();       // [0,1], higher = reusing free blocks
+        const float mem_load = MemoryLoad();           // [0,1], higher = system pressure
+        // reuse is inverted (low reuse → high tension).  Equal weights so no
+        // single signal dominates; a genuinely healthy allocator (high reuse,
+        // low frag, low mem) yields tension → 0 and never tightens.
+        return 0.34f * frag + 0.33f * (1.0f - reuse) + 0.33f * mem_load;
+    }
+
 private:
     std::atomic<uint32_t> old_gen_fragmentation_fp_{0};
     std::atomic<uint32_t> free_list_reuse_rate_fp_{0};

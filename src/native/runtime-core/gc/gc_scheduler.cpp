@@ -466,6 +466,21 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
         if (scaled_young_multiplier < 1.0f) scaled_young_multiplier = 1.0f;
     }
 
+    // GC-N8 Phase-2: dynamic_tuning servo closed loop.  Fold the signal-derived
+    // tension into the young pacing.  High tension (fragmented old-gen, low
+    // free-list reuse, or memory load) tightens the trigger (smaller effective
+    // multiplier → more frequent young GC → less old-gen accumulation), which
+    // in turn reduces fragmentation/pressure — a genuine negative feedback loop.
+    // Bounded to [~0.6×, 1.0×] of the base so it can never make GC runaway.
+    static constexpr float kServoGain = 0.4f;   // tension=1.0 → multiply by 0.6
+    static constexpr float kServoFloor = 0.6f;  // never tighten below 60% of base
+    const float tension = DynamicTension();
+    if (tension > 0.01f) {
+        float servo_factor = 1.0f - kServoGain * tension;
+        if (servo_factor < kServoFloor) servo_factor = kServoFloor;
+        scaled_young_multiplier *= servo_factor;
+    }
+
     if (alloc > static_cast<CHAOS_IL2CPP_SIZE>(last_nursery * scaled_young_multiplier)) {
         return GcCollectionKind::YOUNG;
     }
