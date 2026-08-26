@@ -555,7 +555,12 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
                 last_layout = layout;
             }
 
-            if (layout == nullptr) {
+            if (layout == nullptr || layout->instance_size == 0) {
+                // GC-N6 发现3 root fix: a registered layout with instance_size==0
+                // (or a null lookup) must not advance scan_ptr by 0, which would
+                // spin this Phase-2 walk forever — the typed young-GC hang.
+                // Mirror PreciseObjectSize's guard: fall back to bounds estimation
+                // so scan_ptr always advances.
                 CHAOS_IL2CPP_SIZE obj_size = EstimateObjectSize(obj, nursery);
                 scan_ptr += obj_size;
                 continue;
