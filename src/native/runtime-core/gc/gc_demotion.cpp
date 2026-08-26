@@ -1,5 +1,6 @@
 #include "gc_demotion.h"
 
+#include <chaos/asan_interface.h>
 #include <chaos/log.h>
 
 #include <algorithm>
@@ -215,13 +216,19 @@ void DemotionRelocate(const std::vector<DemotionEntry>& entries,
         [](void* root_addr, bool /*is_interior*/, void* user_data) {
             if (root_addr == nullptr) return;
             auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
-            uintptr_t val = *static_cast<uintptr_t*>(root_addr);
+            // root_addr is a slot on ANOTHER thread's stack (conservative scan);
+            // it may sit in an ASan stack-frame redzone.  Un-instrumented
+            // read+write so relocation of foreign-stack roots doesn't trip a
+            // false "unknown-crash" (access is byte-identical, ASan only elided).
+            uintptr_t val = reinterpret_cast<uintptr_t>(
+                chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
             if (val == 0) return;
 
             auto it = std::lower_bound(map.begin(), map.end(), val,
                 [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
             if (it != map.end() && it->old_addr == val) {
-                *static_cast<uintptr_t*>(root_addr) = it->new_addr;
+                chaos::il2cpp::common::AsanWritePtrNoCheck(
+                    root_addr, reinterpret_cast<void*>(it->new_addr));
             }
         }, &addr_map);
 

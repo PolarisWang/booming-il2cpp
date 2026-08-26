@@ -3,7 +3,15 @@ cmake_minimum_required(VERSION 3.20)
 project(chaos_method_aot_map_test LANGUAGES CXX)
 
 get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../../.." ABSOLUTE)
-set(ARTIFACT_ROOT "${REPO_ROOT}/artifacts/native-runtime-core-test")
+# ARTIFACT_ROOT is overridable via -DARTIFACT_ROOT=... so an ASan-instrumented
+# build tree can emit to its own directory instead of clobbering the normal
+# Debug/Release exes that the non-instrumented CTest suite runs from.  Keeping a
+# distinct output root for sanitizer builds is what makes "which exe am I
+# observing" unambiguous (see gc-n6-liveness-findings: the shared
+# artifacts/native-runtime-core-test/Debug dir caused asan vs normal Debug exe
+# to overwrite each other and corrupt flakiness judgment).
+set(ARTIFACT_ROOT "${REPO_ROOT}/artifacts/native-runtime-core-test" CACHE PATH
+    "Output root for native runtime-core test artifacts (override for sanitizer trees)")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")

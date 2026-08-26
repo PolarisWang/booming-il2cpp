@@ -1,5 +1,6 @@
 #include "gc_young_collector.h"
 
+#include <chaos/asan_interface.h>
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
@@ -453,12 +454,20 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
         threading::GcScanAllThreadRoots(
             [](void* root_addr, bool /*is_interior*/, void* user_data) {
                 auto* slot = static_cast<void**>(root_addr);
-                void* val = *slot;
+                // root_addr points into ANOTHER thread's stack (conservative
+                // all-thread scan).  The slot may fall in an ASan stack frame
+                // redzone between the target thread's frames, which ASan poisons.
+                // Use un-instrumented access so this intentional cross-thread
+                // stack probe doesn't trip a false "unknown-crash" (the store
+                // below, writing the promoted pointer back into the foreign
+                // stack, must likewise be un-instrumented).  The emitted access
+                // is byte-identical; only ASan instrumentation is elided.
+                void* val = chaos::il2cpp::common::AsanReadPtrNoCheck(slot);
                 if (val != nullptr && IsInNursery(val)) {
                     auto* r = static_cast<RootScavengeCtx*>(user_data)->result;
                     void* tenured = GcScavengeObjectKnownNursery(val, r);
                     if (tenured != nullptr && tenured != val) {
-                        *slot = tenured;
+                        chaos::il2cpp::common::AsanWritePtrNoCheck(slot, tenured);
                     }
                 }
             },

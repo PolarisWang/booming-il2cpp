@@ -82,6 +82,19 @@ inline void* AsanReadPtrNoCheck(void* addr) noexcept {
     return *static_cast<void**>(addr);
 }
 
+/// Write @a val to the pointer at @a addr without ASan instrumentation.
+/// Used by GC stack-root relocation: after promoting/demoting a root, the GC
+/// writes the new pointer back into the slot on ANOTHER thread's stack.  That
+/// slot may sit in a region ASan has poisoned (stack frame redzone between
+/// frames), so the store must be un-instrumented — otherwise ASan reports a
+/// false "unknown-crash" during every conservative cross-thread stack scan,
+/// drowning out genuine heap/UAF findings.  The emitted store is byte-for-byte
+/// identical to a normal store; only the ASan instrumention is elided.
+CHAOS_IL2CPP_NO_ASAN
+inline void AsanWritePtrNoCheck(void* addr, void* val) noexcept {
+    *static_cast<void**>(addr) = val;
+}
+
 } // namespace common
 } // namespace il2cpp
 } // namespace chaos

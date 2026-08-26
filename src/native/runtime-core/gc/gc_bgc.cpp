@@ -740,7 +740,10 @@ void BgcController::PopulateRootSet() {
         threading::GcScanAllThreadRoots(
             [](void* root_addr, bool, void*) {
                 auto* slot = static_cast<void**>(root_addr);
-                void* ref = *slot;
+                // root_addr is a slot on ANOTHER thread's stack (conservative
+                // scan); it may sit in an ASan stack-frame redzone. Un-instrumented
+                // read avoids a false "unknown-crash" (byte-identical access).
+                void* ref = chaos::il2cpp::common::AsanReadPtrNoCheck(slot);
                 s_gte_heap++;
                 if (ref == nullptr) return;
                 if (G_OldGen().IsInOldGen(ref)) {

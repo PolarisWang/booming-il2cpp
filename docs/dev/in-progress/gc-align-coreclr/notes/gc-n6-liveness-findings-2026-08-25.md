@@ -372,3 +372,23 @@ in-place demoted 的交互（60s perf + 后续崩）需要额外专项。当前�
 - cdb 每 attempt 70s 都避开（更改时序，不崩）；marker 也避开；ASan exe link 但 ASan runtime 环境未就绪。
 - **结论**：stress crash/hang 是真实 pre-existing/hard timing race，工具墙（cdb/marker/ASan-未就绪/共享输出目录混淆）。**盲试已到递减点**。根治需独立 session：先隔离 asan 树输出目录 + 修好 ASan runtime，再跑 stress 抓 exact 内存错误。
 - 交接：8 个 fix commit 是确定性正确改进，未 push；stress flakiness 单独 track。
+
+### residual flakiness 专项 — ASan 工具墙破除 + 真根收敛（2026-08-26 续）
+**工具墙已全部破除**，ASan 现在可干净捕获 GC 内存错误：
+1. **隔离 asan 输出目录**：`tests/contracts/native/runtime-core/CMakeLists.txt` 的 `ARTIFACT_ROOT` 改 `CACHE PATH` 可覆盖；`build/asan-native` 重配 `-DARTIFACT_ROOT=...-asan` → 不再与 `build/native` 共享 `artifacts/native-runtime-core-test/Debug/`（消除 exe 互相覆盖导致的 flakiness 误判）。
+2. **ASan runtime**：exe 动态 import `clang_rt.asan_dynamic-x86_64.dll`（缺则 127/0xc0000135）；从 `MSVC/14.38.33130/bin/Hostx64/x64/` 复制入隔离目录即恢复。
+3. **保守栈扫描假阳性抑制**（决定性）：GC all-thread 栈扫描跨线程读栈字落 ASan 栈帧 redzone → 假 "unknown-crash"。`asan_interface.h` 新增 `AsanWritePtrNoCheck`，把 **3 处跨线程栈根回调** 改 no-check 读写：`gc_young_collector.cpp` Phase-0 scavenge（实踩）、`gc_demotion.cpp` Phase-2 relocation、`gc_bgc.cpp` `GcScanAllThreadRoots` 回调。GC-heap 对象字段扫描保持 instrumented。no-check 访问 emitted code 字节一致、仅去插桩，无正确性影响。
+
+**ASan 内存错误狩猎 → 决定性阴性**：在隔离 asan 树，flakiness 高嫌疑场景全部**无内存错误**：
+- scenario C (aggressive young GC, idx2)、N (SATB barrier, idx13)、O (collect modes, idx15)、R (gen1 typed, idx17)、S (gen1 mixed, idx18) 全 **PASSED** 0 ASan error。
+- 结论：残留 flakiness **不是 heap/UAF 内存损坏**（ASan 抓不到），实为 **timing-dependent stall** —— 与 §十 早先 "cdb/marker 避开（改时序）" 完全自洽。
+
+**真根收敛 = 病理 full-GC compaction stall（非内存损坏）**：正常 Debug 版 scenario C 无 collection log 即长停滞（CPU 持续暴涨、working set 225MB，5+ 分钟不推进）——命中 §八 已记的 "in-place demoted 对象 vs full-GC compaction/relocation 交互 → 病态性能（60s pathological collect）" 与 §十 "3/10 HANG" 是同一现象。ASan 版 scenario C 反而**快**（halt_on_error 改分配时序避开病理分支）→ 印证 timing 敏感性。剩余根治 = 修 `PlanPageCompaction`/`PlanPageEvacuation` 对 in-place demoted set 的交互（§八 已标独立 session）。
+
+### residual flakiness 专项 — HANG 根因精确定位（cdb 栈捕获，2026-08-26 决定性）
+正常 Debug scenario C 5 次抽样 **2/5 HANG**(>90s)，概率性命中 §十 "3/10 HANG"。**cdb attach 捕获全部线程栈**，精确定位死锁：
+- **全部 100 个 worker 线程** 卡在 `NurseryAllocateSlow` → `GcYoungCollection`（等 GC 返回，spin yield）。
+- **GC 执行线程（thread 4）** 卡在 `GcYoungCollection+0xb7` → `BgcController::PauseForYoungGc+0xcb` —— 即 `while(!bgc_paused_) yield()` 死转，`bgc_paused_` **永不为 true**（BGC 从未 ack 暂停）。
+- 根因机制：`PauseForYoungGc`（gc_bgc.cpp:1398）设 `bgc_pause_requested_`+`notify_all` 后 spin `bgc_paused_`；BGC 仅在 **两处** 服务暂停（mark-complete 后 line1106、REMARK/COMPACT phase-wait line1151/1218）。当 pause 请求与 BGC phase-wait 形成 **lost-wakeup**（或多个 young GC 并发触发，scenario C 100 线程），BGC 未进入任一 ack 点即让 `bgc_paused_` 保持 false → young GC 死转 → 全部线程挂起。M5-1 已让它稀有但未根除，line1103 自注 "pre-existing phase-6/round-N race"。
+- 决定性：**这是协调死锁，不是内存损坏**（ASan 全场景阴性自洽）。修复方向 = 让 BGC 在 **每个** wait/state 保证服务 pending pause（统一 ack 协议，消除 lost-wakeup），跨 BGC 状态机 + young-GC 触发 + safepoint 三域，属独立专家 session。
+- 复现命令：`./chaos_gc_stress_test.exe --scenario 2`（正常 Debug，5 次抽 2 次挂）。
