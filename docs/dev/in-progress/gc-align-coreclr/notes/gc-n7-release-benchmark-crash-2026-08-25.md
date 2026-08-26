@@ -67,6 +67,19 @@ CoreCLR（`coreclr/vm/gcenv.ee.cpp ScanStackRoots` + `siginfo.cpp PromoteCareful
 repo 又缺原生帧根协议**，纯精确扫必 under-retain（实验 88% 崩）。CoreCLR 能这么做是因为它有完整 JIT GCInfo +
 原生互操作根协议。**完整迁移需先补这两块基建** = 真机大改，非沙箱可收口。
 
+### 方案 Y 实测（用户选定，2026-08-26，已 REVERT）
+实现"逐帧混合"：先 T4 精确扫（已有）+ 记录 JIT 帧覆盖范围，再对 native/未覆盖区域做受提交钳位的有界保守扫。
+**Release `YoungGcPauseUnderLoad` 88% 崩（22/25）——显著退化**。
+根因：T4 精确扫用 `FindNativeCodeByAddress` + `sm->frame_size` 划定 JIT 帧范围，与真实栈布局不完全对齐 →
+TestBody 等 native 帧落在 JIT 帧范围之外/之间的区域未被正确保守扫 → **under-retention UAF**。这印证 analysis
+里方案 Y 风险表注："native 帧 frame_size 未必可靠；改后需全量回归，可能暴露新丢根"。
+
+### 沙箱内修复铁律（多轮汇总，已无法更充分）
+**所有沙箱内推断性补丁（方案 A/B/X/CoreCLR忠实版/Y）均未稳定归零 Release 崩溃率，且 A/B/X/Y 有实测净负。**
+原因：ASAN 对"读活帧以下已提交栈"是模型误报，不能作 Release 判据；native 帧根协议缺失使精确/混合方案必然
+under-retain；确切坏字节只能真机 page-heap 归因。**结论不可推翻：真机 page-heap 是唯一路径。**
+已提交代码（`904114c3d` 双真 bug + GC-N8/N9/N10/N11）保持有效、基线干净。
+
 ---
 
 ## 二、缺陷 1（✅ 已提交）：`~MarkSweepOldGen` 析构 FreePage 读已释放页
