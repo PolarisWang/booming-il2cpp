@@ -235,9 +235,11 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
             md = json.loads(meta_path.read_text(encoding="utf-8"))
             meta_total = md.get("totalMethods")
             meta_fact_count = md.get("factMethodCount")
-            # Unique fact generatedMethodIds — the authoritative dispatch
-            # expectation. Dispatching fewer than this means at least one fact
-            # subject silently dropped out of the slot map (coverage regression).
+            # Distinct fact-kind generatedMethodIds — FALLBACK denominator only.
+            # Not used as the authoritative expected when factMethodCount exists:
+            # ATG emits one generatedMethodId PER VALUE-SET (Program.cs:433-437),
+            # fanning out ~2.2x per real wrapper method, so this over-counts the
+            # dispatch obligation (CoreLib system: 4855 GIDs vs 2181 fact methods).
             fact_gids: set[str] = {
                 e.get("generatedMethodId") for e in md.get("methods", [])
                 if e.get("kind") == "fact" and e.get("generatedMethodId")
@@ -310,11 +312,15 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
             status = "passed"  # AOT passing is sufficient for pipeline success
 
     # Cross-check: detect silent method drops from metadata.
-    # Use factMethodCount (actual fact subjects) rather than totalMethods
-    # (which includes helper/benchmark-only subjects that don't need fact dispatch).
-    # This avoids false SEVERE failures when non-fact subjects (closures, compiler-
-    # generated helpers, hotupdate-only entries) aren't dispatched by the codegen.
-    expected = meta_unique_fact if meta_unique_fact is not None else meta_fact_count
+    # Use factMethodCount (the per-wrapper-method FACT subjects the codegen/runtime
+    # actually dispatches) as the authoritative denominator.  NOT meta_unique_fact:
+    # that counts distinct fact-kind `generatedMethodId`s, which ATG emits ONE PER
+    # VALUE-SET (Program.cs:433-437 fan-out ~2.2x per method), so it over-counts the
+    # dispatch obligation and fabricates a false SEVERE (e.g. CoreLib system chunk:
+    # factMethodCount=2181 but unique GIDs=4855).  The generated kSubjectEntryCount
+    # equals factMethodCount (healthy numerics: 180==180), never the GID count.
+    # Also avoid totalMethods (includes helper/benchmark/hotupdate-only subjects).
+    expected = meta_fact_count if meta_fact_count is not None else meta_unique_fact
     aot_dropped = max(0, (expected or 0) - aot_result['total']) if expected else 0
     if aot_dropped > 0 and expected and expected > 0:
         drop_ratio = aot_dropped / expected
