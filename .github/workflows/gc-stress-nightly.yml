@@ -53,6 +53,15 @@ jobs:
       - name: Build Generator
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
 
+      - name: Cache nightly reports (cross-run trend accumulation)
+        # P2: persist gc-stress reports + metrics across runs for trend accumulation.
+        uses: actions/cache@v4
+        with:
+          path: nightly-reports/gc
+          key: nightly-gc-reports
+          restore-keys: |
+            nightly-gc-reports-
+
       - name: Cache windows-x64-reference native build
         # Dedup: gc-ci (02:37), native-nightly (04:07) and this workflow all build the
         # SAME root preset nightly.  The first nightly run populates this cache; later
@@ -126,6 +135,32 @@ jobs:
             --baseline=gc-baseline.json \
             --current=gc-metrics-current.json \
             --thresholds=gc-thresholds.json
+
+      - name: Publish GC stress summary (run-page, green or red)
+        # Success-path reporting: a green GC stress run previously surfaced nothing.
+        # Emit overall pass + per-group outcomes + GC perf scenarios to step summary.
+        if: always()
+        shell: bash
+        run: |
+          if [ -f gc-metrics-current.json ]; then
+            extra="--metrics gc-metrics-current.json"
+          else
+            extra=""
+          fi
+          python scripts/ci/nightly-summary.py --report gc-stress-report.json $extra \
+          || echo "[gc-stress] summary publish failed (non-fatal)"
+
+      - name: Save GC stress report + metrics into cross-run cache
+        # Date-stamp report + metrics into the cached dir for trend accumulation.
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p nightly-reports/gc
+          cp gc-stress-report.json nightly-reports/gc/stress-$(date -u +%Y-%m-%d).json
+          if [ -f gc-metrics-current.json ]; then
+            cp gc-metrics-current.json nightly-reports/gc/metrics-$(date -u +%Y-%m-%d).json
+          fi
+          echo "saved gc-stress report snapshot for $(date -u +%Y-%m-%d)"
 
       - name: Update GC perf baseline (manual dispatch only — fills pending values + commits)
         # Opt-in baselining: only an explicit dispatch with update_baseline=true writes

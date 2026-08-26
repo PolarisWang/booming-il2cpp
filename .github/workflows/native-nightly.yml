@@ -38,6 +38,17 @@ jobs:
       - name: Build Generator
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
 
+      - name: Cache nightly reports (cross-run trend accumulation)
+        # P2: persist native-nightly reports across runs so nightly trends accumulate
+        # (same pattern as foundation-dll's fdci-history cache).  Key is date-independent;
+        # the restore gives prior days' reports, the post-run save adds today's.
+        uses: actions/cache@v4
+        with:
+          path: nightly-reports/native
+          key: nightly-native-reports
+          restore-keys: |
+            nightly-native-reports-
+
       - name: Cache windows-x64-reference native build
         # Dedup: gc-ci (02:37), gc-stress-nightly (03:00) and this workflow (04:07)
         # build the SAME root preset every night.  The first nightly run populates
@@ -73,6 +84,26 @@ jobs:
           python tests/runner/test_driver.py --layer integration --group contracts-native \
             --cases --json native-nightly-report.json \
             2>&1 | tee native-nightly-output.txt
+
+      - name: Publish native nightly summary (run-page, green or red)
+        # Success-path reporting: a green nightly previously surfaced nothing.  Emit
+        # the key numbers to $GITHUB_STEP_SUMMARY so the run page shows what ran+passed.
+        if: always()
+        shell: bash
+        run: |
+          python scripts/ci/nightly-summary.py --report native-nightly-report.json \
+          || echo "[native-nightly] summary publish failed (non-fatal)"
+
+      - name: Save native nightly report into cross-run cache
+        # Date-stamp the report into the cached dir so the next run's restore has
+        # prior nights to diff against (trend accumulation).
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p nightly-reports/native
+          cp native-nightly-report.json nightly-reports/native/native-$(date -u +%Y-%m-%d).json
+          echo "saved nightly report snapshot for $(date -u +%Y-%m-%d)"
+
 
       - name: Upload native nightly output
         if: always()

@@ -173,6 +173,28 @@ jobs:
           python -m verification.ci_smoke --mode=${{ steps.ci-mode.outputs.mode }} ${{ steps.ci-mode.outputs.check-regression }} 2>&1 | tee pipeline_output.txt
           echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
 
+      - name: Render & publish nightly report (dashboard + cross-day sumport)
+        # Turns the raw pipeline JSON into a human-readable report and surfaces it on
+        # the GitHub run page via $GITHUB_STEP_SUMMARY (no auth needed, shows on run page).
+        # All three generators already exist — they were dead code, now wired.
+        if: always()
+        shell: bash
+        run: |
+          export PYTHONPATH="$GITHUB_WORKSPACE/tests/e2e:$GITHUB_WORKSPACE/tests/e2e/verification"
+          export CHAOS_FOUNDATION_DLL="$GITHUB_WORKSPACE/tests/e2e/translation"
+          # 1) Interactive HTML dashboard (deep per-family stage detail)
+          python -m verification.reporting.dashboard --from-results --output deep-dashboard.html 2>&1 || echo "[report] dashboard step failed (non-fatal)"
+          # 2) Cross-day delta (regression/improvement vs last benchmark history)
+          python -m verification.nightly_delta --foundation-dll "$CHAOS_FOUNDATION_DLL" --output nightly-delta.json 2>&1 || echo "[report] nightly-delta failed (non-fatal)"
+          # 3) Markdown summary from delta, surfaced on the GitHub run page
+          python -m verification.nightly_summary --delta nightly-delta.json --output nightly-summary.md 2>&1 || echo "[report] nightly-summary failed (non-fatal)"
+          if [ -f nightly-summary.md ]; then
+            cat nightly-summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "## Foundation-DLL nightly report" >> "$GITHUB_STEP_SUMMARY"
+            echo "Pipeline exit: ${{ steps.pipeline.outputs.exit_code }}. (report generators produced no Markdown)." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Upload Foundation-DLL Results
         if: always()
         uses: actions/upload-artifact@v4
@@ -180,6 +202,13 @@ jobs:
           name: foundation-dll-results-${{ matrix.os }}-${{ github.sha }}
           path: |
             tests/e2e/translation/results/
+            # Per-family detailed reports (coverage%, per-method benchmark, hotupdate,
+            # per-assembly dashboard) — previously outside the glob and not downloadable.
+            tests/e2e/translation/*/_dll/reports/**
+            # Rendered nightly report artifacts
+            deep-dashboard.html
+            nightly-delta.json
+            nightly-summary.md
             pipeline_output.txt
 
       - name: Post PR Comment (on failure or regression)
