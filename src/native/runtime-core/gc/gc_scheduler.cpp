@@ -348,6 +348,23 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
         return GcCollectionKind::FULL;
     }
 
+    // GC-N10 (=M4): high-memory + high-fragmentation → queue a mandated NGC2.
+    // Distinct from provisional entry: this arm acts on the *fragmentation
+    // density + system memory load* signals (GC-N8) rather than the discrete
+    // provisional-mode flag, and queues NGC2 even when not in provisional mode.
+    // When both are elevated, old-gen is both fragmented and the machine is
+    // under memory pressure → a compacting full is required.  Queue the flag
+    // now; the discharge check immediately below clears+fires it exactly once.
+    if (!ngc2_queued_.load(std::memory_order_acquire)) {
+        const float frag  = OldGenFragmentation();
+        const float mload = MemoryLoad();
+        // Thresholds: frag >= 0.5 AND memory load >= 0.5 → fragmentation under
+        // pressure (no slack to absorb the fragmented heap).
+        if (frag >= 0.5f && mload >= 0.5f) {
+            ngc2_queued_.store(true, std::memory_order_release);
+        }
+    }
+
     // 0. NGC2 queue (M4/M3B): a mandated gen2 collection was queued (provisional
     // entry / high memory pressure / high fragmentation).  Discharge it at the
     // next GC decision by forcing a blocking FULL once (never BGC/NONE), then

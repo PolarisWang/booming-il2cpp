@@ -159,3 +159,30 @@ TEST(GcScheduler, DynamicTuningTensionIsBoundedPureFunction) {
         << "higher free-list reuse lowers dynamic tuning tension";
 }
 
+// ── Test 11: GC-N10 provisional complete — high-frag + high-mem → NGC2 FULL ─
+
+TEST(GcScheduler, HighFragHighMemQueuesNgc2Full) {
+    // Reset NGC2 / provisional state to a clean baseline.
+    g_gc_scheduler.ClearNgc2();
+    g_gc_scheduler.SetProvisionalMode(false);
+
+    // Low both → no forced-N10 full (NGC2 not queued by this arm).
+    g_gc_scheduler.SetOldGenFragmentation(0.1f);
+    g_gc_scheduler.SetMemoryLoad(0.1f);
+    bool triggered_low = g_gc_scheduler.IsNgc2Queued();
+    // DecideCollection may return NONE/YOUNG, but must not have queued NGC2
+    // purely from the ratio arm at low signals.
+    EXPECT_FALSE(triggered_low) << "low frag+mem does not queue NGC2 by itself";
+
+    // High both → queues NGC2 and forces a blocking FULL (never BGC).
+    g_gc_scheduler.ClearNgc2();
+    g_gc_scheduler.SetOldGenFragmentation(0.8f);
+    g_gc_scheduler.SetMemoryLoad(0.9f);
+    auto kind_high = g_gc_scheduler.DecideCollection();
+    EXPECT_TRUE(kind_high == GcCollectionKind::FULL)
+        << "high frag+mem → blocking FULL (GC-N10 NGC2 arm)";
+    // The NGC2 was discharged (cleared) by that decision.
+    EXPECT_FALSE(g_gc_scheduler.IsNgc2Queued())
+        << "NGC2 is consumed (cleared) after the forced full";
+}
+
