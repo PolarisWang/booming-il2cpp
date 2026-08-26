@@ -31,17 +31,18 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "Smoke (key families) or full (all families)"
-        default: smoke
+        description: "smoke = core | full = core+standard | extended = ALL families (comprehensive)"
+        default: full
         type: choice
         options:
           - smoke
           - full
-  # Nightly: foundation-dll is the heaviest multi-stage product verification —
-  # PR only runs smoke (build,fact,coverage-audit); the FULL 6-stage pipeline
-  # (build,fact,hotupdate,coverage-audit,benchmark,benchmark_report + check-regression)
-  # must run every night.  Staggered (05:47) after the GC/native windows nightlies
-  # (02:37/03:00/04:07) and off :00/:30 to avoid the CI burst.
+          - extended
+  # Nightly: foundation-dll is the heaviest multi-stage product verification.  PR only
+  # runs smoke; the comprehensive scheduled nightly runs `extended` = ALL families × the
+  # full 10-stage set (build,fact,hotupdate,coverage-audit,profile,benchmark,
+  # managed_benchmark,benchmark_report,aggregate,reporting + check-regression).  Staggered
+  # (05:47) after the GC/native windows nightlies (02:37/03:00/04:07) and off :00/:30.
   schedule:
     - cron: "47 5 * * *"
 
@@ -125,19 +126,40 @@ jobs:
         run: cmake --build build/native-test --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
 
       # Foundation-DLL execution
+      # Restore the benchmark regression history so check-regression has a real
+      # cross-run baseline.  benchmark_report writes a date-stamped snapshot per
+      # run (comparison-YYYY-MM-DD.json) into *_dll/reports/history; without this
+      # cache it is wiped by the clean checkout each run, so ci_smoke --check-regression
+      # always sees <2 history files and never actually diffs.  Stable key → history
+      # accumulates across nights; post-run save merges the newest snapshot back.
+      - name: Restore benchmark regression history (cross-run baseline)
+        uses: actions/cache@v4
+        with:
+          path: tests/e2e/translation/*/_dll/reports/history
+          key: fdci-history-${{ runner.os }}
+          restore-keys: |
+            fdci-history-${{ runner.os }}-
+
       - name: Determine CI Mode
         id: ci-mode
         shell: bash
         run: |
-          # Nightly (schedule) and push-to-main and manual mode=full all run the FULL
-          # 6-stage foundation-dll pipeline.  PR runs smoke (fast feedback).
-          if [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.mode }}" = "full" ]; then
+          # Nightly (schedule) = EXTENDED: ALL families × full 10-stage set (comprehensive).
+          # push-to-main = full (core+standard, all stages) for faster feedback.
+          # workflow_dispatch honors its own mode input (smoke|full|extended).
+          # The stage list is decided INSIDE ci_smoke.py by --mode (full/extended share
+          # _FULL_STAGES); the workflow does NOT pass a stage list.
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            echo "mode=extended" >> $GITHUB_OUTPUT
+            echo "check-regression=--check-regression" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event.inputs.mode }}" = "full" ]; then
             echo "mode=full" >> $GITHUB_OUTPUT
-            echo "stages=build,fact,hotupdate,coverage-audit,benchmark,benchmark_report" >> $GITHUB_OUTPUT
+            echo "check-regression=--check-regression" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.mode }}" = "extended" ]; then
+            echo "mode=extended" >> $GITHUB_OUTPUT
             echo "check-regression=--check-regression" >> $GITHUB_OUTPUT
           else
             echo "mode=smoke" >> $GITHUB_OUTPUT
-            echo "stages=build,fact,coverage-audit" >> $GITHUB_OUTPUT
             echo "check-regression=" >> $GITHUB_OUTPUT
           fi
 

@@ -38,6 +38,14 @@ from _path import foundation_root
 
 
 
+# The full 10-stage product-verification set (build→fact→hotupdate→coverage-audit→
+# profile→benchmark→managed_benchmark→benchmark_report→aggregate→reporting; chunk_pipeline
+# topo-sorts by STAGE_DEPS).  Shared by both `full` (core+standard) and `extended`
+# (all families) modes so every mode that claims comprehensive coverage really runs it.
+_FULL_STAGES = ("build,fact,hotupdate,coverage-audit,profile,"
+                "benchmark,managed_benchmark,benchmark_report,aggregate,reporting")
+
+
 def main() -> int:
     import argparse
 
@@ -110,11 +118,15 @@ def main() -> int:
         print(f"CI Smoke mode: {len(families)} core family(ies), stages=[{stages}]")
     elif args.mode == "full":
         families = CORE_FAMILIES + STANDARD_FAMILIES
-        stages = "build,fact,hotupdate,coverage-audit,benchmark,managed_benchmark,benchmark_report,aggregate,reporting"
+        stages = _FULL_STAGES
         print(f"CI Full mode: {len(families)} families (core+standard), stages=[{stages}]")
     elif args.mode == "extended":
+        # Comprehensive: ALL families × the FULL stage set.  Pre-2026 extended only ran
+        # build/fact/coverage-audit (no benchmark/hotupdate/profile/aggregate/reporting),
+        # so "extended" covered more families but did NOT actually product-verify them.
+        # Now it shares the same full stage list as `full`, just over all 29 families.
         families = ALL_FAMILIES
-        stages = "build,fact,coverage-audit"
+        stages = _FULL_STAGES
         print(f"CI Extended mode: {len(families)} families (all), stages=[{stages}]")
 
     # Override: --families takes precedence over --mode
@@ -133,6 +145,11 @@ def main() -> int:
             "--stages", stages,
             "--all-chunks",
             "--native-config", "check",
+            # strict: coverage-audit fails only when >5% of a chunk's methods are
+            # missing (coverage_audit.py:106).  Default (standard) reds on ANY missing
+            # method, which false-flags nearly-complete families.  strict gives the
+            # proper 5% tier so the gate shows real coverage gaps, not noise.
+            "--mode", "strict",
         ]
         if args.verbose:
             sys.argv.append("--verbose")
