@@ -68,9 +68,16 @@ void Worker(int id) {
             threading::BarrierCriticalSectionScope barrier;
             g_old_slot[id]->nursery_slot[i] = nursery_obj;
             // Record the old->nursery cross-gen reference via the generation-aware
-            // barrier.  This both dirty-cards the old object (so young GC rescans
-            // it) and is what prevents a live young object from being dropped.
-            chaos_gc_dirty_card_dst_ref(g_old_slot[id], nursery_obj);
+            // barrier.  Dirty the card covering the EXACT slot being stored
+            // (&g_old_slot[id]->nursery_slot[i]), NOT the OldMessage base.  The base
+            // only covers a single 256-byte card (slots ~0..31); fields beyond it
+            // would never be carded, so young-GC Phase-1 could drop the cross-gen
+            // edge for slots 32..127 -> use-after-free.  This mirrors production
+            // codegen, where stfld obj.field = ref dirties &obj.field.  (The test's
+            // location-check still passes either way because reclaimed nursery
+            // addresses keep their Young region-gen tag; the content-check upgrade
+            // in GC-N6 depends on this exact-field carding.)
+            chaos_gc_dirty_card_dst_ref(&g_old_slot[id]->nursery_slot[i], nursery_obj);
         }
         // Yield to let the coordinator's GC cycles observe this thread.
         if ((i & 31) == 0) std::this_thread::yield();

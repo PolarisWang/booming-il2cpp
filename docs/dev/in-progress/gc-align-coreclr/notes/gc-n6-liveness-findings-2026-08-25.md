@@ -41,6 +41,119 @@ coordinator `break` 之后、young-GC Phase-1 开始之前，一个 worker 可�
 内层查 `suspend_seq!=0` 则先落 barrier_inflight 再 poll，或用 request→Phase-1 全窗 drain）。高风险 safepoint
 并发改动，需分阶段、先证明窗、bounded-wait + APC 兜底防死锁。
 
+### A2b 机制 gap 定位 — 实证推翻（2026-08-26 续，γ' 阶段1 已实现并否定）
+
+按 `design-a2b-t1-barrier-entry-gate-2026-08-26.md` **实现并测试了 γ' 阶段1**（barrier 入口 gate
+`SafepointRequested()→SafepointPoll()` + coordinator drain 连续两轮 0 才 break），在 content-check probe 上跑
+**20× magic-miss 全部 142**（对照 reverted 基线仍 142）。关键诊断：
+
+- **`gate fires = 0`**（RAII-scope + chaos_barrier_enter 双计数均为 0）：整个 8-GC-cycle run 中，无任何 worker 在
+  barrier 入口观察到 `suspend_seq != 0`。—— **该复现里根本没有发生"store→card 与活跃 safepoint 重叠"**，
+  更不存在 TOCTOU 窗。**142 不是 A2b store-then-barrier 竞态**。
+- **物理结构（每 miss 逐条抓）**：`gen=1`（gen1/survivor）+ `nursery=64 / gen1=78 / old=0`；content 为
+  `foreign_BAD0DEAD=64`（目标被回收、地址被**另一对象复用**）+ `zero=42`（目标指向清零块）等。magic 从
+  offset 8 移到 32 该结构不变 → **稳定、确定的丢边**，与写屏障时机无关。
+
+**结论（诚实推翻 design 前提）**：142 是 **young-GC 晋升可达性 bug**（从 static-root 引用的 old-gen 槽持有的
+nursery 对象，未被正确晋升/标记，即便卡已脏且 barrier 不与 safepoint 重叠）——非写屏障 TOCTOU。γ' 阶段1 修复
+对 142 是**零收益**（会额外每次 store 加一次 acquire load），已整体回滚不提交（不 overclaim）。**真根因转
+promotion-reachability 专项**（可能收敛 GC-N6 发现3 typed-walk / demotion 交互）。
+
+### H2 假设（gen1→gen2 引用重定位缺口）实测否定 + 决定性隔离实验（2026-08-26 续）
+
+按 H2 假设**并实现了 gen1→gen2 relocation 修复**（`gc_gen1.cpp` 所有晋升路径收集 `{old→new}` + `RelocateGen1References`
+镜像 `DemotionRelocate`，覆盖 old-gen 页/static-root/thread-root/gen1 内部 + recard），实测：**272 rewrites 确实触发，
+但 magic-miss 仍是 142**（且隔离实验跑出 `gen1_test` 回归 — "high-threshold demote 保持 region-gen 1" 断言失败）。**该修复也回滚**。
+
+**决定性隔离实验（把根因从"并发竞态"与"标记 bug"分开）**：workers 跑完后**不加并发 GC**，仅 join 后**一次 full collect** →
+**`magic-miss=0`（1024/1024 全活，content 全对）**。对照并发 8-cycle → 142。
+
+⇒ **顺序（无并发 GC）标记/晋升完全正确**（full-GC mark 能到 old-gen interior → nursery 对象，全部驻留）。
+⇒ **142 只在"GC 与 workers 并发执行"时出现，是纯并发 promotion/relocation 竞态**。
+⇒ 且该竞态**不是** barrier 入口 TOCTOU（γ' gate=0）、**不是** gen1→gen2 引用重定位缺口（relocation 触发但无效）。
+
+### 决定性 cycle-scan + mode 判别 — 重定位是纯多代 GC 缺陷，非并发（2026-08-26 终）
+
+升级 probe 为 `mode` 参数化（`probe_a2b_content_check.exe <cycles> <mode>`），测出**最终判别**：
+
+| mode / cycles | magic-miss | 含义 |
+|------|-----------|------|
+| `0 1`（并发 1 次 GC） | **0** | 单次并发 GC 不丢 |
+| `0 2`（并发 2 次） | **142** | 第 2 次 GC 现形，饱和 |
+| `0 4/8` | 142 | 不累积 |
+| `1`（join 后 1 次 full collect，全顺序） | **0** | 单次全收集保全部 |
+| **`2`（worker 全部写完 → 再跑 GC cycles，无 store 竞态）** | **142** | **决定性：非并发竞态** |
+
+**`mode=2`（=0 关键）**：等所有 worker 把 1024 个 slot 全部写完后，**再**跑多次 GC，全程无 store-vs-GC 交错
+→ 仍是 142。**彻底排除"worker 与 GC 并发写竞态"**。
+
+⇒ **142 是纯多代 GC 缺陷**：当跨**多次 `chaos_gc_collect()` 调用**分割晋升时（而非一次全收集原子处理），
+**早期调用产生的 gen1 存活对象，在后续调用的 gen1 collection 中丢失 cross-gen 边**。mode=0 饱和尚在 cycle=2
+（首次有意义的 gen1 collection）、mode=1 单次全收集正确处理、mode=2 多调用丢 —— 三证据完全吻合。
+
+**重定向修复并部分奏效（142→85）**：对该确定性 mode=2 重上 `RelocateGen1References` → **magic-miss 142→85**，
+`gen1_relocate: 85 pairs, 84 rewrites`。说明 gen1 collection 缺"搬迁后重写外部引用"确实丢了 ~57 条边，修复
+已救回；但 **85 残留**（rewritten 后目标地址 content 仍错 / 对象在旧-gen2 副本已损）+ 引 `gen1_test` demote 回归
+（"high-threshold demote 保持 region-gen 1"）。**修复不完整 + 有回归 → 再次回滚不提交。**
+
+**交接**：确定性 reproducer = `probe_a2b_content_check.exe 2 2`（1 秒内、无线程非确定、mode2）。真根因 =
+**跨多次 `chaos_gc_collect()` 调用时 gen1 collection 丢失 cross-gen 边**；修复方向 = gen1 collection 搬迁后重写
+外部引用（Probe 已证 142→85 有效），需解决 85 残留（rewritten 目标 content 仍错）+ demote 回归再提交。
+
+**剩余根因精确定位**：并发 young-GC 晋升竞态（worker 的槽 store 跨多 GC-cycle 与晋升/回收交错，丢 cross-gen 边）。
+γ'（barrier 入口）+ gen1-relocation 均未覆盖它。已恢复两处修复，保持工作树干净（无 overclaim）。下一专项需
+**顺序序依赖调试**（cdb 抓跨 cycle 的 worker store ↔ 晋升交错点），非本 session 可盲修。
+
+### 🔴 决定性翻案（2026-08-26 交接后首个 session）— 142 是 harness barrier-usage bug 非 GC 缺陷
+
+重建当前 source 的 `probe 2 2` 基线 = **142**（3 连跑确定）。逐位诊断（新增 per-store `IsDirty` + `GetRegionGen`）：
+
+```
+original (dirty base card):  card_set=6..15/128 per thread, card_dirty=84/1024, young GC promoted=84
+       all 1024 slot values: ref_young=1024 (GetRegionGen<old), ref_old=0  → barrier 条件不跳过
+```
+
+**根因 = probe 调屏障用错 `dst`**：`chaos_gc_dirty_card_dst_ref(g_old_slot[id], obj)` 传 **OldMessage 基址**，
+只 dirty 基址所在 256B card（覆盖 slot[0..31]）。slot[32..127]（offset 256..1023，位于基址 card 之外）的 card
+**从未被设置** → young GC Phase-1 扫不到 → 其 nursery 对象不晋升 → nursery reset 后悬垂 → 142。
+
+**对照实验 A（改用正确 `dst = &g_old_slot[id]->nursery_slot[i]`）**：`card_set=128/128, card_dirty=1024/1024`,
+young GC **promoted=1025（全部）**。⇒ **修正 barrier 用法后,young-GC 晋升无丢失。** 真实生产 codegen 每个
+`stfld obj.field = ref` 均传**精确字段地址**,不会只有基址 card——probe 与 A2b 真实测试 (gc_region_barrier_
+stress_test:73) 同为此基址简写,均是该潜在 harness bug。
+
+**结论（诚实推翻前 session 的"真根因=gen1 collection 丢边"）**：142 主要是 **harness barrier `dst` 用错** 造成的
+young-GC cross-gen 边丢失,并非"纯多代 GC 缺陷 / gen1 relocation 缺口"。前 session 的 `RelocateGen1References`
+142→85 是在**错误层**修（修的是 reloc 缺口,但真 bug 是 card 设错）。~57 条"救回"实为对该 harness bug 的部分遮蔽。
+
+**真正确修复**（task）：
+1. **修 harness**：probe 与 `gc_region_barrier_stress_test` 的 barrier 调用改传**精确字段地址**
+   `&slot[i]`（贴合生产语义）。这应让 content-check 测试 magic-miss → 0。
+2. **验证**：修正后 `probe 2 2` 应 ≈0。若仍有残留,那才是真 GC 缺陷（再追）。
+3. **独立真实问题**：Experiment A（全晋升到 gen1）后在 Debug 下 old-gen full collect 挂于
+   `cross_page_compact pages=1 objects=20`（GcWorkerPool::RunWorkers 并行 copy/sweep 相）。该 hang 与
+   N6 根因无关,属 parallel-GC 线的 worker_pool/gc_old_gen 交互,需单独看（且 gc_worker_pool.cpp 有并行线
+   未提交改动）。
+
+### 🔴 决定性确认（mode3）：修正 card 后 young grooming 全对,但还有独立的 content-wiring 缺陷
+
+新增 probe `mode 3`（正确 slot-address carding + 只跑 young collection,含内部 gen1 Phase-4,跳过会挂的 full
+old-gen;**修正 probe harness：不重复显式调 GcGen1Collection**,否则 gen1 双跑到异地）：
+
+```
+pre-cycle0 : nursery=1024 | content_ok=1024 content_bad=0   ← mutator 100% 正确
+post-cycle0: nursery=0 gen1=1024 | content_ok=1024 content_bad=0   ← young→gen1 promote 100% 正确
+post-cycle1: nursery=0 gen1=0 old=1024 | content_ok=17 content_bad=1007   ← cycle-1 gen1 collection corrupt
+```
+
+**🔴 精确定位（决定）**：corrupt 只发生在 **cycle-1 的 GcGen1Collection 把 gen1 survivor promote 到 old-gen**。
+cycle-0 young→gen1 promote 100% 正确。根因 = gen1 收集**搬迁（compaction/move）后不 relocation 外部引用**。
+card bug 修好后这个 gen1-relocation 缺口现形（前 session 的 `RelocateGen1References` 正是为它、但被 card bug 遮蔽）。
+
+对象在 gen1 里地址 128B 间隔（128B 分配正确），但 slot(t,i) 指向 post-compaction 前地址 → cycle-1 Phase-3b 判 IsInGen1
+失败 → 当 dead 回收 → 槽读回收后垃圾 = iter+16 错位内容。17 存活 = 恰在当前 gen1_bump 内。miss 打印 ref gen=1 与
+DIAG gen1=0 矛盾 = 4MB chunk tag 陈旧（discover-1 类）。
+
 ## 二、发现 1（✅ 已修复提交 `ef0012d49`）：世代屏障 4MB region-gen chunk 碰撞 → 漏卡 → UAF
 
 ### 证据链（诊断输出，10/10 复现）

@@ -954,6 +954,21 @@ void RegionManager::FreeRegion(RegionId id) {
         g_young_gen.gen1_bump.store(nullptr, std::memory_order_release);
     }
 
+    // Re-tag the freed region's 4MB region-gen chunks back to OLD.  The skewed
+    // region→gen table is per-4MB-chunk (monotonic: a chunk tagged young/gen1
+    // stays so until overwritten).  If this freed Gen1/Nursery region's chunks
+    // kept their YOUNG/GEN1 tag, an old-gen page later allocated into that
+    // address range would read GetRegionGen == young — misclassifying genuine
+    // old-gen objects (dropping old→nursery cards, failing region-gen assertions;
+    // GC-N6 mode3 gen1_resize exposes this when Gen1 shrinks).  Tag them OLD now
+    // that the region no longer owns them.  (LOH/old-gen pages already tag chunks
+    // OLD via GcMarkRangeOld at their own allocation/free.)
+    if (r->kind == RegionKind::REGION_GEN1 ||
+        r->kind == RegionKind::REGION_NURSERY) {
+        GcMarkRangeOld(reinterpret_cast<uintptr_t>(r->begin),
+                       reinterpret_cast<uintptr_t>(r->end));
+    }
+
     // If this is a POH region, remove its range and unlink from POH list.
     if (r->kind == RegionKind::REGION_POH) {
         RemovePohRange(reinterpret_cast<uintptr_t>(r->begin),
