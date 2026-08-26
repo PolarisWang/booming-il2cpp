@@ -86,12 +86,14 @@ MarkSweepOldGen::~MarkSweepOldGen() {
     auto* page = page_list_;
     while (page != nullptr) {
         auto* next = page->next;
-        // Unlink the head BEFORE freeing it.  FreePage()'s segment-sharing
-        // check walks page_list_ and reads each node's in_use flag; if the
-        // previously-freed page were left in the list, the next FreePage()
-        // would dereference an already VirtualFree'd node (AV on Release).
         page_list_ = next;
-        FreePage(page);
+        // Teardown at process exit: VirtualFree the pages DIRECTLY, bypassing
+        // FreePage()'s GcUnregisterHeapRange.  At static-destruction the card
+        // table's g_card_l1 (a std::unique_ptr TU global) may already be torn
+        // down (unspecified cross-TU destruction order vs g_old_gen), so reading
+        // it here is a use-after-free -> teardown SEGFAULT.  Card/segment
+        // cleanup is irrelevant at exit — the OS reclaims all VM.
+        VirtualFreePage(page, page->page_size);
         page = next;
     }
     page_list_ = nullptr;
