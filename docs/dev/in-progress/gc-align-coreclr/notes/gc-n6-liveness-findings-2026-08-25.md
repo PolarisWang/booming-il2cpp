@@ -256,3 +256,28 @@ nursery_begin=0x214B5160048
 - `chaos_gc_region_barrier_stress_test`（位置校验）：5/5 exit 0
 - `test_gc_card_table_ext`：5/5 PASSED
 - `test_gc_region`：18/18 PASSED
+
+## 七、pre-existing 修复（2026-08-26 续 session：逐条修）
+
+在完成 gen1-relocation 主修后，逐条修了 4 个 pre-existing GC 问题（3 个已 commit，1 个待专项）：
+
+1. **dirty_card_decision 3-failure**（commit 1b9bf80c9）：测试的决策矩阵与 finding-1 修正后的 barrier 语义不符。
+   修正测试：young-dst 用**真实 nursery 区**（IsNurseryPointer=true→no card），mature-dst 用 synthetic
+   （card iff ref_gen<old，含保守 gen1→gen1 card）。barrier 本身正确（physical-nursery dst gate）。
+
+2. **region_test GetRegionGen(nursery)!=young 偶发**（commit 1b9bf80c9）：region-gen 表 4MB 粒度，nursery/gen1/
+   tenured 64KB 区共享 chunk，last-writer-wins 把 nursery 的 young 标签冲成 GEN1/OLD（ASLR 依赖 ~50% 闪）。根修：
+   `GetRegionGen` 物理优先——`GcGetRegionGenPhysical` 先查 IsNurseryPointer / Gen1 range，物理 young 权威覆盖
+   表字节，避免 barrier ref-gen / scavenge condemned-filter 因冲坏标签丢边→UAF。
+
+3. **old-gen full-collect CrossPageCompact hang**（commit 7f56e8150）：`GcWorkerPool::Initialize` readiness
+   deadlock——用全局累积 `ready_count_`，`target=ready.load()+spawned` 在**复用 exited slot** 时双重计数（旧线程
+   bump 残留）→ ready 永不达标 → Initialize 死锁 → Phase-4 copy RunWorkers 卡死 → probe mode2 全 GC 挂。
+   修：**Initialize 前 reset ready_count_=0**，target=spawned（每次新线程 entry bump 恰好 +1）。配合 entry-time
+   bump（原 first-park 对 fast-path worker 失效）。
+
+**遗留（pre-existing，待专项）**：
+- mode2 cycle1 `GcVerifyHeap` 崩（demotion 1596 对象 relocate 到 Gen1 后 GcVerify 走 stale/0xFF ref）→ 真实
+  demote 破坏性 bug（A2b memory 的 gc_demotion TypeInfo-less fallback 担忧现形，因 hang 修好后可达）。task#10。
+- gen1_test teardown SEGFAULT（atoexit GcDumpStats/全局析构与后台线程 race，cdb 下不复现）。
+
