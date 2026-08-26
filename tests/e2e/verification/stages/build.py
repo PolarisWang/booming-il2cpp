@@ -652,20 +652,15 @@ def _build_jit_entry_fast(
     native_config: str = "check",
     assembly_dirs: list[str] | None = None,
 ) -> bool:
-    """Build JIT entry-jit.exe if stale or missing, skip via mtime check otherwise.
+    """Build JIT entry-jit.exe — ALWAYS FRESH (2026-08 caching disabled).
 
-    Checks if entry-jit.exe already exists and is newer than the subjects DLL
-    and metadata. If so, skips the expensive TPG codegen + cmake build.
-    Returns True if JIT entry is available (built or already current).
+    Previously skipped via an mtime check when entry-jit.exe existed and was newer
+    than the subjects DLL/metadata.  User directive removed build caching, so we
+    always rebuild the JIT entry to guarantee it matches the current codegen.
     """
     jit_exe = native_dir / "entry-jit.exe"
     if jit_exe.exists():
-        jit_mtime = jit_exe.stat().st_mtime
-        deps = [subjects_dll, metadata_path]
-        if all(d.exists() and jit_mtime >= d.stat().st_mtime for d in deps):
-            print(f"  [build] [jit] entry-jit.exe is current ({jit_exe.stat().st_size} bytes)")
-            return True
-        print(f"  [build] [jit] entry-jit.exe exists but stale — rebuilding")
+        print(f"  [build] [jit] entry-jit.exe exists but caching DISABLED — always rebuild")
     return _build_jit_entry(tpg_dll, subjects_dll, metadata_path, native_dir,
                             native_config, assembly_dirs)
 
@@ -957,21 +952,14 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             total_subjects = metadata.get("totalMethods", 0)
             print(f"  [build] Custom subjects count: {total_subjects}")
 
-            # If entry.exe already exists from a previous successful build,
-            # skip the full TPG build (which may fail for exotic types like
-            # hardware intrinsics). The pre-built entry.exe is still current.
-            if ctx.entry_exe_path.exists():
-                print(f"  [build] Using pre-built entry.exe ({ctx.entry_exe_path.stat().st_size} bytes)")
-                _build_jit_entry_fast(tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),
-                                      subjects_dll, metadata_path, ctx.native_dir,
-                                      ctx.native_config, ctx.assembly_dirs)
-                duration_ms = int((time.perf_counter() - start) * 1000)
-                return StageResult(
-                    stage="build", status="passed",
-                    summary=f"[CUSTOM FALLBACK] {total_subjects} subjects -> entry.exe (pre-built, {duration_ms}ms)",
-                    details={"chunkSlug": ctx.slug, "totalSubjects": total_subjects,
-                             "tfm": tfm, "durationMs": duration_ms, "customFallback": True},
-                    duration_ms=duration_ms)
+            # 2026-08: user directive — always-fresh build.  The pre-built-entry.exe
+            # shortcut below is DISABLED: it skipped the full TPG build and reused a
+            # committed stale entry.exe (which segfaulted on re-codegen'd chunks and
+            # returned 0 from --fact-json).  We always fall through to the full build.
+            # (This fallback originally existed because full TPG may fail on exotic
+            # hardware-intrinsic types; forcing fresh rebuild means those either build
+            # now or surface their real failure instead of silently running stale code.)
+            print(f"  [build] [custom-fallback] pre-built entry.exe shortcut DISABLED — always rebuild")
 
             # Set flag to skip the ATG combine stage below
             _custom_fallback = True
@@ -1146,7 +1134,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         _REPO_ROOT / "artifacts" / "presets" / _sdk_preset / "src" / "native" / "bootstrap" / _sdk_config / f"chaos_bootstrap{_sdk_lib_ext}",
     ]
 
-    # -- 7a. Fast-path mtime check: skip TPG + cmake if entry.exe is already up to date --
+    # -- 7a. mtime fast-path DISABLED (always-fresh build) --
+    # 2026-08: user directive — remove build caching so every build is fresh.
+    # Previously, if entry.exe existed and its mtime >= deps, we skipped TPG+cmake
+    # and kept a STALE committed entry.exe (which segfaulted on re-codegen'd chunks
+    # and returned 0 from --fact-json).  Always fall through to the full build below.
     if ctx.entry_exe_path.exists():
         exe_mtime = ctx.entry_exe_path.stat().st_mtime
         deps = [
@@ -1155,24 +1147,19 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),
         ] + _runtime_stubs + _tpg_build_deps
         deps = [d for d in deps if d is not None and d.exists()]
-        stalest_dep_mtime = max(d.stat().st_mtime for d in deps)
+        stalest_dep_mtime = max(d.stat().st_mtime for d in deps) if deps else 0
         if exe_mtime >= stalest_dep_mtime:
             exe_size = ctx.entry_exe_path.stat().st_size
-            print(f"  [build] [fastpath] entry.exe is current ({exe_size} bytes, mtime={exe_mtime:.0f})")
-            duration_ms = int((time.perf_counter() - start) * 1000)
-            # Also build JIT entry if stale or missing (non-blocking)
-            _build_jit_entry_fast(tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),
-                                  subjects_dll, metadata_path, ctx.native_dir,
-                                  ctx.native_config, ctx.assembly_dirs)
-            return StageResult(
-                stage="build", status="passed",
-                summary=f"[FASTPATH] {total_subjects} subjects -> entry.exe ({duration_ms}ms)",
-                details={"chunkSlug": ctx.slug, "totalSubjects": total_subjects,
-                         "tfm": tfm, "platform": ctx.platform, "durationMs": duration_ms,
-                         "fastpath": True},
-                duration_ms=duration_ms)
+            print(f"  [build] [fastpath] entry.exe exists ({exe_size} bytes) but caching is "
+                  f"DISABLED — rebuilding fresh (no fast-path return)")
+        else:
+            print(f"  [build] [fastpath] entry.exe older than deps — full build")
 
-    # -- 7b. Hephaestus cache lookup: skip TPG if unchanged input --
+    # -- 7b. Hephaestus cache lookup DISABLED (always-fresh build) --
+    # 2026-08: user directive — remove build caching.  We skip the cache-hit
+    # restore entirely so the full TPG+cmake build below always runs.  (The
+    # HephaestusCache object is still constructed for provenance reporting, but
+    # its `.restore_to` is never used to short-circuit the build.)
     cache = HephaestusCache(ctx.foundation_dir, verbose=True)
     cache_status = "miss"
     input_hash = compute_input_hash(
@@ -1182,56 +1169,16 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     )
     # Context fingerprint: fast mtime check on tools/templates (not full SHA-256)
     context_fp = compute_context_fingerprint(_tpg_build_deps)
-
+    # `cache_key` is computed for (a) provenance {cacheKey} in the StageResult and
+    # (b) the cache.store() write AFTER a successful full build.  It is NOT used to
+    # short-circuit/restore here — caching is disabled for the READ path, so the full
+    # TPG+cmake build always runs.
     cache_key = cache.compute_key(input_hash, ctx.assembly, ctx.slug)
-    cache_hit = cache.is_cache_hit(cache_key)
-    # Full cache hit: content + tools/templates all match
-    if cache_hit and cache.is_context_fresh(cache_key, context_fp):
-        print(f"  [build] [hephaestus] FULL CACHE HIT: {cache_key[:48]}...")
-        if cache.restore_to(cache_key, ctx.native_dir):
-            # Verify the restored entry.exe exists
-            if ctx.entry_exe_path.exists():
-                exe_size = ctx.entry_exe_path.stat().st_size
-                print(f"  [build] [hephaestus] Restored entry.exe ({exe_size} bytes)")
-                # Clean stale cmake build dir that may have been restored from
-                # cache.  CMakeCache.txt records CMAKE_HOME_DIRECTORY from the
-                # original projectDir which may differ from the current path
-                # (e.g. different Docker container, clone path changed).  The
-                # cache-miss path (below) already does this; the cache-hit path
-                # was missing it.
-                restored_build_dir = ctx.native_dir / "build"
-                if restored_build_dir.exists():
-                    shutil.rmtree(restored_build_dir, ignore_errors=True)
-                    print(f"  [build] [hephaestus] Cleaned stale cmake build dir from cache")
-                duration_ms = int((time.perf_counter() - start) * 1000)
-                # Also build JIT entry if stale or missing (non-blocking)
-                _build_jit_entry_fast(tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),
-                                      subjects_dll, metadata_path, ctx.native_dir,
-                                      ctx.native_config, ctx.assembly_dirs)
-                return StageResult(
-                    stage="build", status="passed",
-                    summary=f"[CACHE HIT] {total_subjects} subjects -> entry.exe ({duration_ms}ms)",
-                    details={
-                        "chunkSlug": ctx.slug,
-                        "totalSubjects": total_subjects,
-                        "tfm": tfm,
-                        "platform": ctx.platform,
-                        "durationMs": duration_ms,
-                        "hephaestus": "cache_hit",
-                        "cacheKey": cache_key,
-                        "cachedAt": _cache_entry_cached_at(cache, cache_key),
-                    },
-                    duration_ms=duration_ms)
-            else:
-                print(f"  [build] [hephaestus] Cached entry.exe missing, falling through to full build")
-                cache.invalidate_assembly(ctx.assembly)
-                cache_status = "restore_failed_entry_missing"
-        else:
-            cache_status = "restore_failed"
-            print(f"  [build] [hephaestus] Cache restore failed, falling through to full build")
-            print(f"  [build] [hephaestus] Cache restore failed, falling through to full build")
+    # CACHE RESTORE DISABLED: do NOT short-circuit to a cached entry.exe.  Always
+    # fall through to the full build (line below).  This guarantees a fresh entry.
+    print(f"  [build] [cache] restore DISABLED — always full build (hash {cache_key[:24]}...)")
 
-    print(f"  [build] [hephaestus] CACHE MISS: performing full build")
+    print(f"  [build] [hephaestus] CACHE MISS (forced): performing full build")
 
     # -- Clean stale cmake build cache --
     # Prevents stale CMakeCache.txt from a previous run with a different source
