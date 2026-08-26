@@ -1,0 +1,76 @@
+# Native Nightly — non-GC correctness regression (on-demand + nightly).
+#
+# Closes the gap where the non-GC native tiers (JIT, AOT-adjacent, COM, Interop,
+# Hybrid, common) had ZERO nightly coverage and NO known-fail authority: the
+# `known-failures.*` baselines were consumed only by the GC workflows.  This
+# workflow runs the full `contracts-native` integration group through the
+# test_driver, which reconciles against tests/runner/baselines/known-failures.
+#integration.yaml (stale_known auto-reds when a known-fail is fixed, NEW
+# unexpected failures red the gate).  It deliberately runs at a stagger off the
+# GC nightly (:07) to avoid bursting the CI :00/:30.
+#
+# Not a per-PR gate: the fast per-PR correctness gates are aot-regression /
+# jit-baseline / codegen-regression / hybrid-regression / foundation-dll.  This is
+# the nightly authority that also catches cross-tier regressions a single
+# per-PR path-filter would miss.
+
+name: Native Nightly
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 4 * * *"    # every night 04:07 UTC (staggered off gc stress 03:00)
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  native-nightly:
+    runs-on: windows-latest    # reference platform: matches windows-x64-reference
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Configure native (windows-x64-reference root preset)
+        shell: bash
+        run: |
+          cmake -S . -B artifacts/presets/windows-x64-reference \
+            -G "Visual Studio 17 2022" \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
+            -DROADMAP0_PRESET_TARGET=windows-x64-reference
+
+      - name: Build Native Runtime
+        run: |
+          cmake --build artifacts/presets/windows-x64-reference --config Debug -j 8
+
+      - name: Run contracts-native suite (full native, known-fail reconciled)
+        shell: bash
+        run: |
+          # `--layer integration --group contracts-native` exercises the full
+          # native tree (JIT/common/com/interop/hybrid) and reconciles
+          # known-failures.integration.yaml.  Excludes the heavy
+          # benchmark/stress/soak tiers (kept for gc-stress-nightly).
+          python tests/runner/test_driver.py --layer integration --group contracts-native \
+            --cases --json native-nightly-report.json \
+            2>&1 | tee native-nightly-output.txt
+
+      - name: Upload native nightly output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-nightly-output
+          path: native-nightly-output.txt
+
+      - name: Upload native nightly report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-nightly-report
+          path: native-nightly-report.json

@@ -18,6 +18,13 @@ on:
       - "JIT Performance Baseline"
       - "AOT Regression Gate"
       - "Hybrid Regression Gate"
+      # Reliability-critical nightly gates + remaining workflows (previously unmonitored):
+      - "GC Unit Tests"
+      - "GC Stress Nightly"
+      - "Native Nightly"
+      - "ARM64 JIT CI"
+      - "Foundation-DLL CI"
+      - "Secret Scan"
     types:
       - completed
 

@@ -33,6 +33,10 @@ on:
 
 jobs:
   jit-baseline:
+    # contents: write needed ONLY for the explicit update_baseline=true dispatch,
+    # which commits the re-measured baseline back to the repo.
+    permissions:
+      contents: write
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -118,10 +122,16 @@ jobs:
         continue-on-error: true
         id: baseline-check
         run: |
+          # NOTE: --thresholds previously pointed at a missing
+          # .github/baselines/regression-thresholds.yaml, so compare-baseline.py
+          # crashed (FileNotFoundError via json.load) every run and the perf diff
+          # never executed.  Dropped the arg to use compare-baseline.py's built-in
+          # DEFAULT_THRESHOLDS (same as codegen-regression.yml).  `continue-on-error`
+          # keeps runner noise from redding the job; a real severe regression is still
+          # surfaced in baseline-comparison.txt and the PR comment below.
           python scripts/ci/compare-baseline.py \
             --baseline=".github/baselines/jit-metrics.json" \
             --current="jit-metrics-current.json" \
-            --thresholds=".github/baselines/regression-thresholds.yaml" \
             2>&1 | tee baseline-comparison.txt
 
       - name: Upload JIT Metrics
@@ -133,13 +143,27 @@ jobs:
             jit-native-output.txt
             baseline-comparison.txt
 
-      - name: Update Baseline (push to main or manual)
+      - name: Update Baseline (manual dispatch only — real commit back)
+        # Baseline updates are a deliberate, human-invoked act: a bare `cp` into the
+        # ephemeral checkout could never commit back, so the committed
+        # .github/baselines/jit-metrics.json (2026-06-13) was frozen.  Only an
+        # explicit `workflow_dispatch update_baseline=true` re-baselines, and it
+        # commits+pushed the fresh baseline with GITHUB_TOKEN (contents: write).
         if: |
-          (github.event_name == 'push' || github.event.inputs.update_baseline == 'true') &&
+          github.event.inputs.update_baseline == 'true' &&
           steps.baseline-check.outcome != 'failure'
         run: |
           cp jit-metrics-current.json .github/baselines/jit-metrics.json
-          echo "Baseline updated to commit ${{ github.sha }}"
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add .github/baselines/jit-metrics.json
+          if git diff --cached --quiet; then
+            echo "No baseline change to commit (results identical to stored baseline)."
+          else
+            git commit -m "ci(jit): refresh JIT perf baseline @ ${GITHUB_SHA}"
+            git push origin HEAD:${GITHUB_REF_NAME}
+            echo "Baseline committed @ ${GITHUB_SHA}"
+          fi
 
       - name: Post PR Comment (regression detected)
         if: failure() && github.event_name == 'pull_request'

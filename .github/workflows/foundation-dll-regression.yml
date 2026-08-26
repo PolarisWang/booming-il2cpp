@@ -4,8 +4,9 @@
 # PR trigger: smoke mode (key families only, fast feedback)
 # Push to main: full mode (all families, comprehensive verification)
 #
-# Uses the reusable ci-framework.yml for the base build,
-# then runs the foundation-dll pipeline on the compiled runtime.
+# NOTE: this workflow INLINES the base build steps (it does NOT call the reusable
+# ci-framework.yml — that file was unused dead config and has been removed).  See
+# the Configure/Build steps below for the native foundation-dll build.
 
 name: Foundation-DLL Regression
 
