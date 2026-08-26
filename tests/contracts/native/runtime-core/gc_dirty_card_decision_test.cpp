@@ -9,15 +9,20 @@
 /// race that blocks end-to-end survival detectors (see design-t7-barrier-stress-risk.md).
 ///
 /// Barrier contract (gc_card_table.cpp, faithful to CoreCLR region barrier):
-///   - dst in gen0 (nursery)  → never card (nursery scanned wholesale)
-///   - ref == null            → never card (degenerate store)
-///   - ref.gen >= dst.gen     → never card (same or mature generation)
-///   - otherwise (dst.gen > ref.gen, i.e. an older region writing younger)
-///     → card.  Card matrix (dst × ref):
+///   - dst physically in nursery (IsNurseryPointer) → never card (nursery scanned
+///     wholesale).  NOTE: the dst's 4MB region-gen chunk tag is deliberately NOT
+///     the gate — a chunk shared between the nursery tail and an old-gen page
+///     keeps a YOUNG tag, so an old-gen object there would be wrongly skipped and
+///     drop an old→nursery edge (GC-N6 finding 2026-08-25).  Only a real nursery
+///     address skips.
+///   - ref == null              → never card (degenerate store)
+///   - ref.gen == Old(2)        → never card (mature ref, no cross-gen edge)
+///   - otherwise (non-nursery dst, ref not mature) → card — including gen1→gen1,
+///     conservative extra-scan (never a correctness miss), matching CoreCLR.
+///   Card matrix (physical-dst-nursery × ref):
 ///         dst\ref  Young(0)  Gen1(1)  Old(2)
-///         Young(0)   skip    skip      skip
-///         Gen1(1)   CARD     skip      skip
-///         Old(2)    CARD     CARD      skip
+///         nursery    skip    skip      skip
+///         non-nursery CARD   CARD      skip
 ///
 /// Deterministic like the K2b test: a large calloc heap so dst/ref land in
 /// different 4MB region cells, with region→gen driven explicitly via SetRegionGen.
@@ -77,20 +82,47 @@ static void TestDecisionMatrix() {
     GcRegisterHeapRange(reinterpret_cast<uintptr_t>(heap),
                         reinterpret_cast<uintptr_t>(heap) + 8 * 1024 * 1024);
     auto base = reinterpret_cast<uintptr_t>(heap);
-    void* dst = reinterpret_cast<void*>(base + 64);                        // region cell 0
+    void* dst = reinterpret_cast<void*>(base + 64);                        // region cell 0 (non-nursery)
     void* ref = reinterpret_cast<void*>(base + 4 * 1024 * 1024 + 64);      // region cell 1
+
+    // Create a REAL nursery region so the "young dst" case genuinely exercises
+    // the physical-nursery gate (IsNurseryPointer), which the barrier uses for
+    // the "dst in gen0 → skip" decision (GC-N6 finding 2026-08-25).  The 4MB
+    // region-gen chunk tag is deliberately NOT the dst gate (chunk-collision
+    // hazard): an old-gen object sharing a 4MB chunk tagged young must still be
+    // carded, so only a real nursery address skips.  A synthetic calloc address
+    // tagged young via SetRegionGen is NOT physically nursery and must be carded.
+    Region* nursery = RegionManager::Instance().AllocateRegion(
+        RegionKind::REGION_NURSERY, 256 * 1024);
+    if (nursery == nullptr) { GC_FAIL("nursery region alloc failed"); return; }
+    void* nursery_dst = reinterpret_cast<void*>(
+        reinterpret_cast<uintptr_t>(nursery->begin) + 64);
+    if (!RegionManager::Instance().IsNurseryPointer(nursery_dst)) {
+        GC_FAIL("nursery_dst not recognized by IsNurseryPointer"); return;
+    }
 
     const uint8_t gens[3] = { kRegionGenYoung, kRegionGenGen1, kRegionGenOld };
 
-    // Full matrix.  Card  ⇔  dst.gen > ref.gen (both non-null, dst not young).
-    for (int d = 0; d < 3; d++) {
-        for (int r = 0; r < 3; r++) {
-            uint8_t dst_gen = gens[d];
-            uint8_t ref_gen = gens[r];
-            bool expect = (dst_gen != kRegionGenYoung) && (ref_gen < dst_gen);
-            CheckOne(dst_gen, ref_gen, expect, base, dst, ref);
-        }
+    // Correct barrier decision (faithful to the finding-1 implementation and
+    // CoreCLR region barrier): card iff the destination is NOT physically in the
+    // nursery AND the stored reference is not mature (ref_gen < Old).  Dst
+    // generation beyond "not-nursery" is intentionally NOT consulted (conservative
+    // carding: gen1→gen1 is carded, extra scan work, never a correctness miss).
+    //
+    //   nursery dst  → skip for every ref gen (nursery scanned wholesale)
+    //   non-nursery dst + ref Young(0) → CARD
+    //   non-nursery dst + ref Gen1(1)  → CARD  (conservative cross-gen edge)
+    //   non-nursery dst + ref Old(2)   → skip (mature ref, no cross-gen edge)
+    for (int r = 0; r < 3; r++) {
+        uint8_t ref_gen = gens[r];
+        bool nursery_expect = false;  // physical-nursery dst never cards
+        CheckOne(kRegionGenYoung, ref_gen, nursery_expect, base, nursery_dst, ref);
+        bool non_nursery_expect = (ref_gen < kRegionGenOld);  // card unless ref mature
+        CheckOne(kRegionGenOld, ref_gen, non_nursery_expect, base, dst, ref);
     }
+
+    // cleanup the nursery region used only for the physical-nursery dst gate.
+    RegionManager::Instance().FreeRegion(nursery->id);
 
     // Degenerate: ref == null → never card, for each non-null dst gen.
     for (int d = 0; d < 3; d++) {

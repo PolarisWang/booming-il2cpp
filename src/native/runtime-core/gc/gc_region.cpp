@@ -103,6 +103,28 @@ void GcMarkRangeOld(uintptr_t start, uintptr_t end) noexcept {
 YoungGeneration g_young_gen;
 thread_local TLAB tls_tlab;
 
+// Physical nursery/Gen1 membership for GetRegionGen: authoritative over the
+// coarse 4MB chunk table (see gc_region.h GetRegionGen rationale).  Reads the
+// live nursery and Gen1 region ranges directly.  Returns young(0)/gen1(1) if
+// physically inside, else kRegionGenInvalid.
+uint8_t GcGetRegionGenPhysical(uintptr_t addr) noexcept {
+    // Nursery: authoritative via RegionManager's registered nursery range array
+    // (IsNurseryPointer) — this covers BOTH the shared young region (wired by
+    // InitYoungGeneration) AND any independently-allocated REGION_NURSERY (tests).
+    if (RegionManager::Instance().IsNurseryPointer(reinterpret_cast<const void*>(addr))) {
+        return kRegionGenYoung;
+    }
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 != nullptr) {
+        auto* bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+        if (bump != nullptr && addr >= reinterpret_cast<uintptr_t>(gen1->begin) &&
+            addr < reinterpret_cast<uintptr_t>(bump)) {
+            return kRegionGenGen1;
+        }
+    }
+    return kRegionGenInvalid;
+}
+
 // ── Forward declarations ───────────────────────────────────────
 TLAB ClaimEmergencyTlab() noexcept;
 

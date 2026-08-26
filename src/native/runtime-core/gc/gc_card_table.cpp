@@ -8,6 +8,8 @@
 #include <new>
 #include <vector>
 
+#include "gc_region.h"
+
 namespace chaos::il2cpp::runtime_core {
 
 // ── L1 segment pointer table (dynamically growing) ──────────────
@@ -131,8 +133,11 @@ extern "C" void chaos_gc_dirty_card_dst_ref(const void* dst, const void* ref) no
     //    as mature → the ref_gen >= old test below skips — matching CoreCLR's
     //    out-of-range early-out.)
     if (ref == nullptr) return;
+    // 3. GetRegionGen is physical-authoritative for nursery/Gen1 (see gc_region.h):
+    //    a young ref always reads as young despite any 4MB-chunk-table collision.
+    //    A mature (old) ref — ref_gen >= old — creates no cross-gen edge.
     uint8_t ref_gen = GetRegionGen(reinterpret_cast<uintptr_t>(ref));
-    // 3. Conservative CoreCLR condition: only a strictly-younger reference
+    // 4. Conservative CoreCLR condition: only a strictly-younger reference
     //    stored into a non-nursery destination needs a card.  A mature (old)
     //    ref — ref_gen >= old — creates no cross-gen edge.  Note dst's own
     //    chunk tag is deliberately NOT consulted (collision hazard above);

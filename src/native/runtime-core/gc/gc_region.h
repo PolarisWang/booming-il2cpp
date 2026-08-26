@@ -101,10 +101,31 @@ static constexpr CHAOS_IL2CPP_SIZE kRegionGenShift = 22;
 extern uint8_t* g_region_to_gen;          // = table base (skewed by RegionManager)
 extern CHAOS_IL2CPP_SIZE g_region_gen_bytes;  // table size in bytes (for bounds guard)
 
+/// Sentinel returned by GcGetRegionGenPhysical when @a addr is not physically a
+/// nursery/Gen1 address.  Distinct from the real gen values (0/1/2).
+static constexpr uint8_t kRegionGenInvalid = 0xFFu;
+
+/// Physical nursery/Gen1 membership check for the region-gen lookup: returns
+/// young(0) if @a addr is within the live nursery range, gen1(1) if within the
+/// live Gen1 range, else kRegionGenInvalid (no physical young membership — caller
+/// falls back to the 4MB chunk table).  Non-inline because RegionManager is only
+/// complete in gc_region.cpp; the nursery/Gen1 ranges are read directly.
+uint8_t GcGetRegionGenPhysical(uintptr_t addr) noexcept;
+
 /// O(1) skewed lookup of a region's generation from any address.
 /// Bounds-guarded: addresses outside the covered table range conservatively
 /// report old(2) so the write barrier never OOB-reads for an out-of-heap value.
+///
+/// Physical young-gen membership (nursery/Gen1 range) is authoritative over the
+/// coarse 4MB chunk table: a nursery or Gen1 address must classify as young/gen1
+/// even when a mature region shares the SAME 4MB chunk and overwrote that chunk's
+/// table byte (last-writer-wins).  Relying on the clobbered byte would make a
+/// nursery ref read OLD → the write barrier skips the card / the scavenger's
+/// condemned-filter drops the object → cross-gen UAF (GC-N6 K2b: region_test
+/// GetRegionGen(nursery)!=young).
 inline uint8_t GetRegionGen(uintptr_t addr) noexcept {
+    uint8_t physical = GcGetRegionGenPhysical(addr);
+    if (physical != kRegionGenInvalid) return physical;  // physically nursery/Gen1 → authoritative
     if (g_region_to_gen == nullptr) return kRegionGenOld;  // uninitialized → conservative
     CHAOS_IL2CPP_SIZE idx = addr >> kRegionGenShift;
     if (idx >= g_region_gen_bytes) return kRegionGenOld;   // out of covered range → conservative
