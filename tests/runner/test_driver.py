@@ -263,6 +263,8 @@ groups (layers.<layer>.groups.<group>):
                          for the gate to be green
   stale_known    [str]   names the baseline lists as known-fail but which PASSED this run
                          (baseline should be pruned)
+  ghost_known    [str]   names the baseline lists as known-fail but which NEVER ran this run
+                         (test removed/renamed → ghost entry; baseline should be pruned)
   failures       [{ name, msg }]   every failing case (known or not), msg truncated to 500
   cases           — only present with --cases: [{ name, passed, duration_s, msg? }]
 
@@ -452,6 +454,14 @@ def main() -> int:
             passed_names = {c.name for c in res.cases if c.passed}
             stale_known = sorted(known & passed_names)
 
+            # P4b: ghost-known diagnostic — a known-fail name that NEVER appeared in
+            # this run at all (neither passed nor failed).  stale_known only fires when
+            # a known test passes; if the underlying test was removed/renamed, the
+            # known-fail entry silently stops matching and becomes a ghost.  Surface
+            # it so the baseline can be pruned rather than decaying silently.
+            run_names = {c.name for c in res.cases}
+            ghost_known = sorted(known - run_names)
+
             grand_total += res.total
             grand_pass += res.passed
             grand_fail += res.failed
@@ -462,9 +472,19 @@ def main() -> int:
                 "known": len(known_in_run),
                 "unexpected": [c.name for c in unexpected],
                 "stale_known": stale_known,
+                "ghost_known": ghost_known,
                 "failures": [{"name": c.name, "msg": (c.message or "")[:500]}
                              for c in res.cases if not c.passed],
             }
+            # Relay the adapter's captured raw tool stdout to THIS process's stdout.
+            # The native adapter captures ctest output instead of streaming it, so
+            # the nightly `test_driver --stress-only | tee gc-stress-output.txt`
+            # would otherwise never see the benchmark `BENCH,<name>,KEY=VAL` lines
+            # the GC/JIT collector parses.  Emit them here so the tee + downstream
+            # collect-gc-metrics.py / collect-jit-metrics.py get real data.
+            if getattr(res, "raw_out", ""):
+                sys.stdout.write(getattr(res, "raw_out", ""))
+                sys.stdout.flush()
             # P5: optional per-case detail (off by default — native ~200 cases,
             # dotnet can be thousands). With --cases this lets a later run diff
             # exactly which tests passed/failed for regression triage. --junit also
@@ -509,6 +529,8 @@ def _print_human(report: dict) -> None:
                 print(f"        UNEXPECTED-FAIL {u}")
             for s in g.get("stale_known", []):
                 print(f"        STALE-KNOWN (now passing, prune baseline): {s}")
+            for s in g.get("ghost_known", []):
+                print(f"        GHOST-KNOWN (known-fail test never ran — removed/renamed? prune baseline): {s}")
             for f in g["failures"]:
                 print(f"        FAIL {f['name']}\n             {f['msg'][:200]}")
     t = report["total"]

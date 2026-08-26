@@ -99,6 +99,11 @@ def main():
                         help="JSON-ified baseline output path (optional)")
     parser.add_argument("--thresholds",
                         help="GC thresholds JSON output path (optional)")
+    parser.add_argument("--update-baseline",
+                        help="Write this run's measured values INTO gc.perf.yaml "
+                             "(transition it out of pending-first-green-run).  "
+                             "Value = path to the gc-metrics-current.json to merge. "
+                             "Requires --gc-perf-yaml.  Opt-in baselining.")
     args = parser.parse_args()
 
     text = read_text(args.ctest_output)
@@ -160,6 +165,46 @@ def main():
         with open(args.thresholds, "w") as f:
             json.dump(thresholds_cfg, f, indent=2)
         print(f"[GC metrics] thresholds -> {args.thresholds}", file=sys.stderr)
+
+    # Update-baseline mode: merge a measured run's values into gc.perf.yaml so it
+    # transitions out of `pending-first-green-run` (values were all null -> GC perf
+    # comparison was a permanent no-op).  Opt-in: only called with a verified-green,
+    # metrics-non-empty `gc-metrics-current.json` from a human dispatch.
+    if args.update_baseline and os.path.exists(args.gc_perf_yaml):
+        with open(args.update_baseline) as f:
+            current = json.load(f)
+        current_bench = current.get("benchmarks", {})
+        if not current_bench:
+            print("[GC metrics] update-baseline: current metrics are EMPTY — refusing "
+                  "to write a hollow baseline", file=sys.stderr)
+            return 1
+        y = load_yaml(args.gc_perf_yaml)
+        pause = y.setdefault("pause_seconds", {})
+        filled_any = False
+        for scen, cfg in pause.items():
+            if not isinstance(cfg, dict):
+                continue
+            mv = current_bench.get(scen, {})
+            # Only overwrite a null/pending value for the P-keys this scenario
+            # declares, using measured seconds (collector already divided ns->s).
+            for key in ("p50", "p95", "p99"):
+                if key in cfg and cfg[key] is None and key.upper() in mv and mv[key.upper()]:
+                    cfg[key] = mv[key.upper()]
+                    filled_any = True
+        # Mark the baseline as captured (no longer pending).
+        y["machine"] = "github-actions-windows-x64-reference (first green capture)"
+        y["captured_at"] = "captured"   # placeholder; CI lacks Date.now — set by caller if needed
+        y["source_preset"] = "gc-stress"
+        if filled_any:
+            import io
+            import yaml as _yaml   # load_yaml uses a local import; reuse here for dump
+            with io.open(args.gc_perf_yaml, "w", encoding="utf-8", newline="\n") as f:
+                _yaml.safe_dump(y, f, allow_unicode=True, sort_keys=False, default_flow_style=False)
+            print(f"[GC metrics] update-baseline: wrote measured values -> {args.gc_perf_yaml}",
+                  file=sys.stderr)
+        else:
+            print("[GC metrics] update-baseline: no nullable fields to fill "
+                  "(scenarios already captured or no measured data)", file=sys.stderr)
 
     return 0
 

@@ -90,6 +90,16 @@ def main():
     all_warnings = []
     has_severe = False
 
+    # Empty-output guard: if the current run parsed ZERO benchmark entries, the
+    # benchmark tier either produced nothing (renamed/regressed/empty capture) or the
+    # collector found no `BENCH,` lines.  A silent-zero-output benchmark tier must
+    # NOT be reported green (it would mask a degraded/renamed bench suite).  Exit 2
+    # (severe) so the caller can distinguish "no data" from "compared cleanly".
+    if not current.get("benchmarks"):
+        print("[FAIL] Empty benchmark metrics — current run produced ZERO BENCH, "
+              "entries (benchmark tier missing/renamed/empty capture?).", file=sys.stderr)
+        sys.exit(2)
+
     # Compare benchmark metrics
     for bench_name, bench_metrics in current.get("benchmarks", {}).items():
         base_metrics = baseline.get("benchmarks", {}).get(bench_name, {})

@@ -149,10 +149,22 @@ jobs:
         # .github/baselines/jit-metrics.json (2026-06-13) was frozen.  Only an
         # explicit `workflow_dispatch update_baseline=true` re-baselines, and it
         # commits+pushed the fresh baseline with GITHUB_TOKEN (contents: write).
+        # Defense-in-depth: refuse to commit if the current capture is EMPTY or
+        # zero-metric (a hollow/poisoned run must never overwrite the frozen base).
         if: |
           github.event.inputs.update_baseline == 'true' &&
           steps.baseline-check.outcome != 'failure'
         run: |
+          python - <<'EOF'
+          import json
+          with open('jit-metrics-current.json') as f:
+              cur = json.load(f)
+          n = len(cur.get('benchmarks', {}))
+          if n == 0:
+              print('REFUSE: current JIT metrics are EMPTY (0 benchmarks) — not committing a hollow baseline.')
+              raise SystemExit(1)
+          print(f'OK: current JIT metrics carry {n} benchmark families.')
+          EOF
           cp jit-metrics-current.json .github/baselines/jit-metrics.json
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"

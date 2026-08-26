@@ -93,6 +93,9 @@ def run(group: dict, timeout: int = 1800, quick: bool = False) -> SuiteResult:
         cmd += ["-R", ctest_regex]
     rc, out = _run(cwd, cmd, timeout)
     res.duration_s = time.time() - t0
+    # Stash the raw ctest stdout so the driver can relay it (benchmark tiers emit
+    # `BENCH,<name>,KEY=VAL` lines the nightly tee + collector must capture).
+    res.raw_out = out
 
     if rc == 124:
         res.error = "TIMEOUT ctest"; return res

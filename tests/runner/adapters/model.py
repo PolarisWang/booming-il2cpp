@@ -29,6 +29,11 @@ class SuiteResult:
     cases: list[CaseResult] = field(default_factory=list)
     error: Optional[str] = None       # set if the adapter could not run at all
     duration_s: float = 0.0
+    # Raw stdout of the underlying tool (ctest / dotnet / script).  The native
+    # adapter captures ctest output rather than streaming it; benchmark tiers emit
+    # machine-parseable `BENCH,<name>,KEY=VAL` lines that a nightly tee + collector
+    # needs, so the adapter stashes the captured output here for the driver to relay.
+    raw_out: str = ""
 
     @property
     def ok(self) -> bool:

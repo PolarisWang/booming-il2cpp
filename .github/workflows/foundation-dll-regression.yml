@@ -104,7 +104,15 @@ jobs:
         shell: bash
         run: |
           # L11: native CTest suites live under tests/unit/runtime-native (factory via root CMake).
-          cmake --preset windows-x64-reference 2>/dev/null || cmake -S . -B build/native-test -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          # Branch on platform — do NOT "try the windows preset then fall back": on Linux that
+          # `cmake --preset windows-x64-reference 2>/dev/null ||` attempt fails (preset is
+          # Windows/VS-only) and the error was silently swallowed every run.  Configure the
+          # right tree for the actual runner.
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            cmake --preset windows-x64-reference
+          else
+            cmake -S . -B build/native-test -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          fi
 
       - name: Build Native Tests
         run: cmake --build build/native-test --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)

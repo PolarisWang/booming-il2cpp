@@ -20,6 +20,11 @@ name: GC Stress Nightly
 
 on:
   workflow_dispatch:        # manual on-demand stress run
+    inputs:
+      update_baseline:
+        description: "Update the stored gc.perf.yaml baseline with this run's measured values (opt-in baselining)"
+        default: false
+        type: boolean
   schedule:
     - cron: "0 3 * * *"    # every night 03:00 UTC
 
@@ -30,6 +35,10 @@ env:
 jobs:
   gc-stress:
     runs-on: windows-latest    # reference platform: x64; matches windows-x64-reference
+    # contents: write only needed for the explicit update_baseline=true dispatch,
+    # which commits the filled gc.perf.yaml baseline.
+    permissions:
+      contents: write
     env:
       CHAOS_GC_TEST_STRESS_ONLY: "1"
       CHAOS_IL2CPP_ARTIFACTS_ROOT: ${{ github.workspace }}/artifacts
@@ -43,6 +52,18 @@ jobs:
 
       - name: Build Generator
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Cache windows-x64-reference native build
+        # Dedup: gc-ci (02:37), native-nightly (04:07) and this workflow all build the
+        # SAME root preset nightly.  The first nightly run populates this cache; later
+        # runs restore it and do only an incremental build.  Shared key with
+        # native-nightly so the prebuilt tree is reused across all three.
+        uses: actions/cache@v4
+        with:
+          path: artifacts/presets/windows-x64-reference
+          key: windows-ref-${{ runner.os }}-${{ hashFiles('src/native/**', 'tests/**/runtime-native/**', 'CMakeLists.txt', '**/*.cmake') }}
+          restore-keys: |
+            windows-ref-${{ runner.os }}-
 
       # The driver's `contracts-native` group points at the ROOT reference preset
       # (artifacts/presets/windows-x64-reference, per suite_contract.yaml), so the
@@ -105,6 +126,34 @@ jobs:
             --baseline=gc-baseline.json \
             --current=gc-metrics-current.json \
             --thresholds=gc-thresholds.json
+
+      - name: Update GC perf baseline (manual dispatch only — fills pending values + commits)
+        # Opt-in baselining: only an explicit dispatch with update_baseline=true writes
+        # this green run's measured GC perf numbers into gc.perf.yaml (transitioning it
+        # out of pending-first-green-run) and commits.  Automatic nightly runs never
+        # mutate the baseline.  Refuses to write a hollow (empty-metadata) baseline.
+        if: |
+          github.event.inputs.update_baseline == 'true'
+        shell: bash
+        run: |
+          python scripts/ci/collect-gc-metrics.py \
+            --ctest-output=gc-stress-output.txt \
+            --gc-perf-yaml=tests/runner/baselines/gc.perf.yaml \
+            --output=gc-metrics-current.json \
+            --baseline-output=gc-baseline.json \
+            --thresholds=gc-thresholds.json \
+            --update-baseline=gc-metrics-current.json
+          # Commit the filled baseline back (same auth pattern as jit-baseline).
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add tests/runner/baselines/gc.perf.yaml
+          if git diff --cached --quiet; then
+            echo "No GC baseline change to commit (values already captured)."
+          else
+            git commit -m "ci(gc): refresh GC perf baseline @ ${GITHUB_SHA}"
+            git push origin HEAD:${GITHUB_REF_NAME}
+            echo "GC baseline committed @ ${GITHUB_SHA}"
+          fi
 
       - name: Upload current GC metrics
         if: always()

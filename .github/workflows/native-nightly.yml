@@ -38,6 +38,19 @@ jobs:
       - name: Build Generator
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
 
+      - name: Cache windows-x64-reference native build
+        # Dedup: gc-ci (02:37), gc-stress-nightly (03:00) and this workflow (04:07)
+        # build the SAME root preset every night.  The first nightly run populates
+        # this cache; the later runs restore it and only do an incremental build,
+        # instead of three full -j8 builds.  Keyed on the source/CMake tree so a
+        # code change invalidates the cache.
+        uses: actions/cache@v4
+        with:
+          path: artifacts/presets/windows-x64-reference
+          key: windows-ref-${{ runner.os }}-${{ hashFiles('src/native/**', 'tests/**/runtime-native/**', 'CMakeLists.txt', '**/*.cmake') }}
+          restore-keys: |
+            windows-ref-${{ runner.os }}-
+
       - name: Configure native (windows-x64-reference root preset)
         shell: bash
         run: |

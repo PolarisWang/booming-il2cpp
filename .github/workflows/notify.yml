@@ -31,6 +31,10 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
+    # issues: write needed to auto-file a tracking issue when a nightly
+    # (schedule-event) run fails — see the "Auto-file issue for nightly failures" step.
+    permissions:
+      issues: write
 
     steps:
       - name: Check workflow result
@@ -106,4 +110,45 @@ jobs:
           echo "  SHA: ${{ steps.check-result.outputs.head_sha }}"
           echo "  URL: ${{ steps.check-result.outputs.run_url }}"
           echo "  Event: ${{ steps.check-result.outputs.event }}"
-          # Future: add email/webhook notification here
+
+      - name: Auto-file issue for nightly (schedule) failures
+        # CRITICAL observability fix: a nightly (schedule-event) run failure was
+        # previously invisible — the PR-comment path only fires for pull_request, and
+        # the non-PR handler just echoed to the log.  Auto-file a tracking issue so a
+        # red nightly has a durable, human-visible artifact.
+        if: |
+          steps.check-result.outputs.status == 'failed' &&
+          steps.check-result.outputs.event == 'schedule'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const w = '${{ steps.check-result.outputs.workflow }}';
+            const sha = '${{ steps.check-result.outputs.head_sha }}';
+            const url = '${{ steps.check-result.outputs.run_url }}';
+            const title = `[nightly] ${w} failed${sha ? ' @ ' + sha.substring(0,8) : ''}`;
+            // Dedup: don't spam a new issue every night for the same failure — search
+            // for an open issue with the same title prefix and update it instead.
+            const { data: existing } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 30,
+            });
+            const hit = existing.find(i => i.title === title);
+            const body =
+              `Nightly workflow \`${w}\` failed.\n\n` +
+              `- Workflow run: ${url}\n` +
+              `- Commit: ${sha}\n\n` +
+              `A human must triage this. (auto-filed by CI notification)`;
+            if (hit) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: hit.number, body: `Still failing:\n\n${body}`,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title, body,
+              });
+            }
