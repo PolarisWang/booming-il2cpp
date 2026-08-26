@@ -73,6 +73,16 @@ nursery_begin=0x214B5160048
 `scan_ptr+=0` 可死循环。已加 `instance_size==0 → EstimateObjectSize` 回退（对齐 PreciseObjectSize 与 gc_gen1 各 walk）。
 验证：old_gen 6/6、region 18/18、card_table 5/5 全绿；gen1 基线一致。**此为正确健壮性 guard，但非发现3确证根因。**
 
+### 已验证：当前提交代码下 discover-3 不再复现（2026-08-26）
+
+重建 discover-3 触发：**多线程 coordinator + 8 worker 各持 old-gen OldMessage + 128B typed nursery 对象
+（TypeInfo@0 + magic@8，coordinator 端打字，Phase-2 精确扫描）**，连跑 **8/8 全完成，无挂起**（临时 repro，已删）。
+同时单线程自引用 typed 128B young-GC 亦不挂。
+
+**结论**：typed young-GC + 并发坐标路径在当前代码下健壮。discover-3 挂起**很可能已被既有提交消除**
+——最可能 `200c7dd88`（`instance_size==0 → scan_ptr 必前进`）或协作修复（屏障 `ef0012d49`、demotion `4fd172906`）。
+属间接证据（repro 与原内容校验原型有措辞差异：打字位置、demotion 交互），非 100% 断言，但强正面。
+
 ### 待定位（发现3 真根）
 
 **Phase-3 BFS 无限增长**：`GcScavengeObjectKnownNursery` 对 128B typed 对象无限打日志，符合 BFS worklist 循环追加
