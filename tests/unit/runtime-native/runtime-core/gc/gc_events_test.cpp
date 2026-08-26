@@ -85,12 +85,74 @@ TEST(GcEvents, FireMultipleEvents) {
     EXPECT_GE(count.load(), 1) << "callback fired for multiple events";
 }
 
+// ── Test 3b: GC-N11 BGC phase event family + trigger-reason marker ─────────
+
+TEST(GcEvents, BgcPhaseEventFamilyEnumeration) {
+    // The BGC phase event constants enter the same enum domain and are
+    // enumerable/dereferenceable (compile-time proof they're valid values),
+    // and the reason-marker member exists.  Values are dense and ordered so a
+    // consumer can switch exhaustively.
+    GcEvent phases[] = {
+        GcEvent::BGC_ROOT_COLLECT,
+        GcEvent::BGC_CONCURRENT_MARK,
+        GcEvent::BGC_STW_REMARK,
+        GcEvent::BGC_CONCURRENT_SWEEP,
+        GcEvent::BGC_STW_COMPACT,
+        GcEvent::BGC_FINISHED,
+        GcEvent::GC_REASON_MARK,
+    };
+    // All are distinct (no accidental aliasing of the phase ids).
+    uint32_t seen = 0;
+    for (auto e : phases) {
+        uint32_t v = static_cast<uint32_t>(e);
+        EXPECT_FALSE((seen >> v) & 1u) << "event id " << v << " duplicated";
+        seen |= (1u << v);
+    }
+}
+
+TEST(GcEvents, FireBgcPhaseEventFamily) {
+    // Register a handler that records which phase events fire.
+    std::atomic<uint32_t> bgc_root{0}, bgc_mark{0}, bgc_remark{0},
+        bgc_sweep{0}, bgc_compact{0}, bgc_finish{0};
+    auto handler = +[](GcEvent event, void* user_data) {
+        auto* c = static_cast<std::atomic<uint32_t>*>(user_data);
+        switch (event) {
+            case GcEvent::BGC_ROOT_COLLECT:     c[0].fetch_add(1); break;
+            case GcEvent::BGC_CONCURRENT_MARK:  c[1].fetch_add(1); break;
+            case GcEvent::BGC_STW_REMARK:       c[2].fetch_add(1); break;
+            case GcEvent::BGC_CONCURRENT_SWEEP: c[3].fetch_add(1); break;
+            case GcEvent::BGC_STW_COMPACT:      c[4].fetch_add(1); break;
+            case GcEvent::BGC_FINISHED:         c[5].fetch_add(1); break;
+            case GcEvent::GC_REASON_MARK:       c[6].fetch_add(1); break;
+            default: break;
+        }
+    };
+    std::atomic<uint32_t> counters[7] = {};
+    EXPECT_TRUE(GcRegisterEventCallback(handler, counters));
+
+    // Fire the full BGC phase sequence as a single controller would.
+    GcFireEvent(GcEvent::BGC_ROOT_COLLECT);
+    GcFireEvent(GcEvent::BGC_CONCURRENT_MARK);
+    GcFireEvent(GcEvent::BGC_STW_REMARK);
+    GcFireEvent(GcEvent::BGC_CONCURRENT_SWEEP);
+    GcFireEvent(GcEvent::BGC_STW_COMPACT);
+    GcFireEvent(GcEvent::BGC_FINISHED);
+    GcFireEvent(GcEvent::GC_REASON_MARK);
+
+    EXPECT_GE(counters[0].load(), 1);
+    EXPECT_GE(counters[1].load(), 1);
+    EXPECT_GE(counters[2].load(), 1);
+    EXPECT_GE(counters[3].load(), 1);
+    EXPECT_GE(counters[4].load(), 1);
+    EXPECT_GE(counters[5].load(), 1);
+    EXPECT_GE(counters[6].load(), 1);
+}
+
 // ── Test 4: Pinned object lifecycle ─────────────────────────────────────────
 
 TEST(GcEvents, AddRemovePinnedObject) {
     int dummy_obj = 0;
     void* ptr = &dummy_obj;
-
     GcAddPinnedObject(ptr);
     bool is_pinned = GcIsPinnedObject(ptr);
     EXPECT_TRUE(is_pinned) << "object is pinned after GcAddPinnedObject";

@@ -40,6 +40,22 @@ enum class GcEvent : uint8_t {
     GC_FULL_DONE   = 8,    // Full GC completed (with stats)
     GC_OOM         = 9,    // Out-of-memory condition (allocation failed after GC)
     GC_GEN1_COLLECT = 10,   // Gen1 mark-sweep collection
+
+    // GC-N11 (=M13): BGC phase event family — fire at each background
+    // concurrent-GC phase boundary so consumers can trace a full BGC cycle's
+    // progress (not just full-GC start/end).  Mirrors BgcPhase.
+    BGC_ROOT_COLLECT     = 11,  // STW root set population
+    BGC_CONCURRENT_MARK  = 12,  // background transitive-closure marking
+    BGC_STW_REMARK       = 13,  // STW SATB + dirty-card drain
+    BGC_CONCURRENT_SWEEP = 14,  // background page sweep
+    BGC_STW_COMPACT      = 15,  // STW compaction
+    BGC_FINISHED         = 16,  // cycle complete
+
+    // GC-N11: per-GC trigger reason bitmap marker — fired at GC_START/GC_END
+    // boundaries.  The active trigger reason (GcTriggerReason bits) is read by
+    // consumers via GcCurrentTriggerReason(); this marker distinguishes the
+    // "collection carried a reason bitmap" generation of events.
+    GC_REASON_MARK       = 17,
 };
 
 /// Maximum number of registered callbacks.

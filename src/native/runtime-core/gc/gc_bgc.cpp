@@ -171,6 +171,8 @@ void BgcController::StartBgcCycle() {
     // can cause the concurrent mark loop to chase garbage pointers
     // indefinitely (the "BGC hang").
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "start_cycle");
+    // GC-N11: fire BGC root-collect (STW) phase start.
+    GcFireEvent(GcEvent::BGC_ROOT_COLLECT);
     uint32_t bgc_gen = threading::RequestGlobalSafepoint();
     PopulateRootSet();
     threading::ReleaseGlobalSafepoint(bgc_gen);
@@ -183,11 +185,15 @@ void BgcController::StartBgcCycle() {
     bgc_start_requested_.store(true, std::memory_order_release);
     NotifyBgc();
 
+    // GC-N11: fire BGC concurrent-mark phase start.
+    GcFireEvent(GcEvent::BGC_CONCURRENT_MARK);
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_mark_started");
 }
 
 CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
     // Must be called under safepoint.
+    // GC-N11: fire BGC STW re-mark phase start.
+    GcFireEvent(GcEvent::BGC_STW_REMARK);
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "stw_remark_start");
 
     // Drain all thread-local SATB buffers.
@@ -298,10 +304,14 @@ void BgcController::StartConcurrentSweep() {
     bgc_start_requested_.store(true, std::memory_order_release);
     NotifyBgc();
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_sweep_started");
+    // GC-N11: fire BGC concurrent-sweep phase start.
+    GcFireEvent(GcEvent::BGC_CONCURRENT_SWEEP);
 }
 
 void BgcController::StwCompact() {
     // Must be called under safepoint.
+    // GC-N11: fire BGC STW compaction phase start.
+    GcFireEvent(GcEvent::BGC_STW_COMPACT);
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "stw_compact_start");
 
     // Run compaction using the mark bitmap left intact by BgcSweep().
@@ -1229,6 +1239,8 @@ void BgcController::BgcThreadMain() {
             cycle_complete_.store(true, std::memory_order_release);
             NotifyBgc();
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "cycle_finished");
+            // GC-N11: fire BGC cycle-complete (phase family ends here).
+            GcFireEvent(GcEvent::BGC_FINISHED);
         }
 
         // ── BGC dependent handle processing ─────────────────────────

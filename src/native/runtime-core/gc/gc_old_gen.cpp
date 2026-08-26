@@ -3039,6 +3039,9 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                        static_cast<uint64_t>(page_count_));
     GcEtwFireGcEnd(pause_ns, total_reclaimed);
     GcFireEvent(GcEvent::GC_FULL_DONE);
+    // GC-N11: per-GC trigger-reason bitmap marker — consumers read
+    // G_Scheduler().LastTriggerReason() to attribute this full GC's cause.
+    GcFireEvent(GcEvent::GC_REASON_MARK);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_dbg AFTER_ETW");
 
