@@ -104,4 +104,34 @@ TEST_F(GcHeapManagerTest, ForEachHeapProvidesValidHeapIds) {
     });
     EXPECT_TRUE(ids_ok.load());
 }
+
+// GC-N9 (=M3B): runtime dynamic heap-count adjustment (grow / shrink).
+TEST_F(GcHeapManagerTest, AdjustHeapCountGrowShrink) {
+    auto& mgr = GcHeapManager::Instance();
+    mgr.Initialize(2);
+    EXPECT_EQ(mgr.HeapCount(), 2);
+
+    // Grow 2 → 4: heap count reflects the new target and existing ids preserved.
+    EXPECT_TRUE(mgr.AdjustHeapCount(4));
+    EXPECT_EQ(mgr.HeapCount(), 4);
+    for (int i = 0; i < 4; i++) {
+        EXPECT_EQ(mgr.GetHeap(i).heap_id, i) << "heap id preserved on grow";
+    }
+
+    // No-op when already at target.
+    EXPECT_FALSE(mgr.AdjustHeapCount(4));
+
+    // Shrink 4 → 1: bounded to >= 1, surviving heap still id 0.
+    EXPECT_TRUE(mgr.AdjustHeapCount(1));
+    EXPECT_EQ(mgr.HeapCount(), 1);
+    EXPECT_EQ(mgr.GetHeap(0).heap_id, 0);
+
+    // Below-min input clamps to 1; already at 1 → no-op returns false.
+    EXPECT_FALSE(mgr.AdjustHeapCount(-5));
+
+    // Oversized input clamps to the cap and does not exceed the bound.
+    EXPECT_TRUE(mgr.AdjustHeapCount(2000));  // clamped to kMaxServerHeaps
+    EXPECT_LE(mgr.HeapCount(), 64);
+    EXPECT_FALSE(mgr.AdjustHeapCount(2000));  // at cap → unchanged → no-op
+}
 #endif  // CHAOS_IL2CPP_GC_SERVER
