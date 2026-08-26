@@ -37,6 +37,13 @@ on:
         options:
           - smoke
           - full
+  # Nightly: foundation-dll is the heaviest multi-stage product verification —
+  # PR only runs smoke (build,fact,coverage-audit); the FULL 6-stage pipeline
+  # (build,fact,hotupdate,coverage-audit,benchmark,benchmark_report + check-regression)
+  # must run every night.  Staggered (05:47) after the GC/native windows nightlies
+  # (02:37/03:00/04:07) and off :00/:30 to avoid the CI burst.
+  schedule:
+    - cron: "47 5 * * *"
 
 jobs:
   foundation-dll:
@@ -122,7 +129,9 @@ jobs:
         id: ci-mode
         shell: bash
         run: |
-          if [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event.inputs.mode }}" = "full" ]; then
+          # Nightly (schedule) and push-to-main and manual mode=full all run the FULL
+          # 6-stage foundation-dll pipeline.  PR runs smoke (fast feedback).
+          if [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.mode }}" = "full" ]; then
             echo "mode=full" >> $GITHUB_OUTPUT
             echo "stages=build,fact,hotupdate,coverage-audit,benchmark,benchmark_report" >> $GITHUB_OUTPUT
             echo "check-regression=--check-regression" >> $GITHUB_OUTPUT
