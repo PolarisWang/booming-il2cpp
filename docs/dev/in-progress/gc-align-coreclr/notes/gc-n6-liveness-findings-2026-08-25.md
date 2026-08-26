@@ -29,6 +29,18 @@ GC-N6 的价值主张，也为 A2b 提供一个可靠 reproducer（此前 A2b �
 **处置**：内容校验测试暴露真 bug → **不可进快 gate**（会红）；保留为 A2b 专项的确定性 reproducer 依据。
 位置校验版保持快 gate 绿。
 
+### A2b 机制 gap 定位（2026-08-26 续，为何 142 仍发生）
+
+`barrier_inflight` + coordinator drain 已存在（thread_state.cpp:506-523）：collect 阶段 EnumerateThreads 计
+`suspend_ack!=epoch 或 barrier_inflight!=0` 的线程，`s_remaining==0 → break`。**这是点态快照 → TOCTOU 窗**：
+coordinator `break` 之后、young-GC Phase-1 开始之前，一个 worker 可能**新开**一个 `BarrierCriticalSectionScope`
+（inflight 0→1，forbid_suspend.h:109 无条件置位，不查 safepoint 是否已请求）→ 该 store 的 card 不在 drain 已扫
+视野内 → Phase-1 旧页干净卡 → 目标回收 → UAF。per-worker ~1 GC-cycle 的 store 量 = 与 142/1024 吻合。
+
+**修复方向（γ' 阶段1 refined）**：让"safepoint 请求后不得新开 barrier 临界区"（在 `BarrierCriticalSectionScope`
+内层查 `suspend_seq!=0` 则先落 barrier_inflight 再 poll，或用 request→Phase-1 全窗 drain）。高风险 safepoint
+并发改动，需分阶段、先证明窗、bounded-wait + APC 兜底防死锁。
+
 ## 二、发现 1（✅ 已修复提交 `ef0012d49`）：世代屏障 4MB region-gen chunk 碰撞 → 漏卡 → UAF
 
 ### 证据链（诊断输出，10/10 复现）
