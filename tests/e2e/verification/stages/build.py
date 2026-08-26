@@ -589,11 +589,18 @@ def _build_jit_entry(
     # codegen/ and subjects/ (needed for hotupdate cmake reconfigure), so a stale
     # build_jit_output left over from a previous run (with older page-*.cpp that
     # reference external symbols the current codegen no longer emits stubs for)
-    # is NOT fully purged — the incremental cmake build then links those stale
+    # is NOT fully purged -- the incremental cmake build then links those stale
     # pages and fails (C3861: chaos_external_runtime_* identifier not found).
     # Delete the whole dir so codegen regenerates subjects/page-*.cpp fresh.
     if jit_output.exists():
-        shutil.rmtree(jit_output, ignore_errors=True)
+        try:
+            shutil.rmtree(jit_output)
+        except OSError as e:
+            # Do NOT silently swallow a failed purge: a stale build_jit_output
+            # left behind would make the incremental JIT cmake build hit C3861
+            # again with no obvious cause.  Surface a loud warning here.
+            print(f"  [build] WARNING: could not purge stale build_jit_output ({e}); "
+                  f"JIT may hit C3861 from leftover page-*.cpp")
     jit_output.mkdir(parents=True, exist_ok=True)
 
     cmd = [
