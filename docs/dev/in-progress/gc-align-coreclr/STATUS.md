@@ -32,13 +32,14 @@ clearance_confirmed_by_user: true
 | Phase 6 | GC-L1/L2 | ⬜ 纳入 v2 Phase 8 (M6/M3B) |
 | Phase 7-9 | GC-M1..M15（v2 功能对齐） | ⬜ M1 部分完成（regen link-ready），M2 已建测试暴露疑点后闭环 |
 | **Phase 10（批次 1）** | GC-N1..N4（P0 护网闭合） | ✅ GC-N1/N3/N4 已提交；GC-N2 由并行线承接 |
-| **Phase 11（批次 2）** | GC-N5..N8（P1 工程闭环） | 🔄 GC-N5 ✅；GC-N6 发现 2 缺陷（屏障 `ef0012d49` 已修，gen1↔old-gen 重叠专项）；**GC-N7 2 真bug `904114c3d` + 回归验证 `c226c3d08`；GC-N8 完成 `bf1b83503`(采集) + `048b9f15c`(伺服)**（残余堆破坏待真机 page-heap） |
-| **Phase 12（批次 3）** | GC-N9..N12（P2 能力拉平） | ⬜ |
+| **Phase 11（批次 2）** | GC-N5..N8（P1 工程闭环） | 🔄 GC-N5 ✅；GC-N6 发现 2 缺陷（屏障 `ef0012d49` 已修，gen1↔old-gen 重叠专项）；**GC-N7 2 真bug `904114c3d`；GC-N8 完成 `bf1b83503`+`048b9f15c`**（残余堆破坏待真机 page-heap，阻塞 GC-N8<5%量化） |
+| **Phase 12（批次 3）** | GC-N9..N12（P2 能力拉平） | 🔄 **GC-N10 `202c62f22`、GC-N11 `d35d78dcd`、GC-N9 `a77aff4dd` 已提交**；GC-N12 依赖 GC-N7 稳定基准（阻塞） |
 
 ## 下一步
 
 - 批次 1：GC-N1/N3/N4 已提交（待 CI 实跑确认）；GC-N2 由并行 GC 调试线承接。
-- 批次 2：GC-N5 已提交（L1 卡表 UAF）；GC-N6 发现已固化（`notes/gc-n6-liveness-findings-2026-08-25.md`）。**GC-N7 余波**：`904114c3d` 修 2 代码级真 bug（析构 FreePage UAF + ResizeGen1Region 清空新 gen1）；残余 `YoungGcPauseUnderLoad` 为**非确定性堆破坏**（`GcYoungCollection:537` AV + `~MarkSweepOldGen:127` teardown `c0000374`，同代码频率 8%~73% 波动），A/B/C 拟修复已逐项复测 revert；需真实机器 page-heap（`gflags /p /full`）定字节专项（`notes/gc-n7-release-benchmark-crash-2026-08-25.md`）。GC-N7 Release 基准残余修复前无法产出可信数值。
+- 批次 2：GC-N5 已提交（L1 卡表 UAF）；GC-N6 发现已固化（`notes/gc-n6-liveness-findings-2026-08-25.md`）。GC-N7 修正：`904114c3d` 修 2 真 bug，残余 `YoungGcPauseUnderLoad` 为**非确定性堆破坏**（`GcYoungCollection:537` AV + `~MarkSweepOldGen:127` teardown `c0000374`，同代码频率 8%~73%），A/B/C 已 revert；需真机 page-heap（`notes/gc-n7-release-benchmark-crash-2026-08-25.md`）。
+- 批次 3：**GC-N10（provisional 完整，高记忆+高碎片→NGC2 强制 compact）`202c62f22`、GC-N11（BGC 阶段事件族+原因位图）`d35d78dcd`、GC-N9（Dynamic Heap Count，Server-compile 通过、runtime 待 GC-N3 harness）`a77aff4dd` 已提交**。GC-N12（profile 调参）依赖 GC-N7 稳定 Release 基准 + 真机 page-heap 修复残余。
 - 约束满足方式：每子任务按 roadmap 三约束原则（多平台纯 C++ / JIT-AOT 同符号 / 热更兼容入口）+ 架构优先前置。
 
 ## 关键文档
