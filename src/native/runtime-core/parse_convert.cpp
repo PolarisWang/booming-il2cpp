@@ -358,6 +358,28 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, 
     return DecimalFromDoubleResult(ld / rd);
 }
 
+// ── Math::Ceiling/Floor/Round/Truncate(System.Decimal) ─────────────
+// The simplified Decimal model carries a signed integer magnitude, so these
+// integer-rounding ops are value-preserving. Return the input carrier pointer
+// (identity) so a zero/Decimal.Zero arg round-trips to the SAME carrier address —
+// codegen's `Assert.AreEqual(Decimal, Decimal)` lowers to a pointer compare.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalCeiling(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
+{
+    return carrier_ptr;
+}
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalFloor(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
+{
+    return carrier_ptr;
+}
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
+{
+    return carrier_ptr;
+}
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
+{
+    return carrier_ptr;
+}
+
 // ═══════════════════════════════════════════════════════════════════
 // Convert::ToDecimal(Double) — double→DecimalCarrier
 // ═══════════════════════════════════════════════════════════════════

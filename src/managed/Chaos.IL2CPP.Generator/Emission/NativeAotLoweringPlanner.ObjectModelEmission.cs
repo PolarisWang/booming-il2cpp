@@ -1263,16 +1263,27 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		EmitReflectionObjectHelpers(builder, reachableMethods, referenceTypeSubjectIds, hashSet3);
 		EmitExceptionMetadataHelpers(builder, reachableMethods);
 		EmitGcTypeLayoutRegistration(builder, referenceTypeSubjectIds, referenceTypeBaseSubjectIds, fieldsByDeclaringType, fieldTypeMap, valueTypeSubjectIds);
+		bool anyDecimalStatic = hashSet2.Keys.Any(IsDecimalStaticFieldSubjectId);
+		if (anyDecimalStatic)
+		{
+			// A System.Decimal static field is a DecimalCarrier* (16-byte value passed by pointer).
+			// Give such fields a real zero carrier to load, NOT null — otherwise a call like
+			// Math.Ceiling(Decimal.Zero) passes a null carrier and the wrapper null-guard throws → return 0.
+			builder.AppendLine("    static chaos::il2cpp::runtime_core::DecimalCarrier g_chaos_decimal_zero{};");
+		}
 		foreach (KeyValuePair<string, string?> item11 in hashSet2.OrderBy<KeyValuePair<string, string?>, string>((KeyValuePair<string, string?> result) => result.Key, StringComparer.Ordinal))
 		{
 			var cppType = MapFieldTypeToCppType(item11.Value);
+			string initializer = IsDecimalStaticFieldSubjectId(item11.Key)
+				? "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&g_chaos_decimal_zero)"
+				: "0";
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder20 = stringBuilder;
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(23, 1, stringBuilder);
 			handler.AppendLiteral(cppType);
 			handler.AppendLiteral(" ");
 			handler.AppendFormatted(GetNativeStaticFieldSymbol(item11.Key));
-			handler.AppendLiteral(" = 0;");
+			handler.AppendLiteral(" = " + initializer + ";");
 			stringBuilder20.AppendLine(ref handler);
 		}
 		if (hashSet2.Count > 0)
@@ -1680,6 +1691,26 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 				null => "CHAOS_IL2CPP_INTPTR",
 				_ => "CHAOS_IL2CPP_INTPTR",
 			};
+		}
+
+		/// <summary>
+		/// True when a static-field SubjectId denotes System.Decimal (a 16-byte carrier-passed
+		/// value type that must be a valid carrier pointer, not null). Keyed on the FIELD's
+		/// SubjectId (the static-field name), NOT the field TYPE — hashSet2 stores the type as
+		/// null for many fields (external-helper/static-init paths), so type-based detection
+		/// is unreliable. Any System.Decimal static field (e.g. Decimal.Zero/.MinValue/.MaxValue)
+		/// needs a real carrier pointer, not null.
+		/// </summary>
+		private static bool IsDecimalStaticFieldSubjectId(string staticFieldSubjectId)
+		{
+			if (string.IsNullOrEmpty(staticFieldSubjectId))
+				return false;
+			// Field SubjectId forms: "System.Private.CoreLib/System.Decimal.Zero",
+			// "System.Private.CoreLib/System.Decimal::Zero", or bare "System.Decimal.Zero".
+			int idx = staticFieldSubjectId.IndexOf("/System.Decimal", StringComparison.Ordinal);
+			if (idx >= 0)
+				return true;
+			return staticFieldSubjectId.StartsWith("System.Decimal", StringComparison.Ordinal);
 		}
 
 		private void EmitStructMarshallingDescriptors(

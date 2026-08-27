@@ -54,4 +54,12 @@ CHAOS_IL2CPP_FLOAT64 ChaosMathCosh(CHAOS_IL2CPP_FLOAT64 x) noexcept;
 CHAOS_IL2CPP_FLOAT64 ChaosMathSinh(CHAOS_IL2CPP_FLOAT64 x) noexcept;
 CHAOS_IL2CPP_FLOAT64 ChaosMathTanh(CHAOS_IL2CPP_FLOAT64 x) noexcept;
 
+// ── Math::Ceiling/Floor/Round/Truncate(System.Decimal) ─────────────
+// DecimalCarrier* in, DecimalCarrier* out. Declared here (reachable by the
+// generated AOT C++ that forwards via SimpleForward) for a visible symbol.
+CHAOS_IL2CPP_INTPTR    ChaosMathDecimalCeiling(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosMathDecimalFloor(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+
 
