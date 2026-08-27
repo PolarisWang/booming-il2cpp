@@ -87,11 +87,6 @@ void BgcController::Stop() {
         NotifyBgc();
         if (bgc_thread_.joinable())
             bgc_thread_.join();
-        // Thread joined → it ran the exit-path cleanup above.  Belt-and-
-        // suspenders: if join raced or the thread was never running, guarantee
-        // no phantom concurrency state survives Stop (CoreCLR background.cpp:3233).
-        g_bgc_is_marking.store(false, std::memory_order_release);
-        phase_.store(BgcPhase::IDLE, std::memory_order_release);
     }
 
     // Step 2: Stop finalizer thread (after BGC — any pending work was published).
@@ -100,6 +95,19 @@ void BgcController::Stop() {
         if (finalizer_thread_.joinable())
             finalizer_thread_.join();
     }
+
+    // Review #1-test: the no-concurrent-state cleanup below MUST run regardless
+    // of whether a BGC thread was actually running (i.e. not gated on the
+    // bgc_running_ exchange above).  A controller that was never Start()ed, or one
+    // whose thread exited before Stop (phantom / mid-exit window described in
+    // PauseForYoungGc), must STILL re-assert IDLE + not-marking so no stale
+    // concurrency flag poisons a later young-GC coordination.  These stores are
+    // idempotent when the flags are already clear, so the normal running-thread
+    // path is unchanged (same order, same values).
+    g_bgc_is_marking.store(false, std::memory_order_release);
+    phase_.store(BgcPhase::IDLE, std::memory_order_release);
+    bgc_pause_requested_.store(false, std::memory_order_release);
+    bgc_paused_.store(false, std::memory_order_release);
 }
 
 void BgcController::FlushSatbBuffer(const SatbEntry* entries, uint32_t count) {
@@ -661,6 +669,15 @@ void BgcController::StopConcurrentMark() {
     bgc_start_requested_.store(false, std::memory_order_release);
     phase_.store(BgcPhase::IDLE, std::memory_order_release);
     cycle_complete_.store(true, std::memory_order_release);
+    // Review #2: fully clear the young-GC pause handshake too.  A young GC that
+    // timed out waiting for the BGC to ack/clear a pause must not leave bgc_paused_
+    // =true — otherwise the NEXT PauseForYoungGc would see it as an already-acked
+    // pause and evacuate while a (not-yet-fully-stopped) BGC could still be
+    // scanning.  Reset both sides of the handshake as part of forcing BGC to a
+    // clean IDLE.  Safe: StopConcurrentMark runs under safepoint (full GC) or from
+    // the young-GC pause/resume escape, so no handshake is legitimately mid-flight.
+    bgc_pause_requested_.store(false, std::memory_order_release);
+    bgc_paused_.store(false, std::memory_order_release);
     NotifyBgc();
 
     // Free Gen1 bitmap — the full GC handles all sweeping.
@@ -1433,15 +1450,28 @@ void BgcController::WaitForFinalizerDrain() noexcept {
 void BgcController::PauseForYoungGc() noexcept {
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_requested");
 
-    // S3-A fast-path (CoreCLR background.cpp:3233 对照): if the BGC thread is
-    // not running (never Start()ed, or already stopped), there is NO concurrent
-    // mark to coordinate with.  Skipping the pause is correct and eliminates
-    // the "spin forever waiting a dead BGC's ack" deadlock at the call site —
-    // PauseForYoungGc must never block against a non-existent thread.  No deck
-    // drain needed: with no thread, no marking ever happened, so no worker
-    // deque can hold nursery entries.
-    if (!bgc_running_.load(std::memory_order_acquire)) {
-        CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_skipped_no_thread");
+    // S3-A fast-path (CoreCLR background.cpp:3233 对照): if no BGC concurrent mark
+    // is currently ACTIVE (g_bgc_is_marking==false — the precise "is a scan
+    // running" signal), there is nothing to coordinate with.  Skipping the pause is
+    // correct and lets a young GC that never started a BGC (unit fixture / BGC
+    // disabled) proceed without spinning.
+    //
+    // KEY (review #1): do NOT key this on bgc_running_.  Stop() clears bgc_running_
+    // (gc_bgc.cpp:85 exchange) BEFORE the exiting BGC thread clears g_bgc_is_marking
+    // during its exit cleanup.  In that window a young GC reading bgc_running_==false
+    // would skip coordination while the exiting thread could still be scanning a work
+    // deque it had already started — a concurrent mark vs nursery-evacuation race.
+    // g_bgc_is_marking is only set true under the safepoint inside StartBgcCycle
+    // (which itself requires a running thread, line 153), so "marking==true ⟹ a
+    // coordination partner exists / is required" holds unconditionally.
+    if (!g_bgc_is_marking.load(std::memory_order_acquire)) {
+        // Safety net (review #3): even with no mark currently active, a BGC thread
+        // that marked once then exited could have left stale nursery entries in a
+        // worker's work deque.  Those would later be treated as roots pointing at
+        // already-moved addresses (dangling).  Drain unconditionally so neither the
+        // no-mark fast path nor the full wait path can leak a stale nursery root.
+        DrainNurseryFromWorkDeques();
+        CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_skipped_no_active_mark");
         return;
     }
 
@@ -1512,9 +1542,14 @@ void BgcController::ResumeAfterYoungGc() noexcept {
     if (bgc_paused_.load(std::memory_order_acquire)) {
         // BGC didn't clear the pause-ack in time.  Force it to a clean IDLE so
         // the subsequent young GC phases (which assume BGC is not concurrently
-        // scanning) hold.  Same escape as the pause side.
+        // scanning) hold.  Same escape as the pause side.  Review #2: explicitly
+        // clear the pause-ack here too — StopConcurrentMark early-returns when
+        // phase_ is already IDLE, so relying on it alone could leave bgc_paused_
+        // =true to poison the NEXT PauseForYoungGc as a false "already acked".
         CHAOS_IL2CPP_LOG_WARN("BGC", "young_gc_resume_timeout — force-stopping BGC");
         StopConcurrentMark();
+        bgc_pause_requested_.store(false, std::memory_order_release);
+        bgc_paused_.store(false, std::memory_order_release);
     }
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_resumed");
 }

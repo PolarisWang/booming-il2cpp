@@ -191,6 +191,28 @@ TEST_F(BgcUnitTest, PauseForYoungGcNoThreadReturnsImmediately) {
            "not block on a pause-ack no thread can provide";
 }
 
+/// Regression (review #1-test): Stop() must clear ALL concurrency state even when
+/// no BGC thread was running (the fixture never calls Start(), so bgc_running_ is
+/// false — the same "phantom / never-started" state a stress-test entrypoint that
+/// skips RuntimeInit leaves).  Previously the no-concurrent-state cleanup lived
+/// inside `if (bgc_running_.exchange(false,...))`, so Stop() in this state never
+/// reached it and a stale g_bgc_is_marking=true would survive to poison a later
+/// young-GC coordination.  Stop() now re-asserts IDLE/not-marking unconditionally.
+TEST_F(BgcUnitTest, StopClearsConcurrencyStateWithoutRunningThread) {
+    auto& ctrl = BgcController::Instance();
+
+    // Simulate the phantom state: a concurrent mark "active" flag set even though
+    // no BGC thread has been Started (bgc_running_==false in this fixture).
+    // g_bgc_is_marking is the global the inline barrier path reads; the existing
+    // barrier tests already write it directly.
+    g_bgc_is_marking.store(true, std::memory_order_release);
+
+    ctrl.Stop();  // must clear the phantom marking regardless of bgc_running_
+
+    EXPECT_FALSE(g_bgc_is_marking.load(std::memory_order_acquire))
+        << "Stop() must clear g_bgc_is_marking even when no BGC thread was running";
+}
+
 TEST_F(BgcUnitTest, BgcPhaseQueries) {
     auto& ctrl = BgcController::Instance();
     EXPECT_FALSE(ctrl.IsBusy());
