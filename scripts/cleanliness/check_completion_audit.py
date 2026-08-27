@@ -39,17 +39,14 @@ _HOLLOW_RETURN = re.compile(
 
 
 def _functions(file: Path):
-    """Yield (name, body) for each top-level function definition in a .cpp file.
-    Crude but sufficient: matches `rettype name(params) { ... }` at brace depth 0."""
+    """Yield (name, body) for each function definition in a .cpp file.
+    Crude but sufficient for an advisory heuristic: matches `rettype name(params) {`
+    then brace-counts to capture the body. NOTE: sig_re is global (not strictly
+    top-level-only), so a signature can match nested code — acceptable for a
+    conservative surfacer (may over-scan, never under-scan the obvious class)."""
     txt = file.read_text(encoding="utf-8", errors="replace")
-    # strip line comments only at statement level matters little; parse braces
-    depth = 0
-    buf = []
-    current = None
-    sig_re = re.compile(r"^([A-Za-z_][\w:<>,*&\s]*\s+([A-Za-z_]\w*)\s*\([^;{}]*\))\s*\{", re.MULTILINE)
-    i = 0
     n = len(txt)
-    # simplistic: find fns by scanning for '{' after a signature-looking prefix
+    sig_re = re.compile(r"^([A-Za-z_][\w:<>,*&\s]*\s+([A-Za-z_]\w*)\s*\([^;{}]*\))\s*\{", re.MULTILINE)
     for m in sig_re.finditer(txt):
         start = m.end()  # position right after '{'
         depth = 1
@@ -63,7 +60,6 @@ def _functions(file: Path):
             j += 1
         body = txt[start:j - 1]
         yield m.group(2), body
-    return
 
 
 def _is_hollow(decl_name: str, body: str) -> bool:
