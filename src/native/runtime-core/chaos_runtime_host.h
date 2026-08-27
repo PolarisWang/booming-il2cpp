@@ -218,9 +218,16 @@ public:
         if (kChaosExternalRuntimeCount <= 0)
             return;
         // Track overridden entries for hotpatch fixup below.
-        // Heap allocation is unavailable in this noexcept context (no throw),
-        // and kChaosExternalRuntimeCount is typically <100.
-        const int kMaxOverrides = 1024;
+        // Heap allocation is unavailable in this noexcept context (no throw).
+        // kChaosExternalRuntimeCount can be ~2k (CoreLib) — the stack bound must
+        // exceed the worst-case count, AND the reader loop below must only read
+        // slots that were actually written.  Regression guard: a prior change
+        // (kMaxOverrides=1024, ++overridden unconditional) let `overridden` reach
+        // kChaosExternalRuntimeCount while only 1024 slots were written, so the
+        // patch loop read uninitialized stack slots -> garbage fn-table index ->
+        // access violation.  Fix: bound overridden to slots actually written and
+        // make the bound generous enough to cover real counts.
+        const int kMaxOverrides = 4096;
         const char* overridden_subjects[kMaxOverrides];
         int32_t overridden_indices[kMaxOverrides];
         int overridden = 0;
@@ -272,11 +279,15 @@ public:
             ::VirtualProtect(&kChaosExternalRuntimeFnTable[i], sizeof(void*),
                              _cp_old, &_cp_old);
 #endif
+            // Only advance `overridden` when a slot was actually written, so the
+            // reader loop below (oi < overridden) never touches uninitialized stack
+            // slots.  (Regression: previously ++overridden ran unconditionally while
+            // the write was clamped, which made the patch loop read OOB stack memory.)
             if (overridden < kMaxOverrides) {
                 overridden_subjects[overridden] = sid;
                 overridden_indices[overridden] = i;
+                ++overridden;
             }
-            ++overridden;
         }
         // Re-fill null entries with safe stubs
         FillExternalRuntimeStubs();
@@ -300,6 +311,9 @@ public:
             auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
             int patched = 0;
             for (int32_t oi = 0; oi < overridden; oi++) {
+                // Defensive bound: never read past slots that were written.
+                if (oi >= kMaxOverrides)
+                    break;
                 auto* safe_fn = kChaosExternalRuntimeFnTable[overridden_indices[oi]];
                 if (safe_fn == nullptr)
                     continue;
