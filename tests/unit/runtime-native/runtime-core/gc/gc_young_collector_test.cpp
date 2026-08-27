@@ -177,38 +177,47 @@ TEST_F(YoungCollectorTest, ScavengeObject) {
 }
 
 TEST_F(YoungCollectorTest, YoungCollectionEmpty) {
-    Region* nursery = g_young_gen.region.load(std::memory_order_acquire);
-    ASSERT_NE(nursery, nullptr);
-    GcSetHeapBase(nursery->begin);
-
+    // Young GC over a barely-populated nursery: the collection must run without
+    // over-writing g_heap_base, promote the one stack-rooted nursery object, and
+    // reset the shared bump pointer so a fresh allocation re-starts at begin.
+    //
+    // Historically this test called GcSetHeapBase(nursery->begin) (a raw base
+    // override), which violated the documented invariant that GcRegisterHeapRange
+    // is the sole owner of g_heap_base (gc_old_gen.cpp:384-394).  On the first
+    // GcYoungCollection() the card scan recomputed OLD-gen segment addresses from
+    // the non-lowest base, so the L1 index exploded (~2.3 GB offset) and
+    // phase1_scan_cb read unmapped memory → SEH 0xC0000005.  It also manually
+    // dirtied the card covering a NURSERY object and asserted young collection
+    // cleared it — but that is off-model: nursery writes never go through
+    // DirtyCard (nursery keeps cards clean; young GC Phase 2 scans precisely,
+    // gc_card_table.h:160-163), so no production path ever clears a nursery card.
+    // Old→young dirty-card clearing is covered by OldGenToNurseryRefFixedUpVia
+    // DirtyCard and CollectionWithDirtyCard (real old-gen / raw-block slots).
+    //
+    // Re-read g_young_gen.region AFTER the first NurseryAllocate: TlabClaimFromYoungGen
+    // lazily re-runs InitYoungGeneration on the first allocation, which picks a fresh
+    // REGION_NURSERY and stores it to g_young_gen.region — so the region captured
+    // before the allocation may be stale in an isolated (single-test) run.  The bump
+    // reset assert must compare against the region the collection actually operates on.
     void* p = NurseryAllocate(32);
     ASSERT_NE(p, nullptr);
+    std::memset(p, 0, 32);
+    Region* nursery = g_young_gen.region.load(std::memory_order_acquire);
+    ASSERT_NE(nursery, nullptr);
 
+    // p is a stack root on this frame — the all-thread conservative stack scan
+    // (Phase 0) promotes it and rewrites the local to the tenured address.
     YoungCollectionResult r1 = GcYoungCollection();
-    EXPECT_EQ(r1.dirty_cards_scanned, 0u);
+    EXPECT_FALSE(IsInNursery(p));
+    EXPECT_GE(r1.objects_promoted, 1u);
 
-    // DirtyCard intentionally skips nursery objects (young GC scans precisely).
-    // Manually dirty the card to test that young collection clears it.
-    uintptr_t idx = (reinterpret_cast<uintptr_t>(p) - g_heap_base) >> kCardShift;
-    uintptr_t seg_idx = idx / kCardsPerSegment;
-    uintptr_t card_idx = idx % kCardsPerSegment;
-    auto* seg = g_card_l1[seg_idx].load(std::memory_order_relaxed);
-    ASSERT_NE(seg, nullptr);
-    // R6/CoreCLR-aligned bit-per-word card layout: CardSegment.words packs 32
-    // cards per uint32.  Set the card bit covering @a p.
-    seg->words[card_idx / kCardsPerWord] |= (1u << (card_idx % kCardsPerWord));
-    ASSERT_TRUE(IsDirty(p));
-
-    YoungCollectionResult r2 = GcYoungCollection();
+    // Empty nursery · bump reset to the start of the young region.
     EXPECT_EQ(g_young_gen.bump.load(std::memory_order_acquire), nursery->begin);
-    EXPECT_FALSE(IsDirty(p));
 
+    // A fresh allocation on the reset nursery lands back in the nursery.
     void* p2 = NurseryAllocate(64);
     ASSERT_NE(p2, nullptr);
-
-    void* promoted = GcScavengeObject(p2);
-    ASSERT_NE(promoted, nullptr);
-    EXPECT_NE(promoted, p2);
+    EXPECT_TRUE(IsInNursery(p2));
 }
 
 TEST_F(YoungCollectorTest, CollectionWithDirtyCard) {

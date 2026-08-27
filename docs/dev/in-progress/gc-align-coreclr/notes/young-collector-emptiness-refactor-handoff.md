@@ -73,3 +73,28 @@
   tail 归 STW drainer 独占。**已合入 main**，接续者在此之上工作。
 - 本专项只动 `gc_young_collector_test.cpp`（+ 必要 RegionManager API 探查/测试），不碰并行 GC 工作线改动
   （`gc_old_gen.cpp`/`parse_convert.cpp` 等未提交项属并发轨道）。
+
+---
+
+## 七、接续执行结果（2026-08-27 已完成，commit `2a84b6695`）
+
+**方案选择：方向 3 的正式重写（非最小 hack）。** 探查后确认 RegionManager 无公开"含某地址的 active nursery 区 [begin,end)"查询，
+方向 1 需新增 API（较重）。且 §二 已确立生产语义：nursery 卡从不经写屏障（Phase 2 精确扫描），手动脏一个 nursery 指针的卡并断言被清
+是越模型的——`OldGenToNurseryRefFixedUpViaDirtyCard` 与 `CollectionWithDirtyCard` 已覆盖真实 old→young 脏卡清理。故 `YoungCollectionEmpty`
+改测其**独特价值 = 空 nursery young 收集**。
+
+**改法（仅 `gc_young_collector_test.cpp` 该 TEST_F 体内）**：
+1. 删除 `GcSetHeapBase(nursery->begin)`（根因：违反 base 最低注册/`GcRegisterHeapRange` 唯一 owner 不变式 → 首轮收集卡段索引爆炸 0xC0000005）。
+2. 删除越模型的 nursery 卡手动脏/清 + `dirty_cards_scanned==0`。
+3. 断言改为生产一致：栈根 `p` 被 Phase 0 全部线程保守扫描晋升（`IsInNursery(p)` false、`objects_promoted>=1`）、共享 bump 重置回 `begin`、
+   收集后 `NurseryAllocate` 重新落入 nursery。
+
+**验证（实测）**：
+- `YoungCollectionEmpty`：clean HEAD（`b3b0231f0` worktree 实测）SEH 0xC0000005 → 本提交后 PASS。
+- 全量 `test_gc_young_collector`：与 clean HEAD 基线逐项一致；唯一残留失败 `ConservativeSweepSelfRefs` 在 clean HEAD 同样失败
+  （断言 `b_first_word & 1u != 0`，L294 附近，或偶发 SEH）→ **预存在、独立于本专项**，未在本次范围内修复。
+- 回归（§五.2 实测全绿）：`test_gc_bgc_root_scan` 4/4、`test_gc_parallel_mark` 6/6、`test_gc_worker_pool` 7/7。
+- commit message 含 root_cause / fix_strategy / regression_check 三段；repo hygiene gate PASS；仅 1 文件。
+
+**交接遗留（下轮）**：`ConservativeSweepSelfRefs` 是 clean HEAD 就失败的预存在测试缺陷（Phase 0 栈根 vs Phase 2 精确扫描对 objB 的
+晋升时序/可达性），需单独专项定位，勿与本专项耦合。
