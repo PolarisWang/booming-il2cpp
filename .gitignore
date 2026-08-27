@@ -580,3 +580,6 @@ tests/**/coverage.cobertura.xml
 /prec.err
 /r[0-9].txt
 /w.err
+
+# WCT deadlock-spy build artifact (compile wct_deadlock_spy.cpp manually)
+/scripts/wct_deadlock_spy.exe
