@@ -437,3 +437,8 @@ PauseForYoungGc/ResumeAfterYoungGc 从无限 spin 改为 bounded（CoreCLR wait_
 - 验证：scenario C 10/10、bgc_smoke 6/6、scenario L passed，正常路径 **0 spurious timeout**。
 
 **已知残留（pre-push L1/L2 指向，诚实）**：若 BGC 线程存活但 wedged 且**持着 worker `steal_mutex`**，超时后 `StopConcurrentMark` 的 `DrainWorkerDeque` 会阻塞在该锁 → 又一种死锁。这是"死锁前提下再死锁"的极端 edge（需 BGC wedged 同时持锁），CoreCLR 仅靠真 suspend 处理；CRAG 需 try-lock 或强制升级。**边界 wait 本身已是严格改进（绝不无限），force-stop 覆盖常见 wedge（非持锁）**。此 edge 记录留给专门协调专项，不在本轮 over-engineer 引入新竞态。
+**S2-B 静态度假说证伪（2026-08-27）**：建确定性复现 harness（gc_mark_stall_repro, 种子 N 个 16KB 对象 + 一次 full GC）：
+- **2400 对象 → 806 页 → mark 2ms 收敛无 stall**（远超 672 门槛！）。
+- **472 页、806 页均收敛** → **mark-phase stall 不是"页数不够的纯规模问题"**，是**并发触发**（scenario C 的 100 线程 concurrent young-GC + 晋升 churn 在 full-GC mark 期间制造 mark-stack/cross-gen 边不收敛）。
+- 静态种子（无并发 mutator）即使 806 页也 mark 收敛 → **确定性复现需"并发时 young-GC 与 full-GC mark 交错"harness，比静态规模难得多**。
+- 结论：S2-B 真本质 = concurrent-mark-convergence race（CoreCLR 依赖 SATB+mark_array 幂等 + 硬 STW），需并发时序 harness 专项；非简单页数/sweep×demoted。harness 保留为"大堆 mark 收敛"正回归（806 页 PASS）。
