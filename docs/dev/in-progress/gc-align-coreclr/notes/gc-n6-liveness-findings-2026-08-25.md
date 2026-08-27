@@ -379,9 +379,9 @@ in-place demoted 的交互（60s perf + 后续崩）需要额外专项。当前�
 2. **ASan runtime**：exe 动态 import `clang_rt.asan_dynamic-x86_64.dll`（缺则 127/0xc0000135）；从 `MSVC/14.38.33130/bin/Hostx64/x64/` 复制入隔离目录即恢复。
 3. **保守栈扫描假阳性抑制**（决定性）：GC all-thread 栈扫描跨线程读栈字落 ASan 栈帧 redzone → 假 "unknown-crash"。`asan_interface.h` 新增 `AsanWritePtrNoCheck`，把 **3 处跨线程栈根回调** 改 no-check 读写：`gc_young_collector.cpp` Phase-0 scavenge（实踩）、`gc_demotion.cpp` Phase-2 relocation、`gc_bgc.cpp` `GcScanAllThreadRoots` 回调。GC-heap 对象字段扫描保持 instrumented。no-check 访问 emitted code 字节一致、仅去插桩，无正确性影响。
 
-**ASan 内存错误狩猎 → 决定性阴性**：在隔离 asan 树，flakiness 高嫌疑场景全部**无内存错误**：
-- scenario C (aggressive young GC, idx2)、N (SATB barrier, idx13)、O (collect modes, idx15)、R (gen1 typed, idx17)、S (gen1 mixed, idx18) 全 **PASSED** 0 ASan error。
-- 结论：残留 flakiness **不是 heap/UAF 内存损坏**（ASan 抓不到），实为 **timing-dependent stall** —— 与 §十 早先 "cdb/marker 避开（改时序）" 完全自洽。
+**⚠️ ASan 阴性结论需修正（2026-08-27）**：早先 "scenario C ASan PASSED → 非内存损坏" 是**单次侥幸样本**——重测 ASan scenario C **5/5 HANG**（与正常 Debug 2/5 同源）。**死锁与 ASan 无关，两 build 都会挂**（ASan 只改时序）。修正后的诚实表述：
+- flakiness 是 **BGC×youngGC 协调死锁**，ASan 与正常 build 均触发，**不是内存损坏** —— 依据不是"ASan 抓不到"，而是：**从未出现 ASan heap 报错**（完成或悬挂的样本里，含悬挂样本，ASan 无 heap-buffer-overflow/UAF 报告）；且 cdb 栈证据直接显示死锁链（GC 线程卡 `PauseForYoungGc` spin `bgc_paused_`），属 coordination 而非 corrupt。
+- scenario N/O/R/S 在 ASan 下完成且 0 error 仍成立（这几场景压力低于 C，多数样本能跑完）；只有 scenario C（100 线程洪泛）同时压垮了 ASan 与正常 build。
 
 **真根收敛 = 病理 full-GC compaction stall（非内存损坏）**：正常 Debug 版 scenario C 无 collection log 即长停滞（CPU 持续暴涨、working set 225MB，5+ 分钟不推进）——命中 §八 已记的 "in-place demoted 对象 vs full-GC compaction/relocation 交互 → 病态性能（60s pathological collect）" 与 §十 "3/10 HANG" 是同一现象。ASan 版 scenario C 反而**快**（halt_on_error 改分配时序避开病理分支）→ 印证 timing 敏感性。剩余根治 = 修 `PlanPageCompaction`/`PlanPageEvacuation` 对 in-place demoted set 的交互（§八 已标独立 session）。
 
