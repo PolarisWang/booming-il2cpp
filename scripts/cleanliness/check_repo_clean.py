@@ -21,11 +21,13 @@ Allowlist is auto-derived: any root entry already tracked in git is trusted.
 Deviation is only allowed for the explicit self-maintaining exceptions below.
 """
 
+import json
 import subprocess
 import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+REGISTRY = REPO_ROOT / "scripts" / "cleanliness" / "generated-registry.json"
 
 # Root entries that are legitimately NOT tracked but present by design.
 # Keep in sync with the root CMakeLists / docs layout. Anything tracked is
@@ -73,6 +75,22 @@ def derive_trusted_roots():
     return roots | ROOT_EXCEPTIONS
 
 
+def load_generated_registry():
+    """Load regenerable-file globs from generated-registry.json (empty if absent)."""
+    if not REGISTRY.exists():
+        return []
+    try:
+        data = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    return [e.get("glob", "") for e in data.get("entries", [])]
+
+
+def _matches_any(path: str, globs) -> bool:
+    import fnmatch
+    return any(fnmatch.fnmatch(path.replace("\\", "/"), g) for g in globs)
+
+
 def main():
     mode = "soft"
     if "--hard" in sys.argv:
@@ -111,10 +129,43 @@ def main():
                     f"add to .gitignore, commit it under a proper dir, or delete it"
                 )
 
+    # Informational: tracked regenerable manifests that are modified (expected
+    # churn from the registry, not audit). Soft mode reports them so devs see
+    # "this churns on purpose — commit deliberately"; hard mode still passes
+    # (they are committed/expected, not junk). Deleted regenerable manifests ARE
+    # flagged (a tracked generated file should not be silently dropped).
+    regen = load_generated_registry()
+    if regen:
+        tracked_lines = git("status", "--porcelain", "--", ".")
+        regen_modified, regen_deleted = [], []
+        for line in tracked_lines.splitlines():
+            if len(line) < 4 or line.startswith("??"):
+                continue  # skip untracked (handled as root-junk above)
+            path = line[3:]
+            # status is "XY path"; X=staged, Y=unstaged; M/D in either means
+            # modified/deleted. ` M` (working-tree) and `M ` (staged) both.
+            x, y = line[0], line[1]
+            if not _matches_any(path, regen):
+                continue
+            if "D" in (x + y):
+                regen_deleted.append(path)
+            if "M" in (x + y) or "R" in (x + y):
+                regen_modified.append(path)
+        if regen_deleted:
+            for p in regen_deleted:
+                violations.append(
+                    f"regenerable manifest DELETED but registry says it should stay committed: {p}"
+                )
+        if regen_modified and mode != "hard":
+            print("  [repo-clean] informational: regenerable manifests changed (expected churn, commit deliberately):")
+            for p in regen_modified[:8]:
+                print(f"    {p}")
+            if len(regen_modified) > 8:
+                print(f"    ... +{len(regen_modified)-8} more")
+
     if not violations:
         print("=== [repo-clean] repo root is clean ===")
         return 0
-
     for v in violations:
         print("  [repo-clean] " + v)
     print(f"=== [repo-clean] {len(violations)} repo-root cleanliness issue(s) ===")

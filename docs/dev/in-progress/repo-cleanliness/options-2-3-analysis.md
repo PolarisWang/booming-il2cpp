@@ -119,6 +119,17 @@ tools/gc/ tools/wiki/`。`build/` 只留 `toolchains/`（构建配方，可移 `
 > 不动路径；C 做透明——registry 声明 + guard 豁免，让守卫既不误报也不漏监管。
 > 若未来 metadata 需完全脱离源码，再升级到 A（A 是 B 的远期替代）。
 
+**✅ ③-B/③-C 执行（2026-08-27）— 含诚实修正**：
+- **关键发现**：`subjects.metadata.json` 的 churn 是**真实内容漂移**（totalMethods 1333→1542、
+  factMethodCount 570→664），**非确定性重写噪音**。
+- 据此**修正原计划**：幂等写（skip-if-equal）对真实漂移无意义——内容确实在变，
+  等价判定不触发；且写回点藏在 C# `MetadataWriterStage`，定位改造成本高。
+- **落地件**：`generated-registry.json`（声明 3 类可再生 manifest + 漂移策略 commit-deliberately）
+  + guard 集成——soft 模式把"可再生 manifest 已改"报为 informational（预期 churn，需有意提交），
+  hard 模式不阻断（是预期非垃圾）；**删除了可再生 manifest 会 flag**（防静默丢失）。
+- **测试**：soft 报 informational ✓ / hard 放行 ✓ / junk 仍拦 ✓ / guard 语法 + unit 2277 绿。
+- **遗留**：真正的根治（稳定 emission order + 幂等写，或 ③-A 出源）待 `MetadataWriterStage` 重构，远期可选。
+
 ---
 
 # 组合执行建议

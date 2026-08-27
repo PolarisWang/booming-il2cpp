@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Declares which committed files are REGENERABLE (rebuilt by the codegen/pipeline on each run). These files legitimately show as modified when codegen state evolves; their changes must be committed deliberately, never silently reverted or auto-committed. The repo-cleanliness guard consumes this to distinguish 'expected regenerable' from 'accidental junk'.",
+  "maintainerNote": "Do NOT capture full content — only identity (glob) + generator + drift policy. Idempotent-write (skip rewrite when semantically equal) is deferred: current drivers are genuine regeneration drift, not deterministic re-write noise, so skip-if-equal adds no value until the writer is refactored to a stable emission order.",
+  "entries": [
+    {
+      "glob": "tests/e2e/translation/**/managed/subjects/subjects.metadata.json",
+      "generator": "Chaos.IL2CPP.MetadataWriter (MetadataWriterStage)",
+      "driftPolicy": "commit-deliberately",
+      "tracked": true
+    },
+    {
+      "glob": "tests/e2e/translation/**/managed/subjects/supplemental-coverage.json",
+      "generator": "codegen coverage export",
+      "driftPolicy": "commit-deliberately",
+      "tracked": true
+    },
+    {
+      "glob": "tests/e2e/translation/**/subjects_net*/CombinedSubjects.runtimeconfig.json",
+      "generator": "TPG (TestProjectGenerator)",
+      "driftPolicy": "commit-deliberately",
+      "tracked": true
+    }
+  ],
+  "notes": {
+    "notNoise": "2016-08-27 measured: subjects.metadata.json churn is real content drift (totalMethods 1333->1542), NOT timestamp noise — idempotent-write does not apply until stable emission order.",
+    "guardBehavior": "repo-clean guard only flags untracked (`??`) root junk; tracked `.json` under tests/e2e/translation are already ignored because they live under a whitelisted root and are tracked. Registry is for dev/pipeline transparency + future gates."
+  }
+}
