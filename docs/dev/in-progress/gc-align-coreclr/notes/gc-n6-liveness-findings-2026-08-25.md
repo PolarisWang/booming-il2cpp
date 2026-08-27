@@ -428,3 +428,5 @@ collect_dbg S2_after_stop_mark elapsed_ms=0   ← StopConcurrentMark 0ms 完成�
 **`collect_start page_count=672/750` 后，`StopConcurrentMark` 0ms 返回，但 MARK（Phase1 root + Phase2 传递闭包/DrainMarkStackParallel）卡死**。demotion/sweep/compact 均未到。非 worker-pool Initialize 死锁（已修），疑似 mark 栈对大堆(672+ 页)不收敛/ParallelMarkWorkerLoop 边。
 
 CoreCLR 对照：mark 传递闭包有 c_mark_list + mark_array 幂等记账，对象只 mark 一次（`background_mark_phase` background.cpp:1637 用 mark_array 查重）；CRAG 需查 `DrainMarkStackParallel`/`MarkObject` 是否对已标对象重复入栈导致不收敛。真实规模需独立 session（1/12 散布、需放大 heap 确定性复现）。
+
+**S2 复现代价表征（2026-08-27 续）**：mark-phase stall 需 ~672+ 页（scenario C 的 young-GC 晋升累积），默认规模 ~1/12 散布；`CHAOS_IL2CPP_STRESS_SCALE=300`（300×768）能把页推高但单 run 极慢（>150s 未完成），非高效确定性复现。scenario D/E 不累积到高页（page_count=0）。→ 根治 mark 收敛需：① 放大 heap 但控制 run 时长的专项 harness（如固定 old-gen 预填种子页 + 一次大 full-GC），② 分析 `ParallelMarkWorkerLoop`/chunk 分发对已标对象是否重复入栈（CoreCLR mark_array 幂等对照）。这是独立深专项，非本 session 可 1/12 盲试完成。
