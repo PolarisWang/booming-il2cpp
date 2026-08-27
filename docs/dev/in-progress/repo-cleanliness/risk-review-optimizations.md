@@ -105,6 +105,13 @@
 - 实证：`leak_test/` 260MB → ALERT exit 1；正常状态 (.claude/build/artifacts) → info exit 0。
 - 注意：.claude 有界 walk 返回 lower-bound (93MB 而非 484MB)，作为健康信号够用；精确值留给手工 du。
 
+### 已知 reviewer 误报（L3 mojibake × 2 次，均证伪）
+- pre-push review 在 options doc 与 structure-governance/check_repo_clean 上都报
+  "mojibake/lone surrogate (\udc95)"。**均为 false positive**：两文件 strict UTF-8 decode
+  通过 + round-trip encode==原始字节，证实**不存在** lone surrogate（UTF-8 本就不含代理）。
+  reviewer 把合法的 CJK/box-drawing 字符（─ ‖ → ·【】中文）误判为编码损坏。此模式在
+  含中文的改动上会反复出现，可预先知晓并忽略。
+
 ### 优化③ 孤儿脚本清理 — 归档 6 个一次性脚本
 - 实证 `git grep`：`populate_all_families/synthetic_subject_ids/check_wiki_links/
   build_d3_family/build_trh_d3/populate_noncorelib` **无任何代码/CI/CMake/文档引用**
