@@ -430,3 +430,10 @@ collect_dbg S2_after_stop_mark elapsed_ms=0   ← StopConcurrentMark 0ms 完成�
 CoreCLR 对照：mark 传递闭包有 c_mark_list + mark_array 幂等记账，对象只 mark 一次（`background_mark_phase` background.cpp:1637 用 mark_array 查重）；CRAG 需查 `DrainMarkStackParallel`/`MarkObject` 是否对已标对象重复入栈导致不收敛。真实规模需独立 session（1/12 散布、需放大 heap 确定性复现）。
 
 **S2 复现代价表征（2026-08-27 续）**：mark-phase stall 需 ~672+ 页（scenario C 的 young-GC 晋升累积），默认规模 ~1/12 散布；`CHAOS_IL2CPP_STRESS_SCALE=300`（300×768）能把页推高但单 run 极慢（>150s 未完成），非高效确定性复现。scenario D/E 不累积到高页（page_count=0）。→ 根治 mark 收敛需：① 放大 heap 但控制 run 时长的专项 harness（如固定 old-gen 预填种子页 + 一次大 full-GC），② 分析 `ParallelMarkWorkerLoop`/chunk 分发对已标对象是否重复入栈（CoreCLR mark_array 幂等对照）。这是独立深专项，非本 session 可 1/12 盲试完成。
+### S3-A 事件+超时握手落地（2026-08-27，99191f128）+ 已知残留
+PauseForYoungGc/ResumeAfterYoungGc 从无限 spin 改为 bounded（CoreCLR wait_for_gc_done(timeOut)/revert-to-blocking 对照）：
+- **fast-path**：`!bgc_running_` 直接返回（无并发标记可协调，杜绝无线程 spin）——单元测试 PauseForYoungGcNoThreadReturnsImmediately(<100ms)，test_gc_bgc_unit 10/10。
+- **bounded wait**：2s deadline + 500us sleep；超时调 `StopConcurrentMark` force-stop BGC 后继续（安全 under safepoint），绝不无限 spin。
+- 验证：scenario C 10/10、bgc_smoke 6/6、scenario L passed，正常路径 **0 spurious timeout**。
+
+**已知残留（pre-push L1/L2 指向，诚实）**：若 BGC 线程存活但 wedged 且**持着 worker `steal_mutex`**，超时后 `StopConcurrentMark` 的 `DrainWorkerDeque` 会阻塞在该锁 → 又一种死锁。这是"死锁前提下再死锁"的极端 edge（需 BGC wedged 同时持锁），CoreCLR 仅靠真 suspend 处理；CRAG 需 try-lock 或强制升级。**边界 wait 本身已是严格改进（绝不无限），force-stop 覆盖常见 wedge（非持锁）**。此 edge 记录留给专门协调专项，不在本轮 over-engineer 引入新竞态。
