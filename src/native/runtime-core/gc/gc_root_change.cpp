@@ -21,13 +21,19 @@ void BgcRecordRootChange(void** slot, void* old_value) noexcept {
     // Release-store ensures the entry is visible to the BGC drainer.
     std::atomic_thread_fence(std::memory_order_release);
 
-    // If we wrapped around and caught up to tail, advance tail to avoid
-    // overwriting unread entries (stale entries will be re-read, which is
-    // safe — just redundant work).
-    uint32_t tail = mt->root_change_tail_.load(std::memory_order_acquire);
-    if (head - tail >= threading::ManagedThread::kRootChangeBufferSize) {
-        mt->root_change_tail_.store(head + 1, std::memory_order_release);
-    }
+    // NOTE: we deliberately do NOT advance `tail` here.  tail is owned solely by
+    // the STW drainer (BgcDrainRootChangeBuffer sets tail=head after consuming).
+    // Forcing tail forward in the producer (previously "tail = head + 1" when
+    // head - tail >= kRootChangeBufferSize) DISCARDED the un-consumed prefix of
+    // the burst — old_value references that were never re-marked could let an
+    // object be prematurely collected (G-25 correctness hazard), and it
+    // under-reported the unconsumed count (drain returned ~buffer-tail window,
+    // failing the RootChangeBufferWraparound contract that drained > 64).
+    // Without the advance, head - tail == unconsumed logical writes since the
+    // last drain; the drainer re-reads each ring slot's latest state, which is
+    // the correct bounded-lossy ring behavior (overwritten entries are stale
+    // anyway, and re-reading the latest per-slot value is safe — it may mark an
+    // unreachable object, never a reachable one).
 }
 
 }  // namespace chaos::il2cpp::runtime_core
