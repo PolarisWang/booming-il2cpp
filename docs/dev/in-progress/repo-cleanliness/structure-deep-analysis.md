@@ -53,6 +53,12 @@
 **成本** 低；守卫+规约已落地。
 **残余** 真正需要的是团队遵守单根约定，由规约 + 守卫共同保证。
 
+> **L3 triage（2026-08-27）**：pre-push review 对增强提 1 条 L3——`ROOT_EXCEPTIONS`
+> 移除 `testing/` 与历史根级 CMake 目录可能导致误报。已核实：根 `testing/` 在
+> CMakeLists 仅为 `#add_subdirectory(testing/foundation-dll)` 注释（L7 已迁到
+> tests/e2e/translation），现代 CMakePresets 输出到 artifacts/，**根级无合法 CMake 重建路径**。
+> 故这些目录"不在白名单"是正确行为（若被异常重建，守卫应拦截）。无需改动。
+
 ### 方案 ②：脚手架归一 —— 单一 tools 树（中成本，根治分散）
 **做法**
 - 把 `scripts/` + `build/scripts/` + `build/*.cmd/*.py` + `tools/` 统一到一个根，按职责分桶：
