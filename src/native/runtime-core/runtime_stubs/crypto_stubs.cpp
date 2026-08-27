@@ -27,6 +27,23 @@
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 
+// ── Managed byte[] allocation helper (shared: BCrypt AND OpenSSL paths) ──
+// Allocates a managed byte[] of the given length via the GC, returns the handle
+// (0 on failure).  The byte content is zeroed.  Defined in the SHARED region
+// (before the _WIN32/_else platform split) so both the BCrypt and OpenSSL hash
+// families can use it — a prior refactor (b7e079336) moved it into the #else
+// branch only, leaving the BCrypt path with uses-but-no-definition (C3861).
+static CHAOS_IL2CPP_INTPTR alloc_byte_array(CHAOS_IL2CPP_SIZE length) noexcept
+{
+    const auto alloc_size = sizeof(ManagedArrayAccessor) + length;
+    auto* storage = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(alloc_size));
+    if (storage == nullptr) return 0;
+    auto* arr = reinterpret_cast<ManagedArrayAccessor*>(storage);
+    arr->element_type_shape = 2;  // value type
+    arr->length = static_cast<CHAOS_IL2CPP_INTPTR>(length);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
+}
+
 #ifdef _WIN32
 
 // SHA-3 BCrypt algorithm identifiers (not available in older Windows SDKs)
@@ -299,20 +316,6 @@ void ChaosCngFill(CHAOS_IL2CPP_INTPTR buffer) noexcept
 #include <openssl/evp.h>
 #include <openssl/hmac.h>
 #include <openssl/rand.h>
-
-// ── Managed byte[] allocation helper ─────────────────────────────
-// Allocates a managed byte[] of the given length via the GC,
-// returns the handle (0 on failure).  The byte content is zeroed.
-static CHAOS_IL2CPP_INTPTR alloc_byte_array(CHAOS_IL2CPP_SIZE length) noexcept
-{
-    const auto alloc_size = sizeof(ManagedArrayAccessor) + length;
-    auto* storage = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(alloc_size));
-    if (storage == nullptr) return 0;
-    auto* arr = reinterpret_cast<ManagedArrayAccessor*>(storage);
-    arr->element_type_shape = 2;  // value type
-    arr->length = static_cast<CHAOS_IL2CPP_INTPTR>(length);
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
-}
 
 // ── OpenSSL one-shot hash helper ───────────────────────────────────
 // Computes a hash over the managed byte[] data using OpenSSL EVP.

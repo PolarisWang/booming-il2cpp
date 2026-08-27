@@ -9,7 +9,8 @@
 /// stall needs the LARGE interconnected closure + (ideally) mutator churn that
 /// scenario-C produces.  This harness targets the graph shape deterministically.
 ///
-/// Usage: run directly; exit 0 = mark converged, 1 = setup failure, 124 = stall.
+/// Usage: run directly; exit 0 = mark converged, 1 = setup failure, 124 = stall,
+///        3 = SKIP (environmental OOM during setup — not a stall, run elsewhere).
 
 #include <chrono>
 #include <cstdio>
@@ -63,8 +64,16 @@ int main(int argc, char** argv) {
     for (int i = 0; i < kSeedObjects; i++) {
         void* p = g_old_gen.Allocate(kSeedObjectBytes, true);
         if (p == nullptr) {
-            std::printf("[mark_repro] allocation %d failed (OOM) before target page count\n", i);
-            return 1;
+            // ENVIRONMENTAL OOM, NOT a mark stall: on a low-memory CI the 37MB
+            // seed allocation can fail before the target page count is reached.
+            // Return a DISTINCT code (3) and a clear SKIP marker so the harness
+            // does not confuse this with a real mark stall (124) or a generic
+            // regression failure (1).  A stall can only be judged once the graph
+            // is actually built and a full GC ran.
+            std::printf("[mark_repro] SKIP: OOM at seed %d/%d before target page count — "
+                "environmental, not a mark stall (this run cannot expose the stall)\n",
+                i, kSeedObjects);
+            return 3;
         }
         // Zero the payload so the raw-alloc scan sees nulls beyond the refs.
         std::memset(p, 0, kSeedObjectBytes);

@@ -1,16 +1,23 @@
-// ── Crypto behavior test — verifies the CNG hash return-value fix ──────
+// ── Crypto behavior test — verifies the CNG hash return-value + length fix ──
 //
-// Regression test for the return-0 "loan" hole in the CNG hash family
-// (ChaosCngHash/ChaosCngHmac/ChaosCngGetBytes): the function now returns the
-// computed digest in a managed byte[] instead of discarding it with `return 0;`.
+// Regression test for the digest-return + over-read fix in the CNG hash family
+// (ChaosCngHash): the function now returns the computed digest in a managed
+// byte[] (instead of discarding it with `return 0;`) and hashes EXACTLY
+// inArr->length bytes (instead of length * sizeof(INTPTR), which over-read past
+// the buffer).  On the Windows/BCrypt path, the one-shot wrappers
+// ChaosSha1Hash/ChaosSha256Hash/ChaosSha3_*Hash all route through ChaosCngHash,
+// so hashing "abc" with the fixed buffer semantics is covered by test_sha256_abc
+// (an over-read would produce a different digest).
+//
+// NOTE (coverage): the fixtures below drive the SHA1/SHA256/MD5 one-shot wrappers
+// (ChaosMd5Hash uses the OpenSSL sibling on Linux).  They do NOT directly call
+// ChaosCngHmac or ChaosCngGetBytes — a dedicated test is a separate TODO if those
+// need their own digest-return coverage.
 //
 // These stubs take/return a *managed object handle* (CHAOS_IL2CPP_INTPTR). We
 // fabricate a minimal ManagedArrayAccessor on the heap (32-byte header +
 // contiguous element bytes) — get_managed_array is a pure cast and does NOT
 // validate against the GC heap, so a native test can drive the stub directly.
-//
-// NOTE: Windows/BCrypt path (inArr->length = byte count) is exercised; the
-// OpenSSL `#else` sibling shares the same managed-array contract.
 
 #include <cstdio>
 #include <cstdlib>
@@ -21,6 +28,11 @@
 
 #include "runtime_stubs/stub_common.h"
 #include "runtime_stubs/crypto_stubs.h"
+
+// The hash stubs are declared inside chaos::il2cpp::runtime_core (extern "C") in
+// crypto_stubs.h; this test calls them unqualified.  Without this using-directive
+// the unqualified ChaosSha*/ChaosMd5 calls do not resolve (pre-existing test defect).
+using namespace chaos::il2cpp::runtime_core;
 
 static int g_tests_run = 0;
 static int g_tests_passed = 0;
