@@ -45,10 +45,13 @@ else
 fi
 
 # ── 2. Locate + copy the ASan runtime DLL ────────────────────────────────
+# The DLL MUST match the MSVC that built the exe (0xC0000139 entry-point
+# mismatch otherwise).  Prefer the BuildTools toolchain (what the asan configure
+# resolves to via CMAKE_GENERATOR_INSTANCE) before Professional.
 ASAN_DLL=""
 for cand in \
-    "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC" \
-    "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC"; do
+    "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC" \
+    "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC"; do
     ASAN_DLL="$(find "${cand}" -name clang_rt.asan_dynamic-x86_64.dll -path "*/Hostx64/x64/*" 2>/dev/null | sort -V | tail -1)"
     [[ -n "${ASAN_DLL}" ]] && break
 done
@@ -60,6 +63,7 @@ echo "[asan] asan runtime dll = ${ASAN_DLL}"
 mkdir -p "${ASAN_ARTIFACTS_ROOT}/Debug"
 cp -f "${ASAN_DLL}" "${ASAN_ARTIFACTS_ROOT}/Debug/"
 echo "[asan] copied ASan DLL to isolated output dir"
+echo "[asan] asan runtime dll = ${ASAN_DLL}"
 
 # ── 3. Build ─────────────────────────────────────────────────────────────
 echo "[asan] building ${TARGET} (Debug) ..."

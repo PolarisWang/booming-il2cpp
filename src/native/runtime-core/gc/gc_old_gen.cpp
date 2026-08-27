@@ -2155,12 +2155,16 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::ParallelCompactPages() {
             [](void* root_addr, bool /*is_interior*/, void* user_data) {
                 if (root_addr == nullptr) return;
                 auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
-                uintptr_t val = *static_cast<uintptr_t*>(root_addr);
+                // root_addr is a slot on ANOTHER thread's stack (conservative);
+                // may sit in an ASan stack-frame redzone → NoCheck read+write.
+                uintptr_t val = reinterpret_cast<uintptr_t>(
+                    chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
                 if (val == 0) return;
                 auto it = std::lower_bound(map.begin(), map.end(), val,
                     [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
                 if (it != map.end() && it->old_addr == val) {
-                    *static_cast<void**>(root_addr) = reinterpret_cast<void*>(it->new_addr);
+                    chaos::il2cpp::common::AsanWritePtrNoCheck(
+                        root_addr, reinterpret_cast<void*>(it->new_addr));
                 }
             },
             &addr_map);
@@ -2377,13 +2381,17 @@ void MarkSweepOldGen::RelocateRoots(const std::vector<CompactPlanEntry>& entries
         [](void* root_addr, bool /*is_interior*/, void* user_data) {
             if (root_addr == nullptr) return;
             auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
-            uintptr_t val = *static_cast<uintptr_t*>(root_addr);
+            // root_addr is a slot on ANOTHER thread's stack (conservative);
+            // may sit in an ASan stack-frame redzone → NoCheck read+write.
+            uintptr_t val = reinterpret_cast<uintptr_t>(
+                chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
             if (val == 0) return;
 
             auto it = std::lower_bound(map.begin(), map.end(), val,
                 [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
             if (it != map.end() && it->old_addr == val) {
-                *static_cast<void**>(root_addr) = reinterpret_cast<void*>(it->new_addr);
+                chaos::il2cpp::common::AsanWritePtrNoCheck(
+                    root_addr, reinterpret_cast<void*>(it->new_addr));
             }
         },
         &addr_map);
@@ -2411,14 +2419,20 @@ void MarkSweepOldGen::RelocateRoots(const std::vector<CompactPlanEntry>& entries
 
     for (uintptr_t slot = self_aligned_start; slot < self_aligned_end; slot += sizeof(void*)) {
         auto* val_ptr = reinterpret_cast<void**>(slot);
-        if (*val_ptr == nullptr) continue;
-        uintptr_t val = reinterpret_cast<uintptr_t>(*val_ptr);
+        // Self-stack range scan deliberately reads every word incl. ASan frame
+        // redzones between this thread's frames → NoCheck (task#16: the raw
+        // read here was the real full-GC stack-buffer-underflow / SEGFAULT at
+        // gc_old_gen.cpp:2422 under CrossPageCompact).
+        void* slot_val = chaos::il2cpp::common::AsanReadPtrNoCheck(val_ptr);
+        if (slot_val == nullptr) continue;
+        uintptr_t val = reinterpret_cast<uintptr_t>(slot_val);
         if (val < g_heap_base) continue;
 
         auto it = std::lower_bound(addr_map.begin(), addr_map.end(), val,
             [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
         if (it != addr_map.end() && it->old_addr == val) {
-            *val_ptr = reinterpret_cast<void*>(it->new_addr);
+            chaos::il2cpp::common::AsanWritePtrNoCheck(
+                val_ptr, reinterpret_cast<void*>(it->new_addr));
         }
     }
 
@@ -2789,7 +2803,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 // the full GC; G_Loh().Sweep() will free the segment, causing
                 // use-after-free when the worker thread accesses it.
                 auto val = static_cast<void*>(
-                    chaos::il2cpp::common::AsanReadPtrProbe(root_addr));
+                    chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
                 if (val != nullptr && G_Loh().IsInLOH(val)) {
                     G_Loh().MarkObject(val);
                 }
@@ -3209,7 +3223,7 @@ bool MarkSweepOldGen::TryMarkRoot(void* addr) {
     // addr comes from GcScanAllThreadRoots: it is the address of a stack slot.
     // Read the VALUE at that slot �� if it points to old-gen, mark it.
     if (addr == nullptr) return false;
-    auto val = static_cast<void*>(chaos::il2cpp::common::AsanReadPtrProbe(addr));
+    auto val = static_cast<void*>(chaos::il2cpp::common::AsanReadPtrNoCheck(addr));
     if (val == nullptr) return false;
 
     // FindPage before IsValidManagedObject: FindPage is safe for arbitrary

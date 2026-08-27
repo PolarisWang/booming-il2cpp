@@ -1,5 +1,6 @@
 #include "gc_gen1.h"
 
+#include <chaos/asan_interface.h>
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
@@ -272,12 +273,16 @@ static void RelocateGen1References(
         [](void* root_addr, bool /*is_interior*/, void* user_data) {
             if (root_addr == nullptr) return;
             auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
-            uintptr_t val = *reinterpret_cast<uintptr_t*>(root_addr);
+            // root_addr is a slot on ANOTHER thread's stack (conservative scan);
+            // may sit in an ASan stack-frame redzone → NoCheck read+write.
+            uintptr_t val = reinterpret_cast<uintptr_t>(
+                chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
             if (val == 0) return;
             auto it = std::lower_bound(map.begin(), map.end(), val,
                 [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
             if (it != map.end() && it->old_addr == val) {
-                *static_cast<uintptr_t*>(root_addr) = it->new_addr;
+                chaos::il2cpp::common::AsanWritePtrNoCheck(
+                    root_addr, reinterpret_cast<void*>(it->new_addr));
             }
         }, &addr_map);
 
@@ -652,7 +657,12 @@ Gen1CollectionResult GcGen1Collection() {
         threading::GcScanAllThreadRoots(
             [](void* root_addr, bool /*is_interior*/, void* user_data) {
                 auto* ctx = static_cast<StackCtx*>(user_data);
-                void* val = *reinterpret_cast<void**>(root_addr);
+                // root_addr is a slot on ANOTHER thread's stack (conservative
+                // GcScanAllThreadRoots); it may sit in an ASan stack-frame
+                // redzone.  Un-instrumented read avoids a false
+                // stack-buffer-underflow (byte-identical access, ASan only
+                // elided) — see gc_gen1.cpp:655 task#16.
+                void* val = chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr);
                 if (val == nullptr) return;
                 if (IsInGen1(val)) {
                     uintptr_t child_addr = reinterpret_cast<uintptr_t>(val);

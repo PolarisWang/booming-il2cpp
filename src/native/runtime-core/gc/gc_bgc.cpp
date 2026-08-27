@@ -786,7 +786,7 @@ void BgcController::PopulateRootSet() {
                 // root slots instrumented so a real OOB/UAF write into a root is
                 // still surfaced (review #2) — instead of unconditionally eliding
                 // for every slot and masking genuine findings.
-                void* ref = chaos::il2cpp::common::AsanReadPtrProbe(slot);
+                void* ref = chaos::il2cpp::common::AsanReadPtrNoCheck(slot);
                 s_gte_heap++;
                 if (ref == nullptr) return;
                 if (G_OldGen().IsInOldGen(ref)) {

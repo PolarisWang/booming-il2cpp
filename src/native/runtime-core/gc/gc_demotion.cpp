@@ -221,13 +221,13 @@ void DemotionRelocate(const std::vector<DemotionEntry>& entries,
             // for genuinely poisoned slots, keeping live root slots instrumented
             // so a real OOB/UAF write into a root is still surfaced (review #2).
             uintptr_t val = reinterpret_cast<uintptr_t>(
-                chaos::il2cpp::common::AsanReadPtrProbe(root_addr));
+                chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
             if (val == 0) return;
 
             auto it = std::lower_bound(map.begin(), map.end(), val,
                 [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
             if (it != map.end() && it->old_addr == val) {
-                chaos::il2cpp::common::AsanWritePtrProbe(
+                chaos::il2cpp::common::AsanWritePtrNoCheck(
                     root_addr, reinterpret_cast<void*>(it->new_addr));
             }
         }, &addr_map);

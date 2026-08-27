@@ -710,7 +710,7 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
             // Probe sheds ASan only for genuinely poisoned redzone slots; live
             // stack slots stay instrumented (review #2/#4).
             if (auto* read = static_cast<void*>(
-                    chaos::il2cpp::common::AsanReadPtrProbe(val_ptr));
+                    chaos::il2cpp::common::AsanReadPtrNoCheck(val_ptr));
                 read != nullptr &&
                 (reinterpret_cast<uintptr_t>(read) >= g_heap_base ||
                  IsInNursery(read))) {
@@ -726,7 +726,7 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
         //   frame_ptr = RSP = rbp - 880   (base for GcSlotMap offsets)
         for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
             void* val = static_cast<void*>(
-                chaos::il2cpp::common::AsanReadPtrProbe(
+                chaos::il2cpp::common::AsanReadPtrNoCheck(
                     reinterpret_cast<void*>(slot)));
             const auto* nm = chaos::il2cpp::jit::FindNativeCodeByAddress(val);
             if (nm == nullptr) continue;
@@ -734,7 +734,7 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
 
             if (slot < start_aligned + sizeof(void*)) continue;
             uintptr_t saved_rbp = reinterpret_cast<uintptr_t>(
-                chaos::il2cpp::common::AsanReadPtrProbe(
+                chaos::il2cpp::common::AsanReadPtrNoCheck(
                     reinterpret_cast<void*>(slot - sizeof(void*))));
             if (saved_rbp < reinterpret_cast<uintptr_t>(scan_start) ||
                 saved_rbp > reinterpret_cast<uintptr_t>(scan_end)) continue;

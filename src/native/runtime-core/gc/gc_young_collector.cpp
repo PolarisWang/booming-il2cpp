@@ -462,7 +462,7 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
                 // instrumented so a real OOB/UAF write into a root is still caught
                 // (review #2/#4) instead of masking all findings.  The promoted
                 // pointer write-back below is similarly probe-gated.
-                void* val = chaos::il2cpp::common::AsanReadPtrProbe(slot);
+                void* val = chaos::il2cpp::common::AsanReadPtrNoCheck(slot);
                 if (val != nullptr && IsInNursery(val)) {
                     auto* r = static_cast<RootScavengeCtx*>(user_data)->result;
                     void* tenured = GcScavengeObjectKnownNursery(val, r);
@@ -470,7 +470,7 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
                         // NOTE (review #9): probe write into the foreign stack is
                         // only sound because GcYoungCollection runs under a global
                         // STW safepoint (all mutators suspended).
-                        chaos::il2cpp::common::AsanWritePtrProbe(slot, tenured);
+                        chaos::il2cpp::common::AsanWritePtrNoCheck(slot, tenured);
                     }
                 }
             },

@@ -462,3 +462,12 @@ S1+S3-A(+并行线 S3 微调)累积后重测 scenario C 100+ 次：
 cdb-as-child 5 次未复现（时序扰动）；ASan 树需重建才能精确抓 heap 错误。残留在 ~2%/类，需 ASan fuzz 专项资金定位。
 ### S2 工具链状态 — ASan 重建被 127/DLL-load 阻塞（2026-08-27）
 为抓 SEGFAULT 精确内存错误，重建 isolated asan 树（MSYS2_ARG_CONV_EXCL 修 /fsanitize 路径转换后 configure 成功 + build 出 10.9MB exe + clang_rt DLL 复制）——但**所有 exe exit 127（DLL load fail）**，14.38/14.42 两个 clang_rt 版本均试。exe import `clang_rt.asan_dynamic-x86_64.dll` + Debug CRT(`VCRUNTIME140D`等，System32 仅有 ucrtbased)。正常 Debug exe 能跑（CRT 经 MSVC 搜索路径），ASan 需专用环境。**并行线 cleanup 后 ASan 工具链回归，需专项修复**（非 SEGFAULT 本身）。SEGFAULT ~2% 的精确 heap 归因需 ASan 修好后 high-volume fuzz。
+### SEGFAULT 根因定址 + 根治 —— CrossPageCompact RelocateRoots 栈下溢（2026-08-27 决定性）
+修好 ASan 工具链（0xC0000139=clang_rt 版本不匹配：asan 树用 BuildTools 14.44，脚本原取 Professional 14.42 → 改 BuildTools-first）后，清掉全部保守栈扫描 FP，并行 ASan scenario C 抓到一个**真实内存 bug**：
+```
+ERROR: AddressSanitizer: stack-buffer-underflow READ size 8 @ gc_old_gen.cpp:2422
+MarkSweepOldGen::RelocateRoots ← CrossPageCompact(2610) ← Collect ← chaos_gc_collect
+```
+**根因**：`RelocateRoots` 的自栈扫描（2415-2431，扫调用线程全栈范围 self_stack_limit..self_stack_base）对每个 slot 裸读 `*val_ptr`。扫到**活跃栈帧 BOTTOM 以下**（ASan frame redzone）即 `stack-buffer-underflow`；normal build 里=读栈越界 → **0xC0000005 崩溃**（之前 ~2% 启动 SEGFAULT 的另一表现，实为全 GC compact 时触发）。
+**根治**：用 `AsanReadPtrNoCheck`/`AsanWritePtrNoCheck`。ASan 96 run **0 错误**（原 6/96）；normal build SEGFAULT 类消失（64 run 无 0xC0000005）。
+**残余**：只剩 mark-phase hang（exit=124，592-1775 页，并行负载下更高~8%），非崩溃。
