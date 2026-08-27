@@ -2617,6 +2617,14 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // we clear and re-mark it, causing stale marks from a different
     // root snapshot to survive into our mark phase.
     BgcController::Instance().StopConcurrentMark();
+    // DIAG (S2): bounded elapsed-time progress marker — if a full-GC stall
+    // occurs after collect_start, these show the last phase reached.  Pure
+    // observability, non-semantic.
+    CHAOS_IL2CPP_LOG_INFO_M("OldGen",
+        "collect_dbg S2_after_stop_mark elapsed_ms={0}",
+        static_cast<unsigned long long>(
+            std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::chrono::steady_clock::now() - pause_start).count()));
 
     // V4-H3: Snapshot pinned_roots_ under mutex to avoid data race with
     // AddPinnedRoot (which pushes under the same mutex).  Iterating the
@@ -2835,6 +2843,11 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         // Sequential mark for small heaps.
         DrainMarkStack();
     }
+    CHAOS_IL2CPP_LOG_INFO_M("OldGen",
+        "collect_dbg S2_after_mark elapsed_ms={0}",
+        static_cast<unsigned long long>(
+            std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::chrono::steady_clock::now() - pause_start).count()));
 
     // Fire MARK_DONE event.
         GcFireEvent(GcEvent::MARK_DONE);
@@ -2881,6 +2894,11 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // reclaims their old Gen2 space.
     std::vector<DemotionEntry> demotion_entries;
     {
+        CHAOS_IL2CPP_LOG_INFO_M("OldGen",
+            "collect_dbg S2_before_demote elapsed_ms={0}",
+            static_cast<unsigned long long>(
+                std::chrono::duration_cast<std::chrono::milliseconds>(
+                    std::chrono::steady_clock::now() - pause_start).count()));
         demotion_entries = CollectDemotionCandidates(*this);
     }
 

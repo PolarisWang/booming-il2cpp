@@ -418,3 +418,13 @@ if (!bgc_running_.load(std::memory_order_acquire)) {
 **效果（数据验证，区别先前两证伪 fix）**：scenario C **10/10 PASSED（0 hang）vs 2/5**；L/N/D 全绿；`PauseForYoungGc STALL` 不再出现。这是**先取证→定位→针对改**的正确路径成果。
 
 **新发现（独立 pre-existing，非本 fix 回归）**：`gc_bgc_smoke`（新 interleaved 版）在 `BgcSweep` 有 ~60s 病态 stall（"TIMEOUT waiting for phase 6 (current: 5)"→60s 后 `concurrent_sweep_complete`）——是 §八 已记的 sweep/compaction×demoted 病态交互的另一实例，非 PauseForYoungGc 死锁。
+### residual flakiness — S2 定位：full-GC MARK 阶段 stall（2026-08-27 精确）
+幽灵 phase 根修后（S1），scenario C 残余 intermittently hang ~1/12。加全 GC 分相 elapsed 诊断（collect_start→after_stop_mark→after_mark→before_demote→AFTER_SWEEP）抓到：
+```
+collect_start page_count=672
+collect_dbg S2_after_stop_mark elapsed_ms=0   ← StopConcurrentMark 0ms 完成，非它
+...（S2_after_mark 永不出现）                    ← stall 在 MARK 阶段
+```
+**`collect_start page_count=672/750` 后，`StopConcurrentMark` 0ms 返回，但 MARK（Phase1 root + Phase2 传递闭包/DrainMarkStackParallel）卡死**。demotion/sweep/compact 均未到。非 worker-pool Initialize 死锁（已修），疑似 mark 栈对大堆(672+ 页)不收敛/ParallelMarkWorkerLoop 边。
+
+CoreCLR 对照：mark 传递闭包有 c_mark_list + mark_array 幂等记账，对象只 mark 一次（`background_mark_phase` background.cpp:1637 用 mark_array 查重）；CRAG 需查 `DrainMarkStackParallel`/`MarkObject` 是否对已标对象重复入栈导致不收敛。真实规模需独立 session（1/12 散布、需放大 heap 确定性复现）。
