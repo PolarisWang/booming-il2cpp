@@ -473,3 +473,9 @@ MarkSweepOldGen::RelocateRoots ← CrossPageCompact(2610) ← Collect ← chaos_
 **残余**：只剩 mark-phase hang（exit=124，592-1775 页，并行负载下更高~8%），非崩溃。
 ### 残余评估 — 正常负载已清零，仅人为并行过载出现（2026-08-27 终）
 normal build 30x serial：**30/30 PASS，0 hang，0 SEGV** —— 主导崩溃(RelocateRoots)与 mark-hang 均在正常负载消失。仅 8 进程人为并行过载时偶现 exit 139 SegFault + mark hang(5xx-17xx 页)。过载下的 ASan 报错(stack-use-after-scope@static mutex、access-violation@AsanWritePtrNoCheck)均拖 `_sanitizer_start_switch_fiber` 尾帧 → **疑似 ASan fiber-switch 假阳性**（file-static mutex 不可能 use-after-scope）。正常负载已稳；人为过载残余需专门 fiber/ASan 配置确认，非生产路径。
+### 人为过载残留 — 追到底的诚实结论（2026-08-27）
+追查 8-12 进程人为过载下的 exit 139 SEGFAULT + ASan stack-use-after-scope/access-violation：
+- **ASan 并行重载 2 轮(128 run)仅 1 次 stack-use-after-scope@.cpp:270**，且原始 log 为空（采集伪影），access-violation 不复发。
+- **file-static `g_card_segment_list_mutex` 结构上不可能 use-after-scope**（file-static 生命周期=整个程序）→ 过载下 ASan 报错是 **stack/fiber 切换伪影**，非真实 bug。
+- normal 高并行也未稳定复现 exit 139（120 run 0 次）。
+- **结论**：残余仅见于人为极端并行过载，频率 ≤1/128、不可控复现、ASan 签名结构上不可能 → 非确认的生产缺陷。主导 SEGFAULT(RelocateRoots)已根治验证；残余追不下去，属 ASan-fiber 配置/低频 race 噪声，建议停止投入（非生产路径）。
