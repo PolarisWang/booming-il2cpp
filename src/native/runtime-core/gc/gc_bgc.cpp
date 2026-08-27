@@ -96,18 +96,22 @@ void BgcController::Stop() {
             finalizer_thread_.join();
     }
 
-    // Review #1-test: the no-concurrent-state cleanup below MUST run regardless
-    // of whether a BGC thread was actually running (i.e. not gated on the
-    // bgc_running_ exchange above).  A controller that was never Start()ed, or one
+    // Review #1-test: the no-CYCLE-state cleanup below MUST run regardless of
+    // whether a BGC thread was actually running (i.e. not gated on the
+    // bgc_running_ exchange above).  A controller that was never Start()ed, or
     // whose thread exited before Stop (phantom / mid-exit window described in
     // PauseForYoungGc), must STILL re-assert IDLE + not-marking so no stale
-    // concurrency flag poisons a later young-GC coordination.  These stores are
-    // idempotent when the flags are already clear, so the normal running-thread
-    // path is unchanged (same order, same values).
+    // marking/phase flag poisons a later young-GC coordination.  These stores are
+    // idempotent when the flags are already clear.
+    //
+    // DELIBERATELY NOT clearing bgc_pause_requested_/bgc_paused_ here: those are
+    // the ACTIVE young-GC pause handshake, not cycle state.  Clearing them
+    // unconditionally could race a PauseForYoungGc that is legitimately mid-flight
+    // (wiping the ack a young GC is waiting on), which the pre-push review flagged.
+    // The handshake is torn down by the BGC thread's own exit cleanup and by the
+    // StopConcurrentMark/ResumeAfterYoungGc timeout escapes, not by Stop().
     g_bgc_is_marking.store(false, std::memory_order_release);
     phase_.store(BgcPhase::IDLE, std::memory_order_release);
-    bgc_pause_requested_.store(false, std::memory_order_release);
-    bgc_paused_.store(false, std::memory_order_release);
 }
 
 void BgcController::FlushSatbBuffer(const SatbEntry* entries, uint32_t count) {
