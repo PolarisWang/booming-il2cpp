@@ -1432,55 +1432,64 @@ void BgcController::WaitForFinalizerDrain() noexcept {
 
 void BgcController::PauseForYoungGc() noexcept {
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_requested");
+
+    // S3-A fast-path (CoreCLR background.cpp:3233 对照): if the BGC thread is
+    // not running (never Start()ed, or already stopped), there is NO concurrent
+    // mark to coordinate with.  Skipping the pause is correct and eliminates
+    // the "spin forever waiting a dead BGC's ack" deadlock at the call site —
+    // PauseForYoungGc must never block against a non-existent thread.  No deck
+    // drain needed: with no thread, no marking ever happened, so no worker
+    // deque can hold nursery entries.
+    if (!bgc_running_.load(std::memory_order_acquire)) {
+        CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_skipped_no_thread");
+        return;
+    }
+
     bgc_pause_requested_.store(true, std::memory_order_release);
     // M5-1: wake the BGC so it can ack even if it is parked in a phase-wait
     // (REMARK_NEEDED / COMPACT_NEEDED) — otherwise the wait predicate never
     // re-evaluates and the young GC spins on bgc_paused_ forever.
     bgc_cv_.notify_all();
-    // Wait for BGC thread to acknowledge (bgc_paused_ == true).
-    //
-    // DIAGNOSTIC (task#16): if the BGC never acks, this loops forever.  Track
-    // elapsed spin time and periodically report the BGC thread's observable
-    // state so the deadlock's anchor (which BGC phase ack comes from / why not)
-    // can be captured in a normal Debug run WITHOUT changing coordination
-    // semantics.  Pure observability — no lock, no timeline change beyond the
-    // log writes.  Remove once the deadlock is root-caused.
-    {
-        using namespace std::chrono;
-        auto spin_start = steady_clock::now();
-        int log_count = 0;
-        while (!bgc_paused_.load(std::memory_order_acquire)) {
-            auto now = steady_clock::now();
-            auto elapsed_ms = duration_cast<milliseconds>(now - spin_start).count();
-            if (elapsed_ms > 3000 && log_count < 8) {
-                // Decode BgcPhase for readable output.
-                auto p = phase_.load(std::memory_order_acquire);
-                const char* phase_name = "?";
-                switch (p) {
-                    case BgcPhase::IDLE:            phase_name = "IDLE"; break;
-                    case BgcPhase::ROOT_COLLECT:    phase_name = "ROOT_COLLECT"; break;
-                    case BgcPhase::CONCURRENT_MARK: phase_name = "CONCURRENT_MARK"; break;
-                    case BgcPhase::REMARK_NEEDED:   phase_name = "REMARK_NEEDED"; break;
-                    case BgcPhase::STW_REMARK:      phase_name = "STW_REMARK"; break;
-                    case BgcPhase::CONCURRENT_SWEEP:phase_name = "CONCURRENT_SWEEP"; break;
-                    case BgcPhase::COMPACT_NEEDED:  phase_name = "COMPACT_NEEDED"; break;
-                    case BgcPhase::FINISHED:        phase_name = "FINISHED"; break;
-                    default: break;
-                }
-                CHAOS_IL2CPP_LOG_WARN_M("BGC",
-                    "PauseForYoungGc STALL {0}ms — phase={1} bgc_running={2} "
-                    "bgc_paused={3} bgc_marking={4} bgc_workers={5}",
-                    static_cast<unsigned long long>(elapsed_ms), phase_name,
-                    static_cast<int>(bgc_running_.load(std::memory_order_acquire)),
-                    static_cast<int>(bgc_paused_.load(std::memory_order_acquire)),
-                    static_cast<int>(g_bgc_is_marking.load(std::memory_order_acquire)),
-                    static_cast<int>(bgc_worker_count_.load(std::memory_order_acquire)));
-                ++log_count;
-            }
-            std::this_thread::yield();
+
+    // S3-A bounded wait (CoreCLR wait_for_gc_done(timeOut) 对照): wait for the
+    // BGC ack (bgc_paused_==true) up to a deadline, then give up.  If the ack is
+    // never received the BGC is either dead or wedged; instead of spinning
+    // forever (the L2-coordination deadlock family), force the BGC out so the
+    // young GC can proceed safely without racing a possibly-still-scanning BGC.
+    using namespace std::chrono;
+    constexpr auto kPauseTimeout = milliseconds(2000);
+    constexpr auto kPauseSleep   = microseconds(500);
+    auto deadline = steady_clock::now() + kPauseTimeout;
+    int log_count = 0;
+    bool acked = false;
+    while (!bgc_paused_.load(std::memory_order_acquire) &&
+           steady_clock::now() < deadline) {
+        auto remaining = duration_cast<milliseconds>(deadline - steady_clock::now()).count();
+        if (remaining % 500 == 0 && log_count < 4) {  // throttled observability
+            CHAOS_IL2CPP_LOG_WARN_M("BGC",
+                "PauseForYoungGc waiting ack — phase={0} bgc_running={1} "
+                "bgc_paused={2} bgc_marking={3}",
+                static_cast<int>(phase_.load(std::memory_order_acquire)),
+                static_cast<int>(bgc_running_.load(std::memory_order_acquire)),
+                static_cast<int>(bgc_paused_.load(std::memory_order_acquire)),
+                static_cast<int>(g_bgc_is_marking.load(std::memory_order_acquire)));
+            ++log_count;
         }
+        std::this_thread::sleep_for(kPauseSleep);
     }
-    CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_paused_acknowledged");
+    acked = bgc_paused_.load(std::memory_order_acquire);
+    if (acked) {
+        CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_paused_acknowledged");
+    } else {
+        // Deadline hit with no ack: the BGC is dead or wedged.  Force it out so
+        // the young GC proceeds without a concurrent scan racing its evacuation.
+        // StopConcurrentMark (safe under safepoint) drains workers + resets to
+        // IDLE — CoreCLR's "revert to blocking" escape, bounded + deterministic.
+        CHAOS_IL2CPP_LOG_WARN("BGC", "young_gc_pause_timeout — force-stopping BGC");
+        StopConcurrentMark();
+        bgc_pause_requested_.store(false, std::memory_order_release);
+    }
+
     // Drain any stale nursery entries from work deques as a safety net.
     DrainNurseryFromWorkDeques();
 }
@@ -1491,9 +1500,21 @@ void BgcController::ResumeAfterYoungGc() noexcept {
     // M5-1: wake the BGC so it can clear its pause-ack and continue, even if it
     // is parked in a phase-wait.
     bgc_cv_.notify_all();
-    // Wait for BGC thread to clear bgc_paused_ (acknowledge resume).
-    while (bgc_paused_.load(std::memory_order_acquire)) {
-        std::this_thread::yield();
+    // S3-A bounded wait: the BGC must clear bgc_paused_ (ack resume).  Bound it
+    // like the pause side — a wedged BGC must not strand the young GC forever.
+    using namespace std::chrono;
+    constexpr auto kResumeTimeout = milliseconds(2000);
+    auto deadline = steady_clock::now() + kResumeTimeout;
+    while (bgc_paused_.load(std::memory_order_acquire) &&
+           steady_clock::now() < deadline) {
+        std::this_thread::sleep_for(microseconds(500));
+    }
+    if (bgc_paused_.load(std::memory_order_acquire)) {
+        // BGC didn't clear the pause-ack in time.  Force it to a clean IDLE so
+        // the subsequent young GC phases (which assume BGC is not concurrently
+        // scanning) hold.  Same escape as the pause side.
+        CHAOS_IL2CPP_LOG_WARN("BGC", "young_gc_resume_timeout — force-stopping BGC");
+        StopConcurrentMark();
     }
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_resumed");
 }

@@ -4,6 +4,7 @@
 /// and worker deque operations.  These do NOT require a full GC
 /// initialization — they test BGC internals in isolation.
 
+#include <chrono>
 #include <cstdint>
 #include <cstring>
 #include <thread>
@@ -168,6 +169,26 @@ TEST_F(BgcUnitTest, StartBgcCycleNoThreadDoesNotEnterMarking) {
         << "StartBgcCycle with no running BGC thread leaked a phantom phase";
     EXPECT_FALSE(g_bgc_is_marking.load(std::memory_order_acquire))
         << "phantom concurrent mark must not form without a live BGC thread";
+}
+
+/// S3-A regression (task#16): PauseForYoungGc must NOT block against a
+/// non-existent BGC thread.  When bgc_running_==false (the pre-Start state),
+/// it must return immediately — otherwise a young GC would spin forever waiting
+/// on bgc_paused_ that no thread can set.  This is the bounded/dead-thread-safe
+/// fast-path that eliminates the "infinite spin waiting a dead BGC" family.
+TEST_F(BgcUnitTest, PauseForYoungGcNoThreadReturnsImmediately) {
+    auto& ctrl = BgcController::Instance();
+
+    // The fixture never calls Start(), so bgc_running_==false.  PauseForYoungGc
+    // must return without spinning (the fast-path logs young_gc_pause_skipped_no_thread).
+    auto t0 = std::chrono::steady_clock::now();
+    ctrl.PauseForYoungGc();
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+        std::chrono::steady_clock::now() - t0).count();
+
+    EXPECT_LT(elapsed_ms, 100)
+        << "PauseForYoungGc with no running BGC thread must return immediately, "
+           "not block on a pause-ack no thread can provide";
 }
 
 TEST_F(BgcUnitTest, BgcPhaseQueries) {
