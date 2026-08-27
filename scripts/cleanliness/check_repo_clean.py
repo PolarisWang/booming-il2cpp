@@ -21,8 +21,8 @@ Allowlist is auto-derived: any root entry already tracked in git is trusted.
 Deviation is only allowed for the explicit self-maintaining exceptions below.
 """
 
-import fnmatch
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -87,8 +87,50 @@ def load_generated_registry():
     return [e.get("glob", "") for e in data.get("entries", [])]
 
 
+_REGEX_CACHE = {}
+
+
+def _glob_to_regex(glob):
+    """Translate a git-style glob (with ** recursion) to an anchored regex.
+
+    NOTE: 'fnmatch' cannot express recursive '**' (it treats ** == * and * does
+    not span '/'), so a hand-rolled converter is required for registry globs
+    like 'tests/e2e/translation/**/managed/subjects/subjects.metadata.json'
+    to match at any nesting depth. Cached per pattern.
+    """
+    if glob in _REGEX_CACHE:
+        return _REGEX_CACHE[glob]
+    i, n, out = 0, len(glob), []
+    while i < n:
+        c = glob[i]
+        if c == "*":
+            if i + 1 < n and glob[i + 1] == "*":
+                # '**' then '/': matches zero-or-more complete dir segments
+                i += 2
+                if i < n and glob[i] == "/":
+                    out.append("(?:[^/]+/)*")
+                    i += 1
+                else:  # bare '**' at end -> anything
+                    out.append(".*")
+                continue
+            out.append("[^/]*")  # '*' within a segment, does not cross '/'
+            i += 1
+        elif c == "?":
+            out.append("[^/]")
+            i += 1
+        elif c in ".(){}\\^$+[]-|":
+            out.append("\\" + c)
+            i += 1
+        else:
+            out.append(c)
+            i += 1
+    rx = re.compile("^" + "".join(out) + "$")
+    _REGEX_CACHE[glob] = rx
+    return rx
+
+
 def _matches_any(path: str, globs) -> bool:
-    return any(fnmatch.fnmatch(path.replace("\\", "/"), g) for g in globs)
+    return any(_glob_to_regex(g).match(path.replace("\\", "/")) for g in globs)
 
 
 def main():
