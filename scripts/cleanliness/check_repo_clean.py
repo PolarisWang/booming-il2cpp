@@ -30,15 +30,18 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 # Root entries that are legitimately NOT tracked but present by design.
 # Keep in sync with the root CMakeLists / docs layout. Anything tracked is
 # automatically trusted.
+#
+# NOTE: deliberately does NOT whitelist the deleted historical root-CMake build
+# dirs (abi/ bootstrap/ common/ runtime-core/ support/ engine-bridge/ fuzz/
+# hot-update/ codegen/) — if a rogue root-CMake re-run ever recreates one, the
+# guard must flag it.
 ROOT_EXCEPTIONS = {
-    # top-level source dirs (may have untracked legit subfiles handled below)
+    # top-level source dirs
     ".ai", ".claude", ".claude_local",
     "artifacts",            # CI/pipeline cache (gitignored by design)
-    "contracts", "src", "tests", "testing", "docs", "wiki",
+    "contracts", "src", "tests", "docs", "wiki",
     "third_party", "scripts", "tools", "cmake", "build",
-    "optimization-campaign", "results",
-    "schemas", "abi", "bootstrap", "common", "runtime-core", "support",
-    "engine-bridge", "fuzz", "hot-update", "codegen",
+    "optimization-campaign", "results", "schemas",
 }
 
 # Build/scratch file *types* that must never appear loose at repo root,
@@ -79,20 +82,26 @@ def main():
 
     trusted = derive_trusted_roots()
 
-    # Untracked + not-ignored files at repo root (direct level 1).
+    # Untracked + not-ignored entries (git status --porcelain lists every
+    # untracked *file*, including those nested inside a brand-new directory).
     status = git("status", "--porcelain", "--untracked-files=all", "--", ".")
     violations = []
     for line in status.splitlines():
         if not line.startswith("??"):
             continue  # tracked-but-modified is fine
         path = line[3:]
-        # only root-level files (contains no slash) OR root-level dir marker
-        parts = path.split("/")
-        top = parts[0]
+        top = path.split("/")[0]
         if top in trusted:
-            continue
-        # a loose file directly at root, not a tracked/known dir
-        if len(parts) == 1:
+            continue  # inside a known source root — not root-level junk
+        # `top` is a NEW untracked root-level entry (loose file OR a whole new
+        # directory tree). Flag regardless of nesting depth so a rogue build
+        # that drops debug_output/ at root gets caught.
+        if "/" in path:
+            violations.append(
+                f"new untracked root-level directory: {top}/ (first file: {path}) — "
+                f"not a whitelisted root; re-route to artifacts/ or a source dir"
+            )
+        else:
             suffix = Path(top).suffix.lower()
             if suffix in ROOT_BANNED_EXT or top in ROOT_BANNED_NAMES:
                 violations.append(f"banned build-artifact type at root: {path}")
