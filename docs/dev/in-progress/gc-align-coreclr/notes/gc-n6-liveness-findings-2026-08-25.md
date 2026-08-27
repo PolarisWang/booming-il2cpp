@@ -455,3 +455,10 @@ S1+S3-A(+并行线 S3 微调)累积后重测 scenario C 100+ 次：
 - 结论：mark-phase stall 是狭窄 residual race，**fix 降低 4x 但未根除(~2%)**；watchdog 就位可捕获真因，但需更多运行/运气触发，迭代收益非本 session 递减点。
 
 **✅ 初步归因（统计）**：S1 幽灵 phase + S3-A bounded handshake 消除了 full-GC mark 与 BGC 协调残留的大部分干扰 → 大部分 S2 stall 实为协调类（与 S1/S3 同根），残留 ~2% 是纯 mark 内部收敛 boundary。
+### S2 并行采样 — 新发现第二个 ~2% 崩溃：启动 SEGFAULT（2026-08-27）
+并行 8 进程 × 96 次采样撞到 2 类 ~2% 残留：
+1. **mark-phase stall（已知）**：`S2_after_mark` 缺失，卡 mark。
+2. **启动 SEGFAULT 0xC0000005（新）**：`SetupTlsNursery: InitYoungGeneration done` 后、首个 GC marker 前崩溃。stress 自身 CrashHandler 打印 `*** CRASH: Exception code=0xC0000005 at address=...`。**非 mark stall，独立缺陷**，疑似首个 young-GC/分配路径竞态。
+cdb-as-child 5 次未复现（时序扰动）；ASan 树需重建才能精确抓 heap 错误。残留在 ~2%/类，需 ASan fuzz 专项资金定位。
+### S2 工具链状态 — ASan 重建被 127/DLL-load 阻塞（2026-08-27）
+为抓 SEGFAULT 精确内存错误，重建 isolated asan 树（MSYS2_ARG_CONV_EXCL 修 /fsanitize 路径转换后 configure 成功 + build 出 10.9MB exe + clang_rt DLL 复制）——但**所有 exe exit 127（DLL load fail）**，14.38/14.42 两个 clang_rt 版本均试。exe import `clang_rt.asan_dynamic-x86_64.dll` + Debug CRT(`VCRUNTIME140D`等，System32 仅有 ucrtbased)。正常 Debug exe 能跑（CRT 经 MSVC 搜索路径），ASan 需专用环境。**并行线 cleanup 后 ASan 工具链回归，需专项修复**（非 SEGFAULT 本身）。SEGFAULT ~2% 的精确 heap 归因需 ASan 修好后 high-volume fuzz。
