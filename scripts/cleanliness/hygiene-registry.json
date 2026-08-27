@@ -6,14 +6,18 @@
     {
       "name": "root-clean",
       "module": "check_repo_clean",
-      "args": ["--hard"],
+      "args": [
+        "--hard"
+      ],
       "timeout": 60,
       "description": "Commits must not add untracked non-whitelisted root-level junk (files or new dirs). Hard gate."
     },
     {
       "name": "disk-health",
       "module": "check_repo_clean",
-      "args": ["--disk"],
+      "args": [
+        "--disk"
+      ],
       "timeout": 90,
       "description": "Surface ignored output roots silently consuming disk; ALERT on unexpected >200MB dirs (advisory)."
     },
@@ -23,6 +27,13 @@
       "args": [],
       "timeout": 180,
       "description": "Committed generated artifacts must match a fresh hermetic regeneration of their generators (advisory warn in pre-commit; --fail-fast in CI)."
+    },
+    {
+      "name": "completion-audit",
+      "module": "check_completion_audit",
+      "args": [],
+      "timeout": 120,
+      "description": "Surface suspected-incomplete functions (real body then bare default return) — the AI return-0 loan class. Advisory WARN (surfaces real crypto holes); --ci forces a hard fail on any hit while pre-commit --gate stays lenient."
     }
   ]
 }
