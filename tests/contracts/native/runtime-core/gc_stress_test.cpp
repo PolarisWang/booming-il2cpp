@@ -2586,6 +2586,103 @@ struct ScenarioInfo {
     int allocs_per_worker;
 };
 
+// ═══════════════════════════════════════════════════════════════
+// Scenario U: Concurrent full-GC MARK + young-GC promotion churn
+//
+// Reproduces the task#16 S2 residual stall deterministically.  The scenario-C
+// ~1/12 full-GC mark stal was localized to the MARK phase and shown to be
+// concurrency-triggered (static 806-page harnesses converge; a full-GC mark
+// running WHILE mutators promote young objects to old-gen creates cross-gen
+// mark-stack churn).  This scenario drives exactly that interleave:
+//   - a mutator thread allocates via NurseryAllocate (young-GC + promotion)
+//   - a collector thread triggers full g_old_gen.Collect() simultaneously
+// The full-GC mark then races the mutator's ongoing promotion.
+// ═══════════════════════════════════════════════════════════════
+
+static int kUAllocs      = 300000;   // mutator churn allocs
+static std::atomic<bool> g_U_done{false};
+
+static void worker_u(int thread_index, WorkerResult* result) {
+    (void)thread_index;
+    RegisterWorker();
+    threading::EnterCooperativeMode();
+    if (!SetupTlsNursery()) {
+        UnregisterWorker();
+        return;
+    }
+    for (int i = 0; i < kUAllocs; ++i) {
+        void* p = NurseryAllocate(512);
+        if (!p) continue;
+        result->allocations_succeeded++;
+        WritePattern(p, 512, 3333, i);  // write cross-refs to force mark-children
+        if ((i & 511) == 511) threading::SafepointPoll();
+    }
+    threading::SafepointPoll();
+    UnregisterWorker();
+    result->completed = true;
+}
+
+static bool RunScenarioU(GcStatsSnapshot* stats_out) {
+    printf("\n  ── Scenario U: Concurrent full-GC mark + young-GC promotion churn ──\n");
+    GcStatsSnapshot before = SnapshotGcStats();
+
+    // Mutator thread: continuous nursery churn (young-GC + promotion).
+    std::thread churner([]() {
+        RegisterWorker();
+        threading::EnterCooperativeMode();
+        SetupTlsNursery();
+        int g_allocs = 0;
+        while (!g_U_done.load(std::memory_order_acquire)) {
+            void* p = NurseryAllocate(512);
+            if (p) { WritePattern(p, 512, 2222, g_allocs++); }
+            if ((g_allocs & 255) == 255) threading::SafepointPoll();
+        }
+        TeardownTlsNursery();
+        threading::UnregisterThread();
+    });
+
+    // Collector thread: force full-GC marks concurrently with the mutator's
+    // promotion churn.
+    std::atomic<bool> collector_done{false};
+    std::thread collector([&]() {
+        RegisterWorker();
+        threading::EnterCooperativeMode();
+        SetupTlsNursery();
+        for (int i = 0; i < 4; i++) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(20));
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            g_old_gen.Collect(nullptr, nullptr);
+            threading::ReleaseGlobalSafepoint(gen);
+        }
+        TeardownTlsNursery();
+        threading::UnregisterThread();
+        collector_done.store(true, std::memory_order_release);
+    });
+
+    // Let the first few marks run, then stop the mutator.
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    g_U_done.store(true, std::memory_order_release);
+    if (churner.joinable()) churner.join();
+
+    // Wait for collector to finish a bounded time; a concurrent-mark stall shows here.
+    auto c0 = std::chrono::steady_clock::now();
+    while (!collector_done.load(std::memory_order_acquire) &&
+           std::chrono::steady_clock::now() - c0 < std::chrono::seconds(30)) {
+        std::this_thread::yield();
+    }
+    if (collector.joinable()) collector.join();
+    bool collector_ok = collector_done.load(std::memory_order_acquire);
+
+    *stats_out = SnapshotGcStats();
+    uint64_t d_young = stats_out->young_collections > before.young_collections
+        ? stats_out->young_collections - before.young_collections : 0;
+    printf("\n  Result: concurrent full-GC+young churn, young_gc_delta=%llu, collector_ok=%d\n",
+           (unsigned long long)d_young, collector_ok ? 1 : 0);
+
+    g_last_pattern_failures = 0;
+    return collector_ok;
+}
+
 /// Run all scenarios.  If @a start_from is > 0, skips earlier scenarios.
 /// If @a end_at is <= num_scenarios, stops after that scenario (exclusive).
 /// Supports incremental validation without pre-existing scenario hangs.
@@ -2612,6 +2709,7 @@ static int run_scenarios(int start_from = 0, int end_at = 20) {
         {"gen1_typed_stress",      RunScenarioR, kRWorkers,         kRAllocsPerThread},
         {"gen1_mixed_stress",      RunScenarioS, kNumWorkerThreads,  kSAllocsPerThread},
         {"finalizer_stress",       RunScenarioT, kTWorkers,          kTObjectsPerWorker},
+        {"concurrent_full_gc_mark",RunScenarioU, kUAllocs,          1},
     };
     int num_scenarios = sizeof(scenarios) / sizeof(scenarios[0]);
 
