@@ -100,8 +100,10 @@ static CHAOS_IL2CPP_INTPTR ChaosCngHash(
     BCRYPT_HASH_HANDLE hHash = nullptr;
     status = BCryptCreateHash(hAlg, &hHash, hashObj.get(), hashObjSize, nullptr, 0, 0);
     if (ChaosCngOk(status)) {
+        // inArr->length is the byte count for a managed byte[]; the prior
+        // `* sizeof(CHAOS_IL2CPP_INTPTR)` over-read past the buffer.
         status = BCryptHashData(hHash, (PUCHAR)(inData),
-            static_cast<ULONG>(inArr->length * sizeof(CHAOS_IL2CPP_INTPTR)), 0);
+            static_cast<ULONG>(inArr->length), 0);
         if (ChaosCngOk(status)) {
             status = BCryptFinishHash(hHash, hashBuf.get(), hashLen, 0);
         }
@@ -111,9 +113,17 @@ static CHAOS_IL2CPP_INTPTR ChaosCngHash(
 
     if (!ChaosCngOk(status)) return 0;
 
-    // Allocate output managed byte[] and copy hash
-    // For now, return 0 as sentinel (managed-side allocation needed)
-    return 0;
+    // Allocate output managed byte[] and copy the computed hash into it
+    // (mirrors ChaosOpenSslHash). Previously returned 0 sentinel, discarding
+    // the result — the managed side silently got an empty hash.
+    auto result = alloc_byte_array(static_cast<CHAOS_IL2CPP_SIZE>(hashLen));
+    if (result != 0)
+    {
+        auto* outArr = get_managed_array_mut(result);
+        auto* outData = reinterpret_cast<CHAOS_IL2CPP_UINT8*>(accessor_get_elements(outArr));
+        std::memcpy(outData, hashBuf.get(), static_cast<size_t>(hashLen));
+    }
+    return result;
 }
 
 // ── SHA1/256/384/512 One-shot Hashes ──────────────────────────────
@@ -180,16 +190,25 @@ static CHAOS_IL2CPP_INTPTR ChaosCngHmac(
     auto buf = std::make_unique<UCHAR[]>(hashLen);
     status = BCryptHash(hAlg,
         static_cast<PUCHAR>(const_cast<void*>(static_cast<const void*>(keyData))),
-        static_cast<ULONG>(keyArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
+        static_cast<ULONG>(keyArr->length),   // byte count for byte[] (was *sizeof)
         static_cast<PUCHAR>(const_cast<void*>(static_cast<const void*>(dataBuf))),
-        static_cast<ULONG>(dataArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
+        static_cast<ULONG>(dataArr->length),  // byte count for byte[] (was *sizeof)
         buf.get(), hashLen);
 
     BCryptCloseAlgorithmProvider(hAlg, 0);
     if (!ChaosCngOk(status)) return 0;
 
-    // TODO: Allocate managed byte[] and return
-    return 0;
+    // Allocate output managed byte[] and copy the computed HMAC into it
+    // (mirrors ChaosOpenSslHmac). Previously returned 0 sentinel, discarding
+    // the result — the managed side silently got an empty HMAC.
+    auto result = alloc_byte_array(static_cast<CHAOS_IL2CPP_SIZE>(hashLen));
+    if (result != 0)
+    {
+        auto* outArr = get_managed_array_mut(result);
+        auto* outData = reinterpret_cast<CHAOS_IL2CPP_UINT8*>(accessor_get_elements(outArr));
+        std::memcpy(outData, buf.get(), static_cast<size_t>(hashLen));
+    }
+    return result;
 }
 
 // ── HMAC-SHA1/256/384/512 ─────────────────────────────────────────────
@@ -247,8 +266,20 @@ CHAOS_IL2CPP_INTPTR ChaosHmacMd5(CHAOS_IL2CPP_INTPTR key, CHAOS_IL2CPP_INTPTR da
 CHAOS_IL2CPP_INTPTR ChaosCngGetBytes(CHAOS_IL2CPP_INT32 count) noexcept
 {
     if (count <= 0) return 0;
-    // TODO: Allocate managed byte[], fill with BCryptGenRandom, return
-    return 0;
+    // Allocate managed byte[] and fill with cryptographically strong random
+    // bytes via the system-preferred RNG (mirrors ChaosCngFillRandom).
+    auto result = alloc_byte_array(static_cast<CHAOS_IL2CPP_SIZE>(count));
+    if (result == 0) return 0;
+    auto* outArr = get_managed_array_mut(result);
+    auto* outData = reinterpret_cast<CHAOS_IL2CPP_UINT8*>(accessor_get_elements(outArr));
+    if (outData == nullptr) return 0;
+    NTSTATUS status = BCryptGenRandom(nullptr, outData, static_cast<ULONG>(count),
+                                      BCRYPT_USE_SYSTEM_PREFERRED_RNG);
+    if (!ChaosCngOk(status)) {
+        // Fallback: PAL random (mirrors ChaosCngFillRandom).
+        chaos::il2cpp::pal::PalRandomBytes(outData, static_cast<size_t>(count));
+    }
+    return result;
 }
 
 // ── RNG Fill(byte[]) ──
