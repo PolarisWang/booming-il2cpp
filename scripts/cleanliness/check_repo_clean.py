@@ -21,6 +21,7 @@ Allowlist is auto-derived: any root entry already tracked in git is trusted.
 Deviation is only allowed for the explicit self-maintaining exceptions below.
 """
 
+import fnmatch
 import json
 import subprocess
 import sys
@@ -87,7 +88,6 @@ def load_generated_registry():
 
 
 def _matches_any(path: str, globs) -> bool:
-    import fnmatch
     return any(fnmatch.fnmatch(path.replace("\\", "/"), g) for g in globs)
 
 

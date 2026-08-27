@@ -23,7 +23,7 @@
     }
   ],
   "notes": {
-    "notNoise": "2016-08-27 measured: subjects.metadata.json churn is real content drift (totalMethods 1333->1542), NOT timestamp noise — idempotent-write does not apply until stable emission order.",
+    "notNoise": "2026-08-27 measured: subjects.metadata.json churn is real content drift (totalMethods 1333->1542), NOT timestamp noise — idempotent-write does not apply until stable emission order.",
     "guardBehavior": "repo-clean guard only flags untracked (`??`) root junk; tracked `.json` under tests/e2e/translation are already ignored because they live under a whitelisted root and are tracked. Registry is for dev/pipeline transparency + future gates."
   }
 }
