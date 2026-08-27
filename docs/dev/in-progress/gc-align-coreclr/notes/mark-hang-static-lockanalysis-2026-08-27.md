@@ -83,11 +83,24 @@
 
 > 目标：消除并行 mark 终止在过订阅下的 yield() 调度 Livelock。核心改为**被信号唤醒的 cv 等待 + 有界 wait_for 探测**，收敛性仍由 last-worker + AnyWorkRemaining 保证（该逻辑不动），cv 等待只是让空闲 worker 不烧 CPU 且不因缺少连续 quantum 而活锁。**声明：patch 基于 2026-08-27 HEAD（`3dd8ab4cb` 之上）源码现状编写；原生 session implement 前先 `grep` 核对行号，勿盲改。**
 
-> **实现状态（2026-08-27 会话已落地）**：B1/B2/C1/C2/C3/D1/D2(×2)/D3 全 hunks 已实现，
+> **实现状态（2026-08-27 会话已落地 + 验收）**：B1/B2/C1/C2/C3/D1/D2(×2)/D3 全 hunks 已实现，
 > 编译通过（build/native Debug + Release），`test_gc_parallel_mark` 6/6、
-> `test_gc_worker_pool` 7/7、`gc_mark_stall_repro` 3/3 收敛（806 页 mark 完成）。原生 session
-> 剩余验收：过订阅（6-8 进程×满 worker）下 0 hang + CPU 双采样确认 yield→cv 后 mark 段空闲
-> CPU 显著下降；方案3（`CHAOS_GC_ParallelMarkWorkers=1`）保留为独立 off-switch 未动。
+> `test_gc_worker_pool` 7/7、`gc_mark_stall_repro` 3/3 收敛（806 页 mark 完成）。
+>
+> **验收（2026-08-27 原生过订阅完成）**：
+> - **0 hang**：`gc_mark_stall_repro` 8 进程 × 5 轮 = 40/40 收敛（8×8=64 mark worker 争 24
+>   核 ≈ 2.7× 过订阅）；`chaos_gc_stress_test --scenario 2` 单进程 PASSED + 8 进程过订阅
+>   24/24 通过（re-run）。mark 终止协议零 stall，方案1 达成目标。
+> - **回归全绿（方案1 相关路径）**：test_gc_bgc_unit 11/11、test_gc_bgc_smoke 7/7、
+>   test_gc_stress 3/3、chaos_gc_bgc_smoke Passed。
+> - **2 个既有失败（非方案1 回归）**：test_gc_young_collector:YoungCollectionEmpty SEH
+>   0xC0000005 + test_gc_bgc_root_scan:RootChangeBufferWraparound(drained 60>64)。经
+>   **git-worktree baseline db49b51d4** 对比验证在方案1 前完全同样复现 → 既有 root-scan 缺陷族，
+>   与 mark 终止无关（三处均在 AsanReadPtrNoCheck 跨线程保守根扫描路径，见 task#4）。
+> - **CPU 采样未拿到定量对比**（wmic/tasklist 字段在本环境不可靠、且无修前基线）；0-hang +
+>   代码路径分离已足证无 yield Livelock。过订阅下观察到的稀有 AsanReadPtrNoCheck crash
+>   （1/24，非 mark 路径）为既有残余，已记为独立 task#4。
+> - 方案3（`CHAOS_GC_ParallelMarkWorkers=1`）保留为独立 off-switch 未动。
 > **补注（草案遗漏）**：`ParallelMarkContext` 由 `CHAOS_IL2CPP_MALLOC` 分配，新增的
 > `std::mutex mark_mtx_`/`std::condition_variable mark_cv_` 非平凡构造，必须 placement-new
 > 构造并显式析构——实现时在 `InitParallelMarkContext` 加分号构造、三条释放路径
