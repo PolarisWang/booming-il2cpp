@@ -78,3 +78,132 @@
      若 **LOW/BLOCKED** 且确认非调度-饿死 → 补真锁环证据,用 `cdb !cs / !locks`（挂起,仅确认锁序）而非 WCT。
   3. 终极进程内 `timed_mutex` 探针（thread_local 持锁栈 + try_lock_for 超时自报）抓锁序环（侵入,测完删,见 user 约束）。
 - **WCT 保留价值**：仅对**真阻塞锁环**（Mut thread-wait / SendMessage / ALPC）等 WCT 可见对象有效；对 std::mutex/CS/HRW 环无效。doc 内标注其盲区,勿再单点依赖。
+
+## 六、方案1 具体 patch 草稿 — cv 通知替换 yield 自旋终止（根治）
+
+> 目标：消除并行 mark 终止在过订阅下的 yield() 调度 Livelock。核心改为**被信号唤醒的 cv 等待 + 有界 wait_for 探测**，收敛性仍由 last-worker + AnyWorkRemaining 保证（该逻辑不动），cv 等待只是让空闲 worker 不烧 CPU 且不因缺少连续 quantum 而活锁。**声明：patch 基于 2026-08-27 HEAD（`3dd8ab4cb` 之上）源码现状编写；原生 session implement 前先 `grep` 核对行号，勿盲改。**
+
+### A. 正确性论证（为什么 cv 不等价破坏收敛）
+
+现有终止依赖两个不变式：
+1. `active_workers` 分布式计数 → last worker (`prev<=1`) 设 `parallel_done`。
+2. 非 last worker 经 `parallel_done` 检查退出。
+
+关键洞察（已证）：**收敛不依赖轮询响应速度**——last-worker 在设 done 前调 `AnyWorkRemaining` 做全 deque+pending 复查，余留在任何 deque/pending 的 chunk 都会被它 re-increment 后 drain。因此把空闲 worker 的 `yield()` 轮询换成**有界 cv 等待**（1ms wait_for）+ done 信号 notify，只改变"空闲时 CPU 消耗"，不改变"产生 work→被消费"的最终保证。残余 work 的最坏延迟 = 1 个周期（生产者 notify 或 1ms 轮询），仍收敛。
+
+### B. 文件1：`src/native/runtime-core/gc/gc_parallel_mark.h`
+
+**B1. includes**（当前只有 atomic/cstdint/cstring/vector，补 condition_variable + mutex）：
+```cpp
+#include <atomic>
+#include <condition_variable>
+#include <cstdint>
+#include <cstring>
+#include <mutex>
+#include <vector>
+```
+
+**B2. `ParallelMarkContext` 加 cv + mutex**（结构体末尾，`parallel_done` 之后）：
+```cpp
+    /// Set to true when parallel mark is complete (termination signal).
+    std::atomic<bool> parallel_done{false};
+
+    /// 方案1: done/新-work 信号。降空 worker 由 last-worker 设 done 后 notify_all
+    /// 唤醒退出; 生产者(ProcessChunk 推 chunk 溢出自己 deque 给他人 steal 时)也可
+    /// notify。有界 wait_for 兜底, 不丢 work。
+    std::mutex              mark_mtx_;
+    std::condition_variable mark_cv_;
+```
+
+### C. 文件2：`src/native/runtime-core/gc/gc_parallel_mark.cpp` — worker loop 三个 yield 点替换
+
+**C1. drain_started 等待（当前 :342 `while(!drain_started) yield();`）** 替换为：
+```cpp
+    // Wait for drain_started signal from the GC thread (cv + predicate; bounded
+    // wake so a missed notify still proceeds via the store visible on acquire).
+    {
+        std::unique_lock<std::mutex> lock(ctx->mark_mtx_);
+        ctx->mark_cv_.wait(lock, [&]() { return ctx->drain_started.load(std::memory_order_acquire); });
+    }
+```
+> 注：`drain_started` 在 RunWorkers 前已 store(true)（DrainMarkStackParallel），worker 快路径下 store 对 acquire 可见，predicate 直接为真，无额外等待。此 cv add 纯为一致性；原子可见性已保证。
+
+**C2. 内层 wait（当前 :420 `std::this_thread::yield();`）** 在 else 分支替换为有界 cv 等待：
+```cpp
+            // 方案1: 空闲且有界等待。非 last worker 在此等新 work/done。有界
+            // wait_for(1ms): 即便生产者漏 notify, 也会周期重探 pop/steal 消化
+            // 他人推入的 chunk; parallel_done 由 last-worker notify_all 即时醒。
+            {
+                std::unique_lock<std::mutex> lock(ctx->mark_mtx_);
+                ctx->mark_cv_.wait_for(
+                    lock, std::chrono::milliseconds(1),
+                    [&]() { return ctx->parallel_done.load(std::memory_order_acquire); });
+            }
+            // 醒来后回到内层 loop 顶部重试 pop/steal(逻辑不变, 仅等待方式变了)
+```
+> 保持内层 `while(!parallel_done)` 结构与 pop/steal 分支不动，只替换最终 `yield()`。
+
+**C3. last-worker 设 done 后 notify_all**（当前 :400 `parallel_done.store(true)` 之后加）：
+```cpp
+            ctx->parallel_done.store(true, std::memory_order_release);
+            // 方案1: 通知其他 idle worker 退出, 不再空转等到有界周期。
+            {
+                std::lock_guard<std::mutex> lock(ctx->mark_mtx_);
+            }
+            ctx->mark_cv_.notify_all();
+            break;
+```
+> 先 lock_guard 再 notify_all：保证 predicate 读 `parallel_done` 与 notify 之间无 lost-wakeup（cv.notify 持有 mutex 语义下，等待方正在 wait 中会因 mutex 重获 + predicate 重查而醒，不会因 notify 早于其进入 wait 而丢）。
+
+### D. 文件3：`src/native/runtime-core/gc/gc_worker_pool.cpp`
+
+**D1. `RunWorkers` 完成屏障（当前 :112 `while(completed_<expected) yield();`）** 替换为：
+```cpp
+    // 方案1: 主线程等完成不再裸转。cv 有界等待, 由 WorkerLoop 里 completed_ 递增后
+    // notify_all 唤醒。有界 wait_for 兜底, 不丢最终 completed_ 信号。
+    {
+        std::unique_lock<std::mutex> lock(mtx_);
+        cv_.wait_for(lock, std::chrono::milliseconds(1),
+                     [&]() { return completed_.load(std::memory_order_acquire) >= expected_completed_; });
+        // 兜底: 即使 notify 丢失, 1ms 周期重查 completed_ 终达 expected。
+    }
+```
+> **注意**：`RunWorkers` 用 pool 自身 `mtx_`/`cv_`（WorkerLoop park 同款）。但 WorkerLoop 的完成路径在无锁 scope 里 `completed_.fetch_add` —— 需在 D2 里让每次递增后 notify。
+
+**D2. `WorkerLoop` 里 `completed_.fetch_add` 后加 notify_all**（两处 :72 与 :117 附近，均在 `work_fn_` 执行后）：
+```cpp
+            completed_.fetch_add(1, std::memory_order_release);
+            cv_.notify_all();   // 方案1: 唤醒 RunWorkers 主线程完成屏障
+```
+> 两处（fast-path 分支 + 正常路径）都要加。
+
+**D3. `Initialize` ready-spin（当前 :75 `while(ready_count_<target) yield();`）** 替换（可选,低优先）：
+```cpp
+    if (spawned > 0) {
+        // 方案1: spawn 就绪等待从裸转改为有界 cv, 消除 spawn 阶段过订阅活锁。
+        std::unique_lock<std::mutex> lock(mtx_);
+        cv_.wait_for(lock, std::chrono::milliseconds(1),
+                     [&]() { return ready_count_.load(std::memory_order_acquire) >= spawned; });
+    }
+```
+> 若不改 D3, 至少保证 D1/D2/C1/C2/C3（mark 终止主路径）。D3 是 spawn 一次性, 过低风险可留待原生 session 实测后决定。
+
+### E. 验收（原生 session 必做）
+
+1. **编译**：全量 native CMake（含生成头 runtime_abi.h）。`cl /c` 单 TU 无法过（缺生成头），必须全量 build。
+2. **`gc_mark_stall_repro`**：无 env（方案1已生效, 不设 ParallelMarkWorkers）跑, 期望从不收敛(124/挂)转收敛(exit 0) 反复 20+ 次。
+3. **scenario C 大样本**：`--scenario 2` 单进程 50-100 次 0 hang; 6-8 进程并行循环 0 hang。
+4. **不回归绿基线**：`chaos_gc_parallel_mark_test` 6/6、`chaos_gc_bgc_unit`/bgc_smoke、full-GC 相关 stress 全绿; mark 正确性(scenario A 无漏标)不变。
+5. **CPU 前后对比**：mark 段 CPU 从"满核 yield 转"降为"近 0 idle cv 等待"（用 task manager/双采样确认）。注意：wait_for 1ms 仍会 ~1ms 唤醒, CPU 显著下降但不为零——可接受, 若需再降可加长周期或纯 notify。
+6. **方案3 兜底保留**：`CHAOS_GC_ParallelMarkWorkers=1` 仍应强制顺序（与方案1 正交, 保留作为 operator off-switch）。
+
+### F. 风险与回滚
+
+- **风险1**：cv 通知引入新的锁序？不——mark_cv_/mark_mtx_ 只在 worker 自空闲或 done 时取, 与 steal_mutex 无嵌套（worker 在 pop/steal 临界区外等 cv; 等 cv 时已释放 mark_mtx_）。`RunWorkers` 用 pool mtx_ 与 WorkerLoop 的 mtx_ 是同一把（park 同锁）, 但 D2 notify 在无锁 scope, 无嵌套。**无 AB-BA 新增**。
+- **风险2**：completed_ 丢失最终信号？D1 wait_for 1ms 兜底重查, 且 D2 每次递增 notify_all, 无 lost-wakeup（predicate 重查 + mutex 保护 completed_ 读）。保守起见 D2 可只加一次在 expected 达成时但实现复杂, 用 wait_for 兜底最简。
+- **回滚**：单文件 revert `gc_parallel_mark.cpp`/`gc_parallel_mark.h`/`gc_worker_pool.cpp` 即可（不动方案3 的 `InitParallelMarkContext` 那行 config cap, 与方案1 独立文件/区域）。
+
+### G. 与方案3 的关系
+
+- 方案3（已合入 `3dd8ab4cb`）= operator off-switch 止血; 方案1 = 根治。
+- 两者正交：方案1 改 worker loop 等待, 方案3 改 worker_count 计算。可独立合并；原生 session 先验证方案1, 若 risc 高可只留方案3。

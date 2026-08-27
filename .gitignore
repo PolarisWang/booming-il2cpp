@@ -586,3 +586,8 @@ tests/**/coverage.cobertura.xml
 
 # WCT deadlock-spy build artifact (compile wct_deadlock_spy.cpp manually)
 /scripts/wct_deadlock_spy.exe
+
+# Agent one-shot scratch (tmp_*) + debug build artifacts under scripts/debug/
+scripts/debug/tmp_*
+scripts/debug/*.exe
+

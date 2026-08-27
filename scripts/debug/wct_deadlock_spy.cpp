@@ -11,6 +11,14 @@
 //
 // This is a DIAGNOSTIC tool (task#16 S2-B mark-hang global-deadlock capture);
 // not part of the runtime, no production impact.
+//
+// WINDOWS-ONLY: compiled as a standalone diagnostic via scripts/_build_wct.cmd.
+// Guarded with #ifdef _WIN32 so that IF this file is ever swept into a global
+// CMake source list on a non-Windows target (linux/arm64/android/ios), it
+// compiles to an empty TU instead of failing on the Windows-only headers
+// (review #5).  On non-Windows the tool simply cannot run.
+
+#ifdef _WIN32
 
 #include <windows.h>
 #include <wct.h>
@@ -132,3 +140,14 @@ int main(int argc, char** argv) {
     std::printf("-- wct_deadlock_spy done --\n");
     return 0;
 }
+
+#else  // !_WIN32
+
+// Non-Windows: this diagnostic tool is Windows-only (Wait Chain Traversal).
+// Provide an empty main so a global-source-list sweep still links on
+// linux/arm64/android/ios instead of failing on the Windows headers above.
+int main() {
+    return 0;
+}
+
+#endif  // _WIN32

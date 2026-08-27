@@ -34,6 +34,13 @@
       "args": [],
       "timeout": 120,
       "description": "Surface suspected-incomplete functions (real body then bare default return) — the AI return-0 loan class. Advisory WARN (surfaces real crypto holes); --ci forces a hard fail on any hit while pre-commit --gate stays lenient."
+    },
+    {
+      "name": "scripts-hygiene",
+      "module": "check_scripts_hygiene",
+      "args": [],
+      "timeout": 60,
+      "description": "Surface agent one-shot/diagnostic scripts in scripts/ (tmp_/_spy*/_build*/.exe) — advisory WARN."
     }
   ]
 }
