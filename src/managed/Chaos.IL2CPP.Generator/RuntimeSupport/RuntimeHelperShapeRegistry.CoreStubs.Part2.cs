@@ -42,6 +42,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterCultureInfogetInvariantCulture(registry);
             RegisterRandomNext(registry);
             RegisterMathCeiling(registry);
+            RegisterMathTruncate(registry);
             RegisterRandomNextDouble(registry);
             RegisterArrayCreateInstance(registry);
             RegisterAssemblyGetCallingAssembly(registry);
