@@ -479,3 +479,9 @@ normal build 30x serial：**30/30 PASS，0 hang，0 SEGV** —— 主导崩溃(R
 - **file-static `g_card_segment_list_mutex` 结构上不可能 use-after-scope**（file-static 生命周期=整个程序）→ 过载下 ASan 报错是 **stack/fiber 切换伪影**，非真实 bug。
 - normal 高并行也未稳定复现 exit 139（120 run 0 次）。
 - **结论**：残余仅见于人为极端并行过载，频率 ≤1/128、不可控复现、ASan 签名结构上不可能 → 非确认的生产缺陷。主导 SEGFAULT(RelocateRoots)已根治验证；残余追不下去，属 ASan-fiber 配置/低频 race 噪声，建议停止投入（非生产路径）。
+### 并行线 ASan Probe 细化验证（2026-08-27）— 与我的 NoCheck fix 兼容
+并行线把 gc_bgc.cpp:792 PopulateRootSet 从 NoCheck 改回 AsanReadPtrProbe（保留 live slot 插桩），并称"真 fix=gc_old_gen RelocateRoots self-stack NoCheck，非 blanket NoCheck"。**实证验证**：
+- Probe 版 gc_bgc.cpp 编译 ASan stress → scenario C **30/30 serial 0 ASan 错误**（含并行 5 run 0 错）。
+- ⇒ **并行线判断正确**：PopulateRootSet（Probe，跨线程栈内 slot）不再 FP；我早先那个 FP 是别的原因/Parallel 时序。
+- ⇒ 我的 RelocateRoots self-stack NoCheck（已提交 3e020aa28，2426 处）是**真 fix**，与其兼容；我早先"所有 GcScanAllThreadRoots 回调 blanket NoCheck"是 over-broad，并行线的 Probe 细化是对的。
+- **待并行线裁决**：gc_old_gen TSR relocation 回调(2161/2387)的 read 是否也应 Probe（write 侧仍需 NoCheck 保证 foreign redzone 写入安全）。并行线正细修 asan_interface，不重复其努力，此裁决留给他们。
