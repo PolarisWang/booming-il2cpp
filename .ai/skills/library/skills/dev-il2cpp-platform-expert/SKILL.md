@@ -3,8 +3,7 @@ name: dev-il2cpp-platform-expert
 description: 跨平台 PAL 专家 — 平台抽象层、构建系统、CI/CD、跨平台移植、Unity IL2CPP/Mono 对标
 ---
 
-> ⚠️ **本文件通过 Skill 工具加载，作用是注入领域知识到当前对话上下文。**
-> 本文件**不是可执行的 agent**。当前 Agent 需阅读下方"执行流程"作为实现参考。
+> 加载说明(⚠️ Skill 工具注入/当前Agent做不做): 见 `_shared/expert-loading-notice.md`。
 
 # dev-il2cpp-platform-expert — 跨平台 PAL 专家
 

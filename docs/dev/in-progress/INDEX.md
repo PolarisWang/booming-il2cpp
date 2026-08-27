@@ -15,3 +15,4 @@
 | [runtime-external-reflection-type](runtime-external-reflection-type/STATUS.md) | plan | completed | 2026-05-05 | Runtime External 依赖实现 — Reflection/Type + Exception | false |
 | [gc-align-coreclr](gc-align-coreclr/STATUS.md) | roadmap | roadmap | 2026-08-10 | 代码级对齐 CoreCLR GC；next=GC-A1(young GC 全根集扫描) | true |
 | [repo-cleanliness](repo-cleanliness/dev-plan.md) | techdebt | completed | 2026-08-27 | 根目录残留清理(删根级CMake构建目录/日志/NuGet/artifacts+build释放约13GB) + 监控(pre-commit硬门+Claude实时hook双保险)；计划详见 dev-plan.md | false |
+| [20260827-fixing-code-review-agent](20260827-fixing-code-review-agent/STATUS.md) | plan | completed | 2026-08-27 | 完成: 新建 domain-free 通用 review 修复 orchestrator skill(dev-fixing-code-review,混合编排已验证) + R2/R3 真实修复(GC native 13/13绿); R4 转 gc-expert 专项. 见 STATUS §T3/T4 | false |

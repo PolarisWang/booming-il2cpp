@@ -13,7 +13,7 @@
 | 领域 | 何时读取 | registry | skill 数量 |
 | ---- | -------- | -------- | --------- |
 | `workflow` | 需要开始、拆解、推进或调试实现任务时先读取本域 registry。 | [workflow](./registries/workflow.md) | 9 |
-| `quality` | 需要审查代码、验证结果或在完成前补证据时读取本域 registry。 | [quality](./registries/quality.md) | 4 |
+| `quality` | 需要审查代码、验证结果或在完成前补证据时读取本域 registry。 | [quality](./registries/quality.md) | 5 |
 | `git` | 需要创建/切换 worktree、提交本地改动或收口开发分支时读取本域 registry。 | [git](./registries/git.md) | 2 |
 | `knowledge` | 任务产出需要写入 wiki 或维护知识索引时读取本域 registry。 | [knowledge](./registries/knowledge.md) | 1 |
 | `testing` | 任务涉及测试框架、subject 定义、测试生成或测试治理时读取本域 registry。 | [testing](./registries/testing.md) | 5 |

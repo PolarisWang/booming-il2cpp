@@ -1,0 +1,282 @@
+{
+  "expert_keywords": {
+    "dev-il2cpp-translation-expert": [
+      "新 IL 指令",
+      "翻译路径",
+      "Emission",
+      "Planner",
+      "Lowering"
+    ],
+    "dev-il2cpp-codegen-expert": [
+      "C# codegen",
+      "T4 模板",
+      "NativeAot lowering",
+      "snapshot",
+      "codegen 管线"
+    ],
+    "dev-il2cpp-runtime-expert": [
+      "runtime-core",
+      "interpreter",
+      "VTable",
+      "bootstrap",
+      "method_table",
+      "线程状态"
+    ],
+    "dev-il2cpp-debug-expert": [
+      "crash",
+      "segfault",
+      "test failure",
+      "异常行为",
+      "崩溃"
+    ],
+    "dev-il2cpp-gc-expert": [
+      "GC",
+      "分配",
+      "内存回收",
+      "写屏障",
+      "stress test",
+      "分代"
+    ],
+    "dev-il2cpp-build-fixer": [
+      "编译失败",
+      "链接错误",
+      "codegen stub",
+      "dotnet build",
+      "CMake",
+      "LNK"
+    ],
+    "dev-il2cpp-fact-verification-expert": [
+      "foundation-dll",
+      "fact",
+      "subject",
+      "manifest",
+      "ATG",
+      "TPG"
+    ],
+    "dev-il2cpp-hotupdate-expert": [
+      "热更新",
+      "PatchLoader",
+      "patchdata",
+      "HotpatchDispatch",
+      "hotpatch"
+    ],
+    "dev-il2cpp-foundation-dll-optimizer": [
+      "性能优化",
+      "profile",
+      "benchmark",
+      "回归检测"
+    ],
+    "dev-il2cpp-platform-expert": [
+      "跨平台",
+      "CMakePresets",
+      "工具链",
+      "CI/CD",
+      "平台移植"
+    ],
+    "dev-il2cpp-abi-expert": [
+      "ABI",
+      "调用约定",
+      "类型映射",
+      "extern"
+    ],
+    "dev-il2cpp-atg-expert": [
+      "AutoTestGenerator",
+      "ATG",
+      "AutoTest",
+      "subject 生成",
+      "测试代码生成",
+      "metadata",
+      "CombinedSubjects"
+    ],
+    "dev-il2cpp-external-runtime-expert": [
+      "extern stub",
+      "ShapeRegistry",
+      "跨程序集"
+    ],
+    "dev-il2cpp-pipeline-expert": [
+      "缓存策略",
+      "SDK 路径",
+      "pipeline 编排"
+    ],
+    "dev-il2cpp-simd-expert": [
+      "SIMD",
+      "向量化",
+      "Intrinsics"
+    ],
+    "dev-il2cpp-jit-expert": [
+      "JIT 编译",
+      "寄存器分配",
+      "SEH",
+      "unwind",
+      "tier promotion",
+      "OSR"
+    ],
+    "dev-il2cpp-codegen-capabilities": [
+      "codegen 能力",
+      "特性支持"
+    ],
+    "dev-il2cpp-verification-pipeline": [
+      "测试管线",
+      "缓存治理",
+      "验证 gate"
+    ]
+  },
+  "expert_sub_controller": {
+    "runtime-ctl": {
+      "experts": [
+        "dev-il2cpp-runtime-expert",
+        "dev-il2cpp-jit-expert",
+        "dev-il2cpp-debug-expert"
+      ],
+      "domains": [
+        1,
+        3
+      ],
+      "routing_strategy": {
+        "task_type": {
+          "runtime-core/interpreter/VTable 修改": "dev-il2cpp-runtime-expert",
+          "JIT/OSR/tier promotion": "dev-il2cpp-jit-expert",
+          "crash/segfault/异常追踪": "dev-il2cpp-debug-expert"
+        },
+        "execution_order": [
+          "debug-expert 先根因分析，runtime-expert 随后修复"
+        ],
+        "mixed_domain": [
+          "运行时+调试 → debug-expert 先调查，runtime-expert 修复"
+        ]
+      }
+    },
+    "gc-ctl": {
+      "experts": [
+        "dev-il2cpp-gc-expert",
+        "dev-il2cpp-foundation-dll-optimizer"
+      ],
+      "domains": [
+        2,
+        12
+      ],
+      "routing_strategy": {
+        "task_type": {
+          "GC 算法/分代/write barrier/safepoint": "dev-il2cpp-gc-expert",
+          "OOM/stress test/内存泄漏": "dev-il2cpp-gc-expert",
+          "benchmark 回归/profile 分析": "dev-il2cpp-foundation-dll-optimizer",
+          "GC 性能退化": "dev-il2cpp-foundation-dll-optimizer",
+          "AOT vs JIT 对比": "dev-il2cpp-foundation-dll-optimizer"
+        },
+        "execution_order": [
+          "foundation-dll-optimizer 先量化数据，gc-expert 随后做针对性优化"
+        ],
+        "mixed_domain": [
+          "GC + 优化 → optimizer 先出数据，gc-expert 后优化"
+        ]
+      }
+    },
+    "codegen-ctl": {
+      "experts": [
+        "dev-il2cpp-codegen-expert",
+        "dev-il2cpp-translation-expert",
+        "dev-il2cpp-build-fixer",
+        "dev-il2cpp-fact-verification-expert",
+        "dev-il2cpp-hotupdate-expert",
+        "dev-il2cpp-platform-expert",
+        "dev-il2cpp-abi-expert",
+        "dev-il2cpp-external-runtime-expert",
+        "dev-il2cpp-pipeline-expert",
+        "dev-il2cpp-simd-expert",
+        "dev-il2cpp-codegen-capabilities",
+        "dev-il2cpp-verification-pipeline",
+        "dev-il2cpp-atg-expert"
+      ],
+      "domains": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "routing_strategy": {
+        "task_type": {
+          "IL 翻译路径设计/Planner/Emission": "dev-il2cpp-translation-expert",
+          "C# codegen 管线/T4 模板": "dev-il2cpp-codegen-expert",
+          "LNK/编译错误/CMake/codegen stub": "dev-il2cpp-build-fixer",
+          "foundation-dll fact/subject/manifest": "dev-il2cpp-fact-verification-expert",
+          "PatchLoader/patchdata/HotpatchDispatch": "dev-il2cpp-hotupdate-expert",
+          "跨平台 PAL/CMakePresets": "dev-il2cpp-platform-expert",
+          "ABI 类型映射/调用约定": "dev-il2cpp-abi-expert",
+          "extern stub/ShapeRegistry": "dev-il2cpp-external-runtime-expert",
+          "缓存策略/SDK 路径": "dev-il2cpp-pipeline-expert",
+          "SIMD/Intrinsics": "dev-il2cpp-simd-expert",
+          "codegen 能力矩阵/特性列表": "dev-il2cpp-codegen-capabilities",
+          "测试管线治理/验证 gate": "dev-il2cpp-verification-pipeline",
+          "AutoTestGenerator/ATG/AutoTest/subject 生成": "dev-il2cpp-atg-expert"
+        },
+        "execution_order": [
+          "translation-expert 在前，codegen-expert 在后（两者都涉及 Planner/Emission 文件）"
+        ],
+        "mixed_domain": [
+          "翻译+CodeGen → translation-expert 先做路径设计，codegen-expert 后做代码生成",
+          "构建+CodeGen → build-fixer 先诊断分层，如问题在 CodeGen 层则转 codegen-expert",
+          "测试+CodeGen → fact-verification-expert 审查 codegen 输出",
+          "热更新+CodeGen → hotupdate-expert 改完 PatchLoader，codegen-expert 更新 PatchDataExtractor"
+        ]
+      }
+    }
+  },
+  "expert_sub_controller_domain_index": {
+    "1": "runtime-ctl",
+    "2": "gc-ctl",
+    "3": "runtime-ctl",
+    "4": "codegen-ctl",
+    "5": "codegen-ctl",
+    "6": "codegen-ctl",
+    "7": "codegen-ctl",
+    "8": "codegen-ctl",
+    "9": "codegen-ctl",
+    "10": "codegen-ctl",
+    "11": "codegen-ctl",
+    "12": "gc-ctl"
+  },
+  "cross_cutting": [
+    {
+      "name": "dev-il2cpp-abi-expert",
+      "domains": [
+        1,
+        4,
+        7
+      ],
+      "description": "ABI 类型映射、返回类型一致性、跨平台调用约定"
+    },
+    {
+      "name": "dev-il2cpp-external-runtime-expert",
+      "domains": [
+        1,
+        4
+      ],
+      "description": "extern stub 生成、ShapeRegistry 注册、跨程序集路由"
+    },
+    {
+      "name": "dev-il2cpp-pipeline-expert",
+      "domains": [
+        5,
+        7
+      ],
+      "description": "缓存策略、SDK 路径、cmake 增量编译、编排净化"
+    },
+    {
+      "name": "dev-il2cpp-simd-expert",
+      "domains": [
+        4,
+        6
+      ],
+      "description": "SIMD/Intrinsics 翻译路径"
+    }
+  ],
+  "workflow_templates": {
+    "multi": ".ai/skills/workflows/multi-expert.template.js",
+    "debug": ".ai/skills/workflows/deep-debug.template.js"
+  },
+  "_comment": "按需加载路由数据(拆自 expert-registry.json)。core-agent 路由到域/子控制器时才读本文件。"
+}

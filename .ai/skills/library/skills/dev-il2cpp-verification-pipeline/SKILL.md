@@ -3,14 +3,13 @@ name: dev-il2cpp-verification-pipeline
 description: 验证管线总编排专家 — 覆盖 foundation-dll 全 13 stage，只做编排和结果收集，零后处理
 ---
 
-> ⚠️ **本文件通过 Skill 工具加载，作用是注入领域知识到当前对话上下文。**
-> 本文件**不是可执行的 agent**。当前 Agent 需阅读下方"执行流程"作为实现参考。
->
-> **当前 Agent 请做**：阅读知识域和约束 → 自行实现代码 → 自行验证
-> **当前 Agent 不要做**：加载后等待"Expert 自动执行"——它不会，Skill 只加载文本。
+> 加载说明(⚠️ Skill 工具注入/当前Agent做不做): 见 `_shared/expert-loading-notice.md`。
 >
 
 # dev-il2cpp-verification-pipeline — 验证管线总编排专家
+
+> 🔀 **边界：本 expert 只负责 foundation-dll 验证 13-stage 编排（stage 顺序、结果收集, 零后处理）。**
+> build.py 构建编排 / Hephaestus 缓存 / cmake 增量编译 / SDK 路径归 `dev-il2cpp-pipeline-expert`(domain 7). 构建缓存/增量编译问题请转交, 不要在本 expert 处理。
 
 ## 🔴 红线：禁止后处理（零容忍）
 

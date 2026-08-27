@@ -1,0 +1,32 @@
+{
+    "kind": "project",
+    "domain": "quality",
+    "name": "dev-fixing-code-review",
+    "summary": "通用 code-review 结果修复 orchestrator — 对任意域的 review 报告逐条 meta-review(验证有效性/定严重度/找遗漏)，按 file:line 自动路由到底层 domain expert 落地修复并回归。",
+    "trigger_signals": [
+        "收到一份 code review 报告，需要逐条验证其有效性并落地修复",
+        "review 结果跨多域(如 GC+并发/JIT+CodeGen)，需要按域分派专家修复",
+        "对 review 发现做 meta-review：判断真伪、标定严重度、发现遗漏",
+        "修复 review 结果时需按领域路由到 domain expert 并跑回归"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "medium",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2026-08-27",
+            "type": "created"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": "dev-receiving-code-review",
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    },
+    "core_length": "medium"
+}

@@ -16,3 +16,9 @@ latest_stop_point: 已提交 GC-N8（bf1b83503+048b9f15c）/ N9（a77aff4dd）/ 
 2. **GC-N6-发现3 专项**：typed young-GC 无限循环挂起（内容校验原型暴露），需重载测试 harness 后用 cdb 定位循环点。
 3. **GC-N9/runtime（after GC-N3）**：Server harness 健全后跑 AdjustHeapCount。
 ```
+
+---
+
+## 并行任务：20260827-fixing-code-review-agent
+
+> ✅ 已于 2026-08-27 完成并存档。产出：`dev-fixing-code-review` skill（domain-free, 混合编排已验证）+ R2/R3 真实修复（GC native 13/13 绿）。R4 转 gc-expert 专项。详见 `docs/dev/in-progress/20260827-fixing-code-review-agent/STATUS.md`。

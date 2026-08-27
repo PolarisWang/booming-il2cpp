@@ -266,6 +266,50 @@ def verify_outputs(outputs: dict[Path, str]) -> None:
         raise RuntimeError("Catalog outputs are not up to date:\n" + "\n".join(issues))
 
 
+def check_expert_orphans(repo_root: Path) -> None:
+    """一致性自检: 扫描 expert 中只在 keyword 索引、但未挂接到
+    任何 domain 的 default/alternate 的 expert('孤儿'), 输出警告暴露问题。
+
+    孤儿无法被 core-agent 主分发循环 (按 domains[N].defaultExpert/alternateExperts
+    派发) 命中, 内容白写。本检查只警告不阻断, 避免生成流程被卡死但暴露隐患。
+
+    A1 拆分说明: expert_keywords 已从 expert-registry.json 移到
+    expert-registry.routing.json(按需加载)。此处合并读两个文件, 孤儿判定不失效。
+    """
+    disc = repo_root / ".ai" / "skills" / "discovery"
+    reg_path = disc / "expert-registry.json"
+    routing_path = disc / "expert-registry.routing.json"
+    if not reg_path.exists():
+        return
+    try:
+        reg = load_json(reg_path)
+    except (OSError, ValueError):
+        print("[skill-catalog] [warn] expert-registry.json 不可解析, 跳过孤儿检查", file=sys.stderr)
+        return
+    # 合并读 routing 文件里的 expert_keywords(孤儿判定用), 缺失则 fallback 空
+    routing = {}
+    if routing_path.exists():
+        try:
+            routing = load_json(routing_path)
+        except (OSError, ValueError):
+            print("[skill-catalog] [warn] expert-registry.routing.json 不可解析, 孤儿检查可能不完整", file=sys.stderr)
+
+    keywords = set(reg.get("expert_keywords", {}).keys()) | set(routing.get("expert_keywords", {}).keys())
+    bound: set[str] = set()
+    for dom in reg.get("domains", {}).values():
+        bound.add(dom.get("defaultExpert", ""))
+        bound.update(dom.get("alternateExperts", []))
+
+    orphans = sorted(keywords - bound - {""})
+    if orphans:
+        print(
+            "[skill-catalog] [warn] 发现未挂接 domain 的孤儿 expert: "
+            + ", ".join(orphans)
+            + " (仅 keyword 索引, 主分发循环不可达; 请挂到 domains[N].alternateExperts)",
+            file=sys.stderr,
+        )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root")
@@ -282,7 +326,7 @@ def main() -> int:
     project_skill_dirs = sorted(
         entry
         for entry in (chapter_root / "library" / "skills").iterdir()
-        if entry.is_dir()
+        if entry.is_dir() and not entry.name.startswith("_")
     )
 
     project_entries = [
@@ -299,6 +343,7 @@ def main() -> int:
         raise RuntimeError("Duplicate skill names found: " + ", ".join(duplicates))
 
     outputs = build_outputs(chapter_root, domains, published_entries)
+    check_expert_orphans(repo_root)
     if args.check:
         verify_outputs(outputs)
         print("[skill-catalog] Catalog outputs are up to date.")

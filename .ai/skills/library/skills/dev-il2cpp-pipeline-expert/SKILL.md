@@ -5,6 +5,10 @@ description: 构建管线专家 — Hephaestus 缓存策略、cmake 增量编译
 
 # dev-il2cpp-pipeline-expert — 构建管线专家
 
+> 🔀 **边界：本 expert 只负责 build.py 构建编排 / Hephaestus 缓存 / cmake 增量编译 / SDK 路径。**
+> foundation-dll 验证 13-stage 编排（stage 顺序、结果收集、零后处理）归
+> `dev-il2cpp-verification-pipeline`（domain 11）。遇到验证 stage 编排问题请转交, 不要在此处理。
+
 ## 核心原则：Pipeline 只做编排，不做补救
 
 ```

@@ -3,8 +3,7 @@ name: dev-il2cpp-build-fixer
 description: 编译失败与 codegen stub 修复专家。严格分层诊断（ATG/TPG/CodeGen/Python），在哪层出问题就在哪层修
 ---
 
-> ⚠️ **本文件通过 Skill 工具加载，作用是注入领域知识到当前对话上下文。**
-> 本文件**不是可执行的 agent**。当前 Agent 需阅读下方"执行流程"作为实现参考。
+> 加载说明(⚠️ Skill 工具注入/当前Agent做不做): 见 `_shared/expert-loading-notice.md`。
 
 # dev-il2cpp-build-fixer — 编译失败与 CodeGen Stub 修复专家
 

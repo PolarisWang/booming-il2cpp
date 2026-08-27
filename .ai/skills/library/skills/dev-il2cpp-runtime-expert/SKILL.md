@@ -3,11 +3,7 @@ name: dev-il2cpp-runtime-expert
 description: dev-il2cpp-runtime-expert — il2cpp 运行时专家
 ---
 
-> ⚠️ **本文件通过 Skill 工具加载，作用是注入领域知识到当前对话上下文。**
-> 本文件**不是可执行的 agent**。当前 Agent 需阅读下方"执行流程"作为实现参考。
->
-> **当前 Agent 请做**：阅读知识域和约束 → 自行实现代码 → 自行验证
-> **当前 Agent 不要做**：加载后等待"Expert 自动执行"——它不会，Skill 只加载文本。
+> 加载说明(⚠️ Skill 工具注入/当前Agent做不做): 见 `_shared/expert-loading-notice.md`。
 >
 
 # dev-il2cpp-runtime-expert — il2cpp 运行时专家

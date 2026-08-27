@@ -3,8 +3,7 @@ name: dev-il2cpp-fact-verification-expert
 description: foundation-dll fact 验证专家 — fact 流程执行、错误诊断路由、ATG/TPG 质量门、codegen 输出审查、skip-list 维护
 ---
 
-> ⚠️ **本文件通过 Skill 工具加载，作用是注入领域知识到当前对话上下文。**
-> 本文件**不是可执行的 agent**。当前 Agent 需阅读下方"执行流程"作为实现参考。
+> 加载说明(⚠️ Skill 工具注入/当前Agent做不做): 见 `_shared/expert-loading-notice.md`。
 
 # dev-il2cpp-fact-verification-expert — fact 验证专家
 
