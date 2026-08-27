@@ -489,3 +489,9 @@ normal build 30x serial：**30/30 PASS，0 hang，0 SEGV** —— 主导崩溃(R
 试第 5 种：互连 806 页 + 并发 mid-mark 图变异（churner 直接 old-gen Allocate 期间 Collect）——**无效**（无 safepoint，Collect 期间并发 Allocate 是 UB，mark 0s 收敛到 2 页），已回滚。
 **穷举 5 种 harness 全证伪简化复现**：静态/互连/并发scenario U/组合全收敛；mark hang 只在 **scenario C 的精确 random walk**（safepoint 协调的 young-GC→OOM→full-GC 推广，~1/12）出现。
 **结论**：mark hang 是真实但狭窄的并发时序 race，只能在完整 scenario C 随机游走复现；需 high-volume fuzz（scenario C 本体跑大样本+watchdog 捕获 stuck-vs-divergent）专项，非简化 harness 可短公路。主导 SEGFAULT 已根治；此 mark hang 为唯一剩余，特性完全刻划，根修需专门 fuzz session。
+### S2-B fuzz 判别失败 → 重框定为全局死锁（2026-08-27）
+watchdog(独立 300ms 线程, fprintf stderr) 在 **10+ 次复现的 mark hash 上 0 次触发**（STUCK 和 DIVERGE 都不火）。关键诊断：
+- **watchdog 自身也被冻住** → 不是 mark 局部发散(total_marked 涨), 是**全局死锁/线程饿死**——所有线程(含独立 watchdog)被阻塞。
+- mark 看似 stall(S2_after_mark 缺失)实为全 GC 冻住, 死锁点在某共享锁/condition(全 GC 早段)。
+- cdb-as-child break-in 未捕获(时序扰动/挂起实例错过)。
+- **根因重框定**: 不是 mark 不收敛, 是**全局并发死锁**(worker pool/共享锁在 600-1700 页全 GC 早段)。需外部无扰动 stack capture + 深并发锁分析, 专属 sustained investigation。~2%(由 8% 降)。
