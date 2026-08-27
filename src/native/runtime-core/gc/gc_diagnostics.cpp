@@ -113,6 +113,18 @@ void GcVerifyHeap() noexcept {
             if ((bmp[bit >> 3] & (1u << (bit & 7))) == 0) continue;
             void* obj = payload + bit * sizeof(void*);
             if (obj >= payload + payload_size) break;
+            // In-place demotion (gc_old_gen.h:79-85): a demoted object is a live
+            // gen1-owned object that stays RESIDENT in this old-gen page with its
+            // mark-bit kept set (so sweep/BGC preserve it), while GetRegionGen
+            // classifies it as Gen1 — NOT OLD.  The kFull walk below validates
+            // OLD-gen residency + region-gen OLD, which is wrong for demoted
+            // objects: every marked slot inside one is legitimately gen1-resident
+            // in an old-gen page.  Normalize through the demoted set and skip, so
+            // the verify tool reflects the in-place model (avoids an ERROR flood
+            // — and the latent SEGFAULT of reading swept demoted pages as objects).
+            if (IsInDemotedSet(obj)) {
+                continue;  // legitimately gen1-owned, resident in this old-gen page
+            }
             if (!G_OldGen().IsInOldGen(obj)) {
                 CHAOS_IL2CPP_LOG_ERROR_M("GCVerify",
                     "kFull: marked object not in tracked old-gen page: {0}", obj);
