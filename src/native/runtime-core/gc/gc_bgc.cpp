@@ -755,9 +755,12 @@ void BgcController::PopulateRootSet() {
             [](void* root_addr, bool, void*) {
                 auto* slot = static_cast<void**>(root_addr);
                 // root_addr is a slot on ANOTHER thread's stack (conservative
-                // scan); it may sit in an ASan stack-frame redzone. Un-instrumented
-                // read avoids a false "unknown-crash" (byte-identical access).
-                void* ref = chaos::il2cpp::common::AsanReadPtrNoCheck(slot);
+                // scan); it may sit in an ASan stack-frame redzone. Probe sheds
+                // instrumentation only for genuinely poisoned slots, keeping live
+                // root slots instrumented so a real OOB/UAF write into a root is
+                // still surfaced (review #2) — instead of unconditionally eliding
+                // for every slot and masking genuine findings.
+                void* ref = chaos::il2cpp::common::AsanReadPtrProbe(slot);
                 s_gte_heap++;
                 if (ref == nullptr) return;
                 if (G_OldGen().IsInOldGen(ref)) {

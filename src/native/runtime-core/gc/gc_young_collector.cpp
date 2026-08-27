@@ -457,17 +457,20 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
                 // root_addr points into ANOTHER thread's stack (conservative
                 // all-thread scan).  The slot may fall in an ASan stack frame
                 // redzone between the target thread's frames, which ASan poisons.
-                // Use un-instrumented access so this intentional cross-thread
-                // stack probe doesn't trip a false "unknown-crash" (the store
-                // below, writing the promoted pointer back into the foreign
-                // stack, must likewise be un-instrumented).  The emitted access
-                // is byte-identical; only ASan instrumentation is elided.
-                void* val = chaos::il2cpp::common::AsanReadPtrNoCheck(slot);
+                // We only need to shed instrumentation for genuinely poisoned slots
+                // (Probe gates on __asan_address_is_poisoned); live stack slots stay
+                // instrumented so a real OOB/UAF write into a root is still caught
+                // (review #2/#4) instead of masking all findings.  The promoted
+                // pointer write-back below is similarly probe-gated.
+                void* val = chaos::il2cpp::common::AsanReadPtrProbe(slot);
                 if (val != nullptr && IsInNursery(val)) {
                     auto* r = static_cast<RootScavengeCtx*>(user_data)->result;
                     void* tenured = GcScavengeObjectKnownNursery(val, r);
                     if (tenured != nullptr && tenured != val) {
-                        chaos::il2cpp::common::AsanWritePtrNoCheck(slot, tenured);
+                        // NOTE (review #9): probe write into the foreign stack is
+                        // only sound because GcYoungCollection runs under a global
+                        // STW safepoint (all mutators suspended).
+                        chaos::il2cpp::common::AsanWritePtrProbe(slot, tenured);
                     }
                 }
             },

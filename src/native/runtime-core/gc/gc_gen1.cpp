@@ -8,7 +8,6 @@
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
-#include <unordered_set>
 
 #include "gc_bgc.h"
 #include "gc_events.h"
@@ -21,6 +20,12 @@
 #include "gc_heap.h"
 #include "gc_static_roots.h"
 #include "thread_state.h"
+
+// Dense, cache-friendly address set for live_demoted (vs std::unordered_set,
+// whose per-node heap allocations + poor locality inflate gen1 STW pause).
+// Defined AFTER includes since gc_layout.h -> chaos/unordered_dense.h supplies
+// the CHAOS_IL2CPP_UNORDERED_DENSE_SET macro.
+using Gen1LiveDemotedSet = CHAOS_IL2CPP_UNORDERED_DENSE_SET(uintptr_t);
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -558,18 +563,30 @@ Gen1CollectionResult GcGen1Collection() {
     // gen1_begin-relative mark bitmap cannot index them.  Track live-demoted
     // addresses in a set as root scans discover references to them.  The gen1
     // collection then promotes / keeps / reclaims each demoted object in Phase 4.
-    std::unordered_set<uintptr_t> live_demoted;
+    Gen1LiveDemotedSet live_demoted;
     // Mark a child pointer as gen1-live: if it's in the gen1 region, set the mark
     // bitmap bit; if it's an in-place demoted old-gen object, record it in
     // live_demoted (later promoted/kept/reclaimed in Phase 4).
+    //
+    // CRITICAL (base/interior asymmetry, review #1): conservative scans and
+    // interior references record a RAW pointer that may be INTERIOR to the object
+    // (IsInDemotedSet returns true for interior pointers, gc_old_gen.h:160).
+    // Phase 4f keys liveness on the object BASE (page->demoted[i].addr), so every
+    // demoted hit must be normalized to its base via IsInDemotedSetGetBase —
+    // storing the raw interior value would make a base-address lookup MISS a live
+    // demoted object, clear its old-gen mark bits, and the next sweep would
+    // reclaim an object still referenced on a thread stack (use-after-free).
     auto mark_child = [&](void* child) {
         if (child == nullptr) return;
         if (IsInGen1(child)) {
             uintptr_t child_addr = reinterpret_cast<uintptr_t>(child);
             CHAOS_IL2CPP_SIZE slot_idx = (child_addr - gen1_begin) / sizeof(void*);
             mark_bm.MarkRange(slot_idx, 1);
-        } else if (IsInDemotedSet(child)) {
-            live_demoted.insert(reinterpret_cast<uintptr_t>(child));
+        } else {
+            char* demoted_base = IsInDemotedSetGetBase(child);
+            if (demoted_base != nullptr) {
+                live_demoted.insert(reinterpret_cast<uintptr_t>(demoted_base));
+            }
         }
     };
 
@@ -630,7 +647,7 @@ Gen1CollectionResult GcGen1Collection() {
     // 3c: Scan thread stacks (conservative).
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("Gen1_Root_Stacks");
-        struct StackCtx { uintptr_t gen1_begin; GcMarkBitmap* bm; std::unordered_set<uintptr_t>* live_demoted; };
+        struct StackCtx { uintptr_t gen1_begin; GcMarkBitmap* bm; Gen1LiveDemotedSet* live_demoted; };
         StackCtx sctx{gen1_begin, &mark_bm, &live_demoted};
         threading::GcScanAllThreadRoots(
             [](void* root_addr, bool /*is_interior*/, void* user_data) {
@@ -641,8 +658,13 @@ Gen1CollectionResult GcGen1Collection() {
                     uintptr_t child_addr = reinterpret_cast<uintptr_t>(val);
                     CHAOS_IL2CPP_SIZE slot_idx = (child_addr - ctx->gen1_begin) / sizeof(void*);
                     ctx->bm->MarkRange(slot_idx, 1);
-                } else if (IsInDemotedSet(val)) {
-                    ctx->live_demoted->insert(reinterpret_cast<uintptr_t>(val));
+                } else {
+                    // Normalize interior stack pointers to the demoted object base
+                    // (same base-key rule as mark_child) — see review #1.
+                    char* demoted_base = IsInDemotedSetGetBase(val);
+                    if (demoted_base != nullptr) {
+                        ctx->live_demoted->insert(reinterpret_cast<uintptr_t>(demoted_base));
+                    }
                 }
             }, &sctx);
     }
@@ -650,7 +672,7 @@ Gen1CollectionResult GcGen1Collection() {
     // 3d: Scan GCHandles for Gen1 pointers.
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("Gen1_Root_GCHandles");
-        struct HandleCtx { uintptr_t gen1_begin; GcMarkBitmap* bm; std::unordered_set<uintptr_t>* live_demoted; };
+        struct HandleCtx { uintptr_t gen1_begin; GcMarkBitmap* bm; Gen1LiveDemotedSet* live_demoted; };
         HandleCtx hctx{gen1_begin, &mark_bm, &live_demoted};
         GcIterateTenuredHandles(
             [](void* obj, void* user_data) {
@@ -660,8 +682,14 @@ Gen1CollectionResult GcGen1Collection() {
                     uintptr_t obj_addr = reinterpret_cast<uintptr_t>(obj);
                     CHAOS_IL2CPP_SIZE slot_idx = (obj_addr - context->gen1_begin) / sizeof(void*);
                     context->bm->MarkRange(slot_idx, 1);
-                } else if (IsInDemotedSet(obj)) {
-                    context->live_demoted->insert(reinterpret_cast<uintptr_t>(obj));
+                } else {
+                    // GCHandles store the object base, but normalize defensively —
+                    // a handle may point at an interior offset for some projections.
+                    // Key liveness on the base so Phase 4f lookup is consistent.
+                    char* demoted_base = IsInDemotedSetGetBase(obj);
+                    if (demoted_base != nullptr) {
+                        context->live_demoted->insert(reinterpret_cast<uintptr_t>(demoted_base));
+                    }
                 }
             }, &hctx);
     }
@@ -673,6 +701,10 @@ Gen1CollectionResult GcGen1Collection() {
     // child live.  (Root scans in Phase 3 already added direct-reach demoted objs.)
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("Gen1_Demoted_Closure");
+        // Every element is a demoted-object BASE address (all insert points
+        // normalize via IsInDemotedSetGetBase), so dereferencing as an object
+        // header is well-formed — a raw interior/false pointer can never reach
+        // this loop.  IsValidTypeInfoPointer below remains a defensive fallback.
         std::vector<uintptr_t> worklist(live_demoted.begin(), live_demoted.end());
         while (!worklist.empty()) {
             uintptr_t addr = worklist.back();
@@ -687,8 +719,11 @@ Gen1CollectionResult GcGen1Collection() {
                 uint16_t off = layout->pointer_offsets[i].offset;
                 void* child = *reinterpret_cast<void**>(addr + off);
                 if (child == nullptr) continue;
-                if (IsInDemotedSet(child)) {
-                    uintptr_t child_addr = reinterpret_cast<uintptr_t>(child);
+                // Demoted child edge: normalize to base before inserting, so the
+                // base-key invariant of live_demoted is preserved across closure.
+                char* demoted_base = IsInDemotedSetGetBase(child);
+                if (demoted_base != nullptr) {
+                    uintptr_t child_addr = reinterpret_cast<uintptr_t>(demoted_base);
                     if (live_demoted.insert(child_addr).second) {
                         worklist.push_back(child_addr);
                     }

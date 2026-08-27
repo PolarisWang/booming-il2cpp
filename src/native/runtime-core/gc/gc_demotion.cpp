@@ -217,17 +217,17 @@ void DemotionRelocate(const std::vector<DemotionEntry>& entries,
             if (root_addr == nullptr) return;
             auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
             // root_addr is a slot on ANOTHER thread's stack (conservative scan);
-            // it may sit in an ASan stack-frame redzone.  Un-instrumented
-            // read+write so relocation of foreign-stack roots doesn't trip a
-            // false "unknown-crash" (access is byte-identical, ASan only elided).
+            // it may sit in an ASan stack-frame redzone.  Probe sheds ASan only
+            // for genuinely poisoned slots, keeping live root slots instrumented
+            // so a real OOB/UAF write into a root is still surfaced (review #2).
             uintptr_t val = reinterpret_cast<uintptr_t>(
-                chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
+                chaos::il2cpp::common::AsanReadPtrProbe(root_addr));
             if (val == 0) return;
 
             auto it = std::lower_bound(map.begin(), map.end(), val,
                 [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
             if (it != map.end() && it->old_addr == val) {
-                chaos::il2cpp::common::AsanWritePtrNoCheck(
+                chaos::il2cpp::common::AsanWritePtrProbe(
                     root_addr, reinterpret_cast<void*>(it->new_addr));
             }
         }, &addr_map);

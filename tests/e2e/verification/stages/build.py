@@ -596,11 +596,20 @@ def _build_jit_entry(
         try:
             shutil.rmtree(jit_output)
         except OSError as e:
-            # Do NOT silently swallow a failed purge: a stale build_jit_output
-            # left behind would make the incremental JIT cmake build hit C3861
-            # again with no obvious cause.  Surface a loud warning here.
-            print(f"  [build] WARNING: could not purge stale build_jit_output ({e}); "
-                  f"JIT may hit C3861 from leftover page-*.cpp")
+            # Fail loudly, never build on a half-purged stale directory.  On
+            # Windows this is overwhelmingly a locked entry-jit.exe / loaded dll
+            # (shutil.rmtree can't delete files still in use).  The partially
+            # removed build_jit_output still holds stale page-*.cpp referencing
+            # symbols the current codegen no longer emits; running an incremental
+            # cmake build on it re-hits C3861 with the failure hidden behind an
+            # already-existing directory.  Treat the purge failure as a JIT build
+            # failure: surface it via the return value (the pipeline continues
+            # with the previous entry-jit.exe rather than a silently-broken tree).
+            print(f"  [build] FATAL: could not purge stale build_jit_output ({e}); "
+                  f"JIT entry build aborted to avoid hidden C3861 reuse")
+            return False
+
+    # Fresh (or successfully purged) directory — create it for the JIT codegen.
     jit_output.mkdir(parents=True, exist_ok=True)
 
     cmd = [

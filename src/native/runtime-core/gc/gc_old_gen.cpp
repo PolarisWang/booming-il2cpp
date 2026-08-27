@@ -634,6 +634,12 @@ bool IsInDemotedSet(const void* ptr) {
     return page != nullptr && page->DemotedContains(ptr);
 }
 
+char* IsInDemotedSetGetBase(const void* ptr) {
+    if (ptr == nullptr) return nullptr;
+    auto* page = G_OldGen().FindPage(ptr);
+    return page != nullptr ? page->DemotedBase(ptr) : nullptr;
+}
+
 uint64_t MarkSweepOldGen::DiagCountOxFFBytes() const {
     uint64_t count = 0;
     auto* page = page_list_;
@@ -2728,7 +2734,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 // the full GC; G_Loh().Sweep() will free the segment, causing
                 // use-after-free when the worker thread accesses it.
                 auto val = static_cast<void*>(
-                    chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
+                    chaos::il2cpp::common::AsanReadPtrProbe(root_addr));
                 if (val != nullptr && G_Loh().IsInLOH(val)) {
                     G_Loh().MarkObject(val);
                 }
@@ -3138,7 +3144,7 @@ bool MarkSweepOldGen::TryMarkRoot(void* addr) {
     // addr comes from GcScanAllThreadRoots: it is the address of a stack slot.
     // Read the VALUE at that slot �� if it points to old-gen, mark it.
     if (addr == nullptr) return false;
-    auto val = static_cast<void*>(chaos::il2cpp::common::AsanReadPtrNoCheck(addr));
+    auto val = static_cast<void*>(chaos::il2cpp::common::AsanReadPtrProbe(addr));
     if (val == nullptr) return false;
 
     // FindPage before IsValidManagedObject: FindPage is safe for arbitrary

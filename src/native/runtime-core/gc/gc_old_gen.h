@@ -157,6 +157,26 @@ struct OldGenPage {
         }
         return false;
     }
+
+    /// Normalize a demoted pointer (which may be an interior pointer into the
+    /// object) back to the object's base address @c .addr, or nullptr if @a ptr
+    /// is not inside any demoted object on this page.  Unlike DemotedContains
+    /// (a bool test), this returns the containing object's start so callers can
+    /// key by base address — critical because conservative stack scans record
+    /// raw slot values that may be interior pointers, and base/interior address
+    /// semantics MUST NOT be mixed when tracking liveness (GC-gen1 Phase 4f).
+    char* DemotedBase(const void* ptr) const {
+        const auto* cp = static_cast<const char*>(ptr);
+        int32_t n = demoted_count.load(std::memory_order_acquire);
+        for (int32_t i = 0; i < n; i++) {
+            const DemotedObj& e = demoted[i];
+            if (e.addr != nullptr && cp >= e.addr &&
+                cp <  e.addr + static_cast<ptrdiff_t>(e.size)) {
+                return e.addr;
+            }
+        }
+        return nullptr;
+    }
 };
 
 /// Is @a ptr a gen1-owned object physically resident in an old-gen page (i.e. in
@@ -165,6 +185,13 @@ struct OldGenPage {
 /// addresses that are not in the gen1 bump region but are demoted-old-gen.  Only
 /// meaningful when @a ptr is inside an old-gen page.
 bool IsInDemotedSet(const void* ptr);
+
+/// Base-address variant of IsInDemotedSet: for any pointer (base or interior)
+/// inside a gen1-owned in-place demoted old-gen object, return that object's
+/// base @c addr; nullptr if not demoted.  Conservative scans only yield interior
+/// pointers, but liveness bookkeeping must be keyed on the object base — so all
+/// demoted tracking should normalize through this instead of storing raw values.
+char* IsInDemotedSetGetBase(const void* ptr);
 
 // Finalizer table entry: maps object -> finalizer callback.
 struct FinalizerEntry {

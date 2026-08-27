@@ -502,14 +502,17 @@ internal sealed class SdkEmitter
             var targetPath = Path.Combine(libDir, platform.GetStaticLibFileName(targetName));
 
             // On source-built Linux, a locally-built lib is authoritative and must win;
-            // skip copying so we don't clobber it.  On Windows (prebuilt presets), the
-            // preset is always the authoritative source — a pre-existing target is a
-            // STALE artifact from an earlier run (preserved across builds by TPG --clean)
-            // and MUST be overwritten, or the chunk links against libs compiled against an
-            // older pal_eh.h/signature (→ LNK2019).  Do NOT short-circuit here on prebuilt.
+            // skip copying so we don't clobber it.  This is a SKIP, not a copy, so
+            // copiedCount must NOT increment here (review #10) — inflating the count
+            // would misreport how many libs the emitter actually installed, misleading
+            // downstream logs/diagnostics.  On Windows (prebuilt presets), the preset
+            // is always the authoritative source — a pre-existing target is a STALE
+            // artifact from an earlier run (preserved across builds by TPG --clean)
+            // and MUST be overwritten, or the chunk links against libs compiled against
+            // an older pal_eh.h/signature (→ LNK2019).  Do NOT short-circuit this on
+            // prebuilt.
             if (!platform.HasPrebuiltLibraries && File.Exists(targetPath))
             {
-                copiedCount++;
                 continue;
             }
 
