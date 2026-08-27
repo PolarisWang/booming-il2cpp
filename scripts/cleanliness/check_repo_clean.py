@@ -226,11 +226,18 @@ def run_disk_check(alert_mb=DISK_DEFAULT_ALERT_MB) -> int:
 
     unexpected_large = [top for mb, top in offenders if mb >= alert_mb]
     if not offenders and not known:
+        print("[PASS] no significant ignored disk usage")
         print("=== [repo-clean --disk] no significant ignored disk usage ===")
     if unexpected_large:
         print(f"=== [repo-clean --disk] {len(unexpected_large)} unexpected large ignored dir(s) (>={alert_mb}MB): {', '.join(unexpected_large)}")
         print("  Hint: run scripts/clean-build-artifacts.sh or prune .claude/worktrees.")
+        print("[FAIL] oversized ignored output dirs found (disk-health)")
         return 1
+    # Nothing too big -> PASS (even if there are expected output roots and small
+    # sub-threshold junk).  NOTE: the PASS message deliberately avoids the strong
+    # keyword 'unexpected large', which the orchestrator treats as an issue word —
+    # including it here would bump this clean result to a false WARN.
+    print("[PASS] no oversized ignored output dirs reported")
     return 0
 
 
@@ -319,6 +326,9 @@ def main():
                 print(f"    ... +{len(regen_modified)-8} more")
 
     if not violations:
+        # Explicit [PASS] marker: self-declare a clean status so the hygiene
+        # orchestrator does NOT classify a silent-exit-0 as UNKNOWN (review #3).
+        print("[PASS] repo root is clean")
         print("=== [repo-clean] repo root is clean ===")
         return 0
     for v in violations:
@@ -327,7 +337,11 @@ def main():
     print("  Hint: keep the repo root for source only. Move docs under docs/,")
     print("  add scratch to .gitignore, or commit it in a real module dir.")
     if mode == "hard":
+        # Hard mode signals failure via a non-zero exit -> the orchestrator FAILs.
         return 1
+    # Advisory mode: exit 0 but self-declare [WARN] so the orchestrator surfaces
+    # the issue (instead of silently PASSing a real problem).
+    print("[WARN] repo-root cleanliness issues found (advisory)")
     return 0
 
 

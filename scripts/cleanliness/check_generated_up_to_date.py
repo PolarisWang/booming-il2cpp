@@ -117,11 +117,17 @@ def main() -> int:
         print("  Fix: re-run the generator (e.g. python scripts/codegen/generate_ir_opcodes.py) and commit,")
         print("  or remove the stale generated artifact if it is intentionally version-pinned.")
         if "--fail-fast" in sys.argv:
+            # Explicit [FAIL] + non-zero exit: the orchestrator FAILs CI on real
+            # drift via an unambiguous status (review #1) — not a fragile text
+            # heuristic.  CI passes --fail-fast (chaos_hygiene._dispatch).
+            print("[FAIL] generated files are STALE vs their generators")
             return 1
         # pre-commit: warn, don't hard-block (a pre-existing drift shouldn't brick
         # unrelated commits). CI/--fail-fast enforces the real gate.
+        print("[WARN] generated files are STALE vs their generators (advisory)")
         print("  [warn-only] pre-existing drift — pre-commit did NOT block. CI --fail-fast enforces.")
         return 0
+    print("[PASS] all registered generated files are up to date")
     print("=== [generated-drift] all registered generated files are up to date (hermetic check, no writes) ===")
     return 0
 
