@@ -87,6 +87,11 @@ void BgcController::Stop() {
         NotifyBgc();
         if (bgc_thread_.joinable())
             bgc_thread_.join();
+        // Thread joined → it ran the exit-path cleanup above.  Belt-and-
+        // suspenders: if join raced or the thread was never running, guarantee
+        // no phantom concurrency state survives Stop (CoreCLR background.cpp:3233).
+        g_bgc_is_marking.store(false, std::memory_order_release);
+        phase_.store(BgcPhase::IDLE, std::memory_order_release);
     }
 
     // Step 2: Stop finalizer thread (after BGC — any pending work was published).
@@ -1294,6 +1299,19 @@ void BgcController::BgcThreadMain() {
             }
         }
     }  // end while(bgc_running_)
+
+    // ── BGC thread exit cleanup (CoreCLR background.cpp:3233 对照) ──
+    // bgc_running_ 变 false (Stop) 时线程从主循环退出。若退出时正处于
+    // CONCURRENT_MARK / g_bgc_is_marking=true (Stop 不会走到 FINISHED 清位),
+    // 不清会把"幽灵 marking"残留 —— 后续 young GC 见 g_bgc_is_marking=true 调
+    // PauseForYoungGc 死转 (无线程可 ack)。线程退出必须无条件清,保证不变量:
+    //   BGC 线程存活 ⇒ 可能 marking; 线程已死 ⇒ marking 必为 false。
+    //   对照 CoreCLR gc_background_running 只在 BGC 线程主循环置/清 (本文件
+    //   StartBgcCycle 改由线程在进入 mark 时置,见该函数注释)。
+    g_bgc_is_marking.store(false, std::memory_order_release);
+    bgc_pause_requested_.store(false, std::memory_order_release);
+    bgc_paused_.store(false, std::memory_order_release);
+    phase_.store(BgcPhase::IDLE, std::memory_order_release);
 
     threading::UnregisterThread();
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "thread_stopped");
