@@ -1,6 +1,7 @@
 #include "gc_parallel_mark.h"
 
 #include "gc_bit_utils.h"
+#include "gc_config.h"
 #include "gc_layout.h"
 #include "thread_pool.h"
 #include "thread_state.h"
@@ -40,10 +41,19 @@ static inline bool AtomicMarkBit(unsigned char* bitmap, CHAOS_IL2CPP_SIZE byte_i
 
 ParallelMarkContext* InitParallelMarkContext(OldGenPage** pages, int page_count,
                                               int hw_concurrency) {
-    // Worker count: min(pages/32 + 1, hw_concurrency, kMaxParallelMarkWorkers)
+    // Worker count: min(pages/32 + 1, hw_concurrency, kMaxParallelMarkWorkers),
+    // then capped by the ParallelMarkWorkers config governor (task#16 S3 timeout
+    // mitigation / 方案3): setting CHAOS_GC_ParallelMarkWorkers=1 forces a fully
+    // sequential DrainMarkStack (no cross-worker steal/deq spin), eliminating the
+    // yield-spin scheduler Livelock window under extreme process oversubscription.
+    // Default 8 == kMaxParallelMarkWorkers, so default behavior is unchanged.
     int desired = (page_count / 32) + 1;
     desired = (std::min)(desired, hw_concurrency);
     desired = (std::min)(desired, kMaxParallelMarkWorkers);
+    CHAOS_IL2CPP_SIZE cfg_max = GcConfig().ParallelMarkWorkers;
+    if (cfg_max > 0 && static_cast<int>(cfg_max) < desired) {
+        desired = static_cast<int>(cfg_max);
+    }
     if (desired < 1) desired = 1;
 
     auto* ctx = static_cast<ParallelMarkContext*>(
