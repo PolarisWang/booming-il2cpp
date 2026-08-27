@@ -20,6 +20,12 @@
       "generator": "TPG (TestProjectGenerator)",
       "driftPolicy": "commit-deliberately",
       "tracked": true
+    },
+    {
+      "glob": "docs/dev/in-progress/repo-cleanliness/STATUS.md",
+      "generator": "chaos_hygiene.py --report (repo-hygiene dashboard)",
+      "driftPolicy": "regenerate-on-report",
+      "tracked": true
     }
   ],
   "notes": {

@@ -471,3 +471,5 @@ MarkSweepOldGen::RelocateRoots ← CrossPageCompact(2610) ← Collect ← chaos_
 **根因**：`RelocateRoots` 的自栈扫描（2415-2431，扫调用线程全栈范围 self_stack_limit..self_stack_base）对每个 slot 裸读 `*val_ptr`。扫到**活跃栈帧 BOTTOM 以下**（ASan frame redzone）即 `stack-buffer-underflow`；normal build 里=读栈越界 → **0xC0000005 崩溃**（之前 ~2% 启动 SEGFAULT 的另一表现，实为全 GC compact 时触发）。
 **根治**：用 `AsanReadPtrNoCheck`/`AsanWritePtrNoCheck`。ASan 96 run **0 错误**（原 6/96）；normal build SEGFAULT 类消失（64 run 无 0xC0000005）。
 **残余**：只剩 mark-phase hang（exit=124，592-1775 页，并行负载下更高~8%），非崩溃。
+### 残余评估 — 正常负载已清零，仅人为并行过载出现（2026-08-27 终）
+normal build 30x serial：**30/30 PASS，0 hang，0 SEGV** —— 主导崩溃(RelocateRoots)与 mark-hang 均在正常负载消失。仅 8 进程人为并行过载时偶现 exit 139 SegFault + mark hang(5xx-17xx 页)。过载下的 ASan 报错(stack-use-after-scope@static mutex、access-violation@AsanWritePtrNoCheck)均拖 `_sanitizer_start_switch_fiber` 尾帧 → **疑似 ASan fiber-switch 假阳性**（file-static mutex 不可能 use-after-scope）。正常负载已稳；人为过载残余需专门 fiber/ASan 配置确认，非生产路径。

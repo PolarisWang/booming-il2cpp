@@ -90,7 +90,9 @@ def _run_check(check: dict, extra_args: list) -> dict:
 
 
 def _resolve_mode(opts: set) -> str:
-    if "--ci" in opts or "--gate" in opts:
+    if "--ci" in opts:
+        return "ci"
+    if "--gate" in opts:
         return "gate"
     if "--soft" in opts:
         return "soft"
@@ -214,6 +216,11 @@ def main() -> int:
         print(f"dashboard: {STATUS_PATH}")
 
     if has_fail and mode == "gate":
+        return 1
+    if mode == "ci" and any(r["status"] != "PASS" for r in results):
+        # CI hard-enforces: any WARN/FAIL in registered checks blocks. Pre-commit
+        # --gate stays lenient on pre-existing WARN (doesn't brick unrelated
+        # commits); CI is where WARN-able real drift must be fixed.
         return 1
     return 0
 
