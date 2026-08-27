@@ -43,6 +43,12 @@ cl /nologo /EHsc scripts\wct_deadlock_spy.cpp /Fe:scripts\wct_deadlock_spy.exe
 2. 若 std::mutex 但 WCT 不报：用 `GetCurrentThreadId` 映射 → 或直接在死锁时对每个 blocked 线程 `NtQueryInformationThread(ThreadIsIoPending?)` + 外部 `!locks`（挂起, 仅确认锁序）。
 3. 终极：进程内 timed_mutex 探针(thread_local 持有锁栈 + try_lock_for 超时自报) —— 侵入, 测完删(见 user 约束)。
 
+> ## 2026-08-27 交接后续 session 补充（实证，见 `notes/mark-hang-static-lockanalysis-2026-08-27.md`）
+> **WCT 工具已原生 build 且验证完成**（`scripts/_build_wct.cmd` + `scripts/wct_deadlock_spy.exe`），对 explorer 等枚举正常。
+> **关键负结果：WCT 对本工具配置系统性盲** —— 合成 `std::mutex` AB-BA 与原生 `CRITICAL_SECTION` AB-BA 死锁，`GetThreadWaitChain`(synchronous + `WCT_OUT_OF_PROC_CS_FLAG`) 均返回 `ok=1 nodeCount=1`（0 wait-chain）。**↑ 上文步骤 1 的"WCT 应可见"前提不成立**：即使真阻塞锁环本 WCT 也报 0。
+> **静态分析已刻划 hang 真机制**（§二）：并行 mark 终止的 `yield()` 自旋在 6-8 进程过订阅下退化为调度 Livelock —— 与 BLOCKED + 0 wait-chain + watchdog 0 触发 + `S2_after_mark` 缺失 全部吻合。
+> **下一原生 session 不要再单点押 WCT**。判别改用：CPU 双采样(HIGH=yield-spin) → `S2_after_mark` 缺失+`total_marked` 冻结 → `cdb !cs /!locks`(挂起) 或进程内 timed_mutex 探针。修复推荐：方案 1(cv 通知替换 yield)根治 / 方案 3(降并行 worker 或关并行)止血。
+
 ## 四、专项建议执行顺序（原生 Windows 环境）
 1. 修好 wct build/run 环境（vcvars + 非 MSYS），确认能对已知死锁(或构造一个)输出 wait-chain。
 2. 复现 mark hang(并行 6-8 进程), 挂起时跑 WCT → 若报 CriticalSection/Mutex 环 → 直接定位锁序修。

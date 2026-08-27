@@ -99,11 +99,18 @@ int main(int argc, char** argv) {
         WAITCHAIN_NODE_INFO nodes[WCT_MAX_NODE_COUNT]{};
         BOOL isCycle = FALSE;
         BOOL ok = fnGet(session, 0, WCT_OUT_OF_PROC_CS_FLAG, tid, &nodeCount, nodes, &isCycle);
+        // DIAG: always print ok + nodeCount so we can distinguish "no tracked wait"
+        // (ok=true, nodeCount==1) from a real query failure (ok=false) — and detect
+        // WCT genuinely failing to resolve a CS AB-BA we know is blocked.
+        std::printf("TID %lu: ok=%d nodeCount=%u", (unsigned long)tid, ok ? 1 : 0,
+                    static_cast<unsigned>(nodeCount));
+        if (!ok) { std::printf(" [QUERY_FAIL err=%lu]", (unsigned long)GetLastError()); }
+        if (isCycle) std::printf(" [CYCLE]");
+        std::printf("\n");
         if (!ok) continue;
         if (nodeCount <= 1) continue;  // thread unblocked, no wait
 
         std::lock_guard<std::mutex> lg(g_print);
-        // node[0] = the thread itself
         std::printf("TID %lu: ", (unsigned long)tid);
         for (DWORD i = 1; i < nodeCount; i++) {
             auto& n = nodes[i];

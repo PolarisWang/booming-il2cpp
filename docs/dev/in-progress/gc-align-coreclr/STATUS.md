@@ -47,6 +47,7 @@ clearance_confirmed_by_user: true
 - `docs/dev/in-progress/gc-align-coreclr/roadmap-v2-01.md`
 - `docs/dev/assessments/gc-vs-coreclr-remaining-features-2026-08-10.md`（26 项功能域输入）
 - 子任务：gc-a1..gc-k4（Phase 1-5 已提交）
+- task#16 mark-hang 全局死锁专项：`mark-hang-wct-handoff-2026-08-27.md` + `notes/mark-hang-static-lockanalysis-2026-08-27.md`（并行 mark `yield()` 调度 Livelock 根因 + WCT 盲区实证 + cv 修复/降并行止血方案）
 
 ## 用户确认门（2026-08-10）
 

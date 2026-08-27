@@ -32,6 +32,9 @@ docs/executions/
 .DS_Store
 Thumbs.db
 
+# Parallel task scratch dirs (run artifacts, not source)
+work_fact266_tmp/
+
 # Project-generated artifacts
 artifacts/
 !testing/foundation-dll/artifacts/*.py
