@@ -192,17 +192,10 @@ void TestBgcWithYoungGc() {
     // interleaving is not safe in the current CRAG implementation.
     //
     // The young GC (GcYoungCollection) promotes objects from nursery to
-    // old-gen while BGC concurrent mark is scanning old-gen pages.
-    // Without a coordinated pause protocol (pause BGC concurrent mark
-    // during young GC), this creates a data race.
-    //
-    // This test validates that the BGC machinery correctly detects this
-    // condition and handles it gracefully, rather than crashing or
-    // corrupting heap state.
-    //
-    // NOTE: The actual BGC-YoungGC coordinated pause is a Phase 3 item
-    // (Server GC / concurrent root scan, gc-p4-01 / gc-p4-02).
-    // Once implemented, this test should exercise the full interleaved path.
+    // old-gen while BGC concurrent mark is scanning old-gen pages.  The G-3
+    // coordinated pause protocol (PauseForYoungGc / ResumeAfterYoungGc in
+    // BgcController) pauses BGC concurrent mark during young GC, so this is now
+    // SAFE and is exercised for real below (no more ForceComplete-and-skip).
 
     // Reset TLAB to force a fresh claim from the young generation.
     tls_tlab = TLAB{};
@@ -224,18 +217,28 @@ void TestBgcWithYoungGc() {
 
     BgcPhase phase = BgcController::Instance().Phase();
     if (phase == BgcPhase::CONCURRENT_MARK) {
-        // BGC concurrent mark is active.  Young GC during concurrent mark
-        // is unsafe (data race on old-gen pages).  Report as known limitation.
-        printf("  KNOWN LIMITATION: BGC concurrent mark + young GC interleaved\n"
-               "  requires coordinated pause protocol (Phase 3 item)\n");
-        // Complete the BGC cycle cleanly (ForceComplete) and exit.
-        {
+        // BGC concurrent mark is active.  With the G-3 coordinated pause protocol
+        // (PauseForYoungGc / ResumeAfterYoungGc in BgcController — now implemented)
+        // it is SAFE to run a young GC here: GcYoungCollection pauses BGC before
+        // Phase 1, drains stale nursery deques, and resumes it after Phase 5.
+        // This exercises the previously-unsafe interleaved path for real, instead
+        // of ForceComplete-and-skip.
+        printf("  CONCURRENT_MARK active — running interleaved young GC via "
+               "BGC-YoungGC coordinated pause protocol\n");
+        for (int i = 0; i < 3 && BgcController::Instance().Phase() == BgcPhase::CONCURRENT_MARK; i++) {
+            for (int j = 0; j < 50; j++) {
+                void* p = NurseryAllocate(32);
+                if (p) std::memset(p, 0xCC, 32);
+            }
             uint32_t gen = threading::RequestGlobalSafepoint();
-            BgcController::Instance().ForceComplete();
+            GcYoungCollection();   // self-protects via PauseForYoungGc/ResumeAfterYoungGc
             threading::ReleaseGlobalSafepoint(gen);
+            printf("  interleaved young GC #%d during BGC mark OK\n", i + 1);
         }
+        // Now let BGC resume to completion.
         BgcController::Instance().WaitForCycleComplete();
-        CHECK(true, "BGC + young GC interleaved — known limitation, skipped");
+        CHECK(BgcController::Instance().Phase() == BgcPhase::IDLE,
+              "BGC + interleaved young GC (via coordinated pause) completed");
         return;
     }
 
