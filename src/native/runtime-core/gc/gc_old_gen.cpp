@@ -1288,12 +1288,59 @@ void MarkSweepOldGen::DrainMarkStackParallel(OldGenPage** pages, int page_count)
     // Signal all workers to start before dispatching.
     ctx->drain_started.store(true, std::memory_order_release);
 
-    // Use GcWorkerPool for parallel mark (not ThreadPool �� ThreadPool
+    // Use GcWorkerPool for parallel mark (not ThreadPool — ThreadPool
     // workers are registered managed threads that spin in SafepointPoll
     // and would deadlock when called inside a safepoint).
-    GcWorkerPool::Instance().RunWorkers(ctx->worker_count, [ctx](int idx) {
-        ParallelMarkWorkerLoop(ctx, idx);
-    });
+    //
+    // DIAGNOSTIC WATCHDOG (task#16 S2): the scenario-C ~1/12 full-GC mark stall
+    // is a timing race.  If the workers stop making progress (parallel_done never
+    // set while total_marked stops growing = stuck/deadlock) OR total_marked grows
+    // unboundedly (mark doesn't converge = divergent re-requeue), sample this and
+    // log it so the stall's exact failure mode is captured on a reproducing run.
+    // Pure observability; no coordination change.
+    {
+        std::atomic<bool> watchdog_stop{false};
+        std::thread watchdog([&]() {
+            uint64_t last = 0;
+            int no_progress_rounds = 0;
+            while (!watchdog_stop.load(std::memory_order_acquire)) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(300));
+                if (ctx->parallel_done.load(std::memory_order_acquire)) break;
+                uint64_t cur = ctx->total_marked.load(std::memory_order_acquire);
+                if ((cur - last) == 0) {
+                    no_progress_rounds++;
+                    if (no_progress_rounds >= 20) {  // ~6s of no mark progress
+                        // Write DIRECTLY to unbuffered stderr (the log system may
+                        // buffer and never flush before the process is killed on
+                        // the stall).  This diagnoses stuck-vs-divergent on a
+                        // reproducing run.
+                        std::fprintf(stderr,
+                            "S2 mark watchdog: STUCK total_marked=%llu active=%d workers=%d "
+                            "(no progress ~6s, parallel_done not set)\n",
+                            static_cast<unsigned long long>(cur),
+                            static_cast<int>(ctx->active_workers.load(std::memory_order_acquire)),
+                            ctx->worker_count);
+                        std::fflush(stderr);
+                        no_progress_rounds = 0;
+                    }
+                } else {
+                    no_progress_rounds = 0;
+                    if ((cur > 1000000) && ((cur & (cur - 1)) == 0)) {  // log growth rarely
+                        std::fprintf(stderr,
+                            "S2 mark watchdog: total_marked=%llu (large closure)\n",
+                            static_cast<unsigned long long>(cur));
+                        std::fflush(stderr);
+                    }
+                }
+                last = cur;
+            }
+        });
+        GcWorkerPool::Instance().RunWorkers(ctx->worker_count, [ctx](int idx) {
+            ParallelMarkWorkerLoop(ctx, idx);
+        });
+        watchdog_stop.store(true, std::memory_order_release);
+        if (watchdog.joinable()) watchdog.join();
+    }
 
     // Drain any remaining chunks left in deques (workers may have been preempted).
     // As a safety net, process any remaining mark entries sequentially.

@@ -447,3 +447,11 @@ PauseForYoungGc/ResumeAfterYoungGc 从无限 spin 改为 bounded（CoreCLR wait_
 - ⇒ S2 mark-phase stall 是 **全并发 timing 依赖**——需 mutator 在 full-GC mark **期间**分配/晋升(制造 cross-gen 边 mid-mark)，静态 harness 无法产生。
 - 确定性复现需 concurrent harness(mutator 线程在 mark 运行时触发 young-GC)，而它本身引入时序非确定性(与"确定性"矛盾)→ 是真深专项。
 - **harness 保留为正向回归**：大堆(806 页)+互连闭包 mark 收敛(3/3)，证明正常路径 mark 正确；缺陷只在并发交错暴露。
+### S2 mark-stall 修复后再测 — 率降至 ~2% + watchdog 就位（2026-08-27）
+S1+S3-A(+并行线 S3 微调)累积后重测 scenario C 100+ 次：
+- **挂率 ~8%(1/12) → ~2%**（40/40 一次幸运全绿，但累计 98/100 + 2 次 mark-stall 在 660-1790 页）。
+- 两次残留均为同一 mark-phase stall 签名（`collect_start page_count=660-1790`、`S2_after_mark` 缺失）——非新问题。
+- **watchdog 初版 log 系统缓冲导致 0 捕获**；改为直接 `fprintf(stderr)+fflush` 到 unbuffered stderr（正式版），下次 stall 必捕获 stuck(total_marked 停)vs divergent(涨) 判别。
+- 结论：mark-phase stall 是狭窄 residual race，**fix 降低 4x 但未根除(~2%)**；watchdog 就位可捕获真因，但需更多运行/运气触发，迭代收益非本 session 递减点。
+
+**✅ 初步归因（统计）**：S1 幽灵 phase + S3-A bounded handshake 消除了 full-GC mark 与 BGC 协调残留的大部分干扰 → 大部分 S2 stall 实为协调类（与 S1/S3 同根），残留 ~2% 是纯 mark 内部收敛 boundary。
