@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "purpose": "Central registry of all repo-hygiene / project wrap-up checks. Adding a check = add one entry here + a co-located module under scripts/cleanliness/<module>.py exposing a runnable script (exit 0 PASS, exit 1 FAIL, print '[WARN]' for advisory). Wired to a single entrypoint: chaos_hygiene.py.",
+  "output": "artifacts/hygiene-report.json",
+  "checks": [
+    {
+      "name": "root-clean",
+      "module": "check_repo_clean",
+      "args": ["--hard"],
+      "timeout": 60,
+      "description": "Commits must not add untracked non-whitelisted root-level junk (files or new dirs). Hard gate."
+    },
+    {
+      "name": "disk-health",
+      "module": "check_repo_clean",
+      "args": ["--disk"],
+      "timeout": 90,
+      "description": "Surface ignored output roots silently consuming disk; ALERT on unexpected >200MB dirs (advisory)."
+    },
+    {
+      "name": "generated-drift",
+      "module": "check_generated_up_to_date",
+      "args": [],
+      "timeout": 180,
+      "description": "Committed generated artifacts must match a fresh hermetic regeneration of their generators (advisory warn in pre-commit; --fail-fast in CI)."
+    }
+  ]
+}

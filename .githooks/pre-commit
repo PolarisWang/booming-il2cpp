@@ -137,21 +137,12 @@ if [ "$GATE_FAILED" -ne 0 ]; then
 fi
 echo "=== [gate] Deterministic gates passed ==="
 
-echo "=== [repo-clean] Checking repo-root cleanliness (build artifacts / stray files) ==="
-if ! python scripts/cleanliness/check_repo_clean.py --hard; then
+echo "=== [hygiene] Central repo-hygiene gate (root-clean / disk / generated-drift) ==="
+if ! python scripts/cleanliness/chaos_hygiene.py --gate; then
     echo ""
-    echo "ERROR: repo-root cleanliness guard FAILED. Keep the repo root for source."
-    echo "Move/ignore/commit stray files before committing."
-    echo "Use 'git commit --no-verify' to bypass (not recommended)."
+    echo "ERROR: hygiene gate FAILED. Fix the flagged issue(s) or use 'git commit --no-verify' (not recommended)."
     exit 1
 fi
-echo "=== [repo-clean] Repo root is clean ==="
-
-echo "=== [generated-drift] Checking committed generated artifacts match their generators (hermetic) ==="
-if python scripts/cleanliness/check_generated_up_to_date.py; then
-    echo "=== [generated-drift] Ok ==="
-else
-    echo "=== [generated-drift] Generated-file drift flagged above (pre-existing drift is warn-only; CI --fail-fast enforces) ==="
-fi
+echo "=== [hygiene] Repo hygiene gate passed ==="
 
 exit 0

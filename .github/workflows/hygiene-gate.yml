@@ -1,0 +1,28 @@
+name: hygiene-gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PyYAML (generated-drift dep)
+        run: pip install pyyaml
+      - name: Run central hygiene gate (hard-enforce)
+        run: |
+          python scripts/cleanliness/chaos_hygiene.py --ci || {
+            echo "::error::Repo-hygiene gate FAILED. Fix flagged issues (see report) before merge."
+            exit 1
+          }
+      - name: Upload hygiene report
+        uses: actions/upload-artifact@v4
+        with:
+          name: hygiene-report
+          path: artifacts/hygiene-report.json
