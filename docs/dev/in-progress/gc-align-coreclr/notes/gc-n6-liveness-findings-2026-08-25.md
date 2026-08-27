@@ -392,3 +392,9 @@ in-place demoted 的交互（60s perf + 后续崩）需要额外专项。当前�
 - 根因机制：`PauseForYoungGc`（gc_bgc.cpp:1398）设 `bgc_pause_requested_`+`notify_all` 后 spin `bgc_paused_`；BGC 仅在 **两处** 服务暂停（mark-complete 后 line1106、REMARK/COMPACT phase-wait line1151/1218）。当 pause 请求与 BGC phase-wait 形成 **lost-wakeup**（或多个 young GC 并发触发，scenario C 100 线程），BGC 未进入任一 ack 点即让 `bgc_paused_` 保持 false → young GC 死转 → 全部线程挂起。M5-1 已让它稀有但未根除，line1103 自注 "pre-existing phase-6/round-N race"。
 - 决定性：**这是协调死锁，不是内存损坏**（ASan 全场景阴性自洽）。修复方向 = 让 BGC 在 **每个** wait/state 保证服务 pending pause（统一 ack 协议，消除 lost-wakeup），跨 BGC 状态机 + young-GC 触发 + safepoint 三域，属独立专家 session。
 - 复现命令：`./chaos_gc_stress_test.exe --scenario 2`（正常 Debug，5 次抽 2 次挂）。
+### residual flakiness 专项 — 两个候选 fix 均被数据证伪（2026-08-26 追加，防重复踩坑）
+对 scenario C HANG 试了两个 BGC 协调 fix，**均使挂率恶化**（2/5→7/10→8/10），已全部回滚。数据强反信号，供专攻 session 避免重踏：
+1. **IDLE-wait 谓词加 `bgc_pause_requested_`**（gc_bgc.cpp:900）：以为 BGC idle park 时丢 wake。加后 7/10 HANG（更差）。证伪：BGC 卡 concurrent-mark（`g_bgc_is_marking=true` 才进 `PauseForYoungGc`），非 idle。
+2. **freeze-sync spin 内嵌 pause 检查 + abort freeze**（line1011）：以为 SATB 洪泛使 mark 不收敛、BGC 困在 ~10s freeze 而无法 ack。加后 8/10 HANG（更差）。证伪：让 BGC 更勤快 ack 反而更挂 → **不是 BGC 不 ack 的丢 wake**。
+- **结论翻转**：`PauseForYoungGc`↔`bgc_paused_` handshake 是**单槽二元**（无 mutex 串行化，仅靠外围全局 safepoint 保证单 GC 线程进 young collect）。两个 fix 都改变 BGC 调度时序并恶化 → 真根是**时序敏感的 coordination 死锁**，BGC 侧加 ack 支点方向错误。safe 顶点 = `g_bgc_is_marking` 门后才有 PauseForYoungGc（gc_young_collector.cpp:369），safepoint 已串行化 young GC。专攻 session 需在**不打扰 BGC 时序**的前提下重组 handshake（或 ref-count / 不共享单槽 flag），优先在隔离重现代码路径上补断点取证 BGC 线程精确 wait 态（本 session cdb multi-attach 失败 + 进程线程列表仅 ~11 个，未能抓到 BGC 线程栈）。
+- **当前状态**：gc_bgc.cpp 回滚到干净基线（2/5 hang 恢复），ASan 工具链改动（commit f246e9e2c）保留。
