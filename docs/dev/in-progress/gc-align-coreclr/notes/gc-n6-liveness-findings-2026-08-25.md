@@ -495,3 +495,11 @@ watchdog(独立 300ms 线程, fprintf stderr) 在 **10+ 次复现的 mark hash �
 - mark 看似 stall(S2_after_mark 缺失)实为全 GC 冻住, 死锁点在某共享锁/condition(全 GC 早段)。
 - cdb-as-child break-in 未捕获(时序扰动/挂起实例错过)。
 - **根因重框定**: 不是 mark 不收敛, 是**全局并发死锁**(worker pool/共享锁在 600-1700 页全 GC 早段)。需外部无扰动 stack capture + 深并发锁分析, 专属 sustained investigation。~2%(由 8% 降)。
+### S2-B hang 判别细化 — BLOCKED(锁死) 非 SPIN（2026-08-27）
+外部采样挂起进程 CPU（3s 窗 cpu delta=3s）→ **BLOCKED**（非 CPU-pegged 自旋）：主线程 spin `RunWorkers completed_`(~1 核)，其余线程阻塞在某 `std::mutex`/cv。⇒ 是**共享锁死锁**（非 mark 发散、非忙等）。worker-pool cv 逻辑有双检+超时兜底(WorkerLoop:144-167)。最可能 AB-BA 锁序死锁在 full-GC 早段。
+**细化捕获方案**：BLOCKED 死锁唯一观测者是进程外不暂停者。选项: ① Windows Wait Chain Traversal(WCT) 非挂起检测 wait-chain（需专门 WCT API/工具，不扰动时序）；② 进程内 lock-order 探针(try_lock 超时, 侵入但可定位持有者)。① 更干净不污染生产，② 更易落地但侵入。
+### S2-B 捕获方案终选 — 进程内探针侵入度过高, 转 WCT 外部工具（2026-08-27）
+评估进程内 lock-order 探针(timed_mutex + thread_local 持有栈)：需 swap `old_gen mutex_`(34 处) + `steal_mutex`(21 处) ≈ 55 处 lock_guard 类型改动, 测完清理大 diff。**侵入度过高, 不符"用完删侵入码"**。
+**转方案① Windows Wait Chain Traversal(WCT)**: 外部工具非挂起采样 target 进程 wait-chain(谁等哪个同步对象/谁持有), 零生产代码侵入, 无需清理。需写 WCT 工具(WaitChain.dll 动态加载 + GetThreadWaitChain 走链 + 对象名解析), Windows 11 有 wct.h。此为专属工具投入(~1-2 工具 session), 但唯一非侵入正道。
+### S2-B WCT 工具落地 + 捕获受阻（2026-08-27）
+建 wct_deadlock_spy.cpp（Wait Chain Traversal 非挂起采样 target 进程 wait-chain，静态诊断工具，非运行时）：编译通过（Advapi32.dll 导 WCT 函数，WinSxS 无 WaitChain.dll），对活/hung 进程能枚举 11 线程但 **0 wait-chain 报告**（threads 显示无 WCT 可识别阻塞——BLOCKED 死锁可能在 std::mutex 的 yield 自旋或 WCT 不可见对象）。并行重载下又见 2 次 Segmentation fault（SEGFAULT 未完全消失，残余更稀有）。**MSYS/bash + PowerShell 引号/路径摩擦严重**（CRLF 注入、路径转换），阻塞了"复现→WCT-spy"协调循环。此工具需在干净 Windows 原生环境跑。WCT 源码保留为诊断工具；.exe 为 build artifact 不入库。
