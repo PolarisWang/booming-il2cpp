@@ -784,9 +784,12 @@ void BgcController::PopulateRootSet() {
                 // scan); it may sit in an ASan stack-frame redzone. Probe sheds
                 // instrumentation only for genuinely poisoned slots, keeping live
                 // root slots instrumented so a real OOB/UAF write into a root is
-                // still surfaced (review #2) — instead of unconditionally eliding
-                // for every slot and masking genuine findings.
-                void* ref = chaos::il2cpp::common::AsanReadPtrNoCheck(slot);
+                // still surfaced (review #2 / #3) — instead of unconditionally
+                // eliding for every slot and masking genuine findings.  (A prior
+                // S2 pass changed this to blanket NoCheck; that masking is not
+                // what the S2 SEGFAULT fix needed — the real fix was the self-
+                // stack RelocateRoots in gc_old_gen, which keeps NoCheck.)
+                void* ref = chaos::il2cpp::common::AsanReadPtrProbe(slot);
                 s_gte_heap++;
                 if (ref == nullptr) return;
                 if (G_OldGen().IsInOldGen(ref)) {

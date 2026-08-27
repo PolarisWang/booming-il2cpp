@@ -219,15 +219,18 @@ void DemotionRelocate(const std::vector<DemotionEntry>& entries,
             // root_addr is a slot on ANOTHER thread's stack (conservative scan);
             // it may sit in an ASan stack-frame redzone.  Probe sheds ASan only
             // for genuinely poisoned slots, keeping live root slots instrumented
-            // so a real OOB/UAF write into a root is still surfaced (review #2).
+            // so a real OOB/UAF write into a root is still surfaced (review #2/#4).
+            // (A prior S2 pass flattened this to blanket NoCheck + left the Probe
+            // comment in place; that masking is not needed here — the S2 SEGFAULT
+            // fix was the self-stack RelocateRoots in gc_old_gen, which keeps NoCheck.)
             uintptr_t val = reinterpret_cast<uintptr_t>(
-                chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
+                chaos::il2cpp::common::AsanReadPtrProbe(root_addr));
             if (val == 0) return;
 
             auto it = std::lower_bound(map.begin(), map.end(), val,
                 [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
             if (it != map.end() && it->old_addr == val) {
-                chaos::il2cpp::common::AsanWritePtrNoCheck(
+                chaos::il2cpp::common::AsanWritePtrProbe(
                     root_addr, reinterpret_cast<void*>(it->new_addr));
             }
         }, &addr_map);
