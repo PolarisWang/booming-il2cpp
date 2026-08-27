@@ -485,3 +485,7 @@ normal build 30x serial：**30/30 PASS，0 hang，0 SEGV** —— 主导崩溃(R
 - ⇒ **并行线判断正确**：PopulateRootSet（Probe，跨线程栈内 slot）不再 FP；我早先那个 FP 是别的原因/Parallel 时序。
 - ⇒ 我的 RelocateRoots self-stack NoCheck（已提交 3e020aa28，2426 处）是**真 fix**，与其兼容；我早先"所有 GcScanAllThreadRoots 回调 blanket NoCheck"是 over-broad，并行线的 Probe 细化是对的。
 - **待并行线裁决**：gc_old_gen TSR relocation 回调(2161/2387)的 read 是否也应 Probe（write 侧仍需 NoCheck 保证 foreign redzone 写入安全）。并行线正细修 asan_interface，不重复其努力，此裁决留给他们。
+### S2-B mark-phase 并发 harness — 组合设计证伪 + 诚实终态（2026-08-27）
+试第 5 种：互连 806 页 + 并发 mid-mark 图变异（churner 直接 old-gen Allocate 期间 Collect）——**无效**（无 safepoint，Collect 期间并发 Allocate 是 UB，mark 0s 收敛到 2 页），已回滚。
+**穷举 5 种 harness 全证伪简化复现**：静态/互连/并发scenario U/组合全收敛；mark hang 只在 **scenario C 的精确 random walk**（safepoint 协调的 young-GC→OOM→full-GC 推广，~1/12）出现。
+**结论**：mark hang 是真实但狭窄的并发时序 race，只能在完整 scenario C 随机游走复现；需 high-volume fuzz（scenario C 本体跑大样本+watchdog 捕获 stuck-vs-divergent）专项，非简化 harness 可短公路。主导 SEGFAULT 已根治；此 mark hang 为唯一剩余，特性完全刻划，根修需专门 fuzz session。
