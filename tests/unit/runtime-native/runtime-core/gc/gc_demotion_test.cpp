@@ -164,54 +164,39 @@ TEST_F(DemotionTest, FullGcWithDemotion) {
     static constexpr uint32_t kKeepMagic = 0xCC00;
 
     // Pin keep-alive objects via explicit pinned roots (survives full GC).
+    std::vector<void*> keep;
     for (int i = 0; i < kTotal; i++) {
         uint32_t magic = (i < kKeepAlive) ? (kKeepMagic + i) : 0xDD00 + i;
         void* obj = AllocOldGenTyped(kObjSize, magic);
         ASSERT_NE(obj, nullptr);
         if (i < kKeepAlive) {
             g_old_gen.AddPinnedRoot(obj, kObjSize);
+            keep.push_back(obj);
         }
     }
 
     ClearNursery();
 
-    // Run a full GC.  Mark finds kKeepAlive live objects via conservative
-    // stack scan.  Pages with high fragmentation get demoted to Gen1.
+    // Run a full GC.  Under the in-place demotion model (GC-N6 #10,
+    // CoreCLR-aligned), keep-alive survivors are NOT physically moved into the
+    // Gen1 region — they stay resident in their old-gen pages (pinned => they
+    // must survive regardless).  So we verify RETENTION at their original
+    // addresses, not a Gen1-region placement.
     chaos_gc_collect();
 
-    // Verify: scan Gen1 region for objects with the keep-alive magic.
-    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
-    ASSERT_NE(gen1, nullptr);
-    char* gen1_end = g_young_gen.gen1_bump.load(std::memory_order_acquire);
-    EXPECT_GT(gen1_end, gen1->begin)
-        << "Gen1 bump advanced — objects were demoted";
-
+    // Verify: every pinned keep-alive object is still allocated in old-gen and
+    // its magic (written at offset 8) is intact — i.e. the full GC did not
+    // reclaim or corrupt any pinned survivor.
     int found = 0;
-    for (char* cursor = gen1->begin; cursor < gen1_end; ) {
-        // Determine object size from TypeInfo so we stride correctly.
-        CHAOS_IL2CPP_SIZE stride = kObjSize;
-        const void* ti = *reinterpret_cast<const void* const*>(cursor);
-        if (ti != nullptr) {
-            auto& lr = GcLayoutRegistry::Instance();
-            if (lr.IsValidTypeInfoPointer(ti)) {
-                uint64_t sid = lr.ReadStableId(ti);
-                const auto* lay = lr.Lookup(sid);
-                if (lay != nullptr && lay->instance_size > 0) {
-                    stride = static_cast<CHAOS_IL2CPP_SIZE>(lay->instance_size);
-                }
-            }
+    for (void* obj : keep) {
+        // Pinned objects do not move (in-place), so the pointer is still valid.
+        auto* magic = reinterpret_cast<const uint32_t*>(static_cast<char*>(obj) + 8);
+        if (*magic >= kKeepMagic && *magic < kKeepMagic + kKeepAlive) {
+            found++;
         }
-        if (kObjSize >= 12) {
-            auto magic = *reinterpret_cast<const uint32_t*>(cursor + 8);
-            if (magic >= kKeepMagic && magic < kKeepMagic + kKeepAlive) {
-                found++;
-            }
-        }
-        cursor += stride;
     }
-    EXPECT_GE(found, 1)
-        << "At least one keep-alive object should be in Gen1 after full GC";
-    EXPECT_LE(found, kKeepAlive);
+    EXPECT_EQ(found, kKeepAlive)
+        << "All pinned keep-alive objects must be retained with intact magic after full GC";
 }
 
 // ── Test 4: Demotion is a no-op with no survivors ───────────────────────
@@ -251,40 +236,20 @@ TEST_F(DemotionTest, DemotionWithCrossReferences) {
 
     ClearNursery();
 
-    // Mark traces from obj_a to obj_b → both live.
-    // Demotion moves both to Gen1.  Phase 1.5 fixes internal pointer
-    // (obj_a's cross-reference at offset 16 is updated to point to gen1 copy).
+    // Mark traces from obj_a to obj_b → both live.  Under in-place demotion
+    // (GC-N6 #10) pinned objects stay resident in their old-gen pages and are
+    // NOT physically moved to the Gen1 region.  Verify RETENTION at the original
+    // addresses + that the obj_a→obj_b cross-reference is preserved.
     chaos_gc_collect();
 
-    // Verify by scanning Gen1 region.
-    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
-    ASSERT_NE(gen1, nullptr);
-    char* gen1_end = g_young_gen.gen1_bump.load(std::memory_order_acquire);
-    EXPECT_GT(gen1_end, gen1->begin)
-        << "Gen1 contains data after full GC with live objects";
+    // Both pinned objects retained (in-place, addresses unchanged) with intact magic.
+    EXPECT_EQ(*reinterpret_cast<const uint32_t*>(static_cast<char*>(obj_a) + 8), 0xEE00u)
+        << "obj_a must survive full GC with intact magic";
+    EXPECT_EQ(*reinterpret_cast<const uint32_t*>(static_cast<char*>(obj_b) + 8), 0xEE01u)
+        << "obj_b must survive full GC with intact magic";
 
-    // Count objects in Gen1 with the expected magic patterns (at offset 8).
-    int found_a = 0, found_b = 0;
-    for (char* cursor = gen1->begin; cursor < gen1_end; ) {
-        CHAOS_IL2CPP_SIZE stride = kObjSize;
-        const void* ti_x = *reinterpret_cast<const void* const*>(cursor);
-        if (ti_x != nullptr) {
-            auto& lr = GcLayoutRegistry::Instance();
-            if (lr.IsValidTypeInfoPointer(ti_x)) {
-                uint64_t sid = lr.ReadStableId(ti_x);
-                const auto* lay = lr.Lookup(sid);
-                if (lay != nullptr && lay->instance_size > 0) {
-                    stride = static_cast<CHAOS_IL2CPP_SIZE>(lay->instance_size);
-                }
-            }
-        }
-
-        auto magic = (stride >= 12) ? *reinterpret_cast<const uint32_t*>(cursor + 8) : 0;
-        if (magic == 0xEE00) found_a++;
-        if (magic == 0xEE01) found_b++;
-        cursor += stride;
-    }
-
-    EXPECT_GE(found_a, 1) << "Object A should be demoted to Gen1";
-    EXPECT_GE(found_b, 1) << "Object B should be demoted to Gen1";
+    // obj_a's cross-reference to obj_b must still be intact (obj_a+16 == obj_b).
+    void* ref = *reinterpret_cast<void* const*>(static_cast<char*>(obj_a) + 16);
+    EXPECT_EQ(ref, static_cast<void*>(obj_b))
+        << "obj_a -> obj_b cross-reference must be preserved across full GC";
 }
