@@ -6,21 +6,24 @@
 
 ## 一、最终定论（实测证据，已确认非生产 GC 缺陷）
 
-用临时 probe（`GcRegisterHeapRange` 正确锚定 base 后 dirty `p` 的卡 → `ClearCardRange(nursery->begin, end)` → 查 `IsDirty(p)`）实测输出：
+用临时 probe（`GcRegisterHeapRange` 正确锚定 base 后 dirty `p` 的卡 → `ClearCardRange(nursery->begin, end)` → 查 `IsDirty(p)`）实测——**地址为某次运行的进程私有值，关系是稳定的**：
 
 ```
-[diag] g_heap_base=0x171EB4E0000 p=0x171F5510048 nursery=[0x171ED2F0048,0x171F12F0048) size=64MB inNursery=1
+[diag] ... nursery=[N, N+64MB) inNursery=1
 [diag] after Clear isDirty=1   ← ClearCardRange 未清 p 的卡
 ```
 
+（每次运行 base/nursery/p 绝对值不同，但下述关系稳定复现：p 的地址**高于捕获的 nursery->end 约 5MB**，而 `IsInNursery(p)` 仍为真。）
+
 **两个独立事实：**
-1. `p` 数值上高于 `nursery->end`（0x171F5510048 > 0x171F12F0048，~5MB 越界），但 `IsInNursery(p)=1`。
+1. `p` 数值上高于测试捕获的 `nursery->end`（越界约 5MB），但 `IsInNursery(p)=1`。
    - `IsInNursery` 走 `RegionManager::Instance().IsNurseryPointer(ptr)`（gc_young_collector.cpp:68-74）——含**多/全线程 active nursery 区**。
    - 测试捕获的 `g_young_gen.region`（test 开头）是**特定一个** nursery 区，**不是** `NurseryAllocate(32)` 实际落点的区。
-   - → `ClearCardRange(捕获区)` 覆盖不到 p，故卡未清。**生产单一共享 nursery 无此跨区漂移，ClearCardRange 正确。**
+   - → `ClearCardRange(捕获区)` 覆盖不到 p（p 在另一个 active nursery 区），故卡未清。**生产单一共享 nursery 无此跨区漂移，ClearCardRange 正确。**
 2. 原始 crash：测试用 `GcSetHeapBase(nursery->begin)` 原始覆盖 `g_heap_base`，违反文档化不变式
    （gc_old_gen.cpp:384-394：base 必须是最低注册地址，`GcRegisterHeapRange` 唯一 owner）。覆盖后
-   `ScanDirtyCardsInRegisteredSegments` 用新 base 重算旧 old-gen 段地址→偏离 ~2.3GB→扫未映射内存→0xC0000005。
+   `ScanDirtyCardsInRegisteredSegments` 用新 base 重算旧 old-gen 段地址→段索引偏高（约 2.3GB 量级的 offset，
+   实证读地址落在未映射内存）→扫未映射内存→0xC0000005。
 
 **结论：`YoungCollectionEmpty` 是测试对"单一 nursery（捕获区==分配区）"假设在多区累计测试态的误设，非生产 GC 缺陷，与方案1 无关。**
 
