@@ -121,12 +121,15 @@
 ### 改动文件（4）
 `.ai/skills/discovery/expert-registry.json`（挂接+last_updated）· `.ai/skills/tooling/catalog/generate_skill_catalog.py`（自检）· `.ai/skills/library/skills/dev-il2cpp-pipeline-expert/SKILL.md` · `dev-il2cpp-verification-pipeline/SKILL.md`（边界标注）
 
-## Skill Token 优化 A+B（方案定稿, 未落地）
+## Skill Token 优化 A+B（已落地部分, 2026-08-27）
 
-用户评审全项目 skill token 成本（46 skill SKILL.md 合计 370.9KB; 默认加载 3 资源 18KB; 每次 il2cpp 任务 ~48KB 起步）。产出两份定稿文档（未落地, 待用户确认执行）：
-- `exec-plan-skill-token-optim-a-b.md` — 最终执行方案: 护栏前置(Step0) → A1 拆 registry(11→2.6KB) + A2 精简 dev-il2cpp(11.9→4KB) → B1/B2 去重 → 验证 → 建分支提交
-- `risk-report-skill-token-optim-a-b.md` — 风险评估: A+B 自身 R1-R5 可控(护栏/可回滚/验证面干净); **最高实际风险=R6 未提交+pre-existing污染(17改动)**; 建议 A+B 验证后立即建分支提交缩短暴露窗
-- 关键护栏 R1/A1: 拆分 registry 必须同步改 check_expert_orphans() 读核+routing 合并, 否则孤儿自检静默失效; R2/A2 必须保留 loaded_expert 首位 dev-il2cpp(hook:212 强制)
+> 用户评审全项目 skill token 成本（46 skill SKILL.md 合计 370.9KB; 默认加载 3 资源 18KB; 每次 il2cpp 任务 ~48KB 起步）。产出 exec-plan + risk-report 两份定稿后, 本轮执行落地。
+
+**已落地**: A1 拆分 registry(11→3.2KB, 生成脚本合并读防孤儿失效) ✅; A2 保守(修重复编号, 实勘修正: 核心规则是行为规约不宜激进砍) ⚠️部分; B 13 处警示块去重+_shared ✅; catalog --check exit0 ✅。
+**提交**: `feat/skill-token-optim-a-b` 分支 30 文件(+1050/-201), 纯 .ai/skills + docs, 无 src/ 混合 ✅。
+**R6 缓解**: skill/expert/A+B 已隔离提交; R2R3 GC 代码(`gc_parallel_mark.cpp`/`gc_worker_pool.cpp`)留工作区待决(避并行线 R7); pre-existing(fact-266/gc_old_gen等)未碰。
+**剩余**: 见 `final-landing-skill-token-optim.md` §三(决定 R2R3 去向 + PR)。
+
 
 ## 结构告警与架构审视（收尾, 通过）
 

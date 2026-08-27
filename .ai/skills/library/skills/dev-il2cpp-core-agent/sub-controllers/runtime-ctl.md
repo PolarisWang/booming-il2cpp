@@ -11,7 +11,7 @@
 
 ## 分组路由策略
 
-路由策略、执行顺序、混合域处理统一在 `expert-registry.json` 的 `expert_sub_controller.runtime-ctl.routing_strategy` 中定义。
+路由策略、执行顺序、混合域处理统一在 `expert-registry.routing.json` 的 `expert_sub_controller.runtime-ctl.routing_strategy` 中定义。
 本文不重复维护。
 
 ## 输出约束

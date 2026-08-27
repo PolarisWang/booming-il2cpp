@@ -113,7 +113,7 @@ while todo 非空:
   else:
     ── 多域: 走 Workflow 委托（默认，不询问用户）
     1. 子任务按 Expert 域分组
-    2. 从 expert-registry.json 读 workflow_templates
+    2. 从 expert-registry.routing.json 读 workflow_templates
     3. 选择模板: 任意数量→multi, 深度调试→debug
     4. Workflow({scriptPath: template_path, args: {agents, tasks}})
     5. 收集各 Expert 结果:

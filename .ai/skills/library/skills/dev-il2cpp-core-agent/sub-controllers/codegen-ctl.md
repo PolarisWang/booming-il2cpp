@@ -20,7 +20,7 @@
 
 ## 分组路由策略
 
-路由策略（任务类型→Expert）、执行顺序约束、混合域处理统一在 `expert-registry.json` 的 `expert_sub_controller.codegen-ctl.routing_strategy` 中定义。
+路由策略（任务类型→Expert）、执行顺序约束、混合域处理统一在 `expert-registry.routing.json` 的 `expert_sub_controller.codegen-ctl.routing_strategy` 中定义。
 本文不重复维护。
 
 ## 输出约束
