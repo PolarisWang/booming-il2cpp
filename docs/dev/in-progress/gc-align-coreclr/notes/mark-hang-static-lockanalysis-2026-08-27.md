@@ -83,6 +83,17 @@
 
 > 目标：消除并行 mark 终止在过订阅下的 yield() 调度 Livelock。核心改为**被信号唤醒的 cv 等待 + 有界 wait_for 探测**，收敛性仍由 last-worker + AnyWorkRemaining 保证（该逻辑不动），cv 等待只是让空闲 worker 不烧 CPU 且不因缺少连续 quantum 而活锁。**声明：patch 基于 2026-08-27 HEAD（`3dd8ab4cb` 之上）源码现状编写；原生 session implement 前先 `grep` 核对行号，勿盲改。**
 
+> **实现状态（2026-08-27 会话已落地）**：B1/B2/C1/C2/C3/D1/D2(×2)/D3 全 hunks 已实现，
+> 编译通过（build/native Debug + Release），`test_gc_parallel_mark` 6/6、
+> `test_gc_worker_pool` 7/7、`gc_mark_stall_repro` 3/3 收敛（806 页 mark 完成）。原生 session
+> 剩余验收：过订阅（6-8 进程×满 worker）下 0 hang + CPU 双采样确认 yield→cv 后 mark 段空闲
+> CPU 显著下降；方案3（`CHAOS_GC_ParallelMarkWorkers=1`）保留为独立 off-switch 未动。
+> **补注（草案遗漏）**：`ParallelMarkContext` 由 `CHAOS_IL2CPP_MALLOC` 分配，新增的
+> `std::mutex mark_mtx_`/`std::condition_variable mark_cv_` 非平凡构造，必须 placement-new
+> 构造并显式析构——实现时在 `InitParallelMarkContext` 加分号构造、三条释放路径
+> （page_starts OOM / workers OOM / Destroy）加 `~ParallelMarkContext()`；否则 mutex/cv 未
+> 初始化即用为 UB。草案 §六 未提及此点，已补。
+
 ### A. 正确性论证（为什么 cv 不等价破坏收敛）
 
 现有终止依赖两个不变式：

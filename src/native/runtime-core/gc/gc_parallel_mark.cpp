@@ -10,6 +10,7 @@
 #include <chaos/profile.h>
 
 #include <algorithm>
+#include <chrono>
 #include <cstdint>
 #include <cstdlib>
 #include <thread>
@@ -60,6 +61,11 @@ ParallelMarkContext* InitParallelMarkContext(OldGenPage** pages, int page_count,
         CHAOS_IL2CPP_MALLOC(sizeof(ParallelMarkContext)));
     if (ctx == nullptr) return nullptr;
 
+    // Placement-new: ParallelMarkContext now holds std::mutex + condition_variable
+    // (方案1 done/work 信号), which are non-trivially constructible and MUST be
+    // constructed before use.  Plain malloc leaves them indeterminate.
+    new (ctx) ParallelMarkContext();
+
     ctx->pages = pages;
     ctx->page_count = page_count;
     ctx->worker_count = desired;
@@ -72,6 +78,7 @@ ParallelMarkContext* InitParallelMarkContext(OldGenPage** pages, int page_count,
     ctx->page_starts = static_cast<uintptr_t*>(
         CHAOS_IL2CPP_MALLOC(static_cast<size_t>(page_count) * sizeof(uintptr_t)));
     if (ctx->page_starts == nullptr) {
+        ctx->~ParallelMarkContext();  // destroy non-trivial mutex/cv members
         CHAOS_IL2CPP_FREE(ctx);
         return nullptr;
     }
@@ -87,6 +94,7 @@ ParallelMarkContext* InitParallelMarkContext(OldGenPage** pages, int page_count,
         CHAOS_IL2CPP_MALLOC(static_cast<size_t>(desired) * sizeof(MarkWorkerState)));
     if (ctx->workers == nullptr) {
         CHAOS_IL2CPP_FREE(ctx->page_starts);
+        ctx->~ParallelMarkContext();  // destroy non-trivial mutex/cv members
         CHAOS_IL2CPP_FREE(ctx);
         return nullptr;
     }
@@ -133,6 +141,7 @@ void DestroyParallelMarkContext(ParallelMarkContext* ctx) {
     if (ctx->page_starts) {
         CHAOS_IL2CPP_FREE(ctx->page_starts);
     }
+    ctx->~ParallelMarkContext();  // destroy non-trivial mutex/cv members (方案1)
     CHAOS_IL2CPP_FREE(ctx);
 }
 
@@ -337,9 +346,13 @@ void ParallelMarkWorkerLoop(ParallelMarkContext* ctx, int worker_idx) {
 
     ctx->active_workers.fetch_add(1, std::memory_order_relaxed);
 
-    // Wait for drain_started signal from the GC thread.
-    while (!ctx->drain_started.load(std::memory_order_acquire)) {
-        std::this_thread::yield();
+    // Wait for drain_started signal from the GC thread. 方案1: cv + predicate;
+    // bounded wait so a missed notify still proceeds via the store visible on
+    // acquire.  drain_started is stored before RunWorkers wakes, so the predicate
+    // is already true on the fast path (atomic visibility still guarantees it).
+    {
+        std::unique_lock<std::mutex> lock(ctx->mark_mtx_);
+        ctx->mark_cv_.wait(lock, [&]() { return ctx->drain_started.load(std::memory_order_acquire); });
     }
 
     // ====================================================================
@@ -398,6 +411,13 @@ void ParallelMarkWorkerLoop(ParallelMarkContext* ctx, int worker_idx) {
                 continue;  // back to outer loop: pop/steal + (re)flush
             }
             ctx->parallel_done.store(true, std::memory_order_release);
+            // 方案1: 通知其他 idle worker 退出, 不再空转等到有界周期。
+            // lock_guard 再 notify_all: predicate 在 wait 内重查 parallel_done, 不会
+            // 因 notify 早于 wait 进入而丢 (丢失唤醒保护)。
+            {
+                std::lock_guard<std::mutex> lock(ctx->mark_mtx_);
+            }
+            ctx->mark_cv_.notify_all();
             break;
         }
 
@@ -417,7 +437,16 @@ void ParallelMarkWorkerLoop(ParallelMarkContext* ctx, int worker_idx) {
                 work_found = true;
                 break;
             }
-            std::this_thread::yield();
+            // 方案1: 空闲且有界等待。非 last worker 在此等新 work/done。有界
+            // wait_for(1ms): 即便生产者漏 notify, 也会周期重探 pop/steal 消化
+            // 他人推入的 chunk; parallel_done 由 last-worker notify_all 即时醒。
+            {
+                std::unique_lock<std::mutex> lock(ctx->mark_mtx_);
+                ctx->mark_cv_.wait_for(
+                    lock, std::chrono::milliseconds(1),
+                    [&]() { return ctx->parallel_done.load(std::memory_order_acquire); });
+            }
+            // 醒来后回到内层 loop 顶部重试 pop/steal(逻辑不变, 仅等待方式变了)
         }
     }
 }

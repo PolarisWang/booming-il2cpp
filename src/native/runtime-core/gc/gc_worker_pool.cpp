@@ -70,10 +70,14 @@ void GcWorkerPool::Initialize(int count) noexcept {
     // double-count reused slots whose old thread's bump already accumulated and
     // deadlock Initialize forever.
     if (spawned > 0) {
+        // 方案1: spawn 就绪等待从裸转改为有界 cv, 消除 spawn 阶段过订阅活锁。
+        // recall: 已注释死锁前 ready_count_ 被重置为 0, 新线程各 bump 一次, wait_for
+        // 1ms 兜底 (WorkerLoop 线程入口先 fetch_add ready_count_, 即使漏 notify 也
+        // 周期重查达成 spawned)。
         int target = spawned;
-        while (ready_count_.load(std::memory_order_acquire) < target) {
-            std::this_thread::yield();
-        }
+        std::unique_lock<std::mutex> lock(mtx_);
+        cv_.wait_for(lock, std::chrono::milliseconds(1),
+                     [&]() { return ready_count_.load(std::memory_order_acquire) >= target; });
     }
 }
 
@@ -107,9 +111,14 @@ void GcWorkerPool::RunWorkers(int count, std::function<void(int)> fn) noexcept {
     // Main thread participates as worker 0.
     work_fn_(0);
 
-    // Wait for all pool workers to complete.
-    while (completed_.load(std::memory_order_acquire) < expected_completed_) {
-        std::this_thread::yield();
+    // Wait for all pool workers to complete. 方案1: 主线程等完成不再裸转。cv 有界
+    // 等待, 由 WorkerLoop 里 completed_ 递增后 notify_all 唤醒。有界 wait_for(1ms)
+    // 兜底, 不丢最终 completed_ 信号。
+    {
+        std::unique_lock<std::mutex> lock(mtx_);
+        cv_.wait_for(lock, std::chrono::milliseconds(1),
+                     [&]() { return completed_.load(std::memory_order_acquire) >= expected_completed_; });
+        // 兜底: 即使 notify 丢失, 1ms 周期重查 completed_ 终达 expected。
     }
 }
 
@@ -149,6 +158,7 @@ void GcWorkerPool::WorkerLoop(int worker_idx) noexcept {
                 work_fn_(worker_idx);
             }
             completed_.fetch_add(1, std::memory_order_release);
+            cv_.notify_all();   // 方案1: 唤醒 RunWorkers 主线程完成屏障
             continue;
         }
 
@@ -183,6 +193,7 @@ void GcWorkerPool::WorkerLoop(int worker_idx) noexcept {
         }
 
         completed_.fetch_add(1, std::memory_order_release);
+        cv_.notify_all();   // 方案1: 唤醒 RunWorkers 主线程完成屏障
     }
 }
 
