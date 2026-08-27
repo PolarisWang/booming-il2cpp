@@ -12,8 +12,13 @@ This is the enforce-half of "generative scripts don't pollute":
   - it never modifies the repo itself, so running it can never dirty the tree.
 
 Used as:
-  pre-commit [generated-drift] hard gate -> exits 1 on drift.
-  Manual: python scripts/cleanliness/check_generated_up_to_date.py
+  Manual: python scripts/cleanliness/check_generated_up_to_date.py      # warn-only (exit 0 on drift)
+  Hard gate: python ... --fail-fast                                     # exit 1 on drift
+  CI/pre-commit: orchestrated by chaos_hygiene.py (hygiene-registry.json "generated-drift").
+    * CI (--ci) enforces: drift -> the orchestrator flags the module as WARN/non-PASS
+      and --ci blocks on any non-PASS -> real drift fails CI.
+    * pre-commit (--gate) is ADVISORY: gate mode blocks only FAIL (not WARN), so a
+      pre-existing drift does not brick unrelated commits; CI is where enforced.
 """
 
 import json
@@ -55,8 +60,17 @@ def _normalize(text: str) -> str:
     line and strips, so cosmetic spacing differences (`SimdFma = 110 ` vs
     `SimdFma = 110`, `}  // namespace` vs `} // namespace`) don't false-positive —
     the guard catches real content drift (different opcodes/values/order/names),
-    not whitespace no-op regeneration."""
+    not whitespace no-op regeneration.  Also strips the auto-gen banner line(s)
+    (review #2): the banner is generator-version noise, not content — if a future
+    generator embeds a timestamp/path/hash there, the committed and fresh copies
+    would differ and false-report DRIFT on an unchanged artifact.  Stripping it
+    makes the compare robust to that."""
     lines = text.splitlines()
+    # Drop leading lines that exactly match a known auto-gen banner (e.g. the
+    # "// Auto-generated from schemas" header).  Only exact matches on the banner
+    # prefix are stripped, so a semantically-important line is never lost.
+    while lines and any(lines[0].startswith(prefix) for prefix in _BANNER):
+        lines.pop(0)
     normal = [" ".join(line.split()) for line in lines]
     return "\n".join(normal).strip()
 

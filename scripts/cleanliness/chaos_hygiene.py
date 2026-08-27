@@ -77,8 +77,10 @@ def _run_check(check: dict, extra_args: list) -> dict:
         status = "PASS"
     # Advisory self-reports that exit 0 but contain an issue keyword are WARN,
     # not PASS — keeps the dashboard honest (e.g. generated-drift stale output).
+    # Use STRONG failure words only; lowercase 'drift' is too broad (matches the
+    # check's own name/banner like '[generated-drift]' on a PASSING run).
     if status == "PASS" and any(
-        kw in out for kw in ("STALE", "drift", "warn-only", "[warn", "ALERT", "WARNING")
+        kw in out for kw in ("STALE", "warn-only", "ALERT", "WARNING", "unexpected large", "DRIFT")
     ):
         status = "WARN"
     detail = (out.strip() or "no output")
