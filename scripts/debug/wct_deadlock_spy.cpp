@@ -12,7 +12,7 @@
 // This is a DIAGNOSTIC tool (task#16 S2-B mark-hang global-deadlock capture);
 // not part of the runtime, no production impact.
 //
-// WINDOWS-ONLY: compiled as a standalone diagnostic via scripts/_build_wct.cmd.
+// WINDOWS-ONLY: compiled as a standalone diagnostic via scripts/debug/_build_wct.cmd.
 // Guarded with #ifdef _WIN32 so that IF this file is ever swept into a global
 // CMake source list on a non-Windows target (linux/arm64/android/ios), it
 // compiles to an empty TU instead of failing on the Windows-only headers
