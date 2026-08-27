@@ -442,3 +442,8 @@ PauseForYoungGc/ResumeAfterYoungGc 从无限 spin 改为 bounded（CoreCLR wait_
 - **472 页、806 页均收敛** → **mark-phase stall 不是"页数不够的纯规模问题"**，是**并发触发**（scenario C 的 100 线程 concurrent young-GC + 晋升 churn 在 full-GC mark 期间制造 mark-stack/cross-gen 边不收敛）。
 - 静态种子（无并发 mutator）即使 806 页也 mark 收敛 → **确定性复现需"并发时 young-GC 与 full-GC mark 交错"harness，比静态规模难得多**。
 - 结论：S2-B 真本质 = concurrent-mark-convergence race（CoreCLR 依赖 SATB+mark_array 幂等 + 硬 STW），需并发时序 harness 专项；非简单页数/sweep×demoted。harness 保留为"大堆 mark 收敛"正回归（806 页 PASS）。
+**S2-B 并发依赖最终定性（2026-08-27）**：升级 harness 为大对象(16KB×2400→806 页)+ **互连指针闭包**(每对象指 4 sibling, raw-alloc layout 全 16KB 扫描) —— 仍 **0s 收敛**。**推翻"互连闭包规模"假说**：
+- 静态 shape 无论页数(472/806)或互连密度，full-GC mark 都瞬时收敛。
+- ⇒ S2 mark-phase stall 是 **全并发 timing 依赖**——需 mutator 在 full-GC mark **期间**分配/晋升(制造 cross-gen 边 mid-mark)，静态 harness 无法产生。
+- 确定性复现需 concurrent harness(mutator 线程在 mark 运行时触发 young-GC)，而它本身引入时序非确定性(与"确定性"矛盾)→ 是真深专项。
+- **harness 保留为正向回归**：大堆(806 页)+互连闭包 mark 收敛(3/3)，证明正常路径 mark 正确；缺陷只在并发交错暴露。
