@@ -63,7 +63,6 @@ echo "[asan] asan runtime dll = ${ASAN_DLL}"
 mkdir -p "${ASAN_ARTIFACTS_ROOT}/Debug"
 cp -f "${ASAN_DLL}" "${ASAN_ARTIFACTS_ROOT}/Debug/"
 echo "[asan] copied ASan DLL to isolated output dir"
-echo "[asan] asan runtime dll = ${ASAN_DLL}"
 
 # ── 3. Build ─────────────────────────────────────────────────────────────
 echo "[asan] building ${TARGET} (Debug) ..."
