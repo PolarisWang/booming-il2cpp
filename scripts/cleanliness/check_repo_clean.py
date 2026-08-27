@@ -22,6 +22,7 @@ Deviation is only allowed for the explicit self-maintaining exceptions below.
 """
 
 import json
+import os
 import re
 import subprocess
 import sys
@@ -133,7 +134,101 @@ def _matches_any(path: str, globs) -> bool:
     return any(_glob_to_regex(g).match(path.replace("\\", "/")) for g in globs)
 
 
+# Expected disk-hungry roots that regenerate by design (build output, pipeline
+# cache, session state). Reported as informational/"known", NOT alarming.
+DISK_KNOWN_ROOTS = {"build", "artifacts", ".claude", "results", "optimization-campaign"}
+# Single ignored top-level dir above this size (MB) is worth surfacing.
+DISK_DEFAULT_ALERT_MB = 200
+# Stop reporting once this large (MB) is hit — keeps --disk O(fast) on huge caches.
+_SIZE_CAP_MB = 2048.0
+_SIZE_CAP_BYTES = int(_SIZE_CAP_MB * 1024 * 1024)
+# HARD bound on files walked per dir (avoids hanging on .claude/worktrees etc.).
+_MAX_WALK_FILES = 4000
+
+
+def _dir_size_mb(top: Path) -> float:
+    """Bounded recursive size (MB), portable (no `du` subprocess — Git-Bash `du`
+    hangs on this large Windows repo). Bails after _MAX_WALK_FILES files seen and
+    reports as >= _SIZE_CAP_MB so a huge cache is surfaced as 'very large' without
+    walking every file. Skips .git."""
+    total, counted = 0, 0
+    for root, dirs, files in os.walk(top):
+        dirs[:] = [d for d in dirs if d != ".git"]
+        for f in files:
+            try:
+                total += (Path(root) / f).stat().st_size
+            except (OSError, ValueError):
+                continue
+            counted += 1
+            if counted >= _MAX_WALK_FILES or total >= _SIZE_CAP_BYTES:
+                # Bounded probe: return bytes measured so far (a lower bound).
+                return total / (1024 * 1024)
+    return total / (1024 * 1024)
+
+
+def run_disk_check(alert_mb=DISK_DEFAULT_ALERT_MB) -> int:
+    """--disk mode: surface ignored top-level dirs that silently consume disk.
+
+    The main guard only sees *committable* junk (untracked, non-ignored), but
+    gitignored outputs (worktrees, build/, caches) accumulate invisibly. This
+    scans `git status --ignored` top-level dirs, ignores "known output roots" that
+    regenerate by design (reported informational), and pulls the top offenders
+    over `alert_mb` for a real call-to-action. Exit 1 only if something unexpected
+    and large exists; known roots never fail.
+    """
+    ignored = git("status", "--porcelain", "--ignored", "--", ".")
+    root_ignored = set()
+    for line in ignored.splitlines():
+        if not line.startswith("!!"):
+            continue
+        p = line[3:].strip(" /")
+        # Depth-0 root-direct ignored entries = fully-ignored top-level output dirs.
+        if "/" in p or not p:
+            continue
+        root_ignored.add(p)
+
+    # Measure all expected output roots (if present) PLUS any root-direct-ignored
+    # dirs. This surfaces .claude/build/artifacts (both tracked-partial + ignored
+    # output) without wrongly measuring full tracked source roots (src/docs/tests).
+    top_dirs = {p: Path(REPO_ROOT, p) for p in root_ignored}
+    for known in DISK_KNOWN_ROOTS:
+        if Path(REPO_ROOT, known).exists() and known not in top_dirs:
+            top_dirs[known] = Path(REPO_ROOT, known)
+
+    # measure sizes
+    sized = []
+    for top, path in sorted(top_dirs.items()):
+        mb = _dir_size_mb(path)
+        if mb > 0:
+            sized.append((mb, top))
+
+    known, offenders = [], []
+    for mb, top in sorted(sized, reverse=True):
+        (known if top in DISK_KNOWN_ROOTS else offenders).append((mb, top))
+
+    if offenders or known:
+        print("=== [repo-clean --disk] ignored-disk usage (surfacing silent accumulation) ===")
+        for mb, top in offenders:
+            tag = "ALERT" if mb >= alert_mb else "warn"
+            print(f"  [{tag:>5}] {top}/ ~{mb:.0f}MB (unexpected ignored junk)" if tag == "ALERT"
+                  else f"  [{tag:>5}] {top}/ ~{mb:.0f}MB")
+        for mb, top in known:
+            print(f"  [info ] {top}/ ~{mb:.0f}MB (expected output root, regenerates)")
+
+    unexpected_large = [top for mb, top in offenders if mb >= alert_mb]
+    if not offenders and not known:
+        print("=== [repo-clean --disk] no significant ignored disk usage ===")
+    if unexpected_large:
+        print(f"=== [repo-clean --disk] {len(unexpected_large)} unexpected large ignored dir(s) (>={alert_mb}MB): {', '.join(unexpected_large)}")
+        print("  Hint: run scripts/clean-build-artifacts.sh or prune .claude/worktrees.")
+        return 1
+    return 0
+
+
 def main():
+    if "--disk" in sys.argv:
+        return run_disk_check()
+
     mode = "soft"
     if "--hard" in sys.argv:
         mode = "hard"

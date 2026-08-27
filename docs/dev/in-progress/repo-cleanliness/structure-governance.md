@@ -47,7 +47,12 @@ schemas/ build/ artifacts/ optimization-campaign/ results/
 | A | `.githooks/pre-commit` → `check_repo_clean.py --hard` | commit 前硬拦根级违规 |
 | C | `.claude/settings.json` PostToolUse → `check_repo_clean_hook.py` | 产生即时软提醒 + 去重 |
 
-增强要点（2026-08-27）：守卫现能捕获**新建的根级目录**（含嵌套文件），不只根级杂散文件。
+增强要点（2026-08-27）：
+- 守卫现能捕获**新建的根级目录**（含嵌套文件），不只根级杂散文件。
+- 守卫消费 `generated-registry.json`：可再生 manifest 改动报 informational、删除报错。
+- **`--disk` 磁盘健康模式**：扫描 root-direct ignored 输出根 + 已知输出根
+  (build/artifacts/.claude/results/optimization-campaign)，有界 walk 报大小；
+  非预期超 200MB 根报 ALERT + exit 1。用于补"ignored 产物悄悄填磁盘"的盲区。
 
 ## 五、gitignore 治理
 
