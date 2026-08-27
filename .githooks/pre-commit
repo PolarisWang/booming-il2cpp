@@ -137,4 +137,14 @@ if [ "$GATE_FAILED" -ne 0 ]; then
 fi
 echo "=== [gate] Deterministic gates passed ==="
 
+echo "=== [repo-clean] Checking repo-root cleanliness (build artifacts / stray files) ==="
+if ! python scripts/cleanliness/check_repo_clean.py --hard; then
+    echo ""
+    echo "ERROR: repo-root cleanliness guard FAILED. Keep the repo root for source."
+    echo "Move/ignore/commit stray files before committing."
+    echo "Use 'git commit --no-verify' to bypass (not recommended)."
+    exit 1
+fi
+echo "=== [repo-clean] Repo root is clean ==="
+
 exit 0

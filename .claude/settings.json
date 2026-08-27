@@ -30,6 +30,17 @@
             "type": "command"
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write|Bash|Skill",
+        "hooks": [
+          {
+            "command": "python D:/agent/chaos-il2cpp/.ai/skills/hooks/check_repo_clean_hook.py",
+            "statusMessage": "Checking repo-root cleanliness...",
+            "timeout": 20,
+            "type": "command"
+          }
+        ]
       }
     ],
     "Stop": [
