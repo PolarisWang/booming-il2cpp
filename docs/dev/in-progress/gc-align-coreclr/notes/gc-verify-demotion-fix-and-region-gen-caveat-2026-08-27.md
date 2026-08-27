@@ -1,7 +1,7 @@
 # Demotion GcVerify 误判修复 + 深层 region-gen 表 bug 交接
 
 > 日期：2026-08-27 | 承接：`gc-pre-existing-issue-fixes-batch` task#10（demotion GcVerify crash）
-> 状态：demotion 部分已修并提交 `0adc9c12b`；深层 region-gen 表 bug 待专项
+> 状态：demotion 已修（`0adc9c12b`）+ CoreCLR 对标调研完成，region-gen 跨池 clobber 已分类为良性（`049d6e65c`）；**残留 A2b 未类型对象信号待专项**
 
 ## 一、demotion GcVerify 误判 — 已修复（commit `0adc9c12b`，仅 `gc_diagnostics.cpp`）
 
@@ -31,4 +31,21 @@ demotion 误判消除后，kFull verify 暴露**另一批真实错误**（此前
 
 **下一步入口**：先确认 #1 是否为 4MB 表 clobber（用 probe 打印这些 gen0 地址的 `GetRegionGen` 是否物理 old-gen、其 4MB chunk 是否与 nursery/gen1 共享）；修法可能是把 old-gen 页 base（及 LOH/payload）的 gen 显式 `SetRegionGen(...,OLD)` 权威化（对齐 `GcMarkRangeOld` 的既有手段）。详见 [[gc-n6-mode3-content-wiring-iter16-bug]] [[gc-m11-config-knobs-done]]。
 
-Related: [[gc-pre-existing-issue-fixes-batch]]
+## 三、CoreCLR 对标调研结论（2026-08-27，定界 + 提交 `049d6e65c`）
+
+**CoreCLR 权威机制**（本地树 `D:/OpenSource/dotnet/runtime/src/coreclr/gc/`）：
+- `set_region_gen_num`（gcinternal.h:4452）分配 segment 时把 gen 写到覆盖所有 basic region 的 `map_region_to_generation[idx]`；`region_segments_alloc`（regions_segments.cpp:1270-1291）**所有代都走唯一分配器**、每次显式自标 gen。
+- 归属不变式：每个 4MB basic region 完全属于**一个** gen segment，`get_region_gen_num` 读表并 `assert(map == region_of(obj).gen_num)`（regions_segments.cpp:1096）——**绝无跨分配器 last-writer-wins clobber**。
+
+**Chaos 差异**：`MarkSweepOldGen::AllocatePage` 是独立 VirtualAlloc 池（非 region 分配器），可与 nursery/Gen1 **共享 4MB chunk**，nursery `SetRegionGen(young)` 覆盖 old-gen 页 chunk byte → gen0。CoreCLR 靠"不共享"杜绝，Chaos 无法廉价复刻同一 ownership。
+
+**定案：gen0 是良性，非 live bug**。写屏障 dst 侧已 CoreCLR 对齐地精确化（`chaos_gc_dirty_card_dst_ref` 用 `IsNurseryPointer(dst)` 而非 4MB 表，gc_card_table.cpp:117-129），故 old-gen 对象读 gen0 **不丢边**；young 侧由 `GcGetRegionGenPhysical` 物理权威保护。既有的 `get_region_gen_num == OLD` verify 断言是"表必须 OLD"的不变式，在共享 chunk 架构下**无法恒成立**（CoreCLR 靠单一分配器保证，Chaos 不行）。
+
+**落地（commit `049d6e65c`，仅 `gc_diagnostics.cpp`，冷路径）**：
+1. `CheckRegionGenOldClobberAware`：old-gen/LOH 页读非 OLD 仅当**物理 nursery/gen1**（真冲突）才 ERROR；物理 old-gen 但 chunk byte 被跨池 young clobber → **WARN 良性**。应用于 `GcVerifyRegionToGenerationMap` old-gen/LOH + `GcVerifyHeap` kFull region-gen 检查。
+2. `bitmap poison` 检查 **`#if CHAOS_IL2CPP_DEBUG`** 门控（poison 只在 debug 写，非 debug 恒读 0 = 假阳性）。
+3. 不采纳"OLD chunk 不被 young 覆盖"（会破坏共享 chunk 里合法 young 对象 → 反成 UAF 源）；不采纳把 `IsInOldGen` 塞进 hot `GetRegionGen`（O(log n) barrier 变慢）。
+
+**残留 A2b 未类型对象信号（待专项）**：kFull 仍报 ~4k `first-word not valid TypeInfo`——**非 interior-slot 噪声**（标记槽全无合法 TypeInfo head，是 genuinely untyped/raw old-gen 对象），即 A2b raw-object 类信号（`[[a2b-true-rootcause-fullgc-sweep-raw-objects]]`）。本轮已验证不是 interior（连续 8 槽全无 head TypeInfo）。需判断这些 raw 对象是否是测试态伪影或生产合法路径，勿与 region-gen clobber 混淆。
+
+Related: [[gc-pre-existing-issue-fixes-batch]] [[a2b-true-rootcause-fullgc-sweep-raw-objects]] [[coreclr-region-barrier-solution-reference]]
