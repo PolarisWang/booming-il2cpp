@@ -35,8 +35,8 @@
         "matcher": "Edit|Write|Bash|Skill",
         "hooks": [
           {
-            "command": "python D:/agent/chaos-il2cpp/scripts/cleanliness/chaos_hygiene.py --soft --check root-clean",
-            "statusMessage": "Checking repo cleanliness...",
+            "command": "python D:/agent/chaos-il2cpp/scripts/cleanliness/chaos_hygiene.py --soft",
+            "statusMessage": "Checking repo hygiene (root-clean realtime; full throttled)...",
             "timeout": 40,
             "type": "command"
           }

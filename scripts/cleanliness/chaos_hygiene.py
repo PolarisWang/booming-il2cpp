@@ -65,21 +65,30 @@ def _run_check(check: dict, extra_args: list) -> dict:
     except (subprocess.SubprocessError, OSError) as e:
         return {"status": "FAIL", "detail": f"spawn failed: {e}"}
     out = (proc.stdout or "") + (proc.stderr or "")
-    # A check exits non-zero => FAIL, unless the check itself self-declares WARN
-    # (module prints '[WARN]' line and exits 0).
+    # Checks self-declare their status with an explicit marker: '[FAIL]' / '[WARN]'
+    # for issues, '[PASS]' or '[OK]' for a clean run.  Exit code is authoritative
+    # (non-zero => FAIL) but the marker matters when a check exits 0.
     if proc.returncode != 0:
         status = "FAIL"
     elif "[WARN]" in out:
         status = "WARN"
-    elif "[OK]" in out:
+    elif "[FAIL]" in out:      # explicit self-declared FAIL even on exit 0
+        status = "FAIL"
+    elif "[PASS]" in out or "[OK]" in out:
         status = "PASS"
     else:
-        status = "PASS"
-    # Advisory self-reports that exit 0 but contain an issue keyword are WARN,
-    # not PASS — keeps the dashboard honest (e.g. generated-drift stale output).
-    # Use STRONG failure words only; lowercase 'drift' is too broad (matches the
-    # check's own name/banner like '[generated-drift]' on a PASSING run).
-    if status == "PASS" and any(
+        # Exit 0 with NO explicit status marker: a contract violation (review #3).
+        # A check that crashed-then-exited-0, or forgot to print its status marker,
+        # must NOT be silently treated as PASS — that would mask a real failure.
+        # Surface as UNKNOWN so CI/dashboard don't turn it green.  (This also
+        # removes the dead `elif "[OK]"`/`else` redundancy where both were PASS.)
+        status = "UNKNOWN"
+    # Advisory self-reports that exit 0 but contain a strong issue keyword are
+    # WARN, not PASS/UNKNOWN — keeps the dashboard honest (e.g. generated-drift
+    # stale output).  Use STRONG failure words only; lowercase 'drift' is too
+    # broad (matches the check's own name/banner like '[generated-drift]' on a
+    # PASSING run).
+    if status in ("PASS", "UNKNOWN") and any(
         kw in out for kw in ("STALE", "warn-only", "ALERT", "WARNING", "unexpected large", "DRIFT")
     ):
         status = "WARN"
@@ -111,6 +120,12 @@ def _dispatch(registry: dict, names: list | None, opts: set):
         extra = []
         if "--disk" in opts and name == "disk-health":
             extra = ["--disk"]
+        if "--ci" in opts and name == "generated-drift":
+            # Real drift must hard-fail CI via a NON-ZERO exit, not a stdout
+            # substring heuristic (review #1).  --fail-fast makes the check exit 1
+            # on drift -> the orchestrator classifies FAIL unambiguously, so the
+            # fragile '[warn-only]' keyword scan is never the deciding signal.
+            extra += ["--fail-fast"]
         results.append({"name": name, **( _run_check(check, extra) )})
     return results
 
@@ -171,25 +186,67 @@ def main() -> int:
             print("usage: --check <name>", file=sys.stderr)
             return 2
 
+    # --soft (realtime hook) throttling (GAP-6): the full check set re-runs the
+    # generator sandbox + dir walks (~15s), which is too heavy on EVERY tool call.
+    # Within --soft-cooldown-seconds of a previous full run, run only the cheap,
+    # immediate root-clean so the agent still gets realtime structural nudges while
+    # the comprehensive checks (generated-drift/completion/disk) are throttled.
+    # They still run at full on every commit/CI (and GAP-1 auto-refreshes the report).
+    mode = _resolve_mode(opts)
+    if mode == "soft" and names is None:
+        cooldown = float(os.environ.get("CHAOS_SOFT_COOLDOWN", "90"))
+        last_full = None
+        try:
+            last_full = float(json.loads(_SOFT_STATE.read_text(encoding="utf-8")).get("last_full", 0))
+        except (OSError, ValueError):
+            last_full = 0.0
+        import time
+        if last_full and (time.time() - last_full) < cooldown:
+            # within cooldown: only root-clean (cheap + immediate)
+            names = ["root-clean"]
+
     results = _dispatch(registry, names, opts)
     if names:
         results = [r for r in results if r["name"] in names]
+    # Gate: FAIL in any hard-mode check fails the commit/CI.  Compute ONE gate
+    # decision up front and reuse it for both the report and the exit code, so the
+    # dashboard/JSON never contradicts the CI exit code (review #2 — before, --ci
+    # returned 1 on any WARN but still wrote overall='PASS' because it only looked
+    # at has_fail).  UNKNOWN (exit-0-with-no-status-marker, see _run_check) is an
+    # integrity failure and blocks in both gate and CI.
+    has_fail   = any(r["status"] == "FAIL" for r in results)
+    has_unknown = any(r["status"] == "UNKNOWN" for r in results)
+    any_nonpass = any(r["status"] != "PASS" for r in results)
 
-    # Gate: FAIL in any hard-mode check fails the commit/CI.
-    mode = _resolve_mode(opts)
-    has_fail = any(r["status"] == "FAIL" for r in results)
+    if mode == "ci":
+        gate_fail = any_nonpass          # CI blocks on any non-PASS (FAIL/WARN/UNKNOWN)
+    elif mode == "gate":
+        gate_fail = has_fail or has_unknown  # commit gate lenient on WARN, hard on FAIL/UNKNOWN
+    else:
+        gate_fail = False                # soft (realtime nudge) never blocks
 
-    if "--report" in opts or "--ci" in opts:
-        _write_report(results, "FAIL" if has_fail else "PASS")
+    if "--report" in opts or "--ci" in opts or mode == "gate":
+        # Auto-refresh the report/dashboard on every decision point (gate, ci,
+        # report) so the persisted JSON/STATUS never goes stale (GAP-1). The bare
+        # --soft realtime nudge intentionally does NOT rewrite the dashboard (it
+        # fires on every tool call; updating STATUS.md that often is churn).
+        _write_report(results, "FAIL" if gate_fail else "PASS")
 
     # --soft (realtime hook): dedup — only nudge when the issue signature CHANGED
     # vs the last soft run, so the agent isn't told about the same dirt every tool
     # call. Keep quiet when there's nothing new to say.
     if mode == "soft":
         import hashlib
+        import time
         sig = hashlib.sha256(
             "\n".join(f"{r['name']}:{r['status']}:{r['detail']}" for r in results).encode()
         ).hexdigest()
+        # A "full" run (not throttled to root-clean) records its timestamp so the
+        # next call within the cooldown is throttled (GAP-6).
+        was_full = (names or []) != ["root-clean"]
+        state = {"signature": sig}
+        if was_full:
+            state["last_full"] = time.time()
         last_sig = None
         try:
             last_sig = json.loads(_SOFT_STATE.read_text(encoding="utf-8")).get("signature")
@@ -197,7 +254,7 @@ def main() -> int:
             last_sig = None
         try:
             _SOFT_STATE.parent.mkdir(parents=True, exist_ok=True)
-            _SOFT_STATE.write_text(json.dumps({"signature": sig}, ensure_ascii=False), encoding="utf-8")
+            _SOFT_STATE.write_text(json.dumps(state, ensure_ascii=False), encoding="utf-8")
         except OSError:
             pass
         changed = sig != last_sig
@@ -212,19 +269,15 @@ def main() -> int:
         print(f"  [{r['status']:>4}] {r['name']}")
         for line in r["detail"].splitlines()[:4]:
             print(f"          {line}")
-    print(f"=== hygiene: overall={ 'FAIL' if has_fail else 'PASS' } (mode={mode}) ===")
+    print(f"=== hygiene: overall={ 'FAIL' if gate_fail else 'PASS' } (mode={mode}) ===")
     if "--report" in opts:
         print(f"report: {REPORT_PATH}")
         print(f"dashboard: {STATUS_PATH}")
 
-    if has_fail and mode == "gate":
-        return 1
-    if mode == "ci" and any(r["status"] != "PASS" for r in results):
-        # CI hard-enforces: any WARN/FAIL in registered checks blocks. Pre-commit
-        # --gate stays lenient on pre-existing WARN (doesn't brick unrelated
-        # commits); CI is where WARN-able real drift must be fixed.
-        return 1
-    return 0
+    # Exit code matches the report overall (single gate_fail source of truth).
+    if mode == "soft":
+        return 0
+    return 1 if gate_fail else 0
 
 
 if __name__ == "__main__":
