@@ -2670,8 +2670,22 @@ static bool RunScenarioU(GcStatsSnapshot* stats_out) {
            std::chrono::steady_clock::now() - c0 < std::chrono::seconds(30)) {
         std::this_thread::yield();
     }
-    if (collector.joinable()) collector.join();
     bool collector_ok = collector_done.load(std::memory_order_acquire);
+    if (collector_ok) {
+        if (collector.joinable()) collector.join();
+    } else {
+        // Mark STALLED: the collector thread never finished within the bound, i.e.
+        // a full-GC mark did not converge.  Do NOT call collector.join() here —
+        // it would block forever, turning the regression into an invisible HANG
+        // that CI cannot catch (review #8).  Detach and return FAIL so the stall
+        // is surfaced as a scenario failure instead.  Scenario U is the final
+        // scenario and the process exits right after this runner, so the detached
+        // stuck thread is reclaimed by the OS teardown.
+        CHAOS_IL2CPP_LOG_ERROR("Stress",
+            "Scenario U collector MARK STALL (did not complete in 30s) — "
+            "full-GC concurrent mark did not converge");
+        if (collector.joinable()) collector.detach();
+    }
 
     *stats_out = SnapshotGcStats();
     uint64_t d_young = stats_out->young_collections > before.young_collections
@@ -2679,7 +2693,6 @@ static bool RunScenarioU(GcStatsSnapshot* stats_out) {
     printf("\n  Result: concurrent full-GC+young churn, young_gc_delta=%llu, collector_ok=%d\n",
            (unsigned long long)d_young, collector_ok ? 1 : 0);
 
-    g_last_pattern_failures = 0;
     return collector_ok;
 }
 

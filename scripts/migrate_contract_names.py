@@ -44,6 +44,11 @@ def migrate_contracts(dry_run: bool = True) -> int:
 
     migrated = 0
     for legacy_path, cap_path in pairs:
+        # slug (the capability-family name) is used by BOTH the merge branch below
+        # and the legacy-file deletion block that runs even when need_merge is
+        # false (review #9).  Define it once here, unconditionally, so the delete
+        # block never hits NameError when a pair doesn't need merging.
+        slug = cap_path.parent.name
         try:
             legacy = json.loads(legacy_path.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, OSError) as e:
@@ -67,7 +72,6 @@ def migrate_contracts(dry_run: bool = True) -> int:
         )
 
         if need_merge:
-            slug = cap_path.parent.name
             print(f"  MERGE {slug}: {len(leg_indices)} indices into capability file")
             if not dry_run:
                 primary["customEntryIndices"] = leg_indices
