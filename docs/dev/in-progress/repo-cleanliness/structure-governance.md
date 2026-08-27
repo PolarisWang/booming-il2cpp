@@ -64,6 +64,18 @@ schemas/ build/ artifacts/ optimization-campaign/ results/
   profiling_results/verification-history）可清理，但**收益极小（惰性行）**，
   建议保持现状或随重构一并处理，不做单独清理动作。
 
+## 六、生成物放置规约（"生成式脚本不污染项目"）
+
+- **生成式脚本的产物一律落 `*/generated/` 子目录**，不得平铺在手写源码旁
+  （`src/native/interpreter/generated/` 是 good 模型；`fast_dispatch_*.inc` 平铺
+  在 `interpreter/` 是应避免的反例，远期也应迁入 generated/）。
+- 生成器必须支持 **`--out-dir` 输出重定向**，以便漂移守卫在沙箱捕获、不改真源树。
+- 生成器不得**原地改提交物**做"漂移检查"——由 `check_generated_up_to_date.py`
+  （hermetic，沙箱 + 语义 compare）负责，守卫自身永不写入 repo。
+- 新增生成物必须在 `generated-registry.json` 登记（供漂移守卫与 churn 治理识别）。
+- 提交的快照基线（`tests/unit/**/Baselines/**/generated/`）是**测试 golden**，
+  committed 是必须的，不属污染。
+
 ---
 
 ## 六、变更记录

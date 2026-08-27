@@ -78,13 +78,22 @@ def derive_trusted_roots():
 
 
 def load_generated_registry():
-    """Load regenerable-file globs from generated-registry.json (empty if absent)."""
+    """Load regenerable-file globs from generated-registry.json.
+
+    Returns [] ONLY when the registry is absent (fresh clone / not yet minted —
+    a legal pass).  A present-but-malformed registry is a real config error and
+    must NOT be silently swallowed: returning [] there would quietly disable the
+    generated-file churn guard, defeating CLAUDE.md's churn-governance discipline
+    (review #2).  Present-but-corrupt therefore raises, and the caller fails
+    closed instead of silently passing an ill-formed config.
+    """
     if not REGISTRY.exists():
         return []
     try:
         data = json.loads(REGISTRY.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return []
+    except (OSError, ValueError) as e:
+        raise RuntimeError(
+            f"{REGISTRY.name} exists but is unreadable/corrupt: {e}") from e
     return [e.get("glob", "") for e in data.get("entries", [])]
 
 
@@ -271,7 +280,16 @@ def main():
     # "this churns on purpose — commit deliberately"; hard mode still passes
     # (they are committed/expected, not junk). Deleted regenerable manifests ARE
     # flagged (a tracked generated file should not be silently dropped).
-    regen = load_generated_registry()
+    regen = []
+    try:
+        regen = load_generated_registry()
+    except RuntimeError as e:
+        # Registry present but corrupt: fail closed rather than silently disabling
+        # the churn guard (review #2).  Absence is a legal pass; corruption is not.
+        violations.append(
+            f"generated-registry.json present but corrupt — churn guard could not "
+            f"load regenerable globs: {e}"
+        )
     if regen:
         tracked_lines = git("status", "--porcelain", "--", ".")
         regen_modified, regen_deleted = [], []

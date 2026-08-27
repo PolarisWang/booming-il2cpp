@@ -147,4 +147,11 @@ if ! python scripts/cleanliness/check_repo_clean.py --hard; then
 fi
 echo "=== [repo-clean] Repo root is clean ==="
 
+echo "=== [generated-drift] Checking committed generated artifacts match their generators (hermetic) ==="
+if python scripts/cleanliness/check_generated_up_to_date.py; then
+    echo "=== [generated-drift] Ok ==="
+else
+    echo "=== [generated-drift] Generated-file drift flagged above (pre-existing drift is warn-only; CI --fail-fast enforces) ==="
+fi
+
 exit 0
