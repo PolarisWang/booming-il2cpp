@@ -34,6 +34,39 @@ inline void CheckRegionGen(uintptr_t addr, uint8_t expect, const char* what) noe
     }
 }
 
+/// Clobber-aware old-gen/LOH page region-gen check.
+///
+/// Unlike nursery/gen1 (physically authoritative via GcGetRegionGenPhysical),
+/// an old-gen/LOH page's 4MB chunk byte CAN legitimately read non-OLD because
+/// old-gen/LOH are a SEPARATE VirtualAlloc pool (not the region allocator) and
+/// may SHARE a 4MB chunk with the active nursery/Gen1, whose SetRegionGen(young)
+/// last-writer-wins overwrites the page's chunk byte to 0 (CoreCLR avoids this by
+/// a single region allocator where each basic region is owned by exactly one
+/// generation — Chaos cannot cheaply replicate that ownership, so the barrier's
+/// dst side compensates via precise RegionManager::IsNurseryPointer, gc_card_table
+/// .cpp:117-129).  Therefore a non-OLD read is a real defect ONLY when the payload
+/// is PHYSICALLY young/gen1 (genuine allocator collision); if it is physically
+/// old-gen (GcGetRegionGenPhysical == invalid) but the chunk-table byte was age-
+/// clobbered, that is the known benign collision — skip.
+inline void CheckRegionGenOldClobberAware(uintptr_t addr, const char* what) noexcept {
+    uint8_t physical = GcGetRegionGenPhysical(addr);
+    if (physical != kRegionGenInvalid) {
+        // Payload's own address is physically nursery/gen1 → genuine collision.
+        CHAOS_IL2CPP_LOG_ERROR_M("GCVerify",
+            "region->gen mismatch: {0} addr={1} is PHYSICALLY young, table_gen={2}",
+            what, (void*)addr, (unsigned)GetRegionGen(addr));
+        return;
+    }
+    uint8_t got = GetRegionGen(addr);
+    if (got != kRegionGenOld) {
+        // Physically old-gen but its 4MB chunk byte was age-clobbered by a
+        // co-located young region sharing the chunk — the known benign collision.
+        CHAOS_IL2CPP_LOG_WARN_M("GCVerify",
+            "region->gen benign clobber (old-gen page shares 4MB chunk with young): "
+            "{0} addr={1} table_gen={2}", what, (void*)addr, (unsigned)got);
+    }
+}
+
 }  // namespace
 
 void GcVerifyRegionToGenerationMap() noexcept {
@@ -50,17 +83,21 @@ void GcVerifyRegionToGenerationMap() noexcept {
     }
 
     // Old-gen pages must be OLD (gen2) — GcMarkRangeOld sets this at AllocatePage.
-    // A stale 0 here is exactly the cross-gen-edge-dropping bug (barrier sees
-    // gen0 and skips carding).  This is the T1-class bookkeeping-drift guard.
+    // A physically-young read here is a real allocator collision; an age-clobbered
+    // table byte (page shares its 4MB chunk with the active young side) is the known
+    // benign cross-pool collision the region-aware barrier already tolerates via
+    // IsNurseryPointer(dst).  Use the clobber-aware check so genuine drift is flagged
+    // but the benign shared-chunk case is not reported as a hard mismatch.
     for (auto* page = G_OldGen().PageList(); page != nullptr; page = page->next) {
         if (!page->in_use.load(std::memory_order_acquire)) continue;
-        CheckRegionGen(reinterpret_cast<uintptr_t>(page->Payload()), kRegionGenOld, "old_gen_page");
+        CheckRegionGenOldClobberAware(reinterpret_cast<uintptr_t>(page->Payload()), "old_gen_page");
     }
 
-    // LOH payloads must be OLD (gen2) — GcMarkRangeOld at segment alloc.
+    // LOH payloads must be OLD (gen2) — GcMarkRangeOld at segment alloc. Same
+    // clobber-aware semantics (LOH is also a separate non-region VA pool).
     for (auto* seg = G_Loh().SegmentListForDiag(); seg != nullptr; seg = seg->next) {
         uintptr_t payload = reinterpret_cast<uintptr_t>(seg) + sizeof(LohSegment);
-        CheckRegionGen(payload, kRegionGenOld, "loh_segment");
+        CheckRegionGenOldClobberAware(payload, "loh_segment");
     }
 }
 
@@ -87,13 +124,15 @@ void GcVerifyHeap() noexcept {
 
         // Bitmap poison tail: page->bitmap_bytes ALREADY includes the 16-byte
         // 0xCD poison guard appended after the real bitmap (AllocatePage does
-        // bitmap_bytes += kBitmapPoison).  The last 16 bytes of the bitmap are
-        // the poison.  If any were overwritten, an out-of-bounds bitmap write
-        // occurred — report it (kFull only).
+        // bitmap_bytes += kBitmapPoison).  In a CHAOS_IL2CPP_DEBUG build the last
+        // 16 bytes hold 0xCD; if any were overwritten an out-of-bounds bitmap write
+        // occurred.  NON-debug builds never write the poison, so the check must be
+        // gated on the same macro or every page false-positives reading zero.
         unsigned char* bmp = page->MarkBitmap();
         constexpr CHAOS_IL2CPP_SIZE kBitmapPoison = 16;
         CHAOS_IL2CPP_SIZE bmp_useful_bytes = page->bitmap_bytes > kBitmapPoison
             ? (page->bitmap_bytes - kBitmapPoison) : 0;
+#if defined(CHAOS_IL2CPP_DEBUG)
         for (CHAOS_IL2CPP_SIZE k = 0; k < kBitmapPoison; k++) {
             unsigned char v = bmp[bmp_useful_bytes + k];
             if (v != 0xCD) {
@@ -104,6 +143,7 @@ void GcVerifyHeap() noexcept {
                 break;
             }
         }
+#endif
 
         // Sample up to a bounded number of marked object starts on this page.
         char* payload = page->Payload();
@@ -131,9 +171,24 @@ void GcVerifyHeap() noexcept {
             }
             uint8_t rg = GetRegionGen(reinterpret_cast<uintptr_t>(obj));
             if (rg != kRegionGenOld) {
-                CHAOS_IL2CPP_LOG_ERROR_M("GCVerify",
-                    "kFull: marked object region-gen not OLD: {0} gen={1}", obj, (unsigned)rg);
+                // Non-demoted marked old-gen-page object reading non-OLD: either the
+                // object is physically nursery/gen1 (genuine allocator collision) or
+                // its 4MB chunk was age-clobbered by a co-located young region — the
+                // known benign cross-pool collision (see CheckRegionGenOldClobberAware).
+                // Only the physically-young case is a hard defect.
+                if (GcGetRegionGenPhysical(reinterpret_cast<uintptr_t>(obj)) != kRegionGenInvalid) {
+                    CHAOS_IL2CPP_LOG_ERROR_M("GCVerify",
+                        "kFull: marked object PHYSICALLY young but in tracked old-gen page: {0} gen={1}", obj, (unsigned)rg);
+                } else {
+                    CHAOS_IL2CPP_LOG_WARN_M("GCVerify",
+                        "kFull: marked object region-gen benign clobber (shares 4MB chunk with young): {0} gen={1}", obj, (unsigned)rg);
+                }
             }
+            // A marked old-gen page object's first word should be a valid TypeInfo.
+            // (These flagged slots are genuinely untyped/raw old-gen objects — the
+            // A2b-class signal — NOT interior slots of typed objects: the bitmap marks
+            // each object slot, and typed heads carry a valid TypeInfo, so a run of
+            // flagged consecutive slots with no valid head is the raw-object case.)
             const void* fw = *static_cast<const void* const*>(obj);
             if (fw == nullptr ||
                 !GcLayoutRegistry::Instance().IsValidTypeInfoPointer(fw)) {
