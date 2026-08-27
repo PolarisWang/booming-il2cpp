@@ -136,6 +136,20 @@ int BgcController::AllocateSatbBuffer() {
 // ── BGC cycle control ────────────────────────────────────────────────
 
 void BgcController::StartBgcCycle() {
+    // ROOT-CAUSE GUARD (task#16): a BGC cycle is meaningless without a running
+    // BGC thread.  The scheduler calls StartBgcCycle when g_bgc_enabled &&
+    // !IsBusy(), but IsBusy() only checks phase_!=IDLE — NOT bgc_running_.  In
+    // entrypoints that never call BgcController::Start() (e.g. the standalone
+    // gc_stress_test whose main() skips RuntimeInit), the scheduler can start a
+    // "phantom" cycle: phase_=CONCURRENT_MARK + g_bgc_is_marking=true with NO BGC
+    // thread alive to ack PauseForYoungGc.  Every young GC then calls
+    // PauseForYoungGc and spins on bgc_paused_ forever (the scenario-C 2/5
+    // HANG / §十 3/10 HANG).  Bail here so the phantom concurrent mark never forms.
+    if (!bgc_running_.load(std::memory_order_acquire)) {
+        CHAOS_IL2CPP_LOG_DEBUG("BGC", "start_cycle_skipped_no_thread");
+        return;
+    }
+
     // Guard against concurrent BGC start attempts.  Without this guard,
     // multiple threads calling StartBgcCycle simultaneously (e.g., when
     // 100 threads exhaust their nursery at the same time) will each call
@@ -1403,8 +1417,47 @@ void BgcController::PauseForYoungGc() noexcept {
     // re-evaluates and the young GC spins on bgc_paused_ forever.
     bgc_cv_.notify_all();
     // Wait for BGC thread to acknowledge (bgc_paused_ == true).
-    while (!bgc_paused_.load(std::memory_order_acquire)) {
-        std::this_thread::yield();
+    //
+    // DIAGNOSTIC (task#16): if the BGC never acks, this loops forever.  Track
+    // elapsed spin time and periodically report the BGC thread's observable
+    // state so the deadlock's anchor (which BGC phase ack comes from / why not)
+    // can be captured in a normal Debug run WITHOUT changing coordination
+    // semantics.  Pure observability — no lock, no timeline change beyond the
+    // log writes.  Remove once the deadlock is root-caused.
+    {
+        using namespace std::chrono;
+        auto spin_start = steady_clock::now();
+        int log_count = 0;
+        while (!bgc_paused_.load(std::memory_order_acquire)) {
+            auto now = steady_clock::now();
+            auto elapsed_ms = duration_cast<milliseconds>(now - spin_start).count();
+            if (elapsed_ms > 3000 && log_count < 8) {
+                // Decode BgcPhase for readable output.
+                auto p = phase_.load(std::memory_order_acquire);
+                const char* phase_name = "?";
+                switch (p) {
+                    case BgcPhase::IDLE:            phase_name = "IDLE"; break;
+                    case BgcPhase::ROOT_COLLECT:    phase_name = "ROOT_COLLECT"; break;
+                    case BgcPhase::CONCURRENT_MARK: phase_name = "CONCURRENT_MARK"; break;
+                    case BgcPhase::REMARK_NEEDED:   phase_name = "REMARK_NEEDED"; break;
+                    case BgcPhase::STW_REMARK:      phase_name = "STW_REMARK"; break;
+                    case BgcPhase::CONCURRENT_SWEEP:phase_name = "CONCURRENT_SWEEP"; break;
+                    case BgcPhase::COMPACT_NEEDED:  phase_name = "COMPACT_NEEDED"; break;
+                    case BgcPhase::FINISHED:        phase_name = "FINISHED"; break;
+                    default: break;
+                }
+                CHAOS_IL2CPP_LOG_WARN_M("BGC",
+                    "PauseForYoungGc STALL {0}ms — phase={1} bgc_running={2} "
+                    "bgc_paused={3} bgc_marking={4} bgc_workers={5}",
+                    static_cast<unsigned long long>(elapsed_ms), phase_name,
+                    static_cast<int>(bgc_running_.load(std::memory_order_acquire)),
+                    static_cast<int>(bgc_paused_.load(std::memory_order_acquire)),
+                    static_cast<int>(g_bgc_is_marking.load(std::memory_order_acquire)),
+                    static_cast<int>(bgc_worker_count_.load(std::memory_order_acquire)));
+                ++log_count;
+            }
+            std::this_thread::yield();
+        }
     }
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_paused_acknowledged");
     // Drain any stale nursery entries from work deques as a safety net.

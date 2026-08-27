@@ -398,3 +398,23 @@ in-place demoted 的交互（60s perf + 后续崩）需要额外专项。当前�
 2. **freeze-sync spin 内嵌 pause 检查 + abort freeze**（line1011）：以为 SATB 洪泛使 mark 不收敛、BGC 困在 ~10s freeze 而无法 ack。加后 8/10 HANG（更差）。证伪：让 BGC 更勤快 ack 反而更挂 → **不是 BGC 不 ack 的丢 wake**。
 - **结论翻转**：`PauseForYoungGc`↔`bgc_paused_` handshake 是**单槽二元**（无 mutex 串行化，仅靠外围全局 safepoint 保证单 GC 线程进 young collect）。两个 fix 都改变 BGC 调度时序并恶化 → 真根是**时序敏感的 coordination 死锁**，BGC 侧加 ack 支点方向错误。safe 顶点 = `g_bgc_is_marking` 门后才有 PauseForYoungGc（gc_young_collector.cpp:369），safepoint 已串行化 young GC。专攻 session 需在**不打扰 BGC 时序**的前提下重组 handshake（或 ref-count / 不共享单槽 flag），优先在隔离重现代码路径上补断点取证 BGC 线程精确 wait 态（本 session cdb multi-attach 失败 + 进程线程列表仅 ~11 个，未能抓到 BGC 线程栈）。
 - **当前状态**：gc_bgc.cpp 回滚到干净基线（2/5 hang 恢复），ASan 工具链改动（commit f246e9e2c）保留。
+### residual flakiness 专项 — HANG 根因定址 + 根治 fix（2026-08-27，决定性）
+**取证（PauseForYoungGc STALL 诊断）抓到死锁锚点**：
+```
+PauseForYoungGc STALL — phase=CONCURRENT_MARK bgc_running=0 bgc_paused=0 bgc_marking=1 bgc_workers=0
+```
+**`bgc_running_=0` + `bgc_workers=0` 但 `phase=CONCURRENT_MARK` + `bgc_marking=1` = 幽灵并发标记**：
+- `gc_stress_test` 的 `main()` **不调 `RuntimeInit`**（runtime_init.cpp:65 才 `Start()` BGC 线程）→ `bgc_running_` 从未置 true。
+- 但 scheduler 的 BGC-start 路径 `StartBgcCycle()`（gc_bgc.cpp:138）只检查 `phase_!=IDLE`（`IsBusy()`），**不检查 `bgc_running_`** → 在无 BGC 线程时仍置 `phase=CONCURRENT_MARK` + `g_bgc_is_marking=true`。
+- young GC 见 `g_bgc_is_marking=true`（gc_young_collector.cpp:369）→ 调 `PauseForYoungGc` 死转 `bgc_paused_`，但**没有 BGC 线程能 ack** → 永久死锁。scenario C 2/5 HANG、§十 3/10 全解释。
+
+**根治 fix（`StartBgcCycle` 顶部加 `!bgc_running_` 守卫）**：
+```cpp
+if (!bgc_running_.load(std::memory_order_acquire)) {
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "start_cycle_skipped_no_thread");
+    return;   // 幽灵并发标记永不形成
+}
+```
+**效果（数据验证，区别先前两证伪 fix）**：scenario C **10/10 PASSED（0 hang）vs 2/5**；L/N/D 全绿；`PauseForYoungGc STALL` 不再出现。这是**先取证→定位→针对改**的正确路径成果。
+
+**新发现（独立 pre-existing，非本 fix 回归）**：`gc_bgc_smoke`（新 interleaved 版）在 `BgcSweep` 有 ~60s 病态 stall（"TIMEOUT waiting for phase 6 (current: 5)"→60s 后 `concurrent_sweep_complete`）——是 §八 已记的 sweep/compaction×demoted 病态交互的另一实例，非 PauseForYoungGc 死锁。
