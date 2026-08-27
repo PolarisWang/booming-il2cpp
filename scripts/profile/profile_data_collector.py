@@ -2,7 +2,7 @@
 """Profile data collector — runs entry.exe --benchmark and captures PROFILE_DUMP() stderr.
 
 Usage:
-    python tools/profile_data_collector.py \\
+    python scripts/profile/profile_data_collector.py \\
         --family convert-char \\
         --entry-exe-path /path/to/entry.exe \\
         --iterations 100000 \\

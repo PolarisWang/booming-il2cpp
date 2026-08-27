@@ -3,13 +3,13 @@
 
 Usage:
     # Analyze a single profile report
-    python tools/profile_analyzer.py profile_data/convert-char/profile-report.json
+    python scripts/profile/profile_analyzer.py profile_data/convert-char/profile-report.json
 
     # Compare two reports (baseline vs optimized)
-    python tools/profile_analyzer.py profile_data/convert-char/baseline.json profile_data/convert-char/optimized.json --compare
+    python scripts/profile/profile_analyzer.py profile_data/convert-char/baseline.json profile_data/convert-char/optimized.json --compare
 
     # Filter by noise threshold
-    python tools/profile_analyzer.py profile-report.json --min-pct 0.1 --min-count 100
+    python scripts/profile/profile_analyzer.py profile-report.json --min-pct 0.1 --min-count 100
 """
 
 from __future__ import annotations

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Check wiki markdown files for broken internal links.
 
-Usage: python build/check_wiki_links.py [--fix]
+Usage: python scripts/codegen/check_wiki_links.py [--fix]
 
 Scans all .md files in wiki/ for [[link]] and [text](path) patterns
 and verifies the target file exists relative to the wiki root.

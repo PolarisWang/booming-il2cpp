@@ -4,7 +4,7 @@ Phase 1: Generate simplified methodSubjectIds using public surface manifest data
 Phase 2: Inject into formal ledger so foundation-dll pipeline sees methodCount > 0.
 
 Usage:
-    python build/populate_noncorelib_families.py [--scope <assembly-name>]
+    python scripts/codegen/populate_noncorelib_families.py [--scope <assembly-name>]
 """
 from __future__ import annotations
 

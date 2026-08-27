@@ -7,8 +7,8 @@ This one-time migration:
 3. Updates all Python lookup code to point to the single canonical path.
 
 Usage:
-    python tools/migrate_contract_names.py          # dry-run (preview only)
-    python tools/migrate_contract_names.py --apply   # actually migrate + convert
+    python scripts/migrate_contract_names.py          # dry-run (preview only)
+    python scripts/migrate_contract_names.py --apply   # actually migrate + convert
 """
 
 from __future__ import annotations

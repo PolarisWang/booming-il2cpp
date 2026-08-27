@@ -5,7 +5,7 @@ to System.Runtime). We generate synthetic methodSubjectIds from rule_registry.py
 marker types so the pipeline sees methodCount > 0.
 
 Usage:
-    python build/populate_synthetic_subject_ids.py
+    python scripts/codegen/populate_synthetic_subject_ids.py
 """
 from __future__ import annotations
 
