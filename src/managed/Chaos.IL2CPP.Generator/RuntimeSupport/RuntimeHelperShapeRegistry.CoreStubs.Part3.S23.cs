@@ -9,6 +9,34 @@ public sealed partial class NativeAotLoweringPlanner
     partial class RuntimeHelperShapeRegistry
     {
         /// <summary>
+        /// Register Convert.ToXxx(System.String) — inline direct-native call.
+        ///
+        /// The ATG-probed semantics for Convert.ToXxx(default(string)) are "null → 0 /
+        /// invalid → FormatException".  ChaosConvertToInt32 etc already implement exactly
+        /// that (null→0, invalid→FormatException).  Routing the call as an inline shape
+        /// (rather than the SimpleForward that also exists) makes the emitted call site
+        /// skip codegen's reference-argument null-guard, which would otherwise throw NRE
+        /// on `default(string)` (the string carrier is 0) and fail the fact.
+        /// </summary>
+        private static void RegisterConvertStringInline(RuntimeHelperShapeRegistry registry,
+            string methodName, string nativeFn)
+        {
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Convert",
+                MethodName: methodName,
+                Resolver: (callee, paramTypes) =>
+                {
+                    // Only the single System.String overload — let other overloads fall
+                    // through to the numeric inline / SimpleForward handlers.
+                    if (paramTypes.Count != 1 || paramTypes[0] != "System.String")
+                        return null;
+                    // {0} is the raw string-carrier value on the eval stack (could be 0 for
+                    // default(string)); the native tolerates null.
+                    return $"{nativeFn}({{0}})";
+                }));
+        }
+
+        /// <summary>
         /// HashCode::ToHashCode (GenericShapeDescriptor -- handles value type)
         /// </summary>
         private static void RegisterHashCodeToHashCode_1(RuntimeHelperShapeRegistry registry)
@@ -160,6 +188,22 @@ public sealed partial class NativeAotLoweringPlanner
                         RegisterConvertNumericInline(registry, "ToInt64", "CHAOS_IL2CPP_INT64");
                         RegisterConvertNumericInline(registry, "ToSingle", "CHAOS_IL2CPP_FLOAT32");
                         RegisterConvertNumericInline(registry, "ToDouble", "CHAOS_IL2CPP_FLOAT64");
+
+                        // ── Convert.ToXxx(System.String) — inline direct-native calls ──────────
+                        // The ATG-probed semantics for Convert.ToInt32(default(string)) etc. are
+                        // "null → 0 / invalid → FormatException", matching ChaosConvertToInt32
+                        // (null → 0) and friends.  Routing these as inline shapes (instead of the
+                        // SimpleForward that already exists) makes the emitted call site skip the
+                        // codegen reference-argument null-guard (`if (arg==0) raise_nre`), which
+                        // otherwise throws NRE on `default(string)` and fails the fact.
+                        RegisterConvertStringInline(registry, "ToBoolean", "ChaosConvertToBoolean");
+                        RegisterConvertStringInline(registry, "ToByte", "ChaosConvertToByte");
+                        RegisterConvertStringInline(registry, "ToInt16", "ChaosConvertToInt16");
+                        RegisterConvertStringInline(registry, "ToInt32", "ChaosConvertToInt32");
+                        RegisterConvertStringInline(registry, "ToInt64", "ChaosConvertToInt64");
+                        RegisterConvertStringInline(registry, "ToSingle", "ChaosConvertToSingle");
+                        RegisterConvertStringInline(registry, "ToDouble", "ChaosConvertToDouble");
+                        RegisterConvertStringInline(registry, "ToDecimal", "ChaosConvertToDecimal");
 
                         // ── System.Int32/Int64/Double::Parse stubs ─────────────────────────
                         registry.Register("System.Int32", "Parse", ["System.String"],
