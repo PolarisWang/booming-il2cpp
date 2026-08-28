@@ -288,6 +288,11 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     if (pt is "System.Boolean" or "System.DateTime")
                     {
+                        // Boolean → the target numeric via static_cast of the 1/0 carrier value
+                        // (Convert.ToByte(true)=1, ToDouble(true)=1.0).  DateTime is kept as a
+                        // throwing placeholder (no DateTime→numeric semantics).
+                        if (pt is "System.Boolean")
+                            return $"static_cast<{cppCastType}>({{0}})";
                         return $"(chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<{cppCastType}>(0))";
                     }
                     return null;
