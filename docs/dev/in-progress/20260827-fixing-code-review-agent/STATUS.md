@@ -161,3 +161,47 @@
 - worker A 在 ProcessChunk 持有未 flush 的 pending 时，last worker Z 若 set `parallel_done=true`，A 回到外层 `while(!parallel_done)` 条件为 false 不再进 body → **A 的头部 FlushPending 不执行 → pending 指向的新标记对象子指针从未扫描**。
 - 根因不是单行锁，是**并行 mark 终止协议**：`active_workers fetch_sub 到 1` 只保证"还有未 idle worker"，无法保证"未 idle worker 会被 done 打断前完成 flush"。需 CoreCLR 式 re-scan-until-stable 或"所有 worker 确认已 flush/idle 才 set done"的握手。
 - **处置**：升级为独立 P0 专项，转 gc-expert 深度设计（触及 GC 并行内核，不塞进本任务快修）。R2/R3 不受影响。
+
+## 附加：复杂度评估闸门 A+B（2026-08-28, 已提交推送 7ad8b9930）
+
+**根因分析**（用户观察: brainstorm→plan→executing 流程很少触发）:
+- R1(结构): core-agent 阶段2 只路由"域"(translation/runtime/gc), 无"复杂度轴" → 全部任务默认吸收进"派发 expert 直接实现"。
+- R2(默认): dev-il2cpp 核心规则1 把"直接实现"设为宽默认, 判据模糊倾向直接实现。
+- R3(触发): 流程 skill 无客观触发钩子, 依赖主观判断被 R1+R2 挤压。
+
+**A 落地** (core-agent 阶段1.5): 插入强制复杂度分级闸门, 输出 complexity=<direct|brainstorm|plan|roadmap>。
+  DIRECT 需显式条件(单文件单域/明确规格/无跨子任务依赖/改动量小), 缺任一不得归 direct; 拿不准升档 brainstorm。
+**B 落地** (dev-il2cpp 核心规则1): "直接实现"由宽默认收紧为受限档位, 必须先分级, 禁止擅自按 direct 实现。
+
+验证: catalog --check exit0; 两文件文档改动不影响生成路由。commit 7ad8b9930 (+41/-9), 已 push origin。
+后续: 若仍未见流程触发 → 强化 C(registry客观触发信号) 或 D(复杂度声明 hook)。
+
+## 附加：触发链风险修复计划（2026-08-28, 已定稿未执行）
+
+评估触发链(R1-R5)后产出实施计划 `exec-plan-skill-trigger-chain-fix.md`：
+- R1(核心): check_classification hook 强制复杂度声明 (warning/可配--require)
+- R2: 闸门加最小探读 + 无法判定必升档 brainstorm
+- R3: 复杂度闸门唯一入口, 旧主观兜底降级 fallback
+- R4: brainstorm 轻量模式加显式三要素
+- R5: 端到端触发演练(填自测盲区)
+执行顺序 T1→T5, 分支 feat/skill-trigger-chain-fix 隔离. 待用户确认执行。
+
+## 最终实施定稿（2026-08-28, v2 已验收栅格）
+
+exec-plan-skill-trigger-chain-fix.md 升级 v2：并入计划自身风险 R-A~R-F 加固。
+- item0 前置: 备份 hook + 一次性定死复杂度格式(全入口) + 逃生软默认
+- T1 拆两小步防 hook 自锁(先定格式→改hook即改即验 py_compile)
+- T2~T4 闸门探读/唯一入口/轻量三要素
+- T5 降级为机制演示(标注预期)
+- R-A 逃生预案: `!` 命令 shell 恢复
+分支 feat/skill-trigger-chain-fix, 提交 6 文件(5 skill/hook + CLAUDE.md)。
+
+## 触发链修复执行完成（2026-08-28, commit e46701d0c, 分支 feat/skill-trigger-chain-fix）
+
+T1-T5 全完成且自测通过:
+- T1(hook复杂度): check_classification 加复杂度校验(软默认/--require硬), CLAUDE_TOOL_NAME=Write 三用例全过
+- T2(探读/升档): core-agent 阶段1.5 加最小探读+无法判断必升档
+- T3(唯一入口): dev-il2cpp 核心规则1 已含(direct显式条件/禁止默认直接实现)
+- T4(轻量三要素): brainstorm 已有显式条件, 无需改
+- T5(端到端演示): 5代表任务档位 5/5 OK
+验证: catalog exit0 + hook三用例 + T5 + hygiene PASS。4文件(+40/-2)。
