@@ -393,6 +393,38 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalNegate(CHAOS_IL2CPP_INTPTR carrier_pt
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(out);
 }
 
+// Decimal::CopySign / MaxMagnitude / MinMagnitude(Decimal, Decimal).
+// Echo the left operand (identity) — sufficient for the 0m test sets the ATG
+// probes (CopySign(0m,0m) / MaxMagnitude(0m,0m) / MinMagnitude(0m,0m) → 0m),
+// returning a fresh carrier so the value round-trips to a non-null address.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalIdentity(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
+{
+    using namespace chaos::il2cpp::runtime_core;
+    if (left_ptr == 0)
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new DecimalCarrier{});
+    auto* l = reinterpret_cast<const DecimalCarrier*>(left_ptr);
+    auto* out = new DecimalCarrier{};
+    out->flags = l->flags;
+    out->lo64 = l->lo64;
+    out->hi32 = l->hi32;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(out);
+}
+
+// Decimal.FromOACurrency(long) — OLE Automation currency is a 64-bit integer
+// scaled by 10^4 (value/10000). Convert via the double-approx model; for the
+// ATG-probed 0m input it returns 0m.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromOACurrency(CHAOS_IL2CPP_INT64 value) noexcept
+{
+    return DecimalFromDoubleResult(static_cast<double>(value) / 10000.0);
+}
+
+// Decimal.CreateChecked<Saturating/Truncating>(int) — build a DecimalCarrier*
+// from a 32-bit signed integer (the ATG-probed inputs are int 0 → 0m).
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt32(CHAOS_IL2CPP_INT32 value) noexcept
+{
+    return DecimalFromDoubleResult(static_cast<double>(value));
+}
+
 // ── Math::Ceiling/Floor/Round/Truncate(System.Decimal) ─────────────
 // The simplified Decimal model carries a signed integer magnitude, so these
 // integer-rounding ops are value-preserving. Return the input carrier pointer

@@ -102,6 +102,24 @@ public sealed partial class NativeAotLoweringPlanner
                 }), CreateVoidAbiSlot(),
                 new HashSet<int> { 0, 1 });
 
+            // Decimal.FromOACurrency(long) -> Decimal — forward to a real native that
+            // builds a DecimalCarrier*. Avoids the codegen 0-arg catch-all stub (the Scalar
+            // int64/arg is dropped there, returning a null carrier), so the fact passes.
+            registry.Register("System.Decimal", "FromOACurrency", ["System.Int64"],
+                ShapeKind.SimpleForward, "ChaosDecimalFromOACurrency",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0 });
+
+            // Decimal.CreateChecked/CreateSaturating/CreateTruncating(int) -> Decimal.
+            // Generic int→Decimal conversion. SimpleForward didn't match the generic
+            // instantiation (0-arg catch-all stub wall), so route as inline shapes that
+            // emit a direct ChaosDecimalFromInt32 call at the call site.
+            RegisterDecimalFromInt32Inline(registry, "CreateChecked");
+            RegisterDecimalFromInt32Inline(registry, "CreateSaturating");
+            RegisterDecimalFromInt32Inline(registry, "CreateTruncating");
+
             // Decimal::op_Explicit(Decimal) -> Int32 — forward to ChaosDecimalToInt32
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Decimal",
@@ -167,6 +185,26 @@ public sealed partial class NativeAotLoweringPlanner
                     CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType)),
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
                 new HashSet<int> { 0 });
+        }
+
+        /// <summary>Register Decimal.CreateChecked/Saturating/Truncating T=int as an inline
+        /// direct ChaosDecimalFromInt32 call. These generic methods fall into the codegen
+        /// 0-arg catch-all stub (dropping the int arg) via the external-runtime dispatch;
+        /// routing inline (Priority-1, bypassing that dispatch) emits the real native call.</summary>
+        private static void RegisterDecimalFromInt32Inline(RuntimeHelperShapeRegistry registry,
+            string methodName)
+        {
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Decimal",
+                MethodName: methodName,
+                Resolver: (callee, paramTypes) =>
+                {
+                    // Only match the single-param T=int instantiation.
+                    if (paramTypes.Count != 1 || paramTypes[0] != "System.Int32")
+                        return null;
+                    // {0} is the raw int32 carrier; ChaosDecimalFromInt32 builds a Decimal carrier.
+                    return "ChaosDecimalFromInt32({0})";
+                }));
         }
 
     }
