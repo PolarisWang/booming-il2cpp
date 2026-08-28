@@ -44,7 +44,13 @@
 
 ## 下一步
 
-单次整理性提交，仅含本次 7 个技能文件 + 本任务目录；不卷入并行线改动（gc 原生代码等）。等待用户确认后提交。
+已完成。提交 `70b0d118b` 精确含 10 文件、212 行（7 技能 + 3 任务目录），并行线改动未卷入。
+
+## 提交验证
+
+- `70b0d118b` docs(skill-evolve): superpowers 精华最小移植 + 三路径域路由集成
+- pre-commit hooks（check_arch/trace/layer-boundary/workaround-gate/gate/hygiene）全部 PASS
+- 误提交 `4e0dcc24f`（曾错误包含并行线 3 文件）已用 `git reset --mixed HEAD~1` 撤销并修正
 
 ## 边界声明
 
