@@ -450,6 +450,9 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalCeiling(CHAOS_IL2CPP_INTPTR carri
 extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalFloor(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
 extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
 extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigits(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 mode) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigitsMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits, CHAOS_IL2CPP_INT32 mode) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

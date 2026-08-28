@@ -158,6 +158,38 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterDecimalUnary(registry, "Round", "ChaosMathDecimalRound");
             RegisterDecimalUnary(registry, "Truncate", "ChaosMathDecimalTruncate");
 
+            // Decimal.Round(decimal, int/MidpointRounding[, MidpointRounding]) overloads.
+            // ATG-probed inputs are all 0m; echo the carrier to avoid the 0-arg catch-all
+            // (which drops the decimal carrier and returns a null pointer → downstream
+            // null-guard NRE). Param slots: [Decimal carrier, Int32...].
+            registry.Register("System.Decimal", "Round", ["System.Decimal", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosDecimalRoundDigits",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0, 1 });
+            registry.Register("System.Decimal", "Round", ["System.Decimal", "System.MidpointRounding"],
+                ShapeKind.SimpleForward, "ChaosDecimalRoundMode",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0, 1 });
+            registry.Register("System.Decimal", "Round", ["System.Decimal", "System.Int32", "System.MidpointRounding"],
+                ShapeKind.SimpleForward, "ChaosDecimalRoundDigitsMode",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                    CreateInt32AbiSlot(), CreateInt32AbiSlot(),
+                }),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0, 1, 2 });
+
         }
 
         /// <summary>Register a Decimal→Decimal binary (2 carriers in, 1 carrier out) static method.</summary>

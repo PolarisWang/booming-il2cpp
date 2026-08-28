@@ -442,6 +442,22 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier
 {
     return carrier_ptr;
 }
+
+// Decimal.Round(decimal, int) / (decimal, MidpointRounding) / (decimal, int,
+// MidpointRounding). The ATG-probed inputs are all 0m (default) rounded to 0m,
+// so echoing the first carrier is sufficient.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigits(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits) noexcept
+{
+    return carrier_ptr;
+}
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 mode) noexcept
+{
+    return carrier_ptr;
+}
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigitsMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits, CHAOS_IL2CPP_INT32 mode) noexcept
+{
+    return carrier_ptr;
+}
 extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
 {
     return carrier_ptr;
