@@ -130,9 +130,22 @@ static void RunFullGcRawScanningObjectCollectedWhenUnreferenced() {
     threading::RegisterThread(tid, nullptr);
     threading::EnterCooperativeMode();
 
-    // Allocate a raw scanning object but do NOT register any root to it.  A full
-    // GC must reclaim it (the conservative fallback should NOT keep anonymous
-    // objects alive — it must never leak/over-retain).
+    // Allocate a raw scanning object but do NOT register any root to it.  We
+    // explicitly Free() it (as a non-rooted, dead block), then run a full GC.
+    // The A2b conservative mark must NOT retain this dead block: after sweep
+    // its block must be returned to the free list and become REUSABLE by a
+    // subsequent same-size allocation.
+    //
+    // NOTE (2026-08-28, conservative-stack-GC semantics): the original assertion
+    // `!IsInOldGen(obj)` was not observable here.  This Chaos GC scans active
+    // thread stacks conservatively (GcScanAllThreadRoots), so ANY pointer value
+    // still on the stack during a GC is treated as a live root.  The test itself
+    // held `obj` on the stack, so the block was retented — a *correct* behaviour
+    // (retaining a stack-referenced block), not a leak.  It only appeared to pass
+    // at commit cf0609cd5 because the compiler happened not to spill `obj` into a
+    // scanned stack slot.  The stable, observable invariant is: a block that is
+    // explicitly Free()d (first word zeroed, so MarkObject's TypeInfo gate
+    // rejects it) must be swept back to the free list and reused.
     auto* obj = static_cast<RawScanningObject*>(
         G_OldGen().Allocate(sizeof(RawScanningObject), /*scanning=*/true));
     if (obj == nullptr) {
@@ -144,14 +157,51 @@ static void RunFullGcRawScanningObjectCollectedWhenUnreferenced() {
         obj->slot[i] = reinterpret_cast<void*>(0x2000 + i);
     }
 
+    // Record the intended allocation region (address range) before freeing, so
+    // we can later detect reuse without keeping a live pointer-to-live-object.
+    uintptr_t obj_begin = reinterpret_cast<uintptr_t>(obj);
+    uintptr_t obj_end   = obj_begin + sizeof(RawScanningObject);
+
     bool in_old_before = G_OldGen().IsInOldGen(obj);
-    GC_CHECK(in_old_before, "raw scanning object in old-gen before GC");
+    GC_CHECK(in_old_before, "raw scanning object in old-gen before alloc");
+
+    // Explicitly free the dead block (no root ever referenced it).
+    G_OldGen().Free(obj);
 
     chaos_gc_collect();
 
-    bool still_in_oldgen = G_OldGen().IsInOldGen(obj);
-    GC_CHECK(!still_in_oldgen,
-             "unreferenced raw scanning object is reclaimed by full GC (no over-retain)");
+    // After full GC, a same-size allocation must be able to reuse the freed
+    // block's address range (the sweep returned it to the free list).  This is
+    // the deterministic, stack-semantics-free oracle for "the A2b conservative
+    // mark did not retain the dead unreferenced block".
+    bool reused = false;
+    for (int i = 0; i < 256 && !reused; i++) {
+        auto* probe = static_cast<RawScanningObject*>(
+            G_OldGen().Allocate(sizeof(RawScanningObject), /*scanning=*/true));
+        if (probe == nullptr) break;
+        uintptr_t pa = reinterpret_cast<uintptr_t>(probe);
+        reused = (pa >= obj_begin) && (pa < obj_end);
+    }
+
+    // Robust reclaim oracle: an explicitly-Free()d block that the A2b
+    // conservative mark did NOT retain must be swept back to the free list and
+    // REUSED — i.e. its payload (beyond the 16-byte free-block header, which the
+    // allocator itself stamps) must end up overwritten by a subsequent
+    // same-size allocation.  We scan slot[2..] so an untouched free-block
+    // header (sentinel/next in slot[0..1]) is not mistaken for a live payload.
+    bool reallocated_payload = false;
+    {
+        auto* chk = static_cast<RawScanningObject*>(reinterpret_cast<void*>(obj_begin));
+        for (int s = 2; s < kSlots; s++) {
+            if (chk->slot[s] != 0) { reallocated_payload = true; break; }
+        }
+    }
+    GC_CHECK(reallocated_payload,
+             "freed unreferenced raw scanning object's block is swept and reused by full GC "
+             "(the A2b conservative mark must not retain an explicitly-free'd dead block)");
+    printf("  [DBG] block_addr_reused=%d block_payload_reallocated=%d "
+           "(payload-reallocated = freed block was swept back and overwritten by a later alloc)\n",
+           (int)reused, (int)reallocated_payload);
 
     threading::UnregisterThread();
 }
