@@ -299,9 +299,22 @@ TEST_F(YoungCollectorTest, ConservativeSweepSelfRefs) {
     // will promote objB through Phase 2 scan of objA.
     GcYoungCollection();
 
-    auto b_first_word = *static_cast<const uintptr_t*>(objB);
-    EXPECT_NE(b_first_word & 1u, 0u);
-
-    void* b_promoted = reinterpret_cast<void*>(b_first_word & ~1u);
-    EXPECT_FALSE(IsInNursery(b_promoted));
+    // Verified empirically (this exact scenario): the young GC is CORRECT here.
+    // Phase 0 (all-thread stack scan) promotes objA/objB and rewrites the calling
+    // thread's stack locals to the TENURED copies (so objA/objB below are tenured,
+    // not nursery).  Phase 3 BFS then fixes objA's interior ref (offset 8) from the
+    // reclaimed nursery objB to the promoted tenured objB.  After the collection:
+    //   objA/objB locals = tenured (IsInNursery false), objA->ptr8 = tenured objB,
+    //   objB payload intact (0xBABEBABE).
+    // The ORIGINAL assertion (objB_first_word & 1 != 0) assumed objB's local still
+    // aliased the nursery original with a forwarding-stamped tag — but the local was
+    // already rewritten to the tenured copy whose first word is the copied payload,
+    // NOT a forwarding tag.  Assert the real contract instead.
+    EXPECT_FALSE(IsInNursery(objB));                 // objB promoted (local now tenured)
+    EXPECT_FALSE(IsInNursery(objA));                 // objA promoted (local now tenured)
+    void* b_via_a = *reinterpret_cast<void**>(static_cast<uint8_t*>(objA) + 8);
+    EXPECT_FALSE(IsInNursery(b_via_a))               // objA->ptr rewritten off the nursery
+        << "objA->ptr still points into the reclaimed nursery (cross-gen UAF)";
+    EXPECT_EQ(*static_cast<const uint32_t*>(b_via_a), 0xBABEBABEu)
+        << "promoted objB must retain its payload";
 }
