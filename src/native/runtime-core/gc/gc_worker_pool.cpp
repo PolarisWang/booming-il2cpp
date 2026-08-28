@@ -71,9 +71,9 @@ void GcWorkerPool::Initialize(int count) noexcept {
     // deadlock Initialize forever.
     if (spawned > 0) {
         // 方案1: spawn 就绪等待从裸转改为有界 cv, 消除 spawn 阶段过订阅活锁。
-        // recall: 已注释死锁前 ready_count_ 被重置为 0, 新线程各 bump 一次, wait_for
-        // 1ms 兜底 (WorkerLoop 线程入口先 fetch_add ready_count_, 即使漏 notify 也
-        // 周期重查达成 spawned)。
+        // recall: 已注释死锁前 ready_count_ 被重置为 0, 新线程各 bump 一次, 由
+        // WorkerLoop 线程入口 bump 后的 cv_.notify_all() 即时唤醒; wait_for 1ms 仅
+        // 兜底(即便 notify 在 wait 前发出也不丢, 谓词重查达成 spawned)。
         int target = spawned;
         std::unique_lock<std::mutex> lock(mtx_);
         cv_.wait_for(lock, std::chrono::milliseconds(1),
@@ -145,6 +145,7 @@ void GcWorkerPool::WorkerLoop(int worker_idx) noexcept {
     // short forever and deadlocking Initialize() in an infinite spin.  Bumping
     // once at thread entry guarantees the spin always completes.
     ready_count_.fetch_add(1, std::memory_order_release);
+    cv_.notify_all();   // 方案1收口: 唤醒 Initialize 就绪屏障, 消除 1ms 轮询延迟
 
     while (!shutdown_.load(std::memory_order_acquire)) {
         // Fast-path: if round_ already changed while we weren't holding the

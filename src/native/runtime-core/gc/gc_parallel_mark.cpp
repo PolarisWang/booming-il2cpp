@@ -133,8 +133,11 @@ int FindPageIndexByAddr(ParallelMarkContext* ctx, uintptr_t addr) {
 void DestroyParallelMarkContext(ParallelMarkContext* ctx) {
     if (ctx == nullptr) return;
     if (ctx->workers) {
+        // MarkWorkerState 含两个 non-trivial 成员 (std::vector deque + std::mutex
+        // steal_mutex)。逐 worker 调用编译器生成析构, 统一销毁全部成员子对象,
+        // 避免只手动调用 deque.~vector() 遗留 steal_mutex 的半析构(类型不匹配)。
         for (int i = 0; i < ctx->worker_count; i++) {
-            ctx->workers[i].deque.~vector();
+            ctx->workers[i].~MarkWorkerState();
         }
         CHAOS_IL2CPP_FREE(ctx->workers);
     }
