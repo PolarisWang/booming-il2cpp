@@ -402,18 +402,22 @@ public sealed class ProbeEmitter
             using var process = Process.Start(psi);
             if (process is null) return false;
 
-            // Drain stdout/stderr FIRST, then wait for exit.
-            // Calling WaitForExit before ReadToEnd can deadlock when the
-            // child process fills a pipe buffer (default ~4KB) and blocks
-            // on writing, preventing it from exiting.
-            var output = process.StandardOutput.ReadToEnd();
-            var error = process.StandardError.ReadToEnd();
+            // Drain stdout/stderr ASYNCHRONOUSLY in the background, then wait for exit
+            // with a hard timeout.  Reading synchronously with ReadToEnd() first would
+            // block until the child CLOSES its stream — if the child hangs (never exits),
+            // ReadToEnd() never returns and the WaitForExit timeout below is never reached,
+            // so the ATG probe phase deadlocks forever.  Async drain + WaitForExit(timeout)
+            // makes the kill-on-hang enforceable.
+            var outputTask = process.StandardOutput.ReadToEndAsync();
+            var errorTask = process.StandardError.ReadToEndAsync();
 
             if (!process.WaitForExit(120_000))
             {
                 process.Kill();
                 process.WaitForExit(5_000);
             }
+            string output = outputTask.IsCompleted ? outputTask.Result : string.Empty;
+            string error = errorTask.IsCompleted ? errorTask.Result : string.Empty;
 
             success = process.ExitCode == 0;
             if (!success)
@@ -446,16 +450,18 @@ public sealed class ProbeEmitter
             using var process = Process.Start(psi);
             if (process is null) return results;
 
-            // Drain stdout FIRST to avoid pipe buffer deadlock, then
-            // wait for exit with timeout.
-            var output = process.StandardOutput.ReadToEnd();
-            var error = process.StandardError.ReadToEnd();
+            // Async drain (see RunDotnetBuild): synchronous ReadToEnd would block forever
+            // on a hung child, defeating the timeout. Async + WaitForExit(timeout) is
+            // enforceable kill-on-hang.
+            var outputTask = process.StandardOutput.ReadToEndAsync();
+            var errorTask = process.StandardError.ReadToEndAsync();
 
             if (!process.WaitForExit(15_000))
             {
                 process.Kill();
                 process.WaitForExit(5_000);
             }
+            string output = outputTask.IsCompleted ? outputTask.Result : string.Empty;
 
             foreach (var line in output.Split('\n', StringSplitOptions.RemoveEmptyEntries))
             {
