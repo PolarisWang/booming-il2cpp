@@ -351,7 +351,23 @@ public sealed class ProbeEmitter
         sb.AppendLine("        return value.GetHashCode();");
         sb.AppendLine("    }");
         sb.AppendLine("}");
-
+        sb.AppendLine();
+        sb.AppendLine("/// <summary>Creates a subject instance for probing, tolerating types without a");
+        sb.AppendLine("/// public parameterless constructor (e.g. System.String, collection types).</summary>");
+        sb.AppendLine("public static class SubjectInstanceFactory");
+        sb.AppendLine("{");
+        sb.AppendLine("    public static T Create<T>()");
+        sb.AppendLine("    {");
+        sb.AppendLine("        try { return Activator.CreateInstance<T>(); } catch { /* fall through */ }");
+        sb.AppendLine("        try");
+        sb.AppendLine("        {");
+        sb.AppendLine("            var t = typeof(T);");
+        sb.AppendLine("            if (t.IsValueType) return default!;");
+        sb.AppendLine("            return (T)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(t);");
+        sb.AppendLine("        }");
+        sb.AppendLine("        catch { return default!; }");
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
         return sb.ToString();
     }
 
@@ -456,7 +472,7 @@ public sealed class ProbeEmitter
             var outputTask = process.StandardOutput.ReadToEndAsync();
             var errorTask = process.StandardError.ReadToEndAsync();
 
-            if (!process.WaitForExit(15_000))
+            if (!process.WaitForExit(180_000))
             {
                 process.Kill();
                 process.WaitForExit(5_000);

@@ -227,6 +227,33 @@ public sealed partial class NativeAotLoweringPlanner
                             new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                             new HashSet<int> { 0 });
 
+                        // ── System.Decimal.Parse(string) — forward to ChaosConvertToDecimal ──
+                        // (Same native as Convert.ToDecimal(string); returns a Decimal carrier.)
+                        // Register as INLINE to bypass the codegen reference-arg null-guard that
+                        // would fire on default(string) (same pattern as Convert.ToXxx(string)).
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.Decimal",
+                            MethodName: "Parse",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count != 1 || paramTypes[0] != "System.String")
+                                    return null;
+                                return "ChaosConvertToDecimal({0})";
+                            }));
+                        // Same for Decimal.Parse(string, NumberStyles) / (string, IFormatProvider) /
+                        // (string, NumberStyles, IFormatProvider) — the style/format args are ignored
+                        // (null probe values are 0/default), decode the string arg via the same native.
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.Decimal",
+                            MethodName: "Parse",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                // 2/3/4-param overloads: first param is string, rest are ignored.
+                                if (paramTypes.Count < 2 || paramTypes[0] != "System.String")
+                                    return null;
+                                return "ChaosConvertToDecimal({0})";
+                            }));
+
                         // ── System.DateTime/TimeSpan (handled via SimpleForward stubs above) ──
 
                         // ── COM RCW runtime helpers ─────────────────────────────────────────

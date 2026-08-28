@@ -30,7 +30,11 @@
 #include <cerrno>
 #include <chrono>
 #include <cstring>
-#if !defined(_MSC_VER)
+#if defined(_MSC_VER)
+#include <windows.h>   // VirtualQuery / MEMORY_BASIC_INFORMATION (stack scan page probe)
+#else
+#include <unistd.h>    // sysconf(PAGESIZE)
+#include <sys/mman.h>  // mincore (POSIX stack page probe)
 #include <ucontext.h>
 #endif
 
@@ -705,7 +709,56 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
         // allocated separately via RegionManager and can sit below it).
         // The mark phase caller performs the authoritative GC-heap-membership
         // test, so this pre-filter only decides "worth reporting as a candidate".
+        //
+        // Committed-page guard (non-admin): before reading a stack slot that
+        // crosses a page boundary, check whether the target page is committed.
+        // If not, skip the entire page — uncommitted pages are not part of the
+        // live stack and cannot hold valid roots.  This eliminates the
+        // ASan-root-caused stack-buffer-underflow SEH (thread_state.cpp:709)
+        // that occurs when the stale entry-time stack_limit points below the
+        // thread's current committed stack depth.  Win32 uses VirtualQuery
+        // (State == MEM_COMMIT); POSIX uses mincore (non-zero map bits).
+        auto probe_page = [](uintptr_t addr) -> bool {
+#if defined(_WIN32)
+            MEMORY_BASIC_INFORMATION mbi;
+            return ::VirtualQuery(reinterpret_cast<const void*>(addr), &mbi, sizeof(mbi)) == sizeof(mbi) &&
+                   mbi.State == MEM_COMMIT;
+#else
+            unsigned char vec = 0;
+            // mincore fills vec with 1 bit (in-page) if the page is resident.
+            // A not-present page returns -1/ENOMEM, which we treat as not committed.
+            long r = ::mincore(reinterpret_cast<void*>(addr & ~(uintptr_t)4095), 1, &vec);
+            return r == 0 && (vec & 1);
+#endif
+        };
+#if defined(_WIN32)
+        // 4 KB on Windows x64.
+        static constexpr uintptr_t kPageSize = 4096;
+#else
+        static constexpr uintptr_t kPageSize = 4096;   // pagesize() for POSIX
+#endif
+        static constexpr uintptr_t kPageMask  = kPageSize - 1;
+        // Interior-pointer filter (CoreCLR-aligned, gcenv.ee.cpp L160-176):
+        // a stack slot whose VALUE points inside this thread's own stack
+        // ([stack_limit, stack_base)) is an INTERIOR stack pointer (e.g. a
+        // `&local` address a native frame may hold), NOT a GC-heap root.
+        char* th_limit = static_cast<char*>(thread->stack_limit);
+        char* th_base  = static_cast<char*>(thread->stack_base);
+        uintptr_t th_lo = reinterpret_cast<uintptr_t>(th_limit);
+        uintptr_t th_hi = reinterpret_cast<uintptr_t>(th_base);
         for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
+            // ── Page-commit probe ─────────────────────────────────
+            // If this slot is the first on its page (page-aligned), probe the
+            // page's commit status.  Uncommitted → skip the entire page.
+            if ((slot & kPageMask) == 0) {
+                if (!probe_page(slot)) {
+                    // Skip to the start of the next page; the - sizeof(void*)
+                    // is undone by the loop's += sizeof(void*).
+                    slot = (slot + kPageSize - 1) & ~kPageMask;
+                    slot -= sizeof(void*);
+                    continue;
+                }
+            }
             auto* val_ptr = reinterpret_cast<void**>(slot);
             // Probe sheds ASan only for genuinely poisoned redzone slots; live
             // stack slots stay instrumented (review #2/#4).
@@ -714,6 +767,16 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
                 read != nullptr &&
                 (reinterpret_cast<uintptr_t>(read) >= g_heap_base ||
                  IsInNursery(read))) {
+                // Skip stack-interior pointers: a value pointing within the
+                // scanned thread's stack is an interior reference, not a heap
+                // root.  (CoreCLR conservatively reports everything as
+                // INTERIOR|PINNED and never relocates it; here we must not even
+                // report it, since our relocation phase writes conservative
+                // root slots back.)
+                uintptr_t rv = reinterpret_cast<uintptr_t>(read);
+                if (rv >= th_lo && rv <= th_hi) {
+                    continue;
+                }
                 s_callback(reinterpret_cast<void*>(slot), /*is_interior=*/false, s_user_data);
             }
         }
