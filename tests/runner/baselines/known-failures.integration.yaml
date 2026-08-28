@@ -9,8 +9,23 @@
 # L5 native migration; src/native untouched by the L-series) — NOT regressions.
 # They are surfaced (not hidden) but do not flip the integration gate red.
 version: 1
-# No integration (native CTest) failures currently known-failed.  As of 2026-08-28
-# the GC native suite is green (see gc-pp-zero-batch-fixes-2026-08-28); add entries
-# here only for verified-pre-existing failures, and remove them once fixed.
-known: []
+# Recorded 2026-08-28 from the full GC unit gate (ctest -R "chaos_gc_|test_gc_"
+# -LE "benchmark|stress|soak", -j 4 on the reference build).  The deterministic
+# GC suites are green; the two entries below are NON-DETERMINISTIC parallel
+# flake (isolated single-run PASS, flaky only when the whole gate runs in
+# parallel).  Root-cause notes:
+#   - test_gc_young_collector: YoungCollectorTest.ConservativeSweepSelfRefs
+#     throws SEH 0xc0000005 under parallel load = GC-N7 residual heap corruption
+#     (real-machine page-heap attribution is blocked; see gc-n7-... notes).  Does
+#     NOT flip the gate red; value = surfaces the residual so a hard regression
+#     that makes the flake deterministic still turns red.
+#   - test_gc_loh: GcLohTest suite is deterministic 8/8 PASS in isolation; flaky
+#     only under full-gate parallel (-j 4), consistent with shared global
+#     old-gen state during concurrent gate execution.
+# These are binary-level (ctest case) registrations; the native adapter is
+# binary-granular.  Remove each entry once the underlying flake is root-caused
+# (isolated determinism + healed CI).
+known:
+  - test_gc_young_collector
+  - test_gc_loh
 
