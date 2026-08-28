@@ -68,7 +68,36 @@ Dispatcher 接收任务
 4. 建立会话级"il2cpp 态"
 ```
 
-### 阶段 2: 任务分解（Task Decomposition）
+### 阶段 1.5: 复杂度评估闸门（强制 — 决定走流程 or 直接实现）
+
+在任务分解(阶段 2)与域分发(阶段 3)之前，**必须先判定本轮任务的复杂度档位**，不能默认直接实现。
+这是 A+B 修订: 补上 core-agent 缺失的"复杂度轴", 让 brainstorm/writing-plans/executing-plans 有客观触发点:
+
+```
+对用户输入做复杂度分类, 输出一个档位:
+
+  [direct]   边界清晰 + 单会话 + 执行前提已确认 + 满足 DIRECT 显式条件(见下)
+  [brainstorm] 新功能/行为调整/流程重构/结构或 authority 未定/有影响执行的未决问题
+  [plan]     上游问题已清零 + 多步骤 + 需稳定交接执行
+  [roadmap]  明确跨会话 + 多阶段 + 有独立可派生子任务
+
+┌ DIRECT 显式条件(必须满足, 否则不算 direct) ─┐
+│ □ 单文件/单域改动, 无跨域 stub/符号依赖       │
+│ □ 用户已给出明确规格(不是"改进一下"这类开放需求) │
+│ □ 无跨子任务依赖(DAG 无分支汇合)              │
+│ □ 预计改动量小(局部修复/配置/文档)            │
+│ 不满足任何一条 → 不得归 direct, 升到上层档位     │
+└──────────────────────────────────────────┘
+
+分类结果 → 输出: "complexity=<direct|brainstorm|plan|roadmap>"
+- direct → 进入阶段 2/3 派发 expert 直接实现
+- brainstorm → 先调用 dev-brainstorm 清零执行前问题, 不直接实现
+- plan → 先走 dev-writing-plans(或 dev-roadmap 若多阶段) 再执行
+- roadmap → 先走 dev-roadmap 拆阶段
+```
+
+**复杂度闸门决策顺序**: 先看是否满足 DIRECT 显式条件; 不满足则按"影响执行的问题是否清零"分出 brainstorm(未清) / plan/roadmap(已清多步骤)。
+
 
 将用户输入的原始任务拆分为 **子任务清单**：
 

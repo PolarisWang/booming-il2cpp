@@ -123,14 +123,17 @@ dev-il2cpp（.claude/skills/ 唯一入口）
 
 ## 核心规则
 
-### 1. 在任何响应或行动前先选技能
+### 1. 在任何响应或行动前先选技能（含复杂度分级）
 
-- 默认的边界清晰、单会话、单目标任务，且执行前提已确认完毕：可直接实现；如果已存在正式任务目录，默认只维护 `STATUS.md`
-- 新功能、行为调整、流程重构，或仍存在任何影响执行的问题（边界、authority、结构、依赖、验收口径、阶段切分、启动条件）：先用 `dev-brainstorm`
-- 已有明确跨会话或多步骤任务，且上游问题已清零并得到用户确认：用 `writing-plans` 或 `roadmap`
-- 已有计划并开始推进：用 `executing-plans`
-- bug、回归、异常结果：先用 `systematic-debugging`
-- 完成前的结果确认：用 `verification-before-completion`
+**先做复杂度分级（与 core-agent 阶段 1.5 闸门一致），禁止默认直接实现：**
+
+- **DIRECT（可直接实现）** —— 必须**同时满足**：① 单文件/单域改动、无跨域 stub/符号依赖 ② 用户已给出明确规格(非"改进/看看"这类开放需求) ③ 无跨子任务依赖 ④ 预计改动量小(局部修复/配置/文档)。缺任一 → 不得归 DIRECT。
+- **BRAINSTORM（先用 dev-brainstorm）** —— 新功能、行为调整、流程重构，或仍存在影响执行的问题（边界、authority、结构、依赖、验收口径、阶段切分、启动条件）。清零前不直接实现。
+- **PLAN（先 dev-writing-plans / dev-roadmap）** —— 上游问题已清零 + 跨会话或多步骤 + 需稳定交接。多阶段主线用 dev-roadmap。
+- **EXECUTING（dev-executing-plans）** —— 已有计划并开始推进。
+- bug/回归/异常 → `systematic-debugging`；完成前确认 → `verification-before-completion`。
+
+> **注意**：`direct` 是受限档位而非默认。拿不准归属时**升档**到 brainstorm, 不擅自按 direct 实现。
 
 ### 2. 命中测试治理或 AOT obligation 任务时，先走 `project-test-governance`
 
