@@ -733,6 +733,21 @@ TLAB TlabClaimFromYoungGen() noexcept {
     // is nullptr and every allocation falls through to OldGen.
     // Use compare_exchange for thread safety — only one thread initializes.
     static std::atomic<int> s_young_gen_state{0};  // 0=uninit, 1=initing, 2=ready
+    //
+    // GC-N7 / double-init: RuntimeInit OR a test fixture (GcTestBase::SetUp) that
+    // calls InitYoungGeneration() directly leaves this private state at 0 (the
+    // fixture doesn't touch it), so the FIRST NurseryAllocate here re-ran
+    // InitYoungGeneration() — re-allocating BOTH the nursery and Gen1 regions and
+    // pointing g_young_gen.region/gen1_region at fresh addresses.  Any object
+    // allocated into the ORIGINAL regions before this point (e.g., a direct
+    // TryAllocateInGen1 in a test) is left in an orphaned region the next
+    // collection no longer scans → objects_promoted=0 / dangling (gen1
+    // SingleLiveObject bytes_promoted=0).  Make the lazy-init idempotent: if a
+    // region is already wired, InitYoungGeneration already ran — just mark ready,
+    // never re-allocate and strand live region owner.
+    if (g_young_gen.region.load(std::memory_order_acquire) != nullptr) {
+        s_young_gen_state.store(2, std::memory_order_release);
+    }
     int expected = 0;
     if (s_young_gen_state.compare_exchange_strong(expected, 1,
             std::memory_order_acq_rel, std::memory_order_acquire)) {
