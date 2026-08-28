@@ -509,6 +509,22 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
     // ── Phase 2: Precise object-by-object nursery scan ──
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase2_NurseryScan");
+        // GC-N7 (YoungGcPauseUnderLoad-class) Phase-2 safety: the precise scan
+        // derefs every slot in [scan_ptr, nursery_used) as a potential TypeInfo.
+        // Under multi-cycle timed_out young GCs + Gen1 relocation/resize churn the
+        // shared G_YoungGen().bump (or a recycled Region's begin) can desync from the
+        // live frontier, so nursery_used can exceed the committed nursery range and
+        // scan_ptr walks into unmapped memory → SEH.  Confine the walk ALWAYS to the
+        // nursery Region's committed [begin, end) and advance only within it; a slot
+        // beyond the true live frontier simply holds no valid typed header (safe skip),
+        // never a wild deref.  This hardens against the corrupt-state crash; the deep
+        // bump/region desync root is tracked separately (真机上 page-heap 定位).
+        uintptr_t region_begin = reinterpret_cast<uintptr_t>(nursery->begin);
+        uintptr_t region_end   = reinterpret_cast<uintptr_t>(nursery->end);
+        if (nursery_used > region_end) nursery_used = region_end;
+        if (nursery_begin < region_begin) nursery_begin = region_begin;
+        if (nursery_begin > region_end) nursery_begin = region_end;
+
         uintptr_t scan_ptr = nursery_begin;
         auto& layout_registry = GcLayoutRegistry::Instance();
 
@@ -545,6 +561,10 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
         const GcTypeLayout* last_layout = nullptr;
 
         while (scan_ptr < nursery_used) {
+            // Phase-2 always advances within the committed nursery; if a corrupt
+            // layout / size ever pushes scan_ptr past region_end (or below begin),
+            // stop walking instead of dereferencing unmapped memory.
+            if (scan_ptr < region_begin || scan_ptr >= region_end) break;
             auto* obj = reinterpret_cast<void*>(scan_ptr);
             const void* first_word = *static_cast<const void* const*>(obj);
             if (first_word == nullptr) {
@@ -581,6 +601,9 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
             uint32_t obj_size = layout->instance_size;
             for (uint16_t i = 0; i < layout->pointer_count; i++) {
                 uint16_t offset = layout->pointer_offsets[i].offset;
+                // Never read an interior pointer slot beyond the committed nursery
+                // (a corrupt layout could carry an oversize offset or size).
+                if (scan_ptr + offset >= region_end) break;
                 auto* slot = reinterpret_cast<void**>(scan_ptr + offset);
                 void* val = *slot;
                 if (val == nullptr) continue;
@@ -591,7 +614,13 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
                     }
                 }
             }
-            scan_ptr += obj_size;
+            // Bounded advance: never step past the committed region.
+            if (obj_size == 0 || scan_ptr >= region_end ||
+                scan_ptr + obj_size > region_end) {
+                scan_ptr = region_end - sizeof(void*);
+            } else {
+                scan_ptr += obj_size;
+            }
         }
     }
     pt.phase2_ns = static_cast<uint64_t>(std::chrono::duration_cast<
