@@ -501,6 +501,12 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 2. **值类型嵌套引用写屏障（runtime GC-heap-pointer 检测函数）**：当前 codegen 通过 `chaos_gc_dirty_card(chaos_value_owner)` 对任意值类型赋值触发写屏障，存在假阳性（栈上值类型不需要 DirtyCard），可增加 runtime GC-heap-pointer 检测函数避免不必要的 barrier
 3. **完整 GCMemoryInfo 结构体（BCL 侧）**：native 侧 `GcMemoryInfoNative` 结构已实现并可通过 `chaos_gc_get_memory_info()` 获取，但 BCL 侧缺少对应的 `GCMemoryInfo` 托管类型定义
 
+**2026-08-28 复核补充**（与源码实测对齐，校正"全部已解决"的过度声明）：
+- **GC-N7 `YoungGcPauseUnderLoad` 非确定性堆破坏仍在**（`GcYoungCollection:537` AV + teardown `c0000374`，同代码 8%~73%，A/B/C 已 revert，需真机 page-heap）→ 不是"全部已解决"。
+- **cross-test 全局态 flakiness 预存在**：多个 GC TEST_F 共享 `g_young_gen`/nursery 全局态，完整套件下 `YoungCollectorTest` 的 `GcYoungCollection()` 偶发 SEH（N7 同源），隔离稳定。
+- **verify 工具 (CHAOS_GC_HeapVerify=2) 已可靠化**（2026-08-27/28）：demotion GcVerify 误判、region-gen 跨池 clobber（现分类良性 WARN）、bitmap-poison 假阳性、untyped raw 对象 first-word 假阳性均已修。
+- **本轮已修并提交**：`786c3fcb8`(Phase-2 OOB)/`db5aef81a`(双-init)/`4ed90d72e`(ConservSweep 断言)/`0c23c6326`(A2b verify)。
+
 ## P1-P3 扩展功能（2026-05 完成）
 
 以下 6 项扩展功能在 GC P1/P2/P3 阶段完成，覆盖寄存器根枚举、写屏障补齐、GC Stress 模式、NO_GC_REGION、静态根注册和 NUMA 感知。
