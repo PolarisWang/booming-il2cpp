@@ -9,23 +9,8 @@
 # L5 native migration; src/native untouched by the L-series) — NOT regressions.
 # They are surfaced (not hidden) but do not flip the integration gate red.
 version: 1
-known:
-  # BGC root scan (pre-existing, very slow ~392s; verified still-hanging / not passing)
-  - "chaos_gc_bgc_root_scan_test"
-  # Cross-gen write-barrier stress (A2b) — REMOVED 2026-08-13: the "dangling"
-  # residual was a TEST-VALIDITY-CHECK GAP, not a real UAF.  The post-check only
-  # recognized nursery+old-gen (IsNurseryPointer / IsInOldGen), omitting GEN1
-  # (Survivor) where young-GC promotes 128-byte nursery objects.  Every reported
-  # "dangling" pointer was a live, correctly-referenced Gen1 object (classified
-  # via GetRegionGen: all managed-gen, 0 unknown).  Fixed the check to accept
-  # young(0)/gen1(1)/old(2) region generations → 20/20 PASS.  The cf0609cd5
-  # conservative-mark fix (TypeInfo-less raw scanning) plus the complete validity
-  # check now keep the concurrent barrier green; regression of either re-opens
-  # this.  Re-add here if dangling returns.
-  # (Stress-tier tiering is intentional: it stays `stress`-labeled, so the fast
-  #  `-LE benchmark|stress|soak` gate excludes it; the nightly stress tier runs it as PASS.)
-  # ── Removed 2026-08-13 (verified passing, stale pre-07 baseline) ──
-  #   test_jit_native (71/71)  test_jit_il_smoke (18+1skip)  test_jit_unwind (5/5)
-  #   test_jit_mode (12/12)    test_jit_pgo (6/6)            chaos_interpreter_bridge_test (exit 0)
-  #   com_ccw (28/28, ResolveCcw direct-vs-identity fixed)   com_ccw_stress (4/4, same fix, was SEGFAULT)
+# No integration (native CTest) failures currently known-failed.  As of 2026-08-28
+# the GC native suite is green (see gc-pp-zero-batch-fixes-2026-08-28); add entries
+# here only for verified-pre-existing failures, and remove them once fixed.
+known: []
 
