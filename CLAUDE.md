@@ -8,7 +8,7 @@
 > 已在该域中的简单回复（"继续"/"ok"/"A"）不需要重复输出。
 >
 > **执行协议（🔴 每一步必须执行）**：
-> 0. 输出分类声明 → `echo "本轮任务涉及..." > .claude/.classified`；`echo 'loaded_expert:dev-il2cpp→{expert}' >> .claude/.classified`
+> 0. 输出分类声明 → `echo "本轮任务涉及..." > .claude/.classified`；`echo 'loaded_expert:dev-il2cpp→{expert}' >> .claude/.classified`；`echo 'complexity={direct|brainstorm|plan|roadmap}' >> .claude/.classified`
 > 1. **强制**：在分类声明后、任何其他工具使用前，调用 `Skill("dev-il2cpp")` 加载入口技能
 >    — 这不是可选项。跳过此步骤会被 hook 拦截。
 > 2. **🔴 强制阻断门**：按 dev-il2cpp 的路由协议加载对应知识

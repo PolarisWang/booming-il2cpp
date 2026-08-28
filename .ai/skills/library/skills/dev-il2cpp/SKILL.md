@@ -90,8 +90,13 @@ dev-il2cpp（.claude/skills/ 唯一入口）
    ```bash
    echo "dev-il2cpp-codegen-expert" >> .claude/.loaded_skills_cache
    ```
+7. **声明复杂度档位**（复杂度闸门, 见 core-agent 阶段1.5）：
+   ```bash
+   echo "complexity={direct|brainstorm|plan|roadmap}" >> .claude/.classified
+   ```
+   > 取值规则: DIRECT 需满足显式条件(单文件单域/明确规格/无跨子任务依赖/改动量小); 新功能/结构未定/有未决问题 → brainstorm; 已清零多步骤 → plan; 跨会话多阶段 → roadmap。无法判断 → 升档 brainstorm。
 
-> ⚠️ 不执行步骤 1-6 会导致 hook 阻断后续工具调用。`dev-il2cpp` 必须出现在 `loaded_expert:` 行的首位，且 `loaded_skills_cache` 必须写入对应条目。
+> ⚠️ 不执行步骤 1-7 会导致 hook 阻断后续工具调用。`dev-il2cpp` 必须出现在 `loaded_expert:` 行的首位，且 `loaded_skills_cache` 必须写入对应条目。
 
 ## 路由协议（强制 — 从 CLAUDE.md 分类门进入）
 

@@ -98,6 +98,11 @@ Dispatcher 接收任务
 
 **复杂度闸门决策顺序**: 先看是否满足 DIRECT 显式条件; 不满足则按"影响执行的问题是否清零"分出 brainstorm(未清) / plan/roadmap(已清多步骤)。
 
+**判定前最小探读 + 必升档规则**:
+- 判定前可做**最小探读**(ls 目标目录 / 看关键符号表 / 扫函数签名) 快速获真实复杂度线索, 避免凭空猜"单域/小改动"。
+- **无法确定复杂度时 → 必须升档 to brainstorm**, 不得保守归 direct(消除"读代码才能判断 → 倾向直接实现"的死循环)。
+- 复杂度声明写回 `.claude/.classified` 末行 `complexity=<direct|brainstorm|plan|roadmap>`(hook 会校验, R1)。
+
 
 将用户输入的原始任务拆分为 **子任务清单**：
 

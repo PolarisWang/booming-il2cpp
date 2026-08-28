@@ -229,4 +229,32 @@ if missing:
         print(f"     - {skills_base / m / 'SKILL.md'}", file=sys.stderr)
     sys.exit(1)
 
+# ───────────────────────────────────────────────────────────────────
+# 复杂度评估闸门声明校验 (v2: A+B 复杂度强制化)
+# 默认软: 缺失/非法仅 stderr warning, 不 block (避免拖累会话/并行线)。
+# --require-complexity: 显式开启时才视缺失为硬失败 (逃生线未开则不拦)。
+# 格式: .classified 末行 `complexity=<direct|brainstorm|plan|roadmap>`
+# ───────────────────────────────────────────────────────────────────
+_VALID_COMPLEXITY = ("direct", "brainstorm", "plan", "roadmap")
+
+def _parse_complexity(content: str) -> str | None:
+    for line in content.splitlines():
+        if line.strip().startswith("complexity="):
+            val = line.strip().split("=", 1)[1].strip().lower()
+            return val if val in _VALID_COMPLEXITY else None
+    return None  # 未声明
+
+_req = "--require-complexity" in __import__("sys").argv
+_complexity = _parse_complexity(classified_content)
+if _complexity is None:
+    if _req:
+        print(file=sys.stderr)
+        print("  ⚠️  [--require-complexity] .classified 缺少复杂度声明 complexity=<direct|brainstorm|plan|roadmap>！", file=sys.stderr)
+        sys.exit(1)
+    else:
+        print("  [warn] .classified 未声明复杂度档位 (complexity=direct|brainstorm|plan|roadmap, 软提醒非阻断)", file=sys.stderr)
+elif _complexity not in _VALID_COMPLEXITY:
+    # 已在 _parse_complexity 归一为 None, 此处仅防御
+    pass
+
 sys.exit(0)
