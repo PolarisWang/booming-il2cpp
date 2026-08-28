@@ -42,6 +42,24 @@ clearance_confirmed_by_user: true
 - 批次 3：**GC-N10（provisional 完整，高记忆+高碎片→NGC2 强制 compact）`202c62f22`、GC-N11（BGC 阶段事件族+原因位图）`d35d78dcd`、GC-N9（Dynamic Heap Count，Server-compile 通过、runtime 待 GC-N3 harness）`a77aff4dd` 已提交**。GC-N12（profile 调参）依赖 GC-N7 稳定 Release 基准 + 真机 page-heap 修复残余。
 - 约束满足方式：每子任务按 roadmap 三约束原则（多平台纯 C++ / JIT-AOT 同符号 / 热更兼容入口）+ 架构优先前置。
 
+## 2026-08-28 P0 批次复核（GC 验证重跑 + 稳定失败修复）
+
+整体 review（`docs/dev/in-progress/gc-align-coreclr/gc-legacy-plan-review-2026-08-27.md`）后，重跑 GC 验证并修复了全部稳定测试失败 + verify 工具可靠性：
+
+| 项 | 提交 | 根因/结论 |
+|----|------|----------|
+| **P0#1** `test_gc_max_promote` SEH | `786c3fcb8` | GC-N7 类 Phase-2 out-of-bounds scan（dang TypeInfo deref）→ Phase-2 confine region |
+| **P0#2** `test_gc_gen1.SingleLiveObject` | `db5aef81a` | 惰性二次 `InitYoungGeneration` orphan gen1 对象 → 幂等 lazy-init |
+| **P0#3** `ConservativeSweepSelfRefs` | `4ed90d72e` | GC 正确、测试断言不可观测 → 断言真实晋升+跨引用契约 |
+| **P0#4** A2b untyped | `0c23c6326` | verify 假阳性（interior+raw）→ skip interior + 接受 untyped |
+| **可信度** 基线 reconcile | `c7d6c56fd` | 移除 stale bgc_root_scan known-failure（现 4/4 PASS）|
+
+**验证**：默认模式 GC 全量绿（young_collector 6/6、gen1 14/14、max_promote 4/4、demotion 6/6、full_gc 5/5、old_gen 6/6）；`CHAOS_GC_HeapVerify=2` 下 demotion/old_gen 0 hard ERROR。
+
+**确认残局**：
+- **GC-N7 `YoungGcPauseUnderLoad` 堆破坏未闭合**（需真机 page-heap），并表现为 full-suite 的 cross-test 全局态 flakiness（多个测试体 `GcYoungCollection()` 偶发 SEH），隔离稳定。
+- full_gc HeapVerify=2 的 bitmap-poison 47 = `GcMarkBitmap::Clear()` 清零 poison 的 verify 假阳性（非 OOB）。
+
 ## 关键文档
 
 - `docs/dev/in-progress/gc-align-coreclr/roadmap-v2-01.md`
