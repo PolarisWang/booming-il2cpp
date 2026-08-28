@@ -87,6 +87,16 @@ Dispatcher 接收任务
 
 循环执行直到待办清单为空。单域当前 Agent 自行实现，多域走 Workflow 委托。
 
+**三路径前置分类判定（先于分发）：**
+
+对每个 todo 子任务，先按 `expert-registry.json` 的 `task_classification` 分类到 spike / bounded / architectural：
+
+- **spike** → `brainstorm: bypass`：不强制完整 brainstorm，直接查证并报告结论；临时产物标 throwaway。
+- **bounded** → `brainstorm: lightweight`：对话内短设计 + 用户明确批准后直接实现，走 `STATUS.md` 轻量维护；审批门槛与架构级一样硬。
+- **architectural** → `brainstorm: full`：必须先 `dev-brainstorm` 清零执行前问题、拿到用户确认，再进入本 dispatch。
+
+**单向棘轮**：执行中发现隐藏复杂度必须升级分类（bounded→architectural），永不中途降级；“拿轻 label 逃避”即取更重路径。分类结果与决策写入 `.claude/.classified` 与当前任务 `STATUS.md`。
+
 ```
 todo = [子任务清单]       ← 初始 = 阶段 2 的输出
 round = 0

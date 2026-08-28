@@ -3,6 +3,25 @@
   "last_updated": "2026-06-14",
   "description": "单一权威源 — 所有域定义、Expert 映射、路由信息集中在此。其他文件只引用本 JSON，不重复定义。",
 
+  "task_classification": {
+    "_comment": "三路径前置分类，决定是否绕过完整 brainstorm。与 domains 计数路由互补：先判路径，再按域数决定 self/Workflow。",
+    "spike": {
+      "brainstorm": "bypass",
+      "route": "self",
+      "note": "可行性探针，输出答案是结论不是代码；不写 design/plan，临时产物标 throwaway"
+    },
+    "bounded": {
+      "brainstorm": "lightweight",
+      "route": "domain-expert",
+      "note": "有现成 flow 可改的存量改动；对话内短设计 + 明确批准后直接实现，走 STATUS.md 轻量维护"
+    },
+    "architectural": {
+      "brainstorm": "full",
+      "route": "brainstorm-then-plan",
+      "note": "新功能/新子系统/改他人依赖接口；必须 dev-brainstorm 清零问题 -> writing-plans/roadmap"
+    }
+  },
+
   "domains": {
     "1": {
       "name": "runtime",
