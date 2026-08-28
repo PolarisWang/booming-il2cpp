@@ -41,6 +41,13 @@
       "args": [],
       "timeout": 60,
       "description": "Surface agent one-shot/diagnostic scripts in scripts/ (tmp_/_spy*/_build*/.exe) — advisory WARN."
+    },
+    {
+      "name": "git-lock",
+      "module": "check_git_lock",
+      "args": [],
+      "timeout": 30,
+      "description": "Diagnose .git/index.lock holder + surface safe stale-lock clean. Advisory WARN (never fails the gate); --clean-stale does the actual delete. Prevents multi-agent/VS Code lock contention from silently blocking git writes."
     }
   ]
 }
