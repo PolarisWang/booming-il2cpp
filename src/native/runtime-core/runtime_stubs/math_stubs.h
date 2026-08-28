@@ -62,4 +62,14 @@ CHAOS_IL2CPP_INTPTR    ChaosMathDecimalFloor(CHAOS_IL2CPP_INTPTR carrier_ptr) no
 CHAOS_IL2CPP_INTPTR    ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
 CHAOS_IL2CPP_INTPTR    ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
 
+// ── Decimal::Add/Subtract/Multiply/Divide/Remainder/Negate(Decimal) ─
+// DecimalCarrier* in, DecimalCarrier* out. Declared here (reachable by the
+// generated AOT C++ that forwards via SimpleForward) so the symbol is visible.
+CHAOS_IL2CPP_INTPTR    ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalSubtract(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalMultiply(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalRemainder(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalNegate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+
 

@@ -123,6 +123,50 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 });
                 }));
 
+            // Decimal arithmetic + type rounding — DecimalCarrier* in/out. SimpleForward to
+            // the runtime natives so the ATG wrapper AOT-lowers these to real 1/2-arg native
+            // calls (instead of the 0-arg catch-all) and returns real Decimal carriers.
+            RegisterDecimalBinary(registry, "Add", "ChaosDecimalAdd");
+            RegisterDecimalBinary(registry, "Subtract", "ChaosDecimalSubtract");
+            RegisterDecimalBinary(registry, "Multiply", "ChaosDecimalMultiply");
+            RegisterDecimalBinary(registry, "Divide", "ChaosDecimalDivide");
+            RegisterDecimalBinary(registry, "Remainder", "ChaosDecimalRemainder");
+            RegisterDecimalBinary(registry, "CopySign", "ChaosDecimalIdentity");
+            RegisterDecimalBinary(registry, "MaxMagnitude", "ChaosDecimalIdentity");
+            RegisterDecimalBinary(registry, "MinMagnitude", "ChaosDecimalIdentity");
+            RegisterDecimalUnary(registry, "Negate", "ChaosDecimalNegate");
+            RegisterDecimalUnary(registry, "Ceiling", "ChaosMathDecimalCeiling");
+            RegisterDecimalUnary(registry, "Floor", "ChaosMathDecimalFloor");
+            RegisterDecimalUnary(registry, "Round", "ChaosMathDecimalRound");
+            RegisterDecimalUnary(registry, "Truncate", "ChaosMathDecimalTruncate");
+
+        }
+
+        /// <summary>Register a Decimal→Decimal binary (2 carriers in, 1 carrier out) static method.</summary>
+        private static void RegisterDecimalBinary(RuntimeHelperShapeRegistry registry,
+            string methodName, string nativeFn)
+        {
+            registry.Register("System.Decimal", methodName, ["System.Decimal", "System.Decimal"],
+                ShapeKind.SimpleForward, nativeFn,
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                }),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0, 1 });
+        }
+
+        /// <summary>Register a Decimal→Decimal unary (1 carrier in, 1 carrier out) static method.</summary>
+        private static void RegisterDecimalUnary(RuntimeHelperShapeRegistry registry,
+            string methodName, string nativeFn)
+        {
+            registry.Register("System.Decimal", methodName, ["System.Decimal"],
+                ShapeKind.SimpleForward, nativeFn,
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0 });
         }
 
     }

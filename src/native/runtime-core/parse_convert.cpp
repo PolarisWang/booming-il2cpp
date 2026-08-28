@@ -308,6 +308,8 @@ static CHAOS_IL2CPP_INTPTR DecimalFromDoubleResult(double result)
 extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
 {
     using namespace chaos::il2cpp::runtime_core;
+    if (left_ptr == 0 || right_ptr == 0)
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new DecimalCarrier{});  // 0 + x -> 0m
     auto* l = reinterpret_cast<const DecimalCarrier*>(left_ptr);
     auto* r = reinterpret_cast<const DecimalCarrier*>(right_ptr);
     double ld = static_cast<double>(static_cast<CHAOS_IL2CPP_INT64>(l->lo64));
@@ -356,6 +358,39 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, 
             "Attempted to divide by zero.");
     }
     return DecimalFromDoubleResult(ld / rd);
+}
+
+// Decimal remainder (a % b) and unary negate, matching the double-approx model.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRemainder(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
+{
+    using namespace chaos::il2cpp::runtime_core;
+    if (left_ptr == 0 || right_ptr == 0)
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new DecimalCarrier{});
+    auto* l = reinterpret_cast<const DecimalCarrier*>(left_ptr);
+    auto* r = reinterpret_cast<const DecimalCarrier*>(right_ptr);
+    double ld = static_cast<double>(static_cast<CHAOS_IL2CPP_INT64>(l->lo64));
+    double rd = static_cast<double>(static_cast<CHAOS_IL2CPP_INT64>(r->lo64));
+    if (l->flags & 0x80000000u) ld = -ld;
+    if (r->flags & 0x80000000u) rd = -rd;
+    if (rd == 0.0) {
+        chaos::il2cpp::runtime_core::RaiseManagedException(
+            "System.DivideByZeroException",
+            "Attempted to divide by zero.");
+    }
+    return DecimalFromDoubleResult(std::fmod(ld, rd));
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalNegate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
+{
+    using namespace chaos::il2cpp::runtime_core;
+    if (carrier_ptr == 0)
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new DecimalCarrier{});
+    auto* src = reinterpret_cast<const DecimalCarrier*>(carrier_ptr);
+    auto* out = new DecimalCarrier{};
+    out->flags = src->flags ^ 0x80000000u;   // flip sign
+    out->lo64 = src->lo64;
+    out->hi32 = src->hi32;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(out);
 }
 
 // ── Math::Ceiling/Floor/Round/Truncate(System.Decimal) ─────────────
