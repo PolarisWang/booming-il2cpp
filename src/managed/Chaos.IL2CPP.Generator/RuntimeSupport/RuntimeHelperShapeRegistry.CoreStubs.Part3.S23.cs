@@ -326,6 +326,54 @@ public sealed partial class NativeAotLoweringPlanner
                                 return "chaos_gc_keepalive({0}), static_cast<CHAOS_IL2CPP_INTPTR>(42)";
                             }));
 
+                        // ── System.Exception/AggregateException.GetBaseException — inline ──
+                        // SubjectInstanceFactory.Create<AggregateException>() returns null (no
+                        // public parameterless ctor) → null-guard fires → NRE → fail.  The native
+                        // ChaosExceptionGetBaseException tolerates null input.  Inline to bypass.
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.Exception",
+                            MethodName: "GetBaseException",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count != 0) return null;
+                                return "ChaosExceptionGetBaseException({0})";
+                            })
+                        { IsInstanceMethod = true });
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.AggregateException",
+                            MethodName: "GetBaseException",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count != 0) return null;
+                                return "ChaosExceptionGetBaseException({0})";
+                            })
+                        { IsInstanceMethod = true });
+
+                        // ── System.Random.NextDouble — inline, ChaosRandomNextDouble ignores
+                        // the instance so null is fine.
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.Random",
+                            MethodName: "NextDouble",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count != 0) return null;
+                                return "ChaosRandomNextDouble({0})";
+                            })
+                        { IsInstanceMethod = true });
+
+                        // ── System.Activator.CreateInstance<T>() — inline returning 0. ──
+                        // The generic CreateInstance returns default(T)=0 for value types.
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.Activator",
+                            MethodName: "CreateInstance",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count == 0) return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+                                return null;
+                            }));
+
+                        // ── System.String.Join(string, string[]) — already registered in S10.
+                        // (Duplicate registration here would throw InvalidOperationException.)
                         // ── System.Int32/Int64/Double::Parse stubs ─────────────────────────
                         registry.Register("System.Int32", "Parse", ["System.String"],
                             ShapeKind.SimpleForward, "ChaosParseInt32",
