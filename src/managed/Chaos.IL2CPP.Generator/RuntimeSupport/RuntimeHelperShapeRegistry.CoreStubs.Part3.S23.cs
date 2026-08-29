@@ -372,6 +372,30 @@ public sealed partial class NativeAotLoweringPlanner
                                 return null;
                             }));
 
+                        // ── System.BitConverter.GetBytes(Single) — inline to ChaosBitConverterGetBytesFromSingle ──
+                        // The GenericShapeDescriptor in S21.cs returns a NativeInt ABI slot, but the
+                        // subject wrapper's codegen mis-infers the return ABI as Float32 from the
+                        // input parameter, causing ChaosStoreFloat32 which truncates the byte[] pointer.
+                        // Inline shape (Priority-1) bypasses this ABI confusion.
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.BitConverter",
+                            MethodName: "GetBytes",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count == 1 && paramTypes[0] == "System.Single")
+                                    return "ChaosBitConverterGetBytesFromSingle({0})";
+                                return null;
+                            }));
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.BitConverter",
+                            MethodName: "GetBytes",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count == 1 && paramTypes[0] == "System.Double")
+                                    return "ChaosBitConverterGetBytesFromDouble({0})";
+                                return null;
+                            }));
+
                         // ── System.String.Join(string, string[]) — already registered in S10.
                         // (Duplicate registration here would throw InvalidOperationException.)
                         // ── System.Int32/Int64/Double::Parse stubs ─────────────────────────
