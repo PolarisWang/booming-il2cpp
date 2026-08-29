@@ -18,18 +18,29 @@ description: 代码审查结果修复专属入口。收到代码审查反馈时�
 
 > ⚠️ **为什么禁止先读代码**：惯性"先看一下文件再说"会导致延迟派发、上下文浪费、分工粒度粗糙。review 结果的可靠性已由出具方保证；你只需做"是否值得修"的**最小化**核实（如反例可否被源码证明），而非"复核每个 finding"。
 
-## review → 域分类 → Workflow 派发流程
+## review → 域分类 → 派发流程
 
 ```
 收到 review 结果（N 条 finding）
   │
   ├── 按文件所属域把所有 finding 分组（GC / native / codegen / ATG / 工具 / 文档 / ...）
+  │
   ├── ≥2 域 → 启动多域 Workflow：
   │     每个域 = 一个 expert agent（含"该域全部 finding"）
   │     一次性并行派出全部 agent（不要分批 3+3）
-  ├── 全部 agent 完成后 → 统一 review 合并质量
-  └── 验证 → commit（三段式 root_cause/fix_strategy/regression_check）× push
+  │
+  ├── 单域（所有 finding 落于同一域）→ 当前 Agent 自行实现：
+  │     按 CLAUDE.md 流程自行修复，无需派发 Workflow 子 agent
+  │
+  └── 全部 finding 处理完成后：
+       ├── 验证 → 按 CLAUDE.md「统一测试入口」强制自测：
+       │    python tests/runner/test_driver.py --layer unit
+       │    出现非 known 的 [FAIL]（OVERALL: FAILED）即为真实回归，须修复后再推
+       │    报告见 tests/runner/test-report.json
+       └── commit（三段式 root_cause/fix_strategy/regression_check）× push
 ```
+
+> ⚠️ **域计数说明**：CLAUDE.md「代码审查触发」要求"按审查结果场景映射到 ≥2 域规则"，这是指**路由协议**（走 review-fix-expert 而非直接实现），不改变实际域数。按文件→域分组后，若实际落于单域，按上方单域路径执行。
 
 ## 分工原则
 

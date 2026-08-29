@@ -11,8 +11,8 @@
 
 - **分支**：`main`（`D:/agent/chaos-il2cpp` 主目录，session 已清空）
 - **HEAD**：`6ec1a180d`（fact-266 提交见 §4）
-- **已实现结果**：foundation-dll `system-2`(System.Private.CoreLib) fact **2551 → 2614 / 2825**（净 **+63 passed**，failed 274→211）
-- **剩余**：**211 failed**：String 91 / Type 87 / Enum 4 / Convert 2 / Decimal-behavioral 11 / 其它 ~16
+- **已实现结果**：foundation-dll `system-2`(System.Private.CoreLib) fact **2551 → 2614 / 2825**（净 **+63 passed**，failed 274→211→207）
+- **剩余**：**207 failed**：String 91 / Type 87 / Enum 4 / Convert 2 / Decimal-behavioral 7 / 其它 ~16
 - **工作区未提交**：`gc_old_gen.cpp`(并发 GC 线)、`subjects.metadata.json`、`scripts-hygiene-audit.md`(并发)、
   我的 `handoff-2026-08-27.md` + `execution-plan`(文档未 commit，交接用)。**勿把这些并发改动混入 fact-266 commit。**
 
@@ -91,7 +91,7 @@
 
 ---
 
-## 5. 剩余 211 failed（行为/反射族，难低产）
+## 5. 剩余 207 failed（行为/反射族，难低产）
 
 - **String 91 / Type 87 / Enum 4**：反射元数据 / 格式化，ABI 复杂。
 - **Convert 2**：`default(string)`→parse 应抛 FormatException（行为语义），非 value。
@@ -102,7 +102,7 @@
 
 ## 6. 下一步（按优先级）
 
-> **2026-08-28 进度**：Convert.ToXxx(System.String) 8 个已修（inline 绕过 null-guard，commit `588fa7a67`，2602→2610）。Decimal.FromOACurrency + CreateChecked/Saturating/Truncating(int) 4 个已修（commit `6ec1a180d`，2610→2614）。**remaining 211** = String 91 / Type 87 / Decimal-behavioral 7 / Enum 4 / Convert 2 / other 16。
+> **2026-08-28 进度**：Convert.ToXxx(System.String) 8 个已修（inline 绕过 null-guard，commit `588fa7a67`，2602→2610）。Decimal.FromOACurrency + CreateChecked/Saturating/Truncating(int) 4 个已修（commit `6ec1a180d`，2610→2614）。**remaining 207** = String 91 / Type 87 / Decimal-behavioral 7 / Enum 4 / Convert 2 / other 16。
 
 1. **（前置）修 build-infra 持久化**：让 codegen SDK 头/库拷贝源与 origin src 一致，每批 e2e 免手同步。（§3-3）
 2. **Decimal-behavioral(7 未修)**：`Decimal.Parse(string...)`、`CreateChecked/Saturating/Truncating(Decimal)` 等原 11 中未修的部分——与 Convert(string) 同模式（native 实现 + 注册），是高 ROI 下一批。

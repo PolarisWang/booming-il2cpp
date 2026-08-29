@@ -33,10 +33,15 @@
 #include <intrin.h>    // _AddressOfReturnAddress()
 #include <windows.h>
 #else
-// GCC/Clang: _AddressOfReturnAddress() has no standard intrinsic; map it to
-// __builtin_return_address(0) (address of the current frame's return address).
-// Mirrors jit_deopt.cpp so this file stays buildable on every non-Windows target.
-#define _AddressOfReturnAddress() __builtin_return_address(0)
+// GCC/Clang: no standard intrinsic for "address of this frame's return-address
+// slot".  _AddressOfReturnAddress() must return a STACK address (return-address
+// slot), NOT the return-address value (a code address) — __builtin_return_address(0)
+// returns the latter and is semantically wrong here.  On x86-64 SysV and
+// AArch64 AAPCS64 the return address sits one pointer above the frame pointer,
+// so __builtin_frame_address(0) + sizeof(void*) is the slot address.  (Matches
+// WinSehHandler/LinuxSehHandler, which compute g_jit_frame_rsp the same way.)
+#define _AddressOfReturnAddress() \
+    (reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(__builtin_frame_address(0)) + sizeof(void*)))
 #include <ucontext.h>  // ucontext_t for preemptive-suspend register-window capture
 #endif
 
@@ -759,6 +764,16 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
                 // INTERIOR|PINNED and never relocates it; here we must not even
                 // report it, since our relocation phase writes conservative
                 // root slots back.)
+                //
+                // Safety floor: even if a value passes the pre-filter above
+                // (heap/nursery range) AND lands inside the stack range, the
+                // mark phase (TryMarkRoot) is authoritative — FindPage on a
+                // stack-range value returns nullptr / non-in-use / non-scanning
+                // page, so it is rejected regardless.  Discarding here only
+                // avoids firing a callback for a value the mark phase would
+                // reject anyway; it cannot drop a live heap root unless the
+                // heap and this thread's stack share address space, which does
+                // not occur in practice (heap and stack are disjoint regions).
                 uintptr_t rv = reinterpret_cast<uintptr_t>(read);
                 if (rv >= th_lo && rv <= th_hi) {
                     continue;
