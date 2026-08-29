@@ -113,7 +113,7 @@ public sealed partial class NativeAotLoweringPlanner
                         return null;
                     return "ChaosReflectionConcatStringPairValues(ChaosStringConcat2({0}, {1}), {2})";
                 }));
-            // (string, string, string[, string]) — pair-call composition across arrity.
+            // (string, string, string[, string]) — pair-call composition across arity.
             registry.RegisterInline(new InlineShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: methodName,
@@ -121,8 +121,11 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     if (paramTypes.Count < 3 || paramTypes[0] != "System.String" || paramTypes[1] != "System.String")
                         return null;
-                    // All remaining params are strings/objects; fold pairwise.
-                    return "ChaosReflectionConcatStringPairValues(ChaosStringConcat2({0}, {1}), {2})";
+                    // 3-arg: ChaosReflectionConcatStringPairValues(Concat2({0},{1}), {2})
+                    if (paramTypes.Count == 3)
+                        return "ChaosReflectionConcatStringPairValues(ChaosStringConcat2({0}, {1}), {2})";
+                    // 4-arg: double-pair composition
+                    return "ChaosReflectionConcatStringPairValues(ChaosReflectionConcatStringPairValues(ChaosStringConcat2({0}, {1}), {2}), {3})";
                 }));
         }
 
