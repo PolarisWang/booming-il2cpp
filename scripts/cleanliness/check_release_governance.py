@@ -17,9 +17,9 @@ Same shape as the other scripts/cleanliness/* modules; wired into
 chaos_hygiene.py via hygiene-registry.json + a pre-commit gate.
 
 Usage:
-    python scripts/cleanliness/check_release_governance.py            # advisory
-    python scripts/cleanliness/check_release_governance.py --hard     # exit 1 on any fail
-    python scripts/cleanliness/check_release_governance.py --ci       # exit 1 on fail/warn
+    python scripts/cleanliness/check_release_governance.py            # default: exit 1 on [FAIL], exit 0 on [WARN]-only
+    python scripts/cleanliness/check_release_governance.py --hard     # exit 1 on any [FAIL] (same as default for FAILs; explicit for parity)
+    python scripts/cleanliness/check_release_governance.py --ci       # exit 1 on any [FAIL] or [WARN]
 """
 import argparse
 import re

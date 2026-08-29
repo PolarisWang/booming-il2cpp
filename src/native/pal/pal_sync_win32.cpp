@@ -115,7 +115,7 @@ void PalEventReset(PalEvent* e) noexcept {
     ::ResetEvent(reinterpret_cast<HANDLE>(e));
 }
 
-bool PalEventWait(PalEvent* e, uint64_t timeout_ms) noexcept {
+	bool PalEventWait(PalEvent* e, uint64_t timeout_ms) noexcept {
     DWORD ms = (timeout_ms == UINT64_MAX) ? INFINITE
               : (timeout_ms > INFINITE - 1) ? INFINITE - 1
               : static_cast<DWORD>(timeout_ms);
@@ -128,11 +128,51 @@ bool PalEventWait(PalEvent* e, uint64_t timeout_ms) noexcept {
     // an unsafe release — the root of the "safepoint hard timeout ... forcing
     // release" stress crash.  WAIT_IO_COMPLETION means an APC ran; loop and
     // re-wait (the event, if signaled later, still wakes us).
-    DWORD r = ::WaitForSingleObjectEx(h, ms, TRUE);
-    while (r == WAIT_IO_COMPLETION) {
-        r = ::WaitForSingleObjectEx(h, ms, TRUE);
+    //
+    // Timeout budget (review #4): WaitForSingleObjectEx(ms) returns
+    // WAIT_IO_COMPLETION as soon as an APC runs, NOT after ms elapses.  For a
+    // bounded timeout, re-issuing the FULL ms after each APC would let the
+    // total wait exceed timeout_ms unboundedly (an APC storm would starve the
+    // hard-timeout safety net and delay an unsafe release indefinitely).  So
+    // decay the budget by elapsed wall-time and stop once it is exhausted.
+    // INFINITE waits keep re-waiting forever (there is no bound to enforce).
+    if (ms == INFINITE) {
+        DWORD r = ::WaitForSingleObjectEx(h, ms, TRUE);
+        while (r == WAIT_IO_COMPLETION) {
+            r = ::WaitForSingleObjectEx(h, ms, TRUE);
+        }
+        return r == WAIT_OBJECT_0;
     }
-    return r == WAIT_OBJECT_0;
+
+    LARGE_INTEGER freq{}, t0{};
+    bool have_clock = (::QueryPerformanceFrequency(&freq) != 0) && freq.QuadPart != 0
+                      && (::QueryPerformanceCounter(&t0) != 0);
+    const uint64_t budget_ns = static_cast<uint64_t>(ms) * 1000000;  // ms -> ns
+    DWORD wait_ms = ms;
+    while (true) {
+        DWORD r = ::WaitForSingleObjectEx(h, wait_ms, TRUE);
+        if (r != WAIT_IO_COMPLETION) return r == WAIT_OBJECT_0;
+
+        // An APC ran.  If we cannot measure elapsed time, keep resetting the
+        // full budget (best effort — matches the previous behavior).  Otherwise
+        // subtract the elapsed portion and re-wait with the residual.
+        if (have_clock) {
+            LARGE_INTEGER now{};
+            if (::QueryPerformanceCounter(&now)) {
+                __int64 elapsed = (now.QuadPart - t0.QuadPart) * 1000000 / freq.QuadPart;
+                if (elapsed < 0) elapsed = 0;
+                if (static_cast<uint64_t>(elapsed) >= budget_ns) {
+                    return false;  // budget exhausted — give up, do not over-wait
+                }
+                uint64_t remain_ns = budget_ns - static_cast<uint64_t>(elapsed);
+                DWORD remain_ms = static_cast<DWORD>(remain_ns / 1000000);
+                if (remain_ns % 1000000 != 0) ++remain_ms;  // sub-ms residual waits at least 1ms
+                wait_ms = remain_ms;
+            }
+        }
+        // If QPC failed mid-loop, wait_ms is unchanged (full budget reset).
+        // Loop discontinues on signal or budget exhaustion.
+    }
 }
 
 int32_t PalEventWaitAny(PalEvent* const* events, size_t count, uint64_t timeout_ms) noexcept {

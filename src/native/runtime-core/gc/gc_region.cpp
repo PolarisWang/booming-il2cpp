@@ -373,6 +373,11 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
                         if (nursery_ptr != nullptr) {
                             return nursery_ptr;
                         }
+                        // NurseryAllocate returned nullptr despite a fresh TLAB
+                        // (e.g. oversized for remaining TLAB slack).  Clear the
+                        // orphan TLAB so the next allocation re-claims rather than
+                        // using a stale TLS pointer (review #6).
+                        tls_tlab = TLAB{};
                     }
                 }
                 threading::EnterPreemptiveMode();
@@ -512,6 +517,10 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
                         if (nursery_ptr != nullptr) {
                             return nursery_ptr;
                         }
+                        // NurseryAllocateAtomic returned nullptr despite a fresh
+                        // TLAB — clear the orphan TLAB so the TLS pointer does not
+                        // point to a claimed-but-unused region (review #6).
+                        tls_tlab = TLAB{};
                     }
                 }
                 threading::EnterPreemptiveMode();

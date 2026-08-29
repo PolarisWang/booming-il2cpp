@@ -609,14 +609,20 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
                 // this is a real typed object whose extent Phase-2 cannot
                 // precisely determine.  Rather than advancing by EstimateObjectSize
                 // (capped at 2048 bytes, which would phantom-re-walk into the
-                // object interior for objects > 4 KB), jump to the nursery used
-                // frontier.  Remaining internal pointers of such objects are
-                // covered by Phase 0 (stack-root scan), Phase 1 (dirty-card
-                // scan), and Phase 3 (BFS from promoted-objects).
+                // object interior for objects > 4 KB), we still need to advance
+                // past this object before continuing the scan.  Use the slack
+                // between scan_ptr and the end of the nursery as a conservative
+                // upper bound, but advance by at least kMaxTlabAlloc (a reasonable
+                // single-object cap) to avoid an unbounded single-step that
+                // skips the entire remaining nursery for one unregistered object.
                 //
                 // NOTE: first_word is guaranteed valid here because the L621
                 // IsValidTypeInfoPointer gate passed.
-                scan_ptr = nursery_used;
+                {
+                    uintptr_t slack = nursery_used - scan_ptr;
+                    uintptr_t step = slack < kMaxTlabAlloc ? slack : kMaxTlabAlloc;
+                    scan_ptr += step;
+                }
                 continue;
             }
 

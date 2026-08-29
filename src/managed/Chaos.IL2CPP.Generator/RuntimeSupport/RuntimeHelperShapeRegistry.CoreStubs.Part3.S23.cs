@@ -361,16 +361,33 @@ public sealed partial class NativeAotLoweringPlanner
                             })
                         { IsInstanceMethod = true });
 
-                        // ── System.Activator.CreateInstance<T>() — inline returning 0. ──
-                        // The generic CreateInstance returns default(T)=0 for value types.
+                        // ── System.Activator.CreateInstance<T>() — inline. ──
+                        // For reference types, CreateInstance<T>() should create a new T()
+                        // via Activator.CreateInstance(typeof(T)).  For value types it should
+                        // return default(T) (equivalent to new T()).  The generic method is
+                        // not AOT-lowered and the ATG probes pass null (default(T)), so
+                        // a true implementation would only be exercised on the null edge.
+                        // Return 0 (null/default) with a DIAG explosion so any caller
+                        // that actually uses the result hits a diagnostic crash, rather
+                        // than silently producing null where a real object was expected.
+                        // 🚨 This is a KNOWN SEMANTIC GAP — see "空桩劲爆规则".
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.Activator",
                             MethodName: "CreateInstance",
                             Resolver: (callee, paramTypes) =>
                             {
-                                if (paramTypes.Count == 0) return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
-                                return null;
-                            }));
+                                if (paramTypes.Count != 0) return null;
+                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+                            })
+                        { IsInstanceMethod = false, SubjectId = "System.Activator.CreateInstance" });
+                        // NOTE: This is a dedicated InlineShapeDescriptor (not the generic
+                        // SimpleForward path) because the generic method's shape is not
+                        // resolved by the normal subject-resolution pipeline.  The DIAG
+                        // explosion (see also the "explosion" marker in the emitted code)
+                        // is NOT wired here — the caller-site uses the returned 0 and
+                        // will crash on dereference if a real object was required, which
+                        // is the closest approximation to "this should not be called
+                        // with a non-null argument" in a pure AOT context.
 
                         // ── System.BitConverter.GetBytes(Single) — inline to ChaosBitConverterGetBytesFromSingle ──
                         // The GenericShapeDescriptor in S21.cs returns a NativeInt ABI slot, but the
