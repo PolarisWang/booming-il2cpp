@@ -177,7 +177,7 @@ CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytesFromSingle(CHAOS_IL2CPP_FLOAT32 val
     arr->header_data[0] = 0;
     arr->element_type_shape = 0;
     arr->element_type_info = nullptr;
-    arr->length = 1;
+    arr->length = 4;  // 4 bytes for Single
     auto* elements = accessor_get_elements(arr);
     std::memcpy(elements, &value, sizeof(value));
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
@@ -192,7 +192,7 @@ CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytesFromDouble(CHAOS_IL2CPP_FLOAT64 val
     arr->header_data[0] = 0;
     arr->element_type_shape = 0;
     arr->element_type_info = nullptr;
-    arr->length = 1;
+    arr->length = 8;  // 8 bytes for Double
     auto* elements = accessor_get_elements(arr);
     std::memcpy(elements, &value, sizeof(value));
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
