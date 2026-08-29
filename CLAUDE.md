@@ -74,5 +74,22 @@ P1（性能最优）> P2（方案完美性）> P3（HotUpdate 支持）。低优
 - 设计讨论 → `docs/archive/discuss/`
 - 每个功能的 STATUS.md 必须含 `## 架构映射` 小节
 
+### 发布与版本号（开源工业化）
+
+版本号三源一致由 `scripts/cleanliness/check_release_governance.py` 在 pre-commit 和 CI 自动执行（硬阻断三项不一致）。版本号变更必须通过 `scripts/release_bump.sh`：
+
+```
+# 查看当前版本
+cat VERSION
+
+# 升级到 0.2.0（三源同步）
+scripts/release_bump.sh 0.2.0 --tag
+
+# 推送新 tag
+git push origin v0.2.0
+```
+
+任何 agent 禁止手动编辑 VERSION/CMakeLists/Directory.Build.props 三者中任一的版本号——必须用 `scripts/release_bump.sh`。`check_release_governance --gate` 会阻断不一致的提交。
+
 ### 编码规范 / 内存分配 / 四层红线明细
 见 `.ai/references/coding-references.md`。
