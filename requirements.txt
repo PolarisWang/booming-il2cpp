@@ -1,0 +1,24 @@
+# Runtime Python dependencies for the chaos-il2cpp test/verification pipeline.
+#
+# These are the third-party (non-stdlib) imports actually consumed by the
+# repo's Python tooling. Pinned to the versions verified to work on the
+# reference Windows dev machines so builds are reproducible.
+#
+# Install with:
+#   pip install -r requirements.txt
+#
+# Note: `verification`, `_pipeline`, `adapters`, `stages`, etc. are in-repo
+# packages (NOT PyPI dependencies) — they are resolved via PYTHONPATH /
+# sys.path and intentionally excluded here.
+
+# YAML parsing — used by scripts/ci, scripts/codegen, tests/runner,
+# test_driver (fallback + safe_load), nightly pipeline.
+PyYAML==6.0.3
+
+# Process inspection — used by scripts/cleanliness/check_git_lock.py and the
+# soak harness / nightly orchestrator for process/liveness checks.
+psutil==7.2.2
+
+# Schema validation — used by docs/dev/scripts/validate-output-schemas.py
+# (authority/verification audit tooling).
+jsonschema==4.26.0

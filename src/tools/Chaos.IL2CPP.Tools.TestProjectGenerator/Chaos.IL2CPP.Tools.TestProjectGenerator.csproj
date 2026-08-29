@@ -6,7 +6,6 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Chaos.IL2CPP.Tools.TestProjectGenerator</AssemblyName>
     <RootNamespace>Chaos.IL2CPP.Tools.TestProjectGenerator</RootNamespace>
-    <NoWarn>$(NoWarn);NU1902;NU1903;NU1904</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
