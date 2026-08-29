@@ -3472,6 +3472,13 @@ bool MarkSweepOldGen::BgcTryMark(void* obj) {
 // ���� BGC concurrent sweep ����������������������������������������������������������������������������������
 
 void MarkSweepOldGen::BgcSweep() {
+    // Enter preemptive mode for the duration of sweep (CoreCLR-aligned).
+    // BgcSweep blocks on mutex_ (std::mutex::lock, non-alertable) and may
+    // hold it for page iterations.  In cooperative mode this blocks the BGC
+    // thread from acknowledging a safepoint → coordinator counts it
+    // unresponsive → hard timeout forced-release → OOM/crash.
+    threading::EnterPreemptiveMode();
+
     // Snapshot page list under mutex.
     // Prioritize young_tenured pages (recent survivor promotions) so
     // ephemeral tenured objects are reclaimed earlier in the sweep cycle.
@@ -3693,11 +3700,15 @@ void MarkSweepOldGen::BgcSweep() {
     // are now considered mature tenured for the next BGC cycle.
     ClearYoungTenuredFlags();
 
+    threading::EnterCooperativeMode();
 }
 
 // ���� BGC concurrent compaction ������������������������������������������������������������������������
 
 void MarkSweepOldGen::BgcCompact() {
+    // Enter preemptive mode for the duration of compact (same rationale
+    // as BgcSweep: mutex_ blocking in cooperative mode hangs safepoint).
+    threading::EnterPreemptiveMode();
 
     // Transfer pinned roots to compaction skip list so PlanPageEvacuation
     // excludes them from cross-page relocation (same as Collect() does).
@@ -3760,6 +3771,7 @@ void MarkSweepOldGen::BgcCompact() {
     // Clear compaction skip list (snapshot of pinned_roots_ taken above).
     pinned_compact_skip_.clear();
 
+    threading::EnterCooperativeMode();
 }
 
 // ======================================================================

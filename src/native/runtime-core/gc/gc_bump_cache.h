@@ -7,6 +7,7 @@
 
 #include "gc_old_gen.h"
 #include "gc_heap.h"
+#include "thread_state.h"   // EnterPreemptiveMode/EnterCooperativeMode for G_OldGen().Allocate calls
 
 #include <cstddef>
 #include <cstdio>
@@ -150,7 +151,10 @@ private:
         if (size > kMaxInlineSize) {
             oversized_count_++;
             oversized_bytes_ += size;
-            return G_OldGen().Allocate(size, !atomic);
+            threading::EnterPreemptiveMode();
+            void* p = G_OldGen().Allocate(size, !atomic);
+            threading::EnterCooperativeMode();
+            return p;
         }
 
         // Fast path: size-class hit → pop from free list.
@@ -214,7 +218,9 @@ private:
     }
 
     Page* AllocatePage(bool atomic) {
+        threading::EnterPreemptiveMode();
         void* raw = G_OldGen().Allocate(sizeof(Page) + kPageSize, !atomic);
+        threading::EnterCooperativeMode();
 
         auto* page = static_cast<Page*>(raw);
         page->next = atomic ? atomic_page_ : scan_page_;

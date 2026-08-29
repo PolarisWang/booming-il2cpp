@@ -1,6 +1,7 @@
 #include "delegate_helpers.h"
 
 #include "gc/gc_old_gen.h"
+#include "thread_state.h"  // EnterPreemptiveMode/EnterCooperativeMode for G_OldGen().Allocate
 
 #include "gc_heap.h"
 namespace chaos::il2cpp::runtime_core {
@@ -83,16 +84,20 @@ CHAOS_IL2CPP_INTPTR DelegateCreateMulticast(
     const auto* template_delegate = RequireDelegate(template_delegate_value);
 
     // Allocate DelegateObject via old-gen (conservative scan covers all pointer fields).
+    threading::EnterPreemptiveMode();
     auto* delegate = static_cast<DelegateObject*>(
         G_OldGen().Allocate(sizeof(DelegateObject), true));
+    threading::EnterCooperativeMode();
     delegate->type_info = template_delegate->type_info;
     delegate->chaos_delegate_target = 0;
     delegate->chaos_delegate_method_ptr = 0;
 
     // Allocate invocation list in GC heap, placement-new vector copy.
     using InvocationList = std::vector<CHAOS_IL2CPP_INTPTR>;
+    threading::EnterPreemptiveMode();
     auto* vec = static_cast<InvocationList*>(
         G_OldGen().Allocate(sizeof(InvocationList), true));
+    threading::EnterCooperativeMode();
     vec = new (vec) InvocationList(entries);
 
     delegate->chaos_delegate_invocation_list = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(vec);
