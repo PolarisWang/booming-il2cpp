@@ -12,8 +12,15 @@
 #include <intrin.h> // _AddressOfReturnAddress()
 #else
 #include <cstdint>
-// GCC/Clang: _AddressOfReturnAddress() via __builtin_return_address
-#define _AddressOfReturnAddress() __builtin_return_address(0)
+// GCC/Clang: _AddressOfReturnAddress() has no standard intrinsic.  It must
+// return a STACK address (the address of the return-address slot), NOT the
+// return-address value (a code address) — __builtin_return_address(0) returns
+// the latter and is semantically wrong here.  On x86-64 SysV and AArch64
+// AAPCS64 the return address sits one pointer above the frame pointer, so
+// __builtin_frame_address(0) + sizeof(void*) is the slot address.  Matches
+// WinSehHandler/LinuxSehHandler (g_jit_frame_rsp computation).
+#define _AddressOfReturnAddress() \
+    (reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(__builtin_frame_address(0)) + sizeof(void*)))
 #endif
 
 namespace chaos::il2cpp::jit {
