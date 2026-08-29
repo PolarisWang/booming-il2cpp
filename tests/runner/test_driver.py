@@ -314,7 +314,7 @@ def _dry_run(args, contract: dict, layers: dict) -> int:
                 target = g.get("command_project", g.get("script", "?"))
                 scale = "dotnet test project"
             elif adapter == "native":
-                target = g.get("cmake_build_dir", "build/native")
+                target = g.get("cmake_build_dir", "artifacts/native-test/debug")
                 if os.environ.get("CHAOS_GC_TEST_STRESS_ONLY", "") in ("1", "true", "yes"):
                     scale = "ctest -L 'stress|soak|benchmark'  (--stress-only pressure tier)"
                 else:

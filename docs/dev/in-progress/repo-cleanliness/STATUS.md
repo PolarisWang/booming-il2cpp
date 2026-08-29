@@ -1,14 +1,15 @@
 # Repo-Hygiene Dashboard
 
-> Last run: 2026-08-28T05:40:50Z · overall: **PASS**
+> Last run: 2026-08-29T04:53:36Z · overall: **FAIL**
 
 | check | status | note |
 |-------|--------|------|
-| root-clean | PASS | [PASS] repo root is clean |
+| root-clean | FAIL | [repo-clean] new untracked file at repo root: fact.json �� add to .gitignore, commit it un |
 | disk-health | PASS | === [repo-clean --disk] ignored-disk usage (surfacing silent accumulation) === |
 | generated-drift | PASS | [PASS] all registered generated files are up to date |
 | completion-audit | PASS | [PASS] no suspected-incomplete functions found |
 | scripts-hygiene | PASS | [PASS] scripts/ is free of one-shot scratch and build artifacts |
+| git-lock | WARN | [WARN] no index.lock, but a live git writer is running: "C:\Program Files\Git\mingw64\bin\ |
 
 Run `python scripts/cleanliness/chaos_hygiene.py --report` to refresh.
 

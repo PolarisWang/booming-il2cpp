@@ -69,3 +69,28 @@ def results_base() -> Path:
     Layout: <foundation_root>/results/foundation-dll/{assembly}/{slug}/perf/…
     """
     return foundation_root() / "results" / "foundation-dll"
+
+
+def build_root() -> Path:
+    """Single source of truth for the discarded build-artifact root.
+
+    The chunk pipeline separates *sources* (version-controlled: config,
+    crypto-refs, subjects metadata, controlled .cpp) from *discardable build
+    outputs* (native/entry.exe, results/, .autogen/, combined/, .hephaestus-
+    cache/ — the ~80G that used to bloat tests/e2e/translation/). Sources stay
+    under foundation_root(); discardable outputs go here.
+
+    Resolved via CHAOS_BUILD_DLL env override, else anchored under the repo's
+    gitignored artifacts/ dir so the tree stays out of version control by
+    default and vanishes on `git clean -fdX artifacts/`.
+
+    Layout: <repo>/artifacts/foundation-dll/{assembly}/chunks/{slug}/…
+    """
+    override = os.environ.get("CHAOS_BUILD_DLL")
+    if override:
+        return Path(override)
+    # artifacts/ is the repo-level discardable-output root (already gitignored).
+    # Anchored to the repo root (parent of the run/ package), not foundation_root,
+    # because sources and outputs must live in different physical trees.
+    repo_root = _HERE.parents[2]  # verification/ -> tests/e2e/verification -> tests/e2e -> tests -> repo
+    return repo_root / "artifacts" / "foundation-dll"

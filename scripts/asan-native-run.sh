@@ -3,7 +3,7 @@
 # stress test from an ISOLATED output dir (no clobbering the normal Debug exes).
 #
 # Purposes:
-#   1. Configures build/asan-native with ARTIFACT_ROOT=<repo>/artifacts/native-runtime-core-test-asan
+#   1. Configures artifacts/native-test/asan with ARTIFACT_ROOT=<repo>/artifacts/native-runtime-core-test-asan
 #      so sanitizer exes NEVER overwrite the non-instrumented CTest suite's
 #      artifacts/native-runtime-core-test/Debug exes (the exe-overwrite confusion
 #      documented in gc-n6-liveness-findings-2026-08-25.md §十).
@@ -24,7 +24,7 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SCENARIO="${1:-2}"
 TARGET="${2:-chaos_gc_stress_test}"
-ASAN_BUILD_DIR="${REPO_ROOT}/build/asan-native"
+ASAN_BUILD_DIR="${REPO_ROOT}/artifacts/native-test/asan"
 ASAN_ARTIFACTS_ROOT="${REPO_ROOT}/artifacts/native-runtime-core-test-asan"
 
 echo "[asan] repo_root        = ${REPO_ROOT}"
@@ -36,7 +36,7 @@ echo "[asan] isolated output  = ${ASAN_ARTIFACTS_ROOT}/Debug"
 # (/d/...); compare on the artifacts-suffix so either form matches.
 if [[ ! -f "${ASAN_BUILD_DIR}/CMakeCache.txt" ]] ||
    ! grep -q "ARTIFACT_ROOT:PATH=.*native-runtime-core-test-asan" "${ASAN_BUILD_DIR}/CMakeCache.txt"; then
-    echo "[asan] configuring build/asan-native with isolated ARTIFACT_ROOT ..."
+    echo "[asan] configuring artifacts/native-test/asan with isolated ARTIFACT_ROOT ..."
     cmake -S "${REPO_ROOT}" -B "${ASAN_BUILD_DIR}" \
         -DCMAKE_CXX_FLAGS="/fsanitize=address /Zi" \
         -DARTIFACT_ROOT="${ASAN_ARTIFACTS_ROOT}"

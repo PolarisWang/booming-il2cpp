@@ -136,7 +136,12 @@ _test_*.cpp
 native-benchmark.json
 
 # Native build artifacts
+# Legacy: build/native/ + build/asan-native/ were the native test build roots.
+# They are superseded by artifacts/native-test/{debug,asan} — the test driver
+# default + asan-native-run.sh now emit there. Kept as ignore rules for
+# transitional on-disk residue until the old dirs are rm'd.
 build/native/
+build/asan-native/
 
 # CMake-generated project files in build/ root (should use build/native/)
 build/*.vcxproj
@@ -534,6 +539,15 @@ test_all_out.txt
 # The 29-family tree moved from testing/foundation-dll to tests/e2e/translation (L7).
 # Its build/codegen/cache outputs are generated and untracked; these rules mirror
 # the old testing/foundation-dll/** ignores for the new home.
+#
+# NOTE (2026-08-28): the chunk pipeline's *discardable build outputs* now emit to
+# artifacts/foundation-dll/ (a repo-level gitignored root per scripts/…/_path.py
+# build_root()) instead of tests/e2e/translation/**.  Sources stay in the tree.
+# The tests/e2e/translation/** rules below are RETAINED as a transitional guard
+# for pre-migration on-disk residue; they can be dropped once those left-overs
+# are rm'd (see repo-cleanliness design-v1-01 §7).
+# artifacts/foundation-dll/ itself needs no rule — the top-level `artifacts/`
+# (L39) already ignores it wholesale.
 tests/e2e/translation/**/.hephaestus-cache/
 tests/e2e/translation/**/_dll/
 tests/e2e/translation/**/chunks/

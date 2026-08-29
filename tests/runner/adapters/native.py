@@ -32,7 +32,7 @@ def _run(cwd, args, timeout):
 
 def run(group: dict, timeout: int = 1800, quick: bool = False) -> SuiteResult:
     cwd = repo_root()
-    build_dir = group.get("cmake_build_dir", "build/native")
+    build_dir = group.get("cmake_build_dir", "artifacts/native-test/debug")
     preset = group.get("cmake_preset", "windows-x64-reference")
     res = SuiteResult(layer="integration", group=group.get("name", "contracts-native"))
 

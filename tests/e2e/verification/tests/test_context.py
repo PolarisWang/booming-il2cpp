@@ -134,8 +134,8 @@ class TestChunkContext:
         )
         assert ctx.dll_manifest_dir == base / "_dll"
         assert ctx.namespace_partition_path == base / "_dll" / "namespace-partition.json"
-        assert ctx.subjects_dll_path == ctx.managed_dir / "CombinedSubjects.dll"
-        assert ctx.subjects_metadata_path == ctx.managed_dir / "subjects.metadata.json"
+        assert ctx.subjects_dll_path == ctx.build_managed_dir / "CombinedSubjects.dll"
+        assert ctx.subjects_metadata_path == ctx.source_managed_dir / "subjects.metadata.json"
 
 
 class TestUnifiedReport:

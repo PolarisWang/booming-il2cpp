@@ -38,7 +38,7 @@ for _b_d in _b_Path(__file__).resolve().parents:
         if str(_b_d) not in _b_sys.path:
             _b_sys.path.insert(0, str(_b_d))
         break
-from _path import foundation_root
+from _path import foundation_root, build_root
 
 _FOUNDATION_DLL = foundation_root()# .../testing/foundation-dll/
 _TESTING_DIR = _HERE.parent.parent                            # .../testing/
@@ -231,7 +231,10 @@ def _run_chunk_stages(
     Benchmark concurrency is controlled via bench_semaphore (default: 2).
     """
     try:
-        chunk_dir = foundation_dir / "chunks" / slug
+        # Variant A: chunk_dir IS the build-output root (discardable); the
+        # version-controlled source root is derived from foundation_dir/chunks.
+        build_dir = build_root() / assembly / "chunks" / slug
+        chunk_dir = build_dir
 
     # Resolve assembly dirs from pipeline-config.yaml
         chunk_cfg = (pipeline_config.get("chunks") or {}).get(slug, {})
@@ -256,6 +259,7 @@ def _run_chunk_stages(
             slug=slug,
             assembly=assembly,
             chunk_dir=chunk_dir,
+            build_dir=build_dir,
             foundation_dir=foundation_dir,
             mode="standard",
             native_config=native_config,
@@ -494,7 +498,8 @@ def main() -> int:
         agg_ctx = ChunkContext(
             slug="__aggregate__",
             assembly=asm,
-            chunk_dir=fdir / "chunks" / "__aggregate__",
+            chunk_dir=build_root() / asm / "chunks" / "__aggregate__",
+            build_dir=build_root() / asm / "chunks" / "__aggregate__",
             foundation_dir=fdir,
             mode="standard",
             native_config=args.native_config,
@@ -513,7 +518,8 @@ def main() -> int:
         report_ctx = ChunkContext(
             slug="__report__",
             assembly=asm,
-            chunk_dir=fdir / "chunks" / "__report__",
+            chunk_dir=build_root() / asm / "chunks" / "__report__",
+            build_dir=build_root() / asm / "chunks" / "__report__",
             foundation_dir=fdir,
             mode="standard",
             native_config=args.native_config,

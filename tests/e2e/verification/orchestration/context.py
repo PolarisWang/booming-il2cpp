@@ -37,15 +37,33 @@ class ChunkContext:
     """Context for a single chunk verification run.
 
     A "chunk" is a group of methods from the same DLL, collected by namespace
-    partitioning (see namespace-partition.json).  Each chunk lives under
-    <assembly_dir>/chunks/<slug>/ and contains managed subjects, native entry.exe,
-    and results/.
+    partitioning (see namespace-partition.json).  Each chunk has two physical
+    roots, split by lifecycle:
+
+      * `chunk_dir` is the DISCARDABLE build-output root (native/, results/,
+        managed/.autogen/, managed/combined/) — it lives under the gitignored
+        `artifacts/foundation-dll/<assembly>/chunks/<slug>/` tree and is the
+        ~80G that may be wiped freely.
+      * `source_chunk_dir` is the VERSION-CONTROLLED source root (managed/
+        subjects/, chunk.json) — it stays under the foundation tree.
+
+    Pieces live on one side or the other:
+
+      * product outputs (entry.exe, fact.json, CombinedSubjects.dll, .autogen/,
+        combined/, PatchSubjects.dll)        -> chunk_dir
+      * subject sources + controlled metadata (subjects.metadata.json,
+        supplemental-coverage.json, .cs/.csproj, chunk.json) -> source_chunk_dir
+
+    Separate concrete constructors produce a legacy (single-root) context where
+    `build_dir is None` (all properties fall back to chunk_dir) so callers that
+    predate the split keep working unchanged.
 
     Fields:
         slug: Chunk identifier, typically kebab-case (e.g. "system", "collections-generic").
         assembly: Assembly name (e.g. "System.Private.CoreLib").
-        chunk_dir: Root directory for this chunk's files (managed/, native/, results/).
+        chunk_dir: Build-output root for this chunk (managed/, native/, results/).
         foundation_dir: Root directory for the assembly (parent of _dll/, chunks/).
+        build_dir: Discardable build root; None => chunk_dir (legacy single-root).
         mode: Verification mode — "standard" (default) or "strict".
         skip_stages: Set of stage keys to skip during pipeline execution.
         verbose: Enable verbose logging output.
@@ -59,6 +77,7 @@ class ChunkContext:
     assembly: str
     chunk_dir: Path
     foundation_dir: Path
+    build_dir: Path = None  # build-output root; when set, chunk_dir IS the build side (variant A)
     mode: str = "standard"
     skip_stages: set[str] = field(default_factory=set)
     verbose: bool = False
@@ -76,25 +95,55 @@ class ChunkContext:
     git_branch: str = ""
     context_fp: str = ""  # fast context fingerprint for soft cache invalidation
 
+    # ── Roots (single source of truth) ──
     @property
-    def managed_dir(self) -> Path:
-        return self.chunk_dir / "managed" / "subjects"
+    def build_root(self) -> Path:
+        """Build-output root for this chunk = chunk_dir (variant A). Legacy
+        single-root callers pass build_dir=None, alias to foundation chunk."""
+        return self.chunk_dir
 
     @property
+    def source_chunk_dir(self) -> Path:
+        """Version-controlled chunk source root (managed/subjects, chunk.json).
+        Under legacy single-root (build_dir=None) this equals chunk_dir; under
+        the split it is the foundation-side chunk dir. Derived from
+        foundation_dir/chunks/slug so source paths never break."""
+        src = self.chunk_dir
+        # If chunk_dir is the build side (build_dir is not None), the source
+        # sibling lives under foundation_dir/chunks/<slug>.
+        if self.build_dir is not None:
+            src = self.foundation_dir / "chunks" / self.slug
+        return src
+
+    @property
+    def chunks_dir(self) -> Path:
+        """Chunks root on the build side — holds per-chunk discardable outputs
+        (results/, native/, .autogen/, combined/). Aggregate/report/benchmark
+        stages enumerate per-chunk results from here. Falls back to the source
+        chunk parent when no build_dir is set (legacy)."""
+        return (self.build_dir or self.chunk_dir).parent
+
+    # ── Build-side (discardable outputs) ──
+    @property
     def native_dir(self) -> Path:
-        return self.chunk_dir / "native"
+        # native/ (entry.exe, entry-jit.exe, patch.patchdata) are build outputs.
+        return self.build_root / "native"
 
     @property
     def results_dir(self) -> Path:
-        return self.chunk_dir / "results"
+        # results/ (fact.json, benchmarks, reports) are discarded build outputs.
+        return self.build_root / "results"
+
+    @property
+    def build_managed_dir(self) -> Path:
+        """Managed/ subdir on the build side (holds build outputs like .autogen/,
+        combined/, CombinedSubjects.dll)."""
+        return self.build_root / "managed"
 
     @property
     def subjects_dll_path(self) -> Path:
-        return self.managed_dir / "CombinedSubjects.dll"
-
-    @property
-    def subjects_metadata_path(self) -> Path:
-        return self.managed_dir / "subjects.metadata.json"
+        # CombinedSubjects.dll is ATG build output → build-managed side.
+        return self.build_managed_dir / "CombinedSubjects.dll"
 
     @property
     def entry_exe_path(self) -> Path:
@@ -110,8 +159,26 @@ class ChunkContext:
 
     @property
     def patch_subjects_dll_path(self) -> Path:
-        return self.chunk_dir / "managed" / "subjects" / "PatchSubjects.dll"
+        # PatchSubjects.dll is a patch build output → build-managed side.
+        return self.build_managed_dir / "subjects" / "PatchSubjects.dll"
 
+    # ── Source-side (version-controlled) ──
+    @property
+    def source_managed_dir(self) -> Path:
+        """Managed/subjects on the source side — the version-controlled test
+        subject sources (.cs, .csproj) + subjects.metadata.json."""
+        return self.source_chunk_dir / "managed" / "subjects"
+
+    @property
+    def managed_dir(self) -> Path:
+        # Backward-compatible alias: subjects/ is the source-side managed dir.
+        return self.source_managed_dir
+
+    @property
+    def subjects_metadata_path(self) -> Path:
+        return self.source_managed_dir / "subjects.metadata.json"
+
+    # ── Assembly-level source metadata (stays source-side) ──
     @property
     def dll_manifest_dir(self) -> Path:
         return self.foundation_dir / "_dll"

@@ -45,7 +45,7 @@ for _b_d in _b_Path(__file__).resolve().parents:
         if str(_b_d) not in _b_sys.path:
             _b_sys.path.insert(0, str(_b_d))
         break
-from _path import foundation_root, testing_tree_root
+from _path import foundation_root, testing_tree_root, build_root
 
 _FOUNDATION_DLL = foundation_root()
 _TESTING_DIR = testing_tree_root()
@@ -454,7 +454,10 @@ def main():
     seq = 0
 
     for chunk_slug in chunks:
-        chunk_dir = foundation_dir / "chunks" / chunk_slug
+        # Variant A: chunk_dir IS the build-output root (discardable); the
+        # version-controlled source root is derived from foundation_dir/chunks.
+        build_dir = build_root() / assembly / "chunks" / chunk_slug
+        chunk_dir = build_dir
         # Read assembly dirs from pipeline-config.yaml for this chunk
         chunk_cfg = (_PIPELINE_CONFIG.get('chunks') or {}).get(chunk_slug, {})
         assembly_dirs_str = (chunk_cfg.get('assemblyDirs') or '').strip()

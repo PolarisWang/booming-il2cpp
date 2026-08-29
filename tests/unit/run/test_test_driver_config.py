@@ -105,7 +105,7 @@ class NativeAdapterContractDrivenTests(unittest.TestCase):
                            "Test #2: beta .........   ***Failed 0.50 sec")
             return 0, ""
 
-        group = {**group, "cmake_build_dir": "build/native",
+        group = {**group, "cmake_build_dir": "artifacts/native-test/debug",
                  "cmake_preset": "windows-x64-reference"}
         with mock.patch.object(NATIVE, "_run", side_effect=fake_run):
             res = NATIVE.run(group, timeout=3600, quick=True)
