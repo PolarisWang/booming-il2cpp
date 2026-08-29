@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Chaos IL2CPP Discussions
+    url: https://github.com/PolarisWang/booming-il2cpp/discussions
+    about: Please ask and answer questions here.

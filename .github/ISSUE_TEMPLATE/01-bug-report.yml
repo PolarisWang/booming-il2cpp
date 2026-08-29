@@ -1,0 +1,77 @@
+name: 🐛 Bug Report
+description: Report a bug or unexpected behavior
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please include
+        a minimal reproduction so the maintainers can reproduce the issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: What happened? What did you expect to happen?
+      placeholder: A clear and concise description of the issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Run `cmake --preset debug`
+        2. ...
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant output / stack trace
+      description: Copy and paste the build output, error log, or stack trace.
+      render: shell
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which component does this bug affect?
+      options:
+        - Runtime (GC / interpreter / JIT)
+        - Codegen (IL→C++ translation)
+        - Build system (CMake / presets)
+        - Testing / CI
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Run `cat VERSION` or `git describe --tags`
+      placeholder: "e.g. v0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      description: Windows / Linux / macOS / Android
+      placeholder: "e.g. Windows 11 x64"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Any other context, config, or environment details.

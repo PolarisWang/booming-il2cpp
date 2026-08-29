@@ -1,0 +1,24 @@
+# https://help.github.com/articles/about-codeowners/
+
+# Default owners for everything in the repo.
+# Keep this list minimal — the pre-commit/pre-push hooks handle quality gates.
+# A matching PR triggers auto-review request.
+* @PolarisWong
+
+# Runtime core (GC, interpreter, PAL, JIT)
+src/native/runtime-core/ @PolarisWong
+src/native/interpreter/ @PolarisWong
+src/native/jit/ @PolarisWong
+src/native/pal/ @PolarisWong
+
+# Managed codegen pipeline
+src/managed/Chaos.IL2CPP.Generator/ @PolarisWong
+src/managed/Chaos.IL2CPP.Driver/ @PolarisWong
+
+# Test infrastructure
+tests/runner/ @PolarisWong
+tests/e2e/verification/ @PolarisWong
+
+# Build system
+CMakeLists.txt @PolarisWong
+cmake/ @PolarisWong
