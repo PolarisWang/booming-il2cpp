@@ -55,7 +55,8 @@
 
 ### (2) C3861 符号可见性
 - Decimal natives 声明放 **`runtime_core.h` + `math_stubs.h` 双重声明**（`chaos_pch.h` → **所有 generated TU** 可见）。
-- 实测 `4e0dcc24f` 将 `ChaosDecimalIdentity` 放在两个头文件：`runtime_core.h` 给所有 generated TU 通过 `chaos_pch.h` 可见，`math_stubs.h` 给 math-stubs 相关 TU 通过直接 include 可见，确保所有编译单元均不报 C3861。
+- 实测 `6ec1a180d` 将 `ChaosDecimalIdentity` 放在 `runtime_core.h`（给所有 generated TU 通过 `chaos_pch.h` 可见），`c328130f8` 将其替换为真实现 `ChaosDecimalCopySign/MaxMagnitude/MinMagnitude` 并在 `math_stubs.h` 声明，确保所有编译单元均不报 C3861。
+- ⚠️ 注意：`4e0dcc24f`（同名标题 docs/skill-evolve，含 native 代码改动）不在 main/HEAD 历史中，属于并行 skill-line 分支。`ChaosDecimalIdentity` 的声明/实现实际由 `6ec1a180d` + `c328130f8` 落地。勿引用 `4e0dcc24f` 作为依赖。
 - 每个 SimpleForward native 的声明必须在 generated TU reachable 的 header，否则 C3861/build fail。
 
 ### (3) build 同步脆弱性（待专项修）
@@ -94,17 +95,17 @@
 
 - **String 91 / Type 87 / Enum 4**：反射元数据 / 格式化，ABI 复杂。
 - **Convert 2**：`default(string)`→parse 应抛 FormatException（行为语义），非 value。
-- **Decimal-behavioral 11**：Parse(string...)、CreateChecked/Saturating/Truncating(int)（已修 3 个，尚余 int 变体）、FromOACurrency(long)（已修，see §4）——需真实现或行为语义。
+- **Decimal-behavioral 7**（已修 FromOACurrency + CreateChecked/Saturating/Truncating(int) 共 4 个，剩余 7）：`Decimal.Parse(string...)`、`CreateChecked/Saturating/Truncating(Decimal)` 原 11 中刨去已修 4 的剩余部分。
 - 多数是**期望异常**（如 `Convert.ToInt32(default(string))` → .NET 抛），或**反射实现对 runtime 深度依赖**。
 
 ---
 
 ## 6. 下一步（按优先级）
 
-> **2026-08-28 进度**：Convert.ToXxx(System.String) 8 个已修（inline 绕过 null-guard，commit `588fa7a67`，2602→2610）。Decimal.FromOACurrency + CreateChecked/Saturating/Truncating(int) 4 个已修（commit `6ec1a180d`，2610→2614）。**remaining 211** = String 91 / Type 87 / Decimal-Math 11 / Enum 4 / Convert 2 / other 16。
+> **2026-08-28 进度**：Convert.ToXxx(System.String) 8 个已修（inline 绕过 null-guard，commit `588fa7a67`，2602→2610）。Decimal.FromOACurrency + CreateChecked/Saturating/Truncating(int) 4 个已修（commit `6ec1a180d`，2610→2614）。**remaining 211** = String 91 / Type 87 / Decimal-behavioral 7 / Enum 4 / Convert 2 / other 16。
 
 1. **（前置）修 build-infra 持久化**：让 codegen SDK 头/库拷贝源与 origin src 一致，每批 e2e 免手同步。（§3-3）
-2. **Decimal-behavioral(11, 已修 FromOACurrency + CreateChecked/Saturating/Truncating(int) 3 个)**：`Decimal.Parse(string...)`、`CreateChecked/Saturating/Truncating(int)` 剩余 int 变体——与 Convert(string) 同模式（native 实现 + 注册），是高 ROI 下一批。
+2. **Decimal-behavioral(7 未修)**：`Decimal.Parse(string...)`、`CreateChecked/Saturating/Truncating(Decimal)` 等原 11 中未修的部分——与 Convert(string) 同模式（native 实现 + 注册），是高 ROI 下一批。
 3. **Enum(4)**：格式/解析。
 4. **String(91)/Type(87)** 反射——需独立评估（可能大量依赖 runtime 反射支撑，性价比低，可能诚实 known-fail 白名单）。
 5. 每批：改 Generator(worktree 或 origin) + native(origin src) + `build_presets.py --force` + 手动同步 chunk 头/lib + `cmake --build` 重建 entry + `entry.exe --fact-json` 比对 passed 上升 + 无回归。
@@ -152,16 +153,16 @@ cp build/RelWithDebInfo/chaos_entry.exe entry.exe
 
 - 全量 pipeline（`--stages build,fact`）首次跑**必 `TPG generate-dll FAILED (rc=1)`**，cmake link 报 `C3861 ChaosDecimalIdentity`（每个 page TU）→ 手动加 decl 后变 `LNK2019 unresolved ChaosDecimalIdentity`。
 - **根因**：commit `7a785d7d9` 注册 `Decimal.CopySign/MaxMagnitude/MinMagnitude` → SimpleForward `ChaosDecimalIdentity`，但该 native **从未在南向定义/声明**（只挂 Generator）。每次 codegen 重生成 emit 对它的调用 → C3861/LNK2019。
-- **修复（已落地，已进 git `4e0dcc24f`）**：在 `runtime_core.h`+`math_stubs.h` 声明、`parse_convert.cpp` 定义 `ChaosDecimalIdentity(left,right)`（fresh-carrier echo 左操作数，CopySign/MaxMag/MinMag 的 ATG 0m 探针 → 0m 匹配）。Decimal natives 在**预编译 `chaos_runtime_core.lib`**（origin parse_convert.cpp 编译进 lib，chunk 不本地编译），故必须 `build_presets.py --preset windows-x64-reference --force` 重编 lib → 同步 chunk `codegen/lib`+`codegen/include`+`codegen/runtime_stubs` → cmake build → entry.exe。
+- **修复（已落地，落在 `6ec1a180d` + `c328130f8`；⚠️ 勿引用 `4e0dcc24f`——同名标题 docs/skill-evolve，在并行分支非 main/HEAD）**：在 `runtime_core.h`+`math_stubs.h` 声明、`parse_convert.cpp` 定义 `ChaosDecimalIdentity(left,right)`（fresh-carrier echo 左操作数，CopySign/MaxMag/MinMag 的 ATG 0m 探针 → 0m 匹配；后 `c328130f8` 拆为 `ChaosDecimalCopySign/MaxMagnitude/MinMagnitude` 三个真实现）。Decimal natives 在**预编译 `chaos_runtime_core.lib`**（origin parse_convert.cpp 编译进 lib，chunk 不本地编译），故必须 `build_presets.py --preset windows-x64-reference --force` 重编 lib → 同步 chunk `codegen/lib`+`codegen/include`+`codegen/runtime_stubs` → cmake build → entry.exe。
 - **验证**：entry.exe --fact-json == **2602/2825**（与 committed 完全一致）。**之前 on-disk entry/fact 是 stale（2559），不可当 baseline。**
 
-### (B) Convert.ToXxx(System.String) 8 个 failed 的**精确根因**（非"抛 FormatException"）
+### (B) Convert.ToXxx(System.String) 8 个 failed 的**精确根因**（已修复，commit `588fa7a67`，+8）
 
 - 8 个失败：`ToBoolean_18_string / ToByte_75_string / ToInt16_93_string / ToInt32_129_string / ToInt64_165_string / ToSingle_200_string / ToDouble_218_string / ToDecimal_235_string`。
 - **这些 SimpleForward 注册早已存在**（`Part3.S23.cs:56-110`），指向 `ChaosConvertToInt32/Int64/Int16/Byte/.../Boolean/Decimal`（parse_convert.cpp 已实现：null→0、非法串→FormatException，与 ATG 探针 Set0=值0/Set1=FormatException 完全一致）。
 - **真失败因**：codegen 对**引用类型首参**统一 emit `if (chaos_arg_0 == 0) raise_null_reference_exception()`（`Emission/NativeAotLoweringPlanner.ExceptionEmission.Utilities.cs:242-262`）。`default(string)`=null → 触发 → `RaiseManagedException` → 未初始化 runtime 走 `SetExceptionFallback`(longjmp) → 测试 harness `caught=true` → `passed=false`。
 - **现有豁免只覆盖 DirectNativeSymbol==null**（Utilities.cs:252-255 `isSubjectExtRuntime`）。`Convert.ToInt32` 这类 stub `DirectNativeSymbol=ChaosConvertToInt32 != null` → 不进豁免 → null-guard 照常触发。
-- **修复方向（Architectural，需 dev-brainstorm 定）**：区分"静态 helper 首参=指针 carrier(可 null，native 自处理)" vs "实例 callvirt `this`(null 必 NRE)"。不能 blanket 关 DirectNativeSymbol（`String.get_Chars`/`Array.get_Length` null this 必须 NRE）。候选：对 op==`call`(静态)且 native 为 Convert string 族关闭，或加 per-shape 标志。
+- **已实施的修复（`588fa7a67`）**：对 Convert string 族静态方法，在 codegen emission 中检测到首参为引用类型（string）且目标为静态 Convert helper 时，跳过 null-guard emission，将参数直传 native（native 自处理 null→0 语义）。该修复只作用于 Convert string 族注册表，不影响 `String.get_Chars`/`Array.get_Length` 等实例方法（null this 必须 NRE）。
 
 ### (C) git 并发铁律（并行 codex/GC 线，见 memory git-lock-*）
 

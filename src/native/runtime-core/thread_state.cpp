@@ -30,8 +30,13 @@
 #include <chrono>
 #include <cstring>
 #if defined(_MSC_VER)
+#include <intrin.h>    // _AddressOfReturnAddress()
 #include <windows.h>
 #else
+// GCC/Clang: _AddressOfReturnAddress() has no standard intrinsic; map it to
+// __builtin_return_address(0) (address of the current frame's return address).
+// Mirrors jit_deopt.cpp so this file stays buildable on every non-Windows target.
+#define _AddressOfReturnAddress() __builtin_return_address(0)
 #include <ucontext.h>  // ucontext_t for preemptive-suspend register-window capture
 #endif
 
@@ -724,6 +729,21 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
         // BOUNDARY FIX (see above): the scan lower bound for the calling
         // thread is now the live frame pointer, so the loop below no longer
         // reads ASan redzones between the live frames.
+        //
+        // Stack-interior pointer filter (CoreCLR-aligned, gcenv.ee.cpp L160-176):
+        // a stack slot whose VALUE points inside this thread's own stack
+        // ([stack_limit, stack_base)) is an INTERIOR stack pointer (e.g. a
+        // `&local` address a native frame may hold), NOT a GC-heap root.
+        // Without this filter, a value that coincidentally falls into the
+        // [g_heap_base, ...) or nursery address range would be reported as a
+        // candidate root — the mark phase catches it, but the cost of a false
+        // positive is a wasted candidate that could (in rare address-space
+        // overlap scenarios) cause incorrect relocation.  The filter uses
+        // thread->stack_limit (the full registered stack extent), not scan_start,
+        // because interior pointers can legitimately point to any part of the
+        // thread's stack, including frames below the current live frame.
+        uintptr_t th_lo = reinterpret_cast<uintptr_t>(thread->stack_limit);
+        uintptr_t th_hi = reinterpret_cast<uintptr_t>(thread->stack_base);
         for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
             auto* val_ptr = reinterpret_cast<void**>(slot);
             // Probe sheds ASan only for genuinely poisoned redzone slots; live
@@ -733,6 +753,16 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
                 read != nullptr &&
                 (reinterpret_cast<uintptr_t>(read) >= g_heap_base ||
                  IsInNursery(read))) {
+                // Skip stack-interior pointers: a value pointing within the
+                // scanned thread's stack is an interior reference, not a heap
+                // root.  (CoreCLR conservatively reports everything as
+                // INTERIOR|PINNED and never relocates it; here we must not even
+                // report it, since our relocation phase writes conservative
+                // root slots back.)
+                uintptr_t rv = reinterpret_cast<uintptr_t>(read);
+                if (rv >= th_lo && rv <= th_hi) {
+                    continue;
+                }
                 s_callback(reinterpret_cast<void*>(slot), /*is_interior=*/false, s_user_data);
             }
         }

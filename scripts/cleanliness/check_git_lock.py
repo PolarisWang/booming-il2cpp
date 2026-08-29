@@ -282,6 +282,19 @@ def main() -> int:
             except OSError as e:
                 print(f"[FAIL] failed to remove index.lock: {e}")
                 return 1
+        # Read-only diagnostic; refuse to claim "[PASS]" when we could not
+        # enumerate processes — a pending writer could be masked by that gap.
+        # Emit WARN (exit 0) so this advisory module still never fails the gate,
+        # but the aggregator flags it WARN (not PASS/UNKNOWN) — honest signal
+        # that "no live writer" was not actually established (review #6).
+        if not enumerate_ok:
+            print(
+                f"[WARN] .git/index.lock present ({age:.0f}s old, {sz}B) but I could NOT enumerate "
+                "running processes, so I can't confirm whether a live git writer holds it.\n"
+                f"  Auto-clean is refused unless enumeration works. If you're sure no git write is "
+                f"running, delete .git/index.lock manually."
+            )
+            return 0
         print(
             f"[WARN] .git/index.lock present ({age:.0f}s old, {sz}B) with NO live git writer.\n"
             f"  Likely an orphaned/late leftover. Safe to clean: `python scripts/cleanliness/check_git_lock.py --clean-stale`\n"
