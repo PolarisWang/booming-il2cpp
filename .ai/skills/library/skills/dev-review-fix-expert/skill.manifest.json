@@ -1,0 +1,31 @@
+{
+    "kind": "project",
+    "domain": "review",
+    "name": "dev-review-fix-expert",
+    "summary": "代码审查结果修复专属入口——收到 review 立即分类并全量 Workflow 派发 expert，禁止先读代码确认。",
+    "trigger_signals": [
+        "收到代码审查反馈时",
+        "收到审阅结果/报告时",
+        "发现多个跨域 review finding 时"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "large",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2026-08-29",
+            "type": "initial"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": "2026-08-28 review 修复流程复盘（先读代码 vs 立即派 agent 的教训）"
+    },
+    "core_length": "medium"
+}

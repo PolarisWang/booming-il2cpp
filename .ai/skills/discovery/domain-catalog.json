@@ -41,6 +41,14 @@
       "order": 50
     },
     {
+      "id": "review",
+      "title": "review",
+      "summary": "处理与修复代码审查结果技能——收到 review 立即分类并 Workflow 派发 expert。",
+      "selection_hint": "需要处理代码审查结果、修复 review findings 时读取本域 registry。",
+      "expert_registry_domains": [],
+      "order": 55
+    },
+    {
       "id": "il2cpp",
       "title": "il2cpp",
       "summary": "il2cpp 核心翻译路径与架构约束技能。",

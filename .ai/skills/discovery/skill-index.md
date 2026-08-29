@@ -17,6 +17,7 @@
 | `git` | 需要创建/切换 worktree、提交本地改动或收口开发分支时读取本域 registry。 | [git](./registries/git.md) | 2 |
 | `knowledge` | 任务产出需要写入 wiki 或维护知识索引时读取本域 registry。 | [knowledge](./registries/knowledge.md) | 1 |
 | `testing` | 任务涉及测试框架、subject 定义、测试生成或测试治理时读取本域 registry。 | [testing](./registries/testing.md) | 5 |
+| `review` | 需要处理代码审查结果、修复 review findings 时读取本域 registry。 | [review](./registries/review.md) | 1 |
 | `il2cpp` | 需要开发 il2cpp 翻译逻辑或查询架构路径时读取本域 registry。 | [il2cpp](./registries/il2cpp.md) | 20 |
 | `skilling` | 需要判断该用哪些 skill，或要新建/改造 skill 体系时读取本域 registry。 | [skilling](./registries/skilling.md) | 4 |
 

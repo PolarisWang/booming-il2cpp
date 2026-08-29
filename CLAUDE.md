@@ -16,12 +16,22 @@
 >    — 多域（≥2）：读取 `dev-il2cpp-core-agent` 的 SKILL.md 执行调度循环
 >    — 验证方式：`.claude/.classified` 文件必须含 `loaded_expert:dev-il2cpp→{expert}` 行
 
-## 全局优先级（强制）
+## 🔴 不可违规（红线 — 违反即阻断 / 数据损失）
 
+以下是**绝对禁止**的行为。前两条有 hook 强制（结构性防线），其余是必须遵守的硬规则：
+
+1. **禁止 git stash**（hook 拦截）— stash 隐藏未提交变更，`git stash drop` 造成不可逆数据损失。切换上下文用 `git worktree` 或显式提交。
+2. **第〇条分类声明必须执行**（hook 拦截）— 不分类，Edit/Write/Bash/Skill 会被阻断。
+3. **四层架构红线**（明细见 `.ai/references/coding-references.md`）— 禁止跨层写入不应由本层产生的文件类型。跨层写入必须加 `# BOUNDARY_OVERRIDE: issues/NNN` + `Reason:` + `Expires:`。
+4. **统一内存分配**（明细见 `.ai/references/coding-references.md`）— 禁止全局 `operator new/delete` 重载；codegen 输出必须用 `CHAOS_IL2CPP_` 宏；禁止跨域分配/free 不匹配。
+5. **commit message 三段式** — 必须含 `root_cause` / `fix_strategy` / `regression_check`。同 bug 三次未解决禁止再试（先 `dev-brainstorm` 或 `dev-architecture-first-development`）。
+
+## 🟡 流程（应当遵守，违反会被审查但一般不直接导致数据损失）
+
+### 全局优先级
 P1（性能最优）> P2（方案完美性）> P3（HotUpdate 支持）。低优先级让位于高优先级，但高优先级方案不应故意破坏低优先级。
 
-## Workflow 路由
-
+### Workflow 路由
 - **单域** → 当前 Agent 自行实现
 - **≥2 域** → 默认 Workflow 委托
 - **连续 2 轮无进展** → 终止，需人工介入
@@ -29,84 +39,40 @@ P1（性能最优）> P2（方案完美性）> P3（HotUpdate 支持）。低优
   - 同一 chunk fact 失败超过 5 轮
   - 根因横跨 ≥2 域（如 CodeGen + 运行时 + 构建）
   - 当前 Agent 连续 3 次尝试未取得进展
+- 详见 `.ai/skills/discovery/routing-rules.md`。
 
-详见 `.ai/skills/discovery/routing-rules.md`。
+### 代码审查触发（强制）
+收到代码审查结果（含 review 工具、ReportFindings、外部 review 报告）时：
+1. **立即停止后续工具调用**，执行域分类声明（第〇条）
+2. **按"审查结果"场景映射到"≥2 域"规则** — 即使不是开发新翻译路径，也按多域 Workflow 处理
+3. **分类后直接走 Workflow 派发 agent，禁止先读代码确认** — review 已含文件:行号 + 完整诊断
+4. 路径：`review` 域 → `registries/review.md` → `dev-review-fix-expert` SKILL.md
 
-## 架构优先开发
-
+### 架构优先开发
 开发新翻译路径前，必须执行 `dev-architecture-first-development` 完成架构查询，确认与既有架构一致。禁止未查表直接实现。
 
-## 完成前自测
-
+### 完成前自测
 1. **查 wiki 要求** → 2. **无要求走 TDD**（先写失败测试）→ 3. **验证管线**（跑 foundation-dll pipeline）
 2. **统一测试入口**：改码后先跑 `python tests/runner/test_driver.py --layer unit` 自测。
    出现**非 known 的 `[FAIL]`**（`OVERALL: FAILED`）即为真实回归，须修复后再推。
    报告见 `tests/runner/test-report.json`；CI 走 `scripts/ci_test.py --preset <x>`。
    详见 [`wiki/06-测试验证/统一测试入口.md`](wiki/06-测试验证/统一测试入口.md)（含 no-skip 规则）。
 
-## AI Agent Bug 修复三规则
-
-1. **系统性调试**：根因调查 → 模式分析 → 假设验证 → 实现修复（禁止跳过第一步）
-2. **根因记录**：commit message 必须含 `root_cause` / `fix_strategy` / `regression_check`
-3. **三次修复规则**：同 bug 第三次仍未解决，禁止再尝试。先调用 `dev-brainstorm` 或 `dev-architecture-first-development`
-
-## Trace 优先调试
-
+### Trace 优先调试
 遇到失败/编译错/崩溃，先查 trace 系统：`run trace` → `trace-analyze`。信息不足时才加 print/log。
 
-## 知识记录
+## 🔵 参考（需要时查阅，不主动加载细节）
 
+### 技能调用
+技能源码在 `.ai/skills/library/skills/`（git 跟踪）。发现流程：读 `skill-index.md`（预加载）→ 匹配 `registries/<domain>.md` → 读 `library/skills/<name>/SKILL.md`。
+
+### 多域 Workflow 委托
+≥3 域或深度调试条件满足时：Phase 1 — 并行域内调查；Phase 2 — 汇聚根因；Phase 3 — 按方案逐域修复。
+
+### 知识记录
 - 新翻译路径 → `wiki/03-功能模块/il2cpp-核心架构/il2cpp-核心翻译路径参考.md`
 - 设计讨论 → `docs/archive/discuss/`
 - 每个功能的 STATUS.md 必须含 `## 架构映射` 小节
 
-## 技能调用
-
-技能源码在 `.ai/skills/library/skills/`（git 跟踪）。发现流程：
-1. 读 `.ai/skills/discovery/skill-index.md`（预加载）
-2. 匹配领域 → 读对应 `registries/<domain>.md`
-3. 找到 skill → 读 `library/skills/<name>/SKILL.md`
-
-## 多域 Workflow 委托
-
-≥3 域或深度调试条件满足时，启动 Workflow：
-```
-Phase 1 — 并行域内调查（每个 Expert 独立分析）
-Phase 2 — 汇聚根因（synthesize agent）
-Phase 3 — 按方案逐域修复
-```
-
-## 禁止 git stash（强制）
-
-严禁 `git stash`。Stash 隐藏未提交变更，`git stash drop` 造成不可逆数据损失。切换上下文用 `git worktree` 或显式提交。
-
-## 统一内存分配约束（强制）
-
-1. **禁止全局 `operator new/delete` 重载** — 污染引擎分配行为
-2. **codegen 输出必须用 `CHAOS_IL2CPP_` 宏**（`CHAOS_IL2CPP_NEW_GC` / `CHAOS_IL2CPP_MALLOC`）
-3. **禁止跨域分配/free 不匹配** — GC 域→GC 回收，Domain 域→heap->Destroy()，Raw 域→free
-4. 新分配策略通过 `GcAllocate`/`GcAllocateAtomic` 内部切换，对 codegen 透明
-
-详见 `wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/17-统一内存分配体系.md`。
-
-## 四层架构红线（强制）
-
-| 层 | 路径 | 允许产出 | 红线 |
-|----|------|---------|------|
-| **ATG** | `src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/` | `.cs`, `.csproj`, `.json` | 不得生成 C++ |
-| **Codegen** | `src/managed/Chaos.IL2CPP.Generator/` | `.generated.cpp`, `.generated.h`, `.json` | 产出必须自包含 |
-| **TPG** | `src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/` | `.cpp`, `.h` (via Scriban), `.cmake` | 不得修改 `.generated.*` |
-| **Python** | `tests/e2e/verification/` | `.py`, `.json`, `.yaml` | 不得 `write_text` 写入 `.cpp`/`.h` |
-
-跨层写入必须加 `# BOUNDARY_OVERRIDE: issues/NNN` + `Reason:` + `Expires:`。参见 `tests/e2e/verification/preflight/check_layer_boundaries.py`。
-
-## 编码规范（wiki 链接）
-
-以下规范已移入 wiki，写对应文件前先查阅：
-
-| 规范 | wiki 路径 |
-|------|----------|
-| **Native 编码规范 v1**（命名空间/Include/extern C/命名/注释/格式/内存/宏） | `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/native-coding-conventions-v1.md` |
-| Native 调试/LOG/PROFILE_SCOPE | `wiki/03-功能模块/06-il2cpp核心架构/24-DAP调试器使用说明.md` + 上述 v1 §5 日志节 |
-| `unordered_map` 选型 | 见 v1 规范 §5 内存/宏 + `wiki/04-工具与集成/chaos-sdk-usage.md` |
-| SDK/TPG 输出边界（四层架构红线） | `wiki/01-项目总览/codegen-tpg-python-module-boundaries.md` |
+### 编码规范 / 内存分配 / 四层红线明细
+见 `.ai/references/coding-references.md`。

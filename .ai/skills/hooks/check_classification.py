@@ -119,6 +119,32 @@ if tool_name == "Bash":
     if first_word in READONLY_BASH_WORDS:
         sys.exit(0)
 
+    # ── 新增: 危险命令拦截档 — 违反 CLAUDE.md 红线 ─────────────────
+    # 这些命令即使被权限系统放行，也因项目规则被禁止。
+    # 规避说明：该档只拦截直接的 `Bash(git stash ...)` 调用，无法封死
+    # `bash -c "git stash"` / 间接脚本 / CLI 插件，这是工具架构固有局限。
+    # 用 git worktree 或显式提交替代。
+    DANGEROUS_PATTERNS = [
+        # 所有 git 危险命令必须以命令开头（或 ;/&&/||/| 后），防止误拦 echo/commit msg
+        (r'(?:^|;|&&\s*|\|\|\s*|\||\n)\s*git\s+stash\b',
+         'git stash — 数据损失风险（CLAUDE.md 红线），用 git worktree 或显式提交'),
+        (r'(?:^|;|&&\s*|\|\|\s*|\||\n)\s*git\s+checkout\s+--\s+\.(\s|$)',
+         'git checkout -- . — 丢弃整个工作区，禁止'),
+        (r'(?:^|;|&&\s*|\|\|\s*|\||\n)\s*git\s+clean\s+-f[d]?\b',
+         'git clean -f[d] — 删除未跟踪文件，禁止'),
+    ]
+    for pat, reason in DANGEROUS_PATTERNS:
+        try:
+            if re.search(pat, cmd):
+                print(file=sys.stderr)
+                print(f"  ⚠️  危险 Git 命令被拦截（违反 CLAUDE.md 红线）：", file=sys.stderr)
+                print(f"  ── 命令: {cmd.strip()[:120]}", file=sys.stderr)
+                print(f"  ── 规则: {reason}", file=sys.stderr)
+                print(file=sys.stderr)
+                sys.exit(1)
+        except re.error:
+            pass  # 兜底：正则异常不阻断工具链
+
     # 第三档: 域操作 Bash — 仅提醒分类要求（不强制 loaded_expert，因 Skill 工具不可用）
     # 无域路径匹配 → 放行
     sys.exit(0)
