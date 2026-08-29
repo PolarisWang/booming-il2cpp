@@ -168,6 +168,36 @@ CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytes(CHAOS_IL2CPP_INTPTR unused, CHAOS_
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
 
+// BitConverter.GetBytes(Single) -> byte[4]
+CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytesFromSingle(CHAOS_IL2CPP_FLOAT32 value) noexcept
+{
+    auto* ptr = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(sizeof(ManagedArrayAccessor) + 4));
+    if (ptr == nullptr) return 0;
+    auto* arr = reinterpret_cast<ManagedArrayAccessor*>(ptr);
+    arr->header_data[0] = 0;
+    arr->element_type_shape = 0;
+    arr->element_type_info = nullptr;
+    arr->length = 1;
+    auto* elements = accessor_get_elements(arr);
+    std::memcpy(elements, &value, sizeof(value));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
+}
+
+// BitConverter.GetBytes(Double) -> byte[8]
+CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytesFromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept
+{
+    auto* ptr = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(sizeof(ManagedArrayAccessor) + 8));
+    if (ptr == nullptr) return 0;
+    auto* arr = reinterpret_cast<ManagedArrayAccessor*>(ptr);
+    arr->header_data[0] = 0;
+    arr->element_type_shape = 0;
+    arr->element_type_info = nullptr;
+    arr->length = 1;
+    auto* elements = accessor_get_elements(arr);
+    std::memcpy(elements, &value, sizeof(value));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
+}
+
 CHAOS_IL2CPP_INT32 ChaosBitConverterToInt32(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept
 {
     if (byteArray == 0) return 0;

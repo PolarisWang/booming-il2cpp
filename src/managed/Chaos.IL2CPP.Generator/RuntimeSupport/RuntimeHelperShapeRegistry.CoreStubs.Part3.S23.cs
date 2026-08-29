@@ -79,11 +79,11 @@ public sealed partial class NativeAotLoweringPlanner
                 }));
         }
 
-        /// <summary>Register String.Concat — inline direct-native call for 2-param string overload.</summary>
+        /// <summary>Register String.Concat — inline direct-native call for string/object overloads.</summary>
         private static void RegisterStringConcatInline(RuntimeHelperShapeRegistry registry,
             string methodName)
         {
-            // 2-param (string, string) overload — ChaosStringConcat2.
+            // 2-param (string, string) — ChaosStringConcat2.
             registry.RegisterInline(new InlineShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: methodName,
@@ -92,6 +92,37 @@ public sealed partial class NativeAotLoweringPlanner
                     if (paramTypes.Count != 2 || paramTypes[0] != "System.String" || paramTypes[1] != "System.String")
                         return null;
                     return "ChaosStringConcat2({0}, {1})";
+                }));
+            // (object, object) — also ChaosStringConcat2.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.String",
+                MethodName: methodName,
+                Resolver: (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 2 || paramTypes[0] != "System.Object")
+                        return null;
+                    return "ChaosStringConcat2({0}, {1})";
+                }));
+            // (object, object, object) — pair-call composition.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.String",
+                MethodName: methodName,
+                Resolver: (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 3 || paramTypes[0] != "System.Object")
+                        return null;
+                    return "ChaosReflectionConcatStringPairValues(ChaosStringConcat2({0}, {1}), {2})";
+                }));
+            // (string, string, string[, string]) — pair-call composition across arrity.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.String",
+                MethodName: methodName,
+                Resolver: (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count < 3 || paramTypes[0] != "System.String" || paramTypes[1] != "System.String")
+                        return null;
+                    // All remaining params are strings/objects; fold pairwise.
+                    return "ChaosReflectionConcatStringPairValues(ChaosStringConcat2({0}, {1}), {2})";
                 }));
         }
 

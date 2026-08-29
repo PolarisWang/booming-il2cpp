@@ -38,6 +38,8 @@ void ChaosArrayReverse(CHAOS_IL2CPP_INTPTR array) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosArrayGetValue(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosArrayNew1D(const TypeInfo* array_type_info, const TypeInfo* element_type_info, CHAOS_IL2CPP_UINT8 element_type_shape, CHAOS_IL2CPP_INTPTR length) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytes(CHAOS_IL2CPP_INTPTR unused, CHAOS_IL2CPP_INT32 value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytesFromSingle(CHAOS_IL2CPP_FLOAT32 value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytesFromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept;
 CHAOS_IL2CPP_INT32 ChaosBitConverterToInt32(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept;
 double ChaosBitConverterToDouble(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept;
 
