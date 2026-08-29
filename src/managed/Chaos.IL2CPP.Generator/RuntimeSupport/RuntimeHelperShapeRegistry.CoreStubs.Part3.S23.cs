@@ -379,7 +379,7 @@ public sealed partial class NativeAotLoweringPlanner
                                 if (paramTypes.Count != 0) return null;
                                 return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
                             })
-                        { IsInstanceMethod = false, SubjectId = "System.Activator.CreateInstance" });
+                        { IsInstanceMethod = false });
                         // NOTE: This is a dedicated InlineShapeDescriptor (not the generic
                         // SimpleForward path) because the generic method's shape is not
                         // resolved by the normal subject-resolution pipeline.  The DIAG
