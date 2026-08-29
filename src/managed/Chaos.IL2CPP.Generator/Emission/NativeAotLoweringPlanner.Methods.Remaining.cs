@@ -783,6 +783,58 @@ public sealed partial class NativeAotLoweringPlanner
         // lacking a corresponding typedef and append them.
         AppendMissingValueTypeTypedefsForHeader(sb);
 
+        // ── Comprehensive extern declarations for ALL emitted external-runtime
+        // symbols ──
+        // Every chaos_external_runtime_* symbol the codegen emitted a call to during
+        // method body emission (page TUs included) must be declared in the shared
+        // header.  _emittedExternalRuntimeSymbols is the authoritative set (keyed by
+        // symbol, value = return ABI carrier).  The BuildAbiExportDeclarations
+        // post-scan at the end of this method only sees symbols *textually* present
+        // in the header body, which misses calls that appear only in separate page
+        // translation units (e.g. surfaced reflection/delegate helpers such as
+        // SubjectInstanceFactory__Create_System_Type__System_Type__).  Emitting the
+        // full set here (as extern "C" with correct arg counts) avoids C3861 in the
+        // pages while staying ODR-safe (extern declarations, no definitions).  Symbol
+        // already handled by _externalRuntimeSubjects/_externalRuntimeHelpers are
+        // skipped to avoid C2733 / C2371 conflicts.
+        if (_emittedExternalRuntimeSymbols is { Count: > 0 })
+        {
+            // Symbols already declared above via their SubjectId registrations.
+            var declaredViaSubjects = new HashSet<string>(StringComparer.Ordinal);
+            if (_externalRuntimeSubjects is { Count: > 0 })
+                foreach (var kvp in _externalRuntimeSubjects)
+                    declaredViaSubjects.Add(GetExternalRuntimeHelperSymbol(kvp.Key));
+            if (_externalRuntimeHelpers is { Count: > 0 })
+                foreach (var h in _externalRuntimeHelpers)
+                    if (!string.IsNullOrEmpty(h.TargetSymbol))
+                        declaredViaSubjects.Add(h.TargetSymbol);
+
+            var extHeaderSb = new System.Text.StringBuilder(2048);
+            int extDeclCount = 0;
+            foreach (var kvp in _emittedExternalRuntimeSymbols.OrderBy(kv => kv.Key, StringComparer.Ordinal))
+            {
+                if (declaredViaSubjects.Contains(kvp.Key)) continue;
+                if (!seenTargetSymbols.Add(kvp.Key)) continue;   // dedup / skip link-contradiction
+                int pc = _emittedExternalRuntimeSymbolParams.TryGetValue(kvp.Key, out var epc) ? epc : 1;
+                extHeaderSb.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
+                extHeaderSb.Append(kvp.Key);
+                extHeaderSb.Append('(');
+                for (int __pi = 0; __pi < pc; __pi++)
+                {
+                    if (__pi > 0) extHeaderSb.Append(", ");
+                    extHeaderSb.Append("CHAOS_IL2CPP_INTPTR");
+                }
+                extHeaderSb.AppendLine(") noexcept;");
+                extDeclCount++;
+            }
+            if (extDeclCount > 0)
+            {
+                sb.Append("// ── Emitted external-runtime symbol declarations (comprehensive) ──\n");
+                sb.Append(extHeaderSb.ToString());
+                sb.AppendLine();
+            }
+        }
+
         // Phase 1a: ChaosAbiExportCollector — ensure every chaos_external_runtime_*
         // symbol referenced in the generated header has a visible extern "C" declaration.
         string postCollector = BuildAbiExportDeclarations(sb);
@@ -793,8 +845,6 @@ public sealed partial class NativeAotLoweringPlanner
 
         return sb.ToString();
     }
-
-
 
     /// <summary>Remove duplicate struct/boxed-type definitions from C++ code.
     /// FSharp.Core type forwarding may produce the same chaos_type_* symbol
