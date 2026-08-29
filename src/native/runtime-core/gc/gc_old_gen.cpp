@@ -799,7 +799,18 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     // Before allocating a new page, check whether the hard limit would
     // be exceeded.  If so, return nullptr — the caller will go through
     // HandleOomCondition which may trigger a full GC to free memory.
-    if (G_Scheduler().ExceedsHardLimit(size)) {
+    //
+    // Fix-A (recovery routing): RELAX this gate during OOM recovery
+    // (GcInOomRecovery true — i.e. this is the post-full-GC step-2 retry).
+    // The full GC just built old-gen free lists from reclaimed pages; reusing
+    // those lists (TryAllocateFromFreeLists / inline free-list pop below)
+    // touches ONLY already-committed pages and does NOT grow the heap, so the
+    // hard limit (derived from the monotonic estimated_heap_size_ which never
+    // shrinks after a collection) must not block genuine reuse.  True growth
+    // comes only from AllocatePage carving a NEW page — the OS allocation
+    // fails naturally when the heap is genuinely exhausted.  On the normal
+    // (non-recovery) fast path the gate is unchanged.
+    if (G_Scheduler().ExceedsHardLimit(size) && !GcInOomRecovery()) {
         CHAOS_IL2CPP_LOG_WARN_M("OldGen", "hard_limit_reached size={0}",
             static_cast<unsigned long long>(size));
         return nullptr;

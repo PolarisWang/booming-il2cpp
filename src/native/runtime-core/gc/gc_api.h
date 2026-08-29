@@ -46,6 +46,13 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
 /// size in the OOM failure report.
 CHAOS_IL2CPP_SIZE GcGetOomReportBudget() noexcept;
 
+/// True while HandleOomCondition is executing the post-full-GC @a retry_alloc
+/// callback.  Recovery paths consult this to relax gates that must not block a
+/// genuine recovery after a full GC freed memory (e.g. the old-gen
+/// ExceedsHardLimit gate, whose estimate never shrinks).  Only set on the
+/// recovery retry, never on the normal allocation fast path.
+bool GcInOomRecovery() noexcept;
+
 // ── Managed GC API (System.GC) ─────────────────────────────────────
 
 /// Returns the total number of bytes currently thought to be allocated

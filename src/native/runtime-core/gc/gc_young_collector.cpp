@@ -79,6 +79,16 @@ bool IsInNursery(const void* ptr) {
 /// Phase 2 precise nursery scan never advances past valid objects even when
 /// a large gap exists between obj and nursery->current.  Objects larger than
 /// 2048 bytes are typically LOH-allocated and never appear in the nursery.
+///
+/// NOTE (2026-08-29): this cap must stay SMALL (2048).  Raising it (e.g. to a
+/// 64 KB page) made GcScavengeObject copy [obj, obj+obj_size) into old-gen,
+/// which for an object near the nursery edge reads past nursery->committed and
+/// crashes.  When Phase-2 encounters a TypeInfo-valid but layout-unregistered
+/// object it now jumps straight to nursery_used (see gc_young_collector.cpp
+/// Phase-2), so this function is only consulted for promotion sizing — and for
+/// that path a 2048-byte allocation is the safe, bounded choice (never copies
+/// beyond the nursery).  Objects without a registered layout do not exist in
+/// production (all managed types carry a GcTypeLayout via RegisterTypeInfo).
 static constexpr CHAOS_IL2CPP_SIZE kMaxEstObjectSize = 2048;
 
 static CHAOS_IL2CPP_SIZE EstimateObjectSize(const void* obj, const Region* nursery) {
@@ -593,8 +603,20 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
                 // spin this Phase-2 walk forever — the typed young-GC hang.
                 // Mirror PreciseObjectSize's guard: fall back to bounds estimation
                 // so scan_ptr always advances.
-                CHAOS_IL2CPP_SIZE obj_size = EstimateObjectSize(obj, nursery);
-                scan_ptr += obj_size;
+                //
+                // FIX-B alignment: when the _first_word_ IS a valid TypeInfo
+                // pointer (the L621 gate passed) but the layout is unregistered,
+                // this is a real typed object whose extent Phase-2 cannot
+                // precisely determine.  Rather than advancing by EstimateObjectSize
+                // (capped at 2048 bytes, which would phantom-re-walk into the
+                // object interior for objects > 4 KB), jump to the nursery used
+                // frontier.  Remaining internal pointers of such objects are
+                // covered by Phase 0 (stack-root scan), Phase 1 (dirty-card
+                // scan), and Phase 3 (BFS from promoted-objects).
+                //
+                // NOTE: first_word is guaranteed valid here because the L621
+                // IsValidTypeInfoPointer gate passed.
+                scan_ptr = nursery_used;
                 continue;
             }
 

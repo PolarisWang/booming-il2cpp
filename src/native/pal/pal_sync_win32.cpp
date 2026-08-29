@@ -119,7 +119,20 @@ bool PalEventWait(PalEvent* e, uint64_t timeout_ms) noexcept {
     DWORD ms = (timeout_ms == UINT64_MAX) ? INFINITE
               : (timeout_ms > INFINITE - 1) ? INFINITE - 1
               : static_cast<DWORD>(timeout_ms);
-    return ::WaitForSingleObject(reinterpret_cast<HANDLE>(e), ms) == WAIT_OBJECT_0;
+    HANDLE h = reinterpret_cast<HANDLE>(e);
+    // Alertable wait so a queued APC (the preemptive-suspend fallback, see
+    // pal_preempt_win32.cpp QueueUserAPC) can interrupt the park and run on
+    // this thread.  A cooperative thread blocked in the safepoint wait would
+    // otherwise never process the APC (WaitForSingleObject is non-alertable),
+    // so the coordinator deems it unresponsive until the hard timeout forces
+    // an unsafe release — the root of the "safepoint hard timeout ... forcing
+    // release" stress crash.  WAIT_IO_COMPLETION means an APC ran; loop and
+    // re-wait (the event, if signaled later, still wakes us).
+    DWORD r = ::WaitForSingleObjectEx(h, ms, TRUE);
+    while (r == WAIT_IO_COMPLETION) {
+        r = ::WaitForSingleObjectEx(h, ms, TRUE);
+    }
+    return r == WAIT_OBJECT_0;
 }
 
 int32_t PalEventWaitAny(PalEvent* const* events, size_t count, uint64_t timeout_ms) noexcept {

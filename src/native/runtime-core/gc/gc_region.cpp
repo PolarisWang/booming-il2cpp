@@ -351,11 +351,30 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     if (old_result == nullptr) {
         // All recovery attempts failed — invoke the full OOM recovery chain:
         // blocking full GC → retry → emergency reserve → OOM event.
+        //
+        // Fix-A (recovery routing): the retry lambda RE-ENTERS the original
+        // allocation path after the full GC, rather than jumping straight to
+        // old-gen.  The full GC just reset the nursery bump pointer, so
+        // TlabClaimFromYoungGen() now succeeds — allocate from the fresh
+        // nursery first, and only fall back to old-gen if the object is
+        // oversized or the nursery retry fails.  This path runs only inside
+        // HandleOomCondition's step-2 retry (never on the normal fast path).
         struct OomRetryCtx { CHAOS_IL2CPP_SIZE size; bool scanning; };
         OomRetryCtx ctx{size, true};
         old_result = HandleOomCondition(
             [](void* ctx) -> void* {
                 auto* c = static_cast<OomRetryCtx*>(ctx);
+                // Re-enter nursery first: full GC reset the bump pointer.
+                if (c->size <= kMaxTlabAlloc) {
+                    TLAB tlab = TlabClaimFromYoungGen();
+                    if (tlab.current != nullptr) {
+                        tls_tlab = tlab;
+                        void* nursery_ptr = NurseryAllocate(c->size);
+                        if (nursery_ptr != nullptr) {
+                            return nursery_ptr;
+                        }
+                    }
+                }
                 threading::EnterPreemptiveMode();
                 void* p = G_OldGen().Allocate(c->size, c->scanning);
                 threading::EnterCooperativeMode();
@@ -484,6 +503,17 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
         old_result = HandleOomCondition(
             [](void* ctx) -> void* {
                 auto* c = static_cast<OomRetryCtx*>(ctx);
+                // Re-enter nursery first: full GC reset the bump pointer.
+                if (c->size <= kMaxTlabAlloc) {
+                    TLAB tlab = TlabClaimFromYoungGen();
+                    if (tlab.current != nullptr) {
+                        tls_tlab = tlab;
+                        void* nursery_ptr = NurseryAllocateAtomic(c->size);
+                        if (nursery_ptr != nullptr) {
+                            return nursery_ptr;
+                        }
+                    }
+                }
                 threading::EnterPreemptiveMode();
                 void* p = G_OldGen().Allocate(c->size, c->scanning);
                 threading::EnterCooperativeMode();
