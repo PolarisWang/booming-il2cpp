@@ -13,7 +13,11 @@ if(ROADMAP0_TOOLCHAIN_VALIDATE_ONLY)
     endif()
 endif()
 
-project(roadmap0_preset_router LANGUAGES CXX)
+# P0.1: SemVer for the whole project — single source of truth in VERSION.
+# Keep in sync with src/managed/Directory.Build.props <Version> and tags v*.
+set(CHAOS_VERSION "0.1.0")
+
+project(roadmap0_preset_router LANGUAGES CXX VERSION ${CHAOS_VERSION})
 
 # ── MSVC debug info: Embedded (/Z7) avoids shared .pdb contention ─────
 # The default /ZI (Edit-and-Continue PDB) crashes on systems where

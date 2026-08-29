@@ -25,18 +25,17 @@ src/
 │   ├── hot-update/     — Method replacement infrastructure
 │   ├── support/        — Runtime support layer
 │   └── engine-bridge/  — Game engine integration bridge
-├── tools/              — Test project generator (TPG), build helpers
+│   ├── tools/            — Test project generator (TPG), build helpers
 └── dll/                — Foundation DLL test source
 
 contracts/              — Native ABI contract headers + engine interface (v0)
 tests/                  — Snapshot / integration / e2e test suites + runner
-testing/                — Foundation-DLL verification pipeline (build → fact → benchmark)
-tools/                  — Pipeline / benchmark / profile helper scripts
+tests/e2e/translation/    — Foundation-DLL verification pipeline (build → fact → benchmark)
 wiki/                   — Project wiki: architecture, function modules, skill system
 docs/                   — Design docs, assessments, and archived historical records
 scripts/                — CI and build orchestration scripts
 cmake/                  — Shared CMake configuration (incl. native test factory)
-third_party/            — External dependencies (fmt, mono.cecil, scriban, unordered_dense)
+third_party/            — External dependencies (fmt, scriban, unordered_dense)
 .ai/                    — Agent skill system (discovery, registry, hook runtime)
 .claude/                — Claude Code harness configuration, skill routing stub, worktrees
 schemas/                — JSON schemas for pipeline/codegen artifacts
@@ -96,8 +95,9 @@ for the pyramid, the no-skip rule, and how to add tests.
 ## Key Dependencies
 
 - [fmt](https://github.com/fmtlib/fmt) — Type-safe string formatting
-- [Mono.Cecil](https://github.com/jbevain/cecil) — .NET assembly inspection
 - [Scriban](https://github.com/scriban/scriban) — Template engine for code generation
+- [system.reflection.metadata](https://github.com/dotnet/runtime) — .NET metadata reader (vendored)
+- [unordered_dense](https://github.com/ankerl/unordered_dense) — Fast hash map (header-only, vendored)
 
 ## License
 

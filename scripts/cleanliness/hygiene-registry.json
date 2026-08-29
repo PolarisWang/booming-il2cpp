@@ -48,6 +48,13 @@
       "args": [],
       "timeout": 30,
       "description": "Diagnose .git/index.lock holder + surface safe stale-lock clean. Advisory WARN (never fails the gate); --clean-stale does the actual delete. Prevents multi-agent/VS Code lock contention from silently blocking git writes."
+    },
+    {
+      "name": "release-governance",
+      "module": "check_release_governance",
+      "args": [],
+      "timeout": 30,
+      "description": "Open-source industrialization gate: SemVer consistency (VERSION == CMakeLists CHAOS_VERSION == Directory.Build.props <Version>)、README 有效性 (no stale tools//testing//Mono.Cecil)、release tag 存在. Advisory WARN (never fails pre-commit); --ci forces hard fail."
     }
   ]
 }
