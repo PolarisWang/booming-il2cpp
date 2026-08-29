@@ -289,8 +289,21 @@ void SafepointPoll() noexcept {
 
     // Cooperative mode: wait on event (zero CPU, infinite wait).
     // ReleaseGlobalSafepoint will set the event when all threads are done.
+    //
+    // Re-check suspend_seq after waking (lost-wakeup protection).  Without
+    // this re-check, a thread woken by the N-th release may miss epoch N+1
+    // already being published while we were parked (the auto-reset event
+    // was Signaled once, consumed by the wake, and the publisher of N+1
+    // never re-signals it because the thread's suspend_ack still shows the
+    // old epoch, so the coordinator counts it unresponsive → hard timeout
+    // forced-release → conservative scan races the mutator → OOM/crash).
     if (thread->suspend_event != nullptr) {
-        PalEventWait(thread->suspend_event, UINT64_MAX);
+        for (;;) {
+            uint32_t cur_seq = thread->suspend_seq.load(std::memory_order_acquire);
+            if (cur_seq == 0) break;
+            thread->suspend_ack.store(cur_seq, std::memory_order_release);
+            PalEventWait(thread->suspend_event, UINT64_MAX);
+        }
     } else {
         // Fallback: spin if event not available.
         while (thread->suspend_seq.load(std::memory_order_acquire) != 0) {

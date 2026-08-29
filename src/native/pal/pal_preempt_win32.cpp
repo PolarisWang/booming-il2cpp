@@ -33,13 +33,19 @@ bool PalPreemptRequest(void* os_handle, uint64_t /*os_thread_id*/,
                           static_cast<ULONG_PTR>(epoch)) != 0;
 }
 
-void PalPreemptiveSuspendAck(uint64_t epoch, PalEvent* suspend_event,
+void PalPreemptiveSuspendAck(uint64_t epoch, PalEvent* /*suspend_event*/,
                               std::atomic<uint32_t>* /*suspend_seq*/,
                               std::atomic<uint32_t>* suspend_ack) noexcept {
+    // Ack-and-return: DO NOT re-park on the suspend event here.  This runs on
+    // the Windows APC thread context (preemptive-suspend fallback).  Re-entering
+    // PalEventWait inside the APC would (a) block again on the SAME auto-reset
+    // event, which ReleaseGlobalSafepoint will only Signal once — that edge
+    // case can be consumed by this inner wait, leaving the outer SafepointPoll
+    // park wedged (lost-wakeup); and (b) nest an alertable wait inside an ABC
+    // window.  We ack and return; the thread's own SafepointPoll re-check loop
+    // (thread_state.cpp) re-loads suspend_seq and decides whether to park for a
+    // newer epoch — self-healing regardless of how this APC was delivered.
     suspend_ack->store(epoch, std::memory_order_release);
-    if (suspend_event != nullptr) {
-        PalEventWait(suspend_event, UINT64_MAX);
-    }
 }
 
 // ── Phase 2 (C): register-window capture (Win64) ───────────────────────
