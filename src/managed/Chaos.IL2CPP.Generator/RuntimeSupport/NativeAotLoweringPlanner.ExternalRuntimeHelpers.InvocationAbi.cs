@@ -319,6 +319,10 @@ public sealed partial class NativeAotLoweringPlanner
     private void EmitAbiReturnPush(StringBuilder builder, AotCoreIrAbiSlotArtifact returnAbi, string resultExpression, string indentation)
     {
         string[] pushLines;
+        // Track the eval-stack slot type so a subsequent stloc/ldloc of this result
+        // stores/reloads with the correct carrier (else a byte[]/reference pointer
+        // would be written via ChaosStoreFloat32 when the prior stack slot was a
+        // float — truncating the 64-bit address).
         switch (returnAbi.CarrierKindCode)
         {
             case AotCoreIrAbiCarrierKind.Int32:
@@ -330,10 +334,21 @@ public sealed partial class NativeAotLoweringPlanner
             case AotCoreIrAbiCarrierKind.ByRef:
             case AotCoreIrAbiCarrierKind.MultiReturn:
             case AotCoreIrAbiCarrierKind.ByRefToValueType:
-                pushLines =
-                [
-                    $"{indentation}{AllocateEvalStackTargetExpression()} = static_cast<CHAOS_IL2CPP_INTPTR>({resultExpression});"
-                ];
+            case AotCoreIrAbiCarrierKind.ValueTypeByValue:
+                {
+                    var lines = new System.Collections.Generic.List<string>();
+                    if (returnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue)
+                    {
+                        lines.Add($"{indentation}auto* chaos_result_storage = new {GetRequiredAbiValueTypeSymbol(returnAbi)}{{}};");
+                        lines.Add($"{indentation}*chaos_result_storage = {resultExpression};");
+                    }
+                    lines.Add($"{indentation}{AllocateEvalStackTargetExpression()} = " +
+                        (returnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue
+                            ? "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_result_storage);"
+                            : $"static_cast<CHAOS_IL2CPP_INTPTR>({resultExpression});"));
+                    pushLines = lines.ToArray();
+                }
+                PushSlotType(SlotType.NativeInt);
                 break;
             case AotCoreIrAbiCarrierKind.Float32:
                 pushLines =
@@ -354,20 +369,14 @@ public sealed partial class NativeAotLoweringPlanner
                 [
                     $"{indentation}{AllocateEvalStackTargetExpression()} = ChaosStoreInt64({resultExpression});"
                 ];
+                PushSlotType(SlotType.Int64);
                 break;
             case AotCoreIrAbiCarrierKind.UInt64:
                 pushLines =
                 [
                     $"{indentation}{AllocateEvalStackTargetExpression()} = chaos_store_uint64({resultExpression});"
                 ];
-                break;
-            case AotCoreIrAbiCarrierKind.ValueTypeByValue:
-                pushLines =
-                [
-                    $"{indentation}auto* chaos_result_storage = new {GetRequiredAbiValueTypeSymbol(returnAbi)}{{}};",
-                $"{indentation}*chaos_result_storage = {resultExpression};",
-                $"{indentation}{AllocateEvalStackTargetExpression()} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_result_storage);",
-            ];
+                PushSlotType(SlotType.Int64);
                 break;
             default:
                 throw new NotSupportedException($"native-aot lowering does not support pushing ABI return carrier '{returnAbi.CarrierKindCode}'.");
