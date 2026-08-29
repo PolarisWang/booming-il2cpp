@@ -358,14 +358,25 @@ public sealed class ProbeEmitter
         sb.AppendLine("{");
         sb.AppendLine("    public static T Create<T>()");
         sb.AppendLine("    {");
-        sb.AppendLine("        try { return Activator.CreateInstance<T>(); } catch { /* fall through */ }");
+        sb.AppendLine("        try { return Activator.CreateInstance<T>(); } catch { /* no public parameterless ctor */ }");
         sb.AppendLine("        try");
         sb.AppendLine("        {");
         sb.AppendLine("            var t = typeof(T);");
         sb.AppendLine("            if (t.IsValueType) return default!;");
         sb.AppendLine("            return (T)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(t);");
         sb.AppendLine("        }");
-        sb.AppendLine("        catch { return default!; }");
+        sb.AppendLine("        catch (Exception ex)");
+        sb.AppendLine("        {");
+        sb.AppendLine("            // Neither a public parameterless ctor nor GetUninitializedObject succeeded.");
+        sb.AppendLine("            // Returning default! (null) would hand a null subject to the probe; the member");
+        sb.AppendLine("            // call then throws NullReferenceException, recorded as HasException=true and");
+        sb.AppendLine("            // misread as \"this method throws NRE\" — polluting the probe classification.");
+        sb.AppendLine("            // Log the exact type and throw a distinctive exception so the construction");
+        sb.AppendLine("            // failure is diagnosable downstream (and never surfaces as the probe's NRE).");
+        sb.AppendLine("            var t = typeof(T);");
+        sb.AppendLine("            Console.WriteLine($\"[PROBE_WARN] SubjectInstanceFactory.Create<{t.FullName}> failed: no public parameterless ctor and GetUninitializedObject threw {ex.GetType().FullName}: {ex.Message}\");");
+        sb.AppendLine("            throw new System.InvalidOperationException($\"Could not construct probe subject '{t.FullName}': {ex.Message}\");");
+        sb.AppendLine("        }");
         sb.AppendLine("    }");
         sb.AppendLine("}");
         return sb.ToString();
@@ -472,8 +483,14 @@ public sealed class ProbeEmitter
             var outputTask = process.StandardOutput.ReadToEndAsync();
             var errorTask = process.StandardError.ReadToEndAsync();
 
+            // Timeout deliberately generous at 180s, not 15s/60s: the probe process does
+            // cold-start JIT compilation of large reference assemblies, and under ASan/deadlock
+            // instrumentation individual probes historically exceeded the old 15s timeout,
+            // failing CI. Lowering this value reintroduces those flaky timeouts. Async drain +
+            // WaitForExit(timeout) keeps kill-on-hang enforceable (see RunDotnetBuild).
             if (!process.WaitForExit(180_000))
             {
+                Console.Error.WriteLine($"[Probe] Run timed out after 180s for {Path.GetFileName(probeDir)} — killing process.");
                 process.Kill();
                 process.WaitForExit(5_000);
             }

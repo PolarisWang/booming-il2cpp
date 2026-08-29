@@ -1,6 +1,8 @@
 # fact-266 执行方案（多 session，可落地）
 
-> 目的：把 foundation-dll `system-2`（System.Private.CoreLib）fact 的 **266 个 failed（value=0）** 逐族消灭，最终 passed 从 2559 → 2825。
+> ⚠️ **本文档基线为 2026-08-27 实测**。后续 commit `588fa7a67`(Convert string +8, →2610)、`6ec1a180d`(Decimal.FromOACurrency + CreateChecked/Saturating/Truncating(int), →2614) 已推进到 **2610→2614**。接手时以 main 最新 HEAD 为准。
+>
+> 目的：把 foundation-dll `system-2`（System.Private.CoreLib）fact 的 **274 个 failed（value=0）** 逐族消灭，最终 passed 从 2551 → 2825。
 > 本文是**唯一权威的执行入口**。任何 session 从"下一步"小节接手，无需重读历史。
 > 关联诊断已沉淀：`docs/dev/in-progress/fact-266-stub-codegen/handoff-2026-08-27.md`（第 6-10 轮是**已完成证据**，别再重做）。
 

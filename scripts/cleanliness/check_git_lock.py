@@ -36,9 +36,70 @@ def repo_root() -> Path:
     p = Path(__file__).resolve()
     for _ in range(6):
         p = p.parent
-        if (p / ".git").is_dir():
+        git = p / ".git"
+        # .git is a directory in a normal repo, but only a FILE (containing
+        # "gitdir: <path>") in a git worktree. Accept both.
+        if git.is_dir() or git.is_file():
             return p
     raise RuntimeError("not inside a git repo tree")
+
+
+def _git_procs_posix():
+    """Return (procs, enumerate_ok) for Linux/macOS using ``ps aux``.
+
+    Falls back to ``psutil`` if available (more reliable), then ``ps aux``.
+    """
+    procs = []
+    enumerate_ok = False
+    # Try psutil first (more reliable, avoids parsing races).
+    try:
+        import psutil  # noqa: F811
+        enumerate_ok = True
+        for proc in psutil.process_iter(["pid", "name", "cmdline"]):
+            try:
+                info = proc.info
+                name = (info.get("name") or "").lower()
+                cmdline = info.get("cmdline")
+                if "git" not in name and "git" not in str(cmdline).lower():
+                    continue
+                cmd = " ".join(cmdline) if cmdline else name
+                procs.append({"pid": str(info["pid"]), "cmdline": cmd})
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+        return procs, True
+    except ImportError:
+        pass
+    # Fallback: ps aux filtered for git.
+    try:
+        out = subprocess.run(
+            ["ps", "aux"],
+            capture_output=True, text=True, timeout=10, errors="replace",
+        ).stdout
+        enumerate_ok = bool(out.strip())
+    except (subprocess.SubprocessError, OSError, FileNotFoundError):
+        return procs, False
+    if not enumerate_ok:
+        return procs, False
+    for line in out.splitlines():
+        # ps aux output: USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
+        parts = line.split(None, 10)
+        if len(parts) < 11:
+            continue
+        pid = parts[1]
+        cmd = parts[10]
+        if "git" in cmd.lower():
+            procs.append({"pid": pid, "cmdline": cmd})
+    return procs, True
+
+
+def _git_procs_auto():
+    """Auto-detect platform and dispatch to the right implementation."""
+    import platform
+    system = platform.system().lower()
+    if system == "windows":
+        return _git_procs_windows()
+    else:
+        return _git_procs_posix()
 
 
 def _git_procs_windows():
@@ -118,8 +179,33 @@ def have_active_writer(procs) -> bool:
     return False
 
 
+def _git_dir(root: Path) -> Path:
+    """Return the actual git directory (where index.lock lives).
+
+    In a normal repo this is ``root / ".git"``.  In a worktree the ``.git`` file
+    contains ``gitdir: <path>`` and the real git dir is elsewhere.
+    """
+    git = root / ".git"
+    if git.is_dir():
+        return git
+    # git worktree — .git is a file containing "gitdir: <path>"
+    try:
+        text = git.read_text(encoding="utf-8").strip()
+    except OSError:
+        return git  # fall back to the default; will fail gracefully later
+    if text.startswith("gitdir:"):
+        # The path in the file may be relative to the .git file location,
+        # but git always writes absolute paths. Handle both for safety.
+        d = Path(text.split(":", 1)[1].strip())
+        if not d.is_absolute():
+            d = (git.parent / d).resolve()
+        return d
+    return git
+
+
 def lock_info(root: Path):
-    lock = root / ".git" / "index.lock"
+    gitd = _git_dir(root)
+    lock = gitd / "index.lock"
     if not lock.exists():
         return None, None
     try:
@@ -150,7 +236,7 @@ def main() -> int:
                 pass
 
     lock, info = lock_info(root)
-    procs, enumerate_ok = _git_procs_windows()
+    procs, enumerate_ok = _git_procs_auto()
     live_writer = have_active_writer(procs)
     live_writer_cmd = ""
     for p in procs:

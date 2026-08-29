@@ -10,9 +10,9 @@
 ## 1. 当前状态（权威）
 
 - **分支**：`main`（`D:/agent/chaos-il2cpp` 主目录，session 已清空）
-- **HEAD**：`c87aeab69`（含 7 个 fact-266 提交，见 §4）
-- **已实现结果**：foundation-dll `system-2`(System.Private.CoreLib) fact **2551 → 2602 / 2825**（净 **+51 passed**，failed 274→223）
-- **剩余**：**223 failed**：String 91 / Type 76 / Enum 13 / Convert ~10 / Decimal-behavioral ~15 / 其它 ~18
+- **HEAD**：`6ec1a180d`（fact-266 提交见 §4）
+- **已实现结果**：foundation-dll `system-2`(System.Private.CoreLib) fact **2551 → 2614 / 2825**（净 **+63 passed**，failed 274→211）
+- **剩余**：**211 failed**：String 91 / Type 87 / Enum 4 / Convert 2 / Decimal-behavioral 11 / 其它 ~16
 - **工作区未提交**：`gc_old_gen.cpp`(并发 GC 线)、`subjects.metadata.json`、`scripts-hygiene-audit.md`(并发)、
   我的 `handoff-2026-08-27.md` + `execution-plan`(文档未 commit，交接用)。**勿把这些并发改动混入 fact-266 commit。**
 
@@ -54,7 +54,8 @@
 - **native 改动必须同步到 origin `D:\agent\chaos-il2cpp\src\native\...`**。codegen 用 Generator（C#）。
 
 ### (2) C3861 符号可见性
-- Decimal natives 声明放 **`runtime_core.h`**（`chaos_pch.h` → **所有 generated TU** 可见），**不是** math_stubs.h（页面不 include）。
+- Decimal natives 声明放 **`runtime_core.h` + `math_stubs.h` 双重声明**（`chaos_pch.h` → **所有 generated TU** 可见）。
+- 实测 `4e0dcc24f` 将 `ChaosDecimalIdentity` 放在两个头文件：`runtime_core.h` 给所有 generated TU 通过 `chaos_pch.h` 可见，`math_stubs.h` 给 math-stubs 相关 TU 通过直接 include 可见，确保所有编译单元均不报 C3861。
 - 每个 SimpleForward native 的声明必须在 generated TU reachable 的 header，否则 C3861/build fail。
 
 ### (3) build 同步脆弱性（待专项修）
@@ -71,7 +72,7 @@
 
 ---
 
-## 4. 提交清单（main 上的 fact-266 提交)
+## 4. 提交清单（main 上的 fact-266 提交，包含后续 session 的增补）
 
 | commit | 内容 | fact 变化 |
 |--------|------|----------|
@@ -81,26 +82,29 @@
 | `7a785d7d9` | ATG 探针死锁 + CopySign/MaxMag/MinMag | →2592 (+3) |
 | `42383f85f` | Convert.ToXxx(bool) 内联 | →2602 (+10) |
 | `152edae1f`/`64f7bcbe5`/`8c5004860` | 文档（首轮归因/交接/立项） | — |
+| `588fa7a67` | Convert.ToXxx(System.String) — inline direct-native 绕过 null-guard | →2610 (+8) |
+| `9fa292770` | 文档（handoff 更新） | — |
+| `6ec1a180d` | Decimal.FromOACurrency + CreateChecked/Saturating/Truncating(int) | →2614 (+4) |
 
 > committed 在 main。工作树仅剩并发 GC/元数据未提交 + 我的 handoff/execution-plan 文档（可选 commit）。
 
 ---
 
-## 5. 剩余 223 failed（行为/反射族，难低产）
+## 5. 剩余 211 failed（行为/反射族，难低产）
 
-- **String 91 / Type 76 / Enum 13**：反射元数据 / 格式化，ABI 复杂。
-- **Convert ~10**：`default(string)`→parse 应抛 FormatException（行为语义），非 value。
-- **Decimal-behavioral ~15**：Parse(string...)、CreateChecked/Saturating/Truncating(int)、FromOACurrency(long)——需真实现或行为语义。
+- **String 91 / Type 87 / Enum 4**：反射元数据 / 格式化，ABI 复杂。
+- **Convert 2**：`default(string)`→parse 应抛 FormatException（行为语义），非 value。
+- **Decimal-behavioral 11**：Parse(string...)、CreateChecked/Saturating/Truncating(int)（已修 3 个，尚余 int 变体）、FromOACurrency(long)（已修，see §4）——需真实现或行为语义。
 - 多数是**期望异常**（如 `Convert.ToInt32(default(string))` → .NET 抛），或**反射实现对 runtime 深度依赖**。
 
 ---
 
 ## 6. 下一步（按优先级）
 
-> **2026-08-28 进度**：Convert.ToXxx(System.String) 8 个已修（inline 绕过 null-guard，commit `588fa7a67`，2602→2610）。remaining 215 = String 91 / Type 87 / Decimal-Math 15 / Enum 4 / Convert 2 / other 16。
+> **2026-08-28 进度**：Convert.ToXxx(System.String) 8 个已修（inline 绕过 null-guard，commit `588fa7a67`，2602→2610）。Decimal.FromOACurrency + CreateChecked/Saturating/Truncating(int) 4 个已修（commit `6ec1a180d`，2610→2614）。**remaining 211** = String 91 / Type 87 / Decimal-Math 11 / Enum 4 / Convert 2 / other 16。
 
 1. **（前置）修 build-infra 持久化**：让 codegen SDK 头/库拷贝源与 origin src 一致，每批 e2e 免手同步。（§3-3）
-2. **Decimal-behavioral(15)**：`Decimal.Parse(string...)`、`CreateChecked/Saturating/Truncating(int/long)`、`FromOACurrency(long)`——与 Convert(string) 同模式（native 实现 + 注册），是高 ROI 下一批。
+2. **Decimal-behavioral(11, 已修 FromOACurrency + CreateChecked/Saturating/Truncating(int) 3 个)**：`Decimal.Parse(string...)`、`CreateChecked/Saturating/Truncating(int)` 剩余 int 变体——与 Convert(string) 同模式（native 实现 + 注册），是高 ROI 下一批。
 3. **Enum(4)**：格式/解析。
 4. **String(91)/Type(87)** 反射——需独立评估（可能大量依赖 runtime 反射支撑，性价比低，可能诚实 known-fail 白名单）。
 5. 每批：改 Generator(worktree 或 origin) + native(origin src) + `build_presets.py --force` + 手动同步 chunk 头/lib + `cmake --build` 重建 entry + `entry.exe --fact-json` 比对 passed 上升 + 无回归。

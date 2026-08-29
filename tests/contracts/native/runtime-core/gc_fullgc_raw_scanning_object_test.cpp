@@ -178,30 +178,33 @@ static void RunFullGcRawScanningObjectCollectedWhenUnreferenced() {
     for (int i = 0; i < 256 && !reused; i++) {
         auto* probe = static_cast<RawScanningObject*>(
             G_OldGen().Allocate(sizeof(RawScanningObject), /*scanning=*/true));
-        if (probe == nullptr) break;
+        if (probe == nullptr) {
+            printf("  [DBG] probe %d returned nullptr (OOM or hard limit) — "
+                   "continuing to next probe would be pointless, breaking\n", i);
+            break;
+        }
         uintptr_t pa = reinterpret_cast<uintptr_t>(probe);
         reused = (pa >= obj_begin) && (pa < obj_end);
     }
 
-    // Robust reclaim oracle: an explicitly-Free()d block that the A2b
-    // conservative mark did NOT retain must be swept back to the free list and
-    // REUSED — i.e. its payload (beyond the 16-byte free-block header, which the
-    // allocator itself stamps) must end up overwritten by a subsequent
-    // same-size allocation.  We scan slot[2..] so an untouched free-block
-    // header (sentinel/next in slot[0..1]) is not mistaken for a live payload.
-    bool reallocated_payload = false;
-    {
-        auto* chk = static_cast<RawScanningObject*>(reinterpret_cast<void*>(obj_begin));
-        for (int s = 2; s < kSlots; s++) {
-            if (chk->slot[s] != 0) { reallocated_payload = true; break; }
-        }
-    }
-    GC_CHECK(reallocated_payload,
+    // ── Primary assertion ────────────────────────────────────────────────
+    // The `reused` oracle (address-range overlap) is the correct assertion:
+    // if the freed block was swept back to the free list, a subsequent
+    // same-size allocation must land in the same address range.  We do NOT
+    // assert on payload content (reallocated_payload): the allocator performs
+    // a full memset(block, 0, 256) on reuse, so payload bytes 2..31 are all
+    // zero — the same as if the block were still free-list resident with
+    // only the 64-byte zeroed Free() header.  Using payload content as the
+    // oracle would invert the logic: a REUSED block (correct behaviour) would
+    // have all-zero payload and fail, while a NOT-reclaimed block (A2b bug)
+    // would retain 0x2000+ dirty data and pass.  The address-range check is
+    // unambiguous.
+    GC_CHECK(reused,
              "freed unreferenced raw scanning object's block is swept and reused by full GC "
              "(the A2b conservative mark must not retain an explicitly-free'd dead block)");
-    printf("  [DBG] block_addr_reused=%d block_payload_reallocated=%d "
-           "(payload-reallocated = freed block was swept back and overwritten by a later alloc)\n",
-           (int)reused, (int)reallocated_payload);
+    printf("  [DBG] block_addr_reused=%d (reused = freed block was swept back and "
+           "reallocated by a later alloc in the same address range)\n",
+           (int)reused);
 
     threading::UnregisterThread();
 }

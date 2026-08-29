@@ -149,9 +149,9 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterDecimalBinary(registry, "Multiply", "ChaosDecimalMultiply");
             RegisterDecimalBinary(registry, "Divide", "ChaosDecimalDivide");
             RegisterDecimalBinary(registry, "Remainder", "ChaosDecimalRemainder");
-            RegisterDecimalBinary(registry, "CopySign", "ChaosDecimalIdentity");
-            RegisterDecimalBinary(registry, "MaxMagnitude", "ChaosDecimalIdentity");
-            RegisterDecimalBinary(registry, "MinMagnitude", "ChaosDecimalIdentity");
+            RegisterDecimalBinary(registry, "CopySign", "ChaosDecimalCopySign");
+            RegisterDecimalBinary(registry, "MaxMagnitude", "ChaosDecimalMaxMagnitude");
+            RegisterDecimalBinary(registry, "MinMagnitude", "ChaosDecimalMinMagnitude");
             RegisterDecimalUnary(registry, "Negate", "ChaosDecimalNegate");
             RegisterDecimalUnary(registry, "Ceiling", "ChaosMathDecimalCeiling");
             RegisterDecimalUnary(registry, "Floor", "ChaosMathDecimalFloor");

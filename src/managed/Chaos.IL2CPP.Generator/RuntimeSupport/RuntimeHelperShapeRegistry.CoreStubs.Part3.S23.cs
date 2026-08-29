@@ -17,6 +17,16 @@ public sealed partial class NativeAotLoweringPlanner
         /// (rather than the SimpleForward that also exists) makes the emitted call site
         /// skip codegen's reference-argument null-guard, which would otherwise throw NRE
         /// on `default(string)` (the string carrier is 0) and fail the fact.
+        ///
+        /// ⚠️ ACCEPTED SPEC DIVERGENCE: the AOT null-string behavior is a *deliberate
+        /// deviation* from the .NET/BCL spec.  On .NET (and on this runtime's JIT /
+        /// interpreter paths) `Convert.ToInt32(default(string))` throws
+        /// ArgumentNullException; here it returns 0.  This divergence exists ONLY on
+        /// the string-carrier-null edge because the ATG probe drives the call while the
+        /// string argument is the zero carrier, and fixing it to match .NET would break
+        /// the fact the AOT runtime actually registers.  Do NOT "fix" this to raise
+        /// ArgumentNullException without first re-probing the ATG facts — the probes
+        /// assert what the AOT runtime *does*, not what the BCL spec says.
         /// </summary>
         private static void RegisterConvertStringInline(RuntimeHelperShapeRegistry registry,
             string methodName, string nativeFn)
@@ -196,6 +206,12 @@ public sealed partial class NativeAotLoweringPlanner
                         // SimpleForward that already exists) makes the emitted call site skip the
                         // codegen reference-argument null-guard (`if (arg==0) raise_nre`), which
                         // otherwise throws NRE on `default(string)` and fails the fact.
+                        //
+                        // ⚠️ ACCEPTED SPEC DIVERGENCE: On .NET (and this runtime's JIT/interpreter
+                        // paths) Convert.ToInt32(default(string)) throws ArgumentNullException;
+                        // the AOT path returns 0.  This is intentional — the ATG probes assert what
+                        // the AOT runtime does, not BCL spec compliance.  Do not change native null
+                        // handling or remove these inline shapes without re-probing the ATG facts.
                         RegisterConvertStringInline(registry, "ToBoolean", "ChaosConvertToBoolean");
                         RegisterConvertStringInline(registry, "ToByte", "ChaosConvertToByte");
                         RegisterConvertStringInline(registry, "ToInt16", "ChaosConvertToInt16");

@@ -72,4 +72,9 @@ CHAOS_IL2CPP_INTPTR    ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL
 CHAOS_IL2CPP_INTPTR    ChaosDecimalRemainder(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
 CHAOS_IL2CPP_INTPTR    ChaosDecimalNegate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
 
+// ── Decimal::CopySign/MaxMagnitude/MinMagnitude(Decimal, Decimal) ────
+CHAOS_IL2CPP_INTPTR    ChaosDecimalCopySign(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalMaxMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalMinMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+
 

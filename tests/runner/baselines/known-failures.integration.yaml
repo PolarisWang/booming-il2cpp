@@ -6,7 +6,7 @@
 #
 # Recorded 2026-08-07 from ctest -LE benchmark|stress|soak on the reference build.
 # These are PRE-EXISTING native runtime failures (verified identical pre/post the
-# L5 native migration; src/native untouched by the L-series) — NOT regressions.
+# L5 native migration; src/native untouched by the L-series) -- NOT regressions.
 # They are surfaced (not hidden) but do not flip the integration gate red.
 version: 1
 # Recorded 2026-08-28 from the full GC unit gate (ctest -R "chaos_gc_|test_gc_"
@@ -15,10 +15,17 @@ version: 1
 # flake (isolated single-run PASS, flaky only when the whole gate runs in
 # parallel).  Root-cause notes:
 #   - test_gc_young_collector: YoungCollectorTest.ConservativeSweepSelfRefs
-#     throws SEH 0xc0000005 under parallel load = GC-N7 residual heap corruption
-#     (real-machine page-heap attribution is blocked; see gc-n7-... notes).  Does
-#     NOT flip the gate red; value = surfaces the residual so a hard regression
-#     that makes the flake deterministic still turns red.
+#     throws SEH 0xc0000005 under parallel load = GC-N7 residual heap CORRUPTION
+#     (real-machine page-heap attribution is blocked; see gc-n7-... notes).  This
+#     is a DIFFERENT CLASS of flake from the entries above: it is a genuine heap
+#     corruption crash (SEH access-violation), NOT merely a benign timing/ordering
+#     flake.  [HEAP-CORRUPTION WARNING: treat with higher scrutiny than the
+#     other baseline entries -- keep it surfaced (never "skip") so that any
+#     single-thread/deterministic hit flips the gate red immediately; hot only
+#     because it is mutually exclusive with parallel-only occurrence].  Does
+#     NOT flip the gate red in isolation;
+#     value = surfaces the residual so a hard regression that makes the flake
+#     deterministic still turns red.
 #   - test_gc_loh: GcLohTest suite is deterministic 8/8 PASS in isolation; flaky
 #     only under full-gate parallel (-j 4), consistent with shared global
 #     old-gen state during concurrent gate execution.
