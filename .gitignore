@@ -536,16 +536,11 @@ test_all_out.txt
 **/runtime-self-test/**/trace_output.txt
 
 # ── Relocated foundation-dll family tree (tests/e2e/translation) — generated artifacts ──
-# The 29-family tree moved from testing/foundation-dll to tests/e2e/translation (L7).
-# Its build/codegen/cache outputs are generated and untracked; these rules mirror
-# the old testing/foundation-dll/** ignores for the new home.
-#
-# NOTE (2026-08-28): the chunk pipeline's *discardable build outputs* now emit to
-# artifacts/foundation-dll/ (a repo-level gitignored root per scripts/…/_path.py
-# build_root()) instead of tests/e2e/translation/**.  Sources stay in the tree.
-# The tests/e2e/translation/** rules below are RETAINED as a transitional guard
-# for pre-migration on-disk residue; they can be dropped once those left-overs
-# are rm'd (see repo-cleanliness design-v1-01 §7).
+# The chunk pipeline's *discardable build outputs* now emit to
+# artifacts/foundation-dll/ (build_root() in _path.py). Sources stay in the
+# translation tree. The rules below are a transitional safety net for any
+# stray untracked file that might still land in the old location; they do
+# not affect tracked files (gitignore only shields untracked content).
 # artifacts/foundation-dll/ itself needs no rule — the top-level `artifacts/`
 # (L39) already ignores it wholesale.
 tests/e2e/translation/**/.hephaestus-cache/
