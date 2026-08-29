@@ -288,22 +288,26 @@ public sealed class DriverEntry
 
     private static int RunBuild(string[] args)
     {
-        string? convertDir = null;
-        string? targetId = null;
+        string? projectDir = null;
+        string? target = null;
+        var configTier = "check";
 
         for (var i = 0; i < args.Length; i++)
         {
             switch (args[i])
             {
                 case "--target" or "-t" when i + 1 < args.Length:
-                    targetId = args[++i];
+                    target = args[++i];
+                    break;
+                case "--config-tier" when i + 1 < args.Length:
+                    configTier = args[++i];
                     break;
                 case "--help" or "-h":
                     ShowBuildHelp();
                     return 0;
                 default:
-                    if (!args[i].StartsWith('-') && convertDir is null)
-                        convertDir = args[i];
+                    if (!args[i].StartsWith('-') && projectDir is null)
+                        projectDir = args[i];
                     else
                     {
                         Console.Error.WriteLine($"Unknown argument: {args[i]}");
@@ -313,18 +317,18 @@ public sealed class DriverEntry
             }
         }
 
-        if (convertDir is null)
+        if (projectDir is null)
         {
-            Console.Error.WriteLine("Error: convert output directory is required.");
-            Console.Error.WriteLine("Usage: chaos-il2cpp build <convert-output-dir> --target <target-id>");
+            Console.Error.WriteLine("Error: native project directory is required.");
+            Console.Error.WriteLine("Usage: chaos-il2cpp build <native-project-dir> [--target <cmake-target>] [--config-tier <tier>]");
             return 1;
         }
 
-        targetId ??= "windows-x64-reference";
+        target ??= BuildService.ChaosEntryTarget;
 
-        Console.WriteLine($"[1/2] Configuring native build for target: {targetId}");
+        Console.WriteLine($"[1/2] Configuring native build (target: {target}, config-tier: {configTier})");
 
-        var result = BuildService.RunBuild(convertDir, targetId);
+        var result = BuildService.ConfigureAndBuild(projectDir, target, configTier);
 
         if (!string.IsNullOrWhiteSpace(result.Output))
             Console.Write(result.Output);
@@ -333,11 +337,11 @@ public sealed class DriverEntry
 
         if (result.Success)
         {
-            Console.WriteLine($"[2/2] Build completed (target: {targetId})");
+            Console.WriteLine($"[2/2] Build completed (target: {target})");
             return 0;
         }
 
-        Console.Error.WriteLine($"Build failed (target: {targetId}, exit code: {result.ExitCode})");
+        Console.Error.WriteLine($"Build failed (target: {target}, exit code: {result.ExitCode})");
         return 1;
     }
 
@@ -345,7 +349,14 @@ public sealed class DriverEntry
     {
         string? subjectDir = null;
         string? outputDir = null;
-        string? targetId = null;
+        string? target = null;
+        string? dllPath = null;
+        string? metadataPath = null;
+        var configTier = "check";
+        var sourceOnly = false;
+        var clean = false;
+        var isJit = false;
+        var assemblyDirs = new List<string>();
 
         for (var i = 0; i < args.Length; i++)
         {
@@ -355,7 +366,28 @@ public sealed class DriverEntry
                     outputDir = args[++i];
                     break;
                 case "--target" or "-t" when i + 1 < args.Length:
-                    targetId = args[++i];
+                    target = args[++i];
+                    break;
+                case "--dll" when i + 1 < args.Length:
+                    dllPath = Path.GetFullPath(args[++i]);
+                    break;
+                case "--metadata" when i + 1 < args.Length:
+                    metadataPath = Path.GetFullPath(args[++i]);
+                    break;
+                case "--config-tier" when i + 1 < args.Length:
+                    configTier = args[++i];
+                    break;
+                case "--source-only":
+                    sourceOnly = true;
+                    break;
+                case "--clean":
+                    clean = true;
+                    break;
+                case "--jit":
+                    isJit = true;
+                    break;
+                case "--assembly-dir" when i + 1 < args.Length:
+                    assemblyDirs.Add(Path.GetFullPath(args[++i]));
                     break;
                 case "--help" or "-h":
                     ShowPublishHelp();
@@ -372,22 +404,398 @@ public sealed class DriverEntry
             }
         }
 
-        if (subjectDir is null)
+        // If --dll and --metadata are provided directly, use them.
+        // Otherwise, if subjectDir is given, try to resolve from the manifest.
+        if (dllPath is null || metadataPath is null)
         {
-            Console.Error.WriteLine("Error: subject directory is required.");
-            Console.Error.WriteLine("Usage: chaos-il2cpp publish <subject-dir> --target <target-id> --output <dir>");
+            if (subjectDir is null)
+            {
+                Console.Error.WriteLine("Error: subject directory is required (or use --dll + --metadata).");
+                Console.Error.WriteLine("Usage: chaos-il2cpp publish <subject-dir> --output <dir> [--dll <subjects.dll> --metadata <subjects.metadata.json>]");
+                return 1;
+            }
+
+            outputDir ??= Path.GetFullPath(Path.Combine(subjectDir, "output"));
+
+            // Try to resolve dll and metadata from the manifest or well-known locations
+            var manifestPath = Path.Combine(subjectDir, "subject.manifest.json");
+            if (File.Exists(manifestPath))
+            {
+                Console.WriteLine($"[publish] Reading manifest: {manifestPath}");
+                try
+                {
+                    var manifest = JsonSerializer.Deserialize<JsonElement>(File.ReadAllText(manifestPath));
+                    var source = manifest.GetProperty("source");
+
+                    // If the manifest has a subjectsDll or subjectsMetadata field, use those
+                    if (manifest.TryGetProperty("subjectsDll", out var sd))
+                        dllPath ??= Path.GetFullPath(sd.GetString()!, subjectDir);
+                    if (manifest.TryGetProperty("subjectsMetadata", out var sm))
+                        metadataPath ??= Path.GetFullPath(sm.GetString()!, subjectDir);
+
+                    // If not, try convention: output/combined/CombinedSubjects.dll
+                    if (dllPath is null || !File.Exists(dllPath))
+                    {
+                        var combinedDll = Path.Combine(outputDir, "combined", "CombinedSubjects.dll");
+                        if (File.Exists(combinedDll))
+                            dllPath = combinedDll;
+                    }
+                    if (metadataPath is null || !File.Exists(metadataPath))
+                    {
+                        var meta = Path.Combine(outputDir, "combined", "subjects.metadata.json");
+                        if (File.Exists(meta))
+                            metadataPath = meta;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine($"Warning: could not parse manifest: {ex.Message}");
+                }
+            }
+            else
+            {
+                Console.Error.WriteLine($"Warning: no subject.manifest.json at {manifestPath}");
+            }
+        }
+
+        if (dllPath is null || !File.Exists(dllPath))
+        {
+            Console.Error.WriteLine("Error: subjects DLL not found. Provide --dll <subjects.dll> or place it in the output/combined/ directory.");
+            Console.Error.WriteLine("  (subjects.dll is produced by `dotnet build CombinedSubjects.csproj` after ATG emits CombinedSubjects.cs)");
             return 1;
         }
 
-        outputDir ??= Path.Combine(subjectDir, "output");
-        targetId ??= "windows-x64-reference";
+        if (metadataPath is null || !File.Exists(metadataPath))
+        {
+            Console.Error.WriteLine("Error: subjects metadata not found. Provide --metadata <subjects.metadata.json>.");
+            return 1;
+        }
 
-        var convertArgs = new List<string> { subjectDir, "--output", outputDir };
-        var convertResult = RunConvert(convertArgs.ToArray());
-        if (convertResult != 0) return convertResult;
+        outputDir ??= Path.GetFullPath(Path.Combine(subjectDir ?? Directory.GetCurrentDirectory(), "output"));
 
-        var buildArgs = new List<string> { outputDir, "--target", targetId };
-        return RunBuild(buildArgs.ToArray());
+        // ── Locate TPG DLL ──
+        string? tpgDll = null;
+        var tpgAssemblyName = "Chaos.IL2CPP.Tools.TestProjectGenerator";
+
+        // Strategy 1: from the current driver's assembly location (co-located in build output)
+        var driverDir = Path.GetDirectoryName(typeof(DriverEntry).Assembly.Location);
+        if (driverDir is not null)
+        {
+            var candidate = Path.Combine(driverDir, $"{tpgAssemblyName}.dll");
+            if (File.Exists(candidate))
+                tpgDll = candidate;
+        }
+
+        // Strategy 2: search for TPG in the repo build output
+        if (tpgDll is null)
+        {
+            var repoRoot = DetectRepoRoot(subjectDir ?? driverDir);
+            if (repoRoot is not null)
+            {
+                var candidates = new[]
+                {
+                    Path.Combine(repoRoot, "src", "tools", "Chaos.IL2CPP.Tools.TestProjectGenerator", "bin", "Debug", "net8.0", $"{tpgAssemblyName}.dll"),
+                    Path.Combine(repoRoot, "src", "tools", "Chaos.IL2CPP.Tools.TestProjectGenerator", "bin", "Release", "net8.0", $"{tpgAssemblyName}.dll"),
+                };
+                foreach (var c in candidates)
+                {
+                    if (File.Exists(c))
+                    {
+                        tpgDll = c;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (tpgDll is null)
+        {
+            Console.Error.WriteLine($"Error: {tpgAssemblyName}.dll not found. Build the TPG project first:");
+            Console.Error.WriteLine($"  dotnet build src/tools/{tpgAssemblyName}/{tpgAssemblyName}.csproj");
+            return 1;
+        }
+
+        // ── Build TPG generate-dll command ──
+        var tpgArgs = new List<string>
+        {
+            "exec", tpgDll,
+            "generate-dll",
+            "--dll", dllPath,
+            "--metadata", metadataPath,
+            "--output", outputDir,
+            "--config-tier", configTier,
+        };
+
+        if (sourceOnly)
+            tpgArgs.Add("--source-only");
+        if (clean)
+            tpgArgs.Add("--clean");
+        if (isJit)
+            tpgArgs.Add("--jit");
+        foreach (var ad in assemblyDirs)
+        {
+            tpgArgs.Add("--assembly-dir");
+            tpgArgs.Add(ad);
+        }
+
+        Console.WriteLine($"[publish] Running TPG generate-dll (this will run codegen, emit C++ project, and build entry.exe)...");
+        Console.WriteLine($"  TPG DLL: {tpgDll}");
+        Console.WriteLine($"  DLL: {dllPath}");
+        Console.WriteLine($"  Metadata: {metadataPath}");
+        Console.WriteLine($"  Output: {outputDir}");
+
+        var psi = new System.Diagnostics.ProcessStartInfo("dotnet")
+        {
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+        };
+        foreach (var arg in tpgArgs)
+            psi.ArgumentList.Add(arg);
+
+        try
+        {
+            using var process = System.Diagnostics.Process.Start(psi);
+            if (process is null)
+            {
+                Console.Error.WriteLine("Error: failed to start TPG process.");
+                return 1;
+            }
+
+            // Read stdout/stderr concurrently to avoid pipe deadlock. A synchronous
+            // ReadToEnd on one stream can block forever if a grandchild process (e.g.
+            // the msbuild/cl toolchain spawned by TPG) inherits the pipe handle and
+            // holds it open, or if the peer stream fills its buffer while unread.
+            var stdoutTask = process.StandardOutput.ReadToEndAsync();
+            var stderrTask = process.StandardError.ReadToEndAsync();
+
+            if (!process.WaitForExit(1_800_000))
+            {
+                try { process.Kill(entireProcessTree: true); } catch { }
+                Console.Error.WriteLine("Error: TPG generate-dll timed out after 30 minutes.");
+                return 1;
+            }
+
+            var stdout = stdoutTask.GetAwaiter().GetResult();
+            var stderr = stderrTask.GetAwaiter().GetResult();
+
+            // Forward TPG output to console
+            foreach (var line in stdout.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries))
+                Console.WriteLine($"  {line}");
+            if (!string.IsNullOrWhiteSpace(stderr))
+            {
+                foreach (var line in stderr.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries))
+                    Console.Error.WriteLine($"  [TPG:err] {line}");
+            }
+
+            if (process.ExitCode != 0)
+            {
+                Console.Error.WriteLine($"TPG generate-dll failed (exit code: {process.ExitCode})");
+                return process.ExitCode;
+            }
+
+            // ── Fix LNK1107: TPG's codegen emits stub archives (empty `!<arch>\n`)
+            // for libs it couldn't find (incl. chaos_pal). Overwrite them with the
+            // real prebuilt libs from the SDK staging root, then rebuild.
+            CopyRealSdkLibsOverStubs(outputDir, subjectDir ?? driverDir);
+
+            // Rebuild now that real libs are in place (TPG's build with stubs already failed).
+            var buildDir = Path.Combine(outputDir, "build");
+            if (Directory.Exists(buildDir) && File.Exists(Path.Combine(outputDir, "CMakeLists.txt")))
+            {
+                Console.WriteLine("  [publish] Rebuilding with real SDK libs...");
+                var rebuildResult = BuildService.ConfigureAndBuild(outputDir, "chaos_entry", "check", "Visual Studio 17 2022", "x64");
+                if (!rebuildResult.Success)
+                {
+                    Console.Error.WriteLine($"  [publish] Rebuild failed: {rebuildResult.Error}");
+                    Console.Error.WriteLine($"  [publish] Output: {rebuildResult.Output}");
+                    // Continue anyway — FindEntryExe will check if the exe was produced.
+                }
+                else
+                {
+                    Console.WriteLine("  [publish] Rebuild succeeded.");
+                }
+            }
+
+            // Locate entry.exe
+            var entryExe = FindEntryExe(outputDir);
+            if (entryExe is not null)
+            {
+                Console.WriteLine($"  entry.exe produced at: {entryExe}");
+
+                // Write publish.manifest.json
+                var publishManifest = new
+                {
+                    subjectDir = subjectDir ?? "(not specified)",
+                    outputDir,
+                    dllPath,
+                    metadataPath,
+                    entryExe,
+                    configTier,
+                    status = "ok",
+                };
+                WriteJson(Path.Combine(outputDir, "publish.manifest.json"), publishManifest);
+            }
+            else
+            {
+                Console.WriteLine("  (entry.exe not found -- source-only mode or build step skipped)");
+            }
+
+            Console.WriteLine("Publish completed.");
+            return 0;
+        }
+        catch (System.ComponentModel.Win32Exception)
+        {
+            Console.Error.WriteLine("Error: dotnet SDK not found. Install from https://dot.net/download");
+            return 1;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error: {ex.Message}");
+            return 1;
+        }
+    }
+
+    /// <summary>
+    /// Find entry.exe in the publish output directory following the same search order
+    /// as CppProjectEmitter.GenerateAndBuild.
+    /// </summary>
+    private static string? FindEntryExe(string outputDir)
+    {
+        var buildDir = Path.Combine(outputDir, "build");
+        if (!Directory.Exists(buildDir))
+        {
+            // Try direct output dir
+            buildDir = outputDir;
+        }
+
+        var candidates = new[]
+        {
+            Path.Combine(buildDir, "RelWithDebInfo", "chaos_entry.exe"),
+            Path.Combine(buildDir, "Release", "chaos_entry.exe"),
+            Path.Combine(buildDir, "Debug", "chaos_entry.exe"),
+            Path.Combine(buildDir, "chaos_entry.exe"),
+            Path.Combine(buildDir, "RelWithDebInfo", "entry.exe"),
+            Path.Combine(buildDir, "Release", "entry.exe"),
+            Path.Combine(buildDir, "Debug", "entry.exe"),
+            Path.Combine(buildDir, "entry.exe"),
+            // Linux
+            Path.Combine(buildDir, "RelWithDebInfo", "chaos_entry"),
+            Path.Combine(buildDir, "Release", "chaos_entry"),
+            Path.Combine(buildDir, "Debug", "chaos_entry"),
+            Path.Combine(buildDir, "chaos_entry"),
+            Path.Combine(buildDir, "RelWithDebInfo", "entry"),
+            Path.Combine(buildDir, "Release", "entry"),
+            Path.Combine(buildDir, "Debug", "entry"),
+            Path.Combine(buildDir, "entry"),
+        };
+
+        foreach (var c in candidates)
+        {
+            if (File.Exists(c))
+                return Path.GetFullPath(c);
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// TPG's generate-dll produces stub archives (empty `!&lt;arch&gt;\n`, 8 bytes) for
+    /// native libs it cannot resolve — notably chaos_pal.lib — which then fail to link
+    /// with LNK1107. The real prebuilt libs live in the SDK staging root
+    /// (tests/e2e/translation/sdk/&lt;preset&gt;/lib/). Copy them over the stubs under
+    /// &lt;outputDir&gt;/codegen/lib/ so the CMake build can link real symbols.
+    /// </summary>
+    private static void CopyRealSdkLibsOverStubs(string outputDir, string detectRoot)
+    {
+        try
+        {
+            var repoRoot = DetectRepoRoot(detectRoot);
+            if (repoRoot is null)
+            {
+                Console.WriteLine("  [publish] warning: could not resolve repo root; skipping real-lib copy");
+                return;
+            }
+
+            // Real prebuilt libs live under artifacts/presets/<preset>/src/native/*/<config>/
+            // (produced by the build system / build_presets CI). This mirrors how
+            // ConvertToCppHandler sources nativeLibDir. libs not found there fall
+            // back to the SDK staging root (tests/e2e/translation/sdk/<preset>/lib).
+            var isWindows = System.Runtime.InteropServices.RuntimeInformation
+                .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+            var nativePresetDir = isWindows ? "windows-x64-reference" : "linux-x64-profile";
+            var presetLibRoot = Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
+            var sdkLibRoot = Path.Combine(repoRoot, "tests", "e2e", "translation", "sdk", nativePresetDir, "lib");
+            var stubLibRoot = Path.Combine(outputDir, "codegen", "lib");
+
+            // Collect a flat map: targetLibName -> realLibPath (prefer artifacts/presets,
+            // fall back to sdk staging). TPG's codegen/lib uses flat <name>.lib names.
+            var realLibs = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            // 1. SDK staging flat lib/ (authoritative, already flattened).
+            if (Directory.Exists(sdkLibRoot))
+            {
+                foreach (var lib in Directory.GetFiles(sdkLibRoot, "*.lib"))
+                    realLibs[Path.GetFileName(lib)] = lib;
+            }
+            // 2. artifacts/presets deep tree (src/native/<mod>/RelWithDebInfo/<name>.lib).
+            if (Directory.Exists(presetLibRoot))
+            {
+                foreach (var lib in Directory.GetFiles(presetLibRoot, "*.lib", SearchOption.AllDirectories))
+                {
+                    var name = Path.GetFileName(lib);
+                    // Prefer the deepest (RelWithDebInfo / Release) build config.
+                    if (!realLibs.TryGetValue(name, out var existing) ||
+                        Path.GetDirectoryName(lib)!.Length > Path.GetDirectoryName(existing)!.Length)
+                    {
+                        realLibs[name] = lib;
+                    }
+                }
+            }
+
+            if (realLibs.Count == 0)
+            {
+                Console.WriteLine($"  [publish] warning: no real SDK libs found (preset={nativePresetDir}, sdk={sdkLibRoot}); real-lib copy skipped");
+                return;
+            }
+            if (!Directory.Exists(stubLibRoot))
+            {
+                Console.WriteLine($"  [publish] warning: codegen lib dir not found ({stubLibRoot}); real-lib copy skipped");
+                return;
+            }
+
+            Directory.CreateDirectory(stubLibRoot);
+            var copied = 0;
+            foreach (var kv in realLibs)
+            {
+                var dst = Path.Combine(stubLibRoot, kv.Key);
+                File.Copy(kv.Value, dst, overwrite: true);
+                copied++;
+            }
+            Console.WriteLine($"  [publish] Overwrote {copied} stub lib(s) with real SDK libs in {stubLibRoot}" + $"\n  [publish]   (source: {Path.GetDirectoryName(realLibs.Values.First())})");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"  [publish] warning: real-lib copy failed: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Walk up from a directory to find the repo root (looks for src/managed/ or src/native/).
+    /// </summary>
+    private static string? DetectRepoRoot(string? startDir)
+    {
+        if (startDir is null) return null;
+        var dir = new DirectoryInfo(startDir);
+        while (dir is not null)
+        {
+            if (Directory.Exists(Path.Combine(dir.FullName, "src", "managed")) &&
+                Directory.Exists(Path.Combine(dir.FullName, "src", "native")))
+            {
+                return dir.FullName;
+            }
+            dir = dir.Parent;
+        }
+        return null;
     }
 
     private static int RunLegacyConvert(string[] args)
@@ -731,11 +1139,11 @@ public sealed class DriverEntry
         Console.WriteLine("chaos-il2cpp - IL2CPP toolchain CLI");
         Console.WriteLine();
         Console.WriteLine("Commands:");
-        Console.WriteLine("  convert          Convert C# project/DLLs to native source code");
-        Console.WriteLine("  convert-to-cpp   Full assembly IL→C++ translation (Unity IL2CPP style)");
+        Console.WriteLine("  convert          Analyze C# project/DLLs (analysis/generated artifacts, no executable)");
+        Console.WriteLine("  convert-to-cpp   Full assembly IL->C++ translation (Unity IL2CPP style)");
         Console.WriteLine("  asm-compare      Compare JIT vs IL2CPP AOT translation for a method");
-        Console.WriteLine("  build            Build native source code for a target platform");
-        Console.WriteLine("  publish          Convert and build in one step");
+        Console.WriteLine("  build            Build a native project produced by TPG generate-dll (or publish --source-only)");
+        Console.WriteLine("  publish          Full pipeline: subject.manifest -> TPG generate-dll -> entry.exe");
         Console.WriteLine();
         Console.WriteLine("Legacy commands:");
         Console.WriteLine("  <input.dll> <output-root>                    Managed closure generation");
@@ -758,7 +1166,8 @@ public sealed class DriverEntry
     {
         Console.WriteLine("Usage: chaos-il2cpp convert <subject-dir> [--output <dir>] [--entry-point <id>] [--full-assembly-closure]");
         Console.WriteLine();
-        Console.WriteLine("Convert a C# project or managed DLLs to native source code.");
+        Console.WriteLine("Analyze a C# project or managed DLLs, producing analysis/generated artifacts.");
+        Console.WriteLine("NOTE: This does NOT produce an executable. Use 'publish' for the full manifest->exe pipeline.");
         Console.WriteLine("Reads subject.manifest.json from <subject-dir> to determine input type.");
         Console.WriteLine();
         Console.WriteLine("Supported source types:");
@@ -769,18 +1178,41 @@ public sealed class DriverEntry
 
     private static void ShowBuildHelp()
     {
-        Console.WriteLine("Usage: chaos-il2cpp build <convert-output-dir> [--target <target-id>]");
+        Console.WriteLine("Usage: chaos-il2cpp build <native-project-dir> [--target <cmake-target>] [--config-tier <tier>]");
         Console.WriteLine();
-        Console.WriteLine("Build native source code produced by 'convert' for a target platform.");
+        Console.WriteLine("Build a native project produced by TPG generate-dll (or publish --source-only).");
+        Console.WriteLine("The project directory must contain CMakeLists.txt.");
         Console.WriteLine();
-        Console.WriteLine("Targets: windows-x64-reference, macos-reference, android-arm64, ios-arm64, linux-x64");
+        Console.WriteLine("Options:");
+        Console.WriteLine("  --target <target>     CMake target name (default: chaos_entry; standalone: entry)");
+        Console.WriteLine("  --config-tier <tier>  Build configuration: check, profile, or ship (default: check)");
+        Console.WriteLine();
+        Console.WriteLine("CMake targets: chaos_entry (pipeline), entry (standalone)");
+        Console.WriteLine();
+        Console.WriteLine("Note: This is NOT a 'convert' output directory. Use 'publish' for the full manifest->exe pipeline.");
     }
 
     private static void ShowPublishHelp()
     {
-        Console.WriteLine("Usage: chaos-il2cpp publish <subject-dir> [--target <target-id>] [--output <dir>]");
+        Console.WriteLine("Usage: chaos-il2cpp publish <subject-dir> [--output <dir>] [--dll <subjects.dll> --metadata <subjects.metadata.json>]");
+        Console.WriteLine("       [--config-tier check|profile|ship] [--clean] [--source-only] [--jit] [--assembly-dir <dir>]");
         Console.WriteLine();
-        Console.WriteLine("Convert and build in one step. Equivalent to 'convert' + 'build'.");
+        Console.WriteLine("Full pipeline: subject.manifest.json -> TPG generate-dll -> native entry.exe");
+        Console.WriteLine("Runs IL2CPP codegen, emits C++ project, configures CMake, and builds entry.exe.");
+        Console.WriteLine();
+        Console.WriteLine("Options:");
+        Console.WriteLine("  --dll <path>               Subjects DLL (CombinedSubjects.dll)");
+        Console.WriteLine("  --metadata <path>          Subjects metadata (subjects.metadata.json)");
+        Console.WriteLine("  --output <dir>             Output directory (default: <subject-dir>/output)");
+        Console.WriteLine("  --config-tier <tier>       Build config: check, profile, or ship (default: check)");
+        Console.WriteLine("  --clean                    Remove intermediate files, keep only entry.exe");
+        Console.WriteLine("  --source-only              Emit C++ source files only, skip native build");
+        Console.WriteLine("  --jit                      Enable JIT mode (default: AOT)");
+        Console.WriteLine("  --assembly-dir <dir>       Additional assembly directory (may repeat)");
+        Console.WriteLine();
+        Console.WriteLine("Note: --dll and --metadata can be auto-detected from the manifest or");
+        Console.WriteLine("output/combined/ directory. For the full ATG -> CombinedSubjects chain,");
+        Console.WriteLine("use the foundation-dll pipeline (tests/e2e/verification/).");
     }
 
     private static void WriteJson<T>(string path, T value)

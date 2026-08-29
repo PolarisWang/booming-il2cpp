@@ -87,4 +87,25 @@ public sealed class DriverEntryTests
         var result = DriverEntry.Main(["convert"]);
         Assert.Equal(1, result);
     }
+
+    [Fact]
+    public void Main_Publish_Help_ReturnsZero()
+    {
+        var result = DriverEntry.Main(["publish", "--help"]);
+        Assert.Equal(0, result);
+    }
+
+    [Fact]
+    public void Main_Publish_NoArg_ReturnsOne()
+    {
+        var result = DriverEntry.Main(["publish"]);
+        Assert.Equal(1, result);
+    }
+
+    [Fact]
+    public void Main_Publish_UnknownFlag_ReturnsOne()
+    {
+        var result = DriverEntry.Main(["publish", "--invalid"]);
+        Assert.Equal(1, result);
+    }
 }
