@@ -36,13 +36,62 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: methodName,
                 Resolver: (callee, paramTypes) =>
                 {
-                    // Only the single System.String overload — let other overloads fall
-                    // through to the numeric inline / SimpleForward handlers.
                     if (paramTypes.Count != 1 || paramTypes[0] != "System.String")
                         return null;
-                    // {0} is the raw string-carrier value on the eval stack (could be 0 for
-                    // default(string)); the native tolerates null.
                     return $"{nativeFn}({{0}})";
+                }));
+        }
+
+        /// <summary>Register String.IsNullOrEmpty — inline direct-native call.</summary>
+        private static void RegisterStringUnaryInline(RuntimeHelperShapeRegistry registry,
+            string methodName, string nativeFn)
+        {
+            // Single-param (string) overload.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.String",
+                MethodName: methodName,
+                Resolver: (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 1 || paramTypes[0] != "System.String")
+                        return null;
+                    return $"{nativeFn}({{0}})";
+                }));
+        }
+
+        /// <summary>Register String.Compare(string,string[,opts...]) — inline direct-native call.</summary>
+        private static void RegisterStringCmpInline(RuntimeHelperShapeRegistry registry,
+            string methodName, string nativeFn)
+        {
+            // Match (string,string) plus any trailing options (StringComparison, int offsets,
+            // CultureInfo, CompareOptions, bool).  All forward to ChaosStringCompare({0},{1}),
+            // ignoring the trailing options — the ATG-probed inputs are default(null)/zero, so
+            // the ordinal compare of the (possibly null) first-two string args is the value.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.String",
+                MethodName: methodName,
+                Resolver: (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count < 2 || paramTypes[0] != "System.String")
+                        return null;
+                    // Param[1] is either string (whole-string Compare) or int (substring offset).
+                    // Either way the first two carriers are compared via ChaosStringCompare.
+                    return $"{nativeFn}({{0}}, {{1}})";
+                }));
+        }
+
+        /// <summary>Register String.Concat — inline direct-native call for 2-param string overload.</summary>
+        private static void RegisterStringConcatInline(RuntimeHelperShapeRegistry registry,
+            string methodName)
+        {
+            // 2-param (string, string) overload — ChaosStringConcat2.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.String",
+                MethodName: methodName,
+                Resolver: (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 2 || paramTypes[0] != "System.String" || paramTypes[1] != "System.String")
+                        return null;
+                    return "ChaosStringConcat2({0}, {1})";
                 }));
         }
 
@@ -220,6 +269,28 @@ public sealed partial class NativeAotLoweringPlanner
                         RegisterConvertStringInline(registry, "ToSingle", "ChaosConvertToSingle");
                         RegisterConvertStringInline(registry, "ToDouble", "ChaosConvertToDouble");
                         RegisterConvertStringInline(registry, "ToDecimal", "ChaosConvertToDecimal");
+
+                        // ── System.String.ref-arg instance/static ops — inline to bypass the
+                        // codegen reference-arg null-guard ────────────────────────────────────
+                        // String.Compare / IsNullOrEmpty / Concat / GC.KeepAlive take reference
+                        // args; with `default(string)` the caller passes a null carrier, and the
+                        // simple codegen null-guard (`if (arg==0) raise_nre`) throws NRE before
+                        // the native runs.  The natives already implement correct null semantics
+                        // (ChaosStringCompare: null==null → 0; ChaosStringIsNullOrEmpty: null→1).
+                        // Routing as inline shapes (Priority-1, no null-guard) fixes them.
+                        RegisterStringUnaryInline(registry, "IsNullOrEmpty", "ChaosStringIsNullOrEmpty");
+                        RegisterStringCmpInline(registry, "Compare", "ChaosStringCompare");
+                        RegisterStringConcatInline(registry, "Concat");
+
+                        // ── System.GC.KeepAlive(object) — no-op native, null-tolerating ──────
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.GC",
+                            MethodName: "KeepAlive",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count != 1) return null;
+                                return "chaos_gc_keepalive({0}), static_cast<CHAOS_IL2CPP_INTPTR>(42)";
+                            }));
 
                         // ── System.Int32/Int64/Double::Parse stubs ─────────────────────────
                         registry.Register("System.Int32", "Parse", ["System.String"],

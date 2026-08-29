@@ -1185,7 +1185,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     # restore entirely so the full TPG+cmake build below always runs.  (The
     # HephaestusCache object is still constructed for provenance reporting, but
     # its `.restore_to` is never used to short-circuit the build.)
-    cache = HephaestusCache(ctx.foundation_dir, verbose=True)
+    # Guard build_dir: variant-A callers may leave it None (legacy single-root),
+    # in which case fall back to the chunk dir's parent for the cache root.
+    _cache_root = (ctx.build_dir or ctx.chunk_dir).parent
+    cache = HephaestusCache(_cache_root, verbose=True)
     cache_status = "miss"
     input_hash = compute_input_hash(
         subjects_dll, metadata_path, ctx.assembly,
