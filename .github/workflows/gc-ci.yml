@@ -78,6 +78,15 @@ jobs:
 
       - name: Run GC Unit Tests (exclude stress/benchmark/soak)
         shell: bash
+        env:
+          # Full self-verify (CoreCLR HeapVerify-grade): validates old-gen mark
+          # bits, card/region-gen map consistency, and typed references on every
+          # GC.  Debug build only (job matrix is [Debug]).  Catches bookkeeping
+          # drift (page-list / mark-bitmap / region-gen) before it reaches the
+          # fast gate.  P0-verified locally: full 72-test gate is green under
+          # CHAOS_GC_HeapVerify=2 (only the pre-registered ConservativeSweepSelfRefs
+          # parallel-flake fails, which is already in known-failures).
+          CHAOS_GC_HeapVerify: "2"
         run: |
           ctest --test-dir artifacts/presets/windows-x64-reference \
             -C ${{ matrix.config }} \
