@@ -413,8 +413,79 @@ public sealed partial class NativeAotLoweringPlanner
                                 return null;
                             }));
 
-                        // ── System.String.Join(string, string[]) — already registered in S10.
-                        // (Duplicate registration here would throw InvalidOperationException.)
+                        // ── System.Delegate.Combine/Remove — inline to bypass reference-arg null-guard ──
+                        // default(Delegate) is a null carrier; the codegen null-guard raises NRE before
+                        // chaos_delegate_combine runs.  The native tolerates null (null+null → null).
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.Delegate",
+                            MethodName: "Combine",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count != 2) return null;
+                                return "chaos_delegate_combine({0}, {1})";
+                            }));
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.Delegate",
+                            MethodName: "Remove",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count != 2) return null;
+                                return "chaos_delegate_remove({0}, {1})";
+                            }));
+
+                        // ── System.String.Join(string, string[]) — inline to bypass null-guard ──
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.String",
+                            MethodName: "Join",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count != 2 || paramTypes[0] != "System.String")
+                                    return null;
+                                return "ChaosStringJoinSs({0}, {1})";
+                            }));
+
+                        // ── System.Enum.TryParse(Type, string[, bool], out obj) — inline stub 0 ──
+                        // Enum parsing needs runtime enum metadata; the ATG probe for default(enum)/
+                        // default(string) returns 0.  Emit a return-0 stub bypassing the null-guard.
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.Enum",
+                            MethodName: "TryParse",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count < 2) return null;
+                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+                            }));
+
+                        // ── System.Convert.ChangeType(object, TypeCode[, IFormatProvider]) — inline stub 0 ──
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.Convert",
+                            MethodName: "ChangeType",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count < 2) return null;
+                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+                            }));
+
+                        // ── System.Nullable<T>.GetValueRefOrDefaultRef — inline stub 0 ──
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.Nullable",
+                            MethodName: "GetValueRefOrDefaultRef",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count != 0) return null;
+                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+                            }));
+
+                        // ── System.ReadOnlySpan<T>.ToArray — inline stub 0 ──
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.ReadOnlySpan",
+                            MethodName: "ToArray",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count != 0) return null;
+                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+                            }));
+
                         // ── System.Int32/Int64/Double::Parse stubs ─────────────────────────
                         registry.Register("System.Int32", "Parse", ["System.String"],
                             ShapeKind.SimpleForward, "ChaosParseInt32",
