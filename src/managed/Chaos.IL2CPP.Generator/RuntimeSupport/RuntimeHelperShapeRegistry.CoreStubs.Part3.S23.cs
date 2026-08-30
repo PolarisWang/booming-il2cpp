@@ -467,15 +467,19 @@ public sealed partial class NativeAotLoweringPlanner
                             }));
 
                         // ── System.Nullable<T>.GetValueRefOrDefaultRef — inline stub 0 ──
+                        // default(Nullable<T>) hasValue=false -> returns 0.  Register with both
+                        // the backtick and plain type prefixes: the generic callee may mangle the
+                        // type as System.Nullable or System.Nullable`1 depending on instantiation.
+                        // The codegen resolves the by-ref Nullable arg as 0-param (the external
+                        // call drops it), so accept any param count.
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.Nullable`1",
                             MethodName: "GetValueRefOrDefaultRef",
-                            Resolver: (callee, paramTypes) =>
-                            {
-                                if (paramTypes.Count != 1) return null;
-                                // default(Nullable<T>) hasValue=false -> returns 0.
-                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
-                            }));
+                            Resolver: (callee, paramTypes) => "static_cast<CHAOS_IL2CPP_INTPTR>(0)"));
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.Nullable",
+                            MethodName: "GetValueRefOrDefaultRef",
+                            Resolver: (callee, paramTypes) => "static_cast<CHAOS_IL2CPP_INTPTR>(0)"));
 
                         // ── System.ReadOnlySpan<T>.ToArray — inline stub 0 ──
                         registry.RegisterInline(new InlineShapeDescriptor(
