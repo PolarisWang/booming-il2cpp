@@ -151,12 +151,27 @@ internal static class BuildService
             if (process is null)
                 return new BuildResult { Success = false, ExitCode = -1, Error = $"Failed to start {fileName} process." };
 
-            var stdout = process.StandardOutput.ReadToEnd();
-            var stderr = process.StandardError.ReadToEnd();
-            process.WaitForExit();
+            // Read stdout/stderr concurrently to avoid a pipe deadlock: a synchronous
+            // ReadToEnd on one stream can block forever if the peer stream fills its
+            // buffer while unread (also see DriverEntry.TPG run). Then wait for exit
+            // with the real timeout so a hung configure/build cannot freeze the Driver.
+            var stdoutTask = process.StandardOutput.ReadToEndAsync();
+            var stderrTask = process.StandardError.ReadToEndAsync();
 
-            if (!process.HasExited)
-                process.Kill(entireProcessTree: true);
+            if (!process.WaitForExit(timeoutMs))
+            {
+                try { process.Kill(entireProcessTree: true); } catch { }
+                return new BuildResult
+                {
+                    Success = false,
+                    ExitCode = -1,
+                    Error = $"{fileName} did not finish within {timeoutMs} ms. " +
+                            "The process was killed to prevent a hang.",
+                };
+            }
+
+            var stdout = stdoutTask.GetAwaiter().GetResult();
+            var stderr = stderrTask.GetAwaiter().GetResult();
 
             return new BuildResult
             {

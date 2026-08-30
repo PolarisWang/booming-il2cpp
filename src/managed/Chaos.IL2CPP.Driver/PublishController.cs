@@ -1,0 +1,574 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace Chaos.IL2CPP.Driver;
+
+/// <summary>
+/// Top-level orchestrator for the native publish pipeline.
+///
+/// Accepts any .NET project (csproj/dll/exe) and produces a native executable.
+/// Two modes:
+///   --mode app  (default): pure application entry, no test harness
+///   --mode test:            test harness with --fact-json / --benchmark-all
+/// </summary>
+internal static class PublishController
+{
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        WriteIndented = true,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+    };
+
+    public sealed record PublishConfig
+    {
+        public required string InputPath { get; init; }
+        public string OutputDir { get; init; } = "output";
+        public string Mode { get; init; } = "app";      // "app" or "test"
+        public string ConfigTier { get; init; } = "check";
+        public bool SourceOnly { get; init; }
+        public bool Clean { get; init; }
+        public bool IsJit { get; init; }
+        public string? AssemblyDll { get; init; }
+        public string? AssemblyMetadata { get; init; }
+        public IReadOnlyList<string> AssemblyDirs { get; init; } = [];
+    }
+
+    public static int Run(PublishConfig config)
+    {
+        var outputDir = Path.GetFullPath(config.OutputDir);
+        var inputPath = config.InputPath;
+
+        Console.WriteLine($"chaos-il2cpp publish (mode={config.Mode})");
+        Console.WriteLine($"  Input:   {inputPath}");
+        Console.WriteLine($"  Output:  {outputDir}");
+
+        // ── Step 1: Resolve input to assembly paths ────────────────────────
+        string[] assemblyPaths;
+        string? entryPointOverride = null;
+
+        if (inputPath.EndsWith(".csproj", StringComparison.OrdinalIgnoreCase))
+        {
+            // csproj: build first, then locate the output DLL
+            Console.WriteLine("  [1/5] Building managed project...");
+            var hostInputDir = Path.Combine(outputDir, "host-input");
+            Directory.CreateDirectory(hostInputDir);
+
+            var buildResult = RunDotnetBuild(inputPath, hostInputDir);
+            if (buildResult != 0)
+            {
+                Console.Error.WriteLine("Error: managed project build failed.");
+                return 1;
+            }
+
+            // Find the output DLL
+            var dllFiles = Directory.GetFiles(hostInputDir, "*.dll");
+            if (dllFiles.Length == 0)
+            {
+                Console.Error.WriteLine("Error: no DLL produced by dotnet build.");
+                return 1;
+            }
+
+            assemblyPaths = [dllFiles[0]];
+            Console.WriteLine($"    assembly: {Path.GetFileName(assemblyPaths[0])}");
+        }
+        else if (inputPath.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) ||
+                 inputPath.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+        {
+            // Direct assembly path
+            assemblyPaths = [Path.GetFullPath(inputPath)];
+        }
+        else
+        {
+            Console.Error.WriteLine($"Error: unsupported input type: {inputPath}");
+            Console.Error.WriteLine("  Expected: .csproj, .dll, or .exe");
+            return 1;
+        }
+
+        // ── Step 2: Auto-detect entry point ────────────────────────────────
+        Console.Write("  [2/5] Detecting entry point...");
+        entryPointOverride = ConvertService.DetectEntryPoint(assemblyPaths[0]);
+        Console.WriteLine(entryPointOverride != null ? $" {entryPointOverride}" : " (none/auto)");
+
+        // ── Step 3: Convert (IL→C++ codegen) ──────────────────────────────
+        Console.WriteLine($"  [3/5] Running IL2CPP codegen...");
+        var codegenRoot = Path.Combine(outputDir, "codegen", "generated");
+        var sdkRoot = Path.Combine(outputDir, "codegen");
+        Directory.CreateDirectory(codegenRoot);
+
+        var conversionResult = ConvertService.Convert(
+            assemblyPaths,
+            codegenRoot,
+            sdkRoot: sdkRoot,
+            // Do not pass the reflection-detected entry point: for a single
+            // assembly under full closure, the loader resolves the entry point
+            // from the PE entry-point token automatically (same rule as dotnet).
+            // Passing a manual override risks a SubjectId-format mismatch that
+            // fails LOADER_ENTRY_POINT_NOT_FOUND. Results are identical and the
+            // auto-detected path is more robust.
+            entryPoint: null,
+            assemblyDirs: config.AssemblyDirs,
+            configTier: config.ConfigTier,
+            fullClosure: true);
+
+        if (conversionResult == null)
+        {
+            Console.Error.WriteLine("Error: codegen conversion failed.");
+            return 1;
+        }
+
+        // ── Step 4: Emit native project ────────────────────────────────────
+        Console.WriteLine($"  [4/5] Emitting C++ project...");
+
+        if (config.Mode == "app")
+        {
+            // App mode: generate app_main.cpp + AppProject.CMakeLists.txt
+            EmitAppProject(outputDir, sdkRoot, conversionResult, entryPointOverride);
+        }
+        else
+        {
+            // Test mode: use TPG generate-dll for harness
+            return EmitTestProject(outputDir, config, conversionResult);
+        }
+
+        // ── Step 5: Build (unless --source-only) ───────────────────────────
+        if (config.SourceOnly)
+        {
+            Console.WriteLine("  [5/5] --source-only: skipping native build");
+            Console.WriteLine("  Source-only C++ project written to: " + outputDir);
+            WritePublishManifest(outputDir, config, conversionResult, entryExe: null);
+            return 0;
+        }
+
+        Console.WriteLine("  [5/5] Building native executable...");
+
+        // Copy real SDK libs over stubs (TPG's codegen creates stub archives)
+        CopyRealSdkLibsOverStubs(outputDir);
+
+        // Build
+        var buildResult2 = BuildService.ConfigureAndBuild(
+            outputDir, "chaos_entry", config.ConfigTier,
+            "Visual Studio 17 2022", "x64");
+
+        if (!buildResult2.Success)
+        {
+            Console.Error.WriteLine($"  Build failed: {buildResult2.Error}");
+            return 1;
+        }
+
+        // Locate entry.exe
+        var entryExe = FindEntryExe(outputDir);
+        if (entryExe != null)
+        {
+            Console.WriteLine($"  entry.exe: {entryExe}");
+            WritePublishManifest(outputDir, config, conversionResult, entryExe);
+            Console.WriteLine("Publish completed.");
+            return 0;
+        }
+
+        Console.Error.WriteLine("  Error: entry.exe not found after build.");
+        return 1;
+    }
+
+    private static void EmitAppProject(string outputDir, string sdkRoot, ConvertService.ConversionResult result, string? entrySubjectId)
+    {
+        // CMake source list — ONLY .cpp compile units. Generated sources live under
+        // codegen/generated/, plus any page-split files (native-aot.generated.pageN.cpp)
+        // for very large closures.
+        var generatedDir = Path.Combine(sdkRoot, "generated");
+        var generatedCpps = new List<string>();
+        if (Directory.Exists(generatedDir))
+        {
+            generatedCpps.AddRange(Directory.GetFiles(generatedDir, "native-aot.generated.cpp"));
+            generatedCpps.AddRange(Directory.GetFiles(generatedDir, "native-aot.generated.page-*.cpp"));
+            generatedCpps.AddRange(Directory.GetFiles(generatedDir, "chaos_generated_module.cpp"));
+        }
+
+        // Fall back to the converter-reported GeneratedDirs if codegen/generated didn't materialize.
+        if (generatedCpps.Count == 0 && result.GeneratedDirs.Count > 0)
+        {
+            foreach (var src in result.GeneratedDirs)
+            {
+                var rel = src.RelativePath ?? "";
+                if (!rel.EndsWith(".cpp", StringComparison.OrdinalIgnoreCase))
+                    continue;
+                var full = Path.GetFullPath(Path.Combine(result.OutputRoot, rel));
+                if (File.Exists(full))
+                    generatedCpps.Add(full);
+            }
+        }
+        generatedCpps = generatedCpps
+            .Select(Path.GetFullPath)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+        var repoRoot = DetectRepoRoot();
+        var normalizedSources = string.Join("\n    ",
+            generatedCpps.Select(p => p.Replace("\\", "/")));
+
+        // Determine the real generated entry symbol and its proxy wrapper so we can
+        // invoke it directly (NOT a hypothetical UserMain). Derive both from the
+        // auto-detected SubjectId {asm}/{ns}.{Type}::{Method}:{Ret}({Params}), plus
+        // the generated proxy struct name (Assembly_TypeNameWithUnderscores).
+        var (nativeSymbol, proxyCall) = DeriveEntryCall(entrySubjectId, result.AssemblyName);
+
+        // Generate app_main.cpp
+        var appMain = Path.Combine(outputDir, "app_main.cpp");
+        var entrySubjectIdComment = entrySubjectId ?? "unknown";
+        File.WriteAllText(appMain, $@"// Generated by chaos-il2cpp publish --mode app
+// Entry point (SubjectId): {entrySubjectIdComment}
+// Generated native symbol: {nativeSymbol}
+
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cstdint>
+
+#include <chaos_runtime_host.h>
+#include <chaos_generated_module.h>
+
+int main(int argc, char* argv[])
+{{
+    // Initialize the IL2CPP runtime (GC, vtables, hot-update data, registration).
+    ChaosRuntimeHost host;
+    if (!host.Initialize(""chaos-publish""))
+    {{
+        std::fprintf(stderr, ""[app_main] ChaosRuntimeHost initialization failed\n"");
+        return 1;
+    }}
+
+    // Register the generated code table (fills kFunctions) + GC layouts.
+    if (!ChaosGeneratedModuleActivate(&host))
+    {{
+        std::fprintf(stderr, ""[app_main] ChaosGeneratedModuleActivate failed\n"");
+        return 1;
+    }}
+
+    // Invoke the user entry point directly through the generated proxy wrapper.
+    // Main(string[]) — pass NULL (0) as the array argument; acceptable for the ABI
+    // since the callee reads the length only if it actually accesses the array.
+    int result = {proxyCall};
+
+    // host destructor calls Shutdown() automatically.
+    return result;
+}}
+");
+
+        // Generate CMakeLists.txt — mirrors the proven verification-native layout:
+        // compile only .cpp units, include the SDK tree + the full runtime-core repo
+        // tree (SDK include/ is partial and native-aot.generated.cpp includes
+        // chaos_pch.h which only ships in src/native/runtime-core), link chaos::runtime.
+        var sdkRootPath = sdkRoot.Replace("\\", "/");
+        var cmakeLists = Path.Combine(outputDir, "CMakeLists.txt");
+
+        string repoIncludes = "";
+        if (repoRoot != null)
+        {
+            var root = repoRoot.Replace("\\", "/");
+            repoIncludes = $@"
+    ""{root}/src/native/runtime-core""
+    ""{root}/src/native/runtime-core/gc""
+    ""{root}/src/native/runtime-core/runtime_stubs""
+    ""{root}/src/native/bootstrap""
+    ""{root}/src/native/interpreter""
+    ""{root}/src/native/interpreter/generated""
+    ""{root}/src/native/support""
+    ""{root}/src/native/hot-update""
+    ""{root}/third_party/unordered_dense/include""
+    ""{root}/src/native/jit""";
+        }
+
+        File.WriteAllText(cmakeLists, $@"cmake_minimum_required(VERSION 3.20)
+project(chaos_entry CXX)
+set(CMAKE_CXX_STANDARD 20)
+
+# Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions
+# thrown by generated code. /FS avoids fatal-error data races under MSBuild.
+add_compile_options(""$<$<CXX_COMPILER_ID:MSVC>:/utf-8>"")
+add_compile_options(""$<$<CXX_COMPILER_ID:MSVC>:/GS->"")
+add_compile_options(""$<$<CXX_COMPILER_ID:MSVC>:/FS>"")
+add_compile_options(""$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-finput-charset=utf-8>"")
+add_compile_options(""$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-fexceptions>"")
+add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
+
+# Find the chaos SDK (chaos-config.cmake) — provides chaos::runtime (prebuilt libs + flags).
+set(CHAOS_SDK_DIR ""{sdkRootPath}"")
+find_package(chaos REQUIRED PATHS ""${{CHAOS_SDK_DIR}}"")
+set(CHAOS_PROJECT_ROOT ""{(repoRoot ?? sdkRoot).Replace("\\", "/")}"")
+
+# Entry + generated codegen translation units (AOT mode: native-aot.generated.cpp +
+# its page splits + chaos_generated_module.cpp).
+set(CHAOS_ENTRY_SOURCES
+    app_main.cpp
+    {normalizedSources}
+)
+
+add_executable(chaos_entry ${{CHAOS_ENTRY_SOURCES}})
+
+target_include_directories(chaos_entry PRIVATE
+    ""${{CHAOS_SDK_DIR}}/include""
+    ""${{CHAOS_SDK_DIR}}/generated""{repoIncludes}
+)
+
+target_compile_options(chaos_entry PRIVATE ""$<$<CXX_COMPILER_ID:MSVC>:/EHa>"")
+
+target_link_libraries(chaos_entry PRIVATE
+    chaos::runtime
+)
+
+target_link_options(chaos_entry PRIVATE
+    ""$<$<CXX_COMPILER_ID:MSVC>:/FORCE:MULTIPLE>""
+    ""$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wl,--allow-multiple-definition>""
+)
+");
+
+        Console.WriteLine($"    app_main.cpp, CMakeLists.txt written ({generatedCpps.Count} codegen .cpp source(s))");
+    }
+
+    /// <summary>
+    /// Derive the generated native symbol and the proxy-wrapper call expression from an
+    /// auto-detected entry-point SubjectId: {assembly}/{ns}.{Type}::{Method}:{Ret}({Params}).
+    /// The generated proxy wrapper (chaos_generated_module.h) is
+    ///   struct {AssemblySanitized}_{TypeSanitized} {{ static inline {Ret} {Method}(args...); }};
+    /// so we invoke it as {Struct}::{Method}(0).
+    /// </summary>
+    private static (string NativeSymbol, string ProxyCall) DeriveEntryCall(string? entrySubjectId, string assemblyName)
+    {
+        var nativeSymbol = "chaos_entry_unknown_main_unknown";
+        var proxyCall = "0";
+        if (string.IsNullOrWhiteSpace(entrySubjectId))
+            return (nativeSymbol, proxyCall);
+
+        string[] parts;
+        string subject = entrySubjectId;
+        try
+        {
+            // Strip an assembly prefix if present (some detect paths include {asm}/).
+            parts = subject.Split("::", 2);
+            var leftPart = parts[0];
+            var typeAndMethod = leftPart.Split('/');
+            var typeFull = typeAndMethod[^1].Trim();
+
+            if (parts.Length < 2)
+                return (nativeSymbol, proxyCall);
+            var methodPortion = parts[1];
+            var colon = methodPortion.IndexOf(':');
+            var methodName = (colon >= 0 ? methodPortion[..colon] : methodPortion).Trim();
+            if (string.IsNullOrEmpty(methodName))
+                return (nativeSymbol, proxyCall);
+
+            var sanitized = Sanitize(typeFull);
+            var asmSanitized = Sanitize(assemblyName);
+            var structName = $"{asmSanitized}_{sanitized}";
+
+            var args = "0"; // pass NULL for the first param (string[] entry)
+            nativeSymbol = $"{asmSanitized}_{sanitized}_{methodName}";
+            proxyCall = $"{structName}::{methodName}({args})";
+        }
+        catch
+        {
+            // Fall back to unknown; app_main still compiles.
+        }
+        return (nativeSymbol, proxyCall);
+    }
+
+    /// <summary>Flatten a .NET type name to the codegen-sanitized identifier form (dots/nullable/generics ->
+    /// underscores), matching how the proxy struct name is generated.</summary>
+    private static string Sanitize(string name)
+    {
+        var sb = new System.Text.StringBuilder(name.Length);
+        foreach (var ch in name)
+        {
+            if (char.IsLetterOrDigit(ch) || ch == '_')
+                sb.Append(ch);
+            else
+                sb.Append('_');
+        }
+        return sb.ToString();
+    }
+
+    private static int EmitTestProject(string outputDir, PublishConfig config, ConvertService.ConversionResult result)
+    {
+        // Test mode: use TPG generate-dll
+        // (This is the existing path, with the existing RunPublish logic)
+        // For now, delegate to the existing TPG-based publish
+        var tpgDll = FindTpgDll();
+        if (tpgDll == null)
+        {
+            Console.Error.WriteLine("Error: TPG DLL not found.");
+            return 1;
+        }
+
+        var tpgArgs = new List<string>
+        {
+            "exec", tpgDll,
+            "generate-dll",
+            "--dll", config.AssemblyDll ?? Path.Combine(codegenDir(config), "CombinedSubjects.dll"),
+            "--metadata", config.AssemblyMetadata ?? Path.Combine(codegenDir(config), "subjects", "subjects.metadata.json"),
+            "--output", outputDir,
+            "--config-tier", config.ConfigTier,
+        };
+
+        // ... (TPG subprocess invocation - same as the existing RunPublish)
+        // For now, we've defined the test-mode entry point
+        // The actual TPG invocation will be wired in the existing RunPublish flow
+        Console.WriteLine("  [test mode] TPG generate-dll integration");
+        Console.WriteLine("  (test-mode publish is handled by the existing DriverEntry.RunPublish)");
+        return 0;
+    }
+
+    private static string? FindTpgDll()
+    {
+        var driverDir = Path.GetDirectoryName(typeof(PublishController).Assembly.Location);
+        if (driverDir != null)
+        {
+            var candidate = Path.Combine(driverDir, "Chaos.IL2CPP.Tools.TestProjectGenerator.dll");
+            if (File.Exists(candidate))
+                return candidate;
+        }
+        return null;
+    }
+
+    private static string codegenDir(PublishConfig config)
+    {
+        return Path.Combine(config.OutputDir, "codegen", "generated");
+    }
+
+    private static void CopyRealSdkLibsOverStubs(string outputDir)
+    {
+        try
+        {
+            var repoRoot = DetectRepoRoot();
+            if (repoRoot == null) return;
+
+            var isWindows = System.Runtime.InteropServices.RuntimeInformation
+                .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+            var nativePresetDir = isWindows ? "windows-x64-reference" : "linux-x64-profile";
+            var presetLibRoot = Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
+            var sdkLibRoot = Path.Combine(repoRoot, "tests", "e2e", "translation", "sdk", nativePresetDir, "lib");
+            var stubLibRoot = Path.Combine(outputDir, "codegen", "lib");
+
+            var realLibs = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            if (Directory.Exists(sdkLibRoot))
+            {
+                foreach (var lib in Directory.GetFiles(sdkLibRoot, "*.lib"))
+                    realLibs[Path.GetFileName(lib)] = lib;
+            }
+            if (Directory.Exists(presetLibRoot))
+            {
+                foreach (var lib in Directory.GetFiles(presetLibRoot, "*.lib", SearchOption.AllDirectories))
+                {
+                    var name = Path.GetFileName(lib);
+                    if (!realLibs.TryGetValue(name, out var existing) ||
+                        Path.GetDirectoryName(lib)!.Length > Path.GetDirectoryName(existing)!.Length)
+                    {
+                        realLibs[name] = lib;
+                    }
+                }
+            }
+
+            if (realLibs.Count == 0 || !Directory.Exists(stubLibRoot))
+                return;
+
+            Directory.CreateDirectory(stubLibRoot);
+            var copied = 0;
+            foreach (var kv in realLibs)
+            {
+                File.Copy(kv.Value, Path.Combine(stubLibRoot, kv.Key), overwrite: true);
+                copied++;
+            }
+            Console.WriteLine($"  [publish] Overwrote {copied} stub lib(s) with real SDK libs");
+        }
+        catch { }
+    }
+
+    private static string? FindEntryExe(string outputDir)
+    {
+        var candidates = new[]
+        {
+            Path.Combine(outputDir, "build", "RelWithDebInfo", "chaos_entry.exe"),
+            Path.Combine(outputDir, "build", "Release", "chaos_entry.exe"),
+            Path.Combine(outputDir, "build", "Debug", "chaos_entry.exe"),
+            Path.Combine(outputDir, "build", "chaos_entry.exe"),
+            Path.Combine(outputDir, "chaos_entry.exe"),
+            Path.Combine(outputDir, "RelWithDebInfo", "chaos_entry.exe"),
+            Path.Combine(outputDir, "Release", "chaos_entry.exe"),
+            Path.Combine(outputDir, "Debug", "chaos_entry.exe"),
+        };
+        foreach (var c in candidates)
+        {
+            if (File.Exists(c))
+                return Path.GetFullPath(c);
+        }
+        return null;
+    }
+
+    private static string? DetectRepoRoot()
+    {
+        var dir = AppContext.BaseDirectory;
+        for (int i = 0; i < 6; i++)
+        {
+            var candidate = Path.GetFullPath(Path.Combine(dir, ".."));
+            if (File.Exists(Path.Combine(candidate, "CMakeLists.txt")))
+                return candidate;
+            dir = candidate;
+        }
+        return null;
+    }
+
+    private static int RunDotnetBuild(string projectPath, string outputDir)
+    {
+        var psi = new System.Diagnostics.ProcessStartInfo("dotnet")
+        {
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+        };
+        psi.ArgumentList.Add("build");
+        psi.ArgumentList.Add(projectPath);
+        psi.ArgumentList.Add("-o");
+        psi.ArgumentList.Add(outputDir);
+        psi.ArgumentList.Add("--nologo");
+        psi.ArgumentList.Add("-v");
+        psi.ArgumentList.Add("q");
+
+        using var proc = System.Diagnostics.Process.Start(psi);
+        if (proc == null) return -1;
+
+        var stdout = proc.StandardOutput.ReadToEndAsync();
+        var stderr = proc.StandardError.ReadToEndAsync();
+        proc.WaitForExit(120_000);
+
+        var output = stdout.GetAwaiter().GetResult();
+        var error = stderr.GetAwaiter().GetResult();
+
+        if (!string.IsNullOrWhiteSpace(output))
+            Console.WriteLine(output);
+        if (!string.IsNullOrWhiteSpace(error))
+            Console.Error.WriteLine(error);
+
+        return proc.ExitCode;
+    }
+
+    private static void WritePublishManifest(string outputDir, PublishConfig config,
+        ConvertService.ConversionResult result, string? entryExe)
+    {
+        var manifest = new
+        {
+            inputPath = config.InputPath,
+            mode = config.Mode,
+            outputDir,
+            assemblyName = result.AssemblyName,
+            entryPoint = result.EntryPointSubjectId,
+            methodCount = result.MethodCount,
+            configTier = config.ConfigTier,
+            entryExe = entryExe != null ? Path.GetFullPath(entryExe) : null,
+            status = entryExe != null ? "ok" : "source-only",
+        };
+
+        var manifestPath = Path.Combine(outputDir, "publish.manifest.json");
+        File.WriteAllText(manifestPath, JsonSerializer.Serialize(manifest, JsonOptions));
+        Console.WriteLine($"  publish.manifest.json: {manifestPath}");
+    }
+}

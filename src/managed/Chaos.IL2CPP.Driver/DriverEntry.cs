@@ -356,6 +356,7 @@ public sealed class DriverEntry
         var sourceOnly = false;
         var clean = false;
         var isJit = false;
+        var mode = "app";
         var assemblyDirs = new List<string>();
 
         for (var i = 0; i < args.Length; i++)
@@ -367,6 +368,9 @@ public sealed class DriverEntry
                     break;
                 case "--target" or "-t" when i + 1 < args.Length:
                     target = args[++i];
+                    break;
+                case "--mode" when i + 1 < args.Length:
+                    mode = args[++i].ToLowerInvariant();
                     break;
                 case "--dll" when i + 1 < args.Length:
                     dllPath = Path.GetFullPath(args[++i]);
@@ -404,6 +408,37 @@ public sealed class DriverEntry
             }
         }
 
+        // ── App mode: publish any .csproj/.dll/.exe to a native executable ──
+        // Detected when --mode app (default) OR the positional input is a
+        // project/dll/exe file (as opposed to a subject directory).
+        var isAppInput = subjectDir is not null &&
+            (subjectDir.EndsWith(".csproj", StringComparison.OrdinalIgnoreCase) ||
+             subjectDir.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) ||
+             subjectDir.EndsWith(".exe", StringComparison.OrdinalIgnoreCase));
+
+        if (mode == "app" && (dllPath is null || isAppInput))
+        {
+            if (subjectDir is null)
+            {
+                Console.Error.WriteLine("Error: input path is required for app mode.");
+                Console.Error.WriteLine("Usage: chaos-il2cpp publish <project.csproj|app.dll|app.exe> [--mode app] [--output <dir>]");
+                return 1;
+            }
+
+            return PublishController.Run(new PublishController.PublishConfig
+            {
+                InputPath = subjectDir,
+                OutputDir = outputDir ?? Path.Combine(subjectDir, "output"),
+                Mode = "app",
+                ConfigTier = configTier,
+                SourceOnly = sourceOnly,
+                Clean = clean,
+                IsJit = isJit,
+                AssemblyDirs = assemblyDirs,
+            });
+        }
+
+        // ── Test mode: TPG generate-dll (subject deliverable) ─────────────
         // If --dll and --metadata are provided directly, use them.
         // Otherwise, if subjectDir is given, try to resolve from the manifest.
         if (dllPath is null || metadataPath is null)
@@ -604,7 +639,9 @@ public sealed class DriverEntry
             if (Directory.Exists(buildDir) && File.Exists(Path.Combine(outputDir, "CMakeLists.txt")))
             {
                 Console.WriteLine("  [publish] Rebuilding with real SDK libs...");
-                var rebuildResult = BuildService.ConfigureAndBuild(outputDir, "chaos_entry", "check", "Visual Studio 17 2022", "x64");
+                // Let BuildService pick the platform-default generator (VS 2022/x64
+                // on Windows, Unix Makefiles on Linux/macOS); do not hardcode one.
+                var rebuildResult = BuildService.ConfigureAndBuild(outputDir, "chaos_entry", "check");
                 if (!rebuildResult.Success)
                 {
                     Console.Error.WriteLine($"  [publish] Rebuild failed: {rebuildResult.Error}");
@@ -713,7 +750,11 @@ public sealed class DriverEntry
             var repoRoot = DetectRepoRoot(detectRoot);
             if (repoRoot is null)
             {
-                Console.WriteLine("  [publish] warning: could not resolve repo root; skipping real-lib copy");
+                Console.WriteLine("  [publish] warning: could not resolve the chaos-il2cpp repo root from "
+                                  + $"'{detectRoot}'. Skipping real-SDK-lib copy.");
+                Console.WriteLine("  [publish]          Run 'chaos-il2cpp publish' from inside the repo (or pass a "
+                                  + "<subject-dir> that is under it) so the prebuilt SDK libs "
+                                  + "under artifacts/presets/* and tests/e2e/translation/sdk/* can be located.");
                 return;
             }
 
@@ -736,6 +777,9 @@ public sealed class DriverEntry
             {
                 foreach (var lib in Directory.GetFiles(sdkLibRoot, "*.lib"))
                     realLibs[Path.GetFileName(lib)] = lib;
+                // Linux static libraries use .a extension.
+                foreach (var lib in Directory.GetFiles(sdkLibRoot, "*.a"))
+                    realLibs[Path.GetFileName(lib)] = lib;
             }
             // 2. artifacts/presets deep tree (src/native/<mod>/RelWithDebInfo/<name>.lib).
             if (Directory.Exists(presetLibRoot))
@@ -744,6 +788,16 @@ public sealed class DriverEntry
                 {
                     var name = Path.GetFileName(lib);
                     // Prefer the deepest (RelWithDebInfo / Release) build config.
+                    if (!realLibs.TryGetValue(name, out var existing) ||
+                        Path.GetDirectoryName(lib)!.Length > Path.GetDirectoryName(existing)!.Length)
+                    {
+                        realLibs[name] = lib;
+                    }
+                }
+                // Also search .a files in the presets tree for Linux builds.
+                foreach (var lib in Directory.GetFiles(presetLibRoot, "*.a", SearchOption.AllDirectories))
+                {
+                    var name = Path.GetFileName(lib);
                     if (!realLibs.TryGetValue(name, out var existing) ||
                         Path.GetDirectoryName(lib)!.Length > Path.GetDirectoryName(existing)!.Length)
                     {
@@ -1194,25 +1248,25 @@ public sealed class DriverEntry
 
     private static void ShowPublishHelp()
     {
-        Console.WriteLine("Usage: chaos-il2cpp publish <subject-dir> [--output <dir>] [--dll <subjects.dll> --metadata <subjects.metadata.json>]");
+        Console.WriteLine("Usage: chaos-il2cpp publish <path> [--output <dir>] [--mode app|test]");
         Console.WriteLine("       [--config-tier check|profile|ship] [--clean] [--source-only] [--jit] [--assembly-dir <dir>]");
         Console.WriteLine();
-        Console.WriteLine("Full pipeline: subject.manifest.json -> TPG generate-dll -> native entry.exe");
-        Console.WriteLine("Runs IL2CPP codegen, emits C++ project, configures CMake, and builds entry.exe.");
+        Console.WriteLine("Publish any .NET project/csproj/dll/exe to a native executable.");
+        Console.WriteLine();
+        Console.WriteLine("  <path>            .csproj, .dll, or .exe (app mode) | subject dir (test mode)");
+        Console.WriteLine("  --mode <mode>     app (pure application entry) | test (test harness) [default: app]");
         Console.WriteLine();
         Console.WriteLine("Options:");
-        Console.WriteLine("  --dll <path>               Subjects DLL (CombinedSubjects.dll)");
-        Console.WriteLine("  --metadata <path>          Subjects metadata (subjects.metadata.json)");
-        Console.WriteLine("  --output <dir>             Output directory (default: <subject-dir>/output)");
+        Console.WriteLine("  --output <dir>             Output directory (default: <input>/output)");
         Console.WriteLine("  --config-tier <tier>       Build config: check, profile, or ship (default: check)");
-        Console.WriteLine("  --clean                    Remove intermediate files, keep only entry.exe");
         Console.WriteLine("  --source-only              Emit C++ source files only, skip native build");
         Console.WriteLine("  --jit                      Enable JIT mode (default: AOT)");
         Console.WriteLine("  --assembly-dir <dir>       Additional assembly directory (may repeat)");
         Console.WriteLine();
-        Console.WriteLine("Note: --dll and --metadata can be auto-detected from the manifest or");
-        Console.WriteLine("output/combined/ directory. For the full ATG -> CombinedSubjects chain,");
-        Console.WriteLine("use the foundation-dll pipeline (tests/e2e/verification/).");
+        Console.WriteLine("App mode: translates the project's IL to C++, emits app_main.cpp + CMake,");
+        Console.WriteLine("  and builds an independent native executable that runs the user's Main.");
+        Console.WriteLine("Test mode: uses TPG generate-dll for a test harness (fact/benchmark).");
+        Console.WriteLine("  --dll <path> / --metadata <path>  provide subjects for test mode.");
     }
 
     private static void WriteJson<T>(string path, T value)
