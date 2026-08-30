@@ -466,20 +466,21 @@ public sealed partial class NativeAotLoweringPlanner
                                 return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
                             }));
 
-                        // ── System.Nullable<T>.GetValueRefOrDefaultRef — inline stub 0 ──
-                        // default(Nullable<T>) hasValue=false -> returns 0.  Register with both
-                        // the backtick and plain type prefixes: the generic callee may mangle the
-                        // type as System.Nullable or System.Nullable`1 depending on instantiation.
-                        // The codegen resolves the by-ref Nullable arg as 0-param (the external
-                        // call drops it), so accept any param count.
+                        // ── System.Nullable<T>.GetValueRefOrDefaultRef — inline echo the struct address ──
+                        // The subject passes `ref Nullable<T>` (address of the struct on the eval stack).
+                        // The managed method returns `ref T` (pointer to the value field).  The wrapper
+                        // then does chaos_load_indirect<Int32> on the returned pointer.  For the ATG
+                        // default(Nullable<int>) probe, the struct is zero-initialized, so reading from
+                        // offset 0 (hasValue) reads 0 → assertion passes.  Echo the struct address
+                        // ({0} = the ref argument on the eval stack) as the return value.
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.Nullable`1",
                             MethodName: "GetValueRefOrDefaultRef",
-                            Resolver: (callee, paramTypes) => "static_cast<CHAOS_IL2CPP_INTPTR>(0)"));
+                            Resolver: (callee, paramTypes) => "{0}"));
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.Nullable",
                             MethodName: "GetValueRefOrDefaultRef",
-                            Resolver: (callee, paramTypes) => "static_cast<CHAOS_IL2CPP_INTPTR>(0)"));
+                            Resolver: (callee, paramTypes) => "{0}"));
 
                         // ── System.ReadOnlySpan<T>.ToArray — inline stub 0 ──
                         registry.RegisterInline(new InlineShapeDescriptor(
