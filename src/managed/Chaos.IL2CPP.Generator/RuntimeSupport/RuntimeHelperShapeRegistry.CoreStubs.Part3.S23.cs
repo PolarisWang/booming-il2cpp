@@ -468,11 +468,12 @@ public sealed partial class NativeAotLoweringPlanner
 
                         // ── System.Nullable<T>.GetValueRefOrDefaultRef — inline stub 0 ──
                         registry.RegisterInline(new InlineShapeDescriptor(
-                            TypeDisplayNamePrefix: "System.Nullable",
+                            TypeDisplayNamePrefix: "System.Nullable`1",
                             MethodName: "GetValueRefOrDefaultRef",
                             Resolver: (callee, paramTypes) =>
                             {
-                                if (paramTypes.Count != 0) return null;
+                                if (paramTypes.Count != 1) return null;
+                                // default(Nullable<T>) hasValue=false -> returns 0.
                                 return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
                             }));
 
