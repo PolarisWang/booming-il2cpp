@@ -55,14 +55,24 @@ batch-1 的持续交付件（CI 变更 + A3 设计文档）全部完成。T-A4�
 - `a3-forbid-suspend-design.md`：硬驱赶互斥护栏
 
 ## latest_stop_point
-batch-1 收口。**建议：先同步 roadmap 的 A3 档定义为 Hybrid 语义**（T-B1 已修正"纯硬 STW"为证伪），再进入 P1。
+**CHECKPOINT-1（batch-1 收口，等真实 CI 撑稳护网后启动 P1）**
+
+batch-1 全部交付完成（CI 变更 + A3 设计 5 件套）。G-P1 gate 条件已满足，但按「验证先行」原则，P1 动手改 safepoint/分配器前需先确认护网真实绿。用户已确认选 A（暂停等 CI）。
 
 ## 下一步
-- **同步 roadmap A3 档语义**（T-B1 修正）
-- **进入 P1（G-P1 A2b A3 实现）**：ASAN/TSAN 护网下开始实现 Hybrid safepoint + 单分配器 + LEAF barrier + 契约 + forbid 护栏
+先推进「真实 CI 验证清单」（见下），全部绿后启动 G-P1。
+
+## G-P1 启动前置（真实 CI 验证清单）
+1. **T-A3 Linux TSAN 首次绿**—新 Linux x64 GC CI 首跑；Linux GC 单测从未在 CI 验证，可能现未绿需先修基线（最大的未知风险）
+2. **T-A2 ASAN per-PR 首跑**—`gc-asan` job 在 GC PR 上首跑是否绿
+3. **T-A1 stress 门禁首跑**—per-PR SCALE=50 stress 是否绿（已知 SCALE=50 单独绿，需确认并行 -j4 下稳定）
+4. **T-A4 性能基线首捕**—手动 dispatch `gc-stress-nightly` + `update_baseline=true` 填充 gc.perf.yaml
+5. **回归**—现有 Windows GC 单元门禁（gc-ci.yml）在以上改动提交后仍绿
+
+以上 1-5 全绿 → G-P1 可启动。
 
 ## recommended_next_child
-- G-P1（A2b A3 实现）
+- G-P1（A2b A3 实现）——待真实 CI 清单全绿
 
 ## 目标
 超越 CoreCLR WKS 工业化成熟度，消除所有已知并发正确性缺陷。A3 深度对齐。

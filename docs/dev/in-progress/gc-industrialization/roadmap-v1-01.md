@@ -152,9 +152,15 @@
 
 ## 10. 当前建议推进顺序
 
-1. **先派发 batch-1（T-A1..T-A6 + T-B1..T-B5，11 个子任务）**
-2. 全部 `completed` 后 merge，检查 G-P1 的 gate（T-A 绿 + T-B 设计定稿）
-3. 派发 batch-2（G-P1..G-P5，串行）
+1. **✅ batch-1 已完成**（T-A1/A2/A3 + T-B1..B5；T-A4 待真实 CI 捕获，T-A5/A6 deferred）
+2. **⏸️ CHECKPOINT-1**：真实 CI 验证清单全绿后启动 G-P1（见 STATUS「G-P1 启动前置」）
+   - T-A3 Linux TSAN 首绿（最大风险：Linux GC 单测首次 CI 验证）
+   - T-A2 ASAN per-PR 首跑
+   - T-A1 stress 门禁首跑
+   - T-A4 性能基线首捕（手动 dispatch）
+   - 现有 Windows GC 门禁回归
+3. **P1（G-P1）**：A3 Hybrid 实现，4 域 Workflow 委托
+4. 之后 P2 → P3 → P4 → P5 串行
 
 ## 11. 子任务执行策略
 
