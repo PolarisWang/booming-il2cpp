@@ -178,6 +178,7 @@ bool PalGetThreadContext(void* os_handle, void* out_ctx);     // Win32 OK; 其�
 - [x] `SuspendThread` 驱赶仅 Windows，Linux 用 SIGUSR2（已有），Apple/Android 降级纯软
 - [x] 新增 `PalSuspendThread/PalResumeThread/PalGetThreadContext` PAL 抽象
 - [x] `forbid_suspend.h` **保留并强化**为互斥护栏，不废弃
+- [x] 下列已拍板**不**解决 Watch Item 3（epoch 机制冲突）——该未决项与上述决策**并行存在**，实现前必须先统一（见结论§9 前提项 2）
 
 ## 8. Watch Items（执行中观察，非阻塞）
 
@@ -189,6 +190,10 @@ bool PalGetThreadContext(void* os_handle, void* out_ctx);     // Win32 OK; 其�
 
 ## 9. 结论
 
-**修正后的 A3（Hybrid）跨平台完全可行。** 它比 brainstorm 阶段的「硬 STW 主路径」更安全（绕开 OS 寄存器不可靠）、更符合 CoreCLR 真实架构（软主路径 + 硬兜底），且 CRAG 现有 PAL 层已具备大部分前置设施（trampoline、`PalPreemptRequest`、`PalCaptureReliable` 可靠性门控）。唯一新增是 `pal_suspend.h` 三个接口 + Windows 实现。
+**修正后的 A3（Hybrid）跨平台架构方向成立（前提项见下）。** 它比 brainstorm 阶段的「硬 STW 主路径」更安全（绕开 OS 寄存器不可靠）、更符合 CoreCLR 真实架构（软主路径 + 硬兜底），且 CRAG 现有 PAL 层已具备大部分前置设施（trampoline、`PalPreemptRequest`、`PalCaptureReliable` 可靠性门控）。唯一新增是 `pal_suspend.h` 三个接口 + Windows 实现。
+
+**⚠️ 可行性结论的未验证前提（接续者必须保留，勿据此直接拉闸定稿）：**
+1. **Apple/Android latency**：两平台退化为纯软等待无硬驱赶兜底；若某 JIT 方法长时间不撞 cooperative 切换点，GC 等待可能超 target latency（Watch Item 1）。此点未纳入「可行」结论，需在实现期评估——跨平台「✅可行」是**架构方向**结论，非**延迟满足**结论。
+2. **epoch 机制冲突**：全局 trap 标志 + process-wide barrier 与 CRAG 现有 per-thread handshake 的 epoch 机制是否冲突，仍是 Watch Item 3 的未决项——**尚未随本设计决策解决**，实现 handshake 叠加层时必须先统一两者（见 §8）。
 
 下游 B3/B4/B5 需按 §6 修正方向，B2 不受影响。

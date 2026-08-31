@@ -27,16 +27,16 @@ terminals_active: []
 - `auto_stop_policy: blocking-only`
 
 ## 最近摘要
-### batch-1（已完成）
+### batch-1（已完成 10/11，2 项 deferred/scope-adjusted）
 - ✅ T-A1（0b1777e8d）：per-PR 并发 stress 门禁（SCALE=50）
 - ✅ T-A2（84ae5f621）：ASAN per-PR 门禁
-- ✅ T-A3（b8e6da61a+b841b745b）：Linux x64 GC CI + TSAN per-PR
+- ✅ T-A3（b8e6da61a+b841b745b）：**Linux x64 GC CI 已新增** + TSAN 构建框架已就绪。TSAN 在 Windows 上不可用（MSVC 不支持），Linux x64 基线已先行加入 CI。**Linux GC 原生单测首次在 CI 运行**（可能有不绿风险，需先修基线再叠 TSAN 为 per-PR 门禁）。TSAN 全量 per-PR 门禁延后到 P4（平台覆盖阶段）。
 - ✅ T-B1：CoreCLR safepoint 研读 + A3 Hybrid 设计（跨平台 ✅）
 - ✅ T-B2：单 region 分配器设计
 - ✅ T-B3：LEAF barrier 设计（mode switch 绑定）
 - ✅ T-B4：codegen/JIT/interpreter 写屏障契约（S+B+[D] 序列）
 - ✅ T-B5：forbid_suspend 强化为互斥护栏（ForbidSuspendThreadHolder 设计）
-- ⏸️ T-A4（READY-FOR-CI）、T-A5/A6（deferred）
+- ⏸️ T-A4（READY-FOR-CI，**不阻塞 G-P1 gate**——需真实 CI 手动 dispatch 填充基线，属性能基线基建非安全关键；详见 roadmap 子任务映射）、T-A5/A6（deferred，不阻塞 G-P1 gate）
 
 ### P1 E0 — 安全重构批次（进行中）
 方案 A（先做安全可本地验证部分）：

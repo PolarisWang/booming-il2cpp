@@ -197,3 +197,14 @@ LEAF barrier **不是**「原子化 store+barrier」的魔法，而是三件事�
 3. **trap 标志保证**——cooperative 线程已完成 barrier
 
 这三者共同**结构性消除**了 A2b 的 store+barrier 窗口，且绕开 CoreCLR 证伪的「挂起态扫描」路径。跨平台（x64/ARM64）可行性确立。
+
+---
+
+## 10. 交接约束：store 与 barrier 的 mode 绑定（接续者必读）
+
+「mode switch 保证一致性」**有隐含前提**——store 与 barrier 必须执行于同一 mode 上下文，且 mode 切换点与 barrier 调用之间的可见性有明确定义。缺失此处会引入竞态：
+
+1. **同一 mode 上下文**：存储目标引用的 `store` 与随之调用的 `barrier` 必须都由**同一条 codegen 指令序列**在同一 cooperative 段内发出（即插入 barrier 时，该线程已在 cooperative 模式）。禁止 store 与 barrier 被 `EnablePreemptiveGC()/DisablePreemptiveGC()` 切换点隔开——若线程在 store 与 barrier 之间切到 preemptive，mode switch 前提即被破坏，A2b 窗口复活。
+2. **mode 读取顺序**：barrier 开头读取 `tls_current_mode_is_cooperative`；仅在 cooperative 时执行 card/世代处理，否则跳过（preemptive 线程由 rendezvous 兜底扫描）。该判断必须发生在**任何 store 副作用之前**（acquire 顺序），确保「cooperative 读到」⇒「该 store 会被 barrier 覆盖」。
+3. **可见性语义**：cooperative 线程的每次 store 后**必须**跟一次 barrier（sink 处，非 source）。codegen 契约落地时（见 T-B4 契约），对每个写引用 `stfld/stind.ref/stelem.ref` 在**同一基本块末尾**（仍 cooperative）插入 barrier 调用，保证 mode 未切换。
+4. **交接检查**：P1 实现 codegen 插入逻辑时，验证每个 barrier 调用的生成位置与其对应 store 的最高 mode 值一致；用 `gc_region_barrier_stress_test` + TSAN（T-A3）覆盖「store 后立即切换 mode」的并发用例，捕获边界违例。

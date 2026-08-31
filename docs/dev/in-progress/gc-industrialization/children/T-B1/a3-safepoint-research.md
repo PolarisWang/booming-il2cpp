@@ -5,6 +5,8 @@
 > 日期：2026-08-31
 > 用途：CRAG GC A3 深度对齐的前置研究 —— 理解 dotnet/runtime 如何用 `SuspendThread + GetThreadContext` 作为 GC safepoint 主机制，以及它与 per-thread handshake 软协调的真实关系。
 > 源码来源：`dotnet/runtime` main 分支，`src/coreclr/vm/threadsuspend.cpp`（6254 行）、`threadsuspend.h`、`threads.h`、`fcall.h`、`gchelpers.h`、`gcheaputilities.h`。以下所有标识符均取自上述文件原文。
+>
+> **行号精度声明**：本研究中引用的行号为**近似参考**（标记 `~`，如 `~3370`/`~230`/`:~3000`），用于指示代码区域而非逐一精确核验的锚点。标识符（函数/常量/字段名）取自原文，但行号可能随 dotnet/runtime 版本漂移 ±数百行。接续者如需精确位置，应以当前 dotnet/runtime checkout 重新定位，勿以本处近似行号作为权威依据。
 
 ---
 
