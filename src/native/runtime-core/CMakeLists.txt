@@ -126,7 +126,6 @@ add_library(chaos_runtime_core STATIC
     assembly_manager.cpp
     static_var_store.h
     static_var_store.cpp
-    gc/gc_bump_cache.h
     gc/gc_bit_utils.h
     gc/gc_features.h
     gc/gc_helpers.h

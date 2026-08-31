@@ -39,11 +39,6 @@ chaos_native_add_test(test_gc_bit_utils
     LABELS "unit;gc"
 )
 
-# gc_bump_cache_test — GcBumpCache size-class allocator unit tests
-chaos_native_add_test(test_gc_bump_cache
-    gc_bump_cache_test.cpp
-    LABELS "unit;gc"
-)
 
 # gc_layout_test — GcLayoutRegistry unit tests
 chaos_native_add_test(test_gc_layout
