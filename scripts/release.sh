@@ -101,7 +101,11 @@ echo "  target tag      : ${TAG}"
 
 # Clean tree check (unless --dry-run, where we intentionally change nothing).
 if [ "$DRY_RUN" -eq 0 ]; then
-    UNCOMMITTED=$(git status --porcelain 2>/dev/null | grep -v '^??' || true)
+    # Exclude docs/dev/in-progress/repo-cleanliness/STATUS.md — the repo's own
+    # pre-commit hygiene gate regenerates its "Last run" timestamp on EVERY
+    # commit, so it can never be clean. Ignoring it keeps the release flow green.
+    UNCOMMITTED=$(git status --porcelain 2>/dev/null | grep -v '^??' \
+        | grep -v 'docs/dev/in-progress/repo-cleanliness/STATUS.md' || true)
     if [ -n "$UNCOMMITTED" ]; then
         echo "Error: working tree has uncommitted changes. Commit or discard before releasing." >&2
         echo "$UNCOMMITTED" | head -20 >&2
