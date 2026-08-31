@@ -45,6 +45,13 @@ add_library(chaos_pal STATIC
     $<$<PLATFORM_ID:Linux>:pal_preempt_posix.cpp>
     $<$<PLATFORM_ID:Darwin>:pal_preempt_apple.cpp>
     $<$<PLATFORM_ID:Android>:pal_preempt_android.cpp>
+    # ── A3: Hard suspension (SuspendThread) — Windows-only, POSIX stub ──
+    # Windows: full SuspendThread/GetThreadContext/ResumeThread.
+    # All others: kUnsupported (A3 falls back to SIGUSR2 trampoline / soft
+    # rendezvous, matching CoreCLR's DISABLE_THREADSUSPEND platform gate).
+    chaos/pal/pal_suspend.h
+    $<$<PLATFORM_ID:Windows>:pal_suspend_win32.cpp>
+    $<$<NOT:$<PLATFORM_ID:Windows>>:pal_suspend_posix.cpp>
     # ── Track A: Domain heap abstraction ──────────────────────────────
     chaos/pal/pal_heap.h
     $<$<PLATFORM_ID:Windows>:pal_heap_win32.cpp>
