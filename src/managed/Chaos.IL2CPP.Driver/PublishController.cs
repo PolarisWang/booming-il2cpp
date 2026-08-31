@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Reflection;
 
 namespace Chaos.IL2CPP.Driver;
 
@@ -812,6 +813,29 @@ target_link_options(chaos_entry PRIVATE
         return proc.ExitCode;
     }
 
+    /// <summary>
+    /// The tool's own version, sourced from the compiled assembly's informational
+    /// version (which reflects Directory.Build.props <Version>, kept in lock-step
+    /// with VERSION by scripts/release_bump.sh). This removes the hardcoded
+    /// "0.1.0" that previously drifted from the project's real version.
+    /// </summary>
+    private static string ResolveToolVersion()
+    {
+        var info = typeof(PublishController).Assembly
+            .GetCustomAttribute<System.Reflection.AssemblyInformationalVersionAttribute>();
+        var ver = info?.InformationalVersion;
+        if (!string.IsNullOrWhiteSpace(ver))
+        {
+            // InformationalVersion may carry a trailing +<build-metadata> suffix; keep only SemVer.
+            ver = ver.Split('+')[0].Trim();
+            if (ver.Length > 0)
+                return ver;
+        }
+        // Final fallback: the file version (assembly version, no suffix).
+        var fv = typeof(PublishController).Assembly.GetName().Version?.ToString(3);
+        return string.IsNullOrWhiteSpace(fv) ? "0.0.0" : fv;
+    }
+
     private static void WritePublishManifest(string outputDir, PublishConfig config,
         ConvertService.ConversionResult result, string? entryExe)
     {
@@ -826,7 +850,7 @@ target_link_options(chaos_entry PRIVATE
             methodCount = result.MethodCount,
             configTier = config.ConfigTier,
             entryExe = entryExe != null ? Path.GetFullPath(entryExe) : null,
-            toolVersion = "0.1.0",
+            toolVersion = ResolveToolVersion(),
             sdkPreset = ResolveSdkPreset(),
             status = entryExe != null ? "ok" : "source-only",
             timestamp = DateTime.UtcNow.ToString("O"),

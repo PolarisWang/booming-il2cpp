@@ -1,0 +1,222 @@
+# Release workflow — triggered by pushing a v* SemVer tag.
+#
+# Builds all platform SDKs, generates checksums + SBOM, creates a GitHub Release
+# with release notes + artifacts.
+#
+# Trigger:
+#   git push origin v<version>
+#   (e.g. git push origin v0.1.0)
+#
+# The release branch (release/X.Y.x) must already exist and be in sync with the tag.
+# See scripts/release.sh for the complete orchestration.
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'   # v0.1.0, v0.1.0-rc1, etc.
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  # ── Extract version from tag ───────────────────────────────────────────────
+  version:
+    name: Resolve version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.parse.outputs.version }}
+      prerelease: ${{ steps.parse.outputs.prerelease }}
+    steps:
+      - id: parse
+        shell: bash
+        run: |
+          TAG="${{ github.ref_name }}"
+          VER="${TAG#v}"                        # strip leading v
+          PRERELEASE="false"
+          if [[ "$VER" == *-* ]]; then           # has prerelease suffix
+            PRERELEASE="true"
+          fi
+          echo "version=$VER" >> "$GITHUB_OUTPUT"
+          echo "prerelease=$PRERELEASE" >> "$GITHUB_OUTPUT"
+
+  # ── Build SDK (Windows x64 reference) ──────────────────────────────────────
+  build-windows:
+    name: Build SDK (Windows x64)
+    needs: [version]
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+      - name: Build SDK (cmake windows-x64-reference)
+        shell: bash
+        run: |
+          cmake --preset windows-x64-reference
+          cmake --build --preset windows-x64-reference
+      - name: Collect SDK artifacts
+        shell: bash
+        run: |
+          SDK_DIR="artifacts/release/${{ needs.version.outputs.version }}/windows-x64"
+          mkdir -p "$SDK_DIR/lib"
+          # Copy built libs (flattened)
+          find artifacts/presets/windows-x64-reference -type f \( -name '*.lib' -o -name '*.dll' -o -name '*.exe' -o -name '*.pdb' \) -exec cp {} "$SDK_DIR/lib/" \; 2>/dev/null || true
+          # Copy the SDK include tree if SdkEmitter was run
+          if [ -d "tests/e2e/translation/sdk/windows-x64-reference" ]; then
+            cp -r tests/e2e/translation/sdk/windows-x64-reference/* "$SDK_DIR/"
+          fi
+          # Keep the chaos-config.cmake at the SDK root
+          if [ -f "tests/e2e/translation/sdk/windows-x64-reference/chaos-config.cmake" ]; then
+            cp tests/e2e/translation/sdk/windows-x64-reference/chaos-config.cmake "$SDK_DIR/"
+          fi
+          echo "SDK artifacts: $(find "$SDK_DIR" -type f | wc -l) files"
+      - name: Upload SDK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdk-windows-x64-${{ needs.version.outputs.version }}
+          path: artifacts/release/${{ needs.version.outputs.version }}/windows-x64
+
+  # ── Build SDK (Linux x64) ──────────────────────────────────────────────────
+  build-linux:
+    name: Build SDK (Linux x64)
+    needs: [version]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+      - name: Build SDK (cmake linux-x64-native)
+        shell: bash
+        run: |
+          cmake --preset linux-x64-native
+          cmake --build --preset linux-x64-native
+      - name: Collect SDK artifacts
+        shell: bash
+        run: |
+          SDK_DIR="artifacts/release/${{ needs.version.outputs.version }}/linux-x64"
+          mkdir -p "$SDK_DIR/lib"
+          find artifacts/presets/linux-x64-native -type f \( -name '*.a' -o -name '*.so' \) -exec cp {} "$SDK_DIR/lib/" \; 2>/dev/null || true
+          if [ -d "tests/e2e/translation/sdk/linux-x64-profile" ]; then
+            cp -r tests/e2e/translation/sdk/linux-x64-profile/* "$SDK_DIR/"
+          fi
+          echo "SDK artifacts: $(find "$SDK_DIR" -type f | wc -l) files"
+      - name: Upload SDK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdk-linux-x64-${{ needs.version.outputs.version }}
+          path: artifacts/release/${{ needs.version.outputs.version }}/linux-x64
+
+  # ── Generate release notes ─────────────────────────────────────────────────
+  release-notes:
+    name: Generate release notes
+    runs-on: ubuntu-latest
+    needs: [version]
+    outputs:
+      notes-file: release-notes.md
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Generate release notes
+        shell: bash
+        run: |
+          PREV_TAG=$(git describe --abbrev=0 --tags "${{ github.ref_name }}^" 2>/dev/null || echo "")
+          if [ -n "$PREV_TAG" ]; then
+            python scripts/ci/gen_release_notes.py < <(git log --no-merges --format='%H|%s|%an' "$PREV_TAG..${{ github.ref_name }}") > release-notes.md
+          else
+            python scripts/ci/gen_release_notes.py < <(git log --no-merges --format='%H|%s|%an' "${{ github.ref_name }}") > release-notes.md
+          fi
+          echo "Release notes generated ($(wc -c < release-notes.md) bytes)"
+      - name: Upload release notes
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-notes
+          path: release-notes.md
+
+  # ── Generate checksums + SBOM + consolidate ────────────────────────────────
+  checksums:
+    name: Generate checksums + SBOM
+    needs: [version, build-windows, build-linux]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download all SDK artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: sdk-*-${{ needs.version.outputs.version }}
+          merge-multiple: false
+      - name: Generate checksums + SBOM
+        shell: bash
+        run: |
+          mkdir -p release-artifacts
+          for dir in sdk-*; do
+            if [ -d "$dir" ]; then
+              cp -r "$dir" "release-artifacts/$dir"
+            fi
+          done
+          # Generate checksums for the whole release bundle
+          bash scripts/generate-checksums.sh release-artifacts release-artifacts/SHA256SUMS
+          # Generate SBOM
+          bash scripts/generate-sbom.sh release-artifacts "${{ needs.version.outputs.version }}" release-artifacts/sbom.cyclonedx.json
+      - name: Upload release bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-bundle-${{ needs.version.outputs.version }}
+          path: release-artifacts
+
+  # ── Create GitHub Release ──────────────────────────────────────────────────
+  publish:
+    name: Create GitHub Release
+    needs: [version, release-notes, checksums]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download release notes
+        uses: actions/download-artifact@v4
+        with:
+          name: release-notes
+      - name: Download release bundle
+        uses: actions/download-artifact@v4
+        with:
+          name: release-bundle-${{ needs.version.outputs.version }}
+          path: release-bundle
+      - name: Create Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${{ needs.version.outputs.version }}"
+          PRERELEASE="${{ needs.version.outputs.prerelease }}"
+          NOTES_FILE="release-notes.md"
+          BUNDLE_DIR="release-bundle"
+          echo "Creating release v$VERSION (prerelease=$PRERELEASE)"
+          gh release create "v$VERSION" \
+            --notes-file "$NOTES_FILE" \
+            $([ "$PRERELEASE" = "true" ] && echo "--prerelease") \
+            --title "v$VERSION" \
+            --verify-tag
+          # Upload all files in the bundle (flat, one level deep)
+          find "$BUNDLE_DIR" -type f \
+            ! -name "SHA256SUMS" -o -name "SHA256SUMS" \
+            | while read -r f; do
+              echo "Uploading: $f"
+              gh release upload "v$VERSION" "$f" --clobber
+            done
+          echo "Release v$VERSION published"

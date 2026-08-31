@@ -1,0 +1,41 @@
+# Dependabot configuration — automated dependency updates.
+#
+# Enables GitHub-native vulnerability scanning + automated PRs for dependency
+# upgrades. This is the minimum viable supply-chain security posture for a
+# product-grade release pipeline.
+#
+# https://docs.github.com/en/code-security/dependabot
+
+version: 2
+updates:
+  # NuGet / .NET managed dependencies
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Shanghai"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "automated"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  # GitHub Actions workflow dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Shanghai"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "automated"
+    commit-message:
+      prefix: "deps"
+      include: "scope"

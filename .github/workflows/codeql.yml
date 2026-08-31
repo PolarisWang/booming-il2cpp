@@ -1,0 +1,58 @@
+# CodeQL — automated static security analysis.
+#
+# Runs GitHub's CodeQL analysis on push to main and on a scheduled basis to
+# catch high-severity security vulnerabilities (C++/C#/Python). This is the
+# minimum viable security-scan gate for a product-grade release pipeline.
+#
+# Analysis results appear in the GitHub Security tab → Code scanning.
+
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/native/**'
+      - 'src/managed/**'
+      - 'tests/**'
+      - '*.py'
+  schedule:
+    # Off-peak weekly scan (staggered to avoid the :00/:30 CI burst).
+    - cron: "23 5 * * 1"
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+    timeout-minutes: 600
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['c-cpp', 'csharp', 'python']
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      # C++ analysis requires the build to be instrumented; CodeQL does this
+      # automatically via autobuild. Set up the build environment for MSVC-free
+      # Linux (the runner is ubuntu-latest).
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+        continue-on-error: true
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
