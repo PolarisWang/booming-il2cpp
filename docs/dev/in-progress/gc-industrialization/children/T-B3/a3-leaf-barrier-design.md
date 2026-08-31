@@ -181,6 +181,16 @@ x64 DirtyCard LEAF:
 
 ---
 
+### 7.5 mode switch 作用域保证（CoreCLR 对标）
+
+store 与 barrier 的 mode 一致性由函数级作用域保证，而非 per-store 绑定。在 CoreCLR 中：
+- `DisablePreemptiveGC()` 在函数入口设置 `m_fPreemptiveGCDisabled = 1`
+- 整个函数体在同一 cooperative mode 下执行，所有 store 操作都跟在 barrier 之后
+- `EnablePreemptiveGC()` 在函数出口恢复
+- 写屏障本身（如 `JIT_WriteBarrier` 汇编）不检查 mode——调用者保证只在 cooperative 模式下调用
+
+因此不存在"store 在 cooperative 下执行，barrier 在 preemptive 下调用"的竞态。mode 切换点（DisablePreemptiveGC/EnablePreemptiveGC）就是 barrier 作用域的隐式边界。codegen 生成代码时，必须保证每个执行 store 的代码段在同一个 DisablePreemptiveGC→EnablePreemptiveGC 区间内。
+
 ## 8. Watch Items
 
 - [ ] `__forceinline` 在 Release O2 下是否保持 LEAF（需 P1 验证，若破坏则降级汇编）

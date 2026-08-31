@@ -29,7 +29,7 @@ T-B1 研究证明 CoreCLR 恰恰用 `m_dwForbidSuspendThread` 作为核心互斥
 
 新 A3 新增 `pal_suspend.h` 的 `PalSuspendThread`（Windows 硬驱赶）。**硬驱赶线程互相挂起需要 `m_dwForbidSuspendThread` 式互斥**——CRAG 现有 `ForbidSuspendScope` 只处理「软握手中 GC 等待线程」，不处理「硬 SuspendThread 驱赶中线程互相挂」。
 
-**缺口**：当一个线程 T1 正持某把锁（如 RegionManager GcSpinLock），另一个线程 T2 被 A3 硬驱赶逻辑 `SuspendThread(T1)` 挂起——若 T1 正等 T2 释放的锁，则死锁。
+**缺口**：当一个线程 T1 正持某把锁（如 RegionManager GcSpinLock），A3 硬驱赶逻辑调用 `SuspendThread(T1)` 挂起 T1——若 T1 正等 T2 释放的锁，则死锁。
 
 ## 3. 强化设计
 

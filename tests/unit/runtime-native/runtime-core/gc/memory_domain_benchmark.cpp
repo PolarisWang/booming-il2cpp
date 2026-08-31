@@ -96,6 +96,8 @@ TEST_F(MemoryDomainBenchmark, PushPop_100kIterations) {
         PopDomain(depth);
     });
     PrintResult("PushDomain+PopDomain", kIter, total);
+    double avg_ns = (static_cast<double>(total) * 1000.0) / static_cast<double>(kIter);
+    std::printf("BENCH, PushPop_100k,AVG=%.1f,N=%d\n", avg_ns, kIter);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -116,6 +118,8 @@ TEST_F(MemoryDomainBenchmark, AllocateTagged_100kIterations) {
         }
     });
     PrintResult("DomainCurrentAllocateTagged+FreeTagged (64 bytes)", kIter, total);
+    double avg_ns = (static_cast<double>(total) * 1000.0) / static_cast<double>(kIter);
+    std::printf("BENCH, AllocateTaggedFree_100k,AVG=%.1f,N=%d\n", avg_ns, kIter);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -138,6 +142,8 @@ TEST_F(MemoryDomainBenchmark, ReallocateTagged_10kIterations) {
         }
     });
     PrintResult("DomainCurrentReallocateTagged (32->128 bytes)", kIter, total);
+    double avg_ns = (static_cast<double>(total) * 1000.0) / static_cast<double>(kIter);
+    std::printf("BENCH, ReallocateTagged_10k,AVG=%.1f,N=%d\n", avg_ns, kIter);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -155,6 +161,8 @@ TEST_F(MemoryDomainBenchmark, FindById_100kIterations) {
         (void)d;
     });
     PrintResult("FindDomainById", kIter, total);
+    double avg_ns = (static_cast<double>(total) * 1000.0) / static_cast<double>(kIter);
+    std::printf("BENCH, FindById_100k,AVG=%.1f,N=%d\n", avg_ns, kIter);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -176,4 +184,6 @@ TEST_F(MemoryDomainBenchmark, RegisterUnregister_10kIterations) {
         }
     });
     PrintResult("RegisterMemoryDomain+UnregisterMemoryDomain", kIter, total);
+    double avg_ns = (static_cast<double>(total) * 1000.0) / static_cast<double>(kIter);
+    std::printf("BENCH, RegisterUnregister_10k,AVG=%.1f,N=%d\n", avg_ns, kIter);
 }

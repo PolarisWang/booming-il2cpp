@@ -156,6 +156,11 @@ public:
     ForbidSuspendThreadHolder& operator=(ForbidSuspendThreadHolder&&) = delete;
 };
 
+// The reader side of this protocol is in thread_state.cpp (~682, ~706):
+// the coordinator reads the target's forbid_suspend_count with
+// memory_order_acquire BEFORE and AFTER SuspendThread, forming a
+// complete release-acquire pairing with fetch_sub(release) above.
+
 }  // namespace chaos::il2cpp::runtime_core::threading
 
 #endif  // CHAOS_IL2CPP_FORBID_SUSPEND_H_

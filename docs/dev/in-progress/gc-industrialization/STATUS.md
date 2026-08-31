@@ -28,15 +28,15 @@ terminals_active: []
 
 ## 最近摘要
 ### batch-1（已完成 10/11，2 项 deferred/scope-adjusted）
-- ✅ T-A1（0b1777e8d）：per-PR 并发 stress 门禁（SCALE=50）
-- ✅ T-A2（84ae5f621）：ASAN per-PR 门禁
-- ✅ T-A3（b8e6da61a+b841b745b）：**Linux x64 GC CI 已新增** + TSAN 构建框架已就绪。TSAN 在 Windows 上不可用（MSVC 不支持），Linux x64 基线已先行加入 CI。**Linux GC 原生单测首次在 CI 运行**（可能有不绿风险，需先修基线再叠 TSAN 为 per-PR 门禁）。TSAN 全量 per-PR 门禁延后到 P4（平台覆盖阶段）。
+- 🟡 T-A1（0b1777e8d）：per-PR 并发 stress 门禁（SCALE=50）。功能就位但 CI 首绿待验证。flaky 容忍量化策略：允许 ≤3 次重试后标记为 known flaky 并记录到 known-fail 数据库；单次 stress 运行 ≥1/1000 FAIL 即触发人工审查；若连续 3 次 CI 运行均出现同一 flaky，降级为 blocker 并停止门禁。
+- 🟡 T-A2（84ae5f621）：ASAN per-PR 门禁。功能就位但 CI 首绿待验证。
+- 🟡 T-A3（b8e6da61a+b841b745b）：**Linux x64 GC CI 已新增** + TSAN 构建框架已就绪。TSAN 在 Windows 上不可用（MSVC 不支持），Linux x64 基线已先行加入 CI。**Linux GC 原生单测首次在 CI 运行**（可能有不绿风险，需先修基线再叠 TSAN 为 per-PR 门禁）。功能就位但 CI 首绿待验证。TSAN 全量 per-PR 门禁延后到 P4（平台覆盖阶段）。
 - ✅ T-B1：CoreCLR safepoint 研读 + A3 Hybrid 设计（跨平台 ✅）
 - ✅ T-B2：单 region 分配器设计
 - ✅ T-B3：LEAF barrier 设计（mode switch 绑定）
 - ✅ T-B4：codegen/JIT/interpreter 写屏障契约（S+B+[D] 序列）
 - ✅ T-B5：forbid_suspend 强化为互斥护栏（ForbidSuspendThreadHolder 设计）
-- ⏸️ T-A4（READY-FOR-CI，**不阻塞 G-P1 gate**——需真实 CI 手动 dispatch 填充基线，属性能基线基建非安全关键；详见 roadmap 子任务映射）、T-A5/A6（deferred，不阻塞 G-P1 gate）
+- ⏸️ T-A4（READY-FOR-CI，**不阻塞 G-P1 gate**——需真实 CI 手动 dispatch 填充基线，属性能基线基建非安全关键；详见 roadmap 子任务映射）。T-A4 性能基线首捕为建议项（non-blocking），不影响 G-P1 启动判定；但建议在 G-P1 过程中尽早完成，否则 P2 启动时缺少性能回退依据。T-A5/A6（deferred，不阻塞 G-P1 gate）
 
 ### P1 E0+ — A3 Hybrid safepoint 实现（已完成核心）
 - ✅ `7c7872659`：PohAllocate std::mutex → GcSpinLock + ScopedPreemptiveMode（修 HIGH 死锁）。验证：test_gc_poh 9/9

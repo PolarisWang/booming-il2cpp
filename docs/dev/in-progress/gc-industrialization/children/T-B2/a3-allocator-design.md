@@ -3,7 +3,7 @@
 > 标题：单 Region 分配器（统一分配路径，消除 A2b 跨分配器窗口）
 > 作者：Chaos IL2CPP 基础设施
 > 日期：2026-08-31
-> 上位文档：`roadmap-v1-01.md` T-B2 / `a3-safepoint-design.md` §6
+> 上位文档：`roadmap-v1-01.md` T-B2 / `a3-safepoint-research.md`（research）+ `a3-safepoint-design.md`（design）§6
 
 ---
 

@@ -54,6 +54,7 @@ SuspendResult PalGetThreadContext(void* os_handle, uint64_t* ip_out,
         return SuspendResult::kFailure;
     }
 
+#if defined(_M_AMD64)
     // x64: RIP = instruction pointer, RSP = stack pointer
     if (ip_out) *ip_out = ctx.Rip;
     if (sp_out) *sp_out = ctx.Rsp;
@@ -78,6 +79,34 @@ SuspendResult PalGetThreadContext(void* os_handle, uint64_t* ip_out,
         gpr_out[14] = ctx.R14;
         gpr_out[15] = ctx.R15;
     }
+#elif defined(_M_ARM64)
+    // ARM64: Pc = instruction pointer, Sp = stack pointer.
+    if (ip_out) *ip_out = ctx.Pc;
+    if (sp_out) *sp_out = ctx.Sp;
+
+    // Fill the 16-entry GPR array from the first 16 of 31 registers
+    // (X0..X28) + SP; the spare register X30 (LR) is not remapped.
+    if (gpr_out) {
+        gpr_out[0]  = ctx.X0;
+        gpr_out[1]  = ctx.X1;
+        gpr_out[2]  = ctx.X2;
+        gpr_out[3]  = ctx.X3;
+        gpr_out[4]  = ctx.X4;
+        gpr_out[5]  = ctx.X5;
+        gpr_out[6]  = ctx.X6;
+        gpr_out[7]  = ctx.X7;
+        gpr_out[8]  = ctx.X8;
+        gpr_out[9]  = ctx.X9;
+        gpr_out[10] = ctx.X10;
+        gpr_out[11] = ctx.X11;
+        gpr_out[12] = ctx.X12;
+        gpr_out[13] = ctx.X13;
+        gpr_out[14] = ctx.X14;
+        gpr_out[15] = ctx.X15;
+    }
+#else
+#error "Unsupported Windows architecture: only x64 and ARM64 are supported"
+#endif
 
     return SuspendResult::kSuccess;
 }

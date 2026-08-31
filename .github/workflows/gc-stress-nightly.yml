@@ -87,7 +87,7 @@ jobs:
 
       - name: Build Native Runtime + GC tests
         run: |
-          cmake --build artifacts/presets/windows-x64-reference --config Debug -j 8
+          cmake --build artifacts/presets/windows-x64-reference --config Release -j 8
 
       - name: Run GC stress/soak/benchmark tiers (driver, stress-only)
         shell: bash

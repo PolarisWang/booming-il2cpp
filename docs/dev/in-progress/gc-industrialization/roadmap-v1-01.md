@@ -119,7 +119,7 @@
 | T-B2 | T-B | planned | terminal-1 | 设计单 region 分配器 | - | batch-1 | 接口/数据流 | `a3-allocator-design.md` | 设计定稿 | `docs/**` | 1周 |
 | T-B3 | T-B | planned | terminal-1 | 设计 LEAF 汇编写屏障（x64+ARM64） | - | batch-1 | 两套汇编设计 | `a3-leaf-barrier-design.md` | 设计定稿 | `docs/**` | 1周 |
 | T-B4 | T-B | planned | terminal-1 | 设计 codegen/JIT 接口契约 | - | batch-1 | store+barrier 原子窗口 | `a3-contract-design.md` | 契约定稿 | `docs/**` | 1周 |
-| T-B5 | T-B | planned | terminal-1 | 设计 forbid_suspend 保留并强化方案（互斥护栏） | - | batch-1 | 强化路径 | `a3-contract-design.md` | 方案定稿 | `docs/**` | 3天 |
+| T-B5 | T-B | planned | terminal-1 | 设计 forbid_suspend 保留并强化方案（互斥护栏） | - | batch-1 | 强化路径 | `children/T-B5/a3-forbid-suspend-design.md` | 方案定稿 | `docs/**` | 3天 |
 | G-P1 | P1 | planned | terminal-1 | A2b A3 实现（safepoint/分配器/barrier 重构） | T-A1,T-B1..B5 | batch-2 | ASAN 下实现 | gc 源码 | stress 0/1000 + asan 绿 | `src/**` | 4-6周 |
 | G-P2 | P2 | planned | terminal-1 | 残余并发 bug 修复 | G-P1 | batch-2 | 全并发测试绿 | gc 源码 | P2 exit | `src/**` | 3-5周 |
 | G-P3 | P3 | planned | terminal-1 | 诊断/配置完备 | G-P2 | batch-2 | ETW 40+/BCL/servo | diag 源码 | P3 exit | `src/**`,`runtime/**` | 3-4周 |

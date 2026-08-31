@@ -670,16 +670,42 @@ public sealed class ValueGenerator
         // coverage.  The 防线 4 build gate blocks if these stay all-default.
         if (method.Name == "ChangeType")
         {
+            // ChangeType has multiple overloads with the same parameter count:
+            //   ChangeType(object, Type) — 2 params
+            //   ChangeType(object, TypeCode) — 2 params
+            //   ChangeType(object, Type, IFormatProvider) — 3 params
+            //   ChangeType(object, TypeCode, IFormatProvider) — 3 params
+            // When paramTypes[1] is System.Type, use typeof(...) literals instead of
+            // TypeCode enum values (which don't implicitly convert to Type — CS1503).
+            bool isTypeCode = paramTypes.Length >= 2 && paramTypes[1] == "System.TypeCode";
+
             if (paramTypes.Length == 2)
             {
-                AddUnique(sets, usedSignatures, methodIndex, ["42", "System.TypeCode.Int32"]);
-                AddUnique(sets, usedSignatures, methodIndex, ["true", "System.TypeCode.Boolean"]);
-                AddUnique(sets, usedSignatures, methodIndex, ["\"hello\"", "System.TypeCode.String"]);
+                if (isTypeCode)
+                {
+                    AddUnique(sets, usedSignatures, methodIndex, ["42", "System.TypeCode.Int32"]);
+                    AddUnique(sets, usedSignatures, methodIndex, ["true", "System.TypeCode.Boolean"]);
+                    AddUnique(sets, usedSignatures, methodIndex, ["\"hello\"", "System.TypeCode.String"]);
+                }
+                else
+                {
+                    AddUnique(sets, usedSignatures, methodIndex, ["42", "typeof(int)"]);
+                    AddUnique(sets, usedSignatures, methodIndex, ["true", "typeof(bool)"]);
+                    AddUnique(sets, usedSignatures, methodIndex, ["\"hello\"", "typeof(string)"]);
+                }
             }
             else if (paramTypes.Length == 3)
             {
-                AddUnique(sets, usedSignatures, methodIndex, ["42", "System.TypeCode.Int32", "System.Globalization.CultureInfo.InvariantCulture"]);
-                AddUnique(sets, usedSignatures, methodIndex, ["true", "System.TypeCode.Boolean", "System.Globalization.CultureInfo.InvariantCulture"]);
+                if (isTypeCode)
+                {
+                    AddUnique(sets, usedSignatures, methodIndex, ["42", "System.TypeCode.Int32", "System.Globalization.CultureInfo.InvariantCulture"]);
+                    AddUnique(sets, usedSignatures, methodIndex, ["true", "System.TypeCode.Boolean", "System.Globalization.CultureInfo.InvariantCulture"]);
+                }
+                else
+                {
+                    AddUnique(sets, usedSignatures, methodIndex, ["42", "typeof(int)", "System.Globalization.CultureInfo.InvariantCulture"]);
+                    AddUnique(sets, usedSignatures, methodIndex, ["true", "typeof(bool)", "System.Globalization.CultureInfo.InvariantCulture"]);
+                }
             }
             return;
         }
