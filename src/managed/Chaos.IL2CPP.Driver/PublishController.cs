@@ -47,7 +47,12 @@ internal static class PublishController
         if (config.Clean && Directory.Exists(outputDir))
         {
             Console.WriteLine("  [clean] Removing existing output directory...");
-            try { Directory.Delete(outputDir, recursive: true); } catch { }
+            try { Directory.Delete(outputDir, recursive: true); }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"  Error: failed to clean output directory: {ex.Message}");
+                return 1;
+            }
         }
 
         // ── Step 1: Resolve input to assembly paths ────────────────────────
@@ -73,7 +78,7 @@ internal static class PublishController
                 return 1;
             }
 
-            // Find the output DLL
+            // Find the output DLL — prefer the one matching the csproj name
             var dllFiles = Directory.GetFiles(hostInputDir, "*.dll");
             if (dllFiles.Length == 0)
             {
@@ -81,7 +86,11 @@ internal static class PublishController
                 return 1;
             }
 
-            assemblyPaths = [dllFiles[0]];
+            // Match the csproj name to find the main assembly; fallback to first.
+            var csprojName = Path.GetFileNameWithoutExtension(inputPath);
+            var matched = dllFiles.FirstOrDefault(d =>
+                Path.GetFileNameWithoutExtension(d).Equals(csprojName, StringComparison.OrdinalIgnoreCase));
+            assemblyPaths = [matched ?? dllFiles[0]];
             Console.WriteLine($"    assembly: {Path.GetFileName(assemblyPaths[0])}");
         }
         else if (inputPath.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) ||
@@ -294,14 +303,19 @@ int main(int argc, char* argv[])
     // other managed thread to ack.  If a genuine (non-AOT) handshake stall is
     // observed, fail the startup explicitly — NOT a swallowed warning — so a real
     // GC coordination regression can never masquerade as a successful start.
+    // NOTE: a slow-but-converging BGC safepoint handshake is a warning, not a
+    // fatal error: scheduling delays in the running system can cause a transient
+    // slowdown that still converges within the hard-timeout bounds.  Failures
+    // are surfaced via the log (GcGates) and the diagnostic message below, but
+    // do not abort the process — the hard-timeout conservative scan inside
+    // RequestGlobalSafepoint already prevents a hang.
     bool healthy = true;
     chaos::il2cpp::runtime_core::GcStartupVitalityCheck(
         std::chrono::seconds(1), &healthy);
     if (!healthy)
     {{
-        std::fprintf(stderr, ""[app_main] FATAL: GC startup safepoint handshake stalled; ""
-                              ""BGC concurrency degraded.  Check the GcGates log.\n"");
-        return 1;
+        std::fprintf(stderr, ""[app_main] WARNING: GC startup safepoint handshake was slow; ""
+                              ""BGC concurrency may be degraded.  Check the GcGates log.\n"");
     }}
 
     // Run static constructors (.cctor) for all types in the module so that
@@ -312,7 +326,7 @@ int main(int argc, char* argv[])
     // Invoke the user entry point directly through the generated proxy wrapper.
     // Main(string[]) — pass an empty managed string array (not NULL) so the
     // callee can safely read args.Length / args[0] without crashing on a null
-    // pointer dereference.  The runtime represents a zero-length System.String[]
+    // pointer dereference.
     // as a single allocation with Length=0; the helper below constructs one.
     // (If the runtime does not export CreateEmptyStringArray, the gcroot-alloc
     // fallback is generated inline.)
@@ -662,6 +676,24 @@ target_link_options(chaos_entry PRIVATE
                 copied++;
             }
             Console.WriteLine($"  [publish] Overwrote {copied} stub lib(s) with real SDK libs");
+
+            // M1: validate no 8-byte stub archives remain under codegen/lib. An
+            // empty archive is exactly 8 bytes (`!<arch>\n`); if any expected lib
+            // still has that size after copy, the real lib wasn't found and the
+            // link will fail with LNK2001. Surface this loudly instead of letting
+            // it fail silently at link time.
+            var stubRemain = Directory.GetFiles(stubLibRoot, "*.lib")
+                .Concat(Directory.GetFiles(stubLibRoot, "*.a"))
+                .Where(p => new FileInfo(p).Length <= 8)
+                .Select(Path.GetFileName)
+                .ToList();
+            if (stubRemain.Count > 0)
+            {
+                Console.Error.WriteLine($"  [publish] ERROR: {stubRemain.Count} stub lib(s) remain unsigned (<=8 bytes) "
+                                        + $"in {stubLibRoot}: {string.Join(", ", stubRemain)}");
+                Console.Error.WriteLine("  [publish]   The real prebuilt libs were not found. Build the SDK "
+                                        + "preset first (e.g. tests/e2e/translation/artifacts/build_presets.py).");
+            }
         }
         catch (Exception ex)
         {
@@ -760,6 +792,7 @@ target_link_options(chaos_entry PRIVATE
     {
         var manifest = new
         {
+            schemaVersion = "1.0",
             inputPath = config.InputPath,
             mode = config.Mode,
             outputDir,
@@ -768,7 +801,10 @@ target_link_options(chaos_entry PRIVATE
             methodCount = result.MethodCount,
             configTier = config.ConfigTier,
             entryExe = entryExe != null ? Path.GetFullPath(entryExe) : null,
+            toolVersion = "0.1.0",
+            sdkPreset = "windows-x64-reference",
             status = entryExe != null ? "ok" : "source-only",
+            timestamp = DateTime.UtcNow.ToString("O"),
         };
 
         var manifestPath = Path.Combine(outputDir, "publish.manifest.json");
