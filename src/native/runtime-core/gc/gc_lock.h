@@ -29,6 +29,12 @@ namespace chaos::il2cpp::runtime_core {
 
 /// Short-critical-section spinlock with bounded pause-then-yield.  Never parks
 /// in a kernel wait; preemptible by the OS scheduler and safepoint handshake.
+///
+/// WARNING: NOT REENTRANT.  Acquiring the same GcSpinLock instance from the
+/// same thread (e.g. via a nested call that expects the same lock) will DEADLOCK
+/// — the spin never times out.  All callers must ensure a single lock acquisition
+/// per critical section with no recursive entry.  Debug builds assert this via
+/// a thread-local owner check.
 class GcSpinLock {
 public:
     GcSpinLock() noexcept = default;
@@ -83,7 +89,7 @@ public:
     ScopedPreemptiveMode() noexcept {
         threading::EnterPreemptiveMode();
     }
-    ~ScopedPreemptiveMode() {
+    ~ScopedPreemptiveMode() noexcept {
         threading::EnterCooperativeMode();
     }
     ScopedPreemptiveMode(const ScopedPreemptiveMode&) = delete;

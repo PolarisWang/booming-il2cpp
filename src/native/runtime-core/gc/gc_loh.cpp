@@ -245,6 +245,9 @@ void LargeObjectHeap::UnmarkAllForTesting() {
 
 bool LargeObjectHeap::MarkObject(void* obj) {
     if (obj == nullptr) return false;
+    // MarkObject may call FindSegment which holds GcSpinLock; wrap in preemptive
+    // mode so the spin wait does not block safepoint coordination.
+    const ScopedPreemptiveMode preemptive_guard;
     auto* seg = FindSegment(obj);
     if (seg == nullptr) return false;
 

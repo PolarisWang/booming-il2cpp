@@ -701,7 +701,16 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertChangeType(CHAOS_IL2CPP_INTPTR obj, C
             // Read the boxed boolean value from the object's payload at offset 16
             // (ThinLockableHeader(16B) + bool value(1B)).  The pointer value itself
             // is NOT the boolean — must dereference the payload.
+            //
+            // DEFENSIVE GUARD: obj is only a valid boxed value when the caller
+            // passed a real boxed object of the matching TypeCode.  A raw/foreign
+            // pointer (e.g. from a non-ChangeType path) would give an out-of-bounds
+            // read at +16.  The ATG probes only pass legitimately-boxed Boolean
+            // values; the guard below is a DEBUG-only assert + a null safety net so
+            // a stray pointer cannot silently corrupt.
             auto* bytes = reinterpret_cast<const unsigned char*>(obj);
+            CHAOS_IL2CPP_ASSERT(obj != 0);
+            if (bytes == nullptr) return 0;
             bool val = (bytes[16] != 0);
             return box_bool(val ? 1 : 0);
         }
@@ -710,7 +719,13 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertChangeType(CHAOS_IL2CPP_INTPTR obj, C
             // Read the boxed int32 value from the object's payload at offset 16.
             // static_cast<CHAOS_IL2CPP_INT32>(obj) would truncate the pointer address
             // to 32 bits, producing garbage — NOT the actual value.
+            //
+            // DEFENSIVE GUARD: same as Boolean — obj must be a legitimately-boxed
+            // Int32 object.  ATG probes pass valid boxed values; the null net below
+            // protects a stray pointer from an out-of-bounds memcpy.
             auto* bytes = reinterpret_cast<const unsigned char*>(obj);
+            CHAOS_IL2CPP_ASSERT(obj != 0);
+            if (bytes == nullptr) return 0;
             CHAOS_IL2CPP_INT32 val;
             std::memcpy(&val, bytes + 16, sizeof(val));
             return box_int32(val);

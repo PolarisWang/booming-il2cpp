@@ -88,7 +88,7 @@ bool ChaosRunModuleStaticConstructors() {
 {{~ for type_group in type_groups ~}}
 {{~ for method in type_group.methods ~}}
 {{~ if method.is_cctor ~}}
-    { try { {{ method.native_symbol }}(); } catch (...) { ok = false; } }
+    if (ok) { try { {{ method.native_symbol }}(); } catch (...) { ok = false; } }
 {{~ end ~}}
 {{~ end ~}}
 {{~ end ~}}

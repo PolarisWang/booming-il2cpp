@@ -230,6 +230,25 @@ internal static class PublishController
                     generatedCpps.Add(full);
             }
         }
+
+        // M2: source-only needs the SDK's copied runtime_stubs/*.cpp compiled too,
+        // since they're not part of the prebuilt lib. When using the prebuilt
+        // lib they're redundant (the symbols are inside chaos_runtime_core.lib),
+        // so this primarily benefits --source-only output that must self-link.
+        var sdkRuntimeStubs = Path.Combine(sdkRoot, "runtime_stubs");
+        if (Directory.Exists(sdkRuntimeStubs))
+        {
+            generatedCpps.AddRange(Directory.GetFiles(sdkRuntimeStubs, "*.cpp"));
+            // pal_time_stub.cpp + crt_stubs.cpp are emitted by SdkEmitter to fix
+            // MSVC CRT symbol gaps; compile them for the same self-link benefit.
+            foreach (var gen in new[] { "pal_time_stub.cpp", "crt_stubs.cpp" })
+            {
+                var gp = Path.Combine(sdkRoot, gen);
+                if (File.Exists(gp))
+                    generatedCpps.Add(gp);
+            }
+        }
+
         generatedCpps = generatedCpps
             .Select(Path.GetFullPath)
             .Distinct(StringComparer.OrdinalIgnoreCase)
