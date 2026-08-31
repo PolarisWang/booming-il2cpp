@@ -43,7 +43,19 @@ internal static class PublishController
         Console.WriteLine($"  Input:   {inputPath}");
         Console.WriteLine($"  Output:  {outputDir}");
 
+        // ── Clean: remove output dir if requested ──
+        if (config.Clean && Directory.Exists(outputDir))
+        {
+            Console.WriteLine("  [clean] Removing existing output directory...");
+            try { Directory.Delete(outputDir, recursive: true); } catch { }
+        }
+
         // ── Step 1: Resolve input to assembly paths ────────────────────────
+        if (!File.Exists(inputPath) && !inputPath.EndsWith(".csproj", StringComparison.OrdinalIgnoreCase))
+        {
+            Console.Error.WriteLine($"Error: input file not found: {inputPath}");
+            return 1;
+        }
         string[] assemblyPaths;
         string? entryPointOverride = null;
 
@@ -376,8 +388,6 @@ target_link_libraries(chaos_entry PRIVATE
 )
 
 target_link_options(chaos_entry PRIVATE
-    ""$<$<CXX_COMPILER_ID:MSVC>:/FORCE:MULTIPLE>""
-    ""$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wl,--allow-multiple-definition>""
 )
 ");
 
@@ -441,7 +451,7 @@ target_link_options(chaos_entry PRIVATE
             // If the entry signature accepts a string[] main arg, we cannot yet
             // allocate a real empty string[] without a runtime array helper —
             // surface that limitation explicitly instead of silently passing null.
-            if (methodPortion.Contains("System.String[]") || methodPortion.Contains("System.String[]"))
+            if (methodPortion.Contains("System.String[]") || methodPortion.Contains("string[]"))
             {
                 Console.WriteLine("  [publish] warning: entry Main(string[]) — publish passes null string[]; "
                                   + "if Main accesses args.Length/args[0] it will crash. "
