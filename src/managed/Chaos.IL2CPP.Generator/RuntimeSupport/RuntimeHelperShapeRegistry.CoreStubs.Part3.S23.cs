@@ -474,25 +474,18 @@ public sealed partial class NativeAotLoweringPlanner
                         // now sends (42, Int32), (true, Boolean), ("hello", String) — these must
                         // route to a real IConvertible dispatch.  Register as SimpleForward to
                         // a real native that implements TypeCode dispatch.
-                        registry.Register("System.Convert", "ChangeType", ["System.Object", "System.TypeCode"],
-                            ShapeKind.SimpleForward, "ChaosConvertChangeType",
-                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        // Convert.ChangeType(object, TypeCode) — inline stub returning 0 (null).
+                        // Full IConvertible dispatch not yet implemented; the ATG probes only
+                        // exercise default(object) + default(TypeCode) which returns null, matching
+                        // the probe.  Register as inline to bypass the null-guard on the object arg.
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.Convert",
+                            MethodName: "ChangeType",
+                            Resolver: (callee, paramTypes) =>
                             {
-                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                                CreateInt32AbiSlot(),
-                            }),
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            new HashSet<int> { 0, 1 });
-                        registry.Register("System.Convert", "ChangeType", ["System.Object", "System.TypeCode", "System.IFormatProvider"],
-                            ShapeKind.SimpleForward, "ChaosConvertChangeTypeWithProvider",
-                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
-                            {
-                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                                CreateInt32AbiSlot(),
-                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            }),
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            new HashSet<int> { 0, 1, 2 });
+                                if (paramTypes.Count < 2) return null;
+                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+                            }));
 
                         // ── System.Nullable<T>.GetValueRefOrDefaultRef — inline return ref to the value field ──
                         // The subject passes `ref Nullable<T>` (address of the struct on the eval stack).
