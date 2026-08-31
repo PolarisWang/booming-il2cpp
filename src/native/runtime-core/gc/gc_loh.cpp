@@ -6,6 +6,7 @@
 #include "gc_card_table.h"
 #include "gc_heap.h"
 #include "gc_region.h"
+#include "../thread_state.h"  // EnterPreemptiveMode/EnterCooperativeMode (LOH mutex wait)
 
 #include <chaos/pal/pal_mem.h>
 
@@ -125,6 +126,14 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
     LohSegment* seg = nullptr;
     bool allocated = false;
 
+    // Enter preemptive mode while holding the LOH mutex (CoreCLR-aligned:
+    // the BGC/mutator loop is preemptive, and the LOH mutex may block
+    // concurrently).  std::mutex::lock is non-alertable on Windows, so a
+    // cooperative thread blocked here would never acknowledge a safepoint
+    // → coordinator counts it unresponsive → hard timeout → heap corruption.
+    // Preemptive mode tells the coordinator to skip this thread.
+    threading::EnterPreemptiveMode();
+
     {
         std::lock_guard<std::mutex> lock(mutex_);
 
@@ -166,16 +175,19 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
     }  // mutex_ released
 
     if (!allocated) {
-        // AllocateSegment failed (OS-level OOM).  The mutex is already
-        // released, so HandleOomCondition can safely request a safepoint
-        // without risk of deadlock (a thread waiting on the LOH mutex
-        // could not otherwise respond to the safepoint request).
+        // AllocateSegment failed (OS-level OOM).  Return to cooperative mode
+        // BEFORE HandleOomCondition (it requests a safepoint).  The retry
+        // lambda re-enters G_Loh().Allocate, which will wrap itself again.
+        threading::EnterCooperativeMode();
         struct Ctx { CHAOS_IL2CPP_SIZE s; };
         Ctx ctx{size};
         return HandleOomCondition([](void* c) -> void* {
             return G_Loh().Allocate(static_cast<Ctx*>(c)->s);
         }, &ctx, size);
     }
+
+    // Segment allocated under preemptive mode — switch back to cooperative.
+    threading::EnterCooperativeMode();
 
     void* payload = reinterpret_cast<char*>(seg) + sizeof(LohSegment);
     // Register the LOH segment payload with the card table so that
