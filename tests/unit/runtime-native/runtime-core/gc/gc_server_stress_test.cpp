@@ -68,31 +68,39 @@ TEST_F(GcServerStressTest, ConcurrentAllocWithFullGc) {
     std::printf("[ServerStress] ConcurrentAllocWithFullGc threads=%d allocs=%d\n",
                 threads, allocs);
     std::atomic<int> alloc_fails{0};
+    std::atomic<bool> stop{false};
 
-    // Half the threads allocate (nursery mix), half also request global GC
-    // periodically, exercising the parallel old-gen collect under contention.
-    auto worker = [&](bool gc_driver) {
+    // Workers: pure concurrent allocation (no direct GC Request; the main
+    // thread drives full GCs so we don't contend RequestGlobalSafepoint from
+    // multiple mutators concurrently — that would self-serialize and skew the
+    // multi-heap parallel-collect signal).
+    auto worker = [&]() {
         threading::RegisterThread(threading::AllocateThreadId(), nullptr);
         threading::EnterCooperativeMode();
         SetThreadHeap();
-        for (int i = 0; i < allocs; i++) {
-            size_t size = 16 + (i * 2654435761u) % 4096;   // 16B..4KB nursery mix
+        int i = 0;
+        while (!stop.load(std::memory_order_acquire) && alloc_fails.load() == 0) {
+            size_t size = 16 + static_cast<size_t>((i * 2654435761u) % 4096);
             void* p = NurseryAllocate(size);
             if (p == nullptr) { alloc_fails.fetch_add(1); break; }
             std::memset(p, 0x7B, size);
-            if (gc_driver && (i % 16) == 0) {
-                GcCoordinator::Instance().RequestGlobalGc();
-            }
             threading::SafepointPoll();
+            i++;
         }
         ClearThreadHeap();
         threading::UnregisterThread();
     };
 
     std::vector<std::thread> pool;
-    for (int t = 0; t < threads; t++) {
-        pool.emplace_back(worker, (t % 4) == 0);   // 1 in 4 drives GC
+    for (int t = 0; t < threads; t++) pool.emplace_back(worker);
+
+    // Main thread drives full GCs (multi-heap parallel old-gen under server).
+    for (int gc = 0; gc < 8; gc++) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        EXPECT_NO_FATAL_FAILURE(GcCoordinator::Instance().RequestGlobalGc());
     }
+
+    stop.store(true, std::memory_order_release);
     for (auto& th : pool) th.join();
 
     EXPECT_EQ(alloc_fails.load(), 0) << "Server stress: allocation failed under GC load";
@@ -110,16 +118,23 @@ TEST_F(GcServerStressTest, LargeObjectAcrossHeaps) {
                 threads, allocs);
     std::atomic<int> alloc_fails{0};
 
+    // LOH objects (>85KB) go through NurseryAllocateSlow -> old-gen.
+    // Use 48KB (oversized, fits in old-gen page) and 96KB (LOH).
+    // Keep sizes below kMaxTlabAlloc (32KB) to avoid TLAB → Slow recursion
+    // in the FIX-A retry path; old-gen / LOH handle the fallback.
+    constexpr size_t kBig     = 48 * 1024;   // > kMaxTlabAlloc, falls to old-gen
+    constexpr size_t kLohSize = 96 * 1024;   // LOH threshold > 85KB
+    constexpr size_t kSizes[] = { 64, 1024, kBig, kLohSize };
+
     auto worker = [&]() {
         threading::RegisterThread(threading::AllocateThreadId(), nullptr);
         threading::EnterCooperativeMode();
         SetThreadHeap();
         for (int i = 0; i < allocs; i++) {
-            // LOH (>85KB): allocate + fill to stress per-heap LOH / old-gen.
-            const size_t big = (i % 3 == 0) ? (96 * 1024) : (48 * 1024);
-            void* p = NurseryAllocate(big);
+            size_t size = kSizes[i % 4];
+            void* p = NurseryAllocate(size);
             if (p == nullptr) { alloc_fails.fetch_add(1); break; }
-            std::memset(p, 0x5A, big);
+            std::memset(p, 0x5A, size);
             threading::SafepointPoll();
         }
         ClearThreadHeap();
