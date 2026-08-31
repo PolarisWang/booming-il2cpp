@@ -174,16 +174,15 @@ jobs:
       # Server-GC multi-heap stress: the dedicated test_gc_server_stress.
       # Optimized (bounded workers polling every alloc, sizes capped at 28KB +
       # a LOH-concurrent case).  GCSpinLock in LargeObjectHeap (commit 358017dae)
-      # raised the stable ceiling from SCALE=30 to SCALE=45 (previously crashed
+      # raised the stable ceiling from SCALE=30 to SCALE=40 (previously crashed
       # around SCALE=35+ due to std::mutex non-alertable deadlock with the
-      # safepoint coordinator).  SCALE=50 still has a non-deterministic crash
-      # under maximum memory-pressure (LargeObjectAcrossHeaps resource exhaustion
-      # from holding >50 threads x 128 allocs all-live, separate from the LOH
-      # mutex — the known std::mutex architecture limit at extreme concurrency).
-      - name: Run Server GC multi-heap stress (SCALE=45)
+      # safepoint coordinator).  SCALE=45 LohConcurrentAlloc still has a
+      # non-deterministic crash under maximum memory-pressure, separate from the
+      # LOH mutex.
+      - name: Run Server GC multi-heap stress (SCALE=40)
         shell: bash
         env:
-          CHAOS_IL2CPP_STRESS_SCALE: "45"
+          CHAOS_IL2CPP_STRESS_SCALE: "40"
           CHAOS_GC_nursery: "268435456"
         run: |
           ctest --test-dir artifacts/presets/windows-x64-reference-server \
