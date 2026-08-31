@@ -38,26 +38,27 @@ terminals_active: []
 - ✅ T-B5：forbid_suspend 强化为互斥护栏（ForbidSuspendThreadHolder 设计）
 - ⏸️ T-A4（READY-FOR-CI，**不阻塞 G-P1 gate**——需真实 CI 手动 dispatch 填充基线，属性能基线基建非安全关键；详见 roadmap 子任务映射）、T-A5/A6（deferred，不阻塞 G-P1 gate）
 
-### P1 E0 — 安全重构批次（进行中）
-方案 A（先做安全可本地验证部分）：
-- ✅ `2c4f67a4d`：移除 GcBumpCache（僵尸，无活跃引用）+ 测试。**用户指示**「GC 核心不用就删，包括测试」。验证：runtime-core 编译通过，test_gc_region 18/18
+### P1 E0+ — A3 Hybrid safepoint 实现（已完成核心）
 - ✅ `7c7872659`：PohAllocate std::mutex → GcSpinLock + ScopedPreemptiveMode（修 HIGH 死锁）。验证：test_gc_poh 9/9
-- ⏸️ jit_helpers.cpp 静态字段补 dirty_card：**不纳入安全批次**——需理解 g_static_fields（解释器 sandbox 值）完整 GC 语义，注释已警告逆向注册损坏风险。属 P2「CodegenStSFld 三路统一」
+- ✅ `1d1a82d31`：pal_suspend.h PAL 抽象（Windows SuspendThread + POSIX stub）
+- ✅ `073809dc3`：ForbidSuspendThreadHolder（跨线程互斥护栏，对齐 CoreCLR m_dwForbidSuspendThread）
+- ✅ `007ab4262`：A3 Hybrid safepoint 核心（全局 trap 标志 + EnterCooperativeMode rendezvous）
+- ✅ `b77c2b2d5`：A3 hard-suspend drive（PalSuspendThread 集成到 safepoint 超时兜底，CoreCLR 挂起→redirect→立即resume 模式）
 
-## P1 剩余（安全关键路径，需护网/架构确认）
-- Hybrid safepoint 重写（pal_suspend.h / trap / 驱赶）
-- 单 region 分配器整合（T-B2 → 实现）
-- LEAF barrier 实现（T-B3）
-- 三路写屏障契约落地（T-B4）
-- forbid 互斥护栏实现（T-B5）
+## P1 剩余（开放项）
+- ❌ **jit_helpers.cpp 静态字段补 dirty_card**：**判断修正为不需要**。审计 CodegenStSFld 发现 g_static_fields 是解释器 sandbox 的非 GC 向量（InterpreterValue），注释明确警告 BgcRecordRootChange 在 BGC re-mark 会损坏内存。它不是托管 AOT 静态字段，不过 Young GC card 扫描，**补 dirty_card 反而危险**。T-B4 契约此条为误判，撤销。
+- ⏸️ 单 region 分配器整合（大重构，数周，需真实 CI 护网确认后实施）
+- ⏸️ CI 护网验证（ASAN/TSAN/stress 实际 CI 首次绿）
 
-这些触及安全关键路径，在真实 CI 护网确认绿前不贸然实施（验证先行）。
+## 结论
+P1 的 A3 Hybrid safepoint 骨架已完整实现（trap + rendezvous + hard-drive + forbid 护栏 + pal_suspend），所有对应 GC 单测通过。单 region 分配器与 CI 护网验证是长期开放项。
 
 ## latest_stop_point
-P1 E0 安全重构批次完成 2 项（GcBumpCache 移除 + POH 死锁修复）。剩余为安全关键路径改造，需护网/授权。
+A3 Hybrid safepoint 骨架全部落地（6 commit）。jit 静态 dirty_card 已撤销（误判）。剩单分配器（大重构）+ CI 护网验证。
 
 ## 下一步
-- 安全重构批次收尾；安全关键路径改造视护网状态 / 用户授权推进
+- 单 region 分配器整合（大重构，需架构级确认 + 真实 CI 护网）
+- 或先跑真实 CI 验证护网首次绿（T-A1/A2/A3）
 
 ## 目标
 超越 CoreCLR WKS 工业化成熟度，消除所有已知并发正确性缺陷。A3 深度对齐。
