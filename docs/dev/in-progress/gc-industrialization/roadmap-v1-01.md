@@ -8,7 +8,16 @@
 
 - **包含**：GC 核心（safepoint/写屏障/region 分配器）、codegen 写屏障指令序列、JIT 寄存器根扫描、interpreter 帧扫描、CI 门禁加固、ASAN/TSAN、性能基线、诊断完备（ETW/GCMemoryInfo/GCNotification）、平台覆盖（ARM64/Server GC）、差异化优势（MemoryDomain/GcLayout/NUMA）
 - **对标**：CoreCLR WKS
-- **深度**：A3 完全对齐（硬 STW SuspendThread + GetThreadContext + 单 region 分配器 + LEAF 汇编 barrier + 全链路安全）
+
+### 深度分级（A1 / A2 / A3）
+
+全文使用 A1/A2/A3 表示「对 CoreCLR WKS 的对齐深度」，为避免与正文中的 bug 代号（A2b）混淆，此处显式定义：
+
+- **A1 ｜ 关键段对齐**ｖ：仅对写屏障关键路径 + safepoint 握手采用硬 STW（SuspendThread/GetThreadContext），主体保留现有 handshake 软路径。消除绝大部分 A2b 窗口，接受残余极窄竞态窗口。用于「硬 STW 全线程开销不可接受」时的回退档。
+- **A2 ｜ 混合对齐**：软路径（rendezvous handshake）为主 + 硬驱动双螺旋兜底，仅对确证需原子的 store+barrier 对切换模式。
+- **A3 ｜ 完全对齐**：硬 STW SuspendThread + GetThreadContext + 单 region 分配器 + LEAF 汇编 barrier + 全链路安全。本路线图默认目标深度。
+
+> ⚠️ 注意：A2b 是具体并发 bug 代号（cross-gen 写屏障竞态），与深度档 A1/A2/A3 无关。凡提到「A1 深度/A3 深度」均指上表对齐档位。
 
 ## 3. 非目标
 
@@ -44,12 +53,12 @@
 
 ### T-B A2b A3 架构设计
 
-- `goal`: 完成 A3 深度对齐的前置设计
-- `exit_criteria`: CoreCLR WKS safepoint 机制研读；单 region 分配器接口/数据流设计；LEAF 汇编 barrier（x64+ARM64）设计；codegen/JIT 接口契约；forbid_suspend 废弃方案
-- `deliverables`: `a3-safepoint-design.md`、`a3-allocator-design.md`、`a3-leaf-barrier-design.md`、`a3-contract-design.md`
+- `goal`: 完成 A3 深度对齐的前置设计（修正后：Hybrid 软主路径 + 硬驱赶兜底）
+- `exit_criteria`: CoreCLR WKS safepoint 机制研读（已定稿）；单 region 分配器接口/数据流设计；LEAF barrier 设计（mode switch 绑定）；codegen/JIT 接口契约；forbid_suspend 强化方案
+- `deliverables`: `a3-safepoint-design.md`（已定稿，含跨平台验证）、`a3-allocator-design.md`、`a3-leaf-barrier-design.md`、`a3-contract-design.md`
 - `dependencies`: 无（可读 CoreCLR 源码，不需 CI）
-- `resolved_decisions`: 分配器统一为单 region owner；LEAF barrier 消除 store+barrier 中间窗口；寄存器根扫描补齐 Windows JIT 帧
-- `watch_items`: CoreCLR 源码细节复杂度；是否存在 CRAG 独有（MemoryDomain）导致无法直接复制的设计点
+- `resolved_decisions`: 分配器统一为单 region owner；A3 采用 Hybrid **非**全线程物理挂起；根扫描在 rendezvous 做 **非**挂起态；store+barrier 一致性 by mode switch **非**原子指令对；forbid_suspend **保留并强化**为互斥护栏（不废弃；此点修正了原 B5 的废弃方向）
+- `watch_items`: CoreCLR 源码细节复杂度；Apple/Android 纯软等待对 latency 的影响；Windows SuspendThread GetThreadContext 识别安全点位置的一致性风险；全局 trap 与现有 epoch 机制是否需统一
 
 ### P1 A2b A3 实现
 
@@ -137,7 +146,7 @@
 
 ## 9. 备选路径
 
-- **P1 硬 STW 性能超标** → 回退为「硬 STW 仅屏障关键段 + handshake 主路径」混合（A1 深度），仍消除主要 A2b 窗口，接受残余极窄窗口
+- **P1 硬 STW 性能超标** → 回退为「硬 STW 仅屏障关键段 + handshake 主路径」混合（A1 深度，参见上节深度分级），仍消除主要 A2b 窗口，接受残余极窄窗口
 - **T-B 设计发现 MemoryDomain 无法直接套 CoreCLR** → MemoryDomain 相关 barrier 用 CRAG 自有方案，不影响全局单分配器
 - **ASAN/TSAN 工具墙阻塞** → 沿用已知的隔离目录 + 抑制清单策略（记忆中有 ASan 工具墙破除先例）
 

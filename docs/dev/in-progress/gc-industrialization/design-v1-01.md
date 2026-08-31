@@ -31,12 +31,16 @@
 
 ## Authority 决策
 
-- A2b 跨代 UAF → 结构性消除（A3 深度），非测试断言调整
+- A2b 跨代 UAF → 结构性消除：**mode switch 保证 + 强制驱赶兜底（Hybrid）**，非「全线程物理挂起停留」
+- 修正后的 A3 架构：**软协作主路径（全局 trap 标志 + 事件排队）+ `SuspendThread`（Windows）/ `SIGUSR2`（Linux）仅兜底驱赶，根扫描在 rendezvous 中做，绝不在挂起态扫描根**
+- CoreCLR 研究已证实：OS `GetThreadContext` 无法保证一致寄存器，所以「挂起后扫描」是证伪路径，要求绝不在挂起态扫描根
+- store+barrier 原子性由 **mode switch 保证**（barrier 仅在 cooperative 模式触发），非 atomic store+barrier 指令对
 - 三套并行分配系统 → 统一为单 region 分配器
-- 写屏障 → LEAF 汇编（纯汇编，无 C++ call，x64 + ARM64 两套）
-- `forbid_suspend.h` ack-and-continue → 硬 STW 后废弃
+- 写屏障 → LEAF 汇编 + mode switch 绑定（非强制原子化）
+- `forbid_suspend.h` **保留并强化**为 `m_dwForbidSuspendThread` 互斥护栏（CoreCLR 核心件），不废弃
 - L1 卡表 → 恒定卡表（永不 realloc）或 RCU
 - BGC root-scan → 挂起根因定位修复，非已知-fail 归档
+- **跨平台验证结论**：✅ 方案跨平台可行。`SuspendThread` 仅 Windows，Linux 用 SIGUSR2（已有 trampoline x64/ARM64），Apple/Android 降级纯软等待。现有 PAL 层已具备大部分前置设施。唯一新增 `pal_suspend.h` 三个接口 + Windows 实现。
 
 ## 当前结论
 

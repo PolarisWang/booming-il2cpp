@@ -360,11 +360,12 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     # default/null 输入的（即被 ATG 的 ValueGenerator[probe-warn] 标记的）。
     # 这些方法可能被 stub-return-0 蒙过，因为 probe 从未用非-default 输入测试。
     # ATG 在 stderr 输出 "[probe-warn] ALL-DEFAULT-SETS: <method>"，此标记会被
-    # build.py/CI 日志捕获，作为人工审计信号。此处不阻断（这是测试覆盖缺口，
-    # 非回归），只打印提示指导审计。
-    # 注：不依赖特定文件路径，因为 ATG 输出到 stderr，可能被并行捕获。
-    # 该门禁的目的：确保有机制能发现蒙过，而不只是肉眼核对。
-    # （如需自动阻断，可在 build.py 解析 ATG stderr 的 [probe-warn] 行）
+    # build.py/CI 日志捕获，作为人工审计信号。
+    #
+    # 硬阻断逻辑在 build.py 防线 4（非本文件）：build.py 解析 ATG 的 stderr 输出，
+    # 对已知 stub 方法白名单（ChangeType/Enum.TryParse 等）强制要求 ≥1 非-default 输入，
+    # 若仍全 default 则返回 None 阻断 pipeline。本文件仅打印提示，不重复阻断。
+    # 参见 build.py 中的 STUB_BLOCK_FAMILIES + CHAOS_FACT266_BLOCK_ALL_DEFAULT 环境变量。
 
     # ── Write fact history (_dll/reports/history/fact-YYYY-MM-DD.jsonl) ──
     _write_fact_history(ctx, aot_result, jit_result)
