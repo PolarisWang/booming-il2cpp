@@ -274,11 +274,7 @@ internal static class PublishController
 
 #include <chaos_runtime_host.h>
 #include <chaos_generated_module.h>
-
-// Forward-declare the low-memory monitor for explicit teardown before exit.
-// gc_low_mem.h is not in the SDK include/ tree so we use a minimal forward
-// decl instead of pulling in the full header (which depends on <thread>).
-namespace chaos::il2cpp::runtime_core {{ class GcLowMemoryMonitor; extern GcLowMemoryMonitor g_low_memory_monitor; }}
+#include <gc/gc_low_mem.h>
 
 // Declare the GC runtime gates control surface (gc_runtime_gates.h).  The app
 // entrypoint declares its intent via GcRuntimeProfile and the runtime applies
@@ -297,6 +293,15 @@ int main(int argc, char* argv[])
     chaos::il2cpp::runtime_core::ApplyGcRuntimeGates(
         chaos::il2cpp::runtime_core::GcRuntimeGates::For(
             chaos::il2cpp::runtime_core::GcRuntimeProfile::kDefault));
+
+    // Disable the low-memory monitor thread BEFORE RuntimeInit(), so the
+    // monitor thread never starts.  If a low-memory notification is received
+    // during the app's execution (which is < 1s for typical short-lived AOT
+    // apps), the chaos_gc_collect() triggered by the monitor would try to
+    // acquire a safepoint while BGC/finalizer threads are running, hanging
+    // the process on shutdown.  Stopping the monitor after Main() is too
+    // late — the notification may have already arrived and GC'd inside Main().
+    chaos::il2cpp::runtime_core::g_low_mem_enabled = false;
 
     // Initialize the IL2CPP runtime (GC, vtables, hot-update data, registration).
     ChaosRuntimeHost host;
@@ -352,12 +357,6 @@ int main(int argc, char* argv[])
     // pointer dereference.
     // TODO: wire CHAOS_IL2CPP runtime helper for empty array creation.
     int result = {proxyCall};
-
-    // Stop the low-memory monitor BEFORE the host destructor runs Shutdown().
-    // The monitor thread may be blocked on PalLowMemWait() and triggering a GC
-    // safepoint during shutdown causes a hang.  Stopping the monitor first
-    // (via the public API) ensures a clean teardown.
-    chaos::il2cpp::runtime_core::g_low_memory_monitor.Stop();
 
     // host destructor calls Shutdown() automatically.
     return result;

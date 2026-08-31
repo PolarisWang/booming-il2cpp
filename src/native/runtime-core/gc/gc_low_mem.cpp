@@ -81,6 +81,15 @@ void GcLowMemoryMonitor::MonitorLoop() noexcept {
         }
 
         // ── Low-memory notification received ──────────────────────────
+        // NOTE: PalLowMemWait returns 1 for BOTH a real low-memory notification
+        // AND a shutdown-signal wake (it waits on {low_mem_handle, shutdown_event}).
+        // If shutdown was requested, the wake is a teardown signal, NOT a real
+        // low-memory event — triggering chaos_gc_collect() here would try to run
+        // a GC during shutdown (BGC/other threads already stopping), hanging the
+        // process.  Re-check the shutdown flag before doing any GC work.
+        if (shutdown_.load(std::memory_order_acquire)) {
+            return;  // teardown signal — exit the loop, do not GC
+        }
         CHAOS_IL2CPP_LOG_INFO_M("GcLowMem", "low-memory notification received, triggering GC");
 
         // Rate-limit: don't trigger GC more than once per kMinLowMemGcIntervalNs.
