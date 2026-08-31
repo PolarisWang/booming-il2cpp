@@ -407,6 +407,39 @@ inline void RawFree(void* ptr) {
 }
 
 // ======================================================================
+// Single region allocator — unified entry point
+//
+// The region framework intends ONE logical allocation entry that routes to
+// the correct internal path, so that the GC has a single owner for the heap.
+// This is the surface the T-B2 design (a3-allocator-design.md) calls
+// `AllocateRegion`.  The fast path is materialized here as an inline that
+// stays on the per-thread TLAB bump when possible and falls back to the
+// slow path (nursery refill → trigger GC → old-gen) otherwise — the same
+// routing that NurseryAllocate already performs.  `is_atomic` selects zeroed
+// vs no-zero variants (pointer-free data).  `is_pinned` routes to the pinned
+// object heap.  Oversized (> kMaxTlabAlloc) objects fall through to the slow
+// path, which places them directly in old-gen / LOH.
+//
+// Keeping this as a single entry (rather than callers picking between
+// NurseryAllocate / G_OldGen().Allocate / PohAllocate directly) means the GC
+// only needs to reconcile with one allocator owner, which is the structural
+// foundation for eliminating the A2b cross-allocator window.
+// ======================================================================
+inline void* Allocate(CHAOS_IL2CPP_SIZE size, bool is_pinned = false,
+                      bool is_atomic = false) noexcept {
+    if (is_pinned) {
+        return PohAllocate(size);
+    }
+    // Small / ordinary objects go through the per-thread TLAB bump
+    // (fast path) which falls back to the slow path on TLAB exhaustion
+    // (nursery refill → GC trigger → old-gen / LOH).
+    if (is_atomic) {
+        return NurseryAllocateAtomic(size);
+    }
+    return NurseryAllocate(size);
+}
+
+// ======================================================================
 // RegionManager — process-wide region lifecycle manager
 //
 // Singleton that owns all regions, maintains free-lists,
