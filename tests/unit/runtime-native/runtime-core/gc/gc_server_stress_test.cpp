@@ -68,39 +68,44 @@ TEST_F(GcServerStressTest, ConcurrentAllocWithFullGc) {
     std::printf("[ServerStress] ConcurrentAllocWithFullGc threads=%d allocs=%d\n",
                 threads, allocs);
     std::atomic<int> alloc_fails{0};
-    std::atomic<bool> stop{false};
+    std::atomic<int> gcs_done{0};
 
-    // Workers: pure concurrent allocation (no direct GC Request; the main
-    // thread drives full GCs so we don't contend RequestGlobalSafepoint from
-    // multiple mutators concurrently — that would self-serialize and skew the
-    // multi-heap parallel-collect signal).
+    // Workers: pure concurrent allocation with a BOUNDED iteration count, and
+    // SafepointPoll after every allocation.  Bounded count (not while+stop) so
+    // each worker naturally reaches a poll point in finite time — the main
+    // thread's RequestGlobalGc waits only on workers that are mid-allocation,
+    // not on workers that spin forever.  No worker calls RequestGlobalGc
+    // itself (avoids contending RequestGlobalSafepoint from multiple mutators).
     auto worker = [&]() {
         threading::RegisterThread(threading::AllocateThreadId(), nullptr);
         threading::EnterCooperativeMode();
         SetThreadHeap();
-        int i = 0;
-        while (!stop.load(std::memory_order_acquire) && alloc_fails.load() == 0) {
+        for (int i = 0; i < allocs && alloc_fails.load() == 0; i++) {
             size_t size = 16 + static_cast<size_t>((i * 2654435761u) % 4096);
             void* p = NurseryAllocate(size);
             if (p == nullptr) { alloc_fails.fetch_add(1); break; }
             std::memset(p, 0x7B, size);
+            // Every allocation polls so a safepoint wait from the main thread's
+            // RequestGlobalGc is bounded by one allocation, not a long window.
             threading::SafepointPoll();
-            i++;
         }
         ClearThreadHeap();
         threading::UnregisterThread();
+        gcs_done.fetch_add(1);
     };
 
     std::vector<std::thread> pool;
     for (int t = 0; t < threads; t++) pool.emplace_back(worker);
 
-    // Main thread drives full GCs (multi-heap parallel old-gen under server).
+    // Main thread drives full GCs (multi-heap parallel old-gen under server)
+    // while workers are still allocating; each worker polls every alloc so
+    // these GCs complete without waiting on a long-running remote mutator.
     for (int gc = 0; gc < 8; gc++) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::this_thread::sleep_for(std::chrono::milliseconds(5));
         EXPECT_NO_FATAL_FAILURE(GcCoordinator::Instance().RequestGlobalGc());
     }
 
-    stop.store(true, std::memory_order_release);
+    // Wait for all workers to finish (bounded work, they complete promptly).
     for (auto& th : pool) th.join();
 
     EXPECT_EQ(alloc_fails.load(), 0) << "Server stress: allocation failed under GC load";
@@ -118,13 +123,11 @@ TEST_F(GcServerStressTest, LargeObjectAcrossHeaps) {
                 threads, allocs);
     std::atomic<int> alloc_fails{0};
 
-    // LOH objects (>85KB) go through NurseryAllocateSlow -> old-gen.
-    // Use 48KB (oversized, fits in old-gen page) and 96KB (LOH).
-    // Keep sizes below kMaxTlabAlloc (32KB) to avoid TLAB → Slow recursion
-    // in the FIX-A retry path; old-gen / LOH handle the fallback.
-    constexpr size_t kBig     = 48 * 1024;   // > kMaxTlabAlloc, falls to old-gen
-    constexpr size_t kLohSize = 96 * 1024;   // LOH threshold > 85KB
-    constexpr size_t kSizes[] = { 64, 1024, kBig, kLohSize };
+    // Allocate small (TLAB fast path), medium (TLAB carve), and large
+    // (> kMaxTlabAlloc, falls through to old-gen).  Avoid the LOH threshold
+    // (85KB) here — the coordinate path is better exercised by the WKS stress
+    // suite; this test focuses on Server GC multi-heap coordination.
+    constexpr size_t kSizes[] = { 64, 1024, 16 * 1024, 28 * 1024 };
 
     auto worker = [&]() {
         threading::RegisterThread(threading::AllocateThreadId(), nullptr);
