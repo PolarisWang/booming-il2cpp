@@ -95,5 +95,5 @@ bool ChaosRunModuleStaticConstructors() {
     return ok;
 }
 {{~ else ~}}
-bool ChaosRunModuleStaticConstructors() { return false; }
+bool ChaosRunModuleStaticConstructors() { return true; }
 {{~ end ~}}
