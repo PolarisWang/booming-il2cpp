@@ -20,7 +20,7 @@ namespace {
 
 void* CHAOS_RUNTIME_ABI_CALL DefaultAllocate(CHAOS_IL2CPP_SIZE size, void* user_data) {
     (void)user_data;
-    return NurseryAllocate(size);
+    return Allocate(size, /*is_pinned=*/false, /*is_atomic=*/false);
 }
 
 void CHAOS_RUNTIME_ABI_CALL DefaultDeallocate(void* ptr, void* user_data) {
@@ -44,7 +44,7 @@ void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) { return GcAllocateAtomicProfiled
 void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateProfiled");
 
-    void* ptr = NurseryAllocate(size);
+    void* ptr = Allocate(size, /*is_pinned=*/false, /*is_atomic=*/false);
     if (ptr) {
         GcRecordAlloc(size, size > kMaxTlabAlloc);
         tls_alloc_fast_count++;
@@ -59,7 +59,7 @@ void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size) {
 void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateAtomicProfiled");
 
-    void* ptr = NurseryAllocateAtomic(size);
+    void* ptr = Allocate(size, /*is_pinned=*/false, /*is_atomic=*/true);
     if (ptr) {
         GcRecordAlloc(size, size > kMaxTlabAlloc);
         tls_alloc_fast_count++;

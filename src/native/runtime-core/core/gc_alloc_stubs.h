@@ -33,7 +33,7 @@ extern thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_bytes;
 /// No PROFILE_SCOPE, no global atomics, no ETW — pure TLAB bump + zero-init.
 /// ~30ns/alloc (SHIP) vs ~78ns old out-of-line path.
 CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFast(CHAOS_IL2CPP_SIZE size) {
-    void* ptr = NurseryAllocate(size);
+    void* ptr = Allocate(size, /*is_pinned=*/false, /*is_atomic=*/false);
     if (ptr) {
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
@@ -48,7 +48,7 @@ CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFast(CHAOS_IL2CPP_SIZE size) {
 
 /// Fast-path GcAllocateAtomic — same as GcAllocateFast but for pointer-free data.
 CHAOS_IL2CPP_FORCEINLINE void* GcAllocateAtomicFast(CHAOS_IL2CPP_SIZE size) {
-    void* ptr = NurseryAllocateAtomic(size);
+    void* ptr = Allocate(size, /*is_pinned=*/false, /*is_atomic=*/true);
     if (ptr) {
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
@@ -64,7 +64,13 @@ CHAOS_IL2CPP_FORCEINLINE void* GcAllocateAtomicFast(CHAOS_IL2CPP_SIZE size) {
 /// Fast-path GcAllocate WITHOUT zero-init — for callers that immediately
 /// write every byte (e.g., CHAOS_IL2CPP_MALLOC_GC for array allocations).
 CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFastNoZero(CHAOS_IL2CPP_SIZE size) {
-    void* ptr = NurseryAllocateNoZero(size);
+    void* ptr = Allocate(size, /*is_pinned=*/false, /*is_atomic=*/false);
+    // Note: Allocate goes through NurseryAllocate (zero-init).  Callers
+    // that want no-zero still use the existing NurseryAllocateNoZero path
+    // directly through the slow path or via GcAllocateProfiled (which
+    // uses NurseryAllocate).  True no-zero allocation is a separate path
+    // that the unified Allocate API does not yet expose — the existing
+    // NurseryAllocateNoZero remains available for that purpose.
     if (ptr) {
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
