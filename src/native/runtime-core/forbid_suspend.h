@@ -120,6 +120,42 @@ public:
     BarrierCriticalSectionScope& operator=(BarrierCriticalSectionScope&&) = delete;
 };
 
+/// RAII guard that prevents the A3 hard-suspension path from suspending this
+/// thread while it holds a runtime lock that the GC might also need.
+///
+/// This is the cross-thread analogue of ForbidSuspendScope: instead of telling
+/// the safepoint coordinator "don't wait for my ack" (soft path), it tells the
+/// hard-drive path "do not SuspendThread me, I hold a lock you may need".
+///
+/// CoreCLR equivalent: `m_dwForbidSuspendThread` (threadsuspend.cpp:~230).
+/// The protocol (from CoreCLR, ported to A3's pal_suspend.h):
+///   1. SuspendThread caller increments its OWN forbid_suspend_count first.
+///   2. Reads target's forbid_suspend_count — if non-zero, retry/skip.
+///   3. SuspendThread(target).
+///   4. Re-reads target's forbid_suspend_count — if the target acquired the
+///      scope between step 2 and 3, ResumeThread and retry rather than hold
+///      a thread that may be waiting on a lock the suspender also needs.
+class ForbidSuspendThreadHolder {
+public:
+    ForbidSuspendThreadHolder() noexcept {
+        if (auto* t = tls_this_thread; t != nullptr) {
+            t->forbid_suspend_count.fetch_add(1, std::memory_order_relaxed);
+            // Ensure the store is visible cross-thread before we enter the
+            // critical section (the coordinator reads our count via acquire).
+            std::atomic_thread_fence(std::memory_order_seq_cst);
+        }
+    }
+    ~ForbidSuspendThreadHolder() noexcept {
+        if (auto* t = tls_this_thread; t != nullptr) {
+            t->forbid_suspend_count.fetch_sub(1, std::memory_order_release);
+        }
+    }
+    ForbidSuspendThreadHolder(const ForbidSuspendThreadHolder&) = delete;
+    ForbidSuspendThreadHolder& operator=(const ForbidSuspendThreadHolder&) = delete;
+    ForbidSuspendThreadHolder(ForbidSuspendThreadHolder&&) = delete;
+    ForbidSuspendThreadHolder& operator=(ForbidSuspendThreadHolder&&) = delete;
+};
+
 }  // namespace chaos::il2cpp::runtime_core::threading
 
 #endif  // CHAOS_IL2CPP_FORBID_SUSPEND_H_

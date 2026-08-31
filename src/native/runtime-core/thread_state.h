@@ -111,6 +111,16 @@ struct ManagedThread {
     /// its card still clean — closes the A2b cross-gen UAF window.
     std::atomic<uint32_t>    barrier_inflight{0};
 
+    /// Cross-thread "forbid hard suspension" counter (CoreCLR m_dwForbidSuspendThread
+    /// equivalent).  Incremented by the thread itself while it holds a lock that
+    /// must not be preempted by A3 hard-suspension drive (e.g. RegionManager lock,
+    /// thread registry, safepoint owner CAS).  Read cross-thread by the safepoint
+    /// coordinator BEFORE and AFTER SuspendThread: if non-zero either time, the
+    /// coordinator must ResumeThread and retry (or skip) that thread rather than
+    /// hold it suspended while it waits on a lock the suspender also needs —
+    /// avoiding a suspend-thread-vs-lock-holder deadlock.
+    std::atomic<uint32_t>    forbid_suspend_count{0};
+
     /// Event handle for event-based safepoint wait (infinite wait,
     /// zero CPU).  Created in RegisterThread, closed in UnregisterThread.
     /// Set by ReleaseGlobalSafepoint to wake all waiting threads.
@@ -133,7 +143,8 @@ struct ManagedThread {
 
     // ── OS handle for APC/thread ops ─────────────────────────────┐
     /// OS thread handle (for APC fallback on Windows; SuspendThread/ResumeThread on Windows only when preemptive_suspended).
-    /// Used for QueueUserAPC (safepoint fallback on Windows).
+    /// Used for QueueUserAPC (safepoint fallback on Windows) and for A3 hard
+    /// suspension drive (PalSuspendThread / PalResumeThread / PalGetThreadContext).
     void* os_handle{nullptr};
 
     // ── TLAB state (backed up across young GC safepoint) ────────
