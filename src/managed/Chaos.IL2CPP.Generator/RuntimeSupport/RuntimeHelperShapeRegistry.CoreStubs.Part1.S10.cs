@@ -22,7 +22,15 @@ public sealed partial class NativeAotLoweringPlanner
                         return null;
                     var variants = planner.ResolveEnumerableJoinSupportVariants(elementType!);
                     ExternalRuntimeHelperDefinition? def = null;
-                    if (variants.Count > 0)
+                    // The List-family fast path (List<T>/ReadOnlyCollection<T> direct
+                    // items_array iteration) lives INSIDE CreateStringJoinStringEnumerable-
+                    // RuntimeHelperDefinition via list_variant_entries. It must be tried
+                    // even when the enumerator-based variants list is empty (List<T>'s
+                    // GetEnumerator/MoveNext/Current are not AOT-compiled subjects), so
+                    // resolve the List-family variants first and only fall back when
+                    // BOTH paths yield nothing.
+                    var listVariants = planner.ResolveListEnumerableJoinInfoVariants(elementType!);
+                    if (variants.Count > 0 || listVariants.Count > 0)
                     {
                         if (string.Equals(elementType, "System.Int32", StringComparison.Ordinal) ||
                             string.Equals(elementType, "System.Int64", StringComparison.Ordinal) ||

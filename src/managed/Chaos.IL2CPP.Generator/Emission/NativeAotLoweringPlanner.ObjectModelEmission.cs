@@ -451,6 +451,66 @@ public sealed partial class NativeAotLoweringPlanner
 				TrackReferenceType(id, "System.Private.CoreLib/System.Object");
 			}
 		}
+		// Pre-scan: identify ReadOnlyCollection<T> types from method signatures.
+		// These types are only discovered through the supplement scan (which runs
+		// after struct emission), but they need struct bodies and MethodTable
+		// entries. Detect them early so they are added to referenceTypeSubjectIds
+		// before the struct emission loop.
+		foreach (var m in _methodsBySubjectId.Values)
+		{
+			if (m.Identity is null) continue;
+
+			string? retTypeId = m.ReturnAbi?.TypeSubjectId;
+			if (string.IsNullOrEmpty(retTypeId))
+				retTypeId = m.ReturnType;
+			TryTrackReadOnlyCollectionRef(retTypeId, referenceTypeSubjectIds, valueTypeSubjectIds);
+
+			if (m.ParameterAbis is { Count: > 0 })
+				for (int paramIdx = 0; paramIdx < m.ParameterAbis.Count; paramIdx++)
+				{
+					var p = m.ParameterAbis[paramIdx];
+					string? pTypeId = p?.TypeSubjectId;
+					if (string.IsNullOrEmpty(pTypeId) && !string.IsNullOrEmpty(m.SubjectId) &&
+						_allManagedMethods is not null &&
+						_allManagedMethods.TryGetValue(m.SubjectId, out var mm) &&
+						paramIdx < mm.Parameters.Count)
+						pTypeId = mm.Parameters[paramIdx].Type;
+					TryTrackReadOnlyCollectionRef(pTypeId, referenceTypeSubjectIds, valueTypeSubjectIds);
+				}
+
+			if (_allManagedMethods is not null && !string.IsNullOrEmpty(m.SubjectId) &&
+				_allManagedMethods.TryGetValue(m.SubjectId, out var managedM))
+			{
+				TryTrackReadOnlyCollectionRef(managedM.ReturnType, referenceTypeSubjectIds, valueTypeSubjectIds);
+				foreach (var param in managedM.Parameters)
+					TryTrackReadOnlyCollectionRef(param.Type, referenceTypeSubjectIds, valueTypeSubjectIds);
+			}
+		}
+		if (_allManagedMethods is { Count: > 0 })
+		{
+			foreach (var mm2 in _allManagedMethods.Values)
+			{
+				if (mm2.SubjectId is null) continue;
+				TryTrackReadOnlyCollectionRef(mm2.ReturnType, referenceTypeSubjectIds, valueTypeSubjectIds);
+				foreach (var param in mm2.Parameters)
+					TryTrackReadOnlyCollectionRef(param.Type, referenceTypeSubjectIds, valueTypeSubjectIds);
+			}
+		}
+		// Route a ReadOnlyCollection<T> subject id (if it is one) to the reference
+		// type path so a proper GC-object struct body + MethodTable entry is emitted.
+		// The generic IsStructuredValueTypeSubjectId heuristic would misclassify it
+		// as a structured value type, so it must be handled explicitly.
+		void TryTrackReadOnlyCollectionRef(string? typeSubjectId, ISet<string> refIds, ISet<string> valIds)
+		{
+			if (typeSubjectId is { Length: > 0 } &&
+				IsReadOnlyCollectionTypeSubjectId(typeSubjectId) &&
+				!refIds.Contains(typeSubjectId) && !valIds.Contains(typeSubjectId))
+			{
+				var slash = typeSubjectId.IndexOf('/');
+				var coreLibId = (slash > 0) ? "System.Private.CoreLib" + typeSubjectId[slash..] : typeSubjectId;
+				TrackReferenceType(coreLibId, "System.Private.CoreLib/System.Object");
+			}
+		}
 		// Pre-compute types safe for stack allocation (no GC-ref fields, no finalizer).
 		_typesSafeForStackAllocation = ComputeTypesSafeForStackAllocation(
 			referenceTypeSubjectIds, valueTypeSubjectIds,
@@ -1165,6 +1225,8 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 				ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.Dictionary", StringComparison.Ordinal);
 			bool isHashSetType =
 				ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.HashSet", StringComparison.Ordinal);
+			bool isReadOnlyCollectionType =
+				ns.StartsWith("System.Private.CoreLib/System.Collections.ObjectModel.ReadOnlyCollection<", StringComparison.Ordinal);
 			if (isListType)
 			{
 				builder.AppendLine("    CHAOS_IL2CPP_INTPTR items_array = 0;  // GC array reference");
@@ -1174,6 +1236,18 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 			else if (isDictType || isHashSetType)
 			{
 				builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_native_storage = 0;  // native runtime storage ptr");
+			}
+			else if (isReadOnlyCollectionType)
+			{
+				// ReadOnlyCollection<T> wraps a List<T>'s backing state directly,
+				// sharing the SAME chaos_list_fields block (items_array + size +
+				// version) so a ReadOnlyCollection view traverses identically to a
+				// List<T> via reinterpret_cast<chaos_list_fields*>(obj + 8).
+				// items_array is a malloc'd buffer (not a GC array reference),
+				// registered as pointer_count=0 in GcTypeLayout — matching List<T>.
+				builder.AppendLine("    CHAOS_IL2CPP_INTPTR items_array = 0;  // shared List<T> items_array (malloc'd)");
+				builder.AppendLine("    CHAOS_IL2CPP_INT32 size = 0;           // shared element count (view of List<T>.Count)");
+				builder.AppendLine("    CHAOS_IL2CPP_INT32 version = 0;        // shared modification counter");
 			}
 			if (list.Count == 0)
 			{
@@ -1330,7 +1404,26 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 			if (!referenceTypeSubjectIds.Contains(typeSubjectId) &&
 			    !valueTypeSubjectIds.Contains(typeSubjectId))
 			{
-				if (IsStructuredValueTypeSubjectId(typeSubjectId))
+				// ReadOnlyCollection<T> is a genuine reference type whose object model
+				// is a GC object wrapping the source List's items_array (malloc'd buffer).
+				// The generic IsStructuredValueTypeSubjectId heuristic classifies any
+				// non-primitive subject id as a structured value type, which is wrong
+				// for ReadOnlyCollection. Route it explicitly to the reference path so
+				// a proper reference struct (header + items_array) is emitted.
+				if (IsReadOnlyCollectionTypeSubjectId(typeSubjectId))
+				{
+					// ReadOnlyCollection<T> is defined in System.Private.CoreLib
+					// regardless of which assembly prefix the subject id carries.
+					// Force the canonical assembly prefix so the struct symbol
+					// (chaos_type_System_Private_CoreLib_*) matches what the
+					// AsReadOnly stub generates from the List's declaring type.
+					var slash = typeSubjectId.IndexOf('/');
+					var coreLibId = (slash > 0)
+						? "System.Private.CoreLib" + typeSubjectId[slash..]
+						: typeSubjectId;
+					TrackReferenceType(coreLibId, "System.Private.CoreLib/System.Object");
+				}
+				else if (IsStructuredValueTypeSubjectId(typeSubjectId))
 				{
 					valueTypeSubjectIds.Add(typeSubjectId);
 				}

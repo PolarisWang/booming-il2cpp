@@ -39,7 +39,8 @@ public sealed partial class NativeAotLoweringPlanner
             var ns = ManagedNaming.NormalizeSubjectIdAssembly(typeId);
             if (ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.List", StringComparison.Ordinal) ||
                 ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.Dictionary", StringComparison.Ordinal) ||
-                ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.HashSet", StringComparison.Ordinal))
+                ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.HashSet", StringComparison.Ordinal) ||
+                ns.StartsWith("System.Private.CoreLib/System.Collections.ObjectModel.ReadOnlyCollection<", StringComparison.Ordinal))
             {
                 skeletonTypeIds.Add(typeId);
             }

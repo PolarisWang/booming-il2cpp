@@ -91,6 +91,23 @@ public sealed partial class NativeAotLoweringPlanner
                 ["get_current_symbol"] = item.GetCurrentMethod.NativeSymbol,
             })
             .ToArray();
+        // List-family fast path: List<T> and ReadOnlyCollection<T> embed a
+        // chaos_list_fields block (items_array/size/version) at offset +8. Their
+        // GetEnumerator/MoveNext/Current methods are NOT AOT-compiled subjects
+        // (JIT-generated in .NET), so ResolveEnumerableJoinSupportVariants yields no
+        // enumerator variant for them. Emit a dedicated type_info-dispatched branch
+        // that iterates the shared backing buffer directly. Works for both the List
+        // and the ReadOnlyCollection<T> view returned by List<T>.AsReadOnly().
+        var elementType = TryGetStringJoinEnumerableElementType(callee, out var et) ? et : null;
+        var orderedListVariants = elementType != null
+            ? ResolveListEnumerableJoinInfoVariants(elementType)
+                .OrderBy(id => id, StringComparer.Ordinal)
+                .Select(id => new ScriptObject
+                {
+                    ["enumerable_type_info_symbol"] = GetNativeTypeInfoSymbol(id),
+                })
+                .ToArray()
+            : Array.Empty<ScriptObject>();
         var model = new ScriptObject
         {
             ["helper_symbol"] = GetExternalRuntimeHelperSymbol(callee),
@@ -98,6 +115,7 @@ public sealed partial class NativeAotLoweringPlanner
             ["string_type_id_symbol"] = GetNativeTypeIdSymbol("System.Private.CoreLib/System.String"),
             ["string_type_info_symbol"] = GetNativeTypeInfoSymbol("System.Private.CoreLib/System.String"),
             ["variant_entries"] = orderedVariants,
+            ["list_variant_entries"] = orderedListVariants,
         };
         var rendered = ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetStringJoinStringEnumerableTemplate(),
@@ -107,6 +125,52 @@ public sealed partial class NativeAotLoweringPlanner
             CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
             CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)
         }), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1 });
+    }
+
+    /// <summary>
+    /// Resolve the List-family reference-type subject ids (List&lt;T&gt; and
+    /// ReadOnlyCollection&lt;T&gt;) whose closed element type matches
+    /// <paramref name="elementTypeDisplayName"/>. Only types that were actually
+    /// emitted as reference types (present in <see cref="_referenceTypeBaseSubjectIds"/>)
+    /// are returned, guaranteeing their type_info symbol resolves at build time.
+    /// </summary>
+    internal IReadOnlyList<string> ResolveListEnumerableJoinInfoVariants(string elementTypeDisplayName)
+    {
+        var matches = new List<string>();
+        foreach (var subjectId in _referenceTypeBaseSubjectIds.Keys)
+        {
+            // Match the TYPE PATH regardless of assembly prefix: the same closed
+            // generic can be registered under different assembly aliases
+            // (System.Collections/, System.Private.CoreLib/, …) depending on which
+            // reference introduced it, and the MethodTable symbol is derived from
+            // the full subject id either way.
+            var slash = subjectId.IndexOf('/');
+            var typePath = slash > 0 ? subjectId[(slash + 1)..] : subjectId;
+            string? openPrefix = null;
+            if (typePath.StartsWith("System.Collections.Generic.List<", StringComparison.Ordinal))
+                openPrefix = "System.Collections.Generic.List<";
+            else if (typePath.StartsWith("System.Collections.ObjectModel.ReadOnlyCollection<", StringComparison.Ordinal))
+                openPrefix = "System.Collections.ObjectModel.ReadOnlyCollection<";
+            if (openPrefix == null)
+                continue;
+            if (!TryParseClosedSingleGenericArgument2(subjectId, openPrefix, out var elementTypeNameOrSubjectId))
+                continue;
+            if (string.Equals(GetTypeDisplayName(elementTypeNameOrSubjectId), elementTypeDisplayName, StringComparison.Ordinal))
+                matches.Add(subjectId);
+        }
+        return matches;
+    }
+
+    private static bool TryParseClosedSingleGenericArgument2(string subjectId, string openPrefix, out string elementTypeNameOrSubjectId)
+    {
+        elementTypeNameOrSubjectId = string.Empty;
+        if (!TryReadGenericArgumentList(subjectId, openPrefix, out var genericArgumentList))
+            return false;
+        var parts = SplitTopLevelGenericArguments(genericArgumentList);
+        if (parts.Count != 1 || string.IsNullOrWhiteSpace(parts[0]))
+            return false;
+        elementTypeNameOrSubjectId = parts[0];
+        return true;
     }
 
     private static readonly IReadOnlyDictionary<string, string> MarshalCopyElementTypeMap = new Dictionary<string, string>

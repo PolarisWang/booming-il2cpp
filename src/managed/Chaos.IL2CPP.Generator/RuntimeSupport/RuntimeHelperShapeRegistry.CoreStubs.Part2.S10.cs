@@ -173,13 +173,18 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
-        /// List&lt;T&gt;::AsReadOnly — returns a ReadOnlyCollection wrapping the list.
-        /// The current implementation throws a managed exception because returning
-        /// the List pointer directly gives the caller a List&lt;T&gt; object where a
-        /// ReadOnlyCollection&lt;T&gt; is expected — causing wrong type tests (is),
-        /// wrong vtable dispatch, and wrong runtime type reflection.  Until a real
-        /// ReadOnlyCollection wrapper is implemented, this avoids silent wrong-type
-        /// data by making the call loud and diagnosable.
+        /// List&lt;T&gt;::AsReadOnly — returns a real ReadOnlyCollection&lt;T&gt; wrapper
+        /// object that shares the source List's items_array (a malloc'd buffer, NOT
+        /// a GC array reference — registered as pointer_count=0 in GcTypeLayout).
+        ///
+        /// The wrapper is a genuine reference type (see
+        /// NativeAotLoweringPlanner._trackTypeRef + ObjectModelEmission struct
+        /// emission): `struct chaos_type_...ReadOnlyCollection<T> : chaos_object`
+        /// with a single `items_array` member at offset 8, so `is`/type-test and
+        /// vtable dispatch behave like a real ReadOnlyCollection instead of a List.
+        ///
+        /// This replaces the previous loud `throw chaos_managed_exception{}` stub,
+        /// which crashed HelloWorld at `String.Join(",", list.AsReadOnly())`.
         /// </summary>
         private static void RegisterListTAsReadOnly(RuntimeHelperShapeRegistry registry)
         {
@@ -188,13 +193,46 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "AsReadOnly",
                 Resolver: (planner, callee, typeArgs) =>
                 {
+                    // Derive the closed ReadOnlyCollection<T> subject id directly from the
+                    // calling List<T>'s declaring-type subject id, replacing the
+                    // "System.Collections.Generic.List" open-generic name with the
+                    // "System.Collections.ObjectModel.ReadOnlyCollection" name. This
+                    // preserves the assembly prefix (System.Private.CoreLib/ or
+                    // its legacy alias) so the built subject id EXACTLY matches the raw
+                    // reference-type subject id that _trackTypeRef / ObjectModelEmission /
+                    // GcTypeLayout registered — guaranteeing the emitted
+                    // chaos_type_*ReadOnlyCollection struct symbol resolves.
+                    var declaringType = GetMethodDeclaringTypeSubjectId(callee);
+                    const string listMarker = "System.Collections.Generic.List<";
+                    var listMarkerIndex = declaringType.IndexOf(listMarker, StringComparison.Ordinal);
+                    if (listMarkerIndex < 0)
+                        return null;
+                    var rocSubjectId = declaringType.Substring(0, listMarkerIndex) +
+                        "System.Collections.ObjectModel.ReadOnlyCollection<" +
+                        declaringType.Substring(listMarkerIndex + listMarker.Length);
+                    // Normalize the assembly prefix so the emitted struct symbol
+                    // (chaos_type_System_Private_CoreLib_*) matches the reference
+                    // type registration in _trackTypeRef.
+                    rocSubjectId = ManagedNaming.NormalizeSubjectIdAssembly(rocSubjectId);
+                    var rocTypeSymbol = NativeAotLoweringPlanner.GetNativeTypeSymbol(rocSubjectId);
+                    var rocTypeInfoSymbol = NativeAotLoweringPlanner.GetNativeTypeInfoSymbol(rocSubjectId);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    (void)chaos_arg_0;",
-                        "    throw chaos_managed_exception{};",
-                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+                        "    auto* chaos_list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 8);",
+                        $"    auto* chaos_roc = CHAOS_IL2CPP_NEW_GC({rocTypeSymbol}, {{}});",
+                        $"    chaos_roc->header.type_info = {rocTypeInfoSymbol};",
+                        // Share the source List's full backing state (items_array + size +
+                        // version) as a read-only VIEW, mirroring
+                        // System.Collections.ObjectModel ReadOnlyCollection<T> which wraps
+                        // and exposes the underlying List's _items/_size. This keeps the
+                        // ReadOnlyCollection traversable identically to its source List
+                        // (String.Join iterates it via a chaos_list_fields view at offset +8).
+                        "    chaos_roc->items_array = chaos_list->items_array;",
+                        "    chaos_roc->size = chaos_list->size;",
+                        "    chaos_roc->version = chaos_list->version;",
+                        "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_roc);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(

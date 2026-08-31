@@ -82,6 +82,71 @@ extern "C" CHAOS_IL2CPP_INTPTR {{ helper_symbol }}(CHAOS_IL2CPP_INTPTR chaos_arg
         return chaos_reflection_create_string_utf8_copy(chaos_joined.c_str(), chaos_joined.size());
     }
 
+{{~ end }}{{~ for entry in list_variant_entries }}
+    if (chaos_enumerable_ti == {{ entry.enumerable_type_info_symbol }})
+    {
+        // List<T> and ReadOnlyCollection<T> both embed a chaos_list_fields block at
+        // offset +8 (items_array / size / version). Iterate it directly instead of
+        // calling GetEnumerator/MoveNext/Current — those enumerator methods are not
+        // AOT-compiled subjects (JIT-generated in .NET), so no enumerator variant
+        // matches them. This is the true IEnumerable traversal fast path.
+        auto* chaos_list_view = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_1) + 8);
+        auto* chaos_elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+            reinterpret_cast<char*>(chaos_list_view->items_array) + sizeof(CHAOS_IL2CPP_INT32));
+        for (CHAOS_IL2CPP_INT32 chaos_i = 0; chaos_i < chaos_list_view->size; chaos_i++)
+        {
+            chaos_append_separator();
+            const auto chaos_current = chaos_elems[chaos_i];
+            if (chaos_current == 0)
+            {
+                continue;
+            }
+
+            const char* chaos_current_utf8 = chaos_reflection_get_string_utf8(chaos_current);
+            if (chaos_current_utf8 != nullptr)
+            {
+                chaos_joined += chaos_current_utf8;
+            }
+        }
+
+        return chaos_reflection_create_string_utf8_copy(chaos_joined.c_str(), chaos_joined.size());
+    }
+
+{{~ end }}{{~ if list_variant_entries.size > 0 }}
+    // Layout-driven fallback: any object whose embedded chaos_list_fields block
+    // (at +8) holds a plausible items_array pointer and a small size is a
+    // List-family view (List<T>, ReadOnlyCollection<T>, …). This catches
+    // ReadOnlyCollection<T> even when its exact MethodTable symbol was not
+    // enumerable at codegen time (the registry resolver runs before the object
+    // model's reference-type table is fully populated).
+    {
+        auto* chaos_fallback_view = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_1) + 8);
+        if (chaos_fallback_view->items_array != 0 &&
+            chaos_fallback_view->size > 0 &&
+            chaos_fallback_view->size < (1 << 24))
+        {
+            auto* chaos_fb_elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+                reinterpret_cast<char*>(chaos_fallback_view->items_array) + sizeof(CHAOS_IL2CPP_INT32));
+            for (CHAOS_IL2CPP_INT32 chaos_i = 0; chaos_i < chaos_fallback_view->size; chaos_i++)
+            {
+                chaos_append_separator();
+                const auto chaos_current = chaos_fb_elems[chaos_i];
+                if (chaos_current == 0)
+                {
+                    continue;
+                }
+
+                const char* chaos_current_utf8 = chaos_reflection_get_string_utf8(chaos_current);
+                if (chaos_current_utf8 != nullptr)
+                {
+                    chaos_joined += chaos_current_utf8;
+                }
+            }
+
+            return chaos_reflection_create_string_utf8_copy(chaos_joined.c_str(), chaos_joined.size());
+        }
+    }
+
 {{~ end }}
     CHAOS_IL2CPP_FAIL();
 }

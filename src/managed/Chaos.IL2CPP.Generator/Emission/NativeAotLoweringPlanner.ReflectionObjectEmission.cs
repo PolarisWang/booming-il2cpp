@@ -37,11 +37,36 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        return nullptr;");
 		builder.AppendLine("    }");
 		builder.AppendLine();
-		builder.AppendLine("    if (chaos_runtime_get_abi_v0()->is_string_id(chaos_string_value))");
+		builder.AppendLine("    if (chaos_is_string_id(static_cast<intptr_t>(chaos_string_value)))");
 		builder.AppendLine("    {");
 		builder.AppendLine("        const auto chaos_view = chaos::il2cpp::string_table::Resolve(");
-		builder.AppendLine("            chaos_extract_string_id(chaos_string_value));");
+		builder.AppendLine("            chaos_extract_string_id(static_cast<intptr_t>(chaos_string_value)));");
 		builder.AppendLine("        return chaos_view.utf8_data;");
+		builder.AppendLine("    }");
+		builder.AppendLine();
+		// Runtime string stubs (ChaosStringConcat2, ChaosStringFastAllocate, …)
+		// return StubStringHeader* objects: {type, byte_count} followed by inline
+		// UTF-8 bytes. These are NOT chaos_type_System_String* (whose layout is
+		// {header, length, utf8_data, string_id}), so the reinterpret_cast below
+		// would read a garbage utf8_data pointer and crash. Discriminate the two
+		// layouts by the header word: a StubStringHeader's first word is a raw
+		// type token (small integer / 0), while a chaos_type_System_String's
+		// first word is a ThinLockableHeader whose first 8 bytes are a GC type
+		// tag (nonzero, large). Use the runtime's own discriminator when
+		// available, else fall back to the tag heuristic.
+		builder.AppendLine("    auto* chaos_possible_stub = reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(chaos_string_value);");
+		builder.AppendLine("    const auto chaos_first_word = chaos_possible_stub[0];");
+		builder.AppendLine("    const auto chaos_second_word = chaos_possible_stub[1];");
+		builder.AppendLine("    // StubStringHeader: {type(token), byte_count} — byte_count is small (< 1<<32)");
+		builder.AppendLine("    // and type is 0 or a small token. chaos_type_String: {ThinLockableHeader(tag), length} —");
+		builder.AppendLine("    // the GC tag is a large nonzero value. Heuristic: second word small AND first");
+		builder.AppendLine("    // word not a plausible GC tag → StubStringHeader path.");
+		builder.AppendLine("    if (chaos_second_word != 0 && chaos_second_word < (1u << 30) &&");
+		builder.AppendLine("        (chaos_first_word == 0 || chaos_first_word < (1u << 20)))");
+		builder.AppendLine("    {");
+		builder.AppendLine("        auto* chaos_stub = reinterpret_cast<const StubStringHeader*>(");
+		builder.AppendLine("            reinterpret_cast<const void*>(chaos_string_value));");
+		builder.AppendLine("        return stub_string_data(reinterpret_cast<const void*>(chaos_stub));");
 		builder.AppendLine("    }");
 		builder.AppendLine();
 		StringBuilder stringBuilder = builder;
