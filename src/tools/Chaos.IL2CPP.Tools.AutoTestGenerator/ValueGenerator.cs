@@ -662,6 +662,28 @@ public sealed class ValueGenerator
         HashSet<string> usedSignatures,
         int methodIndex)
     {
+        // ── Convert.ChangeType(object, TypeCode[, IFormatProvider]) — 多值探针 ──
+        // The default probe only sends default(object)+default(TypeCode), so a stub
+        // returning null would pass by coincidence.  Inject real value + TypeCode pairs;
+        // the AOT native ChaosConvertChangeType implements real IConvertible dispatch
+        // (box int32/bool, pass-through string), so these give meaningful (non-masked)
+        // coverage.  The 防线 4 build gate blocks if these stay all-default.
+        if (method.Name == "ChangeType")
+        {
+            if (paramTypes.Length == 2)
+            {
+                AddUnique(sets, usedSignatures, methodIndex, ["42", "System.TypeCode.Int32"]);
+                AddUnique(sets, usedSignatures, methodIndex, ["true", "System.TypeCode.Boolean"]);
+                AddUnique(sets, usedSignatures, methodIndex, ["\"hello\"", "System.TypeCode.String"]);
+            }
+            else if (paramTypes.Length == 3)
+            {
+                AddUnique(sets, usedSignatures, methodIndex, ["42", "System.TypeCode.Int32", "System.Globalization.CultureInfo.InvariantCulture"]);
+                AddUnique(sets, usedSignatures, methodIndex, ["true", "System.TypeCode.Boolean", "System.Globalization.CultureInfo.InvariantCulture"]);
+            }
+            return;
+        }
+
         // ── Enum.TryParse — only for System.Enum type ──
         // Guard against false matches on Guid.TryParse, TimeSpan.TryParse, etc.
         // Enum.TryParse has existing natives (ChaosEnumTryParse / ChaosEnumTryParseWithIgnoreCase)
