@@ -1,0 +1,120 @@
+# gc-linux-x64-ci.yml — Linux x64 GC CI + TSAN
+#
+# Linux x64 GC unit-test CI gate with ThreadSanitizer (TSAN).
+# GC is the most memory-safety-critical module; TSAN detects data races
+# (the root cause of the A2b cross-gen UAF class) that ASAN cannot catch.
+#
+# This is a NEW workflow — the existing gc-ci.yml runs only on windows-latest
+# (MSVC) and TSAN requires GCC/Clang on Linux.  This job:
+#   1. Builds the native runtime + GC tests natively on ubuntu-latest (gcc-14)
+#   2. Runs the same GC unit regex as the Windows gate
+#   3. Runs the concurrency stress tests under TSAN
+#
+# Triggered on PR + push to main when GC-relevant sources change.
+#
+# Required: gcc-14 (for TSAN), ninja-build, .NET 8 SDK (for Generator).
+
+name: Linux x64 GC CI + TSAN
+
+on:
+  pull_request:
+    paths:
+      - 'src/native/runtime-core/gc/**'
+      - 'src/native/runtime-core/core/**'
+      - 'src/native/pal/**'
+      - 'tests/contracts/native/runtime-core/**'
+      - 'src/managed/Chaos.IL2CPP.Generator/**'
+      - 'CMakeLists.txt'
+      - 'CMakePresets.json'
+      - 'build/toolchains/linux-x64-native.cmake'
+      - 'tests/suite_contract.yaml'
+  push:
+    branches: [main]
+    paths:
+      - 'src/native/runtime-core/gc/**'
+      - 'src/native/runtime-core/core/**'
+      - 'src/native/pal/**'
+      - 'tests/contracts/native/runtime-core/**'
+      - 'src/managed/Chaos.IL2CPP.Generator/**'
+      - 'CMakeLists.txt'
+      - 'CMakePresets.json'
+      - 'build/toolchains/linux-x64-native.cmake'
+      - 'tests/suite_contract.yaml'
+  workflow_dispatch:
+
+jobs:
+  gc-linux-tsan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install system dependencies (gcc-14 + ninja)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq gcc-14 g++-14 ninja-build
+          echo "=== Verification ==="
+          gcc-14 --version
+          ninja --version
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Configure CMake (linux-x64-native, TSAN)
+        run: |
+          cmake -S . -B artifacts/presets/linux-x64-native \
+            --preset linux-x64-native \
+            -DCMAKE_C_COMPILER=gcc-14 \
+            -DCMAKE_CXX_COMPILER=g++-14 \
+            -DCMAKE_C_FLAGS="-fsanitize=thread -g -O1" \
+            -DCMAKE_CXX_FLAGS="-fsanitize=thread -g -O1" \
+            -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=thread" \
+            -DCMAKE_SHARED_LINKER_FLAGS="-fsanitize=thread"
+
+      - name: Build Native Runtime + GC tests
+        run: |
+          cmake --build artifacts/presets/linux-x64-native -j$(nproc) 2>&1 | tail -50
+
+      - name: Run GC Unit Tests under TSAN
+        shell: bash
+        env:
+          # TSAN suppressions file (optional, for false positives).
+          TSAN_OPTIONS: "halt_on_error=1:history_size=7:second_deadlock_stack=1"
+        run: |
+          ctest --test-dir artifacts/presets/linux-x64-native \
+            -C Debug \
+            -R "chaos_gc_|test_gc_" \
+            -LE "benchmark|stress|soak" \
+            --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-linux-tsan-output.txt
+
+      - name: Run GC concurrency stress tests (TSAN, SCALE=50)
+        shell: bash
+        env:
+          CHAOS_IL2CPP_STRESS_SCALE: "50"
+          TSAN_OPTIONS: "halt_on_error=1:history_size=7:second_deadlock_stack=1"
+        run: |
+          ctest --test-dir artifacts/presets/linux-x64-native \
+            -C Debug \
+            -R "test_gc_general_stress|test_gc_loh_stress|test_gc_delegate_stress" \
+            --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-linux-tsan-stress-output.txt
+
+      - name: Upload GC Linux TSAN test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-linux-tsan-output
+          path: |
+            gc-linux-tsan-output.txt
+            gc-linux-tsan-stress-output.txt

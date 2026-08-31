@@ -139,6 +139,18 @@
         "ROADMAP0_PRESET_TARGET": "linux-arm64-smoke",
         "CHAOS_IL2CPP_EXEC_PROFILE": "desktop"
       }
+    },
+    {
+      "name": "linux-x64-native",
+      "displayName": "Roadmap0 Linux x64 Native",
+      "description": "Linux x64 native build (gcc-14, direct test execution). For GC TSAN CI.",
+      "generator": "Ninja",
+      "binaryDir": "artifacts/presets/linux-x64-native",
+      "toolchainFile": "build/toolchains/linux-x64-native.cmake",
+      "cacheVariables": {
+        "ROADMAP0_PRESET_TARGET": "linux-x64-native",
+        "CHAOS_IL2CPP_EXEC_PROFILE": "desktop"
+      }
     }
   ]
 }
