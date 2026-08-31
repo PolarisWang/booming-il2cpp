@@ -668,6 +668,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromDouble(CHAOS_IL2CPP_FLOAT64 value
 // Pattern from enum_stubs.cpp enum_alloc_boxed_int32.
 static CHAOS_IL2CPP_INTPTR box_int32(CHAOS_IL2CPP_INT32 value) noexcept
 {
+    using namespace chaos::il2cpp::runtime_core;
     auto* storage = static_cast<unsigned char*>(GcAllocateAtomic(20));
     if (storage == nullptr) return 0;
     std::memset(storage, 0, 16); // header
@@ -678,7 +679,8 @@ static CHAOS_IL2CPP_INTPTR box_int32(CHAOS_IL2CPP_INT32 value) noexcept
 // Allocate a boxed boolean object. Layout: ThinLockableHeader(16B) + bool(1B).
 static CHAOS_IL2CPP_INTPTR box_bool(CHAOS_IL2CPP_INT32 value) noexcept
 {
-    auto* storage = static_cast<unsigned char*>(GcAllocateAtomic(17));
+    using namespace chaos::il2cpp::runtime_core;
+    unsigned char* storage = static_cast<unsigned char*>(GcAllocateAtomic(17));
     if (storage == nullptr) return 0;
     std::memset(storage, 0, 16); // header
     storage[16] = value ? 1 : 0;

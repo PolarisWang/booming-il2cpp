@@ -125,9 +125,10 @@ TEST_F(GcServerStressTest, LargeObjectAcrossHeaps) {
     std::atomic<int> alloc_fails{0};
 
     // Allocate small (TLAB fast path), medium (TLAB carve), and large
-    // (> kMaxTlabAlloc, falls through to old-gen).  Avoid the LOH threshold
-    // (85KB) here — the coordinate path is better exercised by the WKS stress
-    // suite; this test focuses on Server GC multi-heap coordination.
+    // (> kMaxTlabAlloc, falls through old-gen).  Cap at 28KB so the FIX-A
+    // preemptive wrapping handles the old-gen fallback without hitting the
+    // known std::mutex architecture limit (the SCALE=100 limit is independent
+    // of object size — it's a thread-count issue, not allocation-size).
     constexpr size_t kSizes[] = { 64, 1024, 16 * 1024, 28 * 1024 };
 
     auto worker = [&]() {
