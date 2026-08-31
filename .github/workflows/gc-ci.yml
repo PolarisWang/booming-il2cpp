@@ -102,11 +102,12 @@ jobs:
           CHAOS_GC_HeapVerify: "2"
         run: |
           # Run the stable 6 young-collector tests under HeapVerify=2, excluding
-          # the known-flaky ConservativeSweepSelfRefs (GC-N7 residual heap  corruption,
-          # SEH 0xc0000005 under parallel load).  The remaining 5 tests (OldGenToNursery,
-          # ForwardingProtocol, IsInNursery, ScavengeObject, YoungCollectionEmpty,
-          # CollectionWithDirtyCard) are deterministic and validate the young-collector
-          # bookkeeping (card-table fixup, forwarding, scavenge, emptiness).
+          # the known-flaky ConservativeSweepSelfRefs (GC-N7 residual heap
+          # corruption, SEH 0xc0000005 under parallel load).  The remaining 6
+          # tests (OldGenToNursery, ForwardingProtocol, IsInNursery, ScavengeObject,
+          # YoungCollectionEmpty, CollectionWithDirtyCard) are deterministic and
+          # validate the young-collector bookkeeping (card-table fixup, forwarding,
+          # scavenge, emptiness).
           "${{ github.workspace }}/artifacts/presets/windows-x64-reference/tests/unit/runtime-native/runtime-core/gc/${{ matrix.config }}/test_gc_young_collector.exe" \
             --gtest_filter='-*ConservativeSweepSelfRefs*' \
             2>&1 | tee -a gc-unit-output.txt
