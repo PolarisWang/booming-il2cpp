@@ -625,31 +625,11 @@ public sealed class ValueGenerator
         HashSet<string> usedSignatures,
         int methodIndex)
     {
-        // ── Convert.ChangeType(object, TypeCode) ──
-        // The generic default probe only sends default(object) + default(TypeCode).
-        // Add real value + TypeCode pairs so the fact can detect a missing
-        // IConvertible dispatch implementation.
-        if (method.Name == "ChangeType" && paramTypes.Length == 2)
-        {
-            // Convert.ChangeType(42, TypeCode.Int32) → expected: boxed Int32(42)
-            AddUnique(sets, usedSignatures, methodIndex, ["42", "System.TypeCode.Int32"]);
-            // Convert.ChangeType(true, TypeCode.Boolean) → expected: boxed Boolean(true)
-            AddUnique(sets, usedSignatures, methodIndex, ["true", "System.TypeCode.Boolean"]);
-            // Convert.ChangeType("hello", TypeCode.String) → expected: "hello" (pass-through)
-            AddUnique(sets, usedSignatures, methodIndex, ["\"hello\"", "System.TypeCode.String"]);
-            return;
-        }
-
-        // ── Convert.ChangeType(object, TypeCode, IFormatProvider) ──
-        if (method.Name == "ChangeType" && paramTypes.Length == 3)
-        {
-            AddUnique(sets, usedSignatures, methodIndex, ["42", "System.TypeCode.Int32", "System.Globalization.CultureInfo.InvariantCulture"]);
-            AddUnique(sets, usedSignatures, methodIndex, ["true", "System.TypeCode.Boolean", "System.Globalization.CultureInfo.InvariantCulture"]);
-            return;
-        }
-
         // ── Enum.TryParse — only for System.Enum type ──
         // Guard against false matches on Guid.TryParse, TimeSpan.TryParse, etc.
+        // Enum.TryParse has existing natives (ChaosEnumTryParse / ChaosEnumTryParseWithIgnoreCase)
+        // that perform real enum metadata lookup, so multi-value probes will exercise
+        // the real AOT code path.
         if (method.Name == "TryParse" && method.DeclaringTypeFullName == "System.Enum")
         {
             // Enum.TryParse(Type, string, out object) — 3 params
