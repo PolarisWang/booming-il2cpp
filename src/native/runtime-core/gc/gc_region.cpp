@@ -854,7 +854,7 @@ TLAB ClaimEmergencyTlab() noexcept {
 
 Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_size,
                                        CHAOS_IL2CPP_UINT32 domain_id) {
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
 
     CHAOS_IL2CPP_SIZE region_size = kDefaultRegionSize;
     switch (kind) {
@@ -1014,7 +1014,7 @@ static constexpr int kFreeListTrimThreshold = 16;
 
 void RegionManager::FreeRegion(RegionId id) {
     if (id == kRegionIdInvalid) return;
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
 
     // O(1) lookup via region_index_.
     auto it = region_index_.find(id);
@@ -1123,7 +1123,7 @@ void RegionManager::FreeRegion(RegionId id) {
 }
 
 void RegionManager::ReleaseDomainRegions(CHAOS_IL2CPP_UINT32 domain_id) {
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
 
     auto dit = domain_regions_.find(domain_id);
     if (dit == domain_regions_.end()) return;
@@ -1263,7 +1263,7 @@ bool RegionManager::IsInDomain(CHAOS_IL2CPP_UINT32 domain_id, const void* ptr) c
     }
 
     // Phase 2: precise check under mutex.
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
 
     auto dit = domain_regions_.find(domain_id);
     if (dit == domain_regions_.end()) return false;
@@ -1482,20 +1482,20 @@ void RegionManager::RemoveDomainRange(uint32_t domain_id) {
 Region* RegionManager::GetFirstPohRegion() const {
     // O(1): returns cached POH list head instead of O(R) region table scan.
     // Mutex ensures caller sees a consistent list (mutators may be allocating).
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
     return poh_region_list_;
 }
 
 int RegionManager::GetPohRegionCount() const {
     // O(1): returns cached count instead of O(R) region table scan.
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
     return poh_region_count_;
 }
 
 Region* RegionManager::GetNextPohRegion(const Region* current) const {
     // O(1): follows poh_next pointer instead of scanning the region table.
     if (current == nullptr) return nullptr;
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
     return current->poh_next;
 }
 

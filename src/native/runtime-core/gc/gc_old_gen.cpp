@@ -10,6 +10,7 @@
 #include "gc_bgc.h"
 #include "gc_bit_utils.h"
 #include "gc_card_table.h"
+#include "gc_lock.h"          // ScopedPreemptiveMode (preemptive-wrap lock regions)
 #include "gc_static_roots.h"
 #include "gc_demotion.h"
 #include "gc_events.h"
@@ -3471,28 +3472,6 @@ bool MarkSweepOldGen::BgcTryMark(void* obj) {
 
 
 // ── BGC concurrent sweep ────────────────────────────────────────────────────────────────────────
-
-// RAII guard that switches the calling thread to preemptive GC mode for the
-// duration of a BGC concurrent phase and restores cooperative mode on scope
-// exit --- including on exception (std::vector allocations in the phase body can
-// throw std::bad_alloc).  Leaving the BGC thread permanently in preemptive
-// mode would make its thread-state object invisible to GC root scanning and
-// exempt it from safepoint participation, so the restore MUST be exception-safe.
-//
-// Requires: the calling thread is registered (tls_this_thread != nullptr) and
-// is entering the phase in cooperative mode.  EnterCooperativeMode/EnterPreemptiveMode
-// are noexcept, so both the ctor and dtor are noexcept as required.
-class [[nodiscard]] ScopedPreemptiveMode {
-public:
-    ScopedPreemptiveMode() noexcept {
-        threading::EnterPreemptiveMode();
-    }
-    ~ScopedPreemptiveMode() {
-        threading::EnterCooperativeMode();
-    }
-    ScopedPreemptiveMode(const ScopedPreemptiveMode&) = delete;
-    ScopedPreemptiveMode& operator=(const ScopedPreemptiveMode&) = delete;
-};
 
 void MarkSweepOldGen::BgcSweep() {
     // Enter preemptive mode for the duration of sweep (CoreCLR-aligned).

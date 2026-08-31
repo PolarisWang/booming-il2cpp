@@ -98,4 +98,8 @@ using namespace chaos::il2cpp::marshal_abi;
 #include "core/struct_marshal_descriptors.cpp"
 #include "core/struct_marshal.cpp"
 #include "core/abi_export.cpp"
-#include "instantiation/aot_method_map.cpp"
+// NOTE: aot_method_map.cpp is intentionally NOT included here.
+// instantiation_engine.cpp (a separate compilation unit) includes it
+// via its own unity chain, and including it in both TU's would duplicate
+// RegisterMethodAotEntries/QueryAotMethod symbols.  runtime_core.cpp
+// does not reference those symbols directly.

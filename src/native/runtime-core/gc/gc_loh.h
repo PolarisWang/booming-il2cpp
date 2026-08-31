@@ -2,7 +2,7 @@
 #define CHAOS_IL2CPP_GC_LOH_H_
 
 #include <chaos/native_types.h>
-#include <chaos/pal/pal_thread.h>   // PalYield (SwitchToThread) for GCSpinLock
+#include "gc_lock.h"   // GcSpinLock / GcSpinLockGuard
 
 #include "gc_card_table.h"
 #include "gc_region.h"
@@ -15,56 +15,6 @@
 #include <vector>
 
 namespace chaos::il2cpp::runtime_core {
-
-// ======================================================================
-// GCSpinLock — short-critical-section spinlock (CoreCLR GCSpinLock-aligned).
-//
-// LOH operations are short (free-list pointer walk, segment traversal), so a
-// spinlock with a bounded pause-then-yield loop is appropriate — it NEVER blocks
-// on the non-alertable std::mutex critical section that leaves a cooperative
-// thread unable to acknowledge a safepoint (the SCALE=40+ Server-GC LOH crash).
-// A thread spinning here is not parked in a kernel wait; it is preemptible by
-// the OS scheduler, and (when the caller wraps the region in preemptive mode)
-// by a safepoint handshake.
-class GcSpinLock {
-public:
-    GcSpinLock() noexcept = default;
-    GcSpinLock(const GcSpinLock&) = delete;
-    GcSpinLock& operator=(const GcSpinLock&) = delete;
-
-    void Acquire() noexcept {
-        int spins = 0;
-        while (flag_.test_and_set(std::memory_order_acquire)) {
-            if (++spins <= 1024) {
-                // Pause hint (<=1024 spins) — cheap.
-                CHAOS_IL2CPP_PAUSE_HINT();
-            } else {
-                // Yield to other threads (SwitchToThread / sched_yield).
-                ::chaos::il2cpp::pal::PalYield();
-                if (++spins > 100000) spins = 0;   // reset counter
-            }
-        }
-    }
-
-    void Release() noexcept {
-        flag_.clear(std::memory_order_release);
-    }
-
-private:
-    std::atomic_flag flag_{};
-};
-
-/// RAII guard for GcSpinLock (drop-in for std::lock_guard).
-class GcSpinLockGuard {
-public:
-    explicit GcSpinLockGuard(GcSpinLock& m) noexcept : m_(m) { m_.Acquire(); }
-    ~GcSpinLockGuard() noexcept { m_.Release(); }
-    GcSpinLockGuard(const GcSpinLockGuard&) = delete;
-    GcSpinLockGuard& operator=(const GcSpinLockGuard&) = delete;
-
-private:
-    GcSpinLock& m_;
-};
 
 // ======================================================================
 // Large Object Heap (LOH) — objects > 85 KB
@@ -142,7 +92,8 @@ public:
                                           Fn&& callback) {
         // LOH segments are registered with the card table via GcRegisterHeapRange
         // (added in Allocate).  Walk segments and scan dirty cards within each
-        // segment's payload range.
+        // segment's payload range.  Preemptive scope: the spinlock may contend.
+        const ScopedPreemptiveMode preemptive_guard;
         GcSpinLockGuard lock(mutex_);
         for (auto* seg = segment_list_; seg != nullptr; seg = seg->next) {
             if (!seg->in_use.load(std::memory_order_acquire)) continue;

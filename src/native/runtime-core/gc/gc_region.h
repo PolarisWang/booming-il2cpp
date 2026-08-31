@@ -10,7 +10,8 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
-#include <mutex>
+
+#include "gc_lock.h"   // GcSpinLock (replaces std::mutex for RegionManager)
 
 #include "gc_scheduler.h"
 #include "gc_stats.h"   // GcRecordAlloc (global allocation accounting)
@@ -610,7 +611,7 @@ private:
 
     std::atomic<CHAOS_IL2CPP_UINT64> total_allocated_bytes_{0};
 
-    mutable std::mutex mutex_;
+    mutable GcSpinLock mutex_;    // alertable spinlock (replaces std::mutex)
 
     // O(1) index: region id → region_table_ slot number.
     CHAOS_IL2CPP_UNORDERED_DENSE_MAP(RegionId, CHAOS_IL2CPP_INT32) region_index_;
