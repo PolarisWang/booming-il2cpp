@@ -19,6 +19,8 @@ CHAOS_IL2CPP_INT16     ChaosConvertToInt16(CHAOS_IL2CPP_INTPTR str) noexcept;
 CHAOS_IL2CPP_INT32     ChaosConvertToInt32(CHAOS_IL2CPP_INTPTR str) noexcept;
 CHAOS_IL2CPP_INT64     ChaosConvertToInt64(CHAOS_IL2CPP_INTPTR str) noexcept;
 float                  ChaosConvertToSingle(CHAOS_IL2CPP_INTPTR str) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosConvertChangeType(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 typeCode) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosConvertChangeTypeWithProvider(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 typeCode, CHAOS_IL2CPP_INTPTR provider) noexcept;
 
 // ── Parse string to primitive ──────────────────────────────────────
 // Direct parse entry points for Int32.Parse, Int64.Parse, Double.Parse.
