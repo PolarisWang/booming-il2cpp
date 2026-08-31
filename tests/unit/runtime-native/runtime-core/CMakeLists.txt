@@ -242,6 +242,13 @@ chaos_native_add_test(convert_parse_test convert_parse_test.cpp
     LABELS "unit;core"
 )
 
+# T3-5b: semantic edge tests — 防线 3: detect stub-0 masking with non-default inputs
+# Tests ChaosConvertChangeType, ChaosSpanInt32ToArray with real boxed values.
+include_directories("${CHAOS_CMAKE_ROOT}/artifacts/presets/windows-x64-reference/_deps/googletest-src/googletest/include")
+chaos_native_add_test(semantic_edge_test semantic_edge_test.cpp
+    LABELS "unit;core"
+)
+
 # T3-6: native_library + static_var_store audit tests
 # Compile static_var_store.cpp from source to test against current implementation.
 # native_library functions resolve from the prebuilt lib (CHAOS_COMMON_TEST_LIBS).

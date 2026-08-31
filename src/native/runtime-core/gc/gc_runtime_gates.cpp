@@ -32,9 +32,13 @@ void ApplyGcRuntimeGates(GcRuntimeGates gates) noexcept {
         gates.bgc_enabled ? 1 : 0, gates.low_mem_monitor_enabled ? 1 : 0);
 }
 
-bool GcStartupVitalityCheck(std::chrono::nanoseconds budget, bool* out_healthy) noexcept {
+bool GcStartupVitalityCheck(std::chrono::nanoseconds budget,
+                            std::chrono::nanoseconds stall_threshold,
+                            GcStartupVitality* out_vitality) noexcept {
     using clock = std::chrono::steady_clock;
     auto start = clock::now();
+
+    if (out_vitality) *out_vitality = GcStartupVitality::kHealthy;
 
     // In pure AOT mode there is no other background thread that can acknowledge
     // the safepoint handshake (no JIT/interpreter worker threads, single-thread
@@ -42,11 +46,8 @@ bool GcStartupVitalityCheck(std::chrono::nanoseconds budget, bool* out_healthy) 
     // timeout and produce a false negative (spurious "startup coordination
     // regression" warning).  Skip the check in AOT-only mode; report healthy.
     if (GetRuntimeMode() == RuntimeMode::Aot) {
-        if (out_healthy) *out_healthy = true;
         return true;
     }
-
-    if (out_healthy) *out_healthy = true;
 
     // Perform a single safepoint round-trip with an overall wall-clock budget.
     // RequestGlobalSafepoint already self-bounds via its internal 100ms/500ms
@@ -57,19 +58,39 @@ bool GcStartupVitalityCheck(std::chrono::nanoseconds budget, bool* out_healthy) 
     threading::ReleaseGlobalSafepoint(epoch);
 
     auto elapsed = clock::now() - start;
-    bool healthy = (elapsed <= budget);
-    if (out_healthy) *out_healthy = healthy;
 
-    if (!healthy) {
-        CHAOS_IL2CPP_LOG_ERROR_M("GcGates",
-            "startup GC-vitality self-check SLOW/stalled: safepoint round-trip took {0}ms "
-            "(budget {1}ms). Indicates a background thread failed to ack promptly; "
-            "the hard-timeout conservative scan prevented a hang but signals a "
-            "startup coordination regression.",
+    GcStartupVitality vitality;
+    if (elapsed <= budget) {
+        vitality = GcStartupVitality::kHealthy;
+    } else if (elapsed <= stall_threshold) {
+        // Over budget but returned within the hard-timeout window — a transient
+        // scheduling hiccup that converged.  Log a warning; keep running.
+        vitality = GcStartupVitality::kSlowButConverged;
+        CHAOS_IL2CPP_LOG_WARN_M("GcGates",
+            "startup GC-vitality self-check slow: safepoint round-trip took {0}ms "
+            "(budget {1}ms). BGC concurrency may be momentarily degraded; "
+            "the hard-timeout conservative scan prevented a hang.",
             static_cast<long long>(std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count()),
             static_cast<long long>(std::chrono::duration_cast<std::chrono::milliseconds>(budget).count()));
+    } else {
+        // Exceeded the hard-timeout window (stall_threshold) — a genuine
+        // coordination stall that forced a conservative-scan release.  Treat as
+        // a real startup failure.
+        vitality = GcStartupVitality::kStalled;
+        CHAOS_IL2CPP_LOG_ERROR_M("GcGates",
+            "startup GC-vitality self-check STALLED: safepoint round-trip took {0}ms "
+            "(budget {1}ms, hard-timeout {2}ms). A background thread failed to ack; "
+            "the conservative scan forced a release — this is a startup "
+            "coordination regression, not a transient delay.",
+            static_cast<long long>(std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count()),
+            static_cast<long long>(std::chrono::duration_cast<std::chrono::milliseconds>(budget).count()),
+            static_cast<long long>(std::chrono::duration_cast<std::chrono::milliseconds>(stall_threshold).count()));
     }
-    return healthy;
+
+    if (out_vitality) *out_vitality = vitality;
+    // Return false ONLY on a genuine stall (kStalled); kSlowButConverged is
+    // still a "converged" outcome so callers can decide to proceed.
+    return vitality != GcStartupVitality::kStalled;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

@@ -62,29 +62,48 @@ struct GcRuntimeGates {
 /// call more than once; the last call wins (idempotent to a single profile).
 void ApplyGcRuntimeGates(GcRuntimeGates gates) noexcept;
 
+/// Outcome of the startup GC-vitality self-check, distinguishing a brief
+/// scheduling hiccup from a genuine coordination stall so the caller can choose
+/// an appropriate action (WARNING vs FATAL).
+enum class GcStartupVitality : uint8_t {
+    /// Safepoint round-trip completed within the budget — healthy.
+    kHealthy = 0,
+    /// Round-trip exceeded the budget but still returned (the internal 100ms
+    /// alertable-pause then hard-timeout conservative scan let it converge).
+    /// A transient scheduling delay — log a warning, keep running.
+    kSlowButConverged = 1,
+    /// Round-trip hit the hard-timeout window (>500ms, i.e. the conservative
+    /// scan had to force-release a non-acking thread).  This is a real
+    /// coordination stall indicator — treat as a startup failure unless the
+    /// caller has a documented reason to proceed degraded.
+    kStalled = 2,
+};
+
 /// Perform a bounded startup GC-vitality self-check.
 ///
 /// After RuntimeInit() has started the BGC thread (when enabled), this performs
 /// a single global-safepoint round-trip with a wall-clock budget and reports
-/// whether the collector reached a quiescent point within budget.  If it stalls
-/// (e.g. a background thread fails to ack, forcing a hard-timeout conservative
-/// scan), it logs a clear diagnostic and — when @a out_healthy is non-null —
-/// reports false so the caller can decide whether to fall back.
+/// the outcome via @a out_vitality (see GcStartupVitality).  In AOT-only mode
+/// there is no other managed thread to ack, so the check is skipped and reports
+/// kHealthy (return true).
 ///
-/// NOTE: This safepoint handshake requires at least one other managed thread to
-/// ack.  In AOT-only mode (no JIT/interpreter background threads, single-thread
-/// startup), there is no other thread to respond — the call will always hit the
-/// internal 100ms timeout and produce a false negative.  Callers MUST check
-/// whether the runtime is in AOT-only mode before calling this function, or
-/// skip the check entirely.  A helper is provided below.
+/// @param budget     Wall-clock budget for a "healthy" round-trip.
+/// @param threshold  Elapsed time above which a returned-but-slow handshake is
+///                   classified as kStalled rather than kSlowButConverged.
+///                   Typical value: 500ms (matches kSafepointHardTimeoutNs).
+/// @param out_vitality  Receives the outcome; may be nullptr.
+/// @return true      If a safepoint was acquired+released (kHealthy or
+///                   kSlowButConverged); false only on kStalled (a genuine
+///                   coordination stall).
 ///
 /// Rationale: the historical app_main hardcode disabled BGC entirely to dodge a
 /// "safepoint hang".  That masked the root cause.  Removing the hardcode and
 /// enabling BGC by default is only sound if a stall is (a) bounded and (b)
 /// surfaced, not silently dead.  This check makes the health of the startup
 /// safepoint an observable, runtime-verifiable fact rather than an assumption.
-/// Returns true if a safepoint was acquired+released within budget.
-bool GcStartupVitalityCheck(std::chrono::nanoseconds budget, bool* out_healthy = nullptr) noexcept;
+bool GcStartupVitalityCheck(std::chrono::nanoseconds budget,
+                            std::chrono::nanoseconds stall_threshold,
+                            GcStartupVitality* out_vitality = nullptr) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

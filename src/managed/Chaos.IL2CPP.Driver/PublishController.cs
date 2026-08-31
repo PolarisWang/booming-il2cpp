@@ -275,6 +275,11 @@ internal static class PublishController
 #include <chaos_runtime_host.h>
 #include <chaos_generated_module.h>
 
+// Forward-declare the low-memory monitor for explicit teardown before exit.
+// gc_low_mem.h is not in the SDK include/ tree so we use a minimal forward
+// decl instead of pulling in the full header (which depends on <thread>).
+namespace chaos::il2cpp::runtime_core {{ class GcLowMemoryMonitor; extern GcLowMemoryMonitor g_low_memory_monitor; }}
+
 // Declare the GC runtime gates control surface (gc_runtime_gates.h).  The app
 // entrypoint declares its intent via GcRuntimeProfile and the runtime applies
 // the corresponding feature gates.  kDefault enables the full GC feature set
@@ -289,9 +294,6 @@ int main(int argc, char* argv[])
     // Declare this process as a production application: keep BGC concurrent
     // collection enabled (the startup safepoint hang is fixed by the
     // ScopedPreemptiveMode RAII guard in the runtime-core).
-    // The low-memory monitor is disabled because its shutdown-triggered GC
-    // safepoint can hang on rapid exit (a known pre-existing runtime issue;
-    // tracked separately).
     chaos::il2cpp::runtime_core::ApplyGcRuntimeGates(
         chaos::il2cpp::runtime_core::GcRuntimeGates::For(
             chaos::il2cpp::runtime_core::GcRuntimeProfile::kDefault));
@@ -311,25 +313,32 @@ int main(int argc, char* argv[])
         return 1;
     }}
 
-    // Post-init GC vitality self-check: verify the BGC thread (now running in
-    // non-AOT mode) can complete a safepoint handshake within budget.  In AOT-only
-    // mode the check is skipped internally (returns healthy) because there is no
-    // other managed thread to ack.  If a genuine (non-AOT) handshake stall is
-    // observed, fail the startup explicitly — NOT a swallowed warning — so a real
-    // GC coordination regression can never masquerade as a successful start.
-    // NOTE: a slow-but-converging BGC safepoint handshake is a warning, not a
-    // fatal error: scheduling delays in the running system can cause a transient
-    // slowdown that still converges within the hard-timeout bounds.  Failures
-    // are surfaced via the log (GcGates) and the diagnostic message below, but
-    // do not abort the process — the hard-timeout conservative scan inside
-    // RequestGlobalSafepoint already prevents a hang.
-    bool healthy = true;
-    chaos::il2cpp::runtime_core::GcStartupVitalityCheck(
-        std::chrono::seconds(1), &healthy);
-    if (!healthy)
+    // Post-init GC vitality self-check: distinguish a transient slow handshake
+    // from a genuine stall via the three-level outcome.
+    //   kHealthy          → nothing to report.
+    //   kSlowButConverged → WARNING (kept running): a scheduling hiccup that
+    //                        still converged; the internal hard-timeout
+    //                        conservative scan prevented a hang.
+    //   kStalled          → FATAL (abort startup): a real coordination regression
+    //                       never swallowed — return 1 so a broken GC can not
+    //                       masquerade as a successful start.
     {{
-        std::fprintf(stderr, ""[app_main] WARNING: GC startup safepoint handshake was slow; ""
-                              ""BGC concurrency may be degraded.  Check the GcGates log.\n"");
+        auto vitality = chaos::il2cpp::runtime_core::GcStartupVitality::kHealthy;
+        bool ok = chaos::il2cpp::runtime_core::GcStartupVitalityCheck(
+            std::chrono::seconds(1),
+            std::chrono::milliseconds(500),
+            &vitality);
+        if (!ok)
+        {{
+            std::fprintf(stderr, ""[app_main] FATAL: GC startup safepoint handshake STALLED; ""
+                                  ""a background thread failed to ack.  Check the GcGates log.\n"");
+            return 1;
+        }}
+        else if (vitality == chaos::il2cpp::runtime_core::GcStartupVitality::kSlowButConverged)
+        {{
+            std::fprintf(stderr, ""[app_main] WARNING: GC startup safepoint handshake was slow; ""
+                                  ""BGC concurrency may be degraded.  Check the GcGates log.\n"");
+        }}
     }}
 
     // Run static constructors (.cctor) for all types in the module so that
@@ -341,11 +350,14 @@ int main(int argc, char* argv[])
     // Main(string[]) — pass an empty managed string array (not NULL) so the
     // callee can safely read args.Length / args[0] without crashing on a null
     // pointer dereference.
-    // as a single allocation with Length=0; the helper below constructs one.
-    // (If the runtime does not export CreateEmptyStringArray, the gcroot-alloc
-    // fallback is generated inline.)
     // TODO: wire CHAOS_IL2CPP runtime helper for empty array creation.
     int result = {proxyCall};
+
+    // Stop the low-memory monitor BEFORE the host destructor runs Shutdown().
+    // The monitor thread may be blocked on PalLowMemWait() and triggering a GC
+    // safepoint during shutdown causes a hang.  Stopping the monitor first
+    // (via the public API) ensures a clean teardown.
+    chaos::il2cpp::runtime_core::g_low_memory_monitor.Stop();
 
     // host destructor calls Shutdown() automatically.
     return result;
@@ -816,7 +828,7 @@ target_link_options(chaos_entry PRIVATE
             configTier = config.ConfigTier,
             entryExe = entryExe != null ? Path.GetFullPath(entryExe) : null,
             toolVersion = "0.1.0",
-            sdkPreset = "windows-x64-reference",
+            sdkPreset = ResolveSdkPreset(),
             status = entryExe != null ? "ok" : "source-only",
             timestamp = DateTime.UtcNow.ToString("O"),
         };
@@ -824,5 +836,33 @@ target_link_options(chaos_entry PRIVATE
         var manifestPath = Path.Combine(outputDir, "publish.manifest.json");
         File.WriteAllText(manifestPath, JsonSerializer.Serialize(manifest, JsonOptions));
         Console.WriteLine($"  publish.manifest.json: {manifestPath}");
+    }
+
+    /// <summary>
+    /// Resolve the SDK preset identifier for the current host platform+architecture.
+    /// Mirrors ConvertService.ResolveNativePreset so the publish manifest's sdkPreset
+    /// matches the actual preset that was linked (not a hardcoded Windows value).
+    /// </summary>
+    private static string ResolveSdkPreset()
+    {
+        var isWindows = System.Runtime.InteropServices.RuntimeInformation
+            .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+        var arch = System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture
+            .ToString().ToLowerInvariant();
+        if (isWindows)
+            return "windows-x64-reference";
+        if (System.Runtime.InteropServices.RuntimeInformation
+                .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux) &&
+            arch == "x64")
+            return "linux-x64-profile";
+        if (System.Runtime.InteropServices.RuntimeInformation
+                .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux) &&
+            arch == "arm64")
+            return "linux-arm64-profile";
+        if (System.Runtime.InteropServices.RuntimeInformation
+                .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX))
+            return arch == "arm64" ? "osx-arm64-profile" : "osx-x64-profile";
+        // Unknown platform — fall back with a clear marker rather than a wrong value.
+        return "unknown";
     }
 }
