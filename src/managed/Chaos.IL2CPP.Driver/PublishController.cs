@@ -239,8 +239,20 @@ internal static class PublishController
 #include <chaos_runtime_host.h>
 #include <chaos_generated_module.h>
 
+// Short-lived app mode: disable background GC + low-memory monitor safepoint
+// contention (same pattern as the verification benchmark harness), so the
+// process starts/stops cleanly.
+namespace chaos::il2cpp::runtime_core {{ extern bool g_bgc_enabled; }}
+namespace chaos::il2cpp::runtime_core {{ extern bool g_low_mem_enabled; }}
+
 int main(int argc, char* argv[])
 {{
+    // Disable BGC and low-memory monitor for this short-lived app process.
+    // Avoids safepoint hangs in the GC coordinator during rapid startup/shutdown
+    // (the benchmark-entry path uses the same g_bgc_enabled flag).
+    chaos::il2cpp::runtime_core::g_bgc_enabled = false;
+    chaos::il2cpp::runtime_core::g_low_mem_enabled = false;
+
     // Initialize the IL2CPP runtime (GC, vtables, hot-update data, registration).
     ChaosRuntimeHost host;
     if (!host.Initialize(""chaos-publish""))
