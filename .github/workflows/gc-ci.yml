@@ -1,24 +1,30 @@
 # gc-ci.yml — GC unit-test CI gate
 #
-# Runs the deterministic GC unit tests in CI.  Two native test trees are
-# covered (see tests/suite_contract.yaml contracts-native-gc for the same
-# regex): the legacy contracts tree (chaos_gc_*) and the GoogleTest tree
-# (test_gc_*).  The A2b cross-gen write-barrier test
-# (chaos_gc_region_barrier_stress_test) is promoted into this fast gate
-# (labels overridden to "unit" in tests/contracts/native/runtime-core/
-# CMakeLists.txt) — it is the highest-value concurrent correctness test and
-# must red the gate if the barrier or the complete validity check regresses.
+# Runs the deterministic GC unit tests in CI, plus per-PR concurrency stress
+# tests at safe lower scale.  Two native test trees are covered (see
+# tests/suite_contract.yaml contracts-native-gc for the same regex): the legacy
+# contracts tree (chaos_gc_*) and the GoogleTest tree (test_gc_*).  The A2b
+# cross-gen write-barrier test (chaos_gc_region_barrier_stress_test) is promoted
+# into this fast gate (labels overridden to "unit" in tests/contracts/native/
+# runtime-core/CMakeLists.txt) — it is the highest-value concurrent correctness
+# test and must red the gate if the barrier or the complete validity check
+# regresses.
 #
-# Only unit-tier tests run here: pressure/benchmark/soak are EXCLUDED via
-# `ctest -LE benchmark|stress|soak` (matches tests/suite_contract.yaml:40 and the
-# native.py adapter).  Pressure tests are a separate nightly tier, not part of
-# this fast unit gate.
+# ── Per-PR concurrency stress ──────────────────────────────────────────────
+# The heavy stress tests (test_gc_general_stress/loh_stress/delegate_stress) are
+# known-fail at the default SCALE=100 (std::mutex architecture limit on Windows).
+# At SCALE=50 they pass deterministically and validate concurrent correctness
+# under load.  A dedicated per-PR step runs them at SCALE=50 so that a
+# concurrency regression (e.g. A2b, BGC-YoungGC deadlock, card-table race) is
+# caught before merging — not deferred to the nightly stress tier.
 #
-# Excluded-by-label here:
+# ── Excluded from the main unit step via `-LE benchmark|stress|soak` ───────
 #   - chaos_gc_bgc_stress_test, chaos_gc_stress_test,
 #     chaos_gc_satb_stress_test, chaos_gc_loh_stress_test,
 #     chaos_gc_oversized_stress_test, chaos_gc_finalizer_stress_test
 #   - chaos_gc_gen1_benchmark (benchmark)
+# These are run explicitly in the per-PR stress step when they have a safe
+# SCALE baseline; the rest remain in the nightly-only gc-stress-nightly.yml tier.
 #
 # Known/slow unit targets included here:
 #   - chaos_gc_bgc_smoke (Test3 BGC-YoungGC root-caused; See gc-ci known note)
@@ -96,6 +102,26 @@ jobs:
             -E "test_gc_young_collector" \
             --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-unit-output.txt
 
+      # ── Per-PR concurrency stress (safe lower scale) ──────────────────────
+      # The heavy stress tests (general/loh/delegate) are known-fail at the
+      # default SCALE=100 (std::mutex architecture limit on Windows; see
+      # known-failures.integration.yaml).  At SCALE<=50 they pass deterministically
+      # and validate concurrent correctness under load.  Run them here per-PR so
+      # that a concurrency regression (e.g. A2b, BGC-YoungGC deadlock, card-table
+      # race) is caught before merging, not deferred to the nightly stress tier.
+      # These are excluded from the main `-LE "benchmark|stress|soak"` run above
+      # via the "stress" label, so they are invoked explicitly here.
+      - name: Run GC concurrency stress tests (SCALE=50, per-PR)
+        shell: bash
+        env:
+          CHAOS_IL2CPP_STRESS_SCALE: "50"
+          CHAOS_GC_HeapVerify: "2"
+        run: |
+          ctest --test-dir artifacts/presets/windows-x64-reference \
+            -C ${{ matrix.config }} \
+            -R "test_gc_general_stress|test_gc_loh_stress|test_gc_delegate_stress" \
+            --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-unit-stress-output.txt
+
       - name: Run young-collector tests (ConservativeSweepSelfRefs excluded from HeapVerify)
         shell: bash
         env:
@@ -117,7 +143,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: gc-unit-output-${{ matrix.config }}
-          path: gc-unit-output.txt
+          path: |
+            gc-unit-output.txt
+            gc-unit-stress-output.txt
 
   # ── Server GC smoke ───────────────────────────────────────────────────────
   # First CI coverage of the CHAOS_IL2CPP_GC_SERVER=ON path (previously default
