@@ -64,6 +64,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterListTIndexOf_1(registry);
             RegisterListTRemove_1(registry);
             RegisterListTRemoveAt(registry);
+            RegisterListTAsReadOnly(registry);
             RegisterSpanTCopyTo(registry);
             RegisterArrayClear(registry);
             RegisterTypeIsAssignableFrom(registry);

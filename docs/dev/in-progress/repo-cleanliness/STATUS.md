@@ -1,10 +1,10 @@
 # Repo-Hygiene Dashboard
 
-> Last run: 2026-08-31T01:25:00Z · overall: **FAIL**
+> Last run: 2026-08-31T02:30:51Z · overall: **PASS**
 
 | check | status | note |
 |-------|--------|------|
-| root-clean | FAIL | [repo-clean] new untracked file at repo root: fact266_review.py �� add to .gitignore, comm |
+| root-clean | PASS | [PASS] repo root is clean |
 | disk-health | PASS | === [repo-clean --disk] ignored-disk usage (surfacing silent accumulation) === |
 | generated-drift | PASS | [PASS] all registered generated files are up to date |
 | completion-audit | PASS | [PASS] no suspected-incomplete functions found |

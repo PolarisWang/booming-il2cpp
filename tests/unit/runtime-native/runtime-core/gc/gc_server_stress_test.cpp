@@ -22,6 +22,7 @@
 #include "gc_coordinator.h"
 #include "gc_test_base.h"
 #include "gc_heap_manager.h"
+#include "gc_loh.h"  // kLohThreshold, G_Loh()
 
 #include <gtest/gtest.h>
 
@@ -149,4 +150,41 @@ TEST_F(GcServerStressTest, LargeObjectAcrossHeaps) {
     for (auto& th : pool) th.join();
 
     EXPECT_EQ(alloc_fails.load(), 0) << "Server stress: LOH alloc failed";
+}
+
+// ── Large-Object Heap concurrent allocation (Server-GC global LOH) ──────
+// The LOH is a process-wide singleton (g_loh) guarded by its OWN mutex
+// (gc_loh.cpp:127), independent of the old-gen std::mutex.  Under Server GC
+// multiple mutators allocate to the shared LOH concurrently; this exercises
+// that path's serialization + segment lifecycle without the old-gen
+// non-alertable-mutex deadlock window.  SCALE capped because the global LOH
+// single-mutex is the same non-alertable primitive at extreme concurrency.
+TEST_F(GcServerStressTest, LohConcurrentAlloc) {
+    const int scale = GetStressScale();
+    const int threads = kServerStressThreads * scale / 50;
+    const int allocs  = (kServerStressAllocs * scale / 50) / 2;
+    std::printf("[ServerStress] LohConcurrentAlloc threads=%d allocs=%d\n", threads, allocs);
+    std::atomic<int> alloc_fails{0};
+    constexpr size_t kLohSize[] = { 96 * 1024, 128 * 1024, 96 * 1024, 256 * 1024 };
+
+    auto worker = [&]() {
+        threading::RegisterThread(threading::AllocateThreadId(), nullptr);
+        threading::EnterCooperativeMode();
+        SetThreadHeap();
+        for (int i = 0; i < allocs; i++) {
+            size_t size = kLohSize[i % 4];
+            void* p = G_Loh().Allocate(size);
+            if (p == nullptr) { alloc_fails.fetch_add(1); break; }
+            std::memset(p, 0x8C, size);
+            threading::SafepointPoll();
+        }
+        ClearThreadHeap();
+        threading::UnregisterThread();
+    };
+
+    std::vector<std::thread> pool;
+    for (int t = 0; t < threads; t++) pool.emplace_back(worker);
+    for (auto& th : pool) th.join();
+
+    EXPECT_EQ(alloc_fails.load(), 0) << "Server stress: LOH concurrent alloc failed";
 }

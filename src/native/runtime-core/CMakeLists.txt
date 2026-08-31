@@ -173,6 +173,8 @@ add_library(chaos_runtime_core STATIC
     gc/gc_bgc.h
     gc/gc_bgc.cpp
     gc/gc_bgc_inline.h
+    gc/gc_runtime_gates.h
+    gc/gc_runtime_gates.cpp
     gc/gc_api.h
     gc/gc_api.cpp
     gc/gc_coordinator.h

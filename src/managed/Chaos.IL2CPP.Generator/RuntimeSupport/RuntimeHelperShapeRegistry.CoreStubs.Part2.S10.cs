@@ -172,5 +172,33 @@ public sealed partial class NativeAotLoweringPlanner
 
         }
 
+        /// <summary>
+        /// List<T>::AsReadOnly — returns the list itself cast to the read-only
+        /// collection. ReadOnlyCollection wraps the same List; since the runtime
+        /// represents both by the same backing array (at +8 field offset), returning
+        /// the list pointer keeps iteration (string.Join, foreach) working.
+        /// </summary>
+        private static void RegisterListTAsReadOnly(RuntimeHelperShapeRegistry registry)
+        {
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.List",
+                MethodName: "AsReadOnly",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    return chaos_arg_0;",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        new HashSet<int> { 0 });
+                }));
+
+        }
+
     }
 }
