@@ -34,7 +34,8 @@ public sealed class TestEmitter
         string typeNamespace,
         IReadOnlyList<MethodSignature> methods,
         IReadOnlyList<IReadOnlyList<ValueSet>> allValueSets,
-        IReadOnlyList<ProbeResult> probeResults)
+        IReadOnlyList<ProbeResult> probeResults,
+        IReadOnlySet<string>? net10OnlyMethods = null)
     {
         // Use typeFullName directly (not MapToCSharpType) to preserve the parent type
         // prefix for nested types. MapToCSharpType strips the namespace via KeywordMap,
@@ -148,6 +149,15 @@ public sealed class TestEmitter
                     SanitizeIdentifier(CSharpSerializer.MapToCSharpType(p.TypeName))));
                 var methodSuffix = $"{SanitizeIdentifier(method.Name)}_{mi}_{paramSuffix}_{set.SetIndex}";
 
+                // B4: net10-only methods (present in net10's System.Private.CoreLib
+                // but absent from net8's) are wrapped in #if NET10_0 so the combined
+                // subjects compile for BOTH net8.0 and net10.0.  Only the [Fact]/
+                // [HotUpdate] and [Benchmark] bodies are guarded; the type and class
+                // scaffolding stay unconditioned.
+                var isNet10Only = net10OnlyMethods is not null && net10OnlyMethods.Contains(method.Name);
+                if (isNet10Only)
+                    sb.AppendLine("        #if NET10_0");
+
                 // Build arg list with variable declarations for out/ref
                 var prelude = new List<string>();
                 var finalArgs = new List<string>();
@@ -258,6 +268,9 @@ public sealed class TestEmitter
                         sb.AppendLine($"            _ = {benchCall};");
                     sb.AppendLine("        }");
                 }
+
+                if (isNet10Only)
+                    sb.AppendLine("        #endif");
             }
         }
 

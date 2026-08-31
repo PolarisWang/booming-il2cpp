@@ -24,6 +24,16 @@ from verification._path import results_base
 
 _RESULTS_BASE = results_base()
 
+# Benchmark timing resolution floor (ms). The managed runner times each
+# iteration with DateTime.UtcNow.Ticks (~100ns resolution, but batches of the
+# fastest methods land at ~1e-5 ms/iteration after division). When the baseline
+# (net8/net10) per-iteration cost is at or below this floor, it is
+# indistinguishable from timer noise and the speed ratio (baseline - tech)/
+# baseline explodes into the thousands of percent. Such methods are excluded
+# from the pct aggregate (status=below_measurement_floor) instead of corrupting
+# the report with meaningless -19565% figures.
+_MEASUREMENT_FLOOR_MS = 0.00001
+
 
 def _median(sorted_vals: list[float]) -> float:
     n = len(sorted_vals)
@@ -198,6 +208,14 @@ def _build_method_comparison(
         chaos_aot_ms = _get_elapsed(techs.get("chaos-aot"))
         chaos_jit_ms = _get_elapsed(techs.get("chaos-jit"))
 
+        # Measurement-floor guard: when the baseline (net8/net10) elapsed is at
+        # or below the timing resolution (DateTime.UtcNow.Ticks floor, ~1e-5 ms
+        # per sample), the per-iteration cost is too small to measure and the
+        # ratio (net8 - tech)/net8 explodes to tens of thousands of percent.
+        # Such methods are marked below_measurement_floor and EXCLUDED from the
+        # pct aggregate rather than polluting it with a meaningless -19565%.
+        below_floor = (net8_ms is not None and 0 < net8_ms <= _MEASUREMENT_FLOOR_MS)
+
         # Coverage-asymmetry bookkeeping (for the harness diagnostic).
         if chaos_aot_ms is not None:
             method_aot_covered += 1
@@ -214,34 +232,45 @@ def _build_method_comparison(
             "chaosJitMs": chaos_jit_ms,
             "net8Error": net8_error,
             "highVariance": net8_high_var,
+            "belowMeasurementFloor": below_floor,
         }
 
         if net8_ms and net8_ms > 0 and not net8_error:
-            method_entry["net10VsNet8Pct"] = _compute_pct(net8_ms, net10_ms)
-            method_entry["chaosAotVsNet8Pct"] = _compute_pct(net8_ms, chaos_aot_ms)
-            method_entry["chaosJitVsNet8Pct"] = _compute_pct(net8_ms, chaos_jit_ms)
-            method_entry["status"] = "completed"
-            total_with_net8 += 1
+            if below_floor:
+                # Baseline indistinguishable from timer noise — can't compute a
+                # meaningful ratio. Keep the timing fields but mark the method
+                # below_measurement_floor and skip the pct aggregate (avoids the
+                # -19565% explosion from dividing by ~1e-5 ms).
+                method_entry["status"] = "below_measurement_floor"
+                method_entry["net10VsNet8Pct"] = None
+                method_entry["chaosAotVsNet8Pct"] = None
+                method_entry["chaosJitVsNet8Pct"] = None
+            else:
+                method_entry["net10VsNet8Pct"] = _compute_pct(net8_ms, net10_ms)
+                method_entry["chaosAotVsNet8Pct"] = _compute_pct(net8_ms, chaos_aot_ms)
+                method_entry["chaosJitVsNet8Pct"] = _compute_pct(net8_ms, chaos_jit_ms)
+                method_entry["status"] = "completed"
+                total_with_net8 += 1
 
-            # ── Bottleneck classification (time-based only; alloc_hot/gc_pause
-            #    are added after gc_comp is computed, see below) ──
-            method_entry["bottleneck"] = _classify_bottleneck(
-                chaos_aot_ms=chaos_aot_ms, net8_ms=net8_ms,
-                high_variance=net8_high_var)
+                # ── Bottleneck classification (time-based only; alloc_hot/gc_pause
+                #    are added after gc_comp is computed, see below) ──
+                method_entry["bottleneck"] = _classify_bottleneck(
+                    chaos_aot_ms=chaos_aot_ms, net8_ms=net8_ms,
+                    high_variance=net8_high_var)
 
-            pct = method_entry.get("chaosAotVsNet8Pct")
-            if pct is not None:
-                all_chaos_aot_pcts.append(pct)
-                if pct > 0:
-                    total_better_than_net8 += 1
+                pct = method_entry.get("chaosAotVsNet8Pct")
+                if pct is not None:
+                    all_chaos_aot_pcts.append(pct)
+                    if pct > 0:
+                        total_better_than_net8 += 1
 
-            pct_jit = method_entry.get("chaosJitVsNet8Pct")
-            if pct_jit is not None:
-                all_chaos_jit_pcts.append(pct_jit)
+                pct_jit = method_entry.get("chaosJitVsNet8Pct")
+                if pct_jit is not None:
+                    all_chaos_jit_pcts.append(pct_jit)
 
-            pct_net10 = method_entry.get("net10VsNet8Pct")
-            if pct_net10 is not None:
-                all_net10_pcts.append(pct_net10)
+                pct_net10 = method_entry.get("net10VsNet8Pct")
+                if pct_net10 is not None:
+                    all_net10_pcts.append(pct_net10)
 
         else:
             method_entry.update({

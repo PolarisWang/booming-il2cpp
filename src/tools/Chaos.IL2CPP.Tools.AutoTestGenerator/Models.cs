@@ -5,6 +5,16 @@ using System.Reflection.PortableExecutable;
 
 namespace Chaos.IL2CPP.Tools.AutoTestGenerator;
 
+/// <summary>Bitmask of target frameworks a method is available in.</summary>
+[Flags]
+public enum TfmMask
+{
+    None = 0,
+    Net8 = 1,
+    Net10 = 2,
+    Both = Net8 | Net10,
+}
+
 public sealed record MethodParameter(
     string Name,
     string TypeName,

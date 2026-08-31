@@ -89,13 +89,28 @@ _NET8_REPLACEMENTS = [
 ]
 
 # Benchmark methods using these APIs crash at runtime (stack overflow / buffer
-# overrun / null-pointer deref) and must be excluded from managed benchmarks.
+# overrun / null-pointer deref) or THROW on real .NET (default(this).Method()
+# auto-generated probes on null/uninit objects), and must be excluded from
+# managed benchmarks.
 _UNSAFE_BENCHMARK_PATTERNS: list[str] = [
     "StoreUnsafe",                     # writes 32B vector past a 4B stack slot — STATUS_ACCESS_VIOLATION
-    "ArgIterator",                     # System.ArgIterator.GetNextArgType() — Internal CLR error (0x80131506)
+    "GetNextArgType",                  # System.ArgIterator.GetNextArgType() — Internal CLR error (0x80131506)
     "RuntimeHelpers.CreateSpan",       # .NET runtime bug — CLR crash on all TFMs
     "Environment.Exit",                # Environment.Exit(N) terminates the runner process immediately
     "Environment.FailFast",            # Environment.FailFast terminates the runner process immediately
+    "Environment.GetEnvironmentVariable",  # per-process, non-deterministic; probes throw on default target
+    "Environment.SetEnvironmentVariable",  # mutates OS env — side-effect hazard across benchmark TFs
+    "Environment.ExpandEnvironmentVariables",  # probes throw on default(null) input
+    "GetHexString",                    # Random.GetHexString — net9+; throws on net8/absent API
+    "NextInt64",                       # Random.NextInt64(long) — probes throw on default boundaries
+    "NextSingle",                      # Random.NextSingle() — probes throw on default state
+    "AggregateException.GetBaseException",   # default(AggregateException) throws NullReference
+    "AggregateException.Handle",             # default(AggregateException) throws NullReference
+    "AggregateException.Flatten",            # default(AggregateException) throws NullReference
+    "System.IntPtr.Parse",             # default(IntPtr).Parse(null) throws ArgumentNull
+    "System.UIntPtr.Parse",            # default(UIntPtr).Parse(null) throws ArgumentNull
+    "System.IntPtr.DivRem",            # default(IntPtr).DivRem — divide-by-zero on default operands
+    "System.UIntPtr.DivRem",           # default(UIntPtr).DivRem — divide-by-zero on default operands
     "Contract.Assert",                 # Contract.Assert(false) triggers FailFast — "Process terminated. Assumption failed."
     "Contract.Assume",                 # Contract.Assume(false) also triggers FailFast
     "Contract.Requires",               # Contract.Requires(false) throws ArgumentException at runtime
@@ -107,11 +122,19 @@ _UNSAFE_BENCHMARK_PATTERNS: list[str] = [
 ]
 
 
-def _remove_unsafe_benchmarks(combined_src: Path) -> bool:
-    """Remove [Benchmark] attributes from methods matching _UNSAFE_BENCHMARK_PATTERNS.
+_DISPATCH_ATTR_PREFIXES = ("[Fact", "[HotUpdate", "[Benchmark")
 
-    The method body stays valid C# so the file still compiles, but the runner
-    won't discover these methods. Returns True if any modifications were made.
+def _remove_unsafe_benchmarks(combined_src: Path) -> bool:
+    """Neutralize dispatch attributes on methods matching _UNSAFE_BENCHMARK_PATTERNS
+    so the runner never dispatches them (they crash / hang / terminate the .NET
+    runtime).
+
+    The Chaos.TestFramework.Runtime runner discovers methods by the [Fact] /
+    [HotUpdate] attributes (BenchmarkRunner.cs:17), NOT [Benchmark]. For each
+    dispatch attribute that sits ABOVE a method-body referencing an unsafe
+    pattern, comment out the attribute line. The method body stays intact so the
+    file still compiles — the method simply has no dispatch attribute and is
+    invisible to the runner. Returns True if any modification was made.
     """
     src_text = combined_src.read_text(encoding="utf-8")
     lines = src_text.splitlines(keepends=True)
@@ -121,18 +144,35 @@ def _remove_unsafe_benchmarks(combined_src: Path) -> bool:
         i = 0
         while i < len(lines):
             stripped = lines[i].strip()
-            if stripped == "[Benchmark]":
-                # Look ahead to see if this benchmark uses the unsafe pattern
-                j = i + 1
-                while j < len(lines) and not lines[j].strip().startswith("["):
-                    if pattern in lines[j]:
-                        # Comment out the [Benchmark] attribute
-                        indent = lines[i][:len(lines[i]) - len(lines[i].lstrip())]
-                        lines[i] = f"{indent}// [SAFE] [Benchmark]\n"
-                        modified = True
-                        print(f"  [managed-benchmark] Removed benchmark using '{pattern}' (line {i + 1})")
-                        break
-                    j += 1
+            # Skip comments and non-dispatch-attribute lines
+            if stripped.startswith(("//", "/*")) or not any(
+                stripped.startswith(p) for p in _DISPATCH_ATTR_PREFIXES
+            ):
+                i += 1
+                continue
+
+            # This line is a dispatch attribute. Find the method signature.
+            sig_idx = i + 1
+            while sig_idx < len(lines):
+                sj = lines[sig_idx].strip()
+                if not sj or sj.startswith("["):
+                    sig_idx += 1
+                    continue
+                if sj.startswith("public ") and "(" in sj:
+                    break
+                sig_idx += 1
+            else:
+                i += 1
+                continue
+
+            # Scan the method body for the unsafe pattern (first 20 lines)
+            body = "".join(lines[sig_idx: min(sig_idx + 20, len(lines))])
+            if pattern in body:
+                indent = lines[i][:len(lines[i]) - len(lines[i].lstrip())]
+                lines[i] = f"{indent}// [SAFE] {lines[i].lstrip()}"
+                modified = True
+                print(f"  [managed-benchmark] Neutralized '{pattern}' dispatch at line {i + 1}")
+
             i += 1
 
     if modified:
