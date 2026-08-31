@@ -464,18 +464,22 @@ public sealed partial class NativeAotLoweringPlanner
                                 return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
                             }));
 
-                        // ── System.Convert.ChangeType(object, TypeCode[, IFormatProvider]) — inline return-0 ──
-                        // The ChangeType default probe asserts Assert.AreEqual(default(object)=null, result).
-                        // A full IConvertible dispatch is not implemented; returning null (0) satisfies
-                        // the null-captured deterministic probe.  Registered as inline (Priority-1) to
-                        // bypass the reference-arg null-guard AND the external dispatch ABI issue.
+                        // ── System.Convert.ChangeType(object, TypeCode[, IFormatProvider]) — inline direct-native ──
+                        // Calls the real native ChaosConvertChangeType, which reads the boxed
+                        // payload at offset 16 and dispatches on TypeCode (Int32/Boolean/String
+                        // real; others throw).  Registered as INLINE (not SimpleForward) to call
+                        // the native directly at the call site — bypassing the external-dispatch
+                        // ABI table that the SimpleForward to the same symbol hit in
+                        // ChangeType_2_0/_3_0 (see commit 9507adbcf).  This is NOT a silent
+                        // null stub: it reaches real IConvertible dispatch for supported types
+                        // and throws for unsupported ones.
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.Convert",
                             MethodName: "ChangeType",
                             Resolver: (callee, paramTypes) =>
                             {
                                 if (paramTypes.Count < 2) return null;
-                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+                                return "ChaosConvertChangeType({0}, {1})";
                             }));
 
                         // ── System.Nullable<T>.GetValueRefOrDefaultRef — inline return ref to the value field ──
