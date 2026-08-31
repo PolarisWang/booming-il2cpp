@@ -6,6 +6,7 @@
 #include <chaos/pal/pal_sync.h>
 #include <chaos/pal/pal_thread.h>
 #include <chaos/pal/pal_preempt.h>
+#include <chaos/pal/pal_suspend.h>  // A3: PalSuspendThread / PalResumeThread / PalGetThreadContext
 
 #include "gc_region.h"
 #include "gc/gc_suspend_trampoline.h"
@@ -59,6 +60,11 @@ using chaos::il2cpp::pal::PalSetThreadPriority;
 using chaos::il2cpp::pal::PalPreemptInit;
 using chaos::il2cpp::pal::PalPreemptRequest;
 using chaos::il2cpp::pal::PalYield;
+using chaos::il2cpp::pal::PalHardSuspendSupported;
+using chaos::il2cpp::pal::PalSuspendThread;
+using chaos::il2cpp::pal::PalResumeThread;
+using chaos::il2cpp::pal::PalGetThreadContext;
+using chaos::il2cpp::pal::SuspendResult;
 
 // ── T4 frame layout constant (mirrors code_generator.cpp kFrameSize) ─
 // The T4 native prologue establishes:
@@ -633,12 +639,104 @@ extern "C" uint32_t RequestGlobalSafepoint() noexcept {
                                 return true;
                             if (t == tls_this_thread) return true;
                             if (t->suspend_ack.load(std::memory_order_acquire) != s_confirm_epoch) {
+                                // First try the soft preemptive request (APC / SIGUSR2).
                                 if (PalPreemptRequest(t->os_handle, t->os_thread_id, s_confirm_epoch)) {
                                     t->preemptive_suspended.store(true, std::memory_order_release);
                                 } else {
                                     CHAOS_IL2CPP_LOG_WARN_M("Safepoint",
                                         "thread {0} unresponsive, cannot preemptively suspend",
                                         t->managed_id);
+                                }
+                            }
+                            return true;
+                        });
+                    }
+
+                    // ── A3: hard-suspension drive (pal_suspend.h) ─────────────
+                    // After the soft preemptive request (APC/SIGUSR2) has been
+                    // delivered and had time to take effect, threads that are still
+                    // unresponsive are likely stuck in a long cooperative-mode
+                    // native code path that does not poll.  Use PalSuspendThread
+                    // (Windows) / kUnsupported (POSIX → retry PalPreemptRequest) to
+                    // force a context switch and redirect.
+                    //
+                    // This matches CoreCLR's Thread::Hijack (threadsuspend.cpp:~3370):
+                    // SuspendThread → GetThreadContext → redirect → ResumeThread.
+                    // The thread is never scanned while physically suspended.
+                    if (preemptive_attempted && !hard_timeout &&
+                        elapsed_ns >= kSafepointTimeoutNs + 150ULL * 1000000ULL) {
+                        EnumerateThreads([](ManagedThread* t) -> bool {
+                            if (t->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive)
+                                return true;
+                            if (t == tls_this_thread) return true;
+                            if (t->suspend_ack.load(std::memory_order_acquire) != s_confirm_epoch) {
+                                // Forbid-suspend check: if the target thread's
+                                // forbid_suspend_count > 0, skip it — it holds a
+                                // lock we may need.  The soft preemptive request
+                                // (APC/SIGUSR2) may still deliver.
+                                if (t->forbid_suspend_count.load(std::memory_order_acquire) != 0)
+                                    return true;
+
+                                if (PalHardSuspendSupported()) {
+                                    // Step 1: Acquire the forbid-suspend latch
+                                    // ourselves (so no other thread tries to
+                                    // suspend us while we hold the target).
+                                    // (ForbidSuspendThreadHolder is in the
+                                    // threading namespace, same as this file.)
+                                    threading::ForbidSuspendThreadHolder self_forbid;
+
+                                    // Step 2: Suspend the target thread.
+                                    auto result = PalSuspendThread(t->os_handle);
+                                    if (result == SuspendResult::kSuccess ||
+                                        result == SuspendResult::kSuspended) {
+                                        // Step 3: Read the target's IP (for
+                                        // diagnostic / redirect decision).
+                                        uint64_t ip = 0;
+                                        PalGetThreadContext(t->os_handle, &ip, nullptr, nullptr);
+
+                                        // Re-check forbid_suspend_count on the
+                                        // target (CoreCLR pattern: a thread may
+                                        // have entered a critical section between
+                                        // our first check and the suspend).
+                                        if (t->forbid_suspend_count.load(
+                                                std::memory_order_acquire) != 0) {
+                                            PalResumeThread(t->os_handle);
+                                            CHAOS_IL2CPP_LOG_DEBUG_M("Safepoint",
+                                                "A3 suspended thread {0} (IP=0x{1:x}) "
+                                                "but target forbid >0, resuming",
+                                                t->managed_id, ip);
+                                            return true;
+                                        }
+
+                                        // Step 4: Mark the thread as preemptively
+                                        // suspended (the coordinator will skip
+                                        // register-root scanning for it).
+                                        t->preemptive_suspended.store(true,
+                                            std::memory_order_release);
+
+                                        // Step 5: Resume the thread immediately
+                                        // (CoreCLR pattern: never hold a thread
+                                        // physically suspended — OS GetThreadContext
+                                        // is unreliable for root scanning).
+                                        PalResumeThread(t->os_handle);
+
+                                        CHAOS_IL2CPP_LOG_DEBUG_M("Safepoint",
+                                            "A3 hard-suspended thread {0} (IP=0x{1:x})",
+                                            t->managed_id, ip);
+                                    } else if (result == SuspendResult::kForbidden) {
+                                        CHAOS_IL2CPP_LOG_DEBUG_M("Safepoint",
+                                            "A3 cannot suspend thread {0}: forbidden",
+                                            t->managed_id);
+                                    } else {
+                                        CHAOS_IL2CPP_LOG_DEBUG_M("Safepoint",
+                                            "A3 PalSuspendThread failed for thread {0}",
+                                            t->managed_id);
+                                    }
+                                } else {
+                                    // Non-Windows: retry the soft preemptive
+                                    // request (SIGUSR2 trampoline).
+                                    PalPreemptRequest(t->os_handle, t->os_thread_id,
+                                        s_confirm_epoch);
                                 }
                             }
                             return true;
