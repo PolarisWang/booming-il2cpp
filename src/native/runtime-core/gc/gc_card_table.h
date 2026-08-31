@@ -2,6 +2,7 @@
 #define CHAOS_IL2CPP_GC_CARD_TABLE_H_
 
 #include <chaos/native_types.h>
+#include <chaos/compiler_hints.h>  // CHAOS_IL2CPP_FORCEINLINE (LEAF contract)
 
 #include <atomic>
 #include <cstddef>
@@ -108,7 +109,9 @@ inline bool CardBundleTest(uintptr_t bundle_bit) noexcept {
 /// a dirty card's bundle is skipped → cross-gen edge dropped in the
 /// ScanDirtyCards fast-path.  Use a platform atomic Or (CoreCLR
 /// Interlocked::Or / __atomic_fetch_or analog) so no bit is ever lost.
-inline void CardBundleSet(uintptr_t bundle_bit) noexcept {
+/// Marked FORCEINLINE so the compiler does not split it into a separate
+/// call (preserving the LEAF contract of the write-barrier sequence).
+CHAOS_IL2CPP_FORCEINLINE void CardBundleSet(uintptr_t bundle_bit) noexcept {
     if (g_card_bundle == nullptr || bundle_bit >= g_card_bundle_size.load(std::memory_order_relaxed) * 8)
         return;
     uint8_t* byte = &g_card_bundle[bundle_bit >> 3];
@@ -144,7 +147,13 @@ extern uintptr_t g_nursery_range_end;
 /// Mark the card covering @a obj as dirty.
 /// Called from the post-write barrier stub inserted by codegen.
 /// Two-level access: L1[idx / kCardsPerSegment] → L2 bit in words[idx/kCardsPerWord].
-inline void DirtyCard(const void* obj) noexcept {
+///
+/// A3 LEAF contract (T-B3): this MUST be a leaf — no function calls (only
+/// atomic intrinsics), no GC trigger, no allocation, no event wait, so the
+/// compiler can always inline it and produce an atomic code fragment with no
+/// cross-suspend-point.  FORCEINLINE is applied so O2 does not refuse to
+/// inline the growing body (the nursery-skip + L1/L2 access chain).
+CHAOS_IL2CPP_FORCEINLINE void DirtyCard(const void* obj) noexcept {
     uintptr_t addr = reinterpret_cast<uintptr_t>(obj);
     if (addr < g_heap_base) [[unlikely]] {
         return;  // below heap base — not managed memory
