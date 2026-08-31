@@ -7,12 +7,12 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstdlib>
-#include <mutex>
 #include <vector>
 
 #include "gc_card_table.h"
 #include "gc_layout.h"
 #include "gc_mark_bitmap.h"
+#include "gc_lock.h"                 // GcSpinLock, GcSpinLockGuard, ScopedPreemptiveMode
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -351,7 +351,8 @@ public:
     /// of scanning nursery address range (which never contains dirty cards).
     template <typename Fn>
     void ScanDirtyCardsInPages(Fn&& callback) {
-        std::lock_guard<std::mutex> lock(mutex_);
+        ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         for (auto* page = page_list_; page != nullptr; page = page->next) {
             if (!page->in_use.load(std::memory_order_acquire)) continue;
             uintptr_t page_start = reinterpret_cast<uintptr_t>(page->Payload());
@@ -367,7 +368,8 @@ public:
     template <typename Fn>
     void ScanDirtyCardsInPagesBatched(CHAOS_IL2CPP_SIZE* dirty_card_count,
                                        Fn&& callback) {
-        std::lock_guard<std::mutex> lock(mutex_);
+        ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         for (auto* page = page_list_; page != nullptr; page = page->next) {
             if (!page->in_use.load(std::memory_order_acquire)) continue;
             uintptr_t page_start = reinterpret_cast<uintptr_t>(page->Payload());
@@ -413,7 +415,8 @@ public:
     /// collection is in progress.  Used by tests to lock pool recycle/trim
     /// behavior (plan-v6 M3/T5).
     int PoolPageCount() const {
-        std::lock_guard<std::mutex> lock(mutex_);
+        ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         return static_cast<int>(page_pool_.size());
     }
 
@@ -422,7 +425,8 @@ public:
     /// scheduler forces a collection so a sweep trims the pool back to cap and
     /// releases retained physical memory instead of letting it sit idle.
     bool IsPoolOversized() const {
-        std::lock_guard<std::mutex> lock(mutex_);
+        ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         return page_pool_.size() > static_cast<size_t>(kMaxPoolSize);
     }
 
@@ -523,7 +527,7 @@ public:
     OldGenPage* PageList() const { return page_list_; }
 
     /// Return the page list mutex for STW scanning.
-    std::mutex& PageMutex() { return mutex_; }
+    GcSpinLock& PageMutex() { return mutex_; }
 
 private:
 
@@ -660,16 +664,16 @@ public:
     OldGenPage* page_list_ = nullptr;   // singly-linked list of all pages
     int         page_count_ = 0;
 
-    mutable std::mutex mutex_;                  // protects page list + free lists
+    mutable GcSpinLock mutex_;                  // protects page list + free lists (alertable, safepoint-aware)
     std::atomic<CHAOS_IL2CPP_SIZE> total_allocated_{0};
 
     // Auto-init guard: true after Init() completes.
     std::atomic<bool> initialized_{false};
 
-    // Separate mutex for auto-init (Allocate holds init_mutex_, then Init()
+    // Separate GcSpinLock for auto-init (Allocate holds init_mutex_, then Init()
     // calls AllocatePage which internally takes mutex_, so we cannot use
     // mutex_ for the init guard).
-    std::mutex init_mutex_;
+    GcSpinLock init_mutex_;
 
     // Marked-object counter (reset each cycle, used by GcStats).
     std::atomic<uint64_t> marked_count_{0};

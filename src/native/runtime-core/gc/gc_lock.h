@@ -20,15 +20,23 @@
 #include <chaos/native_types.h>      // CHAOS_IL2CPP_PAUSE_HINT
 #include <chaos/pal/pal_thread.h>    // PalYield (SwitchToThread)
 
-namespace chaos::il2cpp::runtime_core::threading {
-void EnterPreemptiveMode() noexcept;
-void EnterCooperativeMode() noexcept;
-}  // namespace chaos::il2cpp::runtime_core::threading
+#include "thread_state.h"            // TrapReturningThreads, EnterPreemptiveMode, EnterCooperativeMode
 
 namespace chaos::il2cpp::runtime_core {
 
-/// Short-critical-section spinlock with bounded pause-then-yield.  Never parks
-/// in a kernel wait; preemptible by the OS scheduler and safepoint handshake.
+/// Short-critical-section spinlock with bounded pause-then-yield, and
+/// CoreCLR-aligned safepoint-aware waiting (WaitLongerNoInstru pattern).
+/// Never parks in a kernel wait; preemptible by the OS scheduler and
+/// safepoint handshake.
+///
+/// == Safepoint-aware spin (CoreCLR WaitLongerNoInstru pattern) ==
+/// Every 1024 spins, the Acquire loop checks TrapReturningThreads().  If a
+/// safepoint is in progress, the thread temporarily switches to preemptive
+/// mode (yielding the safepoint handshake) and yields, then re-enters
+/// cooperative mode and continues spinning.  This prevents a 3-party deadlock
+/// where the safepoint owner waits for this thread's ack, but this thread is
+/// spinning on a lock held by a thread that is waiting for the safepoint to
+/// complete.
 ///
 /// WARNING: NOT REENTRANT.  Acquiring the same GcSpinLock instance from the
 /// same thread (e.g. via a nested call that expects the same lock) will DEADLOCK
@@ -49,6 +57,20 @@ public:
             } else {
                 ::chaos::il2cpp::pal::PalYield();
                 if (++spins > 100000) spins = 0;   // reset counter
+                // CoreCLR WaitLongerNoInstru: periodically check if a
+                // safepoint is in progress.  If so, briefly drop to preemptive
+                // mode so the coordinator can see this thread as preemptive
+                // and not wait for its ack (prevents 3-party deadlock where
+                // the safepoint owner waits for this thread's ack, but this
+                // thread is spinning on a lock held by a thread that is
+                // waiting for the safepoint to complete).
+                if ((spins & 511) == 0) {
+                    if (threading::TrapReturningThreads()) {
+                        threading::EnterPreemptiveMode();
+                        ::chaos::il2cpp::pal::PalYield();
+                        threading::EnterCooperativeMode();
+                    }
+                }
             }
         }
     }

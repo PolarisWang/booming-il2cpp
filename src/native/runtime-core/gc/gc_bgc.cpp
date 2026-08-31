@@ -327,7 +327,8 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
         // while it is gen1-owned (CoreCLR-aligned in-place demotion, GC-N6 #10).
         {
             auto& ctrl = BgcController::Instance();
-            std::lock_guard<std::mutex> lock(G_OldGen().PageMutex());
+            const ScopedPreemptiveMode preempt;
+            GcSpinLockGuard lock(G_OldGen().PageMutex());
             for (auto* page = G_OldGen().PageList(); page != nullptr; page = page->next) {
                 if (!page->in_use.load(std::memory_order_acquire)) continue;
                 for (int32_t i = 0; i < page->demoted_count.load(std::memory_order_acquire); i++) {

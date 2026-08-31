@@ -83,6 +83,12 @@ thread_local int32_t        tls_this_thread_id = kMainThreadId;
 
 thread_local int32_t        tls_forbid_suspend_depth = 0;
 
+/// Ref-counted preemptive-mode depth (CoreCLR preemptive_count analog).
+/// EnterPreemptiveMode bumps, EnterCooperativeMode decrements; only the
+/// outermost transitions flip gc_mode / rendezvous.  Enables safe nesting of
+/// ScopedPreemptiveMode guards and the GcSpinLock safepoint-aware spin loop.
+thread_local int32_t        tls_preemptive_depth = 0;
+
 namespace {
 
 /// Lock-free singly-linked list of all registered ManagedThread entries.
@@ -330,6 +336,15 @@ void EnterCooperativeMode() noexcept {
     auto* thread = tls_this_thread;
     if (thread == nullptr) return;
 
+    // Ref-counted (CoreCLR preemptive_count semantics): EnterPreemptiveMode /
+    // EnterCooperativeMode may nest via ScopedPreemptiveMode guards and the
+    // GcSpinLock safepoint-aware spin (WaitLongerNoInstru).  Only the
+    // OUTERMOST exit (depth transitions to 0) actually switches gc_mode back
+    // to cooperative and participates in a pending safepoint.  Inner exits
+    // (still inside another preemptive region) must NOT rendezvous — doing so
+    // would block the thread that still holds a lock the GC may need.
+    if (--tls_preemptive_depth > 0) return;
+
     // ── A3 Hybrid: returning-thread trap check (DisablePreemptiveGC semantics) ──
     // If a safepoint is in progress (trap set), a thread about to enter
     // cooperative mode must NOT enter managed code mid-GC.  It renders a
@@ -366,8 +381,13 @@ void EnterCooperativeMode() noexcept {
 void EnterPreemptiveMode() noexcept {
     auto* thread = tls_this_thread;
     if (thread == nullptr) return;
-    // Mark as preemptive BEFORE any subsequent SafepointPoll sees the flag.
-    thread->gc_mode.store(kGcModePreemptive, std::memory_order_release);
+    // Ref-counted (CoreCLR preemptive_count): only the FIRST entry flips
+    // gc_mode; nested entries (ScopedPreemptiveMode inside ScopedPreemptiveMode,
+    // or a GcSpinLock spin toggle inside a guard) just bump the depth.
+    if (++tls_preemptive_depth == 1) {
+        // Mark as preemptive BEFORE any subsequent SafepointPoll sees the flag.
+        thread->gc_mode.store(kGcModePreemptive, std::memory_order_release);
+    }
 }
 
 /// C-linkage wrapper for SafepointPoll, called from the assembly trampoline

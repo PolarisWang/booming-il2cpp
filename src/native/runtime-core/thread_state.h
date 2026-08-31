@@ -226,6 +226,7 @@ struct ManagedThread {
 
 extern thread_local ManagedThread* tls_this_thread;
 extern thread_local int32_t        tls_this_thread_id;
+extern thread_local int32_t        tls_preemptive_depth;
 
 /// Set thread state with debug validation.
 /// In PROFILE/SHIP, compiles to a plain assignment.

@@ -264,7 +264,8 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
     // Try to recycle a pooled page first (avoids VirtualAlloc syscall).
     // Prefer a page from the same NUMA node as the current thread.
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         if (!page_pool_.empty()) {
             int current_node = GcNumaNodeCount() > 1 ? GcNumaCurrentNode() : 0;
             CHAOS_IL2CPP_SIZE pool_idx = page_pool_.size() - 1;  // fallback: back
@@ -374,7 +375,8 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
     carve_free_lists(mem, preferred_sc_idx);
     // Link into page list.
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         mem->next = page_list_;
         page_list_ = mem;
         page_count_++;
@@ -698,7 +700,8 @@ bool MarkSweepOldGen::IsMarked(const void* obj) const {
 
 void MarkSweepOldGen::AddToMarkStack(void* obj) {
     if (obj == nullptr) return;
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
     mark_stack_.push_back(obj);
 }
 
@@ -722,7 +725,8 @@ int MarkSweepOldGen::SizeClassIndex(CHAOS_IL2CPP_SIZE size) const {
 void* MarkSweepOldGen::TryAllocateFromFreeLists(CHAOS_IL2CPP_SIZE size, int sc_idx) {
     if (sc_idx < 0) return nullptr;
 
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
 
     // Check the cached last-used page first �� avoids O(n) walk.
     auto* page = last_alloc_page_[sc_idx];
@@ -766,7 +770,8 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     // AllocatePage() which takes mutex_ internally �� using mutex_ here
     // would deadlock (std::mutex is non-recursive).
     if (!initialized_.load(std::memory_order_acquire)) {
-        std::lock_guard<std::mutex> lock(init_mutex_);
+        const ScopedPreemptiveMode preempt_init;
+        GcSpinLockGuard lock(init_mutex_);
         if (!initialized_.load(std::memory_order_acquire)) {
             Init(0, 8);
             initialized_.store(true, std::memory_order_release);
@@ -923,7 +928,8 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     // TryAllocateFromFreeLists walk (which would re-acquire mutex_ and scan
     // the entire page_list_ for an entry we know exists on this new page).
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         if (page->free_lists[sc_idx] != nullptr) {
             auto* block = page->free_lists[sc_idx];
             page->free_lists[sc_idx] = block->next;
@@ -951,7 +957,8 @@ void MarkSweepOldGen::Free(void* ptr) {
     // Oversized pages: unlink from page list and virtual-free immediately.
     // Take the mutex first to protect the FindPage �� page_list_ traversal
     // from concurrent page_list_ mutations during GC Collect().
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
 
     auto* page = FindPage(ptr);
     if (page == nullptr) {
@@ -1015,7 +1022,8 @@ void* MarkSweepOldGen::Reallocate(void* ptr, CHAOS_IL2CPP_SIZE new_size) {
     CHAOS_IL2CPP_SIZE old_size = new_size;
     bool oversized = false;
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         auto* page = FindPage(ptr);
         if (page != nullptr) {
             auto addr = reinterpret_cast<uintptr_t>(ptr);
@@ -1727,7 +1735,8 @@ float MarkSweepOldGen::OverallFragmentation() const {
     // Lightweight estimate: walk the page list, compute weighted average
     // fragmentation.  O(n) at page count (typically hundreds).
     // Uses relaxed loads since caller is at safepoint or GC completion.
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
 
     CHAOS_IL2CPP_SIZE total_payload = 0;
     CHAOS_IL2CPP_SIZE total_free = 0;
@@ -1759,7 +1768,8 @@ float MarkSweepOldGen::OverallFragmentation() const {
 }
 
 MarkSweepOldGen::CompactMode MarkSweepOldGen::DecideCompactMode() {
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
 
     int candidate_pages = 0;
     int total_pages = 0;
@@ -1933,7 +1943,8 @@ void MarkSweepOldGen::RelocatePage(OldGenPage* page, const CompactPlan& plan) {
     uintptr_t page_end = page_start + page->payload_size;
 
     // Walk all old-gen pages to find pointers into this page's objects.
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
     for (auto* src = page_list_; src != nullptr; src = src->next) {
         if (!src->in_use.load(std::memory_order_acquire)) continue;
         char* src_payload = src->Payload();
@@ -2014,7 +2025,8 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::ParallelCompactPages() {
     CHAOS_IL2CPP_SIZE total_live = 0;
     CHAOS_IL2CPP_SIZE total_payload = 0;
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         auto* p = page_list_;
         while (p != nullptr) {
             if (p->in_use.load(std::memory_order_acquire) && !p->is_oversized) {
@@ -2094,7 +2106,8 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::ParallelCompactPages() {
     // Phase 4: Build page array once, relocate all pages' slots in parallel.
     std::vector<OldGenPage*> all_pages;
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         all_pages.reserve(static_cast<size_t>(page_count_));
         for (auto* p = page_list_; p != nullptr; p = p->next) {
             all_pages.push_back(p);
@@ -2636,7 +2649,8 @@ void MarkSweepOldGen::MarkYoungTenuredRange(uintptr_t begin, uintptr_t end) {
     // Mark all pages whose payload overlaps [begin, end) as young_tenured.
     // These pages contain recently-promoted objects from survivor and should
     // be prioritized by BGC sweep.
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
     auto* p = page_list_;
     while (p != nullptr) {
         if (p->in_use.load(std::memory_order_relaxed) && !p->is_oversized) {
@@ -2651,7 +2665,8 @@ void MarkSweepOldGen::MarkYoungTenuredRange(uintptr_t begin, uintptr_t end) {
 }
 
 void MarkSweepOldGen::ClearYoungTenuredFlags() {
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
     auto* p = page_list_;
     while (p != nullptr) {
         p->young_tenured = false;
@@ -2705,7 +2720,8 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // reallocation �� the iterator becomes dangling.
     std::vector<PinnedRoot> pinned_snapshot;
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         pinned_snapshot = pinned_roots_;
     }
 
@@ -2726,7 +2742,8 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // and dependent-handle processing could query IsMarked() after sweep.
     // Now we reset them for a fresh mark pass.
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         int seen = 0;
         for (auto* p = page_list_; p != nullptr; p = p->next) {
             seen++;
@@ -2900,7 +2917,8 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 #else
         std::vector<OldGenPage*> pages;
         {
-            std::lock_guard<std::mutex> lock(mutex_);
+            const ScopedPreemptiveMode preempt;
+            GcSpinLockGuard lock(mutex_);
             pages.reserve(static_cast<size_t>(page_count_));
             auto* p = page_list_;
             int page_idx = 0;
@@ -2987,7 +3005,8 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // (which runs concurrently and benefits from time-slicing).
     CHAOS_IL2CPP_SIZE total_reclaimed = 0;
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         for (auto* page = page_list_; page != nullptr; page = page->next) {
             if (!page->in_use.load(std::memory_order_acquire)) continue;
             total_reclaimed += SweepPage(page);
@@ -2997,7 +3016,8 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     // Phase 4: Free decommissioned pages (oversized pages that were fully garbage).
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
 
 
         OldGenPage** pp = &page_list_;
@@ -3225,7 +3245,8 @@ void MarkSweepOldGen::UnregisterThreadStack() {
 }
 
 void MarkSweepOldGen::AddPinnedRoot(void* addr, CHAOS_IL2CPP_SIZE size) {
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
     pinned_roots_.push_back({addr, size});
 }
 
@@ -3306,7 +3327,8 @@ void MarkSweepOldGen::ScanInPlaceDemotedRoots() {
     // object alive across the full collection; DrainMarkStack closes its
     // transitive graph.  PageList_ is stable under the STW safepoint + the
     // PageMutex held by the caller (Collect's root scan).
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
     for (auto* page = page_list_; page != nullptr; page = page->next) {
         if (!page->in_use.load(std::memory_order_acquire)) continue;
         for (int32_t i = 0; i < page->demoted_count.load(std::memory_order_acquire); i++) {
@@ -3327,7 +3349,8 @@ void MarkSweepOldGen::ScanInPlaceDemotedRoots() {
 void MarkSweepOldGen::RegisterFinalizer(void* obj, void (*finalizer)(void*)) {
     if (obj == nullptr || finalizer == nullptr) return;
 
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
     finalizers_.push_back({obj, finalizer});
     g_gc_stats.finalization_pending_count.fetch_add(1, std::memory_order_relaxed);
 }
@@ -3335,7 +3358,8 @@ void MarkSweepOldGen::RegisterFinalizer(void* obj, void (*finalizer)(void*)) {
 CHAOS_IL2CPP_SIZE MarkSweepOldGen::RunFinalizers() {
     std::vector<FinalizerEntry> to_run;
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         to_run.swap(finalizers_);
         // Reset pending counter; RegisterFinalizer calls below will
         // re-add entries for objects that survived (still reachable).
@@ -3403,7 +3427,8 @@ std::vector<FinalizerEntry> MarkSweepOldGen::CollectDeadFinalizables() {
     std::vector<FinalizerEntry> dead_entries;
     std::vector<FinalizerEntry> live_entries;
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         for (auto& entry : finalizers_) {
             if (entry.finalizer == nullptr) continue;
             // Skip suppressed finalizers.
@@ -3443,7 +3468,8 @@ std::vector<FinalizerEntry> MarkSweepOldGen::CollectDeadFinalizables() {
 // ���� Finalizer suppression support ��������������������������������������������������
 void MarkSweepOldGen::SuppressFinalizer(void* obj) {
     if (obj == nullptr) return;
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
     // Only add if not already suppressed (linear scan �� suppressed set is tiny).
     if (std::find(suppressed_finalizers_.begin(), suppressed_finalizers_.end(),
                   obj) == suppressed_finalizers_.end()) {
@@ -3453,7 +3479,8 @@ void MarkSweepOldGen::SuppressFinalizer(void* obj) {
 
 void MarkSweepOldGen::ReRegisterFinalizer(void* obj) {
     if (obj == nullptr) return;
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(mutex_);
     auto it = std::find(suppressed_finalizers_.begin(), suppressed_finalizers_.end(),
                         obj);
     if (it != suppressed_finalizers_.end()) {
@@ -3491,7 +3518,8 @@ void MarkSweepOldGen::BgcSweep() {
     std::vector<OldGenPage*> pages;
     std::vector<OldGenPage*> young_pages;
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         pages.reserve(static_cast<size_t>(page_count_));
         young_pages.reserve(static_cast<size_t>(page_count_));
         auto* p = page_list_;
@@ -3576,7 +3604,8 @@ void MarkSweepOldGen::BgcSweep() {
     // Defer VirtualFree to BgcCompact (under STW safepoint) where no concurrent
     // readers exist.
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
 
 
         OldGenPage** pp = &page_list_;
@@ -3744,7 +3773,8 @@ void MarkSweepOldGen::BgcCompact() {
     // cycle's BgcTryMark, which uses atomic test-and-set and would
     // incorrectly report stale bits as "already marked".
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         auto* p = page_list_;
         while (p != nullptr) {
             if (p->in_use.load(std::memory_order_acquire)) {
@@ -3760,7 +3790,8 @@ void MarkSweepOldGen::BgcCompact() {
     // by BgcSweep's Phase 4b but deferred to avoid use-after-free through
     // stale page_array_ entries in concurrent mutators.
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(mutex_);
         for (auto* p : deferred_free_pages_) {
             VirtualFreePage(p, p->page_size);
         }

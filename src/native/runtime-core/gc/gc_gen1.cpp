@@ -244,7 +244,8 @@ static void RelocateGen1References(
     // Gen1 object's old address.  (Old-gen pages are the primary cross-gen
     // edge source — an old object referencing a Gen1 survivor.)
     {
-        std::lock_guard<std::mutex> lock(G_OldGen().PageMutex());
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(G_OldGen().PageMutex());
         for (auto* page = G_OldGen().PageList(); page != nullptr; page = page->next) {
             if (!page->in_use.load(std::memory_order_acquire)) continue;
             char* payload = page->Payload();
@@ -927,7 +928,8 @@ Gen1CollectionResult GcGen1Collection() {
             //   Dead demoted (not in live_demoted) -> clear its old-gen mark bits so
             //     a later old-gen sweep reclaims the space; remove from demoted set.
             {
-                std::lock_guard<std::mutex> lock(G_OldGen().PageMutex());
+                const ScopedPreemptiveMode preempt;
+                GcSpinLockGuard lock(G_OldGen().PageMutex());
                 for (auto* page = G_OldGen().PageList(); page != nullptr; page = page->next) {
                     if (!page->in_use.load(std::memory_order_acquire)) continue;
                     // Iterate backwards-safe: DemoteRemove swaps-with-last.

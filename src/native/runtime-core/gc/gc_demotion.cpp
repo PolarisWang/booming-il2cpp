@@ -57,7 +57,8 @@ std::vector<DemotionEntry> CollectDemotionCandidates(
     CHAOS_IL2CPP_SIZE total_demoted = 0;
 
     // Lock the page list for a consistent snapshot.
-    std::lock_guard<std::mutex> lock(old_gen.PageMutex());
+    const ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(old_gen.PageMutex());
 
     for (auto* page = old_gen.PageList(); page != nullptr; page = page->next) {
         if (total_demoted >= max_bytes) break;
@@ -161,7 +162,8 @@ void DemotionRelocate(const std::vector<DemotionEntry>& entries,
 
     // Phase 1: Walk all old-gen pages and update slot pointers.
     {
-        std::lock_guard<std::mutex> lock(old_gen.PageMutex());
+        const ScopedPreemptiveMode preempt;
+        GcSpinLockGuard lock(old_gen.PageMutex());
         for (auto* page = old_gen.PageList(); page != nullptr; page = page->next) {
             if (!page->in_use.load(std::memory_order_acquire)) continue;
             char* payload = page->Payload();
