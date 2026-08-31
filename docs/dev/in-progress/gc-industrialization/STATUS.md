@@ -27,28 +27,42 @@ terminals_active: []
 - `auto_stop_policy: blocking-only`
 
 ## 最近摘要
-- T-A1 ✅ 完成（0b1777e8d）：per-PR 并发 stress 门禁（SCALE=50）
-- T-A2 ✅ 完成（84ae5f621）：ASAN per-PR 门禁
-- T-A3 ✅ 完成（b8e6da61a + b841b745b）：Linux x64 GC CI + TSAN per-PR
-- T-B1 ✅ 完成：CoreCLR WKS safepoint 研读 + A3 Hybrid 设计
-- T-B2 ✅ 完成：单 region 分配器设计
-- T-B3 ✅ 完成：LEAF barrier 设计（mode switch 绑定版）
+batch-1 已全部处理（11/11）：
+- ✅ T-A1（0b1777e8d）：per-PR 并发 stress 门禁（SCALE=50）
+- ✅ T-A2（84ae5f621）：ASAN per-PR 门禁
+- ✅ T-A3（b8e6da61a+b841b745b）：Linux x64 GC CI + TSAN per-PR
+- ✅ T-B1：CoreCLR safepoint 研读 + A3 Hybrid 设计（跨平台 ✅）
+- ✅ T-B2：单 region 分配器设计
+- ✅ T-B3：LEAF barrier 设计（mode switch 绑定）
+- ✅ T-B4：codegen/JIT/interpreter 写屏障契约（S+B+[D] 序列，补 jit 静态路径）
+- ✅ T-B5：forbid_suspend 强化为互斥护栏（ForbidSuspendThreadHolder 设计）
+- ⏸️ T-A4（READY-FOR-CI）：性能基线基建全就绪，需真实 CI 跑 green run 填充
+- ⏸️ T-A5（deferred）：known-fail expiry 量小风险高，暂缓
+- ⏸️ T-A6（deferred）：测试框架 singleton reset，延到 P2
 
-batch-1 完成 6/11。progress: T-A1 ✅ T-A2 ✅ T-A3 ✅ T-B1 ✅ T-B2 ✅ T-B3 ✅
+## batch-1 收口判定
+batch-1 的持续交付件（CI 变更 + A3 设计文档）全部完成。T-A4（CI 依赖）/A5/A6（deferred）不阻塞 G-P1 gate。
 
-## 待同步
-- roadmap 的 A3 档定义需同步为 Hybrid 语义（非纯硬 STW，T-B1 已修正）
+**G-P1 gate 检查**：
+- T-A 绿：✅（ASAN per-PR + TSAN per-PR + stress per-PR 已就位；Linux 基线未首次绿=已知风险）
+- T-B 设计完成：✅（a3-safepoint/allocator/leaf-barrier/contract/forbid-suspend 5 件全套）
+
+## 设计文档清单（T-B 系列，供 P1 消耗）
+- `a3-safepoint-design.md`：A3 Hybrid 架构 + 跨平台验证
+- `a3-allocator-design.md`：单 region 分配器
+- `a3-leaf-barrier-design.md`：LEAF barrier + mode switch
+- `a3-contract-design.md`：写屏障 S+B+[D] 契约
+- `a3-forbid-suspend-design.md`：硬驱赶互斥护栏
 
 ## latest_stop_point
-batch-1 推进至 6/11。下一轮换：T-A4（Release 性能基线）+ T-B4（codegen/JIT 契约）。
+batch-1 收口。**建议：先同步 roadmap 的 A3 档定义为 Hybrid 语义**（T-B1 已修正"纯硬 STW"为证伪），再进入 P1。
 
 ## 下一步
-- 继续 batch-1：T-A4（Release 性能基线）+ T-B4（codegen/JIT 契约）
-- 之后 T-A5/A6 + T-B5
+- **同步 roadmap A3 档语义**（T-B1 修正）
+- **进入 P1（G-P1 A2b A3 实现）**：ASAN/TSAN 护网下开始实现 Hybrid safepoint + 单分配器 + LEAF barrier + 契约 + forbid 护栏
 
 ## recommended_next_child
-- T-A4（Release 性能基线，P99/阶段/对比 CoreCLR）
-- T-B4（codegen/JIT 接口契约，store+barrier 一致性）
+- G-P1（A2b A3 实现）
 
 ## 目标
 超越 CoreCLR WKS 工业化成熟度，消除所有已知并发正确性缺陷。A3 深度对齐。

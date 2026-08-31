@@ -13,9 +13,9 @@
 
 全文使用 A1/A2/A3 表示「对 CoreCLR WKS 的对齐深度」，为避免与正文中的 bug 代号（A2b）混淆，此处显式定义：
 
-- **A1 ｜ 关键段对齐**ｖ：仅对写屏障关键路径 + safepoint 握手采用硬 STW（SuspendThread/GetThreadContext），主体保留现有 handshake 软路径。消除绝大部分 A2b 窗口，接受残余极窄竞态窗口。用于「硬 STW 全线程开销不可接受」时的回退档。
+- **A1 ｜ 关键段对齐**：仅对写屏障关键路径 + safepoint 握手采用硬 STW（SuspendThread/GetThreadContext），主体保留现有 handshake 软路径。消除绝大部分 A2b 窗口，接受残余极窄竞态窗口。用于「硬 STW 全线程开销不可接受」时的回退档。
 - **A2 ｜ 混合对齐**：软路径（rendezvous handshake）为主 + 硬驱动双螺旋兜底，仅对确证需原子的 store+barrier 对切换模式。
-- **A3 ｜ 完全对齐**：硬 STW SuspendThread + GetThreadContext + 单 region 分配器 + LEAF 汇编 barrier + 全链路安全。本路线图默认目标深度。
+- **A3 ｜ 完全对齐**：**Hybrid**（软主路径 + 硬驱赶兜底，**非**全线程物理挂起停留）。全局 trap 标志 + 事件排队（软，主路径），`SuspendThread`（Windows）/ `SIGUSR2`（Linux）仅兜底驱赶，根扫描在 rendezvous 中做（**绝不在挂起态扫描**——CoreCLR 已证伪 OS 寄存器一致性），store+barrier 一致性由 **mode switch 保证**（非原子指令对）。+ 单 region 分配器 + LEAF 汇编 barrier + 全链路安全。本路线图默认目标深度。**修正来源**：T-B1 CoreCLR 源码研究（threadsuspend.cpp:3111）证明「全线程物理挂起停留」是 OS 寄存器不可靠的证伪路径。
 
 > ⚠️ 注意：A2b 是具体并发 bug 代号（cross-gen 写屏障竞态），与深度档 A1/A2/A3 无关。凡提到「A1 深度/A3 深度」均指上表对齐档位。
 
@@ -62,12 +62,12 @@
 
 ### P1 A2b A3 实现
 
-- `goal`: A3 深度对齐落地，结构性消除 A2b
-- `exit_criteria`: `gc_region_barrier_stress_test` 0/1000 挂起；ASAN 满 CI 绿；统一分配器通过全部现有测试；LEAF barrier 通过 barrier 单元测试
-- `deliverables`: 重写后的 safepoint、分配器、barrier 源码
-- `dependencies`: T-A（CI 绿）、T-B（设计完成）
-- `resolved_decisions`: 硬 STW 为主路径；forbid_suspend.h ack-and-continue 废弃
-- `watch_items`: 硬 STW 引入的性能开销是否超预算；Windows APC 捕 JIT 帧的绕行方案是否可行
+- `goal`: A3 Hybrid 深度对齐落地，结构性消除 A2b
+- `exit_criteria`: `gc_region_barrier_stress_test` 0/1000 挂起；ASAN/TSAN 满 CI 绿；统一分配器通过全部现有测试；LEAF barrier 通过 barrier 单元测试；三路写屏障契约统一
+- `deliverables`: 重写后的 safepoint（Hybrid）、分配器、barrier、forbid 互斥护栏源码
+- `dependencies`: T-A（CI 绿）、T-B（设计完成，5 件已齐）
+- `resolved_decisions`: A3 Hybrid 主路径（软 + 硬驱赶兜底，**非**全线程物理挂起）；根扫描在 rendezvous 做；mode switch 保证 store+barrier；forbid_suspend 保留并强化（不废弃）
+- `watch_items`: Hybrid 引入的性能开销；`pal_suspend.h` Windows `SuspendThread` GetThreadContext 识别安全点位置的一致性风险；全局 trap 与现有 epoch 机制是否需统一
 
 ### P2 残余并发 bug 修复
 
