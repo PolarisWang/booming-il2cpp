@@ -11,7 +11,7 @@
     ],
     "owner": "00-skills-maintainers",
     "status": "active",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "startup_visible": false,
     "token_budget": "large",
     "version_history": [
@@ -25,6 +25,12 @@
             "date": "2026-08-31",
             "type": "major",
             "summary": "引入 triager 复杂度分级 + complex 子协议（dev-brainstorm 接入）。不再一刀切'信任 review 直接派发'，complex finding 走深挖根因+多方案权衡+用户裁决后再修。"
+        },
+        {
+            "version": "2.1.0",
+            "date": "2026-08-31",
+            "type": "minor",
+            "summary": "自审修正 8 隐患：消除读代码矛盾(A1a)、triager 自证输出(A2a)、complex 方案约束传递(A3a)、跨域质量终检 checklist(B1)、simple sanity check(C1)。"
         }
     ],
     "evolution_lineage": {

@@ -20,6 +20,14 @@ description: 代码审查结果修复专属入口。按复杂度分级（triager
 
 对每条 review finding，**逐条扫描签名清单**。命中任一 → **complex**（强制走 dev-brainstorm 深挖，不得直接修）。未命中 → **simple**（走快速派发路径）。
 
+> **🔍 triager 自证输出（强制，不可跳过）**：对每条 finding，必须有可追溯的分类依据。格式：
+> ```text
+> finding <id>: complexity=<simple|complex>  signaturesHit=[S1, S2, ...]  (或 [])
+> ```
+> 未命中任何签名也要显式写 `signaturesHit=[]`（证明"扫过签名清单但未命中"，而非"没扫"）。
+> **禁止只有 `complexity=` 没有 `signaturesHit` 的输出** —— 分类必须能解释"为什么是/不是 complex"。
+> 全部 finding 输出完毕后，汇总：`complex_findings=[...]`，`simple_findings=[...]`。
+
 ### 复杂度签名清单（硬编码，禁止主观跳过）
 
 | 序号 | 签名 | 说明与反例 |
@@ -55,9 +63,10 @@ description: 代码审查结果修复专属入口。按复杂度分级（triager
 
 complex finding 收集完毕后，严格按此执行：
 
-### 步骤 1：停止派发
+### 步骤 1：停止派发，允许源码取证
 
-不读取更多文件做"确认性复核"，不开始派发 agent。直接进入根因链分析。
+- **停止**：不开始派发 agent，不进入任何文件的实际修改。
+- **允许**：读源码用于**构建根因链的取证**（如核实布局偏移、AOT/JIT 差异、GC 调用链、git 历史证明根因已修）。这与 simple 路径的"禁 full 复核"不同——这里是"取证"不是"复核每一条 finding"。取证是为画准根因链，不是重新判断该不该修。
 
 ### 步骤 2：画完整根因链
 
@@ -111,6 +120,12 @@ Skill("dev-brainstorm")
 用户批准方案后：
 - 将 complex finding 的"方案已定"状态标记为 simple（执行层面已无分歧）
 - 把该 finding 投入派发池，按原流程（跨域 Workflow 或单域自行实现）修复
+- **🔒 方案约束传递（强制）**：拍板方案不是"参考"，是**强制执行约束**。派发给 agent 时，
+  必须把 dev-brainstorm 收敛的**具体方案 + 用户确认**作为 finding 的一部分附上，
+  并在指令中写明："按此方案修，不得更改方案或自创替代实现"。执行中若发现方案
+  不可行，agent 必须**停下列出新问题→回到用户/主 agent 决策**，不能私自换方案。
+  复杂修复（S3/S4）落地后，执行 agent 需回传"实际改动 vs 拍板方案"的简短对照，
+  由主 agent 抽验一致性。
 - 修复+验证+commit 与原流程一致
 
 > ⚠️ complex finding 修复**必须回填根因链到 commit message** 的 root_cause 段
@@ -119,7 +134,13 @@ Skill("dev-brainstorm")
 
 ## ④ Simple 快速派发路径
 
-simple finding 的 routing 与原有流程一致：
+simple finding 的 routing 与原有流程一致。但即使 simple，也不允许**盲改**：
+
+> **🔍 simple sanity check（强制，一眼而非全读）**：派发 agent 前，先让执行者看一眼
+> 目标代码行（读该 finding 命中的文件/行，确认代码真实存在、位置正确、形态与 review
+> 描述一致）。**不是完整复核**，只是一眼对齐——防止 review 行号过期、函数不存在、
+> 或 review 描述的代码与现状不符时被盲目套用。若一眼发现代码与 review 描述不符，
+> 该 finding 升级为 complex（可能命中 S1 自相矛盾）。
 
 ```
 simple finding 按域分组
@@ -148,12 +169,28 @@ simple finding 按域分组
 - 批处理完后，主 agent 统一做一次跨域质量 review（不要全信子 agent 自述"已修"）
 - **complex finding 不进派发池**：先走 dev-brainstorm 收敛方案并让用户拍板，之后才可作为"方案已定"的 finding 进派发池（简单化执行）
 
+### 跨域质量终检清单（主 agent 收尾时逐项核对，不可略过）
+
+批处理完后，对每一条 finding 逐项确认：
+
+| # | 检查项 | 不过的后果 |
+|---|--------|-----------|
+| 1 | **真实修复**：改了目标代码，且改动与该 finding 的诉求对应（非"改了但没修到点上"） | 假修复 |
+| 2 | **无回归**：跑了 `test_driver.py --layer unit`，无非 known 的 `[FAIL]` | 回归淹没 |
+| 3 | **complex 遵守方案**：complex 修复与 dev-brainstorm 拍板方案一致（对照实际改动 vs 方案） | 方案被推翻 |
+| 4 | **回填根因链**：complex 修复的 commit `root_cause` 段引用了根因已修的 commit hash | 只修表面 |
+
+任一不满足 → 打回重做，不得以"子 agent 说已修"收工。
+
 ## ⑥ 禁止
 
 - ❌ **对所有 finding 一刀切"信任 review 直接派发"** — 仅 simple 可 trust；complex 必须深挖
-- ❌ 先 Read 多个文件复核再分工（simple 禁止；complex 的源码核实是根因链的一部分，不在此列）
+- ❌ **triager 无自证** — 每条 finding 必须输出 `complexity= + signaturesHit=[]`（未命中也要写 `[]`），禁止只有分类无依据、或"没扫签名清单直接当 simple"
+- ❌ **simple 盲改** — simple 修复前必须对目标代码做一眼 sanity check（对齐行号/形态），禁止不看代码直接套用 review
+- ❌ **complex 自创方案** — 拍板方案是执行约束；执行 agent 不得私自换方案，发现不可行必须停下回报
+- ❌ 先 Read 多个文件复核再分工（simple 禁止 full 复核；complex 的源码取证是根因链的一部分，不在此列）
 - ❌ 分批派 agent（3+3）而非一次全派
-- ❌ 让子 agent 自证"已修"就收工 —— 主 agent 需抽验
+- ❌ 让子 agent 自证"已修"就收工 —— 主 agent 需抽验（按跨域质量终检清单）
 - ❌ git stash（CLAUDE.md 强制）—— 切换用 git worktree 或显式提交
 
 ## ⑦ 下游
