@@ -25,10 +25,12 @@ void GcHeapManager::Initialize(int num_heaps) noexcept {
         if (num_heaps <= 0) num_heaps = 1;
     }
 
-    heap_count_ = num_heaps;
-    heaps_ = std::make_unique<std::unique_ptr<GcHeapContext>[]>(static_cast<size_t>(heap_count_));
+    // Fix #1: allocate heaps_ BEFORE setting heap_count_, so any code path
+    // that calls HeapForCurrentThread → GcNumaCurrentNode during per-heap
+    // Init sees a valid heap_count_ (previously set to 0, GetHeap crashed).
+    heaps_ = std::make_unique<std::unique_ptr<GcHeapContext>[]>(static_cast<size_t>(num_heaps));
 
-    for (int i = 0; i < heap_count_; i++) {
+    for (int i = 0; i < num_heaps; i++) {
         auto heap = std::make_unique<GcHeapContext>();
         heap->heap_id = i;
         heap->numa_node = i;
@@ -40,6 +42,8 @@ void GcHeapManager::Initialize(int num_heaps) noexcept {
         heap->old_gen.Init(heap_hint);
         heaps_[i] = std::move(heap);
     }
+
+    heap_count_ = num_heaps;
 
     std::printf("[GC] GcHeapManager initialized: %d heaps\n", heap_count_);
 #else

@@ -32,6 +32,7 @@
 #include <chaos/native_types.h>
 #include "gc_layout.h"
 #include "gc_old_gen.h"
+#include "gc_heap_manager.h"   // SetThreadHeap/ClearThreadHeap for Server GC
 #include "gc_region.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
@@ -157,6 +158,10 @@ struct GcTestBase : ::testing::Test {
         threading::RegisterThread(tid, nullptr);
         threading::EnterCooperativeMode();
         InitYoungGeneration();
+        // Fix #2: bind this thread to a heap in Server GC mode (no-op in WKS).
+        // GcHeapManager::Initialize was called inside InitYoungGeneration, so
+        // the heap array is ready and SetThreadHeap can pick heap 0 for tests.
+        SetThreadHeap();
         snapshot_.Capture();
     }
 
@@ -166,6 +171,7 @@ struct GcTestBase : ::testing::Test {
             test_name = info->name();
         }
         tls_tlab = TLAB{};
+        ClearThreadHeap();
         snapshot_.ExpectNoLeaks(test_name);
         threading::UnregisterThread();
     }
