@@ -167,6 +167,20 @@ jobs:
             -R "test_gc_general_stress" \
             --timeout 3600 --output-on-failure 2>&1 | tee gc-server-stress-output.txt
 
+      # Server-GC multi-heap stress: the dedicated test_gc_server_stress.
+      # Capped at SCALE=10 (the SCALE=50 path is the known std::mutex
+      # architecture limit, not a Server-GC-specific defect).
+      - name: Run Server GC multi-heap stress (SCALE=10)
+        shell: bash
+        env:
+          CHAOS_IL2CPP_STRESS_SCALE: "10"
+          CHAOS_GC_nursery: "268435456"
+        run: |
+          ctest --test-dir artifacts/presets/windows-x64-reference-server \
+            -C Debug \
+            -R "test_gc_server_stress" \
+            --timeout 3600 --output-on-failure 2>&1 | tee gc-server-multiheap-output.txt
+
       - name: Upload Server GC test output
         if: always()
         uses: actions/upload-artifact@v4
@@ -175,6 +189,7 @@ jobs:
           path: |
             gc-server-output.txt
             gc-server-stress-output.txt
+            gc-server-multiheap-output.txt
 
   # ── ASAN nightly (AddressSanitizer) ─────────────────────────────────────
   # GC is the most memory-safety-critical module; ASAN coverage of the GC unit
