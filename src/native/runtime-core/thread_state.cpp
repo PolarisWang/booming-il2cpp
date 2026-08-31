@@ -337,7 +337,12 @@ void EnterCooperativeMode() noexcept {
     // clears, then enters cooperative.  This prevents a window where a thread
     // switches to cooperative after the owner set the trap but before setting
     // this thread's suspend_seq.
-    while (TrapReturningThreads()) {
+    //
+    // CRITICAL: the safepoint OWNER (the GC thread holding the safepoint) MUST
+    // NOT rendezvous here — it set the trap itself and would otherwise wait on
+    // its own suspend_event forever (deadlock).  The owner drives the GC
+    // directly and is already outside the managed heap contract.
+    while (TrapReturningThreads() && s_safepoint_owner.load(std::memory_order_acquire) != thread) {
         // Ack any pending request (suspend_seq may be set or about to be set).
         if (thread->suspend_seq.load(std::memory_order_acquire) != 0) {
             thread->suspend_ack.store(thread->suspend_seq.load(std::memory_order_acquire),
