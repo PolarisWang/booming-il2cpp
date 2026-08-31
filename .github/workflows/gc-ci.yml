@@ -83,9 +83,23 @@ jobs:
           # bits, card/region-gen map consistency, and typed references on every
           # GC.  Debug build only (job matrix is [Debug]).  Catches bookkeeping
           # drift (page-list / mark-bitmap / region-gen) before it reaches the
-          # fast gate.  P0-verified locally: full 72-test gate is green under
-          # CHAOS_GC_HeapVerify=2 (only the pre-registered ConservativeSweepSelfRefs
-          # parallel-flake fails, which is already in known-failures).
+          # fast gate.
+          #
+          # ⚠️ HEAP-CORRUPTION / gate-coverage caveat — do not paper over:
+          #   * test_gc_young_collector is registered WHOLE-BINARY in
+          #     known-failures.integration.yaml (binary-granular adapter), so this
+          #     run's CHAOS_GC_HeapVerify=2 exercises verify_heap on a heavily
+          #     curtailed young-collector surface: beyond ConservativeSweepSelfRefs,
+          #     every verify-bookkeeping case inside that binary is exempted here.
+          #     The HeapVerify=2 harness does NOT gate-verify the young-collector
+          #     accounting dimension on this job.
+          #   * ConservativeSweepSelfRefs is a SEH 0xc0000005 genuine heap-corruption
+          #     crash (GC-N7 residual), NOT a benign timing flake — kept surfaced so
+          #     any deterministic/single-thread hit still flips the gate red.
+          # The truly-verified surface is the rest of the 72-test gate minus the
+          # known-fail binary registrations; bookkeeping coverage on the young
+          # collector therefore relies on the deterministic suites running under
+          # this job only insofar as they are NOT inside the registered binaries.
           CHAOS_GC_HeapVerify: "2"
         run: |
           ctest --test-dir artifacts/presets/windows-x64-reference \
@@ -136,12 +150,31 @@ jobs:
             -R "test_gc_coordinator|test_gc_heap_manager" \
             --timeout 3600 --output-on-failure 2>&1 | tee gc-server-output.txt
 
+      # Server-GC pressure: run the multi-threaded general stress suite under the
+      # CHAOS_IL2CPP_GC_SERVER multi-heap path.  SCALE=50 (realistic production
+      # concurrency; the default 100 is the known std::mutex architecture limit,
+      # not a logic bug — registered in known-failures).  Validates that the
+      # per-heap old-gen + shared young/gen1 coordinator ExecuteMultiHeapGc
+      # (gc_coordinator.cpp) survives concurrent allocation + parallel old-gen GC.
+      - name: Run Server GC general stress (SCALE=50)
+        shell: bash
+        env:
+          CHAOS_IL2CPP_STRESS_SCALE: "50"
+          CHAOS_GC_nursery: "268435456"
+        run: |
+          ctest --test-dir artifacts/presets/windows-x64-reference-server \
+            -C Debug \
+            -R "test_gc_general_stress" \
+            --timeout 3600 --output-on-failure 2>&1 | tee gc-server-stress-output.txt
+
       - name: Upload Server GC test output
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: gc-server-output
-          path: gc-server-output.txt
+          path: |
+            gc-server-output.txt
+            gc-server-stress-output.txt
 
   # ── ASAN nightly (AddressSanitizer) ─────────────────────────────────────
   # GC is the most memory-safety-critical module; ASAN coverage of the GC unit
