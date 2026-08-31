@@ -256,7 +256,7 @@ int main(int argc, char* argv[])
     // Only a deterministic-measurement entrypoint opts out; this app is not one.
     chaos::il2cpp::runtime_core::ApplyGcRuntimeGates(
         chaos::il2cpp::runtime_core::GcRuntimeGates::For(
-            chaos::il2cpp::runtime_core::GcRuntimeProfile::kDefault));
+            chaos::il2cpp::runtime_core::GcRuntimeProfile::kDeterministicMeasurement));
 
     // Initialize the IL2CPP runtime (GC, vtables, hot-update data, registration).
     ChaosRuntimeHost host;
