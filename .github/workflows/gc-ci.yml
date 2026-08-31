@@ -225,16 +225,28 @@ jobs:
             gc-server-stress-output.txt
             gc-server-multiheap-output.txt
 
-  # ── ASAN nightly (AddressSanitizer) ─────────────────────────────────────
+  # ── ASAN (AddressSanitizer) — per-PR on GC paths ────────────────────────
   # GC is the most memory-safety-critical module; ASAN coverage of the GC unit
   # tree was previously zero (cmake/sanitizers/asan.cmake existed but had no CI
-  # consumer).  This nightly job instruments the whole build with MSVC ASAN
+  # consumer).  This job instruments the whole build with MSVC ASAN
   # (/fsanitize=address), runs the fast-gate GC unit regex, and REDS on any
-  # failure (no `|| true`).  Nightly-only (schedule + manual) so the slower ASAN
-  # build does not gate every PR.
-  gc-asan-nightly:
+  # failure (no `|| true`).
+  #
+  # Gating: this job runs on EVERY workflow trigger (push / PR / schedule /
+  # manual).  It is the per-PR memory-safety gate for GC — the top-priority
+  # hardening lever of the GC industrialization roadmap (a concurrency/heap-
+  # corruption regression must be caught before merge, not deferred to nightly).
+  # The workflow's top-level `on.push.paths` / `on.pull_request.paths` filters
+  # (GC/core/generator/CMake) already ensure this job only fires when GC-
+  # relevant sources change, so it does NOT add overhead to unrelated PRs.
+  # The slower ASAN build is accepted as the cost of memory-safety gating on
+  # every GC change.
+  gc-asan:
     runs-on: windows-latest
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    # Run on push/PR (per-PR memory-safety gate) and manual dispatch, but NOT
+    # on schedule (schedule has no path filter and would build ASAN even when
+    # no GC code changed — the other jobs already cover schedule).
+    if: github.event_name != 'schedule'
     steps:
       - uses: actions/checkout@v4
 
@@ -288,8 +300,9 @@ jobs:
   # reference preset and drives the pressure tier through test_driver --stress-only
   # (reconciling against known-failures.integration.yaml).  A duplicate
   # gc-stress-nightly job previously lived here at 02:37; it was consolidated into
-  # that workflow so the stress tier runs ONCE nightly instead of twice.  The
-  # schedule cron above (:53) still gates the gc-asan-nightly job (:146).
+  # that workflow so the stress tier runs ONCE nightly instead of twice.  ASAN
+  # now runs per-PR on GC paths (see the `gc-asan` job above) rather than on the
+  # schedule cron — the schedule triggers the other jobs, and ASAN covers PRs.
   #
   # Refs: A2b `chaos_gc_region_barrier_stress_test` was promoted to the fast unit
   # gate (2026-08-14) and runs there as PASS.  Still-known-fail entries surface
