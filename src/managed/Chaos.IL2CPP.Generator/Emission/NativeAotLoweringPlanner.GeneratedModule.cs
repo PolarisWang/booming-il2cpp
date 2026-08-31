@@ -154,6 +154,7 @@ public sealed partial class NativeAotLoweringPlanner
                     ["native_symbol"] = method.NativeSymbol,
                     ["param_count"] = paramAbis.Count,
                     ["params"] = paramModels,
+                    ["is_cctor"] = method.SubjectId.Contains("::.cctor:", StringComparison.Ordinal),
                 };
             }
 
@@ -362,5 +363,11 @@ public sealed partial class NativeAotLoweringPlanner
             return new string(chars);
         }
         return sanitized;
+    }
+
+    /// <summary>True if the subjectId represents a .cctor (static constructor).</summary>
+    private static bool IsStaticConstructorMethod(string subjectId)
+    {
+        return subjectId.Contains(".cctor", StringComparison.Ordinal);
     }
 }

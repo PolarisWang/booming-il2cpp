@@ -470,16 +470,29 @@ public sealed partial class NativeAotLoweringPlanner
                         // site).  Instead the stub THROWS a managed exception (matching the
                         // Assert-stub idiom) so reaching an unimplemented ChangeType is a loud,
                         // diagnosable failure — not a silent null that crashes later in caller code.
-                        registry.RegisterInline(new InlineShapeDescriptor(
-                            TypeDisplayNamePrefix: "System.Convert",
-                            MethodName: "ChangeType",
-                            Resolver: (callee, paramTypes) =>
+                        // The new multi-value ATG probe (ValueGenerator.AddSemanticMethodValueSets)
+                        // now sends (42, Int32), (true, Boolean), ("hello", String) — these must
+                        // route to a real IConvertible dispatch.  Register as SimpleForward to
+                        // a real native that implements TypeCode dispatch.
+                        registry.Register("System.Convert", "ChangeType", ["System.Object", "System.TypeCode"],
+                            ShapeKind.SimpleForward, "ChaosConvertChangeType",
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                             {
-                                if (paramTypes.Count < 2) return null;
-                                return "[&]() -> CHAOS_IL2CPP_INTPTR { "
-                                    + "throw chaos_managed_exception{}; "
-                                    + "return static_cast<CHAOS_IL2CPP_INTPTR>(0); }()";
-                            }));
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateInt32AbiSlot(),
+                            }),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0, 1 });
+                        registry.Register("System.Convert", "ChangeType", ["System.Object", "System.TypeCode", "System.IFormatProvider"],
+                            ShapeKind.SimpleForward, "ChaosConvertChangeTypeWithProvider",
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                            {
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateInt32AbiSlot(),
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            }),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0, 1, 2 });
 
                         // ── System.Nullable<T>.GetValueRefOrDefaultRef — inline return ref to the value field ──
                         // The subject passes `ref Nullable<T>` (address of the struct on the eval stack).

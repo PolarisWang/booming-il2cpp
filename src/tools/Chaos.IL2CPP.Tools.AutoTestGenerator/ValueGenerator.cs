@@ -223,6 +223,14 @@ public sealed class ValueGenerator
         }
         AddUnique(sets, usedSignatures, methodIndex, smartArgs);
 
+        // Semantic value sets for reflection/conversion methods whose default-argument
+        // probing would otherwise never exercise non-empty inputs.  These methods
+        // (Convert.ChangeType, Enum.TryParse) only round-trip default(null) values in
+        // the generic boundary probe, so the AOT runtime's un-implemented behavior
+        // (returning null/false) goes undetected.  Inject explicit non-default argument
+        // combinations so the generated test actually verifies real semantics.
+        AddSemanticMethodValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+
         // Collection state variant: populate the first collection-like parameter with
         // non-empty data (e.g. List<T> with 2 elements, Dictionary<K,V> with 1 entry).
         // This exercises methods that behave differently on empty vs. populated collections
@@ -602,5 +610,73 @@ public sealed class ValueGenerator
         // Reference types: flip null check.
         // Boxing via (object) then != null avoids CS0019/CS0037 on value types.
         return $"(object)({varName}) != null ? 0L : 1L";
+    }
+
+    /// <summary>
+    /// Inject additional non-default value sets for methods whose only probed inputs
+    /// would otherwise be default(T) — the AOT runtime's stub (returning 0/null) would
+    /// pass by coincidence.  Each added set exercises a real non-default argument so
+    /// the generated test can detect if the AOT runtime lacks real semantics.
+    /// </summary>
+    private static void AddSemanticMethodValueSets(
+        MethodSignature method,
+        string[] paramTypes,
+        List<ValueSet> sets,
+        HashSet<string> usedSignatures,
+        int methodIndex)
+    {
+        // ── Convert.ChangeType(object, TypeCode) ──
+        // The generic default probe only sends default(object) + default(TypeCode).
+        // Add real value + TypeCode pairs so the fact can detect a missing
+        // IConvertible dispatch implementation.
+        if (method.Name == "ChangeType" && paramTypes.Length == 2)
+        {
+            // Convert.ChangeType(42, TypeCode.Int32) → expected: boxed Int32(42)
+            AddUnique(sets, usedSignatures, methodIndex, ["42", "System.TypeCode.Int32"]);
+            // Convert.ChangeType(true, TypeCode.Boolean) → expected: boxed Boolean(true)
+            AddUnique(sets, usedSignatures, methodIndex, ["true", "System.TypeCode.Boolean"]);
+            // Convert.ChangeType("hello", TypeCode.String) → expected: "hello" (pass-through)
+            AddUnique(sets, usedSignatures, methodIndex, ["\"hello\"", "System.TypeCode.String"]);
+            return;
+        }
+
+        // ── Convert.ChangeType(object, TypeCode, IFormatProvider) ──
+        if (method.Name == "ChangeType" && paramTypes.Length == 3)
+        {
+            AddUnique(sets, usedSignatures, methodIndex, ["42", "System.TypeCode.Int32", "System.Globalization.CultureInfo.InvariantCulture"]);
+            AddUnique(sets, usedSignatures, methodIndex, ["true", "System.TypeCode.Boolean", "System.Globalization.CultureInfo.InvariantCulture"]);
+            return;
+        }
+
+        // ── Enum.TryParse — only for System.Enum type ──
+        // Guard against false matches on Guid.TryParse, TimeSpan.TryParse, etc.
+        if (method.Name == "TryParse" && method.DeclaringTypeFullName == "System.Enum")
+        {
+            // Enum.TryParse(Type, string, out object) — 3 params
+            if (paramTypes.Length >= 3 && paramTypes[0] == "System.Type")
+            {
+                AddUnique(sets, usedSignatures, methodIndex, ["typeof(System.DayOfWeek)", "\"Monday\"", "out default(System.Object)"]);
+                AddUnique(sets, usedSignatures, methodIndex, ["typeof(System.DayOfWeek)", "\"XYZInvalid\"", "out default(System.Object)"]);
+            }
+            // Enum.TryParse(Type, string, bool, out object) — 4 params
+            if (paramTypes.Length >= 4 && paramTypes[0] == "System.Type")
+            {
+                AddUnique(sets, usedSignatures, methodIndex, ["typeof(System.DayOfWeek)", "\"monday\"", "true", "out default(System.Object)"]);
+            }
+            return;
+        }
+
+        // ── Enum.TryParse<T>(string, out T) — generic, DllScanner-resolved T ──
+        if (method.Name == "TryParse" && method.GenericTypeArgs is { Count: > 0 })
+        {
+            // Generic TryParse<T> with string first param: "Monday" variant
+            // T is resolved by DllScanner (e.g. DayOfWeek, Int32 for fallback)
+            if (paramTypes.Length >= 2 && paramTypes[0] == "System.String")
+            {
+                AddUnique(sets, usedSignatures, methodIndex, ["\"Monday\"", "true", "out default(System.Int32)"]);
+                AddUnique(sets, usedSignatures, methodIndex, ["\"XYZInvalid\"", "true", "out default(System.Int32)"]);
+            }
+            return;
+        }
     }
 }
