@@ -98,7 +98,7 @@ void LargeObjectHeap::FreeSegment(LohSegment* seg) {
 LohSegment* LargeObjectHeap::FindSegment(const void* ptr) const {
     if (ptr == nullptr) return nullptr;
     uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
 
     // Check active segments.
     auto* seg = segment_list_;
@@ -135,7 +135,7 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
     threading::EnterPreemptiveMode();
 
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        GcSpinLockGuard lock(mutex_);
 
         // Try free segment list first.
         LohSegment** pp = &free_segment_list_;
@@ -208,7 +208,7 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
 
 void LargeObjectHeap::Free(void* ptr) {
     if (ptr == nullptr) return;
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
 
     LohSegment** pp = &segment_list_;
     while (*pp != nullptr) {
@@ -234,7 +234,7 @@ void LargeObjectHeap::Free(void* ptr) {
 // ======================================================================
 
 void LargeObjectHeap::UnmarkAllForTesting() {
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
     for (auto* seg = segment_list_; seg != nullptr; seg = seg->next) {
         seg->marked.store(false, std::memory_order_relaxed);
     }
@@ -253,7 +253,7 @@ bool LargeObjectHeap::MarkObject(void* obj) {
 CHAOS_IL2CPP_SIZE LargeObjectHeap::Sweep() {
     CHAOS_IL2CPP_SIZE reclaimed = 0;
     int freed_count = 0;
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
 
     LohSegment** pp = &segment_list_;
     while (*pp != nullptr) {
@@ -345,7 +345,7 @@ static constexpr float kLohCompactFragThreshold = 0.25f;  // 25% free = compact
 CHAOS_IL2CPP_SIZE LargeObjectHeap::Compact(std::vector<std::pair<void*, void*>>& out_relocations) {
     if (compact_mode_ == CompactMode::NONE) return 0;
 
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
 
     // Phase 1: Count live vs free segments.
     int total_segments = 0;
