@@ -27,52 +27,37 @@ terminals_active: []
 - `auto_stop_policy: blocking-only`
 
 ## 最近摘要
-batch-1 已全部处理（11/11）：
+### batch-1（已完成）
 - ✅ T-A1（0b1777e8d）：per-PR 并发 stress 门禁（SCALE=50）
 - ✅ T-A2（84ae5f621）：ASAN per-PR 门禁
 - ✅ T-A3（b8e6da61a+b841b745b）：Linux x64 GC CI + TSAN per-PR
 - ✅ T-B1：CoreCLR safepoint 研读 + A3 Hybrid 设计（跨平台 ✅）
 - ✅ T-B2：单 region 分配器设计
 - ✅ T-B3：LEAF barrier 设计（mode switch 绑定）
-- ✅ T-B4：codegen/JIT/interpreter 写屏障契约（S+B+[D] 序列，补 jit 静态路径）
+- ✅ T-B4：codegen/JIT/interpreter 写屏障契约（S+B+[D] 序列）
 - ✅ T-B5：forbid_suspend 强化为互斥护栏（ForbidSuspendThreadHolder 设计）
-- ⏸️ T-A4（READY-FOR-CI）：性能基线基建全就绪，需真实 CI 跑 green run 填充
-- ⏸️ T-A5（deferred）：known-fail expiry 量小风险高，暂缓
-- ⏸️ T-A6（deferred）：测试框架 singleton reset，延到 P2
+- ⏸️ T-A4（READY-FOR-CI）、T-A5/A6（deferred）
 
-## batch-1 收口判定
-batch-1 的持续交付件（CI 变更 + A3 设计文档）全部完成。T-A4（CI 依赖）/A5/A6（deferred）不阻塞 G-P1 gate。
+### P1 E0 — 安全重构批次（进行中）
+方案 A（先做安全可本地验证部分）：
+- ✅ `2c4f67a4d`：移除 GcBumpCache（僵尸，无活跃引用）+ 测试。**用户指示**「GC 核心不用就删，包括测试」。验证：runtime-core 编译通过，test_gc_region 18/18
+- ✅ `7c7872659`：PohAllocate std::mutex → GcSpinLock + ScopedPreemptiveMode（修 HIGH 死锁）。验证：test_gc_poh 9/9
+- ⏸️ jit_helpers.cpp 静态字段补 dirty_card：**不纳入安全批次**——需理解 g_static_fields（解释器 sandbox 值）完整 GC 语义，注释已警告逆向注册损坏风险。属 P2「CodegenStSFld 三路统一」
 
-**G-P1 gate 检查**：
-- T-A 绿：✅（ASAN per-PR + TSAN per-PR + stress per-PR 已就位；Linux 基线未首次绿=已知风险）
-- T-B 设计完成：✅（a3-safepoint/allocator/leaf-barrier/contract/forbid-suspend 5 件全套）
+## P1 剩余（安全关键路径，需护网/架构确认）
+- Hybrid safepoint 重写（pal_suspend.h / trap / 驱赶）
+- 单 region 分配器整合（T-B2 → 实现）
+- LEAF barrier 实现（T-B3）
+- 三路写屏障契约落地（T-B4）
+- forbid 互斥护栏实现（T-B5）
 
-## 设计文档清单（T-B 系列，供 P1 消耗）
-- `a3-safepoint-design.md`：A3 Hybrid 架构 + 跨平台验证
-- `a3-allocator-design.md`：单 region 分配器
-- `a3-leaf-barrier-design.md`：LEAF barrier + mode switch
-- `a3-contract-design.md`：写屏障 S+B+[D] 契约
-- `a3-forbid-suspend-design.md`：硬驱赶互斥护栏
+这些触及安全关键路径，在真实 CI 护网确认绿前不贸然实施（验证先行）。
 
 ## latest_stop_point
-**CHECKPOINT-1（batch-1 收口，等真实 CI 撑稳护网后启动 P1）**
-
-batch-1 全部交付完成（CI 变更 + A3 设计 5 件套）。G-P1 gate 条件已满足，但按「验证先行」原则，P1 动手改 safepoint/分配器前需先确认护网真实绿。用户已确认选 A（暂停等 CI）。
+P1 E0 安全重构批次完成 2 项（GcBumpCache 移除 + POH 死锁修复）。剩余为安全关键路径改造，需护网/授权。
 
 ## 下一步
-先推进「真实 CI 验证清单」（见下），全部绿后启动 G-P1。
-
-## G-P1 启动前置（真实 CI 验证清单）
-1. **T-A3 Linux TSAN 首次绿**—新 Linux x64 GC CI 首跑；Linux GC 单测从未在 CI 验证，可能现未绿需先修基线（最大的未知风险）
-2. **T-A2 ASAN per-PR 首跑**—`gc-asan` job 在 GC PR 上首跑是否绿
-3. **T-A1 stress 门禁首跑**—per-PR SCALE=50 stress 是否绿（已知 SCALE=50 单独绿，需确认并行 -j4 下稳定）
-4. **T-A4 性能基线首捕**—手动 dispatch `gc-stress-nightly` + `update_baseline=true` 填充 gc.perf.yaml
-5. **回归**—现有 Windows GC 单元门禁（gc-ci.yml）在以上改动提交后仍绿
-
-以上 1-5 全绿 → G-P1 可启动。
-
-## recommended_next_child
-- G-P1（A2b A3 实现）——待真实 CI 清单全绿
+- 安全重构批次收尾；安全关键路径改造视护网状态 / 用户授权推进
 
 ## 目标
 超越 CoreCLR WKS 工业化成熟度，消除所有已知并发正确性缺陷。A3 深度对齐。
