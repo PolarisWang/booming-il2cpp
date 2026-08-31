@@ -152,7 +152,14 @@ thread_local CHAOS_IL2CPP_SIZE tls_tlab_size = kDefaultTlabSize;
 // For now, PohAllocate uses the process-wide POH context to avoid
 // per-thread POH region proliferation (pinned objects are typically few).
 static Region* s_poh_current = nullptr;  // current POH bump region
-static std::mutex s_poh_mutex;
+// GcSpinLock (not std::mutex) for POH: the lock hold is a short bump-pointer
+// critical section, and a std::mutex can park a thread in a kernel wait while
+// in cooperative mode — leaving it unable to acknowledge a safepoint (a
+// potential 3-party deadlock: thread waits mutex, coordinator waits thread's
+// suspend_ack, mutex holder may wait on safepoint).  GcSpinLock never parks
+// (spin-then-yield), and is wrapped in ScopedPreemptiveMode so the safepoint
+// coordinator skips the thread while it may be spinning.
+static GcSpinLock s_poh_lock;
 
 // Platform virtual memory helpers for region recycling.
 static void VirtualFreeRegion(void* ptr, CHAOS_IL2CPP_SIZE size) {
@@ -575,7 +582,11 @@ void* PohAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
         return result;
     }
 
-    std::lock_guard<std::mutex> lock(s_poh_mutex);
+    // Switch to preemptive mode for the POH lock region (GcSpinLock spin-wait
+    // in cooperative mode would block safepoint coordination).  The lock is
+    // held only for the bump-pointer fast path + fallback, never across alloc.
+    ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(s_poh_lock);
 
     // Try bump from current POH region.
     if (s_poh_current != nullptr) {
