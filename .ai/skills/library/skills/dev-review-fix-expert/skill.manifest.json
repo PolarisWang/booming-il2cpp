@@ -2,22 +2,29 @@
     "kind": "project",
     "domain": "review",
     "name": "dev-review-fix-expert",
-    "summary": "代码审查结果修复专属入口——收到 review 立即分类并全量 Workflow 派发 expert，禁止先读代码确认。",
+    "summary": "代码审查结果修复入口——按复杂度分级（triager）处理 review finding：simple 快速派发，complex 走 dev-brainstorm 深挖根因+多方案权衡后修复。",
     "trigger_signals": [
         "收到代码审查反馈时",
         "收到审阅结果/报告时",
-        "发现多个跨域 review finding 时"
+        "发现多个跨域 review finding 时",
+        "review finding 涉及内存安全/GC正确性/契约一致性/根因已修判断时"
     ],
     "owner": "00-skills-maintainers",
     "status": "active",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "startup_visible": false,
     "token_budget": "large",
     "version_history": [
         {
             "version": "1.0.0",
-            "date": "2026-08-29",
+            "date": "2026-08-28",
             "type": "initial"
+        },
+        {
+            "version": "2.0.0",
+            "date": "2026-08-31",
+            "type": "major",
+            "summary": "引入 triager 复杂度分级 + complex 子协议（dev-brainstorm 接入）。不再一刀切'信任 review 直接派发'，complex finding 走深挖根因+多方案权衡+用户裁决后再修。"
         }
     ],
     "evolution_lineage": {
@@ -25,7 +32,7 @@
         "derived_from": null,
         "derived_to": [],
         "fixes": [],
-        "captured_from": "2026-08-28 review 修复流程复盘（先读代码 vs 立即派 agent 的教训）"
+        "captured_from": "2026-08-31 review 修复复盘：BgcGates 方案需要 complex 分级（禁用 GC 掩盖挂起根因）→ 走 dev-brainstorm 给 B1-B4 四方案+用户裁决，而非直接删两行"
     },
     "core_length": "medium"
 }
