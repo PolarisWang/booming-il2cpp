@@ -647,16 +647,15 @@ public sealed class ValueGenerator
         }
 
         // ── Enum.TryParse<T>(string, out T) — generic, DllScanner-resolved T ──
-        if (method.Name == "TryParse" && method.GenericTypeArgs is { Count: > 0 })
-        {
-            // Generic TryParse<T> with string first param: "Monday" variant
-            // T is resolved by DllScanner (e.g. DayOfWeek, Int32 for fallback)
-            if (paramTypes.Length >= 2 && paramTypes[0] == "System.String")
-            {
-                AddUnique(sets, usedSignatures, methodIndex, ["\"Monday\"", "true", "out default(System.Int32)"]);
-                AddUnique(sets, usedSignatures, methodIndex, ["\"XYZInvalid\"", "true", "out default(System.Int32)"]);
-            }
-            return;
-        }
+        // NOTE: We do NOT inject a non-default value set here.  The generic
+        // TryParse<T>(string, out T) has only TWO parameters, but injecting
+        // ["...","true","out default(...)"] would be a 3-value set for a 2-param
+        // method → generated probe fails to compile (CS1503).  Worse, `out T` is
+        // inferred from the argument; a fixed `out default(Int32)` mismatches when
+        // T resolves to a concrete enum (e.g. DayOfWeek) → CS0029.  The non-generic
+        // System.Enum.TryParse(Type, string, out object) above already exercises
+        // real enum parsing with correctly-typed DayOfWeek literals, so this
+        // generic overload is left on the default single-value probe.
+        return;
     }
 }

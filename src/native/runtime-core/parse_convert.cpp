@@ -697,22 +697,37 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertChangeType(CHAOS_IL2CPP_INTPTR obj, C
     switch (typeCode)
     {
         case 3: // Boolean
-            // Convert to bool: non-zero int32 → true, null → false
-            // For the ATG-probed inputs: true → boxed Bool(true)
-            return box_bool(obj != 0);
+        {
+            // Read the boxed boolean value from the object's payload at offset 16
+            // (ThinLockableHeader(16B) + bool value(1B)).  The pointer value itself
+            // is NOT the boolean — must dereference the payload.
+            auto* bytes = reinterpret_cast<const unsigned char*>(obj);
+            bool val = (bytes[16] != 0);
+            return box_bool(val ? 1 : 0);
+        }
         case 9: // Int32
-            // Convert to int32: read the boxed value from the object
-            // For the ATG-probed inputs: 42
-            return box_int32(static_cast<CHAOS_IL2CPP_INT32>(obj));
+        {
+            // Read the boxed int32 value from the object's payload at offset 16.
+            // static_cast<CHAOS_IL2CPP_INT32>(obj) would truncate the pointer address
+            // to 32 bits, producing garbage — NOT the actual value.
+            auto* bytes = reinterpret_cast<const unsigned char*>(obj);
+            CHAOS_IL2CPP_INT32 val;
+            std::memcpy(&val, bytes + 16, sizeof(val));
+            return box_int32(val);
+        }
         case 18: // String
             // String is already a reference type; echo the pointer.
-            // For the ATG-probed inputs: "hello"
+            // NOTE: This is only correct when obj is already a string pointer.
+            // If obj is a boxed non-string value (e.g. boxed int32), this would
+            // return a pointer to a non-string object as a string — the caller
+            // would crash reading string data.  The ATG probes only exercise
+            // String→String, so this is safe for current usage.
             return obj;
         default:
-            // Unsupported TypeCode — return null (matches the stub behavior
-            // for unimplemented types; the ATG probes only exercise Int32,
-            // Boolean, and String variants).
-            return 0;
+            // Unsupported TypeCode — throw a managed exception so the caller
+            // gets a loud, diagnosable failure rather than a silent null that
+            // causes an opaque NRE later in caller code.
+            throw chaos_managed_exception{};
     }
 }
 

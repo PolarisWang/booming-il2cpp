@@ -276,19 +276,20 @@ int main(int argc, char* argv[])
         return 1;
     }}
 
-    // Post-init GC vitality self-check: verify the BGC thread (now running) can
-    // complete a safepoint handshake within a reasonable budget.  If the
-    // handshake stalls (e.g. a background thread is stuck in a non-alertable
-    // wait), the hard-timeout fallback prevents a hang, and the LOG_ERROR
-    // output makes the stall diagnosable.  This prevents a silent regression
-    // of the startup safepoint hang that the old hardcoded-disable was masking.
+    // Post-init GC vitality self-check: verify the BGC thread (now running in
+    // non-AOT mode) can complete a safepoint handshake within budget.  In AOT-only
+    // mode the check is skipped internally (returns healthy) because there is no
+    // other managed thread to ack.  If a genuine (non-AOT) handshake stall is
+    // observed, fail the startup explicitly — NOT a swallowed warning — so a real
+    // GC coordination regression can never masquerade as a successful start.
     bool healthy = true;
     chaos::il2cpp::runtime_core::GcStartupVitalityCheck(
         std::chrono::seconds(1), &healthy);
     if (!healthy)
     {{
-        std::fprintf(stderr, ""[app_main] WARNING: GC startup safepoint handshake was slow; ""
-                              ""BGC concurrency may be degraded.  Check the GcGates log.\n"");
+        std::fprintf(stderr, ""[app_main] FATAL: GC startup safepoint handshake stalled; ""
+                              ""BGC concurrency degraded.  Check the GcGates log.\n"");
+        return 1;
     }}
 
     // Run static constructors (.cctor) for all types in the module so that

@@ -84,15 +84,16 @@ bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
 // ChaosGeneratedModuleActivate.
 {{~ if type_groups.size > 0 ~}}
 bool ChaosRunModuleStaticConstructors() {
+    bool ok = true;
 {{~ for type_group in type_groups ~}}
 {{~ for method in type_group.methods ~}}
 {{~ if method.is_cctor ~}}
-    {{ method.native_symbol }}();
+    { try { {{ method.native_symbol }}(); } catch (...) { ok = false; } }
 {{~ end ~}}
 {{~ end ~}}
 {{~ end ~}}
-    return true;
+    return ok;
 }
 {{~ else ~}}
-bool ChaosRunModuleStaticConstructors() { return true; }
+bool ChaosRunModuleStaticConstructors() { return false; }
 {{~ end ~}}

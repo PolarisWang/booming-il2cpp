@@ -174,56 +174,56 @@ public sealed partial class NativeAotLoweringPlanner
                             }));
 
                         // ── System.Convert stubs ───────────────────────────────────────────
-                        registry.Register("System.Convert", "ToBoolean", ["System.String"],
+                        registry.Register("System.Convert", "ToBoolean", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosConvertToBoolean",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
                             CreateNativeIntAbiSlot(),
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Convert", "ToByte", ["System.String"],
+                        registry.Register("System.Convert", "ToByte", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosConvertToByte",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
                             new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt8, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Convert", "ToInt16", ["System.String"],
+                        registry.Register("System.Convert", "ToInt16", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosConvertToInt16",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
                             new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int16, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Convert", "ToInt32", ["System.String"],
+                        registry.Register("System.Convert", "ToInt32", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosConvertToInt32",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
                             CreateInt32AbiSlot(),
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Convert", "ToInt64", ["System.String"],
+                        registry.Register("System.Convert", "ToInt64", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosConvertToInt64",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
                             new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Convert", "ToSingle", ["System.String"],
+                        registry.Register("System.Convert", "ToSingle", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosConvertToSingle",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
                             new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Convert", "ToDouble", ["System.String"],
+                        registry.Register("System.Convert", "ToDouble", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosConvertToDouble",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
                             new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Convert", "ToDecimal", ["System.String"],
+                        registry.Register("System.Convert", "ToDecimal", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosConvertToDecimal",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
@@ -464,28 +464,34 @@ public sealed partial class NativeAotLoweringPlanner
                                 return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
                             }));
 
-                        // ── System.Convert.ChangeType(object, TypeCode[, IFormatProvider]) — DIAG stub ──
-                        // Return type is System.Object (reference type).  Returning NULL silently
-                        // would make the caller unbox a null reference (opaque NRE at the call
-                        // site).  Instead the stub THROWS a managed exception (matching the
-                        // Assert-stub idiom) so reaching an unimplemented ChangeType is a loud,
-                        // diagnosable failure — not a silent null that crashes later in caller code.
-                        // The new multi-value ATG probe (ValueGenerator.AddSemanticMethodValueSets)
-                        // now sends (42, Int32), (true, Boolean), ("hello", String) — these must
-                        // route to a real IConvertible dispatch.  Register as SimpleForward to
-                        // a real native that implements TypeCode dispatch.
-                        // Convert.ChangeType(object, TypeCode) — inline stub returning 0 (null).
-                        // Full IConvertible dispatch not yet implemented; the ATG probes only
-                        // exercise default(object) + default(TypeCode) which returns null, matching
-                        // the probe.  Register as inline to bypass the null-guard on the object arg.
-                        registry.RegisterInline(new InlineShapeDescriptor(
-                            TypeDisplayNamePrefix: "System.Convert",
-                            MethodName: "ChangeType",
-                            Resolver: (callee, paramTypes) =>
+                        // ── System.Convert.ChangeType(object, TypeCode[, IFormatProvider]) — SimpleForward to native ──
+                        // The native implementation (ChaosConvertChangeType in parse_convert.cpp) reads
+                        // the boxed object's payload at offset 16 (ThinLockableHeader + value) and
+                        // dispatches on TypeCode.  Int32, Boolean, and String are implemented; other
+                        // TypeCodes throw chaos_managed_exception{} (loud, diagnosable).  This is NOT
+                        // a silent null stub — it routes to real IConvertible dispatch.
+                        // Register as SimpleForward (not inline) so the codegen emits a direct call
+                        // to the native function rather than passing through the inline null-guard.
+                        registry.Register("System.Convert", "ChangeType", new string[] { "System.Object", "System.TypeCode" },
+                            ShapeKind.SimpleForward, "ChaosConvertChangeType",
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                             {
-                                if (paramTypes.Count < 2) return null;
-                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
-                            }));
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateInt32AbiSlot(),
+                            }),
+                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0, 1 });
+                        // Register the 3-param overload (with IFormatProvider) as a forward to the same native.
+                        registry.Register("System.Convert", "ChangeType", new string[] { "System.Object", "System.TypeCode", "System.IFormatProvider" },
+                            ShapeKind.SimpleForward, "ChaosConvertChangeTypeWithProvider",
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                            {
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateInt32AbiSlot(),
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.IFormatProvider", AotCoreIrTypeShapeKind.ReferenceType),
+                            }),
+                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0, 1, 2 });
 
                         // ── System.Nullable<T>.GetValueRefOrDefaultRef — inline return ref to the value field ──
                         // The subject passes `ref Nullable<T>` (address of the struct on the eval stack).
@@ -519,40 +525,37 @@ public sealed partial class NativeAotLoweringPlanner
                                 return "{0}";
                             }));
 
-                        // ── System.ReadOnlySpan<T>.ToArray — DIAG stub ──
-                        // Returns a T[] (reference type).  Returning NULL silently would make the
-                        // caller index/length a null array (opaque NRE).  Per the DUMB-STUB rule,
-                        // THROW a managed exception so a reached-but-unimplemented ToArray is a
-                        // loud, diagnosable failure instead of a silent null that crashes later.
-                        // TODO: implement ToArray from the span (pointer, len) once a
-                        // CHAOS_IL2CPP array-allocation native is available.
+                        // ── System.ReadOnlySpan<T>.ToArray — inline to ChaosSpanInt32ToArray ──
+                        // default(ReadOnlySpan<int>) = {pointer=null, length=0}.  ToArray() returns
+                        // an empty int[] (not null).  The native allocates the array from the span's
+                        // pointer and length fields.  Registered as inline to bypass the null-guard
+                        // on the span's `this` value (which is zero for default(ReadOnlySpan<int>)).
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.ReadOnlySpan",
                             MethodName: "ToArray",
                             Resolver: (callee, paramTypes) =>
                             {
                                 if (paramTypes.Count != 0) return null;
-                                return "[&]() -> CHAOS_IL2CPP_INTPTR { "
-                                    + "throw chaos_managed_exception{}; "
-                                    + "return static_cast<CHAOS_IL2CPP_INTPTR>(0); }()";
-                            }));
+                                return "ChaosSpanInt32ToArray({0})";
+                            })
+                        { IsInstanceMethod = true });
 
                         // ── System.Int32/Int64/Double::Parse stubs ─────────────────────────
-                        registry.Register("System.Int32", "Parse", ["System.String"],
+                        registry.Register("System.Int32", "Parse", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosParseInt32",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
                             CreateInt32AbiSlot(),
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Int64", "Parse", ["System.String"],
+                        registry.Register("System.Int64", "Parse", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosParseInt64",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
                             new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Double", "Parse", ["System.String"],
+                        registry.Register("System.Double", "Parse", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosParseDouble",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
@@ -589,25 +592,25 @@ public sealed partial class NativeAotLoweringPlanner
                         // ── System.DateTime/TimeSpan (handled via SimpleForward stubs above) ──
 
                         // ── COM RCW runtime helpers ─────────────────────────────────────────
-                        registry.Register("System.Runtime.InteropServices.Marshal", "CreateRcw", ["System.IntPtr"],
+                        registry.Register("System.Runtime.InteropServices.Marshal", "CreateRcw", new string[] { "System.IntPtr" },
                             ShapeKind.SimpleForward, "MarshalCreateRcw",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),
                             CreateNativeIntAbiSlot(),
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Runtime.InteropServices.Marshal", "ReleaseRcw", ["System.IntPtr"],
+                        registry.Register("System.Runtime.InteropServices.Marshal", "ReleaseRcw", new string[] { "System.IntPtr" },
                             ShapeKind.SimpleForward, "MarshalReleaseRcw",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),
                             CreateVoidAbiSlot(),
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Runtime.InteropServices.Marshal", "GetRcwUnknown", ["System.IntPtr"],
+                        registry.Register("System.Runtime.InteropServices.Marshal", "GetRcwUnknown", new string[] { "System.IntPtr" },
                             ShapeKind.SimpleForward, "MarshalGetRcwUnknown",
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),
                             CreateNativeIntAbiSlot(),
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Runtime.InteropServices.Marshal", "RcwQueryInterface", ["System.IntPtr", "System.IntPtr"],
+                        registry.Register("System.Runtime.InteropServices.Marshal", "RcwQueryInterface", new string[] { "System.IntPtr", "System.IntPtr" },
                             ShapeKind.SimpleForward, "MarshalRcwQueryInterface",
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                             {
@@ -642,7 +645,7 @@ public sealed partial class NativeAotLoweringPlanner
                             new HashSet<int> { 0, 1, 2, 3 });
 
                         // ── COM CCW runtime helpers ─────────────────────────────────────────
-                        registry.Register("Marshal", "CreateCcw", ["System.IntPtr", "System.IntPtr"],
+                        registry.Register("Marshal", "CreateCcw", new string[] { "System.IntPtr", "System.IntPtr" },
                             ShapeKind.SimpleForward, "MarshalCreateCcw",
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                             {
@@ -695,7 +698,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                         // ── ICustomMarshaler runtime helpers (V3) ──────────────────────────
                         registry.Register("System.Runtime.InteropServices.Marshal", "CustomMarshalerNativeToManaged",
-                            ["System.IntPtr", "System.IntPtr"],
+                            new string[] { "System.IntPtr", "System.IntPtr" },
                             ShapeKind.SimpleForward, "CustomMarshalerNativeToManaged",
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                             {
@@ -706,7 +709,7 @@ public sealed partial class NativeAotLoweringPlanner
                             new HashSet<int> { 0, 1 });
 
                         registry.Register("System.Runtime.InteropServices.Marshal", "CustomMarshalerManagedToNative",
-                            ["System.IntPtr", "System.IntPtr"],
+                            new string[] { "System.IntPtr", "System.IntPtr" },
                             ShapeKind.SimpleForward, "CustomMarshalerManagedToNative",
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                             {
@@ -777,7 +780,7 @@ public sealed partial class NativeAotLoweringPlanner
                             CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
                             new HashSet<int> { 0 });
 
-                        registry.Register("System.Enum", "ToString", ["System.String"],
+                        registry.Register("System.Enum", "ToString", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosEnumToStringWithFormat",
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                             {
@@ -1172,7 +1175,7 @@ public sealed partial class NativeAotLoweringPlanner
                             new HashSet<int>());
 
                         // CompareInfo.IsSortable(string) → bool
-                        registry.Register("System.Globalization.CompareInfo", "IsSortable", ["System.String"],
+                        registry.Register("System.Globalization.CompareInfo", "IsSortable", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosCompareInfoIsSortableString",
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
                             {
@@ -1212,7 +1215,7 @@ public sealed partial class NativeAotLoweringPlanner
                             new HashSet<int> { 0 });
 
                         // CultureInfo.GetCultureInfo(string) → CultureInfo  (static)
-                        registry.Register("System.Globalization.CultureInfo", "GetCultureInfo", ["System.String"],
+                        registry.Register("System.Globalization.CultureInfo", "GetCultureInfo", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosCultureGetCultureInfo",
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
                             {
@@ -1233,7 +1236,7 @@ public sealed partial class NativeAotLoweringPlanner
                             new HashSet<int> { 0 });
 
                         // CultureInfo.GetCultureInfoByIetfLanguageTag(string) → CultureInfo (static)
-                        registry.Register("System.Globalization.CultureInfo", "GetCultureInfoByIetfLanguageTag", ["System.String"],
+                        registry.Register("System.Globalization.CultureInfo", "GetCultureInfoByIetfLanguageTag", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosCultureGetCultureInfoByIetfLanguageTag",
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
                             {
@@ -1243,7 +1246,7 @@ public sealed partial class NativeAotLoweringPlanner
                             new HashSet<int> { 0 });
 
                         // CultureInfo.CreateSpecificCulture(string) → CultureInfo (static)
-                        registry.Register("System.Globalization.CultureInfo", "CreateSpecificCulture", ["System.String"],
+                        registry.Register("System.Globalization.CultureInfo", "CreateSpecificCulture", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosCultureCreateSpecificCulture",
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
                             {
@@ -1253,7 +1256,7 @@ public sealed partial class NativeAotLoweringPlanner
                             new HashSet<int> { 0 });
 
                         // CompareInfo.GetCompareInfo(string) → CompareInfo (static)
-                        registry.Register("System.Globalization.CompareInfo", "GetCompareInfo", ["System.String"],
+                        registry.Register("System.Globalization.CompareInfo", "GetCompareInfo", new string[] { "System.String" },
                             ShapeKind.SimpleForward, "ChaosCompareInfoGetCompareInfo",
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
                             {

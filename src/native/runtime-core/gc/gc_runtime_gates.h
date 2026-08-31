@@ -71,6 +71,13 @@ void ApplyGcRuntimeGates(GcRuntimeGates gates) noexcept;
 /// scan), it logs a clear diagnostic and — when @a out_healthy is non-null —
 /// reports false so the caller can decide whether to fall back.
 ///
+/// NOTE: This safepoint handshake requires at least one other managed thread to
+/// ack.  In AOT-only mode (no JIT/interpreter background threads, single-thread
+/// startup), there is no other thread to respond — the call will always hit the
+/// internal 100ms timeout and produce a false negative.  Callers MUST check
+/// whether the runtime is in AOT-only mode before calling this function, or
+/// skip the check entirely.  A helper is provided below.
+///
 /// Rationale: the historical app_main hardcode disabled BGC entirely to dodge a
 /// "safepoint hang".  That masked the root cause.  Removing the hardcode and
 /// enabling BGC by default is only sound if a stall is (a) bounded and (b)

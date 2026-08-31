@@ -40,6 +40,7 @@ CHAOS_IL2CPP_INTPTR ChaosArrayNew1D(const TypeInfo* array_type_info, const TypeI
 CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytes(CHAOS_IL2CPP_INTPTR unused, CHAOS_IL2CPP_INT32 value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytesFromSingle(CHAOS_IL2CPP_FLOAT32 value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytesFromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosSpanInt32ToArray(CHAOS_IL2CPP_INTPTR span_pair) noexcept;
 CHAOS_IL2CPP_INT32 ChaosBitConverterToInt32(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept;
 double ChaosBitConverterToDouble(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept;
 

@@ -3,9 +3,18 @@
 #include <chrono>
 #include <chaos/log.h>
 
-#include "gc_bgc.h"      // g_bgc_enabled
-#include "gc_low_mem.h"  // g_low_mem_enabled
+#include "gc_helpers.h"  // GetRuntimeMode / RuntimeMode
+#include "../runtime_core.h"  // RuntimeMode{Aot,Mixed}
 #include "thread_state.h"
+
+// Forward-declare the runtime-global BGC and low-memory-enabled flags.
+// These are defined in gc_bgc.cpp and gc_low_mem.cpp respectively, which are
+// compiled on all target platforms (the low-memory monitor is a no-op on
+// unsupported platforms; BGC compiles to a stub).  Using forward declarations
+// here instead of #include "gc_bgc.h" / "gc_low_mem.h" avoids depending on
+// those headers being compiled on every platform.
+extern bool g_bgc_enabled;
+extern bool g_low_mem_enabled;
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -24,6 +33,16 @@ void ApplyGcRuntimeGates(GcRuntimeGates gates) noexcept {
 bool GcStartupVitalityCheck(std::chrono::nanoseconds budget, bool* out_healthy) noexcept {
     using clock = std::chrono::steady_clock;
     auto start = clock::now();
+
+    // In pure AOT mode there is no other background thread that can acknowledge
+    // the safepoint handshake (no JIT/interpreter worker threads, single-thread
+    // startup).  Running the handshake here would always hit the internal 100ms
+    // timeout and produce a false negative (spurious "startup coordination
+    // regression" warning).  Skip the check in AOT-only mode; report healthy.
+    if (GetRuntimeMode() == RuntimeMode::Aot) {
+        if (out_healthy) *out_healthy = true;
+        return true;
+    }
 
     if (out_healthy) *out_healthy = true;
 

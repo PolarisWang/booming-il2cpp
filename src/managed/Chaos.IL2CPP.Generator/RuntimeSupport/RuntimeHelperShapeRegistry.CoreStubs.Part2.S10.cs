@@ -173,10 +173,13 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
-        /// List<T>::AsReadOnly — returns the list itself cast to the read-only
-        /// collection. ReadOnlyCollection wraps the same List; since the runtime
-        /// represents both by the same backing array (at +8 field offset), returning
-        /// the list pointer keeps iteration (string.Join, foreach) working.
+        /// List&lt;T&gt;::AsReadOnly — returns a ReadOnlyCollection wrapping the list.
+        /// The current implementation throws a managed exception because returning
+        /// the List pointer directly gives the caller a List&lt;T&gt; object where a
+        /// ReadOnlyCollection&lt;T&gt; is expected — causing wrong type tests (is),
+        /// wrong vtable dispatch, and wrong runtime type reflection.  Until a real
+        /// ReadOnlyCollection wrapper is implemented, this avoids silent wrong-type
+        /// data by making the call loud and diagnosable.
         /// </summary>
         private static void RegisterListTAsReadOnly(RuntimeHelperShapeRegistry registry)
         {
@@ -189,7 +192,9 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    return chaos_arg_0;",
+                        "    (void)chaos_arg_0;",
+                        "    throw chaos_managed_exception{};",
+                        "    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(

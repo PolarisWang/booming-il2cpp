@@ -326,12 +326,15 @@ public sealed class TestEmitter
             if (result.ReturnValueJson == "null" || string.IsNullOrEmpty(result.ReturnValueType))
             {
                 var csType = CSharpSerializer.MapToCSharpType(method.ReturnTypeName);
-                // For reference types: assert IsNotNull first to catch unexpected non-null
-                // results before comparing to default(T)!. This guards against probe
-                // serialization gaps where a non-null value was not captured.
-                var isRefType = !CSharpSerializer.IsValueType(method.ReturnTypeName);
-                if (isRefType)
-                    sb.AppendLine($"            Assert.IsNotNull(result_{mi}_{set.SetIndex});");
+                // For a NULL-captured return value, assert equality with default(T) (null).
+                // Do NOT emit Assert.IsNotNull here — for a method that legitimately returns
+                // null (e.g. Convert.ChangeType(null, TypeCode), default(ReadOnlySpan<T>).
+                // ToArray() is a non-null empty array, so it is captured as non-null), the
+                // IsNotNull + AreEqual(default) pair is logically unsatisfiable: IsNotNull
+                // requires non-null while AreEqual(default=null) requires null.  Emitting both
+                // guarantees failure no matter what the runtime returns — a false failure.
+                // The probe already captured null as the deterministic result, so asserting
+                // equality with default(T) suffices.
                 sb.AppendLine($"            Assert.AreEqual(default({csType})!, result_{mi}_{set.SetIndex});");
                 return;
             }

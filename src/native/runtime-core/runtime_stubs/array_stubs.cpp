@@ -198,6 +198,33 @@ CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytesFromDouble(CHAOS_IL2CPP_FLOAT64 val
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
 
+// ReadOnlySpan<Int32>.ToArray: allocate an int[] from the span's pointer and length.
+// The span is a 2-native-int struct (pointer, length) on the eval stack.  For the
+// ATG-probed default(ReadOnlySpan<int>) = {null, 0}, this returns an empty int[0].
+extern "C" CHAOS_IL2CPP_INTPTR ChaosSpanInt32ToArray(CHAOS_IL2CPP_INTPTR span_pair) noexcept
+{
+    // ReadOnlySpan<Int32> layout: { CHAOS_IL2CPP_INTPTR _pointer; CHAOS_IL2CPP_INT32 _length; }
+    auto* fields = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(span_pair);
+    auto length = static_cast<CHAOS_IL2CPP_INT32>(fields[1]);
+    if (length < 0) length = 0;
+    auto total = sizeof(ManagedArrayAccessor) + static_cast<CHAOS_IL2CPP_SIZE>(length) * sizeof(int32_t);
+    auto* ptr = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(total));
+    if (ptr == nullptr) return 0;
+    auto* arr = reinterpret_cast<ManagedArrayAccessor*>(ptr);
+    arr->header_data[0] = 0;
+    arr->element_type_shape = 0; // byte array shape
+    arr->element_type_info = nullptr;
+    arr->length = length;
+    auto* elements = reinterpret_cast<CHAOS_IL2CPP_INT32*>(accessor_get_elements(arr));
+    if (length > 0)
+    {
+        auto* src = reinterpret_cast<const CHAOS_IL2CPP_INT32*>(fields[0]);
+        if (src != nullptr)
+            std::memcpy(elements, src, static_cast<CHAOS_IL2CPP_SIZE>(length) * sizeof(int32_t));
+    }
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
+}
+
 CHAOS_IL2CPP_INT32 ChaosBitConverterToInt32(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept
 {
     if (byteArray == 0) return 0;
