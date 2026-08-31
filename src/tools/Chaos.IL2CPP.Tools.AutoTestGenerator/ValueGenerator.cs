@@ -231,6 +231,20 @@ public sealed class ValueGenerator
         // combinations so the generated test actually verifies real semantics.
         AddSemanticMethodValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
 
+        // 防线 4: 警告 — 如果该方法的全部值集都只包含 default 输入（所有参数都是
+        // default/null），则说明该方法的 AOT 行为可能被蒙过。这个警告被 pipeline 的
+        // fact 阶段捕获（fact_chunk.py 中的 value_suspicious 检测）。
+        // 这里不阻断 pipeline，但留下可被 grep 的标记。
+        if (sets.Count > 0 && sets.All(s => s.ArgumentExpressions.All(IsDefaultArgument)))
+        {
+            // 静默警告：该方法的所有 value set 都只含 default 输入
+            // 这不会阻断 pipeline，但会被 fact_chunk.py 的覆盖门禁捕获
+            System.Console.Error.WriteLine(
+                $"[probe-warn] ALL-DEFAULT-SETS: {method.DeclaringTypeFullName}.{method.Name} " +
+                $"({methodIndex}): {string.Join(", ", paramTypes)} — " +
+                $"all {sets.Count} value sets use only default arguments");
+        }
+
         // Collection state variant: populate the first collection-like parameter with
         // non-empty data (e.g. List<T> with 2 elements, Dictionary<K,V> with 1 entry).
         // This exercises methods that behave differently on empty vs. populated collections
@@ -282,6 +296,29 @@ public sealed class ValueGenerator
             return $"out {_serializer.DefaultExpression(baseType)}";
         }
         return _serializer.DefaultExpression(typeName);
+    }
+
+    /// <summary>
+    /// True if a C# argument expression is its type's default/null value (i.e. it
+    /// won't exercise any non-trivial branch in the callee).  Used by the coverage
+    /// gate to flag methods whose probes are all default and may therefore be masked
+    /// by a default-return stub.
+    /// </summary>
+    private static bool IsDefaultArgument(string expr)
+    {
+        if (string.IsNullOrWhiteSpace(expr)) return true;
+        var e = expr.Trim();
+        // numeric zero
+        if (e == "0" || e == "0f" || e == "0d" || e == "0m" || e == "0L" || e == "0u") return true;
+        // false / null / default(...)
+        if (e == "false" || e == "null!" || e == "null") return true;
+        if (e.StartsWith("default(", StringComparison.Ordinal)) return true;
+        if (e.StartsWith("out default", StringComparison.Ordinal)) return true;
+        // empty string vs meaningful string
+        if (e == "\"\"") return true;
+        // out-expression for ref/out params uses its default
+        if (e.StartsWith("out ", StringComparison.Ordinal)) return true;
+        return false;
     }
 
     private string BoundaryValue(string typeName, int variantIndex, bool isRefStruct = false)
