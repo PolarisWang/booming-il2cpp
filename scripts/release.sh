@@ -245,8 +245,8 @@ else
         echo "  pushing tag ${TAG}"
         git push origin "$TAG" || echo "  (tag push failed; may already exist)"
     fi
-    PUBLISH_ARGS=("release" "create" "$TAG")
-    if [ -f "$NOTES_FILE" ]; then PUBLISH_ARGS+=("--notes-file" "$NOTES_FILE"); fi
+    PUBLISH_ARGS=("create" "$TAG")
+    if [ -f "$NOTES_FILE" ]; then PUBLISH_ARGS+=("-F" "$NOTES_FILE"); fi
     if [ -f "$SDK_DIR/SHA256SUMS" ]; then PUBLISH_ARGS+=("--verify-tag"); fi
     GH_OUT=$(gh release "${PUBLISH_ARGS[@]}" 2>&1) && echo "  created release: $GH_OUT" \
         || echo "  ⚠️  gh release create returned nonzero (may already exist): $GH_OUT" >&2

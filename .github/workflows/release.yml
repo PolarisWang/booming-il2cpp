@@ -212,9 +212,8 @@ jobs:
             $([ "$PRERELEASE" = "true" ] && echo "--prerelease") \
             --title "v$VERSION" \
             --verify-tag
-          # Upload all files in the bundle (flat, one level deep)
+          # Upload all files in the bundle
           find "$BUNDLE_DIR" -type f \
-            ! -name "SHA256SUMS" -o -name "SHA256SUMS" \
             | while read -r f; do
               echo "Uploading: $f"
               gh release upload "v$VERSION" "$f" --clobber
