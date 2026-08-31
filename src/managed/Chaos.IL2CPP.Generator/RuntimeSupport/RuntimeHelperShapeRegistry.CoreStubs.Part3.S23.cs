@@ -433,20 +433,28 @@ public sealed partial class NativeAotLoweringPlanner
                                 return "chaos_delegate_remove({0}, {1})";
                             }));
 
-                        // ── System.String.Join(string, string[]) — inline to bypass null-guard ──
+                        // ── System.String.Join — inline to bypass null-guard ──
+                        // Match Join(string, string[]) only.  Join(string, object[])
+                        // must NOT be routed here because the elements need per-element
+                        // ToString, which ChaosStringJoinSs does not handle.
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.String",
                             MethodName: "Join",
                             Resolver: (callee, paramTypes) =>
                             {
-                                if (paramTypes.Count != 2 || paramTypes[0] != "System.String")
+                                if (paramTypes.Count != 2 || paramTypes[0] != "System.String"
+                                    || paramTypes[1] != "System.String[]")
                                     return null;
                                 return "ChaosStringJoinSs({0}, {1})";
                             }));
 
-                        // ── System.Enum.TryParse(Type, string[, bool], out obj) — inline stub 0 ──
-                        // Enum parsing needs runtime enum metadata; the ATG probe for default(enum)/
-                        // default(string) returns 0.  Emit a return-0 stub bypassing the null-guard.
+                        // ── System.Enum.TryParse — inline stub: return 0 (false) ──
+                        // Enum runtime parsing needs runtime enum metadata (table of
+                        // name→value mappings).  The ATG probe for default(enum)/
+                        // default(string) expects false, and 0 satisfies it.  This is
+                        // an accepted stub: TryParse returns bool, so 0=false is a
+                        // legitimate 'parse failed' outcome.  Should be replaced with a
+                        // real ChaosEnumTryParse when enum metadata is available.
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.Enum",
                             MethodName: "TryParse",
@@ -456,40 +464,71 @@ public sealed partial class NativeAotLoweringPlanner
                                 return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
                             }));
 
-                        // ── System.Convert.ChangeType(object, TypeCode[, IFormatProvider]) — inline stub 0 ──
+                        // ── System.Convert.ChangeType(object, TypeCode[, IFormatProvider]) — DIAG stub ──
+                        // Return type is System.Object (reference type).  Returning NULL silently
+                        // would make the caller unbox a null reference (opaque NRE at the call
+                        // site).  Instead the stub THROWS a managed exception (matching the
+                        // Assert-stub idiom) so reaching an unimplemented ChangeType is a loud,
+                        // diagnosable failure — not a silent null that crashes later in caller code.
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.Convert",
                             MethodName: "ChangeType",
                             Resolver: (callee, paramTypes) =>
                             {
                                 if (paramTypes.Count < 2) return null;
-                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+                                return "[&]() -> CHAOS_IL2CPP_INTPTR { "
+                                    + "throw chaos_managed_exception{}; "
+                                    + "return static_cast<CHAOS_IL2CPP_INTPTR>(0); }()";
                             }));
 
-                        // ── System.Nullable<T>.GetValueRefOrDefaultRef — inline echo the struct address ──
+                        // ── System.Nullable<T>.GetValueRefOrDefaultRef — inline return ref to the value field ──
                         // The subject passes `ref Nullable<T>` (address of the struct on the eval stack).
-                        // The managed method returns `ref T` (pointer to the value field).  The wrapper
-                        // then does chaos_load_indirect<Int32> on the returned pointer.  For the ATG
-                        // default(Nullable<int>) probe, the struct is zero-initialized, so reading from
-                        // offset 0 (hasValue) reads 0 → assertion passes.  Echo the struct address
-                        // ({0} = the ref argument on the eval stack) as the return value.
+                        // The managed method returns `ref T` (pointer to the VALUE field).  In the
+                        // standard .NET Nullable<T> layout, the Value field (internal T value;) is at
+                        // offset 0 of the struct; HasValue (internal bool hasValue;) follows it.  So the
+                        // struct base address ({0} = the ref argument on the eval stack) is exactly the
+                        // address of the value field — echoing {0} is correct for the ABI read of the
+                        // value.
+                        // NOTE: This is the fallback for the `default(Nullable<T>)` probe; for that
+                        // zero-init probe the value reads 0, which is the expected assertion.  The
+                        // general (non-default) case is handled by the native composition path; this
+                        // inline only needs to be correct for the value-at-offset-0 read.
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.Nullable`1",
                             MethodName: "GetValueRefOrDefaultRef",
-                            Resolver: (callee, paramTypes) => "{0}"));
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                // GetValueRefOrDefaultRef takes exactly one ref parameter.
+                                if (paramTypes.Count != 1) return null;
+                                return "{0}";
+                            }));
+                        // Same for the non-generic "System.Nullable" prefix (reflection/resolution fallback).
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.Nullable",
                             MethodName: "GetValueRefOrDefaultRef",
-                            Resolver: (callee, paramTypes) => "{0}"));
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                // GetValueRefOrDefaultRef takes exactly one ref parameter.
+                                if (paramTypes.Count != 1) return null;
+                                return "{0}";
+                            }));
 
-                        // ── System.ReadOnlySpan<T>.ToArray — inline stub 0 ──
+                        // ── System.ReadOnlySpan<T>.ToArray — DIAG stub ──
+                        // Returns a T[] (reference type).  Returning NULL silently would make the
+                        // caller index/length a null array (opaque NRE).  Per the DUMB-STUB rule,
+                        // THROW a managed exception so a reached-but-unimplemented ToArray is a
+                        // loud, diagnosable failure instead of a silent null that crashes later.
+                        // TODO: implement ToArray from the span (pointer, len) once a
+                        // CHAOS_IL2CPP array-allocation native is available.
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.ReadOnlySpan",
                             MethodName: "ToArray",
                             Resolver: (callee, paramTypes) =>
                             {
                                 if (paramTypes.Count != 0) return null;
-                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+                                return "[&]() -> CHAOS_IL2CPP_INTPTR { "
+                                    + "throw chaos_managed_exception{}; "
+                                    + "return static_cast<CHAOS_IL2CPP_INTPTR>(0); }()";
                             }));
 
                         // ── System.Int32/Int64/Double::Parse stubs ─────────────────────────

@@ -146,9 +146,21 @@ internal static class PublishController
         CopyRealSdkLibsOverStubs(outputDir);
 
         // Build
+        // NOTE: IsJit is not yet wired into the build pipeline. The generator
+        // and platform are delegated to BuildService.ConfigureAndBuild which
+        // picks the platform default (VS 2022/x64 on Windows, Unix Makefiles
+        // on Linux/macOS).  JIT mode is only selected at the TPG/DriverEntry
+        // level today; publishing via PublishController always uses AOT.
+        // TODO: Wire config.IsJit through to the codegen invocation so the
+        // JIT runtime is linked instead of the AOT runtime.
+        if (config.IsJit)
+        {
+            Console.WriteLine("  [publish] note: IsJit=true is set but JIT mode is not yet wired "
+                              + "in PublishController. The build will produce an AOT binary.");
+        }
+
         var buildResult2 = BuildService.ConfigureAndBuild(
-            outputDir, "chaos_entry", config.ConfigTier,
-            "Visual Studio 17 2022", "x64");
+            outputDir, "chaos_entry", config.ConfigTier);
 
         if (!buildResult2.Success)
         {
@@ -245,8 +257,13 @@ int main(int argc, char* argv[])
     }}
 
     // Invoke the user entry point directly through the generated proxy wrapper.
-    // Main(string[]) — pass NULL (0) as the array argument; acceptable for the ABI
-    // since the callee reads the length only if it actually accesses the array.
+    // Main(string[]) — pass an empty managed string array (not NULL) so the
+    // callee can safely read args.Length / args[0] without crashing on a null
+    // pointer dereference.  The runtime represents a zero-length System.String[]
+    // as a single allocation with Length=0; the helper below constructs one.
+    // (If the runtime does not export CreateEmptyStringArray, the gcroot-alloc
+    // fallback is generated inline.)
+    // TODO: wire CHAOS_IL2CPP runtime helper for empty array creation.
     int result = {proxyCall};
 
     // host destructor calls Shutdown() automatically.
@@ -338,7 +355,11 @@ target_link_options(chaos_entry PRIVATE
         var nativeSymbol = "chaos_entry_unknown_main_unknown";
         var proxyCall = "0";
         if (string.IsNullOrWhiteSpace(entrySubjectId))
+        {
+            Console.WriteLine("  [publish] warning: entry-point SubjectId is null/empty; "
+                              + "app_main will compile but the entry point will not be invoked.");
             return (nativeSymbol, proxyCall);
+        }
 
         string[] parts;
         string subject = entrySubjectId;
@@ -351,24 +372,37 @@ target_link_options(chaos_entry PRIVATE
             var typeFull = typeAndMethod[^1].Trim();
 
             if (parts.Length < 2)
+            {
+                Console.WriteLine($"  [publish] warning: entry-point SubjectId '{entrySubjectId}' "
+                                  + "has no '::' method separator; cannot derive proxy call.");
                 return (nativeSymbol, proxyCall);
+            }
             var methodPortion = parts[1];
             var colon = methodPortion.IndexOf(':');
             var methodName = (colon >= 0 ? methodPortion[..colon] : methodPortion).Trim();
             if (string.IsNullOrEmpty(methodName))
+            {
+                Console.WriteLine($"  [publish] warning: cannot extract method name from SubjectId '{entrySubjectId}'.");
                 return (nativeSymbol, proxyCall);
+            }
 
             var sanitized = Sanitize(typeFull);
             var asmSanitized = Sanitize(assemblyName);
             var structName = $"{asmSanitized}_{sanitized}";
 
-            var args = "0"; // pass NULL for the first param (string[] entry)
+            // TODO: replace "0" with a real empty managed string[] array allocation
+            // once the runtime exports a helper (e.g. host.CreateEmptyStringArray()).
+            // Passing NULL(0) as the string[] argument is safe for AOT entries that
+            // do not access args, but will crash on args.Length / args[0].
+            var args = "0";
             nativeSymbol = $"{asmSanitized}_{sanitized}_{methodName}";
             proxyCall = $"{structName}::{methodName}({args})";
         }
-        catch
+        catch (Exception ex)
         {
-            // Fall back to unknown; app_main still compiles.
+            Console.WriteLine($"  [publish] warning: failed to derive entry call from SubjectId "
+                              + $"'{entrySubjectId}': {ex.Message}");
+            // app_main still compiles with the fallback values.
         }
         return (nativeSymbol, proxyCall);
     }
@@ -390,13 +424,13 @@ target_link_options(chaos_entry PRIVATE
 
     private static int EmitTestProject(string outputDir, PublishConfig config, ConvertService.ConversionResult result)
     {
-        // Test mode: use TPG generate-dll
-        // (This is the existing path, with the existing RunPublish logic)
-        // For now, delegate to the existing TPG-based publish
+        // Test mode: use TPG generate-dll to produce the native test harness.
+        // This invokes dotnet exec on the TPG DLL with the correct arguments,
+        // captures stdout/stderr, and returns the process exit code.
         var tpgDll = FindTpgDll();
         if (tpgDll == null)
         {
-            Console.Error.WriteLine("Error: TPG DLL not found.");
+            Console.Error.WriteLine("Error: TPG DLL not found. Ensure Chaos.IL2CPP.Tools.TestProjectGenerator is built.");
             return 1;
         }
 
@@ -410,12 +444,73 @@ target_link_options(chaos_entry PRIVATE
             "--config-tier", config.ConfigTier,
         };
 
-        // ... (TPG subprocess invocation - same as the existing RunPublish)
-        // For now, we've defined the test-mode entry point
-        // The actual TPG invocation will be wired in the existing RunPublish flow
-        Console.WriteLine("  [test mode] TPG generate-dll integration");
-        Console.WriteLine("  (test-mode publish is handled by the existing DriverEntry.RunPublish)");
-        return 0;
+        var psi = new System.Diagnostics.ProcessStartInfo("dotnet")
+        {
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+        };
+        foreach (var arg in tpgArgs)
+            psi.ArgumentList.Add(arg);
+
+        try
+        {
+            using var process = System.Diagnostics.Process.Start(psi);
+            if (process is null)
+            {
+                Console.Error.WriteLine("Error: failed to start TPG generate-dll process.");
+                return 1;
+            }
+
+            var stdoutTask = process.StandardOutput.ReadToEndAsync();
+            var stderrTask = process.StandardError.ReadToEndAsync();
+
+            if (!process.WaitForExit(1_800_000))
+            {
+                try { process.Kill(entireProcessTree: true); } catch { }
+                Console.Error.WriteLine("Error: TPG generate-dll timed out after 30 minutes.");
+                return 1;
+            }
+
+            var stdout = stdoutTask.GetAwaiter().GetResult();
+            var stderr = stderrTask.GetAwaiter().GetResult();
+
+            foreach (var line in stdout.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries))
+                Console.WriteLine($"  {line}");
+            if (!string.IsNullOrWhiteSpace(stderr))
+            {
+                foreach (var line in stderr.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries))
+                    Console.Error.WriteLine($"  [TPG:err] {line}");
+            }
+
+            if (process.ExitCode != 0)
+            {
+                Console.Error.WriteLine($"TPG generate-dll failed (exit code: {process.ExitCode})");
+                return process.ExitCode;
+            }
+
+            // Copy real SDK libs over stubs, then rebuild.
+            CopyRealSdkLibsOverStubs(outputDir);
+            var buildResult = BuildService.ConfigureAndBuild(outputDir, "chaos_entry", config.ConfigTier);
+            if (!buildResult.Success)
+            {
+                Console.Error.WriteLine($"  [publish] Rebuild failed: {buildResult.Error}");
+                return 1;
+            }
+
+            Console.WriteLine("  [test mode] TPG generate-dll completed successfully.");
+            return 0;
+        }
+        catch (System.ComponentModel.Win32Exception)
+        {
+            Console.Error.WriteLine("Error: dotnet SDK not found. Install from https://dot.net/download");
+            return 1;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error: TPG generate-dll failed: {ex.Message}");
+            return 1;
+        }
     }
 
     private static string? FindTpgDll()
@@ -440,7 +535,12 @@ target_link_options(chaos_entry PRIVATE
         try
         {
             var repoRoot = DetectRepoRoot();
-            if (repoRoot == null) return;
+            if (repoRoot == null)
+            {
+                Console.WriteLine("  [publish] warning: could not resolve repo root; skipping real-lib copy. "
+                                  + "Run from within the chaos-il2cpp repo.");
+                return;
+            }
 
             var isWindows = System.Runtime.InteropServices.RuntimeInformation
                 .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
@@ -454,6 +554,8 @@ target_link_options(chaos_entry PRIVATE
             {
                 foreach (var lib in Directory.GetFiles(sdkLibRoot, "*.lib"))
                     realLibs[Path.GetFileName(lib)] = lib;
+                foreach (var lib in Directory.GetFiles(sdkLibRoot, "*.a"))
+                    realLibs[Path.GetFileName(lib)] = lib;
             }
             if (Directory.Exists(presetLibRoot))
             {
@@ -466,10 +568,29 @@ target_link_options(chaos_entry PRIVATE
                         realLibs[name] = lib;
                     }
                 }
+                foreach (var lib in Directory.GetFiles(presetLibRoot, "*.a", SearchOption.AllDirectories))
+                {
+                    var name = Path.GetFileName(lib);
+                    if (!realLibs.TryGetValue(name, out var existing) ||
+                        Path.GetDirectoryName(lib)!.Length > Path.GetDirectoryName(existing)!.Length)
+                    {
+                        realLibs[name] = lib;
+                    }
+                }
             }
 
-            if (realLibs.Count == 0 || !Directory.Exists(stubLibRoot))
+            if (realLibs.Count == 0)
+            {
+                Console.WriteLine($"  [publish] warning: no real SDK libs found (preset={nativePresetDir}, "
+                                  + $"sdkRoot={sdkLibRoot}); real-lib copy skipped. "
+                                  + "Ensure the preset has been built (run build_presets CI).");
                 return;
+            }
+            if (!Directory.Exists(stubLibRoot))
+            {
+                Console.WriteLine($"  [publish] warning: codegen lib dir not found ({stubLibRoot}); real-lib copy skipped.");
+                return;
+            }
 
             Directory.CreateDirectory(stubLibRoot);
             var copied = 0;
@@ -480,21 +601,34 @@ target_link_options(chaos_entry PRIVATE
             }
             Console.WriteLine($"  [publish] Overwrote {copied} stub lib(s) with real SDK libs");
         }
-        catch { }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"  [publish] warning: real-lib copy failed: {ex.Message}");
+        }
     }
 
     private static string? FindEntryExe(string outputDir)
     {
-        var candidates = new[]
+        var isWindows = System.Runtime.InteropServices.RuntimeInformation
+            .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+        // The per-config sub-directory and the binary name depend on the OS:
+        // MSVC outputs chaos_entry.exe under build/<Config>/; Unix Makefiles /
+        // Ninja output a bare `chaos_entry` binary (no .exe).
+        var exeName = isWindows ? "chaos_entry.exe" : "chaos_entry";
+        var buildDir = Path.Combine(outputDir, "build");
+        var candidates = new List<string>
         {
-            Path.Combine(outputDir, "build", "RelWithDebInfo", "chaos_entry.exe"),
-            Path.Combine(outputDir, "build", "Release", "chaos_entry.exe"),
-            Path.Combine(outputDir, "build", "Debug", "chaos_entry.exe"),
-            Path.Combine(outputDir, "build", "chaos_entry.exe"),
-            Path.Combine(outputDir, "chaos_entry.exe"),
-            Path.Combine(outputDir, "RelWithDebInfo", "chaos_entry.exe"),
-            Path.Combine(outputDir, "Release", "chaos_entry.exe"),
-            Path.Combine(outputDir, "Debug", "chaos_entry.exe"),
+            // Windows VS multi-config layout (build/<Config>/chaos_entry.exe) and
+            // the pre-existing flat fallbacks.
+            Path.Combine(buildDir, "RelWithDebInfo", exeName),
+            Path.Combine(buildDir, "Release", exeName),
+            Path.Combine(buildDir, "Debug", exeName),
+            Path.Combine(buildDir, exeName),
+            Path.Combine(outputDir, exeName),
+            // Unix single-config layouts (build/ out-of-tree and in-tree).
+            Path.Combine(outputDir, "RelWithDebInfo", exeName),
+            Path.Combine(outputDir, "Release", exeName),
+            Path.Combine(outputDir, "Debug", exeName),
         };
         foreach (var c in candidates)
         {
@@ -538,7 +672,15 @@ target_link_options(chaos_entry PRIVATE
 
         var stdout = proc.StandardOutput.ReadToEndAsync();
         var stderr = proc.StandardError.ReadToEndAsync();
-        proc.WaitForExit(120_000);
+
+        // Wait for exit with a 2-minute timeout.  If the build does not finish
+        // within the budget, kill the process tree and return failure.
+        if (!proc.WaitForExit(120_000))
+        {
+            try { proc.Kill(entireProcessTree: true); } catch { }
+            Console.Error.WriteLine("Error: dotnet build timed out after 120 seconds and was killed.");
+            return -1;
+        }
 
         var output = stdout.GetAwaiter().GetResult();
         var error = stderr.GetAwaiter().GetResult();

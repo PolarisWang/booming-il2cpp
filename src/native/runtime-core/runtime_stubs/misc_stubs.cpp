@@ -3,10 +3,12 @@
 // misc_stubs.cpp — Miscellaneous stub implementations
 // Array, Buffer, Type marshalling, Culture, GC, Environment, Console, Delegate
 #include <chaos/native_types.h>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 
 #include "generated_code_compat.h"
+#include "string_table.h"
 #include "runtime_stubs/stub_common.h"
 #include "runtime_stubs/string_stubs.h"
 #include "gc_helpers.h"
@@ -357,7 +359,28 @@ CHAOS_IL2CPP_INTPTR ChaosConsoleGetError(void) noexcept { return 0; }
 
 void ChaosConsoleWriteLine(CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    (void)value;
+    // resolve_string_arg is static in string_stubs.cpp; inline the resolution
+    // here so we can print the string content.
+    if (value == 0) { std::fputs("[null]\n", stdout); return; }
+    const void* str_arg = reinterpret_cast<const void*>(value);
+    if (!chaos_is_string_id(value))
+    {
+        // Already a real pointer (StubStringHeader*).
+        auto data = stub_string_data(str_arg);
+        if (data != nullptr)
+        {
+            std::fputs(data, stdout);
+            std::fputc('\n', stdout);
+        }
+        return;
+    }
+    // StringId path: resolve through the AOT string table.
+    auto view = string_table::Resolve(chaos_extract_string_id(value));
+    if (view.utf8_data != nullptr)
+    {
+        std::fwrite(view.utf8_data, sizeof(char), view.byte_count, stdout);
+        std::fputc('\n', stdout);
+    }
 }
 
 // ── Delegate ──

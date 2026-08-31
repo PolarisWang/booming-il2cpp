@@ -116,12 +116,19 @@ internal static class ConvertService
 
         if (assemblyPaths.Count == 1)
         {
+            // FullAssemblyClosure is driven ONLY by the caller's explicit flag.  It
+            // is NOT forced by the absence of an entryPoint override: auto-detection
+            // of Main is orthogonal to closure depth (the loader re-derives the entry
+            // from the PE token independently).  Tying closure depth to entry-point
+            // null-ness would silently expand codegen scope from the entry method to
+            // the whole assembly whenever the caller omitted an override, with no
+            // config escape hatch — surprising large translations.
             var request = new ManagedClosureRequest(
                 assemblyPaths[0],
                 outputRoot,
                 EntryPointSubjectIdOverride: entryPoint,
                 AdditionalAssemblyPaths: additionalPaths,
-                FullAssemblyClosure: fullClosure || string.IsNullOrWhiteSpace(entryPoint))
+                FullAssemblyClosure: fullClosure)
             {
                 SubjectMethodIds = subjectMethods?.ToHashSet(StringComparer.Ordinal),
             };
@@ -165,9 +172,7 @@ internal static class ConvertService
             {
                 Console.Write("  Emitting chaos-sdk...");
                 var repoRoot = ResolveRepoRoot();
-                var isWindows = System.Runtime.InteropServices.RuntimeInformation
-                    .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
-                var nativePresetDir = isWindows ? "windows-x64-reference" : "linux-x64-profile";
+                var nativePresetDir = ResolveNativePreset();
                 var nativeLibDir = Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
                 var assemblyName = result.ClosureManifest?.AssemblyName ?? "unknown";
                 var sdkEmitter = new SdkEmitter();
@@ -253,9 +258,7 @@ internal static class ConvertService
             {
                 Console.Write("  Emitting chaos-sdk...");
                 var repoRoot = ResolveRepoRoot();
-                var isWindows = System.Runtime.InteropServices.RuntimeInformation
-                    .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
-                var nativePresetDir = isWindows ? "windows-x64-reference" : "linux-x64-profile";
+                var nativePresetDir = ResolveNativePreset();
                 var nativeLibDir = Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
                 var assemblyName = results.FirstOrDefault()?.ClosureManifest?.AssemblyName ?? "combined";
                 var sdkEmitter = new SdkEmitter();
@@ -378,7 +381,18 @@ internal static class ConvertService
             if (entryPointToken == null || entryPointToken.Value == 0)
                 return null;
 
-            return $"(entry point token: 0x{entryPointToken.Value:X8})";
+            // PE-metadata token-only fallback: we cannot resolve the real SubjectId
+            // ({assembly}/{ns}.{Type}::{Method}:{Ret}({Params})) from PEReader alone
+            // because it does not expose Assembly.FullName or type/method names.
+            // Returning a fabricated string like "(entry point token: 0x{token})" would
+            // be a pseudo-SubjectId that no caller can match against the canonical format.
+            // Instead, return null so callers do not attempt to use a bogus SubjectId.
+            // The entry point is still auto-detected by the loader (ManagedClosureRequest)
+            // from the PE entry-point token independently.
+            Console.WriteLine($"  [convert] warning: entry-point metadata (token 0x{entryPointToken.Value:X8}) "
+                              + "cannot be resolved to a SubjectId from PE metadata. "
+                              + "The loader will auto-detect the entry point from the token.");
+            return null;
         }
         catch
         {
@@ -424,5 +438,50 @@ internal static class ConvertService
             dir = candidate;
         }
         return null;
+    }
+
+    /// <summary>
+    /// Resolve the native build preset directory (under artifacts/presets/) for the
+    /// current runtime platform + architecture.  On unsupported platforms this logs
+    /// an explicit warning and falls back to linux-x64-profile so the ABI mismatch
+    /// is surfaced rather than silently linking the wrong-arch library.
+    /// </summary>
+    private static string ResolveNativePreset()
+    {
+        var os = System.Runtime.InteropServices.RuntimeInformation
+            .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows)
+            ? "windows"
+            : System.Runtime.InteropServices.RuntimeInformation
+                .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux)
+                ? "linux"
+                : System.Runtime.InteropServices.RuntimeInformation
+                    .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX)
+                    ? "osx"
+                    : "unknown";
+        var arch = System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture
+            .ToString().ToLowerInvariant();
+
+        // Known preset combinations.  Add new entries as presets are produced.
+        var known = new (string Os, string Arch, string Dir)[]
+        {
+            ("windows", "x64", "windows-x64-reference"),
+            ("linux", "x64", "linux-x64-profile"),
+            ("linux", "arm64", "linux-arm64-profile"),
+            ("osx", "x64", "osx-x64-profile"),
+            ("osx", "arm64", "osx-arm64-profile"),
+        };
+
+        foreach (var (o, a, d) in known)
+        {
+            if (string.Equals(o, os, StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(a, arch, StringComparison.OrdinalIgnoreCase))
+            {
+                return d;
+            }
+        }
+
+        Console.Error.WriteLine($"  [convert] WARNING: no native preset for OS='{os}' arch='{arch}'; "
+                                + "falling back to linux-x64-profile (ABI may mismatch).");
+        return "linux-x64-profile";
     }
 }

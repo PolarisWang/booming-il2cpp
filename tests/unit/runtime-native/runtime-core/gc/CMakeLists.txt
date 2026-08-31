@@ -454,6 +454,14 @@ chaos_native_add_test(test_gc_general_stress
 )
 set_tests_properties(test_gc_general_stress PROPERTIES LABELS "stress;gc" TIMEOUT 300)
 
+# gc_server_stress_test — Server GC multi-heap concurrent pressure
+# (ConcurrentAllocWithFullGc, LargeObjectAcrossHeaps).  Runs under both WKS
+# (single-heap fallback) and Server GC (CHAOS_IL2CPP_GC_SERVER=ON) modes.
+chaos_native_add_test(test_gc_server_stress
+    gc_server_stress_test.cpp ${CHAOS_GC_BASE}
+)
+set_tests_properties(test_gc_server_stress PROPERTIES LABELS "stress;gc" TIMEOUT 300)
+
 # delegate_stress_test — Multi-threaded delegate stress (A1-E5)
 chaos_native_add_test(test_gc_delegate_stress
     delegate_stress_test.cpp ${CHAOS_GC_BASE}

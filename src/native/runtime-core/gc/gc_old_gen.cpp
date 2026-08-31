@@ -437,8 +437,8 @@ void MarkSweepOldGen::FreePage(OldGenPage* page) {
     VirtualFreePage(page, page->page_size);
 }
 
-// ���� Sorted page index (doubly-buffered for lock-free reads) ������������
 
+// ���� Sorted page index (doubly-buffered for lock-free reads) ������������
 void MarkSweepOldGen::RebuildPageArray() {
     // Collect all in-use pages.
     int count = 0;
@@ -3228,8 +3228,8 @@ void MarkSweepOldGen::AddPinnedRoot(void* addr, CHAOS_IL2CPP_SIZE size) {
     pinned_roots_.push_back({addr, size});
 }
 
-// ���� Root scanning ����������������������������������������������������������������������������������
 
+// ���� Root scanning ����������������������������������������������������������������������������������
 bool MarkSweepOldGen::TryMarkRoot(void* addr) {
     // addr comes from GcScanAllThreadRoots: it is the address of a stack slot.
     // Read the VALUE at that slot �� if it points to old-gen, mark it.
@@ -3438,8 +3438,8 @@ std::vector<FinalizerEntry> MarkSweepOldGen::CollectDeadFinalizables() {
     return dead_entries;
 }
 
-// ���� Finalizer suppression support ��������������������������������������������������
 
+// ���� Finalizer suppression support ��������������������������������������������������
 void MarkSweepOldGen::SuppressFinalizer(void* obj) {
     if (obj == nullptr) return;
     std::lock_guard<std::mutex> lock(mutex_);
@@ -3460,8 +3460,8 @@ void MarkSweepOldGen::ReRegisterFinalizer(void* obj) {
     }
 }
 
-// ���� BGC concurrent-safe mark ��������������������������������������������������������������������������
 
+// ���� BGC concurrent-safe mark ��������������������������������������������������������������������������
 bool MarkSweepOldGen::BgcTryMark(void* obj) {
     // Delegate to MarkObject which already uses atomic bitmap operations.
     // The concurrent BGC thread and STW parallel mark can safely interleave
@@ -3469,7 +3469,30 @@ bool MarkSweepOldGen::BgcTryMark(void* obj) {
     return MarkObject(obj);
 }
 
-// ���� BGC concurrent sweep ����������������������������������������������������������������������������������
+
+// ── BGC concurrent sweep ────────────────────────────────────────────────────────────────────────
+
+// RAII guard that switches the calling thread to preemptive GC mode for the
+// duration of a BGC concurrent phase and restores cooperative mode on scope
+// exit --- including on exception (std::vector allocations in the phase body can
+// throw std::bad_alloc).  Leaving the BGC thread permanently in preemptive
+// mode would make its thread-state object invisible to GC root scanning and
+// exempt it from safepoint participation, so the restore MUST be exception-safe.
+//
+// Requires: the calling thread is registered (tls_this_thread != nullptr) and
+// is entering the phase in cooperative mode.  EnterCooperativeMode/EnterPreemptiveMode
+// are noexcept, so both the ctor and dtor are noexcept as required.
+class [[nodiscard]] ScopedPreemptiveMode {
+public:
+    ScopedPreemptiveMode() noexcept {
+        threading::EnterPreemptiveMode();
+    }
+    ~ScopedPreemptiveMode() {
+        threading::EnterCooperativeMode();
+    }
+    ScopedPreemptiveMode(const ScopedPreemptiveMode&) = delete;
+    ScopedPreemptiveMode& operator=(const ScopedPreemptiveMode&) = delete;
+};
 
 void MarkSweepOldGen::BgcSweep() {
     // Enter preemptive mode for the duration of sweep (CoreCLR-aligned).
@@ -3477,7 +3500,11 @@ void MarkSweepOldGen::BgcSweep() {
     // hold it for page iterations.  In cooperative mode this blocks the BGC
     // thread from acknowledging a safepoint → coordinator counts it
     // unresponsive → hard timeout forced-release → OOM/crash.
-    threading::EnterPreemptiveMode();
+    // RAII guard guarantees cooperative mode is restored on every exit path
+    // (normal return, exception from vector reserve/push_back below, or any
+    // future early return), so the BGC thread can never be stranded in
+    // preemptive mode.
+    const ScopedPreemptiveMode preemptive_guard;
 
     // Snapshot page list under mutex.
     // Prioritize young_tenured pages (recent survivor promotions) so
@@ -3700,15 +3727,16 @@ void MarkSweepOldGen::BgcSweep() {
     // are now considered mature tenured for the next BGC cycle.
     ClearYoungTenuredFlags();
 
-    threading::EnterCooperativeMode();
+    // (cooperative mode restored by preemptive_guard dtor)
 }
 
-// ���� BGC concurrent compaction ������������������������������������������������������������������������
 
 void MarkSweepOldGen::BgcCompact() {
     // Enter preemptive mode for the duration of compact (same rationale
     // as BgcSweep: mutex_ blocking in cooperative mode hangs safepoint).
-    threading::EnterPreemptiveMode();
+    // RAII guard restores cooperative mode on every exit path (normal return,
+    // exception, or future early return).
+    const ScopedPreemptiveMode preemptive_guard;
 
     // Transfer pinned roots to compaction skip list so PlanPageEvacuation
     // excludes them from cross-page relocation (same as Collect() does).
@@ -3771,7 +3799,7 @@ void MarkSweepOldGen::BgcCompact() {
     // Clear compaction skip list (snapshot of pinned_roots_ taken above).
     pinned_compact_skip_.clear();
 
-    threading::EnterCooperativeMode();
+    // (cooperative mode restored by preemptive_guard dtor)
 }
 
 // ======================================================================

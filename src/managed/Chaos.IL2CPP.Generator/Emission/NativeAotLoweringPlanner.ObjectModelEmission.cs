@@ -470,6 +470,17 @@ public sealed partial class NativeAotLoweringPlanner
 					methodsByDeclaringTypeVT[dt] = list = new List<AotCoreIrMethodArtifact>();
 				list.Add(method);
 			}
+			// Track declaring types of all methods so static classes with only static methods
+			// (e.g., HelloWorld.Program) have their MethodTable definitions emitted.
+			// This must happen before sortedReferenceTypes is computed below.
+			foreach (var m in _methodsBySubjectId.Values)
+			{
+				if (m.Identity?.DeclaringTypeSubjectId is { Length: > 0 } declType &&
+				    !declType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+				{
+					TrackReferenceType(declType, null);
+				}
+			}
 			// Ensure hashSet3 value types are in valueTypeSubjectIds before sortedReferenceTypes
 			// filter (must precede the filter to prevent C2374 redefinition from dual emission).
 			foreach (string vtId in hashSet3)

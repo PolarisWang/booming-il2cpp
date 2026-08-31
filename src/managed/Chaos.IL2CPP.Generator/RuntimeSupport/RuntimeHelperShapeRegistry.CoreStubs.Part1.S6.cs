@@ -109,11 +109,24 @@ public sealed partial class NativeAotLoweringPlanner
                             CreateVoidAbiSlot(),
                             EmptyRawArgumentIndices);
                     }
-                    // WriteLine(string) — 1-arg static
+                    // WriteLine(string) — 1-arg static: print to stdout
                     var src1 = RenderSimpleExternalRuntimeHelper("void", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    (void)chaos_arg_0;",
+                        "    if (chaos_arg_0 == 0) { std::fputs(\"[null]\\n\", stdout); return; }",
+                        "    const void* str_arg = reinterpret_cast<const void*>(chaos_arg_0);",
+                        "    if (!chaos_is_string_id(chaos_arg_0))",
+                        "    {",
+                        "        auto data = stub_string_data(str_arg);",
+                        "        if (data != nullptr) { std::fputs(data, stdout); std::fputc('\\n', stdout); }",
+                        "        return;",
+                        "    }",
+                        "    auto view = string_table::Resolve(chaos_extract_string_id(chaos_arg_0));",
+                        "    if (view.utf8_data != nullptr)",
+                        "    {",
+                        "        std::fwrite(view.utf8_data, sizeof(char), view.byte_count, stdout);",
+                        "        std::fputc('\\n', stdout);",
+                        "    }",
                     ]);
                     return new GenericShapeResolution(src1, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
