@@ -306,6 +306,32 @@ constexpr uint32_t kGcModePreemptive  = 1;
                thread->suspend_seq.load(std::memory_order_acquire) != 0;
     }
 
+    // ── A3 Hybrid: global returning-thread trap (CoreCLR g_TrapReturningThreads) ──
+    // Set by RequestGlobalSafepoint before driving threads to rendezvous, cleared
+    // by ReleaseGlobalSafepoint.  A thread entering cooperative mode re-checks it
+    // (DisablePreemptiveGC semantics): if set, the thread must fall back to
+    // preemptive and wait on suspend_event (rendezvous) rather than enter managed
+    // code mid-GC.  Combined with per-thread suspend_seq/ack, this is the
+    // "soft rendezvous main path" of the A3 Hybrid safepoint.
+    //
+    // Declared extern here, DEFINED once in thread_state.cpp — NOT a function-local
+    // static (which would give each TU its own copy and break cross-thread
+    // visibility of the trap).  Single shared instance, adjust memory_order on
+    // acquire/release pairs exactly like suspend_seq.
+    extern std::atomic<uint32_t> g_trap_returning_threads;
+
+    inline bool TrapReturningThreads() noexcept {
+        return g_trap_returning_threads.load(std::memory_order_acquire) != 0;
+    }
+
+    inline void SetTrapReturningThreads() noexcept {
+        g_trap_returning_threads.store(1, std::memory_order_release);
+    }
+
+    inline void ClearTrapReturningThreads() noexcept {
+        g_trap_returning_threads.store(0, std::memory_order_release);
+    }
+
     /// Called at GC safe points (loop back-edges, method calls).
     /// If a GC safepoint is active, the thread acknowledges and spins until
     /// released.  Threads that are inside native AOT frames (which lack

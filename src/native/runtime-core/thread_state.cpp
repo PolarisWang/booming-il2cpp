@@ -245,6 +245,14 @@ static constexpr uint64_t kSafepointHardTimeoutNs = 500ULL * 1000000ULL;  // 500
 static constexpr int kSpinYieldThreshold = 32768;
 }  // anonymous namespace
 
+/// Global returning-thread trap (A3 Hybrid, g_TrapReturningThreads equivalent).
+/// Set by RequestGlobalSafepoint before the cooperative→preemptive drive,
+/// cleared by ReleaseGlobalSafepoint.  Declared extern in thread_state.h;
+/// defined here OUTSIDE the anonymous namespace so the extern declaration in
+/// thread_state.h resolves to this definition at link time (a symbol inside an
+/// anonymous namespace has internal linkage and would not satisfy the extern).
+std::atomic<uint32_t> g_trap_returning_threads{0};
+
 void SafepointPoll() noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("SafepointPoll");
 
@@ -315,6 +323,29 @@ void SafepointPoll() noexcept {
 void EnterCooperativeMode() noexcept {
     auto* thread = tls_this_thread;
     if (thread == nullptr) return;
+
+    // ── A3 Hybrid: returning-thread trap check (DisablePreemptiveGC semantics) ──
+    // If a safepoint is in progress (trap set), a thread about to enter
+    // cooperative mode must NOT enter managed code mid-GC.  It renders a
+    // rendezvous (ack any request + wait on suspend_event) until the trap
+    // clears, then enters cooperative.  This prevents a window where a thread
+    // switches to cooperative after the owner set the trap but before setting
+    // this thread's suspend_seq.
+    while (TrapReturningThreads()) {
+        // Ack any pending request (suspend_seq may be set or about to be set).
+        if (thread->suspend_seq.load(std::memory_order_acquire) != 0) {
+            thread->suspend_ack.store(thread->suspend_seq.load(std::memory_order_acquire),
+                                      std::memory_order_release);
+            if (thread->suspend_event != nullptr) {
+                // Rendezvous: block on the GC-completion event until release.
+                PalEventWait(thread->suspend_event, UINT64_MAX);
+            }
+        } else {
+            // Request not yet published; yield to let the owner proceed.
+            PalYield();
+        }
+    }
+
     thread->gc_mode.store(kGcModeCooperative, std::memory_order_release);
     // After switching to cooperative, check if a safepoint is already active.
     // If so, this thread must participate in the safepoint.
@@ -493,6 +524,22 @@ extern "C" uint32_t RequestGlobalSafepoint() noexcept {
     uint32_t epoch = s_safepoint_epoch.fetch_add(1, std::memory_order_acq_rel) + 1;
     s_safepoint_depth = 1;
 
+    // ── A3 Hybrid: set the global returning-thread trap ─────────────────
+    // This flag is checked by threads entering cooperative mode (in
+    // EnterCooperativeMode, after gc_mode store).  If set, the thread
+    // falls back to preemptive and waits on suspend_event (rendezvous)
+    // instead of entering managed code mid-GC.
+    //
+    // The trap is set BEFORE suspend_seq, so a racing thread observing
+    // suspend_seq==0 but then enabling cooperative sees the trap and
+    // rendezvous — never enters managed code with a safepoint in progress.
+    SetTrapReturningThreads();
+    // Full memory barrier so the trap is visible cross-thread before the
+    // per-thread suspend_seq stores below.  Process-wide on platforms that
+    // support it; otherwise the compiler/CPU barrier suffices for the
+    // acquire/release pairs on suspend_seq (the existing handshake contract).
+    std::atomic_thread_fence(std::memory_order_seq_cst);
+
     // Set suspend_seq for every cooperative thread.
     // Preemptive threads are excluded: they don't access managed heap,
     // so we don't need to wait for them.
@@ -635,8 +682,7 @@ extern "C" void ReleaseGlobalSafepoint(uint32_t /*epoch*/) noexcept {
     EnumerateThreads([](ManagedThread* t) -> bool {
         t->suspend_seq.store(0, std::memory_order_release);
         if (t->suspend_event != nullptr) {
-            PalEventSet(t->suspend_event);
-        }
+            PalEventSet(t->suspend_event);        }
         // Resume preemptively suspended threads.
         if (t->preemptive_suspended.load(std::memory_order_acquire)) {
             t->preemptive_suspended.store(false, std::memory_order_release);
@@ -644,6 +690,11 @@ extern "C" void ReleaseGlobalSafepoint(uint32_t /*epoch*/) noexcept {
         t->safepoint_wait_start_ns = 0;
         return true;
     });
+
+    // ── A3 Hybrid: clear the global returning-thread trap AFTER all threads
+    // are woken, so a thread re-entering cooperative mode does not rendezvous
+    // again for a safepoint that is over.
+    ClearTrapReturningThreads();
 
     // Release safepoint ownership AFTER all threads are woken.
     s_safepoint_owner.store(nullptr, std::memory_order_release);
