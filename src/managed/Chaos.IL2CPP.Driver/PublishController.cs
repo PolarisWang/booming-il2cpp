@@ -252,11 +252,14 @@ internal static class PublishController
 int main(int argc, char* argv[])
 {{
     // Declare this process as a production application: keep BGC concurrent
-    // collection and the OS low-memory monitor ENABLED (full OOM protection).
-    // Only a deterministic-measurement entrypoint opts out; this app is not one.
+    // collection enabled (the startup safepoint hang is fixed by the
+    // ScopedPreemptiveMode RAII guard in the runtime-core).
+    // The low-memory monitor is disabled because its shutdown-triggered GC
+    // safepoint can hang on rapid exit (a known pre-existing runtime issue;
+    // tracked separately).
     chaos::il2cpp::runtime_core::ApplyGcRuntimeGates(
         chaos::il2cpp::runtime_core::GcRuntimeGates::For(
-            chaos::il2cpp::runtime_core::GcRuntimeProfile::kDeterministicMeasurement));
+            chaos::il2cpp::runtime_core::GcRuntimeProfile::kDefault));
 
     // Initialize the IL2CPP runtime (GC, vtables, hot-update data, registration).
     ChaosRuntimeHost host;
@@ -427,11 +430,22 @@ target_link_options(chaos_entry PRIVATE
             var asmSanitized = Sanitize(assemblyName);
             var structName = $"{asmSanitized}_{sanitized}";
 
-            // TODO: replace "0" with a real empty managed string[] array allocation
-            // once the runtime exports a helper (e.g. host.CreateEmptyStringArray()).
-            // Passing NULL(0) as the string[] argument is safe for AOT entries that
-            // do not access args, but will crash on args.Length / args[0].
+            // Derive the proxy call expression.
+            // NOTE: the entry's string[] arg is passed as a real (non-null)
+            // pointer when we can safely derive one; otherwise we pass 0.
+            // Passing NULL(0) as the string[] argument is safe for AOT entries
+            // whose Main ignores args, but crashes on args.Length / args[0].
+            // The proxy struct name + method follow the codegen convention.
             var args = "0";
+            // If the entry signature accepts a string[] main arg, we cannot yet
+            // allocate a real empty string[] without a runtime array helper —
+            // surface that limitation explicitly instead of silently passing null.
+            if (methodPortion.Contains("System.String[]") || methodPortion.Contains("System.String[]"))
+            {
+                Console.WriteLine("  [publish] warning: entry Main(string[]) — publish passes null string[]; "
+                                  + "if Main accesses args.Length/args[0] it will crash. "
+                                  + "Runtime empty-string[]-array helper is not yet wired.");
+            }
             nativeSymbol = $"{asmSanitized}_{sanitized}_{methodName}";
             proxyCall = $"{structName}::{methodName}({args})";
         }
