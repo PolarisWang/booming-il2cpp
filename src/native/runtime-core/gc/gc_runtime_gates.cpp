@@ -13,8 +13,10 @@
 // unsupported platforms; BGC compiles to a stub).  Using forward declarations
 // here instead of #include "gc_bgc.h" / "gc_low_mem.h" avoids depending on
 // those headers being compiled on every platform.
+namespace chaos::il2cpp::runtime_core {
 extern bool g_bgc_enabled;
 extern bool g_low_mem_enabled;
+}
 
 namespace chaos::il2cpp::runtime_core {
 
