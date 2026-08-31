@@ -13,9 +13,9 @@
 
 全文使用 A1/A2/A3 表示「对 CoreCLR WKS 的对齐深度」，为避免与正文中的 bug 代号（A2b）混淆，此处显式定义：
 
-- **A1 ｜ 关键段对齐**：仅对写屏障关键路径 + safepoint 握手采用硬 STW（SuspendThread/GetThreadContext），主体保留现有 handshake 软路径。消除绝大部分 A2b 窗口，接受残余极窄竞态窗口。用于「硬 STW 全线程开销不可接受」时的回退档。
-- **A2 ｜ 混合对齐**：软路径（rendezvous handshake）为主 + 硬驱动双螺旋兜底，仅对确证需原子的 store+barrier 对切换模式。
-- **A3 ｜ 完全对齐**：**Hybrid**（软主路径 + 硬驱赶兜底，**非**全线程物理挂起停留）。全局 trap 标志 + 事件排队（软，主路径），`SuspendThread`（Windows）/ `SIGUSR2`（Linux）仅兜底驱赶，根扫描在 rendezvous 中做（**绝不在挂起态扫描**——CoreCLR 已证伪 OS 寄存器一致性），store+barrier 一致性由 **mode switch 保证**（非原子指令对）。+ 单 region 分配器 + LEAF 汇编 barrier + 全链路安全。本路线图默认目标深度。**修正来源**：T-B1 CoreCLR 源码研究（threadsuspend.cpp:3111）证明「全线程物理挂起停留」是 OS 寄存器不可靠的证伪路径。
+- **A1 ｜ 关键段对齐**：仅对写屏障关键路径 + safepoint 握手采用硬驱赶兜底（SuspendThread/SIGUSR2），主体保留现有 handshake 软路径。消除绝大部分 A2b 窗口，接受残余极窄竞态窗口。用于「硬驱赶兜底开销不可接受」时的回退档。
+- **A2 ｜ 混合对齐**：软路径（rendezvous handshake）为主 + 硬驱赶双螺旋兜底，仅对确证需原子的 store+barrier 对切换模式。**注意：A2 与修正后 A3 的实质差异已缩小，A3 是路线图默认目标。**
+- **A3 ｜ 完全对齐／已修正**：**Hybrid**（软主路径 + 硬驱赶兜底，**非**全线程物理挂起停留）。全局 trap 标志 + 事件排队（软，主路径），`SuspendThread`（Windows）/ `SIGUSR2`（Linux）仅兜底驱赶，根扫描在 rendezvous 中做（**绝不在挂起态扫描**——CoreCLR 已证伪 OS 寄存器一致性），store+barrier 一致性由 **mode switch 保证**（非原子指令对）。+ 单 region 分配器 + LEAF 汇编 barrier + 全链路安全。本路线图默认目标深度。**修正来源**：T-B1 CoreCLR 源码研究（threadsuspend.cpp:3111）证明「全线程物理挂起停留」是 OS 寄存器不可靠的证伪路径。
 
 > ⚠️ 注意：A2b 是具体并发 bug 代号（cross-gen 写屏障竞态），与深度档 A1/A2/A3 无关。凡提到「A1 深度/A3 深度」均指上表对齐档位。
 
@@ -119,7 +119,7 @@
 | T-B2 | T-B | planned | terminal-1 | 设计单 region 分配器 | - | batch-1 | 接口/数据流 | `a3-allocator-design.md` | 设计定稿 | `docs/**` | 1周 |
 | T-B3 | T-B | planned | terminal-1 | 设计 LEAF 汇编写屏障（x64+ARM64） | - | batch-1 | 两套汇编设计 | `a3-leaf-barrier-design.md` | 设计定稿 | `docs/**` | 1周 |
 | T-B4 | T-B | planned | terminal-1 | 设计 codegen/JIT 接口契约 | - | batch-1 | store+barrier 原子窗口 | `a3-contract-design.md` | 契约定稿 | `docs/**` | 1周 |
-| T-B5 | T-B | planned | terminal-1 | 设计 forbid_suspend ack-and-continue 废弃方案 | - | batch-1 | 废弃路径 | `a3-contract-design.md` | 方案定稿 | `docs/**` | 3天 |
+| T-B5 | T-B | planned | terminal-1 | 设计 forbid_suspend 保留并强化方案（互斥护栏） | - | batch-1 | 强化路径 | `a3-contract-design.md` | 方案定稿 | `docs/**` | 3天 |
 | G-P1 | P1 | planned | terminal-1 | A2b A3 实现（safepoint/分配器/barrier 重构） | T-A1,T-B1..B5 | batch-2 | ASAN 下实现 | gc 源码 | stress 0/1000 + asan 绿 | `src/**` | 4-6周 |
 | G-P2 | P2 | planned | terminal-1 | 残余并发 bug 修复 | G-P1 | batch-2 | 全并发测试绿 | gc 源码 | P2 exit | `src/**` | 3-5周 |
 | G-P3 | P3 | planned | terminal-1 | 诊断/配置完备 | G-P2 | batch-2 | ETW 40+/BCL/servo | diag 源码 | P3 exit | `src/**`,`runtime/**` | 3-4周 |
@@ -141,12 +141,12 @@
 | CoreCLR 源码过深 | 读不完 | 设计延迟 | 只读 safepoint/barrier/分配器核心路径 |
 | 双轨切换认知开销 | 每日切换 | 效率降 | 固定节奏：上午 Track A/下午 Track B |
 | 未知并发 bug | ASAN 满 CI | 计划外 | P2 预置 30% 缓冲 |
-| 硬 STW 性能超标 | Physical Suspend 开销 | 性能不达标 | P1 中对比基线，超预算回退 handshake 混合 |
+| 硬驱赶兜底开销超标 | 强制驱赶路径开销 | 性能不达标 | P1 中对比基线，超预算回退纯软 handshake（A2 深度） |
 | 热更新 MemoryDomain 退化 | 长期无维护 | 差异化丧失 | 每阶段 1 个小维护 commit |
 
 ## 9. 备选路径
 
-- **P1 硬 STW 性能超标** → 回退为「硬 STW 仅屏障关键段 + handshake 主路径」混合（A1 深度，参见上节深度分级），仍消除主要 A2b 窗口，接受残余极窄窗口
+- **P1 混合开销超标** → 回退为纯软 handshake 主路径，保留硬驱赶兜底仅用于超时回退（A2 深度，参见上节深度分级），仍消除主要 A2b 窗口，接受残余极窄窗口
 - **T-B 设计发现 MemoryDomain 无法直接套 CoreCLR** → MemoryDomain 相关 barrier 用 CRAG 自有方案，不影响全局单分配器
 - **ASAN/TSAN 工具墙阻塞** → 沿用已知的隔离目录 + 抑制清单策略（记忆中有 ASan 工具墙破除先例）
 

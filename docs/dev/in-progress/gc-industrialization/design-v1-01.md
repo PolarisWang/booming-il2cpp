@@ -25,7 +25,7 @@
 - **目标**：超越 CoreCLR WKS 的工业化成熟度，消除所有已知并发正确性缺陷
 - **非目标**：不重写 full GC 的全并行 mark-sweep（CoreCLR 级），沿用现有并行架构
 - **对标对象**：CoreCLR WKS（Workstation GC）
-- **深度**：A3 完全对齐 — 硬 STW + 单 region 分配器 + LEAF 汇编 barrier + 全链路安全
+- **深度**：A3 完全对齐（修正后详见 roadmap 深度分级）— Hybrid 软主路径 + 硬驱赶兜底，非全线程物理挂起停留
 - **验证策略**：验证先行 — CI 护网/ASAN/TSAN 就绪后再改核心代码
 - **差异化优势**：热更新 MemoryDomain 保持全球领先，每个 Phase 至少含 1 个小维护 commit
 
@@ -76,14 +76,14 @@ Track A（验证基础设施）          Track B（A2b A3 架构设计）
 | B2 | 设计 CRAG 单 region 分配器（统一 TLAB/nursery/GcBumpCache/old-gen） | 1周 |
 | B3 | 设计 LEAF 汇编写屏障（x64 + ARM64 两套） | 1周 |
 | B4 | 设计 codegen/JIT 接口改动的契约（store+barrier 原子窗口） | 1周 |
-| B5 | 设计 forbid_suspend.h ack-and-continue 废弃方案 | 3天 |
+| B5 | 设计 forbid_suspend 保留并强化方案（互斥护栏，非废弃） | 3天 |
 
 ### Phase 1: A2b A3 实现（ASAN 护网下）
 
-- 重写 safepoint 主路径（SuspendThread + GetThreadContext）
+- 重写 safepoint 主路径（Hybrid：软协作主路径 + 硬驱赶兜底；SuspendThread/SIGUSR2 仅兜底驱赶，根扫描在 rendezvous 做，非挂起态扫描）
 - 统一 region 分配器（消除三套并行路径）
-- 实现 LEAF 汇编 barrier（替代现有 C++ barrier）
-- 废弃 forbid_suspend.h 的 ack-and-continue
+- 实现 LEAF 汇编 barrier（替代现有 C++ barrier，mode switch 绑定）
+- 强化 forbid_suspend.h 为互斥护栏（保留 ack-and-continue 语义，不废弃）
 - 验证：gc_region_barrier_stress_test 0/1000 挂起
 
 ### Phase 2: 残余并发 bug 修复
