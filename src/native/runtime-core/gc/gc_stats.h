@@ -33,6 +33,14 @@ struct GcStats {
     std::atomic<uint64_t> young_cards_scanned{0};
     std::atomic<uint64_t> young_pause_ns{0};
 
+    // ── Young GC phase-level timing (cumulative ns across all young GCs) ──
+    std::atomic<uint64_t> young_phase1_ns{0};
+    std::atomic<uint64_t> young_phase2_ns{0};
+    std::atomic<uint64_t> young_phase2b_ns{0};
+    std::atomic<uint64_t> young_phase3_ns{0};
+    std::atomic<uint64_t> young_phase3b_ns{0};
+    std::atomic<uint64_t> young_phase4_ns{0};
+
     // ── Full collection ───────────────────────────────────────────
     std::atomic<uint64_t> full_collections{0};
     std::atomic<uint64_t> full_pages_collected{0};
@@ -41,6 +49,11 @@ struct GcStats {
     std::atomic<uint64_t> full_finalizers_run{0};
     std::atomic<CHAOS_IL2CPP_SIZE> finalization_pending_count{0};
     std::atomic<uint64_t> full_pause_ns{0};
+
+    // ── Full GC phase-level timing (cumulative ns across all full GCs) ──
+    std::atomic<uint64_t> full_mark_ns{0};
+    std::atomic<uint64_t> full_sweep_ns{0};
+    std::atomic<uint64_t> full_compact_ns{0};
 
     // ── Gen1 collection ───────────────────────────────────────────
     std::atomic<uint64_t> gen1_collections{0};
@@ -135,11 +148,22 @@ struct GcSnapshot {
     uint64_t young_bytes_promoted;
     uint64_t young_bytes_reclaimed;
     uint64_t young_cards_scanned;
+    // Young GC phase cumulative ns (diagnostic granularity).
+    uint64_t young_phase1_ns;
+    uint64_t young_phase2_ns;
+    uint64_t young_phase2b_ns;
+    uint64_t young_phase3_ns;
+    uint64_t young_phase3b_ns;
+    uint64_t young_phase4_ns;
     uint64_t full_pages_collected;
     uint64_t full_objects_marked;
     uint64_t full_bytes_reclaimed;
     uint64_t full_finalizers_run;
     int32_t finalization_pending_count;
+    // Full GC phase cumulative ns (diagnostic granularity).
+    uint64_t full_mark_ns;
+    uint64_t full_sweep_ns;
+    uint64_t full_compact_ns;
     uint64_t alloc_total;
     uint64_t alloc_bytes;
     uint64_t alloc_oversized;
@@ -239,6 +263,23 @@ inline void GcRecordYoungCollection(
     GcRecordEventRing(false, pause_ns, objects_promoted, bytes_reclaimed);
 }
 
+/// Accumulate young-GC phase-level pause times into GcStats (diagnostic
+/// granularity).  Called once per young GC alongside GcRecordYoungCollection;
+/// the phase values are already computed in the collector's PhaseTime struct.
+/// Kept separate from the hot GcRecordYoungCollection to avoid adding
+/// cache-line pressure to that path.
+inline void GcRecordYoungPhaseTimes(
+    uint64_t phase1_ns, uint64_t phase2_ns, uint64_t phase2b_ns,
+    uint64_t phase3_ns, uint64_t phase3b_ns, uint64_t phase4_ns) noexcept
+{
+    g_gc_stats.young_phase1_ns.fetch_add(phase1_ns, std::memory_order_relaxed);
+    g_gc_stats.young_phase2_ns.fetch_add(phase2_ns, std::memory_order_relaxed);
+    g_gc_stats.young_phase2b_ns.fetch_add(phase2b_ns, std::memory_order_relaxed);
+    g_gc_stats.young_phase3_ns.fetch_add(phase3_ns, std::memory_order_relaxed);
+    g_gc_stats.young_phase3b_ns.fetch_add(phase3b_ns, std::memory_order_relaxed);
+    g_gc_stats.young_phase4_ns.fetch_add(phase4_ns, std::memory_order_relaxed);
+}
+
 inline void GcRecordFullCollection(
     CHAOS_IL2CPP_SIZE pages_collected,
     CHAOS_IL2CPP_SIZE objects_marked,
@@ -246,7 +287,10 @@ inline void GcRecordFullCollection(
     CHAOS_IL2CPP_SIZE finalizers_run,
     uint64_t pause_ns,
     int32_t compacted = 0,
-    int32_t concurrent = 0) noexcept
+    int32_t concurrent = 0,
+    uint64_t mark_ns = 0,
+    uint64_t sweep_ns = 0,
+    uint64_t compact_ns = 0) noexcept
 {
     g_gc_stats.full_collections.fetch_add(1, std::memory_order_relaxed);
     g_gc_stats.full_pages_collected.fetch_add(pages_collected, std::memory_order_relaxed);
@@ -254,6 +298,9 @@ inline void GcRecordFullCollection(
     g_gc_stats.full_bytes_reclaimed.fetch_add(bytes_reclaimed, std::memory_order_relaxed);
     g_gc_stats.full_finalizers_run.fetch_add(finalizers_run, std::memory_order_relaxed);
     g_gc_stats.full_pause_ns.fetch_add(pause_ns, std::memory_order_relaxed);
+    g_gc_stats.full_mark_ns.fetch_add(mark_ns, std::memory_order_relaxed);
+    g_gc_stats.full_sweep_ns.fetch_add(sweep_ns, std::memory_order_relaxed);
+    g_gc_stats.full_compact_ns.fetch_add(compact_ns, std::memory_order_relaxed);
     g_gc_stats.last_compacted.store(compacted, std::memory_order_relaxed);
     g_gc_stats.last_concurrent.store(concurrent, std::memory_order_relaxed);
     g_gc_stats.gc_index.fetch_add(1, std::memory_order_relaxed);
@@ -293,6 +340,12 @@ inline void GcRecordAlloc(CHAOS_IL2CPP_SIZE bytes, bool oversized) noexcept {
 // ── Dump ─────────────────────────────────────────────────────────
 
 void GcDumpStats() noexcept;
+
+/// Start the periodic GC-diagnostics dump thread if DumpStatsIntervalSec > 0.
+/// No-op if interval is 0 (default) or the thread is already running.
+/// Called once from InitYoungGeneration.  The thread reads only atomic
+/// counters and never holds GC locks.
+void StartGcPeriodicDumpThread() noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

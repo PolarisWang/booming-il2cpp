@@ -735,6 +735,10 @@ void InitYoungGeneration() noexcept {
     CHAOS_IL2CPP_SIZE gen1_size = GcConfig().DefaultGen1Size > 0
         ? GcConfig().DefaultGen1Size : nursery_size;
 
+    // ── Periodic GC diagnostics dump thread (if enabled) ──
+    // Start after config is initialized, so DumpStatsIntervalSec is readable.
+    StartGcPeriodicDumpThread();
+
     // Allocate an independent nursery region (no longer split 50/50 with survivor).
     auto* nursery = RegionManager::Instance().AllocateRegion(
         RegionKind::REGION_NURSERY, nursery_size);

@@ -2705,6 +2705,12 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // we clear and re-mark it, causing stale marks from a different
     // root snapshot to survive into our mark phase.
     BgcController::Instance().StopConcurrentMark();
+    // Full-GC phase timing boundaries (diagnostic).  Captured at the
+    // MARK_DONE / SWEEP_DONE / COMPACT_DONE GcFireEvent boundaries below.
+    // Set to 0 for the early-return path (page_count_ == 0).
+    auto mark_end      = pause_start;
+    auto sweep_end     = pause_start;
+    auto compact_end   = pause_start;
     // DIAG (S2): bounded elapsed-time progress marker — if a full-GC stall
     // occurs after collect_start, these show the last phase reached.  Pure
     // observability, non-semantic.
@@ -2941,6 +2947,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 std::chrono::steady_clock::now() - pause_start).count()));
 
     // Fire MARK_DONE event.
+    mark_end = std::chrono::steady_clock::now();
         GcFireEvent(GcEvent::MARK_DONE);
 
     // Phase 3: Run finalizers for unreachable objects.
@@ -3063,6 +3070,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     ResetFreelistReleaseCount();
 
     // Fire SWEEP_DONE event.
+    sweep_end = std::chrono::steady_clock::now();
     GcFireEvent(GcEvent::SWEEP_DONE);
 
     // Sweep the Large Object Heap.
@@ -3137,12 +3145,14 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     if (compact_mode == CompactMode::CROSS_PAGE) {
         CHAOS_IL2CPP_LOG_INFO_M("OldGen", "cross_page_compact_mode_enabled");
         CrossPageCompact();
+        compact_end = std::chrono::steady_clock::now();
         GcFireEvent(GcEvent::COMPACT_DONE);
     } else if (compact_mode == CompactMode::COMPACT) {
         CHAOS_IL2CPP_LOG_INFO_M("OldGen", "compact_mode_enabled");
         CHAOS_IL2CPP_SIZE total_saved = ParallelCompactPages();
         CHAOS_IL2CPP_LOG_INFO_M("OldGen", "compact_done saved_bytes={0}",
             static_cast<unsigned long long>(total_saved));
+        compact_end = std::chrono::steady_clock::now();
         GcFireEvent(GcEvent::COMPACT_DONE);
     }
 
@@ -3157,6 +3167,14 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     uint64_t pause_ns = static_cast<uint64_t>(
         std::chrono::duration_cast<std::chrono::nanoseconds>(pause_end - pause_start).count());
 
+    // Phase-level durations (mark_end - pause_start, sweep_end - mark_end, compact_end - sweep_end).
+    uint64_t mark_ns = static_cast<uint64_t>(
+        std::chrono::duration_cast<std::chrono::nanoseconds>(mark_end - pause_start).count());
+    uint64_t sweep_ns = static_cast<uint64_t>(
+        std::chrono::duration_cast<std::chrono::nanoseconds>(sweep_end - mark_end).count());
+    uint64_t compact_ns = static_cast<uint64_t>(
+        std::chrono::duration_cast<std::chrono::nanoseconds>(compact_end - sweep_end).count());
+
     CHAOS_IL2CPP_SIZE marked_count = static_cast<CHAOS_IL2CPP_SIZE>(
         marked_count_.exchange(0, std::memory_order_relaxed));
 
@@ -3169,7 +3187,8 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         finalizers_run,
         pause_ns,
         compact_mode != CompactMode::NONE ? 1 : 0,
-        0);  // concurrent: blocking GC
+        0,   // concurrent: blocking GC
+        mark_ns, sweep_ns, compact_ns);
 
     // Record into scheduler with actual heap size for full GC trigger decisions.
     G_Scheduler().RecordFullCollection(total_heap_bytes, pause_ns);

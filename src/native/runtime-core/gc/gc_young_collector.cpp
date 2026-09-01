@@ -961,6 +961,11 @@ phase3:
         result.dirty_cards_scanned,
         pause_ns);
 
+    // Persist the phase-level breakdown into GcStats (diagnostic granularity).
+    GcRecordYoungPhaseTimes(
+        pt.phase1_ns, pt.phase2_ns, pt.phase2b_ns,
+        pt.phase3_ns, pt.phase3b_ns, pt.phase4_ns);
+
     G_Scheduler().RecordYoungCollection(
         nursery_used_bytes, result.bytes_promoted, pause_ns);
 

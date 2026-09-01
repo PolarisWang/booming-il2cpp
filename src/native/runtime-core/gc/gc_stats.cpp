@@ -2,10 +2,13 @@
 #include "gc_region.h"
 #include "gc_heap.h"
 #include "core/gc_alloc_stubs.h"
+#include "gc_config.h"
 
 #include <chaos/log.h>
 
+#include <atomic>
 #include <cstdlib>
+#include <thread>
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -37,12 +40,21 @@ GcSnapshot GcGetSnapshot() noexcept {
     snap.young_bytes_promoted   = g_gc_stats.young_bytes_promoted.load(std::memory_order_acquire);
     snap.young_bytes_reclaimed  = g_gc_stats.young_bytes_reclaimed.load(std::memory_order_acquire);
     snap.young_cards_scanned    = g_gc_stats.young_cards_scanned.load(std::memory_order_acquire);
+    snap.young_phase1_ns   = g_gc_stats.young_phase1_ns.load(std::memory_order_acquire);
+    snap.young_phase2_ns   = g_gc_stats.young_phase2_ns.load(std::memory_order_acquire);
+    snap.young_phase2b_ns  = g_gc_stats.young_phase2b_ns.load(std::memory_order_acquire);
+    snap.young_phase3_ns   = g_gc_stats.young_phase3_ns.load(std::memory_order_acquire);
+    snap.young_phase3b_ns  = g_gc_stats.young_phase3b_ns.load(std::memory_order_acquire);
+    snap.young_phase4_ns   = g_gc_stats.young_phase4_ns.load(std::memory_order_acquire);
     snap.full_pages_collected   = g_gc_stats.full_pages_collected.load(std::memory_order_acquire);
     snap.full_objects_marked    = g_gc_stats.full_objects_marked.load(std::memory_order_acquire);
     snap.full_bytes_reclaimed   = g_gc_stats.full_bytes_reclaimed.load(std::memory_order_acquire);
     snap.full_finalizers_run    = g_gc_stats.full_finalizers_run.load(std::memory_order_acquire);
     snap.finalization_pending_count = static_cast<int32_t>(
         g_gc_stats.finalization_pending_count.load(std::memory_order_acquire));
+    snap.full_mark_ns    = g_gc_stats.full_mark_ns.load(std::memory_order_acquire);
+    snap.full_sweep_ns   = g_gc_stats.full_sweep_ns.load(std::memory_order_acquire);
+    snap.full_compact_ns = g_gc_stats.full_compact_ns.load(std::memory_order_acquire);
     snap.alloc_total     = g_gc_stats.alloc_total.load(std::memory_order_acquire);
     snap.alloc_bytes     = g_gc_stats.alloc_bytes.load(std::memory_order_acquire);
     snap.alloc_oversized = g_gc_stats.alloc_oversized.load(std::memory_order_acquire);
@@ -90,6 +102,7 @@ namespace {
     static AtExitRegistrar s_atexit_registrar;
 }
 
+// Logging method for GcDumpStats output.
 void GcDumpStats() noexcept {
     // Flush fast-path TLS counters before reading global stats.
     FlushTlsFastStats();
@@ -108,6 +121,16 @@ void GcDumpStats() noexcept {
             g_gc_stats.young_cards_scanned.load(std::memory_order_relaxed),
             total_ns,
             avg_ns);
+
+        // Phase-level timing profile (cumulative ns).
+        CHAOS_IL2CPP_LOG_WRITE_RAW_M(
+            "GC|young-phases|p1={0}|p2={1}|p2b={2}|p3={3}|p3b={4}|p4={5}\n",
+            g_gc_stats.young_phase1_ns.load(std::memory_order_relaxed),
+            g_gc_stats.young_phase2_ns.load(std::memory_order_relaxed),
+            g_gc_stats.young_phase2b_ns.load(std::memory_order_relaxed),
+            g_gc_stats.young_phase3_ns.load(std::memory_order_relaxed),
+            g_gc_stats.young_phase3b_ns.load(std::memory_order_relaxed),
+            g_gc_stats.young_phase4_ns.load(std::memory_order_relaxed));
     }
 
     // ── Full collection ───────────────────────────────────────────
@@ -125,6 +148,13 @@ void GcDumpStats() noexcept {
             g_gc_stats.full_finalizers_run.load(std::memory_order_relaxed),
             total_ns,
             avg_ns);
+
+        // Full-GC phase-level timing profile (cumulative ns).
+        CHAOS_IL2CPP_LOG_WRITE_RAW_M(
+            "GC|full-phases|mark={0}|sweep={1}|compact={2}\n",
+            g_gc_stats.full_mark_ns.load(std::memory_order_relaxed),
+            g_gc_stats.full_sweep_ns.load(std::memory_order_relaxed),
+            g_gc_stats.full_compact_ns.load(std::memory_order_relaxed));
     }
 
     // ── Gen1 collection ───────────────────────────────────────────
@@ -159,6 +189,65 @@ void GcDumpStats() noexcept {
         "GC|region|active={0}|total_allocated={1}\n",
         rm.ActiveRegionCount(),
         rm.TotalAllocatedBytes());
+}
+
+}  // namespace chaos::il2cpp::runtime_core
+
+// ── Periodic dump thread ──────────────────────────────────────────
+// Spawned on first GC when DumpStatsIntervalSec > 0.  Calls GcDumpStats
+// at the configured interval, reading only atomic counters (no locks).
+// The thread is preemptive-safe: it never holds GC locks.
+namespace {
+// (file-local state; all symbols below live inside chaos::il2cpp::runtime_core)
+using namespace chaos::il2cpp::runtime_core;
+
+static std::atomic<bool> g_dump_thread_stop{false};
+static std::thread g_dump_thread_impl;
+
+void DumpThreadLoop() noexcept {
+    uint64_t interval_ns = static_cast<uint64_t>(
+        GcConfig().DumpStatsIntervalSec) * 1'000'000'000ULL;
+    if (interval_ns == 0) return;
+
+    // Interleave between interval_ns/2 and interval_ns to avoid
+    // aligning with system-wide periodic events (scheduling jitter).
+    auto half = interval_ns / 2;
+
+    while (!g_dump_thread_stop.load(std::memory_order_acquire)) {
+        // Not holding GC lock — safe to call GcDumpStats.
+        GcDumpStats();
+
+        // Sleep in two phases: first half-interval, then re-check
+        // the stop flag before the second half.  This ensures the
+        // thread exits within half-interval + context switch delay
+        // when the stop flag is set.
+        std::this_thread::sleep_for(std::chrono::nanoseconds(half));
+        if (g_dump_thread_stop.load(std::memory_order_acquire)) break;
+        std::this_thread::sleep_for(std::chrono::nanoseconds(interval_ns - half));
+    }
+}
+}  // anonymous namespace
+
+namespace chaos::il2cpp::runtime_core {
+
+void StartGcPeriodicDumpThread() noexcept {
+    if (GcConfig().DumpStatsIntervalSec <= 0) return;
+    // Atomic guard: only one thread starts it.
+    static std::atomic<bool> started{false};
+    bool expected = false;
+    if (!started.compare_exchange_strong(expected, true,
+            std::memory_order_acq_rel, std::memory_order_acquire)) {
+        return;  // already started
+    }
+    g_dump_thread_stop.store(false, std::memory_order_release);
+    g_dump_thread_impl = std::thread(DumpThreadLoop);
+    g_dump_thread_impl.detach();
+}
+
+// Stop the periodic dump thread (called from the atexit registrar).
+static void StopPeriodicDumpThread() noexcept {
+    g_dump_thread_stop.store(true, std::memory_order_release);
+    // Detached thread exits within half-interval; it only reads atomics.
 }
 
 }  // namespace chaos::il2cpp::runtime_core

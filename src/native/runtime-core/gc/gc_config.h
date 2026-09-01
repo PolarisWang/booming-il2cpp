@@ -57,6 +57,8 @@ namespace chaos::il2cpp::runtime_core {
     INT_CONFIG(MaxNurserySize,          "MaxNurserySize",       4 * 1024 * 1024, "adaptive nursery size cap (bytes)")       \
     INT_CONFIG(MinGen1Size,             "MinGen1Size",          4 * 1024 * 1024, "adaptive gen1 size floor (bytes)")        \
     INT_CONFIG(MaxGen1Size,             "MaxGen1Size",          32 * 1024 * 1024,"adaptive gen1 size cap (bytes)")          \
+    /* ── diagnostics ── */ \
+    INT_CONFIG(DumpStatsIntervalSec,    "DumpStatsIntervalSec", 0,               "periodic GC stats dump interval (s, 0=off)") \
     /* ── BGC concurrent marking ── */ \
     INT_CONFIG(BgcWorkers,              "BgcWorkers",           8,               "max background-GC worker threads")        \
     INT_CONFIG(MarkSliceBudgetUs,       "MarkSliceBudgetUs",    2000,            "BGC mark slice budget (us)")              \
