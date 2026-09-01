@@ -65,6 +65,54 @@ dotnet build src/managed/Chaos.IL2CPP.Generator
 dotnet test tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests
 ```
 
+## Install chaos-il2cpp (dotnet global tool)
+
+```bash
+# Install from local nupkg
+dotnet tool install --global chaos-il2cpp --add-source <path-to-nupkg-dir>
+
+# Verify
+chaos-il2cpp --help
+```
+
+## Publish a .NET application to native
+
+```bash
+chaos-il2cpp publish MyApp.csproj --mode app --output ./out
+
+# Run the native executable
+./out/build/RelWithDebInfo/chaos_entry.exe
+```
+
+The `publish` command:
+1. Builds the managed project (if `.csproj`)
+2. Translates IL → C++ via the NativeAOT codegen pipeline
+3. Emits `app_main.cpp` + `CMakeLists.txt`
+4. Links against the prebuilt chaos runtime SDK (embedded in the tool package)
+5. Produces a standalone native executable (`chaos_entry.exe`)
+
+### Options
+
+| Flag | Description |
+|------|-------------|
+| `--mode app` | Pure application entry (default) |
+| `--mode test` | Test harness with `--fact-json` / `--benchmark-all` |
+| `--output <dir>` | Output directory (default: `<input>/output`) |
+| `--config-tier check\|profile\|ship` | Build config tier (default: check) |
+| `--source-only` | Emit C++ source only, skip native build |
+| `--clean` | Clean output directory before build |
+| `--jit` | Enable JIT mode (default: AOT) |
+
+### Example: HelloWorld
+
+```bash
+chaos-il2cpp publish tests/fixtures/public-smoke/HelloWorld/HelloWorld.csproj \
+  --mode app --output /tmp/hello --clean
+/tmp/hello/build/RelWithDebInfo/chaos_entry.exe
+# Output: HelloWorld smoke entry reached.
+# Exit code: 0
+```
+
 ## Testing
 
 One command runs the whole suite (unit → integration → e2e):
@@ -98,6 +146,22 @@ for the pyramid, the no-skip rule, and how to add tests.
 - [Scriban](https://github.com/scriban/scriban) — Template engine for code generation
 - [system.reflection.metadata](https://github.com/dotnet/runtime) — .NET metadata reader (vendored)
 - [unordered_dense](https://github.com/ankerl/unordered_dense) — Fast hash map (header-only, vendored)
+
+## Product Release
+
+A versioned release is orchestrated by `scripts/release.sh` (bump branch + sdk + nupkg + checksums + sbom + GitHub Release), delegated to the shared stage helpers under `scripts/`:
+
+```bash
+# Dry run (shows every step, changes nothing)
+scripts/release.sh 0.2.0 --dry-run
+
+# Real publish (release/0.2.x branch + v0.2.0 tag + SDK + nupkg + GitHub Release)
+scripts/release.sh 0.2.0 --publish
+```
+
+The embedded-SDK tool package is built by `scripts/build-tool-package.sh` (a `.nupkg` containing the `chaos-il2cpp` CLI + the native runtime libs + headers).
+
+The internal verification pipeline (`tests/e2e/verification/chunk_pipeline.py`) validates that .NET assemblies translate + run correctly (fact / benchmark / coverage / hot-update) — it is the testing half of the same IL→C++ capability that `publish` exposes to external users.
 
 ## License
 

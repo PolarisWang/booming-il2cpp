@@ -174,7 +174,21 @@ fi
 
 # ── 5. Commit the release prep (version bump + notes) on the release branch ─
 if [ "$DRY_RUN" -eq 0 ] && [ -f "$NOTES_FILE" ]; then
-    git add VERSION CMakeLists.txt src/managed/Directory.Build.props "$NOTES_FILE" 2>/dev/null || true
+    # Prepend a new section to CHANGELOG.md from the release notes
+    CHANGELOG="$REPO_ROOT/CHANGELOG.md"
+    if [ -f "$CHANGELOG" ]; then
+        HEADER="## [${NEW_VER}] - $(date +%Y-%m-%d)"
+        # Extract the body from RELEASE_NOTES (skip the first title line, keep summary + categories)
+        NOTES_BODY=$(tail -n +3 "$NOTES_FILE" 2>/dev/null || echo "")
+        TMP_ADD=$(mktemp)
+        printf "# Changelog\\n\\n%s\\n" "$HEADER" > "$TMP_ADD"
+        printf '%s\n\n' "$NOTES_BODY" >> "$TMP_ADD"
+        # Append the existing content after the first line (# Changelog)
+        tail -n +2 "$CHANGELOG" >> "$TMP_ADD" 2>/dev/null || true
+        mv "$TMP_ADD" "$CHANGELOG"
+        echo "  updated CHANGELOG.md with v$NEW_VER entry"
+    fi
+    git add VERSION CMakeLists.txt src/managed/Directory.Build.props "$NOTES_FILE" "$CHANGELOG" 2>/dev/null || true
     if ! git diff --cached --quiet; then
         git commit -q -m "release(v$NEW_VER): version bump + release notes
 
