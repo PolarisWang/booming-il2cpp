@@ -831,6 +831,78 @@ void ResizeGen1Region(CHAOS_IL2CPP_SIZE new_size) {
         reinterpret_cast<uintptr_t>(new_gen1->end));
 }
 
+/// Resize the nursery region to @a target_size (adaptive sizing, coreCLR
+/// dynamic-gen0 analog).  Called at the END of GcYoungCollection under STW,
+/// when the old nursery is fully drained (all objects promoted/dead), all
+/// threads' TLABs are reset, and no thread holds the old region.  Safest
+/// possible resize point — no concurrent allocator can observe a partial swap.
+///
+/// Ordering (mirrors ResizeGen1Region): allocate NEW before freeing OLD, so
+/// if the new allocation OOMs the old nursery is left intact.  Publish the
+/// new region only after the old region is freed (FreeRegion of a REGION_NURSERY
+/// removes its IsNurseryPointer range but does NOT clear g_young_gen.region;
+/// we overwrite it immediately after).
+void ResizeNurseryRegion(CHAOS_IL2CPP_SIZE target_size) {
+    auto* old_nursery = g_young_gen.region.load(std::memory_order_acquire);
+    if (old_nursery == nullptr) return;
+
+    // Compute the current usable nursery size (end - begin, excluding the
+    // emergency reserve which is carved from the tail).
+    CHAOS_IL2CPP_SIZE old_size =
+        static_cast<CHAOS_IL2CPP_SIZE>(old_nursery->end - old_nursery->begin);
+
+    // Hysteresis: only resize when the target differs by >25% of current.
+    // Prevents thrashing when the survival-rate EMA oscillates.
+    CHAOS_IL2CPP_SIZE delta = (target_size > old_size)
+        ? (target_size - old_size) : (old_size - target_size);
+    if (delta <= old_size / 4) return;
+
+    // Keep the target within valid bounds (clamp to [MinNurserySize/2, MaxNurserySize]).
+    if (target_size < YoungGeneration::kEmergencyTlabSize * 2) {
+        target_size = YoungGeneration::kEmergencyTlabSize * 2;
+    }
+
+    auto* new_nursery = RegionManager::Instance().AllocateRegion(
+        RegionKind::REGION_NURSERY, target_size);
+    if (new_nursery == nullptr) {
+        CHAOS_IL2CPP_LOG_WARN_M("CRAG", "nursery_resize_oom size={0}",
+            static_cast<unsigned long long>(target_size));
+        return;
+    }
+
+    // Free the old nursery region FIRST.  FreeRegion removes its
+    // IsNurseryPointer range and re-tags its 4MB chunks OLD (so no stale
+    // young/gen classification survives).  It does NOT clear g_young_gen.region;
+    // we publish the new pointer immediately after.
+    RegionManager::Instance().FreeRegion(old_nursery->id);
+
+    // Re-carve the emergency reserve from the NEW nursery tail (256 KB).
+    char* new_emergency = new_nursery->end - YoungGeneration::kEmergencyTlabSize;
+    g_young_gen.emergency_start = new_emergency;
+    g_young_gen.emergency_bump.store(new_emergency, std::memory_order_release);
+
+    // Publish the new region + bump + region_end atomically (release ordering
+    // so concurrent allocators observe a consistent snapshot).
+    g_young_gen.region.store(new_nursery, std::memory_order_release);
+    g_young_gen.region_end.store(new_emergency, std::memory_order_release);
+    g_young_gen.bump.store(new_nursery->begin, std::memory_order_release);
+
+    // Register the new nursery range with the card table (AllocateRegion
+    // already added the IsNurseryPointer range; this adds the L2 segment table
+    // entries so the write barrier can dirty cards into nursery objects).
+    GcRegisterHeapRange(
+        reinterpret_cast<uintptr_t>(new_nursery->begin),
+        reinterpret_cast<uintptr_t>(new_nursery->end));
+
+    // Reset the GC slot so the next young GC can trigger promptly at the
+    // new (smaller/larger) nursery size.
+    G_Scheduler().RecordGcCompleted();
+
+    CHAOS_IL2CPP_LOG_INFO_M("CRAG", "nursery_resize {0} -> {1} bytes",
+        static_cast<unsigned long long>(old_size),
+        static_cast<unsigned long long>(target_size));
+}
+
 TLAB TlabClaimFromYoungGen() noexcept {
     // Lazy one-time initialization of the shared young generation.
     // RuntimeInit may not be called in all execution paths (e.g., benchmark

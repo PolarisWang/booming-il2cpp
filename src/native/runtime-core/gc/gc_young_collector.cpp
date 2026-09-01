@@ -998,6 +998,20 @@ phase3:
         BgcController::Instance().ResumeAfterYoungGc();
     }
 
+    // ── Adaptive nursery resize ────────────────────────────────────
+    // After the nursery is fully drained (all objects promoted/dead) and
+    // all TLABs are reset, consult the scheduler's RecommendedNurserySize()
+    // and resize if the current size differs by >25% (hysteresis handled
+    // inside ResizeNurseryRegion).  Only resize when BGC is NOT active
+    // (concurrent mark may reference the old nursery range).
+    if (!BgcController::Instance().IsBusy()) {
+        CHAOS_IL2CPP_SIZE recommended = G_Scheduler().RecommendedNurserySize();
+        auto* nursery = g_young_gen.region.load(std::memory_order_acquire);
+        if (nursery != nullptr && recommended > 0) {
+            ResizeNurseryRegion(recommended);
+        }
+    }
+
     // M3/T8: verify every promoted BFS-worklist target landed in a legal
     // generation (OLD→old-gen page, Gen1→gen1 range).  Only at kFull (debug/CI);
     // cost is O(worklist) which is tiny next to the collection itself.  This makes

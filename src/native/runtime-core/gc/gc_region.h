@@ -217,6 +217,13 @@ bool IsPohPointer(const void* ptr) noexcept;
 /// Logs a warning on OOM and keeps the existing Gen1 region.
 void ResizeGen1Region(CHAOS_IL2CPP_SIZE new_size);
 
+/// Resize the nursery region to @a target_size (adaptive dynamic-gen0).
+/// Called at the END of GcYoungCollection under STW; the old nursery is fully
+/// drained and all threads' TLABs are reset.  Allocates a new REGION_NURSERY,
+/// frees the old one, re-carves the emergency reserve, and re-registers the
+/// card table.  Safe at STW: no concurrent allocator observes a partial swap.
+void ResizeNurseryRegion(CHAOS_IL2CPP_SIZE target_size);
+
 /// Release the current TLS nursery (now a no-op with shared young gen).
 inline void TeardownTlsNursery() noexcept {}
 
