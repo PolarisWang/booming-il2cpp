@@ -8,6 +8,18 @@
 
 #include <chaos/config.h>
 
+// MSVC /EHa exception-symbol fix:
+// MSVC's <exception> line 38 does `using ::terminate;`, which requires the global
+// function ::terminate to be declared. ::terminate comes ONLY from corecrt_terminate.h,
+// which is pulled solely via <exception> -> <vcruntime_exception.h> -> <eh.h> ->
+// <corecrt_terminate.h>. When a chaos header is first included inside an extern "C"
+// block (see runtime_stubs/stubs.h) that pulls C++ std headers, MSVC 14.44+ can fail
+// to declare ::terminate, producing C2039 'terminate' is not a member of global namespace.
+// Forcing #include <eh.h> BEFORE <exception> guarantees ::terminate is always declared.
+#ifdef _MSC_VER
+#  include <eh.h>
+#endif
+
 #include <algorithm>
 #include <array>
 #include <atomic>
