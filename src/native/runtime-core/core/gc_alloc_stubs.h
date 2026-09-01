@@ -63,14 +63,9 @@ CHAOS_IL2CPP_FORCEINLINE void* GcAllocateAtomicFast(CHAOS_IL2CPP_SIZE size) {
 
 /// Fast-path GcAllocate WITHOUT zero-init — for callers that immediately
 /// write every byte (e.g., CHAOS_IL2CPP_MALLOC_GC for array allocations).
+/// Uses NurseryAllocateNoZero directly (no std::memset).
 CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFastNoZero(CHAOS_IL2CPP_SIZE size) {
-    void* ptr = Allocate(size, /*is_pinned=*/false, /*is_atomic=*/false);
-    // Note: Allocate goes through NurseryAllocate (zero-init).  Callers
-    // that want no-zero still use the existing NurseryAllocateNoZero path
-    // directly through the slow path or via GcAllocateProfiled (which
-    // uses NurseryAllocate).  True no-zero allocation is a separate path
-    // that the unified Allocate API does not yet expose — the existing
-    // NurseryAllocateNoZero remains available for that purpose.
+    void* ptr = NurseryAllocateNoZero(size);
     if (ptr) {
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
@@ -84,15 +79,18 @@ CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFastNoZero(CHAOS_IL2CPP_SIZE size) {
 }
 
 /// Fast-path GcAllocateAtomic WITHOUT zero-init (atomic/pointer-free variant).
+/// Callers must write every byte before making the object visible to GC.
+/// Uses NurseryAllocateAtomicNoZero directly (no std::memset).
 CHAOS_IL2CPP_FORCEINLINE void* GcAllocateAtomicFastNoZero(CHAOS_IL2CPP_SIZE size) {
-    void* ptr = Allocate(size, /*is_pinned=*/false, /*is_atomic=*/true);
-    // Note: Allocate goes through NurseryAllocateAtomic (zero-init) for
-    // the TLAB fast path.  True no-zero atomic allocation is a separate
-    // path that the unified Allocate API does not yet expose — the existing
-    // NurseryAllocateAtomicNoZero remains available for that purpose.
+    void* ptr = NurseryAllocateAtomicNoZero(size);
     if (ptr) {
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
+#if CHAOS_IL2CPP_PROFILE_ENABLED
+        ProfileRecordNurseryAlloc(static_cast<int64_t>(size));
+        ProfileRecordAllocCount();
+        ProfileRecordFastPath();
+#endif
     }
     return ptr;
 }

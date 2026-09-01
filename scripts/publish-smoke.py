@@ -69,8 +69,12 @@ def run_publish(driver: Path, extra_args: list[str], out_dir: Path) -> tuple[int
 
 
 def find_entry_exe(out_dir: Path) -> Path | None:
+    # Windows emits chaos_entry.exe; Linux/macOS emit a bare chaos_entry
+    # (CMake default without the .exe suffix).
     for rel in ["build/RelWithDebInfo/chaos_entry.exe", "build/Release/chaos_entry.exe",
-                "build/Debug/chaos_entry.exe", "chaos_entry.exe"]:
+                "build/Debug/chaos_entry.exe", "chaos_entry.exe",
+                "build/RelWithDebInfo/chaos_entry", "build/Release/chaos_entry",
+                "build/Debug/chaos_entry", "chaos_entry"]:
         p = out_dir / rel
         if p.exists():
             return p
@@ -154,9 +158,13 @@ def case_app_jit(driver: Path, out_dir: Path) -> CaseResult:
         r.errors.append(f"entry.exe(jit) exit={erc}: {eout[-200:]}")
         r.summary = "jit entry.exe did not exit 0"
         return r
+    if "ChaosPublishSmoke" not in eout:
+        r.errors.append(f"expected stdout marker missing (jit): {eout[-200:]}")
+        r.summary = "jit stdout marker missing"
+        return r
     r.details["entryOutput"] = eout.strip()[:200]
     r.status = "passed"
-    r.summary = "JIT entry.exe produced + ran exit 0"
+    r.summary = "JIT entry.exe produced + ran exit 0 + stdout marker verified"
     return r
 
 

@@ -871,21 +871,26 @@ void ResizeNurseryRegion(CHAOS_IL2CPP_SIZE target_size) {
     }
 
     // Free the old nursery region FIRST.  FreeRegion removes its
-    // IsNurseryPointer range and re-tags its 4MB chunks OLD (so no stale
-    // young/gen classification survives).  It does NOT clear g_young_gen.region;
-    // we publish the new pointer immediately after.
+    // IsNurseryPointer range, clears g_young_gen.region (so no concurrent
+    // allocator can read the stale freed pointer), and re-tags its 4MB
+    // chunks OLD.
     RegionManager::Instance().FreeRegion(old_nursery->id);
 
+    // Publish the new region + bump FIRST (release ordering so concurrent
+    // allocators observe a consistent snapshot), THEN the emergency reserve.
+    // Publishing emergency before region/bump would let a concurrent allocator
+    // read the new-nursery emergency pointer while the old region is still
+    // perceived as active.
+    g_young_gen.region.store(new_nursery, std::memory_order_release);
+    g_young_gen.bump.store(new_nursery->begin, std::memory_order_release);
+
     // Re-carve the emergency reserve from the NEW nursery tail (256 KB).
+    // region_end is narrowed to the emergency start so TLAB claims stop before
+    // the reserved tail (young GC scanning also skips it).
     char* new_emergency = new_nursery->end - YoungGeneration::kEmergencyTlabSize;
     g_young_gen.emergency_start = new_emergency;
     g_young_gen.emergency_bump.store(new_emergency, std::memory_order_release);
-
-    // Publish the new region + bump + region_end atomically (release ordering
-    // so concurrent allocators observe a consistent snapshot).
-    g_young_gen.region.store(new_nursery, std::memory_order_release);
     g_young_gen.region_end.store(new_emergency, std::memory_order_release);
-    g_young_gen.bump.store(new_nursery->begin, std::memory_order_release);
 
     // Register the new nursery range with the card table (AllocateRegion
     // already added the IsNurseryPointer range; this adds the L2 segment table
@@ -1186,6 +1191,16 @@ void RegionManager::FreeRegion(RegionId id) {
         g_young_gen.gen1_region.store(nullptr, std::memory_order_release);
         g_young_gen.gen1_end = nullptr;
         g_young_gen.gen1_bump.store(nullptr, std::memory_order_release);
+    }
+
+    // If this is the shared nursery region, clear the published pointer so
+    // a concurrent allocator never reads a stale pointer to freed memory.
+    // Symmetric with the Gen1 branch above; restored by the caller that
+    // publishes a replacement nursery (InitYoungGeneration / ResizeNurseryRegion).
+    if (r->kind == RegionKind::REGION_NURSERY) {
+        g_young_gen.region.store(nullptr, std::memory_order_release);
+        g_young_gen.region_end.store(nullptr, std::memory_order_release);
+        g_young_gen.bump.store(nullptr, std::memory_order_release);
     }
 
     // Re-tag the freed region's 4MB region-gen chunks back to OLD.  The skewed

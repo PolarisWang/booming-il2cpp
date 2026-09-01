@@ -98,10 +98,12 @@ layers:
       # toolchain gaps (MSVC 14.44 terminate).  Requires the Driver to be built
       # first (the CI workflow that selects this group does so after building).
       # Triggered on push-to-main and release, not per-PR (codegen is the per-PR gate).
+      # Timeout must exceed the publish-smoke.py per-case publish timeout (1200s):
+      # 3 cases (app/jit/source-only) worst case > 60 min even with entry runs.
       - name: publish-smoke
         script: scripts/publish-smoke.py
         args: [--json, publish-smoke-report.json]
-        timeout: 600
+        timeout: 3600
 
   # pytest layer — the pre-existing authority/integration unit tests that were never
   # wired into the driver (they only ran via bare `pytest`). The subset below is the

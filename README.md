@@ -67,9 +67,18 @@ dotnet test tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests
 
 ## Install chaos-il2cpp (dotnet global tool)
 
+First build the tool package (a `.nupkg` embedding the native runtime SDK + headers):
+
 ```bash
-# Install from local nupkg
-dotnet tool install --global chaos-il2cpp --add-source <path-to-nupkg-dir>
+# Produces artifacts/release/tool/chaos-il2cpp.<version>.nupkg
+./scripts/build-tool-package.sh [version]
+```
+
+Then install it globally from that local package directory:
+
+```bash
+# --add-source points at the directory produced by build-tool-package.sh
+dotnet tool install --global chaos-il2cpp --add-source artifacts/release/tool
 
 # Verify
 chaos-il2cpp --help
@@ -78,6 +87,8 @@ chaos-il2cpp --help
 ## Publish a .NET application to native
 
 ```bash
+# --output ./out is just an example; the native binary always lands under
+# <output>/build/<config-tier>/ (e.g. RelWithDebInfo is the default tier)
 chaos-il2cpp publish MyApp.csproj --mode app --output ./out
 
 # Run the native executable
@@ -91,16 +102,21 @@ The `publish` command:
 4. Links against the prebuilt chaos runtime SDK (embedded in the tool package)
 5. Produces a standalone native executable (`chaos_entry.exe`)
 
+> **Locating the binary**: the executable is always emitted at
+> `<output>/build/<config-tier>/chaos_entry(.exe)`, where `<config-tier>` is the
+> tier you passed to `--config-tier` (`RelWithDebInfo` for the default `check`
+> tier). Windows appends `.exe`; Linux/macOS do not.
+
 ### Options
 
 | Flag | Description |
 |------|-------------|
 | `--mode app` | Pure application entry (default) |
 | `--mode test` | Test harness with `--fact-json` / `--benchmark-all` |
-| `--output <dir>` | Output directory (default: `<input>/output`) |
-| `--config-tier check\|profile\|ship` | Build config tier (default: check) |
+| `--output <dir>` | Output root directory. The build tree and `publish.manifest.json` are written beneath it. Default: `<input>/output`. The native binary is at `<output>/build/<config-tier>/`. |
+| `--config-tier check\|profile\|ship` | Build config tier (default: check → `RelWithDebInfo`) |
 | `--source-only` | Emit C++ source only, skip native build |
-| `--clean` | Clean output directory before build |
+| `--clean` | Remove the entire `<output>` tree (the `build/` subdirectory and the `publish.manifest.json`) before building, so no stale artifacts from a prior build leak into the new output |
 | `--jit` | Enable JIT mode (default: AOT) |
 
 ### Example: HelloWorld

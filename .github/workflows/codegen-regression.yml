@@ -114,8 +114,11 @@ jobs:
 
       # ── publish-smoke: matrix e2e for the publish path ──────────────
       # Runs app / jit / source-only cases through the repo-built Driver (dev mode).
-      # Only on push-to-main (the publish path is a product gate, not a per-PR
-      # gate — codegen regression above is the fast per-PR coverage).
+      # NOTE: this job only runs when the push-to-main path filter at the top of
+      # this workflow is satisfied (codegen/jit/interpreter/common changes).  Merges
+      # that touch only scripts/, tests/fixtures/, or .github/ will skip this workflow
+      # entirely — publish-smoke is not a standalone gate.  A dedicated publish CI
+      # workflow (without the codegen path filter) would be needed for that.
       - name: Publish-Smoke (app/jit/source-only)
         if: github.event_name == 'push'
         run: |
