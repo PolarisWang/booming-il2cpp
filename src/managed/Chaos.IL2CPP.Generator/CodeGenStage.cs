@@ -145,6 +145,11 @@ public sealed partial class CodeGenStage
                 NativeReferenceLoweringPlan = nativeReferenceLoweringPlan,
                 NativeAotLoweringPlan = nativeAotLoweringPlan,
                 ClosureManifest = closureManifest,
+                // All managed methods from the original linked world (incl. BCL /
+                // referenced-assembly methods that AotCoreIr lowering skipped).
+                // This feeds TryBuildExternalRuntimeAotIrJson so the interpreter
+                // can execute external-runtime methods instead of return-0.
+                AllManagedMethods = BuildAllManagedMethods(linkedWorld),
             });
         }
         catch (Exception ex)
@@ -152,6 +157,29 @@ public sealed partial class CodeGenStage
             return PipelineResult<ManagedClosureResult>.Fail("CODEGEN_GENERATE_FAILED",
                 $"Code generation failed: {ex.Message}", ex);
         }
+    }
+
+    /// <summary>
+    /// Build a dictionary of ALL managed methods from the linked world keyed by
+    /// SubjectId, including methods that AotCoreIrLowering skipped (BCL methods,
+    /// missing-shape methods, etc.). This dictionary is consumed by the Planner
+    /// (TryBuildExternalRuntimeAotIrJson) to generate interpreter-executable AOT
+    /// Core IR JSON for external-runtime methods so they don't return 0.
+    /// </summary>
+    private static IReadOnlyDictionary<string, ManagedMethodModel>? BuildAllManagedMethods(
+        LinkedWorldModel linkedWorld)
+    {
+        var methods = linkedWorld.Methods;
+        if (methods == null || methods.Count == 0)
+            return null;
+
+        var dict = new Dictionary<string, ManagedMethodModel>(methods.Count, StringComparer.Ordinal);
+        foreach (var m in methods)
+        {
+            if (!string.IsNullOrEmpty(m.SubjectId))
+                dict[m.SubjectId] = m;
+        }
+        return dict;
     }
 
     /// <summary>
