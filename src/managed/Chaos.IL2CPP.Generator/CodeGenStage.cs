@@ -176,8 +176,14 @@ public sealed partial class CodeGenStage
         var dict = new Dictionary<string, ManagedMethodModel>(methods.Count, StringComparer.Ordinal);
         foreach (var m in methods)
         {
+            // TryAdd (not indexer assignment) so a SubjectId collision keeps the
+            // first occurrence instead of silently overwriting it with a later
+            // method of the same id. This mirrors _methodsBySubjectId construction
+            // (NativeAotLoweringPlanner.Methods.cs) — a silently dropped method
+            // would otherwise vanish from AllManagedMethods and the interpreter
+            // would fall back to returning 0 for it.
             if (!string.IsNullOrEmpty(m.SubjectId))
-                dict[m.SubjectId] = m;
+                dict.TryAdd(m.SubjectId, m);
         }
         return dict;
     }

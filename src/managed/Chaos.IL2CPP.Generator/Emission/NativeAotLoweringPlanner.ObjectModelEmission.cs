@@ -478,13 +478,6 @@ public sealed partial class NativeAotLoweringPlanner
 					TryTrackReadOnlyCollectionRef(pTypeId, referenceTypeSubjectIds, valueTypeSubjectIds);
 				}
 
-			if (_allManagedMethods is not null && !string.IsNullOrEmpty(m.SubjectId) &&
-				_allManagedMethods.TryGetValue(m.SubjectId, out var managedM))
-			{
-				TryTrackReadOnlyCollectionRef(managedM.ReturnType, referenceTypeSubjectIds, valueTypeSubjectIds);
-				foreach (var param in managedM.Parameters)
-					TryTrackReadOnlyCollectionRef(param.Type, referenceTypeSubjectIds, valueTypeSubjectIds);
-			}
 		}
 		if (_allManagedMethods is { Count: > 0 })
 		{
