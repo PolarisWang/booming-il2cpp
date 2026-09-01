@@ -13,6 +13,20 @@
 #ifndef CHAOS_IL2CPP_CHAOS_PCH_H_
 #define CHAOS_IL2CPP_CHAOS_PCH_H_
 
+// MSVC <exception> C2039 'terminate' workaround.
+// native-aot.generated.cpp starts with #include "chaos_pch.h" → <coroutine> →
+// <exception> which does `using ::terminate;` `using ::set_terminate;` etc.
+// These require the symbols to be declared at global scope first.  Forward-
+// declare them with the exact signatures from corecrt_terminate.h (Windows Kits
+// ucrt), but without the _CRT_BEGIN_C_HEADER extern "C" wrapper, because
+// <exception>'s using-declaration expects C++-linkage symbols.
+#ifdef _MSC_VER
+__declspec(noreturn) void __cdecl terminate() throw();
+typedef void (__cdecl* terminate_handler)();
+terminate_handler __cdecl set_terminate(terminate_handler) throw();
+terminate_handler __cdecl _get_terminate() throw();
+#endif
+
 // ── Standard C/C++ headers (needed by all generated files) ─────────
 #include <cstdio>
 #include <cstdlib>

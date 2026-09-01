@@ -10,14 +10,28 @@
 
 // MSVC /EHa exception-symbol fix:
 // MSVC's <exception> line 38 does `using ::terminate;`, which requires the global
-// function ::terminate to be declared. ::terminate comes ONLY from corecrt_terminate.h,
-// which is pulled solely via <exception> -> <vcruntime_exception.h> -> <eh.h> ->
-// <corecrt_terminate.h>. When a chaos header is first included inside an extern "C"
-// block (see runtime_stubs/stubs.h) that pulls C++ std headers, MSVC 14.44+ can fail
-// to declare ::terminate, producing C2039 'terminate' is not a member of global namespace.
-// Forcing #include <eh.h> BEFORE <exception> guarantees ::terminate is always declared.
+// function ::terminate to be declared before that point. ::terminate is declared
+// in corecrt_terminate.h (Windows Kits ucrt), pulled via
+//   <exception> → <vcruntime_exception.h> → <eh.h> → <corecrt_terminate.h>
+// When chaos headers pull in <exception> from inside an extern "C" block (via
+// stubs.h → threading_stubs.h → <thread> → <exception>), the MSVC compiler's own
+// <eh.h> (not the Kits ucrt one) is resolved first, which does NOT include
+// corecrt_terminate.h.  Result: ::terminate is never declared, and <exception>'s
+// `using ::terminate;` produces C2039.
+//
+// Fix: forward-declare ::terminate with C++ linkage (not C linkage as in
+// corecrt_terminate.h) because MSVC's <exception> line 38 does
+// `using ::terminate;` which expects it in the C++ global namespace.
+// Using extern "C" would cause "C2375 redefinition; different linkage" when
+// the CRT's own corecrt_terminate.h is eventually included by another path.
 #ifdef _MSC_VER
-#  include <eh.h>
+__declspec(noreturn) void __cdecl terminate() throw();
+typedef void (__cdecl* terminate_handler)();
+terminate_handler __cdecl set_terminate(terminate_handler) throw();
+// Use throw() to match corecrt_terminate.h's declaration — MSVC treats
+// throw() and noexcept as distinct exception specifications, and C2382
+// fires when they differ even though both mean "does not throw".
+terminate_handler __cdecl _get_terminate() throw();
 #endif
 
 #include <algorithm>
