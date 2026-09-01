@@ -19,19 +19,12 @@
 // corecrt_terminate.h.  Result: ::terminate is never declared, and <exception>'s
 // `using ::terminate;` produces C2039.
 //
-// Fix: forward-declare ::terminate with C++ linkage (not C linkage as in
-// corecrt_terminate.h) because MSVC's <exception> line 38 does
-// `using ::terminate;` which expects it in the C++ global namespace.
-// Using extern "C" would cause "C2375 redefinition; different linkage" when
-// the CRT's own corecrt_terminate.h is eventually included by another path.
-#ifdef _MSC_VER
-__declspec(noreturn) void __cdecl terminate() throw();
-typedef void (__cdecl* terminate_handler)();
-terminate_handler __cdecl set_terminate(terminate_handler) throw();
-// Use throw() to match corecrt_terminate.h's declaration — MSVC treats
-// throw() and noexcept as distinct exception specifications, and C2382
-// fires when they differ even though both mean "does not throw".
-terminate_handler __cdecl _get_terminate() throw();
+// Fix: include <corecrt_terminate.h> directly (via its Windows Kits ucrt path)
+// before any extern "C" block that would pull in <exception>.  This ensures
+// ::terminate is declared with C linkage (matching the CRT's own declaration),
+// avoiding C2732 linkage-specification contradictions.
+#if defined(_MSC_VER) && !defined(_INC_CRT_TERMINATE)
+#include <corecrt_terminate.h>
 #endif
 
 #include <algorithm>
