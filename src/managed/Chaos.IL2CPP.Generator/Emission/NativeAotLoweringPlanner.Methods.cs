@@ -199,6 +199,22 @@ public sealed partial class NativeAotLoweringPlanner
     private Dictionary<string, string?>? _staticFieldDeclarations;
 
     /// <summary>
+    /// Extra chaos_static_* symbol names discovered by scanning method body source,
+    /// for symbols that were emitted by lowered IR without registering in
+    /// <see cref="_staticFieldDeclarations"/>.  Emitted as extern "C" declarations
+    /// in the shared header so page-split TUs can reference them without C3861.
+    /// </summary>
+    private HashSet<string>? _extraStaticFieldSymbols;
+
+    /// <summary>
+    /// Extra chaos_mt_* symbol names discovered by scanning method body source,
+    /// for symbols like MethodTable references that were emitted by lowered IR
+    /// without registering the type in <see cref="_allEmittedTypeSubjectIds"/>.
+    /// Emitted as extern "C" MethodTable declarations in the shared header.
+    /// </summary>
+    private HashSet<string>? _extraMethodTableSymbols;
+
+    /// <summary>
     /// Value type subject IDs captured during EmitObjectModelDeclarations for
     /// chaos_valuetype_* forward declarations in the shared header.
     /// </summary>
@@ -1081,6 +1097,59 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        // ── Comprehensive post-scan: catch chaos_* symbols referenced in method
+        // bodies but not registered in the header-generation data structures.
+        // This is the invariant behind C3861 in page-split (multi-TU) codegen:
+        // every symbol a page file references MUST have an extern declaration in
+        // the shared header, OR the build fails.  The invocation planning and
+        // object-model emission register the *common* symbols; lowered IR that
+        // emits a direct reference (static field address, external runtime call,
+        // boxed MethodTable, method-table cast) can bypass those paths.  On a
+        // single-TU build this is invisible (same TU sees the definition), which
+        // is why small chunks pass and CoreLib's page-split chunk fails.
+        var extraExternalRuntimeSymbols = new HashSet<string>(StringComparer.Ordinal);
+        var extraStaticFieldSymbols = new HashSet<string>(StringComparer.Ordinal);
+        var extraMethodTableSymbols = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var m in methods)
+        {
+            if (string.IsNullOrEmpty(m.MethodSource)) continue;
+            // chaos_external_runtime_* — external runtime catch-all fallback call.
+            ExtractCodegenSymbols(m.MethodSource, "chaos_external_runtime_", extraExternalRuntimeSymbols);
+            // chaos_static_* — static field address/load reference.
+            ExtractCodegenSymbols(m.MethodSource, "chaos_static_", extraStaticFieldSymbols);
+            // chaos_mt_* — MethodTable reference (AsTypeInfoHot, casts, type checks).
+            ExtractCodegenSymbols(m.MethodSource, "chaos_mt_", extraMethodTableSymbols);
+        }
+        // chaos_mt_* and chaos_static_* symbols that are ALREADY declared via their
+        // structured maps (method tables in _allEmittedTypeSubjectIds and static
+        // fields in _staticFieldDeclarations) must NOT be re-declared here — doing
+        // so produces C2371 (redefinition with different basic types) since the
+        // structured decl uses the real C++ type while our catch-all uses a generic
+        // CHAOS_IL2CPP_INTPTR/MethodTable.  Filter out any symbol that maps back to
+        // an existing structured declaration.
+        if (_allEmittedTypeSubjectIds is { Count: > 0 } && extraMethodTableSymbols.Count > 0)
+        {
+            // Build the set of chaos_mt_* symbols already declared by the object model.
+            var declaredMt = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var tid in _allEmittedTypeSubjectIds)
+                declaredMt.Add(GetNativeMethodTableSymbol(tid));
+            extraMethodTableSymbols.ExceptWith(declaredMt);
+        }
+        if (_staticFieldDeclarations is { Count: > 0 } && extraStaticFieldSymbols.Count > 0)
+        {
+            var declaredStatic = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var kvp in _staticFieldDeclarations)
+                declaredStatic.Add(GetNativeStaticFieldSymbol(kvp.Key));
+            extraStaticFieldSymbols.ExceptWith(declaredStatic);
+        }
+        if (extraExternalRuntimeSymbols.Count > 0 || extraStaticFieldSymbols.Count > 0 || extraMethodTableSymbols.Count > 0)
+        {
+            foreach (var sym in extraExternalRuntimeSymbols)
+                _emittedExternalRuntimeSymbols.TryAdd(sym, AotCoreIrAbiCarrierKind.NativeInt);
+            _extraStaticFieldSymbols = extraStaticFieldSymbols;
+            _extraMethodTableSymbols = extraMethodTableSymbols;
+        }
+
         _tPhase4 = _sw.ElapsedMilliseconds;
         long phase4Ms = _tPhase4 - _tPhase3;
         if (useSerial)
@@ -1839,4 +1908,28 @@ public sealed partial class NativeAotLoweringPlanner
     /// Scan a single assembly's PE metadata for enum type definitions and
     /// add their subject IDs to the provided set.
     /// </summary>
+
+    /// <summary>
+    /// Extract all symbol names matching a given prefix from a C++ method body source.
+    /// Used by the comprehensive post-scan to discover chaos_* symbols that were
+    /// emitted by lowered IR but not registered in header-generation data structures.
+    /// </summary>
+    /// <param name="source">The C++ method body source code.</param>
+    /// <param name="prefix">The symbol prefix to search for (e.g. "chaos_external_runtime_").</param>
+    /// <param name="result">Set to add discovered symbol names to.</param>
+    private static void ExtractCodegenSymbols(string source, string prefix, HashSet<string> result)
+    {
+        if (string.IsNullOrEmpty(source)) return;
+        int idx = 0;
+        while ((idx = source.IndexOf(prefix, idx, StringComparison.Ordinal)) >= 0)
+        {
+            // Delimiters include '.' so that `chaos_mt_X.AsTypeInfoHot()` and
+            // `&chaos_mt_X` yield the bare symbol `chaos_mt_X`, not a fragment
+            // that captures the member-access suffix.
+            int end = source.IndexOfAny(new[] { ' ', '(', ';', ')', ',', '>', '[', '.', '&' }, idx + prefix.Length);
+            if (end < 0) end = source.Length;
+            result.Add(source.Substring(idx, end - idx));
+            idx = end;
+        }
+    }
 }

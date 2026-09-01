@@ -334,6 +334,40 @@ public sealed partial class NativeAotLoweringPlanner
             sb.AppendLine();
         }
 
+        // ── Extra static field extern declarations (body-scan discovered) ──
+        // In page-split codegen, lowered IR can emit chaos_static_* references
+        // (e.g., UIntPtr.Zero) without registering in _staticFieldDeclarations.
+        // The post-scan in Methods.cs catches these and stores them in
+        // _extraStaticFieldSymbols — emit them as opaque extern "C" symbols so
+        // page files compile without C2065.
+        if (_extraStaticFieldSymbols is { Count: > 0 })
+        {
+            foreach (var sym in _extraStaticFieldSymbols.OrderBy(s => s, StringComparer.Ordinal))
+            {
+                sb.Append("extern CHAOS_IL2CPP_INTPTR ");
+                sb.Append(sym);
+                sb.AppendLine(";");
+            }
+            sb.AppendLine();
+        }
+
+        // ── Extra MethodTable extern declarations (body-scan discovered) ──
+        // Lowered IR can emit chaos_mt_* references (e.g., InterfaceMapping,
+        // ValueTuple<UIntPtr,UIntPtr>) without the type being registered in
+        // _allEmittedTypeSubjectIds.  Emit `extern MethodTable chaos_mt_*;`
+        // declarations (matching the object-model pattern) so page files can
+        // reference the MethodTable variable without C3861.
+        if (_extraMethodTableSymbols is { Count: > 0 })
+        {
+            foreach (var sym in _extraMethodTableSymbols.OrderBy(s => s, StringComparer.Ordinal))
+            {
+                sb.Append("extern MethodTable ");
+                sb.Append(sym);
+                sb.AppendLine(";");
+            }
+            sb.AppendLine();
+        }
+
         // ── Interface type ID constants (inline constexpr, inside namespace) ──
         // Interface map arrays in page files reference chaos_type_id_* constants.
         // Emit as `inline constexpr` in the shared header so all TUs get their own
