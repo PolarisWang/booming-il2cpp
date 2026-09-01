@@ -37,10 +37,10 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        return nullptr;");
 		builder.AppendLine("    }");
 		builder.AppendLine();
-		builder.AppendLine("    if (chaos_is_string_id(static_cast<intptr_t>(chaos_string_value)))");
+		builder.AppendLine("    if (chaos_is_string_id(static_cast<CHAOS_IL2CPP_INTPTR>(chaos_string_value)))");
 		builder.AppendLine("    {");
 		builder.AppendLine("        const auto chaos_view = chaos::il2cpp::string_table::Resolve(");
-		builder.AppendLine("            chaos_extract_string_id(static_cast<intptr_t>(chaos_string_value)));");
+		builder.AppendLine("            chaos_extract_string_id(static_cast<CHAOS_IL2CPP_INTPTR>(chaos_string_value)));");
 		builder.AppendLine("        return chaos_view.utf8_data;");
 		builder.AppendLine("    }");
 		builder.AppendLine();
