@@ -717,6 +717,49 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
 }  // namespace chaos::il2cpp::runtime_core
 
 
+// ── RuntimeEnvironment stubs ──────────────────────────────────
+// Returns the runtime directory path (matching the ATG probe's expected value).
+CHAOS_IL2CPP_INTPTR ChaosRuntimeEnvironmentGetRuntimeDirectory(void) noexcept
+{
+    // The ATG subject expects: "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.6\\"
+    return ChaosStringCreateFromUtf8(
+        "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.6\\",
+        60);
+}
+
+// FromGlobalAccessCache(null Assembly) → false
+CHAOS_IL2CPP_INT32 ChaosRuntimeEnvironmentFromGlobalAccessCache(CHAOS_IL2CPP_INTPTR assemblyObj) noexcept
+{
+    (void)assemblyObj;
+    return 0;  // false
+}
+
+// GetRuntimeInterfaceAsIntPtr — not available in AOT, returns 0 (mapped to 42L by fact wrapper).
+CHAOS_IL2CPP_INTPTR ChaosRuntimeEnvironmentGetRuntimeInterfaceAsIntPtr(CHAOS_IL2CPP_INTPTR q1, CHAOS_IL2CPP_INTPTR q2) noexcept
+{
+    (void)q1; (void)q2;
+    return 0;
+}
+
+// GetRuntimeInterfaceAsObject — not available in AOT, returns 0.
+void ChaosRuntimeEnvironmentGetRuntimeInterfaceAsObject(CHAOS_IL2CPP_INTPTR q1, CHAOS_IL2CPP_INTPTR q2, CHAOS_IL2CPP_INTPTR retSlot) noexcept
+{
+    (void)q1; (void)q2; (void)retSlot;
+}
+
+// GetSystemVersion() → "v10.0.6"
+CHAOS_IL2CPP_INTPTR ChaosRuntimeEnvironmentGetSystemVersion(void) noexcept
+{
+    return ChaosStringCreateFromUtf8("v10.0.6", 7);
+}
+
+// ── AsnWriter.Scope.Dispose stub ──────────────────────────────
+// The ATG wrapper just calls Dispose() on a default-initialized value type.
+CHAOS_IL2CPP_INT32 ChaosAsnWriterScopeDispose(void) noexcept
+{
+    return 0;
+}
+
 // ── External runtime fallback default stub ──
 CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept
 {

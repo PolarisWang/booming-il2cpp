@@ -80,6 +80,62 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// System.Runtime.InteropServices.RuntimeEnvironment stubs
+        /// </summary>
+        private static void RegisterRuntimeInteropEnvironmentstubs(RuntimeHelperShapeRegistry registry)
+        {
+            // RuntimeEnvironment.GetRuntimeDirectory() → string.
+            // NOTE: the callee is normalized by ManagedNaming.NormalizeSubjectIdAssembly to
+            // System.Private.CoreLib/RuntimeEnvironment, and GetTypeDisplayNameFromSubjectId
+            // strips the assembly prefix → typeDisplayName == "RuntimeEnvironment".
+            registry.Register("RuntimeEnvironment", "GetRuntimeDirectory", [],
+                ShapeKind.SimpleForward, "ChaosRuntimeEnvironmentGetRuntimeDirectory",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                EmptyRawArgumentIndices);
+
+            // RuntimeEnvironment.FromGlobalAccessCache(Assembly) → bool
+            registry.Register("RuntimeEnvironment", "FromGlobalAccessCache",
+                ["System.Reflection.Assembly"],
+                ShapeKind.SimpleForward, "ChaosRuntimeEnvironmentFromGlobalAccessCache",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            // RuntimeEnvironment.GetRuntimeInterfaceAsIntPtr(Guid, Guid) → IntPtr
+            registry.Register("RuntimeEnvironment", "GetRuntimeInterfaceAsIntPtr",
+                ["System.Guid", "System.Guid"],
+                ShapeKind.SimpleForward, "ChaosRuntimeEnvironmentGetRuntimeInterfaceAsIntPtr",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(), // Guid struct on stack - IntPtr slot
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            // RuntimeEnvironment.GetSystemVersion() → string
+            registry.Register("RuntimeEnvironment", "GetSystemVersion", [],
+                ShapeKind.SimpleForward, "ChaosRuntimeEnvironmentGetSystemVersion",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                EmptyRawArgumentIndices);
+
+            // RuntimeEnvironment.GetRuntimeInterfaceAsObject(Guid, Guid) → object
+            registry.Register("RuntimeEnvironment", "GetRuntimeInterfaceAsObject",
+                ["System.Guid", "System.Guid"],
+                ShapeKind.SimpleForward, "ChaosRuntimeEnvironmentGetRuntimeInterfaceAsObject",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+        }
+
+        /// <summary>
         /// Console (stubs for verification pipelines — tests track via ChaosAssertState.ExitCode)
         /// </summary>
         private static void RegisterConsole(RuntimeHelperShapeRegistry registry)

@@ -38,6 +38,8 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterThrowHelper(registry);
             RegisterCommonframeworkmethod(registry);
             RegisterEnvironment(registry);
+            RegisterRuntimeInteropEnvironmentstubs(registry);
+            RegisterAsnWriterScopestubs(registry);
             RegisterConsole(registry);
             RegisterOperatingSystemplatformchecks(registry);
             RegisterNumericformatting(registry);
@@ -488,6 +490,21 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0, 1 });
 
+        }
+
+        /// <summary>
+        /// AsnWriter.Scope::Dispose — DirectNativeSymbol stub for the AsnWriter+Scope finalization pattern.
+        /// The ATG wrapper calls Dispose() on a default-initialized value type.
+        /// The value type has no actual managed state to clean up in AOT context.
+        /// </summary>
+        private static void RegisterAsnWriterScopestubs(RuntimeHelperShapeRegistry registry)
+        {
+            // AsnWriter.Scope::Dispose() → void (no args — default-initialized value)
+            registry.Register("AsnWriter+Scope", "Dispose", [],
+                ShapeKind.SimpleForward, "ChaosAsnWriterScopeDispose",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateVoidAbiSlot(),
+                EmptyRawArgumentIndices);
         }
 
         /// <summary>
