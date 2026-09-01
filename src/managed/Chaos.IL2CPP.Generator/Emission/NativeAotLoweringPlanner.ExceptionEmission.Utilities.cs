@@ -204,7 +204,20 @@ public sealed partial class NativeAotLoweringPlanner
         //   1. Compiler inlining (the call is a known symbol at compile time)
         //   2. No function pointer dereference overhead
         //   3. Better code generation (the compiler sees the full call graph)
-        if (invocationTarget.DirectNativeSymbol is { } nativeSymbol)
+        //
+        // When DirectNativeSymbol is null but TargetSymbol is a chaos_external_runtime_*
+        // symbol (catch-all fallback path), use TargetSymbol as the direct call target.
+        // This ensures _emittedExternalRuntimeSymbols is populated (line 210-213),
+        // which drives the comprehensive extern declaration block in the header —
+        // without it, the symbol lacks an extern declaration and causes C3861.
+        var nativeSymbol = invocationTarget.DirectNativeSymbol;
+        if (nativeSymbol == null &&
+            invocationTarget.TargetSymbol is { } ts &&
+            ts.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
+        {
+            nativeSymbol = ts;
+        }
+        if (nativeSymbol is { })
         {
             // Collect chaos_external_runtime_* symbols for fallback declaration emission
             if (nativeSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
