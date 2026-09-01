@@ -93,6 +93,16 @@ layers:
         slow: true
         timeout: 5400
 
+      # publish-smoke: matrix e2e for the publish path (app / jit / source-only).
+      # Runs the repo-built Driver directly (dev mode) to avoid standalone-tool
+      # toolchain gaps (MSVC 14.44 terminate).  Requires the Driver to be built
+      # first (the CI workflow that selects this group does so after building).
+      # Triggered on push-to-main and release, not per-PR (codegen is the per-PR gate).
+      - name: publish-smoke
+        script: scripts/publish-smoke.py
+        args: [--json, publish-smoke-report.json]
+        timeout: 600
+
   # pytest layer — the pre-existing authority/integration unit tests that were never
   # wired into the driver (they only ran via bare `pytest`). The subset below is the
   # env-independent, consistently-green slice, folded into the unified entry. The

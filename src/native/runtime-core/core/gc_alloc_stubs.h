@@ -85,7 +85,11 @@ CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFastNoZero(CHAOS_IL2CPP_SIZE size) {
 
 /// Fast-path GcAllocateAtomic WITHOUT zero-init (atomic/pointer-free variant).
 CHAOS_IL2CPP_FORCEINLINE void* GcAllocateAtomicFastNoZero(CHAOS_IL2CPP_SIZE size) {
-    void* ptr = NurseryAllocateAtomicNoZero(size);
+    void* ptr = Allocate(size, /*is_pinned=*/false, /*is_atomic=*/true);
+    // Note: Allocate goes through NurseryAllocateAtomic (zero-init) for
+    // the TLAB fast path.  True no-zero atomic allocation is a separate
+    // path that the unified Allocate API does not yet expose — the existing
+    // NurseryAllocateAtomicNoZero remains available for that purpose.
     if (ptr) {
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;

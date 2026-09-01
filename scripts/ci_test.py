@@ -89,6 +89,12 @@ PRESETS = {
     "gc-stress": [("driver", ["--layer", "integration", "--group", "contracts-native",
                               "--stress-only"],
                    "integration/contracts-native stress")],
+    # publish-smoke: matrix e2e for the publish path (app / jit / source-only).
+    # Runs the repo-built Driver directly (dev mode) so it works even in environments
+    # where the standalone embedded-SDK build has toolchain gaps.  Triggered on
+    # push-to-main and release, not per-PR (codegen pipeline is the per-PR gate).
+    "publish-smoke": [("driver", ["--layer", "e2e", "--group", "publish-smoke"],
+                        "e2e/publish-smoke")],
 }
 
 

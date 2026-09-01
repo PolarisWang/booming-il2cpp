@@ -112,6 +112,21 @@ jobs:
           export CHAOS_FOUNDATION_DLL="$GITHUB_WORKSPACE/tests/e2e/translation"
           python -m verification.ci_smoke
 
+      # ── publish-smoke: matrix e2e for the publish path ──────────────
+      # Runs app / jit / source-only cases through the repo-built Driver (dev mode).
+      # Only on push-to-main (the publish path is a product gate, not a per-PR
+      # gate — codegen regression above is the fast per-PR coverage).
+      - name: Publish-Smoke (app/jit/source-only)
+        if: github.event_name == 'push'
+        run: |
+          python scripts/publish-smoke.py --json publish-smoke-report.json
+      - name: Upload publish-smoke report
+        if: github.event_name == 'push' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: publish-smoke-report
+          path: publish-smoke-report.json
+
       # ── JIT Performance Baseline ─────────────────────────────────────
       - name: Run JIT Benchmarks
         continue-on-error: true
