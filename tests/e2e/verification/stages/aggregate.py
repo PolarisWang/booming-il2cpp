@@ -18,6 +18,8 @@ from pathlib import Path
 
 from verification.orchestration.context import ChunkContext, StageResult
 from verification.stages.benchmark_report import _read_jsonl_technology_map
+from verification._path import results_base
+_RESULTS_BASE = results_base()
 
 
 def _try_load_json(path: Path) -> dict | None:
@@ -118,8 +120,8 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 "chunk": slug,
                 "methodCount": benchmark_method_count,
             })
-            total_benchmarked += benchmark_method_count
         else:
+            # Fallback to legacy AOT-only benchmark.json when JSONL not available
             bench_path = results_dir / "benchmark.json"
             bench_data = _try_load_json(bench_path)
             if bench_data:

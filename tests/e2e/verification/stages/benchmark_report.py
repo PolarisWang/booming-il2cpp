@@ -215,25 +215,27 @@ def _build_method_comparison(
         # ratio (net8 - tech)/net8 explodes to tens of thousands of percent.
         # Such methods are marked below_measurement_floor and EXCLUDED from the
         # pct aggregate rather than polluting it with a meaningless -19565%.
-        # AOT-side stub guard: when the chaos-aot elapsed is at the minimum
-        # floor (~0.1ns per-iteration, 0.001ms total / 10000 iterations), the
-        # method is a ChaosExternalRuntimeFallback stub returning 0 rather than
-        # executing real code.  The benchmark_chunk stage also sets `isStub: true`
-        # in the JSONL record at emit time; this floor check mirrors that classification
-        # for records that predate the isStub field.  Stub methods are EXCLUDED from
-        # the pct aggregate (chaos ~0ms ÷ net8 real time → meaningless -thousands%).
-        #
-        # Implementation path classification:
-        #   native ...... chaos_aot_ms > _MEASUREMENT_FLOOR_MS  (real AOT code)
-        #   stub ........ chaos_aot_ms <= _MEASUREMENT_FLOOR_MS  (return-0 fallback)
-        #   interpreter .. chaos_aot_ms > _MEASUREMENT_FLOOR_MS  (AOT core IR, used
-        #                 for methods that are not stub but also not native — this is
-        #                 the generic catch-all; the benchmark_report does not currently
-        #                 distinguish native-vs-interpreter at the AOT level).
+        # AOT-side stub detection.  Prefer the source-side `isStub` flag written by
+        # benchmark_chunk (which compares meanDurationMs, the TOTAL batch elapsed,
+        # against _MIN_ELAPSED_FLOOR=0.001 — a stub's total-batch time is at that
+        # floor).  For records that predate the isStub field (older JSONL), fall
+        # back to checking the AOT per-iteration elapsed against the floor: a stub
+        # measures ~0 across all iterations, i.e. per-iter << _MEASUREMENT_FLOOR_MS.
+        # NOTE: must NOT apply the per-iter floor to real methods whose total-batch
+        # time is e.g. 0.03ms (0.03/10000 = 3e-6 per iter < the 1e-5 floor) — those
+        # are genuine measurements and must not be classified as stubs.
         chaos_aot_rec = techs.get("chaos-aot")
-        is_stub = (chaos_aot_rec is not None
-                   and (chaos_aot_rec.get("isStub") is True
-                        or (chaos_aot_ms is not None and 0 < chaos_aot_ms <= _MEASUREMENT_FLOOR_MS)))
+        aot_is_stub = (chaos_aot_rec is not None and chaos_aot_rec.get("isStub") is True)
+        if not aot_is_stub and chaos_aot_rec is not None and chaos_aot_rec.get("isStub") is None:
+            # No isStub field present (pre-fix data): infer from raw total-batch
+            # elapsed being at/near the native floor.
+            aot_raw = (chaos_aot_rec.get("metrics") or {}).get("elapsedMilliseconds")
+            aot_iters = chaos_aot_rec.get("iterations") or 1
+            # A true stub sits at the _MIN_ELAPSED_FLOOR (0.001ms total) with
+            # essentially zero real body time.  Anything above that floor is a
+            # real measurement (native or interpreter).
+            aot_is_stub = isinstance(aot_raw, (int, float)) and 0 < aot_raw <= 0.001
+        is_stub = aot_is_stub
         below_floor = (net8_ms is not None and 0 < net8_ms <= _MEASUREMENT_FLOOR_MS)
 
         # Coverage-asymmetry bookkeeping (for the harness diagnostic).
