@@ -69,19 +69,16 @@ cp "$SDK_LIB_SRC"/*.lib "$SDK_STAGE/lib/" 2>/dev/null || true
 cp "$SDK_LIB_SRC"/*.a "$SDK_STAGE/lib/" 2>/dev/null || true
 echo "  libs: $(ls -1 "$SDK_STAGE/lib" | wc -l) files ($(du -sh "$SDK_STAGE/lib" | cut -f1))"
 
-# runtime stubs (block .h + .cpp needed by consumer build)
-if [ -d "src/native/runtime-core/runtime_stubs" ]; then
-    cp src/native/runtime-core/runtime_stubs/*.h "$SDK_STAGE/runtime_stubs/" 2>/dev/null || true
-    cp src/native/runtime-core/runtime_stubs/*.cpp "$SDK_STAGE/runtime_stubs/" 2>/dev/null || true
-fi
-
-# Runtime headers — use the SdkEmitter's own CopyRuntimeHeaders logic by
-# invoking it via a tiny codegen invocation, or copy the same set of headers
-# directly from the repo tree.  This mirrors what SdkEmitter.CopyRuntimeHeaders
-# does: src/native/{common,runtime-core,codegen,contracts} → include/.
+# ── Runtime headers ──────────────────────────────────────────────────
 echo "  copying runtime headers..."
 INCLUDE="$SDK_STAGE/include"
 mkdir -p "$INCLUDE/chaos/pal" "$INCLUDE/gc" "$INCLUDE/runtime_stubs" "$INCLUDE/reflection" "$INCLUDE/fmt"
+
+# runtime_stubs .h go into include/runtime_stubs/ (needed by generated_code_compat.h)
+if [ -d "src/native/runtime-core/runtime_stubs" ]; then
+    cp src/native/runtime-core/runtime_stubs/*.h "$INCLUDE/runtime_stubs/" 2>/dev/null || true
+    cp src/native/runtime-core/runtime_stubs/*.cpp "$SDK_STAGE/runtime_stubs/" 2>/dev/null || true
+fi
 
 # chaos/*.h (common public API surface)
 if [ -d "src/native/common/chaos" ]; then
@@ -91,26 +88,40 @@ fi
 if [ -d "src/native/pal/chaos/pal" ]; then
     cp src/native/pal/chaos/pal/*.h "$INCLUDE/chaos/pal/" 2>/dev/null || true
 fi
-# runtime-core top-level headers (chaos_runtime_host.h etc.)
+# runtime-core: copy ALL .h files preserving relative structure — SdkEmitter
+# copies ~8 source dirs with complex transitive deps.  We mirror the tree into
+# include/ so `#include "core/engine_lifecycle.h"` etc. resolve.
 if [ -d "src/native/runtime-core" ]; then
-    for h in chaos_runtime_host.h runtime_core.h com_ccw.h module_registry.h \
-             abi_manifest.h hotpatch_table.h runtime_vtable.h \
-             runtime_instantiation.h reflection_query_model.h \
-             load_store_chaos_bridge.h interpreter_entry.h exception_helpers.h \
-             thread_state.h forbid_suspend.h memory_domain.h convert.h \
-             enum_stubs.h patch_loader.h jit_registration.h \
-             ChaosGeneratedRuntimePrelude.h generated_code_compat.h \
-             string_table.h reflection_api.h reflection_metadata_impl.h \
-             arithmetic_chaos_bridge.h numerics_carriers.h \
-             chaos_pch.h; do
-        [ -f "src/native/runtime-core/$h" ] && cp "src/native/runtime-core/$h" "$INCLUDE/" 2>/dev/null || true
+    (cd src/native/runtime-core && find . -name '*.h' -not -path '*/test/*' \
+        | while read -r h; do mkdir -p "$INCLUDE/$(dirname "$h")"; cp "$h" "$INCLUDE/$h"; done) 2>/dev/null || true
+fi
+# contracts: headers needed by chaos_runtime_host.h / runtime_core.h
+if [ -d "contracts/native/v0" ]; then
+    cp contracts/native/v0/*.h "$INCLUDE/" 2>/dev/null || true
+fi
+# interpreter: interpreter_entry.h is required by runtime_core.h / chaos_pch.h but
+# lives in src/native/interpreter/ (NOT runtime-core). Copy it into the SDK include.
+if [ -d "src/native/interpreter" ]; then
+    for h in interpreter_entry.h; do
+        [ -f "src/native/interpreter/$h" ] && cp "src/native/interpreter/$h" "$INCLUDE/" 2>/dev/null || true
     done
 fi
 # gc/*.h
 if [ -d "src/native/runtime-core/gc" ]; then
     cp src/native/runtime-core/gc/*.h "$INCLUDE/gc/" 2>/dev/null || true
 fi
-# codegen bridge headers
+# codegen bridge headers + contracts headers
+# SdkEmitter.CopyRuntimeHeaders copies from contracts/native/v0/ (abi_manifest.h,
+# codegen_bridge.h, patch_data.h, register_ir.h, runtime_abi.h,
+# runtime_instantiation.h, unified_metadata.h). These are REQUIRED by
+# chaos_runtime_host.h / runtime_core.h.
+if [ -d "contracts/native/v0" ]; then
+    for h in abi_manifest.h codegen_bridge.h patch_data.h register_ir.h \
+             runtime_abi.h runtime_instantiation.h unified_metadata.h; do
+        [ -f "contracts/native/v0/$h" ] && cp "contracts/native/v0/$h" "$INCLUDE/" 2>/dev/null || true
+    done
+fi
+# src/native/codegen/*.h (if any — currently only CMakeLists.txt, but mirror it)
 if [ -d "src/native/codegen" ]; then
     cp src/native/codegen/*.h "$INCLUDE/" 2>/dev/null || true
 fi
@@ -126,6 +137,13 @@ echo "  include: $(find "$INCLUDE" -type f | wc -l) files"
 
 # version marker
 echo "$VERSION" > "$SDK_STAGE/version.txt"
+# third_party headers (ankerl/unordered_dense for chaos/common.h)
+if [ -d "third_party/unordered_dense/include" ]; then
+    mkdir -p "$SDK_STAGE/third_party/ankerl"
+    cp third_party/unordered_dense/include/ankerl/unordered_dense.h "$SDK_STAGE/third_party/ankerl/" 2>/dev/null || true
+    cp third_party/unordered_dense/include/ankerl/stl.h "$SDK_STAGE/third_party/ankerl/" 2>/dev/null || true
+    echo "  third_party: ankerl/ (unordered_dense.h + stl.h)"
+fi
 echo "  sdk stage size: $(du -sh "$SDK_STAGE" | cut -f1)"
 
 # ── 4. dotnet pack the Driver → nupkg ───────────────────────────────────

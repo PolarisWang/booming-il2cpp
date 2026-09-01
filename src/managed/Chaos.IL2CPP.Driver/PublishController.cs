@@ -400,14 +400,17 @@ int main(int argc, char* argv[])
         if (repoRoot == null && embeddedSdkInclude != null && Directory.Exists(embeddedSdkInclude))
         {
             var inc = embeddedSdkInclude.Replace("\\", "/");
-            // Add the SDK include ROOT + its subdirs. The root carries the
-            // public headers (chaos_runtime_host.h etc.); subdirs carry the
-            // chaos/ context, gc/, runtime_stubs/.
+            // SDK sdk/ root (carries sdk/third_party/ankerl for unordered_dense.h).
+            var sdkRootAbs = Path.GetDirectoryName(FindEmbeddedSdkLib()!)?.Replace("\\", "/");
+            // Add the SDK include ROOT + its subdirs. The root carries the public
+            // headers (chaos_runtime_host.h etc.); subdirs carry chaos/, gc/,
+            // runtime_stubs/; third_party carries ankerl/unordered_dense.h.
             toolIncludes = $@"
     ""{inc}""
     ""{inc}/chaos""
     ""{inc}/gc""
-    ""{inc}/runtime_stubs""";
+    ""{inc}/runtime_stubs""
+    ""{sdkRootAbs}/third_party""";
         }
 
         File.WriteAllText(cmakeLists, $@"cmake_minimum_required(VERSION 3.20)
@@ -423,6 +426,11 @@ add_compile_options(""$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-finput-charset=utf-8>"")
 add_compile_options(""$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-fexceptions>"")
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
 add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
+# On MSVC with /EHa the exception header symbols (std::terminate / std::set_terminate)
+# are gated behind _HAS_EXCEPTIONS=1. MSVC 14.44+ BuildTools defaults it for /EHsc
+# but not for /EHa, so force it globally (not via generator expression, which
+# doesn't propagate reliably through add_compile_definitions + find_package(chaos)).
+add_compile_definitions(_HAS_EXCEPTIONS=1)
 
 # Find the chaos SDK (chaos-config.cmake) — provides chaos::runtime (prebuilt libs + flags).
 set(CHAOS_SDK_DIR ""{sdkRootPath}"")

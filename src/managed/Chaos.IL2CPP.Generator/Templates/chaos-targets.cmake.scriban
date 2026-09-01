@@ -22,6 +22,15 @@ target_compile_options(chaos::runtime INTERFACE
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-msse4.2>"
 )
 
+# MSVC 14.44+ (VS 2022 17.14+ BuildTools) defines std::terminate / std::set_terminate
+# in <exception> only when _HAS_EXCEPTIONS=1 is set. With /EHa the default may be
+# 0, causing C2039 errors when any header pulls in <exception>.  Setting it here
+# (as an INTERFACE compile definition) ensures it propagates to every consumer
+# translation unit before <exception> is first included.
+target_compile_definitions(chaos::runtime INTERFACE
+    $<$<CXX_COMPILER_ID:MSVC>:_HAS_EXCEPTIONS=1>
+)
+
 target_compile_features(chaos::runtime INTERFACE
     cxx_std_20
 )

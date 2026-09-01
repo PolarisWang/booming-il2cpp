@@ -222,7 +222,9 @@ internal sealed class SdkEmitter
             "com_ccw.h", "module_registry.h", "abi_manifest.h",
             "hotpatch_table.h", "runtime_vtable.h", "runtime_instantiation.h",
             "reflection_query_model.h", "load_store_chaos_bridge.h",
-            "interpreter_entry.h", "exception_helpers.h", "thread_state.h",
+            // NOTE: interpreter_entry.h lives under src/native/interpreter/, not
+            // runtime-core/ — it is copied separately below (see CopyInterpreterHeaders).
+            "exception_helpers.h", "thread_state.h",
             "forbid_suspend.h", "memory_domain.h", "convert.h",
             "enum_stubs.h", "patch_loader.h", "jit_registration.h",
             "ChaosGeneratedRuntimePrelude.h",
@@ -236,6 +238,29 @@ internal sealed class SdkEmitter
         foreach (var h in runtimeCoreHeaders)
         {
             var src = Path.Combine(srcRuntimeCore, h);
+            if (File.Exists(src))
+            {
+                File.Copy(src, Path.Combine(includeDir, h), overwrite: true);
+                count++;
+            }
+        }
+
+        // ── Copy interpreter/*.h (standalone codegen + runtime_core.h dep) ─
+        // runtime_core.h and chaos_pch.h both #include "interpreter_entry.h",
+        // which lives under src/native/interpreter/.  In dev-mode the repo include
+        // path (PublishController CMakeLists {root}/src/native/interpreter) covers
+        // it, but a standalone tool package needs it IN the SDK include tree so the
+        // self-contained entry builds without a repo tree.  Copy the public
+        // interpreter headers (the ones the generated code / runtime_core.h touch)
+        // into include/.
+        var srcInterpreter = Path.Combine(repoRoot, "src", "native", "interpreter");
+        var interpreterHeaders = new[]
+        {
+            "interpreter_entry.h",
+        };
+        foreach (var h in interpreterHeaders)
+        {
+            var src = Path.Combine(srcInterpreter, h);
             if (File.Exists(src))
             {
                 File.Copy(src, Path.Combine(includeDir, h), overwrite: true);
