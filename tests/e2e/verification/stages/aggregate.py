@@ -17,6 +17,7 @@ from datetime import date
 from pathlib import Path
 
 from verification.orchestration.context import ChunkContext, StageResult
+from verification.stages.benchmark_report import _read_jsonl_technology_map
 
 
 def _try_load_json(path: Path) -> dict | None:
@@ -99,38 +100,57 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         else:
             summary["fact"] = {"status": "no_results"}
 
-        # Benchmark results — collect both counts and performance metrics
-        bench_path = results_dir / "benchmark.json"
-        bench_data = _try_load_json(bench_path)
-        if bench_data:
-            results_list = bench_data.get("results", [])
-            method_count = bench_data.get("methodCount", len(results_list))
+        # Benchmark results — prefer the JSONL perf store (benchmark-history.jsonl)
+        # over the legacy AOT-only benchmark.json, since the JSONL includes both
+        # AOT and managed (net8/net10) records and is the single source of truth
+        # for benchmark_report.  Fall back to benchmark.json for backward compat.
+        jsonl_path = _RESULTS_BASE / assembly / slug / "perf" / "benchmark-history.jsonl"
+        tech_map = _read_jsonl_technology_map(jsonl_path)
+        if tech_map:
+            benchmark_method_count = len(tech_map)
+            benchmark_with_net8 = sum(1 for t in tech_map.values() if "net8-jit" in t or "net10-jit" in t)
             chunk_benchmark = {
-                "methodCount": method_count,
-                "iterations": bench_data.get("iterations", 0),
+                "methodCount": benchmark_method_count,
+                "methodsWithNet8": benchmark_with_net8,
             }
-            perf_summary = bench_data.get("summary", {})
-            if perf_summary:
-                for perf_key in ("meanDurationMs", "meanOpsPerSecond", "minDurationMs",
-                                 "maxDurationMs", "totalDurationMs", "totalAllocatedBytes",
-                                 "meanSampleCount", "totalOutliers",
-                                 "warmupRounds", "sampleRounds"):
-                    if perf_key in perf_summary:
-                        chunk_benchmark[perf_key] = perf_summary[perf_key]
-            # Collect per-method stddev/cv for aggregate CV computation
-            per_method_stats = bench_data.get("perMethodStats") or []
-            if per_method_stats:
-                cvs = [s.get("cv", 0) for s in per_method_stats if isinstance(s.get("cv"), (int, float))]
-                if cvs:
-                    chunk_benchmark["meanCv"] = sum(cvs) / len(cvs)
-                    chunk_benchmark["maxCv"] = max(cvs)
             summary["benchmark"] = chunk_benchmark
             all_benchmark.append({
                 "chunk": slug,
-                **bench_data,
+                "methodCount": benchmark_method_count,
             })
+            total_benchmarked += benchmark_method_count
         else:
-            summary["benchmark"] = {"status": "no_results"}
+            bench_path = results_dir / "benchmark.json"
+            bench_data = _try_load_json(bench_path)
+            if bench_data:
+                results_list = bench_data.get("results", [])
+                method_count = bench_data.get("methodCount", len(results_list))
+                chunk_benchmark = {
+                    "methodCount": method_count,
+                    "iterations": bench_data.get("iterations", 0),
+                }
+                perf_summary = bench_data.get("summary", {})
+                if perf_summary:
+                    for perf_key in ("meanDurationMs", "meanOpsPerSecond", "minDurationMs",
+                                     "maxDurationMs", "totalDurationMs", "totalAllocatedBytes",
+                                     "meanSampleCount", "totalOutliers",
+                                     "warmupRounds", "sampleRounds"):
+                        if perf_key in perf_summary:
+                            chunk_benchmark[perf_key] = perf_summary[perf_key]
+                per_method_stats = bench_data.get("perMethodStats") or []
+                if per_method_stats:
+                    cvs = [s.get("cv", 0) for s in per_method_stats if isinstance(s.get("cv"), (int, float))]
+                    if cvs:
+                        chunk_benchmark["meanCv"] = sum(cvs) / len(cvs)
+                        chunk_benchmark["maxCv"] = max(cvs)
+                summary["benchmark"] = chunk_benchmark
+                all_benchmark.append({
+                    "chunk": slug,
+                    **bench_data,
+                })
+                total_benchmarked += method_count
+            else:
+                summary["benchmark"] = {"status": "no_results"}
 
         # Bug3 fix: collect per-method rows from comparison.json (methodSubjectId +
         # chaosAotVsNet8Pct + status) so the agent report maps signals to methods.

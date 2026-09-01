@@ -491,6 +491,14 @@ def _build_perf_record(
         "iterations": iterations,
         "status": "completed",
         "nativeConfig": ctx.native_config,
+        # Source-side classification: methods whose mean duration is at the
+        # minimum-elapsed floor (~0.001ms total across all iterations) are
+        # ChaosExternalRuntimeFallback stubs returning 0, not real code.  The
+        # benchmark_report stage uses this field to exclude stubs from the
+        # performance aggregate (stub ~0ms ÷ net8 real time produces meaningless
+        # -thousands-of-percent figures).  See also the AOT-side floor check in
+        # benchmark_report._build_method_comparison.
+        "isStub": elapsed_ms <= _MIN_ELAPSED_FLOOR,
     }
 
 

@@ -179,6 +179,7 @@ def _build_method_comparison(
     all_net10_pcts: list[float] = []
     total_better_than_net8 = 0
     total_with_net8 = 0
+    total_stub_methods = 0
     # Coverage-asymmetry counters for the harness diagnostic: which methods each
     # runtime actually benchmarked. When AOT and managed benchmark disjoint sets
     # (family-specific: e.g. SseFormatter throws on .NET, SseParser isn't AOT-
@@ -214,6 +215,25 @@ def _build_method_comparison(
         # ratio (net8 - tech)/net8 explodes to tens of thousands of percent.
         # Such methods are marked below_measurement_floor and EXCLUDED from the
         # pct aggregate rather than polluting it with a meaningless -19565%.
+        # AOT-side stub guard: when the chaos-aot elapsed is at the minimum
+        # floor (~0.1ns per-iteration, 0.001ms total / 10000 iterations), the
+        # method is a ChaosExternalRuntimeFallback stub returning 0 rather than
+        # executing real code.  The benchmark_chunk stage also sets `isStub: true`
+        # in the JSONL record at emit time; this floor check mirrors that classification
+        # for records that predate the isStub field.  Stub methods are EXCLUDED from
+        # the pct aggregate (chaos ~0ms ÷ net8 real time → meaningless -thousands%).
+        #
+        # Implementation path classification:
+        #   native ...... chaos_aot_ms > _MEASUREMENT_FLOOR_MS  (real AOT code)
+        #   stub ........ chaos_aot_ms <= _MEASUREMENT_FLOOR_MS  (return-0 fallback)
+        #   interpreter .. chaos_aot_ms > _MEASUREMENT_FLOOR_MS  (AOT core IR, used
+        #                 for methods that are not stub but also not native — this is
+        #                 the generic catch-all; the benchmark_report does not currently
+        #                 distinguish native-vs-interpreter at the AOT level).
+        chaos_aot_rec = techs.get("chaos-aot")
+        is_stub = (chaos_aot_rec is not None
+                   and (chaos_aot_rec.get("isStub") is True
+                        or (chaos_aot_ms is not None and 0 < chaos_aot_ms <= _MEASUREMENT_FLOOR_MS)))
         below_floor = (net8_ms is not None and 0 < net8_ms <= _MEASUREMENT_FLOOR_MS)
 
         # Coverage-asymmetry bookkeeping (for the harness diagnostic).
@@ -233,18 +253,21 @@ def _build_method_comparison(
             "net8Error": net8_error,
             "highVariance": net8_high_var,
             "belowMeasurementFloor": below_floor,
+            "isStub": is_stub,
         }
 
         if net8_ms and net8_ms > 0 and not net8_error:
-            if below_floor:
-                # Baseline indistinguishable from timer noise — can't compute a
-                # meaningful ratio. Keep the timing fields but mark the method
-                # below_measurement_floor and skip the pct aggregate (avoids the
-                # -19565% explosion from dividing by ~1e-5 ms).
-                method_entry["status"] = "below_measurement_floor"
+            if below_floor or is_stub:
+                # Baseline indistinguishable from timer noise, or AOT side is a
+                # stub (return-0 fallback with no real body).  Keep the timing
+                # fields but mark the method and skip the pct aggregate.
+                status = "below_measurement_floor" if below_floor else "stub"
+                method_entry["status"] = status
                 method_entry["net10VsNet8Pct"] = None
                 method_entry["chaosAotVsNet8Pct"] = None
                 method_entry["chaosJitVsNet8Pct"] = None
+                if is_stub:
+                    total_stub_methods += 1
             else:
                 method_entry["net10VsNet8Pct"] = _compute_pct(net8_ms, net10_ms)
                 method_entry["chaosAotVsNet8Pct"] = _compute_pct(net8_ms, chaos_aot_ms)
@@ -334,6 +357,10 @@ def _build_method_comparison(
         "methodCount": len(methods_list),
         "methodsWithNet8": total_with_net8,
         "methodsBetterThanNet8": total_better_than_net8,
+        # Stub methods (return-0 fallback, no real AOT body) are excluded from the
+        # pct aggregate; this exposes how many were excluded so coverage is
+        # transparent rather than silently inflating/perverting the mean.
+        "stubMethodCount": total_stub_methods,
         # Coverage-asymmetry diagnostic: AOT vs managed (net8/net10) benchmark
         # populations may be disjoint for a family. Exposing these lets the
         # harness see WHY chaosAotVsNet8 is empty (no method has BOTH AOT and
@@ -499,6 +526,7 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
     total_methods = 0
     total_with_net8 = 0
     total_better_than_net8 = 0
+    total_stub_methods = 0
     # Accumulated coverage-asymmetry counters (promoted to top-level aggregate so
     # the dashboard can surface WHY chaosAotVsNet8 may be empty).
     cov_aot = 0
@@ -571,6 +599,7 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
         total_methods += aggregate["methodCount"]
         total_with_net8 += aggregate["methodsWithNet8"]
         total_better_than_net8 += aggregate.get("methodsBetterThanNet8", 0)
+        total_stub_methods += aggregate.get("stubMethodCount", 0)
         if aggregate["methodsWithNet8"] > 0:
             chaos_pct = aggregate.get("chaosAotVsNet8Pct")
             if isinstance(chaos_pct, dict) and chaos_pct.get("mean") is not None:
@@ -620,6 +649,7 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "totalMethods": total_methods,
         "methodsWithNet8": total_with_net8,
+        "stubMethodCount": total_stub_methods,
         "aggregate": cross_chunk_aggregate,
         "perChunk": all_chunk_comparisons,
     }
@@ -649,6 +679,12 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
     net10_mean = cross_chunk_aggregate.get("net10VsNet8Pct", {}).get("mean", "N/A")
     print(f"  [benchmark-report] Comparison: {total_methods} methods, "
           f"{total_with_net8} with net8 baseline")
+    # Surface stub exclusion: methods that executed no real AOT body (return-0
+    # fallback) were excluded from the pct aggregate so the mean reflects only
+    # real measurements, not meaningless ~0ms ÷ net8 ratios.
+    if total_stub_methods:
+        print(f"  [benchmark-report] {total_stub_methods} method(s) excluded as stub "
+              f"(no real AOT body, return-0 fallback)")
     print(f"  [benchmark-report] Chaos AOT vs .NET 8: mean {chaos_mean}% faster")
     print(f"  [benchmark-report] .NET 10 vs .NET 8:   mean {net10_mean}% faster")
 
@@ -664,8 +700,9 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
 
     return StageResult(
         stage="benchmark_report", status="passed",
-        summary=f"compared {total_with_net8}/{total_methods} methods vs net8, "
-                f"chaosAot mean {chaos_mean}% faster",
+        summary=(f"compared {total_with_net8}/{total_methods} methods vs net8, "
+                 f"chaosAot mean {chaos_mean}% faster"
+                 + (f", {total_stub_methods} stubs excluded" if total_stub_methods else "")),
         details=comparison_summary,
         duration_ms=duration_ms,
     )
