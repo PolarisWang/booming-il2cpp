@@ -173,7 +173,25 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
                 allocated = true;
             }
         }
-    }  // mutex_ released
+
+        // Register the segment with the card table and zero-initialize the payload
+        // UNDER THE LOCK.  GcRegisterHeapRange reads seg->payload_size to compute
+        // the L2 segment allocation size; if the segment is freed concurrently by
+        // another thread (Free/Sweep), payload_size is corrupted and
+        // make_unique<CardSegment*[]> receives an absurd size → crash (cdb: "Invalid
+        // allocation size - a8a3000000034").  Holding the lock prevents the segment
+        // from being removed from segment_list_ while we register it.
+        if (seg != nullptr) {
+            void* payload = reinterpret_cast<char*>(seg) + sizeof(LohSegment);
+            GcRegisterHeapRange(
+                reinterpret_cast<uintptr_t>(payload),
+                reinterpret_cast<uintptr_t>(payload) + seg->payload_size);
+            GcMarkRangeOld(
+                reinterpret_cast<uintptr_t>(payload),
+                reinterpret_cast<uintptr_t>(payload) + seg->payload_size);
+            std::memset(payload, 0, seg->payload_size);
+        }
+    }  // mutex_ released — seg is fully registered and zeroed
 
     if (!allocated) {
         // AllocateSegment failed (OS-level OOM).  Return to cooperative mode
@@ -190,21 +208,7 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
     // Segment allocated under preemptive mode — switch back to cooperative.
     threading::EnterCooperativeMode();
 
-    void* payload = reinterpret_cast<char*>(seg) + sizeof(LohSegment);
-    // Register the LOH segment payload with the card table so that
-    // DirtyCard() write barrier tracks pointer writes into LOH objects.
-    // This enables young GC Phase 1 to discover LOH→nursery references
-    // via card scanning.
-    GcRegisterHeapRange(
-        reinterpret_cast<uintptr_t>(payload),
-        reinterpret_cast<uintptr_t>(payload) + seg->payload_size);
-    // Mark LOH payload region-gen bytes OLD so the generation-aware barrier
-    // cards cross-gen stores into LOH objects (mirror old-gen pages).
-    GcMarkRangeOld(
-        reinterpret_cast<uintptr_t>(payload),
-        reinterpret_cast<uintptr_t>(payload) + seg->payload_size);
-    std::memset(payload, 0, seg->payload_size);
-    return payload;
+    return seg ? reinterpret_cast<char*>(seg) + sizeof(LohSegment) : nullptr;
 }
 
 void LargeObjectHeap::Free(void* ptr) {
