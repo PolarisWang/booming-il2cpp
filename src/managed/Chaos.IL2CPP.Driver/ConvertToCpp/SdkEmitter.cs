@@ -70,10 +70,14 @@ internal sealed class SdkEmitter
             Console.WriteLine($"    SDK header: chaos.h");
 
             // ── Phase 1b': Copy runtime headers needed by chaos.h ────────────
-            CopyRuntimeHeaders(repoRoot, includeDir);
+            // Standalone tool mode (repoRoot == null) relies on the embedded SDK
+            // headers already present in the package; nothing to copy from a repo.
+            if (repoRoot != null)
+                CopyRuntimeHeaders(repoRoot, includeDir);
 
             // ── Phase 1b": Copy runtime_stubs .cpp sources into SDK ─────────
-            CopyRuntimeStubSources(repoRoot, sdkRoot);
+            if (repoRoot != null)
+                CopyRuntimeStubSources(repoRoot, sdkRoot);
 
             // ── Phase 1c: Generate chaos-config.cmake ────────────────────────
             var configModel = new ScriptObject
@@ -94,14 +98,18 @@ internal sealed class SdkEmitter
 
             // ── Phase 1e: Build native libs from source (if needed) ─────────
             // On Linux there are no prebuilt .a files; build them from the repo
-            // source tree via cmake.  On Windows this is a no-op.
-            platform.BuildNativeLibs(repoRoot, libDir, configTier);
+            // source tree via cmake.  On Windows this is a no-op.  Standalone tool
+            // mode (repoRoot == null) skips source builds — libs come from the
+            // embedded SDK via CopyRealSdkLibsOverStubs.
+            if (repoRoot != null)
+                platform.BuildNativeLibs(repoRoot, libDir, configTier);
 
             // ── Phase 1f: Copy prebuilt native runtime library files ───────
             CopyNativeLibs(nativeLibDir, buildConfig, libDir, platform);
 
             // ── Phase 2: Precompile native-aot.generated.cpp → chaos_codegen.lib ──
-            TryPrecompileCodegenLib(generatedRoot, repoRoot, sdkRoot, libDir);
+            if (repoRoot != null)
+                TryPrecompileCodegenLib(generatedRoot, repoRoot, sdkRoot, libDir);
 
             Console.WriteLine($"SDK assembled: {sdkRoot}");
             return true;

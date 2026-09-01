@@ -372,7 +372,7 @@ int main(int argc, char* argv[])
         var cmakeLists = Path.Combine(outputDir, "CMakeLists.txt");
 
         string repoIncludes = "";
-        if (repoRoot != null)
+        if (repoRoot != null && Directory.Exists(Path.Combine(repoRoot, "src", "native", "runtime-core")))
         {
             var root = repoRoot.Replace("\\", "/");
             repoIncludes = $@"
@@ -386,6 +386,28 @@ int main(int argc, char* argv[])
     ""{root}/src/native/hot-update""
     ""{root}/third_party/unordered_dense/include""
     ""{root}/src/native/jit""";
+        }
+
+        // Standalone tool mode: no repo tree. The SDK's headers are embedded in
+        // the tool package (sdk/include/, discovered by walking up from
+        // BaseDirectory). Add that include path so the emitted project can find
+        // chaos_runtime_host.h etc. without the repo tree.
+        var embeddedSdkInclude = FindEmbeddedSdkLib() is string embeddedLibDir
+            ? Path.GetDirectoryName(embeddedLibDir) is string sdkRootDir
+                ? Path.Combine(sdkRootDir, "include") : null
+            : null;
+        string? toolIncludes = null;
+        if (repoRoot == null && embeddedSdkInclude != null && Directory.Exists(embeddedSdkInclude))
+        {
+            var inc = embeddedSdkInclude.Replace("\\", "/");
+            // Add the SDK include ROOT + its subdirs. The root carries the
+            // public headers (chaos_runtime_host.h etc.); subdirs carry the
+            // chaos/ context, gc/, runtime_stubs/.
+            toolIncludes = $@"
+    ""{inc}""
+    ""{inc}/chaos""
+    ""{inc}/gc""
+    ""{inc}/runtime_stubs""";
         }
 
         File.WriteAllText(cmakeLists, $@"cmake_minimum_required(VERSION 3.20)
@@ -418,7 +440,7 @@ add_executable(chaos_entry ${{CHAOS_ENTRY_SOURCES}})
 
 target_include_directories(chaos_entry PRIVATE
     ""${{CHAOS_SDK_DIR}}/include""
-    ""${{CHAOS_SDK_DIR}}/generated""{repoIncludes}
+    ""${{CHAOS_SDK_DIR}}/generated""{repoIncludes}{toolIncludes}
 )
 
 target_compile_options(chaos_entry PRIVATE ""$<$<CXX_COMPILER_ID:MSVC>:/EHa>"")
@@ -636,54 +658,66 @@ target_link_options(chaos_entry PRIVATE
     {
         try
         {
-            var repoRoot = DetectRepoRoot();
-            if (repoRoot == null)
-            {
-                Console.WriteLine("  [publish] warning: could not resolve repo root; skipping real-lib copy. "
-                                  + "Run from within the chaos-il2cpp repo.");
-                return;
-            }
-
             var nativePresetDir = ResolveSdkPreset();
-            var presetLibRoot = Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
-            var sdkLibRoot = Path.Combine(repoRoot, "tests", "e2e", "translation", "sdk", nativePresetDir, "lib");
             var stubLibRoot = Path.Combine(outputDir, "codegen", "lib");
 
+            // Three sources, tried in order:
+            //   1. Embedded SDK inside the dotnet tool package (walk up from BaseDir)
+            //   2. Repo-relative SDK (tests/e2e/translation/sdk/...)
+            //   3. Repo-relative preset build (artifacts/presets/...)
             var realLibs = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            if (Directory.Exists(sdkLibRoot))
+
+            // Source 1: embedded SDK (dotnet tool package). Walk up from
+            // BaseDirectory to find sdk/lib (global tools unpack under
+            // .../tools/net8.0/any/, sdk/ is a sibling above).
+            var embeddedSdkLib = FindEmbeddedSdkLib();
+            if (embeddedSdkLib != null)
             {
-                foreach (var lib in Directory.GetFiles(sdkLibRoot, "*.lib"))
+                foreach (var lib in Directory.GetFiles(embeddedSdkLib, "*.lib"))
                     realLibs[Path.GetFileName(lib)] = lib;
-                foreach (var lib in Directory.GetFiles(sdkLibRoot, "*.a"))
+                foreach (var lib in Directory.GetFiles(embeddedSdkLib, "*.a"))
                     realLibs[Path.GetFileName(lib)] = lib;
+                Console.WriteLine($"  [publish] using embedded SDK at {embeddedSdkLib}");
             }
-            if (Directory.Exists(presetLibRoot))
+
+            // Source 2 + 3: repo-relative paths (development mode)
+            var repoRoot = DetectRepoRoot();
+            if (repoRoot != null)
             {
-                foreach (var lib in Directory.GetFiles(presetLibRoot, "*.lib", SearchOption.AllDirectories))
+                var sdkLibRoot = Path.Combine(repoRoot, "tests", "e2e", "translation", "sdk", nativePresetDir, "lib");
+                if (Directory.Exists(sdkLibRoot))
                 {
-                    var name = Path.GetFileName(lib);
-                    if (!realLibs.TryGetValue(name, out var existing) ||
-                        Path.GetDirectoryName(lib)!.Length > Path.GetDirectoryName(existing)!.Length)
+                    foreach (var lib in Directory.GetFiles(sdkLibRoot, "*.lib"))
+                        realLibs[Path.GetFileName(lib)] = lib;
+                    foreach (var lib in Directory.GetFiles(sdkLibRoot, "*.a"))
+                        realLibs[Path.GetFileName(lib)] = lib;
+                }
+                var presetLibRoot = Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
+                if (Directory.Exists(presetLibRoot))
+                {
+                    foreach (var lib in Directory.GetFiles(presetLibRoot, "*.lib", SearchOption.AllDirectories))
                     {
-                        realLibs[name] = lib;
+                        var name = Path.GetFileName(lib);
+                        if (!realLibs.TryGetValue(name, out var existing) ||
+                            Path.GetDirectoryName(lib)!.Length > Path.GetDirectoryName(existing)!.Length)
+                            realLibs[name] = lib;
+                    }
+                    foreach (var lib in Directory.GetFiles(presetLibRoot, "*.a", SearchOption.AllDirectories))
+                    {
+                        var name = Path.GetFileName(lib);
+                        if (!realLibs.TryGetValue(name, out var existing) ||
+                            Path.GetDirectoryName(lib)!.Length > Path.GetDirectoryName(existing)!.Length)
+                            realLibs[name] = lib;
                     }
                 }
-                foreach (var lib in Directory.GetFiles(presetLibRoot, "*.a", SearchOption.AllDirectories))
-                {
-                    var name = Path.GetFileName(lib);
-                    if (!realLibs.TryGetValue(name, out var existing) ||
-                        Path.GetDirectoryName(lib)!.Length > Path.GetDirectoryName(existing)!.Length)
-                    {
-                        realLibs[name] = lib;
-                    }
-                }
             }
+            _ = nativePresetDir;
 
             if (realLibs.Count == 0)
             {
-                Console.WriteLine($"  [publish] warning: no real SDK libs found (preset={nativePresetDir}, "
-                                  + $"sdkRoot={sdkLibRoot}); real-lib copy skipped. "
-                                  + "Ensure the preset has been built (run build_presets CI).");
+                Console.WriteLine($"  [publish] warning: no real SDK libs found (preset={nativePresetDir}); "
+                                  + "real-lib copy skipped. "
+                                  + "Ensure the SDK has been built or the tool package is complete.");
                 return;
             }
             if (!Directory.Exists(stubLibRoot))
@@ -765,6 +799,24 @@ target_link_options(chaos_entry PRIVATE
             if (File.Exists(Path.Combine(candidate, "CMakeLists.txt")))
                 return candidate;
             dir = candidate;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Locate the embedded SDK's lib/ directory inside a dotnet tool package.
+    /// A global tool unpacks to .../tools/net8.0/any/, but the nupkg puts sdk/
+    /// at the package root, so we walk UP from BaseDirectory to find sdk/lib.
+    /// </summary>
+    private static string? FindEmbeddedSdkLib()
+    {
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        for (int i = 0; i < 8 && dir != null; i++)
+        {
+            var candidate = Path.Combine(dir.FullName, "sdk", "lib");
+            if (Directory.Exists(candidate))
+                return candidate;
+            dir = dir.Parent;
         }
         return null;
     }

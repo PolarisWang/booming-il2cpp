@@ -173,7 +173,7 @@ internal static class ConvertService
                 Console.Write("  Emitting chaos-sdk...");
                 var repoRoot = ResolveRepoRoot();
                 var nativePresetDir = ResolveNativePreset();
-                var nativeLibDir = Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
+                var nativeLibDir = ResolveNativeLibDir(repoRoot, nativePresetDir);
                 var assemblyName = result.ClosureManifest?.AssemblyName ?? "unknown";
                 var sdkEmitter = new SdkEmitter();
                 sdkEmitter.EmitSdk(sdkRoot, outputRoot, repoRoot, nativeLibDir, "RelWithDebInfo", assemblyName, configTier);
@@ -436,6 +436,42 @@ internal static class ConvertService
             if (File.Exists(Path.Combine(candidate, "CMakeLists.txt")))
                 return candidate;
             dir = candidate;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Resolve the directory that holds the real (non-stub) native runtime libs.
+    ///
+    /// Order:
+    ///   1. Embedded SDK inside the dotnet tool package (found by walking up from
+    ///      AppContext.BaseDirectory looking for sdk/lib).
+    ///   2. Repo-relative preset build (artifacts/presets/&lt;preset&gt;).
+    /// </summary>
+    private static string ResolveNativeLibDir(string? repoRoot, string nativePresetDir)
+    {
+        var embeddedSdkLib = FindEmbeddedSdkLibDir();
+        if (embeddedSdkLib != null)
+            return embeddedSdkLib;
+        if (repoRoot != null)
+            return Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
+        return "";
+    }
+
+    /// <summary>
+    /// Locate the embedded SDK's lib/ directory inside a dotnet tool package.
+    /// A global tool unpacks to .../tools/net8.0/any/, but the nupkg puts sdk/
+    /// at the package root, so we walk UP from BaseDirectory to find sdk/lib.
+    /// </summary>
+    private static string? FindEmbeddedSdkLibDir()
+    {
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        for (int i = 0; i < 8 && dir != null; i++)
+        {
+            var candidate = Path.Combine(dir.FullName, "sdk", "lib");
+            if (Directory.Exists(candidate))
+                return candidate;
+            dir = dir.Parent;
         }
         return null;
     }
