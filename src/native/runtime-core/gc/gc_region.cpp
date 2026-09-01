@@ -84,12 +84,37 @@ static void* GcTryAllocLargePages(CHAOS_IL2CPP_SIZE alloc_size) noexcept {
 
 namespace chaos::il2cpp::runtime_core {
 
+// ── Region-to-generation skipped-table synchronization ─────────
+// The skewed g_region_to_gen[] table is written by two independent
+// allocators on different locks: RegionManager::AllocateRegion takes
+// RegionManager::mutex_ then SetRegionGen(...young/gen1), while LOH
+// allocation takes LOH::mutex_ then GcMarkRangeOld(...old).  These are
+// DIFFERENT mutexes, so two mutator threads can race on the same 4MB
+// region-gen byte: LOH marks a newly-committed page OLD while the nursery
+// marks a co-located chunk YOUNG.  The final value wins nondeterministically;
+// an old page mislabelled YOUNG makes the write barrier read gen0 and skip
+// carding a genuine old→nursery edge → dropped edge / use-after-free.
+//
+// g_region_gen_lock is a LEAF lock: it always sits at the bottom of the
+// lock order (RegionManager::mutex_ or LOH::mutex_ above it), and it never
+// acquires another lock from within.  Every writer of the table takes this
+// lock, so all region-gen writes are serialized regardless of which allocator
+// owns the parent mutex.  Writers may take it more than once concurrently
+// (AllocateRegion loop + GcMarkRangeOld), but never re-entrantly on one
+// thread once the caller cannot hold it across calls.
+GcSpinLock g_region_gen_lock;
+
 /// Mark every 4MB region-gen byte covering [@a start, @a end) as OLD.  See the
 /// header comment for rationale.  Called by old-gen / LOH page allocation under
 /// their commit lock so updates are serialized with concurrent SetRegionGen
 /// (nursery/Gen1 region creation).
 void GcMarkRangeOld(uintptr_t start, uintptr_t end) noexcept {
     if (start >= end) return;
+    // Serialize region-gen writes against concurrent nursery/Gen1 creation
+    // (AllocateRegion) and other LOH/FREE calls on a distinct lock.  Parent
+    // mutexes (LOH/RegionManager) do NOT protect against each other, so this
+    // lock is the single point that makes the table race-free.
+    GcSpinLockGuard lock(g_region_gen_lock);
     EnsureRegionGenCoverage(start);
     EnsureRegionGenCoverage(end - 1);
     static constexpr CHAOS_IL2CPP_SIZE kRegionSize = CHAOS_IL2CPP_SIZE{1} << kRegionGenShift;
@@ -1038,6 +1063,10 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
     EnsureRegionGenCoverage(reinterpret_cast<uintptr_t>(r->begin));
     EnsureRegionGenCoverage(reinterpret_cast<uintptr_t>(r->end) - 1);
     constexpr CHAOS_IL2CPP_SIZE kRgSize = CHAOS_IL2CPP_SIZE{1} << kRegionGenShift;
+    // Serialize region-gen writes against LOH/other old-gen marking on the same
+    // leaf lock (see g_region_gen_lock) — RegionManager::mutex_ is NOT the lock
+    // that LOH uses, so without this the two allocators race on shared chunks.
+    GcSpinLockGuard rg_lock(g_region_gen_lock);
     uintptr_t a = reinterpret_cast<uintptr_t>(r->begin) & ~(kRgSize - 1);
     for (; a < reinterpret_cast<uintptr_t>(r->end); a += kRgSize) {
         SetRegionGen(a, region_gen);

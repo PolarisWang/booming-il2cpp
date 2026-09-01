@@ -93,23 +93,6 @@ fi
 
 ---
 
-### 🟡 P1-3: release.yml 与 release.sh 的 gh CLI 参数不一致
-
-| 属性 | 值 |
-|------|-----|
-| 文件 | `release.sh` 第 249 行 vs `release.yml` 第 211 行 |
-| 风险 | 低（CI 中 release.yml 控制，不冲突） |
-
-**描述**：`release.sh` 使用 `-F`（gh CLI 2.x 的 `--notes-file` 简写），`release.yml` 使用 `--notes-file` 全称。两者在 gh CLI 2.x 中均支持，但：
-
-- `release.sh` 用于本地执行，`release.yml` 用于 CI 执行
-- 两个路径有不同的参数传法，存在跨版本兼容风险
-- `release.sh` 的 `PUBLISH_ARGS` 数组构建方式与 `release.yml` 的 shell 内联命令不同
-
-**建议**：统一为 `-F` 或 `--notes-file` 全称。
-
----
-
 ### 🟡 P1-4: release.sh 合并回 main 后未确认 main 的 CI 通过
 
 | 属性 | 值 |
@@ -140,17 +123,6 @@ fi
 
 ---
 
-### 🔵 P2-2: generate-sbom.sh 使用 SHA1 生成 serialNumber
-
-| 属性 | 值 |
-|------|-----|
-| 文件 | `scripts/generate-sbom.sh` |
-| 行号 | 72 |
-| 风险 | 极低 |
-
-**描述**：SBOM 的 `serialNumber` 使用 `hashlib.sha1(...)` 生成确定性 UUID。SHA1 不是安全哈希，但对于 SBOM 文档标识（非安全用途）是安全的。CycloneDX 规范要求 `serialNumber` 是 `urn:uuid:<UUID>` 格式，当前实现使用 `hashlib.sha1` 的 hexdigest 而非 UUID 格式，违反了规范。
-
----
 
 ### 🔵 P2-3: gen_release_notes.py 的 "patch" 关键词匹配过宽
 

@@ -156,7 +156,12 @@ inline void SetRegionGen(uintptr_t addr, uint8_t gen) noexcept {
 /// the barrier will read gen0 and skip carding → dropped old→nursery edges.
 ///
 /// Thread-safe when called under the same lock that serializes page commits
-/// (old-gen / LOH allocation).  Declared here; implemented in gc_region.cpp.
+/// (old-gen / LOH allocation).  To remove the cross-allocator race against
+/// nursery/Gen1 creation (which uses RegionManager::mutex_, a different lock),
+/// the implementation takes a dedicated leaf lock (g_region_gen_lock on its own)
+/// around every region-gen write loop.  Callers may hold their own allocator
+/// mutex (LOH or RegionManager) — that lock orders above the leaf lock, never
+/// below it, so this is deadlock-free.  Declared here; impl in gc_region.cpp.
 void GcMarkRangeOld(uintptr_t start, uintptr_t end) noexcept;
 
 // ── Forward declarations ──────────────────────────────────────
