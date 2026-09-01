@@ -114,6 +114,17 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
         threading::ReleaseGlobalSafepoint(gen);
         GcAdvanceBgcCycle();
         gc_ran = true;
+    } else if (!GcIsInNoGcRegion() && G_Scheduler().GcSlotIsHeld()) {
+        // CoreCLR wait_for_gc_done alignment (a_state_retry_allocate):
+        // another thread claimed the GC slot and is in-flight with GC right
+        // now.  Wait for it to complete (SafepointPoll blocks in cooperative
+        // mode until the safepoint is released), then fall through to Step-2
+        // retry — the completed GC reset the nursery bump pointer and built
+        // old-gen free lists, so the post-GC retry can now succeed.  This
+        // prevents 50-concurrent-mutator OOM from falsely reporting
+        // true-mem-exhaustion when the pressure is transient (a concurrent
+        // recovery GC is already reclaiming).
+        threading::SafepointPoll();
     }
 
     // Step 2: Retry allocation after GC.  Set the recovery flag around the

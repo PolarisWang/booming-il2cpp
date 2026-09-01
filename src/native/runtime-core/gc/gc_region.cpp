@@ -310,6 +310,20 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
             tls_tlab = TLAB{};
         }
     }
+    } else if (!GcIsInNoGcRegion() && G_Scheduler().GcSlotIsHeld()) {
+        // CoreCLR wait_for_gc_done alignment (a_state_retry_allocate):
+        // another thread is in-flight with GC right now (it claimed the GC
+        // slot but hasn't completed yet).  Wait for that GC to finish
+        // (SafepointPoll blocks in cooperative mode until the safepoint is
+        // released), then retry TLAB from the freshly-reset nursery.
+        threading::SafepointPoll();
+        tlab = TlabClaimFromYoungGen();
+        if (tlab.current != nullptr) {
+            tls_tlab = tlab;
+            if (size <= kMaxTlabAlloc) {
+                return NurseryAllocate(size);
+            }
+        }
     }
 
     // Phase 3: Retry from the fresh young region + new TLAB.
@@ -477,6 +491,18 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
             threading::ReleaseGlobalSafepoint(gen);
             GcAdvanceBgcCycle();
             tls_tlab = TLAB{};
+        }
+    } else if (!GcIsInNoGcRegion() && G_Scheduler().GcSlotIsHeld()) {
+        // CoreCLR wait_for_gc_done alignment (mirror NurseryAllocateSlow):
+        // another thread is in-flight with GC right now.  Wait for it to
+        // complete, then retry TLAB from the freshly-reset nursery.
+        threading::SafepointPoll();
+        tlab = TlabClaimFromYoungGen();
+        if (tlab.current != nullptr) {
+            tls_tlab = tlab;
+            if (size <= kMaxTlabAlloc) {
+                return NurseryAllocateAtomic(size);
+            }
         }
     }
 

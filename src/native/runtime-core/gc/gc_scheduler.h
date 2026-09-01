@@ -174,6 +174,19 @@ public:
     /// finishes so the next GC can proceed.
     bool TryClaimGcSlot() noexcept;
 
+    /// True while a GC slot is actively held by some thread (between
+    /// TryClaimGcSlot returning true and RecordGcCompleted being called).
+    /// Used by the allocation slow path and OOM handler to distinguish
+    /// "another thread is running GC right now" from "too soon since last
+    /// GC, no GC in flight".  When true, callers should wait for the
+    /// in-flight GC to complete (SafepointPoll) rather than skipping
+    /// directly to old-gen / OOM (CoreCLR wait_for_gc_done alignment).
+    /// Returns false if no slot is held (the last GC finished, or none
+    /// has ever started).
+    bool GcSlotIsHeld() const noexcept {
+        return gc_slot_held_.load(std::memory_order_acquire);
+    }
+
 
     // ── Collection decision ──────────────────────────────────────
 
@@ -637,6 +650,12 @@ private:
     // safepoint storms where 100 threads cascade GC initiations back-to-back.
     // Initialized to 0 (no GC has completed yet — first GC always allowed).
     std::atomic<uint64_t> last_gc_completion_ns_{0};
+
+    /// True while a GC slot is actively held (between TryClaimGcSlot and
+    /// RecordGcCompleted).  Read by the allocation slow path to detect that
+    /// another thread is in-flight with GC, so it can wait for completion
+    /// instead of jumping to old-gen / OOM (CoreCLR wait_for_gc_done).
+    std::atomic<bool> gc_slot_held_{false};
 
     /// Minimum interval between GC completions (in nanoseconds).
     /// 50 ms — reduces GC frequency from every TLAB-pool exhaustion

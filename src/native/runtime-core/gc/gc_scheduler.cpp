@@ -45,6 +45,9 @@ void GcScheduler::RecordGcCompleted() noexcept {
         std::chrono::duration_cast<std::chrono::nanoseconds>(
             now.time_since_epoch()).count());
     last_gc_completion_ns_.store(now_ns, std::memory_order_release);
+
+    // Release the GC slot held indicator (CoreCLR wait_for_gc_done alignment).
+    gc_slot_held_.store(false, std::memory_order_release);
 }
 
 // ── GC rate limiting ─────────────────────────────────────────────
@@ -67,6 +70,7 @@ bool GcScheduler::TryClaimGcSlot() noexcept {
         // our load and CAS (another thread claimed), CAS fails gracefully.
         if (last_gc_completion_ns_.compare_exchange_strong(last_ns, now_ns,
                 std::memory_order_acq_rel, std::memory_order_acquire)) {
+            gc_slot_held_.store(true, std::memory_order_release);
             return true;  // Slot claimed — caller may proceed with GC.
         }
         // CAS failed — another thread claimed the slot first.
