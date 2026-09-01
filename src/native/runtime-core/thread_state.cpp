@@ -310,6 +310,16 @@ void SafepointPoll() noexcept {
     // Cooperative mode: wait on event (zero CPU, infinite wait).
     // ReleaseGlobalSafepoint will set the event when all threads are done.
     //
+    // CRITICAL: the safepoint OWNER must NOT wait here — it set suspend_seq
+    // for itself (including in RequestGlobalSafepoint).  If the owner enters
+    // SafepointPoll from within a GC cycle (e.g., via a ScopedPreemptiveMode
+    // guard in a GC helper function that toggles modes via the GcSpinLock
+    // spin toggle), it must not block on its own event.  The owner's thread
+    // is the GC driver and should never wait for the GC.
+    if (s_safepoint_owner.load(std::memory_order_acquire) == thread) {
+        return;
+    }
+    //
     // Re-check suspend_seq after waking (lost-wakeup protection).  Without
     // this re-check, a thread woken by the N-th release may miss epoch N+1
     // already being published while we were parked (the auto-reset event
