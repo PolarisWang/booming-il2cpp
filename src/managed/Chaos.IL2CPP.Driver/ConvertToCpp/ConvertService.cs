@@ -446,7 +446,7 @@ internal static class ConvertService
     /// an explicit warning and falls back to linux-x64-profile so the ABI mismatch
     /// is surfaced rather than silently linking the wrong-arch library.
     /// </summary>
-    private static string ResolveNativePreset()
+    internal static string ResolveNativePreset()
     {
         var os = System.Runtime.InteropServices.RuntimeInformation
             .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows)

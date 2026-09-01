@@ -49,7 +49,7 @@ def categorize() -> dict[str, dict[str, list[str]]]:
             category = "refactor"
         elif lc.startswith("docs:") or "docs(" in lc or lc.startswith("doc:"):
             category = "docs"
-        elif lc.startswith("test:") or "test(" in lc or lc.startswith("add.*test"):
+        elif lc.startswith("test:") or "test(" in lc or lc.startswith(("add test", "add_test", "adding test")):
             category = "tests"
         elif lc.startswith("revert:"):
             category = "reverts"
@@ -67,7 +67,8 @@ def categorize() -> dict[str, dict[str, list[str]]]:
             area = "CodeGen"
         if "ci" in lc or "workflow" in lc or "github" in lc or "action" in lc:
             area = "CI"
-        if "hotupdate" in lc or "hot-update" in lc or "hot update" in lc or " patch" in lc:
+        if "hotupdate" in lc or "hot-update" in lc or "hot update" in lc \
+                or lc.startswith("patch") or "patch-" in lc:
             area = "HotUpdate"
         if "interpreter" in lc or "interpret" in lc:
             area = "Interpreter"

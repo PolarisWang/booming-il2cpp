@@ -28,7 +28,22 @@ else
     REMOTE_DEFAULT="main"
 fi
 
-hook_log "start: range=origin/$REMOTE_DEFAULT..HEAD"
+# Parse the actual target branch from stdin (git push sends refs line by line).
+# Format: <local-ref> <local-oid> <remote-ref> <remote-oid>
+# We read the first line only — a single push all goes to one remote branch.
+TARGET_BRANCH=""
+while read local_ref local_oid remote_ref remote_oid; do
+    case "$remote_ref" in
+        refs/heads/*)
+            TARGET_BRANCH="${remote_ref#refs/heads/}"
+            break
+            ;;
+    esac
+done
+# Fallback: if stdin parsing yielded nothing (e.g. tag push), use the default.
+: "${TARGET_BRANCH:=$REMOTE_DEFAULT}"
+
+hook_log "start: range=origin/$REMOTE_DEFAULT..HEAD target=$TARGET_BRANCH"
 
 echo "=== [review] Deep review of outgoing changes (L1/L2 blocks) ==="
 
@@ -47,10 +62,9 @@ RC=$?
 printf '%s\n' "$RESULT"   # echo the review output to the terminal
 hook_log "result=${RC}-ok verdict=$(printf '%s' "$RESULT" | grep -oE '\[review\] [A-Z]+' | head -1 || true)"
 
-# Determine target branch. If we're deep-reviewing a push to a protected main-like
-# branch (release/* or main), severe issues are BLOCKING (release-quality gate).
-# For other branches they remain advisory so feature dev is not throttled.
-TARGET_BRANCH="${REMOTE_DEFAULT:-main}"
+# Determine whether this is a protected branch (main/release/*/master).
+# Uses the ACTUAL target branch parsed from stdin, NOT the default branch,
+# so feature-branch pushes are correctly treated as advisory.
 HARD_GATE=0
 case "$TARGET_BRANCH" in
     main|release/*|master) HARD_GATE=1 ;;
@@ -59,16 +73,16 @@ esac
 if [ "$RC" -ne 0 ]; then
     if [ "$HARD_GATE" -eq 1 ]; then
         echo ""
-        echo "NOTICE: Deep review reported L1/L2 (severe) issues on main/release branch."
-        echo "This is a BLOCK on release/main — resolve the issues before pushing."
+        echo "NOTICE: Deep review reported L1/L2 (severe) issues on ${TARGET_BRANCH}."
+        echo "This is a BLOCK on protected branch — resolve the issues before pushing."
         echo "(To bypass deliberately: git push --no-verify — NOT recommended.)"
-        hook_log "result=BLOCK (main/release mandatory review gate)"
+        hook_log "result=BLOCK (protected branch: ${TARGET_BRANCH})"
         exit 1
     fi
     echo ""
     echo "NOTICE: Deep review reported L1/L2 (severe) issues above — treated as advisory (non-blocking)."
     echo "Review the reported issues and fix them in a follow-up; the push proceeds regardless."
-    hook_log "result=ADVISORY (deep review reported issues, push allowed)"
+    hook_log "result=ADVISORY (non-protected branch: ${TARGET_BRANCH})"
     # Soft mode: do NOT block the push.  The review output above remains visible
     # as an advisory for the developer to act on.
     exit 0

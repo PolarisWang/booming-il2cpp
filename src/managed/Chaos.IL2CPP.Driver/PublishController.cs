@@ -644,9 +644,7 @@ target_link_options(chaos_entry PRIVATE
                 return;
             }
 
-            var isWindows = System.Runtime.InteropServices.RuntimeInformation
-                .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
-            var nativePresetDir = isWindows ? "windows-x64-reference" : "linux-x64-profile";
+            var nativePresetDir = ResolveSdkPreset();
             var presetLibRoot = Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
             var sdkLibRoot = Path.Combine(repoRoot, "tests", "e2e", "translation", "sdk", nativePresetDir, "lib");
             var stubLibRoot = Path.Combine(outputDir, "codegen", "lib");
@@ -863,29 +861,10 @@ target_link_options(chaos_entry PRIVATE
 
     /// <summary>
     /// Resolve the SDK preset identifier for the current host platform+architecture.
-    /// Mirrors ConvertService.ResolveNativePreset so the publish manifest's sdkPreset
-    /// matches the actual preset that was linked (not a hardcoded Windows value).
+    /// Delegates to ConvertService.ResolveNativePreset (single source of truth).
     /// </summary>
     private static string ResolveSdkPreset()
     {
-        var isWindows = System.Runtime.InteropServices.RuntimeInformation
-            .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
-        var arch = System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture
-            .ToString().ToLowerInvariant();
-        if (isWindows)
-            return "windows-x64-reference";
-        if (System.Runtime.InteropServices.RuntimeInformation
-                .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux) &&
-            arch == "x64")
-            return "linux-x64-profile";
-        if (System.Runtime.InteropServices.RuntimeInformation
-                .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux) &&
-            arch == "arm64")
-            return "linux-arm64-profile";
-        if (System.Runtime.InteropServices.RuntimeInformation
-                .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX))
-            return arch == "arm64" ? "osx-arm64-profile" : "osx-x64-profile";
-        // Unknown platform — fall back with a clear marker rather than a wrong value.
-        return "unknown";
+        return ConvertService.ResolveNativePreset();
     }
 }

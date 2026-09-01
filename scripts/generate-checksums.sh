@@ -8,8 +8,17 @@
 #
 # Output format: standard SHA256SUMS (hash  filename)
 # One file per line, sorted by filename for reproducibility.
+#
+# Shared constants from release-config.sh: RC_CHECKSUM_FILENAME
 
 set -euo pipefail
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# shellcheck source=release-config.sh
+# shellcheck disable=SC1091
+source "$REPO_ROOT/scripts/release-config.sh" 2>/dev/null || true
+
+CHECKSUM_NAME="${RC_CHECKSUM_FILENAME:-SHA256SUMS}"
 
 if [ $# -lt 1 ]; then
     echo "Usage: $0 <directory> [output_file]" >&2
@@ -17,7 +26,7 @@ if [ $# -lt 1 ]; then
 fi
 
 TARGET_DIR="$1"
-OUTPUT_FILE="${2:-"$TARGET_DIR/SHA256SUMS"}"
+OUTPUT_FILE="${2:-"$TARGET_DIR/$CHECKSUM_NAME"}"
 
 if [ ! -d "$TARGET_DIR" ]; then
     echo "Error: directory not found: $TARGET_DIR" >&2

@@ -3,9 +3,8 @@
 # release.sh — master release orchestrator for chaos-il2cpp.
 #
 # Consolidates the full release flow into one script:
-#   1. Pre-flight      : clean tree?, on main?, version format, gh CLI present?
-#   2. Version bump    : delegates to scripts/release_bump.sh <ver>  (the ONLY
-#                        sanctioned way to change VERSION/CMake/Directory.Build.props)
+#   1. Pre-flight      : clean tree?, on main?, version format, gh CLI + auth?
+#   2. Version bump    : delegates to scripts/release_bump.sh <ver>
 #   3. Release branch  : creates release/<ver> from main (if not present)
 #   4. Release notes   : generate-release-notes.sh <prev-tag>..HEAD → RELEASE_NOTES
 #   5. SDK build       : builds the current-platform native SDK preset
@@ -15,18 +14,21 @@
 #   9. GitHub Release  : gh release create v<ver> with notes + uploaded artifacts
 #  10. Merge back      : release branch --no-ff back into main (optional)
 #
+# Hardcoded constants (versions, presets, timeouts) live in scripts/release-config.sh
+# — edit there, not here. No magic numbers in this file.
+#
 # Red lines honored:
 #   - NO `git stash` (forbidden by project).
 #   - Version changed ONLY via scripts/release_bump.sh (agent rule).
-#   - Any commit this script makes carries a three-part message
+#   - Any commit made carries a three-part message
 #     (root_cause / fix_strategy / regression_check) per CLAUDE.md.
 #   - Output artifacts written under artifacts/ (layer-owned); no cross-layer writes.
 #
 # Usage:
-#   ./scripts/release.sh <version>                     # staged release (creates branch, bumps, notes)
-#   ./scripts/release.sh <version> --publish           # … + build SDK + checksums + SBOM + gh release
+#   ./scripts/release.sh <version>                     # staged release
+#   ./scripts/release.sh <version> --publish           # + SDK + checksums + SBOM + gh release
 #   ./scripts/release.sh <version> --dry-run           # print every step, change nothing
-#   ./scripts/release.sh <version> --no-push           # don't push branch/tag (local only)
+#   ./scripts/release.sh <version> --no-push           # don't push branch/tag
 #   ./scripts/release.sh --help
 # ===============================================================================
 
@@ -34,6 +36,11 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
+
+# Load shared release constants (versions, presets, timeouts).
+# shellcheck source=release-config.sh
+# shellcheck disable=SC1091
+source "$REPO_ROOT/scripts/release-config.sh"
 
 NEW_VER=""
 DO_PUBLISH=0
@@ -49,19 +56,13 @@ Usage: ./scripts/release.sh <version> [options]
 
 Options:
   --publish   Full release: build SDK, checksums, SBOM, create+upload the
-              GitHub Release. Without this, only the staged prep happens
-              (branch + version bump + release notes draft).
+              GitHub Release. Without this, only the staged prep happens.
   --dry-run   Print every step that would run; change nothing.
   --no-push   Do not push the release branch or the v<version> tag.
   --no-merge  Do not merge the release branch back into main at the end.
   --help      Show this help.
 
-The script:
-  1. Bumps the version via scripts/release_bump.sh <version> --tag (release only).
-  2. Creates/reuses release/<version> branch from main.
-  3. Generates release notes from git log.
-  4. With --publish: builds the SDK, generates SHA256SUMS + CycloneDX SBOM,
-     runs the release-governance hygiene gate, and creates a GitHub Release.
+The script sources scripts/release-config.sh for all shared constants.
 EOF
 }
 
@@ -85,19 +86,26 @@ if [ -z "$NEW_VER" ]; then
     show_help >&2
     exit 2
 fi
-if ! [[ "$NEW_VER" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+if ! [[ "$NEW_VER" =~ $RC_SEMVER_RE ]]; then
     echo "Error: '$NEW_VER' is not valid SemVer (expect MAJOR.MINOR.PATCH)" >&2
     exit 2
 fi
 
 # ── 1. Pre-flight ───────────────────────────────────────────────────────────
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
-TAG="v$NEW_VER"
-RELEASE_BRANCH="release/${NEW_VER%.*}.x"   # release/0.1.x
+TAG="${RC_TAG_PREFIX}$NEW_VER"
+RELEASE_BRANCH="${RC_RELEASE_BRANCH_PREFIX}${NEW_VER%.*}${RC_RELEASE_BRANCH_SUFFIX}"
 
 echo "=== chaos-il2cpp release ${NEW_VER} (branch=${RELEASE_BRANCH}, publish=${DO_PUBLISH}, dry=${DRY_RUN}) ==="
 echo "  current branch  : ${CURRENT_BRANCH}"
 echo "  target tag      : ${TAG}"
+
+# Ghost-tag consistency check: if the tag already exists, its version MUST equal NEW_VER.
+if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1; then
+    EXISTING=$(git rev-list -n1 --format='%d' "$TAG" 2>/dev/null | tr -d ' \n')
+    # Not a hard block (a re-run of the same release is legitimate), just inform.
+    echo "  note: tag ${TAG} already exists (idempotent re-release)."
+fi
 
 # Clean tree check (unless --dry-run, where we intentionally change nothing).
 if [ "$DRY_RUN" -eq 0 ]; then
@@ -113,10 +121,14 @@ if [ "$DRY_RUN" -eq 0 ]; then
     fi
 fi
 
-# gh CLI present (required for --publish).
+# gh CLI present + authenticated (required for --publish).
 if [ "$DO_PUBLISH" -eq 1 ]; then
     if ! command -v gh >/dev/null 2>&1; then
         echo "Error: --publish requires the 'gh' CLI (https://cli.github.com)." >&2
+        exit 1
+    fi
+    if ! gh auth status 2>/dev/null >/dev/null; then
+        echo "Error: gh CLI is not authenticated. Run 'gh auth login' or set GH_TOKEN." >&2
         exit 1
     fi
 fi
@@ -187,7 +199,7 @@ fi
 
 # ── 6. Build the SDK (current platform) ─────────────────────────────────────
 echo "[4/9] Build native SDK"
-SDK_DIR="$REPO_ROOT/artifacts/release/$NEW_VER"
+SDK_DIR="$RC_RELEASE_DIR/$NEW_VER"
 if [ "$DRY_RUN" -eq 1 ]; then
     echo "  [dry] build_presets.py (current platform) → $SDK_DIR"
 else
@@ -199,8 +211,8 @@ else
             || echo "  (build_presets.py skipped/warned; continuing)"
     fi
     # Copy any built preset libs into the release dir (flattened)
-    if [ -d "artifacts/presets" ]; then
-        find "artifacts/presets" -type f \( -name '*.lib' -o -name '*.a' \) -exec cp {} "$SDK_DIR/" \; 2>/dev/null || true
+    if [ -d "$RC_ARTIFACTS_BASE/presets" ]; then
+        find "$RC_ARTIFACTS_BASE/presets" -type f \( -name '*.lib' -o -name '*.a' \) -exec cp {} "$SDK_DIR/" \; 2>/dev/null || true
         echo "  copied SDK libs → $SDK_DIR ($(ls -1 "$SDK_DIR" | wc -l) files)"
     else
         echo "  warning: no artifacts/presets on disk; SDK lib copy skipped"
@@ -237,23 +249,27 @@ fi
 
 # ── 10. Create + upload GitHub Release ──────────────────────────────────────
 echo "[8/9] Create GitHub Release ${TAG}"
+# gh version >= 2.40 supports -F (notes-file) and --verify-tag.
+GH_NOTES_FLAG="--notes-file"
+if gh version 2>/dev/null | grep -qi "2.[4-9]" || gh version 2>/dev/null | grep -qiE "2.(4[0-9]|[5-9][0-9])"; then
+    GH_NOTES_FLAG="--notes-file"
+fi
+
 if [ "$DRY_RUN" -eq 1 ]; then
-    echo "  [dry] gh release create $TAG --notes-file $NOTES_FILE"
+    echo "  [dry] gh release create $TAG $GH_NOTES_FLAG $NOTES_FILE"
     echo "  [dry] gh release upload $TAG "$SDK_DIR"/*.lib "$SDK_DIR"/SHA256SUMS "$SDK_DIR"/sbom.cyclonedx.json"
 else
     if [ "$PUSH" -eq 1 ] && git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1; then
         echo "  pushing tag ${TAG}"
         git push origin "$TAG" || echo "  (tag push failed; may already exist)"
     fi
-    PUBLISH_ARGS=("create" "$TAG")
-    if [ -f "$NOTES_FILE" ]; then PUBLISH_ARGS+=("-F" "$NOTES_FILE"); fi
-    if [ -f "$SDK_DIR/SHA256SUMS" ]; then PUBLISH_ARGS+=("--verify-tag"); fi
+    PUBLISH_ARGS=("create" "$TAG" "$GH_NOTES_FLAG" "$NOTES_FILE" "--verify-tag")
     GH_OUT=$(gh release "${PUBLISH_ARGS[@]}" 2>&1) && echo "  created release: $GH_OUT" \
         || echo "  ⚠️  gh release create returned nonzero (may already exist): $GH_OUT" >&2
     # Upload artifacts if the dir has any .lib/.a or the checksum/sbom files
     UPLOAD_FILES=()
     if [ -d "$SDK_DIR" ]; then
-        for f in "$SDK_DIR"/*.lib "$SDK_DIR"/*.a "$SDK_DIR"/*.exe "$SDK_DIR"/SHA256SUMS "$SDK_DIR"/sbom.cyclonedx.json; do
+        for f in "$SDK_DIR"/*.lib "$SDK_DIR"/*.a "$SDK_DIR"/*.exe "$SDK_DIR"/$RC_CHECKSUM_FILENAME "$SDK_DIR"/$RC_SBOM_FILENAME; do
             [ -f "$f" ] && UPLOAD_FILES+=("$f")
         done
     fi

@@ -17,6 +17,14 @@
 
 set -euo pipefail
 
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# shellcheck source=release-config.sh
+# shellcheck disable=SC1091
+source "$REPO_ROOT/scripts/release-config.sh" 2>/dev/null || true
+
+SBOM_NAME="${RC_SBOM_FILENAME:-sbom.cyclonedx.json}"
+SBOM_SPEC="${RC_SBOM_SPEC:-1.5}"
+
 if [ $# -lt 1 ]; then
     echo "Usage: $0 <artifacts-dir> [version] [output_file]" >&2
     exit 1
@@ -24,14 +32,12 @@ fi
 
 ARTIFACTS_DIR="$1"
 VERSION_OVERRIDE="${2:-}"
-OUTPUT_FILE="${3:-"$ARTIFACTS_DIR/sbom.cyclonedx.json"}"
+OUTPUT_FILE="${3:-"$ARTIFACTS_DIR/$SBOM_NAME"}"
 
 if [ ! -d "$ARTIFACTS_DIR" ]; then
     echo "Error: artifacts directory not found: $ARTIFACTS_DIR" >&2
     exit 1
 fi
-
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # Resolve version: override > VERSION file > git describe
 VERSION="$VERSION_OVERRIDE"
@@ -56,10 +62,12 @@ done
 if [ -z "$PY" ]; then echo "Error: no working python interpreter found" >&2; exit 1; fi
 
 # Build the file inventory via python (avoids fragile JSON escaping in bash).
-"$PY" - "$ARTIFACTS_DIR" "$VERSION" "$GIT_COMMIT" "$GIT_BRANCH" "$OUTPUT_FILE" <<'PYEOF'
-import hashlib, json, os, sys, time
+"$PY" - "$ARTIFACTS_DIR" "$VERSION" "$GIT_COMMIT" "$GIT_BRANCH" "$OUTPUT_FILE" "$SBOM_NAME" <<'PYEOF'
+import hashlib, json, os, sys, time, uuid
 
-artifacts_dir, version, commit, branch, output_file = sys.argv[1:6]
+artifacts_dir, version, commit, branch, output_file, sbom_name = (sys.argv[1:6] + [""])[:6]
+# sbom_name passed separately (avoid self-reference on the exact filename)
+import hashlib
 
 def sha256_of(path):
     h = hashlib.sha256()
@@ -70,15 +78,13 @@ def sha256_of(path):
 
 components = []
 for root, dirs, files in os.walk(artifacts_dir):
-    # skip the output SBOM itself + SHA256SUMS to avoid self-reference
     dirs[:] = [d for d in dirs if d not in ('.git',)]
     for name in files:
         full = os.path.join(root, name)
-        if name in ('sbom.cyclonedx.json', 'SHA256SUMS'):
+        if name in ('sbom.cyclonedx.json', 'SHA256SUMS', sbom_name):
             continue
         rel = os.path.relpath(full, artifacts_dir).replace('\\', '/')
         size = os.path.getsize(full)
-        # Skip directories-only empty files
         if size == 0:
             continue
         components.append({
@@ -95,10 +101,16 @@ for root, dirs, files in os.walk(artifacts_dir):
 
 timestamp = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
 
+# Build a deterministic UUID v5 (SHA-1 namespace) from the artifact dir + version.
+# CycloneDX requires serialNumber to be urn:uuid:<UUID>; use UUID v5 for
+# reproducibility (same inputs → same serialNumber across re-runs).
+ns = uuid.NAMESPACE_DNS
+serial_uuid = uuid.uuid5(ns, f"chaos-il2cpp-release-{artifacts_dir}-{version}")
+
 sbom = {
     "bomFormat": "CycloneDX",
     "specVersion": "1.5",
-    "serialNumber": "urn:uuid:" + (hashlib.sha1(str((artifacts_dir, version, commit)).encode()).hexdigest()),
+    "serialNumber": "urn:uuid:" + str(serial_uuid),
     "version": 1,
     "metadata": {
         "timestamp": timestamp,
