@@ -865,9 +865,17 @@ TLAB TlabClaimFromYoungGen() noexcept {
         }
     }
 
-    // Use the per-thread adaptive TLAB size (tuned by UpdateTlabSize).
-    CHAOS_IL2CPP_SIZE tlab_sz = tls_tlab_size;
-    // Clamp to valid range in case UpdateTlabSize produced an extreme value.
+    // Use the per-thread adaptive TLAB size (tuned by the GC's EnumerateThreads
+    // resizer).  For registered threads, read from ManagedThread::tlab_size;
+    // fall back to the TLS variable for unregistered threads (early boot).
+    CHAOS_IL2CPP_SIZE tlab_sz = kDefaultTlabSize;
+    auto* thread = threading::tls_this_thread;
+    if (thread != nullptr) {
+        tlab_sz = thread->tlab_size;
+    } else {
+        tlab_sz = tls_tlab_size;
+    }
+    // Clamp to valid range in case tlab_size produced an extreme value.
     if (tlab_sz < 16 * 1024) tlab_sz = 16 * 1024;
     if (tlab_sz > 256 * 1024) tlab_sz = 256 * 1024;
 

@@ -883,38 +883,40 @@ phase3:
     // RegionManager.  For now, Gen1 is a fixed independent region whose size
     // is set at init time (see InitYoungGeneration).
 
-    // Clear ALL threads' TLAB ranges via EnumerateThreads.
+// ── Adaptive TLAB resizing (ALL threads) ────────────────────────
+    // Snapshot each thread's TLAB utilization BEFORE resetting it.  The STW
+    // safepoint means no thread is allocating, so the captured start/current/
+    // end are stable.  Utilization > 75% → double (up to 256 KB); < 25% →
+    // halve (down to 16 KB); otherwise keep.  This reschedules every thread in
+    // one pass — previously only the GC-initiating thread was resized.
+    // (tlab_end is captured so utilization = (current - start)/(end - start).)
     threading::EnumerateThreads(
         [](threading::ManagedThread* thread) -> bool {
+            CHAOS_IL2CPP_SIZE used = 0;
+            CHAOS_IL2CPP_SIZE total = 0;
+            if (thread->tlab_start != nullptr && thread->tlab_end > thread->tlab_start) {
+                used = static_cast<CHAOS_IL2CPP_SIZE>(
+                    (thread->tlab_current ? thread->tlab_current : thread->tlab_start) - thread->tlab_start);
+                total = static_cast<CHAOS_IL2CPP_SIZE>(thread->tlab_end - thread->tlab_start);
+            }
+            CHAOS_IL2CPP_SIZE new_size = thread->tlab_size;
+            if (total > 0) {
+                double utilization = static_cast<double>(used) / static_cast<double>(total);
+                if (utilization > 0.75 && new_size < 256 * 1024) {
+                    new_size = new_size * 2;
+                } else if (utilization < 0.25 && new_size > 16 * 1024) {
+                    new_size = new_size / 2;
+                }
+            }
+            if (new_size < 16 * 1024) new_size = 16 * 1024;
+            if (new_size > 256 * 1024) new_size = 256 * 1024;
+            thread->tlab_size = new_size;
+            // Reset this thread's TLAB ranges.
             thread->tlab_start = nullptr;
             thread->tlab_current = nullptr;
+            thread->tlab_end = nullptr;
             return true;
         });
-
-    // ── Adaptive TLAB resizing ────────────────────────────────────
-    // Snapshot TLAB utilization BEFORE the reset at the end of this block.
-    // Utilization > 75% → double (up to 256 KB)
-    // Utilization < 25% → halve (down to 16 KB)
-    // Otherwise → keep
-    if (tls_tlab.start != nullptr && tls_tlab.end > tls_tlab.start) {
-        CHAOS_IL2CPP_SIZE used = static_cast<CHAOS_IL2CPP_SIZE>(
-            (tls_tlab.current ? tls_tlab.current : tls_tlab.start) - tls_tlab.start);
-        CHAOS_IL2CPP_SIZE total = static_cast<CHAOS_IL2CPP_SIZE>(tls_tlab.end - tls_tlab.start);
-        if (total > 0) {
-            double utilization = static_cast<double>(used) / static_cast<double>(total);
-            if (utilization > 0.75 && tls_tlab_size < 256 * 1024) {
-                tls_tlab_size = tls_tlab_size * 2;
-            } else if (utilization < 0.25 && tls_tlab_size > 16 * 1024) {
-                tls_tlab_size = tls_tlab_size / 2;
-            }
-        }
-    }
-    // Clamp to valid range.
-    if (tls_tlab_size < 16 * 1024) tls_tlab_size = 16 * 1024;
-    if (tls_tlab_size > 256 * 1024) tls_tlab_size = 256 * 1024;
-
-    // Reset this thread's TLAB.
-    tls_tlab = TLAB();
 
     // Clear card table entries covering the nursery range (and Gen1 range if
     // Gen1 objects exist).  This is more precise than ClearAllCards() — it

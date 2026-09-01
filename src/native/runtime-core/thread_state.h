@@ -154,6 +154,15 @@ struct ManagedThread {
     char* tlab_start{nullptr};
     /// TLAB current bump pointer; same protocol as tlab_start.
     char* tlab_current{nullptr};
+    /// TLAB range end (exclusive) — set by TlabClaimFromYoungGen so the
+    /// adaptive resizer can compute utilization = (current - start) / (end - start).
+    char* tlab_end{nullptr};
+    /// Adaptive TLAB size for this thread (16KB..256KB).  Adjusted by the
+    /// GC's EnumerateThreads resizer during STW; read by TlabClaimFromYoungGen
+    /// to size the next TLAB for this thread.  Mirrors the thread_local
+    /// tls_tlab_size (default 64KB), kept here so the GC can reschedule ALL
+    /// threads in one pass.
+    CHAOS_IL2CPP_SIZE tlab_size{64 * 1024};
 
     /// Stack bounds for conservative root scanning during full GC.
     /// Populated in RegisterThread, read-only after that.
