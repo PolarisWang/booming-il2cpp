@@ -55,14 +55,31 @@ bool Register(CHAOS_IL2CPP_UINT32 method_token, void* thunk) {
     entry.active = true;
 
     // Capture the original pointer on first registration so Revert() can restore it.
+    // P1-B (false+-fix): if the method token is not present in ANY registered
+    // vtable (a genuinely unknown/never-registered method), registration is a
+    // silent no-op — UpdateVTableSlotByMethodToken will update 0 slots.  Callers
+    // must be able to detect this rather than assume the patch took effect.
+    void* original = vtable_registry::FindMethodPointerByMethodToken(method_token);
+    if (original == nullptr) {
+        // Not found in any vtable: roll back the replacement entry we just
+        // created and report failure so the caller knows nothing was registered.
+        GetReplacements().erase(method_token);
+        return false;
+    }
     if (entry.original_pointer == nullptr) {
-        entry.original_pointer =
-            chaos::il2cpp::vtable_registry::FindMethodPointerByMethodToken(method_token);
+        entry.original_pointer = original;
     }
 
     // Sync VTable slots: update all TypeVTables that reference this method_token.
     lock.unlock();
-    chaos::il2cpp::vtable_registry::UpdateVTableSlotByMethodToken(method_token, thunk);
+    CHAOS_IL2CPP_UINT32 updated =
+        chaos::il2cpp::vtable_registry::UpdateVTableSlotByMethodToken(method_token, thunk);
+    if (updated == 0u) {
+        // No vtable slot actually pointed at this token — nothing was repointed.
+        // Report failure so the caller does not treat an inert call-site freeze
+        // as an applied patch (P1-B false-negative guard).
+        return false;
+    }
 
     // Activate the hotpatch dispatch entry so per-call-site dispatch points
     // (the s_hotpatch_entries pattern-aware branches emitted by codegen) route

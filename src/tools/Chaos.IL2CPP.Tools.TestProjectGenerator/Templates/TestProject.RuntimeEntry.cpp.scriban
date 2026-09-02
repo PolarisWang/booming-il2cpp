@@ -885,8 +885,25 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         // Genuine semantic change (both paths succeed but return different values).
         // Only flag when a patch was actually applied — without patch data the
         // return value comparison is unreliable (void methods return garbage RAX).
+        // P0-C (false+-fix): additionally require the patched value to be in the
+        // sentinel range [0xBEEF0000, 0xBEEFFFFF] — the PatchDataExtractor rewrites
+        // Subject_N bodies to "ldc.i4 0xBEEF0000|idx; ret" (see PatchDataExtractor.cs
+        // L630-634).  A patched value in this range proves the interpreter executed
+        // the replacement body (not the original AOT body).  Without this range check,
+        // void methods whose baseline is garbage RAX and keep-native methods whose
+        // patched value is also garbage (different from baseline) would produce false
+        // semantic change — the "change" is just RAX noise, not a real patch application.
+        // The sentinel range [0xBEEF0000, 0xBEEFFFFF] is specific enough that a real
+        // return value collision is virtually impossible (the 0xBExxxxxx prefix is
+        // reserved for debug sentinels in the test framework).
         if (patch_ctx != nullptr && !baseline_caught[si] && !patched_caught &&
-            baseline_value[si] != patched_value) {
+            baseline_value[si] != patched_value &&
+            (patched_value < 0xBEEF0000LL || patched_value > 0xBEEFFFFFLL)) {
+            // Patched value is NOT in the sentinel range — this is a keep-native
+            // method or a void method with garbage RAX.  Do NOT count as semantic
+            // change (the baseline value is undefined for void methods).
+        } else if (patch_ctx != nullptr && !baseline_caught[si] && !patched_caught &&
+                   baseline_value[si] != patched_value) {
             semantic_changed_count++;
         }
     }
@@ -973,6 +990,12 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     printf("\"passedMethods\":%d,", semantic_passed);
     printf("\"failedMethods\":%d,", patched_assert_failed);
     printf("\"totalMethods\":%d,", kCount);
+    // P2-A: report the actual number of dispatch entries that were patched.
+    // This allows the Python gate to cross-check semantic_changed against
+    // activePatchCount — if semantic_changed > 0 but activePatchCount == 0,
+    // something is wrong (semantic change from a non-patch source).
+    int active_patch_count = (patch_ctx != nullptr) ? static_cast<int>(patch_ctx->method_count) : 0;
+    printf("\"activePatchCount\":%d,", active_patch_count);
     printf("\"allSemantic\":%s,", all_semantic ? "true" : "false");
     printf("\"allRevert\":%s,", all_revert ? "true" : "false");
     printf("\"semanticChangedCount\":%d,", semantic_changed_count);

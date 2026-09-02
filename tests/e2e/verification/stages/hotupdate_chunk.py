@@ -611,6 +611,7 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     exit_code = (r.returncode if isinstance(r, subprocess.CompletedProcess)
                  else (r.get('exitCode', 0) if isinstance(r, dict) else 0))
     native_crash = exit_code != 0
+    active_patch_count = hotupdate_data.get("activePatchCount", 0)
 
     if json_truncated:
         status = "error"
@@ -632,6 +633,17 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         if status != "passed" and not errors:
             errors.append("patch skipped; clean-run/revert/exit-code requirement unmet")
         print(f"  [hotupdate] No methods to patch — {passed} passed, revert={all_revert}")
+    # P2-A: cross-check activePatchCount against semantic_changed.
+    # If semantic_changed > 0 but activePatchCount == 0, the semantic change
+    # came from a non-patch source (e.g. void method RAX garbage) — this is an
+    # error, not a genuine patch application.
+    elif patch_data_path and semantic_changed > 0 and active_patch_count == 0:
+        status = "error"
+        if not errors:
+            errors.append(
+                f"semantic_changed={semantic_changed} but activePatchCount=0 — "
+                f"semantic change detected without any patch dispatch entries active; "
+                f"likely a false-positive from void-method RAX noise")
     elif patch_data_path:
         # P0-A (false+-fix): pass REQUIRES semantic_changed > 0 — i.e. at least one
         # patched subject actually produced a different value than its baseline

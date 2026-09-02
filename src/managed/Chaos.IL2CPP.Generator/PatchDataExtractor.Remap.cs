@@ -142,7 +142,15 @@ public sealed partial class PatchDataExtractor
             var md = mr.GetMethodDefinition(mh);
             var name = mr.GetString(md.Name);
 
-            if (!name.StartsWith("Subject_", StringComparison.Ordinal))
+            // P2-B (false+-fix): include ALL subject entry patterns, not just Subject_N.
+            // ExtractSubjectIndex recognizes 3 patterns (Subject_N, CustomEntrySubject_N,
+            // CustomEntryMethodN). Before this fix only Subject_N got a sentinel rewritten
+            // body — CustomEntry subjects were silently skipped, making their hotupdate
+            // "patch" invisible to the sentinel oracle (semantic_changed_count=0 even when
+            // the patch was applied, because the replacement body returned the same value
+            // as the original).  CustomEntry methods are now included in the set of methods
+            // that get their body rewritten to the sentinel 0xBEEF0000|idx.
+            if (ExtractSubjectIndex(name) == null)
                 continue;
 
             int sentinel = (int)(0xBEEF0000U | (uint)(subjectIndex & 0xFFFF));
