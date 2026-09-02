@@ -135,6 +135,11 @@ _benchmark_*.txt
 _test_*.cpp
 native-benchmark.json
 
+# Crash / core dump files (large binaries — must never enter git)
+core.*
+core[0-9]*
+*.core
+
 # Native build artifacts
 # Legacy: build/native/ + build/asan-native/ were the native test build roots.
 # They are superseded by artifacts/native-test/{debug,asan} — the test driver

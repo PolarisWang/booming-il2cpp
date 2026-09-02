@@ -25,15 +25,23 @@ if(NOT COMMAND chaos_enable_ubsan)
             # Use: -fsanitize-blacklist=<file> for targeted suppression.
         elseif(MSVC)
             # MSVC has no UBSan; /RTC1 catches some runtime errors (stack frame
-            # corruption, uninitialized locals).
+            # corruption, uninitialized locals) in Debug builds only.
             #
             # /RTC1 is only valid in Debug configurations:
-            #   - /RTC1 with /O2 emits D9025 warning and silently disables /RTC1
-            #   - /RTC1 requires /MDd (debug CRT); Release uses /MD, causing link
-            #     mismatch (/RTC1 in Release on /MDd targets is handled by CMake's
-            #     generator, but explicit /RTC1 on a Release target with /MT is
-            #     a D9002 error pattern)
-            # Guard with a generator expression so Release builds remain clean.
+            #   - /RTC1 with /O2 emits D9025 (compiler warning: overriding
+            #     /RTC1 with /O2) — the compiler *silently disables* /RTC1,
+            #     not a hard error.  Before the generator-expression guard
+            #     below, a Release build with /RTC1 would produce no UBSan
+            #     coverage AND no build failure, silently wasting the request.
+            #   - /RTC1 requires /MDd (debug CRT); Release uses /MD, causing
+            #     a link mismatch if the target is not already /MDd.
+            # Guard with a generator expression to keep Release builds clean.
+            # NOTE: when SANITIZE "ubsan" is requested for a Release MSVC
+            # target, the generator expression makes this macro a no-op —
+            # no runtime checks are active.  This matches the pre-guard
+            # behavior (D9025 silently disabled /RTC1) but is now honest:
+            # the caller asked for a sanitizer that MSVC does not implement
+            # in Release config.
             target_compile_options(${target} PRIVATE $<$<CONFIG:Debug>:/RTC1>)
         endif()
     endmacro()

@@ -49,19 +49,25 @@ jobs:
             chaos_support chaos_diagnostics \
             -j$(nproc) 2>&1 | tee clang-tidy-output.txt
 
+      # P0_RE: single source of truth for P0-level clang-tidy checkers.
+      # Used both here (filter gate) and in the Report step (statistics).
+      # If you add/remove a checker pattern, update ONLY this env var.
+      # The env var is shared across steps via GITHUB_ENV.
+      #   - core.*              memory-safety: Dereference/Leak/Overflow/StackAddressEscape
+      #   - unix.Malloc         malloc-family leaks (use/uninit/leak)
+      #   - cplusplus.NewDeleteLeak   `new` without matching `delete`
+      #   - valist.CopyLeak     va_copy without matching va_end
+      # Not covered by P0_RE:
+      #   - alpha.deadcode.DeadStores (memLeak) — not under core./unix./cplusplus./
+      #     valist. namespaces, and alpha checkers are off by default in clang-tidy.
+      #     If a future clang-tidy upgrade enables them by default, add the pattern
+      #     here.  For now, the coverage gap is known and tracked.
+      - name: Set P0 regex
+        run: |
+          echo "P0_RE=(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint|StackAddressEscape)|unix\.Malloc|cplusplus\.NewDeleteLeak|valist\.CopyLeak)" >> "$GITHUB_ENV"
+
       - name: Filter P0 warnings (exit 1 on any P0)
         run: |
-          # P0 filter must catch the REAL memory-safety checkers clang-analyzer
-          # emits.  Leak/UAF/overflow/type-confusion diagnostics are NOT all
-          # namespaced under `core.`:
-          #   - unix.Malloc            malloc-family leaks (use/uninit/leak)
-          #   - cplusplus.NewDeleteLeak*   `new` without matching `delete`
-          #   - valist.CopyLeak        va_copy without matching va_end
-          #   - core.* (Dereference/NullableUnderflow/UndefinedBranchCondition,
-          #     StackAddressEscape -> use-after-return)
-          # Restricting to `core.[A-Za-z]*(Leak|...)` misses unix./cplusplus./
-          # valist. checkers — real malloc/new leaks would silently pass the gate.
-          P0_RE='(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint|StackAddressEscape)|unix\.Malloc|cplusplus\.NewDeleteLeak|valist\.CopyLeak)'
           P0_COUNT=$(grep -cE "$P0_RE" clang-tidy-output.txt || true)
           echo "P0 warnings: $P0_COUNT"
           if [ "$P0_COUNT" -gt 0 ]; then
@@ -72,8 +78,6 @@ jobs:
           echo "✅ No P0 clang-tidy warnings"
 
       - name: Report total warnings
-        env:
-          P0_RE: '(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint|StackAddressEscape)|unix\.Malloc|cplusplus\.NewDeleteLeak|valist\.CopyLeak)'
         run: |
           TOTAL=$(grep -cE 'warning:' clang-tidy-output.txt || true)
           echo "Total clang-tidy warnings: $TOTAL"

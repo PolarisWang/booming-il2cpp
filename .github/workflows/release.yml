@@ -20,7 +20,7 @@ on:
     inputs:
       tag:
         description: 'Tag to release (e.g. v0.3.0)'
-        required: false
+        required: true
         type: string
 
 env:
@@ -42,8 +42,17 @@ jobs:
       - id: tag
         shell: bash
         run: |
+          TAG=""
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            TAG="${{ github.event.inputs.tag || github.ref_name }}"
+            TAG="${{ github.event.inputs.tag }}"
+            # Manual dispatch REQUIRES an explicit SemVer tag.  Falling back to
+            # github.ref_name (the branch, e.g. main/develop) would silently
+            # build+upload a malformed release named after the branch — the most
+            # common and least-noticed manual-dispatch mistake.  Fail loudly.
+            if [ -z "$TAG" ]; then
+              echo "::error::workflow_dispatch requires input 'tag' (e.g. v0.3.0). Refusing to release branch $GITHUB_REF_NAME."
+              exit 1
+            fi
           else
             TAG="${{ github.ref_name }}"
           fi
@@ -154,15 +163,13 @@ jobs:
         env:
           GENRL_REPO_URL: "https://github.com/${{ github.repository }}"
           TAG_REF: ${{ needs.version.outputs.tag_ref }}
+          GENRL_PRERELEASE: ${{ needs.version.outputs.prerelease }}
         run: |
           PREV_TAG=$(git describe --abbrev=0 --tags "$TAG_REF^" 2>/dev/null || echo "")
-          # Detect prerelease from the tag (e.g. v0.3.0-rc.1)
-          IS_PRE="false"
-          case "$TAG_REF" in *-*) IS_PRE="true";; esac
           if [ -n "$PREV_TAG" ]; then
-            GENRL_PRERELEASE="$IS_PRE" bash scripts/generate-release-notes.sh "$PREV_TAG" "$TAG_REF" > release-notes.md
+            bash scripts/generate-release-notes.sh "$PREV_TAG" "$TAG_REF" > release-notes.md
           else
-            GENRL_PRERELEASE="$IS_PRE" bash scripts/generate-release-notes.sh "" "$TAG_REF" > release-notes.md
+            bash scripts/generate-release-notes.sh "" "$TAG_REF" > release-notes.md
           fi
           echo "Release notes generated ($(wc -c < release-notes.md) bytes)"
           if [ ! -s release-notes.md ]; then
