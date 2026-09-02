@@ -371,5 +371,51 @@ void CollectionStackClear(CHAOS_IL2CPP_INTPTR handle) noexcept
     storage->items.clear();
 }
 
+// ── Dispose helpers (free native storage when managed object is GC'd) ──
+// Each require_*_storage allocates via new; the managed object holds the
+// pointer in its embedded slot at kNativeStorageSlotOffset but has no
+// finalizer.  These Dispose functions must be called from the managed-side
+// Dispose/Finalize chain (registered in CollectionStubs.cs shape resolvers).
+
+void CollectionListDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return;
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
+    if (*slot == 0) return;
+    delete reinterpret_cast<ListRuntimeStorage*>(*slot);
+    *slot = 0;
+}
+
+void CollectionHashSetDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return;
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
+    if (*slot == 0) return;
+    delete reinterpret_cast<HashSetRuntimeStorage*>(*slot);
+    *slot = 0;
+}
+
+void CollectionQueueDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return;
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
+    if (*slot == 0) return;
+    delete reinterpret_cast<QueueRuntimeStorage*>(*slot);
+    *slot = 0;
+}
+
+void CollectionStackDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == 0) return;
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
+    if (*slot == 0) return;
+    delete reinterpret_cast<StackRuntimeStorage*>(*slot);
+    *slot = 0;
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
