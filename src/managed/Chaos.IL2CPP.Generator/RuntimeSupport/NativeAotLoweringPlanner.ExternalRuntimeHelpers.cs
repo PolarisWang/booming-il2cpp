@@ -158,12 +158,25 @@ public sealed partial class NativeAotLoweringPlanner
 		if (_methodsBySubjectId.ContainsKey(callee))
 			return null;
 
-		if (!_allManagedMethods.TryGetValue(callee, out var mm) || mm?.Body?.Blocks == null)
-			return null;
+		// Primary path: method body IR from the managed world model (reachable closure).
+		if (_allManagedMethods.TryGetValue(callee, out var mm) && mm?.Body?.Blocks != null)
+		{
+			return TryBuildExternalRuntimeAotIrJsonFromBlocks(callee, mm);
+		}
 
+		// Fallback path: BCL / referenced-assembly method bodies are NOT in the
+		// reachable closure (they are cross-assembly callees, not reachable methods).
+		// Read the method body directly from the on-disk assembly (same source the
+		// kChaosExternalRuntimeIlData s_il_* bytes come from) and lower the raw IL
+		// to a conservative AOT-IR instruction list the interpreter can execute.
+		return TryBuildExternalRuntimeAotIrJsonFromDisk(callee);
+	}
+
+	private string? TryBuildExternalRuntimeAotIrJsonFromBlocks(string callee, Contracts.ManagedMethodModel mm)
+	{
 		StringBuilder? sb = null;
 		bool first = true;
-		foreach (var blk in mm.Body.Blocks)
+		foreach (var blk in mm.Body!.Blocks)
 		{
 			foreach (var inst in blk.Instructions)
 			{
@@ -228,6 +241,326 @@ public sealed partial class NativeAotLoweringPlanner
 		if (sb == null) return null;
 		sb.Append("]}");
 		return sb.ToString();
+	}
+
+	/// <summary>Read the IL body of a BCL method from its on-disk assembly and
+	/// lower it to a conservative AOT-IR JSON instruction list the interpreter
+	/// can execute. Returns null when the IL is too complex to lower safely
+	/// (the caller then falls back to return-0, never worse than today).</summary>
+	private string? TryBuildExternalRuntimeAotIrJsonFromDisk(string callee)
+	{
+		try
+		{
+			int slashIdx = callee.IndexOf('/');
+			if (slashIdx <= 0) return null;
+			string assemblyName = callee.Substring(0, slashIdx);
+			int methodSep = callee.IndexOf("::", StringComparison.Ordinal);
+			if (methodSep <= 0) return null;
+			string typePart = callee.Substring(slashIdx + 1, methodSep - slashIdx - 1);
+
+			// Method name + return-type-free signature for token matching.
+			string sigPart = callee.Substring(methodSep + 2);
+			int colonIdx = sigPart.LastIndexOf(':');
+			string methodOnly = colonIdx > 0 ? sigPart.Substring(0, colonIdx) : sigPart;
+			int parenIdx = methodOnly.IndexOf('(');
+			string methodName = parenIdx > 0 ? methodOnly.Substring(0, parenIdx) : methodOnly;
+
+			string? rtDir = System.IO.Path.GetDirectoryName(typeof(object).Assembly.Location);
+			if (rtDir == null) return null;
+			string dllPath = System.IO.Path.Combine(rtDir, assemblyName + ".dll");
+			if (!System.IO.File.Exists(dllPath)) return null;
+
+			using var peReader = new System.Reflection.PortableExecutable.PEReader(
+				System.IO.File.OpenRead(dllPath));
+			if (!peReader.HasMetadata) return null;
+			var md = peReader.GetMetadataReader();
+
+			// Find type (handle both simple & fully-qualified type names).
+			int? methodDefHandle = null;
+			foreach (var td in md.TypeDefinitions)
+			{
+				var tdef = md.GetTypeDefinition(td);
+				if (md.GetString(tdef.Name) == "<Module>") continue;
+				string ns = tdef.Namespace.IsNil ? "" : md.GetString(tdef.Namespace);
+				string tn = md.GetString(tdef.Name);
+				string fullName = string.IsNullOrEmpty(ns) ? tn : ns + "." + tn;
+				if (fullName != typePart && tn != typePart) continue;
+				foreach (var mh in tdef.GetMethods())
+				{
+					var mdef = md.GetMethodDefinition(mh);
+					if (md.GetString(mdef.Name) == methodName && mdef.RelativeVirtualAddress != 0)
+					{
+						methodDefHandle = MetadataTokens.GetToken(mh);
+						break;
+					}
+				}
+				break;
+			}
+			if (methodDefHandle == null) return null;
+
+			// Locate the MethodDefinition by token to read its body RVA.
+			var methodDef = md.GetMethodDefinition(MetadataTokens.MethodDefinitionHandle(methodDefHandle.Value));
+			if (methodDef.RelativeVirtualAddress == 0) return null;
+			var body = peReader.GetMethodBody(methodDef.RelativeVirtualAddress);
+			var ilReader = body.GetILReader();
+			byte[] il = ilReader.ReadBytes(ilReader.RemainingBytes);
+			if (il.Length == 0) return null;
+
+			// Conservative IL decoder — build IR JSON instructions for the op set
+			// the interpreter supports. Unknown/complex IL → null (return-0).
+			return LowerRawIlToAotIrJson(callee, il, md);
+		}
+		catch
+		{
+			return null;
+		}
+	}
+
+	/// <summary>Decode raw ECMA-335 IL bytes into the interpreter's AOT-IR JSON
+	/// instruction format. Conservative: only supports the flat, single-block
+	/// op set that the interpreter's IROpCode handles; anything requiring basic
+	/// blocks (branches), exception handling, or unsupported opcodes returns null.</summary>
+	private string? LowerRawIlToAotIrJson(string callee, byte[] il, MetadataReader md)
+	{
+		var sb = new StringBuilder();
+		sb.Append("{\"subjectId\":\"");
+		sb.Append(callee.Replace("\\", "\\\\").Replace("\"", "\\\""));
+		sb.Append("\",\"instructions\":[");
+		int pos = 0;
+		bool first = true;
+		bool unsupported = false;
+
+		while (pos < il.Length && !unsupported)
+		{
+			byte op1 = il[pos++];
+			bool longForm = op1 == 0xFE;
+			ushort opCode = longForm ? (ushort)(il[pos++] + 0xFE00) : op1;
+
+			if (first) first = false; else sb.Append(",");
+			string mappedOp = MappingOpToJson(opCode);
+			// SAFETY: any opcode we cannot map to an interpreter-supported IROpCode
+			// must cause the whole method to degrade to return-0 (null).  Emitting a
+			// JSON with an "unknown" op could make the interpreter produce a wrong
+			// (silently incorrect) result or crash — strictly worse than return-0.
+			if (mappedOp == "unknown") { unsupported = true; break; }
+			sb.Append("{\"op\":\"").Append(mappedOp).Append('"');
+
+			switch (opCode)
+			{
+				case 0x00: /* nop */ break;
+				case 0x2A: /* ret */ break;
+				case 0x14: /* ldnull */ break;
+				case 0x02: case 0x03: case 0x04: case 0x05: /* ldc.i4.0..3 */
+					sb.Append(",\"operand\":\"").Append(opCode - 0x02).Append('"');
+					break;
+				case 0x16: case 0x17: case 0x18: case 0x19: case 0x1A: case 0x1B: case 0x1C: case 0x1D: /* ldc.i4.m1..8 */
+					sb.Append(",\"operand\":\"").Append(opCode - 0x16).Append('"');
+					break;
+				case 0x20: /* ldc.i4 */
+					if (pos + 4 > il.Length) { unsupported = true; break; }
+					sb.Append(",\"operand\":\"").Append(BitConverter.ToInt32(il, pos)).Append('"');
+					pos += 4;
+					break;
+				case 0x21: /* ldc.i8 */
+					if (pos + 8 > il.Length) { unsupported = true; break; }
+					sb.Append(",\"operand\":\"").Append(BitConverter.ToInt64(il, pos)).Append('"');
+					pos += 8;
+					break;
+				case 0x22: /* ldc.r4 */
+					if (pos + 4 > il.Length) { unsupported = true; break; }
+					sb.Append(",\"operand\":\"").Append(BitConverter.ToSingle(il, pos)).Append('"');
+					pos += 4;
+					break;
+				case 0x23: /* ldc.r8 */
+					if (pos + 8 > il.Length) { unsupported = true; break; }
+					sb.Append(",\"operand\":\"").Append(BitConverter.ToDouble(il, pos)).Append('"');
+					pos += 8;
+					break;
+				case 0x0A: case 0x0B: case 0x0C: case 0x0D: /* ldarg.0..3 */
+					sb.Append(",\"operand\":\"").Append(opCode - 0x0A).Append('"');
+					break;
+				case 0x0E: case 0x0F: case 0x10: case 0x11: /* ldloc.0..3 */
+					sb.Append(",\"operand\":\"").Append(opCode - 0x0E).Append('"');
+					break;
+				case 0x06: case 0x07: case 0x08: case 0x09: /* stloc.0..3 */
+					sb.Append(",\"operand\":\"").Append(opCode - 0x06).Append('"');
+					break;
+				case 0xFE0C: /* ldarg.s */ case 0xFE0D: /* ldarga.s */
+				case 0xFE0E: /* ldloc.s */ case 0xFE0F: /* stloc.s */
+				case 0xFE10: /* ldloca.s */ case 0xFE11: /* starg.s */
+					if (pos + 1 > il.Length) { unsupported = true; break; }
+					sb.Append(",\"operand\":\"").Append(il[pos++]).Append('"');
+					break;
+				case 0x72: /* ldstr */
+					if (pos + 4 > il.Length) { unsupported = true; break; }
+					int userStrTok = BitConverter.ToInt32(il, pos);
+					pos += 4;
+					try
+					{
+						var ush = MetadataTokens.UserStringHandle(userStrTok);
+						string s = md.GetUserString(ush);
+						sb.Append(",\"operand\":\"").Append(s.Replace("\\", "\\\\").Replace("\"", "\\\"")).Append('"');
+					}
+					catch { sb.Append(",\"operand\":\"\""); }
+					break;
+				case 0x28: /* call */ case 0x6F: /* callvirt */ case 0x73: /* newobj */
+					if (pos + 4 > il.Length) { unsupported = true; break; }
+					int methTok = BitConverter.ToInt32(il, pos);
+					pos += 4;
+					string? callee2 = ResolveMethodTokenSubjectId(md, methTok);
+					if (callee2 != null) sb.Append(",\"callee\":\"").Append(callee2.Replace("\\", "\\\\").Replace("\"", "\\\"")).Append('"');
+					break;
+				case 0x7B: /* ldfld */ case 0x7D: /* stfld */ case 0x7E: /* ldsfld */
+				case 0x80: /* stsfld */ case 0x7C: /* ldflda */ case 0x7F: /* ldsflda */
+					if (pos + 4 > il.Length) { unsupported = true; break; }
+					pos += 4; /* field token */
+					break;
+				case 0x8C: /* box */ case 0x8D: /* castclass */ case 0x8E: /* isinst */
+				case 0x8F: /* unbox */ case 0x74: /* unbox.any */
+					if (pos + 4 > il.Length) { unsupported = true; break; }
+					pos += 4; /* type token */
+					break;
+				case 0x25: /* dup */ break;
+				case 0x26: /* pop */ break;
+				// ── Arithmetic / comparison (single-byte) — op name from MappingOpToJson ──
+				case 0x58: case 0x59: case 0x5A: case 0x5B: case 0x5C: case 0x5D: case 0x5E:
+				case 0x60: case 0x61: case 0x62: case 0x63: case 0x64: case 0x65: case 0x66:
+					break;
+				// ── 0xFE (long-form) — op name from MappingOpToJson ──
+				case 0xFE01: case 0xFE02: case 0xFE03: case 0xFE04: case 0xFE05: case 0xFE06:
+				case 0xFE09: case 0xFE12: case 0xFE13: case 0xFE14: case 0xFE15: case 0xFE16:
+				case 0xFE1D: case 0xFE1E:
+					break;
+				// ── Array element access ──
+				case 0x9E: break; /* throw */
+				case 0x9A: break; /* stelem (type) */
+				case 0x8B: case 0x94: case 0xA0: break; /* ldelema/stelem */
+				case 0x9B: case 0x9C: case 0x9D: break; /* stelem.i/i1/u1 */
+
+				default:
+					// Unsupported opcode — degrade to return-0 (never worse than today).
+					unsupported = true;
+					break;
+			}
+			sb.Append("}");
+		}
+
+		if (unsupported) return null;
+		sb.Append("]}");
+		return sb.ToString();
+	}
+
+	private string? ResolveMethodTokenSubjectId(MetadataReader md, int token)
+	{
+		try
+		{
+			// Method tokens have tag 0x06 in the high byte.
+			if ((token & 0xFF000000) != 0x06000000)
+				return null;
+			var mdef = md.GetMethodDefinition(MetadataTokens.MethodDefinitionHandle(token));
+			string name = md.GetString(mdef.Name);
+			var declType = mdef.GetDeclaringType();
+			var tdef = md.GetTypeDefinition(declType);
+			string ns = tdef.Namespace.IsNil ? "" : md.GetString(tdef.Namespace);
+			string tn = md.GetString(tdef.Name);
+			string typeFull = string.IsNullOrEmpty(ns) ? tn : ns + "." + tn;
+			string asm = AssemblyNameFromMetadata(md, declType);
+			return $"{asm}/{typeFull}::{name}";
+		}
+		catch { return null; }
+	}
+
+	private static string AssemblyNameFromMetadata(MetadataReader md, TypeDefinitionHandle tdefHandle)
+	{
+		// The assembly containing this type definition is either the module's
+		// defining assembly or the first assembly reference (for non-Primary
+		// Module assemblies). Prefer the AssemblyDefinition of the module.
+		try
+		{
+			var adef = md.GetAssemblyDefinition();
+			return md.GetString(adef.Name);
+		}
+		catch { }
+		// Fallback: first AssemblyReference.
+		foreach (var ad in md.AssemblyReferences)
+		{
+			var aref = md.GetAssemblyReference(ad);
+			return md.GetString(aref.Name);
+		}
+		return "";
+	}
+
+	private string MappingOpToJson(ushort opCode)
+	{
+		return opCode switch
+		{
+			0x00 => "nop",
+			0x2A => "ret",
+			0x14 => "ldnull",
+			0x02 or 0x03 or 0x04 or 0x05 or 0x16 or 0x17 or 0x18 or 0x19 or 0x1A or 0x1B or 0x1C or 0x1D or 0x20 => "ldc.i4",
+			0x21 => "ldc.i8",
+			0x22 => "ldc.r4",
+			0x23 => "ldc.r8",
+			0x0A or 0x0B or 0x0C or 0x0D => "ldarg",
+			0xFE0C => "ldarg",
+			0xFE0E => "ldloc",
+			0xFE0F => "stloc",
+			0xFE0D => "ldarga",
+			0xFE10 => "ldloca",
+			0xFE11 => "starg",
+			0x0E or 0x0F or 0x10 or 0x11 => "ldloc",
+			0x06 or 0x07 or 0x08 or 0x09 => "stloc",
+			0x72 => "ldstr",
+			0x28 => "call",
+			0x6F => "callvirt",
+			0x73 => "newobj",
+			0x7B => "ldfld",
+			0x7D => "stfld",
+			0x7E => "ldsfld",
+			0x80 => "stsfld",
+			0x7C => "ldflda",
+			0x7F => "ldsflda",
+			0x8C => "box",
+			0x8D => "castclass",
+			0x8E => "isinst",
+			0x8F => "unbox",
+			0x74 => "unbox.any",
+			0x25 => "dup",
+			0x26 => "pop",
+			0x58 => "add",
+			0x59 => "sub",
+			0x5A => "mul",
+			0x5B => "div",
+			0x5C => "div",
+			0x5D => "rem",
+			0x5E => "rem",
+			0x60 => "and",
+			0x61 => "or",
+			0x62 => "xor",
+			0x63 => "shl",
+			0x64 => "shr",
+			0x65 => "shr",
+			0x66 => "neg",
+			>= 0xFE01 and <= 0xFE1E => opCode switch
+			{
+				0xFE01 => "ceq",
+				0xFE02 => "cgt",
+				0xFE03 => "cgt",
+				0xFE04 => "clt",
+				0xFE05 => "clt",
+				0xFE06 => "ldlen",
+				0xFE09 => "ldelema",
+				0xFE12 => "conv.i4",
+				0xFE13 => "conv.i8",
+				0xFE14 => "conv.r4",
+				0xFE15 => "conv.r8",
+				0xFE16 => "conv.u",
+				0xFE1D => "conv.i4",
+				0xFE1E => "conv.u",
+				_ => "unknown",
+			},
+			_ => "unknown",
+		};
 	}
 
 	private bool TryCreateExternalRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
