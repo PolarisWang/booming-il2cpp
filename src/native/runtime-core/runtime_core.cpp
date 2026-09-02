@@ -90,6 +90,7 @@ using namespace chaos::il2cpp::marshal_abi;
 #include "core/monitor.cpp"
 #include "core/gc_safepoint.cpp"
 #include "core/marshal_api.cpp"
+#include "core/marshal_com.cpp"
 #include "core/marshal_string.cpp"
 #include "core/char_classification.cpp"
 #include "core/value_type_kernels.cpp"
