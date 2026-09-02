@@ -1,0 +1,57 @@
+# Doxygen API Docs — generated on push to main, published to GitHub Pages.
+#
+# Scope: contracts/native/v0 (P0) + src/native/common/chaos (P1).
+# Install doxygen in the runner, run `doxygen docs/native-api/Doxyfile`, then
+# publish the output directory `docs/native-api/build/html` to GitHub Pages.
+
+name: API Docs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'contracts/native/v0/**'
+      - 'src/native/common/chaos/**'
+      - 'docs/native-api/**'
+  workflow_dispatch:
+  # Optional: allow PR preview via a separate Pages deployment (not configured now).
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install doxygen
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq doxygen graphviz
+
+      - name: Generate docs
+        run: |
+          doxygen docs/native-api/Doxyfile
+          echo "Generated root: docs/native-api/build/html/index.html"
+
+      - name: Upload docs artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/native-api/build/html
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

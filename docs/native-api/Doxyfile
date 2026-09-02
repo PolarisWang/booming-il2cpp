@@ -1,0 +1,112 @@
+# Doxyfile for chaos-il2cpp native API documentation
+#
+# Configuration derived from T-B5 design document (doxygen-setup.md).
+# INPUT: contracts/native/v0 (P0), src/native/common/chaos (P1), src/native/runtime-core (P2)
+# OUTPUT: docs/native-api/build/html/
+#
+# Usage:
+#   doxygen docs/native-api/Doxyfile
+#   open docs/native-api/build/html/index.html
+#
+# CI: .github/workflows/docs.yml generates and publishes to GitHub Pages.
+# See https://github.com/chaos-il2cpp/chaos-il2cpp/settings/pages
+
+# ── Project info ────────────────────────────────────────────────────────
+PROJECT_NAME           = "Chaos IL2CPP Native API"
+PROJECT_NUMBER         = 0.1.1
+PROJECT_BRIEF          = "The native runtime, GC, and AOT codegen for the Chaos IL2CPP runtime"
+OUTPUT_DIRECTORY       = docs/native-api/build
+CREATE_SUBDIRS         = YES
+
+# ── Input ───────────────────────────────────────────────────────────────
+INPUT                  = contracts/native/v0 \
+                         src/native/common/chaos
+RECURSIVE              = YES
+EXCLUDE                = third_party
+EXAMPLE_PATH           =
+EXAMPLE_PATTERNS       =
+
+# ── Output format ───────────────────────────────────────────────────────
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_XML           = YES
+GENERATE_TREEVIEW      = YES
+SEARCHENGINE           = YES
+HTML_OUTPUT            = html
+USE_MDFILE_AS_MAINPAGE = README.md
+
+# ── Extraction scope ────────────────────────────────────────────────────
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = NO
+HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_CLASSES     = NO
+INTERNAL_DOCS          = NO
+CASE_SENSE_NAMES       = NO
+
+# ── Preprocessor (critical for ABI macro expansion) ────────────────────
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+INCLUDE_PATH           = contracts/native/v0 \
+                         src/native/common \
+                         src/native/runtime-core
+PREDEFINED             = CHAOS_RUNTIME_ABI_EXPORT= \
+                         CHAOS_RUNTIME_ABI_CALL=__cdecl \
+                         CHAOS_IL2CPP_INTPTR=intptr_t \
+                         CHAOS_IL2CPP_UINTPTR=uintptr_t \
+                         CHAOS_IL2CPP_INT32=int32_t \
+                         CHAOS_IL2CPP_UINT32=uint32_t \
+                         CHAOS_IL2CPP_INT16=int16_t \
+                         CHAOS_IL2CPP_UINT16=uint16_t \
+                         CHAOS_IL2CPP_INT8=int8_t \
+                         CHAOS_IL2CPP_UINT8=uint8_t \
+                         CHAOS_IL2CPP_INT64=int64_t \
+                         CHAOS_IL2CPP_UINT64=uint64_t \
+                         CHAOS_IL2CPP_SIZE=size_t \
+                         CHAOS_IL2CPP_INT=int \
+                         CHAOS_IL2CPP_UINT=unsigned \
+                         CHAOS_IL2CPP_FLOAT64=double \
+                         CHAOS_IL2CPP_FLOAT32=float \
+                         CHAOS_IL2CPP_CHAR=char \
+                         CHAOS_IL2CPP_STRING=const\ char* \
+                         "CHAOS_IL2CPP_UNIQUE_PTR(T)=std::unique_ptr<T>" \
+                         "CHAOS_IL2CPP_SHARED_PTR(T)=std::shared_ptr<T>" \
+                         "CHAOS_IL2CPP_VECTOR(T)=std::vector<T>" \
+                         "CHAOS_IL2CPP_MAP(K,V)=std::map<K,V>" \
+                         "CHAOS_IL2CPP_UNORDERED_MAP(K,V)=std::unordered_map<K,V>" \
+                         "CHAOS_IL2CPP_ATOMIC(T)=std::atomic<T>" \
+                         "CHAOS_IL2CPP_MUTEX=std::mutex" \
+                         "CHAOS_IL2CPP_SHARED_MUTEX=std::shared_mutex" \
+                         "CHAOS_IL2CPP_UNIQUE_LOCK(M)=std::unique_lock<M>" \
+                         "CHAOS_IL2CPP_SHARED_LOCK(M)=std::shared_lock<M>" \
+                         __CHAOS_RUNTIME_ABI= \
+                         __attribute__(x)=
+
+# ── C++ parser ──────────────────────────────────────────────────────────
+OPTIMIZE_OUTPUT_FOR_C  = NO
+JAVADOC_AUTOBRIEF      = NO
+QT_AUTOBRIEF           = NO
+MULTILINE_CPP_IS_BRIEF = NO
+MARKDOWN_SUPPORT       = YES
+TYPEDEF_HIDES_STRUCT   = YES
+
+# ── Diagrams ────────────────────────────────────────────────────────────
+CLASS_DIAGRAMS         = YES
+DOT_CLEANUP            = YES
+HAVE_DOT               = NO  # set to YES if graphviz is available
+
+# ── Warnings ────────────────────────────────────────────────────────────
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = YES
+WARN_FORMAT            = "$file($line): $message"
+WARN_LOGFILE           = docs/native-api/build/doxygen-warnings.log
+
+# ── Misc ────────────────────────────────────────────────────────────────
+QUIET                  = NO
+TAB_SIZE               = 4
+ALIASES                =
+FILTER_PATTERNS        =
