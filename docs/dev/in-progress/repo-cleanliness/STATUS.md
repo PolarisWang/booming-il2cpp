@@ -1,6 +1,6 @@
 # Repo-Hygiene Dashboard
 
-> Last run: 2026-09-02T13:45:11Z · overall: **PASS**
+> Last run: 2026-09-02T14:13:28Z · overall: **PASS**
 
 | check | status | note |
 |-------|--------|------|

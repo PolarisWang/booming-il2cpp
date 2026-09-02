@@ -96,13 +96,15 @@ jobs:
       - name: Build SDK (cmake windows-x64-reference)
         shell: bash
         run: |
-          # Explicit generator + toolchain avoids reliance on the VS environment
-          # variables that setup-msbuild may or may not fully propagate to cmake
-          # presets.  Same pattern as codegen-regression.yml.
-          cmake -S . -B build/native -G "Visual Studio 17 2022" \
-            --toolchain build/toolchains/windows-x64-reference.cmake \
+          # No -G: let CMake auto-detect the newest Visual Studio present on the
+          # runner (GH windows-latest now ships VS 2026/18; hardcoding "17 2022"
+          # fails with 'could not find any instance of Visual Studio').  Configure
+          # to the reference binary dir so downstream artifact collection matches
+          # the preset layout.
+          cmake -S . -B artifacts/presets/windows-x64-reference \
+            -A x64 \
             -DROADMAP0_PRESET_TARGET=windows-x64-reference
-          cmake --build build/native --config RelWithDebInfo
+          cmake --build artifacts/presets/windows-x64-reference --config RelWithDebInfo
       - name: Collect SDK artifacts
         shell: bash
         run: |
@@ -144,7 +146,9 @@ jobs:
         shell: bash
         run: |
           cmake --preset linux-x64-native
-          cmake --build --preset linux-x64-native
+          # No buildPreset is defined for linux (CMakePresets.json's buildPresets list is
+          # empty), so build against the configure-output directory explicitly.
+          cmake --build artifacts/presets/linux-x64-native -j$(nproc 2>/dev/null || echo 2)
       - name: Collect SDK artifacts
         shell: bash
         run: |

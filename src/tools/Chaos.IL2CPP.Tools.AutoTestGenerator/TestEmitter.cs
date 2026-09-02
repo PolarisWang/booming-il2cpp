@@ -351,25 +351,42 @@ public sealed class TestEmitter
         // Deterministic return value assertion
         if (result.IsDeterministic && !result.IsVoid && result.ReturnValueJson is not null)
         {
-            // Null return → assert default(T)!
-            if (result.ReturnValueJson == "null" || string.IsNullOrEmpty(result.ReturnValueType))
+            // SUSPICIOUS NULL: when the probe ran on an UNINITIALIZED subject instance
+            // (SubjectInstanceFactory.Create<T> uses GetUninitializedObject, which returns
+            // a bare object with all fields zero/null), a null return value is likely an
+            // artifact of the uninitialized state rather than a genuine semantic null.
+            // Examples: Queue.Clone() on a bare object returns null because _array is null;
+            // Stack.ToArray() on a bare object returns null for the same reason.
+            // In AOT, the stub also returns null → Assert.AreEqual(default, null) passes
+            // by coincidence — a false positive.
+            // Mark as UNVERIFIED instead of asserting a non-semantic null.
+            if (callExpr.StartsWith("SubjectInstanceFactory.Create<", StringComparison.Ordinal))
             {
-                var csType = CSharpSerializer.MapToCSharpType(method.ReturnTypeName);
-
-                // SUSPICIOUS NULL: when the probe ran on an UNINITIALIZED subject instance
-                // (SubjectInstanceFactory.Create<T> uses GetUninitializedObject, which returns
-                // a bare object with all fields zero/null), a null return value is likely an
-                // artifact of the uninitialized state rather than a genuine semantic null.
-                // Examples: Queue.Clone() on a bare object returns null because _array is null;
-                // Stack.ToArray() on a bare object returns null for the same reason.
-                // In AOT, the stub also returns null → Assert.AreEqual(default, null) passes
-                // by coincidence — a false positive.
-                // Mark as UNVERIFIED instead of asserting a non-semantic null.
-                if (callExpr.StartsWith("SubjectInstanceFactory.Create<", StringComparison.Ordinal))
+                // Case 1: ReturnValueJson explicitly null
+                // Case 2: Empty array [] but the return type is NOT an array type
+                //         (e.g. Queue.Clone() returns Queue, not Queue[] — the probe
+                //         serialized an empty object as []). This is also an artifact.
+                var isNullJson = result.ReturnValueJson == "null" || string.IsNullOrEmpty(result.ReturnValueType);
+                var isNonArrayEmptyArray = result.ReturnValueJson == "[]" && !method.ReturnTypeName.EndsWith("[]");
+                // Case 3: Array return type (e.g. System.Object[]) with "[]" JSON.
+                //         The serializer renders default(T) for non-collection types,
+                //         producing Assert.AreEqual(default(Object[]), result) which
+                //         is a false positive for both stub (null) and the uninitialized
+                //         instance (also likely returns null/empty from bare fields).
+                //         Mark as UNVERIFIED — the serializer cannot produce a meaningful
+                //         array expression for this context.
+                var isArrayEmptyArray = result.ReturnValueJson == "[]" && method.ReturnTypeName.EndsWith("[]");
+                if (isNullJson || isNonArrayEmptyArray || isArrayEmptyArray)
                 {
                     sb.AppendLine($"            // [UNVERIFIED] AOT stub: null return from SubjectInstanceFactory instance (uninitialized object artifact — skipping default(T) assertion)");
                     return;
                 }
+            }
+
+            // Null return → assert default(T)!
+            if (result.ReturnValueJson == "null" || string.IsNullOrEmpty(result.ReturnValueType))
+            {
+                var csType = CSharpSerializer.MapToCSharpType(method.ReturnTypeName);
 
                 // For a NULL-captured return value, assert equality with default(T) (null).
                 // Do NOT emit Assert.IsNotNull here — for a method that legitimately returns
