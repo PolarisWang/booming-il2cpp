@@ -1,38 +1,39 @@
 #!/usr/bin/env bash
 # ===============================================================================
-# release.sh — multi-agent-safe release orchestrator for chaos-il2cpp.
+# release.sh — standardized release state machine.
 #
-# DESIGN (multi-agent concurrent repo):
-#   1. Lock a version snapshot: acquire .git/release.lock (flock), read VERSION,
-#      create release/v{NEW_VER} from a FIXED origin/main commit (not the dirty
-#      local worktree).  No git stash (forbidden).
-#   2. worktree isolation: git worktree add <rel-dir> release/v{NEW_VER}.  The
-#      build + verify run in an isolated directory, unaffected by other agents'
-#      concurrent edits to the main worktree.
-#   3. Verify gate: run governance check + publish-smoke matrix + unit tests +
-#      checksums/SBOM generation inside the worktree.  Only if ALL pass may the
-#      release be published.
-#   4. Publish (or abort): --publish creates tag + push + GitHub Release +
-#      merge-back; --abort cleans up the temp branch + lock after a failure.
+# Subcommands (each persists state in .release_state.json, so the flow is
+# re-entrant and scripted end-to-end):
 #
-# The main worktree is NEVER used for release operations.  This makes the release
-#  transaction (lock a commit → verify → publish) immune to concurrent agent work.
+#   init <version>   Start a release: lock, snapshot branch from origin/main,
+#                    git worktree add, version bump, build prerequisites.
+#   verify           Run gates: release-governance, publish-smoke, unit,
+#                    integrity (checksums+SBOM).  Records PASS/FAIL per gate.
+#   fix [--from-main|--shell]
+#                    After a failed verify: --from-main re-bases the worktree on
+#                    the latest origin/main (fixes synced to main are pulled in);
+#                    --shell opens an interactive shell to edit the worktree.
+#                    Both require a subsequent `verify`.
+#   publish          Tag, push, GitHub Release, merge snapshot back to main,
+#                    cleanup worktree + snapshot branch + lock + state.
+#   abort            Cleanup worktree + snapshot branch + lock + state.
+#   status           Show current release state.
 #
-# Usage:
-#   ./scripts/release.sh 0.2.0               # stage 1-5: lock + worktree + build + verify
-#   ./scripts/release.sh 0.2.0 --publish     # stage 6a: publish after verify passes
-#   ./scripts/release.sh 0.2.0 --abort       # stage 6b: abort/cleanup after verify fails
-#   ./scripts/release.sh 0.2.0 --dry-run     # rehearse every step
-#   ./scripts/release.sh 0.2.0 --skip-verify # skip the verify gate (not recommended)
-#   ./scripts/release.sh --help
+# Flow:
+#   release.sh init 0.2.0
+#   release.sh verify                    # PASS -> publish; FAIL -> fix
+#   release.sh fix --from-main           # pull latest origin/main fix, verify again
+#   release.sh publish                   # only after verify passes
+#   release.sh abort                     # abandon
 #
-# Red lines honored:
+# The release acts on a FIXED snapshot of origin/main in an isolated git
+# worktree; concurrent agent edits to the main worktree never touch it.
+#
+# Red lines:
 #   - NO `git stash` (forbidden by project).
-#   - Version changed ONLY via scripts/release_bump.sh (agent rule).
-#   - Any commit made carries a three-part message
-#     (root_cause / fix_strategy / regression_check) per CLAUDE.md.
-#   - Output artifacts written under artifacts/ (layer-owned); no cross-layer writes.
-#   - Release branch + tag operations are exclusive (release.lock held).
+#   - Version changed ONLY via scripts/release_bump.sh.
+#   - Commit messages carry root_cause / fix_strategy / regression_check.
+#   - Artifacts written under artifacts/ (layer-owned).
 # ===============================================================================
 
 set -euo pipefail
@@ -40,300 +41,380 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
-# Load shared release constants.
 # shellcheck source=release-config.sh
 # shellcheck disable=SC1091
 source "$REPO_ROOT/scripts/release-config.sh"
 
-NEW_VER=""
-DO_PUBLISH=0
-DO_ABORT=0
-DRY_RUN=0
-SKIP_VERIFY=0
-CLEANUP_LOCK=0
-
-LOCK_FILE="$REPO_ROOT/.git/release.lock"
+STATE_FILE="$REPO_ROOT/.release_state.json"
+LOCK_DIR="$REPO_ROOT/.git/release.lock.dir"
 WORKTREE_DIR="$REPO_ROOT/.worktrees/rel"
+STATE_VERSION=1
 
-show_help() {
-    cat <<'EOF'
-Usage: ./scripts/release.sh <version> [options]
+PY=""
+for cand in python python3 py; do
+    if command -v "$cand" >/dev/null 2>&1 && "$cand" -c 'import sys' >/dev/null 2>&1; then PY="$cand"; break; fi
+done
+[ -z "$PY" ] && { echo "Error: no python found" >&2; exit 1; }
 
-<version>   SemVer to release (e.g. 0.2.0). Required (omit for --abort).
+show_usage() { cat <<'EOF'
+Usage: ./scripts/release.sh <subcommand> [options]
+
+Subcommands:
+  init <version>       Start release: lock, snapshot branch, worktree, bump, build.
+  verify              Run gates (governance / publish-smoke / unit / integrity).
+  fix --from-main     Re-base worktree on latest origin/main (post-fix re-release).
+  fix --shell         Open interactive shell in the worktree for manual fixes.
+  publish             Tag, push, GitHub Release, merge back to main, cleanup.
+  abort               Cleanup worktree + branch + lock + state.
+  status              Show current release state.
 
 Options:
-  --publish   After a successful verify, actually publish (tag + push + Release + merge).
-  --abort     Clean up a failed release: delete temp branch + release lock + worktree.
-  --dry-run   Print every step that would run; change nothing.
-  --skip-verify  Skip the verify gate (governance/publish-smoke/unit). NOT recommended.
-  --help      Show this help.
-
-Normal flow:
-  release.sh 0.2.0              # step 1-5: lock version, create release/v0.2.x branch
-                                #            from origin/main, worktree, build, verify
-  release.sh 0.2.0 --publish    # verify passed -> create tag + push + GitHub Release
-  release.sh 0.2.0 --abort      # verify failed -> delete temp branch + release lock
-
-The release operates on a FIXED origin/main snapshot in an isolated git worktree,
-so concurrent agent changes to the main worktree never touch the release.
+  --dry-run           Print steps without executing.
+  --help              Show this help.
 EOF
 }
 
-while [ $# -gt 0 ]; do
-    case "$1" in
-        --publish) DO_PUBLISH=1; shift ;;
-        --abort) DO_ABORT=1; shift ;;
-        --dry-run) DRY_RUN=1; shift ;;
-        --skip-verify) SKIP_VERIFY=1; shift ;;
-        --help|-h) show_help; exit 0 ;;
-        *)
-            if [ -z "$NEW_VER" ]; then NEW_VER="$1"; shift
-            else echo "Error: unexpected argument '$1'" >&2; show_help >&2; exit 2; fi
-            ;;
-    esac
-done
-
-# ── 0. Resolve version + validate ─────────────────────────────────────────────
-if [ -z "$NEW_VER" ] && [ "$DO_ABORT" -eq 0 ]; then
-    echo "Error: <version> is required" >&2
-    show_help >&2
-    exit 2
-fi
-if [ -n "$NEW_VER" ] && ! [[ "$NEW_VER" =~ $RC_SEMVER_RE ]]; then
-    echo "Error: '$NEW_VER' is not valid SemVer (expect MAJOR.MINOR.PATCH)" >&2
-    exit 2
-fi
-TAG="${RC_TAG_PREFIX}$NEW_VER"
-RELEASE_BRANCH="${RC_RELEASE_BRANCH_PREFIX}${NEW_VER%.*}${RC_RELEASE_BRANCH_SUFFIX}"   # release/0.2.x
-RELEASE_TAG_BRANCH="${RC_RELEASE_BRANCH_PREFIX}v${NEW_VER}"                            # release/v0.2.0 (snapshot branch)
-
-# ── Acquire exclus. Release lock ───────────────────────────────────────────────
-acquire_lock() {
-    if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] flock ${LOCK_FILE}"; return; fi
-    if [ -f "$LOCK_FILE" ]; then
-        echo "Error: release lock held at ${LOCK_FILE}. Another release may be in progress." >&2
-        echo "  Inspect the lockfile PID, or remove it after confirming no release is running." >&2
-        exit 1
-    fi
-    # Create lock atomically (O_EXCL semantics via mkdir; robust cross-platform).
-    if mkdir "${LOCK_FILE}.dir" 2>/dev/null; then
-        echo "$$" > "${LOCK_FILE}.dir/pid"
-        echo "  acquired release lock (pid $$)"
-    else
-        echo "Error: cannot acquire release lock. ${LOCK_FILE}.dir exists." >&2
-        exit 1
-    fi
+# ── State helpers ─────────────────────────────────────────────────────────
+read_state() {
+    [ -f "$STATE_FILE" ] || { echo '{}'; return; }
+    "$PY" - "$STATE_FILE" <<'PYEOF'
+import json, sys
+try:
+    print(json.dumps(json.load(open(sys.argv[1]))))
+except Exception:
+    print('{}')
+PYEOF
+}
+state_get() {  # key  statejson
+    local key="$1" blob="$2"
+    "$PY" - "$key" "$blob" <<'PYEOF'
+import json, sys
+try: d = json.loads(sys.argv[2])
+except Exception: d = {}
+print(d.get(sys.argv[1], ''))
+PYEOF
+}
+write_state() {  # key  val(json-literal-or-string)
+    local key="$1" val="$2"
+    "$PY" - "$STATE_FILE" "$key" "$val" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" <<'PYEOF'
+import json, os, sys
+p, k, v, ts = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+d = {}
+if os.path.exists(p):
+    try: d = json.load(open(p))
+    except Exception: d = {}
+try: d[k] = json.loads(v)
+except Exception: d[k] = v
+d['updatedAt'] = ts
+json.dump(d, open(p, 'w'), indent=2)
+PYEOF
+}
+init_state() {  # ver commit branch
+    "$PY" - "$STATE_FILE" "$1" "$2" "$3" "$WORKTREE_DIR" <<'PYEOF'
+import json, sys
+d = {
+  "version": sys.argv[2], "tag": "v"+sys.argv[2],
+  "snapshotBranch": sys.argv[3], "snapshotCommit": sys.argv[1],
+  "worktreeDir": sys.argv[4],
+  "phase": "init", "phaseStatus": "done",
+  "verifyResults": {}, "verifyFailed": False, "failures": [],
+  "stateVersion": 1,
+  "createdAt": __import__('time').strftime('%Y-%m-%dT%H:%M:%SZ'),
+  "updatedAt": __import__('time').strftime('%Y-%m-%dT%H:%M:%SZ'),
+}
+json.dump(d, open(sys.argv[1], 'w'), indent=2)
+PYEOF
 }
 
+# ── Lock ─────────────────────────────────────────────────────────────────
+acquire_lock() {
+    [ "$DRY_RUN" -eq 1 ] && { echo "  [dry] acquire lock"; return; }
+    if [ -d "$LOCK_DIR" ]; then echo "Error: release lock held. Run 'abort' or remove." >&2; exit 1; fi
+    mkdir "$LOCK_DIR" && echo "$$" > "$LOCK_DIR/pid" && echo "  acquired release lock (pid $$)"
+}
 release_lock() {
-    if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] release lock"; return; fi
-    rm -rf "${LOCK_FILE}.dir" 2>/dev/null || true
+    [ "$DRY_RUN" -eq 1 ] && { echo "  [dry] release lock"; return; }
+    rm -rf "$LOCK_DIR" 2>/dev/null || true
     echo "  released release lock"
 }
+dispatch_cmd() { ( cd "$WORKTREE_DIR" && "$@" ); }
 
-# ── git helper (worktree-safe) ────────────────────────────────────────────────
-# run inside the worktree dir (passed as first arg), rel path for commands
-dispatch_cmd() {
-    local dir="$1"; shift
-    ( cd "$dir" && "$@" )
+# ── init ─────────────────────────────────────────────────────────────────
+cmd_init() {
+    local ver="${1:-}"; [ -z "$ver" ] && { echo "Error: version required" >&2; exit 2; }
+    [[ "$ver" =~ $RC_SEMVER_RE ]] || { echo "Error: invalid SemVer '$ver'" >&2; exit 2; }
+    local branch="release/v${ver}"
+    echo "=== release init ${ver} (branch=${branch}) ==="
+    acquire_lock
+
+    echo "[1/4] snapshot from origin/main"
+    if [ "$DRY_RUN" -eq 0 ]; then
+        git fetch origin main 2>&1 | tail -1 || true
+        local commit; commit=$(git rev-parse origin/main 2>/dev/null || echo "")
+        [ -n "$commit" ] || { echo "Error: cannot resolve origin/main" >&2; release_lock; exit 1; }
+        git branch -D "$branch" 2>/dev/null || true
+        git branch "$branch" "$commit"
+        echo "  snapshot: ${commit:0:12}"
+    else
+        echo "  [dry] git branch ${branch} origin/main"
+    fi
+
+    echo "[2/4] worktree"
+    if [ "$DRY_RUN" -eq 0 ]; then
+        rm -rf "$WORKTREE_DIR"; git worktree add "$WORKTREE_DIR" "$branch" >/dev/null 2>&1
+        echo "  worktree: ${WORKTREE_DIR}"
+    else
+        echo "  [dry] git worktree add ${WORKTREE_DIR} ${branch}"
+    fi
+
+    echo "[3/4] version bump + state"
+    if [ "$DRY_RUN" -eq 0 ]; then
+        dispatch_cmd bash scripts/release_bump.sh "$ver" 2>&1 | tail -3
+        init_state "$commit" "$ver" "$branch"
+        echo "  version bumped to ${ver}"
+    else
+        echo "  [dry] release_bump.sh ${ver}"
+        echo "  [dry] write .release_state.json"
+    fi
+
+    echo "[4/4] build prerequisites"
+    if [ "$DRY_RUN" -eq 0 ]; then
+        dispatch_cmd dotnet build src/managed/Chaos.IL2CPP.Generator --configuration Release --nologo -v q >/dev/null 2>&1 || true
+        dispatch_cmd dotnet build src/managed/Chaos.IL2CPP.Driver --configuration Release --nologo -v q >/dev/null 2>&1 || true
+        echo "  prerequisites built"
+    else
+        echo "  [dry] dotnet build Generator + Driver"
+    fi
+    echo ""
+    echo "== init done. Run: ./scripts/release.sh verify"
 }
 
-# ── ABORT path ────────────────────────────────────────────────────────────────
-if [ "$DO_ABORT" -eq 1 ]; then
-    echo "=== abort release (cleanup) ==="
-    # Remove the release worktree + temp snapshot branch, release the lock.
-    if [ -d "$WORKTREE_DIR" ]; then
-        if [ "$DRY_RUN" -eq 0 ]; then
-            git worktree remove "$WORKTREE_DIR" --force 2>/dev/null || rm -rf "$WORKTREE_DIR"
-            echo "  removed release worktree: $WORKTREE_DIR"
-        else
-            echo "  [dry] git worktree remove $WORKTREE_DIR --force"
-        fi
-    fi
-    if git rev-parse -q --verify "refs/heads/$RELEASE_TAG_BRANCH" >/dev/null 2>&1; then
-        if [ "$DRY_RUN" -eq 0 ]; then
-            git branch -D "$RELEASE_TAG_BRANCH" 2>/dev/null || true
-            echo "  deleted temp branch: $RELEASE_TAG_BRANCH"
-        else
-            echo "  [dry] git branch -D $RELEASE_TAG_BRANCH"
-        fi
-    fi
-    release_lock
-    echo ""
-    echo "== abort complete. Fix the underlying issue on main, then re-run release.sh."
-    exit 0
-fi
-
-# ── Step 1: Acquire lock + create snapshot ────────────────────────────────────
-echo "=== chaos-il2cpp release ${NEW_VER}"
-echo "  snapshot branch : ${RELEASE_TAG_BRANCH} (from fixed origin/main commit)"
-echo "  publish         : ${DO_PUBLISH}"
-echo "  dry-run         : ${DRY_RUN}"
-acquire_lock
-
-# Ensure we have an up-to-date origin/main (fast-fetch, tolerate lock races).
-echo "[1/6] Sync origin/main + create snapshot branch"
-if [ "$DRY_RUN" -eq 0 ]; then
-    git fetch origin main 2>&1 | tail -1 || true
-    # Resolve the FIXED origin/main commit for the snapshot.
-    SNAPSHOT_COMMIT=$(git rev-parse origin/main 2>/dev/null || echo "")
-    if [ -z "$SNAPSHOT_COMMIT" ]; then
-        echo "Error: cannot resolve origin/main." >&2
-        release_lock
+# ── verify ───────────────────────────────────────────────────────────────
+cmd_verify() {
+    local state; state=$(read_state)
+    local phase; phase=$(echo "$state" | state_get phase "$state")
+    if [ "$phase" != "init" ] && [ "$phase" != "fix" ]; then
+        echo "Error: current phase '${phase}', expected init or fix. Run init <version> first." >&2
         exit 1
     fi
-    echo "  snapshot commit: ${SNAPSHOT_COMMIT:0:12}"
-    # Create the snapshot branch from the fixed commit (force re-create to update).
-    if git rev-parse -q --verify "refs/heads/$RELEASE_TAG_BRANCH" >/dev/null 2>&1; then
-        git branch -D "$RELEASE_TAG_BRANCH" 2>/dev/null || true
-    fi
-    git branch "$RELEASE_TAG_BRANCH" "$SNAPSHOT_COMMIT"
-    echo "  created snapshot branch: ${RELEASE_TAG_BRANCH}"
-else
-    echo "  [dry] git fetch origin main"
-    echo "  [dry] git branch release/v${NEW_VER} origin/main"
-fi
+    [ -d "$WORKTREE_DIR" ] || { echo "Error: worktree not found ${WORKTREE_DIR}" >&2; exit 1; }
 
-# ── Step 2: worktree isolation ────────────────────────────────────────────────
-echo "[2/6] Isolate build in worktree"
-if [ "$DRY_RUN" -eq 0 ]; then
-    rm -rf "$WORKTREE_DIR"
-    git worktree add "$WORKTREE_DIR" "$RELEASE_TAG_BRANCH" 2>&1 | tail -1
-    echo "  worktree ready: $WORKTREE_DIR (${RELEASE_TAG_BRANCH})"
-else
-    echo "  [dry] git worktree add $WORKTREE_DIR $RELEASE_TAG_BRANCH"
-fi
+    echo "=== release verify ==="
+    local failed=0
+    local ver; ver=$(echo "$state" | state_get version "$state")
 
-# ── Step 3: Build (in worktree) ───────────────────────────────────────────────
-echo "[3/6] Build (isolated worktree)"
-if [ "$DRY_RUN" -eq 0 ]; then
-    dispatch_cmd "$WORKTREE_DIR" dotnet build src/managed/Chaos.IL2CPP.Generator --configuration Release --nologo -v q 2>&1 | tail -2 || true
-    dispatch_cmd "$WORKTREE_DIR" dotnet build src/managed/Chaos.IL2CPP.Driver --configuration Release --nologo -v q 2>&1 | tail -2 || true
-    dispatch_cmd "$WORKTREE_DIR" bash scripts/release_bump.sh "$NEW_VER" 2>&1 | tail -3 || true
-else
-    echo "  [dry] dotnet build Generator + Driver + release_bump.sh"
-fi
-
-# ── Step 4: Verify gate ───────────────────────────────────────────────────────
-echo "[4/6] Verify gate"
-GATE_STATUS=0
-if [ "$SKIP_VERIFY" -eq 1 ]; then
-    echo "  (skip-verify set — gate skipped)"
-elif [ "$DRY_RUN" -eq 1 ]; then
-    echo "  [dry] run governance + publish-smoke + unit tests"
-else
-    # 4a. release-governance
-    echo "  4a. release-governance"
-    if dispatch_cmd "$WORKTREE_DIR" python scripts/cleanliness/check_release_governance.py --ci; then
-        echo "    governance: PASS"
+    # 1 governance
+    echo "  1/4 release-governance"
+    if [ "$DRY_RUN" -eq 1 ]; then echo "    [dry] governance";
+    elif dispatch_cmd python scripts/cleanliness/check_release_governance.py; then
+        echo "    pass"; write_state verifyResults.governance '"pass"'
     else
-        echo "    governance: FAIL" >&2
-        GATE_STATUS=1
+        echo "    fail (expected only: no tag yet)"; failed=1; write_state verifyResults.governance '"fail"'
     fi
 
-    # 4b. publish-smoke matrix (dev mode — standalone tool has known MSVC 14.44
-    #    terminate C2039 issue documented in A3; dev mode 3 cases all PASS)
-    echo "  4b. publish-smoke (dev mode, 3 cases)"
-    # publish-smoke defaults to dev mode (repo-built Driver). standalone tool path
-    # is gated separately by the EmbeddedSDK compile test below.
-    if dispatch_cmd "$WORKTREE_DIR" python scripts/publish-smoke.py --json publish-smoke-report.json; then
-        echo "    publish-smoke(dev): PASS"
+    # 2 publish-smoke (dev mode)
+    echo "  2/4 publish-smoke"
+    if [ "$DRY_RUN" -eq 1 ]; then echo "    [dry] publish-smoke"
+    elif dispatch_cmd python scripts/publish-smoke.py --json publish-smoke-report.json >/dev/null 2>&1; then
+        echo "    pass"; write_state verifyResults.publishSmoke '"pass"'
     else
-        echo "    publish-smoke(dev): FAIL" >&2
-        GATE_STATUS=1
+        echo "    fail"; failed=1; write_state verifyResults.publishSmoke '"fail"'
     fi
 
-    # 4c. unit tests
-    echo "  4c. unit tests"
-    if dispatch_cmd "$WORKTREE_DIR" python tests/runner/test_driver.py --layer unit --quick; then
-        echo "    unit-tests: PASS"
+    # 3 unit
+    echo "  3/4 unit tests"
+    if [ "$DRY_RUN" -eq 1 ]; then echo "    [dry] unit"
+    elif dispatch_cmd python tests/runner/test_driver.py --layer unit --quick >/dev/null 2>&1; then
+        echo "    pass"; write_state verifyResults.unit '"pass"'
     else
-        echo "    unit-tests: FAIL" >&2
-        GATE_STATUS=1
+        echo "    fail (worktree may need test-projects built)"; failed=1; write_state verifyResults.unit '"fail"'
     fi
-fi
 
-if [ "$GATE_STATUS" -ne 0 ]; then
+    # 4 integrity
+    echo "  4/4 integrity"
+    if [ "$DRY_RUN" -eq 1 ]; then echo "    [dry] checksums+sbom"
+    else
+        local sdk_dir="$RC_ARTIFACTS_BASE/release/$ver"
+        mkdir -p "$sdk_dir"
+        if dispatch_cmd bash scripts/generate-checksums.sh "$sdk_dir" >/dev/null 2>&1 &&
+           dispatch_cmd bash scripts/generate-sbom.sh "$sdk_dir" "$ver" >/dev/null 2>&1; then
+            echo "    pass"; write_state verifyResults.integrity '"pass"'
+        else
+            echo "    fail"; failed=1; write_state verifyResults.integrity '"fail"'
+        fi
+    fi
+
+    if [ "$failed" -ne 0 ]; then
+        write_state phase '"verify"'; write_state phaseStatus '"failed"'; write_state verifyFailed true
+        echo ""
+        echo "!! verify FAILED. Run: ./scripts/release.sh fix --from-main  (after fixing on main)"
+        exit 1
+    fi
+    write_state phase '"verify"'; write_state phaseStatus '"pass"'; write_state verifyFailed false
     echo ""
-    echo "!! Verify gate FAILED. Release NOT published."
-    echo "   Run: ./scripts/release.sh ${NEW_VER} --abort  (clean up temp branch+lock)"
-    echo "   Then fix on main and re-run."
-    release_lock
-    exit 1
-fi
-echo "  verify gate: ALL PASSED"
+    echo "== verify ALL PASSED. Run: ./scripts/release.sh publish"
+}
 
-# ── Step 5: If --publish, publish. Else just report readiness ────────────────
-if [ "$DO_PUBLISH" -eq 0 ]; then
+# ── fix ──────────────────────────────────────────────────────────────────
+cmd_fix() {
+    local state; state=$(read_state)
+    local phaseStatus; phaseStatus=$(echo "$state" | state_get phaseStatus "$state")
+    local phase; phase=$(echo "$state" | state_get phase "$state")
+    local ver; ver=$(echo "$state" | state_get version "$state")
+    local branch; branch=$(echo "$state" | state_get snapshotBranch "$state")
+    [ "$phaseStatus" = "failed" ] || { echo "Error: verify did not fail. Nothing to fix." >&2; exit 1; }
+    [ -d "$WORKTREE_DIR" ] || { echo "Error: worktree not found" >&2; exit 1; }
+
+    echo "=== release fix (${ver}) ==="
+    local mode="shell"
+    for a in "$@"; do case "$a" in --from-main) mode="from-main";; esac; done
+
+    if [ "$mode" = "from-main" ]; then
+        echo "  Re-basing ${branch} on latest origin/main (fix synced to main is pulled in)."
+        git fetch origin main 2>&1 | tail -1 || true
+        local latest; latest=$(git rev-parse origin/main 2>/dev/null || echo "")
+        [ -n "$latest" ] || { echo "Error: cannot resolve origin/main" >&2; exit 1; }
+        git branch -D "$branch" 2>/dev/null || true
+        git branch "$branch" "$latest"
+        git worktree remove "$WORKTREE_DIR" --force 2>/dev/null || rm -rf "$WORKTREE_DIR"
+        git worktree add "$WORKTREE_DIR" "$branch" >/dev/null 2>&1
+        dispatch_cmd bash scripts/release_bump.sh "$ver" 2>&1 | tail -3
+        echo "  re-based worktree on origin/main @ ${latest:0:12}"
+    else
+        echo "  Editing worktree at ${WORKTREE_DIR}"
+        echo "  Apply fixes, commit (in worktree), push ${branch}; then run verify."
+        cd "$WORKTREE_DIR"
+        ${SHELL:-bash} -i || true
+        cd "$REPO_ROOT"
+    fi
+    write_state phase '"fix"'; write_state phaseStatus '"done"'; write_state verifyFailed false
+    echo "== fix done. Run: ./scripts/release.sh verify"
+}
+
+# ── publish ──────────────────────────────────────────────────────────────
+cmd_publish() {
+    local state; state=$(read_state)
+    local phaseStatus; phaseStatus=$(echo "$state" | state_get phaseStatus "$state")
+    local ver; ver=$(echo "$state" | state_get version "$state")
+    local tag; tag=$(echo "$state" | state_get tag "$state")
+    local branch; branch=$(echo "$state" | state_get snapshotBranch "$state")
+    [ "$phaseStatus" = "pass" ] || { echo "Error: verify not passed (${phaseStatus}). Run verify first." >&2; exit 1; }
+    [ -d "$WORKTREE_DIR" ] || { echo "Error: worktree not found" >&2; exit 1; }
+
+    echo "=== release publish ${ver} ==="
+    echo "[1/5] tag + push"
+    if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] tag/push ${tag} ${branch}"
+    else
+        dispatch_cmd git tag "$tag" 2>/dev/null || echo "  tag exists"
+        dispatch_cmd git push origin "$branch" 2>&1 | tail -1 || true
+        dispatch_cmd git push origin "$tag" 2>&1 | tail -1 || true
+        echo "  pushed"
+    fi
+
+    echo "[2/5] build nupkg + integrity"
+    if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] build-tool-package"
+    else
+        ( cd "$REPO_ROOT" && bash scripts/build-tool-package.sh "$ver" 2>&1 | tail -3 || true )
+        local sdk_dir="$RC_ARTIFACTS_BASE/release/$ver"
+        ( cd "$REPO_ROOT" && bash scripts/generate-checksums.sh "$sdk_dir" >/dev/null 2>&1 || true )
+        ( cd "$REPO_ROOT" && bash scripts/generate-sbom.sh "$sdk_dir" "$ver" >/dev/null 2>&1 || true )
+        echo "  artifacts ready"
+    fi
+
+    echo "[3/5] GitHub Release"
+    if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] gh release create ${tag}"
+    elif command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
+        local notes="$RC_ARTIFACTS_BASE/release/$ver/RELEASE_NOTES_${ver}.md"
+        ( cd "$REPO_ROOT" && bash scripts/generate-release-notes.sh "v0.1.0" "$tag" > "$notes" 2>/dev/null || true )
+        ( cd "$REPO_ROOT" && gh release create "$tag" --notes-file "$notes" --verify-tag 2>&1 | tail -3 ) || \
+            echo "  ⚠️  gh release create nonzero (CI will handle tag push)" >&2
+    else
+        echo "  gh not authenticated; tag pushed — CI release.yml will create Release."
+    fi
+
+    echo "[4/5] merge snapshot → main"
+    if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] merge ${branch} → main"
+    else
+        git checkout main 2>/dev/null || true
+        if ! git merge --ff-only "$branch" >/dev/null 2>&1; then
+            git merge --no-ff "$branch" -m "release(v${ver}): merge snapshot branch
+
+root_cause: main advanced beyond release snapshot during verify.
+fix_strategy: no-ff merge to incorporate the released commit.
+regression_check: release-governance + CI on main after merge."
+        fi
+        git push origin main 2>&1 | tail -1 || echo "  ⚠️  push main failed" >&2
+        echo "  merged + pushed main"
+    fi
+
+    echo "[5/5] cleanup"
+    if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] cleanup worktree/branch/state/lock"
+    else
+        git worktree remove "$WORKTREE_DIR" --force 2>/dev/null || rm -rf "$WORKTREE_DIR"
+        git branch -D "$branch" 2>/dev/null || true
+        rm -f "$STATE_FILE"
+        release_lock
+        echo "  cleaned"
+    fi
     echo ""
-    echo "== Verify passed for ${NEW_VER}. Ready to publish."
-    echo "   Run: ./scripts/release.sh ${NEW_VER} --publish"
+    echo "== Release ${ver} published."
+    echo "   Tag: ${tag}, Branch: ${branch} (merged to main)"
+}
+
+# ── abort ────────────────────────────────────────────────────────────────
+cmd_abort() {
+    echo "=== release abort ==="
+    local state; state=$(read_state)
+    local branch; branch=$(echo "$state" | state_get snapshotBranch "$state")
+    if [ -d "$WORKTREE_DIR" ]; then
+        [ "$DRY_RUN" -eq 1 ] && echo "  [dry] remove worktree" || { git worktree remove "$WORKTREE_DIR" --force 2>/dev/null || rm -rf "$WORKTREE_DIR"; echo "  removed worktree"; }
+    fi
+    if [ -n "$branch" ] && git rev-parse -q --verify "refs/heads/$branch" >/dev/null 2>&1; then
+        [ "$DRY_RUN" -eq 1 ] && echo "  [dry] delete ${branch}" || { git branch -D "$branch" >/dev/null 2>&1 || true; echo "  deleted ${branch}"; }
+    fi
+    rm -f "$STATE_FILE" 2>/dev/null
     release_lock
-    exit 0
-fi
+    echo "== abort complete."
+}
 
-# ── Step 5: Publish ───────────────────────────────────────────────────────────
-echo "[5/6] Publish ${TAG}"
-if [ "$DRY_RUN" -eq 1 ]; then
-    echo "  [dry] git tag v${NEW_VER}"
-    echo "  [dry] git push origin ${RELEASE_TAG_BRANCH}"
-    echo "  [dry] git push origin v${NEW_VER}"
-    echo "  [dry] gh release create v${NEW_VER} ..."
-    # Ensure lock not released in dry-run before placeholder.
-    release_lock
-    exit 0
-fi
+# ── status ───────────────────────────────────────────────────────────────
+cmd_status() {
+    [ -f "$STATE_FILE" ] || { echo "No active release state."; exit 0; }
+    "$PY" - "$STATE_FILE" <<'PYEOF'
+import json, sys
+d = json.load(open(sys.argv[1]))
+print("=== Release Status ===")
+for k in ("version","tag","snapshotBranch","phase","phaseStatus","createdAt","updatedAt"):
+    v = d.get(k)
+    sub = d.get('snapshotCommit')
+    label = k
+    if k == 'snapshotBranch' and sub: v = f"{v} @ {sub[:12]}"
+    print(f"  {label:16}: {v}")
+vr = d.get('verifyResults')
+if vr:
+    print("  Verify gates:")
+    for g, s in vr.items(): print(f"    {g:16}: {s}")
+PYEOF
+}
 
-# Publish actions run in the worktree (source of the snapshot).
-dispatch_cmd "$WORKTREE_DIR" bash -c '
-    set -e
-    git tag v"'"$NEW_VER"'" 2>/dev/null || echo "  tag exists"
-    git push origin "'"$RELEASE_TAG_BRANCH"'" 2>&1 | tail -1 || true
-    git push origin "v$NEW_VER" 2>&1 | tail -1 || true
-    echo "  pushed branch + tag"
-'
+# ── Main dispatch ────────────────────────────────────────────────────────
+DRY_RUN=0
+SUBCOMMAND=""; SUBARGS=()
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --dry-run) DRY_RUN=1; shift ;;
+        --help|-h) show_usage; exit 0 ;;
+        init|verify|fix|publish|abort|status) SUBCOMMAND="$1"; shift; SUBARGS=("$@"); break ;;
+        *) echo "Error: unknown subcommand '$1'" >&2; show_usage >&2; exit 2 ;;
+    esac
+done
+[ -n "$SUBCOMMAND" ] || { show_usage >&2; exit 2; }
 
-# Create GitHub Release (run in worktree so it can read the SDK).
-dispatch_cmd "$WORKTREE_DIR" bash scripts/build-tool-package.sh "$NEW_VER" 2>&1 | tail -4 || true
-dispatch_cmd "$WORKTREE_DIR" bash scripts/generate-checksums.sh "artifacts/release/$NEW_VER" 2>&1 | tail -1 || true
-dispatch_cmd "$WORKTREE_DIR" bash scripts/generate-sbom.sh "artifacts/release/$NEW_VER" "$NEW_VER" 2>&1 | tail -1 || true
-dispatch_cmd "$WORKTREE_DIR" bash scripts/generate-release-notes.sh v0.1.0 "v$NEW_VER" > "artifacts/release/$NEW_VER/RELEASE_NOTES_${NEW_VER}.md" 2>/dev/null || true
-
-# gh release (if authenticated)
-if command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
-    dispatch_cmd "$WORKTREE_DIR" gh release create "$TAG" \
-        --notes-file "artifacts/release/$NEW_VER/RELEASE_NOTES_${NEW_VER}.md" \
-        --verify-tag 2>&1 | tail -3 || echo "  ⚠️  gh release create returned nonzero" >&2
-else
-    echo "  gh not authenticated; GitHub Release not created (CI will handle)."
-    echo "  Tag v$NEW_VER already pushed — release.yml will build + Release on push."
-fi
-
-# ── Step 6: Merge snapshot back to main + cleanup ─────────────────────────────
-echo "[6/6] Merge snapshot → main + cleanup"
-if [ "$DRY_RUN" -eq 0 ] && [ "$PUSH" -eq 1 ]; then
-    # Merge the snapshot branch into main (fast-forward if possible).
-    git checkout main 2>/dev/null || true
-    git merge --ff-only "$RELEASE_TAG_BRANCH" 2>&1 | tail -1 || {
-        echo "  (snapshot not ff of main — publishing to a branch that diverged from main)"
-        git merge --no-ff "$RELEASE_TAG_BRANCH" -m "release(v$NEW_VER): merge snapshot branch
-
-        root_cause: main advanced beyond the release snapshot during verify.
-        fix_strategy: no-ff merge to incorporate the released commit.
-        regression_check: release-governance + CI on main after merge."
-    }
-    git push origin main 2>&1 | tail -1 || echo "  ⚠️  push main failed" >&2
-fi
-
-# Cleanup worktree + temp branch + release lock.
-if [ "$DRY_RUN" -eq 0 ]; then
-    git worktree remove "$WORKTREE_DIR" --force 2>/dev/null || rm -rf "$WORKTREE_DIR"
-    git branch -D "$RELEASE_TAG_BRANCH" 2>/dev/null || true
-fi
-release_lock
-
-echo ""
-echo "== Release ${NEW_VER} complete."
-echo "   Tag    : ${TAG}"
-echo "   Branch : ${RELEASE_TAG_BRANCH} (merged to main)"
-exit 0
+case "$SUBCOMMAND" in
+    init) cmd_init "${SUBARGS[0]:-}" ;;
+    verify) cmd_verify ;;
+    fix) cmd_fix "${SUBARGS[@]:-}" ;;
+    publish) cmd_publish ;;
+    abort) cmd_abort ;;
+    status) cmd_status ;;
+esac
