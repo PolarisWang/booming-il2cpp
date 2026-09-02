@@ -6,9 +6,15 @@
 // repeated here — repeating them inside the interpreter namespace would nest their
 // `chaos::il2cpp::runtime_core` declarations incorrectly.
 
+// GCC/Clang: suppress -Wparentheses for Reg_StInd's `if (is_gc) { barrier; } else { ... }` pattern.
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wparentheses"
+#endif
+
 // ── LdSFld / StSFld: static field access ───────────────────────────────
 // g_static_fields is defined in interpreter_vm.cpp at namespace scope.
-extern CHAOS_IL2CPP_VECTOR(chaos::il2cpp::interpreter::InterpreterValue) g_static_fields;
+extern CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
 
 static void Reg_LdSFld(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdSFld");
