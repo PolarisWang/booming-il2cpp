@@ -18,14 +18,10 @@
 // native-aot.generated.cpp starts with #include "chaos_pch.h" -> <coroutine> ->
 // <exception> which does `using ::terminate;` and would fail without ::terminate.
 // native_types.h's _INC_CRT_TERMINATE guard prevents CRT extern "C" conflict.
+// We include <corecrt_terminate.h> directly so the CRT's own declarations with
+// C linkage are used, avoiding C2375 linkage contradiction.
 #ifdef _MSC_VER
-#  ifndef _INC_CRT_TERMINATE
-#    define _INC_CRT_TERMINATE 1
-__declspec(noreturn) void __cdecl terminate() throw();
-typedef void (__cdecl* terminate_handler)();
-terminate_handler __cdecl set_terminate(terminate_handler) throw();
-terminate_handler __cdecl _get_terminate() throw();
-#  endif
+#include <corecrt_terminate.h>
 #endif
 
 // ── Standard C/C++ headers (needed by all generated files) ─────────
