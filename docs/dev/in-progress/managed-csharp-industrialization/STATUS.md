@@ -14,7 +14,7 @@ native C++ 工业化（archive/dev-completed/17-native-industrialization）
 | Phase | 内容 | 状态 |
 |-------|------|:----:|
 | M-A | dotnet format style CI gate + .editorconfig | ✅ 提交 13c252936 |
-| M-B | Roslyn analyzers CI 门禁 | ⏳ 待做 |
+| M-B | Roslyn analyzers（启用 + 修 CS8602，CI 硬门禁**未接线**） | 🟡 部分（6037c9cd9）|
 | M-C | 拆分 7 个超大 C# 文件 (partial class) | ⏳ 待做 |
 | M-D | C# 覆盖率硬门禁 | ⏳ 待做 |
 | M-E | Scriban 模板审查规范 | ⏳ 待做 |
@@ -37,10 +37,16 @@ native C++ 工业化（archive/dev-completed/17-native-industrialization）
 ## 关键文档
 - 评估: `docs/dev/assessments/managed-csharp-industrialization-eval.md`
 
-## M-B 完成 (6037c9cd9) + M-C 评估
+## M-B 部分完成 (6037c9cd9) + M-C 评估
 - ✅ Directory.Build.props: EnableNETAnalyzers + AnalysisLevel=latest
 - ✅ 修复 CS8602: ExceptionEmission.Helpers + StructuredIR.Emit (#pragma,
    ThreadLocal 工厂初始化假阳性) + AsmCompareHandler (真实 null,加检查)
+- ⚠️ **known gap (诚实, 对标 M-A)**: M-B 定义的"Roslyn analyzers **CI 门禁**"仅完成
+  前一半 —— analyzers 已启用并修复了存量 CS8602, 但**尚未接线 CI enforcement 环节**
+  (无 TreatWarningsAsErrors / WarningsAsErrors, 无类似 M-A `managed-csharp-style.yml`
+  的独立 workflow 把 analyzer 违规转红门). 当前分析器违规只作为本地 build warning 出现,
+   不 red CI. 需后续补: Directory.Build.props 加 `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>`
+   或独立 analyzer-gate workflow (增量 on changed .cs, 不 rewrite 存量). 未补前不应视 M-B 已闭环.
 - 🔍 M-C codegen 文件评估: 4/7 已是 partial class NativeAotLoweringPlanner
    的一部分(方法45-146/文件), 拆单个2000行partial文件需codegen domain
    判断, 收益低(已职责导向partial)风险高(破坏AOT输出). 建议由专职

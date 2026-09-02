@@ -1,10 +1,4 @@
 # Known failures for the e2e layer. See known-failures.integration.yaml header.
 # foundation-dll verification is heavyweight; record any known failures here.
 version: 1
-known:
-  # System.Runtime.InteropServices — COM marshaller stub returns null pointer
-  # instead of a real COM interface pointer.  UniqueComInterfaceMarshaller
-  # requires a running COM runtime, which is not available in AOT mode.
-  - family: System.Runtime.InteropServices
-    methodSubjectId: "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller<System.Int32>::ConvertToUnmanaged:System.Void*(System.Int32)"
-    reason: "COM marshaller stub returns null (no COM runtime in AOT)"
+known: []

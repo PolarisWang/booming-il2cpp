@@ -76,6 +76,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     # the agent-facing report can map a signal back to a concrete method, instead
     # of discarding per-method identity (which made dashboard un-actionable).
     per_method_rows: list[dict] = []
+    total_benchmarked = 0  # init before loop (fix #2: UnboundLocalError guard)
 
     for slug in chunk_slugs:
         chunk_dir = chunks_dir / slug
@@ -123,11 +124,38 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 "methodCount": benchmark_method_count,
                 "methodsWithNet8": benchmark_with_net8,
             }
+            # Extract aggregate perf metrics from the JSONL per-method records.
+            # Each tech_map value is {technology: record} — pull chaos-aot
+            # elapsedMilliseconds across all methods for the chunk-level summary.
+            chaos_msecs: list[float] = []
+            chaos_ops: list[float] = []
+            for msid, techs in tech_map.items():
+                for tech, rec in techs.items():
+                    if tech != "chaos-aot":
+                        continue
+                    m = (rec.get("metrics") or {}).get("elapsedMilliseconds", 0) or 0
+                    o = (rec.get("metrics") or {}).get("opsPerSecond", 0) or 0
+                    if m > 0:
+                        chaos_msecs.append(m)
+                    if o > 0:
+                        chaos_ops.append(o)
+            if chaos_msecs:
+                chunk_benchmark["meanDurationMs"] = sum(chaos_msecs) / len(chaos_msecs)
+                chunk_benchmark["minDurationMs"] = min(chaos_msecs)
+                chunk_benchmark["maxDurationMs"] = max(chaos_msecs)
+                chunk_benchmark["totalDurationMs"] = sum(chaos_msecs)
+            if chaos_ops:
+                chunk_benchmark["meanOpsPerSecond"] = sum(chaos_ops) / len(chaos_ops)
+            # NOTE: CV and outlier counts are not available at the JSONL chunk
+            # level (they are per-method fields in the stats section, not in the
+            # per-method JSONL records).  Aggregate via the legacy benchmark.json
+            # fallback, or accept that JSONL path has no CV/outlier summary.
             summary["benchmark"] = chunk_benchmark
             all_benchmark.append({
                 "chunk": slug,
                 "methodCount": benchmark_method_count,
             })
+            total_benchmarked += benchmark_method_count
         else:
             # Fallback to legacy AOT-only benchmark.json when JSONL not available
             bench_path = results_dir / "benchmark.json"

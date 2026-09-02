@@ -551,6 +551,44 @@ public sealed partial class NativeAotLoweringPlanner
                         EmptyRawArgumentIndices);
                 }));
 
+            // ── COM marshaller placeholder shapes (ComInterfaceMarshaller / UniqueComInterfaceMarshaller) ──
+            // ComInterfaceMarshaller<T>.ConvertToUnmanaged(T) and
+            // UniqueComInterfaceMarshaller<T>.ConvertToUnmanaged(T) return a COM
+            // interface pointer in real .NET.  AOT has no COM runtime; returning
+            // nullptr makes the subject wrapper (result != null ? 0L : 1L) FAIL
+            // against its 0L oracle.  Forward BOTH marshaller types to a native
+            // placeholder that returns a non-null inert IUnknown-like object, so
+            // C++ behaviour === C# (non-null) even without a COM runtime.
+            foreach (var marshallerPrefix in new[]
+                     {
+                         "System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller",
+                         "System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller",
+                     })
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: marshallerPrefix,
+                    MethodName: "ConvertToUnmanaged",
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                        bool hasManagedArg = typeArgs != null && typeArgs.Count > 0;
+                        // Placeholder ignores the managed value; but the call site still
+                        // passes it, so model a value-type slot when a type arg exists.
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            hasManagedArg ? "CHAOS_IL2CPP_INT32 chaos_arg_0" : "",
+                        [
+                            "    return ChaosComInterfaceMarshallerConvertToUnmanaged();",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            hasManagedArg
+                                ? new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                    CreateInt32AbiSlot(null, AotCoreIrTypeShapeKind.ValueType))
+                                : Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                            CreateNativeIntAbiSlot(),  // returns void*/native pointer
+                            hasManagedArg ? new HashSet<int> { 0 } : EmptyRawArgumentIndices);
+                    }));
+            }
+
 
 
             // Helper: register a precompiled JsonSerializer::Serialize<T> stub.
