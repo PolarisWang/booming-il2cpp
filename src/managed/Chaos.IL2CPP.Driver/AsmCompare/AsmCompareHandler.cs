@@ -324,7 +324,7 @@ internal static class AsmCompareHandler
             var content = source.Contents;
 
             var symbol = method.NativeSymbol;
-            if (!string.IsNullOrEmpty(symbol) && content.Contains(symbol))
+            if (!string.IsNullOrEmpty(symbol) && !string.IsNullOrEmpty(content) && content.Contains(symbol))
             {
                 var extracted = ExtractFunctionContent(content, symbol);
                 sb.AppendLine(extracted);

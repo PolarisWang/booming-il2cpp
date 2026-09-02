@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading;
 using Chaos.IL2CPP.Contracts;
 
+// _state is ThreadLocal<PerMethodState> with a factory initializer.  Never null at runtime.
+#pragma warning disable CS8602
+
 namespace Chaos.IL2CPP.Generator;
 
 public sealed partial class NativeAotLoweringPlanner

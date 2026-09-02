@@ -13,6 +13,11 @@ using System.Text;
 using System.Text.Json;
 using Chaos.IL2CPP.Contracts;
 
+// _state is ThreadLocal<PerMethodState> with a factory initializer (see ExceptionEmission.cs L21),
+// so it is never null at runtime.  The nullable analyzer cannot prove this across partial class
+// files, so suppress CS8602 (Dereference of possibly null reference) for _state.Value! accesses.
+#pragma warning disable CS8602
+
 namespace Chaos.IL2CPP.Generator;
 
 public sealed partial class NativeAotLoweringPlanner

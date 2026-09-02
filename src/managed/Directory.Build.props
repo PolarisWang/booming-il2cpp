@@ -10,5 +10,9 @@
     <!-- P0.1: single source of the managed package version (SemVer). Bump here
          on every tagged release; individual csproj may override. -->
     <Version>0.1.1</Version>
+    <!-- M-B industrial: Roslyn analyzers (recommended set; verified 0 new
+         CA warnings on Generator).  Enforces IDE0005/CA rules going forward. -->
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 </Project>
