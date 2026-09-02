@@ -13,17 +13,9 @@
 // function ::terminate to be declared before that point. ::terminate is declared
 // in corecrt_terminate.h (Windows Kits ucrt), pulled via
 //   <exception> → <vcruntime_exception.h> → <eh.h> → <corecrt_terminate.h>
-// When chaos headers pull in <exception> from inside an extern "C" block (via
-// stubs.h → threading_stubs.h → <thread> → <exception>), the MSVC compiler's own
-// <eh.h> (not the Kits ucrt one) is resolved first, which does NOT include
-// corecrt_terminate.h.  Result: ::terminate is never declared, and <exception>'s
-// `using ::terminate;` produces C2039.
-//
-// Fix: include <corecrt_terminate.h> directly (via its Windows Kits ucrt path)
-// before any extern "C" block that would pull in <exception>.  This ensures
-// ::terminate is declared with C linkage (matching the CRT's own declaration),
-// avoiding C2732 linkage-specification contradictions.
-#if defined(_MSC_VER) && !defined(_INC_CRT_TERMINATE)
+// Use C linkage (matching CRT) so no C2375/C2732 linkage contradiction fires
+// when the CRT's own header is later pulled in by <vcruntime_exception.h>.
+#if defined(_MSC_VER)
 #include <corecrt_terminate.h>
 #endif
 

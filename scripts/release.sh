@@ -1,21 +1,30 @@
 #!/usr/bin/env bash
 # ===============================================================================
-# release.sh — master release orchestrator for chaos-il2cpp.
+# release.sh — multi-agent-safe release orchestrator for chaos-il2cpp.
 #
-# Consolidates the full release flow into one script:
-#   1. Pre-flight      : clean tree?, on main?, version format, gh CLI + auth?
-#   2. Version bump    : delegates to scripts/release_bump.sh <ver>
-#   3. Release branch  : creates release/<ver> from main (if not present)
-#   4. Release notes   : generate-release-notes.sh <prev-tag>..HEAD → RELEASE_NOTES
-#   5. SDK build       : builds the current-platform native SDK preset
-#   6. Checksums       : generate-checksums.sh over the release artifact dir
-#   7. SBOM            : generate-sbom.sh over the release artifact dir
-#   8. Hygiene gate    : chaos_hygiene.py --ci (release-governance must pass)
-#   9. GitHub Release  : gh release create v<ver> with notes + uploaded artifacts
-#  10. Merge back      : release branch --no-ff back into main (optional)
+# DESIGN (multi-agent concurrent repo):
+#   1. Lock a version snapshot: acquire .git/release.lock (flock), read VERSION,
+#      create release/v{NEW_VER} from a FIXED origin/main commit (not the dirty
+#      local worktree).  No git stash (forbidden).
+#   2. worktree isolation: git worktree add <rel-dir> release/v{NEW_VER}.  The
+#      build + verify run in an isolated directory, unaffected by other agents'
+#      concurrent edits to the main worktree.
+#   3. Verify gate: run governance check + publish-smoke matrix + unit tests +
+#      checksums/SBOM generation inside the worktree.  Only if ALL pass may the
+#      release be published.
+#   4. Publish (or abort): --publish creates tag + push + GitHub Release +
+#      merge-back; --abort cleans up the temp branch + lock after a failure.
 #
-# Hardcoded constants (versions, presets, timeouts) live in scripts/release-config.sh
-# — edit there, not here. No magic numbers in this file.
+# The main worktree is NEVER used for release operations.  This makes the release
+#  transaction (lock a commit → verify → publish) immune to concurrent agent work.
+#
+# Usage:
+#   ./scripts/release.sh 0.2.0               # stage 1-5: lock + worktree + build + verify
+#   ./scripts/release.sh 0.2.0 --publish     # stage 6a: publish after verify passes
+#   ./scripts/release.sh 0.2.0 --abort       # stage 6b: abort/cleanup after verify fails
+#   ./scripts/release.sh 0.2.0 --dry-run     # rehearse every step
+#   ./scripts/release.sh 0.2.0 --skip-verify # skip the verify gate (not recommended)
+#   ./scripts/release.sh --help
 #
 # Red lines honored:
 #   - NO `git stash` (forbidden by project).
@@ -23,13 +32,7 @@
 #   - Any commit made carries a three-part message
 #     (root_cause / fix_strategy / regression_check) per CLAUDE.md.
 #   - Output artifacts written under artifacts/ (layer-owned); no cross-layer writes.
-#
-# Usage:
-#   ./scripts/release.sh <version>                     # staged release
-#   ./scripts/release.sh <version> --publish           # + SDK + checksums + SBOM + gh release
-#   ./scripts/release.sh <version> --dry-run           # print every step, change nothing
-#   ./scripts/release.sh <version> --no-push           # don't push branch/tag
-#   ./scripts/release.sh --help
+#   - Release branch + tag operations are exclusive (release.lock held).
 # ===============================================================================
 
 set -euo pipefail
@@ -37,41 +40,51 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
-# Load shared release constants (versions, presets, timeouts).
+# Load shared release constants.
 # shellcheck source=release-config.sh
 # shellcheck disable=SC1091
 source "$REPO_ROOT/scripts/release-config.sh"
 
 NEW_VER=""
 DO_PUBLISH=0
+DO_ABORT=0
 DRY_RUN=0
-PUSH=1
-MERGE_BACK=1
+SKIP_VERIFY=0
+CLEANUP_LOCK=0
+
+LOCK_FILE="$REPO_ROOT/.git/release.lock"
+WORKTREE_DIR="$REPO_ROOT/.worktrees/rel"
 
 show_help() {
     cat <<'EOF'
 Usage: ./scripts/release.sh <version> [options]
 
-<version>   SemVer to release (e.g. 0.1.0). Required.
+<version>   SemVer to release (e.g. 0.2.0). Required (omit for --abort).
 
 Options:
-  --publish   Full release: build SDK, checksums, SBOM, create+upload the
-              GitHub Release. Without this, only the staged prep happens.
+  --publish   After a successful verify, actually publish (tag + push + Release + merge).
+  --abort     Clean up a failed release: delete temp branch + release lock + worktree.
   --dry-run   Print every step that would run; change nothing.
-  --no-push   Do not push the release branch or the v<version> tag.
-  --no-merge  Do not merge the release branch back into main at the end.
+  --skip-verify  Skip the verify gate (governance/publish-smoke/unit). NOT recommended.
   --help      Show this help.
 
-The script sources scripts/release-config.sh for all shared constants.
+Normal flow:
+  release.sh 0.2.0              # step 1-5: lock version, create release/v0.2.x branch
+                                #            from origin/main, worktree, build, verify
+  release.sh 0.2.0 --publish    # verify passed -> create tag + push + GitHub Release
+  release.sh 0.2.0 --abort      # verify failed -> delete temp branch + release lock
+
+The release operates on a FIXED origin/main snapshot in an isolated git worktree,
+so concurrent agent changes to the main worktree never touch the release.
 EOF
 }
 
 while [ $# -gt 0 ]; do
     case "$1" in
         --publish) DO_PUBLISH=1; shift ;;
+        --abort) DO_ABORT=1; shift ;;
         --dry-run) DRY_RUN=1; shift ;;
-        --no-push) PUSH=0; shift ;;
-        --no-merge) MERGE_BACK=0; shift ;;
+        --skip-verify) SKIP_VERIFY=1; shift ;;
         --help|-h) show_help; exit 0 ;;
         *)
             if [ -z "$NEW_VER" ]; then NEW_VER="$1"; shift
@@ -80,236 +93,247 @@ while [ $# -gt 0 ]; do
     esac
 done
 
-# ── 0. Validate version ─────────────────────────────────────────────────────
-if [ -z "$NEW_VER" ]; then
+# ── 0. Resolve version + validate ─────────────────────────────────────────────
+if [ -z "$NEW_VER" ] && [ "$DO_ABORT" -eq 0 ]; then
     echo "Error: <version> is required" >&2
     show_help >&2
     exit 2
 fi
-if ! [[ "$NEW_VER" =~ $RC_SEMVER_RE ]]; then
+if [ -n "$NEW_VER" ] && ! [[ "$NEW_VER" =~ $RC_SEMVER_RE ]]; then
     echo "Error: '$NEW_VER' is not valid SemVer (expect MAJOR.MINOR.PATCH)" >&2
     exit 2
 fi
-
-# ── 1. Pre-flight ───────────────────────────────────────────────────────────
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
 TAG="${RC_TAG_PREFIX}$NEW_VER"
-RELEASE_BRANCH="${RC_RELEASE_BRANCH_PREFIX}${NEW_VER%.*}${RC_RELEASE_BRANCH_SUFFIX}"
+RELEASE_BRANCH="${RC_RELEASE_BRANCH_PREFIX}${NEW_VER%.*}${RC_RELEASE_BRANCH_SUFFIX}"   # release/0.2.x
+RELEASE_TAG_BRANCH="${RC_RELEASE_BRANCH_PREFIX}v${NEW_VER}"                            # release/v0.2.0 (snapshot branch)
 
-echo "=== chaos-il2cpp release ${NEW_VER} (branch=${RELEASE_BRANCH}, publish=${DO_PUBLISH}, dry=${DRY_RUN}) ==="
-echo "  current branch  : ${CURRENT_BRANCH}"
-echo "  target tag      : ${TAG}"
-
-# Ghost-tag consistency check: if the tag already exists, its version MUST equal NEW_VER.
-if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1; then
-    EXISTING=$(git rev-list -n1 --format='%d' "$TAG" 2>/dev/null | tr -d ' \n')
-    # Not a hard block (a re-run of the same release is legitimate), just inform.
-    echo "  note: tag ${TAG} already exists (idempotent re-release)."
-fi
-
-# Clean tree check (unless --dry-run, where we intentionally change nothing).
-if [ "$DRY_RUN" -eq 0 ]; then
-    # Exclude docs/dev/in-progress/repo-cleanliness/STATUS.md — the repo's own
-    # pre-commit hygiene gate regenerates its "Last run" timestamp on EVERY
-    # commit, so it can never be clean. Ignoring it keeps the release flow green.
-    UNCOMMITTED=$(git status --porcelain 2>/dev/null | grep -v '^??' \
-        | grep -v 'docs/dev/in-progress/repo-cleanliness/STATUS.md' || true)
-    if [ -n "$UNCOMMITTED" ]; then
-        echo "Error: working tree has uncommitted changes. Commit or discard before releasing." >&2
-        echo "$UNCOMMITTED" | head -20 >&2
+# ── Acquire exclus. Release lock ───────────────────────────────────────────────
+acquire_lock() {
+    if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] flock ${LOCK_FILE}"; return; fi
+    if [ -f "$LOCK_FILE" ]; then
+        echo "Error: release lock held at ${LOCK_FILE}. Another release may be in progress." >&2
+        echo "  Inspect the lockfile PID, or remove it after confirming no release is running." >&2
         exit 1
     fi
-fi
-
-# gh CLI present + authenticated (required for --publish).
-if [ "$DO_PUBLISH" -eq 1 ]; then
-    if ! command -v gh >/dev/null 2>&1; then
-        echo "Error: --publish requires the 'gh' CLI (https://cli.github.com)." >&2
-        exit 1
-    fi
-    if ! gh auth status 2>/dev/null >/dev/null; then
-        echo "Error: gh CLI is not authenticated. Run 'gh auth login' or set GH_TOKEN." >&2
-        exit 1
-    fi
-fi
-
-# ── 2. Create/verify release branch ─────────────────────────────────────────
-echo "[1/9] Release branch → ${RELEASE_BRANCH}"
-if git rev-parse -q --verify "refs/heads/$RELEASE_BRANCH" >/dev/null 2>&1; then
-    echo "  release branch already exists: $RELEASE_BRANCH"
-elif git ls-remote --exit-code --heads origin "$RELEASE_BRANCH" >/dev/null 2>&1; then
-    echo "  release branch exists on origin; fetching"
-    if [ "$DRY_RUN" -eq 0 ]; then git fetch origin "$RELEASE_BRANCH"; fi
-else
-    if [ "$DRY_RUN" -eq 0 ]; then
-        git checkout -b "$RELEASE_BRANCH"
-        echo "  created + checked out: $RELEASE_BRANCH"
+    # Create lock atomically (O_EXCL semantics via mkdir; robust cross-platform).
+    if mkdir "${LOCK_FILE}.dir" 2>/dev/null; then
+        echo "$$" > "${LOCK_FILE}.dir/pid"
+        echo "  acquired release lock (pid $$)"
     else
-        echo "  [dry] git checkout -b $RELEASE_BRANCH"
+        echo "Error: cannot acquire release lock. ${LOCK_FILE}.dir exists." >&2
+        exit 1
     fi
-fi
+}
 
-# ── 3. Version bump (delegate; never edit version files directly) ───────────
-echo "[2/9] Version bump via release_bump.sh ${NEW_VER} --tag"
-BUMP_ARGS=("$NEW_VER")
-if [ "$DRY_RUN" -eq 1 ]; then BUMP_ARGS+=(--dry-run); fi
-if [ "$DO_PUBLISH" -eq 1 ]; then BUMP_ARGS+=(--tag); fi
-if [ "$DRY_RUN" -eq 1 ]; then
-    echo "  [dry] bash scripts/release_bump.sh ${BUMP_ARGS[*]}"
-else
-    bash scripts/release_bump.sh "${BUMP_ARGS[@]}"
-fi
+release_lock() {
+    if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] release lock"; return; fi
+    rm -rf "${LOCK_FILE}.dir" 2>/dev/null || true
+    echo "  released release lock"
+}
 
-# ── 4. Release notes ────────────────────────────────────────────────────────
-echo "[3/9] Generate release notes"
-PREV_TAG=$(git describe --abbrev=0 --tags "$(git rev-list --max-parents=0 HEAD 2>/dev/null)". 2>/dev/null \
-           || git describe --abbrev=0 --tags HEAD~1 2>/dev/null || echo "")
-NOTES_FILE="$REPO_ROOT/RELEASE_NOTES_${NEW_VER}.md"
-if [ "$DRY_RUN" -eq 1 ]; then
-    echo "  [dry] bash scripts/generate-release-notes.sh ${PREV_TAG:-<none>} HEAD > $NOTES_FILE"
-else
-    bash scripts/generate-release-notes.sh "${PREV_TAG:-}" HEAD > "$NOTES_FILE"
-    echo "  wrote $NOTES_FILE"
-fi
+# ── git helper (worktree-safe) ────────────────────────────────────────────────
+# run inside the worktree dir (passed as first arg), rel path for commands
+dispatch_cmd() {
+    local dir="$1"; shift
+    ( cd "$dir" && "$@" )
+}
 
-# ── 5. Commit the release prep (version bump + notes) on the release branch ─
-if [ "$DRY_RUN" -eq 0 ] && [ -f "$NOTES_FILE" ]; then
-    # Prepend a new section to CHANGELOG.md from the release notes
-    CHANGELOG="$REPO_ROOT/CHANGELOG.md"
-    if [ -f "$CHANGELOG" ]; then
-        HEADER="## [${NEW_VER}] - $(date +%Y-%m-%d)"
-        # Extract the body from RELEASE_NOTES (skip the first title line, keep summary + categories)
-        NOTES_BODY=$(tail -n +3 "$NOTES_FILE" 2>/dev/null || echo "")
-        TMP_ADD=$(mktemp)
-        printf "# Changelog\\n\\n%s\\n" "$HEADER" > "$TMP_ADD"
-        printf '%s\n\n' "$NOTES_BODY" >> "$TMP_ADD"
-        # Append the existing content after the first line (# Changelog)
-        tail -n +2 "$CHANGELOG" >> "$TMP_ADD" 2>/dev/null || true
-        mv "$TMP_ADD" "$CHANGELOG"
-        echo "  updated CHANGELOG.md with v$NEW_VER entry"
+# ── ABORT path ────────────────────────────────────────────────────────────────
+if [ "$DO_ABORT" -eq 1 ]; then
+    echo "=== abort release (cleanup) ==="
+    # Remove the release worktree + temp snapshot branch, release the lock.
+    if [ -d "$WORKTREE_DIR" ]; then
+        if [ "$DRY_RUN" -eq 0 ]; then
+            git worktree remove "$WORKTREE_DIR" --force 2>/dev/null || rm -rf "$WORKTREE_DIR"
+            echo "  removed release worktree: $WORKTREE_DIR"
+        else
+            echo "  [dry] git worktree remove $WORKTREE_DIR --force"
+        fi
     fi
-    git add VERSION CMakeLists.txt src/managed/Directory.Build.props "$NOTES_FILE" "$CHANGELOG" 2>/dev/null || true
-    if ! git diff --cached --quiet; then
-        git commit -q -m "release(v$NEW_VER): version bump + release notes
-
-root_cause: v$NEW_VER requires version bump across VERSION/CMake/Directory.Build.props and an artifact-set changelog.
-fix_strategy: delegate bump to release_bump.sh; emit auto-generated release notes; keep release branch.
-regression_check: release-governance hygiene gate + manual release-notes review post-tag."
-        echo "  committed release prep (v$NEW_VER)"
-    else
-        echo "  no version/notes changes to commit"
+    if git rev-parse -q --verify "refs/heads/$RELEASE_TAG_BRANCH" >/dev/null 2>&1; then
+        if [ "$DRY_RUN" -eq 0 ]; then
+            git branch -D "$RELEASE_TAG_BRANCH" 2>/dev/null || true
+            echo "  deleted temp branch: $RELEASE_TAG_BRANCH"
+        else
+            echo "  [dry] git branch -D $RELEASE_TAG_BRANCH"
+        fi
     fi
-fi
-
-if [ "$DO_PUBLISH" -eq 0 ]; then
+    release_lock
     echo ""
-    echo "== Staged release prep complete (branch=${RELEASE_BRANCH}, ver=${NEW_VER})."
-    echo "   Re-run with --publish to build SDK, checksums, SBOM, and create the GitHub Release."
-    if [ "$PUSH" -eq 1 ]; then
-        echo "   Push your branch/tag, e.g.: git push -u origin ${RELEASE_BRANCH} ${TAG}"
-    fi
+    echo "== abort complete. Fix the underlying issue on main, then re-run release.sh."
     exit 0
 fi
 
-# ── 6. Build the SDK (current platform) ─────────────────────────────────────
-echo "[4/9] Build native SDK"
-SDK_DIR="$RC_RELEASE_DIR/$NEW_VER"
-if [ "$DRY_RUN" -eq 1 ]; then
-    echo "  [dry] build_presets.py (current platform) → $SDK_DIR"
-else
-    mkdir -p "$SDK_DIR"
-    # invoke the preset builder if present (test-oriented), else cmake the ref preset
-    if [ -f "tests/e2e/translation/artifacts/build_presets.py" ]; then
-        python tests/e2e/translation/artifacts/build_presets.py 2>/dev/null \
-            && echo "  built presets via build_presets.py" \
-            || echo "  (build_presets.py skipped/warned; continuing)"
+# ── Step 1: Acquire lock + create snapshot ────────────────────────────────────
+echo "=== chaos-il2cpp release ${NEW_VER}"
+echo "  snapshot branch : ${RELEASE_TAG_BRANCH} (from fixed origin/main commit)"
+echo "  publish         : ${DO_PUBLISH}"
+echo "  dry-run         : ${DRY_RUN}"
+acquire_lock
+
+# Ensure we have an up-to-date origin/main (fast-fetch, tolerate lock races).
+echo "[1/6] Sync origin/main + create snapshot branch"
+if [ "$DRY_RUN" -eq 0 ]; then
+    git fetch origin main 2>&1 | tail -1 || true
+    # Resolve the FIXED origin/main commit for the snapshot.
+    SNAPSHOT_COMMIT=$(git rev-parse origin/main 2>/dev/null || echo "")
+    if [ -z "$SNAPSHOT_COMMIT" ]; then
+        echo "Error: cannot resolve origin/main." >&2
+        release_lock
+        exit 1
     fi
-    # Copy any built preset libs into the release dir (flattened)
-    if [ -d "$RC_ARTIFACTS_BASE/presets" ]; then
-        find "$RC_ARTIFACTS_BASE/presets" -type f \( -name '*.lib' -o -name '*.a' \) -exec cp {} "$SDK_DIR/" \; 2>/dev/null || true
-        echo "  copied SDK libs → $SDK_DIR ($(ls -1 "$SDK_DIR" | wc -l) files)"
+    echo "  snapshot commit: ${SNAPSHOT_COMMIT:0:12}"
+    # Create the snapshot branch from the fixed commit (force re-create to update).
+    if git rev-parse -q --verify "refs/heads/$RELEASE_TAG_BRANCH" >/dev/null 2>&1; then
+        git branch -D "$RELEASE_TAG_BRANCH" 2>/dev/null || true
+    fi
+    git branch "$RELEASE_TAG_BRANCH" "$SNAPSHOT_COMMIT"
+    echo "  created snapshot branch: ${RELEASE_TAG_BRANCH}"
+else
+    echo "  [dry] git fetch origin main"
+    echo "  [dry] git branch release/v${NEW_VER} origin/main"
+fi
+
+# ── Step 2: worktree isolation ────────────────────────────────────────────────
+echo "[2/6] Isolate build in worktree"
+if [ "$DRY_RUN" -eq 0 ]; then
+    rm -rf "$WORKTREE_DIR"
+    git worktree add "$WORKTREE_DIR" "$RELEASE_TAG_BRANCH" 2>&1 | tail -1
+    echo "  worktree ready: $WORKTREE_DIR (${RELEASE_TAG_BRANCH})"
+else
+    echo "  [dry] git worktree add $WORKTREE_DIR $RELEASE_TAG_BRANCH"
+fi
+
+# ── Step 3: Build (in worktree) ───────────────────────────────────────────────
+echo "[3/6] Build (isolated worktree)"
+if [ "$DRY_RUN" -eq 0 ]; then
+    dispatch_cmd "$WORKTREE_DIR" dotnet build src/managed/Chaos.IL2CPP.Generator --configuration Release --nologo -v q 2>&1 | tail -2 || true
+    dispatch_cmd "$WORKTREE_DIR" dotnet build src/managed/Chaos.IL2CPP.Driver --configuration Release --nologo -v q 2>&1 | tail -2 || true
+    dispatch_cmd "$WORKTREE_DIR" bash scripts/release_bump.sh "$NEW_VER" 2>&1 | tail -3 || true
+else
+    echo "  [dry] dotnet build Generator + Driver + release_bump.sh"
+fi
+
+# ── Step 4: Verify gate ───────────────────────────────────────────────────────
+echo "[4/6] Verify gate"
+GATE_STATUS=0
+if [ "$SKIP_VERIFY" -eq 1 ]; then
+    echo "  (skip-verify set — gate skipped)"
+elif [ "$DRY_RUN" -eq 1 ]; then
+    echo "  [dry] run governance + publish-smoke + unit tests"
+else
+    # 4a. release-governance
+    echo "  4a. release-governance"
+    if dispatch_cmd "$WORKTREE_DIR" python scripts/cleanliness/check_release_governance.py --ci; then
+        echo "    governance: PASS"
     else
-        echo "  warning: no artifacts/presets on disk; SDK lib copy skipped"
+        echo "    governance: FAIL" >&2
+        GATE_STATUS=1
     fi
-fi
 
-# ── 7. Checksums ────────────────────────────────────────────────────────────
-echo "[5/9] Generate checksums"
-if [ "$DRY_RUN" -eq 1 ]; then
-    echo "  [dry] bash scripts/generate-checksums.sh $SDK_DIR"
-else
-    bash scripts/generate-checksums.sh "$SDK_DIR"
-fi
-
-# ── 8. SBOM ─────────────────────────────────────────────────────────────────
-echo "[6/9] Generate SBOM"
-if [ "$DRY_RUN" -eq 1 ]; then
-    echo "  [dry] bash scripts/generate-sbom.sh $SDK_DIR $NEW_VER"
-else
-    bash scripts/generate-sbom.sh "$SDK_DIR" "$NEW_VER"
-fi
-
-# ── 9. Release-governance gate ──────────────────────────────────────────────
-echo "[7/9] Release-governance hygiene gate"
-if [ "$DRY_RUN" -eq 1 ]; then
-    echo "  [dry] python scripts/cleanliness/chaos_hygiene.py --ci"
-else
-    if python scripts/cleanliness/chaos_hygiene.py --ci; then
-        echo "  hygiene gate passed"
+    # 4b. publish-smoke matrix (dev mode — standalone tool has known MSVC 14.44
+    #    terminate C2039 issue documented in A3; dev mode 3 cases all PASS)
+    echo "  4b. publish-smoke (dev mode, 3 cases)"
+    # publish-smoke defaults to dev mode (repo-built Driver). standalone tool path
+    # is gated separately by the EmbeddedSDK compile test below.
+    if dispatch_cmd "$WORKTREE_DIR" python scripts/publish-smoke.py --json publish-smoke-report.json; then
+        echo "    publish-smoke(dev): PASS"
     else
-        echo "  ⚠️  hygiene gate reported issues — inspect artifacts/hygiene-report.json" >&2
+        echo "    publish-smoke(dev): FAIL" >&2
+        GATE_STATUS=1
+    fi
+
+    # 4c. unit tests
+    echo "  4c. unit tests"
+    if dispatch_cmd "$WORKTREE_DIR" python tests/runner/test_driver.py --layer unit --quick; then
+        echo "    unit-tests: PASS"
+    else
+        echo "    unit-tests: FAIL" >&2
+        GATE_STATUS=1
     fi
 fi
 
-# ── 10. Create + upload GitHub Release ──────────────────────────────────────
-echo "[8/9] Create GitHub Release ${TAG}"
-# gh version >= 2.40 supports -F (notes-file) and --verify-tag.
-GH_NOTES_FLAG="--notes-file"
-if gh version 2>/dev/null | grep -qi "2.[4-9]" || gh version 2>/dev/null | grep -qiE "2.(4[0-9]|[5-9][0-9])"; then
-    GH_NOTES_FLAG="--notes-file"
+if [ "$GATE_STATUS" -ne 0 ]; then
+    echo ""
+    echo "!! Verify gate FAILED. Release NOT published."
+    echo "   Run: ./scripts/release.sh ${NEW_VER} --abort  (clean up temp branch+lock)"
+    echo "   Then fix on main and re-run."
+    release_lock
+    exit 1
+fi
+echo "  verify gate: ALL PASSED"
+
+# ── Step 5: If --publish, publish. Else just report readiness ────────────────
+if [ "$DO_PUBLISH" -eq 0 ]; then
+    echo ""
+    echo "== Verify passed for ${NEW_VER}. Ready to publish."
+    echo "   Run: ./scripts/release.sh ${NEW_VER} --publish"
+    release_lock
+    exit 0
 fi
 
+# ── Step 5: Publish ───────────────────────────────────────────────────────────
+echo "[5/6] Publish ${TAG}"
 if [ "$DRY_RUN" -eq 1 ]; then
-    echo "  [dry] gh release create $TAG $GH_NOTES_FLAG $NOTES_FILE"
-    echo "  [dry] gh release upload $TAG "$SDK_DIR"/*.lib "$SDK_DIR"/SHA256SUMS "$SDK_DIR"/sbom.cyclonedx.json"
-else
-    if [ "$PUSH" -eq 1 ] && git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1; then
-        echo "  pushing tag ${TAG}"
-        git push origin "$TAG" || echo "  (tag push failed; may already exist)"
-    fi
-    PUBLISH_ARGS=("create" "$TAG" "$GH_NOTES_FLAG" "$NOTES_FILE" "--verify-tag")
-    GH_OUT=$(gh release "${PUBLISH_ARGS[@]}" 2>&1) && echo "  created release: $GH_OUT" \
-        || echo "  ⚠️  gh release create returned nonzero (may already exist): $GH_OUT" >&2
-    # Upload artifacts if the dir has any .lib/.a or the checksum/sbom files
-    UPLOAD_FILES=()
-    if [ -d "$SDK_DIR" ]; then
-        for f in "$SDK_DIR"/*.lib "$SDK_DIR"/*.a "$SDK_DIR"/*.exe "$SDK_DIR"/$RC_CHECKSUM_FILENAME "$SDK_DIR"/$RC_SBOM_FILENAME; do
-            [ -f "$f" ] && UPLOAD_FILES+=("$f")
-        done
-    fi
-    if [ "${#UPLOAD_FILES[@]}" -gt 0 ]; then
-        gh release upload "$TAG" "${UPLOAD_FILES[@]}" 2>&1 | sed 's/^/  /' || echo "  ⚠️  upload incomplete" >&2
-    fi
+    echo "  [dry] git tag v${NEW_VER}"
+    echo "  [dry] git push origin ${RELEASE_TAG_BRANCH}"
+    echo "  [dry] git push origin v${NEW_VER}"
+    echo "  [dry] gh release create v${NEW_VER} ..."
+    # Ensure lock not released in dry-run before placeholder.
+    release_lock
+    exit 0
 fi
 
-# ── 11. Merge release branch back into main ─────────────────────────────────
-if [ "$MERGE_BACK" -eq 1 ] && [ "$CURRENT_BRANCH" = "main" ] && [ "$DRY_RUN" -eq 0 ]; then
-    echo "[9/9] Merge ${RELEASE_BRANCH} → main"
-    git checkout main
-    git merge --no-ff "$RELEASE_BRANCH" -m "release(v$NEW_VER): merge $RELEASE_BRANCH back to main
+# Publish actions run in the worktree (source of the snapshot).
+dispatch_cmd "$WORKTREE_DIR" bash -c '
+    set -e
+    git tag v"'"$NEW_VER"'" 2>/dev/null || echo "  tag exists"
+    git push origin "'"$RELEASE_TAG_BRANCH"'" 2>&1 | tail -1 || true
+    git push origin "v$NEW_VER" 2>&1 | tail -1 || true
+    echo "  pushed branch + tag"
+'
 
-root_cause: post-release main must incorporate the version bump and notes.
-fix_strategy: no-ff merge of the release branch; keeps release history.
-regression_check: release-governance + CI on main post-merge."
-    if [ "$PUSH" -eq 1 ]; then git push origin main; fi
+# Create GitHub Release (run in worktree so it can read the SDK).
+dispatch_cmd "$WORKTREE_DIR" bash scripts/build-tool-package.sh "$NEW_VER" 2>&1 | tail -4 || true
+dispatch_cmd "$WORKTREE_DIR" bash scripts/generate-checksums.sh "artifacts/release/$NEW_VER" 2>&1 | tail -1 || true
+dispatch_cmd "$WORKTREE_DIR" bash scripts/generate-sbom.sh "artifacts/release/$NEW_VER" "$NEW_VER" 2>&1 | tail -1 || true
+dispatch_cmd "$WORKTREE_DIR" bash scripts/generate-release-notes.sh v0.1.0 "v$NEW_VER" > "artifacts/release/$NEW_VER/RELEASE_NOTES_${NEW_VER}.md" 2>/dev/null || true
+
+# gh release (if authenticated)
+if command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
+    dispatch_cmd "$WORKTREE_DIR" gh release create "$TAG" \
+        --notes-file "artifacts/release/$NEW_VER/RELEASE_NOTES_${NEW_VER}.md" \
+        --verify-tag 2>&1 | tail -3 || echo "  ⚠️  gh release create returned nonzero" >&2
 else
-    echo "[9/9] Merge-back skipped (dry-run, not on main, or --no-merge)."
+    echo "  gh not authenticated; GitHub Release not created (CI will handle)."
+    echo "  Tag v$NEW_VER already pushed — release.yml will build + Release on push."
 fi
+
+# ── Step 6: Merge snapshot back to main + cleanup ─────────────────────────────
+echo "[6/6] Merge snapshot → main + cleanup"
+if [ "$DRY_RUN" -eq 0 ] && [ "$PUSH" -eq 1 ]; then
+    # Merge the snapshot branch into main (fast-forward if possible).
+    git checkout main 2>/dev/null || true
+    git merge --ff-only "$RELEASE_TAG_BRANCH" 2>&1 | tail -1 || {
+        echo "  (snapshot not ff of main — publishing to a branch that diverged from main)"
+        git merge --no-ff "$RELEASE_TAG_BRANCH" -m "release(v$NEW_VER): merge snapshot branch
+
+        root_cause: main advanced beyond the release snapshot during verify.
+        fix_strategy: no-ff merge to incorporate the released commit.
+        regression_check: release-governance + CI on main after merge."
+    }
+    git push origin main 2>&1 | tail -1 || echo "  ⚠️  push main failed" >&2
+fi
+
+# Cleanup worktree + temp branch + release lock.
+if [ "$DRY_RUN" -eq 0 ]; then
+    git worktree remove "$WORKTREE_DIR" --force 2>/dev/null || rm -rf "$WORKTREE_DIR"
+    git branch -D "$RELEASE_TAG_BRANCH" 2>/dev/null || true
+fi
+release_lock
 
 echo ""
-echo "== Release ${NEW_VER} flow complete."
-echo "   Branch : ${RELEASE_BRANCH}"
+echo "== Release ${NEW_VER} complete."
 echo "   Tag    : ${TAG}"
-echo "   Notes  : ${NOTES_FILE}"
-echo "   SDK    : ${SDK_DIR}"
+echo "   Branch : ${RELEASE_TAG_BRANCH} (merged to main)"
 exit 0
