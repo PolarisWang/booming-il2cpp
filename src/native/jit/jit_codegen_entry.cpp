@@ -23,6 +23,12 @@
 #include <gc_root_scanner.h> // GcRegisterSlotMap
 #include <instantiation_engine.h>
 #include <chaos/profile.h>
+#if defined(__linux__)
+// GCC unwinder .eh_frame registration — no header declares these on all GCC versions.
+// Split from jit_engine.cpp (T2.4 module split) where the same extern block lives.
+extern "C" void __register_frame(const void*);
+extern "C" void __deregister_frame(const void*);
+#endif
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h> // PRUNTIME_FUNCTION (Win64 .pdata/.xdata)
 #endif
