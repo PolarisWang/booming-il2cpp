@@ -8,15 +8,6 @@
 #include "generated_code_compat.h" // chaos_managed_exception (Step 2.2 in-band safepoint)
 namespace ri = chaos::il2cpp::runtime_instantiation;
 
-// GC write-barrier primitives for Reg_StInd/Reg_StObj (mirror FastExecute):
-// chaos_is_gc_pointer (gc_api.h, in namespace chaos::il2cpp::runtime_core),
-// BgcSatbPreWriteBarrier (gc_bgc_inline.h), chaos_gc_dirty_card (gc_card_table.h),
-// BarrierCriticalSectionScope (forbid_suspend.h).
-#include <gc/gc_api.h>
-#include <gc/gc_bgc_inline.h>
-#include <gc/gc_card_table.h>
-#include <forbid_suspend.h>
-
 #include "jit_engine.h"         // Compile, JitMethod, CompileConfig
 #include "jit_seh.h"            // RegisterNativeCodeSection, FindNativeCodeByAddress
 #include "../jit/jit_helpers.h" // CodegenLdVirtFtn
@@ -25,12 +16,23 @@ namespace ri = chaos::il2cpp::runtime_instantiation;
 #include <chaos/log.h>
 #include <chaos/runtime/execution_config.h>
 
-// Access interpreter global state for static field and object operations.
-namespace chaos::il2cpp::interpreter {
-extern CHAOS_IL2CPP_VECTOR(InterpreterValue) g_static_fields;
-}
+// GC write-barrier primitives used by the textually-included Reg_StInd/Reg_StObj
+// helpers (chaos_is_gc_pointer, BgcSatbPreWriteBarrier, chaos_gc_dirty_card,
+// BarrierCriticalSectionScope).  Kept at global scope (not inside the interpreter
+// namespace) so the <gc/...> headers keep declaring runtime_core at its true
+// namespace; the helper bodies reference them fully-qualified.
+#include <gc/gc_api.h>
+#include <gc/gc_bgc_inline.h>
+#include <gc/gc_card_table.h>
+#include <forbid_suspend.h>
 
 namespace chaos::il2cpp::interpreter {
+
+// GC write-barrier / static-field helpers (Reg_LdSFld/Reg_StSFld/Reg_StInd/
+// Reg_StObj) are textually included from ir_reg_gc_helpers.cpp so they share
+// this TU (their `static` functions feed the dispatch tables / computed-goto
+// labels without a CMakeLists.txt change or cross-TU extern).
+#include "ir_reg_gc_helpers.cpp"
 
 // ── Register Allocator ──────────────────────────────────────────────────
 // Linear-scan register allocator.  Walks IRMethod.instructions sequentially,
@@ -1225,78 +1227,6 @@ static void Reg_StArg(RegisterFrame& frame, const RegisterInstruction& instr) no
     ++frame.pc;
 }
 
-// ── LdSFld / StSFld: static field access ───────────────────────────────
-static void Reg_LdSFld(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdSFld");
-    uint32_t offset = instr.imm.field_offset;
-    auto& sfields = g_static_fields;
-    if (sfields.size() <= offset) {
-        sfields.resize(offset + 1u);
-    }
-    const auto& iv = sfields[offset];
-    switch (iv.tag) {
-        case ValueTag::Int32:
-            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(iv.i32)),
-                               static_cast<uint8_t>(ValueTag::Int32));
-            break;
-        case ValueTag::Int64:
-            frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(iv.i64), static_cast<uint8_t>(ValueTag::Int64));
-            break;
-        case ValueTag::Float32: {
-            uint64_t val;
-            std::memcpy(&val, &iv.f32, sizeof(float));
-            frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32));
-            break;
-        }
-        case ValueTag::Float64: {
-            uint64_t val;
-            std::memcpy(&val, &iv.f64, sizeof(double));
-            frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64));
-            break;
-        }
-        default:
-            frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(iv.obj),
-                               static_cast<uint8_t>(ValueTag::ObjectRef));
-            break;
-    }
-    ++frame.pc;
-}
-
-static void Reg_StSFld(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StSFld");
-    uint32_t offset = instr.imm.field_offset;
-    auto& sfields = g_static_fields;
-    if (sfields.size() <= offset) {
-        sfields.resize(offset + 1u);
-    }
-    uint8_t tag = frame.regs.reg_tag(instr.src1_reg());
-    uint64_t val = frame.regs.reg(instr.src1_reg());
-    switch (static_cast<ValueTag>(tag)) {
-        case ValueTag::Int32:
-            sfields[offset] = InterpreterValue::from_i32(static_cast<int32_t>(val));
-            break;
-        case ValueTag::Int64:
-            sfields[offset] = InterpreterValue::from_i64(static_cast<int64_t>(val));
-            break;
-        case ValueTag::Float32: {
-            float fv;
-            std::memcpy(&fv, &val, sizeof(float));
-            sfields[offset] = InterpreterValue::from_f32(fv);
-            break;
-        }
-        case ValueTag::Float64: {
-            double dv;
-            std::memcpy(&dv, &val, sizeof(double));
-            sfields[offset] = InterpreterValue::from_f64(dv);
-            break;
-        }
-        default:
-            sfields[offset] = InterpreterValue::from_obj(reinterpret_cast<void*>(val));
-            break;
-    }
-    ++frame.pc;
-}
-
 // ── NewArr: allocate interpreter array ──────────────────────────────────
 // Custom destructor for ArrayStorage used in T2 path.  Handles flat arrays.
 static void RegFreeArrayStorage(void* p) noexcept {
@@ -1628,34 +1558,6 @@ static void Reg_LdInd(RegisterFrame& frame, const RegisterInstruction& instr) no
     ++frame.pc;
 }
 
-// ── StInd: indirect store ───────────────────────────────────────────────
-static void Reg_StInd(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StInd");
-    uint64_t val = frame.regs.reg(instr.src1_reg());
-    void* ptr = reinterpret_cast<void*>(frame.regs.reg(instr.src2_reg()));
-    if (ptr != nullptr) {
-        // Mirror FastExecute Handle_StInd: when the destination is a GC-managed
-        // pointer, emit the SATB pre-write barrier + dirty the card under the
-        // barrier critical section (store→card atomic).  Otherwise the stored
-        // GC ref would be un-tracked → premature collection / missing card
-        // mark → UAF that the FastExecute tier doesn't have.
-        const bool is_gc = chaos::il2cpp::runtime_core::chaos_is_gc_pointer(ptr);
-        if (is_gc) {
-            using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-            BgcSatbPreWriteBarrier(reinterpret_cast<void**>(ptr));
-        }
-        if (is_gc) {
-            using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
-            BarrierCriticalSectionScope barrier;
-            *static_cast<uint64_t*>(ptr) = val;
-            chaos_gc_dirty_card(ptr);
-        } else {
-            *static_cast<uint64_t*>(ptr) = val;
-        }
-    }
-    ++frame.pc;
-}
-
 // ── LdObj: load object from managed pointer ─────────────────────────────
 static void Reg_LdObj(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdObj");
@@ -1679,37 +1581,6 @@ static void Reg_LdObj(RegisterFrame& frame, const RegisterInstruction& instr) no
         }
     } else {
         frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
-    }
-    ++frame.pc;
-}
-
-// ── StObj: store object to managed pointer ──────────────────────────────
-static void Reg_StObj(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StObj");
-    // StObj: src1 = value, src2 = address (managed pointer)
-    uint64_t val = frame.regs.reg(instr.src1_reg());
-    uint8_t tag = frame.regs.reg_tag(instr.src1_reg());
-    void* ptr = reinterpret_cast<void*>(frame.regs.reg(instr.src2_reg()));
-    if (ptr != nullptr) {
-        auto* iv = static_cast<InterpreterValue*>(ptr);
-        // Mirror FastExecute Handle_StObj: when the destination is a real
-        // GC-managed InterpreterValue, emit the SATB pre-write barrier on the
-        // object slot + store→card under the barrier critical section, so the
-        // written GC ref is tracked (no un-tracked write → UAF).
-        if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(iv)) {
-            using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-            using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
-            BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
-            {
-                BarrierCriticalSectionScope barrier;
-                iv->tag = static_cast<ValueTag>(tag);
-                iv->i64 = static_cast<int64_t>(val);
-                chaos_gc_dirty_card(iv);
-            }
-        } else {
-            iv->tag = static_cast<ValueTag>(tag);
-            iv->i64 = static_cast<int64_t>(val);
-        }
     }
     ++frame.pc;
 }

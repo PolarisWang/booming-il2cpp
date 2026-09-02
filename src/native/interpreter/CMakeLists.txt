@@ -4,6 +4,7 @@ include("${REPO_ROOT}/cmake/config-tier.cmake")
 
 add_library(chaos_interpreter STATIC
     interpreter_vm.cpp
+    interpreter_value.cpp
     interpreter_vm.h
     interpreter_entry.cpp
     interpreter_entry.h
