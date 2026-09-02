@@ -69,3 +69,11 @@ bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
     }
     return ok;
 }
+
+// Run every type's static constructor (.cctor) so static fields are initialized
+// before the entry point runs. App-mode entry (app_main.cpp) calls this after
+// ChaosGeneratedModuleActivate.
+bool ChaosRunModuleStaticConstructors() {
+    bool ok = true;
+    return ok;
+}

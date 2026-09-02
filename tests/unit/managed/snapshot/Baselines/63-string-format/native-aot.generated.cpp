@@ -80,6 +80,14 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StringFormatHelper_TestFormat
 
 
 
+MethodTable chaos_mt_SnapshotTestFixtures_StringFormatHelper = {nullptr, nullptr, 5677866095979396126ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_StringFormatHelper = static_cast<CHAOS_IL2CPP_UINT64>(5677866095979396126ULL);
+
+
+
 MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
@@ -340,7 +348,7 @@ const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_va
 
 
 
-	if (chaos_runtime_get_abi_v0()->is_string_id(chaos_string_value))
+	if (chaos_is_string_id(static_cast<CHAOS_IL2CPP_INTPTR>(chaos_string_value)))
 
 
 
@@ -352,11 +360,71 @@ const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_va
 
 
 
-			chaos_extract_string_id(chaos_string_value));
+			chaos_extract_string_id(static_cast<CHAOS_IL2CPP_INTPTR>(chaos_string_value)));
 
 
 
 		return chaos_view.utf8_data;
+
+
+
+	}
+
+
+
+
+
+
+
+	auto* chaos_possible_stub = reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(chaos_string_value);
+
+
+
+	const auto chaos_first_word = chaos_possible_stub[0];
+
+
+
+	const auto chaos_second_word = chaos_possible_stub[1];
+
+
+
+	// StubStringHeader: {type(token), byte_count} — byte_count is small (< 1<<32)
+
+
+
+	// and type is 0 or a small token. chaos_type_String: {ThinLockableHeader(tag), length} —
+
+
+
+	// the GC tag is a large nonzero value. Heuristic: second word small AND first
+
+
+
+	// word not a plausible GC tag → StubStringHeader path.
+
+
+
+	if (chaos_second_word != 0 && chaos_second_word < (1u << 30) &&
+
+
+
+		(chaos_first_word == 0 || chaos_first_word < (1u << 20)))
+
+
+
+	{
+
+
+
+		auto* chaos_stub = reinterpret_cast<const StubStringHeader*>(
+
+
+
+			reinterpret_cast<const void*>(chaos_string_value));
+
+
+
+		return stub_string_data(reinterpret_cast<const void*>(chaos_stub));
 
 
 
@@ -568,6 +636,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(5677866095979396126ULL, sizeof(chaos_type_SnapshotTestFixtures_StringFormatHelper), nullptr, 0);
+
+
+
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 
 
@@ -621,6 +693,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 	// Register MethodTable address ranges for IsValidTypeInfoPointer.
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_StringFormatHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_StringFormatHelper) + sizeof(chaos_mt_SnapshotTestFixtures_StringFormatHelper));
 
 
 

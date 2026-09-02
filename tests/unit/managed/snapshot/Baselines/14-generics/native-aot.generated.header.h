@@ -6,9 +6,18 @@
 #include "generated_code_compat.h"  // PureTypeHeader for delegate type definitions
 #include "ChaosGeneratedRuntimePrelude.h"  // chaos_managed_array for array-compat checks
 
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_GenericHelper;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Void;
+
+struct chaos_type_SnapshotTestFixtures_GenericHelper
+
+{
+
+    ThinLockableHeader header{};
+
+};
+
+
 
 struct chaos_type_SnapshotTestFixtures_Wrapper_System_Int32_
 
@@ -298,7 +307,6 @@ void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_excep
 
 
 // chaos_valuetype_* typedefs (safety net: TPG stub declarations)
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_GenericHelper;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Void;
 

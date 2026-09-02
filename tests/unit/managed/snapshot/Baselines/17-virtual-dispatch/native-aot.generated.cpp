@@ -111,6 +111,14 @@ inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_DerivedC
 
 
 
+MethodTable chaos_mt_SnapshotTestFixtures_VirtualHelper = {nullptr, nullptr, 3348207094403749803ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_VirtualHelper = static_cast<CHAOS_IL2CPP_UINT64>(3348207094403749803ULL);
+
+
+
 MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
@@ -443,6 +451,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(3348207094403749803ULL, sizeof(chaos_type_SnapshotTestFixtures_VirtualHelper), nullptr, 0);
+
+
+
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 
 
@@ -500,6 +512,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_DerivedClass), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_DerivedClass) + sizeof(chaos_mt_SnapshotTestFixtures_DerivedClass));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_VirtualHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_VirtualHelper) + sizeof(chaos_mt_SnapshotTestFixtures_VirtualHelper));
 
 
 

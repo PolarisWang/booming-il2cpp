@@ -83,3 +83,9 @@ struct SnapshotTestFixtures_FieldHelper {
 /// @param host  Pointer to an initialized ChaosRuntimeHost instance.
 /// @return true on success.
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host);
+
+/// Run every type's static constructor (.cctor) in this module so static
+/// fields are initialized before the entry point runs. App-mode entry calls
+/// this after ChaosGeneratedModuleActivate().
+/// @return true on success.
+bool ChaosRunModuleStaticConstructors();

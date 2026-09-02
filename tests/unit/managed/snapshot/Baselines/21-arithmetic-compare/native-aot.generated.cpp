@@ -80,6 +80,14 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArithmeticCompareHelper_RunCo
 
 
 
+MethodTable chaos_mt_SnapshotTestFixtures_ArithmeticCompareHelper = {nullptr, nullptr, 318650952885315379ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_ArithmeticCompareHelper = static_cast<CHAOS_IL2CPP_UINT64>(318650952885315379ULL);
+
+
+
 MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
@@ -388,6 +396,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(318650952885315379ULL, sizeof(chaos_type_SnapshotTestFixtures_ArithmeticCompareHelper), nullptr, 0);
+
+
+
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 
 
@@ -441,6 +453,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 	// Register MethodTable address ranges for IsValidTypeInfoPointer.
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_ArithmeticCompareHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_ArithmeticCompareHelper) + sizeof(chaos_mt_SnapshotTestFixtures_ArithmeticCompareHelper));
 
 
 

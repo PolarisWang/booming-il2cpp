@@ -31,7 +31,6 @@
 class ChaosRuntimeHost;
 
 // chaos_valuetype_* typedefs (opaque 32-bit managed value types)
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_CrossAssemblyComCaller;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_IComInternal;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SomeOtherAssembly_IComExternal;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
@@ -126,3 +125,9 @@ struct SomeOtherAssembly_IComExternal {
 /// @param host  Pointer to an initialized ChaosRuntimeHost instance.
 /// @return true on success.
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host);
+
+/// Run every type's static constructor (.cctor) in this module so static
+/// fields are initialized before the entry point runs. App-mode entry calls
+/// this after ChaosGeneratedModuleActivate().
+/// @return true on success.
+bool ChaosRunModuleStaticConstructors();

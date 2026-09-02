@@ -103,6 +103,14 @@ const void* chaos_vtable_SnapshotTestFixtures_HasFields[] =
 
 
 
+MethodTable chaos_mt_SnapshotTestFixtures_AddressHelper = {nullptr, nullptr, 8728763443904278020ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_AddressHelper = static_cast<CHAOS_IL2CPP_UINT64>(8728763443904278020ULL);
+
+
+
 MethodTable chaos_mt_SnapshotTestFixtures_HasFields = {nullptr, chaos_vtable_SnapshotTestFixtures_HasFields, 6075661983971539625ULL, 1u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
@@ -439,6 +447,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(8728763443904278020ULL, sizeof(chaos_type_SnapshotTestFixtures_AddressHelper), nullptr, 0);
+
+
+
 	registry.Register(6075661983971539625ULL, sizeof(chaos_type_SnapshotTestFixtures_HasFields), nullptr, 0);
 
 
@@ -496,6 +508,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 	// Register MethodTable address ranges for IsValidTypeInfoPointer.
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_AddressHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_AddressHelper) + sizeof(chaos_mt_SnapshotTestFixtures_AddressHelper));
 
 
 

@@ -114,6 +114,14 @@ const void* chaos_vtable_SnapshotTestFixtures_MyClass[] =
 
 
 
+MethodTable chaos_mt_SnapshotTestFixtures_LdVirtftnHelper = {nullptr, nullptr, 14408295464084273173ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_LdVirtftnHelper = static_cast<CHAOS_IL2CPP_UINT64>(14408295464084273173ULL);
+
+
+
 MethodTable chaos_mt_SnapshotTestFixtures_MyClass = {nullptr, chaos_vtable_SnapshotTestFixtures_MyClass, 17017755788800598734ULL, 2u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
@@ -454,6 +462,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(14408295464084273173ULL, sizeof(chaos_type_SnapshotTestFixtures_LdVirtftnHelper), nullptr, 0);
+
+
+
 	registry.Register(17017755788800598734ULL, sizeof(chaos_type_SnapshotTestFixtures_MyClass), nullptr, 0);
 
 
@@ -511,6 +523,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 	// Register MethodTable address ranges for IsValidTypeInfoPointer.
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_LdVirtftnHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_LdVirtftnHelper) + sizeof(chaos_mt_SnapshotTestFixtures_LdVirtftnHelper));
 
 
 

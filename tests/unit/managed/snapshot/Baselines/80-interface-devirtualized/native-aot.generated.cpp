@@ -90,6 +90,26 @@ inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_IMyInter
 
 
 
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_IMyInterface_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+
+
+
+const void* chaos_vtable_SnapshotTestFixtures_IMyInterface[] =
+
+
+
+{
+
+
+
+	reinterpret_cast<void*>(SnapshotTestFixtures_IMyInterface_GetValue),
+
+
+
+};
+
+
+
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ImplHelper_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
 
 
@@ -110,6 +130,22 @@ const void* chaos_vtable_SnapshotTestFixtures_ImplHelper[] =
 
 
 
+static const InterfaceMapEntry chaos_iface_map_SnapshotTestFixtures_IMyInterface[] = {
+
+
+
+	{ chaos_type_id_SnapshotTestFixtures_IMyInterface, 0, 1 }
+
+
+
+};
+
+
+
+MethodTable chaos_mt_SnapshotTestFixtures_IMyInterface = {nullptr, chaos_vtable_SnapshotTestFixtures_IMyInterface, 3080637198406087848ULL, 1u, 32, 1, 0, chaos_iface_map_SnapshotTestFixtures_IMyInterface, nullptr, 1, 0, 256};
+
+
+
 static const InterfaceMapEntry chaos_iface_map_SnapshotTestFixtures_ImplHelper[] = {
 
 
@@ -127,6 +163,14 @@ MethodTable chaos_mt_SnapshotTestFixtures_ImplHelper = {nullptr, chaos_vtable_Sn
 
 
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_ImplHelper = static_cast<CHAOS_IL2CPP_UINT64>(2682382514493266270ULL);
+
+
+
+MethodTable chaos_mt_SnapshotTestFixtures_InterfaceDevirtHelper = {nullptr, nullptr, 12595614890116465415ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_InterfaceDevirtHelper = static_cast<CHAOS_IL2CPP_UINT64>(12595614890116465415ULL);
 
 
 
@@ -226,7 +270,23 @@ inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System
 
 
 
-MethodTable chaos_mt_SnapshotTestFixtures_IMyInterface = {nullptr, nullptr, 3080637198406087848ULL, 0u, 32, 3, 0, nullptr, nullptr, 0, 0, 0, 0};
+
+
+
+
+static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_IMyInterface[] =
+
+
+
+{
+
+
+
+	{ 0x00000004u, reinterpret_cast<void*>(&SnapshotTestFixtures_IMyInterface_GetValue) },
+
+
+
+};
 
 
 
@@ -462,7 +522,15 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(3080637198406087848ULL, sizeof(chaos_type_SnapshotTestFixtures_IMyInterface), nullptr, 0);
+
+
+
 	registry.Register(2682382514493266270ULL, sizeof(chaos_type_SnapshotTestFixtures_ImplHelper), nullptr, 0);
+
+
+
+	registry.Register(12595614890116465415ULL, sizeof(chaos_type_SnapshotTestFixtures_InterfaceDevirtHelper), nullptr, 0);
 
 
 
@@ -522,7 +590,15 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_IMyInterface), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_IMyInterface) + sizeof(chaos_mt_SnapshotTestFixtures_IMyInterface));
+
+
+
 	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_ImplHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_ImplHelper) + sizeof(chaos_mt_SnapshotTestFixtures_ImplHelper));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_InterfaceDevirtHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_InterfaceDevirtHelper) + sizeof(chaos_mt_SnapshotTestFixtures_InterfaceDevirtHelper));
 
 
 
@@ -3758,6 +3834,45 @@ static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 	{
 
 
+		CHAOS_IL2CPP_UINT64_C(0x2AC09F35C4D974A8),
+
+
+		0x00000003u,
+
+
+		0u,
+
+
+		1u,
+
+
+		reinterpret_cast<const void*>(kSlots_SnapshotTestFixtures_IMyInterface),
+
+
+		reinterpret_cast<const void**>(chaos_vtable_SnapshotTestFixtures_IMyInterface),
+
+
+		1u,
+
+
+		3,
+
+
+		{0, 0, 0},
+
+
+		chaos_iface_map_SnapshotTestFixtures_IMyInterface,
+
+
+		1u,
+
+
+	},
+
+
+	{
+
+
 		CHAOS_IL2CPP_UINT64_C(0x2539BCAF6017195E),
 
 
@@ -3839,7 +3954,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.vtable_descriptors = kChaosVTableDescriptors,
 
 
-	.vtable_descriptor_count = 1u,
+	.vtable_descriptor_count = 2u,
 
 
 	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),

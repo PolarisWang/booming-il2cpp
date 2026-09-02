@@ -6,12 +6,30 @@
 #include "generated_code_compat.h"  // PureTypeHeader for delegate type definitions
 #include "ChaosGeneratedRuntimePrelude.h"  // chaos_managed_array for array-compat checks
 
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_BaseClass;
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_VirtualDispatchHelper;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Void;
 
+struct chaos_type_SnapshotTestFixtures_BaseClass
+
+{
+
+    ThinLockableHeader header{};
+
+};
+
+
+
 struct chaos_type_SnapshotTestFixtures_DerivedClass
+
+{
+
+    ThinLockableHeader header{};
+
+};
+
+
+
+struct chaos_type_SnapshotTestFixtures_VirtualDispatchHelper
 
 {
 
@@ -244,6 +262,7 @@ extern MethodTable chaos_mt_System_Private_CoreLib_System_String;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Type;
 extern MethodTable chaos_mt_System_Void;
 
+extern const void* chaos_vtable_SnapshotTestFixtures_BaseClass[];
 extern const void* chaos_vtable_SnapshotTestFixtures_DerivedClass[];
 
 extern CHAOS_IL2CPP_INTPTR chaos_static_SnapshotTestFixtures_DerivedClass;
@@ -304,8 +323,6 @@ void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_excep
 
 
 // chaos_valuetype_* typedefs (safety net: TPG stub declarations)
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_BaseClass;
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_VirtualDispatchHelper;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Void;
 

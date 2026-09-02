@@ -80,6 +80,22 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_OverflowHelper_RunOverflowAdd
 
 
 
+MethodTable chaos_mt_SnapshotTestFixtures_OverflowHelper = {nullptr, nullptr, 10670810986509613182ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_OverflowHelper = static_cast<CHAOS_IL2CPP_UINT64>(10670810986509613182ULL);
+
+
+
+MethodTable chaos_mt_SnapshotTestFixtures_OverflowUnHelper = {nullptr, nullptr, 7686812729336774089ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_OverflowUnHelper = static_cast<CHAOS_IL2CPP_UINT64>(7686812729336774089ULL);
+
+
+
 MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
@@ -400,6 +416,14 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(10670810986509613182ULL, sizeof(chaos_type_SnapshotTestFixtures_OverflowHelper), nullptr, 0);
+
+
+
+	registry.Register(7686812729336774089ULL, sizeof(chaos_type_SnapshotTestFixtures_OverflowUnHelper), nullptr, 0);
+
+
+
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 
 
@@ -457,6 +481,14 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 	// Register MethodTable address ranges for IsValidTypeInfoPointer.
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_OverflowHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_OverflowHelper) + sizeof(chaos_mt_SnapshotTestFixtures_OverflowHelper));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_OverflowUnHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_OverflowUnHelper) + sizeof(chaos_mt_SnapshotTestFixtures_OverflowUnHelper));
 
 
 

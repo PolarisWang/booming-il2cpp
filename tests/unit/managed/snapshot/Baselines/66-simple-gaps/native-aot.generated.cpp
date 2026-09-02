@@ -80,6 +80,22 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SimpleGapsHelper_RunLdnull(vo
 
 
 
+MethodTable chaos_mt_SnapshotTestFixtures_LdindStindGapsHelper = {nullptr, nullptr, 9895521128069584078ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_LdindStindGapsHelper = static_cast<CHAOS_IL2CPP_UINT64>(9895521128069584078ULL);
+
+
+
+MethodTable chaos_mt_SnapshotTestFixtures_SimpleGapsHelper = {nullptr, nullptr, 6843307364584949679ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_SimpleGapsHelper = static_cast<CHAOS_IL2CPP_UINT64>(6843307364584949679ULL);
+
+
+
 MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
@@ -388,6 +404,14 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(9895521128069584078ULL, sizeof(chaos_type_SnapshotTestFixtures_LdindStindGapsHelper), nullptr, 0);
+
+
+
+	registry.Register(6843307364584949679ULL, sizeof(chaos_type_SnapshotTestFixtures_SimpleGapsHelper), nullptr, 0);
+
+
+
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 
 
@@ -441,6 +465,14 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 	// Register MethodTable address ranges for IsValidTypeInfoPointer.
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_LdindStindGapsHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_LdindStindGapsHelper) + sizeof(chaos_mt_SnapshotTestFixtures_LdindStindGapsHelper));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_SimpleGapsHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_SimpleGapsHelper) + sizeof(chaos_mt_SnapshotTestFixtures_SimpleGapsHelper));
 
 
 

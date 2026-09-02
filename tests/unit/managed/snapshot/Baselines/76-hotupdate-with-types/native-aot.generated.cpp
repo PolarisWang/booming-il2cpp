@@ -80,6 +80,14 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_HotUpdateWithTypesDemo_Run(vo
 
 
 
+MethodTable chaos_mt_SnapshotTestFixtures_HotUpdateWithTypesDemo = {nullptr, nullptr, 10417042028071584232ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_HotUpdateWithTypesDemo = static_cast<CHAOS_IL2CPP_UINT64>(10417042028071584232ULL);
+
+
+
 MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
@@ -388,6 +396,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(10417042028071584232ULL, sizeof(chaos_type_SnapshotTestFixtures_HotUpdateWithTypesDemo), nullptr, 0);
+
+
+
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 
 
@@ -441,6 +453,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 	// Register MethodTable address ranges for IsValidTypeInfoPointer.
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_HotUpdateWithTypesDemo), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_HotUpdateWithTypesDemo) + sizeof(chaos_mt_SnapshotTestFixtures_HotUpdateWithTypesDemo));
 
 
 

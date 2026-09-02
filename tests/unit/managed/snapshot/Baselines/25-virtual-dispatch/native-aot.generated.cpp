@@ -83,11 +83,31 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_VirtualDispatchHelper_UseVirt
 
 
 
-extern "C" void SnapshotTestFixtures_DerivedClass__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BaseClass_Compute(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+
+
+
+const void* chaos_vtable_SnapshotTestFixtures_BaseClass[] =
+
+
+
+{
+
+
+
+	reinterpret_cast<void*>(SnapshotTestFixtures_BaseClass_Compute),
+
+
+
+};
 
 
 
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_DerivedClass_Compute(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+
+
+
+extern "C" void SnapshotTestFixtures_DerivedClass__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
 
 
 
@@ -99,15 +119,23 @@ const void* chaos_vtable_SnapshotTestFixtures_DerivedClass[] =
 
 
 
-	reinterpret_cast<void*>(SnapshotTestFixtures_DerivedClass__ctor),
-
-
-
 	reinterpret_cast<void*>(SnapshotTestFixtures_DerivedClass_Compute),
 
 
 
+	reinterpret_cast<void*>(SnapshotTestFixtures_DerivedClass__ctor),
+
+
+
 };
+
+
+
+MethodTable chaos_mt_SnapshotTestFixtures_BaseClass = {nullptr, chaos_vtable_SnapshotTestFixtures_BaseClass, 16934624807659080947ULL, 1u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_BaseClass = static_cast<CHAOS_IL2CPP_UINT64>(16934624807659080947ULL);
 
 
 
@@ -116,6 +144,14 @@ MethodTable chaos_mt_SnapshotTestFixtures_DerivedClass = {nullptr, chaos_vtable_
 
 
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_DerivedClass = static_cast<CHAOS_IL2CPP_UINT64>(5213792135327273735ULL);
+
+
+
+MethodTable chaos_mt_SnapshotTestFixtures_VirtualDispatchHelper = {nullptr, nullptr, 12216233432069542029ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_VirtualDispatchHelper = static_cast<CHAOS_IL2CPP_UINT64>(12216233432069542029ULL);
 
 
 
@@ -219,6 +255,26 @@ inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System
 
 
 
+static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_BaseClass[] =
+
+
+
+{
+
+
+
+	{ 0x00000005u, reinterpret_cast<void*>(&SnapshotTestFixtures_BaseClass_Compute) },
+
+
+
+};
+
+
+
+
+
+
+
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_DerivedClass[] =
 
 
@@ -227,11 +283,11 @@ static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFix
 
 
 
-	{ 0x00000007u, reinterpret_cast<void*>(&SnapshotTestFixtures_DerivedClass__ctor) },
-
-
-
 	{ 0x00000006u, reinterpret_cast<void*>(&SnapshotTestFixtures_DerivedClass_Compute) },
+
+
+
+	{ 0x00000007u, reinterpret_cast<void*>(&SnapshotTestFixtures_DerivedClass__ctor) },
 
 
 
@@ -451,7 +507,15 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(16934624807659080947ULL, sizeof(chaos_type_SnapshotTestFixtures_BaseClass), nullptr, 0);
+
+
+
 	registry.Register(5213792135327273735ULL, sizeof(chaos_type_SnapshotTestFixtures_DerivedClass), nullptr, 0);
+
+
+
+	registry.Register(12216233432069542029ULL, sizeof(chaos_type_SnapshotTestFixtures_VirtualDispatchHelper), nullptr, 0);
 
 
 
@@ -511,7 +575,15 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_BaseClass), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_BaseClass) + sizeof(chaos_mt_SnapshotTestFixtures_BaseClass));
+
+
+
 	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_DerivedClass), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_DerivedClass) + sizeof(chaos_mt_SnapshotTestFixtures_DerivedClass));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_VirtualDispatchHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_VirtualDispatchHelper) + sizeof(chaos_mt_SnapshotTestFixtures_VirtualDispatchHelper));
 
 
 
@@ -3646,6 +3718,45 @@ static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 	{
 
 
+		CHAOS_IL2CPP_UINT64_C(0xEB03DF8A01098CF3),
+
+
+		0x00000003u,
+
+
+		0u,
+
+
+		1u,
+
+
+		reinterpret_cast<const void*>(kSlots_SnapshotTestFixtures_BaseClass),
+
+
+		reinterpret_cast<const void**>(chaos_vtable_SnapshotTestFixtures_BaseClass),
+
+
+		1u,
+
+
+		1,
+
+
+		{0, 0, 0},
+
+
+		nullptr,
+
+
+		0u,
+
+
+	},
+
+
+	{
+
+
 		CHAOS_IL2CPP_UINT64_C(0x485B1C52BEE85307),
 
 
@@ -3727,7 +3838,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.vtable_descriptors = kChaosVTableDescriptors,
 
 
-	.vtable_descriptor_count = 1u,
+	.vtable_descriptor_count = 2u,
 
 
 	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),

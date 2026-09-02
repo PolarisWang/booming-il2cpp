@@ -13,6 +13,7 @@ namespace chaos { namespace il2cpp { namespace shape_dispatch {
 
 // ---- Shape ID enum (FNV-1a hashes of canonical shape keys) ----
 enum ShapeId : CHAOS_IL2CPP_UINT32 {
+    SHAPE_ASNWRITER_SCOPE_DISPOSE = 0x5B33BD89u,
     SHAPE_HMACMD5_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__ = 0x0A53FB71u,
     SHAPE_HMACSHA1_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__ = 0x02E793DEu,
     SHAPE_HMACSHA256_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__ = 0x75866860u,
@@ -66,6 +67,11 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_MONITOR_TRYENTER_SYSTEM_OBJECT_SYSTEM_INT32 = 0x5149D70Cu,
     SHAPE_RANDOMNUMBERGENERATOR_FILL_SYSTEM_BYTE__ = 0xB3F4C475u,
     SHAPE_RANDOMNUMBERGENERATOR_GETBYTES_SYSTEM_INT32 = 0x34FA6871u,
+    SHAPE_RUNTIMEENVIRONMENT_FROMGLOBALACCESSCACHE_SYSTEM_REFLECTION_ASSEMBLY = 0x754B1B60u,
+    SHAPE_RUNTIMEENVIRONMENT_GETRUNTIMEDIRECTORY = 0xF7BF8568u,
+    SHAPE_RUNTIMEENVIRONMENT_GETRUNTIMEINTERFACEASINTPTR_SYSTEM_GUID_SYSTEM_GUID = 0x317A1ED5u,
+    SHAPE_RUNTIMEENVIRONMENT_GETRUNTIMEINTERFACEASOBJECT_SYSTEM_GUID_SYSTEM_GUID = 0x88C238F3u,
+    SHAPE_RUNTIMEENVIRONMENT_GETSYSTEMVERSION = 0x493B526Cu,
     SHAPE_SHA1_HASHDATA_SYSTEM_BYTE__ = 0xBFCDBB46u,
     SHAPE_SHA256_HASHDATA_SYSTEM_BYTE__ = 0x6A52C980u,
     SHAPE_SHA384_HASHDATA_SYSTEM_BYTE__ = 0xBF8294CCu,
@@ -111,6 +117,23 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_DATETIME_TOSTRING_SYSTEM_STRING = 0x6FF0EB4Au,
     SHAPE_SYSTEM_DATETIME__CTOR_SYSTEM_INT32_SYSTEM_INT32_SYSTEM_INT32 = 0xD8CB8D55u,
     SHAPE_SYSTEM_DATETIME__CTOR_SYSTEM_INT32_SYSTEM_INT32_SYSTEM_INT32_SYSTEM_INT32_SYSTEM_INT32_SYSTEM_INT32 = 0xF98C270Eu,
+    SHAPE_SYSTEM_DECIMAL_ADD_SYSTEM_DECIMAL_SYSTEM_DECIMAL = 0x930D165Bu,
+    SHAPE_SYSTEM_DECIMAL_CEILING_SYSTEM_DECIMAL = 0x1A50A39Fu,
+    SHAPE_SYSTEM_DECIMAL_COPYSIGN_SYSTEM_DECIMAL_SYSTEM_DECIMAL = 0x42E6A800u,
+    SHAPE_SYSTEM_DECIMAL_DIVIDE_SYSTEM_DECIMAL_SYSTEM_DECIMAL = 0x5F392027u,
+    SHAPE_SYSTEM_DECIMAL_FLOOR_SYSTEM_DECIMAL = 0xC306B17Au,
+    SHAPE_SYSTEM_DECIMAL_FROMOACURRENCY_SYSTEM_INT64 = 0x738D2601u,
+    SHAPE_SYSTEM_DECIMAL_MAXMAGNITUDE_SYSTEM_DECIMAL_SYSTEM_DECIMAL = 0x67133E84u,
+    SHAPE_SYSTEM_DECIMAL_MINMAGNITUDE_SYSTEM_DECIMAL_SYSTEM_DECIMAL = 0x2E3D81E2u,
+    SHAPE_SYSTEM_DECIMAL_MULTIPLY_SYSTEM_DECIMAL_SYSTEM_DECIMAL = 0x265E0480u,
+    SHAPE_SYSTEM_DECIMAL_NEGATE_SYSTEM_DECIMAL = 0x53FBB210u,
+    SHAPE_SYSTEM_DECIMAL_REMAINDER_SYSTEM_DECIMAL_SYSTEM_DECIMAL = 0x5A08C40Fu,
+    SHAPE_SYSTEM_DECIMAL_ROUND_SYSTEM_DECIMAL = 0xEDDF5330u,
+    SHAPE_SYSTEM_DECIMAL_ROUND_SYSTEM_DECIMAL_SYSTEM_INT32 = 0x71DB4E6Fu,
+    SHAPE_SYSTEM_DECIMAL_ROUND_SYSTEM_DECIMAL_SYSTEM_INT32_SYSTEM_MIDPOINTROUNDING = 0x0A39EC68u,
+    SHAPE_SYSTEM_DECIMAL_ROUND_SYSTEM_DECIMAL_SYSTEM_MIDPOINTROUNDING = 0x64B3B59Fu,
+    SHAPE_SYSTEM_DECIMAL_SUBTRACT_SYSTEM_DECIMAL_SYSTEM_DECIMAL = 0xCFD3BD6Cu,
+    SHAPE_SYSTEM_DECIMAL_TRUNCATE_SYSTEM_DECIMAL = 0x4BA936DCu,
     SHAPE_SYSTEM_DECIMAL__CTOR_SYSTEM_INT32 = 0xE1CCAB35u,
     SHAPE_SYSTEM_DELEGATE_COMBINE_SYSTEM_DELEGATE_SYSTEM_DELEGATE = 0x85382755u,
     SHAPE_SYSTEM_DELEGATE_REMOVE_SYSTEM_DELEGATE_SYSTEM_DELEGATE = 0x36442080u,
@@ -221,18 +244,22 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_MATH_ABS_SYSTEM_DOUBLE = 0x0F157D7Bu,
     SHAPE_SYSTEM_MATH_ABS_SYSTEM_INT32 = 0x4C4DAE5Au,
     SHAPE_SYSTEM_MATH_BIGMUL_SYSTEM_INT32_SYSTEM_INT32 = 0x4D9F6615u,
+    SHAPE_SYSTEM_MATH_CEILING_SYSTEM_DECIMAL = 0x5562876Cu,
     SHAPE_SYSTEM_MATH_CEILING_SYSTEM_DOUBLE = 0x4A1D867Eu,
     SHAPE_SYSTEM_MATH_COS_SYSTEM_DOUBLE = 0xB02E3302u,
+    SHAPE_SYSTEM_MATH_FLOOR_SYSTEM_DECIMAL = 0xF524C305u,
     SHAPE_SYSTEM_MATH_FLOOR_SYSTEM_DOUBLE = 0x32FF00B1u,
     SHAPE_SYSTEM_MATH_MAX_SYSTEM_DOUBLE_SYSTEM_DOUBLE = 0x61F8C811u,
     SHAPE_SYSTEM_MATH_MAX_SYSTEM_INT32_SYSTEM_INT32 = 0x25C383CFu,
     SHAPE_SYSTEM_MATH_MIN_SYSTEM_DOUBLE_SYSTEM_DOUBLE = 0xC9FB52B3u,
     SHAPE_SYSTEM_MATH_MIN_SYSTEM_INT32_SYSTEM_INT32 = 0xF775F9A9u,
     SHAPE_SYSTEM_MATH_POW_SYSTEM_DOUBLE_SYSTEM_DOUBLE = 0x106AF321u,
+    SHAPE_SYSTEM_MATH_ROUND_SYSTEM_DECIMAL = 0xE9D93B4Fu,
     SHAPE_SYSTEM_MATH_ROUND_SYSTEM_DOUBLE = 0xC5A20343u,
     SHAPE_SYSTEM_MATH_ROUND_SYSTEM_DOUBLE_SYSTEM_INT32 = 0xFDEE4C3Eu,
     SHAPE_SYSTEM_MATH_SIN_SYSTEM_DOUBLE = 0x448A2335u,
     SHAPE_SYSTEM_MATH_SQRT_SYSTEM_DOUBLE = 0x2F5B83E9u,
+    SHAPE_SYSTEM_MATH_TRUNCATE_SYSTEM_DECIMAL = 0xB193EB59u,
     SHAPE_SYSTEM_NET_WEBUTILITY_HTMLDECODE_SYSTEM_STRING = 0x9B5606FBu,
     SHAPE_SYSTEM_NET_WEBUTILITY_HTMLENCODE_SYSTEM_STRING = 0x423E555Fu,
     SHAPE_SYSTEM_NET_WEBUTILITY_URLDECODE_SYSTEM_STRING = 0xA4F3B939u,
@@ -457,13 +484,13 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 443u,
+    SHAPE_COUNT = 470u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
 template <ShapeId S, typename... Args>
 CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
-    if constexpr (S == SHAPE_HMACMD5_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__) {
+    else if constexpr (S == SHAPE_HMACMD5_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosHmacMd5(args...));
     }
@@ -530,6 +557,22 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_RANDOMNUMBERGENERATOR_GETBYTES_SYSTEM_INT32) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosCngGetBytes(args...));
+    }
+    else if constexpr (S == SHAPE_RUNTIMEENVIRONMENT_GETRUNTIMEDIRECTORY) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosRuntimeEnvironmentGetRuntimeDirectory(args...));
+    }
+    else if constexpr (S == SHAPE_RUNTIMEENVIRONMENT_GETRUNTIMEINTERFACEASINTPTR_SYSTEM_GUID_SYSTEM_GUID) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosRuntimeEnvironmentGetRuntimeInterfaceAsIntPtr(args...));
+    }
+    else if constexpr (S == SHAPE_RUNTIMEENVIRONMENT_GETRUNTIMEINTERFACEASOBJECT_SYSTEM_GUID_SYSTEM_GUID) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosRuntimeEnvironmentGetRuntimeInterfaceAsObject(args...));
+    }
+    else if constexpr (S == SHAPE_RUNTIMEENVIRONMENT_GETSYSTEMVERSION) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosRuntimeEnvironmentGetSystemVersion(args...));
     }
     else if constexpr (S == SHAPE_SHA1_HASHDATA_SYSTEM_BYTE__) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -650,6 +693,74 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_DATETIME_TOSTRING_SYSTEM_STRING) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosDateTimeToStringFormat(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_ADD_SYSTEM_DECIMAL_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalAdd(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_CEILING_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosMathDecimalCeiling(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_COPYSIGN_SYSTEM_DECIMAL_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalCopySign(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_DIVIDE_SYSTEM_DECIMAL_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalDivide(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_FLOOR_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosMathDecimalFloor(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_FROMOACURRENCY_SYSTEM_INT64) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalFromOACurrency(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_MAXMAGNITUDE_SYSTEM_DECIMAL_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalMaxMagnitude(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_MINMAGNITUDE_SYSTEM_DECIMAL_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalMinMagnitude(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_MULTIPLY_SYSTEM_DECIMAL_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalMultiply(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_NEGATE_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalNegate(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_REMAINDER_SYSTEM_DECIMAL_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalRemainder(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_ROUND_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosMathDecimalRound(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_ROUND_SYSTEM_DECIMAL_SYSTEM_INT32) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalRoundDigits(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_ROUND_SYSTEM_DECIMAL_SYSTEM_INT32_SYSTEM_MIDPOINTROUNDING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalRoundDigitsMode(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_ROUND_SYSTEM_DECIMAL_SYSTEM_MIDPOINTROUNDING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalRoundMode(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_SUBTRACT_SYSTEM_DECIMAL_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosDecimalSubtract(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_DECIMAL_TRUNCATE_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosMathDecimalTruncate(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_DELEGATE_COMBINE_SYSTEM_DELEGATE_SYSTEM_DELEGATE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -847,6 +958,10 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosMathBigMul(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_MATH_CEILING_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosMathDecimalCeiling(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_MATH_CEILING_SYSTEM_DOUBLE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosMathCeiling(args...));
@@ -854,6 +969,10 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_MATH_COS_SYSTEM_DOUBLE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosMathCos(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_MATH_FLOOR_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosMathDecimalFloor(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_MATH_FLOOR_SYSTEM_DOUBLE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -871,6 +990,10 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosMathPow(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_MATH_ROUND_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosMathDecimalRound(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_MATH_ROUND_SYSTEM_DOUBLE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosMathRound(args...));
@@ -886,6 +1009,10 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_MATH_SQRT_SYSTEM_DOUBLE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosMathSqrt(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_MATH_TRUNCATE_SYSTEM_DECIMAL) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosMathDecimalTruncate(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_NET_WEBUTILITY_HTMLDECODE_SYSTEM_STRING) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1500,6 +1627,9 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
 // ---- Compile-time dispatch: Void-returning shapes ----
 template <ShapeId S, typename... Args>
 void DispatchVoid(Args... args) {
+    if constexpr (S == SHAPE_ASNWRITER_SCOPE_DISPOSE) {
+        ChaosAsnWriterScopeDispose(args...);
+    }
     else if constexpr (S == SHAPE_INTERLOCKED_MEMORYBARRIER) {
         ChaosInterlockedMemoryBarrier(args...);
     }
@@ -1814,6 +1944,10 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
     else if constexpr (S == SHAPE_MONITOR_TRYENTER_SYSTEM_OBJECT_SYSTEM_INT32) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosMonitorTryEnter(args...));
+    }
+    else if constexpr (S == SHAPE_RUNTIMEENVIRONMENT_FROMGLOBALACCESSCACHE_SYSTEM_REFLECTION_ASSEMBLY) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosRuntimeEnvironmentFromGlobalAccessCache(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_ARRAY_GETLENGTH_SYSTEM_INT32) {
         return static_cast<CHAOS_IL2CPP_INT32>(
@@ -2194,7 +2328,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 443u,
+static_assert(SHAPE_COUNT == 470u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

@@ -31,7 +31,6 @@
 class ChaosRuntimeHost;
 
 // chaos_valuetype_* typedefs (opaque 32-bit managed value types)
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_NegShiftHelper;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
 
 
@@ -84,3 +83,9 @@ struct SnapshotTestFixtures_NegShiftHelper {
 /// @param host  Pointer to an initialized ChaosRuntimeHost instance.
 /// @return true on success.
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host);
+
+/// Run every type's static constructor (.cctor) in this module so static
+/// fields are initialized before the entry point runs. App-mode entry calls
+/// this after ChaosGeneratedModuleActivate().
+/// @return true on success.
+bool ChaosRunModuleStaticConstructors();

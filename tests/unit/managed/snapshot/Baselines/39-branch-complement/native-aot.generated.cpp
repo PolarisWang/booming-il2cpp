@@ -80,6 +80,22 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchCompareBHelper_RunBranc
 
 
 
+MethodTable chaos_mt_SnapshotTestFixtures_BranchCompareBHelper = {nullptr, nullptr, 15657490851251551143ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_BranchCompareBHelper = static_cast<CHAOS_IL2CPP_UINT64>(15657490851251551143ULL);
+
+
+
+MethodTable chaos_mt_SnapshotTestFixtures_BranchUnsignedBHelper = {nullptr, nullptr, 8476122795907008935ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_BranchUnsignedBHelper = static_cast<CHAOS_IL2CPP_UINT64>(8476122795907008935ULL);
+
+
+
 MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
@@ -388,6 +404,14 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(15657490851251551143ULL, sizeof(chaos_type_SnapshotTestFixtures_BranchCompareBHelper), nullptr, 0);
+
+
+
+	registry.Register(8476122795907008935ULL, sizeof(chaos_type_SnapshotTestFixtures_BranchUnsignedBHelper), nullptr, 0);
+
+
+
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 
 
@@ -441,6 +465,14 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 	// Register MethodTable address ranges for IsValidTypeInfoPointer.
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_BranchCompareBHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_BranchCompareBHelper) + sizeof(chaos_mt_SnapshotTestFixtures_BranchCompareBHelper));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_BranchUnsignedBHelper), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_SnapshotTestFixtures_BranchUnsignedBHelper) + sizeof(chaos_mt_SnapshotTestFixtures_BranchUnsignedBHelper));
 
 
 
