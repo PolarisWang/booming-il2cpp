@@ -185,9 +185,22 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference"
     # ── Foundation DLL native family skeletons ────────────────────
 
     # ── Native testing suite (GoogleTest-based unit/stress/benchmark) ─────
-    # Windows only: imports prebuilt .lib files, uses MSVC-specific flags.
+    # Every chaos_native_add_test() target links gtest_main/gtest, so provision
+    # googletest here before the unit/runtime-native tree (mirrors the windows
+    # branch block at line 72).
     if(MSVC OR UNIX)
-        # Legacy "testing" CMake root removed (L11); GoogleTest provisioned at root.
+        include(FetchContent)
+        FetchContent_Declare(
+            googletest
+            URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.tar.gz
+        )
+        if(MSVC)
+            set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+        else()
+            set(gtest_force_shared_crt OFF CACHE BOOL "" FORCE)
+        endif()
+        FetchContent_MakeAvailable(googletest)
+        # Legacy "testing" CMake root removed (L11); GoogleTest provisioned here.
         add_subdirectory(tests/unit/runtime-native)
     endif()
 
