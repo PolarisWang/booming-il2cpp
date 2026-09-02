@@ -109,13 +109,15 @@ d['updatedAt'] = ts
 json.dump(d, open(p, 'w'), indent=2)
 PYEOF
 }
-init_state() {  # ver commit branch
+init_state() {  # ver commit branch worktreeDir
     "$PY" - "$STATE_FILE" "$1" "$2" "$3" "$WORKTREE_DIR" <<'PYEOF'
 import json, sys
 d = {
-  "version": sys.argv[2], "tag": "v"+sys.argv[2],
-  "snapshotBranch": sys.argv[3], "snapshotCommit": sys.argv[1],
-  "worktreeDir": sys.argv[4],
+  "version": sys.argv[2],
+  "tag": "v" + sys.argv[2],
+  "snapshotBranch": sys.argv[4],
+  "snapshotCommit": sys.argv[3],
+  "worktreeDir": sys.argv[5],
   "phase": "init", "phaseStatus": "done",
   "verifyResults": {}, "verifyFailed": False, "failures": [],
   "stateVersion": 1,
@@ -170,7 +172,7 @@ cmd_init() {
     echo "[3/4] version bump + state"
     if [ "$DRY_RUN" -eq 0 ]; then
         dispatch_cmd bash scripts/release_bump.sh "$ver" 2>&1 | tail -3
-        init_state "$commit" "$ver" "$branch"
+        init_state "$ver" "$commit" "$branch"
         echo "  version bumped to ${ver}"
     else
         echo "  [dry] release_bump.sh ${ver}"
