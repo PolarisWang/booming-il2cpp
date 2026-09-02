@@ -29,7 +29,9 @@ RANGE="$FROM_REF..$TO_REF"
 echo "== generate-release-notes: $RANGE" >&2
 
 # Write git-log data to a temp file; feed to the python categorizer.
-# One CSV line per commit: hash|subject|author
+# Format: hash|subject|author  (body is NOT included — breaking-change detection
+# is done on the subject line itself via the `!:` convention, which is simpler
+# and already enforced by the commit-style guide).
 TMP_CSV=$(mktemp)
 trap 'rm -f "$TMP_CSV"' EXIT
 
@@ -45,7 +47,16 @@ fi
 VERSION=$(git show "$TO_REF:VERSION" 2>/dev/null || echo "")
 VERSION_LABEL="${VERSION:-$TO_REF}"
 TOTAL_COMMITS=$(wc -l < "$TMP_CSV" | tr -d ' ')
-AUTHORS=$(git log --no-merges --format='%an' "$RANGE" 2>/dev/null | sort -u | tr '\n' ', ' | sed 's/, $//')
+
+# Fix author trailing comma: join with bare commas, then replace with comma+space.
+# The old `tr '\n' ', ' | sed 's/, $//'` could leave a trailing comma because
+# the `$` anchor mismatches when the input has trailing whitespace.
+AUTHORS=$(git log --no-merges --format='%an' "$RANGE" 2>/dev/null \
+    | sort -u \
+    | tr '\n' ',' \
+    | sed 's/,$//' \
+    | sed 's/,/, /g')
+
 FILES_CHANGED=$(git diff --shortstat "$RANGE" 2>/dev/null | tail -1 || echo "")
 
 # Pass metadata to python via env (avoid quoting collisions).
@@ -54,6 +65,7 @@ export GENRL_RANGE="$RANGE"
 export GENRL_TOTAL_COMMITS="$TOTAL_COMMITS"
 export GENRL_AUTHORS="$AUTHORS"
 export GENRL_FILES_CHANGED="$FILES_CHANGED"
+export GENRL_DATE="$(date +%Y-%m-%d)"
 
 # Resolve a working python interpreter (python3 may be a broken Windows Store alias).
 PY=""

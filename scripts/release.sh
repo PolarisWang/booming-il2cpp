@@ -367,7 +367,58 @@ cmd_publish() {
     [ -d "$WORKTREE_DIR" ] || { echo "Error: worktree not found" >&2; exit 1; }
 
     echo "=== release publish ${ver} ==="
-    echo "[1/5] tag + push"
+
+    # ── 0. Auto-detect previous tag ──────────────────────────────────────
+    local prev_tag
+    prev_tag=$(git describe --abbrev=0 --tags "$tag^" 2>/dev/null || echo "")
+    if [ -z "$prev_tag" ]; then
+        prev_tag=$(git rev-list --max-parents=0 "$tag" 2>/dev/null | tail -1)
+    fi
+    echo "  previous tag: ${prev_tag:-<none>}"
+
+    # ── 1. Release notes + CHANGELOG (on snapshot branch, before tag) ────
+    echo "[1/6] release notes + CHANGELOG"
+    if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] generate release notes + update CHANGELOG"
+    else
+        local notes="$RC_ARTIFACTS_BASE/release/$ver/RELEASE_NOTES_${ver}.md"
+        mkdir -p "$(dirname "$notes")"
+        if [ -n "$prev_tag" ]; then
+            dispatch_cmd bash scripts/generate-release-notes.sh "$prev_tag" "$tag" > "$notes" 2>/dev/null || true
+        else
+            dispatch_cmd bash scripts/generate-release-notes.sh "" "$tag" > "$notes" 2>/dev/null || true
+        fi
+        # Update CHANGELOG: insert new release notes at the top, above the
+        # existing [Unreleased] section.
+        local changelog="$REPO_ROOT/CHANGELOG.md"
+        local tmpcl
+        tmpcl=$(mktemp)
+        {
+            echo "# Changelog"
+            echo ""
+            echo "## [${ver}] - $(date +%Y-%m-%d)"
+            echo ""
+            cat "$notes" 2>/dev/null || echo "  (auto-generated notes)"
+            echo ""
+            # Append existing content, skipping the '# Changelog' header
+            tail -n +3 "$changelog" 2>/dev/null || true
+        } > "$tmpcl"
+        cp "$tmpcl" "$changelog"
+        rm -f "$tmpcl"
+        dispatch_cmd git add CHANGELOG.md || true
+        dispatch_cmd git add "$notes" 2>/dev/null || true
+        dispatch_cmd git commit -m "docs(changelog): update for v${ver}
+
+root_cause: CHANGELOG.md was manually maintained and never updated by
+  the release pipeline; release notes were not saved to a stable path.
+fix_strategy: release.sh publish now generates notes + updates CHANGELOG
+  on the snapshot branch before the tag is applied.
+regression_check: CHANGELOG.md contains the v${ver} entry on the tag
+  commit and on main after merge." --allow-empty >/dev/null 2>&1 || true
+        echo "  release notes + CHANGELOG updated"
+    fi
+
+    # ── 2. tag + push ────────────────────────────────────────────────────
+    echo "[2/6] tag + push"
     if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] tag/push ${tag} ${branch}"
     else
         dispatch_cmd git tag "$tag" 2>/dev/null || echo "  tag exists"
@@ -376,7 +427,8 @@ cmd_publish() {
         echo "  pushed"
     fi
 
-    echo "[2/5] build nupkg + integrity"
+    # ── 3. build nupkg + integrity ───────────────────────────────────────
+    echo "[3/6] build nupkg + integrity"
     if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] build-tool-package"
     else
         ( cd "$REPO_ROOT" && bash scripts/build-tool-package.sh "$ver" 2>&1 | tail -3 || true )
@@ -386,18 +438,34 @@ cmd_publish() {
         echo "  artifacts ready"
     fi
 
-    echo "[3/5] GitHub Release"
+    # ── 4. GitHub Release ────────────────────────────────────────────────
+    echo "[4/6] GitHub Release"
     if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] gh release create ${tag}"
     elif command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
         local notes="$RC_ARTIFACTS_BASE/release/$ver/RELEASE_NOTES_${ver}.md"
-        ( cd "$REPO_ROOT" && bash scripts/generate-release-notes.sh "v0.1.0" "$tag" > "$notes" 2>/dev/null || true )
-        ( cd "$REPO_ROOT" && gh release create "$tag" --notes-file "$notes" --verify-tag 2>&1 | tail -3 ) || \
+        # Create the release with the structured notes
+        ( cd "$REPO_ROOT" && gh release create "$tag" \
+            -F "$notes" \
+            --title "$tag" \
+            --verify-tag 2>&1 | tail -3 ) || \
             echo "  ⚠️  gh release create nonzero (CI will handle tag push)" >&2
+        # Upload all built artifacts (nupkg, checksums, sbom)
+        if [ -d "$RC_ARTIFACTS_BASE/release/$ver" ]; then
+            find "$RC_ARTIFACTS_BASE/release/$ver" -type f \
+                ! -name "RELEASE_NOTES_*" \
+                -exec gh release upload "$tag" {} --clobber \; 2>/dev/null || true
+        fi
+        # Upload the nupkg from the tool directory
+        if [ -f "$RC_ARTIFACTS_BASE/release/tool/chaos-il2cpp.${ver}.nupkg" ]; then
+            gh release upload "$tag" "$RC_ARTIFACTS_BASE/release/tool/chaos-il2cpp.${ver}.nupkg" --clobber 2>/dev/null || true
+        fi
+        echo "  release created/updated"
     else
         echo "  gh not authenticated; tag pushed — CI release.yml will create Release."
     fi
 
-    echo "[4/5] merge snapshot → main"
+    # ── 5. merge snapshot → main ─────────────────────────────────────────
+    echo "[5/6] merge snapshot → main"
     if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] merge ${branch} → main"
     else
         git checkout main 2>/dev/null || true
@@ -412,7 +480,7 @@ regression_check: release-governance + CI on main after merge."
         echo "  merged + pushed main"
     fi
 
-    echo "[5/5] cleanup"
+    echo "[6/6] cleanup"
     if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] cleanup worktree/branch/state/lock"
     else
         git worktree remove "$WORKTREE_DIR" --force 2>/dev/null || rm -rf "$WORKTREE_DIR"
