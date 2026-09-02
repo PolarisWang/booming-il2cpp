@@ -87,6 +87,7 @@ add_library(chaos_runtime_core STATIC
     instantiation_engine.h
     thread_state.cpp
     thread_state.h
+    thread_state_safepoint.cpp
     jit_demotion.cpp
     jit_demotion.h
     jit/jit_debug_contract.cpp
@@ -136,6 +137,7 @@ add_library(chaos_runtime_core STATIC
     gc/gc_scheduler.cpp
     gc/gc_region.h
     gc/gc_region.cpp
+    gc/gc_region_range.cpp
     gc/gc_diagnostics.h
     gc/gc_diagnostics.cpp
     gc/gc_root_change.h
@@ -167,6 +169,7 @@ add_library(chaos_runtime_core STATIC
     gc/gc_etw.cpp
     gc/gc_gen1.h
     gc/gc_gen1.cpp
+    gc/gc_gen1_relocate.cpp
     gc/gc_stats.h
     gc/gc_stats.cpp
     gc/gc_worker_pool.h
@@ -174,6 +177,7 @@ add_library(chaos_runtime_core STATIC
     gc/gc_bgc.h
     gc/gc_bgc.cpp
     gc/gc_bgc_inline.h
+    gc/gc_bgc_worker.cpp
     gc/gc_runtime_gates.h
     gc/gc_runtime_gates.cpp
     gc/gc_api.h

@@ -5,6 +5,7 @@
 
 #include <atomic>
 #include <cstdint>
+#include <vector>
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -103,6 +104,28 @@ float Gen1Fragmentation();
 ///      a. Gen1 occupancy > 80% (adaptive: lower when survival rate is low)
 ///      b. Gen1 fragmentation > 50%
 bool GcGen1ShouldCollect();
+
+/// A single Gen1 object relocation (old address → new address), recorded during
+/// promotion/compaction and used by RelocateGen1References to rewrite external
+/// references after Gen1 objects physically move.  Declared in the header so both
+/// gc_gen1.cpp (which produces the moves) and gc_gen1_relocate.cpp (which applies
+/// them) share the type.
+struct Gen1MoveEntry {
+    uintptr_t old_addr;
+    uintptr_t new_addr;
+};
+
+/// Scan a single Gen1 object for pointers into Gen2, invoking @a mark_callback
+/// for each non-null child.  Used by full GC and BGC root scanning (not by the
+/// Gen1 collection itself).  Defined in gc_gen1_relocate.cpp.
+void ScanGen1ObjectPointers(const char* obj_addr, CHAOS_IL2CPP_SIZE obj_size,
+                            void (*mark_callback)(void* child, void* ctx),
+                            void* ctx);
+
+/// Rewrite every external reference (old-gen slot, static root, thread stack,
+/// surviving-Gen1 interior, GCHandle) that EXACTLY matches a moved Gen1 object's
+/// old address to its new address.  Defined in gc_gen1_relocate.cpp.
+void RelocateGen1References(const std::vector<Gen1MoveEntry>& moves) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 
