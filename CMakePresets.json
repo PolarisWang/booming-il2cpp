@@ -151,6 +151,26 @@
         "ROADMAP0_PRESET_TARGET": "linux-x64-native",
         "CHAOS_IL2CPP_EXEC_PROFILE": "desktop"
       }
+    },
+    {
+      "name": "linux-x64-ubsan",
+      "displayName": "Linux x64 UBSan (UndefinedBehaviorSanitizer)",
+      "description": "Linux x64 GCC build with UBSan enabled (T-A4). Uses gcc-14 + Ninja.",
+      "inherits": "linux-x64-native",
+      "binaryDir": "artifacts/presets/linux-x64-ubsan",
+      "cacheVariables": {
+        "CHAOS_IL2CPP_SANITIZE_UBSAN": "ON"
+      }
+    },
+    {
+      "name": "linux-x64-clang-tidy",
+      "displayName": "Linux x64 clang-tidy static analysis",
+      "description": "Linux x64 native build with clang-tidy static analysis enabled (T-A1). Same toolchain as linux-x64-native.",
+      "inherits": "linux-x64-native",
+      "binaryDir": "artifacts/presets/linux-x64-clang-tidy",
+      "cacheVariables": {
+        "CHAOS_IL2CPP_CLANG_TIDY": "ON"
+      }
     }
   ]
 }

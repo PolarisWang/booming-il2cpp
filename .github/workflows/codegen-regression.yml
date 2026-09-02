@@ -66,14 +66,17 @@ jobs:
       - name: Run Snapshot Tests
         run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n
 
-      - name: Code Coverage Collection
+      - name: Code Coverage Collection (with threshold)
         run: |
           dotnet test tests/unit/managed/codegen/Chaos.IL2CPP.CodeGen.Tests.csproj `
             --configuration Release `
             --settings tests/unit/managed/codegen/coverlet.runsettings `
             /p:CollectCoverage=true `
             /p:CoverletOutputFormat=cobertura `
-            /p:CoverletOutput=coverage-results/coverage.cobertura.xml
+            /p:CoverletOutput=coverage-results/coverage.cobertura.xml `
+            /p:CoverletThreshold=50 `
+            /p:CoverletThresholdType=line `
+            /p:CoverletThresholdStat=total
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
@@ -144,8 +147,9 @@ jobs:
             --native-output="jit-native-output.txt" `
             --output="jit-metrics-current.json"
 
-      - name: Compare Against Baseline
-        continue-on-error: true
+      - name: Compare Against Baseline (hard gate)
+        # T-A6: remove continue-on-error so a severe perf regression reds the gate.
+        # compare-baseline.py exits 0=pass, 1=warning, 2=severe regression.
         id: baseline-check
         run: |
           python scripts/ci/compare-baseline.py `

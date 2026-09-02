@@ -19,6 +19,23 @@ set(CHAOS_VERSION "0.1.1")
 
 project(roadmap0_preset_router LANGUAGES CXX VERSION ${CHAOS_VERSION})
 
+# ── clang-tidy static analysis (T-A1) ──────────────────────────────────
+# Enable with -DCHAOS_IL2CPP_CLANG_TIDY=ON on GCC/Clang presets (Linux Ninja).
+# MSVC: clang-tidy analysis of MSVC dialect is unsupported/noisy — gate OFF.
+# The config lives in src/native/.clang-tidy (HeaderFilterRegex src/native/.*\.h$).
+# CI invokes `run-clang-tidy` against the `<preset>-clang-tidy` build; CMAKE_CXX_CLANG_TIDY
+# is set here so the analyzer runs during the (re)compile pass on changed translation units.
+option(CHAOS_IL2CPP_CLANG_TIDY "Enable clang-tidy static analysis during build" OFF)
+if(CHAOS_IL2CPP_CLANG_TIDY AND NOT MSVC)
+    find_program(CHAOS_IL2CPP_CLANG_TIDY_EXE clang-tidy)
+    if(CHAOS_IL2CPP_CLANG_TIDY_EXE)
+        set(CMAKE_CXX_CLANG_TIDY "${CHAOS_IL2CPP_CLANG_TIDY_EXE}")
+        message(STATUS "clang-tidy enabled: ${CHAOS_IL2CPP_CLANG_TIDY_EXE}")
+    else()
+        message(WARNING "CHAOS_IL2CPP_CLANG_TIDY=ON but clang-tidy not found — static analysis skipped")
+    endif()
+endif()
+
 # ── MSVC debug info: Embedded (/Z7) avoids shared .pdb contention ─────
 # The default /ZI (Edit-and-Continue PDB) crashes on systems where
 # mspdbsrv.exe (RPC service) is disabled or blocked.  /Z7 puts debug

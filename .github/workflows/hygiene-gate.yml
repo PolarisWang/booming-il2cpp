@@ -21,6 +21,33 @@ jobs:
             echo "::error::Repo-hygiene gate FAILED. Fix flagged issues (see report) before merge."
             exit 1
           }
+      - name: clang-format check (T-A2)
+        run: |
+          # Fail if any native C++ file deviate from .clang-format (Google-based).
+          CLANG_FORMAT_BIN=$(command -v clang-format || command -v clang-format-18 || echo "")
+          if [ -z "$CLANG_FORMAT_BIN" ]; then
+            echo "::warning::clang-format not installed — installing..."
+            sudo apt-get update -qq && sudo apt-get install -y -qq clang-format-18
+            CLANG_FORMAT_BIN=clang-format-18
+          fi
+          FAILED=0
+          CHANGED_FILES=$(git diff --name-only origin/${GITHUB_BASE_REF:-main}...HEAD 2>/dev/null || git diff --name-only HEAD~1 || true)
+          for f in $CHANGED_FILES; do
+            case "$f" in
+              src/native/*.cpp|src/native/*.h)
+                if ! "$CLANG_FORMAT_BIN" --dry-run --Werror "$f" > /tmp/cf.log 2>&1; then
+                  echo "::error::clang-format mismatch in $f"
+                  head -20 /tmp/cf.log
+                  FAILED=1
+                fi
+                ;;
+            esac
+          done
+          if [ "$FAILED" -ne 0 ]; then
+            echo "::error::Native C++ files not clang-format clean. Run clang-format -i on the flagged files."
+            exit 1
+          fi
+          echo "✅ Native C++ files are clang-format clean"
       - name: Upload hygiene report
         uses: actions/upload-artifact@v4
         with:

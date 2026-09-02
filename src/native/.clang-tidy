@@ -1,0 +1,112 @@
+# ── Native C++ static analysis config ──
+# Target: production-grade clang-tidy for il2cpp native runtime.
+# Strategy: start with highest-value checks that catch real bugs,
+# suppress noisy/legacy checks, tighten over time.
+#
+# Priority tiers:
+#   P0 — Must-fix: correctness, UB, memory safety, concurrency
+#   P1 — Should-fix: performance, readability, maintainability
+#   P2 — Nice-to-have: style, modernize
+
+Checks: >
+  clang-diagnostic-*,
+  clang-analyzer-*,
+  bugprone-*,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-implicit-widening-of-multiplication-result,
+  -bugprone-narrowing-conversions,
+  -bugprone-chained-comparison,
+  -bugprone-reserved-identifier,
+  -bugprone-unchecked-optional-access,
+  performance-*,
+  -performance-no-int-to-ptr,
+  -performance-avoid-endl,
+  modernize-*,
+  -modernize-use-trailing-return-type,
+  -modernize-avoid-c-arrays,
+  -modernize-concat-nested-namespaces,
+  -modernize-use-nodiscard,
+  -modernize-use-default-member-init,
+  -modernize-use-auto,
+  -modernize-pass-by-value,
+  -modernize-return-braced-init-list,
+  -modernize-use-override,
+  -modernize-use-equals-default,
+  -modernize-use-equals-delete,
+  -modernize-loop-convert,
+  -modernize-use-emplace,
+  -modernize-deprecated-headers,
+  readability-*,
+  -readability-magic-numbers,
+  -readability-isolate-declaration,
+  -readability-function-cognitive-complexity,
+  -readability-identifier-length,
+  -readability-named-parameter,
+  -readability-redundant-access-specifiers,
+  -readability-else-after-return,
+  -readability-convert-member-functions-to-static,
+  -readability-avoid-const-params-in-decls,
+  -readability-const-return-type,
+  -readability-redundant-smartptr-get,
+  -readability-redundant-string-cstr,
+  -readability-implicit-bool-conversion,
+  -readability-simplify-boolean-expr,
+  -readability-inconsistent-declaration-parameter-name,
+  -readability-uppercase-literal-suffix,
+  -readability-redundant-control-flow,
+  -readability-delete-null-pointer,
+  -readability-non-const-parameter,
+  -readability-string-compare,
+  cppcoreguidelines-*,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-avoid-non-const-global-variables,
+  -cppcoreguidelines-pro-type-vararg,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-pro-type-reinterpret-cast,
+  -cppcoreguidelines-pro-type-cstyle-cast,
+  -cppcoreguidelines-owning-memory,
+  -cppcoreguidelines-avoid-c-arrays,
+  -cppcoreguidelines-non-private-member-variables-in-classes,
+  -cppcoreguidelines-explicit-virtual-functions,
+  -cppcoreguidelines-macro-usage,
+  -cppcoreguidelines-pro-bounds-constant-array-index,
+  -cppcoreguidelines-pro-type-const-cast,
+  -cppcoreguidelines-special-member-functions,
+  -cppcoreguidelines-no-malloc,
+  concurrency-*,
+  -concurrency-mt-unsafe,
+  misc-*,
+  -misc-const-correctness,
+  -misc-no-recursion,
+  -misc-non-private-member-variables-in-classes,
+  -misc-include-cleaner,
+  llvm-*,
+  -llvm-header-guard,
+  -llvm-else-after-return,
+  -llvm-qualified-auto,
+  -llvm-prefer-isa-or-dyn-cast-in-conditionals,
+  -llvm-twine-local,
+  -llvm-include-order
+
+WarningsAsErrors: >
+  clang-analyzer-core*,
+  clang-analyzer-cplusplus*,
+  clang-analyzer-security*,
+  bugprone-undefined-memory-manipulation,
+  bugprone-use-after-move,
+  bugprone-dangling-handle,
+  bugprone-sizeof-expression,
+  bugprone-forwarding-reference-overload,
+  bugprone-macro-repeated-side-effects,
+  bugprone-suspicious-missing-comma,
+  bugprone-suspicious-memory-comparison,
+  bugprone-suspicious-string-compare
+
+HeaderFilterRegex: 'src/native/.*\.h$'
+FormatStyle: file
+
+CheckOptions:
+  - key: bugprone-assert-side-effect.AssertMacros
+    value: 'assert|chaos_assert|CHAOS_IL2CPP_ASSERT'
+  - key: readability-function-size.LineThreshold
+    value: '2000'

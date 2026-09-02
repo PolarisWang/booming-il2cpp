@@ -118,17 +118,13 @@ jobs:
             --native-output="jit-native-output.txt" \
             --output="jit-metrics-current.json"
 
-      - name: Compare Against Baseline
-        continue-on-error: true
+      - name: Compare Against Baseline (hard gate)
+        # compare-baseline.py exits 0=pass, 1=warning, 2=severe regression.
+        # T-A6: remove continue-on-error so a severe regression reds the gate.
+        # The baseline file must exist for the comparison to work — CI will
+        # create it on push-to-main (see the "Update Baseline on Main" step).
         id: baseline-check
         run: |
-          # NOTE: --thresholds previously pointed at a missing
-          # .github/baselines/regression-thresholds.yaml, so compare-baseline.py
-          # crashed (FileNotFoundError via json.load) every run and the perf diff
-          # never executed.  Dropped the arg to use compare-baseline.py's built-in
-          # DEFAULT_THRESHOLDS (same as codegen-regression.yml).  `continue-on-error`
-          # keeps runner noise from redding the job; a real severe regression is still
-          # surfaced in baseline-comparison.txt and the PR comment below.
           python scripts/ci/compare-baseline.py \
             --baseline=".github/baselines/jit-metrics.json" \
             --current="jit-metrics-current.json" \

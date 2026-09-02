@@ -47,3 +47,12 @@ target_include_directories(test_fuzz_gc PRIVATE
 )
 target_link_options(test_fuzz_gc PRIVATE /FORCE:MULTIPLE)
 set_tests_properties(test_fuzz_gc PROPERTIES TIMEOUT 600)
+
+# VTable dispatch fuzzer: random slot lookups + type instantiation.
+# Links chaos_runtime_core for VTableRegistry.
+chaos_native_add_test(test_fuzz_vtable
+    fuzz_vtable_test.cpp
+    LIBS ${CHAOS_FUZZ_LIBS}
+    LABELS "fuzz;runtime-core"
+)
+set_tests_properties(test_fuzz_vtable PROPERTIES TIMEOUT 600)

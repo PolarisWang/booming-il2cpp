@@ -1,0 +1,76 @@
+# clang-tidy static analysis — T-A1
+#
+# Runs clang-tidy across the native C++ source tree on every PR that touches
+# native code. Uses the linux-x64-clang-tidy CMake preset (gcc-14 + Ninja).
+#
+# Only on PR (not push to main) because the analysis is per-TU and the output
+# is actionable as PR comments. The hygiene-gate.yml already covers push-to-main
+# with the central hygiene orchestrator.
+#
+# Strategy: configure + build with CMAKE_CXX_CLANG_TIDY so the analyzer runs
+# during the (re)compile pass on changed translation units.  Output is captured
+# and filtered — any P0-level finding (clang-analyzer-core*, bugprone-UB*)
+# reds the gate.
+
+name: clang-tidy analysis
+
+on:
+  pull_request:
+    paths:
+      - 'src/native/**'
+      - 'CMakeLists.txt'
+      - 'CMakePresets.json'
+      - 'src/native/.clang-tidy'
+
+jobs:
+  clang-tidy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install clang-tidy (LLVM 18)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq clang-tidy-18 ninja-build gcc-14 g++-14
+          sudo update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-18 100
+
+      - name: Configure CMake (linux-x64-clang-tidy)
+        run: |
+          cmake -S . -B artifacts/presets/linux-x64-clang-tidy \
+            --preset linux-x64-clang-tidy \
+            -DCMAKE_C_COMPILER=gcc-14 \
+            -DCMAKE_CXX_COMPILER=g++-14
+
+      - name: Build (clang-tidy analysis runs during compile)
+        run: |
+          cmake --build artifacts/presets/linux-x64-clang-tidy \
+            --target chaos_common chaos_pal chaos_runtime_core chaos_bootstrap \
+            chaos_interpreter chaos_jit chaos_hot_update chaos_engine_bridge \
+            chaos_support chaos_diagnostics \
+            -j$(nproc) 2>&1 | tee clang-tidy-output.txt
+
+      - name: Filter P0 warnings (exit 1 on any P0)
+        run: |
+          # P0 patterns: core.*(dereference|leak|overflow|undefined|taint)
+          # bugprone.*(undefined-memory|use-after-move|dangling-handle|sizeof)
+          P0_COUNT=$(grep -cE '(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint)|bugprone-(undefined-memory-manipulation|use-after-move|dangling-handle|sizeof-expression))' clang-tidy-output.txt || true)
+          echo "P0 warnings: $P0_COUNT"
+          if [ "$P0_COUNT" -gt 0 ]; then
+            echo "::error::clang-tidy found $P0_COUNT P0 warning(s) — must fix before merge"
+            grep -E '(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint)|bugprone-(undefined-memory-manipulation|use-after-move|dangling-handle|sizeof-expression))' clang-tidy-output.txt
+            exit 1
+          fi
+          echo "✅ No P0 clang-tidy warnings"
+
+      - name: Report total warnings
+        run: |
+          TOTAL=$(grep -cE 'warning:' clang-tidy-output.txt || true)
+          echo "Total clang-tidy warnings: $TOTAL"
+          echo "P0: $(grep -cE '(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint)|bugprone-(undefined-memory-manipulation|use-after-move|dangling-handle|sizeof-expression))' clang-tidy-output.txt || true)"
+          echo "P1+: $((TOTAL - $(grep -cE '(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint)|bugprone-(undefined-memory-manipulation|use-after-move|dangling-handle|sizeof-expression))' clang-tidy-output.txt || true)))"
+
+      - name: Upload clang-tidy report
+        uses: actions/upload-artifact@v4
+        with:
+          name: clang-tidy-report
+          path: clang-tidy-output.txt
