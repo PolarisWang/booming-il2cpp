@@ -139,7 +139,7 @@ jobs:
         shell: bash
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq gcc-14 g++-14 ninja-build libnuma-dev
+          sudo apt-get install -y -qq gcc-14 g++-14 ninja-build libnuma-dev libssl-dev
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'

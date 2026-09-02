@@ -307,6 +307,7 @@ elseif(UNIX AND NOT APPLE AND NOT ANDROID)
     target_link_libraries(chaos_runtime_core PUBLIC chaos_interpreter)
     target_link_libraries(chaos_runtime_core PUBLIC chaos_eventpipe)
     target_link_libraries(chaos_runtime_core PRIVATE numa)
+    target_link_libraries(chaos_runtime_core PRIVATE ssl crypto)
 endif()
 
 # Platform-specific sources
