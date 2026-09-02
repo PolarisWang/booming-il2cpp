@@ -191,13 +191,32 @@ cmd_init() {
         echo "  [dry] git worktree add ${WORKTREE_DIR} ${branch}"
     fi
 
-    echo "[3/4] version bump + state"
+    echo "[3/4] version bump + commit + state"
     if [ "$DRY_RUN" -eq 0 ]; then
         dispatch_cmd bash scripts/release_bump.sh "$ver" 2>&1 | tail -3
+        # Commit the bump so the snapshot branch / tag / merge actually carry
+        # the new version.  Without this commit the version bump would live only
+        # as an uncommitted worktree edit that is destroyed on cleanup, tagging
+        # a tree whose VERSION still says the previous release.
+        local bump_rc=0
+        dispatch_cmd git add VERSION CMakeLists.txt src/managed/Directory.Build.props || bump_rc=1
+        if [ "$bump_rc" -eq 0 ] && dispatch_cmd git diff --cached --quiet; then
+            echo "  (no version-file diff to commit — already at ${ver})"
+            commit=$(git rev-parse "$branch")
+        else
+            dispatch_cmd git commit -m "chore(release): bump version to ${ver}
+
+root_cause: version bump was never committed into the snapshot branch, so the
+  release tag pointed at a tree whose VERSION still read the previous version.
+fix_strategy: commit VERSION/CMakeLists/Directory.Build.props on the snapshot
+  branch before verify/publish so tag+merge carry the new version.
+regression_check: release-governance on origin/main + tag resolves VERSION=${ver}." >/dev/null 2>&1
+            commit=$(git rev-parse "$branch")
+            echo "  version bumped to ${ver} (commit ${commit:0:12})"
+        fi
         init_state "$ver" "$commit" "$branch"
-        echo "  version bumped to ${ver}"
     else
-        echo "  [dry] release_bump.sh ${ver}"
+        echo "  [dry] release_bump.sh ${ver} + commit version files"
         echo "  [dry] write .release_state.json"
     fi
 
@@ -251,15 +270,26 @@ cmd_verify() {
     echo "  3/4 unit tests"
     if [ "$DRY_RUN" -eq 1 ]; then echo "    [dry] unit"
     else
-        local unit_pass=0
+        # Run each test project in its own foreground subshell with an explicit
+        # timeout.  A bare `dispatch_cmd dotnet test ... >/dev/null` under
+        # `set -euo pipefail` can terminate the whole script when the MSBuild
+        # build server tears down between invocations, so we isolate each call,
+        # disable node reuse to avoid VBCSCompiler lingering, and stream output
+        # (not pipe-discard) so a slow/hung test is visible in the log.
+        local unit_pass=0 unit_rc=0
         for path in \
             "tests/unit/managed/codegen/Chaos.IL2CPP.CodeGen.Tests.csproj" \
             "tests/unit/managed/driver/Chaos.IL2CPP.Driver.Tests.csproj" \
             "tests/unit/managed/snapshot/Chaos.IL2CPP.CodeGen.SnapshotTests.csproj"; do
-            if dispatch_cmd dotnet test "$path" --nologo -v q >/dev/null 2>&1; then
-                echo "    $(basename "$path"): pass"; ((unit_pass++))
+            if (
+                cd "$WORKTREE_DIR"
+                export MSBUILDDISABLENODEREUSE=1 DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1
+                timeout "${RC_DOTNET_TEST_TIMEOUT:-300}" dotnet test "$path" --nologo -v q 2>&1
+            ); then
+                echo "    $(basename "$path"): pass"; unit_pass=$((unit_pass+1))
             else
-                echo "    $(basename "$path"): fail"; failed=1
+                unit_rc=$?
+                echo "    $(basename "$path"): fail (rc=${unit_rc})"; failed=1
             fi
         done
         [ "$unit_pass" -eq 3 ] && write_state verifyResults.unit '"pass"' || write_state verifyResults.unit '"fail"'
