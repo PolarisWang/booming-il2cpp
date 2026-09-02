@@ -111,14 +111,16 @@ def _read_jsonl_technology_map(jsonl_path: Path) -> dict[str, dict[str, Any]]:
             if not msid or not tech:
                 continue
 
-            # Primary index: by methodSubjectId — keep the MAX elapsedMs
-            # across rounds (ignores timer-floor 0.001ms values from very
-            # fast methods, while also ignoring unusually high outliers).
+            # Primary index: by methodSubjectId — keep the latest timestamp
+            # per technology.  The max-elapsed heuristic was a root-cause
+            # workaround for the chaos-jit-overwriting-chaos-aot bug (now
+            # fixed by single-write combined perf store).  With the write
+            # bug fixed, a single file contains at most one record per
+            # technology per run, so the "latest" = "only" in normal use.
+            # When reruns append, the latest timestamp is the correct one.
             existing = tech_map[msid].get(tech)
             if existing:
-                existing_ms = (existing.get("metrics") or {}).get("elapsedMilliseconds", 0) or 0
-                new_ms = (rec.get("metrics") or {}).get("elapsedMilliseconds", 0) or 0
-                if new_ms <= existing_ms:
+                if rec.get("timestamp", "") <= existing.get("timestamp", ""):
                     continue
             tech_map[msid][tech] = rec
 
@@ -230,7 +232,6 @@ def _build_method_comparison(
             # No isStub field present (pre-fix data): infer from raw total-batch
             # elapsed being at/near the native floor.
             aot_raw = (chaos_aot_rec.get("metrics") or {}).get("elapsedMilliseconds")
-            aot_iters = chaos_aot_rec.get("iterations") or 1
             # A true stub sits at the _MIN_ELAPSED_FLOOR (0.001ms total) with
             # essentially zero real body time.  Anything above that floor is a
             # real measurement (native or interpreter).
