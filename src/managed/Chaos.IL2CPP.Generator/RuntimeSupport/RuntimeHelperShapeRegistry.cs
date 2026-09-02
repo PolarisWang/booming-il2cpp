@@ -573,16 +573,20 @@ public sealed partial class NativeAotLoweringPlanner
                         var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                         bool hasManagedArg = typeArgs != null && typeArgs.Count > 0;
                         // Placeholder ignores the managed value; but the call site still
-                        // passes it, so model a value-type slot when a type arg exists.
+                        // passes it, so model a native-int slot when a type arg exists.
+                        // Was CreateInt32AbiSlot (32-bit), but the managed arg is an object
+                        // reference (pointer-sized).  On 64-bit platforms, a 32-bit slot
+                        // would misalign the ABI layout relative to the non-intrinsic
+                        // C++ signature — use NativeInt for pointer-width correctness.
                         var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                            hasManagedArg ? "CHAOS_IL2CPP_INT32 chaos_arg_0" : "",
+                            hasManagedArg ? "CHAOS_IL2CPP_INTPTR chaos_arg_0" : "",
                         [
                             "    return ChaosComInterfaceMarshallerConvertToUnmanaged();",
                         ]);
                         return new GenericShapeResolution(src, symbol,
                             hasManagedArg
                                 ? new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                                    CreateInt32AbiSlot(null, AotCoreIrTypeShapeKind.ValueType))
+                                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType))
                                 : Array.Empty<AotCoreIrAbiSlotArtifact>(),
                             CreateNativeIntAbiSlot(),  // returns void*/native pointer
                             hasManagedArg ? new HashSet<int> { 0 } : EmptyRawArgumentIndices);

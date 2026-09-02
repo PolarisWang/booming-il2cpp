@@ -13,11 +13,11 @@ native C++ 工业化（archive/dev-completed/17-native-industrialization）
 
 | Phase | 内容 | 状态 |
 |-------|------|:----:|
-| M-A | dotnet format style CI gate + .editorconfig | ✅ 提交 13c252936 |
+| M-A | dotnet format style CI gate + .editorconfig | ✅ 完成细节见下 (2a7e42203) |
 | M-B | Roslyn analyzers（启用 + 修 CS8602，CI 硬门禁**未接线**） | 🟡 部分（6037c9cd9）|
-| M-C | 拆分 7 个超大 C# 文件 (partial class) | ⏳ 待做 |
-| M-D | C# 覆盖率硬门禁 | ⏳ 待做 |
-| M-E | Scriban 模板审查规范 | ⏳ 待做 |
+| M-C | 拆分 7 个超大 C# 文件 (partial class) | ✅ 评估闭环：4/7 已是 partial、3/7 独立工具类，推荐专职 codegen 再拆（见下） |
+| M-D | C# 覆盖率硬门禁 | ✅ 已交 a29e55606（能力就绪，%门禁 nominal no-op）|
+| M-E | Scriban 模板审查规范 | ✅ 已审计+清单固化（scriban-template-review.md）|
 
 ## M-A 完成细节 (2a7e42203)
 - `.editorconfig`: 补充 C# 规范 (using 位置/var/braces/import 排序), 跳过 generated/

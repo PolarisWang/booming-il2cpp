@@ -4,6 +4,7 @@
 // These stubs are compiled from source (not part of prebuilt lib)
 // to avoid stale-symbol issues with the SDK runtime library.
 #include <cstdlib>
+#include <atomic>
 
 #include "generated_code_compat.h"
 #include "runtime_stubs/stub_common.h"
@@ -398,11 +399,21 @@ CHAOS_IL2CPP_INT32 ChaosComWrappersTryGetObject(CHAOS_IL2CPP_INTPTR comPtr, CHAO
 // pointer).  The returned object's vtable methods all return E_NOTIMPL.
 // This is NOT a real COM runtime — it only satisfies the non-null contract.
 //
-// The subject oracle (result != null ? 0L : 1L) expects non-null from a
+// The subject oracle (result != null ? 0L : 1L) requires non-null from a
 // method returning void* (the COM interface pointer).  Returning null would
 // make the subject return 1L, which fails the fact assertion (oracle=0L).
 // Returning a dummy non-null pointer keeps the oracle passing while the
 // placeholder remains inert (no real COM behavior).
+//
+// ⚠️ KNOWN LEAK: each ConvertToUnmanaged allocates a new ComPlaceholderObject
+// via malloc (refCount=1).  AOT codegen only wires ConvertToUnmanaged — there
+// is no downstream caller that feeds the pointer into an RCW/wrapper that
+// would trigger Release.  Every call leaks one object.  This is acceptable
+// for the P2 placeholder: the COM marshaller is not on any hot path, and
+// each allocation is tiny (vtable ptr + refcount = 16 bytes).  A real COM
+// runtime integration (beyond P2 scope) would need to wire the full
+// ConvertToUnmanaged → RCW → Release lifecycle, at which point this
+// placeholder is replaced wholesale.
 
 // IUnknown-compatible vtable: 3 methods (QueryInterface, AddRef, Release).
 // All return E_NOTIMPL except AddRef/Release (manage refcount for lifecycle).
@@ -414,7 +425,7 @@ struct ComPlaceholderVtbl {
 
 struct ComPlaceholderObject {
     const ComPlaceholderVtbl* lpVtbl;
-    CHAOS_IL2CPP_UINT32 refCount;
+    std::atomic<CHAOS_IL2CPP_UINT32> refCount;
 };
 
 static CHAOS_IL2CPP_INTPTR Placeholder_QueryInterface(
@@ -435,7 +446,7 @@ static CHAOS_IL2CPP_UINT32 Placeholder_Release(void* self) noexcept
     auto* obj = static_cast<ComPlaceholderObject*>(self);
     CHAOS_IL2CPP_UINT32 ref = --obj->refCount;
     if (ref == 0) {
-        delete obj;
+        std::free(obj);
     }
     return ref;
 }
@@ -453,7 +464,11 @@ static const ComPlaceholderVtbl kComPlaceholderVtbl = {
 CHAOS_IL2CPP_INTPTR ChaosComInterfaceMarshallerConvertToUnmanaged(void) noexcept
 {
     auto* obj = static_cast<ComPlaceholderObject*>(std::malloc(sizeof(ComPlaceholderObject)));
-    if (obj == nullptr) return 0;
+    if (obj == nullptr) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("COM", "OOM: malloc(%zu) failed in ConvertToUnmanaged",
+            sizeof(ComPlaceholderObject));
+        return 0;
+    }
     obj->lpVtbl = &kComPlaceholderVtbl;
     obj->refCount = 1;
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(obj);

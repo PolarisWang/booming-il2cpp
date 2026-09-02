@@ -49,7 +49,7 @@
 
 | task_id | mode | description | wait_for |
 |---------|------|-------------|:--------:|
-| P1 | sequential | 裸 new 改宏(基线:176处, 来源:alloc-audit.md L19 2026-05-21统计 覆盖 src/native/runtime-core/ + src/native/common/ + src/native/chaos-metadata/ 三域; 审计后已修正4处泄漏, 合约头新增 kNew/malloc 宏; **注意**: 176是静态快照, 非增量基准, 替换过程中计数会递减, 验收以"全部替换完毕"而非"对齐176"为准) + reinterpret_cast 审查 + 错误类型落地 | batch-1 且 T-B3/T-B4 产物已产出+review ✅ |
+| P1 | sequential | 裸 new 改宏(基线:176处, 来源:alloc-audit.md L19 2026-05-21统计 覆盖 src/native/runtime-core/ + src/native/common/ + src/native/chaos-metadata/ 三域; 审计后已修正4处泄漏, 合约头新增 kNew/malloc 宏; **注意**: 176是静态快照, 非增量基准(4处泄漏修正已含在176内, 176与172的分歧仅在审计后若按修正量扣减会得到172, 但不需要追踪——验收以"全部替换完毕"而非"对齐176"为准, 最终计数应当为0) + reinterpret_cast 审查 + 错误类型落地 | batch-1 且 T-B3/T-B4 产物已产出+review ✅ |
 
 ### batch-3: P2 模块化重构（串行组）
 
