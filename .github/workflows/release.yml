@@ -135,6 +135,11 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Install system dependencies (gcc-14 + ninja + libnuma)
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq gcc-14 g++-14 ninja-build libnuma-dev
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
