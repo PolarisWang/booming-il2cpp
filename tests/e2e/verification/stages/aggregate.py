@@ -91,6 +91,11 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             summary["fact"] = {
                 "passed": fact_data.get("passed", 0),
                 "total": fact_data.get("total", 0),
+                # Methods whose AOT execution is a smoke test only (managed
+                # exception not replicated by the stub).  Excluded from the
+                # "real" pass rate — see realTotal, realPassed.
+                "unverifiedSmoke": fact_data.get("unverifiedSmoke", 0),
+                "realTotal": fact_data.get("realTotal", fact_data.get("total", 0)),
                 "valueSuspicious": fact_data.get("valueSuspicious", False),
                 "valueWarnings": fact_data.get("valueWarnings", 0),
                 # Preserve factMethodCount as its OWN key. The meta-mismatch
@@ -321,6 +326,17 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     # ── Build aggregate metrics ──
     total_passed = sum(s.get("fact", {}).get("passed", 0) for s in chunk_summaries)
     total_fact = sum(s.get("fact", {}).get("total", 0) for s in chunk_summaries)
+    # Smoke-only subjects (managed exception not replicated by AOT stub) are
+    # NOT semantic verifications even though the runner counts them "passed".
+    # Track them separately so the dashboard lists real verified totals + the
+    # smoke tail, and factPassRate reflects only genuinely-verified subjects.
+    total_unverified_smoke = sum(
+        s.get("fact", {}).get("unverifiedSmoke", 0) for s in chunk_summaries
+    )
+    total_real_fact = sum(
+        s.get("fact", {}).get("realTotal", s.get("fact", {}).get("total", 0))
+        for s in chunk_summaries
+    )
     # Only count chunks that actually ran subjects (total > 0)
     chunks_with_fact = sum(
         1 for s in chunk_summaries
@@ -426,6 +442,10 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "chunksWithValueWarnings": chunks_with_value_warnings,
         "totalPassed": total_passed,
         "totalFactMethods": total_fact,
+        # Unverified smoke tail (stub cannot replicate managed exception).  Not
+        # real assertions despite being counted "passed" by the native runner.
+        "totalUnverifiedSmoke": total_unverified_smoke,
+        "totalRealFactMethods": total_real_fact,
         "staleChunks": sorted(set(stale_chunks)),
         "chunkSummaries": chunk_summaries,
     }
@@ -483,6 +503,15 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             "chunksWithMetaMismatch": chunks_with_meta_mismatch,
             "chunksWithCoverageGap": chunks_with_coverage_gap,
             "factPassRate": round(total_passed / total_fact * 100, 1) if total_fact else 0,
+            # Genuine verification pass rate (excluding smoke-only subjects).
+            # Smoke subjects are counted "passed" by the native runner but have
+            # no semantic assertion — they are AOT stub default returns for
+            # methods that throw in managed.  realFactPassRate vs factPassRate
+            # shows the gap between "all passed" and "truly verified".
+            "realFactPassRate": round(
+                total_passed / total_real_fact * 100, 1
+            ) if total_real_fact else 0,
+            "totalUnverifiedSmoke": total_unverified_smoke,
             "totalBenchmarkedMethods": total_benchmarked,
             "aggregatePerformance": aggregate_perf,
             "hotupdate": {

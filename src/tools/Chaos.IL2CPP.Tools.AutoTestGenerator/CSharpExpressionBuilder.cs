@@ -234,9 +234,14 @@ public sealed class CSharpExpressionBuilder
             // generic type params; unresolved types may be in unreferenced assemblies).
             try {
                 var t = Type.GetType(typeFullName, false);
-                if (t == null || (t.IsValueType && t.IsByRefLike))
+                // Ref struct types can't be used as generic type arguments — use default(T) for them.
+                if (t != null && t.IsValueType && t.IsByRefLike)
                     return $"default(global::{qualified.Replace('+', '.')})!";
-            } catch { return $"default(global::{qualified.Replace('+', '.')})!"; }
+                // For types where Type.GetType returns null (BCL types not loaded in ATG process),
+                // fall through to SubjectInstanceFactory.Create<T>() which uses GetUninitializedObject
+                // to return a non-null instance. This fixes the 908-case "default(global::T)! → NRE"
+                // pattern that caused 42-sentinel false passes.
+            } catch { /* fall through to SubjectInstanceFactory.Create<T>() */ }
             return $"SubjectInstanceFactory.Create<global::{qualified.Replace('+', '.')}>()";
         }
 

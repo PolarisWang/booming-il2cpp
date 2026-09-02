@@ -151,6 +151,10 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference"
        OR ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-native")
     add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX=1)
     include(cmake/config-tier.cmake)
+    # Register the test helper module (defines chaos_native_test / chaos_compile_only_smoke)
+    # used by tests/contracts/native/* added below.  Without it the linux SDK config
+    # fails with "Unknown CMake command" — mirrors windows-x64-reference (line 61).
+    include(cmake/chaos_native_test.cmake)
     find_package(Python3 QUIET)
 
     add_subdirectory(third_party/fmt fmt_build)

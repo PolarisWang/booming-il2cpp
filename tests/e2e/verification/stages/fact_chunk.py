@@ -91,6 +91,29 @@ def _run_single_fact(exe_path: Path, tech: str) -> dict:
     }
 
 
+def _count_unverified_markers(ctx: ChunkContext) -> int:
+    """Scan CombinedSubjects.cs for [UNVERIFIED] markers.
+
+    When an external AOT assembly method has a managed exception that the AOT
+    stub cannot replicate, TestEmitter emits a `// [UNVERIFIED] ...` comment
+    instead of a real assertion.  These subjects execute the call (smoke test)
+    but produce no Assert.* call, so the native runner always counts them as
+    "passed" — a false positive.  This function detects them so the fact stage
+    can exclude them from the authoritative passed count.
+
+    Returns the count of [UNVERIFIED] markers found.
+    """
+    combined_cs = ctx.chunk_dir / "managed" / "combined" / "CombinedSubjects.cs"
+    if not combined_cs.exists():
+        return 0
+    try:
+        text = combined_cs.read_text(encoding="utf-8", errors="replace")
+        count = text.count("[UNVERIFIED]")
+        return count
+    except OSError:
+        return 0
+
+
 def _tech_status(tech_result: dict, meta_total: int | None) -> str:
     """Determine status for a single technology result.
 
@@ -145,7 +168,7 @@ def _write_fact_history(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
 
 def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | None,
                         meta_total: int | None, fact_method_count: int | None,
-                        value_warnings: int) -> None:
+                        value_warnings: int, unverified_smoke: int = 0) -> None:
     """Write fact.json to chunk results dir for aggregate stage to read."""
     chunk_results_dir = ctx.chunk_dir / "results"
     chunk_results_dir.mkdir(parents=True, exist_ok=True)
@@ -163,6 +186,14 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     fact_data = {
         "passed": passed,
         "total": total,
+        # Methods whose AOT path is an UNVERIFIED smoke (managed exception not
+        # replicated by stub).  They are NOT semantic verifications: the runner
+        # counts them as passed purely because no Assert.* threw.  Expose the
+        # count + a "real" total (total - smoke) so aggregate/reporting can show
+        # genuinely-verified coverage alongside the smoke-only tail and a reader
+        # is never misled that an unverified stub call was a real assertion pass.
+        "unverifiedSmoke": unverified_smoke,
+        "realTotal": max(0, total - unverified_smoke),
         "valueSuspicious": value_warnings > 0,
         "valueWarnings": value_warnings,
         "metaTotal": meta_total or total,
@@ -367,11 +398,22 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     # 若仍全 default 则返回 None 阻断 pipeline。本文件仅打印提示，不重复阻断。
     # 参见 build.py 中的 STUB_BLOCK_FAMILIES + CHAOS_FACT266_BLOCK_ALL_DEFAULT 环境变量。
 
+    # ── Scan for [UNVERIFIED] markers (smoke-only subjects) ──
+    # Methods where the AOT stub cannot replicate a managed exception are
+    # marked with `// [UNVERIFIED] ...` by TestEmitter.  The native runner
+    # counts them as "passed" (no Assert.* throws) but they are NOT semantic
+    # verifications.  Detect them so fact.json exposes real vs. smoke-only.
+    unverified_smoke = _count_unverified_markers(ctx)
+    if unverified_smoke > 0:
+        print(f"  [fact] {unverified_smoke} subject(s) marked [UNVERIFIED] "
+              f"(smoke-only — AOT stub cannot replicate managed exception)")
+
     # ── Write fact history (_dll/reports/history/fact-YYYY-MM-DD.jsonl) ──
     _write_fact_history(ctx, aot_result, jit_result)
 
     # ── Also write fact.json to chunk results dir for aggregate consumption ──
-    _write_fact_results(ctx, aot_result, jit_result, meta_total, meta_fact_count, value_warnings)
+    _write_fact_results(ctx, aot_result, jit_result, meta_total, meta_fact_count,
+                        value_warnings, unverified_smoke)
 
     return StageResult(
         stage="fact", status=status,

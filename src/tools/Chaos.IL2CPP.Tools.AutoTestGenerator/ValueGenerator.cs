@@ -144,6 +144,20 @@ public sealed class ValueGenerator
         // instance methods are called.  Use Array.Empty<int>() to get a valid
         // non-null Array instance for probe subjects and verification tests.
         ["Array"] = _ => "System.Array.Empty<int>()",
+        // Non-generic collection classes (System.Collections).  default(Queue)! etc.
+        // causes ArgumentNullException in static wrapper methods (Queue.Synchronized
+        // etc.).  new <T>() returns a valid instance for probes and verification.
+        ["Queue"] = _ => "new System.Collections.Queue()",
+        ["Stack"] = _ => "new System.Collections.Stack()",
+        ["ArrayList"] = _ => "new System.Collections.ArrayList()",
+        ["SortedList"] = _ => "new System.Collections.SortedList()",
+        ["Hashtable"] = _ => "new System.Collections.Hashtable()",
+        ["BitArray"] = _ => "new System.Collections.BitArray(8)",
+        ["CollectionBase"] = _ => "new System.Collections.CollectionBase()",
+        // Non-generic collection interfaces resolve to their concrete impls
+        ["IEnumerable"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Linq.Enumerable.Empty<{typeArgs[0]}>()"
+            : "new System.Collections.ArrayList()",
     };
 
     public ValueGenerator(CSharpSerializer serializer, AutoFixtureAllower? autoFixture = null)
@@ -219,7 +233,8 @@ public sealed class ValueGenerator
             else if (TryGetNullGuardSafeExpression(t, out var safeExpr))
                 smartArgs[i] = safeExpr;
             else
-                smartArgs[i] = DefaultValue(t, false);
+                smartArgs[i] = TryGetResolvableInstanceExpression(t)
+                    ?? DefaultValue(t, false);
         }
         AddUnique(sets, usedSignatures, methodIndex, smartArgs);
 
@@ -556,6 +571,87 @@ public sealed class ValueGenerator
             return false;
         }
     }
+
+    /// <summary>
+    /// Try to produce a non-null instance expression for a resolvable reference-type
+    /// PARAMETER so static/instance methods don't throw ArgumentNullException on default
+    /// probing (e.g. Queue.Synchronized(default(Queue)!) → new Queue()).
+    ///
+    /// Strategy mirrors CSharpExpressionBuilder.GetInstanceExpression but is argument-agnostic:
+    ///   1. A public parameterless ctor → `new T()`.
+    ///   2. Otherwise a resolvable class/abstract-constructible → SubjectInstanceFactory.Create<T>()
+    ///      (backed by RuntimeHelpers.GetUninitializedObject, no ctor needed).
+    ///   3. Reference (non-value) types that Type.GetType can't resolve in the ATG host → null
+    ///      (caller falls back to DefaultValue).
+    ///
+    /// We deliberately do NOT return instances here for generic/array/delegate/interface shapes
+    /// that the existing NullGuardSafeDefaults / TryGetInterfaceExpression / TryGetArrayExpression
+    /// / TryGetDelegateExpression already produce non-null results for — those run before this.
+    /// </summary>
+    private static string? TryGetResolvableInstanceExpression(string typeName)
+    {
+        // Only concrete class types qualify. Interfaces/abstracts/delegates/arrays are
+        // handled upstream; pointer/ref/fnptr token should stay null here.
+        if (typeName.EndsWith('*')) return null;
+        if (typeName.EndsWith('&'))
+        {
+            var baseType = typeName[..^1].Trim();
+            // out/ref locals are declared as default by the emitter; keep them null-shaped.
+            return null;
+        }
+        if (typeName.StartsWith("System.Array") || typeName.EndsWith("[]")) return null;
+        if (typeName.EndsWith('`') || typeName.Contains('`')) return null; // generic definition
+
+        string csName;
+        try { csName = CSharpSerializer.ToCSharpTypeName(typeName); }
+        catch { return null; }
+        if (string.IsNullOrEmpty(csName) || csName is "void" or "System.Void") return null;
+
+        // System.Object maps to the C# keyword `object` — `global::object()` is not
+        // valid C# (global:: only legal for namespace-qualified identifiers).  These
+        // are handled upstream; returning null keeps prior default behavior.
+        if (typeName == "System.Object") return null;
+
+        // Value types (int, DateTime, Guid...) already handled by DefaultValue as default(T)
+        // which is a VALID value — do not fabricate new instances; NULL-reference is the
+        // only defect DefaultValue introduces, and only for reference types.
+        if (IsResolvableValueType(typeName))
+            return null;
+
+        // Non-generic qualified reference types only (e.g. System.Collections.Queue).
+        // Try parameterless ctor via reflection.
+        try
+        {
+            var t = Type.GetType(typeName, false);
+            if (t is null || t.IsAbstract || t.IsInterface || t.IsArray || t.IsGenericType)
+                return null; // leave to caller DefaultValue (null!) — no blind SubjectInstanceFactory for these
+            if (t.IsValueType) return null;
+            // Public parameterless ctor?
+            var ctors = t.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+            if (ctors.Any(c => c.GetParameters().Length == 0))
+                return $"new global::{csName.Replace('+', '.')}()";
+            // No paramless ctor but a real class → GetUninitializedObject is the safe non-null route.
+            // Skip types where GetUninitializedObject would produce an unusable bare object
+            // that still throws later deeper (e.g. some sealed runtime types); here we accept
+            // the managed-equivalent execution and let the probe classify outcome.
+            return $"SubjectInstanceFactory.Create<global::{csName.Replace('+', '.')}>()";
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static bool IsResolvableValueType(string typeName)
+    {
+        try
+        {
+            var t = Type.GetType(typeName, false);
+            return t?.IsValueType == true;
+        }
+        catch { return false; }
+    }
+
 
     /// <summary>
     /// Known integer value type full names for ResultToLong conversion.
