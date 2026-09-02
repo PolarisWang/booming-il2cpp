@@ -59,7 +59,7 @@ known:
   # Parallel gate execution / system load widens the window; conservative clean
   # up requires resetting the shared singletons between cases (out of scope
   # here).  Kept surfaced so a *deterministic* single-case hit still flips red.
-    - test_gc_gen1
+  - test_gc_gen1
     # ── Transfer to GC-域 (2026-09-02, native-industrialization handoff) ──
     # Empirically verified 2026-09-02 (all PASS in isolation on windows-x64-reference):
     #   test_gc_young_collector  6/6  (isolation) — ConservativeSweepSelfRefs SEH under parallel
