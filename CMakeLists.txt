@@ -191,19 +191,21 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference"
     # MSVC only: the native unit suites (log_system_test etc.) include Windows
     # headers (io.h / windows.h) and aren't portable to the linux SDK build,
     # which only needs to emit chaos_*.so/.a libraries.
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.tar.gz
+    )
     if(MSVC)
-        include(FetchContent)
-        FetchContent_Declare(
-            googletest
-            URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.tar.gz
-        )
-        if(MSVC)
-            set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-        else()
-            set(gtest_force_shared_crt OFF CACHE BOOL "" FORCE)
-        endif()
-        FetchContent_MakeAvailable(googletest)
-        # Legacy "testing" CMake root removed (L11); GoogleTest provisioned here.
+        set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    else()
+        set(gtest_force_shared_crt OFF CACHE BOOL "" FORCE)
+    endif()
+    FetchContent_MakeAvailable(googletest)
+
+    # Native unit tests (log_system_test etc.) are Windows-only (io.h/windows.h);
+    # skip them on the linux SDK release build which only needs chaos_*.so/.a.
+    if(MSVC)
         add_subdirectory(tests/unit/runtime-native)
     endif()
 
