@@ -32,18 +32,25 @@ inline constexpr CHAOS_IL2CPP_UINT64 kKnownStableId = 0xBEEF000000000001ULL;
 inline constexpr CHAOS_IL2CPP_UINT32 kKnownMethodToken = 0x00010001;
 
 /// Register a single synthetic vtable so lookups hit a non-empty registry.
-/// Returns the token to query, recorded in an out-param for later assertions.
-void RegisterKnownVTable(TypeVTable& vt, std::vector<VTableSlot>& slots) {
-    slots = {VTableSlot{kKnownMethodToken, reinterpret_cast<void*>(0x1000)}};
-    vt = TypeVTable{};
-    vt.type_token = kKnownTypeToken;
-    vt.stable_id = kKnownStableId;
-    vt.slot_count = 1u;
-    vt.slots = slots.data();
-    vt.vtable_array = nullptr;
-    vt.vtable_length = 0u;
-    vt.type_shape = 1u;  // reference type
-    RegisterTypeVTable(&vt);
+/// Uses static storage so the data outlives all TESTs in the suite.
+/// RegisterTypeVTable is idempotent (same type_token → no-op on repeat), so
+/// call this from each test freely — only the first call actually registers.
+void RegisterKnownVTable() {
+    static std::vector<VTableSlot> s_slots = {
+        VTableSlot{kKnownMethodToken, reinterpret_cast<void*>(0x1000)}
+    };
+    static TypeVTable s_vt = []{
+        TypeVTable v{};
+        v.type_token = kKnownTypeToken;
+        v.stable_id = kKnownStableId;
+        v.slot_count = static_cast<CHAOS_IL2CPP_UINT32>(s_slots.size());
+        v.slots = s_slots.data();
+        v.vtable_array = nullptr;
+        v.vtable_length = 0u;
+        v.type_shape = 1u;  // reference type
+        return v;
+    }();
+    RegisterTypeVTable(&s_vt);
 }
 
 /// Random type-token lookups to stress the TryGetTypeVTable path.
@@ -51,9 +58,7 @@ void RegisterKnownVTable(TypeVTable& vt, std::vector<VTableSlot>& slots) {
 /// reachable; then asserts the vast majority of random tokens resolve to
 /// nullptr (as the lookup contract requires for unknown types).
 TEST(VTableFuzz, RandomTypeTokenLookups) {
-    TypeVTable vt;
-    std::vector<VTableSlot> slots;
-    RegisterKnownVTable(vt, slots);
+    RegisterKnownVTable();
 
     // The known token must resolve — proves the helper walks a real registry
     // rather than a hard-coded nullptr return.
@@ -76,9 +81,7 @@ TEST(VTableFuzz, RandomTypeTokenLookups) {
 
 /// Random stable-id lookups to stress the FindVTable path.
 TEST(VTableFuzz, RandomStableIdLookups) {
-    TypeVTable vt;
-    std::vector<VTableSlot> slots;
-    RegisterKnownVTable(vt, slots);
+    RegisterKnownVTable();
 
     const void** known = FindVTable(kKnownStableId);
     // FindVTable only resolves flat registered arrays; our synthetic type has
@@ -100,9 +103,7 @@ TEST(VTableFuzz, RandomStableIdLookups) {
 
 /// Random virtual method pointer resolution.
 TEST(VTableFuzz, RandomVirtualMethodResolve) {
-    TypeVTable vt;
-    std::vector<VTableSlot> slots;
-    RegisterKnownVTable(vt, slots);
+    RegisterKnownVTable();
 
     // The known type's method must resolve to a non-null pointer — proves the
     // inheritance-walk path returns real function pointers, not hard nullptr.
