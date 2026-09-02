@@ -43,7 +43,15 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
 
     foundation_dir = ctx.foundation_dir
     assembly = ctx.assembly
-    chunks_dir = foundation_dir / "chunks"
+    # Use the build-side chunks root (ctx.chunks_dir) so per-chunk results/
+    # (fact.json, benchmark.json) are read from the artifact output tree
+    # (artifacts/foundation-dll/<assembly>/chunks/) rather than the version-
+    # controlled source tree (foundation/chunks/) which has no results/ dir.
+    # When build_dir is None (legacy single-root), ctx.chunks_dir falls back
+    # to the source chunk parent, which IS the foundation chunks dir — in that
+    # case the results/ dir IS under the foundation tree (same as fact_chunk
+    # writes to) and there is no split.
+    chunks_dir = ctx.chunks_dir
     reports_dir = foundation_dir / "_dll" / "reports"
     latest_dir = reports_dir / "latest"
     history_dir = reports_dir / "history"
