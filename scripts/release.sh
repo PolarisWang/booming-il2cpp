@@ -141,6 +141,28 @@ release_lock() {
 }
 dispatch_cmd() { ( cd "$WORKTREE_DIR" && "$@" ); }
 
+# Provision prebuilt SDK libs from the main worktree into the release worktree.
+# The release worktree is a clean checkout; the native SDK libs (Windows .lib /
+# Linux .a) live in the MAIN repo under gitignored tree tests/e2e/translation/sdk
+# and are needed at link time by publish-smoke's CopyRealSdkLibsOverStubs
+# (which reads repoRoot-relative paths).  Without them the publish link fails
+# with LNK1107 on 8-byte stub archives.  Uses cp -r (Windows symlinks unreliable).
+provision_worktree_sdk() {
+    echo "  provisioning prebuilt SDK into worktree"
+    local wt="$WORKTREE_DIR"
+    local sdk_dir_src="$REPO_ROOT/tests/e2e/translation/sdk"
+    local sdk_dir_dst="$wt/tests/e2e/translation/sdk"
+    if [ -d "$sdk_dir_src" ] && [ ! -d "$sdk_dir_dst" ]; then
+        mkdir -p "$wt/tests/e2e/translation"
+        cp -r "$sdk_dir_src" "$sdk_dir_dst" 2>/dev/null && echo "    copied sdk lib tree" || cp "$sdk_dir_src"/*.lib "$sdk_dir_dst" 2>/dev/null || true
+    fi
+    # artifacts/release dir needed by checksums/sbom integrity
+    if [ ! -d "$wt/artifacts" ]; then mkdir -p "$wt/artifacts" "$REPO_ROOT/artifacts"; fi
+    if [ -d "$REPO_ROOT/artifacts/release" ] && [ ! -e "$wt/artifacts/release" ]; then
+        ln -sfn "$REPO_ROOT/artifacts/release" "$wt/artifacts/release" 2>/dev/null || cp -r "$REPO_ROOT/artifacts/release" "$wt/artifacts/release" 2>/dev/null || true
+    fi
+}
+
 # ── init ─────────────────────────────────────────────────────────────────
 cmd_init() {
     local ver="${1:-}"; [ -z "$ver" ] && { echo "Error: version required" >&2; exit 2; }
@@ -179,13 +201,14 @@ cmd_init() {
         echo "  [dry] write .release_state.json"
     fi
 
-    echo "[4/4] build prerequisites"
+    echo "[4/4] build prerequisites + SDK provision"
     if [ "$DRY_RUN" -eq 0 ]; then
         dispatch_cmd dotnet build src/managed/Chaos.IL2CPP.Generator --configuration Release --nologo -v q >/dev/null 2>&1 || true
         dispatch_cmd dotnet build src/managed/Chaos.IL2CPP.Driver --configuration Release --nologo -v q >/dev/null 2>&1 || true
+        provision_worktree_sdk
         echo "  prerequisites built"
     else
-        echo "  [dry] dotnet build Generator + Driver"
+        echo "  [dry] dotnet build Generator + Driver + provision SDK"
     fi
     echo ""
     echo "== init done. Run: ./scripts/release.sh verify"
@@ -195,7 +218,7 @@ cmd_init() {
 cmd_verify() {
     local state; state=$(read_state)
     local phase; phase=$(echo "$state" | state_get phase "$state")
-    if [ "$phase" != "init" ] && [ "$phase" != "fix" ]; then
+    if [ "$phase" != "init" ] && [ "$phase" != "fix" ] && [ "$phase" != "verify" ]; then
         echo "Error: current phase '${phase}', expected init or fix. Run init <version> first." >&2
         exit 1
     fi
@@ -223,13 +246,23 @@ cmd_verify() {
         echo "    fail"; failed=1; write_state verifyResults.publishSmoke '"fail"'
     fi
 
-    # 3 unit
+    # 3 unit: dotnet test each project individually (test_driver infra expects
+    # trx produced by a pre-built bin; worktree is a clean checkout).
     echo "  3/4 unit tests"
     if [ "$DRY_RUN" -eq 1 ]; then echo "    [dry] unit"
-    elif dispatch_cmd python tests/runner/test_driver.py --layer unit --quick >/dev/null 2>&1; then
-        echo "    pass"; write_state verifyResults.unit '"pass"'
     else
-        echo "    fail (worktree may need test-projects built)"; failed=1; write_state verifyResults.unit '"fail"'
+        local unit_pass=0
+        for path in \
+            "tests/unit/managed/codegen/Chaos.IL2CPP.CodeGen.Tests.csproj" \
+            "tests/unit/managed/driver/Chaos.IL2CPP.Driver.Tests.csproj" \
+            "tests/unit/managed/snapshot/Chaos.IL2CPP.CodeGen.SnapshotTests.csproj"; do
+            if dispatch_cmd dotnet test "$path" --nologo -v q >/dev/null 2>&1; then
+                echo "    $(basename "$path"): pass"; ((unit_pass++))
+            else
+                echo "    $(basename "$path"): fail"; failed=1
+            fi
+        done
+        [ "$unit_pass" -eq 3 ] && write_state verifyResults.unit '"pass"' || write_state verifyResults.unit '"fail"'
     fi
 
     # 4 integrity
