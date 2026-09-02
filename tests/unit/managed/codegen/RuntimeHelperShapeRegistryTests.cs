@@ -710,4 +710,33 @@ public sealed class RuntimeHelperShapeRegistryTests
             Assert.Equal(methodName, descriptor!.MethodName);
         }
     }
+
+    // ── COM marshaller placeholder shapes (Built from 454c84f33) ────────
+    // ComInterfaceMarshaller<Int32>/UniqueComInterfaceMarshaller<Int32>
+    // .ConvertToUnmanaged must resolve via BuildDefault() to the native
+    // ChaosComInterfaceMarshallerConvertToUnmanaged placeholder so C++ AOT
+    // returns a non-null COM pointer (matching C#), not ExternalRuntimeFallback→null.
+
+    [Fact]
+    public void BuildDefault_ComInterfaceMarshallerConvertToUnmanaged_Resolves()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        var comSubjects = new[]
+        {
+            "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller<System.Int32>::ConvertToUnmanaged:System.Void*(System.Int32)",
+            "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller<System.Int32>::ConvertToUnmanaged:System.Void*(System.Int32)",
+        };
+        foreach (var callee in comSubjects)
+        {
+            Assert.True(
+                registry.TryMatchGenericShape(callee, out var descriptor, out var typeArgs),
+                $"TryMatchGenericShape should match COM ConvertToUnmanaged for {callee}");
+            Assert.Equal("ConvertToUnmanaged", descriptor!.MethodName);
+
+            // Resolver lambda must yield the native placeholder body.
+            var resolution = descriptor.Resolver(null!, callee, typeArgs!);
+            Assert.NotNull(resolution);
+            Assert.Contains("ChaosComInterfaceMarshallerConvertToUnmanaged()", resolution!.CppSource);
+        }
+    }
 }
