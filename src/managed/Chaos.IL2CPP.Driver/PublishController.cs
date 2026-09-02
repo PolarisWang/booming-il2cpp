@@ -272,16 +272,14 @@ internal static class PublishController
         System.IO.Directory.CreateDirectory(sdkRootForPrefix);
         var fiPrefixPath = Path.Combine(sdkRootForPrefix, "chaos_fi_prefix.h");
         File.WriteAllText(fiPrefixPath, @"// chaos_fi_prefix.h — force-include prefix for MSVC 14.44+ terminate C2039 fix.
-// Declares ::terminate et al. with EXTERN ""C"" linkage (matching corecrt_terminate.h)
-// so that MSVC <exception>'s `using ::terminate;` finds a visible global symbol.
-// Force-included via /FI BEFORE any <exception> include.
+// By placing #include <corecrt_terminate.h> at the very TOP of every TU (via
+// /FI, before ANY other include), the CRT's own extern ""C"" declaration of
+// ::terminate / ::set_terminate / ::_get_terminate is seen FIRST, so MSVC
+// <exception>'s later `using ::terminate;` finds the symbol.  This avoids both
+// C2039 (symbol absent) and C2375 (linkage mismatch) because the CRT declaration
+// is the single, authoritative one.
 #ifdef _MSC_VER
-extern ""C"" {
-    __declspec(noreturn) void __cdecl terminate() throw();
-    typedef void (__cdecl* terminate_handler)();
-    terminate_handler __cdecl set_terminate(terminate_handler) throw();
-    terminate_handler __cdecl _get_terminate() noexcept;
-}
+#include <corecrt_terminate.h>
 #endif
 ");
 
