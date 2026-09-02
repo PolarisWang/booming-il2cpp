@@ -515,7 +515,7 @@ def _compile_custom_subjects(
     return method_info
 
 
-def _merge_supplemental_coverage(metadata_path: Path, chunk_dir: Path) -> None:
+def _merge_supplemental_coverage(metadata_path: Path, chunk_dir: Path, ctx) -> None:
     """Merge supplemental coverage entries into subjects.metadata.json.
 
     Reads supplemental-coverage.json from the chunk's managed/subjects/
@@ -526,8 +526,18 @@ def _merge_supplemental_coverage(metadata_path: Path, chunk_dir: Path) -> None:
     The file is a no-op (no changes made) when supplemental-coverage.json
     does not exist — making this safe for all chunks regardless of whether
     they have supplemental entries.
+
+    The file lives in the VERSION-CONTROLLED source tree (foundation_dir/chunks/slug/
+    managed/subjects/) and is NOT copied to the build-output tree.  In the
+    single-root layout (build_dir=None) the chunk_dir IS the build side, but
+    the supplemental-coverage.json is only on the source side.  Search both
+    paths, preferring the source side.
     """
-    supplemental_path = chunk_dir / "managed" / "subjects" / "supplemental-coverage.json"
+    # 1. Source side (version-controlled)
+    source_path = ctx.foundation_dir / "chunks" / ctx.slug / "managed" / "subjects" / "supplemental-coverage.json"
+    # 2. Build side (legacy single-root, or build-side copy)
+    build_path = chunk_dir / "managed" / "subjects" / "supplemental-coverage.json"
+    supplemental_path = source_path if source_path.exists() else build_path
     if not supplemental_path.exists():
         return
 
@@ -918,7 +928,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         # For methods the ATG cannot probe (delegate Invoke, internal classes),
         # supplemental-coverage.json provides entries so the AOT codegen still
         # compiles them. This is a no-op for chunks without the file.
-        _merge_supplemental_coverage(metadata_path, ctx.chunk_dir)
+        _merge_supplemental_coverage(metadata_path, ctx.chunk_dir, ctx)
         # Re-read after potential merge so total_subjects reflects all entries
         metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
         total_subjects = metadata.get("totalMethods", 0)

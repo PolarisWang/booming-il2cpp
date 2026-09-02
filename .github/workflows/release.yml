@@ -96,8 +96,13 @@ jobs:
       - name: Build SDK (cmake windows-x64-reference)
         shell: bash
         run: |
-          cmake --preset windows-x64-reference
-          cmake --build --preset windows-x64-reference
+          # Explicit generator + toolchain avoids reliance on the VS environment
+          # variables that setup-msbuild may or may not fully propagate to cmake
+          # presets.  Same pattern as codegen-regression.yml.
+          cmake -S . -B build/native -G "Visual Studio 17 2022" \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
+            -DROADMAP0_PRESET_TARGET=windows-x64-reference
+          cmake --build build/native --config RelWithDebInfo
       - name: Collect SDK artifacts
         shell: bash
         run: |

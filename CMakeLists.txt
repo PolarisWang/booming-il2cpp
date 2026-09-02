@@ -17,7 +17,7 @@ endif()
 # Keep in sync with src/managed/Directory.Build.props <Version> and tags v*.
 set(CHAOS_VERSION "0.2.0")
 
-project(roadmap0_preset_router LANGUAGES CXX VERSION ${CHAOS_VERSION})
+project(roadmap0_preset_router LANGUAGES CXX ASM VERSION ${CHAOS_VERSION})
 
 # ── clang-tidy static analysis (T-A1) ──────────────────────────────────
 # Enable with -DCHAOS_IL2CPP_CLANG_TIDY=ON on GCC/Clang presets (Linux Ninja).

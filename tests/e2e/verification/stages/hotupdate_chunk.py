@@ -128,23 +128,23 @@ def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | Non
     return patch_dll.exists()
 
 
-def _regenerate_host_arrays(ctx, metadata: dict) -> None:
+def _regenerate_host_arrays(ctx, metadata: dict) -> bool:
     """Regenerate patch-host-arrays.cpp with correct AOT name mappings.
 
-    Reads native-aot.generated.cpp to extract the exact AOT type/method names.
+    Returns True on success, False on any failure (caller must propagate).
     """
     hu_indices = metadata.get("hotupdateMethodIndices", [])
     methods = metadata.get("methods", [])
     if not hu_indices or not methods:
         print(f"  [hotupdate] No hotupdate subjects in metadata, skipping host arrays")
-        return
+        return False
 
     # Build assembly name from the first method's subjectId
     first_sid = methods[0].get("methodSubjectId", "")
     assembly = first_sid.split("/")[0] if "/" in first_sid else ""
     if not assembly:
         print(f"  [hotupdate] Cannot determine assembly name from subjectId")
-        return
+        return False
 
     import re
     sanitized_asm = assembly.replace(".", "_")
@@ -155,8 +155,8 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> None:
     if not aot_gen_path.exists():
         aot_gen_path = ctx.chunk_dir / "native" / "codegen" / "generated" / "native-aot.generated.cpp"
     if not aot_gen_path.exists():
-        print(f"  [hotupdate] Cannot read AOT generated code")
-        return
+        print(f"  [hotupdate] Cannot read AOT generated code at either location")
+        return False
 
     aot_code = aot_gen_path.read_text(encoding="utf-8", errors="replace")
 
@@ -164,7 +164,7 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> None:
     slot_match = re.search(r'kSubjectSlotMap\[\d+\]\s*=\s*\{([^}]+)\}', aot_code, re.DOTALL)
     if not slot_match:
         print(f"  [hotupdate] Could not parse kSubjectSlotMap")
-        return
+        return False
     slot_map = [int(x.strip()) for x in slot_match.group(1).split(",") if x.strip().isdigit()]
 
     # Parse hotpatch types: {type_name, namespace, first_idx, count}
@@ -178,7 +178,7 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> None:
 
     if not type_entries or not method_entries:
         print(f"  [hotupdate] Could not parse AOT entries ({len(type_entries)} types, {len(method_entries)} methods)")
-        return
+        return False
 
     # Build method_name -> AOT_method_index mapping from method_entries
     # method_entries[i] = (name, flags) at AOT method index i
@@ -197,7 +197,7 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> None:
 
     if not type_info:
         print(f"  [hotupdate] No type entries found for namespace {host_ns}")
-        return
+        return False
 
     # For each hotupdate subject, find type name by method name
     idx_to_method = {m["index"]: m for m in methods}
@@ -232,7 +232,7 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> None:
 
     if not type_names:
         print(f"  [hotupdate] No host array entries generated")
-        return
+        return False
 
     host_arrays_path = ctx.chunk_dir / "native" / "patch-host-arrays.cpp"
     lines = [
@@ -249,19 +249,21 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> None:
     # BOUNDARY_OVERRIDE: patch-host-arrays.cpp (post-hoc name list; see header note).
     host_arrays_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"  [hotupdate] Regenerated {host_arrays_path.name} ({len(type_names)} entries)")
+    return True
 
 
-def _incremental_rebuild(ctx) -> None:
+def _incremental_rebuild(ctx) -> bool:
     """Incremental cmake rebuild of entry.exe (no cmake re-configure).
 
     Deletes the stale patch-host-arrays.obj first to force recompilation,
     then runs cmake --build for proper dependency tracking.
+    Returns True on success, False on failure.
     """
     build_dir = ctx.chunk_dir / "native" / "build"
     src_file = ctx.chunk_dir / "native" / "patch-host-arrays.cpp"
     if not build_dir.exists() or not src_file.exists():
         print(f"  [hotupdate] Cannot rebuild: build dir or source not found")
-        return
+        return False
 
     import subprocess, shutil, glob as _glob
 
@@ -283,13 +285,16 @@ def _incremental_rebuild(ctx) -> None:
         for line in (result.stderr.splitlines() + result.stdout.splitlines())[-5:]:
             print(f"      {line}")
         print(f"  [hotupdate] Rebuild FAILED (rc={result.returncode})")
-        return
+        return False
 
     src = build_dir / "RelWithDebInfo" / "chaos_entry.exe"
     dst = ctx.chunk_dir / "native" / "entry.exe"
     if src.exists():
         shutil.copy2(src, dst)
         print(f"  [hotupdate] Rebuilt entry.exe: {dst.name} ({src.stat().st_size} bytes)")
+        return True
+    print(f"  [hotupdate] Rebuild completed but entry.exe not found at {src}")
+    return False
 
 
 def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
@@ -468,8 +473,23 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # null values. Without this mapping, ApplyPatchFromMemoryEx cannot match
     # patch methods to AOT dispatch entries (0 patches applied).
     if patch_data_path and patch_data_path.exists() and patch_data_path.stat().st_size > 0:
-        _regenerate_host_arrays(ctx, metadata)
-        _incremental_rebuild(ctx)
+        # P0-A/P1-A (false+-fix): if host-array regeneration fails (name-map miss,
+        # empty mapping, stale parse), ApplyPatchFromMemoryEx will match 0 dispatch
+        # entries and the native run would "pass" while applying nothing. Propagate
+        # the failure as an error instead of silently running on stale arrays.
+        if not _regenerate_host_arrays(ctx, metadata):
+            return StageResult(
+                stage="hotupdate", status="error",
+                summary="patch-host-arrays.cpp regeneration failed — cannot guarantee patch "
+                        "will be applied (would risk a false-positive no-op pass); check "
+                        "native-aot.generated.cpp parse / name mapping",
+                duration_ms=int((time.perf_counter() - start) * 1000))
+        if not _incremental_rebuild(ctx):
+            return StageResult(
+                stage="hotupdate", status="error",
+                summary="incremental rebuild failed after host-array regen — stale executable "
+                        "cannot apply patch (false-positive risk); not marking passed",
+                duration_ms=int((time.perf_counter() - start) * 1000))
 
     # ── Step 2: Run entry.exe --hotupdate [--patch-data ...] [--benchmark-iterations N] ──
     # NOTE: We do NOT do a cmake rebuild here.  The cmake build infrastructure
@@ -575,18 +595,23 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
 
     # Determine status:
     # - Unified pass criterion (applies to both with and without patch data):
-    #   methods must execute without crashing (failed==0 && passed>0) and
+    #   methods must execute without crashing (passed>0 && assert_failed==0) and
     #   revert must work cleanly (allRevert=true).
-    # - With IL rewriting, allSemantic will naturally be true (sentinel vs real value),
-    #   but we no longer require it as a hard gate — the combination of "methods run
-    #   correctly + revert cleanly" is sufficient to prove the mechanism works.
+    # - With IL rewriting, allSemantic (semantic_changed>0) is REQUIRED as a hard gate:
+    #   it proves the patch data was actually applied AND the replacement (sentinel)
+    #   IL executed (patched != baseline). Without it, a "no-op patch" (0 dispatch
+    #   entries activated because of a name-map miss, empty host arrays, or a stale
+    #   executable) still runs the original AOT body, does not crash, and "reverts"
+    #   trivially — reporting passed while NO replacement code ever ran (false+).
     # - assert_failed > 0 means the patch introduced a crash in a previously-passing
     #   method — this is a genuine regression and should fail.
-    # Determine status: simplified — no skip status variants.
-    # JSON truncation or failed patch generation → error.
-    # With patch data → passed if no crash and revert clean; else failed.
-    # Without patch data → skipped (nothing meaningful was tested).
+    # - Native non-zero exit (even with well-formed JSON) is treated as unreliable:
+    #   the process may have crashed after flushing stdout.
     errors: list[str] = []
+    exit_code = (r.returncode if isinstance(r, subprocess.CompletedProcess)
+                 else (r.get('exitCode', 0) if isinstance(r, dict) else 0))
+    native_crash = exit_code != 0
+
     if json_truncated:
         status = "error"
         if not errors:
@@ -601,11 +626,33 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         if not errors:
             errors.append("patch data generation failed earlier")
     elif result_data.get("patchSkippedNoMethods"):
-        # ATG produced 0 patchable methods — tests ran clean, nothing to patch
-        status = "passed" if (assert_failed == 0 and all_revert) else "failed"
+        # ATG produced 0 patchable methods — tests ran clean, nothing to patch.
+        # Semantic gate N/A (no patch to apply); require clean run + clean revert.
+        status = "passed" if (assert_failed == 0 and all_revert and not native_crash) else "failed"
+        if status != "passed" and not errors:
+            errors.append("patch skipped; clean-run/revert/exit-code requirement unmet")
         print(f"  [hotupdate] No methods to patch — {passed} passed, revert={all_revert}")
     elif patch_data_path:
-        status = "passed" if (assert_failed == 0 and all_revert) else "failed"
+        # P0-A (false+-fix): pass REQUIRES semantic_changed > 0 — i.e. at least one
+        # patched subject actually produced a different value than its baseline
+        # (the sentinel body executed, not the original AOT body).  A no-op patch
+        # (0 dispatch entries activated) yields semantic_changed == 0 and must fail,
+        # not pass.  Combined with a clean run (no assert crash) + clean revert +
+        # clean native exit code.
+        semantic_ok = semantic_changed > 0
+        status = "passed" if (assert_failed == 0 and all_revert and semantic_ok and not native_crash) else "failed"
+        if status != "passed":
+            if not semantic_ok:
+                errors.append(
+                    f"semantic_changed == {semantic_changed} — patch appeared to apply 0 "
+                    f"replacements (no patched value differed from baseline); possible "
+                    f"no-op patch / name-map miss / stale executable")
+            elif assert_failed != 0:
+                errors.append(f"patch introduced {assert_failed} assertion crash(es)")
+            elif not all_revert:
+                errors.append("revert did not cleanly restore baseline")
+            elif native_crash:
+                errors.append(f"native runner exited non-zero ({exit_code}) with complete JSON — unreliable")
     else:
         status = "skipped"
         print(f"  [hotupdate] Skipped — no patch data was provided")
