@@ -17,6 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="coverlet.msbuild" Version="6.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\managed\Chaos.IL2CPP.Driver\Chaos.IL2CPP.Driver.csproj" />
     <ProjectReference Include="..\..\..\..\src\managed\Chaos.IL2CPP.Pipeline\Chaos.IL2CPP.Pipeline.csproj" />
     <ProjectReference Include="..\codegen\StubAssembly\StubAssembly.csproj">

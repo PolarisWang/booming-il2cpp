@@ -78,6 +78,17 @@ jobs:
             /p:CoverletThresholdType=line `
             /p:CoverletThresholdStat=total
 
+      - name: Driver Coverage Report (collect; no hard threshold — 29 driver tests
+        # genuinely cover a thin CLI surface (ConvertToCpp/Pipeline seam); a forced
+        # low % gate would be a nominal no-op.  Snapshot tests (108) are the real
+        # codegen-output gate.  Report-only surfaces the coverage gap for growth.
+        run: |
+          dotnet test tests/unit/managed/driver/ `
+            --configuration Release `
+            /p:CollectCoverage=true `
+            /p:CoverletOutputFormat=cobertura `
+            /p:CoverletOutput=coverage-results/coverage-driver.xml
+
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
         with:
