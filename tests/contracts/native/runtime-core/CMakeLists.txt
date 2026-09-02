@@ -125,25 +125,23 @@ endif()
 # chaos::il2cpp::jit::EmitUnwindInfo (src/native/jit/jit_unwind.h), which is in
 # CHAOS_NATIVE_INCLUDE_DIRS. Replaced the old speculative codegen:: binding.
 #
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
-    if(MSVC AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+# Test sources include <windows.h> (codegen_native_test.cpp), t4_jit_call.asm,
+# and assert x64 Win64 SEH/pdata-xdata byte layout (unwind_info_test.cpp) — all
+# are Windows JIT integration tests.  They only build on MSVC x64; on Linux/arm64
+# the runtime SDK build must not try (and fail) to compile them.
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp" AND WIN32 AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+    if(MSVC)
         # x64 Windows: T4 thunk requires an x64 assembly shim (ASM_MASM).
         enable_language(ASM_MASM)
         set_source_files_properties(
             "${CMAKE_CURRENT_SOURCE_DIR}/t4_jit_call.asm"
             PROPERTIES LANGUAGE ASM_MASM)
-        chaos_native_add_test(chaos_codegen_native_test
-            codegen_native_test.cpp
-            "${CMAKE_CURRENT_SOURCE_DIR}/t4_jit_call.asm")
-    else()
-        # Non-x64 / non-MSVC: T4 thunk assembly is x64-only; still compile the
-        # C++ test, but without native codegen execution coverage.
-        chaos_native_add_test(chaos_codegen_native_test codegen_native_test.cpp)
     endif()
+    chaos_native_add_test(chaos_codegen_native_test
+        codegen_native_test.cpp)
 endif()
 # unwind_info_test asserts x86-64 UWOP/RBP/mov-rax-imm64 byte layout — only valid
-# on x64. On non-x64 (arm64) the bytes don't exist, so exclude the target there.
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unwind_info_test.cpp" AND
-   (MSVC AND CMAKE_SIZEOF_VOID_P EQUAL 8 OR CMAKE_SYSTEM_PROCESSOR MATCHES "^(x86_64|AMD64|amd64)$"))
+# on x64 Windows (EmitUnwindInfo / AllocRuntimeFunction are Win64 SEH helpers).
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unwind_info_test.cpp" AND WIN32 AND CMAKE_SIZEOF_VOID_P EQUAL 8)
     chaos_native_add_test(chaos_unwind_info_test unwind_info_test.cpp)
 endif()
