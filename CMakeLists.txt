@@ -188,7 +188,10 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference"
     # Every chaos_native_add_test() target links gtest_main/gtest, so provision
     # googletest here before the unit/runtime-native tree (mirrors the windows
     # branch block at line 72).
-    if(MSVC OR UNIX)
+    # MSVC only: the native unit suites (log_system_test etc.) include Windows
+    # headers (io.h / windows.h) and aren't portable to the linux SDK build,
+    # which only needs to emit chaos_*.so/.a libraries.
+    if(MSVC)
         include(FetchContent)
         FetchContent_Declare(
             googletest
