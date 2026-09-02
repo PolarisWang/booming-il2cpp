@@ -373,13 +373,30 @@ void CollectionStackClear(CHAOS_IL2CPP_INTPTR handle) noexcept
 
 // ── Dispose helpers (free native storage when managed object is GC'd) ──
 // Each require_*_storage allocates via new; the managed object holds the
-// pointer in its embedded slot at kNativeStorageSlotOffset but has no
-// finalizer.  These Dispose functions must be called from the managed-side
-// Dispose/Finalize chain (registered in CollectionStubs.cs shape resolvers).
+// pointer in its embedded slot at kNativeStorageSlotOffset.
+//
+// ⚠️ NOT-CURRENTLY-WIRED (known): as of the industrial P1/P2 split, these four
+// Dispose exports have NO caller in native, managed, or codegen — they are
+// declared in collection_stubs.h but never invoked (a future managed-side
+// Dispose/Finalize chain has not been wired).  Each require_*_storage `new`
+// therefore leaks unless a caller is added; this is an accepted, tracked gap.
+//
+// PRECONDITION (must hold for any FUTURE caller): `handle` must be a live
+// managed collection-object base pointer (List/HashSet/Queue/Stack) whose
+// embedded native-storage slot at kNativeStorageSlotOffset == 0 can be
+// overwritten ONLY by the matching require_*_storage.  The slot check below
+// (`if *slot == 0 return`) prevents sequential double-free but CANNOT defend
+// against an arbitrary/dangling `handle` — dereferencing handle+16 and
+// `delete`-ing an unvalidated address is heap corruption.  A caller must not
+// pass a random/dangling/reused handle, and concurrent Dispose+use on the
+// same object is undefined (no synchronization exists here).
 
 void CollectionListDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
 {
     if (handle == 0) return;
+    // NOTE: slot read/delete is only safe when `handle` satisfies PRECONDITION
+    // above.  No object-validity check is available in this subsystem today;
+    // callers are responsible for passing a live List object.
     auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
         reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
     if (*slot == 0) return;

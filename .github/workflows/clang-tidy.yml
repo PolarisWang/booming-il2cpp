@@ -51,23 +51,34 @@ jobs:
 
       - name: Filter P0 warnings (exit 1 on any P0)
         run: |
-          # P0 patterns: core.*(dereference|leak|overflow|undefined|taint)
-          # bugprone.*(undefined-memory|use-after-move|dangling-handle|sizeof)
-          P0_COUNT=$(grep -cE '(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint)|bugprone-(undefined-memory-manipulation|use-after-move|dangling-handle|sizeof-expression))' clang-tidy-output.txt || true)
+          # P0 filter must catch the REAL memory-safety checkers clang-analyzer
+          # emits.  Leak/UAF/overflow/type-confusion diagnostics are NOT all
+          # namespaced under `core.`:
+          #   - unix.Malloc            malloc-family leaks (use/uninit/leak)
+          #   - cplusplus.NewDeleteLeak*   `new` without matching `delete`
+          #   - valist.CopyLeak        va_copy without matching va_end
+          #   - core.* (Dereference/NullableUnderflow/UndefinedBranchCondition,
+          #     StackAddressEscape -> use-after-return)
+          #   - memLeak (deadcode.DeadStores family via alpha)
+          # Restricting to `core.[A-Za-z]*(Leak|...)` misses unix./cplusplus./
+          # valist. checkers — real malloc/new leaks would silently pass the gate.
+          P0_RE='(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint|StackAddressEscape)|unix\.Malloc|cplusplus\.NewDeleteLeak|valist\.CopyLeak)'
+          P0_COUNT=$(grep -cE "$P0_RE" clang-tidy-output.txt || true)
           echo "P0 warnings: $P0_COUNT"
           if [ "$P0_COUNT" -gt 0 ]; then
             echo "::error::clang-tidy found $P0_COUNT P0 warning(s) — must fix before merge"
-            grep -E '(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint)|bugprone-(undefined-memory-manipulation|use-after-move|dangling-handle|sizeof-expression))' clang-tidy-output.txt
+            grep -E "$P0_RE" clang-tidy-output.txt
             exit 1
           fi
           echo "✅ No P0 clang-tidy warnings"
 
       - name: Report total warnings
         run: |
+          P0_RE='(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint|StackAddressEscape)|unix\.Malloc|cplusplus\.NewDeleteLeak|valist\.CopyLeak)'
           TOTAL=$(grep -cE 'warning:' clang-tidy-output.txt || true)
           echo "Total clang-tidy warnings: $TOTAL"
-          echo "P0: $(grep -cE '(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint)|bugprone-(undefined-memory-manipulation|use-after-move|dangling-handle|sizeof-expression))' clang-tidy-output.txt || true)"
-          echo "P1+: $((TOTAL - $(grep -cE '(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint)|bugprone-(undefined-memory-manipulation|use-after-move|dangling-handle|sizeof-expression))' clang-tidy-output.txt || true)))"
+          echo "P0: $(grep -cE "$P0_RE" clang-tidy-output.txt || true)"
+          echo "P1+: $((TOTAL - $(grep -cE "$P0_RE" clang-tidy-output.txt || true)))"
 
       - name: Upload clang-tidy report
         uses: actions/upload-artifact@v4

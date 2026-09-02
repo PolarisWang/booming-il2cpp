@@ -12,20 +12,20 @@
 #   - type mismatches (e.g., vtable call on wrong object)
 #   - function pointer mismatches
 #
-# GCC/Clang (Linux): -fsanitize=undefined (default halt-on-error)
+# GCC/Clang (Linux): -fsanitize=undefined (halt-on-error via -fno-sanitize-recover)
 # MSVC: UBSan is not available — use /RTC1 as partial substitute.
 
 if(NOT COMMAND chaos_enable_ubsan)
     macro(chaos_enable_ubsan target)
         if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-            target_compile_options(${target} PRIVATE -fsanitize=undefined)
+            target_compile_options(${target} PRIVATE -fsanitize=undefined -fno-sanitize-recover=all)
             target_link_options(${target} PRIVATE -fsanitize=undefined)
             # Blacklist known UB patterns that are intentional in the runtime
             # (e.g., type-punning in GC, reinterpret_cast in ABI layer).
             # Use: -fsanitize-blacklist=<file> for targeted suppression.
         elseif(MSVC)
             # MSVC has no UBSan; /RTC1 catches some runtime errors.
-            # message(STATUS "UBSan not available on MSVC — skipping ${target}")
+            target_compile_options(${target} PRIVATE /RTC1)
         endif()
     endmacro()
 endif()
