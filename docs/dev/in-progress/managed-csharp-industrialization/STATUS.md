@@ -46,3 +46,13 @@ native C++ 工业化（archive/dev-completed/17-native-industrialization）
    判断, 收益低(已职责导向partial)风险高(破坏AOT输出). 建议由专职
    codegen agent 分批做.
 - 3 非 partial (Program.cs/JitAsmCapture/DllScanner) 为独立工具类.
+
+## M-C / M-D / M-E 完成 (2026-09-02)
+- 🔍 M-C: 7 超大文件评估 → 4/7 已是 NativeAotLoweringPlanner partial class 部分
+   (45-146 方法/文件, 职责导向), 纯物理拆分收益低风险高(codegen输出). 建议
+   专职 codegen agent 需 domain 判断时再拆. 3 非partial为独立工具类. 记录不强制.
+- ✅ M-D: Driver.Tests +coverlet.msbuild(能力就绪), CI codegen(50%硬门禁 保留) +
+   Driver Coverage Report(report-only, 29测试仅覆盖薄CLI面, 强设%门禁是
+   nominal no-op). commit a29e55606.
+- ✅ M-E: 160 Scriban 模板审计 → 无 stub/硬编码/编码残留, snapshot(108)守正确性.
+   固化 6 项审查清单(scriban-template-review.md). 记录 kSubjectContractMap 已知gap.
