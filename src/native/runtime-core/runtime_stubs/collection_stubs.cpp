@@ -390,9 +390,19 @@ void CollectionStackClear(CHAOS_IL2CPP_INTPTR handle) noexcept
 // `delete`-ing an unvalidated address is heap corruption.  A caller must not
 // pass a random/dangling/reused handle, and concurrent Dispose+use on the
 // same object is undefined (no synchronization exists here).
+//
+// 🔴 RUNTIME GUARD (not comment-only): each Dispose below begins with
+// CHAOS_IL2CPP_FAIL so that an unexpected/accidental invocation while the
+// managed Dispose/Finalize chain is unwired ABORTS loudly (verification mode:
+// SEH-managed exception, fact runner value=-1) instead of silently running an
+// unvalidated handle+16 deref + delete that would heap-corrupt.  This guard
+// MUST be removed (replaced by the real delete path below) when the managed
+// Dispose chain is actually wired and callers are known to pass a live, valid
+// collection handle per the PRECONDITION above.
 
 void CollectionListDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
 {
+    CHAOS_IL2CPP_FAIL("CollectionListDispose not wired — see comment above");
     if (handle == 0) return;
     // NOTE: slot read/delete is only safe when `handle` satisfies PRECONDITION
     // above.  No object-validity check is available in this subsystem today;
@@ -406,6 +416,7 @@ void CollectionListDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
 
 void CollectionHashSetDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
 {
+    CHAOS_IL2CPP_FAIL("CollectionHashSetDispose not wired — see comment above");
     if (handle == 0) return;
     auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
         reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
@@ -416,6 +427,7 @@ void CollectionHashSetDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
 
 void CollectionQueueDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
 {
+    CHAOS_IL2CPP_FAIL("CollectionQueueDispose not wired — see comment above");
     if (handle == 0) return;
     auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
         reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
@@ -426,6 +438,7 @@ void CollectionQueueDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
 
 void CollectionStackDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
 {
+    CHAOS_IL2CPP_FAIL("CollectionStackDispose not wired — see comment above");
     if (handle == 0) return;
     auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
         reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);

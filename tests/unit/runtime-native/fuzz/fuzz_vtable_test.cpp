@@ -106,7 +106,9 @@ TEST(VTableFuzz, RandomVirtualMethodResolve) {
 
     // The known type's method must resolve to a non-null pointer — proves the
     // inheritance-walk path returns real function pointers, not hard nullptr.
-    ResolveVirtualMethodPointer(kKnownTypeToken, kKnownMethodToken);
+    void* known_method = ResolveVirtualMethodPointer(kKnownTypeToken, kKnownMethodToken);
+    EXPECT_NE(known_method, nullptr)
+        << "Known synthetic type+method must resolve to a real function pointer";
 
     std::mt19937 rng(kFuzzSeed + 2);
     std::uniform_int_distribution<CHAOS_IL2CPP_UINT32> token_dist(0, 100000);

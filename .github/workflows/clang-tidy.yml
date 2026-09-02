@@ -59,7 +59,6 @@ jobs:
           #   - valist.CopyLeak        va_copy without matching va_end
           #   - core.* (Dereference/NullableUnderflow/UndefinedBranchCondition,
           #     StackAddressEscape -> use-after-return)
-          #   - memLeak (deadcode.DeadStores family via alpha)
           # Restricting to `core.[A-Za-z]*(Leak|...)` misses unix./cplusplus./
           # valist. checkers — real malloc/new leaks would silently pass the gate.
           P0_RE='(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint|StackAddressEscape)|unix\.Malloc|cplusplus\.NewDeleteLeak|valist\.CopyLeak)'
@@ -73,8 +72,9 @@ jobs:
           echo "✅ No P0 clang-tidy warnings"
 
       - name: Report total warnings
+        env:
+          P0_RE: '(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint|StackAddressEscape)|unix\.Malloc|cplusplus\.NewDeleteLeak|valist\.CopyLeak)'
         run: |
-          P0_RE='(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint|StackAddressEscape)|unix\.Malloc|cplusplus\.NewDeleteLeak|valist\.CopyLeak)'
           TOTAL=$(grep -cE 'warning:' clang-tidy-output.txt || true)
           echo "Total clang-tidy warnings: $TOTAL"
           echo "P0: $(grep -cE "$P0_RE" clang-tidy-output.txt || true)"

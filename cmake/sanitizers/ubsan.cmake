@@ -24,8 +24,17 @@ if(NOT COMMAND chaos_enable_ubsan)
             # (e.g., type-punning in GC, reinterpret_cast in ABI layer).
             # Use: -fsanitize-blacklist=<file> for targeted suppression.
         elseif(MSVC)
-            # MSVC has no UBSan; /RTC1 catches some runtime errors.
-            target_compile_options(${target} PRIVATE /RTC1)
+            # MSVC has no UBSan; /RTC1 catches some runtime errors (stack frame
+            # corruption, uninitialized locals).
+            #
+            # /RTC1 is only valid in Debug configurations:
+            #   - /RTC1 with /O2 emits D9025 warning and silently disables /RTC1
+            #   - /RTC1 requires /MDd (debug CRT); Release uses /MD, causing link
+            #     mismatch (/RTC1 in Release on /MDd targets is handled by CMake's
+            #     generator, but explicit /RTC1 on a Release target with /MT is
+            #     a D9002 error pattern)
+            # Guard with a generator expression so Release builds remain clean.
+            target_compile_options(${target} PRIVATE $<$<CONFIG:Debug>:/RTC1>)
         endif()
     endmacro()
 endif()
