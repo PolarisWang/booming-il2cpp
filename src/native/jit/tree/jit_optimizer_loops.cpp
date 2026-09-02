@@ -15,9 +15,12 @@ namespace chaos::il2cpp::jit::tree {
 namespace internal {
 
 // ── Helper: build vreg → defining block map ───────────────────────────
-static void BuildVRegDefBlocks(const std::vector<interpreter::RegisterInstruction>& instrs,
-                               const std::vector<BBRange>& bbs, uint32_t max_vreg,
-                               std::vector<uint32_t>& out_def_blocks) noexcept {
+// Declared in jit_optimizer_internal.h; defined here for the main TU
+// (OptimizeWithTreeIR) to call via internal::.  Non-static for cross-TU
+// linkage — was file-local static before the split.
+void BuildVRegDefBlocks(const std::vector<interpreter::RegisterInstruction>& instrs,
+                        const std::vector<BBRange>& bbs, uint32_t max_vreg,
+                        std::vector<uint32_t>& out_def_blocks) noexcept {
     out_def_blocks.assign(max_vreg, UINT32_MAX);
     uint32_t bi = 0;
     for (const auto& bb : bbs) {
