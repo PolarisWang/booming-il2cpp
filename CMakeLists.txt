@@ -147,7 +147,8 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
             COMMENT "Checking all native modules for architecture compliance..."
         )
     endif()
-elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference")
+elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference"
+       OR ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-native")
     add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX=1)
     include(cmake/config-tier.cmake)
     find_package(Python3 QUIET)

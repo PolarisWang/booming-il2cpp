@@ -75,6 +75,9 @@ jobs:
     needs: [version]
     runs-on: windows-latest
     steps:
+      - name: Enable long paths (Windows workaround for archive docs)
+        shell: bash
+        run: git config --global core.longpaths true
       - uses: actions/checkout@v4
         with:
           submodules: recursive
