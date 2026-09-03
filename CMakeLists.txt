@@ -15,7 +15,7 @@ endif()
 
 # P0.1: SemVer for the whole project — single source of truth in VERSION.
 # Keep in sync with src/managed/Directory.Build.props <Version> and tags v*.
-set(CHAOS_VERSION "0.2.0")
+set(CHAOS_VERSION "0.2.1")
 
 project(roadmap0_preset_router LANGUAGES CXX ASM VERSION ${CHAOS_VERSION})
 
