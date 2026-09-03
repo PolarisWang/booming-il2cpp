@@ -195,6 +195,7 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference"
     FetchContent_Declare(
         googletest
         URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.tar.gz
+        URL_HASH SHA256=7b42b4d6ed48810c5362c265a17faebe90dc2373c885e5216439d37927f02926
     )
     if(MSVC)
         set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -510,6 +511,7 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-native")
         FetchContent_Declare(
             googletest
             URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.tar.gz
+            URL_HASH SHA256=7b42b4d6ed48810c5362c265a17faebe90dc2373c885e5216439d37927f02926
         )
         set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
         set(FETCHCONTENT_BASE_DIR "${CMAKE_BINARY_DIR}/_deps")
@@ -726,6 +728,7 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-smoke")
         FetchContent_Declare(
             googletest
             URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.tar.gz
+            URL_HASH SHA256=7b42b4d6ed48810c5362c265a17faebe90dc2373c885e5216439d37927f02926
         )
         set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
         # Isolated content dir (separate from x64 native test build tree)

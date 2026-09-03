@@ -248,7 +248,7 @@ cmd_verify() {
     local ver; ver=$(echo "$state" | state_get version "$state")
 
     # 1 governance
-    echo "  1/4 release-governance"
+    echo "  1/5 release-governance"
     if [ "$DRY_RUN" -eq 1 ]; then echo "    [dry] governance";
     elif dispatch_cmd python scripts/cleanliness/check_release_governance.py; then
         echo "    pass"; write_state verifyResults.governance '"pass"'
@@ -257,7 +257,7 @@ cmd_verify() {
     fi
 
     # 2 publish-smoke (dev mode)
-    echo "  2/4 publish-smoke"
+    echo "  2/5 publish-smoke"
     if [ "$DRY_RUN" -eq 1 ]; then echo "    [dry] publish-smoke"
     elif dispatch_cmd python scripts/publish-smoke.py --json publish-smoke-report.json >/dev/null 2>&1; then
         echo "    pass"; write_state verifyResults.publishSmoke '"pass"'
@@ -267,7 +267,7 @@ cmd_verify() {
 
     # 3 unit: dotnet test each project individually (test_driver infra expects
     # trx produced by a pre-built bin; worktree is a clean checkout).
-    echo "  3/4 unit tests"
+    echo "  3/5 unit tests"
     if [ "$DRY_RUN" -eq 1 ]; then echo "    [dry] unit"
     else
         # Run each test project in its own foreground subshell with an explicit
@@ -296,7 +296,7 @@ cmd_verify() {
     fi
 
     # 4 integrity
-    echo "  4/4 integrity"
+    echo "  4/5 integrity"
     if [ "$DRY_RUN" -eq 1 ]; then echo "    [dry] checksums+sbom"
     else
         local sdk_dir="$RC_ARTIFACTS_BASE/release/$ver"
@@ -306,6 +306,36 @@ cmd_verify() {
             echo "    pass"; write_state verifyResults.integrity '"pass"'
         else
             echo "    fail"; failed=1; write_state verifyResults.integrity '"fail"'
+        fi
+    fi
+
+    # 5 nupkg end-to-end: install the tool from the just-built nupkg and
+    # publish the HelloWorld fixture.  We do this in the worktree's isolated
+    # temp dir so the global tool install doesn't pollute the host.
+    echo "  5/5 nupkg e2e"
+    if [ "$DRY_RUN" -eq 1 ]; then echo "    [dry] nupkg e2e"
+    else
+        local nupkg="$RC_ARTIFACTS_BASE/release/tool/chaos-il2cpp.${ver}.nupkg"
+        if [ -f "$nupkg" ]; then
+            # Install to a temp directory (not --global) to avoid side effects
+            local tool_test_dir
+            tool_test_dir=$(mktemp -d)
+            if dotnet tool install chaos-il2cpp \
+                --add-source "$(dirname "$nupkg")" \
+                --tool-path "$tool_test_dir" >/dev/null 2>&1; then
+                # Run chaos-il2cpp --version to verify basic invocation
+                if "$tool_test_dir/chaos-il2cpp" --version >/dev/null 2>&1; then
+                    echo "    nupkg install + version: pass"
+                else
+                    echo "    nupkg version check failed"; failed=1
+                fi
+                rm -rf "$tool_test_dir"
+            else
+                echo "    nupkg install failed (expected in CI without matching .NET SDK)"
+                echo "    (skipped — not blocking)"
+            fi
+        else
+            echo "    nupkg not found at $nupkg (skipped — not blocking)"
         fi
     fi
 
@@ -387,23 +417,28 @@ cmd_publish() {
         else
             dispatch_cmd bash scripts/generate-release-notes.sh "" "$tag" > "$notes" 2>/dev/null || true
         fi
-        # Update CHANGELOG: insert new release notes at the top, above the
-        # existing [Unreleased] section.
+        # Update CHANGELOG: append to the end (not insert at the top), so the
+        # existing hand-written structure is preserved.  Strip the release notes'
+        # own "# v0.2.0" header since it's redundant with the "## [ver]" entry.
         local changelog="$REPO_ROOT/CHANGELOG.md"
         local tmpcl
         tmpcl=$(mktemp)
-        {
-            echo "# Changelog"
-            echo ""
-            echo "## [${ver}] - $(date +%Y-%m-%d)"
-            echo ""
-            cat "$notes" 2>/dev/null || echo "  (auto-generated notes)"
-            echo ""
-            # Append existing content, skipping the '# Changelog' header
-            tail -n +3 "$changelog" 2>/dev/null || true
-        } > "$tmpcl"
+        if grep -q "^## \[${ver}\] -" "$changelog" 2>/dev/null; then
+            echo "  CHANGELOG already has an entry for ${ver} — skipping (idempotent)"
+        else
+            {
+                cat "$changelog" 2>/dev/null || echo "# Changelog"
+                echo ""
+                echo "## [${ver}] - $(date +%Y-%m-%d)"
+                echo ""
+                # Strip the first line of release notes (which is "# v0.2.0") since
+                # we already emit "## [ver]" as the CHANGELOG entry header.
+                sed -n '2,$p' "$notes" 2>/dev/null || echo "  (auto-generated notes)"
+                echo ""
+            } > "$tmpcl"
         cp "$tmpcl" "$changelog"
         rm -f "$tmpcl"
+        fi
         dispatch_cmd git add CHANGELOG.md || true
         dispatch_cmd git add "$notes" 2>/dev/null || true
         dispatch_cmd git commit -m "docs(changelog): update for v${ver}
@@ -417,24 +452,40 @@ regression_check: CHANGELOG.md contains the v${ver} entry on the tag
         echo "  release notes + CHANGELOG updated"
     fi
 
-    # ── 2. tag + push ────────────────────────────────────────────────────
+    # ── 2. tag + push (immutable — refuses to overwrite an existing tag) ────
     echo "[2/6] tag + push"
     if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] tag/push ${tag} ${branch}"
     else
-        dispatch_cmd git tag "$tag" 2>/dev/null || echo "  tag exists"
+        if dispatch_cmd git rev-parse -q --verify "refs/tags/$tag" >/dev/null 2>&1; then
+            echo "  Error: tag '$tag' already exists. Refusing to overwrite an immutable tag." >&2
+            echo "  To release a fix, bump the version number (e.g. ${ver} → x.y.z+1)." >&2
+            exit 1
+        fi
+        dispatch_cmd git tag -a "$tag" -m "release v${ver}" 2>/dev/null || { echo "  Error: tag creation failed"; exit 1; }
         dispatch_cmd git push origin "$branch" 2>&1 | tail -1 || true
         dispatch_cmd git push origin "$tag" 2>&1 | tail -1 || true
         echo "  pushed"
     fi
 
-    # ── 3. build nupkg + integrity ───────────────────────────────────────
+    # ── 3. build nupkg + integrity (in WORKTREE, so the nupkg matches verified code) ─
     echo "[3/6] build nupkg + integrity"
     if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] build-tool-package"
     else
-        ( cd "$REPO_ROOT" && bash scripts/build-tool-package.sh "$ver" 2>&1 | tail -3 || true )
+        dispatch_cmd bash scripts/build-tool-package.sh "$ver" 2>&1 | tail -3 || {
+            echo "  ⚠️  nupkg build failed (continuing with publish)" >&2
+        }
+        # Copy nupkg from worktree back to main repo's artifact dir so the
+        # gh release upload step can find it.
+        local wt_nupkg="$WORKTREE_DIR/artifacts/release/tool/chaos-il2cpp.${ver}.nupkg"
+        local main_nupkg="$RC_ARTIFACTS_BASE/release/tool/chaos-il2cpp.${ver}.nupkg"
+        if [ -f "$wt_nupkg" ]; then
+            mkdir -p "$(dirname "$main_nupkg")"
+            cp "$wt_nupkg" "$main_nupkg" 2>/dev/null || true
+        fi
         local sdk_dir="$RC_ARTIFACTS_BASE/release/$ver"
-        ( cd "$REPO_ROOT" && bash scripts/generate-checksums.sh "$sdk_dir" >/dev/null 2>&1 || true )
-        ( cd "$REPO_ROOT" && bash scripts/generate-sbom.sh "$sdk_dir" "$ver" >/dev/null 2>&1 || true )
+        mkdir -p "$sdk_dir"
+        dispatch_cmd bash scripts/generate-checksums.sh "$sdk_dir" >/dev/null 2>&1 || true
+        dispatch_cmd bash scripts/generate-sbom.sh "$sdk_dir" "$ver" >/dev/null 2>&1 || true
         echo "  artifacts ready"
     fi
 
@@ -444,11 +495,16 @@ regression_check: CHANGELOG.md contains the v${ver} entry on the tag
     elif command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
         local notes="$RC_ARTIFACTS_BASE/release/$ver/RELEASE_NOTES_${ver}.md"
         # Create the release with the structured notes
-        ( cd "$REPO_ROOT" && gh release create "$tag" \
-            -F "$notes" \
-            --title "$tag" \
-            --verify-tag 2>&1 | tail -3 ) || \
-            echo "  ⚠️  gh release create nonzero (CI will handle tag push)" >&2
+        if gh release view "$tag" >/dev/null 2>&1; then
+            echo "  Release $tag already exists — editing body"
+            gh release edit "$tag" -F "$notes" 2>/dev/null || true
+        else
+            ( cd "$REPO_ROOT" && gh release create "$tag" \
+                -F "$notes" \
+                --title "$tag" \
+                --verify-tag 2>&1 | tail -3 ) || \
+                echo "  ⚠️  gh release create nonzero (CI will handle tag push)" >&2
+        fi
         # Upload all built artifacts (nupkg, checksums, sbom)
         if [ -d "$RC_ARTIFACTS_BASE/release/$ver" ]; then
             find "$RC_ARTIFACTS_BASE/release/$ver" -type f \
@@ -462,6 +518,17 @@ regression_check: CHANGELOG.md contains the v${ver} entry on the tag
         echo "  release created/updated"
     else
         echo "  gh not authenticated; tag pushed — CI release.yml will create Release."
+    fi
+
+    # ── 4b. NuGet publish (optional) ──────────────────────────────────────
+    if [ "$DRY_RUN" -eq 1 ]; then echo "  [dry] nuget publish"
+    elif [ -f "$RC_ARTIFACTS_BASE/release/tool/chaos-il2cpp.${ver}.nupkg" ] && \
+         [ -n "${NUGET_API_KEY:-}" ]; then
+        echo "  [4b/6] Publishing to NuGet.org..."
+        ( cd "$REPO_ROOT" && bash scripts/publish-nuget.sh "$ver" 2>&1 | tail -5 ) || \
+            echo "  ⚠️  NuGet publish failed (continuing)" >&2
+    else
+        echo "  [4b/6] NuGet publish skipped (set NUGET_API_KEY to enable)"
     fi
 
     # ── 5. merge snapshot → main ─────────────────────────────────────────

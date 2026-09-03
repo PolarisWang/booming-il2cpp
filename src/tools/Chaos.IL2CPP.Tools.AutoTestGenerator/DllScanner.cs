@@ -356,10 +356,44 @@ public sealed class DllScanner
         var signatures = new List<MethodSignature>();
         var skippedMethods = new List<string>();
 
-        foreach (var rawMethod in targetType.GetMethods(
-            BindingFlags.Public | BindingFlags.Static |
-            BindingFlags.Instance | BindingFlags.DeclaredOnly))
+        // ── Methods snapshot ──
+        // Materialize the method list up-front.  Some BCL static classes (e.g.
+        // System.Linq.Enumerable, System.Text.Json.JsonSerializer) expose heavily
+        // overloaded / generic methods whose canonical signatures collide under MLC's
+        // lazy token resolution.  Accessing their ReturnType/ReturnParameter etc. can
+        // throw AmbiguousMatchException.  If that aborts the whole per-type scan, the
+        // entire type is skipped and ALL its probeable methods are lost (this was the
+        // global root cause of many STANDARD families producing 0 subjects).  Catching
+        // the ambiguity per method preserves the siblings.  Enumerating into a list
+        // first also lets a GetMethods() moveNext abort be isolated from per-method
+        // processing (we still keep whatever materialized before the abort).
+        MethodInfo[] rawMethods;
+        try
         {
+            rawMethods = targetType.GetMethods(
+                BindingFlags.Public | BindingFlags.Static |
+                BindingFlags.Instance | BindingFlags.DeclaredOnly).ToArray();
+        }
+        catch (AmbiguousMatchException ex)
+        {
+            // The GetMethods() enumeration itself tripped an ambiguous overload.
+            // Cannot salvage per-method — skip the whole type with a precise reason.
+            throw new InvalidOperationException(
+                $"Type '{typeFullName}' exposes ambiguous generic overloads that MLC " +
+                $"cannot enumerate: {ex.Message}");
+        }
+
+        foreach (var rawMethod in rawMethods)
+        {
+            // ── Per-method isolation ──
+            // MLC resolves a method's return type / generic signature lazily.  For
+            // overloaded generic BCL methods the resolution can throw
+            // AmbiguousMatchException.  Isolate it so one ambiguous overload skips
+            // itself while the type's other probeable methods survive.  Without this
+            // the whole type is discarded (DllScanner.ScanAll catches at the per-type
+            // level), dropping every subject that type would otherwise produce.
+            try
+            {
             // MLC sometimes leaks interface methods on closed generic types
             // even with DeclaredOnly (e.g., List<int> appears to have MoveNext
             // from List<int>.Enumerator). Skip methods whose declaring type
