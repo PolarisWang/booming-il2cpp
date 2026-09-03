@@ -229,4 +229,58 @@ public sealed class ExternalDispatchTests : IDisposable
     {
         // No cleanup needed.
     }
+
+    /// <summary>
+    /// ComInterfaceMarshaller<Int32>/UniqueComInterfaceMarshaller<Int32>
+    /// .ConvertToUnmanaged is forwarded (方案D) to ChaosComInterfaceMarshallerConvertToUnmanaged
+    /// (a non-null inert placeholder) instead of falling through to the catch-all
+    /// ExternalRuntimeFallback null return.  The GenericShapeDescriptor fires at
+    /// TryMatchGenericShape (ExternalRuntimeHelpers.cs:589) and the Resolver builds
+    /// a GenericShapeResolution whose CppSource contains the placeholder call.
+    ///
+    /// The caller body DOES NOT contain the placeholder inline — it calls the wrapper
+    /// symbol (chaos_external_runtime_...).  The placeholder lives in the shared
+    /// ObjectModelCode (external runtime helper definitions).  This test asserts both:
+    ///   (A) the caller references the wrapper symbol (proves shape fired);
+    ///   (B) the ObjectModelCode contains the placeholder body (proves generated code
+    ///       returns ChaosComInterfaceMarshallerConvertToUnmanaged, not null).
+    /// </summary>
+    [Fact]
+    public void UniqueComInterfaceMarshallerConvertToUnmanaged_EmitsPlaceholderCall()
+    {
+        var method = ModelFactory.CreateMethod(
+            "TestModule.TestClass::TestComConvert",
+            returnAbi: ModelFactory.VoidAbi,
+            instructions: new[]
+            {
+                // push arg (managed value, Int32 -> slot arg 0)
+                ModelFactory.Instruction("ldc.i4", ilOffset: 0, intOperand: 0),
+                // call UniqueComInterfaceMarshaller<System.Int32>.ConvertToUnmanaged(System.Int32)
+                ModelFactory.CallInstruction(
+                    callee: "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller<System.Int32>::ConvertToUnmanaged:System.Void*(System.Int32)",
+                    targetSymbol: "chaos_com_marshaler",
+                    ilOffset: 1,
+                    targetReturnType: "System.Void*",
+                    targetParameterCount: 1),
+                ModelFactory.Instruction("ret", ilOffset: 5),
+            });
+
+        // (A) Assert caller body references the wrapper symbol (proves shape fired).
+        var source = _fixture.RunPlannerSingleMethod(method);
+        AssertExtensions.ContainsCode(
+            "chaos_external_runtime_System_Private_CoreLib_System_Runtime_InteropServices_Marshalling_UniqueComInterfaceMarshaller_System_Int32___ConvertToUnmanaged_System_Void__System_Int32_",
+            source);
+
+        // (B) Assert the shared ObjectModelCode contains the placeholder body.
+        // This proves the Resolver's CppSource (which holds the actual placeholder
+        // call) was emitted — not a generic null-returning fallback.
+        var artifact = ModelFactory.CreateArtifact(method);
+        var plan = ModelFactory.CreateDefaultPlan(method.SubjectId);
+        var manifest = ModelFactory.CreateDefaultManifest(
+            inputAssemblyPath: PlannerFixture.StubAssemblyPath);
+        var templateModel = _fixture.RunPlanner(artifact, plan, manifest);
+        AssertExtensions.ContainsCode(
+            "ChaosComInterfaceMarshallerConvertToUnmanaged",
+            templateModel.ObjectModelCode);
+    }
 }
