@@ -943,6 +943,70 @@ PatchContext* ApplyPatchFromMemoryEx(
         if (md != nullptr) patch_domain_id_ex = md->domain_id;
     }
 
+    // ── Phase 1: Validation (dry-run, no state mutation) ────────────────
+    // (工业级 two-phase: 确保当前 blob 所有 "应有 body" 的方法都能在 AOT 注册表里
+    // 解析到 slot. 任一解析失败 → 整体不提交, 不进入 commit, 返回 nullptr.
+    // 这是模块级事务保证: 不会出现 "部分方法被打上 kHotpatchActive, 其余静默漏" 的
+    // 半残状态 — 这正是前期假阳性审计 FP-4 强调的缺口.)
+    //
+    // "应为该补丁一部分" = 有 body + 有有效 type/method name 的方法(与 commit
+    // 循环同判据). body_size==0 / 缺名 是补丁自己没带, 不是解析失败, 不阻断.
+    {
+        uint32_t total = cache->MethodCount();
+        uint32_t resolve_failures = 0;
+        uint32_t candidates = 0;  // 应被解析的方法数
+        for (uint32_t i = 0; i < total; ++i) {
+            auto* method_entry = cache->GetMethodDef(i);
+            if (method_entry == nullptr) continue;
+            if (method_entry->body_size == 0) continue;
+
+            const char* type_name = cache->GetTypeName(method_entry);
+            const char* type_ns = cache->GetTypeNamespace(method_entry);
+            const char* method_name = cache->GetString(method_entry->name_offset);
+            if (type_name == nullptr || method_name == nullptr) continue;
+
+            const char* lookup_ns = (host_type_ns != nullptr) ? host_type_ns : type_ns;
+            const char* lookup_type = type_name;
+            if (has_per_method_overrides && i < static_cast<uint32_t>(method_count)
+                && host_type_names != nullptr && host_type_names[i] != nullptr)
+                lookup_type = host_type_names[i];
+            if (has_per_method_overrides && i < static_cast<uint32_t>(method_count)
+                && host_method_names != nullptr && host_method_names[i] != nullptr)
+                method_name = host_method_names[i];
+
+            ++candidates;
+            uint64_t lookup = registry.LookupMethod(lookup_ns, lookup_type, method_name);
+            if (lookup == 0) {
+                HOTPATCH_DIAG("DIAG[APFM-P1]: unresolvable method ns='%s' type='%s' method='%s'\n",
+                    lookup_ns ? lookup_ns : "(null)",
+                    lookup_type ? lookup_type : "(null)",
+                    method_name ? method_name : "(null)");
+                ++resolve_failures;
+                continue;
+            }
+            uint32_t module_id_tmp = ExtractModuleId(lookup);
+            uint32_t aot_token_tmp = ExtractToken(lookup);
+            uint32_t slot_tmp = registry.TokenToSlot(module_id_tmp, aot_token_tmp);
+            if (slot_tmp == ~0u) {
+                HOTPATCH_DIAG("DIAP[APFM-P1]: no slot for ns='%s' method='%s'\n",
+                    lookup_ns ? lookup_ns : "(null)", method_name ? method_name : "(null)");
+                ++resolve_failures;
+            }
+        }
+        HOTPATCH_DIAG("DIAP[APFM-P1]: validated %u candidates, %u failures\n",
+            static_cast<unsigned>(candidates), static_cast<unsigned>(resolve_failures));
+
+        // 事务性判定: 该补丁的候选方法里只要有一个解析失败就不整体提交.
+        // (body_size==0 的方法不算候选 —— 那类不含此补丁改的 subject.)
+        if (candidates > 0 && resolve_failures > 0) {
+            HOTPATCH_DIAG("DIAP[APFM-P1]: transactional abort — %u/%u candidate methods unresolvable\n",
+                static_cast<unsigned>(resolve_failures), static_cast<unsigned>(candidates));
+            // 不做任何 SetPatchedBySlot. 由调用方(ChaosApplyPatch)映射为 PARTIAL_ROLLBACK/NO_METHODS.
+            DestroyPatchContext(ctx);
+            return nullptr;
+        }
+    }
+
     uint32_t patched_count = 0;
     uint32_t total = cache->MethodCount();
     for (uint32_t i = 0; i < total; ++i) {
