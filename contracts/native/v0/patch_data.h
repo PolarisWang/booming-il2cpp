@@ -114,9 +114,9 @@ typedef struct PatchDataHeader {    uint32_t magic;
     uint32_t patch_revision;
     //
     // These are appended AFTER dependency_count so a v3 reader that only knows
-    // sizeof(v3)==116 bytes stops exactly at dependency_count and never touches
+    // sizeof(v3)==132 bytes stops exactly at dependency_count and never touches
     // the two new trailing fields.  A v4 reader MUST verify header_size is large
-    // enough before reading them (an old v3 blob has header_size==116 < 124).
+    // enough before reading them (an old v3 blob has header_size==132 < 140).
 } PatchDataHeader;
 
 // ── Table entry structs ──────────────────────────────────────────────
