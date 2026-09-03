@@ -366,8 +366,13 @@ TEST_F(ReplacementBenchmarkTest, ConcurrentRegisterSameToken)
     auto worker = [&](int id) {
         (void)id;
         for (int i = 0; i < ops_per_thread; i++) {
-            // PHASE 1: Only Register — isolate if crash is in Register path
+            // Concurrent Register+Revert cycles on the SAME token — exercises
+            // mutex contention; end state must be fully reverted (Resolve null).
+            // (Previous version only Register'd and then asserted a reverted
+            // final state, which was contradictory — Register leaves the token
+            // active.  Now each op reverts, matching RegisterRevertCycleStress.)
             mr::Register(kSharedToken, kPatch);
+            mr::Revert(kSharedToken);
         }
     };
 
