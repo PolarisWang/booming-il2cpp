@@ -51,3 +51,9 @@ chaos_native_add_test(test_hotpatch_api_contract
     LABELS "unit;hotupdate"
 )
 
+# hotpatch_api_version_roundtrip_test — v4 header backward-compat + version-reject
+chaos_native_add_test(test_hotpatch_api_version_roundtrip
+    hotpatch_api_version_roundtrip_test.cpp
+    LABELS "unit;hotupdate"
+)
+

@@ -298,6 +298,10 @@ struct PatchContext {
 // after a hotpatch. Relaxed ordering is sufficient for the counter itself.
 extern std::atomic<uint64_t> g_patch_generation;
 
+// Host build revision, set via ChaosSetHostRevision.  Used by the v4 version-
+// compatibility check in ApplyPatchFromMemory.  Default 0 = accept any patch.
+extern std::atomic<uint32_t> g_host_revision;
+
 // ── Public API ──────────────────────────────────────────────────────────
 
 // Apply a .patchdata binary blob.

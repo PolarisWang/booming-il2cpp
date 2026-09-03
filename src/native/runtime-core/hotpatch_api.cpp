@@ -10,10 +10,12 @@ namespace chaos {
 namespace il2cpp {
 namespace runtime_core {
 
+// Host build revision set via ChaosSetHostRevision.  Default 0 = accept any.
+// Defined here (external linkage) so patch_loader.cpp version-compat check sees it.
+std::atomic<uint32_t> g_host_revision{0};
+
 namespace {
 
-// Host build revision set via ChaosSetHostRevision.  Default 0 = accept any.
-std::atomic<uint32_t> g_host_revision{0};
 // Next token to hand out for an applied patch.
 std::atomic<int32_t> g_next_token{1};
 // List of live patch contexts, keyed by token.  These are deleted on Revert.
@@ -55,17 +57,20 @@ int32_t ChaosApplyPatch(const void* data, size_t size) {
     using namespace chaos::il2cpp::runtime_core;
 
     PatchContext* ctx = nullptr;
-    uint32_t min_host = 0u;
-    // Minimal header peek for revision check without full parse.
-    if (data != nullptr && size >= sizeof(PatchDataHeader)) {
-        auto* hdr = static_cast<const PatchDataHeader*>(data);
-        if (hdr->magic != PATCH_DATA_MAGIC) return CHAOS_PATCH_ERR_INVALID_FORMAT;
-        if (hdr->version >= 4u) {
-            // v4 adds min_host_revision after dependency_count.  These are read
-            // as a trailer (see patch_data.h v4 layout).  We keep the check here
-            // tolerantly: if the field is absent (older producer), accept.
-            // Actual enforcement of the field, when present, lives in the loader.
-            (void)min_host;
+    // Minimal header peek for magic + version-compat check before the deep parse.
+    // Need at least the magic(4)+version(4)+header_size(4) to validate; the v4
+    // trailing min_host_revision/patch_revision are only present when
+    // header_size >= 140.  Read defensively: never beyond `size`.
+    if (data == nullptr || size < 12u) return CHAOS_PATCH_ERR_INVALID_FORMAT;
+    auto* hdr = static_cast<const PatchDataHeader*>(data);
+    if (hdr->magic != PATCH_DATA_MAGIC) return CHAOS_PATCH_ERR_INVALID_FORMAT;
+    if (hdr->version >= 4u && hdr->header_size >= 140u && size >= 140u) {
+        // v4 trailing fields present → enforce host revision requirement here so we
+        // can return the precise VERSION_MISMATCH code (the loader returns nullptr
+        // generically on version rejection and cannot be distinguished there).
+        uint32_t host_rev = g_host_revision.load(std::memory_order_relaxed);
+        if (host_rev > 0u && hdr->min_host_revision > host_rev) {
+            return CHAOS_PATCH_ERR_VERSION_MISMATCH;
         }
     }
 

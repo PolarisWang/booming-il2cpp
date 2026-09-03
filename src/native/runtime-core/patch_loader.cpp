@@ -551,14 +551,37 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
     auto* header = static_cast<const PatchDataHeader*>(data);
     HOTPATCH_DIAG("DIAG[APFM]: magic=%x ver=%u\n", header->magic, header->version);
 
-    // Validate magic and version (accept v1, v2, or v3).
+    // Validate magic and version (accept v1, v2, v3, or v4).
     if (header->magic != PATCH_DATA_MAGIC) return nullptr;
-    if (header->version != 1 && header->version != 2 && header->version != 3) return nullptr;
-    // v1 header: 112 bytes, v2 header: 124 bytes, v3 header: 132 bytes
+    if (header->version != 1 && header->version != 2 && header->version != 3 && header->version != 4) return nullptr;
+    // v1 header: 112 bytes, v2 header: 124 bytes, v3 header: 132 bytes, v4 header: 140 bytes
+    // NOTE: use version-literal sizes, NOT sizeof(PatchDataHeader), so old v3 blobs
+    // (header_size=132) written before the v4 fields existed still pass once a v4
+    // loader is installed.  sizeof(PatchDataHeader) is now 140 (includes the v4
+    // trailing fields) and would wrongly reject 132-byte v3 blobs.
     uint32_t min_header = (header->version == 1) ? 112 :
-                          (header->version == 2) ? 124 : sizeof(PatchDataHeader);
+                          (header->version == 2) ? 124 :
+                          (header->version == 3) ? 132 : 140;
     if (header->header_size < min_header) return nullptr;
     HOTPATCH_DIAG("DIAG[APFM]: validation OK (v%u header_size=%u)\n", header->version, header->header_size);
+
+    // Version-compatibility check (v4+ trailing fields):
+    // If the header is large enough to contain the v4 trailing fields, read them
+    // and reject if the host revision is below the patch's minimum requirement.
+    if (header->version >= 4) {
+        // Safe access: verify header_size covers the trailing fields before reading.
+        // offsetof(PatchDataHeader, patch_revision) + sizeof(uint32_t) = 136 + 4 = 140
+        if (header->header_size >= sizeof(PatchDataHeader)) {
+            uint32_t host_rev = g_host_revision.load(std::memory_order_relaxed);
+            if (host_rev > 0 && header->min_host_revision > host_rev) {
+                HOTPATCH_DIAG("DIAG[APFM]: version mismatch — patch requires host rev >= %u, host has %u\n",
+                    static_cast<unsigned>(header->min_host_revision), static_cast<unsigned>(host_rev));
+                return nullptr;  // caller maps to CHAOS_PATCH_ERR_VERSION_MISMATCH
+            }
+        }
+        // header_size < sizeof(PatchDataHeader): old header from a v4 producer that
+        // wrote a shorter header? unlikely but safe to skip check.
+    }
 
     // Validate structural integrity: total size must include AotCoreIr section.
     uint32_t expected_size = header->body_data_offset + header->body_data_size;
@@ -857,14 +880,25 @@ PatchContext* ApplyPatchFromMemoryEx(
     const char* const* host_method_names,
     int method_count) noexcept {
     // Same validation as ApplyPatchFromMemory.
-    if (data == nullptr || size < sizeof(PatchDataHeader)) return nullptr;
+    // Floor = smallest valid header (v1, 112 bytes).  sizeof(PatchDataHeader) is now
+    // 140 (v4) — using it here would reject valid 112-132-byte v1/v2/v3 blobs.
+    if (data == nullptr || size < 112u) return nullptr;
 
     auto* header = static_cast<const PatchDataHeader*>(data);
     if (header->magic != PATCH_DATA_MAGIC) return nullptr;
-    if (header->version != 1 && header->version != 2 && header->version != 3) return nullptr;
+    if (header->version != 1 && header->version != 2 && header->version != 3 && header->version != 4) return nullptr;
     uint32_t min_header = (header->version == 1) ? 112 :
-                          (header->version == 2) ? 124 : sizeof(PatchDataHeader);
+                          (header->version == 2) ? 124 :
+                          (header->version == 3) ? 132 : 140;
     if (header->header_size < min_header) return nullptr;
+
+    // Version-compatibility check (v4+ trailing fields).
+    if (header->version >= 4 && header->header_size >= 140u) {
+        uint32_t host_rev = g_host_revision.load(std::memory_order_relaxed);
+        if (host_rev > 0 && header->min_host_revision > host_rev) {
+            return nullptr;  // caller maps to version-mismatch
+        }
+    }
 
     uint32_t expected_size = header->body_data_offset + header->body_data_size;
     uint32_t ir_section_end = header->aot_core_ir_offset + header->aot_core_ir_size;

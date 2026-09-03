@@ -33,14 +33,20 @@ extern "C" {
 
 // ── Magic and version ────────────────────────────────────────────────
 #define PATCH_DATA_MAGIC     0x50415854u   // "PADT" little-endian
-#define PATCH_DATA_VERSION   3u            // v3: added dependency section
+#define PATCH_DATA_VERSION   4u            // v4: trailing min_host_revision + patch_revision
 
-// ── Main header (fixed-size, 132 bytes in v3) ────────────────────────────
-// v1: 112 bytes (aot_core_ir_count was the last field at offset 108)
-// v2: 124 bytes (added reg_ir_offset/reg_ir_size/reg_ir_count after aot_core_ir_count)
-// v3: 132 bytes (added dependency_offset/dependency_count after reg_ir_count)
-typedef struct PatchDataHeader {
-    uint32_t magic;
+// ── Main header (fixed-size, all fields uint32_t, no padding) ────────
+// v1:  28 fields = 112 bytes (through aot_core_ir_count)
+// v2:  31 fields = 124 bytes (reg_ir_offset/reg_ir_size/reg_ir_count appended)
+// v3:  33 fields = 132 bytes (dependency_offset/dependency_count appended)
+// v4:  35 fields = 140 bytes (min_host_revision + patch_revision appended)
+// The WRITER stores header_size = sizeof(PatchDataHeader) at write time;
+// readers use header_size (not sizeof) to know how far the header extends.
+// The trailing two v4 fields are OPTIONAL — a v3 reader that only knows
+// sizeof(v3)=132 stops at dependency_count, never touches the two new
+// fields.  A v4 reader MUST verify header_size >= offsetof(patch_revision)+4
+// before reading them (a v3 blob has header_size==132 < 140).
+typedef struct PatchDataHeader {    uint32_t magic;
     uint32_t version;
     uint32_t header_size;               // sizeof(PatchDataHeader)
 
@@ -99,6 +105,18 @@ typedef struct PatchDataHeader {
     // the dependency is registered before applying this patch.
     uint32_t dependency_offset;
     uint32_t dependency_count;
+
+    // Version-compatibility fields (v4+, trailing optional):
+    //   min_host_revision — minimum host build revision this patch requires.
+    //                       Hosts below this must reject the patch. 0 = any.
+    //   patch_revision    — incrementing patch ID (conflict/staleness detect).
+    uint32_t min_host_revision;
+    uint32_t patch_revision;
+    //
+    // These are appended AFTER dependency_count so a v3 reader that only knows
+    // sizeof(v3)==116 bytes stops exactly at dependency_count and never touches
+    // the two new trailing fields.  A v4 reader MUST verify header_size is large
+    // enough before reading them (an old v3 blob has header_size==116 < 124).
 } PatchDataHeader;
 
 // ── Table entry structs ──────────────────────────────────────────────
