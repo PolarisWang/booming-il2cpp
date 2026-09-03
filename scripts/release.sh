@@ -323,7 +323,8 @@ cmd_verify() {
             if dotnet tool install chaos-il2cpp \
                 --add-source "$(dirname "$nupkg")" \
                 --tool-path "$tool_test_dir" >/dev/null 2>&1; then
-                # Run chaos-il2cpp --version to verify basic invocation
+                # Run chaos-il2cpp --version (added to Driver as a first-class command)
+                # to verify the tool assembled in the nupkg loads and reports.
                 if "$tool_test_dir/chaos-il2cpp" --version >/dev/null 2>&1; then
                     echo "    nupkg install + version: pass"
                 else

@@ -38,6 +38,16 @@ public sealed class DriverEntry
             return 1;
         }
 
+        // Handle --version / -v before the command dispatch — these are
+        // meta-options that apply to the driver itself, not to a subcommand.
+        if (args[0] == "--version" || args[0] == "-v")
+        {
+            var ver = System.Reflection.Assembly.GetExecutingAssembly()
+                .GetName().Version?.ToString() ?? "0.0.0";
+            Console.WriteLine($"chaos-il2cpp {ver}");
+            return 0;
+        }
+
         var command = args[0];
         ChaosTrace.Point("driver.main", "cli", new Dictionary<string, object?>
         {
