@@ -1,0 +1,26 @@
+{
+  "description": "Supplemental coverage for methods ATG cannot probe due to MLC limitations",
+  "generatedBy": "Chaos.IL2CPP.Tools (manual fix)",
+  "entries": [
+    {
+      "methodSubjectId": "System.Collections.NonGeneric/System.Collections.Specialized.CollectionsUtil::CreateCaseInsensitiveHashtable:System.Collections.Hashtable()",
+      "reason": "MLC AmbiguousMatchException: static method overloads on Hashtable cause GetType() to fail",
+      "kind": "aot-coverage"
+    },
+    {
+      "methodSubjectId": "System.Collections.NonGeneric/System.Collections.Specialized.CollectionsUtil::CreateCaseInsensitiveHashtable:System.Collections.Hashtable(System.Int32)",
+      "reason": "MLC AmbiguousMatchException: static method overloads on Hashtable cause GetType() to fail",
+      "kind": "aot-coverage"
+    },
+    {
+      "methodSubjectId": "System.Collections.NonGeneric/System.Collections.Specialized.CollectionsUtil::CreateCaseInsensitiveHashtable:System.Collections.Hashtable(System.Collections.IDictionary)",
+      "reason": "MLC AmbiguousMatchException: static method overloads on Hashtable cause GetType() to fail",
+      "kind": "aot-coverage"
+    },
+    {
+      "methodSubjectId": "System.Collections.NonGeneric/System.Collections.Specialized.CollectionsUtil::CreateCaseInsensitiveSortedList:System.Collections.SortedList()",
+      "reason": "MLC AmbiguousMatchException: same type as parent, GetType() fails",
+      "kind": "aot-coverage"
+    }
+  ]
+}
