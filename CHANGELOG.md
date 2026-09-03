@@ -62,6 +62,20 @@ high-level summary for cross-cutting milestones.
 
 Prior history: see `git log` and `docs/archive/` (frozen completed-work records).
 
-## [0.2.1] - 2026-09-03
+## [0.2.2] - 2026-09-03
+
+### 发布流程完善（Release pipeline industrialization）
+- release.sh 全自动化：多平台 SDK 构建、校验和、SBOM、gh release 创建/发布
+- release.yml CI 触发：push tag 自动构建 + 手动 dispatch 支持
+- 版本号三源一致由 check_release_governance.py 硬门禁保障
+
+### Review 修复（4 批 code-review 响应）
+- 内存安全：interop_stubs.cpp COM malloc/free 匹配 + atomic refCount + OOM 日志
+- ABI 正确性：RuntimeHelperShapeRegistry.cs Int32→NativeInt 槽位修正
+- 测试诚信：fuzz_vtable_test.cpp 悬垂指针根因修复（static 存储）+ 返回值断言
+- 门禁精度：clang-tidy.yml P0_RE 单源注入 + memLeak 未覆盖注释；ubsan.cmake Debug-only 守卫 + 注释精度
+- 文档：STATUS.md M 阶段表同步 + DISPATCH.md 计数歧义消除
+- 供应链：CMakeLists.txt 4 处 googletest FetchContent 补 URL_HASH SHA256 校验
+- 流程：release.yml tag 必填校验 + prerelease 单源；.gitignore 加 core. 模式
 
 

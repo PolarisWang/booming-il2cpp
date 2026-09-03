@@ -793,14 +793,16 @@ public sealed class DllScanner
                 // one method; the type's remaining probeable methods are still emitted.
                 skippedMethods.Add($"{rawMethod.Name} (MLC ambiguous overload — skipped)");
             }
-            catch (Exception ex) when (!(ex is AmbiguousMatchException) &&
-                                        (ex is System.TypeLoadException ||
-                                         ex is InvalidOperationException))
+            catch (Exception ex) when (ex is System.TypeLoadException ||
+                                       ex is InvalidOperationException)
             {
                 // MLC may also fail to resolve a constructed generic's return assembly
                 // (e.g. Lookup<TKey,TElement>, KeyedCollection<TKey,TItem>) throwing
                 // TypeLoadException "Could not find assembly".  Skip that method rather
                 // than dropping the type.
+                // NOTE: AmbiguousMatchException is already caught by the catch block
+                // above (C# matches the first catch); the second block here only
+                // handles TypeLoadException/InvalidOperationException.
                 skippedMethods.Add($"{rawMethod.Name} (MLC unresolved: {ex.GetType().Name})");
             }
         }
@@ -828,11 +830,14 @@ public sealed class DllScanner
                     // combined build's compiler can resolve against net8 normally.
                     present = true;
                 }
-                catch (Exception)
+                catch (Exception ex) when (ex is not OutOfMemoryException and
+                                           ex is not StackOverflowException)
                 {
                     // Any net8 resolution failure: conservatively treat as present
                     // (defers net10-only correctness to the compiler rather than
-                    // dropping the method).
+                    // dropping the method).  Exclude unrecoverable system exceptions
+                    // (OOM, stack overflow) so they propagate rather than silently
+                    // masking data corruption.
                     present = true;
                 }
                 if (!present)
