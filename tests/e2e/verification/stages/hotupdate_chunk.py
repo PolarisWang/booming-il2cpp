@@ -510,7 +510,11 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
 
     # When patch data is available, run benchmark before/after for performance comparison
     # Scale iterations by chunk size: 5 for small (<500), 2 for medium, 0 (disabled) for large
-    # NOTE: benchmark disabled for now — see DispatchDirectVoid+benchmark+patch-data crash
+    # NOTE: benchmark disabled for now — the harness RunBenchmark now uses budgeted
+    # no-GC-region (chaos_gc_try_start_no_gc_region) and warmed terminal-tier dispatch
+    # to fix the "DispatchDirectVoid+benchmark+patch-data crash" (root cause: interpreter
+    # tier-promotion + GC re-entrancy in the timed loop, fixed in Dispatch.scriban).
+    # Enable once the fix is verified in CI rebuild with a patched-hotupdate family.
     benchmark_iterations = 0
     method_count = len(hotupdate_indices)
 
