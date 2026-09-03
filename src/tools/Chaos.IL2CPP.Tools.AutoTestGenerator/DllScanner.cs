@@ -784,6 +784,25 @@ public sealed class DllScanner
                 isRefStructReturn,
                 genericTypeArgs
             ));
+            } // /try per-method
+            catch (AmbiguousMatchException)
+            {
+                // MLC cannot distinguish an overloaded/generic method whose canonical
+                // signature collides with a sibling (e.g. Enumerable.Aggregate, or an
+                // overloaded instance method sharing an erased signature).  Skip this
+                // one method; the type's remaining probeable methods are still emitted.
+                skippedMethods.Add($"{rawMethod.Name} (MLC ambiguous overload — skipped)");
+            }
+            catch (Exception ex) when (!(ex is AmbiguousMatchException) &&
+                                        (ex is System.TypeLoadException ||
+                                         ex is InvalidOperationException))
+            {
+                // MLC may also fail to resolve a constructed generic's return assembly
+                // (e.g. Lookup<TKey,TElement>, KeyedCollection<TKey,TItem>) throwing
+                // TypeLoadException "Could not find assembly".  Skip that method rather
+                // than dropping the type.
+                skippedMethods.Add($"{rawMethod.Name} (MLC unresolved: {ex.GetType().Name})");
+            }
         }
 
         // ── B4: detect net10-only methods ──
@@ -797,7 +816,26 @@ public sealed class DllScanner
         {
             foreach (var sig in signatures)
             {
-                if (!MethodExistsInNet8(mlc8, assembly8, sig))
+                bool present;
+                try
+                {
+                    present = MethodExistsInNet8(mlc8, assembly8, sig);
+                }
+                catch (AmbiguousMatchException)
+                {
+                    // net8 MLC cannot disambiguate these overloads.  Treated as
+                    // present (not net10-only) so we don't wrongly guard it — the
+                    // combined build's compiler can resolve against net8 normally.
+                    present = true;
+                }
+                catch (Exception)
+                {
+                    // Any net8 resolution failure: conservatively treat as present
+                    // (defers net10-only correctness to the compiler rather than
+                    // dropping the method).
+                    present = true;
+                }
+                if (!present)
                     net10OnlyMethods.Add(sig.Name);
             }
         }
@@ -996,12 +1034,34 @@ public sealed class DllScanner
                     continue;
             }
 
-            var count = t.GetMethods(
-                BindingFlags.Public | BindingFlags.Static |
-                BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                .Count(m => m.Name is not ("get_" or "set_" or "add_" or "remove_")
-                    && !m.Name.StartsWith("op_")
-                    && !m.IsSpecialName);
+            // ── Count public methods ──
+            // MLC may throw AmbiguousMatchException when enumerating heavily
+            // overloaded/generic types (e.g. Enumerable, JsonSerializer).  The
+            // count is used only as a heuristic to skip types with no probeable
+            // methods — a missed count due to ambiguity is acceptable (the type
+            // will be discovered later by ScanInContext which has per-method
+            // isolation).  Catching here prevents the whole type from vanishing
+            // from the type list.
+            int count = 0;
+            try
+            {
+                count = t.GetMethods(
+                    BindingFlags.Public | BindingFlags.Static |
+                    BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                    .Count(m => m.Name is not ("get_" or "set_" or "add_" or "remove_")
+                        && !m.Name.StartsWith("op_")
+                        && !m.IsSpecialName);
+            }
+            catch (AmbiguousMatchException)
+            {
+                // MLC ambiguous overloads.  The type still has probeable methods
+                // — we just couldn't count them here.  Signal count=1 so the type
+                // IS included in the candidate list and ScanInContext processes it
+                // with per-method isolation.  Without this, the type vanishes from
+                // the types list and produces zero subjects (the global root cause
+                // of many STANDARD families being completely empty).
+                count = 1;
+            }
 
             if (count > 0)
                 result.Add((t.FullName ?? t.Name, count));

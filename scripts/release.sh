@@ -399,10 +399,17 @@ cmd_publish() {
     echo "=== release publish ${ver} ==="
 
     # ── 0. Auto-detect previous tag ──────────────────────────────────────
+    # The release tag ($tag) does NOT exist yet — it's created in step 2 below.
+    # So derive the "previous release tag" from the SNAPSHOT BRANCH's history
+    # (git describe walks commits reachable from the branch), never from $tag^.
     local prev_tag
-    prev_tag=$(git describe --abbrev=0 --tags "$tag^" 2>/dev/null || echo "")
+    prev_tag=$(git describe --abbrev=0 --tags "$branch" 2>/dev/null || echo "")
     if [ -z "$prev_tag" ]; then
-        prev_tag=$(git rev-list --max-parents=0 "$tag" 2>/dev/null | tail -1)
+        prev_tag=$(git tag -l "v[0-9]*.[0-9]*.[0-9]*" --sort=-version:refname \
+            | grep -v "^${tag}$" | head -1)
+    fi
+    if [ -z "$prev_tag" ]; then
+        prev_tag=$(git rev-list --max-parents=0 "$branch" 2>/dev/null | tail -1)
     fi
     echo "  previous tag: ${prev_tag:-<none>}"
 

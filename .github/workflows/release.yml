@@ -89,6 +89,8 @@ jobs:
         run: dotnet restore src/managed/Chaos.IL2CPP.Generator/
       - name: Build Generator
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+      - name: Restore Driver NuGet packages
+        run: dotnet restore src/managed/Chaos.IL2CPP.Driver/
       - name: Build Driver (dotnet tool)
         run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release --no-restore
       - name: Build native SDK libs (test-free targets only)
@@ -260,6 +262,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Download release notes
         uses: actions/download-artifact@v4
         with:

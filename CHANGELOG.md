@@ -61,3 +61,7 @@ high-level summary for cross-cutting milestones.
 ---
 
 Prior history: see `git log` and `docs/archive/` (frozen completed-work records).
+
+## [0.2.1] - 2026-09-03
+
+
