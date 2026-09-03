@@ -82,10 +82,6 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
@@ -93,18 +89,22 @@ jobs:
         run: dotnet restore src/managed/Chaos.IL2CPP.Generator/
       - name: Build Generator
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
-      - name: Build SDK (cmake windows-x64-reference)
+      - name: Build Driver (dotnet tool)
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release --no-restore
+      - name: Build native SDK libs (test-free targets only)
         shell: bash
         run: |
-          # No -G: let CMake auto-detect the newest Visual Studio present on the
-          # runner (GH windows-latest now ships VS 2026/18; hardcoding "17 2022"
-          # fails with 'could not find any instance of Visual Studio').  Configure
-          # to the reference binary dir so downstream artifact collection matches
-          # the preset layout.
           cmake -S . -B artifacts/presets/windows-x64-reference \
             -A x64 \
             -DROADMAP0_PRESET_TARGET=windows-x64-reference
-          cmake --build artifacts/presets/windows-x64-reference --config RelWithDebInfo
+          # Build only the library targets, not the test/contract trees.
+          cmake --build artifacts/presets/windows-x64-reference \
+            --target chaos_common --config RelWithDebInfo
+          cmake --build artifacts/presets/windows-x64-reference \
+            --target chaos_pal --config RelWithDebInfo
+          cmake --build artifacts/presets/windows-x64-reference \
+            --target chaos_runtime_core --config RelWithDebInfo
+          echo "  core libs done"
       - name: Collect SDK artifacts
         shell: bash
         run: |
