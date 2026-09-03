@@ -43,3 +43,11 @@ chaos_native_add_test(test_hotupdate_replacement_benchmark
     hotupdate_replacement_benchmark_test.cpp
     LABELS "unit;hotupdate;benchmark"
 )
+
+# hotpatch_api_contract_test — Public hotpatch C API contract (input validation,
+# return-code semantics, host revision).  Host-module-independent behaviors only.
+chaos_native_add_test(test_hotpatch_api_contract
+    hotpatch_api_contract_test.cpp
+    LABELS "unit;hotupdate"
+)
+

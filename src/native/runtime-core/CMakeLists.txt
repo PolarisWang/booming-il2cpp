@@ -119,6 +119,8 @@ add_library(chaos_runtime_core STATIC
     hotpatch_table.cpp
     patch_loader.h
     patch_loader.cpp
+    hotpatch_api.h
+    hotpatch_api.cpp
     jit_registration.h
     jit_registration.cpp
     jit_data_loader.h
