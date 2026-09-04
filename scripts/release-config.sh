@@ -19,12 +19,17 @@ export RC_SEMVER_RE="^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$"
 # ── Release branch / tag naming ───────────────────────────────────────────────
 # Tag prefix used for releases, e.g. v0.1.1. Derived from version.
 export RC_TAG_PREFIX="v"
-# Release branch prefix + suffix, e.g. release/0.1.x.
+# Release branch prefix, e.g. release/  → release/v0.2.4.
 export RC_RELEASE_BRANCH_PREFIX="release/"
-export RC_RELEASE_BRANCH_SUFFIX=".x"
+
+# ── Repo identity ─────────────────────────────────────────────────────────────
+# GitHub repo slug — single source for all release scripts.  Override for forks.
+export RC_REPO="${RC_REPO:-PolarisWang/booming-il2cpp}"
+export RC_REPO_URL="https://github.com/${RC_REPO}"
 
 # ── Timeouts (seconds) ─────────────────────────────────────────────────────────
 export RC_DOTNET_BUILD_TIMEOUT="${RC_DOTNET_BUILD_TIMEOUT:-120000}"   # ms; csproj build
+export RC_DOTNET_TEST_TIMEOUT="${RC_DOTNET_TEST_TIMEOUT:-300}"        # s; dotnet test per project
 export RC_TPG_TIMEOUT="${RC_TPG_TIMEOUT:-1800000}"                    # ms; TPG generate-dll
 export RC_CI_TIMEOUT="${RC_CI_TIMEOUT:-120}"                          # s; hygiene gate
 

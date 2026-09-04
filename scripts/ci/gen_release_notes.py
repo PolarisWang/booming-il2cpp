@@ -13,7 +13,7 @@ the caller scripts/generate-release-notes.sh:
   GENRL_FILES_CHANGED (str)   — git diff --shortstat string
   GENRL_DATE         (str)    — ISO date (YYYY-MM-DD); defaults to today
   GENRL_PRERELEASE   (str)    — "true" if prerelease
-  GENRL_REPO_URL     (str)    — repo base URL (defaults to PolarisWang/booming-il2cpp)
+  GENRL_REPO_URL     (str)    — repo base URL (default below; override for forks)
 """
 from __future__ import annotations
 

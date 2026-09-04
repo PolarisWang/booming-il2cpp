@@ -14,6 +14,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
+source "$REPO_ROOT/scripts/release-config.sh"
 
 FROM_REF="${1:-}"
 TO_REF="${2:-HEAD}"
@@ -60,12 +61,15 @@ AUTHORS=$(git log --no-merges --format='%an' "$RANGE" 2>/dev/null \
 FILES_CHANGED=$(git diff --shortstat "$RANGE" 2>/dev/null | tail -1 || echo "")
 
 # Pass metadata to python via env (avoid quoting collisions).
+# GENRL_REPO_URL defaults to the centralized RC_REPO_URL (from release-config.sh),
+# so release notes full-changelog links track the fork config in one place.
 export GENRL_VERSION_LABEL="$VERSION_LABEL"
 export GENRL_RANGE="$RANGE"
 export GENRL_TOTAL_COMMITS="$TOTAL_COMMITS"
 export GENRL_AUTHORS="$AUTHORS"
 export GENRL_FILES_CHANGED="$FILES_CHANGED"
 export GENRL_DATE="$(date +%Y-%m-%d)"
+export GENRL_REPO_URL="${GENRL_REPO_URL:-$RC_REPO_URL}"
 
 # Resolve a working python interpreter (python3 may be a broken Windows Store alias).
 PY=""

@@ -196,7 +196,7 @@ provision_worktree_sdk() {
 cmd_init() {
     local ver="${1:-}"; [ -z "$ver" ] && { echo "Error: version required" >&2; exit 2; }
     [[ "$ver" =~ $RC_SEMVER_RE ]] || { echo "Error: invalid SemVer '$ver'" >&2; exit 2; }
-    local branch="release/v${ver}"
+    local branch="${RC_RELEASE_BRANCH_PREFIX}v${ver}"
     echo "=== release init ${ver} (branch=${branch}) ==="
     acquire_lock
 
@@ -382,7 +382,7 @@ cmd_verify() {
             "FEISHU_ENV=验证" \
             "FEISHU_FAILED_STAGE=${fail_gates:-one or more release gates}" \
             "FEISHU_FAILED_DETAILS=Release verify did not pass; run fix --from-main after pushing fixes." \
-            "FEISHU_REPO=PolarisWang/booming-il2cpp"
+            "FEISHU_REPO=${RC_REPO}"
         exit 1
     fi
     write_state phase '"verify"'; write_state phaseStatus '"pass"'; write_state verifyFailed false
@@ -392,7 +392,7 @@ cmd_verify() {
     notify_release verify "$ver" "" \
         "FEISHU_ENV=验证" \
         "FEISHU_GATES=governance ✓ · publish-smoke ✓ · unit ✓ · integrity ✓ · nupkg-e2e ✓" \
-        "FEISHU_REPO=PolarisWang/booming-il2cpp"
+        "FEISHU_REPO=${RC_REPO}"
 }
 
 # ── fix ──────────────────────────────────────────────────────────────────
@@ -618,9 +618,9 @@ regression_check: release-governance + CI on main after merge."
     [ -f "$nupkg_file" ] && artifacts_summary="$artifacts_summary ($(du -h "$nupkg_file" | cut -f1))"
     notify_release published "$ver" "$notes_file" \
         "FEISHU_ENV=生产" \
-        "FEISHU_RELEASE_URL=https://github.com/PolarisWang/booming-il2cpp/releases/tag/${tag}" \
+        "FEISHU_RELEASE_URL=${RC_REPO_URL}/releases/tag/${tag}" \
         "FEISHU_ARTIFACTS=${artifacts_summary} · SHA256SUMS · SBOM" \
-        "FEISHU_REPO=PolarisWang/booming-il2cpp"
+        "FEISHU_REPO=${RC_REPO}"
 }
 
 # ── abort ────────────────────────────────────────────────────────────────

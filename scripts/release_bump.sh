@@ -22,6 +22,8 @@
 
 set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# Source centralized config for shared constants (tag prefix, SemVer regex, etc.)
+source "$REPO_ROOT/scripts/release-config.sh"
 VERSION_FILE="$REPO_ROOT/VERSION"
 
 DRY_RUN=0
@@ -54,7 +56,8 @@ if [[ -z "$NEW_VER" ]]; then
 fi
 
 # Basic SemVer sanity (MAJOR.MINOR.PATCH, optionally -prerelease).
-if ! [[ "$NEW_VER" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+# Uses RC_SEMVER_RE from release-config.sh (sourced above).
+if ! [[ "$NEW_VER" =~ $RC_SEMVER_RE ]]; then
     echo "error: '$NEW_VER' is not a valid SemVer (expect MAJOR.MINOR.PATCH)" >&2
     exit 2
 fi
@@ -98,7 +101,7 @@ fi
 
 # ── 5. Optional tag ───────────────────────────────────────────────────────
 if [[ "$DO_TAG" -eq 1 ]]; then
-    TAG="v$NEW_VER"
+    TAG="${RC_TAG_PREFIX}${NEW_VER}"
     if git -C "$REPO_ROOT" rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1; then
         echo "  [ok ] tag already exists: $TAG"
     else
