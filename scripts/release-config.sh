@@ -55,3 +55,8 @@ export RC_SBOM_FILENAME="sbom.cyclonedx.json"
 
 # ── Checksums ─────────────────────────────────────────────────────────────────
 export RC_CHECKSUM_FILENAME="SHA256SUMS"
+
+# ── Feishu notification (optional; set FEISHU_WEBHOOK in env to enable) ──────
+# Custom bot webhook URL: https://open.feishu.cn/open-apis/bot/v2/hook/<token>
+# Optional signing secret (FEISHU_SECRET) if the bot has signature verification.
+export RC_FEISHU_SCRIPT="$REPO_ROOT/scripts/notify-feishu.sh"

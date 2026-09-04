@@ -79,3 +79,7 @@ Prior history: see `git log` and `docs/archive/` (frozen completed-work records)
 - 流程：release.yml tag 必填校验 + prerelease 单源；.gitignore 加 core. 模式
 
 
+
+## [0.2.3] - 2026-09-03
+
+
