@@ -83,21 +83,47 @@ case "$EVENT" in
 esac
 
 # ── Build elements (Python for safe JSON assembly) ───────────────────────
-PAYLOAD=$(python - "$WEBHOOK" "$SECRET" "$EVENT" "$HEADER_EMOJI" "$HEADER_TITLE" "$HEADER_TEMPLATE" \
-    "$VERSION" "$ACTOR" "$ENV" "$TIME_UTC" "$REPO" "$RELEASE_URL" "$LOG_URL" \
-    "$HIGHLIGHTS" "$CHANGED_SUMMARY" "$ARTIFACTS" "$STATS" "$GATES" \
-    "$FAILED_STAGE" "$FAILED_DETAILS" "$PENDING_URL" <<'PYEOF'
-import json, time, hmac, hashlib, base64, sys
+# NOTE: All data is read from environment variables, NOT from sys.argv.
+# On Windows Git Bash, command-line arguments are encoded in the terminal
+# codepage (GBK) by the time they reach Python, corrupting non-ASCII
+# characters.  Environment variables are natively UTF-8 in Git Bash, so
+# os.environ preserves the correct encoding.
+export _FEISHU_HEADER_EMOJI="$HEADER_EMOJI"
+export _FEISHU_HEADER_TITLE="$HEADER_TITLE"
+export _FEISHU_HEADER_TEMPLATE="$HEADER_TEMPLATE"
+PAYLOAD=$(python <<'PYEOF'
+import json, time, hmac, hashlib, base64, os, sys
 
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 except Exception:
     pass
 
-webhook, secret, event, emoji, title, template = sys.argv[1:7]
-ver, actor, env, time_utc, repo, rel_url, log_url = sys.argv[7:14]
-highlights, changed_summary, artifacts, stats, gates = sys.argv[14:19]
-failed_stage, failed_details, pending_url = sys.argv[19:22]
+def _env(k, default=""):
+    return os.environ.get(k, default)
+
+
+webhook    = _env("FEISHU_WEBHOOK")
+secret     = _env("FEISHU_SECRET")
+event      = _env("FEISHU_EVENT", "published")
+emoji      = _env("_FEISHU_HEADER_EMOJI")
+title      = _env("_FEISHU_HEADER_TITLE")
+template   = _env("_FEISHU_HEADER_TEMPLATE")
+ver        = _env("FEISHU_VERSION")
+actor      = _env("FEISHU_ACTOR")
+env_name   = _env("FEISHU_ENV")
+time_utc   = _env("FEISHU_TIME_UTC")
+repo       = _env("FEISHU_REPO")
+rel_url    = _env("FEISHU_RELEASE_URL")
+log_url    = _env("FEISHU_LOG_URL")
+highlights = _env("FEISHU_HIGHLIGHTS")
+changed    = _env("FEISHU_CHANGED_SUMMARY")
+artifacts  = _env("FEISHU_ARTIFACTS")
+stats      = _env("FEISHU_STATS")
+gates      = _env("FEISHU_GATES")
+fail_stage = _env("FEISHU_FAILED_STAGE")
+fail_detail = _env("FEISHU_FAILED_DETAILS")
+pending_url = _env("FEISHU_PENDING_URL")
 
 # Sign
 ts = str(int(time.time()))
@@ -111,8 +137,8 @@ elements = []
 meta_lines = []
 if repo:
     meta_lines.append(f"**Repository**：{repo}")
-if env:
-    meta_lines.append(f"**Environment**：{env}")
+if env_name:
+    meta_lines.append(f"**Environment**：{env_name}")
 if actor:
     meta_lines.append(f"**Actor**：{actor}")
 if ver:
@@ -130,8 +156,8 @@ if highlights:
     elements.append({"tag": "div", "text": {"tag": "lark_md", "content": content}})
 
 # ── What's Changed (published only) ──
-if event == "published" and changed_summary:
-    elements.append({"tag": "div", "text": {"tag": "lark_md", "content": f"**📋 What's Changed**\n{changed_summary}"}})
+if event == "published" and changed:
+    elements.append({"tag": "div", "text": {"tag": "lark_md", "content": f"**📋 What's Changed**\n{changed}"}})
 
 # ── Artifacts (published only) ──
 if event == "published" and artifacts:
@@ -144,10 +170,10 @@ if event == "verify" and gates:
 # ── Failure info (failed only) ──
 if event == "failed":
     fail_lines = []
-    if failed_stage:
-        fail_lines.append(f"**Stage**：{failed_stage}")
-    if failed_details:
-        fail_lines.append(f"**Detail**：{failed_details}")
+    if fail_stage:
+        fail_lines.append(f"**Stage**：{fail_stage}")
+    if fail_detail:
+        fail_lines.append(f"**Detail**：{fail_detail}")
     fail_lines.append("\n**Suggested action**：Fix the issue, then run `release.sh fix --from-main` and re-verify.")
     if fail_lines:
         elements.append({"tag": "div", "text": {"tag": "lark_md", "content": "\n".join(fail_lines)}})
