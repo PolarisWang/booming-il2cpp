@@ -15,6 +15,21 @@
 
 name: Pipeline
 on:
+  push:
+    branches: [main]
+    paths:
+      # Trigger on codegen/CI changes — the PR profile is fast enough for push.
+      # Nightly/release profiles use the schedule/tag triggers.
+      - 'src/managed/Chaos.IL2CPP.Generator/**'
+      - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
+      - 'src/tools/**'
+      - 'CMakeLists.txt'
+      - '**/*.cmake'
+      - 'tests/e2e/translation/**'
+      - 'tests/suite_contract.yaml'
+      - 'System.Private.CoreLib/**'
+      - '.github/workflows/**'
+      - '.github/pipelines/**'
   workflow_call:
     inputs:
       profile:
