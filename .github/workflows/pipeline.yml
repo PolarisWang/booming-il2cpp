@@ -2,7 +2,7 @@
 # Pipeline orchestrator — dispatches stages from a profile YAML.
 #
 # 3-layer architecture:
-#   - Stage definitions: .github/workflows/stages/<stage>.yml (reusable workflow_call)
+#   - Stage definitions: .github/workflows/<stage>.yml (reusable workflow_call)
 #   - Profile config:    .github/pipelines/<profile>.yml (YAML: which stage to run)
 #   - Orchestrator:      this file (resolve profile → dispatch each enabled stage)
 #
@@ -10,7 +10,7 @@
 # every stage is an explicit job whose `if:` is gated on the profile's enabled set
 # (computed by .github/scripts/ci_resolve_profile.py exported as JSON array).
 #
-# To add a new stage: (1) create .github/workflows/stages/<name>.yml, (2) add a
+# To add a new stage: (1) create .github/workflows/<name>.yml, (2) add a
 # dispatcher job below, (3) add to .github/pipelines/<profile>.yml.
 
 name: Pipeline
@@ -83,7 +83,7 @@ jobs:
     name: gc-unit
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'gc-unit') }}
-    uses: ./.github/workflows/stages/gc-unit.yml
+    uses: ./.github/workflows/gc-unit.yml
     with:
       os: windows-latest
       timeout: 120
@@ -94,7 +94,7 @@ jobs:
     name: gc-server-smoke
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'gc-server-smoke') }}
-    uses: ./.github/workflows/stages/gc-server-smoke.yml
+    uses: ./.github/workflows/gc-server-smoke.yml
     with:
       os: windows-latest
       timeout: 180
@@ -103,7 +103,7 @@ jobs:
     name: gc-asan
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'gc-asan') }}
-    uses: ./.github/workflows/stages/gc-asan.yml
+    uses: ./.github/workflows/gc-asan.yml
     with:
       os: windows-latest
       timeout: 240
@@ -112,7 +112,7 @@ jobs:
     name: gc-linux-tsan
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'gc-linux-tsan') }}
-    uses: ./.github/workflows/stages/gc-linux-tsan.yml
+    uses: ./.github/workflows/gc-linux-tsan.yml
     with:
       os: ubuntu-latest
       timeout: 600
@@ -121,7 +121,7 @@ jobs:
     name: gc-stress
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'gc-stress') }}
-    uses: ./.github/workflows/stages/gc-stress.yml
+    uses: ./.github/workflows/gc-stress.yml
     with:
       os: windows-latest
       timeout: 3600
@@ -130,7 +130,7 @@ jobs:
     name: gc-perf
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'gc-perf') }}
-    uses: ./.github/workflows/stages/gc-perf.yml
+    uses: ./.github/workflows/gc-perf.yml
     with:
       os: windows-latest
       timeout: 600
@@ -141,7 +141,7 @@ jobs:
     name: codegen-unit
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'codegen-unit') }}
-    uses: ./.github/workflows/stages/codegen-unit.yml
+    uses: ./.github/workflows/codegen-unit.yml
     with:
       os: windows-latest
       timeout: 240
@@ -150,7 +150,7 @@ jobs:
     name: metadata-writer-unit
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'metadata-writer-unit') }}
-    uses: ./.github/workflows/stages/metadata-writer-unit.yml
+    uses: ./.github/workflows/metadata-writer-unit.yml
     with:
       os: windows-latest
       timeout: 120
@@ -159,7 +159,7 @@ jobs:
     name: snapshot-unit
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'snapshot-unit') }}
-    uses: ./.github/workflows/stages/snapshot-unit.yml
+    uses: ./.github/workflows/snapshot-unit.yml
     with:
       os: ubuntu-latest
       timeout: 60
@@ -168,7 +168,7 @@ jobs:
     name: aot-smoke
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'aot-smoke') }}
-    uses: ./.github/workflows/stages/aot-smoke.yml
+    uses: ./.github/workflows/aot-smoke.yml
     with:
       os: ubuntu-latest
       timeout: 120
@@ -177,7 +177,7 @@ jobs:
     name: publish-smoke
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'publish-smoke') }}
-    uses: ./.github/workflows/stages/publish-smoke.yml
+    uses: ./.github/workflows/publish-smoke.yml
     with:
       os: windows-latest
       timeout: 3600
@@ -186,7 +186,7 @@ jobs:
     name: jit-unit
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'jit-unit') }}
-    uses: ./.github/workflows/stages/jit-unit.yml
+    uses: ./.github/workflows/jit-unit.yml
     with:
       os: windows-latest
       timeout: 180
@@ -195,7 +195,7 @@ jobs:
     name: jit-baseline
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'jit-baseline') }}
-    uses: ./.github/workflows/stages/jit-baseline.yml
+    uses: ./.github/workflows/jit-baseline-stage.yml
     with:
       os: ubuntu-latest
       timeout: 1800
@@ -204,7 +204,7 @@ jobs:
     name: hybrid-jit
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'hybrid-jit') }}
-    uses: ./.github/workflows/stages/hybrid-jit.yml
+    uses: ./.github/workflows/hybrid-jit.yml
     with:
       os: ubuntu-latest
       timeout: 300
@@ -213,7 +213,7 @@ jobs:
     name: arm64-jit
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'arm64-jit') }}
-    uses: ./.github/workflows/stages/arm64-jit.yml
+    uses: ./.github/workflows/arm64-jit.yml
     with:
       os: ubuntu-latest
       timeout: 1200
@@ -224,7 +224,7 @@ jobs:
     name: foundation-verify
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'foundation-verify') }}
-    uses: ./.github/workflows/stages/foundation-verify.yml
+    uses: ./.github/workflows/foundation-verify.yml
     with:
       os: windows-latest
       timeout: 120
@@ -233,7 +233,7 @@ jobs:
     name: foundation-dll
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'foundation-dll') }}
-    uses: ./.github/workflows/stages/foundation-dll.yml
+    uses: ./.github/workflows/foundation-dll.yml
     with:
       os: ubuntu-latest
       timeout: 1800
@@ -245,7 +245,7 @@ jobs:
     name: native-integration
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'native-integration') }}
-    uses: ./.github/workflows/stages/native-integration.yml
+    uses: ./.github/workflows/native-integration.yml
     with:
       os: windows-latest
       timeout: 2400
@@ -256,7 +256,7 @@ jobs:
     name: clang-tidy
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'clang-tidy') }}
-    uses: ./.github/workflows/stages/clang-tidy.yml
+    uses: ./.github/workflows/clang-tidy-stage.yml
     with:
       os: ubuntu-latest
       timeout: 120
@@ -265,7 +265,7 @@ jobs:
     name: ubsan
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'ubsan') }}
-    uses: ./.github/workflows/stages/ubsan.yml
+    uses: ./.github/workflows/ubsan.yml
     with:
       os: ubuntu-latest
       timeout: 240
@@ -274,7 +274,7 @@ jobs:
     name: style-csharp
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'style-csharp') }}
-    uses: ./.github/workflows/stages/style-csharp.yml
+    uses: ./.github/workflows/style-csharp.yml
     with:
       os: ubuntu-latest
       timeout: 15
@@ -283,7 +283,7 @@ jobs:
     name: hygiene
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'hygiene') }}
-    uses: ./.github/workflows/stages/hygiene.yml
+    uses: ./.github/workflows/hygiene.yml
     with:
       os: ubuntu-latest
       timeout: 15
@@ -292,7 +292,7 @@ jobs:
     name: secret-scan
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'secret-scan') }}
-    uses: ./.github/workflows/stages/secret-scan.yml
+    uses: ./.github/workflows/secret-scan-stage.yml
     with:
       os: ubuntu-latest
       timeout: 15
@@ -301,7 +301,7 @@ jobs:
     name: codeql
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'codeql') }}
-    uses: ./.github/workflows/stages/codeql.yml
+    uses: ./.github/workflows/codeql-stage.yml
     with:
       os: ubuntu-latest
       timeout: 60
@@ -312,7 +312,7 @@ jobs:
     name: docs-build
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'docs-build') }}
-    uses: ./.github/workflows/stages/docs-build.yml
+    uses: ./.github/workflows/docs-build.yml
     with:
       os: ubuntu-latest
       timeout: 30
@@ -321,7 +321,7 @@ jobs:
     name: docs-deploy
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'docs-deploy') }}
-    uses: ./.github/workflows/stages/docs-deploy.yml
+    uses: ./.github/workflows/docs-deploy.yml
     with:
       os: ubuntu-latest
       timeout: 15

@@ -71,7 +71,7 @@ def resolve(profile: str, repo_root: str, changed_paths: list[str] | None = None
     # only fail indirectly when the orchestrator references a non-existent job.
     import fnmatch as _fn  # minimal import inside function keeps top fast
 
-    stages_dir = os.path.join(repo_root, ".github", "workflows", "stages")
+    stages_dir = os.path.join(repo_root, ".github", "workflows")
     enabled = []
     for name, opts in stages_cfg.items():
         if isinstance(opts, dict) and opts.get("enabled") is False:
