@@ -1,0 +1,97 @@
+# .github/workflows/stages/hybrid-jit.yml
+# Stage: Hybrid mode verification (JIT-hybrid precode + full JIT regression sanity)
+# Reusable stage extracted verbatim from .github/workflows/hybrid-regression.yml job `hybrid-regression`.
+#
+# NOTE on runs-on: the task briefing described this gate as WS2 self-hosted, but the CURRENT
+# source job runs on a plain `ubuntu-latest` GitHub-hosted runner (matrix os: [ubuntu-latest]).
+# The stage therefore follows the actual source and defaults runs-on to ubuntu-latest (callers
+# may override via the `os` input).  Verify against release.yml / any self-hosted runner mapping
+# before wiring into a lineup if a WS2 label was intended.
+name: hybrid-jit
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+      timeout:
+        required: false
+        type: number
+        default: 300
+
+jobs:
+  hybrid-jit:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup MSBuild (Windows)
+        if: runner.os == 'Windows'
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Build Chaos.IL2CPP.Driver
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
+
+      # Native build
+      - name: Configure CMake
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            cmake -S . -B build/native -G "Visual Studio 17 2022" \
+              --toolchain build/toolchains/windows-x64-reference.cmake \
+              -DROADMAP0_PRESET_TARGET=windows-x64-reference
+          else
+            cmake -S . -B build/native -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+              -DCHAOS_IL2CPP_CONFIG_TIER=debug
+          fi
+
+      - name: Build Native Libraries
+        run: cmake --build build/native --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
+
+      - name: Configure Native Tests
+        shell: bash
+        run: |
+          # L11: native CTest suites live at tests/unit/runtime-native (googletest from root CMake).
+          cmake -S tests/unit/runtime-native -B tests/unit/runtime-native/build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+      - name: Build Native Tests
+        run: cmake --build tests/unit/runtime-native/build --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
+
+      - name: Run Hybrid Mode Tests
+        run: |
+          ctest --test-dir tests/unit/runtime-native/build \
+            -R "test_jit_hybrid_mode|test_hybrid_e2e|test_hybrid_race" \
+            --output-on-failure -V 2>&1 | tee hybrid-test-output.txt
+
+      - name: Run Full JIT Regression (sanity check)
+        run: |
+          ctest --test-dir tests/unit/runtime-native/build \
+            -R "test_jit_native|test_jit_abi|test_jit_il_smoke" \
+            --output-on-failure -V
+
+      - name: Upload Hybrid Test Output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hybrid-test-output-${{ inputs.os }}-${{ github.sha }}
+          path: hybrid-test-output.txt

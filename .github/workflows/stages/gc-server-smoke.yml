@@ -1,0 +1,89 @@
+# .github/workflows/stages/gc-server-smoke.yml
+# Stage: Server-GC (CHAOS_IL2CPP_GC_SERVER=ON) smoke — coordinator/heap + stress.
+name: gc-server-smoke
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: windows-latest
+      timeout:
+        required: false
+        type: number
+        default: 180
+      config:
+        required: false
+        type: string
+        default: Debug
+
+jobs:
+  gc-server-smoke:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+
+      - name: Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Configure CMake (Server GC ON)
+        run: |
+          cmake -S . -B artifacts/presets/windows-x64-reference-server \
+            -G "Visual Studio 17 2022" \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
+            -DROADMAP0_PRESET_TARGET=windows-x64-reference \
+            -DCHAOS_IL2CPP_GC_SERVER=ON
+
+      - name: Build Native Runtime + GC tests
+        run: |
+          cmake --build artifacts/presets/windows-x64-reference-server --config ${{ inputs.config }} -j 8
+
+      - name: Run Server GC coordinator/heap-manager tests
+        shell: bash
+        run: |
+          ctest --test-dir artifacts/presets/windows-x64-reference-server \
+            -C ${{ inputs.config }} \
+            -R "test_gc_coordinator|test_gc_heap_manager" \
+            --timeout 3600 --output-on-failure 2>&1 | tee gc-server-output.txt
+
+      - name: Run Server GC general stress (SCALE=50)
+        shell: bash
+        env:
+          CHAOS_IL2CPP_STRESS_SCALE: "50"
+          CHAOS_GC_nursery: "268435456"
+        run: |
+          ctest --test-dir artifacts/presets/windows-x64-reference-server \
+            -C ${{ inputs.config }} \
+            -R "test_gc_general_stress" \
+            --timeout 3600 --output-on-failure 2>&1 | tee gc-server-stress-output.txt
+
+      - name: Run Server GC multi-heap stress (SCALE=45)
+        shell: bash
+        env:
+          CHAOS_IL2CPP_STRESS_SCALE: "45"
+          CHAOS_GC_nursery: "268435456"
+        run: |
+          ctest --test-dir artifacts/presets/windows-x64-reference-server \
+            -C ${{ inputs.config }} \
+            -R "test_gc_server_stress" \
+            --timeout 3600 --output-on-failure 2>&1 | tee gc-server-multiheap-output.txt
+
+      - name: Upload Server GC test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-server-output
+          path: |
+            gc-server-output.txt
+            gc-server-stress-output.txt
+            gc-server-multiheap-output.txt

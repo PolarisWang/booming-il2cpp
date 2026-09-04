@@ -1,0 +1,66 @@
+# .github/workflows/stages/ubsan.yml
+# Stage: Linux x64 Native UBSan build + ctest
+# Source: .github/workflows/ubsan-ci.yml job `native-ubsan`
+name: ubsan
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+      timeout:
+        required: false
+        type: number
+        default: 120
+
+jobs:
+  ubsan:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install system dependencies (gcc-14 + ninja)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq gcc-14 g++-14 ninja-build
+          echo "=== Verification ==="
+          gcc-14 --version
+          ninja --version
+
+      - name: Configure CMake (linux-x64-native, UBSan)
+        run: |
+          cmake -S . -B artifacts/presets/linux-x64-native \
+            --preset linux-x64-native \
+            -DCMAKE_C_COMPILER=gcc-14 \
+            -DCMAKE_CXX_COMPILER=g++-14 \
+            -DCMAKE_C_FLAGS="-fsanitize=undefined -fno-sanitize-recover=all -g -O1" \
+            -DCMAKE_CXX_FLAGS="-fsanitize=undefined -fno-sanitize-recover=all -g -O1" \
+            -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=undefined" \
+            -DCMAKE_SHARED_LINKER_FLAGS="-fsanitize=undefined"
+
+      - name: Build Native Runtime + tests under UBSan
+        run: |
+          cmake --build artifacts/presets/linux-x64-native -j$(nproc) 2>&1 | tee ubsan-build-output.txt | tail -50
+
+      - name: Run native contracts under UBSan
+        shell: bash
+        env:
+          UBSAN_OPTIONS: "halt_on_error=1:print_stacktrace=1"
+        run: |
+          ctest --test-dir artifacts/presets/linux-x64-native \
+            -C Debug \
+            -LE "benchmark|stress|soak|tsan" \
+            --timeout 3600 --output-on-failure -j 4 2>&1 | tee ubsan-ctest-output.txt
+
+      - name: Upload UBSan output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-ubsan-output
+          path: |
+            ubsan-build-output.txt
+            ubsan-ctest-output.txt

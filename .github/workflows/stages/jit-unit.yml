@@ -1,0 +1,86 @@
+# .github/workflows/stages/jit-unit.yml
+# Stage: JIT native unit tests (ctest — test_jit_* and test_common suites)
+# Reusable stage extracted verbatim from .github/workflows/codegen-regression.yml job `jit-regression`
+# (lines 98–127: Configure CMake, Build Native Libraries, Configure Native Tests, Build Native
+# Tests, Run Codegen Native Tests, Run Common Native Tests).  Also present in jit-baseline.yml
+# job `jit-baseline` (identical cmake+ctest pattern).  Steps that belong to sibling stages
+# (codegen coverage, snapshot, foundation-dll smoke, publish-smoke, JIT benchmarks/baseline) are
+# NOT reproduced here.
+name: jit-unit
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: windows-latest
+      timeout:
+        required: false
+        type: number
+        default: 180
+
+jobs:
+  jit-unit:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup Visual Studio Developer Command Prompt
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+          dotnet restore tests/unit/managed/snapshot/
+          dotnet restore tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Build Chaos.IL2CPP.Driver
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
+
+      - name: Build MetadataWriter Tests
+        run: dotnet build tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore
+
+      - name: Configure CMake (windows-x64-reference)
+        run: |
+          cmake -S . -B build/native -G "Visual Studio 17 2022" `
+            --toolchain build/toolchains/windows-x64-reference.cmake `
+            -DROADMAP0_PRESET_TARGET=windows-x64-reference
+
+      - name: Build Native Libraries
+        run: cmake --build build/native --config RelWithDebInfo
+
+      - name: Configure Native Tests
+        run: |
+          cmake -S tests/unit/runtime-native -B tests/unit/runtime-native/build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+      - name: Build Native Tests
+        run: cmake --build tests/unit/runtime-native/build --config RelWithDebInfo
+
+      - name: Run Codegen Native Tests
+        run: |
+          ctest --test-dir tests/unit/runtime-native/build -R "test_jit_native|test_jit_abi|test_jit_il_smoke|test_jit_gc_slot_map|test_jit_osr|test_jit_seh|test_jit_unwind|test_jit_binary_ir|test_jit_mode|test_jit_pgo" --output-on-failure -V 2>&1 | tee jit-native-output.txt
+
+      - name: Run Common Native Tests
+        run: ctest --test-dir tests/unit/runtime-native/build -R "test_common" --output-on-failure
+
+      - name: Upload JIT test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jit-native-output
+          path: jit-native-output.txt

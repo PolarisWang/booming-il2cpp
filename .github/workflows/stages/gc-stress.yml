@@ -1,0 +1,194 @@
+# .github/workflows/stages/gc-stress.yml
+# Stage: GC heavy pressure tier (stress/soak/benchmark) — nightly or on-demand
+# Reusable stage extracted verbatim from gc-stress-nightly.yml job `gc-stress`.
+name: gc-stress
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: windows-latest
+      timeout:
+        required: false
+        type: number
+        default: 3600
+      update_baseline:
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  gc-stress:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    # contents: write is needed for the explicit update_baseline=true dispatch,
+    # which commits the filled gc.perf.yaml baseline.  A caller that never
+    # triggers baseline-update can omit this permission.
+    permissions:
+      contents: write
+    env:
+      CHAOS_GC_TEST_STRESS_ONLY: "1"
+      CHAOS_IL2CPP_ARTIFACTS_ROOT: ${{ github.workspace }}/artifacts
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Cache nightly reports (cross-run trend accumulation)
+        # P2: persist gc-stress reports + metrics across runs for trend accumulation.
+        uses: actions/cache@v4
+        with:
+          path: nightly-reports/gc
+          key: nightly-gc-reports
+          restore-keys: |
+            nightly-gc-reports-
+
+      - name: Cache windows-x64-reference native build
+        # Dedup: gc-ci (02:37), native-nightly (04:07) and this workflow all build the
+        # SAME root preset nightly.  The first nightly run populates this cache; later
+        # runs restore it and do only an incremental build.  Shared key with
+        # native-nightly so the prebuilt tree is reused across all three.
+        uses: actions/cache@v4
+        with:
+          path: artifacts/presets/windows-x64-reference
+          key: windows-ref-${{ runner.os }}-${{ hashFiles('src/native/**', 'tests/**/runtime-native/**', 'CMakeLists.txt', '**/*.cmake') }}
+          restore-keys: |
+            windows-ref-${{ runner.os }}-
+
+      # The driver's `contracts-native` group points at the ROOT reference preset
+      # (artifacts/presets/windows-x64-reference, per suite_contract.yaml), so the
+      # stress tier must build that same tree — not just tests/unit/runtime-native.
+      - name: Configure native (windows-x64-reference root preset)
+        shell: bash
+        run: |
+          cmake -S . -B artifacts/presets/windows-x64-reference \
+            -G "Visual Studio 17 2022" \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
+            -DROADMAP0_PRESET_TARGET=windows-x64-reference
+
+      - name: Build Native Runtime + GC tests
+        run: |
+          cmake --build artifacts/presets/windows-x64-reference --config Release -j 8
+
+      - name: Run GC stress/soak/benchmark tiers (driver, stress-only)
+        shell: bash
+        run: |
+          python tests/runner/test_driver.py --layer integration --group contracts-native \
+            --stress-only --cases --json gc-stress-report.json \
+            2>&1 | tee gc-stress-output.txt
+
+      - name: Upload GC stress output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-stress-output
+          path: gc-stress-output.txt
+
+      - name: Upload GC stress JSON report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-stress-report
+          path: gc-stress-report.json
+
+      - name: Upload GC stress reports (gc_stress_report_*.json)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-stress-reports
+          path: artifacts/native-runtime-core-test/reports/*.json
+
+      - name: Collect GC perf metrics (BENCH, lines -> current + baseline + thresholds)
+        shell: bash
+        run: |
+          python scripts/ci/collect-gc-metrics.py \
+            --ctest-output=gc-stress-output.txt \
+            --gc-perf-yaml=tests/runner/baselines/gc.perf.yaml \
+            --output=gc-metrics-current.json \
+            --baseline-output=gc-baseline.json \
+            --thresholds=gc-thresholds.json
+
+      - name: Compare GC perf against baseline (perf advisory, not a hard red)
+        continue-on-error: true
+        shell: bash
+        run: |
+          python scripts/ci/compare-baseline.py \
+            --baseline=gc-baseline.json \
+            --current=gc-metrics-current.json \
+            --thresholds=gc-thresholds.json
+
+      - name: Publish GC stress summary (run-page, green or red)
+        # Success-path reporting: a green GC stress run previously surfaced nothing.
+        # Emit overall pass + per-group outcomes + GC perf scenarios to step summary.
+        if: always()
+        shell: bash
+        run: |
+          if [ -f gc-metrics-current.json ]; then
+            extra="--metrics gc-metrics-current.json"
+          else
+            extra=""
+          fi
+          python scripts/ci/nightly-summary.py --report gc-stress-report.json $extra \
+          || echo "[gc-stress] summary publish failed (non-fatal)"
+
+      - name: Save GC stress report + metrics into cross-run cache
+        # Date-stamp report + metrics into the cached dir for trend accumulation.
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p nightly-reports/gc
+          cp gc-stress-report.json nightly-reports/gc/stress-$(date -u +%Y-%m-%d).json
+          if [ -f gc-metrics-current.json ]; then
+            cp gc-metrics-current.json nightly-reports/gc/metrics-$(date -u +%Y-%m-%d).json
+          fi
+          echo "saved gc-stress report snapshot for $(date -u +%Y-%m-%d)"
+
+      - name: Update GC perf baseline (manual dispatch only — fills pending values + commits)
+        # Opt-in baselining: only an explicit dispatch with update_baseline=true writes
+        # this green run's measured GC perf numbers into gc.perf.yaml (transitioning it
+        # out of pending-first-green-run) and commits.  Automatic nightly runs never
+        # mutate the baseline.  Refuses to write a hollow (empty-metadata) baseline.
+        if: ${{ inputs.update_baseline == true }}
+        shell: bash
+        run: |
+          python scripts/ci/collect-gc-metrics.py \
+            --ctest-output=gc-stress-output.txt \
+            --gc-perf-yaml=tests/runner/baselines/gc.perf.yaml \
+            --output=gc-metrics-current.json \
+            --baseline-output=gc-baseline.json \
+            --thresholds=gc-thresholds.json \
+            --update-baseline=gc-metrics-current.json
+          # Commit the filled baseline back (same auth pattern as jit-baseline).
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add tests/runner/baselines/gc.perf.yaml
+          if git diff --cached --quiet; then
+            echo "No GC baseline change to commit (values already captured)."
+          else
+            git commit -m "ci(gc): refresh GC perf baseline @ ${GITHUB_SHA}"
+            git push origin HEAD:${GITHUB_REF_NAME}
+            echo "GC baseline committed @ ${GITHUB_SHA}"
+          fi
+
+      - name: Upload current GC metrics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-metrics-current
+          path: gc-metrics-current.json
+
+      - name: Upload GC thresholds/baseline (for inspection)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-perf-support
+          path: |
+            gc-thresholds.json
+            gc-baseline.json

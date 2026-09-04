@@ -1,0 +1,84 @@
+# .github/workflows/stages/clang-tidy.yml
+# Stage: clang-tidy static analysis (PR-only, P0 filter)
+# Source: .github/workflows/clang-tidy.yml job `clang-tidy`
+name: clang-tidy
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+      timeout:
+        required: false
+        type: number
+        default: 60
+
+jobs:
+  clang-tidy:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install clang-tidy (LLVM 18)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq clang-tidy-18 ninja-build gcc-14 g++-14
+          sudo update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-18 100
+
+      - name: Configure CMake (linux-x64-clang-tidy)
+        run: |
+          cmake -S . -B artifacts/presets/linux-x64-clang-tidy \
+            --preset linux-x64-clang-tidy \
+            -DCMAKE_C_COMPILER=gcc-14 \
+            -DCMAKE_CXX_COMPILER=g++-14
+
+      - name: Build (clang-tidy analysis runs during compile)
+        run: |
+          cmake --build artifacts/presets/linux-x64-clang-tidy \
+            --target chaos_common chaos_pal chaos_runtime_core chaos_bootstrap \
+            chaos_interpreter chaos_jit chaos_hot_update chaos_engine_bridge \
+            chaos_support chaos_diagnostics \
+            -j$(nproc) 2>&1 | tee clang-tidy-output.txt
+
+      # P0_RE: single source of truth for P0-level clang-tidy checkers.
+      # Used both here (filter gate) and in the Report step (statistics).
+      # If you add/remove a checker pattern, update ONLY this env var.
+      # The env var is shared across steps via GITHUB_ENV.
+      #   - core.*              memory-safety: Dereference/Leak/Overflow/StackAddressEscape
+      #   - unix.Malloc         malloc-family leaks (use/uninit/leak)
+      #   - cplusplus.NewDeleteLeak   `new` without matching `delete`
+      #   - valist.CopyLeak     va_copy without matching va_end
+      # Not covered by P0_RE:
+      #   - alpha.deadcode.DeadStores (memLeak) — not under core./unix./cplusplus./
+      #     valist. namespaces, and alpha checkers are off by default in clang-tidy.
+      #     If a future clang-tidy upgrade enables them by default, add the pattern
+      #     here.  For now, the coverage gap is known and tracked.
+      - name: Set P0 regex
+        run: |
+          echo "P0_RE=(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint|StackAddressEscape)|unix\.Malloc|cplusplus\.NewDeleteLeak|valist\.CopyLeak)" >> "$GITHUB_ENV"
+
+      - name: Filter P0 warnings (exit 1 on any P0)
+        run: |
+          P0_COUNT=$(grep -cE "$P0_RE" clang-tidy-output.txt || true)
+          echo "P0 warnings: $P0_COUNT"
+          if [ "$P0_COUNT" -gt 0 ]; then
+            echo "::error::clang-tidy found $P0_COUNT P0 warning(s) — must fix before merge"
+            grep -E "$P0_RE" clang-tidy-output.txt
+            exit 1
+          fi
+          echo "✅ No P0 clang-tidy warnings"
+
+      - name: Report total warnings
+        run: |
+          TOTAL=$(grep -cE 'warning:' clang-tidy-output.txt || true)
+          echo "Total clang-tidy warnings: $TOTAL"
+          echo "P0: $(grep -cE "$P0_RE" clang-tidy-output.txt || true)"
+          echo "P1+: $((TOTAL - $(grep -cE "$P0_RE" clang-tidy-output.txt || true)))"
+
+      - name: Upload clang-tidy report
+        uses: actions/upload-artifact@v4
+        with:
+          name: clang-tidy-report
+          path: clang-tidy-output.txt

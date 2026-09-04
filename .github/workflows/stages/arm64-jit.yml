@@ -1,0 +1,74 @@
+# .github/workflows/stages/arm64-jit.yml
+# Stage: ARM64 JIT — cross-compile native JIT tests + run under QEMU user-mode emulation
+# Reusable stage extracted verbatim from .github/workflows/arm64-jit-ci.yml job `arm64-jit`
+# (which runs on ubuntu-latest).  Requires qemu-user + aarch64-linux-gnu-gcc cross-toolchain,
+# installed via apt-get in the runner.
+name: arm64-jit
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+      timeout:
+        required: false
+        type: number
+        default: 1200
+
+jobs:
+  arm64-jit:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install QEMU + ARM64 cross toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq qemu-user qemu-user-static binfmt-support \
+            gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+          echo "=== Verification ==="
+          qemu-aarch64 --version
+          aarch64-linux-gnu-gcc --version
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+          dotnet restore tests/unit/managed/snapshot/
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Build Chaos.IL2CPP.Driver
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
+
+      - name: Configure CMake (linux-arm64-smoke)
+        run: cmake --preset linux-arm64-smoke
+
+      - name: Build ARM64 Native Libraries + Tests
+        run: |
+          cmake --build artifacts/presets/linux-arm64-smoke -j$(nproc) 2>&1 | tail -50
+
+      - name: Run ARM64 JIT Tests under QEMU
+        run: |
+          ctest --test-dir artifacts/presets/linux-arm64-smoke \
+            -L arm64 --output-on-failure -V 2>&1 | tee arm64-jit-output.txt
+
+      - name: Upload ARM64 Test Output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arm64-jit-output-${{ github.sha }}
+          path: |
+            arm64-jit-output.txt
+            artifacts/presets/linux-arm64-smoke/Testing/Temporary/

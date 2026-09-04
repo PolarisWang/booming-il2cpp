@@ -1,0 +1,26 @@
+# .github/workflows/stages/docs-deploy.yml
+# Stage: Deploy API docs to GitHub Pages
+# Source: .github/workflows/docs.yml job `deploy`
+name: docs-deploy
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+      timeout:
+        required: false
+        type: number
+        default: 15
+
+jobs:
+  docs-deploy:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

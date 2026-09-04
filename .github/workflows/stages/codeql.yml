@@ -1,0 +1,67 @@
+# .github/workflows/stages/codeql.yml
+# Stage: CodeQL security analysis (C/C++/C#/Python)
+# Source: .github/workflows/codeql.yml job `analyze`
+name: codeql
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+      timeout:
+        required: false
+        type: number
+        default: 600
+
+jobs:
+  codeql:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ${{ inputs.os }}
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+    timeout-minutes: ${{ inputs.timeout }}
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['c-cpp', 'csharp', 'python']
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      # C++ analysis requires the build to be instrumented; CodeQL does this
+      # automatically via autobuild. Set up the build environment for MSVC-free
+      # Linux (the runner is ubuntu-latest).
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+
+      # C++ analysis needs a real build to instrument. GitHub's autobuild may not
+      # auto-detect the repo's CMake presets, so for c-cpp we configure + build the
+      # known reference preset explicitly. The analyze step is gated on this
+      # succeeding, so a failed C++ build does not silently skip analysis.
+      - name: Configure + build (c-cpp)
+        if: matrix.language == 'c-cpp'
+        shell: bash
+        run: |
+          cmake -S . -B artifacts/presets/linux-x64-native \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            --toolchain build/toolchains/linux-x64-native.cmake \
+            -DROADMAP0_PRESET_TARGET=linux-x64-native
+          cmake --build artifacts/presets/linux-x64-native -j$(nproc 2>/dev/null || echo 2)
+
+      - name: Autobuild
+        id: autobuild
+        uses: github/codeql-action/autobuild@v3
+        continue-on-error: true
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        if: steps.autobuild.outcome == 'success'

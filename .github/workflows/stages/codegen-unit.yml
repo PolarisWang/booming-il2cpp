@@ -1,0 +1,75 @@
+# .github/workflows/stages/codegen-unit.yml
+# Stage: Managed codegen xunit unit tests (Chaos.IL2CPP.CodeGen.Tests) with coverage gate
+# Reusable stage extracted verbatim from .github/workflows/codegen-regression.yml job `jit-regression`
+# (the codegen xunit project's tests run there under the code-coverage steps).  Steps that
+# belong to sibling stages (snapshot-unit, jit-unit, foundation-dll smoke, publish-smoke, JIT
+# baseline) are NOT reproduced here — see those stage files.
+#
+# Source runs on windows-latest (jit-regression); the codegen csproj threshold test is
+# Coverage-threshold=50, line-level, total-stat gated.
+name: codegen-unit
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: windows-latest
+      timeout:
+        required: false
+        type: number
+        default: 240
+
+jobs:
+  codegen-unit:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup Visual Studio Developer Command Prompt
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+          dotnet restore tests/unit/managed/snapshot/
+          dotnet restore tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Build Chaos.IL2CPP.Driver
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
+
+      - name: Build MetadataWriter Tests
+        run: dotnet build tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore
+
+      - name: Code Coverage Collection (with threshold)
+        run: |
+          dotnet test tests/unit/managed/codegen/Chaos.IL2CPP.CodeGen.Tests.csproj `
+            --configuration Release `
+            --settings tests/unit/managed/codegen/coverlet.runsettings `
+            /p:CollectCoverage=true `
+            /p:CoverletOutputFormat=cobertura `
+            /p:CoverletOutput=coverage-results/coverage.cobertura.xml `
+            /p:CoverletThreshold=50 `
+            /p:CoverletThresholdType=line `
+            /p:CoverletThresholdStat=total
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jit-coverage-report
+          path: coverage-results/

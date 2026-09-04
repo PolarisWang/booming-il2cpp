@@ -1,0 +1,107 @@
+# .github/workflows/stages/gc-perf.yml
+# Stage: GC perf/benchmark comparison against stored baseline (gc.perf.yaml)
+# Reusable stage extracted verbatim from .github/workflows/gc-stress-nightly.yml job `gc-stress`
+# (BENCH-tier perf comparison portion: `Collect GC perf metrics`, `Compare GC perf against
+# baseline`, `Update GC perf baseline`, and the metric/threshold support uploads).  The
+# benchmark/compare logic is isolated here so a caller can run GC perf comparison without the
+# full gc-stress pressure tier (that tier's ctest run + report uploads live in gc-stress.yml).
+# The perf steps consume gc-stress-output.txt, which the gc-stress stage produces in the
+# workspace; run gc-perf AFTER gc-stress.  Source runs on windows-latest; perf advisory is
+# `continue-on-error: true` (NOT a hard red).  Baseline-update was manual-dispatch-only in the
+# source (workflow_dispatch input update_baseline); here it is gated on an `update_baseline`
+# input (bool, default false) the caller passes through.
+name: gc-perf
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: windows-latest
+      timeout:
+        required: false
+        type: number
+        default: 600
+      update_baseline:
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  gc-perf:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    # contents: write is needed for the explicit update_baseline=true path, which commits the
+    # filled gc.perf.yaml baseline.  A caller that never triggers baseline-update can omit this.
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Collect GC perf metrics (BENCH, lines -> current + baseline + thresholds)
+        shell: bash
+        run: |
+          python scripts/ci/collect-gc-metrics.py \
+            --ctest-output=gc-stress-output.txt \
+            --gc-perf-yaml=tests/runner/baselines/gc.perf.yaml \
+            --output=gc-metrics-current.json \
+            --baseline-output=gc-baseline.json \
+            --thresholds=gc-thresholds.json
+
+      - name: Compare GC perf against baseline (perf advisory, not a hard red)
+        continue-on-error: true
+        shell: bash
+        run: |
+          python scripts/ci/compare-baseline.py \
+            --baseline=gc-baseline.json \
+            --current=gc-metrics-current.json \
+            --thresholds=gc-thresholds.json
+
+      - name: Update GC perf baseline (manual dispatch only — fills pending values + commits)
+        # Opt-in baselining: only update_baseline=true writes this run's measured GC perf numbers
+        # into gc.perf.yaml (transitioning it out of pending-first-green-run) and commits.
+        # Routine/nightly runs never mutate the baseline.  Refuses to write a hollow
+        # (empty-metadata) baseline.  Preserved verbatim from the source, whose condition was
+        # `github.event.inputs.update_baseline == 'true'` on the manual workflow_dispatch.
+        if: ${{ inputs.update_baseline == true }}
+        shell: bash
+        run: |
+          python scripts/ci/collect-gc-metrics.py \
+            --ctest-output=gc-stress-output.txt \
+            --gc-perf-yaml=tests/runner/baselines/gc.perf.yaml \
+            --output=gc-metrics-current.json \
+            --baseline-output=gc-baseline.json \
+            --thresholds=gc-thresholds.json \
+            --update-baseline=gc-metrics-current.json
+          # Commit the filled baseline back (same auth pattern as jit-baseline).
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add tests/runner/baselines/gc.perf.yaml
+          if git diff --cached --quiet; then
+            echo "No GC baseline change to commit (values already captured)."
+          else
+            git commit -m "ci(gc): refresh GC perf baseline @ ${GITHUB_SHA}"
+            git push origin HEAD:${GITHUB_REF_NAME}
+            echo "GC baseline committed @ ${GITHUB_SHA}"
+          fi
+
+      - name: Upload current GC metrics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-metrics-current
+          path: gc-metrics-current.json
+
+      - name: Upload GC thresholds/baseline (for inspection)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-perf-support
+          path: |
+            gc-thresholds.json
+            gc-baseline.json

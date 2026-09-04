@@ -1,0 +1,55 @@
+# .github/workflows/stages/metadata-writer-unit.yml
+# Stage: Build-verify MetadataWriter managed test project (compilation gate)
+# Reusable stage extracted verbatim from .github/workflows/codegen-regression.yml job `jit-regression`
+# (lines 55, 64: restore + build of tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/).
+# The source workflow has no dedicated `dotnet test` step for MetadataWriter — build
+# verification is the gate.  Steps that belong to sibling stages (codegen-unit, snapshot-unit,
+# jit-unit, etc.) are NOT reproduced here.
+name: metadata-writer-unit
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: windows-latest
+      timeout:
+        required: false
+        type: number
+        default: 120
+
+jobs:
+  metadata-writer-unit:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup Visual Studio Developer Command Prompt
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+          dotnet restore tests/unit/managed/snapshot/
+          dotnet restore tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Build Chaos.IL2CPP.Driver
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
+
+      - name: Build MetadataWriter Tests
+        run: dotnet build tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore

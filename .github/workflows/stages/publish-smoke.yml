@@ -1,0 +1,57 @@
+# .github/workflows/stages/publish-smoke.yml
+# Stage: Matrix e2e for the publish path (app/jit/source-only via repo-built Driver)
+# Reusable stage extracted verbatim from .github/workflows/codegen-regression.yml job `jit-regression`
+# (the `Publish-Smoke (app/jit/source-only)` + `Upload publish-smoke report` steps,
+# lines 136-145).  In the source, both steps run only on `push` (github.event_name == 'push'),
+# so publish-smoke is NOT a standalone gate in that workflow — the calling workflow decides
+# when to invoke this stage.  The source job has no timeout override for these steps; the
+# publish path is slow, so this stage defaults to a generous 3600s (caller may lower it).
+name: publish-smoke
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: windows-latest
+      timeout:
+        required: false
+        type: number
+        default: 3600
+
+jobs:
+  publish-smoke:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup Visual Studio Developer Command Prompt
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
+      # Source `if:` semantics (preserved): publish-smoke only ran on push events
+      # (github.event_name == 'push').  As a reusable stage, the CALLER decides when to
+      # invoke publish-smoke; the push-only gate is not enforced here.
+      - name: Publish-Smoke (app/jit/source-only)
+        run: |
+          python scripts/publish-smoke.py --json publish-smoke-report.json
+
+      # Source `if:` semantics (preserved): upload ran only for `github.event_name == 'push'
+      # && always()`, i.e. report is uploaded even when the publish-smoke script reds.
+      - name: Upload publish-smoke report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: publish-smoke-report
+          path: publish-smoke-report.json

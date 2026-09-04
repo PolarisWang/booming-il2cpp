@@ -1,0 +1,207 @@
+# .github/workflows/stages/foundation-dll.yml
+# Stage: Foundation-DLL verification pipeline (smoke/full/extended)
+# Source: .github/workflows/foundation-dll-regression.yml job `foundation-dll`
+name: foundation-dll
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+      timeout:
+        required: false
+        type: number
+        default: 240
+      mode:
+        required: false
+        type: string
+        default: full
+
+jobs:
+  foundation-dll:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup MSBuild (Windows)
+        if: runner.os == 'Windows'
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+          dotnet restore tests/unit/managed/snapshot/
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-fdci-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: nuget-fdci-${{ runner.os }}-
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Build Chaos.IL2CPP.Driver
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
+
+      - name: Run Snapshot Tests
+        run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n
+
+      # Native build
+      - name: Configure CMake
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            cmake -S . -B build/native -G "Visual Studio 17 2022" \
+              --toolchain build/toolchains/windows-x64-reference.cmake \
+              -DROADMAP0_PRESET_TARGET=windows-x64-reference
+          else
+            cmake -S . -B build/native -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+              -DCHAOS_IL2CPP_CONFIG_TIER=debug
+          fi
+
+      - name: Build Native Libraries
+        run: cmake --build build/native --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
+
+      - name: Configure Native Tests
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            cmake --preset windows-x64-reference
+          else
+            cmake -S . -B build/native-test -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          fi
+
+      - name: Build Native Tests
+        run: cmake --build build/native-test --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
+
+      # Foundation-DLL execution
+      - name: Restore benchmark regression history (cross-run baseline)
+        uses: actions/cache@v4
+        with:
+          path: tests/e2e/translation/*/_dll/reports/history
+          key: fdci-history-${{ runner.os }}
+          restore-keys: |
+            fdci-history-${{ runner.os }}-
+
+      - name: Determine CI Mode
+        id: ci-mode
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            echo "mode=extended" >> $GITHUB_OUTPUT
+            echo "check-regression=--check-regression" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" = "push" ] || [ "${{ inputs.mode }}" = "full" ]; then
+            echo "mode=full" >> $GITHUB_OUTPUT
+            echo "check-regression=--check-regression" >> $GITHUB_OUTPUT
+          elif [ "${{ inputs.mode }}" = "extended" ]; then
+            echo "mode=extended" >> $GITHUB_OUTPUT
+            echo "check-regression=--check-regression" >> $GITHUB_OUTPUT
+          else
+            echo "mode=smoke" >> $GITHUB_OUTPUT
+            echo "check-regression=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run Foundation-DLL Pipeline
+        shell: bash
+        id: pipeline
+        run: |
+          export PYTHONPATH="$GITHUB_WORKSPACE/tests/e2e:$GITHUB_WORKSPACE/tests/e2e/verification"
+          export CHAOS_FOUNDATION_DLL="$GITHUB_WORKSPACE/tests/e2e/translation"
+          python -m verification.ci_smoke --mode=${{ steps.ci-mode.outputs.mode }} ${{ steps.ci-mode.outputs.check-regression }} 2>&1 | tee pipeline_output.txt
+          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+
+      - name: Render & publish nightly report (dashboard + cross-day sumport)
+        if: always()
+        shell: bash
+        run: |
+          export PYTHONPATH="$GITHUB_WORKSPACE/tests/e2e:$GITHUB_WORKSPACE/tests/e2e/verification"
+          export CHAOS_FOUNDATION_DLL="$GITHUB_WORKSPACE/tests/e2e/translation"
+          python -m verification.reporting.dashboard --from-results --output deep-dashboard.html 2>&1 || echo "[report] dashboard step failed (non-fatal)"
+          python -m verification.nightly_delta --foundation-dll "$CHAOS_FOUNDATION_DLL" --output nightly-delta.json 2>&1 || echo "[report] nightly-delta failed (non-fatal)"
+          python -m verification.nightly_summary --delta nightly-delta.json --output nightly-summary.md 2>&1 || echo "[report] nightly-summary failed (non-fatal)"
+          if [ -f nightly-summary.md ]; then
+            cat nightly-summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "## Foundation-DLL nightly report" >> "$GITHUB_STEP_SUMMARY"
+            echo "Pipeline exit: ${{ steps.pipeline.outputs.exit_code }}. (report generators produced no Markdown)." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload Foundation-DLL Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: foundation-dll-results-${{ inputs.os }}-${{ github.sha }}
+          path: |
+            tests/e2e/translation/results/
+            tests/e2e/translation/*/_dll/reports/**
+            deep-dashboard.html
+            nightly-delta.json
+            nightly-summary.md
+            pipeline_output.txt
+
+      - name: Post PR Comment (on failure or regression)
+        if: (failure() || steps.pipeline.outputs.exit_code != '0') && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            let pipelineOutput = '';
+            try {
+              pipelineOutput = fs.readFileSync('pipeline_output.txt', 'utf8');
+            } catch(e) { pipelineOutput = '(could not read pipeline output)'; }
+
+            const failedFamilies = (pipelineOutput.match(/FAILED families: (.+)/) || [])[1] || '(none)';
+            const regressionFamilies = (pipelineOutput.match(/REGRESSED families: (.+)/) || [])[1] || '';
+            const regressionLines = (pipelineOutput.match(/\[regression\] .+/g) || []).join('\n');
+            const passedLine = (pipelineOutput.match(/CI (Smoke|Full) complete: \d+\/\d+ passed/) || [])[0] || '';
+
+            let body = `## Foundation-DLL CI Report
+
+            Mode: \`${{ steps.ci-mode.outputs.mode }}\`
+            Commit: ${{ github.sha }}
+            ${passedLine}
+
+            `;
+
+            if (failedFamilies !== '(none)') {
+              body += `### ❌ Pipeline Failures
+            \`${failedFamilies}\`
+
+            `;
+            }
+
+            if (regressionFamilies) {
+              body += `### 📉 Benchmark Regressions
+            \`${regressionFamilies}\`
+
+            \`\`\`
+            ${regressionLines}
+            \`\`\`
+
+            `;
+            }
+
+            body += `[Workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });

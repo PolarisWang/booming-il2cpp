@@ -1,12 +1,5 @@
-# Pipeline profile: pr — validation before merge on every PR / push to main.
-#
-# Each stage name maps 1:1 to a file in .github/workflows/stages/<name>.yml.
-# Per-PR runs the medium-weight gates that must hold BEFORE merge.  Heavy tiers
-# (gc-stress scale=100, jit-baseline, arm64, full foundation, publish-smoke,
-# extended foundation) are deferred to nightly/release so PR feedback stays fast.
-
-profile: pr
-description: "PR / push-to-main fast-to-medium validation"
+profile: release
+description: "Pre-release verification (heavy gates before tag publish)"
 
 stages:
   hygiene:
@@ -24,11 +17,26 @@ stages:
     os: ubuntu-latest
     timeout: 15
 
+  codegen-unit:
+    enabled: true
+    os: windows-latest
+    timeout: 240
+
+  metadata-writer-unit:
+    enabled: true
+    os: windows-latest
+    timeout: 120
+
+  snapshot-unit:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 60
+
   gc-unit:
     enabled: true
     os: windows-latest
     timeout: 120
-    stress_scale: 50          # safe per-PR stress; heavy 100 deferred to nightly
+    stress_scale: 100
 
   gc-server-smoke:
     enabled: true
@@ -45,35 +53,56 @@ stages:
     os: ubuntu-latest
     timeout: 600
 
-  codegen-unit:
+  gc-stress:
     enabled: true
     os: windows-latest
-    timeout: 240
+    timeout: 3600
 
-  metadata-writer-unit:
+  gc-perf:
     enabled: true
     os: windows-latest
-    timeout: 120
+    timeout: 600
 
-  snapshot-unit:
+  aot-smoke:
     enabled: true
     os: ubuntu-latest
-    timeout: 60
+    timeout: 120
 
   jit-unit:
     enabled: true
     os: windows-latest
     timeout: 180
 
+  jit-baseline:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 1800
+
   hybrid-jit:
     enabled: true
     os: ubuntu-latest
     timeout: 300
 
-  aot-smoke:
+  arm64-jit:
     enabled: true
     os: ubuntu-latest
+    timeout: 1200
+
+  foundation-verify:
+    enabled: true
+    os: windows-latest
     timeout: 120
+
+  foundation-dll:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 1800
+    mode: extended
+
+  native-integration:
+    enabled: true
+    os: windows-latest
+    timeout: 2400
 
   clang-tidy:
     enabled: true
@@ -84,3 +113,8 @@ stages:
     enabled: true
     os: ubuntu-latest
     timeout: 240
+
+  publish-smoke:
+    enabled: true
+    os: windows-latest
+    timeout: 3600

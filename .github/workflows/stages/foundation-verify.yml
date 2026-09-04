@@ -1,0 +1,50 @@
+# .github/workflows/stages/foundation-verify.yml
+# Stage: Build + Small Batch verification (3 dotnet SDKs, cmake, small-batch translation)
+# Source: .github/workflows/ci.yml job `verify`
+name: foundation-verify
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: windows-latest
+      timeout:
+        required: false
+        type: number
+        default: 120
+
+jobs:
+  foundation-verify:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+      - name: Restore & Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/Chaos.IL2CPP.Generator.csproj --configuration Release
+      - name: Restore & Build TPG
+        run: dotnet build src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/Chaos.IL2CPP.Tools.TestProjectGenerator.csproj --configuration Release
+      - name: Restore & Build ATG
+        run: dotnet build src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/Chaos.IL2CPP.Tools.AutoTestGenerator.csproj --configuration Release
+      - name: Build SDK (cmake)
+        run: |
+          cmake --preset windows-x64-reference
+          cmake --build --preset windows-x64-reference
+      - name: Run Small Batch
+        working-directory: tests/e2e/translation
+        run: |
+          bash ci-run-all.sh "build,fact" "small"
+      - name: Upload Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-small
+          path: tests/e2e/translation/*/_dll/reports/latest/

@@ -1,0 +1,49 @@
+# .github/workflows/stages/snapshot-unit.yml
+# Stage: Managed Snapshot (codegen-output golden) unit tests
+# Reusable stage extracted verbatim from the `Run Snapshot Tests` step that is identical across
+# .github/workflows/codegen-regression.yml (job jit-regression, windows-latest),
+# .github/workflows/aot-regression.yml (job aot-codegen, ubuntu-latest) and
+# .github/workflows/foundation-dll-regression.yml (job foundation-dll, ubuntu-latest):
+#     dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n
+# Only the verbatim snapshot run step + the minimal setup overhead a fresh checkout needs to
+# satisfy `--no-restore` (restore + generator build) are carried.  Steps belonging to sibling stages
+# (AOT smoke, native build, JIT ctests, foundation-dll pipeline, codegen coverage) are NOT here.
+name: snapshot-unit
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+      timeout:
+        required: false
+        type: number
+        default: 60
+
+jobs:
+  snapshot-unit:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+          dotnet restore tests/unit/managed/snapshot/
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Run Snapshot Tests
+        run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n

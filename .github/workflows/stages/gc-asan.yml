@@ -1,0 +1,78 @@
+# .github/workflows/stages/gc-asan.yml
+# Stage: MSVC AddressSanitizer build + GC unit-test memory-safety gate
+# Reusable stage extracted verbatim from gc-ci.yml job `gc-asan`.
+#
+# Source job gating note: the original job runs on push/PR/manual but NOT on
+# `schedule` (`if: github.event_name != 'schedule'`, because schedule has no path
+# filter).  Timing is the caller's decision for a reusable stage, so that
+# condition is reproduced below as a comment rather than as a hard `if` here —
+# a caller that triggers on schedule should apply its own equivalent guard.
+name: gc-asan
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: windows-latest
+      timeout:
+        required: false
+        type: number
+        default: 240
+      # Build generator output/ASAN targets are Debug-only in the source; exposed
+      # as an input for caller flexibility (source used no matrix, always Debug).
+      config:
+        required: false
+        type: string
+        default: Debug
+
+jobs:
+  gc-asan:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Configure CMake (ASAN)
+        run: |
+          cmake -S . -B artifacts/presets/windows-x64-reference-asan \
+            -G "Visual Studio 17 2022" \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
+            -DROADMAP0_PRESET_TARGET=windows-x64-reference \
+            -DCMAKE_CXX_FLAGS="/fsanitize=address" \
+            -DCMAKE_EXE_LINKER_FLAGS="/fsanitize=address"
+
+      - name: Build Native Runtime + GC tests
+        run: |
+          cmake --build artifacts/presets/windows-x64-reference-asan --config ${{ inputs.config }} -j 8
+
+      - name: Locate & copy ASan runtime DLL
+        shell: bash
+        run: |
+          dll=$(find "/c/Program Files/Microsoft Visual Studio/2022" -iname "clang_rt.asan_dynamic-x86_64.dll" 2>/dev/null | head -1)
+          if [ -z "$dll" ]; then echo "::error::clang_rt.asan_dynamic-x86_64.dll not found under VS 2022"; exit 1; fi
+          echo "ASan DLL: $dll"
+          # Multi-config Debug output dirs (new tree exes) + the contracts-tree
+          # absolute output dir (tests/contracts/native/runtime-core/CMakeLists.txt).
+          find artifacts/presets/windows-x64-reference-asan -type d -name Debug -exec cp "$dll" {} \; 2>/dev/null || true
+          mkdir -p artifacts/native-runtime-core-test/Debug
+          cp "$dll" artifacts/native-runtime-core-test/Debug/
+
+      - name: Run GC Unit Tests under ASAN
+        shell: bash
+        run: |
+          ctest --test-dir artifacts/presets/windows-x64-reference-asan \
+            -C ${{ inputs.config }} \
+            -R "chaos_gc_|test_gc_" \
+            -LE "benchmark|stress|soak" \
+            --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-asan-output.txt
+
+      - name: Upload ASAN test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-asan-output
+          path: gc-asan-output.txt

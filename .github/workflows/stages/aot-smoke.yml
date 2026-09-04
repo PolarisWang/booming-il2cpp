@@ -1,0 +1,63 @@
+# .github/workflows/stages/aot-smoke.yml
+# Stage: AOT smoke check — runs AOT-generated C++ compilation + smoke tests via aot-smoke.py
+# Reusable stage extracted verbatim from .github/workflows/aot-regression.yml job `aot-codegen`.
+# The snapshot test step (Run Snapshot Tests) is NOT reproduced here — it belongs to the
+# snapshot-unit stage.  The AOT-specific steps (build generator + driver + Cache NuGet + run
+# aot-smoke.py + upload results) are copied verbatim.
+name: aot-smoke
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+      timeout:
+        required: false
+        type: number
+        default: 120
+
+jobs:
+  aot-smoke:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+          dotnet restore tests/unit/managed/snapshot/
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-aot-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: nuget-aot-${{ runner.os }}-
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Build Chaos.IL2CPP.Driver
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
+
+      - name: Run AOT Smoke Check
+        run: |
+          python scripts/ci/aot-smoke.py
+
+      - name: Upload AOT Smoke Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aot-smoke-results-${{ inputs.os }}-${{ github.sha }}
+          path: aot-smoke-results/

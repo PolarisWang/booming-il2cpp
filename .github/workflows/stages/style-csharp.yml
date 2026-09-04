@@ -1,0 +1,77 @@
+# .github/workflows/stages/style-csharp.yml
+# Stage: dotnet format style verification on changed .cs files
+# Source: .github/workflows/managed-csharp-style.yml job `dotnet-format`
+name: style-csharp
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+      timeout:
+        required: false
+        type: number
+        default: 15
+
+jobs:
+  style-csharp:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # need origin/main for diff
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: dotnet format verify on changed files
+        shell: bash
+        run: |
+          set -o pipefail
+          FAILED=0
+          changed=$(git diff --name-only origin/main...HEAD -- '*.cs' || true)
+          [ -z "$changed" ] && { echo "No changed .cs files"; exit 0; }
+
+          echo "Changed .cs count: $(echo "$changed" | wc -l)"
+
+          for fpath in $changed; do
+            [ -z "$fpath" ] && continue
+            # Find the closest csproj for this file
+            proj=$(find "$(dirname "$fpath")" -maxdepth 2 -name '*.csproj' | head -1)
+            if [ -z "$proj" ]; then
+              # Try project root fallback
+              for dir in src/managed src/tools; do
+                proj=$(find "$dir" -maxdepth 2 -name '*.csproj' 2>/dev/null | grep -m1 .)
+                [ -n "$proj" ] && break
+              done
+            fi
+            if [ -z "$proj" ]; then
+              echo "::warning::No csproj found for $fpath — skipping"
+              continue
+            fi
+
+            # Run dotnet format style check on this single file
+            if ! dotnet format "$proj" style \
+                 --include "$fpath" --verify-no-changes --verbosity minimal \
+                 2>&1 | tee /tmp/dotnetfmt.log; then
+              # dotnet format exits non-zero when violations exist
+              echo "::error::dotnet format style violation in $fpath"
+              FAILED=1
+            fi
+          done
+
+          if [ "$FAILED" -ne 0 ]; then
+            echo "::error::One or more .cs files have style violations. Run: dotnet format style <csproj> --include <file>"
+            exit 1
+          fi
+          echo "✅ All changed .cs files are style-clean"
+
+      - name: Upload format log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dotnet-format-output
+          path: /tmp/dotnetfmt.log

@@ -1,0 +1,187 @@
+# .github/workflows/stages/jit-baseline.yml
+# Stage: JIT performance baseline — benchmark collect + compare against stored baseline
+# Reusable stage extracted verbatim from .github/workflows/jit-baseline.yml job `jit-baseline`
+# (all steps).  The native/JIT regression ctest here also appears in jit-unit; it is retained
+# because jit-baseline must benchmark the SAME binaries it compares, so the build + regression
+# ctest steps are intrinsic to this stage (their output feeds collect-jit-metrics.py).
+#
+# Baseline updates are deliberate, human-invoked: the source only re-baselines when the
+# workflow_dispatch input `update_baseline=true` commits+pushed back to the repo.  In a
+# workflow_call this event-level dispatch condition becomes the caller-supplied `update_baseline`
+# boolean input (default false).  Keep the baseline-update ONLY-on-update + non-failure guard.
+name: jit-baseline
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+      timeout:
+        required: false
+        type: number
+        default: 1800
+      update_baseline:
+        required: false
+        type: boolean
+        default: false
+        description: "Callers only set true on explicit dispatch; commits re-measured baseline back"
+
+jobs:
+  jit-baseline:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup MSBuild (Windows)
+        if: runner.os == 'Windows'
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+          dotnet restore tests/unit/managed/snapshot/
+          dotnet restore tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Build Chaos.IL2CPP.Driver
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
+
+      # Native build
+      - name: Configure CMake
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            cmake -S . -B build/native -G "Visual Studio 17 2022" \
+              --toolchain build/toolchains/windows-x64-reference.cmake \
+              -DROADMAP0_PRESET_TARGET=windows-x64-reference
+          else
+            cmake -S . -B build/native -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+              -DCHAOS_IL2CPP_CONFIG_TIER=profile
+          fi
+
+      - name: Build Native Libraries
+        run: cmake --build build/native --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
+
+      - name: Configure Native Tests
+        shell: bash
+        run: |
+          # L11: native CTest suites live at tests/unit/runtime-native (googletest from root CMake).
+          cmake -S tests/unit/runtime-native -B tests/unit/runtime-native/build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+      - name: Build Native Tests
+        run: cmake --build tests/unit/runtime-native/build --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
+
+      - name: Run JIT Regression Tests
+        run: |
+          ctest --test-dir tests/unit/runtime-native/build \
+            -R "test_jit_native|test_jit_abi|test_jit_il_smoke|test_jit_gc_slot_map|test_jit_osr|test_jit_seh|test_jit_unwind|test_jit_binary_ir|test_jit_mode|test_jit_pgo" \
+            --output-on-failure -V 2>&1 | tee jit-native-output.txt
+
+      - name: Run JIT Benchmarks
+        continue-on-error: true
+        run: |
+          ctest --test-dir tests/unit/runtime-native/build \
+            -R "test_jit_bench" -C RelWithDebInfo \
+            --output-on-failure > jit-bench-output.txt 2>&1
+
+      - name: Collect JIT Metrics
+        continue-on-error: true
+        run: |
+          python scripts/ci/collect-jit-metrics.py \
+            --benchmark-output="jit-bench-output.txt" \
+            --native-output="jit-native-output.txt" \
+            --output="jit-metrics-current.json"
+
+      - name: Compare Against Baseline (hard gate)
+        # compare-baseline.py exits 0=pass, 1=warning, 2=severe regression.
+        # T-A6: remove continue-on-error so a severe regression reds the gate.
+        # The baseline file must exist for the comparison to work — CI will
+        # create it on push-to-main (see the "Update Baseline on Main" step).
+        id: baseline-check
+        run: |
+          python scripts/ci/compare-baseline.py \
+            --baseline=".github/baselines/jit-metrics.json" \
+            --current="jit-metrics-current.json" \
+            2>&1 | tee baseline-comparison.txt
+
+      - name: Upload JIT Metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: jit-metrics-${{ github.sha }}
+          path: |
+            jit-metrics-current.json
+            jit-native-output.txt
+            baseline-comparison.txt
+
+      - name: Update Baseline (explicit dispatch only — real commit back)
+        # Baseline updates are a deliberate, human-invoked act: a bare `cp` into the
+        # ephemeral checkout could never commit back, so the committed
+        # .github/baselines/jit-metrics.json (2026-06-13) was frozen.  Only an explicit
+        # `update_baseline=true` dispatch re-baselines, and it commits+pushed the fresh
+        # baseline with GITHUB_TOKEN (contents: write).  In this reusable stage the caller
+        # sets the `update_baseline` input to true ONLY on explicit dispatch.
+        # Defense-in-depth: refuse to commit if the current capture is EMPTY or
+        # zero-metric (a hollow/poisoned run must never overwrite the frozen base).
+        if: |
+          inputs.update_baseline == 'true' &&
+          steps.baseline-check.outcome != 'failure'
+        run: |
+          python - <<'EOF'
+          import json
+          with open('jit-metrics-current.json') as f:
+              cur = json.load(f)
+          n = len(cur.get('benchmarks', {}))
+          if n == 0:
+              print('REFUSE: current JIT metrics are EMPTY (0 benchmarks) — not committing a hollow baseline.')
+              raise SystemExit(1)
+          print(f'OK: current JIT metrics carry {n} benchmark families.')
+          EOF
+          cp jit-metrics-current.json .github/baselines/jit-metrics.json
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add .github/baselines/jit-metrics.json
+          if git diff --cached --quiet; then
+            echo "No baseline change to commit (results identical to stored baseline)."
+          else
+            git commit -m "ci(jit): refresh JIT perf baseline @ ${GITHUB_SHA}"
+            git push origin HEAD:${GITHUB_REF_NAME}
+            echo "Baseline committed @ ${GITHUB_SHA}"
+          fi
+
+      - name: Post PR Comment (regression detected)
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let body = '## JIT Performance Baseline Check\n\n';
+            try {
+              const comparison = fs.readFileSync('baseline-comparison.txt', 'utf8');
+              body += '```\n' + comparison + '\n```\n';
+            } catch (e) {
+              body += 'Baseline comparison output not available.\n';
+            }
+            body += '\nSee [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.';
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
