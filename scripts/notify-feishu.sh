@@ -216,7 +216,20 @@ PYEOF
 )
 
 # ── Send ──
-RESP=$(curl -s -X POST "$WEBHOOK" -H "Content-Type: application/json; charset=utf-8" --data "$PAYLOAD" 2>/dev/null || true)
+# Write the payload to a Windows-native temp file and POST with `-d @file`.
+# Two protections are needed on Windows:
+#   (a) Git Bash converts non-UTF-8 argv to the console codepage (GBK) when it
+#       passes an inline `--data "$PAYLOAD"` to native curl.exe, corrupting CJK
+#       and unencodable emoji (🚀 cannot map to GBK → '?').  A @file body passes
+#       raw bytes untouched.
+#   (b) Git Bash `mktemp` returns an MSYS path (/tmp/...) that native curl.exe
+#       cannot open.  Write to $TEMP (a real Windows dir) instead.
+PAYLOAD_BASENAME="chaos_feishu_payload.$$.json"
+PAYLOAD_FILE="${TEMP:-/tmp}/$PAYLOAD_BASENAME"
+printf '%s' "$PAYLOAD" > "$PAYLOAD_FILE"
+RESP=$(curl -s -X POST "$WEBHOOK" -H "Content-Type: application/json; charset=utf-8" \
+    --data-binary @"$PAYLOAD_FILE" 2>/dev/null || true)
+rm -f "$PAYLOAD_FILE"
 echo "  [feishu] response: ${RESP:0:300}"
 
 if echo "$RESP" | grep -qE '"code"\s*:\s*0'; then
