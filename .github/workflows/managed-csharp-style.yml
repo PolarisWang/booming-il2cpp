@@ -9,18 +9,14 @@
 name: managed-csharp-style
 
 on:
-  pull_request:
-    paths:
-      - 'src/managed/**'
-      - 'src/tools/**'
-      - '.editorconfig'
-  push:
-    branches: [main]
-    paths:
-      - 'src/managed/**'
-      - 'src/tools/**'
-      - '.editorconfig'
-
+  workflow_dispatch:
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
+    inputs:
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 jobs:
   dotnet-format:
     runs-on: ubuntu-latest

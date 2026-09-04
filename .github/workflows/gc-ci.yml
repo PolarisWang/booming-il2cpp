@@ -33,31 +33,14 @@
 name: GC Unit Tests
 
 on:
-  push:
-    paths:
-      - 'src/native/runtime-core/gc/**'
-      - 'src/native/runtime-core/core/**'
-      - 'tests/contracts/native/runtime-core/**'
-      - 'src/managed/Chaos.IL2CPP.Generator/**'
-      - 'CMakeLists.txt'
-      - 'tests/suite_contract.yaml'
-  pull_request:
-    paths:
-      - 'src/native/runtime-core/gc/**'
-      - 'src/native/runtime-core/core/**'
-      - 'tests/contracts/native/runtime-core/**'
-      - 'src/managed/Chaos.IL2CPP.Generator/**'
-      - 'CMakeLists.txt'
-      - 'tests/suite_contract.yaml'
   workflow_dispatch:
-  # Nightly pressure tier: the A2b cross-gen stress test (and the other stress
-  # tests) are a KNOWN-FAIL surfaced via tests/runner/baselines/known-failures.integration.yaml.
-  # Running them on a schedule makes the residual visible and turns the gate red
-  # if it REGRESSES (the baseline driver's stale_known signals a fix).  Off-peak
-  # time chosen to avoid the :00/:30 CI burst.
-  schedule:
-    - cron: "37 2 * * *"
-
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
+    inputs:
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 jobs:
   gc-unit:
     runs-on: windows-latest

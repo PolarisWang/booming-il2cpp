@@ -1,33 +1,14 @@
 name: Foundation-DLL CI
 
 on:
-  push:
-    branches: [main]
-    # This is the heaviest gate (3 SDK versions + full SDK cmake build + Small-Batch
-    # translation); it fired on ANY change (docs/LICENSE/etc).  Narrow to the
-    # foundation-dll inputs: the managed codegen/tools, the SDK build config, and the
-    # translation corpus it emits.  Unrelated changes skip the wasted 3-SDK build.
-    paths:
-      - 'src/managed/Chaos.IL2CPP.Generator/**'
-      - 'src/tools/**'
-      - 'CMakeLists.txt'
-      - '**/*.cmake'
-      - 'build/**'
-      - 'tests/e2e/translation/**'
-      - 'tests/suite_contract.yaml'
-      - 'System.Private.CoreLib/**'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'src/managed/Chaos.IL2CPP.Generator/**'
-      - 'src/tools/**'
-      - 'CMakeLists.txt'
-      - '**/*.cmake'
-      - 'build/**'
-      - 'tests/e2e/translation/**'
-      - 'tests/suite_contract.yaml'
-      - 'System.Private.CoreLib/**'
-
+  workflow_dispatch:
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
+    inputs:
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 env:
   DOTNET_NOLOGO: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true

@@ -9,28 +9,14 @@
 name: JIT Performance Baseline
 
 on:
-  pull_request:
-    paths:
-      - 'src/native/jit/**'
-      - 'src/native/interpreter/**'
-      - 'src/native/runtime-core/**'
-      - 'src/native/common/**'
-      - 'tests/unit/runtime-native/**'
-  push:
-    branches: [main]
-    paths:
-      - 'src/native/jit/**'
-      - 'src/native/interpreter/**'
-      - 'src/native/runtime-core/**'
-      - 'src/native/common/**'
-      - 'tests/unit/runtime-native/**'
   workflow_dispatch:
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
     inputs:
-      update_baseline:
-        description: "Update stored baseline with these results"
-        default: false
-        type: boolean
-
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 jobs:
   jit-baseline:
     # contents: write needed ONLY for the explicit update_baseline=true dispatch,

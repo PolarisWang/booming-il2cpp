@@ -19,15 +19,14 @@
 name: GC Stress Nightly
 
 on:
-  workflow_dispatch:        # manual on-demand stress run
+  workflow_dispatch:
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
     inputs:
-      update_baseline:
-        description: "Update the stored gc.perf.yaml baseline with this run's measured values (opt-in baselining)"
-        default: false
-        type: boolean
-  schedule:
-    - cron: "0 3 * * *"    # every night 03:00 UTC
-
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 env:
   DOTNET_NOLOGO: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true

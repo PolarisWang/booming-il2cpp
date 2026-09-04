@@ -15,13 +15,14 @@
 name: clang-tidy analysis
 
 on:
-  pull_request:
-    paths:
-      - 'src/native/**'
-      - 'CMakeLists.txt'
-      - 'CMakePresets.json'
-      - 'src/native/.clang-tidy'
-
+  workflow_dispatch:
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
+    inputs:
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 jobs:
   clang-tidy:
     runs-on: ubuntu-latest

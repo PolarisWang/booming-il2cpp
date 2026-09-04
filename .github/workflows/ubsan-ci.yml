@@ -10,25 +10,14 @@
 name: Native UBSan
 
 on:
-  pull_request:
-    paths:
-      - 'src/native/**'
-      - 'CMakeLists.txt'
-      - 'CMakePresets.json'
-      - 'cmake/sanitizers/**'
-      - 'build/toolchains/linux-x64-native.cmake'
-      - 'tests/suite_contract.yaml'
-  push:
-    branches: [main]
-    paths:
-      - 'src/native/**'
-      - 'CMakeLists.txt'
-      - 'CMakePresets.json'
-      - 'cmake/sanitizers/**'
-      - 'build/toolchains/linux-x64-native.cmake'
-      - 'tests/suite_contract.yaml'
   workflow_dispatch:
-
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
+    inputs:
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 jobs:
   native-ubsan:
     runs-on: ubuntu-latest

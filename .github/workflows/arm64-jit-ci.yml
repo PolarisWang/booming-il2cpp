@@ -9,29 +9,14 @@
 name: ARM64 JIT CI
 
 on:
-  pull_request:
-    paths:
-      - 'src/native/jit/**'
-      - 'src/native/common/**'
-      - 'src/native/runtime-core/**'
-      - 'src/native/pal/**'
-      - 'tests/contracts/native/runtime-core/**'
-      - 'CMakeLists.txt'
-      - 'CMakePresets.json'
-      - 'build/toolchains/linux-arm64*'
-  push:
-    branches: [main]
-    paths:
-      - 'src/native/jit/**'
-      - 'src/native/common/**'
-      - 'src/native/runtime-core/**'
-      - 'src/native/pal/**'
-      - 'tests/contracts/native/runtime-core/**'
-      - 'CMakeLists.txt'
-      - 'CMakePresets.json'
-      - 'build/toolchains/linux-arm64*'
   workflow_dispatch:
-
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
+    inputs:
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 jobs:
   arm64-jit:
     runs-on: ubuntu-latest

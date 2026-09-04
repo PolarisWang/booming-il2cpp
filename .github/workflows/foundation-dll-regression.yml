@@ -11,41 +11,14 @@
 name: Foundation-DLL Regression
 
 on:
-  pull_request:
-    paths:
-      - 'src/native/**'
-      - 'src/managed/Chaos.IL2CPP.Generator/**'
-      - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
-      - 'tests/e2e/translation/**'
-      - 'testing/snapshots/**'
-      - 'contracts/native/v0/**'
-  push:
-    branches: [main]
-    paths:
-      - 'src/native/**'
-      - 'src/managed/Chaos.IL2CPP.Generator/**'
-      - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
-      - 'tests/e2e/translation/**'
-      - 'testing/snapshots/**'
-      - 'contracts/native/v0/**'
   workflow_dispatch:
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
     inputs:
-      mode:
-        description: "smoke = core | full = core+standard | extended = ALL families (comprehensive)"
-        default: full
-        type: choice
-        options:
-          - smoke
-          - full
-          - extended
-  # Nightly: foundation-dll is the heaviest multi-stage product verification.  PR only
-  # runs smoke; the comprehensive scheduled nightly runs `extended` = ALL families × the
-  # full 10-stage set (build,fact,hotupdate,coverage-audit,profile,benchmark,
-  # managed_benchmark,benchmark_report,aggregate,reporting + check-regression).  Staggered
-  # (05:47) after the GC/native windows nightlies (02:37/03:00/04:07) and off :00/:30.
-  schedule:
-    - cron: "47 5 * * *"
-
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 jobs:
   foundation-dll:
     strategy:

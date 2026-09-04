@@ -1,10 +1,14 @@
 name: hygiene-gate
 
 on:
-  pull_request:
-  push:
-    branches: [main]
-
+  workflow_dispatch:
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
+    inputs:
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 jobs:
   hygiene:
     runs-on: ubuntu-latest

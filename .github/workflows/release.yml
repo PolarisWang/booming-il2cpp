@@ -31,7 +31,7 @@ jobs:
   # ── Extract version from tag ───────────────────────────────────────────────
   version:
     name: Resolve version
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LINUX || 'ubuntu-latest' }}
     outputs:
       version: ${{ steps.parse.outputs.version }}
       prerelease: ${{ steps.parse.outputs.prerelease }}
@@ -84,7 +84,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: ${{ vars.DOTNET_VERSION || '8.0.x' }}
       - name: Restore NuGet packages
         run: dotnet restore src/managed/Chaos.IL2CPP.Generator/
       - name: Build Generator
@@ -136,7 +136,7 @@ jobs:
   build-linux:
     name: Build SDK (Linux x64)
     needs: [version]
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LINUX || 'ubuntu-latest' }}
     if: ${{ false }}  # disabled until linux portability gaps are resolved
     steps:
       - uses: actions/checkout@v4
@@ -150,7 +150,7 @@ jobs:
           sudo apt-get install -y -qq gcc-14 g++-14 ninja-build libnuma-dev libssl-dev
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: ${{ vars.DOTNET_VERSION || '8.0.x' }}
       - name: Restore NuGet packages
         run: dotnet restore src/managed/Chaos.IL2CPP.Generator/
       - name: Build Generator
@@ -181,7 +181,7 @@ jobs:
   # ── Generate release notes ─────────────────────────────────────────────────
   release-notes:
     name: Generate release notes
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LINUX || 'ubuntu-latest' }}
     needs: [version]
     steps:
       - uses: actions/checkout@v4
@@ -217,7 +217,7 @@ jobs:
   checksums:
     name: Generate checksums + SBOM
     needs: [version, build-windows]
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LINUX || 'ubuntu-latest' }}
     if: ${{ always() && needs.build-windows.result != 'failure' }}
     continue-on-error: true
     steps:
@@ -258,7 +258,7 @@ jobs:
   publish:
     name: Create GitHub Release
     needs: [version, release-notes]
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LINUX || 'ubuntu-latest' }}
     permissions:
       contents: write
     steps:

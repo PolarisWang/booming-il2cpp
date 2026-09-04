@@ -6,25 +6,14 @@
 name: AOT Regression Gate
 
 on:
-  pull_request:
-    paths:
-      - 'src/managed/Chaos.IL2CPP.Generator/**'
-      - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
-      - 'src/managed/Chaos.IL2CPP.Driver/**'
-      - 'testing/snapshots/**'
-      - 'tests/e2e/translation/System.Private.CoreLib/**'
-      - 'contracts/native/v0/**'
-  push:
-    branches: [main]
-    paths:
-      - 'src/managed/Chaos.IL2CPP.Generator/**'
-      - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
-      - 'src/managed/Chaos.IL2CPP.Driver/**'
-      - 'testing/snapshots/**'
-      - 'tests/e2e/translation/System.Private.CoreLib/**'
-      - 'contracts/native/v0/**'
   workflow_dispatch:
-
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
+    inputs:
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 jobs:
   aot-codegen:
     strategy:

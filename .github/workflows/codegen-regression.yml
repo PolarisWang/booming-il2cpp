@@ -1,32 +1,14 @@
 name: Codegen & Common Regression
 
 on:
-  pull_request:
-    paths:
-      - 'src/managed/Chaos.IL2CPP.Generator/**'
-      - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
-      - 'src/native/jit/**'
-      - 'src/native/interpreter/**'
-      - 'src/native/common/**'
-      - 'testing/snapshots/**'
-      - 'tests/unit/runtime-native/**'
-      - 'tests/unit/managed/**'
-      - 'tests/e2e/translation/**'
-      - 'contracts/native/v0/**'
-  push:
-    branches: [main]
-    paths:
-      - 'src/managed/Chaos.IL2CPP.Generator/**'
-      - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
-      - 'src/native/jit/**'
-      - 'src/native/interpreter/**'
-      - 'src/native/common/**'
-      - 'testing/snapshots/**'
-      - 'tests/unit/runtime-native/**'
-      - 'tests/unit/managed/**'
-      - 'tests/e2e/translation/**'
-      - 'contracts/native/v0/**'
-
+  workflow_dispatch:
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
+    inputs:
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 jobs:
   jit-regression:
     runs-on: windows-latest

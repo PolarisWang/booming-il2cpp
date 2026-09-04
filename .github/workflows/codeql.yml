@@ -9,18 +9,14 @@
 name: CodeQL
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'src/native/**'
-      - 'src/managed/**'
-      - 'tests/**'
-      - '*.py'
-  schedule:
-    # Off-peak weekly scan (staggered to avoid the :00/:30 CI burst).
-    - cron: "23 5 * * 1"
   workflow_dispatch:
-
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
+    inputs:
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 jobs:
   analyze:
     name: Analyze (${{ matrix.language }})

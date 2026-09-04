@@ -7,15 +7,14 @@
 name: API Docs
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'contracts/native/v0/**'
-      - 'src/native/common/chaos/**'
-      - 'docs/native-api/**'
   workflow_dispatch:
-  # Optional: allow PR preview via a separate Pages deployment (not configured now).
-
+    # [DEGATED] superseded by Pipeline profile (pipeline.yml). Manual only.
+    inputs:
+      reason:
+        description: "Manual override (was auto-triggered)"
+        default: "degated-superseded-by-pipeline"
+        required: false
+        type: string
 permissions:
   contents: read
   pages: write
