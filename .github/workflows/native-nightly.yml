@@ -42,7 +42,7 @@ jobs:
         # P2: persist native-nightly reports across runs so nightly trends accumulate
         # (same pattern as foundation-dll's fdci-history cache).  Key is date-independent;
         # the restore gives prior days' reports, the post-run save adds today's.
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: nightly-reports/native
           key: nightly-native-reports
@@ -55,7 +55,7 @@ jobs:
         # this cache; the later runs restore it and only do an incremental build,
         # instead of three full -j8 builds.  Keyed on the source/CMake tree so a
         # code change invalidates the cache.
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: artifacts/presets/windows-x64-reference
           key: windows-ref-${{ runner.os }}-${{ hashFiles('src/native/**', 'tests/**/runtime-native/**', 'CMakeLists.txt', '**/*.cmake') }}

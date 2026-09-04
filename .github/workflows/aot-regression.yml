@@ -50,7 +50,7 @@ jobs:
           dotnet restore tests/unit/managed/snapshot/
 
       - name: Cache NuGet packages
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.nuget/packages
           key: nuget-aot-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}

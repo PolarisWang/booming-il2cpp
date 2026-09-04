@@ -55,7 +55,7 @@ jobs:
 
       - name: Cache nightly reports (cross-run trend accumulation)
         # P2: persist gc-stress reports + metrics across runs for trend accumulation.
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: nightly-reports/gc
           key: nightly-gc-reports
@@ -67,7 +67,7 @@ jobs:
         # SAME root preset nightly.  The first nightly run populates this cache; later
         # runs restore it and do only an incremental build.  Shared key with
         # native-nightly so the prebuilt tree is reused across all three.
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: artifacts/presets/windows-x64-reference
           key: windows-ref-${{ runner.os }}-${{ hashFiles('src/native/**', 'tests/**/runtime-native/**', 'CMakeLists.txt', '**/*.cmake') }}
