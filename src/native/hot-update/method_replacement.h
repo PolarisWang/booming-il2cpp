@@ -14,6 +14,19 @@ struct MethodReplacementEntry {
     bool active = false;
 };
 
+/// Register a method replacement for the given method_token.
+///
+/// @return true  if the replacement was accepted as a binding (token and thunk
+///               are valid).  This does NOT guarantee that the method is a real
+///               dispatch subject — a token accepted by Register may still be an
+///               inert entry if no codegen dispatch slot exists for it.
+///               Effectiveness is determined by the loader/API boundary:
+///                 - ChaosApplyPatch returns method_count + NO_METHODS/PARTIAL
+///                 - SetPatchedBySlot reports actual dispatch slot wiring
+///                 - Direct callers of Register (outside ChaosApplyPatch) must
+///                   separately verify that Resolve() returns the replacement
+///                   thunk before treating the patch as live.
+/// @return false if method_token==0 or thunk==nullptr.
 bool Register(CHAOS_IL2CPP_UINT32 method_token, void* thunk);
 bool Revert(CHAOS_IL2CPP_UINT32 method_token);
 void RevertAll();

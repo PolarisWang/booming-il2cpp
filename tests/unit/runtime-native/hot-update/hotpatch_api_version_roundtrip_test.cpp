@@ -10,6 +10,13 @@
 ///
 /// These construct raw byte buffers to test ONLY the C++ loader/API layer, not the
 /// C# PatchDataExtractor producer.
+///
+/// NOTE: All header-only blobs (no method defs, no body data) go through the full
+/// loader path and return NO_METHODS (-3) — the loader successfully creates a context
+/// with 0 patched methods, then ChaosApplyPatch calls Unpatch(ctx) and returns -3.
+/// The acceptance assertions therefore pin the expected NO_METHODS code, not just
+/// "not a version/format error".  A header-only blob that returns VERSION_MISMATCH
+/// or INVALID_FORMAT is a regression.
 
 #include "hotpatch_api.h"
 
@@ -80,10 +87,11 @@ TEST(HotPatchApiV4, V3Blob_StillAccepted_BackwardCompat)
 {
     auto blob = MakeV3();
     auto rc = ChaosApplyPatch(blob.data(), blob.size());
-    // A valid v3 header with no methods must not be a format error.  (It will be
-    // NO_METHODS/PARTIAL since there are no method defs — that is the expected
-    // outcome for a header-only blob.)
-    EXPECT_NE(rc, CHAOS_PATCH_ERR_INVALID_FORMAT);
+    // A valid v3 header with no methods must not be a format error or version
+    // mismatch.  It parses successfully and the loader creates a 0-method context,
+    // so the expected outcome is NO_METHODS (-3) — the patch is accepted but
+    // applies nothing.
+    EXPECT_EQ(rc, CHAOS_PATCH_ERR_NO_METHODS);
 }
 
 TEST(HotPatchApiV4, V4Blob_ZeroRevision_Accepted)
@@ -91,8 +99,8 @@ TEST(HotPatchApiV4, V4Blob_ZeroRevision_Accepted)
     ChaosSetHostRevision(0);       // accept any
     auto blob = MakeV4(0, 0);      // min_host_revision = 0 → compatible with any
     auto rc = ChaosApplyPatch(blob.data(), blob.size());
-    EXPECT_NE(rc, CHAOS_PATCH_ERR_VERSION_MISMATCH);
-    EXPECT_NE(rc, CHAOS_PATCH_ERR_INVALID_FORMAT);
+    // No version constraint, no methods → NO_METHODS, not VERSION_MISMATCH.
+    EXPECT_EQ(rc, CHAOS_PATCH_ERR_NO_METHODS);
 }
 
 TEST(HotPatchApiV4, V4Blob_HostBelowMin_Rejected)
@@ -108,8 +116,8 @@ TEST(HotPatchApiV4, V4Blob_HostMetMin_Accepted)
     ChaosSetHostRevision(10);
     auto blob = MakeV4(10, 2);     // requires >= 10, host = 10
     auto rc = ChaosApplyPatch(blob.data(), blob.size());
-    EXPECT_NE(rc, CHAOS_PATCH_ERR_VERSION_MISMATCH);
-    EXPECT_NE(rc, CHAOS_PATCH_ERR_INVALID_FORMAT);
+    // Host revision meets the minimum → version gate passes, no methods → NO_METHODS.
+    EXPECT_EQ(rc, CHAOS_PATCH_ERR_NO_METHODS);
 }
 
 TEST(HotPatchApiV4, V4Blob_HostAboveMin_Accepted)
@@ -117,7 +125,8 @@ TEST(HotPatchApiV4, V4Blob_HostAboveMin_Accepted)
     ChaosSetHostRevision(20);
     auto blob = MakeV4(10, 3);     // requires >= 10, host = 20
     auto rc = ChaosApplyPatch(blob.data(), blob.size());
-    EXPECT_NE(rc, CHAOS_PATCH_ERR_VERSION_MISMATCH);
+    // Host revision exceeds the minimum → version gate passes, no methods → NO_METHODS.
+    EXPECT_EQ(rc, CHAOS_PATCH_ERR_NO_METHODS);
 }
 
 TEST(HotPatchApiV4, V4ShortHeader_NoVersionMismatch_NoCrash)
@@ -126,7 +135,12 @@ TEST(HotPatchApiV4, V4ShortHeader_NoVersionMismatch_NoCrash)
     auto blob = MakeV4_ShortHeader();  // only 132 bytes, no trailing fields
     auto rc = ChaosApplyPatch(blob.data(), blob.size());
     // No trailing fields to check → must not report a version mismatch.
+    // The loader detects header_size < min_header(140) for version=4 and
+    // returns nullptr, which ChaosApplyPatch surfaces as PARTIAL_ROLLBACK (-4).
+    // This is the expected outcome for a structurally incomplete blob.
     EXPECT_NE(rc, CHAOS_PATCH_ERR_VERSION_MISMATCH);
+    EXPECT_NE(rc, CHAOS_PATCH_ERR_INVALID_FORMAT);
+    EXPECT_EQ(rc, CHAOS_PATCH_ERR_PARTIAL_ROLLBACK);
 }
 
 TEST(HotPatchApiV4, EmptyInput_InvalidFormat)

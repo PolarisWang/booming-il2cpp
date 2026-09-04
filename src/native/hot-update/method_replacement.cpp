@@ -63,6 +63,7 @@ bool Register(CHAOS_IL2CPP_UINT32 method_token, void* thunk) {
     // False-positive protection ("a token that generated no dispatch entry") is handled
     // at the loader/API boundary (ChaosApplyPatch returns method_count) and by
     // PatchMethodLowerIR / SetPatchedBySlot reporting, not by Register returning false.
+    // See method_replacement.h doc for the Register return-value contract.
     if (entry.original_pointer == nullptr) {
         entry.original_pointer =
             chaos::il2cpp::vtable_registry::FindMethodPointerByMethodToken(method_token);
