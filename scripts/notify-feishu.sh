@@ -1,30 +1,34 @@
 #!/usr/bin/env bash
-# notify-feishu.sh — send a Feishu group notification via a custom bot webhook.
+# notify-feishu.sh — send a production-grade Feishu interactive card via custom bot webhook.
 #
-# Used by the release pipeline to broadcast release events to a chat group.
-#
-# Supported events (via FFEISHU_EVENT):
-#   published    — release.sh publish completed (tag + nupkg + GitHub Release ok)
-#   verify       — release.sh verify passed but not yet published
-#   failed       — a release/verify/CI step failed
+# Three event types (via FEISHU_EVENT):
+#   published  — release.sh publish completed (tag + nupkg + GitHub Release ok)
+#   verify     — release.sh verify passed but not yet published
+#   failed     — a release/verify/CI step failed
 #
 # Credentials (via env):
-#   FEISHU_WEBHOOK   custom-bot webhook URL (https://open.feishu.cn/open-apis/bot/v2/hook/<token>)
-#   FEISHU_SECRET    optional "sign" secret if the bot has signature verification enabled
-#   FEISHU_EVENT     one of published|verify|failed   [default: published]
+#   FEISHU_WEBHOOK   custom-bot webhook URL (required)
+#   FEISHU_SECRET    optional signing secret (if enabled on the bot)
+#   FEISHU_EVENT     published|verify|failed  [default: published]
 #
-# Rich content (optional, all env-overridable):
-#   FEISHU_VERSION     release version, e.g. v0.2.3
-#   FEISHU_URL         release page / run URL
-#   FEISHU_HIGHLIGHTS  first stanza of generated release notes, or a short heading
-#   FEISHU_NOTES       longer body text (may contain \n)
-#   FEISHU_REPO        repo slug, e.g. PolarisWang/booming-il2cpp
+# Card content (all optional, empty=skip that section):
+#   FEISHU_VERSION          v0.2.3
+#   FEISHU_ACTOR            PolarisWong
+#   FEISHU_ENV              生产 | 验证 | CI
+#   FEISHU_TIME_UTC         2026-09-04T12:00:00Z
+#   FEISHU_REPO             PolarisWang/booming-il2cpp
+#   FEISHU_RELEASE_URL      https://github.com/.../releases/tag/v0.2.3
+#   FEISHU_LOG_URL           (failed card button)
+#   FEISHU_HIGHLIGHTS       3 lines for highlights section (literal \n for newlines)
+#   FEISHU_CHANGED_SUMMARY  "New Features 11 · Bug Fixes 20 · Performance 2"
+#   FEISHU_ARTIFACTS        "chaos-il2cpp.0.2.3.nupkg (16MB) · SHA256SUMS"
+#   FEISHU_STATS            "28 commits · 240 files · v0.2.2 → v0.2.3"
+#   FEISHU_GATES            "governance ✓ · publish-smoke ✓ · unit ✓ · integrity ✓ · nupkg ✓"
+#   FEISHU_FAILED_STAGE     "verify gate: unit" or "CI: build-windows"
+#   FEISHU_FAILED_DETAILS   "3/5 unit tests failed"
+#   FEISHU_PENDING_URL       (verify card button)
 #
-# Usage:
-#   FEISHU_WEBHOOK=... FEISHU_EVENT=published FEISHU_VERSION=v0.2.3 scripts/notify-feishu.sh
-#
-# Exit 0 on success (or when no webhook configured / disabled); nonzero on a hard
-# send failure.  Hard-fails are logged but never block the caller (belt & braces).
+# Exit 0 on success (or when no webhook configured); never blocks the caller.
 
 set -euo pipefail
 
@@ -32,135 +36,166 @@ WEBHOOK="${FEISHU_WEBHOOK:-}"
 SECRET="${FEISHU_SECRET:-}"
 EVENT="${FEISHU_EVENT:-published}"
 
-# If no webhook is configured, this is a no-op (release works without chat notify).
 if [ -z "$WEBHOOK" ]; then
     echo "  [feishu] no FEISHU_WEBHOOK configured — notification skipped"
     exit 0
 fi
 
+# Read all optional env
 VERSION="${FEISHU_VERSION:-}"
-URL="${FEISHU_URL:-}"
+ACTOR="${FEISHU_ACTOR:-}"
+ENV="${FEISHU_ENV:-}"
+TIME_UTC="${FEISHU_TIME_UTC:-}"
 REPO="${FEISHU_REPO:-PolarisWang/booming-il2cpp}"
-HL="${FEISHU_HIGHLIGHTS:-}"
-NOTES="${FEISHU_NOTES:-}"
+RELEASE_URL="${FEISHU_RELEASE_URL:-}"
+LOG_URL="${FEISHU_LOG_URL:-}"
+HIGHLIGHTS="${FEISHU_HIGHLIGHTS:-}"
+CHANGED_SUMMARY="${FEISHU_CHANGED_SUMMARY:-}"
+ARTIFACTS="${FEISHU_ARTIFACTS:-}"
+STATS="${FEISHU_STATS:-}"
+GATES="${FEISHU_GATES:-}"
+FAILED_STAGE="${FEISHU_FAILED_STAGE:-}"
+FAILED_DETAILS="${FEISHU_FAILED_DETAILS:-}"
+PENDING_URL="${FEISHU_PENDING_URL:-}"
 
-# ── Build the card title / text per event ────────────────────────────────
-title=""
-color=""
+# ── Build card header ────────────────────────────────────────────────────
 case "$EVENT" in
     published)
-        title="🚀 chaos-il2cpp 发布成功${VERSION:+ $VERSION}"
-        color="green"
+        HEADER_EMOJI="🚀"
+        HEADER_TITLE="chaos-il2cpp 发布成功${VERSION:+ $VERSION}"
+        HEADER_TEMPLATE="green"
         ;;
     verify)
-        title="✅ chaos-il2cpp 验证通过${VERSION:+ $VERSION}（待发布）"
-        color="blue"
+        HEADER_EMOJI="✅"
+        HEADER_TITLE="chaos-il2cpp 验证通过${VERSION:+ $VERSION}（待发布）"
+        HEADER_TEMPLATE="blue"
         ;;
     failed)
-        title="🔴 chaos-il2cpp 发布失败/告警${VERSION:+ $VERSION}"
-        color="red"
+        HEADER_EMOJI="🔴"
+        HEADER_TITLE="chaos-il2cpp 发布失败${VERSION:+ $VERSION}"
+        HEADER_TEMPLATE="red"
         ;;
     *)
-        title="📣 chaos-il2cpp 通知${VERSION:+ $VERSION}"
-        color="blue"
+        HEADER_EMOJI="📣"
+        HEADER_TITLE="chaos-il2cpp 通知${VERSION:+ $VERSION}"
+        HEADER_TEMPLATE="blue"
         ;;
 esac
 
-# Escape text for JSON (Feishu card/text uses plain text; newlines preserved)
-escape_json() {
-    python -c "import json,sys; print(json.dumps(sys.argv[1]))" "$1"
-}
+# ── Build elements (Python for safe JSON assembly) ───────────────────────
+PAYLOAD=$(python - "$WEBHOOK" "$SECRET" "$EVENT" "$HEADER_EMOJI" "$HEADER_TITLE" "$HEADER_TEMPLATE" \
+    "$VERSION" "$ACTOR" "$ENV" "$TIME_UTC" "$REPO" "$RELEASE_URL" "$LOG_URL" \
+    "$HIGHLIGHTS" "$CHANGED_SUMMARY" "$ARTIFACTS" "$STATS" "$GATES" \
+    "$FAILED_STAGE" "$FAILED_DETAILS" "$PENDING_URL" <<'PYEOF'
+import json, time, hmac, hashlib, base64, sys
 
-# ── Compute sign if a secret is present ─────────────────────────────────
-# Feishu signature scheme: base64(hmac_sha256(key, timestamp + "\n" + secret))
-SIGN_PART=""
-if [ -n "$SECRET" ]; then
-    # python used for hmac/base64 (cross-platform reliable)
-    SIGN_PART=$(python - "$SECRET" <<'PYEOF'
-import base64, hmac, hashlib, sys, time
-secret = sys.argv[1]
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
+webhook, secret, event, emoji, title, template = sys.argv[1:7]
+ver, actor, env, time_utc, repo, rel_url, log_url = sys.argv[7:14]
+highlights, changed_summary, artifacts, stats, gates = sys.argv[14:19]
+failed_stage, failed_details, pending_url = sys.argv[19:22]
+
+# Sign
 ts = str(int(time.time()))
-string_to_sign = ts + "\n" + secret
-sig = base64.b64encode(hmac.new(string_to_sign.encode("utf-8"), digestmod=hashlib.sha256).digest()).decode()
-print(f"{ts},{sig}")
-PYEOF
-    )
-fi
+sig = ""
+if secret:
+    sig = base64.b64encode(hmac.new((ts + "\n" + secret).encode(), digestmod=hashlib.sha256).digest()).decode()
 
-# Assemble content lines.
-body_lines=""
-body_lines="${body_lines}${REPO:+仓库：}$REPO\\n"
-[ -n "$VERSION" ] && body_lines="${body_lines}版本：${VERSION}\\n"
-[ -n "$URL" ] && body_lines="${body_lines}地址：${URL}\\n"
-if [ -n "$NOTES" ]; then
-    body_lines="${body_lines}\\n${NOTES}\\n"
-elif [ -n "$HL" ]; then
-    body_lines="${body_lines}\\n${HL}\\n"
-fi
+elements = []
 
-# Build Feishu text payload.  event/failed==red -> error_code style card is
-# overkill; a plain text message with emoji title is consistent & robust.
-ts_part="${SIGN_PART%,*}"
-sig_part="${SIGN_PART#*,}"
-payload_generated=$(python - "$title" "$body_lines" <<'PYEOF'
-import json, sys
-content = sys.argv[1] + "\n\n" + sys.argv[2]
-print(json.dumps({
-  "msg_type": "interactive",
-  "card": {
-     "header": {"title": {"tag": "plain_text", "content": content.split(chr(10))[0]}, "template": "green"},
-     "elements": [{"tag": "div", "text": {"tag": "lark_md", "content": content}}]
-  }
-}))
-PYEOF
-)
+# ── Audit / metadata row ──
+meta_lines = []
+if repo:
+    meta_lines.append(f"**Repository**：{repo}")
+if env:
+    meta_lines.append(f"**Environment**：{env}")
+if actor:
+    meta_lines.append(f"**Actor**：{actor}")
+if ver:
+    meta_lines.append(f"**Version**：{ver}")
+if time_utc:
+    meta_lines.append(f"**Time (UTC)**：{time_utc}")
+if meta_lines:
+    elements.append({"tag": "div", "text": {"tag": "lark_md", "content": "\n".join(meta_lines)}})
+    elements.append({"tag": "hr"})
 
-# The card-as-plain more complex; simpler: use the "text"/"post" message type
-# which every custom bot accepts without card schema risk.
-# Rebuild as a rich text (post) message with the title as first line.
-payload=$(python - "$title" "$body_lines" <<'PYEOF'
-import json, sys
-title, body = sys.argv[1], sys.argv[2]
-print(json.dumps({
-  "msg_type": "text",
-  "content": {"text": title + "\n" + body}
-}))
-PYEOF
-)
+# ── Highlights ──
+if highlights:
+    lines = highlights.replace("\\n", "\n").split("\n")
+    content = "**🎯 Highlights**\n" + "\n".join(f"- {l}" for l in lines if l.strip())
+    elements.append({"tag": "div", "text": {"tag": "lark_md", "content": content}})
 
-# Send.
-curl_send() {
-    local sign_args=()
-    if [ -n "$SIGN_PART" ]; then
-        sign_args=(--data-urlencode "timestamp=${ts_part}" --data-urlencode "sign=${sig_part}")
-    fi
-    if [ -n "${sign_args[*]:-}" ]; then
-        # Feishu sign is in the body, not query, for custom bots: embed sign &
-        # timestamp into the JSON payload is NOT standard; instead use the header:
-        # https://open.feishu.cn/document/client-docs/bot-v3/add-custom-bot#756b82f3
-        curl -s -X POST "$WEBHOOK" \
-            -H "Content-Type: application/json; charset=utf-8" \
-             --data "$(python - "$payload" "${ts_part}" "${sig_part}" <<'PYEOF'
-import json,sys
-p=json.loads(sys.argv[1]); p["timestamp"]=sys.argv[2]; p["sign"]=sys.argv[3]
-print(json.dumps(p))
-PYEOF
-            )" || true
-    else
-        curl -s -X POST "$WEBHOOK" -H "Content-Type: application/json; charset=utf-8" \
-            --data "$payload" || true
-    fi
+# ── What's Changed (published only) ──
+if event == "published" and changed_summary:
+    elements.append({"tag": "div", "text": {"tag": "lark_md", "content": f"**📋 What's Changed**\n{changed_summary}"}})
+
+# ── Artifacts (published only) ──
+if event == "published" and artifacts:
+    elements.append({"tag": "div", "text": {"tag": "lark_md", "content": f"**📦 Artifacts**\n{artifacts}"}})
+
+# ── Gates (verify only) ──
+if event == "verify" and gates:
+    elements.append({"tag": "div", "text": {"tag": "lark_md", "content": f"**✅ Gates**\n{gates}"}})
+
+# ── Failure info (failed only) ──
+if event == "failed":
+    fail_lines = []
+    if failed_stage:
+        fail_lines.append(f"**Stage**：{failed_stage}")
+    if failed_details:
+        fail_lines.append(f"**Detail**：{failed_details}")
+    fail_lines.append("\n**Suggested action**：Fix the issue, then run `release.sh fix --from-main` and re-verify.")
+    if fail_lines:
+        elements.append({"tag": "div", "text": {"tag": "lark_md", "content": "\n".join(fail_lines)}})
+
+# ── Stats ──
+if stats:
+    if elements and elements[-1].get("tag") != "hr":
+        elements.append({"tag": "hr"})
+    elements.append({"tag": "div", "text": {"tag": "lark_md", "content": f"**📊 Stats**\n{stats}"}})
+
+# ── Action button ──
+actions = []
+if rel_url:
+    actions.append({"tag": "button", "text": {"tag": "plain_text", "content": "🔗 View Release"}, "type": "primary", "url": rel_url})
+if event == "verify" and pending_url:
+    actions.append({"tag": "button", "text": {"tag": "plain_text", "content": "▶️ Proceed to Publish"}, "type": "default", "url": pending_url})
+if event == "failed" and log_url:
+    actions.append({"tag": "button", "text": {"tag": "plain_text", "content": "📋 View Logs"}, "type": "danger", "url": log_url})
+if actions:
+    elements.append({"tag": "action", "actions": actions})
+
+# ── Assemble ──
+card = {
+    "msg_type": "interactive",
+    "timestamp": ts,
+    "card": {
+        "config": {"wide_screen_mode": True},
+        "header": {
+            "title": {"tag": "plain_text", "content": f"{emoji} {title}"},
+            "template": template
+        },
+        "elements": elements
+    }
 }
+if sig:
+    card["sign"] = sig
 
-RESP=$(curl_send)
-echo "  [feishu] webhook response: ${RESP:0:200}"
+print(json.dumps(card, ensure_ascii=False))
+PYEOF
+)
 
-# Feishu returns code=0 on success.
-if echo "$RESP" | grep -q '"code":0'; then
+# ── Send ──
+RESP=$(curl -s -X POST "$WEBHOOK" -H "Content-Type: application/json; charset=utf-8" --data "$PAYLOAD" 2>/dev/null || true)
+echo "  [feishu] response: ${RESP:0:300}"
+
+if echo "$RESP" | grep -qE '"code"\s*:\s*0'; then
     echo "  [feishu] notification sent ($EVENT)"
-    exit 0
 else
     echo "  [feishu] warning: notification not acknowledged: $RESP" >&2
-    # Non-blocking by design: do not fail the release because a chat bot is down.
-    exit 0
 fi
+exit 0

@@ -141,6 +141,35 @@ release_lock() {
 }
 dispatch_cmd() { ( cd "$WORKTREE_DIR" && "$@" ); }
 
+# ── Feishu notification wrapper ─────────────────────────────────────────
+# Send a release event card.  Pulls structured fields (highlights/change
+# summary/stats) from the generated release notes when they are available.
+# Usage: notify_release <event: published|verify|failed> <version> <notes_file> [extra_env...]
+# Extra env lines like "FEISHU_FAILED_STAGE=verify gate: unit" may be passed as
+# "$3 .. $N" — each is `exported` before the notify call.
+FEISHU_NOTIFY_ENABLED="${FEISHU_NOTIFY_ENABLED:-1}"   # set 0 to opt out entirely
+notify_release() {
+    [ "$FEISHU_NOTIFY_ENABLED" = "1" ] || return 0
+    local ev="$1" ver="$2" notes_file="${3:-}" tag="v${2}"
+    # Load any extracted summary fields (highlights/stats/changed) if notes exist.
+    if [ -n "$notes_file" ] && [ -s "$notes_file" ]; then
+        local _pb _prev
+        _prev=$(git describe --abbrev=0 --tags "$tag^" 2>/dev/null || echo "")
+        # source the exported vars from release_notes_summary.sh
+        # shellcheck disable=SC1091
+        eval "$(bash "$REPO_ROOT/scripts/release_notes_summary.sh" "$notes_file" "$_prev" "$tag" 2>/dev/null)" || true
+        export FEISHU_HIGHLIGHTS FEISHU_CHANGED_SUMMARY FEISHU_STATS
+    fi
+    export FEISHU_EVENT="$ev" FEISHU_VERSION="$ver" \
+        FEISHU_TIME_UTC="$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+        FEISHU_ACTOR="$(git config user.name 2>/dev/null || echo 'ci')"
+    # apply any extra overrides passed after notes_file (KEY=value args)
+    for kv in "${@:4}"; do
+        [ -n "$kv" ] && export "$kv"
+    done
+    bash "$REPO_ROOT/scripts/notify-feishu.sh" >/dev/null 2>&1 || true
+}
+
 # Provision prebuilt SDK libs from the main worktree into the release worktree.
 # The release worktree is a clean checkout; the native SDK libs (Windows .lib /
 # Linux .a) live in the MAIN repo under gitignored tree tests/e2e/translation/sdk
@@ -344,21 +373,26 @@ cmd_verify() {
         write_state phase '"verify"'; write_state phaseStatus '"failed"'; write_state verifyFailed true
         echo ""
         echo "!! verify FAILED. Run: ./scripts/release.sh fix --from-main  (after fixing on main)"
-        # Notify Feishu on failure
-        FEISHU_EVENT=failed \
-            FEISHU_VERSION="$ver" \
-            FEISHU_NOTES="Release verify FAILED — one or more gates did not pass.  Run 'fix --from-main' after pushing fixes." \
-            bash "$RC_FEISHU_SCRIPT" 2>/dev/null || true
+        # Notify Feishu on failure (list which gates are red)
+        local fail_gates=""
+        { fail_gates=$(for g in governance publishSmoke unit integrity; do
+            s=$(echo "$state" | state_get "verifyResults.$g" "$state")
+            [ "$s" = "fail" ] && printf ' %s' "$g"; done); } 2>/dev/null || true
+        notify_release failed "$ver" "" \
+            "FEISHU_ENV=验证" \
+            "FEISHU_FAILED_STAGE=${fail_gates:-one or more release gates}" \
+            "FEISHU_FAILED_DETAILS=Release verify did not pass; run fix --from-main after pushing fixes." \
+            "FEISHU_REPO=PolarisWang/booming-il2cpp"
         exit 1
     fi
     write_state phase '"verify"'; write_state phaseStatus '"pass"'; write_state verifyFailed false
     echo ""
     echo "== verify ALL PASSED. Run: ./scripts/release.sh publish"
-    # Notify Feishu on verify pass
-    FEISHU_EVENT=verify \
-        FEISHU_VERSION="$ver" \
-        FEISHU_NOTES="All 5 gates passed (governance/publish-smoke/unit/integrity/nupkg-e2e).  Ready to publish." \
-        bash "$RC_FEISHU_SCRIPT" 2>/dev/null || true
+    # Notify Feishu on verify pass (gates all green)
+    notify_release verify "$ver" "" \
+        "FEISHU_ENV=验证" \
+        "FEISHU_GATES=governance ✓ · publish-smoke ✓ · unit ✓ · integrity ✓ · nupkg-e2e ✓" \
+        "FEISHU_REPO=PolarisWang/booming-il2cpp"
 }
 
 # ── fix ──────────────────────────────────────────────────────────────────
@@ -578,11 +612,15 @@ regression_check: release-governance + CI on main after merge."
     echo "== Release ${ver} published."
     echo "   Tag: ${tag}, Branch: ${branch} (merged to main)"
     # Notify Feishu that the release is live
-    FEISHU_EVENT=published \
-        FEISHU_VERSION="$ver" \
-        FEISHU_URL="https://github.com/PolarisWang/booming-il2cpp/releases/tag/${tag}" \
-        FEISHU_NOTES="Release ${tag} published.  nupkg + structured release notes are live on GitHub." \
-        bash "$RC_FEISHU_SCRIPT" 2>/dev/null || true
+    local notes_file="$RC_ARTIFACTS_BASE/release/$ver/RELEASE_NOTES_${ver}.md"
+    local nupkg_file="$RC_ARTIFACTS_BASE/release/tool/chaos-il2cpp.${ver}.nupkg"
+    local artifacts_summary="chaos-il2cpp.${ver}.nupkg"
+    [ -f "$nupkg_file" ] && artifacts_summary="$artifacts_summary ($(du -h "$nupkg_file" | cut -f1))"
+    notify_release published "$ver" "$notes_file" \
+        "FEISHU_ENV=生产" \
+        "FEISHU_RELEASE_URL=https://github.com/PolarisWang/booming-il2cpp/releases/tag/${tag}" \
+        "FEISHU_ARTIFACTS=${artifacts_summary} · SHA256SUMS · SBOM" \
+        "FEISHU_REPO=PolarisWang/booming-il2cpp"
 }
 
 # ── abort ────────────────────────────────────────────────────────────────

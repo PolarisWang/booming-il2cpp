@@ -325,11 +325,23 @@ jobs:
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
           FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
         run: |
-          FEISHU_EVENT=published \
+          # Generate the structured summary fields from release-notes.md
+          # (the release-notes job artifact downloaded above).
+          PREV_TAG="$(git describe --abbrev=0 --tags "${{ needs.version.outputs.tag_ref }}^" 2>/dev/null || git rev-list --max-parents=0 HEAD 2>/dev/null | tail -1)"
+          if [ -s "release-notes.md" ]; then
+            eval "$(bash scripts/release_notes_summary.sh release-notes.md "$PREV_TAG" "${{ needs.version.outputs.tag_ref }}")"
+          fi
+          # Prepare all card env, then invoke the notifier in the same shell so the
+          # exported FEISHU_* (incl. the summary-derived ones) are visible to it.
+          export FEISHU_EVENT=published \
             FEISHU_VERSION="${{ needs.version.outputs.version }}" \
-            FEISHU_URL="https://github.com/${{ github.repository }}/releases/tag/${{ needs.version.outputs.tag_ref }}" \
+            FEISHU_ACTOR="${{ github.actor }}" \
+            FEISHU_ENV="生产" \
+            FEISHU_TIME_UTC="$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             FEISHU_REPO="${{ github.repository }}" \
-            bash scripts/notify-feishu.sh
+            FEISHU_RELEASE_URL="https://github.com/${{ github.repository }}/releases/tag/${{ needs.version.outputs.tag_ref }}" \
+            FEISHU_ARTIFACTS="chaos-il2cpp.${{ needs.version.outputs.version }}.nupkg · SHA256SUMS · SBOM"
+          bash scripts/notify-feishu.sh
       - name: Notify Feishu on publish failure
         if: ${{ failure() }}
         shell: bash
@@ -338,8 +350,13 @@ jobs:
           FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
         continue-on-error: true
         run: |
-          FEISHU_EVENT=failed \
+          export FEISHU_EVENT=failed \
             FEISHU_VERSION="${{ needs.version.outputs.version }}" \
+            FEISHU_ACTOR="${{ github.actor }}" \
+            FEISHU_ENV="CI" \
+            FEISHU_TIME_UTC="$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             FEISHU_REPO="${{ github.repository }}" \
-            FEISHU_NOTES="CI Release pipeline failed for tag ${{ needs.version.outputs.tag_ref }}.  Check the Actions log for details." \
-            bash scripts/notify-feishu.sh
+            FEISHU_FAILED_STAGE="CI Release pipeline (tag ${{ needs.version.outputs.tag_ref }})" \
+            FEISHU_FAILED_DETAILS="Check the Actions run log for the failing job." \
+            FEISHU_LOG_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          bash scripts/notify-feishu.sh
