@@ -268,3 +268,22 @@ jobs:
 2. **Phase 2 的 25 个 stage 清单**：有没有遗漏或多余的？
 3. **迁移策略**：Phase 1 保持旧 workflow 并行（`if: false`）还是直接删旧换新？
 4. **优先级**：先做 Phase 1 验证设计，再全量拆解？还是直接全量拆解？
+---
+
+## 执行状态 (2026-09-04)
+
+| Phase | 状态 | commit | 验证 |
+|-------|------|--------|------|
+| Phase 0 目录+调度器+v1 dispatcher | ✅ | d635868ac (spike) | yaml 绿 |
+| Phase 1 概念验证(gc-unit/hygiene/codegen 3 stage) | ✅ | d635868ac / merge | 26 文件 yaml 绿 |
+| Phase 2 全量 26 stage + pipeline + 3 profile | ✅ | 3e9ecaa67 | 全 32 文件 yaml 绿 |
+| Phase 3 degate 18 旧 workload | ✅ | 5f6e2357c | 18/18 degate + yaml 绿; release/notify 保留 |
+| Phase 3 on:push 自触发入口 | ✅ | 386f26246 | Pipeline on push main(codegen paths) |
+| Phase 4 依赖拓扑/report/path-skip | 🔶 部分(仅浅层 marker) | pending | GitHub 语义需真绿观察;已加 finish marker + TODO |
+
+### Phase 4 决策(诚实)
+- GitHub 原生已 render per-run 各 job status → 自造 report job 价值低,不 push 复杂版。
+- per-profile DAG(如 publish⊃foundation) 与 per-stage path-skip 依赖 dispatch 语义
+  (skipped-job in needs = success) 的真 GitHub 运行确认, 否则本地无法证明 → 标 TODO,
+  首绿后观察调优。
+- finish job: 低风险 workflow 级显式 gate(needs [resolve]), 缺失 profile→resolve fail→红。

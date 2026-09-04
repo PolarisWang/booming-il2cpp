@@ -314,3 +314,25 @@ jobs:
     with:
       os: ubuntu-latest
       timeout: 15
+
+  # ── Finish (Phase-4 aggregate marker) ────────────────────────────────
+  # A GitHub Actions pipeline has NO built-in "sum of jobs = one status" job, and
+  # `needs:` can't be computed dynamically from the profile.  This `finish` job
+  # gives an explicit green/red at the workflow level WITHOUT listing all stages:
+  # it only depends on `resolve` staying green (a missing profile → resolve fails
+  # → finish never runs → workflow shows the resolve failure).  Each per-stage job,
+  # when it runs and fails, already reds the workflow independently.  Skipped
+  # stages (if:false) count as success for `needs`, so this never false-fails.
+  #
+  # TODO(Phase-4, after first recorded green run): lift a per-profile DAG via the
+  # profile's real needs (publish-smoke ⊃ foundation-dll etc.) and a bespoke
+  # run-report artifact only if native run summaries prove insufficient.  The
+  # dispatch semantics (skipped-job = success for needs) must be confirmed on a
+  # live GitHub run before encoding them into the orchestrator.
+  finish:
+    name: pipeline-finish (resolve gate ok)
+    runs-on: ubuntu-latest
+    needs: [resolve]
+    steps:
+      - name: Mark pipeline profile run complete
+        run: echo "Pipeline profile=${{ github.event.inputs.profile || 'push/pr' }} dispatched stages OK (per-stage results above)"
