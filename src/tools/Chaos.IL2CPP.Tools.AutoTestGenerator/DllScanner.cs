@@ -830,8 +830,8 @@ public sealed class DllScanner
                     // combined build's compiler can resolve against net8 normally.
                     present = true;
                 }
-                catch (Exception ex) when (ex is not OutOfMemoryException and
-                                           ex is not StackOverflowException)
+                catch (Exception ex) when (ex is not OutOfMemoryException &&
+                                       !(ex is StackOverflowException))
                 {
                     // Any net8 resolution failure: conservatively treat as present
                     // (defers net10-only correctness to the compiler rather than
