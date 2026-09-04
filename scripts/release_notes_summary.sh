@@ -36,6 +36,11 @@ if [ -z "$PY" ]; then echo "  [release-notes-summary] no working python; skippin
 eval "$("$PY" - "$NOTES_FILE" "$PREV_TAG" "$CUR_TAG" <<'PYEOF'
 import json, os, sys, re
 
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
 notes_file = sys.argv[1]
 prev_tag = sys.argv[2] or ""
 cur_tag = sys.argv[3] or ""
@@ -117,8 +122,8 @@ if prev_tag and cur_tag:
 stats_str = " · ".join(stats_parts)
 
 # Print as env vars
-print(f"FEISHU_HIGHLIGHTS={json.dumps(hl_str)}")
-print(f"FEISHU_CHANGED_SUMMARY={json.dumps(changed_summary)}")
-print(f"FEISHU_STATS={json.dumps(stats_str)}")
+print(f"FEISHU_HIGHLIGHTS={json.dumps(hl_str, ensure_ascii=False)}")
+print(f"FEISHU_CHANGED_SUMMARY={json.dumps(changed_summary, ensure_ascii=False)}")
+print(f"FEISHU_STATS={json.dumps(stats_str, ensure_ascii=False)}")
 PYEOF
 )"
