@@ -213,7 +213,7 @@ jobs:
 
       - name: Post PR Comment (on failure or regression)
         if: (failure() || steps.pipeline.outputs.exit_code != '0') && github.event_name == 'pull_request'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');
