@@ -13,21 +13,24 @@ name: CI Notification
 on:
   workflow_run:
     workflows:
-      - "Codegen & Common Regression"
-      - "Foundation-DLL Regression"
-      - "JIT Performance Baseline"
-      - "AOT Regression Gate"
-      - "Hybrid Regression Gate"
-      # Reliability-critical nightly gates + remaining workflows (previously unmonitored):
-      - "GC Unit Tests"
-      - "GC Stress Nightly"
-      - "Native Nightly"
-      - "ARM64 JIT CI"
-      - "Foundation-DLL CI"
-      - "Secret Scan"
-      # Pipeline orchestrator — resolve failure or stage-level crashes must be visible:
-      - "PR Pipeline"
+      # Pipeline orchestrator — the single entry for all CI profiles:
       - "Pipeline"
+      # Trigger-level workflows (PR / Nightly / Release):
+      - "PR Pipeline"
+      - "Nightly Pipeline"
+      - "Release Pipeline"
+      # High-impact stage workflows (monitored individually for granular alerting):
+      - "gc-unit"
+      - "gc-stress"
+      - "foundation-dll"
+      - "codegen-unit"
+      - "jit-unit"
+      - "native-integration"
+      - "arm64-jit"
+      - "hygiene"
+      - "secret-scan"
+      - "codeql"
+      - "clang-tidy"
     types:
       - completed
 
