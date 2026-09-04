@@ -1,0 +1,26 @@
+# Pipeline profile: pr — validation before merge on every PR / push to main.
+#
+# This file declares WHICH stages run for the `pr` profile.  Add/remove a stage by
+# editing .enabled here — you do NOT touch pipeline.yml workflow code.
+#
+# Each stage name must map 1:1 to a file in .github/workflows/stages/<name>.yml.
+
+profile: pr
+description: "PR / push-to-main fast validation"
+
+stages:
+  # ── Hard quality gates (every PR) ──
+  hygiene:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 15
+
+  # ── GC (unit + safe per-PR stress) ──
+  gc-unit:
+    enabled: true
+    os: windows-latest
+    timeout: 120
+    params:
+      stress_scale: 50        # light stress runs per-PR; heavy 100 deferred to nightly
+
+  # ── Codegen unit (Phase 2 will add codegen-unit, jit-unit, etc. here) ──

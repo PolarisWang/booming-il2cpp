@@ -1,0 +1,103 @@
+# .github/workflows/stages/gc-unit.yml
+# Stage: GC deterministic unit tests + per-PR concurrency stress (safe scale)
+name: gc-unit
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: windows-latest
+      timeout:
+        required: false
+        type: number
+        default: 120
+      stress_scale:
+        required: false
+        type: number
+        default: 50
+      heap_verify:
+        required: false
+        type: number
+        default: 2
+      cmake_preset:
+        required: false
+        type: string
+        default: windows-x64-reference
+      config:
+        required: false
+        type: string
+        default: Debug
+
+jobs:
+  gc-unit:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+
+      - name: Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Configure CMake
+        run: |
+          cmake -S . -B artifacts/presets/${{ inputs.cmake_preset }} \
+            -G "Visual Studio 17 2022" \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
+            -DROADMAP0_PRESET_TARGET=${{ inputs.cmake_preset }}
+
+      - name: Build Native Runtime + GC tests
+        run: |
+          cmake --build artifacts/presets/${{ inputs.cmake_preset }} --config ${{ inputs.config }} -j 8
+
+      - name: Run GC Unit Tests (exclude stress/benchmark/soak)
+        shell: bash
+        env:
+          CHAOS_GC_HeapVerify: "${{ inputs.heap_verify }}"
+        run: |
+          ctest --test-dir artifacts/presets/${{ inputs.cmake_preset }} \
+            -C ${{ inputs.config }} \
+            -R "chaos_gc_|test_gc_" \
+            -LE "benchmark|stress|soak" \
+            -E "test_gc_young_collector" \
+            --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-unit-output.txt
+
+      - name: Run GC concurrency stress tests (SCALE=${{ inputs.stress_scale }})
+        if: ${{ inputs.stress_scale > 0 }}
+        shell: bash
+        env:
+          CHAOS_IL2CPP_STRESS_SCALE: "${{ inputs.stress_scale }}"
+          CHAOS_GC_HeapVerify: "${{ inputs.heap_verify }}"
+        run: |
+          ctest --test-dir artifacts/presets/${{ inputs.cmake_preset }} \
+            -C ${{ inputs.config }} \
+            -R "test_gc_general_stress|test_gc_loh_stress|test_gc_delegate_stress" \
+            --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-unit-stress-output.txt
+
+      - name: Run young-collector tests (ConservativeSweepSelfRefs excluded)
+        if: ${{ inputs.os == 'windows-latest' }}
+        shell: bash
+        env:
+          CHAOS_GC_HeapVerify: "${{ inputs.heap_verify }}"
+        run: |
+          "${{ github.workspace }}/artifacts/presets/${{ inputs.cmake_preset }}/tests/unit/runtime-native/runtime-core/gc/${{ inputs.config }}/test_gc_young_collector.exe" \
+            --gtest_filter='-*ConservativeSweepSelfRefs*' \
+            2>&1 | tee -a gc-unit-output.txt
+
+      - name: Upload GC test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gc-unit-output-${{ inputs.config }}
+          path: |
+            gc-unit-output.txt
+            gc-unit-stress-output.txt

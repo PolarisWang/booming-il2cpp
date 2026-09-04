@@ -1,0 +1,36 @@
+# .github/workflows/triggers/pr.yml
+# PR trigger → pipeline.yml --profile pr
+name: PR Pipeline
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/native/**'
+      - 'src/managed/**'
+      - 'src/tools/**'
+      - 'CMakeLists.txt'
+      - '**/*.cmake'
+      - 'build/**'
+      - 'tests/e2e/translation/**'
+      - 'tests/suite_contract.yaml'
+      - '.github/workflows/**'
+      - '.github/pipelines/**'
+  push:
+    branches: [main]
+    paths:
+      - 'src/native/**'
+      - 'src/managed/**'
+      - 'src/tools/**'
+      - 'CMakeLists.txt'
+      - '**/*.cmake'
+      - 'build/**'
+      - 'tests/e2e/translation/**'
+      - 'tests/suite_contract.yaml'
+      - '.github/workflows/**'
+      - '.github/pipelines/**'
+
+jobs:
+  pr-pipeline:
+    uses: ./.github/workflows/pipeline.yml
+    with:
+      profile: pr

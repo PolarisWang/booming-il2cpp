@@ -1,0 +1,71 @@
+# .github/workflows/pipeline.yml
+# Pipeline orchestrator — dispatches stages from a profile YAML.
+#
+# 3-layer architecture:
+#   - Stage definitions: .github/workflows/stages/<stage>.yml (each a workflow_call reusable)
+#   - Profile config:    .github/pipelines/<profile>.yml (YAML: which stage to run)
+#   - Orchestrator:      this file (resolve profile → dispatch each enabled stage)
+#
+# GitHub constraint: reusable workflow `uses:` cannot take a dynamic stage name, so
+# every stage is an explicit job whose `if:` is gated on the profile's enabled set
+# (computed by .github/scripts/ci_resolve_profile.py and passed as a matrix/JSON).
+#
+# This SPIKE wires gc-unit + hygiene only, to validate the mechanism on real GitHub
+# before scaling to the full 28-stage inventory.
+
+name: Pipeline
+on:
+  workflow_call:
+    inputs:
+      profile:
+        required: true
+        type: string
+        description: "Pipeline profile name (pr, nightly, release)"
+  workflow_dispatch:
+    inputs:
+      profile:
+        required: true
+        type: choice
+        options:
+          - pr
+          - nightly
+          - release
+        default: pr
+
+jobs:
+  # ── Resolve: which stages does this profile enable? ──
+  resolve:
+    runs-on: ubuntu-latest
+    outputs:
+      stages: ${{ steps.parse.outputs.stages }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: parse
+        name: Resolve enabled stages from profile
+        env:
+          PROFILE: ${{ github.event.inputs.profile || inputs.profile || 'pr' }}
+          ROOT: ${{ github.workspace }}
+        run: |
+          python3 .github/scripts/ci_resolve_profile.py "$PROFILE" "$ROOT"
+
+  # ── Stage dispatchers (add the full 28-stage set here in Phase 2) ──
+
+  gc-unit:
+    name: gc-unit
+    needs: [resolve]
+    if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'gc-unit') }}
+    uses: ./.github/workflows/stages/gc-unit.yml
+    with:
+      os: windows-latest
+      timeout: 120
+      stress_scale: 50
+      heap_verify: 2
+
+  hygiene:
+    name: hygiene
+    needs: [resolve]
+    if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'hygiene') }}
+    uses: ./.github/workflows/stages/hygiene.yml
+    with:
+      os: ubuntu-latest
+      timeout: 15
