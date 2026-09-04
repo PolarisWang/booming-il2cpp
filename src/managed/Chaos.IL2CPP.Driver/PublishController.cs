@@ -384,6 +384,17 @@ int main(int argc, char* argv[])
     chaos_args->header.type_info = &chaos_type_info_managed_array.hot;
     chaos_args->element_type_shape = chaos_type_shape_reference;
     chaos_args->element_type_info = nullptr;
+    #ifdef DEBUG
+    // DEBUG-only safety net: element_type_info == nullptr is only valid while the
+    // array is length 0 (nothing for the GC scanner to read).  If a future GC
+    // scanner reads element_type_info for reference-type arrays regardless of
+    // length, this assert fires before a null dereference.  Matches element_type_shape.
+    if (chaos_args->element_type_shape == chaos_type_shape_reference)
+    {{
+        CHAOS_IL2CPP_ASSERT(chaos_args->length == 0
+            && ""reference-type array with element_type_info == nullptr must be length 0 (GC must not read it)"");
+    }}
+    #endif
     chaos_args->length = 0;
 
     // Invoke the user entry point with the (non-null) empty String[] args handle.
@@ -551,10 +562,11 @@ target_link_options(chaos_entry PRIVATE
             var asmSanitized = Sanitize(assemblyName);
             var structName = $"{asmSanitized}_{sanitized}";
 
-            // The proxy struct name + method follow the codegen convention.  Main's
-            // string[] arg is passed as the app_main local `chaos_args` handle
-            // (a non-null empty managed string[]), so args.Length==0 / iterate
-            // zero times and never crash on a null dereference.
+            // NOTE: 'chaos_args' is the local variable name in the app_main template
+            // (see template at ~line 382).  Keep in sync if the template changes.
+            // The reinterpret_cast is safe because CHAOS_IL2CPP_INTPTR matches the
+            // managed array handle type expected by the generated proxy struct.
+            // (No compile-time check — must be kept in sync manually.)
             // For entries without a string[] arg (e.g. Main()) we still pass
             // whatever the existing convention was (the literal 0) — the proxy
             // wrapper's parameter count must match the generated signature.

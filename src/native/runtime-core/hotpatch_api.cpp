@@ -3,8 +3,8 @@
 #include "method_replacement.h"
 
 #include <atomic>
+#include <mutex>
 #include <vector>
-#include <cstring>
 
 namespace chaos {
 namespace il2cpp {
@@ -25,7 +25,17 @@ struct LivePatch {
     PatchContext*  ctx   = nullptr;
     uint64_t       applied_at = 0;
 };
-std::vector<LivePatch>* g_live = nullptr;      // guarded by apply/revert never concurrent (documented)
+// Guards all access to the live-patch container.  Apply/Revert/Status may now be
+// called from different threads; a plain mutex is sufficient at this scale
+// (Status's read is held only briefly while copying entries out).
+std::mutex g_live_mutex;
+// Returns the process-wide live-patch container, first-initialized on demand.
+// A function-local static avoids both the raw `new` (never freed) and the global
+// static-initialization-order problem of a namespace-scope pointer.
+std::vector<LivePatch>& GetLivePatches() {
+    static std::vector<LivePatch> live;
+    return live;
+}
 
 PatchContext* ApplyBlob(const void* data, size_t size) {
     // Reject obviously-invalid input before doing anything.
@@ -38,7 +48,7 @@ PatchContext* ApplyBlob(const void* data, size_t size) {
         nullptr,          // host_type_ns
         nullptr,          // host_type_names
         nullptr,          // host_method_names
-        0);               // method_count → no per-method overrides
+        0);               // method_count -> no per-method overrides
 }
 
 }  // namespace
@@ -65,7 +75,7 @@ int32_t ChaosApplyPatch(const void* data, size_t size) {
     auto* hdr = static_cast<const PatchDataHeader*>(data);
     if (hdr->magic != PATCH_DATA_MAGIC) return CHAOS_PATCH_ERR_INVALID_FORMAT;
     if (hdr->version >= 4u && hdr->header_size >= 140u && size >= 140u) {
-        // v4 trailing fields present → enforce host revision requirement here so we
+        // v4 trailing fields present -> enforce host revision requirement here so we
         // can return the precise VERSION_MISMATCH code (the loader returns nullptr
         // generically on version rejection and cannot be distinguished there).
         uint32_t host_rev = g_host_revision.load(std::memory_order_relaxed);
@@ -84,65 +94,88 @@ int32_t ChaosApplyPatch(const void* data, size_t size) {
         // returns non-null on a real context, and loader sets method_count==0 for
         // a valid blob with no matching methods, we return NO_METHODS when a blob
         // parsed but produced 0.  We cannot distinguish easily post-hoc, so:
-        //   1) If size/signature invalid → INVALID_FORMAT
-        //   2) otherwise → PARTIAL/INTERNAL
+        //   1) If size/signature invalid -> INVALID_FORMAT
+        //   2) otherwise -> PARTIAL/INTERNAL
         return CHAOS_PATCH_ERR_PARTIAL_ROLLBACK;
     }
     if (ctx->method_count == 0u) {
-        // A valid blob applied zero methods — treat as no-match/rollback.
+        // A valid blob applied zero methods -- treat as no-match/rollback.
         (void)Unpatch(ctx);
         return CHAOS_PATCH_ERR_NO_METHODS;
     }
 
     // Register the live context under a token.
     int32_t token = g_next_token.fetch_add(1, std::memory_order_relaxed);
-    if (g_live == nullptr) {
-        g_live = new std::vector<LivePatch>();
+    {
+        std::lock_guard<std::mutex> lock(g_live_mutex);
+        GetLivePatches().push_back(LivePatch{
+            token,
+            g_host_revision.load(std::memory_order_relaxed),
+            ctx,
+            /* applied_at */ static_cast<uint64_t>(0),  // no clock dependency
+        });
     }
-    g_live->push_back(LivePatch{
-        token,
-        g_host_revision.load(std::memory_order_relaxed),
-        ctx,
-        /* applied_at */ static_cast<uint64_t>(0),  // no clock dependency
-    });
 
     return CHAOS_PATCH_OK;
 }
 
 int32_t ChaosRevertPatch(int32_t token) {
     using namespace chaos::il2cpp::runtime_core;
-    if (g_live == nullptr) return CHAOS_PATCH_ERR_INTERNAL;
 
-    if (token == 0) {
-        // Revert all live patches.
-        int32_t rc = CHAOS_PATCH_OK;
-        for (auto& lp : *g_live) {
-            if (lp.ctx != nullptr && !Unpatch(lp.ctx)) rc = CHAOS_PATCH_ERR_PARTIAL_ROLLBACK;
-            lp.ctx = nullptr;
-        }
-        g_live->clear();
-        return rc;
-    }
+    // Collect the PatchContext* to unpatch under the lock, then call Unpatch()
+    // OUTSIDE the lock.  Unpatch() runs unbounded registry teardown
+    // (DestroyPatchContext / name-registry writes); holding g_live_mutex across
+    // it would both delay concurrent Status queries and risk a lock-order
+    // inversion if Unpatch ever re-entered a Chaos* entry point.  Extracting the
+    // clean context list first keeps the critical section to just the vector
+    // mutation.
+    std::vector<PatchContext*> to_unpatch;
+    bool found = false;
+    {
+        std::lock_guard<std::mutex> lock(g_live_mutex);
+        auto& live = GetLivePatches();
+        if (live.empty()) return CHAOS_PATCH_ERR_INTERNAL;
 
-    for (auto it = g_live->begin(); it != g_live->end(); ++it) {
-        if (it->token == token) {
-            bool ok = (it->ctx != nullptr) && Unpatch(it->ctx);
-            g_live->erase(it);
-            return ok ? CHAOS_PATCH_OK : CHAOS_PATCH_ERR_INTERNAL;
+        if (token == 0) {
+            // Revert all live patches.
+            for (auto& lp : live) {
+                if (lp.ctx != nullptr) {
+                    to_unpatch.push_back(lp.ctx);
+                    lp.ctx = nullptr;
+                }
+            }
+            live.clear();
+            found = true;
+        } else {
+            for (auto it = live.begin(); it != live.end(); ++it) {
+                if (it->token == token) {
+                    to_unpatch.push_back(it->ctx);
+                    it->ctx = nullptr;
+                    live.erase(it);
+                    found = true;
+                    break;
+                }
+            }
         }
     }
-    // Token not found.
-    return CHAOS_PATCH_ERR_INTERNAL;
+    if (!found) return CHAOS_PATCH_ERR_INTERNAL;
+
+    int32_t rc = CHAOS_PATCH_OK;
+    for (auto* ctx : to_unpatch) {
+        if (ctx != nullptr && !Unpatch(ctx)) rc = CHAOS_PATCH_ERR_PARTIAL_ROLLBACK;
+    }
+    return rc;
 }
 
 int32_t ChaosPatchStatus(int32_t max_patches, ChaosPatchStatusEntry* out_info) {
     using namespace chaos::il2cpp::runtime_core;
-    if (g_live == nullptr) return 0;
-    int32_t n = static_cast<int32_t>(g_live->size());
+    std::lock_guard<std::mutex> lock(g_live_mutex);
+    auto& live = GetLivePatches();
+    int32_t n = static_cast<int32_t>(live.size());
     if (out_info == nullptr || max_patches <= 0) return n;  // count-only
     int32_t written = (n < max_patches) ? n : max_patches;
     for (int32_t i = 0; i < written; ++i) {
-        auto& lp = (*g_live)[i];
+        auto& lp = live[i];
         out_info[i].token        = lp.token;
         out_info[i].method_count = (lp.ctx != nullptr) ? static_cast<int32_t>(lp.ctx->method_count) : 0;
         out_info[i].generation   = static_cast<int32_t>(chaos::il2cpp::runtime_core::g_patch_generation.load(std::memory_order_relaxed));
