@@ -73,16 +73,16 @@ jobs:
   build-windows:
     name: Build SDK (Windows x64)
     needs: [version]
-    runs-on: windows-latest
+    runs-on: ${{ vars.RUNNER_WIN || 'windows-latest' }}
     steps:
       - name: Enable long paths (Windows workaround for archive docs)
         shell: bash
         run: git config --global core.longpaths true
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@${{ vars.ACTIONS_CHECKOUT_VER || 'v4' }}
         with:
-          submodules: recursive
-          fetch-depth: 0
-      - uses: actions/setup-dotnet@v4
+          submodules: ${{ vars.CHECKOUT_SUBMODULES || 'recursive' }}
+          fetch-depth: ${{ vars.CHECKOUT_DEPTH || 0 }}
+      - uses: actions/setup-dotnet@${{ vars.ACTIONS_SETUP_DOTNET_VER || 'v4' }}
         with:
           dotnet-version: ${{ vars.DOTNET_VERSION || '8.0.x' }}
       - name: Restore NuGet packages
@@ -122,7 +122,7 @@ jobs:
           fi
           echo "SDK artifacts: $(find "$SDK_DIR" -type f | wc -l) files"
       - name: Upload SDK artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@${{ vars.ACTIONS_UPLOAD_ARTIFACT_VER || 'v4' }}
         with:
           name: sdk-windows-x64-${{ needs.version.outputs.version }}
           path: artifacts/release/${{ needs.version.outputs.version }}/windows-x64
@@ -139,16 +139,16 @@ jobs:
     runs-on: ${{ vars.RUNNER_LINUX || 'ubuntu-latest' }}
     if: ${{ false }}  # disabled until linux portability gaps are resolved
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@${{ vars.ACTIONS_CHECKOUT_VER || 'v4' }}
         with:
-          submodules: recursive
-          fetch-depth: 0
+          submodules: ${{ vars.CHECKOUT_SUBMODULES || 'recursive' }}
+          fetch-depth: ${{ vars.CHECKOUT_DEPTH || 0 }}
       - name: Install system dependencies (gcc-14 + ninja + libnuma)
         shell: bash
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq gcc-14 g++-14 ninja-build libnuma-dev libssl-dev
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@${{ vars.ACTIONS_SETUP_DOTNET_VER || 'v4' }}
         with:
           dotnet-version: ${{ vars.DOTNET_VERSION || '8.0.x' }}
       - name: Restore NuGet packages
@@ -173,7 +173,7 @@ jobs:
           fi
           echo "SDK artifacts: $(find "$SDK_DIR" -type f | wc -l) files"
       - name: Upload SDK artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@${{ vars.ACTIONS_UPLOAD_ARTIFACT_VER || 'v4' }}
         with:
           name: sdk-linux-x64-${{ needs.version.outputs.version }}
           path: artifacts/release/${{ needs.version.outputs.version }}/linux-x64
@@ -184,9 +184,9 @@ jobs:
     runs-on: ${{ vars.RUNNER_LINUX || 'ubuntu-latest' }}
     needs: [version]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@${{ vars.ACTIONS_CHECKOUT_VER || 'v4' }}
         with:
-          fetch-depth: 0
+          fetch-depth: ${{ vars.CHECKOUT_DEPTH || 0 }}
       - name: Generate release notes
         shell: bash
         env:
@@ -205,7 +205,7 @@ jobs:
             echo "::error::release notes empty" && exit 1
           fi
       - name: Upload release notes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@${{ vars.ACTIONS_UPLOAD_ARTIFACT_VER || 'v4' }}
         with:
           name: release-notes
           path: release-notes.md
@@ -221,9 +221,9 @@ jobs:
     if: ${{ always() && needs.build-windows.result != 'failure' }}
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@${{ vars.ACTIONS_CHECKOUT_VER || 'v4' }}
         with:
-          fetch-depth: 0
+          fetch-depth: ${{ vars.CHECKOUT_DEPTH || 0 }}
       - name: Download all SDK artifacts
         uses: actions/download-artifact@v4
         with:
@@ -243,7 +243,7 @@ jobs:
           bash scripts/generate-checksums.sh release-artifacts
           bash scripts/generate-sbom.sh release-artifacts "${{ needs.version.outputs.version }}"
       - name: Upload release bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@${{ vars.ACTIONS_UPLOAD_ARTIFACT_VER || 'v4' }}
         with:
           name: release-bundle-${{ needs.version.outputs.version }}
           path: release-artifacts
@@ -262,9 +262,9 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@${{ vars.ACTIONS_CHECKOUT_VER || 'v4' }}
         with:
-          fetch-depth: 0
+          fetch-depth: ${{ vars.CHECKOUT_DEPTH || 0 }}
       - name: Download release notes
         uses: actions/download-artifact@v4
         with:
