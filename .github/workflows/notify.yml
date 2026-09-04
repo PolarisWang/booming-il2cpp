@@ -25,6 +25,9 @@ on:
       - "ARM64 JIT CI"
       - "Foundation-DLL CI"
       - "Secret Scan"
+      # Pipeline orchestrator — resolve failure or stage-level crashes must be visible:
+      - "PR Pipeline"
+      - "Pipeline"
     types:
       - completed
 

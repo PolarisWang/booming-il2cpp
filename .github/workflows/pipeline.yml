@@ -46,6 +46,9 @@ jobs:
           PROFILE: ${{ github.event.inputs.profile || inputs.profile || 'pr' }}
           ROOT: ${{ github.workspace }}
         run: |
+          # PyYAML is required by ci_resolve_profile.py.  Without it the script now
+          # hard-fails (it must never return an empty set that silently skips stages).
+          python3 -m pip install pyyaml --quiet
           python3 .github/scripts/ci_resolve_profile.py "$PROFILE" "$ROOT"
 
   # ── GC domain ────────────────────────────────────────────────────────

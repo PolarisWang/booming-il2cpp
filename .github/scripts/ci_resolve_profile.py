@@ -32,16 +32,49 @@ def resolve(profile: str, repo_root: str) -> list[str]:
         raise FileNotFoundError(f"Pipeline profile not found: {path}")
 
     if yaml is None:
-        # Degenerate: without yaml we cannot parse; empty set (nothing enabled).
-        return []
+        # Failing hard (rather than returning an empty set) is essential: an empty
+        # set flows into the orchestrator's `contains(needs.resolve.outputs.stages, ...)`
+        # gates and silently disables every downstream stage job — the pipeline would
+        # show green while running NO tests.  A missing PyYAML is a toolchain misconfig
+        # that must surface as a red workflow, not a false-green skip.
+        raise RuntimeError(
+            "PyYAML is required to resolve the pipeline profile (import failed). "
+            "Install it on the runner: python3 -m pip install pyyaml"
+        )
 
     with open(path, encoding="utf-8") as fh:
-        cfg = yaml.safe_load(fh)
-    stages_cfg = cfg.get("stages", {}) if isinstance(cfg, dict) else {}
-    enabled = [
-        name for name, opts in stages_cfg.items()
-        if not (isinstance(opts, dict) and opts.get("enabled") is False)
-    ]
+        try:
+            cfg = yaml.safe_load(fh)
+        except yaml.YAMLError as exc:
+            raise RuntimeError(f"Failed to parse pipeline profile {path}: {exc}") from exc
+
+    if not isinstance(cfg, dict):
+        raise RuntimeError(f"Pipeline profile {path} must be a YAML mapping (got {type(cfg).__name__})")
+
+    stages_cfg = cfg.get("stages", {})
+    if not isinstance(stages_cfg, dict):
+        raise RuntimeError(
+            f"Pipeline profile {path}: 'stages' must be a mapping of stage-name -> options "
+            f"(got {type(stages_cfg).__name__}). Mis-configured profiles must fail loudly, "
+            "not yield an empty enabled-set that silently skips every stage."
+        )
+
+    # Validate that every enabled stage name has a corresponding reusable workflow
+    # file.  A typo'd stage name in the profile would otherwise pass resolve() and
+    # only fail indirectly when the orchestrator references a non-existent job.
+    stages_dir = os.path.join(repo_root, ".github", "workflows", "stages")
+    enabled = []
+    for name, opts in stages_cfg.items():
+        if isinstance(opts, dict) and opts.get("enabled") is False:
+            continue
+        stage_file = os.path.join(stages_dir, f"{name}.yml")
+        # Only the templates/plain stage files are expected; _template/partial are skipped.
+        if not os.path.isfile(stage_file):
+            raise RuntimeError(
+                f"Enabled stage '{name}' (in {path}) has no matching reusable workflow "
+                f"file: expected {stage_file}. Fix the stage name or create the file."
+            )
+        enabled.append(name)
     return enabled
 
 
@@ -50,7 +83,10 @@ def main() -> int:
     repo_root = sys.argv[2] if len(sys.argv) > 2 else os.getcwd()
     try:
         result = resolve(profile, repo_root)
-    except FileNotFoundError as exc:
+    except (FileNotFoundError, RuntimeError) as exc:
+        # Both profile-not-found and hard-failures (missing PyYAML / malformed profile /
+        # stage/name/file mismatch) must surface as a red workflow, never an empty
+        # enabled-set that silently skips every downstream stage.
         print(f"::error::{exc}", file=sys.stderr)
         return 1
 

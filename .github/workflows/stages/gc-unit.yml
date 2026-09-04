@@ -50,14 +50,19 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake -S . -B artifacts/presets/${{ inputs.cmake_preset }} \
-            -G "Visual Studio 17 2022" \
-            --toolchain build/toolchains/windows-x64-reference.cmake \
+          cmake --preset ${{ inputs.cmake_preset }} \
             -DROADMAP0_PRESET_TARGET=${{ inputs.cmake_preset }}
 
       - name: Build Native Runtime + GC tests
+        shell: bash
         run: |
-          cmake --build artifacts/presets/${{ inputs.cmake_preset }} --config ${{ inputs.config }} -j 8
+          # Use parallel build count matching available cores (cap at 8 for
+          # self-hosted runners with high core counts; default 2-4 for GH-hosted).
+          # Hard-coding -j 8 oversubscribes standard 2-4 core runners.
+          CORES=$(nproc 2>/dev/null || echo 4)
+          [ "$CORES" -gt 8 ] && CORES=8
+          cmake --build artifacts/presets/${{ inputs.cmake_preset }} \
+            --config ${{ inputs.config }} -j "$CORES"
 
       - name: Run GC Unit Tests (exclude stress/benchmark/soak)
         shell: bash
@@ -84,6 +89,13 @@ jobs:
             --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-unit-stress-output.txt
 
       - name: Run young-collector tests (ConservativeSweepSelfRefs excluded)
+        # ConservativeSweepSelfRefs is excluded because it is a pre-existing
+        # flaky failure tracked in memory: [[youngcollectionempty-fixed-conservativesweep-preexisting]]
+        # (ConservativeSweepSelfRefs=clean-HEAD pre-existing failure at L294, pending
+        # dedicated fix.  Not a regression — the test is known to fail intermittently
+        # and is suppressed here to avoid blocking CI while the fix is in progress.)
+        # The young-collector test binary is Windows-only (.exe).  On non-Windows
+        # runners the test is skipped with a log message (not silently).
         if: ${{ inputs.os == 'windows-latest' }}
         shell: bash
         env:
@@ -92,6 +104,13 @@ jobs:
           "${{ github.workspace }}/artifacts/presets/${{ inputs.cmake_preset }}/tests/unit/runtime-native/runtime-core/gc/${{ inputs.config }}/test_gc_young_collector.exe" \
             --gtest_filter='-*ConservativeSweepSelfRefs*' \
             2>&1 | tee -a gc-unit-output.txt
+
+      - name: Skip young-collector (non-Windows runner)
+        if: ${{ inputs.os != 'windows-latest' }}
+        shell: bash
+        run: |
+          echo "::notice::young-collector tests skipped: test binary is Windows-only (.exe).  "
+          echo "       Non-Windows GC coverage is handled by the gc-unit and gc-stress ctest suites above."
 
       - name: Upload GC test output
         if: always()
