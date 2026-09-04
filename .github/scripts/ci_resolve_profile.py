@@ -24,8 +24,15 @@ except ImportError:
     yaml = None  # type: ignore[assignment]
 
 
-def resolve(profile: str, repo_root: str) -> list[str]:
-    """Return the list of enabled stage names for a profile."""
+def resolve(profile: str, repo_root: str, changed_paths: list[str] | None = None) -> list[str]:
+    """Return the list of enabled stage names for a profile.
+
+    changed_paths: optional list of files changed on this push/PR.  When provided,
+    a stage whose options declare a `requires` (list of path globs, fnmatch-style)
+    is included ONLY if at least one glob matches a changed file.  Stages with no
+    `requires` always run.  When changed_paths is None (manual dispatch / no diff),
+    no path-filtering is applied and every enabled stage runs.
+    """
     path = os.path.join(repo_root, ".github", "pipelines", f"{profile}.yml")
     if not os.path.isfile(path):
         # No PyYAML available in runner and no file to statically fall back to.
@@ -62,6 +69,8 @@ def resolve(profile: str, repo_root: str) -> list[str]:
     # Validate that every enabled stage name has a corresponding reusable workflow
     # file.  A typo'd stage name in the profile would otherwise pass resolve() and
     # only fail indirectly when the orchestrator references a non-existent job.
+    import fnmatch as _fn  # minimal import inside function keeps top fast
+
     stages_dir = os.path.join(repo_root, ".github", "workflows", "stages")
     enabled = []
     for name, opts in stages_cfg.items():
@@ -74,6 +83,35 @@ def resolve(profile: str, repo_root: str) -> list[str]:
                 f"Enabled stage '{name}' (in {path}) has no matching reusable workflow "
                 f"file: expected {stage_file}. Fix the stage name or create the file."
             )
+
+        # Optional per-stage path scoping: when changed_paths is provided and the
+        # stage declares `requires` globs, drop the stage unless one glob matches a
+        # changed file.  Glob matching is prefix-aware and also honors a leading `/`
+        # (repo-root-anchored).  If the stage has no `requires`, it always runs.
+        requires = opts.get("requires") if isinstance(opts, dict) else None
+        if requires is not None and changed_paths:
+            if not isinstance(requires, list) or not all(isinstance(g, str) for g in requires):
+                raise RuntimeError(
+                    f"Stage '{name}' requires must be a list of path globs "
+                    f"(got {requires!r}). Mis-configured profile must fail loudly."
+                )
+            hit = False
+            for changed in changed_paths:
+                norm = changed.lstrip("/")
+                for glob in requires:
+                    # match both a trailing exact path and any path under it
+                    if _fn.fnmatch(norm, glob.lstrip("/")) or norm.startswith(
+                        glob.lstrip("/").rstrip("/") + "/"
+                    ) or any(
+                        _fn.fnmatch(part, glob.lstrip("/"))
+                        for part in norm.split("/")[:-1]
+                    ):
+                        hit = True
+                        break
+                if hit:
+                    break
+            if not hit:
+                continue  # this stage's code area not touched; skip it on this push
         enabled.append(name)
     return enabled
 
@@ -81,8 +119,17 @@ def resolve(profile: str, repo_root: str) -> list[str]:
 def main() -> int:
     profile = sys.argv[1] if len(sys.argv) > 1 else "pr"
     repo_root = sys.argv[2] if len(sys.argv) > 2 else os.getcwd()
+    # Optional 3rd argument: newline-separated changed file paths (from
+    # `git diff --name-only`).  Used for per-stage path skip; when absent
+    # (manual dispatch) every enabled stage runs.
+    changed_input = sys.argv[3] if len(sys.argv) > 3 else ""
+    changed_paths: list[str] | None = (
+        [p for p in changed_input.splitlines() if p.strip()]
+        if changed_input.strip()
+        else None
+    )
     try:
-        result = resolve(profile, repo_root)
+        result = resolve(profile, repo_root, changed_paths=changed_paths)
     except (FileNotFoundError, RuntimeError) as exc:
         # Both profile-not-found and hard-failures (missing PyYAML / malformed profile /
         # stage/name/file mismatch) must surface as a red workflow, never an empty

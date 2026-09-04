@@ -279,7 +279,7 @@ jobs:
 | Phase 2 全量 26 stage + pipeline + 3 profile | ✅ | 3e9ecaa67 | 全 32 文件 yaml 绿 |
 | Phase 3 degate 18 旧 workload | ✅ | 5f6e2357c | 18/18 degate + yaml 绿; release/notify 保留 |
 | Phase 3 on:push 自触发入口 | ✅ | 386f26246 | Pipeline on push main(codegen paths) |
-| Phase 4 依赖拓扑/report/path-skip | 🔶 部分(仅浅层 marker) | pending | GitHub 语义需真绿观察;已加 finish marker + TODO |
+| Phase 4 path-skip capability (resolver+git-diff) | 🔶 已加(no-op; 无 stage 声明 `requires`) | next | 首绿后启用 `requires` 见 profile |
 
 ### Phase 4 决策(诚实)
 - GitHub 原生已 render per-run 各 job status → 自造 report job 价值低,不 push 复杂版。

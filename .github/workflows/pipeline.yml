@@ -61,10 +61,21 @@ jobs:
           PROFILE: ${{ github.event.inputs.profile || inputs.profile || 'pr' }}
           ROOT: ${{ github.workspace }}
         run: |
-          # PyYAML is required by ci_resolve_profile.py.  Without it the script now
-          # hard-fails (it must never return an empty set that silently skips stages).
           python3 -m pip install pyyaml --quiet
-          python3 .github/scripts/ci_resolve_profile.py "$PROFILE" "$ROOT"
+          # Compute changed paths for path-skip: on PR use HEAD~1 vs base; on push use
+          # HEAD~1 vs HEAD; on dispatch no filter (all enabled stages run).
+          CHANGED=""
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch --depth=1 origin ${{ github.base_ref }} 2>/dev/null || true
+            CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD 2>/dev/null || echo "")
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "")
+          fi
+          if [ -n "$CHANGED" ]; then
+            python3 .github/scripts/ci_resolve_profile.py "$PROFILE" "$ROOT" "$CHANGED"
+          else
+            python3 .github/scripts/ci_resolve_profile.py "$PROFILE" "$ROOT"
+          fi
 
   # ── GC domain ────────────────────────────────────────────────────────
 
