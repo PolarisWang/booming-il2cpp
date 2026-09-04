@@ -45,7 +45,7 @@
 | [`unified-project-workspaces-and-deploy-core.md`](./unified-project-workspaces-and-deploy-core.md) | project workspaces and deploy core | 固化 `generate/build project`、`deploy core`、`subject-exec` 与 `artifacts/projects/**` / `deploy/core/**` 边界。 |
 | [`asm-compare-diagnostic-tool.md`](./asm-compare-diagnostic-tool.md) | ASM-COMPARE 诊断工具 | JIT vs IL2CPP AOT 方法级汇编对比工具，支持分段报告和 IL offset 对齐的 side-by-side 对比。 |
 | [`chaos-sdk-usage.md`](./chaos-sdk-usage.md) | Chaos SDK 使用指南 | `find_package(chaos)` CMake 集成方式、SDK 目录结构、`chaos::runtime` / `chaos::codegen` target 说明、Foundation-DLL 管线集成说明。 |
-| [`autotest-generator.md`](./autotest-generator.md) | AutoTestGenerator | BCL 方法级自动测试生成管线：5-phase pipeline (Scan/ValueGen/Probe/TestEmit/ProjectWrite)、边界值策略、NullGuard 安全表达式、批量 CoreLib 覆盖。 |
+| [`配置集中化地图.md`](./配置集中化地图.md) | 配置集中化地图 | 三栈（bash/CI/CMake）配置集中化策略：`release-config.sh`、GitHub repo vars、`CMakePresets` 与 `VERSION` 真源。列出所有 RC_* 常量、10 个 GitHub repo vars 与修改方式。 |
 
 ## 维护约定
 
