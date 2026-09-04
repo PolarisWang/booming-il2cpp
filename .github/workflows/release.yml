@@ -318,28 +318,3 @@ jobs:
           # Publish the draft release once all artifacts are uploaded
           gh release edit "$TAG_REF" --draft=false
           echo "Release $TAG_REF published"
-      - name: Notify Feishu on publish success
-        if: ${{ success() }}
-        shell: bash
-        env:
-          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
-          FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
-        run: |
-          FEISHU_EVENT=published \
-            FEISHU_VERSION="${{ needs.version.outputs.version }}" \
-            FEISHU_URL="https://github.com/${{ github.repository }}/releases/tag/${{ needs.version.outputs.tag_ref }}" \
-            FEISHU_REPO="${{ github.repository }}" \
-            bash scripts/notify-feishu.sh
-      - name: Notify Feishu on publish failure
-        if: ${{ failure() }}
-        shell: bash
-        env:
-          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
-          FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
-        continue-on-error: true
-        run: |
-          FEISHU_EVENT=failed \
-            FEISHU_VERSION="${{ needs.version.outputs.version }}" \
-            FEISHU_REPO="${{ github.repository }}" \
-            FEISHU_NOTES="CI Release pipeline failed for tag ${{ needs.version.outputs.tag_ref }}.  Check the Actions log for details." \
-            bash scripts/notify-feishu.sh

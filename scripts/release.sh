@@ -344,21 +344,11 @@ cmd_verify() {
         write_state phase '"verify"'; write_state phaseStatus '"failed"'; write_state verifyFailed true
         echo ""
         echo "!! verify FAILED. Run: ./scripts/release.sh fix --from-main  (after fixing on main)"
-        # Notify Feishu on failure
-        FEISHU_EVENT=failed \
-            FEISHU_VERSION="$ver" \
-            FEISHU_NOTES="Release verify FAILED — one or more gates did not pass.  Run 'fix --from-main' after pushing fixes." \
-            bash "$RC_FEISHU_SCRIPT" 2>/dev/null || true
         exit 1
     fi
     write_state phase '"verify"'; write_state phaseStatus '"pass"'; write_state verifyFailed false
     echo ""
     echo "== verify ALL PASSED. Run: ./scripts/release.sh publish"
-    # Notify Feishu on verify pass
-    FEISHU_EVENT=verify \
-        FEISHU_VERSION="$ver" \
-        FEISHU_NOTES="All 5 gates passed (governance/publish-smoke/unit/integrity/nupkg-e2e).  Ready to publish." \
-        bash "$RC_FEISHU_SCRIPT" 2>/dev/null || true
 }
 
 # ── fix ──────────────────────────────────────────────────────────────────
@@ -577,12 +567,6 @@ regression_check: release-governance + CI on main after merge."
     echo ""
     echo "== Release ${ver} published."
     echo "   Tag: ${tag}, Branch: ${branch} (merged to main)"
-    # Notify Feishu that the release is live
-    FEISHU_EVENT=published \
-        FEISHU_VERSION="$ver" \
-        FEISHU_URL="https://github.com/PolarisWang/booming-il2cpp/releases/tag/${tag}" \
-        FEISHU_NOTES="Release ${tag} published.  nupkg + structured release notes are live on GitHub." \
-        bash "$RC_FEISHU_SCRIPT" 2>/dev/null || true
 }
 
 # ── abort ────────────────────────────────────────────────────────────────
