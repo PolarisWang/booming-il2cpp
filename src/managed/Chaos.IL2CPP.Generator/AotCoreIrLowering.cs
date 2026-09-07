@@ -305,6 +305,7 @@ public sealed partial class AotCoreIrLowering
             Instructions = instructions,
             IsPInvoke = method.Import is not null,
             IsUnmanagedCallersOnly = method.IsUnmanagedCallersOnly,
+            BodyAvailability = typedMethod.BodyAvailability,
             ImportModuleName = method.Import?.ModuleName,
             ImportEntryPointName = method.Import?.EntryPointName,
             ImportCallingConvention = method.Import?.CallingConvention ?? 0,

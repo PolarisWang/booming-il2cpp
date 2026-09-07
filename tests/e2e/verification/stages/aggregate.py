@@ -37,6 +37,88 @@ def _try_load_json(path: Path) -> dict | None:
         return None
 
 
+def _aggregate_capability(chunk_summaries: list[dict]) -> dict | None:
+    """Roll per-chunk capability breakdowns into a family-wide aggregate.
+
+    Translation-tracking: across every chunk that reported a capability breakdown,
+    sum pass/total per translation category (NativeGenerated vs NoCanonicalBody and
+    any other stamped label).  Returns None when no chunk exposed capability data
+    (older runs / metadata absent) so the report stays additive and non-breaking.
+    """
+    agg_pass: dict[str, int] = {}
+    agg_total: dict[str, int] = {}
+    chunks_reported = 0
+    for s in chunk_summaries:
+        cap = (s.get("fact") or {}).get("capability")
+        if not cap or not isinstance(cap, dict):
+            continue
+        pby = cap.get("passByAvailability") or {}
+        tby = cap.get("totalByAvailability") or {}
+        if not tby:
+            continue
+        chunks_reported += 1
+        for avail, cnt in tby.items():
+            agg_total[avail] = agg_total.get(avail, 0) + cnt
+        for avail, cnt in pby.items():
+            agg_pass[avail] = agg_pass.get(avail, 0) + cnt
+    if not agg_total:
+        return None
+    return {
+        "chunksReported": chunks_reported,
+        "passByAvailability": agg_pass,
+        "totalByAvailability": agg_total,
+        "nativeGeneratedPassRate": {
+            avail: round(agg_pass.get(avail, 0) / cnt, 4)
+            for avail, cnt in agg_total.items()
+        },
+    }
+
+
+def _read_chunk_capability(chunk_dir: Path, results_dir: Path) -> dict:
+    """Read per-chunk translation-capability breakdown from metadata + fact-results.
+
+    Translation-tracking: joins the build-stage stamped bodyAvailability per method
+    against the actual fact-results per-method execution records.  Returns a dict
+    with ``status: "no_data"`` when metadata is absent (graceful for older runs).
+    """
+    meta_caps_path = chunk_dir / "managed" / "subjects" / "subjects.metadata.json"
+    if not meta_caps_path.exists():
+        return {"status": "no_data"}
+    try:
+        mm = json.loads(meta_caps_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {"status": "unreadable_metadata"}
+    cap_sum = mm.get("capabilitySummary") or {}
+    passed_by_avail: dict[str, int] = {}
+    total_by_avail: dict[str, int] = {}
+    avail_by_index = {
+        int(e.get("index")): e.get("bodyAvailability")
+        for e in mm.get("methods") or []
+        if e.get("index") is not None and e.get("bodyAvailability")
+    }
+    fr_path = results_dir / "fact-results.json"
+    if fr_path.exists():
+        try:
+            fr = json.loads(fr_path.read_text(encoding="utf-8"))
+            for rec in fr.get("aot") or fr.get("jit") or []:
+                idx = rec.get("si", rec.get("methodIndex"))
+                avail = avail_by_index.get(int(idx)) if idx is not None else None
+                if not avail:
+                    continue
+                total_by_avail[avail] = total_by_avail.get(avail, 0) + 1
+                if rec.get("passed"):
+                    passed_by_avail[avail] = passed_by_avail.get(avail, 0) + 1
+        except (json.JSONDecodeError, OSError):
+            pass
+    return {
+        "declaredTotal": cap_sum.get("totalMethods"),
+        "annotated": cap_sum.get("annotated"),
+        "nativeGeneratedDeclared": cap_sum.get("nativeGenerated"),
+        "passByAvailability": passed_by_avail,
+        "totalByAvailability": total_by_avail,
+    }
+
+
 def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     """Aggregate stage: collect all chunk results into _dll/reports/."""
     start = time.perf_counter()
@@ -108,6 +190,17 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 "factMethodCount": fact_data.get("factMethodCount"),
                 "metaTotal": fact_data.get("metaTotal"),
                 "metaBenchmarkCount": fact_data.get("factMethodCount", fact_data.get("metaTotal", 0)),
+                # ── Per-method translation-capability breakdown ──
+                # Translation-tracking: bucket this chunk's fact results by the codegen
+                # translation category (NativeGenerated vs NoCanonicalBody/fallback) that
+                # build.py stamped on each method in subjects.metadata.json.  The metadata
+                # capabilitySummary gives the declared denominator; fact-results.json gives
+                # the actually-executed per-method category.  This lets aggregate report
+                # how much of a chunk's pass/fail is on genuinely-AOT-native wrappers vs
+                # ones with no canonical AOT body — i.e. real translation residual vs
+                # expected fallback.  Missing metadata / absent bodyAvailability degrades
+                # gracefully.
+                "capability": _read_chunk_capability(chunk_dir, results_dir),
             }
             all_fact.append({
                 "chunk": slug,
@@ -447,6 +540,9 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "totalUnverifiedSmoke": total_unverified_smoke,
         "totalRealFactMethods": total_real_fact,
         "staleChunks": sorted(set(stale_chunks)),
+        # Translation-tracking aggregate: roll per-chunk capability breakdowns into a
+        # family-wide NativeGenerated vs NoCanonicalBody (fallback) pass/total table.
+        "capabilityAggregate": _aggregate_capability(chunk_summaries),
         "chunkSummaries": chunk_summaries,
     }
     (latest_dir / "fact-summary.json").write_text(

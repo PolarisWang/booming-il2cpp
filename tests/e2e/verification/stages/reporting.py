@@ -177,6 +177,7 @@ def _enrich_with_chunk_facts(asm_data: dict, chunks_dir: Path) -> None:
                     "value": r.get("value"),
                     "message": r.get("message", ""),
                     "tech": tech,
+                    "bodyAvailability": r.get("bodyAvailability"),
                     "errorPattern": pattern,
                     "routeHint": route_for_error(pattern),
                 })
@@ -296,6 +297,7 @@ def _extract_fact_failures(assemblies: dict[str, dict]) -> list[dict]:
                     "methodIndex": f.get("methodIndex"),
                     "value": f.get("value"),
                     "message": f.get("message"),
+                    "bodyAvailability": f.get("bodyAvailability"),
                     "errorPattern": f.get("errorPattern"),
                     "routeHint": f.get("routeHint"),
                 })

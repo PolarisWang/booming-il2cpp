@@ -204,12 +204,39 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     except OSError:
         pass  # non-fatal
 
-    # Write per-method fact results for Allure report generation
+    # Write per-method fact results for Allure report generation.  Each record is
+    # additionally stamped with the codegen translation category (bodyAvailability,
+    # annotated into subjects.metadata.json by the build stage) so downstream
+    # fact-failures reporting can bucket failures by 'real AOT native' vs 'no
+    # canonical body / fallback'.  The runtime per-method `si` is the sequential
+    # fact-subject index, which equals the metadata methods index (verified: the
+    # native runner emits fact records in metadata declaration order), so lookup by
+    # positional index into metadata.methods is correct.
+    avail_by_index: dict[int, str] = {}
+    try:
+        md = json.loads(ctx.subjects_metadata_path.read_text(encoding="utf-8"))
+        for mm in md.get("methods") or []:
+            idx = mm.get("index")
+            ba = mm.get("bodyAvailability")
+            if idx is not None and ba:
+                avail_by_index[int(idx)] = ba
+    except (json.JSONDecodeError, OSError):
+        avail_by_index = {}
+
+    def _annotate(records: list) -> list:
+        if not records:
+            return records
+        for rec in records:
+            idx = rec.get("si", rec.get("methodIndex"))
+            if idx is not None and int(idx) in avail_by_index:
+                rec["bodyAvailability"] = avail_by_index[int(idx)]
+        return records
+
     per_method = {
-        "aot": aot_result.get("results", []),
+        "aot": _annotate([dict(r) for r in (aot_result.get("results", []) or [])]),
     }
     if jit_result and jit_result.get("results"):
-        per_method["jit"] = jit_result["results"]
+        per_method["jit"] = _annotate([dict(r) for r in jit_result["results"]])
     try:
         (chunk_results_dir / "fact-results.json").write_text(
             json.dumps(per_method, ensure_ascii=False), encoding="utf-8")

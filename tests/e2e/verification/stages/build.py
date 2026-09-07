@@ -368,6 +368,105 @@ def _reconcile_metadata_to_combined(
     return reconciled
 
 
+# Mapping from codegen BodyAvailability label (`has-canonical-body` etc.) to the
+# tracking category the pipeline reports per method in fact/chunk summaries.
+# A wrapper whose subject-id is present in aot-core-ir got a real AOT lowering, so
+# the DEFAULT is NativeGenerated; a (post-rebuild) empty bodyAvailability label would
+# downgrade to NoCanonicalBody.  This keeps the enrichment correct even before the
+# codegen emitter is rebuilt (older aot-core-ir lacks the bodyAvailability field but
+# its presence alone already proves lowering happened).
+_BODY_AVAIL_TO_CATEGORY: dict[str, str] = {
+    "has-canonical-body": "NativeGenerated",
+    "no-canonical-body": "NoCanonicalBody",
+}
+
+
+def _enrich_metadata_body_availability(metadata: dict, ir_methods: list[dict]) -> int:
+    """Annotate each metadata method with its codegen translation category.
+
+    Each metadata ``fact`` wrapper's ``generatedMethodId`` is joined back to the
+    wrapper entry in aot-core-ir (subject-id tail ``<generatedMethodId>:<ReturnType>()``)
+    emitted by codegen.  A match means codegen produced a real AOT lowering for that
+    wrapper → NativeGenerated.  When the codegen emitter stamps ``bodyAvailability``
+    explicitly and it is ``no-canonical-body`` (or empty after a rebuild), the category
+    is downgraded accordingly.  aot-coverage entries (no generatedMethodId) have no
+    translatable wrapper body and are left unannotated.
+    """
+    by_tail: dict[str, dict] = {}
+    for m in ir_methods:
+        sid = m.get("subjectId", "")
+        if not sid.startswith("CombinedSubjects/"):
+            continue
+        tail = sid.split("::", 1)[-1] if "::" in sid else sid
+        by_tail[tail] = m
+
+    annotated = 0
+    for mm in metadata.get("methods") or []:
+        if mm.get("kind") == "aot-coverage":
+            continue
+        gid = mm.get("generatedMethodId")
+        if not gid:
+            continue
+        # aot-core-ir subject-id tail is "<generatedMethodId>:<ReturnType>()"; the
+        # return-type span is unknown, so match on prefix "<gid>:".
+        irm = next((v for tail, v in by_tail.items() if tail.startswith(gid + ":")), None)
+        if irm is None:
+            # Present in metadata (declared/probed) but no AOT IR emitted: this wrapper
+            # has no real AOT C++ body — interpreted/stubbed.  Track as fallback so the
+            # residual is visible rather than silently omitted.
+            mm["bodyAvailability"] = "NoCanonicalBody"
+            annotated += 1
+            continue
+        category = "NativeGenerated"
+        avail = irm.get("bodyAvailability")
+        if avail:
+            category = _BODY_AVAIL_TO_CATEGORY.get(avail, avail)
+        mm["bodyAvailability"] = category
+        annotated += 1
+    return annotated
+
+
+def _merge_codegen_body_availability(
+    metadata_path: Path,
+    aot_core_ir_path: Path,
+) -> int:
+    """Reconcile subjects.metadata.json fact wrappers against the codegen AOT IR.
+
+    Reads the fresh aot-core-ir.json emitted by TPG generate-dll and stamps each fact
+    method's ``bodyAvailability`` category into the metadata manifest, then rewrites the
+    manifest.  Translation-tracking Phase 1: makes 'did codegen give this method a real
+    AOT lowering' queryable per method later in fact/aggregate/reporting.
+    """
+    if not metadata_path.exists() or not aot_core_ir_path.exists():
+        return 0
+    try:
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        ir = json.loads(aot_core_ir_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return 0
+    ir_methods = ir.get("methods") or []
+    annotated = _enrich_metadata_body_availability(metadata, ir_methods)
+    total = len(metadata.get("methods") or [])
+    native_count = sum(
+        1 for m in metadata.get("methods") or []
+        if m.get("bodyAvailability") == "NativeGenerated"
+    )
+    metadata["capabilitySummary"] = {
+        "totalMethods": total,
+        "annotated": annotated,
+        "nativeGenerated": native_count,
+        "externalRuntimeOrFallback": total - native_count,
+    }
+    if annotated:
+        metadata_path.write_text(
+            json.dumps(metadata, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        print(f"  [build] Stamped bodyAvailability on {annotated}/{total} methods "
+              f"({native_count} NativeGenerated, capabilitySummary added)")
+    return annotated
+
+
 def _compile_custom_subjects(
     custom_cs_files: list[Path],
     subjects_dll: Path,
@@ -1318,7 +1417,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
                 duration_ms=int((time.perf_counter() - start) * 1000))
 
-    # -- 8b. Inject --profile mode into runtime-entry.cpp --
+    # -- 8b. Stamp bodyAvailability into subjects.metadata.json from codegen IR --
+    aot_core_ir_path = ctx.native_dir / "codegen" / "generated" / "aot-core-ir.json"
+    _merge_codegen_body_availability(metadata_path, aot_core_ir_path)
+
+    # -- 8c. Inject --profile mode into runtime-entry.cpp --
     _inject_profile_mode(ctx.native_dir)
 
     entry_exe = ctx.entry_exe_path

@@ -417,6 +417,17 @@ public sealed record AotCoreIrMethodArtifact
 
     public required ManagedMethodIdentityArtifact Identity { get; init; }
 
+    /// <summary>
+    /// Translation capability classification for this AOT method body, resolved
+    /// from the linked-world method model. Mirrors <see cref="ManagedClosureModels.BodyAvailabilityCode"/>:
+    /// <c>NativeGenerated</c> = real AOT C++ lowered; <c>InterpreterReady</c> = falls
+    /// back to interpreter; <c>ExternalRuntime</c> = no AOT, runtime stub; etc.
+    /// Serialized into aot-core-ir.json so the foundation-dll pipeline can track
+    /// per-method translation state (translation-tracking). Backward-compatible:
+    /// non-required so older construction sites compile unchanged.
+    /// </summary>
+    public string? BodyAvailability { get; init; }
+
     public string? OpenDefinitionSubjectId { get; init; }
 
     public SharedGenericBodyId? SharedGenericBodyId { get; init; }
