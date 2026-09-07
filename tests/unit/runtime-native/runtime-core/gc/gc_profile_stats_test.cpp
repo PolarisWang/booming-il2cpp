@@ -26,6 +26,7 @@
 #include <cstdint>
 #include <cstdio>
 #include <cstring>
+#include <mutex>
 #include <string>
 #include <thread>
 #include <vector>
@@ -309,12 +310,21 @@ TEST(GcProfileStatsTest, MultiThreadAccumulation) {
     static constexpr int kNumThreads = 4;
     std::vector<std::thread> threads;
 
+    // Mutex serializing FlushThreadProfileData → ProfileStoreAdd writes to the
+    // process-wide snapshot store (s_profile_store[] / s_profile_count).  The
+    // production code assumes single-threaded dispatch and does not lock — the
+    // mutex here is test-only, not a production fix.
+    std::mutex flush_mutex;
+
     for (int t = 0; t < kNumThreads; t++) {
-        threads.emplace_back([t] {
+        threads.emplace_back([t, &flush_mutex] {
             ProfileRecordNurseryAlloc(static_cast<int64_t>((t + 1) * 4096));
             ProfileRecordAllocCount();
             ProfileRecordGcPause(static_cast<int64_t>((t + 1) * 10000));
-            FlushThreadProfileData(t);
+            {
+                std::lock_guard<std::mutex> lock(flush_mutex);
+                FlushThreadProfileData(t);
+            }
             ResetThreadProfileData();
         });
     }
