@@ -38,3 +38,44 @@ jobs:
     uses: ./.github/workflows/pipeline.yml
     with:
       profile: pr
+
+  # Pr-notify: post a PR comment when at least one enabled stage failed, naming
+  # exactly which stage(s).  Green / all-skipped runs post nothing.
+  pr-notify:
+    runs-on: ubuntu-latest
+    needs: [pr-pipeline]
+    # only comment on a real failure (failed_stages non-empty); success/skip post nothing
+    if: ${{ always() && needs.pr-pipeline.outputs.failed_stages != '' }}
+    permissions:
+      issues: write     # commenting on the PR uses the issues write scope
+      pull-requests: write
+    steps:
+      - name: Comment failing-stages on PR
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const failed = '${{ needs.pr-pipeline.outputs.failed_stages }}';
+            const parts = failed.split(',').filter(Boolean);
+            const prNumber = context.issue.number || context.payload.pull_request?.number;
+            if (!prNumber) {
+              console.log('No PR context; skipping comment.');
+              return;
+            }
+            const headSha = context.payload.pull_request?.head?.sha;
+            const names = parts.map(s => `\`${s}\``).join(', ');
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/$RUN_ID`;
+            const body =
+              `## ❌ CI stage failure\n\n` +
+              `The Pipeline run failed:\n\n` +
+              `**Failed stage(s):** ${names}\n\n` +
+              `See [the run](${runUrl}) for details.\n\n` +
+              `(Commit ${headSha ? headSha.slice(0, 7) : 'n/a'})`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body
+            });
+          env:
+            RUN_ID: ${{ github.run_id }}

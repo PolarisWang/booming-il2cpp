@@ -36,6 +36,13 @@ on:
         required: true
         type: string
         description: "Pipeline profile name (pr, nightly, release)"
+    outputs:
+      failed_stages:
+        description: "Comma-separated list of failed/cancelled stage names; empty = all green"
+        value: ${{ jobs.finish.outputs.failed_stages }}
+      enabled_count:
+        description: "Number of stages that actually ran (non-skipped) for this profile"
+        value: ${{ jobs.finish.outputs.enabled_count }}
   workflow_dispatch:
     inputs:
       profile:
@@ -326,24 +333,122 @@ jobs:
       os: ubuntu-latest
       timeout: 15
 
-  # ── Finish (Phase-4 aggregate marker) ────────────────────────────────
-  # A GitHub Actions pipeline has NO built-in "sum of jobs = one status" job, and
-  # `needs:` can't be computed dynamically from the profile.  This `finish` job
-  # gives an explicit green/red at the workflow level WITHOUT listing all stages:
-  # it only depends on `resolve` staying green (a missing profile → resolve fails
-  # → finish never runs → workflow shows the resolve failure).  Each per-stage job,
-  # when it runs and fails, already reds the workflow independently.  Skipped
-  # stages (if:false) count as success for `needs`, so this never false-fails.
+  # ── Finish (aggregate marker + stage result outputs) ───────────────────
+  # Collects every per-stage job's result and emits outputs consumed by the
+  # trigger-level workflows (pr/nightly/release) for notification.
   #
-  # TODO(Phase-4, after first recorded green run): lift a per-profile DAG via the
-  # profile's real needs (publish-smoke ⊃ foundation-dll etc.) and a bespoke
-  # run-report artifact only if native run summaries prove insufficient.  The
-  # dispatch semantics (skipped-job = success for needs) must be confirmed on a
-  # live GitHub run before encoding them into the orchestrator.
+  # This is NOT a talisman — each stage job already reds the workflow independently
+  # when it fails.  The finish job provides a structured failed_stages summary that
+  # the trigger layer uses to write a PR comment / auto-file a nightly issue.
+  #
+  # Skipped stages (if:false) count as success for `needs`, so this never
+  # false-fails on profile-enabled stages that were legitimately left out.
+  #
+  # MAINTENANCE: when you add a new stage dispatcher job above, add it to this
+  # `needs:` list AND to the env block below (R_<STAGE>).  Keeping this list in
+  # sync with the dispatcher jobs is the standard GHA trade-off for a dynamic
+  # aggregate.
   finish:
-    name: pipeline-finish (resolve gate ok)
+    name: pipeline-finish (aggregate)
     runs-on: ubuntu-latest
-    needs: [resolve]
+    if: ${{ always() }}
+    needs:
+      - gc-unit
+      - gc-server-smoke
+      - gc-asan
+      - gc-linux-tsan
+      - gc-stress
+      - gc-perf
+      - codegen-unit
+      - metadata-writer-unit
+      - snapshot-unit
+      - aot-smoke
+      - publish-smoke
+      - jit-unit
+      - jit-baseline
+      - hybrid-jit
+      - arm64-jit
+      - foundation-verify
+      - foundation-dll
+      - native-integration
+      - clang-tidy
+      - ubsan
+      - style-csharp
+      - hygiene
+      - secret-scan
+      - codeql
+      - docs-build
+      - docs-deploy
+    outputs:
+      failed_stages: ${{ steps.agg.outputs.failed_stages }}
+      enabled_count: ${{ steps.agg.outputs.enabled_count }}
+    env:
+      PROFILE: ${{ github.event.inputs.profile || inputs.profile || 'pr' }}
+      R_GC_UNIT: ${{ needs.gc-unit.result }}
+      R_GC_SERVER_SMOKE: ${{ needs.gc-server-smoke.result }}
+      R_GC_ASAN: ${{ needs.gc-asan.result }}
+      R_GC_LINUX_TSAN: ${{ needs.gc-linux-tsan.result }}
+      R_GC_STRESS: ${{ needs.gc-stress.result }}
+      R_GC_PERF: ${{ needs.gc-perf.result }}
+      R_CODEGEN_UNIT: ${{ needs.codegen-unit.result }}
+      R_METADATA_WRITER_UNIT: ${{ needs.metadata-writer-unit.result }}
+      R_SNAPSHOT_UNIT: ${{ needs.snapshot-unit.result }}
+      R_AOT_SMOKE: ${{ needs.aot-smoke.result }}
+      R_PUBLISH_SMOKE: ${{ needs.publish-smoke.result }}
+      R_JIT_UNIT: ${{ needs.jit-unit.result }}
+      R_JIT_BASELINE: ${{ needs.jit-baseline.result }}
+      R_HYBRID_JIT: ${{ needs.hybrid-jit.result }}
+      R_ARM64_JIT: ${{ needs.arm64-jit.result }}
+      R_FOUNDATION_VERIFY: ${{ needs.foundation-verify.result }}
+      R_FOUNDATION_DLL: ${{ needs.foundation-dll.result }}
+      R_NATIVE_INTEGRATION: ${{ needs.native-integration.result }}
+      R_CLANG_TIDY: ${{ needs.clang-tidy.result }}
+      R_UBSAN: ${{ needs.ubsan.result }}
+      R_STYLE_CSHARP: ${{ needs.style-csharp.result }}
+      R_HYGIENE: ${{ needs.hygiene.result }}
+      R_SECRET_SCAN: ${{ needs.secret-scan.result }}
+      R_CODEQL: ${{ needs.codeql.result }}
+      R_DOCS_BUILD: ${{ needs.docs-build.result }}
+      R_DOCS_DEPLOY: ${{ needs.docs-deploy.result }}
     steps:
-      - name: Mark pipeline profile run complete
-        run: echo "Pipeline profile=${{ github.event.inputs.profile || 'push/pr' }} dispatched stages OK (per-stage results above)"
+      - id: agg
+        run: |
+          fail=0
+          enabled=0
+          failed_list=""
+          for s in \
+            "gc-unit:$R_GC_UNIT" "gc-server-smoke:$R_GC_SERVER_SMOKE" \
+            "gc-asan:$R_GC_ASAN" "gc-linux-tsan:$R_GC_LINUX_TSAN" \
+            "gc-stress:$R_GC_STRESS" "gc-perf:$R_GC_PERF" \
+            "codegen-unit:$R_CODEGEN_UNIT" "metadata-writer-unit:$R_METADATA_WRITER_UNIT" \
+            "snapshot-unit:$R_SNAPSHOT_UNIT" "aot-smoke:$R_AOT_SMOKE" \
+            "publish-smoke:$R_PUBLISH_SMOKE" "jit-unit:$R_JIT_UNIT" \
+            "jit-baseline:$R_JIT_BASELINE" "hybrid-jit:$R_HYBRID_JIT" \
+            "arm64-jit:$R_ARM64_JIT" "foundation-verify:$R_FOUNDATION_VERIFY" \
+            "foundation-dll:$R_FOUNDATION_DLL" "native-integration:$R_NATIVE_INTEGRATION" \
+            "clang-tidy:$R_CLANG_TIDY" "ubsan:$R_UBSAN" \
+            "style-csharp:$R_STYLE_CSHARP" "hygiene:$R_HYGIENE" \
+            "secret-scan:$R_SECRET_SCAN" "codeql:$R_CODEQL" \
+            "docs-build:$R_DOCS_BUILD" "docs-deploy:$R_DOCS_DEPLOY" \
+          ; do
+            stage="${s%%:*}"
+            res="${s#*:}"
+            [ -z "$res" ] && res="skipped"
+            case "$res" in
+              failure|cancelled)
+                fail=1
+                failed_list="${failed_list}${failed_list:+,}${stage}"
+                echo "::error::Pipeline profile=$PROFILE: stage $stage=$res"
+                ;;
+              success)
+                enabled=$((enabled+1))
+                ;;
+              *) ;;  # skipped → pass (not counted in enabled)
+            esac
+          done
+          echo "failed_stages=$failed_list" >> "$GITHUB_OUTPUT"
+          echo "enabled_count=$enabled" >> "$GITHUB_OUTPUT"
+          echo "Profile=$PROFILE enabled=$enabled failed=${failed_list:-none}"
+          if [ "$fail" = "1" ]; then
+            exit 1
+          fi

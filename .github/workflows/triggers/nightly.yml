@@ -14,3 +14,50 @@ jobs:
     uses: ./.github/workflows/pipeline.yml
     with:
       profile: nightly
+
+  # Nightly-notify: auto-file a GitHub issue when a nightly (schedule) run
+  # fails, listing the failed stage(s).  Dedup: if an issue with the same
+  # title exists, update it (append a new comment) instead of creating a new one.
+  nightly-notify:
+    runs-on: ubuntu-latest
+    needs: [nightly-pipeline]
+    if: ${{ always() && needs.nightly-pipeline.outputs.failed_stages != '' }}
+    permissions:
+      issues: write
+    steps:
+      - name: Auto-file issue for nightly failure
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const failed = '${{ needs.nightly-pipeline.outputs.failed_stages }}';
+            const parts = failed.split(',').filter(Boolean);
+            const sha = '${{ github.sha }}';
+            const runUrl = '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}';
+            const names = parts.map(s => '`' + s + '`').join(', ');
+            const title = `[nightly] Pipeline failed${sha ? ' @ ' + sha.slice(0, 8) : ''}`;
+            const body =
+              `Nightly pipeline failed.\n\n` +
+              (names ? `**Failed stage(s):** ${names}\n\n` : '') +
+              `- Workflow run: ${runUrl}\n` +
+              `- Commit: ${sha}\n\n` +
+              `A human must triage this. (auto-filed by nightly-notify)`;
+            // Dedup: search for an open issue with the same title prefix
+            const { data: existing } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 30,
+            });
+            const hit = existing.find(i => i.title === title);
+            if (hit) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: hit.number, body: `Still failing:\n\n${body}`,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title, body,
+              });
+            }

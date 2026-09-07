@@ -3,6 +3,16 @@
 # Aggregates CI results from all workflows and sends notifications.
 # Triggered on workflow run completion via workflow_run events.
 #
+# SCOPE: This workflow only monitors TOP-LEVEL workflow runs (those triggered
+# by push/PR/schedule/tag/workflow_dispatch).  Stage-level workflows that are
+# invoked via `workflow_call` from the pipeline orchestrator do NOT produce
+# independent workflow_run events — they are structurally invisible to this
+# file.  Stage-level notification is handled by the trigger layer:
+#   - PR failures → triggers/pr.yml .pr-notify (comments on the PR)
+#   - Nightly failures → triggers/nightly.yml .nightly-notify (auto-files issue)
+#   - Release failures → Release Pipeline / release.yml (notify.yml here)
+#     serves as a fallback for the top-level Release workflow.
+#
 # Notifications:
 #   - PR comment on failure (per-workflow)
 #   - GitHub Checks API status
@@ -19,18 +29,10 @@ on:
       - "PR Pipeline"
       - "Nightly Pipeline"
       - "Release Pipeline"
-      # High-impact stage workflows (monitored individually for granular alerting):
-      - "gc-unit"
-      - "gc-stress"
-      - "foundation-dll"
-      - "codegen-unit"
-      - "jit-unit"
-      - "native-integration"
-      - "arm64-jit"
-      - "hygiene"
-      - "secret-scan"
-      - "codeql"
-      - "clang-tidy"
+      # Stage-level notification is handled by trigger-level workflows above
+      # (pr-notify / nightly-notify); stage names are NOT listed here because
+      # workflow_call does not produce independent workflow_run events.
+      # See file header for the complete delegation model.
     types:
       - completed
 
