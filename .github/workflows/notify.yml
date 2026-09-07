@@ -76,7 +76,7 @@ jobs:
         if: |
           steps.check-result.outputs.status == 'failed' &&
           steps.check-result.outputs.event == 'pull_request'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -127,7 +127,7 @@ jobs:
         if: |
           steps.check-result.outputs.status == 'failed' &&
           steps.check-result.outputs.event == 'schedule'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
