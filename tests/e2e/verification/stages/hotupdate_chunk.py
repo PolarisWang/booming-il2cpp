@@ -508,19 +508,36 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     else:
         print(f"  [hotupdate] Running without --patch-data (no semantic change expected)...")
 
-    # When patch data is available, run benchmark before/after for performance comparison
-    # Scale iterations by chunk size: 5 for small (<500), 2 for medium, 0 (disabled) for large
-    # NOTE: benchmark disabled — the DispatchDirectVoid+benchmark+patch-data crash
-    # root cause (interpreter tier-promotion + GC re-entrancy in the timed loop) was
-    # fixed in Dispatch.scriban (commit f5c4a2dc2) via:
+    # When patch data is available, run benchmark before/after for performance comparison.
+    # Scale iterations by chunk size: 5 for small (<500 methods), 2 for medium, 0 disabled
+    # for large (keeps the run bounded; the semantic assertion coverage is invariant of it).
+    #
+    # The DispatchDirectVoid+benchmark+patch-data crash (interpreter tier-promotion + GC
+    # re-entrancy in the timed loop) was fixed in Dispatch.scriban (commit f5c4a2dc2) via:
     #   (1) 1000-call warmup to terminal tier outside the timer,
-    #   (2) budgeted no-GC region (chaos_gc_try_start_no_gc_region) instead of
-    #       TLS-only counter, failing-safe if budget insufficient,
-    #   (3) post-timer chaos_gc_end_no_gc_region to release deferred GC outside window.
-    # However, the fix has NOT been verified in a full rebuild of a hotupdate family.
-    # Enable once a CI rebuild with patched-hotupdate confirms no crash.
-    benchmark_iterations = 0
+    #   (2) budgeted no-GC region (chaos_gc_try_start_no_gc_region) instead of a TLS-only
+    #       counter, failing-safe if the budget is insufficient,
+    #   (3) post-timer chaos_gc_end_no_gc_region to release the deferred GC outside window.
+    #
+    # The fix was authored-but-not-yet validated in a full rebuild of a hotupdate family.
+    # Benchmarking is therefore ENABLED here (small/medium chunks) but overridable to 0 via
+    # CHAOS_HOTUPDATE_BENCHMARK_ITERS — so the first nightly/release full rebuild can confirm
+    # the fix holds, and if it does not, flip the env var off in CI profile config rather than
+    # editing code.  (The semantic assertion path — baseline/patched/revert — is unaffected by
+    # benchmark_iterations, so a benchmark crash cannot false-pass/false-fail correctness.)
     method_count = len(hotupdate_indices)
+    benchmark_iterations = 0
+    if method_count < 500:
+        benchmark_iterations = 5
+    elif method_count < 5000:
+        benchmark_iterations = 2
+    # Allow an operator to force-disable/force a specific value from CI without a code change.
+    _env_override = os.environ.get("CHAOS_HOTUPDATE_BENCHMARK_ITERS")
+    if _env_override is not None:
+        try:
+            benchmark_iterations = int(_env_override)
+        except (TypeError, ValueError):
+            benchmark_iterations = 0
 
     # Scale timeout by chunk size: 3s per method for 3 passes (baseline/patched/revert)
     hotupdate_timeout = max(120, 60 + method_count * 3)

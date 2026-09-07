@@ -1324,8 +1324,18 @@ shutdown:
     // the separate CHAOS_IL2CPP_VM_PROFILER_ENABLED=1) exposes the interpreter's
     // per-opcode distribution — the interpreter perf anchor the 2026-08-13
     // review flagged as missing.  Fully compiled out unless a macro is on, so
-    // default/optimized builds are unaffected.  Declarations kept local/named
-    // to link against chaos_interpreter without pulling <fast_dispatch.h>.
+    // default/optimized builds are unaffected.
+    //
+    // NOTE: DumpFastExecuteOpcodeHistogram is in the chaos_interpreter lib,
+    // which is NOT linked by all profile builds (only families with interpreter-
+    // heavy subjects).  The GC profile data (ProfileRecord*, ProfileEmitJson)
+    // lives in chaos_runtime_core and is always available.  The histogram dump
+    // is disabled here to avoid link errors; it can be re-enabled once the
+    // profile-build cmake template guarantees chaos_interpreter linkage.
+    //
+    // The VM profiler (CHAOS_IL2CPP_VM_PROFILER_ENABLED) is also in
+    // chaos_interpreter and gated by its own macro, which is OFF in profile builds.
+#if 0
 #if CHAOS_IL2CPP_PROFILE_ENABLED
     {
         extern void chaos::il2cpp::runtime_core::DumpFastExecuteOpcodeHistogram() noexcept;
@@ -1339,6 +1349,7 @@ shutdown:
         chaos::il2cpp::interpreter::DumpProfilerToFile(nullptr);  // nullptr → DumpAll() to stderr
         chaos::il2cpp::interpreter::ResetProfiler();
     }
+#endif
 #endif
     std::fflush(stdout);
 #if defined(_WIN32)

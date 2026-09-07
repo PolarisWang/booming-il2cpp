@@ -33,6 +33,37 @@ def resolve(profile: str, repo_root: str, changed_paths: list[str] | None = None
     `requires` always run.  When changed_paths is None (manual dispatch / no diff),
     no path-filtering is applied and every enabled stage runs.
     """
+    _, enabled = _load_profile(profile, repo_root, changed_paths=changed_paths)
+    return enabled
+
+
+def resolve_modes(profile: str, repo_root: str, changed_paths: list[str] | None = None) -> dict[str, str]:
+    """Return {enabled_stage_name: mode} for stages that declare a per-stage `mode`.
+
+    The orchestrator's dispatcher jobs pass mode-sensitive stages (foundation-dll runs
+    smoke on PR, full on nightly, extended on release) a mode from the profile.  Only
+    stages that actually declare `mode` in their profile options are returned — a stage
+    with no declared mode keeps its workflow default, so this map stays small and each
+    stage controls its own default.
+    """
+    opts, enabled = _load_profile(profile, repo_root, changed_paths=changed_paths)
+    modes = {}
+    for name in enabled:
+        stage_opts = opts.get(name)
+        m = stage_opts.get("mode") if isinstance(stage_opts, dict) else None
+        if isinstance(m, str) and m:
+            modes[name] = m
+    return modes
+
+
+def _load_profile(
+    profile: str, repo_root: str, changed_paths: list[str] | None = None
+) -> tuple[dict, list[str]]:
+    """Load a pipeline profile, returning (stage_opts_by_name, enabled_names).
+
+    Stage options are validated the same way resolve() does (stage file exists),
+    and per-stage path-scoping (`requires`) is honored against changed_paths.
+    """
     path = os.path.join(repo_root, ".github", "pipelines", f"{profile}.yml")
     if not os.path.isfile(path):
         # No PyYAML available in runner and no file to statically fall back to.
@@ -77,11 +108,16 @@ def resolve(profile: str, repo_root: str, changed_paths: list[str] | None = None
         if isinstance(opts, dict) and opts.get("enabled") is False:
             continue
         stage_file = os.path.join(stages_dir, f"{name}.yml")
-        # Only the reusable workflow files are expected (flat .github/workflows/ — no _template/partial subdir anymore).
-        if not os.path.isfile(stage_file):
+        stage_file_alt = os.path.join(stages_dir, f"{name}-stage.yml")
+        # Only the reusable workflow files are expected (flat .github/workflows/ — no
+        # _template/partial subdir anymore).  Some stage names (secret-scan, clang-tidy,
+        # codeql, jit-baseline) use a -stage suffix on the workflow file, so check both
+        # the exact name and the -stage variant before failing.
+        if not os.path.isfile(stage_file) and not os.path.isfile(stage_file_alt):
             raise RuntimeError(
                 f"Enabled stage '{name}' (in {path}) has no matching reusable workflow "
-                f"file: expected {stage_file}. Fix the stage name or create the file."
+                f"file: expected {stage_file} or {stage_file_alt}. Fix the stage name "
+                "or create the file."
             )
 
         # Optional per-stage path scoping: when changed_paths is provided and the
@@ -113,7 +149,7 @@ def resolve(profile: str, repo_root: str, changed_paths: list[str] | None = None
             if not hit:
                 continue  # this stage's code area not touched; skip it on this push
         enabled.append(name)
-    return enabled
+    return stages_cfg, enabled
 
 
 def main() -> int:
@@ -130,6 +166,7 @@ def main() -> int:
     )
     try:
         result = resolve(profile, repo_root, changed_paths=changed_paths)
+        modes = resolve_modes(profile, repo_root, changed_paths=changed_paths)
     except (FileNotFoundError, RuntimeError) as exc:
         # Both profile-not-found and hard-failures (missing PyYAML / malformed profile /
         # stage/name/file mismatch) must surface as a red workflow, never an empty
@@ -138,14 +175,16 @@ def main() -> int:
         return 1
 
     payload = json.dumps(result)
+    modes_payload = json.dumps(modes)
     # Emit for GitHub Actions
     try:
         out = os.environ["GITHUB_OUTPUT"]
         with open(out, "a", encoding="utf-8") as fh:
             fh.write(f"stages={payload}\n")
+            fh.write(f"modes={modes_payload}\n")
     except KeyError:
         # Local run: print it for inspection.
-        print(f"[local] profile={profile} enabled_stages={payload}")
+        print(f"[local] profile={profile} enabled_stages={payload} modes={modes_payload}")
     return 0
 
 

@@ -84,3 +84,16 @@ stages:
     enabled: true
     os: ubuntu-latest
     timeout: 240
+
+  # ── Foundation-dll e2e smoke (core families only, no hotupdate/benchmark) ──
+  # Added as part of translation-tracking + hotupdate correctness audit (2026-09-07).
+  # PR-level smoke ensures codegen/runtime changes that break the build→fact→coverage-audit
+  # pipeline for System.Private.CoreLib are caught before merge, NOT deferred to push-to-main
+  # or nightly.  mode=smoke → only core families (1 family: CoreLib), 3 stages (build, fact,
+  # coverage-audit).  Heavy/hotupdate/benchmark/aggregate stages are deferred to foundation-dll
+  # full in nightly.  Timeout is ~30min actual, 120min guard.
+  foundation-dll:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 120
+    mode: smoke
