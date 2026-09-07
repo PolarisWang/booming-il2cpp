@@ -1,4 +1,4 @@
-# .github/workflows/stages/gc-server-smoke.yml
+# .github/workflows/gc-server-smoke.yml
 # Stage: Server-GC (CHAOS_IL2CPP_GC_SERVER=ON) smoke — coordinator/heap + stress.
 name: gc-server-smoke
 on:

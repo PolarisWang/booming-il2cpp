@@ -1,4 +1,4 @@
-# .github/workflows/stages/style-csharp.yml
+# .github/workflows/style-csharp.yml
 # Stage: dotnet format style verification on changed .cs files
 # Source: .github/workflows/managed-csharp-style.yml job `dotnet-format`
 name: style-csharp

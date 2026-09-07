@@ -1,4 +1,4 @@
-# .github/workflows/stages/aot-smoke.yml
+# .github/workflows/aot-smoke.yml
 # Stage: AOT smoke check — runs AOT-generated C++ compilation + smoke tests via aot-smoke.py
 # Reusable stage extracted verbatim from .github/workflows/aot-regression.yml job `aot-codegen`.
 # The snapshot test step (Run Snapshot Tests) is NOT reproduced here — it belongs to the

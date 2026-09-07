@@ -1,4 +1,4 @@
-# .github/workflows/stages/snapshot-unit.yml
+# .github/workflows/snapshot-unit.yml
 # Stage: Managed Snapshot (codegen-output golden) unit tests
 # Reusable stage extracted verbatim from the `Run Snapshot Tests` step that is identical across
 # .github/workflows/codegen-regression.yml (job jit-regression, windows-latest),

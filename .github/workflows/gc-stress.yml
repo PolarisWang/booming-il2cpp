@@ -1,4 +1,4 @@
-# .github/workflows/stages/gc-stress.yml
+# .github/workflows/gc-stress.yml
 # Stage: GC heavy pressure tier (stress/soak/benchmark) — nightly or on-demand
 # Reusable stage extracted verbatim from gc-stress-nightly.yml job `gc-stress`.
 name: gc-stress

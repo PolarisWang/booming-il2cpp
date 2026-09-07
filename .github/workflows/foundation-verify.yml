@@ -1,4 +1,4 @@
-# .github/workflows/stages/foundation-verify.yml
+# .github/workflows/foundation-verify.yml
 # Stage: Build + Small Batch verification (3 dotnet SDKs, cmake, small-batch translation)
 # Source: .github/workflows/ci.yml job `verify`
 name: foundation-verify

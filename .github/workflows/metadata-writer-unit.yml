@@ -1,4 +1,4 @@
-# .github/workflows/stages/metadata-writer-unit.yml
+# .github/workflows/metadata-writer-unit.yml
 # Stage: Build-verify MetadataWriter managed test project (compilation gate)
 # Reusable stage extracted verbatim from .github/workflows/codegen-regression.yml job `jit-regression`
 # (lines 55, 64: restore + build of tests/unit/managed/Chaos.IL2CPP.Tests.MetadataWriter/).

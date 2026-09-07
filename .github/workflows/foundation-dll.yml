@@ -1,4 +1,4 @@
-# .github/workflows/stages/foundation-dll.yml
+# .github/workflows/foundation-dll.yml
 # Stage: Foundation-DLL verification pipeline (smoke/full/extended)
 # Source: .github/workflows/foundation-dll-regression.yml job `foundation-dll`
 name: foundation-dll

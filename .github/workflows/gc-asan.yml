@@ -1,4 +1,4 @@
-# .github/workflows/stages/gc-asan.yml
+# .github/workflows/gc-asan.yml
 # Stage: MSVC AddressSanitizer build + GC unit-test memory-safety gate
 # Reusable stage extracted verbatim from gc-ci.yml job `gc-asan`.
 #

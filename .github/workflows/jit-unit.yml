@@ -1,4 +1,4 @@
-# .github/workflows/stages/jit-unit.yml
+# .github/workflows/jit-unit.yml
 # Stage: JIT native unit tests (ctest — test_jit_* and test_common suites)
 # Reusable stage extracted verbatim from .github/workflows/codegen-regression.yml job `jit-regression`
 # (lines 98–127: Configure CMake, Build Native Libraries, Configure Native Tests, Build Native

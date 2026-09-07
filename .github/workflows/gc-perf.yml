@@ -1,4 +1,4 @@
-# .github/workflows/stages/gc-perf.yml
+# .github/workflows/gc-perf.yml
 # Stage: GC perf/benchmark comparison against stored baseline (gc.perf.yaml)
 # Reusable stage extracted verbatim from .github/workflows/gc-stress-nightly.yml job `gc-stress`
 # (BENCH-tier perf comparison portion: `Collect GC perf metrics`, `Compare GC perf against

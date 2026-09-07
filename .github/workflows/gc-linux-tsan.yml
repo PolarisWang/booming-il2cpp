@@ -1,4 +1,4 @@
-# .github/workflows/stages/gc-linux-tsan.yml
+# .github/workflows/gc-linux-tsan.yml
 # Stage: Linux x64 GC unit-test gate + TSAN (ThreadSanitizer) stress runs
 # Reusable stage extracted verbatim from gc-linux-x64-ci.yml job `gc-linux-tsan`.
 name: gc-linux-tsan

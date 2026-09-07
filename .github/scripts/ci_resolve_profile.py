@@ -77,7 +77,7 @@ def resolve(profile: str, repo_root: str, changed_paths: list[str] | None = None
         if isinstance(opts, dict) and opts.get("enabled") is False:
             continue
         stage_file = os.path.join(stages_dir, f"{name}.yml")
-        # Only the templates/plain stage files are expected; _template/partial are skipped.
+        # Only the reusable workflow files are expected (flat .github/workflows/ — no _template/partial subdir anymore).
         if not os.path.isfile(stage_file):
             raise RuntimeError(
                 f"Enabled stage '{name}' (in {path}) has no matching reusable workflow "

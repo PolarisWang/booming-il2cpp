@@ -1,0 +1,16 @@
+# .github/workflows/triggers/nightly.yml
+# Nightly trigger → pipeline.yml --profile nightly
+name: Nightly Pipeline
+
+on:
+  schedule:
+    # Nightly full regression. 14:17 UTC ≈ 22:17 Beijing / 07:17 Pacific.
+    # Off-minute (17) to avoid the :00 stampede.
+    - cron: '17 14 * * *'
+  workflow_dispatch:
+
+jobs:
+  nightly-pipeline:
+    uses: ./.github/workflows/pipeline.yml
+    with:
+      profile: nightly

@@ -1,4 +1,4 @@
-# .github/workflows/stages/hybrid-jit.yml
+# .github/workflows/hybrid-jit.yml
 # Stage: Hybrid mode verification (JIT-hybrid precode + full JIT regression sanity)
 # Reusable stage extracted verbatim from .github/workflows/hybrid-regression.yml job `hybrid-regression`.
 #

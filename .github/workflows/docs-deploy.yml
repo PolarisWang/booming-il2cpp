@@ -1,4 +1,4 @@
-# .github/workflows/stages/docs-deploy.yml
+# .github/workflows/docs-deploy.yml
 # Stage: Deploy API docs to GitHub Pages
 # Source: .github/workflows/docs.yml job `deploy`
 name: docs-deploy

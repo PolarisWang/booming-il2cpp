@@ -1,4 +1,4 @@
-# .github/workflows/stages/codeql.yml
+# .github/workflows/codeql-stage.yml
 # Stage: CodeQL security analysis (C/C++/C#/Python)
 # Source: .github/workflows/codeql.yml job `analyze`
 name: codeql

@@ -1,4 +1,4 @@
-# .github/workflows/stages/clang-tidy.yml
+# .github/workflows/clang-tidy-stage.yml
 # Stage: clang-tidy static analysis (PR-only, P0 filter)
 # Source: .github/workflows/clang-tidy.yml job `clang-tidy`
 name: clang-tidy
@@ -12,7 +12,7 @@ on:
       timeout:
         required: false
         type: number
-        default: 60
+        default: 120  # raised from 60: full native-tree static analysis on a cold runner can exceed the old/absent 60-min cap
 
 jobs:
   clang-tidy:

@@ -1,4 +1,4 @@
-# .github/workflows/stages/publish-smoke.yml
+# .github/workflows/publish-smoke.yml
 # Stage: Matrix e2e for the publish path (app/jit/source-only via repo-built Driver)
 # Reusable stage extracted verbatim from .github/workflows/codegen-regression.yml job `jit-regression`
 # (the `Publish-Smoke (app/jit/source-only)` + `Upload publish-smoke report` steps,

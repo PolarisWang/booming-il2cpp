@@ -1,4 +1,4 @@
-# .github/workflows/stages/ubsan.yml
+# .github/workflows/ubsan.yml
 # Stage: Linux x64 Native UBSan build + ctest
 # Source: .github/workflows/ubsan-ci.yml job `native-ubsan`
 name: ubsan

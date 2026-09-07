@@ -1,4 +1,4 @@
-# .github/workflows/stages/docs-build.yml
+# .github/workflows/docs-build.yml
 # Stage: Doxygen API doc generation
 # Source: .github/workflows/docs.yml job `build`
 name: docs-build

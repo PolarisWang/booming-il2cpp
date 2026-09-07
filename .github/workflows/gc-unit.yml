@@ -1,4 +1,4 @@
-# .github/workflows/stages/gc-unit.yml
+# .github/workflows/gc-unit.yml
 # Stage: GC deterministic unit tests + per-PR concurrency stress (safe scale)
 name: gc-unit
 on:

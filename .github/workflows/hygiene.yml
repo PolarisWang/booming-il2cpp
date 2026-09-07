@@ -1,4 +1,4 @@
-# .github/workflows/stages/hygiene.yml
+# .github/workflows/hygiene.yml
 # Stage: Repo hygiene gate + clang-format check
 name: hygiene
 on:

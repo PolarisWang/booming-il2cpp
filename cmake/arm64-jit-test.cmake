@@ -1,3 +1,61 @@
+# ═════════════════════════════════════════════════════════════════════════
+# ARM64 JIT test suite — linux-arm64-* presets only.
+#
+# Shared include roots / link set used identically by chaos_arm64_jit_smoke,
+# chaos_arm64_jit_exec and the add_arm64_jit_test() targets.  Defines them
+# once here instead of repeating per target (keeping three copies in sync was
+# the maintenance hazard this file exists to avoid).  Per-target EXTRA dirs
+# (gc stubs / native unit-test tree) are added where needed.
+#
+# Linux-only: uses binutils -Wl flags, -lnuma and QEMU.  The Linux flags are
+# intentional for this file's scope — it is only included from the
+# linux-arm64-native / linux-arm64-smoke presets, which enforce the platform.
+# ═════════════════════════════════════════════════════════════════════════
+set(ARM64_JIT_CORE_INCLUDE_DIRS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/native/jit"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/native/common"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core/gc"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core/runtime_stubs"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter/generated"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/native/diagnostics"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/native/pal"
+    "${CMAKE_CURRENT_SOURCE_DIR}/contracts/native/v0"
+    "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/third_party/unordered_dense/include")
+
+# Native unit-test include roots used by targets that compile CNative tests
+# (the exec + the gtest-based add_arm64_jit_test suite).
+set(ARM64_JIT_TEST_INCLUDE_DIRS
+    "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/runtime-native")
+
+# The chaos static libs, linked as one group with the binutils magic to
+# resolve cyclic native deps.  Every ARM64 JIT executable links this.
+set(ARM64_JIT_COMMON_LINK_LIBS
+    "-Wl,--start-group"
+    chaos_jit
+    chaos_runtime_core
+    chaos_interpreter
+    chaos_bootstrap
+    chaos_hot_update
+    chaos_support
+    chaos_common
+    chaos_pal
+    chaos_eventpipe
+    chaos_fmt
+    "-Wl,--end-group"
+    "-lnuma")
+
+# QEMU user-mode dynamic-loader prefix — where the aarch64 cross sysroot lives.
+# Default to the Debian/Ubuntu gcc-aarch64-linux-gnu conventional path; override
+# with -DARM64_JIT_QEMU_SYSROOT=<your cross sysroot> if the toolchain is on a
+# non-standard prefix (e.g. /opt/cross/aarch64 or a Docker mount).
+if(NOT DEFINED ARM64_JIT_QEMU_SYSROOT)
+    set(ARM64_JIT_QEMU_SYSROOT "/usr/aarch64-linux-gnu" CACHE STRING
+        "Cross-compile sysroot prefix used by QEMU_LD_PREFIX for ARM64 tests")
+endif()
+
     # ── ARM64 JIT encoder smoke test ──────────────────────────────────
     message(STATUS "Checking arm64_jit_smoke_test.cpp...")
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/contracts/native/runtime-core/arm64_jit_smoke_test.cpp")
@@ -6,37 +64,14 @@
             tests/contracts/native/runtime-core/arm64_jit_smoke_test.cpp)
         target_compile_features(chaos_arm64_jit_smoke PRIVATE cxx_std_17)
         target_include_directories(chaos_arm64_jit_smoke PRIVATE
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/jit"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/common"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core/gc"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core/runtime_stubs"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter/generated"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/diagnostics"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/pal"
-            "${CMAKE_CURRENT_SOURCE_DIR}/contracts/native/v0"
-            "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include"
-            "${CMAKE_CURRENT_SOURCE_DIR}/third_party/unordered_dense/include")
+            ${ARM64_JIT_CORE_INCLUDE_DIRS})
         target_link_libraries(chaos_arm64_jit_smoke PRIVATE
-            "-Wl,--start-group"
-            chaos_jit
-            chaos_runtime_core
-            chaos_interpreter
-            chaos_bootstrap
-            chaos_hot_update
-            chaos_support
-            chaos_common
-            chaos_pal
-            chaos_eventpipe
-            chaos_fmt
-            "-Wl,--end-group"
-            "-lnuma")
+            ${ARM64_JIT_COMMON_LINK_LIBS})
         set_target_properties(chaos_arm64_jit_smoke PROPERTIES
             RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../bin"
             ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../lib")
     else()
-        message(STATUS "NOT FOUND: arm64_jit_smoke_test.cpp")
+        message(WARNING "NOT FOUND: arm64_jit_smoke_test.cpp")
     endif()
 
     # ── ARM64 JIT code execution test ───────────────────────────────────
@@ -48,34 +83,11 @@
             src/native/jit/jit_helpers.cpp)
         target_compile_features(chaos_arm64_jit_exec PRIVATE cxx_std_17)
         target_include_directories(chaos_arm64_jit_exec PRIVATE
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/jit"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/common"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core/gc"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core/runtime_stubs"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter/generated"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/diagnostics"
-            "${CMAKE_CURRENT_SOURCE_DIR}/src/native/pal"
-            "${CMAKE_CURRENT_SOURCE_DIR}/contracts/native/v0"
-            "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include"
-            "${CMAKE_CURRENT_SOURCE_DIR}/third_party/unordered_dense/include"
+            ${ARM64_JIT_CORE_INCLUDE_DIRS}
             "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/runtime-native/runtime-core/gc"
-            "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/runtime-native")
+            ${ARM64_JIT_TEST_INCLUDE_DIRS})
         target_link_libraries(chaos_arm64_jit_exec PRIVATE
-            "-Wl,--start-group"
-            chaos_jit
-            chaos_runtime_core
-            chaos_interpreter
-            chaos_bootstrap
-            chaos_hot_update
-            chaos_support
-            chaos_common
-            chaos_pal
-            chaos_eventpipe
-            chaos_fmt
-            "-Wl,--end-group"
-            "-lnuma")
+            ${ARM64_JIT_COMMON_LINK_LIBS})
         set_target_properties(chaos_arm64_jit_exec PROPERTIES
             RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../bin"
             ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/../lib")
@@ -92,7 +104,7 @@
                 COMMAND ${QEMU_AARCH64} $<TARGET_FILE:chaos_arm64_jit_exec>)
             set_tests_properties(chaos_arm64_jit_smoke chaos_arm64_jit_exec PROPERTIES
                 LABELS "arm64;jit"
-                ENVIRONMENT "QEMU_LD_PREFIX=/usr/aarch64-linux-gnu")
+                ENVIRONMENT "QEMU_LD_PREFIX=${ARM64_JIT_QEMU_SYSROOT}")
             message(STATUS "ARM64 CTest tests registered (qemu-aarch64 found)")
         else()
             message(WARNING "qemu-aarch64 not found — ARM64 tests will not be registered with CTest")
@@ -115,37 +127,18 @@
                 tests/unit/runtime-native/runtime-core/gc/gc_test_stubs.cpp)
             target_compile_features(chaos_arm64_jit_${name} PRIVATE cxx_std_17)
             target_include_directories(chaos_arm64_jit_${name} PRIVATE
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/native/jit"
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/native/common"
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core"
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core/gc"
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/native/runtime-core/runtime_stubs"
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter"
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/native/interpreter/generated"
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/native/diagnostics"
-                "${CMAKE_CURRENT_SOURCE_DIR}/src/native/pal"
-                "${CMAKE_CURRENT_SOURCE_DIR}/contracts/native/v0"
-                "${CMAKE_CURRENT_SOURCE_DIR}/third_party/fmt/include"
-                "${CMAKE_CURRENT_SOURCE_DIR}/third_party/unordered_dense/include"
-                "${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/runtime-native")
+                ${ARM64_JIT_CORE_INCLUDE_DIRS}
+                ${ARM64_JIT_TEST_INCLUDE_DIRS})
             target_link_libraries(chaos_arm64_jit_${name} PRIVATE
                 gtest_main
-                "-Wl,--start-group"
-                chaos_jit
-                chaos_runtime_core
-                chaos_interpreter
-                chaos_bootstrap
-                chaos_hot_update
-                chaos_support
-                chaos_common
-                chaos_pal
-                chaos_eventpipe
-                chaos_fmt
-                "-Wl,--end-group"
-                "-lnuma")
+                ${ARM64_JIT_COMMON_LINK_LIBS})
             target_compile_definitions(chaos_arm64_jit_${name} PRIVATE
                 CHAOS_IL2CPP_JIT_TEST_ACTIVE=1)
             target_link_options(chaos_arm64_jit_${name} PRIVATE
+                # Deliberate, mirrors cmake/chaos_native_test.cmake (host JIT tests):
+                # the tier-0/tier-1 JIT symbols coexist for the recompile path, and
+                # --undefined=JitRecompileToTier1 forces the runtime redirect out of
+                # the otherwise-unreferenced JIT object.  Not an accidental ODR mask.
                 -Wl,--allow-multiple-definition
                 -Wl,--undefined=JitRecompileToTier1)
             if(QEMU_AARCH64)
@@ -153,7 +146,7 @@
                     COMMAND ${QEMU_AARCH64} $<TARGET_FILE:chaos_arm64_jit_${name}>)
                 set_tests_properties(chaos_arm64_jit_${name} PROPERTIES
                     LABELS "arm64;jit"
-                    ENVIRONMENT "QEMU_LD_PREFIX=/usr/aarch64-linux-gnu")
+                    ENVIRONMENT "QEMU_LD_PREFIX=${ARM64_JIT_QEMU_SYSROOT}")
             endif()
         endfunction()
 
@@ -188,5 +181,5 @@
 
         message(STATUS "ARM64 JIT: 10 architecture-neutral test targets registered")
     else()
-        message(STATUS "NOT FOUND: arm64_jit_exec_test.cpp")
+        message(WARNING "NOT FOUND: arm64_jit_exec_test.cpp")
     endif()

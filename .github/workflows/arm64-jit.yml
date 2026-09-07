@@ -1,4 +1,4 @@
-# .github/workflows/stages/arm64-jit.yml
+# .github/workflows/arm64-jit.yml
 # Stage: ARM64 JIT — cross-compile native JIT tests + run under QEMU user-mode emulation
 # Reusable stage extracted verbatim from .github/workflows/arm64-jit-ci.yml job `arm64-jit`
 # (which runs on ubuntu-latest).  Requires qemu-user + aarch64-linux-gnu-gcc cross-toolchain,
@@ -57,7 +57,7 @@ jobs:
 
       - name: Build ARM64 Native Libraries + Tests
         run: |
-          cmake --build artifacts/presets/linux-arm64-smoke -j$(nproc) 2>&1 | tail -50
+          cmake --build artifacts/presets/linux-arm64-smoke -j$(nproc) 2>&1  # keep full build log for parallel-debug of failures
 
       - name: Run ARM64 JIT Tests under QEMU
         run: |

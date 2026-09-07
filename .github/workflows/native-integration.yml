@@ -1,4 +1,4 @@
-# .github/workflows/stages/native-integration.yml
+# .github/workflows/native-integration.yml
 # Stage: non-GC native correctness regression — full contracts-native integration suite
 # Reusable stage extracted verbatim from native-nightly.yml job `native-nightly`.
 name: native-integration

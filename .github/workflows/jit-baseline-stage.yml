@@ -1,4 +1,4 @@
-# .github/workflows/stages/jit-baseline.yml
+# .github/workflows/jit-baseline-stage.yml
 # Stage: JIT performance baseline — benchmark collect + compare against stored baseline
 # Reusable stage extracted verbatim from .github/workflows/jit-baseline.yml job `jit-baseline`
 # (all steps).  The native/JIT regression ctest here also appears in jit-unit; it is retained

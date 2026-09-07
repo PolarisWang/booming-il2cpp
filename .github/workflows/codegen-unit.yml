@@ -1,4 +1,4 @@
-# .github/workflows/stages/codegen-unit.yml
+# .github/workflows/codegen-unit.yml
 # Stage: Managed codegen xunit unit tests (Chaos.IL2CPP.CodeGen.Tests) with coverage gate
 # Reusable stage extracted verbatim from .github/workflows/codegen-regression.yml job `jit-regression`
 # (the codegen xunit project's tests run there under the code-coverage steps).  Steps that
