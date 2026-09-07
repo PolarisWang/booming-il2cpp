@@ -89,3 +89,21 @@ AsyncStateMachineBox native 等价物。
 * ASYNC-P1-5: async_integration_smoke + execution_context_smoke 已覆盖 → 满足
 
 **Phase 1 net**: ThreadPool 活、Task 能续列派发、EC 贯穿。Phase 2 是翻译引擎(接 AsyncCoroutineEmitter 占位 → 真状态机翻译)。
+
+## Phase 2 on-ramp（ASYNC-P2-1, 下一会话入口）
+Async codegen 现状(MethodEmission.cs:206-263)：
+- Complex async → interpreter-dispatch stub(不执行状态机)
+- 非 Complex async → GenPromise+GenCoro 占位(co_await std::suspend_always{} 不做任何事) →
+  NativeSymbol wrapper 返回 handle
+⇒ 两态都不真正执行 MoveNext 的 IL。
+
+P2-1 正确入口(最小可验证翻译器)：
+1. 在 translator 用一个手工迷你 async Task subject(如 async Task<int> One(){await Task.Yield();return 1;})，
+   锁机其 >d__ IL：switch(state)+builder+awaiter。
+2. 新增实现："MoveNext IL → C++ 状态机 struct+成员函数" (非 C++20 coroutine)，绕过现 GenCoro 占位。
+3. 复用 Phase 1 的 native 续列契约(async_task_on_completed/builder) 接线 MoveNext 重入。
+4. 跑通端到端(entry AOT 态)后，再扩通用正常方法 lowering(translateNormalBody 复用+state 处理)。
+
+警告：AsyncCoroutineEmitter/MethodEmission 是 Multi-session 增量built，
+替换须在清醒完整会话谨慎做，避免在状态机 IL → C++ 翻译误埋 latent 错。
+Phase 1 infra (ThreadPool/续列/EC) 已真落地可用，是 P2-1 的稳固地基。
