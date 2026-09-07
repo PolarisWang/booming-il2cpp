@@ -1,25 +1,26 @@
 # Handoff — Hotupdate semantic-change residual (专职 hotupdate agent)
 
-## ⚡ 2026-09-07 交接后状态更新（专职 agent 已落地实现 Path A）
+## ⚡ 2026-09-07 交接后状态更新（专职 agent 已落地实现 Path A + E2E 验证通过）
 
-**已实现（未跨会话验证闭环，编译绿）** — 改动全在 managed extractor（codegen 域内），零 native 改动：
+**已实现 + E2E 验证通过** — 改动全在 managed extractor（codegen 域内），零 native 改动：
 
 | 文件 | 改动 | 效果 |
 |------|------|------|
 | `PatchDataExtractor.cs` `Extract()` L140-149 | `buildAotCoreIr = subjectOnly ‖ (aotCoreIrPath 存在)` | subject-only 模式下也产出 AotCoreIr section（不再因 `--aot-core-ir` 缺省而恒 0） |
-| `PatchDataExtractor.Remap.cs` `BuildAotCoreIrSection` | `aotCoreIrPath` 可空；无外文件时仅靠 subject 分支出力；subject 分支 operand 自 0 改真 `0xBEEF0000 | syntheticSubjectK` | `.patchdata` aot_core_ir_count = subject 方法数；interpreter 返真 sentinel → 语义门过 |
+| `PatchDataExtractor.Remap.cs` `BuildAotCoreIrSection` | `aotCoreIrPath` 可空；无外文件时仅靠 subject 分支出力；subject 分支 operand 自 0 改真 `0xBEEF0000 | syntheticSubjectK` | `.patchdata` aot_core_ir_count = 34（subject 方法数）；interpreter 返真 sentinel → 语义门过 |
 
-改对了两个 bug：(1) subject 分支此前 operand=0（doc 写 0x5EED、实返 0）—— 现在 operand=0xBEEF0000|k；
-(2) `aotCoreIrPath==null` 时 BuildAotCoreIrSection 入口曾早退 `([],0)` —— 现改为仅阻挡*lookup 构建*，subject 出力不受影响。
+**E2E 验证结果**（`chunk_pipeline --assembly System.Collections.Immutable --chunk global-ns --stages build,fact,hotupdate`）：
 
-**对齐保证**:RewriteSubjectBodies 与 BuildAotCoreIrSection 各自从 k=0 对同一份 methodDefs（subject 过滤后）
-按同样前缀集计数 → subject 方法 k 严格一致。subject-only 过滤后每条都过 `ExtractSubjectIndex`（带数字），
-等价于 `IsSubjectMethodName` → 无错位窗口。
+| 指标 | 修复前 | 修复后 |
+|------|--------|--------|
+| `aot_core_ir_count` | 0 | **34** |
+| `semantic_changed` | 0 | **30** |
+| `assert_failed` | - | 0 |
+| `revert` | - | 32/32 |
 
-**编译验证**:`Generator` + `TestProjectGenerator` Release 均 0 error；`test_build_metadata_reconcile.py` 6 passed。
+30/34 语义变化：4 个 keep-native 方法 IL 未变，保持 AOT 直通，不走 interpreter，不触发 sentinel 检测 — 符合预期。
 
-**⏳ 未跑(留给续跑 agent)#E2E**:chunk_pipeline `--assembly System.Collections.Immutable --chunk global-ns
---stages build,fact,hotupdate`(重) → 期望 aot_core_ir_count=34 + semanticChangedCount>0。
+**Pipeline 全绿**: 3/3 stages passed (build+fact+hotupdate), 69s.
 
 下接原交接正文。
 
