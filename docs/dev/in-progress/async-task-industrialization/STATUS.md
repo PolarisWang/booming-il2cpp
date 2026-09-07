@@ -35,14 +35,14 @@ dispatch_model: sequential
 ## 设计摘要（权威输入）
 
 ### 边界拍板
-- 采用手工状态机翻译，不做 C++20 coroutine reverse-engineering
-- 目标：async Task 全家桶（Task/Task<T>/ValueTask 等）+ performance < .NET8 2× + hotupdate 支持
+- 采用手工状态机翻译，不做 C++20 coroutine reverse-engineering— **决策来源**：brainstorm 深挖 C++20 coroutine 语义，判定其不能满足 P1(perf)+P2(arch)+P3(hotupdate)，详见 `docs/dev/archive/discuss/`（brainstorm 记录）
+- 目标：async Task 全家桶（Task/Task<T>/ValueTask 等）+ **performance < .NET8 2×（roadmap 计划目标，非已测量的性能数据；具体 baseline 待 Phase 5 时才产出）** + hotupdate 支持
 - 非目标：await foreach、await using、Pipelines、Channel、自定义 TaskScheduler（后置）
 
 ### 架构结论
-- native 侧 ThreadPool（thread_pool.cpp）是孤儿，需 `ThreadPoolInitialize` 接到 RuntimeInit
-- AsyncStateMachineBox native 等价物需用 GC 堆对象（非 pinned）
-- 状态机是按 IL `MoveNext` 直译（switch + goto），不多做一次变换
+- native 侧 ThreadPool（thread_pool.cpp）是孤儿，需 `ThreadPoolInitialize` 接到 RuntimeInit — **证据**：`async.h`/`thread_pool.cpp` 中的 ThreadPool 类型已独立存在，但既不被 RuntimeInit 调用也不被任何 GC 路径引用，属于"有代码无接入"的孤儿状态；详见 `src/native/runtime-core/thread_pool.cpp` + `src/native/runtime-core/async.h`
+- AsyncStateMachineBox native 等价物需用 GC 堆对象（非 pinned）— **证据**：CoreCLR 的 `AsyncStateMachineBox<T>` 是 `Task<T>` 子类、分配在 GC 堆上；pinned 违背 GC 设计（产生碎片、阻止晋升）；详见 `src/coreclr/System.Private.CoreLib/src/System/Runtime/CompilerServices/AsyncTaskMethodBuilder.cs`（CoreCLR 源码）
+- 状态机是按 IL `MoveNext` 直译（switch + goto），不多做一次变换 — **证据**：Roslyn 生成的 `>d__` struct 已含完整 switch(state)/goto 状态机，直接翻译即可复用；见 Inputs 段的 Roslyn 状态机 IL
 
 ### 阶段切分
 Phase 1（运行时基础设施闭环）→ Phase 2（状态机翻译引擎）→ Phase 3（组合子语义）→ Phase 4（Parallel）→ Phase 5（性能优化）→ Phase 6（验证+hotupdate）
@@ -67,7 +67,25 @@ Phase 1（运行时基础设施闭环）→ Phase 2（状态机翻译引擎）�
 ## 调度状态
 
 ```yaml
-dispatch_model: sequential
+# dispatch_model 权威声明在顶部元信息 yaml（本文件 L19）；此处不重复维护以避免漂移。
 active_batches: []
 completed_batches: []
 ```
+## 执行进度
+
+### ASYNC-P1-1 ✅ completed (commit a5f6ec141)
+ThreadPool 生命周期接入 RuntimeInit：RuntimeInit 调 ThreadPoolInitialize()、RuntimeShutdown 调 ThreadPoolShutdown()、加 s_initialized 单次守卫。GC 6/6 + threading 12/13 绿。
+
+### ASYNC-P1-2 in-progress
+AsyncStateMachineBox native 等价物。
+`async.h` AsyncTask 是 primitive：非 GC 堆 (`CHAOS_IL2CPP_NEW`)、无 continuation dispatch、无 MoveNext 续列机制。需补：Task 的 GC 承载 + continuation 注册/派发 + EC 保存。
+
+## Phase 1 收尾（实际进度）
+
+* ASYNC-P1-1 ✅ a5f6ec141: ThreadPool→RuntimeInit
+* ASYNC-P1-2 ✅ ef440e3de: AsyncTask 续列(box resumption)契约 + 5测试
+* ASYNC-P1-3 ✅ a46d4be49: 续列经 ThreadPool 派发 + 桥接注册 + 2测试
+* ASYNC-P1-4: EC infra **已存在且已消费**(execution_context.cpp 318行 + task_runner/thread_pool 已用), execution_context_smoke 11/11 绿 → 视为 pre-existing 满足, 不再重复建。跨 await 自动 EC 流属 P3-4。
+* ASYNC-P1-5: async_integration_smoke + execution_context_smoke 已覆盖 → 满足
+
+**Phase 1 net**: ThreadPool 活、Task 能续列派发、EC 贯穿。Phase 2 是翻译引擎(接 AsyncCoroutineEmitter 占位 → 真状态机翻译)。
