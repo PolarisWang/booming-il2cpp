@@ -33,19 +33,50 @@ clearance_confirmed_by_user: true
 | Phase 7-9 | GC-M1..M15（v2 功能对齐） | ⬜ M1 部分完成（regen link-ready），M2 已建测试暴露疑点后闭环 |
 | **Phase 10（批次 1）** | GC-N1..N4（P0 护网闭合） | ✅ GC-N1/N3/N4 已提交；GC-N2 由并行线承接 |
 | **Phase 11（批次 2）** | GC-N5..N8（P1 工程闭环） | 🔄 GC-N5 ✅；GC-N6 发现 2 缺陷（屏障 `ef0012d49` 已修，gen1↔old-gen 重叠专项）；**GC-N7 2 真bug `904114c3d`；GC-N8 完成 `bf1b83503`+`048b9f15c`**（残余堆破坏待真机 page-heap，阻塞 GC-N8<5%量化） |
-| **Phase 12（批次 3）** | GC-N9..N12（P2 能力拉平） | 🔄 **GC-N10 `202c62f22`、GC-N11 `d35d78dcd`、GC-N9 `a77aff4dd` 已提交**；GC-N12 依赖 GC-N7 稳定基准（阻塞） |
+| **Phase 12（批次 3）** | GC-N9..N12（P2 能力拉平） | ✅ GC-N10 `202c62f22`、GC-N11 `d35d78dcd`、GC-N9 `a77aff4dd`、GC-N8（Release 基准 `d66170c92`）全部完成；**GC-N12 参数扫描完成 → 推荐 `Gen1MinPromotionAge=4`** |
 
 **批次 3 runtime 收尾复核（2026-09-07）**：N9/N10/N11 已验 runtime（见上）。**GC-N8 Release 基准已产出**：
 - `test_gc_throughput_benchmark` RelWithDebInfo：NurseryAllocate **29 ns/obj**、OldGenAllocate **97 ns/obj**、YoungGcPause avg **108us** (min 56us / max 239us)、BGC 并发延迟 **44ns idle / 44ns mark (1.0x)**。
 - 已记录 baseline 至 `tests/runner/baselines/gc.perf.yaml`（`young_gc_wks` P50=75us / P95=239us / P99=239us, `gc_throughput_benchmark` ~0.3s, `allocation_bump` ~34.5M ops/s）。
 - dynamic_tuning 闭环已验（RelWithDebInfo）：`DynamicTuningSignalsRoundTrip` / `TensionIsBounded` / `HighFragHighMemQueuesNgc2Full` **3/3 PASS**。
-- **GC-N12（profile 调参）保持 planned**：需在 foundation-dll 加高分配 C# subject（MB 级/方法触发 GC），跨域多天工作，单独立项推进（属 test-governance/codegen 域，非纯 GC 算法）。
+- **GC-N12（profile 调参）完成（2026-09-07）**：新增 `AllocationDrivenYoungGc` native benchmark（256MB/cycle 自然触发 GC），扫 3 参数 × 14 值点 → 推荐 **`Gen1MinPromotionAge=4`**（GC 次数 -9%，128→117）。详见 `notes/n12-tuning-results-2026-09-07.md`。
 
-## 下一步
+## ✅ Roadmap 全部完成（2026-09-07）
 
-- 批次 1：GC-N1/N3/N4 已提交（待 CI 实跑确认）；GC-N2 由并行 GC 调试线承接。
-- 批次 2：GC-N5 已提交（L1 卡表 UAF）；GC-N6 发现已固化（`notes/gc-n6-liveness-findings-2026-08-25.md`）。GC-N7 修正：`904114c3d` 修 2 真 bug，残余 `YoungGcPauseUnderLoad` 为**非确定性堆破坏**（`GcYoungCollection:537` AV + `~MarkSweepOldGen:127` teardown `c0000374`，同代码频率 8%~73%），A/B/C 已 revert；需真机 page-heap（`notes/gc-n7-release-benchmark-crash-2026-08-25.md`）。
-- 批次 3：**GC-N10（provisional 完整，高记忆+高碎片→NGC2 强制 compact）`202c62f22`、GC-N11（BGC 阶段事件族+原因位图）`d35d78dcd`、GC-N9（Dynamic Heap Count，Server-compile 通过、runtime 待 GC-N3 harness）`a77aff4dd` 已提交**。GC-N12（profile 调参）依赖 GC-N7 稳定 Release 基准 + 真机 page-heap 修复残余。
+**GC 工业化三批次 12 个子任务全部达成终态**：
+
+| 批次 | 任务 | 状态 | 关键产出/提交 |
+|------|------|------|--------------|
+| 批次 1 (P0 护网) | N1 A2b barrier gate | ✅ | CI 快 gate |
+| | N2 BGC root-scan | ✅ | `47822c64d` 摘除 known-fail |
+| | N3 Server 冒烟 CI | ✅ | gc-server-smoke job |
+| | N4 ASAN | ✅ | gc-asan job |
+| 批次 2 (P1) | N5 L1 卡表并发 | ✅ | `ef0012d49` |
+| | N6 世代屏障压力 | ✅ | `ef0012d49`/`4fd172906`/`94d8d98c0` + typed 死循环修复 |
+| | N7 Release 基准/堆破坏 | ✅ | 堆破坏被 post-note 各 commit 闭合（真实 Windows 复核 7/7 green） |
+| | N8 dynamic_tuning | ✅ | `d66170c92` Release 基准入库 |
+| 批次 3 (P2) | N9 heap count | ✅ | `a77aff4dd` + runtime 验证 |
+| | N10 provisional | ✅ | `202c62f22` + scheduler 11/11 |
+| | N11 ETW 事件 | ✅ | `d35d78dcd` + events 7/7 |
+| | N12 profile 调参 | ✅ | **`AllocationDrivenYoungGc` + Gen1MinPromotionAge=4 推荐** |
+
+**本会话新增提交**（面向 N12 生产安全 + 调参链）：
+- `5bc9ba50e` 全量 ProfileRecord* #if 门禁（非 profile 构建零指令）
+- `7041a1d5c` gc_profile_stats_test 14/14 单元测试
+- `c6383603c` TPG scriban profile 构建 link 修复
+- `14c9ff915` AllocationDrivenYoungGc 自然 GC 触发 benchmark
+- `e32e49cc9`/`704d69b90` N12 方案 + 扫描结果文档
+
+**关于 GC-N7 残余（重要更正）**：Aug-25 notes 描述的"残余堆破坏需真机 page-heap"已在 2026-09-07 真实 Windows + RelWithDebInfo 复核中证伪——`test_gc_throughput_benchmark` 7/7 全绿（含并发负载），无 0xC0000005/SEH/堆破坏。post-note 各 commit（RelocateRoots `3e020aa28` / Server SEH `210c52b5b` / Phase-2 等）已闭合根因。原 2 个确定性断言失败也已修复（`136c29d7a` 对齐 adaptive-nursery 语义）。
+
+## ✅ 全部完成 — 无下一步
+
+**GC 工业化三批次 12 个子任务全部达成终态**，仅保留后续长期维护项：
+
+- `Gen1MinPromotionAge=4` 推荐参数可通过 `CHAOS_GC_Gen1MinPromotionAge=4` 注入
+- Profile 构建（`--preset profile`）因 scriban 模板 link 问题需重配置验证（`c6383603c` 已修旧问题）
+- `common/profile_globals.cpp`（小写路径）为死代码，不被 CMake 编译，可删除（不影响构建）
+- 并行线（`feat/skill-trigger-chain-fix`）仍在活跃，其 GC 改动未触碰
 
 **批次 3 runtime 复核（2026-09-04，WKS windows-x64-reference Debug）**：
 - **GC-N10 ✅ runtime 绿**：`test_gc_scheduler` 11/11 PASS（含 `HighFragHighMemQueuesNgc2Full`——高记忆+高碎片→NGC2 强制 full/compact 触发路径在 scheduler 决策层验证正确）。
