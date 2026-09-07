@@ -159,3 +159,69 @@ value-this 发射"最难,故先走最简。
 Codegen emission 单测/文字断言的最高保真基座 = AsyncPipelineTests(全管线提取)+ 对该
 `>d__::MoveNext` artifact 的 emission 文字断言;`SNAPSHOT_UPDATE` 风格全发射可后续再铺。
 
+### PART 1/2 DONE（Step 2+3）✅ committed `60b1c8b06`
+把 async MoveNext 从 C++20 coroutine 占位切到真 state-machine 结构化发射。
+
+* MethodEmission.cs async 分支:移除 GenPromise/GenCoro(+ NativeSymbol forward wrapper
+  只管返回 int64 handle)发射。非-Complex async MoveNext 现在直接**fall-through 到现有普通
+  结构化发射**:EmitAbiArgumentInitialization + EmitViaStructuredIR(含 EH 5-shape /
+  线性 emit), 不特殊内联。
+* emit 决策复用(不重写): `EmitManagedMethod` 共享主路径;body 内的 stfld/ldfld value-this
+  走 `chaos_resolve_managed_value_pointer`,`call AsyncTaskMethodBuilder::SetResult/
+  AwaitUnsafeOnCompleted/* async_yield_get_*` 等已被**既有 LinearEmitCall/ExternalRuntime
+  helper resolution** 解析为 C++ extern。无需新 segment-B resolver —— 现有 catalog/未注册
+  但 `chaos_external_runtime_...` + async_yield_* 路径已 cover。
+* AsyncPipelineTests 两 emission 断言(用 real 全管线 artifacts + NativeAotLoweringPlanner
+  Create 生 MoveNext 函数源)。
+
+真产出(<DoVoid>d__1::MoveNext)经实际查看:
+```
+extern "C" void ...MoveNext(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) {  // async_yield_*,
+  ... state switch, ldfld/stfld field_...1__state / t__builder / u__1,
+  ... async_yield_create/get_awaiter/get_is_completed/get_result,
+  ... chaos_external_runtime_...AsyncTaskMethodBuilder...AwaitUnsafeOnCompleted(...),
+  ... SetException(在 CHAOS_EH_CATCH_BEGIN), SetResult,
+  ... }  // 无 co_await / suspend_always / AsyncPromise_ / _Coro();
+```
+不再空壳。segment-B call 已真解析到 native(dataset:await 挂起/续列重入在 MoveNext 源码里
+经 get_is_completed==0 分支写 state 并交给 ThreadPool 续列——但 **codegen 未发显式
+cheduler/continuation 注册**:当前产出只是把 await 当"get_is_completed 为真才继续,否则返回"
+的表达;真正 resume 注册(spike 的 awaiter.UnsafeOnCompleted→async_task_on_completed/
+ThreadPool re-MoveNext)是 Step 5 需要接的 native 半边,见下)。
+
+回归门:codegen 单元 1986/1986 green(含 98 stub emission/shape 测试);snapshot
+88-fixture **pre-existing 已挂 85**(与本次改动无关 —— clean baseline 也挂,待 repo-cleanliness
+track)。Driver.cs async 已 revert;AsyncTestAssembly 是 async subject 唯一 home。
+
+### REMAIN（Step 4-5 及残余,续做入口）
+Step 3 输出已把 `MoveNext` 体真发射 + builder/awaiter call 解析到 native,已达"段 A+B 的
+**codegen 文本层**判据。但完整异步运行语义(真正跨 await 挂起→续列重入)需下述 native 半边,
+未在本次 session(已很长 + 仓库多 agent 争用 index.lock)做:
+
+1. **R1【最重要】codegen 尚未发 resume 续列注册**。真实 move-next 的 await 分支目前只:
+   `if(!get_is_completed) { 存 awaiter; /* 没有 UnsafeOnCompleted 续列注册 */ return; }`
+   —— 需要类似 spike 的
+   `async_task_on_completed(task_handle, continuation_cb=MoveNext, ctx=this)`(awaiter 里取出
+   Task handle)+ 把 MoveNext 地址当 continuation_cb。此即"挂起后 ThreadPool 重入 MoveNext"。
+   落地:在 `call AwaitUnsafeOnCompleted`/`async_*` 的 emission 映射处,或给 await 分支补
+   continuation_cb(= MoveNext native symbol FN) + ctx(=this) 注册调用;并确认 `d__` box(经
+   builder.get_Task → 实际 `AsyncTask` handle)不 GC。参考 Phase1 async.h:`async_task_on_completed`
+   / `finish_async_task` 已实现。
+2. **确定 emitted C++ 可编译**。AsyncTestAssembly 的异步方法现在 emit 的 path 需要真正
+   编译链接(C++ macro/field struct/`chaos_type_...d__` 声明存在与否)。当前 codegen 单测
+   只断言文本非空壳,未做编译链接。需要能接 foundation-dll 或 native smoke 里:
+   thread_pool initialized + ThreadPool init + `async_task_run` 注册;test 驱动 AsyncHelper 的
+   entry(冒烟 pattern)验证端到端(One→yield→ThreadPool→set_result(1)→completed=1)。
+3. **async entry(段 C)** 由真实 `async` 方法(非 MoveNext)建 box+`builder.Start`+返回 Task:
+   codegen 对 `AsyncMethods::GetOne/DoVoid` 本体(返回 Task/空 GetAwaiter stub)还没真做
+   MoveNext box 起动——R1/R2 打通后自然能验。
+
+recommended_next（下一 clean session）: 从 **R2(把 real MoveNext emitted C++ 接进
+async_integration_smoke 同型链路编译/跑通)+ R1(补 continuation_cb 注册)** 二择一起桥,先
+R1 最小(只补 resume 注册 + MoveNext continuation) 让它能在已 verify 的 Phase1 native smoke
+spike(手写 AsyncStateMachine_One) 等价路径里 codegen 真跑。
+
+已澄清作业要求:不 C++20 coroutine(hotupdate P3 不可丢);performance AOT<2x .NET8;
+Priority P1>P2>P3;Go production-grade 不催。
+
+
