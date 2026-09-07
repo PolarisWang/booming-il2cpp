@@ -106,6 +106,16 @@ chaos_native_add_test(test_gc_memory_domain
     LABELS "unit;gc"
 )
 
+# gc_profile_stats_test — per-dispatch profile data collection unit tests
+# Verifies ProfileRecord* / ProfileStore* API in both stub and profile build tiers.
+# Links chaos_runtime_core for the profile_stats.cpp implementation.
+chaos_native_add_test(test_gc_profile_stats
+    gc_profile_stats_test.cpp
+    LIBS chaos_runtime_core chaos_fmt chaos_common
+    LABELS "unit;gc"
+)
+target_link_options(test_gc_profile_stats PRIVATE /FORCE:MULTIPLE)
+
 # ═══════════════════════════════════════════════════════════════════════════
 # Batch B2 — Memory Domain stress, benchmark, proof tests
 # ═══════════════════════════════════════════════════════════════════════════
