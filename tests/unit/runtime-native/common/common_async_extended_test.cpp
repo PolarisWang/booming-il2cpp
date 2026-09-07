@@ -594,3 +594,85 @@ TEST(CommonAsyncExtended, BuilderSlotReuse) {
     EXPECT_EQ(20, task2->result);
     EXPECT_NE(task1, task2);  // Different task instance
 }
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// AsyncTask continuation (box resumption) protocol
+// ═══════════════════════════════════════════════════════════════════════════════
+
+TEST(CommonAsyncExtended, TaskOnCompletedFiresOnSetResult) {
+    auto handle = async_task_create();
+    auto* task = require_async_task(handle);
+
+    std::atomic<bool> fired{false};
+    async_task_on_completed(handle, [](CHAOS_IL2CPP_INTPTR, void* ctx) {
+        *static_cast<std::atomic<bool>*>(ctx) = true;
+    }, &fired);
+
+    // Complete the task — should fire the continuation.
+    async_task_builder_set_result_raw(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&handle), 42);
+    EXPECT_TRUE(fired.load());
+}
+
+TEST(CommonAsyncExtended, TaskOnCompletedFiresOnSetException) {
+    auto handle = async_task_create();
+    auto* task = require_async_task(handle);
+
+    std::atomic<bool> fired{false};
+    async_task_on_completed(handle, [](CHAOS_IL2CPP_INTPTR, void* ctx) {
+        *static_cast<std::atomic<bool>*>(ctx) = true;
+    }, &fired);
+
+    async_task_builder_set_exception(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&handle), 1);
+    EXPECT_TRUE(fired.load());
+}
+
+TEST(CommonAsyncExtended, TaskOnCompletedFiresImmediatelyIfAlreadyDone) {
+    auto handle = async_task_create();
+    auto* task = require_async_task(handle);
+
+    // Complete before registering the continuation.
+    task->completed.store(true, std::memory_order_release);
+
+    std::atomic<bool> fired{false};
+    async_task_on_completed(handle, [](CHAOS_IL2CPP_INTPTR, void* ctx) {
+        *static_cast<std::atomic<bool>*>(ctx) = true;
+    }, &fired);
+    EXPECT_TRUE(fired.load());
+}
+
+TEST(CommonAsyncExtended, TaskOnCompletedFiresOnlyOnce) {
+    auto handle = async_task_create();
+    auto* task = require_async_task(handle);
+
+    std::atomic<int> count{0};
+    async_task_on_completed(handle, [](CHAOS_IL2CPP_INTPTR, void* ctx) {
+        (*static_cast<std::atomic<int>*>(ctx))++;
+    }, &count);
+
+    // Set result twice — continuation should fire only once.
+    task->result = 1;
+    task->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(handle);
+    task->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(handle);
+
+    EXPECT_EQ(1, count.load());
+}
+
+TEST(CommonAsyncExtended, TaskOnCompletedWithAlreadyCompletedAtomic) {
+    auto handle = async_task_create();
+    auto* task = require_async_task(handle);
+
+    // Complete before continuation registration.
+    task->result = 100;
+    task->completed.store(true, std::memory_order_release);
+
+    std::atomic<bool> fired{false};
+    async_task_on_completed(handle, [](CHAOS_IL2CPP_INTPTR, void* ctx) {
+        *static_cast<std::atomic<bool>*>(ctx) = true;
+    }, &fired);
+    EXPECT_TRUE(fired.load());
+    EXPECT_EQ(100, task->result);
+}

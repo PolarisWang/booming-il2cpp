@@ -99,7 +99,7 @@ TEST_F(AsyncIntegrationTest, TaskRunQueuesAndCompletes) {
     ASSERT_NE(0, handle);
 
     auto* task = require_async_task(handle);
-    EXPECT_TRUE(WaitFor([task] { return task->completed; }))
+    EXPECT_TRUE(WaitFor([task] { return task->completed.load(); }))
         << "Task did not complete within timeout";
     EXPECT_FALSE(task->faulted);
 }
@@ -120,7 +120,7 @@ TEST_F(AsyncIntegrationTest, TaskRunMultipleTimes) {
 
     for (int i = 0; i < kCount; ++i) {
         auto* task = require_async_task(handles[i]);
-        EXPECT_TRUE(WaitFor([task] { return task->completed; }))
+        EXPECT_TRUE(WaitFor([task] { return task->completed.load(); }))
             << "Task " << i << " did not complete";
     }
 }
@@ -156,7 +156,7 @@ TEST_F(AsyncIntegrationTest, TaskRunFromMultipleThreads) {
         for (int i = 0; i < kTasksPerThread; ++i) {
             if (all_handles[t][i] == 0) continue;
             auto* task = require_async_task(all_handles[t][i]);
-            if (WaitFor([task] { return task->completed; })) {
+            if (WaitFor([task] { return task->completed.load(); })) {
                 ++completed;
             }
         }
@@ -182,7 +182,7 @@ TEST_F(AsyncIntegrationTest, TaskRunStress) {
     int completed = 0;
     for (auto h : handles) {
         auto* task = require_async_task(h);
-        if (WaitFor([task] { return task->completed; })) {
+        if (WaitFor([task] { return task->completed.load(); })) {
             ++completed;
         }
     }
@@ -206,7 +206,7 @@ TEST_F(AsyncIntegrationTest, DirectThreadPoolWorkItem) {
         c->task->completed = true;
     }, ctx);
 
-    EXPECT_TRUE(WaitFor([task] { return task->completed; }));
+    EXPECT_TRUE(WaitFor([task] { return task->completed.load(); }));
     EXPECT_EQ(42, task->result);
     EXPECT_FALSE(task->faulted);
 
@@ -229,8 +229,8 @@ TEST_F(AsyncIntegrationTest, ChainedTasks) {
         t->completed = true;
     }, task_b);
 
-    EXPECT_TRUE(WaitFor([task_a] { return task_a->completed; }));
-    EXPECT_TRUE(WaitFor([task_b] { return task_b->completed; }));
+    EXPECT_TRUE(WaitFor([task_a] { return task_a->completed.load(); }));
+    EXPECT_TRUE(WaitFor([task_b] { return task_b->completed.load(); }));
     EXPECT_EQ(42, task_a->result);
     EXPECT_EQ(99, task_b->result);
 
@@ -256,7 +256,7 @@ TEST_F(AsyncIntegrationTest, BuilderSetResultFromWorker) {
     }, reinterpret_cast<void*>(static_cast<std::intptr_t>(ref)));
 
     auto* task = require_async_task(handle);
-    EXPECT_TRUE(WaitFor([task] { return task->completed; }));
+    EXPECT_TRUE(WaitFor([task] { return task->completed.load(); }));
     EXPECT_EQ(77, task->result);
     EXPECT_FALSE(task->faulted);
 }
@@ -275,7 +275,7 @@ TEST_F(AsyncIntegrationTest, BuilderSetExceptionFromWorker) {
     }, reinterpret_cast<void*>(static_cast<std::intptr_t>(ref)));
 
     auto* task = require_async_task(handle);
-    EXPECT_TRUE(WaitFor([task] { return task->completed; }));
+    EXPECT_TRUE(WaitFor([task] { return task->completed.load(); }));
     EXPECT_TRUE(task->faulted);
     EXPECT_EQ(0xBAD, task->exception);
 }
@@ -296,7 +296,7 @@ TEST_F(AsyncIntegrationTest, AwaiterPollUntilComplete) {
     })) << "awaiter did not complete";
 
     auto* task = require_async_task(handle);
-    EXPECT_TRUE(task->completed);
+    EXPECT_TRUE(task->completed.load());
 }
 
 TEST_F(AsyncIntegrationTest, SequentialAsyncAwaitPattern) {
@@ -333,5 +333,5 @@ TEST_F(AsyncIntegrationTest, YieldThenTaskRun) {
     ASSERT_NE(0, task_handle);
 
     auto* task = require_async_task(task_handle);
-    EXPECT_TRUE(WaitFor([task] { return task->completed; }));
+    EXPECT_TRUE(WaitFor([task] { return task->completed.load(); }));
 }

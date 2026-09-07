@@ -35,7 +35,11 @@ static void TaskRunCallback(void* state) noexcept {
         if (inner->delegate != 0) {
             chaos_delegate_object_invoke(inner->delegate, nullptr, nullptr, 0);
         }
-        inner->task->completed = true;
+        // Publish completion + fire any registered continuation (box resumption)
+        // so an awaiting state machine's MoveNext can re-enter.
+        inner->task->completed.store(true, std::memory_order_release);
+        chaos::il2cpp::common::finish_async_task(
+            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(inner->task));
     }, rc);
 
     ExecutionContextFree(rc->ctx);
@@ -45,8 +49,8 @@ static void TaskRunCallback(void* state) noexcept {
 CHAOS_IL2CPP_INTPTR TaskRun(CHAOS_IL2CPP_INTPTR delegate_fn) noexcept {
     if (delegate_fn == 0) return 0;
 
-    auto* task = new (std::nothrow) chaos::il2cpp::common::AsyncTask();
-    if (task == nullptr) return 0;
+    CHAOS_IL2CPP_INTPTR handle = chaos::il2cpp::common::async_task_create();
+    auto* task = chaos::il2cpp::common::require_async_task(handle);
 
     auto* ctx = new (std::nothrow) TaskRunContext();
     if (ctx == nullptr) {
