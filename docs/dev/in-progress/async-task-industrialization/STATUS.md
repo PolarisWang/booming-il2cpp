@@ -217,4 +217,33 @@ spike(手写 AsyncStateMachine_One) 等价路径里 codegen 真跑。
 已澄清作业要求:不 C++20 coroutine(hotupdate P3 不可丢);performance AOT<2x .NET8;
 Priority P1>P2>P3;Go production-grade 不催。
 
+### 2026-09-07 会话末再校准（真实边界：段 A 结构发射 done；B+C+R1+R2 REMAIN）
+补一次诚实校准：60b1c8b06 完成的只是**段 A 结构发射**（移除 coroutine 占位 → MoveNext 经现有
+普通结构化发射产出真 C++ 函数体），且已验证 **dormant-safe**：当前无任何 codegen/真实 subject
+会调用 MoveNext（async entry 段 C 未建 → 没人 box+Start → MoveNext 不可达），故不会有 silent
+运行期错。
+
+确凿事实（用 real <DoVoid>d__1::MoveNext 生成源当证据，~180 行）：
+- MoveNext 产出真 extern "C" 函数：state 初始化、switch(state)、`<>1__state/<>u__1/<>t__builder`
+  字段读写走 `reinterpret_cast<chaos_type_<...>d__1*>`（reference-this —— Roslyn 把 >d__ box 进
+  AsyncStateMachineBox<T> 堆对象首成员存 >d__，故 `reinterpret_cast<chaos_type_...>` 取 box 内
+  >d__ 是**语义正确**的），EH CHAOS_EH_TRY/CATCH (SetException)，末尾 SetResult。
+- call `builder.SetResult/SetException/* async_yield_*` 已被既有 callee→native resolve 成
+  `async_*` extern 或 `chaos_external_runtime_System_PublicCoreLib_...AsyncTaskMethodBuilder*
+  SetResult/SetException/AwaitUnsafeOnCompleted...()`。
+
+但**真 async/await 语义 REMAIN**（下一步必须是它，不是已在"完成"里）：
+- `call ...AwaitUnsafeOnCompleted...()` 现在落成 extern-runtime-stub 调用（对它来说要真做
+  resume 注册 = box+Start+AsyncTaskMethodBuilder 真 class + async_task_on_completed 注册
+  MoveNext 重入）。这需要 **native runtime 提供真 AsyncTaskMethodBuilder.Start / box** +
+  **段 C**（async entry 建 >d__ box 驱动 MoveNext）。codegen 不能独自闭链。
+- 顺序：段 C（async entry : Create box + builder.Start(box) → move-next 起跑）→ 真 builder
+  Start → R2(实编译/原生跑通 One→yield→ThreadPool→set_result(1)→completed=1)。
+结论：60b1c8b06 是正确但**仅段 A**。Rest status 表不要标 ASYNC-P2-* "完成"直到 Step5(R1+R2+段C)e2e
+真跑通 codegen 产出的状态机。recommended_next fresh session = 由接入真 native AsyncTaskMethodBuilder
+runtimeless builder(段 C 入口 + Start) 起步,复证 spike 往返。
+线程并发注意:async.h / async_integration_smoke 有并行 agent(已 committed d5342d7e6 补 finish_async
+顺带 + smoke 线程 identity 断言);commit 前核对暂存区。
+
+
 
