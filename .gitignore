@@ -611,3 +611,8 @@ scripts/debug/*.exe
 .enrich-ctx/
 .*.json
 .enrich-ctx/
+*.tmp-feishu-status.py
+
+# Parallel-session Feishu board-query scratch (root) — not source
+.feishu-extract.py
+.tmp-feishu-status*.py

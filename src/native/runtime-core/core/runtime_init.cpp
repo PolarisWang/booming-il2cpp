@@ -16,6 +16,7 @@ namespace chaos::il2cpp::runtime_core {
 // Forward declarations from task_runner.cpp (threading sub-namespace)
 namespace threading {
     void RegisterAsyncTaskRun() noexcept;
+    void RegisterAsyncContinuationDispatch() noexcept;
 }
 
 // Forward declarations from thread_pool.cpp
@@ -88,6 +89,13 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     // Register ThreadPool-backed Task.Run so that async_task_run() in
     // chaos_common delegates to the real implementation instead of stubbing.
     threading::RegisterAsyncTaskRun();
+
+    // Register ThreadPool-backed continuation dispatch so that a completing
+    // task's continuation (state-machine MoveNext resumption) runs on a worker
+    // thread rather than the completing thread.  Without this, continuations
+    // fire inline on whatever thread calls SetResult/SetException, which can
+    // cause unexpected stack growth or reentrancy.
+    threading::RegisterAsyncContinuationDispatch();
 
     // Initialize the shared young generation (nursery + TLAB).
     // Must be called before any GC allocation — every allocation goes through

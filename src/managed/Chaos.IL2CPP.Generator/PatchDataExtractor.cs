@@ -140,7 +140,10 @@ public sealed partial class PatchDataExtractor
         // ── Optional AotCoreIr JSON section ──
         byte[]? aotCoreIrSection = null;
         uint aotCoreIrCount = 0;
-        if (aotCoreIrPath != null && File.Exists(aotCoreIrPath))
+        // Subject-only mode: always build AotCoreIr section (inline subject IR, no external file).
+        // Non-subject mode: require aotCoreIrPath to provide the real AOT IR JSON.
+        bool buildAotCoreIr = subjectOnly || (aotCoreIrPath != null && File.Exists(aotCoreIrPath));
+        if (buildAotCoreIr)
         {
             (aotCoreIrSection, aotCoreIrCount) = BuildAotCoreIrSection(aotCoreIrPath, methodDefs, mr, mode);
         }

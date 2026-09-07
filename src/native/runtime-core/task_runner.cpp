@@ -72,4 +72,28 @@ void RegisterAsyncTaskRun() noexcept {
     ::chaos::il2cpp::common::register_async_task_run_fn(TaskRun);
 }
 
+// ── Async continuation dispatch via ThreadPool ─────────────────────────
+
+/// Dispatch a continuation callback onto the ThreadPool.  Registered as
+/// g_async_dispatch_continuation_fn so that completing tasks queue their
+/// state-machine resumption (MoveNext) on a worker thread rather than
+/// executing inline on the completing thread.
+static void AsyncContinuationDispatch(
+    chaos::il2cpp::common::AsyncContinueFn cb, void* ctx,
+    CHAOS_IL2CPP_INTPTR task_handle) noexcept
+{
+    (void)task_handle;
+    ThreadPoolQueueUserWorkItemUnsafe(
+        [](void* state) {
+            auto* pair = static_cast<std::pair<chaos::il2cpp::common::AsyncContinueFn, void*>*>(state);
+            pair->first(0, pair->second);
+            delete pair;
+        },
+        new std::pair<chaos::il2cpp::common::AsyncContinueFn, void*>(cb, ctx));
+}
+
+void RegisterAsyncContinuationDispatch() noexcept {
+    ::chaos::il2cpp::common::register_async_dispatch_continuation_fn(AsyncContinuationDispatch);
+}
+
 }  // namespace chaos::il2cpp::runtime_core::threading
