@@ -60,6 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       stages: ${{ steps.parse.outputs.stages }}
+      modes: ${{ steps.parse.outputs.modes }}
     steps:
       - uses: actions/checkout@v4
       - id: parse
@@ -244,7 +245,8 @@ jobs:
     with:
       os: ubuntu-latest
       timeout: 1800
-      mode: full   # profile-level fine-grained per-stage params land in a later iteration
+      # mode from profile (pr=smoke, nightly=full, release=extended), fallback full
+      mode: ${{ fromJson(needs.resolve.outputs.modes).foundation-dll || 'full' }}
 
   # ── Native integration ───────────────────────────────────────────────
 
@@ -437,13 +439,14 @@ jobs:
             case "$res" in
               failure|cancelled)
                 fail=1
+                enabled=$((enabled+1))   # a failed/cancelled stage still RAN (non-skipped)
                 failed_list="${failed_list}${failed_list:+,}${stage}"
                 echo "::error::Pipeline profile=$PROFILE: stage $stage=$res"
                 ;;
               success)
                 enabled=$((enabled+1))
                 ;;
-              *) ;;  # skipped → pass (not counted in enabled)
+              *) ;;  # skipped → not run; excluded from enabled_count
             esac
           done
           echo "failed_stages=$failed_list" >> "$GITHUB_OUTPUT"
