@@ -196,11 +196,13 @@ static void VirtualFreeRegion(void* ptr, CHAOS_IL2CPP_SIZE size) {
 // ======================================================================
 void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("NurseryAllocateSlow");
+#if CHAOS_IL2CPP_PROFILE_ENABLED
     ProfileRecordSlowPath();
 
     if (size > kMaxTlabAlloc) {
         ProfileRecordLargeObjAlloc(static_cast<int64_t>(size));
     }
+#endif
 
     // Flush TLS allocation counter to scheduler before making any GC decision.
     FlushTlsAllocCounter();
@@ -258,8 +260,12 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
             auto gc_start = std::chrono::high_resolution_clock::now();
             chaos_gc_collect();
             auto gc_end = std::chrono::high_resolution_clock::now();
+#if CHAOS_IL2CPP_PROFILE_ENABLED
             auto gc_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(gc_end - gc_start).count();
             ProfileRecordGcPause(static_cast<int64_t>(gc_ns));
+#else
+            (void)gc_end;
+#endif
             if (mt) {
                 mt->tlab_start = nullptr;
                 mt->tlab_current = nullptr;
@@ -281,8 +287,12 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
             auto gc1_start = std::chrono::high_resolution_clock::now();
             GcGen1Collection();
             auto gc1_end = std::chrono::high_resolution_clock::now();
+#if CHAOS_IL2CPP_PROFILE_ENABLED
             auto gc1_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(gc1_end - gc1_start).count();
             ProfileRecordGcPause(static_cast<int64_t>(gc1_ns));
+#else
+            (void)gc1_end;
+#endif
             if (mt) {
                 mt->tlab_start = nullptr;
                 mt->tlab_current = nullptr;
@@ -440,11 +450,13 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
 
 void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("NurseryAllocateAtomicSlow");
+#if CHAOS_IL2CPP_PROFILE_ENABLED
     ProfileRecordSlowPath();
 
     if (size > kMaxTlabAlloc) {
         ProfileRecordLargeObjAlloc(static_cast<int64_t>(size));
     }
+#endif
 
     FlushTlsAllocCounter();
 
@@ -491,8 +503,12 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
             auto gc_start = std::chrono::high_resolution_clock::now();
             chaos_gc_collect();
             auto gc_end = std::chrono::high_resolution_clock::now();
+#if CHAOS_IL2CPP_PROFILE_ENABLED
             auto gc_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(gc_end - gc_start).count();
             ProfileRecordGcPause(static_cast<int64_t>(gc_ns));
+#else
+            (void)gc_end;
+#endif
             if (mt) {
                 mt->tlab_start = nullptr;
                 mt->tlab_current = nullptr;

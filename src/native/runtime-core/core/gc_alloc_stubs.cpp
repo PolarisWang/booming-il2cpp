@@ -49,9 +49,11 @@ void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size) {
         GcRecordAlloc(size, size > kMaxTlabAlloc);
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
+#if CHAOS_IL2CPP_PROFILE_ENABLED
         ProfileRecordNurseryAlloc(static_cast<int64_t>(size));
         ProfileRecordAllocCount();
         ProfileRecordFastPath();
+#endif
     }
     return ptr;
 }
@@ -64,9 +66,11 @@ void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size) {
         GcRecordAlloc(size, size > kMaxTlabAlloc);
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
+#if CHAOS_IL2CPP_PROFILE_ENABLED
         ProfileRecordNurseryAlloc(static_cast<int64_t>(size));
         ProfileRecordAllocCount();
         ProfileRecordFastPath();
+#endif
     }
     return ptr;
 }
