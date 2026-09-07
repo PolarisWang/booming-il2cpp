@@ -616,3 +616,4 @@ scripts/debug/*.exe
 # Parallel-session Feishu board-query scratch (root) — not source
 .feishu-extract.py
 .tmp-feishu-status*.py
+.tmp-check-eng-*.py

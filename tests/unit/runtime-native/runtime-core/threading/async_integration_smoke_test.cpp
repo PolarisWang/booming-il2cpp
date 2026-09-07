@@ -409,3 +409,144 @@ TEST_F(AsyncIntegrationTest, ContinuationDispatchedExactlyOnce) {
     delete task;
     register_async_dispatch_continuation_fn(nullptr);   // no leak into later tests
 }
+
+// ══════════════════════════════════════════════════════════════════════════════
+// P2-1 spike: Hand-crafted state machine demonstrating the real async translation
+// ══════════════════════════════════════════════════════════════════════════════
+//
+// This is the core pattern that Phase 2 must emit from IL:
+//
+//   C#:   async Task<int> One() { await Task.Yield(); return 1; }
+//
+//   Roslyn emits (simplified):
+//     struct <One>d__0 : IAsyncStateMachine {
+//       int <>1__state;                  // -1=done, 0=await yield
+//       AsyncTaskMethodBuilder<int> <>t__builder;
+//       YieldAwaiter <>u__awaiter0;
+//       int <result>5__0;
+//
+//       void MoveNext() {
+//         try {
+//           switch (<>1__state) {
+//             case -1: return;
+//             case 0: goto AWAIT_YIELD_DONE;
+//           }
+//           <>u__awaiter0 = Task.Yield().GetAwaiter();
+//           if (!<>u__awaiter0.IsCompleted) {
+//             <>1__state = 0;
+//             <>t__builder.AwaitUnsafeOnCompleted(ref <>u__awaiter0, ref this);
+//             return;  // suspend — continuation resumes here
+//           }
+//           AWAIT_YIELD_DONE:
+//           <>u__awaiter0.GetResult();
+//           <>t__builder.SetResult(1);
+//         } catch (Exception ex) {
+//           <>1__state = -1;
+//           <>t__builder.SetException(ex);
+//         }
+//       }
+//     }
+//
+// We translate this to a native C++ struct with a MoveNext() member function
+// using the Phase 1 builder/awaiter/continuation protocol.
+
+// Awaiter wrapper for Task.Yield().  In the real translator this is
+// constructed from the IL GetAwaiter call; here we hand-code it.
+struct YieldAwaiter {
+    bool is_completed = false;
+    void UnsafeOnCompleted(AsyncContinueFn cb, void* ctx) {
+        // Yield always completes asynchronously: queue the continuation.
+        // This simulates what Task.Yield().GetAwaiter().UnsafeOnCompleted does.
+        threading::ThreadPoolQueueUserWorkItemUnsafe([](void* state) {
+            auto* pair = static_cast<std::pair<AsyncContinueFn, void*>*>(state);
+            pair->first(0, pair->second);
+            delete pair;
+        }, new std::pair<AsyncContinueFn, void*>(cb, ctx));
+    }
+};
+
+// The state machine struct — this is what the translator must emit.
+// It mirrors the Roslyn <One>d__0 exactly.
+struct AsyncStateMachine_One {
+    // State: -1 = done, 0 = await yield, -2 = initial
+    int state = -2;
+    // Builder slot (holds the Task handle)
+    CHAOS_IL2CPP_INTPTR builder_slot = 0;
+    // Awaiter storage
+    YieldAwaiter awaiter;
+    // Result
+    int result = 0;
+
+    void MoveNext() {
+        // AOT EH: try block
+        switch (state) {
+            case -1: return;  // already completed
+            case 0: goto AFTER_YIELD;  // resume from await
+        }
+        // Initial state: call Task.Yield().GetAwaiter()
+        // In the real translator this is the IL instruction sequence.
+        // awaiter = Task.Yield().GetAwaiter();
+        // For this spike, YieldAwaiter starts as not-completed.
+        if (!awaiter.is_completed) {
+            state = 0;  // mark suspend point
+            // builder.AwaitUnsafeOnCompleted(ref awaiter, ref this)
+            // The continuation calls MoveNext again.
+            awaiter.UnsafeOnCompleted(
+                [](CHAOS_IL2CPP_INTPTR, void* ctx) {
+                    static_cast<AsyncStateMachine_One*>(ctx)->MoveNext();
+                },
+                this);
+            return;  // suspend — continuation will re-enter
+        }
+        AFTER_YIELD:
+        // awaiter.GetResult() — no-op for yield awaiter
+        // builder.SetResult(1)
+        result = 1;
+        state = -1;
+        chaos::il2cpp::common::async_task_builder_set_result_raw(
+            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&builder_slot),
+            static_cast<CHAOS_IL2CPP_INTPTR>(result));
+        // AOT EH: catch block would set exception on builder
+    }
+};
+
+TEST_F(AsyncIntegrationTest, HandCraftedStateMachineOne) {
+    // This test proves the Phase 2 state-machine translation pattern works:
+    //   1. Create a state machine struct
+    //   2. Call builder.Start (which invokes MoveNext synchronously until first suspend)
+    //   3. MoveNext suspends after setting up the continuation
+    //   4. The continuation (Task.Yield completion) re-enters MoveNext
+    //   5. MoveNext sets result on the builder
+    //   6. The Task completes with the correct value
+
+    AsyncStateMachine_One sm;
+
+    // Simulate the AsyncTaskMethodBuilder<int>.Start(ref sm) prologue:
+    // Roslyn's builder lazily creates the Task when the caller accesses
+    // builder.Task (returned by the async method).  Force that creation so a
+    // Task exists before MoveNext runs (this is what "builder.Create" +
+    // returned "Task" getter do).
+    chaos::il2cpp::common::async_task_builder_get_task(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sm.builder_slot));
+
+    // builder.Start(ref stateMachine) calls MoveNext synchronously until the
+    // first suspension point.
+    sm.MoveNext();
+
+    // After the first MoveNext, the state machine should have suspended
+    // (state == 0, continuation queued to thread pool).  The builder
+    // should have created a Task (builder_slot != 0).
+    ASSERT_NE(sm.builder_slot, 0);
+    EXPECT_EQ(sm.state, 0);  // suspended at yield
+
+    // Wait for the continuation to fire and the task to complete.
+    auto* task = chaos::il2cpp::common::require_async_task(
+        *chaos::il2cpp::common::resolve_native_int_slot(
+            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sm.builder_slot)));
+    EXPECT_TRUE(WaitFor([task] { return task->completed.load(); }));
+
+    // Task should have result 1.
+    EXPECT_EQ(task->result, 1);
+    EXPECT_FALSE(task->faulted.load());
+    EXPECT_EQ(sm.state, -1);  // state machine marked done
+}
