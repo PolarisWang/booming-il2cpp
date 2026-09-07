@@ -607,3 +607,7 @@ scripts/debug/*.exe
 
 .feishu-*.json
 .chk.json
+.cur.json
+.enrich-ctx/
+.*.json
+.enrich-ctx/
