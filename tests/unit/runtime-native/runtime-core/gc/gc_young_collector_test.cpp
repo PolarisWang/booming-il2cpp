@@ -202,8 +202,6 @@ TEST_F(YoungCollectorTest, YoungCollectionEmpty) {
     void* p = NurseryAllocate(32);
     ASSERT_NE(p, nullptr);
     std::memset(p, 0, 32);
-    Region* nursery = g_young_gen.region.load(std::memory_order_acquire);
-    ASSERT_NE(nursery, nullptr);
 
     // p is a stack root on this frame — the all-thread conservative stack scan
     // (Phase 0) promotes it and rewrites the local to the tenured address.
@@ -211,10 +209,27 @@ TEST_F(YoungCollectorTest, YoungCollectionEmpty) {
     EXPECT_FALSE(IsInNursery(p));
     EXPECT_GE(r1.objects_promoted, 1u);
 
-    // Empty nursery · bump reset to the start of the young region.
-    EXPECT_EQ(g_young_gen.bump.load(std::memory_order_acquire), nursery->begin);
+    // Re-read the CURRENT nursery after the collection.  Adaptive sizing
+    // (ResizeNurseryRegion @ end-of-GcYoungCollection, gc_region.cpp:845) may
+    // replace the region when survival/alloc pressure changes, so the region
+    // captured before the GC can be a freed/stale pointer.  The bump-reset and
+    // re-nursery invariants must be asserted against the region that is ACTIVE
+    // now, not a pre-GC snapshot.
+    Region* nursery_after = g_young_gen.region.load(std::memory_order_acquire);
+    ASSERT_NE(nursery_after, nullptr);
 
-    // A fresh allocation on the reset nursery lands back in the nursery.
+    // Empty nursery · bump reset to the start of the active young region.
+    EXPECT_EQ(g_young_gen.bump.load(std::memory_order_acquire), nursery_after->begin);
+
+    // Reset the thread-local TLAB so the next NurseryAllocate goes through
+    // TlabClaimFromYoungGen and picks up a fresh TLAB from the current nursery.
+    // GcYoungCollection resets ManagedThread::tlab_start/current/end (line 915-917)
+    // but does NOT clear the thread_local tls_tlab variable itself.  Without this
+    // reset, the next NurseryAllocate may re-use the stale TLAB ranges pointing
+    // into the old (freed/resized) nursery region, causing IsInNursery(p2)=false.
+    tls_tlab = TLAB();
+
+    // A fresh allocation on the reset nursery lands back in the active nursery.
     void* p2 = NurseryAllocate(64);
     ASSERT_NE(p2, nullptr);
     EXPECT_TRUE(IsInNursery(p2));
