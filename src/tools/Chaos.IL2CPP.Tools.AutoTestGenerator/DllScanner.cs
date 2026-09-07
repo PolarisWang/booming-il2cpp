@@ -310,6 +310,17 @@ public sealed class DllScanner
                 $"Interface type '{typeFullName}' is not supported. " +
                 "Interface methods cannot be invoked without a concrete implementation.");
 
+        // ── Skip ref struct types ──
+        // Ref struct types (Span<T>, ReadOnlySpan<T>, MemoryExtensions+TryWriteInterpolatedStringHandler, etc.)
+        // cannot be used as generic type arguments in C# (CS9244).  They also cannot be boxed, so
+        // the fact harness's (object)(returnValue) pattern fails at compile time (CS0030).
+        // Skip the entire type rather than individual methods, since SubjectInstanceFactory.Create<T>()
+        // for the declaring type itself is invalid on a ref struct.
+        if (IsRefStructType(targetType))
+            throw new InvalidOperationException(
+                $"Ref struct type '{typeFullName}' is not supported. " +
+                "Ref struct types cannot be used as generic type arguments or boxed.");
+
         // ── Concretize generic type definitions (e.g. Stack`1 → Stack<int>) ──
         if (targetType.IsGenericTypeDefinition)
         {
@@ -1710,6 +1721,7 @@ public sealed class DllScanner
     {
         "ReadOnlySpan", "ReadOnlySpan`1",
         "Span", "Span`1",
+        "TryWriteInterpolatedStringHandler",
     };
 
     /// <summary>

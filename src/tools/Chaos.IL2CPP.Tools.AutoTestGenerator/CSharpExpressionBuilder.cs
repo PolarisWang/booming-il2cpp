@@ -243,22 +243,31 @@ public sealed class CSharpExpressionBuilder
                 var gaPart = qualified.Contains('<') ? qualified[qualified.IndexOf('<')..] : "";
                 return $"global::{baseName}{gaPart}{sharedSuffix}";
             }
-            // Use SubjectInstanceFactory for valid instances. Ref structs and
+                        // Use SubjectInstanceFactory for valid instances. Ref structs and
             // unresolvable types fall back to default(T)! (ref structs can't be
             // generic type params; unresolved types may be in unreferenced assemblies).
             try {
                 var t = Type.GetType(typeFullName, false);
+                var qualifiedType = CSharpSerializer.ToQualifiedCSharpType(typeFullName);
                 // Ref struct types can't be used as generic type arguments — use default(T) for them.
                 if (t != null && t.IsValueType && t.IsByRefLike)
-                    return $"default(global::{qualified.Replace('+', '.')})!";
+                    return $"default({qualifiedType})!";
                 // For types where Type.GetType returns null (BCL types not loaded in ATG process),
                 // fall through to SubjectInstanceFactory.Create<T>() which uses GetUninitializedObject
                 // to return a non-null instance. This fixes the 908-case "default(global::T)! → NRE"
                 // pattern that caused 42-sentinel false passes.
-            } catch { /* fall through to SubjectInstanceFactory.Create<T>() */ }
-            // Use bare keyword form when csType is a C# keyword alias (string, int, bool, etc.)
-            var typeArg = IsCSharpKeyword(csType) ? csType : $"global::{qualified.Replace('+', '.')}";
-            return $"SubjectInstanceFactory.Create<{typeArg}>()";
+                // NOTE: ToQualifiedCSharpType keeps the full namespace path for non-keyword types
+                // (e.g. System.Globalization.CultureInfo), and collapses primitives to keywords
+                // (string, int, bool).  This avoids two invalid patterns:
+                //   global::string   — global:: cannot precede a C# keyword (CS1525)
+                //   global::CultureInfo — bare type not globally resolvable (CS0400)
+                // When t is null (unresolvable) we still emit Create<T> since the caller
+                // expects a non-null instance; if the type turns out to be a ref struct
+                // the compilation will fail with CS9244 — but that's better than silently
+                // returning null from default(T) and producing false positives.
+                return $"SubjectInstanceFactory.Create<{qualifiedType}>()";
+            } catch { /* fall through to default(T) fallback */ }
+            return $"default({CSharpSerializer.ToQualifiedCSharpType(typeFullName)})!";
         }
 
         // Try to find a parameterless constructor via runtime reflection

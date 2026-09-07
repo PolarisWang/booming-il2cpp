@@ -633,6 +633,9 @@ public sealed class ValueGenerator
             if (t is null || t.IsAbstract || t.IsInterface || t.IsArray || t.IsGenericType)
                 return null; // leave to caller DefaultValue (null!) — no blind SubjectInstanceFactory for these
             if (t.IsValueType) return null;
+            // Ref struct types (Span<T>, ReadOnlySpan<T>, InterpolatedStringHandler, etc.)
+            // cannot be used as generic type arguments in C# — skip SubjectInstanceFactory.
+            if (t.IsByRefLike) return null;
             // Public parameterless ctor?
             var ctors = t.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
             if (ctors.Any(c => c.GetParameters().Length == 0))
