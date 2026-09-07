@@ -55,23 +55,37 @@ public sealed partial class PatchDataExtractor
     /// </summary>
     private static int? ExtractSubjectIndex(string name)
     {
+        // The numeric subject index is always the FIRST run of ASCII digits after the
+        // recognized prefix, and may be followed by a separator + method detail (e.g.
+        // patch subjects are named "Subject_0_ToFrozenDictionary_0_...").  Scan digits
+        // and stop at the first non-digit — mirroring NativeAotLoweringPlanner.  This
+        // keeps pure "Subject_17" and suffixed "Subject_17_<method>" both working.
+        int N;
+        int start;
         if (name.StartsWith("Subject_", StringComparison.Ordinal))
         {
-            if (int.TryParse(name.AsSpan(8), out var idx))
-                return idx;
+            start = 8;
         }
         else if (name.StartsWith("CustomEntrySubject_", StringComparison.Ordinal))
         {
-            if (int.TryParse(name.AsSpan(19), out var idx))
-                return idx;
+            start = 19;
         }
         else if (name.StartsWith("CustomEntryMethod", StringComparison.Ordinal))
         {
-            var span = name.AsSpan(16);
-            if (span.Length > 0 && int.TryParse(span, out var idx))
-                return idx;
+            start = 16;
         }
-        return null;
+        else
+        {
+            return null;
+        }
+
+        N = name.Length;
+        int pos = start;
+        if (pos >= N || !char.IsAsciiDigit(name[pos]))
+            return null;
+        while (pos < N && char.IsAsciiDigit(name[pos]))
+            pos++;
+        return int.Parse(name.AsSpan(start, pos - start), System.Globalization.CultureInfo.InvariantCulture);
     }
 
 
