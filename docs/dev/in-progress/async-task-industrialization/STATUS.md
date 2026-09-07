@@ -73,14 +73,7 @@ completed_batches: []
 ```
 ## 执行进度
 
-### ASYNC-P1-1 ✅ completed (commit a5f6ec141)
-ThreadPool 生命周期接入 RuntimeInit：RuntimeInit 调 ThreadPoolInitialize()、RuntimeShutdown 调 ThreadPoolShutdown()、加 s_initialized 单次守卫。GC 6/6 + threading 12/13 绿。
-
-### ASYNC-P1-2 in-progress
-AsyncStateMachineBox native 等价物。
-`async.h` AsyncTask 是 primitive：非 GC 堆 (`CHAOS_IL2CPP_NEW`)、无 continuation dispatch、无 MoveNext 续列机制。需补：Task 的 GC 承载 + continuation 注册/派发 + EC 保存。
-
-## Phase 1 收尾（实际进度）
+### Phase 1 收尾（实际进度）
 
 * ASYNC-P1-1 ✅ a5f6ec141: ThreadPool→RuntimeInit
 * ASYNC-P1-2 ✅ ef440e3de: AsyncTask 续列(box resumption)契约 + 5测试

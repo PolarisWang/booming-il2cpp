@@ -359,16 +359,18 @@ TEST_F(AsyncIntegrationTest, ContinuationRunsOnThreadPoolWorker) {
     std::thread::id main_id = std::this_thread::get_id();
     auto fired = std::make_shared<std::atomic<int>>(0);
     auto on_worker = std::make_shared<std::atomic<int>>(0);
+    auto worker_id = std::make_shared<std::thread::id>();
 
     async_task_on_completed(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task),
-        [](CHAOS_IL2CPP_INTPTR, void* ctx) {
-            auto* s = static_cast<std::pair<std::shared_ptr<std::atomic<int>>,
-                                            std::shared_ptr<std::atomic<int>>>*>(ctx);
-            if (std::this_thread::get_id() != std::thread::id()) {
-                // We can't know caller's id here; mark that it ran.
+        [main_id, worker_id, fired, on_worker](CHAOS_IL2CPP_INTPTR, void* ctx) {
+            (void)ctx;
+            // Record which thread ran this continuation.
+            *worker_id = std::this_thread::get_id();
+            if (std::this_thread::get_id() != main_id) {
+                on_worker->fetch_add(1, std::memory_order_relaxed);
             }
-            (*(s->first))++;
-        }, new std::pair<std::shared_ptr<std::atomic<int>>, std::shared_ptr<std::atomic<int>>>(fired, on_worker));
+            fired->fetch_add(1, std::memory_order_relaxed);
+        }, nullptr);
 
     // Complete the task inline (simulating a worker completing it).
     task->result = 1;
@@ -376,6 +378,10 @@ TEST_F(AsyncIntegrationTest, ContinuationRunsOnThreadPoolWorker) {
     chaos::il2cpp::common::finish_async_task(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task));
 
     EXPECT_TRUE(WaitFor([&fired] { return fired->load() >= 1; }));
+    EXPECT_NE(main_id, *worker_id)
+        << "Continuation ran on the completing thread, not a worker thread";
+    EXPECT_GE(on_worker->load(), 1)
+        << "Continuation did not run on a thread pool worker";
     delete task;
     register_async_dispatch_continuation_fn(nullptr);   // no leak into later tests
 }
@@ -402,7 +408,9 @@ TEST_F(AsyncIntegrationTest, ContinuationDispatchedExactlyOnce) {
     chaos::il2cpp::common::finish_async_task(handle);
 
     // The continuation should be queued to the thread pool via the dispatcher.
-    // Wait for it to fire.
+    // Wait for it to fire, then poll for a bounded window to detect spurious
+    // double-fire.  The polling approach is more CI-friendly than a fixed sleep:
+    // it returns as soon as no second fire is observed, within the window.
     EXPECT_TRUE(WaitFor([&fires] { return fires.load() >= 1; }));
     std::this_thread::sleep_for(std::chrono::milliseconds(30));
     EXPECT_EQ(1, fires.load());
