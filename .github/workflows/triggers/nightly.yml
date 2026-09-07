@@ -66,7 +66,7 @@ jobs:
               // thread) so the most recent failure state is always visible at
               // a glance.  Previous failure details are still in the issue's
               // event history.
-              const updatedBody = body + `\n\n---\n*This is an automated update — previous body has been replaced.*`;
+              const updatedBody = body + `\n\n---\n*This is an automated update - previous body has been replaced.*`;
               await github.rest.issues.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
