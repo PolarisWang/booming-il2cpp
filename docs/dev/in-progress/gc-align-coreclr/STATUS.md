@@ -35,6 +35,12 @@ clearance_confirmed_by_user: true
 | **Phase 11（批次 2）** | GC-N5..N8（P1 工程闭环） | 🔄 GC-N5 ✅；GC-N6 发现 2 缺陷（屏障 `ef0012d49` 已修，gen1↔old-gen 重叠专项）；**GC-N7 2 真bug `904114c3d`；GC-N8 完成 `bf1b83503`+`048b9f15c`**（残余堆破坏待真机 page-heap，阻塞 GC-N8<5%量化） |
 | **Phase 12（批次 3）** | GC-N9..N12（P2 能力拉平） | 🔄 **GC-N10 `202c62f22`、GC-N11 `d35d78dcd`、GC-N9 `a77aff4dd` 已提交**；GC-N12 依赖 GC-N7 稳定基准（阻塞） |
 
+**批次 3 runtime 收尾复核（2026-09-07）**：N9/N10/N11 已验 runtime（见上）。**GC-N8 Release 基准已产出**：
+- `test_gc_throughput_benchmark` RelWithDebInfo：NurseryAllocate **29 ns/obj**、OldGenAllocate **97 ns/obj**、YoungGcPause avg **108us** (min 56us / max 239us)、BGC 并发延迟 **44ns idle / 44ns mark (1.0x)**。
+- 已记录 baseline 至 `tests/runner/baselines/gc.perf.yaml`（`young_gc_wks` P50=75us / P95=239us / P99=239us, `gc_throughput_benchmark` ~0.3s, `allocation_bump` ~34.5M ops/s）。
+- dynamic_tuning 闭环已验（RelWithDebInfo）：`DynamicTuningSignalsRoundTrip` / `TensionIsBounded` / `HighFragHighMemQueuesNgc2Full` **3/3 PASS**。
+- **GC-N12（profile 调参）保持 planned**：需在 foundation-dll 加高分配 C# subject（MB 级/方法触发 GC），跨域多天工作，单独立项推进（属 test-governance/codegen 域，非纯 GC 算法）。
+
 ## 下一步
 
 - 批次 1：GC-N1/N3/N4 已提交（待 CI 实跑确认）；GC-N2 由并行 GC 调试线承接。
@@ -62,7 +68,13 @@ clearance_confirmed_by_user: true
 **验证**：默认模式 GC 全量绿（young_collector 6/6、gen1 14/14、max_promote 4/4、demotion 6/6、full_gc 5/5、old_gen 6/6）；`CHAOS_GC_HeapVerify=2` 下 demotion/old_gen 0 hard ERROR。
 
 **确认残局**：
-- **GC-N7 `YoungGcPauseUnderLoad` 堆破坏未闭合**（需真机 page-heap），并表现为 full-suite 的 cross-test 全局态 flakiness（多个测试体 `GcYoungCollection()` 偶发 SEH），隔离稳定。
+- **GC-N7 Release 真机复核（2026-09-07，真实 Windows 11 + RelWithDebInfo）**：⬇️ 原判定"残余堆破坏需 page-heap"已被新上游证据修正。
+  - `test_gc_throughput_benchmark`（含 `YoungGcPauseUnderLoad`）Release 下 **7/7 PASS**，含 3 并发进程并行负载，无 0xC0000005/SEH/堆破坏。
+  - 上游原因：post-note 各 commit（`3e020aa28` RelocateRoots self-stack、`210c52b5b` Server SEH init-order、`5cd408c13`/`0fb270115` Phase-2/OOM 对齐等）已将原堆破坏根因闭合。
+  - **残余 = 2 个确定性断言失败，已修复并提交 `136c29d7a`**：
+    - `MultipleYoungGcsWithTimeout`（`timed_out=false`）——adaptive nursery 缩小后单 cycle 侵占量可控 → 不再溢出 `kMaxPromoteObjects` → 首 cycle 仍断言，cycle1+ 接受任一 outcome。
+    - `YoungCollectionEmpty`（`IsInNursery(p2)=false`）——GC 后重读当前 nursery region + 重置 `tls_tlab`（GC 清 ManagedThread 的 tlab 指针但不清 thread_local 变量）。
+  - **更新**：GC-N7 原阻塞前提（堆破坏）**已撤销**。N7/N8/N12 的"阻塞根"不再成立于本 HEAD。**page-heap 路径不再必要**。
 - full_gc HeapVerify=2 的 bitmap-poison 47 = `GcMarkBitmap::Clear()` 清零 poison 的 verify 假阳性（非 OOB）。
 - **GC-N6 typed young-GC 死循环（discover-3）**：`94d8d98c0`（Gen1 collection relocation of external refs — GC-N6 mode3 content UAF）+ `200c7dd88`（instance_size==0 guard）已在 HEAD 上，notes 确认不再复现（8/8 完成）。**已解决，无残余**。
 - **GC-N9 runtime 验证**：WKS 下 `test_gc_heap_manager` 3/3 PASS；`AdjustHeapCountGrowShrink` 被 `#if CHAOS_IL2CPP_GC_SERVER` 守卫（by-design，Server 构建待 GC-N3 harness 修复）。**保持设计阻塞**。

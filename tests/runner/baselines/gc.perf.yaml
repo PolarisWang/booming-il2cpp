@@ -15,17 +15,17 @@
 # No-skip rule applies: these are recorded facts, not test suppressions.
 
 version: 1
-machine: "pending-first-green-run"   # set to hostinfo of the recording run
-captured_at: null
+machine: "windows-x64-reference (RelWithDebInfo)"
+captured_at: "2026-09-07T09:50+08:00"
 source_preset: native-gc            # or gc-stress for the heavy tiers
 unit: "seconds"                     # pause times are seconds; throughput ops/sec
 
 pause_seconds:
   young_gc_wks:
-    desc: "Young GC STW pause (WKS/single-heap mode), nursery 256KB"
-    p50: null            # fill from first green run
-    p95: null
-    p99: null
+    desc: "Young GC STW pause (WKS/single-heap mode), adaptive nursery 64KB-4MB"
+    p50: 0.000075            # 75 us (P50 from 10-cycle run)
+    p95: 0.000239            # 239 us (P95 = max in this run)
+    p99: 0.000239            # 239 us (P99 = max in this run)
     tol_pct: 50
   full_gc_small:
     desc: "Full GC mark-only small heap (<100 pages)"
@@ -58,11 +58,11 @@ pause_seconds:
 scenario_duration_s:    # per-scenario wall durations (from --cases)
   gc_stress_scenarios: null
   gc_bgc_stress_scenarios: null
-  gc_throughput_benchmark: null
+  gc_throughput_benchmark: 0.3       # ~300ms for 4 tests full run
   gc_regression_benchmark: null
 
 throughput_kops_per_s:
-  allocation_bump: null      # NurseryAllocate fast-path throughput
+  allocation_bump: 34483         # NurseryAllocate: 29 ns/obj → ~34483 ops/s
   tol_pct: 30
 
 regress_policy:
