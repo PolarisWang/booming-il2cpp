@@ -605,6 +605,13 @@ public sealed class ValueGenerator
         string csName;
         try { csName = CSharpSerializer.ToCSharpTypeName(typeName); }
         catch { return null; }
+        // ToQualifiedCSharpType returns a C#-expressible type name that keeps the full
+        // namespace for non-keyword types (e.g. System.Globalization.CultureInfo) yet
+        // collapses primitives to their C# keyword (string, int, bool).  Using it (instead
+        // of namespace-stripped csName wrapped in global::) avoids two invalid forms:
+        //   global::string   — global:: cannot precede a C# keyword
+        //   global::CultureInfo — bare type not rooted in the file's usings
+        var qualifiedType = CSharpSerializer.ToQualifiedCSharpType(typeName);
         if (string.IsNullOrEmpty(csName) || csName is "void" or "System.Void") return null;
 
         // System.Object maps to the C# keyword `object` — `global::object()` is not
@@ -629,12 +636,12 @@ public sealed class ValueGenerator
             // Public parameterless ctor?
             var ctors = t.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
             if (ctors.Any(c => c.GetParameters().Length == 0))
-                return $"new global::{csName.Replace('+', '.')}()";
+                return $"new {qualifiedType}()";
             // No paramless ctor but a real class → GetUninitializedObject is the safe non-null route.
             // Skip types where GetUninitializedObject would produce an unusable bare object
             // that still throws later deeper (e.g. some sealed runtime types); here we accept
             // the managed-equivalent execution and let the probe classify outcome.
-            return $"SubjectInstanceFactory.Create<global::{csName.Replace('+', '.')}>()";
+            return $"SubjectInstanceFactory.Create<{qualifiedType}>()";
         }
         catch
         {

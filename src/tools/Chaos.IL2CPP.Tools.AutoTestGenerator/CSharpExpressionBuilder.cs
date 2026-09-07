@@ -9,6 +9,20 @@ namespace Chaos.IL2CPP.Tools.AutoTestGenerator;
 /// </summary>
 public sealed class CSharpExpressionBuilder
 {
+    /// <summary>
+    /// C# keyword aliases that cannot follow global:: (e.g. global::string is invalid).
+    /// When ToCSharpTypeName/StripAssemblyQualification produces one of these, emit the
+    /// bare keyword directly instead of global::&lt;keyword&gt;.
+    /// </summary>
+    internal static bool IsCSharpKeyword(string name) => name switch
+    {
+        "bool" or "byte" or "sbyte" or "short" or "ushort" or
+        "int" or "uint" or "long" or "ulong" or
+        "float" or "double" or "decimal" or
+        "char" or "string" or "object" or "void" => true,
+        _ => false
+    };
+
     private readonly CSharpSerializer _serializer;
 
     // Types with well-known static factory instances (abstract or no default ctor)
@@ -242,7 +256,9 @@ public sealed class CSharpExpressionBuilder
                 // to return a non-null instance. This fixes the 908-case "default(global::T)! → NRE"
                 // pattern that caused 42-sentinel false passes.
             } catch { /* fall through to SubjectInstanceFactory.Create<T>() */ }
-            return $"SubjectInstanceFactory.Create<global::{qualified.Replace('+', '.')}>()";
+            // Use bare keyword form when csType is a C# keyword alias (string, int, bool, etc.)
+            var typeArg = IsCSharpKeyword(csType) ? csType : $"global::{qualified.Replace('+', '.')}";
+            return $"SubjectInstanceFactory.Create<{typeArg}>()";
         }
 
         // Try to find a parameterless constructor via runtime reflection
