@@ -414,12 +414,14 @@ def _enrich_metadata_body_availability(
 
     # ── Layer 2: BCL coverage declarations joined via aot-manifest ──
     by_bcl_subject: dict[str, str] = {}
-    if bcl_manifest:
+    if isinstance(bcl_manifest, list):
         for en in bcl_manifest:
+            if not isinstance(en, dict):
+                continue  # tolerate non-object entries (some manifests may embed strings)
             if en.get("subjectKind") != "method":
                 continue
             sid = en.get("subjectId", "")
-            if "CombinedSubjects/" in sid:
+            if not isinstance(sid, str) or "CombinedSubjects/" in sid:
                 continue
             avail = en.get("bodyAvailability")
             by_bcl_subject[sid] = _BODY_AVAIL_TO_CATEGORY.get(avail, avail)
@@ -490,7 +492,13 @@ def _merge_codegen_body_availability(
     except (json.JSONDecodeError, OSError):
         return 0
     ir_methods = ir.get("methods") or []
-    annotated = _enrich_metadata_body_availability(metadata, ir_methods)
+    bcl_manifest = None
+    if aot_manifest_path and aot_manifest_path.exists():
+        try:
+            bcl_manifest = json.loads(aot_manifest_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError) as e:
+            print(f"  [build] WARNING: unreadable aot-manifest.json ({e}), Layer 2 BCL coverage skipped")
+    annotated = _enrich_metadata_body_availability(metadata, ir_methods, bcl_manifest)
     total = len(metadata.get("methods") or [])
     native_count = sum(
         1 for m in metadata.get("methods") or []
