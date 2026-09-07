@@ -253,14 +253,21 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> bool:
 
 
 def _incremental_rebuild(ctx) -> bool:
-    """Incremental cmake rebuild of entry.exe (no cmake re-configure).
+    """Incremental cmake rebuild of entry.exe with patch-host-arrays.cpp linked.
 
-    Deletes the stale patch-host-arrays.obj first to force recompilation,
-    then runs cmake --build for proper dependency tracking.
+    Deletes the stale patch-host-arrays.obj first, patches CMakeLists.txt so
+    patch-host-arrays.cpp is compiled AND linked FIRST, reconfigures, and rebuilds.
     Returns True on success, False on failure.
+
+    Distinct-linking note: BOTH runtime-patchdata.cpp (sentinel kPatchDataHostCount=0,
+    null arrays) and patch-host-arrays.cpp (real entries) define the same symbols.
+    Verified MSVC /FORCE:MULTIPLE keeps the FIRST-compiled duplicate (LNK4006), so the
+    patch file must link before the sentinel.  runtime-patchdata.cpp still supplies
+    kPatchData/kPatchDataSize (no duplicate), so it stays in the build — just later.
     """
     build_dir = ctx.chunk_dir / "native" / "build"
-    src_file = ctx.chunk_dir / "native" / "patch-host-arrays.cpp"
+    native_dir = ctx.chunk_dir / "native"
+    src_file = native_dir / "patch-host-arrays.cpp"
     if not build_dir.exists() or not src_file.exists():
         print(f"  [hotupdate] Cannot rebuild: build dir or source not found")
         return False
@@ -278,6 +285,70 @@ def _incremental_rebuild(ctx) -> bool:
     os.utime(str(src_file), None)
 
     cmake = shutil.which("cmake") or r"C:\Program Files\CMake\bin\cmake.exe"
+    # ── Reorder CMakeLists so patch-host-arrays.cpp is compiled + linked FIRST ──
+    # The generated CMakeLists.txt list(REMOVE_ITEM CHAOS_NATIVE_STUBS ...) excludes
+    # patch-host-arrays.cpp entirely (so it is never compiled → entry uses the
+    # runtime-patchdata sentinel → 0 patches); even when added, MSVC /FORCE:MULTIPLE
+    # would keep the sentinel if it links first.  Fix both by un-excluding the file and
+    # placing it ahead of runtime-patchdata.cpp.
+    cmake_path = native_dir / "CMakeLists.txt"
+    try:
+        cmake_text = cmake_path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        cmake_text = None
+    _patched_cmake = False
+    if cmake_text:
+        src_lines = cmake_text.splitlines(keepends=True)
+        # (1) drop the REMOVE_ITEM entry that excludes patch-host-arrays.cpp
+        kept = [ln for ln in src_lines
+                if not ln.strip().startswith('"${CMAKE_CURRENT_SOURCE_DIR}/patch-host-arrays.cpp"')]
+        # (2) ensure patch-host-arrays.cpp is the FIRST CHAOS_ENTRY_SOURCES source,
+        #     right after runtime-entry.cpp and before runtime-patchdata.cpp.
+        out_lines = []
+        inserted_host = False
+        for ln in kept:
+            stripped = ln.strip()
+            if not inserted_host and stripped.startswith('"runtime-entry.cpp"'):
+                indent = ln[:len(ln) - len(ln.lstrip())]
+                out_lines.append(ln)
+                out_lines.append(f'{indent}    "patch-host-arrays.cpp"\n')
+                inserted_host = True
+            else:
+                out_lines.append(ln)
+        # If runtime-entry.cpp isn't the anchor, prepend at set(CHAOS_ENTRY_SOURCES too.
+        if not inserted_host:
+            out_lines = []
+            for ln in kept:
+                if not inserted_host and ln.strip().startswith("set(CHAOS_ENTRY_SOURCES"):
+                    indent = ln[:len(ln) - len(ln.lstrip())]
+                    out_lines.append(ln)
+                    out_lines.append(f'{indent}    "patch-host-arrays.cpp"\n')
+                    inserted_host = True
+                else:
+                    out_lines.append(ln)
+        out_text = "".join(out_lines)
+        if out_text != cmake_text and inserted_host:
+            cmake_path.write_text(out_text, encoding="utf-8")
+            _patched_cmake = True
+            print(f"  [hotupdate] Patched CMakeLists.txt: patch-host-arrays.cpp linked before runtime-patchdata.cpp")
+        else:
+            _patched_cmake = False
+
+    def _restore_cmake():
+        if cmake_text and _patched_cmake and cmake_path.exists():
+            cmake_path.write_text(cmake_text, encoding="utf-8")
+
+    # Re-configure so the (now un-excluded) file is part of the target.
+    reconf = subprocess.run(
+        [cmake, "-S", str(native_dir), "-B", str(build_dir)],
+        capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
+    if reconf.returncode != 0:
+        for line in (reconf.stderr.splitlines() + reconf.stdout.splitlines())[-5:]:
+            print(f"      {line}")
+        print(f"  [hotupdate] cmake configure FAILED (rc={reconf.returncode})")
+        _restore_cmake()
+        return False
+
     cmd = [cmake, "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "chaos_entry"]
     print(f"  [hotupdate] Incremental rebuild...")
     result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=300)
@@ -285,6 +356,7 @@ def _incremental_rebuild(ctx) -> bool:
         for line in (result.stderr.splitlines() + result.stdout.splitlines())[-5:]:
             print(f"      {line}")
         print(f"  [hotupdate] Rebuild FAILED (rc={result.returncode})")
+        _restore_cmake()
         return False
 
     src = build_dir / "RelWithDebInfo" / "chaos_entry.exe"
@@ -292,8 +364,10 @@ def _incremental_rebuild(ctx) -> bool:
     if src.exists():
         shutil.copy2(src, dst)
         print(f"  [hotupdate] Rebuilt entry.exe: {dst.name} ({src.stat().st_size} bytes)")
+        _restore_cmake()
         return True
     print(f"  [hotupdate] Rebuild completed but entry.exe not found at {src}")
+    _restore_cmake()
     return False
 
 
