@@ -15,7 +15,11 @@ name: Release
 on:
   push:
     tags:
-      - 'v[0-9]+\.[0-9]+\.[0-9]+*'   # v0.1.0, v0.1.0-rc1, etc.
+      # GHA tag filters are GLOB, not regex.  Match only well-formed SemVer tags
+      # (vMAJOR.MINOR.PATCH, optionally a -pre-release suffix), so junk tags like
+      # v0.1.0foo or v0.1.0.4 never trigger a release build.
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'   # v0.1.0, v0.1.0-rc1, etc.
   workflow_dispatch:
     inputs:
       tag:

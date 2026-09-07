@@ -42,22 +42,42 @@ jobs:
               `- Workflow run: ${runUrl}\n` +
               `- Commit: ${sha}\n\n` +
               `A human must triage this. (auto-filed by nightly-notify)`;
-            // Dedup: search for an open issue with the same title prefix
-            const { data: existing } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              per_page: 30,
-            });
-            const hit = existing.find(i => i.title === title);
-            if (hit) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner, repo: context.repo.repo,
-                issue_number: hit.number, body: `Still failing:\n\n${body}`,
+            // Dedup: search ALL open issues (paginated) with the same title prefix.
+            // per_page:100 + pagination avoids the per_page:30 blind spot that
+            // would miss the existing issue when the repo has more open issues
+            // than the page size.
+            let hit = null;
+            let page = 1;
+            const perPage = 100;
+            while (true) {
+              const { data: issues } = await github.rest.issues.listForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'open',
+                per_page: perPage,
+                page,
               });
+              hit = issues.find(i => i.title === title);
+              if (hit || issues.length < perPage) break;
+              page++;
+            }
+            if (hit) {
+              // Update the issue body (rather than appending an endless comment
+              // thread) so the most recent failure state is always visible at
+              // a glance.  Previous failure details are still in the issue's
+              // event history.
+              const updatedBody = body + `\n\n---\n*This is an automated update — previous body has been replaced.*`;
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: hit.number,
+                body: updatedBody,
+              });
+              console.log(`Updated nightly-failure issue #${hit.number} body (not appending comment)`);
             } else {
               await github.rest.issues.create({
                 owner: context.repo.owner, repo: context.repo.repo,
                 title, body,
               });
+              console.log(`Created new nightly-failure issue: ${title}`);
             }

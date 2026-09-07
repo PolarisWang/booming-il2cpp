@@ -221,15 +221,10 @@ TEST_F(YoungCollectorTest, YoungCollectionEmpty) {
     // Empty nursery · bump reset to the start of the active young region.
     EXPECT_EQ(g_young_gen.bump.load(std::memory_order_acquire), nursery_after->begin);
 
-    // Reset the thread-local TLAB so the next NurseryAllocate goes through
-    // TlabClaimFromYoungGen and picks up a fresh TLAB from the current nursery.
-    // GcYoungCollection resets ManagedThread::tlab_start/current/end (line 915-917)
-    // but does NOT clear the thread_local tls_tlab variable itself.  Without this
-    // reset, the next NurseryAllocate may re-use the stale TLAB ranges pointing
-    // into the old (freed/resized) nursery region, causing IsInNursery(p2)=false.
-    tls_tlab = TLAB();
-
-    // A fresh allocation on the reset nursery lands back in the active nursery.
+    // GcYoungCollection() already reset the calling thread's thread_local tls_tlab
+    // (and ManagedThread::tlab_start/current/end for all threads via EnumerateThreads),
+    // so the next NurseryAllocate re-claims a fresh TLAB from the current nursery and
+    // lands back in the active young region.
     void* p2 = NurseryAllocate(64);
     ASSERT_NE(p2, nullptr);
     EXPECT_TRUE(IsInNursery(p2));

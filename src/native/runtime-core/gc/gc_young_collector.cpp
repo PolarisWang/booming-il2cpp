@@ -1019,6 +1019,22 @@ phase3:
     // path instead of only the legacy PromoteNursery entry point.
     GcVerifyPromotedTracked(result);
 
+    // Reset the calling thread's thread_local TLAB so the next NurseryAllocate
+    // goes through the slow path (TlabClaimFromYoungGen) and picks up a fresh
+    // TLAB.  EnumerateThreads above already resets ManagedThread::tlab_* for ALL
+    // threads, but those are the GC's accounting mirror, NOT the thread_local
+    // tls_tlab that NurseryAllocate's bump-pointer fast path actually reads.  The
+    // GC thread cannot write another thread's thread_local, so this only clears
+    // the current (GC-initiating) thread's tls_tlab — which is exactly the thread
+    // that will allocate next on the straightforward young-allocation path that
+    // fired the collection.  A stale tls_tlab on a different thread that was parked
+    // at the safepoint can still point at a freed nursery after an adaptive resize;
+    // that ownership quirk is outside the STW collection body and is handled on the
+    // resumption/allocator side (the region reset replaces g_young_gen.region, and a
+    // subsequent slow-path claim re-validates against the published region).  Keeping
+    // this here removes the need for GC API callers/tests to hand-reset tls_tlab.
+    tls_tlab = TLAB{};
+
     return result;
 }
 

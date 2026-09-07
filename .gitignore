@@ -605,3 +605,5 @@ tests/**/coverage.cobertura.xml
 scripts/debug/tmp_*
 scripts/debug/*.exe
 
+.feishu-*.json
+.chk.json
