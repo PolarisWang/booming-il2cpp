@@ -18,6 +18,13 @@ namespace threading {
     void RegisterAsyncTaskRun() noexcept;
 }
 
+// Forward declarations from thread_pool.cpp
+namespace threading {
+    void ThreadPoolInitialize() noexcept;
+    void ThreadPoolShutdown() noexcept;
+    int32_t ThreadPoolWorkerCount() noexcept;
+}
+
 RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     const RuntimeInitParams* init_params,
     const RuntimeConfig* config,
@@ -65,6 +72,12 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
         BgcController::Instance().Start();
     }
 
+    // Start the native ThreadPool (worker threads, gate thread, hill-climbing).
+    // Must be called after BGC start (worker threads rely on preemptive mode
+    // which requires GC safepoint to be functional) but before any Task.Run
+    // or async continuation that needs the thread pool.
+    threading::ThreadPoolInitialize();
+
     // Start the OS low-memory notification monitor.
     // Non-functional on non-Windows platforms (no-op).
     g_low_memory_monitor.Start();
@@ -94,9 +107,11 @@ void CHAOS_RUNTIME_ABI_CALL RuntimeShutdown(RuntimeState* runtime_state) {
     //   1. BGC controller first — joins BGC concurrent-mark thread + finalizer
     //      thread so they no longer access GC data structures.
     //   2. GC worker pool — joins any parked parallel GC workers.
-    //   3. Then remaining teardown (ETW, low-mem monitor, free state).
+    //   3. Native ThreadPool — joins worker/gate/wakeable threads.
+    //   4. Then remaining teardown (ETW, low-mem monitor, free state).
     BgcController::Instance().Stop();
     GcWorkerPool::Instance().Shutdown();
+    threading::ThreadPoolShutdown();
     DestroyYoungGeneration();
     GcEtwShutdown();
     g_low_memory_monitor.Stop();
