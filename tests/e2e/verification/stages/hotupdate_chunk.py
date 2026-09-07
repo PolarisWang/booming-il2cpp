@@ -12,6 +12,8 @@ from __future__ import annotations
 
 import json
 import os
+import re
+import shutil
 import subprocess
 import sys
 import time
@@ -30,13 +32,35 @@ from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 
 
-# -- BOUNDARY_OVERRIDE: https://github.com/chaos-il2cpp/chaos-il2cpp/issues/PHASE5-HOSTARRAYS --
+# BOUNDARY_OVERRIDE: https://github.com/chaos-il2cpp/chaos-il2cpp/issues/PHASE5-HOSTARRAYS
 # Reason: patch-host-arrays.cpp is regenerated here (Python write_text) after the
 #         pipeline emits the patch DLL, because the exact type/method name list is
 #         only known post-hoc. TPG's BuildHostArrays() covers the ATG-present case;
 #         this post-hoc path exists for the batch/hotupdate flow. Preferred fix: push
 #         the name list back into TPG. Keep until DONE.
-# Expires: 2099-12-31
+# Expires: 2026-12-31
+
+
+class _HostArraysRebuildUnsupported(Exception):
+    """Raised by _incremental_rebuild when the host-array relink is not possible on
+    the current toolchain (non-MSVC).  Callers can distinguish this genuine *skip* from
+    a *failure* (which returns False).  (#2)"""
+
+
+def _msvc_toolchain_available() -> bool:
+    """Whether the MSVC toolchain is actually active for this build.
+
+    The distinct-linking host-array patch relies on MSVC's /FORCE:MULTIPLE
+    (cl.exe/link.exe option).  clang-cl and MinGW also set sys.platform=='win32'
+    yet lack /FORCE:MULTIPLE, so a bare platform check is insufficient (#4)."""
+    if sys.platform != "win32":
+        return False
+    # cl.exe/link.exe on PATH (a 'Developer Prompt' / post-vcvars shell), or MSVC
+    # toolchain exported env vars (VS-imported CMake / msbuild set these).
+    if shutil.which("cl.exe") or shutil.which("link.exe"):
+        return True
+    return any(os.environ.get(v) for v in
+               ("VCToolsInstallDir", "VCINSTALLDIR", "VSINSTALLDIR", "VisualStudioVersion"))
 
 
 def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | None = None) -> bool:
@@ -252,6 +276,34 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> bool:
     return True
 
 
+def _check_build_order(build_output: str, probe: str, must_precede: str) -> bool | None:
+    """Return whether `probe` compiled (in the cmake/msbuild build log) before `must_precede`.
+
+    Because MSVC /FORCE:MULTIPLE keeps the FIRST-compiled duplicate (LNK4006), merely
+    linking both files is insufficient — the *source order* decides which symbol wins.
+    MSBuild (VS generator) prints compilation lines alphabetically-ish per project, so we
+    look at the relative log position of the two *.cpp->*.obj compile steps (#1).
+
+    Returns:
+      * True  — order determined and `probe` comes first (patch symbols win).
+      * False — order determined and `probe` comes after (sentinel wins) → caller must fail.
+      * None  — the build log doesn't let us infer order (non-MSBuild generator / parallel
+                output); caller should fall back to a weaker existence check.
+    """
+    lines = [ln.strip() for ln in build_output.splitlines()]
+    probe_idx = None
+    precede_idx = None
+    for i, ln in enumerate(lines):
+        low = ln.lower()
+        if probe.lower() in low and probe_idx is None:
+            probe_idx = i
+        if must_precede.lower() in low and precede_idx is None:
+            precede_idx = i
+    if probe_idx is None or precede_idx is None:
+        return None
+    return probe_idx < precede_idx
+
+
 def _incremental_rebuild(ctx) -> bool:
     """Incremental cmake rebuild of entry.exe with patch-host-arrays.cpp linked.
 
@@ -265,9 +317,13 @@ def _incremental_rebuild(ctx) -> bool:
     patch file must link before the sentinel.  runtime-patchdata.cpp still supplies
     kPatchData/kPatchDataSize (no duplicate), so it stays in the build — just later.
 
-    Platform note: MSVC /FORCE:MULTIPLE is required for the distinct-linking approach.
-    On non-MSVC toolchains, cross-TU duplicate symbols are a hard error (multiple definition).
-    Non-Windows platforms will return False.
+    Return contract (so the caller can tell *skip* from *failure*, #2):
+      * True  — rebuild succeeded and host arrays are wired.
+      * False — a genuine build/link failure; the stage must report an error to
+                avoid a false-positive pass.
+      * Raises _HostArraysRebuildUnsupported — the current toolchain is not MSVC
+        (cross-TU duplicate symbols are a hard error there; /FORCE:MULTIPLE is a
+        cl.exe/link.exe feature). This is a legitimate SKIP, not a failure.
     """
     build_dir = ctx.chunk_dir / "native" / "build"
     native_dir = ctx.chunk_dir / "native"
@@ -276,14 +332,16 @@ def _incremental_rebuild(ctx) -> bool:
         print(f"  [hotupdate] Cannot rebuild: build dir or source not found")
         return False
 
-    import subprocess, shutil, glob as _glob
+    import glob as _glob
 
-    # Platform check: MSVC /FORCE:MULTIPLE is required for the distinct-linking
-    # approach. On non-MSVC toolchains, cross-TU duplicate symbols are a hard error.
-    if sys.platform != "win32":
-        print(f"  [hotupdate] Non-MSVC platform: incremental rebuild not supported "
-              f"(MSVC /FORCE:MULTIPLE required for duplicate symbol resolution)")
-        return False
+    # MSVC toolchain check (#4): /FORCE:MULTIPLE is a link.exe option required for the
+    # distinct-linking approach.  clang-cl/MinGW report sys.platform=='win32' too but do
+    # NOT provide it, so detect the MSVC toolchain rather than just the OS.
+    if not _msvc_toolchain_available():
+        raise _HostArraysRebuildUnsupported(
+            "MSVC toolchain not detected (cl.exe/link.exe not on PATH, no MSVC env "
+            "markers) — /FORCE:MULTIPLE required for duplicate-symbol host-array "
+            "relink; incremental rebuild unavailable on this toolchain")
 
     # Delete stale .obj to force MSBuild recompilation
     obj_pattern = str(build_dir / "chaos_entry.dir" / "RelWithDebInfo" / "patch-host-arra*")
@@ -309,7 +367,7 @@ def _incremental_rebuild(ctx) -> bool:
     #         — the CMake template is generated by TPG and any structural change to it
     #         will silently break the insert logic. Preferred fix: move the reordering
     #         into the TPG template generator.
-    # Expires: 2099-12-31
+    # Expires: 2026-12-31
     try:
         cmake_text = cmake_path.read_text(encoding="utf-8", errors="replace")
     except OSError:
@@ -330,35 +388,40 @@ def _incremental_rebuild(ctx) -> bool:
             print(f"  [hotupdate] ERROR: Cannot read {cmake_path.name} — cannot wire "
                   f"patch-host-arrays.cpp link; aborting to avoid false-positive pass.")
             return False
-        if cmake_text:
-            src_lines = cmake_text.splitlines(keepends=True)
-            # (1) drop the REMOVE_ITEM entry that excludes patch-host-arrays.cpp
-            kept = [ln for ln in src_lines
-                    if not ln.strip().startswith('"${CMAKE_CURRENT_SOURCE_DIR}/patch-host-arrays.cpp"')]
-            # (2) ensure patch-host-arrays.cpp is the FIRST CHAOS_ENTRY_SOURCES source,
-            #     right after runtime-entry.cpp and before runtime-patchdata.cpp.
+
+        src_lines = cmake_text.splitlines(keepends=True)
+        # (1) drop the REMOVE_ITEM entry that excludes patch-host-arrays.cpp.
+        #     Both "${CMAKE_CURRENT_SOURCE_DIR}/patch-host-arrays.cpp" and the bare
+        #     "patch-host-arrays.cpp" form are matched (they may appear in the generated
+        #     CMakeLists.txt depending on the Scriban template version, #11).
+        _patch_cpp_bare = "patch-host-arrays.cpp"
+        kept = [ln for ln in src_lines
+                if not re.search(r'"' + re.escape(_patch_cpp_bare) + r'"', ln.strip())]
+        # (2) ensure patch-host-arrays.cpp is the FIRST CHAOS_ENTRY_SOURCES source,
+        #     right after runtime-entry.cpp and before runtime-patchdata.cpp.
+        _insert_line = f'"{_patch_cpp_bare}"'
+        out_lines = []
+        inserted_host = False
+        for ln in kept:
+            stripped = ln.strip()
+            if not inserted_host and stripped.startswith('"runtime-entry.cpp"'):
+                indent = ln[:len(ln) - len(ln.lstrip())]
+                out_lines.append(ln)
+                out_lines.append(f'{indent}    {_insert_line}\n')
+                inserted_host = True
+            else:
+                out_lines.append(ln)
+        # If runtime-entry.cpp isn't the anchor, prepend at set(CHAOS_ENTRY_SOURCES too.
+        if not inserted_host:
             out_lines = []
-            inserted_host = False
             for ln in kept:
-                stripped = ln.strip()
-                if not inserted_host and stripped.startswith('"runtime-entry.cpp"'):
+                if not inserted_host and ln.strip().startswith("set(CHAOS_ENTRY_SOURCES"):
                     indent = ln[:len(ln) - len(ln.lstrip())]
                     out_lines.append(ln)
-                    out_lines.append(f'{indent}    "patch-host-arrays.cpp"\n')
+                    out_lines.append(f'{indent}    {_insert_line}\n')
                     inserted_host = True
                 else:
                     out_lines.append(ln)
-            # If runtime-entry.cpp isn't the anchor, prepend at set(CHAOS_ENTRY_SOURCES too.
-            if not inserted_host:
-                out_lines = []
-                for ln in kept:
-                    if not inserted_host and ln.strip().startswith("set(CHAOS_ENTRY_SOURCES"):
-                        indent = ln[:len(ln) - len(ln.lstrip())]
-                        out_lines.append(ln)
-                        out_lines.append(f'{indent}    "patch-host-arrays.cpp"\n')
-                        inserted_host = True
-                    else:
-                        out_lines.append(ln)
             if not inserted_host:
                 _anchor_found = False
                 print(f"  [hotupdate] WARNING: Could not find anchor in CMakeLists.txt "
@@ -399,17 +462,27 @@ def _incremental_rebuild(ctx) -> bool:
         src = build_dir / "RelWithDebInfo" / "chaos_entry.exe"
         dst = ctx.chunk_dir / "native" / "entry.exe"
         if src.exists():
-            # Verify patch-host-arrays.cpp was actually linked (not sentinel) (#1)
+            # Verify actual link order (#1): the build output should show the compilation order
+            # of source files.  If patch-host-arrays.cpp compiles AFTER runtime-patchdata.cpp,
+            # /FORCE:MULTIPLE keeps the sentinel symbols (0 patches) and the rebuild is a
+            # false-positive pass.  If the build output does not contain the compilation order
+            # (non-MSBuild generators), fall back to the .obj existence check.
             if not _patched_cmake:
-                print(f"  [hotupdate] WARNING: CMakeLists.txt patch was not applied — "
-                      f"entry.exe may contain sentinel (0 patches). "
-                      f"Verifying patch-host-arra*.obj exists...")
-                fresh_objs = _glob.glob(str(build_dir / "chaos_entry.dir" / "RelWithDebInfo" / "patch-host-arra*"))
-                if not fresh_objs:
-                    print(f"  [hotupdate] ERROR: No patch-host-arra*.obj found after rebuild — "
-                          f"patch was NOT linked. Returning failure to avoid false-positive pass.")
+                build_output = (result.stdout or "") + (result.stderr or "")
+                _order_ok = _check_build_order(build_output, "patch-host-arrays.cpp", "runtime-patchdata.cpp")
+                if _order_ok is False:
+                    print(f"  [hotupdate] ERROR: patch-host-arrays.cpp compiled AFTER "
+                          f"runtime-patchdata.cpp — /FORCE:MULTIPLE keeps the first "
+                          f"(sentinel). Returning failure to avoid false-positive pass.")
                     return False
-                print(f"  [hotupdate] patch-host-arra*.obj found, patch linked.")
+                if _order_ok is None:
+                    # Build output didn't show compilation order — fall back to .obj existence
+                    fresh_objs = _glob.glob(str(build_dir / "chaos_entry.dir" / "RelWithDebInfo" / "patch-host-arra*"))
+                    if not fresh_objs:
+                        print(f"  [hotupdate] ERROR: No patch-host-arra*.obj found after rebuild — "
+                              f"patch was NOT linked. Returning failure to avoid false-positive pass.")
+                        return False
+                    print(f"  [hotupdate] patch-host-arra*.obj found, patch linked (order undetermined).")
             shutil.copy2(src, dst)
             print(f"  [hotupdate] Rebuilt entry.exe: {dst.name} ({src.stat().st_size} bytes)")
             return True
@@ -606,7 +679,20 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
                         "will be applied (would risk a false-positive no-op pass); check "
                         "native-aot.generated.cpp parse / name mapping",
                 duration_ms=int((time.perf_counter() - start) * 1000))
-        if not _incremental_rebuild(ctx):
+        try:
+            rebuild_ok = _incremental_rebuild(ctx)
+        except _HostArraysRebuildUnsupported as exc:
+            # Toolchain can't do the MSVC /FORCE:MULTIPLE distinct-link needed to
+            # activate patch host arrays. This is a *skip*, not a failure (#2): the
+            # stage is not supported on this toolchain, so return skipped rather than
+            # reporting a false error.
+            print(f"  [hotupdate] Host-array incremental rebuild skipped: {exc}")
+            return StageResult(
+                stage="hotupdate", status="skipped",
+                summary=f"skipped: host-array incremental rebuild not supported on this "
+                        f"toolchain ({exc})",
+                duration_ms=int((time.perf_counter() - start) * 1000))
+        if not rebuild_ok:
             return StageResult(
                 stage="hotupdate", status="error",
                 summary="incremental rebuild failed after host-array regen — stale executable "

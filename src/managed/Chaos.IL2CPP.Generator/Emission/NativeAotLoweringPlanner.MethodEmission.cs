@@ -229,16 +229,23 @@ public sealed partial class NativeAotLoweringPlanner
                 builder.AppendLine("}");
                 return;
             }
-            AsyncCoroutineMethodCount++;
+            AsyncStateMachineCount++;
             // Phase 2 translator (ASYNC-P2-1): non-complex async state machine MoveNext.
             // MoveNext is a value-this instance method on the >d__ struct.  Emit it via
             // the normal structured IR path — the >d__ struct fields are picked up by
             // ObjectModelEmission (field scanning handles ValueType-declared fields),
             // and the MoveNext body (switch(state), stfld/ldfld, call, EH) is handled
             // by the standard structured emission + linear emission.
-            // Builder/awaiter call resolution (SetResult → async_task_builder_set_result_raw,
-            // AwaitUnsafeOnCompleted → awaiter mapping) is Phase 2 segment B.
-            // Fall through to normal emission below.
+            // NOTE (ASYNC-P2-1): Builder/awaiter call resolution
+            // (SetResult → async_task_builder_set_result_raw,
+            // AwaitUnsafeOnCompleted → awaiter mapping) is Phase 2 segment B
+            // (deferred). When segment B is implemented, add a
+            // CHAOS_STATIC_ASSERT or #error in the generated C++ at the
+            // emission site to prevent silent misbehavior if the mapping
+            // is incomplete. Without this guard, unresolved builder/awaiter
+            // calls pass through to the standard structured emitter which
+            // may produce incorrect C++ (e.g., calling SetResult on a raw
+            // pointer instead of the native builder helper).
         }
         IReadOnlyList<AotCoreIrInstructionArtifact> instructions = method.Instructions;
 

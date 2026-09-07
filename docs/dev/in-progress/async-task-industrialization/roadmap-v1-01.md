@@ -152,11 +152,11 @@ Phase 2（状态机翻译引擎）— 依赖 Phase 1
   │
   ├──▶ Phase 3（组合子语义）— 依赖 Phase 2
   │       │
-  │       └──▶ Phase 5（性能优化）— 依赖 Phase 2+3（传递依赖 Phase 1+2）
+  │       └──▶ Phase 5（性能优化）— 依赖 Phase 2+3
   │
-  ├──▶ Phase 4（Parallel）— 依赖 Phase 1，与 Phase 2 并行（传递依赖 Phase 1）
+  ├──▶ Phase 4（Parallel）— 依赖 Phase 1，与 Phase 2 并行
   │
-  └──▶ Phase 6（验证覆盖）— 依赖 Phase 2+3+4（传递依赖 Phase 1+2+3+4，关键链最长）
+  └──▶ Phase 6（验证覆盖）— 依赖 Phase 2+3+4
 ```
 
 > 注：Phase 6 传递依赖 Phase 2+3+4，而 Phase 4 仅依赖 Phase 1，Phase 3 依赖 Phase 2，因此 Phase 6 的关键链 = Phase 1 → Phase 2 → Phase 3 → Phase 6（最长）。Phase 4 与 Phase 2 并行（两者均依赖 Phase 1 完成后可同时启动）缩短了总工期，但 Phase 6 仍需等待 Phase 3 和 Phase 4 都完成。

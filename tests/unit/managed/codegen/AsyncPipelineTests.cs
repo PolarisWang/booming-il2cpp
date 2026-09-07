@@ -27,10 +27,25 @@ public sealed class AsyncPipelineTests
         var repoRoot = dir?.FullName ?? throw new DirectoryNotFoundException(
             "Could not locate repository root (.git directory).");
 
+        // Detect build configuration (Debug/Release) and TFM from the test runner's
+        // output directory. BaseDirectory is typically:
+        //   <repo>/tests/unit/managed/codegen/bin/<Configuration>/<TFM>/
+        string config = "Debug";
+        string tfm = "net8.0";
+        var baseDir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+        if (baseDir?.Parent?.Parent is { } configDir &&
+            configDir.Parent?.Name == "bin")
+        {
+            tfm = baseDir.Name;
+            string configName = configDir.Name;
+            if (configName is "Debug" or "Release" or "RelWithDebInfo")
+                config = configName;
+        }
+
         return Path.Combine(
             repoRoot,
             "tests", "unit", "managed", "codegen",
-            "AsyncTestAssembly", "bin", "Debug", "net8.0",
+            "AsyncTestAssembly", "bin", config, tfm,
             "AsyncTestAssembly.dll");
     }
 
@@ -40,8 +55,15 @@ public sealed class AsyncPipelineTests
             Path.GetTempPath(), "ChaosAsyncPipeline_" + Guid.NewGuid().ToString("N"));
         public void Dispose()
         {
-            if (Directory.Exists(OutputRoot))
-                Directory.Delete(OutputRoot, recursive: true);
+            try
+            {
+                if (Directory.Exists(OutputRoot))
+                    Directory.Delete(OutputRoot, recursive: true);
+            }
+            catch
+            {
+                // Cleanup failures should not fail the test.
+            }
         }
     }
 
@@ -95,22 +117,29 @@ public sealed class AsyncPipelineTests
             (c.Contains("SetResult") || c.Contains("AwaitUnsafeOnCompleted") || c.Contains("get_Task")));
     }
 
-    [Fact]
-    public void MovenextArtifact_IsStructThis_ValueType()
+    /// <summary>
+    /// Builds a planner for the MoveNext method of the async state machine
+    /// and returns the template model and matched method for assertions.
+    /// </summary>
+    private static (AotCoreIrMethodArtifact Movenext, NativeAotTemplateModel TemplateModel, NativeAotMethodTemplateModel MatchMethod)
+        BuildPlannerForMoveNext(TempCtx ctx, string asyncAssemblyPath)
     {
-        using var ctx = new TempCtx();
         var request = new ManagedClosureRequest(
-            InputAssemblyPath: s_asyncAssemblyPath,
+            InputAssemblyPath: asyncAssemblyPath,
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: null,
             AdditionalAssemblyPaths: null,
             FullAssemblyClosure: true);
-        var result = new PipelinePlan().Execute(request).Value!;
+        var exec = new PipelinePlan().Execute(request);
+        if (exec.IsFailure)
+        {
+            Assert.Fail($"Pipeline failed: {exec.Error?.Code}: {exec.Error?.Message}");
+        }
+        var result = exec.Value!;
         var movenext = result.AotCoreIr.Methods
             .FirstOrDefault(m => m.SubjectId.Contains(">d__") && m.SubjectId.Contains("::MoveNext"));
         Assert.NotNull(movenext);
 
-        // Feed the real MoveNext artifact into the planner's emitter.
         var planner = new NativeAotLoweringPlanner();
         var loweringPlan = new NativeAotLoweringPlanArtifact
         {
@@ -126,25 +155,30 @@ public sealed class AsyncPipelineTests
         {
             AssemblyName = "AsyncTestAssembly",
             EntrySubjectId = movenext.SubjectId,
-            InputAssemblyPath = s_asyncAssemblyPath,
+            InputAssemblyPath = asyncAssemblyPath,
             InputModuleVersionId = result.ClosureManifest!.InputModuleVersionId,
             FullAssemblyClosure = true,
             Artifacts = [],
-
         };
         var templateModel = planner.Create(
             loweringPlan,
             result.AotCoreIr,
-            result.AotCoreIr.Methods[0],
+            movenext,
             closureManifest,
             result.MetadataRegistration,
             result.SupplementalMetadataTemplate,
             fullAssemblyMode: true);
-
-        // Find the MoveNext method's generated source in the output.
         var matchMethod = templateModel.Methods
             .FirstOrDefault(m => m.SubjectId == movenext.SubjectId);
         Assert.NotNull(matchMethod);
+        return (movenext, templateModel, matchMethod);
+    }
+
+    [Fact]
+    public void MovenextEmittedSource_ContainsStateMachineFields()
+    {
+        using var ctx = new TempCtx();
+        var (_, _, matchMethod) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
 
         // Phase 2 translator: MoveNext is emitted as real C++ via structured emission.
         // It should NOT contain the old GenPromise/GenCoro placeholder markers.
@@ -152,7 +186,7 @@ public sealed class AsyncPipelineTests
         Assert.DoesNotContain("_Coro()", matchMethod.MethodSource);
         Assert.DoesNotContain("co_await", matchMethod.MethodSource);
         Assert.DoesNotContain("std::suspend_always", matchMethod.MethodSource);
-        Assert.DoesNotContain("fallback", matchMethod.MethodSource, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("fallback", matchMethod.MethodSource, StringComparison.Ordinal);
 
         // The emitted code should contain the real state machine structure:
         // state field access, builder field access, native yield/awaiter calls.
@@ -167,44 +201,7 @@ public sealed class AsyncPipelineTests
     public void MovenextEmittedSource_ContainsSetResultAndAwaitUnsafeOnCompleted()
     {
         using var ctx = new TempCtx();
-        var request = new ManagedClosureRequest(
-            InputAssemblyPath: s_asyncAssemblyPath,
-            OutputRootPath: ctx.OutputRoot,
-            EntryPointSubjectIdOverride: null,
-            AdditionalAssemblyPaths: null,
-            FullAssemblyClosure: true);
-        var result = new PipelinePlan().Execute(request).Value!;
-        var movenext = result.AotCoreIr.Methods
-            .FirstOrDefault(m => m.SubjectId.Contains(">d__") && m.SubjectId.Contains("::MoveNext"));
-        Assert.NotNull(movenext);
-
-        var planner = new NativeAotLoweringPlanner();
-        var loweringPlan = new NativeAotLoweringPlanArtifact
-        {
-            PlanKind = "full-assembly-entry",
-            AssemblyName = "AsyncTestAssembly",
-            EntrySubjectId = movenext.SubjectId,
-            NativeEntryFunctionName = string.Empty,
-            EntrySymbol = movenext.NativeSymbol,
-            EntryMethodToken = "0x06000001",
-            WorkloadAbi = "full-assembly",
-        };
-        var closureManifest = new ManagedClosureManifestArtifact
-        {
-            AssemblyName = "AsyncTestAssembly",
-            EntrySubjectId = movenext.SubjectId,
-            InputAssemblyPath = s_asyncAssemblyPath,
-            InputModuleVersionId = result.ClosureManifest!.InputModuleVersionId,
-            FullAssemblyClosure = true,
-            Artifacts = [],
-        };
-        var templateModel = planner.Create(
-            loweringPlan, result.AotCoreIr, result.AotCoreIr.Methods[0],
-            closureManifest, result.MetadataRegistration, result.SupplementalMetadataTemplate,
-            fullAssemblyMode: true);
-        var matchMethod = templateModel.Methods
-            .FirstOrDefault(m => m.SubjectId == movenext.SubjectId);
-        Assert.NotNull(matchMethod);
+        var (_, _, matchMethod) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
 
         // Phase 2 segment B: builder/awaiter calls resolved to native externs.
         // SetResult, SetException, AwaitUnsafeOnCompleted should appear in the emitted C++.

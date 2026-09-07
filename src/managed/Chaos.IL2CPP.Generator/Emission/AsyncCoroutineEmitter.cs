@@ -27,7 +27,13 @@ public sealed partial class NativeAotLoweringPlanner
         return AsyncMethodKind.AsyncTask;
     }
     internal int AsyncMethodCount;
-    internal int AsyncCoroutineMethodCount;
+    /// <summary>
+    /// Count of non-complex async state machine MoveNext methods emitted via the
+    /// normal structured IR path (not via GenPromise/GenCoro). Historical name
+    /// "AsyncCoroutine" is misleading — these state machines no longer map to
+    /// C++20 <c>co_await</c> coroutines.
+    /// </summary>
+    internal int AsyncStateMachineCount;
     internal int AsyncInterpreterFallbackCount;
 
     private StructuredIRNode? BuildAsyncStructuredBody(AotCoreIrMethodArtifact m)

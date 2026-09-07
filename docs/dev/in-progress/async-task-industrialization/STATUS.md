@@ -162,8 +162,9 @@ Codegen emission 单测/文字断言的最高保真基座 = AsyncPipelineTests(�
 * emit 决策复用(不重写): `EmitManagedMethod` 共享主路径;body 内的 stfld/ldfld value-this
   走 `chaos_resolve_managed_value_pointer`,`call AsyncTaskMethodBuilder::SetResult/
   AwaitUnsafeOnCompleted/* async_yield_get_*` 等已被**既有 LinearEmitCall/ExternalRuntime
-  helper resolution** 解析为 C++ extern。无需新 segment-B resolver —— 现有 catalog/未注册
-  但 `chaos_external_runtime_...` + async_yield_* 路径已 cover。
+  helper resolution** 解析为 C++ extern。当前 catalog 已能解析这些符号为 extern 声明（C++ 编译
+  通过），但 symbol 尚未在运行时注册表中登记（运行时链接阶段可能解析失败 —— 此属 R1 范围）。无需
+  新 segment-B resolver。`chaos_external_runtime_...` + async_yield_* 路径已 cover。
 * AsyncPipelineTests 两 emission 断言(用 real 全管线 artifacts + NativeAotLoweringPlanner
   Create 生 MoveNext 函数源)。
 
@@ -178,13 +179,23 @@ extern "C" void ...MoveNext(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) {  // async_yiel
 ```
 不再空壳。segment-B call 已真解析到 native(dataset:await 挂起/续列重入在 MoveNext 源码里
 经 get_is_completed==0 分支写 state 并交给 ThreadPool 续列——但 **codegen 未发显式
-cheduler/continuation 注册**:当前产出只是把 await 当"get_is_completed 为真才继续,否则返回"
+scheduler/continuation 注册**:当前产出只是把 await 当"get_is_completed 为真才继续,否则返回"
 的表达;真正 resume 注册(spike 的 awaiter.UnsafeOnCompleted→async_task_on_completed/
 ThreadPool re-MoveNext)是 Step 5 需要接的 native 半边,见下)。
+
+> **两层语义澄清**（文本层已解析 ≠ 运行时语义完整）:上述"解析到 native / 无显式注册"并不矛盾
+> —— extern 调用仅保证 C++ 编译通过（call 语句能落成合法 extern 声明并 emitted），真正
+> 挂起→续列重入的注册语义（MoveNext 何时/如何被 ThreadPool 重新拉起）依赖 R1 的
+> continuation_cb 注册,未在本 session 落地。
 
 回归门:codegen 单元 1986/1986 green(含 98 stub emission/shape 测试);snapshot
 88-fixture **pre-existing 已挂 85**(与本次改动无关 —— clean baseline 也挂,待 repo-cleanliness
 track)。Driver.cs async 已 revert;AsyncTestAssembly 是 async subject 唯一 home。
+
+**关键门复现命令**：
+- codegen 单元(回归门): `dotnet test tests/unit/managed/codegen/Chaos.IL2CPP.CodeGen.Tests.csproj`
+- snapshot(88-fixture 预挂的已知门): `dotnet test tests/unit/managed/snapshot/Chaos.IL2CPP.CodeGen.SnapshotTests.csproj` (经统一入口 = `python tests/runner/test_driver.py --layer unit --group snapshot`)
+- async_integration_smoke(native CTest): `tests/unit/runtime-native/runtime-core/threading/async_integration_smoke_test.cpp`
 
 ### REMAIN（Step 4-5 及残余,续做入口）
 Step 3 输出已把 `MoveNext` 体真发射 + builder/awaiter call 解析到 native,已达"段 A+B 的

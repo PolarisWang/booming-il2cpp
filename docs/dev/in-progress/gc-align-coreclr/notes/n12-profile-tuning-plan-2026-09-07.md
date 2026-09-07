@@ -82,8 +82,8 @@ N12 的目标是"用真实负载采集 GC profile 数据 → 驱动 GC 参数（
 
 ## 七、给用户的判断点
 
-1. **路径选 A 还是 B？** A 快、部分语义；B 完整、重。
-2. **若走 B**：是否接受一个专门的 foundation-dll 测试 family/chunk 只承载高分配 subject（避免污染现有真实 family 的 fact/coverage），代价是多一份构建。
+1. **路径已选 A**（已实现，见同目录下 n12-tuning-results-2026-09-07.md）。A 快、部分语义；B 完整、重。
+2. **B 未选**（当时若走 B）:是否接受一个专门的 foundation-dll 测试 family/chunk 只承载高分配 subject（避免污染现有真实 family 的 fact/coverage），代价是多一份构建——现因取 A 而不适用，留档备查。
 3. **范围**：仅"产出推荐默认值 + 量化报告"是否够，还是需要把推荐写死进运行时默认配置（后者我会谨慎，需你明确授权，因改默认影响全体进程 GC 行为）。
 
 ---

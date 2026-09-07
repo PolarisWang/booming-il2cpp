@@ -43,6 +43,8 @@ clearance_confirmed_by_user: true
   - **关于 -9% 的局限性**：此结论仅基于单一 native 负载（`AllocationDrivenYoungGc`，非方法级 AOT profile），且计划中自定的成功判据（"有 >10 方法在 profile 下 `gcPauseNs > 0`"）**实际未满足**。结果量级仍在一位数（-9%），spread 可能接近 run-to-run 噪声。不应视为已达成终态的证据，而是初步指导方向（#7）。
   - **推荐参数（Gen1MinPromotionAge=4）尚未固化进运行时默认值**：当前仅通过 `CHAOS_GC_Gen1MinPromotionAge=4` env 注入生效，是否写入运行时默认值待拍板（#9）。
 
+> **注释图例**：#N（此处 #16 / #7 / #9）指代上方对 GC-N12 收尾复核时对应序号的审查意见——#7 → “-9% 非终态证据”的局限声明，#16 → 显式 force-GC 基准与本自然触发推荐不可直接对比，#9 → 推荐值尚未固化为默认的待拍板项。原文以路径/相对描述给出结论，前缀编号对应本轮 review 反馈条目。
+
 ## ✅ Roadmap 全部完成（2026-09-07）
 
 **GC 工业化三批次 12 个子任务全部达成终态**：
