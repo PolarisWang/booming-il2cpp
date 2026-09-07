@@ -13,3 +13,6 @@ latest_stop_point: GC 工业化三批次 12 子任务全部达成；N12 参数�
 ## ✅ 已完成 — GC 工业化 roadmap 全部终态
 
 **12/12 子任务全部完成**，无阻塞项。无需下一步。
+
+**残余确认**：
+- GC-N6-发现3（typed young-GC 无限循环挂起）：`94d8d98c0`（Gen1 relocation of external refs — mode3 content UAF）+ `200c7dd88`（instance_size==0 guard）已在 HEAD 上，notes 确认不再复现（8/8 完成）。**已解决，无残余**。详见 STATUS.md §2026-08-28 P0 批次复核。

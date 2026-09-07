@@ -107,3 +107,55 @@ P2-1 正确入口(最小可验证翻译器)：
 警告：AsyncCoroutineEmitter/MethodEmission 是 Multi-session 增量built，
 替换须在清醒完整会话谨慎做，避免在状态机 IL → C++ 翻译误埋 latent 错。
 Phase 1 infra (ThreadPool/续列/EC) 已真落地可用，是 P2-1 的稳固地基。
+
+## 执行进度（2026-09-07 会话 2 续）
+
+### ASYNC-P2-1 前导：真实 async subject + 全管线提取 ✅ committed `f04d4af34`
+用户拍板 scope=段 A+B 一次做、基座=**真实 async subject + 完整翻译管线**(非手搓 synthetic)。
+达成的第一可交付：**现有基础内并无任何真实 async C# subject**，故先建真实 subject 源 + 用真管线提取。
+
+* `tests/unit/managed/codegen/AsyncTestAssembly/{AsyncMethods.cs,AsyncTestAssembly.csproj}`:
+  含 `async Task<int> GetOne()`(await Task.Yield+return 1)与 `async Task DoVoid()`，
+  编译产真 `<GetOne>d__0::MoveNext` / `<DoVoid>d__0::MoveNext` value-type 状态机。
+* `tests/unit/managed/codegen/AsyncPipelineTests.cs`: 用 `new PipelinePlan().Execute()`(
+  FullAssemblyClosure) 驱动 **Loader→SemanticWorld→Linker→MetadataWriter→CodeGenStage**
+  全管线对该 dll 提取 → **PASSED**。断言:subject surface 出 `AsyncMethods::GetOne` +
+  `>d__::MoveNext`,且 MoveNext body 的 callee 含 `AsyncTaskMethodBuilder`(SetResult /
+  AwaitUnsafeOnCompleted / get_Task)。
+* `Chaos.IL2CPP.CodeGen.Tests.csproj` 加 `AsyncTestAssembly.csproj` ProjectReference
+  (ReferenceOutputAssembly=false 仿 StubAssembly)。异质 dll `bin/Debug/net8.0/AsyncTestAssembly.dll`。
+* Driver.cs(snapshot FixtureAssembly)那处 async 尝试**已 revert** —— snapshot 88-fixture 是
+  手写 aot-core-ir.json,不经真提取;AsyncTestAssembly 才是真提取主体,避免污染共享 snapshot。
+
+→ **结论(根因定版)**: 真 async 经全管线确实能让 `>d__::MoveNext` 进 AOT core IR 且带
+builder/awaiter callee;管线能承载、不跳过 compiler-generated 类型。TDD 基座可用。
+
+### Step 2 设计要点(权威,续做前必读)
+真实 `MoveNext` = 值类型 `>d__` 上的实例方法,IL 含:
+- `ldfld/stfld <>1__state (int)`
+- `ldflda/ldfld <>t__builder` — `AsyncTaskMethodBuilder<int>` value 字段(嵌套 struct)
+- `call builder.AwaitUnsafeOnCompleted<YieldAwaiter,d__>(ref awaiter, ref this)`
+- `call builder.SetResult` / `SetException`(SetException 在 catch 区)
+- **EH : `try{...} catch { builder.SetException}`** + state machine switch(brfalse/branch)
+
+发射器未变(MethodEmission.cs:206-254)前,该 MoveNext 走的是:
+- `IsAsyncStateMachineMoveNext` → `ClassifyAsyncMethod`
+- 非 Complex → `AsyncCoroutineMethodCount++; GenPromise+GenCoro(c++20 co_return 假 coroutine)`+NativeSymbol wrapper。
+  GenCoro **丢弃 abody**,不执行真 IL → 状态机不真跑。
+
+改造落点(MethodEmission.cs:206-263 async 分支):把非-Complex 从 `GenPromise/GenCoro` 改为
+**值类型 struct-this 结构化发射** —— 复用现有 lower path:
+- struct: 由 ObjectModelEmission 发 `struct chaos_valuetype_...>d__N { field_<>1__state int / field_<>t__builder b / ... }`
+  (需 `>d__` 进 `valueTypeSubjectIds`+`_fieldsByDeclaringType`;ObjectModel 的 field 扫描在
+  reachableMethods 上独立于 method emission,见 ObjectModelEmission.cs:280-304 已含 Field
+  TargetReference → ValueType 判定 → 加 declaring type)
+- MoveNext body: 走 Emit 普通 value-this(ldarg.0 / stfld value / EH 异常体 → native builder.SetException)。
+- 段 B: 在其 body 里把 `call builder.SetResult/GetTask/AwaitUnsafeOnCompleted` resolve 到
+  async.h native extern(SetResult/GetResult/is_completed 已有;Start/AwaitUnsafeOnCompleted 待加)。
+
+风险/顺序护栏:优先无 EH、无真挂起(单 await 恒完成)最简样例先绿,再叠 EH SetException 与
+resume 语义;理由与 roadmap `watch_items`(异常传播) 一致。真 MoveNext 的 EH 区域让"一步到位
+value-this 发射"最难,故先走最简。
+Codegen emission 单测/文字断言的最高保真基座 = AsyncPipelineTests(全管线提取)+ 对该
+`>d__::MoveNext` artifact 的 emission 文字断言;`SNAPSHOT_UPDATE` 风格全发射可后续再铺。
+

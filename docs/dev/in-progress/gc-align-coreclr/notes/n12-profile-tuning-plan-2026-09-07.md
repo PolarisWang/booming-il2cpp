@@ -1,6 +1,6 @@
 # GC-N12 Profile 驱动调参 — 完整方案（供判断）
 
-> 日期：2026-09-07 | 状态：方案待用户拍板 | 类别：跨域专项（GC + codegen + test-governance + profile pipeline）
+> 日期：2026-09-07 | 状态：**方案已实现为 AllocationDrivenYoungGc + 参数扫描，推荐 Gen1MinPromotionAge=4（推荐值是否固化默认待拍板）** — 本文件为方案设计原始文档，最终状态以 STATUS.md 为准（见 §八隔离承诺：推荐值未进生产默认） | 类别：跨域专项（GC + codegen + test-governance + profile pipeline）
 
 ## 一、问题（为什么需要这个专项）
 
@@ -8,7 +8,7 @@ N12 的目标是"用真实负载采集 GC profile 数据 → 驱动 GC 参数（
 
 **阻碍**：现有 `entry.exe --profile` 逐方法测量时**只测 1 次 managed 调用**，且所有 subject 输入都是 `default(T)` / `Empty<T>()` 空值 → 单次调用分配量 0~几百字节 → **GC 从不触发** → 所有方法 `gcPauseNs = 0`。
 
-历史证据：profile-range 扫 `System.Collections.NonGeneric` 得 **109 方法仅 7 个分配、共 271B**。
+历史证据：profile-range 扫 `System.Collections.NonGeneric` 得 **109 方法仅 7 个分配、共 271B**（注：此数据为全集累计 —— 109 个被测方法中仅 7 个方法产生了非零分配，总计 271 字节；非每方法平均值。该数据来自基础 profile 扫描，不是本会话的调参负载测量，与本 N12 方案结论的关联性为间接参考）。
 
 **本会话已实测的第二个阻碍**（native 层 `test_gc_throughput_benchmark`）：每个参数点（nursery 1-64MB、trigger 1-4x、promotion age 1-12）跑出的 young-GC P50 都在 **61-88us 内窄幅波动**，spread 小于 run-to-run 噪声。原因：该 benchmark **显式调 `GcYoungCollection()` 强制 GC**，pause 由强制收集本身主导，参数差异被掩盖。
 

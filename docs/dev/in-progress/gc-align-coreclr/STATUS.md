@@ -32,14 +32,16 @@ clearance_confirmed_by_user: true
 | Phase 6 | GC-L1/L2 | ⬜ 纳入 v2 Phase 8 (M6/M3B) |
 | Phase 7-9 | GC-M1..M15（v2 功能对齐） | ⬜ M1 部分完成（regen link-ready），M2 已建测试暴露疑点后闭环 |
 | **Phase 10（批次 1）** | GC-N1..N4（P0 护网闭合） | ✅ GC-N1/N3/N4 已提交；GC-N2 由并行线承接 |
-| **Phase 11（批次 2）** | GC-N5..N8（P1 工程闭环） | 🔄 GC-N5 ✅；GC-N6 发现 2 缺陷（屏障 `ef0012d49` 已修，gen1↔old-gen 重叠专项）；**GC-N7 2 真bug `904114c3d`；GC-N8 完成 `bf1b83503`+`048b9f15c`**（残余堆破坏待真机 page-heap，阻塞 GC-N8<5%量化） |
-| **Phase 12（批次 3）** | GC-N9..N12（P2 能力拉平） | ✅ GC-N10 `202c62f22`、GC-N11 `d35d78dcd`、GC-N9 `a77aff4dd`、GC-N8（Release 基准 `d66170c92`）全部完成；**GC-N12 参数扫描完成 → 推荐 `Gen1MinPromotionAge=4`** |
+| **Phase 11（批次 2）** | GC-N5..N8（P1 工程闭环） | ✅ GC-N5 ✅（`ef0012d49`）；GC-N6 发现 2 缺陷已修（屏障 `ef0012d49`，gen1↔old-gen 重叠已闭合）；GC-N7 2 真bug `904114c3d` 已修；GC-N8 ✅ `bf1b83503`+`048b9f15c`+Release `d66170c92`。~~残余堆破坏待 page-heap~~ 🔴 已撤销（见下方 2026-09-07 复核：真机 7/7 green，page-heap 不再必要）|
+| **Phase 12（批次 3）** | GC-N9..N12（P2 能力拉平） | ✅ GC-N10 `202c62f22`、GC-N11 `d35d78dcd`、GC-N9 `a77aff4dd`、GC-N8（Release 基准 `d66170c92`）全部完成；**GC-N12 参数扫描完成 → 推荐 `Gen1MinPromotionAge=4`**（待拍板是否固化默认，见下）|
 
 **批次 3 runtime 收尾复核（2026-09-07）**：N9/N10/N11 已验 runtime（见上）。**GC-N8 Release 基准已产出**：
 - `test_gc_throughput_benchmark` RelWithDebInfo：NurseryAllocate **29 ns/obj**、OldGenAllocate **97 ns/obj**、YoungGcPause avg **108us** (min 56us / max 239us)、BGC 并发延迟 **44ns idle / 44ns mark (1.0x)**。
-- 已记录 baseline 至 `tests/runner/baselines/gc.perf.yaml`（`young_gc_wks` P50=75us / P95=239us / P99=239us, `gc_throughput_benchmark` ~0.3s, `allocation_bump` ~34.5M ops/s）。
+- 已记录 baseline 至 `tests/runner/baselines/gc.perf.yaml`（`young_gc_wks` P50=75us / P95=239us / P99=239us, `gc_throughput_benchmark` ~0.3s, `allocation_bump` ~34.5M ops/s）— **注意**：此 baseline 来自显式 force-GC benchmark（`GcYoungCollection()` 强制触发），不是自然触发 GC 的 profile 语义，两者结果粒度不同，不可直接类比到自然触发推荐上（#16）。
 - dynamic_tuning 闭环已验（RelWithDebInfo）：`DynamicTuningSignalsRoundTrip` / `TensionIsBounded` / `HighFragHighMemQueuesNgc2Full` **3/3 PASS**。
 - **GC-N12（profile 调参）完成（2026-09-07）**：新增 `AllocationDrivenYoungGc` native benchmark（256MB/cycle 自然触发 GC），扫 3 参数 × 14 值点 → 推荐 **`Gen1MinPromotionAge=4`**（GC 次数 -9%，128→117）。详见 `notes/n12-tuning-results-2026-09-07.md`。
+  - **关于 -9% 的局限性**：此结论仅基于单一 native 负载（`AllocationDrivenYoungGc`，非方法级 AOT profile），且计划中自定的成功判据（"有 >10 方法在 profile 下 `gcPauseNs > 0`"）**实际未满足**。结果量级仍在一位数（-9%），spread 可能接近 run-to-run 噪声。不应视为已达成终态的证据，而是初步指导方向（#7）。
+  - **推荐参数（Gen1MinPromotionAge=4）尚未固化进运行时默认值**：当前仅通过 `CHAOS_GC_Gen1MinPromotionAge=4` env 注入生效，是否写入运行时默认值待拍板（#9）。
 
 ## ✅ Roadmap 全部完成（2026-09-07）
 
@@ -71,9 +73,9 @@ clearance_confirmed_by_user: true
 
 ## ✅ 全部完成 — 无下一步
 
-**GC 工业化三批次 12 个子任务全部达成终态**，仅保留后续长期维护项：
+**GC 工业化三批次 12 个子任务全部达成「工程闭环」终态**，推荐参数与长期维护项如下：
 
-- `Gen1MinPromotionAge=4` 推荐参数可通过 `CHAOS_GC_Gen1MinPromotionAge=4` 注入
+- `Gen1MinPromotionAge=4` **尚未固化进运行时默认值**——当前仅通过 `CHAOS_GC_Gen1MinPromotionAge=4` env 注入生效（符合本会话「推荐值不进生产默认」铁律）。是否写入默认配置**待拍板**；在拍板前接续者不可视为已采纳生产默认 (见 `notes/n12-profile-tuning-plan-2026-09-07.md` §八隔离 + 我下方 §批次3复核局限)。
 - Profile 构建（`--preset profile`）因 scriban 模板 link 问题需重配置验证（`c6383603c` 已修旧问题）
 - `common/profile_globals.cpp`（小写路径）为死代码，不被 CMake 编译，可删除（不影响构建）
 - 并行线（`feat/skill-trigger-chain-fix`）仍在活跃，其 GC 改动未触碰
@@ -81,7 +83,7 @@ clearance_confirmed_by_user: true
 **批次 3 runtime 复核（2026-09-04，WKS windows-x64-reference Debug）**：
 - **GC-N10 ✅ runtime 绿**：`test_gc_scheduler` 11/11 PASS（含 `HighFragHighMemQueuesNgc2Full`——高记忆+高碎片→NGC2 强制 full/compact 触发路径在 scheduler 决策层验证正确）。
 - **GC-N11 ✅ runtime 绿**：`test_gc_events` 7/7 PASS（含 BGC 阶段事件族枚举 + Fire 验证）。
-- **GC-N9 ⏳ runtime 阻塞（by-design）**：`AdjustHeapCountGrowShrink` 测试由 `#if CHAOS_IL2CPP_GC_SERVER` 守卫，默认 WKS 构建 compile-out（`--gtest_list_tests` 仅 3 个基础测试）。WKS 路径 heap_manager 3/3 PASS（不受 N9 无操作影响）。runtime 增减验证需 Server 构建，而 Server 构建的 `GcTestBase::SetUp` 仍 SEH（GC-N3 harness 缺口）——与 commit 如实声明一致，非 N9 代码回归。
+- **GC-N9 ✅ runtime 已完成**：`AdjustHeapCountGrowShrink` 测试由 `#if CHAOS_IL2CPP_GC_SERVER` 守卫（默认 WKS 构建 compile-out）。**Server 树实跑已闭合**：2026-09-07 现场验证 `windows-x64-reference-server` Debug 构建下 `test_gc_heap_manager` 3/3 + coordinator 5/5 + server_stress 3/3 全绿。`GcTestBase::SetUp` 已由 `210c52b5b` 修复(heap array init + thread binding)，Server 构建下不再 SEH。GC-N3 harness 缺口已解除。N9 设计阻塞已消除。Jira ENG-34885 CLOSED。
 - 约束满足方式：每子任务按 roadmap 三约束原则（多平台纯 C++ / JIT-AOT 同符号 / 热更兼容入口）+ 架构优先前置。
 
 ## 2026-08-28 P0 批次复核（GC 验证重跑 + 稳定失败修复）
@@ -108,7 +110,7 @@ clearance_confirmed_by_user: true
   - **更新**：GC-N7 原阻塞前提（堆破坏）**已撤销**。N7/N8/N12 的"阻塞根"不再成立于本 HEAD。**page-heap 路径不再必要**。
 - full_gc HeapVerify=2 的 bitmap-poison 47 = `GcMarkBitmap::Clear()` 清零 poison 的 verify 假阳性（非 OOB）。
 - **GC-N6 typed young-GC 死循环（discover-3）**：`94d8d98c0`（Gen1 collection relocation of external refs — GC-N6 mode3 content UAF）+ `200c7dd88`（instance_size==0 guard）已在 HEAD 上，notes 确认不再复现（8/8 完成）。**已解决，无残余**。
-- **GC-N9 runtime 验证**：WKS 下 `test_gc_heap_manager` 3/3 PASS；`AdjustHeapCountGrowShrink` 被 `#if CHAOS_IL2CPP_GC_SERVER` 守卫（by-design，Server 构建待 GC-N3 harness 修复）。**保持设计阻塞**。
+- **GC-N9 runtime 验证**：WKS 下 `test_gc_heap_manager` 3/3 PASS；**Server GC 树实跑 `test_gc_heap_manager` 3/3 + coordinator 5/5 + server_stress 3/3 全绿**（2026-09-07 现场验证，`windows-x64-reference-server` Debug 构建）。`AdjustHeapCountGrowShrink` 在 `CHAOS_IL2CPP_GC_SERVER=ON` 下功能正常（遇 WKS 被守卫 by-design，非 bug）。**🔴 阻塞已解除 → ✅ 完成**。Jira ENG-34885 CLOSED。
 - **GC-N10 runtime 验证**：`test_gc_scheduler` 11/11 PASS（含 `HighFragHighMemQueuesNgc2Full`）。**✅ 完成**。
 - **GC-N11 runtime 验证**：`test_gc_events` 7/7 PASS（含 BGC 阶段事件族枚举 + Fire）。**✅ 完成**。
 
@@ -173,8 +175,8 @@ dispatch_model: sequential
 ## 调度状态
 
 ```yaml
+# dispatch_model 权威声明在上面 §执行策略 yaml（sequential）；此处不再重复维护以避免漂移。
 dispatch_doc: 无（sequential 模式）
-dispatch_model: sequential
 active_batches: []
 completed_batches: []
 ```

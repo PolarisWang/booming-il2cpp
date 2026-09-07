@@ -58,10 +58,10 @@
 
 | 目标 | 内容 |
 |------|------|
-| **goal** | 补齐 native 运行时 Runable 所需的全部桥梁，使 ThreadPool 活起来、状态机在 native 侧可执行 |
+| **goal** | 补齐 native 运行时 Runnable 所需的全部桥梁，使 ThreadPool 活起来、状态机在 native 侧可执行 |
 | **exit_criteria** | · `ThreadPoolInitialize` 由 `RuntimeInit` 调用，worker 线程存活<br>· `AsyncStateMachineBox` native 等价物实现（Task 子类 + continuation 容器 + EC 保存）<br>· `TaskAwaiter.UnsafeOnCompleted` → native 回调路径接通<br>· `ExecutionContext.Capture/Run` 的 native 实现<br>· 单元测试覆盖各组件 |
 | **dependencies** | 无（独立，只依赖现有 runtime-core） |
-| **resolved_decisions** | · thread_pool.cpp 的 hill-climbing 和 work-stealing 全部保留，只加启动点<br>· ASyncStateMachineBox 用 GC 堆对象（不用 pinned）<br>· awaiter 回调用函数指针 + 上下文指针，不用 `std::function` |
+| **resolved_decisions** | · thread_pool.cpp 的 hill-climbing 和 work-stealing 全部保留，只加启动点<br>· `AsyncStateMachineBox` 用 GC 堆对象（不用 pinned）<br>· awaiter 回调用函数指针 + 上下文指针，不用 `std::function` |
 | **watch_items** | · ThreadPool 首次启动时的线程配置<br>· EC 捕获的性能开销 |
 
 ### Phase 2：状态机翻译引擎（6 周）
@@ -152,12 +152,14 @@ Phase 2（状态机翻译引擎）— 依赖 Phase 1
   │
   ├──▶ Phase 3（组合子语义）— 依赖 Phase 2
   │       │
-  │       └──▶ Phase 5（性能优化）— 依赖 Phase 2+3
+  │       └──▶ Phase 5（性能优化）— 依赖 Phase 2+3（传递依赖 Phase 1+2）
   │
-  └──▶ Phase 4（Parallel）— 依赖 Phase 1，与 Phase 2 并行
+  ├──▶ Phase 4（Parallel）— 依赖 Phase 1，与 Phase 2 并行（传递依赖 Phase 1）
   │
-  └──▶ Phase 6（验证覆盖）— 依赖 Phase 2+3+4
+  └──▶ Phase 6（验证覆盖）— 依赖 Phase 2+3+4（传递依赖 Phase 1+2+3+4，关键链最长）
 ```
+
+> 注：Phase 6 传递依赖 Phase 2+3+4，而 Phase 4 仅依赖 Phase 1，Phase 3 依赖 Phase 2，因此 Phase 6 的关键链 = Phase 1 → Phase 2 → Phase 3 → Phase 6（最长）。Phase 4 与 Phase 2 并行（两者均依赖 Phase 1 完成后可同时启动）缩短了总工期，但 Phase 6 仍需等待 Phase 3 和 Phase 4 都完成。
 
 ## 七、风险
 
@@ -173,7 +175,7 @@ Phase 2（状态机翻译引擎）— 依赖 Phase 1
 
 - 若某个 Phase 2 的 IL 模式无法翻译：回退到当前 `ChaosExternalRuntimeFallback` 解释器路径（但不标记为完成）
 - 若 EC 性能达不到要求：提供 `ExecutionContext.SuppressFlow()` 在 hot path 上跳过 capture
-- 若 ThreadPool hill-climbing 不稳定：退化为固定线程数（`CHAOS_GC_MaxThreadPoolThreads` 环境变量）
+- 若 ThreadPool hill-climbing 不稳定：退化为固定线程数（`CHAOS_THREADPOOL_MaxWorkerThreads` 环境变量，需实现；注意 `CHAOS_GC_*` 环境变量族专用于 GC 配置（`gc_config.h/cpp`），ThreadPool 最大线程数不在 GC 配置域内）
 
 ## 九、当前建议推进顺序
 
@@ -197,3 +199,9 @@ recommended_next_child: ASYNC-P1-1
 
 - `docs/dev/in-progress/async-task-industrialization/roadmap-v1-01.md`（本文件）
 - `docs/dev/in-progress/async-task-industrialization/STATUS.md`
+- 调研证据：
+  - CLR JIT 自建状态机变换 → `src/coreclr/jit/async.cpp`（CoreCLR 源码，IL 状态机直接翻译，无 C++ coroutine）
+  - 已有 native 地基 → `src/native/runtime-core/thread_pool.cpp`、`src/native/runtime-core/async.h`、`src/native/runtime-core/task_runner.cpp`
+  - codegen 占位 → `src/dll/chaos-codegen/emitters/AsyncCoroutineEmitter.cs`（占位 coroutine）、`src/dll/chaos-codegen/emitters/AsyncAwaiterCatalog.cs`
+  - builder 契约 → `src/coreclr/System.Private.CoreLib/src/System/Runtime/CompilerServices/AsyncTaskMethodBuilder.cs`（CoreCLR 源码）
+  - 决策来源：`docs/dev/in-progress/async-task-industrialization/STATUS.md` §边界拍板 + 深度调研 brainstorm 记录
