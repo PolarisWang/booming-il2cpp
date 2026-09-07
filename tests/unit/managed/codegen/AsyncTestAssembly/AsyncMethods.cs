@@ -1,0 +1,32 @@
+// A real async subject assembly whose compiled <OneNumber>d__0::MoveNext
+// is the input to full-pipeline (Loader -> SemanticWorld -> Linker ->
+// MetadataWriter -> CodeGenStage) extraction tests.
+//
+// The method bodies deliberately mirror the minimal async shape the Phase 2
+// translator targets: async Task<int> awaiting Task.Yield() once, returning a
+// constant. Compiling this file produces the compiler-generated state machine
+// type whose MoveNext IL is exactly what AsyncCoroutineEmitter + MethodEmission
+// must translate to a native hand-built state machine.
+
+using System;
+using System.Threading.Tasks;
+
+namespace AsyncTestAssembly;
+
+public static class AsyncMethods
+{
+    // async Task<int> awaiting Task.Yield once. Returns 1.
+    // Roslyn generates <GetOne>d__0 (a value type) with a MoveNext member.
+    public static async Task<int> GetOne()
+    {
+        await Task.Yield();
+        return 1;
+    }
+
+    // async Task (non-generic) awaiting Task.Yield once.
+    // Generates <DoVoid>d__0 (void-returning builder).
+    public static async Task DoVoid()
+    {
+        await Task.Yield();
+    }
+}
