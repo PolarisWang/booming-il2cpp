@@ -29,6 +29,8 @@
 #include "gc_young_collector.h"
 #include "gc_young_gen.h"
 #include "thread_state.h"
+#include "profile_stats.h"
+#include "gc_api.h"
 
 #include <gtest/gtest.h>
 
@@ -332,4 +334,119 @@ TEST_F(ThroughputBenchTest, BgcLatency) {
     // but should not be pathological.
     printf("  [Bench] Concurrent/Idle ratio: %.2fx\n",
            static_cast<double>(concurrent_avg) / static_cast<double>(idle_avg));
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Benchmark 5: Allocation-driven GC (no explicit GcYoungCollection)
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Unlike YoungGcPauseUnderLoad (which forces GcYoungCollection explicitly),
+// this test allocates heap pressure until the GC scheduler triggers a young
+// collection naturally.  This is the same mechanism that entry.exe --profile
+// exercises — a single method dispatch that allocates enough to overflow the
+// nursery.  The GC pause is measured via ProfileRecordGcPause (the same data
+// path as the per-method AOT profile).
+//
+// Tuning knobs (set via CHAOS_GC_* env vars):
+//   CHAOS_GC_NurserySize          — default 64MB, min 64KB
+//   CHAOS_GC_YoungTriggerMultiplier — FP*1000, default 2000 (2.0x)
+//   CHAOS_GC_Gen1MinPromotionAge  — default 1
+//   CHAOS_GC_MaxTlabAlloc         — default 32KB
+
+TEST_F(ThroughputBenchTest, AllocationDrivenYoungGc) {
+    static constexpr int kCycles = 5;
+    // Total allocation per cycle (256 MB) must exceed the nursery region
+    // (default 64 MB, adaptive Min=64 KB) to force a natural GC trigger.
+    static constexpr CHAOS_IL2CPP_SIZE kAllocTarget = 256 * 1024 * 1024;
+    static constexpr uint32_t kSize = 64;
+
+    std::vector<uint64_t> pauses_ns;
+    pauses_ns.reserve(kCycles);
+    int total_gc_count = 0;
+    int cycles_with_gc = 0;
+
+    // Reset TLS profile data before the benchmark.
+    ResetThreadProfileData();
+
+    for (int c = 0; c < kCycles; c++) {
+        // GC collection counts work in BOTH profile and non-profile builds
+        // (they read GcGetSnapshot, not the profile_stats stub).  We use them
+        // to prove that allocation pressure naturally triggers young GC even
+        // when CHAOS_IL2CPP_PROFILE_ENABLED=0 (where ProfileRecord* is no-op).
+        int young_before = chaos_gc_get_collection_count(0);
+        int full_before = chaos_gc_get_collection_count(2);
+
+        // Allocate a large volume without calling GcYoungCollection().
+        CHAOS_IL2CPP_SIZE allocated = 0;
+        while (allocated < kAllocTarget) {
+            void* p = NurseryAllocate(kSize);
+            ASSERT_NE(p, nullptr);
+            std::memset(p, 0, kSize);
+            InitTestObject(p, kSize);
+            allocated += kSize;
+        }
+
+        // Natural GC trigger count (non-profile counter).
+        int young_after = chaos_gc_get_collection_count(0);
+        int full_after = chaos_gc_get_collection_count(2);
+        int natural_gc = (young_after - young_before) + (full_after - full_before);
+
+        // Flush profile data accumulated during this cycle's allocations.
+        FlushThreadProfileData(c);
+
+        const auto* snap = ProfileStoreGet(ProfileStoreCount() - 1);
+        uint64_t cycle_pause = 0;
+        int cycle_gc = 0;
+        if (snap) {
+            cycle_pause = static_cast<uint64_t>(snap->data.gc_pause.total_pause_ns);
+            cycle_gc = snap->data.gc_pause.pause_count;
+        }
+        // If profile is stubbed (pause=0) but natural_gc > 0, the GC DID fire
+        // naturally — profile just couldn't record it.  Use natural_gc as the
+        // authoritative "did GC happen" signal that works in both tiers.
+        if (cycle_gc == 0) cycle_gc = natural_gc;
+        pauses_ns.push_back(cycle_pause);
+        if (cycle_gc > 0) {
+            cycles_with_gc++;
+            total_gc_count += cycle_gc;
+        }
+        printf("  [Bench] AllocDrivenCycle[%d]: gcPause=%llu ns, gcCount=%d "
+               "(natural young=%d full=%d)\n",
+               c, static_cast<unsigned long long>(cycle_pause), cycle_gc,
+               young_after - young_before, full_after - full_before);
+
+        ResetThreadProfileData();
+    }
+
+    uint64_t min_pause = pauses_ns.empty() ? 0
+        : *std::min_element(pauses_ns.begin(), pauses_ns.end());
+    uint64_t max_pause = pauses_ns.empty() ? 0
+        : *std::max_element(pauses_ns.begin(), pauses_ns.end());
+    uint64_t sum = 0;
+    for (auto p : pauses_ns) sum += p;
+    uint64_t avg_pause = pauses_ns.empty() ? 0 : sum / pauses_ns.size();
+
+    printf("  [Bench] AllocDrivenGC: %d cycles, %d with GC, %d total GCs, "
+           "pause: min=%llu ns, max=%llu ns, avg=%llu ns\n",
+           kCycles, cycles_with_gc, total_gc_count,
+           static_cast<unsigned long long>(min_pause),
+           static_cast<unsigned long long>(max_pause),
+           static_cast<unsigned long long>(avg_pause));
+
+    RecordMetric("AllocDrivenGC/Min", min_pause);
+    RecordMetric("AllocDrivenGC/Max", max_pause);
+    RecordMetric("AllocDrivenGC/Avg", avg_pause);
+    EmitPercentiles("alloc_driven_gc", pauses_ns);
+
+    // At least one cycle should have triggered natural young GC.
+    // chaos_gc_get_collection_count(0) works in BOTH tiers (reads GcGetSnapshot,
+    // not the profile_stats stub), so this assertion is valid regardless of
+    // CHAOS_IL2CPP_PROFILE_ENABLED.
+    EXPECT_GT(cycles_with_gc, 0)
+        << "Allocation-driven GC should trigger at least one young GC "
+        << "across " << kCycles << " cycles of " << kAllocTarget
+        << " bytes each";
+    EXPECT_GT(total_gc_count, 0)
+        << "Total natural young GC count should be > 0";
 }
