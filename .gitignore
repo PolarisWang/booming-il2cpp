@@ -617,3 +617,16 @@ scripts/debug/*.exe
 .feishu-extract.py
 .tmp-feishu-status*.py
 .tmp-check-eng-*.py
+
+# Local-only Jira credentials (never commit)
+**/.config/chaos-il2cpp/
+jira_token
+.tmp-batch-m2.py
+.tmp-batch-*.py
+.batch-*.py
+.jira_*.py
+.jira_write.py
+.tmp-audit-*.py
+.tmp-extract-*.py
+.feishu-*.py
+.tmp-feishu*.py
