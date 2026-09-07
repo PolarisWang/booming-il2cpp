@@ -381,17 +381,29 @@ _BODY_AVAIL_TO_CATEGORY: dict[str, str] = {
 }
 
 
-def _enrich_metadata_body_availability(metadata: dict, ir_methods: list[dict]) -> int:
+def _enrich_metadata_body_availability(
+    metadata: dict,
+    ir_methods: list[dict],
+    bcl_manifest: list[dict] | None = None,
+) -> int:
     """Annotate each metadata method with its codegen translation category.
 
-    Each metadata ``fact`` wrapper's ``generatedMethodId`` is joined back to the
-    wrapper entry in aot-core-ir (subject-id tail ``<generatedMethodId>:<ReturnType>()``)
-    emitted by codegen.  A match means codegen produced a real AOT lowering for that
-    wrapper → NativeGenerated.  When the codegen emitter stamps ``bodyAvailability``
-    explicitly and it is ``no-canonical-body`` (or empty after a rebuild), the category
-    is downgraded accordingly.  aot-coverage entries (no generatedMethodId) have no
-    translatable wrapper body and are left unannotated.
+    Two-layer join, because a chunk's methods carry two distinct subject-id spaces:
+
+    * ``fact``/``benchmark`` methods are probe wrappers whose ``generatedMethodId``
+      matches the tail of a CombinedSubjects subject-id in aot-core-ir.  Presence in
+      aot-core-ir ⇒ real AOT lowering → NativeGenerated (downgraded only when the
+      emitter stamps an explicit ``no-canonical-body``).
+    * ``aot-coverage`` methods (kind == aot-coverage) have no generatedMethodId/wrapper
+      body; they are AOT-compiled from the raw BCL method.  Their translation state is
+      read from the aot-manifest (each BCL method entry now stamped with
+      ``bodyAvailability`` by the MetadataWriter emitter): has-canonical-body ⇒
+      NativeGenerated, else no-canonical-body ⇒ NoCanonicalBody.  This is the layer that
+      lets the tracking see past the probe wrappers down to the underlying BCL methods.
+
+    Returns the number of methods annotated.
     """
+    # ── Layer 1: probe wrappers joined via aot-core-ir ──
     by_tail: dict[str, dict] = {}
     for m in ir_methods:
         sid = m.get("subjectId", "")
@@ -400,9 +412,40 @@ def _enrich_metadata_body_availability(metadata: dict, ir_methods: list[dict]) -
         tail = sid.split("::", 1)[-1] if "::" in sid else sid
         by_tail[tail] = m
 
+    # ── Layer 2: BCL coverage declarations joined via aot-manifest ──
+    by_bcl_subject: dict[str, str] = {}
+    if bcl_manifest:
+        for en in bcl_manifest:
+            if en.get("subjectKind") != "method":
+                continue
+            sid = en.get("subjectId", "")
+            if "CombinedSubjects/" in sid:
+                continue
+            avail = en.get("bodyAvailability")
+            by_bcl_subject[sid] = _BODY_AVAIL_TO_CATEGORY.get(avail, avail)
+
     annotated = 0
     for mm in metadata.get("methods") or []:
         if mm.get("kind") == "aot-coverage":
+            # Classify coverage-only BCL declarations from the manifest.
+            subj = mm.get("methodSubjectId")
+            if not subj:
+                continue
+            category = by_bcl_subject.get(subj)
+            if not category:
+                # Fallback: prefix match against manifest BCL method subject-ids (the
+                # manifest keeps the generic-param form; metadata strips a suffix).  We
+                # only claim NativeGenerated when the manifest confirms a canonical body;
+                # an unmatched coverage declaration is NOT counted native so a residual
+                # (genuinely-untranslated BCL method) surfaces rather than being hidden.
+                for manifest_sid, cat in by_bcl_subject.items():
+                    if manifest_sid.startswith(subj):
+                        category = cat
+                        break
+                if not category:
+                    category = "NoCanonicalBody"
+            mm["bodyAvailability"] = category
+            annotated += 1
             continue
         gid = mm.get("generatedMethodId")
         if not gid:
@@ -429,13 +472,15 @@ def _enrich_metadata_body_availability(metadata: dict, ir_methods: list[dict]) -
 def _merge_codegen_body_availability(
     metadata_path: Path,
     aot_core_ir_path: Path,
+    aot_manifest_path: Path | None = None,
 ) -> int:
-    """Reconcile subjects.metadata.json fact wrappers against the codegen AOT IR.
+    """Reconcile subjects.metadata.json against the codegen AOT IR + manifest.
 
-    Reads the fresh aot-core-ir.json emitted by TPG generate-dll and stamps each fact
-    method's ``bodyAvailability`` category into the metadata manifest, then rewrites the
-    manifest.  Translation-tracking Phase 1: makes 'did codegen give this method a real
-    AOT lowering' queryable per method later in fact/aggregate/reporting.
+    Reads the fresh aot-core-ir.json and (optionally) aot-manifest.json and stamps
+    each method's ``bodyAvailability`` category into the metadata manifest.  The
+    manifest layer annotates aot-coverage entries (BCL raw methods) that the wrapper
+    IR cannot see — this is the BCL-original-method resolution that makes the tracking
+    useful for fact-266 residual auditing.
     """
     if not metadata_path.exists() or not aot_core_ir_path.exists():
         return 0
@@ -1419,7 +1464,8 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     # -- 8b. Stamp bodyAvailability into subjects.metadata.json from codegen IR --
     aot_core_ir_path = ctx.native_dir / "codegen" / "generated" / "aot-core-ir.json"
-    _merge_codegen_body_availability(metadata_path, aot_core_ir_path)
+    aot_manifest_path = ctx.native_dir / "codegen" / "generated" / "aot-manifest.json"
+    _merge_codegen_body_availability(metadata_path, aot_core_ir_path, aot_manifest_path)
 
     # -- 8c. Inject --profile mode into runtime-entry.cpp --
     _inject_profile_mode(ctx.native_dir)
