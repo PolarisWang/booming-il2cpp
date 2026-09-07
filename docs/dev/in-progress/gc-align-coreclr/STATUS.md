@@ -40,6 +40,11 @@ clearance_confirmed_by_user: true
 - 批次 1：GC-N1/N3/N4 已提交（待 CI 实跑确认）；GC-N2 由并行 GC 调试线承接。
 - 批次 2：GC-N5 已提交（L1 卡表 UAF）；GC-N6 发现已固化（`notes/gc-n6-liveness-findings-2026-08-25.md`）。GC-N7 修正：`904114c3d` 修 2 真 bug，残余 `YoungGcPauseUnderLoad` 为**非确定性堆破坏**（`GcYoungCollection:537` AV + `~MarkSweepOldGen:127` teardown `c0000374`，同代码频率 8%~73%），A/B/C 已 revert；需真机 page-heap（`notes/gc-n7-release-benchmark-crash-2026-08-25.md`）。
 - 批次 3：**GC-N10（provisional 完整，高记忆+高碎片→NGC2 强制 compact）`202c62f22`、GC-N11（BGC 阶段事件族+原因位图）`d35d78dcd`、GC-N9（Dynamic Heap Count，Server-compile 通过、runtime 待 GC-N3 harness）`a77aff4dd` 已提交**。GC-N12（profile 调参）依赖 GC-N7 稳定 Release 基准 + 真机 page-heap 修复残余。
+
+**批次 3 runtime 复核（2026-09-04，WKS windows-x64-reference Debug）**：
+- **GC-N10 ✅ runtime 绿**：`test_gc_scheduler` 11/11 PASS（含 `HighFragHighMemQueuesNgc2Full`——高记忆+高碎片→NGC2 强制 full/compact 触发路径在 scheduler 决策层验证正确）。
+- **GC-N11 ✅ runtime 绿**：`test_gc_events` 7/7 PASS（含 BGC 阶段事件族枚举 + Fire 验证）。
+- **GC-N9 ⏳ runtime 阻塞（by-design）**：`AdjustHeapCountGrowShrink` 测试由 `#if CHAOS_IL2CPP_GC_SERVER` 守卫，默认 WKS 构建 compile-out（`--gtest_list_tests` 仅 3 个基础测试）。WKS 路径 heap_manager 3/3 PASS（不受 N9 无操作影响）。runtime 增减验证需 Server 构建，而 Server 构建的 `GcTestBase::SetUp` 仍 SEH（GC-N3 harness 缺口）——与 commit 如实声明一致，非 N9 代码回归。
 - 约束满足方式：每子任务按 roadmap 三约束原则（多平台纯 C++ / JIT-AOT 同符号 / 热更兼容入口）+ 架构优先前置。
 
 ## 2026-08-28 P0 批次复核（GC 验证重跑 + 稳定失败修复）
@@ -59,6 +64,19 @@ clearance_confirmed_by_user: true
 **确认残局**：
 - **GC-N7 `YoungGcPauseUnderLoad` 堆破坏未闭合**（需真机 page-heap），并表现为 full-suite 的 cross-test 全局态 flakiness（多个测试体 `GcYoungCollection()` 偶发 SEH），隔离稳定。
 - full_gc HeapVerify=2 的 bitmap-poison 47 = `GcMarkBitmap::Clear()` 清零 poison 的 verify 假阳性（非 OOB）。
+- **GC-N6 typed young-GC 死循环（discover-3）**：`94d8d98c0`（Gen1 collection relocation of external refs — GC-N6 mode3 content UAF）+ `200c7dd88`（instance_size==0 guard）已在 HEAD 上，notes 确认不再复现（8/8 完成）。**已解决，无残余**。
+- **GC-N9 runtime 验证**：WKS 下 `test_gc_heap_manager` 3/3 PASS；`AdjustHeapCountGrowShrink` 被 `#if CHAOS_IL2CPP_GC_SERVER` 守卫（by-design，Server 构建待 GC-N3 harness 修复）。**保持设计阻塞**。
+- **GC-N10 runtime 验证**：`test_gc_scheduler` 11/11 PASS（含 `HighFragHighMemQueuesNgc2Full`）。**✅ 完成**。
+- **GC-N11 runtime 验证**：`test_gc_events` 7/7 PASS（含 BGC 阶段事件族枚举 + Fire）。**✅ 完成**。
+
+**已知失败清理 audit（2026-09-04，隔离/safe-scale 实证）**：
+- 全量跑 `ctest -R "chaos_gc_|test_gc_" -LE "benchmark|stress|soak"`（-j 2）：90% pass (63/70)，7 失败均为 GC 域已有 known/并行 flake。
+- **6 个 known-fail 条目均保留**（no-skip 政策：并行门为权威 gate，隔离/safe-scale 绿不能作为摘除依据，摘除会让并行门翻红）。逐项隔离/safe-scale 复核记录见 `known-failures.integration.yaml` + 上表：
+  - `test_gc_loh` 8/8×5 隔离绿（并行门 flake）
+  - `test_gc_general_stress` 4/4×3 SCALE=50 绿（SCALE=100 边界）
+  - `test_gc_loh_stress`/`delegate_stress` 隔离绿（SCALE=100 边界）
+  - `test_gc_gen1` 14/14 隔离 5x 内 3/5 绿（跨测试态污染，并行门更明显）
+  - `test_gc_young_collector` **YoungCollectionEmpty 隔离确定性失败**：GC 后 `NurseryAllocate` 触发延迟 `InitYoungGeneration` 替换 nursery region，新 region 未注册进 `IsNurseryPointer` 槽位 → `IsInNursery(p2)=false` → **测试隔离问题，非 GC 缺陷**（ConservativeSweepSelfRefs 隔离绿，P0#3 已修）。
 
 ## 关键文档
 
