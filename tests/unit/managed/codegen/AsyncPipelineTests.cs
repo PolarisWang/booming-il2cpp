@@ -94,4 +94,122 @@ public sealed class AsyncPipelineTests
             c.Contains("AsyncTaskMethodBuilder") &&
             (c.Contains("SetResult") || c.Contains("AwaitUnsafeOnCompleted") || c.Contains("get_Task")));
     }
+
+    [Fact]
+    public void MovenextArtifact_IsStructThis_ValueType()
+    {
+        using var ctx = new TempCtx();
+        var request = new ManagedClosureRequest(
+            InputAssemblyPath: s_asyncAssemblyPath,
+            OutputRootPath: ctx.OutputRoot,
+            EntryPointSubjectIdOverride: null,
+            AdditionalAssemblyPaths: null,
+            FullAssemblyClosure: true);
+        var result = new PipelinePlan().Execute(request).Value!;
+        var movenext = result.AotCoreIr.Methods
+            .FirstOrDefault(m => m.SubjectId.Contains(">d__") && m.SubjectId.Contains("::MoveNext"));
+        Assert.NotNull(movenext);
+
+        // Feed the real MoveNext artifact into the planner's emitter.
+        var planner = new NativeAotLoweringPlanner();
+        var loweringPlan = new NativeAotLoweringPlanArtifact
+        {
+            PlanKind = "full-assembly-entry",
+            AssemblyName = "AsyncTestAssembly",
+            EntrySubjectId = movenext.SubjectId,
+            NativeEntryFunctionName = string.Empty,
+            EntrySymbol = movenext.NativeSymbol,
+            EntryMethodToken = "0x06000001",
+            WorkloadAbi = "full-assembly",
+        };
+        var closureManifest = new ManagedClosureManifestArtifact
+        {
+            AssemblyName = "AsyncTestAssembly",
+            EntrySubjectId = movenext.SubjectId,
+            InputAssemblyPath = s_asyncAssemblyPath,
+            InputModuleVersionId = result.ClosureManifest!.InputModuleVersionId,
+            FullAssemblyClosure = true,
+            Artifacts = [],
+
+        };
+        var templateModel = planner.Create(
+            loweringPlan,
+            result.AotCoreIr,
+            result.AotCoreIr.Methods[0],
+            closureManifest,
+            result.MetadataRegistration,
+            result.SupplementalMetadataTemplate,
+            fullAssemblyMode: true);
+
+        // Find the MoveNext method's generated source in the output.
+        var matchMethod = templateModel.Methods
+            .FirstOrDefault(m => m.SubjectId == movenext.SubjectId);
+        Assert.NotNull(matchMethod);
+
+        // Phase 2 translator: MoveNext is emitted as real C++ via structured emission.
+        // It should NOT contain the old GenPromise/GenCoro placeholder markers.
+        Assert.DoesNotContain("AsyncPromise_", matchMethod.MethodSource);
+        Assert.DoesNotContain("_Coro()", matchMethod.MethodSource);
+        Assert.DoesNotContain("co_await", matchMethod.MethodSource);
+        Assert.DoesNotContain("std::suspend_always", matchMethod.MethodSource);
+        Assert.DoesNotContain("fallback", matchMethod.MethodSource, StringComparison.OrdinalIgnoreCase);
+
+        // The emitted code should contain the real state machine structure:
+        // state field access, builder field access, native yield/awaiter calls.
+        Assert.Contains("field_", matchMethod.MethodSource);
+        Assert.Contains("1__state", matchMethod.MethodSource);
+        Assert.Contains("t__builder", matchMethod.MethodSource);
+        Assert.Contains("async_yield_", matchMethod.MethodSource);
+        Assert.Contains("CHAOS_EH_TRY", matchMethod.MethodSource);
+    }
+
+    [Fact]
+    public void MovenextEmittedSource_ContainsSetResultAndAwaitUnsafeOnCompleted()
+    {
+        using var ctx = new TempCtx();
+        var request = new ManagedClosureRequest(
+            InputAssemblyPath: s_asyncAssemblyPath,
+            OutputRootPath: ctx.OutputRoot,
+            EntryPointSubjectIdOverride: null,
+            AdditionalAssemblyPaths: null,
+            FullAssemblyClosure: true);
+        var result = new PipelinePlan().Execute(request).Value!;
+        var movenext = result.AotCoreIr.Methods
+            .FirstOrDefault(m => m.SubjectId.Contains(">d__") && m.SubjectId.Contains("::MoveNext"));
+        Assert.NotNull(movenext);
+
+        var planner = new NativeAotLoweringPlanner();
+        var loweringPlan = new NativeAotLoweringPlanArtifact
+        {
+            PlanKind = "full-assembly-entry",
+            AssemblyName = "AsyncTestAssembly",
+            EntrySubjectId = movenext.SubjectId,
+            NativeEntryFunctionName = string.Empty,
+            EntrySymbol = movenext.NativeSymbol,
+            EntryMethodToken = "0x06000001",
+            WorkloadAbi = "full-assembly",
+        };
+        var closureManifest = new ManagedClosureManifestArtifact
+        {
+            AssemblyName = "AsyncTestAssembly",
+            EntrySubjectId = movenext.SubjectId,
+            InputAssemblyPath = s_asyncAssemblyPath,
+            InputModuleVersionId = result.ClosureManifest!.InputModuleVersionId,
+            FullAssemblyClosure = true,
+            Artifacts = [],
+        };
+        var templateModel = planner.Create(
+            loweringPlan, result.AotCoreIr, result.AotCoreIr.Methods[0],
+            closureManifest, result.MetadataRegistration, result.SupplementalMetadataTemplate,
+            fullAssemblyMode: true);
+        var matchMethod = templateModel.Methods
+            .FirstOrDefault(m => m.SubjectId == movenext.SubjectId);
+        Assert.NotNull(matchMethod);
+
+        // Phase 2 segment B: builder/awaiter calls resolved to native externs.
+        // SetResult, SetException, AwaitUnsafeOnCompleted should appear in the emitted C++.
+        Assert.Contains("SetResult", matchMethod.MethodSource);
+        Assert.Contains("SetException", matchMethod.MethodSource);
+        Assert.Contains("AwaitUnsafeOnCompleted", matchMethod.MethodSource);
+    }
 }
