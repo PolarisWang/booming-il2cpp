@@ -125,6 +125,27 @@ clearance_confirmed_by_user: true
   - `test_gc_gen1` 14/14 隔离 5x 内 3/5 绿（跨测试态污染，并行门更明显）
   - `test_gc_young_collector` **YoungCollectionEmpty 隔离确定性失败**：GC 后 `NurseryAllocate` 触发延迟 `InitYoungGeneration` 替换 nursery region，新 region 未注册进 `IsNurseryPointer` 槽位 → `IsInNursery(p2)=false` → **测试隔离问题，非 GC 缺陷**（ConservativeSweepSelfRefs 隔离绿，P0#3 已修）。
 
+## M1 已知失败收尾复核（2026-09-08）— code 域闭环，剩 CI 域
+
+> 承接上节 2026-09-04 audit 逐条实证（本次真机器跑二进制，非依赖旧注释）。两条重大更正 + 两条澄清，含代码提交 `be09ed381`。
+
+**更正 1（重要）— ConservativeSweepSelfRefs 是确定性跨测试堆破坏，非"隔离绿 flake"**：
+- 上节/`P0#3` 标"隔离绿、pure GC 正确、断言不可观测" → **误判**。实测 full-binary 下 **~20%（3/15）抛 SEH 0xC0000005**，非纯并行 flake。
+- 根因（纯测试 cross-test 全局态污染，非运行时）：`CollectionWithDirtyCard`（`gc_young_collector_test.cpp` 原 L239）的 **raw `GcSetHeapBase` 覆盖**未在 `GTEST_SKIP()`（L254）路径恢复，污染共享全局 `g_heap_base`（card-table base）。下一测试 `ConservativeSweepSelfRefs` 的 young-GC **Phase-1 卡表扫描**用被污染的 base 重算段地址 → 读到未映射内存 → SEH。
+- 修 `be09ed381`：`CollectionWithDirtyCard` 里 save `g_heap_base`，在 skip + 常规尾双处 restore。
+- 验证：full binary **0/20 crash**（修前 3/15）；原确定性触发组合 YCE+ColDirty+Cons **0/15**；`ctest -j4 test_gc_young_collector PASS`。
+- `known-failures.integration.yaml`：摘除 `test_gc_young_collector`（6→5 项）并附根因注释；`gc-unit.yml` 移除 `-E test_gc_young_collector` + `--gtest_filter` 特例（现确定性全绿，无需再跳过）。
+
+**澄清 2 — delegate_stress "死锁" 误报（非 M1 门禁阻断）**：
+- 前标"A2/E1/E3 SCALE=100 死锁"。实测**非死锁**：A2 在 600s、E1 在 2.3s 均 **PASS**。
+- 机制：dormant BGC 线程在 `requested safepoint` 时 `forbid_suspend` 使线程 2 无法被 APC preempt → safepoint 协调器每次等满 ~34s hard-timeout 后 force-release → Collect 正常跑完。每次 full GC 额外 ~34s，非阻塞而是**慢**。CI `gc-unit` stress job `--timeout 3600` 可吸收，不翻红。
+- 仍是 safepoint-stall 气味（BGC 未在 full GC 前 drain/ack），值得一个独立运行时优化，但**不构成 M1 G0 门禁阻断**。
+
+**复核断言最终构成**（2026-09-08）：
+- `test_gc_loh` 8/8×5、`loh_stress` 6/6×5、`general_stress` SCALE=50 4/4×3、`gen1` 14/14×多数 → 均隔离绿（注意 `general_stress` 需 `CHAOS_IL2CPP_STRESS_SCALE` env；曾以 `CHAOS_GC_TEST_SCALE` 误报）。
+- **M1 代码域已闭环：无已知 GC 代码缺陷遗留。** 剩 5 项 known-fail（loh/gen1/general_stress/loh_stress/delegate_stress）与 ENG-34889 回归基线锁定的摘除/锚定判据都是**权威并行门 = 真实 GitHub CI 首绿**——非单机/单 agent 会话可推进，收敛到 **CI 域**。
+- 待 main pipeline（含 gc-unit/stress job）真绿后，从 `known-failures.integration.yaml` 逐项移除可摘条目并录 ENGINE ticket。
+
 ## 关键文档
 
 - `docs/dev/in-progress/gc-align-coreclr/roadmap-v2-01.md`
