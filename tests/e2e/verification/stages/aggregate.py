@@ -68,7 +68,7 @@ def _aggregate_capability(chunk_summaries: list[dict]) -> dict | None:
         "passByAvailability": agg_pass,
         "totalByAvailability": agg_total,
         "nativeGeneratedPassRate": {
-            avail: round(agg_pass.get(avail, 0) / cnt, 4)
+            avail: round(agg_pass.get(avail, 0) / cnt, 4) if cnt > 0 else 0.0
             for avail, cnt in agg_total.items()
         },
     }
@@ -91,25 +91,47 @@ def _read_chunk_capability(chunk_dir: Path, results_dir: Path) -> dict:
     cap_sum = mm.get("capabilitySummary") or {}
     passed_by_avail: dict[str, int] = {}
     total_by_avail: dict[str, int] = {}
-    avail_by_index = {
-        int(e.get("index")): e.get("bodyAvailability")
-        for e in mm.get("methods") or []
-        if e.get("index") is not None and e.get("bodyAvailability")
-    }
+    # Fix #3: guard each method's `index` against non-integer values so a
+    # corrupt/float index (e.g. "abc" / 1.5) can't crash the whole aggregate.
+    avail_by_index: dict[int, str] = {}
+    for _e in mm.get("methods") or []:
+        if not _e.get("bodyAvailability"):
+            continue
+        try:
+            _idx = int(_e.get("index"))
+        except (TypeError, ValueError):
+            # Non-integer index: skip this method, keep the aggregate going.
+            _e_body = _e.get("bodyAvailability")
+            print(f"  [aggregate] WARNING: non-integer method index in {meta_caps_path.name}, "
+                  f"skipping availability {_e_body!r}")
+            continue
+        avail_by_index[_idx] = _e.get("bodyAvailability")
     fr_path = results_dir / "fact-results.json"
     if fr_path.exists():
         try:
             fr = json.loads(fr_path.read_text(encoding="utf-8"))
-            for rec in fr.get("aot") or fr.get("jit") or []:
-                idx = rec.get("si", rec.get("methodIndex"))
-                avail = avail_by_index.get(int(idx)) if idx is not None else None
+            for rec in (fr.get("aot") or []) + (fr.get("jit") or []):
+                idx_val = rec.get("si", rec.get("methodIndex"))
+                if idx_val is None:
+                    continue
+                try:
+                    # Fix #2: coerce conservatively — non-numeric si/methodIndex
+                    # is tolerated as no-match rather than crashing the stage.
+                    idx = int(idx_val)
+                except (TypeError, ValueError):
+                    print(f"  [aggregate] WARNING: non-integer method 'si'/'methodIndex' "
+                          f"({idx_val!r}) in {fr_path.name}, skipping record")
+                    continue
+                avail = avail_by_index.get(idx)
                 if not avail:
                     continue
                 total_by_avail[avail] = total_by_avail.get(avail, 0) + 1
                 if rec.get("passed"):
                     passed_by_avail[avail] = passed_by_avail.get(avail, 0) + 1
-        except (json.JSONDecodeError, OSError):
-            pass
+        except (json.JSONDecodeError, OSError) as e:
+            # Fix #4: log the corruption instead of silently swallowing it, so a
+            # damaged fact-results.json is diagnosable (matches _try_load_json).
+            print(f"  [aggregate] WARNING: unreadable/corrupt {fr_path.name}: {e}")
     return {
         "declaredTotal": cap_sum.get("totalMethods"),
         "annotated": cap_sum.get("annotated"),

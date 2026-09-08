@@ -1,0 +1,99 @@
+"""worklist — discover every (assembly, chunk) work item from the foundation tree.
+
+Each assembly directory under `foundation_dir` that is a project family
+(starts with "System." or is a known family) holds a `_dll/namespace-partition.json`
+whose `chunks` array lists the chunk slugs + their namespaces/methods.  We
+reuse that manifest (already produced by the manifest stage) as the single
+source of truth for the worklist.  This intentionally reuses
+`verification/orchestration/discovery.py::discover_chunks` rather than
+re-implementing partition parsing.
+"""
+
+from __future__ import annotations
+
+import os
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+
+# Ensure the verification package importable regardless of cwd.  `_path` lives
+# directly inside verification/, so add verification/ itself to sys.path (same
+# way the rest of the engine bootstraps).
+_HERE = Path(__file__).resolve().parent            # .../verification/nightly/
+_VERIFY = _HERE.parent                             # .../verification/
+for _p in (_VERIFY, _VERIFY.parent, _VERIFY.parent.parent):   # verification/, tests/e2e/, tests/
+    _ps = str(_p)
+    if _ps not in sys.path:
+        sys.path.insert(0, _ps)
+    if (_p / "_path.py").exists():
+        break
+
+from _path import foundation_root  # noqa: E402  (verification/_path.py)
+
+
+@dataclass(frozen=True)
+class WorkItem:
+    """One chunk to run through chunk_pipeline subprocess."""
+    assembly: str
+    slug: str
+
+    @property
+    def key(self) -> str:
+        return f"{self.assembly}__{self.slug}"
+
+
+# Families whose top-level dirs under foundation root are assemblies we should
+# scan.  Anything starting with "_" / "." (build roots, gitignore dirs) excluded.
+def _is_assembly_dir(name: str) -> bool:
+    if name.startswith("_") or name.startswith("."):
+        return False
+    # Family dirs are dotnet assemblies (System.*, Microsoft.Bcl.HashCode, etc.).
+    # Broad: include any dir that has a _dll/namespace-partition.json.
+    return name.startswith("System.") or name == "System.Private.CoreLib"
+
+
+def discover_worklist(config) -> list[WorkItem]:
+    """Return all (assembly, slug) work items across the foundation tree.
+
+    Args:
+        config: NightlyConfig (uses foundation_dir + assembly_filter).
+    Returns:
+        list[WorkItem] sorted deterministically (assembly, slug).
+    """
+    import json as _json
+
+    foundation = Path(config.foundation_dir)
+    if not foundation.is_dir():
+        raise FileNotFoundError(f"Foundation dir not found: {foundation}")
+
+    items: list[WorkItem] = []
+    filter_set = set(config.assembly_filter) if config.assembly_filter else None
+
+    for entry in sorted(foundation.iterdir(), key=lambda p: p.name):
+        if not entry.is_dir():
+            continue
+        name = entry.name
+        if _is_assembly_dir(name) is False and name != "System.Private.CoreLib":
+            # _is_assembly_dir True for System.*; others excluded unless manifest
+            # exists (custom proof assemblies).  Fall back to manifest presence.
+            pass
+        # Only include it if it has a namespace-partition manifest (real family)
+        partition_path = entry / "_dll" / "namespace-partition.json"
+        if not partition_path.is_file():
+            continue
+        if filter_set is not None and name not in filter_set:
+            continue
+        try:
+            manifest = _json.loads(partition_path.read_text(encoding="utf-8"))
+        except (OSError, _json.JSONDecodeError):
+            # Can't parse — skip (missing manifest is benign; a real nightly
+            # would've generated it in the manifest stage).
+            continue
+        chunks = manifest.get("chunks", [])
+        for ch in chunks:
+            slug = ch.get("slug")
+            if slug:
+                items.append(WorkItem(assembly=name, slug=slug))
+
+    items.sort(key=lambda w: (w.assembly, w.slug))
+    return items

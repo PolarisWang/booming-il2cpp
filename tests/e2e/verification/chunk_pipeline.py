@@ -21,6 +21,7 @@ Usage:
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import subprocess
@@ -215,6 +216,12 @@ def main():
                         help="Run all chunks for the assembly")
     parser.add_argument("--stages", default=None,
                         help="Comma-separated stages to run (default: build,fact,hotupdate,coverage-audit; or build,fact,coverage-audit with --smoke)")
+    parser.add_argument("--provided-stages", default=None,
+                        help="Comma-separated stages already produced by a prior run. "
+                             "Satisfy DAG dependencies without re-running them (e.g. Phase B "
+                             "reuses Phase A's build+fact products). Guarded by provenance.json "
+                             "existence + git-commit match; if the guard fails the run aborts "
+                             "with a message instead of trusting a stale build.")
     parser.add_argument("--smoke", action="store_true",
                         help="Smoke mode: run only fast verification stages (build,fact,coverage-audit) "
                              "and, with --all-chunks, only the first --smoke-chunks chunks.")
@@ -356,6 +363,20 @@ def main():
         if s not in stage_functions:
             print(f"ERROR: Unknown stage '{s}'. Valid: {', '.join(stage_functions.keys())}")
             return 1
+    # ── --provided-stages: stages already produced by a prior run (satisfy DAG deps
+    #    without re-running).  They must be valid stage names; they are NOT executed
+    #    here (the real phase file/cache backing them is trusted only via the
+    #    provenance guard below on build/fact). ──
+    provided_set: set[str] = set()
+    if args.provided_stages:
+        for ps in args.provided_stages.split(","):
+            ps = ps.strip()
+            if not ps:
+                continue
+            if ps not in stage_functions:
+                print(f"ERROR: Unknown --provided-stages '{ps}'. Valid: {', '.join(stage_functions.keys())}")
+                return 1
+            provided_set.add(ps)
 
     # ── Stage dependency DAG validation ──
     STAGE_DEPS: dict[str, list[str]] = {
@@ -376,7 +397,7 @@ def main():
                               "hotupdate", "benchmark_report"],
         "reporting":         ["aggregate"],
     }
-    stage_set = set(stage_names)
+    stage_set = set(stage_names) | provided_set
     missing_deps = False
     for s in stage_names:
         for dep in STAGE_DEPS.get(s, []):
@@ -395,6 +416,60 @@ def main():
         print(f"[chunk-pipeline] Reordered stages by dependency: "
               f"{', '.join(reordered)}")
     stage_names = reordered
+
+    # ── Filter out --provided-stages from actual execution ──
+    # provided stages satisfy DAG deps but are NOT run here (they were already
+    # produced by a prior invocation, e.g. Phase A).  Only keep stages that
+    # are actually meant to execute in this call.
+    if provided_set:
+        filtered = [s for s in stage_names if s not in provided_set]
+        if not filtered:
+            print(f"[chunk-pipeline] All stages provided via --provided-stages, nothing to execute. "
+                  f"Provided: {args.provided_stages}")
+            return 0
+        if filtered != stage_names:
+            skipped = set(stage_names) - set(filtered)
+            print(f"[chunk-pipeline] --provided-stages={args.provided_stages}: "
+                  f"skipping {sorted(skipped)}, running {filtered}")
+            stage_names = filtered
+
+    # ── Provenance guard: when build/fact are provided, verify the prior run's
+    #    products are still valid (provenance.json exists, git_commit matches).
+    #    If the guard fails, the run aborts rather than silently trusting stale
+    #    build products.  This is the P1-1 risk mitigation.
+    #
+    #    Checked once per assembly (not per chunk) because the provenance is
+    #    per-chunk under the same build root.  We check the first chunk's
+    #    provenance as a representative sample — if the git_commit doesn't
+    #    match, none of the chunks are valid.
+    if provided_set & {"build", "fact"}:
+        _provenance_ok = True
+        if chunks:
+            _first_chunk_build_dir = build_root() / assembly / "chunks" / chunks[0]
+            _provenance_path = _first_chunk_build_dir / "results" / "provenance.json"
+            if not _provenance_path.exists():
+                print(f"ERROR: --provided-stages requested but provenance.json not found at "
+                      f"{_provenance_path}.  Cannot trust build products.  "
+                      f"Run without --provided-stages to rebuild from scratch.")
+                _provenance_ok = False
+            else:
+                try:
+                    _prov = json.loads(_provenance_path.read_text(encoding="utf-8"))
+                    _prov_commit = _prov.get("gitCommit", "")
+                    _current_commit = subprocess.run(
+                        ["git", "rev-parse", "HEAD"], capture_output=True, text=True, timeout=10
+                    ).stdout.strip()
+                    if _prov_commit and _prov_commit != _current_commit:
+                        print(f"ERROR: --provided-stages provenance git_commit mismatch: "
+                              f"provenance={_prov_commit[:12]}, HEAD={_current_commit[:12]}.  "
+                              f"Stale build products detected.  "
+                              f"Run without --provided-stages to rebuild.")
+                        _provenance_ok = False
+                except Exception as e:
+                    print(f"ERROR: --provided-stages provenance check failed: {e}")
+                    _provenance_ok = False
+        if not _provenance_ok:
+            return 1
 
     # Import stage functions
     from verification.stages.build import run_build
