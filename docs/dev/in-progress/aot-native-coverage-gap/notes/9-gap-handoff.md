@@ -1,5 +1,28 @@
 # Handoff — AOT-Native-Coverage-Gap (9 GAP) — 2026-09-07
 
+## 🔄 2026-09-08 移交后更新：CoreLib 构建阻塞已修 + 剩余 fact 调查结论
+
+**已修复并推送**（`937847fbb` ATG global:: + `21ea08267` ATG ref-struct）：CoreLib system-3 chunk
+从 4616 编译错 → **3/3 stages passed**。整族 CoreLib ci_smoke 现 **55781/55850 fact passed**。
+
+**「2 个剩余 fact fail」逐案调查结论（3 agent 并行,** 无真实 codegen 缺陷）**：
+- **system-6**：假阳性。aggregate 在重建前读到旧 stale artifact (total=0)；实际 `3779/3779 passed`。
+- **threading-tasks**："5/10" 是 stage 级统计非事实失败；**456/456 fact 实际全过**。
+- **runtime-interop**：6 fact fail（si 39/40/405/406/411/465 → codegen idx 96/97/114/115/141/745）
+  全为 `System.Runtime.InteropServices.Marshal` COM 测试方法（GetObjectForIUnknown 等）。
+  body 全 NativeGenerated、语义正确，但 smoke subject 对不可复现的 COM/unmanaged 调用返 0 而非
+  42 sentinel → 被 harness 当真实失败而非 UNVERIFIED-smoke。是 **ATG/harness UNVERIFIED 分类边角**，
+  非 AOT 翻译缺陷。
+
+**净结论**：9 个 aot-native-coverage-gap 的 fact 无一真实失败（全部过系统 5 之外的已跑 chunks 通过），
+无待修 codegen/AOT 翻译缺口的残留。runtime-interop Marshal COM smoke 分类问题属
+测试治理/ATG 域（见 [[com-marshaller-aot-semantic-alignment]] / [[atg-fact-false-positive-unverified-fix]]），
+不在本 GAP 追踪域。
+
+下接原交接正文（9 GAP 注册状态 + 入口仍在，作为参考可关闭/归档）。
+
+
+
 ## 交接给谁
 chaos-il2cpp codegen 专家 agent（dev-il2cpp-codegen-expert）。
 
