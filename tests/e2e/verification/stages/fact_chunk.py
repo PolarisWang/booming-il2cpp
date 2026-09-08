@@ -194,6 +194,7 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         # is never misled that an unverified stub call was a real assertion pass.
         "unverifiedSmoke": unverified_smoke,
         "realTotal": max(0, total - unverified_smoke),
+        "realPassed": max(0, passed - unverified_smoke),
         "valueSuspicious": value_warnings > 0,
         "valueWarnings": value_warnings,
         "metaTotal": meta_total or total,
