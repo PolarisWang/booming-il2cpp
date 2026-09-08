@@ -33,6 +33,23 @@ Call site:
 
 子 agent 另指出第二洞：回收 re-carve（`carve_free_lists`，L231）只 guarantee `pref_sc` 优先，其余 round-robin 的 `free_lists[i]` 头块尺寸可能 < 请求 size，若按请求 size `memset` 会越界清相邻块（L738/752/936）。
 
+## ⚠️ 2026-09-08 深挖补充（方向 A 已实证失败，勿重试）
+
+试过删 L930-942 直接弹块（改回 L945 fallback 回环），重建后**仍 20/20 隔离 SEGFAULT** → 根因不在该段，该假设排除、改动已回退。
+
+**更深的 CDB 证据（推断根因是 free_lists 头被写 0xcd，而非弹块读到 freed）**：
+```
+TryAllocateFromFreeLists+0x111 mov rdx,[rsp+60h]   ; block = page->free_lists[sc_idx]
+TryAllocateFromFreeLists+0x123 mov rdx,[rdx+8]      ; ← rdx(block头)=0xcdcdcdcdcdcdcdcd, 读[+8] AV
+
+page(rcx) header @ 0x...750000:
+  0x50: 05760f30 000001d3 cdcdcdcd cdcdcdcd   ← offset ~0x58 (free_lists 数组区) 存 0xcdcdcdcdcd
+```
+cx 头在 free_lists 数组偏移处就是 `0xcdcdcdcdcdcdcdcd` → 该值**在 page 头里已成事实**，不是"刚 memset 越界写到下一块"。方向：
+- 该 page 曾 VirtualFree/回池被 poison，但另一线程仍在 page_list_ 遍历其 free_lists[sc_idx]（page 已 [stale? 但 in_use 检查应拦截]）→ 检查页序是否在 AllocatePage 前插 new page 时与某线程 Read page_list_ 竞态
+- 或 0xcd 写进 free_lists 来自 bitmap poison（l.370 `memset(MarkBitmap()+raw_bitmap, 0xCD, 16)`）恰在 page 头 free_lists 区附近/错的 offset → 查 OldGenPage 头 sizeof 与 free_lists 偏移是否因 `kMaxDemotedPerPage=128 × DemotedObj` 大数组把 free_lists[0x58] 区域与别结构错位
+- 下一个 GC 域工程师应抓 faulting 时 `page_list_` 是哪个 node、`free_lists[sc_idx]` 那条的头为何已是 0xcd，倒查写入点（搜谁会把某 free_lists 槽写成 poison 值 / 是否 0xcd 来自 bitmap poison guard 越界覆盖）。
+
 ## 建议修复方向（GC 域专项，勿在当前并行工作树盲 patch）
 A（轻，推荐先验）：把 L930-942 这段"假设新页必含请求精确块"的直接弹块删除，改回 L945 的 `TryAllocateFromFreeLists` 回环（该路径做 in_use + sweep_lock + 精确 sc 校验）。避免在两个独立 mutex 区之间缓存 stale page。
 B（根治）：将 Allocate 全程收敛成单一 mutex_ 临界区 + 重验 page，杜绝 decommit/reclaim 与分配交错；但 AllocatePage 内部已取锁，需拆"纯 carve/create" 与 "取锁 link" 两步。
