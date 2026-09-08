@@ -63,3 +63,29 @@ timeout 60 $B && echo "PASS" || echo "rc=$?"
 # 按本机 WinSDK Debuggers 安装路径替换 <cdb_path>
 <cdb_path> -c "sxe av; g; r; k L10; q" -G -o "$B"
 ```
+
+# ⚠️ GC 域 sub-agent 1h 深挖附加（2026-09-08 第二轮）— 纠错 + 收敛
+
+以下由深挖 sub-agent（ac20f387）长期排查产出，修正了上文若干猜测，供接续 GC 域者直接使用，勿重复已排除假设。
+
+## 铁证修订
+- **崩溃是 sc14（256B size class，Test3 worker i%5==0 分支），不是 sc6。** 早前 "sc6/single-slot" 是 probe 只盯 sc6 的误读。
+- **full_gcs == 0**：崩溃发生前**无任何同步 full-GC / chaos_gc_collect 触发**。→ "Test3 内 NurseryAllocateAtomicSlow 的 scheduler gate 触发 full-GC 与 mutator pop 竞态"假设**已被实验排除**（=上一轮我给它的 main 方向是错的，勿重走）。
+- **多轮下 sc6 与 sc14 两槽都出现 0xCD** → 0xCD 涂抹跨 free_lists[] 连续 header 区，指向 **page-header 区被一片 0xCD 写覆盖**（非单一 free-list 管理/非单指针写）。
+- cdb 确定性 AV 复现不变：`AtomicAllocWorker → NurseryAllocate → NurseryAllocateAtomicSlow → Allocate → TryAllocateFromFreeLists`（mov rdx,[rdx+8] 读 0xCDCDCDCDCDCDCDCD 头）。
+
+## 未证实/已排除（请勿重试）
+- ✗ Allocate L930-942 直接弹块（删它仍崩）
+- ✗ Init 页数 2/64（都崩）→ 非回收压力
+- ✗ header/bitmap 区被 return 的 block 起点触碰（side 有 ULTRA-DIAG 探针：free-list 头从未指向非 payload 区 → 不是"block 起点错在 header"）
+- ✗ full-GC 在 mutator pop 上竞态（full_gcs==0）
+
+## 仍需 GC 域定夺的 writer 候选（指向一片 0xCD 写 header free_lists[] 连续区）
+若 free-list 头都合法指向 payload，那 0xCD 涂抹是从**别处**落到 header free_lists[] 上。候选：
+(a) `AtomicAllocWorker` 的 `(id+i)&0xFF`，当 id+i 让 8 字节块地址高 4 字节凑成 0xCDCD... 但 worker memset 的是它拿到的合法 payload block，不会撞 header，除非 block 记账 size 比实际大致 memset 越过 payload 顶端 冲回 header？—— 需查某 sc 的 block 是否可能贴近 page 顶端、其 memset(block,0,size)…不对 worker 用 pattern 非 0。
+(b) 某 size-class 的 block 紧贴 `payload_end`，worker 按 64/256 memset 但实际块更小（size-class 错配）→ 越过 payload 尾写 admin/下页。
+(c) **VirtualFree/decommit 页侧** 把 freed 页填 0xCD？ Windows VirtualFree 不填用户区，nor 为 0xCD（0xCD 是 MSVC CRT debug heap free fill）。→ 若 0xCD 真是 CRT-like fill，暗示某块内存其实是 `_msize`/new/malloc 管理而非 VirtualAlloc —— 但 OldGenPage 是 VirtualAlloc。矛盾 → 需确认 0xCD 到底是谁的 fill（CRT debug `_CrtSetDebugFillThreshold` 只在 `free`/`new` 释放时填，仅覆盖 malloc-heap，非 VirtualAlloc）。
+   → **关键下一步：分清 0xCD 是否真是 CRT-heap fill**（若是，说明 page header 或 free_lists 区某对象实际经 malloc/new 分配且被 free，与 VirtualAlloc page 混叠）vs 自写 pattern。
+(d) SweepPage L1519 清 free_lists 后重 carving 时 cover header 的 0xCD？但 full_gcs==0 无 sweep。
+
+**给接续 GC 域的最小可行动作**：在测崩溃前拿一次 **full 28 槽 free_lists[] + 相邻 header 原始字节** 的 dump（探针已具备雏形，broaden 到全部 sc + header 窗口），判定涂抹边界；若 0xCD 落在一个"本应 CRT-malloc 管理的对象"起点（对比 address 是否在 VirtualAlloc 大区域 vs CRT segment），即定位 writer。勿再假设 full-GC 参与。
