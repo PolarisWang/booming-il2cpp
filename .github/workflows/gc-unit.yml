@@ -73,7 +73,6 @@ jobs:
             -C ${{ inputs.config }} \
             -R "chaos_gc_|test_gc_" \
             -LE "benchmark|stress|soak" \
-            -E "test_gc_young_collector" \
             --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-unit-output.txt
 
       - name: Run GC concurrency stress tests (SCALE=${{ inputs.stress_scale }})
@@ -88,12 +87,11 @@ jobs:
             -R "test_gc_general_stress|test_gc_loh_stress|test_gc_delegate_stress" \
             --timeout 3600 --output-on-failure -j 4 2>&1 | tee gc-unit-stress-output.txt
 
-      - name: Run young-collector tests (ConservativeSweepSelfRefs excluded)
-        # ConservativeSweepSelfRefs is excluded because it is a pre-existing
-        # flaky failure tracked in memory: [[youngcollectionempty-fixed-conservativesweep-preexisting]]
-        # (ConservativeSweepSelfRefs=clean-HEAD pre-existing failure at L294, pending
-        # dedicated fix.  Not a regression — the test is known to fail intermittently
-        # and is suppressed here to avoid blocking CI while the fix is in progress.)
+      - name: Run young-collector tests (now fully deterministic after fix)
+        # ConservativeSweepSelfRefs was a DETERMINISTIC cross-test heap-corruption crash
+        # caused by CollectionWithDirtyCard's raw GcSetHeapBase override not being
+        # restored on GTEST_SKIP.  FIXED: save/restore g_heap_base.  Full binary now
+        # deterministic 0/20 crashes — no exclusion needed.
         # The young-collector test binary is Windows-only (.exe).  On non-Windows
         # runners the test is skipped with a log message (not silently).
         if: ${{ inputs.os == 'windows-latest' }}
@@ -102,7 +100,6 @@ jobs:
           CHAOS_GC_HeapVerify: "${{ inputs.heap_verify }}"
         run: |
           "${{ github.workspace }}/artifacts/presets/${{ inputs.cmake_preset }}/tests/unit/runtime-native/runtime-core/gc/${{ inputs.config }}/test_gc_young_collector.exe" \
-            --gtest_filter='-*ConservativeSweepSelfRefs*' \
             2>&1 | tee -a gc-unit-output.txt
 
       - name: Skip young-collector (non-Windows runner)

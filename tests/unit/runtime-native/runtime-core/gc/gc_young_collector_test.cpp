@@ -236,6 +236,12 @@ TEST_F(YoungCollectorTest, CollectionWithDirtyCard) {
 
     uintptr_t nursery_start = reinterpret_cast<uintptr_t>(nursery->begin);
     uintptr_t base_aligned = nursery_start & ~(kCardSize - 1);
+
+    // Save g_heap_base BEFORE the ad-hoc GcSetHeapBase override so the
+    // GTEST_SKIP() path (or TearDown) can restore it — preventing
+    // cross-test global-state pollution of subsequent tests.
+    uintptr_t saved_base = g_heap_base;
+
     GcSetHeapBase(reinterpret_cast<void*>(base_aligned));
 
     void* old_block = calloc(1, kCardSize + 64);
@@ -251,6 +257,7 @@ TEST_F(YoungCollectorTest, CollectionWithDirtyCard) {
     uintptr_t nursery_last_idx = (reinterpret_cast<uintptr_t>(nursery->end) - 1 - base_aligned) >> kCardShift;
 
     if (old_card_idx > nursery_last_idx) {
+        g_heap_base = saved_base;  // restore before skip — cross-test pollution
         GTEST_SKIP() << "No address overlap, testing via conservative sweep";
     }
 
@@ -268,6 +275,10 @@ TEST_F(YoungCollectorTest, CollectionWithDirtyCard) {
     EXPECT_FALSE(IsInNursery(updated_ptr));
 
     free(old_block);
+
+    // Restore g_heap_base so this ad-hoc override cannot leak global state
+    // into the next test in the same process.
+    g_heap_base = saved_base;
 }
 
 TEST_F(YoungCollectorTest, ConservativeSweepSelfRefs) {

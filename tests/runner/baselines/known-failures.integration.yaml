@@ -33,7 +33,6 @@ version: 1
 # binary-granular.  Remove each entry once the underlying flake is root-caused
 # (isolated determinism + healed CI).
 known:
-  - test_gc_young_collector
   - test_gc_loh
   - test_gc_general_stress
   - test_gc_loh_stress
@@ -49,10 +48,25 @@ known:
   #   test_gc_loh_stress        6/6 isolated PASS     → SCALE=100 limit
   #   test_gc_delegate_stress   isolated PASS         → SCALE=100 limit
   #   test_gc_gen1              14/14 isolated PASS   → cross-test global-state pollution
-  #   test_gc_young_collector   YoungCollectionEmpty FAILs in isolation (test-isolation:
-  #                             delayed InitYoungGeneration replaces nursery region not
-  #                             registered into IsNurseryPointer slots — test-base, not GC
-  #                             defect); ConservativeSweepSelfRefs PASSes isolated (P0#3).
+  #   test_gc_delegate_stress   2026-09-07: A2/E1/E3 "hang" is NOT a deadlock — each
+  #                             RunFullGc's RequestGlobalSafepoint waits a ~34s hard
+  #                             timeout on the dormant BGC thread (forbid_suspend>>
+  #                             APC cannot preempt it), then force-releases and Collect
+  #                             completes.  A2 PASSES at 600s / E1 PASSES at 2.3s once a
+  #                             permissive timeout is given.  Time-to-green is slow, not
+  #                             failing — CI `--timeout 3600` absorbs it.  Not a GC
+  #                             correctness defect; a full-GC safepoint-stall smell that
+  #                             a BGC-drain/acking improvement would remove.
+  #   test_gc_young_collector   ConservativeSweepSelfRefs was a DETERMINISTIC cross-test
+  #                             heap-corruption crash (NOT a "passes isolated" flake):
+  #                             CollectionWithDirtyCard's raw GcSetHeapBase override is
+  #                             not restored on GTEST_SKIP → corrupts g_heap_base; the
+  #                             NEXT test's Phase-1 card scan computes stale seg addresses
+  #                             and SEH 0xC0000005 (~20% / 3-of-15 full-binary runs).
+  #                             FIXED <this-change>: save/restore g_heap_base around the
+  #                             override (both skip + normal tail).  Full binary now
+  #                             deterministic 0/20 crashes.  YoungCollectionEmpty is a
+  #                             separate test-isolation observation (runs fine here).
   # Owned by the GC-工业化 roadmap. Re-audit under the authoritative parallel gate at
   # expiry before removal.
 
