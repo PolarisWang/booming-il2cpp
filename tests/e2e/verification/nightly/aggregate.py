@@ -71,8 +71,6 @@ def aggregate_reports(config, results) -> ReportSummary:  # results: NightlyResu
         config: NightlyConfig (for report_dir).
         results: NightlyResult (chunk_results dict key → {status,error_class,...})
     """
-    from dataclasses import dataclass, field  # noqa
-
     summ = ReportSummary()
     cr = results.chunk_results
     summ.total_chunks = len(cr)
