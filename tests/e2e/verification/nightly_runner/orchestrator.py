@@ -10,10 +10,10 @@ import os
 import subprocess
 import sys
 import time
-from concurrent.futures import ProcessPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
-from multiprocessing import Manager
 from pathlib import Path
+from threading import Semaphore
 from typing import Any
 
 # Ensure testing/ and testing/foundation-dll/ are on sys.path so
@@ -360,7 +360,7 @@ def _run_profile_pass(
 
     profile_workers = max(1, config.max_workers // 2)
     profile_futures = []
-    with ProcessPoolExecutor(max_workers=profile_workers) as executor:
+    with ThreadPoolExecutor(max_workers=profile_workers) as executor:
         for asm, slug, fdir in all_chunks:
             future = executor.submit(
                 _run_chunk_stages,
@@ -484,10 +484,10 @@ class NightlyOrchestrator:
         print(f"{'='*60}")
 
         phase_a_stages = ["build", "fact"]
-        bench_semaphore = Manager().Semaphore(config.bench_workers or 1)
+        bench_semaphore = Semaphore(config.bench_workers or 1)
         result.chunk_results = {}
 
-        with ProcessPoolExecutor(max_workers=config.max_workers) as executor:
+        with ThreadPoolExecutor(max_workers=config.max_workers) as executor:
             futures = []
             for asm, slug, fdir in all_chunks:
                 future = executor.submit(
@@ -533,7 +533,7 @@ class NightlyOrchestrator:
                 "benchmark", "managed_benchmark", "hotupdate",
                 "benchmark_report", "coverage_audit",
             ]
-            with ProcessPoolExecutor(max_workers=config.max_workers) as executor:
+            with ThreadPoolExecutor(max_workers=config.max_workers) as executor:
                 futures = []
                 for asm, slug, fdir in passed_chunks:
                     # Phase B worker: _run_single_chunk (handles log capture +
