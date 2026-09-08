@@ -313,3 +313,38 @@ REMAIN 项 3 和 4 已完成（672bcee2a）。确凿（native test_async_integra
 - R4: TaskYieldRoundTripAcrossThreadPool —— 完整跨线程往返:
   builder_start → MoveNext(is_completed=0挂起→queue ThreadPool)→ worker fire continuation
   → MoveNext 重入(state=0→SetResult(1)→completed=1,result=1)。4 测试 ALL PASS。
+
+### 2026-09-08 R2-full（真 codegen 产物实编译+驱动）状态
+真 codegen 产物已实编译+链接+运行到 native exe（artifacts/r2full/asyncgen/r2full_asyncgen.exe）。
+确凿证据（运行输出）:
+- ChaosRuntimeHost 初始化 + threadpool dispatcher armed(g_async_dispatch_continuation_fn!=0)。
+- codegen GetOne entry(AOT 非手写)被调用;Start wrapper 执 async_task_builder_get_task + 驱动 MoveNext。
+- MoveNext suspend 路径 engaged: async_yield_get_is_completed armed==1 → 0(override 文件生效) → 走 AwaitUnsafeOnCompleted。
+- AwaitUnsafeOnCompleted(YieldAwaiter) wrapper: g_async_dispatch_continuation_fn!=0 时 new ContinuationData + queue 到 threadpool。
+
+REMAIN 缺陷（只差最后一步）: task 完成但 result==0 非 1。MoveNext resume 重入(state==0)未正确跳到
+SetResult(1) 尾(或 result local 未填 1)。看 native-aot.generated.cpp ~1438+ probe + ~1623 SetResult tail:
+MoveNext 结构是 if(state==0){await setup} else{resume},但 Tail(CHAOS_EH_END 后)无条件 SetResult + 重
+置 state=-2。可能 resume 重入写 state 分支/result local(chaos_locals[1]) 用到了初值 0。
+命令复现: cd artifacts/r2full/asyncgen && cmake --build build --config Debug && ./build/Debug/r2full_asyncgen.exe
+(cmake 需 -DCHAOS_SDK_ROOT 指向 source-coherent ref preset libs,见 CMakeLists)。
+下一步: 修 MoveNext resume 语义 — 确证 resume 时 MoveNext 读到 state==0 应 goto 尾(SetResult)而非重跑
+await setup。或改 codegen switch 使 resume(非首跑)分支进 tail。
+
+### R2-full 修复定位（给下一 session 的精确修复说明）
+根因已 100% 定位在 codegen MoveNext lowering（非 runtime/async.h）。见
+`artifacts/r2full/asyncgen/native-aot.generated.cpp` ~1435-1582。
+
+具体: GetOne = `await Task.Yield(); return 1;`。其 MoveNext 被发射为:
+- `if(is_completed != 0){ GetResult(); chaos_locals[1]=1; }` ← **await 后的 `return 1` 只被发射在"同步完成"分支**。
+- `else { /* suspend: state=0 + store awaiter + AwaitUnsafeOnCompleted(queue), 然后 state 又被写回 -1 */ }`
+- try 后无条件 Tail: `SetResult(chaos_locals[1])`.
+
+问题: suspend 走 else,`chaos_locals[1]`从未被赋 1(它只在 sync-complete 分支被赋)。且 suspend 把 state 归位后被
+register 后续的 stfld 又把 state 改 -1(非 resume 索引?),重入不跳 after-await。两因叠加 → SetResult(chaos_locals[1])
+其中 chaos_locals[1]==0 → result=0。
+
+最小正确修复 = codegen async MoveNext 的 `return <expr>`(await 之后)须 stfld 进 d__ field 或保证在"共享尾"
+(非仅 sync-complete 分支)对 resume 也赋值;且 suspend 后 state 应保留为 resume-to-after-await 标记、不得被后续
+置成使 if(state==0) false 的值。即对齐 Roslyn: suspension 存 resume-index,resume 进 move-next 时 goto post-await
+该值已捕获到 d__ 供 builder 尾。接入点在新 AsyncCoroutineEmitter/结构化 IR 的 async 分支(MethodEmission 段A)。

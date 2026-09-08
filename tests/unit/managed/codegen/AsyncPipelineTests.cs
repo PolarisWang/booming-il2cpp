@@ -1,4 +1,5 @@
 using Chaos.IL2CPP.Contracts;
+using Chaos.IL2CPP.Generator;
 using Chaos.IL2CPP.Pipeline;
 using Xunit;
 
@@ -262,5 +263,101 @@ public sealed class AsyncPipelineTests
         // continuation resumes on another thread.
         Assert.DoesNotContain("__chaos_stack_obj", entry!.MethodSource);
         Assert.Contains("CHAOS_IL2CPP_NEW_GC", entry.MethodSource);
+    }
+
+    /// <summary>
+    /// Repo-relative stable output dir for R2-full native round-trip proof.
+    /// Emitted C++ (native-aot.generated.*.h/cpp etc.) and the hand-written
+    /// driver + CMakeLists.txt live here, ready for a bounded native compile.
+    /// </summary>
+    private static string R2FullOutputRoot()
+    {
+        var dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+        while (dir != null && !Directory.Exists(Path.Combine(dir.FullName, ".git")))
+            dir = dir.Parent;
+        var repoRoot = dir?.FullName ?? throw new DirectoryNotFoundException(
+            "Could not locate repository root (.git directory).");
+        return Path.Combine(repoRoot, "artifacts", "r2full", "asyncgen");
+    }
+
+    /// <summary>
+    /// Full NATIVE emission of the real AsyncTestAssembly closure into a stable
+    /// dir. Drives PipelinePlan.Execute -> NativeAotEmitter.GenerateFromArtifacts
+    /// (the same surface FullAssemblyEmitter uses) and writes every generated
+    /// source page to disk so the files can be compiled + linked by a bounded
+    /// native driver (not the whole framework).
+    ///
+    /// This is R2-full-1 step 1: surface the REAL compiler-emitted C++ for
+    /// GetOne's async state machine (incl. &lt;GetOne&gt;d__0::MoveNext) as
+    /// compilable headers/translation units.
+    /// </summary>
+    [Fact]
+    public void R2Full_RealCodegen_EmitsGetOneAndMoveNext()
+    {
+        Assert.True(File.Exists(s_asyncAssemblyPath),
+            $"AsyncTestAssembly.dll not built at {s_asyncAssemblyPath}");
+
+        var request = new ManagedClosureRequest(
+            InputAssemblyPath: s_asyncAssemblyPath,
+            OutputRootPath: R2FullOutputRoot(),
+            EntryPointSubjectIdOverride: null,
+            AdditionalAssemblyPaths: null,
+            FullAssemblyClosure: true);
+
+        var exec = new PipelinePlan().Execute(request);
+        Assert.False(exec.IsFailure,
+            $"Pipeline failed: {exec.Error?.Code}: {exec.Error?.Message}");
+        var result = exec.Value!;
+
+        // GenerateFromArtifacts emits the full assembly. The pipeline's OWN
+        // lowering plan is used so this proves the un-modified codegen surface
+        // produces the async state machine C++ (correct plan/entry for closure).
+        var emitted = new NativeAotEmitter().GenerateFromArtifacts(
+            result.NativeAotLoweringPlan,
+            result.AotCoreIr,
+            result.ClosureManifest!,
+            result.MetadataRegistration,
+            result.SupplementalMetadataTemplate,
+            R2FullOutputRoot(),
+            mode: CodegenMode.Aot,
+            subjectMethods: null,
+            goldProfilePath: null,
+            allManagedMethods: result.AllManagedMethods);
+
+        var outputRoot = R2FullOutputRoot();
+        Directory.CreateDirectory(outputRoot);
+
+        var written = new List<string>();
+        foreach (var source in emitted.GeneratedSources)
+        {
+            string contents = source.Contents
+                ?? source.ContentsBuilder?.ToString()
+                ?? string.Empty;
+            if (contents.Length == 0)
+                continue; // structural entries (paths only) have no source text
+            var destPath = Path.Combine(outputRoot, source.RelativePath);
+            Directory.CreateDirectory(Path.GetDirectoryName(destPath)!);
+            File.WriteAllText(destPath, contents);
+            written.Add(source.RelativePath);
+        }
+
+        // The async state machine must be part of what got emitted to native C++
+        // headers/TUs. Spans page source so the assertion is cheap.
+        string combined = string.Join("\n", written);
+        Assert.Contains("generated", combined, StringComparison.Ordinal);
+
+        // GetOne entry and the compiler-generated MoveNext body must reference the
+        // native async.h-building helpers (async_task_builder_* / async_builder_*).
+        string pagesPath = written.FirstOrDefault(w =>
+            w.EndsWith(".cpp", StringComparison.Ordinal) && w.Contains("generated", StringComparison.Ordinal))
+            ?? throw new Xunit.Sdk.XunitException(
+                "Emission produced no native-aot.generated.cpp; cannot verify bodies.");
+        var pageContents = File.ReadAllText(Path.Combine(outputRoot, pagesPath));
+
+        Assert.Contains("GetOne", pageContents);
+        Assert.Contains("d__", pageContents);
+        Assert.Contains("MoveNext", pageContents);
+        Assert.True(pageContents.Contains("async_task_builder") || pageContents.Contains("async_builder"),
+            "GetOne/MoveNext emitted C++ should route builder ops to native async.h helpers.");
     }
 }
