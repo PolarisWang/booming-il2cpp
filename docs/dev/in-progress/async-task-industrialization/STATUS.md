@@ -287,3 +287,17 @@ REMAIN（下一 session 入口,codegen emission 未做 end-to-end runtime 验证
 
 recommended_next(fresh): R2 把 AsyncTestAssembly codegen 产出接实编译,先证 Start wrapper 真调 MoveNext + entry
 真 produce completed=1 Task(不走 ThreadPool);绿后再叠 3/4 跨线程。
+
+### 2026-09-08 R2a（native 冒烟验证）done
+**REMAIN 项 R2a 已完成（c9cfec49a）**：async.h native helpers 真人编译验证 + 冒烟。
+确凿（native test_async_integration_smoke 17 tests 编译过,SegmentB_*2 新+HandCrafted*1 旧均 PASS）:
+- `async_task_builder_start` 驱动手写 MoveNext → Task 同步 completed。（SegmentB_AsyncTaskBuilderStartCompletes）
+- `async_await_task_resume` 注册 continuation,从 ThreadPool worker complete Task → MoveNext 重入并 SetResult。
+  （SegmentB_AsyncAwaitTaskResumesAndCompletes）
+另修 ContinuationRunsOnThreadPoolWorker pre-existing capturing-lambda 不匹配 fn-ptr AsyncContinueFn(改 ctx-ptr)。
+
+REMAIN(2,3,4)未做:
+- R3 Task.Yield is_completed: 现恒1(即时)。.NET Task.Yield语义 is_completed=false(恒异步线程池跳)。真让
+  codegen-emitted GetOne 挂起跨线程需 is_completed 返回0(需 dispatcher 注册时才如此,保留同步 smoke 路径)。
+- R4 e2e: 需把 codegen-emitted GetOne/DoVoid 真实 C++ 接进 native 测试 build 编译链接(全 R2 pipe 的前置)。
+- R2b GC-heap box: entry 仍 stack `__chaos_stack_obj` 分配 d__; 跨 await 跨线程挂起需 CHAOS_IL2CPP_NEW_GC。

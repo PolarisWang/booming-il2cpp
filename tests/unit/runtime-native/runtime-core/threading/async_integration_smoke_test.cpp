@@ -666,3 +666,86 @@ TEST_F(AsyncIntegrationTest, SegmentB_AsyncAwaitTaskResumesAndCompletes) {
     EXPECT_TRUE(WaitFor([&sm] { return sm.state == -1; }))
         << "MoveNext continuation did not re-enter to completion";
 }
+
+// ══════════════════════════════════════════════════════════════════════════════
+// R3/R4: Task.Yield cross-thread round trip — mirror the codegen-emitted MoveNext
+// flow for `async Task<int> GetOne(){ await Task.Yield(); return 1; }`:
+//   MoveNext (initial, state==-1):  yield = Task.Yield().GetAwaiter();
+//     if (yield.IsCompleted) yield.GetResult();      // NEVER with dispatcher (R3)
+//     else { state=0; builder.AwaitUnsafeOnCompleted(ref yield, ref this); return; }
+//   MoveNext (resumed, state==0):    // jump past the await
+//     yield.GetResult(); builder.SetResult(1); state=-1;
+// ══════════════════════════════════════════════════════════════════════════════
+
+struct AsyncSM_YieldGetOne {
+    CHAOS_IL2CPP_INTPTR builder_slot = 0;   // field_<>t__builder (holds AsyncTask handle)
+    int state = -1;                          // field_<>1__state
+    int result = 0;
+};
+
+// Thread-pool queue wrapper matching the dispatcher used under runtime init.
+static void YieldDispatcherCb(AsyncContinueFn cb, void* ctx, CHAOS_IL2CPP_INTPTR handle) {
+    (void)handle;
+    threading::ThreadPoolQueueUserWorkItemUnsafe([](void* st) {
+        auto* pair = static_cast<std::pair<AsyncContinueFn, void*>*>(st);
+        pair->first(0, pair->second);
+        delete pair;
+    }, new std::pair<AsyncContinueFn, void*>(cb, ctx));
+}
+
+void AsyncSM_YieldGetOne_MoveNext(CHAOS_IL2CPP_INTPTR box) {
+    auto* sm = reinterpret_cast<AsyncSM_YieldGetOne*>(box);
+    if (sm->state == 0) {
+        // RESUMED past the await: GetResult + SetResult + mark done.
+        chaos::il2cpp::common::async_yield_get_result(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(sm)); // no-op
+        chaos::il2cpp::common::async_task_builder_set_result_raw(
+            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sm->builder_slot),
+            static_cast<CHAOS_IL2CPP_INTPTR>(1));
+        sm->state = -1;
+        return;
+    }
+    // INITIAL: await Task.Yield.  With dispatcher registered, is_completed == 0
+    // (R3) → suspend: register MoveNext as continuation; on resume re-enter with state 0.
+    auto awaiterSlot = static_cast<CHAOS_IL2CPP_INTPTR>(async_yield_create() & 0xFF); // non-null sentinel
+    (void)awaiterSlot;
+    CHAOS_IL2CPP_INTPTR isc = chaos::il2cpp::common::async_yield_get_is_completed(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sm->result));
+    if (isc != 0) {
+        // Not suspended (no dispatcher / sync path): GetResult inline + complete.
+        chaos::il2cpp::common::async_task_builder_set_result_raw(
+            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sm->builder_slot),
+            static_cast<CHAOS_IL2CPP_INTPTR>(1));
+        sm->state = -1;
+        return;
+    }
+    // Suspend: state=0, queue MoveNext to thread pool via the dispatcher.
+    sm->state = 0;
+    chaos::il2cpp::common::async_await_yield_resume(
+        reinterpret_cast<void*>(box), AsyncSM_YieldGetOne_MoveNext);
+}
+
+// Full cross-thread round trip, thread-pool dispatcher registered (R4).
+TEST_F(AsyncIntegrationTest, TaskYieldRoundTripAcrossThreadPool) {
+    register_async_dispatch_continuation_fn(YieldDispatcherCb);
+    AsyncSM_YieldGetOne sm;
+    sm.builder_slot = 0;
+    CHAOS_IL2CPP_INTPTR builder_ref =
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sm.builder_slot);
+
+    // AsyncGetOne entry-equivalent: drive builder.Start(ref sm).
+    CHAOS_IL2CPP_INTPTR rc = chaos::il2cpp::common::async_task_builder_start(
+        builder_ref, AsyncSM_YieldGetOne_MoveNext, &sm);
+    EXPECT_EQ(1, rc);
+
+    // Start should have suspended at the yield (state==0), NOT completed synchronously.
+    auto* task = chaos::il2cpp::common::require_async_task(sm.builder_slot);
+    EXPECT_FALSE(task->completed.load());
+    EXPECT_EQ(0, sm.state);
+
+    // The ThreadPool worker fires the continuation → MoveNext resumed → SetResult(1) → completed.
+    EXPECT_TRUE(WaitFor([task] { return task->completed.load(); }));
+    EXPECT_EQ(1, task->result);
+    EXPECT_FALSE(task->faulted.load());
+    EXPECT_EQ(-1, sm.state);
+    register_async_dispatch_continuation_fn(nullptr);
+}

@@ -183,6 +183,15 @@ inline CHAOS_IL2CPP_INTPTR async_yield_get_awaiter(CHAOS_IL2CPP_INTPTR awaiter_r
 inline CHAOS_IL2CPP_INTPTR async_yield_get_is_completed(CHAOS_IL2CPP_INTPTR awaiter_ref)
 {
     (void)awaiter_ref;
+    // When a thread-pool dispatcher is registered (runtime init), Task.Yield()
+    // is NEVER synchronously complete — it always suspends and resumes via the
+    // thread pool.  This makes the codegen-emitted MoveNext take the suspend
+    // path (store awaiter, state=0, call AwaitUnsafeOnCompleted → continuation
+    // queued to ThreadPool) instead of the fast path (GetResult inline).
+    // Without a dispatcher (standalone/smoke TU), yield is instant-complete so
+    // the synchronous path (HandCraftedStateMachineOne) works without a pool.
+    if (g_async_dispatch_continuation_fn != nullptr)
+        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
     return static_cast<CHAOS_IL2CPP_INTPTR>(1);
 }
 
