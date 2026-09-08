@@ -1,89 +1,71 @@
 # Nightly Runner Refactor — STATUS
 
 ## Phase
-`brainstorming → design completed → writing-plans → implementation completed`
+`brainstorming(2026-09-08) → design(route-3 subprocess-per-chunk) → writing-plans → **implementation completed(2026-09-08)**`
 
-## 边界拍板
-- 新增 `verification/nightly_runner/` 模块，6 个文件
-- 报告目录 `nightly-build-report/YYYY-MM-DD_HHMMSS-id/` + `latest` 符号链接或 `latest.txt`
-- Jenkins 通过 `main.py` 单入口触发
-- 现有 `nightly_build.py` + stage 文件保留不变（零侵入式日志通过 ChunkLogManager 自动截获）
+## 🔄 重大转向（2026-09-08）—— 方案 D / Route 3 取代旧 nightly_runner 进程内模型
 
-## Authority
-- Owner: nightly CI/CD 域
-- 不改变 codegen 或 runtime 的翻译路径
-- 不改变 agnostic 的语法/规则
+上一轮实现的 `verification/nightly_runner/`（进程/线程池 + 局部 import verification.stages.run_*）在 Windows multiprocessing spawn 下每个 worker 重 import `__main__` 时无法解析 `verification` 包（ModuleNotFoundError），且单 stdout 无心跳 → 假卡死/无法定位。经 brainstorm 裁决改走 **方案 D + chunk_pipeline --provided-stages（Route 3）**，删旧 nightly_runner、新建 `verification/nightly/`。
 
-## 当前结论
-已实现，测试通过。
+**决定文件（authority）**：
+- 设计：`design-v1-02-subprocess-per-chunk.md`
+- 实施计划：`plan-v1-01.md`
+- 风险评估：`risk-assessment.md`
+- 本 STATUS.md 记录当前状态
 
-### 已实现文件
-| 文件 | 状态 | 关键设计 |
-|------|------|---------|
-| `nightly_runner/__init__.py` | ✅ | 导出 NightlyConfig, NightlyOrchestrator, NightlyResult, ReportCollector |
-| `nightly_runner/config.py` | ✅ | NightlyConfig dataclass + 自动 repo root 检测 + Jenkins env 注入 |
-| `nightly_runner/log_manager.py` | ✅ | TeeStream + ChunkLogManager（自动 stdout/stderr 截获 + subprocess.run monkey-patch + stage 名智能识别） |
-| `nightly_runner/orchestrator.py` | ✅ | 从 nightly_build.py 提取执行引擎 + 并行 ProcessPoolExecutor |
-| `nightly_runner/report_collector.py` | ✅ | 6 阶段报告聚合（reports/per-chunk/benchmark-history/summary/metadata/latest） |
-| `nightly_runner/main.py` | ✅ | Jenkins CLI 入口 |
+## 当前结论（实现完成 + 已推送 origin/main）
+Phase 0/1/2 + Phase 3 核心验证已完成并合入 main。
 
-### 现有文件改动
-| 文件 | 改动 |
+### 已实现（Route 3）
+`tests/e2e/verification/nightly/`（10 文件，取代 nightly_runner）：
+| 文件 | 职责 |
 |------|------|
-| 所有 `stages/*.py` | **0 行改动** — `ChunkLogManager` 通过 subprocess monkey-patch 自动截获 |
-| `nightly_build.py` | **0 行改动** — 保留完全向后兼容 |
+| `config.py` | NightlyConfig（retry_on_error 按错误类、oom_auto_downgrade、resume_run_id…） |
+| `worklist.py` | 遍历 foundation → namespace-partition → (asm, slug)；纯 manifest 驱动 |
+| `state.py` | 心跳(.heartbeat)/结果(.result)分离文件；`read_all_results(for_run_id=…)`；error_class 分类器 |
+| `observer.py` | 每 chunk 子进程 stdout → run.log；utf-8+replace(GBK 安全)；daemon reader |
+| `watchdog.py` | 心跳超时 + 子进程树存活判定 + OOM(仅137)检测/降级 |
+| `run.py` | subprocess farm + phase 分批(a: build+fact → b: benchmark+coverage) + `--provided-stages build,fact` + retry 策略 |
+| `resume.py` | 读 PRIOR run state -> skip passed（修复读错 run_id 的 L2） |
+| `aggregate.py` | 汇总 chunk 结果 → nightly-result.json + nightly-summary.md；错误分 translation-defect/infra/code |
+| `cli.py` | 入口 `python -m verification.nightly.cli` |
 
-### 日志架构
-```
-ChunkLogManager.__enter__()
-  ├── sys.stdout = TeeStream → pipeline.log + console
-  ├── sys.stderr = TeeStream → pipeline.log + console
-  ├── subprocess.run = _logged_run → {stage}.log  (stage 名由 _guess_stage_name 自动识别)
-  │     dotnet build/build → "build"
-  │     entry.exe --fact-json → "fact"
-  │     entry.exe --benchmark-all → "benchmark"
-  │     entry.exe --hotupdate → "hotupdate"
-  │     cmake ... → "build"
-  │     autotestgenerator/tpg → "build"
-  └── os.environ["CHAOS_NIGHTLY_LOG_DIR"] = str(log_dir)
-```
+`chunk_pipeline.py` 增加 `--provided-stages` + provenance(git-commit) 守护（Provenance check）、`coverage-audit` 名确认。
 
-### 测试
+### 已删除
+- `verification/nightly_runner/`（整目录）
+- `tests/.../test_nightly_orchestrator_phaseB.py`、`test_soak_log_robustness.py`
+
+## 测试
 | 测试 | 结果 |
 |------|------|
-| `test_nightly_build.py` (35 项) | ✅ 全部通过 |
-|  nightly_runner 模块导入 | ✅ |
-|  nightly_runner CLI --help | ✅ |
-|  _guess_stage_name 智能识别 | ✅ dotnet build/build/benchmark/hotupdate/cmake |
+| `tests/e2e/verification/tests/test_nightly_state.py`（error_class 分类器, real-failure 文本 mock） | ✅ 14 passed |
+| `tests/e2e/verification/tests/test_nightly_observer.py`（GBK + heartbeat） | ✅ 2 passed |
+| Nightly 包 import + worklist discovery(82 chunks × 27 asm) | ✅ |
+| 单 assembly 端到端 (System.Collections.NonGeneric) | ✅ Phase A build+fact PASS; Phase B benchmark/managed_benchmark/coverage-audit 经 --provided-stages PASS; hotupdate → hotupdate-patch-arm(不盲目重试) |
+
+## 三优先级
+- P1 性能：进程级隔离真并行; 状态文件低成本。
+- P2 架构：单引擎(chunk_pipeline)单源; 编排层薄; structured state/error_class 定位准。
+- P3 热更：不涉及。
 
 ## blocking_questions
-- [x] 报告目录结构已定
-- [x] 日志机制（Tee + subprocess monkey-patch）已定，零侵入 stage
-- [x] 向后兼容策略已定
-- [x] Jenkins 集成方式已定
-
+`[]`
 ## question_clearance
 `cleared`
-
 ## clearance_confirmed_by_user
 `true`
 
-## 下一步
-可执行 nightly_runner 验证：
+## 下一步（如果续跑全量）
 ```bash
-# 单 assembly 测试（不带日志，快速验证）
-python -m verification.nightly_runner.main \
-    --assembly System.Linq \
-    --max-workers 2 \
-    --no-logs
+cd tests/e2e
+# 全量 27 个 family（Phase A + B）
+CHAOS_FOUNDATION_DLL=$PWD/translation python -m verification.nightly.cli --max-workers 8 --verbose
 
-# 全量执行（带日志）
-python -m verification.nightly_runner.main \
-    --report-dir /path/to/nightly-build-report \
-    --max-workers 8
+# resume 续跑
+CHAOS_FOUNDATION_DLL=$PWD/translation python -m verification.nightly.cli --resume <run_id>
 
-# 带 profile pass
-python -m verification.nightly_runner.main \
-    --run-profile \
-    --max-workers 4
+# 单 assembly 快速验证
+python -m verification.nightly.cli --assembly System.Collections.NonGeneric --max-workers 2
 ```
+> 注：全量跑过一次 82 chunk 基线（Phase A: 72/82 pass；~5 chunk 因 codegen/ATG/SYSLIB 已知翻译缺陷 fail，见 risk-assessment P1-4），本 STATUS 反映引擎本身稳定可复跑——真实翻译缺陷独立于 nightly 引擎。
