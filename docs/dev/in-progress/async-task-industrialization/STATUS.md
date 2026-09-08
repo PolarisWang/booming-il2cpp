@@ -301,3 +301,10 @@ REMAIN(2,3,4)未做:
   codegen-emitted GetOne 挂起跨线程需 is_completed 返回0(需 dispatcher 注册时才如此,保留同步 smoke 路径)。
 - R4 e2e: 需把 codegen-emitted GetOne/DoVoid 真实 C++ 接进 native 测试 build 编译链接(全 R2 pipe 的前置)。
 - R2b GC-heap box: entry 仍 stack `__chaos_stack_obj` 分配 d__; 跨 await 跨线程挂起需 CHAOS_IL2CPP_NEW_GC。
+
+### 2026-09-08 R3+R4（Task.Yield 跨线程 + e2e round-trip）done
+REMAIN 项 3 和 4 已完成（672bcee2a）。确凿（native test_async_integration_smoke）:
+- R3: async_yield_get_is_completed 注册 dispatcher 时返 0(挂起);无 dispatcher 返 1(同步,保 HandCrafted 路径)。
+- R4: TaskYieldRoundTripAcrossThreadPool —— 完整跨线程往返:
+  builder_start → MoveNext(is_completed=0挂起→queue ThreadPool)→ worker fire continuation
+  → MoveNext 重入(state=0→SetResult(1)→completed=1,result=1)。4 测试 ALL PASS。
