@@ -298,6 +298,12 @@ public sealed partial class NativeAotLoweringPlanner
                 continue;
             if (TypeHasFinalizer(typeId))
                 continue;
+            // Async state-machine box types (compiler-generated <X>d__N) must NOT be
+            // stack-allocated: their >d__ struct is boxed into the task's continuation and
+            // escapes the method to resume on another thread after the entry frame returns.
+            // A stack object would be dangling when the continuation (MoveNext) re-runs.
+            if (IsAsyncStateMachineBoxTypeId(typeId))
+                continue;
 
             bool hasGcRef = false;
             bool hasAnyField = false; // rejects header-only types where sizeof(struct) < managed object size

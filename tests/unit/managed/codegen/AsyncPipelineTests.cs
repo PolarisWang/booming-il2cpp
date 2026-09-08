@@ -247,4 +247,20 @@ public sealed class AsyncPipelineTests
         Assert.True(hasResult, "MoveNext body should call async_task_builder_set_result_raw/_void");
         Assert.Contains("async_task_builder_set_exception", matchMethod.MethodSource);
     }
+
+    [Fact]
+    public void GetOneEntry_AllocatesOnGcHeapNotStack()
+    {
+        using var ctx = new TempCtx();
+        var (_, tmpl, _) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
+        var entry = tmpl.Methods.FirstOrDefault(m =>
+            m.SubjectId.Contains("AsyncMethods::GetOne") || m.SubjectId.Contains("AsyncMethods::DoVoid"));
+        Assert.NotNull(entry);
+
+        // R2b: async entry must allocate the >d__ box on the GC heap — not on the C++
+        // stack — so the box survives the entry frame returning and is alive when the
+        // continuation resumes on another thread.
+        Assert.DoesNotContain("__chaos_stack_obj", entry!.MethodSource);
+        Assert.Contains("CHAOS_IL2CPP_NEW_GC", entry.MethodSource);
+    }
 }
