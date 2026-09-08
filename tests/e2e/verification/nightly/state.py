@@ -90,15 +90,27 @@ def read_result(config, key: str) -> dict[str, Any]:
         return {"key": key, "status": "unknown"}
 
 
-def read_all_results(config):
-    """Scan run-state/<run_id>/ for all .result files. Returns dict key→payload."""
-    d = run_state_dir(config)
+def read_all_results(config, *, for_run_id: str | None = None):
+    """Scan run-state/<run_id>/ for all .result files. Returns dict key→payload.
+
+    If `for_run_id` is given, scan THAT run's state dir instead of
+    config.run_id — used by resume (which must read the PRIOR run's results,
+    not the current one's).
+    """
+    run_id = for_run_id if for_run_id else config.run_id
+    d = Path(config.report_dir) / "run-state" / run_id
     out: dict[str, dict] = {}
     if not d.is_dir():
         return out
     for f in sorted(d.glob("*.result")):
         key = f.name[: -len(".result")]
-        out[key] = read_result(config, key)
+        p = f
+        if not p.is_file():
+            continue
+        try:
+            out[key] = json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            out[key] = {"key": key, "status": "unknown"}
     return out
 
 
@@ -144,7 +156,12 @@ def classify_exit(exit_code: int | None, tail_text: str) -> str:
     # 9. killed
     if exit_code in (-9, -15):
         return "killed"
-    # 10. linker/other C/C++ error (native build, codegen OK)
+    # 10. native-linker-error: C/C++ linker/build error NOT in codegen output
+    #     (e.g. LNK2019, LNK2001, or C errors in non-codegen source files).
+    #     Rule #2 already catches native-aot.generated.cpp C errors; the "error C"
+    #     here is for the remaining C/C++ errors from other TU compilation.
+    #     The "error CS" sub-branch is dead (rule #3 and #7 catch it earlier)
+    #     but harmless; keep for documentation.
     if "error C" in t:
-        return "csharp-error" if ("error CS" in t) else "native-codegen-syntax"
+        return "native-linker-error"
     return "unknown"

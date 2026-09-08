@@ -19,6 +19,7 @@ from pathlib import Path
 
 from .worklist import WorkItem
 from . import state as nstate
+from .resume import build_resume_worklist
 
 
 @dataclass
@@ -227,14 +228,3 @@ def run_phases(config, worklist: list[WorkItem]) -> NightlyResult:
     return combined
 
 
-def build_resume_worklist(config, full_worklist):
-    """Given a prior run_id and the current full worklist, return only not-yet-passed items."""
-    # reuse full worklist & filter out any with status == passed in prior state
-    d = nstate.read_all_results(config)   # reads <report_dir>/run-state/<resume_run_id>
-    out = []
-    for w in full_worklist:
-        prior = d.get(w.key, {})
-        if prior.get("status") == "passed":
-            continue
-        out.append(w)
-    return out

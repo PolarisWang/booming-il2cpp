@@ -24,8 +24,9 @@ def build_resume_worklist(config, full_worklist: list[WorkItem]) -> list[WorkIte
         # Nothing to resume against; caller should have passed a run id.
         return list(full_worklist)
 
-    # Read prior state from <report_dir>/run-state/<resume_run_id>
-    prior = nstate.read_all_results(config)
+    # Read prior state from <report_dir>/run-state/<resume_run_id> — the PRIOR
+    # run's results, not the current run's (config.run_id differs).
+    prior = nstate.read_all_results(config, for_run_id=config.resume_run_id)
     remaining = []
     skipped = 0
     for w in full_worklist:
