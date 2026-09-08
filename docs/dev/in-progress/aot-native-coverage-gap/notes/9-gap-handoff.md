@@ -5,19 +5,27 @@
 **已修复并推送**（`937847fbb` ATG global:: + `21ea08267` ATG ref-struct）：CoreLib system-3 chunk
 从 4616 编译错 → **3/3 stages passed**。整族 CoreLib ci_smoke 现 **55781/55850 fact passed**。
 
-**「2 个剩余 fact fail」逐案调查结论（3 agent 并行,** 无真实 codegen 缺陷）**：
+**「剩余 fact fail」逐案调查结论（3 agent 并行,** 无真实 codegen 缺陷）**：
 - **system-6**：假阳性。aggregate 在重建前读到旧 stale artifact (total=0)；实际 `3779/3779 passed`。
 - **threading-tasks**："5/10" 是 stage 级统计非事实失败；**456/456 fact 实际全过**。
 - **runtime-interop**：6 fact fail（si 39/40/405/406/411/465 → codegen idx 96/97/114/115/141/745）
   全为 `System.Runtime.InteropServices.Marshal` COM 测试方法（GetObjectForIUnknown 等）。
-  body 全 NativeGenerated、语义正确，但 smoke subject 对不可复现的 COM/unmanaged 调用返 0 而非
+  body 全 NativeGenerated、语义正确（基于 smoke 对 COM 调用的 0-vs-42 sentinel 判定——0 指示不可调用的
+  COM 对象，非翻译错误），但 smoke subject 对不可复现的 COM/unmanaged 调用返 0 而非
   42 sentinel → 被 harness 当真实失败而非 UNVERIFIED-smoke。是 **ATG/harness UNVERIFIED 分类边角**，
   非 AOT 翻译缺陷。
+
+> **语义正确性验证局限**：上述"语义正确"基于 smoke subject 的 sentinel 判定（42=正常返回，0=COM 不可调用），
+> 而非全量方法级语义验证。0 而非 42 仅说明 COM 调用在无 COM 运行时不可复现，不证明 body 在真 COM 场景下
+> 行为正确。此局限与 `UNVERIFIED` 分类的语义一致，属 ATG 测试治理范畴。
 
 **净结论**：9 个 aot-native-coverage-gap 的 fact 无一真实失败（全部过系统 5 之外的已跑 chunks 通过），
 无待修 codegen/AOT 翻译缺口的残留。runtime-interop Marshal COM smoke 分类问题属
 测试治理/ATG 域（见 [[com-marshaller-aot-semantic-alignment]] / [[atg-fact-false-positive-unverified-fix]]），
 不在本 GAP 追踪域。
+
+> **口径提醒（数字对不上，未在文中补臆测）**：首行 `55781/55850` = 69 fact fail；下方仅逐案归类了
+> runtime-interop 的 6 个（COM 假阳性）+ 说明 system-6 / threading-tasks 各为统计口径假象。
 
 下接原交接正文（9 GAP 注册状态 + 入口仍在，作为参考可关闭/归档）。
 
@@ -64,13 +72,16 @@ chaos-il2cpp codegen 专家 agent（dev-il2cpp-codegen-expert）。
 
 ## 下一会话入口
 
-### 第一优先级：分诊 CoreLib `system-3` chunk 的 CS1525 生成 bug
+### ~~第一优先级：分诊 CoreLib `system-3` chunk 的 CS1525 生成 bug~~ ✅ 已解决
 
-**症状**：`ci_smoke --mode full` 在 CoreLib system-3 chunk 的 managed-combined 编译时
+> **2026-09-08 更新**：此阻塞已由 `937847fbb` (ATG global::) + `21ea08267` (ATG ref-struct) 修复。
+> system-3 chunk 3/3 stages passed，不再需要分诊。下方原正文保留供历史参考，不再作为待办。
+
+**遗留症状**：`ci_smoke --mode full` 在 CoreLib system-3 chunk 的 managed-combined 编译时
 抛出数千 CS1525/CS1003/CS1001 语法错。错误位置集中在 `CombinedSubjects.cs` 的 `UIntPtr.TryParse`
 相关行（line ~72500+），`string` 关键字出现在语法错误位置。
 
-**根本原因悬而未决**: 可能是 ATG subject generator 在为 `UIntPtr.TryParse` 生成 subject 时 C# 措辞问题
+**遗留根本原因**：ATG subject generator 在为 `UIntPtr.TryParse` 生成 subject 时 C# 措辞问题
 （`string` 关键字在 `out` 参数位置生成无效），或 emitter 模板问题。
 
 **修复入口**：`artifacts/foundation-dll/System.Private.CoreLib/chunks/system-3/managed/combined/CombinedSubjects.cs`
