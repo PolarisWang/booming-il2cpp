@@ -93,34 +93,23 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		builderResultTypeName = null;
 		stateMachineTypeName = null;
-		// Try generic form: AsyncTaskMethodBuilder<T>::Start<SM>(...) with <T> generic type arg
-		if (TryReadSingleGenericTypeArgument(callee, openGenericBuilderTypePrefix + "<", out string builderResultTypeNameValue))
+		if (!TryReadSingleGenericTypeArgument(callee, openGenericBuilderTypePrefix + "<", out string builderResultTypeNameValue))
 		{
-			string marker = $"{openGenericBuilderTypePrefix}<{builderResultTypeNameValue}>::Start<";
-			if (TryReadGenericArgumentList(callee, marker, out string genericArgumentList))
-			{
-				IReadOnlyList<string> readOnlyList = SplitTopLevelGenericArguments(genericArgumentList);
-				if (readOnlyList.Count == 1)
-				{
-					builderResultTypeName = builderResultTypeNameValue;
-					stateMachineTypeName = readOnlyList[0];
-					return true;
-				}
-			}
+			return false;
 		}
-		// Fallback: non-generic form AsyncTaskMethodBuilder::Start<SM>(...) (no <T>)
-		string marker2 = $"{openGenericBuilderTypePrefix}::Start<";
-		if (TryReadGenericArgumentList(callee, marker2, out string genericArgumentList2))
+		string marker = $"{openGenericBuilderTypePrefix}<{builderResultTypeNameValue}>::Start<";
+		if (!TryReadGenericArgumentList(callee, marker, out string genericArgumentList))
 		{
-			IReadOnlyList<string> readOnlyList2 = SplitTopLevelGenericArguments(genericArgumentList2);
-			if (readOnlyList2.Count == 1)
-			{
-				builderResultTypeName = string.Empty; // non-generic builder
-				stateMachineTypeName = readOnlyList2[0];
-				return true;
-			}
+			return false;
 		}
-		return false;
+		IReadOnlyList<string> readOnlyList = SplitTopLevelGenericArguments(genericArgumentList);
+		if (readOnlyList.Count != 1)
+		{
+			return false;
+		}
+		builderResultTypeName = builderResultTypeNameValue;
+		stateMachineTypeName = readOnlyList[0];
+		return true;
 	}
 
 	private static bool TryParseAsyncBuilderAwaitUnsafeOnCompleted(string callee, string openGenericBuilderTypePrefix, out string? builderResultTypeName, out string? awaiterTypeName, out string? stateMachineTypeName)
@@ -128,36 +117,24 @@ public sealed partial class NativeAotLoweringPlanner
 		builderResultTypeName = null;
 		awaiterTypeName = null;
 		stateMachineTypeName = null;
-		// Try generic form: AsyncTaskMethodBuilder<T>::AwaitUnsafeOnCompleted<TAwaiter,SM>(...) with <T>
-		if (TryReadSingleGenericTypeArgument(callee, openGenericBuilderTypePrefix + "<", out string builderResultTypeNameValue))
+		if (!TryReadSingleGenericTypeArgument(callee, openGenericBuilderTypePrefix + "<", out string builderResultTypeNameValue))
 		{
-			string marker = $"{openGenericBuilderTypePrefix}<{builderResultTypeNameValue}>::AwaitUnsafeOnCompleted<";
-			if (TryReadGenericArgumentList(callee, marker, out string genericArgumentList))
-			{
-				IReadOnlyList<string> readOnlyList = SplitTopLevelGenericArguments(genericArgumentList);
-				if (readOnlyList.Count == 2)
-				{
-					builderResultTypeName = builderResultTypeNameValue;
-					awaiterTypeName = readOnlyList[0];
-					stateMachineTypeName = readOnlyList[1];
-					return true;
-				}
-			}
+			return false;
 		}
-		// Fallback: non-generic form AsyncTaskMethodBuilder::AwaitUnsafeOnCompleted<TAwaiter,SM>(...) (no <T>)
-		string marker2 = $"{openGenericBuilderTypePrefix}::AwaitUnsafeOnCompleted<";
-		if (TryReadGenericArgumentList(callee, marker2, out string genericArgumentList2))
+		string marker = $"{openGenericBuilderTypePrefix}<{builderResultTypeNameValue}>::AwaitUnsafeOnCompleted<";
+		if (!TryReadGenericArgumentList(callee, marker, out string genericArgumentList))
 		{
-			IReadOnlyList<string> readOnlyList2 = SplitTopLevelGenericArguments(genericArgumentList2);
-			if (readOnlyList2.Count == 2)
-			{
-				builderResultTypeName = string.Empty;
-				awaiterTypeName = readOnlyList2[0];
-				stateMachineTypeName = readOnlyList2[1];
-				return true;
-			}
+			return false;
 		}
-		return false;
+		IReadOnlyList<string> readOnlyList = SplitTopLevelGenericArguments(genericArgumentList);
+		if (readOnlyList.Count != 2)
+		{
+			return false;
+		}
+		builderResultTypeName = builderResultTypeNameValue;
+		awaiterTypeName = readOnlyList[0];
+		stateMachineTypeName = readOnlyList[1];
+		return true;
 	}
 
 	private static bool TryReadGenericArgumentList(string value, string marker, out string genericArgumentList)
