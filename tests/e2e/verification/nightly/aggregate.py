@@ -100,7 +100,7 @@ def aggregate_reports(config, results) -> ReportSummary:  # results: NightlyResu
             # will surface again as passed/failed in a later result write
             pass
 
-    # persist summary
+    # persist summary JSON
     out_dir = Path(config.report_dir) / "summary"
     out_dir.mkdir(parents=True, exist_ok=True)
     payload = {
@@ -114,10 +114,49 @@ def aggregate_reports(config, results) -> ReportSummary:  # results: NightlyResu
         "infraFails": summ.infra_fail_keys,
         "codeDefectFails": summ.code_defect_fail_keys,
         "timestamp": time.time(),
+        "runId": config.run_id,
+        "nativeConfig": config.native_config,
     }
     try:
         (out_dir / "nightly-result.json").write_text(
             json.dumps(payload, indent=2), encoding="utf-8")
+    except OSError:
+        pass
+
+    # Also emit an old-compatible human-readable summary markdown (what consumers
+    # watching nightly-reports read).  This closes the reviewer's L2 gap: nightly
+    # report markdown is produced even though the lean runner no longer shells out
+    # to an aggregate/reporting subprocess per family.
+    try:
+        md_lines = [
+            "# Nightly Build Summary",
+            "",
+            f"- Run: `{config.run_id}`",
+            f"- Config: `{config.native_config}`",
+            f"- Result: **{summ.passed}/{summ.total_chunks} passed**, "
+            f"{summ.failed} failed, {summ.stalled} stalled",
+            "",
+            "## Error classes",
+            "",
+        ]
+        if summ.by_error_class:
+            md_lines.append("| class | count |")
+            md_lines.append("|-------|-------|")
+            for k, v in sorted(summ.by_error_class.items()):
+                md_lines.append(f"| {k} | {v} |")
+        md_lines += ["", "## Failed chunks", ""]
+        if summ.translation_defect_fail_keys:
+            md_lines += ["### translation-defect (real codegen issues)", ""]
+            md_lines += [f"- `{k}`" if "`" not in k else f"- {k}"
+                         for k in summ.translation_defect_fail_keys]
+        if summ.infra_fail_keys:
+            md_lines += ["### infra / timeout", ""]
+            md_lines += [f"- {k}" for k in summ.infra_fail_keys]
+        if summ.code_defect_fail_keys:
+            md_lines += ["### other", ""]
+            md_lines += [f"- {k}" for k in summ.code_defect_fail_keys]
+        (out_dir / "nightly-summary.md").write_text(
+            "\n".join(md_lines) + "\n", encoding="utf-8")
     except OSError:
         pass
     return summ

@@ -50,8 +50,15 @@ def _process_tree_alive(pid: int) -> bool:
 
 
 def _count_oom(exit_code: int | None) -> bool:
-    """Check if exit code indicates OOM kill (SIGKILL = 137 on Linux, -9 on Unix)."""
-    return exit_code == 137 or exit_code == -9
+    """True when the process was killed by the OOM killer.
+
+    On POSIX the OOM killer delivers SIGKILL, so a process reaped by Python has
+    exit_code = -9.  BUT a watchdog/job explicit kill would ALSO present as -9,
+    so we only treat -9 as OOM when it was not an explicit kill by us.  Since the
+    watchdog cannot distinguish, we co-operate with state.py: only the explicit
+    (wrapper-observed) code 137 is unambiguous OOM.  signal-death -9 is 'killed'.
+    """
+    return exit_code == 137
 
 
 # ── Watchdog loop ──────────────────────────────────────────────────────────
