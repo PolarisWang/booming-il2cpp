@@ -309,6 +309,9 @@ def _build_cross_dll_summary(assemblies: dict[str, dict]) -> dict:
     entries = []
     total_passed = 0
     total_fact_methods = 0
+    total_real_passed = 0
+    total_real_fact_methods = 0
+    total_smoke = 0
     for asm_name, asm_data in sorted(assemblies.items()):
         fs = asm_data.get("fact-summary") or {}
         ds = asm_data.get("dashboard") or {}
@@ -316,12 +319,30 @@ def _build_cross_dll_summary(assemblies: dict[str, dict]) -> dict:
 
         fact_passed = fs.get("totalPassed", 0)
         fact_total = fs.get("totalFactMethods", 0)
+        # Consume real-vs-smoke fields from the aggregate's fact-summary.json.
+        # These are present when the aggregate stage wrote them (totalRealPassed /
+        # totalRealFactMethods / totalUnverifiedSmoke); absent for older data, in
+        # which case real-passed defaults to nominal-passed (conservative).
+        asm_real_passed = fs.get("totalRealPassed", fact_passed)
+        asm_real_total = fs.get("totalRealFactMethods", fact_total)
+        asm_smoke = fs.get("totalUnverifiedSmoke", 0)
         total_passed += fact_passed
         total_fact_methods += fact_total
+        total_real_passed += asm_real_passed
+        total_real_fact_methods += asm_real_total
+        total_smoke += asm_smoke
 
+        real_fact_rate = round(asm_real_passed / asm_real_total, 4) if asm_real_total else 0
         entries.append({
             "assembly": asm_name,
             "factPassRate": round(fact_passed / fact_total, 4) if fact_total else 0,
+            # Nominal pass even though the chunk may be smoke-heavy is NOT a real
+            # verification pass.  Surface the real (smoke-excluded) rate and how
+            # many methods were [UNVERIFIED] smoke so a Net.Http-style chunk reads
+            # as proportionally unverified rather than a clean green.
+            "realFactPassRate": real_fact_rate,
+            "smokeOnlyMethodCount": asm_smoke,
+            "realVerifiedMethodCount": asm_real_passed,
             "totalBenchmarkedMethods": ds.get("summary", {}).get("totalBenchmarkedMethods", 0),
             "chaosAotVsNet8Pct": (cs.get("aggregate") or {}).get("chaosAotVsNet8Pct", {}),
         })
@@ -330,5 +351,15 @@ def _build_cross_dll_summary(assemblies: dict[str, dict]) -> dict:
         "generatedAt": datetime.now(timezone.utc).isoformat(),
         "totalAssemblies": len(entries),
         "overallFactPassRate": round(total_passed / total_fact_methods, 4) if total_fact_methods else 0,
+        # Genuine (smoke-excluded) verification rate + smoke counts.  The gap
+        # between overallFactPassRate and overallRealFactPassRate = the methods
+        # reported "passed" that are [UNVERIFIED] smoke-only stubs (return-42, no
+        # semantic assertion).  Surface it so the cross-DLL dashboard reads honest.
+        "overallRealFactPassRate": round(total_real_passed / total_real_fact_methods, 4)
+            if total_real_fact_methods else 0,
+        "totalUnverifiedSmoke": total_smoke,
+        "totalRealPassed": total_real_passed,
+        "totalRealFactMethods": total_real_fact_methods,
+        "nominalVsRealGap": max(0, total_fact_methods - total_real_fact_methods),
         "assemblies": entries,
     }

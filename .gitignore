@@ -1,6 +1,11 @@
 # Tool-generated backup files — never commit
 *.bak
 
+# Ad-hoc debug/probe scripts — never commit to repo root
+cdb_*.cmd
+tmp_cdb_*.cmd
+tmp_cdb_*.sh
+
 # Local workflow state
 .booming/
 .claude/

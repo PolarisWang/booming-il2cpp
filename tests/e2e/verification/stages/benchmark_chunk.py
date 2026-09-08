@@ -728,6 +728,13 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     result_path = ctx.results_dir / "benchmark.json"
 
     flat_results: list[dict] = []
+    # Count stubs (methods whose mean duration is at the minimum-elapsed floor,
+    # indicating a ChaosExternalRuntimeFallback stub returning 0 rather than real
+    # native code).  These are NOT real perf measurements — they are structurally
+    # excluded from benchmark_report aggregates and must not masquerade as a
+    # meaningful perf pass in the chunk headline.
+    stub_count = sum(1 for s in per_method_stats if s.get("meanDurationMs", 0) <= _MIN_ELAPSED_FLOOR)
+    non_stub_count = method_count - stub_count
     for method_idx, s in enumerate(per_method_stats):
         flat_results.append({
             "entryIndex": method_idx,
@@ -745,6 +752,8 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         "technology": "chaos-aot",
         "iterations": iterations,
         "methodCount": method_count,
+        "stubCount": stub_count,
+        "nonStubCount": non_stub_count,
         "results": flat_results,
         "summary": summary,
         "perMethodStats": per_method_stats,
@@ -790,14 +799,34 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         status = "error"
 
     duration_ms = int((time.perf_counter() - start) * 1000)
-    print(f"  [benchmark] {status}: {method_count} methods "
-          f"({len(results)} technologies, {sample_rounds} samples, {duration_ms}ms, {iterations} iterations)")
+    if stub_count > 0:
+        # Surface the stub-vs-real split so a chunk whose headline reads "X methods"
+        # but is primarily stubs is not mistaken for a meaningful perf pass.
+        # Stubs (isStub: elapsed <= _MIN_ELAPSED_FLOOR) are ChaosExternalRuntime
+        # Fallback returning 0, not real native code — they are excluded from
+        # benchmark_report aggregates and must not be counted as perf successes.
+        print(f"  [benchmark] {status}: {non_stub_count} real methods "
+              f"({stub_count} stubs excluded) across {len(results)} technologies, "
+              f"{sample_rounds} samples, {duration_ms}ms, {iterations} iterations")
+    else:
+        print(f"  [benchmark] {status}: {method_count} methods "
+              f"({len(results)} technologies, {sample_rounds} samples, {duration_ms}ms, {iterations} iterations)")
+
+    # Build the summary headline: surface real-non-stub method count when stubs exist
+    # so the stage result is honest about what's actually measured.
+    if stub_count > 0:
+        summary_headline = (f"{status}: {non_stub_count} real methods "
+                            f"({stub_count} stubs excluded), {len(results)} techs, "
+                            f"{sample_rounds} samples, {summary.get('totalOutliers', 0)} outliers removed")
+    else:
+        summary_headline = (f"{status}: {method_count} methods, {len(results)} techs, "
+                            f"{sample_rounds} samples, {summary.get('totalOutliers', 0)} outliers removed")
+    if errors:
+        summary_headline += f"; errors: {'; '.join(errors[:2])}"
 
     return StageResult(
         stage="benchmark", status=status,
-        summary=f"{status}: {method_count} methods, {len(results)} techs, "
-                f"{sample_rounds} samples, {summary.get('totalOutliers', 0)} outliers removed"
-                + (f"; errors: {'; '.join(errors[:2])}" if errors else ""),
+        summary=summary_headline,
         details=result_data,
         duration_ms=duration_ms,
     )

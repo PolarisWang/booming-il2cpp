@@ -395,10 +395,36 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
             errors.append(f"jit: {jit_dropped} methods dropped vs metadata ({expected}) — SEVERE ({jit_drop_ratio:.0%})")
         else:
             errors.append(f"jit: {jit_dropped} methods dropped vs metadata ({expected})")
-    # Summary
-    summary_parts = [f"aot: {aot_result['passed']}/{aot_result['total']} passed ({aot_status})"]
+    # ── Scan for [UNVERIFIED] markers (smoke-only subjects) early, so the
+    # printed summary can reveal real-vs-smoke rather than masking it.
+    # Methods where the AOT stub cannot replicate a managed exception are
+    # marked with `// [UNVERIFIED] ...` by TestEmitter.  The native runner
+    # counts them as "passed" (no Assert.* throws) but they are NOT semantic
+    # verifications.
+    unverified_smoke = _count_unverified_markers(ctx)
+    if unverified_smoke > 0:
+        print(f"  [fact] {unverified_smoke} subject(s) marked [UNVERIFIED] "
+              f"(smoke-only — AOT stub cannot replicate managed exception)")
+
+    # Summary. The `X/Y passed` headline must not be taken as "X/Y semantic
+    # verifications" when part of the tail is smoke-only: an [UNVERIFIED] stub
+    # returns 42 and is counted "passed" by the native runner purely because no
+    # Assert.* threw.  Reveal the real count inline so the console read is honest,
+    # even though the chunk-level `status` stays nominal (high smoke is legitimate
+    # for families without a native C++ body; only genuine assertion mismatches
+    # hard-fail — those are already handled by _tech_status when passed < total).
+    # _write_fact_results persists the same real/nominal split to fact.json.
+    def _render_tech(pt: int, tt: int, tst: str) -> str:
+        base = f"{pt}/{tt} passed ({tst})"
+        if unverified_smoke > 0:
+            real_p = max(0, pt - unverified_smoke)
+            real_t = max(0, tt - unverified_smoke)
+            return f"{base}; real={real_p}/{real_t} verified, {unverified_smoke} [UNVERIFIED] smoke"
+        return base
+
+    summary_parts = [_render_tech(aot_result['passed'], aot_result['total'], aot_status)]
     if has_jit and jit_result:
-        summary_parts.append(f"jit: {jit_result['passed']}/{jit_result['total']} passed ({jit_status})")
+        summary_parts.append("jit: " + _render_tech(jit_result['passed'], jit_result['total'], jit_status))
     if errors:
         summary_parts.append(f"errors: {'; '.join(errors)}")
 
@@ -414,27 +440,6 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     if value_suspicious:
         errors.append(f"{value_warnings} method(s) returned negative values")
         print(f"  [fact] ERROR: {value_warnings} method(s) returned negative values")
-
-    # 防线 4: 覆盖门禁 — 检测 probe 生成的 subject 中是否有全部 value set 都是
-    # default/null 输入的（即被 ATG 的 ValueGenerator[probe-warn] 标记的）。
-    # 这些方法可能被 stub-return-0 蒙过，因为 probe 从未用非-default 输入测试。
-    # ATG 在 stderr 输出 "[probe-warn] ALL-DEFAULT-SETS: <method>"，此标记会被
-    # build.py/CI 日志捕获，作为人工审计信号。
-    #
-    # 硬阻断逻辑在 build.py 防线 4（非本文件）：build.py 解析 ATG 的 stderr 输出，
-    # 对已知 stub 方法白名单（ChangeType/Enum.TryParse 等）强制要求 ≥1 非-default 输入，
-    # 若仍全 default 则返回 None 阻断 pipeline。本文件仅打印提示，不重复阻断。
-    # 参见 build.py 中的 STUB_BLOCK_FAMILIES + CHAOS_FACT266_BLOCK_ALL_DEFAULT 环境变量。
-
-    # ── Scan for [UNVERIFIED] markers (smoke-only subjects) ──
-    # Methods where the AOT stub cannot replicate a managed exception are
-    # marked with `// [UNVERIFIED] ...` by TestEmitter.  The native runner
-    # counts them as "passed" (no Assert.* throws) but they are NOT semantic
-    # verifications.  Detect them so fact.json exposes real vs. smoke-only.
-    unverified_smoke = _count_unverified_markers(ctx)
-    if unverified_smoke > 0:
-        print(f"  [fact] {unverified_smoke} subject(s) marked [UNVERIFIED] "
-              f"(smoke-only — AOT stub cannot replicate managed exception)")
 
     # ── Write fact history (_dll/reports/history/fact-YYYY-MM-DD.jsonl) ──
     _write_fact_history(ctx, aot_result, jit_result)

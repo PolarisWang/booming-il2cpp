@@ -200,6 +200,17 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 # "real" pass rate — see realTotal, realPassed.
                 "unverifiedSmoke": fact_data.get("unverifiedSmoke", 0),
                 "realTotal": fact_data.get("realTotal", fact_data.get("total", 0)),
+                "realPassed": fact_data.get("realPassed", fact_data.get("passed", 0)),
+                # smoke-dominated: >= half of the methods this chunk dispatched
+                # are [UNVERIFIED] stubs (return-42, no real assertion path).
+                # Such a chunk is NOT genuinely / fully verified even though its
+                # nominal passed==total reads "green".  Surfaces so a consumer
+                # never mistakes a Net.Http-style no-native-C++ chunk for a real
+                # 143/143 verification pass.
+                "smokeDominated": (
+                    fact_data.get("total", 0) > 0
+                    and fact_data.get("unverifiedSmoke", 0) * 2 >= fact_data.get("total", 0)
+                ),
                 "valueSuspicious": fact_data.get("valueSuspicious", False),
                 "valueWarnings": fact_data.get("valueWarnings", 0),
                 # Preserve factMethodCount as its OWN key. The meta-mismatch
@@ -286,6 +297,8 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 chunk_benchmark = {
                     "methodCount": method_count,
                     "iterations": bench_data.get("iterations", 0),
+                    "stubCount": bench_data.get("stubCount", 0),
+                    "nonStubCount": bench_data.get("nonStubCount", method_count),
                 }
                 perf_summary = bench_data.get("summary", {})
                 if perf_summary:
@@ -452,6 +465,10 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         s.get("fact", {}).get("realTotal", s.get("fact", {}).get("total", 0))
         for s in chunk_summaries
     )
+    total_real_passed = sum(
+        s.get("fact", {}).get("realPassed", s.get("fact", {}).get("passed", 0))
+        for s in chunk_summaries
+    )
     # Only count chunks that actually ran subjects (total > 0)
     chunks_with_fact = sum(
         1 for s in chunk_summaries
@@ -469,8 +486,24 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     chunks_with_meta_mismatch = 0
     chunks_with_meta_warning = 0
     chunks_with_coverage_gap = 0  # P2-F: codegen didn't dispatch methods (all run passed)
+    # Chunks where >= half of dispatched methods are [UNVERIFIED] smoke stubs
+    # (return-42, no real assertion path).  Such a chunk is NOT genuinely / fully
+    # verified even though its nominal passed==total reads "green" — e.g. a
+    # Net.Http chunk with 143/143 passed but 121/143 [UNVERIFIED].  Track the
+    # count and the slug list so the aggregate report surfaces smoke-dominated
+    # chunks explicitly rather than grouping them with fully-verified chunks.
+    smoke_dominated_chunks: list[str] = []
+    smoke_dominated_methods = 0
     for s in chunk_summaries:
         fact = s.get("fact", {})
+        # Smoke-dominated chunk tagging (independent of meta-mismatch below).
+        if fact.get("smokeDominated"):
+            smoke_dominated_methods += fact.get("unverifiedSmoke", 0)
+            smoke_dominated_chunks.append(s.get("slug", "?"))
+            print(f"  [aggregate] SMOKE-DOMINATED: {s.get('slug')} "
+                  f"{fact.get('unverifiedSmoke', 0)}/{fact.get('total', 0)} methods are "
+                  f"[UNVERIFIED] smoke (return-42, no assertion) — NOT a real "
+                  f"semantic pass; nominal 'green' must NOT be read as fully-verified")
         meta = fact.get("factMethodCount") if fact.get("factMethodCount") is not None else fact.get("metaTotal")
         total = s.get("fact", {}).get("total")
         if meta is not None and meta > 0 and total is not None and total != meta:
@@ -561,6 +594,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         # real assertions despite being counted "passed" by the native runner.
         "totalUnverifiedSmoke": total_unverified_smoke,
         "totalRealFactMethods": total_real_fact,
+        "totalRealPassed": total_real_passed,
         "staleChunks": sorted(set(stale_chunks)),
         # Translation-tracking aggregate: roll per-chunk capability breakdowns into a
         # family-wide NativeGenerated vs NoCanonicalBody (fallback) pass/total table.
@@ -627,9 +661,20 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             # methods that throw in managed.  realFactPassRate vs factPassRate
             # shows the gap between "all passed" and "truly verified".
             "realFactPassRate": round(
-                total_passed / total_real_fact * 100, 1
+                total_real_passed / total_real_fact * 100, 1
             ) if total_real_fact else 0,
             "totalUnverifiedSmoke": total_unverified_smoke,
+            "totalRealPassed": total_real_passed,
+            "totalRealFactMethods": total_real_fact,
+            # Smoke-dominated chunks: a chunk whose nominal "passed" reads green
+            # but >= half of its dispatched methods are [UNVERIFIED] smoke stubs
+            # (return-42, no real assertion path).  Such chunks are NOT genuinely
+            # / fully verified — e.g. Net.Http 143/143 "passed" but 121/143 are
+            # [UNVERIFIED].  The count and slug list are surfaced here so no
+            # consumer mistakes a smoke-dominated chunk for a real verification pass.
+            "smokeDominatedChunkCount": len(smoke_dominated_chunks),
+            "smokeDominatedChunks": sorted(set(smoke_dominated_chunks)),
+            "smokeDominatedMethods": smoke_dominated_methods,
             "totalBenchmarkedMethods": total_benchmarked,
             "aggregatePerformance": aggregate_perf,
             "hotupdate": {
@@ -696,7 +741,21 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
 
     duration_ms = int((time.perf_counter() - start) * 1000)
     print(f"  [aggregate] Reports written to {latest_dir}")
+    total_smoke = total_unverified_smoke
+    nominal_green_only = total_fact > 0 and total_smoke > 0 and total_passed >= total_real_fact
     print(f"  [aggregate] Fact: {total_passed}/{total_fact} passed across {chunks_with_fact} chunks")
+    if total_smoke > 0:
+        # Keep the coarse headline but immediately expose the real-vs-smoke split so
+        # no one reads "{passed}/{total} passed" as "{passed}/{total} semantically
+        # verified". [UNVERIFIED] stubs return 42 and are counted "passed" by the
+        # native runner because no Assert.* throws — they are NOT verifications.
+        print(f"  [aggregate] Real vs smoke: {total_real_passed}/{total_real_fact} real "
+              f"(semantic) verifications; {total_smoke} [UNVERIFIED] smoke-only "
+              f"(return-42, no assertion)")
+    if smoke_dominated_chunks:
+        print(f"  [aggregate] SMOKE-DOMINATED chunks: {len(smoke_dominated_chunks)} "
+              f"({', '.join(sorted(set(smoke_dominated_chunks)))}) — >=50% of their "
+              f"methods are [UNVERIFIED] smoke; nominal green must NOT be read as verified")
     if chunks_with_value_warnings:
         print(f"  [aggregate] Value warnings: {chunks_with_value_warnings} chunk(s)")
     if chunks_with_meta_mismatch:
@@ -725,9 +784,15 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     # Build summary suffix for error status details
     partial_reasons = aggregate_errors
 
+    fact_headline = f"{total_passed}/{total_fact} passed"
+    if total_smoke > 0:
+        # Surface the smoke split so a smoke-fat "green" is not mistaken for a fully
+        # verified pass in the stage summary (e.g. Net.Http passed but largely
+        # [UNVERIFIED]).  This is descriptive, not a gate.
+        fact_headline += f" ({total_real_passed}/{total_real_fact} real, {total_smoke} smoke)"
     return StageResult(
         stage="aggregate", status=aggregate_status,
-        summary=f"aggregated {chunks_with_fact}/{len(chunk_slugs)} chunks, {total_passed}/{total_fact} passed"
+        summary=f"aggregated {chunks_with_fact}/{len(chunk_slugs)} chunks, {fact_headline}"
                 + (f" ({', '.join(partial_reasons)})" if partial_reasons else ""),
         details=fact_summary,
         duration_ms=duration_ms,
