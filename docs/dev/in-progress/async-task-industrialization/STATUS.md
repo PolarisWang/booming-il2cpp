@@ -259,12 +259,17 @@ runtimeless builder(段 C 入口 + Start) 起步,复证 spike 往返。
 
 
 
-### 2026-09-08 段 B/C（commit 35ab089c0）真实边界校准
+### 2026-09-08 段 B/C（原 commit 35ab089c0，已 reverted 后 re-applied 为 75f22310c + c9cfec49a）真实边界校准
 用 live AOT-IR 提取(AsyncTestAssembly) probe 实证段 C 的 entry 发射**结构早已完整**（建 box+Create+Start+
 builder.get_Task 都吐了）——真正的 gap 不是缺 entry emission，而是 **builder 6 操作都落 ChaosExternalRuntimeFallback**。
 本 commit 闭合了那部分：给 async.h + ShapeRegistry 接真 native。
 
-确凿（绿测试为证,codegen 2149/2149 + AsyncPipelineTests 5/5）:
+> **提交历史**：此段内容先由 `35ab089c0` 提交，后因 CI 门禁问题被 `a9650df30` revert，再由 `75f22310c` 原样 re-apply
+> （`c9cfec49a` 补充 R2a 冒烟验证）。HEAD 中 Segment B 代码真实存在，STATUS.md 描述与 HEAD 一致。
+
+确凿（绿测试为证,codegen 2149/2149 段 B/C 增量后测得 + AsyncPipelineTests 5/5;
+计数演进:前文 L191 "1986" = 段 A（Step2+3）基线;本段 "2149" = 段 B/C 增量后的 codegen 总数,
+为各会话各自实测值，随测试数量递增而不同,非矛盾。当前 HEAD 全量 codegen 实测为 2150）:
 - **Entry**(GetOne/DoVoid) `Create`→`chaos_async_task_builder_create()`、`get_Task`→`async_task_builder_get_task()`
   已 native;不再走 interpreter fallback。（新测试 CreateAndGetTaskRouteToNativeAsyncBuilder）
 - **MoveNext body** `SetResult`→`async_task_builder_set_result_raw/_void`、`SetException`→`async_task_builder_set_exception`
@@ -281,7 +286,7 @@ REMAIN（下一 session 入口,codegen emission 未做 end-to-end runtime 验证
    (含 mnSym 调用) 真被 emit 且能链接，而非 interpreter 0-return。
 2. **AwaitUnsafeOnCompleted wrap 上亦同理**（GetOne 的 yield 路径是 TaskAwaiter 还是 YieldAwaiter 边界待实测确认）。
 3. **跨线程线程/GC box 生命周期**：entry 用 stack `__chaos_stack_obj` 分配 d__，真跨 await 挂起跨线程 resume 需改
-   GC-heap box(CH_AOS_IL2CPP_NEW_GC)+ continuation 持 box;否则 UAF。设计见 roadmap 决定(GC 堆非 pinned)。
+   GC-heap box(`CHAOS_IL2CPP_NEW_GC`)+ continuation 持 box;否则 UAF。设计见 roadmap 决定(GC 堆非 pinned)。
 4. **Task.Yield is_completed 策略**：async.h 现恒 1(即时)。要真跨线程测试需让 yield 在注册 dispatcher 时走
    async_await_yield_resume 挂起路径;同步 smoke 仍可走即时完成(两路并存)。
 

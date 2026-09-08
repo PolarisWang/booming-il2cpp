@@ -26,6 +26,8 @@
 
 > **口径提醒（数字对不上，未在文中补臆测）**：首行 `55781/55850` = 69 fact fail；下方仅逐案归类了
 > runtime-interop 的 6 个（COM 假阳性）+ 说明 system-6 / threading-tasks 各为统计口径假象。
+> 其余 ~63 fact fail 的归属不在本 GAP 覆盖范围内——它们属于 CoreLib 其他 chunk 的 fact 基线管理，
+> 由 ATG/fact-266 追踪（见 `docs/dev/in-progress/aot-native-coverage-gap/`），非本 handoff 的核销主体。
 
 下接原交接正文（9 GAP 注册状态 + 入口仍在，作为参考可关闭/归档）。
 
