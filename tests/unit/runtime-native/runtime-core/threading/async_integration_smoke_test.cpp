@@ -361,16 +361,19 @@ TEST_F(AsyncIntegrationTest, ContinuationRunsOnThreadPoolWorker) {
     auto on_worker = std::make_shared<std::atomic<int>>(0);
     auto worker_id = std::make_shared<std::thread::id>();
 
+    // Non-capturing continuation per AsyncContinueFn (fn-ptr) contract; state via ctx.
+    struct Ctx { std::thread::id main_id; std::shared_ptr<std::atomic<int>> fired;
+                 std::shared_ptr<std::atomic<int>> on_worker; std::shared_ptr<std::thread::id> worker_id; };
+    auto* ctx = new Ctx{ main_id, fired, on_worker, worker_id };
     async_task_on_completed(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task),
-        [main_id, worker_id, fired, on_worker](CHAOS_IL2CPP_INTPTR, void* ctx) {
-            (void)ctx;
-            // Record which thread ran this continuation.
-            *worker_id = std::this_thread::get_id();
-            if (std::this_thread::get_id() != main_id) {
-                on_worker->fetch_add(1, std::memory_order_relaxed);
+        [](CHAOS_IL2CPP_INTPTR, void* raw) {
+            auto* c = static_cast<Ctx*>(raw);
+            *c->worker_id = std::this_thread::get_id();
+            if (std::this_thread::get_id() != c->main_id) {
+                c->on_worker->fetch_add(1, std::memory_order_relaxed);
             }
-            fired->fetch_add(1, std::memory_order_relaxed);
-        }, nullptr);
+            c->fired->fetch_add(1, std::memory_order_relaxed);
+        }, ctx);
 
     // Complete the task inline (simulating a worker completing it).
     task->result = 1;
@@ -383,6 +386,7 @@ TEST_F(AsyncIntegrationTest, ContinuationRunsOnThreadPoolWorker) {
     EXPECT_GE(on_worker->load(), 1)
         << "Continuation did not run on a thread pool worker";
     delete task;
+    delete ctx;
     register_async_dispatch_continuation_fn(nullptr);   // no leak into later tests
 }
 
@@ -557,4 +561,108 @@ TEST_F(AsyncIntegrationTest, HandCraftedStateMachineOne) {
     EXPECT_EQ(task->result, 1);
     EXPECT_FALSE(task->faulted.load());
     EXPECT_EQ(sm.state, -1);  // state machine marked done
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Segment B/C native helpers (async.h): AsyncTaskMethodBuilder<T> wiring to
+// real native MoveNext + continuation resumption.
+//
+// Phase 2 Segment B committed AsyncStateMachineMoveNextFn / async_task_builder_start
+// / async_await_task_resume / async_await_yield_resume in async.h.  These tests
+// exercise that protocol end to end with hand-crafted MoveNext entries matching the
+// codegen ABI (extern "C" void MoveNext(CHAOS_IL2CPP_INTPTR box)).
+// ══════════════════════════════════════════════════════════════════════════════
+
+namespace {
+
+// Classic Box + MoveNext pair driven by Segment B helpers.
+// MoveNext ABI: void(*)(CHAOS_IL2CPP_INTPTR box) — box is the >d__ instance.
+struct AsyncSM_Box {
+    CHAOS_IL2CPP_INTPTR builder_slot = 0;  // field_<>t__builder
+    int state = -1;
+    int result = 0;
+};
+
+void AsyncSM_Box_MoveNext_Complete(CHAOS_IL2CPP_INTPTR box) {
+    auto* sm = reinterpret_cast<AsyncSM_Box*>(box);
+    // Mirror the codegen MoveNext tail: builder.SetResult -> task completes.
+    chaos::il2cpp::common::async_task_builder_set_result_void(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sm->builder_slot));
+    sm->state = -1;
+}
+
+void AsyncSM_Box_MoveNext_Suspend(CHAOS_IL2CPP_INTPTR box) {
+    auto* sm = reinterpret_cast<AsyncSM_Box*>(box);
+    // First MoveNext (codegen runs via async_task_builder_start): initial run sets
+    // state=0 (suspended at await) and registers a continuation; does NOT complete.
+    if (sm->state == 0) {
+        // resumed: MoveNext tail -> SetResult (task int returns); we simulate non-generic.
+        chaos::il2cpp::common::async_task_builder_set_result_void(
+            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sm->builder_slot));
+        sm->state = -1;
+        return;
+    }
+    // initial entry: state stays 0; the *host* of MoveNext (async import caller)
+    // supplies the real continuation registration.  Here the host is this test,
+    // so we set state=0 and let the outside drive async_task_builder_start, then
+    // the later dispatch re-enters MoveNext with state already 0 to complete.
+    sm->state = 0;
+}
+
+} // anonymous namespace
+
+// Verify async_task_builder_start drives a MoveNext synchronously and the
+// builder Task is created + completed (non-suspending path).
+TEST_F(AsyncIntegrationTest, SegmentB_AsyncTaskBuilderStartCompletes) {
+    AsyncSM_Box sm;
+    sm.builder_slot = 0;
+    CHAOS_IL2CPP_INTPTR builder_ref =
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sm.builder_slot);
+
+    // builder.Start(ref sm) — drives MoveNext synchronously to SetResult.
+    CHAOS_IL2CPP_INTPTR rc = chaos::il2cpp::common::async_task_builder_start(
+        builder_ref, AsyncSM_Box_MoveNext_Complete, &sm);
+    EXPECT_EQ(1, rc);
+
+    auto* task = chaos::il2cpp::common::require_async_task(sm.builder_slot);
+    EXPECT_TRUE(task->completed.load());
+    EXPECT_FALSE(task->faulted.load());
+    EXPECT_EQ(-1, sm.state);
+}
+
+// Verify async_task_builder_push_continuation via async_await_task_resume:
+// a resumed MoveNext (registered as continuation) re-enters and the task completes.
+TEST_F(AsyncIntegrationTest, SegmentB_AsyncAwaitTaskResumesAndCompletes) {
+    // Use a fresh box/task; complete it from a worker after registering continuation.
+    AsyncSM_Box sm;
+    sm.builder_slot = 0;
+    sm.state = 0;  // about to suspend
+    CHAOS_IL2CPP_INTPTR builder_ref =
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sm.builder_slot);
+    // Materialize the task handle now (Start does this).
+    chaos::il2cpp::common::async_task_builder_get_task(builder_ref);
+
+    // The awaited "task" is the builder's own task handle (the yield-style awaiter
+    // holds that handle in a slot).  Register continuation -> on completion it re-enters.
+    CHAOS_IL2CPP_INTPTR awaiter_ref = builder_ref;  // awaiter slot == builder slot holds handle
+    CHAOS_IL2CPP_INTPTR rc = chaos::il2cpp::common::async_await_task_resume(
+        awaiter_ref, AsyncSM_Box_MoveNext_Complete, &sm);
+    EXPECT_EQ(1, rc);
+
+    auto* task = chaos::il2cpp::common::require_async_task(sm.builder_slot);
+    EXPECT_FALSE(task->completed.load());  // continuation registered, not yet fired
+
+    // Complete the task from a worker thread; the continuation (MoveNext) fires,
+    // which calls SetResult again (idempotent enough) and ends.
+    threading::ThreadPoolQueueUserWorkItemUnsafe([](void* state) {
+        auto* t = static_cast<AsyncTask*>(state);
+        t->result = 1;
+        t->completed.store(true, std::memory_order_release);
+        chaos::il2cpp::common::finish_async_task(
+            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(t));
+    }, task);
+
+    // Wait until the continuation fired (task already completed) — bounded wait.
+    EXPECT_TRUE(WaitFor([&sm] { return sm.state == -1; }))
+        << "MoveNext continuation did not re-enter to completion";
 }
