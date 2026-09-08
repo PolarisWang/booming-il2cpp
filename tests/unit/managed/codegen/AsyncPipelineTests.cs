@@ -102,6 +102,7 @@ public sealed class AsyncPipelineTests
         // The real async method surfaces.
         Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::GetOne"));
 
+
         // The compiler-generated state machine MoveNext surfaces as a subject.
         var movenext = result.AotCoreIr.Methods
             .FirstOrDefault(m => m.SubjectId.Contains(">d__") && m.SubjectId.Contains("::MoveNext"));
@@ -204,9 +205,46 @@ public sealed class AsyncPipelineTests
         var (_, _, matchMethod) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
 
         // Phase 2 segment B: builder/awaiter calls resolved to native externs.
-        // SetResult, SetException, AwaitUnsafeOnCompleted should appear in the emitted C++.
-        Assert.Contains("SetResult", matchMethod.MethodSource);
-        Assert.Contains("SetException", matchMethod.MethodSource);
+        // SetResult, SetException, AwaitUnsafeOnCompleted should appear in the emitted C++,
+        // either as the managed method name (SetResult / SetException) or as the native
+        // function name (async_task_builder_set_result_raw / async_task_builder_set_exception).
+        bool hasSetResult = matchMethod.MethodSource.Contains("SetResult") ||
+            matchMethod.MethodSource.Contains("async_task_builder_set_result");
+        Assert.True(hasSetResult, "MoveNext body should contain SetResult or async_task_builder_set_result");
+        bool hasSetException = matchMethod.MethodSource.Contains("SetException") ||
+            matchMethod.MethodSource.Contains("async_task_builder_set_exception");
+        Assert.True(hasSetException, "MoveNext body should contain SetException or async_task_builder_set_exception");
         Assert.Contains("AwaitUnsafeOnCompleted", matchMethod.MethodSource);
+    }
+
+    [Fact]
+    public void MovenextEmittedSource_CreateAndGetTaskRouteToNativeAsyncBuilder()
+    {
+        using var ctx = new TempCtx();
+        // The async entry surfaces alongside MoveNext in full-assembly template.
+        var (_, tmpl, _) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
+        var entry = tmpl.Methods.FirstOrDefault(m =>
+            m.SubjectId.Contains("AsyncMethods::GetOne") || m.SubjectId.Contains("AsyncMethods::DoVoid"));
+        Assert.NotNull(entry);
+
+        // Phase 2 segment B/C: the async method's builder create/get_Task must route
+        // to the native async.h helpers — NOT the interpreter fallback (which returns 0).
+        Assert.Contains("chaos_async_task_builder_create", entry!.MethodSource);
+        Assert.Contains("async_task_builder_get_task", entry.MethodSource);
+        Assert.DoesNotContain("ChaosExternalRuntimeFallback", entry.MethodSource);
+    }
+
+    [Fact]
+    public void MovenextEmittedSource_SetResultAndSetExceptionRouteToNativeAsyncBuilder()
+    {
+        using var ctx = new TempCtx();
+        var (_, _, matchMethod) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
+
+        // Phase 2 segment B/C: the builder's SetResult / SetException inside the state
+        // machine's MoveNext body route to native async.h setters, not interpreter fallback.
+        bool hasResult = matchMethod.MethodSource.Contains("async_task_builder_set_result_raw") ||
+            matchMethod.MethodSource.Contains("async_task_builder_set_result_void");
+        Assert.True(hasResult, "MoveNext body should call async_task_builder_set_result_raw/_void");
+        Assert.Contains("async_task_builder_set_exception", matchMethod.MethodSource);
     }
 }
