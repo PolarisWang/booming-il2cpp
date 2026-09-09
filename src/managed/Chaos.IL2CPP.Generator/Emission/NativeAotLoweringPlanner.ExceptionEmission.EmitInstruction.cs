@@ -997,7 +997,19 @@ public sealed partial class NativeAotLoweringPlanner
                 }
             case "ldloca":
                 {
-                    EmitEvalStackPush(builder, indentation, $"&chaos_locals[{GetRequiredIntOperand(instruction)}]");
+                    int slot = GetRequiredIntOperand(instruction);
+                    // For async-MoveNext box pointer slots (a GC-heap pointer to the state
+                    // machine), the slot's VALUE already is the durable address of the struct.
+                    // Emit the value, not &chaos_locals[N] (address of the stack slot), so the
+                    // box survives cross-thread continuation resumption.
+                    if (_state.Value!.AsyncBoxPointerLocalSlots is { } abp && abp.Contains(slot))
+                    {
+                        EmitEvalStackPush(builder, indentation, $"chaos_locals[{slot}]");
+                    }
+                    else
+                    {
+                        EmitEvalStackPush(builder, indentation, $"&chaos_locals[{slot}]");
+                    }
                     break;
                 }
             case "ldarga":

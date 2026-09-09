@@ -1699,6 +1699,7 @@ public sealed partial class NativeAotLoweringPlanner
         _state.Value!.StructLocalSlots = IdentifyStructLocalSlots(instructions);
         _state.Value!.FloatLocalSlots = IdentifyFloatLocalSlots(instructions);
         _state.Value!.Int64LocalSlots = IdentifyInt64LocalSlots(instructions);
+        _state.Value!.AsyncBoxPointerLocalSlots = IdentifyAsyncBoxPointerLocalSlots(instructions, method);
         slotContext.FloatLocalSlots = _state.Value!.FloatLocalSlots;
         try
         {
@@ -1711,6 +1712,7 @@ public sealed partial class NativeAotLoweringPlanner
             _state.Value!.StructLocalSlots = null;
             _state.Value!.FloatLocalSlots = null;
             _state.Value!.Int64LocalSlots = null;
+            _state.Value!.AsyncBoxPointerLocalSlots = null;
         }
         return slotContext;
     }
