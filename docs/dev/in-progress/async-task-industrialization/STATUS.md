@@ -331,20 +331,122 @@ MoveNext 结构是 if(state==0){await setup} else{resume},但 Tail(CHAOS_EH_END 
 下一步: 修 MoveNext resume 语义 — 确证 resume 时 MoveNext 读到 state==0 应 goto 尾(SetResult)而非重跑
 await setup。或改 codegen switch 使 resume(非首跑)分支进 tail。
 
-### R2-full 修复定位（给下一 session 的精确修复说明）
-根因已 100% 定位在 codegen MoveNext lowering（非 runtime/async.h）。见
-`artifacts/r2full/asyncgen/native-aot.generated.cpp` ~1435-1582。
+### HANDSIGN: 2026-09-09 会话 3 — dispatch 极性 + suspend return + 预存 C++ 编译缺陷全部修复, R2-full 最终 block 为 async box ABI 间接层
 
-具体: GetOne = `await Task.Yield(); return 1;`。其 MoveNext 被发射为:
-- `if(is_completed != 0){ GetResult(); chaos_locals[1]=1; }` ← **await 后的 `return 1` 只被发射在"同步完成"分支**。
-- `else { /* suspend: state=0 + store awaiter + AwaitUnsafeOnCompleted(queue), 然后 state 又被写回 -1 */ }`
-- try 后无条件 Tail: `SetResult(chaos_locals[1])`.
+#### 2026-09-09 已推送修复 (3 commits, 均 `origin/main`)
 
-问题: suspend 走 else,`chaos_locals[1]`从未被赋 1(它只在 sync-complete 分支被赋)。且 suspend 把 state 归位后被
-register 后续的 stfld 又把 state 改 -1(非 resume 索引?),重入不跳 after-await。两因叠加 → SetResult(chaos_locals[1])
-其中 chaos_locals[1]==0 → result=0。
+| Commit | 内容 | 域 | 验证 |
+|--------|------|----|------|
+| `2b3fd2511` | **async MoveNext resume-state**: (1) `BuildIfThenElse` trampoline 链追逐,解决 dispatch 极性颠倒（state==0 → resume 分支; state!=0 → setup 分支）; (2) `AppendSuspendReturnsForAsyncMoveNext` 在 `AwaitUnsafeOnCompleted` 后插 `IRReturn`, 阻止首次进入 fall-through 到尾 `SetResult(0)` | codegen | 2153/2153 PASS + 新回归测试 |
+| `8e41cceda` | **header extern `{;`**: `BuildTypeDeclarationsCode` 取 Source 首行作 extern 声明时去掉尾 `{` (async helper 多行 body 源残 `{` → C2598/C1075) | codegen | 2153 PASS |
+| `31ad4a921` | **gc_dirty_card_dst_ref cast**: second arg reinterpret_cast<const void*> (1de5c36ec LEAF barrier 后 intptr_t 不再隐式转换) | codegen | 2153 PASS; R2-full 能编译链接 |
 
-最小正确修复 = codegen async MoveNext 的 `return <expr>`(await 之后)须 stfld 进 d__ field 或保证在"共享尾"
-(非仅 sync-complete 分支)对 resume 也赋值;且 suspend 后 state 应保留为 resume-to-after-await 标记、不得被后续
-置成使 if(state==0) false 的值。即对齐 Roslyn: suspension 存 resume-index,resume 进 move-next 时 goto post-await
-该值已捕获到 d__ 供 builder 尾。接入点在新 AsyncCoroutineEmitter/结构化 IR 的 async 分支(MethodEmission 段A)。
+#### 修复后 R2-full (真 codegen 产物) 运行行为
+
+```c++
+// 现已编译+链接+启动通过。emitted MoveNext(for GetOne):
+//   if (state == 0) {   ← RESUME path (correct!)
+//       reload u__1 awaiter; GetResult; chaos_locals[1] = 1;
+//   } else {             ← SETUP path (correct!)
+//       yield_create; get_awaiter; get_is_completed;
+//       if (!is_completed) state=0; AwaitUnsafeOnCompleted(...); return;  ← SUSPEND + RETURN
+//       // ^^^ suspend no longer falls through to tail SetResult(0)
+//   }
+//   tail: SetResult(chaos_locals[1])
+```
+
+运行输出到 2× `[override:is_completed] armed=1 → 0` 后**挂起**．不 segfault、不报错，task 不在合理时限内完成。
+
+#### 真实根因(下一 session 入口精确说明)
+
+**box 指针传递多了一层间接** —— 这是从段 A 出厂时就潜伏的根本 ABI 缺陷, 被旧的"无 suspend return → 永远 fall through 到尾 SetResult"掩盖了。因为我修好了 suspend return, 真实挂起走了第一次, 暴露了此缺陷。
+
+**证据（生成 C++ artifacts/r2full/asyncgen/native-aot.generated.cpp）**:
+
+GetOne 入口 (async entry, `AsyncTestAssembly_AsyncMethods_GetOne`):
+```
+15: auto* box = CHAOS_IL2CPP_NEW_GC(chaos_type_...d__0, {});  // GC 堆分配
+16: box->header.type_info = ...;
+19: chaos_locals[0] = (intptr_t)box;  // 栈槽 [0] = box_ptr
+...
+44: chaos_arg_0 = &box->t__builder;          // OK: builder_ref = &(box内的 builder 字段)
+45: chaos_arg_1 = reinterpret_cast<INTPTR>(&chaos_locals[0]); // BUG: &stack-slot, NOT box_ptr
+     //                    ^^^^^^^^^^^^^^^^^
+     // 传的是"持 box ptr 的栈槽地址", 不是 box_ptr 本身
+46: Start<SM>(chaos_arg_0, chaos_arg_1);     // Start wrapper 收到 chaos_arg_1 = &chaos_locals[0]
+```
+Start wrapper (同一文件):
+```
+extern "C" ... Start<SM>(... chaos_arg_1) {
+    async_task_builder_get_task(chaos_arg_0);
+    AsyncTestAssembly...MoveNext(chaos_arg_1);  // 此处 chaos_arg_1 是 &chaos_locals[0] (栈槽地址)
+}
+```
+
+所以 MoveNext 收到的 `chaos_fn_arg_0` = `&chaos_locals[0]` (调用者的栈帧上的一个 INTPTR 槽).  
+Sync 路径碰巧能工作: 因为 &slot 在调用者栈帧仍存活, `reinterpret_cast<chaos_type_d__0*>(chaos_fn_arg_0)` 读出的是栈槽内容(box ptr), 然后通过这个内容访问字段。这个"通过栈槽位置读取 box 指针"的模式本身就不稳定,但在同步单帧路径中存活足够久。
+
+跨线程续列时彻底崩: 
+```
+AwaitUnsafeOnCompleted wrapper (chaos_arg_2 = &chaos_locals[4]):
+244: auto* __data = new AsyncStateMachineContinuationData{ MoveNext_fn, reinterpret_cast<void*>(chaos_arg_2) };
+     // chaos_arg_2 = &chaos_locals[4] (调用者栈帧的另一个 slot)
+     // ContinuationData.sm_box = dead stack slot address
+...
+// worker 线程 fire continuation → AsyncStateMachineContinuationCallback:
+data->move_next(reinterpret_cast<INTPTR>(data->sm_box));
+// data->sm_box = 已消亡调用者栈的地址 → 读 garbage → 挂起
+```
+
+**这就是 STATUS REMAIN#3(GC-heap box + continuation 需持 box)的根本子**。陈旧的分析说 'stack `__chaos_stack_obj`' 是错的 — 实际代码已经是 `CHAOS_IL2CPP_NEW_GC`(2b3fd2511 前的 17ded8c5f 已经改了)。但 codegen 对 `ref this` 参数的 ABI 解析始终走的 `ldloca`(取局部槽地址) 而不是传递 box 的 GC 稳定地址。
+
+#### 修法（给下 session 的精确入口）
+
+**本质**: async MoveNext 是 value-type 实例方法, Roslyn IL 内 `ldarg.0` = `ref this` = 指向 **box GC 对象** 内含 >d__ 首位置的指针。当前 codegen 的 ABI 解析把这个 `ldarg.0` (参 0, type=value-type-by-ref) 映射成了 `chaos_args[0]` → 而 **EmitAbiArgumentInitialization** 对于 value-type this 填入的是 `&chaos_locals[i]` (持 box 的栈槽地址), 不是 box 值本身。
+
+**修复目标**: 对于 async state machine MoveNext (或其他确认 GC-heap 盒化值类型的实例方法), 传递给 Start/AwaitUnsafeOnCompleted 的 `ref state_machine` 应该传 GC 对象的稳定指针(interior pointer to box->>d__), 而不是 `&chaos_locals[i]`。
+
+**具体修改范围**:
+1. **`EmitAbiArgumentInitialization`** (MethodEmission.cs 或其调用的 ABI 格式化代码): 识别 async state machine 场景, 把 `ldarga.s 0`/`ldloca 0`(value-this) 解析为 `chaos_args[0]`(直接传 box 值) 而非 `&chaos_locals[0]`。  
+   **关键**: codegen 目前的 value-type this 通用处理是 `chaos_resolve_managed_value_pointer(...)` 或者 `&chaos_locals[0]`, 两者都产生栈间接 — 需要改为直接传持久指针。
+
+2. **MoveNext 本身**: 现在 MoveNext 读 `chaos_args[0]`(Input: `&chaos_locals[0]`, 栈槽地址) → 用 `reinterpret_cast<type*>(chaos_args[0])` 读 box 内容 → 实际上读的是栈槽里存的 box ptr, 继续字段访问。如果改成直接传 `chaos_locals[0]`(box ptr), 链路上的 `reinterpret_cast<type*>(chaos_args[0])` 仍然正确(box ptr reinterpret 为 type* 访问 box 头部 >d__ 字段)。
+
+3. **Start/AwaitUnsafeOnCompleted 的 chaos_arg_2(持 box 值的字段)**: 现在这些调用点传的是 `&chaos_locals[4]` (局部栈槽), 需要改为直接传可用于 cross-thread 的持久 box 指针。
+
+**风险**: `ldloca 0`/`ldarga.s 0` 是 value-type 实例方法共享的全域 ABI 路径。直接改全局影响所有 value-type 方法。必须加 async state machine 专属守卫,或者确认不改变其他 value-type 实例方法的语义(它们通常不和跨线程续列相关)。
+
+**推荐方案**: 在 `EmitManagedMethod` 的 async MoveNext 分支(MethodEmission.cs:232-249)或 `EmitAbiArgumentInitialization` 中插入: 若 `IsAsyncStateMachineMoveNext`, 不映射 `arg.0` → `chaos_args[0]` 然后 `&chaos_locals[0]` 转储, 改为**直接从 GC 对象传稳定指针**:
+```
+intptr_t this_box = CHAOS_IL2CPP_NEW_GC(...)/*已在 entry 分配*/;
+// MoveNext 收到的 chaos_args[0] = this_box (box ptr, stable for cross-thread)
+// 现有 reinterpret_cast<chaos_type_d__0*>(chaos_args[0]) 已在 MoveNext body 中运行, 读 box 头部的 >d__ 字段。
+```
+
+#### 当前架构决策(不要推翻)
+1. **手工状态机翻译, 不做 C++20 coroutine**
+2. **MoveNext 当普通 value-this 方法发射** — 复用现存结构化发射路径
+3. **GC 堆 box(CHAOS_IL2CPP_NEW_GC)而非栈** — 已在 17ded8c5f 完成, 不需重做
+4. **保障代码: 入口 SetResult/SetException 进 native async.h 路径**(段B)
+5. **跨线程 dispatcher 注册(register_async_dispatch_continuation_fn)** — 已实现在 runtime init
+
+#### 复现命令
+```bash
+# 1. Regenerate codegen artifacts from current codegen unit test
+dotnet test tests/unit/managed/codegen/Chaos.IL2CPP.CodeGen.Tests.csproj \
+  --filter "FullyQualifiedName~R2Full_RealCodegen_EmitsGetOneAndMoveNext"
+
+# 2. Recompile native exe
+cd artifacts/r2full/asyncgen
+cmake --build build --config Debug
+
+# 3. Run
+./build/Debug/r2full_asyncgen.exe
+
+# 4. 观察: 如修复正确, 应输出 task->result = 1 + PASS
+```
+
+#### 门禁
+- codegen 全量: `dotnet test tests/unit/managed/codegen/Chaos.IL2CPP.CodeGen.Tests.csproj` (2153+, 无新增 FAIL)
+- AsyncPipelineTests 7/7 PASS (包括 `MovenextEmittedSource_SuspendReturnsAfterAwaitUnsafeOnCompleted`)
+- native smoke: `tests/unit/runtime-native/runtime-core/threading/async_integration_smoke_test.cpp` (17 tests, 无关改动不改它, 仅验证 async.h 语义完整)
