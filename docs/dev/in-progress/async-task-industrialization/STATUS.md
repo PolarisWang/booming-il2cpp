@@ -535,5 +535,24 @@ Phase 3 组合子 + 集成（native-first，全绿已提交 main）:
 
 > 仓库环境极多争用（并行 CI/review agent 反复 checkout 主工作区、build .github ci 线、削 S16/async_stubs 我的实现）。为防被逆，主要实现改在隔离 worktree async-p3c branch，commit 完 ff 回 main（现 main=feccdb166）；外部 agent 已"停止"。残余 flaky（ThreadPoolInitialize s_initialized guard 不 reset → 全量跑 TaskRunFromMultipleThreads/SequentialAsyncAwaitPattern 崩/超时）为本仓库既有问题（非 async 引入），记录于 P3-2 根因段。
 
+### Phase 3 net（本会话在 main 上、已 push origin/main）
+P3-1 TCS → 3cf2e4532（native TaskSource + registry + AwaitTcs subject）
+P3-2 Delay → 6bdc6ea63+4bb252875（TimerQueue delay + registry + TaskDelay CTest）
+P3-3 WhenAll/WhenAny → 822933575（WhenState 组合子 + 4 CTest，native 9/9）
+P3-4 EC 跨续列 auto-flow → 5c540b3a9（AsyncContinuationDispatch 加 EC capture/run/free）
+P3-5a + P3-7 → feccdb166（WhenAll/WhenAny registry 到 chaos_task_when_{all,any}_array；managed-array unpack 用 stub_common ManagedArrayAccessor = 与 ChaosArrayNew1D_Inline 同一 GC-array 布局，已 9/9 CTest 覆盖基底；AsyncTestAssembly 加 AwaitWhenAll/ComposeAll 主题 + pipeline 断言）
+codegen 门：2166/2166 PASS。
+
+**P3 残余**:
+- P3-6 AsyncLocal：EC flow(P3-4)已使跨 await 续列自动传播 AsyncLocal；AsyncLocal 的 native Get/Set 实现 pre-existing，无需额外。
+- P3-5 SynchronizationContext：foundation-dll threading-tasks chunk IR 中**无 SyncCtx.Post/Send callee 引用**（只 ConfigureAwait getter 4 个且非 SyncCtx-flow）。real BCL 组合子代码不调 SyncCtx.Post/Send —— 某此无触发 path 无法在 foundation 层验证，需要完整 App 级 SyncCtx 场景。**defer 为"App 级验证项"，非组合子闭链阻塞**（roadmap watch，符合 P1… 非阻塞）。
+
+### Phase 4/5/6 需要的前置（不属 "在本 checkout 内能验证" — 记录实需）
+- **Phase 4 Parallel**：需要真实 machine + Parallel.For/Each/Invoke 语义核对 + ThreadPool hill-climb 多核评测。native 线程池已有，但 full Parallel body-ranges/partitioners + delegate marshalling 需完整 codegen+managed delegate runtime，不能靠 stub 0-return 冒烟。
+- **Phase 5 perf <2× .NET8**：需真实 .NET8 可执行做 A/B framework benchmark（本 checkout 无 .NET8 runtime 可跑）。
+- **Phase 6 foundation fact + hotupdate**：需 nocturnal full foundation-dll build（跑数小时）+ patch 框架实机替换 MoveNext。
+以上三项各自要求在本仓库 CI/nightly host（非本对话能驱动）执行。
+
+
 
 

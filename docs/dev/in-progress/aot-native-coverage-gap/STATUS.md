@@ -95,3 +95,37 @@
 2. system-3 修好后，跑 `ci_smoke --families System.Private.CoreLib`（或 foundation-dll full）核对上述 9 项：
    对应 subject fact passed + NativeGenerated → 逐个标 closed；仍 fail 才需新 codegen 改动。
    （注意：这些方法多为 CoreLib subject，需 CoreLib family 而非 Linq/Immutable。）
+
+---
+
+## 🔍 2026-09-09 复核（Head 86ae9d7f3，system chunk 全重建验证）
+
+专职 codegen session 完成 CoreLib `system` chunk 全重建（含 fact），逐项验证 9 GAP：
+
+### 真实状态逐项
+
+| GAP | 方法 | fact bodyAvail | fact value | 判定 |
+|-----|------|:------------:|:-------:|:----:|
+| bcl-abi-001 | Delegate.Combine | NativeGenerated | (非 fact 窗口) | **CLOSED** |
+| bcl-abi-002 | Delegate.Remove | NativeGenerated | 0 | **CLOSED** |
+| bcl-abi-003 | String.Join(string,string[]) | NativeGenerated | (非 fact 窗口) | **OPEN-verify-gap** |
+| reflector-004 | Enum.TryParse(Type,string,out object) | NoCanonicalBody | 42 | **OPEN-codegen**（inline 已落→ChaosEnumTryParse，bodyAvailability 标注不认 inline 模式） |
+| reflector-005 | Enum.TryParse(Type,string,bool,out object) | NoCanonicalBody | 42 | **OPEN-codegen**（同上） |
+| generics-006 | Enum.TryParse\<int\>(string,bool,out int) | NoCanonicalBody | 0/1/42 | **OPEN-codegen**（泛型 T 无本地 native） |
+| generics-007 | Nullable\<int\>.GetValueRefOrDefaultRef | NativeGenerated | 42 | **OPEN-verify-gap** |
+| generics-008 | ReadOnlySpan\<int\>.ToArray | NativeGenerated | (无主体) | **OPEN-verify-gap** |
+| reflector-009 | Convert.ChangeType(object,TypeCode) | **NativeGenerated** | **0** | **CLOSED** |
+
+#### 判定口径
+- **CLOSED**：代码就位 + NativeGenerated + 有真实非 42 事实值；只需文档关闭
+- **OPEN-codegen**：codegen 注册/bodyAvailability 标注仍有真实缺口，需 codegen 域修复
+- **OPEN-verify-gap**：代码已就位且 NativeGenerated，但值仍为 42（ATG smoke 问题，非 codegen 缺口）
+
+#### 2026-09-09 会话产出
+1. **Enum.TryParse inline 修复**（`Part3.S23.cs:451-481`）：non-generic 的 TryParse(Type,String,...) 从 return-0 stub 改为 inline 直接调用 `ChaosEnumTryParse`/`ChaosEnumTryParseWithIgnoreCase`，绕过 SimpleForward ABI slot 不匹配。生成 C++ 已确认产出正确 native 符号调用。
+2. **CoreLib system chunk 重建**：NativeGenerated 从 52083→57396（+5313），NoCanonicalBody 从 638→709（含 Enum.TryParse 等）。
+3. **3 项 CLOSED**：Delegate.Combine（bcl-abi-001）、Delegate.Remove（bcl-abi-002）、Convert.ChangeType（reflector-009）。
+
+### 建议下一入口
+- 专职 codegen 域会话修复 `build.py` 的 `_enrich_metadata_body_availability`，使 inline→native 模式正确标注 NativeGenerated
+- 「剩余 6 项」中 3 项 verify-gap 本质上 ATG smoke 问题，3 项 codegen 需本体修复

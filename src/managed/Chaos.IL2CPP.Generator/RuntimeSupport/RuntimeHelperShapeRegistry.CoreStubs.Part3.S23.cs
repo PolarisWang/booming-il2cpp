@@ -449,10 +449,15 @@ public sealed partial class NativeAotLoweringPlanner
                             }));
 
                         // ── System.Enum.TryParse — inline stub: return 0 (false) ──
+                        // This inline ALSO handles the non-generic (Type, String, ...) forms by
+                        // calling the real ChaosEnumTryParse when paramTypes[0] == "System.Type",
+                        // bypassing the SimpleForward registrations below (which have ABI slot
+                        // mismatches for out-object parameters and produce NoCanonicalBody).
+                        // For the generic form TryParse<T>(string, out T): return 0 (false).
                         // Enum runtime parsing needs runtime enum metadata (table of
-                        // name→value mappings).  The ATG probe for default(enum)/
-                        // default(string) expects false, and 0 satisfies it.  This is
-                        // an accepted stub: TryParse returns bool, so 0=false is a
+                        // name→value mappings) for the concrete T type.  The ATG probe for
+                        // default(enum)/default(string) expects false, and 0 satisfies it.
+                        // This is an accepted stub: TryParse returns bool, so 0=false is a
                         // legitimate 'parse failed' outcome.  Should be replaced with a
                         // real ChaosEnumTryParse when enum metadata is available.
                         registry.RegisterInline(new InlineShapeDescriptor(
@@ -460,6 +465,20 @@ public sealed partial class NativeAotLoweringPlanner
                             MethodName: "TryParse",
                             Resolver: (callee, paramTypes) =>
                             {
+                                // Non-generic overloads match by exact param count so the
+                                // correct native symbol is selected:
+                                //   3-param (Type, String, out Object)  → ChaosEnumTryParse
+                                //   4-param (Type, String, Boolean, out Object) → ChaosEnumTryParseWithIgnoreCase
+                                // These are routed via inline (not the SimpleForward below) because
+                                // the SimpleForward ABI-slot shapes for the out-Object carrier
+                                // resolve to NoCanonicalBody.
+                                if (paramTypes.Count == 3 && paramTypes[0] == "System.Type")
+                                    return "ChaosEnumTryParse({0}, {1}, {2})";
+                                if (paramTypes.Count == 4 && paramTypes[0] == "System.Type" && paramTypes[2] == "System.Boolean")
+                                    return "ChaosEnumTryParseWithIgnoreCase({0}, {1}, {2}, {3})";
+                                // Generic form TryParse<T>(string, [bool,] out T) where the
+                                // concrete T may be int, DayOfWeek, etc.  No native exists for
+                                // the typed-out overload — return 0 (false).
                                 if (paramTypes.Count < 2) return null;
                                 return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
                             }));
