@@ -34,4 +34,5 @@ useDefault = true
   paths = [
     '''_fix_validator_types\.py''',
     '''capability-snapshot\.json''',
+    '''result-master\.json''',
   ]
