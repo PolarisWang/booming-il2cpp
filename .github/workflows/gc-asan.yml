@@ -49,13 +49,14 @@ jobs:
 
       - name: Configure CMake (ASAN)
         shell: bash
+        env:
+          MSYS2_ARG_CONV_EXCL: "*"
         run: |
           cmake -S . -B artifacts/presets/windows-x64-reference-asan \
-            -G "Visual Studio 17 2022" \
             --toolchain build/toolchains/windows-x64-reference.cmake \
             -DROADMAP0_PRESET_TARGET=windows-x64-reference \
-            -DCMAKE_CXX_FLAGS="//fsanitize=address" \
-            -DCMAKE_EXE_LINKER_FLAGS="//fsanitize=address"
+            -DCMAKE_CXX_FLAGS="/fsanitize=address" \
+            -DCMAKE_EXE_LINKER_FLAGS="/fsanitize=address"
 
       - name: Build Native Runtime + GC tests
         run: |
