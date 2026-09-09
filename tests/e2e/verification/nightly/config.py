@@ -80,6 +80,11 @@ class NightlyConfig:
         "hotupdate", "coverage-audit", "aggregate",
     ])
     max_idle_seconds: int = 1200  # watchdog threshold
+    # ⚡ D.1-fix V1: per-stage idle budget (build/fact can be silent for long,
+    #    benchmark/hotupdate output more frequently).  If None, all stages
+    #    use max_idle_seconds.  Overridable via env CHAOS_IDLE_BY_STAGE as a
+    #    JSON dict like '{"benchmark":900,"build":3600}'.
+    idle_by_stage: dict[str, int] | None = None
     verbose: bool = False
     profile_pass: bool = False
 
@@ -114,6 +119,25 @@ class NightlyConfig:
     def __post_init__(self):
         self.foundation_dir = Path(self.foundation_dir).resolve()
         self.report_dir = Path(self.report_dir).resolve()
+        # D.1-fix V1: parse idle_by_stage from env if not set on object.
+        if self.idle_by_stage is None:
+            raw = os.environ.get("CHAOS_IDLE_BY_STAGE", "")
+            if raw:
+                try:
+                    parsed = json.loads(raw)
+                    if isinstance(parsed, dict):
+                        self.idle_by_stage = {str(k): int(v) for k, v in parsed.items()}
+                except (ValueError, TypeError):
+                    print("  [config] WARN: CHAOS_IDLE_BY_STAGE not valid JSON; "
+                          "using max_idle_seconds for all stages")
+
+    def idle_for(self, stage: str) -> int:
+        """Per-stage idle budget (D.1-fix V1). Falls back to max_idle_seconds."""
+        if self.idle_by_stage:
+            got = self.idle_by_stage.get(stage)
+            if got is not None:
+                return got
+        return self.max_idle_seconds
 
     @classmethod
     def from_env(cls) -> dict[str, str]:
