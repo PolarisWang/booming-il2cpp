@@ -59,8 +59,12 @@ jobs:
       # StubAssembly is referenced with ReferenceOutputAssembly=false (build-time dep only,
       # loading its DLL by path from the test fixture). dotnet test does NOT auto-build
       # P2P references flagged this way, so we must build it explicitly here.
+      # Note: PlannerFixture resolves the assembly path as bin/Debug/net8.0/ regardless
+      # of the dotnet test --configuration Release setting, so we build in Debug too.
       - name: Build StubAssembly test fixture
-        run: dotnet build tests/unit/managed/codegen/StubAssembly/ --configuration Release
+        run: |
+          dotnet build tests/unit/managed/codegen/StubAssembly/ --configuration Release
+          dotnet build tests/unit/managed/codegen/StubAssembly/ --configuration Debug
 
       - name: Code Coverage Collection (with threshold)
         run: |

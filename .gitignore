@@ -639,3 +639,4 @@ jira_token
 # PR log collection (sync_feishu_to_jira scratch)
 /pr_logs.zip
 /pr_logs/
+.ci-logs/

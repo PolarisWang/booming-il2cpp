@@ -132,7 +132,13 @@ function(chaos_native_add_test name)
         # x64 MASM shim (e.g. t4_jit_call.asm, LANGUAGE ASM_MASM); ml64 rejects
         # /GS- /bigobj /utf-8 (A4018) and aborts the whole vcxproj (MSB3721) when
         # these leak onto the asm source via an unscoped target_compile_options.
-        target_compile_options(${name} PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${_opts}>")
+        # Each flag must be wrapped individually because CMake lists are semicolon-
+        # separated; "$<$<COMPILE_LANGUAGE:CXX>:${_opts}>" passes the raw list string
+        # through the gen-expr as one token, which does not apply per-flag scoping.
+        foreach(_flag ${_opts})
+            list(APPEND _scoped_cxx_opts "$<$<COMPILE_LANGUAGE:CXX>:${_flag}>")
+        endforeach()
+        target_compile_options(${name} PRIVATE ${_scoped_cxx_opts})
     else()
         # Linux: wrap the static chaos libs in --start-group/--end-group to resolve
         # circular deps; allow duplicate TLS defs like the old add_chaos_test.
