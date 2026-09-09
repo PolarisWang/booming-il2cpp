@@ -296,6 +296,61 @@ public sealed class AsyncPipelineTests
         Assert.Contains("return", between);
     }
 
+    [Fact]
+    public void MovenextEmittedSource_BoxPointerPassedByValueNotStackSlot()
+    {
+        using var ctx = new TempCtx();
+        var (_, tmpl, _) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
+
+        // R2b box ABI fix: async state-machine box pointers must be passed by VALUE
+        // (the durable GC-heap address which already IS the struct address), NOT by
+        // &chaos_locals[N] (the address of the C++ stack slot that holds the pointer).
+        //
+        // In the entry method (GetOne), the box pointer value from CHAOS_IL2CPP_NEW_GC
+        // is stored in chaos_locals[0].  When that slot is ldloca'd and passed to
+        // builder.Start as ref stateMachine, the emitted code must be:
+        //   _s3 = chaos_locals[0];           ✓ box value (durable)
+        // NOT:
+        //   _s3 = &chaos_locals[0];          ✗ stack slot address (dies with frame)
+
+        var entry = tmpl.Methods.FirstOrDefault(m =>
+            m.SubjectId.Contains("AsyncMethods::GetOne") || m.SubjectId.Contains("AsyncMethods::DoVoid"));
+        Assert.NotNull(entry);
+
+        string entrySrc = entry!.MethodSource;
+
+        // The entry must contain "chaos_locals[0]" (the box pointer value).
+        Assert.Contains("chaos_locals[0]", entrySrc);
+        // It must NOT use "&chaos_locals[0]" (stack slot address) for the box pointer.
+        // The pattern "&chaos_locals[0]" would be the old buggy emission.
+        Assert.DoesNotContain("&chaos_locals[0]", entrySrc);
+
+        // However, other ldloca uses (e.g. &chaos_locals[2] for the awaiter slot)
+        // must still use "&chaos_locals" — so verify the async helpers still work.
+        // For the MoveNext body, the AwaitUnsafeOnCompleted box arg (slot 4) must
+        // also be passed by value, not by stack-slot address.
+        var (_, _, movenext) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
+        string mnSrc = movenext.MethodSource;
+
+        // Verify the box pointer slot 4 is referenced as "chaos_locals[4]" (value)
+        // when passed to the AwaitUnsafeOnCompleted call.  The exact C++ variable
+        // name may be _s3 or another _sN; assert at the source-text level.
+        // Before the AwaitUnsafeOnCompleted call there should be an assignment
+        // of chaos_locals[4] (not &chaos_locals[4]).
+        int aocIdx = mnSrc.IndexOf("AwaitUnsafeOnCompleted", StringComparison.Ordinal);
+        Assert.True(aocIdx > 0, "MoveNext must contain AwaitUnsafeOnCompleted");
+
+        // Find the segment before AwaitUnsafeOnCompleted that sets up its chaos_arg_2
+        // (the ref state_machine argument). This contains the box arg loading.
+        string preAoc = aocIdx > 200 ? mnSrc.Substring(aocIdx - 200, 200) : mnSrc.Substring(0, aocIdx);
+        // It should NOT contain &chaos_locals[4] (the old buggy pattern).
+        Assert.DoesNotContain("&chaos_locals[4]", preAoc);
+
+        // Reference-type locals (&chaos_locals[2] for awaiter slots) should STILL
+        // use & — verify that the general ldloca pattern is not disabled.
+        Assert.Contains("&chaos_locals[2]", mnSrc);
+    }
+
     /// <summary>
     /// Repo-relative stable output dir for R2-full native round-trip proof.
     /// Emitted C++ (native-aot.generated.*.h/cpp etc.) and the hand-written

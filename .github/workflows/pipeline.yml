@@ -130,6 +130,11 @@ jobs:
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'gc-stress') }}
     uses: ./.github/workflows/gc-stress.yml
+    # gc-stress.yml requests contents: write (for the opt-in update_baseline
+    # dispatch path that commits gc.perf.yaml).  A reusable workflow cannot
+    # request MORE than the caller grants — mirror the callee's permission here.
+    permissions:
+      contents: write
     with:
       os: windows-latest
       timeout: 3600
@@ -139,6 +144,10 @@ jobs:
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'gc-perf') }}
     uses: ./.github/workflows/gc-perf.yml
+    # gc-perf.yml requests contents: write (opt-in update_baseline commits
+    # gc.perf.yaml) — a reusable callee can't request more than the caller grants.
+    permissions:
+      contents: write
     with:
       os: windows-latest
       timeout: 600
@@ -204,6 +213,10 @@ jobs:
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'jit-baseline') }}
     uses: ./.github/workflows/jit-baseline-stage.yml
+    # jit-baseline-stage.yml commits the jit.perf.yaml baseline (contents: write)
+    # — callee can't request more than the caller grants.
+    permissions:
+      contents: write
     with:
       os: ubuntu-latest
       timeout: 1800
