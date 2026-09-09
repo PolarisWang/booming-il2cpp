@@ -44,6 +44,7 @@ jobs:
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
 
       - name: Configure CMake (ASAN)
+        shell: bash
         run: |
           cmake -S . -B artifacts/presets/windows-x64-reference-asan \
             -G "Visual Studio 17 2022" \

@@ -2,5 +2,6 @@
   <PropertyGroup>
     <RootNamespace>Chaos.IL2CPP.Tests.Shared</RootNamespace>
     <AssemblyName>Chaos.IL2CPP.Tests.Shared</AssemblyName>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 </Project>
