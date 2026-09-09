@@ -89,7 +89,7 @@ TEST_F(DemotionTest, ShouldDemoteWithLowMarkDensity) {
     // Find the page containing objs[0].
     OldGenPage* page = nullptr;
     {
-        std::lock_guard<std::mutex> lock(g_old_gen.PageMutex());
+        GcSpinLockGuard lock(g_old_gen.PageMutex());
         for (auto* p = g_old_gen.PageList(); p != nullptr; p = p->next) {
             if (!p->in_use.load(std::memory_order_acquire)) continue;
             char* payload = p->Payload();
@@ -134,7 +134,7 @@ TEST_F(DemotionTest, ShouldDemoteRejectsOversized) {
     // Find the oversized page.
     OldGenPage* page = nullptr;
     {
-        std::lock_guard<std::mutex> lock(g_old_gen.PageMutex());
+        GcSpinLockGuard lock(g_old_gen.PageMutex());
         for (auto* p = g_old_gen.PageList(); p != nullptr; p = p->next) {
             if (!p->in_use.load(std::memory_order_acquire)) continue;
             char* payload = p->Payload();

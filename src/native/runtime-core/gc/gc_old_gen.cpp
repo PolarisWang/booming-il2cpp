@@ -3084,7 +3084,11 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     // LOH compaction (opt-in, controlled by CompactMode).
     // Relocates live LOH segments to reduce fragmentation.
-    {
+    // Skip when no LOH segments exist: avoids constructing ScopedPreemptiveMode
+    // (which enters SafepointPoll on destroy) inside an already-held STW GC
+    // safepoint — prevents the ~34s safepoint rendezvous hang (demotion timeout
+    // root cause, CoreCLR-option1: gate by SegmentCount > 0).
+    if (G_Loh().SegmentCount() > 0) {
         std::vector<std::pair<void*, void*>> loh_relocs;
         if (G_Loh().Compact(loh_relocs) > 0) {
             CHAOS_IL2CPP_LOG_INFO_M("OldGen", "loh_compact relocations={0}",
