@@ -76,3 +76,16 @@ P2: fact real 的 JIT 提升合并/tech 差异不改 total 语义(现有)。
 2. 端到端全 family gate 回归未跑(R6),
 3. 无正式 honest-report 工具约束(操作者可回退手工看旧绿)。
 修复顺序: R2 → 正式 tool → e2e gate 回归 → GATE 阈值 configable。
+
+---
+
+## R6 实测状态（2026-09-09 15:35 更新）
+
+**代表性验证已通过（gate 双向正确）**:
+- Immutable(real 0%) → chunk_pipeline benchmark stage 返回 `skipped_fact_gate`（45s），S2 生效 ✅
+- NonGeneric(real 100%) → benchmark aot+jit 真跑（62 methods），不受影响 ✅
+- honest_report / aggregate：Immutable 等 6 chunk 标 FAIL/gated（2026 snapshot）✅
+
+**已知残余/注意项（诚实）**:
+- 用 route3 nightly 跑跨 family 时，chunk_pipeline 在 benchmark 被 gate(skip_fact_gate) 但其它 B-stage(如 benchmark_report/coverage) passed → chunk_pipeline 整体 exit 0 → nightly 高层标 `[B] PASS`(as "run 结束非绿")。benchmark 事实上没跑且 aggregate S1 已从基准 method 数排除，**但 nightly 那行 "PASS" 措辞把"覆盖率过了"包装成 chunk passed**，对只看输出的读者会读成 benchmark 绿。已由 aggregate real-gate 解(不计 benchmark)。此措辞问题是展示层需后续微调(可选)。
+- 真正"全 82 chunk × 每个都验证 gate 不误伤 + 全绿 baseline"需 hours-long full nightly，本项窄验证(R6 partial)：S1+S2 双向正确性已证；广度回归挂一个 full run。#R6-full
