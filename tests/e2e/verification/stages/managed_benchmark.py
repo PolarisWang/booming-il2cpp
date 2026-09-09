@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
+from verification.stages.gating import classify_gate  # S1/S2 fact gate
 from verification._path import results_base
 
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -348,6 +349,25 @@ def _write_perf_records(
 def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     """Managed benchmark stage: run CombinedSubjects under .NET 8 and .NET 10 JIT."""
     start = time.perf_counter()
+
+    # ── Fact gate (S1/S2): do NOT managed-benchmark a chunk whose fact was not
+    #    genuinely verified (real-passed/real-total below threshold). Reads the
+    #    authoritative chunk fact.json; same source aggregate uses. Mirrors the
+    #    gate added to benchmark_chunk/hotupdate_chunk (S2).
+    try:
+        _fact_path = ctx.chunk_dir / "results" / "fact.json"
+        if _fact_path.exists():
+            _fact_data = json.loads(_fact_path.read_text(encoding="utf-8"))
+            _gate = classify_gate(_fact_data)
+            if _gate == "fail":
+                return StageResult(
+                    stage="managed_benchmark", status="skipped_fact_gate",
+                    summary=("managed_benchmark gated: fact not genuinely verified "
+                             "(real-passed/real-total below threshold)"),
+                    duration_ms=int((time.perf_counter() - start) * 1000),
+                )
+    except Exception:
+        pass
 
     # Pre-req: CombinedSubjects.dll must exist
     subjects_dll = ctx.subjects_dll_path

@@ -20,7 +20,9 @@ drawn from the honest snapshot: most currently-green chunks sit either near 100%
 an operator can loosen/tighten per run without touching stage code.
 """
 
-GATE_REAL_RATIO = 0.10  # min real-passed / real-total to clear the fact gate
+import os
+
+GATE_REAL_RATIO = float(os.environ.get("CHAOS_GATE_REAL_RATIO", "0.10"))
 
 
 def classify_gate(fact: dict | None, *, min_ratio: float = GATE_REAL_RATIO) -> str:
