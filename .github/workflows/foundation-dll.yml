@@ -46,7 +46,7 @@ jobs:
           dotnet restore tests/unit/managed/snapshot/
 
       - name: Cache NuGet packages
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.nuget/packages
           key: nuget-fdci-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
@@ -91,7 +91,7 @@ jobs:
 
       # Foundation-DLL execution
       - name: Restore benchmark regression history (cross-run baseline)
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: tests/e2e/translation/*/_dll/reports/history
           key: fdci-history-${{ runner.os }}
