@@ -635,3 +635,7 @@ jira_token
 .tmp-extract-*.py
 .feishu-*.py
 .tmp-feishu*.py
+
+# PR log collection (sync_feishu_to_jira scratch)
+/pr_logs.zip
+/pr_logs/

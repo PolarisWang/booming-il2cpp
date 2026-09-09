@@ -124,6 +124,76 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        // ── Self-validation (DEBUG only) ──────────────────────────────────────
+        // For each identified slot, verify it is consumed as a by-ref async builder
+        // argument (ldloca → call/callvirt to builder.Start/AwaitUnsafeOnCompleted).
+        // This catches false positives where the heuristic marks a non-async-box slot:
+        // mis-emission would cause silent data corruption (value/address flip).
+#if DEBUG
+        if (result.Count > 0)
+        {
+            // Build a map: slot → set of subsequent call/callvirt callees that ldloca it.
+            var slotConsumers = new Dictionary<int, HashSet<string>>();
+            for (int i = 0; i < instructions.Count; i++)
+            {
+                if (instructions[i].Op != "ldloca") continue;
+                int slot = GetRequiredIntOperand(instructions[i]);
+                if (!result.Contains(slot)) continue;
+                // Scan forward from this ldloca to find the nearest call/callvirt
+                // that consumes the pushed address.  ldloca pushes a single value;
+                // any intervening push or pop would break the contract.
+                for (int j = i + 1; j < instructions.Count; j++)
+                {
+                    var op = instructions[j].Op;
+                    if (op is "call" or "callvirt")
+                    {
+                        if (!string.IsNullOrEmpty(instructions[j].Callee))
+                        {
+                            if (!slotConsumers.ContainsKey(slot))
+                                slotConsumers[slot] = new HashSet<string>();
+                            slotConsumers[slot].Add(instructions[j].Callee!);
+                        }
+                        break; // ldloca's single value is consumed by this call
+                    }
+                    // Ops that consume one eval-stack value and produce one:
+                    // still forwarding the same address reference.
+                    if (op is "ldfld" or "ldflda" or "unbox" or "unbox.any"
+                        or "isinst" or "castclass") continue;
+                    // Ops that consume without pushing a reference (dup is a
+                    // copy so we need to track both forks — but tracking every
+                    // dup fork is unbounded; flag it as a potential loss).
+                    if (op is "dup") continue; // conservatively not a loss
+                    // Any other op consumed the value: stop scanning.
+                    break;
+                }
+            }
+            // Every identified slot must be consumed by an async builder call.
+            foreach (int slot in result)
+            {
+                bool hasBuilderRef = slotConsumers.TryGetValue(slot, out var callees)
+                    && callees!.Any(c => c.Contains("AsyncTaskMethodBuilder")
+                        || c.Contains("AsyncValueTaskMethodBuilder")
+                        || c.Contains("AsyncVoidMethodBuilder")
+                        || c.Contains("AsyncPromise")
+                        || c.Contains("Start")
+                        || c.Contains("AwaitUnsafeOnCompleted"));
+                if (!hasBuilderRef)
+                {
+                    // A slot identified as a durable async box pointer must actually be
+                    // ldloca/ldloc-forwarded into an async builder call.  If not, the
+                    // value/address flip in EmitInstruction's ldloca branch would emit a
+                    // corrupt pointer with no other compile-time defence — fail LOUDLY here
+                    // (development build) instead of silently emitting wrong C++.
+                    throw new InvalidOperationException(
+                        "IdentifyAsyncBoxPointerLocalSlots: slot " + slot
+                        + " was identified as a durable async state-machine box pointer but is "
+                        + "not consumed by an async builder call (Start/AwaitUnsafeOnCompleted). "
+                        + "Consumer callees: [" + string.Join(", ", slotConsumers.TryGetValue(slot, out var cs) ? cs : new HashSet<string>()) + "]. "
+                        + "A value/address flip at ldloca would corrupt the emitted code.");
+                }
+            }
+        }
+#endif
         return result;
     }
 

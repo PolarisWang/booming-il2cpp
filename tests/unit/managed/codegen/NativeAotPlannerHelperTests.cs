@@ -956,6 +956,229 @@ public sealed class NativeAotPlannerHelperTests
         Assert.Equal([0], result); // counted regardless of typeShape (initobj = value type)
     }
 
+    // ── IdentifyAsyncBoxPointerLocalSlots (ExceptionEmission.Helpers.cs) ──
+
+    [Fact]
+    public void IdentifyAsyncBoxPointer_EntryPattern_ReturnsSlot()
+    {
+        // Pattern A: async entry method.  newobj produces a >d__ box, result stloc'd.
+        // Include a builder.Start call downstream so the DEBUG self-validation passes.
+        var method = s_plannerType.GetMethod("IdentifyAsyncBoxPointerLocalSlots", s_static,
+            new[] { typeof(IReadOnlyList<AotCoreIrInstructionArtifact>), typeof(AotCoreIrMethodArtifact) })!;
+        var methodArtifact = MakeSimpleMethod();
+        var instructions = new List<AotCoreIrInstructionArtifact>
+        {
+            new() { Op = "newobj", IlOffset = 0,
+                TargetReference = new AotCoreIrReferenceArtifact
+                {
+                    Kind = AotCoreIrReferenceKind.Type,
+                    AssemblyName = "AsyncTestAssembly",
+                    SubjectId = "AsyncTestAssembly/AsyncMethods::<GetOne>d__0",
+                }},
+            new() { Op = "stloc", IlOffset = 1, Operand = 0 },
+            // The box pointer is ldloca'd and passed to builder.Start as by-ref arg.
+            new() { Op = "ldloca", IlOffset = 2, Operand = 0 },
+            new() { Op = "call", IlOffset = 3, Callee = "AsyncTaskMethodBuilder`1::Start" },
+        };
+        var result = (HashSet<int>)method.Invoke(null, new object[] { instructions, methodArtifact })!;
+        Assert.Equal([0], result);
+    }
+
+    [Fact]
+    public void IdentifyAsyncBoxPointer_EntryNoSlot_NewobjTypeMismatch_ReturnsEmpty()
+    {
+        // newobj on a type that does NOT contain >d__ — should not match.
+        var method = s_plannerType.GetMethod("IdentifyAsyncBoxPointerLocalSlots", s_static,
+            new[] { typeof(IReadOnlyList<AotCoreIrInstructionArtifact>), typeof(AotCoreIrMethodArtifact) })!;
+        var methodArtifact = MakeSimpleMethod();
+        var instructions = new List<AotCoreIrInstructionArtifact>
+        {
+            new() { Op = "newobj", IlOffset = 0,
+                TargetReference = new AotCoreIrReferenceArtifact
+                {
+                    Kind = AotCoreIrReferenceKind.Type,
+                    AssemblyName = "System.Text",
+                    SubjectId = "System.Text/StringBuilder::.ctor",
+                }},
+            new() { Op = "stloc", IlOffset = 1, Operand = 0 },
+        };
+        var result = (HashSet<int>)method.Invoke(null, new object[] { instructions, methodArtifact })!;
+        Assert.Empty(result);
+    }
+
+    [Fact]
+    public void IdentifyAsyncBoxPointer_EntryInterveningUnknownInstr_ReturnsEmpty()
+    {
+        // newobj >d__ followed by an unknown op (not dup/call/callvirt/nop) before stloc
+        // must abort matching (line 106 break).
+        var method = s_plannerType.GetMethod("IdentifyAsyncBoxPointerLocalSlots", s_static,
+            new[] { typeof(IReadOnlyList<AotCoreIrInstructionArtifact>), typeof(AotCoreIrMethodArtifact) })!;
+        var methodArtifact = MakeSimpleMethod();
+        var instructions = new List<AotCoreIrInstructionArtifact>
+        {
+            new() { Op = "newobj", IlOffset = 0,
+                TargetReference = new AotCoreIrReferenceArtifact
+                {
+                    Kind = AotCoreIrReferenceKind.Type,
+                    AssemblyName = "Test",
+                    SubjectId = "Test/<Foo>d__0",
+                }},
+            new() { Op = "ldnull", IlOffset = 1 }, // unknown intervening op — stops matching
+            new() { Op = "stloc", IlOffset = 2, Operand = 0 },
+        };
+        var result = (HashSet<int>)method.Invoke(null, new object[] { instructions, methodArtifact })!;
+        Assert.Empty(result);
+    }
+
+    [Fact]
+    public void IdentifyAsyncBoxPointer_EntryNotFirstNewobj_OnlyFirstCounts()
+    {
+        // Pattern A's break after first >d__ newobj: only the first async state
+        // machine's stloc slot is identified, even if a second newobj follows.
+        var method = s_plannerType.GetMethod("IdentifyAsyncBoxPointerLocalSlots", s_static,
+            new[] { typeof(IReadOnlyList<AotCoreIrInstructionArtifact>), typeof(AotCoreIrMethodArtifact) })!;
+        var methodArtifact = MakeSimpleMethod();
+        var instructions = new List<AotCoreIrInstructionArtifact>
+        {
+            new() { Op = "newobj", IlOffset = 0,
+                TargetReference = new AotCoreIrReferenceArtifact
+                {
+                    Kind = AotCoreIrReferenceKind.Type,
+                    AssemblyName = "Test",
+                    SubjectId = "Test/<First>d__0",
+                }},
+            new() { Op = "stloc", IlOffset = 1, Operand = 2 },
+            new() { Op = "ldloca", IlOffset = 2, Operand = 2 },
+            new() { Op = "call", IlOffset = 3, Callee = "AsyncTaskMethodBuilder::Start" },
+            // Second async newobj — should NOT be identified (break after first).
+            new() { Op = "newobj", IlOffset = 4,
+                TargetReference = new AotCoreIrReferenceArtifact
+                {
+                    Kind = AotCoreIrReferenceKind.Type,
+                    AssemblyName = "Test",
+                    SubjectId = "Test/<Second>d__1",
+                }},
+            new() { Op = "stloc", IlOffset = 5, Operand = 3 },
+        };
+        var result = (HashSet<int>)method.Invoke(null, new object[] { instructions, methodArtifact })!;
+        Assert.Equal([2], result); // only slot 2 (first >d__), not 3
+    }
+
+    [Fact]
+    public void IdentifyAsyncBoxPointer_MoveNext_ReturnsSlot()
+    {
+        // Pattern B: async MoveNext.  ldarg.0 + stloc identifies the 'this' box copy.
+        // SubjectId must contain >d__ + ::MoveNext.
+        var method = s_plannerType.GetMethod("IdentifyAsyncBoxPointerLocalSlots", s_static,
+            new[] { typeof(IReadOnlyList<AotCoreIrInstructionArtifact>), typeof(AotCoreIrMethodArtifact) })!;
+        var methodArtifact = MakeGenericMethod(null, null) with
+        {
+            SubjectId = "Test/<Foo>d__0::MoveNext",
+        };
+        var instructions = new List<AotCoreIrInstructionArtifact>
+        {
+            new() { Op = "ldarg", IlOffset = 0, Operand = 0 },
+            new() { Op = "stloc", IlOffset = 1, Operand = 4 },
+            // The box copy (slot 4) is later ldloca'd and passed to builder.
+            new() { Op = "ldloca", IlOffset = 2, Operand = 4 },
+            new() { Op = "call", IlOffset = 3, Callee = "AsyncTaskMethodBuilder::AwaitUnsafeOnCompleted" },
+        };
+        var result = (HashSet<int>)method.Invoke(null, new object[] { instructions, methodArtifact })!;
+        Assert.Equal([4], result);
+    }
+
+    [Fact]
+    public void IdentifyAsyncBoxPointer_MoveNext_LdargNotAdjacent_NoMatch()
+    {
+        // ldarg.0 must be IMMEDIATELY followed by stloc (adjacent pair).
+        var method = s_plannerType.GetMethod("IdentifyAsyncBoxPointerLocalSlots", s_static,
+            new[] { typeof(IReadOnlyList<AotCoreIrInstructionArtifact>), typeof(AotCoreIrMethodArtifact) })!;
+        var methodArtifact = MakeGenericMethod(null, null) with
+        {
+            SubjectId = "Test/<Foo>d__0::MoveNext",
+        };
+        var instructions = new List<AotCoreIrInstructionArtifact>
+        {
+            new() { Op = "ldarg", IlOffset = 0, Operand = 0 },
+            new() { Op = "ldc.i4", IlOffset = 1, Operand = 42 }, // non-stloc between
+            new() { Op = "stloc", IlOffset = 2, Operand = 4 },
+        };
+        var result = (HashSet<int>)method.Invoke(null, new object[] { instructions, methodArtifact })!;
+        Assert.Empty(result); // not adjacent → no match
+    }
+
+    [Fact]
+    public void IdentifyAsyncBoxPointer_NonMoveNext_ReturnsEmpty()
+    {
+        // Pattern B only runs for MoveNext methods.  Non-MoveNext with ldarg.0+stloc
+        // should not be matched even with >d__ in the SubjectId.
+        var method = s_plannerType.GetMethod("IdentifyAsyncBoxPointerLocalSlots", s_static,
+            new[] { typeof(IReadOnlyList<AotCoreIrInstructionArtifact>), typeof(AotCoreIrMethodArtifact) })!;
+        var methodArtifact = MakeGenericMethod(null, null) with
+        {
+            SubjectId = "Test/<Foo>d__0::GetResult", // NOT ::MoveNext
+        };
+        var instructions = new List<AotCoreIrInstructionArtifact>
+        {
+            new() { Op = "ldarg", IlOffset = 0, Operand = 0 },
+            new() { Op = "stloc", IlOffset = 1, Operand = 4 },
+        };
+        var result = (HashSet<int>)method.Invoke(null, new object[] { instructions, methodArtifact })!;
+        Assert.Empty(result); // Pattern B skipped because SubjectId is not MoveNext
+    }
+
+    [Fact]
+    public void IdentifyAsyncBoxPointer_EmptyInstructions_ReturnsEmpty()
+    {
+        var method = s_plannerType.GetMethod("IdentifyAsyncBoxPointerLocalSlots", s_static,
+            new[] { typeof(IReadOnlyList<AotCoreIrInstructionArtifact>), typeof(AotCoreIrMethodArtifact) })!;
+        var methodArtifact = MakeSimpleMethod();
+        var result = (HashSet<int>)method.Invoke(null, new object[] { new List<AotCoreIrInstructionArtifact>(), methodArtifact })!;
+        Assert.Empty(result);
+    }
+
+    [Fact]
+    public void IdentifyAsyncBoxPointer_NoPatterns_ReturnsEmpty()
+    {
+        // Instructions with no newobj or ldarg patterns.
+        var method = s_plannerType.GetMethod("IdentifyAsyncBoxPointerLocalSlots", s_static,
+            new[] { typeof(IReadOnlyList<AotCoreIrInstructionArtifact>), typeof(AotCoreIrMethodArtifact) })!;
+        var methodArtifact = MakeSimpleMethod();
+        var instructions = new List<AotCoreIrInstructionArtifact>
+        {
+            new() { Op = "ldc.i4", IlOffset = 0, Operand = 42 },
+            new() { Op = "stloc", IlOffset = 1, Operand = 0 },
+            new() { Op = "ldloc", IlOffset = 2, Operand = 0 },
+            new() { Op = "call", IlOffset = 3, Callee = "System.Console::WriteLine" },
+        };
+        var result = (HashSet<int>)method.Invoke(null, new object[] { instructions, methodArtifact })!;
+        Assert.Empty(result);
+    }
+
+    [Fact]
+    public void IdentifyAsyncBoxPointer_MoveNext_OnlyLdarg0Counts()
+    {
+        // Pattern B matches ldarg.0 specifically (argument index 0, i.e. 'this'),
+        // not ldarg.N for N > 0.
+        var method = s_plannerType.GetMethod("IdentifyAsyncBoxPointerLocalSlots", s_static,
+            new[] { typeof(IReadOnlyList<AotCoreIrInstructionArtifact>), typeof(AotCoreIrMethodArtifact) })!;
+        var methodArtifact = MakeGenericMethod(null, null) with
+        {
+            SubjectId = "Test/<Foo>d__0::MoveNext",
+        };
+        var instructions = new List<AotCoreIrInstructionArtifact>
+        {
+            new() { Op = "ldarg", IlOffset = 0, Operand = 0 },
+            new() { Op = "stloc", IlOffset = 1, Operand = 4 },    // slot 4 = this copy
+            new() { Op = "ldarg", IlOffset = 2, Operand = 1 },
+            new() { Op = "stloc", IlOffset = 3, Operand = 5 },    // slot 5 = arg1 copy — NOT matched
+            new() { Op = "ldloca", IlOffset = 4, Operand = 4 },
+            new() { Op = "call", IlOffset = 5, Callee = "AsyncTaskMethodBuilder::AwaitUnsafeOnCompleted" },
+        };
+        var result = (HashSet<int>)method.Invoke(null, new object[] { instructions, methodArtifact })!;
+        Assert.Equal([4], result); // only slot 4 (the this copy), not slot 5
+    }
+
     // ── FilterRedundantStoreReloadPairs (ExceptionEmission.cs) ────────
 
     [Fact]
@@ -1089,6 +1312,17 @@ public sealed class NativeAotPlannerHelperTests
             ParameterCount = 0, ParameterAbis = [], LocalCount = 0,
             ExceptionRegionCount = 0, ExceptionRegions = [], Instructions = instructions,
         };
+    }
+
+    /// <summary>
+    /// Builds a parameterless non-async method artifact (the "identity" of a plain
+    /// method) reused across the IdentifyAsyncBoxPointerLocalSlots fixtures where the
+    /// instruction stream alone drives detection (entry Pattern A keys only on
+    /// instructions; the method artifact is inert).
+    /// </summary>
+    private static AotCoreIrMethodArtifact MakeSimpleMethod()
+    {
+        return MakeMinimalMethod([]);
     }
 
     // ── StructuredControlFlow.cs: opcode predicates ────────────────────
