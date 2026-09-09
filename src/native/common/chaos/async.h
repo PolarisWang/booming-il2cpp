@@ -362,4 +362,127 @@ inline CHAOS_IL2CPP_INTPTR async_await_yield_resume(
 
 } // namespace chaos::il2cpp::common
 
+// ══════════════════════════════════════════════════════════════════════════════
+// Phase 3 (P3-1) TaskCompletionSource<T> — native TaskSource proxy.
+//
+// A TaskSource wraps an AsyncTask handle and provides SetResult/SetException
+// /TrySetResult/TrySetCanceled/TrySetException/get_Task operations matching
+// the managed TaskCompletionSource<T> contract.
+//
+// TCS is the "external completion" counterpart of AsyncTaskMethodBuilder:
+//   - Builder: the async state machine owns the Task and completes it.
+//   - TCS: external code creates a Task source and hands the Task out; TCS
+//     is the *completion trigger* for that Task.
+//
+// The TaskSource itself is NOT GC-owned yet (Phase 5 perf when GC-boxed
+// TCS objects are defined). Use task_source_create() for plain-new allocation.
+//
+// Lifecycle: call task_source_destroy() when the TaskSource is no longer
+// needed (its underlying AsyncTask continues to live independently once
+// handed out; destroying the TaskSource does NOT destroy the Task — that
+// is the caller's responsibility via the returned handle).
+// ══════════════════════════════════════════════════════════════════════════════
+
+namespace chaos::il2cpp::common {
+
+/// Lightweight proxy holding an AsyncTask handle and driving completions
+/// from external code (non-state-machine).  This is the native equivalent
+/// of TaskCompletionSource<T>.
+struct TaskSource {
+    AsyncTask* task;
+
+    /// Return the underlying AsyncTask handle (the Task that awaiters see).
+    CHAOS_IL2CPP_INTPTR get_task() const noexcept {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task);
+    }
+
+    /// SetResult(TResult value): complete the Task successfully.
+    /// Fires any registered continuation.  Idempotent-safe: does NOT assert
+    /// if the task already completed (the Try* variants are the gate for
+    /// "only the first completion wins" semantics).
+    void set_result(CHAOS_IL2CPP_INTPTR value) noexcept {
+        task->result = value;
+        task->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+        task->faulted.store(false, std::memory_order_relaxed);
+        task->completed.store(true, std::memory_order_release);
+        finish_async_task(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task));
+    }
+
+    /// SetException(Exception ex): fault the Task.
+    /// Fires any registered continuation.
+    void set_exception(CHAOS_IL2CPP_INTPTR exception) noexcept {
+        task->exception = exception;
+        task->faulted.store(true, std::memory_order_relaxed);
+        task->completed.store(true, std::memory_order_release);
+        finish_async_task(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task));
+    }
+
+    /// TrySetResult(TResult value): complete if not yet completed.
+    /// Returns 1 if this call completed it, 0 if already completed.
+    CHAOS_IL2CPP_INTPTR try_set_result(CHAOS_IL2CPP_INTPTR value) noexcept {
+        bool expected = false;
+        if (task->completed.compare_exchange_strong(
+                expected, true, std::memory_order_acq_rel)) {
+            task->result = value;
+            task->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+            task->faulted.store(false, std::memory_order_relaxed);
+            finish_async_task(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task));
+            return static_cast<CHAOS_IL2CPP_INTPTR>(1);
+        }
+        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    }
+
+    /// TrySetException(Exception ex): fault if not yet completed.
+    /// Returns 1 if this call completed it, 0 if already completed.
+    CHAOS_IL2CPP_INTPTR try_set_exception(CHAOS_IL2CPP_INTPTR exception) noexcept {
+        bool expected = false;
+        if (task->completed.compare_exchange_strong(
+                expected, true, std::memory_order_acq_rel)) {
+            task->exception = exception;
+            task->faulted.store(true, std::memory_order_relaxed);
+            finish_async_task(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task));
+            return static_cast<CHAOS_IL2CPP_INTPTR>(1);
+        }
+        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    }
+
+    /// TrySetCanceled(): cancel if not yet completed.
+    /// Returns 1 if this call canceled it, 0 if already completed.
+    CHAOS_IL2CPP_INTPTR try_set_canceled() noexcept {
+        bool expected = false;
+        if (task->completed.compare_exchange_strong(
+                expected, true, std::memory_order_acq_rel)) {
+            task->faulted.store(true, std::memory_order_relaxed);
+            task->completed.store(true, std::memory_order_release);
+            finish_async_task(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task));
+            return static_cast<CHAOS_IL2CPP_INTPTR>(1);
+        }
+        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    }
+};
+
+/// Allocate a new TaskSource + its underlying AsyncTask.
+/// Returns nullptr on allocation failure.
+inline TaskSource* task_source_create() noexcept {
+    auto* task = new (std::nothrow) AsyncTask();
+    if (task == nullptr) return nullptr;
+    auto* ts = new (std::nothrow) TaskSource();
+    if (ts == nullptr) {
+        delete task;
+        return nullptr;
+    }
+    ts->task = task;
+    return ts;
+}
+
+/// Destroy a TaskSource allocated by task_source_create.
+/// Does NOT delete the underlying AsyncTask — it outlives the source
+/// once handed out to awaiters.  The caller destroys the Task separately
+/// if owning it (in test/standalone contexts).
+inline void task_source_destroy(TaskSource* ts) noexcept {
+    delete ts;
+}
+
+} // namespace chaos::il2cpp::common
+
 #endif // CHAOS_IL2CPP_COMMON_ASYNC_H_

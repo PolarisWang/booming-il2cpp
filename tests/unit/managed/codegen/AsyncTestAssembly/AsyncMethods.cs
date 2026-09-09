@@ -29,4 +29,16 @@ public static class AsyncMethods
     {
         await Task.Yield();
     }
+
+    // async Task<int> awaiting a TaskCompletionSource<int>.Task — externally
+    // completed.  This exercises TCS in the codegen pipeline: TCS object
+    // creation (newobj), get_Task, await the Task handle — all surface in
+    // the AOT IR and must be correctly lowered.
+    public static async Task<int> AwaitTcs()
+    {
+        var tcs = new TaskCompletionSource<int>();
+        // Return the task so the awaiter (the async state machine) registers
+        // a continuation on the TCS's inner Task.
+        return await tcs.Task;
+    }
 }

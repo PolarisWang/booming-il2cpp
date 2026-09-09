@@ -450,3 +450,40 @@ cmake --build build --config Debug
 - codegen 全量: `dotnet test tests/unit/managed/codegen/Chaos.IL2CPP.CodeGen.Tests.csproj` (2153+, 无新增 FAIL)
 - AsyncPipelineTests 7/7 PASS (包括 `MovenextEmittedSource_SuspendReturnsAfterAwaitUnsafeOnCompleted`)
 - native smoke: `tests/unit/runtime-native/runtime-core/threading/async_integration_smoke_test.cpp` (17 tests, 无关改动不改它, 仅验证 async.h 语义完整)
+
+## 执行进度（2026-09-09 会话 4）— Phase 3 P3-1: TaskCompletionSource 落地
+
+### Step 1 ✅（native TaskSource 代理 + 4 CTest）
+`src/native/common/chaos/async.h` 新增 `TaskSource` struct + `task_source_create/destroy`：
+- `get_task()`：返回底层 AsyncTask handle
+- `set_result(value)`/`set_exception(ex)`：完成/置错，fire continuation
+- `try_set_result/set_exception/set_canceled()`：CAS gate 首次完成胜利
+
+`async_integration_smoke_test.cpp` 加 4 TEST_F（TaskSource_*，全 PASS）：
+- `SetResultCompletesAwaitingSM`：SM await tcs.Task → 外部 SetResult(42) → resume 读 42 完成
+- `SetExceptionFaultsAwaitingSM`：SetException fault 读 0xBAD
+- `TrySetFiresExactlyOnce`：首次胜利，第二/canceled no-op
+- `SetResultFromWorkerThread`：跨线程 SetResult(7)
+
+（注：SequentialAsyncAwaitPattern 超时为 **pre-existing flaky**，与本改动无关——clean baseline 也超时。）
+
+### Step 2 ✅（ShapeRegistry 注册 TCS 完成信号方法）
+`RuntimeHelperShapeRegistry.CoreStubs.Part1.S16.cs` 新增 `RegisterTaskCompletionSource`（Part1.cs 派发加入）。
+非泛型 + 泛型(`<T>`)实例方法均 SimpleForward/Generic 路由到 native：
+- SetResult / TrySetResult / SetException / TrySetException / SetCanceled / TrySetCanceled
+- codegen 单测全量 **2165/2165 PASS**。
+
+### Step 3 ✅（真实 TCS async subject + pipeline）
+- `AsyncTestAssembly/AsyncMethods.cs` 加 `async Task<int> AwaitTcs()`：`new TaskCompletionSource<int>()` + `await tcs.Task`。
+- `AsyncPipelineTests` 加 `FullAssemblyClosure_SurfacesTaskCompletionSourceSubject`（验证 `AsyncMethods::AwaitTcs` 与其 `>d__::MoveNext` 及含 TaskCompletionSource callee 的表面化）。
+- 既有 yield 字段断言测试显式指向 `<GetOne>d__`（AwaitTcs 的 MoveNext 不 yield，避免误匹配）。
+- AsyncPipelineTests **10/10 PASS**。
+
+### REMAIN（尚未 done — 需独立 codegen-域 session）
+1. **TCS `.ctor` + `get_Task`**：TCS 是携带 `m_task:Task` 字段的对象模型类型。此二对象模型原语走完整的 reference-type 发射(ObjectModelEmission 收录 + 字段 + MethodTable)，非完成信号类 extern 直发。此前只 callee 存在、无 canonical 发射体。需在 codegen-域做对象模型注册后才打通(这就是 TCS 泛型收集风险点)。
+2. **ObjectModelEmission 泛型收集**: TCS`<T>` 需进 referenceTypeSubjectIds（仿 ObjectModelEmission :415/:445 显式 Track），否则 C++ CHAOS_IL2CPP_NEW_GC 遇 C2027。
+3. **跨线程 UAF 防护**: `AsyncTask` 目前在 async.h 是 plain-new 持根。TCS 跨线程被持有需 GC box(Phase 5 perf / GC lifetime)。
+4. 现 foundation-dll `threading-tasks` chunk 无真实 SPCoreLib `new TaskCompletionSource` 代码路径（仅 CombinedSubjects test-harness 用 SubjectInstanceFactory::Create 建），故 Step-2 注册给完成信号方法已能让 harness probe 的 `tcs.SetResult/SetException/TrySet*` 直接 native 而非 stub 0-wall；`.ctor/get_Task` 的剩余仍会 fallthrough 到 interpreter，直到 (1)(2) 完成。
+
+→ **P3-1 本 session 落地 = native 代理 + 4 CTest + registry 完成信号路由 + pipeline TCS subject 表面化。** 缺 `.ctor/get_Task` 对象模型 = 已建档 REMAIN，移交 codegen 域。
+

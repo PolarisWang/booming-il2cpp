@@ -138,8 +138,9 @@ public sealed class AsyncPipelineTests
             Assert.Fail($"Pipeline failed: {exec.Error?.Code}: {exec.Error?.Message}");
         }
         var result = exec.Value!;
+
         var movenext = result.AotCoreIr.Methods
-            .FirstOrDefault(m => m.SubjectId.Contains(">d__") && m.SubjectId.Contains("::MoveNext"));
+            .FirstOrDefault(m => m.SubjectId.Contains("GetOne") && m.SubjectId.Contains(">d__") && m.SubjectId.Contains("::MoveNext"));
         Assert.NotNull(movenext);
 
         var planner = new NativeAotLoweringPlanner();
@@ -180,6 +181,9 @@ public sealed class AsyncPipelineTests
     public void MovenextEmittedSource_ContainsStateMachineFields()
     {
         using var ctx = new TempCtx();
+        // BuildPlannerForMoveNext resolves the <GetOne>d__0 state machine (the TCS-awaiting
+        // AwaitTcs also emits a MoveNext, but it does NOT yield; yield-specific structure
+        // assertions must target GetOne, which Task.Yields).
         var (_, _, matchMethod) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
 
         // Phase 2 translator: MoveNext is emitted as real C++ via structured emission.
@@ -202,6 +206,9 @@ public sealed class AsyncPipelineTests
     [Fact]
     public void MovenextEmittedSource_ContainsSetResultAndAwaitUnsafeOnCompleted()
     {
+        // BuildPlannerForMoveNext resolves GetOne's state machine (which reaches SetResult
+        // + AwaitUnsafeOnCompleted via Task.Yield). AwaitTcs's state machine awaits a TCS
+        // instead and is a separate subject — not this assertion's target.
         using var ctx = new TempCtx();
         var (_, _, matchMethod) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
 
@@ -349,6 +356,50 @@ public sealed class AsyncPipelineTests
         // Reference-type locals (&chaos_locals[2] for awaiter slots) should STILL
         // use & — verify that the general ldloca pattern is not disabled.
         Assert.Contains("&chaos_locals[2]", mnSrc);
+    }
+
+    [Fact]
+    public void FullAssemblyClosure_SurfacesTaskCompletionSourceSubject()
+    {
+        if (!File.Exists(s_asyncAssemblyPath))
+        {
+            Assert.Fail($"AsyncTestAssembly.dll not built at {s_asyncAssemblyPath}");
+        }
+
+        using var ctx = new TempCtx();
+        var request = new ManagedClosureRequest(
+            InputAssemblyPath: s_asyncAssemblyPath,
+            OutputRootPath: ctx.OutputRoot,
+            EntryPointSubjectIdOverride: null,
+            AdditionalAssemblyPaths: null,
+            FullAssemblyClosure: true);
+
+        var pipeline = new PipelinePlan();
+        var exec = pipeline.Execute(request);
+        if (exec.IsFailure)
+        {
+            Assert.Fail($"Pipeline failed: {exec.Error?.Code}: {exec.Error?.Message}");
+        }
+        var result = exec.Value!;
+
+        // The async method that awaits a TCS must surface.
+        var subjectIds = result.AotCoreIr.Methods
+            .Select(m => m.SubjectId)
+            .ToList();
+        Assert.Contains(subjectIds, id => id.Contains("AwaitTcs"));
+
+        // Its compiler-generated state machine surfaces too.
+        Assert.Contains(subjectIds, id =>
+            id.Contains(">d__") && id.Contains("MoveNext"));
+
+        // The IR method graph must reach the TaskCompletionSource construction and
+        // accessor path (newobj/get_Task are part of the awaited-TCS lowering).
+        var callGraph = result.AotCoreIr.Methods
+            .SelectMany(m => m.Instructions)
+            .Select(i => i.Callee ?? i.TargetReference?.SubjectId ?? string.Empty)
+            .Where(s => s.Length > 0)
+            .ToList();
+        Assert.Contains(callGraph, s => s.Contains("System.Threading.Tasks.TaskCompletionSource"));
     }
 
     /// <summary>

@@ -749,3 +749,144 @@ TEST_F(AsyncIntegrationTest, TaskYieldRoundTripAcrossThreadPool) {
     EXPECT_EQ(-1, sm.state);
     register_async_dispatch_continuation_fn(nullptr);
 }
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Phase 3 P3-1: TaskCompletionSource<T> — native TaskSource proxy.
+//
+// TCS is the "external completion" counterpart of AsyncTaskMethodBuilder.
+// A TaskSource owns an AsyncTask handle; external code registers a
+// continuation (an awaiting state machine's MoveNext) on ts.get_task(),
+// then completes it from another thread via SetResult / SetException.
+// The Try* variants model "only the first completion wins" (Idempotent):
+// a second TrySetResult / TrySetException on an already-completed task is a
+// no-op returning 0.
+// ══════════════════════════════════════════════════════════════════════════════
+
+namespace {
+
+/// Hand-crafted state-machine mirroring a `async Task<int> AwaitTcs(TaskCompletionSource<int> tcs)`
+/// that awaits tcs.Task.  Await/suspend registers MoveNext as the continuation
+/// on the TCS's inner Task; resume completes and stores the result.
+/// Awaiter state: -2 initial (first MoveNext), 0 = suspended at awaits, -1 done.
+struct AsyncSM_AwaitsTcs {
+    TaskSource* tcs;             // external completion source we await
+    int state;                   // -2 initial, 0 suspended at await, -1 done
+    int result = 0;
+};
+
+void AsyncSM_AwaitsTcs_MoveNext(CHAOS_IL2CPP_INTPTR box) {
+    auto* sm = reinterpret_cast<AsyncSM_AwaitsTcs*>(box);
+    switch (sm->state) {
+        case -1: return;            // already done
+        case 0:                     // RESUMED from await: read result, mark done
+            sm->result = static_cast<int>(sm->tcs->task->result);
+            sm->state = -1;
+            return;
+        default: break;             // initial (-2): fall through to register
+    }
+    // INITIAL: register MoveNext as continuation on the TCS task (await),
+    // suspend (state=0).  The task is NOT yet complete, so the continuation
+    // won't fire until an external SetResult triggers it.
+    sm->state = 0;
+    auto* data = new AsyncStateMachineContinuationData{
+        AsyncSM_AwaitsTcs_MoveNext,
+        reinterpret_cast<void*>(box)};
+    chaos::il2cpp::common::async_task_on_completed(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(sm->tcs->task),
+        AsyncStateMachineContinuationCallback, data);
+}
+
+} // anonymous namespace
+
+// A waiter registers a continuation on a TCS's inner Task; an external worker
+// then calls tcs->set_result(...) → the continuation fires → the SM reads the
+// result and completes.  (Round-trip starting from external completion.)
+TEST_F(AsyncIntegrationTest, TaskSource_SetResultCompletesAwaitingSM) {
+    register_async_dispatch_continuation_fn(YieldDispatcherCb);  // run resume on a worker
+
+    auto* tcs = chaos::il2cpp::common::task_source_create();
+    ASSERT_NE(nullptr, tcs);
+    AsyncSM_AwaitsTcs sm{tcs, -2, 0};
+
+    // Simulate the entry: state-machine awaits tcs.Task (registers continuation).
+    AsyncSM_AwaitsTcs_MoveNext(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sm));
+
+    auto* task = chaos::il2cpp::common::require_async_task(tcs->get_task());
+    EXPECT_FALSE(task->completed.load());       // not yet externally completed
+    EXPECT_EQ(0, sm.state);                      // suspended at await
+
+    // External completion: another owner calls tcs.SetResult(42).
+    tcs->set_result(static_cast<CHAOS_IL2CPP_INTPTR>(42));
+
+    // The registered continuation (MoveNext resume) should have fired and the
+    // SM read the result.
+    EXPECT_TRUE(WaitFor([&sm] { return sm.state == -1; }))
+        << "awaiting SM did not resume to completion after tcs SetResult";
+    EXPECT_FALSE(task->faulted.load());
+    EXPECT_FALSE(tcs->task->faulted.load());
+    EXPECT_EQ(42, tcs->task->result);
+
+    chaos::il2cpp::common::task_source_destroy(tcs);
+    register_async_dispatch_continuation_fn(nullptr);
+}
+
+// TaskSource.SetException faults the awaited task; the awaiting SM resumes and
+// sees the fault (the exception is readable, not swallowed to 0).
+TEST_F(AsyncIntegrationTest, TaskSource_SetExceptionFaultsAwaitingSM) {
+    auto* tcs = chaos::il2cpp::common::task_source_create();
+    ASSERT_NE(nullptr, tcs);
+    AsyncSM_AwaitsTcs sm{tcs, -2, 0};
+
+    AsyncSM_AwaitsTcs_MoveNext(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sm));
+    EXPECT_EQ(0, sm.state);
+
+    tcs->set_exception(static_cast<CHAOS_IL2CPP_INTPTR>(0xBAD));
+    EXPECT_TRUE(WaitFor([&sm] { return sm.state == -1; }));
+    auto* task = chaos::il2cpp::common::require_async_task(tcs->get_task());
+    EXPECT_TRUE(task->faulted.load());
+    EXPECT_EQ(0xBAD, task->exception);
+
+    chaos::il2cpp::common::task_source_destroy(tcs);
+}
+
+// TrySetResult / TrySetException model TaskCompletionSource's "only the first
+// completion wins": a second statement on an already-set TCS is a no-op.
+TEST_F(AsyncIntegrationTest, TaskSource_TrySetFiresExactlyOnce) {
+    auto* tcs = chaos::il2cpp::common::task_source_create();
+    ASSERT_NE(nullptr, tcs);
+
+    EXPECT_EQ(1, tcs->try_set_result(static_cast<CHAOS_IL2CPP_INTPTR>(1)));
+    // Second completion attempt must lose (already completed).
+    EXPECT_EQ(0, tcs->try_set_result(static_cast<CHAOS_IL2CPP_INTPTR>(99)));
+    EXPECT_EQ(0, tcs->try_set_exception(static_cast<CHAOS_IL2CPP_INTPTR>(0xDEAD)));
+    EXPECT_EQ(0, tcs->try_set_canceled());
+
+    auto* task = chaos::il2cpp::common::require_async_task(tcs->get_task());
+    EXPECT_TRUE(task->completed.load());
+    EXPECT_EQ(1, task->result);
+    EXPECT_FALSE(task->faulted.load());   // first-set result wins, not the exception
+
+    chaos::il2cpp::common::task_source_destroy(tcs);
+}
+
+// Cross-thread: an external worker thread completes the TCS via SetResult,
+// and a waiter polling sees it become completed (models TCS being completed
+// by exactly one owner from another thread).
+TEST_F(AsyncIntegrationTest, TaskSource_SetResultFromWorkerThread) {
+    auto* tcs = chaos::il2cpp::common::task_source_create();
+    ASSERT_NE(nullptr, tcs);
+
+    // Start a worker that will complete the TCS after a short delay.
+    std::thread completer([tcs] {
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        tcs->set_result(static_cast<CHAOS_IL2CPP_INTPTR>(7));
+    });
+
+    auto* task = chaos::il2cpp::common::require_async_task(tcs->get_task());
+    EXPECT_TRUE(WaitFor([task] { return task->completed.load(); }));
+    completer.join();
+    EXPECT_EQ(7, task->result);
+    EXPECT_FALSE(task->faulted.load());
+
+    chaos::il2cpp::common::task_source_destroy(tcs);
+}

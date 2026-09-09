@@ -328,6 +328,248 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// TaskCompletionSource (non-generic and generic) — route SetResult/TrySetResult/
+        /// SetException/TrySetException/SetCanceled/TrySetCanceled to native chaos_tcs_*
+        /// helpers so generated C++ calls them directly instead of falling through to the
+        /// interpreter stub (ChaosExternalRuntimeFallback → 0).
+        ///
+        /// NOTE: This registers ONLY the completion signal methods.  The TCS constructor
+        /// (.ctor) and get_Task accessor require proper object model emission (the TCS
+        /// object has a m_task:Task field).  They still fall through to the interpreter
+        /// until the object model registration is completed in a follow-up.
+        /// </summary>
+        private static void RegisterTaskCompletionSource(RuntimeHelperShapeRegistry registry)
+        {
+            // Non-generic TaskCompletionSource (no generic param).
+            // SetResult() — void completion, value=0 sentinel.
+            registry.Register("System.Threading.Tasks.TaskCompletionSource", "SetResult", [],
+                ShapeKind.SimpleForward, "chaos_tcs_set_result",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // SetException(Exception)
+            registry.Register("System.Threading.Tasks.TaskCompletionSource", "SetException",
+                ["System.Exception"],
+                ShapeKind.SimpleForward, "chaos_tcs_set_exception",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact[2]
+                    {
+                        CreateNativeIntAbiSlot(),
+                        CreateNativeIntAbiSlot(),
+                    }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            // TrySetResult() — returns bool
+            registry.Register("System.Threading.Tasks.TaskCompletionSource", "TrySetResult", [],
+                ShapeKind.SimpleForward, "chaos_tcs_try_set_result",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            // TrySetException(Exception) — returns bool
+            registry.Register("System.Threading.Tasks.TaskCompletionSource", "TrySetException",
+                ["System.Exception"],
+                ShapeKind.SimpleForward, "chaos_tcs_try_set_exception",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact[2]
+                    {
+                        CreateNativeIntAbiSlot(),
+                        CreateNativeIntAbiSlot(),
+                    }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            // SetCanceled() — void.
+            registry.Register("System.Threading.Tasks.TaskCompletionSource", "SetCanceled", [],
+                ShapeKind.SimpleForward, "chaos_tcs_set_exception",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // TrySetCanceled() — returns bool.
+            registry.Register("System.Threading.Tasks.TaskCompletionSource", "TrySetCanceled", [],
+                ShapeKind.SimpleForward, "chaos_tcs_try_set_canceled",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── Generic TaskCompletionSource<T> variants (T=System.Int32) ──
+            // SetResult(T) — value typed.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.TaskCompletionSource",
+                MethodName: "SetResult",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count == 0)
+                    {
+                        // Non-generic void SetResult (fallback — unlikely here but safe).
+                        var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                        [
+                            "    chaos_tcs_set_result(chaos_arg_0, static_cast<CHAOS_IL2CPP_INTPTR>(0));",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                CreateNativeIntAbiSlot()),
+                            CreateVoidAbiSlot(),
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: "chaos_tcs_set_result");
+                    }
+                    // Generic T SetResult(T) — T resolved to native int.
+                    var src2 = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    chaos_tcs_set_result(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src2, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(),
+                                CreateNativeIntAbiSlot(),
+                            }),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: "chaos_tcs_set_result");
+                }));
+
+            // TrySetResult(T) — returns bool.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.TaskCompletionSource",
+                MethodName: "TrySetResult",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count == 0)
+                    {
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                        [
+                            "    return chaos_tcs_try_set_result(chaos_arg_0, static_cast<CHAOS_IL2CPP_INTPTR>(0));",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                CreateNativeIntAbiSlot()),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: "chaos_tcs_try_set_result");
+                    }
+                    var src2 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return chaos_tcs_try_set_result(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src2, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(),
+                                CreateNativeIntAbiSlot(),
+                            }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: "chaos_tcs_try_set_result");
+                }));
+
+            // SetException(Exception) — generic variant.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.TaskCompletionSource",
+                MethodName: "SetException",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    chaos_tcs_set_exception(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(),
+                                CreateNativeIntAbiSlot(),
+                            }),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: "chaos_tcs_set_exception");
+                }));
+
+            // TrySetException(Exception) — generic variant.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.TaskCompletionSource",
+                MethodName: "TrySetException",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return chaos_tcs_try_set_exception(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(),
+                                CreateNativeIntAbiSlot(),
+                            }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: "chaos_tcs_try_set_exception");
+                }));
+
+            // SetCanceled() — generic variant.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.TaskCompletionSource",
+                MethodName: "SetCanceled",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    chaos_tcs_try_set_canceled(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "chaos_tcs_try_set_canceled");
+                }));
+
+            // TrySetCanceled() — generic variant returns bool.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.TaskCompletionSource",
+                MethodName: "TrySetCanceled",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    return chaos_tcs_try_set_canceled(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "chaos_tcs_try_set_canceled");
+                }));
+        }
+
+        /// <summary>
         /// Decimal
         /// </summary>
         private static void RegisterDecimal(RuntimeHelperShapeRegistry registry)
