@@ -58,6 +58,12 @@ jobs:
       - name: Build Chaos.IL2CPP.Driver
         run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
 
+      # Snapshot tests copy the pre-built SnapshotTestFixtures.dll into each fixture's
+      # temp sandbox (SnapshotTestBase). That dll is a git-ignored build artifact, so a
+      # fresh CI checkout MUST build FixtureAssembly first.
+      - name: Build FixtureAssembly
+        run: dotnet build tests/unit/managed/snapshot/FixtureAssembly/ --configuration Release
+
       - name: Run Snapshot Tests
         run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n
 

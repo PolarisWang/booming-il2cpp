@@ -2,6 +2,7 @@
   <PropertyGroup>
     <RootNamespace>Chaos.IL2CPP.Tests.MetadataWriter</RootNamespace>
     <AssemblyName>Chaos.IL2CPP.Tests.MetadataWriter</AssemblyName>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

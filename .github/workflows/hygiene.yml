@@ -19,6 +19,11 @@ jobs:
     timeout-minutes: ${{ inputs.timeout }}
     steps:
       - uses: actions/checkout@v4
+        # fetch-depth 0 so git describe sees the latest SemVer tag. git tags are
+        # only present on a full clone; release-governance otherwise warns
+        # "no SemVer tag reachable" and, in ci mode, a WARN blocks the gate.
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

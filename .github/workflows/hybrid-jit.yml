@@ -62,7 +62,7 @@ jobs:
               -DROADMAP0_PRESET_TARGET=windows-x64-reference
           else
             cmake -S . -B build/native -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-              -DCHAOS_IL2CPP_CONFIG_TIER=debug
+              -DROADMAP0_PRESET_TARGET=linux-x64-native
           fi
 
       - name: Build Native Libraries

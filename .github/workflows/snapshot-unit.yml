@@ -45,5 +45,12 @@ jobs:
       - name: Build Chaos.IL2CPP.Generator
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
 
+      # Snapshot tests copy the pre-built SnapshotTestFixtures.dll into each fixture's
+      # temp sandbox (SnapshotTestBase). That dll is a git-ignored build artifact, so a
+      # fresh CI checkout MUST build FixtureAssembly first — otherwise every fixture
+      # throws "Could not find file .../SnapshotTestFixtures.dll".
+      - name: Build FixtureAssembly
+        run: dotnet build tests/unit/managed/snapshot/FixtureAssembly/ --configuration Release
+
       - name: Run Snapshot Tests
         run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n

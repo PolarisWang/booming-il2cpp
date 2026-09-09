@@ -33,6 +33,9 @@ jobs:
             9.0.x
             10.0.x
 
+      - name: Restore Generator
+        run: dotnet restore src/managed/Chaos.IL2CPP.Generator/
+
       - name: Build Generator
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
 
