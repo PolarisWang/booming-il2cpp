@@ -12,6 +12,7 @@
 #include <chaos/native_types.h>
 #include <chaos/async.h>
 #include "timer_queue.h"
+#include "runtime_stubs/stub_common.h"
 
 #include <cstdint>
 #include <new>
@@ -293,6 +294,40 @@ CHAOS_IL2CPP_INTPTR chaos_task_when_all(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2
 CHAOS_IL2CPP_INTPTR chaos_task_when_any(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept
 {
     return WhenAllAnyInternal(children, n, /*when_all=*/false);
+}
+
+// ── Managed-array overloads used by ShapeRegistry (codegen passes Task[] as INTPTR) ──
+// The contraining method unpack the managed handle array and delegate to
+// chaos_task_when_all/any which expect a flat element handle array.
+static CHAOS_IL2CPP_INTPTR WhenAllAnyManagedArray(
+    CHAOS_IL2CPP_INTPTR tasks_handle, bool when_all) noexcept
+{
+    if (tasks_handle == 0) {
+        return when_all ? chaos_task_when_all(nullptr, 0) : 0;
+    }
+    auto* arr = get_managed_array(tasks_handle);
+    if (arr == nullptr) return 0;
+    CHAOS_IL2CPP_INT32 n = static_cast<CHAOS_IL2CPP_INT32>(arr->length);
+    auto* elements = accessor_get_elements(
+        const_cast<ManagedArrayAccessor*>(arr));
+    auto* mem = new (std::nothrow) CHAOS_IL2CPP_INTPTR[static_cast<size_t>(n)];
+    if (mem == nullptr) return 0;
+    for (CHAOS_IL2CPP_INT32 i = 0; i < n; ++i) mem[i] = elements[i];
+    auto agg = WhenAllAnyInternal(mem, n, when_all);
+    delete[] mem;
+    return agg;
+}
+
+/// ShapeRegistry symbol for WhenAll(Task[]): extract from managed array handle.
+CHAOS_IL2CPP_INTPTR chaos_task_when_all_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept
+{
+    return WhenAllAnyManagedArray(tasks_handle, /*when_all=*/true);
+}
+
+/// ShapeRegistry symbol for WhenAny(Task[]): extract from managed array handle.
+CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept
+{
+    return WhenAllAnyManagedArray(tasks_handle, /*when_all=*/false);
 }
 
 }  // extern "C"

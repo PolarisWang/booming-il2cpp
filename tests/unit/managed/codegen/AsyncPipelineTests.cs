@@ -402,6 +402,28 @@ public sealed class AsyncPipelineTests
         Assert.Contains(callGraph, s => s.Contains("System.Threading.Tasks.TaskCompletionSource"));
     }
 
+    [Fact]
+    public void FullAssemblyClosure_CompositorSubjectsSurface()
+    {
+        using var ctx = new TempCtx();
+        var (_, tmpl, _) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
+
+        // The combinator + delay + Task.Run subjects must surface as methods in
+        // the lowered template (real async methods that reach MoveNext state
+        // machines).  This is a translation-surface gate: if a subject does not
+        // reach planning here it would be silently unfused in a real closure.
+        var subjectNames = tmpl.Methods.Select(m => m.SubjectId).ToList();
+        var joined = string.Join("\n", subjectNames);
+
+        Assert.Contains("AsyncMethods::ComposeAll", joined);
+        Assert.Contains("AsyncMethods::AwaitWhenAll", joined);
+        // Their compiler-generated MoveNext state machines surface too.
+        Assert.Contains("ComposeAll", joined) ;
+        Assert.Contains("AwaitWhenAll", joined);
+        Assert.Contains("WhenAll", joined);
+        Assert.Contains(">d__", joined);
+    }
+
     /// <summary>
     /// Repo-relative stable output dir for R2-full native round-trip proof.
     /// Emitted C++ (native-aot.generated.*.h/cpp etc.) and the hand-written

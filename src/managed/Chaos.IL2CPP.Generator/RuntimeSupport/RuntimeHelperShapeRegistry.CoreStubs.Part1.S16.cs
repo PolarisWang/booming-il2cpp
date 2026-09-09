@@ -608,6 +608,46 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 },
                         DirectNativeSymbol: "chaos_task_delay_stub");
                 }));
+
+            // Task.WhenAll(Task[])/Task.WhenAny(Task[]) — route the array combinator
+            // to the native async_stubs helpers (which unpack the managed array and
+            // produce an aggregate AsyncTask handle).  Returns the aggregate handle
+            // as a native int so the awaiting state machine can continue on it.
+            IEnumerable<(string Method, string Native)> combinators =
+            [
+                (Method: "WhenAll", Native: "chaos_task_when_all_array"),
+                (Method: "WhenAny", Native: "chaos_task_when_any_array"),
+            ];
+            foreach (var (method, native) in combinators)
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                    MethodName: method,
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        // Only the concrete Task[] single-arg overload.  Generic
+                        // WhenAll<TReturn>(Task[]) variants have a different return;
+                        // keep those null (conservative → interpreter).
+                        if (paramTypes.Count != 1 || !paramTypes[0].Contains("[]", StringComparison.Ordinal))
+                            return null;
+                        if (!callee.Contains("::" + method + ":System.Threading.Tasks.Task(", StringComparison.Ordinal)
+                            && !callee.Contains("Task[]", StringComparison.Ordinal))
+                            return null;
+                        var symbol2 = GetExternalRuntimeHelperSymbol(callee);
+                        var src2 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol2,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                        [
+                            $"    return {native}(chaos_arg_0);",
+                        ]);
+                        return new GenericShapeResolution(src2, symbol2,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ReferenceType }),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: native);
+                    }));
+            }
         }
 
         /// <summary>

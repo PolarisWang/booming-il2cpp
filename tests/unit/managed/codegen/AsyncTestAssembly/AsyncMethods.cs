@@ -41,4 +41,26 @@ public static class AsyncMethods
         // a continuation on the TCS's inner Task.
         return await tcs.Task;
     }
+
+    // async Task awaiting Task.WhenAll(Task[]) — exercises the combinator
+    // in the codegen pipeline.  WhenAll returns a Task that completes when
+    // all argument tasks complete.  The state machine awaits that aggregate.
+    public static async Task AwaitWhenAll()
+    {
+        var t1 = Task.Run(() => { });
+        var t2 = Task.Delay(1);
+        await Task.WhenAll(t1, t2);
+    }
+
+    // async Task that returns 42 after awaiting Task.Delay(1) and then a
+    // trivial await Task.Yield — exercises Delay+TCS+WhenAll+Task.Yield
+    // composition in one subject for full coverage.
+    public static async Task ComposeAll()
+    {
+        var tcs = new TaskCompletionSource<int>();
+        var t1 = Task.Delay(1);
+        var t2 = tcs.Task;
+        await Task.Yield();
+        await Task.WhenAll(t1, t2);
+    }
 }
