@@ -933,3 +933,99 @@ TEST_F(AsyncIntegrationTest, TaskDelay_CompletesAfterElapsedTime) {
         EXPECT_GE(elapsed_ms, 40) << "Task.Delay completed before the requested delay elapsed";
     }
 }
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Phase 3 P3-3: Task.WhenAll / WhenAny native combinators.
+// chaos_task_when_all(children[], n) / chaos_task_when_any(children[], n):
+// produce an aggregate AsyncTask from a contiguous array of child Task handles.
+// ══════════════════════════════════════════════════════════════════════════════
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_task_when_all(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_task_when_any(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept;
+
+TEST_F(AsyncIntegrationTest, WhenAll_AllChildrenComplete_CompletesAggregate) {
+    using namespace chaos::il2cpp::common;
+    // One instantly-complete child + two live ones we complete afterward.
+    auto* c1 = new AsyncTask();   // live
+    auto* c2 = new AsyncTask();   // live
+    auto h1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(c1);
+    auto h2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(c2);
+
+    CHAOS_IL2CPP_INTPTR children[2] = {h1, h2};
+    auto agg = chaos_task_when_all(children, 2);
+    ASSERT_NE(0, agg);
+    auto* aggTask = require_async_task(agg);
+    ASSERT_FALSE(aggTask->completed.load());  // neither child done yet
+
+    // Complete c1.
+    c1->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(h1);
+    EXPECT_FALSE(aggTask->completed.load());  // still c2 pending
+
+    // Complete c2 → aggregate done.
+    c2->result = 42;
+    c2->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(h2);
+    EXPECT_TRUE(WaitFor([aggTask] { return aggTask->completed.load(); }));
+    EXPECT_FALSE(aggTask->faulted.load());
+    EXPECT_EQ(0, aggTask->result);  // WhenAll(Task[]) returns a Task, result not used
+    delete c1; delete c2;
+}
+
+TEST_F(AsyncIntegrationTest, WhenAll_ChildFaults_AggregateFaults) {
+    using namespace chaos::il2cpp::common;
+    auto* good = new AsyncTask();
+    auto* bad = new AsyncTask();
+    auto hg = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(good);
+    auto hb = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(bad);
+
+    CHAOS_IL2CPP_INTPTR children[2] = {hg, hb};
+    auto agg = chaos_task_when_all(children, 2);
+    ASSERT_NE(0, agg);
+    auto* aggTask = require_async_task(agg);
+
+    good->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(hg);
+
+    bad->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0xDEAD);
+    bad->faulted.store(true, std::memory_order_relaxed);
+    bad->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(hb);
+
+    EXPECT_TRUE(WaitFor([aggTask] { return aggTask->completed.load(); }));
+    EXPECT_TRUE(aggTask->faulted.load());
+    EXPECT_EQ(0xDEAD, aggTask->exception);
+    delete good; delete bad;
+}
+
+TEST_F(AsyncIntegrationTest, WhenAny_FirstChildToComplete_Wins) {
+    using namespace chaos::il2cpp::common;
+    // Two live children. Child #1 completes first → aggregate won idx=2 (1-based).
+    auto* slow = new AsyncTask();
+    auto* fast = new AsyncTask();
+    auto hs = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(slow);
+    auto hf = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(fast);
+
+    CHAOS_IL2CPP_INTPTR children[2] = {hs, hf};
+    auto agg = chaos_task_when_any(children, 2);
+    ASSERT_NE(0, agg);
+    auto* aggTask = require_async_task(agg);
+    ASSERT_FALSE(aggTask->completed.load());
+
+    // Complete the SECOND child (index 1) first → winner idx 1 (0-based) → result 2.
+    fast->result = 99;
+    fast->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(hf);
+
+    EXPECT_TRUE(WaitFor([aggTask] { return aggTask->completed.load(); }));
+    EXPECT_EQ(2, aggTask->result);  // 1-based winner index of child[1]
+    delete slow; delete fast;
+}
+
+TEST_F(AsyncIntegrationTest, WhenAll_EmptyChildren_CompletesImmediately) {
+    using namespace chaos::il2cpp::common;
+    auto agg = chaos_task_when_all(nullptr, 0);
+    ASSERT_NE(0, agg);
+    auto* aggTask = require_async_task(agg);
+    EXPECT_TRUE(aggTask->completed.load());  // empty WhenAll completes immediately
+}

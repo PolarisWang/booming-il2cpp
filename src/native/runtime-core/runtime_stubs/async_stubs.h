@@ -40,4 +40,10 @@ CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) n
 CHAOS_IL2CPP_INTPTR chaos_task_delay_stub(CHAOS_IL2CPP_INT32 millisecondsTimeout) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_task_delay_timespan_stub(CHAOS_IL2CPP_INT64 ticks) noexcept;
 
+// ── Task.WhenAll / WhenAny native combinators (Phase 3 P3-3) ──
+// `children` is a contiguous array of CHAOS_IL2CPP_INTPTR Task handles; n = count.
+// Each returns a NEW aggregate AsyncTask handle (0 on invalid args/allocation failure).
+CHAOS_IL2CPP_INTPTR chaos_task_when_all(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_when_any(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept;
+
 }  // extern "C"
