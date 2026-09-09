@@ -1,5 +1,10 @@
 # Coverage Gap Report — 2026-04-30
 
+> **勘误与追溯 (2026-09-09, review #2/#4)**：本文件是归档快照（2026-04-30）。下方所有 table/数字为当次覆盖普查的结果值。生成该清点的**具体测量命令/入口未在归档内记载**（本公告不虚构来源），仅能确证：
+> — 验证见文末 Verification 的 `foundation-dll full ... --mode quick`（exit 0）；
+> — baseline 标识见下 `20260429-233753-windows-ae47`。
+> 读者欲复现这些普查定论（41179 不覆盖 / PackedSpanHelpers=41 等）应重跑当次 foundation-dll 普查并由运行时覆盖率口径自行核对，而非依赖本快照命令行。
+
 ## Overview
 
 Baseline: canonical formal `20260429-233753-windows-ae47`
@@ -7,10 +12,13 @@ Baseline: canonical formal `20260429-233753-windows-ae47`
 | Metric | Value |
 |--------|-------|
 | Uncovered method count | 41,179 |
-| SpanHelpers:: core uncovered | 0 ✅ |
-| MemoryMarshal:: direct uncovered | 0 ✅ |
+| SpanHelpers:: core uncovered¹ | 0 ✅ |
+| MemoryMarshal:: direct uncovered² | 0 ✅ |
 | MemoryMarshal nested iterators | 369 |
 | PackedSpanHelpers | 41 |
+
+> ¹ "core" = `System.SpanHelpers` 主类型（不含嵌套类型 `PackedSpanHelpers`）  
+> ² "direct" = `MemoryMarshal` 主类型直接方法（不含编译器生成的 `MemoryMarshal+<>` 嵌套迭代器）
 
 ## Line B: MemoryMarshal Coverage Fix (已完成)
 
@@ -40,7 +48,9 @@ Baseline: canonical formal `20260429-233753-windows-ae47`
 | `LastIndexOf(System.Byte&..)` | `SpanHelpersLastIndexOfByte` | Batch 2 ✅ |
 | `LastIndexOf(System.Char&..)` | `SpanHelpersLastIndexOfChar` | Batch 2 ✅ |
 
-Remaining SpanHelpers uncovered (67) are all `System.PackedSpanHelpers` — intrinsics-heavy helpers that use `Vector128/256/512<T>`. These are a separate type and not managed by the `SpanHelpersKernelFamily` router.
+> ¹ Batch 1（前 3 个方法：Clear* / Fill）与本报告记录的 Batch 2（下 8 个方法）落地于 `37-supplemental` 同一任务的不同 commit；Batch 1 的具体 commit/PR 未在本归档内逐条单列，3 个方法均包含在 `runtime_core.h/cpp` 的 "SpanHelpers helpers" 区块。两批合计恰为本表 11 方法（3 Batch 1 + 8 Batch 2）。
+
+Remaining SpanHelpers uncovered (41) are all `System.PackedSpanHelpers` — intrinsics-heavy helpers that use `Vector128/256/512<T>`. These are a separate type and not managed by the `SpanHelpersKernelFamily` router.
 
 ## Remaining Uncovered Clusters (Sorted by Priority)
 
