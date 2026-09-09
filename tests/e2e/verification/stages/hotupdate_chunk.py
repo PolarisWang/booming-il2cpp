@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
+from verification.stages.gating import classify_gate  # S1/S2 fact gate
 
 # Ensure testing/ is on sys.path so _pipeline.tool_helpers can be imported
 _TESTING = str(Path(__file__).resolve().parents[3])
@@ -495,6 +496,24 @@ def _incremental_rebuild(ctx) -> bool:
 def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     """HotUpdate stage: generate patch data, run entry.exe (+ entry-jit.exe), verify semantic change."""
     start = time.perf_counter()
+
+    # ── Fact gate (S1/S2): do NOT hotupdate a chunk whose fact was not genuinely
+    #    verified (real-passed/real-total below threshold, i.e. smoke-dominated).
+    #    Reads the authoritative chunk fact.json (same source aggregate uses).
+    try:
+        _fact_path = ctx.chunk_dir / "results" / "fact.json"
+        if _fact_path.exists():
+            _fact_data = json.loads(_fact_path.read_text(encoding="utf-8"))
+            _gate = classify_gate(_fact_data)
+            if _gate == "fail":
+                return StageResult(
+                    stage="hotupdate", status="skipped_fact_gate",
+                    summary=("hotupdate gated: fact not genuinely verified "
+                             "(real-passed/real-total below threshold)"),
+                    duration_ms=int((time.perf_counter() - start) * 1000),
+                )
+    except Exception:
+        pass
 
     # Collect available binaries
     technologies: list[tuple[Path, str]] = []

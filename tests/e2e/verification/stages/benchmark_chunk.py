@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
+from verification.stages.gating import classify_gate  # S1/S2 fact gate
 from verification._path import results_base
 
 _RESULTS_BASE = results_base()
@@ -655,6 +656,26 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     start = time.perf_counter()
     timeout = max(ctx.stage_timeout_seconds or 300, 30)
     metadata_methods = _read_benchmark_metadata(ctx)
+
+    # ── Fact gate (S1/S2): do NOT benchmark a chunk whose fact was not genuinely
+    #    verified (real-passed/real-total below threshold, i.e. smoke-dominated).
+    #    Reads the authoritative chunk fact.json (same source aggregate uses).
+    #    This keeps the stage-level gate consistent with the aggregate-level gate
+    #    so a Net.Http-style smoke stub chunk is not benchmarked at all.
+    try:
+        _fact_path = ctx.chunk_dir / "results" / "fact.json"
+        if _fact_path.exists():
+            _fact_data = json.loads(_fact_path.read_text(encoding="utf-8"))
+            _gate = classify_gate(_fact_data)
+            if _gate == "fail":
+                return StageResult(
+                    stage="benchmark", status="skipped_fact_gate",
+                    summary=("benchmark gated: fact not genuinely verified "
+                             "(real-passed/real-total below threshold)"),
+                    duration_ms=int((time.perf_counter() - start) * 1000),
+                )
+    except Exception:
+        pass  # missing/unreadable fact.json -> don't gate, keep historical behavior
 
     # Read technologies to benchmark
     technologies: list[tuple[Path, str]] = []
