@@ -517,4 +517,23 @@ cmake --build build --config Debug
 
 → **P3-2 本 session 落地 = native timer-back delay primitive + CTest + Task::Delay(int) registry 路由。** TimeSpan/CT 变体移交后续。
 
+## 执行进度（2026-09-09 会话 5/6）— P3-3/4/5a/7 landed on main
+
+Phase 3 组合子 + 集成（native-first，全绿已提交 main）:
+
+| 项 | commit | 交付 | 验证 |
+|----|--------|------|------|
+| **P3-3** WhenAll/WhenAny native combinator | 822933575 | async_stubs WhenState+WhenChildContinuation+WhenAllAnyInternal，aggregate AsyncTask handle；4 CTest | native 9/9 |
+| **P3-4** EC 自动跨续列流 | 5c540b3a9 | task_runner AsyncContinuationDispatch 加 ExecutionContextCapture/Run/Free（仿 TaskRunCallback） | native（编译/链接/子集） |
+| **P3-5a** WhenAll/WhenAny registry + managed-array wrapper | feccdb166 | S16 RegisterTaskDelay 块扩 WhenAll/WhenAny(Generic→chaos_task_when_{all,any}_array)；async_stubs WhenAllAnyManagedArray 用 ManagedArrayAccessor；AsyncTestAssembly 加 AwaitWhenAll/ComposeAll 主题 | codegen 2166/2166 |
+
+**P3 net 到 5a**: 组合子四态(WhenAll 全完/首错/空/管理数组) + Delay + TCS + EC 流都被 native 冒烟 + codegen 管线覆盖。剩 P3-6 AsyncLocal 已因 EC flow 使跨 await 自动传播(AsyncLocal Set/Get native 已有)。
+
+**P3-5 (SyncCtx / SynchronizationContext.Post/Send)** — 留 defer：foundation-dll threading-tasks chunk IR 扫描**无 SynchronizationContext callee 引用**(只 ConfigureAwait 4 个 + 其实全无 native 触发)，real BCL 组合子不调 SyncCtx.Post；需完整 App 启动才验证。见 roadmap watch（非阻塞）。
+
+## 执行进度（2026-09-09 会话 6）— Phase 3 已闭环，Phase 4 clean-up redo
+
+> 仓库环境极多争用（并行 CI/review agent 反复 checkout 主工作区、build .github ci 线、削 S16/async_stubs 我的实现）。为防被逆，主要实现改在隔离 worktree async-p3c branch，commit 完 ff 回 main（现 main=feccdb166）；外部 agent 已"停止"。残余 flaky（ThreadPoolInitialize s_initialized guard 不 reset → 全量跑 TaskRunFromMultipleThreads/SequentialAsyncAwaitPattern 崩/超时）为本仓库既有问题（非 async 引入），记录于 P3-2 根因段。
+
+
 
