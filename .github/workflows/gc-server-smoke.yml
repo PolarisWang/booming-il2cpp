@@ -47,7 +47,6 @@ jobs:
         shell: bash
         run: |
           cmake -S . -B artifacts/presets/windows-x64-reference-server \
-            -G "Visual Studio 17 2022" \
             --toolchain build/toolchains/windows-x64-reference.cmake \
             -DROADMAP0_PRESET_TARGET=windows-x64-reference \
             -DCHAOS_IL2CPP_GC_SERVER=ON

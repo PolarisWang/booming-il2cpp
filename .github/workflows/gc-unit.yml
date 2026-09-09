@@ -59,7 +59,6 @@ jobs:
         shell: bash
         run: |
           cmake -S . -B artifacts/presets/${{ inputs.cmake_preset }} \
-            -G "Visual Studio 17 2022" \
             --toolchain build/toolchains/windows-x64-reference.cmake \
             -DROADMAP0_PRESET_TARGET=${{ inputs.cmake_preset }}
 

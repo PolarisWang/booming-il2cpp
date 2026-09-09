@@ -51,7 +51,6 @@ jobs:
         shell: bash
         run: |
           cmake -S . -B artifacts/presets/windows-x64-reference-asan \
-            -G "Visual Studio 17 2022" \
             --toolchain build/toolchains/windows-x64-reference.cmake \
             -DROADMAP0_PRESET_TARGET=windows-x64-reference \
             -DCMAKE_CXX_FLAGS="/fsanitize=address" \
