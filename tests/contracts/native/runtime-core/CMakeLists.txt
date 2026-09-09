@@ -138,7 +138,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp" AND WIN32 AND CM
             PROPERTIES LANGUAGE ASM_MASM)
     endif()
     chaos_native_add_test(chaos_codegen_native_test
-        codegen_native_test.cpp)
+        codegen_native_test.cpp
+        t4_jit_call.asm)
 endif()
 # unwind_info_test asserts x86-64 UWOP/RBP/mov-rax-imm64 byte layout — only valid
 # on x64 Windows (EmitUnwindInfo / AllocRuntimeFunction are Win64 SEH helpers).
