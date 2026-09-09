@@ -521,16 +521,27 @@ public sealed partial class NativeAotLoweringPlanner
                     continue;
 
                 // Extract the first line of the source (the function signature)
-                // and convert it to a declaration by appending ";".
+                // and convert it to a declaration by appending ";".  Some
+                // external-runtime helpers (e.g. the async AwaitUnsafeOnCompleted /
+                // builder.Start inline stubs) author their Source as a multi-line
+                // function DEFINITION whose first line ends with an opening `{`:
+                //   extern "C" CHAOS_IL2CPP_INTPTR foo(...)  {
+                //     <body as lines 2..n>
+                //   }
+                // The shared-header only needs the DECLARATION.  Strip a trailing `{`
+                // from that first line before appending `;`, otherwise we emit the
+                // malformed `...(...) {;` (C2598 / unmatched-brace C1075).
                 var source = helper.Source;
                 if (string.IsNullOrEmpty(source))
                     continue;
                 int newlineIdx = source.IndexOf('\n');
                 string signatureLine = newlineIdx >= 0
-                    ? source.Substring(0, newlineIdx).Trim()
+                    ? source.Substring(0, newlineIdx).TrimEnd()
                     : source.Trim();
                 if (string.IsNullOrEmpty(signatureLine))
                     continue;
+                if (signatureLine.EndsWith("{"))
+                    signatureLine = signatureLine.Substring(0, signatureLine.Length - 1).TrimEnd();
                 // Remove `static ` prefix if present (should be gone after template fix,
                 // but handle gracefully for any remaining static helpers).
                 // Also skip `extern "C" ` prefix if present — the declaration already
@@ -580,10 +591,12 @@ public sealed partial class NativeAotLoweringPlanner
                     continue;
                 int newlineIdx = source.IndexOf('\n');
                 string signatureLine = newlineIdx >= 0
-                    ? source.Substring(0, newlineIdx).Trim()
+                    ? source.Substring(0, newlineIdx).TrimEnd()
                     : source.Trim();
                 if (string.IsNullOrEmpty(signatureLine))
                     continue;
+                if (signatureLine.EndsWith("{"))
+                    signatureLine = signatureLine.Substring(0, signatureLine.Length - 1).TrimEnd();
                 if (signatureLine.StartsWith("static ", StringComparison.Ordinal))
                     signatureLine = signatureLine.Substring(7);
                 if (signatureLine.StartsWith("extern \"C\" ", StringComparison.Ordinal))
