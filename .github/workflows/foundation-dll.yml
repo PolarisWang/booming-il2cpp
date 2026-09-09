@@ -64,8 +64,17 @@ jobs:
       - name: Build FixtureAssembly
         run: dotnet build tests/unit/managed/snapshot/FixtureAssembly/ --configuration Release
 
+      # Snapshot tests are Windows-host-only (baselines are regenerated against
+      # the Windows generator's shape enumeration; see snapshot-unit.yml pinned os).
+      # On Linux runners the snapshot unit job (windows-latest) already covers the
+      # golden baseline comparison — skip here to avoid deterministic mismatch.
       - name: Run Snapshot Tests
+        if: runner.os == 'Windows'
         run: dotnet test tests/unit/managed/snapshot/ --configuration Release --no-restore -v n
+
+      - name: Skip Snapshot Tests (Linux runner — covered by snapshot-unit on Windows)
+        if: runner.os != 'Windows'
+        run: echo "::notice::Snapshot tests skipped on Linux (non-deterministic baseline). Covered by snapshot-unit (windows-latest)."
 
       # Native build
       - name: Configure CMake
