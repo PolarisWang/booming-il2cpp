@@ -24,6 +24,8 @@
 #include <cstring>
 #include <vector>
 
+using namespace chaos::il2cpp::runtime_core;
+
 // 构造一个 boxed Int32 对象（ThinLockableHeader 16B + int32 payload）。
 // 布局与 enum_stubs.cpp 的 enum_alloc_boxed_int32 一致。
 static CHAOS_IL2CPP_INTPTR MakeBoxedInt32(CHAOS_IL2CPP_INT32 value) {

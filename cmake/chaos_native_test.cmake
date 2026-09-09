@@ -128,7 +128,11 @@ function(chaos_native_add_test name)
         if(NOT ARG_WITHOUT_UTF8)
             list(APPEND _opts /utf-8)
         endif()
-        target_compile_options(${name} PRIVATE ${_opts})
+        # Scope C++-only flags to the CXX language. Some targets also compile an
+        # x64 MASM shim (e.g. t4_jit_call.asm, LANGUAGE ASM_MASM); ml64 rejects
+        # /GS- /bigobj /utf-8 (A4018) and aborts the whole vcxproj (MSB3721) when
+        # these leak onto the asm source via an unscoped target_compile_options.
+        target_compile_options(${name} PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${_opts}>")
     else()
         # Linux: wrap the static chaos libs in --start-group/--end-group to resolve
         # circular deps; allow duplicate TLS defs like the old add_chaos_test.
