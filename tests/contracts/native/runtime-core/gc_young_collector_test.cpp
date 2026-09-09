@@ -224,6 +224,10 @@ static void test_young_collection() {
     if (nursery == nullptr) { FAIL("no nursery"); return; }
 
     // Set up a heap base for card table ops.
+    // Save+g_heap_base before the ad-hoc GcSetHeapBase override so it can be
+    // restored after the collection checks — preventing cross-test g_heap_base
+    // pollution (same pattern as the unit test_fix: Conservativesweep SEH).
+    uintptr_t saved_heap_base = g_heap_base;
     GcSetHeapBase(nursery->begin);
 
     // Allocate a few bytes so nursery isn't completely empty.
@@ -258,6 +262,9 @@ static void test_young_collection() {
     if (IsDirty(p)) { FAIL("card still dirty after collect"); return; }
     PASS();
 
+    // Restore g_heap_base to prevent pollution of subsequent tests.
+    g_heap_base = saved_heap_base;
+
     SUBTEST("collection with active nursery allocated data");
     // Allocate again after reset.
     void* p2 = NurseryAllocate(64);
@@ -287,6 +294,8 @@ static void test_collection_with_dirty_card() {
     // cards starting from a known index.
     uintptr_t nursery_start = reinterpret_cast<uintptr_t>(nursery->begin);
     uintptr_t base_aligned = nursery_start & ~(kCardSize - 1);
+    // Save g_heap_base before ad-hoc override; restore at end of the function.
+    uintptr_t saved_b = g_heap_base;
     GcSetHeapBase(reinterpret_cast<void*>(base_aligned));
 
     uintptr_t nursery_idx = (nursery_start - base_aligned) >> kCardShift;
@@ -419,6 +428,9 @@ static void test_collection_with_dirty_card() {
         return;
     }
     PASS();
+
+    // Restore g_heap_base to prevent pollution.
+    g_heap_base = saved_b;
 }
 
 // ── M10: gen>condemned filter discards newer-generation objects ────
