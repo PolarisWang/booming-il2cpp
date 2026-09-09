@@ -61,6 +61,7 @@ jobs:
               --toolchain build/toolchains/windows-x64-reference.cmake \
               -DROADMAP0_PRESET_TARGET=windows-x64-reference
           else
+            sudo apt-get update -qq && sudo apt-get install -y -qq libnuma-dev
             cmake -S . -B build/native -DCMAKE_BUILD_TYPE=RelWithDebInfo \
               -DROADMAP0_PRESET_TARGET=linux-x64-native
           fi
