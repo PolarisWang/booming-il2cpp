@@ -265,6 +265,37 @@ public sealed class AsyncPipelineTests
         Assert.Contains("CHAOS_IL2CPP_NEW_GC", entry.MethodSource);
     }
 
+    [Fact]
+    public void MovenextEmittedSource_SuspendReturnsAfterAwaitUnsafeOnCompleted()
+    {
+        using var ctx = new TempCtx();
+        var (_, _, matchMethod) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
+
+        // R2-full resume-state fix.  On a real cross-thread suspension, the MoveNext
+        // first-entry registers the continuation (AwaitUnsafeOnCompleted) and then MUST
+        // return to the caller — it must NOT fall through to the unconditional task tail
+        // SetResult(locals[1]), which runs before the worker has produced a value (and
+        // would thus mark the Task complete with the stale/uninitialised result 0).
+        //
+        // Structural marker (visible in the emitted C++): after the AwaitUnsafeOnCompleted
+        // registration there is a `return;` before any `set_result`.  The old buggy
+        // emission dropped the suspend `leave` so control fell straight into the tail.
+        string src = matchMethod.MethodSource;
+
+        // Find the segment after the AwaitUnsafeOnCompleted call.
+        int awIdx = src.IndexOf("AwaitUnsafeOnCompleted", StringComparison.Ordinal);
+        Assert.True(awIdx >= 0, "MoveNext must contain the AwaitUnsafeOnCompleted suspension call");
+
+        int setResultIdx = src.IndexOf("async_task_builder_set_result", awIdx, StringComparison.Ordinal);
+        Assert.True(setResultIdx > awIdx, "The tail SetResult must occur after the AwaitUnsafeOnCompleted call");
+
+        // Between the AwaitUnsafeOnCompleted registration and the tail SetResult there
+        // must be at least one `return;` (the suspension exit). Without it the first entry
+        // would run the tail SetResult(0) inline and complete the task prematurely.
+        string between = src.Substring(awIdx, setResultIdx - awIdx);
+        Assert.Contains("return", between);
+    }
+
     /// <summary>
     /// Repo-relative stable output dir for R2-full native round-trip proof.
     /// Emitted C++ (native-aot.generated.*.h/cpp etc.) and the hand-written

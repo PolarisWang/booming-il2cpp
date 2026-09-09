@@ -1673,6 +1673,18 @@ public sealed partial class NativeAotLoweringPlanner
         if (body is null)
             return null;
 
+        // Async state-machine MoveNext fix (R2-full): the generic structured IR
+        // recovery models ONLY the "success / fall-through-to-SetResult" exit.  In a
+        // Roslyn async MoveNext the suspension point calls builder.AwaitUnsafeOnCompleted
+        // then LEAVES the method (leave to the final ret) — it must NOT fall through to
+        // the unconditional tail SetResult(locals[1]).  Rewrite the IR so an IRReturn is
+        // appended right after any block that ends at an AwaitUnsafeOnCompleted call.
+        // This is exactly the .NET suspension semantics: register a continuation, return
+        // to the caller; a ThreadPool worker later re-enters MoveNext with state==0
+        // (resume) which independently reaches the tail SetResult with the real value.
+        if (method.SubjectId is not null && IsAsyncStateMachineMoveNext(method.SubjectId))
+            body = AppendSuspendReturnsForAsyncMoveNext(body);
+
         TotalMethodCount++;
 
         if (method.ExceptionRegionCount > 0)
@@ -2445,6 +2457,110 @@ public sealed partial class NativeAotLoweringPlanner
         var id = method.SubjectId;
         if (string.IsNullOrEmpty(id)) return "<null>";
         return id.Length > 80 ? id.Substring(0, 80) : id;
+    }
+
+    // AOT async MoveNext suspension fix (R2-full).  Roslyn's async state machine
+    // MoveNext sets the resume state and calls builder.AwaitUnsafeOnCompleted then
+    // LEAVES the method (suspends); it must NOT flow through to an unconditional
+    // tail SetResult on first entry.  The generic structured IR emitter models only
+    // the success exit, so insert an IRReturn immediately after every suspend block
+    // (a block whose final instruction is the AwaitUnsafeOnCompleted continuation
+    // registration).  This is safe for async state machines: after registration the
+    // method unconditionally returns and a worker/continuation re-enters later.
+    private static bool IsSuspendContinuationCall(AotCoreIrInstructionArtifact instr)
+    {
+        if (instr.Op is not ("call" or "callvirt"))
+            return false;
+        string probe = instr.Callee ?? instr.TargetSymbol ?? string.Empty;
+        return probe.Contains("AwaitUnsafeOnCompleted", StringComparison.Ordinal);
+    }
+
+    private static StructuredIRNode AppendSuspendReturnsForAsyncMoveNext(StructuredIRNode body)
+        => AppendSuspendReturnsRec(body);
+
+    private static StructuredIRNode AppendSuspendReturnsRec(StructuredIRNode node)
+    {
+        switch (node)
+        {
+            case IRBlock block:
+                if (block.BodyInstructions.Count > 0
+                    && IsSuspendContinuationCall(block.BodyInstructions[^1])
+                    && block.Terminator is null)
+                {
+                    // This block ends at the await-completion registration with no
+                    // trailing terminator → after it the state machine suspends.  Emit
+                    // an IRReturn so first entry does not run the success tail.
+                    return new IRSequence(new StructuredIRNode[] { block, new IRReturn() });
+                }
+                return block;
+
+            case IRSequence seq:
+                {
+                    var outNodes = new List<StructuredIRNode>(seq.Nodes.Count);
+                    for (int i = 0; i < seq.Nodes.Count; i++)
+                    {
+                        var c = AppendSuspendReturnsRec(seq.Nodes[i]);
+                        outNodes.Add(c);
+                        if (i + 1 >= seq.Nodes.Count || seq.Nodes[i] is IRBlock)
+                        {
+                            // If the rewritten node itself inserted IRReturn (i.e. this was
+                            // a suspend block / a sequence already marked suspended), the
+                            // recompute is handled by recursion above; nothing extra needed.
+                        }
+                    }
+                    // If one rewritten child ended by returning (suspend), later siblings
+                    // after an IRReturn are dead. Truncate at the first IRReturn so the
+                    // unconditional success tail after a suspend is not reached.
+                    int cut = outNodes.Count;
+                    for (int i = 0; i < outNodes.Count; i++)
+                    {
+                        if (EndsWithReturn(outNodes[i])) { cut = i + 1; break; }
+                    }
+                    if (cut < outNodes.Count)
+                        outNodes.RemoveRange(cut, outNodes.Count - cut);
+                    return new IRSequence(outNodes);
+                }
+
+            case IRIfThenElse ite:
+                return new IRIfThenElse(
+                    ite.ConditionInstructions, ite.BranchTerminator,
+                    AppendSuspendReturnsRec(ite.ThenBody),
+                    ite.ElseBody is null ? null : AppendSuspendReturnsRec(ite.ElseBody),
+                    AppendSuspendReturnsRec(ite.PostMergeBody ?? new IRSequence(Array.Empty<StructuredIRNode>())),
+                    ite.PreConditionDepth);
+
+            case IRExceptionRegion er:
+                return new IRExceptionRegion(
+                    er.Kind,
+                    AppendSuspendReturnsRec(er.TryBody),
+                    AppendSuspendReturnsRec(er.HandlerBody),
+                    er.CatchTypeSubjectId, er.FilterInstructions);
+
+            case IRWhileLoop { } w:
+                return new IRWhileLoop(w.ConditionInstructions, w.ConditionTerminator,
+                    AppendSuspendReturnsRec(w.Body), w.ExitOffset);
+            case IRDoWhileLoop { } dw:
+                return new IRDoWhileLoop(AppendSuspendReturnsRec(dw.Body),
+                    dw.LatchInstructions, dw.LatchTerminator, dw.HeaderOffset, dw.ExitOffset);
+            case IRSwitch { } sw:
+                return new IRSwitch(sw.SwitchInstructions,
+                    sw.CaseBodies.ToDictionary(p => p.Key, p => AppendSuspendReturnsRec(p.Value)),
+                    sw.DefaultBody is null ? null : AppendSuspendReturnsRec(sw.DefaultBody),
+                    sw.ExitOffset, sw.FallthroughCaseValues);
+            default:
+                return node;
+        }
+    }
+
+    private static bool EndsWithReturn(StructuredIRNode node)
+    {
+        switch (node)
+        {
+            case IRReturn: return true;
+            case IRSequence seq:
+                return seq.Nodes.Count > 0 && EndsWithReturn(seq.Nodes[^1]);
+            default: return false;
+        }
     }
 
 }
