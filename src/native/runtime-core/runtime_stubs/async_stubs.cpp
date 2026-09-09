@@ -11,6 +11,10 @@
 
 #include <chaos/native_types.h>
 #include <chaos/async.h>
+#include "timer_queue.h"
+
+#include <cstdint>
+#include <new>
 
 extern "C" {
 
@@ -93,11 +97,80 @@ CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_exception(CHAOS_IL2CPP_INTPTR tcs_handle, 
     return ts->try_set_exception(exception);
 }
 
+void chaos_tcs_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept
+{
+    if (tcs_handle == 0) return;
+    auto* ts = reinterpret_cast<chaos::il2cpp::common::TaskSource*>(tcs_handle);
+    ts->set_canceled();
+}
+
 CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept
 {
     if (tcs_handle == 0) return 0;
     auto* ts = reinterpret_cast<chaos::il2cpp::common::TaskSource*>(tcs_handle);
     return ts->try_set_canceled();
+}
+
+// ── Task.Delay native helpers (Phase 3 P3-2) ──
+// These use the existing TimerQueue to schedule delayed completion.
+// TimerQueueInitialize must have been called (via ThreadPoolInitialize).
+
+namespace {
+
+struct DelayCompletion {
+    chaos::il2cpp::common::AsyncTask* task;
+    CHAOS_IL2CPP_INTPTR handle;
+};
+
+void DelayTimerCallback(void* state) noexcept {
+    auto* dc = static_cast<DelayCompletion*>(state);
+    dc->task->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(dc->handle);
+    delete dc;
+}
+
+} // anonymous namespace
+
+/// Core delay internal: create an AsyncTask, register one-shot timer,
+/// complete the task when the timer fires.  Returns task handle (0 on failure).
+static CHAOS_IL2CPP_INTPTR ChaosTaskDelayCore(uint32_t due_time_ms) noexcept {
+    using namespace chaos::il2cpp::common;
+    using namespace chaos::il2cpp::runtime_core::threading;
+    auto* task = new (std::nothrow) AsyncTask();
+    if (task == nullptr) return 0;
+    CHAOS_IL2CPP_INTPTR handle = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task);
+    auto* dc = new (std::nothrow) DelayCompletion{task, handle};
+    if (dc == nullptr) {
+        delete task;
+        return 0;
+    }
+    uint32_t timer_id = TimerQueueCreate(DelayTimerCallback, dc, due_time_ms, 0);
+    if (timer_id == kTimerQueueInvalidId) {
+        delete dc;
+        delete task;
+        return 0;
+    }
+    return handle;
+}
+
+CHAOS_IL2CPP_INTPTR chaos_task_delay_stub(CHAOS_IL2CPP_INT32 millisecondsTimeout) noexcept
+{
+    if (millisecondsTimeout <= 0) {
+        return ChaosTaskDelayCore(0);
+    }
+    return ChaosTaskDelayCore(static_cast<uint32_t>(millisecondsTimeout));
+}
+
+CHAOS_IL2CPP_INTPTR chaos_task_delay_timespan_stub(CHAOS_IL2CPP_INT64 ticks) noexcept
+{
+    constexpr int64_t kTicksPerMs = 10000;
+    CHAOS_IL2CPP_INT32 ms = 0;
+    if (ticks > 0) {
+        int64_t cnt = ticks / kTicksPerMs;
+        if (cnt > static_cast<int64_t>(INT32_MAX)) cnt = INT32_MAX;
+        ms = static_cast<CHAOS_IL2CPP_INT32>(cnt);
+    }
+    return ChaosTaskDelayCore(static_cast<uint32_t>(ms));
 }
 
 }  // extern "C"
