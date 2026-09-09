@@ -1,10 +1,8 @@
 """resume — build a resume worklist from a prior run's state files.
 
-Used on a re-run with `--resume <run_id>` to skip chunks that already passed,
-so an interrupted nightly can continue without redoing completed work.
-
-Risk mitigation: P3-1 (tolerant reads — unknown/missing result files are
-treated as "not passed" → included in the resume set).
+Used on a re-run with `--resume <run_id>` to skip chunks that already have a
+final outcome (passed OR failed/stalled) and only re-run chunks that were still
+in-flight (running/retrying) or never started (unknown/absent).
 """
 
 from __future__ import annotations
@@ -14,29 +12,29 @@ from . import state as nstate
 
 
 def build_resume_worklist(config, full_worklist: list[WorkItem]) -> list[WorkItem]:
-    """Return only WorkItems whose prior result (under resume_run_id) is not passed.
+    """Return only WorkItems that still need a final result.
 
-    Items with no result file at all (not present in prior run) are included
-    (they simply didn't run before).  Items whose prior status == "passed" are
-    skipped.  Anything else (failed/stalled/retrying/unknown) is re-run.
+    Items whose prior result (under resume_run_id) has a terminal status
+    ("passed", "failed", "stalled") are SKIPPED — they reached a conclusion.
+    Items with status "running", "retrying", "unknown" or NO prior result at
+    all are included (they were in-flight or never started when the run died).
     """
     if not config.resume_run_id:
-        # Nothing to resume against; caller should have passed a run id.
         return list(full_worklist)
 
-    # Read prior state from <report_dir>/run-state/<resume_run_id> — the PRIOR
-    # run's results, not the current run's (config.run_id differs).
     prior = nstate.read_all_results(config, for_run_id=config.resume_run_id)
-    remaining = []
+    terminal = {"passed", "failed", "stalled"}
+    remaining: list[WorkItem] = []
     skipped = 0
     for w in full_worklist:
         prior_res = prior.get(w.key, {})
         status = prior_res.get("status", "unknown")
-        if status == "passed":
+        if status in terminal:
             skipped += 1
             continue
         remaining.append(w)
 
-    print(f"  [resume] {skipped} already-passed chunks skipped, {len(remaining)} to run",
+    print(f"  [resume] {skipped} already-terminated chunks skipped, "
+          f"{len(remaining)} in-flight / orphaned to re-run",
           flush=True)
     return remaining
