@@ -72,19 +72,25 @@ def _kill_tree(pid: int) -> None:
     """Kill a process and its whole subtree, cross-platform.
 
     Windows uses taskkill /F /T (recursive tree).  POSIX kills the process
-    group (Popen must be launched in its own session for a group to exist;
-    run.py launches with default, but os.killpg on a pgid = pid works if the
-    child was start_new_session — we use start_new_session=True in _launch so
-    the child owns a fresh pgid equal to its pid).
+    group (Popen must be launched in its own session for a group to exist).
+    Timeout on taskkill is caught so the daemon reaper thread does not die
+    silently leaving the main loop stuck.
     """
     if not pid:
         return
     if platform.system() == "Windows":
-        subprocess.run(
-            ["taskkill", "/F", "/T", "/PID", str(pid)],
-            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-            timeout=30,
-        )
+        try:
+            subprocess.run(
+                ["taskkill", "/F", "/T", "/PID", str(pid)],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                timeout=30,
+            )
+        except subprocess.TimeoutExpired:
+            print(f"  [reaper] WARN: taskkill /T /PID {pid} timed out after 30s",
+                  flush=True)
+        except Exception as exc:
+            print(f"  [reaper] WARN: taskkill /T /PID {pid} failed: {exc}",
+                  flush=True)
     else:
         try:
             os.killpg(pid, signal.SIGKILL)  # child launched start_new_session → pgid==pid
