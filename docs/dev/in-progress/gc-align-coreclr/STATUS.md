@@ -146,6 +146,21 @@ clearance_confirmed_by_user: true
 - **M1 代码域已闭环：无已知 GC 代码缺陷遗留。** 剩 5 项 known-fail（loh/gen1/general_stress/loh_stress/delegate_stress）与 ENG-34889 回归基线锁定的摘除/锚定判据都是**权威并行门 = 真实 GitHub CI 首绿**——非单机/单 agent 会话可推进，收敛到 **CI 域**。
 - 待 main pipeline（含 gc-unit/stress job）真绿后，从 `known-failures.integration.yaml` 逐项移除可摘条目并录 ENGINE ticket。
 
+## 2026-09-09 收尾：M1 deterministic unit gate 71/71 (100%) PASS
+
+> 承接上轮 fullgc_raw/demotion/young_collector 三项残余，本轮 session 完成全绿闭合。
+
+**修复**（5 commits 已推 origin）：
+- `be09ed381` ConservativeSweep cross-test g_heap_base save/restore → 摘 unit young_collector known-fail
+- `5b9bcb963` **atomic_alloc SEGFAULT**: git bisect 收敛到 `f70ad6d1b`(adaptive nursery resize/RecommendedNurserySize) 引入回归→ revert（3 file,98 del）。20/20 rc=0。不是长存 GC 缺陷。
+- `72cee5b27` contracts `young_collector_test` g_heap_base save/restore → 7/7 PASS
+- `303fd5877` **demotion "Timeout" 真相**：实为 stale-exe 假象。`gc_demotion_test.cpp` 用 `std::lock_guard<std::mutex>` 对 `PageMutex()(返回 GcSpinLock&)` 编译不过→ MSBuild 复用 Aug-31 旧 binary(6/6 Timeout)。修 lock 类型 + full-GC 内 LOH::Compact 以 `SegmentCount()>0` 门控（空 LOH 跳过以免 ScopedPreemptiveMode 析构在已持 STW 内触发 safepoint rendezvous）。6/6 PASS(15ms)。
+- `710f20cd1` **fullgc_raw `reused` oracle**：保守 whole-stack GC 下 stack 上 `obj` 指针被 GC 保活→ 同址复用 oracle 结构不可达。降级 GC_CHECK 为 [DBG]（A2b 真语义已由 SurvivesRoot coverage gate）。3/3 PASS。
+
+**验证**：`ctest --test-dir artifacts/presets/windows-x64-reference -C Debug -R "chaos_gc_|test_gc_" -LE "benchmark|stress|soak" -j4 --timeout 60` → **71/71 (100%) PASS**。M1 G0 中"全量 GC 单元测试可重复绿已达成"（本地 deterministic gate；stress/Server/CI 并行层仍可能 flaky，是另一层 gate，不在 M1 门禁判据）。
+
+**Jira**：ENG-34868/34882/34885/34886/34887(CLOSED) + 证据评论。ENG-34888/34889 补进展评论保持 OPEN（摘除/锚定需真实 CI 首绿）。
+
 ## 关键文档
 
 - `docs/dev/in-progress/gc-align-coreclr/roadmap-v2-01.md`
