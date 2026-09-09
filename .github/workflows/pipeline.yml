@@ -324,6 +324,13 @@ jobs:
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'codeql') }}
     uses: ./.github/workflows/codeql-stage.yml
+    # codeql-stage requests security-events:write / actions:read / packages:read;
+    # caller must grant >= what the callee requests.
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
     with:
       os: ubuntu-latest
       timeout: 60
