@@ -487,3 +487,34 @@ cmake --build build --config Debug
 
 → **P3-1 本 session 落地 = native 代理 + 4 CTest + registry 完成信号路由 + pipeline TCS subject 表面化。** 缺 `.ctor/get_Task` 对象模型 = 已建档 REMAIN，移交 codegen 域。
 
+## 执行进度（2026-09-09 会话 4b）— Phase 3 P3-2: Task.Delay 落地
+
+### 调查
+- TimerQueue(timer_queue.cpp/h) 已成熟：min-heap + kTimerQueueMaxEntries, gate thread(~15ms tick) 调 TimerQueueOnTick。cancellation_token.cpp 已有 TimerQueueCreate 应用先例。
+- foundation-dll threading-tasks chunk Task.Delay 6 overload 只以 callee 存在（无 canonical 发射体）：`Delay(int)`/`Delay(int,CT)`/`Delay(TimeSpan)`/`Delay(TimeSpan,CT)`/`Delay(TimeSpan,TimeProvider)`/`Delay(...TC)`。
+
+### Step 1 ✅ native delay + CTest
+- `runtime_stubs/async_stubs.cpp` 加 `#include "timer_queue.h"` + Delay 实现：
+  - `DelayTimerCallback`(fire→task completed + finish_async_task + delete ctx)
+  - `ChaosTaskDelayCore(due_ms)` → AsyncTask + TimerQueueCreate(one-shot)
+  - extern `chaos_task_delay_stub(int32 ms)` / `chaos_task_delay_timespan_stub(int64 ticks, 100ns→ms clamp)`
+  - 声明加到 async_stubs.h。
+- 注意：**delay NOT in async.h**（common 层不得依赖 runtime-core 的 timer_queue.h —— 跨层违例）。linger 在 runtime_stubs(runtime-core) 层才对，与 TCS 同层。
+- `async_integration_smoke_test.cpp` SetUp 加 `TimerQueueInitialize()`、TearDown 加 `TimerQueueShutdown()`（原来缺——thread_pool.cpp 的 ThreadPoolInitialize 自己**不调** TimerQueueInitialize，只有 gate thread OnTick，故 timer heap 从不被清/从不真正初始化）。
+- 新 `TaskDelay_CompletesAfterElapsedTime` CTest：chaos_task_delay_stub(80) → WaitFor task->completed (~108ms PASS)；断言完成时间 ≥40ms(确证确经 timer，非即时)。
+
+**根因记录（重要 flaky）**: ThreadPoolInitialize 用 `s_initialized` singleton guard，**Shutdown 不重置** → 同进程内连续 init/shutdown/init 的后续 ThreadPoolInitialize 变 no-op，gate thread 不重启 → 依赖 timer/async_task_run 的后测超时。这正是 SequentialAsyncAwaitPattern(6s timeout) 与全量跑偶发 TaskRunFromMultipleThreads `vector subscript out of range` 的 pre-existing 根(class 与 TCS/delay 无关)。TaskDelay 被多测组合打断即此因。隔离/前置于最前可过。
+
+### Step 2 ✅ ShapeRegistry Task::Delay 路由
+- S16.cs `RegisterTaskDelay`：Generic(prefix `System.Threading.Tasks.Task`, method `Delay`)→resolver 仅当单 `System.Int32` 参时 Routes `chaos_task_delay_stub`(DirectNativeSymbol)。 ct/TimeProvider/TimeSpan 变体 return null → 保守 interpreter（需真 cancellation 源，defer）。
+- Part1.cs 派发加 `RegisterTaskDelay(registry);`
+- codegen **2165/2165 PASS**。
+
+### REMAIN (defer)
+1. `Delay(TimeSpan)` → chaos_task_delay_timespan_stub（要求单 TimeSpan 参模板；TimeSpan ABI 现为 native int ticks，可同法扩）。
+2. `Delay(int, CancellationToken)` / TimeProvider 变体需真 cancellation 源（CTSSource/CTS + CancellationTokenRegister 已native，可后续接线实现取消即 fault）。
+3. 无真实 C# subject `await Task.Delay()`（AsyncTestAssembly 只 await Task.Yield/TCS）。可加 `async Task<int> DelayThenReturn()` subject 进 pipeline 断言(仿 AwaitTcs)。
+
+→ **P3-2 本 session 落地 = native timer-back delay primitive + CTest + Task::Delay(int) registry 路由。** TimeSpan/CT 变体移交后续。
+
+

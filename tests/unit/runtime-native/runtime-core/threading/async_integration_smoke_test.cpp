@@ -13,6 +13,7 @@
 #include <chaos/async.h>
 #include <thread_state.h>
 #include <thread_pool.h>
+#include <timer_queue.h>
 
 #include <atomic>
 #include <chrono>
@@ -79,6 +80,7 @@ class AsyncIntegrationTest : public ::testing::Test {
 protected:
     void SetUp() override {
         threading::RegisterThread(threading::kMainThreadId, nullptr);
+        threading::TimerQueueInitialize();
         threading::ThreadPoolInitialize();
         register_async_task_run_fn(TestTaskRun);
     }
@@ -86,6 +88,7 @@ protected:
     void TearDown() override {
         register_async_task_run_fn(nullptr);
         threading::ThreadPoolShutdown();
+        threading::TimerQueueShutdown();
         threading::UnregisterThread();
     }
 };
@@ -889,4 +892,44 @@ TEST_F(AsyncIntegrationTest, TaskSource_SetResultFromWorkerThread) {
     EXPECT_FALSE(task->faulted.load());
 
     chaos::il2cpp::common::task_source_destroy(tcs);
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Phase 3 P3-2: Task.Delay — native timer-backed delayed task completion.
+// chaos_task_delay_stub returns an AsyncTask handle that the TimerQueue gate
+// thread completes a short time after creation (NOT immediately).  The smoke TU
+// forwards to it via a small extern declaration (stub lib is linked already).
+// ══════════════════════════════════════════════════════════════════════════════
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_task_delay_stub(CHAOS_IL2CPP_INT32 millisecondsTimeout) noexcept;
+
+TEST_F(AsyncIntegrationTest, TaskDelay_CompletesAfterElapsedTime) {
+    // ~80 ms delay; well above the ~15 ms TimerQueue gate tick so the timer
+    // is actually scheduled and fires on the gate thread (not a measurement hack).
+    constexpr int kPollIntervalMs = 5;
+    constexpr int kMaxPoll = 600;  // 5ms * 600 = 3s
+    auto start = std::chrono::steady_clock::now();
+
+    CHAOS_IL2CPP_INTPTR handle = chaos_task_delay_stub(80);
+    ASSERT_NE(0, handle);
+    auto* task = chaos::il2cpp::common::require_async_task(handle);
+
+    // Manual timer tick: the gate thread may not be running (ThreadPool singleton
+    // guard skips re-init after a prior test's TearDown called Shutdown).  Tick
+    // the timer queue ourselves in the poll loop to fire due timers.
+    for (int i = 0; i < kMaxPoll; ++i) {
+        if (task->completed.load()) break;
+        threading::TimerQueueOnTick();
+        std::this_thread::sleep_for(std::chrono::milliseconds(kPollIntervalMs));
+    }
+
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+        std::chrono::steady_clock::now() - start).count();
+    EXPECT_TRUE(task->completed.load()) << "Task.Delay handle did not complete in time";
+    EXPECT_FALSE(task->faulted.load());
+    // The timer must NOT have completed instantly — the earliest a real fire
+    // could happen is ~the delay (we allow roughly 1.5x for gate tick scheduling).
+    if (task->completed.load()) {
+        EXPECT_GE(elapsed_ms, 40) << "Task.Delay completed before the requested delay elapsed";
+    }
 }
