@@ -76,6 +76,11 @@ jobs:
         if: runner.os != 'Windows'
         run: echo "::notice::Snapshot tests skipped on Linux (non-deterministic baseline). Covered by snapshot-unit (windows-latest)."
 
+      # Linux native build needs libnuma-dev for NUMA-aware GC code paths.
+      - name: Install Linux system dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt update && sudo apt install -y libnuma-dev
+
       # Native build
       - name: Configure CMake
         shell: bash
