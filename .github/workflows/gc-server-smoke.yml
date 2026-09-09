@@ -33,6 +33,10 @@ jobs:
             9.0.x
             10.0.x
 
+      - uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
       - name: Restore Generator
         run: dotnet restore src/managed/Chaos.IL2CPP.Generator/
 

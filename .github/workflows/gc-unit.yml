@@ -45,6 +45,10 @@ jobs:
             9.0.x
             10.0.x
 
+      - uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
       - name: Restore Generator
         run: dotnet restore src/managed/Chaos.IL2CPP.Generator/
 
@@ -54,7 +58,9 @@ jobs:
       - name: Configure CMake
         shell: bash
         run: |
-          cmake --preset ${{ inputs.cmake_preset }} \
+          cmake -S . -B artifacts/presets/${{ inputs.cmake_preset }} \
+            -G "Visual Studio 17 2022" \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
             -DROADMAP0_PRESET_TARGET=${{ inputs.cmake_preset }}
 
       - name: Build Native Runtime + GC tests

@@ -176,9 +176,15 @@ jobs:
     name: snapshot-unit
     needs: [resolve]
     if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'snapshot-unit') }}
+    # runtime_helper_shapes.h + shape enumeration in runtime_helper_shapes is
+    # WINDOWS-STABLE (baselines are maintained/generated on Windows — the
+    # generator's per-framework shape enumeration differs subtly on Linux
+    # .NET host, so regenerated baselines only match a Windows host).  Running
+    # on ubuntu-latest made every fixture drift even after SNAPSHOT_UPDATE;
+    # pin to windows-latest so the golden comparison host == baseline host.
     uses: ./.github/workflows/snapshot-unit.yml
     with:
-      os: ubuntu-latest
+      os: windows-latest
       timeout: 60
 
   aot-smoke:
