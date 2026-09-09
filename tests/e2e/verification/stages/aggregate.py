@@ -18,6 +18,7 @@ from pathlib import Path
 
 from verification.orchestration.context import ChunkContext, StageResult
 from verification.stages.benchmark_report import _read_jsonl_technology_map
+from verification.stages.gating import classify_gate  # Re-export constants too
 from verification._path import results_base
 _RESULTS_BASE = results_base()
 
@@ -201,12 +202,13 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 "unverifiedSmoke": fact_data.get("unverifiedSmoke", 0),
                 "realTotal": fact_data.get("realTotal", fact_data.get("total", 0)),
                 "realPassed": fact_data.get("realPassed", fact_data.get("passed", 0)),
-                # smoke-dominated: >= half of the methods this chunk dispatched
-                # are [UNVERIFIED] stubs (return-42, no real assertion path).
-                # Such a chunk is NOT genuinely / fully verified even though its
-                # nominal passed==total reads "green".  Surfaces so a consumer
-                # never mistakes a Net.Http-style no-native-C++ chunk for a real
-                # 143/143 verification pass.
+                # ⚡ Unified fact gate (S1): classify_gate decides 'pass'|'fail'|'skip'
+                # based on realPassed/realTotal ratio vs GATE_REAL_RATIO (default 0.10).
+                # When 'fail', the chunk is NOT genuinely verified — downstream metrics
+                # (benchmark, hotupdate) are gated out of aggregate totals.
+                # This replaces the prior standalone smokeDominated heuristic with a
+                # shared gating function also used by stage-level gates (S2).
+                "factGate": classify_gate(fact_data),
                 "smokeDominated": (
                     fact_data.get("total", 0) > 0
                     and fact_data.get("unverifiedSmoke", 0) * 2 >= fact_data.get("total", 0)
@@ -528,9 +530,23 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 chunks_with_meta_mismatch += 1
                 print(f"  [aggregate] ERROR: {chunk_slug} fact total={total} != {meta_label}={meta} (gap={gap}, {gap_ratio:.1%})")
 
-    # ── Compute aggregate benchmark performance ──
-    chunks_with_benchmark = [s.get("benchmark", {}) for s in chunk_summaries if "methodCount" in s.get("benchmark", {})]
-    total_benchmarked = sum(b.get("methodCount", 0) for b in chunks_with_benchmark)
+    # ── Compute aggregate benchmark performance (filtering gated chunks) ──
+    # S1: a chunk whose fact gate is 'fail' has NOT been genuinely verified.
+    # Its benchmark metrics are excluded from the aggregate totals so the
+    # report does not count stub / smoke-dominated methods as "benchmarked".
+    chunks_with_benchmark_raw = [
+        s for s in chunk_summaries
+        if "methodCount" in s.get("benchmark", {})
+    ]
+    chunks_with_benchmark = [
+        s for s in chunks_with_benchmark_raw
+        if s.get("fact", {}).get("factGate") != "fail"
+    ]
+    gated_benchmark_chunks = [
+        s for s in chunks_with_benchmark_raw
+        if s.get("fact", {}).get("factGate") == "fail"
+    ]
+    total_benchmarked = sum(b.get("benchmark", {}).get("methodCount", 0) for b in chunks_with_benchmark)
     aggregate_perf: dict[str, float] = {}
     if chunks_with_benchmark:
         duration_values = [b["meanDurationMs"] for b in chunks_with_benchmark if "meanDurationMs" in b]
@@ -547,28 +563,34 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         if total_outliers:
             aggregate_perf["totalOutliers"] = total_outliers
 
-    # ── Compute aggregate hotupdate metrics ──
+    # ── Compute aggregate hotupdate metrics (filtering gated chunks) ──
+    # S1: exclude chunks whose fact gate is 'fail' — smoke-dominated, not
+    # genuinely verified.  Their hotupdate results are not counted.
+    hu_relevant = [
+        s for s in chunk_summaries
+        if s.get("fact", {}).get("factGate") != "fail"
+    ]
     chunks_with_patch_data = sum(
-        1 for s in chunk_summaries
+        1 for s in hu_relevant
         if s.get("hotupdate", {}).get("patchDataUsed", False)
     )
     chunks_with_patch_failed = sum(
-        1 for s in chunk_summaries
+        1 for s in hu_relevant
         if s.get("hotupdate", {}).get("patchFailed", False)
     )
     chunks_with_patch_skipped_no_methods = sum(
-        1 for s in chunk_summaries
+        1 for s in hu_relevant
         if s.get("hotupdate", {}).get("patchSkippedNoMethods", False)
     )
     chunks_with_revert_failure = sum(
-        1 for s in chunk_summaries
+        1 for s in hu_relevant
         if not s.get("hotupdate", {}).get("allRevert", True)
     )
     total_hu_passed = sum(
-        s.get("hotupdate", {}).get("passed", 0) for s in chunk_summaries
+        s.get("hotupdate", {}).get("passed", 0) for s in hu_relevant
     )
     total_hu_failed = sum(
-        s.get("hotupdate", {}).get("failed", 0) for s in chunk_summaries
+        s.get("hotupdate", {}).get("failed", 0) for s in hu_relevant
     )
     # Count hotupdate skip-status breakdowns for observability
     hotupdate_skip_statuses: dict[str, int] = {}
