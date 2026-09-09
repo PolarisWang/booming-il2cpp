@@ -24,7 +24,7 @@ jobs:
         # "no SemVer tag reachable" and, in ci mode, a WARN blocks the gate.
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - name: Install PyYAML
