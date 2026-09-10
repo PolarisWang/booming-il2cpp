@@ -218,18 +218,22 @@ public:
         if (kChaosExternalRuntimeCount <= 0)
             return;
         // Track overridden entries for hotpatch fixup below.
-        // Heap allocation is unavailable in this noexcept context (no throw).
-        // kChaosExternalRuntimeCount can be ~2k (CoreLib) — the stack bound must
-        // exceed the worst-case count, AND the reader loop below must only read
-        // slots that were actually written.  Regression guard: a prior change
-        // (kMaxOverrides=1024, ++overridden unconditional) let `overridden` reach
-        // kChaosExternalRuntimeCount while only 1024 slots were written, so the
-        // patch loop read uninitialized stack slots -> garbage fn-table index ->
-        // access violation.  Fix: bound overridden to slots actually written and
-        // make the bound generous enough to cover real counts.
-        const int kMaxOverrides = 4096;
-        const char* overridden_subjects[kMaxOverrides];
-        int32_t overridden_indices[kMaxOverrides];
+        // Heap allocation is used (not stack arrays) because kChaosExternalRuntimeCount
+        // can reach ~2150 (CoreLib), and 2× 4KB×2150 ≈ 17KB of stack + the `std::string`
+        // locals in the parse loop pushed the stack past the guard page in the MSVC /GS-
+        // builds, causing an AV in `overridden_indices[1024]` (a slot that should have
+        // been reachable).  Using malloc avoids both the "stack overflow" and "max
+        // capacity constant too small" problems.
+        const int count = kChaosExternalRuntimeCount;
+        auto* overridden_subjects = static_cast<const char**>(
+            std::malloc(static_cast<size_t>(count) * sizeof(const char*)));
+        auto* overridden_indices = static_cast<int32_t*>(
+            std::malloc(static_cast<size_t>(count) * sizeof(int32_t)));
+        if (overridden_subjects == nullptr || overridden_indices == nullptr) {
+            std::free(overridden_subjects);
+            std::free(overridden_indices);
+            return;
+        }
         int overridden = 0;
         for (int32_t i = 0; i < kChaosExternalRuntimeCount; i++) {
             void* fn = kChaosExternalRuntimeFnTable[i];
@@ -283,7 +287,7 @@ public:
             // reader loop below (oi < overridden) never touches uninitialized stack
             // slots.  (Regression: previously ++overridden ran unconditionally while
             // the write was clamped, which made the patch loop read OOB stack memory.)
-            if (overridden < kMaxOverrides) {
+            if (overridden < count) {
                 overridden_subjects[overridden] = sid;
                 overridden_indices[overridden] = i;
                 ++overridden;
@@ -312,7 +316,7 @@ public:
             int patched = 0;
             for (int32_t oi = 0; oi < overridden; oi++) {
                 // Defensive bound: never read past slots that were written.
-                if (oi >= kMaxOverrides)
+                if (oi >= count)
                     break;
                 auto* safe_fn = kChaosExternalRuntimeFnTable[overridden_indices[oi]];
                 if (safe_fn == nullptr)
@@ -390,6 +394,8 @@ public:
                 std::printf("  [aggregate] Patched %d/%d hotpatch entries -> safe stubs\n", patched, overridden);
             }
         }
+        std::free(overridden_subjects);
+        std::free(overridden_indices);
     }
 
     /// Returns true if the runtime has been successfully initialized.
