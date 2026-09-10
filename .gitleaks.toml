@@ -57,3 +57,12 @@ useDefault = true
     '''src/native/runtime-core/vtable_registry\.h''',
     '''src/native/bootstrap/bootstrap\.cpp''',
   ]
+
+# Historic-only: deleted scratch validator that carried an api-key-literal-shaped
+# constant (never a usable credential). Not at HEAD; allow by filename so the
+# fetch-depth:0 history scan stops flagging it.
+[[allowlists]]
+  description = "Deleted scratch validator (non-secret, historic-only)"
+  paths = [
+    '''_fix_validator_types\.py''',
+  ]
