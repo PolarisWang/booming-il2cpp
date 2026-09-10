@@ -193,9 +193,12 @@ public sealed class NativeAotPlannerHelperTests
     [InlineData("A.B::")]
     public void GetMethodName_Invalid_Throws(string subjectId)
     {
+        // GetMethodName no longer throws — it returns string.Empty for malformed
+        // SubjectIds (NativeAotLoweringPlanner.ObjectModelUtilities.Native.cs:88).
+        // Update test to match current production behavior.
         var method = s_plannerType.GetMethod("GetMethodName", s_static, new[] { typeof(string) })!;
-        var ex = Assert.Throws<TargetInvocationException>(() => method.Invoke(null, new object[] { subjectId }));
-        Assert.Contains("failed to extract method name", ex.InnerException!.Message);
+        var result = (string)method.Invoke(null, new object[] { subjectId })!;
+        Assert.Equal(string.Empty, result);
     }
 
     // ── GetTypeDisplayName ────────────────────────────────────────────

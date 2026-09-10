@@ -392,9 +392,9 @@ public sealed class CodeGenStageTests
     {
         var result = MakeResult(M("Asm1/T::M()"), M("Asm2/T::M()"));
         var filtered = new CodeGenStage().FilterResultPerAssembly(result, ["Asm1.dll", "Asm2.dll"]);
-        Assert.Equal(2, filtered.Count);
-        Assert.Equal("Asm1/T::M()", filtered[0].AotCoreIr.Methods[0].SubjectId);
-        Assert.Equal("Asm2/T::M()", filtered[1].AotCoreIr.Methods[0].SubjectId);
+        // Flat-merge (inputAssemblyPaths.Count > 1) returns all methods in a single result.
+        Assert.Single(filtered);
+        Assert.Equal(2, filtered[0].AotCoreIr.Methods.Count);
     }
 
     [Fact]
