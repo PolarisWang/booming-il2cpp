@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.string-ops.use-string",
+      "subjectId": "SnapshotTestFixtures/StringOps::UseString:System.Int32()",
+      "signature": "System.Int32 StringOps::UseString()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/StringOps",
+        "definitionSubjectId": "SnapshotTestFixtures/StringOps::UseString:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/StringOps::UseString:System.Int32()",
+        "methodId": "snapshot-test-fixtures.string-ops.use-string",
+        "signature": "System.Int32 StringOps::UseString()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_StringOps_UseString",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "Hello, World!",
+          "ilOffset": 0,
+          "resultType": "System.String"
+        },
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectKind": "method",
+            "subjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 3
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.helper.consume-string",
+      "subjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
+      "signature": "System.Void Helper::ConsumeString(System.String)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
+        "definitionSubjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
+        "subjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
+        "methodId": "snapshot-test-fixtures.helper.consume-string",
+        "signature": "System.Void Helper::ConsumeString(System.String)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_Helper_ConsumeString",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 0
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        { "carrierKindCode": 2, "typeShape": 1 }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "ilOffset": 0
+        }
+      ]
+    }
+  ]
+}

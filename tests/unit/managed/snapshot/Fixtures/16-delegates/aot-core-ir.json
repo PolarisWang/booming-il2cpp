@@ -1,0 +1,118 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.delegate-helper.run-delegate",
+      "subjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
+      "signature": "System.Int32 DelegateHelper::RunDelegate()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/DelegateHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
+        "methodId": "snapshot-test-fixtures.delegate-helper.run-delegate",
+        "signature": "System.Int32 DelegateHelper::RunDelegate()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_DelegateHelper_RunDelegate",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "ilOffset": 0,
+          "resultType": "System.Object"
+        },
+        {
+          "op": "ldftn",
+          "operand": "System.Int32 Helper::GetValue()",
+          "callee": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+          "ilOffset": 1,
+          "resultType": "System.IntPtr"
+        },
+        {
+          "op": "newobj",
+          "operand": "System.Void Func<System.Int32>::.ctor(System.Object, System.IntPtr)",
+          "ilOffset": 2,
+          "resultType": "System.Func<System.Int32>",
+          "callee": "SnapshotTestFixtures/Func<System.Int32>::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "mscorlib",
+            "subjectKind": "method",
+            "subjectId": "SnapshotTestFixtures/Func<System.Int32>::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "mscorlib",
+            "subjectId": "System.Func<System.Int32>",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "pop",
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 5
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.helper.get-value",
+      "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+      "signature": "System.Int32 Helper::GetValue()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
+        "definitionSubjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+        "methodId": "snapshot-test-fixtures.helper.get-value",
+        "signature": "System.Int32 Helper::GetValue()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_Helper_GetValue",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 1
+        }
+      ]
+    }
+  ]
+}

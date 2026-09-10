@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/FlowControl",
+      "name": "FlowControl",
+      "displayName": "FlowControl",
+      "definitionSubjectId": "SnapshotTestFixtures/FlowControl"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
+      "name": "IsPositive",
+      "definitionSubjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/FlowControl",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

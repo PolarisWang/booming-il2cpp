@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper",
+      "name": "ConvSmallIntHelper",
+      "displayName": "ConvSmallIntHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+      "name": "RunConvSmall",
+      "definitionSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

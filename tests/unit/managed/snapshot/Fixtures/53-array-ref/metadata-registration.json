@@ -1,0 +1,9 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    { "registrationKind": "assembly", "slot": 0, "subjectId": "SnapshotTestFixtures" },
+    { "registrationKind": "type", "slot": 1, "subjectId": "SnapshotTestFixtures/ArrayRefHelper", "name": "ArrayRefHelper", "displayName": "ArrayRefHelper", "definitionSubjectId": "SnapshotTestFixtures/ArrayRefHelper" },
+    { "registrationKind": "method", "slot": 2, "subjectId": "SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()", "name": "RunArrayRef", "definitionSubjectId": "SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/ArrayRefHelper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false }
+  ]
+}

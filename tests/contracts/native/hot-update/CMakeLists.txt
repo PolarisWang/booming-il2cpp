@@ -1,19 +1,11 @@
-add_executable(chaos_method_replacement_smoke
-    method_replacement_smoke.cpp)
+# Hot-Update contracts targets — factory (cmake/chaos_native_test.cmake) provides
+# the runtime lib set, /FORCE:MULTIPLE + /utf-8 flags, include dirs, and the
+# codegen-symbol stub.
 
-target_compile_features(chaos_method_replacement_smoke PRIVATE cxx_std_17)
-target_link_libraries(
-    chaos_method_replacement_smoke
-    PRIVATE
-        chaos_hot_update
-        chaos_interpreter)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/method_replacement_smoke.cpp")
+    chaos_native_add_test(chaos_method_replacement_smoke method_replacement_smoke.cpp)
+endif()
 
-add_executable(chaos_hotupdate_verification_test
-    hotupdate_verification_test.cpp)
-
-target_compile_features(chaos_hotupdate_verification_test PRIVATE cxx_std_17)
-target_link_libraries(
-    chaos_hotupdate_verification_test
-    PRIVATE
-        chaos_hot_update
-        chaos_bootstrap)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/hotupdate_verification_test.cpp")
+    chaos_native_add_test(chaos_hotupdate_verification_test hotupdate_verification_test.cpp)
+endif()

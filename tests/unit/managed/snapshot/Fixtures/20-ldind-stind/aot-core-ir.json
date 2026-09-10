@@ -1,0 +1,71 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.indirect-helper.read-write-ref",
+      "subjectId": "SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()",
+      "signature": "System.Int32 IndirectHelper::ReadWriteRef()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/IndirectHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()",
+        "methodId": "snapshot-test-fixtures.indirect-helper.read-write-ref",
+        "signature": "System.Int32 IndirectHelper::ReadWriteRef()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_IndirectHelper_ReadWriteRef",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloca",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Int32&"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 100,
+          "ilOffset": 3,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stind.i4",
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 5
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    }
+  ]
+}

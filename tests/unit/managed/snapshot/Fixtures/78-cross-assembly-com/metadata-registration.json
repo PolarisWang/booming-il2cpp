@@ -1,0 +1,73 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "assembly",
+      "slot": 1,
+      "subjectId": "SomeOtherAssembly"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/CrossAssemblyComCaller",
+      "name": "CrossAssemblyComCaller",
+      "displayName": "CrossAssemblyComCaller",
+      "definitionSubjectId": "SnapshotTestFixtures/CrossAssemblyComCaller"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 3,
+      "subjectId": "SnapshotTestFixtures/IComInternal",
+      "name": "IComInternal",
+      "displayName": "IComInternal",
+      "definitionSubjectId": "SnapshotTestFixtures/IComInternal"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 4,
+      "subjectId": "SomeOtherAssembly/IComExternal",
+      "name": "IComExternal",
+      "displayName": "IComExternal",
+      "definitionSubjectId": "SomeOtherAssembly/IComExternal"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "SnapshotTestFixtures/CrossAssemblyComCaller::CallIt:System.Int32()",
+      "name": "CallIt",
+      "definitionSubjectId": "SnapshotTestFixtures/CrossAssemblyComCaller::CallIt:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/CrossAssemblyComCaller",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "SnapshotTestFixtures/IComInternal::Compute:System.Int32(System.Int32)",
+      "name": "Compute",
+      "definitionSubjectId": "SnapshotTestFixtures/IComInternal::Compute:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/IComInternal",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "SomeOtherAssembly/IComExternal::Compute:System.Int32(System.Int32)",
+      "name": "Compute",
+      "definitionSubjectId": "SomeOtherAssembly/IComExternal::Compute:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SomeOtherAssembly/IComExternal",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    }
+  ]
+}

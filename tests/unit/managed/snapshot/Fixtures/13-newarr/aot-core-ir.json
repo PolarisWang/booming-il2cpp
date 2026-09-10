@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.array-helper.make-and-fill",
+      "subjectId": "SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()",
+      "signature": "System.Int32 ArrayHelper::MakeAndFill()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/ArrayHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()",
+        "methodId": "snapshot-test-fixtures.array-helper.make-and-fill",
+        "signature": "System.Int32 ArrayHelper::MakeAndFill()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_ArrayHelper_MakeAndFill",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 3,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "newarr",
+          "operand": "System.Int32",
+          "ilOffset": 1,
+          "resultType": "System.Int32[]",
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 3
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 5,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stelem.i4",
+          "ilOffset": 6,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 7
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldelem.i4",
+          "ilOffset": 9,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 10
+        }
+      ]
+    }
+  ]
+}

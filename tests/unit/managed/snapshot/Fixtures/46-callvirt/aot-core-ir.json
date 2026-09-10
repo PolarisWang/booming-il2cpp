@@ -1,0 +1,97 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.callvirt-helper.run-callvirt",
+      "subjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()",
+      "signature": "System.Int32 CallvirtHelper::RunCallvirt()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/CallvirtHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()",
+        "methodId": "snapshot-test-fixtures.callvirt-helper.run-callvirt",
+        "signature": "System.Int32 CallvirtHelper::RunCallvirt()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_CallvirtHelper_RunCallvirt",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 42, "ilOffset": 0, "resultType": "System.Int32" },
+        {
+          "op": "newobj",
+          "operand": "System.Void InstanceHelper::.ctor(System.Int32)",
+          "ilOffset": 1,
+          "resultType": "System.Object",
+          "callee": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)",
+          "reference": {
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectKind": "method",
+            "subjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/InstanceHelper",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "callvirt",
+          "operand": "System.Int32 InstanceHelper::GetValue()",
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "callee": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/InstanceHelper",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1
+        },
+        { "op": "ret", "ilOffset": 3 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.instance-helper.get-value",
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
+      "signature": "System.Int32 InstanceHelper::GetValue()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/InstanceHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
+        "methodId": "snapshot-test-fixtures.instance-helper.get-value",
+        "signature": "System.Int32 InstanceHelper::GetValue()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_InstanceHelper_GetValue",
+      "isStatic": false,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [
+        { "carrierKindCode": 2, "typeShape": 1 }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 42, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 1 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.cross-assembly-com-caller.call-it",
+      "subjectId": "SnapshotTestFixtures/CrossAssemblyComCaller::CallIt:System.Int32()",
+      "signature": "System.Int32 CrossAssemblyComCaller::CallIt()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/CrossAssemblyComCaller",
+        "definitionSubjectId": "SnapshotTestFixtures/CrossAssemblyComCaller::CallIt:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/CrossAssemblyComCaller::CallIt:System.Int32()",
+        "methodId": "snapshot-test-fixtures.cross-assembly-com-caller.call-it",
+        "signature": "System.Int32 CrossAssemblyComCaller::CallIt()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_CrossAssemblyComCaller_CallIt",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldtoken", "ilOffset": 0, "resultType": "System.RuntimeTypeHandle", "targetReference": { "kind": 1, "assemblyName": "SnapshotTestFixtures", "subjectId": "SnapshotTestFixtures/IComInternal", "comInterfaceGuid": "11111111-1111-1111-1111-111111111111", "typeShape": 3, "arrayElementTypeShape": 0, "declaringTypeShape": 0 } },
+        { "op": "pop", "ilOffset": 1, "resultType": "System.Void" },
+        { "op": "ldtoken", "ilOffset": 2, "resultType": "System.RuntimeTypeHandle", "targetReference": { "kind": 1, "assemblyName": "SomeOtherAssembly", "subjectId": "SomeOtherAssembly/IComExternal", "comInterfaceGuid": "22222222-2222-2222-2222-222222222222", "typeShape": 3, "arrayElementTypeShape": 0, "declaringTypeShape": 0 } },
+        { "op": "pop", "ilOffset": 3, "resultType": "System.Void" },
+        { "op": "ldnull", "ilOffset": 4, "resultType": "System.Object" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 5, "resultType": "System.Int32" },
+        { "op": "call", "ilOffset": 6, "resultType": "System.Int32", "callee": "SnapshotTestFixtures/IComInternal::Compute:System.Int32(System.Int32)", "reference": { "assemblyName": "SnapshotTestFixtures", "subjectKind": "method", "subjectId": "SnapshotTestFixtures/IComInternal::Compute:System.Int32(System.Int32)" }, "targetReference": { "kind": 3, "assemblyName": "SnapshotTestFixtures", "subjectId": "SnapshotTestFixtures/IComInternal::Compute:System.Int32(System.Int32)", "typeShape": 0, "arrayElementTypeShape": 0, "declaringTypeShape": 0 } },
+        { "op": "pop", "ilOffset": 7, "resultType": "System.Int32" },
+        { "op": "ldnull", "ilOffset": 8, "resultType": "System.Object" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 9, "resultType": "System.Int32" },
+        { "op": "call", "ilOffset": 10, "resultType": "System.Int32", "callee": "SomeOtherAssembly/IComExternal::Compute:System.Int32(System.Int32)", "reference": { "assemblyName": "SomeOtherAssembly", "subjectKind": "method", "subjectId": "SomeOtherAssembly/IComExternal::Compute:System.Int32(System.Int32)" }, "targetReference": { "kind": 3, "assemblyName": "SomeOtherAssembly", "subjectId": "SomeOtherAssembly/IComExternal::Compute:System.Int32(System.Int32)", "typeShape": 0, "arrayElementTypeShape": 0, "declaringTypeShape": 0 } },
+        { "op": "pop", "ilOffset": 11, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 12, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 13 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.icom-internal.compute",
+      "subjectId": "SnapshotTestFixtures/IComInternal::Compute:System.Int32(System.Int32)",
+      "signature": "System.Int32 IComInternal::Compute(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/IComInternal",
+        "definitionSubjectId": "SnapshotTestFixtures/IComInternal::Compute:System.Int32(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/IComInternal::Compute:System.Int32(System.Int32)",
+        "methodId": "snapshot-test-fixtures.icom-internal.compute",
+        "signature": "System.Int32 IComInternal::Compute(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_IComInternal_Compute",
+      "isStatic": false,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 1,
+      "parameterAbis": [{ "carrierKindCode": 1, "typeShape": 2 }],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 1 }
+      ]
+    },
+    {
+      "methodId": "some-other-assembly.icom-external.compute",
+      "subjectId": "SomeOtherAssembly/IComExternal::Compute:System.Int32(System.Int32)",
+      "signature": "System.Int32 IComExternal::Compute(System.Int32)",
+      "identity": {
+        "assemblyName": "SomeOtherAssembly",
+        "declaringTypeSubjectId": "SomeOtherAssembly/IComExternal",
+        "definitionSubjectId": "SomeOtherAssembly/IComExternal::Compute:System.Int32(System.Int32)",
+        "subjectId": "SomeOtherAssembly/IComExternal::Compute:System.Int32(System.Int32)",
+        "methodId": "some-other-assembly.icom-external.compute",
+        "signature": "System.Int32 IComExternal::Compute(System.Int32)"
+      },
+      "nativeSymbol": "SomeOtherAssembly_IComExternal_Compute",
+      "isStatic": false,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 1,
+      "parameterAbis": [{ "carrierKindCode": 1, "typeShape": 2 }],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 1 }
+      ]
+    }
+  ]
+}

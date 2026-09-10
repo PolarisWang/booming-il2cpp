@@ -1,0 +1,94 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.void-caller.do-nothing",
+      "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
+      "signature": "System.Int32 VoidCaller::DoNothing()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/VoidCaller",
+        "definitionSubjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
+        "methodId": "snapshot-test-fixtures.void-caller.do-nothing",
+        "signature": "System.Int32 VoidCaller::DoNothing()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_VoidCaller_DoNothing",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "ilOffset": 0,
+          "resultType": "System.Void",
+          "callee": "SnapshotTestFixtures/Helper::Nop:System.Void()",
+          "reference": {
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectKind": "method",
+            "subjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotTestFixtures",
+            "subjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 2
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.helper.nop",
+      "subjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
+      "signature": "System.Void Helper::Nop()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
+        "definitionSubjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
+        "subjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
+        "methodId": "snapshot-test-fixtures.helper.nop",
+        "signature": "System.Void Helper::Nop()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_Helper_Nop",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 0
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "ilOffset": 0
+        }
+      ]
+    }
+  ]
+}

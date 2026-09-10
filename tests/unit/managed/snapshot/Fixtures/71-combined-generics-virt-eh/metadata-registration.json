@@ -1,0 +1,68 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo",
+      "name": "GenericsVirtEhDemo",
+      "displayName": "GenericsVirtEhDemo",
+      "definitionSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "name": "DemoCombine",
+      "definitionSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "type",
+      "slot": 3,
+      "subjectId": "SnapshotTestFixtures/BaseClass",
+      "name": "BaseClass",
+      "displayName": "BaseClass",
+      "definitionSubjectId": "SnapshotTestFixtures/BaseClass"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "SnapshotTestFixtures/BaseClass::Compute:System.Int32()",
+      "name": "Compute",
+      "definitionSubjectId": "SnapshotTestFixtures/BaseClass::Compute:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/BaseClass",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "type",
+      "slot": 5,
+      "subjectId": "SnapshotTestFixtures/DerivedClass",
+      "name": "DerivedClass",
+      "displayName": "DerivedClass",
+      "definitionSubjectId": "SnapshotTestFixtures/DerivedClass"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/DerivedClass",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

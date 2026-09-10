@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/BranchDupHelper",
+      "name": "BranchDupHelper",
+      "displayName": "BranchDupHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/BranchDupHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
+      "name": "RunBranchDup",
+      "definitionSubjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/BranchDupHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

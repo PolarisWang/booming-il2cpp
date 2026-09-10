@@ -1,0 +1,67 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/AddressHelper",
+      "name": "AddressHelper",
+      "displayName": "AddressHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/AddressHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()",
+      "name": "RunAddress",
+      "definitionSubjectId": "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/AddressHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "type",
+      "slot": 3,
+      "subjectId": "SnapshotTestFixtures/HasFields",
+      "name": "HasFields",
+      "displayName": "HasFields",
+      "definitionSubjectId": "SnapshotTestFixtures/HasFields"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "SnapshotTestFixtures/HasFields::.ctor:System.Void()",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotTestFixtures/HasFields::.ctor:System.Void()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/HasFields",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "field",
+      "slot": 5,
+      "subjectId": "SnapshotTestFixtures/HasFields::instanceVal",
+      "name": "instanceVal",
+      "definitionSubjectId": "SnapshotTestFixtures/HasFields::instanceVal",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/HasFields",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 6,
+      "subjectId": "SnapshotTestFixtures/HasFields::staticVal",
+      "name": "staticVal",
+      "definitionSubjectId": "SnapshotTestFixtures/HasFields::staticVal",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/HasFields",
+      "memberType": "System.Int32"
+    }
+  ]
+}

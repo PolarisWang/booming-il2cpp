@@ -1,0 +1,9 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    { "registrationKind": "assembly", "slot": 0, "subjectId": "SnapshotTestFixtures" },
+    { "registrationKind": "type", "slot": 1, "subjectId": "SnapshotTestFixtures/LdindI8Helper", "name": "LdindI8Helper", "displayName": "LdindI8Helper", "definitionSubjectId": "SnapshotTestFixtures/LdindI8Helper" },
+    { "registrationKind": "method", "slot": 2, "subjectId": "SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()", "name": "RunLdindI8", "definitionSubjectId": "SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/LdindI8Helper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false }
+  ]
+}

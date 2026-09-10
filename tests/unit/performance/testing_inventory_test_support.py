@@ -9,6 +9,7 @@ from typing import Any
 from tests._support.fs import make_temp_repo_root, write_json
 from tests._support.module_loading import load_module
 from build.toolchains.run.core.common import read_json
+from build.toolchains.run.testing import verification_layout as vlayout
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -481,10 +482,10 @@ def make_registry_index(
 
 def write_inventory_fixture_repo(repo_root: Path, fixture: dict[str, Any]) -> None:
     subject_id = str(fixture["subjectId"])
-    owner_root = repo_root / "verification" / "catalog" / "owners" / subject_id
-    workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
-    raw_records_root = repo_root / ".artifact" / "verification" / "benchmark-records" / subject_id
-    codegen_root = repo_root / "verification" / "evidence" / "owners" / subject_id / "codegen-stubs"
+    owner_root = vlayout.owner_root(repo_root, subject_id)
+    workspace_root = vlayout.subject_workspace_root(repo_root, subject_id)
+    raw_records_root = vlayout.raw_benchmark_records_root(repo_root) / subject_id
+    codegen_root = vlayout.owner_codegen_stubs_root(repo_root, subject_id)
     features_path = owner_root / "owner.features.json"
     write_json(
         features_path,
@@ -516,7 +517,7 @@ def write_inventory_fixture_repo(repo_root: Path, fixture: dict[str, Any]) -> No
             "displayName": str(fixture["displayName"]),
             "source": {
                 "type": "dotnet-project",
-                "path": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.csproj",
+                "path": f"artifact/verification-catalog/catalog/owners/{subject_id}/support/host/{subject_id}.csproj",
             },
             "workloadEntry": str(fixture["workloadEntry"]),
             "executionPipelines": [
@@ -661,11 +662,7 @@ def write_inventory_fixture_repo_with_declared_units(
     write_inventory_fixture_repo(repo_root, fixture)
     subject_id = str(fixture["subjectId"])
     collection_path = (
-        repo_root
-        / "verification"
-        / "workspaces"
-        / "subjects"
-        / subject_id
+        vlayout.subject_workspace_root(repo_root, subject_id)
         / "managed-tests"
         / "Generated"
         / "declared-tests.collection.json"
@@ -701,7 +698,7 @@ def append_benchmark_record(
     benchmark_case_overrides: dict[str, Any] | None = None,
 ) -> None:
     subject_id = str(fixture["subjectId"])
-    records_path = repo_root / ".artifact" / "verification" / "benchmark-records" / subject_id / "records.jsonl"
+    records_path = vlayout.raw_benchmark_records_path(repo_root, subject_id)
     records_path.parent.mkdir(parents=True, exist_ok=True)
 
     benchmark_case = benchmark_case_payload(fixture)
@@ -958,8 +955,8 @@ def write_legacy_managed_output_proof_run(
                 "pipelineId": "managed-runtime-output",
                 "source": {
                     "type": "dotnet-project",
-                    "path": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.sln",
-                    "primaryProjectPath": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.csproj",
+                    "path": f"artifact/verification-catalog/catalog/owners/{subject_id}/support/host/{subject_id}.sln",
+                    "primaryProjectPath": f"artifact/verification-catalog/catalog/owners/{subject_id}/support/host/{subject_id}.csproj",
                     "entry": source_entry,
                 },
                 "executionContext": {
@@ -1183,9 +1180,9 @@ def sample_inventory_source() -> dict[str, Any]:
         "workspaceCollections": [
             {
                 "subjectId": subject_id,
-                "manifestPath": f"verification/workspaces/subjects/{subject_id}/workspace.manifest.json",
+                "manifestPath": f"artifact/verification-catalog/workspaces/subjects/{subject_id}/workspace.manifest.json",
                 "collectionPath": (
-                    f"verification/workspaces/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json"
+                    f"artifact/verification-catalog/workspaces/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json"
                 ),
                 "declaredUnitTests": [
                     {
@@ -1240,7 +1237,7 @@ def sample_inventory_source() -> dict[str, Any]:
                 "lastRecordedAt": fixture["recordedAt"],
                 "gitCommit": fixture["gitCommit"],
                 "isStale": False,
-                "sourceSubjectPath": f".artifact/verification/benchmark-records/{subject_id}/records.jsonl",
+                "sourceSubjectPath": f"artifact/verification/benchmark-records/{subject_id}/records.jsonl",
             }
         ],
         "codegenStubs": [
@@ -1252,14 +1249,14 @@ def sample_inventory_source() -> dict[str, Any]:
                 "managedSourceRefs": [
                     {
                         "kind": "managed-source",
-                        "path": f"verification/catalog/owners/{subject_id}/proofs/NativeInteropProofEntry.cs",
+                        "path": f"artifact/verification-catalog/catalog/owners/{subject_id}/proofs/NativeInteropProofEntry.cs",
                         "label": fixture["sourceEntry"],
                     }
                 ],
                 "stubRefs": [
                     {
                         "kind": "stub-dir",
-                        "path": f"verification/evidence/owners/{subject_id}/codegen-stubs/windows-native-check",
+                        "path": f"artifact/verification-catalog/evidence/owners/{subject_id}/codegen-stubs/windows-native-check",
                         "label": "windows-native-check",
                     }
                 ],

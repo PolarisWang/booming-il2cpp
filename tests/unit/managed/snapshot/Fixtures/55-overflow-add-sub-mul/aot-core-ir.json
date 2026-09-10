@@ -1,0 +1,234 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.overflow-helper.run-overflow-add",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()",
+      "signature": "System.Int32 OverflowHelper::RunOverflowAdd()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()",
+        "methodId": "snapshot-test-fixtures.overflow-helper.run-overflow-add",
+        "signature": "System.Int32 OverflowHelper::RunOverflowAdd()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowHelper_RunOverflowAdd",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 3,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 4,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "add.ovf",
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 3
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.overflow-helper.run-overflow-sub",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()",
+      "signature": "System.Int32 OverflowHelper::RunOverflowSub()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()",
+        "methodId": "snapshot-test-fixtures.overflow-helper.run-overflow-sub",
+        "signature": "System.Int32 OverflowHelper::RunOverflowSub()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowHelper_RunOverflowSub",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 10,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 3,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "sub.ovf",
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 3
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.overflow-helper.run-overflow-mul",
+      "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()",
+      "signature": "System.Int32 OverflowHelper::RunOverflowMul()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()",
+        "methodId": "snapshot-test-fixtures.overflow-helper.run-overflow-mul",
+        "signature": "System.Int32 OverflowHelper::RunOverflowMul()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowHelper_RunOverflowMul",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 5,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 6,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "mul.ovf",
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 3
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.overflow-un-helper.run-overflow-add-un",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
+      "signature": "System.Int32 OverflowUnHelper::RunOverflowAddUn()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowUnHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
+        "methodId": "snapshot-test-fixtures.overflow-un-helper.run-overflow-add-un",
+        "signature": "System.Int32 OverflowUnHelper::RunOverflowAddUn()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowUnHelper_RunOverflowAddUn",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 2147483647, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "add.ovf.un", "ilOffset": 2, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 3 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.overflow-un-helper.run-overflow-sub-un",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
+      "signature": "System.Int32 OverflowUnHelper::RunOverflowSubUn()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowUnHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
+        "methodId": "snapshot-test-fixtures.overflow-un-helper.run-overflow-sub-un",
+        "signature": "System.Int32 OverflowUnHelper::RunOverflowSubUn()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowUnHelper_RunOverflowSubUn",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "sub.ovf.un", "ilOffset": 2, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 3 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.overflow-un-helper.run-overflow-mul-un",
+      "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
+      "signature": "System.Int32 OverflowUnHelper::RunOverflowMulUn()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowUnHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
+        "methodId": "snapshot-test-fixtures.overflow-un-helper.run-overflow-mul-un",
+        "signature": "System.Int32 OverflowUnHelper::RunOverflowMulUn()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowUnHelper_RunOverflowMulUn",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 65536, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 65536, "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "mul.ovf.un", "ilOffset": 2, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 3 }
+      ]
+    }
+  ]
+}

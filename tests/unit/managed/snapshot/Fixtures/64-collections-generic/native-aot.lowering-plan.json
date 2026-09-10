@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "generic-managed-entry",
+  "assemblyName": "SnapshotTestFixtures",
+  "entrySubjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "SnapshotTestFixtures_CollectionsHelper_TestList",
+  "entryMethodToken": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
+  "workloadAbi": "int()"
+}

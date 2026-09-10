@@ -1,0 +1,95 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.flow-control.is-positive",
+      "subjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
+      "signature": "System.Int32 FlowControl::IsPositive()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/FlowControl",
+        "definitionSubjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
+        "methodId": "snapshot-test-fixtures.flow-control.is-positive",
+        "signature": "System.Int32 FlowControl::IsPositive()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_FlowControl_IsPositive",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 5,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "cgt",
+          "ilOffset": 2,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "stloc",
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldloc",
+          "operand": 0,
+          "ilOffset": 4
+        },
+        {
+          "op": "brfalse",
+          "operand": 8,
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "targetReference": {
+            "kind": 0,
+            "assemblyName": "",
+            "subjectId": "",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 1,
+          "ilOffset": 6,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 7
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 9
+        }
+      ]
+    }
+  ]
+}

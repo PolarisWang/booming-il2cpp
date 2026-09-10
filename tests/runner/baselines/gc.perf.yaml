@@ -1,0 +1,71 @@
+# GC performance/regression baseline — "据实达标基线"
+#
+# Records the ACTUAL measured values from a green run of the GC gate so later
+# commits can diff against them (P50/P95/P99 pause, throughput, per-scenario
+# durations from test-report.json --cases).  This is NOT a "doc claim" — every
+# number below must be produced by an actual `--preset native-gc` / `--preset
+# gc-stress` run on the reference build (windows-x64-reference, Debug).
+#
+# Consumption: a small comparator (CI/nightly) diffs the current run's numbers
+# against this file and fails if a value regresses by more than the "tol_pct"
+# for its tier.  Until the first real run is captured, keep entries in a
+# provisional state (value: null, source: "pending-first-green-run") so the
+# comparator knows not to fail on an uninitialized baseline.
+#
+# No-skip rule applies: these are recorded facts, not test suppressions.
+
+version: 1
+machine: "pending-first-green-run"   # set to hostinfo of the recording run
+captured_at: null
+source_preset: native-gc            # or gc-stress for the heavy tiers
+unit: "seconds"                     # pause times are seconds; throughput ops/sec
+
+pause_seconds:
+  young_gc_wks:
+    desc: "Young GC STW pause (WKS/single-heap mode), nursery 256KB"
+    p50: null            # fill from first green run
+    p95: null
+    p99: null
+    tol_pct: 50
+  full_gc_small:
+    desc: "Full GC mark-only small heap (<100 pages)"
+    p50: null
+    p95: null
+    p99: null
+    tol_pct: 50
+  full_gc_parallel_100mb:
+    desc: "Full GC parallel mark on ~100MB heap"
+    p50: null
+    p95: null
+    p99: null
+    tol_pct: 50
+  bgc_mark_slice:
+    desc: "BGC concurrent-mark slice budget (event-driven, time-sliced)"
+    p95: null
+    p99: null
+    tol_pct: 50
+  loh_sweep:
+    desc: "LOH mark-sweep"
+    p95: null
+    tol_pct: 50
+  gen1:
+    desc: "Gen1 mark-sweep-promote pause (gc_gen1_benchmark direct call)"
+    p50: null
+    p95: null
+    p99: null
+    tol_pct: 50
+
+scenario_duration_s:    # per-scenario wall durations (from --cases)
+  gc_stress_scenarios: null
+  gc_bgc_stress_scenarios: null
+  gc_throughput_benchmark: null
+  gc_regression_benchmark: null
+
+throughput_kops_per_s:
+  allocation_bump: null      # NurseryAllocate fast-path throughput
+  tol_pct: 30
+
+regress_policy:
+  young_gc_p99: "fail if p99 regresses by > tol_pct vs captured baseline"
+  full_gc_p95: "fail if > tol_pct"
+  gc_stress_scenarios: "fail if any scenario fails OR total duration > 2x baseline"

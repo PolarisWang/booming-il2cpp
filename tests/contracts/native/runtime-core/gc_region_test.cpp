@@ -250,6 +250,72 @@ static void test_card_table() {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
+// GC-K2a region→gen table
+// ════════════════════════════════════════════════════════════════════════════
+
+/// Verifies the region→generation skewed table: AllocateRegion assigns the
+/// correct generation by kind (nursery/gen1 → young(0), tenured → old(2)),
+/// GetRegionGen reads it back, SetRegionGen updates it, and an uncovered
+/// (unmapped) address conservatively reports old(2).
+static void test_region_gen() {
+    TEST("GC-K2a region→gen table");
+    auto& mgr = RegionManager::Instance();
+
+    Region* nursery = mgr.AllocateRegion(RegionKind::REGION_NURSERY, 64 * 1024);
+    Region* gen1    = mgr.AllocateRegion(RegionKind::REGION_GEN1,    64 * 1024);
+    Region* tenured = mgr.AllocateRegion(RegionKind::REGION_TENURED, 64 * 1024);
+    if (!nursery || !gen1 || !tenured) { FAIL("region alloc failed"); return; }
+
+    // (1) Nursery → young(0); Gen1(survivor, K3) → gen1(1, M9 3-gen);
+    //     tenured → old(2).
+    uintptr_t nb = reinterpret_cast<uintptr_t>(nursery->begin);
+    uintptr_t gb = reinterpret_cast<uintptr_t>(gen1->begin);
+    uintptr_t tb = reinterpret_cast<uintptr_t>(tenured->begin);
+    if (nursery->gen != kRegionGenYoung) FAIL("nursery.gen != young");
+    if (gen1->gen    != kRegionGenGen1)  FAIL("gen1.gen != gen1 (M9 3-gen)");
+    if (tenured->gen != kRegionGenOld)   FAIL("tenured.gen != old");
+    if (GetRegionGen(nb) != kRegionGenYoung) FAIL("GetRegionGen(nursery) != young");
+    if (GetRegionGen(gb) != kRegionGenGen1)  FAIL("GetRegionGen(gen1) != gen1 (M9)");
+    if (GetRegionGen(tb) != kRegionGenOld)   FAIL("GetRegionGen(tenured) != old");
+
+    // (2) SetRegionGen updates + skewness: same addr read back reflects new gen.
+    SetRegionGen(tb, kRegionGenYoung);
+    if (GetRegionGen(tb) != kRegionGenYoung) FAIL("SetRegionGen(tenured→young) not reflected");
+    SetRegionGen(tb, kRegionGenOld);
+    if (GetRegionGen(tb) != kRegionGenOld) FAIL("SetRegionGen restore failed");
+
+    // (3) Uncovered (unmapped) address → conservative old(2) (never young).
+    uintptr_t unmapped = static_cast<uintptr_t>(UINTPTR_MAX) ^ 4u;  // far from real regions
+    if (GetRegionGen(unmapped) != kRegionGenOld) FAIL("GetRegionGen(uncovered) != old conservative");
+
+    // (4) GcMarkRangeOld marks a raw (non-Region, old-gen/LOH-like) VA range OLD.
+    // This is the layer-1 fix: old-gen/LOH pages are allocated by a separate
+    // allocator and would otherwise read a stale/clobbered byte; marking the
+    // range OLD makes the generation-aware barrier card them (CoreCLR
+    // set_region_gen_num analog).  Using a range on a fake heap aligned to +16MB
+    // guarantees it maps to dedicated (non-nursery) 4MB chunks.
+    void* raw = calloc(1, 16 * 1024 * 1024);
+    if (raw == nullptr) { FAIL("raw calloc failed"); return; }
+    uintptr_t rawb = reinterpret_cast<uintptr_t>(raw) & ~(static_cast<uintptr_t>(1) << kRegionGenShift);
+    rawb += (static_cast<uintptr_t>(1) << kRegionGenShift);  // 4MB-aligned, clear of low cells
+    uintptr_t raw_end = rawb + 1024 * 1024;                  // 1MB range
+    SetRegionGen(rawb, kRegionGenYoung);                     // simulate a prior young clobber
+    if (GetRegionGen(rawb) != kRegionGenYoung) FAIL("pre-mark: not young");
+    GcMarkRangeOld(rawb, raw_end);
+    bool all_old = true;
+    for (uintptr_t a = rawb; a < raw_end; a += (static_cast<uintptr_t>(1) << kRegionGenShift)) {
+        if (GetRegionGen(a) != kRegionGenOld) { all_old = false; break; }
+    }
+    if (!all_old) FAIL("GcMarkRangeOld did not mark all covered 4MB chunks OLD");
+    std::free(raw);
+
+    mgr.FreeRegion(nursery->id);
+    mgr.FreeRegion(gen1->id);
+    mgr.FreeRegion(tenured->id);
+    PASS();
+}
+
+// ════════════════════════════════════════════════════════════════════════════
 // Main
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -261,6 +327,7 @@ int main() {
     test_region_manager();
     test_nursery_allocate();
     test_card_table();
+    test_region_gen();
 
     printf("\nResults: %d tests, %d failures\n", g_tests, g_failures);
     return g_failures > 0 ? 1 : 0;

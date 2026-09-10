@@ -22,6 +22,7 @@
 #include "reflection_query_model.h"
 
 #include <chaos/profile.h>
+#include "register_vm_profiler.h"
 
 #include <chrono>
 #include <cstdio>
@@ -1935,6 +1936,13 @@ int main() {
     UnregisterThread();
 
     CHAOS_IL2CPP_PROFILE_DUMP();
+
+    // Dump per-method VM profiler anchors (VmProfileScope RDTSC cycles + calls).
+    // Compiles out entirely in non-PROFILE tiers. Mirrors the Scriban shutdown hook.
+#if CHAOS_IL2CPP_VM_PROFILER_ENABLED
+    chaos::il2cpp::interpreter::DumpProfilerToFile(nullptr);
+    chaos::il2cpp::interpreter::ResetProfiler();
+#endif
 
     std::printf("\n%d passed, %d failed\n", s_passed, s_failed);
 

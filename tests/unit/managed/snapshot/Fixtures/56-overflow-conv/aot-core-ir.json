@@ -1,0 +1,330 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-i4",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()",
+      "signature": "System.Int32 OverflowConvHelper::ConvOvfI4()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()",
+        "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-i4",
+        "signature": "System.Int32 OverflowConvHelper::ConvOvfI4()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfI4",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "conv.ovf.i4",
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 2
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u1",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.UInt8(System.Int32)",
+      "signature": "System.UInt8 OverflowConvHelper::ConvOvfU1(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.UInt8(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.UInt8(System.Int32)",
+        "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u1",
+        "signature": "System.UInt8 OverflowConvHelper::ConvOvfU1(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfU1",
+      "isStatic": true,
+      "returnType": "System.UInt8",
+      "returnAbi": {
+        "carrierKindCode": 5,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "conv.ovf.u1",
+          "ilOffset": 1,
+          "resultType": "System.UInt8"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 2
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-i2",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int16(System.Int32)",
+      "signature": "System.Int16 OverflowConvHelper::ConvOvfI2(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int16(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int16(System.Int32)",
+        "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-i2",
+        "signature": "System.Int16 OverflowConvHelper::ConvOvfI2(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfI2",
+      "isStatic": true,
+      "returnType": "System.Int16",
+      "returnAbi": {
+        "carrierKindCode": 6,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "conv.ovf.i2",
+          "ilOffset": 1,
+          "resultType": "System.Int16"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 2
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u2",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.UInt16(System.Int32)",
+      "signature": "System.UInt16 OverflowConvHelper::ConvOvfU2(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.UInt16(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.UInt16(System.Int32)",
+        "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u2",
+        "signature": "System.UInt16 OverflowConvHelper::ConvOvfU2(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfU2",
+      "isStatic": true,
+      "returnType": "System.UInt16",
+      "returnAbi": {
+        "carrierKindCode": 7,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "conv.ovf.u2",
+          "ilOffset": 1,
+          "resultType": "System.UInt16"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 2
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u4",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.UInt32(System.Int64)",
+      "signature": "System.UInt32 OverflowConvHelper::ConvOvfU4(System.Int64)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.UInt32(System.Int64)",
+        "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.UInt32(System.Int64)",
+        "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u4",
+        "signature": "System.UInt32 OverflowConvHelper::ConvOvfU4(System.Int64)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfU4",
+      "isStatic": true,
+      "returnType": "System.UInt32",
+      "returnAbi": {
+        "carrierKindCode": 9,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 10,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int64"
+        },
+        {
+          "op": "conv.ovf.u4",
+          "ilOffset": 1,
+          "resultType": "System.UInt32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 2
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-i8",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+      "signature": "System.Int64 OverflowConvHelper::ConvOvfI8(System.Single)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+        "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
+        "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-i8",
+        "signature": "System.Int64 OverflowConvHelper::ConvOvfI8(System.Single)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfI8",
+      "isStatic": true,
+      "returnType": "System.Int64",
+      "returnAbi": {
+        "carrierKindCode": 10,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 11,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Single"
+        },
+        {
+          "op": "conv.ovf.i8",
+          "ilOffset": 1,
+          "resultType": "System.Int64"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 2
+        }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u8",
+      "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.UInt64(System.Double)",
+      "signature": "System.UInt64 OverflowConvHelper::ConvOvfU8(System.Double)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.UInt64(System.Double)",
+        "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.UInt64(System.Double)",
+        "methodId": "snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u8",
+        "signature": "System.UInt64 OverflowConvHelper::ConvOvfU8(System.Double)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfU8",
+      "isStatic": true,
+      "returnType": "System.UInt64",
+      "returnAbi": {
+        "carrierKindCode": 14,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 12,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Double"
+        },
+        {
+          "op": "conv.ovf.u8",
+          "ilOffset": 1,
+          "resultType": "System.UInt64"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 2
+        }
+      ]
+    }
+  ]
+}

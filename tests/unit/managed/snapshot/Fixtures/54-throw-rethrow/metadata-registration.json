@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    { "registrationKind": "assembly", "slot": 0, "subjectId": "SnapshotTestFixtures" },
+    { "registrationKind": "type", "slot": 1, "subjectId": "SnapshotTestFixtures/ThrowHelper", "name": "ThrowHelper", "displayName": "ThrowHelper", "definitionSubjectId": "SnapshotTestFixtures/ThrowHelper" },
+    { "registrationKind": "method", "slot": 2, "subjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)", "name": "CheckPositive", "definitionSubjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)", "declaringTypeSubjectId": "SnapshotTestFixtures/ThrowHelper", "memberType": "System.Int32", "parameterCount": 1, "isImported": false },
+    { "registrationKind": "type", "slot": 3, "subjectId": "SnapshotTestFixtures/RethrowHelper", "name": "RethrowHelper", "displayName": "RethrowHelper", "definitionSubjectId": "SnapshotTestFixtures/RethrowHelper" },
+    { "registrationKind": "method", "slot": 4, "subjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()", "name": "RunRethrow", "definitionSubjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/RethrowHelper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false }
+  ]
+}

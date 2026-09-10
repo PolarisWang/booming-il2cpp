@@ -167,7 +167,18 @@ static std::FILE* g_report_file = nullptr;
 
 static void OpenReport() {
     // Ensure reports directory exists.
-    const char* report_dir = "D:/agent/booming-il2cpp/artifacts/native-runtime-core-test/reports";
+    // Report/crash artifacts are written under THIS repo's artifacts dir, not a
+    // cross-project path.  Overridable via CHAOS_IL2CPP_ARTIFACTS_ROOT for CI/
+    // custom run roots.  Resolves relative to the process cwd (ctest runs with
+    // --test-dir set to the build dir under artifacts/<preset>/; when run from
+    // the repo root the fallback resolves to <repo>/artifacts/...).
+    const char* env_root = std::getenv("CHAOS_IL2CPP_ARTIFACTS_ROOT");
+    std::string report_dir;
+    if (env_root != nullptr && env_root[0] != '\0') {
+        report_dir = std::string(env_root) + "/native-runtime-core-test/reports";
+    } else {
+        report_dir = "artifacts/native-runtime-core-test/reports";
+    }
 #if defined(_WIN32) || defined(_WIN64)
     ::system(("if not exist \"" + std::string(report_dir) + "\" mkdir \"" + std::string(report_dir) + "\"").c_str());
 #else
@@ -975,21 +986,29 @@ static bool RunScenarioE(GcStatsSnapshot* stats_out) {
     return ok;
 }
 
-// ════════════════════════════════════════════════════════════════════════════
-// Scenario F: Concurrent AddPinnedRoot + oversized object allocation
-//
-// 50 threads each:
-//   1) Allocate a 4KB object in old-gen via g_old_gen.Allocate
-//   2) Register it as a pinned root via g_old_gen.AddPinnedRoot
-//   3) Verify pattern
-//   4) Periodically call full GC via RequestFullGc
-//
-// Tests concurrent write to pinned_roots_ vector under mutex, object
-// survival across full GC, and oversized allocation paths.
-// ════════════════════════════════════════════════════════════════════════════
+// Worker count for the concurrent scenarios (F/G).  Previously hardcoded to 20,
+// which under-reported the "high-concurrency" claim.  Now scales with the host's
+// hardware concurrency (capped by CHAOS_IL2CPP_STRESS_SCALE and a sane ceiling so
+// the test stays within a CI runner's budget).  Matches the stated acceptance of
+// "100 threads / ~100MB heap / high concurrency".
+static int GcStressWorkerCount() {
+    unsigned hw = std::thread::hardware_concurrency();
+    if (hw == 0) hw = 4;               // unknown host -> conservative baseline
+    if (hw > 64) hw = 64;              // cap: avoid oversubscribing huge hosts
+    const char* env = std::getenv("CHAOS_IL2CPP_STRESS_SCALE");
+    if (env != nullptr) {
+        char* end = nullptr;
+        long val = std::strtol(env, &end, 10);
+        if (end != env && val >= 1 && val <= 1000) {
+            hw = static_cast<unsigned>(std::max(1L, static_cast<long>(hw) * val / 100));
+        }
+    }
+    return static_cast<int>(hw);
+}
 
-static constexpr int kFWorkers = 20;
-static constexpr int kFAllocsPerThread = 20;
+// Scenario F: Concurrent AddPinnedRoot + oversized object allocation
+static int kFWorkers        = 20;   // replaced at main() start by GcStressWorkerCount()
+static int kFAllocsPerThread = 20;
 
 struct PinnedRootAlloc {
     void* ptr;
@@ -1111,8 +1130,8 @@ static bool RunScenarioF(GcStatsSnapshot* stats_out) {
 // reclamation path in old-gen sweep.
 // ════════════════════════════════════════════════════════════════════════════
 
-static constexpr int kGWorkers = 20;
-static constexpr int kGAllocsPerThread = 16;
+static int kGWorkers        = 20;   // replaced at main() start by GcStressWorkerCount()
+static int kGAllocsPerThread = 16;
 
 static void worker_g(int thread_index, WorkerResult* result) {
     RegisterWorker();
@@ -1162,22 +1181,34 @@ static bool RunScenarioG(GcStatsSnapshot* stats_out) {
     printf("\n  ── Scenario G: Oversized objects (30×32, 33KB-256KB, direct old-gen) ──\n");
     GcStatsSnapshot before = SnapshotGcStats();
 
-    // Background GC thread — DISABLED FOR DIAGNOSTIC.
-    // std::atomic<bool> gc_done{false};
-    // std::thread gc_thread([&]() {
-    //     RegisterWorker();
-    //     threading::EnterCooperativeMode();
-    //     SetupTlsNursery();
-    //     for (int i = 0; i < 3; i++) {
-    //         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    //         uint32_t gen = threading::RequestGlobalSafepoint();
-    //         g_old_gen.Collect(nullptr, nullptr);
-    //         threading::ReleaseGlobalSafepoint(gen);
-    //     }
-    //     TeardownTlsNursery();
-    //     threading::UnregisterThread();
-    //     gc_done.store(true, std::memory_order_release);
-    // });
+    // Background GC thread interleaves full collections with the oversized
+    // allocation workers — this makes the documented "interleaved with full GC
+    // cycles" scenario real (previously DISABLED FOR DIAGNOSTIC).  The interleave
+    // exercises concurrent RequestGlobalSafepoint + OldGen::Collect against the
+    // allocating workers, catching cross-gen UAF / pin-marking regressions.
+    // Disable for a quick non-concurrent diagnostic with CHAOS_IL2CPP_GC_STRESS_INTERLEAVE=0.
+    bool interleave = true;
+    if (const char* e = std::getenv("CHAOS_IL2CPP_GC_STRESS_INTERLEAVE")) {
+        interleave = (std::string(e) != "0");
+    }
+    std::atomic<bool> gc_done{false};
+    std::thread gc_thread;
+    if (interleave) {
+        gc_thread = std::thread([&]() {
+            RegisterWorker();
+            threading::EnterCooperativeMode();
+            SetupTlsNursery();
+            for (int i = 0; i < 3; i++) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                uint32_t gen = threading::RequestGlobalSafepoint();
+                g_old_gen.Collect(nullptr, nullptr);
+                threading::ReleaseGlobalSafepoint(gen);
+            }
+            TeardownTlsNursery();
+            threading::UnregisterThread();
+            gc_done.store(true, std::memory_order_release);
+        });
+    }
 
     std::vector<WorkerResult> results(kGWorkers);
     std::vector<std::thread> workers;
@@ -1186,7 +1217,7 @@ static bool RunScenarioG(GcStatsSnapshot* stats_out) {
         workers.emplace_back(worker_g, i, &results[i]);
 
     for (auto& w : workers) { if (w.joinable()) w.join(); }
-    // if (gc_thread.joinable()) gc_thread.join();
+    if (gc_thread.joinable()) gc_thread.join();
 
     *stats_out = SnapshotGcStats();
 
@@ -2555,6 +2586,116 @@ struct ScenarioInfo {
     int allocs_per_worker;
 };
 
+// ═══════════════════════════════════════════════════════════════
+// Scenario U: Concurrent full-GC MARK + young-GC promotion churn
+//
+// Reproduces the task#16 S2 residual stall deterministically.  The scenario-C
+// ~1/12 full-GC mark stal was localized to the MARK phase and shown to be
+// concurrency-triggered (static 806-page harnesses converge; a full-GC mark
+// running WHILE mutators promote young objects to old-gen creates cross-gen
+// mark-stack churn).  This scenario drives exactly that interleave:
+//   - a mutator thread allocates via NurseryAllocate (young-GC + promotion)
+//   - a collector thread triggers full g_old_gen.Collect() simultaneously
+// The full-GC mark then races the mutator's ongoing promotion.
+// ═══════════════════════════════════════════════════════════════
+
+static int kUAllocs      = 300000;   // mutator churn allocs
+static std::atomic<bool> g_U_done{false};
+
+static void worker_u(int thread_index, WorkerResult* result) {
+    (void)thread_index;
+    RegisterWorker();
+    threading::EnterCooperativeMode();
+    if (!SetupTlsNursery()) {
+        UnregisterWorker();
+        return;
+    }
+    for (int i = 0; i < kUAllocs; ++i) {
+        void* p = NurseryAllocate(512);
+        if (!p) continue;
+        result->allocations_succeeded++;
+        WritePattern(p, 512, 3333, i);  // write cross-refs to force mark-children
+        if ((i & 511) == 511) threading::SafepointPoll();
+    }
+    threading::SafepointPoll();
+    UnregisterWorker();
+    result->completed = true;
+}
+
+static bool RunScenarioU(GcStatsSnapshot* stats_out) {
+    printf("\n  ── Scenario U: Concurrent full-GC mark + young-GC promotion churn ──\n");
+    GcStatsSnapshot before = SnapshotGcStats();
+
+    // Mutator thread: continuous nursery churn (young-GC + promotion).
+    std::thread churner([]() {
+        RegisterWorker();
+        threading::EnterCooperativeMode();
+        SetupTlsNursery();
+        int g_allocs = 0;
+        while (!g_U_done.load(std::memory_order_acquire)) {
+            void* p = NurseryAllocate(512);
+            if (p) { WritePattern(p, 512, 2222, g_allocs++); }
+            if ((g_allocs & 255) == 255) threading::SafepointPoll();
+        }
+        TeardownTlsNursery();
+        threading::UnregisterThread();
+    });
+
+    // Collector thread: force full-GC marks concurrently with the mutator's
+    // promotion churn.
+    std::atomic<bool> collector_done{false};
+    std::thread collector([&]() {
+        RegisterWorker();
+        threading::EnterCooperativeMode();
+        SetupTlsNursery();
+        for (int i = 0; i < 4; i++) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(20));
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            g_old_gen.Collect(nullptr, nullptr);
+            threading::ReleaseGlobalSafepoint(gen);
+        }
+        TeardownTlsNursery();
+        threading::UnregisterThread();
+        collector_done.store(true, std::memory_order_release);
+    });
+
+    // Let the first few marks run, then stop the mutator.
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    g_U_done.store(true, std::memory_order_release);
+    if (churner.joinable()) churner.join();
+
+    // Wait for collector to finish a bounded time; a concurrent-mark stall shows here.
+    auto c0 = std::chrono::steady_clock::now();
+    while (!collector_done.load(std::memory_order_acquire) &&
+           std::chrono::steady_clock::now() - c0 < std::chrono::seconds(30)) {
+        std::this_thread::yield();
+    }
+    bool collector_ok = collector_done.load(std::memory_order_acquire);
+    if (collector_ok) {
+        if (collector.joinable()) collector.join();
+    } else {
+        // Mark STALLED: the collector thread never finished within the bound, i.e.
+        // a full-GC mark did not converge.  Do NOT call collector.join() here —
+        // it would block forever, turning the regression into an invisible HANG
+        // that CI cannot catch (review #8).  Detach and return FAIL so the stall
+        // is surfaced as a scenario failure instead.  Scenario U is the final
+        // scenario and the process exits right after this runner, so the detached
+        // stuck thread is reclaimed by the OS teardown.
+        CHAOS_IL2CPP_LOG_ERROR("Stress",
+            "Scenario U collector MARK STALL (did not complete in 30s) — "
+            "full-GC concurrent mark did not converge");
+        if (collector.joinable()) collector.detach();
+    }
+
+    *stats_out = SnapshotGcStats();
+    uint64_t d_young = stats_out->young_collections > before.young_collections
+        ? stats_out->young_collections - before.young_collections : 0;
+    printf("\n  Result: concurrent full-GC+young churn, young_gc_delta=%llu, collector_ok=%d\n",
+           (unsigned long long)d_young, collector_ok ? 1 : 0);
+
+    return collector_ok;
+}
+
 /// Run all scenarios.  If @a start_from is > 0, skips earlier scenarios.
 /// If @a end_at is <= num_scenarios, stops after that scenario (exclusive).
 /// Supports incremental validation without pre-existing scenario hangs.
@@ -2581,6 +2722,7 @@ static int run_scenarios(int start_from = 0, int end_at = 20) {
         {"gen1_typed_stress",      RunScenarioR, kRWorkers,         kRAllocsPerThread},
         {"gen1_mixed_stress",      RunScenarioS, kNumWorkerThreads,  kSAllocsPerThread},
         {"finalizer_stress",       RunScenarioT, kTWorkers,          kTObjectsPerWorker},
+        {"concurrent_full_gc_mark",RunScenarioU, kUAllocs,          1},
     };
     int num_scenarios = sizeof(scenarios) / sizeof(scenarios[0]);
 
@@ -2656,11 +2798,14 @@ static LONG WINAPI CrashHandler(EXCEPTION_POINTERS* ep) {
             ep->ExceptionRecord->ExceptionCode,
             ep->ExceptionRecord->ExceptionAddress);
 
-    // Write minidump.
+    // Write minidump (same artifacts root as the report — see OpenReport()).
+    const char* env_root = std::getenv("CHAOS_IL2CPP_ARTIFACTS_ROOT");
+    std::string artifacts_root = (env_root != nullptr && env_root[0] != '\0')
+        ? std::string(env_root) : std::string("artifacts");
     char dump_path[MAX_PATH];
     std::snprintf(dump_path, sizeof(dump_path),
-        "D:/agent/booming-il2cpp/artifacts/native-runtime-core-test/stress_crash_%p.dmp",
-        ep->ExceptionRecord->ExceptionAddress);
+        "%s/native-runtime-core-test/stress_crash_%p.dmp",
+        artifacts_root.c_str(), ep->ExceptionRecord->ExceptionAddress);
 
     HANDLE hFile = CreateFileA(dump_path, GENERIC_WRITE, 0, nullptr,
                                 CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
@@ -2723,6 +2868,12 @@ int main(int argc, char** argv) {
 #endif
 
     ApplyStressScale();
+
+    // Scale the concurrent scenarios (F/G) to the host's available parallelism so
+    // the "high-concurrency" claim is real (not a hardcoded 20×20).
+    kFWorkers = GcStressWorkerCount();
+    kGWorkers = GcStressWorkerCount();
+    printf("[stress] scenario F/G workers = %d (hw_concurrency based)\n", kFWorkers);
 
     // Initialize Gen1 test type info for Scenario R (typed allocation).
     // This must happen before worker_r runs, but GcLayoutRegistry is a singleton

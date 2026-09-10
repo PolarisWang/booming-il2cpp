@@ -1,0 +1,15 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "managedClosureManifest",
+  "assemblyName": "SnapshotTestFixtures",
+  "entrySubjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
+  "inputAssemblyPath": "SnapshotTestFixtures.dll",
+  "fullAssemblyClosure": false,
+  "inputModuleVersionId": "00000000-0000-0000-0000-000000000067",
+  "artifacts": [
+    { "kind": "nativeAotLoweringPlan", "path": "native-aot.lowering-plan.json" },
+    { "kind": "aotCoreIr", "path": "aot-core-ir.json" },
+    { "kind": "metadataRegistration", "path": "metadata-registration.json" },
+    { "kind": "supplementalMetadataTemplate", "path": "hot-update/supplemental-metadata-template.json" }
+  ]
+}

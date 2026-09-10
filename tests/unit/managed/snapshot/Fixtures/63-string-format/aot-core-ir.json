@@ -1,0 +1,91 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.string-format-helper.test-format-one",
+      "subjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
+      "signature": "System.Int32 StringFormatHelper::TestFormatOne()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/StringFormatHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
+        "methodId": "snapshot-test-fixtures.string-format-helper.test-format-one",
+        "signature": "System.Int32 StringFormatHelper::TestFormatOne()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_StringFormatHelper_TestFormatOne",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "operand": "Value: {0}",
+          "ilOffset": 0,
+          "resultType": "System.String"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Int32",
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          }
+        },
+        {
+          "op": "call",
+          "ilOffset": 3,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Format(System.String,System.Object)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Format(System.String,System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Format(System.String,System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "pop",
+          "ilOffset": 4,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 5,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 6
+        }
+      ]
+    }
+  ]
+}

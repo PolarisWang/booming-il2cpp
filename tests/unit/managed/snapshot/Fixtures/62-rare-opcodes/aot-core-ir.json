@@ -1,0 +1,233 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.rare-ops-helper.test-initblk",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32&)",
+      "signature": "System.Void RareOpsHelper::TestInitBlk(System.Int32&)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/RareOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32&)",
+        "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32&)",
+        "methodId": "snapshot-test-fixtures.rare-ops-helper.test-initblk",
+        "signature": "System.Void RareOpsHelper::TestInitBlk(System.Int32&)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_RareOpsHelper_TestInitBlk",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": { "carrierKindCode": 0, "typeShape": 2 },
+      "parameterCount": 1,
+      "parameterAbis": [
+        { "carrierKindCode": 2, "typeShape": 2 }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldarg", "operand": 0, "ilOffset": 0, "resultType": "System.Int32&" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 4, "ilOffset": 2, "resultType": "System.Int32" },
+        { "op": "initblk", "ilOffset": 3, "resultType": "System.Void" },
+        { "op": "ret", "ilOffset": 4 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.rare-ops-helper.test-starg",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+      "signature": "System.Int32 RareOpsHelper::TestStarg(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/RareOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
+        "methodId": "snapshot-test-fixtures.rare-ops-helper.test-starg",
+        "signature": "System.Int32 RareOpsHelper::TestStarg(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_RareOpsHelper_TestStarg",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 1,
+      "parameterAbis": [
+        { "carrierKindCode": 1, "typeShape": 2 }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 42, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "starg", "operand": 0, "ilOffset": 1, "resultType": "System.Void" },
+        { "op": "ldarg", "operand": 0, "ilOffset": 2, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 3 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.rare-ops-helper.test-conv-run",
+      "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+      "signature": "System.Int32 RareOpsHelper::TestConvRUn(System.Single)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/RareOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+        "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
+        "methodId": "snapshot-test-fixtures.rare-ops-helper.test-conv-run",
+        "signature": "System.Int32 RareOpsHelper::TestConvRUn(System.Single)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_RareOpsHelper_TestConvRUn",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 1,
+      "parameterAbis": [
+        { "carrierKindCode": 11, "typeShape": 2 }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldarg", "operand": 0, "ilOffset": 0, "resultType": "System.Single" },
+        { "op": "conv.r.un", "ilOffset": 1, "resultType": "System.Double" },
+        { "op": "pop", "ilOffset": 2, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 3, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 4 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.more-rare-ops-helper.run-arglist",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()",
+      "signature": "System.Int32 MoreRareOpsHelper::RunArglist()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()",
+        "methodId": "snapshot-test-fixtures.more-rare-ops-helper.run-arglist",
+        "signature": "System.Int32 MoreRareOpsHelper::RunArglist()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunArglist",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "arglist", "ilOffset": 0, "resultType": "System.RuntimeArgumentHandle" },
+        { "op": "pop", "ilOffset": 1, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 2, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 3 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.more-rare-ops-helper.run-mkrefany",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()",
+      "signature": "System.Int32 MoreRareOpsHelper::RunMkrefany()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()",
+        "methodId": "snapshot-test-fixtures.more-rare-ops-helper.run-mkrefany",
+        "signature": "System.Int32 MoreRareOpsHelper::RunMkrefany()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunMkrefany",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldloca", "operand": 0, "ilOffset": 0, "resultType": "System.Int32&" },
+        { "op": "mkrefany", "operand": "System.Int32", "ilOffset": 1, "resultType": "System.TypedReference", "targetReference": { "kind": 1, "assemblyName": "System.Private.CoreLib", "subjectId": "System.Private.CoreLib/System.Int32", "typeShape": 2, "arrayElementTypeShape": 0, "declaringTypeShape": 0 } },
+        { "op": "pop", "ilOffset": 2, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 3, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 4 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.more-rare-ops-helper.run-refanyval",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()",
+      "signature": "System.Int32 MoreRareOpsHelper::RunRefanyval()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()",
+        "methodId": "snapshot-test-fixtures.more-rare-ops-helper.run-refanyval",
+        "signature": "System.Int32 MoreRareOpsHelper::RunRefanyval()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunRefanyval",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 1 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.more-rare-ops-helper.run-refanytype",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()",
+      "signature": "System.Int32 MoreRareOpsHelper::RunRefanytype()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()",
+        "methodId": "snapshot-test-fixtures.more-rare-ops-helper.run-refanytype",
+        "signature": "System.Int32 MoreRareOpsHelper::RunRefanytype()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunRefanytype",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 1 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.more-rare-ops-helper.run-jmp",
+      "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()",
+      "signature": "System.Int32 MoreRareOpsHelper::RunJmp()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()",
+        "methodId": "snapshot-test-fixtures.more-rare-ops-helper.run-jmp",
+        "signature": "System.Int32 MoreRareOpsHelper::RunJmp()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunJmp",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 1 }
+      ]
+    }
+  ]
+}

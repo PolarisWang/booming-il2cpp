@@ -1,0 +1,84 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.multi-dispatcher.dispatch-both",
+      "subjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()",
+      "signature": "System.Int32 MultiDispatcher::DispatchBoth()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/MultiDispatcher",
+        "definitionSubjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()",
+        "methodId": "snapshot-test-fixtures.multi-dispatcher.dispatch-both",
+        "signature": "System.Int32 MultiDispatcher::DispatchBoth()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_MultiDispatcher_DispatchBoth",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 10, "ilOffset": 0, "resultType": "System.Int32" },
+        {
+          "op": "call",
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "callee": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
+          "reference": { "assemblyName": "SnapshotTestFixtures", "subjectKind": "method", "subjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)" },
+          "targetReference": { "kind": 3, "assemblyName": "SnapshotTestFixtures", "subjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)", "typeShape": 0, "arrayElementTypeShape": 0, "declaringTypeShape": 0 },
+          "dispatchKindCode": 4
+        },
+        { "op": "stloc", "operand": 0, "ilOffset": 2, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 20, "ilOffset": 3, "resultType": "System.Int32" },
+        {
+          "op": "call",
+          "ilOffset": 4,
+          "resultType": "System.Int32",
+          "callee": "SomeOtherAssembly/ExternalClass::Compute:System.Int32(System.Int32)",
+          "reference": { "assemblyName": "SomeOtherAssembly", "subjectKind": "method", "subjectId": "SomeOtherAssembly/ExternalClass::Compute:System.Int32(System.Int32)" },
+          "targetReference": { "kind": 3, "assemblyName": "SomeOtherAssembly", "subjectId": "SomeOtherAssembly/ExternalClass::Compute:System.Int32(System.Int32)", "typeShape": 0, "arrayElementTypeShape": 0, "declaringTypeShape": 0 },
+          "dispatchKindCode": 4
+        },
+        { "op": "stloc", "operand": 1, "ilOffset": 5, "resultType": "System.Void" },
+        { "op": "ldloc", "operand": 0, "ilOffset": 6, "resultType": "System.Int32" },
+        { "op": "ldloc", "operand": 1, "ilOffset": 7, "resultType": "System.Int32" },
+        { "op": "add", "ilOffset": 8, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 9 }
+      ]
+    },
+    {
+      "methodId": "snapshot-test-fixtures.internal-helper.double",
+      "subjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
+      "signature": "System.Int32 InternalHelper::Double(System.Int32)",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/InternalHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
+        "subjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
+        "methodId": "snapshot-test-fixtures.internal-helper.double",
+        "signature": "System.Int32 InternalHelper::Double(System.Int32)"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_InternalHelper_Double",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 1,
+      "parameterAbis": [{ "carrierKindCode": 1, "typeShape": 2 }],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldarg", "operand": 0, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ldc.i4", "operand": 2, "ilOffset": 1, "resultType": "System.Int32" },
+        { "op": "mul", "ilOffset": 2, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 3 }
+      ]
+    }
+  ]
+}

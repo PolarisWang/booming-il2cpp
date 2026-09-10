@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/LdtokenHelper",
+      "name": "LdtokenHelper",
+      "displayName": "LdtokenHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdtokenHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()",
+      "name": "RunLdtoken",
+      "definitionSubjectId": "SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdtokenHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

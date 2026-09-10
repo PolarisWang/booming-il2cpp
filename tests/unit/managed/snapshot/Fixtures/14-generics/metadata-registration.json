@@ -1,0 +1,76 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/GenericHelper",
+      "name": "GenericHelper",
+      "displayName": "GenericHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/GenericHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()",
+      "name": "UseGeneric",
+      "definitionSubjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/GenericHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "type",
+      "slot": 3,
+      "subjectId": "SnapshotTestFixtures/Wrapper`1",
+      "name": "Wrapper`1",
+      "displayName": "Wrapper<T>",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 4,
+      "subjectId": "SnapshotTestFixtures/Wrapper<System.Int32>",
+      "name": "Wrapper<System.Int32>",
+      "displayName": "Wrapper<System.Int32>",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 5,
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "name": "Int32",
+      "displayName": "Int32",
+      "definitionSubjectId": "System.Private.CoreLib/System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(System.Int32)",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper`1",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "SnapshotTestFixtures/Wrapper<System.Int32>::.ctor:System.Void(System.Int32)",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper<System.Int32>",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    }
+  ]
+}

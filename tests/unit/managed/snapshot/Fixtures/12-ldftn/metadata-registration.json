@@ -1,0 +1,49 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/LdftnHelper",
+      "name": "LdftnHelper",
+      "displayName": "LdftnHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+      "name": "GetFnPtr",
+      "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdftnHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "type",
+      "slot": 3,
+      "subjectId": "SnapshotTestFixtures/TargetHelper",
+      "name": "TargetHelper",
+      "displayName": "TargetHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/TargetHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()",
+      "name": "GetValue",
+      "definitionSubjectId": "SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/TargetHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

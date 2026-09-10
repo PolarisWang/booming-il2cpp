@@ -1,0 +1,69 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/CallVirtHelper",
+      "name": "CallVirtHelper",
+      "displayName": "CallVirtHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/CallVirtHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
+      "name": "CreateAndUse",
+      "definitionSubjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/CallVirtHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "type",
+      "slot": 3,
+      "subjectId": "SnapshotTestFixtures/InstanceHelper",
+      "name": "InstanceHelper",
+      "displayName": "InstanceHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/InstanceHelper",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
+      "name": "GetValue",
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/InstanceHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "field",
+      "slot": 6,
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::_val",
+      "name": "_val",
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper::_val",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/InstanceHelper",
+      "memberType": "System.Int32"
+    }
+  ]
+}

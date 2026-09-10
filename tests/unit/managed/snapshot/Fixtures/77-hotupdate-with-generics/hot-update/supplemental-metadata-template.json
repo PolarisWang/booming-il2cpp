@@ -1,0 +1,66 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper<System.Int32>",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1",
+          "typeArguments": ["System.Private.CoreLib/System.Int32"]
+        },
+        "sharedGenericBodyId": { "value": "Wrapper`1[[System.Int32]]" },
+        "instantiationStubId": { "value": "Wrapper$1_System_Int32_" },
+        "supportKindCode": 3,
+        "specializationKindCode": 2
+      },
+      "metadataToken": 33554433
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper<System.String>",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1",
+          "typeArguments": ["System.Private.CoreLib/System.String"]
+        },
+        "sharedGenericBodyId": { "value": "Wrapper`1[[System.String]]" },
+        "instantiationStubId": { "value": "Wrapper$1_System_String_" },
+        "supportKindCode": 3,
+        "specializationKindCode": 2
+      },
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/Wrapper<System.Int32>::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper<System.Int32>",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "SnapshotTestFixtures/Wrapper`1",
+          "typeArguments": ["System.Private.CoreLib/System.Int32"]
+        },
+        "sharedGenericBodyId": { "value": "Wrapper`1[[System.Int32]]" },
+        "instantiationStubId": { "value": "Wrapper$1_System_Int32__ctor" },
+        "supportKindCode": 3,
+        "specializationKindCode": 2
+      },
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

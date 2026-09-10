@@ -1,0 +1,49 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/InstanceFieldHelper",
+      "name": "InstanceFieldHelper",
+      "displayName": "InstanceFieldHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceFieldHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+      "name": "CreateAndUseFields",
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/InstanceFieldHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "type",
+      "slot": 3,
+      "subjectId": "SnapshotTestFixtures/HasInstanceFields",
+      "name": "HasInstanceFields",
+      "displayName": "HasInstanceFields",
+      "definitionSubjectId": "SnapshotTestFixtures/HasInstanceFields"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "name": ".ctor",
+      "definitionSubjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/HasInstanceFields",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    }
+  ]
+}

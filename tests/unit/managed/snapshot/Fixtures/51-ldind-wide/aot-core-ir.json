@@ -1,0 +1,52 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.ldind-wide-helper.run-ldind-wide",
+      "subjectId": "SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()",
+      "signature": "System.Int32 LdindWideHelper::RunLdindWide()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/LdindWideHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()",
+        "methodId": "snapshot-test-fixtures.ldind-wide-helper.run-ldind-wide",
+        "signature": "System.Int32 LdindWideHelper::RunLdindWide()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_LdindWideHelper_RunLdindWide",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 200, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "stloc", "operand": 0, "ilOffset": 1, "resultType": "System.Void" },
+        { "op": "ldloca", "operand": 0, "ilOffset": 2, "resultType": "System.Int32&" },
+        { "op": "ldind.i2", "ilOffset": 3, "resultType": "System.Int16" },
+        { "op": "pop", "ilOffset": 4, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 5, "resultType": "System.Int32" },
+        { "op": "stloc", "operand": 0, "ilOffset": 6, "resultType": "System.Void" },
+        { "op": "ldloca", "operand": 0, "ilOffset": 7, "resultType": "System.Int32&" },
+        { "op": "ldind.r4", "ilOffset": 8, "resultType": "System.Single" },
+        { "op": "pop", "ilOffset": 9, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 10, "resultType": "System.Int32" },
+        { "op": "stloc", "operand": 0, "ilOffset": 11, "resultType": "System.Void" },
+        { "op": "ldloca", "operand": 0, "ilOffset": 12, "resultType": "System.Int32&" },
+        { "op": "ldind.r8", "ilOffset": 13, "resultType": "System.Double" },
+        { "op": "pop", "ilOffset": 14, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 15, "resultType": "System.Int32" },
+        { "op": "stloc", "operand": 0, "ilOffset": 16, "resultType": "System.Void" },
+        { "op": "ldloca", "operand": 0, "ilOffset": 17, "resultType": "System.Int32&" },
+        { "op": "ldind.ref", "ilOffset": 18, "resultType": "System.Object" },
+        { "op": "pop", "ilOffset": 19, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 0, "ilOffset": 20, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 21 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "generic-managed-entry",
+  "assemblyName": "SnapshotTestFixtures",
+  "entrySubjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "SnapshotTestFixtures_ExternalCaller_CallExternal",
+  "entryMethodToken": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
+  "workloadAbi": "int(int32)"
+}

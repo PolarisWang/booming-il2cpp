@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "generic-managed-entry",
+  "assemblyName": "SnapshotTestFixtures",
+  "entrySubjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "SnapshotTestFixtures_StringFormatHelper_TestFormatOne",
+  "entryMethodToken": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
+  "workloadAbi": "int(int32)"
+}

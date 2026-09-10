@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <RunConfiguration>
+    <EnvironmentVariables>
+      <SNAPSHOT_UPDATE>1</SNAPSHOT_UPDATE>
+    </EnvironmentVariables>
+  </RunConfiguration>
+</RunSettings>

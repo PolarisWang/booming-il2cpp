@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    { "registrationKind": "assembly", "slot": 0, "subjectId": "SnapshotTestFixtures" },
+    { "registrationKind": "type", "slot": 1, "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper", "name": "SealedClassVirtualHelper", "displayName": "SealedClassVirtualHelper", "definitionSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper" },
+    { "registrationKind": "method", "slot": 2, "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()", "name": "RunSealedVirtual", "definitionSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false },
+    { "registrationKind": "type", "slot": 3, "subjectId": "SnapshotTestFixtures/SealedHelper", "name": "SealedHelper", "displayName": "SealedHelper", "definitionSubjectId": "SnapshotTestFixtures/SealedHelper" },
+    { "registrationKind": "method", "slot": 4, "subjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()", "name": "GetValueVirtual", "definitionSubjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()", "declaringTypeSubjectId": "SnapshotTestFixtures/SealedHelper", "memberType": "System.Int32", "parameterCount": 0, "isImported": false }
+  ]
+}

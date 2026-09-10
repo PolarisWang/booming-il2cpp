@@ -1,0 +1,93 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.collections-helper.test-list",
+      "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
+      "signature": "System.Int32 CollectionsHelper::TestList()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/CollectionsHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
+        "methodId": "snapshot-test-fixtures.collections-helper.test-list",
+        "signature": "System.Int32 CollectionsHelper::TestList()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_CollectionsHelper_TestList",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "operand": "System.Void System.Collections.Generic.List`1<System.Int32>::.ctor()",
+          "ilOffset": 0,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Collections.Generic.List`1<System.Int32>::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Collections.Generic.List`1<System.Int32>::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Collections.Generic.List`1<System.Int32>",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "callvirt",
+          "operand": "System.Void System.Collections.Generic.List`1<System.Int32>::Add(System.Int32)",
+          "ilOffset": 2,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Collections.Generic.List`1<System.Int32>::Add(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Collections.Generic.List`1<System.Int32>::Add(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Collections.Generic.List`1<System.Int32>::Add(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1
+        },
+        {
+          "op": "pop",
+          "ilOffset": 3,
+          "resultType": "System.Void"
+        },
+        {
+          "op": "ldc.i4",
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "ret",
+          "ilOffset": 5
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.arithmetic-ops.run-add",
+      "subjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
+      "signature": "System.Int32 ArithmeticOps::RunAdd()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/ArithmeticOps",
+        "definitionSubjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
+        "methodId": "snapshot-test-fixtures.arithmetic-ops.run-add",
+        "signature": "System.Int32 ArithmeticOps::RunAdd()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_ArithmeticOps_RunAdd",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": { "carrierKindCode": 1, "typeShape": 2 },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 1, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "ret", "ilOffset": 1 }
+      ]
+    }
+  ]
+}

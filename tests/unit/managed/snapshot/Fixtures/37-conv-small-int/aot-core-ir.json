@@ -1,0 +1,47 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.conv-small-int-helper.run-conv-small",
+      "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+      "signature": "System.Int32 ConvSmallIntHelper::RunConvSmall()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
+        "methodId": "snapshot-test-fixtures.conv-small-int-helper.run-conv-small",
+        "signature": "System.Int32 ConvSmallIntHelper::RunConvSmall()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_ConvSmallIntHelper_RunConvSmall",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 4,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        { "op": "ldc.i4", "operand": 42, "ilOffset": 0, "resultType": "System.Int32" },
+        { "op": "conv.i1", "ilOffset": 1, "resultType": "System.Int8" },
+        { "op": "stloc", "operand": 0, "ilOffset": 2, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 42, "ilOffset": 3, "resultType": "System.Int32" },
+        { "op": "conv.i2", "ilOffset": 4, "resultType": "System.Int16" },
+        { "op": "stloc", "operand": 1, "ilOffset": 5, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 42, "ilOffset": 6, "resultType": "System.Int32" },
+        { "op": "conv.u1", "ilOffset": 7, "resultType": "System.UInt8" },
+        { "op": "stloc", "operand": 2, "ilOffset": 8, "resultType": "System.Void" },
+        { "op": "ldc.i4", "operand": 42, "ilOffset": 9, "resultType": "System.Int32" },
+        { "op": "conv.u2", "ilOffset": 10, "resultType": "System.UInt16" },
+        { "op": "stloc", "operand": 3, "ilOffset": 11, "resultType": "System.Void" },
+        { "op": "ldloc", "operand": 0, "ilOffset": 12 },
+        { "op": "ret", "ilOffset": 13 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/DelegateHelper",
+      "name": "DelegateHelper",
+      "displayName": "DelegateHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/DelegateHelper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
+      "name": "RunDelegate",
+      "definitionSubjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/DelegateHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "type",
+      "slot": 3,
+      "subjectId": "SnapshotTestFixtures/Helper",
+      "name": "Helper",
+      "displayName": "Helper",
+      "definitionSubjectId": "SnapshotTestFixtures/Helper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+      "name": "GetValue",
+      "definitionSubjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

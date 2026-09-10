@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotTestFixtures"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotTestFixtures/LdindI1Helper",
+      "name": "LdindI1Helper",
+      "displayName": "LdindI1Helper",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindI1Helper"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()",
+      "name": "RunLdindI1",
+      "definitionSubjectId": "SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/LdindI1Helper",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

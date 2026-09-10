@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "snapshot-test-fixtures.boxing-helper.box-and-unbox",
+      "subjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "signature": "System.Int32 BoxingHelper::BoxAndUnbox()",
+      "identity": {
+        "assemblyName": "SnapshotTestFixtures",
+        "declaringTypeSubjectId": "SnapshotTestFixtures/BoxingHelper",
+        "definitionSubjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
+        "subjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
+        "methodId": "snapshot-test-fixtures.boxing-helper.box-and-unbox",
+        "signature": "System.Int32 BoxingHelper::BoxAndUnbox()"
+      },
+      "nativeSymbol": "SnapshotTestFixtures_BoxingHelper_BoxAndUnbox",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "operand": 42,
+          "ilOffset": 0,
+          "resultType": "System.Int32"
+        },
+        {
+          "op": "box",
+          "operand": "System.Int32",
+          "ilOffset": 1,
+          "resultType": "System.Object",
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9
+        },
+        {
+          "op": "unbox.any",
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 2,
+            "arrayElementTypeShape": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 11
+        },
+        {
+          "op": "ret",
+          "ilOffset": 3
+        }
+      ]
+    }
+  ]
+}

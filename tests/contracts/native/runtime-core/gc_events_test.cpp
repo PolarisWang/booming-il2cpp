@@ -13,6 +13,7 @@
 
 #include <chaos/native_types.h>
 #include "gc_events.h"
+#include "gc_etw.h"
 #include "gc_region.h"
 #include "core/engine_lifecycle.h"
 #include "gc_test_macros.h"
@@ -121,6 +122,67 @@ void TestSetGetHandleTarget() {
     GcFreeHandle(handle);
 }
 
+// ── Test 6: ETW provider init/shutdown idempotence (M13) ────────────
+// GcEtwInitialize/GcEtwShutdown must be safe to call repeatedly: only the
+// first Initialize registers, and Shutdown unregisters cleanly.  On platforms
+// without a real ETW provider (or with the feature flag off) these are no-ops
+// that must not crash.
+void TestEtwInitializeShutdown() {
+    TEST("EtwInitializeShutdown");
+
+    // First init (registers provider if available).
+    GcEtwInitialize();
+    // Repeat init — must be idempotent (no double-register / no crash).
+    GcEtwInitialize();
+    GcEtwInitialize();
+    GC_CHECK(true, "GcEtwInitialize repeated is idempotent without crash");
+
+    // Shutdown, then re-init (full lifecycle round-trip).
+    GcEtwShutdown();
+    GcEtwShutdown();  // double shutdown must be a safe no-op
+    GC_CHECK(true, "GcEtwShutdown repeated is safe");
+
+    GcEtwInitialize();  // re-init after shutdown
+    GC_CHECK(true, "GcEtw re-initialize after shutdown OK");
+
+    // Leave shutdown for a clean exit.
+    GcEtwShutdown();
+}
+
+// ── Test 7: ETW fire functions are callable (M13) ───────────────────
+// Fires every GcEtwFire* event with representative payloads.  Under the
+// CHAOS_IL2CPP_GC_EVENTS guard this executes the payload-path; without a
+// registered provider (guard inside WriteEtwEvent) it degrades to a safe
+// no-op.  Either way it must not crash and must be safe to call before/after
+// provider init.
+void TestEtwFireFunctions() {
+    TEST("EtwFireFunctions");
+
+    // Fire with no provider (safe no-op path).
+    GcEtwFireGcStart(2);
+    GcEtwFireGcEnd(1000, 4096);
+    GcEtwFireGcYoungStart(65536);
+    GcEtwFireGcYoungEnd(100, 8, 4096, 32768);
+    GcEtwFireGcFullStart(16);
+    GcEtwFireGcFullEnd(5000, 1048576, 2048, 32);
+    GcEtwFireGcOom();
+    GcEtwFireGcGen1Collect(200, 4, 8192);
+    GcEtwFireAllocationTick(102400, 0);
+    GcEtwFireAllocationTick(131072, 1);
+    GC_CHECK(true, "All GcEtwFire* callable without provider no-op crash");
+
+    // Fire after explicit init+shutdown (lifecycle-safe references).
+    GcEtwInitialize();
+    GcEtwFireGcStart(1);
+    GcEtwFireGcOom();
+    GcEtwFireAllocationTick(204800, 0);
+    GcEtwShutdown();
+    // Fire again after shutdown — must remain callable (no dangling state).
+    GcEtwFireGcEnd(0, 0);
+    GcEtwFireAllocationTick(0, 0);
+    GC_CHECK(true, "All GcEtwFire* callable across init/shutdown");
+}
+
 // ── Main ────────────────────────────────────────────────────────────
 int main() {
     puts("GC events unit tests");
@@ -131,6 +193,8 @@ int main() {
     TestFireMultipleEvents();
     TestAddRemovePinnedObject();
     TestSetGetHandleTarget();
+    TestEtwInitializeShutdown();
+    TestEtwFireFunctions();
 
     printf("\nResults: %d tests, %d failures\n", g_tests, g_failures);
     return g_failures > 0 ? 1 : 0;

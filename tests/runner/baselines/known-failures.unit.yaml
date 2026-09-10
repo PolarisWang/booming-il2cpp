@@ -1,0 +1,19 @@
+# Known failures for the unit (dotnet) layer — recorded 2026-08-04, cleared 2026-08-14.
+#
+# Project rule: there is NO "skip". These tests are RUN and REPORTED as FAIL.
+# This file only LISTS which failures are known/expected so the test driver can
+# (a) label them [KNOWN-FAIL] transparently and (b) treat a group whose only
+# failures are these as "OK for gating" (exit code 0) WITHOUT hiding them.
+#
+# When these are fixed, remove the corresponding entry here; the test flips to
+# green and the driver then fails the gate if they regress.
+#
+# ABI correctness debt repaid 2026-08-14: the 13 ResolveAbiSlot_* tests (reflection
+# needed a 4-arg signature), 7 UnknownOpWarning_* (retargeted to MapUnknownOp),
+# and the CodeGenStage/Emission/Lowering/NativeAotEmitter helper tests were fixed.
+# Two genuine codegen bugs were also fixed: BuildGeneratedSources paging dropped
+# methods with an empty NativeSymbol (suppressing page emission), and
+# AppendMissingValueTypeTypedefsForHeader crashed on a negative Substring length.
+# known-failures baseline is now empty: all unit tests pass.
+version: 1
+known: []

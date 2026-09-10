@@ -1,0 +1,411 @@
+/// gc_test_base.h — Shared test fixture hierarchy for GC tests (GoogleTest).
+///
+/// Four-level hierarchy:
+///   GcTestBase       — common SetUp/TearDown (InitYoungGeneration + thread state)
+///   GcUnitTestBase   — adds default TypeInfo + GcLayout registration
+///   GcStressTestBase — adds multi-threaded stress test helpers
+///   GcBenchTestBase  — adds RDTSC timing helpers
+///
+/// All fixtures perform automatic resource-leak detection in TearDown():
+///   - Thread count (registered threads must return to baseline)
+///   - TLAB state (must not be left in an inconsistent state)
+///
+/// Usage:
+///   TEST_F(GcUnitTestBase, MyTest) { ... }
+///   TEST_F(GcStressTestBase, ScenarioS) { ... }
+
+#ifndef CHAOS_IL2CPP_GC_TEST_BASE_H_
+#define CHAOS_IL2CPP_GC_TEST_BASE_H_
+
+#include <algorithm>
+#include <atomic>
+#include <cstdint>
+#include <cstdio>
+#include <functional>
+#include <thread>
+#include <vector>
+
+#if defined(_MSC_VER)
+#include <intrin.h>
+#endif
+
+#include <chaos/native_types.h>
+#include "gc_layout.h"
+#include "gc_old_gen.h"
+#include "gc_heap_manager.h"   // SetThreadHeap/ClearThreadHeap for Server GC
+#include "gc_region.h"
+#include "gc_scheduler.h"
+#include "gc_stats.h"
+#include "gc_young_gen.h"
+#include "thread_state.h"
+
+#include <gtest/gtest.h>
+
+namespace chaos { namespace il2cpp { namespace runtime_core {
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GcResourceSnapshot — lightweight resource-state snapshot for leak detection
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Captures the current state of global GC resources. GcTestBase captures one
+// at the end of SetUp() and asserts in TearDown() that no resources leaked.
+// ═══════════════════════════════════════════════════════════════════════════
+
+struct GcResourceSnapshot {
+    int32_t thread_count = 0;
+    CHAOS_IL2CPP_UINT32 active_region_count = 0;
+    int poh_region_count = 0;
+    bool tlab_clean = true;  // true = tls_tlab.start == nullptr
+
+    void Capture() {
+        thread_count = threading::GetThreadCount();
+        active_region_count = RegionManager::Instance().ActiveRegionCount();
+        poh_region_count = RegionManager::Instance().GetPohRegionCount();
+        tlab_clean = (tls_tlab.start == nullptr);
+    }
+
+    /// Assert that current state matches this snapshot (within tolerance).
+    /// Thread count allows ±2 for BGC/Finalizer thread lifecycle.
+    /// Region count changes are logged as warnings, not failures.
+    void ExpectNoLeaks(const char* test_name) const {
+        GcResourceSnapshot current;
+        current.Capture();
+
+        // Thread count: allow ±2 to tolerate BGC + Finalizer thread lifecycle.
+        int32_t thread_diff = current.thread_count - thread_count;
+        if (thread_diff < -2 || thread_diff > 2) {
+            EXPECT_EQ(current.thread_count, thread_count)
+                << "[" << test_name << "] Thread leak detected: "
+                << current.thread_count << " now vs " << thread_count << " at setup";
+        }
+
+        EXPECT_EQ(current.tlab_clean, tlab_clean)
+            << "[" << test_name << "] TLAB state changed: "
+            << (current.tlab_clean ? "clean" : "dirty") << " now vs "
+            << (tlab_clean ? "clean" : "dirty") << " at setup";
+
+        // Region count changes are logged but not failed — pre-allocated
+        // regions vary with GC parameter values (young region size, etc.).
+        if (current.active_region_count != active_region_count) {
+            printf("[%s] Region count changed: %u now vs %u at setup\n",
+                   test_name, current.active_region_count, active_region_count);
+        }
+        if (current.poh_region_count != poh_region_count) {
+            printf("[%s] POH region count changed: %u now vs %u at setup\n",
+                   test_name, current.poh_region_count, poh_region_count);
+        }
+    }
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GcAllocationTracker — RAII allocation counter for test assertions
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Captures total allocation count and bytes in constructor, computes delta
+// in AllocCount() / AllocBytes().  Uses process-wide GcStats counters so
+// it captures all GC-tracked allocations (nursery + old gen + LOH).
+//
+// Usage:
+//   GcAllocationTracker tracker;
+//   DoOperation();
+//   EXPECT_EQ(tracker.AllocCount(), 0);   // zero-allocation assertion
+//   EXPECT_GT(tracker.AllocBytes(), 0);   // some bytes allocated
+// ═══════════════════════════════════════════════════════════════════════════
+
+struct GcAllocationTracker {
+    uint64_t count_before_;
+    uint64_t bytes_before_;
+
+    GcAllocationTracker() {
+        count_before_ = g_gc_stats.alloc_total.load(std::memory_order_relaxed);
+        bytes_before_ = g_gc_stats.alloc_bytes.load(std::memory_order_relaxed);
+    }
+
+    /// Number of allocations since construction.
+    uint64_t AllocCount() const {
+        return g_gc_stats.alloc_total.load(std::memory_order_relaxed) - count_before_;
+    }
+
+    /// Total bytes allocated since construction.
+    uint64_t AllocBytes() const {
+        return g_gc_stats.alloc_bytes.load(std::memory_order_relaxed) - bytes_before_;
+    }
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Level 1: GcTestBase — minimal shared fixture
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// SetUp:
+//   1. AllocateThreadId + RegisterThread + EnterCooperativeMode
+//   2. InitYoungGeneration()
+//
+// TearDown:
+//   1. UnregisterThread
+//
+// Provides utility methods:
+//   ForceYoungGc()   — calls GcYoungCollection()
+//   ForceFullGc()    — calls chaos_gc_collect()
+//   AllocNursery()   — calls NurseryAllocate(size)
+// ═══════════════════════════════════════════════════════════════════════════
+
+struct GcTestBase : ::testing::Test {
+    uint32_t tid = 0;
+    GcResourceSnapshot snapshot_;
+
+    void SetUp() override {
+        tid = threading::AllocateThreadId();
+        threading::RegisterThread(tid, nullptr);
+        threading::EnterCooperativeMode();
+        InitYoungGeneration();
+        // Fix #2: bind this thread to a heap in Server GC mode (no-op in WKS).
+        // GcHeapManager::Initialize was called inside InitYoungGeneration, so
+        // the heap array is ready and SetThreadHeap can pick heap 0 for tests.
+        SetThreadHeap();
+        snapshot_.Capture();
+    }
+
+    void TearDown() override {
+        const char* test_name = "?";
+        if (auto* info = ::testing::UnitTest::GetInstance()->current_test_info()) {
+            test_name = info->name();
+        }
+        tls_tlab = TLAB{};
+        ClearThreadHeap();
+        snapshot_.ExpectNoLeaks(test_name);
+        threading::UnregisterThread();
+    }
+
+    // ── Utility methods ─────────────────────────────────────────────
+
+    static void* AllocNursery(CHAOS_IL2CPP_SIZE size) {
+        return NurseryAllocate(size);
+    }
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Level 2: GcUnitTestBase — adds default type info and layout registration
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Extends GcTestBase by registering a small set of TypeInfo entries and
+// a default GcLayout so that typed allocations are recognised by the GC.
+//
+// Test files that override SetUp() must call GcUnitTestBase::SetUp() first.
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// Default instance sizes for which test TypeInfo entries are registered.
+static constexpr CHAOS_IL2CPP_SIZE kTestTypeSizes[] = { 32, 64, 128, 256, 512, 1024, 4096 };
+
+/// A simple TypeInfo struct matching the layout expected by GC code.
+struct alignas(8) GcTestTypeInfo {
+    uint64_t stable_id;
+    uint64_t reserved[3];
+};
+
+/// Per-size TestTypeInfo storage (one per entry in kTestTypeSizes).
+struct GcTestTypeRegistry {
+    GcTestTypeInfo infos[sizeof(kTestTypeSizes) / sizeof(kTestTypeSizes[0])];
+    uintptr_t range_begin;
+    uintptr_t range_end;
+};
+
+/// Register test TypeInfo entries and return the registry.
+/// Called once by GcUnitTestBase::SetUp(); safe to call multiple times.
+GcTestTypeRegistry& SetupDefaultTestTypes();
+
+struct GcUnitTestBase : GcTestBase {
+    void SetUp() override {
+        GcTestBase::SetUp();
+
+        // Register test TypeInfo entries.
+        auto& reg = SetupDefaultTestTypes();
+        range_begin_ = reg.range_begin;
+        range_end_ = reg.range_end;
+
+        // Register a standard pointer-bearing layout for 64-byte objects.
+        // Offset 8 holds a single pointer field.
+        static constexpr uint16_t kPtrOffsets[] = { 8 };
+        uint64_t sid = GcLayoutRegistry::Instance().RegisterOrGetRawAllocType(64);
+        GcLayoutRegistry::Instance().Register(sid, 64, kPtrOffsets, 1);
+
+        // Warmup: allocate one old-gen object so the old-gen page pool is ready.
+        warmup_ = g_old_gen.Allocate(8, true);
+
+        // Re-capture snapshot after warmup allocation so region count baseline
+        // includes the warmup object's region.
+        snapshot_.Capture();
+    }
+
+    void TearDown() override {
+        warmup_ = nullptr;
+        GcTestBase::TearDown();
+    }
+
+    /// Return a test TypeInfo pointer for the given instance size.
+    /// Returns nullptr if size does not match a registered test type.
+    static const void* GetTestTypeInfo(CHAOS_IL2CPP_SIZE instance_size);
+
+    /// Initialize an object with a test TypeInfo header.
+    static void InitTestObject(void* obj, CHAOS_IL2CPP_SIZE size,
+                               uint32_t pattern = 0xCAFEBABE) {
+        const void* ti = GetTestTypeInfo(size);
+        if (ti) {
+            *static_cast<const void**>(obj) = ti;
+        }
+        if (size >= 12) {
+            *reinterpret_cast<uint32_t*>(static_cast<char*>(obj) + 8) = pattern;
+        }
+    }
+
+    static const void* test_type_info_64() { return GetTestTypeInfo(64); }
+
+    // ── Gen1 benchmark utilities ─────────────────────────────────────
+
+    /// Fill the Gen1 (survivor) area to the given occupancy fraction.
+    static void FillSurvivorTo(float occupancy);
+
+    /// Run GcGen1Collection() and return the pause duration in ns.
+    static uint64_t MeasureGen1Collection();
+
+    /// Read the x86/x64 TSC (time-stamp counter).
+    static inline uint64_t Rdtsc() {
+#if defined(_MSC_VER)
+        return __rdtsc();
+#elif defined(__x86_64__) || defined(__i386__)
+        uint32_t lo, hi;
+        asm volatile("rdtsc" : "=a"(lo), "=d"(hi));
+        return (static_cast<uint64_t>(hi) << 32) | lo;
+#else
+        return 0;
+#endif
+    }
+
+    /// Approximate RDTSC ticks to nanoseconds using QPC calibration.
+    static uint64_t RdtscToNs(uint64_t ticks);
+
+protected:
+    static GcTestTypeRegistry* s_test_types_;
+    static void* s_warmup_;
+
+private:
+    uintptr_t range_begin_ = 0;
+    uintptr_t range_end_ = 0;
+    void* warmup_ = nullptr;
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Level 3: GcStressTestBase — multi-threaded stress test helpers
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Provides:
+//   StressConfig        — struct describing allocation mix + survival strategy
+//   RunConcurrentAlloc  — spawn threads, allocate, GC, join
+//   VerifyNoCorruption  — check all surviving objects for magic-pattern integrity
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// Survival level for stress test objects.
+enum class SurvivalLevel {
+    GLOBAL,         // Referenced from a global array (survives all GCs)
+    THREAD_LOCAL,   // Referenced from a TLS array (survives until thread exits)
+    EPHEMERAL,      // No external reference (dies at next GC)
+};
+
+/// Size distribution entry: a size class and its probability weight.
+struct SizeClass {
+    CHAOS_IL2CPP_SIZE size;
+    float probability;  // 0.0–1.0; normalised across all entries
+};
+
+/// Survival strategy entry.
+struct SurvivalClass {
+    SurvivalLevel level;
+    float probability;  // 0.0–1.0; normalised across all entries
+};
+
+/// Configuration for RunConcurrentAlloc.
+struct StressConfig {
+    int thread_count = 4;
+    int allocs_per_thread = 100;
+    std::vector<SizeClass> size_distribution = {
+        { 64,  0.40f },
+        { 512, 0.30f },
+        { 4096, 0.20f },
+        { 85 * 1024, 0.10f },  // LOH threshold
+    };
+    std::vector<SurvivalClass> survival_strategy = {
+        { SurvivalLevel::GLOBAL,       0.20f },
+        { SurvivalLevel::THREAD_LOCAL, 0.50f },
+        { SurvivalLevel::EPHEMERAL,    0.30f },
+    };
+    /// If > 0, force a GC every N allocations per thread.
+    int gc_interval = 0;
+    /// Magic pattern to write at the start of each object for integrity checks.
+    uint32_t magic_pattern = 0xDEADBEEF;
+};
+
+struct GcStressTestBase : GcUnitTestBase {
+    /// Run a concurrent allocation stress test according to config.
+    /// All threads are registered, allocate, and optionally trigger GC.
+    /// Returns the number of surviving global objects (for post-hoc checks).
+    int RunConcurrentAlloc(const StressConfig& cfg);
+
+    /// Verify that global surviving objects have intact magic patterns.
+    /// Call after RunConcurrentAlloc to confirm no memory corruption.
+    void VerifyNoCorruption(const StressConfig& cfg);
+
+    /// Thread context passed to each worker thread.
+    struct ThreadCtx {
+        int id;
+        StressConfig cfg;
+        std::atomic<int>* ok;
+    };
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Level 4: GcBenchTestBase — benchmark timing helpers
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Provides RDTSC-based timing and metric recording for GC benchmarks.
+// ═══════════════════════════════════════════════════════════════════════════
+
+struct GcBenchTestBase : GcUnitTestBase {
+    /// Record a named metric and print to stdout.
+    static void RecordMetric(const char* name, uint64_t value_ns);
+
+    /// Emit a machine-parseable benchmark line for a set of pause/latency
+    /// samples (in ns) as `BENCH,<scenario>,P50=..,P95=..,P99=..,AVG=..,N=..`.
+    /// Optional p95_only/p95p99_only restrict emission to the fields the
+    /// gc.perf.yaml baseline declares for that scenario (loh_sweep: P95 only;
+    /// bgc_mark_slice: P95,P99 only).  Header-inline `static` so every TU that
+    /// instantiates a benchmark (linked with /FORCE:MULTIPLE) gets its own
+    /// copy — no ODR collision.
+    static void EmitPercentiles(const char* scenario,
+                                const std::vector<uint64_t>& samples_ns,
+                                bool p95_only = false,
+                                bool p95p99_only = false) {
+        if (samples_ns.empty()) return;
+        std::vector<uint64_t> v = samples_ns;
+        std::sort(v.begin(), v.end());
+        const size_t n = v.size();
+        uint64_t s = 0;
+        for (auto x : v) s += x;
+        const double avg = static_cast<double>(s) / static_cast<double>(n);
+        // Mirror collect-jit-metrics.py:104-111 percentile indexing.
+        const double p50 = v[n * 50 / 100];
+        const double p95 = v[n * 95 / 100];
+        const double p99 = v[n * 99 / 100];
+        if (p95_only) {
+            printf("BENCH,%s,P95=%.3f,N=%zu\n", scenario, p95, n);
+        } else if (p95p99_only) {
+            printf("BENCH,%s,P95=%.3f,P99=%.3f,N=%zu\n", scenario, p95, p99, n);
+        } else {
+            printf("BENCH,%s,P50=%.3f,P95=%.3f,P99=%.3f,AVG=%.3f,N=%zu\n",
+                   scenario, p50, p95, p99, avg, n);
+        }
+        fflush(stdout);
+    }
+};
+
+}}}  // namespace chaos::il2cpp::runtime_core
+
+#endif  // CHAOS_IL2CPP_GC_TEST_BASE_H_
