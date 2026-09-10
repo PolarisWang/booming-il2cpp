@@ -3460,6 +3460,9 @@ extern "C" const int kSubjectEntryCount = 0;
 extern "C" const int kSubjectSlotMap[1] = { 0 };
 
 
+extern "C" const char* const kSubjectSubjectIds[1] = { "" };
+
+
 // ── GC Slot Map Section ───────────────────────────────────────────
 
 
