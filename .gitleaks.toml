@@ -22,6 +22,10 @@ useDefault = true
     '''crypto_stubs_win32\.cpp''',
     '''crypto_stubs\.cpp''',
     '''crypto_stubs\.h''',
+    # The same crypto stubs are codegen'd into each DLL's SDK tree under
+    # testing/foundation-dll/<dll>/chunks/*/native/chaos-sdk/.  These are
+    # identical copies — the same 'key' parameter name, not a secret.
+    '''testing/foundation-dll/.*/chaos-sdk/.*crypto_stubs\.''',
   ]
 
 # Historic-only noise (files deleted from the current tree but still in DAG
@@ -44,6 +48,10 @@ useDefault = true
   description = "Obsolete testing-inventory/verification files (auto-generated inventory data, never secrets)"
   paths = [
     '''docs/testing-inventory/verification/''',
+    # 'latest' and 'master' subdirs under testing-inventory are also hit
+    # by the generic-api-key rule, same pattern.
+    '''docs/testing-inventory/verification/latest/''',
+    '''docs/testing-inventory/verification/master/''',
   ]
 
 # vtable_registry.cpp/h and bootstrap.cpp hit due to low-entropy SHA1-like
@@ -55,6 +63,7 @@ useDefault = true
   paths = [
     '''src/native/runtime-core/vtable_registry\.cpp''',
     '''src/native/runtime-core/vtable_registry\.h''',
+    '''src/native/runtime-core/vtable_registry_resolve\.cpp''',
     '''src/native/bootstrap/bootstrap\.cpp''',
   ]
 
