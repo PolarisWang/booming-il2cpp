@@ -1,0 +1,117 @@
+# .github/workflows/provenance-archive.yml
+# Stage: emit a provenance manifest for the pipeline run (M2-seq16 / ENG-34898)
+#
+# Why this exists: every stage above uploads artifacts, but nothing records what
+# produced them.  A baseline, benchmark record, or SDK build that is later
+# questioned can only be reconstructed by hand from the GitHub UI.  This job
+# writes a machine-readable sidecar that travels with the run, so downstream
+# consumers (baseline_store, triage, audit dashboards) can assert that two data
+# points are actually comparable instead of assuming it.
+#
+# Scope note: this records provenance for the *pipeline run*, plus the stage
+# results that actually ran.  It deliberately does not re-hash every artifact
+# tree in every stage (that would mean downloading gigabytes to re-derive what
+# each stage already knows).  Stages that want byte-level fingerprints for their
+# own payload pass --artifact to .github/scripts/ci_provenance.py themselves.
+#
+# This stage must never fail the pipeline: a missing manifest degrades
+# traceability, it does not break the build.  Failures are annotated, not fatal.
+name: provenance-archive
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+      timeout:
+        required: false
+        type: number
+        default: 10
+      profile:
+        required: false
+        type: string
+        default: pr
+      failed_stages:
+        required: false
+        type: string
+        default: ""
+      enabled_count:
+        required: false
+        type: number
+        default: 0
+
+jobs:
+  provenance-archive:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: ${{ inputs.timeout }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # need full history for commit metadata
+
+      - name: Write provenance manifest
+        env:
+          CHAOS_PROVENANCE_STAGE: provenance-archive
+          CHAOS_PROVENANCE_PROFILE: ${{ inputs.profile }}
+        run: |
+          python3 .github/scripts/ci_provenance.py write \
+            --out provenance.json \
+            --repo-root .
+
+      - name: Annotate stage results
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib
+
+          p = pathlib.Path("provenance.json")
+          m = json.loads(p.read_text(encoding="utf-8"))
+
+          failed = [s for s in (os.environ["FAILED_STAGES"] or "").split(",") if s]
+          m["pipeline"] = {
+              "profile": os.environ["PROFILE"],
+              "enabledStageCount": int(os.environ["ENABLED_COUNT"] or 0),
+              "failedStages": failed,
+              "outcome": "failure" if failed else "success",
+          }
+
+          p.write_text(json.dumps(m, indent=2, ensure_ascii=False) + "\n",
+                       encoding="utf-8")
+          print(f"profile={m['pipeline']['profile']} "
+                f"enabled={m['pipeline']['enabledStageCount']} "
+                f"failed={failed or 'none'}")
+          PY
+        env:
+          PROFILE: ${{ inputs.profile }}
+          FAILED_STAGES: ${{ inputs.failed_stages }}
+          ENABLED_COUNT: ${{ inputs.enabled_count }}
+
+      - name: Summary
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          m = json.loads(pathlib.Path("provenance.json").read_text(encoding="utf-8"))
+          s, p = m["source"], m["pipeline"]
+          lines = [
+              "## Provenance",
+              "",
+              f"- commit: `{(s.get('commit') or 'unknown')[:12]}`"
+              f"{' (dirty)' if s.get('dirty') else ''}",
+              f"- profile: `{p['profile']}` · outcome: **{p['outcome']}**",
+              f"- stages: {p['enabledStageCount']} ran"
+              f"{', failed: ' + ', '.join(p['failedStages']) if p['failedStages'] else ''}",
+              f"- runner: {m['runner'].get('os')} / {m['runner'].get('arch')}",
+          ]
+          pathlib.Path("provenance-summary.md").write_text(
+              "\n".join(lines) + "\n", encoding="utf-8")
+          print("\n".join(lines))
+          PY
+
+      - name: Upload provenance manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: provenance-archive
+          path: |
+            provenance.json
+            provenance-summary.md
+          retention-days: 90   # outlives the default 90d so old runs stay traceable

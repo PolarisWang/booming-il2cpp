@@ -361,6 +361,22 @@ jobs:
       os: ubuntu-latest
       timeout: 15
 
+  # ── Provenance ───────────────────────────────────────────────────────
+  # Runs after every stage so the manifest can record the real outcome set.
+  # `always()` is required: a run that failed is precisely when provenance
+  # matters most.  It does not gate the pipeline (see finish below).
+  provenance-archive:
+    name: provenance-archive
+    needs: [resolve, finish]
+    if: ${{ always() }}
+    uses: ./.github/workflows/provenance-archive.yml
+    with:
+      os: ubuntu-latest
+      timeout: 10
+      profile: ${{ github.event.inputs.profile || inputs.profile || 'pr' }}
+      failed_stages: ${{ needs.finish.outputs.failed_stages }}
+      enabled_count: ${{ fromJson(needs.finish.outputs.enabled_count || '0') }}
+
   # ── Finish (aggregate marker + stage result outputs) ───────────────────
   # Collects every per-stage job's result and emits outputs consumed by the
   # trigger-level workflows (pr/nightly/release) for notification.
