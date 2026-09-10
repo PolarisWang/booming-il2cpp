@@ -144,6 +144,13 @@ public sealed class ValueGenerator
         // instance methods are called.  Use Array.Empty<int>() to get a valid
         // non-null Array instance for probe subjects and verification tests.
         ["Array"] = _ => "System.Array.Empty<int>()",
+        // System.Text.Json metadata factories: JsonMetadataServices.Create*Info<T> take a
+        // JsonCollectionInfoValues<T> alongside JsonSerializerOptions.  A null (default)
+        // value throws ArgumentNullException before the factory can do anything; a real
+        // empty instance lets the options-null-check and early branches run.
+        ["JsonCollectionInfoValues"] = typeArgs => typeArgs.Length > 0
+            ? $"new System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<{typeArgs[0]}>()"
+            : "new System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<object>()",
     };
 
     public ValueGenerator(CSharpSerializer serializer, AutoFixtureAllower? autoFixture = null)
