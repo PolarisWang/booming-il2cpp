@@ -162,6 +162,39 @@ public sealed class CSharpExpressionBuilder
             "typeof(System.ComponentModel.PropertyChangedEventArgs).GetEvents()[0]",
         ["System.Reflection.Assembly"] =
             "typeof(int).Assembly",
+        // System.Net.Sockets — constructible instance types
+        ["System.Net.Sockets.Socket"] =
+            "new System.Net.Sockets.Socket(System.Net.Sockets.SocketType.Stream, System.Net.Sockets.ProtocolType.Tcp)",
+        ["System.Net.Sockets.SocketAsyncEventArgs"] =
+            "new System.Net.Sockets.SocketAsyncEventArgs()",
+        ["System.Net.Sockets.TcpClient"] =
+            "new System.Net.Sockets.TcpClient()",
+        ["System.Net.Sockets.TcpListener"] =
+            "new System.Net.Sockets.TcpListener(System.Net.IPAddress.Loopback, 0)",
+        ["System.Net.Sockets.UdpClient"] =
+            "new System.Net.Sockets.UdpClient()",
+        ["System.Net.Sockets.UnixDomainSocketEndPoint"] =
+            "new System.Net.Sockets.UnixDomainSocketEndPoint(\"/tmp/test\")",
+        // System.Net.ServerSentEvents
+        ["System.Net.ServerSentEvents.SseParser"] =
+            "System.Net.ServerSentEvents.SseParser.Create<int>(System.IO.Stream.Null)",
+        // System.IO.Compression — a valid, empty in-memory zip (22-byte EOCD-only)
+        // so ZipFileExtensions instance methods get a real archive instead of a
+        // bare GetUninitializedObject (null backing store → ArgumentNullException).
+        ["System.IO.Compression.ZipArchive"] =
+            "new System.IO.Compression.ZipArchive(new System.IO.MemoryStream(System.Convert.FromBase64String(\"UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA==\")), System.IO.Compression.ZipArchiveMode.Read)",
+        // System.Runtime.Serialization — formatter types with parameterless ctors.
+        // A bare GetUninitializedObject has null internal state, so every instance
+        // method throws (ObjectIDGenerator.GetId, BinaryFormatter.Serialize, …).
+        // These are real constructible types; `new T()` gives working instances.
+        ["System.Runtime.Serialization.ObjectIDGenerator"] =
+            "new System.Runtime.Serialization.ObjectIDGenerator()",
+        ["System.Runtime.Serialization.FormatterConverter"] =
+            "new System.Runtime.Serialization.FormatterConverter()",
+        ["System.Runtime.Serialization.SurrogateSelector"] =
+            "new System.Runtime.Serialization.SurrogateSelector()",
+        ["System.Runtime.Serialization.Formatters.Binary.BinaryFormatter"] =
+            "new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter()",
     };
 
     // Types with a static `Shared` property that returns a valid instance.
@@ -171,6 +204,9 @@ public sealed class CSharpExpressionBuilder
     private static readonly Dictionary<string, string> SharedInstanceTypes = new(StringComparer.Ordinal)
     {
         ["System.Buffers.ArrayPool"] = ".Shared",
+        // Frozen collections — .Empty returns a real non-bare instance
+        ["System.Collections.Frozen.FrozenDictionary"] = ".Empty",
+        ["System.Collections.Frozen.FrozenSet"] = ".Empty",
     };
 
     /// <summary>
@@ -198,6 +234,12 @@ public sealed class CSharpExpressionBuilder
         ["System.Collections.Generic.Stack"] =         new(FactoryKind.EnumerableCtor, 1),
         ["System.Collections.Generic.Queue"] =         new(FactoryKind.EnumerableCtor, 1),
 
+        // ObservableCollection<T> — a bare GetUninitializedObject instance has a null
+        // backing list, so Move/Remove throw ArgumentOutOfRangeException/NullReference.
+        // Construct with seeded items via the IEnumerable<T> ctor so index-based
+        // operations (Move(0,1)) succeed with deterministic semantics.
+        ["System.Collections.ObjectModel.ObservableCollection"] = new(FactoryKind.EnumerableCtor, 1),
+
         // Special constructor expressions
         ["System.IO.MemoryStream"] =                   new(FactoryKind.CustomExpr, 0,
             "new MemoryStream(new byte[] { 1, 2, 3 })"),
@@ -223,11 +265,19 @@ public sealed class CSharpExpressionBuilder
         var csType = CSharpSerializer.MapToCSharpType(typeFullName);
 
         // Check known factory instances (Encoding.UTF8, string.Empty)
+        // Check known factory instances (Encoding.UTF8, string.Empty).
+        // Try the full namespace-qualified name first, then the C# short name:
+        // MapToCSharpType strips the namespace (System.Net.Sockets.Socket → Socket)
+        // but KnownInstances keys are fully qualified, so both must be probed.
+        if (KnownInstances.TryGetValue(typeFullName, out var knownExprFull))
+            return knownExprFull;
         if (KnownInstances.TryGetValue(csType, out var knownExpr))
             return knownExpr;
 
-        // Check known type factories (collections, special constructors)
-        var factoryResult = TryBuildFactoryExpression(csType, csType);
+        // Check known type factories (collections, special constructors).
+        // Pass typeFullName so the factory table (which is keyed on the fully
+        // qualified name) can match.
+        var factoryResult = TryBuildFactoryExpression(typeFullName, csType);
         if (factoryResult is not null)
             return factoryResult;
 

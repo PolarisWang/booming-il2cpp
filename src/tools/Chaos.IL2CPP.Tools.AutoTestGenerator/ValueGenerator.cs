@@ -144,6 +144,18 @@ public sealed class ValueGenerator
         // instance methods are called.  Use Array.Empty<int>() to get a valid
         // non-null Array instance for probe subjects and verification tests.
         ["Array"] = _ => "System.Array.Empty<int>()",
+        // System.Text.Json metadata factories: JsonMetadataServices.Create*Info<T> take a
+        // JsonCollectionInfoValues<T> alongside JsonSerializerOptions.  A null (default)
+        // value throws ArgumentNullException before the factory can do anything; a real
+        // empty instance lets the options-null-check and early branches run.
+        ["JsonCollectionInfoValues"] = typeArgs => typeArgs.Length > 0
+            ? $"new System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<{typeArgs[0]}>()"
+            : "new System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<object>()",
+        // IO.Compression — ZipArchive over a valid empty in-memory zip so
+        // ZipFileExtensions methods receive a non-null archive instead of
+        // default(ZipArchive)! → ArgumentNullException.  The 22-byte base64 zip
+        // is the minimal valid empty zip (end-of-central-directory only).
+        ["ZipArchive"] = _ => "new System.IO.Compression.ZipArchive(new System.IO.MemoryStream(System.Convert.FromBase64String(\"UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA==\")), System.IO.Compression.ZipArchiveMode.Read)",
         // Non-generic collection classes (System.Collections).  default(Queue)! etc.
         // causes ArgumentNullException in static wrapper methods (Queue.Synchronized
         // etc.).  new <T>() returns a valid instance for probes and verification.
