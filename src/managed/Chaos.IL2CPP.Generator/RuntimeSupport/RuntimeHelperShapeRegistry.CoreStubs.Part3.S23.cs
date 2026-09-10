@@ -551,6 +551,55 @@ public sealed partial class NativeAotLoweringPlanner
                             new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                             new HashSet<int> { 0 });
 
+                        // ── System.UInt32::Parse — all 4 documented overloads ─────────────
+                        // UInt32.Parse was the missing sibling of the Int32/Int64/Double
+                        // stubs above.  Its absence let codegen emit calls to
+                        // chaos_external_runtime_System_Private_CoreLib_System_UInt32__Parse_*
+                        // without registering them, so the shared header never declared
+                        // them and page-split TUs failed with C3861 (CoreLib `system`
+                        // chunk).  Every overload funnels to the same unsigned native
+                        // entry point; the extra parameters (NumberStyles, IFormatProvider)
+                        // are accepted and ignored, matching the sibling stubs' behavior.
+                        {
+                            var uint32ReturnSlot = new AotCoreIrAbiSlotArtifact
+                            {
+                                CarrierKindCode = AotCoreIrAbiCarrierKind.Int32,
+                                TypeShape = AotCoreIrTypeShapeKind.ValueType,
+                            };
+                            var stringSlot = CreateNativeIntAbiSlot(
+                                "System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+                            var int32Slot = CreateInt32AbiSlot();
+                            var nativeIntSlot = CreateNativeIntAbiSlot(
+                                "System.Object", AotCoreIrTypeShapeKind.ReferenceType);
+
+                            registry.Register("System.UInt32", "Parse", new string[] { "System.String" },
+                                ShapeKind.SimpleForward, "ChaosParseUInt32",
+                                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(stringSlot),
+                                uint32ReturnSlot,
+                                new HashSet<int> { 0 });
+
+                            registry.Register("System.UInt32", "Parse",
+                                new string[] { "System.String", "System.Globalization.NumberStyles" },
+                                ShapeKind.SimpleForward, "ChaosParseUInt32",
+                                new List<AotCoreIrAbiSlotArtifact> { stringSlot, int32Slot },
+                                uint32ReturnSlot,
+                                new HashSet<int> { 0 });
+
+                            registry.Register("System.UInt32", "Parse",
+                                new string[] { "System.String", "System.IFormatProvider" },
+                                ShapeKind.SimpleForward, "ChaosParseUInt32",
+                                new List<AotCoreIrAbiSlotArtifact> { stringSlot, nativeIntSlot },
+                                uint32ReturnSlot,
+                                new HashSet<int> { 0 });
+
+                            registry.Register("System.UInt32", "Parse",
+                                new string[] { "System.String", "System.Globalization.NumberStyles", "System.IFormatProvider" },
+                                ShapeKind.SimpleForward, "ChaosParseUInt32",
+                                new List<AotCoreIrAbiSlotArtifact> { stringSlot, int32Slot, nativeIntSlot },
+                                uint32ReturnSlot,
+                                new HashSet<int> { 0 });
+                        }
+
                         // ── System.Decimal.Parse(string) — forward to ChaosConvertToDecimal ──
                         // (Same native as Convert.ToDecimal(string); returns a Decimal carrier.)
                         // Register as INLINE to bypass the codegen reference-arg null-guard that

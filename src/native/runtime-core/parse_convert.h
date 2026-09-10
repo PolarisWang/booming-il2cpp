@@ -31,6 +31,12 @@ CHAOS_IL2CPP_INT32  ChaosParseInt32(CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INT64  ChaosParseInt64(CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_FLOAT64 ChaosParseDouble(CHAOS_IL2CPP_INTPTR value) noexcept;
 
+// ── UInt32::Parse ────────────────────────────────────────────────────
+// The unsigned sibling of ChaosParseInt32.  Separate entry point (rather than
+// reusing ChaosParseInt32) so the carrier stays an unsigned 32-bit value and
+// values above Int32::MaxValue do not wrap to negative.
+CHAOS_IL2CPP_UINT32 ChaosParseUInt32(CHAOS_IL2CPP_INTPTR value) noexcept;
+
 // ── Decimal arithmetic (DecimalCarrier* via intptr) ────────────
 CHAOS_IL2CPP_INT32 ChaosDecimalToInt32(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;

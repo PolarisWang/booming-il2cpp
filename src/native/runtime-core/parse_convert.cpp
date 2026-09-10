@@ -305,6 +305,14 @@ extern "C" CHAOS_IL2CPP_FLOAT64 ChaosParseDouble(CHAOS_IL2CPP_INTPTR value) noex
     return ChaosConvertToDouble(value);
 }
 
+extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32(CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    // Truncate through the signed path, then reinterpret — the bit pattern is
+    // what UInt32::Parse callers consume.  Values above Int32::MaxValue arrive
+    // as an already-wrapped negative int32 and reinterpret unchanged.
+    return static_cast<CHAOS_IL2CPP_UINT32>(ChaosConvertToInt32(value));
+}
+
 // ═══════════════════════════════════════════════════════════════════
 // Decimal arithmetic
 // ═══════════════════════════════════════════════════════════════════
