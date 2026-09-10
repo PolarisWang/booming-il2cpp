@@ -1,6 +1,10 @@
 # .github/workflows/docs-deploy.yml
-# Stage: Deploy API docs to GitHub Pages
-# Source: .github/workflows/docs.yml job `deploy`
+# Stage: Deploy docs + verification reports to GitHub Pages
+#
+# Consumers must sequence this AFTER docs-build: `actions/deploy-pages` reads the
+# artifact that `upload-pages-artifact` produced, and there is no implicit
+# ordering between sibling workflows.  The orchestrator encodes that with
+# `needs: docs-build`; see pipeline.yml.
 name: docs-deploy
 on:
   workflow_call:
@@ -23,4 +27,5 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4

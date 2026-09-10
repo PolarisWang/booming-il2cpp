@@ -354,8 +354,8 @@ jobs:
 
   docs-deploy:
     name: docs-deploy
-    needs: [resolve]
-    if: ${{ contains(fromJson(needs.resolve.outputs.stages), 'docs-deploy') }}
+    needs: [resolve, docs-build]
+    if: ${{ always() && contains(fromJson(needs.resolve.outputs.stages), 'docs-deploy') }}
     uses: ./.github/workflows/docs-deploy.yml
     with:
       os: ubuntu-latest

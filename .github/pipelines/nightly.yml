@@ -118,3 +118,12 @@ stages:
     enabled: true
     os: ubuntu-latest
     timeout: 30
+
+  # Publish the verification reports (dashboard + per-DLL detail pages) to
+  # GitHub Pages.  Nightly-only: it deploys over the live site, so it must
+  # never run from a PR.  Sequenced after docs-build by pipeline.yml —
+  # deploy-pages consumes the artifact that upload-pages-artifact produced.
+  docs-deploy:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 15
