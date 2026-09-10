@@ -30,8 +30,8 @@ extern "C" __attribute__((weak)) const int chaos_il2cpp_aot_hotpatch_module = 0;
 // ════════════════════════════════════════════════════════════════════════════
 
 extern "C" __attribute__((weak)) const int kChaosExternalRuntimeCount = 0;
-extern "C" __attribute__((weak)) const void* const kChaosExternalRuntimeSubjects[1] = { nullptr };
-extern "C" __attribute__((weak)) const void* const kChaosExternalRuntimeFnTable[1] = { nullptr };
+extern "C" __attribute__((weak)) const void* const kChaosExternalRuntimeSubjects[1] = {nullptr};
+extern "C" __attribute__((weak)) const void* const kChaosExternalRuntimeFnTable[1] = {nullptr};
 
 // ════════════════════════════════════════════════════════════════════════════
 // Debugger stubs (normally in chaos_debugger, Windows-only)
@@ -49,10 +49,12 @@ namespace chaos::il2cpp::diagnostics {
 // (including the std::atomic<bool> globals and the DbgFrameSnapshot& return of
 // DbgGetFrameSnapshot) or the mangled names differ and every consumer is left
 // with an unresolved external on Linux, where chaos_debugger is not built.
-std::atomic<bool> g_dbg_any_breakpoints{ false };
-std::atomic<bool> g_dbg_pause_requested{ false };
+std::atomic<bool> g_dbg_any_breakpoints {false};
+std::atomic<bool> g_dbg_pause_requested {false};
 
-bool DbgIsStepping() noexcept { return false; }
+bool DbgIsStepping() noexcept {
+    return false;
+}
 void DbgClearFrameSnapshot() noexcept {}
 DbgFrameSnapshot& DbgGetFrameSnapshot() noexcept {
     static DbgFrameSnapshot snapshot;
@@ -61,10 +63,14 @@ DbgFrameSnapshot& DbgGetFrameSnapshot() noexcept {
 // Stub the non-stepping variants — DbgCheckBreakpoint is declared in
 // dbg_breakpoint.h (returns int), DbgNotifyPaused/DbgShouldStopAtCurrentPosition
 // in dbg_runtime.h.
-int DbgCheckBreakpoint(uint32_t, uint32_t) noexcept { return 0; }
+int DbgCheckBreakpoint(uint32_t, uint32_t) noexcept {
+    return 0;
+}
 void DbgNotifyPaused(uint32_t, uint32_t) noexcept {}
-bool DbgShouldStopAtCurrentPosition(int) noexcept { return false; }
+bool DbgShouldStopAtCurrentPosition(int) noexcept {
+    return false;
+}
 
-}  // namespace chaos::il2cpp::diagnostics
+} // namespace chaos::il2cpp::diagnostics
 
-#endif  // _WIN32
+#endif // _WIN32
