@@ -68,6 +68,7 @@ public sealed class SemanticWorldStage
                 Assembly = loadedWorld.Assembly,
                 Assemblies = loadedWorld.Assemblies.Select(assembly => assembly.Assembly).ToList(),
                 EntryPointSubjectId = loadedWorld.EntryPointSubjectId,
+                ResolvedEntryPointSubjectId = loadedWorld.ResolvedEntryPointSubjectId,
                 GenericInstantiationDemandGraph = loadedWorld.GenericInstantiationDemandGraph,
                 Types = loadedWorld.Types,
                 Fields = loadedWorld.Fields,

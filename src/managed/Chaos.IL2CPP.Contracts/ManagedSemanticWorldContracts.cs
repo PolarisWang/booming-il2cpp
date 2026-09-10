@@ -41,6 +41,12 @@ public sealed record SemanticWorldModel
 
     public required IReadOnlyList<ManagedMethodModel> Methods { get; init; }
 
+    /// <summary>
+    /// The entry point resolved by the pipeline, always set regardless of
+    /// FullAssemblyClosure (see <see cref="LoadedWorldModel.ResolvedEntryPointSubjectId"/>).
+    /// </summary>
+    public string? ResolvedEntryPointSubjectId { get; init; }
+
     public required CanonicalSubjectsModel CanonicalSubjects { get; init; }
 
     public required SemanticShapesModel SemanticShapes { get; init; }
@@ -59,6 +65,14 @@ public sealed record LinkedWorldModel
     public required IReadOnlyList<AssemblyIdentityModel> Assemblies { get; init; }
 
     public required string EntryPointSubjectId { get; init; }
+
+    /// <summary>
+    /// The entry point resolved by the pipeline, always set regardless of
+    /// FullAssemblyClosure (see <see cref="LoadedWorldModel.ResolvedEntryPointSubjectId"/>).
+    /// Carried through so closure.manifest.json can report the real entry point
+    /// for publish-mode app_main.cpp generation.
+    /// </summary>
+    public string? ResolvedEntryPointSubjectId { get; init; }
 
     public GenericInstantiationDemandGraphModel? GenericInstantiationDemandGraph { get; init; }
 

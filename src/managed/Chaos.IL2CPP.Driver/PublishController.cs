@@ -111,7 +111,6 @@ internal static class PublishController
         Console.Write("  [2/5] Detecting entry point...");
         entryPointOverride = ConvertService.DetectEntryPoint(assemblyPaths[0]);
         Console.WriteLine(entryPointOverride != null ? $" {entryPointOverride}" : " (none/auto)");
-
         // ── Step 3: Convert (IL→C++ codegen) ──────────────────────────────
         Console.WriteLine($"  [3/5] Running IL2CPP codegen...");
         var codegenRoot = Path.Combine(outputDir, "codegen", "generated");
@@ -144,8 +143,17 @@ internal static class PublishController
 
         if (config.Mode == "app")
         {
-            // App mode: generate app_main.cpp + AppProject.CMakeLists.txt
-            EmitAppProject(outputDir, sdkRoot, conversionResult, entryPointOverride);
+            // App mode: generate app_main.cpp + AppProject.CMakeLists.txt.
+            // Prefer the entry point the pipeline resolved from the PE token
+            // (conversionResult.EntryPointSubjectId) over the reflection-based
+            // probe: DetectEntryPoint loads the target assembly into the Driver's
+            // own runtime and returns null whenever the target's TFM differs from
+            // the Driver's (net8.0), which silently produced an app_main that
+            // never invoked Main.
+            var resolvedEntryPoint = entryPointOverride ?? conversionResult.EntryPointSubjectId;
+            if (entryPointOverride == null && resolvedEntryPoint != null)
+                Console.WriteLine($"  [publish] entry point resolved from pipeline: {resolvedEntryPoint}");
+            EmitAppProject(outputDir, sdkRoot, conversionResult, resolvedEntryPoint);
         }
         else
         {

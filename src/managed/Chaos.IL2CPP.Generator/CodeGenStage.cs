@@ -102,7 +102,11 @@ public sealed partial class CodeGenStage
             var closureManifest = new ManagedClosureManifestArtifact
             {
                 AssemblyName = linkedWorld.Assembly.Name,
-                EntrySubjectId = linkedWorld.EntryPointSubjectId,
+                // Report the RESOLVED entry point, not EntryPointSubjectId: in
+                // FullAssemblyClosure mode the latter is intentionally empty (it is
+                // the codegen skeleton-plan discriminator), but publish-mode
+                // app_main.cpp generation needs the real entry to invoke Main.
+                EntrySubjectId = linkedWorld.ResolvedEntryPointSubjectId ?? linkedWorld.EntryPointSubjectId,
                 InputAssemblyPath = ManagedNaming.NormalizePathForManifest(request.InputAssemblyPath, Environment.CurrentDirectory),
                 AdditionalAssemblyPaths = request.AdditionalAssemblyPaths?
                     .Where(path => !string.IsNullOrWhiteSpace(path))

@@ -195,7 +195,7 @@ internal static class ConvertService
             return new ConversionResult
             {
                 AssemblyName = assemblyName2,
-                EntryPointSubjectId = entryPoint,
+                EntryPointSubjectId = entryPoint ?? result.ClosureManifest?.EntrySubjectId,
                 GeneratedDirs = emitResult.GeneratedSources,
                 SubjectMethods = subjectIds,
                 OutputRoot = outputRoot,

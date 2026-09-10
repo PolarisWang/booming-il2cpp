@@ -52,16 +52,13 @@ chaos-il2cpp publish HelloWorld.csproj --mode app --output ./build
 
 ## Known limitations
 
-- **Entry-point invocation**: `chaos-il2cpp publish` currently emits `app_main.cpp`
-  with a no-op entry call when the entry point cannot be resolved to a SubjectId.
-  `ConvertService.DetectEntryPoint` resolves it via `Assembly.LoadFrom`, which fails
-  when the target's TFM differs from the Driver's (`net8.0`) — the PE-metadata
-  fallback deliberately returns null rather than a fabricated SubjectId.  The
-  resulting `chaos_entry.exe` boots the runtime and GC correctly and exits 0, but
-  does not invoke `Main`, so the `Console.WriteLine` output above is not printed.
-  Tracked as a Driver/codegen defect, not a sample defect.
 - **async Task Main**: The async state machine's `AwaitUnsafeOnCompleted` and
   `Start` declarations are emitted into `native-aot.generated.header.h` as
   `extern "C" ... ) {;` (an unmatched `{` inside a namespace scope), which fails
   MSVC compilation with C2598/C2601/C1075.  This is why the sample uses a
   synchronous `Main`.
+- **args.Length in $"" interpolation**: When `Console.WriteLine($"args.Length={args.Length}")`
+  is compiled to a `DefaultInterpolatedStringHandler`, the emitted codegen skips
+  the `AppendFormatted(System.Int32)` or produces a null output.  The string
+  literal `"args.Length="` is emitted correctly, but the inline formatted value
+  is not.  Tracked as a codegen interpolation-handler emission gap.

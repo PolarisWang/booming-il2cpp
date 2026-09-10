@@ -78,6 +78,15 @@ public sealed partial class LoaderStage
                 ? string.Empty
                 : entryAssembly.EntryPointSubjectId;
 
+        // The REAL entry point, independent of the FullAssemblyClosure skeleton-mode
+        // contract above.  FullAssemblyClosure deliberately empties EntryPointSubjectId
+        // so the codegen discriminator (FullAssemblyClosure && empty entry) keeps
+        // selecting the assembly-full-closure skeleton plan; downstream publish-mode
+        // consumers (app_main.cpp generation) still need the resolved entry point.
+        var resolvedEntryPointSubjectId = !string.IsNullOrWhiteSpace(resolvedEntryPointSubjectIdOverride)
+            ? resolvedEntryPointSubjectIdOverride!
+            : entryAssembly.EntryPointSubjectId;
+
         return PipelineResult<LoadedWorldModel>.Ok(new LoadedWorldModel
         {
             InputAssemblyPath = request.InputAssemblyPath,
@@ -85,6 +94,7 @@ public sealed partial class LoaderStage
             Assembly = entryAssembly.Assembly,
             Assemblies = loadedAssemblies,
             EntryPointSubjectId = entryPointSubjectId,
+            ResolvedEntryPointSubjectId = resolvedEntryPointSubjectId,
             GenericInstantiationDemandGraph = MergeGenericInstantiationDemandGraphs(loadedAssemblies),
             Types = loadedAssemblies.SelectMany(assembly => assembly.Types).OrderBy(model => model.MetadataToken).ToList(),
             Fields = loadedAssemblies.SelectMany(assembly => assembly.Fields).OrderBy(model => model.MetadataToken).ToList(),
