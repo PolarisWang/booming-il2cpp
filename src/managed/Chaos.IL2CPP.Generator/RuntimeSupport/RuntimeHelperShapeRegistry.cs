@@ -70,6 +70,18 @@ public sealed partial class NativeAotLoweringPlanner
         private readonly List<GenericShapeDescriptor> _genericDescriptors = new();
         private readonly List<InlineShapeDescriptor> _inlineDescriptors = new();
 
+        /// <summary>
+        /// Callee subject-ids that were resolved by an inline shape descriptor.
+        /// These methods get native C++ emitted directly at the call site (no
+        /// AotCoreIr method artifact, hence no .jdata entry).  The verification
+        /// pipeline needs to know about them so it can classify the wrapper as
+        /// NativeGenerated rather than NoCanonicalBody.
+        /// </summary>
+        private readonly HashSet<string> _inlineMatchedCallees = new(StringComparer.Ordinal);
+
+        /// <summary>Snapshot of callees resolved via inline shapes (sorted for stable output).</summary>
+        public IReadOnlyList<string> InlineMatchedCallees => _inlineMatchedCallees.OrderBy(s => s, StringComparer.Ordinal).ToArray();
+
         /// <summary>FNV-1a 32-bit hash — must match the C++ constexpr implementation exactly.</summary>
         public static uint Fnv1aHash(string text)
         {
@@ -232,6 +244,7 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     cppExpression = result;
                     matchedDescriptor = entry;
+                    _inlineMatchedCallees.Add(callee);
                     return true;
                 }
             }

@@ -487,6 +487,9 @@ public sealed partial class NativeAotLoweringPlanner
         _jitDataOutputPath = jitDataOutputPath;
     }
 
+    /// <summary>Callees resolved via InlineShapeDescriptor (no .jdata entry but real native).</summary>
+    public IReadOnlyList<string> InlineMatchedCallees => _shapeRegistry.InlineMatchedCallees;
+
     public NativeAotTemplateModel Create(
         NativeAotLoweringPlanArtifact loweringPlan,
         AotCoreIrArtifact aotCoreIr,
