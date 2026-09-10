@@ -683,6 +683,11 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-smoke")
     message(STATUS "ENTERED linux-arm64-smoke branch")
     add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX=1)
     include(cmake/config-tier.cmake)
+    # tests/contracts/native/** CMakeLists call chaos_native_add_test() /
+    # chaos_native_glob_add_tests(); the macro definitions must be loaded before
+    # those add_subdirectory() calls or configure fails with
+    # 'Unknown CMake command "chaos_native_glob_add_tests"'.
+    include(cmake/chaos_native_test.cmake)
 
     add_subdirectory(third_party/fmt fmt_build)
     add_subdirectory(third_party/unordered_dense unordered_dense_build)
