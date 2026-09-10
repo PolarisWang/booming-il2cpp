@@ -154,6 +154,8 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference")
     add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX=1)
     include(cmake/config-tier.cmake)
     find_package(Python3 QUIET)
+    # chaos_runtime_core compiles gc_suspend_trampoline_x64.S on Linux.
+    enable_language(ASM)
 
     add_subdirectory(third_party/fmt fmt_build)
     add_subdirectory(third_party/unordered_dense unordered_dense_build)
@@ -364,6 +366,12 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-native")
     # this branch mirrors linux-x64-reference's target set.
     message(STATUS "ENTERED linux-x64-native branch")
     add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX=1)
+    # chaos_runtime_core compiles gc_suspend_trampoline_x64.S on Linux (see
+    # src/native/runtime-core/CMakeLists.txt).  Without ASM enabled CMake leaves
+    # CMAKE_ASM_COMPILE_OBJECT unset and fails at generate time with
+    # "Error required internal CMake variable not set" — which is exactly how
+    # gc-linux-tsan/ubsan/hybrid-jit were failing.
+    enable_language(ASM)
     include(cmake/config-tier.cmake)
     include(cmake/chaos_native_test.cmake)
     find_package(Python3 QUIET)
