@@ -157,6 +157,20 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference")
     # chaos_runtime_core compiles gc_suspend_trampoline_x64.S on Linux.
     enable_language(ASM)
 
+    # ── GoogleTest ────────────────────────────────────────────────────────
+    # tests/unit/runtime-native/** is added below and every
+    # chaos_native_add_test() target links gtest_main/gtest, so googletest must
+    # be provisioned here.  Without it: "fatal error: gtest/gtest.h: No such
+    # file or directory".
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.tar.gz
+        URL_HASH SHA256=7b42b4d6ed48810c5362c265a17faebe90dc2373c885e5216439d37927f02926
+    )
+    set(gtest_force_shared_crt OFF CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
+
     add_subdirectory(third_party/fmt fmt_build)
     add_subdirectory(third_party/unordered_dense unordered_dense_build)
     add_subdirectory(src/native/pal)
@@ -375,6 +389,20 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-native")
     include(cmake/config-tier.cmake)
     include(cmake/chaos_native_test.cmake)
     find_package(Python3 QUIET)
+
+    # ── GoogleTest ────────────────────────────────────────────────────────
+    # tests/unit/runtime-native/** is added below (UNIX) and every
+    # chaos_native_add_test() target links gtest_main/gtest, so googletest must
+    # be provisioned here.  Without it the build dies at the first gtest
+    # include: "fatal error: gtest/gtest.h: No such file or directory".
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.tar.gz
+        URL_HASH SHA256=7b42b4d6ed48810c5362c265a17faebe90dc2373c885e5216439d37927f02926
+    )
+    set(gtest_force_shared_crt OFF CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
 
     add_subdirectory(third_party/fmt fmt_build)
     add_subdirectory(third_party/unordered_dense unordered_dense_build)
