@@ -941,8 +941,13 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     ctx.native_dir.mkdir(parents=True, exist_ok=True)
 
     # -- 1. Find target DLL --
-    # Auto-detect DOTNET_ROOT if not set, via dotnet --info (cross-platform)
-    if "DOTNET_ROOT" not in os.environ:
+    # Resolve the dotnet root.  Prefer DOTNET_ROOT from the environment, but fall
+    # back to (a) `dotnet --info` and (b) well-known install locations — the
+    # Jenkins Windows agent runs as a service whose PATH often lacks dotnet, and
+    # a missing/empty DOTNET_ROOT in the child process makes every chunk fail
+    # with "DLL not found for <Assembly>".
+    if not os.environ.get("DOTNET_ROOT"):
+        detected = None
         try:
             info = subprocess.run(
                 ["dotnet", "--info"], capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=15
@@ -951,9 +956,23 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             if m:
                 base = Path(m.group(1).strip())
                 if base.is_dir():
-                    os.environ["DOTNET_ROOT"] = str(base.parent.parent)
+                    # .../dotnet/sdk/<ver>/ -> .../dotnet
+                    detected = base.parent.parent
         except (FileNotFoundError, subprocess.TimeoutExpired, OSError):
             pass
+        if detected is None:
+            import platform as _plat
+            for cand in (
+                Path(r"C:\Program Files\dotnet"),
+                Path(r"C:\Program Files (x86)\dotnet"),
+                Path("/usr/share/dotnet"),
+                Path("/usr/local/share/dotnet"),
+            ):
+                if (cand / "shared").is_dir():
+                    detected = cand
+                    break
+        if detected is not None:
+            os.environ["DOTNET_ROOT"] = str(detected)
 
     dotnet_root = os.environ.get("DOTNET_ROOT")
     runtime_base = Path(dotnet_root) / "shared" if dotnet_root else None
@@ -984,6 +1003,14 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         if c.exists():
             target_dll = c
             break
+
+    if target_dll is None:
+        # Debug output so the controller can diagnose "DLL not found"
+        _dbg = "; ".join(f"{c} exists={c.exists()}" for c in dll_candidates[:6])
+        print(f"  [build] DOTNET_ROOT={dotnet_root!r}")
+        print(f"  [build] DLL candidates: {_dbg}")
+        if runtime_base and runtime_base.is_dir():
+            print(f"  [build] shared children: {[p.name for p in runtime_base.iterdir()][:10]}")
 
     if target_dll is None:
         return StageResult(
