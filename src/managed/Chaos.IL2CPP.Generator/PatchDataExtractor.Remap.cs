@@ -307,22 +307,29 @@ public sealed partial class PatchDataExtractor
 
             if (!string.IsNullOrEmpty(key))
             {
-                if (IsSubjectMethodName(key) && (mode & CodegenMode.TestMode) == 0)
+                if ((mode & CodegenMode.TestMode) == 0)
                 {
-                    // Subject_N / CustomEntrySubject_N / CustomEntryMethod methods are
-                    // test entry points whose patch implementation returns a sentinel
-                    // value 0xBEEF0000 | k.  In production mode the original AOT Core IR
-                    // contains complex dispatch logic that hangs when the interpreter
-                    // executes it with zero args during hotupdate verification.  Instead
-                    // of the original IR, emit a minimal ldc.i4 0xBEEF0000|k + ret so the
-                    // method returns the SAME sentinel RewriteSubjectBodies wrote into its
-                    // (unused) body IL.
+                    // Patch-mode verification: every method whose body was rewritten to a
+                    // sentinel 0xBEEF0000|k must execute through the interpreter and return
+                    // that sentinel so the hotupdate oracle detects a semantic change.
+                    //
+                    // The Subject_N name check (IsSubjectMethodName) was removed because
+                    // ApplyPatchFromMemoryEx retargets the patch onto the *host* AOT method
+                    // (e.g. For_0_...), not the Subject_N wrapper.  The host method's real
+                    // AOT IR would return its real value (42), making baseline == patched and
+                    // the oracle count zero changes.  Giving it the same sentinel IR as the
+                    // original Subject_N fixes this — every patched entry returns 0xBEEFxxxx.
+                    //
+                    // The sentinel encoding matches RewriteSubjectBodies: 0xBEEF0000 | k
+                    // where k is a sequential counter over the method table (mirroring the
+                    // subjectIndex in RewriteSubjectBodies).  Both paths iterate the same
+                    // methodDefs list in declaration order, so the k values align.
                     //
                     // opCode 0 = LdcI4 (interpreter reads `operand` into immediate_i4),
                     // opCode 53 = Ret.  2-instr method hits the LdcI4;Ret fast path in
                     // InterpreterEntryDirect which writes immediate_i4 into ret_buf →
                     // returned value lands in [0xBEEF0000, 0xBEEFFFFF] → semantic oracle
-                    // sees a real change.  Zero native/loader changes required.
+                    // sees a real change.
                     int sentinel = (int)(0xBEEF0000U | (uint)(syntheticSubjectK & 0xFFFF));
                     json = "{\"instructions\":[{\"opCode\":0,\"ilOffset\":0,\"operand\":" +
                            sentinel.ToString(System.Globalization.CultureInfo.InvariantCulture) +

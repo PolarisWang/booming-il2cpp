@@ -896,9 +896,18 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         // The sentinel range [0xBEEF0000, 0xBEEFFFFF] is specific enough that a real
         // return value collision is virtually impossible (the 0xBExxxxxx prefix is
         // reserved for debug sentinels in the test framework).
+        //
+        // The comparison is done in UNSIGNED space.  PatchDataExtractor writes the
+        // sentinel as a signed int32 (e.g. 0xBEEF0000 → -1091633152), and that value
+        // survives the interpreter round-trip as a negative int64.  Comparing it
+        // against the signed literal 0xBEEF0000LL (a large positive number) would
+        // classify every real sentinel as "outside the range" and suppress the count,
+        // which is exactly the semanticChangedCount=0 symptom.  Reinterpreting both
+        // sides as uint64 compares the bit pattern the sentinel was built from.
+        auto _patched_bits = static_cast<CHAOS_IL2CPP_UINT64>(patched_value);
         if (patch_ctx != nullptr && !baseline_caught[si] && !patched_caught &&
             baseline_value[si] != patched_value &&
-            (patched_value < 0xBEEF0000LL || patched_value > 0xBEEFFFFFLL)) {
+            (_patched_bits < CHAOS_IL2CPP_UINT64_C(0xBEEF0000) || _patched_bits > CHAOS_IL2CPP_UINT64_C(0xBEEFFFFF))) {
             // Patched value is NOT in the sentinel range — this is a keep-native
             // method or a void method with garbage RAX.  Do NOT count as semantic
             // change (the baseline value is undefined for void methods).
