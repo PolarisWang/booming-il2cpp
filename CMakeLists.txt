@@ -50,6 +50,24 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     include(cmake/chaos_native_test.cmake)
     find_package(Python3 QUIET)
 
+    # ── GoogleTest ────────────────────────────────────────────────────────
+    # Every chaos_native_add_test() target links gtest_main/gtest, so googletest
+    # must be provisioned here (before the native contracts / runtime-native
+    # subdirectories) or their link steps fail with
+    # "LNK1181: cannot open input file 'gtest_main.lib'".
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.tar.gz
+        URL_HASH SHA256=7b42b4d6ed48810c5362c265a17faebe90dc2373c885e5216439d37927f02926
+    )
+    if(MSVC)
+        set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    else()
+        set(gtest_force_shared_crt OFF CACHE BOOL "" FORCE)
+    endif()
+    FetchContent_MakeAvailable(googletest)
+
     add_subdirectory(third_party/fmt fmt_build)
     add_subdirectory(third_party/unordered_dense unordered_dense_build)
     add_subdirectory(src/native/pal)
