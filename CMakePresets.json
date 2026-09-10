@@ -172,5 +172,12 @@
         "CHAOS_IL2CPP_EXEC_PROFILE": "desktop"
       }
     }
+  ],
+  "buildPresets": [
+    {
+      "name": "windows-x64-reference",
+      "configurePreset": "windows-x64-reference",
+      "configuration": "Release"
+    }
   ]
 }
