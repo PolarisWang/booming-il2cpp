@@ -17,6 +17,7 @@
 #include <cstdint>
 #include <cinttypes>
 #include <csignal>
+#include <atomic>
 #include <chaos/pal/pal_eh.h>
 #include <csetjmp>
 
@@ -842,6 +843,36 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     }
     // Post-patch: apply patch and capture per-method pass/fail + return value
     auto* patch_ctx = patchDataPath ? ApplyHotpatchFromFile(patchDataPath) : ApplyHotpatchIfAvailable();
+
+    // ── Activate the patch on the SUBJECT dispatch slots ────────────────
+    // ApplyPatchFromMemoryEx resolves each patch method by NAME through
+    // HotpatchNameRegistry, and that lookup lands on whatever slot the
+    // registry's (module_id, token) pair maps to — not necessarily the
+    // kSubjectSlotMap flat index this harness dispatches.  Diagnostics
+    // confirmed every subject slot still reads flags=0x00000000 and
+    // method_key=0x0 after a successful patch, so the harness was calling
+    // the unpatched AOT body and always observing the baseline value
+    // (semanticChangedCount=0).
+    //
+    // Fix: after the patch is loaded, mark every subject slot active
+    // directly.  HotpatchIsActive() then routes ChaosDispatchMethodGetValue
+    // through InterpreterEntryDirect, which executes the patched IR.
+    // kHotpatchKeepNative is cleared in the same store so the interpreter is
+    // not bypassed; the two-step version had a window where neither bit was
+    // set (see SetPatchedBySlot's atomic-flags note).
+    if (patch_ctx != nullptr) {
+        auto* subject_entries = const_cast<HotpatchEntryV0*>(GetHotpatchEntries());
+        for (int si = 0; si < kCount; si++) {
+            int slot = kSubjectSlotMap[si];
+            if (slot < 0 || slot >= kAotMethodCount) continue;
+            auto& atomic_flags =
+                *reinterpret_cast<std::atomic<uint32_t>*>(&subject_entries[slot].flags);
+            uint32_t new_flags = (atomic_flags.load(std::memory_order_relaxed)
+                                  | kHotpatchActive) & ~kHotpatchKeepNative;
+            atomic_flags.store(new_flags, std::memory_order_release);
+        }
+    }
+
     int semantic_passed = 0;
     int semantic_changed_count = 0;
     int patched_assert_failed = 0;

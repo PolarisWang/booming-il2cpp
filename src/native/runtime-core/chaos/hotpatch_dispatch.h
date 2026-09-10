@@ -24,6 +24,8 @@
 #define CHAOS_IL2CPP_HOTPATCH_DISPATCH_H_
 
 #include <cstdint>
+#include <cstdio>
+#include <cstdlib>
 #include <chaos/config.h>
 #include <chaos/native_types.h>
 
@@ -252,6 +254,21 @@ inline int64_t ChaosDispatchMethodGetValue(
     if (index < 0 || index >= count) return INT64_MIN;
     auto& entry = entries[index];
 
+    // ── TEMP DIAGNOSTIC (hotupdate semantic-verification investigation) ──
+    // Remove once semanticChangedCount > 0 is confirmed.
+    if (std::getenv("CHAOS_DISPATCH_DIAG") != nullptr) {
+        std::fprintf(stderr,
+            "[DISPATCH_DIAG] idx=%d flags=0x%08X keep_native=%d active=%d "
+            "direct_ptr=%p method_key=0x%llX thunks=%p\n",
+            index, entry.flags,
+            HotpatchShouldKeepNative(entry) ? 1 : 0,
+            HotpatchIsActive(entry) ? 1 : 0,
+            entry.direct_ptr,
+            static_cast<unsigned long long>(entry.method_key),
+            reinterpret_cast<const void*>(thunks));
+        std::fflush(stderr);
+    }
+
     // Keep-native fast path (subject methods) — call direct_ptr directly
     if (CHAOS_IL2CPP_LIKELY(HotpatchShouldKeepNative(entry))) {
         if (entry.direct_ptr) {
@@ -264,6 +281,11 @@ inline int64_t ChaosDispatchMethodGetValue(
         uint64_t __chaos_args[4] = {};
         uint64_t __chaos_ret[2] = {};
         InterpreterEntryDirect(entry.method_key, __chaos_args, __chaos_ret);
+        if (std::getenv("CHAOS_DISPATCH_DIAG") != nullptr) {
+            std::fprintf(stderr, "[DISPATCH_DIAG]   -> interpreter ret[0]=0x%llX\n",
+                static_cast<unsigned long long>(__chaos_ret[0]));
+            std::fflush(stderr);
+        }
         return static_cast<int64_t>(__chaos_ret[0]);
     }
     if (thunks) {
