@@ -530,3 +530,141 @@ testing/foundation-dll/nightly-build-report/
 
 # Stale pipeline artifacts (regenerated on each run)
 testing/foundation-dll/inject_getui.py
+
+# ── Root-level one-off debug/test artifacts (never source) ──
+_crypto_fact.json
+enum_parsing_output.txt
+err[0-9].txt
+immutable_analysis.md
+linq-test.json
+min_err.txt
+min_out.txt
+out[0-9].txt
+perf.data
+bash.exe.stackdump
+runner_stderr*.txt
+runner_stdout*.txt
+tmp_dump_output.txt
+tmp_fact.json
+tmp_fix*.js
+_tmp_*.py
+tests/runner/test-report.json
+
+# ── Root-level build/runtime artifacts (not source; stop committing these) ──
+build/
+results/
+optimization-campaign/
+il2cpp_dist/logs/
+tmp/
+--probe-mode
+pipeline.log
+pipeline_full_run.log
+ci-small-results-*.log
+benchmark-full-report.json
+benchmark-scan-report.json
+build_log.txt
+test_all_err.txt
+test_all_out.txt
+
+# Test run-output captures (stdout/stderr/trace dumps from test executions)
+**/aot_output.txt
+**/aot_stderr.txt
+**/runtime-self-test/**/stdout.txt
+**/runtime-self-test/**/stderr.txt
+**/runtime-self-test/**/trace_output.txt
+
+# ── Relocated foundation-dll family tree (tests/e2e/translation) — generated artifacts ──
+# The chunk pipeline's *discardable build outputs* now emit to
+# artifacts/foundation-dll/ (build_root() in _path.py). Sources stay in the
+# translation tree. The rules below are a transitional safety net for any
+# stray untracked file that might still land in the old location; they do
+# not affect tracked files (gitignore only shields untracked content).
+# artifacts/foundation-dll/ itself needs no rule — the top-level `artifacts/`
+# (L39) already ignores it wholesale.
+tests/e2e/translation/**/.hephaestus-cache/
+tests/e2e/translation/**/_dll/
+tests/e2e/translation/**/chunks/
+tests/e2e/translation/**/native/build*/
+tests/e2e/translation/**/build_jit*/
+tests/e2e/translation/**/build_jit_output/
+tests/e2e/translation/**/codegen/
+tests/e2e/translation/**/managed/**/build-output/
+tests/e2e/translation/**/results/
+tests/e2e/translation/**/Makefile
+tests/e2e/translation/**/CTestTestfile.cmake
+tests/e2e/translation/**/cmake_install.cmake
+tests/e2e/translation/**/*.o
+tests/e2e/translation/**/*.lib
+tests/e2e/translation/**/*.a
+
+# ── Chaos.TestFramework.Sdk — stray legacy build artifacts ──
+# A couple of L-series-era chunks/…/subjects_net*/ build outputs were once committed
+# under src/reference/Chaos.TestFramework.Sdk. Removed from tracking (git rm --cached,
+# kept on disk). These rules keep any regenerated equivalents out of the index.
+src/reference/Chaos.TestFramework.Sdk/**/chunks/
+src/reference/Chaos.TestFramework.Sdk/**/subjects_net*/
+src/reference/Chaos.TestFramework.Sdk/**/*.deps.json
+src/reference/Chaos.TestFramework.Sdk/**/bin/
+src/reference/Chaos.TestFramework.Sdk/**/obj/
+
+# Coverage reports (generated outputs — not source)
+tests/**/coverage.cobertura.xml
+
+# ── Session artifacts (debug dumps / generated / large inventories) ──
+/arith_block.txt
+/cls_err.txt
+/jit_allocation_stats.json
+/tests/e2e/verification/a1_fact_inventory.json
+/testing/
+/tests/e2e/verification/a0_inventory.json
+
+# ── GC/native debugging scratch (CDB/WinDbg dumps, PID files, err captures) ──
+# Leftover from windows-debug CDB sessions: heap/PID dumps must never enter git.
+*.err
+*_pid.txt
+*.pid
+/cdb*.txt
+/cdbmem.txt
+/cdbw.txt
+/diag*.txt
+/prec.err
+/r[0-9].txt
+/w.err
+
+# WCT deadlock-spy build artifact (compile wct_deadlock_spy.cpp manually)
+/scripts/wct_deadlock_spy.exe
+
+# Agent one-shot scratch (tmp_*) + debug build artifacts under scripts/debug/
+scripts/debug/tmp_*
+scripts/debug/*.exe
+
+.feishu-*.json
+.chk.json
+.cur.json
+.enrich-ctx/
+.*.json
+.enrich-ctx/
+*.tmp-feishu-status.py
+
+# Parallel-session Feishu board-query scratch (root) — not source
+.feishu-extract.py
+.tmp-feishu-status*.py
+.tmp-check-eng-*.py
+
+# Local-only Jira credentials (never commit)
+**/.config/chaos-il2cpp/
+jira_token
+.tmp-batch-m2.py
+.tmp-batch-*.py
+.batch-*.py
+.jira_*.py
+.jira_write.py
+.tmp-audit-*.py
+.tmp-extract-*.py
+.feishu-*.py
+.tmp-feishu*.py
+
+# PR log collection (sync_feishu_to_jira scratch)
+/pr_logs.zip
+/pr_logs/
+.ci-logs/

@@ -19,7 +19,7 @@ set(CHAOS_IL2CPP_CONFIG_TIER "debug" CACHE STRING "Build config tier: debug|prof
 # /GS function in any lib triggers 0xC0000409 on stack manipulation patterns
 # that are safe in AOT-generated code. SHIP tier omits it for production.
 if(MSVC AND NOT CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
-    add_compile_options(/GS-)
+    add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:/GS->")
 endif()
 
 if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
