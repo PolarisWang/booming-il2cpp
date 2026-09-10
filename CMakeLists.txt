@@ -15,6 +15,12 @@ endif()
 
 project(roadmap0_preset_router LANGUAGES CXX)
 
+# ── Project version (single source of truth: ./VERSION) ───────────────
+# Synced by scripts/release_bump.sh; enforced by
+# scripts/cleanliness/check_release_governance.py (VERSION == CHAOS_VERSION
+# == src/managed/Directory.Build.props <Version>).
+set(CHAOS_VERSION "0.2.5")
+
 # ── MSVC debug info: Embedded (/Z7) avoids shared .pdb contention ─────
 # The default /ZI (Edit-and-Continue PDB) crashes on systems where
 # mspdbsrv.exe (RPC service) is disabled or blocked.  /Z7 puts debug
