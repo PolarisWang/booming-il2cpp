@@ -48,7 +48,7 @@ CSHARP_ENUM_PATH = (
 
 
 def load_opcodes(path: Path):
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     return data["opcodes"]
 
@@ -79,7 +79,7 @@ def generate_cpp_enum(opcodes, path: Path):
         "",
     ]
     text = "\n".join(lines)
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write(text)
     print(f"  [ok] {path.relative_to(REPO_ROOT)} ({count} opcodes)")
 
@@ -111,7 +111,7 @@ def generate_cpp_names(opcodes, path: Path):
         "",
     ]
     text = "\n".join(lines)
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write(text)
     print(f"  [ok] {path.relative_to(REPO_ROOT)} ({count} names)")
 
@@ -134,7 +134,7 @@ def generate_csharp_enum(opcodes, path: Path):
         "",
     ]
     text = "\n".join(lines)
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write(text)
     print(f"  [ok] {path.relative_to(REPO_ROOT)} ({count} opcodes)")
 
