@@ -22,6 +22,12 @@ jobs:
   docs-deploy:
     runs-on: ${{ inputs.os }}
     timeout-minutes: ${{ inputs.timeout }}
+    # deploy-pages authenticates to Pages via an OIDC token, not the repo token.
+    # Without id-token: write the action fails with
+    # "Unable to get ACTIONS_ID_TOKEN_REQUEST_URL env variable".
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
