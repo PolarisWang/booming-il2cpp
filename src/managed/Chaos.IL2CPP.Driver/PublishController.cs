@@ -570,6 +570,11 @@ target_link_options(chaos_entry PRIVATE
             var asmSanitized = Sanitize(assemblyName);
             var structName = $"{asmSanitized}_{sanitized}";
 
+            // Sanitize the method name so generic names like <Main> become
+            // the C++-valid _Main_ — matching the codegen-emitted proxy struct
+            // (Sanitize replaces <, >, punctuation with underscores).
+            var sanitizedMethod = Sanitize(methodName);
+
             // NOTE: 'chaos_args' is the local variable name in the app_main template
             // (see template at ~line 382).  Keep in sync if the template changes.
             // The reinterpret_cast is safe because CHAOS_IL2CPP_INTPTR matches the
@@ -583,8 +588,8 @@ target_link_options(chaos_entry PRIVATE
             {
                 args = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_args)";
             }
-            nativeSymbol = $"{asmSanitized}_{sanitized}_{methodName}";
-            proxyCall = $"{structName}::{methodName}({args})";
+            nativeSymbol = $"{asmSanitized}_{sanitized}_{sanitizedMethod}";
+            proxyCall = $"{structName}::{sanitizedMethod}({args})";
         }
         catch (Exception ex)
         {
