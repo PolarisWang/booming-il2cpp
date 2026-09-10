@@ -294,13 +294,17 @@ TEST_F(YoungCollectorTest, ConservativeSweepSelfRefs) {
     // Override with a pointer-bearing layout
     GcLayoutRegistry::Instance().Register(sid, 64, kPtrOffsets, 1);
 
-    struct alignas(8) PtrType { uint64_t stable_id; uint64_t payload; void* ptr; };
-    static PtrType s_ti{};
-    s_ti.stable_id = sid;
+    // TypeInfo storage must be at least sizeof(TypeInfoHot) == 32 bytes:
+// GcScavengeObjectKnownNursery reads ti_ptr->flags at offset 31. A 24-byte
+// struct lands in the ASan global redzone -> global-buffer-overflow
+// (YoungCollectorTest_ConservativeSweepSelfRefs).
+struct alignas(8) TiBuf { uint64_t a; uint64_t b; void* c; uint32_t d; uint32_t e; };
+static TiBuf s_ti{};
+s_ti.a = sid;
     {
         auto* reg = &GcLayoutRegistry::Instance();
         uintptr_t ti_addr = reinterpret_cast<uintptr_t>(&s_ti);
-        reg->RegisterTypeInfoRange(ti_addr, ti_addr + sizeof(PtrType));
+        reg->RegisterTypeInfoRange(ti_addr, ti_addr + sizeof(TiBuf));
     }
 
     void* objA = NurseryAllocate(64);
