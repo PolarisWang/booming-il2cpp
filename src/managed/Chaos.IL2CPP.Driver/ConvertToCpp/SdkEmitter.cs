@@ -460,6 +460,10 @@ internal sealed class SdkEmitter
         // The prebuilt chaos_runtime_core.lib was compiled with a newer MSVC (19.42+)
         // that added internal CRT/STL symbols (e.g. _Thrd_sleep_for, __std_find_end_1)
         // not available in older MSVC. This stub provides fallback implementations.
+        //
+        // IMPORTANT — MSVC 19.42+ signatures differ from C11 threads:
+        //   _Thrd_sleep_for(unsigned long ms)        — takes ms directly, NOT a timespec ptr!
+        //   _Cnd_timedwait_for_unchecked(void*, void*, unsigned int) — ms, NOT a struct ptr!
         var crtStubsDst = Path.Combine(dstRuntimeStubs, "crt_stubs.cpp");
         if (!File.Exists(crtStubsDst))
         {
@@ -468,17 +472,16 @@ internal sealed class SdkEmitter
                 + "// referenced by prebuilt chaos_runtime_core.lib.\n"
                 + "#include <windows.h>\n"
                 + "#include <cstring>\n"
-                + "extern \"C\" int __cdecl _Thrd_sleep_for(const void* duration, void* remaining) {\n"
-                + "    const auto* ts = static_cast<const long*>(duration);\n"
-                + "    if (!ts) return -1;\n"
-                + "    DWORD ms = static_cast<DWORD>(ts[0] * 1000 + ts[1] / 1000000);\n"
-                + "    if (ms == 0 && (ts[0] > 0 || ts[1] > 0)) ms = 1;\n"
+                + "// _Thrd_sleep_for: MSVC 19.42+ passes ms directly (unsigned long),\n"
+                + "// NOT a struct timespec pointer.  x64 ABI: 4-byte ulong in register.\n"
+                + "extern \"C\" void __stdcall _Thrd_sleep_for(unsigned long ms) {\n"
+                + "    if (ms == 0) ms = 1;\n"
                 + "    Sleep(ms);\n"
-                + "    if (remaining) std::memset(remaining, 0, sizeof(long) * 2);\n"
-                + "    return 0;\n"
                 + "}\n"
-                + "extern \"C\" int __cdecl _Cnd_timedwait_for_unchecked(void*, void*, const void*) {\n"
-                + "    Sleep(1); return 0;\n"
+                + "// _Cnd_timedwait_for_unchecked: MSVC 19.42+ passes ms as unsigned int.\n"
+                + "extern \"C\" int __stdcall _Cnd_timedwait_for_unchecked(void*, void*, unsigned int ms) {\n"
+                + "    Sleep(ms > 0 ? ms : 1);\n"
+                + "    return 0;  // _Thrd_result::_Success\n"
                 + "}\n"
                 + "extern \"C\" const unsigned char* __cdecl __std_find_last_trivial_1(\n"
                 + "    const unsigned char* first, const unsigned char* last, unsigned char val) {\n"

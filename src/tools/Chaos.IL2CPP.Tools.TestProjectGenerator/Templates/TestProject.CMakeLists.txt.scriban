@@ -165,6 +165,21 @@ set(CHAOS_OBJECT_STUBS
 set(CHAOS_GC_ALLOC_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
 )
+# crt_stubs.cpp: the prebuilt chaos_runtime_core.lib is compiled with MSVC 19.42+,
+# whose CRT/STL references internal symbols (_Thrd_sleep_for,
+# _Cnd_timedwait_for_unchecked, __std_find_last_trivial_1, __std_find_end_1) that
+# older link-time MSVC doesn't provide.  SdkEmitter emits the stub — it must be
+# compiled in or the link fails with LNK1120 "4 unresolved externals".
+# Windows/MSVC only: the stub includes <windows.h> and implements the timers via
+# Sleep(), so it cannot build on Linux (where the runtime lib is built from source
+# and carries no such references anyway).
+if(MSVC)
+  set(CHAOS_CRT_STUBS
+      "${CHAOS_SDK_DIR}/runtime_stubs/crt_stubs.cpp"
+  )
+else()
+  set(CHAOS_CRT_STUBS "")
+endif()
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
@@ -185,6 +200,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_CRYPTO_STUBS}
     ${CHAOS_OBJECT_STUBS}
     ${CHAOS_GC_ALLOC_STUBS}
+    ${CHAOS_CRT_STUBS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
