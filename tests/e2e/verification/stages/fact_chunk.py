@@ -91,6 +91,60 @@ def _run_single_fact(exe_path: Path, tech: str) -> dict:
     }
 
 
+def _return_type_of(subject_id: str | None) -> str | None:
+    """Extract the declared return type from a methodSubjectId.
+
+    methodSubjectId format: ``<Assembly>/<Type>::<Method>:<ReturnType>(<params>)``
+    e.g. ``System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::OpenRead:System.IO.Compression.ZipArchive(System.String)``
+    → ``System.IO.Compression.ZipArchive``
+
+    Returns None when the subject-id is missing/malformed.
+    """
+    if not subject_id or "::" not in subject_id:
+        return None
+    after = subject_id.split("::", 1)[1]
+    if ":" not in after:
+        return None
+    ret = after.split(":", 1)[1]
+    return ret.split("(", 1)[0].strip() or None
+
+
+# Return types that carry NO assertable return value: the subject is a smoke
+# execution ("did it run without crashing") rather than a semantic check.
+#   - System.Void            — nothing to compare
+#   - Task / ValueTask       — async void; unwrapped to void by the emitter
+_UNASSERTABLE_RETURN_TYPES = frozenset({
+    "System.Void",
+    "System.Threading.Tasks.Task",
+    "System.Threading.Tasks.ValueTask",
+})
+
+
+def classify_fact_record(rec: dict, return_type: str | None) -> str:
+    """Classify one runtime fact record into exactly one bucket.
+
+    This is THE single source of truth for real-vs-smoke.  Both the chunk-level
+    ``fact.json`` aggregate and the standalone honest_report consume this, so the
+    two can never disagree.
+
+    Buckets:
+      * ``real``        — value != 42: a genuine assertion produced a real value.
+      * ``unassertable``— value == 42 on a method with no return value (void /
+                          async-void).  The 42 is structural, not a coverage gap.
+      * ``smoke``       — value == 42 on a method that DOES return a value: it
+                          should have produced a real assertion but did not.
+                          This is the honest coverage gap.
+      * ``failed``      — passed == False: a genuine assertion failure.
+    """
+    if not rec.get("passed"):
+        return "failed"
+    if rec.get("value") != 42:
+        return "real"
+    if return_type in _UNASSERTABLE_RETURN_TYPES:
+        return "unassertable"
+    return "smoke"
+
+
 def _count_unverified_markers(ctx: ChunkContext) -> int:
     """Scan CombinedSubjects.cs for [UNVERIFIED] markers.
 
@@ -169,7 +223,15 @@ def _write_fact_history(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
 def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | None,
                         meta_total: int | None, fact_method_count: int | None,
                         value_warnings: int, unverified_smoke: int = 0) -> None:
-    """Write fact.json to chunk results dir for aggregate stage to read."""
+    """Write fact.json + fact-results.json to chunk results dir.
+
+    ``fact-results.json`` is the SOURCE OF TRUTH: each per-method runtime record
+    is stamped with a ``resultKind`` (real / unassertable / smoke / failed) by
+    ``_annotate``, which joins against metadata to get the return type.
+
+    ``fact.json`` is an aggregate DERIVED from the same records, so down-stream
+    consumers (gate, honest_report) always see the same numbers.
+    """
     chunk_results_dir = ctx.chunk_dir / "results"
     chunk_results_dir.mkdir(parents=True, exist_ok=True)
     fact_path = chunk_results_dir / "fact.json"
@@ -183,37 +245,14 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         if jit_rate > aot_rate:
             passed = jit_passed
             total = jit_total
-    fact_data = {
-        "passed": passed,
-        "total": total,
-        # Methods whose AOT path is an UNVERIFIED smoke (managed exception not
-        # replicated by stub).  They are NOT semantic verifications: the runner
-        # counts them as passed purely because no Assert.* threw.  Expose the
-        # count + a "real" total (total - smoke) so aggregate/reporting can show
-        # genuinely-verified coverage alongside the smoke-only tail and a reader
-        # is never misled that an unverified stub call was a real assertion pass.
-        "unverifiedSmoke": unverified_smoke,
-        "realTotal": max(0, total - unverified_smoke),
-        "realPassed": max(0, passed - unverified_smoke),
-        "valueSuspicious": value_warnings > 0,
-        "valueWarnings": value_warnings,
-        "metaTotal": meta_total or total,
-        "factMethodCount": fact_method_count or total,
-    }
-    try:
-        fact_path.write_text(json.dumps(fact_data, ensure_ascii=False, indent=2), encoding="utf-8")
-    except OSError:
-        pass  # non-fatal
 
-    # Write per-method fact results for Allure report generation.  Each record is
-    # additionally stamped with the codegen translation category (bodyAvailability,
-    # annotated into subjects.metadata.json by the build stage) so downstream
-    # fact-failures reporting can bucket failures by 'real AOT native' vs 'no
-    # canonical body / fallback'.  The runtime per-method `si` is the sequential
-    # fact-subject index, which equals the metadata methods index (verified: the
-    # native runner emits fact records in metadata declaration order), so lookup by
-    # positional index into metadata.methods is correct.
+    # ── Build the per-method annotated records FIRST (source of truth) ──
+    # Each record is stamped with bodyAvailability + returnType + resultKind by
+    # _annotate(), so fact.json can be derived from these rather than from the
+    # compile-time [UNVERIFIED] marker count (which only sees what ATG chose to
+    # label and therefore diverges from the runtime truth).
     avail_by_index: dict[int, str] = {}
+    sid_by_index: dict[int, str] = {}
     try:
         md = json.loads(ctx.subjects_metadata_path.read_text(encoding="utf-8"))
         for mm in md.get("methods") or []:
@@ -221,8 +260,12 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
             ba = mm.get("bodyAvailability")
             if idx is not None and ba:
                 avail_by_index[int(idx)] = ba
+            if idx is not None:
+                sid = mm.get("methodSubjectId") or ""
+                sid_by_index[int(idx)] = sid
     except (json.JSONDecodeError, OSError):
         avail_by_index = {}
+        sid_by_index = {}
 
     def _annotate(records: list) -> list:
         if not records:
@@ -231,6 +274,11 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
             idx = rec.get("si", rec.get("methodIndex"))
             if idx is not None and int(idx) in avail_by_index:
                 rec["bodyAvailability"] = avail_by_index[int(idx)]
+            if idx is not None and int(idx) in sid_by_index:
+                sid = sid_by_index[int(idx)]
+                rt = _return_type_of(sid)
+                rec["returnType"] = rt
+                rec["resultKind"] = classify_fact_record(rec, rt)
         return records
 
     per_method = {
@@ -241,6 +289,41 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     try:
         (chunk_results_dir / "fact-results.json").write_text(
             json.dumps(per_method, ensure_ascii=False), encoding="utf-8")
+    except OSError:
+        pass  # non-fatal
+
+    # ── Aggregate per-record resultKind (records → fact.json, one truth) ──
+    annotated = per_method.get("aot") or []
+    real_ct = sum(1 for r in annotated if r.get("resultKind") == "real")
+    unassertable_ct = sum(1 for r in annotated if r.get("resultKind") == "unassertable")
+    smoke_ct = sum(1 for r in annotated if r.get("resultKind") == "smoke")
+    failed_ct = sum(1 for r in annotated if r.get("resultKind") == "failed")
+
+    # Real-signal numerator: records that produced/or would produce a genuine
+    # semantic check (a real value, or a genuine failure).  unassertable records
+    # stay in the denominator so an all-void chunk cannot claim a free 100%.
+    real_signal = real_ct + failed_ct
+
+    fact_data = {
+        "passed": passed,
+        "total": total,
+        # ── Runtime-derived real-vs-smoke (single source of truth) ──
+        "realVerified": real_ct,        # value != 42: genuine assertion value
+        "unassertable": unassertable_ct,  # void/async-void: 42 is structural
+        "smokeUnknown": smoke_ct,       # has a return type but returned 42 → GAP
+        "failed": failed_ct,            # passed == False
+        # ── Legacy fields (backward compat; now runtime-based, not marker-based) ──
+        "realTotal": real_signal,
+        "realPassed": real_ct,
+        "unverifiedSmoke": unassertable_ct + smoke_ct,
+        "unverifiedMarkers": unverified_smoke,  # diagnostic only (compile-time)
+        "valueSuspicious": value_warnings > 0,
+        "valueWarnings": value_warnings,
+        "metaTotal": meta_total or total,
+        "factMethodCount": fact_method_count or total,
+    }
+    try:
+        fact_path.write_text(json.dumps(fact_data, ensure_ascii=False, indent=2), encoding="utf-8")
     except OSError:
         pass  # non-fatal
 

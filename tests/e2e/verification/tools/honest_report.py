@@ -42,14 +42,43 @@ except Exception:
 
 
 def _fact_stats(fr: Path):
-    if not fr.is_file(): return None
+    """Read per-chunk fact-results and derive real-vs-smoke from the
+    runtime-stamped ``resultKind`` field (written by fact_chunk.py _annotate).
+
+    Factories to ``fact.json`` for legacy chunks (pre-runtime-enrichment) which
+    use ``realTotal``/``realPassed`` / fall back to marker-based counting.
+
+    The returned dict always has ``{total, nominal, realVerified, unassertable,
+    smokeUnknown, failed}`` so consumers never see missing keys.
+    """
+    result = dict(total=0, nominal=0, realVerified=0, unassertable=0,
+                  smokeUnknown=0, failed=0)
+    if not fr.is_file():
+        return None
     d = json.loads(fr.read_text(encoding="utf-8"))
     a = d.get("aot", [])
-    t = len(a)
-    if t == 0: return None
-    nm = sum(1 for r in a if r.get("passed"))
+    result["total"] = len(a)
+    if result["total"] == 0:
+        return None
+    # Check for the runtime-enriched resultKind (the single source of truth)
+    kinds = [r.get("resultKind") for r in a if r.get("resultKind")]
+    if kinds:
+        result["nominal"] = sum(1 for r in a if r.get("passed"))
+        result["realVerified"] = sum(1 for k in kinds if k == "real")
+        result["unassertable"] = sum(1 for k in kinds if k == "unassertable")
+        result["smokeUnknown"] = sum(1 for k in kinds if k == "smoke")
+        result["failed"] = sum(1 for k in kinds if k == "failed")
+        return result
+
+    # Legacy: no resultKind — fall back to value==42 detection
+    result["nominal"] = sum(1 for r in a if r.get("passed"))
     sm = sum(1 for r in a if r.get("value") == 42)
-    return dict(total=t, nominal=nm, realTotal=max(0, t - sm), realPassed=max(0, nm - sm), smoke42=sm)
+    t = result["total"]
+    result["realVerified"] = max(0, result["nominal"] - sm)
+    result["unassertable"] = 0
+    result["smokeUnknown"] = sm
+    result["failed"] = t - result["nominal"]
+    return result
 
 
 def _bench_stats(br: Path):
@@ -130,14 +159,15 @@ def main() -> int:
 
     # build table
     lines = []
-    hdr = (f"{'CHUNK':56s}{'F_tot':>5}{'F_nom':>6}{'F_real':>6}{'F_smk':>6}"
-           f"{'real%':>5}  {'B_ok':>5}{'B_stub':>5}  {'HU_sem':>6}{'HU_pch':>6}  {'GATE':>6}")
+    hdr = (f"{'CHUNK':56s}  {'F_tot':>5}  {'F_nom':>4}"
+           f"  {'real':>4}  {'unassert':>7}  {'smoke?':>6}  {'fail':>4}"
+           f"  {'real%':>5}   {'B_ok':>4}{'B_stub':>5}   {'HU_sem':>6}{'HU_pch':>6}   {'GATE':>4}")
     sep = "-" * len(hdr)
     lines.append("")
     lines.append(hdr)
     lines.append(sep)
 
-    ft, fn, frl, fs, bo, bs, hs, hp, gc, bg, hg = [0] * 11
+    ft, fn, frl, fu, fs, ff, bo, bs, hs, hp, bg, hg = [0] * 12
     gk = []
     for key in sorted(seen, key=lambda k: k.lower()):
         info = seen[key]
@@ -149,25 +179,29 @@ def main() -> int:
 
         # compute gate
         gt = classify_gate(f) if f else "skip"
-        real_t = f["realTotal"] if f else 0
-        real_p = f["realPassed"] if f else 0
-        pct = real_p / real_t * 100 if real_t > 0 else 0.0
+        real_v = f["realVerified"] if f else 0
+        unassert = f["unassertable"] if f else 0
+        smoke_u = f["smokeUnknown"] if f else 0
+        fail_ct = f["failed"] if f else 0
+        pct = real_v / f["total"] * 100 if f and f["total"] > 0 else 0.0
 
         b_stub = b["stub"] if b else 0
         b_total = (b["nonStub"] or 0) if b else 0
         h_sem = h["semantic"] if h else 0
         h_pch = h["patch"] if h else 0
-        if f: ft += f["total"]; fn += f["nominal"]; frl += f["realTotal"]; fs += f["smoke42"]
+        if f:
+            ft += f["total"]; fn += f["nominal"]
+            frl += real_v; fu += unassert; fs += smoke_u; ff += fail_ct
         if b: bo += b["nonStub"]; bs += b["stub"]
         if h: hs += h["semantic"]; hp += h["patch"]
         if gt == "fail": bg += 1; gk.append(key); hg += 1
         gs = "PASS" if gt == "pass" else "FAIL" if gt == "fail" else "skip"
-        lines.append(f"{key:56s}{f['total'] if f else 0:5d}"
-                     f"{f['nominal'] if f else 0:6d}{real_t:6d}{(f['smoke42'] if f else 0):6d}"
-                     f"{pct:4.0f}%  {b_total:5d}{b_stub:5d}  {h_sem:6d}{h_pch:6d}  {gs:>6}")
+        lines.append(f"{key:56s}  {f['total'] if f else 0:5d}  {f['nominal'] if f else 0:4d}"
+                     f"  {real_v:4d}  {unassert:7d}  {smoke_u:6d}  {fail_ct:4d}"
+                     f"  {pct:4.1f}%   {b_total:4d}{b_stub:5d}   {h_sem:6d}{h_pch:6d}   {gs:>4}")
 
     lines.append(sep)
-    lines.append(f"{'TOTAL':56s}{ft:5d}{fn:6d}{frl:6d}{fs:6d}       {bo:5d}{bs:5d}  {hs:6d}{hp:6d}  gated_b={bg}  gated_hu={hg}")
+    lines.append(f"{'TOTAL':56s}{ft:5d}{fn:6d}{frl:5d}{fu:8d}{fs:6d}{ff:<5}       {bo:5d}{bs:5d}  {hs:6d}{hp:6d}  gated_b={bg}  gated_hu={hg}")
     lines.append(f"\nGate ratio threshold: {gate_ratio}  |  Gated chunks: {bg}")
     if gk:
         lines.append(f"  gated list: {', '.join(gk)}")
