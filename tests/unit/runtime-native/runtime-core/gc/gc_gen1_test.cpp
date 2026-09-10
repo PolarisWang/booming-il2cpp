@@ -370,15 +370,20 @@ TEST_F(Gen1Test, Gen1ShouldCollect_OccupancyBased) {
     // High occupancy should trigger collection.
     EXPECT_TRUE(GcGen1ShouldCollect());
 
-    // Collect and verify compaction for new survivors.
+    // Collect and verify: with gen1_prev_compact_end == nullptr (first collection
+    // after reset), ALL live survivors are treated as "old" and promoted to Gen2 —
+    // none are compacted.  This is correct C20 behavior: gen1 has no "new" survivors
+    // until it has run at least one collection that established a compaction boundary.
     Gen1CollectionResult r = GcGen1Collection();
     EXPECT_GT(r.objects_in_gen1, 0u);
     EXPECT_FALSE(r.promotion_failed);
-    // With C20, "new" survivors are compacted in Gen1 (not promoted).
-    // The live gen1_obj will be compacted to Gen1 start.
+    // With gen1_prev_compact_end == nullptr, every live object is promoted
+    // (zero survivors get the compaction path).
     auto* bump_after = g_young_gen.gen1_bump.load(std::memory_order_acquire);
-    EXPECT_GT(bump_after, gen1->begin);
-    EXPECT_GT(r.bytes_compacted, 0u);
+    EXPECT_EQ(bump_after, gen1->begin);          // All promoted, nothing compacted
+    EXPECT_EQ(r.bytes_compacted, 0u);            // No bytes compacted
+    EXPECT_GT(r.objects_promoted, 0u);           // Survivors promoted instead
+    EXPECT_GT(r.bytes_promoted, 0u);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
