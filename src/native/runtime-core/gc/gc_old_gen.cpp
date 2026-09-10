@@ -10,15 +10,12 @@
 #include "gc_bgc.h"
 #include "gc_bit_utils.h"
 #include "gc_card_table.h"
-#include "gc_lock.h"          // ScopedPreemptiveMode (preemptive-wrap lock regions)
-#include "gc_static_roots.h"
 #include "gc_demotion.h"
 #include "gc_events.h"
 #include "gc_etw.h"
 #include "gc_helpers.h"
 #include "gc_layout.h"
 #include "gc_loh.h"
-#include "gc_config.h"
 #include "gc_region.h"
 #include "gc_numa.h"
 #include "gc_parallel_mark.h"
@@ -87,14 +84,7 @@ MarkSweepOldGen::~MarkSweepOldGen() {
     auto* page = page_list_;
     while (page != nullptr) {
         auto* next = page->next;
-        page_list_ = next;
-        // Teardown at process exit: VirtualFree the pages DIRECTLY, bypassing
-        // FreePage()'s GcUnregisterHeapRange.  At static-destruction the card
-        // table's g_card_l1 (a std::unique_ptr TU global) may already be torn
-        // down (unspecified cross-TU destruction order vs g_old_gen), so reading
-        // it here is a use-after-free -> teardown SEGFAULT.  Card/segment
-        // cleanup is irrelevant at exit — the OS reclaims all VM.
-        VirtualFreePage(page, page->page_size);
+        FreePage(page);
         page = next;
     }
     page_list_ = nullptr;
@@ -264,8 +254,7 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
     // Try to recycle a pooled page first (avoids VirtualAlloc syscall).
     // Prefer a page from the same NUMA node as the current thread.
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         if (!page_pool_.empty()) {
             int current_node = GcNumaNodeCount() > 1 ? GcNumaCurrentNode() : 0;
             CHAOS_IL2CPP_SIZE pool_idx = page_pool_.size() - 1;  // fallback: back
@@ -295,9 +284,6 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
             recycled->preferred_sc_idx = (preferred_sc_idx >= 0 && preferred_sc_idx < kOldGenNumSizeClasses)
                 ? static_cast<int8_t>(preferred_sc_idx) : static_cast<int8_t>(-1);
             recycled->in_use.store(true, std::memory_order_release);
-            // Demoted set is page-header-stale after recommit (Windows zeroes the
-            // page).  Reset explicitly for clarity/safety.
-            recycled->demoted_count.store(0, std::memory_order_release);
 
             // Clear bitmap (page_size/payload_size/bitmap_bytes were restored
             // from PoolEntry after recommit — Windows zeroes the entire page
@@ -330,7 +316,6 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
     mem->bitmap_bytes = bitmap_bytes;
     mem->scanning = scanning;
     mem->in_use.store(true, std::memory_order_release);
-    mem->demoted_count.store(0, std::memory_order_release);  // in-place demotion set starts empty
 
     // Mark oversized pages so sweep handles them differently.
     // A page is oversized only when holding a single large object (>32KB).
@@ -375,8 +360,7 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
     carve_free_lists(mem, preferred_sc_idx);
     // Link into page list.
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         mem->next = page_list_;
         page_list_ = mem;
         page_count_++;
@@ -384,17 +368,8 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
 
         if (heap_base_ == 0) {
             heap_base_ = reinterpret_cast<uintptr_t>(mem);
-            // NOTE: The card table's g_heap_base is NOT overridden here (the
-            // historic GcSetHeapBase(page) call was removed).  g_heap_base
-            // must remain the MINIMUM address registered with the card table
-            // so the (addr - g_heap_base) >> kCardShift index math in the
-            // write barrier, IsDirty, ClearCardRange and ScanDirtyCards* stay
-            // consistent with every registered segment's stored seg_idx.  The
-            // GcRegisterHeapRange() below is the single owner of base
-            // maintenance: when this page sits below the current base it
-            // lowers g_heap_base and re-keys the L1 table (see below-base
-            // path in gc_card_table.cpp); otherwise it registers segments at
-            // their real indices without perturbing the base.
+            // Align card table heap_base to the actual first page address.
+            GcSetHeapBase(reinterpret_cast<void*>(heap_base_));
         }
 
         // Register page with the two-level card table so write barriers
@@ -410,38 +385,11 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
 
 void MarkSweepOldGen::FreePage(OldGenPage* page) {
     if (page == nullptr) return;
-    // R4/CoreCLR-aligned: freeing a page must pair with unregistering its card
-    // range so "registered segments == committed pages" holds (no segment leak,
-    // no stale cards for freed memory).  Guard: only unregister segments that no
-    // OTHER live page maps into — a 64KB-old-gen page usually owns its 64KB
-    // segment 1:1, but if a segment is shared with a sibling page, freeing it
-    // would leave the sibling's DirtyCard writing to freed segment memory (UAF).
-    uintptr_t start = reinterpret_cast<uintptr_t>(page);
-    uintptr_t end   = start + page->page_size;
-    bool shared = false;
-    {
-        // Compute the segment range this page maps to.
-        uintptr_t first_idx = (start - g_heap_base) >> kCardShift;
-        uintptr_t last_idx  = (end - 1 - g_heap_base) >> kCardShift;
-        uintptr_t first_seg = first_idx / kCardsPerSegment;
-        uintptr_t last_seg  = last_idx / kCardsPerSegment;
-        for (auto* p = page_list_; p != nullptr; p = p->next) {
-            if (p == page || !p->in_use.load(std::memory_order_acquire)) continue;
-            uintptr_t ps = reinterpret_cast<uintptr_t>(p);
-            uintptr_t pe = ps + p->page_size;
-            uintptr_t ps_seg = ((ps - g_heap_base) >> kCardShift) / kCardsPerSegment;
-            uintptr_t pe_seg = ((pe - 1 - g_heap_base) >> kCardShift) / kCardsPerSegment;
-            if ((ps_seg <= last_seg && pe_seg >= first_seg)) { shared = true; break; }
-        }
-    }
-    if (!shared) {
-        GcUnregisterHeapRange(start, end);
-    }
     VirtualFreePage(page, page->page_size);
 }
 
-
 // ���� Sorted page index (doubly-buffered for lock-free reads) ������������
+
 void MarkSweepOldGen::RebuildPageArray() {
     // Collect all in-use pages.
     int count = 0;
@@ -629,20 +577,6 @@ bool MarkSweepOldGen::IsInOldGen(const void* ptr) const {
     return false;
 }
 
-bool IsInDemotedSet(const void* ptr) {
-    if (ptr == nullptr) return false;
-    // Demoted objects live in old-gen pages; locate the page then scan its
-    // inline demoted array.  Muted only at STW safepoint; read-only here.
-    auto* page = G_OldGen().FindPage(ptr);
-    return page != nullptr && page->DemotedContains(ptr);
-}
-
-char* IsInDemotedSetGetBase(const void* ptr) {
-    if (ptr == nullptr) return nullptr;
-    auto* page = G_OldGen().FindPage(ptr);
-    return page != nullptr ? page->DemotedBase(ptr) : nullptr;
-}
-
 uint64_t MarkSweepOldGen::DiagCountOxFFBytes() const {
     uint64_t count = 0;
     auto* page = page_list_;
@@ -700,8 +634,7 @@ bool MarkSweepOldGen::IsMarked(const void* obj) const {
 
 void MarkSweepOldGen::AddToMarkStack(void* obj) {
     if (obj == nullptr) return;
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
     mark_stack_.push_back(obj);
 }
 
@@ -725,8 +658,7 @@ int MarkSweepOldGen::SizeClassIndex(CHAOS_IL2CPP_SIZE size) const {
 void* MarkSweepOldGen::TryAllocateFromFreeLists(CHAOS_IL2CPP_SIZE size, int sc_idx) {
     if (sc_idx < 0) return nullptr;
 
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
 
     // Check the cached last-used page first �� avoids O(n) walk.
     auto* page = last_alloc_page_[sc_idx];
@@ -770,8 +702,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     // AllocatePage() which takes mutex_ internally �� using mutex_ here
     // would deadlock (std::mutex is non-recursive).
     if (!initialized_.load(std::memory_order_acquire)) {
-        const ScopedPreemptiveMode preempt_init;
-        GcSpinLockGuard lock(init_mutex_);
+        std::lock_guard<std::mutex> lock(init_mutex_);
         if (!initialized_.load(std::memory_order_acquire)) {
             Init(0, 8);
             initialized_.store(true, std::memory_order_release);
@@ -805,18 +736,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     // Before allocating a new page, check whether the hard limit would
     // be exceeded.  If so, return nullptr — the caller will go through
     // HandleOomCondition which may trigger a full GC to free memory.
-    //
-    // Fix-A (recovery routing): RELAX this gate during OOM recovery
-    // (GcInOomRecovery true — i.e. this is the post-full-GC step-2 retry).
-    // The full GC just built old-gen free lists from reclaimed pages; reusing
-    // those lists (TryAllocateFromFreeLists / inline free-list pop below)
-    // touches ONLY already-committed pages and does NOT grow the heap, so the
-    // hard limit (derived from the monotonic estimated_heap_size_ which never
-    // shrinks after a collection) must not block genuine reuse.  True growth
-    // comes only from AllocatePage carving a NEW page — the OS allocation
-    // fails naturally when the heap is genuinely exhausted.  On the normal
-    // (non-recovery) fast path the gate is unchanged.
-    if (G_Scheduler().ExceedsHardLimit(size) && !GcInOomRecovery()) {
+    if (G_Scheduler().ExceedsHardLimit(size)) {
         CHAOS_IL2CPP_LOG_WARN_M("OldGen", "hard_limit_reached size={0}",
             static_cast<unsigned long long>(size));
         return nullptr;
@@ -848,7 +768,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
             Ctx ctx{size, scanning_required};
             return HandleOomCondition([](void* c) -> void* {
                 auto* p = static_cast<Ctx*>(c);
-                return G_OldGen().Allocate(p->s, p->scan);
+                return g_old_gen.Allocate(p->s, p->scan);
             }, &ctx, size);
         }
 
@@ -884,7 +804,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
             Ctx ctx{size, scanning_required};
             return HandleOomCondition([](void* c) -> void* {
                 auto* p = static_cast<Ctx*>(c);
-                return G_OldGen().Allocate(p->s, p->scan);
+                return g_old_gen.Allocate(p->s, p->scan);
             }, &ctx, size);
         }
         sc_idx = SizeClassIndex(size);
@@ -900,14 +820,12 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     // Try free lists.
     auto* ptr = TryAllocateFromFreeLists(size, sc_idx);
     if (ptr != nullptr) {
-        free_list_hits_.fetch_add(1, std::memory_order_relaxed);
         GcRecordAlloc(size, false);
         memory_domain::GcTrackDomainAlloc(size);
         return ptr;
     }
 
     // Miss: allocate a new page
-    free_list_carves_.fetch_add(1, std::memory_order_relaxed);
     auto* page = AllocatePage(kOldGenPageSize, scanning_required, sc_idx);
     if (page == nullptr) {
         CHAOS_IL2CPP_LOG_ERROR_M("OldGen", "AllocatePage failed sc_idx={0} scanning={1}",
@@ -920,7 +838,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
         Ctx ctx{size, scanning_required};
         return HandleOomCondition([](void* c) -> void* {
             auto* p = static_cast<Ctx*>(c);
-            return G_OldGen().Allocate(p->s, p->scan);
+            return g_old_gen.Allocate(p->s, p->scan);
         }, &ctx, size);
     }
 
@@ -928,8 +846,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     // TryAllocateFromFreeLists walk (which would re-acquire mutex_ and scan
     // the entire page_list_ for an entry we know exists on this new page).
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         if (page->free_lists[sc_idx] != nullptr) {
             auto* block = page->free_lists[sc_idx];
             page->free_lists[sc_idx] = block->next;
@@ -944,7 +861,6 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     // Fallback: retry free list walk (should be rare — new page was just carved).
     ptr = TryAllocateFromFreeLists(size, sc_idx);
     if (ptr != nullptr) {
-        free_list_hits_.fetch_add(1, std::memory_order_relaxed);
         GcRecordAlloc(size, false);
         memory_domain::GcTrackDomainAlloc(size);
     }
@@ -957,8 +873,7 @@ void MarkSweepOldGen::Free(void* ptr) {
     // Oversized pages: unlink from page list and virtual-free immediately.
     // Take the mutex first to protect the FindPage �� page_list_ traversal
     // from concurrent page_list_ mutations during GC Collect().
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
 
     auto* page = FindPage(ptr);
     if (page == nullptr) {
@@ -997,12 +912,6 @@ void MarkSweepOldGen::Free(void* ptr) {
     // accidental pointer retention through the mark phase.  Full-page
     // memset happens at page carve time.
     std::memset(ptr, 0, 64);
-
-    // M3/T5 FIX-1: record that a normal free happened.  The page itself is not
-    // pooled yet (only SweepPage can reclaim it), but if many normal frees pile
-    // up without a sweep, DecideCollection nudges a BGC/FULL so fully-free
-    // pages get swept back into the pool and their physical memory is released.
-    freelist_release_count_.fetch_add(1, std::memory_order_relaxed);
 }
 
 void* MarkSweepOldGen::AllocatePinned(CHAOS_IL2CPP_SIZE size) noexcept {
@@ -1022,8 +931,7 @@ void* MarkSweepOldGen::Reallocate(void* ptr, CHAOS_IL2CPP_SIZE new_size) {
     CHAOS_IL2CPP_SIZE old_size = new_size;
     bool oversized = false;
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         auto* page = FindPage(ptr);
         if (page != nullptr) {
             auto addr = reinterpret_cast<uintptr_t>(ptr);
@@ -1115,42 +1023,7 @@ bool MarkSweepOldGen::MarkObject(void* obj) {
     if (type_info_ptr == nullptr) return false;
 
     auto& layout_registry = GcLayoutRegistry::Instance();
-    if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) {
-        // ── Conservative fallback (A2b-raw-object fix) ─────────────────────
-        // A raw `scanning=true` object (e.g. the stress test's OldMessage, a
-        // plain struct of pointers allocated via G_OldGen().Allocate(size,
-        // scanning=true)) has NO TypeInfo in its first word — its first word is
-        // payload data (a nursery pointer).  IsValidTypeInfoPointer therefore
-        // rejects it, so it is never marked and the full-GC sweep reclaims it
-        // even when a registered static root still references it → the root
-        // dangles (reads freed-and-reused memory).
-        //
-        // Mark a bounded span conservatively, mirroring DrainMarkStack's
-        // TypeInfo-less fallback (:1104-1123): cap at the largest size-class
-        // and the remaining page payload.  This keeps every slot of the raw
-        // block's span alive across the sweep.  The transitive contents (the
-        // nursery refs inside the raw block) are then walked by DrainMarkStack
-        // (via its own conservative fallback) and by the card-driven page scan.
-        //
-        // Guard: only do this for objects in a valid in-use *scanning* page.
-        // FindPage already succeeded above; sniff the scanning/oversized nature
-        // of the page to avoid marking arbitrary aligned stack/heap garbage.
-        CHAOS_IL2CPP_SIZE raw_num_slots = 1;
-        if (page->in_use.load(std::memory_order_acquire)) {
-            CHAOS_IL2CPP_SIZE payload_remaining = page->payload_size - offset;
-            CHAOS_IL2CPP_SIZE max_bytes = kOldGenSizeClasses[kOldGenNumSizeClasses - 1];
-            if (payload_remaining < max_bytes) max_bytes = payload_remaining;
-            raw_num_slots = (max_bytes + sizeof(void*) - 1) / sizeof(void*);
-            if (raw_num_slots < 1) raw_num_slots = 1;
-        }
-        CHAOS_IL2CPP_SIZE raw_slot_idx = offset / sizeof(void*);
-        bool raw_newly_set = GcMarkBitmap(page->MarkBitmap(), page->bitmap_bytes)
-                                 .MarkRange(raw_slot_idx, raw_num_slots);
-        if (raw_newly_set) {
-            marked_count_.fetch_add(1, std::memory_order_relaxed);
-        }
-        return raw_newly_set;
-    }
+    if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) return false;
 
     uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
     if (stable_id == 0) return false;
@@ -1308,59 +1181,12 @@ void MarkSweepOldGen::DrainMarkStackParallel(OldGenPage** pages, int page_count)
     // Signal all workers to start before dispatching.
     ctx->drain_started.store(true, std::memory_order_release);
 
-    // Use GcWorkerPool for parallel mark (not ThreadPool — ThreadPool
+    // Use GcWorkerPool for parallel mark (not ThreadPool �� ThreadPool
     // workers are registered managed threads that spin in SafepointPoll
     // and would deadlock when called inside a safepoint).
-    //
-    // DIAGNOSTIC WATCHDOG (task#16 S2): the scenario-C ~1/12 full-GC mark stall
-    // is a timing race.  If the workers stop making progress (parallel_done never
-    // set while total_marked stops growing = stuck/deadlock) OR total_marked grows
-    // unboundedly (mark doesn't converge = divergent re-requeue), sample this and
-    // log it so the stall's exact failure mode is captured on a reproducing run.
-    // Pure observability; no coordination change.
-    {
-        std::atomic<bool> watchdog_stop{false};
-        std::thread watchdog([&]() {
-            uint64_t last = 0;
-            int no_progress_rounds = 0;
-            while (!watchdog_stop.load(std::memory_order_acquire)) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(300));
-                if (ctx->parallel_done.load(std::memory_order_acquire)) break;
-                uint64_t cur = ctx->total_marked.load(std::memory_order_acquire);
-                if ((cur - last) == 0) {
-                    no_progress_rounds++;
-                    if (no_progress_rounds >= 20) {  // ~6s of no mark progress
-                        // Write DIRECTLY to unbuffered stderr (the log system may
-                        // buffer and never flush before the process is killed on
-                        // the stall).  This diagnoses stuck-vs-divergent on a
-                        // reproducing run.
-                        std::fprintf(stderr,
-                            "S2 mark watchdog: STUCK total_marked=%llu active=%d workers=%d "
-                            "(no progress ~6s, parallel_done not set)\n",
-                            static_cast<unsigned long long>(cur),
-                            static_cast<int>(ctx->active_workers.load(std::memory_order_acquire)),
-                            ctx->worker_count);
-                        std::fflush(stderr);
-                        no_progress_rounds = 0;
-                    }
-                } else {
-                    no_progress_rounds = 0;
-                    if ((cur > 1000000) && ((cur & (cur - 1)) == 0)) {  // log growth rarely
-                        std::fprintf(stderr,
-                            "S2 mark watchdog: total_marked=%llu (large closure)\n",
-                            static_cast<unsigned long long>(cur));
-                        std::fflush(stderr);
-                    }
-                }
-                last = cur;
-            }
-        });
-        GcWorkerPool::Instance().RunWorkers(ctx->worker_count, [ctx](int idx) {
-            ParallelMarkWorkerLoop(ctx, idx);
-        });
-        watchdog_stop.store(true, std::memory_order_release);
-        if (watchdog.joinable()) watchdog.join();
-    }
+    GcWorkerPool::Instance().RunWorkers(ctx->worker_count, [ctx](int idx) {
+        ParallelMarkWorkerLoop(ctx, idx);
+    });
 
     // Drain any remaining chunks left in deques (workers may have been preempted).
     // As a safety net, process any remaining mark entries sequentially.
@@ -1735,8 +1561,7 @@ float MarkSweepOldGen::OverallFragmentation() const {
     // Lightweight estimate: walk the page list, compute weighted average
     // fragmentation.  O(n) at page count (typically hundreds).
     // Uses relaxed loads since caller is at safepoint or GC completion.
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
 
     CHAOS_IL2CPP_SIZE total_payload = 0;
     CHAOS_IL2CPP_SIZE total_free = 0;
@@ -1768,8 +1593,7 @@ float MarkSweepOldGen::OverallFragmentation() const {
 }
 
 MarkSweepOldGen::CompactMode MarkSweepOldGen::DecideCompactMode() {
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
 
     int candidate_pages = 0;
     int total_pages = 0;
@@ -1817,9 +1641,7 @@ MarkSweepOldGen::CompactMode MarkSweepOldGen::DecideCompactMode() {
         ? 1.0f - (static_cast<float>(total_live) / static_cast<float>(total_payload))
         : 0.0f;
 
-    const float cross_frag =
-        static_cast<float>(GcConfig().CrossPageFragThresholdFP) / 1000.0f;
-    if (global_frag > cross_frag || candidate_pages >= total_pages / 2) {
+    if (global_frag > kCrossPageFragThreshold || candidate_pages >= total_pages / 2) {
         return CompactMode::CROSS_PAGE;
     }
 
@@ -1881,13 +1703,6 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::PlanPageCompaction(OldGenPage* page,
                 }
             }
 
-            // Skip IN-PLACE demoted objects -- gen1-owned (CoreCLR-aligned in-place
-            // demotion).  They must stay at their original address; compacting them
-            // would move a gen1-owned object and stale the page's demoted set.
-            if (page->DemotedContains(obj)) {
-                continue;
-            }
-
             marked.push_back({obj, obj_size});
         }
         slot = (w + 1) * 64;
@@ -1943,8 +1758,7 @@ void MarkSweepOldGen::RelocatePage(OldGenPage* page, const CompactPlan& plan) {
     uintptr_t page_end = page_start + page->payload_size;
 
     // Walk all old-gen pages to find pointers into this page's objects.
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
     for (auto* src = page_list_; src != nullptr; src = src->next) {
         if (!src->in_use.load(std::memory_order_acquire)) continue;
         char* src_payload = src->Payload();
@@ -2025,8 +1839,7 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::ParallelCompactPages() {
     CHAOS_IL2CPP_SIZE total_live = 0;
     CHAOS_IL2CPP_SIZE total_payload = 0;
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         auto* p = page_list_;
         while (p != nullptr) {
             if (p->in_use.load(std::memory_order_acquire) && !p->is_oversized) {
@@ -2106,8 +1919,7 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::ParallelCompactPages() {
     // Phase 4: Build page array once, relocate all pages' slots in parallel.
     std::vector<OldGenPage*> all_pages;
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         all_pages.reserve(static_cast<size_t>(page_count_));
         for (auto* p = page_list_; p != nullptr; p = p->next) {
             all_pages.push_back(p);
@@ -2169,52 +1981,6 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::ParallelCompactPages() {
                 }
             }
         }
-    }
-
-    // Phase 4b: relocate remaining roots (thread stacks + static roots + GC
-    // handles) for COMPACT mode (CoreCLR-aligned).  ParallelCompactPages used to
-    // only fix page-internal + POH slots, leaving roots pointing at evacuated
-    // pages stale.  Reuse the addr_map built above.
-    if (!addr_map.empty()) {
-        threading::GcScanAllThreadRoots(
-            [](void* root_addr, bool /*is_interior*/, void* user_data) {
-                if (root_addr == nullptr) return;
-                auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
-                // root_addr is a slot on ANOTHER thread's stack (conservative);
-                // may sit in an ASan stack-frame redzone → NoCheck read+write.
-                uintptr_t val = reinterpret_cast<uintptr_t>(
-                    chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
-                if (val == 0) return;
-                auto it = std::lower_bound(map.begin(), map.end(), val,
-                    [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
-                if (it != map.end() && it->old_addr == val) {
-                    chaos::il2cpp::common::AsanWritePtrNoCheck(
-                        root_addr, reinterpret_cast<void*>(it->new_addr));
-                }
-            },
-            &addr_map);
-
-        GcScanStaticRoots(
-            [](void* root_addr, bool /*is_interior*/, void* user_data) {
-                if (root_addr == nullptr) return;
-                auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
-                uintptr_t val = *static_cast<uintptr_t*>(root_addr);
-                if (val == 0) return;
-                auto it = std::lower_bound(map.begin(), map.end(), val,
-                    [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
-                if (it != map.end() && it->old_addr == val) {
-                    *static_cast<void**>(root_addr) = reinterpret_cast<void*>(it->new_addr);
-                }
-            },
-            &addr_map);
-
-        std::vector<std::pair<void*, void*>> handle_relocs;
-        handle_relocs.reserve(addr_map.size());
-        for (auto& ap : addr_map) {
-            handle_relocs.emplace_back(reinterpret_cast<void*>(ap.old_addr),
-                                       reinterpret_cast<void*>(ap.new_addr));
-        }
-        GcRelocateHandles(handle_relocs);
     }
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "parallel_compact_done pages={0} objects={1} saved={2}",
@@ -2296,14 +2062,6 @@ void MarkSweepOldGen::PlanPageEvacuation(OldGenPage* page, CompactPlan& out_plan
                     if (pr.addr == obj) { is_pinned = true; break; }
                 }
                 if (is_pinned) continue;
-            }
-
-            // Skip IN-PLACE demoted objects -- gen1-owned (CoreCLR-aligned in-place
-            // demotion), must stay at their original address.  Owned by the gen1
-            // collection and tracked in the page's demoted set; evacuating them
-            // would move a gen1-owned object and stale the set.
-            if (page->DemotedContains(obj)) {
-                continue;
             }
 
             // Allocate target space in old-gen (under STW, no concurrent frees).
@@ -2406,17 +2164,13 @@ void MarkSweepOldGen::RelocateRoots(const std::vector<CompactPlanEntry>& entries
         [](void* root_addr, bool /*is_interior*/, void* user_data) {
             if (root_addr == nullptr) return;
             auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
-            // root_addr is a slot on ANOTHER thread's stack (conservative);
-            // may sit in an ASan stack-frame redzone → NoCheck read+write.
-            uintptr_t val = reinterpret_cast<uintptr_t>(
-                chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
+            uintptr_t val = *static_cast<uintptr_t*>(root_addr);
             if (val == 0) return;
 
             auto it = std::lower_bound(map.begin(), map.end(), val,
                 [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
             if (it != map.end() && it->old_addr == val) {
-                chaos::il2cpp::common::AsanWritePtrNoCheck(
-                    root_addr, reinterpret_cast<void*>(it->new_addr));
+                *static_cast<void**>(root_addr) = reinterpret_cast<void*>(it->new_addr);
             }
         },
         &addr_map);
@@ -2444,51 +2198,16 @@ void MarkSweepOldGen::RelocateRoots(const std::vector<CompactPlanEntry>& entries
 
     for (uintptr_t slot = self_aligned_start; slot < self_aligned_end; slot += sizeof(void*)) {
         auto* val_ptr = reinterpret_cast<void**>(slot);
-        // Self-stack range scan deliberately reads every word incl. ASan frame
-        // redzones between this thread's frames → NoCheck (task#16: the raw
-        // read here was the real full-GC stack-buffer-underflow / SEGFAULT at
-        // gc_old_gen.cpp:2422 under CrossPageCompact).
-        void* slot_val = chaos::il2cpp::common::AsanReadPtrNoCheck(val_ptr);
-        if (slot_val == nullptr) continue;
-        uintptr_t val = reinterpret_cast<uintptr_t>(slot_val);
+        if (*val_ptr == nullptr) continue;
+        uintptr_t val = reinterpret_cast<uintptr_t>(*val_ptr);
         if (val < g_heap_base) continue;
 
         auto it = std::lower_bound(addr_map.begin(), addr_map.end(), val,
             [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
         if (it != addr_map.end() && it->old_addr == val) {
-            chaos::il2cpp::common::AsanWritePtrNoCheck(
-                val_ptr, reinterpret_cast<void*>(it->new_addr));
+            *val_ptr = reinterpret_cast<void*>(it->new_addr);
         }
     }
-
-    // Relocate registered static roots (CoreCLR-aligned: compaction must
-    // re-address ALL roots, including static/global, not just thread stacks).
-    // Without this, a static root pointing at a compacted old-gen object holds a
-    // stale address → barrier cards the OLD page, Phase-1 scans the NEW page →
-    // no cross-gen edge → the referenced young object is collected → dangling.
-    GcScanStaticRoots(
-        [](void* root_addr, bool /*is_interior*/, void* user_data) {
-            if (root_addr == nullptr) return;
-            auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
-            uintptr_t val = *static_cast<uintptr_t*>(root_addr);
-            if (val == 0) return;
-            auto it = std::lower_bound(map.begin(), map.end(), val,
-                [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
-            if (it != map.end() && it->old_addr == val) {
-                *static_cast<void**>(root_addr) = reinterpret_cast<void*>(it->new_addr);
-            }
-        },
-        &addr_map);
-
-    // Relocate GC handles (strong / pinned / dependent) that point at compacted
-    // old-gen objects (CoreCLR-aligned: GcScanHandles during relocate phase).
-    std::vector<std::pair<void*, void*>> handle_relocs;
-    handle_relocs.reserve(entries.size());
-    for (auto* it = addr_map.data(); it != addr_map.data() + addr_map.size(); ++it) {
-        handle_relocs.emplace_back(reinterpret_cast<void*>(it->old_addr),
-                                   reinterpret_cast<void*>(it->new_addr));
-    }
-    GcRelocateHandles(handle_relocs);
 }
 
 void MarkSweepOldGen::CrossPageCompact() {
@@ -2505,7 +2224,7 @@ void MarkSweepOldGen::CrossPageCompact() {
     for (auto* p = page_list_; p != nullptr; p = p->next) {
         if (!p->in_use.load(std::memory_order_acquire) || p->is_oversized) continue;
         float frag = PageFragmentation(p);
-        if (frag > static_cast<float>(GcConfig().CrossPageFragThresholdFP) / 1000.0f) {
+        if (frag > kCrossPageFragThreshold) {
             candidates.push_back({p, frag});
         }
     }
@@ -2649,8 +2368,7 @@ void MarkSweepOldGen::MarkYoungTenuredRange(uintptr_t begin, uintptr_t end) {
     // Mark all pages whose payload overlaps [begin, end) as young_tenured.
     // These pages contain recently-promoted objects from survivor and should
     // be prioritized by BGC sweep.
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
     auto* p = page_list_;
     while (p != nullptr) {
         if (p->in_use.load(std::memory_order_relaxed) && !p->is_oversized) {
@@ -2665,8 +2383,7 @@ void MarkSweepOldGen::MarkYoungTenuredRange(uintptr_t begin, uintptr_t end) {
 }
 
 void MarkSweepOldGen::ClearYoungTenuredFlags() {
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
     auto* p = page_list_;
     while (p != nullptr) {
         p->young_tenured = false;
@@ -2705,20 +2422,6 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // we clear and re-mark it, causing stale marks from a different
     // root snapshot to survive into our mark phase.
     BgcController::Instance().StopConcurrentMark();
-    // Full-GC phase timing boundaries (diagnostic).  Captured at the
-    // MARK_DONE / SWEEP_DONE / COMPACT_DONE GcFireEvent boundaries below.
-    // Set to 0 for the early-return path (page_count_ == 0).
-    auto mark_end      = pause_start;
-    auto sweep_end     = pause_start;
-    auto compact_end   = pause_start;
-    // DIAG (S2): bounded elapsed-time progress marker — if a full-GC stall
-    // occurs after collect_start, these show the last phase reached.  Pure
-    // observability, non-semantic.
-    CHAOS_IL2CPP_LOG_INFO_M("OldGen",
-        "collect_dbg S2_after_stop_mark elapsed_ms={0}",
-        static_cast<unsigned long long>(
-            std::chrono::duration_cast<std::chrono::milliseconds>(
-                std::chrono::steady_clock::now() - pause_start).count()));
 
     // V4-H3: Snapshot pinned_roots_ under mutex to avoid data race with
     // AddPinnedRoot (which pushes under the same mutex).  Iterating the
@@ -2726,8 +2429,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // reallocation �� the iterator becomes dangling.
     std::vector<PinnedRoot> pinned_snapshot;
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         pinned_snapshot = pinned_roots_;
     }
 
@@ -2748,8 +2450,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // and dependent-handle processing could query IsMarked() after sweep.
     // Now we reset them for a fresh mark pass.
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         int seen = 0;
         for (auto* p = page_list_; p != nullptr; p = p->next) {
             seen++;
@@ -2789,7 +2490,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 if (young_region == nullptr) return true;
                 void* cur = G_YoungGen().bump.load(std::memory_order_acquire);
                 if (cur > young_region->begin) {
-                    G_OldGen().ScanRangeForRoots(
+                    g_old_gen.ScanRangeForRoots(
                         young_region->begin, cur);
                 }
 
@@ -2800,19 +2501,9 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 if (gen1 != nullptr) {
                     char* s_end = G_YoungGen().gen1_bump.load(std::memory_order_acquire);
                     if (s_end > gen1->begin) {
-                        G_OldGen().ScanRangeForRoots(gen1->begin, s_end);
+                        g_old_gen.ScanRangeForRoots(gen1->begin, s_end);
                     }
                 }
-
-                // Scan IN-PLACE demoted objects as roots.  A demoted object is a
-                // live gen1-owned object physically resident in an old-gen page
-                // (GC-N6 #10, CoreCLR-aligned in-place demotion).  Because its
-                // mark bit is cleared at the start of this full-GC mark phase
-                // (like every page's bitmap), it must be re-rooted here or the
-                // sweep would reclaim a still-gen1-owned object.  Rooting it (and
-                // closing over its transitive graph via the mark stack) keeps it
-                // and everything it references alive across the full collection.
-                G_OldGen().ScanInPlaceDemotedRoots();
                 return true;
             });
         if (mark_stack_.size() > before_roots) {
@@ -2842,25 +2533,6 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 if (val != nullptr && G_Loh().IsInLOH(val)) {
                     G_Loh().MarkObject(val);
                 }
-            },
-            this);
-        if (mark_stack_.size() > before_roots) {
-            has_roots = true;
-        }
-    }
-
-    // Scan registered static/ALC root ranges as roots (P1-A2b / repo-wide fix).
-    // Objects referenced only from a registered static root (ALC static fields,
-    // or the test's OldMessage[] backing store) were previously invisible to the
-    // full-GC mark → they (and transitively their referenced old-gen objects)
-    // were swept → use-after-free.  CoreCLR scans all registered roots during
-    // mark; this closes that gap.
-    {
-        size_t before_roots = mark_stack_.size();
-        GcScanStaticRoots(
-            [](void* root_addr, bool /*is_interior*/, void* user_data) {
-                auto* self = static_cast<MarkSweepOldGen*>(user_data);
-                self->TryMarkRoot(root_addr);
             },
             this);
         if (mark_stack_.size() > before_roots) {
@@ -2923,8 +2595,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 #else
         std::vector<OldGenPage*> pages;
         {
-            const ScopedPreemptiveMode preempt;
-            GcSpinLockGuard lock(mutex_);
+            std::lock_guard<std::mutex> lock(mutex_);
             pages.reserve(static_cast<size_t>(page_count_));
             auto* p = page_list_;
             int page_idx = 0;
@@ -2940,14 +2611,8 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         // Sequential mark for small heaps.
         DrainMarkStack();
     }
-    CHAOS_IL2CPP_LOG_INFO_M("OldGen",
-        "collect_dbg S2_after_mark elapsed_ms={0}",
-        static_cast<unsigned long long>(
-            std::chrono::duration_cast<std::chrono::milliseconds>(
-                std::chrono::steady_clock::now() - pause_start).count()));
 
     // Fire MARK_DONE event.
-    mark_end = std::chrono::steady_clock::now();
         GcFireEvent(GcEvent::MARK_DONE);
 
     // Phase 3: Run finalizers for unreachable objects.
@@ -2992,11 +2657,6 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // reclaims their old Gen2 space.
     std::vector<DemotionEntry> demotion_entries;
     {
-        CHAOS_IL2CPP_LOG_INFO_M("OldGen",
-            "collect_dbg S2_before_demote elapsed_ms={0}",
-            static_cast<unsigned long long>(
-                std::chrono::duration_cast<std::chrono::milliseconds>(
-                    std::chrono::steady_clock::now() - pause_start).count()));
         demotion_entries = CollectDemotionCandidates(*this);
     }
 
@@ -3012,8 +2672,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // (which runs concurrently and benefits from time-slicing).
     CHAOS_IL2CPP_SIZE total_reclaimed = 0;
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         for (auto* page = page_list_; page != nullptr; page = page->next) {
             if (!page->in_use.load(std::memory_order_acquire)) continue;
             total_reclaimed += SweepPage(page);
@@ -3023,8 +2682,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     // Phase 4: Free decommissioned pages (oversized pages that were fully garbage).
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
 
 
         OldGenPage** pp = &page_list_;
@@ -3064,13 +2722,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     }
     RebuildPageArray();
 
-    // M3/T5 FIX-1: a full collection has now swept 100%-free normal pages into
-    // the pool; reset the normal-free counter that DecideCollection reads to
-    // signal "reclaimable pages may exist".
-    ResetFreelistReleaseCount();
-
     // Fire SWEEP_DONE event.
-    sweep_end = std::chrono::steady_clock::now();
     GcFireEvent(GcEvent::SWEEP_DONE);
 
     // Sweep the Large Object Heap.
@@ -3084,11 +2736,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     // LOH compaction (opt-in, controlled by CompactMode).
     // Relocates live LOH segments to reduce fragmentation.
-    // Skip when no LOH segments exist: avoids constructing ScopedPreemptiveMode
-    // (which enters SafepointPoll on destroy) inside an already-held STW GC
-    // safepoint — prevents the ~34s safepoint rendezvous hang (demotion timeout
-    // root cause, CoreCLR-option1: gate by SegmentCount > 0).
-    if (G_Loh().SegmentCount() > 0) {
+    {
         std::vector<std::pair<void*, void*>> loh_relocs;
         if (G_Loh().Compact(loh_relocs) > 0) {
             CHAOS_IL2CPP_LOG_INFO_M("OldGen", "loh_compact relocations={0}",
@@ -3132,11 +2780,9 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     }
 
     // Phase 4a: Relocate references for demoted objects (Gen2 → Gen1).
-    // IN-PLACE (CoreCLR-aligned, GC-N6 #10): demotion no longer moves objects, so
-    // there are no addresses to rewrite — DemotionRelocate (old→old) is a no-op.
-    // Skip it to avoid the wasteful full old-gen/gen1/root walk.  (The historical
-    // moving demotion needed this to fix the stale-ref window that SEGFAULTed.)
-    if (!demotion_entries.empty() && demotion_entries[0].new_addr != demotion_entries[0].old_addr) {
+    // Must happen after sweep (old pages are still valid for slot scanning)
+    // but before compaction (which would invalidate page layout).
+    if (!demotion_entries.empty()) {
         DemotionRelocate(demotion_entries, *this);
     }
 
@@ -3149,14 +2795,12 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     if (compact_mode == CompactMode::CROSS_PAGE) {
         CHAOS_IL2CPP_LOG_INFO_M("OldGen", "cross_page_compact_mode_enabled");
         CrossPageCompact();
-        compact_end = std::chrono::steady_clock::now();
         GcFireEvent(GcEvent::COMPACT_DONE);
     } else if (compact_mode == CompactMode::COMPACT) {
         CHAOS_IL2CPP_LOG_INFO_M("OldGen", "compact_mode_enabled");
         CHAOS_IL2CPP_SIZE total_saved = ParallelCompactPages();
         CHAOS_IL2CPP_LOG_INFO_M("OldGen", "compact_done saved_bytes={0}",
             static_cast<unsigned long long>(total_saved));
-        compact_end = std::chrono::steady_clock::now();
         GcFireEvent(GcEvent::COMPACT_DONE);
     }
 
@@ -3171,14 +2815,6 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     uint64_t pause_ns = static_cast<uint64_t>(
         std::chrono::duration_cast<std::chrono::nanoseconds>(pause_end - pause_start).count());
 
-    // Phase-level durations (mark_end - pause_start, sweep_end - mark_end, compact_end - sweep_end).
-    uint64_t mark_ns = static_cast<uint64_t>(
-        std::chrono::duration_cast<std::chrono::nanoseconds>(mark_end - pause_start).count());
-    uint64_t sweep_ns = static_cast<uint64_t>(
-        std::chrono::duration_cast<std::chrono::nanoseconds>(sweep_end - mark_end).count());
-    uint64_t compact_ns = static_cast<uint64_t>(
-        std::chrono::duration_cast<std::chrono::nanoseconds>(compact_end - sweep_end).count());
-
     CHAOS_IL2CPP_SIZE marked_count = static_cast<CHAOS_IL2CPP_SIZE>(
         marked_count_.exchange(0, std::memory_order_relaxed));
 
@@ -3191,21 +2827,10 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         finalizers_run,
         pause_ns,
         compact_mode != CompactMode::NONE ? 1 : 0,
-        0,   // concurrent: blocking GC
-        mark_ns, sweep_ns, compact_ns);
+        0);  // concurrent: blocking GC
 
     // Record into scheduler with actual heap size for full GC trigger decisions.
     G_Scheduler().RecordFullCollection(total_heap_bytes, pause_ns);
-
-    // GC-N8 Phase-1: sample free-list reuse rate since the last collection and
-    // feed the scheduler signal.  High reuse = allocator recycling dead blocks
-    // cheaply (low pressure); low reuse = constant fresh page carves (pressure).
-    // Drains the counters so each sample reflects only the inter-GC window.
-    const uint64_t hits   = free_list_hits_.exchange(0, std::memory_order_relaxed);
-    const uint64_t carves = free_list_carves_.exchange(0, std::memory_order_relaxed);
-    const uint64_t total  = hits + carves;
-    const float reuse = (total > 0) ? static_cast<float>(hits) / static_cast<float>(total) : 0.0f;
-    G_Scheduler().SetFreeListReuseRate(reuse);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_dbg AFTER_SWEEP page_count={0}",
         static_cast<unsigned long long>(page_count_));
@@ -3220,9 +2845,6 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                        static_cast<uint64_t>(page_count_));
     GcEtwFireGcEnd(pause_ns, total_reclaimed);
     GcFireEvent(GcEvent::GC_FULL_DONE);
-    // GC-N11: per-GC trigger-reason bitmap marker — consumers read
-    // G_Scheduler().LastTriggerReason() to attribute this full GC's cause.
-    GcFireEvent(GcEvent::GC_REASON_MARK);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_dbg AFTER_ETW");
 
@@ -3268,13 +2890,12 @@ void MarkSweepOldGen::UnregisterThreadStack() {
 }
 
 void MarkSweepOldGen::AddPinnedRoot(void* addr, CHAOS_IL2CPP_SIZE size) {
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
     pinned_roots_.push_back({addr, size});
 }
 
-
 // ���� Root scanning ����������������������������������������������������������������������������������
+
 bool MarkSweepOldGen::TryMarkRoot(void* addr) {
     // addr comes from GcScanAllThreadRoots: it is the address of a stack slot.
     // Read the VALUE at that slot �� if it points to old-gen, mark it.
@@ -3285,24 +2906,10 @@ bool MarkSweepOldGen::TryMarkRoot(void* addr) {
     // FindPage before IsValidManagedObject: FindPage is safe for arbitrary
     // values (numeric range comparison only, no pointer dereference).
     auto* page = FindPage(val);
-    if (page == nullptr || !page->in_use.load(std::memory_order_acquire)) {
-        return false;
-    }
+    if (page == nullptr || !page->in_use.load(std::memory_order_acquire)) return false;
 
-    // Now safe to read inside the page.  A root may point at (a) a normal
-    // managed object whose first word is a valid TypeInfo, or (b) a raw
-    // `scanning=true` object (e.g. the stress OldMessage) whose first word is
-    // payload data with NO TypeInfo.  Historically this checked only
-    // IsValidManagedObject (TypeInfo gate), so TypeInfo-less raw objects were
-    // never marked and the sweep reclaimed them even while still root-
-    // referenced → dangling (A2b true root cause).  Defer the TypeInfo decision
-    // to MarkObject, which now conservatively marks raw objects on a scanning
-    // page.  Keep a floor sanity check: only attempt when the page is a
-    // scanning page (it is expected to hold pointer-bearing objects), so we do
-    // not conservatively mark arbitrary aligned values on non-scanning pages.
-    if (!page->scanning) {
-        return false;
-    }
+    // Now safe to read the first word (memory is within a valid heap page).
+    if (!IsValidManagedObject(val)) return false;
 
     if (MarkObject(val)) {
         mark_stack_.push_back(val);
@@ -3329,37 +2936,11 @@ void MarkSweepOldGen::ScanRangeForRoots(void* range_begin, void* range_end) {
         auto* page = FindPage(val);
         if (page == nullptr || !page->in_use.load(std::memory_order_acquire)) continue;
 
-        // Defer the TypeInfo decision to MarkObject (see TryMarkRoot): a raw
-        // scanning=true object has no TypeInfo first word but is still a live
-        // root reference and must be conservatively marked.  Only gate on the
-        // page being a scanning page so we don't conservatively mark arbitrary
-        // aligned values on non-scanning pages.
-        if (!page->scanning) continue;
+        // Now safe to read the first word (memory is within a valid heap page).
+        if (!IsValidManagedObject(val)) continue;
 
         if (MarkObject(val)) {
             mark_stack_.push_back(val);
-        }
-    }
-    DrainMarkStack();
-}
-
-void MarkSweepOldGen::ScanInPlaceDemotedRoots() {
-    // Walk every old-gen page's inline demoted set and mark each gen1-owned
-    // object as a root.  Because its mark bit is cleared at the start of the
-    // full-GC mark phase (bitmaps.Clear), this keeps a demoted (gen1-owned)
-    // object alive across the full collection; DrainMarkStack closes its
-    // transitive graph.  PageList_ is stable under the STW safepoint + the
-    // PageMutex held by the caller (Collect's root scan).
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
-    for (auto* page = page_list_; page != nullptr; page = page->next) {
-        if (!page->in_use.load(std::memory_order_acquire)) continue;
-        for (int32_t i = 0; i < page->demoted_count.load(std::memory_order_acquire); i++) {
-            char* obj = page->demoted[i].addr;
-            if (obj == nullptr) continue;
-            if (MarkObject(obj)) {
-                mark_stack_.push_back(obj);
-            }
         }
     }
     DrainMarkStack();
@@ -3372,8 +2953,7 @@ void MarkSweepOldGen::ScanInPlaceDemotedRoots() {
 void MarkSweepOldGen::RegisterFinalizer(void* obj, void (*finalizer)(void*)) {
     if (obj == nullptr || finalizer == nullptr) return;
 
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
     finalizers_.push_back({obj, finalizer});
     g_gc_stats.finalization_pending_count.fetch_add(1, std::memory_order_relaxed);
 }
@@ -3381,8 +2961,7 @@ void MarkSweepOldGen::RegisterFinalizer(void* obj, void (*finalizer)(void*)) {
 CHAOS_IL2CPP_SIZE MarkSweepOldGen::RunFinalizers() {
     std::vector<FinalizerEntry> to_run;
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         to_run.swap(finalizers_);
         // Reset pending counter; RegisterFinalizer calls below will
         // re-add entries for objects that survived (still reachable).
@@ -3450,8 +3029,7 @@ std::vector<FinalizerEntry> MarkSweepOldGen::CollectDeadFinalizables() {
     std::vector<FinalizerEntry> dead_entries;
     std::vector<FinalizerEntry> live_entries;
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         for (auto& entry : finalizers_) {
             if (entry.finalizer == nullptr) continue;
             // Skip suppressed finalizers.
@@ -3487,12 +3065,11 @@ std::vector<FinalizerEntry> MarkSweepOldGen::CollectDeadFinalizables() {
     return dead_entries;
 }
 
-
 // ���� Finalizer suppression support ��������������������������������������������������
+
 void MarkSweepOldGen::SuppressFinalizer(void* obj) {
     if (obj == nullptr) return;
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
     // Only add if not already suppressed (linear scan �� suppressed set is tiny).
     if (std::find(suppressed_finalizers_.begin(), suppressed_finalizers_.end(),
                   obj) == suppressed_finalizers_.end()) {
@@ -3502,8 +3079,7 @@ void MarkSweepOldGen::SuppressFinalizer(void* obj) {
 
 void MarkSweepOldGen::ReRegisterFinalizer(void* obj) {
     if (obj == nullptr) return;
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
     auto it = std::find(suppressed_finalizers_.begin(), suppressed_finalizers_.end(),
                         obj);
     if (it != suppressed_finalizers_.end()) {
@@ -3511,8 +3087,8 @@ void MarkSweepOldGen::ReRegisterFinalizer(void* obj) {
     }
 }
 
-
 // ���� BGC concurrent-safe mark ��������������������������������������������������������������������������
+
 bool MarkSweepOldGen::BgcTryMark(void* obj) {
     // Delegate to MarkObject which already uses atomic bitmap operations.
     // The concurrent BGC thread and STW parallel mark can safely interleave
@@ -3520,29 +3096,16 @@ bool MarkSweepOldGen::BgcTryMark(void* obj) {
     return MarkObject(obj);
 }
 
-
-// ── BGC concurrent sweep ────────────────────────────────────────────────────────────────────────
+// ���� BGC concurrent sweep ����������������������������������������������������������������������������������
 
 void MarkSweepOldGen::BgcSweep() {
-    // Enter preemptive mode for the duration of sweep (CoreCLR-aligned).
-    // BgcSweep blocks on mutex_ (std::mutex::lock, non-alertable) and may
-    // hold it for page iterations.  In cooperative mode this blocks the BGC
-    // thread from acknowledging a safepoint → coordinator counts it
-    // unresponsive → hard timeout forced-release → OOM/crash.
-    // RAII guard guarantees cooperative mode is restored on every exit path
-    // (normal return, exception from vector reserve/push_back below, or any
-    // future early return), so the BGC thread can never be stranded in
-    // preemptive mode.
-    const ScopedPreemptiveMode preemptive_guard;
-
     // Snapshot page list under mutex.
     // Prioritize young_tenured pages (recent survivor promotions) so
     // ephemeral tenured objects are reclaimed earlier in the sweep cycle.
     std::vector<OldGenPage*> pages;
     std::vector<OldGenPage*> young_pages;
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         pages.reserve(static_cast<size_t>(page_count_));
         young_pages.reserve(static_cast<size_t>(page_count_));
         auto* p = page_list_;
@@ -3570,53 +3133,22 @@ void MarkSweepOldGen::BgcSweep() {
     }
 
     // Parallel sweep via GcWorkerPool.
+    // Restored after BGC hang investigation — see git log for details.
     // Each page has independent free_lists and bitmap; SweepPage + CoalescePage
-    // are thread-safe on disjoint pages (guarded by per-page sweep_lock), and
-    // clear_bitmap=false preserves the mark bitmap for DecideCompactMode which
-    // runs later in BgcCompact().
-    //
-    // re-introduce true parallel sweep (align CoreCLR background_sweep).
-    // Pages are strided across workers so each worker owns a DISJOINT subset of
-    // pages — no shared page is swept by two workers concurrently.  The worker
-    // pool run is a bounded join (thread-safe, no safepoint interaction because
-    // these are GC worker threads with their own stack, not mutators).
+    // are thread-safe on disjoint pages. clear_bitmap=false preserves mark
+    // bitmap for DecideCompactMode which runs later in BgcCompact().
     {
         int total_pages = static_cast<int>(pages.size());
-        int active = 0;
         for (auto* page : pages) {
-            if (page->in_use.load(std::memory_order_acquire)) active++;
-        }
-        if (active > 8) {
-            // Enough work to justify parallel dispatch.
-            int worker_count = std::min<int>(active / 32 + 1, 8);
-            int target_workers = std::min(worker_count, active);
-            std::atomic<int> shared_slice{0};
-            GcWorkerPool::Instance().RunWorkers(target_workers, [&](int /*idx*/) {
-                // Each worker takes the next-disjoint page from the shared
-                // counter; page->sweep_lock in SweepPage guards against any
-                // residual contention.
-                for (;;) {
-                    int p = shared_slice.fetch_add(1, std::memory_order_relaxed);
-                    if (p >= total_pages) break;
-                    auto* page = pages[p];
-                    if (!page->in_use.load(std::memory_order_acquire)) continue;
-                    SweepPage(page, false);
-                    CoalescePage(page);
-                }
-            });
-        } else {
-            // Small sweep — serial (avoids worker-pool startup overhead).
-            for (auto* page : pages) {
-                if (!page->in_use.load(std::memory_order_acquire)) continue;
-                SweepPage(page, false);
-                CoalescePage(page);
+            if (!page->in_use.load(std::memory_order_acquire)) continue;
+            SweepPage(page, false);
+            CoalescePage(page);
 
-                // Time-slice: yield after exceeding budget to let mutators run.
-                auto elapsed = std::chrono::steady_clock::now() - sweep_slice_start;
-                if (elapsed >= kSweepSliceBudget) {
-                    sweep_slice_start = std::chrono::steady_clock::now();
-                    std::this_thread::sleep_for(kSweepSliceInterval);
-                }
+            // Time-slice: yield after exceeding budget to let mutators run.
+            auto elapsed = std::chrono::steady_clock::now() - sweep_slice_start;
+            if (elapsed >= kSweepSliceBudget) {
+                sweep_slice_start = std::chrono::steady_clock::now();
+                std::this_thread::sleep_for(kSweepSliceInterval);
             }
         }
     }
@@ -3627,8 +3159,7 @@ void MarkSweepOldGen::BgcSweep() {
     // Defer VirtualFree to BgcCompact (under STW safepoint) where no concurrent
     // readers exist.
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
 
 
         OldGenPage** pp = &page_list_;
@@ -3684,14 +3215,7 @@ void MarkSweepOldGen::BgcSweep() {
         {
             static constexpr int kMinPagesPerPoolNode = 4;
             auto total = static_cast<int>(page_pool_.size());
-            // Under provisional (high-memory-pressure) mode, aggressively return
-            // pooled pages to the OS instead of holding the committed pool
-            // (align CoreCLR regions_segments.cpp:1386-1450 memory-pressure
-            // decommit).  Effective cap drops to 0 so all unlinked 100%-free
-            // pages are released.  Safe because this runs at a STW safepoint
-            // and the pool pages are already unlinked from page_array_.
-            int effective_cap = G_Scheduler().InProvisionalMode() ? 0 : kMaxPoolSize;
-            if (total > effective_cap) {
+            if (total > kMaxPoolSize) {
                 // Count pages per NUMA node.
                 std::unordered_map<int, int> per_node;
                 for (auto& e : page_pool_) {
@@ -3707,9 +3231,9 @@ void MarkSweepOldGen::BgcSweep() {
                     per_node_keep[node] = keep;
                     total_keep += keep;
                 }
-                // If total_keep > effective_cap, cap proportionally.
-                if (effective_cap > 0 && total_keep > effective_cap) {
-                    float ratio = static_cast<float>(effective_cap) / total_keep;
+                // If total_keep > kMaxPoolSize, cap proportionally.
+                if (total_keep > kMaxPoolSize) {
+                    float ratio = static_cast<float>(kMaxPoolSize) / total_keep;
                     total_keep = 0;
                     for (auto& [node, count] : per_node) {
                         int keep = std::max(kMinPagesPerPoolNode,
@@ -3718,7 +3242,7 @@ void MarkSweepOldGen::BgcSweep() {
                         total_keep += keep;
                     }
                 }
-                int to_remove = total - effective_cap;
+                int to_remove = total - kMaxPoolSize;
                 int removed = 0;
 
                 // Remove excess: iterate pool from back, skipping kept pages.
@@ -3758,16 +3282,11 @@ void MarkSweepOldGen::BgcSweep() {
     // are now considered mature tenured for the next BGC cycle.
     ClearYoungTenuredFlags();
 
-    // (cooperative mode restored by preemptive_guard dtor)
 }
 
+// ���� BGC concurrent compaction ������������������������������������������������������������������������
 
 void MarkSweepOldGen::BgcCompact() {
-    // Enter preemptive mode for the duration of compact (same rationale
-    // as BgcSweep: mutex_ blocking in cooperative mode hangs safepoint).
-    // RAII guard restores cooperative mode on every exit path (normal return,
-    // exception, or future early return).
-    const ScopedPreemptiveMode preemptive_guard;
 
     // Transfer pinned roots to compaction skip list so PlanPageEvacuation
     // excludes them from cross-page relocation (same as Collect() does).
@@ -3796,8 +3315,7 @@ void MarkSweepOldGen::BgcCompact() {
     // cycle's BgcTryMark, which uses atomic test-and-set and would
     // incorrectly report stale bits as "already marked".
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         auto* p = page_list_;
         while (p != nullptr) {
             if (p->in_use.load(std::memory_order_acquire)) {
@@ -3813,8 +3331,7 @@ void MarkSweepOldGen::BgcCompact() {
     // by BgcSweep's Phase 4b but deferred to avoid use-after-free through
     // stale page_array_ entries in concurrent mutators.
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         for (auto* p : deferred_free_pages_) {
             VirtualFreePage(p, p->page_size);
         }
@@ -3832,7 +3349,6 @@ void MarkSweepOldGen::BgcCompact() {
     // Clear compaction skip list (snapshot of pinned_roots_ taken above).
     pinned_compact_skip_.clear();
 
-    // (cooperative mode restored by preemptive_guard dtor)
 }
 
 // ======================================================================
@@ -3842,28 +3358,23 @@ void MarkSweepOldGen::BgcCompact() {
 bool MarkSweepOldGen::InitEmergencyReserve() noexcept {
     if (emergency_reserve_base_ != nullptr) return true;  // Already initialized.
 
-    // Emergency reserve size is config-tunable (CHAOS_GC_EmergencyReserveSize);
-    // fall back to the compile-time constant if the config value is unreasonable.
-    CHAOS_IL2CPP_SIZE reserve_size = GcConfig().EmergencyReserveSize;
-    if (reserve_size < 4 * 1024) reserve_size = kEmergencyReserveSize;
-
-    auto* mem = static_cast<char*>(GcNumaVirtualAlloc(reserve_size, 0));
+    auto* mem = static_cast<char*>(GcNumaVirtualAlloc(kEmergencyReserveSize, 0));
     if (mem == nullptr) {
         // Non-fatal: finalizer OOM protection is best-effort.
         return false;
     }
 
     // Zero the reserved memory.
-    std::memset(mem, 0, reserve_size);
+    std::memset(mem, 0, kEmergencyReserveSize);
 
     emergency_reserve_base_ = mem;
-    emergency_reserve_size_ = reserve_size;
+    emergency_reserve_size_ = kEmergencyReserveSize;
     emergency_reserve_current_.store(mem, std::memory_order_release);
     emergency_reserve_activated_.store(false, std::memory_order_release);
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "emergency_reserve_allocated base=0x{0} size={1}",
         reinterpret_cast<uintptr_t>(mem),
-        static_cast<unsigned long long>(reserve_size));
+        static_cast<unsigned long long>(kEmergencyReserveSize));
     return true;
 }
 

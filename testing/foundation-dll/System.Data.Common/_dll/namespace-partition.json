@@ -1,0 +1,2990 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Data.Common",
+  "generatedAt": "2026-06-04T10:30:42.761093+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 4,
+  "chunks": [
+    {
+      "slug": "system-data",
+      "namespaces": [
+        "System.Data"
+      ],
+      "methodCount": 331,
+      "methods": [
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::Add:System.Void(System.Data.Constraint)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::Add:System.Data.Constraint(System.String,System.Data.DataColumn,System.Boolean)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::Add:System.Data.Constraint(System.String,System.Data.DataColumn,System.Data.DataColumn)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::Add:System.Data.Constraint(System.String,System.Data.DataColumn[],System.Boolean)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::Add:System.Data.Constraint(System.String,System.Data.DataColumn[],System.Data.DataColumn[])",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::AddRange:System.Void(System.Data.Constraint[])",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::CanRemove:System.Boolean(System.Data.Constraint)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::Clear:System.Void()",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::Contains:System.Boolean(System.String)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::CopyTo:System.Void(System.Data.Constraint[],System.Int32)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::IndexOf:System.Int32(System.Data.Constraint)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::IndexOf:System.Int32(System.String)",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::Remove:System.Void(System.Data.Constraint)",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::Remove:System.Void(System.String)",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::RemoveAt:System.Void(System.Int32)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumn::SetOrdinal:System.Void(System.Int32)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataColumnChangeEventArgs,System.AsyncCallback,System.Object)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnChangeEventHandler::Invoke:System.Void(System.Object,System.Data.DataColumnChangeEventArgs)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::Add:System.Data.DataColumn()",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::Add:System.Void(System.Data.DataColumn)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::Add:System.Data.DataColumn(System.String)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::Add:System.Data.DataColumn(System.String,System.Type)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::Add:System.Data.DataColumn(System.String,System.Type,System.String)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::AddRange:System.Void(System.Data.DataColumn[])",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::CanRemove:System.Boolean(System.Data.DataColumn)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::Clear:System.Void()",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::Contains:System.Boolean(System.String)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::CopyTo:System.Void(System.Data.DataColumn[],System.Int32)",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::IndexOf:System.Int32(System.Data.DataColumn)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::IndexOf:System.Int32(System.String)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::Remove:System.Void(System.Data.DataColumn)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::Remove:System.Void(System.String)",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::RemoveAt:System.Void(System.Int32)",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetBoolean:System.Boolean(System.Data.Common.DbDataReader,System.String)",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetByte:System.Byte(System.Data.Common.DbDataReader,System.String)",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetBytes:System.Int64(System.Data.Common.DbDataReader,System.String,System.Int64,System.Byte[],System.Int32,System.Int32)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetChar:System.Char(System.Data.Common.DbDataReader,System.String)",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetChars:System.Int64(System.Data.Common.DbDataReader,System.String,System.Int64,System.Char[],System.Int32,System.Int32)",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetData:System.Data.Common.DbDataReader(System.Data.Common.DbDataReader,System.String)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetDataTypeName:System.String(System.Data.Common.DbDataReader,System.String)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetDateTime:System.DateTime(System.Data.Common.DbDataReader,System.String)",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetDecimal:System.Decimal(System.Data.Common.DbDataReader,System.String)",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetDouble:System.Double(System.Data.Common.DbDataReader,System.String)",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetFieldType:System.Type(System.Data.Common.DbDataReader,System.String)",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetFloat:System.Single(System.Data.Common.DbDataReader,System.String)",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetGuid:System.Guid(System.Data.Common.DbDataReader,System.String)",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetInt16:System.Int16(System.Data.Common.DbDataReader,System.String)",
+          "index": 47
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetInt32:System.Int32(System.Data.Common.DbDataReader,System.String)",
+          "index": 48
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetInt64:System.Int64(System.Data.Common.DbDataReader,System.String)",
+          "index": 49
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetProviderSpecificFieldType:System.Type(System.Data.Common.DbDataReader,System.String)",
+          "index": 50
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetProviderSpecificValue:System.Object(System.Data.Common.DbDataReader,System.String)",
+          "index": 51
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetStream:System.IO.Stream(System.Data.Common.DbDataReader,System.String)",
+          "index": 52
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetString:System.String(System.Data.Common.DbDataReader,System.String)",
+          "index": 53
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetTextReader:System.IO.TextReader(System.Data.Common.DbDataReader,System.String)",
+          "index": 54
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::GetValue:System.Object(System.Data.Common.DbDataReader,System.String)",
+          "index": 55
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::IsDBNull:System.Boolean(System.Data.Common.DbDataReader,System.String)",
+          "index": 56
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataReaderExtensions::IsDBNullAsync:System.Threading.Tasks.Task<System.Boolean>(System.Data.Common.DbDataReader,System.String,System.Threading.CancellationToken)",
+          "index": 57
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::AcceptChanges:System.Void()",
+          "index": 58
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::BeginEdit:System.Void()",
+          "index": 59
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::CancelEdit:System.Void()",
+          "index": 60
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::ClearErrors:System.Void()",
+          "index": 61
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::Delete:System.Void()",
+          "index": 62
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::EndEdit:System.Void()",
+          "index": 63
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetChildRows:System.Data.DataRow[](System.Data.DataRelation)",
+          "index": 64
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetChildRows:System.Data.DataRow[](System.Data.DataRelation,System.Data.DataRowVersion)",
+          "index": 65
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetChildRows:System.Data.DataRow[](System.String)",
+          "index": 66
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetChildRows:System.Data.DataRow[](System.String,System.Data.DataRowVersion)",
+          "index": 67
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetColumnError:System.String(System.Data.DataColumn)",
+          "index": 68
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetColumnError:System.String(System.Int32)",
+          "index": 69
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetColumnError:System.String(System.String)",
+          "index": 70
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetColumnsInError:System.Data.DataColumn[]()",
+          "index": 71
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetParentRow:System.Data.DataRow(System.Data.DataRelation)",
+          "index": 72
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetParentRow:System.Data.DataRow(System.Data.DataRelation,System.Data.DataRowVersion)",
+          "index": 73
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetParentRow:System.Data.DataRow(System.String)",
+          "index": 74
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetParentRow:System.Data.DataRow(System.String,System.Data.DataRowVersion)",
+          "index": 75
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetParentRows:System.Data.DataRow[](System.Data.DataRelation)",
+          "index": 76
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetParentRows:System.Data.DataRow[](System.Data.DataRelation,System.Data.DataRowVersion)",
+          "index": 77
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetParentRows:System.Data.DataRow[](System.String)",
+          "index": 78
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::GetParentRows:System.Data.DataRow[](System.String,System.Data.DataRowVersion)",
+          "index": 79
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::HasVersion:System.Boolean(System.Data.DataRowVersion)",
+          "index": 80
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::IsNull:System.Boolean(System.Data.DataColumn)",
+          "index": 81
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::IsNull:System.Boolean(System.Data.DataColumn,System.Data.DataRowVersion)",
+          "index": 82
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::IsNull:System.Boolean(System.Int32)",
+          "index": 83
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::IsNull:System.Boolean(System.String)",
+          "index": 84
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::RejectChanges:System.Void()",
+          "index": 85
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::SetAdded:System.Void()",
+          "index": 86
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::SetColumnError:System.Void(System.Data.DataColumn,System.String)",
+          "index": 87
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::SetColumnError:System.Void(System.Int32,System.String)",
+          "index": 88
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::SetColumnError:System.Void(System.String,System.String)",
+          "index": 89
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::SetModified:System.Void()",
+          "index": 90
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::SetParentRow:System.Void(System.Data.DataRow)",
+          "index": 91
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRow::SetParentRow:System.Void(System.Data.DataRow,System.Data.DataRelation)",
+          "index": 92
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataRowChangeEventArgs,System.AsyncCallback,System.Object)",
+          "index": 93
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 94
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowChangeEventHandler::Invoke:System.Void(System.Object,System.Data.DataRowChangeEventArgs)",
+          "index": 95
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::Add:System.Void(System.Data.DataRow)",
+          "index": 96
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::Add:System.Data.DataRow(System.Object[])",
+          "index": 97
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::Clear:System.Void()",
+          "index": 98
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::Contains:System.Boolean(System.Object)",
+          "index": 99
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::Contains:System.Boolean(System.Object[])",
+          "index": 100
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 101
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::CopyTo:System.Void(System.Data.DataRow[],System.Int32)",
+          "index": 102
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::Find:System.Data.DataRow(System.Object)",
+          "index": 103
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::Find:System.Data.DataRow(System.Object[])",
+          "index": 104
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 105
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::IndexOf:System.Int32(System.Data.DataRow)",
+          "index": 106
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::InsertAt:System.Void(System.Data.DataRow,System.Int32)",
+          "index": 107
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::Remove:System.Void(System.Data.DataRow)",
+          "index": 108
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::RemoveAt:System.Void(System.Int32)",
+          "index": 109
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowView::BeginEdit:System.Void()",
+          "index": 110
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowView::CancelEdit:System.Void()",
+          "index": 111
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowView::CreateChildView:System.Data.DataView(System.Data.DataRelation)",
+          "index": 112
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowView::CreateChildView:System.Data.DataView(System.Data.DataRelation,System.Boolean)",
+          "index": 113
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowView::CreateChildView:System.Data.DataView(System.String)",
+          "index": 114
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowView::CreateChildView:System.Data.DataView(System.String,System.Boolean)",
+          "index": 115
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowView::Delete:System.Void()",
+          "index": 116
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataRowView::EndEdit:System.Void()",
+          "index": 117
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::AcceptChanges:System.Void()",
+          "index": 118
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::BeginInit:System.Void()",
+          "index": 119
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Clear:System.Void()",
+          "index": 120
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Clone:System.Data.DataSet()",
+          "index": 121
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Copy:System.Data.DataSet()",
+          "index": 122
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::CreateDataReader:System.Data.DataTableReader()",
+          "index": 123
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::CreateDataReader:System.Data.DataTableReader(System.Data.DataTable[])",
+          "index": 124
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::EndInit:System.Void()",
+          "index": 125
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::GetChanges:System.Data.DataSet()",
+          "index": 126
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::GetChanges:System.Data.DataSet(System.Data.DataRowState)",
+          "index": 127
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::GetDataSetSchema:System.Xml.Schema.XmlSchemaComplexType(System.Xml.Schema.XmlSchemaSet)",
+          "index": 128
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+          "index": 129
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::GetXml:System.String()",
+          "index": 130
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::GetXmlSchema:System.String()",
+          "index": 131
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::HasChanges:System.Boolean()",
+          "index": 132
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::HasChanges:System.Boolean(System.Data.DataRowState)",
+          "index": 133
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::InferXmlSchema:System.Void(System.IO.Stream,System.String[])",
+          "index": 134
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::InferXmlSchema:System.Void(System.IO.TextReader,System.String[])",
+          "index": 135
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::InferXmlSchema:System.Void(System.String,System.String[])",
+          "index": 136
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::InferXmlSchema:System.Void(System.Xml.XmlReader,System.String[])",
+          "index": 137
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Load:System.Void(System.Data.IDataReader,System.Data.LoadOption,System.Data.DataTable[])",
+          "index": 138
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Load:System.Void(System.Data.IDataReader,System.Data.LoadOption,System.Data.FillErrorEventHandler,System.Data.DataTable[])",
+          "index": 139
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Load:System.Void(System.Data.IDataReader,System.Data.LoadOption,System.String[])",
+          "index": 140
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Merge:System.Void(System.Data.DataRow[])",
+          "index": 141
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Merge:System.Void(System.Data.DataRow[],System.Boolean,System.Data.MissingSchemaAction)",
+          "index": 142
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Merge:System.Void(System.Data.DataSet)",
+          "index": 143
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Merge:System.Void(System.Data.DataSet,System.Boolean)",
+          "index": 144
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Merge:System.Void(System.Data.DataSet,System.Boolean,System.Data.MissingSchemaAction)",
+          "index": 145
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Merge:System.Void(System.Data.DataTable)",
+          "index": 146
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Merge:System.Void(System.Data.DataTable,System.Boolean,System.Data.MissingSchemaAction)",
+          "index": 147
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::ReadXml:System.Data.XmlReadMode(System.IO.Stream)",
+          "index": 148
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::ReadXml:System.Data.XmlReadMode(System.IO.Stream,System.Data.XmlReadMode)",
+          "index": 149
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::ReadXml:System.Data.XmlReadMode(System.IO.TextReader)",
+          "index": 150
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::ReadXml:System.Data.XmlReadMode(System.IO.TextReader,System.Data.XmlReadMode)",
+          "index": 151
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::ReadXml:System.Data.XmlReadMode(System.String)",
+          "index": 152
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::ReadXml:System.Data.XmlReadMode(System.String,System.Data.XmlReadMode)",
+          "index": 153
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::ReadXml:System.Data.XmlReadMode(System.Xml.XmlReader)",
+          "index": 154
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::ReadXml:System.Data.XmlReadMode(System.Xml.XmlReader,System.Data.XmlReadMode)",
+          "index": 155
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::ReadXmlSchema:System.Void(System.IO.Stream)",
+          "index": 156
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::ReadXmlSchema:System.Void(System.IO.TextReader)",
+          "index": 157
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::ReadXmlSchema:System.Void(System.String)",
+          "index": 158
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::ReadXmlSchema:System.Void(System.Xml.XmlReader)",
+          "index": 159
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::RejectChanges:System.Void()",
+          "index": 160
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::Reset:System.Void()",
+          "index": 161
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXml:System.Void(System.IO.Stream)",
+          "index": 162
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXml:System.Void(System.IO.Stream,System.Data.XmlWriteMode)",
+          "index": 163
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXml:System.Void(System.IO.TextWriter)",
+          "index": 164
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXml:System.Void(System.IO.TextWriter,System.Data.XmlWriteMode)",
+          "index": 165
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXml:System.Void(System.String)",
+          "index": 166
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXml:System.Void(System.String,System.Data.XmlWriteMode)",
+          "index": 167
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXml:System.Void(System.Xml.XmlWriter)",
+          "index": 168
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXml:System.Void(System.Xml.XmlWriter,System.Data.XmlWriteMode)",
+          "index": 169
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.IO.Stream)",
+          "index": 170
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.IO.Stream,System.Converter<System.Type,System.String>)",
+          "index": 171
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.IO.TextWriter)",
+          "index": 172
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.IO.TextWriter,System.Converter<System.Type,System.String>)",
+          "index": 173
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.String)",
+          "index": 174
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.String,System.Converter<System.Type,System.String>)",
+          "index": 175
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.Xml.XmlWriter)",
+          "index": 176
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataSet::WriteXmlSchema:System.Void(System.Xml.XmlWriter,System.Converter<System.Type,System.String>)",
+          "index": 177
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::AcceptChanges:System.Void()",
+          "index": 178
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::BeginInit:System.Void()",
+          "index": 179
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::BeginLoadData:System.Void()",
+          "index": 180
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Clear:System.Void()",
+          "index": 181
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Clone:System.Data.DataTable()",
+          "index": 182
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Compute:System.Object(System.String,System.String)",
+          "index": 183
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Copy:System.Data.DataTable()",
+          "index": 184
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::CreateDataReader:System.Data.DataTableReader()",
+          "index": 185
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::EndInit:System.Void()",
+          "index": 186
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::EndLoadData:System.Void()",
+          "index": 187
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::GetChanges:System.Data.DataTable()",
+          "index": 188
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::GetChanges:System.Data.DataTable(System.Data.DataRowState)",
+          "index": 189
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::GetDataTableSchema:System.Xml.Schema.XmlSchemaComplexType(System.Xml.Schema.XmlSchemaSet)",
+          "index": 190
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::GetErrors:System.Data.DataRow[]()",
+          "index": 191
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+          "index": 192
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::ImportRow:System.Void(System.Data.DataRow)",
+          "index": 193
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Load:System.Void(System.Data.IDataReader)",
+          "index": 194
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Load:System.Void(System.Data.IDataReader,System.Data.LoadOption)",
+          "index": 195
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Load:System.Void(System.Data.IDataReader,System.Data.LoadOption,System.Data.FillErrorEventHandler)",
+          "index": 196
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::LoadDataRow:System.Data.DataRow(System.Object[],System.Boolean)",
+          "index": 197
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::LoadDataRow:System.Data.DataRow(System.Object[],System.Data.LoadOption)",
+          "index": 198
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Merge:System.Void(System.Data.DataTable)",
+          "index": 199
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Merge:System.Void(System.Data.DataTable,System.Boolean)",
+          "index": 200
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Merge:System.Void(System.Data.DataTable,System.Boolean,System.Data.MissingSchemaAction)",
+          "index": 201
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::NewRow:System.Data.DataRow()",
+          "index": 202
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::ReadXml:System.Data.XmlReadMode(System.IO.Stream)",
+          "index": 203
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::ReadXml:System.Data.XmlReadMode(System.IO.TextReader)",
+          "index": 204
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::ReadXml:System.Data.XmlReadMode(System.String)",
+          "index": 205
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::ReadXml:System.Data.XmlReadMode(System.Xml.XmlReader)",
+          "index": 206
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::ReadXmlSchema:System.Void(System.IO.Stream)",
+          "index": 207
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::ReadXmlSchema:System.Void(System.IO.TextReader)",
+          "index": 208
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::ReadXmlSchema:System.Void(System.String)",
+          "index": 209
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::ReadXmlSchema:System.Void(System.Xml.XmlReader)",
+          "index": 210
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::RejectChanges:System.Void()",
+          "index": 211
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Reset:System.Void()",
+          "index": 212
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Select:System.Data.DataRow[]()",
+          "index": 213
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Select:System.Data.DataRow[](System.String)",
+          "index": 214
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Select:System.Data.DataRow[](System.String,System.String)",
+          "index": 215
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::Select:System.Data.DataRow[](System.String,System.String,System.Data.DataViewRowState)",
+          "index": 216
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.IO.Stream)",
+          "index": 217
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.IO.Stream,System.Boolean)",
+          "index": 218
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.IO.Stream,System.Data.XmlWriteMode)",
+          "index": 219
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.IO.Stream,System.Data.XmlWriteMode,System.Boolean)",
+          "index": 220
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.IO.TextWriter)",
+          "index": 221
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.IO.TextWriter,System.Boolean)",
+          "index": 222
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.IO.TextWriter,System.Data.XmlWriteMode)",
+          "index": 223
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.IO.TextWriter,System.Data.XmlWriteMode,System.Boolean)",
+          "index": 224
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.String)",
+          "index": 225
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.String,System.Boolean)",
+          "index": 226
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.String,System.Data.XmlWriteMode)",
+          "index": 227
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.String,System.Data.XmlWriteMode,System.Boolean)",
+          "index": 228
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.Xml.XmlWriter)",
+          "index": 229
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.Xml.XmlWriter,System.Boolean)",
+          "index": 230
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.Xml.XmlWriter,System.Data.XmlWriteMode)",
+          "index": 231
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXml:System.Void(System.Xml.XmlWriter,System.Data.XmlWriteMode,System.Boolean)",
+          "index": 232
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXmlSchema:System.Void(System.IO.Stream)",
+          "index": 233
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXmlSchema:System.Void(System.IO.Stream,System.Boolean)",
+          "index": 234
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXmlSchema:System.Void(System.IO.TextWriter)",
+          "index": 235
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXmlSchema:System.Void(System.IO.TextWriter,System.Boolean)",
+          "index": 236
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXmlSchema:System.Void(System.String)",
+          "index": 237
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXmlSchema:System.Void(System.String,System.Boolean)",
+          "index": 238
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXmlSchema:System.Void(System.Xml.XmlWriter)",
+          "index": 239
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTable::WriteXmlSchema:System.Void(System.Xml.XmlWriter,System.Boolean)",
+          "index": 240
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableClearEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataTableClearEventArgs,System.AsyncCallback,System.Object)",
+          "index": 241
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableClearEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 242
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableClearEventHandler::Invoke:System.Void(System.Object,System.Data.DataTableClearEventArgs)",
+          "index": 243
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::Add:System.Data.DataTable()",
+          "index": 244
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::Add:System.Void(System.Data.DataTable)",
+          "index": 245
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::Add:System.Data.DataTable(System.String)",
+          "index": 246
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::Add:System.Data.DataTable(System.String,System.String)",
+          "index": 247
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::AddRange:System.Void(System.Data.DataTable[])",
+          "index": 248
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::CanRemove:System.Boolean(System.Data.DataTable)",
+          "index": 249
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::Clear:System.Void()",
+          "index": 250
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::Contains:System.Boolean(System.String)",
+          "index": 251
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::Contains:System.Boolean(System.String,System.String)",
+          "index": 252
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::CopyTo:System.Void(System.Data.DataTable[],System.Int32)",
+          "index": 253
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::IndexOf:System.Int32(System.Data.DataTable)",
+          "index": 254
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::IndexOf:System.Int32(System.String)",
+          "index": 255
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::IndexOf:System.Int32(System.String,System.String)",
+          "index": 256
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::Remove:System.Void(System.Data.DataTable)",
+          "index": 257
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::Remove:System.Void(System.String)",
+          "index": 258
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::Remove:System.Void(System.String,System.String)",
+          "index": 259
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::RemoveAt:System.Void(System.Int32)",
+          "index": 260
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::AsDataView:System.Data.DataView(System.Data.DataTable)",
+          "index": 261
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableExtensions::AsEnumerable:System.Data.EnumerableRowCollection<System.Data.DataRow>(System.Data.DataTable)",
+          "index": 262
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableNewRowEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataTableNewRowEventArgs,System.AsyncCallback,System.Object)",
+          "index": 263
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableNewRowEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 264
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableNewRowEventHandler::Invoke:System.Void(System.Object,System.Data.DataTableNewRowEventArgs)",
+          "index": 265
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::Close:System.Void()",
+          "index": 266
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetBoolean:System.Boolean(System.Int32)",
+          "index": 267
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetByte:System.Byte(System.Int32)",
+          "index": 268
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)",
+          "index": 269
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetChar:System.Char(System.Int32)",
+          "index": 270
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)",
+          "index": 271
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetDataTypeName:System.String(System.Int32)",
+          "index": 272
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetDateTime:System.DateTime(System.Int32)",
+          "index": 273
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetDecimal:System.Decimal(System.Int32)",
+          "index": 274
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetDouble:System.Double(System.Int32)",
+          "index": 275
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 276
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetFieldType:System.Type(System.Int32)",
+          "index": 277
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetFloat:System.Single(System.Int32)",
+          "index": 278
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetGuid:System.Guid(System.Int32)",
+          "index": 279
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetInt16:System.Int16(System.Int32)",
+          "index": 280
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetInt32:System.Int32(System.Int32)",
+          "index": 281
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetInt64:System.Int64(System.Int32)",
+          "index": 282
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetName:System.String(System.Int32)",
+          "index": 283
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetOrdinal:System.Int32(System.String)",
+          "index": 284
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetProviderSpecificFieldType:System.Type(System.Int32)",
+          "index": 285
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetProviderSpecificValue:System.Object(System.Int32)",
+          "index": 286
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetProviderSpecificValues:System.Int32(System.Object[])",
+          "index": 287
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetSchemaTable:System.Data.DataTable()",
+          "index": 288
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetString:System.String(System.Int32)",
+          "index": 289
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetValue:System.Object(System.Int32)",
+          "index": 290
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::GetValues:System.Int32(System.Object[])",
+          "index": 291
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::IsDBNull:System.Boolean(System.Int32)",
+          "index": 292
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::NextResult:System.Boolean()",
+          "index": 293
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataTableReader::Read:System.Boolean()",
+          "index": 294
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::AddNew:System.Data.DataRowView()",
+          "index": 295
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::BeginInit:System.Void()",
+          "index": 296
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 297
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::Delete:System.Void(System.Int32)",
+          "index": 298
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::EndInit:System.Void()",
+          "index": 299
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::Find:System.Int32(System.Object)",
+          "index": 300
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::Find:System.Int32(System.Object[])",
+          "index": 301
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::FindRows:System.Data.DataRowView[](System.Object)",
+          "index": 302
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::FindRows:System.Data.DataRowView[](System.Object[])",
+          "index": 303
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 304
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::ToTable:System.Data.DataTable()",
+          "index": 305
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::ToTable:System.Data.DataTable(System.Boolean,System.String[])",
+          "index": 306
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::ToTable:System.Data.DataTable(System.String)",
+          "index": 307
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataView::ToTable:System.Data.DataTable(System.String,System.Boolean,System.String[])",
+          "index": 308
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataViewManager::CreateDataView:System.Data.DataView(System.Data.DataTable)",
+          "index": 309
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataViewSettingCollection::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 310
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataViewSettingCollection::CopyTo:System.Void(System.Data.DataViewSetting[],System.Int32)",
+          "index": 311
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DataViewSettingCollection::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 312
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DBConcurrencyException::CopyToRows:System.Void(System.Data.DataRow[])",
+          "index": 313
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DBConcurrencyException::CopyToRows:System.Void(System.Data.DataRow[],System.Int32)",
+          "index": 314
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.DBConcurrencyException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+          "index": 315
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.FillErrorEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.FillErrorEventArgs,System.AsyncCallback,System.Object)",
+          "index": 316
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.FillErrorEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 317
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.FillErrorEventHandler::Invoke:System.Void(System.Object,System.Data.FillErrorEventArgs)",
+          "index": 318
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.InternalDataCollectionBase::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 319
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.InternalDataCollectionBase::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 320
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.MergeFailedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.MergeFailedEventArgs,System.AsyncCallback,System.Object)",
+          "index": 321
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.MergeFailedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 322
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.MergeFailedEventHandler::Invoke:System.Void(System.Object,System.Data.MergeFailedEventArgs)",
+          "index": 323
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.PropertyCollection::Clone:System.Object()",
+          "index": 324
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.StateChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.StateChangeEventArgs,System.AsyncCallback,System.Object)",
+          "index": 325
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.StateChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 326
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.StateChangeEventHandler::Invoke:System.Void(System.Object,System.Data.StateChangeEventArgs)",
+          "index": 327
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.StatementCompletedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.StatementCompletedEventArgs,System.AsyncCallback,System.Object)",
+          "index": 328
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.StatementCompletedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+          "index": 329
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.StatementCompletedEventHandler::Invoke:System.Void(System.Object,System.Data.StatementCompletedEventArgs)",
+          "index": 330
+        }
+      ]
+    },
+    {
+      "slug": "system-data-common",
+      "namespaces": [
+        "System.Data.Common"
+      ],
+      "methodCount": 80,
+      "methods": [
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::Fill:System.Int32(System.Data.DataSet)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::FillSchema:System.Data.DataTable[](System.Data.DataSet,System.Data.SchemaType)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::GetFillParameters:System.Data.IDataParameter[]()",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::ResetFillLoadOption:System.Void()",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::ShouldSerializeAcceptChangesDuringFill:System.Boolean()",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::ShouldSerializeFillLoadOption:System.Boolean()",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataAdapter::Update:System.Int32(System.Data.DataSet)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMapping::GetDataColumnBySchemaAction:System.Data.DataColumn(System.Data.DataTable,System.Type,System.Data.MissingSchemaAction)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMapping::GetDataColumnBySchemaAction:System.Data.DataColumn(System.String,System.String,System.Data.DataTable,System.Type,System.Data.MissingSchemaAction)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Add:System.Int32(System.Object)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Add:System.Data.Common.DataColumnMapping(System.String,System.String)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::AddRange:System.Void(System.Array)",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::AddRange:System.Void(System.Data.Common.DataColumnMapping[])",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Clear:System.Void()",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Contains:System.Boolean(System.Object)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Contains:System.Boolean(System.String)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::CopyTo:System.Void(System.Data.Common.DataColumnMapping[],System.Int32)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::GetByDataSetColumn:System.Data.Common.DataColumnMapping(System.String)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::GetColumnMappingBySchemaAction:System.Data.Common.DataColumnMapping(System.Data.Common.DataColumnMappingCollection,System.String,System.Data.MissingMappingAction)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::GetDataColumn:System.Data.DataColumn(System.Data.Common.DataColumnMappingCollection,System.String,System.Type,System.Data.DataTable,System.Data.MissingMappingAction,System.Data.MissingSchemaAction)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::IndexOf:System.Int32(System.Object)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::IndexOf:System.Int32(System.String)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::IndexOfDataSetColumn:System.Int32(System.String)",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Insert:System.Void(System.Int32,System.Data.Common.DataColumnMapping)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Insert:System.Void(System.Int32,System.Object)",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Remove:System.Void(System.Data.Common.DataColumnMapping)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::Remove:System.Void(System.Object)",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::RemoveAt:System.Void(System.Int32)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataColumnMappingCollection::RemoveAt:System.Void(System.String)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMapping::GetColumnMappingBySchemaAction:System.Data.Common.DataColumnMapping(System.String,System.Data.MissingMappingAction)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMapping::GetDataColumn:System.Data.DataColumn(System.String,System.Type,System.Data.DataTable,System.Data.MissingMappingAction,System.Data.MissingSchemaAction)",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMapping::GetDataTableBySchemaAction:System.Data.DataTable(System.Data.DataSet,System.Data.MissingSchemaAction)",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Add:System.Int32(System.Object)",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Add:System.Data.Common.DataTableMapping(System.String,System.String)",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::AddRange:System.Void(System.Array)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::AddRange:System.Void(System.Data.Common.DataTableMapping[])",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Clear:System.Void()",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Contains:System.Boolean(System.Object)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Contains:System.Boolean(System.String)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::CopyTo:System.Void(System.Array,System.Int32)",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::CopyTo:System.Void(System.Data.Common.DataTableMapping[],System.Int32)",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::GetByDataSetTable:System.Data.Common.DataTableMapping(System.String)",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::GetEnumerator:System.Collections.IEnumerator()",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::GetTableMappingBySchemaAction:System.Data.Common.DataTableMapping(System.Data.Common.DataTableMappingCollection,System.String,System.String,System.Data.MissingMappingAction)",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::IndexOf:System.Int32(System.Object)",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::IndexOf:System.Int32(System.String)",
+          "index": 47
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::IndexOfDataSetTable:System.Int32(System.String)",
+          "index": 48
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Insert:System.Void(System.Int32,System.Data.Common.DataTableMapping)",
+          "index": 49
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Insert:System.Void(System.Int32,System.Object)",
+          "index": 50
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Remove:System.Void(System.Data.Common.DataTableMapping)",
+          "index": 51
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::Remove:System.Void(System.Object)",
+          "index": 52
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::RemoveAt:System.Void(System.Int32)",
+          "index": 53
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DataTableMappingCollection::RemoveAt:System.Void(System.String)",
+          "index": 54
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::Add:System.Void(System.String,System.Object)",
+          "index": 55
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::AppendKeyValuePair:System.Void(System.Text.StringBuilder,System.String,System.String)",
+          "index": 56
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::AppendKeyValuePair:System.Void(System.Text.StringBuilder,System.String,System.String,System.Boolean)",
+          "index": 57
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::Clear:System.Void()",
+          "index": 58
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::ContainsKey:System.Boolean(System.String)",
+          "index": 59
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::EquivalentTo:System.Boolean(System.Data.Common.DbConnectionStringBuilder)",
+          "index": 60
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::Remove:System.Boolean(System.String)",
+          "index": 61
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::ShouldSerialize:System.Boolean(System.String)",
+          "index": 62
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbConnectionStringBuilder::TryGetValue:System.Boolean(System.String,System.Object)",
+          "index": 63
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReaderExtensions::CanGetColumnSchema:System.Boolean(System.Data.Common.DbDataReader)",
+          "index": 64
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbDataReaderExtensions::GetColumnSchema:System.Collections.ObjectModel.ReadOnlyCollection<System.Data.Common.DbColumn>(System.Data.Common.DbDataReader)",
+          "index": 65
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbEnumerator::MoveNext:System.Boolean()",
+          "index": 66
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbEnumerator::Reset:System.Void()",
+          "index": 67
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::GetFactory:System.Data.Common.DbProviderFactory(System.Data.Common.DbConnection)",
+          "index": 68
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::GetFactory:System.Data.Common.DbProviderFactory(System.Data.DataRow)",
+          "index": 69
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::GetFactory:System.Data.Common.DbProviderFactory(System.String)",
+          "index": 70
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::GetFactoryClasses:System.Data.DataTable()",
+          "index": 71
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::GetProviderInvariantNames:System.Collections.Generic.IEnumerable<System.String>()",
+          "index": 72
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::RegisterFactory:System.Void(System.String,System.Data.Common.DbProviderFactory)",
+          "index": 73
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::RegisterFactory:System.Void(System.String,System.String)",
+          "index": 74
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::RegisterFactory:System.Void(System.String,System.Type)",
+          "index": 75
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::TryGetFactory:System.Boolean(System.String,System.Data.Common.DbProviderFactory)",
+          "index": 76
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.DbProviderFactories::UnregisterFactory:System.Boolean(System.String)",
+          "index": 77
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.RowUpdatedEventArgs::CopyToRows:System.Void(System.Data.DataRow[])",
+          "index": 78
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.Common.RowUpdatedEventArgs::CopyToRows:System.Void(System.Data.DataRow[],System.Int32)",
+          "index": 79
+        }
+      ]
+    },
+    {
+      "slug": "system-data-sqltypes",
+      "namespaces": [
+        "System.Data.SqlTypes"
+      ],
+      "methodCount": 314,
+      "methods": [
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBinary::Add:System.Data.SqlTypes.SqlBinary(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBinary::CompareTo:System.Int32(System.Data.SqlTypes.SqlBinary)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBinary::CompareTo:System.Int32(System.Object)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBinary::Concat:System.Data.SqlTypes.SqlBinary(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBinary::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBinary::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBinary::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBinary::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBinary::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBinary::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBinary::ToSqlGuid:System.Data.SqlTypes.SqlGuid()",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBinary::WrapBytes:System.Data.SqlTypes.SqlBinary(System.Byte[])",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::And:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::CompareTo:System.Int32(System.Data.SqlTypes.SqlBoolean)",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::CompareTo:System.Int32(System.Object)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::GreaterThanOrEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::LessThanOrEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::OnesComplement:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::Or:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::Parse:System.Data.SqlTypes.SqlBoolean(System.String)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlByte:System.Data.SqlTypes.SqlByte()",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlDouble:System.Data.SqlTypes.SqlDouble()",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlInt16:System.Data.SqlTypes.SqlInt16()",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlInt32:System.Data.SqlTypes.SqlInt32()",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlInt64:System.Data.SqlTypes.SqlInt64()",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlMoney:System.Data.SqlTypes.SqlMoney()",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlSingle:System.Data.SqlTypes.SqlSingle()",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlString:System.Data.SqlTypes.SqlString()",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBoolean::Xor:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::Add:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::BitwiseAnd:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::BitwiseOr:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::CompareTo:System.Int32(System.Data.SqlTypes.SqlByte)",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::CompareTo:System.Int32(System.Object)",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::Divide:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::Mod:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::Modulus:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::Multiply:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 47
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 48
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::OnesComplement:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte)",
+          "index": 49
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::Parse:System.Data.SqlTypes.SqlByte(System.String)",
+          "index": 50
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::Subtract:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 51
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()",
+          "index": 52
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()",
+          "index": 53
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlDouble:System.Data.SqlTypes.SqlDouble()",
+          "index": 54
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlInt16:System.Data.SqlTypes.SqlInt16()",
+          "index": 55
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlInt32:System.Data.SqlTypes.SqlInt32()",
+          "index": 56
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlInt64:System.Data.SqlTypes.SqlInt64()",
+          "index": 57
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlMoney:System.Data.SqlTypes.SqlMoney()",
+          "index": 58
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlSingle:System.Data.SqlTypes.SqlSingle()",
+          "index": 59
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlString:System.Data.SqlTypes.SqlString()",
+          "index": 60
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlByte::Xor:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)",
+          "index": 61
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBytes::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 62
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBytes::Read:System.Int64(System.Int64,System.Byte[],System.Int32,System.Int32)",
+          "index": 63
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBytes::SetLength:System.Void(System.Int64)",
+          "index": 64
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBytes::SetNull:System.Void()",
+          "index": 65
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBytes::ToSqlBinary:System.Data.SqlTypes.SqlBinary()",
+          "index": 66
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlBytes::Write:System.Void(System.Int64,System.Byte[],System.Int32,System.Int32)",
+          "index": 67
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlChars::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 68
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlChars::Read:System.Int64(System.Int64,System.Char[],System.Int32,System.Int32)",
+          "index": 69
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlChars::SetLength:System.Void(System.Int64)",
+          "index": 70
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlChars::SetNull:System.Void()",
+          "index": 71
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlChars::ToSqlString:System.Data.SqlTypes.SqlString()",
+          "index": 72
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlChars::Write:System.Void(System.Int64,System.Char[],System.Int32,System.Int32)",
+          "index": 73
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDateTime::Add:System.Data.SqlTypes.SqlDateTime(System.Data.SqlTypes.SqlDateTime,System.TimeSpan)",
+          "index": 74
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDateTime::CompareTo:System.Int32(System.Data.SqlTypes.SqlDateTime)",
+          "index": 75
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDateTime::CompareTo:System.Int32(System.Object)",
+          "index": 76
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDateTime::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 77
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDateTime::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)",
+          "index": 78
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDateTime::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)",
+          "index": 79
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDateTime::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)",
+          "index": 80
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDateTime::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)",
+          "index": 81
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDateTime::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)",
+          "index": 82
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDateTime::Parse:System.Data.SqlTypes.SqlDateTime(System.String)",
+          "index": 83
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDateTime::Subtract:System.Data.SqlTypes.SqlDateTime(System.Data.SqlTypes.SqlDateTime,System.TimeSpan)",
+          "index": 84
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDateTime::ToSqlString:System.Data.SqlTypes.SqlString()",
+          "index": 85
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Abs:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal)",
+          "index": 86
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Add:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)",
+          "index": 87
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::AdjustScale:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Int32,System.Boolean)",
+          "index": 88
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Ceiling:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal)",
+          "index": 89
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::CompareTo:System.Int32(System.Data.SqlTypes.SqlDecimal)",
+          "index": 90
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::CompareTo:System.Int32(System.Object)",
+          "index": 91
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ConvertToPrecScale:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Int32,System.Int32)",
+          "index": 92
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Divide:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)",
+          "index": 93
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Floor:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal)",
+          "index": 94
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 95
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)",
+          "index": 96
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)",
+          "index": 97
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)",
+          "index": 98
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)",
+          "index": 99
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Multiply:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)",
+          "index": 100
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)",
+          "index": 101
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Parse:System.Data.SqlTypes.SqlDecimal(System.String)",
+          "index": 102
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Power:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Double)",
+          "index": 103
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Round:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Int32)",
+          "index": 104
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Sign:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlDecimal)",
+          "index": 105
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Subtract:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)",
+          "index": 106
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToDouble:System.Double()",
+          "index": 107
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()",
+          "index": 108
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlByte:System.Data.SqlTypes.SqlByte()",
+          "index": 109
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlDouble:System.Data.SqlTypes.SqlDouble()",
+          "index": 110
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlInt16:System.Data.SqlTypes.SqlInt16()",
+          "index": 111
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlInt32:System.Data.SqlTypes.SqlInt32()",
+          "index": 112
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlInt64:System.Data.SqlTypes.SqlInt64()",
+          "index": 113
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlMoney:System.Data.SqlTypes.SqlMoney()",
+          "index": 114
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlSingle:System.Data.SqlTypes.SqlSingle()",
+          "index": 115
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlString:System.Data.SqlTypes.SqlString()",
+          "index": 116
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Truncate:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Int32)",
+          "index": 117
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDecimal::WriteTdsValue:System.Int32(System.Span<System.UInt32>)",
+          "index": 118
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::Add:System.Data.SqlTypes.SqlDouble(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)",
+          "index": 119
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::CompareTo:System.Int32(System.Data.SqlTypes.SqlDouble)",
+          "index": 120
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::CompareTo:System.Int32(System.Object)",
+          "index": 121
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::Divide:System.Data.SqlTypes.SqlDouble(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)",
+          "index": 122
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 123
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)",
+          "index": 124
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)",
+          "index": 125
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)",
+          "index": 126
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)",
+          "index": 127
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::Multiply:System.Data.SqlTypes.SqlDouble(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)",
+          "index": 128
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)",
+          "index": 129
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::Parse:System.Data.SqlTypes.SqlDouble(System.String)",
+          "index": 130
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::Subtract:System.Data.SqlTypes.SqlDouble(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)",
+          "index": 131
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()",
+          "index": 132
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlByte:System.Data.SqlTypes.SqlByte()",
+          "index": 133
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()",
+          "index": 134
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlInt16:System.Data.SqlTypes.SqlInt16()",
+          "index": 135
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlInt32:System.Data.SqlTypes.SqlInt32()",
+          "index": 136
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlInt64:System.Data.SqlTypes.SqlInt64()",
+          "index": 137
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlMoney:System.Data.SqlTypes.SqlMoney()",
+          "index": 138
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlSingle:System.Data.SqlTypes.SqlSingle()",
+          "index": 139
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlString:System.Data.SqlTypes.SqlString()",
+          "index": 140
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlGuid::CompareTo:System.Int32(System.Data.SqlTypes.SqlGuid)",
+          "index": 141
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlGuid::CompareTo:System.Int32(System.Object)",
+          "index": 142
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlGuid::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 143
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlGuid::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)",
+          "index": 144
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlGuid::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)",
+          "index": 145
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlGuid::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)",
+          "index": 146
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlGuid::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)",
+          "index": 147
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlGuid::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)",
+          "index": 148
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlGuid::Parse:System.Data.SqlTypes.SqlGuid(System.String)",
+          "index": 149
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlGuid::ToByteArray:System.Byte[]()",
+          "index": 150
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlGuid::ToSqlBinary:System.Data.SqlTypes.SqlBinary()",
+          "index": 151
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlGuid::ToSqlString:System.Data.SqlTypes.SqlString()",
+          "index": 152
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::Add:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 153
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::BitwiseAnd:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 154
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::BitwiseOr:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 155
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::CompareTo:System.Int32(System.Data.SqlTypes.SqlInt16)",
+          "index": 156
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::CompareTo:System.Int32(System.Object)",
+          "index": 157
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::Divide:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 158
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 159
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 160
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 161
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 162
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 163
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::Mod:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 164
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::Modulus:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 165
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::Multiply:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 166
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 167
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::OnesComplement:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16)",
+          "index": 168
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::Parse:System.Data.SqlTypes.SqlInt16(System.String)",
+          "index": 169
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::Subtract:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 170
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()",
+          "index": 171
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlByte:System.Data.SqlTypes.SqlByte()",
+          "index": 172
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()",
+          "index": 173
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlDouble:System.Data.SqlTypes.SqlDouble()",
+          "index": 174
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlInt32:System.Data.SqlTypes.SqlInt32()",
+          "index": 175
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlInt64:System.Data.SqlTypes.SqlInt64()",
+          "index": 176
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlMoney:System.Data.SqlTypes.SqlMoney()",
+          "index": 177
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlSingle:System.Data.SqlTypes.SqlSingle()",
+          "index": 178
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlString:System.Data.SqlTypes.SqlString()",
+          "index": 179
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt16::Xor:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)",
+          "index": 180
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::Add:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 181
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::BitwiseAnd:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 182
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::BitwiseOr:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 183
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::CompareTo:System.Int32(System.Data.SqlTypes.SqlInt32)",
+          "index": 184
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::CompareTo:System.Int32(System.Object)",
+          "index": 185
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::Divide:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 186
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 187
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 188
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 189
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 190
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 191
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::Mod:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 192
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::Modulus:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 193
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::Multiply:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 194
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 195
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::OnesComplement:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32)",
+          "index": 196
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::Parse:System.Data.SqlTypes.SqlInt32(System.String)",
+          "index": 197
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::Subtract:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 198
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()",
+          "index": 199
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlByte:System.Data.SqlTypes.SqlByte()",
+          "index": 200
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()",
+          "index": 201
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlDouble:System.Data.SqlTypes.SqlDouble()",
+          "index": 202
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlInt16:System.Data.SqlTypes.SqlInt16()",
+          "index": 203
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlInt64:System.Data.SqlTypes.SqlInt64()",
+          "index": 204
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlMoney:System.Data.SqlTypes.SqlMoney()",
+          "index": 205
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlSingle:System.Data.SqlTypes.SqlSingle()",
+          "index": 206
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlString:System.Data.SqlTypes.SqlString()",
+          "index": 207
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt32::Xor:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)",
+          "index": 208
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::Add:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 209
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::BitwiseAnd:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 210
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::BitwiseOr:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 211
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::CompareTo:System.Int32(System.Data.SqlTypes.SqlInt64)",
+          "index": 212
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::CompareTo:System.Int32(System.Object)",
+          "index": 213
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::Divide:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 214
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 215
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 216
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 217
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 218
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 219
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::Mod:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 220
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::Modulus:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 221
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::Multiply:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 222
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 223
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::OnesComplement:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64)",
+          "index": 224
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::Parse:System.Data.SqlTypes.SqlInt64(System.String)",
+          "index": 225
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::Subtract:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 226
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()",
+          "index": 227
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlByte:System.Data.SqlTypes.SqlByte()",
+          "index": 228
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()",
+          "index": 229
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlDouble:System.Data.SqlTypes.SqlDouble()",
+          "index": 230
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlInt16:System.Data.SqlTypes.SqlInt16()",
+          "index": 231
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlInt32:System.Data.SqlTypes.SqlInt32()",
+          "index": 232
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlMoney:System.Data.SqlTypes.SqlMoney()",
+          "index": 233
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlSingle:System.Data.SqlTypes.SqlSingle()",
+          "index": 234
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlString:System.Data.SqlTypes.SqlString()",
+          "index": 235
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlInt64::Xor:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)",
+          "index": 236
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::Add:System.Data.SqlTypes.SqlMoney(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)",
+          "index": 237
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::CompareTo:System.Int32(System.Data.SqlTypes.SqlMoney)",
+          "index": 238
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::CompareTo:System.Int32(System.Object)",
+          "index": 239
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::Divide:System.Data.SqlTypes.SqlMoney(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)",
+          "index": 240
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::FromTdsValue:System.Data.SqlTypes.SqlMoney(System.Int64)",
+          "index": 241
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::GetTdsValue:System.Int64()",
+          "index": 242
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 243
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)",
+          "index": 244
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)",
+          "index": 245
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)",
+          "index": 246
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)",
+          "index": 247
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::Multiply:System.Data.SqlTypes.SqlMoney(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)",
+          "index": 248
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)",
+          "index": 249
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::Parse:System.Data.SqlTypes.SqlMoney(System.String)",
+          "index": 250
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::Subtract:System.Data.SqlTypes.SqlMoney(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)",
+          "index": 251
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToDecimal:System.Decimal()",
+          "index": 252
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToDouble:System.Double()",
+          "index": 253
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToInt32:System.Int32()",
+          "index": 254
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToInt64:System.Int64()",
+          "index": 255
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()",
+          "index": 256
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlByte:System.Data.SqlTypes.SqlByte()",
+          "index": 257
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()",
+          "index": 258
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlDouble:System.Data.SqlTypes.SqlDouble()",
+          "index": 259
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlInt16:System.Data.SqlTypes.SqlInt16()",
+          "index": 260
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlInt32:System.Data.SqlTypes.SqlInt32()",
+          "index": 261
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlInt64:System.Data.SqlTypes.SqlInt64()",
+          "index": 262
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlSingle:System.Data.SqlTypes.SqlSingle()",
+          "index": 263
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlString:System.Data.SqlTypes.SqlString()",
+          "index": 264
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::Add:System.Data.SqlTypes.SqlSingle(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)",
+          "index": 265
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::CompareTo:System.Int32(System.Data.SqlTypes.SqlSingle)",
+          "index": 266
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::CompareTo:System.Int32(System.Object)",
+          "index": 267
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::Divide:System.Data.SqlTypes.SqlSingle(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)",
+          "index": 268
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 269
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)",
+          "index": 270
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)",
+          "index": 271
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)",
+          "index": 272
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)",
+          "index": 273
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::Multiply:System.Data.SqlTypes.SqlSingle(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)",
+          "index": 274
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)",
+          "index": 275
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::Parse:System.Data.SqlTypes.SqlSingle(System.String)",
+          "index": 276
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::Subtract:System.Data.SqlTypes.SqlSingle(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)",
+          "index": 277
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()",
+          "index": 278
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlByte:System.Data.SqlTypes.SqlByte()",
+          "index": 279
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()",
+          "index": 280
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlDouble:System.Data.SqlTypes.SqlDouble()",
+          "index": 281
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlInt16:System.Data.SqlTypes.SqlInt16()",
+          "index": 282
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlInt32:System.Data.SqlTypes.SqlInt32()",
+          "index": 283
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlInt64:System.Data.SqlTypes.SqlInt64()",
+          "index": 284
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlMoney:System.Data.SqlTypes.SqlMoney()",
+          "index": 285
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlString:System.Data.SqlTypes.SqlString()",
+          "index": 286
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::Add:System.Data.SqlTypes.SqlString(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)",
+          "index": 287
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::Clone:System.Data.SqlTypes.SqlString()",
+          "index": 288
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::CompareOptionsFromSqlCompareOptions:System.Globalization.CompareOptions(System.Data.SqlTypes.SqlCompareOptions)",
+          "index": 289
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::CompareTo:System.Int32(System.Data.SqlTypes.SqlString)",
+          "index": 290
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::CompareTo:System.Int32(System.Object)",
+          "index": 291
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::Concat:System.Data.SqlTypes.SqlString(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)",
+          "index": 292
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::GetNonUnicodeBytes:System.Byte[]()",
+          "index": 293
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::GetUnicodeBytes:System.Byte[]()",
+          "index": 294
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 295
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)",
+          "index": 296
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)",
+          "index": 297
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)",
+          "index": 298
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)",
+          "index": 299
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)",
+          "index": 300
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()",
+          "index": 301
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlByte:System.Data.SqlTypes.SqlByte()",
+          "index": 302
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlDateTime:System.Data.SqlTypes.SqlDateTime()",
+          "index": 303
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()",
+          "index": 304
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlDouble:System.Data.SqlTypes.SqlDouble()",
+          "index": 305
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlGuid:System.Data.SqlTypes.SqlGuid()",
+          "index": 306
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlInt16:System.Data.SqlTypes.SqlInt16()",
+          "index": 307
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlInt32:System.Data.SqlTypes.SqlInt32()",
+          "index": 308
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlInt64:System.Data.SqlTypes.SqlInt64()",
+          "index": 309
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlMoney:System.Data.SqlTypes.SqlMoney()",
+          "index": 310
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlSingle:System.Data.SqlTypes.SqlSingle()",
+          "index": 311
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlXml::CreateReader:System.Xml.XmlReader()",
+          "index": 312
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Data.SqlTypes.SqlXml::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)",
+          "index": 313
+        }
+      ]
+    },
+    {
+      "slug": "global-ns",
+      "namespaces": [
+        "System.Xml"
+      ],
+      "methodCount": 11,
+      "methods": [
+        {
+          "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::CloneNode:System.Xml.XmlNode(System.Boolean)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateElement:System.Xml.XmlElement(System.String,System.String,System.String)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateEntityReference:System.Xml.XmlEntityReference(System.String)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementById:System.Xml.XmlElement(System.String)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementFromRow:System.Xml.XmlElement(System.Data.DataRow)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementsByTagName:System.Xml.XmlNodeList(System.String)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetRowFromElement:System.Data.DataRow(System.Xml.XmlElement)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.IO.Stream)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.IO.TextReader)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.String)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.Xml.XmlReader)",
+          "index": 10
+        }
+      ]
+    }
+  ]
+}

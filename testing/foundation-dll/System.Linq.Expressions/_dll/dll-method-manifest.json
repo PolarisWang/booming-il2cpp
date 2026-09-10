@@ -1,0 +1,957 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq.Expressions",
+  "generatedAt": "2026-06-04T10:30:43.7715125Z",
+  "totalMethods": 72,
+  "methods": [
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindBinaryOperation:System.Dynamic.DynamicMetaObject(System.Dynamic.BinaryOperationBinder,System.Dynamic.DynamicMetaObject)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "BindBinaryOperation",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Dynamic.BinaryOperationBinder",
+        "System.Dynamic.DynamicMetaObject"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindConvert:System.Dynamic.DynamicMetaObject(System.Dynamic.ConvertBinder)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "BindConvert",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Dynamic.ConvertBinder"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindCreateInstance:System.Dynamic.DynamicMetaObject(System.Dynamic.CreateInstanceBinder,System.Dynamic.DynamicMetaObject[])",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "BindCreateInstance",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Dynamic.CreateInstanceBinder",
+        "System.Dynamic.DynamicMetaObject[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindDeleteIndex:System.Dynamic.DynamicMetaObject(System.Dynamic.DeleteIndexBinder,System.Dynamic.DynamicMetaObject[])",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "BindDeleteIndex",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Dynamic.DeleteIndexBinder",
+        "System.Dynamic.DynamicMetaObject[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindDeleteMember:System.Dynamic.DynamicMetaObject(System.Dynamic.DeleteMemberBinder)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "BindDeleteMember",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Dynamic.DeleteMemberBinder"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindGetIndex:System.Dynamic.DynamicMetaObject(System.Dynamic.GetIndexBinder,System.Dynamic.DynamicMetaObject[])",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "BindGetIndex",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Dynamic.GetIndexBinder",
+        "System.Dynamic.DynamicMetaObject[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindGetMember:System.Dynamic.DynamicMetaObject(System.Dynamic.GetMemberBinder)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "BindGetMember",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Dynamic.GetMemberBinder"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindInvoke:System.Dynamic.DynamicMetaObject(System.Dynamic.InvokeBinder,System.Dynamic.DynamicMetaObject[])",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "BindInvoke",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Dynamic.InvokeBinder",
+        "System.Dynamic.DynamicMetaObject[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindInvokeMember:System.Dynamic.DynamicMetaObject(System.Dynamic.InvokeMemberBinder,System.Dynamic.DynamicMetaObject[])",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "BindInvokeMember",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Dynamic.InvokeMemberBinder",
+        "System.Dynamic.DynamicMetaObject[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindSetIndex:System.Dynamic.DynamicMetaObject(System.Dynamic.SetIndexBinder,System.Dynamic.DynamicMetaObject[],System.Dynamic.DynamicMetaObject)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "BindSetIndex",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Dynamic.SetIndexBinder",
+        "System.Dynamic.DynamicMetaObject[]",
+        "System.Dynamic.DynamicMetaObject"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindSetMember:System.Dynamic.DynamicMetaObject(System.Dynamic.SetMemberBinder,System.Dynamic.DynamicMetaObject)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "BindSetMember",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Dynamic.SetMemberBinder",
+        "System.Dynamic.DynamicMetaObject"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::BindUnaryOperation:System.Dynamic.DynamicMetaObject(System.Dynamic.UnaryOperationBinder)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "BindUnaryOperation",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Dynamic.UnaryOperationBinder"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::Create:System.Dynamic.DynamicMetaObject(System.Object,System.Linq.Expressions.Expression)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "Create",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Object",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicMetaObject::GetDynamicMemberNames:System.Collections.Generic.IEnumerable<System.String>()",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicMetaObject",
+      "methodName": "GetDynamicMemberNames",
+      "returnType": "System.Collections.Generic.IEnumerable<System.String>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::GetDynamicMemberNames:System.Collections.Generic.IEnumerable<System.String>()",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "GetDynamicMemberNames",
+      "returnType": "System.Collections.Generic.IEnumerable<System.String>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::GetMetaObject:System.Dynamic.DynamicMetaObject(System.Linq.Expressions.Expression)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "GetMetaObject",
+      "returnType": "System.Dynamic.DynamicMetaObject",
+      "parameters": [
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryBinaryOperation:System.Boolean(System.Dynamic.BinaryOperationBinder,System.Object,System.Object)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "TryBinaryOperation",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Dynamic.BinaryOperationBinder",
+        "System.Object",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryConvert:System.Boolean(System.Dynamic.ConvertBinder,System.Object)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "TryConvert",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Dynamic.ConvertBinder",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryCreateInstance:System.Boolean(System.Dynamic.CreateInstanceBinder,System.Object[],System.Object)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "TryCreateInstance",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Dynamic.CreateInstanceBinder",
+        "System.Object[]",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryDeleteIndex:System.Boolean(System.Dynamic.DeleteIndexBinder,System.Object[])",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "TryDeleteIndex",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Dynamic.DeleteIndexBinder",
+        "System.Object[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryDeleteMember:System.Boolean(System.Dynamic.DeleteMemberBinder)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "TryDeleteMember",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Dynamic.DeleteMemberBinder"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryGetIndex:System.Boolean(System.Dynamic.GetIndexBinder,System.Object[],System.Object)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "TryGetIndex",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Dynamic.GetIndexBinder",
+        "System.Object[]",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryGetMember:System.Boolean(System.Dynamic.GetMemberBinder,System.Object)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "TryGetMember",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Dynamic.GetMemberBinder",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryInvoke:System.Boolean(System.Dynamic.InvokeBinder,System.Object[],System.Object)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "TryInvoke",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Dynamic.InvokeBinder",
+        "System.Object[]",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryInvokeMember:System.Boolean(System.Dynamic.InvokeMemberBinder,System.Object[],System.Object)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "TryInvokeMember",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Dynamic.InvokeMemberBinder",
+        "System.Object[]",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TrySetIndex:System.Boolean(System.Dynamic.SetIndexBinder,System.Object[],System.Object)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "TrySetIndex",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Dynamic.SetIndexBinder",
+        "System.Object[]",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TrySetMember:System.Boolean(System.Dynamic.SetMemberBinder,System.Object)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "TrySetMember",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Dynamic.SetMemberBinder",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Dynamic.DynamicObject::TryUnaryOperation:System.Boolean(System.Dynamic.UnaryOperationBinder,System.Object)",
+      "namespace": "System.Dynamic",
+      "declaringType": "System.Dynamic.DynamicObject",
+      "methodName": "TryUnaryOperation",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Dynamic.UnaryOperationBinder",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.BinaryExpression::Reduce:System.Linq.Expressions.Expression()",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.BinaryExpression",
+      "methodName": "Reduce",
+      "returnType": "System.Linq.Expressions.Expression",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.BinaryExpression::Update:System.Linq.Expressions.BinaryExpression(System.Linq.Expressions.Expression,System.Linq.Expressions.LambdaExpression,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.BinaryExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.BinaryExpression",
+      "parameters": [
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.LambdaExpression",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.BlockExpression::Update:System.Linq.Expressions.BlockExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.BlockExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.BlockExpression",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>",
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.CatchBlock::Update:System.Linq.Expressions.CatchBlock(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.CatchBlock",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.CatchBlock",
+      "parameters": [
+        "System.Linq.Expressions.ParameterExpression",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ConditionalExpression::Update:System.Linq.Expressions.ConditionalExpression(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.ConditionalExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.ConditionalExpression",
+      "parameters": [
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "Dynamic",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Runtime.CompilerServices.CallSiteBinder",
+        "System.Type",
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "Dynamic",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Runtime.CompilerServices.CallSiteBinder",
+        "System.Type",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "Dynamic",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Runtime.CompilerServices.CallSiteBinder",
+        "System.Type",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "Dynamic",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Runtime.CompilerServices.CallSiteBinder",
+        "System.Type",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "Dynamic",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Runtime.CompilerServices.CallSiteBinder",
+        "System.Type",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Dynamic:System.Linq.Expressions.DynamicExpression(System.Runtime.CompilerServices.CallSiteBinder,System.Type,System.Linq.Expressions.Expression[])",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "Dynamic",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Runtime.CompilerServices.CallSiteBinder",
+        "System.Type",
+        "System.Linq.Expressions.Expression[]"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "MakeDynamic",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Type",
+        "System.Runtime.CompilerServices.CallSiteBinder",
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "MakeDynamic",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Type",
+        "System.Runtime.CompilerServices.CallSiteBinder",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "MakeDynamic",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Type",
+        "System.Runtime.CompilerServices.CallSiteBinder",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "MakeDynamic",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Type",
+        "System.Runtime.CompilerServices.CallSiteBinder",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "MakeDynamic",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Type",
+        "System.Runtime.CompilerServices.CallSiteBinder",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::MakeDynamic:System.Linq.Expressions.DynamicExpression(System.Type,System.Runtime.CompilerServices.CallSiteBinder,System.Linq.Expressions.Expression[])",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "MakeDynamic",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Type",
+        "System.Runtime.CompilerServices.CallSiteBinder",
+        "System.Linq.Expressions.Expression[]"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.DynamicExpression::Update:System.Linq.Expressions.DynamicExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.DynamicExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.DynamicExpression",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ElementInit::Update:System.Linq.Expressions.ElementInit(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.ElementInit",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.ElementInit",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.GotoExpression::Update:System.Linq.Expressions.GotoExpression(System.Linq.Expressions.LabelTarget,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.GotoExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.GotoExpression",
+      "parameters": [
+        "System.Linq.Expressions.LabelTarget",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.IndexExpression::Update:System.Linq.Expressions.IndexExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.IndexExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.IndexExpression",
+      "parameters": [
+        "System.Linq.Expressions.Expression",
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.InvocationExpression::Update:System.Linq.Expressions.InvocationExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.InvocationExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.InvocationExpression",
+      "parameters": [
+        "System.Linq.Expressions.Expression",
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.LabelExpression::Update:System.Linq.Expressions.LabelExpression(System.Linq.Expressions.LabelTarget,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.LabelExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.LabelExpression",
+      "parameters": [
+        "System.Linq.Expressions.LabelTarget",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ListInitExpression::Reduce:System.Linq.Expressions.Expression()",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.ListInitExpression",
+      "methodName": "Reduce",
+      "returnType": "System.Linq.Expressions.Expression",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.ListInitExpression::Update:System.Linq.Expressions.ListInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.ListInitExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.ListInitExpression",
+      "parameters": [
+        "System.Linq.Expressions.NewExpression",
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.LoopExpression::Update:System.Linq.Expressions.LoopExpression(System.Linq.Expressions.LabelTarget,System.Linq.Expressions.LabelTarget,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.LoopExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.LoopExpression",
+      "parameters": [
+        "System.Linq.Expressions.LabelTarget",
+        "System.Linq.Expressions.LabelTarget",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberAssignment::Update:System.Linq.Expressions.MemberAssignment(System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.MemberAssignment",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.MemberAssignment",
+      "parameters": [
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberExpression::Update:System.Linq.Expressions.MemberExpression(System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.MemberExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.MemberExpression",
+      "parameters": [
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberInitExpression::Reduce:System.Linq.Expressions.Expression()",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.MemberInitExpression",
+      "methodName": "Reduce",
+      "returnType": "System.Linq.Expressions.Expression",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberInitExpression::Update:System.Linq.Expressions.MemberInitExpression(System.Linq.Expressions.NewExpression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.MemberInitExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.MemberInitExpression",
+      "parameters": [
+        "System.Linq.Expressions.NewExpression",
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberListBinding::Update:System.Linq.Expressions.MemberListBinding(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.MemberListBinding",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.MemberListBinding",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.ElementInit>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MemberMemberBinding::Update:System.Linq.Expressions.MemberMemberBinding(System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.MemberMemberBinding",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.MemberMemberBinding",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.MethodCallExpression::Update:System.Linq.Expressions.MethodCallExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.MethodCallExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.MethodCallExpression",
+      "parameters": [
+        "System.Linq.Expressions.Expression",
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.NewArrayExpression::Update:System.Linq.Expressions.NewArrayExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.NewArrayExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.NewArrayExpression",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.NewExpression::Update:System.Linq.Expressions.NewExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.NewExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.NewExpression",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.RuntimeVariablesExpression::Update:System.Linq.Expressions.RuntimeVariablesExpression(System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.RuntimeVariablesExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.RuntimeVariablesExpression",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.ParameterExpression>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.SwitchCase::Update:System.Linq.Expressions.SwitchCase(System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.SwitchCase",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.SwitchCase",
+      "parameters": [
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.SwitchExpression::Update:System.Linq.Expressions.SwitchExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.SwitchCase>,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.SwitchExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.SwitchExpression",
+      "parameters": [
+        "System.Linq.Expressions.Expression",
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.SwitchCase>",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.TryExpression::Update:System.Linq.Expressions.TryExpression(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable<System.Linq.Expressions.CatchBlock>,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.TryExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.TryExpression",
+      "parameters": [
+        "System.Linq.Expressions.Expression",
+        "System.Collections.Generic.IEnumerable<System.Linq.Expressions.CatchBlock>",
+        "System.Linq.Expressions.Expression",
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.TypeBinaryExpression::Update:System.Linq.Expressions.TypeBinaryExpression(System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.TypeBinaryExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.TypeBinaryExpression",
+      "parameters": [
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.UnaryExpression::Reduce:System.Linq.Expressions.Expression()",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.UnaryExpression",
+      "methodName": "Reduce",
+      "returnType": "System.Linq.Expressions.Expression",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Linq.Expressions.UnaryExpression::Update:System.Linq.Expressions.UnaryExpression(System.Linq.Expressions.Expression)",
+      "namespace": "System.Linq.Expressions",
+      "declaringType": "System.Linq.Expressions.UnaryExpression",
+      "methodName": "Update",
+      "returnType": "System.Linq.Expressions.UnaryExpression",
+      "parameters": [
+        "System.Linq.Expressions.Expression"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSite::Create:System.Runtime.CompilerServices.CallSite(System.Type,System.Runtime.CompilerServices.CallSiteBinder)",
+      "namespace": "System.Runtime.CompilerServices",
+      "declaringType": "System.Runtime.CompilerServices.CallSite",
+      "methodName": "Create",
+      "returnType": "System.Runtime.CompilerServices.CallSite",
+      "parameters": [
+        "System.Type",
+        "System.Runtime.CompilerServices.CallSiteBinder"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Linq.Expressions/System.Runtime.CompilerServices.CallSiteHelpers::IsInternalFrame:System.Boolean(System.Reflection.MethodBase)",
+      "namespace": "System.Runtime.CompilerServices",
+      "declaringType": "System.Runtime.CompilerServices.CallSiteHelpers",
+      "methodName": "IsInternalFrame",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Reflection.MethodBase"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    }
+  ],
+  "namespaces": {
+    "System.Dynamic": {
+      "methodCount": 28
+    },
+    "System.Linq.Expressions": {
+      "methodCount": 42
+    },
+    "System.Runtime.CompilerServices": {
+      "methodCount": 2
+    }
+  }
+}

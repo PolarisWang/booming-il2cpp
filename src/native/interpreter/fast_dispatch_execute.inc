@@ -105,16 +105,9 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
                  i < interpreter::RegisterFrame::kMaxTracked; ++i) {
                 rf.tracked_objs[rf.tracked_cnt] = osr.tracked_objs[i];
                 rf.tracked_dtors[rf.tracked_cnt] = osr.tracked_dtors[i];
-                rf.tracked_is_pool[rf.tracked_cnt] = osr.tracked_is_pool[i];
                 ++rf.tracked_cnt;
             }
             osr.tracked_cnt = 0;
-
-            // ── Register-VM per-method cycle profiler (D1 anchor) ────────
-            // Scoped only in PROFILE builds (CHAOS_IL2CPP_VM_PROFILER_ENABLED=1);
-            // body compiles out entirely in default/optimized builds, so this
-            // OSR hot path pays nothing unless profiling is explicitly enabled.
-            ::chaos::il2cpp::interpreter::VmProfileScope osr_prof(static_cast<uintptr_t>(pm->token));
 
             bool reg_ok = interpreter::RegisterExecute(
                 rf, rm->instructions.data(),
@@ -237,20 +230,8 @@ bool FastExecute(FastFrame& frame,
         &&kOp_StFldBarrier,                                              // 103
         &&kOp_LdElemNoChk, &&kOp_StElemNoChk, &&kOp_LdElemANoChk,        // 104-106
         &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 107-109
-        &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 110-112 (110=SimdFma)
-        &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 113-115
-        &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 116-118
-        &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 119-121
-        &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 122-124
-        &&kOp_Unsupported, &&kOp_Unsupported, &&kOp_Unsupported,          // 125-127
     };
-    // Entries 128+ cannot be indexed: the _op > 127 bounds check redirects
-    // any out-of-range opcode to threw_exception.  Entries 110-127 are filled
-    // above with kOp_Unsupported (not nullptr) so a not-yet-implemented opcode
-    // such as SimdFma(110) hits the real handler — logging + threw_exception —
-    // instead of a null that `goto *nullptr` would crash on.  (Previously the
-    // comment claimed the bounds check caught 110-127, but `_op > 127` does not
-    // — index 110 was a dangling null → latent crash if ever emitted.)
+    // Entries 110-127 default to nullptr (caught by bounds check below).
 
     // First dispatch: enter the first instruction's handler.
     {
@@ -469,10 +450,6 @@ bool FastExecute(FastFrame& frame,
     // ═══════════════════════════════════════════════════════════════════
 
     kOp_Epilogue: {
-        // The per-backedge safepoint probe was retired (C1) — GC cooperative
-        // suspension is now drained uniformly at the kOp_Next decimated cadence
-        // (every 64 ops), so straight-line code also cooperates (A3).  Only OSR
-        // hot-loop detection remains here.
         // OSR: detect hot-loop backward branch via frame.last_pc (set by branch handlers).
         if (frame.pc < frame.last_pc) {
             uint32_t threshold = kFastOsrLoopThreshold;
@@ -504,14 +481,7 @@ bool FastExecute(FastFrame& frame,
         if (frame.pc == 9999 || frame.threw_exception) { AccumulatePgoCounters(frame); frame.CleanupTracked(); return false; }
         if (frame.pc >= instr_count) { AccumulatePgoCounters(frame); frame.CleanupTracked(); return true; }
 
-        // Decimated safepoint + interrupt check — every 64 instructions.
-        // Single cadence drains both (a) abort/interrupt signals and (b) a
-        // GC-requested cooperative safepoint (suspend_seq), so a straight-line
-        // interpreted method with no backward branches still cooperatively
-        // participates in GC at least every 64 ops — closing the back-edge-only
-        // safepoint gap (A3) and letting the per-backedge probe (C1) be retired.
-        // SafepointPoll throws chaos_managed_exception on abort/interrupt;
-        // translate to the frame's threw_exception convention.
+        // Decimated interrupt check — every 64 instructions.
         if ((++check_counter & kCheckMask) == 0 && thread != nullptr) {
             if (CHAOS_IL2CPP_UNLIKELY(
                     thread->pending_abort.load(std::memory_order_relaxed) ||
@@ -520,21 +490,6 @@ bool FastExecute(FastFrame& frame,
                 AccumulatePgoCounters(frame);
                 frame.CleanupTracked();
                 return false;
-            }
-            // GC cooperative safepoint: drain any in-progress suspension even in
-            // straight-line code (no back-edge).  Reuses the same throwing-handling
-            // as the former per-backedge probe (moved to the decimated slot).
-            if (CHAOS_IL2CPP_UNLIKELY(
-                    thread->suspend_seq.load(std::memory_order_acquire) != 0)) {
-                try {
-                    threading::SafepointPoll();
-                } catch (const chaos_managed_exception&) {
-                    frame.threw_exception = true;
-                    frame.pc = 9999;
-                    AccumulatePgoCounters(frame);
-                    frame.CleanupTracked();
-                    return false;
-                }
             }
         }
 
@@ -696,22 +651,6 @@ bool FastExecute(FastFrame& frame,
             default:
                 Handle_Unsupported(frame, instrs[frame.pc]);
                 break;
-        }
-
-        // In-band safepoint (Step 2.2, scheme B) — mirror computed-goto epilogue.
-        if (frame.pc < frame.last_pc) {
-            auto* sp_thr = threading::tls_this_thread;
-            if (sp_thr != nullptr &&
-                CHAOS_IL2CPP_UNLIKELY(sp_thr->suspend_seq.load(std::memory_order_acquire) != 0)) {
-                try {
-                    threading::SafepointPoll();
-                } catch (const chaos_managed_exception&) {
-                    frame.threw_exception = true;
-                    frame.pc = 9999;
-                    frame.last_pc = 0;
-                    AccumulatePgoCounters(frame); frame.CleanupTracked(); return false;
-                }
-            }
         }
 
         if (frame.pc < frame.last_pc) {

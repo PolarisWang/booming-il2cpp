@@ -1,0 +1,124 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Private.Xml",
+  "chunkSlug": "system-xml-xsl",
+  "entries": [
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.XPath.XPathException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.String)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.Xml.XmlWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.String,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.XmlWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.XmlWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Transform:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.String,System.String)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.String,System.String,System.Xml.XmlResolver)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.Stream,System.Xml.XmlResolver)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter,System.Xml.XmlResolver)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.Stream)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.Stream,System.Xml.XmlResolver)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.IO.TextWriter,System.Xml.XmlResolver)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlWriter,System.Xml.XmlResolver)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Xml.XmlReader(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Xml.XmlReader(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlResolver)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Xml.XmlReader(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Transform:System.Xml.XmlReader(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlResolver)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltCompileException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltMessageEncounteredEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Xsl.XsltMessageEncounteredEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltMessageEncounteredEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltMessageEncounteredEventHandler::Invoke:System.Void(System.Object,System.Xml.Xsl.XsltMessageEncounteredEventArgs)"
+    }
+  ]
+}

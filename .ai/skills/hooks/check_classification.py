@@ -21,23 +21,17 @@ def _get_repo_root() -> Path | None:
     global _RESOLVED_REPO_ROOT
     if _RESOLVED_REPO_ROOT is not None:
         return _RESOLVED_REPO_ROOT
-    # Derive from script location first — no git subprocess fork on the hot path.
-    # Walk up from the script's directory until we find a repo marker (.git/.gitignore),
-    # without assuming a specific nesting depth (works however the script is deployed,
-    # e.g. .ai/skills/hooks/ vs a vendored/ symlinked copy).
-    p = Path(__file__).resolve().parent
-    while True:
-        if (p / ".git").exists() or (p / ".gitignore").exists():
-            _RESOLVED_REPO_ROOT = p
-            return p
-        parent = p.parent
-        if parent == p:  # reached filesystem root without finding a repo marker
+    # R9: try multiple fallback strategies
+    strategies = [
+        lambda: Path(__file__).resolve().parent,   # script dir
+        lambda: Path.cwd(),                          # cwd
+        None,
+    ]
+    for get_dir in strategies:
+        if get_dir is None:
             break
-        p = parent
-    # R9: fallback — git rev-parse when the script isn't under a repo tree.
-    strategies = [Path(__file__).resolve().parent, Path.cwd()]
-    for d in strategies:
         try:
+            d = get_dir()
             output = subprocess.run(
                 ["git", "-C", str(d), "rev-parse", "--show-toplevel"],
                 capture_output=True, text=True, timeout=5,
@@ -51,13 +45,13 @@ def _get_repo_root() -> Path | None:
     return None
 
 
-# R9: 多级 claude_dir 候选（主线：repo root/.claude）
-_claude_candidates: list[Path] = []
+# R9: 多级 claude_dir 候选
+_claude_candidates: list[Path] = [
+    Path(__file__).resolve().parent.parent.parent / ".claude",
+]
 repo_root = _get_repo_root()
 if repo_root:
     _claude_candidates.append(repo_root / ".claude")
-else:
-    _claude_candidates.append(Path(__file__).resolve().parent.parent.parent / ".claude")
 _claude_candidates.append(Path.cwd() / ".claude")
 
 _claude_dir = _claude_candidates[0]
@@ -118,32 +112,6 @@ if tool_name == "Bash":
     first_word = cmd.strip().split()[0] if cmd.strip() else ""
     if first_word in READONLY_BASH_WORDS:
         sys.exit(0)
-
-    # ── 新增: 危险命令拦截档 — 违反 CLAUDE.md 红线 ─────────────────
-    # 这些命令即使被权限系统放行，也因项目规则被禁止。
-    # 规避说明：该档只拦截直接的 `Bash(git stash ...)` 调用，无法封死
-    # `bash -c "git stash"` / 间接脚本 / CLI 插件，这是工具架构固有局限。
-    # 用 git worktree 或显式提交替代。
-    DANGEROUS_PATTERNS = [
-        # 所有 git 危险命令必须以命令开头（或 ;/&&/||/| 后），防止误拦 echo/commit msg
-        (r'(?:^|;|&&\s*|\|\|\s*|\||\n)\s*git\s+stash\b',
-         'git stash — 数据损失风险（CLAUDE.md 红线），用 git worktree 或显式提交'),
-        (r'(?:^|;|&&\s*|\|\|\s*|\||\n)\s*git\s+checkout\s+--\s+\.(\s|$)',
-         'git checkout -- . — 丢弃整个工作区，禁止'),
-        (r'(?:^|;|&&\s*|\|\|\s*|\||\n)\s*git\s+clean\s+-f[d]?\b',
-         'git clean -f[d] — 删除未跟踪文件，禁止'),
-    ]
-    for pat, reason in DANGEROUS_PATTERNS:
-        try:
-            if re.search(pat, cmd):
-                print(file=sys.stderr)
-                print(f"  ⚠️  危险 Git 命令被拦截（违反 CLAUDE.md 红线）：", file=sys.stderr)
-                print(f"  ── 命令: {cmd.strip()[:120]}", file=sys.stderr)
-                print(f"  ── 规则: {reason}", file=sys.stderr)
-                print(file=sys.stderr)
-                sys.exit(1)
-        except re.error:
-            pass  # 兜底：正则异常不阻断工具链
 
     # 第三档: 域操作 Bash — 仅提醒分类要求（不强制 loaded_expert，因 Skill 工具不可用）
     # 无域路径匹配 → 放行

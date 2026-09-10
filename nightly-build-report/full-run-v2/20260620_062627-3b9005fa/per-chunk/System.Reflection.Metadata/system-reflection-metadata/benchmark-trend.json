@@ -1,0 +1,2469 @@
+{
+  "methodCount": 306,
+  "technologies": [
+    "chaos-aot",
+    "chaos-jit"
+  ],
+  "perMethodStats": [
+    {
+      "entryIndex": 0,
+      "meanDurationMs": 0.025,
+      "meanOpsPerSecond": 373278999.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.20804,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 1,
+      "meanDurationMs": 0.0328,
+      "meanOpsPerSecond": 314413211.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.176619,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 2,
+      "meanDurationMs": 0.031,
+      "meanOpsPerSecond": 301106801.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.183676,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 3,
+      "meanDurationMs": 0.0319,
+      "meanOpsPerSecond": 311351742.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.242907,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 4,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 319630464.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.323714,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 5,
+      "meanDurationMs": 0.0331,
+      "meanOpsPerSecond": 312946499.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.202417,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 6,
+      "meanDurationMs": 0.0321,
+      "meanOpsPerSecond": 304279953.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.23293,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 7,
+      "meanDurationMs": 0.0322,
+      "meanOpsPerSecond": 308427578.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.23084,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 8,
+      "meanDurationMs": 0.0278,
+      "meanOpsPerSecond": 331756982.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.28431,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 9,
+      "meanDurationMs": 0.0299,
+      "meanOpsPerSecond": 341958446.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.14765,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 10,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 319006478.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.165359,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 11,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 305176035.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.178174,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 12,
+      "meanDurationMs": 0.0287,
+      "meanOpsPerSecond": 338248316.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.190221,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 13,
+      "meanDurationMs": 0.0342,
+      "meanOpsPerSecond": 296403965.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.149552,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 14,
+      "meanDurationMs": 0.0309,
+      "meanOpsPerSecond": 306209202.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.136195,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 15,
+      "meanDurationMs": 0.0318,
+      "meanOpsPerSecond": 300556592.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.34839,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 16,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 320775978.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.103082,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 17,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 317585054.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.158233,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 18,
+      "meanDurationMs": 0.0317,
+      "meanOpsPerSecond": 310663385.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.164866,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 19,
+      "meanDurationMs": 0.032,
+      "meanOpsPerSecond": 298841506.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.64053,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 20,
+      "meanDurationMs": 0.0338,
+      "meanOpsPerSecond": 306332596.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.19926,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 21,
+      "meanDurationMs": 0.0329,
+      "meanOpsPerSecond": 310693311.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.158201,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 22,
+      "meanDurationMs": 0.0343,
+      "meanOpsPerSecond": 302918774.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.205348,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 23,
+      "meanDurationMs": 0.0334,
+      "meanOpsPerSecond": 308109387.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.17874,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 24,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 322846199.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.102163,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 25,
+      "meanDurationMs": 0.031,
+      "meanOpsPerSecond": 317146026.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.138935,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 26,
+      "meanDurationMs": 0.0334,
+      "meanOpsPerSecond": 305740364.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.153952,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 27,
+      "meanDurationMs": 0.0308,
+      "meanOpsPerSecond": 318556227.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.191375,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 28,
+      "meanDurationMs": 0.0353,
+      "meanOpsPerSecond": 270942334.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.642462,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 29,
+      "meanDurationMs": 0.0326,
+      "meanOpsPerSecond": 322665110.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.231671,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 30,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 313249644.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.193688,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 31,
+      "meanDurationMs": 0.0321,
+      "meanOpsPerSecond": 318939736.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.17757,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 32,
+      "meanDurationMs": 0.0299,
+      "meanOpsPerSecond": 312681574.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.191273,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 33,
+      "meanDurationMs": 0.0355,
+      "meanOpsPerSecond": 290123228.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.202445,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 34,
+      "meanDurationMs": 0.0296,
+      "meanOpsPerSecond": 319430782.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.189361,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 35,
+      "meanDurationMs": 0.0314,
+      "meanOpsPerSecond": 298978148.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.170214,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 36,
+      "meanDurationMs": 0.0323,
+      "meanOpsPerSecond": 297348398.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.287518,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 37,
+      "meanDurationMs": 0.0302,
+      "meanOpsPerSecond": 324653438.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.162514,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 38,
+      "meanDurationMs": 0.0352,
+      "meanOpsPerSecond": 295342218.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.211376,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 39,
+      "meanDurationMs": 0.0308,
+      "meanOpsPerSecond": 318184749.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.207892,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 40,
+      "meanDurationMs": 0.0345,
+      "meanOpsPerSecond": 296496912.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.187959,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 41,
+      "meanDurationMs": 0.0303,
+      "meanOpsPerSecond": 315695131.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.156043,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 42,
+      "meanDurationMs": 0.034,
+      "meanOpsPerSecond": 299749692.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.179869,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 43,
+      "meanDurationMs": 0.0339,
+      "meanOpsPerSecond": 300632601.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.182056,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 44,
+      "meanDurationMs": 0.0311,
+      "meanOpsPerSecond": 314571699.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.237237,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 45,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 322402884.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.204026,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 46,
+      "meanDurationMs": 0.0342,
+      "meanOpsPerSecond": 301740014.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.178243,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 47,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 314008202.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.193688,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 48,
+      "meanDurationMs": 0.034,
+      "meanOpsPerSecond": 307266507.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.213311,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 49,
+      "meanDurationMs": 0.0343,
+      "meanOpsPerSecond": 301613708.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.19603,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 50,
+      "meanDurationMs": 0.0302,
+      "meanOpsPerSecond": 323830532.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.191392,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 51,
+      "meanDurationMs": 0.033,
+      "meanOpsPerSecond": 310623548.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.180297,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 52,
+      "meanDurationMs": 0.0289,
+      "meanOpsPerSecond": 328124544.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.164558,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 53,
+      "meanDurationMs": 0.0324,
+      "meanOpsPerSecond": 294381382.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.542176,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 54,
+      "meanDurationMs": 0.0303,
+      "meanOpsPerSecond": 321239871.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.169908,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 55,
+      "meanDurationMs": 0.0319,
+      "meanOpsPerSecond": 310758363.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.198766,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 56,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 331320512.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.177522,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 57,
+      "meanDurationMs": 0.0314,
+      "meanOpsPerSecond": 309506703.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.154137,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 58,
+      "meanDurationMs": 0.0323,
+      "meanOpsPerSecond": 303398711.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.240859,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 59,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 316223757.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.173609,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 60,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 329659168.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.161934,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 61,
+      "meanDurationMs": 0.0331,
+      "meanOpsPerSecond": 311617333.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.189371,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 62,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 324631554.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.163757,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 63,
+      "meanDurationMs": 0.0289,
+      "meanOpsPerSecond": 336775448.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.182107,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 64,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 328293837.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.168588,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 65,
+      "meanDurationMs": 0.0317,
+      "meanOpsPerSecond": 322591100.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.151977,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 66,
+      "meanDurationMs": 0.0294,
+      "meanOpsPerSecond": 334171150.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.172392,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 67,
+      "meanDurationMs": 0.0359,
+      "meanOpsPerSecond": 292854040.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.229851,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 68,
+      "meanDurationMs": 0.0341,
+      "meanOpsPerSecond": 303233460.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.208376,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 69,
+      "meanDurationMs": 0.0343,
+      "meanOpsPerSecond": 298819123.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.182093,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 70,
+      "meanDurationMs": 0.029,
+      "meanOpsPerSecond": 338458446.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.211124,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 71,
+      "meanDurationMs": 0.0303,
+      "meanOpsPerSecond": 321245569.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.181953,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 72,
+      "meanDurationMs": 0.032,
+      "meanOpsPerSecond": 306230164.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.126404,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 73,
+      "meanDurationMs": 0.0321,
+      "meanOpsPerSecond": 323194821.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.209651,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 74,
+      "meanDurationMs": 0.0294,
+      "meanOpsPerSecond": 343859676.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.118999,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 75,
+      "meanDurationMs": 0.0311,
+      "meanOpsPerSecond": 330706527.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.094173,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 76,
+      "meanDurationMs": 0.0324,
+      "meanOpsPerSecond": 315862928.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.171401,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 77,
+      "meanDurationMs": 0.0302,
+      "meanOpsPerSecond": 318003098.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.094441,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 78,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 331602139.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.131952,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 79,
+      "meanDurationMs": 0.0314,
+      "meanOpsPerSecond": 328732831.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.180829,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 80,
+      "meanDurationMs": 0.032,
+      "meanOpsPerSecond": 319825350.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.157495,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 81,
+      "meanDurationMs": 0.0309,
+      "meanOpsPerSecond": 314350719.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.110926,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 82,
+      "meanDurationMs": 0.0354,
+      "meanOpsPerSecond": 288919330.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.158394,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 83,
+      "meanDurationMs": 0.031,
+      "meanOpsPerSecond": 301335809.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.170882,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 84,
+      "meanDurationMs": 0.031,
+      "meanOpsPerSecond": 328196189.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.177338,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 85,
+      "meanDurationMs": 0.0301,
+      "meanOpsPerSecond": 313381594.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.161269,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 86,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 324817067.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.182339,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 87,
+      "meanDurationMs": 0.0303,
+      "meanOpsPerSecond": 338759479.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.165708,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 88,
+      "meanDurationMs": 0.0313,
+      "meanOpsPerSecond": 325615609.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.176897,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 89,
+      "meanDurationMs": 0.0338,
+      "meanOpsPerSecond": 301714386.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.153048,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 90,
+      "meanDurationMs": 0.0343,
+      "meanOpsPerSecond": 300188589.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.19385,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 91,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 308563352.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.146686,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 92,
+      "meanDurationMs": 0.0323,
+      "meanOpsPerSecond": 322633064.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.202568,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 93,
+      "meanDurationMs": 0.0271,
+      "meanOpsPerSecond": 343020445.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.246376,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 94,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 307152809.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.185579,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 95,
+      "meanDurationMs": 0.0311,
+      "meanOpsPerSecond": 317939429.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.156395,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 96,
+      "meanDurationMs": 0.0303,
+      "meanOpsPerSecond": 318400876.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.246351,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 97,
+      "meanDurationMs": 0.0328,
+      "meanOpsPerSecond": 311480327.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.167433,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 98,
+      "meanDurationMs": 0.0302,
+      "meanOpsPerSecond": 327477331.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.105591,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 99,
+      "meanDurationMs": 0.0317,
+      "meanOpsPerSecond": 325052217.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.181244,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 100,
+      "meanDurationMs": 0.0283,
+      "meanOpsPerSecond": 332146166.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.203591,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 101,
+      "meanDurationMs": 3.1588,
+      "meanOpsPerSecond": 3351436.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.258296,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 102,
+      "meanDurationMs": 20.9599,
+      "meanOpsPerSecond": 446714.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.188964,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 103,
+      "meanDurationMs": 0.029,
+      "meanOpsPerSecond": 337717845.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.109545,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 104,
+      "meanDurationMs": 0.0318,
+      "meanOpsPerSecond": 313960032.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.190036,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 105,
+      "meanDurationMs": 24.3003,
+      "meanOpsPerSecond": 419621.0,
+      "meanAllocatedBytes": 640000.0,
+      "cv": 0.145786,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 106,
+      "meanDurationMs": 0,
+      "meanOpsPerSecond": 0,
+      "meanAllocatedBytes": 0,
+      "cv": 0,
+      "sampleCount": 0
+    },
+    {
+      "entryIndex": 107,
+      "meanDurationMs": 0,
+      "meanOpsPerSecond": 0,
+      "meanAllocatedBytes": 0,
+      "cv": 0,
+      "sampleCount": 0
+    },
+    {
+      "entryIndex": 108,
+      "meanDurationMs": 0.0278,
+      "meanOpsPerSecond": 353071247.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.122288,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 109,
+      "meanDurationMs": 0.0328,
+      "meanOpsPerSecond": 311225143.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.175528,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 110,
+      "meanDurationMs": 0.0317,
+      "meanOpsPerSecond": 313430748.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.101855,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 111,
+      "meanDurationMs": 0.0328,
+      "meanOpsPerSecond": 299575154.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.174465,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 112,
+      "meanDurationMs": 0.0294,
+      "meanOpsPerSecond": 333702027.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.157602,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 113,
+      "meanDurationMs": 22.404,
+      "meanOpsPerSecond": 433402.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.181551,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 114,
+      "meanDurationMs": 21.8773,
+      "meanOpsPerSecond": 424170.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.214837,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 115,
+      "meanDurationMs": 0.0309,
+      "meanOpsPerSecond": 335131766.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.185598,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 116,
+      "meanDurationMs": 23.1416,
+      "meanOpsPerSecond": 422649.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.170251,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 117,
+      "meanDurationMs": 24.7151,
+      "meanOpsPerSecond": 417005.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.188214,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 118,
+      "meanDurationMs": 25.7072,
+      "meanOpsPerSecond": 400693.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.183678,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 119,
+      "meanDurationMs": 3.9269,
+      "meanOpsPerSecond": 2442262.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.19748,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 120,
+      "meanDurationMs": 0.0274,
+      "meanOpsPerSecond": 356944529.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.134299,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 121,
+      "meanDurationMs": 0.0308,
+      "meanOpsPerSecond": 330902928.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.151453,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 122,
+      "meanDurationMs": 0.0319,
+      "meanOpsPerSecond": 314150533.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.145138,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 123,
+      "meanDurationMs": 0.0335,
+      "meanOpsPerSecond": 297771883.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.243325,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 124,
+      "meanDurationMs": 0.0321,
+      "meanOpsPerSecond": 303063619.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.26393,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 125,
+      "meanDurationMs": 0.0319,
+      "meanOpsPerSecond": 303049662.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.089134,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 126,
+      "meanDurationMs": 0.0303,
+      "meanOpsPerSecond": 339513499.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.160363,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 127,
+      "meanDurationMs": 0.0315,
+      "meanOpsPerSecond": 284697115.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.516081,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 128,
+      "meanDurationMs": 0.0324,
+      "meanOpsPerSecond": 313673353.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.120489,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 129,
+      "meanDurationMs": 0.0311,
+      "meanOpsPerSecond": 329351065.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.151808,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 130,
+      "meanDurationMs": 0.0321,
+      "meanOpsPerSecond": 324098616.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.192265,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 131,
+      "meanDurationMs": 0.0324,
+      "meanOpsPerSecond": 305266719.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.180522,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 132,
+      "meanDurationMs": 0.035,
+      "meanOpsPerSecond": 293947518.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.176126,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 133,
+      "meanDurationMs": 0.0321,
+      "meanOpsPerSecond": 306750455.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.177229,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 134,
+      "meanDurationMs": 4.5409,
+      "meanOpsPerSecond": 2278106.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.198976,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 135,
+      "meanDurationMs": 4.3735,
+      "meanOpsPerSecond": 2121781.0,
+      "meanAllocatedBytes": 960000.0,
+      "cv": 0.226314,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 136,
+      "meanDurationMs": 3.3926,
+      "meanOpsPerSecond": 2746002.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.244907,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 137,
+      "meanDurationMs": 3.1871,
+      "meanOpsPerSecond": 2897810.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.277752,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 138,
+      "meanDurationMs": 0.0274,
+      "meanOpsPerSecond": 357981175.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.141443,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 139,
+      "meanDurationMs": 0.0343,
+      "meanOpsPerSecond": 289819440.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.197143,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 140,
+      "meanDurationMs": 0.0309,
+      "meanOpsPerSecond": 321296854.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.217017,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 141,
+      "meanDurationMs": 0.0297,
+      "meanOpsPerSecond": 332873342.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.12924,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 142,
+      "meanDurationMs": 0.0313,
+      "meanOpsPerSecond": 323664095.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.171705,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 143,
+      "meanDurationMs": 0.0296,
+      "meanOpsPerSecond": 343908312.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.136981,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 144,
+      "meanDurationMs": 0.0296,
+      "meanOpsPerSecond": 346957601.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.145074,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 145,
+      "meanDurationMs": 0.0309,
+      "meanOpsPerSecond": 319656115.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.16328,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 146,
+      "meanDurationMs": 0.0318,
+      "meanOpsPerSecond": 318534540.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.118333,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 147,
+      "meanDurationMs": 0.031,
+      "meanOpsPerSecond": 313341219.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.166407,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 148,
+      "meanDurationMs": 0.031,
+      "meanOpsPerSecond": 329990651.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.164485,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 149,
+      "meanDurationMs": 0.0333,
+      "meanOpsPerSecond": 313821525.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.227536,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 150,
+      "meanDurationMs": 0.0293,
+      "meanOpsPerSecond": 332723617.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.186428,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 151,
+      "meanDurationMs": 0.0313,
+      "meanOpsPerSecond": 330414055.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.112449,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 152,
+      "meanDurationMs": 0.0303,
+      "meanOpsPerSecond": 326673003.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.194346,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 153,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 324155848.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.100092,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 154,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 323272856.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.115385,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 155,
+      "meanDurationMs": 0.0303,
+      "meanOpsPerSecond": 328691000.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.162576,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 156,
+      "meanDurationMs": 0.0315,
+      "meanOpsPerSecond": 319632920.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.085479,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 157,
+      "meanDurationMs": 0.0303,
+      "meanOpsPerSecond": 320788630.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.155804,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 158,
+      "meanDurationMs": 0.0312,
+      "meanOpsPerSecond": 309272090.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.130724,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 159,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 323599725.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.114348,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 160,
+      "meanDurationMs": 0.031,
+      "meanOpsPerSecond": 330256963.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.132754,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 161,
+      "meanDurationMs": 0.031,
+      "meanOpsPerSecond": 317551635.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.145237,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 162,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 332498383.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.118442,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 163,
+      "meanDurationMs": 0.0321,
+      "meanOpsPerSecond": 319190809.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.211055,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 164,
+      "meanDurationMs": 0.0284,
+      "meanOpsPerSecond": 324061569.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.325947,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 165,
+      "meanDurationMs": 0.0309,
+      "meanOpsPerSecond": 331177205.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.162103,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 166,
+      "meanDurationMs": 0.0289,
+      "meanOpsPerSecond": 340499852.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.115262,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 167,
+      "meanDurationMs": 0.031,
+      "meanOpsPerSecond": 323351064.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.108028,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 168,
+      "meanDurationMs": 0.0302,
+      "meanOpsPerSecond": 324358570.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.100984,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 169,
+      "meanDurationMs": 0.0313,
+      "meanOpsPerSecond": 313479245.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.130362,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 170,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 308500793.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.150418,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 171,
+      "meanDurationMs": 0.0309,
+      "meanOpsPerSecond": 305474789.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.144542,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 172,
+      "meanDurationMs": 0.0329,
+      "meanOpsPerSecond": 309732703.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.161094,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 173,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 307276246.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.180714,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 174,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 323829745.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.100092,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 175,
+      "meanDurationMs": 0.0326,
+      "meanOpsPerSecond": 302910693.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.173928,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 176,
+      "meanDurationMs": 0.0335,
+      "meanOpsPerSecond": 305018369.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.154678,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 177,
+      "meanDurationMs": 0.0295,
+      "meanOpsPerSecond": 344474237.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.136648,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 178,
+      "meanDurationMs": 0.0313,
+      "meanOpsPerSecond": 330314104.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.120169,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 179,
+      "meanDurationMs": 0.0299,
+      "meanOpsPerSecond": 329860041.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.185221,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 180,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 306334023.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.251828,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 181,
+      "meanDurationMs": 0.0318,
+      "meanOpsPerSecond": 304981830.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.396445,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 182,
+      "meanDurationMs": 0.03,
+      "meanOpsPerSecond": 324481218.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.160631,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 183,
+      "meanDurationMs": 0.033,
+      "meanOpsPerSecond": 312864898.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.195918,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 184,
+      "meanDurationMs": 0.0317,
+      "meanOpsPerSecond": 309921888.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.157245,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 185,
+      "meanDurationMs": 0.0292,
+      "meanOpsPerSecond": 337161051.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.208455,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 186,
+      "meanDurationMs": 0.0293,
+      "meanOpsPerSecond": 335333034.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.145339,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 187,
+      "meanDurationMs": 0.0328,
+      "meanOpsPerSecond": 307356314.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.108049,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 188,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 321278654.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.117619,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 189,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 329261741.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.171886,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 190,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 325157625.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.175179,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 191,
+      "meanDurationMs": 0.0326,
+      "meanOpsPerSecond": 308074422.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.109917,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 192,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 323049438.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.213722,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 193,
+      "meanDurationMs": 0.0285,
+      "meanOpsPerSecond": 333337969.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.169827,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 194,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 334087698.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.108617,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 195,
+      "meanDurationMs": 0.0304,
+      "meanOpsPerSecond": 330250278.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.177522,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 196,
+      "meanDurationMs": 0.0302,
+      "meanOpsPerSecond": 315804426.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.107839,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 197,
+      "meanDurationMs": 4.6811,
+      "meanOpsPerSecond": 2007870.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.181083,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 198,
+      "meanDurationMs": 0.0314,
+      "meanOpsPerSecond": 328999031.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.175708,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 199,
+      "meanDurationMs": 0.0325,
+      "meanOpsPerSecond": 289670355.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.175141,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 200,
+      "meanDurationMs": 0.0302,
+      "meanOpsPerSecond": 322765919.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.161501,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 201,
+      "meanDurationMs": 0.0325,
+      "meanOpsPerSecond": 286476250.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.221615,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 202,
+      "meanDurationMs": 0.0338,
+      "meanOpsPerSecond": 299874375.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.139273,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 203,
+      "meanDurationMs": 0.0359,
+      "meanOpsPerSecond": 288927963.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.187873,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 204,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 309114835.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.203883,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 205,
+      "meanDurationMs": 0.034,
+      "meanOpsPerSecond": 307062542.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.203771,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 206,
+      "meanDurationMs": 0.0351,
+      "meanOpsPerSecond": 289706132.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.119148,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 207,
+      "meanDurationMs": 0.0349,
+      "meanOpsPerSecond": 295875949.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.18097,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 208,
+      "meanDurationMs": 0.0319,
+      "meanOpsPerSecond": 298661862.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.128208,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 209,
+      "meanDurationMs": 0.0355,
+      "meanOpsPerSecond": 292196552.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.196478,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 210,
+      "meanDurationMs": 0.0344,
+      "meanOpsPerSecond": 301028369.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.196818,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 211,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 319184116.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.198272,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 212,
+      "meanDurationMs": 0.0314,
+      "meanOpsPerSecond": 313450867.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.169478,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 213,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 313219728.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.143921,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 214,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 317352259.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.072901,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 215,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 315602685.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.099806,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 216,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 327752606.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.175603,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 217,
+      "meanDurationMs": 0.0351,
+      "meanOpsPerSecond": 292855957.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.192155,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 218,
+      "meanDurationMs": 0.0311,
+      "meanOpsPerSecond": 314289734.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.140898,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 219,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 320062721.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.160883,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 220,
+      "meanDurationMs": 0.0308,
+      "meanOpsPerSecond": 312997296.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.142583,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 221,
+      "meanDurationMs": 0.029,
+      "meanOpsPerSecond": 338799309.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.142082,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 222,
+      "meanDurationMs": 0.0309,
+      "meanOpsPerSecond": 324235277.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.168037,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 223,
+      "meanDurationMs": 0.029,
+      "meanOpsPerSecond": 335356503.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.188278,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 224,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 315376056.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.163036,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 225,
+      "meanDurationMs": 0.0314,
+      "meanOpsPerSecond": 310842294.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.161667,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 226,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 320842094.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.154498,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 227,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 331702447.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.059628,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 228,
+      "meanDurationMs": 0.0285,
+      "meanOpsPerSecond": 353090828.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.104382,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 229,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 322768318.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.038168,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 230,
+      "meanDurationMs": 0.0291,
+      "meanOpsPerSecond": 336392143.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.129056,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 231,
+      "meanDurationMs": 0.0285,
+      "meanOpsPerSecond": 328219960.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.221826,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 232,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 337590894.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.082535,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 233,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 314555544.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.082285,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 234,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 326965487.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.053373,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 235,
+      "meanDurationMs": 0.0313,
+      "meanOpsPerSecond": 314482642.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.219611,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 236,
+      "meanDurationMs": 0.0288,
+      "meanOpsPerSecond": 349427400.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.087566,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 237,
+      "meanDurationMs": 0.0294,
+      "meanOpsPerSecond": 336662072.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.149445,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 238,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 319587061.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.130867,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 239,
+      "meanDurationMs": 0.0288,
+      "meanOpsPerSecond": 349313933.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.087566,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 240,
+      "meanDurationMs": 0.0308,
+      "meanOpsPerSecond": 332420724.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.060696,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 241,
+      "meanDurationMs": 0.0301,
+      "meanOpsPerSecond": 324729299.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.16642,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 242,
+      "meanDurationMs": 0.0328,
+      "meanOpsPerSecond": 308486345.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.134146,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 243,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 320836670.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.19176,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 244,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 336507054.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.064455,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 245,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 317840375.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.053556,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 246,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 332999973.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.0584,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 247,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 325251897.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.016393,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 248,
+      "meanDurationMs": 0.0325,
+      "meanOpsPerSecond": 315830573.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.16003,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 249,
+      "meanDurationMs": 0.0327,
+      "meanOpsPerSecond": 299261140.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.139269,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 250,
+      "meanDurationMs": 0.0321,
+      "meanOpsPerSecond": 315801522.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.111846,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 251,
+      "meanDurationMs": 0.0297,
+      "meanOpsPerSecond": 307716489.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.324257,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 252,
+      "meanDurationMs": 0.0296,
+      "meanOpsPerSecond": 308102528.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.397335,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 253,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 320026865.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.170592,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 254,
+      "meanDurationMs": 0.0317,
+      "meanOpsPerSecond": 318418941.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.118076,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 255,
+      "meanDurationMs": 0.028,
+      "meanOpsPerSecond": 345439269.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.183928,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 256,
+      "meanDurationMs": 0.0344,
+      "meanOpsPerSecond": 282475710.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.683097,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 257,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 340153564.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.077671,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 258,
+      "meanDurationMs": 0.0315,
+      "meanOpsPerSecond": 322301184.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.141439,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 259,
+      "meanDurationMs": 0.0288,
+      "meanOpsPerSecond": 334555083.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.222078,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 260,
+      "meanDurationMs": 0.0306,
+      "meanOpsPerSecond": 318752679.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.141195,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 261,
+      "meanDurationMs": 0.0285,
+      "meanOpsPerSecond": 334169890.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.158892,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 262,
+      "meanDurationMs": 0.0345,
+      "meanOpsPerSecond": 295551352.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.168141,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 263,
+      "meanDurationMs": 0.0303,
+      "meanOpsPerSecond": 325685363.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.180283,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 264,
+      "meanDurationMs": 0.0325,
+      "meanOpsPerSecond": 320977821.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.227047,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 265,
+      "meanDurationMs": 0.0331,
+      "meanOpsPerSecond": 309032976.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.170072,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 266,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 321898525.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.161453,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 267,
+      "meanDurationMs": 0.0305,
+      "meanOpsPerSecond": 324917207.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.135831,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 268,
+      "meanDurationMs": 0.0318,
+      "meanOpsPerSecond": 320865843.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.160839,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 269,
+      "meanDurationMs": 0.0345,
+      "meanOpsPerSecond": 301443662.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.222736,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 270,
+      "meanDurationMs": 0.0344,
+      "meanOpsPerSecond": 304667195.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.228969,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 271,
+      "meanDurationMs": 0.0321,
+      "meanOpsPerSecond": 295550608.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.259984,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 272,
+      "meanDurationMs": 0.0311,
+      "meanOpsPerSecond": 310963629.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.161852,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 273,
+      "meanDurationMs": 0.0312,
+      "meanOpsPerSecond": 328801599.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.144622,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 274,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 316282510.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.115244,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 275,
+      "meanDurationMs": 0.0303,
+      "meanOpsPerSecond": 313611302.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.174193,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 276,
+      "meanDurationMs": 5.5276,
+      "meanOpsPerSecond": 1777198.0,
+      "meanAllocatedBytes": 320000.0,
+      "cv": 0.283246,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 277,
+      "meanDurationMs": 0.0288,
+      "meanOpsPerSecond": 326229700.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.189979,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 278,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 314202286.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.167465,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 279,
+      "meanDurationMs": 4.9944,
+      "meanOpsPerSecond": 1813540.5,
+      "meanAllocatedBytes": 320000.0,
+      "cv": 0.310286,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 280,
+      "meanDurationMs": 0.0288,
+      "meanOpsPerSecond": 353237488.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.136083,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 281,
+      "meanDurationMs": 0.0332,
+      "meanOpsPerSecond": 285224854.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.671887,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 282,
+      "meanDurationMs": 0.034,
+      "meanOpsPerSecond": 310833886.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.25095,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 283,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 314137188.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.174634,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 284,
+      "meanDurationMs": 0.031,
+      "meanOpsPerSecond": 309694934.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.187038,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 285,
+      "meanDurationMs": 0.033,
+      "meanOpsPerSecond": 298387779.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.154612,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 286,
+      "meanDurationMs": 0.0309,
+      "meanOpsPerSecond": 314265073.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.151703,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 287,
+      "meanDurationMs": 0.0308,
+      "meanOpsPerSecond": 322709066.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.167549,
+      "sampleCount": 6
+    },
+    {
+      "entryIndex": 288,
+      "meanDurationMs": 0.031,
+      "meanOpsPerSecond": 313253807.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.121534,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 289,
+      "meanDurationMs": 0.0307,
+      "meanOpsPerSecond": 321424899.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.105817,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 290,
+      "meanDurationMs": 0.0286,
+      "meanOpsPerSecond": 352835104.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.106285,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 291,
+      "meanDurationMs": 0.0316,
+      "meanOpsPerSecond": 322478468.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.172287,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 292,
+      "meanDurationMs": 0.0309,
+      "meanOpsPerSecond": 329160809.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.104575,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 293,
+      "meanDurationMs": 4.9769,
+      "meanOpsPerSecond": 1935618.6,
+      "meanAllocatedBytes": 320000.0,
+      "cv": 0.21792,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 294,
+      "meanDurationMs": 0.0288,
+      "meanOpsPerSecond": 329552083.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.175435,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 295,
+      "meanDurationMs": 0.0327,
+      "meanOpsPerSecond": 312598407.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.129058,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 296,
+      "meanDurationMs": 0.0316,
+      "meanOpsPerSecond": 322326047.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.140244,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 297,
+      "meanDurationMs": 0.0309,
+      "meanOpsPerSecond": 307214615.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.159269,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 298,
+      "meanDurationMs": 0.0316,
+      "meanOpsPerSecond": 311315923.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.138003,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 299,
+      "meanDurationMs": 0.0311,
+      "meanOpsPerSecond": 316145937.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.119406,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 300,
+      "meanDurationMs": 0.0331,
+      "meanOpsPerSecond": 299526298.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.176442,
+      "sampleCount": 9
+    },
+    {
+      "entryIndex": 301,
+      "meanDurationMs": 0.0347,
+      "meanOpsPerSecond": 298849960.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.195052,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 302,
+      "meanDurationMs": 0.0313,
+      "meanOpsPerSecond": 311721263.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.16506,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 303,
+      "meanDurationMs": 0.0314,
+      "meanOpsPerSecond": 316755493.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.158841,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 304,
+      "meanDurationMs": 0.0311,
+      "meanOpsPerSecond": 312183768.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.158888,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 305,
+      "meanDurationMs": 0.0311,
+      "meanOpsPerSecond": 310057849.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.190397,
+      "sampleCount": 7
+    }
+  ],
+  "aggregateSummary": {
+    "methodCount": 306,
+    "meanDurationMs": 0.7020944444444445,
+    "minDurationMs": 0,
+    "maxDurationMs": 25.7072,
+    "totalDurationMs": 214.8409,
+    "meanOpsPerSecond": 300051117.0082237,
+    "totalAllocatedBytes": 2560000.0,
+    "elapsedMilliseconds": 214.8409,
+    "meanSampleCount": 8.5,
+    "totalOutliers": 446
+  }
+}

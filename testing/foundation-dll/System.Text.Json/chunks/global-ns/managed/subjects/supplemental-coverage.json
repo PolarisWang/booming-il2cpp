@@ -1,0 +1,70 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Text.Json",
+  "chunkSlug": "global-ns",
+  "entries": [
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.EmptyJsonTypeInfoResolver::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.EmptyJsonTypeInfoResolver::IsCompatibleWithOptions:System.Boolean(System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy::DetectFSharpKind:System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+FSharpKind(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy::IsFSharpType:System.Boolean(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo+JsonPropertyInfoList::AddPropertyWithConflictResolution:System.Void(System.Text.Json.Serialization.Metadata.JsonPropertyInfo,System.Text.Json.Serialization.Metadata.JsonTypeInfo+PropertyHierarchyResolutionState&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo+JsonPropertyInfoList::SortProperties:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoResolverChain::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoResolverWithAddedModifiers::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoResolverWithAddedModifiers::WithAddedModifier:System.Text.Json.Serialization.Metadata.JsonTypeInfoResolverWithAddedModifiers(System.Action`1[[System.Text.Json.Serialization.Metadata.JsonTypeInfo, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.PolymorphicTypeResolver::IsSupportedDerivedType:System.Boolean(System.Type,System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.PolymorphicTypeResolver::IsSupportedPolymorphicBaseType:System.Boolean(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.PolymorphicTypeResolver::TryGetDerivedJsonTypeInfo:System.Boolean(System.Object,System.Text.Json.Serialization.Metadata.JsonTypeInfo&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.PolymorphicTypeResolver::TryGetDerivedJsonTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo&,System.Object&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.PropertyRef::GetKey:System.UInt64(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.PropertyRefCacheBuilder::ToArray:System.Text.Json.Serialization.Metadata.PropertyRef[]()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.PropertyRefCacheBuilder::TryAdd:System.Void(System.Text.Json.Serialization.Metadata.PropertyRef)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.ReflectionEmitCachingMemberAccessor::Clear:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.ReflectionEmitCachingMemberAccessor::CreateParameterlessConstructor:System.Func`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Type,System.Reflection.ConstructorInfo)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.ReflectionEmitMemberAccessor::CreateParameterlessConstructor:System.Func`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Type,System.Reflection.ConstructorInfo)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.ReflectionMemberAccessor::CreateParameterlessConstructor:System.Func`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Type,System.Reflection.ConstructorInfo)"
+    }
+  ]
+}

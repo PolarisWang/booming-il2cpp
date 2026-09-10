@@ -1,10 +1,10 @@
-# chaos-il2cpp
+# booming-il2cpp
 
 A high-performance C++ IL2CPP runtime for .NET applications, designed with hot-update support, precise generational GC, and NativeAOT code generation.
 
 ## Overview
 
-chaos-il2cpp translates .NET IL code to native C++ via a custom codegen pipeline, then compiles it into native binaries. It features:
+booming-il2cpp translates .NET IL code to native C++ via a custom codegen pipeline, then compiles it into native binaries. It features:
 
 - **NativeAOT Code Generation** — IL-to-C++ translation with lowering optimization
 - **Precise Generational GC** — Bump-allocated young generation + mark-compact old generation
@@ -25,26 +25,21 @@ src/
 │   ├── hot-update/     — Method replacement infrastructure
 │   ├── support/        — Runtime support layer
 │   └── engine-bridge/  — Game engine integration bridge
-│   ├── tools/            — Test project generator (TPG), build helpers
-└── dll/                — Foundation DLL test source
+├── dll/                — Foundation DLL test infrastructure
+├── mobile/             — Android/iOS platform support
+└── reference/          — Test framework SDK and runner
 
-contracts/              — Native ABI contract headers + engine interface (v0)
-tests/                  — Snapshot / integration / e2e test suites + runner
-tests/e2e/translation/    — Foundation-DLL verification pipeline (build → fact → benchmark)
-wiki/                   — Project wiki: architecture, function modules, skill system
-docs/                   — Design docs, assessments, and archived historical records
-scripts/                — CI and build orchestration scripts
-cmake/                  — Shared CMake configuration (incl. native test factory)
-third_party/            — External dependencies (fmt, scriban, unordered_dense)
-.ai/                    — Agent skill system (discovery, registry, hook runtime)
-.claude/                — Claude Code harness configuration, skill routing stub, worktrees
-schemas/                — JSON schemas for pipeline/codegen artifacts
+contracts/              — Native ABI contracts (v0)
+tests/                  — Snapshot tests, integration tests, verification suites
+verification/           — Foundation DLL verification pipeline
+wiki/                   — Project wiki and architecture documentation
+third_party/            — External dependencies (fmt, mono.cecil, scriban)
 ```
 
 ## Prerequisites
 
 - Windows 10+ (primary target) / Linux x64 / Android arm64
-- CMake 3.20+
+- CMake 3.15+
 - .NET 10 SDK
 - Visual Studio 2022+ (Windows) or clang 15+ (Linux)
 - Python 3.10+
@@ -52,101 +47,18 @@ schemas/                — JSON schemas for pipeline/codegen artifacts
 ## Quick Start
 
 ```bash
-# Configure
+# Clone and configure
 cmake --preset debug
 
 # Build native runtime
 cmake --build artifacts/presets/debug --target chaos_runtime_core
 
 # Build managed codegen
-dotnet build src/managed/Chaos.IL2CPP.Generator
+dotnet build src/managed/Chaos.IL2CPC.Pipeline
 
 # Run snapshot tests
 dotnet test tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests
 ```
-
-## Install chaos-il2cpp (dotnet global tool)
-
-First build the tool package (a `.nupkg` embedding the native runtime SDK + headers):
-
-```bash
-# Produces artifacts/release/tool/chaos-il2cpp.<version>.nupkg
-./scripts/build-tool-package.sh [version]
-```
-
-Then install it globally from that local package directory:
-
-```bash
-# --add-source points at the directory produced by build-tool-package.sh
-dotnet tool install --global chaos-il2cpp --add-source artifacts/release/tool
-
-# Verify
-chaos-il2cpp --help
-```
-
-## Publish a .NET application to native
-
-```bash
-# --output ./out is just an example; the native binary always lands under
-# <output>/build/<config-tier>/ (e.g. RelWithDebInfo is the default tier)
-chaos-il2cpp publish MyApp.csproj --mode app --output ./out
-
-# Run the native executable
-./out/build/RelWithDebInfo/chaos_entry.exe
-```
-
-The `publish` command:
-1. Builds the managed project (if `.csproj`)
-2. Translates IL → C++ via the NativeAOT codegen pipeline
-3. Emits `app_main.cpp` + `CMakeLists.txt`
-4. Links against the prebuilt chaos runtime SDK (embedded in the tool package)
-5. Produces a standalone native executable (`chaos_entry.exe`)
-
-> **Locating the binary**: the executable is always emitted at
-> `<output>/build/<config-tier>/chaos_entry(.exe)`, where `<config-tier>` is the
-> tier you passed to `--config-tier` (`RelWithDebInfo` for the default `check`
-> tier). Windows appends `.exe`; Linux/macOS do not.
-
-### Options
-
-| Flag | Description |
-|------|-------------|
-| `--mode app` | Pure application entry (default) |
-| `--mode test` | Test harness with `--fact-json` / `--benchmark-all` |
-| `--output <dir>` | Output root directory. The build tree and `publish.manifest.json` are written beneath it. Default: `<input>/output`. The native binary is at `<output>/build/<config-tier>/`. |
-| `--config-tier check\|profile\|ship` | Build config tier (default: check → `RelWithDebInfo`) |
-| `--source-only` | Emit C++ source only, skip native build |
-| `--clean` | Remove the entire `<output>` tree (the `build/` subdirectory and the `publish.manifest.json`) before building, so no stale artifacts from a prior build leak into the new output |
-| `--jit` | Enable JIT mode (default: AOT) |
-
-### Example: HelloWorld
-
-```bash
-chaos-il2cpp publish tests/fixtures/public-smoke/HelloWorld/HelloWorld.csproj \
-  --mode app --output /tmp/hello --clean
-/tmp/hello/build/RelWithDebInfo/chaos_entry.exe
-# Output: HelloWorld smoke entry reached.
-# Exit code: 0
-```
-
-## Testing
-
-One command runs the whole suite (unit → integration → e2e):
-
-```bash
-# Full suite
-python tests/runner/test_driver.py --layer all --quick
-
-# Fast unit tier only (~50s)
-python tests/runner/test_driver.py --layer unit
-
-# CI wrapper (same engine, preset selection)
-python scripts/ci_test.py --preset managed-full
-```
-
-A unified JSON report is written to `tests/runner/test-report.json` (add
-`--junit out.xml` for CI). See [docs/dev/tests/architecture.md](docs/dev/tests/architecture.md)
-for the pyramid, the no-skip rule, and how to add tests.
 
 ## Build Configurations
 
@@ -159,25 +71,8 @@ for the pyramid, the no-skip rule, and how to add tests.
 ## Key Dependencies
 
 - [fmt](https://github.com/fmtlib/fmt) — Type-safe string formatting
+- [Mono.Cecil](https://github.com/jbevain/cecil) — .NET assembly inspection
 - [Scriban](https://github.com/scriban/scriban) — Template engine for code generation
-- [system.reflection.metadata](https://github.com/dotnet/runtime) — .NET metadata reader (vendored)
-- [unordered_dense](https://github.com/ankerl/unordered_dense) — Fast hash map (header-only, vendored)
-
-## Product Release
-
-A versioned release is orchestrated by `scripts/release.sh` (bump branch + sdk + nupkg + checksums + sbom + GitHub Release), delegated to the shared stage helpers under `scripts/`:
-
-```bash
-# Dry run (shows every step, changes nothing)
-scripts/release.sh 0.2.0 --dry-run
-
-# Real publish (release/0.2.x branch + v0.2.0 tag + SDK + nupkg + GitHub Release)
-scripts/release.sh 0.2.0 --publish
-```
-
-The embedded-SDK tool package is built by `scripts/build-tool-package.sh` (a `.nupkg` containing the `chaos-il2cpp` CLI + the native runtime libs + headers).
-
-The internal verification pipeline (`tests/e2e/verification/chunk_pipeline.py`) validates that .NET assemblies translate + run correctly (fact / benchmark / coverage / hot-update) — it is the testing half of the same IL→C++ capability that `publish` exposes to external users.
 
 ## License
 

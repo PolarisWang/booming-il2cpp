@@ -1,0 +1,486 @@
+{
+  "exitCode": 0,
+  "passed": 28,
+  "failed": 0,
+  "assertFailed": 0,
+  "allSemantic": false,
+  "allRevert": true,
+  "revertPassed": 34,
+  "semanticChangedCount": 0,
+  "patchDataUsed": true,
+  "patchFailed": false,
+  "patchSkippedNoMethods": false,
+  "truncated": false,
+  "crash": false,
+  "hasBaselineBenchmark": false,
+  "hasPatchedBenchmark": false,
+  "details": {
+    "baselineFact": [
+      {
+        "si": 0,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 1,
+        "passed": false,
+        "value": 0
+      },
+      {
+        "si": 2,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 3,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 4,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 5,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 6,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 7,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 8,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 9,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 10,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 11,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 12,
+        "passed": true,
+        "value": 140700900542752
+      },
+      {
+        "si": 13,
+        "passed": false,
+        "value": 0
+      },
+      {
+        "si": 14,
+        "passed": false,
+        "value": 0
+      },
+      {
+        "si": 15,
+        "passed": false,
+        "value": 0
+      },
+      {
+        "si": 16,
+        "passed": false,
+        "value": 0
+      },
+      {
+        "si": 17,
+        "passed": false,
+        "value": 0
+      },
+      {
+        "si": 18,
+        "passed": true,
+        "value": 385734933488
+      },
+      {
+        "si": 19,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 20,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 21,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 22,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 23,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 24,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 25,
+        "passed": true,
+        "value": 385734933488
+      },
+      {
+        "si": 26,
+        "passed": true,
+        "value": 385734933488
+      },
+      {
+        "si": 27,
+        "passed": true,
+        "value": 385734933488
+      },
+      {
+        "si": 28,
+        "passed": true,
+        "value": 385734933472
+      },
+      {
+        "si": 29,
+        "passed": true,
+        "value": 385734933472
+      },
+      {
+        "si": 30,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 31,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 32,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 33,
+        "passed": true,
+        "value": 42
+      }
+    ],
+    "patchedFact": [
+      {
+        "si": 0,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 2,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 3,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 4,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 5,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 6,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 7,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 8,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 9,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 10,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 11,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 12,
+        "passed": true,
+        "value": 140700900542752
+      },
+      {
+        "si": 18,
+        "passed": true,
+        "value": 385734933488
+      },
+      {
+        "si": 19,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 20,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 21,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 22,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 23,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 24,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 25,
+        "passed": true,
+        "value": 385734933488
+      },
+      {
+        "si": 26,
+        "passed": true,
+        "value": 385734933488
+      },
+      {
+        "si": 27,
+        "passed": true,
+        "value": 385734933488
+      },
+      {
+        "si": 28,
+        "passed": true,
+        "value": 385734933472
+      },
+      {
+        "si": 29,
+        "passed": true,
+        "value": 385734933472
+      },
+      {
+        "si": 30,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 31,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 32,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 33,
+        "passed": true,
+        "value": 42
+      }
+    ],
+    "revertedFact": [
+      {
+        "si": 0,
+        "passed": true
+      },
+      {
+        "si": 1,
+        "passed": true,
+        "skipped": true
+      },
+      {
+        "si": 2,
+        "passed": true
+      },
+      {
+        "si": 3,
+        "passed": true
+      },
+      {
+        "si": 4,
+        "passed": true
+      },
+      {
+        "si": 5,
+        "passed": true
+      },
+      {
+        "si": 6,
+        "passed": true
+      },
+      {
+        "si": 7,
+        "passed": true
+      },
+      {
+        "si": 8,
+        "passed": true
+      },
+      {
+        "si": 9,
+        "passed": true
+      },
+      {
+        "si": 10,
+        "passed": true
+      },
+      {
+        "si": 11,
+        "passed": true
+      },
+      {
+        "si": 12,
+        "passed": true
+      },
+      {
+        "si": 13,
+        "passed": true,
+        "skipped": true
+      },
+      {
+        "si": 14,
+        "passed": true,
+        "skipped": true
+      },
+      {
+        "si": 15,
+        "passed": true,
+        "skipped": true
+      },
+      {
+        "si": 16,
+        "passed": true,
+        "skipped": true
+      },
+      {
+        "si": 17,
+        "passed": true,
+        "skipped": true
+      },
+      {
+        "si": 18,
+        "passed": true
+      },
+      {
+        "si": 19,
+        "passed": true
+      },
+      {
+        "si": 20,
+        "passed": true
+      },
+      {
+        "si": 21,
+        "passed": true
+      },
+      {
+        "si": 22,
+        "passed": true
+      },
+      {
+        "si": 23,
+        "passed": true
+      },
+      {
+        "si": 24,
+        "passed": true
+      },
+      {
+        "si": 25,
+        "passed": true
+      },
+      {
+        "si": 26,
+        "passed": true
+      },
+      {
+        "si": 27,
+        "passed": true
+      },
+      {
+        "si": 28,
+        "passed": true
+      },
+      {
+        "si": 29,
+        "passed": true
+      },
+      {
+        "si": 30,
+        "passed": true
+      },
+      {
+        "si": 31,
+        "passed": true
+      },
+      {
+        "si": 32,
+        "passed": true
+      },
+      {
+        "si": 33,
+        "passed": true
+      }
+    ],
+    "passedMethods": 28,
+    "failedMethods": 0,
+    "totalMethods": 34,
+    "allSemantic": false,
+    "allRevert": true,
+    "semanticChangedCount": 0,
+    "patchedAssertFailed": 0
+  },
+  "stderr": "[2026-06-17T09:51:54][INFO][GcLowMem] low-memory monitor started\n[2026-06-17T09:51:54][DEBUG][codegen] T4 VEH handler registered\n[2026-06-17T09:51:54][DEBUG][GcEvents] registered callback 0x7ff77b4249b0 at slot 0\n[2026-06-17T09:51:54][DEBUG][codegen] T4 VEH handler registered\n[2026-06-17T09:51:54][DEBUG][GcEvents] registered callback 0x7ff77b4249b0 at slot 1\nINFO: Applied patches to 34 methods from D:\\agent\\chaos-il2cpp\\testing\\foundation-dll\\System.IO.Compression.Brotli\\chunks\\global-ns\\native\\",
+  "status": "passed"
+}

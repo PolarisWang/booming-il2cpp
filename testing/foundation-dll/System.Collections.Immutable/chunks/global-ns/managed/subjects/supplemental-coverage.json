@@ -1,0 +1,43 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Collections.Immutable",
+  "chunkSlug": "global-ns",
+  "entries": [
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenHashTable::Create:System.Collections.Frozen.FrozenHashTable(System.Span`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenHashTable::FindMatchingEntries:System.Void(System.Int32,System.Int32&,System.Int32&)"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.Int32FrozenSet+GSW::FindItemIndex:System.Int32(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.Int32FrozenSet+GSW::GetEnumerator:System.Collections.Frozen.FrozenSet`1+Enumerator[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.Int32FrozenSet+GSW::Store:System.Void(System.Collections.Frozen.FrozenSet`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.KeyAnalyzer+GetSpan::Invoke:System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.String,System.Int32,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.LengthBucketsFrozenSet+GSW::FindItemIndex:System.Int32(System.String)"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.LengthBucketsFrozenSet+GSW::GetEnumerator:System.Collections.Frozen.FrozenSet`1+Enumerator[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.LengthBucketsFrozenSet+GSW::Store:System.Void(System.Collections.Frozen.FrozenSet`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.OrdinalStringFrozenSet+GSW::FindItemIndex:System.Int32(System.String)"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.OrdinalStringFrozenSet+GSW::GetEnumerator:System.Collections.Frozen.FrozenSet`1+Enumerator[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.OrdinalStringFrozenSet+GSW::Store:System.Void(System.Collections.Frozen.FrozenSet`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    }
+  ]
+}

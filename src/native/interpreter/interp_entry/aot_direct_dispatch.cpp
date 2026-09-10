@@ -10,7 +10,11 @@ static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(std::string, const void*) s_direct_fn_ma
 static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(std::string, void*) s_external_runtime_map;
 static bool s_external_runtime_map_initialized = false;
 
-extern "C" void ChaosRegisterDirectFnTable(const char* const* subjects, const void* const* table, int count) noexcept {
+extern "C" void ChaosRegisterDirectFnTable(
+    const char* const* subjects,
+    const void* const* table,
+    int count) noexcept
+{
     s_direct_fn_map.reserve(static_cast<size_t>(count));
     for (int i = 0; i < count; ++i) {
         if (subjects[i] != nullptr && table[i] != nullptr) {
@@ -71,12 +75,17 @@ extern "C" int32_t kChaosExternalRuntimeCount;
 /// if even the fallback fails.
 
 // Forward declaration for ParseSubjectIdForHotpatchLookup (defined in hotpatch_resolve.cpp)
-static void ParseSubjectIdForHotpatchLookup(const char* subject_id, std::string& out_ns, std::string& out_type_name,
-                                            std::string& out_method_name) noexcept;
+static void ParseSubjectIdForHotpatchLookup(
+    const char* subject_id,
+    std::string& out_ns,
+    std::string& out_type_name,
+    std::string& out_method_name) noexcept;
 
-static void* ResolveDirectFn(const char* subject_id, void* /*user_data*/) noexcept {
-    if (subject_id == nullptr)
-        return nullptr;
+static void* ResolveDirectFn(
+    const char* subject_id,
+    void* /*user_data*/) noexcept
+{
+    if (subject_id == nullptr) return nullptr;
 
     // Step 1: Hash map lookup (O(1)) — populated by ChaosRegisterDirectFnTable
     {
@@ -95,7 +104,8 @@ static void* ResolveDirectFn(const char* subject_id, void* /*user_data*/) noexce
         ParseSubjectIdForHotpatchLookup(subject_id, ns, type_name, method_name);
         if (!type_name.empty() && !method_name.empty()) {
             auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
-            uint64_t lookup = registry.LookupMethod(ns.c_str(), type_name.c_str(), method_name.c_str());
+            uint64_t lookup = registry.LookupMethod(
+                ns.c_str(), type_name.c_str(), method_name.c_str());
             if (lookup != 0) {
                 uint32_t module_id = ExtractModuleId(lookup);
                 uint32_t token = ExtractToken(lookup);
@@ -112,21 +122,22 @@ static void* ResolveDirectFn(const char* subject_id, void* /*user_data*/) noexce
                         auto original_cb = GetOriginalAotPtrCallback();
                         if (original_cb) {
                             void* original = original_cb(entry);
-                            if (original)
-                                aot_ptr = original;
+                            if (original) aot_ptr = original;
                         }
-                        std::fprintf(
-                            stderr,
-                            "[hotpatch-resolve] subject='%s' -> module=%u token=%u slot=%u direct_ptr=%p aot_ptr=%p\n",
-                            subject_id, static_cast<unsigned>(module_id), static_cast<unsigned>(token),
-                            static_cast<unsigned>(slot), entry->direct_ptr, aot_ptr);
+                        std::fprintf(stderr, "[hotpatch-resolve] subject='%s' -> module=%u token=%u slot=%u direct_ptr=%p aot_ptr=%p\n",
+                            subject_id,
+                            static_cast<unsigned>(module_id),
+                            static_cast<unsigned>(token),
+                            static_cast<unsigned>(slot),
+                            entry->direct_ptr,
+                            aot_ptr);
                         std::fflush(stderr);
                         return aot_ptr;
                     }
                 }
             } else {
                 std::fprintf(stderr, "[hotpatch-resolve] MISS subject='%s' parsed ns='%s' type='%s' method='%s'\n",
-                             subject_id, ns.c_str(), type_name.c_str(), method_name.c_str());
+                    subject_id, ns.c_str(), type_name.c_str(), method_name.c_str());
                 std::fflush(stderr);
             }
         }
@@ -138,7 +149,8 @@ static void* ResolveDirectFn(const char* subject_id, void* /*user_data*/) noexce
             // This avoids adding a startup-time init dependency for a rarely-hit path.
             s_external_runtime_map.reserve(static_cast<size_t>(kChaosExternalRuntimeCount));
             for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
-                if (kChaosExternalRuntimeSubjects[i] != nullptr && kChaosExternalRuntimeFnTable[i] != nullptr) {
+                if (kChaosExternalRuntimeSubjects[i] != nullptr &&
+                    kChaosExternalRuntimeFnTable[i] != nullptr) {
                     s_external_runtime_map[std::string(kChaosExternalRuntimeSubjects[i])] =
                         kChaosExternalRuntimeFnTable[i];
                 }
@@ -151,7 +163,7 @@ static void* ResolveDirectFn(const char* subject_id, void* /*user_data*/) noexce
                 void* fn = it->second;
                 if (fn != nullptr) {
                     std::fprintf(stderr, "[hotpatch-resolve] kChaosExternalRuntimeTable hit for '%s' -> %p\n",
-                                 subject_id, fn);
+                        subject_id, fn);
                     std::fflush(stderr);
                 }
                 return fn;
@@ -169,9 +181,10 @@ static void* ResolveDirectFn(const char* subject_id, void* /*user_data*/) noexce
 /// This is used by ResolveSubjectId for the call_target path; ResolveDirectFn
 /// (with all 3 tiers) is still used by DeserializeAotCoreIr for the direct_fn
 /// path where function pointers are called directly.
-void* ResolveDirectFnSafe(const char* subject_id) noexcept {
-    if (subject_id == nullptr)
-        return nullptr;
+void* ResolveDirectFnSafe(
+    const char* subject_id) noexcept
+{
+    if (subject_id == nullptr) return nullptr;
 
     // Step 1: Hash map lookup (O(1)) — populated by ChaosRegisterDirectFnTable
     {
@@ -188,7 +201,8 @@ void* ResolveDirectFnSafe(const char* subject_id) noexcept {
         ParseSubjectIdForHotpatchLookup(subject_id, ns, type_name, method_name);
         if (!type_name.empty() && !method_name.empty()) {
             auto& registry = GetHotpatchNameRegistry();
-            uint64_t lookup = registry.LookupMethod(ns.c_str(), type_name.c_str(), method_name.c_str());
+            uint64_t lookup = registry.LookupMethod(
+                ns.c_str(), type_name.c_str(), method_name.c_str());
             if (lookup != 0) {
                 uint32_t module_id = ExtractModuleId(lookup);
                 uint32_t token = ExtractToken(lookup);
@@ -199,8 +213,8 @@ void* ResolveDirectFnSafe(const char* subject_id) noexcept {
                         // P/Invoke stubs (direct_ptr = InterpreterEntryDirect) have no
                         // IL body. Skip them so Step 3 can route to native BCrypt stubs.
                         using InterpreterEntryDirectFn = void(uintptr_t, void*, void*) noexcept;
-                        if (entry->direct_ptr == reinterpret_cast<void*>(static_cast<InterpreterEntryDirectFn*>(
-                                                     &chaos::il2cpp::runtime_core::InterpreterEntryDirect))) {
+                        if (entry->direct_ptr ==
+                            reinterpret_cast<void*>(static_cast<InterpreterEntryDirectFn*>(&chaos::il2cpp::runtime_core::InterpreterEntryDirect))) {
                             return nullptr; // fall through to caller's nullptr check
                         }
                         // In JIT mode, direct_ptr may be a JIT trampoline.
@@ -209,8 +223,7 @@ void* ResolveDirectFnSafe(const char* subject_id) noexcept {
                         auto original_cb = GetOriginalAotPtrCallback();
                         if (original_cb) {
                             void* original = original_cb(entry);
-                            if (original)
-                                aot_ptr = original;
+                            if (original) aot_ptr = original;
                         }
                         return aot_ptr;
                     }
@@ -222,4 +235,4 @@ void* ResolveDirectFnSafe(const char* subject_id) noexcept {
     return nullptr;
 }
 
-} // namespace chaos::il2cpp::runtime_core
+}  // namespace chaos::il2cpp::runtime_core

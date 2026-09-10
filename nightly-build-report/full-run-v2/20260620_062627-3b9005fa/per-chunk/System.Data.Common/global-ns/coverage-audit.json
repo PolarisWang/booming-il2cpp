@@ -1,0 +1,8 @@
+{
+  "chunkSlug": "global-ns",
+  "declaredMethods": 11,
+  "coveredMethods": 11,
+  "missingMethods": 0,
+  "coveragePct": 100.0,
+  "namespaceGaps": {}
+}

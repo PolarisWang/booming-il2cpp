@@ -360,8 +360,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             EmitLinearResolvedInvocation(builder, localSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck);
         }
-        else if (invocationTarget.ExternalRuntimeTableIndex >= 0 || invocationTarget.DirectNativeSymbol != null
-                 || (invocationTarget.TargetSymbol?.StartsWith("chaos_external_runtime_", StringComparison.Ordinal) ?? false))
+        else if (invocationTarget.ExternalRuntimeTableIndex >= 0 || invocationTarget.DirectNativeSymbol != null)
         {
             EmitExternalRuntimeTableDispatch(builder, invocationTarget, indentation, enforceInstanceNullCheck, instruction);
         }

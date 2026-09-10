@@ -1,0 +1,51 @@
+{
+  "date": "2026-06-16",
+  "assemblyName": "System.Collections.Immutable",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 36,
+        "total": 36,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 36,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 5,
+        "iterations": 10000,
+        "meanDurationMs": 0.03188,
+        "meanOpsPerSecond": 319805536.57,
+        "minDurationMs": 0.0272,
+        "maxDurationMs": 0.036,
+        "totalDurationMs": 0.1594,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 6.6,
+        "totalOutliers": 2,
+        "meanCv": 0.1740032,
+        "maxCv": 0.224473
+      },
+      "hotupdate": {
+        "passed": 33,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

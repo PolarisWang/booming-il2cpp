@@ -1,0 +1,34 @@
+{
+  "date": "2026-06-05",
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 40,
+        "total": 40,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 84,
+        "metaBenchmarkCount": 84
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 40,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    }
+  ]
+}

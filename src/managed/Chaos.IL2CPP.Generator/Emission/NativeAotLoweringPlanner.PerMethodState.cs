@@ -28,13 +28,6 @@ public sealed partial class NativeAotLoweringPlanner
         public Dictionary<string, int>? SlotVarToLocalSlot;
         public Dictionary<int, string>? AccumulatorSlots;
         public HashSet<int>? StructLocalSlots;
-        /// <summary>Local slots that hold a GC-heap pointer to a boxed async state machine
-        /// (the <c>&gt;d__</c> instance).  <c>ldloca</c> on these slots must emit the slot's
-        /// VALUE (the box pointer, which is already the durable address of the struct),
-        /// not <c>&amp;chaos_locals[N]</c> (the address of the stack slot).  Passing the stack
-        /// slot address across a thread resumption is invalid (the slot dies when the calling
-        /// frame returns).  Scoped to async MoveNext + its async entry, empty otherwise.</summary>
-        public HashSet<int>? AsyncBoxPointerLocalSlots;
         public Dictionary<int, SlotType>? FloatLocalSlots;
         public HashSet<int>? Int64LocalSlots;
         public StructuredSlotEmissionContext? ActiveStructuredSlotContext;

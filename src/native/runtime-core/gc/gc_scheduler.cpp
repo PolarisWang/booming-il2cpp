@@ -8,12 +8,9 @@
 
 #include "gc_bgc.h"
 #include "gc_api.h"
-#include "gc_config.h"
 #include "gc_gen1.h"
 #include "gc_young_gen.h"
 #include "gc_heap.h"
-
-#include <chaos/pal/pal_mem.h>
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -37,7 +34,7 @@ void GcScheduler::RecordAllocation(CHAOS_IL2CPP_SIZE bytes) noexcept {
 
 void GcScheduler::RecordGcCompleted() noexcept {
     // Set cooldown to skip ShouldTriggerGc for the next N allocations.
-    gc_cooldown_skips_.store(static_cast<int>(GcConfig().CooldownAllocations), std::memory_order_release);
+    gc_cooldown_skips_.store(kCooldownAllocations, std::memory_order_release);
 
     // Record completion timestamp for TryClaimGcSlot rate limiting.
     auto now = std::chrono::steady_clock::now();
@@ -45,9 +42,6 @@ void GcScheduler::RecordGcCompleted() noexcept {
         std::chrono::duration_cast<std::chrono::nanoseconds>(
             now.time_since_epoch()).count());
     last_gc_completion_ns_.store(now_ns, std::memory_order_release);
-
-    // Release the GC slot held indicator (CoreCLR wait_for_gc_done alignment).
-    gc_slot_held_.store(false, std::memory_order_release);
 }
 
 // ── GC rate limiting ─────────────────────────────────────────────
@@ -65,12 +59,11 @@ bool GcScheduler::TryClaimGcSlot() noexcept {
     // If no GC has ever completed, or enough time has passed since the last one,
     // try to claim the slot atomically.  Only one thread succeeds.
     if (last_ns == 0 || (now_ns >= last_ns &&
-        (now_ns - last_ns) >= GcConfig().MinGcIntervalMs * 1000ULL * 1000ULL)) {
+        (now_ns - last_ns) >= kMinGcIntervalNs)) {
         // CAS: claim the slot by writing now_ns.  If last_ns changed between
         // our load and CAS (another thread claimed), CAS fails gracefully.
         if (last_gc_completion_ns_.compare_exchange_strong(last_ns, now_ns,
                 std::memory_order_acq_rel, std::memory_order_acquire)) {
-            gc_slot_held_.store(true, std::memory_order_release);
             return true;  // Slot claimed — caller may proceed with GC.
         }
         // CAS failed — another thread claimed the slot first.
@@ -160,19 +153,6 @@ void GcScheduler::RecordFullCollection(CHAOS_IL2CPP_SIZE total_heap_bytes, uint6
 
     // Clear the full-GC request flag.
     full_gc_requested_.store(false, std::memory_order_relaxed);
-
-    // GC-N8 Phase-1: sample system memory-load at collection time (cheap,
-    // not on the allocation hot path).  High ratio = high memory pressure.
-    pal::PalMemoryStatus mst;
-    pal::PalGetMemoryStatus(mst);
-    if (mst.total_phys > 0) {
-        double avail_fraction = static_cast<double>(mst.avail_phys) /
-                                static_cast<double>(mst.total_phys);
-        double load = 1.0 - avail_fraction;   // 0 (plenty free) .. ~1 (pressure)
-        if (load < 0.0) load = 0.0;
-        if (load > 1.0) load = 1.0;
-        SetMemoryLoad(static_cast<float>(load));
-    }
 }
 
 void GcScheduler::RecordPageCountGrowth(int delta) noexcept {
@@ -211,10 +191,10 @@ void GcScheduler::RecordGen1Collection(CHAOS_IL2CPP_SIZE bytes_promoted,
     //     there longer for efficient filtering before Gen2 promotion.
     double gen1_survival = BitsToDouble(
         gen1_survival_rate_bits_.load(std::memory_order_relaxed));
-    int threshold = static_cast<int>(GcConfig().Gen1MinPromotionAge);
+    int threshold = kGen1MinPromotionAge;
 
     if (gen1_survival > 0.60) {
-        threshold = static_cast<int>(GcConfig().Gen1MinPromotionAge);  // promote fast
+        threshold = kGen1MinPromotionAge;  // 1 — promote fast
     } else if (gen1_survival > 0.20) {
         threshold = 2;  // moderate filtering
     } else {
@@ -229,10 +209,9 @@ void GcScheduler::RecordGen1Collection(CHAOS_IL2CPP_SIZE bytes_promoted,
         gen1_total_promoted_bytes_.load(std::memory_order_relaxed);
     if (total_promoted > 0 && total_pause > 0) {
         uint64_t ns_per_byte = total_pause / total_promoted;
-        if (ns_per_byte > GcConfig().Gen1MaxNsPerByte) {
+        if (ns_per_byte > kGen1MaxNsPerByte) {
             // High pause cost: increase threshold, capped at max.
-            threshold = std::min(threshold + 1,
-                static_cast<int>(GcConfig().Gen1MaxPromotionAge));
+            threshold = std::min(threshold + 1, kGen1MaxPromotionAge);
         }
     }
 
@@ -318,73 +297,8 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
                        mode == GcLatencyMode::SUSTAINED_LOW_LATENCY);
     auto& bgc = BgcController::Instance();
 
-    // Provisional (high-memory-pressure) mode: align CoreCLR's provisional
-    // degradation (gcpriv.h:4324) — under memory pressure never defer to BGC
-    // or NONE; force a blocking STOP-THE-WORLD FULL so memory is reclaimed
-    // promptly instead of waiting on the concurrent background mark.
-    bool provisional = provisional_mode_.load(std::memory_order_acquire);
-    if (provisional) {
-        prefer_bgc = false;
-    }
-
-    // 0c. M3/T5 FIX-3: under provisional (high memory-pressure) mode, if the
-    // reusable-page pool is over its capacity cap, force a blocking FULL so a
-    // sweep trims the pool back to kMaxPoolSize and releases retained physical
-    // memory.  Mirrors the NGC2 fire-once pattern below so it re-arms on the
-    // next provisional entry rather than continuously.
-    if (provisional && G_OldGen().IsPoolOversized()) {
-        SetLastTriggerReason(GcTriggerReason::PROVISIONAL);
-        return GcCollectionKind::FULL;
-    }
-
-    // 0d. M3/T5 FIX-1: many normal (non-oversized) frees have piled up since the
-    // last collection without a sweep to reclaim them.  Each normal Free only
-    // memsets the block; the containing page is pooled only when SweepPage sees
-    // it 100%-free.  Nudge a background sweep so those fully-free pages return
-    // to the pool and release physical memory.  Not provisional → prefer BGC
-    // (non-blocking); threshold ~ one 64KB page of 32-byte blocks.
-    constexpr CHAOS_IL2CPP_SIZE kFreelistReleaseTrigger = 2048;
-    if (G_OldGen().FreelistReleaseCount() >= kFreelistReleaseTrigger) {
-        SetLastTriggerReason(GcTriggerReason::PAGE_GROWTH);
-        if (g_bgc_enabled && !bgc.IsBusy() && !provisional) {
-            return GcCollectionKind::FULL_BGC;
-        }
-        return GcCollectionKind::FULL;
-    }
-
-    // GC-N10 (=M4): high-memory + high-fragmentation → queue a mandated NGC2.
-    // Distinct from provisional entry: this arm acts on the *fragmentation
-    // density + system memory load* signals (GC-N8) rather than the discrete
-    // provisional-mode flag, and queues NGC2 even when not in provisional mode.
-    // When both are elevated, old-gen is both fragmented and the machine is
-    // under memory pressure → a compacting full is required.  Queue the flag
-    // now; the discharge check immediately below clears+fires it exactly once.
-    if (!ngc2_queued_.load(std::memory_order_acquire)) {
-        const float frag  = OldGenFragmentation();
-        const float mload = MemoryLoad();
-        // Thresholds: frag >= 0.5 AND memory load >= 0.5 → fragmentation under
-        // pressure (no slack to absorb the fragmented heap).
-        if (frag >= 0.5f && mload >= 0.5f) {
-            ngc2_queued_.store(true, std::memory_order_release);
-        }
-    }
-
-    // 0. NGC2 queue (M4/M3B): a mandated gen2 collection was queued (provisional
-    // entry / high memory pressure / high fragmentation).  Discharge it at the
-    // next GC decision by forcing a blocking FULL once (never BGC/NONE), then
-    // clear so it fires exactly once.
-    if (ngc2_queued_.load(std::memory_order_acquire)) {
-        ngc2_queued_.store(false, std::memory_order_relaxed);
-        SetLastTriggerReason(provisional
-                             ? GcTriggerReason::PROVISIONAL
-                             : GcTriggerReason::EXPLICIT_REQUEST);
-        return GcCollectionKind::FULL;
-    }
-
     // 1. Full GC requested by another thread?
     if (full_gc_requested_.load(std::memory_order_acquire)) {
-        SetLastTriggerReason(
-            provisional ? GcTriggerReason::PROVISIONAL : GcTriggerReason::EXPLICIT_REQUEST);
         if (prefer_bgc && g_bgc_enabled && !bgc.IsBusy()) {
             return GcCollectionKind::FULL_BGC;
         }
@@ -394,12 +308,10 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
     // 2. Page count growth threshold exceeded?
     // Catches rapid page allocation bursts before the byte-based trigger reacts.
     if (page_count_growth_.load(std::memory_order_relaxed) >= kMaxPageGrowthThreshold) {
-        SetLastTriggerReason(
-            provisional ? GcTriggerReason::PROVISIONAL : GcTriggerReason::PAGE_GROWTH);
-        if (g_bgc_enabled && !bgc.IsBusy() && !provisional) {
+        if (g_bgc_enabled && !bgc.IsBusy()) {
             return GcCollectionKind::FULL_BGC;
         }
-        if (prefer_bgc && !provisional) {
+        if (prefer_bgc) {
             return GcCollectionKind::NONE;  // wait for BGC rather than STW
         }
         return GcCollectionKind::FULL;
@@ -438,15 +350,14 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
         }
     }
 
-    float full_trigger_mult = static_cast<float>(GcConfig().FullTriggerMultiplierFP) / 1000.0f;
     // Compute memory pressure ratio: how full the heap is relative to
     // the full-GC trigger.  >1.0 means we've exceeded the normal full GC
     // threshold but the BGC might be busy or deferred.
     float pressure_ratio = (heap_est > 0)
-        ? static_cast<float>(alloc_full) / (static_cast<float>(heap_est) * full_trigger_mult)
+        ? static_cast<float>(alloc_full) / (static_cast<float>(heap_est) * kFullTriggerMultiplier)
         : 0.0f;
 
-    if (heap_est > 0 && alloc_full > static_cast<CHAOS_IL2CPP_SIZE>(heap_est * full_trigger_mult)) {
+    if (heap_est > 0 && alloc_full > static_cast<CHAOS_IL2CPP_SIZE>(heap_est * kFullTriggerMultiplier)) {
         // Full collection threshold exceeded.  Prefer BGC over STW when:
         //   - BGC thread is running
         //   - BGC is not already busy with a cycle
@@ -458,13 +369,6 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
         if (prefer_bgc) {
             return GcCollectionKind::NONE;
         }
-        // External pressure triggering full GC?
-        bool ext_triggered = (ext_pressure > 0 && heap_est > 0 &&
-            static_cast<CHAOS_IL2CPP_INT64>(alloc_full) > ext_pressure);
-        SetLastTriggerReason(
-            ext_triggered
-                ? (provisional ? GcTriggerReason::PROVISIONAL : GcTriggerReason::EXTERNAL_PRESSURE)
-                : (provisional ? GcTriggerReason::PROVISIONAL : GcTriggerReason::ALLOC_PRESSURE));
         return GcCollectionKind::FULL;
     }
 
@@ -478,28 +382,11 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
     // Scale young threshold by pressure: at pressure_ratio=1.0 (normal),
     // use kYoungTriggerMultiplier=2.0.  At pressure_ratio=2.0 (very high),
     // tighten to 1.0× for aggressive young GC pacing.
-    const float young_trigger_mult =
-        static_cast<float>(GcConfig().YoungTriggerMultiplierFP) / 1000.0f;
-    float scaled_young_multiplier = young_trigger_mult;
+    float scaled_young_multiplier = kYoungTriggerMultiplier;
     if (pressure_ratio > 0.5f) {
         // Linear scale from 2.0× at 0.5 pressure to 1.0× at 2.0 pressure.
-        scaled_young_multiplier = young_trigger_mult * (1.5f - pressure_ratio * 0.5f);
+        scaled_young_multiplier = kYoungTriggerMultiplier * (1.5f - pressure_ratio * 0.5f);
         if (scaled_young_multiplier < 1.0f) scaled_young_multiplier = 1.0f;
-    }
-
-    // GC-N8 Phase-2: dynamic_tuning servo closed loop.  Fold the signal-derived
-    // tension into the young pacing.  High tension (fragmented old-gen, low
-    // free-list reuse, or memory load) tightens the trigger (smaller effective
-    // multiplier → more frequent young GC → less old-gen accumulation), which
-    // in turn reduces fragmentation/pressure — a genuine negative feedback loop.
-    // Bounded to [~0.6×, 1.0×] of the base so it can never make GC runaway.
-    static constexpr float kServoGain = 0.4f;   // tension=1.0 → multiply by 0.6
-    static constexpr float kServoFloor = 0.6f;  // never tighten below 60% of base
-    const float tension = DynamicTension();
-    if (tension > 0.01f) {
-        float servo_factor = 1.0f - kServoGain * tension;
-        if (servo_factor < kServoFloor) servo_factor = kServoFloor;
-        scaled_young_multiplier *= servo_factor;
     }
 
     if (alloc > static_cast<CHAOS_IL2CPP_SIZE>(last_nursery * scaled_young_multiplier)) {
@@ -510,10 +397,8 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
     // cumulative allocation since last full GC has grown beyond
     // kHighPressureTriggerMultiplier × heap.  Pre-emptively trigger
     // a young GC to slow the accumulation.
-    const float high_pressure_mult =
-        static_cast<float>(GcConfig().HighPressureTriggerMultiplierFP) / 1000.0f;
     if (heap_est > 0 &&
-        alloc_full > static_cast<CHAOS_IL2CPP_SIZE>(heap_est * high_pressure_mult) &&
+        alloc_full > static_cast<CHAOS_IL2CPP_SIZE>(heap_est * kHighPressureTriggerMultiplier) &&
         alloc > last_nursery * 0.5f) {
         return GcCollectionKind::YOUNG;
     }
@@ -623,16 +508,9 @@ CHAOS_IL2CPP_SIZE GcScheduler::RecommendedNurserySize() const noexcept {
         size = static_cast<CHAOS_IL2CPP_SIZE>(size * 0.75);
     }
 
-    // Clamp to [kMinNurserySize, kMaxNurserySize] (config-tunable).  Fall back
-    // to the compile-time scheduler bounds when config is uninitialized (0):
-    // this keeps sizing correct for tests / early callers that never ran
-    // GcConfig().Initialize().
-    CHAOS_IL2CPP_SIZE min_nursery = GcConfig().MinNurserySize;
-    CHAOS_IL2CPP_SIZE max_nursery = GcConfig().MaxNurserySize;
-    if (min_nursery == 0) min_nursery = kMinNurserySize;
-    if (max_nursery == 0) max_nursery = kMaxNurserySize;
-    if (size < min_nursery) size = min_nursery;
-    if (size > max_nursery) size = max_nursery;
+    // Clamp to [kMinNurserySize, kMaxNurserySize].
+    if (size < kMinNurserySize) size = kMinNurserySize;
+    if (size > kMaxNurserySize) size = kMaxNurserySize;
 
     // Round up to page size (4 KB) for aligned VirtualAlloc.
     constexpr CHAOS_IL2CPP_SIZE kPageSize = 4 * 1024;
@@ -673,14 +551,9 @@ CHAOS_IL2CPP_SIZE GcScheduler::RecommendedGen1Size() const noexcept {
     CHAOS_IL2CPP_SIZE size = static_cast<CHAOS_IL2CPP_SIZE>(base);
     size = (size + kGen1Align - 1) & ~(kGen1Align - 1);
 
-    // Clamp to [kMinGen1Size, kMaxGen1Size] (config-tunable).  Fall back to the
-    // compile-time scheduler bounds when config is uninitialized (0).
-    CHAOS_IL2CPP_SIZE min_gen1 = GcConfig().MinGen1Size;
-    CHAOS_IL2CPP_SIZE max_gen1 = GcConfig().MaxGen1Size;
-    if (min_gen1 == 0) min_gen1 = kMinGen1Size;
-    if (max_gen1 == 0) max_gen1 = kMaxGen1Size;
-    if (size < min_gen1) size = min_gen1;
-    if (size > max_gen1) size = max_gen1;
+    // Clamp to [kMinGen1Size, kMaxGen1Size].
+    if (size < kMinGen1Size) size = kMinGen1Size;
+    if (size > kMaxGen1Size) size = kMaxGen1Size;
 
     return size;
 }

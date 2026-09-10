@@ -1,0 +1,3606 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Net.Sockets",
+  "generatedAt": "2026-06-04T10:30:44.2795003Z",
+  "totalMethods": 271,
+  "methods": [
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "BeginRead",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "BeginWrite",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Close:System.Void(System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "Close",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Close:System.Void(System.TimeSpan)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "Close",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.TimeSpan"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::EndRead:System.Int32(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "EndRead",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::EndWrite:System.Void(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "EndWrite",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Flush:System.Void()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "Flush",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "FlushAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "Read",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Read:System.Int32(System.Span<System.Byte>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "Read",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Span<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "ReadAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "ReadAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.Memory<System.Byte>",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadByte:System.Int32()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "ReadByte",
+      "returnType": "System.Int32",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "Seek",
+      "returnType": "System.Int64",
+      "parameters": [
+        "System.Int64",
+        "System.IO.SeekOrigin"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::SetLength:System.Void(System.Int64)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "SetLength",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int64"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "Write",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Write:System.Void(System.ReadOnlySpan<System.Byte>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "Write",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "WriteAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "WriteAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.ReadOnlyMemory<System.Byte>",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteByte:System.Void(System.Byte)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.NetworkStream",
+      "methodName": "WriteByte",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Byte"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Accept:System.Net.Sockets.Socket()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Accept",
+      "returnType": "System.Net.Sockets.Socket",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "AcceptAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.Socket>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>(System.Net.Sockets.Socket)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "AcceptAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.Socket>",
+      "parameters": [
+        "System.Net.Sockets.Socket"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.Socket>(System.Net.Sockets.Socket,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "AcceptAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Net.Sockets.Socket>",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "AcceptAsync",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Net.Sockets.SocketAsyncEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.Socket>(System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "AcceptAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Net.Sockets.Socket>",
+      "parameters": [
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginAccept:System.IAsyncResult(System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginAccept",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginAccept:System.IAsyncResult(System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginAccept",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginAccept:System.IAsyncResult(System.Net.Sockets.Socket,System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginAccept",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.EndPoint,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginConnect",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Net.EndPoint",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.IPAddress,System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginConnect",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Net.IPAddress",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.IPAddress[],System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginConnect",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Net.IPAddress[]",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.String,System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginConnect",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.String",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginDisconnect:System.IAsyncResult(System.Boolean,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginDisconnect",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Boolean",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginReceive",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginReceive",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.Sockets.SocketError",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginReceive",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>",
+        "System.Net.Sockets.SocketFlags",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginReceive",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.Sockets.SocketError",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginReceiveFrom",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveMessageFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginReceiveMessageFrom",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginSend",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginSend",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.Sockets.SocketError",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginSend",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>",
+        "System.Net.Sockets.SocketFlags",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginSend",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.Sockets.SocketError",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendFile:System.IAsyncResult(System.String,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginSendFile",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.String",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendFile:System.IAsyncResult(System.String,System.Byte[],System.Byte[],System.Net.Sockets.TransmitFileOptions,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginSendFile",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.String",
+        "System.Byte[]",
+        "System.Byte[]",
+        "System.Net.Sockets.TransmitFileOptions",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendTo:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "BeginSendTo",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Bind:System.Void(System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Bind",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::CancelConnectAsync:System.Void(System.Net.Sockets.SocketAsyncEventArgs)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "CancelConnectAsync",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Sockets.SocketAsyncEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Close:System.Void()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Close",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Close:System.Void(System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Close",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Connect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.IPAddress,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Connect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.IPAddress",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.IPAddress[],System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Connect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.IPAddress[]",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.String,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Connect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.String",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.EndPoint,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.Net.EndPoint",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Net.IPAddress",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress,System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.Net.IPAddress",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress[],System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Net.IPAddress[]",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.Net.IPAddress[]",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Net.Sockets.SocketAsyncEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Boolean(System.Net.Sockets.SocketType,System.Net.Sockets.ProtocolType,System.Net.Sockets.SocketAsyncEventArgs)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Net.Sockets.SocketType",
+        "System.Net.Sockets.ProtocolType",
+        "System.Net.Sockets.SocketAsyncEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.String,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.String",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.String,System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.String",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Disconnect:System.Void(System.Boolean)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Disconnect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::DisconnectAsync:System.Threading.Tasks.ValueTask(System.Boolean,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "DisconnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.Boolean",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::DisconnectAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "DisconnectAsync",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Net.Sockets.SocketAsyncEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Dispose:System.Void()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::DuplicateAndClose:System.Net.Sockets.SocketInformation(System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "DuplicateAndClose",
+      "returnType": "System.Net.Sockets.SocketInformation",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.Byte[],System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndAccept",
+      "returnType": "System.Net.Sockets.Socket",
+      "parameters": [
+        "System.Byte[]",
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.Byte[],System.Int32,System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndAccept",
+      "returnType": "System.Net.Sockets.Socket",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndAccept",
+      "returnType": "System.Net.Sockets.Socket",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndConnect:System.Void(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndConnect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndDisconnect:System.Void(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndDisconnect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndReceive:System.Int32(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndReceive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndReceive:System.Int32(System.IAsyncResult,System.Net.Sockets.SocketError)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndReceive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.IAsyncResult",
+        "System.Net.Sockets.SocketError"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndReceiveFrom:System.Int32(System.IAsyncResult,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndReceiveFrom",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.IAsyncResult",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndReceiveMessageFrom:System.Int32(System.IAsyncResult,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndReceiveMessageFrom",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.IAsyncResult",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint",
+        "System.Net.Sockets.IPPacketInformation"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndSend:System.Int32(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndSend",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndSend:System.Int32(System.IAsyncResult,System.Net.Sockets.SocketError)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndSend",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.IAsyncResult",
+        "System.Net.Sockets.SocketError"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndSendFile:System.Void(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndSendFile",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndSendTo:System.Int32(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "EndSendTo",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetRawSocketOption:System.Int32(System.Int32,System.Int32,System.Span<System.Byte>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "GetRawSocketOption",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Int32",
+        "System.Int32",
+        "System.Span<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetSocketOption:System.Object(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "GetSocketOption",
+      "returnType": "System.Object",
+      "parameters": [
+        "System.Net.Sockets.SocketOptionLevel",
+        "System.Net.Sockets.SocketOptionName"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Byte[])",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "GetSocketOption",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Sockets.SocketOptionLevel",
+        "System.Net.Sockets.SocketOptionName",
+        "System.Byte[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetSocketOption:System.Byte[](System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "GetSocketOption",
+      "returnType": "System.Byte[]",
+      "parameters": [
+        "System.Net.Sockets.SocketOptionLevel",
+        "System.Net.Sockets.SocketOptionName",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::IOControl:System.Int32(System.Int32,System.Byte[],System.Byte[])",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "IOControl",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Int32",
+        "System.Byte[]",
+        "System.Byte[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::IOControl:System.Int32(System.Net.Sockets.IOControlCode,System.Byte[],System.Byte[])",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "IOControl",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Net.Sockets.IOControlCode",
+        "System.Byte[]",
+        "System.Byte[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Listen:System.Void()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Listen",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Listen:System.Void(System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Listen",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Poll:System.Boolean(System.Int32,System.Net.Sockets.SelectMode)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Poll",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Int32",
+        "System.Net.Sockets.SelectMode"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Poll:System.Boolean(System.TimeSpan,System.Net.Sockets.SelectMode)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Poll",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.TimeSpan",
+        "System.Net.Sockets.SelectMode"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[])",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Receive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Receive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Receive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.Sockets.SocketError"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Receive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Receive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Receive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Receive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Receive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.Sockets.SocketError"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Span<System.Byte>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Receive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Span<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Receive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Span<System.Byte>",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Receive",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Span<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.Sockets.SocketError"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.ArraySegment<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.ArraySegment<System.Byte>",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.Memory<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.Memory<System.Byte>",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveAsync",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Net.Sockets.SocketAsyncEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFrom",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFrom",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFrom",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFrom",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Span<System.Byte>,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFrom",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Span<System.Byte>",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFrom",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Span<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFrom",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Span<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.SocketAddress"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult>(System.ArraySegment<System.Byte>,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFromAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult>",
+      "parameters": [
+        "System.ArraySegment<System.Byte>",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFromAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult>",
+      "parameters": [
+        "System.ArraySegment<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveFromResult>(System.Memory<System.Byte>,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFromAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveFromResult>",
+      "parameters": [
+        "System.Memory<System.Byte>",
+        "System.Net.EndPoint",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveFromResult>(System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFromAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveFromResult>",
+      "parameters": [
+        "System.Memory<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFromAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.Memory<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.SocketAddress",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveFromAsync",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Net.Sockets.SocketAsyncEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveMessageFrom",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint",
+        "System.Net.Sockets.IPPacketInformation"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFrom:System.Int32(System.Span<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveMessageFrom",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Span<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint",
+        "System.Net.Sockets.IPPacketInformation"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult>(System.ArraySegment<System.Byte>,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveMessageFromAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult>",
+      "parameters": [
+        "System.ArraySegment<System.Byte>",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveMessageFromAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult>",
+      "parameters": [
+        "System.ArraySegment<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveMessageFromResult>(System.Memory<System.Byte>,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveMessageFromAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveMessageFromResult>",
+      "parameters": [
+        "System.Memory<System.Byte>",
+        "System.Net.EndPoint",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveMessageFromResult>(System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveMessageFromAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Net.Sockets.SocketReceiveMessageFromResult>",
+      "parameters": [
+        "System.Memory<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "ReceiveMessageFromAsync",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Net.Sockets.SocketAsyncEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Select:System.Void(System.Collections.IList,System.Collections.IList,System.Collections.IList,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Select",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Collections.IList",
+        "System.Collections.IList",
+        "System.Collections.IList",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Select:System.Void(System.Collections.IList,System.Collections.IList,System.Collections.IList,System.TimeSpan)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Select",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Collections.IList",
+        "System.Collections.IList",
+        "System.Collections.IList",
+        "System.TimeSpan"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[])",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.Sockets.SocketError"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.Sockets.SocketError"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.ReadOnlySpan<System.Byte>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.Sockets.SocketError"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.ArraySegment<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.ArraySegment<System.Byte>",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendAsync",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Net.Sockets.SocketAsyncEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.ReadOnlyMemory<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.ReadOnlyMemory<System.Byte>",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendFile",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String,System.Byte[],System.Byte[],System.Net.Sockets.TransmitFileOptions)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendFile",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.String",
+        "System.Byte[]",
+        "System.Byte[]",
+        "System.Net.Sockets.TransmitFileOptions"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Net.Sockets.TransmitFileOptions)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendFile",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.String",
+        "System.ReadOnlySpan<System.Byte>",
+        "System.ReadOnlySpan<System.Byte>",
+        "System.Net.Sockets.TransmitFileOptions"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFileAsync:System.Threading.Tasks.ValueTask(System.String,System.ReadOnlyMemory<System.Byte>,System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.TransmitFileOptions,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendFileAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.String",
+        "System.ReadOnlyMemory<System.Byte>",
+        "System.ReadOnlyMemory<System.Byte>",
+        "System.Net.Sockets.TransmitFileOptions",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFileAsync:System.Threading.Tasks.ValueTask(System.String,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendFileAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.String",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendPacketsAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendPacketsAsync",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Net.Sockets.SocketAsyncEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendTo",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendTo",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendTo",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendTo",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendTo",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendTo",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendTo",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.SocketAddress"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendToAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.ArraySegment<System.Byte>",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.Task<System.Int32>(System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendToAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.ArraySegment<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendToAsync",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Net.Sockets.SocketAsyncEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendToAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.ReadOnlyMemory<System.Byte>",
+        "System.Net.EndPoint",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendToAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.ReadOnlyMemory<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.SocketAddress,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SendToAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.ReadOnlyMemory<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.SocketAddress",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetIPProtectionLevel:System.Void(System.Net.Sockets.IPProtectionLevel)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SetIPProtectionLevel",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Sockets.IPProtectionLevel"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetRawSocketOption:System.Void(System.Int32,System.Int32,System.ReadOnlySpan<System.Byte>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SetRawSocketOption",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Int32",
+        "System.ReadOnlySpan<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Boolean)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SetSocketOption",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Sockets.SocketOptionLevel",
+        "System.Net.Sockets.SocketOptionName",
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Byte[])",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SetSocketOption",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Sockets.SocketOptionLevel",
+        "System.Net.Sockets.SocketOptionName",
+        "System.Byte[]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SetSocketOption",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Sockets.SocketOptionLevel",
+        "System.Net.Sockets.SocketOptionName",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "SetSocketOption",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Sockets.SocketOptionLevel",
+        "System.Net.Sockets.SocketOptionName",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Shutdown:System.Void(System.Net.Sockets.SocketShutdown)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.Socket",
+      "methodName": "Shutdown",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.Sockets.SocketShutdown"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::Dispose:System.Void()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketAsyncEventArgs",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Byte[],System.Int32,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketAsyncEventArgs",
+      "methodName": "SetBuffer",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Int32,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketAsyncEventArgs",
+      "methodName": "SetBuffer",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Memory<System.Byte>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketAsyncEventArgs",
+      "methodName": "SetBuffer",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Memory<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::AcceptAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>(System.Net.Sockets.Socket)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "AcceptAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.Socket>",
+      "parameters": [
+        "System.Net.Sockets.Socket"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::AcceptAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>(System.Net.Sockets.Socket,System.Net.Sockets.Socket)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "AcceptAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.Socket>",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.Net.Sockets.Socket"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.EndPoint,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.Net.EndPoint",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.IPAddress,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.Net.IPAddress",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.IPAddress,System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.Net.IPAddress",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.IPAddress[],System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.Net.IPAddress[]",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.Net.IPAddress[]",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.String,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.String",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.String,System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.String",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ReceiveAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.ArraySegment<System.Byte>",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ReceiveAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Net.Sockets.Socket,System.Memory<System.Byte>,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ReceiveAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.Memory<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ReceiveFromAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveFromResult>",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.ArraySegment<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveMessageFromAsync:System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "ReceiveMessageFromAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.SocketReceiveMessageFromResult>",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.ArraySegment<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.ArraySegment<System.Byte>",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.Collections.Generic.IList<System.ArraySegment<System.Byte>>,System.Net.Sockets.SocketFlags)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.Collections.Generic.IList<System.ArraySegment<System.Byte>>",
+        "System.Net.Sockets.SocketFlags"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Net.Sockets.Socket,System.ReadOnlyMemory<System.Byte>,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.ReadOnlyMemory<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendToAsync:System.Threading.Tasks.Task<System.Int32>(System.Net.Sockets.Socket,System.ArraySegment<System.Byte>,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.SocketTaskExtensions",
+      "methodName": "SendToAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Net.Sockets.Socket",
+        "System.ArraySegment<System.Byte>",
+        "System.Net.Sockets.SocketFlags",
+        "System.Net.EndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.Net.IPAddress,System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "BeginConnect",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Net.IPAddress",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.Net.IPAddress[],System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "BeginConnect",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Net.IPAddress[]",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.String,System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "BeginConnect",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.String",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Close:System.Void()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "Close",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPAddress,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "Connect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.IPAddress",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPAddress[],System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "Connect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.IPAddress[]",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPEndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "Connect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.IPEndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.String,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "Connect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.String",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Net.IPAddress",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress,System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.Net.IPAddress",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress[],System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Net.IPAddress[]",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.Net.IPAddress[]",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPEndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Net.IPEndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPEndPoint,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.Net.IPEndPoint",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.String,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.String",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.String,System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "ConnectAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.String",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Dispose:System.Void()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::EndConnect:System.Void(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "EndConnect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::GetStream:System.Net.Sockets.NetworkStream()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpClient",
+      "methodName": "GetStream",
+      "returnType": "System.Net.Sockets.NetworkStream",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocket:System.Net.Sockets.Socket()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "AcceptSocket",
+      "returnType": "System.Net.Sockets.Socket",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocketAsync:System.Threading.Tasks.Task<System.Net.Sockets.Socket>()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "AcceptSocketAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.Socket>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocketAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.Socket>(System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "AcceptSocketAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Net.Sockets.Socket>",
+      "parameters": [
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClient:System.Net.Sockets.TcpClient()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "AcceptTcpClient",
+      "returnType": "System.Net.Sockets.TcpClient",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClientAsync:System.Threading.Tasks.Task<System.Net.Sockets.TcpClient>()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "AcceptTcpClientAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.TcpClient>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClientAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.TcpClient>(System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "AcceptTcpClientAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Net.Sockets.TcpClient>",
+      "parameters": [
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AllowNatTraversal:System.Void(System.Boolean)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "AllowNatTraversal",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::BeginAcceptSocket:System.IAsyncResult(System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "BeginAcceptSocket",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::BeginAcceptTcpClient:System.IAsyncResult(System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "BeginAcceptTcpClient",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Create:System.Net.Sockets.TcpListener(System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "Create",
+      "returnType": "System.Net.Sockets.TcpListener",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Dispose:System.Void()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::EndAcceptSocket:System.Net.Sockets.Socket(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "EndAcceptSocket",
+      "returnType": "System.Net.Sockets.Socket",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::EndAcceptTcpClient:System.Net.Sockets.TcpClient(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "EndAcceptTcpClient",
+      "returnType": "System.Net.Sockets.TcpClient",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Pending:System.Boolean()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "Pending",
+      "returnType": "System.Boolean",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Start:System.Void()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "Start",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Start:System.Void(System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "Start",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Stop:System.Void()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.TcpListener",
+      "methodName": "Stop",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::AllowNatTraversal:System.Void(System.Boolean)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "AllowNatTraversal",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginReceive:System.IAsyncResult(System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "BeginReceive",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "BeginSend",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Net.IPEndPoint,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "BeginSend",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Net.IPEndPoint",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.String,System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "BeginSend",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.String",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Close:System.Void()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "Close",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Connect:System.Void(System.Net.IPAddress,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "Connect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.IPAddress",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Connect:System.Void(System.Net.IPEndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "Connect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.IPEndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Connect:System.Void(System.String,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "Connect",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.String",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Dispose:System.Void()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::DropMulticastGroup:System.Void(System.Net.IPAddress)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "DropMulticastGroup",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.IPAddress"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::DropMulticastGroup:System.Void(System.Net.IPAddress,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "DropMulticastGroup",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.IPAddress",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::EndReceive:System.Byte[](System.IAsyncResult,System.Net.IPEndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "EndReceive",
+      "returnType": "System.Byte[]",
+      "parameters": [
+        "System.IAsyncResult",
+        "System.Net.IPEndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::EndSend:System.Int32(System.IAsyncResult)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "EndSend",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Int32,System.Net.IPAddress)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "JoinMulticastGroup",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Net.IPAddress"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Net.IPAddress)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "JoinMulticastGroup",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.IPAddress"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Net.IPAddress,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "JoinMulticastGroup",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.IPAddress",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Net.IPAddress,System.Net.IPAddress)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "JoinMulticastGroup",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Net.IPAddress",
+        "System.Net.IPAddress"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Receive:System.Byte[](System.Net.IPEndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "Receive",
+      "returnType": "System.Byte[]",
+      "parameters": [
+        "System.Net.IPEndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::ReceiveAsync:System.Threading.Tasks.Task<System.Net.Sockets.UdpReceiveResult>()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "ReceiveAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Net.Sockets.UdpReceiveResult>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::ReceiveAsync:System.Threading.Tasks.ValueTask<System.Net.Sockets.UdpReceiveResult>(System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "ReceiveAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Net.Sockets.UdpReceiveResult>",
+      "parameters": [
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.Net.IPEndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Net.IPEndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.String,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.String",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.ReadOnlySpan<System.Byte>)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.Net.IPEndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>",
+        "System.Net.IPEndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.ReadOnlySpan<System.Byte>,System.String,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "Send",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>",
+        "System.String",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Net.IPEndPoint)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Net.IPEndPoint"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.String,System.Int32)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.Task<System.Int32>",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.String",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Net.IPEndPoint,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.ReadOnlyMemory<System.Byte>",
+        "System.Net.IPEndPoint",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.String,System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.ReadOnlyMemory<System.Byte>",
+        "System.String",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UdpClient",
+      "methodName": "SendAsync",
+      "returnType": "System.Threading.Tasks.ValueTask<System.Int32>",
+      "parameters": [
+        "System.ReadOnlyMemory<System.Byte>",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UnixDomainSocketEndPoint::Create:System.Net.EndPoint(System.Net.SocketAddress)",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UnixDomainSocketEndPoint",
+      "methodName": "Create",
+      "returnType": "System.Net.EndPoint",
+      "parameters": [
+        "System.Net.SocketAddress"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UnixDomainSocketEndPoint::Serialize:System.Net.SocketAddress()",
+      "namespace": "System.Net.Sockets",
+      "declaringType": "System.Net.Sockets.UnixDomainSocketEndPoint",
+      "methodName": "Serialize",
+      "returnType": "System.Net.SocketAddress",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    }
+  ],
+  "namespaces": {
+    "System.Net.Sockets": {
+      "methodCount": 271
+    }
+  }
+}

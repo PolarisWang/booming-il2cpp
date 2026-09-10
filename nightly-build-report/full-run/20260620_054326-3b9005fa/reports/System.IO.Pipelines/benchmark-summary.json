@@ -1,0 +1,165 @@
+{
+  "assemblyName": "System.IO.Pipelines",
+  "timestamp": "2026-06-20T05:43:26",
+  "totalChunks": 1,
+  "totalBenchmarkedMethods": 23,
+  "aggregatePerformance": {
+    "meanDurationMs": 2.680308695652174,
+    "meanOpsPerSecond": 173703419.10869566,
+    "aggregateMeanCv": 0.6943524347826087,
+    "totalOutliers": 25
+  },
+  "chunkSummaries": [
+    {
+      "slug": "system-io-pipelines",
+      "fact": {
+        "passed": 40,
+        "total": 50,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 33,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 23,
+        "iterations": 5000,
+        "meanDurationMs": 2.680308695652174,
+        "meanOpsPerSecond": 173703419.10869566,
+        "minDurationMs": 0.0184,
+        "maxDurationMs": 12.383,
+        "totalDurationMs": 61.6471,
+        "totalAllocatedBytes": 320000.0,
+        "meanSampleCount": 8.9,
+        "totalOutliers": 25,
+        "meanCv": 0.6943524347826087,
+        "maxCv": 2.717174
+      },
+      "hotupdate": {
+        "passed": 23,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 24.2,
+        "namespaceGaps": {
+          "System.IO.Pipelines/System.IO.Pipelines.BufferSegment": {
+            "declared": 5,
+            "covered": 0,
+            "gap": 5,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.BufferSegmentStack": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.InlineScheduler": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.Pipe": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader": {
+            "declared": 10,
+            "covered": 0,
+            "gap": 10,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter": {
+            "declared": 11,
+            "covered": 0,
+            "gap": 11,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable": {
+            "declared": 8,
+            "covered": 0,
+            "gap": 8,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.PipeCompletion": {
+            "declared": 4,
+            "covered": 0,
+            "gap": 4,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.PipeCompletionCallbacks": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.PipeOperationState": {
+            "declared": 5,
+            "covered": 0,
+            "gap": 5,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream": {
+            "declared": 12,
+            "covered": 0,
+            "gap": 12,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream": {
+            "declared": 11,
+            "covered": 0,
+            "gap": 11,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader": {
+            "declared": 6,
+            "covered": 0,
+            "gap": 6,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader": {
+            "declared": 9,
+            "covered": 0,
+            "gap": 9,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter": {
+            "declared": 8,
+            "covered": 0,
+            "gap": 8,
+            "gapPct": 100.0
+          },
+          "System.IO.Pipelines/System.IO.Pipelines.ThreadPoolScheduler": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2846720,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

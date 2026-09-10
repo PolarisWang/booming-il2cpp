@@ -1,0 +1,34 @@
+{
+  "date": "2026-06-05",
+  "assemblyName": "System.Runtime.InteropServices",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 31,
+        "total": 31,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 38,
+        "metaBenchmarkCount": 38
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 31,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    }
+  ]
+}

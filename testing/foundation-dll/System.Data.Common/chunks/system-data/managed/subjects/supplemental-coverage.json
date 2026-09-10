@@ -1,0 +1,109 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Data.Common",
+  "chunkSlug": "system-data",
+  "entries": [
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.ConstraintCollection::CopyTo:System.Void(System.Data.Constraint[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DBConcurrencyException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataColumnChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataColumnChangeEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataColumnChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataColumnChangeEventHandler::Invoke:System.Void(System.Object,System.Data.DataColumnChangeEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataColumnCollection::CopyTo:System.Void(System.Data.DataColumn[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataRowChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataRowChangeEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataRowChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataRowChangeEventHandler::Invoke:System.Void(System.Object,System.Data.DataRowChangeEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataRowCollection::CopyTo:System.Void(System.Data.DataRow[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataSet::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataTable::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataTable::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableClearEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataTableClearEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableClearEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableClearEventHandler::Invoke:System.Void(System.Object,System.Data.DataTableClearEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableCollection::CopyTo:System.Void(System.Data.DataTable[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableNewRowEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.DataTableNewRowEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableNewRowEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataTableNewRowEventHandler::Invoke:System.Void(System.Object,System.Data.DataTableNewRowEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.DataViewSettingCollection::CopyTo:System.Void(System.Data.DataViewSetting[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.FillErrorEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.FillErrorEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.FillErrorEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.FillErrorEventHandler::Invoke:System.Void(System.Object,System.Data.FillErrorEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.MergeFailedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.MergeFailedEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.MergeFailedEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.MergeFailedEventHandler::Invoke:System.Void(System.Object,System.Data.MergeFailedEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.StateChangeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.StateChangeEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.StateChangeEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.StateChangeEventHandler::Invoke:System.Void(System.Object,System.Data.StateChangeEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.StatementCompletedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Data.StatementCompletedEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.StatementCompletedEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Data.Common/System.Data.StatementCompletedEventHandler::Invoke:System.Void(System.Object,System.Data.StatementCompletedEventArgs)"
+    }
+  ]
+}

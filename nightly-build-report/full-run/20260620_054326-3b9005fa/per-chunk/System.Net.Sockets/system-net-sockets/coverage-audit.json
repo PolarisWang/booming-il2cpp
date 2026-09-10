@@ -1,0 +1,39 @@
+{
+  "chunkSlug": "system-net-sockets",
+  "declaredMethods": 271,
+  "coveredMethods": 246,
+  "missingMethods": 25,
+  "coveragePct": 90.8,
+  "namespaceGaps": {
+    "System.Net.Sockets/System.Net.Sockets.NetworkStream": {
+      "declared": 20,
+      "covered": 18,
+      "gap": 2,
+      "gapPct": 10.0
+    },
+    "System.Net.Sockets/System.Net.Sockets.Socket": {
+      "declared": 157,
+      "covered": 141,
+      "gap": 16,
+      "gapPct": 10.2
+    },
+    "System.Net.Sockets/System.Net.Sockets.TcpListener": {
+      "declared": 17,
+      "covered": 14,
+      "gap": 3,
+      "gapPct": 17.6
+    },
+    "System.Net.Sockets/System.Net.Sockets.UdpClient": {
+      "declared": 33,
+      "covered": 30,
+      "gap": 3,
+      "gapPct": 9.1
+    },
+    "System.Net.Sockets/System.Net.Sockets.UnixDomainSocketEndPoint": {
+      "declared": 2,
+      "covered": 1,
+      "gap": 1,
+      "gapPct": 50.0
+    }
+  }
+}

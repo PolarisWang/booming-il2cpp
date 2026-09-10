@@ -21,50 +21,19 @@ public sealed partial class NativeAotLoweringPlanner
                     if (!TryGetStringJoinEnumerableElementType(callee, out var elementType))
                         return null;
                     var variants = planner.ResolveEnumerableJoinSupportVariants(elementType!);
+                    if (variants.Count == 0) return null;
                     ExternalRuntimeHelperDefinition? def = null;
-                    // The List-family fast path (List<T>/ReadOnlyCollection<T> direct
-                    // items_array iteration) lives INSIDE CreateStringJoinStringEnumerable-
-                    // RuntimeHelperDefinition via list_variant_entries. It must be tried
-                    // even when the enumerator-based variants list is empty (List<T>'s
-                    // GetEnumerator/MoveNext/Current are not AOT-compiled subjects), so
-                    // resolve the List-family variants first and only fall back when
-                    // BOTH paths yield nothing.
-                    var listVariants = planner.ResolveListEnumerableJoinInfoVariants(elementType!);
-                    if (variants.Count > 0 || listVariants.Count > 0)
+                    if (string.Equals(elementType, "System.Int32", StringComparison.Ordinal) ||
+                        string.Equals(elementType, "System.Int64", StringComparison.Ordinal) ||
+                        string.Equals(elementType, "System.Int16", StringComparison.Ordinal))
                     {
-                        if (string.Equals(elementType, "System.Int32", StringComparison.Ordinal) ||
-                            string.Equals(elementType, "System.Int64", StringComparison.Ordinal) ||
-                            string.Equals(elementType, "System.Int16", StringComparison.Ordinal))
-                        {
-                            def = planner.CreateStringJoinInt32EnumerableRuntimeHelperDefinition(callee, variants);
-                        }
-                        if (string.Equals(elementType, "System.String", StringComparison.Ordinal))
-                        {
-                            def = planner.CreateStringJoinStringEnumerableRuntimeHelperDefinition(callee, variants);
-                        }
+                        def = planner.CreateStringJoinInt32EnumerableRuntimeHelperDefinition(callee, variants);
                     }
-                    // Fallback: when no enumerable variant matches (e.g. ReadOnlyCollection
-                    // whose GetEnumerator/MoveNext/Current weren't AOT-compiled), return an
-                    // empty string rather than a null that crashes the caller.
-                    if (def == null)
+                    if (string.Equals(elementType, "System.String", StringComparison.Ordinal))
                     {
-                        var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-                        [
-                            "    (void)chaos_arg_0;",
-                            "    (void)chaos_arg_1;",
-                            "    return chaos_reflection_create_string_utf8_copy(\"\", 0);",
-                        ]);
-                        def = new ExternalRuntimeHelperDefinition(callee, symbol, src.TrimEnd(),
-                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                            {
-                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            }),
-                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                            new HashSet<int> { 0, 1 });
+                        def = planner.CreateStringJoinStringEnumerableRuntimeHelperDefinition(callee, variants);
                     }
+                    if (def == null) return null;
                     return new GenericShapeResolution(def.Source, def.TargetSymbol,
                         def.ParameterAbis, def.ReturnAbi, def.RawArgumentIndices,
                         def.ReferencedStaticFieldSubjectIds);

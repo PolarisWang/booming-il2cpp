@@ -1,0 +1,36 @@
+Chunk                     |            chaos-aot |            NET 8 JIT |            NET10 JIT |   AOT/NET8 |  AOT/NET10 |  Methods
+--------------------------------------------------------------------------------------------------------------------------------
+buffers                   |            291669112 |            105144559 |            105447693 |      2.77x |      2.77x |      944
+collections               |            347588087 |            128205128 |            126582278 |      2.71x |      2.75x |       23
+collections-generic       |                    ！ |                    ！ |                    ！ |          ！ |          ！ |        ！
+diagnostics               |            243463617 |                    ！ |                    ！ |          ！ |          ！ |      751
+globalization             |            300057701 |             78360943 |             80996447 |      3.83x |      3.70x |     1691
+io                        |            222181905 |             56389748 |             56029921 |      3.94x |      3.97x |     2157
+io-2                      |            220887318 |             57603411 |             56579487 |      3.83x |      3.90x |     2157
+numerics                  |                    ！ |            136151771 |            131350602 |          ！ |          ！ |      135
+reflection                |                    ！ |             26398681 |             28977189 |          ！ |          ！ |        8
+reflection-emit           |                    ！ |                    ！ |                    ！ |          ！ |          ！ |        ！
+runtime-compiler          |            256648092 |                    ！ |            102226649 |          ！ |      2.51x |     1001
+runtime-interop           |            297239507 |             98739541 |             99747484 |      3.01x |      2.98x |     1268
+runtime-intrinsics        |            306922964 |            136467273 |            149547466 |      2.25x |      2.05x |     4440
+runtime-intrinsics-2      |            313731507 |            137768318 |            146621576 |      2.28x |      2.14x |     4440
+system                    |                    ！ |                    ！ |                    ！ |          ！ |          ！ |        ！
+system-2                  |                    ！ |                    ！ |                    ！ |          ！ |          ！ |        ！
+system-3                  |                    ！ |                    ！ |                    ！ |          ！ |          ！ |        ！
+system-4                  |                    ！ |                    ！ |                    ！ |          ！ |          ！ |        ！
+system-5                  |                    ！ |                    ！ |                    ！ |          ！ |          ！ |        ！
+text                      |            241312166 |             97192837 |             99116505 |      2.48x |      2.43x |     2882
+threading                 |            286202524 |                    ！ |                    ！ |          ！ |          ！ |     1370
+threading-tasks           |                    ！ |             73615226 |             80078715 |          ！ |          ！ |       54
+--------------------------------------------------------------------------------------------------------------------------------
+** Overall **             |            274671248 |             86005532 |             89355067 |      3.19x |      3.07x |    23124
+
+  Coverage: 12/22 chunks have native AOT data (23124 methods)
+            12/22 chunks have NET 8 JIT data (2768 methods)
+            13/22 chunks have NET10 JIT data (2944 methods)
+
+  chaos-aot: il2cpp AOT codegen (entry.exe --benchmark-all)
+  NET 8 JIT: dotnet run --framework net8.0 (managed benchmark)
+  NET10 JIT: dotnet run --framework net10.0 (managed benchmark)
+  Ratio >1.0: AOT (chaos-aot) is faster
+  Ratio <1.0: Managed JIT is faster

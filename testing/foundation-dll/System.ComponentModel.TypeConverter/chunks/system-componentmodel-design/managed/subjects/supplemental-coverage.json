@@ -1,0 +1,100 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.ComponentModel.TypeConverter",
+  "chunkSlug": "system-componentmodel-design",
+  "entries": [
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ActiveDesignerEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ActiveDesignerEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ActiveDesignerEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ActiveDesignerEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ActiveDesignerEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangedEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangingEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentChangingEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangingEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangingEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentChangingEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentRenameEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentRenameEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentRenameEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentRenameEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentRenameEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.DesignerEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.DesignerEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection::CopyTo:System.Void(System.Array,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection::GetEnumerator:System.Collections.IEnumerator()"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection::IndexOf:System.Int32(System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection::ShowDialog:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransactionCloseEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.DesignerTransactionCloseEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransactionCloseEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransactionCloseEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.DesignerTransactionCloseEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::CopyTo:System.Void(System.ComponentModel.Design.DesignerVerb[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.MenuCommand::Invoke:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.MenuCommand::Invoke:System.Void(System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceCreatorCallback::BeginInvoke:System.IAsyncResult(System.ComponentModel.Design.IServiceContainer,System.Type,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceCreatorCallback::EndInvoke:System.Object(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceCreatorCallback::Invoke:System.Object(System.ComponentModel.Design.IServiceContainer,System.Type)"
+    }
+  ]
+}

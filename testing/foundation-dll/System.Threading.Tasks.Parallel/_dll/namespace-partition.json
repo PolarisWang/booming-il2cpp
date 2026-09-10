@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "generatedAt": "2026-06-02T02:15:41.644490+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 1,
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "namespaces": [
+        "System.Threading.Tasks"
+      ],
+      "methodCount": 8,
+      "methods": [
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelFork:System.Void(System.Int32,System.Int32,System.Int32)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelInvokeBegin:System.Void(System.Int32,System.Int32,System.Int32,System.Threading.Tasks.ParallelEtwProvider+ForkJoinOperationType,System.Int32)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelInvokeEnd:System.Void(System.Int32,System.Int32,System.Int32)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelJoin:System.Void(System.Int32,System.Int32,System.Int32)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelLoopBegin:System.Void(System.Int32,System.Int32,System.Int32,System.Threading.Tasks.ParallelEtwProvider+ForkJoinOperationType,System.Int64,System.Int64)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelLoopEnd:System.Void(System.Int32,System.Int32,System.Int32,System.Int64)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()",
+          "index": 7
+        }
+      ]
+    }
+  ]
+}

@@ -290,33 +290,13 @@ public sealed partial class NativeAotLoweringPlanner
             AotCoreIrAbiCarrierKind.Float64 => "double",
             AotCoreIrAbiCarrierKind.Int64 => "CHAOS_IL2CPP_INT64",
             AotCoreIrAbiCarrierKind.UInt64 => "CHAOS_IL2CPP_UINT64",
-            AotCoreIrAbiCarrierKind.NativeInt => MapNativeIntSlot(abiSlot),
+            AotCoreIrAbiCarrierKind.NativeInt => "CHAOS_IL2CPP_INTPTR",
             AotCoreIrAbiCarrierKind.ByRef => "CHAOS_IL2CPP_INTPTR",
             AotCoreIrAbiCarrierKind.MultiReturn => "CHAOS_IL2CPP_INTPTR",
             AotCoreIrAbiCarrierKind.ByRefToValueType => "CHAOS_IL2CPP_INTPTR",
             AotCoreIrAbiCarrierKind.ValueTypeByValue => GetRequiredAbiValueTypeSymbol(abiSlot),
             _ => throw new NotSupportedException($"native-aot lowering does not support ABI return carrier '{abiSlot.CarrierKindCode}'."),
         };
-    }
-
-    /// <summary>
-    /// Map a NativeInt ABI slot to a C++ type name.  When the slot has a
-    /// non-null TypeSubjectId from an external value type (e.g. System.Data.
-    /// CommandBehavior), emit chaos_valuetype_X instead of CHAOS_IL2CPP_INTPTR.
-    /// This ensures dispatch table typedefs in chaos_generated_module.h match
-    /// the extern "C" declarations in page files.
-    /// </summary>
-    private static string MapNativeIntSlot(AotCoreIrAbiSlotArtifact abiSlot)
-    {
-        // Only emit chaos_valuetype_* for actual value types.  Reference types
-        // (classes like System.Globalization.CompareInfo, CultureInfo) and interfaces
-        // must use CHAOS_IL2CPP_INTPTR even when they have a non-CoreLib TypeSubjectId,
-        // because they are passed by reference (pointer-sized), not by value.
-        if (!string.IsNullOrEmpty(abiSlot.TypeSubjectId) &&
-            !abiSlot.TypeSubjectId.StartsWith("System.Private.CoreLib/", StringComparison.Ordinal) &&
-            abiSlot.TypeShape == AotCoreIrTypeShapeKind.ValueType)
-            return GetNativeValueTypeSymbol(abiSlot.TypeSubjectId);
-        return "CHAOS_IL2CPP_INTPTR";
     }
 
 

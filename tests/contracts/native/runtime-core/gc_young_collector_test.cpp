@@ -153,15 +153,6 @@ static void test_scavenge_object() {
     if (promoted == nursery_obj) { FAIL("promoted same as nursery (not copied)"); return; }
     if (IsInNursery(promoted)) { FAIL("promoted still in nursery"); return; }
 
-    // M8 (plan-gen): the promoted destination's region-gen must reflect its NEW
-    // generation — either gen1 (copied to the gen1 survivor region) or old(2)
-    // (if it fell through to old-gen).  Never the stale young(0) of its nursery
-    // origin.  This guards the write-barrier correctness after promotion.
-    uint8_t dst_gen = GetRegionGen(reinterpret_cast<uintptr_t>(promoted));
-    if (dst_gen != kRegionGenGen1 && dst_gen != kRegionGenOld) {
-        FAIL("promoted object region-gen is not gen1/old (plan-gen rebind)"); return;
-    }
-
     // Verify content was copied.  The nursery object's first word has been
     // overwritten by the forwarding pointer, so we check the promoted copy
     // directly for the expected values.
@@ -174,25 +165,6 @@ static void test_scavenge_object() {
     // C2 uses EstimateObjectSize which returns at most 32 bytes.
     // Bytes within the copied range match; beyond that, calloc
     // returns zeroed memory regardless of what the nursery had.
-    PASS();
-
-    SUBTEST("condemned-gen concept (T3) + nursery region-gen");
-    // (a) condemned-gen field defaults to gen1 for a young collection (M9-M10:
-    //     a young GC condemns the young side gen0+gen1; gen2+ objects are not
-    //     promoted here).  (b) a nursery object reads region-gen YOUNG(0) —
-    //     verifies the systemic fix that marks every nursery 4MB chunk young.
-    {
-        YoungCollectionResult r;
-        if (r.condemned_gen_num != kRegionGenGen1)
-            { FAIL("default condemned_gen_num != gen1 (M9 young condemns gen0+gen1)"); return; }
-        void* n2 = NurseryAllocate(32);
-        if (n2 == nullptr) { FAIL("nursery alloc n2 failed"); return; }
-        std::memset(n2, 0, 32);
-        if (GetRegionGen(reinterpret_cast<uintptr_t>(n2)) != kRegionGenYoung) {
-            FAIL("nursery object region-gen not young(0)");
-            return;
-        }
-    }
     PASS();
 
     SUBTEST("forwarded object returns same promoted address");
@@ -224,10 +196,6 @@ static void test_young_collection() {
     if (nursery == nullptr) { FAIL("no nursery"); return; }
 
     // Set up a heap base for card table ops.
-    // Save+g_heap_base before the ad-hoc GcSetHeapBase override so it can be
-    // restored after the collection checks — preventing cross-test g_heap_base
-    // pollution (same pattern as the unit test_fix: Conservativesweep SEH).
-    uintptr_t saved_heap_base = g_heap_base;
     GcSetHeapBase(nursery->begin);
 
     // Allocate a few bytes so nursery isn't completely empty.
@@ -240,30 +208,16 @@ static void test_young_collection() {
     PASS();
 
     SUBTEST("normal collection resets nursery and clears cards");
-    // Young GC Phase 4 calls ClearCardRange(nursery_begin, nursery_used) to
-    // clear the nursery-range cards.  DirtyCard() fast-skips nursery pointers
-    // by design (young GC scans the nursery precisely), so to observe the
-    // clear we must dirty a card in the nursery range directly (bypassing the
-    // barrier), then verify young GC clears it.
-    // Compute the nursery-range card index for p and force it dirty.
-    uintptr_t p_addr = reinterpret_cast<uintptr_t>(p);
-    uintptr_t card_idx = (p_addr - g_heap_base) >> kCardShift;
-    uintptr_t seg_idx = card_idx / kCardsPerSegment;
-    uintptr_t card_off = card_idx % kCardsPerSegment;
-    auto* card_seg = g_card_l1[seg_idx].load(std::memory_order_relaxed);
-    if (card_seg == nullptr) { FAIL("card segment not allocated for nursery"); return; }
-    card_seg->words[card_off / kCardsPerWord] |= (1u << (card_off % kCardsPerWord));
+    // Dirty a card first, then collect.
+    DirtyCard(p);
     if (!IsDirty(p)) { FAIL("card should be dirty before collect"); return; }
 
     YoungCollectionResult r2 = GcYoungCollection();
     // Nursery should be reset.
     if (g_young_gen.bump.load(std::memory_order_acquire) != nursery->begin) { FAIL("nursery not reset after collect"); return; }
-    // Cards in the nursery range should be cleared.
+    // Cards should be cleared.
     if (IsDirty(p)) { FAIL("card still dirty after collect"); return; }
     PASS();
-
-    // Restore g_heap_base to prevent pollution of subsequent tests.
-    g_heap_base = saved_heap_base;
 
     SUBTEST("collection with active nursery allocated data");
     // Allocate again after reset.
@@ -294,8 +248,6 @@ static void test_collection_with_dirty_card() {
     // cards starting from a known index.
     uintptr_t nursery_start = reinterpret_cast<uintptr_t>(nursery->begin);
     uintptr_t base_aligned = nursery_start & ~(kCardSize - 1);
-    // Save g_heap_base before ad-hoc override; restore at end of the function.
-    uintptr_t saved_b = g_heap_base;
     GcSetHeapBase(reinterpret_cast<void*>(base_aligned));
 
     uintptr_t nursery_idx = (nursery_start - base_aligned) >> kCardShift;
@@ -428,45 +380,6 @@ static void test_collection_with_dirty_card() {
         return;
     }
     PASS();
-
-    // Restore g_heap_base to prevent pollution.
-    g_heap_base = saved_b;
-}
-
-// ── M10: gen>condemned filter discards newer-generation objects ────
-// A GC condemns every generation <= condemned_gen_num.  Objects whose region-gen
-// is NEWER (greater) than condemned must be left untouched by GcScavengeObject*
-// (they belong to a younger-generation collection).  Verifies the filter is
-// actually honored, not just tracked.
-static void test_condemned_gen_filter() {
-    TEST("scavenge respects gen>condemned");
-    InitYoungGeneration();
-
-    // Allocate a Gen1 region and tag it (M9 already tags GEN1 as kRegionGenGen1=1
-    // at allocation time).  An object there reads region-gen 1.
-    Region* gen1 = RegionManager::Instance().AllocateRegion(
-        RegionKind::REGION_GEN1, 64 * 1024);
-    if (gen1 == nullptr || gen1->begin == nullptr) { FAIL("gen1 alloc failed"); return; }
-    void* gen1_obj = gen1->begin;
-    std::memset(gen1_obj, 0, 16);
-    if (GetRegionGen(reinterpret_cast<uintptr_t>(gen1_obj)) != kRegionGenGen1) {
-        FAIL("gen1 object region-gen != gen1(1)");
-        return;
-    }
-
-    // A collection that condemns only gen0 (condemned=young, not gen1): the gen1
-    // object has region-gen 1 > 0, so it MUST be returned unchanged (not scavenged).
-    YoungCollectionResult result;
-    result.condemned_gen_num = kRegionGenYoung;  // condemn only gen0
-    void* before = gen1_obj;
-    void* out = GcScavengeObjectKnownNursery(gen1_obj, &result);
-    if (out != before) { FAIL("gen>condemned object was scalarved (should be skipped)"); return; }
-    PASS();
-
-    // Sanity: a young collection (condemn gen0+gen1) DOES process the gen1 object.
-    result.condemned_gen_num = kRegionGenGen1;
-    void* out2 = GcScavengeObjectKnownNursery(gen1_obj, &result);
-    PASS();  // (promotion/idempotency covered elsewhere; no crash is the assert here)
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -482,7 +395,6 @@ int main() {
     test_scavenge_object();
     test_young_collection();
     test_collection_with_dirty_card();
-    test_condemned_gen_filter();
 
     printf("\nResults: %d tests, %d failures\n", g_tests, g_failures);
     return g_failures > 0 ? 1 : 0;

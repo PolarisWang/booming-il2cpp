@@ -8,7 +8,7 @@
 ## 文件结构
 
 ```
-tests/e2e/verification/
+testing/foundation-dll/verification/
 ├── nightly_build.py               ← (不改) 兼容旧入口
 ├── nightly_delta.py               ← 改: v2 schema 扩展
 ├── nightly_summary.py             ← 改: 新指标表格

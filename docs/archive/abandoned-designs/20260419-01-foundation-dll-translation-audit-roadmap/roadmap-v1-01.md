@@ -30,9 +30,9 @@ Status: cancelled (user requested re-plan)
   - `FoundationDllTranslationSolution` subject design/plan
   - workspace artifact chain test
 - dependencies:
-  - `docs/archive/architecture/subject-test-framework-v1/INDEX.md`
-  - `docs/archive/architecture/verification-v1/spec.md`
-  - `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/reference-assembly-and-corelib-policy.md`
+  - `docs/architecture/subject-test-framework-v1/INDEX.md`
+  - `docs/architecture/verification-v1/spec.md`
+  - `docs/architecture/reference-assembly-and-corelib-policy.md`
 - open_questions:
   - 鏄惁绔嬪嵆鏂板鐙珛 solution銆傚綋鍓嶆帹鑽愭柊澧炪€?
 ### Phase 1: System.Private.CoreLib Full Verification [COMPLETED]
@@ -188,9 +188,9 @@ Status: cancelled (user requested re-plan)
 | `20260419-06-corelib-hotupdate-proof-normalization` | `phase-1` | `completed` | `codex` | 统一 CoreLib hotupdate proof obligation | `20260419-05` |
 | `20260419-07-corelib-dll-boundary-native-codegen-implementation` | `phase-1` | `completed` | `codex` | 完成窄边界 runtime-skeleton widening 与 subject review bundle 主链接线 | `20260419-06` |
 | `20260419-20-corelib-supplemental-full-closure-audit-integration` | `phase-1` | `completed` | `codex` | 已把真实 `System.Private.CoreLib.dll` supplemental full-assembly-closure artifacts 接入当前 canonical proof/audit 链路，并把 truth boundary 推进到 `narrow-proof-packet-plus-supplemental-full-closure-evidence` | `20260419-07` |
-| `20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening` | `phase-1` | `completed` | `codex` | CoreLib widening 完成：54863/59942 发射，常规 managed 方法全覆盖。物理目录已移入 `docs/archive/dev-completed/` | `20260419-20` |
+| `20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening` | `phase-1` | `completed` | `codex` | CoreLib widening 完成：54863/59942 发射，常规 managed 方法全覆盖。物理目录已移入 `docs/dev/completed/` | `20260419-20` |
 | `20260425-03-foundation-dll-capability-closure-reporting-roadmap` | `cross-cutting` | `completed` | `codex` | 冻结 foundation DLL 报告的 capability-closure denominator、workflow-progress 口径、DLL completed 规则与 source-links / projection contract | `20260419-20` |
-| `20260430-01-ldind-stind-full-series` | `phase-1` | `completed` | `codex` | ldind/stind 全系列补齐（C++ 模板 + 参数化 C# 发射器）。物理目录已移入 `docs/archive/dev-completed/` | `20260419-07` |
+| `20260430-01-ldind-stind-full-series` | `phase-1` | `completed` | `codex` | ldind/stind 全系列补齐（C++ 模板 + 参数化 C# 发射器）。物理目录已移入 `docs/dev/completed/` | `20260419-07` |
 | `20260430-02-closure-corelib-resolution` | `phase-1` | `superseded` | `codex` | CoreLib closure 解析方案（已废弃，被 Reference Assembly 架构取代）。已归档 | `20260419-07` |
 | `20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable` | `phase-2` | `planned` | `codex` | 验证 `System.Collections.Immutable`，CoreLib full verification 已完成，阻塞已解除 | `20260419-03` |
 | `20260419-22-complex-bcl-ordered-dll-02-system-formats-asn1` | `phase-2` | `planned` | `codex` | 验证 `System.Formats.Asn1` | `20260419-21` |
@@ -211,9 +211,9 @@ Status: cancelled (user requested re-plan)
 
 ## 7. 渚濊禆
 
-- `docs/archive/architecture/subject-test-framework-v1/INDEX.md`
-- `docs/archive/architecture/verification-v1/spec.md`
-- `wiki/03-功能模块/06-il2cpp核心架构/05-架构参考/reference-assembly-and-corelib-policy.md`
+- `docs/architecture/subject-test-framework-v1/INDEX.md`
+- `docs/architecture/verification-v1/spec.md`
+- `docs/architecture/reference-assembly-and-corelib-policy.md`
 - `wiki/06-娴嬭瘯楠岃瘉/AOT鏂癋eature鎺ュ叆鑷祴瑙勮寖.md`
 - `subjects/SolutionCorePack/subject.features.json`
 - `subjects/HotUpdateHostPack/subject.features.json`

@@ -1,0 +1,49 @@
+# Pipeline configuration for foundation-dll verification
+# This file is read by chunk_pipeline.py during pipeline setup.
+
+pipeline:
+  # Default verification mode for all chunks
+  defaultMode: standard
+
+  # Per-chunk assembly search directories (--assembly-dir for codegen).
+  # Used when a chunk's subjects reference types from non-runtime assemblies
+  # (e.g., game engine DLLs, NuGet packages).
+  #
+  # Format: semicolon-separated absolute or relative paths.
+  # Relative paths are resolved from the foundation-dll directory.
+  # Example: chunks/system-net-http/assemblyDirs: ../external-dlls
+  #
+  # When empty (default): no --assembly-dir is passed, the codegen only loads
+  # the subjects DLL itself. Cross-assembly references are resolved by
+  # the BRIDGE-AOT compiler via runtime directory discovery.
+  chunks:
+    numerics:
+      assemblyDirs: ""
+    global-ns:
+      assemblyDirs: "chunks/global-ns/managed/subjects"
+    security-cryptography:
+      assemblyDirs: "crypto-refs"
+    security-cryptography-2:
+      assemblyDirs: "crypto-refs"
+    system-security-cryptography-x509certificates:
+      assemblyDirs: "crypto-refs"
+
+
+  # Timeouts in seconds for specific stages
+  timeouts:
+    codegen_aot: 600
+    fact_aot: 600
+    benchmark: 300
+
+  # Cache configuration
+  cache:
+    # Force invalidation of all cached build outputs (set to true to bypass cache).
+    # Use this when you know the codegen/TPG/runtime hasn't changed but you
+    # want a clean build, e.g. after fixing a stale intermediate file.
+    invalidate_all: false
+
+    # Manual cache version bump.  Increment this to invalidate all existing
+    # cache entries without modifying the automatic version hashes.  The
+    # CACHE_KEY_VERSION constant in hephaestus_cache.py is the default;
+    # this config overrides it per-pipeline.
+    version: "2"

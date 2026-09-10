@@ -1,0 +1,90 @@
+{
+  "date": "2026-06-05",
+  "assemblyName": "System.Private.Xml",
+  "chunks": [
+    {
+      "slug": "system-xml-schema",
+      "fact": {
+        "passed": 112,
+        "total": 112,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 120,
+        "metaBenchmarkCount": 120
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    },
+    {
+      "slug": "system-xml-serialization",
+      "fact": {
+        "passed": 189,
+        "total": 189,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 207,
+        "metaBenchmarkCount": 207
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    },
+    {
+      "slug": "system-xml-xsl",
+      "fact": {
+        "passed": 186,
+        "total": 186,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 208,
+        "metaBenchmarkCount": 208
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    },
+    {
+      "slug": "system-xml-xsl-runtime",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    },
+    {
+      "slug": "xml",
+      "fact": {
+        "passed": 916,
+        "total": 916,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 1025,
+        "metaBenchmarkCount": 1025
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    }
+  ]
+}

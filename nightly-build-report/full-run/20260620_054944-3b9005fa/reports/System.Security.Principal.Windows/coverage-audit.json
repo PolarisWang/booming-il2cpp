@@ -1,0 +1,11 @@
+{
+  "assemblyName": "System.Security.Principal.Windows",
+  "timestamp": "2026-06-20T05:49:44",
+  "totalChunks": 1,
+  "chunksWithResults": 1,
+  "chunksWithValueWarnings": 0,
+  "chunksWithMetaMismatch": 0,
+  "totalDeclaredMethods": 120,
+  "coveragePct": 100.0,
+  "namespaceGaps": {}
+}

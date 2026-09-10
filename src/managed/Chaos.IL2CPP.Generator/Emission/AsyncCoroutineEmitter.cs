@@ -13,23 +13,6 @@ public sealed partial class NativeAotLoweringPlanner
         if (string.IsNullOrEmpty(sid)) return false;
         return sid.Contains(">d__") && (sid.Contains("::MoveNext") || sid.Contains("::MoveNext:"));
     }
-    /// <summary>
-    /// True if a TYPE subject id is the declaring type of a compiler-generated async
-    /// state machine (its subject looks like <code>&lt;Name&gt;d__N</code> — surfaced in a
-    /// nesting-safe way as <code>&gt;d__N</code>/<code>&gt;d__</code>). Uses only the type
-    /// subject string; safe for the stack-allocation blacklist because Roslyn's async /
-    /// iterator boxes always carry the <code>d__</code> marker.
-    /// </summary>
-    private static bool IsAsyncStateMachineBoxTypeId(string? subjectId)
-    {
-        if (string.IsNullOrEmpty(subjectId)) return false;
-        var seen = subjectId.Contains(">d__", StringComparison.Ordinal);
-        if (seen) return true;
-        // Nested surface form: "<Name>d__0" (Roslyn 3.x un-nested emits "<...>d__", nested uses "+<...>d__").
-        return subjectId.Contains("+<", StringComparison.Ordinal)
-            && subjectId.Contains("d__", StringComparison.Ordinal)
-            && !subjectId.Contains("::", StringComparison.Ordinal); // type, not method
-    }
     internal enum AsyncMethodKind { NotAsync, AsyncTask, AsyncTaskOfT, AsyncValueTask, AsyncValueTaskOfT, AsyncVoid, Complex }
     private AsyncMethodKind ClassifyAsyncMethod(AotCoreIrMethodArtifact m)
     {
@@ -44,13 +27,7 @@ public sealed partial class NativeAotLoweringPlanner
         return AsyncMethodKind.AsyncTask;
     }
     internal int AsyncMethodCount;
-    /// <summary>
-    /// Count of non-complex async state machine MoveNext methods emitted via the
-    /// normal structured IR path (not via GenPromise/GenCoro). Historical name
-    /// "AsyncCoroutine" is misleading — these state machines no longer map to
-    /// C++20 <c>co_await</c> coroutines.
-    /// </summary>
-    internal int AsyncStateMachineCount;
+    internal int AsyncCoroutineMethodCount;
     internal int AsyncInterpreterFallbackCount;
 
     private StructuredIRNode? BuildAsyncStructuredBody(AotCoreIrMethodArtifact m)

@@ -1,0 +1,90 @@
+# ARM64 JIT CI
+#
+# Cross-compiles ARM64 JIT tests and runs them under QEMU user-mode emulation.
+# Triggered on PR + push to main when ARM64-relevant files change.
+#
+# Requires: qemu-user + aarch64-linux-gnu-gcc cross-toolchain
+# (installed via apt-get in the CI runner).
+
+name: ARM64 JIT CI
+
+on:
+  pull_request:
+    paths:
+      - 'src/native/jit/**'
+      - 'src/native/common/**'
+      - 'src/native/runtime-core/**'
+      - 'src/native/pal/**'
+      - 'tests/contracts/native/runtime-core/**'
+      - 'CMakeLists.txt'
+      - 'CMakePresets.json'
+      - 'build/toolchains/linux-arm64*'
+  push:
+    branches: [main]
+    paths:
+      - 'src/native/jit/**'
+      - 'src/native/common/**'
+      - 'src/native/runtime-core/**'
+      - 'src/native/pal/**'
+      - 'tests/contracts/native/runtime-core/**'
+      - 'CMakeLists.txt'
+      - 'CMakePresets.json'
+      - 'build/toolchains/linux-arm64*'
+  workflow_dispatch:
+
+jobs:
+  arm64-jit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install QEMU + ARM64 cross toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq qemu-user qemu-user-static binfmt-support \
+            gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+          echo "=== Verification ==="
+          qemu-aarch64 --version
+          aarch64-linux-gnu-gcc --version
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+          dotnet restore tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Build Chaos.IL2CPP.Driver
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
+
+      - name: Configure CMake (linux-arm64-smoke)
+        run: cmake --preset linux-arm64-smoke
+
+      - name: Build ARM64 Native Libraries + Tests
+        run: |
+          cmake --build artifacts/presets/linux-arm64-smoke -j$(nproc) 2>&1 | tail -50
+
+      - name: Run ARM64 JIT Tests under QEMU
+        run: |
+          ctest --test-dir artifacts/presets/linux-arm64-smoke \
+            -L arm64 --output-on-failure -V 2>&1 | tee arm64-jit-output.txt
+
+      - name: Upload ARM64 Test Output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arm64-jit-output-${{ github.sha }}
+          path: |
+            arm64-jit-output.txt
+            artifacts/presets/linux-arm64-smoke/Testing/Temporary/

@@ -1,0 +1,33 @@
+{
+  "date": "2026-06-14",
+  "assemblyName": "System.Collections.Immutable",
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": -6.46,
+      "median": -6.46,
+      "min": -6.46,
+      "max": -6.46,
+      "p25": -6.46,
+      "p75": -6.46
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 4,
+      "methodsWithNet8": 4,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -6.46,
+          "median": -10.44,
+          "min": -27.03,
+          "max": 22.06,
+          "p25": -20.39,
+          "p75": 3.49
+        }
+      }
+    }
+  ]
+}

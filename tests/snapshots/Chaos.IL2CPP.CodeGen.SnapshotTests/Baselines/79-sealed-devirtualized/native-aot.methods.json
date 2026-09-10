@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "SnapshotTestFixtures",
+  "methodCount": 2,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "SnapshotTestFixtures_SealedClassVirtualHelper_RunSealedVirtual",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "SnapshotTestFixtures_SealedHelper_GetValueVirtual",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    }
+  ]
+}

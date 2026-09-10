@@ -3,15 +3,6 @@ get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
 add_library(chaos_jit STATIC
     code_buffer.cpp
     jit_engine.cpp
-    jit_codegen_arith.cpp
-    jit_codegen_branch.cpp
-    jit_codegen_deopt.cpp
-    jit_codegen_gc.cpp
-    jit_codegen_memory.cpp
-    jit_codegen_simd.cpp
-    jit_codegen_generate.cpp
-    jit_codegen_entry.cpp
-    jit_codegen_emit.cpp
     jit_helpers.cpp
     jit_inline.cpp
     jit_deopt.cpp
@@ -28,8 +19,6 @@ add_library(chaos_jit STATIC
     tree/jit_tree_mutator.cpp
     tree/jit_linearizer.cpp
     tree/jit_optimizer.cpp
-	    tree/jit_optimizer_loops.cpp
-	    tree/jit_optimizer_internal.h
     )
 
 target_compile_features(chaos_jit PUBLIC cxx_std_17)

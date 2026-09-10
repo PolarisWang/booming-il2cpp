@@ -1,0 +1,17 @@
+{
+  "date": "2026-06-04",
+  "assemblyName": "System.Net.Sockets",
+  "aggregate": {
+    "highValueMethods_betterThanNet8": 0
+  },
+  "perChunk": [
+    {
+      "slug": "system-net-sockets",
+      "methodCount": 246,
+      "methodsWithNet8": 0,
+      "aggregate": {
+        "methodsBetterThanNet8": 0
+      }
+    }
+  ]
+}

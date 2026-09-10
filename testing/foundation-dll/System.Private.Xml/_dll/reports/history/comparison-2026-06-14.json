@@ -1,0 +1,65 @@
+{
+  "date": "2026-06-14",
+  "assemblyName": "System.Private.Xml",
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": -10.24,
+      "median": 6.27,
+      "min": -58.53,
+      "max": 21.54,
+      "p25": -26.13,
+      "p75": 13.9
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "system-xml-schema",
+      "methodCount": 3,
+      "methodsWithNet8": 3,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -58.53,
+          "median": -71.43,
+          "min": -112.5,
+          "max": 8.33,
+          "p25": -91.97,
+          "p75": -31.55
+        }
+      }
+    },
+    {
+      "slug": "system-xml-serialization",
+      "methodCount": 9,
+      "methodsWithNet8": 9,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": 6.27,
+          "median": 9.52,
+          "min": -26.09,
+          "max": 28.57,
+          "p25": -6.25,
+          "p75": 23.08
+        }
+      }
+    },
+    {
+      "slug": "xml",
+      "methodCount": 28,
+      "methodsWithNet8": 28,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": 21.54,
+          "median": 29.16,
+          "min": -33.33,
+          "max": 42.86,
+          "p25": 14.29,
+          "p75": 38.46
+        }
+      }
+    }
+  ]
+}

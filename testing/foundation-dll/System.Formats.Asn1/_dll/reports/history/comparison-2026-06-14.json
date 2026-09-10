@@ -1,0 +1,33 @@
+{
+  "date": "2026-06-14",
+  "assemblyName": "System.Formats.Asn1",
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": -81.43,
+      "median": -81.43,
+      "min": -81.43,
+      "max": -81.43,
+      "p25": -81.43,
+      "p75": -81.43
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "system-formats-asn1",
+      "methodCount": 5,
+      "methodsWithNet8": 5,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -81.43,
+          "median": -75.0,
+          "min": -100.0,
+          "max": -57.14,
+          "p25": -100.0,
+          "p75": -75.0
+        }
+      }
+    }
+  ]
+}

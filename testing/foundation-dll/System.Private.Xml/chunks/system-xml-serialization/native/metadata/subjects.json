@@ -1,0 +1,2147 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-26T05:44:53.9294042Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakePascal:System.String(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifier",
+      "methodName": "MakePascal",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakePascal:System.String(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifier",
+      "methodName": "MakePascal",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakeCamel:System.String(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifier",
+      "methodName": "MakeCamel",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakeCamel:System.String(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifier",
+      "methodName": "MakeCamel",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakeValid:System.String(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifier",
+      "methodName": "MakeValid",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakeValid:System.String(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifier",
+      "methodName": "MakeValid",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::Clear:System.Void()",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "Clear",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::MakeRightCase:System.String(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "MakeRightCase",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::MakeRightCase:System.String(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "MakeRightCase",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::MakeUnique:System.String(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "MakeUnique",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::MakeUnique:System.String(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "MakeUnique",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::AddReserved:System.Void(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "AddReserved",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::AddReserved:System.Void(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "AddReserved",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::RemoveReserved:System.Void(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "RemoveReserved",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::RemoveReserved:System.Void(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "RemoveReserved",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::AddUnique:System.String(System.String,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "AddUnique",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::AddUnique:System.String(System.String,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "AddUnique",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::IsInUse:System.Boolean(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "IsInUse",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::IsInUse:System.Boolean(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "IsInUse",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::Add:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::Add:System.Void(System.String,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::Remove:System.Void(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::Remove:System.Void(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::ToArray:System.Object(System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.CodeIdentifiers",
+      "methodName": "ToArray",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapAttributeOverrides::Add:System.Void(System.Type,System.Xml.Serialization.SoapAttributes)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapAttributeOverrides",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapAttributeOverrides::Add:System.Void(System.Type,System.String,System.Xml.Serialization.SoapAttributes)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapAttributeOverrides",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapAttributeOverrides::Add:System.Void(System.Type,System.String,System.Xml.Serialization.SoapAttributes)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapAttributeOverrides",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::IncludeTypes:System.Void(System.Reflection.ICustomAttributeProvider)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "IncludeTypes",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::IncludeType:System.Void(System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "IncludeType",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 46,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 47,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 48,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 49,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 50,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 51,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.SoapReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 52,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::Add:System.Int32(System.Xml.Serialization.XmlAnyElementAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAnyElementAttributes",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 53,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlAnyElementAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAnyElementAttributes",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 54,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlAnyElementAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAnyElementAttributes",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 55,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::IndexOf:System.Int32(System.Xml.Serialization.XmlAnyElementAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAnyElementAttributes",
+      "methodName": "IndexOf",
+      "isStatic": true
+    },
+    {
+      "index": 56,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::Contains:System.Boolean(System.Xml.Serialization.XmlAnyElementAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAnyElementAttributes",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 57,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::Remove:System.Void(System.Xml.Serialization.XmlAnyElementAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAnyElementAttributes",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 58,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::Add:System.Int32(System.Xml.Serialization.XmlArrayItemAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlArrayItemAttributes",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 59,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlArrayItemAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlArrayItemAttributes",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 60,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlArrayItemAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlArrayItemAttributes",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 61,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::IndexOf:System.Int32(System.Xml.Serialization.XmlArrayItemAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlArrayItemAttributes",
+      "methodName": "IndexOf",
+      "isStatic": true
+    },
+    {
+      "index": 62,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::Contains:System.Boolean(System.Xml.Serialization.XmlArrayItemAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlArrayItemAttributes",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 63,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::Remove:System.Void(System.Xml.Serialization.XmlArrayItemAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlArrayItemAttributes",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 64,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeOverrides::Add:System.Void(System.Type,System.Xml.Serialization.XmlAttributes)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAttributeOverrides",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 65,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeOverrides::Add:System.Void(System.Type,System.String,System.Xml.Serialization.XmlAttributes)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAttributeOverrides",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 66,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeOverrides::Add:System.Void(System.Type,System.String,System.Xml.Serialization.XmlAttributes)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAttributeOverrides",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 67,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::Add:System.Int32(System.Xml.Serialization.XmlElementAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementAttributes",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 68,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlElementAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementAttributes",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 69,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlElementAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementAttributes",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 70,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::IndexOf:System.Int32(System.Xml.Serialization.XmlElementAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementAttributes",
+      "methodName": "IndexOf",
+      "isStatic": true
+    },
+    {
+      "index": 71,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::Contains:System.Boolean(System.Xml.Serialization.XmlElementAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementAttributes",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 72,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::Remove:System.Void(System.Xml.Serialization.XmlElementAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementAttributes",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 73,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlMapping::SetKey:System.Void(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlMapping",
+      "methodName": "SetKey",
+      "isStatic": true
+    },
+    {
+      "index": 74,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlMapping::SetKey:System.Void(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlMapping",
+      "methodName": "SetKey",
+      "isStatic": true
+    },
+    {
+      "index": 75,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::IncludeTypes:System.Void(System.Reflection.ICustomAttributeProvider)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "IncludeTypes",
+      "isStatic": true
+    },
+    {
+      "index": 76,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::IncludeType:System.Void(System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "IncludeType",
+      "isStatic": true
+    },
+    {
+      "index": 77,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 78,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 79,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 80,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.Xml.Serialization.XmlRootAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 81,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.Xml.Serialization.XmlRootAttribute,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 82,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.Xml.Serialization.XmlRootAttribute,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 83,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 84,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 85,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 86,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 87,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 88,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 89,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 90,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 91,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 92,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 93,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 94,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 95,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 96,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 97,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 98,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 99,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 100,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 101,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 102,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlReflectionImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 103,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportTypeMapping:System.Void(System.Xml.Serialization.XmlTypeMapping)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaExporter",
+      "methodName": "ExportTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 104,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportTypeMapping:System.Xml.XmlQualifiedName(System.Xml.Serialization.XmlMembersMapping)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaExporter",
+      "methodName": "ExportTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 105,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportMembersMapping:System.Void(System.Xml.Serialization.XmlMembersMapping)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaExporter",
+      "methodName": "ExportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 106,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportMembersMapping:System.Void(System.Xml.Serialization.XmlMembersMapping,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaExporter",
+      "methodName": "ExportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 107,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportMembersMapping:System.Void(System.Xml.Serialization.XmlMembersMapping,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaExporter",
+      "methodName": "ExportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 108,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportAnyType:System.String(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaExporter",
+      "methodName": "ExportAnyType",
+      "isStatic": true
+    },
+    {
+      "index": 109,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportAnyType:System.String(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaExporter",
+      "methodName": "ExportAnyType",
+      "isStatic": true
+    },
+    {
+      "index": 110,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportAnyType:System.String(System.Xml.Serialization.XmlMembersMapping)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaExporter",
+      "methodName": "ExportAnyType",
+      "isStatic": true
+    },
+    {
+      "index": 111,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportDerivedTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportDerivedTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 112,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportDerivedTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportDerivedTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 113,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportDerivedTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportDerivedTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 114,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportSchemaType:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportSchemaType",
+      "isStatic": true
+    },
+    {
+      "index": 115,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportSchemaType:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportSchemaType",
+      "isStatic": true
+    },
+    {
+      "index": 116,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportSchemaType:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportSchemaType",
+      "isStatic": true
+    },
+    {
+      "index": 117,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportSchemaType:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportSchemaType",
+      "isStatic": true
+    },
+    {
+      "index": 118,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportTypeMapping",
+      "isStatic": true
+    },
+    {
+      "index": 119,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 120,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportAnyType:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportAnyType",
+      "isStatic": true
+    },
+    {
+      "index": 121,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportAnyType:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportAnyType",
+      "isStatic": true
+    },
+    {
+      "index": 122,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 123,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 124,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 125,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[],System.Type,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 126,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[],System.Type,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 127,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[],System.Type,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 128,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[],System.Type,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 129,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 130,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 131,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 132,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 133,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaImporter",
+      "methodName": "ImportMembersMapping",
+      "isStatic": true
+    },
+    {
+      "index": 134,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::GetSchemas:System.Collections.IList(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "GetSchemas",
+      "isStatic": true
+    },
+    {
+      "index": 135,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::GetSchemas:System.Collections.IList(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "GetSchemas",
+      "isStatic": true
+    },
+    {
+      "index": 136,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Add:System.Int32(System.Xml.Schema.XmlSchema)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 137,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Add:System.Int32(System.Xml.Schema.XmlSchema,System.Uri)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 138,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Add:System.Void(System.Xml.Serialization.XmlSchemas)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 139,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::AddReference:System.Void(System.Xml.Schema.XmlSchema)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "AddReference",
+      "isStatic": true
+    },
+    {
+      "index": 140,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Insert:System.Void(System.Int32,System.Xml.Schema.XmlSchema)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 141,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Insert:System.Void(System.Int32,System.Xml.Schema.XmlSchema)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 142,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::IndexOf:System.Int32(System.Xml.Schema.XmlSchema)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "IndexOf",
+      "isStatic": true
+    },
+    {
+      "index": 143,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Contains:System.Boolean(System.Xml.Schema.XmlSchema)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 144,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Contains:System.Boolean(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 145,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Contains:System.Boolean(System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 146,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Remove:System.Void(System.Xml.Schema.XmlSchema)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 147,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Find:System.Object(System.Xml.XmlQualifiedName,System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "Find",
+      "isStatic": true
+    },
+    {
+      "index": 148,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::IsDataSet:System.Boolean(System.Xml.Schema.XmlSchema)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "IsDataSet",
+      "isStatic": true
+    },
+    {
+      "index": 149,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Compile:System.Void(System.Xml.Schema.ValidationEventHandler,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "Compile",
+      "isStatic": true
+    },
+    {
+      "index": 150,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Compile:System.Void(System.Xml.Schema.ValidationEventHandler,System.Boolean)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "Compile",
+      "isStatic": true
+    },
+    {
+      "index": 151,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.TextWriter,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 152,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.TextWriter,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 153,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.TextWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 154,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.TextWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 155,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 156,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 157,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 158,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 159,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.Xml.XmlWriter,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 160,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.Xml.XmlWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 161,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.Xml.XmlWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 162,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.Xml.XmlWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces,System.String,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 163,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.IO.Stream)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 164,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.IO.Stream)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 165,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.IO.TextReader)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 166,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.IO.TextReader)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 167,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 168,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.Xml.Serialization.XmlDeserializationEvents)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 169,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 170,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 171,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.String,System.Xml.Serialization.XmlDeserializationEvents)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 172,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.String,System.Xml.Serialization.XmlDeserializationEvents)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 173,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::CanDeserialize:System.Boolean(System.Xml.XmlReader)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "CanDeserialize",
+      "isStatic": true
+    },
+    {
+      "index": 174,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "FromMappings",
+      "isStatic": true
+    },
+    {
+      "index": 175,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "FromMappings",
+      "isStatic": true
+    },
+    {
+      "index": 176,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "FromMappings",
+      "isStatic": true
+    },
+    {
+      "index": 177,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[],System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "FromMappings",
+      "isStatic": true
+    },
+    {
+      "index": 178,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[],System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "FromMappings",
+      "isStatic": true
+    },
+    {
+      "index": 179,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[],System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "FromMappings",
+      "isStatic": true
+    },
+    {
+      "index": 180,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromTypes:System.Xml.Serialization.XmlSerializer[](System.Type[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "FromTypes",
+      "isStatic": true
+    },
+    {
+      "index": 181,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromTypes:System.Xml.Serialization.XmlSerializer[](System.Type[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "FromTypes",
+      "isStatic": true
+    },
+    {
+      "index": 182,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromTypes:System.Xml.Serialization.XmlSerializer[](System.Type[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "FromTypes",
+      "isStatic": true
+    },
+    {
+      "index": 183,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::GetXmlSerializerAssemblyName:System.String(System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "GetXmlSerializerAssemblyName",
+      "isStatic": true
+    },
+    {
+      "index": 184,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::GetXmlSerializerAssemblyName:System.String(System.Type,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "GetXmlSerializerAssemblyName",
+      "isStatic": true
+    },
+    {
+      "index": 185,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::GetXmlSerializerAssemblyName:System.String(System.Type,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializer",
+      "methodName": "GetXmlSerializerAssemblyName",
+      "isStatic": true
+    },
+    {
+      "index": 186,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 187,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 188,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 189,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlRootAttribute)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 190,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Type[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 191,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Type[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 192,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Type[])",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 193,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 194,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Xml.Serialization.XmlTypeMapping)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 195,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 196,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 197,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 198,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 199,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 200,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerFactory",
+      "methodName": "CreateSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 201,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerImplementation::CanSerialize:System.Boolean(System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerImplementation",
+      "methodName": "CanSerialize",
+      "isStatic": true
+    },
+    {
+      "index": 202,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerImplementation::GetSerializer:System.Xml.Serialization.XmlSerializer(System.Type)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerImplementation",
+      "methodName": "GetSerializer",
+      "isStatic": true
+    },
+    {
+      "index": 203,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerNamespaces::Add:System.Void(System.String,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerNamespaces",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 204,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerNamespaces::Add:System.Void(System.String,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerNamespaces",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 205,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerNamespaces::Add:System.Void(System.String,System.String)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerNamespaces",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 206,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerNamespaces::ToArray:System.Xml.XmlQualifiedName[]()",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializerNamespaces",
+      "methodName": "ToArray",
+      "isStatic": true
+    },
+    {
+      "index": 207,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.UnreferencedObjectEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Serialization.UnreferencedObjectEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.UnreferencedObjectEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 208,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.UnreferencedObjectEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.UnreferencedObjectEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 209,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.UnreferencedObjectEventHandler::Invoke:System.Void(System.Object,System.Xml.Serialization.UnreferencedObjectEventArgs)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.UnreferencedObjectEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 210,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::CopyTo:System.Void(System.Xml.Serialization.XmlAnyElementAttribute[],System.Int32)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAnyElementAttributes",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 211,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::CopyTo:System.Void(System.Xml.Serialization.XmlArrayItemAttribute[],System.Int32)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlArrayItemAttributes",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 212,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Serialization.XmlAttributeEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAttributeEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 213,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAttributeEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 214,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeEventHandler::Invoke:System.Void(System.Object,System.Xml.Serialization.XmlAttributeEventArgs)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlAttributeEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 215,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::CopyTo:System.Void(System.Xml.Serialization.XmlElementAttribute[],System.Int32)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementAttributes",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 216,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Serialization.XmlElementEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 217,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 218,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementEventHandler::Invoke:System.Void(System.Object,System.Xml.Serialization.XmlElementEventArgs)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlElementEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 219,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlNodeEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Serialization.XmlNodeEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlNodeEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 220,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlNodeEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlNodeEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 221,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlNodeEventHandler::Invoke:System.Void(System.Object,System.Xml.Serialization.XmlNodeEventArgs)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlNodeEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 222,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaEnumerator::Dispose:System.Void()",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaEnumerator",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 223,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaEnumerator::MoveNext:System.Boolean()",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemaEnumerator",
+      "methodName": "MoveNext",
+      "isStatic": true
+    },
+    {
+      "index": 224,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::CopyTo:System.Void(System.Xml.Schema.XmlSchema[],System.Int32)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSchemas",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 225,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationCollectionFixupCallback::BeginInvoke:System.IAsyncResult(System.Object,System.Object,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationCollectionFixupCallback",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 226,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationCollectionFixupCallback::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationCollectionFixupCallback",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 227,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationCollectionFixupCallback::Invoke:System.Void(System.Object,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationCollectionFixupCallback",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 228,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationFixupCallback::BeginInvoke:System.IAsyncResult(System.Object,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationFixupCallback",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 229,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationFixupCallback::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationFixupCallback",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 230,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationFixupCallback::Invoke:System.Void(System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationFixupCallback",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 231,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationReadCallback::BeginInvoke:System.IAsyncResult(System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationReadCallback",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 232,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationReadCallback::EndInvoke:System.Object(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationReadCallback",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 233,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationReadCallback::Invoke:System.Object()",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationReadCallback",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 234,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationWriteCallback::BeginInvoke:System.IAsyncResult(System.Object,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationWriteCallback",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 235,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationWriteCallback::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationWriteCallback",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 236,
+      "kind": "fact",
+      "subjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializationWriteCallback::Invoke:System.Void(System.Object)",
+      "assemblyName": "System.Private.Xml",
+      "typeName": "System.Xml.Serialization.XmlSerializationWriteCallback",
+      "methodName": "Invoke",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 237,
+    "factCount": 237,
+    "benchmarkCount": 0,
+    "hotUpdateCount": 0
+  }
+}

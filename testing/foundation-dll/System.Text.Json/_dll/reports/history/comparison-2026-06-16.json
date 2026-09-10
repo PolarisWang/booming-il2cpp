@@ -1,0 +1,129 @@
+{
+  "date": "2026-06-16",
+  "assemblyName": "System.Text.Json",
+  "aggregate": {
+    "chaosAotVsNet8Pct": {
+      "mean": -318.02,
+      "median": -318.02,
+      "min": -490.46,
+      "max": -145.59,
+      "p25": -404.24,
+      "p75": -231.81
+    },
+    "chaosJitVsNet8Pct": {
+      "mean": -152.63,
+      "median": -152.63,
+      "min": -174.82,
+      "max": -130.45,
+      "p25": -163.73,
+      "p75": -141.54
+    },
+    "net10VsNet8Pct": {
+      "mean": 17.92,
+      "median": 17.92,
+      "min": 1.33,
+      "max": 34.51,
+      "p25": 9.62,
+      "p75": 26.21
+    },
+    "highValueMethods_betterThanNet8": 5.8
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 35,
+      "methodsWithNet8": 35,
+      "aggregate": {
+        "methodsBetterThanNet8": 1,
+        "chaosAotVsNet8Pct": {
+          "mean": -145.59,
+          "median": -158.13,
+          "min": -278.24,
+          "max": 36.67,
+          "p25": -174.33,
+          "p75": -142.47
+        },
+        "highValueMethods_betterThanNet8": 2.9,
+        "chaosJitVsNet8Pct": {
+          "mean": -130.45,
+          "median": -148.82,
+          "min": -207.14,
+          "max": 93.33,
+          "p25": -166.77,
+          "p75": -119.44
+        },
+        "net10VsNet8Pct": {
+          "mean": 34.51,
+          "median": 37.5,
+          "min": 10.81,
+          "max": 44.44,
+          "p25": 32.29,
+          "p75": 38.2
+        },
+        "gcAllocComparison": {
+          "aotVsNet8Ratio": {
+            "mean": -100.0,
+            "median": -100.0,
+            "min": -100.0,
+            "max": -100.0,
+            "p25": -100.0,
+            "p75": -100.0
+          },
+          "methodsWithAllocData": 29
+        }
+      }
+    },
+    {
+      "slug": "system-text-json-serialization-converters",
+      "methodCount": 84,
+      "methodsWithNet8": 0,
+      "aggregate": {
+        "methodsBetterThanNet8": 0
+      }
+    },
+    {
+      "slug": "text-json",
+      "methodCount": 329,
+      "methodsWithNet8": 329,
+      "aggregate": {
+        "methodsBetterThanNet8": 20,
+        "chaosAotVsNet8Pct": {
+          "mean": -490.46,
+          "median": -321.79,
+          "min": -41614.88,
+          "max": 96.03,
+          "p25": -516.39,
+          "p75": -221.81
+        },
+        "highValueMethods_betterThanNet8": 7.2,
+        "chaosJitVsNet8Pct": {
+          "mean": -174.82,
+          "median": -85.55,
+          "min": -18434.31,
+          "max": 97.94,
+          "p25": -191.78,
+          "p75": -48.0
+        },
+        "net10VsNet8Pct": {
+          "mean": 1.33,
+          "median": 0.0,
+          "min": -122.22,
+          "max": 65.52,
+          "p25": -11.11,
+          "p75": 37.5
+        },
+        "gcAllocComparison": {
+          "aotVsNet8Ratio": {
+            "mean": -100.0,
+            "median": -100.0,
+            "min": -100.0,
+            "max": -100.0,
+            "p25": -100.0,
+            "p75": -100.0
+          },
+          "methodsWithAllocData": 176
+        }
+      }
+    }
+  ]
+}

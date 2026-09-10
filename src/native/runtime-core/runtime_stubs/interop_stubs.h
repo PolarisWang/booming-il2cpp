@@ -86,30 +86,6 @@ CHAOS_IL2CPP_INTPTR ChaosComWrappersGetOrCreateObjectForComInstance(CHAOS_IL2CPP
 CHAOS_IL2CPP_INT32 ChaosComWrappersTryGetComInstance(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR wrapperObj) noexcept;
 CHAOS_IL2CPP_INT32 ChaosComWrappersTryGetObject(CHAOS_IL2CPP_INTPTR comPtr, CHAOS_IL2CPP_INTPTR wrapperObj) noexcept;
 
-// ── COM marshaller placeholder (ComInterfaceMarshaller / UniqueComInterfaceMarshaller) ──
-// Returns a non-null IUnknown-compatible dummy object pointer so that AOT
-// ConvertToUnmanaged matches the C# semantics (non-null COM interface pointer).
-// The returned object's vtable methods all return E_NOTIMPL.  This is NOT a
-// real COM runtime — it only satisfies the non-null contract for the subject
-// oracle (result != null ? 0L : 1L).
-CHAOS_IL2CPP_INTPTR ChaosComInterfaceMarshallerConvertToUnmanaged(void) noexcept;
-
-// ── RuntimeEnvironment stubs ──────────────────────────────────
-// DirectNativeSymbol stubs for System.Runtime.InteropServices.RuntimeEnvironment.
-// Returns the actual runtime directory / version where determinable, and safe
-// defaults otherwise.  These keep the RuntimeEnvironment fact wrappers in the
-// AOT subject dispatch table (they would otherwise be dropped as unmatched
-// external-call callees).
-CHAOS_IL2CPP_INTPTR ChaosRuntimeEnvironmentGetRuntimeDirectory(void) noexcept;
-CHAOS_IL2CPP_INT32   ChaosRuntimeEnvironmentFromGlobalAccessCache(CHAOS_IL2CPP_INTPTR assemblyObj) noexcept;
-CHAOS_IL2CPP_INTPTR  ChaosRuntimeEnvironmentGetRuntimeInterfaceAsIntPtr(CHAOS_IL2CPP_INTPTR q1, CHAOS_IL2CPP_INTPTR q2) noexcept;
-CHAOS_IL2CPP_INTPTR  ChaosRuntimeEnvironmentGetSystemVersion(void) noexcept;
-void                 ChaosRuntimeEnvironmentGetRuntimeInterfaceAsObject(CHAOS_IL2CPP_INTPTR q1, CHAOS_IL2CPP_INTPTR q2, CHAOS_IL2CPP_INTPTR retSlot) noexcept;
-
-// ── AsnWriter.Scope stubs ────────────────────────────────────
-// DirectNativeSymbol stubs for System.Formats.Asn1.AsnWriter+Scope.
-CHAOS_IL2CPP_INT32   ChaosAsnWriterScopeDispose(void) noexcept;
-
 // ── NativeLibrary stubs ─────────────────────────────────────
 // DirectNativeSymbol stubs for NativeLibrary.Load/Free/GetExport.
 CHAOS_IL2CPP_INTPTR ChaosNativeLibraryLoad(CHAOS_IL2CPP_INTPTR nameObj) noexcept;

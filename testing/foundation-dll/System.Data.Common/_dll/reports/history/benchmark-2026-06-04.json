@@ -1,0 +1,118 @@
+{
+  "date": "2026-06-04",
+  "assemblyName": "System.Data.Common",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 20,
+        "total": 20,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 21,
+        "metaBenchmarkCount": 21
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 20,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    },
+    {
+      "slug": "system-data",
+      "fact": {
+        "passed": 591,
+        "total": 591,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 648,
+        "metaBenchmarkCount": 648
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 591,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    },
+    {
+      "slug": "system-data-common",
+      "fact": {
+        "passed": 331,
+        "total": 331,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 436,
+        "metaBenchmarkCount": 436
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 331,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    },
+    {
+      "slug": "system-data-sqltypes",
+      "fact": {
+        "passed": 247,
+        "total": 247,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 353,
+        "metaBenchmarkCount": 353
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 247,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    }
+  ]
+}

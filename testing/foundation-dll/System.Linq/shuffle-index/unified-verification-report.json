@@ -1,0 +1,87 @@
+{
+  "family": "shuffle-index",
+  "assembly": "System.Linq",
+  "mode": "strict",
+  "timestamp": "2026-05-29T09:50:07",
+  "duration_ms": 12436,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "24 methods, 24 custom entries",
+      "details": {
+        "methodCount": 24,
+        "customMethodCount": 24,
+        "hasCustomEntryFile": true,
+        "customMethods": [
+          "System.Linq/System.Linq.Enumerable::ElementAt{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Int32)",
+          "System.Linq/System.Linq.Enumerable::ElementAt{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Index)",
+          "System.Linq/System.Linq.Enumerable::ElementAtOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Int32)",
+          "System.Linq/System.Linq.Enumerable::ElementAtOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Index)",
+          "System.Linq/System.Linq.Enumerable::First{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::First{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+          "System.Linq/System.Linq.Enumerable::FirstOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::FirstOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},TSource)",
+          "System.Linq/System.Linq.Enumerable::FirstOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+          "System.Linq/System.Linq.Enumerable::FirstOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean},TSource)",
+          "System.Linq/System.Linq.Enumerable::Index{TSource}:System.Collections.Generic.IEnumerable{System.ValueTuple{System.Int32,TSource}}(System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::Last{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::Last{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+          "System.Linq/System.Linq.Enumerable::LastOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::LastOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},TSource)",
+          "System.Linq/System.Linq.Enumerable::LastOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+          "System.Linq/System.Linq.Enumerable::LastOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean},TSource)",
+          "System.Linq/System.Linq.Enumerable::Shuffle{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::Single{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::Single{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+          "System.Linq/System.Linq.Enumerable::SingleOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::SingleOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},TSource)",
+          "System.Linq/System.Linq.Enumerable::SingleOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+          "System.Linq/System.Linq.Enumerable::SingleOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean},TSource)"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "entry.exe build failed",
+      "details": {
+        "steps": {
+          "build_subjects": "OK",
+          "convert_to_cpp": "OK",
+          "build_entry_exe": "FAILED"
+        }
+      },
+      "errors": [],
+      "duration_ms": 12436
+    }
+  },
+  "coverage": {
+    "methodCoverage": 0.0,
+    "testedRate": 0.0,
+    "overall": 0.0
+  },
+  "dashboard": {
+    "interpreter": {},
+    "irTranslation": {},
+    "performance": {},
+    "hotupdate": {},
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 0,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "skipped",
+      "message": "No benchmark report found"
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

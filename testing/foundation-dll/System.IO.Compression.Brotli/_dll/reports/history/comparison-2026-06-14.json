@@ -1,0 +1,33 @@
+{
+  "date": "2026-06-14",
+  "assemblyName": "System.IO.Compression.Brotli",
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": -4.69,
+      "median": -4.69,
+      "min": -4.69,
+      "max": -4.69,
+      "p25": -4.69,
+      "p75": -4.69
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 4,
+      "methodsWithNet8": 4,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -4.69,
+          "median": -3.12,
+          "min": -12.5,
+          "max": 0.0,
+          "p25": -7.81,
+          "p75": 0.0
+        }
+      }
+    }
+  ]
+}

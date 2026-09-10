@@ -1,0 +1,106 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Diagnostics.DiagnosticSource",
+  "chunkSlug": "diagnostics",
+  "entries": [
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::EnumerateEvents:System.Diagnostics.Activity+Enumerator<System.Diagnostics.ActivityEvent>()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::EnumerateLinks:System.Diagnostics.Activity+Enumerator<System.Diagnostics.ActivityLink>()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::EnumerateTagObjects:System.Diagnostics.Activity+Enumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Start:System.Diagnostics.Activity()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityEvent::EnumerateTagObjects:System.Diagnostics.Activity+Enumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityLink::EnumerateTagObjects:System.Diagnostics.Activity+Enumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CopyTo:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateFromBytes:System.Diagnostics.ActivitySpanId(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateFromString:System.Diagnostics.ActivitySpanId(System.ReadOnlySpan<System.Char>)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateFromUtf8String:System.Diagnostics.ActivitySpanId(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection+Enumerator::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::GetEnumerator:System.Diagnostics.ActivityTagsCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CopyTo:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateFromBytes:System.Diagnostics.ActivityTraceId(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateFromString:System.Diagnostics.ActivityTraceId(System.ReadOnlySpan<System.Char>)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateFromUtf8String:System.Diagnostics.ActivityTraceId(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback::BeginInvoke:System.IAsyncResult(System.Object,System.String,System.String,System.Collections.Generic.IEnumerable<System.String>,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback::EndInvoke:System.Void(System.String,System.Collections.Generic.IEnumerable<System.String>,System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback::Invoke:System.Void(System.Object,System.String,System.String,System.Collections.Generic.IEnumerable<System.String>)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback::BeginInvoke:System.IAsyncResult(System.Object,System.String,System.String,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback::Invoke:System.Void(System.Object,System.String,System.String)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ExceptionRecorder::BeginInvoke:System.IAsyncResult(System.Diagnostics.Activity,System.Exception,System.Diagnostics.TagList,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ExceptionRecorder::EndInvoke:System.Void(System.Diagnostics.TagList,System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ExceptionRecorder::Invoke:System.Void(System.Diagnostics.Activity,System.Exception,System.Diagnostics.TagList)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList+Enumerator::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList+Enumerator::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Span<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)"
+    }
+  ]
+}

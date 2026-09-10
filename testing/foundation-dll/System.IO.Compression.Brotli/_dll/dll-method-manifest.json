@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Compression.Brotli",
+  "generatedAt": "2026-06-02T02:15:38.5177855Z",
+  "totalMethods": 28,
+  "methods": [
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&,System.Int32&)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliDecoder",
+      "methodName": "Decompress",
+      "returnType": "System.Buffers.OperationStatus",
+      "parameters": [
+        "System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Int32&",
+        "System.Int32&"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliDecoder",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliDecoder",
+      "methodName": "TryDecompress",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Int32&"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Compress:System.Buffers.OperationStatus(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&,System.Int32&,System.Boolean)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliEncoder",
+      "methodName": "Compress",
+      "returnType": "System.Buffers.OperationStatus",
+      "parameters": [
+        "System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Int32&",
+        "System.Int32&",
+        "System.Boolean"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Dispose:System.Void()",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliEncoder",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Flush:System.Buffers.OperationStatus(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliEncoder",
+      "methodName": "Flush",
+      "returnType": "System.Buffers.OperationStatus",
+      "parameters": [
+        "System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Int32&"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::GetMaxCompressedLength:System.Int32(System.Int32)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliEncoder",
+      "methodName": "GetMaxCompressedLength",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliEncoder",
+      "methodName": "TryCompress",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Int32&"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&,System.Int32,System.Int32)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliEncoder",
+      "methodName": "TryCompress",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Int32&",
+        "System.Int32",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "BeginRead",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "BeginWrite",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::DisposeAsync:System.Threading.Tasks.ValueTask()",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "DisposeAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndRead:System.Int32(System.IAsyncResult)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "EndRead",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndWrite:System.Void(System.IAsyncResult)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "EndWrite",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Flush:System.Void()",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "Flush",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "FlushAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "Read",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "Read",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "ReadAsync",
+      "returnType": "System.Threading.Tasks.Task`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.ValueTask`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Threading.CancellationToken)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "ReadAsync",
+      "returnType": "System.Threading.Tasks.ValueTask`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+      "parameters": [
+        "System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadByte:System.Int32()",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "ReadByte",
+      "returnType": "System.Int32",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "Seek",
+      "returnType": "System.Int64",
+      "parameters": [
+        "System.Int64",
+        "System.IO.SeekOrigin"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::SetLength:System.Void(System.Int64)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "SetLength",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int64"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "Write",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "Write",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "WriteAsync",
+      "returnType": "System.Threading.Tasks.Task",
+      "parameters": [
+        "System.Byte[]",
+        "System.Int32",
+        "System.Int32",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Threading.CancellationToken)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "WriteAsync",
+      "returnType": "System.Threading.Tasks.ValueTask",
+      "parameters": [
+        "System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "System.Threading.CancellationToken"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteByte:System.Void(System.Byte)",
+      "namespace": "System.IO.Compression",
+      "declaringType": "System.IO.Compression.BrotliStream",
+      "methodName": "WriteByte",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Byte"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    }
+  ],
+  "namespaces": {
+    "System.IO.Compression": {
+      "methodCount": 28
+    }
+  }
+}

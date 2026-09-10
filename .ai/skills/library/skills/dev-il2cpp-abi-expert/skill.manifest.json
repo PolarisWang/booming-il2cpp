@@ -1,28 +1,16 @@
 {
-  "kind": "project",
-  "domain": "il2cpp",
   "name": "dev-il2cpp-abi-expert",
-  "summary": "跨平台 ABI 调用约定专家 — Windows x64/Linux x64/ARM64、CHAOS_IL2CPP_INTPTR 语义、struct 传递规则、extern stub ABI 正确性",
-  "trigger_signals": [
+  "description": "跨平台 ABI 调用约定专家 — Windows x64/Linux x64/ARM64、CHAOS_IL2CPP_INTPTR 语义、struct 传递规则、extern stub ABI 正确性",
+  "version": "1.0.0",
+  "owner": "00-skills-maintainers",
+  "budget": "small",
+  "status": "active",
+  "domain": "il2cpp",
+  "triggers": [
     "返回类型 ABI 冲突 (C2556, C2371)",
     "CarrierKindCode 映射表修改",
     "chaos_external_runtime_* stub 生成",
     "跨平台构建配置变更",
     "XMM0 vs RAX 相关运行 crash"
-  ],
-  "owner": "00-skills-maintainers",
-  "status": "active",
-  "version": "1.0.0",
-  "startup_visible": false,
-  "token_budget": "small",
-  "version_history": [
-    { "version": "1.0.0", "date": "2026-06-11", "type": "created" }
-  ],
-  "evolution_lineage": {
-    "parent": null,
-    "derived_from": null,
-    "derived_to": [],
-    "fixes": [],
-    "captured_from": null
-  }
+  ]
 }

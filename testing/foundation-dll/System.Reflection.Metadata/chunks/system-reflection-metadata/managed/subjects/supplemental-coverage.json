@@ -1,0 +1,232 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Reflection.Metadata",
+  "chunkSlug": "system-reflection-metadata",
+  "entries": [
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyDefinition::GetAssemblyNameInfo:System.Reflection.Metadata.AssemblyNameInfo()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyFileHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyFileHandleCollection::GetEnumerator:System.Reflection.Metadata.AssemblyFileHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyNameInfo::Parse:System.Reflection.Metadata.AssemblyNameInfo(System.ReadOnlySpan<System.Char>)"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyNameInfo::TryParse:System.Boolean(System.ReadOnlySpan<System.Char>,System.Reflection.Metadata.AssemblyNameInfo)"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReference::GetAssemblyNameInfo:System.Reflection.Metadata.AssemblyNameInfo()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReferenceHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReferenceHandleCollection::GetEnumerator:System.Reflection.Metadata.AssemblyReferenceHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder+Blobs::GetEnumerator:System.Reflection.Metadata.BlobBuilder+Blobs()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder+Blobs::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder+Blobs::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::GetBlobs:System.Reflection.Metadata.BlobBuilder+Blobs()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteInt16:System.Void(System.Int16)"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteInt16:System.Void(System.Int16)"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomAttributeHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomAttributeHandleCollection::GetEnumerator:System.Reflection.Metadata.CustomAttributeHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomDebugInformationHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomDebugInformationHandleCollection::GetEnumerator:System.Reflection.Metadata.CustomDebugInformationHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection::GetEnumerator:System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DocumentHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DocumentHandleCollection::GetEnumerator:System.Reflection.Metadata.DocumentHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinition::GetDeclaringType:System.Reflection.Metadata.TypeDefinitionHandle()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.EventDefinitionHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ExportedTypeHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ExportedTypeHandleCollection::GetEnumerator:System.Reflection.Metadata.ExportedTypeHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.FieldDefinitionHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterConstraintHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterConstraintHandleCollection::GetEnumerator:System.Reflection.Metadata.GenericParameterConstraintHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterHandleCollection::GetEnumerator:System.Reflection.Metadata.GenericParameterHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection+Enumerator::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection::GetEnumerator:System.Reflection.Metadata.ImportDefinitionCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportScopeCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportScopeCollection::GetEnumerator:System.Reflection.Metadata.ImportScopeCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.InterfaceImplementationHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.InterfaceImplementationHandleCollection::GetEnumerator:System.Reflection.Metadata.InterfaceImplementationHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalConstantHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalConstantHandleCollection::GetEnumerator:System.Reflection.Metadata.LocalConstantHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScope::GetChildren:System.Reflection.Metadata.LocalScopeHandleCollection+ChildrenEnumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection+ChildrenEnumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection::GetEnumerator:System.Reflection.Metadata.LocalScopeHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalVariableHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalVariableHandleCollection::GetEnumerator:System.Reflection.Metadata.LocalVariableHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ManifestResourceHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ManifestResourceHandleCollection::GetEnumerator:System.Reflection.Metadata.ManifestResourceHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReferenceHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReferenceHandleCollection::GetEnumerator:System.Reflection.Metadata.MemberReferenceHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodBodyBlock::Create:System.Reflection.Metadata.MethodBodyBlock(System.Reflection.Metadata.BlobReader)"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformationHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformationHandleCollection::GetEnumerator:System.Reflection.Metadata.MethodDebugInformationHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.MethodDefinitionHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodImplementationHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodImplementationHandleCollection::GetEnumerator:System.Reflection.Metadata.MethodImplementationHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ParameterHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ParameterHandleCollection::GetEnumerator:System.Reflection.Metadata.ParameterHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinition::GetDeclaringType:System.Reflection.Metadata.TypeDefinitionHandle()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.PropertyDefinitionHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection+Enumerator::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection::GetEnumerator:System.Reflection.Metadata.SequencePointCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.TypeDefinitionHandleCollection+Enumerator()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::Parse:System.Reflection.Metadata.TypeName(System.ReadOnlySpan<System.Char>,System.Reflection.Metadata.TypeNameParseOptions)"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::TryParse:System.Boolean(System.ReadOnlySpan<System.Char>,System.Reflection.Metadata.TypeName,System.Reflection.Metadata.TypeNameParseOptions)"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::Unescape:System.String(System.String)"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeReferenceHandleCollection+Enumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeReferenceHandleCollection::GetEnumerator:System.Reflection.Metadata.TypeReferenceHandleCollection+Enumerator()"
+    }
+  ]
+}

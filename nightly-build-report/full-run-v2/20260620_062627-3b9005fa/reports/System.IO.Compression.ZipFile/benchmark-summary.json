@@ -1,0 +1,81 @@
+{
+  "assemblyName": "System.IO.Compression.ZipFile",
+  "timestamp": "2026-06-20T06:26:26",
+  "totalChunks": 1,
+  "totalBenchmarkedMethods": 66,
+  "aggregatePerformance": {
+    "meanDurationMs": 0.039483333333333336,
+    "meanOpsPerSecond": 253438547.19727275,
+    "aggregateMeanCv": 0.18750548484848484,
+    "totalOutliers": 52
+  },
+  "chunkSummaries": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 198,
+        "total": 198,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 66,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 66,
+        "iterations": 10000,
+        "meanDurationMs": 0.039483333333333336,
+        "meanOpsPerSecond": 253438547.19727275,
+        "minDurationMs": 0.0366,
+        "maxDurationMs": 0.0421,
+        "totalDurationMs": 2.6059,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 8.2,
+        "totalOutliers": 52,
+        "meanCv": 0.18750548484848484,
+        "maxCv": 1.029898
+      },
+      "hotupdate": {
+        "passed": 66,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 50.0,
+        "namespaceGaps": {
+          "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile": {
+            "declared": 34,
+            "covered": 17,
+            "gap": 17,
+            "gapPct": 50.0
+          },
+          "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions": {
+            "declared": 12,
+            "covered": 6,
+            "gap": 6,
+            "gapPct": 50.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2840576,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

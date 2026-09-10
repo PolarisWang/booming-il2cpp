@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "SnapshotTestFixtures",
+  "methodCount": 1,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "SnapshotTestFixtures_EhFilterFinallyHelper_FilterFinally",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "date": "2026-06-14",
+  "assemblyName": "System.Net.Http",
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": 11.56,
+      "median": 11.56,
+      "min": 11.56,
+      "max": 11.56,
+      "p25": 11.56,
+      "p75": 11.56
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 44,
+      "methodsWithNet8": 44,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": 11.56,
+          "median": 5.55,
+          "min": -100.0,
+          "max": 60.61,
+          "p25": 0.0,
+          "p75": 36.36
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.ObjectModel",
+  "chunkSlug": "global-ns",
+  "totalMethods": 10,
+  "factMethodCount": 4,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "generatedMethodId": "Contains_0_int_0"
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "generatedMethodId": "Contains_0_int_1"
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "generatedMethodId": "TryGetValue_1_int_int_0"
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "generatedMethodId": "TryGetValue_1_int_int_1"
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "generatedMethodId": "TryGetValue_1_int_int_2"
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::Remove:System.Boolean(System.Int32)",
+      "generatedMethodId": "Remove_2_int_0"
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::Remove:System.Boolean(System.Int32)",
+      "generatedMethodId": "Remove_2_int_1"
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Int32\u003E::Move:System.Void(System.Int32,System.Int32)",
+      "generatedMethodId": "Move_0_int_int_0"
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Int32\u003E::Move:System.Void(System.Int32,System.Int32)",
+      "generatedMethodId": "Move_0_int_int_1"
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Int32\u003E::Move:System.Void(System.Int32,System.Int32)",
+      "generatedMethodId": "Move_0_int_int_2"
+    }
+  ]
+}

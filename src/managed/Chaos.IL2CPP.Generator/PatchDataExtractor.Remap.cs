@@ -55,37 +55,23 @@ public sealed partial class PatchDataExtractor
     /// </summary>
     private static int? ExtractSubjectIndex(string name)
     {
-        // The numeric subject index is always the FIRST run of ASCII digits after the
-        // recognized prefix, and may be followed by a separator + method detail (e.g.
-        // patch subjects are named "Subject_0_ToFrozenDictionary_0_...").  Scan digits
-        // and stop at the first non-digit — mirroring NativeAotLoweringPlanner.  This
-        // keeps pure "Subject_17" and suffixed "Subject_17_<method>" both working.
-        int N;
-        int start;
         if (name.StartsWith("Subject_", StringComparison.Ordinal))
         {
-            start = 8;
+            if (int.TryParse(name.AsSpan(8), out var idx))
+                return idx;
         }
         else if (name.StartsWith("CustomEntrySubject_", StringComparison.Ordinal))
         {
-            start = 19;
+            if (int.TryParse(name.AsSpan(19), out var idx))
+                return idx;
         }
         else if (name.StartsWith("CustomEntryMethod", StringComparison.Ordinal))
         {
-            start = 16;
+            var span = name.AsSpan(16);
+            if (span.Length > 0 && int.TryParse(span, out var idx))
+                return idx;
         }
-        else
-        {
-            return null;
-        }
-
-        N = name.Length;
-        int pos = start;
-        if (pos >= N || !char.IsAsciiDigit(name[pos]))
-            return null;
-        while (pos < N && char.IsAsciiDigit(name[pos]))
-            pos++;
-        return int.Parse(name.AsSpan(start, pos - start), System.Globalization.CultureInfo.InvariantCulture);
+        return null;
     }
 
 
@@ -156,15 +142,7 @@ public sealed partial class PatchDataExtractor
             var md = mr.GetMethodDefinition(mh);
             var name = mr.GetString(md.Name);
 
-            // P2-B (false+-fix): include ALL subject entry patterns, not just Subject_N.
-            // ExtractSubjectIndex recognizes 3 patterns (Subject_N, CustomEntrySubject_N,
-            // CustomEntryMethodN). Before this fix only Subject_N got a sentinel rewritten
-            // body — CustomEntry subjects were silently skipped, making their hotupdate
-            // "patch" invisible to the sentinel oracle (semantic_changed_count=0 even when
-            // the patch was applied, because the replacement body returned the same value
-            // as the original).  CustomEntry methods are now included in the set of methods
-            // that get their body rewritten to the sentinel 0xBEEF0000|idx.
-            if (ExtractSubjectIndex(name) == null)
+            if (!name.StartsWith("Subject_", StringComparison.Ordinal))
                 continue;
 
             int sentinel = (int)(0xBEEF0000U | (uint)(subjectIndex & 0xFFFF));
@@ -224,7 +202,7 @@ public sealed partial class PatchDataExtractor
     /// Methods without a matching AotCoreIr entry get an empty entry (null terminator only).
     /// </summary>
     private static (byte[] Section, uint Count) BuildAotCoreIrSection(
-        string? aotCoreIrPath,
+        string aotCoreIrPath,
         List<PatchMethodDefEntry> methodDefs,
         MetadataReader mr,
         CodegenMode mode = CodegenMode.Aot)
@@ -233,34 +211,31 @@ public sealed partial class PatchDataExtractor
         // The genuine aot-core-ir.json uses TypeName=NativeEntry but the
         // patch DLL uses TypeName=PatchEntry, so we match by method name alone.
         // Within a family, method names (Method0..MethodN) are unique.
+        var jsonText = File.ReadAllText(aotCoreIrPath);
+        using var doc = JsonDocument.Parse(jsonText);
+        var root = doc.RootElement;
+
+        if (!root.TryGetProperty("methods", out var methodsArray))
+            return ([], 0);
+
         var aotIrLookup = new Dictionary<string, string>(StringComparer.Ordinal);
-        if (aotCoreIrPath != null && File.Exists(aotCoreIrPath))
+        foreach (var methodElem in methodsArray.EnumerateArray())
         {
-            var jsonText = File.ReadAllText(aotCoreIrPath);
-            using var doc = JsonDocument.Parse(jsonText);
-            var root = doc.RootElement;
+            var subjectId = methodElem.TryGetProperty("subjectId", out var sid)
+                ? sid.GetString() ?? ""
+                : "";
 
-            if (root.TryGetProperty("methods", out var methodsArray))
+            // subjectId format: "Assembly/TypeName::MethodName:ReturnType(Params)"
+            // Extract method name after "::" and before ':ReturnType'.
+            var doubleColon = subjectId.IndexOf("::", StringComparison.Ordinal);
+            if (doubleColon < 0) continue;
+            var afterDoubleColon = subjectId[(doubleColon + 2)..];
+            var returnTypeColon = afterDoubleColon.IndexOf(':');
+            var methodName = returnTypeColon >= 0 ? afterDoubleColon[..returnTypeColon] : afterDoubleColon;
+
+            if (!string.IsNullOrEmpty(methodName))
             {
-                foreach (var methodElem in methodsArray.EnumerateArray())
-                {
-                    var subjectId = methodElem.TryGetProperty("subjectId", out var sid)
-                        ? sid.GetString() ?? ""
-                        : "";
-
-                    // subjectId format: "Assembly/TypeName::MethodName:ReturnType(Params)"
-                    // Extract method name after "::" and before ':ReturnType'.
-                    var doubleColon = subjectId.IndexOf("::", StringComparison.Ordinal);
-                    if (doubleColon < 0) continue;
-                    var afterDoubleColon = subjectId[(doubleColon + 2)..];
-                    var returnTypeColon = afterDoubleColon.IndexOf(':');
-                    var methodName = returnTypeColon >= 0 ? afterDoubleColon[..returnTypeColon] : afterDoubleColon;
-
-                    if (!string.IsNullOrEmpty(methodName))
-                    {
-                        aotIrLookup.TryAdd(methodName, methodElem.GetRawText());
-                    }
-                }
+                aotIrLookup.TryAdd(methodName, methodElem.GetRawText());
             }
         }
 
@@ -286,20 +261,7 @@ public sealed partial class PatchDataExtractor
         // GetAotCoreIr(i) = section_start + sizeof(uint32_t)*count + index[i]  (O(1))
 
         // First pass: collect all JSON byte arrays.
-        //
-        // IMPORTANT (subject sentinel alignment): RewriteSubjectBodies() assigns each
-        // subject-type method (Subject_N / CustomEntrySubject_N / CustomEntryMethod)
-        // a sequential sentinel 0xBEEF0000 | k, walking methodDefs in [declaration] order
-        // and counting ONLY subject entries starting from k=0.  The AotCoreIr operand
-        // must reproduce EXACTLY that same k for the same method — i.e. we must walk the
-        // same methodDefs order with an independent counter that increments only across
-        // subject entries.  Using a per-call [static] index or the N inside "Subject_N"
-        // would silently misalign when the patch DLL does not number subjects 0..N-1 or
-        // the count differs from RewriteSubjectBodies, causing the interpreter to return
-        // a sentinel that the baseline oracle never observes → semantic_changed_count=0.
-        // So: one local counter, incremented per synthetic-subject method.
         var jsonList = new List<byte[]>();
-        int syntheticSubjectK = 0;
         foreach (var methodDef in methodDefs)
         {
             var key = BuildMethodKey(mr, methodDef);
@@ -311,23 +273,19 @@ public sealed partial class PatchDataExtractor
                 {
                     // Subject_N / CustomEntrySubject_N / CustomEntryMethod methods are
                     // test entry points whose patch implementation returns a sentinel
-                    // value 0xBEEF0000 | k.  In production mode the original AOT Core IR
+                    // value (0xB0000000+N).  In production mode the original AOT Core IR
                     // contains complex dispatch logic that hangs when the interpreter
                     // executes it with zero args during hotupdate verification.  Instead
-                    // of the original IR, emit a minimal ldc.i4 0xBEEF0000|k + ret so the
-                    // method returns the SAME sentinel RewriteSubjectBodies wrote into its
-                    // (unused) body IL.
+                    // of the original IR, emit a minimal ldc.i4 0x5EED + ret sequence
+                    // so the method returns a distinctive sentinel value.  This guarantees
+                    // semantic change detection: the baseline thunk returns 0 (or undefined
+                    // RAX garbage for AOT direct_ptr), while the patched interpreter always
+                    // returns 0x5EED.  The chance that RAX garbage coincidentally
+                    // equals 0x5EED is negligible (~1e-12).
                     //
-                    // opCode 0 = LdcI4 (interpreter reads `operand` into immediate_i4),
-                    // opCode 53 = Ret.  2-instr method hits the LdcI4;Ret fast path in
-                    // InterpreterEntryDirect which writes immediate_i4 into ret_buf →
-                    // returned value lands in [0xBEEF0000, 0xBEEFFFFF] → semantic oracle
-                    // sees a real change.  Zero native/loader changes required.
-                    int sentinel = (int)(0xBEEF0000U | (uint)(syntheticSubjectK & 0xFFFF));
-                    json = "{\"instructions\":[{\"opCode\":0,\"ilOffset\":0,\"operand\":" +
-                           sentinel.ToString(System.Globalization.CultureInfo.InvariantCulture) +
-                           "},{\"opCode\":53,\"ilOffset\":1}]}";
-                    ++syntheticSubjectK;
+                    // In TestMode (CodegenMode.TestMode), this folding is skipped and the
+                    // real AOT Core IR is emitted, enabling test-correctness validation.
+                    json = "{\"instructions\":[{\"opCode\":0,\"ilOffset\":0,\"operand\":0},{\"opCode\":53,\"ilOffset\":1}]}";
                 }
                 else if (aotIrLookup.TryGetValue(key, out var found))
                 {

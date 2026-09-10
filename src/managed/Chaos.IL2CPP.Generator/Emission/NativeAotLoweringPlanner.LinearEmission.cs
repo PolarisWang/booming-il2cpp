@@ -23,7 +23,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         string lengthExpr = ConsumeEvalStackValueExpression();
         EmitEvalStackPush(builder, indentation,
-            $"ChaosArrayNew1D(&chaos_type_info_managed_array.hot, {GetRuntimeTypeInfoExpression(subjectId)}, {GetNativeTypeShapeValue(typeShape)}, {lengthExpr})");
+            $"ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, {GetRuntimeTypeInfoExpression(subjectId)}, {GetNativeTypeShapeValue(typeShape)}, {lengthExpr})");
 
     }
 
@@ -86,7 +86,7 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine($"{indentation}    chaos_store_indirect<{nativeType}>(chaos_address, chaos_value);");
         if (needsSatbBarrier)
         {
-            builder.AppendLine($"{indentation}    chaos_gc_dirty_card_dst_ref(reinterpret_cast<const void*>(chaos_address), reinterpret_cast<const void*>(chaos_value));");
+            builder.AppendLine($"{indentation}    chaos_gc_dirty_card(reinterpret_cast<void*>(chaos_address));");
         }
         builder.AppendLine($"{indentation}}}");
     }
@@ -270,7 +270,7 @@ public sealed partial class NativeAotLoweringPlanner
         if (isReferenceElement)
         {
             builder.AppendLine($"{indentation}    GC_END_STUBBORN_CHANGE(chaos_array);");
-            builder.AppendLine($"{indentation}    chaos_gc_dirty_card_dst_ref(chaos_array, reinterpret_cast<const void*>(chaos_value));");
+            builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_array);");
         }
         builder.AppendLine($"{indentation}}}");
     }

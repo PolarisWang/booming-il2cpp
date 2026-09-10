@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "SnapshotTestFixtures",
+  "methodCount": 2,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "SnapshotTestFixtures_CalliHelper_RunCalli",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "SnapshotTestFixtures_Helper_GetValue",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    }
+  ]
+}

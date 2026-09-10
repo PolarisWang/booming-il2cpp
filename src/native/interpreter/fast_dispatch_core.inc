@@ -10,7 +10,6 @@
 #include "instantiation_engine.h"
 #include "vtable_registry.h"
 #include "reflection_query_model.h"
-#include "register_vm_profiler.h"
 namespace ri = chaos::il2cpp::runtime_instantiation;
 namespace vr = chaos::il2cpp::vtable_registry;
 
@@ -20,14 +19,12 @@ namespace vr = chaos::il2cpp::vtable_registry;
 #include <jit_engine.h>
 #include <jit_seh.h>
 #include <jit_helpers.h>
-#include <forbid_suspend.h>
 
 #include <memory_domain.h>
 #include <patch_loader.h>
 
 #include <eventpipe/ep_exception_bridge.h>
 #include <diagnostics/debugger/dbg_runtime.h>
-#include "generated_code_compat.h"  // chaos_managed_exception (Step 2.2 in-band safepoint)
 
 // Forward declarations from entry_direct.cpp
 namespace chaos::il2cpp::runtime_core {
@@ -403,9 +400,6 @@ static void Handle_LdArg(FastFrame& frame, const interpreter::IRInstruction& ins
 static void Handle_LdLoc(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdLoc");
     uint32_t idx = static_cast<uint32_t>(instr.operand_index);
-    // Bounds guard (B2): kMaxLocals=32 is a hard array bound.  A method declaring
-    // >32 locals must fault, not write past locals[31] into adjacent frame state.
-    if (idx >= FastFrame::kMaxLocals) { frame.threw_exception = true; frame.pc = 9999; return; }
     if (idx >= frame.local_count) {
         // Zero-initialized on first access.
         frame.locals[idx] = 0;
@@ -422,8 +416,6 @@ static void Handle_StLoc(FastFrame& frame, const interpreter::IRInstruction& ins
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_StLoc");
     uint32_t idx = static_cast<uint32_t>(instr.operand_index);
     if (frame.sp == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
-    // Bounds guard (B2): >kMaxLocals local index must fault, not overflow the array.
-    if (idx >= FastFrame::kMaxLocals) { frame.threw_exception = true; frame.pc = 9999; return; }
     --frame.sp;
     frame.locals[idx] = frame.stack[frame.sp];
     frame.local_tags[idx] = frame.stack_tags[frame.sp];

@@ -33,12 +33,8 @@ static void Handle_Call_DoAotDirect(FastFrame& frame,
     if (CHAOS_IL2CPP_UNLIKELY(instr.safe_to_direct_call)) {
         result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
     } else {
-        uint64_t caught_exc_obj = 0;
-        bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7,
-                                         result, &caught_exc_obj);
+        bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
         if (caught) {
-            if (caught_exc_obj != 0)
-                frame.exception_obj_val = reinterpret_cast<void*>(caught_exc_obj);
             frame.threw_exception = true;
             frame.pc = 9999;
             return;
@@ -87,17 +83,10 @@ static void Handle_Call_DoMIC(FastFrame& frame,
     uint64_t a6 = (ac > 6) ? raw_args[6] : 0;
     uint64_t a7 = (ac > 7) ? raw_args[7] : 0;
     uint64_t result = 0;
-    uint64_t exc_val = 0;
-    // B3: pass out_exception_object so a callee-thrown managed exception's
-    // object identity (Message/StackTrace/type) survives the DoMIC boundary —
-    // otherwise the outer layers only see threw_exception with a lost object.
-    bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result, &exc_val);
+    bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
     if (caught) {
         frame.threw_exception = true;
         frame.pc = 9999;
-        if (exc_val != 0) {
-            frame.exception_obj_val = reinterpret_cast<void*>(exc_val);
-        }
         return;
     }
 
@@ -263,12 +252,8 @@ static void Handle_Call_DirectInline(FastFrame& frame, const interpreter::IRInst
     if (CHAOS_IL2CPP_UNLIKELY(instr.safe_to_direct_call)) {
         result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
     } else {
-        uint64_t caught_exc_obj = 0;
-        bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7,
-                                         result, &caught_exc_obj);
+        bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
         if (caught) {
-            if (caught_exc_obj != 0)
-                frame.exception_obj_val = reinterpret_cast<void*>(caught_exc_obj);
             frame.threw_exception = true;
             frame.pc = 9999;
             return;

@@ -1,0 +1,449 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Net.Http",
+  "generatedAt": "2026-06-04T09:59:29.058645+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 2,
+  "chunks": [
+    {
+      "slug": "system-net-http",
+      "namespaces": [
+        "System.Net.Http"
+      ],
+      "methodCount": 57,
+      "methods": [
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::CancelPendingRequests:System.Void()",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Threading.CancellationToken)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Threading.CancellationToken)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpCompletionOption)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Threading.CancellationToken)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpCompletionOption)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Threading.CancellationToken)",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.String)",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.String,System.Threading.CancellationToken)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.Uri)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task<System.Byte[]>(System.Uri,System.Threading.CancellationToken)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.String)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.String,System.Threading.CancellationToken)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.Uri)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task<System.IO.Stream>(System.Uri,System.Threading.CancellationToken)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.String)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.String,System.Threading.CancellationToken)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.Uri)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task<System.String>(System.Uri,System.Threading.CancellationToken)",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent)",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent)",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage)",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption)",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage)",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption)",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpMessageInvoker::Dispose:System.Void()",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpMessageInvoker::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpMessageInvoker::SendAsync:System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+          "index": 47
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpMethod::Parse:System.Net.Http.HttpMethod(System.ReadOnlySpan<System.Char>)",
+          "index": 48
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpRequestMessage::Dispose:System.Void()",
+          "index": 49
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpResponseMessage::Dispose:System.Void()",
+          "index": 50
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.HttpResponseMessage::EnsureSuccessStatusCode:System.Net.Http.HttpResponseMessage()",
+          "index": 51
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartContent::Add:System.Void(System.Net.Http.HttpContent)",
+          "index": 52
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartContent::GetEnumerator:System.Collections.Generic.IEnumerator<System.Net.Http.HttpContent>()",
+          "index": 53
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent)",
+          "index": 54
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent,System.String)",
+          "index": 55
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent,System.String,System.String)",
+          "index": 56
+        }
+      ]
+    },
+    {
+      "slug": "global-ns",
+      "namespaces": [
+        "System.Net.Http.Headers",
+        "System.Net.Http.Metrics"
+      ],
+      "methodCount": 48,
+      "methods": [
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.AuthenticationHeaderValue::Parse:System.Net.Http.Headers.AuthenticationHeaderValue(System.String)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.AuthenticationHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.AuthenticationHeaderValue)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.CacheControlHeaderValue::Parse:System.Net.Http.Headers.CacheControlHeaderValue(System.String)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.CacheControlHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.CacheControlHeaderValue)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ContentDispositionHeaderValue::Parse:System.Net.Http.Headers.ContentDispositionHeaderValue(System.String)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ContentDispositionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ContentDispositionHeaderValue)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ContentRangeHeaderValue::Parse:System.Net.Http.Headers.ContentRangeHeaderValue(System.String)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ContentRangeHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ContentRangeHeaderValue)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.EntityTagHeaderValue::Parse:System.Net.Http.Headers.EntityTagHeaderValue(System.String)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.EntityTagHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.EntityTagHeaderValue)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HeaderStringValues::GetEnumerator:System.Net.Http.Headers.HeaderStringValues+Enumerator()",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HeaderStringValues+Enumerator::Dispose:System.Void()",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HeaderStringValues+Enumerator::MoveNext:System.Boolean()",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated::Contains:System.Boolean(System.String)",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated::GetEnumerator:System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator()",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated::TryGetValues:System.Boolean(System.String,System.Net.Http.Headers.HeaderStringValues)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator::Dispose:System.Void()",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator::MoveNext:System.Boolean()",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeHeaderValue::Parse:System.Net.Http.Headers.MediaTypeHeaderValue(System.String)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.MediaTypeHeaderValue)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeWithQualityHeaderValue::Parse:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(System.String)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.MediaTypeWithQualityHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.MediaTypeWithQualityHeaderValue)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.NameValueHeaderValue::Parse:System.Net.Http.Headers.NameValueHeaderValue(System.String)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.NameValueHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.NameValueHeaderValue)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.NameValueWithParametersHeaderValue::Parse:System.Net.Http.Headers.NameValueWithParametersHeaderValue(System.String)",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.NameValueWithParametersHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.NameValueWithParametersHeaderValue)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ProductHeaderValue::Parse:System.Net.Http.Headers.ProductHeaderValue(System.String)",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ProductHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ProductHeaderValue)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ProductInfoHeaderValue::Parse:System.Net.Http.Headers.ProductInfoHeaderValue(System.String)",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ProductInfoHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ProductInfoHeaderValue)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.RangeConditionHeaderValue::Parse:System.Net.Http.Headers.RangeConditionHeaderValue(System.String)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.RangeConditionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RangeConditionHeaderValue)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.RangeHeaderValue::Parse:System.Net.Http.Headers.RangeHeaderValue(System.String)",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.RangeHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RangeHeaderValue)",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.RetryConditionHeaderValue::Parse:System.Net.Http.Headers.RetryConditionHeaderValue(System.String)",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.RetryConditionHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.RetryConditionHeaderValue)",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.StringWithQualityHeaderValue::Parse:System.Net.Http.Headers.StringWithQualityHeaderValue(System.String)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.StringWithQualityHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.StringWithQualityHeaderValue)",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingHeaderValue::Parse:System.Net.Http.Headers.TransferCodingHeaderValue(System.String)",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.TransferCodingHeaderValue)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingWithQualityHeaderValue::Parse:System.Net.Http.Headers.TransferCodingWithQualityHeaderValue(System.String)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.TransferCodingWithQualityHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.TransferCodingWithQualityHeaderValue)",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ViaHeaderValue::Parse:System.Net.Http.Headers.ViaHeaderValue(System.String)",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.ViaHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.ViaHeaderValue)",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.WarningHeaderValue::Parse:System.Net.Http.Headers.WarningHeaderValue(System.String)",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Headers.WarningHeaderValue::TryParse:System.Boolean(System.String,System.Net.Http.Headers.WarningHeaderValue)",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Metrics.HttpMetricsEnrichmentContext::AddCallback:System.Void(System.Net.Http.HttpRequestMessage,System.Action<System.Net.Http.Metrics.HttpMetricsEnrichmentContext>)",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.Net.Http/System.Net.Http.Metrics.HttpMetricsEnrichmentContext::AddCustomTag:System.Void(System.String,System.Object)",
+          "index": 47
+        }
+      ]
+    }
+  ]
+}

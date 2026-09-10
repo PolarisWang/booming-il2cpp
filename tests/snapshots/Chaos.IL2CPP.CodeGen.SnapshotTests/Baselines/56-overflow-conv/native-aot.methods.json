@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "SnapshotTestFixtures",
+  "methodCount": 1,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfI4",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    }
+  ]
+}

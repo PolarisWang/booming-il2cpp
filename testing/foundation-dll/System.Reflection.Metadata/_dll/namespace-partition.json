@@ -1,0 +1,2661 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Reflection.Metadata",
+  "generatedAt": "2026-06-04T10:30:43.013091+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 3,
+  "chunks": [
+    {
+      "slug": "system-reflection-metadata",
+      "namespaces": [
+        "System.Reflection.Metadata"
+      ],
+      "methodCount": 345,
+      "methods": [
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyDefinition::GetAssemblyName:System.Reflection.AssemblyName()",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyDefinition::GetAssemblyNameInfo:System.Reflection.Metadata.AssemblyNameInfo()",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyDefinition::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyDefinition::GetDeclarativeSecurityAttributes:System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection()",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyFile::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyFileHandleCollection::GetEnumerator:System.Reflection.Metadata.AssemblyFileHandleCollection+Enumerator()",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyFileHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyNameInfo::Parse:System.Reflection.Metadata.AssemblyNameInfo(System.ReadOnlySpan<System.Char>)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyNameInfo::ToAssemblyName:System.Reflection.AssemblyName()",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyNameInfo::TryParse:System.Boolean(System.ReadOnlySpan<System.Char>,System.Reflection.Metadata.AssemblyNameInfo)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReference::GetAssemblyName:System.Reflection.AssemblyName()",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReference::GetAssemblyNameInfo:System.Reflection.Metadata.AssemblyNameInfo()",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReference::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReferenceHandleCollection::GetEnumerator:System.Reflection.Metadata.AssemblyReferenceHandleCollection+Enumerator()",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.AssemblyReferenceHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Blob::GetBytes:System.ArraySegment<System.Byte>()",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::Align:System.Void(System.Int32)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::Clear:System.Void()",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ContentEquals:System.Boolean(System.Reflection.Metadata.BlobBuilder)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::GetBlobs:System.Reflection.Metadata.BlobBuilder+Blobs()",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::LinkPrefix:System.Void(System.Reflection.Metadata.BlobBuilder)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::LinkSuffix:System.Void(System.Reflection.Metadata.BlobBuilder)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::PadTo:System.Void(System.Int32)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ReserveBytes:System.Reflection.Metadata.Blob(System.Int32)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ToArray:System.Byte[]()",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ToArray:System.Byte[](System.Int32,System.Int32)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ToImmutableArray:System.Collections.Immutable.ImmutableArray<System.Byte>()",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::ToImmutableArray:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Int32,System.Int32)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::TryWriteBytes:System.Int32(System.IO.Stream,System.Int32)",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBoolean:System.Void(System.Boolean)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteByte:System.Void(System.Byte)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Byte*,System.Int32)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Byte,System.Int32)",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Byte[])",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Byte[],System.Int32,System.Int32)",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray<System.Byte>)",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray<System.Byte>,System.Int32,System.Int32)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteCompressedInteger:System.Void(System.Int32)",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteCompressedSignedInteger:System.Void(System.Int32)",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteConstant:System.Void(System.Object)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteContentTo:System.Void(System.IO.Stream)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteContentTo:System.Void(System.Reflection.Metadata.BlobBuilder)",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteContentTo:System.Void(System.Reflection.Metadata.BlobWriter)",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteDateTime:System.Void(System.DateTime)",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteDecimal:System.Void(System.Decimal)",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteDouble:System.Void(System.Double)",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteGuid:System.Void(System.Guid)",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteInt16:System.Void(System.Int16)",
+          "index": 47
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteInt16BE:System.Void(System.Int16)",
+          "index": 48
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteInt32:System.Void(System.Int32)",
+          "index": 49
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteInt32BE:System.Void(System.Int32)",
+          "index": 50
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteInt64:System.Void(System.Int64)",
+          "index": 51
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteReference:System.Void(System.Int32,System.Boolean)",
+          "index": 52
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteSByte:System.Void(System.SByte)",
+          "index": 53
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteSerializedString:System.Void(System.String)",
+          "index": 54
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteSingle:System.Void(System.Single)",
+          "index": 55
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteUInt16:System.Void(System.UInt16)",
+          "index": 56
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteUInt16BE:System.Void(System.UInt16)",
+          "index": 57
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteUInt32:System.Void(System.UInt32)",
+          "index": 58
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteUInt32BE:System.Void(System.UInt32)",
+          "index": 59
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteUInt64:System.Void(System.UInt64)",
+          "index": 60
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteUserString:System.Void(System.String)",
+          "index": 61
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteUTF16:System.Void(System.Char[])",
+          "index": 62
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteUTF16:System.Void(System.String)",
+          "index": 63
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder::WriteUTF8:System.Void(System.String,System.Boolean)",
+          "index": 64
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder+Blobs::GetEnumerator:System.Reflection.Metadata.BlobBuilder+Blobs()",
+          "index": 65
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder+Blobs::MoveNext:System.Boolean()",
+          "index": 66
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobBuilder+Blobs::Reset:System.Void()",
+          "index": 67
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobContentId::FromHash:System.Reflection.Metadata.BlobContentId(System.Byte[])",
+          "index": 68
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobContentId::FromHash:System.Reflection.Metadata.BlobContentId(System.Collections.Immutable.ImmutableArray<System.Byte>)",
+          "index": 69
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobContentId::GetTimeBasedProvider:System.Func<System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,System.Reflection.Metadata.BlobContentId>()",
+          "index": 70
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::Align:System.Void(System.Byte)",
+          "index": 71
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::IndexOf:System.Int32(System.Byte)",
+          "index": 72
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadBlobHandle:System.Reflection.Metadata.BlobHandle()",
+          "index": 73
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadBoolean:System.Boolean()",
+          "index": 74
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadByte:System.Byte()",
+          "index": 75
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadBytes:System.Byte[](System.Int32)",
+          "index": 76
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadBytes:System.Void(System.Int32,System.Byte[],System.Int32)",
+          "index": 77
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadChar:System.Char()",
+          "index": 78
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadCompressedInteger:System.Int32()",
+          "index": 79
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadCompressedSignedInteger:System.Int32()",
+          "index": 80
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadConstant:System.Object(System.Reflection.Metadata.ConstantTypeCode)",
+          "index": 81
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadDateTime:System.DateTime()",
+          "index": 82
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadDecimal:System.Decimal()",
+          "index": 83
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadDouble:System.Double()",
+          "index": 84
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadGuid:System.Guid()",
+          "index": 85
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadInt16:System.Int16()",
+          "index": 86
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadInt32:System.Int32()",
+          "index": 87
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadInt64:System.Int64()",
+          "index": 88
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadSByte:System.SByte()",
+          "index": 89
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadSerializationTypeCode:System.Reflection.Metadata.SerializationTypeCode()",
+          "index": 90
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadSerializedString:System.String()",
+          "index": 91
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadSignatureHeader:System.Reflection.Metadata.SignatureHeader()",
+          "index": 92
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadSignatureTypeCode:System.Reflection.Metadata.SignatureTypeCode()",
+          "index": 93
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadSingle:System.Single()",
+          "index": 94
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadTypeHandle:System.Reflection.Metadata.EntityHandle()",
+          "index": 95
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadUInt16:System.UInt16()",
+          "index": 96
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadUInt32:System.UInt32()",
+          "index": 97
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadUInt64:System.UInt64()",
+          "index": 98
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadUTF16:System.String(System.Int32)",
+          "index": 99
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::ReadUTF8:System.String(System.Int32)",
+          "index": 100
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::Reset:System.Void()",
+          "index": 101
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::TryReadCompressedInteger:System.Boolean(System.Int32)",
+          "index": 102
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobReader::TryReadCompressedSignedInteger:System.Boolean(System.Int32)",
+          "index": 103
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::Align:System.Void(System.Int32)",
+          "index": 104
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::Clear:System.Void()",
+          "index": 105
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ContentEquals:System.Boolean(System.Reflection.Metadata.BlobWriter)",
+          "index": 106
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::PadTo:System.Void(System.Int32)",
+          "index": 107
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ToArray:System.Byte[]()",
+          "index": 108
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ToArray:System.Byte[](System.Int32,System.Int32)",
+          "index": 109
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ToImmutableArray:System.Collections.Immutable.ImmutableArray<System.Byte>()",
+          "index": 110
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::ToImmutableArray:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Int32,System.Int32)",
+          "index": 111
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBoolean:System.Void(System.Boolean)",
+          "index": 112
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteByte:System.Void(System.Byte)",
+          "index": 113
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Byte*,System.Int32)",
+          "index": 114
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Byte,System.Int32)",
+          "index": 115
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Byte[])",
+          "index": 116
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Byte[],System.Int32,System.Int32)",
+          "index": 117
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray<System.Byte>)",
+          "index": 118
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Collections.Immutable.ImmutableArray<System.Byte>,System.Int32,System.Int32)",
+          "index": 119
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Int32(System.IO.Stream,System.Int32)",
+          "index": 120
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteBytes:System.Void(System.Reflection.Metadata.BlobBuilder)",
+          "index": 121
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteCompressedInteger:System.Void(System.Int32)",
+          "index": 122
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteCompressedSignedInteger:System.Void(System.Int32)",
+          "index": 123
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteConstant:System.Void(System.Object)",
+          "index": 124
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteDateTime:System.Void(System.DateTime)",
+          "index": 125
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteDecimal:System.Void(System.Decimal)",
+          "index": 126
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteDouble:System.Void(System.Double)",
+          "index": 127
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteGuid:System.Void(System.Guid)",
+          "index": 128
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteInt16:System.Void(System.Int16)",
+          "index": 129
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteInt16BE:System.Void(System.Int16)",
+          "index": 130
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteInt32:System.Void(System.Int32)",
+          "index": 131
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteInt32BE:System.Void(System.Int32)",
+          "index": 132
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteInt64:System.Void(System.Int64)",
+          "index": 133
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteReference:System.Void(System.Int32,System.Boolean)",
+          "index": 134
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteSByte:System.Void(System.SByte)",
+          "index": 135
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteSerializedString:System.Void(System.String)",
+          "index": 136
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteSingle:System.Void(System.Single)",
+          "index": 137
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteUInt16:System.Void(System.UInt16)",
+          "index": 138
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteUInt16BE:System.Void(System.UInt16)",
+          "index": 139
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteUInt32:System.Void(System.UInt32)",
+          "index": 140
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteUInt32BE:System.Void(System.UInt32)",
+          "index": 141
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteUInt64:System.Void(System.UInt64)",
+          "index": 142
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteUserString:System.Void(System.String)",
+          "index": 143
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteUTF16:System.Void(System.Char[])",
+          "index": 144
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteUTF16:System.Void(System.String)",
+          "index": 145
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.BlobWriter::WriteUTF8:System.Void(System.String,System.Boolean)",
+          "index": 146
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomAttributeHandleCollection::GetEnumerator:System.Reflection.Metadata.CustomAttributeHandleCollection+Enumerator()",
+          "index": 147
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomAttributeHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 148
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomDebugInformationHandleCollection::GetEnumerator:System.Reflection.Metadata.CustomDebugInformationHandleCollection+Enumerator()",
+          "index": 149
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.CustomDebugInformationHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 150
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection::GetEnumerator:System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection+Enumerator()",
+          "index": 151
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 152
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DocumentHandleCollection::GetEnumerator:System.Reflection.Metadata.DocumentHandleCollection+Enumerator()",
+          "index": 153
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.DocumentHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 154
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinition::GetAccessors:System.Reflection.Metadata.EventAccessors()",
+          "index": 155
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinition::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 156
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinition::GetDeclaringType:System.Reflection.Metadata.TypeDefinitionHandle()",
+          "index": 157
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.EventDefinitionHandleCollection+Enumerator()",
+          "index": 158
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.EventDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 159
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ExportedType::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 160
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ExportedTypeHandleCollection::GetEnumerator:System.Reflection.Metadata.ExportedTypeHandleCollection+Enumerator()",
+          "index": 161
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ExportedTypeHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 162
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinition::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 163
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinition::GetDeclaringType:System.Reflection.Metadata.TypeDefinitionHandle()",
+          "index": 164
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinition::GetDefaultValue:System.Reflection.Metadata.ConstantHandle()",
+          "index": 165
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinition::GetMarshallingDescriptor:System.Reflection.Metadata.BlobHandle()",
+          "index": 166
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinition::GetOffset:System.Int32()",
+          "index": 167
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinition::GetRelativeVirtualAddress:System.Int32()",
+          "index": 168
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.FieldDefinitionHandleCollection+Enumerator()",
+          "index": 169
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.FieldDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 170
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameter::GetConstraints:System.Reflection.Metadata.GenericParameterConstraintHandleCollection()",
+          "index": 171
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameter::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 172
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterConstraint::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 173
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterConstraintHandleCollection::GetEnumerator:System.Reflection.Metadata.GenericParameterConstraintHandleCollection+Enumerator()",
+          "index": 174
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterConstraintHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 175
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterHandleCollection::GetEnumerator:System.Reflection.Metadata.GenericParameterHandleCollection+Enumerator()",
+          "index": 176
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.GenericParameterHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 177
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.HandleComparer::Compare:System.Int32(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.EntityHandle)",
+          "index": 178
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.HandleComparer::Compare:System.Int32(System.Reflection.Metadata.Handle,System.Reflection.Metadata.Handle)",
+          "index": 179
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ILOpCodeExtensions::GetBranchOperandSize:System.Int32(System.Reflection.Metadata.ILOpCode)",
+          "index": 180
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ILOpCodeExtensions::GetLongBranch:System.Reflection.Metadata.ILOpCode(System.Reflection.Metadata.ILOpCode)",
+          "index": 181
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ILOpCodeExtensions::GetShortBranch:System.Reflection.Metadata.ILOpCode(System.Reflection.Metadata.ILOpCode)",
+          "index": 182
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ILOpCodeExtensions::IsBranch:System.Boolean(System.Reflection.Metadata.ILOpCode)",
+          "index": 183
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection::GetEnumerator:System.Reflection.Metadata.ImportDefinitionCollection+Enumerator()",
+          "index": 184
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 185
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportDefinitionCollection+Enumerator::Reset:System.Void()",
+          "index": 186
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportScope::GetImports:System.Reflection.Metadata.ImportDefinitionCollection()",
+          "index": 187
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportScopeCollection::GetEnumerator:System.Reflection.Metadata.ImportScopeCollection+Enumerator()",
+          "index": 188
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ImportScopeCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 189
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.InterfaceImplementation::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 190
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.InterfaceImplementationHandleCollection::GetEnumerator:System.Reflection.Metadata.InterfaceImplementationHandleCollection+Enumerator()",
+          "index": 191
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.InterfaceImplementationHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 192
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalConstantHandleCollection::GetEnumerator:System.Reflection.Metadata.LocalConstantHandleCollection+Enumerator()",
+          "index": 193
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalConstantHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 194
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScope::GetChildren:System.Reflection.Metadata.LocalScopeHandleCollection+ChildrenEnumerator()",
+          "index": 195
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScope::GetLocalConstants:System.Reflection.Metadata.LocalConstantHandleCollection()",
+          "index": 196
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScope::GetLocalVariables:System.Reflection.Metadata.LocalVariableHandleCollection()",
+          "index": 197
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection::GetEnumerator:System.Reflection.Metadata.LocalScopeHandleCollection+Enumerator()",
+          "index": 198
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection+ChildrenEnumerator::MoveNext:System.Boolean()",
+          "index": 199
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalScopeHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 200
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalVariableHandleCollection::GetEnumerator:System.Reflection.Metadata.LocalVariableHandleCollection+Enumerator()",
+          "index": 201
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.LocalVariableHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 202
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ManifestResource::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 203
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ManifestResourceHandleCollection::GetEnumerator:System.Reflection.Metadata.ManifestResourceHandleCollection+Enumerator()",
+          "index": 204
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ManifestResourceHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 205
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReference::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 206
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReference::GetKind:System.Reflection.Metadata.MemberReferenceKind()",
+          "index": 207
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReferenceHandleCollection::GetEnumerator:System.Reflection.Metadata.MemberReferenceHandleCollection+Enumerator()",
+          "index": 208
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MemberReferenceHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 209
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetAssemblyDefinition:System.Reflection.Metadata.AssemblyDefinition()",
+          "index": 210
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetAssemblyFile:System.Reflection.Metadata.AssemblyFile(System.Reflection.Metadata.AssemblyFileHandle)",
+          "index": 211
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetAssemblyName:System.Reflection.AssemblyName(System.String)",
+          "index": 212
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetAssemblyReference:System.Reflection.Metadata.AssemblyReference(System.Reflection.Metadata.AssemblyReferenceHandle)",
+          "index": 213
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetBlobBytes:System.Byte[](System.Reflection.Metadata.BlobHandle)",
+          "index": 214
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetBlobContent:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Reflection.Metadata.BlobHandle)",
+          "index": 215
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetBlobReader:System.Reflection.Metadata.BlobReader(System.Reflection.Metadata.BlobHandle)",
+          "index": 216
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetBlobReader:System.Reflection.Metadata.BlobReader(System.Reflection.Metadata.StringHandle)",
+          "index": 217
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetConstant:System.Reflection.Metadata.Constant(System.Reflection.Metadata.ConstantHandle)",
+          "index": 218
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetCustomAttribute:System.Reflection.Metadata.CustomAttribute(System.Reflection.Metadata.CustomAttributeHandle)",
+          "index": 219
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection(System.Reflection.Metadata.EntityHandle)",
+          "index": 220
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetCustomDebugInformation:System.Reflection.Metadata.CustomDebugInformation(System.Reflection.Metadata.CustomDebugInformationHandle)",
+          "index": 221
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetCustomDebugInformation:System.Reflection.Metadata.CustomDebugInformationHandleCollection(System.Reflection.Metadata.EntityHandle)",
+          "index": 222
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetDeclarativeSecurityAttribute:System.Reflection.Metadata.DeclarativeSecurityAttribute(System.Reflection.Metadata.DeclarativeSecurityAttributeHandle)",
+          "index": 223
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetDocument:System.Reflection.Metadata.Document(System.Reflection.Metadata.DocumentHandle)",
+          "index": 224
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetEventDefinition:System.Reflection.Metadata.EventDefinition(System.Reflection.Metadata.EventDefinitionHandle)",
+          "index": 225
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetExportedType:System.Reflection.Metadata.ExportedType(System.Reflection.Metadata.ExportedTypeHandle)",
+          "index": 226
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetFieldDefinition:System.Reflection.Metadata.FieldDefinition(System.Reflection.Metadata.FieldDefinitionHandle)",
+          "index": 227
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetGenericParameter:System.Reflection.Metadata.GenericParameter(System.Reflection.Metadata.GenericParameterHandle)",
+          "index": 228
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetGenericParameterConstraint:System.Reflection.Metadata.GenericParameterConstraint(System.Reflection.Metadata.GenericParameterConstraintHandle)",
+          "index": 229
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetGuid:System.Guid(System.Reflection.Metadata.GuidHandle)",
+          "index": 230
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetImportScope:System.Reflection.Metadata.ImportScope(System.Reflection.Metadata.ImportScopeHandle)",
+          "index": 231
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetInterfaceImplementation:System.Reflection.Metadata.InterfaceImplementation(System.Reflection.Metadata.InterfaceImplementationHandle)",
+          "index": 232
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetLocalConstant:System.Reflection.Metadata.LocalConstant(System.Reflection.Metadata.LocalConstantHandle)",
+          "index": 233
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetLocalScope:System.Reflection.Metadata.LocalScope(System.Reflection.Metadata.LocalScopeHandle)",
+          "index": 234
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetLocalScopes:System.Reflection.Metadata.LocalScopeHandleCollection(System.Reflection.Metadata.MethodDebugInformationHandle)",
+          "index": 235
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetLocalScopes:System.Reflection.Metadata.LocalScopeHandleCollection(System.Reflection.Metadata.MethodDefinitionHandle)",
+          "index": 236
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetLocalVariable:System.Reflection.Metadata.LocalVariable(System.Reflection.Metadata.LocalVariableHandle)",
+          "index": 237
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetManifestResource:System.Reflection.Metadata.ManifestResource(System.Reflection.Metadata.ManifestResourceHandle)",
+          "index": 238
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetMemberReference:System.Reflection.Metadata.MemberReference(System.Reflection.Metadata.MemberReferenceHandle)",
+          "index": 239
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetMethodDebugInformation:System.Reflection.Metadata.MethodDebugInformation(System.Reflection.Metadata.MethodDebugInformationHandle)",
+          "index": 240
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetMethodDebugInformation:System.Reflection.Metadata.MethodDebugInformation(System.Reflection.Metadata.MethodDefinitionHandle)",
+          "index": 241
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetMethodDefinition:System.Reflection.Metadata.MethodDefinition(System.Reflection.Metadata.MethodDefinitionHandle)",
+          "index": 242
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetMethodImplementation:System.Reflection.Metadata.MethodImplementation(System.Reflection.Metadata.MethodImplementationHandle)",
+          "index": 243
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetMethodSpecification:System.Reflection.Metadata.MethodSpecification(System.Reflection.Metadata.MethodSpecificationHandle)",
+          "index": 244
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetModuleDefinition:System.Reflection.Metadata.ModuleDefinition()",
+          "index": 245
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetModuleReference:System.Reflection.Metadata.ModuleReference(System.Reflection.Metadata.ModuleReferenceHandle)",
+          "index": 246
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetNamespaceDefinition:System.Reflection.Metadata.NamespaceDefinition(System.Reflection.Metadata.NamespaceDefinitionHandle)",
+          "index": 247
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetNamespaceDefinitionRoot:System.Reflection.Metadata.NamespaceDefinition()",
+          "index": 248
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetParameter:System.Reflection.Metadata.Parameter(System.Reflection.Metadata.ParameterHandle)",
+          "index": 249
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetPropertyDefinition:System.Reflection.Metadata.PropertyDefinition(System.Reflection.Metadata.PropertyDefinitionHandle)",
+          "index": 250
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetStandaloneSignature:System.Reflection.Metadata.StandaloneSignature(System.Reflection.Metadata.StandaloneSignatureHandle)",
+          "index": 251
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetString:System.String(System.Reflection.Metadata.DocumentNameBlobHandle)",
+          "index": 252
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetString:System.String(System.Reflection.Metadata.NamespaceDefinitionHandle)",
+          "index": 253
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetString:System.String(System.Reflection.Metadata.StringHandle)",
+          "index": 254
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetTypeDefinition:System.Reflection.Metadata.TypeDefinition(System.Reflection.Metadata.TypeDefinitionHandle)",
+          "index": 255
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetTypeReference:System.Reflection.Metadata.TypeReference(System.Reflection.Metadata.TypeReferenceHandle)",
+          "index": 256
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetTypeSpecification:System.Reflection.Metadata.TypeSpecification(System.Reflection.Metadata.TypeSpecificationHandle)",
+          "index": 257
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReader::GetUserString:System.String(System.Reflection.Metadata.UserStringHandle)",
+          "index": 258
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReaderProvider::Dispose:System.Void()",
+          "index": 259
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReaderProvider::FromMetadataImage:System.Reflection.Metadata.MetadataReaderProvider(System.Byte*,System.Int32)",
+          "index": 260
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReaderProvider::FromMetadataImage:System.Reflection.Metadata.MetadataReaderProvider(System.Collections.Immutable.ImmutableArray<System.Byte>)",
+          "index": 261
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReaderProvider::FromMetadataStream:System.Reflection.Metadata.MetadataReaderProvider(System.IO.Stream,System.Reflection.Metadata.MetadataStreamOptions,System.Int32)",
+          "index": 262
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReaderProvider::FromPortablePdbImage:System.Reflection.Metadata.MetadataReaderProvider(System.Byte*,System.Int32)",
+          "index": 263
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReaderProvider::FromPortablePdbImage:System.Reflection.Metadata.MetadataReaderProvider(System.Collections.Immutable.ImmutableArray<System.Byte>)",
+          "index": 264
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReaderProvider::FromPortablePdbStream:System.Reflection.Metadata.MetadataReaderProvider(System.IO.Stream,System.Reflection.Metadata.MetadataStreamOptions,System.Int32)",
+          "index": 265
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataReaderProvider::GetMetadataReader:System.Reflection.Metadata.MetadataReader(System.Reflection.Metadata.MetadataReaderOptions,System.Reflection.Metadata.MetadataStringDecoder)",
+          "index": 266
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataStringComparer::StartsWith:System.Boolean(System.Reflection.Metadata.StringHandle,System.String)",
+          "index": 267
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataStringComparer::StartsWith:System.Boolean(System.Reflection.Metadata.StringHandle,System.String,System.Boolean)",
+          "index": 268
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MetadataStringDecoder::GetString:System.String(System.Byte*,System.Int32)",
+          "index": 269
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodBodyBlock::Create:System.Reflection.Metadata.MethodBodyBlock(System.Reflection.Metadata.BlobReader)",
+          "index": 270
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodBodyBlock::GetILBytes:System.Byte[]()",
+          "index": 271
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodBodyBlock::GetILContent:System.Collections.Immutable.ImmutableArray<System.Byte>()",
+          "index": 272
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodBodyBlock::GetILReader:System.Reflection.Metadata.BlobReader()",
+          "index": 273
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformation::GetSequencePoints:System.Reflection.Metadata.SequencePointCollection()",
+          "index": 274
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformation::GetStateMachineKickoffMethod:System.Reflection.Metadata.MethodDefinitionHandle()",
+          "index": 275
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformationHandle::ToDefinitionHandle:System.Reflection.Metadata.MethodDefinitionHandle()",
+          "index": 276
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformationHandleCollection::GetEnumerator:System.Reflection.Metadata.MethodDebugInformationHandleCollection+Enumerator()",
+          "index": 277
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDebugInformationHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 278
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinition::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 279
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinition::GetDeclarativeSecurityAttributes:System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection()",
+          "index": 280
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinition::GetDeclaringType:System.Reflection.Metadata.TypeDefinitionHandle()",
+          "index": 281
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinition::GetGenericParameters:System.Reflection.Metadata.GenericParameterHandleCollection()",
+          "index": 282
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinition::GetImport:System.Reflection.Metadata.MethodImport()",
+          "index": 283
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinition::GetParameters:System.Reflection.Metadata.ParameterHandleCollection()",
+          "index": 284
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinitionHandle::ToDebugInformationHandle:System.Reflection.Metadata.MethodDebugInformationHandle()",
+          "index": 285
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.MethodDefinitionHandleCollection+Enumerator()",
+          "index": 286
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 287
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodImplementation::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 288
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodImplementationHandleCollection::GetEnumerator:System.Reflection.Metadata.MethodImplementationHandleCollection+Enumerator()",
+          "index": 289
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodImplementationHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 290
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.MethodSpecification::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 291
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ModuleDefinition::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 292
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ModuleReference::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 293
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Parameter::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 294
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Parameter::GetDefaultValue:System.Reflection.Metadata.ConstantHandle()",
+          "index": 295
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Parameter::GetMarshallingDescriptor:System.Reflection.Metadata.BlobHandle()",
+          "index": 296
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ParameterHandleCollection::GetEnumerator:System.Reflection.Metadata.ParameterHandleCollection+Enumerator()",
+          "index": 297
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.ParameterHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 298
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PEReaderExtensions::GetMetadataReader:System.Reflection.Metadata.MetadataReader(System.Reflection.PortableExecutable.PEReader)",
+          "index": 299
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PEReaderExtensions::GetMetadataReader:System.Reflection.Metadata.MetadataReader(System.Reflection.PortableExecutable.PEReader,System.Reflection.Metadata.MetadataReaderOptions)",
+          "index": 300
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PEReaderExtensions::GetMetadataReader:System.Reflection.Metadata.MetadataReader(System.Reflection.PortableExecutable.PEReader,System.Reflection.Metadata.MetadataReaderOptions,System.Reflection.Metadata.MetadataStringDecoder)",
+          "index": 301
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PEReaderExtensions::GetMethodBody:System.Reflection.Metadata.MethodBodyBlock(System.Reflection.PortableExecutable.PEReader,System.Int32)",
+          "index": 302
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinition::GetAccessors:System.Reflection.Metadata.PropertyAccessors()",
+          "index": 303
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinition::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 304
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinition::GetDeclaringType:System.Reflection.Metadata.TypeDefinitionHandle()",
+          "index": 305
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinition::GetDefaultValue:System.Reflection.Metadata.ConstantHandle()",
+          "index": 306
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.PropertyDefinitionHandleCollection+Enumerator()",
+          "index": 307
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.PropertyDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 308
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection::GetEnumerator:System.Reflection.Metadata.SequencePointCollection+Enumerator()",
+          "index": 309
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 310
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.SequencePointCollection+Enumerator::Reset:System.Void()",
+          "index": 311
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.StandaloneSignature::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 312
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.StandaloneSignature::GetKind:System.Reflection.Metadata.StandaloneSignatureKind()",
+          "index": 313
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 314
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetDeclarativeSecurityAttributes:System.Reflection.Metadata.DeclarativeSecurityAttributeHandleCollection()",
+          "index": 315
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetDeclaringType:System.Reflection.Metadata.TypeDefinitionHandle()",
+          "index": 316
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetEvents:System.Reflection.Metadata.EventDefinitionHandleCollection()",
+          "index": 317
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetFields:System.Reflection.Metadata.FieldDefinitionHandleCollection()",
+          "index": 318
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetGenericParameters:System.Reflection.Metadata.GenericParameterHandleCollection()",
+          "index": 319
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetInterfaceImplementations:System.Reflection.Metadata.InterfaceImplementationHandleCollection()",
+          "index": 320
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetLayout:System.Reflection.Metadata.TypeLayout()",
+          "index": 321
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetMethodImplementations:System.Reflection.Metadata.MethodImplementationHandleCollection()",
+          "index": 322
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetMethods:System.Reflection.Metadata.MethodDefinitionHandleCollection()",
+          "index": 323
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetNestedTypes:System.Collections.Immutable.ImmutableArray<System.Reflection.Metadata.TypeDefinitionHandle>()",
+          "index": 324
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinition::GetProperties:System.Reflection.Metadata.PropertyDefinitionHandleCollection()",
+          "index": 325
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinitionHandleCollection::GetEnumerator:System.Reflection.Metadata.TypeDefinitionHandleCollection+Enumerator()",
+          "index": 326
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeDefinitionHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 327
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::GetArrayRank:System.Int32()",
+          "index": 328
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::GetElementType:System.Reflection.Metadata.TypeName()",
+          "index": 329
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::GetGenericArguments:System.Collections.Immutable.ImmutableArray<System.Reflection.Metadata.TypeName>()",
+          "index": 330
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::GetGenericTypeDefinition:System.Reflection.Metadata.TypeName()",
+          "index": 331
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::GetNodeCount:System.Int32()",
+          "index": 332
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::MakeArrayTypeName:System.Reflection.Metadata.TypeName(System.Int32)",
+          "index": 333
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::MakeByRefTypeName:System.Reflection.Metadata.TypeName()",
+          "index": 334
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::MakeGenericTypeName:System.Reflection.Metadata.TypeName(System.Collections.Immutable.ImmutableArray<System.Reflection.Metadata.TypeName>)",
+          "index": 335
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::MakePointerTypeName:System.Reflection.Metadata.TypeName()",
+          "index": 336
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::MakeSZArrayTypeName:System.Reflection.Metadata.TypeName()",
+          "index": 337
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::Parse:System.Reflection.Metadata.TypeName(System.ReadOnlySpan<System.Char>,System.Reflection.Metadata.TypeNameParseOptions)",
+          "index": 338
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::TryParse:System.Boolean(System.ReadOnlySpan<System.Char>,System.Reflection.Metadata.TypeName,System.Reflection.Metadata.TypeNameParseOptions)",
+          "index": 339
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::Unescape:System.String(System.String)",
+          "index": 340
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeName::WithAssemblyName:System.Reflection.Metadata.TypeName(System.Reflection.Metadata.AssemblyNameInfo)",
+          "index": 341
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeReferenceHandleCollection::GetEnumerator:System.Reflection.Metadata.TypeReferenceHandleCollection+Enumerator()",
+          "index": 342
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeReferenceHandleCollection+Enumerator::MoveNext:System.Boolean()",
+          "index": 343
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.TypeSpecification::GetCustomAttributes:System.Reflection.Metadata.CustomAttributeHandleCollection()",
+          "index": 344
+        }
+      ]
+    },
+    {
+      "slug": "system-reflection-metadata-ecma335",
+      "namespaces": [
+        "System.Reflection.Metadata.Ecma335"
+      ],
+      "methodCount": 286,
+      "methods": [
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ArrayShapeEncoder::Shape:System.Void(System.Int32,System.Collections.Immutable.ImmutableArray<System.Int32>,System.Collections.Immutable.ImmutableArray<System.Int32>)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::CustomAttributeSignature:System.Void(System.Action<System.Reflection.Metadata.Ecma335.FixedArgumentsEncoder>,System.Action<System.Reflection.Metadata.Ecma335.CustomAttributeNamedArgumentsEncoder>)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::CustomAttributeSignature:System.Void(System.Reflection.Metadata.Ecma335.FixedArgumentsEncoder,System.Reflection.Metadata.Ecma335.CustomAttributeNamedArgumentsEncoder)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::Field:System.Reflection.Metadata.Ecma335.FieldTypeEncoder()",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::FieldSignature:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder()",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::LocalVariableSignature:System.Reflection.Metadata.Ecma335.LocalVariablesEncoder(System.Int32)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::MethodSignature:System.Reflection.Metadata.Ecma335.MethodSignatureEncoder(System.Reflection.Metadata.SignatureCallingConvention,System.Int32,System.Boolean)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::MethodSpecificationSignature:System.Reflection.Metadata.Ecma335.GenericTypeArgumentsEncoder(System.Int32)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::PermissionSetArguments:System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder(System.Int32)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::PermissionSetBlob:System.Reflection.Metadata.Ecma335.PermissionSetEncoder(System.Int32)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::PropertySignature:System.Reflection.Metadata.Ecma335.MethodSignatureEncoder(System.Boolean)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::TypeSpecificationSignature:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder()",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::CustomAttributeType:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::HasConstant:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::HasCustomAttribute:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::HasCustomDebugInformation:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::HasDeclSecurity:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::HasFieldMarshal:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::HasSemantics:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::Implementation:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::MemberForwarded:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::MemberRefParent:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::MethodDefOrRef:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::ResolutionScope:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::TypeDefOrRef:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::TypeDefOrRefOrSpec:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::TypeOrMethodDef:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ControlFlowBuilder::AddCatchRegion:System.Void(System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.EntityHandle)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ControlFlowBuilder::AddFaultRegion:System.Void(System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle)",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ControlFlowBuilder::AddFilterRegion:System.Void(System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ControlFlowBuilder::AddFinallyRegion:System.Void(System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ControlFlowBuilder::Clear:System.Void()",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder::ElementType:System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder()",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder::ObjectArray:System.Void()",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Boolean:System.Void()",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Byte:System.Void()",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Char:System.Void()",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Double:System.Void()",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Enum:System.Void(System.String)",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Int16:System.Void()",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Int32:System.Void()",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Int64:System.Void()",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::PrimitiveType:System.Void(System.Reflection.Metadata.PrimitiveSerializationTypeCode)",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::SByte:System.Void()",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Single:System.Void()",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::String:System.Void()",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::SystemType:System.Void()",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::UInt16:System.Void()",
+          "index": 47
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::UInt32:System.Void()",
+          "index": 48
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::UInt64:System.Void()",
+          "index": 49
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeNamedArgumentsEncoder::Count:System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder(System.Int32)",
+          "index": 50
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomModifiersEncoder::AddModifier:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder(System.Reflection.Metadata.EntityHandle,System.Boolean)",
+          "index": 51
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::Add:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Reflection.Metadata.ExceptionRegionKind,System.Int32,System.Int32,System.Int32,System.Int32,System.Reflection.Metadata.EntityHandle,System.Int32)",
+          "index": 52
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddCatch:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32,System.Reflection.Metadata.EntityHandle)",
+          "index": 53
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFault:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32)",
+          "index": 54
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFilter:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
+          "index": 55
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFinally:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32)",
+          "index": 56
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::IsSmallExceptionRegion:System.Boolean(System.Int32,System.Int32)",
+          "index": 57
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::IsSmallRegionCount:System.Boolean(System.Int32)",
+          "index": 58
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExportedTypeExtensions::GetTypeDefinitionId:System.Int32(System.Reflection.Metadata.ExportedType)",
+          "index": 59
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.FieldTypeEncoder::CustomModifiers:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder()",
+          "index": 60
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.FieldTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean)",
+          "index": 61
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.FieldTypeEncoder::TypedReference:System.Void()",
+          "index": 62
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.FixedArgumentsEncoder::AddArgument:System.Reflection.Metadata.Ecma335.LiteralEncoder()",
+          "index": 63
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.GenericTypeArgumentsEncoder::AddArgument:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder()",
+          "index": 64
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Branch:System.Void(System.Reflection.Metadata.ILOpCode,System.Reflection.Metadata.Ecma335.LabelHandle)",
+          "index": 65
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Call:System.Void(System.Reflection.Metadata.EntityHandle)",
+          "index": 66
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Call:System.Void(System.Reflection.Metadata.MemberReferenceHandle)",
+          "index": 67
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Call:System.Void(System.Reflection.Metadata.MethodDefinitionHandle)",
+          "index": 68
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Call:System.Void(System.Reflection.Metadata.MethodSpecificationHandle)",
+          "index": 69
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::CallIndirect:System.Void(System.Reflection.Metadata.StandaloneSignatureHandle)",
+          "index": 70
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::DefineLabel:System.Reflection.Metadata.Ecma335.LabelHandle()",
+          "index": 71
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadArgument:System.Void(System.Int32)",
+          "index": 72
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadArgumentAddress:System.Void(System.Int32)",
+          "index": 73
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadConstantI4:System.Void(System.Int32)",
+          "index": 74
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadConstantI8:System.Void(System.Int64)",
+          "index": 75
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadConstantR4:System.Void(System.Single)",
+          "index": 76
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadConstantR8:System.Void(System.Double)",
+          "index": 77
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadLocal:System.Void(System.Int32)",
+          "index": 78
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadLocalAddress:System.Void(System.Int32)",
+          "index": 79
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadString:System.Void(System.Reflection.Metadata.UserStringHandle)",
+          "index": 80
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::MarkLabel:System.Void(System.Reflection.Metadata.Ecma335.LabelHandle)",
+          "index": 81
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::OpCode:System.Void(System.Reflection.Metadata.ILOpCode)",
+          "index": 82
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::StoreArgument:System.Void(System.Int32)",
+          "index": 83
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::StoreLocal:System.Void(System.Int32)",
+          "index": 84
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Switch:System.Reflection.Metadata.Ecma335.SwitchInstructionEncoder(System.Int32)",
+          "index": 85
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Token:System.Void(System.Int32)",
+          "index": 86
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Token:System.Void(System.Reflection.Metadata.EntityHandle)",
+          "index": 87
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::Scalar:System.Reflection.Metadata.Ecma335.ScalarEncoder()",
+          "index": 88
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::TaggedScalar:System.Void(System.Action<System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder>,System.Action<System.Reflection.Metadata.Ecma335.ScalarEncoder>)",
+          "index": 89
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::TaggedScalar:System.Void(System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder,System.Reflection.Metadata.Ecma335.ScalarEncoder)",
+          "index": 90
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::TaggedVector:System.Void(System.Action<System.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder>,System.Action<System.Reflection.Metadata.Ecma335.VectorEncoder>)",
+          "index": 91
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::TaggedVector:System.Void(System.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder,System.Reflection.Metadata.Ecma335.VectorEncoder)",
+          "index": 92
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::Vector:System.Reflection.Metadata.Ecma335.VectorEncoder()",
+          "index": 93
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralsEncoder::AddLiteral:System.Reflection.Metadata.Ecma335.LiteralEncoder()",
+          "index": 94
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LocalVariablesEncoder::AddVariable:System.Reflection.Metadata.Ecma335.LocalVariableTypeEncoder()",
+          "index": 95
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LocalVariableTypeEncoder::CustomModifiers:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder()",
+          "index": 96
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LocalVariableTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean,System.Boolean)",
+          "index": 97
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LocalVariableTypeEncoder::TypedReference:System.Void()",
+          "index": 98
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataAggregator::GetGenerationHandle:System.Reflection.Metadata.Handle(System.Reflection.Metadata.Handle,System.Int32)",
+          "index": 99
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddAssembly:System.Reflection.Metadata.AssemblyDefinitionHandle(System.Reflection.Metadata.StringHandle,System.Version,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle,System.Reflection.AssemblyFlags,System.Reflection.AssemblyHashAlgorithm)",
+          "index": 100
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddAssemblyFile:System.Reflection.Metadata.AssemblyFileHandle(System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle,System.Boolean)",
+          "index": 101
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddAssemblyReference:System.Reflection.Metadata.AssemblyReferenceHandle(System.Reflection.Metadata.StringHandle,System.Version,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle,System.Reflection.AssemblyFlags,System.Reflection.Metadata.BlobHandle)",
+          "index": 102
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddConstant:System.Reflection.Metadata.ConstantHandle(System.Reflection.Metadata.EntityHandle,System.Object)",
+          "index": 103
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddCustomAttribute:System.Reflection.Metadata.CustomAttributeHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.BlobHandle)",
+          "index": 104
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddCustomDebugInformation:System.Reflection.Metadata.CustomDebugInformationHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.GuidHandle,System.Reflection.Metadata.BlobHandle)",
+          "index": 105
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddDeclarativeSecurityAttribute:System.Reflection.Metadata.DeclarativeSecurityAttributeHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.DeclarativeSecurityAction,System.Reflection.Metadata.BlobHandle)",
+          "index": 106
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddDocument:System.Reflection.Metadata.DocumentHandle(System.Reflection.Metadata.BlobHandle,System.Reflection.Metadata.GuidHandle,System.Reflection.Metadata.BlobHandle,System.Reflection.Metadata.GuidHandle)",
+          "index": 107
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddEncLogEntry:System.Void(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.Ecma335.EditAndContinueOperation)",
+          "index": 108
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddEncMapEntry:System.Void(System.Reflection.Metadata.EntityHandle)",
+          "index": 109
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddEvent:System.Reflection.Metadata.EventDefinitionHandle(System.Reflection.EventAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.EntityHandle)",
+          "index": 110
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddEventMap:System.Void(System.Reflection.Metadata.TypeDefinitionHandle,System.Reflection.Metadata.EventDefinitionHandle)",
+          "index": 111
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddExportedType:System.Reflection.Metadata.ExportedTypeHandle(System.Reflection.TypeAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.EntityHandle,System.Int32)",
+          "index": 112
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddFieldDefinition:System.Reflection.Metadata.FieldDefinitionHandle(System.Reflection.FieldAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle)",
+          "index": 113
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddFieldLayout:System.Void(System.Reflection.Metadata.FieldDefinitionHandle,System.Int32)",
+          "index": 114
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddFieldRelativeVirtualAddress:System.Void(System.Reflection.Metadata.FieldDefinitionHandle,System.Int32)",
+          "index": 115
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddGenericParameter:System.Reflection.Metadata.GenericParameterHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.GenericParameterAttributes,System.Reflection.Metadata.StringHandle,System.Int32)",
+          "index": 116
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddGenericParameterConstraint:System.Reflection.Metadata.GenericParameterConstraintHandle(System.Reflection.Metadata.GenericParameterHandle,System.Reflection.Metadata.EntityHandle)",
+          "index": 117
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddImportScope:System.Reflection.Metadata.ImportScopeHandle(System.Reflection.Metadata.ImportScopeHandle,System.Reflection.Metadata.BlobHandle)",
+          "index": 118
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddInterfaceImplementation:System.Reflection.Metadata.InterfaceImplementationHandle(System.Reflection.Metadata.TypeDefinitionHandle,System.Reflection.Metadata.EntityHandle)",
+          "index": 119
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddLocalConstant:System.Reflection.Metadata.LocalConstantHandle(System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle)",
+          "index": 120
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddLocalScope:System.Reflection.Metadata.LocalScopeHandle(System.Reflection.Metadata.MethodDefinitionHandle,System.Reflection.Metadata.ImportScopeHandle,System.Reflection.Metadata.LocalVariableHandle,System.Reflection.Metadata.LocalConstantHandle,System.Int32,System.Int32)",
+          "index": 121
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddLocalVariable:System.Reflection.Metadata.LocalVariableHandle(System.Reflection.Metadata.LocalVariableAttributes,System.Int32,System.Reflection.Metadata.StringHandle)",
+          "index": 122
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddManifestResource:System.Reflection.Metadata.ManifestResourceHandle(System.Reflection.ManifestResourceAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.EntityHandle,System.UInt32)",
+          "index": 123
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMarshallingDescriptor:System.Void(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.BlobHandle)",
+          "index": 124
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMemberReference:System.Reflection.Metadata.MemberReferenceHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle)",
+          "index": 125
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodDebugInformation:System.Reflection.Metadata.MethodDebugInformationHandle(System.Reflection.Metadata.DocumentHandle,System.Reflection.Metadata.BlobHandle)",
+          "index": 126
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodDefinition:System.Reflection.Metadata.MethodDefinitionHandle(System.Reflection.MethodAttributes,System.Reflection.MethodImplAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle,System.Int32,System.Reflection.Metadata.ParameterHandle)",
+          "index": 127
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodImplementation:System.Reflection.Metadata.MethodImplementationHandle(System.Reflection.Metadata.TypeDefinitionHandle,System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.EntityHandle)",
+          "index": 128
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodImport:System.Void(System.Reflection.Metadata.MethodDefinitionHandle,System.Reflection.MethodImportAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.ModuleReferenceHandle)",
+          "index": 129
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodSemantics:System.Void(System.Reflection.Metadata.EntityHandle,System.Reflection.MethodSemanticsAttributes,System.Reflection.Metadata.MethodDefinitionHandle)",
+          "index": 130
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodSpecification:System.Reflection.Metadata.MethodSpecificationHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.BlobHandle)",
+          "index": 131
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddModule:System.Reflection.Metadata.ModuleDefinitionHandle(System.Int32,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.GuidHandle,System.Reflection.Metadata.GuidHandle,System.Reflection.Metadata.GuidHandle)",
+          "index": 132
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddModuleReference:System.Reflection.Metadata.ModuleReferenceHandle(System.Reflection.Metadata.StringHandle)",
+          "index": 133
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddNestedType:System.Void(System.Reflection.Metadata.TypeDefinitionHandle,System.Reflection.Metadata.TypeDefinitionHandle)",
+          "index": 134
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddParameter:System.Reflection.Metadata.ParameterHandle(System.Reflection.ParameterAttributes,System.Reflection.Metadata.StringHandle,System.Int32)",
+          "index": 135
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddProperty:System.Reflection.Metadata.PropertyDefinitionHandle(System.Reflection.PropertyAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle)",
+          "index": 136
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddPropertyMap:System.Void(System.Reflection.Metadata.TypeDefinitionHandle,System.Reflection.Metadata.PropertyDefinitionHandle)",
+          "index": 137
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddStandaloneSignature:System.Reflection.Metadata.StandaloneSignatureHandle(System.Reflection.Metadata.BlobHandle)",
+          "index": 138
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddStateMachineMethod:System.Void(System.Reflection.Metadata.MethodDefinitionHandle,System.Reflection.Metadata.MethodDefinitionHandle)",
+          "index": 139
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddTypeDefinition:System.Reflection.Metadata.TypeDefinitionHandle(System.Reflection.TypeAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.FieldDefinitionHandle,System.Reflection.Metadata.MethodDefinitionHandle)",
+          "index": 140
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddTypeLayout:System.Void(System.Reflection.Metadata.TypeDefinitionHandle,System.UInt16,System.UInt32)",
+          "index": 141
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddTypeReference:System.Reflection.Metadata.TypeReferenceHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.StringHandle)",
+          "index": 142
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddTypeSpecification:System.Reflection.Metadata.TypeSpecificationHandle(System.Reflection.Metadata.BlobHandle)",
+          "index": 143
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlob:System.Reflection.Metadata.BlobHandle(System.Byte[])",
+          "index": 144
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlob:System.Reflection.Metadata.BlobHandle(System.Collections.Immutable.ImmutableArray<System.Byte>)",
+          "index": 145
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlob:System.Reflection.Metadata.BlobHandle(System.Reflection.Metadata.BlobBuilder)",
+          "index": 146
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlobUTF16:System.Reflection.Metadata.BlobHandle(System.String)",
+          "index": 147
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlobUTF8:System.Reflection.Metadata.BlobHandle(System.String,System.Boolean)",
+          "index": 148
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddConstantBlob:System.Reflection.Metadata.BlobHandle(System.Object)",
+          "index": 149
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddDocumentName:System.Reflection.Metadata.BlobHandle(System.String)",
+          "index": 150
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddGuid:System.Reflection.Metadata.GuidHandle(System.Guid)",
+          "index": 151
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddString:System.Reflection.Metadata.StringHandle(System.String)",
+          "index": 152
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddUserString:System.Reflection.Metadata.UserStringHandle(System.String)",
+          "index": 153
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetRowCount:System.Int32(System.Reflection.Metadata.Ecma335.TableIndex)",
+          "index": 154
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetRowCounts:System.Collections.Immutable.ImmutableArray<System.Int32>()",
+          "index": 155
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::ReserveGuid:System.Reflection.Metadata.ReservedBlob<System.Reflection.Metadata.GuidHandle>()",
+          "index": 156
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::ReserveUserString:System.Reflection.Metadata.ReservedBlob<System.Reflection.Metadata.UserStringHandle>(System.Int32)",
+          "index": 157
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::SetCapacity:System.Void(System.Reflection.Metadata.Ecma335.HeapIndex,System.Int32)",
+          "index": 158
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::SetCapacity:System.Void(System.Reflection.Metadata.Ecma335.TableIndex,System.Int32)",
+          "index": 159
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetEditAndContinueLogEntries:System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Ecma335.EditAndContinueLogEntry>(System.Reflection.Metadata.MetadataReader)",
+          "index": 160
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetEditAndContinueMapEntries:System.Collections.Generic.IEnumerable<System.Reflection.Metadata.EntityHandle>(System.Reflection.Metadata.MetadataReader)",
+          "index": 161
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetHeapMetadataOffset:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Ecma335.HeapIndex)",
+          "index": 162
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetHeapSize:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Ecma335.HeapIndex)",
+          "index": 163
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetNextHandle:System.Reflection.Metadata.BlobHandle(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.BlobHandle)",
+          "index": 164
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetNextHandle:System.Reflection.Metadata.StringHandle(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.StringHandle)",
+          "index": 165
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetNextHandle:System.Reflection.Metadata.UserStringHandle(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.UserStringHandle)",
+          "index": 166
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetTableMetadataOffset:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Ecma335.TableIndex)",
+          "index": 167
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetTableRowCount:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Ecma335.TableIndex)",
+          "index": 168
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetTableRowSize:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Ecma335.TableIndex)",
+          "index": 169
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetTypesWithEvents:System.Collections.Generic.IEnumerable<System.Reflection.Metadata.TypeDefinitionHandle>(System.Reflection.Metadata.MetadataReader)",
+          "index": 170
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetTypesWithProperties:System.Collections.Generic.IEnumerable<System.Reflection.Metadata.TypeDefinitionHandle>(System.Reflection.Metadata.MetadataReader)",
+          "index": 171
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::ResolveSignatureTypeKind:System.Reflection.Metadata.SignatureTypeKind(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.EntityHandle,System.Byte)",
+          "index": 172
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataRootBuilder::Serialize:System.Void(System.Reflection.Metadata.BlobBuilder,System.Int32,System.Int32)",
+          "index": 173
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataSizes::GetAlignedHeapSize:System.Int32(System.Reflection.Metadata.Ecma335.HeapIndex)",
+          "index": 174
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::AssemblyFileHandle:System.Reflection.Metadata.AssemblyFileHandle(System.Int32)",
+          "index": 175
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::AssemblyReferenceHandle:System.Reflection.Metadata.AssemblyReferenceHandle(System.Int32)",
+          "index": 176
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::BlobHandle:System.Reflection.Metadata.BlobHandle(System.Int32)",
+          "index": 177
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ConstantHandle:System.Reflection.Metadata.ConstantHandle(System.Int32)",
+          "index": 178
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::CustomAttributeHandle:System.Reflection.Metadata.CustomAttributeHandle(System.Int32)",
+          "index": 179
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::CustomDebugInformationHandle:System.Reflection.Metadata.CustomDebugInformationHandle(System.Int32)",
+          "index": 180
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::DeclarativeSecurityAttributeHandle:System.Reflection.Metadata.DeclarativeSecurityAttributeHandle(System.Int32)",
+          "index": 181
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::DocumentHandle:System.Reflection.Metadata.DocumentHandle(System.Int32)",
+          "index": 182
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::DocumentNameBlobHandle:System.Reflection.Metadata.DocumentNameBlobHandle(System.Int32)",
+          "index": 183
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::EntityHandle:System.Reflection.Metadata.EntityHandle(System.Int32)",
+          "index": 184
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::EntityHandle:System.Reflection.Metadata.EntityHandle(System.Reflection.Metadata.Ecma335.TableIndex,System.Int32)",
+          "index": 185
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::EventDefinitionHandle:System.Reflection.Metadata.EventDefinitionHandle(System.Int32)",
+          "index": 186
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ExportedTypeHandle:System.Reflection.Metadata.ExportedTypeHandle(System.Int32)",
+          "index": 187
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::FieldDefinitionHandle:System.Reflection.Metadata.FieldDefinitionHandle(System.Int32)",
+          "index": 188
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GenericParameterConstraintHandle:System.Reflection.Metadata.GenericParameterConstraintHandle(System.Int32)",
+          "index": 189
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GenericParameterHandle:System.Reflection.Metadata.GenericParameterHandle(System.Int32)",
+          "index": 190
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetHeapOffset:System.Int32(System.Reflection.Metadata.BlobHandle)",
+          "index": 191
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetHeapOffset:System.Int32(System.Reflection.Metadata.GuidHandle)",
+          "index": 192
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetHeapOffset:System.Int32(System.Reflection.Metadata.Handle)",
+          "index": 193
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetHeapOffset:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Handle)",
+          "index": 194
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetHeapOffset:System.Int32(System.Reflection.Metadata.StringHandle)",
+          "index": 195
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetHeapOffset:System.Int32(System.Reflection.Metadata.UserStringHandle)",
+          "index": 196
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetRowNumber:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 197
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetRowNumber:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.EntityHandle)",
+          "index": 198
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetToken:System.Int32(System.Reflection.Metadata.EntityHandle)",
+          "index": 199
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetToken:System.Int32(System.Reflection.Metadata.Handle)",
+          "index": 200
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetToken:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.EntityHandle)",
+          "index": 201
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetToken:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Handle)",
+          "index": 202
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GuidHandle:System.Reflection.Metadata.GuidHandle(System.Int32)",
+          "index": 203
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::Handle:System.Reflection.Metadata.Handle(System.Int32)",
+          "index": 204
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::Handle:System.Reflection.Metadata.EntityHandle(System.Reflection.Metadata.Ecma335.TableIndex,System.Int32)",
+          "index": 205
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ImportScopeHandle:System.Reflection.Metadata.ImportScopeHandle(System.Int32)",
+          "index": 206
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::InterfaceImplementationHandle:System.Reflection.Metadata.InterfaceImplementationHandle(System.Int32)",
+          "index": 207
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::LocalConstantHandle:System.Reflection.Metadata.LocalConstantHandle(System.Int32)",
+          "index": 208
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::LocalScopeHandle:System.Reflection.Metadata.LocalScopeHandle(System.Int32)",
+          "index": 209
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::LocalVariableHandle:System.Reflection.Metadata.LocalVariableHandle(System.Int32)",
+          "index": 210
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ManifestResourceHandle:System.Reflection.Metadata.ManifestResourceHandle(System.Int32)",
+          "index": 211
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MemberReferenceHandle:System.Reflection.Metadata.MemberReferenceHandle(System.Int32)",
+          "index": 212
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MethodDebugInformationHandle:System.Reflection.Metadata.MethodDebugInformationHandle(System.Int32)",
+          "index": 213
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MethodDefinitionHandle:System.Reflection.Metadata.MethodDefinitionHandle(System.Int32)",
+          "index": 214
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MethodImplementationHandle:System.Reflection.Metadata.MethodImplementationHandle(System.Int32)",
+          "index": 215
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MethodSpecificationHandle:System.Reflection.Metadata.MethodSpecificationHandle(System.Int32)",
+          "index": 216
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ModuleReferenceHandle:System.Reflection.Metadata.ModuleReferenceHandle(System.Int32)",
+          "index": 217
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ParameterHandle:System.Reflection.Metadata.ParameterHandle(System.Int32)",
+          "index": 218
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::PropertyDefinitionHandle:System.Reflection.Metadata.PropertyDefinitionHandle(System.Int32)",
+          "index": 219
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::StandaloneSignatureHandle:System.Reflection.Metadata.StandaloneSignatureHandle(System.Int32)",
+          "index": 220
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::StringHandle:System.Reflection.Metadata.StringHandle(System.Int32)",
+          "index": 221
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TryGetHeapIndex:System.Boolean(System.Reflection.Metadata.HandleKind,System.Reflection.Metadata.Ecma335.HeapIndex)",
+          "index": 222
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TryGetTableIndex:System.Boolean(System.Reflection.Metadata.HandleKind,System.Reflection.Metadata.Ecma335.TableIndex)",
+          "index": 223
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TypeDefinitionHandle:System.Reflection.Metadata.TypeDefinitionHandle(System.Int32)",
+          "index": 224
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TypeReferenceHandle:System.Reflection.Metadata.TypeReferenceHandle(System.Int32)",
+          "index": 225
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TypeSpecificationHandle:System.Reflection.Metadata.TypeSpecificationHandle(System.Int32)",
+          "index": 226
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::UserStringHandle:System.Reflection.Metadata.UserStringHandle(System.Int32)",
+          "index": 227
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder::AddMethodBody:System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder+MethodBody(System.Int32,System.Int32,System.Int32,System.Boolean,System.Reflection.Metadata.StandaloneSignatureHandle,System.Reflection.Metadata.Ecma335.MethodBodyAttributes)",
+          "index": 228
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder::AddMethodBody:System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder+MethodBody(System.Int32,System.Int32,System.Int32,System.Boolean,System.Reflection.Metadata.StandaloneSignatureHandle,System.Reflection.Metadata.Ecma335.MethodBodyAttributes,System.Boolean)",
+          "index": 229
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder::AddMethodBody:System.Int32(System.Reflection.Metadata.Ecma335.InstructionEncoder,System.Int32,System.Reflection.Metadata.StandaloneSignatureHandle,System.Reflection.Metadata.Ecma335.MethodBodyAttributes)",
+          "index": 230
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder::AddMethodBody:System.Int32(System.Reflection.Metadata.Ecma335.InstructionEncoder,System.Int32,System.Reflection.Metadata.StandaloneSignatureHandle,System.Reflection.Metadata.Ecma335.MethodBodyAttributes,System.Boolean)",
+          "index": 231
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodSignatureEncoder::Parameters:System.Void(System.Int32,System.Action<System.Reflection.Metadata.Ecma335.ReturnTypeEncoder>,System.Action<System.Reflection.Metadata.Ecma335.ParametersEncoder>)",
+          "index": 232
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodSignatureEncoder::Parameters:System.Void(System.Int32,System.Reflection.Metadata.Ecma335.ReturnTypeEncoder,System.Reflection.Metadata.Ecma335.ParametersEncoder)",
+          "index": 233
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder::AddArgument:System.Void(System.Boolean,System.Action<System.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder>,System.Action<System.Reflection.Metadata.Ecma335.NameEncoder>,System.Action<System.Reflection.Metadata.Ecma335.LiteralEncoder>)",
+          "index": 234
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder::AddArgument:System.Void(System.Boolean,System.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder,System.Reflection.Metadata.Ecma335.NameEncoder,System.Reflection.Metadata.Ecma335.LiteralEncoder)",
+          "index": 235
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder::Object:System.Void()",
+          "index": 236
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder::ScalarType:System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder()",
+          "index": 237
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder::SZArray:System.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder()",
+          "index": 238
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NameEncoder::Name:System.Void(System.String)",
+          "index": 239
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ParametersEncoder::AddParameter:System.Reflection.Metadata.Ecma335.ParameterTypeEncoder()",
+          "index": 240
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ParametersEncoder::StartVarArgs:System.Reflection.Metadata.Ecma335.ParametersEncoder()",
+          "index": 241
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ParameterTypeEncoder::CustomModifiers:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder()",
+          "index": 242
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ParameterTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean)",
+          "index": 243
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ParameterTypeEncoder::TypedReference:System.Void()",
+          "index": 244
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.PermissionSetEncoder::AddPermission:System.Reflection.Metadata.Ecma335.PermissionSetEncoder(System.String,System.Collections.Immutable.ImmutableArray<System.Byte>)",
+          "index": 245
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.PermissionSetEncoder::AddPermission:System.Reflection.Metadata.Ecma335.PermissionSetEncoder(System.String,System.Reflection.Metadata.BlobBuilder)",
+          "index": 246
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.PortablePdbBuilder::Serialize:System.Reflection.Metadata.BlobContentId(System.Reflection.Metadata.BlobBuilder)",
+          "index": 247
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::CustomModifiers:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder()",
+          "index": 248
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean)",
+          "index": 249
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::TypedReference:System.Void()",
+          "index": 250
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::Void:System.Void()",
+          "index": 251
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ScalarEncoder::Constant:System.Void(System.Object)",
+          "index": 252
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ScalarEncoder::NullArray:System.Void()",
+          "index": 253
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ScalarEncoder::SystemType:System.Void(System.String)",
+          "index": 254
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Array:System.Void(System.Action<System.Reflection.Metadata.Ecma335.SignatureTypeEncoder>,System.Action<System.Reflection.Metadata.Ecma335.ArrayShapeEncoder>)",
+          "index": 255
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Array:System.Void(System.Reflection.Metadata.Ecma335.SignatureTypeEncoder,System.Reflection.Metadata.Ecma335.ArrayShapeEncoder)",
+          "index": 256
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Boolean:System.Void()",
+          "index": 257
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Byte:System.Void()",
+          "index": 258
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Char:System.Void()",
+          "index": 259
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::CustomModifiers:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder()",
+          "index": 260
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Double:System.Void()",
+          "index": 261
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::FunctionPointer:System.Reflection.Metadata.Ecma335.MethodSignatureEncoder(System.Reflection.Metadata.SignatureCallingConvention,System.Reflection.Metadata.Ecma335.FunctionPointerAttributes,System.Int32)",
+          "index": 262
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::GenericInstantiation:System.Reflection.Metadata.Ecma335.GenericTypeArgumentsEncoder(System.Reflection.Metadata.EntityHandle,System.Int32,System.Boolean)",
+          "index": 263
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::GenericMethodTypeParameter:System.Void(System.Int32)",
+          "index": 264
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::GenericTypeParameter:System.Void(System.Int32)",
+          "index": 265
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Int16:System.Void()",
+          "index": 266
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Int32:System.Void()",
+          "index": 267
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Int64:System.Void()",
+          "index": 268
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::IntPtr:System.Void()",
+          "index": 269
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Object:System.Void()",
+          "index": 270
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Pointer:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder()",
+          "index": 271
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::PrimitiveType:System.Void(System.Reflection.Metadata.PrimitiveTypeCode)",
+          "index": 272
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::SByte:System.Void()",
+          "index": 273
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Single:System.Void()",
+          "index": 274
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::String:System.Void()",
+          "index": 275
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::SZArray:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder()",
+          "index": 276
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Type:System.Void(System.Reflection.Metadata.EntityHandle,System.Boolean)",
+          "index": 277
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::TypedReference:System.Void()",
+          "index": 278
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::UInt16:System.Void()",
+          "index": 279
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::UInt32:System.Void()",
+          "index": 280
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::UInt64:System.Void()",
+          "index": 281
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::UIntPtr:System.Void()",
+          "index": 282
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::VoidPointer:System.Void()",
+          "index": 283
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SwitchInstructionEncoder::Branch:System.Void(System.Reflection.Metadata.Ecma335.LabelHandle)",
+          "index": 284
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.VectorEncoder::Count:System.Reflection.Metadata.Ecma335.LiteralsEncoder(System.Int32)",
+          "index": 285
+        }
+      ]
+    },
+    {
+      "slug": "global-ns",
+      "namespaces": [
+        "System.Reflection.PortableExecutable"
+      ],
+      "methodCount": 25,
+      "methods": [
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16,System.Int32)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEmbeddedPortablePdbEntry:System.Void(System.Reflection.Metadata.BlobBuilder,System.UInt16)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddPdbChecksumEntry:System.Void(System.String,System.Collections.Immutable.ImmutableArray<System.Byte>)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddReproducibleEntry:System.Void()",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.ManagedPEBuilder::Sign:System.Void(System.Reflection.Metadata.BlobBuilder,System.Func<System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,System.Byte[]>)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaderBuilder::CreateExecutableHeader:System.Reflection.PortableExecutable.PEHeaderBuilder()",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaderBuilder::CreateLibraryHeader:System.Reflection.PortableExecutable.PEHeaderBuilder()",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaders::GetContainingSectionIndex:System.Int32(System.Int32)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaders::TryGetDirectoryOffset:System.Boolean(System.Reflection.PortableExecutable.DirectoryEntry,System.Int32)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetContent:System.Collections.Immutable.ImmutableArray<System.Byte>()",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetContent:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Int32,System.Int32)",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetReader:System.Reflection.Metadata.BlobReader()",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetReader:System.Reflection.Metadata.BlobReader(System.Int32,System.Int32)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::Dispose:System.Void()",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetEntireImage:System.Reflection.PortableExecutable.PEMemoryBlock()",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetMetadata:System.Reflection.PortableExecutable.PEMemoryBlock()",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetSectionData:System.Reflection.PortableExecutable.PEMemoryBlock(System.Int32)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetSectionData:System.Reflection.PortableExecutable.PEMemoryBlock(System.String)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::ReadCodeViewDebugDirectoryData:System.Reflection.PortableExecutable.CodeViewDebugDirectoryData(System.Reflection.PortableExecutable.DebugDirectoryEntry)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::ReadDebugDirectory:System.Collections.Immutable.ImmutableArray<System.Reflection.PortableExecutable.DebugDirectoryEntry>()",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::ReadEmbeddedPortablePdbDebugDirectoryData:System.Reflection.Metadata.MetadataReaderProvider(System.Reflection.PortableExecutable.DebugDirectoryEntry)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::ReadPdbChecksumDebugDirectoryData:System.Reflection.PortableExecutable.PdbChecksumDebugDirectoryData(System.Reflection.PortableExecutable.DebugDirectoryEntry)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::TryOpenAssociatedPortablePdb:System.Boolean(System.String,System.Func<System.String,System.IO.Stream>,System.Reflection.Metadata.MetadataReaderProvider,System.String)",
+          "index": 24
+        }
+      ]
+    }
+  ]
+}

@@ -21,31 +21,34 @@ except ImportError:
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
 YAML_PATH = REPO_ROOT / "schemas" / "ir_opcodes.yaml"
-# Default output paths live under *generated/* subdirs (hermetic model).
-# --out-dir <dir> overrides the C++/C# output *directory* so the drift guard can
-# sandbox a regeneration into a temp dir without touching the repo.
-DEFAULT_CPP_OUT = (
-    REPO_ROOT / "src" / "native" / "interpreter" / "generated"
+CPP_ENUM_PATH = (
+    REPO_ROOT
+    / "src"
+    / "native"
+    / "interpreter"
+    / "generated"
+    / "ir_opcodes.h"
 )
-DEFAULT_CSHARP_OUT = (
-    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "generated"
+CPP_NAMES_PATH = (
+    REPO_ROOT
+    / "src"
+    / "native"
+    / "interpreter"
+    / "generated"
+    / "ir_opcode_names.h"
 )
-CPP_ENUM_REL = "ir_opcodes.h"
-CPP_NAMES_REL = "ir_opcode_names.h"
-CSHARP_ENUM_REL = "InstructionOpCode.cs"
-
-
-def _display(path: Path) -> str:
-    """Repo-relative display path for logs; fall back to abspath when outside repo
-    (e.g. --out-dir sandbox in /tmp)."""
-    try:
-        return str(path.relative_to(REPO_ROOT))
-    except ValueError:
-        return str(path)
+CSHARP_ENUM_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.Contracts"
+    / "generated"
+    / "InstructionOpCode.cs"
+)
 
 
 def load_opcodes(path: Path):
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, "r") as f:
         data = yaml.safe_load(f)
     return data["opcodes"]
 
@@ -78,7 +81,7 @@ def generate_cpp_enum(opcodes, path: Path):
     text = "\n".join(lines)
     with open(path, "w") as f:
         f.write(text)
-    print(f"  [ok] {_display(path)} ({count} opcodes)")
+    print(f"  [ok] {path.relative_to(REPO_ROOT)} ({count} opcodes)")
 
 
 def generate_cpp_names(opcodes, path: Path):
@@ -110,7 +113,7 @@ def generate_cpp_names(opcodes, path: Path):
     text = "\n".join(lines)
     with open(path, "w") as f:
         f.write(text)
-    print(f"  [ok] {_display(path)} ({count} names)")
+    print(f"  [ok] {path.relative_to(REPO_ROOT)} ({count} names)")
 
 
 def generate_csharp_enum(opcodes, path: Path):
@@ -133,42 +136,23 @@ def generate_csharp_enum(opcodes, path: Path):
     text = "\n".join(lines)
     with open(path, "w") as f:
         f.write(text)
-    print(f"  [ok] {_display(path)} ({count} opcodes)")
+    print(f"  [ok] {path.relative_to(REPO_ROOT)} ({count} opcodes)")
 
 
 def main():
-    import argparse
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument(
-        "--out-dir", metavar="DIR", default=None,
-        help="Override output directory (sandbox/drift-check). Writes "
-             "<out>/%s, <out>/%s and <out>/%s instead of the repo's generated/ "
-             "dirs. Default: repo's generated/ dirs." % (CPP_ENUM_REL, CPP_NAMES_REL, CSHARP_ENUM_REL),
-    )
-    args = ap.parse_args()
-
     print("Loading opcodes from schemas/ir_opcodes.yaml ...")
     opcodes = load_opcodes(YAML_PATH)
     print(f"  loaded {len(opcodes)} opcodes (0..{opcodes[-1]['value']})")
     print()
 
-    if args.out_dir:
-        out = Path(args.out_dir)
-        out.mkdir(parents=True, exist_ok=True)
-        cpp_out = out
-        csharp_out = out
-    else:
-        cpp_out = DEFAULT_CPP_OUT
-        csharp_out = DEFAULT_CSHARP_OUT
-
     print("Generating C++ enum  -> ir_opcodes.h")
-    generate_cpp_enum(opcodes, cpp_out / CPP_ENUM_REL)
+    generate_cpp_enum(opcodes, CPP_ENUM_PATH)
 
     print("Generating C++ names -> ir_opcode_names.h")
-    generate_cpp_names(opcodes, cpp_out / CPP_NAMES_REL)
+    generate_cpp_names(opcodes, CPP_NAMES_PATH)
 
     print("Generating C# enum   -> InstructionOpCode.cs")
-    generate_csharp_enum(opcodes, csharp_out / CSHARP_ENUM_REL)
+    generate_csharp_enum(opcodes, CSHARP_ENUM_PATH)
 
     print()
     print("All generated files updated.")

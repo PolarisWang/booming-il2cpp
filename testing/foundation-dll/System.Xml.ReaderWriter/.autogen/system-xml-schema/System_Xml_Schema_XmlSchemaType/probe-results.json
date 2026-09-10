@@ -1,0 +1,67 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Xml.Schema.XmlSchemaType::GetBuiltInSimpleType:System.Xml.Schema.XmlSchemaSimpleType(System.Xml.XmlQualifiedName)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Xml.Schema.XmlSchemaType::GetBuiltInSimpleType:System.Xml.Schema.XmlSchemaSimpleType(System.Xml.Schema.XmlTypeCode)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "null",
+    "returnValueType": "",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Xml.Schema.XmlSchemaType::GetBuiltInComplexType:System.Xml.Schema.XmlSchemaComplexType(System.Xml.Schema.XmlTypeCode)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "null",
+    "returnValueType": "",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.Xml.Schema.XmlSchemaType::GetBuiltInComplexType:System.Xml.Schema.XmlSchemaComplexType(System.Xml.XmlQualifiedName)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 4,
+    "setIndex": 0,
+    "subjectId": "System.Xml.Schema.XmlSchemaType::IsDerivedFrom:System.Boolean(System.Xml.Schema.XmlSchemaType,System.Xml.Schema.XmlSchemaType,System.Xml.Schema.XmlSchemaDerivationMethod)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "false",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

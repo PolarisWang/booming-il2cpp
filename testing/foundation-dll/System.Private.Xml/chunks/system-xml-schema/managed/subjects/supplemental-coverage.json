@@ -1,0 +1,52 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Private.Xml",
+  "chunkSlug": "system-xml-schema",
+  "entries": [
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.ValidationEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Xml.Schema.ValidationEventArgs,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.ValidationEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.ValidationEventHandler::Invoke:System.Void(System.Object,System.Xml.Schema.ValidationEventArgs)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollection::CopyTo:System.Void(System.Xml.Schema.XmlSchema[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaCollectionEnumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaInferenceException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectCollection::CopyTo:System.Void(System.Xml.Schema.XmlSchemaObject[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectEnumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectEnumerator::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaSet::CopyTo:System.Void(System.Xml.Schema.XmlSchema[],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaValidationException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlValueGetter::BeginInvoke:System.IAsyncResult(System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlValueGetter::EndInvoke:System.Object(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Private.Xml/System.Xml.Schema.XmlValueGetter::Invoke:System.Object()"
+    }
+  ]
+}

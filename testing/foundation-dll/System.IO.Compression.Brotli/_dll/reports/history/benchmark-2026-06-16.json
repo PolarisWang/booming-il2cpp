@@ -1,0 +1,56 @@
+{
+  "date": "2026-06-16",
+  "assemblyName": "System.IO.Compression.Brotli",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 18,
+        "total": 34,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 49,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 34,
+        "iterations": 10000,
+        "meanDurationMs": 0.013082352941176472,
+        "meanOpsPerSecond": 362927968.1,
+        "minDurationMs": 0,
+        "maxDurationMs": 0.029,
+        "totalDurationMs": 0.44480000000000003,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 4.1,
+        "totalOutliers": 19,
+        "meanCv": 0.076063375,
+        "maxCv": 0.232892
+      },
+      "hotupdate": {
+        "passed": 46,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2827264,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

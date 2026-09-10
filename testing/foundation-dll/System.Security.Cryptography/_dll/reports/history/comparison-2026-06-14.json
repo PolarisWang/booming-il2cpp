@@ -1,0 +1,25 @@
+{
+  "date": "2026-06-14",
+  "assemblyName": "System.Security.Cryptography",
+  "aggregate": {
+    "highValueMethods_betterThanNet8": 0
+  },
+  "perChunk": [
+    {
+      "slug": "security-cryptography",
+      "methodCount": 145,
+      "methodsWithNet8": 0,
+      "aggregate": {
+        "methodsBetterThanNet8": 0
+      }
+    },
+    {
+      "slug": "security-cryptography-2",
+      "methodCount": 145,
+      "methodsWithNet8": 0,
+      "aggregate": {
+        "methodsBetterThanNet8": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Reflection.Metadata",
+  "chunkSlug": "system-reflection-metadata-ecma335",
+  "entries": [
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder::AddMethodBody:System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder+MethodBody(System.Int32,System.Int32,System.Int32,System.Boolean,System.Reflection.Metadata.StandaloneSignatureHandle,System.Reflection.Metadata.Ecma335.MethodBodyAttributes)"
+    },
+    {
+      "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder::AddMethodBody:System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder+MethodBody(System.Int32,System.Int32,System.Int32,System.Boolean,System.Reflection.Metadata.StandaloneSignatureHandle,System.Reflection.Metadata.Ecma335.MethodBodyAttributes,System.Boolean)"
+    }
+  ]
+}

@@ -2,15 +2,14 @@
 #define CHAOS_IL2CPP_GC_LOH_H_
 
 #include <chaos/native_types.h>
-#include "gc_lock.h"   // GcSpinLock / GcSpinLockGuard
 
 #include "gc_card_table.h"
-#include "gc_region.h"
 
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
+#include <mutex>
 #include <utility>
 #include <vector>
 
@@ -30,10 +29,7 @@ namespace chaos::il2cpp::runtime_core {
 // [LOHSegment header | mark_bit (1 byte) | payload (size aligned to segment)]
 // ======================================================================
 
-// Runtime-latchable (not constexpr): defaults to the historical 85 KB but is
-// overwritten from GcConfig().LohThreshold during GC init so the
-// CHAOS_GC_LOHThreshold knob drives the real LOH classification path.
-inline CHAOS_IL2CPP_SIZE kLohThreshold = 85 * 1024;    // 85 KB
+static constexpr CHAOS_IL2CPP_SIZE kLohThreshold = 85 * 1024;     // 85 KB
 static constexpr CHAOS_IL2CPP_SIZE kLohSegmentSize = 64 * 1024;   // 64 KB min segment
 
 /// LOH segment header (at the start of each VirtualAlloc'd block).
@@ -42,7 +38,6 @@ struct LohSegment {
     CHAOS_IL2CPP_SIZE payload_size;          ///< Usable payload bytes
     std::atomic<bool> in_use;                ///< true = segment actively used
     std::atomic<bool> marked;                ///< true = object in this segment is marked live
-    RegionId region_id;                      ///< Backing region ; kRegionIdInvalid if raw
 };
 
 /// Large Object Heap — mark-sweep with optional compaction.
@@ -92,9 +87,8 @@ public:
                                           Fn&& callback) {
         // LOH segments are registered with the card table via GcRegisterHeapRange
         // (added in Allocate).  Walk segments and scan dirty cards within each
-        // segment's payload range.  Preemptive scope: the spinlock may contend.
-        const ScopedPreemptiveMode preemptive_guard;
-        GcSpinLockGuard lock(mutex_);
+        // segment's payload range.
+        std::lock_guard<std::mutex> lock(mutex_);
         for (auto* seg = segment_list_; seg != nullptr; seg = seg->next) {
             if (!seg->in_use.load(std::memory_order_acquire)) continue;
             uintptr_t payload_start = reinterpret_cast<uintptr_t>(seg) + sizeof(LohSegment);
@@ -136,10 +130,6 @@ public:
     /// caller can fix up references (e.g., via GlobalRelocate-style walk).
     CHAOS_IL2CPP_SIZE Compact(std::vector<std::pair<void*, void*>>& out_relocations);
 
-    /// Diagnostics accessor for the active segment list (GCVerify / tooling).
-    /// Returns the head of segment_list_ (may be null).  Not for mutation.
-    LohSegment* SegmentListForDiag() const noexcept { return segment_list_; }
-
 private:
     /// Allocate a new segment from the OS.
     LohSegment* AllocateSegment(CHAOS_IL2CPP_SIZE min_size);
@@ -155,7 +145,7 @@ private:
     int segment_count_ = 0;
     std::atomic<CHAOS_IL2CPP_SIZE> total_allocated_{0};
     CompactMode compact_mode_{CompactMode::AUTOMATIC}; ///< Default: AUTOMATIC compaction
-    mutable GcSpinLock mutex_;    // alertable spinlock (replaces std::mutex)
+    mutable std::mutex mutex_;
 };
 
 /// Global LOH instance.

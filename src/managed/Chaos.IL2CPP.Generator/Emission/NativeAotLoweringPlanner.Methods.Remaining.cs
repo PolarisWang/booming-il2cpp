@@ -57,7 +57,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// <param name="codegenNamespace">C++ namespace for the codegen (e.g. "CombinedSubjects").
     /// Declarations are wrapped in `namespace chaos::il2cpp::codegen::{codegenNamespace}` to
     /// match the definition namespace on page 0, avoiding linker unresolved externals.</param>
-    private string BuildTypeDeclarationsCode(string codegenNamespace, IReadOnlySet<string>? extraValuetypes = null)
+    private string BuildTypeDeclarationsCode(string codegenNamespace)
     {
         if (_allEmittedTypeSubjectIds is not { Count: > 0 })
             return string.Empty;
@@ -89,76 +89,15 @@ public sealed partial class NativeAotLoweringPlanner
             hasAnyForwardDeclarations = true;
         }
         // Emit typedef for remaining value types (enum-like, no struct definition).
-        var typedefNames = new HashSet<string>(StringComparer.Ordinal);
-        // Phase 1: collect from _emittedValueTypeSubjectIds (ObjectModelEmission types)
         if (_emittedValueTypeSubjectIds is { Count: > 0 })
         {
             HashSet<string>? structSubjectIds = _valueTypeStructSubjectIds;
             foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
             {
                 if (structSubjectIds?.Contains(typeId) == true)
-                    continue;
-                typedefNames.Add(GetNativeValueTypeSymbol(typeId));
-            }
-        }
-        // Phase 2: collect from extraValuetypes (method body scan)
-        if (extraValuetypes is { Count: > 0 })
-        {
-            foreach (var name in extraValuetypes)
-                typedefNames.Add(name);
-        }
-        // Phase 3: scan _methodDeclarations for chaos_valuetype_* references.
-        // Method declarations (extern "C" function signatures) are rendered into page
-        // files via Scriban templates.  They reference chaos_valuetype_* types from
-        // external assemblies (e.g. System.Data.CommandBehavior) that are NOT in
-        // _emittedValueTypeSubjectIds or extraValuetypes because they appear only as
-        // ABI parameter types in extern declarations, not in method bodies or IR slots.
-        // Exclude names that have struct definitions (tracked by _valueTypeStructSubjectIds).
-        HashSet<string>? structSubjectIds3 = _valueTypeStructSubjectIds;
-        var structVtNames = new HashSet<string>(StringComparer.Ordinal);
-        if (structSubjectIds3 is { Count: > 0 })
-        {
-            foreach (var sid in structSubjectIds3)
-                structVtNames.Add(GetNativeValueTypeSymbol(sid));
-        }
-        if (_methodDeclarations is { Count: > 0 })
-        {
-            foreach (var decl in _methodDeclarations)
-            {
-                int pos = 0;
-                while ((pos = decl.IndexOf("chaos_valuetype_", pos, StringComparison.Ordinal)) >= 0)
-                {
-                    int start = pos;
-                    int end = pos + 16;
-                    while (end < decl.Length && (char.IsLetterOrDigit(decl[end]) || decl[end] == '_'))
-                        end++;
-                    var name = decl.Substring(start, end - start);
-                    if (!structVtNames.Contains(name))
-                        typedefNames.Add(name);
-                    pos = end;
-                }
-            }
-        }
-        if (typedefNames.Count > 0)
-        {
-            // Exclude names that have struct definitions in vtCode.
-            var skipNames = new HashSet<string>(StringComparer.Ordinal);
-            if (vtCode is { Length: > 0 })
-            {
-                int pos = 0;
-                while ((pos = vtCode.IndexOf("struct chaos_valuetype_", pos, StringComparison.Ordinal)) >= 0)
-                {
-                    int end = vtCode.IndexOfAny(new[] { ' ', '{' }, pos);
-                    if (end < 0) break;
-                    skipNames.Add(vtCode[pos..end]);
-                    pos = end;
-                }
-            }
-            foreach (var name in typedefNames.OrderBy(n => n, StringComparer.Ordinal))
-            {
-                if (skipNames.Contains(name)) continue;
+                    continue; // already has struct definition above
                 sb.Append("typedef CHAOS_IL2CPP_INT32 ");
-                sb.Append(name);
+                sb.Append(GetNativeValueTypeSymbol(typeId));
                 sb.AppendLine(";");
             }
             hasAnyForwardDeclarations = true;
@@ -334,40 +273,6 @@ public sealed partial class NativeAotLoweringPlanner
             sb.AppendLine();
         }
 
-        // ── Extra static field extern declarations (body-scan discovered) ──
-        // In page-split codegen, lowered IR can emit chaos_static_* references
-        // (e.g., UIntPtr.Zero) without registering in _staticFieldDeclarations.
-        // The post-scan in Methods.cs catches these and stores them in
-        // _extraStaticFieldSymbols — emit them as opaque extern "C" symbols so
-        // page files compile without C2065.
-        if (_extraStaticFieldSymbols is { Count: > 0 })
-        {
-            foreach (var sym in _extraStaticFieldSymbols.OrderBy(s => s, StringComparer.Ordinal))
-            {
-                sb.Append("extern CHAOS_IL2CPP_INTPTR ");
-                sb.Append(sym);
-                sb.AppendLine(";");
-            }
-            sb.AppendLine();
-        }
-
-        // ── Extra MethodTable extern declarations (body-scan discovered) ──
-        // Lowered IR can emit chaos_mt_* references (e.g., InterfaceMapping,
-        // ValueTuple<UIntPtr,UIntPtr>) without the type being registered in
-        // _allEmittedTypeSubjectIds.  Emit `extern MethodTable chaos_mt_*;`
-        // declarations (matching the object-model pattern) so page files can
-        // reference the MethodTable variable without C3861.
-        if (_extraMethodTableSymbols is { Count: > 0 })
-        {
-            foreach (var sym in _extraMethodTableSymbols.OrderBy(s => s, StringComparer.Ordinal))
-            {
-                sb.Append("extern MethodTable ");
-                sb.Append(sym);
-                sb.AppendLine(";");
-            }
-            sb.AppendLine();
-        }
-
         // ── Interface type ID constants (inline constexpr, inside namespace) ──
         // Interface map arrays in page files reference chaos_type_id_* constants.
         // Emit as `inline constexpr` in the shared header so all TUs get their own
@@ -501,11 +406,6 @@ public sealed partial class NativeAotLoweringPlanner
         // ── chaos_external_runtime_* declarations (inside codegen namespace) ──
         // These helpers are DEFINED on page 0 inside the codegen namespace, so their
         // extern declarations MUST also be inside the namespace to match.
-        // Deduplication by TargetSymbol: SanitizeSubjectId used by GetExternalRuntimeHelperSymbol
-        // is non-injective — different SubjectIds can map to the same sanitized symbol
-        // (e.g. generic instantiations).  Emitting two extern "C" declarations with
-        // the same name but different signatures causes C2733.
-        var seenTargetSymbols = new HashSet<string>(StringComparer.Ordinal);
         if (_externalRuntimeHelpers is { Count: > 0 })
         {
             sb.Append("namespace chaos::il2cpp::codegen::");
@@ -513,35 +413,17 @@ public sealed partial class NativeAotLoweringPlanner
             sb.AppendLine("{");
             foreach (var helper in _externalRuntimeHelpers)
             {
-                // Deduplicate by TargetSymbol — two different SubjectIds may
-                // sanitize to the same symbol name, and extern "C" doesn't
-                // allow overloading by parameter types (C2733).
-                if (!string.IsNullOrEmpty(helper.TargetSymbol) &&
-                    !seenTargetSymbols.Add(helper.TargetSymbol))
-                    continue;
-
                 // Extract the first line of the source (the function signature)
-                // and convert it to a declaration by appending ";".  Some
-                // external-runtime helpers (e.g. the async AwaitUnsafeOnCompleted /
-                // builder.Start inline stubs) author their Source as a multi-line
-                // function DEFINITION whose first line ends with an opening `{`:
-                //   extern "C" CHAOS_IL2CPP_INTPTR foo(...)  {
-                //     <body as lines 2..n>
-                //   }
-                // The shared-header only needs the DECLARATION.  Strip a trailing `{`
-                // from that first line before appending `;`, otherwise we emit the
-                // malformed `...(...) {;` (C2598 / unmatched-brace C1075).
+                // and convert it to a declaration by appending ";".
                 var source = helper.Source;
                 if (string.IsNullOrEmpty(source))
                     continue;
                 int newlineIdx = source.IndexOf('\n');
                 string signatureLine = newlineIdx >= 0
-                    ? source.Substring(0, newlineIdx).TrimEnd()
+                    ? source.Substring(0, newlineIdx).Trim()
                     : source.Trim();
                 if (string.IsNullOrEmpty(signatureLine))
                     continue;
-                if (signatureLine.EndsWith("{"))
-                    signatureLine = signatureLine.Substring(0, signatureLine.Length - 1).TrimEnd();
                 // Remove `static ` prefix if present (should be gone after template fix,
                 // but handle gracefully for any remaining static helpers).
                 // Also skip `extern "C" ` prefix if present — the declaration already
@@ -576,27 +458,19 @@ public sealed partial class NativeAotLoweringPlanner
         // Only emit for helpers with non-empty Source (they have real signatures).
         // DirectNativeSymbol-only helpers (empty Source) get a separate minimal
         // extern "C" fallback below.
-        // Dedup by TargetSymbol (same seenTargetSymbols from Section 1).
         if (_externalRuntimeHelpers is { Count: > 0 })
         {
             foreach (var helper in _externalRuntimeHelpers)
             {
-                // Deduplicate by TargetSymbol (same set from Section 1 above).
-                if (!string.IsNullOrEmpty(helper.TargetSymbol) &&
-                    !seenTargetSymbols.Contains(helper.TargetSymbol))
-                    continue;
-
                 var source = helper.Source;
                 if (string.IsNullOrEmpty(source))
                     continue;
                 int newlineIdx = source.IndexOf('\n');
                 string signatureLine = newlineIdx >= 0
-                    ? source.Substring(0, newlineIdx).TrimEnd()
+                    ? source.Substring(0, newlineIdx).Trim()
                     : source.Trim();
                 if (string.IsNullOrEmpty(signatureLine))
                     continue;
-                if (signatureLine.EndsWith("{"))
-                    signatureLine = signatureLine.Substring(0, signatureLine.Length - 1).TrimEnd();
                 if (signatureLine.StartsWith("static ", StringComparison.Ordinal))
                     signatureLine = signatureLine.Substring(7);
                 if (signatureLine.StartsWith("extern \"C\" ", StringComparison.Ordinal))
@@ -647,32 +521,16 @@ public sealed partial class NativeAotLoweringPlanner
                 if (helpersWithSource.Contains(kvp.Key))
                     continue;
                 var symbol = GetExternalRuntimeHelperSymbol(kvp.Key);
-                // Skip if the symbol already has a declaration from any earlier section
-                // (helper template declarations or previously-processed subjects).
-                if (aotDeclaredSymbols.Contains(symbol) || !seenTargetSymbols.Add(symbol))
+                // Skip if the symbol already has an AOT declaration
+                // (from _externalRuntimeHelpers or BuildAbiExportDeclarations)
+                if (aotDeclaredSymbols.Contains(symbol))
                     continue;
-                // Look up the correct parameter count from _emittedExternalRuntimeSymbolParams
-                // (populated during method body emission from InvocationTarget.ParameterAbis).
-                // Without this, SkipInit(ref int) → 1 ABI param gets declared as 0-param,
-                // causing C2660 when the call site passes chaos_arg_0.
-                // Default to 1 param (CHAOS_IL2CPP_INTPTR) because ALL external runtime
-                // stubs are called with at least chaos_arg_0 (the this pointer or sole arg).
-                // Using 0-param () would conflict with AddExternalRuntimeStubs which correctly
-                // counts call-site args and emits (CHAOS_IL2CPP_INTPTR), causing C2733
-                // (extern "C" overloading disallowed) when both declarations are visible.
-                int extParamCount = _emittedExternalRuntimeSymbolParams.TryGetValue(symbol, out var epc) ? epc : 1;
                 // Generate extern "C" CHAOS_IL2CPP_INTPTR (same format as
                 // BuildAbiExportDeclarations) to avoid conflicting return type
                 // declarations at global scope.
                 fallbackSb.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
                 fallbackSb.Append(symbol);
-                fallbackSb.Append('(');
-                for (int __pi = 0; __pi < extParamCount; __pi++)
-                {
-                    if (__pi > 0) fallbackSb.Append(", ");
-                    fallbackSb.Append("CHAOS_IL2CPP_INTPTR");
-                }
-                fallbackSb.AppendLine(") noexcept;");
+                fallbackSb.AppendLine("() noexcept;");
                 fallbackCount++;
             }
             if (fallbackCount > 0)
@@ -707,10 +565,6 @@ public sealed partial class NativeAotLoweringPlanner
                 foreach (var h in _externalRuntimeHelpers)
                     declaredExtSymbols.Add(h.TargetSymbol);
             }
-            // Also consider symbols deduped by seenTargetSymbols to avoid
-            // emitting static inline stubs for symbols already declared as extern "C".
-            foreach (var s in seenTargetSymbols)
-                declaredExtSymbols.Add(s);
 
             foreach (var m in _methodsBySubjectId.Values)
             {
@@ -799,87 +653,16 @@ public sealed partial class NativeAotLoweringPlanner
                     AotCoreIrAbiCarrierKind.Float64 => "double",
                     _ => "CHAOS_IL2CPP_INTPTR",
                 };
-                // Look up the correct parameter count from _emittedExternalRuntimeSymbolParams
-                // (set at same time as _emittedExternalRuntimeSymbols from InvocationTarget).
-                // Without this, the stub declares () noexcept but the caller passes arguments,
-                // causing C2660 (function does not take N arguments).
-                int paramCount = _emittedExternalRuntimeSymbolParams.TryGetValue(kvp.Key, out var pc) ? pc : 0;
                 sb.Append("static inline ");
                 sb.Append(cppType);
                 sb.Append(' ');
                 sb.Append(kvp.Key);
-                sb.Append('(');
-                for (int __pi = 0; __pi < paramCount; __pi++)
-                {
-                    if (__pi > 0) sb.Append(", ");
-                    sb.Append("CHAOS_IL2CPP_INTPTR chaos_arg_");
-                    sb.Append(__pi);
-                }
-                sb.Append(") noexcept");
                 if (kvp.Value == AotCoreIrAbiCarrierKind.Void)
-                    sb.AppendLine(" {}");
+                    sb.AppendLine("() noexcept {}");
                 else
-                    sb.AppendLine(" { return 0; }");
+                    sb.AppendLine("() noexcept { return 0; }");
             }
             sb.AppendLine();
-        }
-
-        // ── Safety net: append missing chaos_valuetype_* typedefs ──
-        // Must run BEFORE BuildAbiExportDeclarations (which may return a modified
-        // string and skip the rest).  Scan sb for chaos_valuetype_* references
-        // lacking a corresponding typedef and append them.
-        AppendMissingValueTypeTypedefsForHeader(sb);
-
-        // ── Comprehensive extern declarations for ALL emitted external-runtime
-        // symbols ──
-        // Every chaos_external_runtime_* symbol the codegen emitted a call to during
-        // method body emission (page TUs included) must be declared in the shared
-        // header.  _emittedExternalRuntimeSymbols is the authoritative set (keyed by
-        // symbol, value = return ABI carrier).  The BuildAbiExportDeclarations
-        // post-scan at the end of this method only sees symbols *textually* present
-        // in the header body, which misses calls that appear only in separate page
-        // translation units (e.g. surfaced reflection/delegate helpers such as
-        // SubjectInstanceFactory__Create_System_Type__System_Type__).  Emitting the
-        // full set here (as extern "C" with correct arg counts) avoids C3861 in the
-        // pages while staying ODR-safe (extern declarations, no definitions).  Symbol
-        // already handled by _externalRuntimeSubjects/_externalRuntimeHelpers are
-        // skipped to avoid C2733 / C2371 conflicts.
-        if (_emittedExternalRuntimeSymbols is { Count: > 0 })
-        {
-            // Symbols already declared above via their SubjectId registrations.
-            var declaredViaSubjects = new HashSet<string>(StringComparer.Ordinal);
-            if (_externalRuntimeSubjects is { Count: > 0 })
-                foreach (var kvp in _externalRuntimeSubjects)
-                    declaredViaSubjects.Add(GetExternalRuntimeHelperSymbol(kvp.Key));
-            if (_externalRuntimeHelpers is { Count: > 0 })
-                foreach (var h in _externalRuntimeHelpers)
-                    if (!string.IsNullOrEmpty(h.TargetSymbol))
-                        declaredViaSubjects.Add(h.TargetSymbol);
-
-            var extHeaderSb = new System.Text.StringBuilder(2048);
-            int extDeclCount = 0;
-            foreach (var kvp in _emittedExternalRuntimeSymbols.OrderBy(kv => kv.Key, StringComparer.Ordinal))
-            {
-                if (declaredViaSubjects.Contains(kvp.Key)) continue;
-                if (!seenTargetSymbols.Add(kvp.Key)) continue;   // dedup / skip link-contradiction
-                int pc = _emittedExternalRuntimeSymbolParams.TryGetValue(kvp.Key, out var epc) ? epc : 1;
-                extHeaderSb.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
-                extHeaderSb.Append(kvp.Key);
-                extHeaderSb.Append('(');
-                for (int __pi = 0; __pi < pc; __pi++)
-                {
-                    if (__pi > 0) extHeaderSb.Append(", ");
-                    extHeaderSb.Append("CHAOS_IL2CPP_INTPTR");
-                }
-                extHeaderSb.AppendLine(") noexcept;");
-                extDeclCount++;
-            }
-            if (extDeclCount > 0)
-            {
-                sb.Append("// ── Emitted external-runtime symbol declarations (comprehensive) ──\n");
-                sb.Append(extHeaderSb.ToString());
-                sb.AppendLine();
-            }
         }
 
         // Phase 1a: ChaosAbiExportCollector — ensure every chaos_external_runtime_*
@@ -892,6 +675,8 @@ public sealed partial class NativeAotLoweringPlanner
 
         return sb.ToString();
     }
+
+
 
     /// <summary>Remove duplicate struct/boxed-type definitions from C++ code.
     /// FSharp.Core type forwarding may produce the same chaos_type_* symbol
@@ -961,75 +746,6 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
 
-
-    /// <summary>
-    /// Safety net: scan the generated header StringBuilder for any chaos_valuetype_*
-    /// references that lack a corresponding typedef and append the missing ones.
-    /// This catches value types referenced in TPG stub method declarations that are
-    /// not part of the AOT subject methods' type closure (e.g. System.Data.Common
-    /// internal enums like DataRowVersion, ConflictOption, CommandBehavior).
-    /// </summary>
-    private static void AppendMissingValueTypeTypedefsForHeader(StringBuilder sb)
-    {
-        var content = sb.ToString();
-
-        // Collect existing typedefs and struct definitions.
-        var existing = new HashSet<string>(StringComparer.Ordinal);
-        const string typedefPrefix = "typedef CHAOS_IL2CPP_INT32 chaos_valuetype_";
-        const string structPrefix = "struct chaos_valuetype_";
-        int pos = 0;
-        while ((pos = content.IndexOf(typedefPrefix, pos, StringComparison.Ordinal)) >= 0)
-        {
-            int end = content.IndexOf(';', pos);
-            if (end < 0) break;
-            var name = content.Substring(pos, end - pos).TrimEnd();
-            // Strip "typedef CHAOS_IL2CPP_INT32 " prefix to get bare symbol name
-            existing.Add(name[typedefPrefix.Length..]);
-            pos = end + 1;
-        }
-        pos = 0;
-        while ((pos = content.IndexOf(structPrefix, pos, StringComparison.Ordinal)) >= 0)
-        {
-            // The struct symbol name follows the full structPrefix ("struct chaos_valuetype_").
-            // Search for the first terminator AFTER the prefix; the prefix itself contains a
-            // space, so we must not use IndexOfAny from pos (it would match inside the keyword).
-            int nameStart = pos + structPrefix.Length;
-            int end = content.IndexOfAny(new[] { ' ', '{', ';' }, nameStart);
-            if (end < 0) end = content.Length;
-            if (end <= nameStart) { pos = end + 1; continue; }
-            existing.Add(content.Substring(nameStart, end - nameStart));
-            pos = end + 1;
-        }
-
-        // Scan for referenced chaos_valuetype_* symbols.
-        var needed = new HashSet<string>(StringComparer.Ordinal);
-        const string refPrefix = "chaos_valuetype_";
-        pos = 0;
-        while ((pos = content.IndexOf(refPrefix, pos, StringComparison.Ordinal)) >= 0)
-        {
-            int start = pos;
-            int end = start + refPrefix.Length;
-            while (end < content.Length && (char.IsLetterOrDigit(content[end]) || content[end] == '_'))
-                end++;
-            var symbol = content[start..end];
-            if (!existing.Contains(symbol))
-                needed.Add(symbol);
-            pos = end;
-        }
-
-        if (needed.Count == 0)
-            return;
-
-        sb.AppendLine();
-        sb.AppendLine("// chaos_valuetype_* typedefs (safety net: TPG stub declarations)");
-        foreach (var name in needed.OrderBy(n => n, StringComparer.Ordinal))
-        {
-            sb.Append("typedef CHAOS_IL2CPP_INT32 ");
-            sb.Append(name);
-            sb.AppendLine(";");
-        }
-        sb.AppendLine();
-    }
 
     private string BuildCryptoAotIrCode()
     {

@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Security.Principal.Windows",
+  "generatedAt": "2026-06-02T02:15:40.850804+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 1,
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "namespaces": [
+        "System.Security.Principal"
+      ],
+      "methodCount": 33,
+      "methods": [
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityNotMappedException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Add:System.Void(System.Security.Principal.IdentityReference)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Clear:System.Void()",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Contains:System.Boolean(System.Security.Principal.IdentityReference)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::CopyTo:System.Void(System.Security.Principal.IdentityReference[],System.Int32)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::GetEnumerator:System.Collections.Generic.IEnumerator`1[[System.Security.Principal.IdentityReference, System.Security.Principal.Windows, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]]()",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Remove:System.Boolean(System.Security.Principal.IdentityReference)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type,System.Boolean)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceEnumerator::Dispose:System.Void()",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceEnumerator::MoveNext:System.Boolean()",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceEnumerator::Reset:System.Void()",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::IsValidTargetType:System.Boolean(System.Type)",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::CompareTo:System.Int32(System.Security.Principal.SecurityIdentifier)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetBinaryForm:System.Void(System.Byte[],System.Int32)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsAccountSid:System.Boolean()",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsEqualDomainSid:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsValidTargetType:System.Boolean(System.Type)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsWellKnown:System.Boolean(System.Security.Principal.WellKnownSidType)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Dispose:System.Void()",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetAnonymous:System.Security.Principal.WindowsIdentity()",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity()",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Boolean)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Security.Principal.TokenAccessLevels)",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Void(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Action)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func`1[[System.Threading.Tasks.Task, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.String)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.WindowsBuiltInRole)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Int32)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "index": 32
+        }
+      ]
+    }
+  ]
+}

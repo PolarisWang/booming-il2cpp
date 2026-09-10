@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "SnapshotTestFixtures",
+  "methodCount": 2,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "SnapshotTestFixtures_LdftnHelper_GetFnPtr",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "SnapshotTestFixtures_TargetHelper_GetValue",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    }
+  ]
+}

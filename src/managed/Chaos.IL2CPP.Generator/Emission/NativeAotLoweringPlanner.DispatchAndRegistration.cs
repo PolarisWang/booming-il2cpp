@@ -26,10 +26,8 @@ public sealed partial class NativeAotLoweringPlanner
         if (methods.Count == 0) return string.Empty;
         System.Console.WriteLine("F_a64e93");
 
-        // Deterministic: pick the Ordinal-smallest key's hash. First().Value depended
-        // on unordered set/dict enumeration order -> non-deterministic across runs.
         ulong defaultStringId = _stringIdMapping is { Count: > 0 }
-            ? _stringIdMapping.OrderBy(kv => kv.Key, StringComparer.Ordinal).First().Value
+            ? _stringIdMapping.First().Value
             : 0UL;
 
         var methodEntries = new List<ScriptObject>(methods.Count);
@@ -333,10 +331,8 @@ public sealed partial class NativeAotLoweringPlanner
 
     private string BuildMethodsManifestJson(IReadOnlyList<AotCoreIrMethodArtifact> methods)
     {
-        // Deterministic: pick the Ordinal-smallest key's hash. First().Value depended
-        // on unordered set/dict enumeration order -> non-deterministic across runs.
         ulong defaultStringId = _stringIdMapping is { Count: > 0 }
-            ? _stringIdMapping.OrderBy(kv => kv.Key, StringComparer.Ordinal).First().Value
+            ? _stringIdMapping.First().Value
             : 0UL;
 
         var manifestMethods = new List<Dictionary<string, object>>(methods.Count);

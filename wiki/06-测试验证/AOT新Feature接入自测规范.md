@@ -331,7 +331,7 @@ benchmark 的职责是补充成本证据，不替代 correctness 层。
 
 - [`新增测试接入规范.md`](./新增测试接入规范.md)
 - [`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md)
-- [`../../docs/archive/architecture/subject-test-framework-v1/INDEX.md`](../../docs/archive/architecture/subject-test-framework-v1/INDEX.md)
+- [`../../docs/architecture/subject-test-framework-v1/INDEX.md`](../../docs/architecture/subject-test-framework-v1/INDEX.md)
 - [`../../docs/archive/architecture/verification-v1/spec.md`](../../docs/archive/architecture/verification-v1/spec.md)
 
 ## 8. Foundation DLL Capability Verification Supplement
@@ -373,15 +373,15 @@ Annotations should prefer enum-backed attributes. String should be kept only for
 
 Per family, fixed directories are:
 
-- `tests/e2e/translation/<assembly>/<family>/handwritten/` — **READ ONLY** handwrite partial class `.cs` 源（管线只读不写）
-- `tests/e2e/translation/<assembly>/<family>/src/` — handwrite managed source（legacy，已弃用，新 family 用 handwritten/）
-- `tests/e2e/translation/<assembly>/<family>/src/patch/` — handwrite patch source
-- `tests/e2e/translation/<assembly>/<family>/managed_test/tests/` — managed xunit tests
-- `tests/e2e/translation/<assembly>/<family>/managed_test/benchmarks/` — managed benchmarks
-- `tests/e2e/translation/<assembly>/<family>/il2cpp_dist/` — generated il2cpp output (not committed)
-- `tests/e2e/translation/<assembly>/<family>/native_test/benchmark/` — native benchmark entry (committed)
-- `tests/e2e/translation/<assembly>/<family>/native_test/hotupdate/` — native hotupdate skeleton (committed)
-- `tests/e2e/translation/<assembly>/<family>/reports/` — test reports (not committed)
+- `testing/foundation-dll/<assembly>/<family>/handwritten/` — **READ ONLY** handwrite partial class `.cs` 源（管线只读不写）
+- `testing/foundation-dll/<assembly>/<family>/src/` — handwrite managed source（legacy，已弃用，新 family 用 handwritten/）
+- `testing/foundation-dll/<assembly>/<family>/src/patch/` — handwrite patch source
+- `testing/foundation-dll/<assembly>/<family>/managed_test/tests/` — managed xunit tests
+- `testing/foundation-dll/<assembly>/<family>/managed_test/benchmarks/` — managed benchmarks
+- `testing/foundation-dll/<assembly>/<family>/il2cpp_dist/` — generated il2cpp output (not committed)
+- `testing/foundation-dll/<assembly>/<family>/native_test/benchmark/` — native benchmark entry (committed)
+- `testing/foundation-dll/<assembly>/<family>/native_test/hotupdate/` — native hotupdate skeleton (committed)
+- `testing/foundation-dll/<assembly>/<family>/reports/` — test reports (not committed)
 
 **`handwritten/` 保护规则**：
 - 管线只从该目录读 `.cs` 文件，从不写入

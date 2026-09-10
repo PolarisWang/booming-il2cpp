@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Compression.ZipFile",
+  "generatedAt": "2026-06-13T18:19:18.179250+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 1,
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "namespaces": [
+        "System.IO.Compression"
+      ],
+      "methodCount": 46,
+      "methods": [
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectoryAsync:System.Threading.Tasks.Task(System.String,System.String,System.Threading.CancellationToken)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectoryAsync:System.Threading.Tasks.Task(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean,System.Threading.CancellationToken)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectoryAsync:System.Threading.Tasks.Task(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding,System.Threading.CancellationToken)",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectoryAsync:System.Threading.Tasks.Task(System.String,System.IO.Stream,System.Threading.CancellationToken)",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectoryAsync:System.Threading.Tasks.Task(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean,System.Threading.CancellationToken)",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectoryAsync:System.Threading.Tasks.Task(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding,System.Threading.CancellationToken)",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String)",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Boolean)",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding)",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding,System.Boolean)",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String)",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Boolean)",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding)",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding,System.Boolean)",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectoryAsync:System.Threading.Tasks.Task(System.String,System.String,System.Threading.CancellationToken)",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectoryAsync:System.Threading.Tasks.Task(System.String,System.String,System.Boolean,System.Threading.CancellationToken)",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectoryAsync:System.Threading.Tasks.Task(System.String,System.String,System.Text.Encoding,System.Threading.CancellationToken)",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectoryAsync:System.Threading.Tasks.Task(System.String,System.String,System.Text.Encoding,System.Boolean,System.Threading.CancellationToken)",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectoryAsync:System.Threading.Tasks.Task(System.IO.Stream,System.String,System.Threading.CancellationToken)",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectoryAsync:System.Threading.Tasks.Task(System.IO.Stream,System.String,System.Boolean,System.Threading.CancellationToken)",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectoryAsync:System.Threading.Tasks.Task(System.IO.Stream,System.String,System.Text.Encoding,System.Threading.CancellationToken)",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectoryAsync:System.Threading.Tasks.Task(System.IO.Stream,System.String,System.Text.Encoding,System.Boolean,System.Threading.CancellationToken)",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::Open:System.IO.Compression.ZipArchive(System.String,System.IO.Compression.ZipArchiveMode)",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::Open:System.IO.Compression.ZipArchive(System.String,System.IO.Compression.ZipArchiveMode,System.Text.Encoding)",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::OpenAsync:System.Threading.Tasks.Task<System.IO.Compression.ZipArchive>(System.String,System.IO.Compression.ZipArchiveMode,System.Threading.CancellationToken)",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::OpenAsync:System.Threading.Tasks.Task<System.IO.Compression.ZipArchive>(System.String,System.IO.Compression.ZipArchiveMode,System.Text.Encoding,System.Threading.CancellationToken)",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::OpenRead:System.IO.Compression.ZipArchive(System.String)",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::OpenReadAsync:System.Threading.Tasks.Task<System.IO.Compression.ZipArchive>(System.String,System.Threading.CancellationToken)",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String)",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String,System.IO.Compression.CompressionLevel)",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFileAsync:System.Threading.Tasks.Task<System.IO.Compression.ZipArchiveEntry>(System.IO.Compression.ZipArchive,System.String,System.String,System.Threading.CancellationToken)",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFileAsync:System.Threading.Tasks.Task<System.IO.Compression.ZipArchiveEntry>(System.IO.Compression.ZipArchive,System.String,System.String,System.IO.Compression.CompressionLevel,System.Threading.CancellationToken)",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(System.IO.Compression.ZipArchive,System.String)",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(System.IO.Compression.ZipArchive,System.String,System.Boolean)",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectoryAsync:System.Threading.Tasks.Task(System.IO.Compression.ZipArchive,System.String,System.Threading.CancellationToken)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectoryAsync:System.Threading.Tasks.Task(System.IO.Compression.ZipArchive,System.String,System.Boolean,System.Threading.CancellationToken)",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(System.IO.Compression.ZipArchiveEntry,System.String)",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(System.IO.Compression.ZipArchiveEntry,System.String,System.Boolean)",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFileAsync:System.Threading.Tasks.Task(System.IO.Compression.ZipArchiveEntry,System.String,System.Threading.CancellationToken)",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFileAsync:System.Threading.Tasks.Task(System.IO.Compression.ZipArchiveEntry,System.String,System.Boolean,System.Threading.CancellationToken)",
+          "index": 45
+        }
+      ]
+    }
+  ]
+}

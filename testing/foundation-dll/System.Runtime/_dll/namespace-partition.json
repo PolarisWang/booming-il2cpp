@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime",
+  "generatedAt": "2026-06-08T02:19:25.186026+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 0,
+  "chunks": []
+}

@@ -1,0 +1,106 @@
+{
+  "exitCode": 0,
+  "nativeConfig": "check",
+  "entryCount": 10,
+  "profileData": [
+    {
+      "methodIndex": 35,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 36,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 39,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 40,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 41,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 37,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 38,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 43,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 44,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 45,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    }
+  ],
+  "summary": {
+    "methodCount": 10,
+    "totalGcPauseNs": 0,
+    "maxGcPauseNs": 0,
+    "totalNurseryAllocBytes": 0,
+    "totalAllocCount": 0,
+    "fastPathRate": 1.0,
+    "methodsWithGc": 0,
+    "methodsWithAlloc": 0,
+    "codeTextBytes": 0,
+    "codeDataBytes": 0
+  },
+  "sectionSizes": {
+    "text": 0,
+    "data": 0,
+    "pdata": 0,
+    "reloc": 0,
+    "total": 2810880
+  }
+}

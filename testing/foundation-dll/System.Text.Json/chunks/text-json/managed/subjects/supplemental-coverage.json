@@ -1,0 +1,586 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Text.Json",
+  "chunkSlug": "text-json",
+  "entries": [
+    {
+      "methodSubjectId": "System.Text.Json/System.Net.ArrayBuffer::ClearAndReturnBuffer:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Net.ArrayBuffer::Commit:System.Void(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Net.ArrayBuffer::Discard:System.Void(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Net.ArrayBuffer::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Net.ArrayBuffer::EnsureAvailableSpace:System.Void(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.BitStack::Peek:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.BitStack::Pop:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.BitStack::PushFalse:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.BitStack::PushTrue:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.BitStack::ResetFirstBit:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.BitStack::SetFirstBit:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonCamelCaseNamingPolicy::ConvertName:System.String(System.String)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument+MetadataDb::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument+PropertyNameSet::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument+StackRowStack::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.Buffers.ReadOnlySequence`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonDocumentOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonDocumentOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonDocumentOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task`1[[System.Text.Json.JsonDocument, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseValue:System.Text.Json.JsonDocument(System.Text.Json.Utf8JsonReader&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::TryParseValue:System.Boolean(System.Text.Json.Utf8JsonReader&,System.Text.Json.JsonDocument&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ArrayEnumerator::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ArrayEnumerator::GetEnumerator:System.Text.Json.JsonElement+ArrayEnumerator()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ArrayEnumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ArrayEnumerator::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ObjectEnumerator::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ObjectEnumerator::GetEnumerator:System.Text.Json.JsonElement+ObjectEnumerator()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ObjectEnumerator::MoveNext:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement+ObjectEnumerator::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::EnumerateArray:System.Text.Json.JsonElement+ArrayEnumerator()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::EnumerateObject:System.Text.Json.JsonElement+ObjectEnumerator()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetProperty:System.Text.Json.JsonElement(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetProperty:System.Text.Json.JsonElement(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Parse:System.Text.Json.JsonElement(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonDocumentOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Parse:System.Text.Json.JsonElement(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonDocumentOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Parse:System.Text.Json.JsonElement(System.String,System.Text.Json.JsonDocumentOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ParseValue:System.Text.Json.JsonElement(System.Text.Json.Utf8JsonReader&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetByte:System.Boolean(System.Byte&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetBytesFromBase64:System.Boolean(System.Byte[]&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDateTime:System.Boolean(System.DateTime&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDateTimeOffset:System.Boolean(System.DateTimeOffset&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDecimal:System.Boolean(System.Decimal&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDouble:System.Boolean(System.Double&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetGuid:System.Boolean(System.Guid&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetInt16:System.Boolean(System.Int16&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetInt32:System.Boolean(System.Int32&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetInt64:System.Boolean(System.Int64&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetProperty:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonElement&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetProperty:System.Boolean(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonElement&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetProperty:System.Boolean(System.String,System.Text.Json.JsonElement&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetSByte:System.Boolean(System.SByte&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetSingle:System.Boolean(System.Single&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetUInt16:System.Boolean(System.UInt16&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetUInt32:System.Boolean(System.UInt32&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetUInt64:System.Boolean(System.UInt64&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryParseValue:System.Boolean(System.Text.Json.Utf8JsonReader&,System.Nullable`1[[System.Text.Json.JsonElement, System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]]&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ValueEquals:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ValueEquals:System.Boolean(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonEncodedText::Encode:System.Text.Json.JsonEncodedText(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Encodings.Web.JavaScriptEncoder)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonEncodedText::Encode:System.Text.Json.JsonEncodedText(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Encodings.Web.JavaScriptEncoder)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonException::GetObjectData:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonProperty::NameEquals:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonProperty::NameEquals:System.Boolean(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions+CachingContext+CacheEntry::GetResult:System.Text.Json.Serialization.Metadata.JsonTypeInfo()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions+CachingContext::Clear:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions+CachingContext::GetOrAddTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type,System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions+CachingContext::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions+OptionsBoundJsonTypeInfoResolverChain::DetachFromOptions:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::Advance:System.Void(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::CancelPendingFlush:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::Clear:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::ClearAndReturnBuffers:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::Complete:System.Void(System.Exception)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::CreateEmptyInstanceForCaching:System.Text.Json.PooledByteBufferWriter()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::FlushAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.FlushResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::GetMemory:System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::GetSpan:System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.PooledByteBufferWriter::InitializeEmptyInstance:System.Void(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::ExitPolymorphicConverter:System.Void(System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::GetTopJsonTypeInfoWithParameterizedConstructor:System.Text.Json.Serialization.Metadata.JsonTypeInfo()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::InitializePolymorphicReEntry:System.Text.Json.Serialization.JsonConverter(System.Text.Json.Serialization.Metadata.JsonTypeInfo)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::JsonPath:System.String()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::Pop:System.Void(System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::Push:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStack::ResumePolymorphicReEntry:System.Text.Json.Serialization.JsonConverter()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStackFrame::EndConstructorParameter:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStackFrame::EndElement:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStackFrame::EndProperty:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStackFrame::IsProcessingDictionary:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStackFrame::IsProcessingEnumerable:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.ReadStackFrame::MarkPropertyAsRead:System.Void(System.Text.Json.Serialization.Metadata.JsonPropertyInfo)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader+PartialStateForRollback::GetStartPosition:System.SequencePosition(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::CopyString:System.Int32(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::CopyString:System.Int32(System.Span`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetByte:System.Boolean(System.Byte&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetBytesFromBase64:System.Boolean(System.Byte[]&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDateTime:System.Boolean(System.DateTime&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDateTimeOffset:System.Boolean(System.DateTimeOffset&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDecimal:System.Boolean(System.Decimal&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDouble:System.Boolean(System.Double&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetGuid:System.Boolean(System.Guid&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt16:System.Boolean(System.Int16&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt32:System.Boolean(System.Int32&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt64:System.Boolean(System.Int64&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetSByte:System.Boolean(System.SByte&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetSingle:System.Boolean(System.Single&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt16:System.Boolean(System.UInt16&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt32:System.Boolean(System.UInt32&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt64:System.Boolean(System.UInt64&)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::ValueTextEquals:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonReader::ValueTextEquals:System.Boolean(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64String:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64String:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64String:System.Void(System.String,System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64String:System.Void(System.Text.Json.JsonEncodedText,System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64StringSegment:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64StringValue:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteCommentValue:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteCommentValue:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNull:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNull:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Decimal)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Double)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int64)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Single)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.UInt32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.UInt64)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Decimal)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Double)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int64)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Single)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.UInt32)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.UInt64)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WritePropertyName:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WritePropertyName:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.DateTime)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.DateTimeOffset)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Guid)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.String)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonEncodedText)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.DateTime)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.DateTimeOffset)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Guid)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.String)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Text.Json.JsonEncodedText)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValueSegment:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValueSegment:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::AddCompletedAsyncDisposable:System.Void(System.IAsyncDisposable)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::DisposeCompletedAsyncDisposables:System.Threading.Tasks.ValueTask()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::DisposePendingDisposablesOnException:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::DisposePendingDisposablesOnExceptionAsync:System.Threading.Tasks.ValueTask()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::PeekNestedJsonTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::Pop:System.Void(System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::PropertyPath:System.String()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStack::Push:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::EndCollectionElement:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::EndDictionaryEntry:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::EndProperty:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::ExitPolymorphicConverter:System.Void(System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::GetNestedJsonTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::InitializePolymorphicReEntry:System.Text.Json.Serialization.JsonConverter(System.Text.Json.Serialization.Metadata.JsonTypeInfo)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::InitializePolymorphicReEntry:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type,System.Text.Json.JsonSerializerOptions)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.WriteStackFrame::ResumePolymorphicReEntry:System.Text.Json.Serialization.JsonConverter()"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.ValueStringBuilder::Append:System.Void(System.Char)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.ValueStringBuilder::Append:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.ValueStringBuilder::Append:System.Void(System.String)"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.ValueStringBuilder::Dispose:System.Void()"
+    }
+  ]
+}

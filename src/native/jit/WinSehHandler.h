@@ -30,7 +30,8 @@ public:
     ~WinSehHandler() noexcept override;
 
     // ISehHandler interface
-    void RegisterCode(void* code_start, uint32_t code_size, const JitMethod* nm,
+    void RegisterCode(void* code_start, uint32_t code_size,
+                      const JitMethod* nm,
                       uint32_t patch_method_token = 0) noexcept override;
     void UnregisterCode(void* code_start) noexcept override;
     const JitMethod* FindCodeByAddress(const void* address) noexcept override;
@@ -47,15 +48,15 @@ private:
     // Thread-safe: entries are append-only, never removed.
 
     struct JitCodeEntry {
-        const void* code_start = nullptr; // RX code entry point
-        uint32_t code_size = 0;           // bytes
-        const JitMethod* nm = nullptr;
-        uint32_t patch_method_token = 0; // PatchMethod token for hotpatch demotion
-        uint32_t domain_id = 0;          // 0 = core domain (never unloaded)
+        const void*       code_start = nullptr;   // RX code entry point
+        uint32_t          code_size  = 0;          // bytes
+        const JitMethod*  nm         = nullptr;
+        uint32_t          patch_method_token = 0;  // PatchMethod token for hotpatch demotion
+        uint32_t          domain_id  = 0;           // 0 = core domain (never unloaded)
     };
 
     std::vector<JitCodeEntry> entries_;
-    std::atomic<long> lock_ {0}; // spinlock: 0=free, 1=locked
+    std::atomic<long> lock_{0};  // spinlock: 0=free, 1=locked
 
     // RAII guard is a friend so it can call AcquireLock/ReleaseLock.
     template <typename T>
@@ -66,9 +67,9 @@ private:
     // Dynamic vector (reserve 256 at init).
 
     struct PendingFreeRegion {
-        void* code_start = nullptr;
-        uint32_t code_size = 0;
-        bool active = false;
+        void*    code_start = nullptr;
+        uint32_t code_size  = 0;
+        bool     active     = false;
     };
 
     std::vector<PendingFreeRegion> pending_free_;
@@ -76,7 +77,7 @@ private:
     // ── Lookup Cache Generation ─────────────────────────────────────────
     // Global generation counter for TLS lookup cache invalidation.
     // Each time T4 code is demoted/unregistered, this counter is incremented.
-    std::atomic<uint32_t> lookup_generation_ {1}; // 0 is reserved for "not initialized"
+    std::atomic<uint32_t> lookup_generation_{1};  // 0 is reserved for "not initialized"
 
     // ── Spinlock helpers ─────────────────────────────────────────────────
     void AcquireLock() noexcept;
@@ -91,6 +92,6 @@ private:
 /// The singleton is created on first call and lives for the process lifetime.
 WinSehHandler& GetWinSehHandler() noexcept;
 
-} // namespace chaos::il2cpp::jit
+}  // namespace chaos::il2cpp::jit
 
-#endif // CHAOS_IL2CPP_WINSEHHANDLER_H_
+#endif  // CHAOS_IL2CPP_WINSEHHANDLER_H_

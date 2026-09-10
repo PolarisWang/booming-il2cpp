@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.ObjectModel",
+  "generatedAt": "2026-06-02T02:04:59.0068927Z",
+  "totalMethods": 27,
+  "methods": [
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.NotifyCollectionChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs,System.AsyncCallback,System.Object)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.NotifyCollectionChangedEventHandler",
+      "methodName": "BeginInvoke",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Object",
+        "System.Collections.Specialized.NotifyCollectionChangedEventArgs",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.NotifyCollectionChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.NotifyCollectionChangedEventHandler",
+      "methodName": "EndInvoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.NotifyCollectionChangedEventHandler::Invoke:System.Void(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.NotifyCollectionChangedEventHandler",
+      "methodName": "Invoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.Collections.Specialized.NotifyCollectionChangedEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::Add:System.Int32(System.Object)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.ReadOnlyList",
+      "methodName": "Add",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::Clear:System.Void()",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.ReadOnlyList",
+      "methodName": "Clear",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::Contains:System.Boolean(System.Object)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.ReadOnlyList",
+      "methodName": "Contains",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::CopyTo:System.Void(System.Array,System.Int32)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.ReadOnlyList",
+      "methodName": "CopyTo",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Array",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::GetEnumerator:System.Collections.IEnumerator()",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.ReadOnlyList",
+      "methodName": "GetEnumerator",
+      "returnType": "System.Collections.IEnumerator",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::IndexOf:System.Int32(System.Object)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.ReadOnlyList",
+      "methodName": "IndexOf",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::Insert:System.Void(System.Int32,System.Object)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.ReadOnlyList",
+      "methodName": "Insert",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::Remove:System.Void(System.Object)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.ReadOnlyList",
+      "methodName": "Remove",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.ReadOnlyList::RemoveAt:System.Void(System.Int32)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.ReadOnlyList",
+      "methodName": "RemoveAt",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::Add:System.Int32(System.Object)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.SingleItemReadOnlyList",
+      "methodName": "Add",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::Clear:System.Void()",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.SingleItemReadOnlyList",
+      "methodName": "Clear",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::Contains:System.Boolean(System.Object)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.SingleItemReadOnlyList",
+      "methodName": "Contains",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::CopyTo:System.Void(System.Array,System.Int32)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.SingleItemReadOnlyList",
+      "methodName": "CopyTo",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Array",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::GetEnumerator:System.Collections.IEnumerator()",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.SingleItemReadOnlyList",
+      "methodName": "GetEnumerator",
+      "returnType": "System.Collections.IEnumerator",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::IndexOf:System.Int32(System.Object)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.SingleItemReadOnlyList",
+      "methodName": "IndexOf",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::Insert:System.Void(System.Int32,System.Object)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.SingleItemReadOnlyList",
+      "methodName": "Insert",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::Remove:System.Void(System.Object)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.SingleItemReadOnlyList",
+      "methodName": "Remove",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.SingleItemReadOnlyList::RemoveAt:System.Void(System.Int32)",
+      "namespace": "System.Collections.Specialized",
+      "declaringType": "System.Collections.Specialized.SingleItemReadOnlyList",
+      "methodName": "RemoveAt",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.PropertyChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.PropertyChangedEventArgs,System.AsyncCallback,System.Object)",
+      "namespace": "System.ComponentModel",
+      "declaringType": "System.ComponentModel.PropertyChangedEventHandler",
+      "methodName": "BeginInvoke",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Object",
+        "System.ComponentModel.PropertyChangedEventArgs",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.PropertyChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "namespace": "System.ComponentModel",
+      "declaringType": "System.ComponentModel.PropertyChangedEventHandler",
+      "methodName": "EndInvoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.PropertyChangedEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.PropertyChangedEventArgs)",
+      "namespace": "System.ComponentModel",
+      "declaringType": "System.ComponentModel.PropertyChangedEventHandler",
+      "methodName": "Invoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.ComponentModel.PropertyChangedEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.PropertyChangingEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.PropertyChangingEventArgs,System.AsyncCallback,System.Object)",
+      "namespace": "System.ComponentModel",
+      "declaringType": "System.ComponentModel.PropertyChangingEventHandler",
+      "methodName": "BeginInvoke",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Object",
+        "System.ComponentModel.PropertyChangingEventArgs",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.PropertyChangingEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "namespace": "System.ComponentModel",
+      "declaringType": "System.ComponentModel.PropertyChangingEventHandler",
+      "methodName": "EndInvoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.PropertyChangingEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.PropertyChangingEventArgs)",
+      "namespace": "System.ComponentModel",
+      "declaringType": "System.ComponentModel.PropertyChangingEventHandler",
+      "methodName": "Invoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.ComponentModel.PropertyChangingEventArgs"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    }
+  ],
+  "namespaces": {
+    "System.Collections.Specialized": {
+      "methodCount": 21
+    },
+    "System.ComponentModel": {
+      "methodCount": 6
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Net.ServerSentEvents",
+  "generatedAt": "2026-06-02T02:15:39.319896+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 1,
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "namespaces": [
+        "System.Net",
+        "System.Net.ServerSentEvents"
+      ],
+      "methodCount": 9,
+      "methods": [
+        {
+          "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::Commit:System.Void(System.Int32)",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::Discard:System.Void(System.Int32)",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::Dispose:System.Void()",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::EnsureAvailableSpace:System.Void(System.Int32)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::Advance:System.Void(System.Int32)",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::Dispose:System.Void()",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::GetMemory:System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::GetSpan:System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::Reset:System.Void()",
+          "index": 8
+        }
+      ]
+    }
+  ]
+}

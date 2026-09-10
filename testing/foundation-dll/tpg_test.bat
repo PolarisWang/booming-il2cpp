@@ -1,0 +1,3 @@
+@echo off
+call "C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvars64.bat" >nul
+dotnet run --project "D:\agent\booming-il2cpp\src\tools\Chaos.IL2CPP.Tools.TestProjectGenerator" -- generate-dll --dll "D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\chunks\numerics\managed\subjects\CombinedSubjects.dll" --metadata "D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\chunks\numerics\managed\subjects\subjects.metadata.json" --output "D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\chunks\numerics\native" 2>&1

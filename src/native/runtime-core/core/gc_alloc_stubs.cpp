@@ -12,6 +12,7 @@
 
 #include "gc_region.h"
 #include "gc_stats.h"
+#include "gc_stress.h"
 #include "gc_alloc_stubs.h"
 #include "profile_stats.h"
 
@@ -20,7 +21,7 @@ namespace {
 
 void* CHAOS_RUNTIME_ABI_CALL DefaultAllocate(CHAOS_IL2CPP_SIZE size, void* user_data) {
     (void)user_data;
-    return Allocate(size, /*is_pinned=*/false, /*is_atomic=*/false);
+    return NurseryAllocate(size);
 }
 
 void CHAOS_RUNTIME_ABI_CALL DefaultDeallocate(void* ptr, void* user_data) {
@@ -44,16 +45,21 @@ void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) { return GcAllocateAtomicProfiled
 void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateProfiled");
 
-    void* ptr = Allocate(size, /*is_pinned=*/false, /*is_atomic=*/false);
+    // GC Stress mode: force a full GC before allocation.
+    if (GcStressShouldTrigger()) [[unlikely]] {
+        tls_in_gc_stress = true;
+        chaos_gc_collect();
+        tls_in_gc_stress = false;
+    }
+
+    void* ptr = NurseryAllocate(size);
     if (ptr) {
         GcRecordAlloc(size, size > kMaxTlabAlloc);
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
-#if CHAOS_IL2CPP_PROFILE_ENABLED
         ProfileRecordNurseryAlloc(static_cast<int64_t>(size));
         ProfileRecordAllocCount();
         ProfileRecordFastPath();
-#endif
     }
     return ptr;
 }
@@ -61,16 +67,21 @@ void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size) {
 void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateAtomicProfiled");
 
-    void* ptr = Allocate(size, /*is_pinned=*/false, /*is_atomic=*/true);
+    // GC Stress mode: force a full GC before allocation.
+    if (GcStressShouldTrigger()) [[unlikely]] {
+        tls_in_gc_stress = true;
+        chaos_gc_collect();
+        tls_in_gc_stress = false;
+    }
+
+    void* ptr = NurseryAllocateAtomic(size);
     if (ptr) {
         GcRecordAlloc(size, size > kMaxTlabAlloc);
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
-#if CHAOS_IL2CPP_PROFILE_ENABLED
         ProfileRecordNurseryAlloc(static_cast<int64_t>(size));
         ProfileRecordAllocCount();
         ProfileRecordFastPath();
-#endif
     }
     return ptr;
 }

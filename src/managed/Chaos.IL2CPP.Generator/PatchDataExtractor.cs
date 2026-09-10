@@ -140,10 +140,7 @@ public sealed partial class PatchDataExtractor
         // ── Optional AotCoreIr JSON section ──
         byte[]? aotCoreIrSection = null;
         uint aotCoreIrCount = 0;
-        // Subject-only mode: always build AotCoreIr section (inline subject IR, no external file).
-        // Non-subject mode: require aotCoreIrPath to provide the real AOT IR JSON.
-        bool buildAotCoreIr = subjectOnly || (aotCoreIrPath != null && File.Exists(aotCoreIrPath));
-        if (buildAotCoreIr)
+        if (aotCoreIrPath != null && File.Exists(aotCoreIrPath))
         {
             (aotCoreIrSection, aotCoreIrCount) = BuildAotCoreIrSection(aotCoreIrPath, methodDefs, mr, mode);
         }
@@ -508,7 +505,7 @@ public sealed partial class PatchDataExtractor
         var hdr = new FileHeader
         {
             magic = Magic,
-            version = 4,            // v4: trailing min_host_revision + patch_revision
+            version = 3,
             header_size = hdrSize,
             string_heap_offset = strOff,
             string_heap_size = (uint)stringHeap.Length,
@@ -540,8 +537,6 @@ public sealed partial class PatchDataExtractor
             reg_ir_count = 0,
             dependency_offset = depOff,
             dependency_count = (uint)deps.Length,
-            min_host_revision = 0,           // v4+: 0 = compatible with any host (default)
-            patch_revision = 0,              // v4+: 0 = unversioned (default)
         };
         WriteStruct(bw, hdr);
 
@@ -613,7 +608,6 @@ public sealed partial class PatchDataExtractor
         public uint aot_core_ir_offset, aot_core_ir_size, aot_core_ir_count;
         public uint reg_ir_offset, reg_ir_size, reg_ir_count;
         public uint dependency_offset, dependency_count;
-        public uint min_host_revision, patch_revision;   // v4+
     }
 
     [StructLayout(LayoutKind.Sequential)]

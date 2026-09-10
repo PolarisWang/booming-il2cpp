@@ -1,0 +1,97 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Linq",
+  "chunkSlug": "global-ns",
+  "entries": [
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Decimal(System.Collections.Generic.IEnumerable<System.Decimal>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Double(System.Collections.Generic.IEnumerable<System.Double>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Int32(System.Collections.Generic.IEnumerable<System.Int32>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Int64(System.Collections.Generic.IEnumerable<System.Int64>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Decimal>(System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Int32>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Int64>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Nullable<System.Single>(System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Max:System.Single(System.Collections.Generic.IEnumerable<System.Single>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Decimal(System.Collections.Generic.IEnumerable<System.Decimal>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Double(System.Collections.Generic.IEnumerable<System.Double>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Int32(System.Collections.Generic.IEnumerable<System.Int32>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Int64(System.Collections.Generic.IEnumerable<System.Int64>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Decimal>(System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Int32>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Int64>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Nullable<System.Single>(System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Min:System.Single(System.Collections.Generic.IEnumerable<System.Single>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Decimal(System.Collections.Generic.IEnumerable<System.Decimal>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Double(System.Collections.Generic.IEnumerable<System.Double>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Int32(System.Collections.Generic.IEnumerable<System.Int32>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Int64(System.Collections.Generic.IEnumerable<System.Int64>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Decimal>(System.Collections.Generic.IEnumerable<System.Nullable<System.Decimal>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Double>(System.Collections.Generic.IEnumerable<System.Nullable<System.Double>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Int32>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int32>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Int64>(System.Collections.Generic.IEnumerable<System.Nullable<System.Int64>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Nullable<System.Single>(System.Collections.Generic.IEnumerable<System.Nullable<System.Single>>)"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sum:System.Single(System.Collections.Generic.IEnumerable<System.Single>)"
+    }
+  ]
+}

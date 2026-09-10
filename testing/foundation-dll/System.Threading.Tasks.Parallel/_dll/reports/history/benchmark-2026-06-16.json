@@ -1,0 +1,51 @@
+{
+  "date": "2026-06-16",
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 111,
+        "total": 113,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 114,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 111,
+        "iterations": 50000,
+        "meanDurationMs": 0.8287972972972972,
+        "meanOpsPerSecond": 296805026.77614677,
+        "minDurationMs": 0,
+        "maxDurationMs": 38.4619,
+        "totalDurationMs": 91.9965,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 9.5,
+        "totalOutliers": 37,
+        "meanCv": 0.16282129357798164,
+        "maxCv": 0.513625
+      },
+      "hotupdate": {
+        "passed": 109,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

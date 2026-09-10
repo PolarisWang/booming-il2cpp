@@ -1,0 +1,2254 @@
+{
+  "assemblyName": "System.Private.CoreLib",
+  "timestamp": "2026-06-20T05:43:26",
+  "totalChunks": 24,
+  "chunksWithFacts": 13,
+  "chunksWithValueWarnings": 0,
+  "totalPassed": 16369,
+  "totalFactMethods": 16581,
+  "chunkSummaries": [
+    {
+      "slug": "buffers",
+      "fact": {
+        "passed": 97,
+        "total": 97,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 37,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 23,
+        "iterations": 10000,
+        "meanDurationMs": 0.5272913043478261,
+        "meanOpsPerSecond": 297094185.9521739,
+        "minDurationMs": 0.0256,
+        "maxDurationMs": 7.9343,
+        "totalDurationMs": 12.1277,
+        "totalAllocatedBytes": 320000.0,
+        "meanSampleCount": 7.4,
+        "totalOutliers": 37,
+        "meanCv": 0.14938643478260868,
+        "maxCv": 0.337099
+      },
+      "hotupdate": {
+        "passed": 23,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 9.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.Buffers.Binary.BinaryPrimitives": {
+            "declared": 126,
+            "covered": 10,
+            "gap": 116,
+            "gapPct": 92.1
+          },
+          "System.Private.CoreLib/System.Buffers.MemoryHandle": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Buffers.SearchValues": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Buffers.StandardFormat": {
+            "declared": 3,
+            "covered": 1,
+            "gap": 2,
+            "gapPct": 66.7
+          },
+          "System.Private.CoreLib/System.Buffers.Text.Base64": {
+            "declared": 10,
+            "covered": 2,
+            "gap": 8,
+            "gapPct": 80.0
+          },
+          "System.Private.CoreLib/System.Buffers.Text.Base64Url": {
+            "declared": 25,
+            "covered": 0,
+            "gap": 25,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Buffers.Text.Utf8Formatter": {
+            "declared": 16,
+            "covered": 0,
+            "gap": 16,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Buffers.Text.Utf8Parser": {
+            "declared": 16,
+            "covered": 0,
+            "gap": 16,
+            "gapPct": 100.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2855936,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "collections",
+      "fact": {
+        "passed": 273,
+        "total": 273,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 96,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 81,
+        "iterations": 10000,
+        "meanDurationMs": 0.11233456790123457,
+        "meanOpsPerSecond": 316204728.9728395,
+        "minDurationMs": 0.0265,
+        "maxDurationMs": 3.3552,
+        "totalDurationMs": 9.0991,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 7.8,
+        "totalOutliers": 179,
+        "meanCv": 0.11022301234567902,
+        "maxCv": 0.568305
+      },
+      "hotupdate": {
+        "passed": 81,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 85.7,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.Collections.Comparer": {
+            "declared": 2,
+            "covered": 1,
+            "gap": 1,
+            "gapPct": 50.0
+          },
+          "System.Private.CoreLib/System.Collections.Hashtable": {
+            "declared": 12,
+            "covered": 10,
+            "gap": 2,
+            "gapPct": 16.7
+          },
+          "System.Private.CoreLib/System.Collections.ListDictionaryInternal": {
+            "declared": 6,
+            "covered": 0,
+            "gap": 6,
+            "gapPct": 100.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2860544,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "diagnostics",
+      "fact": {
+        "passed": 318,
+        "total": 318,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 483,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 318,
+        "iterations": 8333,
+        "meanDurationMs": 1.0841408805031447,
+        "meanOpsPerSecond": 244053921.81949687,
+        "minDurationMs": 0.0211,
+        "maxDurationMs": 8.0071,
+        "totalDurationMs": 344.7568,
+        "totalAllocatedBytes": 5333120.0,
+        "meanSampleCount": 9.0,
+        "totalOutliers": 328,
+        "meanCv": 0.2104633962264151,
+        "maxCv": 1.451356
+      },
+      "hotupdate": {
+        "passed": 318,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.Collections.Generic.NonRandomizedStringEqualityComparer": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.ComponentModel.Win32Exception": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Diagnostics.Contracts.ContractException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Diagnostics.Debug": {
+            "declared": 36,
+            "covered": 29,
+            "gap": 7,
+            "gapPct": 19.4
+          },
+          "System.Private.CoreLib/System.Diagnostics.Debug+AssertInterpolatedStringHandler": {
+            "declared": 6,
+            "covered": 0,
+            "gap": 6,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Diagnostics.Debug+WriteIfInterpolatedStringHandler": {
+            "declared": 6,
+            "covered": 0,
+            "gap": 6,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Diagnostics.DebugProvider": {
+            "declared": 7,
+            "covered": 0,
+            "gap": 7,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Diagnostics.Debugger": {
+            "declared": 6,
+            "covered": 0,
+            "gap": 6,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Diagnostics.DiagnosticMethodInfo": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Diagnostics.Stopwatch": {
+            "declared": 8,
+            "covered": 6,
+            "gap": 2,
+            "gapPct": 25.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "enum-parsing",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
+      }
+    },
+    {
+      "slug": "global-ns",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
+      }
+    },
+    {
+      "slug": "globalization",
+      "fact": {
+        "passed": 2480,
+        "total": 2481,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 834,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 814,
+        "iterations": 4761,
+        "meanDurationMs": 0.053527764127764124,
+        "meanOpsPerSecond": 308203450.40270936,
+        "minDurationMs": 0,
+        "maxDurationMs": 11.1126,
+        "totalDurationMs": 43.5716,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 8.2,
+        "totalOutliers": 1442,
+        "meanCv": 0.15242281896551724,
+        "maxCv": 2.232199
+      },
+      "hotupdate": {
+        "passed": 812,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.Globalization.CompareInfo": {
+            "declared": 57,
+            "covered": 43,
+            "gap": 14,
+            "gapPct": 24.6
+          },
+          "System.Private.CoreLib/System.Globalization.CultureNotFoundException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Globalization.StringInfo": {
+            "declared": 10,
+            "covered": 9,
+            "gap": 1,
+            "gapPct": 10.0
+          },
+          "System.Private.CoreLib/System.Globalization.TextElementEnumerator": {
+            "declared": 3,
+            "covered": 1,
+            "gap": 2,
+            "gapPct": 66.7
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 5872128,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "io",
+      "fact": {
+        "passed": 3776,
+        "total": 3776,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 1299,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 1178,
+        "iterations": 4761,
+        "meanDurationMs": 0.17584176570458404,
+        "meanOpsPerSecond": 289158049.8234295,
+        "minDurationMs": 0.0138,
+        "maxDurationMs": 15.4462,
+        "totalDurationMs": 207.1416,
+        "totalAllocatedBytes": 2132928.0,
+        "meanSampleCount": 9.7,
+        "totalOutliers": 315,
+        "meanCv": 0.2132372869269949,
+        "maxCv": 2.725916
+      },
+      "hotupdate": {
+        "passed": 1178,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.IO.BinaryReader": {
+            "declared": 27,
+            "covered": 25,
+            "gap": 2,
+            "gapPct": 7.4
+          },
+          "System.Private.CoreLib/System.IO.BinaryWriter": {
+            "declared": 28,
+            "covered": 26,
+            "gap": 2,
+            "gapPct": 7.1
+          },
+          "System.Private.CoreLib/System.IO.BufferedStream": {
+            "declared": 21,
+            "covered": 19,
+            "gap": 2,
+            "gapPct": 9.5
+          },
+          "System.Private.CoreLib/System.IO.DirectoryInfo": {
+            "declared": 29,
+            "covered": 28,
+            "gap": 1,
+            "gapPct": 3.4
+          },
+          "System.Private.CoreLib/System.IO.File": {
+            "declared": 105,
+            "covered": 96,
+            "gap": 9,
+            "gapPct": 8.6
+          },
+          "System.Private.CoreLib/System.IO.FileInfo": {
+            "declared": 19,
+            "covered": 18,
+            "gap": 1,
+            "gapPct": 5.3
+          },
+          "System.Private.CoreLib/System.IO.FileLoadException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.IO.FileNotFoundException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.IO.FileStream": {
+            "declared": 24,
+            "covered": 22,
+            "gap": 2,
+            "gapPct": 8.3
+          },
+          "System.Private.CoreLib/System.IO.MemoryStream": {
+            "declared": 20,
+            "covered": 18,
+            "gap": 2,
+            "gapPct": 10.0
+          },
+          "System.Private.CoreLib/System.IO.Path": {
+            "declared": 45,
+            "covered": 28,
+            "gap": 17,
+            "gapPct": 37.8
+          },
+          "System.Private.CoreLib/System.IO.RandomAccess": {
+            "declared": 11,
+            "covered": 9,
+            "gap": 2,
+            "gapPct": 18.2
+          },
+          "System.Private.CoreLib/System.IO.StreamReader": {
+            "declared": 18,
+            "covered": 16,
+            "gap": 2,
+            "gapPct": 11.1
+          },
+          "System.Private.CoreLib/System.IO.StreamWriter": {
+            "declared": 31,
+            "covered": 27,
+            "gap": 4,
+            "gapPct": 12.9
+          },
+          "System.Private.CoreLib/System.IO.StringReader": {
+            "declared": 16,
+            "covered": 14,
+            "gap": 2,
+            "gapPct": 12.5
+          },
+          "System.Private.CoreLib/System.IO.StringWriter": {
+            "declared": 20,
+            "covered": 18,
+            "gap": 2,
+            "gapPct": 10.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 7528448,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "io-2",
+      "fact": {
+        "passed": 1466,
+        "total": 1595,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 1299,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 723,
+        "iterations": 10000,
+        "meanDurationMs": 1.7044585062240662,
+        "meanOpsPerSecond": 266131228.35961273,
+        "minDurationMs": 0.0284,
+        "maxDurationMs": 39.774,
+        "totalDurationMs": 1232.3235,
+        "totalAllocatedBytes": 10240000.0,
+        "meanSampleCount": 9.4,
+        "totalOutliers": 434,
+        "meanCv": 0.28005488520055327,
+        "maxCv": 2.799906
+      },
+      "hotupdate": {
+        "passed": 723,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.IO.Enumeration.FileSystemName": {
+            "declared": 3,
+            "covered": 1,
+            "gap": 2,
+            "gapPct": 66.7
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 6792192,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "numerics",
+      "fact": {
+        "passed": 35,
+        "total": 35,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 130,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 5,
+        "iterations": 10000,
+        "meanDurationMs": 0.04068000000000001,
+        "meanOpsPerSecond": 246649658.73400003,
+        "minDurationMs": 0.0367,
+        "maxDurationMs": 0.042,
+        "totalDurationMs": 0.20340000000000003,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.0324298,
+        "maxCv": 0.079658
+      },
+      "hotupdate": {
+        "passed": 5,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 17.1,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.Net.WebUtility": {
+            "declared": 8,
+            "covered": 0,
+            "gap": 8,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Numerics.BitOperations": {
+            "declared": 34,
+            "covered": 31,
+            "gap": 3,
+            "gapPct": 8.8
+          },
+          "System.Private.CoreLib/System.Numerics.Matrix3x2": {
+            "declared": 20,
+            "covered": 2,
+            "gap": 18,
+            "gapPct": 90.0
+          },
+          "System.Private.CoreLib/System.Numerics.Matrix4x4": {
+            "declared": 49,
+            "covered": 3,
+            "gap": 46,
+            "gapPct": 93.9
+          },
+          "System.Private.CoreLib/System.Numerics.Plane": {
+            "declared": 7,
+            "covered": 2,
+            "gap": 5,
+            "gapPct": 71.4
+          },
+          "System.Private.CoreLib/System.Numerics.Quaternion": {
+            "declared": 18,
+            "covered": 2,
+            "gap": 16,
+            "gapPct": 88.9
+          },
+          "System.Private.CoreLib/System.Numerics.Vector": {
+            "declared": 127,
+            "covered": 24,
+            "gap": 103,
+            "gapPct": 81.1
+          },
+          "System.Private.CoreLib/System.Numerics.Vector2": {
+            "declared": 58,
+            "covered": 3,
+            "gap": 55,
+            "gapPct": 94.8
+          },
+          "System.Private.CoreLib/System.Numerics.Vector3": {
+            "declared": 58,
+            "covered": 3,
+            "gap": 55,
+            "gapPct": 94.8
+          },
+          "System.Private.CoreLib/System.Numerics.Vector4": {
+            "declared": 60,
+            "covered": 3,
+            "gap": 57,
+            "gapPct": 95.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2828288,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "reflection",
+      "fact": {
+        "passed": 1181,
+        "total": 1183,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 413,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 357,
+        "iterations": 5000,
+        "meanDurationMs": 0.07747563025210084,
+        "meanOpsPerSecond": 321409652.9792157,
+        "minDurationMs": 0.012,
+        "maxDurationMs": 10.5302,
+        "totalDurationMs": 27.6588,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 5.2,
+        "totalOutliers": 289,
+        "meanCv": 0.1519962324929972,
+        "maxCv": 0.722939
+      },
+      "hotupdate": {
+        "passed": 357,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.Reflection.AssemblyName": {
+            "declared": 9,
+            "covered": 7,
+            "gap": 2,
+            "gapPct": 22.2
+          },
+          "System.Private.CoreLib/System.Reflection.ConstructorInvoker": {
+            "declared": 7,
+            "covered": 0,
+            "gap": 7,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Reflection.MemberFilter": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Reflection.MethodInvoker": {
+            "declared": 7,
+            "covered": 0,
+            "gap": 7,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Reflection.ModuleResolveEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Reflection.NullabilityInfoContext": {
+            "declared": 4,
+            "covered": 0,
+            "gap": 4,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Reflection.Pointer": {
+            "declared": 2,
+            "covered": 1,
+            "gap": 1,
+            "gapPct": 50.0
+          },
+          "System.Private.CoreLib/System.Reflection.ReflectionTypeLoadException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Reflection.TypeFilter": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 4346368,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "runtime-compiler",
+      "fact": {
+        "passed": 700,
+        "total": 700,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 778,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 562,
+        "iterations": 50000,
+        "meanDurationMs": 0.9858556939501778,
+        "meanOpsPerSecond": 314681019.81324524,
+        "minDurationMs": 0,
+        "maxDurationMs": 95.752,
+        "totalDurationMs": 554.0509,
+        "totalAllocatedBytes": 15200000.0,
+        "meanSampleCount": 2.8,
+        "totalOutliers": 0,
+        "meanCv": 0.03643820188679245,
+        "maxCv": 0.412755
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.Reflection.Emit.DynamicMethod": {
+            "declared": 13,
+            "covered": 12,
+            "gap": 1,
+            "gapPct": 7.7
+          },
+          "System.Private.CoreLib/System.Reflection.Metadata.MetadataUpdater": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Resources.ResourceReader": {
+            "declared": 4,
+            "covered": 3,
+            "gap": 1,
+            "gapPct": 25.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncIteratorMethodBuilder": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder": {
+            "declared": 4,
+            "covered": 3,
+            "gap": 1,
+            "gapPct": 25.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder": {
+            "declared": 4,
+            "covered": 3,
+            "gap": 1,
+            "gapPct": 25.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncVoidMethodBuilder": {
+            "declared": 4,
+            "covered": 3,
+            "gap": 1,
+            "gapPct": 25.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.ConfiguredTaskAwaitable": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.ConfiguredTaskAwaitable+ConfiguredTaskAwaiter": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable+ConfiguredValueTaskAwaiter": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.ContractHelper": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder": {
+            "declared": 4,
+            "covered": 0,
+            "gap": 4,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers+CleanupCode": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers+TryCode": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.SwitchExpressionException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.YieldAwaitable": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.CompilerServices.YieldAwaitable+YieldAwaiter": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.Loader.AssemblyLoadContext": {
+            "declared": 12,
+            "covered": 10,
+            "gap": 2,
+            "gapPct": 16.7
+          },
+          "System.Private.CoreLib/System.Runtime.Loader.AssemblyLoadContext+ContextualReflectionScope": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "runtime-interop",
+      "fact": {
+        "passed": 1278,
+        "total": 1344,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 525,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 354,
+        "iterations": 10000,
+        "meanDurationMs": 0.9117805084745764,
+        "meanOpsPerSecond": 295847110.15578794,
+        "minDurationMs": 0,
+        "maxDurationMs": 25.0297,
+        "totalDurationMs": 322.7703,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.0736130888252149,
+        "maxCv": 0.392407
+      },
+      "hotupdate": {
+        "passed": 391,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 75.5,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.Runtime.InteropServices.DllImportResolver": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.AnsiStringMarshaller+ManagedToUnmanagedIn": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.BStrStringMarshaller+ManagedToUnmanagedIn": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.ComVariant": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.Utf8StringMarshaller+ManagedToUnmanagedIn": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.InteropServices.NFloat": {
+            "declared": 106,
+            "covered": 0,
+            "gap": 106,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal": {
+            "declared": 4,
+            "covered": 1,
+            "gap": 3,
+            "gapPct": 75.0
+          },
+          "System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+UnhandledExceptionPropagationHandler": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.InteropServices.PosixSignalRegistration": {
+            "declared": 2,
+            "covered": 1,
+            "gap": 1,
+            "gapPct": 50.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 5224448,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "runtime-intrinsics",
+      "fact": {
+        "passed": 0,
+        "total": 0,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 1059,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 408,
+        "iterations": 10000,
+        "meanDurationMs": 2.969280637254902,
+        "meanOpsPerSecond": 42169523.70335195,
+        "minDurationMs": 0,
+        "maxDurationMs": 49.0511,
+        "totalDurationMs": 1211.4665,
+        "totalAllocatedBytes": 98240000.0,
+        "meanSampleCount": 8.3,
+        "totalOutliers": 190,
+        "meanCv": 0.44480503072625704,
+        "maxCv": 2.589186
+      },
+      "hotupdate": {
+        "passed": 0,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": false,
+        "exitCode": 3221225477,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": true,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {}
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "runtime-intrinsics-2",
+      "fact": {
+        "passed": 0,
+        "total": 0,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 1059,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 408,
+        "iterations": 10000,
+        "meanDurationMs": 2.0968561274509803,
+        "meanOpsPerSecond": 50395435.40217877,
+        "minDurationMs": 0,
+        "maxDurationMs": 33.011,
+        "totalDurationMs": 855.5173,
+        "totalAllocatedBytes": 98240000.0,
+        "meanSampleCount": 2.6,
+        "totalOutliers": 0,
+        "meanCv": 0.057709553072625694,
+        "maxCv": 0.390539
+      },
+      "hotupdate": {
+        "passed": 0,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": false,
+        "exitCode": 3221225477,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": true,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {}
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system",
+      "fact": {
+        "passed": 0,
+        "total": 0,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 5045,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 514,
+        "iterations": 10000,
+        "meanDurationMs": 1.3936661478599222,
+        "meanOpsPerSecond": 268152622.35055447,
+        "minDurationMs": 0,
+        "maxDurationMs": 20.5383,
+        "totalDurationMs": 716.3444,
+        "totalAllocatedBytes": 18400000.0,
+        "meanSampleCount": 2.9,
+        "totalOutliers": 0,
+        "meanCv": 0.03830260594059406,
+        "maxCv": 0.426224
+      },
+      "hotupdate": {
+        "passed": 0,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": false,
+        "exitCode": 3221225477,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/Internal.Console": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/Internal.Console+Error": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Action": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.AggregateException": {
+            "declared": 4,
+            "covered": 3,
+            "gap": 1,
+            "gapPct": 25.0
+          },
+          "System.Private.CoreLib/System.AppDomain": {
+            "declared": 42,
+            "covered": 41,
+            "gap": 1,
+            "gapPct": 2.4
+          },
+          "System.Private.CoreLib/System.ArgIterator": {
+            "declared": 5,
+            "covered": 3,
+            "gap": 2,
+            "gapPct": 40.0
+          },
+          "System.Private.CoreLib/System.ArgumentException": {
+            "declared": 3,
+            "covered": 2,
+            "gap": 1,
+            "gapPct": 33.3
+          },
+          "System.Private.CoreLib/System.AssemblyLoadEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.AsyncCallback": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.BadImageFormatException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.BitConverter": {
+            "declared": 64,
+            "covered": 38,
+            "gap": 26,
+            "gapPct": 40.6
+          },
+          "System.Private.CoreLib/System.Boolean": {
+            "declared": 8,
+            "covered": 5,
+            "gap": 3,
+            "gapPct": 37.5
+          },
+          "System.Private.CoreLib/System.Byte": {
+            "declared": 36,
+            "covered": 23,
+            "gap": 13,
+            "gapPct": 36.1
+          },
+          "System.Private.CoreLib/System.CharEnumerator": {
+            "declared": 4,
+            "covered": 1,
+            "gap": 3,
+            "gapPct": 75.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-2",
+      "fact": {
+        "passed": 0,
+        "total": 0,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 5045,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 514,
+        "iterations": 10000,
+        "meanDurationMs": 1.427035214007782,
+        "meanOpsPerSecond": 264322141.9966733,
+        "minDurationMs": 0,
+        "maxDurationMs": 21.486,
+        "totalDurationMs": 733.4961,
+        "totalAllocatedBytes": 18400000.0,
+        "meanSampleCount": 2.9,
+        "totalOutliers": 0,
+        "meanCv": 0.03427600396039604,
+        "maxCv": 0.39598
+      },
+      "hotupdate": {
+        "passed": 0,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": false,
+        "exitCode": 3221225477,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.CultureAwareComparer": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.DBNull": {
+            "declared": 2,
+            "covered": 1,
+            "gap": 1,
+            "gapPct": 50.0
+          },
+          "System.Private.CoreLib/System.DateOnly": {
+            "declared": 40,
+            "covered": 26,
+            "gap": 14,
+            "gapPct": 35.0
+          },
+          "System.Private.CoreLib/System.DateTime": {
+            "declared": 62,
+            "covered": 51,
+            "gap": 11,
+            "gapPct": 17.7
+          },
+          "System.Private.CoreLib/System.DateTimeOffset": {
+            "declared": 47,
+            "covered": 36,
+            "gap": 11,
+            "gapPct": 23.4
+          },
+          "System.Private.CoreLib/System.Decimal": {
+            "declared": 65,
+            "covered": 52,
+            "gap": 13,
+            "gapPct": 20.0
+          },
+          "System.Private.CoreLib/System.Double": {
+            "declared": 107,
+            "covered": 85,
+            "gap": 22,
+            "gapPct": 20.6
+          },
+          "System.Private.CoreLib/System.Environment": {
+            "declared": 14,
+            "covered": 12,
+            "gap": 2,
+            "gapPct": 14.3
+          },
+          "System.Private.CoreLib/System.EventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Exception": {
+            "declared": 2,
+            "covered": 1,
+            "gap": 1,
+            "gapPct": 50.0
+          },
+          "System.Private.CoreLib/System.Guid": {
+            "declared": 23,
+            "covered": 13,
+            "gap": 10,
+            "gapPct": 43.5
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-3",
+      "fact": {
+        "passed": 0,
+        "total": 0,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 5045,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 514,
+        "iterations": 50000,
+        "meanDurationMs": 7.228453307392996,
+        "meanOpsPerSecond": 263490196.59464285,
+        "minDurationMs": 0,
+        "maxDurationMs": 130.0093,
+        "totalDurationMs": 3715.425,
+        "totalAllocatedBytes": 92000000.0,
+        "meanSampleCount": 8.6,
+        "totalOutliers": 607,
+        "meanCv": 0.12652368055555555,
+        "maxCv": 0.560623
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.Int128": {
+            "declared": 41,
+            "covered": 27,
+            "gap": 14,
+            "gapPct": 34.1
+          },
+          "System.Private.CoreLib/System.Int16": {
+            "declared": 42,
+            "covered": 28,
+            "gap": 14,
+            "gapPct": 33.3
+          },
+          "System.Private.CoreLib/System.Int32": {
+            "declared": 43,
+            "covered": 29,
+            "gap": 14,
+            "gapPct": 32.6
+          },
+          "System.Private.CoreLib/System.Int64": {
+            "declared": 43,
+            "covered": 29,
+            "gap": 14,
+            "gapPct": 32.6
+          },
+          "System.Private.CoreLib/System.IntPtr": {
+            "declared": 46,
+            "covered": 32,
+            "gap": 14,
+            "gapPct": 30.4
+          },
+          "System.Private.CoreLib/System.Math": {
+            "declared": 120,
+            "covered": 66,
+            "gap": 54,
+            "gapPct": 45.0
+          },
+          "System.Private.CoreLib/System.MathF": {
+            "declared": 44,
+            "covered": 34,
+            "gap": 10,
+            "gapPct": 22.7
+          },
+          "System.Private.CoreLib/System.MemoryExtensions": {
+            "declared": 52,
+            "covered": 25,
+            "gap": 27,
+            "gapPct": 51.9
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-4",
+      "fact": {
+        "passed": 0,
+        "total": 0,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 5045,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 514,
+        "iterations": 50000,
+        "meanDurationMs": 7.146510505836575,
+        "meanOpsPerSecond": 262455332.6329365,
+        "minDurationMs": 0,
+        "maxDurationMs": 140.6152,
+        "totalDurationMs": 3673.3064,
+        "totalAllocatedBytes": 92000000.0,
+        "meanSampleCount": 8.6,
+        "totalOutliers": 615,
+        "meanCv": 0.12445833928571429,
+        "maxCv": 0.768375
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.MemoryExtensions+TryWriteInterpolatedStringHandler": {
+            "declared": 6,
+            "covered": 0,
+            "gap": 6,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.MissingMemberException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.NotFiniteNumberException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.ObjectDisposedException": {
+            "declared": 3,
+            "covered": 2,
+            "gap": 1,
+            "gapPct": 33.3
+          },
+          "System.Private.CoreLib/System.OperatingSystem": {
+            "declared": 23,
+            "covered": 22,
+            "gap": 1,
+            "gapPct": 4.3
+          },
+          "System.Private.CoreLib/System.OrdinalComparer": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.ResolveEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.RuntimeFieldHandle": {
+            "declared": 3,
+            "covered": 2,
+            "gap": 1,
+            "gapPct": 33.3
+          },
+          "System.Private.CoreLib/System.RuntimeMethodHandle": {
+            "declared": 4,
+            "covered": 3,
+            "gap": 1,
+            "gapPct": 25.0
+          },
+          "System.Private.CoreLib/System.RuntimeTypeHandle": {
+            "declared": 4,
+            "covered": 3,
+            "gap": 1,
+            "gapPct": 25.0
+          },
+          "System.Private.CoreLib/System.SByte": {
+            "declared": 42,
+            "covered": 28,
+            "gap": 14,
+            "gapPct": 33.3
+          },
+          "System.Private.CoreLib/System.Single": {
+            "declared": 107,
+            "covered": 85,
+            "gap": 22,
+            "gapPct": 20.6
+          },
+          "System.Private.CoreLib/System.String": {
+            "declared": 153,
+            "covered": 137,
+            "gap": 16,
+            "gapPct": 10.5
+          },
+          "System.Private.CoreLib/System.StringNormalizationExtensions": {
+            "declared": 4,
+            "covered": 2,
+            "gap": 2,
+            "gapPct": 50.0
+          },
+          "System.Private.CoreLib/System.TimeOnly": {
+            "declared": 46,
+            "covered": 32,
+            "gap": 14,
+            "gapPct": 30.4
+          },
+          "System.Private.CoreLib/System.TimeSpan": {
+            "declared": 50,
+            "covered": 39,
+            "gap": 11,
+            "gapPct": 22.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-5",
+      "fact": {
+        "passed": 0,
+        "total": 0,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 5045,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 514,
+        "iterations": 50000,
+        "meanDurationMs": 7.10705953307393,
+        "meanOpsPerSecond": 255679015.25298804,
+        "minDurationMs": 0,
+        "maxDurationMs": 127.823,
+        "totalDurationMs": 3653.0286,
+        "totalAllocatedBytes": 92000000.0,
+        "meanSampleCount": 4.2,
+        "totalOutliers": 373,
+        "meanCv": 0.15460088047808765,
+        "maxCv": 1.992749
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.CodeDom.Compiler.IndentedTextWriter": {
+            "declared": 48,
+            "covered": 46,
+            "gap": 2,
+            "gapPct": 4.2
+          },
+          "System.Private.CoreLib/System.TimeZoneInfo+AdjustmentRule": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.TimeZoneInfo+TransitionTime": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.TypeInitializationException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.TypeLoadException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.TypedReference": {
+            "declared": 5,
+            "covered": 0,
+            "gap": 5,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.UInt128": {
+            "declared": 35,
+            "covered": 22,
+            "gap": 13,
+            "gapPct": 37.1
+          },
+          "System.Private.CoreLib/System.UInt16": {
+            "declared": 36,
+            "covered": 23,
+            "gap": 13,
+            "gapPct": 36.1
+          },
+          "System.Private.CoreLib/System.UInt32": {
+            "declared": 37,
+            "covered": 24,
+            "gap": 13,
+            "gapPct": 35.1
+          },
+          "System.Private.CoreLib/System.UInt64": {
+            "declared": 37,
+            "covered": 24,
+            "gap": 13,
+            "gapPct": 35.1
+          },
+          "System.Private.CoreLib/System.UIntPtr": {
+            "declared": 40,
+            "covered": 27,
+            "gap": 13,
+            "gapPct": 32.5
+          },
+          "System.Private.CoreLib/System.UnhandledExceptionEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.UnitySerializationHolder": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.ValueTuple": {
+            "declared": 2,
+            "covered": 1,
+            "gap": 1,
+            "gapPct": 50.0
+          },
+          "System.Private.CoreLib/System.Version": {
+            "declared": 11,
+            "covered": 5,
+            "gap": 6,
+            "gapPct": 54.5
+          },
+          "System.Private.CoreLib/System.WeakReference": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-data",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
+      }
+    },
+    {
+      "slug": "system-data-common",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
+      }
+    },
+    {
+      "slug": "text",
+      "fact": {
+        "passed": 2562,
+        "total": 2562,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 892,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 778,
+        "iterations": 10000,
+        "meanDurationMs": 0.421433676092545,
+        "meanOpsPerSecond": 315100246.52152956,
+        "minDurationMs": 0.0264,
+        "maxDurationMs": 22.5106,
+        "totalDurationMs": 327.8754,
+        "totalAllocatedBytes": 640000.0,
+        "meanSampleCount": 5.2,
+        "totalOutliers": 649,
+        "meanCv": 0.11650256555269924,
+        "maxCv": 0.580704
+      },
+      "hotupdate": {
+        "passed": 778,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 98.1,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.Runtime.Serialization.DeserializationToken": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Runtime.Serialization.SerializationInfo": {
+            "declared": 35,
+            "covered": 34,
+            "gap": 1,
+            "gapPct": 2.9
+          },
+          "System.Private.CoreLib/System.Runtime.Serialization.SerializationInfoEnumerator": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Security.SecurityException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Text.ASCIIEncoding": {
+            "declared": 21,
+            "covered": 15,
+            "gap": 6,
+            "gapPct": 28.6
+          },
+          "System.Private.CoreLib/System.Text.Ascii": {
+            "declared": 28,
+            "covered": 2,
+            "gap": 26,
+            "gapPct": 92.9
+          },
+          "System.Private.CoreLib/System.Text.DecoderReplacementFallbackBuffer": {
+            "declared": 4,
+            "covered": 3,
+            "gap": 1,
+            "gapPct": 25.0
+          },
+          "System.Private.CoreLib/System.Text.EncoderReplacementFallbackBuffer": {
+            "declared": 5,
+            "covered": 4,
+            "gap": 1,
+            "gapPct": 20.0
+          },
+          "System.Private.CoreLib/System.Text.Rune": {
+            "declared": 34,
+            "covered": 26,
+            "gap": 8,
+            "gapPct": 23.5
+          },
+          "System.Private.CoreLib/System.Text.SpanLineEnumerator": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Text.SpanRuneEnumerator": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Text.StringBuilder": {
+            "declared": 81,
+            "covered": 69,
+            "gap": 12,
+            "gapPct": 14.8
+          },
+          "System.Private.CoreLib/System.Text.StringBuilder+AppendInterpolatedStringHandler": {
+            "declared": 6,
+            "covered": 0,
+            "gap": 6,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Text.StringBuilder+ChunkEnumerator": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Text.StringRuneEnumerator": {
+            "declared": 2,
+            "covered": 1,
+            "gap": 1,
+            "gapPct": 50.0
+          },
+          "System.Private.CoreLib/System.Text.UTF8Encoding": {
+            "declared": 22,
+            "covered": 16,
+            "gap": 6,
+            "gapPct": 27.3
+          },
+          "System.Private.CoreLib/System.Text.Unicode.Utf8": {
+            "declared": 5,
+            "covered": 0,
+            "gap": 5,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Text.Unicode.Utf8+TryWriteInterpolatedStringHandler": {
+            "declared": 8,
+            "covered": 0,
+            "gap": 8,
+            "gapPct": 100.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 6618624,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "threading",
+      "fact": {
+        "passed": 1081,
+        "total": 1095,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 673,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 430,
+        "iterations": 10000,
+        "meanDurationMs": 3.2724497674418602,
+        "meanOpsPerSecond": 221989884.55797672,
+        "minDurationMs": 0.0267,
+        "maxDurationMs": 29.309,
+        "totalDurationMs": 1407.1534,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.08828218372093023,
+        "maxCv": 0.478337
+      },
+      "hotupdate": {
+        "passed": 430,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 98.3,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.Threading.CancellationTokenSource": {
+            "declared": 11,
+            "covered": 10,
+            "gap": 1,
+            "gapPct": 9.1
+          },
+          "System.Private.CoreLib/System.Threading.CompressedStack": {
+            "declared": 5,
+            "covered": 4,
+            "gap": 1,
+            "gapPct": 20.0
+          },
+          "System.Private.CoreLib/System.Threading.ContextCallback": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Threading.EventWaitHandle": {
+            "declared": 4,
+            "covered": 3,
+            "gap": 1,
+            "gapPct": 25.0
+          },
+          "System.Private.CoreLib/System.Threading.ExecutionContext": {
+            "declared": 9,
+            "covered": 8,
+            "gap": 1,
+            "gapPct": 11.1
+          },
+          "System.Private.CoreLib/System.Threading.IOCompletionCallback": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Threading.Lock": {
+            "declared": 6,
+            "covered": 5,
+            "gap": 1,
+            "gapPct": 16.7
+          },
+          "System.Private.CoreLib/System.Threading.Lock+Scope": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Threading.ManualResetEventSlim": {
+            "declared": 9,
+            "covered": 8,
+            "gap": 1,
+            "gapPct": 11.1
+          },
+          "System.Private.CoreLib/System.Threading.ParameterizedThreadStart": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Threading.SendOrPostCallback": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Threading.SpinWait": {
+            "declared": 6,
+            "covered": 5,
+            "gap": 1,
+            "gapPct": 16.7
+          },
+          "System.Private.CoreLib/System.Threading.Thread": {
+            "declared": 63,
+            "covered": 61,
+            "gap": 2,
+            "gapPct": 3.2
+          },
+          "System.Private.CoreLib/System.Threading.ThreadExceptionEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Threading.ThreadStart": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Threading.TimerCallback": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Threading.WaitCallback": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.CoreLib/System.Threading.WaitOrTimerCallback": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 7463424,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "threading-tasks",
+      "fact": {
+        "passed": 1122,
+        "total": 1122,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 581,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 541,
+        "iterations": 5263,
+        "meanDurationMs": 0.15300314232902032,
+        "meanOpsPerSecond": 304606428.5068392,
+        "minDurationMs": 0.0136,
+        "maxDurationMs": 11.7454,
+        "totalDurationMs": 82.7747,
+        "totalAllocatedBytes": 842080.0,
+        "meanSampleCount": 8.6,
+        "totalOutliers": 754,
+        "meanCv": 0.175671157116451,
+        "maxCv": 1.818502
+      },
+      "hotupdate": {
+        "passed": 541,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.CoreLib/System.Threading.Tasks.TaskAsyncEnumerableExtensions": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 5138432,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

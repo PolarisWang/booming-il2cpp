@@ -1,0 +1,27 @@
+{
+  "assemblyName": "System.ObjectModel",
+  "timestamp": "2026-06-26T05:47:49",
+  "summary": {
+    "chunks": 1,
+    "chunksVerified": 1,
+    "chunksWithValueWarnings": 0,
+    "chunksWithMetaMismatch": 1,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 3,
+    "aggregatePerformance": {
+      "meanDurationMs": 8.1971,
+      "meanOpsPerSecond": 1228914.25,
+      "aggregateMeanCv": 0.04540166666666667,
+      "totalOutliers": 1
+    },
+    "hotupdate": {
+      "chunksWithPatchData": 0,
+      "chunksPatchFailed": 0,
+      "chunksPatchSkippedNoMethods": 0,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 0,
+      "totalFailed": 0,
+      "skipBreakdown": {}
+    }
+  }
+}

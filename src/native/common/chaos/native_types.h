@@ -8,17 +8,6 @@
 
 #include <chaos/config.h>
 
-// MSVC /EHa exception-symbol fix:
-// MSVC's <exception> line 38 does `using ::terminate;`, which requires the global
-// function ::terminate to be declared before that point. ::terminate is declared
-// in corecrt_terminate.h (Windows Kits ucrt), pulled via
-//   <exception> → <vcruntime_exception.h> → <eh.h> → <corecrt_terminate.h>
-// Use C linkage (matching CRT) so no C2375/C2732 linkage contradiction fires
-// when the CRT's own header is later pulled in by <vcruntime_exception.h>.
-#if defined(_MSC_VER)
-#include <corecrt_terminate.h>
-#endif
-
 #include <algorithm>
 #include <array>
 #include <atomic>
@@ -380,13 +369,13 @@ namespace chaos { namespace il2cpp { namespace common {
     ::new (CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(T))) T{__VA_ARGS__}
 
 // ========== Raw domain — temp / non-GC structures ==========
-// Existing macros: NEW/NEW_ARRAY/CALLOC only.  MALLOC/FREE/REALLOC are defined
-// once above (unified allocation section) — DO NOT redefine here (a silent
-// re-definition of identical replacement was removed; keep a single source of
-// truth for the raw allocator macros).
+// Existing macros — unchanged semantics, std::malloc/free/realloc.
 #define CHAOS_IL2CPP_NEW(T)          new T
 #define CHAOS_IL2CPP_NEW_ARRAY(T, N) new T[N]
+#define CHAOS_IL2CPP_MALLOC(s)     std::malloc(s)
 #define CHAOS_IL2CPP_CALLOC(n,s)   std::calloc(n, s)
+#define CHAOS_IL2CPP_FREE(p)       std::free(p)
+#define CHAOS_IL2CPP_REALLOC(p,s)  std::realloc(p, s)
 
 // ── Numeric limits ─────────────────────────────────────────
 // Parentheses around min/max prevent collision with Windows macros (NOMINMAX not guaranteed).

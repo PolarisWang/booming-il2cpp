@@ -38,31 +38,8 @@ void PalPreemptiveSuspendAck(uint64_t epoch, PalEvent* suspend_event,
                               std::atomic<uint32_t>* suspend_ack) noexcept {
     suspend_ack->store(epoch, std::memory_order_release);
     if (suspend_event != nullptr) {
-        // Wait for release.  This runs on a PREEMPTIVE thread (e.g. BGC) that
-        // does NOT return through SafepointPoll re-check — ack-and-return would
-        // let it keep running native GC code while the STW safepoint believes
-        // it is suspended, racing the collector.  For cooperative threads the
-        // SafepointPoll re-check loop (thread_state.cpp) owns the re-wait; for
-        // preemptive threads this wait IS the stop point until ReleaseGlobalSafepoint
-        // Signals the event.
         PalEventWait(suspend_event, UINT64_MAX);
     }
-}
-
-// ── Phase 2 (C): register-window capture (Win64) ───────────────────────
-// Reliability gate: under the current QueueUserAPC + PalEventWait suspend,
-// the suspended thread parks inside the APC/wait — GetThreadContext would return
-// the suspend machinery's frame, NOT the interrupted JIT-safepoint registers.
-// So capture is marked unreliable: PalGetCaptureSlot()=-1 and capture returns
-// false, which keeps the GC at gc_num_gprs=0 (register-root scanning skipped,
-// stack-slot floor preserved — never under-retains).  The real primitive
-// (SuspendThread + GetThreadContext) is a separate effort (plan 2b/B).
-int  PalGetCaptureSlot() noexcept { return -1; }
-bool PalCaptureReliable() noexcept { return false; }
-void PalSetPreemptContext(int /*slot*/, const void* /*ucontext*/) noexcept {}
-bool PalCaptureThreadContext(int /*slot*/, uint64_t /*gpr_values*/[16], uint32_t* out_num) noexcept {
-    if (out_num) *out_num = 0;
-    return false;
 }
 
 }  // namespace chaos::il2cpp::pal

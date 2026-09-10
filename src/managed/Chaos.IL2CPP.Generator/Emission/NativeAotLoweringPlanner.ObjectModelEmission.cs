@@ -451,59 +451,6 @@ public sealed partial class NativeAotLoweringPlanner
 				TrackReferenceType(id, "System.Private.CoreLib/System.Object");
 			}
 		}
-		// Pre-scan: identify ReadOnlyCollection<T> types from method signatures.
-		// These types are only discovered through the supplement scan (which runs
-		// after struct emission), but they need struct bodies and MethodTable
-		// entries. Detect them early so they are added to referenceTypeSubjectIds
-		// before the struct emission loop.
-		foreach (var m in _methodsBySubjectId.Values)
-		{
-			if (m.Identity is null) continue;
-
-			string? retTypeId = m.ReturnAbi?.TypeSubjectId;
-			if (string.IsNullOrEmpty(retTypeId))
-				retTypeId = m.ReturnType;
-			TryTrackReadOnlyCollectionRef(retTypeId, referenceTypeSubjectIds, valueTypeSubjectIds);
-
-			if (m.ParameterAbis is { Count: > 0 })
-				for (int paramIdx = 0; paramIdx < m.ParameterAbis.Count; paramIdx++)
-				{
-					var p = m.ParameterAbis[paramIdx];
-					string? pTypeId = p?.TypeSubjectId;
-					if (string.IsNullOrEmpty(pTypeId) && !string.IsNullOrEmpty(m.SubjectId) &&
-						_allManagedMethods is not null &&
-						_allManagedMethods.TryGetValue(m.SubjectId, out var mm) &&
-						paramIdx < mm.Parameters.Count)
-						pTypeId = mm.Parameters[paramIdx].Type;
-					TryTrackReadOnlyCollectionRef(pTypeId, referenceTypeSubjectIds, valueTypeSubjectIds);
-				}
-
-		}
-		if (_allManagedMethods is { Count: > 0 })
-		{
-			foreach (var mm2 in _allManagedMethods.Values)
-			{
-				if (mm2.SubjectId is null) continue;
-				TryTrackReadOnlyCollectionRef(mm2.ReturnType, referenceTypeSubjectIds, valueTypeSubjectIds);
-				foreach (var param in mm2.Parameters)
-					TryTrackReadOnlyCollectionRef(param.Type, referenceTypeSubjectIds, valueTypeSubjectIds);
-			}
-		}
-		// Route a ReadOnlyCollection<T> subject id (if it is one) to the reference
-		// type path so a proper GC-object struct body + MethodTable entry is emitted.
-		// The generic IsStructuredValueTypeSubjectId heuristic would misclassify it
-		// as a structured value type, so it must be handled explicitly.
-		void TryTrackReadOnlyCollectionRef(string? typeSubjectId, ISet<string> refIds, ISet<string> valIds)
-		{
-			if (typeSubjectId is { Length: > 0 } &&
-				IsReadOnlyCollectionTypeSubjectId(typeSubjectId) &&
-				!refIds.Contains(typeSubjectId) && !valIds.Contains(typeSubjectId))
-			{
-				var slash = typeSubjectId.IndexOf('/');
-				var coreLibId = (slash > 0) ? "System.Private.CoreLib" + typeSubjectId[slash..] : typeSubjectId;
-				TrackReferenceType(coreLibId, "System.Private.CoreLib/System.Object");
-			}
-		}
 		// Pre-compute types safe for stack allocation (no GC-ref fields, no finalizer).
 		_typesSafeForStackAllocation = ComputeTypesSafeForStackAllocation(
 			referenceTypeSubjectIds, valueTypeSubjectIds,
@@ -522,17 +469,6 @@ public sealed partial class NativeAotLoweringPlanner
 				if (!methodsByDeclaringTypeVT.TryGetValue(dt, out var list))
 					methodsByDeclaringTypeVT[dt] = list = new List<AotCoreIrMethodArtifact>();
 				list.Add(method);
-			}
-			// Track declaring types of all methods so static classes with only static methods
-			// (e.g., HelloWorld.Program) have their MethodTable definitions emitted.
-			// This must happen before sortedReferenceTypes is computed below.
-			foreach (var m in _methodsBySubjectId.Values)
-			{
-				if (m.Identity?.DeclaringTypeSubjectId is { Length: > 0 } declType &&
-				    !declType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
-				{
-					TrackReferenceType(declType, null);
-				}
 			}
 			// Ensure hashSet3 value types are in valueTypeSubjectIds before sortedReferenceTypes
 			// filter (must precede the filter to prevent C2374 redefinition from dual emission).
@@ -1218,8 +1154,6 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 				ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.Dictionary", StringComparison.Ordinal);
 			bool isHashSetType =
 				ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.HashSet", StringComparison.Ordinal);
-			bool isReadOnlyCollectionType =
-				ns.StartsWith("System.Private.CoreLib/System.Collections.ObjectModel.ReadOnlyCollection<", StringComparison.Ordinal);
 			if (isListType)
 			{
 				builder.AppendLine("    CHAOS_IL2CPP_INTPTR items_array = 0;  // GC array reference");
@@ -1229,18 +1163,6 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 			else if (isDictType || isHashSetType)
 			{
 				builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_native_storage = 0;  // native runtime storage ptr");
-			}
-			else if (isReadOnlyCollectionType)
-			{
-				// ReadOnlyCollection<T> wraps a List<T>'s backing state directly,
-				// sharing the SAME chaos_list_fields block (items_array + size +
-				// version) so a ReadOnlyCollection view traverses identically to a
-				// List<T> via reinterpret_cast<chaos_list_fields*>(obj + 8).
-				// items_array is a malloc'd buffer (not a GC array reference),
-				// registered as pointer_count=0 in GcTypeLayout — matching List<T>.
-				builder.AppendLine("    CHAOS_IL2CPP_INTPTR items_array = 0;  // shared List<T> items_array (malloc'd)");
-				builder.AppendLine("    CHAOS_IL2CPP_INT32 size = 0;           // shared element count (view of List<T>.Count)");
-				builder.AppendLine("    CHAOS_IL2CPP_INT32 version = 0;        // shared modification counter");
 			}
 			if (list.Count == 0)
 			{
@@ -1341,27 +1263,16 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		EmitReflectionObjectHelpers(builder, reachableMethods, referenceTypeSubjectIds, hashSet3);
 		EmitExceptionMetadataHelpers(builder, reachableMethods);
 		EmitGcTypeLayoutRegistration(builder, referenceTypeSubjectIds, referenceTypeBaseSubjectIds, fieldsByDeclaringType, fieldTypeMap, valueTypeSubjectIds);
-		bool anyDecimalStatic = hashSet2.Keys.Any(IsDecimalStaticFieldSubjectId);
-		if (anyDecimalStatic)
-		{
-			// A System.Decimal static field is a DecimalCarrier* (16-byte value passed by pointer).
-			// Give such fields a real zero carrier to load, NOT null — otherwise a call like
-			// Math.Ceiling(Decimal.Zero) passes a null carrier and the wrapper null-guard throws → return 0.
-			builder.AppendLine("    static chaos::il2cpp::runtime_core::DecimalCarrier g_chaos_decimal_zero{};");
-		}
 		foreach (KeyValuePair<string, string?> item11 in hashSet2.OrderBy<KeyValuePair<string, string?>, string>((KeyValuePair<string, string?> result) => result.Key, StringComparer.Ordinal))
 		{
 			var cppType = MapFieldTypeToCppType(item11.Value);
-			string initializer = IsDecimalStaticFieldSubjectId(item11.Key)
-				? "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&g_chaos_decimal_zero)"
-				: "0";
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder20 = stringBuilder;
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(23, 1, stringBuilder);
 			handler.AppendLiteral(cppType);
 			handler.AppendLiteral(" ");
 			handler.AppendFormatted(GetNativeStaticFieldSymbol(item11.Key));
-			handler.AppendLiteral(" = " + initializer + ";");
+			handler.AppendLiteral(" = 0;");
 			stringBuilder20.AppendLine(ref handler);
 		}
 		if (hashSet2.Count > 0)
@@ -1376,152 +1287,9 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		    foreach (var kvp in hashSet2)
 		        _staticFieldDeclarations.TryAdd(kvp.Key, kvp.Value);
 		}
-		// ── Supplement: collect types from ALL method ABI slots ─────────────────
-		// Subject-only IR lowering only includes instructions for subject methods +
-		// direct callees.  Non-subject methods have no instructions in the IR, so
-		// their operand-based type discovery is lost.  However, their return types,
-		// parameter types, exception catch types, and declaring types are still
-		// available via ABI metadata and are needed for complete struct definitions.
-		// Without this scan, nested types like Queue+QueueEnumerator referenced only
-		// through non-subject methods (e.g. Queue.GetEnumerator returns QueueEnumerator)
-		// have no forward declarations, causing C2061/C2039 in the generated code.
-		// Initialize _allEmittedTypeSubjectIds before the scan (in case the main
-		// initialization below is updated after the scan).
-		_allEmittedTypeSubjectIds ??= new HashSet<string>(StringComparer.Ordinal);
-		void _trackTypeRef(string typeSubjectId)
-		{
-			if (!_allEmittedTypeSubjectIds.Contains(typeSubjectId))
-				_allEmittedTypeSubjectIds.Add(typeSubjectId);
-			if (!hashSet3.Contains(typeSubjectId))
-				hashSet3.Add(typeSubjectId);
-			if (!referenceTypeSubjectIds.Contains(typeSubjectId) &&
-			    !valueTypeSubjectIds.Contains(typeSubjectId))
-			{
-				// ReadOnlyCollection<T> is a genuine reference type whose object model
-				// is a GC object wrapping the source List's items_array (malloc'd buffer).
-				// The generic IsStructuredValueTypeSubjectId heuristic classifies any
-				// non-primitive subject id as a structured value type, which is wrong
-				// for ReadOnlyCollection. Route it explicitly to the reference path so
-				// a proper reference struct (header + items_array) is emitted.
-				if (IsReadOnlyCollectionTypeSubjectId(typeSubjectId))
-				{
-					// ReadOnlyCollection<T> is defined in System.Private.CoreLib
-					// regardless of which assembly prefix the subject id carries.
-					// Force the canonical assembly prefix so the struct symbol
-					// (chaos_type_System_Private_CoreLib_*) matches what the
-					// AsReadOnly stub generates from the List's declaring type.
-					var slash = typeSubjectId.IndexOf('/');
-					var coreLibId = (slash > 0)
-						? "System.Private.CoreLib" + typeSubjectId[slash..]
-						: typeSubjectId;
-					TrackReferenceType(coreLibId, "System.Private.CoreLib/System.Object");
-				}
-				else if (IsStructuredValueTypeSubjectId(typeSubjectId))
-				{
-					valueTypeSubjectIds.Add(typeSubjectId);
-				}
-				else
-				{
-					TrackReferenceType(typeSubjectId, null);
-				}
-			}
-		}
-		foreach (var m in _methodsBySubjectId.Values)
-		{
-			if (m.Identity is null) continue;
-
-			// 1. Declaring type
-			if (m.Identity.DeclaringTypeSubjectId is { Length: > 0 } declType &&
-			    !declType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
-				_trackTypeRef(declType);
-
-			// 2. Return type: prefer ABI TypeSubjectId, fall back to raw ReturnType
-			string? retTypeId = m.ReturnAbi?.TypeSubjectId;
-			if (string.IsNullOrEmpty(retTypeId))
-				retTypeId = m.ReturnType;
-			if (retTypeId is { Length: > 0 } &&
-			    !retTypeId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
-			    !retTypeId.StartsWith("!!", StringComparison.Ordinal) &&
-			    !retTypeId.StartsWith("!", StringComparison.Ordinal))
-				_trackTypeRef(retTypeId);
-
-			// 3. Parameter types: prefer ABI TypeSubjectId, fall back to _allManagedMethods
-			if (m.ParameterAbis is { Count: > 0 })
-				for (int paramIdx = 0; paramIdx < m.ParameterAbis.Count; paramIdx++)
-				{
-					var p = m.ParameterAbis[paramIdx];
-					string? pTypeId = p?.TypeSubjectId;
-					if (string.IsNullOrEmpty(pTypeId) &&
-					    !string.IsNullOrEmpty(m.SubjectId) &&
-					    _allManagedMethods is not null &&
-					    _allManagedMethods.TryGetValue(m.SubjectId, out var mm))
-					{
-						if (paramIdx < mm.Parameters.Count)
-							pTypeId = mm.Parameters[paramIdx].Type;
-					}
-					if (pTypeId is { Length: > 0 } &&
-					    !pTypeId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
-					    !pTypeId.StartsWith("!!", StringComparison.Ordinal) &&
-					    !pTypeId.StartsWith("!", StringComparison.Ordinal))
-						_trackTypeRef(pTypeId);
-				}
-
-			// 4. Scan _allManagedMethods for concrete type strings
-			if (_allManagedMethods is not null && !string.IsNullOrEmpty(m.SubjectId) &&
-			    _allManagedMethods.TryGetValue(m.SubjectId, out var managedM))
-			{
-				string? rt = managedM.ReturnType;
-				if (rt is { Length: > 0 } && !rt.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
-				    !rt.StartsWith("!!", StringComparison.Ordinal) && !rt.StartsWith("!", StringComparison.Ordinal))
-					_trackTypeRef(rt);
-				foreach (var param in managedM.Parameters)
-				{
-					string? pt = param.Type;
-					if (pt is { Length: > 0 } && !pt.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
-					    !pt.StartsWith("!!", StringComparison.Ordinal) && !pt.StartsWith("!", StringComparison.Ordinal))
-						_trackTypeRef(pt);
-				}
-			}
-
-			// 5. Supplement: scan ALL _allManagedMethods for types referenced in
-			// method signatures of dependency assemblies not in _methodsBySubjectId.
-			if (_allManagedMethods is { Count: > 0 })
-			{
-				foreach (var mm2 in _allManagedMethods.Values)
-				{
-					if (mm2.SubjectId is null) continue;
-					string? rt2 = mm2.ReturnType;
-					if (rt2 is { Length: > 0 } && !rt2.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
-					    !rt2.StartsWith("!!", StringComparison.Ordinal) && !rt2.StartsWith("!", StringComparison.Ordinal))
-						_trackTypeRef(rt2);
-					foreach (var param in mm2.Parameters)
-					{
-						string? pt2 = param.Type;
-						if (pt2 is { Length: > 0 } && !pt2.StartsWith("CombinedSubjects/", StringComparison.Ordinal) &&
-						    !pt2.StartsWith("!!", StringComparison.Ordinal) && !pt2.StartsWith("!", StringComparison.Ordinal))
-							_trackTypeRef(pt2);
-					}
-				}
-			}
-
-			// 6. Exception catch types
-			if (m.ExceptionRegions is { Count: > 0 })
-				foreach (var e in m.ExceptionRegions)
-					if (e?.CatchTypeSubjectId is { Length: > 0 } catchType &&
-					    !catchType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
-						_trackTypeRef(catchType);
-		}
-
 		_emittedValueTypeSubjectIds = new HashSet<string>(valueTypeSubjectIds, StringComparer.Ordinal);
-		// Merge with value type symbols discovered by BuildGeneratedModuleModel's
-		// ABI slot scan.  Value types referenced via chaos_resolve_managed_value_pointer<T>
-		// may not be in the AOT IR type metadata and thus omitted from valueTypeSubjectIds.
-		if (_emittedValueTypeSubjectIdsFromAbi is { Count: > 0 })
-			_emittedValueTypeSubjectIds.UnionWith(_emittedValueTypeSubjectIdsFromAbi);
 		// Capture emitted type subject IDs for Phase 0 ModuleRegistry Tier 0 arrays
-		// Note: _allEmittedTypeSubjectIds was pre-initialized in the ABI slot scan
-		// above; do NOT use = new HashSet (which would discard ABI-scanned entries).
-		_allEmittedTypeSubjectIds.UnionWith(referenceTypeSubjectIds);
+		_allEmittedTypeSubjectIds = new HashSet<string>(referenceTypeSubjectIds, StringComparer.Ordinal);
 		_allEmittedTypeSubjectIds.UnionWith(interfaceTypeSubjectIds);
 		_allEmittedTypeSubjectIds.UnionWith(valueTypeSubjectIds);
 		_allEmittedTypeSubjectIds.UnionWith(hashSet3);
@@ -1788,26 +1556,6 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 				null => "CHAOS_IL2CPP_INTPTR",
 				_ => "CHAOS_IL2CPP_INTPTR",
 			};
-		}
-
-		/// <summary>
-		/// True when a static-field SubjectId denotes System.Decimal (a 16-byte carrier-passed
-		/// value type that must be a valid carrier pointer, not null). Keyed on the FIELD's
-		/// SubjectId (the static-field name), NOT the field TYPE — hashSet2 stores the type as
-		/// null for many fields (external-helper/static-init paths), so type-based detection
-		/// is unreliable. Any System.Decimal static field (e.g. Decimal.Zero/.MinValue/.MaxValue)
-		/// needs a real carrier pointer, not null.
-		/// </summary>
-		private static bool IsDecimalStaticFieldSubjectId(string staticFieldSubjectId)
-		{
-			if (string.IsNullOrEmpty(staticFieldSubjectId))
-				return false;
-			// Field SubjectId forms: "System.Private.CoreLib/System.Decimal.Zero",
-			// "System.Private.CoreLib/System.Decimal::Zero", or bare "System.Decimal.Zero".
-			int idx = staticFieldSubjectId.IndexOf("/System.Decimal", StringComparison.Ordinal);
-			if (idx >= 0)
-				return true;
-			return staticFieldSubjectId.StartsWith("System.Decimal", StringComparison.Ordinal);
 		}
 
 		private void EmitStructMarshallingDescriptors(

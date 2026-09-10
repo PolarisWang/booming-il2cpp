@@ -52,11 +52,6 @@ public sealed class MetadataWriterStage
 
         foreach (var method in linkedWorld.Methods)
         {
-            // Resolve each method's translation capability from its body availability
-            // (native AOT lowering vs interpreter/ExternalRuntime fallback).  The
-            // BodyAvailabilityCode is not a property of ManagedMethodModel; it is
-            // resolved per-method, mirroring the planner/semantic path.
-            var availability = Chaos.IL2CPP.Contracts.BodyAvailabilityResolver.Resolve(method);
             aotEntries.Add(new AotManifestEntry
             {
                 AssemblyName = method.AssemblyName,
@@ -65,12 +60,6 @@ public sealed class MetadataWriterStage
                 Reason = string.Equals(method.SubjectId, linkedWorld.EntryPointSubjectId, StringComparison.Ordinal)
                     ? "entrypoint"
                     : "generated-direct-call",
-                // ResolveBodyAvailabilityCode returns a BodyAvailabilityCode; collapse to
-                // the canonical-body label by checking the enum has a real body.
-                BodyAvailability = availability == BodyAvailabilityCode.NativeGenerated
-                    || availability == BodyAvailabilityCode.InterpreterReady
-                        ? "has-canonical-body"
-                        : "no-canonical-body",
             });
         }
 

@@ -32,42 +32,17 @@ def _rotate_jsonl_if_needed(path: Path) -> None:
             pass
 
 
-_REPO_ROOT: Path | None = None
-
-
-def _derive_repo_root() -> Path | None:
-    """Derive repo root from script location — no git subprocess fork.
-
-    This file lives at <repo>/.ai/skills/hooks/... (4 levels below repo root).
-    Falls back to a git query only if hooks are not deployed under the repo tree.
-    """
-    p = Path(__file__).resolve()
-    for _ in range(4):
-        p = p.parent
-        if (p / ".git").exists() or (p / ".gitignore").exists():
-            return p
+def resolve_repo_root() -> Path | None:
     try:
         script_dir = Path(__file__).resolve().parent
         output = subprocess.run(
             ["git", "-C", str(script_dir), "rev-parse", "--show-toplevel"],
-            capture_output=True, text=True, timeout=5,
+            capture_output=True, text=True, timeout=10,
         )
         root = output.stdout.strip()
         return Path(root).resolve() if root else None
     except Exception:
         return None
-
-
-def resolve_repo_root() -> Path | None:
-    """Resolve the repository root once, caching it at module scope.
-
-    Uses _derive_repo_root() (git rev-parse) on first call and reuses the result
-    afterwards, so the git subprocess is never spawned on the per-record hot path.
-    """
-    global _REPO_ROOT
-    if _REPO_ROOT is None:
-        _REPO_ROOT = _derive_repo_root()
-    return _REPO_ROOT
 
 
 def load_jsonl(path: Path, max_records: int = 0) -> list[dict]:
@@ -87,7 +62,7 @@ def load_jsonl(path: Path, max_records: int = 0) -> list[dict]:
 
 def estimate_quality_from_telemetry(repo_root: Path) -> dict:
     """Compute quality score from telemetry data instead of session transcript."""
-    telemetry_dir = repo_root / ".ai" / "skills" / "lifecycle" / "telemetry"
+    telemetry_dir = repo_root / "skills" / "lifecycle" / "telemetry"
     usage_path = telemetry_dir / "usage.jsonl"
     tool_path = telemetry_dir / "tool_outcomes.jsonl"
     session_path = telemetry_dir / "session_outcomes.jsonl"
@@ -212,7 +187,7 @@ def main() -> int:
     if quality["score"] < 0.5:
         return 0  # Not a high-quality enough period to record
 
-    signals_dir = repo_root / ".ai" / "skills" / "lifecycle" / "learning" / "signals"
+    signals_dir = repo_root / "skills" / "lifecycle" / "learning" / "signals"
     signals_dir.mkdir(parents=True, exist_ok=True)
 
     record = {
@@ -242,7 +217,7 @@ def main() -> int:
             # Generate proposals from latest telemetry
             subprocess.run(
                 [sys.executable or "python",
-                 str(repo_root / ".ai" / "skills" / "tooling" / "learning" / "evolve.py"),
+                 str(repo_root / "skills" / "tooling" / "learning" / "evolve.py"),
                  "auto-evolve"],
                 cwd=repo_root, capture_output=True, timeout=25,
             )

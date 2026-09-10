@@ -10,11 +10,9 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
-
-#include "gc_lock.h"   // GcSpinLock (replaces std::mutex for RegionManager)
+#include <mutex>
 
 #include "gc_scheduler.h"
-#include "gc_stats.h"   // GcRecordAlloc (global allocation accounting)
 #include "gc_young_gen.h"
 #include "thread_state.h"
 
@@ -76,93 +74,7 @@ struct Region {
     Region*         next;           // free-list / GC work-set link
     Region*         poh_next;       // POH region linked list (O(1) iteration)
 
-    uint8_t         gen;            // generation of this region (0/1/2),
-                                    // aligned to CoreCLR region_info's low 2 bits.
 };
-
-/// Low 2 bits carry the region's current generation (align CoreCLR RI_GEN_MASK).
-static constexpr uint8_t kRegionGenMask   = 0x3u;
-/// Generation value for a nursery (youngest) region.
-static constexpr uint8_t kRegionGenYoung  = 0u;
-/// Generation value for a Gen1 survivor region (M9: distinct 3rd-gen value).
-/// The 2-bit mask (0x3) already admits this value, but GEN1 regions previously
-/// shared kRegionGenYoung (0).  Distinguishing them lets the write barrier /
-/// scavenge treat gen1 as its own generation (Cross-coreCLR HNDTYPE).
-
-static constexpr uint8_t kRegionGenGen1   = 1u;
-/// Generation value for a mature (old / tenured / LOH-like) region.
-static constexpr uint8_t kRegionGenOld    = 2u;
-
-/// Region-to-generation skewed table (align CoreCLR map_region_to_generation_skewed).
-/// 1 byte per basic region; base is pre-offset so a write barrier can index with
-/// raw `addr >> kRegionGenShift` (no watermark subtraction).  Populated by
-/// RegionManager::Init / region allocation; read-only after init on the hot path.
-/// kRegionGenShift = log2(4MB) = 22 (largest region size class from K1).
-static constexpr CHAOS_IL2CPP_SIZE kRegionGenShift = 22;
-extern uint8_t* g_region_to_gen;          // = table base (skewed by RegionManager)
-extern CHAOS_IL2CPP_SIZE g_region_gen_bytes;  // table size in bytes (for bounds guard)
-
-/// Sentinel returned by GcGetRegionGenPhysical when @a addr is not physically a
-/// nursery/Gen1 address.  Distinct from the real gen values (0/1/2).
-static constexpr uint8_t kRegionGenInvalid = 0xFFu;
-
-/// Physical nursery/Gen1 membership check for the region-gen lookup: returns
-/// young(0) if @a addr is within the live nursery range, gen1(1) if within the
-/// live Gen1 range, else kRegionGenInvalid (no physical young membership — caller
-/// falls back to the 4MB chunk table).  Non-inline because RegionManager is only
-/// complete in gc_region.cpp; the nursery/Gen1 ranges are read directly.
-uint8_t GcGetRegionGenPhysical(uintptr_t addr) noexcept;
-
-/// O(1) skewed lookup of a region's generation from any address.
-/// Bounds-guarded: addresses outside the covered table range conservatively
-/// report old(2) so the write barrier never OOB-reads for an out-of-heap value.
-///
-/// Physical young-gen membership (nursery/Gen1 range) is authoritative over the
-/// coarse 4MB chunk table: a nursery or Gen1 address must classify as young/gen1
-/// even when a mature region shares the SAME 4MB chunk and overwrote that chunk's
-/// table byte (last-writer-wins).  Relying on the clobbered byte would make a
-/// nursery ref read OLD → the write barrier skips the card / the scavenger's
-/// condemned-filter drops the object → cross-gen UAF (GC-N6 K2b: region_test
-/// GetRegionGen(nursery)!=young).
-inline uint8_t GetRegionGen(uintptr_t addr) noexcept {
-    uint8_t physical = GcGetRegionGenPhysical(addr);
-    if (physical != kRegionGenInvalid) return physical;  // physically nursery/Gen1 → authoritative
-    if (g_region_to_gen == nullptr) return kRegionGenOld;  // uninitialized → conservative
-    CHAOS_IL2CPP_SIZE idx = addr >> kRegionGenShift;
-    if (idx >= g_region_gen_bytes) return kRegionGenOld;   // out of covered range → conservative
-    return g_region_to_gen[idx] & kRegionGenMask;
-}
-
-/// Update the skewed table entry for the region covering @a addr to @a gen.
-/// No-op if the table isn't initialized or @a addr is out of covered range.
-inline void SetRegionGen(uintptr_t addr, uint8_t gen) noexcept {
-    if (g_region_to_gen == nullptr) return;
-    CHAOS_IL2CPP_SIZE idx = addr >> kRegionGenShift;
-    if (idx >= g_region_gen_bytes) return;
-    g_region_to_gen[idx] = gen & kRegionGenMask;
-}
-
-/// Mark every 4MB region-gen byte covering [@a start, @a end) as OLD (gen 2).
-/// Old-gen / LOH pages are allocated by their own (non-Region) allocators and
-/// are registered only with the card table; call this when such a page is
-/// committed so the generation-aware write barrier (chaos_gc_dirty_card_dst_ref)
-/// treats the page as mature and dirty-cards cross-gen stores into it.
-///
-/// Rationale (CoreCLR-aligned): CoreCLR's single region allocator calls
-/// set_region_gen_num on every region, so each basic region's gen byte is owned
-/// by that region and never collides across allocators.  Chaos's old-gen/LOH
-/// pages are a separate VA pool; without this marking, a co-located nursery/Gen1
-/// SetRegionGen(..., young) can overwrite an old page's 4MB chunk byte to 0, and
-/// the barrier will read gen0 and skip carding → dropped old→nursery edges.
-///
-/// Thread-safe when called under the same lock that serializes page commits
-/// (old-gen / LOH allocation).  To remove the cross-allocator race against
-/// nursery/Gen1 creation (which uses RegionManager::mutex_, a different lock),
-/// the implementation takes a dedicated leaf lock (g_region_gen_lock on its own)
-/// around every region-gen write loop.  Callers may hold their own allocator
-/// mutex (LOH or RegionManager) — that lock orders above the leaf lock, never
-/// below it, so this is deadlock-free.  Declared here; impl in gc_region.cpp.
-void GcMarkRangeOld(uintptr_t start, uintptr_t end) noexcept;
 
 // ── Forward declarations ──────────────────────────────────────
 class RegionManager;
@@ -249,13 +161,6 @@ inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
         std::memset(ptr, 0, size);
         tls_alloc_since_last_gc += size;
         tls_total_allocated_bytes += size;
-        // Account into the global GC stats (reported by GcGetSnapshot/GcMemoryInfo).
-        // The slow path and old-gen already record; the TLAB bump-pointer fast path
-        // was missing this, so alloc_total/alloc_bytes were under-counted for the
-        // common allocation traffic. Cost on the hot path is acceptable: GcRecordAlloc
-        // is inline, noexcept, lock-free (two relaxed atomic fetch_add), and does not
-        // recurse into the allocator, so it composes safely with the Safepoint check.
-        GcRecordAlloc(size, false);
         if (threading::SafepointRequested()) [[unlikely]] {
             // SPB: thread is at a safe point (object initialized).  Ack the
             // safepoint so GC doesn't wait for this thread, then continue
@@ -327,13 +232,6 @@ inline void* NurseryAllocateAtomic(CHAOS_IL2CPP_SIZE size) noexcept {
         std::memset(ptr, 0, size);
         tls_alloc_since_last_gc += size;
         tls_total_allocated_bytes += size;
-        // Account into the global GC stats (reported by GcGetSnapshot/GcMemoryInfo).
-        // The slow path and old-gen already record; the TLAB bump-pointer fast path
-        // was missing this, so alloc_total/alloc_bytes were under-counted for the
-        // common allocation traffic. Cost on the hot path is acceptable: GcRecordAlloc
-        // is inline, noexcept, lock-free (two relaxed atomic fetch_add), and does not
-        // recurse into the allocator, so it composes safely with the Safepoint check.
-        GcRecordAlloc(size, false);
         if (threading::SafepointRequested()) [[unlikely]] {
             // SPB: thread is at a safe point (object initialized).  Ack the
             // safepoint so GC doesn't wait for this thread, then continue
@@ -412,39 +310,6 @@ inline void RawFree(void* ptr) {
 }
 
 // ======================================================================
-// Single region allocator — unified entry point
-//
-// The region framework intends ONE logical allocation entry that routes to
-// the correct internal path, so that the GC has a single owner for the heap.
-// This is the surface the T-B2 design (a3-allocator-design.md) calls
-// `AllocateRegion`.  The fast path is materialized here as an inline that
-// stays on the per-thread TLAB bump when possible and falls back to the
-// slow path (nursery refill → trigger GC → old-gen) otherwise — the same
-// routing that NurseryAllocate already performs.  `is_atomic` selects zeroed
-// vs no-zero variants (pointer-free data).  `is_pinned` routes to the pinned
-// object heap.  Oversized (> kMaxTlabAlloc) objects fall through to the slow
-// path, which places them directly in old-gen / LOH.
-//
-// Keeping this as a single entry (rather than callers picking between
-// NurseryAllocate / G_OldGen().Allocate / PohAllocate directly) means the GC
-// only needs to reconcile with one allocator owner, which is the structural
-// foundation for eliminating the A2b cross-allocator window.
-// ======================================================================
-inline void* Allocate(CHAOS_IL2CPP_SIZE size, bool is_pinned = false,
-                      bool is_atomic = false) noexcept {
-    if (is_pinned) {
-        return PohAllocate(size);
-    }
-    // Small / ordinary objects go through the per-thread TLAB bump
-    // (fast path) which falls back to the slow path on TLAB exhaustion
-    // (nursery refill → GC trigger → old-gen / LOH).
-    if (is_atomic) {
-        return NurseryAllocateAtomic(size);
-    }
-    return NurseryAllocate(size);
-}
-
-// ======================================================================
 // RegionManager — process-wide region lifecycle manager
 //
 // Singleton that owns all regions, maintains free-lists,
@@ -472,33 +337,6 @@ public:
     /// Returns nullptr on OOM.
     Region* AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_size,
                            CHAOS_IL2CPP_UINT32 domain_id = 0);
-
-    /// Select an adaptive region size for @a kind given @a min_size.
-    /// Aligns CRAG toward CoreCLR's region-size classes (interface.cpp:455
-    /// 4/2/1MB).  Nursery/POH/Domain/Gen1 keep their fixed historical sizes
-    /// (behaviour-preserving); TENURED / oversized allocations use the
-    /// 4/2/1MB classes so large tenured regions scale with object size.
-    static CHAOS_IL2CPP_SIZE SelectRegionSize(RegionKind kind,
-                                              CHAOS_IL2CPP_SIZE min_size) noexcept {
-        switch (kind) {
-        case RegionKind::REGION_NURSERY:
-            return kDefaultRegionSize;
-        case RegionKind::REGION_GEN1:
-            return kDefaultYoungRegionSize;
-        case RegionKind::REGION_DOMAIN:
-            return kDomainRegionSize;
-        case RegionKind::REGION_POH:
-            return kPohRegionSize;
-        case RegionKind::REGION_TENURED:
-        default: {
-            // CoreCLR-style basic-region classes: 4/2/1 MB.
-            CHAOS_IL2CPP_SIZE size = kTenuredRegionSize;  // 1 MB
-            if (min_size > (2 * 1024 * 1024)) size = 4 * 1024 * 1024;   // 4 MB
-            else if (min_size > (1 * 1024 * 1024)) size = 2 * 1024 * 1024;  // 2 MB
-            return (min_size > size) ? min_size : size;
-        }
-        }
-    }
 
     /// Return a region to the free pool.
     void FreeRegion(RegionId id);
@@ -649,7 +487,7 @@ private:
 
     std::atomic<CHAOS_IL2CPP_UINT64> total_allocated_bytes_{0};
 
-    mutable GcSpinLock mutex_;    // alertable spinlock (replaces std::mutex)
+    mutable std::mutex mutex_;
 
     // O(1) index: region id → region_table_ slot number.
     CHAOS_IL2CPP_UNORDERED_DENSE_MAP(RegionId, CHAOS_IL2CPP_INT32) region_index_;

@@ -1,0 +1,292 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.IO.Pipelines",
+  "chunkSlug": "system-io-pipelines",
+  "entries": [
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegment::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegment::ResetMemory:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegment::SetNext:System.Void(System.IO.Pipelines.BufferSegment)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegment::SetOwnedMemory:System.Void(System.Buffers.IMemoryOwner`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegment::SetOwnedMemory:System.Void(System.Byte[])"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegmentStack::Push:System.Void(System.IO.Pipelines.BufferSegment)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.BufferSegmentStack::TryPop:System.Boolean(System.IO.Pipelines.BufferSegment&)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.InlineScheduler::Schedule:System.Void(System.Action`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::AdvanceTo:System.Void(System.SequencePosition)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::AdvanceTo:System.Void(System.SequencePosition,System.SequencePosition)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::CancelPendingRead:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::Complete:System.Void(System.Exception)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::GetResult:System.IO.Pipelines.ReadResult(System.Int16)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::GetStatus:System.Threading.Tasks.Sources.ValueTaskSourceStatus(System.Int16)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::OnCompleted:System.Void(System.Action`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object,System.Int16,System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::OnWriterCompleted:System.Void(System.Action`2[[System.Exception, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::ReadAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.ReadResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeReader::TryRead:System.Boolean(System.IO.Pipelines.ReadResult&)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::Advance:System.Void(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::CancelPendingFlush:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::Complete:System.Void(System.Exception)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::FlushAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.FlushResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::GetMemory:System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::GetResult:System.IO.Pipelines.FlushResult(System.Int16)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::GetSpan:System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::GetStatus:System.Threading.Tasks.Sources.ValueTaskSourceStatus(System.Int16)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::OnCompleted:System.Void(System.Action`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object,System.Int16,System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::OnReaderCompleted:System.Void(System.Action`2[[System.Exception, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe+DefaultPipeWriter::WriteAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.FlushResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::BeginOperation:System.Void(System.Threading.CancellationToken,System.Action`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::Cancel:System.Void(System.IO.Pipelines.CompletionData&)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::CancellationTokenFired:System.Void(System.IO.Pipelines.CompletionData&)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::Complete:System.Void(System.IO.Pipelines.CompletionData&)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::ObserveCancellation:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::OnCompleted:System.Void(System.Action`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object,System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags,System.IO.Pipelines.CompletionData&,System.Boolean&)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::ReleaseCancellationTokenRegistration:System.Threading.CancellationTokenRegistration(System.Threading.CancellationToken&)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeAwaitable::SetUncompleted:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeCompletion::AddCallback:System.IO.Pipelines.PipeCompletionCallbacks(System.Action`2[[System.Exception, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeCompletion::IsCompletedOrThrow:System.Boolean()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeCompletion::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeCompletion::TryComplete:System.IO.Pipelines.PipeCompletionCallbacks(System.Exception)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeCompletionCallbacks::Execute:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeOperationState::BeginRead:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeOperationState::BeginReadTentative:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeOperationState::BeginWrite:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeOperationState::EndRead:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeOperationState::EndWrite:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::EndRead:System.Int32(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::Flush:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::Read:System.Int32(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::ReadAsync:System.Threading.Tasks.Task`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::ReadAsync:System.Threading.Tasks.ValueTask`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::ReadByte:System.Int32()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::SetLength:System.Void(System.Int64)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReaderStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::DisposeAsync:System.Threading.Tasks.ValueTask()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::EndWrite:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::Flush:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::SetLength:System.Void(System.Int64)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriterStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader::AdvanceTo:System.Void(System.SequencePosition)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader::AdvanceTo:System.Void(System.SequencePosition,System.SequencePosition)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader::CancelPendingRead:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader::Complete:System.Void(System.Exception)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader::ReadAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.ReadResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.SequencePipeReader::TryRead:System.Boolean(System.IO.Pipelines.ReadResult&)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::AdvanceTo:System.Void(System.SequencePosition)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::AdvanceTo:System.Void(System.SequencePosition,System.SequencePosition)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::CancelPendingRead:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::Complete:System.Void(System.Exception)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::CompleteAsync:System.Threading.Tasks.ValueTask(System.Exception)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::ReadAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.ReadResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeReader::TryRead:System.Boolean(System.IO.Pipelines.ReadResult&)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::Advance:System.Void(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::CancelPendingFlush:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::Complete:System.Void(System.Exception)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::CompleteAsync:System.Threading.Tasks.ValueTask(System.Exception)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::FlushAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.FlushResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::GetMemory:System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::GetSpan:System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriter::WriteAsync:System.Threading.Tasks.ValueTask`1[[System.IO.Pipelines.FlushResult, System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]](System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Threading.CancellationToken)"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.ThreadPoolScheduler::Schedule:System.Void(System.Action`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Object)"
+    }
+  ]
+}

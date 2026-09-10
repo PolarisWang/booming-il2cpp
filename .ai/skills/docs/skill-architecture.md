@@ -5,10 +5,10 @@
 ## 加载链
 
 ```
-.ai/skills/library/skills/<entry>/SKILL.md
-  -> .ai/skills/discovery/skill-index.md
-     -> .ai/skills/discovery/registries/<domain>.md
-        -> .ai/skills/library/skills/<name>/SKILL.md
+skills/library/skills/<entry>/SKILL.md
+  -> skills/discovery/skill-index.md
+     -> skills/discovery/registries/<domain>.md
+        -> skills/library/skills/<name>/SKILL.md
            -> references/ / scripts/ / assets/ on demand
 ```
 

@@ -1,0 +1,33 @@
+{
+  "date": "2026-06-14",
+  "assemblyName": "System.Linq.Expressions",
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": -4.45,
+      "median": -4.45,
+      "min": -4.45,
+      "max": -4.45,
+      "p25": -4.45,
+      "p75": -4.45
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 11,
+      "methodsWithNet8": 11,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -4.45,
+          "median": 0.0,
+          "min": -50.0,
+          "max": 38.46,
+          "p25": -10.23,
+          "p75": 7.33
+        }
+      }
+    }
+  ]
+}

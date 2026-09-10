@@ -13,17 +13,6 @@
 #ifndef CHAOS_IL2CPP_CHAOS_PCH_H_
 #define CHAOS_IL2CPP_CHAOS_PCH_H_
 
-// MSVC <exception> C2039 'terminate' workaround (same as native_types.h).
-// Must be at the very top of the PCH, before any std header, because
-// native-aot.generated.cpp starts with #include "chaos_pch.h" -> <coroutine> ->
-// <exception> which does `using ::terminate;` and would fail without ::terminate.
-// native_types.h's _INC_CRT_TERMINATE guard prevents CRT extern "C" conflict.
-// We include <corecrt_terminate.h> directly so the CRT's own declarations with
-// C linkage are used, avoiding C2375 linkage contradiction.
-#ifdef _MSC_VER
-#include <corecrt_terminate.h>
-#endif
-
 // ── Standard C/C++ headers (needed by all generated files) ─────────
 #include <cstdio>
 #include <cstdlib>

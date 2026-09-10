@@ -1,0 +1,15 @@
+{
+  "chunkSlug": "global-ns",
+  "declaredMethods": 8,
+  "coveredMethods": 43,
+  "missingMethods": 6,
+  "coveragePct": 100.0,
+  "namespaceGaps": {
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider": {
+      "declared": 6,
+      "covered": 0,
+      "gap": 6,
+      "gapPct": 100.0
+    }
+  }
+}

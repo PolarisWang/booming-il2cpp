@@ -1,0 +1,55 @@
+{
+  "date": "2026-06-14",
+  "assemblyName": "System.ComponentModel.TypeConverter",
+  "chunks": [
+    {
+      "slug": "component-model",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "global-ns",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "failed"
+      }
+    },
+    {
+      "slug": "system-componentmodel-design",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "failed"
+      }
+    }
+  ]
+}

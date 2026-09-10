@@ -59,9 +59,6 @@ std::thread                               s_gate_thread;
 /// Set to true to signal shutdown.
 std::atomic<bool>                         s_shutdown{false};
 
-/// Set to true after ThreadPoolInitialize completes (singleton guard).
-static std::atomic<bool>                  s_initialized{false};
-
 /// Counters.
 std::atomic<int32_t>                      s_busy_workers{0};
 std::atomic<int32_t>                      s_desired_workers{kThreadPoolMinWorkerCount};
@@ -631,15 +628,6 @@ static void ContextRunWrapper(void* raw) noexcept {
 // ── Public API ────────────────────────────────────────────────────────
 
 void ThreadPoolInitialize() noexcept {
-    // Singleton guard: ensure init runs exactly once even if called from
-    // multiple paths (RuntimeInit + test setup).  Double-checked locking
-    // is not needed because ThreadPool is always initialized under a single-
-    // threaded init sequence.
-    if (s_initialized.load(std::memory_order_acquire)) {
-        return;
-    }
-    s_initialized.store(true, std::memory_order_release);
-
     s_shutdown.store(false, std::memory_order_relaxed);
     s_desired_workers.store(kThreadPoolMinWorkerCount, std::memory_order_relaxed);
     s_completed_since_tick.store(0, std::memory_order_relaxed);

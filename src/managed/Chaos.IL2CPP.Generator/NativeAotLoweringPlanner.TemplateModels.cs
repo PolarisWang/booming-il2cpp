@@ -146,16 +146,6 @@ public sealed record NativeAotTemplateModel
     /// Empty string when module generation is not active.
     /// </summary>
     public string GeneratedModuleSourceContent { get; init; } = "";
-
-    /// <summary>
-    /// Additional chaos_valuetype_ typedefs discovered by scanning method
-    /// body C++ code.  External value types (e.g. System.Data.CommandBehavior)
-    /// are not captured by ABI slot scanning — they appear in the generated
-    /// C++ via chaos_resolve_managed_value_pointer&lt;chaos_valuetype_X&gt;().
-    /// This field holds the complete set of chaos_valuetype_ names that
-    /// need typedefs in chaos_generated_module.h.
-    /// </summary>
-    public IReadOnlySet<string> ExtraValuetypeTypedefs { get; init; } = new HashSet<string>();
 }
 
 public sealed record NativeAotMethodTemplateModel

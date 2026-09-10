@@ -1,0 +1,237 @@
+{
+  "chunkSlug": "security-cryptography",
+  "declaredMethods": 500,
+  "coveredMethods": 570,
+  "missingMethods": 166,
+  "coveragePct": 100.0,
+  "namespaceGaps": {
+    "System.Security.Cryptography/System.Security.Cryptography.AesCcm": {
+      "declared": 5,
+      "covered": 3,
+      "gap": 2,
+      "gapPct": 40.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.AesGcm": {
+      "declared": 5,
+      "covered": 3,
+      "gap": 2,
+      "gapPct": 40.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.AsnEncodedDataCollection": {
+      "declared": 4,
+      "covered": 3,
+      "gap": 1,
+      "gapPct": 25.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.AsnEncodedDataEnumerator": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.ChaCha20Poly1305": {
+      "declared": 5,
+      "covered": 3,
+      "gap": 2,
+      "gapPct": 40.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.CngKey": {
+      "declared": 18,
+      "covered": 15,
+      "gap": 3,
+      "gapPct": 16.7
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.CompositeMLDsaCng": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.CryptographicOperations": {
+      "declared": 20,
+      "covered": 9,
+      "gap": 11,
+      "gapPct": 55.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.DSACng": {
+      "declared": 11,
+      "covered": 4,
+      "gap": 7,
+      "gapPct": 63.6
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.DSACryptoServiceProvider": {
+      "declared": 14,
+      "covered": 12,
+      "gap": 2,
+      "gapPct": 14.3
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanCng": {
+      "declared": 21,
+      "covered": 14,
+      "gap": 7,
+      "gapPct": 33.3
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.ECDsaCng": {
+      "declared": 24,
+      "covered": 14,
+      "gap": 10,
+      "gapPct": 41.7
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.HKDF": {
+      "declared": 6,
+      "covered": 3,
+      "gap": 3,
+      "gapPct": 50.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.HMACMD5": {
+      "declared": 11,
+      "covered": 6,
+      "gap": 5,
+      "gapPct": 45.5
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.HMACSHA1": {
+      "declared": 11,
+      "covered": 6,
+      "gap": 5,
+      "gapPct": 45.5
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.HMACSHA256": {
+      "declared": 11,
+      "covered": 6,
+      "gap": 5,
+      "gapPct": 45.5
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.HMACSHA384": {
+      "declared": 11,
+      "covered": 6,
+      "gap": 5,
+      "gapPct": 45.5
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_256": {
+      "declared": 11,
+      "covered": 6,
+      "gap": 5,
+      "gapPct": 45.5
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_384": {
+      "declared": 11,
+      "covered": 6,
+      "gap": 5,
+      "gapPct": 45.5
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.HMACSHA3_512": {
+      "declared": 11,
+      "covered": 6,
+      "gap": 5,
+      "gapPct": 45.5
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.HMACSHA512": {
+      "declared": 11,
+      "covered": 6,
+      "gap": 5,
+      "gapPct": 45.5
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.IncrementalHash": {
+      "declared": 14,
+      "covered": 8,
+      "gap": 6,
+      "gapPct": 42.9
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.Kmac128": {
+      "declared": 17,
+      "covered": 10,
+      "gap": 7,
+      "gapPct": 41.2
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.Kmac256": {
+      "declared": 17,
+      "covered": 10,
+      "gap": 7,
+      "gapPct": 41.2
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.KmacXof128": {
+      "declared": 17,
+      "covered": 10,
+      "gap": 7,
+      "gapPct": 41.2
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.KmacXof256": {
+      "declared": 17,
+      "covered": 10,
+      "gap": 7,
+      "gapPct": 41.2
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.MLDsaCng": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.MLDsaOpenSsl": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.MLKemCng": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.MLKemOpenSsl": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.OidCollection": {
+      "declared": 3,
+      "covered": 2,
+      "gap": 1,
+      "gapPct": 33.3
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.OidEnumerator": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.PasswordDeriveBytes": {
+      "declared": 3,
+      "covered": 2,
+      "gap": 1,
+      "gapPct": 33.3
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.PemEncoding": {
+      "declared": 10,
+      "covered": 1,
+      "gap": 9,
+      "gapPct": 90.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.RNGCryptoServiceProvider": {
+      "declared": 5,
+      "covered": 3,
+      "gap": 2,
+      "gapPct": 40.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.RSACng": {
+      "declared": 18,
+      "covered": 6,
+      "gap": 12,
+      "gapPct": 66.7
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.RSACryptoServiceProvider": {
+      "declared": 20,
+      "covered": 18,
+      "gap": 2,
+      "gapPct": 10.0
+    },
+    "System.Security.Cryptography/System.Security.Cryptography.Rfc2898DeriveBytes": {
+      "declared": 9,
+      "covered": 4,
+      "gap": 5,
+      "gapPct": 55.6
+    }
+  }
+}

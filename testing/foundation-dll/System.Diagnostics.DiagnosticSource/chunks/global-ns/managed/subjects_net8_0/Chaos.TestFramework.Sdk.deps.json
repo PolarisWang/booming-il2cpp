@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Chaos.TestFramework.Sdk/0.1.0": {
+        "runtime": {
+          "Chaos.TestFramework.Sdk.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Chaos.TestFramework.Sdk/0.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

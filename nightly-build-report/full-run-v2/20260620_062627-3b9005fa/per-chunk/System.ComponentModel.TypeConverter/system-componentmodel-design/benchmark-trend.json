@@ -1,0 +1,269 @@
+{
+  "methodCount": 31,
+  "technologies": [
+    "chaos-aot",
+    "chaos-jit"
+  ],
+  "perMethodStats": [
+    {
+      "entryIndex": 0,
+      "meanDurationMs": 0.032,
+      "meanOpsPerSecond": 323123803.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.183818,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 1,
+      "meanDurationMs": 0.0323,
+      "meanOpsPerSecond": 318352384.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.173513,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 2,
+      "meanDurationMs": 0.0324,
+      "meanOpsPerSecond": 318435186.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.183739,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 3,
+      "meanDurationMs": 0.0362,
+      "meanOpsPerSecond": 285455966.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.174187,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 4,
+      "meanDurationMs": 0.0349,
+      "meanOpsPerSecond": 290449211.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.112041,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 5,
+      "meanDurationMs": 0.0343,
+      "meanOpsPerSecond": 299267580.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.157029,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 6,
+      "meanDurationMs": 0.0335,
+      "meanOpsPerSecond": 304807092.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.132995,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 7,
+      "meanDurationMs": 0.0362,
+      "meanOpsPerSecond": 280088285.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.098677,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 8,
+      "meanDurationMs": 0.0349,
+      "meanOpsPerSecond": 291342620.9,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.130333,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 9,
+      "meanDurationMs": 0.0336,
+      "meanOpsPerSecond": 304283875.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.140985,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 10,
+      "meanDurationMs": 0.0361,
+      "meanOpsPerSecond": 282890256.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.142033,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 11,
+      "meanDurationMs": 0.0357,
+      "meanOpsPerSecond": 287308540.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.152937,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 12,
+      "meanDurationMs": 0.0368,
+      "meanOpsPerSecond": 279192954.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.159286,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 13,
+      "meanDurationMs": 0.0346,
+      "meanOpsPerSecond": 296455899.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.164613,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 14,
+      "meanDurationMs": 0.035,
+      "meanOpsPerSecond": 296395056.2,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.18428,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 15,
+      "meanDurationMs": 0.0357,
+      "meanOpsPerSecond": 286221199.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.147185,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 16,
+      "meanDurationMs": 0.0353,
+      "meanOpsPerSecond": 293827980.8,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.181414,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 17,
+      "meanDurationMs": 0.0315,
+      "meanOpsPerSecond": 302127955.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.174209,
+      "sampleCount": 8
+    },
+    {
+      "entryIndex": 18,
+      "meanDurationMs": 0.0325,
+      "meanOpsPerSecond": 316312320.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.158245,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 19,
+      "meanDurationMs": 0.0336,
+      "meanOpsPerSecond": 307423365.0,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.181132,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 20,
+      "meanDurationMs": 0.0345,
+      "meanOpsPerSecond": 294318029.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.114667,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 21,
+      "meanDurationMs": 0.0345,
+      "meanOpsPerSecond": 299516589.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.176431,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 22,
+      "meanDurationMs": 0.0343,
+      "meanOpsPerSecond": 297866751.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.151519,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 23,
+      "meanDurationMs": 0.0352,
+      "meanOpsPerSecond": 289246242.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.125644,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 24,
+      "meanDurationMs": 0.0337,
+      "meanOpsPerSecond": 298511742.7,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.081858,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 25,
+      "meanDurationMs": 0.0355,
+      "meanOpsPerSecond": 287696229.5,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.141548,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 26,
+      "meanDurationMs": 0.0337,
+      "meanOpsPerSecond": 297852539.4,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.122642,
+      "sampleCount": 7
+    },
+    {
+      "entryIndex": 27,
+      "meanDurationMs": 0.0357,
+      "meanOpsPerSecond": 285794273.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.124043,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 28,
+      "meanDurationMs": 0.0359,
+      "meanOpsPerSecond": 287664228.6,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.183696,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 29,
+      "meanDurationMs": 0.0375,
+      "meanOpsPerSecond": 272717710.3,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.147633,
+      "sampleCount": 10
+    },
+    {
+      "entryIndex": 30,
+      "meanDurationMs": 0.0365,
+      "meanOpsPerSecond": 278967433.1,
+      "meanAllocatedBytes": 0.0,
+      "cv": 0.128066,
+      "sampleCount": 10
+    }
+  ],
+  "aggregateSummary": {
+    "methodCount": 31,
+    "meanDurationMs": 0.034648387096774196,
+    "minDurationMs": 0.0315,
+    "maxDurationMs": 0.0375,
+    "totalDurationMs": 1.0741,
+    "meanOpsPerSecond": 295287525.91935486,
+    "totalAllocatedBytes": 0.0,
+    "elapsedMilliseconds": 1.0741,
+    "meanSampleCount": 9.8,
+    "totalOutliers": 5
+  }
+}

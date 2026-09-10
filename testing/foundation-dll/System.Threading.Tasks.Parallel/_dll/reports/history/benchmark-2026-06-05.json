@@ -1,0 +1,34 @@
+{
+  "date": "2026-06-05",
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 112,
+        "total": 112,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 114,
+        "metaBenchmarkCount": 114
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "passed": 112,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      }
+    }
+  ]
+}

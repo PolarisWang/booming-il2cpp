@@ -1,0 +1,54 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Xml.Serialization.XmlSerializerNamespaces::Add:System.Void(System.String,System.String)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.Xml.Serialization.XmlSerializerNamespaces::Add:System.Void(System.String,System.String)__Set1",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 2,
+    "subjectId": "System.Xml.Serialization.XmlSerializerNamespaces::Add:System.Void(System.String,System.String)__Set2",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Xml.Serialization.XmlSerializerNamespaces::ToArray:System.Xml.XmlQualifiedName[]()__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

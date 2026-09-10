@@ -70,14 +70,10 @@ internal sealed class SdkEmitter
             Console.WriteLine($"    SDK header: chaos.h");
 
             // ── Phase 1b': Copy runtime headers needed by chaos.h ────────────
-            // Standalone tool mode (repoRoot == null) relies on the embedded SDK
-            // headers already present in the package; nothing to copy from a repo.
-            if (repoRoot != null)
-                CopyRuntimeHeaders(repoRoot, includeDir);
+            CopyRuntimeHeaders(repoRoot, includeDir);
 
             // ── Phase 1b": Copy runtime_stubs .cpp sources into SDK ─────────
-            if (repoRoot != null)
-                CopyRuntimeStubSources(repoRoot, sdkRoot);
+            CopyRuntimeStubSources(repoRoot, sdkRoot);
 
             // ── Phase 1c: Generate chaos-config.cmake ────────────────────────
             var configModel = new ScriptObject
@@ -98,18 +94,14 @@ internal sealed class SdkEmitter
 
             // ── Phase 1e: Build native libs from source (if needed) ─────────
             // On Linux there are no prebuilt .a files; build them from the repo
-            // source tree via cmake.  On Windows this is a no-op.  Standalone tool
-            // mode (repoRoot == null) skips source builds — libs come from the
-            // embedded SDK via CopyRealSdkLibsOverStubs.
-            if (repoRoot != null)
-                platform.BuildNativeLibs(repoRoot, libDir, configTier);
+            // source tree via cmake.  On Windows this is a no-op.
+            platform.BuildNativeLibs(repoRoot, libDir, configTier);
 
             // ── Phase 1f: Copy prebuilt native runtime library files ───────
             CopyNativeLibs(nativeLibDir, buildConfig, libDir, platform);
 
             // ── Phase 2: Precompile native-aot.generated.cpp → chaos_codegen.lib ──
-            if (repoRoot != null)
-                TryPrecompileCodegenLib(generatedRoot, repoRoot, sdkRoot, libDir);
+            TryPrecompileCodegenLib(generatedRoot, repoRoot, sdkRoot, libDir);
 
             Console.WriteLine($"SDK assembled: {sdkRoot}");
             return true;
@@ -222,9 +214,7 @@ internal sealed class SdkEmitter
             "com_ccw.h", "module_registry.h", "abi_manifest.h",
             "hotpatch_table.h", "runtime_vtable.h", "runtime_instantiation.h",
             "reflection_query_model.h", "load_store_chaos_bridge.h",
-            // NOTE: interpreter_entry.h lives under src/native/interpreter/, not
-            // runtime-core/ — it is copied separately below (see CopyInterpreterHeaders).
-            "exception_helpers.h", "thread_state.h",
+            "interpreter_entry.h", "exception_helpers.h", "thread_state.h",
             "forbid_suspend.h", "memory_domain.h", "convert.h",
             "enum_stubs.h", "patch_loader.h", "jit_registration.h",
             "ChaosGeneratedRuntimePrelude.h",
@@ -245,37 +235,13 @@ internal sealed class SdkEmitter
             }
         }
 
-        // ── Copy interpreter/*.h (standalone codegen + runtime_core.h dep) ─
-        // runtime_core.h and chaos_pch.h both #include "interpreter_entry.h",
-        // which lives under src/native/interpreter/.  In dev-mode the repo include
-        // path (PublishController CMakeLists {root}/src/native/interpreter) covers
-        // it, but a standalone tool package needs it IN the SDK include tree so the
-        // self-contained entry builds without a repo tree.  Copy the public
-        // interpreter headers (the ones the generated code / runtime_core.h touch)
-        // into include/.
-        var srcInterpreter = Path.Combine(repoRoot, "src", "native", "interpreter");
-        var interpreterHeaders = new[]
-        {
-            "interpreter_entry.h",
-        };
-        foreach (var h in interpreterHeaders)
-        {
-            var src = Path.Combine(srcInterpreter, h);
-            if (File.Exists(src))
-            {
-                File.Copy(src, Path.Combine(includeDir, h), overwrite: true);
-                count++;
-            }
-        }
-
         // ── Copy gc/*.h ────────────────────────────────────────────────────
         // Needed by: chaos_runtime_host.h, generated code
         var gcHeaders = new[]
         {
             "gc_api.h", "gc_bgc_inline.h", "gc_helpers.h", "gc_card_table.h",
-            "gc_layout.h", "gc_root_change.h",
+            "gc_layout.h", "gc_bump_cache.h", "gc_root_change.h",
             "gc_heap.h", "gc_old_gen.h",
-            "gc_low_mem.h",
         };
         foreach (var h in gcHeaders)
         {
@@ -290,17 +256,11 @@ internal sealed class SdkEmitter
         // ── Copy ALL runtime_stubs/*.h ────────────────────────────────────
         // Needed by: generated_code_compat.h (via stubs.h), chaos_runtime_host.h
         // Use glob instead of maintainable-explicit-list (20+ files with transitive deps).
-        // EXCEPT stub_common.h — it is also on the include path from the repo tree
-        // (CHAOS_PROJECT_ROOT/src/native/runtime-core/runtime_stubs), and having two
-        // copies with different file paths causes #pragma once to fail, resulting in
-        // C2011 redefinition when consumers compile with both paths in scope.
         if (Directory.Exists(srcRuntimeStubs))
         {
             foreach (var f in Directory.GetFiles(srcRuntimeStubs, "*.h"))
             {
                 var name = Path.GetFileName(f);
-                if (string.Equals(name, "stub_common.h", StringComparison.OrdinalIgnoreCase))
-                    continue;
                 File.Copy(f, Path.Combine(dstRuntimeStubs, name), overwrite: true);
                 count++;
             }
@@ -535,18 +495,10 @@ internal sealed class SdkEmitter
         {
             var targetPath = Path.Combine(libDir, platform.GetStaticLibFileName(targetName));
 
-            // On source-built Linux, a locally-built lib is authoritative and must win;
-            // skip copying so we don't clobber it.  This is a SKIP, not a copy, so
-            // copiedCount must NOT increment here (review #10) — inflating the count
-            // would misreport how many libs the emitter actually installed, misleading
-            // downstream logs/diagnostics.  On Windows (prebuilt presets), the preset
-            // is always the authoritative source — a pre-existing target is a STALE
-            // artifact from an earlier run (preserved across builds by TPG --clean)
-            // and MUST be overwritten, or the chunk links against libs compiled against
-            // an older pal_eh.h/signature (→ LNK2019).  Do NOT short-circuit this on
-            // prebuilt.
-            if (!platform.HasPrebuiltLibraries && File.Exists(targetPath))
+            // Skip if the target already exists (e.g. built from source on Linux)
+            if (File.Exists(targetPath))
             {
+                copiedCount++;
                 continue;
             }
 

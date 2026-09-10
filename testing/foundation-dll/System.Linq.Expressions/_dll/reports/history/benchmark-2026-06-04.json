@@ -1,0 +1,24 @@
+{
+  "date": "2026-06-04",
+  "assemblyName": "System.Linq.Expressions",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 737,
+        "total": 737,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 752,
+        "metaBenchmarkCount": 752
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    }
+  ]
+}

@@ -1,0 +1,644 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-26T05:32:08.7115471Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerCollection::GetEnumerator:System.Collections.IEnumerator()",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/DesignerOptionService.DesignerOptionCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "DesignerOptionService.DesignerOptionCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/DesignerOptionService.DesignerOptionCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "DesignerOptionService.DesignerOptionCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/DesignerOptionService.DesignerOptionCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "DesignerOptionService.DesignerOptionCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/DesignerOptionService.DesignerOptionCollection::GetEnumerator:System.Collections.IEnumerator()",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "DesignerOptionService.DesignerOptionCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/DesignerOptionService.DesignerOptionCollection::IndexOf:System.Int32(DesignerOptionService.DesignerOptionCollection)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "DesignerOptionService.DesignerOptionCollection",
+      "methodName": "IndexOf",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/DesignerOptionService.DesignerOptionCollection::ShowDialog:System.Boolean()",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "DesignerOptionService.DesignerOptionCollection",
+      "methodName": "ShowDialog",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransaction::Cancel:System.Void()",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerTransaction",
+      "methodName": "Cancel",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransaction::Commit:System.Void()",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerTransaction",
+      "methodName": "Commit",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Add:System.Int32(System.ComponentModel.Design.DesignerVerb)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerVerbCollection",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::AddRange:System.Void(System.ComponentModel.Design.DesignerVerb[])",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerVerbCollection",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::AddRange:System.Void(System.ComponentModel.Design.DesignerVerb[])",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerVerbCollection",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::AddRange:System.Void(System.ComponentModel.Design.DesignerVerb[])",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerVerbCollection",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::AddRange:System.Void(System.ComponentModel.Design.DesignerVerbCollection)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerVerbCollection",
+      "methodName": "AddRange",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Insert:System.Void(System.Int32,System.ComponentModel.Design.DesignerVerb)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerVerbCollection",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Insert:System.Void(System.Int32,System.ComponentModel.Design.DesignerVerb)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerVerbCollection",
+      "methodName": "Insert",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::IndexOf:System.Int32(System.ComponentModel.Design.DesignerVerb)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerVerbCollection",
+      "methodName": "IndexOf",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Contains:System.Boolean(System.ComponentModel.Design.DesignerVerb)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerVerbCollection",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Remove:System.Void(System.ComponentModel.Design.DesignerVerb)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerVerbCollection",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContext::GetSavedLicenseKey:System.String(System.Type,System.Reflection.Assembly)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesigntimeLicenseContext",
+      "methodName": "GetSavedLicenseKey",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContext::SetSavedLicenseKey:System.Void(System.Type,System.String)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesigntimeLicenseContext",
+      "methodName": "SetSavedLicenseKey",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContext::SetSavedLicenseKey:System.Void(System.Type,System.String)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesigntimeLicenseContext",
+      "methodName": "SetSavedLicenseKey",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContextSerializer::Serialize:System.Void(System.IO.Stream,System.String,System.ComponentModel.Design.DesigntimeLicenseContext)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesigntimeLicenseContextSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContextSerializer::Serialize:System.Void(System.IO.Stream,System.String,System.ComponentModel.Design.DesigntimeLicenseContext)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesigntimeLicenseContextSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContextSerializer::Serialize:System.Void(System.IO.Stream,System.String,System.ComponentModel.Design.DesigntimeLicenseContext)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesigntimeLicenseContextSerializer",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.HelpKeywordAttribute::IsDefaultAttribute:System.Boolean()",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.HelpKeywordAttribute",
+      "methodName": "IsDefaultAttribute",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.Object)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceContainer",
+      "methodName": "AddService",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.Object,System.Boolean)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceContainer",
+      "methodName": "AddService",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.Object,System.Boolean)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceContainer",
+      "methodName": "AddService",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.ComponentModel.Design.ServiceCreatorCallback)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceContainer",
+      "methodName": "AddService",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.ComponentModel.Design.ServiceCreatorCallback,System.Boolean)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceContainer",
+      "methodName": "AddService",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.ComponentModel.Design.ServiceCreatorCallback,System.Boolean)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceContainer",
+      "methodName": "AddService",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::Dispose:System.Void()",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceContainer",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::GetService:System.Object(System.Type)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceContainer",
+      "methodName": "GetService",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::RemoveService:System.Void(System.Type)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceContainer",
+      "methodName": "RemoveService",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::RemoveService:System.Void(System.Type,System.Boolean)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceContainer",
+      "methodName": "RemoveService",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::RemoveService:System.Void(System.Type,System.Boolean)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceContainer",
+      "methodName": "RemoveService",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.TypeDescriptionProviderService::GetProvider:System.ComponentModel.TypeDescriptionProvider(System.Object)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.TypeDescriptionProviderService",
+      "methodName": "GetProvider",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.TypeDescriptionProviderService::GetProvider:System.ComponentModel.TypeDescriptionProvider(System.Type)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.TypeDescriptionProviderService",
+      "methodName": "GetProvider",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ActiveDesignerEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ActiveDesignerEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ActiveDesignerEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ActiveDesignerEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ActiveDesignerEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ActiveDesignerEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ActiveDesignerEventArgs)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ActiveDesignerEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangedEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ComponentChangedEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangedEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ComponentChangedEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangedEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ComponentChangedEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangingEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentChangingEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ComponentChangingEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 46,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangingEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ComponentChangingEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 47,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentChangingEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentChangingEventArgs)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ComponentChangingEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 48,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ComponentEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 49,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ComponentEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 50,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentEventArgs)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ComponentEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 51,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentRenameEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.ComponentRenameEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ComponentRenameEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 52,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentRenameEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ComponentRenameEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 53,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ComponentRenameEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.ComponentRenameEventArgs)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ComponentRenameEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 54,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.DesignerEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 55,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 56,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.DesignerEventArgs)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 57,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService\u002BDesignerOptionCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerOptionService\u002BDesignerOptionCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 58,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService\u002BDesignerOptionCollection::GetEnumerator:System.Collections.IEnumerator()",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerOptionService\u002BDesignerOptionCollection",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 59,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService\u002BDesignerOptionCollection::IndexOf:System.Int32(System.ComponentModel.Design.DesignerOptionService\u002BDesignerOptionCollection)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerOptionService\u002BDesignerOptionCollection",
+      "methodName": "IndexOf",
+      "isStatic": true
+    },
+    {
+      "index": 60,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerOptionService\u002BDesignerOptionCollection::ShowDialog:System.Boolean()",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerOptionService\u002BDesignerOptionCollection",
+      "methodName": "ShowDialog",
+      "isStatic": true
+    },
+    {
+      "index": 61,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransactionCloseEventHandler::BeginInvoke:System.IAsyncResult(System.Object,System.ComponentModel.Design.DesignerTransactionCloseEventArgs,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerTransactionCloseEventHandler",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 62,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransactionCloseEventHandler::EndInvoke:System.Void(System.IAsyncResult)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerTransactionCloseEventHandler",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 63,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransactionCloseEventHandler::Invoke:System.Void(System.Object,System.ComponentModel.Design.DesignerTransactionCloseEventArgs)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerTransactionCloseEventHandler",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 64,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::CopyTo:System.Void(System.ComponentModel.Design.DesignerVerb[],System.Int32)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.DesignerVerbCollection",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 65,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.MenuCommand::Invoke:System.Void()",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.MenuCommand",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 66,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.MenuCommand::Invoke:System.Void(System.Object)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.MenuCommand",
+      "methodName": "Invoke",
+      "isStatic": true
+    },
+    {
+      "index": 67,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceCreatorCallback::BeginInvoke:System.IAsyncResult(System.ComponentModel.Design.IServiceContainer,System.Type,System.AsyncCallback,System.Object)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceCreatorCallback",
+      "methodName": "BeginInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 68,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceCreatorCallback::EndInvoke:System.Object(System.IAsyncResult)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceCreatorCallback",
+      "methodName": "EndInvoke",
+      "isStatic": true
+    },
+    {
+      "index": 69,
+      "kind": "fact",
+      "subjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceCreatorCallback::Invoke:System.Object(System.ComponentModel.Design.IServiceContainer,System.Type)",
+      "assemblyName": "System.ComponentModel.TypeConverter",
+      "typeName": "System.ComponentModel.Design.ServiceCreatorCallback",
+      "methodName": "Invoke",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 70,
+    "factCount": 70,
+    "benchmarkCount": 0,
+    "hotUpdateCount": 0
+  }
+}

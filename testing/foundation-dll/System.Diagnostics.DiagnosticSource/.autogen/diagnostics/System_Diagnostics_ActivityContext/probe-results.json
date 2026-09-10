@@ -1,0 +1,146 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "false",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": [
+      "{\u0022TraceId\u0022:{},\u0022SpanId\u0022:{},\u0022TraceFlags\u0022:0,\u0022TraceState\u0022:null,\u0022IsRemote\u0022:false}"
+    ]
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "false",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": [
+      "{\u0022TraceId\u0022:{},\u0022SpanId\u0022:{},\u0022TraceFlags\u0022:0,\u0022TraceState\u0022:null,\u0022IsRemote\u0022:false}"
+    ]
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 2,
+    "subjectId": "System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)__Set2",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "false",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": [
+      "{\u0022TraceId\u0022:{},\u0022SpanId\u0022:{},\u0022TraceFlags\u0022:0,\u0022TraceState\u0022:null,\u0022IsRemote\u0022:false}"
+    ]
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 3,
+    "subjectId": "System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)__Set3",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "false",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": [
+      "{\u0022TraceId\u0022:{},\u0022SpanId\u0022:{},\u0022TraceFlags\u0022:0,\u0022TraceState\u0022:null,\u0022IsRemote\u0022:false}"
+    ]
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Diagnostics.ActivityContext)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "false",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": [
+      "{\u0022TraceId\u0022:{},\u0022SpanId\u0022:{},\u0022TraceFlags\u0022:0,\u0022TraceState\u0022:null,\u0022IsRemote\u0022:false}"
+    ]
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Diagnostics.ActivityContext)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "false",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": [
+      "{\u0022TraceId\u0022:{},\u0022SpanId\u0022:{},\u0022TraceFlags\u0022:0,\u0022TraceState\u0022:null,\u0022IsRemote\u0022:false}"
+    ]
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 2,
+    "subjectId": "System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Diagnostics.ActivityContext)__Set2",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "false",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": [
+      "{\u0022TraceId\u0022:{},\u0022SpanId\u0022:{},\u0022TraceFlags\u0022:0,\u0022TraceState\u0022:null,\u0022IsRemote\u0022:false}"
+    ]
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Diagnostics.ActivityContext::Parse:System.Diagnostics.ActivityContext(System.String,System.String)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 1,
+    "subjectId": "System.Diagnostics.ActivityContext::Parse:System.Diagnostics.ActivityContext(System.String,System.String)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 2,
+    "subjectId": "System.Diagnostics.ActivityContext::Parse:System.Diagnostics.ActivityContext(System.String,System.String)__Set2",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

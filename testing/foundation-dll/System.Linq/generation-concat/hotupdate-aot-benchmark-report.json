@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/generation/concat",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Append{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},TSource)",
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T09:51:02][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x5652b3e4759f at slot 0\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x5652b3e4759f at slot 1\n[2026-05-29T09:51:02][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Concat{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource})",
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T09:51:02][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x55ac2b3a959f at slot 0\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x55ac2b3a959f at slot 1\n[2026-05-29T09:51:02][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::DefaultIfEmpty{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T09:51:02][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x5570fdae459f at slot 0\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x5570fdae459f at slot 1\n[2026-05-29T09:51:02][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::DefaultIfEmpty{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},TSource)",
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T09:51:02][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x5637f40f559f at slot 0\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x5637f40f559f at slot 1\n[2026-05-29T09:51:02][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Empty{TResult}:System.Collections.Generic.IEnumerable{TResult}()",
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T09:51:02][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x55e7d980d59f at slot 0\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x55e7d980d59f at slot 1\n[2026-05-29T09:51:02][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::InfiniteSequence{T}:System.Collections.Generic.IEnumerable{T}(T,T)",
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T09:51:02][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x561ec540d59f at slot 0\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x561ec540d59f at slot 1\n[2026-05-29T09:51:02][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Prepend{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},TSource)",
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T09:51:02][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x55781995b59f at slot 0\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x55781995b59f at slot 1\n[2026-05-29T09:51:02][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Range:System.Collections.Generic.IEnumerable{System.Int32}(System.Int32,System.Int32)",
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T09:51:02][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x55a7c977559f at slot 0\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x55a7c977559f at slot 1\n[2026-05-29T09:51:02][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Repeat{TResult}:System.Collections.Generic.IEnumerable{TResult}(TResult,System.Int32)",
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T09:51:02][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x5569c403659f at slot 0\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x5569c403659f at slot 1\n[2026-05-29T09:51:02][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sequence{T}:System.Collections.Generic.IEnumerable{T}(T,T,T)",
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T09:51:02][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x55ee4b0a959f at slot 0\n[2026-05-29T09:51:02][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T09:51:02][DEBUG][GcEvents] registered callback 0x55ee4b0a959f at slot 1\n[2026-05-29T09:51:02][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
+    }
+  ],
+  "summary": {
+    "totalMethods": 10,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
+    "slowdownThresholdX": 50.0
+  }
+}

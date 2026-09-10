@@ -20,12 +20,6 @@
 // static inline functions using C++ casts (static_cast).
 #include "exception_stubs.h"
 
-// threading_stubs.h pulls <chaos/thread.h> → <thread>/<mutex> (C++ std headers).
-// It MUST be included OUTSIDE extern "C": MSVC 14.44+ fails to declare the global
-// ::terminate (→ C2039) when a C++ std header is first seen inside an extern "C"
-// block.
-#include "threading_stubs.h"
-
 extern "C" {
 
 #include "array_stubs.h"
@@ -40,6 +34,7 @@ extern "C" {
 #include "string_stubs.h"
 #include "stream_stubs.h"
 #include "object_stubs.h"
+#include "threading_stubs.h"
 #include "collection_stubs.h"
 #include "misc_stubs.h"
 #include "mutex_stubs.h"
@@ -48,6 +43,5 @@ extern "C" {
 #include "web_stubs.h"
 #include "interop_stubs.h"
 #include "simd_stubs.h"
-#include "xml_nametable_stubs.h"
 
 }  // extern "C"

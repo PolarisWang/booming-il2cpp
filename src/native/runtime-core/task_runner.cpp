@@ -35,11 +35,7 @@ static void TaskRunCallback(void* state) noexcept {
         if (inner->delegate != 0) {
             chaos_delegate_object_invoke(inner->delegate, nullptr, nullptr, 0);
         }
-        // Publish completion + fire any registered continuation (box resumption)
-        // so an awaiting state machine's MoveNext can re-enter.
-        inner->task->completed.store(true, std::memory_order_release);
-        chaos::il2cpp::common::finish_async_task(
-            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(inner->task));
+        inner->task->completed = true;
     }, rc);
 
     ExecutionContextFree(rc->ctx);
@@ -49,8 +45,8 @@ static void TaskRunCallback(void* state) noexcept {
 CHAOS_IL2CPP_INTPTR TaskRun(CHAOS_IL2CPP_INTPTR delegate_fn) noexcept {
     if (delegate_fn == 0) return 0;
 
-    CHAOS_IL2CPP_INTPTR handle = chaos::il2cpp::common::async_task_create();
-    auto* task = chaos::il2cpp::common::require_async_task(handle);
+    auto* task = new (std::nothrow) chaos::il2cpp::common::AsyncTask();
+    if (task == nullptr) return 0;
 
     auto* ctx = new (std::nothrow) TaskRunContext();
     if (ctx == nullptr) {
@@ -70,53 +66,6 @@ CHAOS_IL2CPP_INTPTR TaskRun(CHAOS_IL2CPP_INTPTR delegate_fn) noexcept {
 
 void RegisterAsyncTaskRun() noexcept {
     ::chaos::il2cpp::common::register_async_task_run_fn(TaskRun);
-}
-
-// ── Async continuation dispatch via ThreadPool ─────────────────────────
-
-/// Dispatch a continuation callback onto the ThreadPool.  Registered as
-/// g_async_dispatch_continuation_fn so that completing tasks queue their
-/// state-machine resumption (MoveNext) on a worker thread rather than
-/// executing inline on the completing thread.
-///
-/// ExecutionContext is flowed from the completing thread to the awaiter:
-/// the continuation (MoveNext) runs under the captured EC, matching the
-/// managed Task contract (the awaiter resumes on the same ExecutionContext
-/// it had when it registered the continuation).
-static void AsyncContinuationDispatch(
-    chaos::il2cpp::common::AsyncContinueFn cb, void* ctx,
-    CHAOS_IL2CPP_INTPTR task_handle) noexcept
-{
-    (void)task_handle;
-    struct ContCtx {
-        chaos::il2cpp::common::AsyncContinueFn cb;
-        void* uc;
-        ExecutionContext* ec;
-    };
-    auto* cc = new (std::nothrow) ContCtx{cb, ctx, ExecutionContextCapture()};
-    if (cc == nullptr) {
-        // Fall back to bare dispatch on capture-allocation failure (still correct
-        // semantically, just without EC flow).
-        ThreadPoolQueueUserWorkItemUnsafe([](void* state) {
-            auto* cp = static_cast<std::pair<chaos::il2cpp::common::AsyncContinueFn, void*>*>(state);
-            cp->first(0, cp->second);
-            delete cp;
-        }, new std::pair<chaos::il2cpp::common::AsyncContinueFn, void*>(cb, ctx));
-        return;
-    }
-    ThreadPoolQueueUserWorkItemUnsafe([](void* state) {
-        auto* c = static_cast<ContCtx*>(state);
-        ExecutionContextRun(c->ec, [](void* s) {
-            auto* inner = static_cast<ContCtx*>(s);
-            inner->cb(0, inner->uc);
-        }, c);
-        ExecutionContextFree(c->ec);
-        delete c;
-    }, cc);
-}
-
-void RegisterAsyncContinuationDispatch() noexcept {
-    ::chaos::il2cpp::common::register_async_dispatch_continuation_fn(AsyncContinuationDispatch);
 }
 
 }  // namespace chaos::il2cpp::runtime_core::threading

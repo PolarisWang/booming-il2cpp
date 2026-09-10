@@ -1,6 +1,5 @@
 #include "gc_young_collector.h"
 
-#include <chaos/asan_interface.h>
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
@@ -17,7 +16,6 @@
 #include "gc_scheduler.h"
 #include "gc_stats.h"
 #include "gc_heap.h"
-#include "gc_diagnostics.h"
 #include <thread_state.h>
 
 #include <chrono>
@@ -79,16 +77,6 @@ bool IsInNursery(const void* ptr) {
 /// Phase 2 precise nursery scan never advances past valid objects even when
 /// a large gap exists between obj and nursery->current.  Objects larger than
 /// 2048 bytes are typically LOH-allocated and never appear in the nursery.
-///
-/// NOTE (2026-08-29): this cap must stay SMALL (2048).  Raising it (e.g. to a
-/// 64 KB page) made GcScavengeObject copy [obj, obj+obj_size) into old-gen,
-/// which for an object near the nursery edge reads past nursery->committed and
-/// crashes.  When Phase-2 encounters a TypeInfo-valid but layout-unregistered
-/// object it now jumps straight to nursery_used (see gc_young_collector.cpp
-/// Phase-2), so this function is only consulted for promotion sizing — and for
-/// that path a 2048-byte allocation is the safe, bounded choice (never copies
-/// beyond the nursery).  Objects without a registered layout do not exist in
-/// production (all managed types carry a GcTypeLayout via RegisterTypeInfo).
 static constexpr CHAOS_IL2CPP_SIZE kMaxEstObjectSize = 2048;
 
 static CHAOS_IL2CPP_SIZE EstimateObjectSize(const void* obj, const Region* nursery) {
@@ -158,9 +146,6 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
     if (obj == nullptr) return nullptr;
     if (!IsInNursery(obj)) {
         // Already in tenured — no copy needed.
-        // (The IsInNursery gate IS the condemned filter for a young collection:
-        //  only nursery refs are promoted.  condemned_gen_num is tracked for
-        //  deeper Gen1/old collections but the young path uses the precise range.)
         return obj;
     }
     if (IsForwarded(obj)) {
@@ -260,18 +245,6 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
 void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
     if (obj == nullptr) return nullptr;
     // Caller already verified obj is in nursery — skip IsInNursery check.
-    // M9-A2 / M10: activate the condemned-generation filter.  A GC condemns every
-    // gen <= condemned_gen_num; objects with region_gen NEWER than the condemned
-    // gen are not promoted/marked here (they belong to an older-gen collection).
-    // For a young GC condemned=gen1(1) → nursery(0)/gen1(1) are processed, gen2+
-    // skipped.  For a gen0-only collection condemned=young(0) → nursery processes,
-    // a gen1 object (region-gen 1 > 0) is skipped.  Note: no `condemned>0` guard —
-    // kRegionGenYoung(0) is a legitimate condemned value.
-    if (result != nullptr) {
-        if (GetRegionGen(reinterpret_cast<uintptr_t>(obj)) > result->condemned_gen_num) {
-            return obj;  // newer than condemned — leave for the appropriate collection
-        }
-    }
     if (IsForwarded(obj)) {
         return GetForwardingAddress(obj);
     }
@@ -293,15 +266,13 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
         }
     }
 
-    // ── Age tenuring: determine destination based on source generation ──
-    // M9-A2: consult the region-generation tag (not just location) so the gen1
-    // value drives the destination.  A gen0 (nursery, region_gen=0) object always
-    // promotes to gen1 (first survival).  A gen1 (region_gen=1) object has
-    // survived: with the dynamic threshold > 1 it stays in gen1, else it promotes
-    // to gen2 (old).  gen2 (old) objects never reach this scavenge.
-    const uint8_t src_gen = GetRegionGen(reinterpret_cast<uintptr_t>(obj));
+    // ── Age tenuring: determine destination based on current location ──
+    // Objects in Gen1 (survivor area) have survived at least one young GC.
+    // With dynamic threshold, they may stay in Gen1 for more cycles
+    // before promotion (threshold > 1 → copy back to Gen1).
+    // Objects in Gen0 (young half) always copy to Gen1 (first survival).
     void* target;
-    if (src_gen == kRegionGenGen1 || IsInGen1(obj)) {  // gen1 (survivor)
+    if (IsInGen1(obj)) {
         int threshold = G_YoungGen().promotion_age_threshold_.load(
             std::memory_order_acquire);
         if (threshold > 1) {
@@ -312,7 +283,7 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
         } else {
             target = G_OldGen().Allocate(obj_size, true);
         }
-    } else {                                          // gen0 (nursery) → gen1
+    } else {
         target = TryAllocateInGen1(obj_size);
         if (target == nullptr) {
             target = G_OldGen().Allocate(obj_size, true);
@@ -444,74 +415,76 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
         }
     }
 
-    // ── Phase 0: All-thread conservative + precise stack root scan ──
-    // Scan the stacks of ALL suspended threads for nursery pointers and
-    // promote them, fixing up stack-local references after promotion.
-    //
-    // GcYoungCollection is always invoked under a global STW safepoint
-    // (all callers in gc_region.cpp:201/217/362 + gc_api.cpp + gc_coordinator
-    // acquire RequestGlobalSafepoint first), so every managed thread's stack
-    // is frozen and consistent here.  Previous versions scanned only the
-    // current thread's stack — other suspended threads' stacks holding
-    // nursery references were invisible, so their objects could be collected
-    // while still referenced -> use-after-free.  We now scan all threads via
-    // GcScanAllThreadRoots (which both conservatively scans every stack AND
-    // precisely scans registered T4 frames via GcSlotMap), promoting any
-    // nursery pointer found and writing the tenured target back into the slot.
+    // ── Phase 0: Conservative stack root scan ──
+    // Scan only the current thread's stack for nursery pointers to fix up
+    // stack-local GC handles after promotion.  This runs inline with the
+    // mutator thread that triggered the allocation (not at a STW safepoint),
+    // so only the current thread's stack is guaranteed consistent.
+    // We do NOT use GcScanAllThreadRoots here because that function applies
+    // a g_heap_base filter that may not cover nursery region addresses —
+    // nursery is allocated via RegionManager with separate ranges that can
+    // fall below the old-gen heap base.
     {
-        CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase0_AllThreadStackRoots");
-        struct RootScavengeCtx { YoungCollectionResult* result; } scavenge_ctx{ &result };
-        threading::GcScanAllThreadRoots(
-            [](void* root_addr, bool /*is_interior*/, void* user_data) {
-                auto* slot = static_cast<void**>(root_addr);
-                // root_addr points into ANOTHER thread's stack (conservative
-                // all-thread scan).  The slot may fall in an ASan stack frame
-                // redzone between the target thread's frames, which ASan poisons.
-                // We only need to shed instrumentation for genuinely poisoned slots
-                // (Probe gates on __asan_address_is_poisoned); live stack slots stay
-                // instrumented so a real OOB/UAF write into a root is still caught
-                // (review #2/#4) instead of masking all findings.  The promoted
-                // pointer write-back below is similarly probe-gated.
-                void* val = chaos::il2cpp::common::AsanReadPtrNoCheck(slot);
+        CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase0_StackRoots");
+        auto* current_thread = threading::GetCurrentThread();
+        if (current_thread != nullptr) {
+            char* scan_start = static_cast<char*>(current_thread->stack_limit);
+            char* scan_end   = static_cast<char*>(current_thread->stack_base);
+            uintptr_t start_aligned = (reinterpret_cast<uintptr_t>(scan_start) + sizeof(void*) - 1)
+                & ~static_cast<uintptr_t>(sizeof(void*) - 1);
+            uintptr_t end_aligned = reinterpret_cast<uintptr_t>(scan_end)
+                & ~static_cast<uintptr_t>(sizeof(void*) - 1);
+            for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
+                void* val = *reinterpret_cast<void**>(slot);
                 if (val != nullptr && IsInNursery(val)) {
-                    auto* r = static_cast<RootScavengeCtx*>(user_data)->result;
-                    void* tenured = GcScavengeObjectKnownNursery(val, r);
+                    void* tenured = GcScavengeObjectKnownNursery(val, &result);
                     if (tenured != nullptr && tenured != val) {
-                        // NOTE (review #9): probe write into the foreign stack is
-                        // only sound because GcYoungCollection runs under a global
-                        // STW safepoint (all mutators suspended).
-                        chaos::il2cpp::common::AsanWritePtrNoCheck(slot, tenured);
+                        *reinterpret_cast<void**>(slot) = tenured;
                     }
                 }
-            },
-            &scavenge_ctx);
+            }
+        }
     }
 
     // ── Phase 1: Scan dirty cards for old→young cross-gen references ──
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase1_DirtyCards");
         result.dirty_cards_scanned = 0;
-        // CoreCLR-aligned scan source: iterate REGISTERED L2 card segments (the
-        // write barrier only writes into registered segments), so every card the
-        // barrier recorded is reachable.  The prior allocator-page + LOH-segment
-        // driven scans could miss a barrier-written card (page's L2 segment not
-        // registered, or page range not covering the card index) → old→nursery
-        // edge dropped → young object collected → dangling.
-        auto phase1_scan_cb = [](uintptr_t range_start, uintptr_t range_end, void* ud) {
-            auto* scav = static_cast<YoungCollectionResult*>(ud);
-            for (uintptr_t slot = range_start; slot < range_end; slot += sizeof(void*)) {
-                auto* ptr_slot = reinterpret_cast<void**>(slot);
-                void* val = *ptr_slot;
-                if (val != nullptr && IsInNursery(val)) {
-                    void* tenured = GcScavengeObjectKnownNursery(val, scav);
-                    if (tenured != nullptr) {
-                        *ptr_slot = tenured;
+        // Batched scan: groups consecutive dirty cards into ranges,
+        // reducing per-card callback overhead (common when large object
+        // arrays span multiple cards).
+        // Scan old-gen pages for Gen2→nursery references.
+        G_OldGen().ScanDirtyCardsInPagesBatched(
+            &result.dirty_cards_scanned,
+            [&](uintptr_t range_start, uintptr_t range_end) {
+                for (uintptr_t slot = range_start; slot < range_end; slot += sizeof(void*)) {
+                    auto* ptr_slot = reinterpret_cast<void**>(slot);
+                    void* val = *ptr_slot;
+                    if (val != nullptr && IsInNursery(val)) {
+                        void* tenured = GcScavengeObjectKnownNursery(val, &result);
+                        if (tenured != nullptr) {
+                            *ptr_slot = tenured;
+                        }
                     }
                 }
-            }
-        };
-        ScanDirtyCardsInRegisteredSegments(&result.dirty_cards_scanned,
-                                            phase1_scan_cb, &result);
+            });
+        // Scan LOH segments for LOH→nursery references.
+        // LOH segments are registered with the card table, so DirtyCard()
+        // tracks all pointer writes into LOH objects during the mutator phase.
+        G_Loh().ScanDirtyCardsInSegmentsBatched(
+            &result.dirty_cards_scanned,
+            [&](uintptr_t range_start, uintptr_t range_end) {
+                for (uintptr_t slot = range_start; slot < range_end; slot += sizeof(void*)) {
+                    auto* ptr_slot = reinterpret_cast<void**>(slot);
+                    void* val = *ptr_slot;
+                    if (val != nullptr && IsInNursery(val)) {
+                        void* tenured = GcScavengeObjectKnownNursery(val, &result);
+                        if (tenured != nullptr) {
+                            *ptr_slot = tenured;
+                        }
+                    }
+                }
+            });
     }
     pt.phase1_ns = static_cast<uint64_t>(std::chrono::duration_cast<
         std::chrono::nanoseconds>(std::chrono::steady_clock::now() - pause_start).count());
@@ -519,22 +492,6 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
     // ── Phase 2: Precise object-by-object nursery scan ──
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase2_NurseryScan");
-        // GC-N7 (YoungGcPauseUnderLoad-class) Phase-2 safety: the precise scan
-        // derefs every slot in [scan_ptr, nursery_used) as a potential TypeInfo.
-        // Under multi-cycle timed_out young GCs + Gen1 relocation/resize churn the
-        // shared G_YoungGen().bump (or a recycled Region's begin) can desync from the
-        // live frontier, so nursery_used can exceed the committed nursery range and
-        // scan_ptr walks into unmapped memory → SEH.  Confine the walk ALWAYS to the
-        // nursery Region's committed [begin, end) and advance only within it; a slot
-        // beyond the true live frontier simply holds no valid typed header (safe skip),
-        // never a wild deref.  This hardens against the corrupt-state crash; the deep
-        // bump/region desync root is tracked separately (真机上 page-heap 定位).
-        uintptr_t region_begin = reinterpret_cast<uintptr_t>(nursery->begin);
-        uintptr_t region_end   = reinterpret_cast<uintptr_t>(nursery->end);
-        if (nursery_used > region_end) nursery_used = region_end;
-        if (nursery_begin < region_begin) nursery_begin = region_begin;
-        if (nursery_begin > region_end) nursery_begin = region_end;
-
         uintptr_t scan_ptr = nursery_begin;
         auto& layout_registry = GcLayoutRegistry::Instance();
 
@@ -571,10 +528,6 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
         const GcTypeLayout* last_layout = nullptr;
 
         while (scan_ptr < nursery_used) {
-            // Phase-2 always advances within the committed nursery; if a corrupt
-            // layout / size ever pushes scan_ptr past region_end (or below begin),
-            // stop walking instead of dereferencing unmapped memory.
-            if (scan_ptr < region_begin || scan_ptr >= region_end) break;
             auto* obj = reinterpret_cast<void*>(scan_ptr);
             const void* first_word = *static_cast<const void* const*>(obj);
             if (first_word == nullptr) {
@@ -597,41 +550,15 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
                 last_layout = layout;
             }
 
-            if (layout == nullptr || layout->instance_size == 0) {
-                // GC-N6 发现3 root fix: a registered layout with instance_size==0
-                // (or a null lookup) must not advance scan_ptr by 0, which would
-                // spin this Phase-2 walk forever — the typed young-GC hang.
-                // Mirror PreciseObjectSize's guard: fall back to bounds estimation
-                // so scan_ptr always advances.
-                //
-                // FIX-B alignment: when the _first_word_ IS a valid TypeInfo
-                // pointer (the L621 gate passed) but the layout is unregistered,
-                // this is a real typed object whose extent Phase-2 cannot
-                // precisely determine.  Rather than advancing by EstimateObjectSize
-                // (capped at 2048 bytes, which would phantom-re-walk into the
-                // object interior for objects > 4 KB), we still need to advance
-                // past this object before continuing the scan.  Use the slack
-                // between scan_ptr and the end of the nursery as a conservative
-                // upper bound, but advance by at least kMaxTlabAlloc (a reasonable
-                // single-object cap) to avoid an unbounded single-step that
-                // skips the entire remaining nursery for one unregistered object.
-                //
-                // NOTE: first_word is guaranteed valid here because the L621
-                // IsValidTypeInfoPointer gate passed.
-                {
-                    uintptr_t slack = nursery_used - scan_ptr;
-                    uintptr_t step = slack < kMaxTlabAlloc ? slack : kMaxTlabAlloc;
-                    scan_ptr += step;
-                }
+            if (layout == nullptr) {
+                CHAOS_IL2CPP_SIZE obj_size = EstimateObjectSize(obj, nursery);
+                scan_ptr += obj_size;
                 continue;
             }
 
             uint32_t obj_size = layout->instance_size;
             for (uint16_t i = 0; i < layout->pointer_count; i++) {
                 uint16_t offset = layout->pointer_offsets[i].offset;
-                // Never read an interior pointer slot beyond the committed nursery
-                // (a corrupt layout could carry an oversize offset or size).
-                if (scan_ptr + offset >= region_end) break;
                 auto* slot = reinterpret_cast<void**>(scan_ptr + offset);
                 void* val = *slot;
                 if (val == nullptr) continue;
@@ -642,13 +569,7 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
                     }
                 }
             }
-            // Bounded advance: never step past the committed region.
-            if (obj_size == 0 || scan_ptr >= region_end ||
-                scan_ptr + obj_size > region_end) {
-                scan_ptr = region_end - sizeof(void*);
-            } else {
-                scan_ptr += obj_size;
-            }
+            scan_ptr += obj_size;
         }
     }
     pt.phase2_ns = static_cast<uint64_t>(std::chrono::duration_cast<
@@ -883,40 +804,38 @@ phase3:
     // RegionManager.  For now, Gen1 is a fixed independent region whose size
     // is set at init time (see InitYoungGeneration).
 
-// ── Adaptive TLAB resizing (ALL threads) ────────────────────────
-    // Snapshot each thread's TLAB utilization BEFORE resetting it.  The STW
-    // safepoint means no thread is allocating, so the captured start/current/
-    // end are stable.  Utilization > 75% → double (up to 256 KB); < 25% →
-    // halve (down to 16 KB); otherwise keep.  This reschedules every thread in
-    // one pass — previously only the GC-initiating thread was resized.
-    // (tlab_end is captured so utilization = (current - start)/(end - start).)
+    // Clear ALL threads' TLAB ranges via EnumerateThreads.
     threading::EnumerateThreads(
         [](threading::ManagedThread* thread) -> bool {
-            CHAOS_IL2CPP_SIZE used = 0;
-            CHAOS_IL2CPP_SIZE total = 0;
-            if (thread->tlab_start != nullptr && thread->tlab_end > thread->tlab_start) {
-                used = static_cast<CHAOS_IL2CPP_SIZE>(
-                    (thread->tlab_current ? thread->tlab_current : thread->tlab_start) - thread->tlab_start);
-                total = static_cast<CHAOS_IL2CPP_SIZE>(thread->tlab_end - thread->tlab_start);
-            }
-            CHAOS_IL2CPP_SIZE new_size = thread->tlab_size;
-            if (total > 0) {
-                double utilization = static_cast<double>(used) / static_cast<double>(total);
-                if (utilization > 0.75 && new_size < 256 * 1024) {
-                    new_size = new_size * 2;
-                } else if (utilization < 0.25 && new_size > 16 * 1024) {
-                    new_size = new_size / 2;
-                }
-            }
-            if (new_size < 16 * 1024) new_size = 16 * 1024;
-            if (new_size > 256 * 1024) new_size = 256 * 1024;
-            thread->tlab_size = new_size;
-            // Reset this thread's TLAB ranges.
             thread->tlab_start = nullptr;
             thread->tlab_current = nullptr;
-            thread->tlab_end = nullptr;
             return true;
         });
+
+    // ── Adaptive TLAB resizing ────────────────────────────────────
+    // Snapshot TLAB utilization BEFORE the reset at the end of this block.
+    // Utilization > 75% → double (up to 256 KB)
+    // Utilization < 25% → halve (down to 16 KB)
+    // Otherwise → keep
+    if (tls_tlab.start != nullptr && tls_tlab.end > tls_tlab.start) {
+        CHAOS_IL2CPP_SIZE used = static_cast<CHAOS_IL2CPP_SIZE>(
+            (tls_tlab.current ? tls_tlab.current : tls_tlab.start) - tls_tlab.start);
+        CHAOS_IL2CPP_SIZE total = static_cast<CHAOS_IL2CPP_SIZE>(tls_tlab.end - tls_tlab.start);
+        if (total > 0) {
+            double utilization = static_cast<double>(used) / static_cast<double>(total);
+            if (utilization > 0.75 && tls_tlab_size < 256 * 1024) {
+                tls_tlab_size = tls_tlab_size * 2;
+            } else if (utilization < 0.25 && tls_tlab_size > 16 * 1024) {
+                tls_tlab_size = tls_tlab_size / 2;
+            }
+        }
+    }
+    // Clamp to valid range.
+    if (tls_tlab_size < 16 * 1024) tls_tlab_size = 16 * 1024;
+    if (tls_tlab_size > 256 * 1024) tls_tlab_size = 256 * 1024;
+
+    // Reset this thread's TLAB.
+    tls_tlab = TLAB();
 
     // Clear card table entries covering the nursery range (and Gen1 range if
     // Gen1 objects exist).  This is more precise than ClearAllCards() — it
@@ -963,11 +882,6 @@ phase3:
         result.dirty_cards_scanned,
         pause_ns);
 
-    // Persist the phase-level breakdown into GcStats (diagnostic granularity).
-    GcRecordYoungPhaseTimes(
-        pt.phase1_ns, pt.phase2_ns, pt.phase2b_ns,
-        pt.phase3_ns, pt.phase3b_ns, pt.phase4_ns);
-
     G_Scheduler().RecordYoungCollection(
         nursery_used_bytes, result.bytes_promoted, pause_ns);
 
@@ -997,29 +911,6 @@ phase3:
     if (bgc_was_paused) {
         BgcController::Instance().ResumeAfterYoungGc();
     }
-
-    // M3/T8: verify every promoted BFS-worklist target landed in a legal
-    // generation (OLD→old-gen page, Gen1→gen1 range).  Only at kFull (debug/CI);
-    // cost is O(worklist) which is tiny next to the collection itself.  This makes
-    // the previously-dead P1-A3 assertion actually run on the production young-GC
-    // path instead of only the legacy PromoteNursery entry point.
-    GcVerifyPromotedTracked(result);
-
-    // Reset the calling thread's thread_local TLAB so the next NurseryAllocate
-    // goes through the slow path (TlabClaimFromYoungGen) and picks up a fresh
-    // TLAB.  EnumerateThreads above already resets ManagedThread::tlab_* for ALL
-    // threads, but those are the GC's accounting mirror, NOT the thread_local
-    // tls_tlab that NurseryAllocate's bump-pointer fast path actually reads.  The
-    // GC thread cannot write another thread's thread_local, so this only clears
-    // the current (GC-initiating) thread's tls_tlab — which is exactly the thread
-    // that will allocate next on the straightforward young-allocation path that
-    // fired the collection.  A stale tls_tlab on a different thread that was parked
-    // at the safepoint can still point at a freed nursery after an adaptive resize;
-    // that ownership quirk is outside the STW collection body and is handled on the
-    // resumption/allocator side (the region reset replaces g_young_gen.region, and a
-    // subsequent slow-path claim re-validates against the published region).  Keeping
-    // this here removes the need for GC API callers/tests to hand-reset tls_tlab.
-    tls_tlab = TLAB{};
 
     return result;
 }

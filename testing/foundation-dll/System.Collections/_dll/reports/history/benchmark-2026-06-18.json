@@ -1,0 +1,56 @@
+{
+  "date": "2026-06-18",
+  "assemblyName": "System.Collections",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 65,
+        "total": 65,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 67,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 65,
+        "iterations": 10000,
+        "meanDurationMs": 3.962206153846154,
+        "meanOpsPerSecond": 38602889.08384615,
+        "minDurationMs": 0.2157,
+        "maxDurationMs": 92.3471,
+        "totalDurationMs": 257.5434,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 8.1,
+        "totalOutliers": 60,
+        "meanCv": 0.7297662461538462,
+        "maxCv": 1.060827
+      },
+      "hotupdate": {
+        "passed": 65,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 7487032,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

@@ -100,21 +100,16 @@ dev-il2cpp（.claude/skills/ 唯一入口）
 ```
 分类命中域 1-8
   │
-  ├── (Hot-first) 检查 .claude/.hot_skills：
-  │      目标 Expert ∈ hot → 直接读 .ai/skills/library/skills/<expert>/SKILL.md（1 步，跳过发现链）
-  │
-  ├── 未命中 hot → 读取 .ai/skills/discovery/registries/il2cpp.md 找到 dev-il2cpp-core-agent
+  ├── 读取 .ai/skills/discovery/registries/il2cpp.md 找到 dev-il2cpp-core-agent
   ├── 读取 .ai/skills/discovery/expert-registry.json 获取域名对应 Expert 名
   ├── 读取 .ai/skills/library/skills/<expert_name>/SKILL.md
   └── 按 SKILL.md 指令执行，不走通用回复
 ```
 
-> 🔴 Hot-first 为强制：热列表内 Expert 不得走完整发现链。`.claude/.hot_skills` 是唯一权威源（`.claude/dot-claude/.hot_skills` 已废弃）。
-
 > 也可使用确定性查询工具替代手动读 JSON：
 > ```bash
-> python tests/e2e/verification/tools/expert_lookup.py --domain <N>
-> python tests/e2e/verification/tools/expert_lookup.py --keyword "<描述关键词>"
+> python testing/foundation-dll/verification/tools/expert_lookup.py --domain <N>
+> python testing/foundation-dll/verification/tools/expert_lookup.py --keyword "<描述关键词>"
 > ```
 
 此路由在分类声明后、任何工具使用前执行。所有 il2cpp 域的任务必须先经此门。
@@ -124,8 +119,6 @@ dev-il2cpp（.claude/skills/ 唯一入口）
 ## 核心规则
 
 ### 1. 在任何响应或行动前先选技能
-
-**先做三路径前置分类**（说出分类结果，用户可推翻）：Spike（可行性探针，出答案）→ 不写 design/plan 轻量查证；Bounded（有现成 flow 可改）→ 短设计+审批后直接实现；Architectural（新子系统/改接口）→ 走 `dev-brainstorm` 全流程。**单向棘轮：隐藏复杂度只能升级、永不降级**。分类后再按下方技能选择推进。
 
 - 默认的边界清晰、单会话、单目标任务，且执行前提已确认完毕：可直接实现；如果已存在正式任务目录，默认只维护 `STATUS.md`
 - 新功能、行为调整、流程重构，或仍存在任何影响执行的问题（边界、authority、结构、依赖、验收口径、阶段切分、启动条件）：先用 `dev-brainstorm`
@@ -153,15 +146,6 @@ dev-il2cpp（.claude/skills/ 唯一入口）
 → **不走通用回复，不跳过此路由**
 
 以下为通用任务的工作流参考（仅当上方强制规则未命中时使用）：
-
-**三路径前置分类（先说出分类，再选流程）**：
-
-- **Spike（可行性探针，输出一个答案）**：不写 design/plan，成本允许的最轻方式查证后报告推荐；临时产物标 throwaway。
-- **Bounded（有现成 flow 可改的存量改动）**：对话内短设计 + 用户明确 yes 后直接实现，走 `STATUS.md` 轻量维护，不强制补 `plan` / `design`；审批门槛与架构级一样硬。
-- **Architectural（新功能/规范/新子系统/改他人依赖接口）**：必须 `dev-brainstorm` 清零问题 → `writing-plans` / `roadmap`。
-- **单向棘轮**：执行中发现隐藏复杂度必须升级路径（bounded→architectural），永不中途降级；“拿轻 label 逃避”即取更重路径。
-
-按三路径分类落到具体工作流：
 
 - “设计一个新功能 / 规范 / 架构”：
   先 `dev-brainstorm` 把执行相关问题清零并拿到用户确认；之后进入 `writing-plans`，如果是多阶段主线则转 `roadmap`
@@ -198,14 +182,6 @@ dev-il2cpp（.claude/skills/ 唯一入口）
   - 如果问题已清零，只是执行步骤增多：升级到 `writing-plans`
   - 如果问题已清零，且已经形成多阶段或多个独立子任务：升级到 `roadmap`
   - 升级必须在原任务目录完成，并在 `STATUS.md` 记录升级原因与下一步入口
-
-### 6. 结论偏好（decisiveness-over-options）
-
-除用户明确要求"给几个方案 / 对比 / 权衡"外，**默认给一个带理由的推荐实现**，直接可推进，而不是罗列多个方案等用户拍板。
-
-- 只在存在**多重等权重权衡、且选错会显著浪费返工**时，才给出备选并用 AskUserQuestion 让用户定。
-- 禁止把"给 N 个方案 + 分析"当默认姿态——那是把决策推回给用户。
-- 给方案后若用户没明确选，主动给**主推荐**（哪个、为什么、下一步），而不是结束在"你选一个"。
 
 ### 6. 技能激活前检查健康仪表盘
 

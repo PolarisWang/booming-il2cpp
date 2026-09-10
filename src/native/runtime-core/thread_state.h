@@ -101,26 +101,6 @@ struct ManagedThread {
     /// Read (and cleared at release) by the safepoint initiator.
     std::atomic<uint32_t>    suspend_ack{0};
 
-    /// Nonzero while this thread is inside a write-barrier store→card critical
-    /// section.  Set BEFORE the object store, cleared AFTER the card table is
-    /// dirtied.  Written by the owning thread (relaxed set / release clear);
-    /// read cross-thread by the safepoint coordinator (acquire).  Pairs with
-    /// tls_forbid_suspend_depth: the thread acks-and-continues (no deadlock)
-    /// inside the scope, yet the coordinator still waits for barrier_inflight==0
-    /// before starting young-GC Phase-1, so a store can never be observed with
-    /// its card still clean — closes the A2b cross-gen UAF window.
-    std::atomic<uint32_t>    barrier_inflight{0};
-
-    /// Cross-thread "forbid hard suspension" counter (CoreCLR m_dwForbidSuspendThread
-    /// equivalent).  Incremented by the thread itself while it holds a lock that
-    /// must not be preempted by A3 hard-suspension drive (e.g. RegionManager lock,
-    /// thread registry, safepoint owner CAS).  Read cross-thread by the safepoint
-    /// coordinator BEFORE and AFTER SuspendThread: if non-zero either time, the
-    /// coordinator must ResumeThread and retry (or skip) that thread rather than
-    /// hold it suspended while it waits on a lock the suspender also needs —
-    /// avoiding a suspend-thread-vs-lock-holder deadlock.
-    std::atomic<uint32_t>    forbid_suspend_count{0};
-
     /// Event handle for event-based safepoint wait (infinite wait,
     /// zero CPU).  Created in RegisterThread, closed in UnregisterThread.
     /// Set by ReleaseGlobalSafepoint to wake all waiting threads.
@@ -143,8 +123,7 @@ struct ManagedThread {
 
     // ── OS handle for APC/thread ops ─────────────────────────────┐
     /// OS thread handle (for APC fallback on Windows; SuspendThread/ResumeThread on Windows only when preemptive_suspended).
-    /// Used for QueueUserAPC (safepoint fallback on Windows) and for A3 hard
-    /// suspension drive (PalSuspendThread / PalResumeThread / PalGetThreadContext).
+    /// Used for QueueUserAPC (safepoint fallback on Windows).
     void* os_handle{nullptr};
 
     // ── TLAB state (backed up across young GC safepoint) ────────
@@ -154,15 +133,6 @@ struct ManagedThread {
     char* tlab_start{nullptr};
     /// TLAB current bump pointer; same protocol as tlab_start.
     char* tlab_current{nullptr};
-    /// TLAB range end (exclusive) — set by TlabClaimFromYoungGen so the
-    /// adaptive resizer can compute utilization = (current - start) / (end - start).
-    char* tlab_end{nullptr};
-    /// Adaptive TLAB size for this thread (16KB..256KB).  Adjusted by the
-    /// GC's EnumerateThreads resizer during STW; read by TlabClaimFromYoungGen
-    /// to size the next TLAB for this thread.  Mirrors the thread_local
-    /// tls_tlab_size (default 64KB), kept here so the GC can reschedule ALL
-    /// threads in one pass.
-    CHAOS_IL2CPP_SIZE tlab_size{64 * 1024};
 
     /// Stack bounds for conservative root scanning during full GC.
     /// Populated in RegisterThread, read-only after that.
@@ -180,22 +150,16 @@ struct ManagedThread {
     /// Set to true when this thread is preemptively suspended (POSIX SIGUSR2).
     std::atomic<bool> preemptive_suspended{false};
 
-    /// PAL capture-slot index for this thread's captured register state (Phase 2
-    /// C).  Set by the target thread itself in the preemptive-suspend callback
-    /// (PalGetCaptureSlot()) and read cross-thread by the GC.  -1 = no reliable
-    /// capture on this platform (Windows APC-park).  The ucontext itself is owned
-    /// by the PAL (PalSetPreemptContext / PalCaptureThreadContext), not here.
-    int gc_capture_slot{-1};
-
-    // ── Phase 2: GC register window ─────────────────────────────────
-    /// Captured physical-GPR value file for this thread at GC suspension,
-    /// indexed by physical x64 register number (RAX=0..R15=15).  Filled by
-    /// CaptureThreadRegisterWindow from the PAL capture slot, read by
-    /// GcScanAllThreadRoots to report safepoint register roots.  gc_num_gprs==0
-    /// means no window is available and register-root reporting is skipped
-    /// (stack slots remain the scan source).
-    uint64_t gc_reg_file[16]{};
-    uint32_t gc_num_gprs{0};
+    /// ucontext_t pointer captured by the SA_SIGINFO signal handler during
+    /// preemptive suspend.  Provides access to the interrupted thread's
+    /// register state (RIP, RSP, RBP on x64) for precise root scanning and
+    /// optional RIP redirect (thread hijacking trampoline).
+    ///
+    /// Written by PreemptiveSuspendHandler from PalPreemptGetUcontext(),
+    /// cleared after safepoint release.  Valid only on POSIX (Linux) when
+    /// SA_SIGINFO is active; always nullptr on other platforms and outside
+    /// preemptive suspend context.
+    std::atomic<const void*> preempt_ucontext{nullptr};
 
     /// OS thread ID for pthread_kill-based preemptive suspend (Linux).
     /// Populated by PalGetCurrentThreadId().  Used on Linux (non-Apple,
@@ -235,7 +199,6 @@ struct ManagedThread {
 
 extern thread_local ManagedThread* tls_this_thread;
 extern thread_local int32_t        tls_this_thread_id;
-extern thread_local int32_t        tls_preemptive_depth;
 
 /// Set thread state with debug validation.
 /// In PROFILE/SHIP, compiles to a plain assignment.
@@ -314,32 +277,6 @@ constexpr uint32_t kGcModePreemptive  = 1;
         auto* thread = tls_this_thread;
         return thread != nullptr &&
                thread->suspend_seq.load(std::memory_order_acquire) != 0;
-    }
-
-    // ── A3 Hybrid: global returning-thread trap (CoreCLR g_TrapReturningThreads) ──
-    // Set by RequestGlobalSafepoint before driving threads to rendezvous, cleared
-    // by ReleaseGlobalSafepoint.  A thread entering cooperative mode re-checks it
-    // (DisablePreemptiveGC semantics): if set, the thread must fall back to
-    // preemptive and wait on suspend_event (rendezvous) rather than enter managed
-    // code mid-GC.  Combined with per-thread suspend_seq/ack, this is the
-    // "soft rendezvous main path" of the A3 Hybrid safepoint.
-    //
-    // Declared extern here, DEFINED once in thread_state.cpp — NOT a function-local
-    // static (which would give each TU its own copy and break cross-thread
-    // visibility of the trap).  Single shared instance, adjust memory_order on
-    // acquire/release pairs exactly like suspend_seq.
-    extern std::atomic<uint32_t> g_trap_returning_threads;
-
-    inline bool TrapReturningThreads() noexcept {
-        return g_trap_returning_threads.load(std::memory_order_acquire) != 0;
-    }
-
-    inline void SetTrapReturningThreads() noexcept {
-        g_trap_returning_threads.store(1, std::memory_order_release);
-    }
-
-    inline void ClearTrapReturningThreads() noexcept {
-        g_trap_returning_threads.store(0, std::memory_order_release);
     }
 
     /// Called at GC safe points (loop back-edges, method calls).

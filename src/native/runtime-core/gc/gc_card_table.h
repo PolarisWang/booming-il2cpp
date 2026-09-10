@@ -2,16 +2,12 @@
 #define CHAOS_IL2CPP_GC_CARD_TABLE_H_
 
 #include <chaos/native_types.h>
-#include <chaos/compiler_hints.h>  // CHAOS_IL2CPP_FORCEINLINE (LEAF contract)
 
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
 #include <memory>
-#if defined(_MSC_VER)
-#include <intrin.h>
-#endif
 
 #include "gc_bit_utils.h"
 #include "gc_region.h"
@@ -51,21 +47,18 @@ namespace chaos::il2cpp::runtime_core {
 // one predictable branch (segment-null check, always taken on hot path).
 // ======================================================================
 
-static constexpr CHAOS_IL2CPP_SIZE kCardSize = 256;            // bytes per card (CoreCLR card_size)
-static constexpr CHAOS_IL2CPP_SIZE kCardShift = 8;             // log2(kCardSize)
+static constexpr CHAOS_IL2CPP_SIZE kCardSize = 512;            // bytes per card
+static constexpr CHAOS_IL2CPP_SIZE kCardShift = 9;             // log2(kCardSize)
 
-// Two-level parameters.  R6/CoreCLR-aligned: bit-per-word cards.  A 64KB
-// segment holds 256 cards of 256 B each, packed 32 cards per uint32 word
-// (one word covers 32 × 256 = 8 KB, matching CoreCLR card_word_width/card_size).
-static constexpr int kCardsPerSegment = 256;                    // cards per L2 segment (64KB / 256B)
-static constexpr int kCardsPerWord   = 32;                      // cards per uint32 word (bit-per-word)
+// Two-level parameters
+static constexpr int kCardsPerSegment = 128;                     // cards per L2 segment
 static constexpr CHAOS_IL2CPP_SIZE kSegmentCoverage =
     static_cast<CHAOS_IL2CPP_SIZE>(kCardsPerSegment) * kCardSize;  // 64 KB
 static constexpr int kCardL1Entries = 64 * 1024;                // 64K → 4 GB coverage
 
-/// One L2 segment: 256 cards covering 64 KB, bit-packed 32 cards/word.
+/// One L2 segment: 128 card bytes covering 64 KB of heap.
 struct CardSegment {
-    uint32_t words[kCardsPerSegment / kCardsPerWord];           // 8 words = 256 card bits
+    uint8_t cards[kCardsPerSegment];
 };
 
 /// L1 segment pointer table (dynamically growing).
@@ -74,61 +67,8 @@ struct CardSegment {
 /// Initial size: 64K entries (512 KB), auto-grows for heaps > 4 GB.
 /// Uses unique_ptr<T[]> because std::atomic is not copyable (MSVC).
 /// Size tracked separately in g_card_l1_size (atomic for lock-free read).
-/// Lifetime policy (GC-N5): the OLD array is NEVER freed on grow/rebase —
-/// it is retired into a process-lifetime list (gc_card_table.cpp), because
-/// DirtyCard reads the array pointer lock-free and a freed array would be a
-/// use-after-free for concurrent barriers.  Retired memory is bounded
-/// (~512 KB per growth step; growth is rare, heaps > 4 GB or below-base
-/// allocations).
 extern std::unique_ptr<std::atomic<CardSegment*>[]> g_card_l1;
 extern std::atomic<size_t> g_card_l1_size;
-
-/// Card bundle (align CoreCLR card_bundle): a sparse 1-bit-per-2MB
-/// upper index over the card table.  Set alongside a card write; ScanDirtyCards
-/// checks it first to skip entire clean 2MB chunks without touching L2 cards.
-/// size = (max_covered_bytes >> kCardBundleShift + 7) / 8 bytes.
-/// kCardBundleShift = 21 → 2 MB per bundle bit.  Non-atomic: grown under the
-/// card-table mutex alongside g_card_l1; bits written via relaxed stores.
-static constexpr CHAOS_IL2CPP_SIZE kCardBundleShift = 21;
-extern uint8_t* g_card_bundle;
-extern std::atomic<size_t> g_card_bundle_size;
-
-/// Get the bundle bit for @a heap_offset_idx (card-index space → 2MB units).
-inline uintptr_t CardBundleBit(uintptr_t card_global_idx) noexcept {
-    return (card_global_idx >> (kCardBundleShift - kCardShift));
-}
-/// Test whether a bundle bit is dirty.
-inline bool CardBundleTest(uintptr_t bundle_bit) noexcept {
-    if (g_card_bundle == nullptr || bundle_bit >= g_card_bundle_size.load(std::memory_order_relaxed) * 8)
-        return true;  // out of coverage → conservatively "possibly dirty"
-    return (g_card_bundle[bundle_bit >> 3] & (uint8_t)(1u << (bundle_bit & 7))) != 0;
-}
-/// Set a bundle bit (atomic RMW; called alongside DirtyCard).
-/// Multiple mutators may set different bundle bits in the same byte
-/// concurrently — a non-atomic read-modify-write (|=) could lose a bit →
-/// a dirty card's bundle is skipped → cross-gen edge dropped in the
-/// ScanDirtyCards fast-path.  Use a platform atomic Or (CoreCLR
-/// Interlocked::Or / __atomic_fetch_or analog) so no bit is ever lost.
-/// Marked FORCEINLINE so the compiler does not split it into a separate
-/// call (preserving the LEAF contract of the write-barrier sequence).
-CHAOS_IL2CPP_FORCEINLINE void CardBundleSet(uintptr_t bundle_bit) noexcept {
-    if (g_card_bundle == nullptr || bundle_bit >= g_card_bundle_size.load(std::memory_order_relaxed) * 8)
-        return;
-    uint8_t* byte = &g_card_bundle[bundle_bit >> 3];
-    uint8_t mask = static_cast<uint8_t>(1u << (bundle_bit & 7));
-#if defined(_MSC_VER)
-    _InterlockedOr8(reinterpret_cast<volatile char*>(byte), static_cast<char>(mask));
-#elif defined(__GNUC__) || defined(__clang__)
-    __atomic_fetch_or(byte, mask, __ATOMIC_RELAXED);
-#else
-    #error "CardBundleSet: no atomic Or intrinsic on this platform"
-#endif
-}
-/// Clear all bundle bits (called alongside ClearAllCards).
-inline void CardBundleClearAll() noexcept {
-    if (g_card_bundle == nullptr) return;
-    std::memset(g_card_bundle, 0, g_card_bundle_size.load(std::memory_order_relaxed));
-}
 
 /// Base address of the managed heap.  Set once at startup via GcSetHeapBase().
 extern uintptr_t g_heap_base;
@@ -146,14 +86,8 @@ extern uintptr_t g_nursery_range_end;
 
 /// Mark the card covering @a obj as dirty.
 /// Called from the post-write barrier stub inserted by codegen.
-/// Two-level access: L1[idx / kCardsPerSegment] → L2 bit in words[idx/kCardsPerWord].
-///
-/// A3 LEAF contract (T-B3): this MUST be a leaf — no function calls (only
-/// atomic intrinsics), no GC trigger, no allocation, no event wait, so the
-/// compiler can always inline it and produce an atomic code fragment with no
-/// cross-suspend-point.  FORCEINLINE is applied so O2 does not refuse to
-/// inline the growing body (the nursery-skip + L1/L2 access chain).
-CHAOS_IL2CPP_FORCEINLINE void DirtyCard(const void* obj) noexcept {
+/// Two-level access: L1[idx / 128] → L2[idx % 128].
+inline void DirtyCard(const void* obj) noexcept {
     uintptr_t addr = reinterpret_cast<uintptr_t>(obj);
     if (addr < g_heap_base) [[unlikely]] {
         return;  // below heap base — not managed memory
@@ -175,22 +109,15 @@ CHAOS_IL2CPP_FORCEINLINE void DirtyCard(const void* obj) noexcept {
     if (seg_idx >= g_card_l1_size.load(std::memory_order_relaxed)) [[unlikely]] {
         return;  // beyond card table coverage — not managed
     }
-    uintptr_t card_off = idx % kCardsPerSegment;   // 0..255 within segment
-    uintptr_t word_idx = card_off / kCardsPerWord; // 0..7
-    uint32_t bit_mask  = 1u << (card_off % kCardsPerWord);
+    uintptr_t card_idx = idx % kCardsPerSegment;
     auto* seg = g_card_l1[seg_idx].load(std::memory_order_relaxed);
     if (seg != nullptr) [[likely]] {
-        // Atomically Or the card bit (a plain |= could lose a concurrent bit).
-        // CoreCLR uses interlocked Or on card words; match that portability.
-        uint32_t* word = &seg->words[word_idx];
-#if defined(_MSC_VER)
-        _InterlockedOr(reinterpret_cast<volatile long*>(word), static_cast<long>(bit_mask));
-#else
-        __atomic_fetch_or(word, bit_mask, __ATOMIC_RELAXED);
-#endif
-        // also set the 2MB bundle bit so ScanDirtyCards can fast-skip
-        // clean chunks (align CoreCLR card_bundle_set).
-        CardBundleSet(CardBundleBit(idx));
+        // DC optimization: skip the store if the card is already dirty.
+        // On multiprocessor systems this avoids cache-line invalidation
+        // traffic for repeated writes to the same 512-byte card.
+        if (seg->cards[card_idx] != 0xFF) {
+            seg->cards[card_idx] = 0xFF;
+        }
     }
 }
 
@@ -200,12 +127,6 @@ CHAOS_IL2CPP_FORCEINLINE void DirtyCard(const void* obj) noexcept {
 /// The codegen includes this header via <gc/gc_card_table.h>.
 extern "C" void chaos_gc_dirty_card(const void* obj) noexcept;
 
-/// generation-aware write barrier (dst + stored ref) — codegen emits
-/// this at stfld / stelem.ref / stobj where the stored reference is available
-/// to skip gen0→gen0 / same-mature card marking (faithful to CoreCLR region
-/// write barrier).  Fallback to chaos_gc_dirty_card(dst) when ref is unknown.
-extern "C" void chaos_gc_dirty_card_dst_ref(const void* dst, const void* ref) noexcept;
-
 /// Check whether the card covering @a obj is dirty.
 inline bool IsDirty(const void* obj) noexcept {
     uintptr_t addr = reinterpret_cast<uintptr_t>(obj);
@@ -213,11 +134,10 @@ inline bool IsDirty(const void* obj) noexcept {
     uintptr_t idx = (addr - g_heap_base) >> kCardShift;
     uintptr_t seg_idx = idx / kCardsPerSegment;
     if (seg_idx >= g_card_l1_size.load(std::memory_order_acquire)) return false;
-    uintptr_t card_off = idx % kCardsPerSegment;
-    uint32_t bit_mask  = 1u << (card_off % kCardsPerWord);
+    uintptr_t card_idx = idx % kCardsPerSegment;
     auto* seg = g_card_l1[seg_idx].load(std::memory_order_acquire);
     if (seg == nullptr) return false;
-    return (seg->words[card_off / kCardsPerWord] & bit_mask) != 0;
+    return seg->cards[card_idx] == 0xFF;
 }
 
 /// Clear the card covering @a obj.
@@ -227,11 +147,10 @@ inline void ClearCard(const void* obj) noexcept {
     uintptr_t idx = (addr - g_heap_base) >> kCardShift;
     uintptr_t seg_idx = idx / kCardsPerSegment;
     if (seg_idx >= g_card_l1_size.load(std::memory_order_acquire)) return;
-    uintptr_t card_off = idx % kCardsPerSegment;
-    uint32_t bit_mask  = 1u << (card_off % kCardsPerWord);
+    uintptr_t card_idx = idx % kCardsPerSegment;
     auto* seg = g_card_l1[seg_idx].load(std::memory_order_relaxed);
     if (seg != nullptr) {
-        seg->words[card_off / kCardsPerWord] &= ~bit_mask;
+        seg->cards[card_idx] = 0;
     }
 }
 
@@ -255,18 +174,6 @@ void GcSetCardTableNurseryRange(uintptr_t begin, uintptr_t end) noexcept;
 /// Called from old-gen page allocation (under mutex, but may race with
 /// concurrent DirtyCard reads on other threads).
 void GcRegisterHeapRange(uintptr_t start, uintptr_t end);
-
-/// Scan every REGISTERED L2 card segment for dirty cards (CoreCLR-aligned: the
-/// scan set is the registered/committed segment set, so every card the write
-/// barrier ever recorded is reachable).  This is the authoritative cross-gen
-/// scan source — callers that previously drove the scan from an allocator
-/// page/segment list could miss a barrier-written card if the page's L2 segment
-/// wasn't registered or the page range didn't cover the written card index.
-/// @param dirty_card_count  Optional accumulator.
-/// @param range_cb  Callback (range_start, range_end, user_data) per dirty batch.
-void ScanDirtyCardsInRegisteredSegments(CHAOS_IL2CPP_SIZE* dirty_card_count,
-                                         void (*range_cb)(uintptr_t, uintptr_t, void*),
-                                         void* user_data) noexcept;
 
 /// Unregister a heap range [start, end) from the card table.
 /// Sets L1 entries to null and frees the corresponding L2 segments.
@@ -304,30 +211,18 @@ inline void ScanDirtyCards(uintptr_t start, uintptr_t end, Fn&& callback) noexce
         auto* seg = g_card_l1[si].load(std::memory_order_acquire);
         if (seg == nullptr) continue;
 
-        // card-bundle fast skip (align CoreCLR find_card_dword).  If
-        // this segment's 2MB bundle bit is CLEAR, no card in the entire chunk
-        // was dirtied — skip the whole segment without touching L2 cards.
-        uintptr_t global_card_for_seg = si * kCardsPerSegment;
-        if (!CardBundleTest(CardBundleBit(global_card_for_seg))) {
-            continue;
-        }
-
         uintptr_t seg_first_card = (si == first_seg) ? (first % kCardsPerSegment) : 0;
         uintptr_t seg_last_card  = (si == last_seg)  ? (last  % kCardsPerSegment) : (kCardsPerSegment - 1);
 
-        // Fast-skip for full-segment scan: if all card words are zero, the
-        // whole segment is clean (bit-per-word; 8 uint32 words = 256 card bits).
+        // SIMD fast-skip for full-segment scan: check all 128 bytes at once.
         if (seg_first_card == 0 && seg_last_card == (kCardsPerSegment - 1)) {
-            bool any = false;
-            for (int w = 0; w < kCardsPerSegment / kCardsPerWord; w++) {
-                if (seg->words[w] != 0) { any = true; break; }
+            if (!GcSegmentHasDirtyCards(seg->cards)) {
+                continue;  // entire segment clean — skip
             }
-            if (!any) continue;  // entire segment clean — skip
         }
 
         for (uintptr_t ci = seg_first_card; ci <= seg_last_card; ci++) {
-            uint32_t bit_mask = 1u << (ci % kCardsPerWord);
-            if (seg->words[ci / kCardsPerWord] & bit_mask) {
+            if (seg->cards[ci] != 0) {
                 uintptr_t global_card_idx = si * kCardsPerSegment + ci;
                 uintptr_t card_start = g_heap_base + (global_card_idx << kCardShift);
                 uintptr_t card_end   = card_start + kCardSize;
@@ -369,21 +264,16 @@ inline void ScanDirtyCardsBatched(uintptr_t start, uintptr_t end,
         uintptr_t seg_first_card = (si == first_seg) ? (first % kCardsPerSegment) : 0;
         uintptr_t seg_last_card  = (si == last_seg)  ? (last  % kCardsPerSegment) : (kCardsPerSegment - 1);
 
-        // Fast-skip for full-segment scan: check all card words (bit-per-word).
+        // SIMD fast-skip for full-segment scan: check all 128 bytes at once.
         if (seg_first_card == 0 && seg_last_card == (kCardsPerSegment - 1)) {
-            bool any = false;
-            for (int w = 0; w < kCardsPerSegment / kCardsPerWord; w++) {
-                if (seg->words[w] != 0) { any = true; break; }
-            }
-            if (!any) {
+            if (!GcSegmentHasDirtyCards(seg->cards)) {
                 in_run = false;
                 continue;  // entire segment clean — skip
             }
         }
 
         for (uintptr_t ci = seg_first_card; ci <= seg_last_card; ci++) {
-            uint32_t bit_mask = 1u << (ci % kCardsPerWord);
-            if (seg->words[ci / kCardsPerWord] & bit_mask) {
+            if (seg->cards[ci] != 0) {
                 if (dirty_card_count) (*dirty_card_count)++;
                 if (!in_run) {
                     run_start_addr = g_heap_base + ((si * kCardsPerSegment + ci) << kCardShift);

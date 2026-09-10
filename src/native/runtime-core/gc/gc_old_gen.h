@@ -7,12 +7,12 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstdlib>
+#include <mutex>
 #include <vector>
 
 #include "gc_card_table.h"
 #include "gc_layout.h"
 #include "gc_mark_bitmap.h"
-#include "gc_lock.h"                 // GcSpinLock, GcSpinLockGuard, ScopedPreemptiveMode
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -76,24 +76,6 @@ struct OldGenPage {
     // Free-list heads (one per size class, indexed by kOldGenSizeClasses).
     OldGenFreeBlock* free_lists[kOldGenNumSizeClasses];
 
-    // ── In-place demotion (CoreCLR-aligned, GC-N6 #10) ──
-    // A "demoted" object is a live gen1-owned object that stays resident in this
-    // OLD-GEN page (not copied to the gen1 region).  It keeps its old-gen page
-    // mark-bit SET (so sweep/BGC preserve it) while being tracked here so the
-    // gen1 collection can scan it, the full GC can root it, and GetRegionGen can
-    // classify it as gen1.  This replaces the fragile physically-moving demotion
-    // whose DemotionRelocate could leave a stale ref → SEGFAULT.
-    // Fixed inline array (worst-case a fragmented 64KB page holds at most a few
-    // dozen live objects) — allocation-free, no lifetime/lock-free-array hazards.
-    struct DemotedObj {
-        char* addr;                // object start within Payload()
-        CHAOS_IL2CPP_SIZE size;    // instance size (bytes)
-        bool  must_promote;        // survived >=1 gen1 collection (age)
-    };
-    static constexpr int kMaxDemotedPerPage = 128;
-    DemotedObj demoted[kMaxDemotedPerPage];
-    std::atomic<int32_t> demoted_count{0};
-
     // Mark bitmap follows immediately after the header at offset sizeof(OldGenPage).
     unsigned char* MarkBitmap() {
         return reinterpret_cast<unsigned char*>(this) + sizeof(OldGenPage);
@@ -115,83 +97,7 @@ struct OldGenPage {
     /// containing object by backward bitmap scan + TypeInfo validation.
     /// Returns nullptr if no valid containing object is found.
     void* FindObjectContaining(const void* interior_ptr) const;
-
-    // ── In-place demotion helpers (async/reused by gen1 collection + full GC) ──
-    /// Add a gen1-owned object resident on this page (addr within Payload()).
-    /// Entry is fully written BEFORE demoted_count is published so a concurrent
-    /// reader that observes the new count sees a valid entry.  Writers are STW.
-    /// Returns false if the inline array is full (demotion is best-effort).
-    bool DemoteInPlace(char* addr, CHAOS_IL2CPP_SIZE size, bool must_promote = false) {
-        int32_t n = demoted_count.load(std::memory_order_acquire);
-        if (n >= kMaxDemotedPerPage) return false;
-        demoted[n] = {addr, size, must_promote};
-        demoted_count.store(n + 1, std::memory_order_release);
-        return true;
-    }
-    /// Remove the gen1-owned object at exactly @a addr (idempotent).  Returns the
-    /// removed entry (addr==nullptr if none).  STW.
-    DemotedObj DemoteRemove(char* addr) {
-        DemotedObj none{nullptr, 0, false};
-        int32_t n = demoted_count.load(std::memory_order_acquire);
-        for (int32_t i = 0; i < n; i++) {
-            if (demoted[i].addr == addr) {
-                DemotedObj e = demoted[i];
-                demoted[i] = demoted[n - 1];
-                demoted_count.store(n - 1, std::memory_order_release);
-                return e;
-            }
-        }
-        return none;
-    }
-    /// Is @a addr (or an interior pointer into) a gen1-owned object on this page?
-    /// Concurrent-safe: reads count once, then only valid entries [0,count).
-    bool DemotedContains(const void* ptr) const {
-        const auto* cp = static_cast<const char*>(ptr);
-        int32_t n = demoted_count.load(std::memory_order_acquire);
-        for (int32_t i = 0; i < n; i++) {
-            const DemotedObj& e = demoted[i];
-            if (e.addr != nullptr && cp >= e.addr &&
-                cp <  e.addr + static_cast<ptrdiff_t>(e.size)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /// Normalize a demoted pointer (which may be an interior pointer into the
-    /// object) back to the object's base address @c .addr, or nullptr if @a ptr
-    /// is not inside any demoted object on this page.  Unlike DemotedContains
-    /// (a bool test), this returns the containing object's start so callers can
-    /// key by base address — critical because conservative stack scans record
-    /// raw slot values that may be interior pointers, and base/interior address
-    /// semantics MUST NOT be mixed when tracking liveness (GC-gen1 Phase 4f).
-    char* DemotedBase(const void* ptr) const {
-        const auto* cp = static_cast<const char*>(ptr);
-        int32_t n = demoted_count.load(std::memory_order_acquire);
-        for (int32_t i = 0; i < n; i++) {
-            const DemotedObj& e = demoted[i];
-            if (e.addr != nullptr && cp >= e.addr &&
-                cp <  e.addr + static_cast<ptrdiff_t>(e.size)) {
-                return e.addr;
-            }
-        }
-        return nullptr;
-    }
 };
-
-/// Is @a ptr a gen1-owned object physically resident in an old-gen page (i.e. in
-/// this mark-sweep old gen's in-place demoted set)?  O(log n) via FindPage +
-/// per-page demoted-array scan.  Used to extend gen1-ness / classification for
-/// addresses that are not in the gen1 bump region but are demoted-old-gen.  Only
-/// meaningful when @a ptr is inside an old-gen page.
-bool IsInDemotedSet(const void* ptr);
-
-/// Base-address variant of IsInDemotedSet: for any pointer (base or interior)
-/// inside a gen1-owned in-place demoted old-gen object, return that object's
-/// base @c addr; nullptr if not demoted.  Conservative scans only yield interior
-/// pointers, but liveness bookkeeping must be keyed on the object base — so all
-/// demoted tracking should normalize through this instead of storing raw values.
-char* IsInDemotedSetGetBase(const void* ptr);
 
 // Finalizer table entry: maps object -> finalizer callback.
 struct FinalizerEntry {
@@ -231,21 +137,6 @@ public:
     /// Allocate @a size bytes in the old generation.
     /// @param scanning_required  true if the GC must scan this memory for pointers.
     void* Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required = true);
-
-    // ── GC-N8 free-list reuse-rate accounting ─────────────────────
-    // Counts allocations served from existing page free-lists (hits) vs fresh
-    // page carves (misses).  Sampled & reset at collection time to feed the
-    // scheduler's FreeListReuseRate signal (dynamic_tuning Phase-1).
-    uint64_t FreeListHits() const noexcept {
-        return free_list_hits_.load(std::memory_order_relaxed);
-    }
-    uint64_t FreeListMisses() const noexcept {
-        return free_list_carves_.load(std::memory_order_relaxed);
-    }
-    void ResetFreeListAccounting() noexcept {
-        free_list_hits_.store(0, std::memory_order_relaxed);
-        free_list_carves_.store(0, std::memory_order_relaxed);
-    }
 
     /// Free a pointer previously allocated via Allocate().
     void Free(void* ptr);
@@ -338,21 +229,13 @@ public:
     /// Runs DrainMarkStack() after scanning.
     void ScanRangeForRoots(void* range_begin, void* range_end);
 
-    /// Mark every in-place-demoted object (gen1-owned, physically resident in an
-    /// old-gen page) as a root so a full GC never sweeps a still-gen1-owned object.
-    /// CoreCLR-aligned in-place demotion (GC-N6 #10).  Runs during the full-GC
-    /// mark root phase, then DrainMarkStack() closes over each demoted object's
-    /// transitive graph.
-    void ScanInPlaceDemotedRoots();
-
     /// Scan dirty cards across all old-gen pages for young GC.
     /// Calls @a callback(card_index, card_start, card_end) for each dirty card
     /// found in any old-gen page.  This replaces the previous incorrect approach
     /// of scanning nursery address range (which never contains dirty cards).
     template <typename Fn>
     void ScanDirtyCardsInPages(Fn&& callback) {
-        ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         for (auto* page = page_list_; page != nullptr; page = page->next) {
             if (!page->in_use.load(std::memory_order_acquire)) continue;
             uintptr_t page_start = reinterpret_cast<uintptr_t>(page->Payload());
@@ -368,8 +251,7 @@ public:
     template <typename Fn>
     void ScanDirtyCardsInPagesBatched(CHAOS_IL2CPP_SIZE* dirty_card_count,
                                        Fn&& callback) {
-        ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
+        std::lock_guard<std::mutex> lock(mutex_);
         for (auto* page = page_list_; page != nullptr; page = page->next) {
             if (!page->in_use.load(std::memory_order_acquire)) continue;
             uintptr_t page_start = reinterpret_cast<uintptr_t>(page->Payload());
@@ -409,38 +291,6 @@ public:
         return total_allocated_.load(std::memory_order_relaxed);
     }
     CHAOS_IL2CPP_SIZE TotalPages() const { return page_count_; }
-
-    /// Number of decommissioned 100%-free pages currently held in the reusable
-    /// pool.  Read-only diagnostic accessor (locks mutex_); never valid while a
-    /// collection is in progress.  Used by tests to lock pool recycle/trim
-    /// behavior (plan-v6 M3/T5).
-    int PoolPageCount() const {
-        ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
-        return static_cast<int>(page_pool_.size());
-    }
-
-    /// True if the reusable page pool is over its capacity cap
-    /// (kMaxPoolSize = 16).  Under provisional (high memory-pressure) mode the
-    /// scheduler forces a collection so a sweep trims the pool back to cap and
-    /// releases retained physical memory instead of letting it sit idle.
-    bool IsPoolOversized() const {
-        ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(mutex_);
-        return page_pool_.size() > static_cast<size_t>(kMaxPoolSize);
-    }
-
-    /// Monotonic count of Non-oversized Free() calls since the last Reset/
-    /// read.  Used by DecideCollection to nudge a sweep when many normal frees
-    /// have not yet been swept back into the reusable pool (M3/T5 FIX-1).
-    CHAOS_IL2CPP_SIZE FreelistReleaseCount() const noexcept {
-        return freelist_release_count_.load(std::memory_order_relaxed);
-    }
-
-    /// Reset the normal-free counter (called when a collection reclaims pages).
-    void ResetFreelistReleaseCount() noexcept {
-        freelist_release_count_.store(0, std::memory_order_relaxed);
-    }
 
     // ── Page index (sorted array for O(log n) lookup) ───────────
 
@@ -527,7 +377,7 @@ public:
     OldGenPage* PageList() const { return page_list_; }
 
     /// Return the page list mutex for STW scanning.
-    GcSpinLock& PageMutex() { return mutex_; }
+    std::mutex& PageMutex() { return mutex_; }
 
 private:
 
@@ -664,16 +514,16 @@ public:
     OldGenPage* page_list_ = nullptr;   // singly-linked list of all pages
     int         page_count_ = 0;
 
-    mutable GcSpinLock mutex_;                  // protects page list + free lists (alertable, safepoint-aware)
+    mutable std::mutex mutex_;                  // protects page list + free lists
     std::atomic<CHAOS_IL2CPP_SIZE> total_allocated_{0};
 
     // Auto-init guard: true after Init() completes.
     std::atomic<bool> initialized_{false};
 
-    // Separate GcSpinLock for auto-init (Allocate holds init_mutex_, then Init()
+    // Separate mutex for auto-init (Allocate holds init_mutex_, then Init()
     // calls AllocatePage which internally takes mutex_, so we cannot use
     // mutex_ for the init guard).
-    GcSpinLock init_mutex_;
+    std::mutex init_mutex_;
 
     // Marked-object counter (reset each cycle, used by GcStats).
     std::atomic<uint64_t> marked_count_{0};
@@ -721,11 +571,6 @@ public:
     static constexpr int kMaxPoolSize = 16;
     std::vector<PoolEntry> page_pool_;
 
-    // Monotonic count of normal (non-oversized) Free() calls.  Read by the
-    // scheduler (M3/T5 FIX-1) to decide when to nudge a sweep so fully-free
-    // pages get pooled; reset when a collection reclaims them.
-    std::atomic<CHAOS_IL2CPP_SIZE> freelist_release_count_{0};
-
     // Pool pages (100%-free normal pages) deferred from BgcSweep Phase 4b
     // to BgcCompact (STW safepoint).  BgcSweep runs concurrently with
     // mutators that may have allocated from a page's free list after
@@ -736,11 +581,6 @@ public:
 
     // Per-size-class last-used-page cache (avoids O(n) page_list walk).
     OldGenPage* last_alloc_page_[kOldGenNumSizeClasses]{};
-
-    // GC-N8 reuse-rate counters (incremented on the alloc path; sampled at
-    // collection time).  Relaxed — lightweight telemetry, not correctness.
-    std::atomic<uint64_t> free_list_hits_{0};
-    std::atomic<uint64_t> free_list_carves_{0};
 
     // Pinned roots.
     struct PinnedRoot {

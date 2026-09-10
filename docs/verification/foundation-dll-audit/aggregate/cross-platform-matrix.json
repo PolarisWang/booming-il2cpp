@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "platforms": [],
+  "platformBuckets": [
+    {
+      "name": "desktop",
+      "displayName": "Desktop",
+      "platforms": [
+        "windows-x64",
+        "linux-x64",
+        "macos-arm64",
+        "macos-x64"
+      ],
+      "aggregateRule": "all-pass"
+    },
+    {
+      "name": "mobile",
+      "displayName": "Mobile",
+      "platforms": [
+        "android-arm64",
+        "ios-arm64"
+      ],
+      "aggregateRule": "any-pass"
+    }
+  ],
+  "families": []
+}

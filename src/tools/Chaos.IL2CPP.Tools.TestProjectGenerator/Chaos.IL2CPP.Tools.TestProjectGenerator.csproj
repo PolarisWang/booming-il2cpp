@@ -6,10 +6,11 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Chaos.IL2CPP.Tools.TestProjectGenerator</AssemblyName>
     <RootNamespace>Chaos.IL2CPP.Tools.TestProjectGenerator</RootNamespace>
+    <NoWarn>$(NoWarn);NU1902;NU1903;NU1904</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Scriban" Version="7.2.6" />
+    <PackageReference Include="Scriban" Version="5.12.1" />
     <PackageReference Include="System.Reflection.MetadataLoadContext" Version="8.0.0" />
   </ItemGroup>
 

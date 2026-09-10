@@ -27,31 +27,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         int preCondDepth = ComputePreConditionDepth(cfg, conditionBlockIndex);
 
-        // Resolve pure `br`/`leave` trampoline blocks in the conditional target
-        // chain.  A trampoline has an empty body and a single forward `br` to a
-        // distinct block.  Following the chain to the first non-trampoline block
-        // gives the real destination of the branch arm, so the recovered THEN
-        // body starts at the actual code, not at an empty redirect block that
-        // the sequential fallthrough recovery (Recovery.cs:403-411) would strip
-        // as "implicit sequential fallthrough" and absorb the wrong code.
-        bool IsTrampoline(BasicBlock b, out int jumpTo)
-        {
-            jumpTo = -1;
-            if (b.BodyInstructions.Count != 0) return false;
-            if (b.Terminator is not { Op: "br" or "leave" }) return false;
-            jumpTo = GetRequiredIntOperand(b.Terminator);
-            return true;
-        }
-        int trueTarget = condBlock.ConditionalTarget.Value;
-        if (cfg.OffsetToBlockIndex.TryGetValue(trueTarget, out var walkIdx))
-        {
-            var seen = new HashSet<int> { conditionBlockIndex };
-            while (walkIdx >= 0 && walkIdx < cfg.Blocks.Count && IsTrampoline(cfg.Blocks[walkIdx], out var jt) && seen.Add(walkIdx))
-            {
-                if (jt < 0 || !cfg.OffsetToBlockIndex.TryGetValue(jt, out walkIdx)) { walkIdx = -1; break; }
-            }
-            if (walkIdx > 0) trueTarget = cfg.Blocks[walkIdx].StartOffset;
-        }
+        var trueTarget = condBlock.ConditionalTarget.Value;
         if (!cfg.OffsetToBlockIndex.TryGetValue(trueTarget, out var trueBlockIdx))
             return new IRBlock(condBlock.BodyInstructions, condBlock.Terminator);
 

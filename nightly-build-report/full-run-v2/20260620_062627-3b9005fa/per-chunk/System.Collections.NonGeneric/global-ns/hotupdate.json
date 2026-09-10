@@ -1,0 +1,1289 @@
+{
+  "exitCode": 0,
+  "passed": 52,
+  "failed": 0,
+  "assertFailed": 0,
+  "allSemantic": false,
+  "allRevert": true,
+  "revertPassed": 52,
+  "revertRegressionCount": 0,
+  "revertFixedCount": 0,
+  "revertStableCount": 52,
+  "semanticChangedCount": 0,
+  "patchDataUsed": false,
+  "patchFailed": true,
+  "patchSkippedNoMethods": false,
+  "truncated": false,
+  "crash": false,
+  "hasBaselineBenchmark": true,
+  "hasPatchedBenchmark": true,
+  "details": {
+    "baselineFact": [
+      {
+        "si": 0,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 1,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 2,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 3,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 4,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 5,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 6,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 7,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 8,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 9,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 10,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 11,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 12,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 13,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 14,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 15,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 16,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 17,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 18,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 19,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 20,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 21,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 22,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 23,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 24,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 25,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 26,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 27,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 28,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 29,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 30,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 31,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 32,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 33,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 34,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 35,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 36,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 37,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 38,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 39,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 40,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 41,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 42,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 43,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 44,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 45,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 46,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 47,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 48,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 49,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 50,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 51,
+        "passed": true,
+        "value": 42
+      }
+    ],
+    "baselineBenchmark": [
+      {
+        "methodIndex": 35,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1764706
+      },
+      {
+        "methodIndex": 37,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1875000
+      },
+      {
+        "methodIndex": 39,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1578947
+      },
+      {
+        "methodIndex": 38,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1875000
+      },
+      {
+        "methodIndex": 43,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1578947
+      },
+      {
+        "methodIndex": 42,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1666667
+      },
+      {
+        "methodIndex": 46,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1666667
+      },
+      {
+        "methodIndex": 49,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1666667
+      },
+      {
+        "methodIndex": 48,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1666667
+      },
+      {
+        "methodIndex": 51,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1428571
+      },
+      {
+        "methodIndex": 55,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1500000
+      },
+      {
+        "methodIndex": 56,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1428571
+      },
+      {
+        "methodIndex": 54,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1428571
+      },
+      {
+        "methodIndex": 57,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1500000
+      },
+      {
+        "methodIndex": 58,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1363636
+      },
+      {
+        "methodIndex": 50,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1363636
+      },
+      {
+        "methodIndex": 59,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1304348
+      },
+      {
+        "methodIndex": 60,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1304348
+      },
+      {
+        "methodIndex": 62,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1363636
+      },
+      {
+        "methodIndex": 64,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1428571
+      },
+      {
+        "methodIndex": 65,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1363636
+      },
+      {
+        "methodIndex": 66,
+        "elapsedMilliseconds": 0.001,
+        "opsPerSecond": 2307692
+      },
+      {
+        "methodIndex": 67,
+        "elapsedMilliseconds": 0.001,
+        "opsPerSecond": 2142857
+      },
+      {
+        "methodIndex": 68,
+        "elapsedMilliseconds": 0.001,
+        "opsPerSecond": 2307692
+      },
+      {
+        "methodIndex": 69,
+        "elapsedMilliseconds": 0.001,
+        "opsPerSecond": 2142857
+      },
+      {
+        "methodIndex": 70,
+        "elapsedMilliseconds": 0.001,
+        "opsPerSecond": 2142857
+      },
+      {
+        "methodIndex": 73,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 2000000
+      },
+      {
+        "methodIndex": 75,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 2000000
+      },
+      {
+        "methodIndex": 76,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 2000000
+      },
+      {
+        "methodIndex": 78,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 2000000
+      },
+      {
+        "methodIndex": 79,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 2000000
+      },
+      {
+        "methodIndex": 80,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1875000
+      },
+      {
+        "methodIndex": 81,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 1000000
+      },
+      {
+        "methodIndex": 83,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 1034483
+      },
+      {
+        "methodIndex": 82,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 1111111
+      },
+      {
+        "methodIndex": 85,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 1071429
+      },
+      {
+        "methodIndex": 87,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 1000000
+      },
+      {
+        "methodIndex": 88,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 1000000
+      },
+      {
+        "methodIndex": 95,
+        "elapsedMilliseconds": 0.004,
+        "opsPerSecond": 769231
+      },
+      {
+        "methodIndex": 96,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 967742
+      },
+      {
+        "methodIndex": 98,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 882353
+      },
+      {
+        "methodIndex": 100,
+        "elapsedMilliseconds": 0.004,
+        "opsPerSecond": 810811
+      },
+      {
+        "methodIndex": 102,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 967742
+      },
+      {
+        "methodIndex": 103,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 967742
+      },
+      {
+        "methodIndex": 104,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 967742
+      },
+      {
+        "methodIndex": 105,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 909091
+      },
+      {
+        "methodIndex": 108,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 909091
+      },
+      {
+        "methodIndex": 109,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 882353
+      },
+      {
+        "methodIndex": 110,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 937500
+      },
+      {
+        "methodIndex": 111,
+        "elapsedMilliseconds": 0.004,
+        "opsPerSecond": 810811
+      },
+      {
+        "methodIndex": 112,
+        "elapsedMilliseconds": 0.004,
+        "opsPerSecond": 833333
+      },
+      {
+        "methodIndex": 113,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1500000
+      }
+    ],
+    "patchedFact": [
+      {
+        "si": 0,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 1,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 2,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 3,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 4,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 5,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 6,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 7,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 8,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 9,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 10,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 11,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 12,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 13,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 14,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 15,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 16,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 17,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 18,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 19,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 20,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 21,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 22,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 23,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 24,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 25,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 26,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 27,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 28,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 29,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 30,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 31,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 32,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 33,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 34,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 35,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 36,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 37,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 38,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 39,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 40,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 41,
+        "passed": true,
+        "value": 0
+      },
+      {
+        "si": 42,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 43,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 44,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 45,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 46,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 47,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 48,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 49,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 50,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 51,
+        "passed": true,
+        "value": 42
+      }
+    ],
+    "patchedBenchmark": [
+      {
+        "methodIndex": 35,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1578947
+      },
+      {
+        "methodIndex": 37,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1666667
+      },
+      {
+        "methodIndex": 39,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1666667
+      },
+      {
+        "methodIndex": 38,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1363636
+      },
+      {
+        "methodIndex": 43,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1578947
+      },
+      {
+        "methodIndex": 42,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1578947
+      },
+      {
+        "methodIndex": 46,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1500000
+      },
+      {
+        "methodIndex": 49,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1578947
+      },
+      {
+        "methodIndex": 48,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1666667
+      },
+      {
+        "methodIndex": 51,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1500000
+      },
+      {
+        "methodIndex": 55,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1428571
+      },
+      {
+        "methodIndex": 56,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1428571
+      },
+      {
+        "methodIndex": 54,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1578947
+      },
+      {
+        "methodIndex": 57,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1500000
+      },
+      {
+        "methodIndex": 58,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1250000
+      },
+      {
+        "methodIndex": 50,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1578947
+      },
+      {
+        "methodIndex": 59,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1428571
+      },
+      {
+        "methodIndex": 60,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1304348
+      },
+      {
+        "methodIndex": 62,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1304348
+      },
+      {
+        "methodIndex": 64,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1304348
+      },
+      {
+        "methodIndex": 65,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1304348
+      },
+      {
+        "methodIndex": 66,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 1200000
+      },
+      {
+        "methodIndex": 67,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1304348
+      },
+      {
+        "methodIndex": 68,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1250000
+      },
+      {
+        "methodIndex": 69,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1304348
+      },
+      {
+        "methodIndex": 70,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 2000000
+      },
+      {
+        "methodIndex": 73,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 2000000
+      },
+      {
+        "methodIndex": 75,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 2000000
+      },
+      {
+        "methodIndex": 76,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1875000
+      },
+      {
+        "methodIndex": 78,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1875000
+      },
+      {
+        "methodIndex": 79,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1875000
+      },
+      {
+        "methodIndex": 80,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1764706
+      },
+      {
+        "methodIndex": 81,
+        "elapsedMilliseconds": 0.002,
+        "opsPerSecond": 1764706
+      },
+      {
+        "methodIndex": 83,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 1000000
+      },
+      {
+        "methodIndex": 82,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 1034483
+      },
+      {
+        "methodIndex": 85,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 1000000
+      },
+      {
+        "methodIndex": 87,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 967742
+      },
+      {
+        "methodIndex": 88,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 967742
+      },
+      {
+        "methodIndex": 95,
+        "elapsedMilliseconds": 0.004,
+        "opsPerSecond": 857143
+      },
+      {
+        "methodIndex": 96,
+        "elapsedMilliseconds": 0.004,
+        "opsPerSecond": 857143
+      },
+      {
+        "methodIndex": 98,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 909091
+      },
+      {
+        "methodIndex": 100,
+        "elapsedMilliseconds": 0.004,
+        "opsPerSecond": 833333
+      },
+      {
+        "methodIndex": 102,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 882353
+      },
+      {
+        "methodIndex": 103,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 909091
+      },
+      {
+        "methodIndex": 104,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 909091
+      },
+      {
+        "methodIndex": 105,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 909091
+      },
+      {
+        "methodIndex": 108,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 937500
+      },
+      {
+        "methodIndex": 109,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 937500
+      },
+      {
+        "methodIndex": 110,
+        "elapsedMilliseconds": 0.003,
+        "opsPerSecond": 882353
+      },
+      {
+        "methodIndex": 111,
+        "elapsedMilliseconds": 0.004,
+        "opsPerSecond": 857143
+      },
+      {
+        "methodIndex": 112,
+        "elapsedMilliseconds": 0.004,
+        "opsPerSecond": 750000
+      },
+      {
+        "methodIndex": 113,
+        "elapsedMilliseconds": 0.004,
+        "opsPerSecond": 857143
+      }
+    ],
+    "revertedFact": [
+      {
+        "si": 0,
+        "passed": true
+      },
+      {
+        "si": 1,
+        "passed": true
+      },
+      {
+        "si": 2,
+        "passed": true
+      },
+      {
+        "si": 3,
+        "passed": true
+      },
+      {
+        "si": 4,
+        "passed": true
+      },
+      {
+        "si": 5,
+        "passed": true
+      },
+      {
+        "si": 6,
+        "passed": true
+      },
+      {
+        "si": 7,
+        "passed": true
+      },
+      {
+        "si": 8,
+        "passed": true
+      },
+      {
+        "si": 9,
+        "passed": true
+      },
+      {
+        "si": 10,
+        "passed": true
+      },
+      {
+        "si": 11,
+        "passed": true
+      },
+      {
+        "si": 12,
+        "passed": true
+      },
+      {
+        "si": 13,
+        "passed": true
+      },
+      {
+        "si": 14,
+        "passed": true
+      },
+      {
+        "si": 15,
+        "passed": true
+      },
+      {
+        "si": 16,
+        "passed": true
+      },
+      {
+        "si": 17,
+        "passed": true
+      },
+      {
+        "si": 18,
+        "passed": true
+      },
+      {
+        "si": 19,
+        "passed": true
+      },
+      {
+        "si": 20,
+        "passed": true
+      },
+      {
+        "si": 21,
+        "passed": true
+      },
+      {
+        "si": 22,
+        "passed": true
+      },
+      {
+        "si": 23,
+        "passed": true
+      },
+      {
+        "si": 24,
+        "passed": true
+      },
+      {
+        "si": 25,
+        "passed": true
+      },
+      {
+        "si": 26,
+        "passed": true
+      },
+      {
+        "si": 27,
+        "passed": true
+      },
+      {
+        "si": 28,
+        "passed": true
+      },
+      {
+        "si": 29,
+        "passed": true
+      },
+      {
+        "si": 30,
+        "passed": true
+      },
+      {
+        "si": 31,
+        "passed": true
+      },
+      {
+        "si": 32,
+        "passed": true
+      },
+      {
+        "si": 33,
+        "passed": true
+      },
+      {
+        "si": 34,
+        "passed": true
+      },
+      {
+        "si": 35,
+        "passed": true
+      },
+      {
+        "si": 36,
+        "passed": true
+      },
+      {
+        "si": 37,
+        "passed": true
+      },
+      {
+        "si": 38,
+        "passed": true
+      },
+      {
+        "si": 39,
+        "passed": true
+      },
+      {
+        "si": 40,
+        "passed": true
+      },
+      {
+        "si": 41,
+        "passed": true
+      },
+      {
+        "si": 42,
+        "passed": true
+      },
+      {
+        "si": 43,
+        "passed": true
+      },
+      {
+        "si": 44,
+        "passed": true
+      },
+      {
+        "si": 45,
+        "passed": true
+      },
+      {
+        "si": 46,
+        "passed": true
+      },
+      {
+        "si": 47,
+        "passed": true
+      },
+      {
+        "si": 48,
+        "passed": true
+      },
+      {
+        "si": 49,
+        "passed": true
+      },
+      {
+        "si": 50,
+        "passed": true
+      },
+      {
+        "si": 51,
+        "passed": true
+      }
+    ],
+    "passedMethods": 52,
+    "failedMethods": 0,
+    "totalMethods": 52,
+    "allSemantic": false,
+    "allRevert": true,
+    "semanticChangedCount": 0,
+    "patchedAssertFailed": 0
+  },
+  "stderr": "[2026-06-20T14:17:20][INFO][GcLowMem] low-memory monitor started\n[2026-06-20T14:17:20][DEBUG][codegen] T4 VEH handler registered\n[2026-06-20T14:17:20][DEBUG][GcEvents] registered callback 0x7ff6f1109410 at slot 0\n[2026-06-20T14:17:20][DEBUG][codegen] T4 VEH handler registered\n[2026-06-20T14:17:20][DEBUG][GcEvents] registered callback 0x7ff6f1109410 at slot 1\n[2026-06-20T14:17:20][DEBUG][GC_API] enter_no_gc_region depth=%d\n[2026-06-20T14:17:20][DEBUG][GC_API] leave_no_gc_region depth=%d\n[2026-06-",
+  "status": "error"
+}

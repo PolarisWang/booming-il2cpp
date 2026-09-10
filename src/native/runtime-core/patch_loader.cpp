@@ -551,37 +551,14 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
     auto* header = static_cast<const PatchDataHeader*>(data);
     HOTPATCH_DIAG("DIAG[APFM]: magic=%x ver=%u\n", header->magic, header->version);
 
-    // Validate magic and version (accept v1, v2, v3, or v4).
+    // Validate magic and version (accept v1, v2, or v3).
     if (header->magic != PATCH_DATA_MAGIC) return nullptr;
-    if (header->version != 1 && header->version != 2 && header->version != 3 && header->version != 4) return nullptr;
-    // v1 header: 112 bytes, v2 header: 124 bytes, v3 header: 132 bytes, v4 header: 140 bytes
-    // NOTE: use version-literal sizes, NOT sizeof(PatchDataHeader), so old v3 blobs
-    // (header_size=132) written before the v4 fields existed still pass once a v4
-    // loader is installed.  sizeof(PatchDataHeader) is now 140 (includes the v4
-    // trailing fields) and would wrongly reject 132-byte v3 blobs.
+    if (header->version != 1 && header->version != 2 && header->version != 3) return nullptr;
+    // v1 header: 112 bytes, v2 header: 124 bytes, v3 header: 132 bytes
     uint32_t min_header = (header->version == 1) ? 112 :
-                          (header->version == 2) ? 124 :
-                          (header->version == 3) ? 132 : 140;
+                          (header->version == 2) ? 124 : sizeof(PatchDataHeader);
     if (header->header_size < min_header) return nullptr;
     HOTPATCH_DIAG("DIAG[APFM]: validation OK (v%u header_size=%u)\n", header->version, header->header_size);
-
-    // Version-compatibility check (v4+ trailing fields):
-    // If the header is large enough to contain the v4 trailing fields, read them
-    // and reject if the host revision is below the patch's minimum requirement.
-    if (header->version >= 4) {
-        // Safe access: verify header_size covers the trailing fields before reading.
-        // offsetof(PatchDataHeader, patch_revision) + sizeof(uint32_t) = 136 + 4 = 140
-        if (header->header_size >= sizeof(PatchDataHeader)) {
-            uint32_t host_rev = g_host_revision.load(std::memory_order_relaxed);
-            if (host_rev > 0 && header->min_host_revision > host_rev) {
-                HOTPATCH_DIAG("DIAG[APFM]: version mismatch — patch requires host rev >= %u, host has %u\n",
-                    static_cast<unsigned>(header->min_host_revision), static_cast<unsigned>(host_rev));
-                return nullptr;  // caller maps to CHAOS_PATCH_ERR_VERSION_MISMATCH
-            }
-        }
-        // header_size < sizeof(PatchDataHeader): old header from a v4 producer that
-        // wrote a shorter header? unlikely but safe to skip check.
-    }
 
     // Validate structural integrity: total size must include AotCoreIr section.
     uint32_t expected_size = header->body_data_offset + header->body_data_size;
@@ -880,25 +857,14 @@ PatchContext* ApplyPatchFromMemoryEx(
     const char* const* host_method_names,
     int method_count) noexcept {
     // Same validation as ApplyPatchFromMemory.
-    // Floor = smallest valid header (v1, 112 bytes).  sizeof(PatchDataHeader) is now
-    // 140 (v4) — using it here would reject valid 112-132-byte v1/v2/v3 blobs.
-    if (data == nullptr || size < 112u) return nullptr;
+    if (data == nullptr || size < sizeof(PatchDataHeader)) return nullptr;
 
     auto* header = static_cast<const PatchDataHeader*>(data);
     if (header->magic != PATCH_DATA_MAGIC) return nullptr;
-    if (header->version != 1 && header->version != 2 && header->version != 3 && header->version != 4) return nullptr;
+    if (header->version != 1 && header->version != 2 && header->version != 3) return nullptr;
     uint32_t min_header = (header->version == 1) ? 112 :
-                          (header->version == 2) ? 124 :
-                          (header->version == 3) ? 132 : 140;
+                          (header->version == 2) ? 124 : sizeof(PatchDataHeader);
     if (header->header_size < min_header) return nullptr;
-
-    // Version-compatibility check (v4+ trailing fields).
-    if (header->version >= 4 && header->header_size >= 140u) {
-        uint32_t host_rev = g_host_revision.load(std::memory_order_relaxed);
-        if (host_rev > 0 && header->min_host_revision > host_rev) {
-            return nullptr;  // caller maps to version-mismatch
-        }
-    }
 
     uint32_t expected_size = header->body_data_offset + header->body_data_size;
     uint32_t ir_section_end = header->aot_core_ir_offset + header->aot_core_ir_size;
@@ -975,70 +941,6 @@ PatchContext* ApplyPatchFromMemoryEx(
     {
         auto* md = memory_domain::CurrentDomain();
         if (md != nullptr) patch_domain_id_ex = md->domain_id;
-    }
-
-    // ── Phase 1: Validation (dry-run, no state mutation) ────────────────
-    // (工业级 two-phase: 确保当前 blob 所有 "应有 body" 的方法都能在 AOT 注册表里
-    // 解析到 slot. 任一解析失败 → 整体不提交, 不进入 commit, 返回 nullptr.
-    // 这是模块级事务保证: 不会出现 "部分方法被打上 kHotpatchActive, 其余静默漏" 的
-    // 半残状态 — 这正是前期假阳性审计 FP-4 强调的缺口.)
-    //
-    // "应为该补丁一部分" = 有 body + 有有效 type/method name 的方法(与 commit
-    // 循环同判据). body_size==0 / 缺名 是补丁自己没带, 不是解析失败, 不阻断.
-    {
-        uint32_t total = cache->MethodCount();
-        uint32_t resolve_failures = 0;
-        uint32_t candidates = 0;  // 应被解析的方法数
-        for (uint32_t i = 0; i < total; ++i) {
-            auto* method_entry = cache->GetMethodDef(i);
-            if (method_entry == nullptr) continue;
-            if (method_entry->body_size == 0) continue;
-
-            const char* type_name = cache->GetTypeName(method_entry);
-            const char* type_ns = cache->GetTypeNamespace(method_entry);
-            const char* method_name = cache->GetString(method_entry->name_offset);
-            if (type_name == nullptr || method_name == nullptr) continue;
-
-            const char* lookup_ns = (host_type_ns != nullptr) ? host_type_ns : type_ns;
-            const char* lookup_type = type_name;
-            if (has_per_method_overrides && i < static_cast<uint32_t>(method_count)
-                && host_type_names != nullptr && host_type_names[i] != nullptr)
-                lookup_type = host_type_names[i];
-            if (has_per_method_overrides && i < static_cast<uint32_t>(method_count)
-                && host_method_names != nullptr && host_method_names[i] != nullptr)
-                method_name = host_method_names[i];
-
-            ++candidates;
-            uint64_t lookup = registry.LookupMethod(lookup_ns, lookup_type, method_name);
-            if (lookup == 0) {
-                HOTPATCH_DIAG("DIAG[APFM-P1]: unresolvable method ns='%s' type='%s' method='%s'\n",
-                    lookup_ns ? lookup_ns : "(null)",
-                    lookup_type ? lookup_type : "(null)",
-                    method_name ? method_name : "(null)");
-                ++resolve_failures;
-                continue;
-            }
-            uint32_t module_id_tmp = ExtractModuleId(lookup);
-            uint32_t aot_token_tmp = ExtractToken(lookup);
-            uint32_t slot_tmp = registry.TokenToSlot(module_id_tmp, aot_token_tmp);
-            if (slot_tmp == ~0u) {
-                HOTPATCH_DIAG("DIAP[APFM-P1]: no slot for ns='%s' method='%s'\n",
-                    lookup_ns ? lookup_ns : "(null)", method_name ? method_name : "(null)");
-                ++resolve_failures;
-            }
-        }
-        HOTPATCH_DIAG("DIAP[APFM-P1]: validated %u candidates, %u failures\n",
-            static_cast<unsigned>(candidates), static_cast<unsigned>(resolve_failures));
-
-        // 事务性判定: 该补丁的候选方法里只要有一个解析失败就不整体提交.
-        // (body_size==0 的方法不算候选 —— 那类不含此补丁改的 subject.)
-        if (candidates > 0 && resolve_failures > 0) {
-            HOTPATCH_DIAG("DIAP[APFM-P1]: transactional abort — %u/%u candidate methods unresolvable\n",
-                static_cast<unsigned>(resolve_failures), static_cast<unsigned>(candidates));
-            // 不做任何 SetPatchedBySlot. 由调用方(ChaosApplyPatch)映射为 PARTIAL_ROLLBACK/NO_METHODS.
-            DestroyPatchContext(ctx);
-            return nullptr;
-        }
     }
 
     uint32_t patched_count = 0;

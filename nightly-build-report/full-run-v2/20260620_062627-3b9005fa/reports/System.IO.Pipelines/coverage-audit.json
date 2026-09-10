@@ -1,0 +1,11 @@
+{
+  "assemblyName": "System.IO.Pipelines",
+  "timestamp": "2026-06-20T06:26:26",
+  "totalChunks": 1,
+  "chunksWithResults": 1,
+  "chunksWithValueWarnings": 0,
+  "chunksWithMetaMismatch": 0,
+  "totalDeclaredMethods": 50,
+  "coveragePct": 80.0,
+  "namespaceGaps": {}
+}

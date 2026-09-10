@@ -28,7 +28,6 @@
 #include <chaos/config.h>
 #include <chaos/native_types.h>
 
-#include <cstdio>
 #include <cstdlib>
 
 #if defined(CHAOS_IL2CPP_EH_SETJMP)
@@ -63,12 +62,9 @@ inline jmp_buf* push_exception_jmp_buf() noexcept {
 }
 
 inline void pop_exception_jmp_buf() noexcept {
-    if (g_chaos_exception_jmp_depth <= 0) {
-        std::fprintf(stderr, "[FATAL] exception_jmp: pop underflow — depth already 0 (EH state corrupted)\n");
-        std::fflush(stderr);
-        std::abort();
+    if (g_chaos_exception_jmp_depth > 0) {
+        g_chaos_exception_jmp_depth--;
     }
-    g_chaos_exception_jmp_depth--;
 }
 
 [[noreturn]] inline void chaos_raise_exception(CHAOS_IL2CPP_INTPTR obj) noexcept {

@@ -1,0 +1,210 @@
+{
+  "exitCode": 0,
+  "nativeConfig": "check",
+  "entryCount": 23,
+  "profileData": [
+    {
+      "methodIndex": 38,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.001
+    },
+    {
+      "methodIndex": 40,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 41,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 43,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 61,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 63,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 65,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 67,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 69,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 70,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 71,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 73,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 75,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 77,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 79,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 80,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 82,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 83,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 86,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 87,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 91,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 1616,
+      "allocCount": 0,
+      "elapsedMs": 0.001
+    },
+    {
+      "methodIndex": 100,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    },
+    {
+      "methodIndex": 98,
+      "gcPauseNs": 0,
+      "maxGcPauseNs": 0,
+      "nurseryAllocBytes": 0,
+      "allocCount": 0,
+      "elapsedMs": 0.0
+    }
+  ],
+  "summary": {
+    "methodCount": 23,
+    "totalGcPauseNs": 0,
+    "maxGcPauseNs": 0,
+    "totalNurseryAllocBytes": 1616,
+    "totalAllocCount": 0,
+    "fastPathRate": 1.0,
+    "methodsWithGc": 0,
+    "methodsWithAlloc": 0,
+    "codeTextBytes": 0,
+    "codeDataBytes": 0
+  },
+  "sectionSizes": {
+    "text": 0,
+    "data": 0,
+    "pdata": 0,
+    "reloc": 0,
+    "total": 2855936
+  }
+}

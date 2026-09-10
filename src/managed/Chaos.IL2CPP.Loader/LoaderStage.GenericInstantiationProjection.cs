@@ -252,7 +252,6 @@ public sealed partial class LoaderStage
                     {
                         Name = parameter.Name,
                         Type = ProjectInstantiationText(parameter.Type, substitutions, subjectSubstitutions),
-                        TypeSubjectId = parameter.TypeSubjectId,
                     })
                     .ToList();
 
@@ -415,7 +414,6 @@ public sealed partial class LoaderStage
             {
                 Name = parameter.Name,
                 Type = ProjectInstantiationText(parameter.Type, methodReference.Substitutions, subjectSubstitutions),
-                TypeSubjectId = parameter.TypeSubjectId,
             })
             .ToList();
 

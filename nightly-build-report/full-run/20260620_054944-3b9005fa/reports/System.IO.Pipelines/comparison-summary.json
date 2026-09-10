@@ -1,0 +1,461 @@
+{
+  "assemblyName": "System.IO.Pipelines",
+  "timestamp": "2026-06-20T12:48:39",
+  "totalMethods": 20,
+  "methodsWithNet8": 12,
+  "aggregate": {
+    "chaosAotVsNet8Pct": {
+      "mean": 74.94,
+      "median": 74.94,
+      "min": 74.94,
+      "max": 74.94,
+      "p25": 74.94,
+      "p75": 74.94
+    },
+    "chaosJitVsNet8Pct": {
+      "mean": 72.25,
+      "median": 72.25,
+      "min": 72.25,
+      "max": 72.25,
+      "p25": 72.25,
+      "p75": 72.25
+    },
+    "net10VsNet8Pct": {
+      "mean": 0.0,
+      "median": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "p25": 0.0,
+      "p75": 0.0
+    },
+    "highValueMethods_betterThanNet8": 75.0
+  },
+  "perChunk": [
+    {
+      "slug": "system-io-pipelines",
+      "methodCount": 20,
+      "methodsWithNet8": 12,
+      "aggregate": {
+        "methodsBetterThanNet8": 9,
+        "chaosAotVsNet8Pct": {
+          "mean": 74.94,
+          "median": 77.11,
+          "min": 62.0,
+          "max": 89.09,
+          "p25": 72.38,
+          "p75": 79.22
+        },
+        "highValueMethods_betterThanNet8": 100.0,
+        "chaosJitVsNet8Pct": {
+          "mean": 72.25,
+          "median": 75.0,
+          "min": 57.5,
+          "max": 87.07,
+          "p25": 71.83,
+          "p75": 76.53
+        },
+        "net10VsNet8Pct": {
+          "mean": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "p25": 0.0,
+          "p75": 0.0
+        },
+        "gcAllocComparison": {
+          "aotVsNet8Ratio": {
+            "mean": -100.0,
+            "median": -100.0,
+            "min": -100.0,
+            "max": -100.0,
+            "p25": -100.0,
+            "p75": -100.0
+          },
+          "methodsWithAllocData": 9
+        }
+      },
+      "methods": [
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::TryRead:System.Boolean(System.IO.Pipelines.ReadResult)",
+          "net8Ms": null,
+          "net10Ms": null,
+          "chaosAotMs": 2.026e-05,
+          "chaosJitMs": 2.2025e-05,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "missing_net8"
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAsync:System.Threading.Tasks.ValueTask<System.IO.Pipelines.ReadResult>(System.Threading.CancellationToken)",
+          "net8Ms": null,
+          "net10Ms": null,
+          "chaosAotMs": 0.00220132,
+          "chaosJitMs": 0.0025972499999999997,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "missing_net8",
+          "gcComparison": {
+            "chaosAotAllocBytes": 1616,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotFastPathRate": 1.0,
+            "chaosJitAllocBytes": 128000
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAtLeastAsync:System.Threading.Tasks.ValueTask<System.IO.Pipelines.ReadResult>(System.Int32,System.Threading.CancellationToken)",
+          "net8Ms": null,
+          "net10Ms": null,
+          "chaosAotMs": 0.0024766,
+          "chaosJitMs": 0.002629525,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "missing_net8",
+          "gcComparison": {
+            "chaosAotAllocBytes": 1616,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotFastPathRate": 1.0,
+            "chaosJitAllocBytes": 128000
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AdvanceTo:System.Void(System.SequencePosition)",
+          "net8Ms": null,
+          "net10Ms": null,
+          "chaosAotMs": 0.00244392,
+          "chaosJitMs": 0.002389275,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "missing_net8"
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AdvanceTo:System.Void(System.SequencePosition,System.SequencePosition)",
+          "net8Ms": null,
+          "net10Ms": null,
+          "chaosAotMs": 0.00220764,
+          "chaosJitMs": 0.00238705,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "missing_net8"
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AsStream:System.IO.Stream(System.Boolean)",
+          "net8Ms": null,
+          "net10Ms": null,
+          "chaosAotMs": 0.0024018,
+          "chaosJitMs": 0.0028430749999999996,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "missing_net8"
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CancelPendingRead:System.Void()",
+          "net8Ms": null,
+          "net10Ms": null,
+          "chaosAotMs": 3.86e-06,
+          "chaosJitMs": 4.25e-06,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "missing_net8"
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::Complete:System.Void(System.Exception)",
+          "net8Ms": null,
+          "net10Ms": null,
+          "chaosAotMs": 3.82e-06,
+          "chaosJitMs": 4.499999999999999e-06,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "missing_net8"
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CompleteAsync:System.Threading.Tasks.ValueTask(System.Exception)",
+          "net8Ms": 1.4999999999999999e-05,
+          "net10Ms": 1.4999999999999999e-05,
+          "chaosAotMs": 3.7199999999999995e-06,
+          "chaosJitMs": 4.224999999999999e-06,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": 0.0,
+          "chaosAotVsNet8Pct": 75.2,
+          "chaosJitVsNet8Pct": 71.83,
+          "status": "completed",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73640,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 77792,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::OnWriterCompleted:System.Void(System.Action<System.Exception,System.Object>,System.Object)",
+          "net8Ms": 1.6e-05,
+          "net10Ms": 1.6e-05,
+          "chaosAotMs": 4.42e-06,
+          "chaosJitMs": 4.499999999999999e-06,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": 0.0,
+          "chaosAotVsNet8Pct": 72.38,
+          "chaosJitVsNet8Pct": 71.88,
+          "status": "completed",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73608,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 77792,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)",
+          "net8Ms": 1.7e-05,
+          "net10Ms": 1.7e-05,
+          "chaosAotMs": 3.8e-06,
+          "chaosJitMs": 4.25e-06,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": 0.0,
+          "chaosAotVsNet8Pct": 77.65,
+          "chaosJitVsNet8Pct": 75.0,
+          "status": "completed",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73616,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 77792,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Threading.CancellationToken)",
+          "net8Ms": 1.7999999999999997e-05,
+          "net10Ms": 1.7999999999999997e-05,
+          "chaosAotMs": 3.74e-06,
+          "chaosJitMs": 4.224999999999999e-06,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": 0.0,
+          "chaosAotVsNet8Pct": 79.22,
+          "chaosJitVsNet8Pct": 76.53,
+          "status": "completed",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 77792,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeScheduler::Schedule:System.Void(System.Action<System.Object>,System.Object)",
+          "net8Ms": 3.5000000000000004e-05,
+          "net10Ms": 3.5000000000000004e-05,
+          "chaosAotMs": 3.82e-06,
+          "chaosJitMs": 4.525000000000001e-06,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": 0.0,
+          "chaosAotVsNet8Pct": 89.09,
+          "chaosJitVsNet8Pct": 87.07,
+          "status": "completed",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73616,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Complete:System.Void(System.Exception)",
+          "net8Ms": 1.7999999999999997e-05,
+          "net10Ms": 1.7999999999999997e-05,
+          "chaosAotMs": 3.6999999999999997e-06,
+          "chaosJitMs": 4.15e-06,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": 0.0,
+          "chaosAotVsNet8Pct": 79.44,
+          "chaosJitVsNet8Pct": 76.94,
+          "status": "completed",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73584,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::CompleteAsync:System.Threading.Tasks.ValueTask(System.Exception)",
+          "net8Ms": 1e-05,
+          "net10Ms": 1e-05,
+          "chaosAotMs": 3.8e-06,
+          "chaosJitMs": 4.25e-06,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": 0.0,
+          "chaosAotVsNet8Pct": 62.0,
+          "chaosJitVsNet8Pct": 57.5,
+          "status": "completed",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73584,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::CancelPendingFlush:System.Void()",
+          "net8Ms": 1e-05,
+          "net10Ms": 1e-05,
+          "chaosAotMs": 3.76e-06,
+          "chaosJitMs": 4.15e-06,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": 0.0,
+          "chaosAotVsNet8Pct": 62.4,
+          "chaosJitVsNet8Pct": 58.5,
+          "status": "completed",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73584,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::OnReaderCompleted:System.Void(System.Action<System.Exception,System.Object>,System.Object)",
+          "net8Ms": 1.7999999999999997e-05,
+          "net10Ms": 1.7999999999999997e-05,
+          "chaosAotMs": 4.12e-06,
+          "chaosJitMs": 4.499999999999999e-06,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": 0.0,
+          "chaosAotVsNet8Pct": 77.11,
+          "chaosJitVsNet8Pct": 75.0,
+          "status": "completed",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73584,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::FlushAsync:System.Threading.Tasks.ValueTask<System.IO.Pipelines.FlushResult>(System.Threading.CancellationToken)",
+          "net8Ms": 1e-05,
+          "net10Ms": 1e-05,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": 0.0,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "completed",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73584,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Advance:System.Void(System.Int32)",
+          "net8Ms": 1.7999999999999997e-05,
+          "net10Ms": 1.7999999999999997e-05,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": 0.0,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "completed",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73664,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::GetMemory:System.Memory<System.Byte>(System.Int32)",
+          "net8Ms": 1.1e-05,
+          "net10Ms": 1.1e-05,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": 0.0,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "completed",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73696,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        }
+      ]
+    }
+  ]
+}

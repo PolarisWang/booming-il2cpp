@@ -1,6 +1,5 @@
 #include "gc_demotion.h"
 
-#include <chaos/asan_interface.h>
 #include <chaos/log.h>
 
 #include <algorithm>
@@ -8,7 +7,6 @@
 #include <vector>
 
 #include "gc_events.h"
-#include "gc_card_table.h"   // DirtyCard (Phase 2.5 re-card)
 #include "gc_young_gen.h"
 #include "gc_gen1.h"
 #include "gc_layout.h"
@@ -57,8 +55,7 @@ std::vector<DemotionEntry> CollectDemotionCandidates(
     CHAOS_IL2CPP_SIZE total_demoted = 0;
 
     // Lock the page list for a consistent snapshot.
-    const ScopedPreemptiveMode preempt;
-    GcSpinLockGuard lock(old_gen.PageMutex());
+    std::lock_guard<std::mutex> lock(old_gen.PageMutex());
 
     for (auto* page = old_gen.PageList(); page != nullptr; page = page->next) {
         if (total_demoted >= max_bytes) break;
@@ -105,23 +102,22 @@ std::vector<DemotionEntry> CollectDemotionCandidates(
             // Compute the slot range for this object.
             CHAOS_IL2CPP_SIZE obj_slots = (obj_size + sizeof(void*) - 1) / sizeof(void*);
 
-            // IN-PLACE demotion (CoreCLR-aligned, GC-N6 #10): DO NOT move the
-            // object to the gen1 region.  It stays resident in this old-gen page
-            // at its original address, tracked in the page's demoted set so gen1
-            // collection can scan it, full GC can root it, and classification
-            // (GetRegionGen) reports it as gen1.  Its old-gen mark bit is KEPT SET
-            // so old-gen sweep / BGC preserve it while it is gen1-owned.  Because
-            // the address never changes, no external reference fix-up is needed —
-            // eliminating the stale-reference class that crashed (probe mode2).
-            // The old physically-moving demotion memcpy'd to TryAllocateInGen1 and
-            // cleared the mark bit (bm.ClearRange), leaving a stale ref risk.
-            if (!page->DemoteInPlace(static_cast<char*>(obj_addr), obj_size, /*must_promote=*/false)) {
-                // Page's inline demoted array is full — skip this object (demotion
-                // is best-effort; the object stays a normal gen2 object).
+            // Try to allocate in Gen1.
+            void* gen1_addr = TryAllocateInGen1(obj_size);
+            if (gen1_addr == nullptr) {
+                // Gen1 is full — skip demotion for this object, keep in Gen2.
                 s += obj_slots;
                 continue;
             }
-            entries.push_back({obj_addr, obj_addr, obj_size});
+
+            // Copy the object payload to Gen1.
+            std::memcpy(gen1_addr, obj_addr, obj_size);
+
+            // Clear mark bitmap bits so sweep reclaims the old Gen2 space.
+            bm.ClearRange(s, obj_slots);
+
+            // Record relocation.
+            entries.push_back({obj_addr, gen1_addr, obj_size});
             total_demoted += obj_size;
 
             // Advance past this object.
@@ -131,7 +127,7 @@ std::vector<DemotionEntry> CollectDemotionCandidates(
 
     if (!entries.empty()) {
         CHAOS_IL2CPP_LOG_INFO_M("CRAG",
-            "demotion: {0} objects, {1} bytes (in-place gen1-owned in old-gen pages)",
+            "demotion: {0} objects, {1} bytes relocated to Gen1",
             static_cast<unsigned long>(entries.size()),
             static_cast<unsigned long long>(total_demoted));
     }
@@ -162,8 +158,7 @@ void DemotionRelocate(const std::vector<DemotionEntry>& entries,
 
     // Phase 1: Walk all old-gen pages and update slot pointers.
     {
-        const ScopedPreemptiveMode preempt;
-        GcSpinLockGuard lock(old_gen.PageMutex());
+        std::lock_guard<std::mutex> lock(old_gen.PageMutex());
         for (auto* page = old_gen.PageList(); page != nullptr; page = page->next) {
             if (!page->in_use.load(std::memory_order_acquire)) continue;
             char* payload = page->Payload();
@@ -218,37 +213,15 @@ void DemotionRelocate(const std::vector<DemotionEntry>& entries,
         [](void* root_addr, bool /*is_interior*/, void* user_data) {
             if (root_addr == nullptr) return;
             auto& map = *static_cast<std::vector<AddrPair>*>(user_data);
-            // root_addr is a slot on ANOTHER thread's stack (conservative scan);
-            // it may sit in an ASan stack-frame redzone.  Probe sheds ASan only
-            // for genuinely poisoned slots, keeping live root slots instrumented
-            // so a real OOB/UAF write into a root is still surfaced (review #2/#4).
-            // (A prior S2 pass flattened this to blanket NoCheck + left the Probe
-            // comment in place; that masking is not needed here — the S2 SEGFAULT
-            // fix was the self-stack RelocateRoots in gc_old_gen, which keeps NoCheck.)
-            uintptr_t val = reinterpret_cast<uintptr_t>(
-                chaos::il2cpp::common::AsanReadPtrProbe(root_addr));
+            uintptr_t val = *static_cast<uintptr_t*>(root_addr);
             if (val == 0) return;
 
             auto it = std::lower_bound(map.begin(), map.end(), val,
                 [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
             if (it != map.end() && it->old_addr == val) {
-                chaos::il2cpp::common::AsanWritePtrProbe(
-                    root_addr, reinterpret_cast<void*>(it->new_addr));
+                *static_cast<uintptr_t*>(root_addr) = it->new_addr;
             }
         }, &addr_map);
-
-    // Phase 2.5: Re-set the card table for each demoted object's NEW address.
-    // GC-N6 finding (2026-08-25): demotion relocates old-gen objects — which
-    // may hold interior cross-gen (old->nursery) references — into Gen1, but
-    // the write barrier never carded the NEW Gen1 addresses.  The young GC's
-    // Phase-2b Gen1 dirty-card scan therefore cannot see the demoted objects'
-    // nursery references; the referenced nursery objects are collected while
-    // still referenced (stale slots; exposed by the content-liveness check in
-    // gc_region_barrier_stress_test).  Re-set the card for each new address so
-    // Phase-2b rescans the demoted content (DirtyCard is lock-free).
-    for (const auto& e : entries) {
-        DirtyCard(e.new_addr);
-    }
 
     // Phase 3: Relocate GCHandles.
     // Build a vector of {old, new} pairs in the format GcRelocateHandles expects.

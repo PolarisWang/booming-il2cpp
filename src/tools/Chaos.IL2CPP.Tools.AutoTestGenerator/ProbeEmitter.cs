@@ -351,34 +351,7 @@ public sealed class ProbeEmitter
         sb.AppendLine("        return value.GetHashCode();");
         sb.AppendLine("    }");
         sb.AppendLine("}");
-        sb.AppendLine();
-        sb.AppendLine("/// <summary>Creates a subject instance for probing, tolerating types without a");
-        sb.AppendLine("/// public parameterless constructor (e.g. System.String, collection types).</summary>");
-        sb.AppendLine("public static class SubjectInstanceFactory");
-        sb.AppendLine("{");
-        sb.AppendLine("    public static T Create<T>()");
-        sb.AppendLine("    {");
-        sb.AppendLine("        try { return Activator.CreateInstance<T>(); } catch { /* no public parameterless ctor */ }");
-        sb.AppendLine("        try");
-        sb.AppendLine("        {");
-        sb.AppendLine("            var t = typeof(T);");
-        sb.AppendLine("            if (t.IsValueType) return default!;");
-        sb.AppendLine("            return (T)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(t);");
-        sb.AppendLine("        }");
-        sb.AppendLine("        catch (Exception ex)");
-        sb.AppendLine("        {");
-        sb.AppendLine("            // Neither a public parameterless ctor nor GetUninitializedObject succeeded.");
-        sb.AppendLine("            // Returning default! (null) would hand a null subject to the probe; the member");
-        sb.AppendLine("            // call then throws NullReferenceException, recorded as HasException=true and");
-        sb.AppendLine("            // misread as \"this method throws NRE\" — polluting the probe classification.");
-        sb.AppendLine("            // Log the exact type and throw a distinctive exception so the construction");
-        sb.AppendLine("            // failure is diagnosable downstream (and never surfaces as the probe's NRE).");
-        sb.AppendLine("            var t = typeof(T);");
-        sb.AppendLine("            Console.WriteLine($\"[PROBE_WARN] SubjectInstanceFactory.Create<{t.FullName}> failed: no public parameterless ctor and GetUninitializedObject threw {ex.GetType().FullName}: {ex.Message}\");");
-        sb.AppendLine("            throw new System.InvalidOperationException($\"Could not construct probe subject '{t.FullName}': {ex.Message}\");");
-        sb.AppendLine("        }");
-        sb.AppendLine("    }");
-        sb.AppendLine("}");
+
         return sb.ToString();
     }
 
@@ -429,22 +402,18 @@ public sealed class ProbeEmitter
             using var process = Process.Start(psi);
             if (process is null) return false;
 
-            // Drain stdout/stderr ASYNCHRONOUSLY in the background, then wait for exit
-            // with a hard timeout.  Reading synchronously with ReadToEnd() first would
-            // block until the child CLOSES its stream — if the child hangs (never exits),
-            // ReadToEnd() never returns and the WaitForExit timeout below is never reached,
-            // so the ATG probe phase deadlocks forever.  Async drain + WaitForExit(timeout)
-            // makes the kill-on-hang enforceable.
-            var outputTask = process.StandardOutput.ReadToEndAsync();
-            var errorTask = process.StandardError.ReadToEndAsync();
+            // Drain stdout/stderr FIRST, then wait for exit.
+            // Calling WaitForExit before ReadToEnd can deadlock when the
+            // child process fills a pipe buffer (default ~4KB) and blocks
+            // on writing, preventing it from exiting.
+            var output = process.StandardOutput.ReadToEnd();
+            var error = process.StandardError.ReadToEnd();
 
             if (!process.WaitForExit(120_000))
             {
                 process.Kill();
                 process.WaitForExit(5_000);
             }
-            string output = outputTask.IsCompleted ? outputTask.Result : string.Empty;
-            string error = errorTask.IsCompleted ? errorTask.Result : string.Empty;
 
             success = process.ExitCode == 0;
             if (!success)
@@ -477,24 +446,16 @@ public sealed class ProbeEmitter
             using var process = Process.Start(psi);
             if (process is null) return results;
 
-            // Async drain (see RunDotnetBuild): synchronous ReadToEnd would block forever
-            // on a hung child, defeating the timeout. Async + WaitForExit(timeout) is
-            // enforceable kill-on-hang.
-            var outputTask = process.StandardOutput.ReadToEndAsync();
-            var errorTask = process.StandardError.ReadToEndAsync();
+            // Drain stdout FIRST to avoid pipe buffer deadlock, then
+            // wait for exit with timeout.
+            var output = process.StandardOutput.ReadToEnd();
+            var error = process.StandardError.ReadToEnd();
 
-            // Timeout deliberately generous at 180s, not 15s/60s: the probe process does
-            // cold-start JIT compilation of large reference assemblies, and under ASan/deadlock
-            // instrumentation individual probes historically exceeded the old 15s timeout,
-            // failing CI. Lowering this value reintroduces those flaky timeouts. Async drain +
-            // WaitForExit(timeout) keeps kill-on-hang enforceable (see RunDotnetBuild).
-            if (!process.WaitForExit(180_000))
+            if (!process.WaitForExit(15_000))
             {
-                Console.Error.WriteLine($"[Probe] Run timed out after 180s for {Path.GetFileName(probeDir)} — killing process.");
                 process.Kill();
                 process.WaitForExit(5_000);
             }
-            string output = outputTask.IsCompleted ? outputTask.Result : string.Empty;
 
             foreach (var line in output.Split('\n', StringSplitOptions.RemoveEmptyEntries))
             {

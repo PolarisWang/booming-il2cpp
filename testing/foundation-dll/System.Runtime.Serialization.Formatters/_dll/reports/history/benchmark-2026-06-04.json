@@ -1,0 +1,24 @@
+{
+  "date": "2026-06-04",
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 40,
+        "total": 40,
+        "isShutdownAV": false,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 84,
+        "metaBenchmarkCount": 84
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      }
+    }
+  ]
+}

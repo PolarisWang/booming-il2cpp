@@ -1,0 +1,77 @@
+{
+  "date": "2026-06-16",
+  "assemblyName": "System.Runtime.InteropServices",
+  "aggregate": {
+    "chaosAotVsNet8Pct": {
+      "mean": -874.76,
+      "median": -874.76,
+      "min": -874.76,
+      "max": -874.76,
+      "p25": -874.76,
+      "p75": -874.76
+    },
+    "chaosJitVsNet8Pct": {
+      "mean": -949.82,
+      "median": -949.82,
+      "min": -949.82,
+      "max": -949.82,
+      "p25": -949.82,
+      "p75": -949.82
+    },
+    "net10VsNet8Pct": {
+      "mean": -5.54,
+      "median": -5.54,
+      "min": -5.54,
+      "max": -5.54,
+      "p25": -5.54,
+      "p75": -5.54
+    },
+    "highValueMethods_betterThanNet8": 69.2
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 26,
+      "methodsWithNet8": 26,
+      "aggregate": {
+        "methodsBetterThanNet8": 18,
+        "chaosAotVsNet8Pct": {
+          "mean": -874.76,
+          "median": 79.32,
+          "min": -16526.0,
+          "max": 99.55,
+          "p25": 64.17,
+          "p75": 99.0
+        },
+        "highValueMethods_betterThanNet8": 81.8,
+        "chaosJitVsNet8Pct": {
+          "mean": -949.82,
+          "median": 75.09,
+          "min": -17101.5,
+          "max": 99.55,
+          "p25": 66.62,
+          "p75": 99.0
+        },
+        "net10VsNet8Pct": {
+          "mean": -5.54,
+          "median": -10.0,
+          "min": -77.78,
+          "max": 97.63,
+          "p25": -17.21,
+          "p75": 0.0
+        },
+        "gcAllocComparison": {
+          "aotVsNet8Ratio": {
+            "mean": -100.0,
+            "median": -100.0,
+            "min": -100.0,
+            "max": -100.0,
+            "p25": -100.0,
+            "p75": -100.0
+          },
+          "methodsWithAllocData": 22
+        }
+      }
+    }
+  ]
+}

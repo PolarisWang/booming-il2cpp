@@ -1,0 +1,85 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Security.Cryptography",
+  "chunkSlug": "security-cryptography-2",
+  "entries": [
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveBytes:System.Byte[](System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveBytes:System.Byte[](System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Char>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveBytes:System.Void(System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveBytes:System.Void(System.ReadOnlySpan<System.Byte>,System.Security.Cryptography.HashAlgorithmName,System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Char>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveKey:System.Byte[](System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveKey:System.Byte[](System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Char>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveKey:System.Void(System.ReadOnlySpan<System.Byte>,System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SP800108HmacCounterKdf::DeriveKey:System.Void(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<System.Char>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::AppendData:System.Void(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::GetCurrentHash:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::GetHashAndReset:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashData:System.Void(System.IO.Stream,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::HashData:System.Void(System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::Read:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake128::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::AppendData:System.Void(System.ReadOnlySpan<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::GetCurrentHash:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::GetHashAndReset:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashData:System.Byte[](System.ReadOnlySpan<System.Byte>,System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashData:System.Void(System.IO.Stream,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::HashData:System.Void(System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::Read:System.Void(System.Span<System.Byte>)"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.Shake256::Reset:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SlhDsaCng::GetKey:System.Security.Cryptography.CngKey()"
+    },
+    {
+      "methodSubjectId": "System.Security.Cryptography/System.Security.Cryptography.SlhDsaOpenSsl::DuplicateKeyHandle:System.Security.Cryptography.SafeEvpPKeyHandle()"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "assemblyName": "System.Security.Principal.Windows",
+  "timestamp": "2026-06-26T05:47:49",
+  "summary": {
+    "chunks": 1,
+    "chunksVerified": 1,
+    "chunksWithValueWarnings": 0,
+    "chunksWithMetaMismatch": 0,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 36,
+    "aggregatePerformance": {
+      "meanDurationMs": 0.029813888888888886,
+      "meanOpsPerSecond": 335226736.87027776,
+      "aggregateMeanCv": 0.0320815
+    },
+    "hotupdate": {
+      "chunksWithPatchData": 1,
+      "chunksPatchFailed": 0,
+      "chunksPatchSkippedNoMethods": 0,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 36,
+      "totalFailed": 0,
+      "skipBreakdown": {}
+    },
+    "benchmarkComparison": {
+      "methodsAnalyzed": 32,
+      "methodsWithNet8": 32,
+      "chaosAotVsNet8": {
+        "mean": 69.44,
+        "median": 69.44,
+        "min": 69.44,
+        "max": 69.44,
+        "p25": 69.44,
+        "p75": 69.44
+      },
+      "chaosJitVsNet8": {
+        "mean": 69.29,
+        "median": 69.29,
+        "min": 69.29,
+        "max": 69.29,
+        "p25": 69.29,
+        "p75": 69.29
+      },
+      "net10VsNet8": {
+        "mean": -17.67,
+        "median": -17.67,
+        "min": -17.67,
+        "max": -17.67,
+        "p25": -17.67,
+        "p75": -17.67
+      },
+      "highValueMethods_betterThanNet8": 87.5
+    }
+  }
+}

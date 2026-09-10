@@ -1,0 +1,545 @@
+{
+  "exitCode": 0,
+  "passed": 21,
+  "failed": 0,
+  "assertFailed": 0,
+  "allSemantic": false,
+  "allRevert": true,
+  "revertPassed": 21,
+  "revertRegressionCount": 0,
+  "revertFixedCount": 0,
+  "revertStableCount": 21,
+  "semanticChangedCount": 0,
+  "patchDataUsed": true,
+  "patchFailed": false,
+  "patchSkippedNoMethods": false,
+  "truncated": false,
+  "crash": false,
+  "hasBaselineBenchmark": true,
+  "hasPatchedBenchmark": true,
+  "details": {
+    "baselineFact": [
+      {
+        "si": 0,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 1,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 2,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 3,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 4,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 5,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 6,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 7,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 8,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 9,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 10,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 11,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 12,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 13,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 14,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 15,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 16,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 17,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 18,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 19,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 20,
+        "passed": true,
+        "value": 42
+      }
+    ],
+    "baselineBenchmark": [
+      {
+        "methodIndex": 37,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 7500000
+      },
+      {
+        "methodIndex": 38,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 39,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 40,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 41,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 42,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 48,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 45,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 35,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 36,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 49,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 50,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 51,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 52,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 53,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 54,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 55,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 43,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 44,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 46,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 47,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      }
+    ],
+    "patchedFact": [
+      {
+        "si": 0,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 1,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 2,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 3,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 4,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 5,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 6,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 7,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 8,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 9,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 10,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 11,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 12,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 13,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 14,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 15,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 16,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 17,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 18,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 19,
+        "passed": true,
+        "value": 42
+      },
+      {
+        "si": 20,
+        "passed": true,
+        "value": 42
+      }
+    ],
+    "patchedBenchmark": [
+      {
+        "methodIndex": 37,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 38,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 39,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 40,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 41,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 42,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 48,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 45,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 35,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 36,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 30000000
+      },
+      {
+        "methodIndex": 49,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 50,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 51,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 52,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 53,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 54,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 55,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 43,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 44,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 46,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      },
+      {
+        "methodIndex": 47,
+        "elapsedMilliseconds": 0.0,
+        "opsPerSecond": 0.0
+      }
+    ],
+    "revertedFact": [
+      {
+        "si": 0,
+        "passed": true
+      },
+      {
+        "si": 1,
+        "passed": true
+      },
+      {
+        "si": 2,
+        "passed": true
+      },
+      {
+        "si": 3,
+        "passed": true
+      },
+      {
+        "si": 4,
+        "passed": true
+      },
+      {
+        "si": 5,
+        "passed": true
+      },
+      {
+        "si": 6,
+        "passed": true
+      },
+      {
+        "si": 7,
+        "passed": true
+      },
+      {
+        "si": 8,
+        "passed": true
+      },
+      {
+        "si": 9,
+        "passed": true
+      },
+      {
+        "si": 10,
+        "passed": true
+      },
+      {
+        "si": 11,
+        "passed": true
+      },
+      {
+        "si": 12,
+        "passed": true
+      },
+      {
+        "si": 13,
+        "passed": true
+      },
+      {
+        "si": 14,
+        "passed": true
+      },
+      {
+        "si": 15,
+        "passed": true
+      },
+      {
+        "si": 16,
+        "passed": true
+      },
+      {
+        "si": 17,
+        "passed": true
+      },
+      {
+        "si": 18,
+        "passed": true
+      },
+      {
+        "si": 19,
+        "passed": true
+      },
+      {
+        "si": 20,
+        "passed": true
+      }
+    ],
+    "passedMethods": 21,
+    "failedMethods": 0,
+    "totalMethods": 21,
+    "allSemantic": false,
+    "allRevert": true,
+    "semanticChangedCount": 0,
+    "patchedAssertFailed": 0
+  },
+  "stderr": "[2026-06-20T14:19:17][INFO][GcLowMem] low-memory monitor started\n[2026-06-20T14:19:17][DEBUG][codegen] T4 VEH handler registered\n[2026-06-20T14:19:17][DEBUG][GcEvents] registered callback 0x7ff6394e1930 at slot 0\n[2026-06-20T14:19:17][DEBUG][codegen] T4 VEH handler registered\n[2026-06-20T14:19:17][DEBUG][GcEvents] registered callback 0x7ff6394e1930 at slot 1\n[2026-06-20T14:19:17][DEBUG][GC_API] enter_no_gc_region depth=%d\n[2026-06-20T14:19:17][DEBUG][GC_API] leave_no_gc_region depth=%d\n[2026-06-",
+  "status": "passed"
+}

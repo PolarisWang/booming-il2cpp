@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> - Benchmark Detail - System.Private.CoreLib - Foundation DLL Audit</title>
+  <link rel="stylesheet" href="../../../../../dashboard.css">
+</head>
+<body>
+  <main>
+    <div class="page-header">
+      <a class="back-link" href="../System.Private.CoreLib.html">Back to System.Private.CoreLib</a>
+      <div class="eyebrow">Benchmark Detail — Performance Comparison</div>
+      <h1></h1>
+      <div class="summary-grid">
+        <div class="summary-card"><strong>Closure Status</strong><span class="status status-in-progress">in-progress</span></div>
+        <div class="summary-card"><strong>Methods</strong>11</div>
+        <div class="summary-card"><strong>Avg Speedup</strong>0.0%</div>
+        <div class="summary-card"><strong>Native Faster</strong>0</div>
+        <div class="summary-card"><strong>Managed Faster</strong>0</div>
+      </div>
+      <p>Average Speedup: 0.0% (Native faster: 0, Managed faster: 0, Total methods: 11)</p>
+    </div>
+
+    <section class="detail-section">
+      <h2>Benchmark Results</h2>
+      <p>Managed vs Native execution time comparison per method. Expand code blocks to inspect the benchmark source code.</p>
+      <div class="table-wrap">
+        <table class="family-detail-table">
+          <thead><tr><th>Method</th><th>Managed (ms)</th><th>Native (ms)</th><th>Speedup %</th><th>Status</th><th>Managed Benchmark Code</th><th>Native Benchmark Code</th></tr></thead>
+          <tbody><tr><td>System.Convert::ChangeType(System.Object,System.Type)</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code> 861  	&quot;System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)&quot;,
+ 862  	&quot;System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type)&quot;,
+ 863  	&quot;System.Private.CoreLib/System.Object::GetHashCode:System.Int32()&quot;,
+ 864  	&quot;BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::_exitCode&quot;,
+ 865  	&quot;System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)&quot;,
+ 866  	&quot;System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)&quot;,
+ 867  	&quot;System.Private.CoreLib/System.Type::IsInstanceOfType:System.Boolean(System.Object)&quot;,
+ 868  	&quot;System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)&quot;,
+ 869  	&quot;System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)&quot;,
+ 870  	&quot;System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)&quot;,
+ 871  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)&quot;,
+ 872  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)&quot;,
+ 873  	&quot;System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)&quot;,
+ 874  };
+ 875  
+ 876  extern &quot;C&quot; void* kChaosExternalRuntimeFnTable[15] = {
+ 877  	nullptr,
+ 878  	nullptr,
+ 879  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
+ 880  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
+ 881  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+ 882  	nullptr,
+ 883  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_),
+ 884  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableFrom_System_Boolean_System_Type_),
+ 885  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsInstanceOfType_System_Boolean_System_Object_),
+ 886  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsSubclassOf_System_Boolean_System_Type_),
+ 887  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
+ 888  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
+ 889  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
+ 890  	nullptr,
+ 891  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
+ 892  };</code></pre></details></td></tr><tr><td>System.Convert::ChangeType(System.Object,System.Type,System.IFormatProvider)</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code> 864  	&quot;BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::_exitCode&quot;,
+ 865  	&quot;System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)&quot;,
+ 866  	&quot;System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)&quot;,
+ 867  	&quot;System.Private.CoreLib/System.Type::IsInstanceOfType:System.Boolean(System.Object)&quot;,
+ 868  	&quot;System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)&quot;,
+ 869  	&quot;System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)&quot;,
+ 870  	&quot;System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)&quot;,
+ 871  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)&quot;,
+ 872  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)&quot;,
+ 873  	&quot;System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)&quot;,
+ 874  };
+ 875  
+ 876  extern &quot;C&quot; void* kChaosExternalRuntimeFnTable[15] = {
+ 877  	nullptr,
+ 878  	nullptr,
+ 879  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
+ 880  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
+ 881  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+ 882  	nullptr,
+ 883  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_),
+ 884  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableFrom_System_Boolean_System_Type_),
+ 885  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsInstanceOfType_System_Boolean_System_Object_),
+ 886  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsSubclassOf_System_Boolean_System_Type_),
+ 887  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
+ 888  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
+ 889  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
+ 890  	nullptr,
+ 891  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
+ 892  };</code></pre></details></td></tr><tr><td>System.Type::IsAssignableFrom(System.Type)</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code> 865  	&quot;System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)&quot;,
+ 866  	&quot;System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)&quot;,
+ 867  	&quot;System.Private.CoreLib/System.Type::IsInstanceOfType:System.Boolean(System.Object)&quot;,
+ 868  	&quot;System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)&quot;,
+ 869  	&quot;System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)&quot;,
+ 870  	&quot;System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)&quot;,
+ 871  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)&quot;,
+ 872  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)&quot;,
+ 873  	&quot;System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)&quot;,
+ 874  };
+ 875  
+ 876  extern &quot;C&quot; void* kChaosExternalRuntimeFnTable[15] = {
+ 877  	nullptr,
+ 878  	nullptr,
+ 879  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
+ 880  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
+ 881  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+ 882  	nullptr,
+ 883  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_),
+ 884  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableFrom_System_Boolean_System_Type_),
+ 885  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsInstanceOfType_System_Boolean_System_Object_),
+ 886  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsSubclassOf_System_Boolean_System_Type_),
+ 887  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
+ 888  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
+ 889  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
+ 890  	nullptr,
+ 891  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
+ 892  };</code></pre></details></td></tr><tr><td>System.Type::IsInstanceOfType(System.Object)</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code> 866  	&quot;System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)&quot;,
+ 867  	&quot;System.Private.CoreLib/System.Type::IsInstanceOfType:System.Boolean(System.Object)&quot;,
+ 868  	&quot;System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)&quot;,
+ 869  	&quot;System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)&quot;,
+ 870  	&quot;System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)&quot;,
+ 871  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)&quot;,
+ 872  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)&quot;,
+ 873  	&quot;System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)&quot;,
+ 874  };
+ 875  
+ 876  extern &quot;C&quot; void* kChaosExternalRuntimeFnTable[15] = {
+ 877  	nullptr,
+ 878  	nullptr,
+ 879  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
+ 880  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
+ 881  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+ 882  	nullptr,
+ 883  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_),
+ 884  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableFrom_System_Boolean_System_Type_),
+ 885  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsInstanceOfType_System_Boolean_System_Object_),
+ 886  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsSubclassOf_System_Boolean_System_Type_),
+ 887  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
+ 888  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
+ 889  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
+ 890  	nullptr,
+ 891  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
+ 892  };</code></pre></details></td></tr><tr><td>System.Type::IsSubclassOf(System.Type)</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code> 867  	&quot;System.Private.CoreLib/System.Type::IsInstanceOfType:System.Boolean(System.Object)&quot;,
+ 868  	&quot;System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)&quot;,
+ 869  	&quot;System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)&quot;,
+ 870  	&quot;System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)&quot;,
+ 871  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)&quot;,
+ 872  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)&quot;,
+ 873  	&quot;System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)&quot;,
+ 874  };
+ 875  
+ 876  extern &quot;C&quot; void* kChaosExternalRuntimeFnTable[15] = {
+ 877  	nullptr,
+ 878  	nullptr,
+ 879  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
+ 880  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
+ 881  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+ 882  	nullptr,
+ 883  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_),
+ 884  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableFrom_System_Boolean_System_Type_),
+ 885  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsInstanceOfType_System_Boolean_System_Object_),
+ 886  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsSubclassOf_System_Boolean_System_Type_),
+ 887  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
+ 888  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
+ 889  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
+ 890  	nullptr,
+ 891  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
+ 892  };</code></pre></details></td></tr><tr><td>System.Type::IsAssignableTo(System.Type)</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code> 868  	&quot;System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)&quot;,
+ 869  	&quot;System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)&quot;,
+ 870  	&quot;System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)&quot;,
+ 871  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)&quot;,
+ 872  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)&quot;,
+ 873  	&quot;System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)&quot;,
+ 874  };
+ 875  
+ 876  extern &quot;C&quot; void* kChaosExternalRuntimeFnTable[15] = {
+ 877  	nullptr,
+ 878  	nullptr,
+ 879  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
+ 880  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
+ 881  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+ 882  	nullptr,
+ 883  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_),
+ 884  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableFrom_System_Boolean_System_Type_),
+ 885  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsInstanceOfType_System_Boolean_System_Object_),
+ 886  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsSubclassOf_System_Boolean_System_Type_),
+ 887  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
+ 888  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
+ 889  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
+ 890  	nullptr,
+ 891  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
+ 892  };</code></pre></details></td></tr><tr><td>System.Object::MemberwiseClone()</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><span class="status-muted">Code not found</span></td></tr><tr><td>System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue(System.Object)</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code> 869  	&quot;System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)&quot;,
+ 870  	&quot;System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)&quot;,
+ 871  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)&quot;,
+ 872  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)&quot;,
+ 873  	&quot;System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)&quot;,
+ 874  };
+ 875  
+ 876  extern &quot;C&quot; void* kChaosExternalRuntimeFnTable[15] = {
+ 877  	nullptr,
+ 878  	nullptr,
+ 879  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
+ 880  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
+ 881  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+ 882  	nullptr,
+ 883  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_),
+ 884  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableFrom_System_Boolean_System_Type_),
+ 885  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsInstanceOfType_System_Boolean_System_Object_),
+ 886  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsSubclassOf_System_Boolean_System_Type_),
+ 887  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
+ 888  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
+ 889  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
+ 890  	nullptr,
+ 891  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
+ 892  };</code></pre></details></td></tr><tr><td>System.Array::CreateInstance(System.Type,System.Int32)</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code> 870  	&quot;System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)&quot;,
+ 871  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)&quot;,
+ 872  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)&quot;,
+ 873  	&quot;System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)&quot;,
+ 874  };
+ 875  
+ 876  extern &quot;C&quot; void* kChaosExternalRuntimeFnTable[15] = {
+ 877  	nullptr,
+ 878  	nullptr,
+ 879  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
+ 880  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
+ 881  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+ 882  	nullptr,
+ 883  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_),
+ 884  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableFrom_System_Boolean_System_Type_),
+ 885  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsInstanceOfType_System_Boolean_System_Object_),
+ 886  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsSubclassOf_System_Boolean_System_Type_),
+ 887  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
+ 888  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
+ 889  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
+ 890  	nullptr,
+ 891  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
+ 892  };</code></pre></details></td></tr><tr><td>System.Array::CreateInstance(System.Type,System.Int32,System.Int32)</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code> 871  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)&quot;,
+ 872  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)&quot;,
+ 873  	&quot;System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)&quot;,
+ 874  };
+ 875  
+ 876  extern &quot;C&quot; void* kChaosExternalRuntimeFnTable[15] = {
+ 877  	nullptr,
+ 878  	nullptr,
+ 879  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
+ 880  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
+ 881  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+ 882  	nullptr,
+ 883  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_),
+ 884  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableFrom_System_Boolean_System_Type_),
+ 885  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsInstanceOfType_System_Boolean_System_Object_),
+ 886  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsSubclassOf_System_Boolean_System_Type_),
+ 887  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
+ 888  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
+ 889  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
+ 890  	nullptr,
+ 891  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
+ 892  };</code></pre></details></td></tr><tr><td>System.ValueType::Equals(System.Object)</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code> 872  	&quot;System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)&quot;,
+ 873  	&quot;System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)&quot;,
+ 874  };
+ 875  
+ 876  extern &quot;C&quot; void* kChaosExternalRuntimeFnTable[15] = {
+ 877  	nullptr,
+ 878  	nullptr,
+ 879  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
+ 880  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
+ 881  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+ 882  	nullptr,
+ 883  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider_),
+ 884  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableFrom_System_Boolean_System_Type_),
+ 885  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsInstanceOfType_System_Boolean_System_Object_),
+ 886  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsSubclassOf_System_Boolean_System_Type_),
+ 887  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_),
+ 888  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
+ 889  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
+ 890  	nullptr,
+ 891  	reinterpret_cast&lt;void*&gt;(&amp;chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
+ 892  };</code></pre></details></td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Evidence</h2>
+      <div class="source-links">
+        <span class="status-muted">n/a</span>
+      </div>
+    </section>
+  </main>
+  <script>
+// Tab switching
+function switchTab(tabName) {
+  var contents = document.querySelectorAll('.tab-content');
+  for (var i = 0; i < contents.length; i++) { contents[i].classList.remove('active'); }
+  var buttons = document.querySelectorAll('.tab-button');
+  for (var i = 0; i < buttons.length; i++) { buttons[i].classList.remove('active'); }
+  var target = document.getElementById('tab-' + tabName);
+  if (target) { target.classList.add('active'); }
+  var btn = document.querySelector('.tab-button[data-tab="' + tabName + '"]');
+  if (btn) { btn.classList.add('active'); }
+  window.location.hash = tabName;
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var hash = window.location.hash.replace('#', '');
+  if (hash) {
+    var btn = document.querySelector('.tab-button[data-tab="' + hash + '"]');
+    if (btn) switchTab(hash);
+  }
+});
+// Expandable rows
+function toggleRow(btn) {
+  var row = btn.closest('tr');
+  var detail = row.nextElementSibling;
+  if (detail && detail.classList.contains('matrix-row-detail')) {
+    row.classList.toggle('expanded');
+    detail.classList.toggle('expanded');
+  }
+}
+// Native proof tooltips
+(function() {
+  var triggers = document.querySelectorAll('.native-proof-trigger');
+  for (var i = 0; i < triggers.length; i++) {
+    var trigger = triggers[i];
+    var delayMs = Number(trigger.dataset.tooltipDelayMs || '500');
+    var hideTimer = null;
+    var clearHide = function() {
+      if (hideTimer !== null) { window.clearTimeout(hideTimer); hideTimer = null; }
+    };
+    var show = function() { clearHide(); trigger.classList.add('is-visible'); };
+    var hide = function() {
+      clearHide();
+      hideTimer = window.setTimeout(function() {
+        trigger.classList.remove('is-visible');
+        hideTimer = null;
+      }, delayMs);
+    };
+    trigger.addEventListener('pointerenter', show);
+    trigger.addEventListener('pointerleave', hide);
+    trigger.addEventListener('focusin', show);
+    trigger.addEventListener('focusout', function(event) {
+      if (trigger.contains(event.relatedTarget)) { return; }
+      hide();
+    });
+  }
+})();
+</script>
+</body>
+</html>

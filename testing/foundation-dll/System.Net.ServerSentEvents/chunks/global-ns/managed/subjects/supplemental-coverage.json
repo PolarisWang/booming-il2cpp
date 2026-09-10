@@ -1,0 +1,34 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe.",
+  "assemblyName": "System.Net.ServerSentEvents",
+  "chunkSlug": "global-ns",
+  "entries": [
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::Commit:System.Void(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::Discard:System.Void(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ArrayBuffer::EnsureAvailableSpace:System.Void(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::Advance:System.Void(System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::Dispose:System.Void()"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::GetMemory:System.Memory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::GetSpan:System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Int32)"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter::Reset:System.Void()"
+    }
+  ]
+}

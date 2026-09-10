@@ -11,7 +11,7 @@
 
 ## Authority 边界
 
-- [`../../../docs/archive/architecture/subject-test-framework-v1/INDEX.md`](../../../docs/archive/architecture/subject-test-framework-v1/INDEX.md)
+- [`../../../docs/architecture/subject-test-framework-v1/INDEX.md`](../../../docs/architecture/subject-test-framework-v1/INDEX.md)
   - 拥有统一测试主线、collection / manifest / codegen 分层�?subject test framework 边界
 - [`../../../docs/archive/architecture/verification-v1/spec.md`](../../../docs/archive/architecture/verification-v1/spec.md)
   - 拥有 formal verification、归并归档、projection 与权责图审核边界

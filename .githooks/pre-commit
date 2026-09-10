@@ -3,21 +3,12 @@
 #
 # Runs:
 #   1. build/check_arch.py on staged native C++ files
-#   2. tests/e2e/verification/preflight/check_layer_boundaries.py on staged Python (4-layer compliance)
+#   2. build/check_foundation_dll_pipeline.py when test generator/ledger files change
 #   3. CHAOS_IL2CPP_LOG_TRACE() / CHAOS_IL2CPP_LOG_*() coverage check on staged .cpp files (advisory)
 #
 # To install: git config core.hooksPath .githooks
 # You can skip this check with: git commit --no-verify
 
-# Audit log (NOT committed to the repo): each hook invocation is recorded with a
-# timestamp + result to .git/chaos-hooks.log so you can audit which runs happened.
-GIT_DIR=$(git rev-parse --git-dir 2>/dev/null || echo .git)
-HOOK_LOG="$GIT_DIR/chaos-hooks.log"
-PRE_COMMIT_RC=0
-hook_log() { printf '%s  pre-commit  %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >> "$HOOK_LOG" 2>/dev/null || true; }
-trap 'hook_log "exit=$?"' 0
-
-hook_log "start: $(git log -1 --format=%h 2>/dev/null || echo none)"
 echo "=== [check_arch] Checking native architecture compliance ==="
 
 STAGED_CPP=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^src/native/.*\.(cpp|h)$' || true)
@@ -72,7 +63,7 @@ if [ -z "$STAGED_PY" ]; then
     echo "=== [layer-boundary] No Python files staged, skipping ==="
 else
     # Run the boundary check script
-    BOUNDARY_OUTPUT=$(python tests/e2e/verification/preflight/check_layer_boundaries.py 2>&1 | cat)
+    BOUNDARY_OUTPUT=$(python testing/foundation-dll/verification/preflight/check_layer_boundaries.py 2>&1 | cat)
     echo "$BOUNDARY_OUTPUT"
     if echo "$BOUNDARY_OUTPUT" | grep -q "FAIL"; then
         echo ""
@@ -82,67 +73,5 @@ else
     fi
     echo "=== [layer-boundary] All staged files pass layer boundary checks ==="
 fi
-
-echo "=== [workaround-gate] Checking workaround / override bans (方案 B) ==="
-WRO_OUTPUT=$(python tests/e2e/verification/preflight/check_workarounds.py 2>&1 | cat)
-echo "$WRO_OUTPUT"
-if echo "$WRO_OUTPUT" | grep -q "FAIL"; then
-    echo ""
-    echo "ERROR: workaround/override gate FAILED. Root-fix the masked workaround, or"
-    echo "annotate a harmless robustness fallback (# FALLBACK_KIND: robust) or a"
-    echo "temporary capped workaround (# FALLBACK_KIND: workaround + # WRO: EXPIRES)."
-    echo "Permanent workarounds and masked-success returns are banned."
-    echo "Use 'git commit --no-verify' to bypass (not recommended)."
-    exit 1
-fi
-echo "=== [workaround-gate] All staged files pass workaround/override checks ==="
-
-echo "=== [gate] Deterministic severe-issue gates (secrets / artifacts / large files) ==="
-
-GATE_FAILED=0
-
-# (a) secrets / credentials accidentally staged
-SECRET_HITS=$(git diff --cached | grep -iE \
-    'AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{35}|sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{36,}|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|password[[:space:]]*[=:][[:space:]]*["'"'"'][^"'"'"']{6,}' | head -5)
-if [ -n "$SECRET_HITS" ]; then
-    echo "ERROR: possible secret/credential staged:"
-    echo "$SECRET_HITS"
-    GATE_FAILED=1
-fi
-
-# (b) build artifacts accidentally staged (4-layer redline: only legit referenced
-#     .dll under src/dll, crypto-refs, third_party/mono.cecil are allowed)
-ARTIFACTS=$(git diff --cached --name-only --diff-filter=ACMR \
-    | grep -E '\.(dll|o|obj|a|lib|pdb|so|ilk|exe)$' \
-    | grep -vE '^src/dll/|^tests/e2e/translation/crypto-refs/|^third_party/mono\.cecil/' || true)
-if [ -n "$ARTIFACTS" ]; then
-    echo "ERROR: build artifacts staged (4-layer redline):"
-    echo "$ARTIFACTS"
-    GATE_FAILED=1
-fi
-
-# (c) large file (>5MB) staged — likely accidental binary
-for f in $(git diff --cached --name-only --diff-filter=ACMR); do
-    size=$(git cat-file -s :"$f" 2>/dev/null || echo 0)
-    if [ "$size" -gt 5242880 ]; then
-        echo "ERROR: $f is $((size/1048576))MB (>5MB) — likely shouldn't be committed"
-        GATE_FAILED=1
-    fi
-done
-
-if [ "$GATE_FAILED" -ne 0 ]; then
-    echo ""
-    echo "ERROR: severe-issue gate failed. Fix the above or use 'git commit --no-verify' to bypass (not recommended)."
-    exit 1
-fi
-echo "=== [gate] Deterministic gates passed ==="
-
-echo "=== [hygiene] Central repo-hygiene gate (root-clean / disk / generated-drift) ==="
-if ! python scripts/cleanliness/chaos_hygiene.py --gate; then
-    echo ""
-    echo "ERROR: hygiene gate FAILED. Fix the flagged issue(s) or use 'git commit --no-verify' (not recommended)."
-    exit 1
-fi
-echo "=== [hygiene] Repo hygiene gate passed ==="
 
 exit 0

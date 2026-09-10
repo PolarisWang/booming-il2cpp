@@ -1,0 +1,67 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.ComponentModel.Container::Add:System.Void(System.ComponentModel.IComponent)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.ComponentModel.Container::Add:System.Void(System.ComponentModel.IComponent,System.String)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.ComponentModel.Container::Add:System.Void(System.ComponentModel.IComponent,System.String)__Set1",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 2,
+    "subjectId": "System.ComponentModel.Container::Dispose:System.Void()__Set2",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.ComponentModel.Container::Remove:System.Void(System.ComponentModel.IComponent)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

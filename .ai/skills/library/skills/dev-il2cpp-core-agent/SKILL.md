@@ -50,8 +50,8 @@ Dispatcher 接收任务
    P1（最高）= 性能最优 > P2 = 方案完美性 > P3 = HotUpdate 支持
 
 2. 健康自检（断路器）:
-   a. 列出 .ai/skills/library/skills/ 下所有 dev-il2cpp-*-expert 目录
-   b. 与 <code>.ai/skills/discovery/expert-registry.json</code> 对比，检查是否有 Expert 存在但未注册
+   a. 列出 skills/library/skills/ 下所有 dev-il2cpp-*-expert 目录
+   b. 与 <code>skills/discovery/expert-registry.json</code> 对比，检查是否有 Expert 存在但未注册
    c. 检查 registry 中 domains 字段是否为空或只有退化条目
    d. 结果:
       - ✅ 正常 → 继续
@@ -87,16 +87,6 @@ Dispatcher 接收任务
 
 循环执行直到待办清单为空。单域当前 Agent 自行实现，多域走 Workflow 委托。
 
-**三路径前置分类判定（先于分发）：**
-
-对每个 todo 子任务，先按 `expert-registry.json` 的 `task_classification` 分类到 spike / bounded / architectural：
-
-- **spike** → `brainstorm: bypass`：不强制完整 brainstorm，直接查证并报告结论；临时产物标 throwaway。
-- **bounded** → `brainstorm: lightweight`：对话内短设计 + 用户明确批准后直接实现，走 `STATUS.md` 轻量维护；审批门槛与架构级一样硬。
-- **architectural** → `brainstorm: full`：必须先 `dev-brainstorm` 清零执行前问题、拿到用户确认，再进入本 dispatch。
-
-**单向棘轮**：执行中发现隐藏复杂度必须升级分类（bounded→architectural），永不中途降级；“拿轻 label 逃避”即取更重路径。分类结果与决策写入 `.claude/.classified` 与当前任务 `STATUS.md`。
-
 ```
 todo = [子任务清单]       ← 初始 = 阶段 2 的输出
 round = 0
@@ -111,7 +101,7 @@ while todo 非空:
   if domains == 1:
     ── 单域: 当前 Agent 自行实现
     expert = 从 expert-registry.json 匹配 Expert 名
-    skill_md = 读取 .ai/skills/library/skills/{expert}/SKILL.md
+    skill_md = 读取 skills/library/skills/{expert}/SKILL.md
 
     // 注入领域知识到当前上下文
     读取 SKILL.md → 提取领域边界、已知约束、执行流程
@@ -149,7 +139,7 @@ MAX_ROUNDS = 5（默认）
 #### 检测与触发
 
 ```
-registry 无匹配 → 记录到 .ai/skills/.unknown-domains.json:
+registry 无匹配 → 记录到 skills/.unknown-domains.json:
   {
     "domain": "ci-cd",
     "first_seen": "2026-06-11",
@@ -191,9 +181,9 @@ Step 2: 3 个独立 Jury Agent 并行审查（Workflow 委托）
 Step 3: 汇总裁决
 
   ≥2/3 PASS → 注册:
-    1. 写 .ai/skills/library/skills/dev-il2cpp-{domain}-expert/SKILL.md
-    2. 更新 .ai/skills/discovery/expert-registry.json（追加新行）
-    3. 更新 .ai/skills/.unknown-domains.json → status=registered
+    1. 写 skills/library/skills/dev-il2cpp-{domain}-expert/SKILL.md
+    2. 更新 expert-registry.json（追加新行）
+    3. 更新 skills/.unknown-domains.json → status=registered
     4. 当前轮继续用新 skill 处理子任务
 
   <2/3 PASS → 拒绝:
@@ -245,7 +235,7 @@ L3（完整 — 翻译路径变更/AOT 输出变更/ABI 修改/多域修改）:
 
 ## Expert 路由
 
-域编号 → Expert 名、关键词 → Expert 名、子控制器分组的**完整映射**统一在 `.ai/skills/discovery/expert-registry.json` 中定义，本文不重复。
+域编号 → Expert 名、关键词 → Expert 名、子控制器分组的**完整映射**统一在 `skills/discovery/expert-registry.json` 中定义，本文不重复。
 
 拓扑结构（完整映射见 expert-registry.json）：
 

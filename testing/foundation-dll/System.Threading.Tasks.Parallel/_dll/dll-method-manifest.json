@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "generatedAt": "2026-06-02T02:15:41.6200227Z",
+  "totalMethods": 8,
+  "methods": [
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelFork:System.Void(System.Int32,System.Int32,System.Int32)",
+      "namespace": "System.Threading.Tasks",
+      "declaringType": "System.Threading.Tasks.ParallelEtwProvider",
+      "methodName": "ParallelFork",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Int32",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelInvokeBegin:System.Void(System.Int32,System.Int32,System.Int32,System.Threading.Tasks.ParallelEtwProvider+ForkJoinOperationType,System.Int32)",
+      "namespace": "System.Threading.Tasks",
+      "declaringType": "System.Threading.Tasks.ParallelEtwProvider",
+      "methodName": "ParallelInvokeBegin",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Int32",
+        "System.Int32",
+        "System.Threading.Tasks.ParallelEtwProvider+ForkJoinOperationType",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelInvokeEnd:System.Void(System.Int32,System.Int32,System.Int32)",
+      "namespace": "System.Threading.Tasks",
+      "declaringType": "System.Threading.Tasks.ParallelEtwProvider",
+      "methodName": "ParallelInvokeEnd",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Int32",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelJoin:System.Void(System.Int32,System.Int32,System.Int32)",
+      "namespace": "System.Threading.Tasks",
+      "declaringType": "System.Threading.Tasks.ParallelEtwProvider",
+      "methodName": "ParallelJoin",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Int32",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelLoopBegin:System.Void(System.Int32,System.Int32,System.Int32,System.Threading.Tasks.ParallelEtwProvider+ForkJoinOperationType,System.Int64,System.Int64)",
+      "namespace": "System.Threading.Tasks",
+      "declaringType": "System.Threading.Tasks.ParallelEtwProvider",
+      "methodName": "ParallelLoopBegin",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Int32",
+        "System.Int32",
+        "System.Threading.Tasks.ParallelEtwProvider+ForkJoinOperationType",
+        "System.Int64",
+        "System.Int64"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider::ParallelLoopEnd:System.Void(System.Int32,System.Int32,System.Int32,System.Int64)",
+      "namespace": "System.Threading.Tasks",
+      "declaringType": "System.Threading.Tasks.ParallelEtwProvider",
+      "methodName": "ParallelLoopEnd",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Int32",
+        "System.Int32",
+        "System.Int64"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+      "namespace": "System.Threading.Tasks",
+      "declaringType": "System.Threading.Tasks.ParallelLoopState",
+      "methodName": "Break",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()",
+      "namespace": "System.Threading.Tasks",
+      "declaringType": "System.Threading.Tasks.ParallelLoopState",
+      "methodName": "Stop",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    }
+  ],
+  "namespaces": {
+    "System.Threading.Tasks": {
+      "methodCount": 8
+    }
+  }
+}

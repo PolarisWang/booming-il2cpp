@@ -1,0 +1,27 @@
+{
+  "chunkSlug": "global-ns",
+  "declaredMethods": 23,
+  "coveredMethods": 29,
+  "missingMethods": 11,
+  "coveragePct": 100.0,
+  "namespaceGaps": {
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComImportInteropInterfaceDetailsStrategy": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    },
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate": {
+      "declared": 5,
+      "covered": 0,
+      "gap": 5,
+      "gapPct": 100.0
+    },
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.DefaultIUnknownInterfaceDetailsStrategy": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    }
+  }
+}

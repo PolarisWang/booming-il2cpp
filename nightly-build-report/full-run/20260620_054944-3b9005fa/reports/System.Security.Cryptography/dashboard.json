@@ -1,0 +1,64 @@
+{
+  "assemblyName": "System.Security.Cryptography",
+  "timestamp": "2026-06-20T05:49:43",
+  "summary": {
+    "chunks": 3,
+    "chunksVerified": 3,
+    "chunksWithValueWarnings": 0,
+    "chunksWithMetaMismatch": 0,
+    "factPassRate": 99.8,
+    "totalBenchmarkedMethods": 2425,
+    "aggregatePerformance": {
+      "meanDurationMs": 0.16191852555266648,
+      "meanOpsPerSecond": 322337682.0411615,
+      "aggregateMeanCv": 0.059893283943172206
+    },
+    "hotupdate": {
+      "chunksWithPatchData": 0,
+      "chunksPatchFailed": 3,
+      "chunksPatchSkippedNoMethods": 0,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 2425,
+      "totalFailed": 0,
+      "skipBreakdown": {}
+    },
+    "memory": {
+      "totalAllocatedBytes": 11497728.0,
+      "meanAllocatedPerChunk": 3832576.0,
+      "chunksWithAllocData": 3
+    },
+    "coverage": {
+      "overallPct": 99.8,
+      "chunksWithGaps": 0
+    },
+    "benchmarkComparison": {
+      "methodsAnalyzed": 1605,
+      "methodsWithNet8": 1539,
+      "chaosAotVsNet8": {
+        "mean": -149.36,
+        "median": -212.35,
+        "min": -219.13,
+        "max": -16.6,
+        "p25": -215.74,
+        "p75": -114.47
+      },
+      "chaosJitVsNet8": {
+        "mean": -204.41,
+        "median": -233.56,
+        "min": -344.52,
+        "max": -35.15,
+        "p25": -289.04,
+        "p75": -134.35
+      },
+      "net10VsNet8": {
+        "mean": -2.82,
+        "median": 0.0,
+        "min": -8.45,
+        "max": 0.0,
+        "p25": -4.22,
+        "p75": 0.0
+      },
+      "highValueMethods_betterThanNet8": 73.0
+    }
+  }
+}

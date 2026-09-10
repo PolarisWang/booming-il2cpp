@@ -1,19 +1,8 @@
 #ifndef CHAOS_IL2CPP_COMMON_ASYNC_H_
 #define CHAOS_IL2CPP_COMMON_ASYNC_H_
 
-// Canonical Continuation/Race-safe AsyncTask contract.
-//
-// AUTHORITATIVE SOURCE: src/native/common/chaos/async.h (included by
-// runtime-core/task_runner.cpp and all runtime-core threading/common tests).
-// This file is a MIRROR of that canonical header, maintained by hand for subject
-// fixture TUs that may need the same contract without linking runtime_core.
-// KEEP THE TWO IDENTICAL: any protocol change (continuation register/fire,
-// mem-orders) must be applied to BOTH. Before editing, copy from the canonical
-// source; do not let this copy drift.
-
 #include "ptr_tag.h"
 
-#include <atomic>
 #include <cstdint>
 #include <cstdlib>
 
@@ -33,40 +22,12 @@ inline void register_async_task_run_fn(AsyncTaskRunFn fn) noexcept {
     g_async_task_run_fn = fn;
 }
 
-struct AsyncTask;
-
-// Continuation callback = state machine resumption contract.  When a Task
-// completes (result or exception), exactly one registered continuation is
-// invoked so an awaiting state machine's MoveNext can re-enter.
-using AsyncContinueFn = void (*)(CHAOS_IL2CPP_INTPTR task_handle, void* ctx);
-
-// Optional dispatcher: runs a continuation off the completing thread (e.g.
-// thread pool).  Defaults to nullptr → continuations fire synchronously on
-// the completing thread (semantically correct, just not thread-pool queued).
-using AsyncDispatchContinuationFn = void (*)(AsyncContinueFn cb, void* ctx, CHAOS_IL2CPP_INTPTR task_handle);
-inline AsyncDispatchContinuationFn g_async_dispatch_continuation_fn = nullptr;
-inline void register_async_dispatch_continuation_fn(AsyncDispatchContinuationFn fn) noexcept {
-    g_async_dispatch_continuation_fn = fn;
-}
-
 struct AsyncTask
 {
-    // Result/exception payload set by completion setters.
     CHAOS_IL2CPP_INTPTR result = 0;
     CHAOS_IL2CPP_INTPTR exception = 0;
-
-    // Completion flags.  Atomic so a completing worker thread can publish
-    // completion that an awaiting thread observes safely.  Implicit conversion
-    // keeps existing plain `task->completed` reads/writes source-compatible.
-    std::atomic<bool> completed{false};
-    std::atomic<bool> faulted{false};
-
-    // Continuation (single-slot box): registered by AwaitUnsafeOnCompleted.
-    // fired exactly once on first completion.
-    AsyncContinueFn   continuation_cb = nullptr;
-    void*             continuation_ctx = nullptr;
-    std::atomic<bool> has_continuation{false};
-    std::atomic<bool> continuation_fired{false};
+    bool completed = false;
+    bool faulted = false;
 };
 
 inline AsyncTask* require_async_task(CHAOS_IL2CPP_INTPTR handle)
@@ -78,74 +39,8 @@ inline AsyncTask* require_async_task(CHAOS_IL2CPP_INTPTR handle)
     return reinterpret_cast<AsyncTask*>(handle);
 }
 
-/// Internal: deliver the registered continuation (box resumption) exactly once
-/// after the task completes.  Uses the global dispatcher when present, else
-/// invokes inline on the completing thread.
-///
-/// Ordering: checks has_continuation BEFORE claiming continuation_fired, so
-/// that if no continuation is registered yet, the registering thread's re-check
-/// path (async_task_on_completed) will be the one to deliver.  This prevents
-/// the lost-wakeup race: a completing thread claiming continuation_fired before
-/// has_continuation is set, then returning without firing, while the registerer
-/// later sees continuation_fired already true and also skips.
-inline void finish_async_task(CHAOS_IL2CPP_INTPTR handle) noexcept
-{
-    auto* task = require_async_task(handle);
-
-    // Check if a continuation is registered before claiming the fired flag.
-    // If no continuation is registered yet, the registering thread's re-check
-    // path (async_task_on_completed) will finish the delivery.
-    if (!task->has_continuation.load(std::memory_order_acquire)) return;
-
-    // A continuation is registered.  Claim the exactly-once fired flag.
-    if (task->continuation_fired.exchange(true, std::memory_order_acq_rel)) return;
-
-    // has_continuation (acquire) guarantees visibility of cb/ctx writes.
-    // The non-atomic reads below are safe because both has_continuation (acquire)
-    // and continuation_fired (exchange with acq_rel) order the cb/ctx stores.
-    AsyncContinueFn cb = task->continuation_cb;
-    void* ctx = task->continuation_ctx;
-    if (cb == nullptr) return;
-    if (g_async_dispatch_continuation_fn != nullptr) {
-        g_async_dispatch_continuation_fn(cb, ctx, handle);
-    } else {
-        cb(handle, ctx);
-    }
-}
-
-/// Register a continuation (state-machine MoveNext resumption).  If the task is
-/// already completed the continuation is delivered immediately, otherwise it is
-/// stored and fired once on completion.  Returns 1 on success, 0 on invalid args.
-inline CHAOS_IL2CPP_INTPTR async_task_on_completed(
-    CHAOS_IL2CPP_INTPTR handle, AsyncContinueFn cb, void* ctx) noexcept
-{
-    if (handle == static_cast<CHAOS_IL2CPP_INTPTR>(0) || cb == nullptr) return 0;
-    auto* task = require_async_task(handle);
-
-    // Fast path: already completed before any continuation registered.
-    if (task->completed.load(std::memory_order_acquire)) {
-        cb(handle, ctx);
-        return 1;
-    }
-
-    task->continuation_cb = cb;
-    task->continuation_ctx = ctx;
-    task->has_continuation.store(true, std::memory_order_release);
-
-    // Re-check after publishing: the completing thread may have finished between
-    // the first completed check and the store above.
-    if (task->completed.load(std::memory_order_acquire)) {
-        finish_async_task(handle);
-    }
-    return 1;
-}
-
 inline CHAOS_IL2CPP_INTPTR async_task_create()
 {
-    // Allocation: plain new.  GC-ownership of AsyncTask (so a live continuation
-    // can keep the Task rooted and unhungry) is deferred until the translator
-    // defines the full lifetime contract (Phase 2); this header is included by
-    // standalone subject/fixture TUs that may not link the GC allocator macros.
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NEW(AsyncTask){});
 }
 
@@ -161,23 +56,19 @@ inline CHAOS_IL2CPP_INTPTR async_task_builder_get_task(CHAOS_IL2CPP_INTPTR build
 
 inline void async_task_builder_set_result_raw(CHAOS_IL2CPP_INTPTR builder_ref, CHAOS_IL2CPP_INTPTR value)
 {
-    CHAOS_IL2CPP_INTPTR handle = async_task_builder_get_task(builder_ref);
-    auto* task = require_async_task(handle);
+    auto* task = require_async_task(async_task_builder_get_task(builder_ref));
     task->result = value;
     task->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-    task->faulted.store(false, std::memory_order_relaxed);
-    task->completed.store(true, std::memory_order_release);
-    finish_async_task(handle);
+    task->faulted = false;
+    task->completed = true;
 }
 
 inline void async_task_builder_set_exception(CHAOS_IL2CPP_INTPTR builder_ref, CHAOS_IL2CPP_INTPTR exception)
 {
-    CHAOS_IL2CPP_INTPTR handle = async_task_builder_get_task(builder_ref);
-    auto* task = require_async_task(handle);
+    auto* task = require_async_task(async_task_builder_get_task(builder_ref));
     task->exception = exception;
-    task->faulted.store(true, std::memory_order_relaxed);
-    task->completed.store(true, std::memory_order_release);
-    finish_async_task(handle);
+    task->faulted = true;
+    task->completed = true;
 }
 
 inline CHAOS_IL2CPP_INTPTR async_yield_create() noexcept
@@ -210,22 +101,16 @@ inline CHAOS_IL2CPP_INTPTR async_task_get_awaiter(CHAOS_IL2CPP_INTPTR task_handl
 inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_is_completed(CHAOS_IL2CPP_INTPTR awaiter_ref)
 {
     auto* task = require_async_task(*resolve_native_int_slot(awaiter_ref));
-    return task->completed.load(std::memory_order_acquire)
-        ? static_cast<CHAOS_IL2CPP_INTPTR>(1)
-        : static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    return task->completed ? static_cast<CHAOS_IL2CPP_INTPTR>(1) : static_cast<CHAOS_IL2CPP_INTPTR>(0);
 }
 
-/// Get the result of a completed (non-faulted) task.  If not yet completed, or
-/// faulted, returns 0 WITHOUT aborting: a faulted task's payload lives in
-/// task->exception and must be retrieved via async_task_awaiter_get_exception
-/// and propagated to managed code by the caller (C# await semantics: a faulted
-/// await throws, it does not read result or crash).  Callers branch on faulted
-/// BEFORE reading result.
 inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_result_raw(CHAOS_IL2CPP_INTPTR awaiter_ref)
 {
     auto* task = require_async_task(*resolve_native_int_slot(awaiter_ref));
-    if (task->faulted.load(std::memory_order_acquire)) return 0;  // result is undefined
-    if (!task->completed.load(std::memory_order_acquire)) return 0; // not done; caller must IsCompleted-gate
+    if (!task->completed || task->faulted)
+    {
+        CHAOS_IL2CPP_ABORT();
+    }
     return task->result;
 }
 

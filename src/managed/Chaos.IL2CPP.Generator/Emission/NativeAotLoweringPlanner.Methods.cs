@@ -199,22 +199,6 @@ public sealed partial class NativeAotLoweringPlanner
     private Dictionary<string, string?>? _staticFieldDeclarations;
 
     /// <summary>
-    /// Extra chaos_static_* symbol names discovered by scanning method body source,
-    /// for symbols that were emitted by lowered IR without registering in
-    /// <see cref="_staticFieldDeclarations"/>.  Emitted as extern "C" declarations
-    /// in the shared header so page-split TUs can reference them without C3861.
-    /// </summary>
-    private HashSet<string>? _extraStaticFieldSymbols;
-
-    /// <summary>
-    /// Extra chaos_mt_* symbol names discovered by scanning method body source,
-    /// for symbols like MethodTable references that were emitted by lowered IR
-    /// without registering the type in <see cref="_allEmittedTypeSubjectIds"/>.
-    /// Emitted as extern "C" MethodTable declarations in the shared header.
-    /// </summary>
-    private HashSet<string>? _extraMethodTableSymbols;
-
-    /// <summary>
     /// Value type subject IDs captured during EmitObjectModelDeclarations for
     /// chaos_valuetype_* forward declarations in the shared header.
     /// </summary>
@@ -416,15 +400,6 @@ public sealed partial class NativeAotLoweringPlanner
     /// Value is the return type's ABI carrier kind (needed to emit correct C++ return type).
     /// </summary>
     private readonly System.Collections.Concurrent.ConcurrentDictionary<string, AotCoreIrAbiCarrierKind> _emittedExternalRuntimeSymbols = new(System.StringComparer.Ordinal);
-
-    /// <summary>
-    /// Parallel to _emittedExternalRuntimeSymbols: maps each symbol to its ABI parameter
-    /// slot count.  Used by <see cref="BuildTypeDeclarationsCode"/> to emit fallback
-    /// static inline declarations with the correct number of parameters, preventing
-    /// C2660 (function does not take N arguments) when the call site passes arguments
-    /// but the stub declares zero.
-    /// </summary>
-    private readonly System.Collections.Concurrent.ConcurrentDictionary<string, int> _emittedExternalRuntimeSymbolParams = new(System.StringComparer.Ordinal);
 
     /// <summary>
     /// Cache for TryCreateExternalRuntimeHelperDefinition results (P0 optimization).
@@ -1058,14 +1033,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
         var allMethods = new NativeAotMethodTemplateModel[emitMethods.Count];
-        // Dynamic parallelism: use serial emission for small method sets
-        // (< 16 methods) where Parallel.For overhead (partitioning + thread
-        // scheduling + ThreadLocal state restore) exceeds the parallel benefit.
-        // Measured threshold: ~0.15ms/method overhead for Parallel.For itself
-        // on a 16-core machine.  16 methods × 0.15ms = ~2.4ms overhead vs
-        // ~19ms serial = 13% gain for the parallel path at 16 methods.
-        bool useSerial = _forceSerial || emitMethods.Count < 16;
-        if (useSerial)
+        if (_forceSerial)
         {
             for (int i = 0; i < emitMethods.Count; i++)
                 allMethods[i] = EmitOneMethod(emitMethods[i], aotReachableSubjectIds);
@@ -1079,81 +1047,10 @@ public sealed partial class NativeAotLoweringPlanner
         }
         List<NativeAotMethodTemplateModel> methods = new List<NativeAotMethodTemplateModel>(allMethods);
 
-        // Scan all method bodies for chaos_valuetype_* references that were
-        // not captured by ABI slot scanning (external value types like
-        // System.Data.CommandBehavior whose CarrierKindCode is NativeInt).
-        var extraValuetypes = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var m in methods)
-        {
-            if (string.IsNullOrEmpty(m.MethodSource)) continue;
-            int idx = 0;
-            while ((idx = m.MethodSource.IndexOf("chaos_valuetype_", idx, StringComparison.Ordinal)) >= 0)
-            {
-                int start = idx;
-                int end = m.MethodSource.IndexOfAny(new[] { ' ', '>', ',', ')', ';' }, idx + 16);
-                if (end < 0) end = m.MethodSource.Length;
-                extraValuetypes.Add(m.MethodSource.Substring(idx, end - idx));
-                idx = end;
-            }
-        }
-
-        // ── Comprehensive post-scan: catch chaos_* symbols referenced in method
-        // bodies but not registered in the header-generation data structures.
-        // This is the invariant behind C3861 in page-split (multi-TU) codegen:
-        // every symbol a page file references MUST have an extern declaration in
-        // the shared header, OR the build fails.  The invocation planning and
-        // object-model emission register the *common* symbols; lowered IR that
-        // emits a direct reference (static field address, external runtime call,
-        // boxed MethodTable, method-table cast) can bypass those paths.  On a
-        // single-TU build this is invisible (same TU sees the definition), which
-        // is why small chunks pass and CoreLib's page-split chunk fails.
-        var extraExternalRuntimeSymbols = new HashSet<string>(StringComparer.Ordinal);
-        var extraStaticFieldSymbols = new HashSet<string>(StringComparer.Ordinal);
-        var extraMethodTableSymbols = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var m in methods)
-        {
-            if (string.IsNullOrEmpty(m.MethodSource)) continue;
-            // chaos_external_runtime_* — external runtime catch-all fallback call.
-            ExtractCodegenSymbols(m.MethodSource, "chaos_external_runtime_", extraExternalRuntimeSymbols);
-            // chaos_static_* — static field address/load reference.
-            ExtractCodegenSymbols(m.MethodSource, "chaos_static_", extraStaticFieldSymbols);
-            // chaos_mt_* — MethodTable reference (AsTypeInfoHot, casts, type checks).
-            ExtractCodegenSymbols(m.MethodSource, "chaos_mt_", extraMethodTableSymbols);
-        }
-        // chaos_mt_* and chaos_static_* symbols that are ALREADY declared via their
-        // structured maps (method tables in _allEmittedTypeSubjectIds and static
-        // fields in _staticFieldDeclarations) must NOT be re-declared here — doing
-        // so produces C2371 (redefinition with different basic types) since the
-        // structured decl uses the real C++ type while our catch-all uses a generic
-        // CHAOS_IL2CPP_INTPTR/MethodTable.  Filter out any symbol that maps back to
-        // an existing structured declaration.
-        if (_allEmittedTypeSubjectIds is { Count: > 0 } && extraMethodTableSymbols.Count > 0)
-        {
-            // Build the set of chaos_mt_* symbols already declared by the object model.
-            var declaredMt = new HashSet<string>(StringComparer.Ordinal);
-            foreach (var tid in _allEmittedTypeSubjectIds)
-                declaredMt.Add(GetNativeMethodTableSymbol(tid));
-            extraMethodTableSymbols.ExceptWith(declaredMt);
-        }
-        if (_staticFieldDeclarations is { Count: > 0 } && extraStaticFieldSymbols.Count > 0)
-        {
-            var declaredStatic = new HashSet<string>(StringComparer.Ordinal);
-            foreach (var kvp in _staticFieldDeclarations)
-                declaredStatic.Add(GetNativeStaticFieldSymbol(kvp.Key));
-            extraStaticFieldSymbols.ExceptWith(declaredStatic);
-        }
-        if (extraExternalRuntimeSymbols.Count > 0 || extraStaticFieldSymbols.Count > 0 || extraMethodTableSymbols.Count > 0)
-        {
-            foreach (var sym in extraExternalRuntimeSymbols)
-                _emittedExternalRuntimeSymbols.TryAdd(sym, AotCoreIrAbiCarrierKind.NativeInt);
-            _extraStaticFieldSymbols = extraStaticFieldSymbols;
-            _extraMethodTableSymbols = extraMethodTableSymbols;
-        }
-
         _tPhase4 = _sw.ElapsedMilliseconds;
         long phase4Ms = _tPhase4 - _tPhase3;
-        if (useSerial)
-            System.Console.Error.WriteLine($"[PARALLEL] SERIAL mode ({emitMethods.Count} methods): {phase4Ms}ms ({phase4Ms / Math.Max(1, emitMethods.Count)} ms/method)");
+        if (_forceSerial)
+            System.Console.Error.WriteLine($"[PARALLEL] SERIAL mode: {emitMethods.Count} methods in {phase4Ms}ms ({phase4Ms / Math.Max(1, emitMethods.Count)} ms/method)");
         else
             System.Console.Error.WriteLine($"[PARALLEL] PARALLEL mode DOP={Math.Max(1, _maxParallelism)}: {emitMethods.Count} methods in {phase4Ms}ms ({phase4Ms / Math.Max(1, emitMethods.Count)} ms/method)");
 
@@ -1503,8 +1400,8 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Build A1 typed dispatch table header + A2 dispatch wiring source.
         // These are emitted as separate files (chaos_generated_module.h/.cpp) for
         // typed dispatch via ChaosRuntimeHost. Empty when methodsForLowering is empty.
-        var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix, extraValuetypes);
-        var moduleSource = BuildGeneratedModuleSource(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix, extraValuetypes);
+        var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix);
+        var moduleSource = BuildGeneratedModuleSource(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix);
 
         // Build include list — stable runtime headers go into chaos_pch.h
         // (precompiled header). Only conditional/per-run headers are here.
@@ -1648,7 +1545,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             Includes = includes_,
             ObjectModelCode = objectModelCode,
             ObjectModelCodeBuilder = objectModelCodeBuilder,
-            TypeDeclarationsCode = BuildTypeDeclarationsCode(SanitizeCppIdentifier(loweringPlan.AssemblyName), extraValuetypes),
+            TypeDeclarationsCode = BuildTypeDeclarationsCode(SanitizeCppIdentifier(loweringPlan.AssemblyName)),
             GenericRegistrationCode = genericRegistrationHelperCode,
             MethodDeclarations = methodDeclarations,
             Methods = allMethods,
@@ -1667,7 +1564,6 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             CodegenNamespace = SanitizeCppIdentifier(loweringPlan.AssemblyName),
             GeneratedModuleHeaderContent = moduleHeader,
             GeneratedModuleSourceContent = moduleSource,
-            ExtraValuetypeTypedefs = extraValuetypes,
         };
     }
 
@@ -1908,28 +1804,4 @@ public sealed partial class NativeAotLoweringPlanner
     /// Scan a single assembly's PE metadata for enum type definitions and
     /// add their subject IDs to the provided set.
     /// </summary>
-
-    /// <summary>
-    /// Extract all symbol names matching a given prefix from a C++ method body source.
-    /// Used by the comprehensive post-scan to discover chaos_* symbols that were
-    /// emitted by lowered IR but not registered in header-generation data structures.
-    /// </summary>
-    /// <param name="source">The C++ method body source code.</param>
-    /// <param name="prefix">The symbol prefix to search for (e.g. "chaos_external_runtime_").</param>
-    /// <param name="result">Set to add discovered symbol names to.</param>
-    private static void ExtractCodegenSymbols(string source, string prefix, HashSet<string> result)
-    {
-        if (string.IsNullOrEmpty(source)) return;
-        int idx = 0;
-        while ((idx = source.IndexOf(prefix, idx, StringComparison.Ordinal)) >= 0)
-        {
-            // Delimiters include '.' so that `chaos_mt_X.AsTypeInfoHot()` and
-            // `&chaos_mt_X` yield the bare symbol `chaos_mt_X`, not a fragment
-            // that captures the member-access suffix.
-            int end = source.IndexOfAny(new[] { ' ', '(', ';', ')', ',', '>', '[', '.', '&' }, idx + prefix.Length);
-            if (end < 0) end = source.Length;
-            result.Add(source.Substring(idx, end - idx));
-            idx = end;
-        }
-    }
 }

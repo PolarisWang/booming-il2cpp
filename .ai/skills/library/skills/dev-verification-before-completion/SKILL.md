@@ -38,19 +38,6 @@ python -m verification.entry_points.cli <family-slug> --assembly System.Private.
 4. 验证：确认输出真的支持该声明
 5. 只有这时，才能汇报结果
 
-### 自证闸门（meta-verification）——防"检查器静默失效"
-
-在依赖某个确定性检查器 / 门禁 / 扫描的结论来证明声明时，**额外**确认该检查器"真扫到了目标"，而非被空集或失效路径短路后假绿：
-
-```
-□ 若检查器按 staging/changed 文件集扫描 → 确认候选数 > 0（空集短路 = 检查没生效，不能算通过）
-□ 若检查器扫描某目录 → 确认该目录路径存在且 is_dir() 为真（hardcode 旧路径 → 静默 no-op，参考 check_layer_boundaries 曾踩过）
-□ 若检查器输出 0 违规 → 确认它确实遍历了目标（如"0 候选"≠"0 违规"）
-□ git hook 声称通过时 → 确认对应 hook 文件确实存在并被本提交触发，而非 --no-verify 绕过
-```
-
-引用任何 gate 通过作为依据时，要能回答："它真跑到了 N>0 个目标，还是被空输入 / 失效路径短路了？" 回答不了 → 不能拿它当"已验证"的证据。
-
 ## 常见错误
 
 - 用”应该””可能””看起来”代替验证结果
@@ -121,7 +108,7 @@ assert not failures, failures
   - `docs/verification/foundation-dll-audit/family-verification-claims.json`
   - `docs/verification/foundation-dll-audit/family-verification.json`
 - 典型命中点包括：
-  - `tests/e2e/verification/tooling/derive.py`
+  - `testing/foundation-dll/verification/tooling/derive.py`
   - `build/toolchains/run/testing/foundation_dll_audit_generator.py`
   - `Native Proof Detail`、family progress、tooltip detail
 - 命中时，默认需要执行 `run test inventory --json`，而不是只改 HTML 或局部 JSON
@@ -219,15 +206,15 @@ assert not failures, failures
 
 ## 进化系统健康检查（新增）
 
-如果本轮改动触及 `.ai/skills/` 下的技能内容或进化系统，完成前运行以下检查：
+如果本轮改动触及 skills/ 下的技能内容或进化系统，完成前运行以下检查：
 
 ```
 ## 进化系统验证清单
-[ ] python .ai/skills/tooling/learning/health_engine.py report --window 30
+[ ] python skills/tooling/learning/health_engine.py report --window 30
      — 确认无异常指标（LOW-TOOL、HIGH-FALLBACK 等）
-[ ] python .ai/skills/tooling/learning/evolve.py propose --dry-run
+[ ] python skills/tooling/learning/evolve.py propose --dry-run
      — 确认无意外进化提案
-[ ] python .ai/skills/tooling/verification/verify_skill_pipeline.py
+[ ] python skills/tooling/verification/verify_skill_pipeline.py
      — 确认入口桩、manifest、catalog、evolution 目录一致
 ```
 
@@ -235,16 +222,16 @@ assert not failures, failures
 
 ```powershell
 # 计算健康指标
-python .ai/skills/tooling/learning/health_engine.py compute --all --window 30
+python skills/tooling/learning/health_engine.py compute --all --window 30
 
 # 生成报告
-python .ai/skills/tooling/learning/health_engine.py report --window 30
+python skills/tooling/learning/health_engine.py report --window 30
 
 # 预览进化提案
-python .ai/skills/tooling/learning/evolve.py propose --dry-run
+python skills/tooling/learning/evolve.py propose --dry-run
 
 # 执行进化（需要 review 后 promote）
-python .ai/skills/tooling/learning/evolve.py auto-evolve
+python skills/tooling/learning/evolve.py auto-evolve
 ```
 
 ## Dashboard 数据约束检查（新增）
@@ -252,7 +239,7 @@ python .ai/skills/tooling/learning/evolve.py auto-evolve
 如果本轮改动触及以下任一文件，完成前必须运行 dashboard 数据约束检查：
 
 - `build/toolchains/run/testing/foundation_dll_audit_generator.py`
-- `tests/e2e/verification/tooling/derive.py`
+- `testing/foundation-dll/verification/tooling/derive.py`
 
 命中时执行以下检查：
 

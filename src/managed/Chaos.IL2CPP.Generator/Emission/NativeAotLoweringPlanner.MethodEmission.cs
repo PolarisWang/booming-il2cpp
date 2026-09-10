@@ -157,22 +157,17 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
-        // Compiler-generated display class constructors (<>c::.cctor/<>c::.ctor)
+        // Skip compiler-generated display class constructors (<>c::.cctor/<>c::.ctor)
         // — their newobj instructions cannot be lowered properly by the structured IR
-        // emitter, producing malformed C++ (auto chaos_value = return).  Route them to
-        // the interpreter fallback instead of emitting CHAOS_IL2CPP_FAIL() so the
-        // runtime dispatches through kChaosExternalRuntimeFnTable → InterpreterEntryDirect
-        // (when IL data is embedded) or returns the graceful fallback default (when not).
-        // Emitting FAIL here would crash any compiled caller that direct-calls the
-        // display-class constructor.
+        // emitter, producing malformed C++ (auto chaos_value = return).
         if (method.SubjectId is not null && method.SubjectId.Contains("<>c::", StringComparison.Ordinal))
         {
-            builder.AppendLine("// Interpreter-dispatch stub (display-class): " + method.SubjectId);
+            builder.AppendLine("// AOT-unreachable stub: " + method.SubjectId);
             var _fnDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
             builder.AppendLine(_fnDecl.Length > 0 && _fnDecl[^1] == ";"[0] ? _fnDecl[..^1] : _fnDecl);
             builder.AppendLine("{");
-            builder.AppendLine("    (void)ChaosExternalRuntimeFallback(\"" + EscapeCppStringLiteral(method.SubjectId) + "\");");
-            // Suppress MSVC C4715 for non-void return carriers (FAIL is not noreturn in CHECK config).
+            builder.AppendLine("    CHAOS_IL2CPP_FAIL();");
+            // Suppress MSVC C4715: CHAOS_IL2CPP_FAIL is not noreturn in CHECK config
             if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
             {
                 builder.AppendLine("    return {};");
@@ -208,44 +203,30 @@ public sealed partial class NativeAotLoweringPlanner
         {
             AsyncMethodCount++;
             var ak = ClassifyAsyncMethod(method);
-            if (ak == AsyncMethodKind.Complex)
+            if (ak == AsyncMethodKind.Complex) { AsyncInterpreterFallbackCount++; builder.AppendLine("// Complex async"); var fd = FormatMethodDeclaration(method, _sharedContextSymbols); builder.AppendLine(fd.Length > 0 && fd[^1] == ";"[0] ? fd[..^1] : fd); builder.AppendLine("{ CHAOS_IL2CPP_FAIL(); }"); return; }
+            AsyncCoroutineMethodCount++;
+            var abody = BuildAsyncStructuredBody(method);
+            var uid = GetAsyncUid(method);
+            var hr = ak == AsyncMethodKind.AsyncTaskOfT || ak == AsyncMethodKind.AsyncValueTaskOfT;
+            builder.Append(GenPromise(uid, hr));
+            builder.Append(GenCoro(uid, hr, method.SubjectId ?? "", abody ?? new IRSequence(new List<StructuredIRNode>())));
+            // Emit forwarding function with NativeSymbol name so the hotpatch
+            // dispatch table's direct_ptr resolves correctly.  The coroutine entry
+            // point is Entry_<uid>; we emit a thin wrapper that calls it and
+            // returns the raw int64 result.
+            var nativeSym = method.NativeSymbol;
+            if (!string.IsNullOrEmpty(nativeSym))
             {
-                // State machine whose resume graph cannot be lowered to a structured
-                // coroutine (no lowered awaiter pattern).  Route it to the interpreter
-                // fallback so it executes through kChaosExternalRuntimeFnTable →
-                // InterpreterEntryDirect instead of emitting CHAOS_IL2CPP_FAIL() (which
-                // would crash the matching async entry when its coroutine is resumed).
-                AsyncInterpreterFallbackCount++;
-                builder.AppendLine("// Complex async (interpreter-dispatch stub): " + method.SubjectId);
-                var fd = FormatMethodDeclaration(method, _sharedContextSymbols);
-                builder.AppendLine(fd.Length > 0 && fd[^1] == ";"[0] ? fd[..^1] : fd);
+                builder.Append("extern \"C\" CHAOS_IL2CPP_INT64 ");
+                builder.Append(nativeSym);
+                builder.AppendLine("(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept");
                 builder.AppendLine("{");
-                // IsAsyncStateMachineMoveNext guarantees SubjectId is non-null here.
-                builder.AppendLine("    (void)ChaosExternalRuntimeFallback(\"" + EscapeCppStringLiteral(method.SubjectId!) + "\");");
-                if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
-                {
-                    builder.AppendLine("    return {};");
-                }
+                builder.Append("    return Entry_");
+                builder.Append(uid);
+                builder.AppendLine("();");
                 builder.AppendLine("}");
-                return;
             }
-            AsyncStateMachineCount++;
-            // Phase 2 translator (ASYNC-P2-1): non-complex async state machine MoveNext.
-            // MoveNext is a value-this instance method on the >d__ struct.  Emit it via
-            // the normal structured IR path — the >d__ struct fields are picked up by
-            // ObjectModelEmission (field scanning handles ValueType-declared fields),
-            // and the MoveNext body (switch(state), stfld/ldfld, call, EH) is handled
-            // by the standard structured emission + linear emission.
-            // NOTE (ASYNC-P2-1): Builder/awaiter call resolution
-            // (SetResult → async_task_builder_set_result_raw,
-            // AwaitUnsafeOnCompleted → awaiter mapping) is Phase 2 segment B
-            // (deferred). When segment B is implemented, add a
-            // CHAOS_STATIC_ASSERT or #error in the generated C++ at the
-            // emission site to prevent silent misbehavior if the mapping
-            // is incomplete. Without this guard, unresolved builder/awaiter
-            // calls pass through to the standard structured emitter which
-            // may produce incorrect C++ (e.g., calling SetResult on a raw
-            // pointer instead of the native builder helper).
+            return;
         }
         IReadOnlyList<AotCoreIrInstructionArtifact> instructions = method.Instructions;
 
@@ -297,10 +278,9 @@ public sealed partial class NativeAotLoweringPlanner
         stringBuilder5.AppendLine(ref handler);
         EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
         EmitStaticInitializationPrologue(builder, method);
-        // Emit structured IR body FIRST to capture actual slot depth via
-        // slotContext, since ComputeMaxEvalStackDepth may undercount for
-        // generic methods where inlined code or StringId emission expands
-        // the effective depth.
+        // Emit structured IR body first to capture actual slot depth,
+        // since ComputeMaxEvalStackDepth may undercount for generic methods
+        // where inlined code or StringId emission expands the effective depth.
         var bodyBuilder = new System.Text.StringBuilder();
         _state.Value!.CurrentMethodNativeSymbol = method.NativeSymbol;
         _state.Value!.CurrentMethodArtifact = method;
@@ -314,30 +294,6 @@ public sealed partial class NativeAotLoweringPlanner
             _state.Value!.CurrentMethodNativeSymbol = null;
             _state.Value!.CurrentMethodArtifact = null;
         }
-        // Now emit safety net declarations based on actual slotContext peak values.
-        // The safety net is prepended to builder (before the body) but we emit it
-        // here since we need slotContext to determine the required counts.
-        // We use a separate StringBuilder and insert it into the main builder later.
-        if (usesStructuredSlots && slotContext != null)
-        {
-            // Tracked int slots (_sN): safety net covers up to peak depth
-            for (int __si = 0; __si < slotContext.MaxIntSlots; __si++)
-                builder.AppendLine("\tCHAOS_IL2CPP_INTPTR _s" + __si + "{};");
-            // Tracked int64 slots (_iN)
-            for (int __ii = 0; __ii < slotContext.MaxInt64Slots; __ii++)
-                builder.AppendLine("\tCHAOS_IL2CPP_INT64 _i" + __ii + "{};");
-            // Float64/double slots: safety net uses MaxFloat64Slots peak
-            // (typically 0-8, up to 16 for Vector<double> in numerics chunks)
-            for (int __di = 0; __di < slotContext.MaxFloat64Slots; __di++)
-                builder.Append("\tdouble _d" + __di + "{};");
-            if (slotContext.MaxFloat64Slots > 0) builder.AppendLine();
-            // Float32/float slots
-            for (int __fi = 0; __fi < slotContext.MaxFloat32Slots; __fi++)
-                builder.Append("\tfloat _f" + __fi + "{};");
-            if (slotContext.MaxFloat32Slots > 0) builder.AppendLine();
-            builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 32) chaos_eval_stack{};");
-            builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
-        }
         // Use the larger of ComputeMaxEvalStackDepth and the actual peak depth
         // tracked by StructuredSlotEmissionContext (the latter may be higher for
         // generic methods where StringId emission or inlined code expands depth).
@@ -345,7 +301,7 @@ public sealed partial class NativeAotLoweringPlanner
             evalStackSize = Math.Max(evalStackSize, slotContext.MaxIntSlots);
         if (usesStructuredSlots && slotContext != null)
         {
-			// Skip EmitStructuredSlotDeclarations - handled by preamble
+            EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots + 2, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, slotContext.MaxInt64Slots + 2, slotContext.MaxWideSlots, "	");
             // Pre-populate _s0 with 'this' for instance subject methods.
             // Structured IR building can drop the initial ldarg.0 when the first
             // basic block has no branches, leaving _s0 = 0 (the slot init value).
@@ -371,13 +327,26 @@ public sealed partial class NativeAotLoweringPlanner
                     builder.AppendLine($"	{varType} chaos_float_local_{slot}{{}};");
                 }
             }
-            // chaos_eval_stack is universal (declared above in safety net).
-            // Skip here to avoid C2371 redefinition.
+            // chaos_eval_stack is needed for EH (finally) condition tracking in ExceptionEmission.cs,
+            // even for structured IR methods. It tracks the finally condition state via:
+            //   chaos_eval_stack[--chaos_stack_top] = 1;  // finally entry
+            //   if (chaos_eval_stack[--chaos_stack_top])   // finally exit condition check
+            if (method.ExceptionRegionCount > 0)
+            {
+                builder.AppendLine("\tCHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 16) chaos_eval_stack{};");
+                builder.AppendLine("\tCHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
+            }
         }
         else if (!usesStructuredSlots && evalStackSize > 0)
         {
-            // chaos_eval_stack is universal (declared above in safety net).
-            // Skip here to avoid C2371 redefinition.
+            stringBuilder = builder;
+            StringBuilder stringBuilder6 = stringBuilder;
+            handler = new StringBuilder.AppendInterpolatedStringHandler(51, 1, stringBuilder);
+            handler.AppendLiteral("	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, ");
+            handler.AppendFormatted(evalStackSize);
+            handler.AppendLiteral(") chaos_eval_stack{};");
+            stringBuilder6.AppendLine(ref handler);
+            builder.AppendLine("	CHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
         }
         // Pre-try TypeInfo* fold evaluations (outside SEH frame)
         if (_state.Value!.PreTryFoldInitializers is { Count: > 0 })
@@ -399,9 +368,7 @@ public sealed partial class NativeAotLoweringPlanner
         bool _wrapInTryCatch = _isSubjectMethod && method.ExceptionRegionCount == 0 && (method.Instructions?.Any(i => i.Callee != null) == true);
         if (_wrapInTryCatch)
             builder.AppendLine("	try {");
-        // Strip inline decls from bodyBuilder — now unnecessary since
-        // EmitViaStructuredIR no longer calls EmitStructuredSlotDeclarations.
-        // The safety net (emitted above) handles all slot declarations.
+
         builder.Append(bodyBuilder);
         // Safety: close any unmatched { from structured IR lowering (e.g. failed newobj)
         // to prevent C2598/C2601 cascading to subsequent functions.

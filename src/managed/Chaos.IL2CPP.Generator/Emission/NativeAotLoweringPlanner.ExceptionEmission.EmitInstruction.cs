@@ -997,19 +997,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }
             case "ldloca":
                 {
-                    int slot = GetRequiredIntOperand(instruction);
-                    // For async-MoveNext box pointer slots (a GC-heap pointer to the state
-                    // machine), the slot's VALUE already is the durable address of the struct.
-                    // Emit the value, not &chaos_locals[N] (address of the stack slot), so the
-                    // box survives cross-thread continuation resumption.
-                    if (_state.Value!.AsyncBoxPointerLocalSlots is { } abp && abp.Contains(slot))
-                    {
-                        EmitEvalStackPush(builder, indentation, $"chaos_locals[{slot}]");
-                    }
-                    else
-                    {
-                        EmitEvalStackPush(builder, indentation, $"&chaos_locals[{slot}]");
-                    }
+                    EmitEvalStackPush(builder, indentation, $"&chaos_locals[{GetRequiredIntOperand(instruction)}]");
                     break;
                 }
             case "ldarga":
@@ -1227,7 +1215,7 @@ public sealed partial class NativeAotLoweringPlanner
                         {
                             builder.AppendLine($"{indentation}    if (chaos_is_gc_pointer(chaos_value_owner))");
                             builder.AppendLine($"{indentation}    {{");
-                            builder.AppendLine($"{indentation}        chaos_gc_dirty_card_dst_ref(reinterpret_cast<const void*>(chaos_value_owner), reinterpret_cast<const void*>(chaos_value));");
+                            builder.AppendLine($"{indentation}        chaos_gc_dirty_card(chaos_value_owner);");
                             builder.AppendLine($"{indentation}    }}");
                         }
                     }
@@ -1243,7 +1231,7 @@ public sealed partial class NativeAotLoweringPlanner
                         builder.AppendLine($"{indentation}    chaos_object->{GetNativeFieldMemberName(targetRef.SubjectId)} = chaos_value;");
                         if (fieldTypeId == null || !(PrimitiveValueTypeSubjectIds.Contains(fieldTypeId) || PrimitiveValueTypeSubjectIds.Contains("System.Private.CoreLib/" + fieldTypeId)))
                         {
-                            builder.AppendLine($"{indentation}    chaos_gc_dirty_card_dst_ref(chaos_object, reinterpret_cast<const void*>(chaos_value));");
+                            builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_object);");
                         }
                     }
 

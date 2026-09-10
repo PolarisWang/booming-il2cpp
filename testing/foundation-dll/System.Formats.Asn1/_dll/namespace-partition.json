@@ -1,0 +1,407 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Formats.Asn1",
+  "generatedAt": "2026-06-02T02:15:38.145204+00:00",
+  "partitionStrategy": "namespace",
+  "maxMethodsPerChunk": 500,
+  "totalChunks": 1,
+  "chunks": [
+    {
+      "slug": "system-formats-asn1",
+      "namespaces": [
+        "System.Formats.Asn1"
+      ],
+      "methodCount": 97,
+      "methods": [
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsConstructed:System.Formats.Asn1.Asn1Tag()",
+          "index": 0
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsPrimitive:System.Formats.Asn1.Asn1Tag()",
+          "index": 1
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::CalculateEncodedSize:System.Int32()",
+          "index": 2
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Decode:System.Formats.Asn1.Asn1Tag(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&)",
+          "index": 3
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Encode:System.Int32(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+          "index": 4
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::HasSameClassAndValue:System.Boolean(System.Formats.Asn1.Asn1Tag)",
+          "index": 5
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::TryDecode:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Formats.Asn1.Asn1Tag&,System.Int32&)",
+          "index": 6
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::TryEncode:System.Boolean(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&)",
+          "index": 7
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder+BitStringCopyAction::Invoke:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Byte,System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+          "index": 8
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::Clone:System.Formats.Asn1.AsnReader()",
+          "index": 9
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekContentBytes:System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()",
+          "index": 10
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekEncodedValue:System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()",
+          "index": 11
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekTag:System.Formats.Asn1.Asn1Tag()",
+          "index": 12
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte[](System.Int32&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 13
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBoolean:System.Boolean(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 14
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadCharacterString:System.String(System.Formats.Asn1.UniversalTagNumber,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 15
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEncodedValue:System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]()",
+          "index": 16
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedBytes:System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 17
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.Enum(System.Type,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 18
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadGeneralizedTime:System.DateTimeOffset(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 19
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadInteger:System.Numerics.BigInteger(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 20
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadIntegerBytes:System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]](System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 21
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitList:System.Collections.BitArray(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 22
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.Enum(System.Type,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 23
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNull:System.Void(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 24
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadObjectIdentifier:System.String(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 25
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadOctetString:System.Byte[](System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 26
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSequence:System.Formats.Asn1.AsnReader(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 27
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 28
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Boolean,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 29
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 30
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 31
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ThrowIfNotEmpty:System.Void()",
+          "index": 32
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadBitString:System.Boolean(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&,System.Int32&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 33
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadCharacterString:System.Boolean(System.Span`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Formats.Asn1.UniversalTagNumber,System.Int32&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 34
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadCharacterStringBytes:System.Boolean(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Formats.Asn1.Asn1Tag,System.Int32&)",
+          "index": 35
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 36
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 37
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadOctetString:System.Boolean(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 38
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32&,System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 39
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveCharacterStringBytes:System.Boolean(System.Formats.Asn1.Asn1Tag,System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]&)",
+          "index": 40
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 41
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 42
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64&,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 43
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::CopyTo:System.Void(System.Formats.Asn1.AsnWriter)",
+          "index": 44
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode:System.Int32(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+          "index": 45
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode:System.Byte[]()",
+          "index": 46
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::EncodedValueEquals:System.Boolean(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+          "index": 47
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::EncodedValueEquals:System.Boolean(System.Formats.Asn1.AsnWriter)",
+          "index": 48
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::GetEncodedLength:System.Int32()",
+          "index": 49
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopOctetString:System.Void(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 50
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSequence:System.Void(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 51
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSetOf:System.Void(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 52
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PushOctetString:System.Formats.Asn1.AsnWriter+Scope(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 53
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PushSequence:System.Formats.Asn1.AsnWriter+Scope(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 54
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PushSetOf:System.Formats.Asn1.AsnWriter+Scope(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 55
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Reset:System.Void()",
+          "index": 56
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::TryEncode:System.Boolean(System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32&)",
+          "index": 57
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBitString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Int32,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 58
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 59
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.String,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 60
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 61
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEncodedValue:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+          "index": 62
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.Enum,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 63
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 64
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 65
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 66
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 67
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 68
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteIntegerUnsigned:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 69
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Enum,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 70
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Collections.BitArray,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 71
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNull:System.Void(System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 72
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 73
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 74
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteOctetString:System.Void(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 75
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 76
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable`1[[System.Formats.Asn1.Asn1Tag, System.Formats.Asn1, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51]])",
+          "index": 77
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter+ArrayIndexSetOfValueComparer::Compare:System.Int32(System.ValueTuple`2[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ValueTuple`2[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+          "index": 78
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter+Scope::Dispose:System.Void()",
+          "index": 79
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter+StackFrame::Deconstruct:System.Void(System.Formats.Asn1.Asn1Tag&,System.Int32&,System.Formats.Asn1.UniversalTagNumber&)",
+          "index": 80
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.BMPEncoding::GetMaxByteCount:System.Int32(System.Int32)",
+          "index": 81
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.BMPEncoding::GetMaxCharCount:System.Int32(System.Int32)",
+          "index": 82
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.SetOfValueComparer::Compare:System.Int32(System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]],System.ReadOnlyMemory`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+          "index": 83
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetByteCount:System.Int32(System.Char[],System.Int32,System.Int32)",
+          "index": 84
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetByteCount:System.Int32(System.Char*,System.Int32)",
+          "index": 85
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetByteCount:System.Int32(System.String)",
+          "index": 86
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetByteCount:System.Int32(System.ReadOnlySpan`1[[System.Char, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+          "index": 87
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetBytes:System.Int32(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)",
+          "index": 88
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetBytes:System.Int32(System.Char*,System.Int32,System.Byte*,System.Int32)",
+          "index": 89
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetCharCount:System.Int32(System.Byte[],System.Int32,System.Int32)",
+          "index": 90
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetCharCount:System.Int32(System.Byte*,System.Int32)",
+          "index": 91
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetCharCount:System.Int32(System.ReadOnlySpan`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])",
+          "index": 92
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetChars:System.Int32(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)",
+          "index": 93
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetChars:System.Int32(System.Byte*,System.Int32,System.Char*,System.Int32)",
+          "index": 94
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetMaxByteCount:System.Int32(System.Int32)",
+          "index": 95
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.T61Encoding::GetMaxCharCount:System.Int32(System.Int32)",
+          "index": 96
+        }
+      ]
+    }
+  ]
+}

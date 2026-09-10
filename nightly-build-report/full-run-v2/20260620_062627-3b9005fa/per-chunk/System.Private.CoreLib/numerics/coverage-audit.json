@@ -1,0 +1,69 @@
+{
+  "chunkSlug": "numerics",
+  "declaredMethods": 439,
+  "coveredMethods": 75,
+  "missingMethods": 383,
+  "coveragePct": 17.1,
+  "namespaceGaps": {
+    "System.Private.CoreLib/System.Net.WebUtility": {
+      "declared": 8,
+      "covered": 0,
+      "gap": 8,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Numerics.BitOperations": {
+      "declared": 34,
+      "covered": 31,
+      "gap": 3,
+      "gapPct": 8.8
+    },
+    "System.Private.CoreLib/System.Numerics.Matrix3x2": {
+      "declared": 20,
+      "covered": 2,
+      "gap": 18,
+      "gapPct": 90.0
+    },
+    "System.Private.CoreLib/System.Numerics.Matrix4x4": {
+      "declared": 49,
+      "covered": 3,
+      "gap": 46,
+      "gapPct": 93.9
+    },
+    "System.Private.CoreLib/System.Numerics.Plane": {
+      "declared": 7,
+      "covered": 2,
+      "gap": 5,
+      "gapPct": 71.4
+    },
+    "System.Private.CoreLib/System.Numerics.Quaternion": {
+      "declared": 18,
+      "covered": 2,
+      "gap": 16,
+      "gapPct": 88.9
+    },
+    "System.Private.CoreLib/System.Numerics.Vector": {
+      "declared": 127,
+      "covered": 24,
+      "gap": 103,
+      "gapPct": 81.1
+    },
+    "System.Private.CoreLib/System.Numerics.Vector2": {
+      "declared": 58,
+      "covered": 3,
+      "gap": 55,
+      "gapPct": 94.8
+    },
+    "System.Private.CoreLib/System.Numerics.Vector3": {
+      "declared": 58,
+      "covered": 3,
+      "gap": 55,
+      "gapPct": 94.8
+    },
+    "System.Private.CoreLib/System.Numerics.Vector4": {
+      "declared": 60,
+      "covered": 3,
+      "gap": 57,
+      "gapPct": 95.0
+    }
+  }
+}

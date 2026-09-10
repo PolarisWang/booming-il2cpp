@@ -1,5 +1,5 @@
-#ifndef CHAOS_IL2CPP_JIT_ENGINE_H_
-#define CHAOS_IL2CPP_JIT_ENGINE_H_
+#ifndef CHAOS_IL2CPP_CODEGEN_CODE_GENERATOR_H_
+#define CHAOS_IL2CPP_CODEGEN_CODE_GENERATOR_H_
 
 // ── x64 native code generator ──────────────────────────────────────────────
 //
@@ -19,118 +19,19 @@
 #include "ISehHandler.h"
 #include "jit_method.h"
 #include "jit_helpers.h"
-#include "jit_reg_alloc.h"               // GraphColoringResult
-#include "code_buffer.h"                 // CodeBuffer
-#include "codegen_bridge.h"              // CodegenCallVirtArgs
-#include "ArchTraits.h"                  // ArchTraits, Arch
-#include "jit_codegen_stats.h"           // CodegenStats diagnostics (CHAOS_IL2CPP_CODEGEN_STATS gate)
-#include <chaos/profile.h>               // CHAOS_IL2CPP_PROFILE_SCOPE
-#include <chaos/pal/pal_preempt.h>       // PalCaptureReliable (register-window reliability gate)
-#include "../interpreter/ir_reg_alloc.h" // RegisterMethod, RegisterInstruction
-#if defined(__aarch64__)
-#include "Arm64Encoder.h" // Arm64Encoder
-#else
-#include "X64Encoder.h" // X64Encoder
-#endif
+#include "../interpreter/ir_reg_alloc.h"  // RegisterMethod, RegisterInstruction
 
 #include <cstdint>
 #include <cstddef>
-#include <vector>
 
 namespace chaos::il2cpp::jit {
-
-// Architecture register-file alias (AT), shared by the codegen TUs split out
-// of jit_engine.cpp (T2.4): maps AT::kScratchA/B/C etc. to the concrete
-// ArchTraits specialization for the target architecture.
-#if defined(__aarch64__)
-using AT = ArchTraits<Arch::kARM64>;
-#else
-using AT = ArchTraits<Arch::kX64>;
-#endif
-
-// ── Stack frame layout (shared by the codegen TUs).  Moved from
-// jit_engine.cpp during the T2.4 monolith split; all jit_codegen_*.cpp files
-// reference these offsets/frame-size constants.
-
-// ── Frame layout constants ─────────────────────────────────────────────────
-// Stack frame (relative to RSP/SP):
-//
-// x64 layout:
-//   [rsp + 0 .. 32)       = Win64 shadow space (for callee calls)
-//   [rsp + 32 .. 544)     = GPR file (virtual register 0..63, 512 bytes)
-//   [rsp + 544 .. 1568)   = FPR file (virtual register 64..95, 1024 bytes, 32-byte YMM slots)
-//   [rsp + 1568 .. 1632)  = CallVirtArgs struct
-//   Total: 1632 bytes
-//
-// ARM64 layout:
-//   [sp + 0 .. 512)       = GPR file (virtual register 0..63, 512 bytes)
-//   [sp + 512 .. 1024)    = FPR file (virtual register 64..95, 512 bytes, 16-byte Q slots)
-//   [sp + 1024 .. 1088)   = CallVirtArgs struct
-//   Total: 1088 bytes
-//
-// When LocAlloc is used, an additional reserve region is appended:
-//   [rsp + base_frame_end .. +8)       = localloc_bump (uint32_t counter)
-//   [rsp + base_frame_end+8 .. +4008)  = localloc_reserve (4KB scratch)
-//   localloc_extra = 4008 bytes
-
-#if defined(__aarch64__)
-static constexpr uint32_t kShadowSize = 0;   // No shadow space on ARM64
-static constexpr uint32_t kFprSlotSize = 16; // 128-bit NEON Q registers
-#else
-static constexpr uint32_t kShadowSize = 32;  // Win64 shadow space
-static constexpr uint32_t kFprSlotSize = 32; // YMM 256-bit slots (AVX)
-#endif
-
-static constexpr uint32_t kGprCount = interpreter::kGPRegisters; // 64
-static constexpr uint32_t kFprCount = interpreter::kFPRegisters; // 32
-static constexpr uint32_t kGprFileSize = kGprCount * 8;          // 512 bytes
-static constexpr uint32_t kFprFileSize = kFprCount * kFprSlotSize;
-static constexpr uint32_t kGprFileOff = kShadowSize;
-static constexpr uint32_t kFprFileOff = kGprFileOff + kGprFileSize;
-static constexpr uint32_t kCallVirtArgsOff = kFprFileOff + kFprFileSize;
-static constexpr uint32_t kFrameSize = kCallVirtArgsOff + sizeof(CodegenCallVirtArgs);
-
-// GcSlotMapV0 slot encoding reserves the top bit for the interior kind flag,
-// leaving 31 bits for the RSP/frame offset (up to ~2 GB) — effectively
-// unbounded for stack frames.
-static_assert(kFrameSize < (1u << 31), "GcSlotMapV0 offset must fit in 31 bits");
-
-// LocAlloc reserve: bump counter + scratch region
-static constexpr uint32_t kLocAllocReserveSize = 4096;
-static constexpr uint32_t kLocAllocBumpAndReserve = 8 + kLocAllocReserveSize; // 4104
-static constexpr uint32_t kMaxTlabInlineSize = 2048;                          // max bytes per TLAB inline allocation
-
-// VEX/AVX encoding toggle: true → use VEX 3-operand encoding for SIMD ops
-// ARM64 NEON does not use VEX — all operations are true 3-operand via arm64_encoder.h.
-#if defined(__aarch64__)
-static constexpr bool kUseVexEncoding = false;
-#else
-static constexpr bool kUseVexEncoding = true;
-#endif
-
-// Helper: RSP offset for a virtual GPR (shared by the codegen TUs).
-inline uint32_t GprOff(uint32_t vreg) noexcept {
-    return kGprFileOff + vreg * 8;
-}
-
-// Helper: RSP offset for a virtual FPR (vreg 64+; shared by the codegen TUs).
-inline uint32_t FprOff(uint32_t vreg) noexcept {
-    return kFprFileOff + (vreg - kGprCount) * kFprSlotSize;
-}
-
-// Register convention constants (mirrors ir_reg_alloc.h convention)
-// r0-r7   = argument registers (mapped from LdArg operand_index)
-// r8-r15  = local variable registers (mapped from LdLoc/StLoc operand_index)
-// r16+    = evaluation stack virtual registers
-static constexpr uint32_t kArgRegCount = 8;
-static constexpr uint32_t kLocalRegBase = 8;
 
 /// Compilation tier for JIT code generation.
 /// Tier 0 produces code quickly with no optimizations (stack-only register access,
 /// no liveness, no deopt metadata, no SEH).  Tier 1 is the full pipeline with
 /// graph coloring, optimizer, liveness analysis, deopt, SEH, and OSR.
 enum class CompileTier : uint8_t {
-    kQuick = 0, // Quick JIT (<50µs target): stack-only, no optimizer/liveness/deopt/SEH
+    kQuick = 0,  // Quick JIT (<50µs target): stack-only, no optimizer/liveness/deopt/SEH
     kFull = 1,  // Standard JIT: full pipeline with graph coloring + optimizations
 };
 
@@ -180,7 +81,7 @@ struct CompileConfig {
     // hotpatch tracking.  Indexed by current_instr_index_.
     // nullptr = no call cache available (T4 test paths without PatchMethod).
     const void* call_cache = nullptr;
-    uint32_t call_cache_count = 0;
+    uint32_t    call_cache_count = 0;
 
     // This method's own AOT metadata token.
     // Used by RegisterNativeCodeSection to associate the generated code with its token
@@ -194,20 +95,20 @@ struct CompileConfig {
     // ObjectRef, enabling precise GC slot maps for method arguments.
     // Indexed by `RegisterInstruction::imm::operand_index`.
     const uint8_t* arg_type_tags = nullptr;
-    uint32_t arg_type_count = 0;
+    uint32_t       arg_type_count = 0;
 
     // ── Precise GC: field type tags by field token (indexed by token value) ─
     // When non-null, LdFld/LdSFld type inference uses the per-field tag
     // instead of conservative ObjectRef, enabling precise GC slot maps.
     const uint8_t* field_type_tags = nullptr;
-    uint32_t field_type_count = 0;
+    uint32_t       field_type_count = 0;
 
     // ── Precise GC: method return type tags by instruction index ──────────
     // When non-null, Call/CallVirt/CallBridge/Calli type inference uses the
     // per-instruction return tag as a fallback when call_cache ret_tag is
     // unavailable.  Indexed by current_instr_index_.
     const uint8_t* method_ret_tags = nullptr;
-    uint32_t method_ret_tag_count = 0;
+    uint32_t       method_ret_tag_count = 0;
 
     // ── Per-instruction PIC data for inline monomorphic cache ──────────
     // Populated by entry_direct.cpp from the first PIC chain slot for each
@@ -216,7 +117,7 @@ struct CompileConfig {
     // monomorphic check + direct call instead of going through CodegenCallVirt.
     // Indexed by current_instr_index_.
     const PerInstrPicData* per_instr_pic = nullptr;
-    uint32_t per_instr_pic_count = 0;
+    uint32_t               per_instr_pic_count = 0;
 
     /// Compilation tier.  kFull (full pipeline) by default.
     CompileTier compile_tier = CompileTier::kFull;
@@ -252,364 +153,15 @@ struct CompileConfig {
 ///
 /// @return JitMethod containing the generated code + metadata,
 ///         or nullptr on failure (unsupported opcodes, allocation error).
-JitMethod* Compile(const interpreter::RegisterMethod& rm, const CompileConfig& config = CompileConfig()) noexcept;
+JitMethod* Compile(
+    const interpreter::RegisterMethod& rm,
+    const CompileConfig& config = CompileConfig()) noexcept;
 
 /// Check if Compile can handle this RegisterMethod.
 /// Returns false if the method contains unsupported opcodes.
-bool CanCompile(const interpreter::RegisterMethod& rm) noexcept;
+bool CanCompile(
+    const interpreter::RegisterMethod& rm) noexcept;
 
-// ── NativeCodeGenerator ─────────────────────────────────────────────
-// T4 machine-code generator.  Moved from jit_engine.cpp to jit_engine.h
-// as the T2.4 monolith-split precursor: the class declaration (with all
-// member state) lives here so the generated-code TUs (jit_codegen_*.cpp)
-// can share it; method definitions remain in jit_engine.cpp (and split
-// into per-module files during T2.4).
-//
-// ⚠️ Codegen-TU invariant (regression guard, T2.4): every identifier a
-// jit_codegen_*.cpp TU references that is NOT a class member MUST be
-// visible via this header (or an explicit include in that TU).  In
-// particular, any free `inline` helper used by more than one codegen TU
-// (e.g. PatchArm64Bcond/PatchArm64B in arm64_encoder.h) must live in a
-// header — an `inline` function defined in one .cpp and called from
-// another silently fails to compile on ARM64 only (undeclared identifier),
-// which x64 CI cannot catch.  Put shared inline helpers in a header.
+}  // namespace chaos::il2cpp::jit
 
-class NativeCodeGenerator {
-public:
-    NativeCodeGenerator(const interpreter::RegisterMethod& rm, const CompileConfig& config, ISehHandler& seh)
-        : rm_(rm), config_(config), encoder_(buf_), enc_(encoder_), seh_(seh) {
-        is_tier0_ = (config_.compile_tier == CompileTier::kQuick);
-    }
-
-    JitMethod* Generate() noexcept;
-
-private:
-    const interpreter::RegisterMethod& rm_;
-    CompileConfig config_;
-    CodeBuffer buf_;
-#if defined(__aarch64__)
-    Arm64Encoder encoder_; // Concrete ARM64 encoder writing to buf_
-#else
-    X64Encoder encoder_; // Concrete x64 encoder writing to buf_
-#endif
-    IEncoder& enc_; // Interface reference to encoder_
-    ISehHandler& seh_;
-
-    // Slot patch displacement offset within the call instruction placeholder.
-    // x64: call [rip+disp32] (FF 15 <dd dd dd dd>) — disp32 starts at byte 2.
-    // ARM64: LDR X17, #imm19 — imm19 field starts at byte 0 (bits [23:5]).
-#if defined(__aarch64__)
-    static constexpr uint32_t kSlotPatchDispOff = 0; // ARM64 LDR X17, #imm19 starts at byte 0 (imm19 in bits [23:5])
-#else
-    static constexpr uint32_t kSlotPatchDispOff = 2; // x64 call [rip+disp32]: FF 15 <dd dd dd dd>
-#endif
-
-    // When true, use quick JIT path: stack-only, no optimizer, no liveness, no deopt.
-    bool is_tier0_ = false;
-
-    // Per-instruction byte offset in the output buffer.
-    std::vector<uint32_t> instr_offsets_;
-
-    // Current instruction index in the Generate() loop.
-    uint32_t current_instr_index_ = 0;
-
-    // Branch patch records.
-    struct BranchPatch {
-        uint32_t patch_offset;
-        uint32_t target_instr;
-    };
-    std::vector<BranchPatch> branch_patches_;
-
-    // Deopt jump patch records.
-    struct DeoptJumpPatch {
-        uint32_t patch_offset;
-    };
-    std::vector<DeoptJumpPatch> deopt_jump_patches_;
-
-    // Cold-path jump patch records (for Throw/Rethrow).
-    // A short JMP rel32 at patch_offset redirects to the cold section
-    // appended after the epilogue so hot-path code stays contiguous.
-    struct ColdPatch {
-        uint32_t patch_offset; // offset of JMP rel32 displacement field
-    };
-    std::vector<ColdPatch> cold_patches_;
-
-    // Slot-based call tracking for call-site indirection.
-    // Records which call instructions should use slot-based (call [rip+off])
-    // emission instead of mov rax, imm64; call rax.
-    struct SlotPatch {
-        uint32_t patch_offset;    // buffer offset of the disp32 in call [rip+disp32]
-        uint32_t call_site_index; // index in call_sites_ for this call
-        void* target_fn;          // target function pointer to write into slot
-    };
-    std::vector<SlotPatch> slot_patches_;
-    uint32_t slot_count_ = 0;      // total number of slots reserved
-    uint32_t slot_count_used_ = 0; // number of slots actually used (≤ slot_count_)
-
-    // Jump table patch records (for Switch with >=4 cases).
-    struct JumpTablePatch {
-        uint32_t table_entry_offset; // buffer offset of this .int32 entry
-        uint32_t table_base;         // buffer offset of the table start
-        uint32_t target_instr;       // target instruction index
-    };
-    std::vector<JumpTablePatch> jump_table_patches_;
-
-    // Call site metadata
-    std::vector<CallSiteInfo> call_sites_;
-
-    // Deoptimization metadata
-    std::vector<DeoptEntry> deopt_entries_;
-    std::vector<DeoptValue> deopt_values_;
-
-    // GC points
-    std::vector<GcPoint> gc_points_;
-
-    // GC slot map entries (for GcSlotMapV0 serialization)
-    std::vector<uint32_t> slot_map_entries_;
-
-    // ── Precise GC: liveness analysis for slot map filtering ─────────────
-    // Per-instruction live-in bitmask (1 << vreg).  Set by Generate() when
-    // config_.enable_liveness is true.  Used by RecordGcPoint() to report
-    // only ObjectRef vregs that are actually live at each GC point.
-    std::vector<uint64_t> live_in_;
-
-    // When true, RecordGcPoint() filters by live_in_ at current_instr_index_.
-    // Default false so existing call sites (EmitSafepointPoll, EmitCallWithSpill)
-    // continue to report all ObjectRef vregs conservatively.
-    bool use_liveness_ = false;
-
-    // Tracks whether liveness was computed in Generate().  Used by
-    // RecordGcPoint() to decide whether live_in_ contains valid data.
-    bool liveness_computed_ = false;
-
-    // ── Conservative forward type inference ────────────────────────────
-    // Per-vreg type state used to determine which vregs hold ObjectRefs
-    // at GC safepoints.  Initialized to kTypeVoid in Generate().
-    static constexpr uint8_t kTypeVoid = 0;
-    static constexpr uint8_t kTypeInt32 = 1;
-    static constexpr uint8_t kTypeInt64 = 2;
-    static constexpr uint8_t kTypeFloat32 = 3;
-    static constexpr uint8_t kTypeFloat64 = 4;
-    static constexpr uint8_t kTypeObjectRef = 5;
-
-    std::vector<uint8_t> vreg_types_;
-    inline void SetVregType(uint32_t vreg, uint8_t type) noexcept {
-        if (vreg < vreg_types_.size())
-            vreg_types_[vreg] = type;
-    }
-    void PropagateTypes(const interpreter::RegisterInstruction& instr) noexcept;
-    // ───────────────────────────────────────────────────────────────────
-
-    // Position of the deopt_return shared epilogue label.
-    uint32_t deopt_return_pos_ = 0;
-
-    // ── Register caching V1 ──────────────────────────────────────────────
-    // Maps hot virtual registers to callee-saved GPRs.
-    // Dirty-bit tracking avoids unnecessary stack writes.
-#if defined(__aarch64__)
-    // ARM64: X19-X28 (all 10 callee-saved GPRs)
-    static constexpr uint8_t kCacheableRegs[10] = {19, 20, 21, 22, 23, 24, 25, 26, 27, 28};
-    static constexpr uint32_t kMaxCacheRegs = 10;
-    static constexpr uint32_t kPhysRegCount = 32;
-#else
-#if defined(_WIN32) || defined(_WIN64)
-    // Win64: R12-R15 (all callee-saved except RDI which is pushed
-    // explicitly in prologue for REP STOSQ zero-init)
-    static constexpr uint8_t kCacheableRegs[4] = {12, 13, 14, 15};
-    static constexpr uint32_t kMaxCacheRegs = 4;
-#else
-    // Linux SysV: R12-R15 only (RDI is caller-saved, excluded from cache)
-    static constexpr uint8_t kCacheableRegs[4] = {12, 13, 14, 15};
-    static constexpr uint32_t kMaxCacheRegs = 4;
-#endif
-    static constexpr uint32_t kPhysRegCount = 16;
-#endif
-    static constexpr uint8_t kNotCached = 0xFF;
-
-    // vreg → phys reg# (kNotCached if not cached)
-    uint8_t cached_x64_for_vreg_[interpreter::kGPRegisters];
-    // phys reg → vreg (kNotCached if not used as cache)
-    uint8_t phys_to_cached_vreg_[kPhysRegCount];
-    // Bit i set = cache slot i is in use (maps to kCacheableRegs[i])
-    uint32_t cached_slots_used_ = 0;
-    // Bit i set = cache slot i is dirty (needs spill)
-    uint32_t cached_dirty_mask_ = 0;
-    // Number of cacheable regs actually selected
-    uint32_t num_cache_regs_ = 0;
-    // Alignment adjustment (0 or 8 bytes) when num_cache_regs_ is odd
-    // Keeps RSP 16-byte aligned per Win64 ABI (x64 only — ARM64 STP is always 16 bytes).
-    int32_t frame_align_adj_ = 0;
-
-    // ── Graph-coloring register allocation (V2) ──────────────────────────
-    // Replaces V1 frequency-based caching with Chaitin-Briggs coloring.
-    // Results are mutually exclusive with V1: when active, cached_slots_used_=0.
-    GraphColoringResult gcr_;
-    bool has_graph_coloring_ = false;
-    // Callee-saved GPRs selected by graph coloring (subset of kCacheableRegs)
-    uint8_t callee_gpr_regs_[kMaxCacheRegs];
-    // phys reg → vreg (0xFF = not colored); indexed by physical register number
-    uint8_t phys_to_colored_vreg_[kPhysRegCount];
-    // Pointer to current callee-saved register list (callee_gpr_regs_ or kCacheableRegs)
-    const uint8_t* callee_saved_regs_ = kCacheableRegs;
-
-    // ── FPR (XMM) coloring ────────────────────────────────────────────────
-    uint8_t callee_xmm_regs_[10]; // XMM6-XMM15 max
-    uint8_t callee_xmm_fi_[10];   // FPR vreg index (fi) for each callee_xmm_regs_[slot]
-    uint32_t num_fpr_callee_ = 0;
-    int32_t xmm_save_size_ = 0;
-
-    // ── Prologue tracking (for .pdata/.xdata unwind info) ──────────────────
-    // Byte offsets from function entry for each prologue instruction.
-    // Set during prologue emission (lines ~2825-2833).
-    uint32_t prologue_push_offsets_[14] {};  // Offsets: [0]=STP FP/LR, [4..13]=cache reg STPs
-    uint32_t prologue_sub_rsp_offset_ = 0;   // Offset of sub rsp, K
-    uint32_t prologue_set_fpreg_offset_ = 0; // Offset of mov rbp, rsp
-    uint32_t prologue_total_bytes_ = 0;      // Total prologue size in bytes
-    uint8_t push_reg_nums_[11] {};           // Register numbers in push/STP order
-    uint32_t num_push_regs_ = 0;             // Number of push regs (3 + num_cache_regs_)
-    uint32_t prologue_sub_rsp_size_ = 0;     // K value in sub rsp, K
-
-    // .eh_frame DWARF CFI offset (Linux x64), 0 = not emitted.
-    uint32_t eh_frame_offset_ = 0;
-
-    // Pointer to JitMethod::stale for HotUpdate inline PIC stale checking.
-    // Set during Generate() before instruction emission; read by EmitInstruction
-    // to embed the address as an immediate for runtime stale flag checks.
-    void* stale_flag_ptr_ = nullptr;
-
-    // Error tracking: set by early-exit helpers; causes Generate() to return nullptr.
-    bool failed_ = false;
-
-    // ── Allocation-quality diagnostics (CHAOS_IL2CPP_CODEGEN_STATS gate) ────
-    // Cached once at Generate(); hot accessors read this single bool (always
-    // false in production) so the instrumentation is a predictable no-taken
-    // branch.  current_opc_ is the IROpCode being emitted by EmitInstruction,
-    // used to attribute stack traffic to the responsible opcode.
-    bool collect_stats_ = false;
-    uint32_t current_opc_ = 0;
-
-    // Bitmask of vregs colored by allocator but filtered (caller-saved).
-    // These vregs fall through to stack I/O, so the prologue zeros
-    // their stack slots to prevent garbage reads (e.g. Calli func_ptr).
-    uint64_t filtered_vreg_mask_ = 0;
-
-    // Bitmask of vregs colored to caller-saved x64 registers (R8-R11).
-    // These survive the callee-only filter — EmitCallWithSpill reloads
-    // them after each runtime helper call.
-    uint64_t caller_colored_mask_ = 0;
-
-    // Bitmask of FPR vregs colored to caller-saved XMM registers.
-    // Same strategy as caller_colored_mask_ but for XMM0-XMM5 on x64
-    // (V0-V7 on ARM64). EmitCallWithSpill reloads after each call.
-    uint64_t caller_fpr_colored_mask_ = 0;
-
-    // True if any IR instruction in the method can clobber caller-saved
-    // registers at runtime: a managed/runtime call (Call/CallVirt/CallBridge/
-    // Calli), a safepoint poll (enable_safepoint_polls), or an overflow-checked
-    // op (AddOvf/SubOvf/MulOvf/ConvOvf*) whose deopt path reads caller-colored
-    // vreg stack slots.  When false, caller-colored vregs never need the
-    // write-through in StoreGpr/StoreFpr — their value stays purely in the
-    // colored register (caller-saved) across the whole call-free method,
-    // eliminating the per-op stack roundtrip (T2.1 A1).
-    bool has_caller_clobber_ = true;
-
-    // Bitmask of GPR vregs whose live range crosses a call or safepoint.
-    // A caller-colored vreg in this mask must keep its stack slot current
-    // (write-through in StoreGpr) so EmitCallWithSpill can reload it and GC can
-    // scan it at the safepoint.  A caller-colored vreg NOT in this mask has a
-    // live range contained within call-free code: it can stay purely in the
-    // colored register with no stack write and no reload (per-vreg refinement
-    // of the coarse method-wide has_caller_clobber_ — CoreCLR LSRA-equivalent).
-    uint64_t cross_call_mask_ = 0;
-
-    // LocAlloc: extra frame bytes (bump counter + reserve) when method uses LocAlloc.
-    uint32_t localloc_extra_ = 0;
-
-    // Frame extension for tree-optimizer-created vregs.
-    // The GPR file area only covers vregs 0-63 (kGprCount * 8 = 512 bytes).
-    // Tree-created vregs start at 64; when they exceed kFrameSize, this
-    // extension shifts saved-register / XMM-save / localloc areas upward
-    // to prevent StoreGpr(vreg) from overwriting saved ret_buf at [SP+kFrameSize].
-    uint32_t frame_size_extra_ = 0;
-
-    void SelectCacheableRegs() noexcept;
-    // True when the physical GPR is a call-argument register: such a vreg's
-    // register is written by argument setup at a call site BEFORE the pre-call
-    // spill can run, so it must rely on store-side write-through (its stack slot
-    // records the value while the register still holds it).  Non-arg caller-
-    // saved vregs are preserved by SpillLiveColoredForCall and skip write-through.
-    static bool IsGprArgReg(uint8_t phys) noexcept {
-#if defined(__aarch64__)
-        return phys <= 7; // X0-X7
-#else
-        return phys == 1 || phys == 2 || phys == 8 || phys == 9; // RCX/RDX/R8/R9 (Win64)
-#endif
-    }
-    // 方案3/方案1 (cross-platform unify): cache the PAL's register-window
-    // capture-reliability gate.  True only on platforms where a preemptively
-    // suspended thread's registers can be captured reliably (Linux SA_SIGINFO);
-    // false on Windows (APC-park → no reliable window) and Apple/Android.
-    //
-    // When true, the codegen may SKIP the pre-call spill for GC-ref registers
-    // whose live value is recoverable from the register window — GC reads the
-    // physical registers via PalCaptureThreadContext instead of the stack slot.
-    // When false, the stack-slot flood is the floor and never under-retains.
-    // Cached once so the per-spill-decision hot path is a single load, not a
-    // call into the PAL.
-    static bool kReliableRegisterCapture() noexcept {
-        static const bool kReliable = chaos::il2cpp::pal::PalCaptureReliable();
-        return kReliable;
-    }
-    void SpillCachedRegs() noexcept;
-    void SpillGcRefCachedRegs() noexcept;
-    // 省写穿 (Phase 1): spill the colored GPRs actually live at the current
-    // call/clobber site to their fixed stack slots.  Arg-register-colored vregs
-    // (RCX/RDX/R8/R9) are excluded — argument setup has already written them,
-    // so they keep store-side write-through (see IsGprArgReg).  object_only=true
-    // spills just the ObjectRef-typed live vregs (for GC safepoint polling);
-    // false spills every live, non-arg colored vreg so deopt/GC can rebuild
-    // from the stack slot.  FPRs are not handled (64-bit liveness mask limit).
-    void SpillLiveColoredForCall(bool object_only) noexcept;
-    void EmitCallWithSpill(uint8_t reg) noexcept;
-    template <typename T>
-    uint32_t EmitRuntimeHelperCall(T* target_fn) noexcept {
-        return EmitRuntimeHelperCallImpl(reinterpret_cast<void*>(target_fn));
-    }
-    uint32_t EmitRuntimeHelperCallImpl(void* target_fn) noexcept;
-
-    void LoadGpr(uint8_t x64_reg, uint32_t vreg) noexcept;
-    void StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept;
-    void LoadFpr(uint8_t xmm_reg, uint32_t vreg) noexcept;
-    void StoreFpr(uint8_t xmm_reg, uint32_t vreg) noexcept;
-    void EmitSafepointPoll() noexcept;
-    void EmitInlineDirtyCard(uint8_t obj_reg) noexcept;
-    void EmitIntegerArithmetic(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept;
-    void EmitFloatingArithmetic(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept;
-    void EmitBitwise(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept;
-    void EmitShift(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2, int32_t imm) noexcept;
-    void ResolveBranches() noexcept;
-    bool EmitInstruction(const interpreter::RegisterInstruction& instr) noexcept;
-    bool EmitSimd(const interpreter::RegisterInstruction& instr, uint8_t simd_op, uint8_t elem_type,
-                  uint16_t simd_imm) noexcept;
-    void EmitDeoptSequence(uint32_t instr_pc, uint32_t osr_resume_pc = 0) noexcept;
-    // 精确 spill (T2.3): append DeoptValues for the GPR vregs LIVE at instr_pc
-    // and osr_resume_pc (if set) to deopt_values_, returning the value-count
-    // contributed.  Dead vregs are never read by the interpreter continuation,
-    // so their DeoptValue entries are omitted (shrinks the deopt table; FPR
-    // vregs >=64 stay conservative — unrepresentable in the 64-bit liveness mask).
-    uint32_t RecordDeoptValues(uint32_t instr_pc, uint32_t osr_resume_pc = 0) noexcept;
-    void RecordGcPoint(uint32_t native_offset) noexcept;
-
-    /// Returns true when an OOM or other unrecoverable error has occurred.
-    /// Emit helpers check buf_.failed() internally; this is a combined check
-    /// so Generate() can bail out early after any major emit section.
-    bool CheckFailed() noexcept {
-        if (buf_.failed())
-            failed_ = true;
-        return failed_;
-    }
-};
-
-} // namespace chaos::il2cpp::jit
-
-#endif // CHAOS_IL2CPP_JIT_ENGINE_H_
+#endif  // CHAOS_IL2CPP_CODEGEN_CODE_GENERATOR_H_

@@ -1,0 +1,49 @@
+{
+  "description": "Supplemental AOT coverage entries for methods AutoTestGenerator cannot probe: delegate Invoke/BeginInvoke/EndInvoke, internal class methods (SerializationFieldInfo, SurrogateForCyclicalReference), and ref/out parameter type mismatches.",
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "chunkSlug": "global-ns",
+  "entries": [
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.DeserializationEventHandler::Invoke:System.Void(System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationEventHandler::BeginInvoke:System.IAsyncResult(System.Runtime.Serialization.StreamingContext,System.AsyncCallback,System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationEventHandler::EndInvoke:System.Void(System.IAsyncResult)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationEventHandler::Invoke:System.Void(System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::GetCustomAttributes:System.Object[](System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::GetCustomAttributes:System.Object[](System.Type,System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::GetValue:System.Object(System.Object)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::IsDefined:System.Boolean(System.Type,System.Boolean)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationFieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateForCyclicalReference::GetObjectData:System.Void(System.Object,System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateForCyclicalReference::SetObjectData:System.Object(System.Object,System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::GetId:System.Int64(System.Object,System.Boolean&)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::HasId:System.Int64(System.Object,System.Boolean&)"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector&)"
+    }
+  ]
+}

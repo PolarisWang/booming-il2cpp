@@ -1,0 +1,178 @@
+{
+  "assemblyName": "System.Xml.ReaderWriter",
+  "timestamp": "2026-06-26T05:47:49",
+  "totalChunks": 4,
+  "totalBenchmarkedMethods": 613,
+  "aggregatePerformance": {
+    "meanDurationMs": 10.170680542863192,
+    "meanOpsPerSecond": 794850.3771444651,
+    "aggregateMeanCv": 0.053984086670794636
+  },
+  "chunkSummaries": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
+      }
+    },
+    {
+      "slug": "system-xml-schema",
+      "fact": {
+        "passed": 64,
+        "total": 193,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 120,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 51,
+        "iterations": 10000,
+        "meanDurationMs": 11.077327450980393,
+        "meanOpsPerSecond": 1011558.8498039217,
+        "minDurationMs": 6.5857,
+        "maxDurationMs": 27.0227,
+        "totalDurationMs": 564.9437,
+        "totalAllocatedBytes": 640000.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.05283729411764706,
+        "maxCv": 0.398955
+      },
+      "hotupdate": {
+        "passed": 51,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2998272,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-xml-xsl",
+      "fact": {
+        "passed": 129,
+        "total": 451,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 257,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 115,
+        "iterations": 7142,
+        "meanDurationMs": 8.245381739130435,
+        "meanOpsPerSecond": 839515.1857894737,
+        "minDurationMs": 0,
+        "maxDurationMs": 15.3907,
+        "totalDurationMs": 948.2189,
+        "totalAllocatedBytes": 7541952.0,
+        "meanSampleCount": 2.5,
+        "totalOutliers": 0,
+        "meanCv": 0.039431557894736846,
+        "maxCv": 0.339
+      },
+      "hotupdate": {
+        "passed": 0,
+        "failed": 0,
+        "allSemantic": true,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 3
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 3216896,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "xml",
+      "fact": {
+        "passed": 375,
+        "total": 411,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 1025,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 447,
+        "iterations": 3703,
+        "meanDurationMs": 11.189332438478747,
+        "meanOpsPerSecond": 533477.09584,
+        "minDurationMs": 0,
+        "maxDurationMs": 51.6347,
+        "totalDurationMs": 5001.6316,
+        "totalAllocatedBytes": 16826432.0,
+        "meanSampleCount": 2.5,
+        "totalOutliers": 0,
+        "meanCv": 0.069683408,
+        "maxCv": 0.334194
+      },
+      "hotupdate": {
+        "passed": 375,
+        "failed": 0,
+        "allSemantic": true,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 5
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 10794496,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

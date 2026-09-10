@@ -1,0 +1,93 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.ComponentModel.CultureInfoConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.ComponentModel.CultureInfoConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.ComponentModel.CultureInfoConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.ComponentModel.CultureInfoConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 4,
+    "setIndex": 0,
+    "subjectId": "System.ComponentModel.CultureInfoConverter::GetStandardValues:TypeConverter.StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 5,
+    "setIndex": 0,
+    "subjectId": "System.ComponentModel.CultureInfoConverter::GetStandardValuesExclusive:System.Boolean(System.ComponentModel.ITypeDescriptorContext)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 6,
+    "setIndex": 0,
+    "subjectId": "System.ComponentModel.CultureInfoConverter::GetStandardValuesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

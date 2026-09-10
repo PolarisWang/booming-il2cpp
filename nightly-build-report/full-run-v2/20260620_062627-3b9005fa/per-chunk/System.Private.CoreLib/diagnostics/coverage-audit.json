@@ -1,0 +1,69 @@
+{
+  "chunkSlug": "diagnostics",
+  "declaredMethods": 124,
+  "coveredMethods": 212,
+  "missingMethods": 40,
+  "coveragePct": 100.0,
+  "namespaceGaps": {
+    "System.Private.CoreLib/System.Collections.Generic.NonRandomizedStringEqualityComparer": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.ComponentModel.Win32Exception": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Diagnostics.Contracts.ContractException": {
+      "declared": 1,
+      "covered": 0,
+      "gap": 1,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Diagnostics.Debug": {
+      "declared": 36,
+      "covered": 29,
+      "gap": 7,
+      "gapPct": 19.4
+    },
+    "System.Private.CoreLib/System.Diagnostics.Debug+AssertInterpolatedStringHandler": {
+      "declared": 6,
+      "covered": 0,
+      "gap": 6,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Diagnostics.Debug+WriteIfInterpolatedStringHandler": {
+      "declared": 6,
+      "covered": 0,
+      "gap": 6,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Diagnostics.DebugProvider": {
+      "declared": 7,
+      "covered": 0,
+      "gap": 7,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Diagnostics.Debugger": {
+      "declared": 6,
+      "covered": 0,
+      "gap": 6,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Diagnostics.DiagnosticMethodInfo": {
+      "declared": 2,
+      "covered": 0,
+      "gap": 2,
+      "gapPct": 100.0
+    },
+    "System.Private.CoreLib/System.Diagnostics.Stopwatch": {
+      "declared": 8,
+      "covered": 6,
+      "gap": 2,
+      "gapPct": 25.0
+    }
+  }
+}

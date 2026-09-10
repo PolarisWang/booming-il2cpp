@@ -1,0 +1,93 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Xml.XmlResolver::GetEntity:System.Object(System.Uri,System.String,System.Type)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 0,
+    "setIndex": 1,
+    "subjectId": "System.Xml.XmlResolver::GetEntity:System.Object(System.Uri,System.String,System.Type)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Xml.XmlResolver::GetEntityAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Uri,System.String,System.Type)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Xml.XmlResolver::GetEntityAsync:System.Threading.Tasks.Task\u003CSystem.Object\u003E(System.Uri,System.String,System.Type)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Xml.XmlResolver::ResolveUri:System.Uri(System.Uri,System.String)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 1,
+    "subjectId": "System.Xml.XmlResolver::ResolveUri:System.Uri(System.Uri,System.String)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.Xml.XmlResolver::SupportsType:System.Boolean(System.Uri,System.Type)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

@@ -1,0 +1,77 @@
+# AOT Regression Gate
+#
+# Verifies AOT codegen compilation + smoke testing on PR and push to main.
+# Validates that AOT-generated C++ code compiles and key CoreLib families pass.
+
+name: AOT Regression Gate
+
+on:
+  pull_request:
+    paths:
+      - 'src/managed/Chaos.IL2CPP.Generator/**'
+      - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
+      - 'src/managed/Chaos.IL2CPP.Driver/**'
+      - 'testing/snapshots/**'
+      - 'testing/foundation-dll/System.Private.CoreLib/**'
+      - 'contracts/native/v0/**'
+  push:
+    branches: [main]
+    paths:
+      - 'src/managed/Chaos.IL2CPP.Generator/**'
+      - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
+      - 'src/managed/Chaos.IL2CPP.Driver/**'
+      - 'testing/snapshots/**'
+      - 'testing/foundation-dll/System.Private.CoreLib/**'
+      - 'contracts/native/v0/**'
+  workflow_dispatch:
+
+jobs:
+  aot-codegen:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore .NET dependencies
+        run: |
+          dotnet restore src/managed/Chaos.IL2CPP.Generator/
+          dotnet restore tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-aot-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: nuget-aot-${{ runner.os }}-
+
+      - name: Build Chaos.IL2CPP.Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      - name: Build Chaos.IL2CPP.Driver
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
+
+      - name: Run Snapshot Tests
+        run: dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/ --configuration Release --no-restore -v n
+
+      - name: Run AOT Smoke Check
+        run: |
+          python scripts/ci/aot-smoke.py
+
+      - name: Upload AOT Smoke Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aot-smoke-results-${{ matrix.os }}-${{ github.sha }}
+          path: aot-smoke-results/

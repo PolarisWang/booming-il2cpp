@@ -1,0 +1,82 @@
+{
+  "slug": "global-ns",
+  "methods": [
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable<System.Net.ServerSentEvents.SseItem<System.String>>,System.IO.Stream,System.Threading.CancellationToken)",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": 0.0014323652365236526,
+      "chaosJitMs": 0.0014280211208448337,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable<System.Net.ServerSentEvents.SseItem<System.Int32>>,System.IO.Stream,System.Action<System.Net.ServerSentEvents.SseItem<System.Int32>,System.Buffers.IBufferWriter<System.Byte>>,System.Threading.CancellationToken)",
+      "net8Ms": null,
+      "net10Ms": null,
+      "chaosAotMs": 2.9372937293729374e-06,
+      "chaosJitMs": 3.156126245049802e-06,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": null,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "missing_net8"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser<System.Int32>::Enumerate:System.Collections.Generic.IEnumerable<System.Net.ServerSentEvents.SseItem<System.Int32>>()",
+      "net8Ms": 1.4999999999999999e-05,
+      "net10Ms": 1.4999999999999999e-05,
+      "chaosAotMs": null,
+      "chaosJitMs": null,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": 0.0,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "completed",
+      "bottleneck": "",
+      "gcComparison": {
+        "net8AllocBytes": 73656,
+        "net8CollectionCount0": 0,
+        "net8HeapDelta": 77792
+      }
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser<System.Int32>::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable<System.Net.ServerSentEvents.SseItem<System.Int32>>(System.Threading.CancellationToken)",
+      "net8Ms": 1.9e-05,
+      "net10Ms": 1.9e-05,
+      "chaosAotMs": null,
+      "chaosJitMs": null,
+      "net8Error": false,
+      "highVariance": false,
+      "net10VsNet8Pct": 0.0,
+      "chaosAotVsNet8Pct": null,
+      "chaosJitVsNet8Pct": null,
+      "status": "completed",
+      "bottleneck": "",
+      "gcComparison": {
+        "net8AllocBytes": 73704,
+        "net8CollectionCount0": 0,
+        "net8HeapDelta": 77792
+      }
+    }
+  ],
+  "aggregate": {
+    "methodCount": 4,
+    "methodsWithNet8": 2,
+    "methodsBetterThanNet8": 0,
+    "net10VsNet8Pct": {
+      "mean": 0.0,
+      "median": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "p25": 0.0,
+      "p75": 0.0
+    }
+  }
+}

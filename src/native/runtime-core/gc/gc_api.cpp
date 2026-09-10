@@ -10,7 +10,6 @@
 #include "gc_old_gen.h"
 #include "gc_region.h"
 #include "gc_scheduler.h"
-#include "gc_config.h"
 #include "gc_stats.h"
 #include "gc_young_collector.h"
 #include "gc_bgc.h"
@@ -45,39 +44,6 @@ namespace {
 /// Set to true while HandleOomCondition is executing, checked on entry.
 thread_local bool tls_in_oom_handler = false;
 
-/// True only while HandleOomCondition is running the post-full-GC retry_alloc
-/// callback (Step 2).  Recovery paths consult this to relax gates that would
-/// otherwise block a genuine recovery after a full GC freed memory — most
-/// importantly the old-gen ExceedsHardLimit gate, whose estimated_heap_size_
-/// is monotonic and never shrinks after a collection, so it would keep
-/// blocking free-space reuse even though memory is available.  This flag is
-/// set ONLY around the retry callback, never on the normal allocation fast
-/// path, so recovery behavior is isolated from steady-state allocation.
-thread_local bool tls_in_oom_recovery = false;
-
-bool GcInOomRecovery() noexcept {
-    return tls_in_oom_recovery;
-}
-
-/// Align CoreCLR allocation.cpp:2063-2070 (OOOM attribution): distinguishes a
-/// TRUE memory-exhaustion OOM (a reserve/commit genuinely failed during this
-/// OOM escalation) from a transient/budget misreport.  Set when the emergency
-/// reserve also fails (i.e. we truly could not obtain memory), cleared on any
-/// successful allocation within the ladder.  Read-only in Step 4.
-static std::atomic<bool> s_recent_gc_mem_failure{false};
-
-/// Half-budget clamp for the OOM failure report (align CoreCLR
-/// allocation.cpp:2058-2061 oom_budget: reported size = min_alloc_budget/2).
-/// CRAG analog of dd_min_size(gen0)/2: derived from the (config-tunable)
-/// gen0/nursery minimum budget (GcConfig().MinNurserySize, default 64 KB) / 2,
-/// so the reported OOM size scales with the configured gen0 budget rather than
-/// a hardcoded constant.  Exposed as GcGetOomReportBudget() for testability.
-CHAOS_IL2CPP_SIZE GcGetOomReportBudget() noexcept {
-    CHAOS_IL2CPP_SIZE min_nursery = GcConfig().MinNurserySize;
-    if (min_nursery == 0) min_nursery = 64 * 1024;  // fallback: default gen0 min
-    return min_nursery / 2;
-}
-
 void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
                          CHAOS_IL2CPP_SIZE size) noexcept {
     // Re-entrancy guard: if called from within a GC promotion path,
@@ -89,24 +55,17 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
     }
     tls_in_oom_handler = true;
 
-    // Step 1: Try a blocking full STW GC.
-    //
-    // NOTE: We deliberately do NOT gate this on a pre-check of
-    // ExceedsHardLimit.  The estimated_heap_size_ is monotonic and never
-    // shrinks after a collection, so if the hard limit was already crossed,
-    // a pre-check would permanently suppress the recovery GC and the OOM
-    // would never be resolved even though a full GC frees memory that old-gen
-    // free lists can reuse WITHOUT growing the heap (that reuse only touches
-    // already-committed pages; see MarkSweepOldGen::Allocate recovery-bypass).
-    //
-    // The full GC resets the nursery bump pointer AND builds old-gen free
-    // lists.  Running it here is the only way the step-2 retry (which for
-    // nursery callers re-enters the nursery, and for old-gen callers reuses
-    // freed lists) has a chance to succeed.  True hard-limit enforcement is
-    // deferred to the allocation retry itself, where it can distinguish
-    // "reuse existing pages" from "carve genuinely new pages".
+    // Step 0: Hard limit guard — if the hard limit is already exceeded,
+    // skip the full GC retry.  Even after GC, the estimated heap size
+    // would still exceed the limit (old-gen free lists reuse space but
+    // don't reduce the heap size estimate).  Fall through to emergency
+    // reserve and OOM event.
+    bool hard_limit_exceeded = G_Scheduler().ExceedsHardLimit(size);
+
+    // Step 1: Try a blocking full STW GC (skip if hard limit exceeded).
     bool gc_ran = false;
-    if (!GcIsInNoGcRegion() && G_Scheduler().TryClaimGcSlot()) {
+    if (!hard_limit_exceeded &&
+        !GcIsInNoGcRegion() && G_Scheduler().TryClaimGcSlot()) {
         CHAOS_IL2CPP_LOG_WARN_M("GC_API", "OOM: triggering blocking full GC for size={0}",
             static_cast<unsigned long long>(size));
         uint32_t gen = threading::RequestGlobalSafepoint();
@@ -114,77 +73,31 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
         threading::ReleaseGlobalSafepoint(gen);
         GcAdvanceBgcCycle();
         gc_ran = true;
-    } else if (!GcIsInNoGcRegion() && G_Scheduler().GcSlotIsHeld()) {
-        // CoreCLR wait_for_gc_done alignment (a_state_retry_allocate):
-        // another thread claimed the GC slot and is in-flight with GC right
-        // now.  Wait for it to complete (SafepointPoll blocks in cooperative
-        // mode until the safepoint is released), then fall through to Step-2
-        // retry — the completed GC reset the nursery bump pointer and built
-        // old-gen free lists, so the post-GC retry can now succeed.  This
-        // prevents 50-concurrent-mutator OOM from falsely reporting
-        // true-mem-exhaustion when the pressure is transient (a concurrent
-        // recovery GC is already reclaiming).
-        threading::SafepointPoll();
     }
 
-    // Step 2: Retry allocation after GC.  Set the recovery flag around the
-    // callback so recovery-only relaxation in the allocator (old-gen hard
-    // limit bypass for free-list reuse, nursery re-entry) activates.  The
-    // flag is strictly thread-local and scoped to this callback — the normal
-    // allocation fast path never observes it.
+    // Step 2: Retry allocation after GC.
     if (retry_alloc) {
-        tls_in_oom_recovery = true;
         void* ptr = retry_alloc(retry_context);
-        tls_in_oom_recovery = false;
         if (ptr != nullptr) {
-            // Allocation succeeded — memory is available again; clear the
-            // attribution flag and leave provisional mode so subsequent
-            // allocations resume the low-latency/deferred shape.
-            s_recent_gc_mem_failure.store(false, std::memory_order_relaxed);
-            G_Scheduler().SetProvisionalMode(false);
             CHAOS_IL2CPP_LOG_INFO("GC_API", "OOM recovery: allocation succeeded after full GC");
             tls_in_oom_handler = false;
             return ptr;
         }
-    } else {
-        // Even without a caller retry, clear the flag so a nested retry-lambda
-        // across a boundary (e.g. an allocation that internally re-enters
-        // HandleOomCondition) never inherits the recovery state.
-        tls_in_oom_recovery = false;
     }
 
     // Step 3: Try the old-gen emergency reserve (protects finalizer thread).
     if (gc_ran) {
         void* reserve_ptr = G_OldGen().AllocateFromEmergencyReserve(size);
         if (reserve_ptr != nullptr) {
-            s_recent_gc_mem_failure.store(false, std::memory_order_relaxed);
-            G_Scheduler().SetProvisionalMode(false);
             CHAOS_IL2CPP_LOG_INFO("GC_API", "OOM recovery: allocated from emergency reserve");
             tls_in_oom_handler = false;
             return reserve_ptr;
         }
     }
 
-    // Step 4: All attempts failed — fire OOM event.  Enter provisional mode:
-    // subsequent GCs are forced blocking (never deferred to BGC) so memory is
-    // reclaimed promptly under pressure (align CoreCLR provisional degradation).
-    //
-    // Provisional-mode liveness: only enter provisional on a *persistent* OOM
-    // (a full GC ran and the retry still failed).  If instead we couldn't run
-    // a GC (already in a GC / NO_GC_REGION / no GC slot), the failure is
-    // transient — the outer scope's GC will complete and a later allocation
-    // re-enters recovery.  Entering provisional on that transient path would
-    // distort the low-latency deferral shape without reclaiming anything.
-    if (gc_ran) {
-        s_recent_gc_mem_failure.store(true, std::memory_order_relaxed);
-        G_Scheduler().SetProvisionalMode(true);
-    }
-    CHAOS_IL2CPP_SIZE report_size =
-        (size > GcGetOomReportBudget()) ? GcGetOomReportBudget() : size;
-    CHAOS_IL2CPP_LOG_ERROR_M("GC_API",
-        "OOM: all recovery attempts failed (<true-mem-exhaustion> requested={0} reported={1})",
-        static_cast<unsigned long long>(size),
-        static_cast<unsigned long long>(report_size));
+    // Step 4: All attempts failed — fire OOM event.
+    CHAOS_IL2CPP_LOG_ERROR_M("GC_API", "OOM: all recovery attempts failed for size={0}",
+        static_cast<unsigned long long>(size));
     GcEtwFireGcOom();
     tls_in_oom_handler = false;
     return nullptr;

@@ -144,12 +144,6 @@ extern "C" void RunMicrobench();
 // Hotupdate benchmark iteration count (set by --benchmark-iterations in main)
 static int g_benchmark_iterations = 0;
 
-// Benchmark protocol output stream. Defaults to stdout (back-compat); when the
-// harness passes --benchmark-out <file>, benchmark JSON is written to that
-// file instead of stdout so the protocol data is decoupled from the process's
-// console stream (logs go to stderr; machine data can go to a file).
-static FILE* g_benchmark_out = stdout;
-
 {{ if is_jit }}
 extern "C" void ChaosJitRegisterAll();
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
@@ -598,9 +592,9 @@ static int RunBenchmarkAllMode(int iterations) {
             }
 
             if (crashed) {
-                fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n",
+                printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n",
                        i);
-                fflush(g_benchmark_out);
+                fflush(stdout);
 #if defined(_WIN32)
                 __leave;
 #else
@@ -631,27 +625,27 @@ static int RunBenchmarkAllMode(int iterations) {
             chaos::il2cpp::runtime_core::chaos_gc_leave_no_gc_region();
 
             if (crashed) {
-                fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
+                printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
                        i, alloc_after - alloc_before);
             } else {
                 double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
                 double ops_per_sec = elapsed_ms > 0.0 ? (iterations / elapsed_ms) * 1000.0 : 0.0;
-                fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
+                printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
                        i, elapsed_ms, ops_per_sec, iterations, (long long)(alloc_after - alloc_before));
             }
-            fflush(g_benchmark_out);
+            fflush(stdout);
 #if defined(_WIN32)
         } __except(EXCEPTION_EXECUTE_HANDLER) {
             // Process-level crash caught (e.g. AV in no_gc_region, stack overflow).
             // Record the failure and continue with the next method.
-            fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"fatal crash\"}\n",
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"fatal crash\"}\n",
                    i);
-            fflush(g_benchmark_out);
+            fflush(stdout);
         }
 #endif
     }
-    fprintf(g_benchmark_out, "{\"summary\":{\"methodCount\":%d}}\n", kCount);
-    fflush(g_benchmark_out);
+    printf("{\"summary\":{\"methodCount\":%d}}\n", kCount);
+    fflush(stdout);
     return 0;
 }
 
@@ -680,9 +674,9 @@ static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
         }
 
         if (crashed) {
-            fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n",
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n",
                    i);
-            fflush(g_benchmark_out);
+            fflush(stdout);
             continue;
         }
 
@@ -709,18 +703,18 @@ static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
         chaos::il2cpp::runtime_core::chaos_gc_leave_no_gc_region();
 
         if (crashed) {
-            fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":%" PRId64 ",\"error\":\"managed exception\"}\n",
                    i, alloc_after - alloc_before);
         } else {
             double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
             double ops_per_sec = elapsed_ms > 0.0 ? (iterations / elapsed_ms) * 1000.0 : 0.0;
-            fprintf(g_benchmark_out, "{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
                    i, elapsed_ms, ops_per_sec, iterations, (long long)(alloc_after - alloc_before));
         }
-        fflush(g_benchmark_out);
+        fflush(stdout);
     }
-    fprintf(g_benchmark_out, "{\"summary\":{\"methodCount\":%d}}\n", end_idx - start_idx);
-    fflush(g_benchmark_out);
+    printf("{\"summary\":{\"methodCount\":%d}}\n", end_idx - start_idx);
+    fflush(stdout);
     return 0;
 }
 
@@ -885,25 +879,8 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         // Genuine semantic change (both paths succeed but return different values).
         // Only flag when a patch was actually applied — without patch data the
         // return value comparison is unreliable (void methods return garbage RAX).
-        // P0-C (false+-fix): additionally require the patched value to be in the
-        // sentinel range [0xBEEF0000, 0xBEEFFFFF] — the PatchDataExtractor rewrites
-        // Subject_N bodies to "ldc.i4 0xBEEF0000|idx; ret" (see PatchDataExtractor.cs
-        // L630-634).  A patched value in this range proves the interpreter executed
-        // the replacement body (not the original AOT body).  Without this range check,
-        // void methods whose baseline is garbage RAX and keep-native methods whose
-        // patched value is also garbage (different from baseline) would produce false
-        // semantic change — the "change" is just RAX noise, not a real patch application.
-        // The sentinel range [0xBEEF0000, 0xBEEFFFFF] is specific enough that a real
-        // return value collision is virtually impossible (the 0xBExxxxxx prefix is
-        // reserved for debug sentinels in the test framework).
         if (patch_ctx != nullptr && !baseline_caught[si] && !patched_caught &&
-            baseline_value[si] != patched_value &&
-            (patched_value < 0xBEEF0000LL || patched_value > 0xBEEFFFFFLL)) {
-            // Patched value is NOT in the sentinel range — this is a keep-native
-            // method or a void method with garbage RAX.  Do NOT count as semantic
-            // change (the baseline value is undefined for void methods).
-        } else if (patch_ctx != nullptr && !baseline_caught[si] && !patched_caught &&
-                   baseline_value[si] != patched_value) {
+            baseline_value[si] != patched_value) {
             semantic_changed_count++;
         }
     }
@@ -990,12 +967,6 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     printf("\"passedMethods\":%d,", semantic_passed);
     printf("\"failedMethods\":%d,", patched_assert_failed);
     printf("\"totalMethods\":%d,", kCount);
-    // P2-A: report the actual number of dispatch entries that were patched.
-    // This allows the Python gate to cross-check semantic_changed against
-    // activePatchCount — if semantic_changed > 0 but activePatchCount == 0,
-    // something is wrong (semantic change from a non-patch source).
-    int active_patch_count = (patch_ctx != nullptr) ? static_cast<int>(patch_ctx->method_count) : 0;
-    printf("\"activePatchCount\":%d,", active_patch_count);
     printf("\"allSemantic\":%s,", all_semantic ? "true" : "false");
     printf("\"allRevert\":%s,", all_revert ? "true" : "false");
     printf("\"semanticChangedCount\":%d,", semantic_changed_count);
@@ -1092,22 +1063,6 @@ int main(int argc, char* argv[]) {
         if (std::strcmp(argv[ai], "--benchmark-iterations") == 0 && ai + 1 < argc) {
             g_benchmark_iterations = atoi(argv[ai + 1]);
             if (g_benchmark_iterations < 0) g_benchmark_iterations = 0;
-            break;
-        }
-    }
-
-    // --benchmark-out <file>: route benchmark protocol JSON to a file instead of
-    // stdout (decouples machine data from the console stream). Closes any prior
-    // handle if present; on failure falls back to stdout (non-fatal).
-    for (int ai = 1; ai < argc; ai++) {
-        if (std::strcmp(argv[ai], "--benchmark-out") == 0 && ai + 1 < argc) {
-            FILE* f = std::fopen(argv[ai + 1], "w");
-            if (f != nullptr) {
-                if (g_benchmark_out != stdout) std::fclose(g_benchmark_out);
-                g_benchmark_out = f;
-            } else {
-                std::fprintf(stderr, "WARN: cannot open --benchmark-out %s; using stdout\n", argv[ai + 1]);
-            }
             break;
         }
     }
@@ -1317,40 +1272,6 @@ int main(int argc, char* argv[]) {
     ret = 1;
 
 shutdown:
-    // ── Interpreter profiling hook (项8 基建) ─────────────────────────────
-    // Dump the FastExecute opcode-frequency histogram + register-VM per-method
-    // cycles so an entry.exe --benchmark / --benchmark-all run in a profile
-    // build (CHAOS_IL2CPP_CONFIG_PROFILE → CHAOS_IL2CPP_PROFILE_ENABLED=1, or
-    // the separate CHAOS_IL2CPP_VM_PROFILER_ENABLED=1) exposes the interpreter's
-    // per-opcode distribution — the interpreter perf anchor the 2026-08-13
-    // review flagged as missing.  Fully compiled out unless a macro is on, so
-    // default/optimized builds are unaffected.
-    //
-    // NOTE: DumpFastExecuteOpcodeHistogram is in the chaos_interpreter lib,
-    // which is NOT linked by all profile builds (only families with interpreter-
-    // heavy subjects).  The GC profile data (ProfileRecord*, ProfileEmitJson)
-    // lives in chaos_runtime_core and is always available.  The histogram dump
-    // is disabled here to avoid link errors; it can be re-enabled once the
-    // profile-build cmake template guarantees chaos_interpreter linkage.
-    //
-    // The VM profiler (CHAOS_IL2CPP_VM_PROFILER_ENABLED) is also in
-    // chaos_interpreter and gated by its own macro, which is OFF in profile builds.
-#if 0
-#if CHAOS_IL2CPP_PROFILE_ENABLED
-    {
-        extern void chaos::il2cpp::runtime_core::DumpFastExecuteOpcodeHistogram() noexcept;
-        chaos::il2cpp::runtime_core::DumpFastExecuteOpcodeHistogram();
-    }
-#endif
-#if CHAOS_IL2CPP_VM_PROFILER_ENABLED
-    {
-        extern void chaos::il2cpp::interpreter::DumpProfilerToFile(const char* path) noexcept;
-        extern void chaos::il2cpp::interpreter::ResetProfiler() noexcept;
-        chaos::il2cpp::interpreter::DumpProfilerToFile(nullptr);  // nullptr → DumpAll() to stderr
-        chaos::il2cpp::interpreter::ResetProfiler();
-    }
-#endif
-#endif
     std::fflush(stdout);
 #if defined(_WIN32)
     TerminateProcess(GetCurrentProcess(), static_cast<DWORD>(ret));

@@ -1,0 +1,1303 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Diagnostics.DiagnosticSource",
+  "generatedAt": "2026-06-04T10:30:44.5324449Z",
+  "totalMethods": 105,
+  "methods": [
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "AddBaggage",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.String",
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddEvent:System.Diagnostics.Activity(System.Diagnostics.ActivityEvent)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "AddEvent",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.Diagnostics.ActivityEvent"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddException:System.Diagnostics.Activity(System.Exception,System.Diagnostics.TagList,System.DateTimeOffset)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "AddException",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.Exception",
+        "System.Diagnostics.TagList",
+        "System.DateTimeOffset"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddLink:System.Diagnostics.Activity(System.Diagnostics.ActivityLink)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "AddLink",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.Diagnostics.ActivityLink"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "AddTag",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.String",
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "AddTag",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.String",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Dispose:System.Void()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::EnumerateEvents:System.Diagnostics.Activity+Enumerator<System.Diagnostics.ActivityEvent>()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "EnumerateEvents",
+      "returnType": "System.Diagnostics.Activity+Enumerator<System.Diagnostics.ActivityEvent>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::EnumerateLinks:System.Diagnostics.Activity+Enumerator<System.Diagnostics.ActivityLink>()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "EnumerateLinks",
+      "returnType": "System.Diagnostics.Activity+Enumerator<System.Diagnostics.ActivityLink>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::EnumerateTagObjects:System.Diagnostics.Activity+Enumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "EnumerateTagObjects",
+      "returnType": "System.Diagnostics.Activity+Enumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetBaggageItem:System.String(System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "GetBaggageItem",
+      "returnType": "System.String",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetCustomProperty:System.Object(System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "GetCustomProperty",
+      "returnType": "System.Object",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetTagItem:System.Object(System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "GetTagItem",
+      "returnType": "System.Object",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetBaggage:System.Diagnostics.Activity(System.String,System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "SetBaggage",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.String",
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetCustomProperty:System.Void(System.String,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "SetCustomProperty",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.String",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetEndTime:System.Diagnostics.Activity(System.DateTime)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "SetEndTime",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.DateTime"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetIdFormat:System.Diagnostics.Activity(System.Diagnostics.ActivityIdFormat)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "SetIdFormat",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.Diagnostics.ActivityIdFormat"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetParentId:System.Diagnostics.Activity(System.Diagnostics.ActivityTraceId,System.Diagnostics.ActivitySpanId,System.Diagnostics.ActivityTraceFlags)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "SetParentId",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.Diagnostics.ActivityTraceId",
+        "System.Diagnostics.ActivitySpanId",
+        "System.Diagnostics.ActivityTraceFlags"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetParentId:System.Diagnostics.Activity(System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "SetParentId",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetStartTime:System.Diagnostics.Activity(System.DateTime)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "SetStartTime",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.DateTime"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetStatus:System.Diagnostics.Activity(System.Diagnostics.ActivityStatusCode,System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "SetStatus",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.Diagnostics.ActivityStatusCode",
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetTag:System.Diagnostics.Activity(System.String,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "SetTag",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.String",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Start:System.Diagnostics.Activity()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "Start",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Stop:System.Void()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.Activity",
+      "methodName": "Stop",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::Parse:System.Diagnostics.ActivityContext(System.String,System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityContext",
+      "methodName": "Parse",
+      "returnType": "System.Diagnostics.ActivityContext",
+      "parameters": [
+        "System.String",
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Diagnostics.ActivityContext)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityContext",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.String",
+        "System.Diagnostics.ActivityContext"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityContext",
+      "methodName": "TryParse",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.String",
+        "System.Boolean",
+        "System.Diagnostics.ActivityContext"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityEvent::EnumerateTagObjects:System.Diagnostics.Activity+Enumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityEvent",
+      "methodName": "EnumerateTagObjects",
+      "returnType": "System.Diagnostics.Activity+Enumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityLink::EnumerateTagObjects:System.Diagnostics.Activity+Enumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityLink",
+      "methodName": "EnumerateTagObjects",
+      "returnType": "System.Diagnostics.Activity+Enumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityListener::Dispose:System.Void()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityListener",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::AddActivityListener:System.Void(System.Diagnostics.ActivityListener)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySource",
+      "methodName": "AddActivityListener",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Diagnostics.ActivityListener"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySource",
+      "methodName": "CreateActivity",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.String",
+        "System.Diagnostics.ActivityKind"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySource",
+      "methodName": "CreateActivity",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.String",
+        "System.Diagnostics.ActivityKind",
+        "System.Diagnostics.ActivityContext",
+        "System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>",
+        "System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>",
+        "System.Diagnostics.ActivityIdFormat"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySource",
+      "methodName": "CreateActivity",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.String",
+        "System.Diagnostics.ActivityKind",
+        "System.String",
+        "System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>",
+        "System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>",
+        "System.Diagnostics.ActivityIdFormat"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::Dispose:System.Void()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySource",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::HasListeners:System.Boolean()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySource",
+      "methodName": "HasListeners",
+      "returnType": "System.Boolean",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.String",
+        "System.Diagnostics.ActivityKind"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.String",
+        "System.Diagnostics.ActivityKind",
+        "System.Diagnostics.ActivityContext",
+        "System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>",
+        "System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>",
+        "System.DateTimeOffset"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.String",
+        "System.Diagnostics.ActivityKind",
+        "System.String",
+        "System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>",
+        "System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>",
+        "System.DateTimeOffset"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset,System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySource",
+      "methodName": "StartActivity",
+      "returnType": "System.Diagnostics.Activity",
+      "parameters": [
+        "System.Diagnostics.ActivityKind",
+        "System.Diagnostics.ActivityContext",
+        "System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>",
+        "System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>",
+        "System.DateTimeOffset",
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CopyTo:System.Void(System.Span<System.Byte>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySpanId",
+      "methodName": "CopyTo",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Span<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateFromBytes:System.Diagnostics.ActivitySpanId(System.ReadOnlySpan<System.Byte>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySpanId",
+      "methodName": "CreateFromBytes",
+      "returnType": "System.Diagnostics.ActivitySpanId",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateFromString:System.Diagnostics.ActivitySpanId(System.ReadOnlySpan<System.Char>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySpanId",
+      "methodName": "CreateFromString",
+      "returnType": "System.Diagnostics.ActivitySpanId",
+      "parameters": [
+        "System.ReadOnlySpan<System.Char>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateFromUtf8String:System.Diagnostics.ActivitySpanId(System.ReadOnlySpan<System.Byte>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySpanId",
+      "methodName": "CreateFromUtf8String",
+      "returnType": "System.Diagnostics.ActivitySpanId",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateRandom:System.Diagnostics.ActivitySpanId()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySpanId",
+      "methodName": "CreateRandom",
+      "returnType": "System.Diagnostics.ActivitySpanId",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::ToHexString:System.String()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivitySpanId",
+      "methodName": "ToHexString",
+      "returnType": "System.String",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.String,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Add",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.String",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Add",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Collections.Generic.KeyValuePair<System.String,System.Object>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Clear:System.Void()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Clear",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Contains:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Contains",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Collections.Generic.KeyValuePair<System.String,System.Object>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::ContainsKey:System.Boolean(System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "ContainsKey",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][],System.Int32)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "CopyTo",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::GetEnumerator:System.Diagnostics.ActivityTagsCollection+Enumerator()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "GetEnumerator",
+      "returnType": "System.Diagnostics.ActivityTagsCollection+Enumerator",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Remove",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "Remove",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Collections.Generic.KeyValuePair<System.String,System.Object>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::TryGetValue:System.Boolean(System.String,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTagsCollection",
+      "methodName": "TryGetValue",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection+Enumerator::Dispose:System.Void()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTagsCollection+Enumerator",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection+Enumerator::MoveNext:System.Boolean()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTagsCollection+Enumerator",
+      "methodName": "MoveNext",
+      "returnType": "System.Boolean",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CopyTo:System.Void(System.Span<System.Byte>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTraceId",
+      "methodName": "CopyTo",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Span<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateFromBytes:System.Diagnostics.ActivityTraceId(System.ReadOnlySpan<System.Byte>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTraceId",
+      "methodName": "CreateFromBytes",
+      "returnType": "System.Diagnostics.ActivityTraceId",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateFromString:System.Diagnostics.ActivityTraceId(System.ReadOnlySpan<System.Char>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTraceId",
+      "methodName": "CreateFromString",
+      "returnType": "System.Diagnostics.ActivityTraceId",
+      "parameters": [
+        "System.ReadOnlySpan<System.Char>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateFromUtf8String:System.Diagnostics.ActivityTraceId(System.ReadOnlySpan<System.Byte>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTraceId",
+      "methodName": "CreateFromUtf8String",
+      "returnType": "System.Diagnostics.ActivityTraceId",
+      "parameters": [
+        "System.ReadOnlySpan<System.Byte>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateRandom:System.Diagnostics.ActivityTraceId()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTraceId",
+      "methodName": "CreateRandom",
+      "returnType": "System.Diagnostics.ActivityTraceId",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::ToHexString:System.String()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ActivityTraceId",
+      "methodName": "ToHexString",
+      "returnType": "System.String",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Dispose:System.Void()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DiagnosticListener",
+      "methodName": "IsEnabled",
+      "returnType": "System.Boolean",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean(System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DiagnosticListener",
+      "methodName": "IsEnabled",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean(System.String,System.Object,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DiagnosticListener",
+      "methodName": "IsEnabled",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.String",
+        "System.Object",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::OnActivityExport:System.Void(System.Diagnostics.Activity,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DiagnosticListener",
+      "methodName": "OnActivityExport",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Diagnostics.Activity",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::OnActivityImport:System.Void(System.Diagnostics.Activity,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DiagnosticListener",
+      "methodName": "OnActivityImport",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Diagnostics.Activity",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Subscribe",
+      "returnType": "System.IDisposable",
+      "parameters": [
+        "System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Func<System.String,System.Object,System.Object,System.Boolean>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Subscribe",
+      "returnType": "System.IDisposable",
+      "parameters": [
+        "System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>",
+        "System.Func<System.String,System.Object,System.Object,System.Boolean>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Predicate<System.String>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Subscribe",
+      "returnType": "System.IDisposable",
+      "parameters": [
+        "System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>",
+        "System.Predicate<System.String>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Func<System.String,System.Object,System.Object,System.Boolean>,System.Action<System.Diagnostics.Activity,System.Object>,System.Action<System.Diagnostics.Activity,System.Object>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Subscribe",
+      "returnType": "System.IDisposable",
+      "parameters": [
+        "System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>",
+        "System.Func<System.String,System.Object,System.Object,System.Boolean>",
+        "System.Action<System.Diagnostics.Activity,System.Object>",
+        "System.Action<System.Diagnostics.Activity,System.Object>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Write:System.Void(System.String,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DiagnosticListener",
+      "methodName": "Write",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.String",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback::BeginInvoke:System.IAsyncResult(System.Object,System.String,System.String,System.Collections.Generic.IEnumerable<System.String>,System.AsyncCallback,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback",
+      "methodName": "BeginInvoke",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Object",
+        "System.String",
+        "System.String",
+        "System.Collections.Generic.IEnumerable<System.String>",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback::EndInvoke:System.Void(System.String,System.Collections.Generic.IEnumerable<System.String>,System.IAsyncResult)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback",
+      "methodName": "EndInvoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.String",
+        "System.Collections.Generic.IEnumerable<System.String>",
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback::Invoke:System.Void(System.Object,System.String,System.String,System.Collections.Generic.IEnumerable<System.String>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback",
+      "methodName": "Invoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.String",
+        "System.String",
+        "System.Collections.Generic.IEnumerable<System.String>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback::BeginInvoke:System.IAsyncResult(System.Object,System.String,System.String,System.AsyncCallback,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback",
+      "methodName": "BeginInvoke",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Object",
+        "System.String",
+        "System.String",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback::EndInvoke:System.Void(System.IAsyncResult)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback",
+      "methodName": "EndInvoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback::Invoke:System.Void(System.Object,System.String,System.String)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback",
+      "methodName": "Invoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Object",
+        "System.String",
+        "System.String"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ExceptionRecorder::BeginInvoke:System.IAsyncResult(System.Diagnostics.Activity,System.Exception,System.Diagnostics.TagList,System.AsyncCallback,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ExceptionRecorder",
+      "methodName": "BeginInvoke",
+      "returnType": "System.IAsyncResult",
+      "parameters": [
+        "System.Diagnostics.Activity",
+        "System.Exception",
+        "System.Diagnostics.TagList",
+        "System.AsyncCallback",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ExceptionRecorder::EndInvoke:System.Void(System.Diagnostics.TagList,System.IAsyncResult)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ExceptionRecorder",
+      "methodName": "EndInvoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Diagnostics.TagList",
+        "System.IAsyncResult"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.ExceptionRecorder::Invoke:System.Void(System.Diagnostics.Activity,System.Exception,System.Diagnostics.TagList)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.ExceptionRecorder",
+      "methodName": "Invoke",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Diagnostics.Activity",
+        "System.Exception",
+        "System.Diagnostics.TagList"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.Meter::Dispose:System.Void()",
+      "namespace": "System.Diagnostics.Metrics",
+      "declaringType": "System.Diagnostics.Metrics.Meter",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterFactoryExtensions::Create:System.Diagnostics.Metrics.Meter(System.Diagnostics.Metrics.IMeterFactory,System.String,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
+      "namespace": "System.Diagnostics.Metrics",
+      "declaringType": "System.Diagnostics.Metrics.MeterFactoryExtensions",
+      "methodName": "Create",
+      "returnType": "System.Diagnostics.Metrics.Meter",
+      "parameters": [
+        "System.Diagnostics.Metrics.IMeterFactory",
+        "System.String",
+        "System.String",
+        "System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>"
+      ],
+      "visibility": "public",
+      "isStatic": true
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::DisableMeasurementEvents:System.Object(System.Diagnostics.Metrics.Instrument)",
+      "namespace": "System.Diagnostics.Metrics",
+      "declaringType": "System.Diagnostics.Metrics.MeterListener",
+      "methodName": "DisableMeasurementEvents",
+      "returnType": "System.Object",
+      "parameters": [
+        "System.Diagnostics.Metrics.Instrument"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::Dispose:System.Void()",
+      "namespace": "System.Diagnostics.Metrics",
+      "declaringType": "System.Diagnostics.Metrics.MeterListener",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::EnableMeasurementEvents:System.Void(System.Diagnostics.Metrics.Instrument,System.Object)",
+      "namespace": "System.Diagnostics.Metrics",
+      "declaringType": "System.Diagnostics.Metrics.MeterListener",
+      "methodName": "EnableMeasurementEvents",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Diagnostics.Metrics.Instrument",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::RecordObservableInstruments:System.Void()",
+      "namespace": "System.Diagnostics.Metrics",
+      "declaringType": "System.Diagnostics.Metrics.MeterListener",
+      "methodName": "RecordObservableInstruments",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.Metrics.MeterListener::Start:System.Void()",
+      "namespace": "System.Diagnostics.Metrics",
+      "declaringType": "System.Diagnostics.Metrics.MeterListener",
+      "methodName": "Start",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.String,System.Object)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList",
+      "methodName": "Add",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.String",
+        "System.Object"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList",
+      "methodName": "Add",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Collections.Generic.KeyValuePair<System.String,System.Object>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Clear:System.Void()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList",
+      "methodName": "Clear",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Contains:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList",
+      "methodName": "Contains",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Collections.Generic.KeyValuePair<System.String,System.Object>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Span<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList",
+      "methodName": "CopyTo",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Span<System.Collections.Generic.KeyValuePair<System.String,System.Object>>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][],System.Int32)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList",
+      "methodName": "CopyTo",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::GetEnumerator:System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList",
+      "methodName": "GetEnumerator",
+      "returnType": "System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::IndexOf:System.Int32(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList",
+      "methodName": "IndexOf",
+      "returnType": "System.Int32",
+      "parameters": [
+        "System.Collections.Generic.KeyValuePair<System.String,System.Object>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList",
+      "methodName": "Insert",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32",
+        "System.Collections.Generic.KeyValuePair<System.String,System.Object>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Remove:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList",
+      "methodName": "Remove",
+      "returnType": "System.Boolean",
+      "parameters": [
+        "System.Collections.Generic.KeyValuePair<System.String,System.Object>"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::RemoveAt:System.Void(System.Int32)",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList",
+      "methodName": "RemoveAt",
+      "returnType": "System.Void",
+      "parameters": [
+        "System.Int32"
+      ],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList+Enumerator::Dispose:System.Void()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList+Enumerator",
+      "methodName": "Dispose",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList+Enumerator::MoveNext:System.Boolean()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList+Enumerator",
+      "methodName": "MoveNext",
+      "returnType": "System.Boolean",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    },
+    {
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList+Enumerator::Reset:System.Void()",
+      "namespace": "System.Diagnostics",
+      "declaringType": "System.Diagnostics.TagList+Enumerator",
+      "methodName": "Reset",
+      "returnType": "System.Void",
+      "parameters": [],
+      "visibility": "public",
+      "isStatic": false
+    }
+  ],
+  "namespaces": {
+    "System.Diagnostics": {
+      "methodCount": 98
+    },
+    "System.Diagnostics.Metrics": {
+      "methodCount": 7
+    }
+  }
+}

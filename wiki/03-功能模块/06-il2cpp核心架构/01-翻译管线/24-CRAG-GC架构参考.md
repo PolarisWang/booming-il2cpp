@@ -104,29 +104,6 @@
 - **ClearAllCards**：O(allocated_segments) 而非 O(64K)，通过 tracked segment list
 - **ScanDirtyCards**：模板化范围扫描，用于 young GC Phase 1
 
-### 世代感知 region 写屏障 (GC-K2, 2026-08-10)
-
-对齐 CoreCLR `map_region_to_generation` / `JitHelpers_FastWriteBarriers` region 写屏障，补 2026-08 区域化重构引入：
-
-```
-region→gen 表 (skewed):  GetRegionGen(addr) = g_region_to_gen[addr >> 22] & 0x3
-  - NURSERY / GEN1 → young(0)      (young GC Phase 2 精确扫，无需卡)
-  - TENURED/LOH/DOMAIN/POH → old(2)
-双参屏障: chaos_gc_dirty_card_dst_ref(dst, ref)
-  - dst.gen == young(0) → 不设卡
-  - ref == null → 不设卡
-  - ref.gen >= dst.gen → 不设卡 (非老→幼)
-  - 否则 DirtyCard(dst)
-card bundle: 1bit/2MB 粗卡 (kCardBundleShift=21)
-  - DirtyCard 设卡顺带着色 bundle
-  - ScanDirtyCards 先检 bundle，clean 整 segment 跳过
-```
-
-- **文件**：`gc_region.h` (kRegionGenShift/GetRegionGen/SetRegionGen)、`gc_card_table.h/cpp` (chaos_gc_dirty_card_dst_ref/CardBundle*)、`NativeAotLoweringPlanner.*` codegen (发射 `_dst_ref`)。
-- **效果**：gen0→gen0 / 同代成熟写不设卡（省热路径设卡）。
-- **跨平台**：纯 C++（`addr>>22` 查表 + 位移），无 asm/OS 调用。
-- **BOUNDARY_OVERRIDE**：issues/GC-K2c（codegen 层产生 C++ 调用新 GC API）。
-
 ### 并行标记 (Parallel Mark) — DrainMarkStackParallel
 
 | 参数 | 值 |
@@ -500,12 +477,6 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 1. **Region 框架 O(R) 扫描**：FreeRegion 和 IsInDomain 线性扫描 region 表，200+ DLL 时 region 数 ≤ 数千，仍可接受
 2. **值类型嵌套引用写屏障（runtime GC-heap-pointer 检测函数）**：当前 codegen 通过 `chaos_gc_dirty_card(chaos_value_owner)` 对任意值类型赋值触发写屏障，存在假阳性（栈上值类型不需要 DirtyCard），可增加 runtime GC-heap-pointer 检测函数避免不必要的 barrier
 3. **完整 GCMemoryInfo 结构体（BCL 侧）**：native 侧 `GcMemoryInfoNative` 结构已实现并可通过 `chaos_gc_get_memory_info()` 获取，但 BCL 侧缺少对应的 `GCMemoryInfo` 托管类型定义
-
-**2026-08-28 复核补充**（与源码实测对齐，校正"全部已解决"的过度声明）：
-- **GC-N7 `YoungGcPauseUnderLoad` 非确定性堆破坏仍在**（`GcYoungCollection:537` AV + teardown `c0000374`，同代码 8%~73%，A/B/C 已 revert，需真机 page-heap）→ 不是"全部已解决"。
-- **cross-test 全局态 flakiness 预存在**：多个 GC TEST_F 共享 `g_young_gen`/nursery 全局态，完整套件下 `YoungCollectorTest` 的 `GcYoungCollection()` 偶发 SEH（N7 同源），隔离稳定。
-- **verify 工具 (CHAOS_GC_HeapVerify=2) 已可靠化**（2026-08-27/28）：demotion GcVerify 误判、region-gen 跨池 clobber（现分类良性 WARN）、bitmap-poison 假阳性、untyped raw 对象 first-word 假阳性均已修。
-- **本轮已修并提交**：`786c3fcb8`(Phase-2 OOB)/`db5aef81a`(双-init)/`4ed90d72e`(ConservSweep 断言)/`0c23c6326`(A2b verify)。
 
 ## P1-P3 扩展功能（2026-05 完成）
 

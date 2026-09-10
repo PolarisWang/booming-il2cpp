@@ -1,0 +1,261 @@
+{
+  "assemblyName": "System.Private.Xml",
+  "timestamp": "2026-06-20T06:26:26",
+  "totalChunks": 5,
+  "chunksWithFacts": 4,
+  "chunksWithValueWarnings": 0,
+  "totalPassed": 4255,
+  "totalFactMethods": 4433,
+  "chunkSummaries": [
+    {
+      "slug": "system-xml-schema",
+      "fact": {
+        "passed": 352,
+        "total": 352,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 120,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 112,
+        "iterations": 5000,
+        "meanDurationMs": 0.20822857142857143,
+        "meanOpsPerSecond": 323929663.2625,
+        "minDurationMs": 0.012,
+        "maxDurationMs": 10.1382,
+        "totalDurationMs": 23.3216,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 4.4,
+        "totalOutliers": 69,
+        "meanCv": 0.08190970535714286,
+        "maxCv": 0.438735
+      },
+      "hotupdate": {
+        "passed": 112,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 3531264,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-xml-serialization",
+      "fact": {
+        "passed": 352,
+        "total": 530,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 207,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 148,
+        "iterations": 10000,
+        "meanDurationMs": 1.8289527027027028,
+        "meanOpsPerSecond": 208316037.75702703,
+        "minDurationMs": 0.0253,
+        "maxDurationMs": 6.3167,
+        "totalDurationMs": 270.685,
+        "totalAllocatedBytes": 4800000.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.05885087162162163,
+        "maxCv": 0.353706
+      },
+      "hotupdate": {
+        "passed": 148,
+        "failed": 0,
+        "allSemantic": true,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 2
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 4358656,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-xml-xsl",
+      "fact": {
+        "passed": 602,
+        "total": 602,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 208,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 186,
+        "iterations": 10000,
+        "meanDurationMs": 0.030413440860215055,
+        "meanOpsPerSecond": 334056576.8936559,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 0.0447,
+        "totalDurationMs": 5.6569,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.06305254838709677,
+        "maxCv": 0.576996
+      },
+      "hotupdate": {
+        "passed": 186,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 3567104,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-xml-xsl-runtime",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "failed"
+      }
+    },
+    {
+      "slug": "xml",
+      "fact": {
+        "passed": 2949,
+        "total": 2949,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 1025,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 899,
+        "iterations": 10000,
+        "meanDurationMs": 0.17539410456062293,
+        "meanOpsPerSecond": 326511226.8854616,
+        "minDurationMs": 0.025,
+        "maxDurationMs": 22.8107,
+        "totalDurationMs": 157.6793,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.05350889655172414,
+        "maxCv": 1.033138
+      },
+      "hotupdate": {
+        "passed": 899,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Private.Xml/System.Xml.XmlAttributeCollection": {
+            "declared": 9,
+            "covered": 8,
+            "gap": 1,
+            "gapPct": 11.1
+          },
+          "System.Private.Xml/System.Xml.XmlException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Private.Xml/System.Xml.XmlNodeChangedEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Private.Xml/System.Xml.XmlReaderSettings": {
+            "declared": 2,
+            "covered": 1,
+            "gap": 1,
+            "gapPct": 50.0
+          },
+          "System.Private.Xml/System.Xml.XmlWriterSettings": {
+            "declared": 2,
+            "covered": 1,
+            "gap": 1,
+            "gapPct": 50.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 6040576,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}
