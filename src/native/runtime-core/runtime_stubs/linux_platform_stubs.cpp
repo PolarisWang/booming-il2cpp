@@ -58,7 +58,10 @@ DbgFrameSnapshot& DbgGetFrameSnapshot() noexcept {
     static DbgFrameSnapshot snapshot;
     return snapshot;
 }
-bool DbgCheckBreakpoint(uint32_t, uint32_t) noexcept { return false; }
+// Stub the non-stepping variants — DbgCheckBreakpoint is declared in
+// dbg_breakpoint.h (returns int), DbgNotifyPaused/DbgShouldStopAtCurrentPosition
+// in dbg_runtime.h.
+int DbgCheckBreakpoint(uint32_t, uint32_t) noexcept { return 0; }
 void DbgNotifyPaused(uint32_t, uint32_t) noexcept {}
 bool DbgShouldStopAtCurrentPosition(int) noexcept { return false; }
 
