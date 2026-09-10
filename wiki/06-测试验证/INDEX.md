@@ -37,6 +37,7 @@
 
 | 文档 | 主题 | 说明 |
 | --- | --- | --- |
+| [`Flaky容忍与重试策略.md`](./Flaky容忍与重试策略.md) | Flaky 判定与容忍 | 定义 flaky 判定阈值（≥1/1000）、四类分类（A 时序/B 内存破坏/C 环境/D 测试缺陷）、处置流程、台账格式与升级路径。**B 类（内存破坏）禁止靠重试放行**；本项目当前默认不启用自动重试 |
 | [`CodeGen快照测试规范.md`](./CodeGen快照测试规范.md) | CodeGen 增量回归测试 | 定义 NativeAotEmitter 输出的快照测试体系：夹具结构、基线管理、开发工作流集成 |
 | [`测试方法清单.md`](./测试方法清单.md) | 全链路测试方法索引 | **推荐入口** — 系统梳理 Python、C# Foundation-DLL、Native 编译三条测试链的所有测试方法和管线阶段，按文件/类/方法粒度索引 |
 | [`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md) | 统一测试框架 | 说明 `Sdk / Runtime / collector / manifest` 分层，为正式 canonical 入口 |
@@ -68,6 +69,7 @@
 - Python 自动化测试优先模板化；手工 benchmark、dashboard 观察和控制台输出都不能替代自动化验证。
 - IL2CPP / Python 结构化文本 codegen 默认优先 `Scriban`；功能不足时先扩展 `Scriban`，不新增长期手写拼串主线。
 - 测试阶段只要 `dotnet build` / `dotnet test` / `msbuild` 发生编译崩溃，就必须先检查崩溃原因并修复；不能靠重试、跳过或降级为环境噪音继续推进。
+- flaky 判定 / 分类 / 处置以 [`Flaky容忍与重试策略.md`](./Flaky容忍与重试策略.md) 为 authority；B 类（内存破坏/崩溃）禁止写入 known-failures 或靠重试放行；本项目当前默认不启用 CI 自动重试。
 - `subject.features.json` 是 owner subject 与 proof / benchmark obligation 的正式 authority。
 - canonical proof / benchmark / host correctness 不允许使用 `Console.WriteLine` / `ChaosEvidenceKind.Stdout`。
 - obligation-driven AOT / IL2CPP 任务在计划中必须显式声明 `formalVerificationObjects` 与 `requiredGates`。
