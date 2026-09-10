@@ -124,6 +124,10 @@ jobs:
           if [ -d "tests/e2e/translation/sdk/windows-x64-reference" ]; then
             cp -r tests/e2e/translation/sdk/windows-x64-reference/. "$SDK_DIR/"
           fi
+          # Bundle the samples/ tree so users get ready-to-build examples
+          if [ -d "samples" ]; then
+            cp -r samples/. "$SDK_DIR/samples/"
+          fi
           echo "SDK artifacts: $(find "$SDK_DIR" -type f | wc -l) files"
       - name: Upload SDK artifact
         uses: actions/upload-artifact@${{ vars.ACTIONS_UPLOAD_ARTIFACT_VER || 'v4' }}
