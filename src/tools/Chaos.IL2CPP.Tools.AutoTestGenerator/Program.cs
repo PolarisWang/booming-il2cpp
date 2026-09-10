@@ -783,6 +783,11 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
     sb.AppendLine($"    public sealed unsafe class {patchClassName}");
     sb.AppendLine("    {");
 
+    // Native hotupdate probe — marks patch execution for the harness.
+    sb.AppendLine("        [System.Runtime.InteropServices.DllImport(\"__Internal\", EntryPoint = \"chaos_hotupdate_probe_mark\", CallingConvention = System.Runtime.InteropServices.CallingConvention.Cdecl)]");
+    sb.AppendLine("        internal static extern void __ChaosHotupdateProbeMark(uint subjectIndex);");
+    sb.AppendLine();
+
     int subjectIndex = 0;
     int patchedCount = 0;
 
@@ -911,6 +916,9 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
                     }
                     else
                     {
+                        // Non-generic Task/ValueTask or void with no ref/out:
+                        // no comparable return value, so emit a probe mark instead.
+                        sb.AppendLine($"            __ChaosHotupdateProbeMark({subjectIndex}U);");
                         sb.AppendLine("            return 142L;");
                     }
                 }

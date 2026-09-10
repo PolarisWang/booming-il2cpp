@@ -762,6 +762,27 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
             }
         }
 
+        // ── IL-change detection ─────────────────────────────────────────
+        // PatchDataExtractor rewrites every patch-subject body in place to a
+        // 7-byte Tiny-format "ldc.i4 <sentinel>; ret".  A body of exactly that
+        // size therefore means this patch carries new executable IL.
+        //
+        // Such a method must NOT keep its kHotpatchKeepNative flag: keep-native
+        // dispatch calls entry.direct_ptr (the original AOT body), which would
+        // silently discard the patched IL and leave hotupdate semantic
+        // verification reporting zero changes.  Marking it here lets Phase 3
+        // route the method through InterpreterEntryDirect so the patched body
+        // actually runs and its sentinel return becomes observable.
+        //
+        // Methods whose body was not rewritten (metadata-only patches) keep the
+        // original flag and stay on the AOT-fast path.
+        {
+            constexpr uint32_t kSentinelBodySize = 7;  // Tiny header + ldc.i4 + ret
+            if (method_entry->body_size == kSentinelBodySize) {
+                patch_method.il_changed = true;
+            }
+        }
+
         registry.SetPatchedBySlot(module_id, slot, true, &patch_method, patch_domain_id);
         HOTPATCH_DIAG("DIAG[APFM]: SetPatchedBySlot OK\n");
 
@@ -769,7 +790,11 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         // SetPatchedBySlot unconditionally clears kHotpatchKeepNative. For
         // methods whose IL hasn't changed (keep_native=true), restore the flag
         // so ChaosDispatchMethod skips interpreter entry for AOT-speed execution.
-        if (patch_method.keep_native) {
+        //
+        // Methods carrying new IL (il_changed=true) are deliberately excluded:
+        // restoring keep-native there would route dispatch back to entry.direct_ptr
+        // (the stale AOT body), so the patched IL would never execute.
+        if (patch_method.keep_native && !patch_method.il_changed) {
             auto* entry = registry.GetDispatchEntryBySlot(module_id, slot);
             if (entry != nullptr) {
 #if defined(_MSC_VER)
@@ -1022,9 +1047,18 @@ PatchContext* ApplyPatchFromMemoryEx(
             }
         }
 
+        // IL-change detection — see first ApplyPatchFromMemory for rationale.
+        {
+            constexpr uint32_t kSentinelBodySize = 7;
+            if (method_entry->body_size == kSentinelBodySize) {
+                patch_method.il_changed = true;
+            }
+        }
+
         registry.SetPatchedBySlot(module_id, slot, true, &patch_method, patch_domain_id_ex);
 
-        if (patch_method.keep_native) {
+        // Skip keep-native restoration for methods carrying new IL.
+        if (patch_method.keep_native && !patch_method.il_changed) {
             auto* entry = registry.GetDispatchEntryBySlot(module_id, slot);
             if (entry != nullptr) {
 #if defined(_MSC_VER)
