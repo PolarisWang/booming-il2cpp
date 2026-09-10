@@ -16,7 +16,10 @@ class TestClassifyGate:
         assert classify_gate({"realTotal": 100, "realPassed": 85, "total": 200, "passed": 200}) == "pass"
 
     def test_fail_under_ratio(self):
-        assert classify_gate({"realTotal": 100, "realPassed": 5, "total": 200, "passed": 200}) == "fail"
+        # 4/100 = 0.04 < GATE_REAL_RATIO (0.05) → fail.  Deliberately below the
+        # threshold: exactly-at-threshold is the >= boundary, covered by
+        # test_pass_exactly_at_threshold.
+        assert classify_gate({"realTotal": 100, "realPassed": 4, "total": 200, "passed": 200}) == "fail"
 
     def test_skip_none(self):
         assert classify_gate(None) == "skip"
@@ -41,7 +44,8 @@ class TestClassifyGate:
 
     def test_fallback_nominal(self):
         """No realTotal/realPassed fields → fallback to total/passed."""
-        assert classify_gate({"total": 100, "passed": 5}) == "fail"  # all nominal-fail still fail
+        # 4/100 = 0.04 < GATE_REAL_RATIO (0.05) → fail.
+        assert classify_gate({"total": 100, "passed": 4}) == "fail"  # all nominal-fail still fail
         assert classify_gate({"total": 100, "passed": 95}) == "pass"
 
     def test_ratio_helper(self):

@@ -41,6 +41,15 @@ def ensure_tool_built(tool_name: str) -> bool:
             src_time = proj.stat().st_mtime
         if src_time <= dll.stat().st_mtime:
             return True
+    # Release any lingering VBCSCompiler (Roslyn compiler server) handle on the
+    # output DLL before rebuilding.  Without this, concurrent chunk pipelines on
+    # Windows race: the first build spins VBCSCompiler up and it keeps the DLL
+    # open, so a parallel build's csc fails with CS2012 "being used by another
+    # process" and the whole chunk dies before entry.exe is produced.
+    subprocess.run(
+        ["dotnet", "build-server", "shutdown"],
+        capture_output=True, text=True, timeout=30)
+
     # Rebuild
     result = subprocess.run(
         ["dotnet", "build", str(proj), "-nologo"],
