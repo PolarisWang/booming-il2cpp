@@ -153,6 +153,10 @@ jobs:
           export PYTHONPATH="$GITHUB_WORKSPACE/tests/e2e:$GITHUB_WORKSPACE/tests/e2e/verification"
           export CHAOS_FOUNDATION_DLL="$GITHUB_WORKSPACE/tests/e2e/translation"
           python -m verification.reporting.dashboard --from-results --output deep-dashboard.html 2>&1 || echo "[report] dashboard step failed (non-fatal)"
+          python -m verification.reporting.fact_report \
+            --translation-root "$CHAOS_FOUNDATION_DLL" \
+            --output fact-report.json \
+            --markdown fact-report.md 2>&1 || echo "[report] fact_report failed (non-fatal)"
           python -m verification.nightly_delta --foundation-dll "$CHAOS_FOUNDATION_DLL" --output nightly-delta.json 2>&1 || echo "[report] nightly-delta failed (non-fatal)"
           python -m verification.nightly_summary --delta nightly-delta.json --output nightly-summary.md 2>&1 || echo "[report] nightly-summary failed (non-fatal)"
           if [ -f nightly-summary.md ]; then
@@ -160,6 +164,9 @@ jobs:
           else
             echo "## Foundation-DLL nightly report" >> "$GITHUB_STEP_SUMMARY"
             echo "Pipeline exit: ${{ steps.pipeline.outputs.exit_code }}. (report generators produced no Markdown)." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f fact-report.md ]; then
+            cat fact-report.md >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Upload Foundation-DLL Results
@@ -171,6 +178,8 @@ jobs:
             tests/e2e/translation/results/
             tests/e2e/translation/*/_dll/reports/**
             deep-dashboard.html
+            fact-report.json
+            fact-report.md
             nightly-delta.json
             nightly-summary.md
             pipeline_output.txt
