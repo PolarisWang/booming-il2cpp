@@ -157,6 +157,14 @@ jobs:
             --translation-root "$CHAOS_FOUNDATION_DLL" \
             --output fact-report.json \
             --markdown fact-report.md 2>&1 || echo "[report] fact_report failed (non-fatal)"
+          python -m verification.reporting.benchmark_report \
+            --translation-root "$CHAOS_FOUNDATION_DLL" \
+            --output benchmark-report.json \
+            --markdown benchmark-report.md 2>&1 || echo "[report] benchmark_report failed (non-fatal)"
+          python -m verification.reporting.hotupdate_report \
+            --translation-root "$CHAOS_FOUNDATION_DLL" \
+            --output hotupdate-report.json \
+            --markdown hotupdate-report.md 2>&1 || echo "[report] hotupdate_report failed (non-fatal)"
           python -m verification.nightly_delta --foundation-dll "$CHAOS_FOUNDATION_DLL" --output nightly-delta.json 2>&1 || echo "[report] nightly-delta failed (non-fatal)"
           python -m verification.nightly_summary --delta nightly-delta.json --output nightly-summary.md 2>&1 || echo "[report] nightly-summary failed (non-fatal)"
           if [ -f nightly-summary.md ]; then
@@ -167,6 +175,12 @@ jobs:
           fi
           if [ -f fact-report.md ]; then
             cat fact-report.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f benchmark-report.md ]; then
+            cat benchmark-report.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f hotupdate-report.md ]; then
+            cat hotupdate-report.md >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Upload Foundation-DLL Results
@@ -180,6 +194,10 @@ jobs:
             deep-dashboard.html
             fact-report.json
             fact-report.md
+            benchmark-report.json
+            benchmark-report.md
+            hotupdate-report.json
+            hotupdate-report.md
             nightly-delta.json
             nightly-summary.md
             pipeline_output.txt
