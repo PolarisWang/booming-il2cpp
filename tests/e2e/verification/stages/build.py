@@ -381,10 +381,36 @@ _BODY_AVAIL_TO_CATEGORY: dict[str, str] = {
 }
 
 
+def _load_inline_native_subject_ids(codegen_dir: Path) -> set[str]:
+    """Load the codegen's inline-natives sidecar into a subject-id set.
+
+    NativeAotEmitter writes ``inline-natives.json`` (at the codegen output root)
+    listing every callee resolved via an InlineShapeDescriptor: those got native
+    C++ emitted at the call site and therefore have no AotCoreIr artifact /
+    .jdata entry.  build.py promotes such wrappers from NoCanonicalBody to
+    NativeGenerated.
+
+    Returns an empty set when the sidecar is absent (older codegen) — enrichment
+    then behaves exactly as before.
+    """
+    path = codegen_dir / "inline-natives.json"
+    if not path.exists():
+        return set()
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"  [build] WARNING: unreadable inline-natives.json ({e}); "
+              f"inline-native promotion skipped")
+        return set()
+    callees = data.get("inlineNativeCallees") or []
+    return {c for c in callees if isinstance(c, str) and c}
+
+
 def _enrich_metadata_body_availability(
     metadata: dict,
     ir_methods: list[dict],
     bcl_manifest: list[dict] | None = None,
+    inline_subject_ids: set[str] | None = None,
 ) -> int:
     """Annotate each metadata method with its codegen translation category.
 
@@ -459,7 +485,14 @@ def _enrich_metadata_body_availability(
             # Present in metadata (declared/probed) but no AOT IR emitted: this wrapper
             # has no real AOT C++ body — interpreted/stubbed.  Track as fallback so the
             # residual is visible rather than silently omitted.
-            mm["bodyAvailability"] = "NoCanonicalBody"
+            # EXCEPTION: inline-registered natives (InlineShapeDescriptor) emit real
+            # C++ at the call site but produce no AotCoreIr artifact.  The codegen
+            # lists them in inline-natives.json; promote those wrappers.
+            subj = mm.get("methodSubjectId")
+            if subj and inline_subject_ids and subj in inline_subject_ids:
+                mm["bodyAvailability"] = "NativeGenerated"
+            else:
+                mm["bodyAvailability"] = "NoCanonicalBody"
             annotated += 1
             continue
         category = "NativeGenerated"
@@ -498,7 +531,9 @@ def _merge_codegen_body_availability(
             bcl_manifest = json.loads(aot_manifest_path.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, OSError) as e:
             print(f"  [build] WARNING: unreadable aot-manifest.json ({e}), Layer 2 BCL coverage skipped")
-    annotated = _enrich_metadata_body_availability(metadata, ir_methods, bcl_manifest)
+    annotated = _enrich_metadata_body_availability(
+        metadata, ir_methods, bcl_manifest,
+        inline_subject_ids=_load_inline_native_subject_ids(aot_core_ir_path.parent.parent))
     total = len(metadata.get("methods") or [])
     native_count = sum(
         1 for m in metadata.get("methods") or []
