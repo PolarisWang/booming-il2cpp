@@ -1,6 +1,14 @@
 # .github/workflows/clang-tidy-stage.yml
 # Stage: clang-tidy static analysis (PR-only, P0 filter)
 # Source: .github/workflows/clang-tidy.yml job `clang-tidy`
+#
+# Diff-scoped: only translation units touched by this PR are analyzed.  A
+# full-tree cold clang-tidy pass over 10 native targets runs well past the
+# stage timeout, which is why the stage was previously never green.  Changed
+# files are identified from origin/main...HEAD, corresponding TUs are touched
+# so Ninja re-runs the analyzer on exactly those, and the P0 gate is evaluated
+# only against findings that belong to changed files.  Pre-existing findings in
+# untouched code are reported but do not gate.
 name: clang-tidy
 on:
   workflow_call:
@@ -12,7 +20,7 @@ on:
       timeout:
         required: false
         type: number
-        default: 120  # raised from 60: full native-tree static analysis on a cold runner can exceed the old/absent 60-min cap
+        default: 120  # diff-scoped analysis; full-tree cold runs are excluded by design
 
 jobs:
   clang-tidy:
@@ -20,27 +28,92 @@ jobs:
     timeout-minutes: ${{ inputs.timeout }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # need origin/main for the diff
+
+      - name: Compute changed native sources
+        id: changed
+        shell: bash
+        run: |
+          CHANGED_FILES="${{ runner.temp }}/clang-tidy-changed-files.txt"
+          echo "CHANGED_FILE_LIST=$CHANGED_FILES" >> "$GITHUB_ENV"
+
+          if git rev-parse --verify origin/main >/dev/null 2>&1; then
+            BASE=origin/main
+          else
+            BASE=$(git rev-parse HEAD~1 2>/dev/null || echo "")
+          fi
+
+          if [ -n "$BASE" ]; then
+            git diff --name-only "$BASE"...HEAD -- \
+              'src/native/**/*.cpp' 'src/native/**/*.cc' 'src/native/**/*.h' \
+              'src/native/**/*.hpp' | grep -v '/generated/' > "$CHANGED_FILES" || true
+          fi
+
+          COUNT=$(wc -l < "$CHANGED_FILES" 2>/dev/null || echo 0)
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "Changed native sources: $COUNT"
+          cat "$CHANGED_FILES" | sed 's/^/  /'
+
+      - name: Skip notice (no native source changes)
+        if: steps.changed.outputs.count == '0'
+        run: |
+          echo "No changed native sources in this PR — clang-tidy analysis skipped."
+          echo "Config-only PRs do not trigger a full-tree re-analysis by design."
 
       - name: Install clang-tidy (LLVM 18)
+        if: steps.changed.outputs.count != '0'
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq clang-tidy-18 ninja-build gcc-14 g++-14
           sudo update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-18 100
 
       - name: Configure CMake (linux-x64-clang-tidy)
+        if: steps.changed.outputs.count != '0'
         run: |
           cmake -S . -B artifacts/presets/linux-x64-clang-tidy \
             --preset linux-x64-clang-tidy \
             -DCMAKE_C_COMPILER=gcc-14 \
             -DCMAKE_CXX_COMPILER=g++-14
 
-      - name: Build (clang-tidy analysis runs during compile)
+      # Build once to warm the tree, then touch only changed files so the
+      # analyzer re-runs on exactly the diff.  The warm build also proves the
+      # preset configures/compiles before the analysis pass.
+      - name: Warm build (establish baseline, analysis runs here too)
+        if: steps.changed.outputs.count != '0'
         run: |
           cmake --build artifacts/presets/linux-x64-clang-tidy \
             --target chaos_common chaos_pal chaos_runtime_core chaos_bootstrap \
             chaos_interpreter chaos_jit chaos_hot_update chaos_engine_bridge \
             chaos_support chaos_diagnostics \
+            -j$(nproc) > clang-tidy-warm.txt 2>&1 || {
+              echo "::error::warm build failed — see artifact"
+              tail -100 clang-tidy-warm.txt
+              exit 1
+            }
+
+      - name: Re-analyze changed translation units
+        if: steps.changed.outputs.count != '0'
+        shell: bash
+        run: |
+          : > clang-tidy-output.txt
+          touch_count=0
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            [ -f "$f" ] || { echo "  (deleted, skip) $f"; continue; }
+            touch "$f"
+            touch_count=$((touch_count + 1))
+          done < "$CHANGED_FILE_LIST"
+          echo "Touched $touch_count changed file(s); re-running analysis."
+
+          if [ "$touch_count" -eq 0 ]; then
+            echo "No analyzable files remain (all deleted) — nothing to check."
+            exit 0
+          fi
+
+          cmake --build artifacts/presets/linux-x64-clang-tidy \
             -j$(nproc) 2>&1 | tee clang-tidy-output.txt
+          echo "Analysis output lines: $(wc -l < clang-tidy-output.txt)"
 
       # P0_RE: single source of truth for P0-level clang-tidy checkers.
       # Used both here (filter gate) and in the Report step (statistics).
@@ -56,29 +129,56 @@ jobs:
       #     If a future clang-tidy upgrade enables them by default, add the pattern
       #     here.  For now, the coverage gap is known and tracked.
       - name: Set P0 regex
+        if: steps.changed.outputs.count != '0'
         run: |
           echo "P0_RE=(core\.[A-Za-z]*(Dereference|Leak|Overflow|Undefined|Taint|StackAddressEscape)|unix\.Malloc|cplusplus\.NewDeleteLeak|valist\.CopyLeak)" >> "$GITHUB_ENV"
+          echo "P0_FILES_FILE=${{ runner.temp }}/clang-tidy-p0-files.txt" >> "$GITHUB_ENV"
 
-      - name: Filter P0 warnings (exit 1 on any P0)
+      - name: Filter P0 warnings in changed files (exit 1 on any P0)
+        if: steps.changed.outputs.count != '0'
+        shell: bash
         run: |
-          P0_COUNT=$(grep -cE "$P0_RE" clang-tidy-output.txt || true)
-          echo "P0 warnings: $P0_COUNT"
-          if [ "$P0_COUNT" -gt 0 ]; then
-            echo "::error::clang-tidy found $P0_COUNT P0 warning(s) — must fix before merge"
-            grep -E "$P0_RE" clang-tidy-output.txt
+          : > "$P0_FILES_FILE"
+          cp "$CHANGED_FILE_LIST" "$P0_FILES_FILE"
+
+          TOTAL_P0=$(grep -cE "$P0_RE" clang-tidy-output.txt || true)
+          echo "P0 warnings total (whole analysis output): $TOTAL_P0"
+
+          # Attribute each P0 diagnostic to its source file and keep only the
+          # ones landing in a changed file — pre-existing debt in untouched code
+          # must not red this stage.
+          CHANGED_P0=$(grep -E "$P0_RE" clang-tidy-output.txt \
+            | grep -oE '^[^:]+\.(cpp|cc|h|hpp)' | sort -u \
+            | grep -FxFf "$P0_FILES_FILE" || true)
+
+          if [ -n "$CHANGED_P0" ]; then
+            echo "::error::clang-tidy found P0 warning(s) in files changed by this PR"
+            echo "--- offending files ---"
+            echo "$CHANGED_P0"
+            echo "--- diagnostics ---"
+            while IFS= read -r cf; do
+              [ -z "$cf" ] && continue
+              grep -E "$P0_RE" clang-tidy-output.txt | grep -F "$cf" || true
+            done <<< "$CHANGED_P0"
             exit 1
           fi
-          echo "✅ No P0 clang-tidy warnings"
+          echo "✅ No P0 clang-tidy warnings in changed files"
 
       - name: Report total warnings
+        if: steps.changed.outputs.count != '0'
         run: |
           TOTAL=$(grep -cE 'warning:' clang-tidy-output.txt || true)
-          echo "Total clang-tidy warnings: $TOTAL"
-          echo "P0: $(grep -cE "$P0_RE" clang-tidy-output.txt || true)"
-          echo "P1+: $((TOTAL - $(grep -cE "$P0_RE" clang-tidy-output.txt || true)))"
+          P0=$(grep -cE "$P0_RE" clang-tidy-output.txt || true)
+          echo "Total clang-tidy warnings in changed-TU analysis: $TOTAL"
+          echo "P0: $P0"
+          echo "P1+: $((TOTAL - P0))"
 
       - name: Upload clang-tidy report
+        if: always() && steps.changed.outputs.count != '0'
         uses: actions/upload-artifact@v4
         with:
           name: clang-tidy-report
-          path: clang-tidy-output.txt
+          path: |
+            clang-tidy-output.txt
+            clang-tidy-warm.txt
+

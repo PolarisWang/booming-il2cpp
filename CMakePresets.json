@@ -129,6 +129,38 @@
       }
     },
     {
+      "name": "linux-x64-native",
+      "displayName": "Linux x64 Native",
+      "description": "Native Linux x64 build (gcc-14 + Ninja, no cross-compiler). Parent preset for the clang-tidy / UBSan analysis presets; also the base for TSAN, CodeQL, hybrid-jit, foundation-dll and the release SDK build.",
+      "generator": "Ninja",
+      "binaryDir": "artifacts/presets/linux-x64-native",
+      "toolchainFile": "build/toolchains/linux-x64-native.cmake",
+      "cacheVariables": {
+        "ROADMAP0_PRESET_TARGET": "linux-x64-native",
+        "CHAOS_IL2CPP_EXEC_PROFILE": "desktop"
+      }
+    },
+    {
+      "name": "linux-x64-clang-tidy",
+      "displayName": "Linux x64 clang-tidy static analysis",
+      "description": "Linux x64 native build with clang-tidy static analysis enabled (T-A1). Same toolchain as linux-x64-native.",
+      "inherits": "linux-x64-native",
+      "binaryDir": "artifacts/presets/linux-x64-clang-tidy",
+      "cacheVariables": {
+        "CHAOS_IL2CPP_CLANG_TIDY": "ON"
+      }
+    },
+    {
+      "name": "linux-x64-ubsan",
+      "displayName": "Linux x64 UBSan (UndefinedBehaviorSanitizer)",
+      "description": "Linux x64 GCC build with UBSan enabled (T-A4). Uses gcc-14 + Ninja.",
+      "inherits": "linux-x64-native",
+      "binaryDir": "artifacts/presets/linux-x64-ubsan",
+      "cacheVariables": {
+        "CHAOS_IL2CPP_SANITIZE_UBSAN": "ON"
+      }
+    },
+    {
       "name": "linux-arm64-smoke",
       "displayName": "Roadmap0 Linux arm64 Smoke",
       "description": "Linux ARM64 cross-compile smoke test (aarch64-linux-gnu-gcc + QEMU).",

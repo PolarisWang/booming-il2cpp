@@ -21,6 +21,25 @@ project(roadmap0_preset_router LANGUAGES CXX)
 # == src/managed/Directory.Build.props <Version>).
 set(CHAOS_VERSION "0.2.5")
 
+# ── clang-tidy static analysis (T-A1) ──────────────────────────────────
+# Enable with -DCHAOS_IL2CPP_CLANG_TIDY=ON on GCC/Clang presets (Linux Ninja).
+# MSVC: clang-tidy analysis of MSVC dialect is unsupported/noisy — gate OFF.
+# The config lives in src/native/.clang-tidy (HeaderFilterRegex src/native/.*\.h$).
+# CMAKE_CXX_CLANG_TIDY is set here so the analyzer runs during the (re)compile
+# pass, i.e. only on translation units that actually get rebuilt.  The CI stage
+# (.github/workflows/clang-tidy-stage.yml) rebuilds the touched targets after a
+# forced `touch`, so diff-scoped changes are what actually gets analyzed.
+option(CHAOS_IL2CPP_CLANG_TIDY "Enable clang-tidy static analysis during build" OFF)
+if(CHAOS_IL2CPP_CLANG_TIDY AND NOT MSVC)
+    find_program(CHAOS_IL2CPP_CLANG_TIDY_EXE clang-tidy)
+    if(CHAOS_IL2CPP_CLANG_TIDY_EXE)
+        set(CMAKE_CXX_CLANG_TIDY "${CHAOS_IL2CPP_CLANG_TIDY_EXE}")
+        message(STATUS "clang-tidy enabled: ${CHAOS_IL2CPP_CLANG_TIDY_EXE}")
+    else()
+        message(WARNING "CHAOS_IL2CPP_CLANG_TIDY=ON but clang-tidy not found — static analysis skipped")
+    endif()
+endif()
+
 # ── MSVC debug info: Embedded (/Z7) avoids shared .pdb contention ─────
 # The default /ZI (Edit-and-Continue PDB) crashes on systems where
 # mspdbsrv.exe (RPC service) is disabled or blocked.  /Z7 puts debug
@@ -338,6 +357,74 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "ios-arm64-packaging")
 elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-packaging")
     add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX=1)
     add_subdirectory(tests/integration/platform-hosts/linux-packaging)
+elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-native")
+    # Native Linux x64 build (gcc-14 + Ninja, no cross-compiler).  Parent preset
+    # for linux-x64-clang-tidy / linux-x64-ubsan.  Consumed by gc-linux-tsan,
+    # ubsan, codeql, hybrid-jit, foundation-dll and release SDK-build lanes, so
+    # this branch mirrors linux-x64-reference's target set.
+    message(STATUS "ENTERED linux-x64-native branch")
+    add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX=1)
+    include(cmake/config-tier.cmake)
+    include(cmake/chaos_native_test.cmake)
+    find_package(Python3 QUIET)
+
+    add_subdirectory(third_party/fmt fmt_build)
+    add_subdirectory(third_party/unordered_dense unordered_dense_build)
+    add_subdirectory(src/native/pal)
+    add_subdirectory(src/native/common)
+    add_subdirectory(src/native/diagnostics)
+    add_subdirectory(src/native/runtime-core)
+    add_subdirectory(src/native/hot-update)
+    add_subdirectory(src/native/interpreter)
+    add_subdirectory(src/native/jit)
+    add_subdirectory(src/native/engine-bridge)
+    add_subdirectory(src/native/support)
+    add_subdirectory(src/native/bootstrap)
+    add_subdirectory(src/native/codegen)
+    add_subdirectory(src/native/benchmark-host)
+    add_subdirectory(src/native/proof-host)
+
+    add_subdirectory(tests/contracts/native/abi)
+    add_subdirectory(tests/contracts/native/engine-binding)
+    add_subdirectory(tests/contracts/native/hot-update)
+    add_subdirectory(tests/contracts/native/interpreter)
+    add_subdirectory(tests/contracts/native/gc)
+    add_subdirectory(tests/contracts/native/runtime-core)
+    add_subdirectory(tests/contracts/native/common)
+    add_subdirectory(tests/perf/unordered-map-bench)
+
+    # ── Native testing suite (GoogleTest-based unit/stress/benchmark) ─────
+    if(UNIX)
+        add_subdirectory(tests/unit/runtime-native)
+    endif()
+
+    # ── Architecture check targets ─────────────────────────────────────
+    if(Python3_FOUND)
+        set(CHAOS_NATIVE_MODULES
+            chaos_common
+            chaos_runtime_core
+            chaos_hot_update
+            chaos_interpreter
+            chaos_jit
+            chaos_support
+            chaos_bootstrap
+            chaos_engine_bridge
+            chaos_benchmark_host
+            chaos_proof_host)
+        foreach(MODULE ${CHAOS_NATIVE_MODULES})
+            add_custom_target(check_arch_${MODULE}
+                COMMAND ${Python3_EXECUTABLE} build/check_arch.py --module ${MODULE}
+                WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+                COMMENT "Checking ${MODULE} architecture compliance..."
+            )
+        endforeach()
+        add_custom_target(check_arch
+            COMMAND ${Python3_EXECUTABLE} build/check_arch.py --ci
+            WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+            COMMENT "Checking all native modules for architecture compliance..."
+        )
+    endif()
+
 elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-arm64-native")
     message(STATUS "ENTERED linux-arm64-native branch")
     add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX=1)
