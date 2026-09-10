@@ -658,7 +658,11 @@ Gen1CollectionResult GcGen1Collection() {
 
             result.objects_promoted = local_promoted_count;
             result.bytes_promoted = local_bytes_promoted;
-            result.bytes_compacted = local_compacted;
+            // NOTE: bytes_compacted is a BYTE count (gc_gen1.h). Assigning
+            // local_compacted (an object count) here silently under-reported the
+            // compacted bytes as 0 for single-object compaction and made the
+            // Gen1 compaction tests see bytes_compacted == 0.
+            result.bytes_compacted = local_bytes_compacted;
             result.bytes_reclaimed = local_reclaimed;
             result.promotion_failed = false;
         } else {
