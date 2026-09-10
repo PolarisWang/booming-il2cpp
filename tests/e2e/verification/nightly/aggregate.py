@@ -157,4 +157,18 @@ def aggregate_reports(config, results) -> ReportSummary:  # results: NightlyResu
             "\n".join(md_lines) + "\n", encoding="utf-8")
     except OSError:
         pass
+
+    # ── Persist baseline snapshot for triage ──
+    # Best-effort: never let a failed baseline write interrupt the nightly.
+    try:
+        from verification.tools.baseline_store import record_from_run
+        record_from_run(
+            run_id=config.run_id,
+            report_dir=config.report_dir,
+            results_base=config.foundation_dir.parent / "artifacts" / "foundation-dll",
+            native_config=config.native_config,
+        )
+    except Exception:
+        pass
+
     return summ

@@ -528,6 +528,10 @@ testing/foundation-dll/**/*.nuget.dgspec.json
 testing/foundation-dll/nightly-build-report/
 /nightly-build-report/
 
+# Nightly triage reports (generated artifacts — baseline/ is tracked for CI
+# across runners, but per-day triage reports are ephemeral).
+tests/e2e/nightly-build-report/triage/
+
 # Stale pipeline artifacts (regenerated on each run)
 testing/foundation-dll/inject_getui.py
 
