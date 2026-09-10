@@ -45,6 +45,22 @@ extern "C" const int kSubjectContractMap[{{ subject_entries.size }}] = {
 	{{ entry.contract_index }},
 {{~ end ~}}
 };
+
+// ── Subject id table (kSubjectSubjectIds[]) ────────────────────────────
+// Maps subject slot index (si) to its full SubjectId string.  Reported by
+// the fact runner as "methodSubjectId" so consumers can match a runtime
+// record against the metadata table by IDENTITY rather than by index.
+//
+// kSubjectSlotMap[si] holds a kMethodTable index, but subjects.metadata.json
+// numbers its methods in a different order; feeding the kMethodTable index
+// into the metadata table silently resolves a *different* method.  The
+// subject id is stable under any internal reordering, so it is the only
+// safe cross-reference key.
+extern "C" const char* const kSubjectSubjectIds[{{ subject_entries.size }}] = {
+{{~ for entry in subject_entries ~}}
+	"{{ entry.subject_id }}",
+{{~ end ~}}
+};
 {{~ else ~}}
 // ── Subject slot map (empty) ────────────────────────────────────────
 // No subject entries match the ::Subject_N / ::CustomEntrySubject_N
@@ -52,4 +68,5 @@ extern "C" const int kSubjectContractMap[{{ subject_entries.size }}] = {
 // so runtime-entry.cpp / verification_dispatch.generated.cpp can link.
 extern "C" const int kSubjectEntryCount = 0;
 extern "C" const int kSubjectSlotMap[1] = { 0 };
+extern "C" const char* const kSubjectSubjectIds[1] = { "" };
 {{~ end ~}}

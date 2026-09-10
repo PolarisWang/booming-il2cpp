@@ -66,6 +66,14 @@ extern "C" const int kAotMethodCount;
 extern "C" const int kSubjectEntryCount;
 extern "C" const int kSubjectSlotMap[];
 
+// kSubjectSubjectIds maps subject index → full SubjectId string.  Exported
+// by the codegen-generated dispatch table (NativeAot.DispatchEntryCode.cpp).
+// The fact runner outputs this as "methodSubjectId" so Python consumers can
+// cross-reference against subjects.metadata.json by identifier rather than
+// by integer index (whose space differs between kMethodTable and the metadata
+// file — see NativeAot.DispatchEntryCode.cpp.scriban for the full rationale).
+extern "C" const char* const kSubjectSubjectIds[];
+
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;
 
 // Codegen registration symbols (defined in native-aot.generated.cpp)
@@ -423,8 +431,11 @@ static int RunFactJsonMode() {
         bool passed = !caught && !assertFailed;
 
         if (!first) printf(",");
-        printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 ",\"assertFailed\":%s}",
-               si, i, passed ? "true" : "false", result,
+        printf("{\"si\":%d,\"methodIndex\":%d,\"methodSubjectId\":\"%s\",\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 ",\"assertFailed\":%s}",
+               si, i,
+               (si < kSubjectEntryCount && si < kCount && kSubjectSubjectIds != nullptr && kSubjectSubjectIds[si] != nullptr)
+                   ? kSubjectSubjectIds[si] : "",
+               passed ? "true" : "false", result,
                assertFailed ? "true" : "false");
         first = false;
     }
@@ -488,8 +499,11 @@ static int RunFactJsonMode() {
         }
 
         if (!first) printf(",");
-        printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
-               si, v_i, caught ? "false" : "true", caught ? result : result);
+        printf("{\"si\":%d,\"methodIndex\":%d,\"methodSubjectId\":\"%s\",\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
+               si, v_i,
+               (si < kSubjectEntryCount && si < kCount && kSubjectSubjectIds != nullptr && kSubjectSubjectIds[si] != nullptr)
+                   ? kSubjectSubjectIds[si] : "",
+               caught ? "false" : "true", caught ? result : result);
         first = false;
     }
     printf("]}\n");

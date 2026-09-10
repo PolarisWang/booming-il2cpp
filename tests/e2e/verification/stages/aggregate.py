@@ -95,35 +95,49 @@ def _read_chunk_capability(chunk_dir: Path, results_dir: Path) -> dict:
     # Fix #3: guard each method's `index` against non-integer values so a
     # corrupt/float index (e.g. "abc" / 1.5) can't crash the whole aggregate.
     avail_by_index: dict[int, str] = {}
+    avail_by_genid: dict[str, str] = {}
     for _e in mm.get("methods") or []:
         if not _e.get("bodyAvailability"):
             continue
         try:
             _idx = int(_e.get("index"))
         except (TypeError, ValueError):
-            # Non-integer index: skip this method, keep the aggregate going.
-            _e_body = _e.get("bodyAvailability")
-            print(f"  [aggregate] WARNING: non-integer method index in {meta_caps_path.name}, "
-                  f"skipping availability {_e_body!r}")
-            continue
-        avail_by_index[_idx] = _e.get("bodyAvailability")
+            _idx = None
+        if _idx is not None:
+            avail_by_index[_idx] = _e.get("bodyAvailability")
+        _gid = _e.get("generatedMethodId")
+        if _gid:
+            avail_by_genid[_gid] = _e.get("bodyAvailability")
     fr_path = results_dir / "fact-results.json"
     if fr_path.exists():
         try:
             fr = json.loads(fr_path.read_text(encoding="utf-8"))
             for rec in (fr.get("aot") or []) + (fr.get("jit") or []):
-                idx_val = rec.get("si", rec.get("methodIndex"))
-                if idx_val is None:
-                    continue
-                try:
-                    # Fix #2: coerce conservatively — non-numeric si/methodIndex
-                    # is tolerated as no-match rather than crashing the stage.
-                    idx = int(idx_val)
-                except (TypeError, ValueError):
-                    print(f"  [aggregate] WARNING: non-integer method 'si'/'methodIndex' "
-                          f"({idx_val!r}) in {fr_path.name}, skipping record")
-                    continue
-                avail = avail_by_index.get(idx)
+                # Preferred: match by generatedMethodId extracted from the
+                # CombinedSubjects SubjectId.  kSubjectSlotMap[si] holds a
+                # kMethodTable index while the metadata file numbers methods in
+                # a different order, so integer lookup can resolve the wrong
+                # method; the id is stable under any reordering.
+                _rsid = rec.get("methodSubjectId") or ""
+                _gid = None
+                if "::" in _rsid:
+                    _after = _rsid.split("::", 1)[1]
+                    _gid = _after.split(":", 1)[0] if ":" in _after else _after
+                avail = avail_by_genid.get(_gid) if _gid else None
+                if not avail:
+                    # Fallback for records lacking methodSubjectId.
+                    idx_val = rec.get("si", rec.get("methodIndex"))
+                    if idx_val is None:
+                        continue
+                    try:
+                        # Fix #2: coerce conservatively — non-numeric si/methodIndex
+                        # is tolerated as no-match rather than crashing the stage.
+                        idx = int(idx_val)
+                    except (TypeError, ValueError):
+                        print(f"  [aggregate] WARNING: non-integer method 'si'/'methodIndex' "
+                              f"({idx_val!r}) in {fr_path.name}, skipping record")
+                        continue
+                    avail = avail_by_index.get(idx)
                 if not avail:
                     continue
                 total_by_avail[avail] = total_by_avail.get(avail, 0) + 1

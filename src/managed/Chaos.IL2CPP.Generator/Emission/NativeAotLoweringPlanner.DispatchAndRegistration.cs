@@ -165,6 +165,12 @@ public sealed partial class NativeAotLoweringPlanner
                     ["subject_index"] = subjectIdx,
                     ["contract_index"] = subjectIdx,
                     ["method_index"] = i,
+                    // Carried through to kSubjectSubjectIds[] so the fact runner can
+                    // report an unambiguous identifier.  method_index is a
+                    // kMethodTable index while the fact metadata uses its own
+                    // 0..N-1 ordering — reporting the raw index made consumers
+                    // resolve the wrong method.  See NativeAot.DispatchEntryCode.
+                    ["subject_id"] = method.SubjectId ?? string.Empty,
                 });
             }
         }

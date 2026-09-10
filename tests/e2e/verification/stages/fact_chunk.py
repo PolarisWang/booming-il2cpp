@@ -13,6 +13,7 @@ fewer subjects than metadata declares, and that's expected.
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import time
 from pathlib import Path
@@ -120,7 +121,8 @@ _UNASSERTABLE_RETURN_TYPES = frozenset({
 })
 
 
-def classify_fact_record(rec: dict, return_type: str | None) -> str:
+def classify_fact_record(rec: dict, return_type: str | None,
+                         is_factory_subject: bool = False) -> str:
     """Classify one runtime fact record into exactly one bucket.
 
     This is THE single source of truth for real-vs-smoke.  Both the chunk-level
@@ -134,6 +136,14 @@ def classify_fact_record(rec: dict, return_type: str | None) -> str:
       * ``smoke``       — value == 42 on a method that DOES return a value: it
                           should have produced a real assertion but did not.
                           This is the honest coverage gap.
+      * ``factoryGap``  — the dispatch threw before reaching the method: the
+                          test's ``SubjectInstanceFactory.Create<T>()`` returned
+                          null in AOT (its generic instantiation has no native
+                          stub), so the emitted null-guard raised NRE.  The
+                          method under test never ran.  This is an
+                          infrastructure gap, reported separately so it is
+                          neither hidden inside ``failed`` nor confused with a
+                          genuine assertion failure.
       * ``failed``      — passed == False: a genuine assertion failure.
 
     **Missing metadata**: some fact records come from supplemental-coverage
@@ -146,6 +156,13 @@ def classify_fact_record(rec: dict, return_type: str | None) -> str:
     can give for a method ATG cannot reach).
     """
     if not rec.get("passed"):
+        # assertFailed is stamped by the runner when the subject's own Assert.*
+        # executed and left a non-zero exit code.  A bare `caught` with no
+        # assertion failure, on a subject whose body routes through the
+        # instance factory, is the factory returning null — not a defect in the
+        # method under test.
+        if is_factory_subject and not rec.get("assertFailed"):
+            return "factoryGap"
         return "failed"
     if rec.get("value") != 42:
         return "real"
@@ -186,6 +203,39 @@ def _count_unverified_markers(ctx: ChunkContext) -> int:
         return count
     except OSError:
         return 0
+
+
+def _get_factory_subject_ids(ctx: ChunkContext) -> frozenset[str]:
+    """Scan CombinedSubjects.cs for methods using SubjectInstanceFactory.Create<T>().
+
+    Tests of the form ``SubjectInstanceFactory.Create<T>().Method()`` dispatch
+    through a factory that, in AOT mode, may return null when the generic
+    instantiation of ``Create<T>`` has no native stub.  When the factory
+    returns null, the subsequent null-guard raises NullReferenceException
+    and the dispatch records ``caught=true`` — a failure of the *infrastructure*
+    rather than of the method under test.
+
+    Returns a frozenset of ``generatedMethodId`` values whose test body
+    calls ``SubjectInstanceFactory.Create<``.
+    """
+    combined_cs = ctx.chunk_dir / "managed" / "combined" / "CombinedSubjects.cs"
+    if not combined_cs.exists():
+        return frozenset()
+    try:
+        text = combined_cs.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return frozenset()
+
+    factory_ids: set[str] = set()
+    for m in re.finditer(r'public long (\w+)\(\)\s*\n\s*\{', text, re.MULTILINE):
+        gid = m.group(1)
+        body_start = m.end()
+        # Body runs to the next method declaration (or end of file).
+        next_method = re.search(r'public (?:long|static)\s', text[body_start:])
+        body_end = body_start + (next_method.start() if next_method else len(text) - body_start)
+        if 'SubjectInstanceFactory.Create<' in text[body_start:body_end]:
+            factory_ids.add(gid)
+    return frozenset(factory_ids)
 
 
 def _tech_status(tech_result: dict, meta_total: int | None) -> str:
@@ -273,6 +323,7 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     # label and therefore diverges from the runtime truth).
     avail_by_index: dict[int, str] = {}
     sid_by_index: dict[int, str] = {}
+    meta_by_genid: dict[str, dict] = {}
     try:
         md = json.loads(ctx.subjects_metadata_path.read_text(encoding="utf-8"))
         for mm in md.get("methods") or []:
@@ -283,14 +334,74 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
             if idx is not None:
                 sid = mm.get("methodSubjectId") or ""
                 sid_by_index[int(idx)] = sid
+            # generatedMethodId-keyed lookup — stable under any reordering.
+            gid = mm.get("generatedMethodId")
+            if gid:
+                meta_by_genid[gid] = mm
     except (json.JSONDecodeError, OSError):
         avail_by_index = {}
         sid_by_index = {}
+        meta_by_genid = {}
+
+    def _generated_method_id_from_subject_id(sid: str) -> str | None:
+        """Extract the generatedMethodId from a CombinedSubjects SubjectId.
+
+        The fact runner emits SubjectIds of the form::
+
+            CombinedSubjects/AutoGenerated.Ns.Class::GeneratedMethodId:ReturnType
+
+        while the metadata stores the *original* SubjectId
+        (``Assembly/Namespace.Type::Method``) and separately stores
+        ``generatedMethodId``.  Extracting the component after ``::``
+        and before the next ``:`` gives the id that matches metadata.
+        """
+        if not sid or "::" not in sid:
+            return sid
+        after = sid.split("::", 1)[1]
+        after = after.split(":", 1)[0] if ":" in after else after
+        return after.strip() or None
+
+    # Factory-gap detection: pre-scan CombinedSubjects.cs for methods whose
+    # test body calls SubjectInstanceFactory.Create<T>(), then feed that
+    # signal to classify_fact_record so caught-from-factory entries are
+    # reported in their own bucket rather than hidden inside "failed".
+    factory_subjects = _get_factory_subject_ids(ctx)
 
     def _annotate(records: list) -> list:
         if not records:
             return records
         for rec in records:
+            # Preferred path: match by generatedMethodId extracted from the
+            # CombinedSubjects SubjectId (see meta_by_genid note above).
+            rec_sid = rec.get("methodSubjectId")
+            gen_id = _generated_method_id_from_subject_id(rec_sid) if rec_sid else None
+            mm = meta_by_genid.get(gen_id) if gen_id else None
+            if mm is not None:
+                # Rewrite methodIndex from the kMethodTable index space to the
+                # metadata index space.  The runtime reports the index it
+                # dispatched through (a kMethodTable slot); downstream tools all
+                # treat "methodIndex" as an index into subjects.metadata.json.
+                # Those two orderings differ, so the raw value silently resolved
+                # a *different* method (502/586 records on System.Net.Sockets).
+                # Once the record is identified by generatedMethodId we know the
+                # true metadata row, and its index is the value consumers expect.
+                # Nothing reads methodIndex back out to address the native
+                # dispatch table — that stays inside entry.exe via
+                # kSubjectSlotMap — so rewriting it here is lossless.
+                meta_idx = mm.get("index")
+                if meta_idx is not None:
+                    rec["methodIndex"] = meta_idx
+                ba = mm.get("bodyAvailability")
+                if ba:
+                    rec["bodyAvailability"] = ba
+                rt = _return_type_of(mm.get("methodSubjectId", ""))
+                rec["returnType"] = rt
+                rec["resultKind"] = classify_fact_record(
+                    rec, rt,
+                    is_factory_subject=(gen_id in factory_subjects) if gen_id else False)
+                continue
+
+            # Fallback for records without methodSubjectId (pre-rebuild).
             idx = rec.get("si", rec.get("methodIndex"))
             if idx is not None and int(idx) in avail_by_index:
                 rec["bodyAvailability"] = avail_by_index[int(idx)]
@@ -317,12 +428,17 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     real_ct = sum(1 for r in annotated if r.get("resultKind") == "real")
     unassertable_ct = sum(1 for r in annotated if r.get("resultKind") == "unassertable")
     smoke_ct = sum(1 for r in annotated if r.get("resultKind") == "smoke")
+    factory_gap_ct = sum(1 for r in annotated if r.get("resultKind") == "factoryGap")
     failed_ct = sum(1 for r in annotated if r.get("resultKind") == "failed")
 
     # Real-signal numerator: records that produced/or would produce a genuine
     # semantic check (a real value, or a genuine failure).  unassertable records
     # stay in the denominator so an all-void chunk cannot claim a free 100%.
+    # factoryGap records are infrastructure failures (factory returned null), not
+    # defects in the method under test — they are excluded from numerator AND
+    # denominator so they cannot block the gate while remaining fully visible.
     real_signal = real_ct + failed_ct
+    gate_denominator = total - factory_gap_ct
 
     fact_data = {
         "passed": passed,
@@ -331,7 +447,11 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         "realVerified": real_ct,        # value != 42: genuine assertion value
         "unassertable": unassertable_ct,  # void/async-void: 42 is structural
         "smokeUnknown": smoke_ct,       # has a return type but returned 42 → GAP
+        "factoryGap": factory_gap_ct,   # factory returned null → caught before method ran
         "failed": failed_ct,            # passed == False
+        # ── Gate numerator/denominator (factoryGap excluded from both sides) ──
+        "gateTotal": gate_denominator,
+        "gatePassed": passed,
         # ── Legacy fields (backward compat; now runtime-based, not marker-based) ──
         "realTotal": real_signal,
         "realPassed": real_ct,
