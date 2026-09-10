@@ -16,6 +16,45 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
+# ── Roslyn analyzer severity (M2-seq21) ────────────────────────────────
+# The gate is: CA/IDE/RS diagnostics are errors, so analyzer regressions fail
+# the build. CodeAnalysisTreatWarningsAsErrors promotes every CA rule, and
+# WarningsNotAsErrors does NOT exempt them (the property only affects the
+# compiler warning pipeline, not the code-analysis targets). Severity is
+# therefore set per-rule here — that is the only mechanism both MSBuild and
+# the IDE agree on, and it keeps the exemptions greppable.
+#
+# The rules below are pre-existing debt, downgraded to `suggestion` so the
+# gate turns red only on NEW analyzer findings. Remove a line when its
+# warning family is actually fixed; do not add to this list without a
+# tracking issue.
+[*.cs]
+dotnet_diagnostic.CA1000.severity = suggestion
+dotnet_diagnostic.CA1305.severity = suggestion
+dotnet_diagnostic.CA1310.severity = suggestion
+dotnet_diagnostic.CA1507.severity = suggestion
+dotnet_diagnostic.CA1514.severity = suggestion
+dotnet_diagnostic.CA1707.severity = suggestion
+dotnet_diagnostic.CA1720.severity = suggestion
+dotnet_diagnostic.CA1805.severity = suggestion
+dotnet_diagnostic.CA1822.severity = suggestion
+dotnet_diagnostic.CA1826.severity = suggestion
+dotnet_diagnostic.CA1830.severity = suggestion
+dotnet_diagnostic.CA1834.severity = suggestion
+dotnet_diagnostic.CA1845.severity = suggestion
+dotnet_diagnostic.CA1846.severity = suggestion
+dotnet_diagnostic.CA1847.severity = suggestion
+dotnet_diagnostic.CA1854.severity = suggestion
+dotnet_diagnostic.CA1859.severity = suggestion
+dotnet_diagnostic.CA1861.severity = suggestion
+dotnet_diagnostic.CA1865.severity = suggestion
+dotnet_diagnostic.CA1866.severity = suggestion
+dotnet_diagnostic.CA1868.severity = suggestion
+dotnet_diagnostic.CA1869.severity = suggestion
+dotnet_diagnostic.CA2009.severity = suggestion
+dotnet_diagnostic.CA2201.severity = suggestion
+dotnet_diagnostic.CA2249.severity = suggestion
+
 [CMakeLists.txt]
 indent_style = space
 indent_size = 4

@@ -14,5 +14,24 @@
          CA warnings on Generator).  Enforces IDE0005/CA rules going forward. -->
     <AnalysisLevel>latest</AnalysisLevel>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <!-- M2-seq21: make Roslyn analyzer diagnostics fail the build.
+         CodeAnalysisTreatWarningsAsErrors promotes CA diagnostics to errors via
+         the SDK code-analysis target.  Verified end-to-end: a fresh CA1806
+         fails the build (`dotnet build` → 1 Error), all 20 managed+tools
+         projects build clean.
+         Pre-existing CA debt is downgraded per-rule in /.editorconfig —
+         WarningsNotAsErrors cannot be used here because it only affects the
+         compiler warning pipeline, not the code-analysis target.
+         AnalysisMode=Recommended is required for the gate to mean anything:
+         with AnalysisMode empty the effective CA set is a handful of rules.
+         KNOWN GAP: IDE*/RS* are still NOT gated.  WarningsAsErrors=IDE*;RS*
+         plus EnforceCodeStyleInBuild was tried and does not surface IDE0005
+         under the current SDK, so no IDE claim is made here.  Tracked
+         separately rather than asserted. -->
+    <AnalysisMode>Recommended</AnalysisMode>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <WarningsAsErrors>$(WarningsAsErrors);RS*</WarningsAsErrors>
   </PropertyGroup>
 </Project>
