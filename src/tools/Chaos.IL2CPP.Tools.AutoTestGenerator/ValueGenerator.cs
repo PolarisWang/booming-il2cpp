@@ -218,11 +218,22 @@ public sealed class ValueGenerator
 
         // Smart set: non-null values for delegate/interface/array parameters
         var smartArgs = new string[paramTypes.Length];
+        bool anyFixture = false;
         for (int i = 0; i < paramTypes.Length; i++)
         {
             var t = paramTypes[i];
             if (isRefStructParam[i])
                 smartArgs[i] = DefaultValue(t, true);
+            // Fixtures FIRST: a real input (JSON text, XML doc, UTF-8 buffer,
+            // stream, …) exercises the method's real code path.  Checked before
+            // the generic delegate/array/interface handlers so a method taking
+            // e.g. (ReadOnlyMemory<byte>, JsonReaderOptions) gets a real buffer
+            // rather than default(T)!.
+            else if (TryGetFixtureExpression(t, out var fixtureExpr))
+            {
+                smartArgs[i] = fixtureExpr;
+                anyFixture = true;
+            }
             else if (TryGetDelegateExpression(t, out var delegateExpr))
                 smartArgs[i] = delegateExpr;
             else if (TryGetArrayExpression(t, out var arrayExpr))
@@ -249,6 +260,25 @@ public sealed class ValueGenerator
                     ?? DefaultValue(t, false);
         }
         AddUnique(sets, usedSignatures, methodIndex, smartArgs);
+
+        // ── Fixture-only set ──
+        // When at least one parameter got a fixture above, ALSO emit a set where
+        // every parameter is a fixture or the (already non-null) smart value.
+        // This matters for methods like
+        // `JsonDocument.Parse(ReadOnlyMemory<byte>, JsonDocumentOptions)` where the
+        // smart set may still pass a default for a secondary parameter and trip an
+        // argument-null guard before reaching the real code path.
+        if (anyFixture)
+        {
+            var fixtureArgs = (string[])smartArgs.Clone();
+            for (int i = 0; i < paramTypes.Length; i++)
+            {
+                if (isRefStructParam[i]) continue;
+                if (TryGetFixtureExpression(paramTypes[i], out var fx))
+                    fixtureArgs[i] = fx;
+            }
+            AddUnique(sets, usedSignatures, methodIndex, fixtureArgs);
+        }
 
         // Semantic value sets for reflection/conversion methods whose default-argument
         // probing would otherwise never exercise non-empty inputs.  These methods
@@ -417,6 +447,67 @@ public sealed class ValueGenerator
         var baseName = gaStart >= 0 ? typeName[..gaStart] : typeName;
         var lastDot = baseName.LastIndexOf('.');
         return lastDot >= 0 ? baseName[(lastDot + 1)..] : baseName;
+    }
+
+    /// <summary>
+    /// Real input fixtures, keyed by the SHORT base name of the parameter type
+    /// (see <see cref="GetShortBaseName"/>).  Used by
+    /// <see cref="TryGetFixtureExpression"/>.
+    ///
+    /// Why this exists: ATG's generic argument resolution falls back to
+    /// <c>default(T)!</c> for types it can't construct, which means methods whose
+    /// whole point is to consume a real input — <c>JsonDocument.Parse</c>,
+    /// <c>Utf8JsonReader</c>, <c>XPathNavigator.Evaluate</c> — either throw
+    /// ArgumentNullException or take a trivially-empty path.  Registering a small
+    /// but *valid* fixture lets those subjects exercise their real code path and
+    /// produce a non-42 result that the fact gate can verify.
+    ///
+    /// Every expression here must be:
+    ///   * a compile-time constant C# expression (no reflection, no I/O),
+    ///   * valid on both net8.0 and net10.0,
+    ///   * cheap — it is constructed for every subject that takes this type.
+    /// </summary>
+    private static readonly Dictionary<string, string> FixtureValues = new(StringComparer.Ordinal)
+    {
+        // ── System.Text.Json ──
+        // A minimal but *valid* JSON document.  Parsing "{}" exercises the real
+        // reader/tokenizer path (token type, depth tracking, options handling)
+        // rather than the empty/throw path.
+        ["JsonDocument"] = "System.Text.Json.JsonDocument.Parse(\"{}\")",
+        ["JsonElement"] = "System.Text.Json.JsonDocument.Parse(\"{}\").RootElement",
+        // Raw UTF-8 bytes for the reader-based overloads.  "{}" == 0x7B 0x7D.
+        ["Utf8JsonReader"] = "new System.Text.Json.Utf8JsonReader(new byte[] { 0x7B, 0x7D })",
+        // ── System.Xml ──
+        // A minimal well-formed XML document for the XPath/XSLT navigators.
+        ["XPathDocument"] = "new System.Xml.XPath.XPathDocument(new System.IO.StringReader(\"<root/>\"))",
+        ["XPathNavigator"] = "new System.Xml.XPath.XPathDocument(new System.IO.StringReader(\"<root/>\")).CreateNavigator()",
+        ["XmlDocument"] = "new System.Xml.XmlDocument()",
+        ["XmlNode"] = "new System.Xml.XmlDocument().CreateElement(\"root\")",
+        ["XmlReader"] = "System.Xml.XmlReader.Create(new System.IO.StringReader(\"<root/>\"))",
+        ["XmlWriter"] = "System.Xml.XmlWriter.Create(System.IO.Stream.Null)",
+        ["XsltArgumentList"] = "new System.Xml.Xsl.XsltArgumentList()",
+        ["XslCompiledTransform"] = "new System.Xml.Xsl.XslCompiledTransform()",
+        ["XslTransform"] = "new System.Xml.Xsl.XslTransform()",
+        // ── Streams / buffers (real, non-null, seekable where useful) ──
+        // Stream.Null is already handled in NullGuardSafeDefaults; the ones below
+        // give non-empty content so read/path methods take their real branch.
+        ["MemoryStream"] = "new System.IO.MemoryStream(new byte[] { 0x7B, 0x7D })",
+        ["ReadOnlyMemory"] = "new System.ReadOnlyMemory<System.Byte>(new byte[] { 0x7B, 0x7D })",
+        ["ReadOnlySequence"] = "new System.Buffers.ReadOnlySequence<System.Byte>(new byte[] { 0x7B, 0x7D })",
+        ["ArraySegment"] = "new System.ArraySegment<System.Byte>(new byte[] { 0x7B, 0x7D })",
+        ["IBufferWriter"] = "new System.Buffers.ArrayBufferWriter<System.Byte>()",
+    };
+
+    /// <summary>
+    /// Resolve a real fixture expression for a parameter type, or false when the
+    /// type has no registered fixture.  Matched on the short base name so a
+    /// single entry covers every generic instantiation.
+    /// </summary>
+    private static bool TryGetFixtureExpression(string typeName, out string expr)
+    {
+        expr = null!;
+        var baseName = GetShortBaseName(typeName);
+        return FixtureValues.TryGetValue(baseName, out expr!);
     }
 
     private static bool TryGetDelegateExpression(string typeName, out string expr)
