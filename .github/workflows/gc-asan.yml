@@ -65,11 +65,23 @@ jobs:
       - name: Locate & copy ASan runtime DLL
         shell: bash
         run: |
-          # The runner may host VS 2022 (17) or VS 2026 (18); search both rather than
-          # hard-coding the 2022 tree, and fall back to a whole-VS-dir search.
-          dll=$(find "/c/Program Files/Microsoft Visual Studio/2022" "/c/Program Files/Microsoft Visual Studio/18" -iname "clang_rt.asan_dynamic-x86_64.dll" 2>/dev/null | head -1)
-          if [ -z "$dll" ]; then dll=$(find "/c/Program Files/Microsoft Visual Studio" -iname "clang_rt.asan_dynamic-x86_64.dll" 2>/dev/null | head -1); fi
-          if [ -z "$dll" ]; then echo "::error::clang_rt.asan_dynamic-x86_64.dll not found under any Visual Studio install"; exit 1; fi
+          # The runner may host VS 2022 (17) or VS 2026 (18). The ASan dynamic
+          # runtime ships in the MSVC toolchain bin dir; search the known MSVC
+          # Hostx64/x64 dirs first (fast) then fall back to a whole-VS search.
+          dll=""
+          for base in "/c/Program Files/Microsoft Visual Studio/2022" "/c/Program Files/Microsoft Visual Studio/18" "/c/Program Files/Microsoft Visual Studio"; do
+            [ -d "$base" ] || continue
+            dll=$(find "$base" -path "*Hostx64/x64*" -iname "clang_rt.asan_dynamic-x86_64.dll" 2>/dev/null | head -1)
+            [ -n "$dll" ] && break
+            dll=$(find "$base" -iname "clang_rt.asan_dynamic-x86_64.dll" 2>/dev/null | head -1)
+            [ -n "$dll" ] && break
+          done
+          if [ -z "$dll" ]; then
+            echo "::warning::clang_rt.asan_dynamic-x86_64.dll not found; listing candidates"
+            find "/c/Program Files/Microsoft Visual Studio" -iname "clang_rt.asan*" 2>/dev/null | head -20 || true
+            echo "::error::clang_rt.asan_dynamic-x86_64.dll not found under any Visual Studio install (ASan component may be absent on this image)"
+            exit 1
+          fi
           echo "ASan DLL: $dll"
           # Multi-config Debug output dirs (new tree exes) + the contracts-tree
           # absolute output dir (tests/contracts/native/runtime-core/CMakeLists.txt).
