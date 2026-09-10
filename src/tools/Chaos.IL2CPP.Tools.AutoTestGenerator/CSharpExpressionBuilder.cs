@@ -199,10 +199,9 @@ public sealed class CSharpExpressionBuilder
         // NOTE: Formatter deliberately excluded — ~20 abstract members
         // (WriteDouble, WriteChar, …) vary by framework version.
         ["System.Runtime.Serialization.SerializationBinder"] = "new TestSerializationBinder()",
-        // System.Xml — XsltContext and XPathExpression are abstract; the
-        // synthesized subclasses give permissive default behaviour.
-        ["System.Xml.Xsl.XsltContext"] = "new TestXsltContext()",
-        ["System.Xml.XPath.XPathExpression"] = "new TestXPathExpression()",
+        // System.Xml — XsltContext and XPathExpression are abstract with too
+        // many abstract members whose set varies by framework version, so
+        // no stable synthesized subclass is possible.
     };
 
     // Types with a static `Shared` property that returns a valid instance.
