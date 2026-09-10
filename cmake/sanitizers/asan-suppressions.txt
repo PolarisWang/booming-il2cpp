@@ -1,0 +1,26 @@
+# ASan suppression list for chaos-il2cpp testing
+#
+# Usage:
+#   set ASAN_OPTIONS=suppressions=testing/asan-suppressions.txt
+#
+# Suppression format (MSVC):
+#   interceptor_via_fun:function_name
+#   interceptor_via_lib:library_name
+#
+# Each entry includes the reason so suppressions can be removed when no longer needed.
+
+# ── Domain heap allocations (batch-freed via heap->Destroy) ─────────────────────
+# Domain allocator uses its own arena; not std::malloc/free tracked by ASan.
+interceptor_via_fun:DomainArenaAlloc
+
+# ── ThreadPool worker threads (ASan may report races on intentionally shared state) ──
+# ThreadPool worker threads intentionally read/write shared atomic state.
+# Remove once thread sanitizer (TSan) is integrated separately.
+interceptor_via_fun:ThreadPoolWorkerThread
+
+# ── Parallel sweep lambda (gc_old_gen.cpp) ──────────────────────────────────────
+# Worker pool threads access stack-local atomics (next_page, parallel_reclaimed)
+# during parallel sweep.  ASan's cross-thread stack access detection flags this
+# as suspicious, but RunWorkers() guarantees all workers complete before the
+# stack frame goes out of scope.
+interceptor_via_fun:MarkSweepOldGen::Collect

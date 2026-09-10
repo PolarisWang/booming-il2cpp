@@ -12,7 +12,7 @@
 #ifndef CHAOS_IL2CPP_JIT_CFG_H_
 #define CHAOS_IL2CPP_JIT_CFG_H_
 
-#include "tree/jit_tree_builder.h"  // BBRange
+#include "tree/jit_tree_builder.h" // BBRange
 
 #include <cstdint>
 #include <vector>
@@ -25,30 +25,30 @@ namespace chaos::il2cpp::jit::tree {
 
 /// A single basic block node in the control flow graph.
 struct CfgBlock {
-    uint32_t lo = 0;            // instruction index range [lo, hi)
+    uint32_t lo = 0; // instruction index range [lo, hi)
     uint32_t hi = 0;
-    uint32_t id = 0;            // block index in the blocks_ array
-    int32_t  idom = -1;         // immediate dominator (-1 = entry / no idom)
-    uint32_t loop_depth = 0;    // nesting depth (0 = outside any loop)
-    bool     visited = false;   // for DFS / loop detection
+    uint32_t id = 0;         // block index in the blocks_ array
+    int32_t idom = -1;       // immediate dominator (-1 = entry / no idom)
+    uint32_t loop_depth = 0; // nesting depth (0 = outside any loop)
+    bool visited = false;    // for DFS / loop detection
 
-    std::vector<uint32_t> preds;  // predecessor block IDs
-    std::vector<uint32_t> succs;  // successor block IDs
+    std::vector<uint32_t> preds; // predecessor block IDs
+    std::vector<uint32_t> succs; // successor block IDs
 };
 
 /// A natural loop identified from back-edge analysis.
 struct NaturalLoop {
-    uint32_t              header = 0;       // loop header block ID
-    uint32_t              back_edge_from = 0; // source of the back-edge
-    std::vector<uint32_t> blocks;            // all blocks belonging to this loop
-    uint32_t              depth = 0;         // nesting depth (0 = outermost)
+    uint32_t header = 0;          // loop header block ID
+    uint32_t back_edge_from = 0;  // source of the back-edge
+    std::vector<uint32_t> blocks; // all blocks belonging to this loop
+    uint32_t depth = 0;           // nesting depth (0 = outermost)
 };
 
 /// Result of CFG analysis: graph, dominator tree, and natural loops.
 struct LoopAnalysis {
-    std::vector<CfgBlock>   blocks;
+    std::vector<CfgBlock> blocks;
     std::vector<NaturalLoop> loops;
-    bool                    has_loops = false;
+    bool has_loops = false;
 
     /// True if block_id belongs to at least one natural loop.
     /// If so, out_loop_idx is set to the innermost loop index.
@@ -70,18 +70,20 @@ struct LoopAnalysis {
     /// the vreg's defining instruction originates from a block outside
     /// the loop (dominated by the loop pre-header).  def_blocks maps
     /// vreg → defining block id (UINT32_MAX if unknown/variable).
-    bool IsLoopInvariant(uint32_t vreg, uint32_t loop_idx,
-                         const uint32_t* def_blocks,
+    bool IsLoopInvariant(uint32_t vreg, uint32_t loop_idx, const uint32_t* def_blocks,
                          uint32_t def_block_count) const noexcept {
-        if (vreg >= def_block_count) return false;
+        if (vreg >= def_block_count)
+            return false;
         uint32_t def_block = def_blocks[vreg];
-        if (def_block == UINT32_MAX) return false;
+        if (def_block == UINT32_MAX)
+            return false;
 
         const auto& loop = loops[loop_idx];
         for (uint32_t b : loop.blocks) {
-            if (b == def_block) return false;  // defined inside the loop
+            if (b == def_block)
+                return false; // defined inside the loop
         }
-        return true;  // defined outside the loop → invariant
+        return true; // defined outside the loop → invariant
     }
 };
 
@@ -97,9 +99,8 @@ struct LoopAnalysis {
 /// After building the graph, computes the immediate dominator tree using
 /// the Lengauer-Tarjan algorithm, then identifies natural loops from
 /// back-edges in the dominator tree.
-LoopAnalysis BuildCfg(const std::vector<BBRange>& bbs,
-                      const interpreter::RegisterInstruction* instrs) noexcept;
+LoopAnalysis BuildCfg(const std::vector<BBRange>& bbs, const interpreter::RegisterInstruction* instrs) noexcept;
 
-}  // namespace chaos::il2cpp::jit::tree
+} // namespace chaos::il2cpp::jit::tree
 
-#endif  // CHAOS_IL2CPP_JIT_CFG_H_
+#endif // CHAOS_IL2CPP_JIT_CFG_H_

@@ -9,6 +9,20 @@ namespace Chaos.IL2CPP.Tools.AutoTestGenerator;
 /// </summary>
 public sealed class CSharpExpressionBuilder
 {
+    /// <summary>
+    /// C# keyword aliases that cannot follow global:: (e.g. global::string is invalid).
+    /// When ToCSharpTypeName/StripAssemblyQualification produces one of these, emit the
+    /// bare keyword directly instead of global::&lt;keyword&gt;.
+    /// </summary>
+    internal static bool IsCSharpKeyword(string name) => name switch
+    {
+        "bool" or "byte" or "sbyte" or "short" or "ushort" or
+        "int" or "uint" or "long" or "ulong" or
+        "float" or "double" or "decimal" or
+        "char" or "string" or "object" or "void" => true,
+        _ => false
+    };
+
     private readonly CSharpSerializer _serializer;
 
     // Types with well-known static factory instances (abstract or no default ctor)
@@ -148,30 +162,6 @@ public sealed class CSharpExpressionBuilder
             "typeof(System.ComponentModel.PropertyChangedEventArgs).GetEvents()[0]",
         ["System.Reflection.Assembly"] =
             "typeof(int).Assembly",
-        // System.Net.Sockets — constructible instance types
-        ["System.Net.Sockets.Socket"] =
-            "new System.Net.Sockets.Socket(System.Net.Sockets.SocketType.Stream, System.Net.Sockets.ProtocolType.Tcp)",
-        ["System.Net.Sockets.SocketAsyncEventArgs"] =
-            "new System.Net.Sockets.SocketAsyncEventArgs()",
-        ["System.Net.Sockets.TcpClient"] =
-            "new System.Net.Sockets.TcpClient()",
-        ["System.Net.Sockets.TcpListener"] =
-            "new System.Net.Sockets.TcpListener(System.Net.IPAddress.Loopback, 0)",
-        ["System.Net.Sockets.UdpClient"] =
-            "new System.Net.Sockets.UdpClient()",
-        ["System.Net.Sockets.UnixDomainSocketEndPoint"] =
-            "new System.Net.Sockets.UnixDomainSocketEndPoint(\"/tmp/test\")",
-        // System.Net.ServerSentEvents
-        ["System.Net.ServerSentEvents.SseParser"] =
-            "System.Net.ServerSentEvents.SseParser.Create<int>(System.IO.Stream.Null)",
-        // System.IO.Compression — ZipArchive over a valid in-memory empty zip.
-        // A 22-byte end-of-central-directory-only zip is a fully valid, readable
-        // archive with zero entries; constructing ZipArchive over it yields a real
-        // instance whose Entries is empty (non-throwing), letting instance-method
-        // subjects (ZipFileExtensions.*) run with deterministic semantics instead
-        // of ArgumentNullException on a bare GetUninitializedObject.
-        ["System.IO.Compression.ZipArchive"] =
-            "new System.IO.Compression.ZipArchive(new System.IO.MemoryStream(System.Convert.FromBase64String(\"UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA==\")), System.IO.Compression.ZipArchiveMode.Read)",
     };
 
     // Types with a static `Shared` property that returns a valid instance.
@@ -181,9 +171,6 @@ public sealed class CSharpExpressionBuilder
     private static readonly Dictionary<string, string> SharedInstanceTypes = new(StringComparer.Ordinal)
     {
         ["System.Buffers.ArrayPool"] = ".Shared",
-        // Frozen collections — .Empty returns a real non-bare instance
-        ["System.Collections.Frozen.FrozenDictionary"] = ".Empty",
-        ["System.Collections.Frozen.FrozenSet"] = ".Empty",
     };
 
     /// <summary>
@@ -211,12 +198,6 @@ public sealed class CSharpExpressionBuilder
         ["System.Collections.Generic.Stack"] =         new(FactoryKind.EnumerableCtor, 1),
         ["System.Collections.Generic.Queue"] =         new(FactoryKind.EnumerableCtor, 1),
 
-        // ObservableCollection<T> — a bare GetUninitializedObject instance has a null
-        // backing list, so Move/Remove throw ArgumentOutOfRangeException/NullReference.
-        // Construct with seeded items via the IEnumerable<T> ctor so index-based
-        // operations (Move(0,1)) succeed with deterministic semantics.
-        ["System.Collections.ObjectModel.ObservableCollection"] = new(FactoryKind.EnumerableCtor, 1),
-
         // Special constructor expressions
         ["System.IO.MemoryStream"] =                   new(FactoryKind.CustomExpr, 0,
             "new MemoryStream(new byte[] { 1, 2, 3 })"),
@@ -242,16 +223,11 @@ public sealed class CSharpExpressionBuilder
         var csType = CSharpSerializer.MapToCSharpType(typeFullName);
 
         // Check known factory instances (Encoding.UTF8, string.Empty)
-        // First try the full (namespace-qualified) typeFullName, then the C# short-name csType.
-        // MapToCSharpType strips the namespace (e.g. "System.Net.Sockets.Socket" → "Socket"),
-        // but KnownInstances uses full-name keys — so both forms must be checked.
-        if (KnownInstances.TryGetValue(typeFullName, out var knownExprFull))
-            return knownExprFull;
         if (KnownInstances.TryGetValue(csType, out var knownExpr))
             return knownExpr;
 
         // Check known type factories (collections, special constructors)
-        var factoryResult = TryBuildFactoryExpression(typeFullName, csType);
+        var factoryResult = TryBuildFactoryExpression(csType, csType);
         if (factoryResult is not null)
             return factoryResult;
 
@@ -267,15 +243,31 @@ public sealed class CSharpExpressionBuilder
                 var gaPart = qualified.Contains('<') ? qualified[qualified.IndexOf('<')..] : "";
                 return $"global::{baseName}{gaPart}{sharedSuffix}";
             }
-            // Use SubjectInstanceFactory for valid instances. Ref structs and
+                        // Use SubjectInstanceFactory for valid instances. Ref structs and
             // unresolvable types fall back to default(T)! (ref structs can't be
             // generic type params; unresolved types may be in unreferenced assemblies).
             try {
                 var t = Type.GetType(typeFullName, false);
-                if (t == null || (t.IsValueType && t.IsByRefLike))
-                    return $"default(global::{qualified.Replace('+', '.')})!";
-            } catch { return $"default(global::{qualified.Replace('+', '.')})!"; }
-            return $"SubjectInstanceFactory.Create<global::{qualified.Replace('+', '.')}>()";
+                var qualifiedType = CSharpSerializer.ToQualifiedCSharpType(typeFullName);
+                // Ref struct types can't be used as generic type arguments — use default(T) for them.
+                if (t != null && t.IsValueType && t.IsByRefLike)
+                    return $"default({qualifiedType})!";
+                // For types where Type.GetType returns null (BCL types not loaded in ATG process),
+                // fall through to SubjectInstanceFactory.Create<T>() which uses GetUninitializedObject
+                // to return a non-null instance. This fixes the 908-case "default(global::T)! → NRE"
+                // pattern that caused 42-sentinel false passes.
+                // NOTE: ToQualifiedCSharpType keeps the full namespace path for non-keyword types
+                // (e.g. System.Globalization.CultureInfo), and collapses primitives to keywords
+                // (string, int, bool).  This avoids two invalid patterns:
+                //   global::string   — global:: cannot precede a C# keyword (CS1525)
+                //   global::CultureInfo — bare type not globally resolvable (CS0400)
+                // When t is null (unresolvable) we still emit Create<T> since the caller
+                // expects a non-null instance; if the type turns out to be a ref struct
+                // the compilation will fail with CS9244 — but that's better than silently
+                // returning null from default(T) and producing false positives.
+                return $"SubjectInstanceFactory.Create<{qualifiedType}>()";
+            } catch { /* fall through to default(T) fallback */ }
+            return $"default({CSharpSerializer.ToQualifiedCSharpType(typeFullName)})!";
         }
 
         // Try to find a parameterless constructor via runtime reflection

@@ -39,6 +39,20 @@ void GetPlatformMemoryStatus(MemoryStatusData& out) noexcept;
 void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
                          CHAOS_IL2CPP_SIZE size) noexcept;
 
+/// Get the gen-scaled OOM report budget (align CoreCLR allocation.cpp
+/// oom_budget = dd_min_size(gen0)/2).  CRAG derives it from the config-tunable
+/// gen0/nursery minimum budget (GcConfig().MinNurserySize, default 64 KB) / 2,
+/// so it scales with the configured gen0 budget.  Used to clamp the requested
+/// size in the OOM failure report.
+CHAOS_IL2CPP_SIZE GcGetOomReportBudget() noexcept;
+
+/// True while HandleOomCondition is executing the post-full-GC @a retry_alloc
+/// callback.  Recovery paths consult this to relax gates that must not block a
+/// genuine recovery after a full GC freed memory (e.g. the old-gen
+/// ExceedsHardLimit gate, whose estimate never shrinks).  Only set on the
+/// recovery retry, never on the normal allocation fast path.
+bool GcInOomRecovery() noexcept;
+
 // ── Managed GC API (System.GC) ─────────────────────────────────────
 
 /// Returns the total number of bytes currently thought to be allocated
@@ -101,6 +115,24 @@ static inline bool chaos_is_gc_pointer(const void* ptr) noexcept {
     // card table, covering old-gen and nursery.  Stack-allocated value
     // types live far below this address.
     if (addr >= g_heap_base) [[likely]] return true;
+    // Nursery regions are allocated separately via RegionManager and may sit
+    // BELOW g_heap_base (g_heap_base is not the whole-heap lower bound; see
+    // the conservative scan filter in thread_state.cpp:674-678).  Fast path
+    // first: the DirtyCard nursery window covers the single main nursery, so
+    // a true GC nursery object below base is not mistaken for a stack address
+    // — otherwise the write barrier would skip carding an old→nursery store →
+    // dropped cross-gen edge → UAF.
+    if (addr >= g_nursery_range_begin && addr < g_nursery_range_end) [[likely]]
+        return true;
+    // Authoritative nursery test: g_nursery_range_begin/end only tracks the
+    // single main nursery published by InitYoungGeneration.  RegionManager
+    // may hold additional nursery ranges (secondary/multi-nursery or a
+    // recycled nursery re-published via AddNurseryRange) that sit below
+    // g_heap_base yet are NOT reflected in that one fast window.  Route
+    // through the full lock-free RegionManager::IsNurseryPointer (its own
+    // O(1) global-bounds fast path returns false cheaply for out-of-range
+    // addresses) so no live nursery object is missed.
+    if (RegionManager::Instance().IsNurseryPointer(ptr)) return true;
     // POH regions are independently VirtualAlloc'd and may be below
     // g_heap_base (the card table does not cover POH).  Check via the
     // lock-free POH slot array.

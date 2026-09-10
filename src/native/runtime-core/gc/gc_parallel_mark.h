@@ -4,8 +4,10 @@
 #include <chaos/native_types.h>
 
 #include <atomic>
+#include <condition_variable>
 #include <cstdint>
 #include <cstring>
+#include <mutex>
 #include <vector>
 
 #include "gc_old_gen.h"
@@ -35,7 +37,9 @@ namespace chaos::il2cpp::runtime_core {
 // ======================================================================
 
 /// Maximum parallel workers (bound to prevent oversubscription).
-static constexpr int kMaxParallelMarkWorkers = 8;
+/// Runtime-latchable from GcConfig().ParallelMarkWorkers during GC init so the
+/// CHAOS_GC_ParallelMarkWorkers knob drives the real mark worker count.
+inline int kMaxParallelMarkWorkers = 8;
 
 /// Chunk representing up to 64 objects on the same page.
 struct MarkChunk {
@@ -92,6 +96,12 @@ struct ParallelMarkContext {
 
     /// Set to true when parallel mark is complete (termination signal).
     std::atomic<bool> parallel_done{false};
+
+    /// 方案1: done/新-work 信号。降空 worker 由 last-worker 设 done 后 notify_all
+    /// 唤醒退出; 生产者(ProcessChunk 推 chunk 溢出自己 deque 给他人 steal 时)也可
+    /// notify。有界 wait_for 兜底, 不丢 work。
+    std::mutex              mark_mtx_;
+    std::condition_variable mark_cv_;
 };
 
 /// Initialize parallel mark context with a snapshot of pages.

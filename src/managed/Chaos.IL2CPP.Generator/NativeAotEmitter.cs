@@ -89,12 +89,6 @@ public sealed partial class NativeAotEmitter
             planner.SetJitDataOutputPath(jitDataPath);
         }
 
-        // ── Emit inline-natives sidecar ──
-        // Methods resolved via InlineShapeDescriptor get native C++ emitted
-        // at the call site, bypassing AotCoreIr artifact creation.  Write the
-        // list so build.py can classify them as NativeGenerated.
-        EmitInlineNativesSidecar(planner, outputRootPath);
-
         var (generatedSources, generatedArtifacts) = BuildGeneratedSources(
             templateModel, loweringPlan);
 
@@ -159,39 +153,6 @@ public sealed partial class NativeAotEmitter
             CodegenMetrics = codegenMetrics,
             GeneratedSources = generatedSources,
         };
-    }
-
-    internal const string InlineNativesSidecarName = "inline-natives.json";
-
-    private static void EmitInlineNativesSidecar(
-        NativeAotLoweringPlanner planner, string outputRootPath)
-    {
-        try
-        {
-            var callees = planner.InlineMatchedCallees;
-            if (callees.Count == 0)
-                return;
-            var payload = new
-            {
-                schemaVersion = 1,
-                count = callees.Count,
-                inlineNativeCallees = callees,
-            };
-            var path = Path.Combine(outputRootPath, InlineNativesSidecarName);
-            File.WriteAllText(
-                path,
-                JsonSerializer.Serialize(payload, new JsonSerializerOptions
-                {
-                    WriteIndented = true,
-                }));
-            System.Console.Error.WriteLine(
-                $"[inline-natives] wrote {callees.Count} inline-resolved callee(s) to {InlineNativesSidecarName}");
-        }
-        catch (Exception ex)
-        {
-            System.Console.Error.WriteLine(
-                $"[inline-natives] WARNING: failed to write sidecar: {ex.Message}");
-        }
     }
 
     private static void ValidateLoweringPlan(

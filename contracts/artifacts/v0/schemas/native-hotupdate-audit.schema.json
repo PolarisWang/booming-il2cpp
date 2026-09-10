@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Native HotUpdate Audit v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "reportVersion", "artifactKind", "runId", "subjectId", "matrixId",
+    "status", "pipelineId", "entrySelection", "hostInput", "nativeGeneration",
+    "nativeBuild", "hotupdateRuntime", "truthBoundary"
+  ],
+  "properties": {
+    "reportVersion": { "type": "string" },
+    "artifactKind": { "type": "string", "const": "native-hotupdate-audit" },
+    "runId": { "type": "string" },
+    "subjectId": { "type": "string" },
+    "matrixId": { "type": "string" },
+    "status": { "type": "string" },
+    "pipelineId": { "type": "string" },
+    "entrySelection": { "type": "object" },
+    "hostInput": { "type": "object" },
+    "nativeGeneration": {
+      "type": "object",
+      "required": [
+        "nativeReferencePlanKind", "translationUnitMode", "translationUnitMethodCount",
+        "auditStatus", "auditMessage", "runtimeSkeletonReservedStubCount",
+        "runtimeSkeletonCoverageReportPath", "runtimeSkeletonUncoveredMethodCount"
+      ],
+      "properties": {
+        "preferredAssemblyDispatchSubjectId": { "type": "string" },
+        "translationUnitPageCount": { "type": "integer", "minimum": 0 },
+        "runtimeSkeletonReservedStubCount": { "type": "integer", "deprecated": true, "description": "always 0" }
+      }
+    },
+    "nativeBuild": { "type": "object" },
+    "hotupdateRuntime": { "type": "object" },
+    "truthBoundary": {
+      "type": "object",
+      "properties": {
+        "nativeAotScope": { "type": "string", "const": "not-used-by-this-combined-proof" },
+        "fullCoreLibTranslated": { "type": "boolean", "const": false }
+      }
+    }
+  }
+}

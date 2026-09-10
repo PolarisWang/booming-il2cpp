@@ -46,6 +46,12 @@ private:
 /// Process-wide low-memory monitor instance.
 extern GcLowMemoryMonitor g_low_memory_monitor;
 
+/// Gate for the low-memory monitor background thread — mirrors
+/// gc_bgc.h `g_bgc_enabled`. Set to false before RuntimeInit() to disable the
+/// OS low-memory notification monitor (used by short-lived app/benchmark
+/// processes where a low-memory-triggered GC safepoint would hang startup).
+extern bool g_low_mem_enabled;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_LOW_MEM_H_

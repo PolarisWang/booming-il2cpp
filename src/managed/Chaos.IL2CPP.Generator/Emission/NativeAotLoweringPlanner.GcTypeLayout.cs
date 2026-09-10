@@ -39,7 +39,8 @@ public sealed partial class NativeAotLoweringPlanner
             var ns = ManagedNaming.NormalizeSubjectIdAssembly(typeId);
             if (ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.List", StringComparison.Ordinal) ||
                 ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.Dictionary", StringComparison.Ordinal) ||
-                ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.HashSet", StringComparison.Ordinal))
+                ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.HashSet", StringComparison.Ordinal) ||
+                ns.StartsWith("System.Private.CoreLib/System.Collections.ObjectModel.ReadOnlyCollection<", StringComparison.Ordinal))
             {
                 skeletonTypeIds.Add(typeId);
             }
@@ -296,6 +297,12 @@ public sealed partial class NativeAotLoweringPlanner
             if (IsDelegateTypeSubjectId(typeId, _referenceTypeBaseSubjectIds))
                 continue;
             if (TypeHasFinalizer(typeId))
+                continue;
+            // Async state-machine box types (compiler-generated <X>d__N) must NOT be
+            // stack-allocated: their >d__ struct is boxed into the task's continuation and
+            // escapes the method to resume on another thread after the entry frame returns.
+            // A stack object would be dangling when the continuation (MoveNext) re-runs.
+            if (IsAsyncStateMachineBoxTypeId(typeId))
                 continue;
 
             bool hasGcRef = false;

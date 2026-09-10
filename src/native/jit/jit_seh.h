@@ -48,9 +48,8 @@ struct JitMethod;
 /// @param code_size   Size of generated code in bytes
 /// @param nm          JitMethod containing SEH clause table metadata
 /// @param patch_method_token  AOT metadata token of the owning PatchMethod (for hotpatch demotion)
-void RegisterNativeCodeSection(void* code_start, uint32_t code_size,
-                    const JitMethod* nm,
-                    uint32_t patch_method_token = 0) noexcept;
+void RegisterNativeCodeSection(void* code_start, uint32_t code_size, const JitMethod* nm,
+                               uint32_t patch_method_token = 0) noexcept;
 
 /// Unregister a T4 code range.  Called during T4 demotion.
 /// Marks the entry inactive so the VEH handler won't dispatch to it.
@@ -90,14 +89,14 @@ static constexpr uint32_t kMaxUnwindDepth = 64;
 /// Thread-local unwind state for T4 finally/fault two-phase execution.
 /// Set up by the VEH handler (Phase 1), consumed by JitEndFinallyHelper.
 struct JitUnwindState {
-    uint32_t unwind_list[kMaxUnwindDepth];  // finally/fault clause indices (innermost→outermost)
-    uint32_t unwind_count  = 0;             // number of finally/fault clauses to unwind
-    uint32_t unwind_index  = 0;             // current position in unwind_list
-    bool     exception_in_flight = false;   // true = unwinding for exception (not Leave)
-    bool     pending_leave = false;         // true = Leave triggered unwind (not exception)
-    uint32_t leave_target_offset = 0;       // native byte offset of leave target (for pending_leave)
-    bool     has_catch    = false;          // true = a catch handler was found (Phase 1)
-    uint32_t catch_handler_offset = 0;      // native byte offset of catch handler
+    uint32_t unwind_list[kMaxUnwindDepth]; // finally/fault clause indices (innermost→outermost)
+    uint32_t unwind_count = 0;             // number of finally/fault clauses to unwind
+    uint32_t unwind_index = 0;             // current position in unwind_list
+    bool exception_in_flight = false;      // true = unwinding for exception (not Leave)
+    bool pending_leave = false;            // true = Leave triggered unwind (not exception)
+    uint32_t leave_target_offset = 0;      // native byte offset of leave target (for pending_leave)
+    bool has_catch = false;                // true = a catch handler was found (Phase 1)
+    uint32_t catch_handler_offset = 0;     // native byte offset of catch handler
 };
 
 /// Thread-local SEH V3 unwind state.
@@ -112,8 +111,7 @@ extern "C" void* JitEndFinallyHelper() noexcept;
 /// try block.  Resolves byte offsets and finds the innermost finally.
 /// Returns the native byte offset of the first finally handler, or 0 if no
 /// finally/fault covers the path (caller should fall through to normal JMP).
-extern "C" void* JitLeaveHelper(uint32_t target_instr_idx,
-                                uint32_t current_instr_idx) noexcept;
+extern "C" void* JitLeaveHelper(uint32_t target_instr_idx, uint32_t current_instr_idx) noexcept;
 
 /// Demote all T4 code entries matching the given method_token.
 /// Clears their JitMethod reference so the VEH handler stops dispatching
@@ -138,6 +136,6 @@ uint32_t DemoteJittedCodeByDomain(uint32_t domain_id) noexcept;
 /// RegisterJitSehHandler.  Exposed for testing and explicit reclamation.
 void ReclaimDemotedCode() noexcept;
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_JIT_SEH_HANDLER_H_
+#endif // CHAOS_IL2CPP_JIT_SEH_HANDLER_H_

@@ -27,16 +27,16 @@
 namespace chaos::il2cpp::interpreter {
 struct RegisterInstruction;
 struct RegisterMethod;
-}  // namespace chaos::il2cpp::interpreter
+} // namespace chaos::il2cpp::interpreter
 
 namespace chaos::il2cpp::jit::tree {
 
 /// Result of building a tree for a basic block.
 struct TreeBuildResult {
-    ExprNode** roots;        // array of root nodes (side-effects + branch sources)
-    uint32_t   root_count;   // number of roots
-    ExprNode*  first_node;   // first allocated node (for arena reset)
-    uint8_t*   arena;        // arena pointer (for freeing)
+    ExprNode** roots;     // array of root nodes (side-effects + branch sources)
+    uint32_t root_count;  // number of roots
+    ExprNode* first_node; // first allocated node (for arena reset)
+    uint8_t* arena;       // arena pointer (for freeing)
 };
 
 /// Basic block range: [lo, hi) instruction indices.
@@ -52,7 +52,7 @@ public:
     static constexpr uint32_t kMaxNodes = 4096;
 
     /// Default arena size per BB.
-    static constexpr uint32_t kArenaSize = 16 * 1024;  // 16KB
+    static constexpr uint32_t kArenaSize = 16 * 1024; // 16KB
 
     TreeBuilder() noexcept;
     ~TreeBuilder() noexcept;
@@ -64,20 +64,16 @@ public:
     /// Roots are side-effect nodes (calls, stores) and the branch source
     /// (if the BB ends with a conditional branch).
     /// Returns empty result on allocation failure.
-    TreeBuildResult Build(const interpreter::RegisterInstruction* instrs,
-                          uint32_t lo, uint32_t hi) noexcept;
+    TreeBuildResult Build(const interpreter::RegisterInstruction* instrs, uint32_t lo, uint32_t hi) noexcept;
 
     /// Convenience: build for a RegisterMethod's full instruction span.
-    TreeBuildResult Build(const interpreter::RegisterMethod& rm,
-                          uint32_t lo, uint32_t hi) noexcept;
+    TreeBuildResult Build(const interpreter::RegisterMethod& rm, uint32_t lo, uint32_t hi) noexcept;
 
     /// Access the VNTable (for CSE mutator to query computed flags).
     VNTable& VN() noexcept { return vn_; }
 
     /// Find the defining ExprNode for a vreg (nullptr if unknown/not defined in BB).
-    ExprNode* FindVRegDef(uint32_t vreg) const noexcept {
-        return (vreg < 64) ? vreg_to_node_[vreg] : nullptr;
-    }
+    ExprNode* FindVRegDef(uint32_t vreg) const noexcept { return (vreg < 64) ? vreg_to_node_[vreg] : nullptr; }
 
     /// Get the constant size of a NewArr-defined vreg (0 = unknown/variable-size).
     uint32_t GetNewArrConstantSize(uint32_t vreg) const noexcept {
@@ -89,9 +85,7 @@ private:
     bool EnsureArena(uint32_t bytes) noexcept;
 
     /// Allocate a single ExprNode from the arena.
-    ExprNode* AllocNode(NodeKind kind, TypeTag tag,
-                         ExprNode* c0 = nullptr,
-                         ExprNode* c1 = nullptr) noexcept;
+    ExprNode* AllocNode(NodeKind kind, TypeTag tag, ExprNode* c0 = nullptr, ExprNode* c1 = nullptr) noexcept;
 
     /// Look up or create a leaf node for a vreg.
     /// If the vreg has a defining node in the current BB, returns it.
@@ -115,7 +109,7 @@ private:
     // Roots collected during building
     static constexpr uint32_t kMaxRoots = 128;
     ExprNode* roots_[kMaxRoots];
-    uint32_t  root_count_ = 0;
+    uint32_t root_count_ = 0;
 
     // When true, Build() returns an empty result (triggers linear fallback).
     // Set when the instruction stream contains operations that the tree IR
@@ -127,10 +121,8 @@ private:
 /// Returns a vector of [lo, hi) ranges.
 /// A BB ends at: Br, BrTrue, BrFalse, Ret, Throw, Rethrow, Switch, Leave.
 /// Call does NOT end a BB (single-BB may contain calls).
-std::vector<BBRange> FindBasicBlocks(
-    const interpreter::RegisterInstruction* instrs,
-    uint32_t count) noexcept;
+std::vector<BBRange> FindBasicBlocks(const interpreter::RegisterInstruction* instrs, uint32_t count) noexcept;
 
-}  // namespace chaos::il2cpp::jit::tree
+} // namespace chaos::il2cpp::jit::tree
 
-#endif  // CHAOS_IL2CPP_JIT_TREE_BUILDER_H_
+#endif // CHAOS_IL2CPP_JIT_TREE_BUILDER_H_

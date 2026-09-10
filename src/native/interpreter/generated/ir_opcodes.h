@@ -117,9 +117,9 @@ enum class IROpCode : std::int32_t {
     Simd = 107,
     Popcnt = 108,
     Lzcnt = 109,
-    SimdFma = 110 
+    SimdFma = 110
 };
 
-}  // namespace chaos::il2cpp::interpreter
+} // namespace chaos::il2cpp::interpreter
 
-#endif  // CHAOS_IL2CPP_GENERATED_IR_OPCODES_H_
+#endif // CHAOS_IL2CPP_GENERATED_IR_OPCODES_H_

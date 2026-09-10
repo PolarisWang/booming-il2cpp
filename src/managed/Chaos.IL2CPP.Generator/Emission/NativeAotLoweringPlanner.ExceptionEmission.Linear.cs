@@ -724,6 +724,17 @@ public sealed partial class NativeAotLoweringPlanner
             else
             {
                 // Direct call to target symbol (InternalCall or generic external)
+                // When the target is a chaos_external_runtime_* symbol, register it
+                // in _emittedExternalRuntimeSymbols so the header generates an extern
+                // declaration — without this, the symbol lacks a declaration and causes
+                // C3861 at compile time (the catch-all fallback route sets TargetSymbol
+                // but not ExternalRuntimeTableIndex, so the dispatch-table path above
+                // is never taken).
+                if (thunk.TargetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
+                {
+                    _emittedExternalRuntimeSymbols[thunk.TargetSymbol] = thunk.ReturnAbi.CarrierKindCode;
+                    _emittedExternalRuntimeSymbolParams[thunk.TargetSymbol] = thunk.ParameterAbis.Count;
+                }
                 if (!isVoid)
                 {
                     builder.AppendLine("    auto result = " + thunk.TargetSymbol + "(" + paramNames + ");");

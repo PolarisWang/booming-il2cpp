@@ -24,65 +24,64 @@
 //   0xFF 0xE0             jmp  rax              ; tail-call to compiled entry
 
 #include "jit_precode.h"
-#include "jit_inline.h"            // g_inline_reverse_map
+#include "jit_inline.h" // g_inline_reverse_map
 
-#include <codegen_bridge.h>   // HotpatchEntryV0
-#include <aot_core_ir_reader.h>  // DeserializeAotCoreIrMethod
-#include <hotpatch_table.h>      // GetHotpatchNameRegistry
-#include <ir_reg_alloc.h>        // AllocateRegisters
-#include "jit_seh.h"             // RegisterNativeCodeSection
-#include <jit_registration.h>    // JitEntry
-#include <patch_loader.h>        // PatchMethod (full definition)
+#include <codegen_bridge.h>     // HotpatchEntryV0
+#include <aot_core_ir_reader.h> // DeserializeAotCoreIrMethod
+#include <hotpatch_table.h>     // GetHotpatchNameRegistry
+#include <ir_reg_alloc.h>       // AllocateRegisters
+#include "jit_seh.h"            // RegisterNativeCodeSection
+#include <jit_registration.h>   // JitEntry
+#include <patch_loader.h>       // PatchMethod (full definition)
 
 #include <mutex>
-#include <tier_manager.h>        // TierManager::EnqueueJitRecompilation
-#include <slot_map.h>            // ReverseSlotMap, g_reverse_slot_map
-#include <chaos/log.h>           // CHAOS_IL2CPP_LOG_ERROR_M
-#include <gc/gc_root_scanner.h>  // GcRegisterSlotMap
+#include <tier_manager.h>       // TierManager::EnqueueJitRecompilation
+#include <slot_map.h>           // ReverseSlotMap, g_reverse_slot_map
+#include <chaos/log.h>          // CHAOS_IL2CPP_LOG_ERROR_M
+#include <gc/gc_root_scanner.h> // GcRegisterSlotMap
 
 #if defined(_WIN32) || defined(_WIN64)
-  #define NOMINMAX
-  #include <windows.h>
-  #include <intrin.h>
-  #include <exception_jmp.h>     // CHAOS_SEH_FILTER_ALL (needs DWORD from windows.h)
+#define NOMINMAX
+#include <windows.h>
+#include <intrin.h>
+#include <exception_jmp.h> // CHAOS_SEH_FILTER_ALL (needs DWORD from windows.h)
 #endif
 
 #include <chaos/pal/pal_mem.h>
 #include <chaos/pal/pal_cache.h>
-#include <chaos/eh.h>            // CHAOS_EH_TRY / CHAOS_EH_CATCH_BEGIN
-#include <generated_code_compat.h>  // chaos_managed_exception for CHAOS_EH_CATCH_BEGIN
+#include <chaos/eh.h>              // CHAOS_EH_TRY / CHAOS_EH_CATCH_BEGIN
+#include <generated_code_compat.h> // chaos_managed_exception for CHAOS_EH_CATCH_BEGIN
 
 #include <cstdlib>
 #include <cstring>
 #include <thread>
 
 #if defined(__x86_64__)
-  #include <immintrin.h>
+#include <immintrin.h>
 #endif
 
 namespace chaos::il2cpp::jit {
 
 // ── Constants ──────────────────────────────────────────────────────────
-static constexpr uint32_t kPageSize        = 64 * 1024;  // 64KB per RWX page
-static constexpr uint32_t kSharedEntrySize = 64;          // reserved
-static constexpr uint32_t kSharedEntryUnwindOffset = 40;  // UNWIND_INFO offset (must be 4-byte aligned for Win64)
+static constexpr uint32_t kPageSize = 64 * 1024;         // 64KB per RWX page
+static constexpr uint32_t kSharedEntrySize = 64;         // reserved
+static constexpr uint32_t kSharedEntryUnwindOffset = 40; // UNWIND_INFO offset (must be 4-byte aligned for Win64)
 #if defined(__aarch64__)
-static constexpr uint32_t kTrampolineSize  = 16;          // LDR + BR + literal pool
+static constexpr uint32_t kTrampolineSize = 16; // LDR + BR + literal pool
 #else
-static constexpr uint32_t kTrampolineSize  = 15;          // mov r10, addr + jmp rel32
+static constexpr uint32_t kTrampolineSize = 15; // mov r10, addr + jmp rel32
 #endif
 
 // ── Per-page descriptor ───────────────────────────────────────────────
 struct Page {
-    uint8_t* base;       // RWX memory base
-    uint32_t pos;        // next free offset from base
-    uint32_t capacity;   // total page size
+    uint8_t* base;     // RWX memory base
+    uint32_t pos;      // next free offset from base
+    uint32_t capacity; // total page size
 };
 
 // ── PrecodeArena ──────────────────────────────────────────────────────
 
-PrecodeArena::PrecodeArena() noexcept {
-}
+PrecodeArena::PrecodeArena() noexcept {}
 
 PrecodeArena::~PrecodeArena() noexcept {
     for (auto& pg : pages_) {
@@ -99,30 +98,26 @@ PrecodeArena::~PrecodeArena() noexcept {
 
 // Forward declaration for RegisterPagePdata (defined after AllocateJitTrampoline).
 #if defined(_WIN64)
-static void RegisterPagePdata(uint8_t* page_base, void*& out_runtime_function,
-                               uint32_t entry_size) noexcept;
+static void RegisterPagePdata(uint8_t* page_base, void*& out_runtime_function, uint32_t entry_size) noexcept;
 #endif
 
 void PrecodeArena::EnsurePage() noexcept {
     if (!pages_.empty()) {
         auto& last = pages_.back();
         if (last.pos + kTrampolineSize <= last.capacity)
-            return;  // room on current page
+            return; // room on current page
 
         // ── Seal the full page to RX (W^X compliance) ─────────────
         // This page is now full — no more trampolines will be written
         // to it.  Seal to RX so it can only be executed, not modified.
-        chaos::il2cpp::pal::PalVirtualProtect(last.base, last.capacity,
-            chaos::il2cpp::pal::kPalMemReadExec);
+        chaos::il2cpp::pal::PalVirtualProtect(last.base, last.capacity, chaos::il2cpp::pal::kPalMemReadExec);
     }
 
     // Allocate RW memory, then make it RWX for code emission.
     // This is more secure than allocating RWX directly (W^X principle).
-    uint8_t* base = static_cast<uint8_t*>(
-        chaos::il2cpp::pal::PalVirtualAlloc(kPageSize));
+    uint8_t* base = static_cast<uint8_t*>(chaos::il2cpp::pal::PalVirtualAlloc(kPageSize));
     if (base) {
-        chaos::il2cpp::pal::PalVirtualProtect(base, kPageSize,
-            chaos::il2cpp::pal::kPalMemReadWriteExec);
+        chaos::il2cpp::pal::PalVirtualProtect(base, kPageSize, chaos::il2cpp::pal::kPalMemReadWriteExec);
     }
     if (!base) {
         CHAOS_IL2CPP_LOG_ERROR_M("jit", "PrecodeArena: failed to allocate RWX page");
@@ -130,8 +125,8 @@ void PrecodeArena::EnsurePage() noexcept {
     }
 
     Page pg;
-    pg.base     = base;
-    pg.pos      = 0;
+    pg.base = base;
+    pg.pos = 0;
     pg.capacity = kPageSize;
     pages_.push_back(pg);
 
@@ -148,13 +143,13 @@ void PrecodeArena::EnsurePage() noexcept {
 #if defined(_WIN64)
     // Register .pdata for the shared entry so the OS can unwind through
     // this non-leaf trampoline frame when JIT-compiled code crashes.
-    RegisterPagePdata(pages_.back().base, pages_.back().runtime_function,
-                      jit_entry_size_);
+    RegisterPagePdata(pages_.back().base, pages_.back().runtime_function, jit_entry_size_);
 #endif
 }
 
 void PrecodeArena::EmitJitSharedEntry() noexcept {
-    if (pages_.empty()) return;
+    if (pages_.empty())
+        return;
     auto& pg = pages_.back();
     jit_entry_offset_ = pg.pos;
 
@@ -178,12 +173,9 @@ void PrecodeArena::EmitJitSharedEntry() noexcept {
     // br x17                                           48       0xD61F0220  20 02 1F D6
     // 8-byte literal (dispatch address)                52
     // nop padding to 64                                60       0xD503201F  1F 20 03 D5
-    const uint32_t kSharedEntryInstrs[] = {
-        0xA9BF07E0u, 0xA9BF0FE2u, 0xA9BF17E4u, 0xA9BF1FE6u,
-        0xAA1103E0u, 0x58000101u, 0xD63F0020u, 0xAA0003F1u,
-        0xA8C11FE6u, 0xA8C117E4u, 0xA8C10FE2u, 0xA8C107E0u,
-        0xD61F0220u
-    };
+    const uint32_t kSharedEntryInstrs[] = {0xA9BF07E0u, 0xA9BF0FE2u, 0xA9BF17E4u, 0xA9BF1FE6u, 0xAA1103E0u,
+                                           0x58000101u, 0xD63F0020u, 0xAA0003F1u, 0xA8C11FE6u, 0xA8C117E4u,
+                                           0xA8C10FE2u, 0xA8C107E0u, 0xD61F0220u};
     std::memcpy(p, kSharedEntryInstrs, sizeof(kSharedEntryInstrs));
 
     auto dispatch_addr = reinterpret_cast<uintptr_t>(&JitStubDispatchImpl);
@@ -199,36 +191,53 @@ void PrecodeArena::EmitJitSharedEntry() noexcept {
     // push rdx                ; 0x52
     p[1] = 0x52;
     // push r8                 ; 0x41 0x50
-    p[2] = 0x41; p[3] = 0x50;
+    p[2] = 0x41;
+    p[3] = 0x50;
     // push r9                 ; 0x41 0x51
-    p[4] = 0x41; p[5] = 0x51;
+    p[4] = 0x41;
+    p[5] = 0x51;
     // sub rsp, 0x28           ; 40 bytes (32 shadow + 8 alignment)
-    p[6] = 0x48; p[7] = 0x83; p[8] = 0xEC; p[9] = 0x28;
+    p[6] = 0x48;
+    p[7] = 0x83;
+    p[8] = 0xEC;
+    p[9] = 0x28;
     // mov rcx, r10            ; 0x4C 0x89 0xD1 — first arg = precode ptr
-    p[10] = 0x4C; p[11] = 0x89; p[12] = 0xD1;
+    p[10] = 0x4C;
+    p[11] = 0x89;
+    p[12] = 0xD1;
     // mov rax, <dispatch>     ; 0x48 0xB8 + 8B addr
     auto dispatch_addr = reinterpret_cast<uintptr_t>(&JitStubDispatchImpl);
-    p[13] = 0x48; p[14] = 0xB8;
+    p[13] = 0x48;
+    p[14] = 0xB8;
     std::memcpy(p + 15, &dispatch_addr, sizeof(dispatch_addr));
     // call rax                ; 0xFF 0xD0
-    p[23] = 0xFF; p[24] = 0xD0;
+    p[23] = 0xFF;
+    p[24] = 0xD0;
     // add rsp, 0x28           ; 0x48 0x83 0xC4 0x28
-    p[25] = 0x48; p[26] = 0x83; p[27] = 0xC4; p[28] = 0x28;
+    p[25] = 0x48;
+    p[26] = 0x83;
+    p[27] = 0xC4;
+    p[28] = 0x28;
     // pop r9                  ; 0x41 0x59
-    p[29] = 0x41; p[30] = 0x59;
+    p[29] = 0x41;
+    p[30] = 0x59;
     // pop r8                  ; 0x41 0x58
-    p[31] = 0x41; p[32] = 0x58;
+    p[31] = 0x41;
+    p[32] = 0x58;
     // pop rdx                 ; 0x5A
     p[33] = 0x5A;
     // pop rcx                 ; 0x59
     p[34] = 0x59;
     // jmp rax                 ; 0xFF 0xE0
-    p[35] = 0xFF; p[36] = 0xE0;
+    p[35] = 0xFF;
+    p[36] = 0xE0;
 
     // ── Padding to 4-byte alignment (offsets 37-39) ────────────────────
     // Win64 requires UNWIND_INFO to be DWORD-aligned (4 bytes).
     // Code ends at offset 36; pad to offset 40.
-    p[37] = 0xCC; p[38] = 0xCC; p[39] = 0xCC;
+    p[37] = 0xCC;
+    p[38] = 0xCC;
+    p[39] = 0xCC;
 
     // ── UNWIND_INFO for .pdata registration (offsets 40-55) ─────────
     // Required so the OS can unwind through this non-leaf trampoline
@@ -242,32 +251,43 @@ void PrecodeArena::EmitJitSharedEntry() noexcept {
     //   push r9        ; offset 4, 2 bytes
     //   sub rsp, 0x28  ; offset 6, 4 bytes
     // Version=1, Flags=0, SizeOfProlog=10 bytes, 5 codes, no FP
-    p[40] = 0x01;              // version_flags
-    p[41] = 10;                // size_of_prolog (bytes: push rcx+rdx+r8+r9 + sub rsp,0x28 = 10)
-    p[42] = 5;                 // count_of_codes
-    p[43] = 0x00;              // frame_register=RSP, frame_offset=0
+    p[40] = 0x01; // version_flags
+    p[41] = 10;   // size_of_prolog (bytes: push rcx+rdx+r8+r9 + sub rsp,0x28 = 10)
+    p[42] = 5;    // count_of_codes
+    p[43] = 0x00; // frame_register=RSP, frame_offset=0
 
     // 5 UNWIND_CODE entries (reverse prologue order, 2 bytes each):
-    p[44] = 6;  p[45] = 0x24;  // UWOP_ALLOC_SMALL(4):  sub rsp, 0x28
-    p[46] = 4;  p[47] = 0x09;  // UWOP_PUSH_NONVOL(9):  push r9
-    p[48] = 2;  p[49] = 0x08;  // UWOP_PUSH_NONVOL(8):  push r8
-    p[50] = 1;  p[51] = 0x02;  // UWOP_PUSH_NONVOL(2):  push rdx
-    p[52] = 0;  p[53] = 0x01;  // UWOP_PUSH_NONVOL(1):  push rcx
+    p[44] = 6;
+    p[45] = 0x24; // UWOP_ALLOC_SMALL(4):  sub rsp, 0x28
+    p[46] = 4;
+    p[47] = 0x09; // UWOP_PUSH_NONVOL(9):  push r9
+    p[48] = 2;
+    p[49] = 0x08; // UWOP_PUSH_NONVOL(8):  push r8
+    p[50] = 1;
+    p[51] = 0x02; // UWOP_PUSH_NONVOL(2):  push rdx
+    p[52] = 0;
+    p[53] = 0x01; // UWOP_PUSH_NONVOL(1):  push rcx
 
     // Pad to 4-byte boundary (14 bytes → 2 pad)
-    p[54] = 0x00; p[55] = 0x00;
+    p[54] = 0x00;
+    p[55] = 0x00;
 #else
     // System V AMD64 calling convention: rdi = first arg, no shadow space
     // mov rdi, r10            ; 0x4C 0x89 0xD7 — first arg = precode ptr
-    p[0] = 0x4C; p[1] = 0x89; p[2] = 0xD7;
+    p[0] = 0x4C;
+    p[1] = 0x89;
+    p[2] = 0xD7;
     // mov rax, <dispatch>     ; 0x48 0xB8 + 8B addr
     auto dispatch_addr = reinterpret_cast<uintptr_t>(&JitStubDispatchImpl);
-    p[3] = 0x48; p[4] = 0xB8;
+    p[3] = 0x48;
+    p[4] = 0xB8;
     std::memcpy(p + 5, &dispatch_addr, sizeof(dispatch_addr));
     // call rax                ; 0xFF 0xD0
-    p[13] = 0xFF; p[14] = 0xD0;
+    p[13] = 0xFF;
+    p[14] = 0xD0;
     // jmp rax                 ; 0xFF 0xE0
-    p[15] = 0xFF; p[16] = 0xE0;
+    p[15] = 0xFF;
+    p[16] = 0xE0;
 #endif
 
     jit_entry_size_ = kSharedEntrySize;
@@ -276,7 +296,8 @@ void PrecodeArena::EmitJitSharedEntry() noexcept {
 
 void* PrecodeArena::AllocateJitTrampoline(JitPrecode* precode) noexcept {
     EnsurePage();
-    if (pages_.empty()) return nullptr;
+    if (pages_.empty())
+        return nullptr;
 
     auto& pg = pages_.back();
     uint32_t offset = pg.pos;
@@ -289,15 +310,22 @@ void* PrecodeArena::AllocateJitTrampoline(JitPrecode* precode) noexcept {
     //   <8-byte literal>       ; 8B — precode address
     auto precode_addr = reinterpret_cast<uintptr_t>(precode);
     // LDR X17, literal, imm19=2 (offset 8 bytes)
-    p[0] = 0x51; p[1] = 0x00; p[2] = 0x80; p[3] = 0x58;
+    p[0] = 0x51;
+    p[1] = 0x00;
+    p[2] = 0x80;
+    p[3] = 0x58;
     // BR X17
-    p[4] = 0x20; p[5] = 0x02; p[6] = 0x1F; p[7] = 0xD6;
+    p[4] = 0x20;
+    p[5] = 0x02;
+    p[6] = 0x1F;
+    p[7] = 0xD6;
     // Literal pool
     std::memcpy(p + 8, &precode_addr, sizeof(precode_addr));
 #else
     // mov r10, <precode_addr>  ; 0x49 0xBA + 8B addr  (10 bytes)
     auto precode_addr = reinterpret_cast<uintptr_t>(precode);
-    p[0] = 0x49; p[1] = 0xBA;
+    p[0] = 0x49;
+    p[1] = 0xBA;
     std::memcpy(p + 2, &precode_addr, sizeof(precode_addr));
 
     // jmp <jit_shared_entry>   ; 0xE9 + rel32  (5 bytes)
@@ -321,25 +349,22 @@ void* PrecodeArena::AllocateJitTrampoline(JitPrecode* precode) noexcept {
 // JIT-compiled method crashes, preventing STATUS_INVALID_CRUNTIME_PARAMETER
 // recursion during SEH unwind.
 #if defined(_WIN64)
-static void RegisterPagePdata(uint8_t* page_base, void*& out_runtime_function,
-                               uint32_t entry_size) noexcept {
-    auto* rf = static_cast<PRUNTIME_FUNCTION>(
-        std::malloc(sizeof(IMAGE_RUNTIME_FUNCTION_ENTRY)));
+static void RegisterPagePdata(uint8_t* page_base, void*& out_runtime_function, uint32_t entry_size) noexcept {
+    auto* rf = static_cast<PRUNTIME_FUNCTION>(std::malloc(sizeof(IMAGE_RUNTIME_FUNCTION_ENTRY)));
     if (!rf) {
         CHAOS_IL2CPP_LOG_ERROR_M("jit", "RegisterPagePdata: malloc failed");
         return;
     }
-    rf->BeginAddress      = 0;
-    rf->EndAddress        = entry_size;
+    rf->BeginAddress = 0;
+    rf->EndAddress = entry_size;
     rf->UnwindInfoAddress = kSharedEntryUnwindOffset;
-    out_runtime_function  = rf;
+    out_runtime_function = rf;
 
     if (!RtlAddFunctionTable(rf, 1, reinterpret_cast<DWORD64>(page_base))) {
-        CHAOS_IL2CPP_LOG_ERROR_M("jit",
-            "RegisterPagePdata: RtlAddFunctionTable FAILED for page={}", (void*)page_base);
+        CHAOS_IL2CPP_LOG_ERROR_M("jit", "RegisterPagePdata: RtlAddFunctionTable FAILED for page={}", (void*)page_base);
     } else {
-        CHAOS_IL2CPP_LOG_INFO_M("jit",
-            "RegisterPagePdata: .pdata registered for page={}, base={}", (void*)page_base, (void*)page_base);
+        CHAOS_IL2CPP_LOG_INFO_M("jit", "RegisterPagePdata: .pdata registered for page={}, base={}", (void*)page_base,
+                                (void*)page_base);
     }
 }
 #endif
@@ -348,13 +373,12 @@ static void RegisterPagePdata(uint8_t* page_base, void*& out_runtime_function,
 // Wraps Compile() in SEH __try/__except so callers don't need C++ object
 // unwinding in their SEH blocks (avoids MSVC C2712).
 // Returns nullptr on managed exception during compilation.
-static JitMethod* CompileWithCatch(const interpreter::RegisterMethod& ir,
-                                    const CompileConfig& config) noexcept {
+static JitMethod* CompileWithCatch(const interpreter::RegisterMethod& ir, const CompileConfig& config) noexcept {
     JitMethod* jit = nullptr;
     CHAOS_EH_TRY
-        jit = Compile(ir, config);
+    jit = Compile(ir, config);
     CHAOS_EH_CATCH_BEGIN
-        jit = nullptr;
+    jit = nullptr;
     CHAOS_EH_END
     return jit;
 }
@@ -364,13 +388,12 @@ static JitMethod* CompileWithCatch(const interpreter::RegisterMethod& ir,
 // during compilation.  The CHAOS_EH filter doesn't catch AVs, so we use
 // a catch-all handler.  Returns nullptr on any SEH during compilation.
 // Separate function to avoid MSVC C2712 (__try in function with unwind).
-static JitMethod* SafeCompileWithCatch(const interpreter::RegisterMethod& ir,
-                                        const CompileConfig& config) noexcept {
+static JitMethod* SafeCompileWithCatch(const interpreter::RegisterMethod& ir, const CompileConfig& config) noexcept {
 #if defined(_WIN32)
     JitMethod* jit = nullptr;
     __try {
         jit = Compile(ir, config);
-    } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
         jit = nullptr;
     }
     return jit;
@@ -405,8 +428,7 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
             // CAS: Compiled → Uncompiled.  If another thread already grabbed
             // the recompilation slot, this CAS fails and we just re-read state.
             uint32_t expected_compiled = kPrecodeCompiled;
-            precode->state.compare_exchange_strong(expected_compiled, kPrecodeUncompiled,
-                                                    std::memory_order_acq_rel);
+            precode->state.compare_exchange_strong(expected_compiled, kPrecodeUncompiled, std::memory_order_acq_rel);
             s = precode->state.load(std::memory_order_relaxed);
             // Fall through to the compile path below
         } else {
@@ -424,8 +446,7 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
 
     // Attempt to become the compiler: Uncompiled → Compiling
     uint32_t expected = kPrecodeUncompiled;
-    if (precode->state.compare_exchange_strong(expected, kPrecodeCompiling,
-                                                std::memory_order_acq_rel)) {
+    if (precode->state.compare_exchange_strong(expected, kPrecodeCompiling, std::memory_order_acq_rel)) {
         // Winner — compile the method
         void* fallback = precode->original_direct_ptr;
         JitMethod* jit = SafeCompileWithCatch(precode->ir, precode->config);
@@ -436,8 +457,7 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
                 precode->entry->direct_ptr = fallback;
             }
             precode->state.store(kPrecodeUncompiled, std::memory_order_release);
-            CHAOS_IL2CPP_LOG_WARN_M("jit",
-                "JitStubDispatchImpl: Compile() failed, falling back to AOT");
+            CHAOS_IL2CPP_LOG_WARN_M("jit", "JitStubDispatchImpl: Compile() failed, falling back to AOT");
             return fallback;
         }
 
@@ -483,11 +503,12 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
                     // Compiler thread appears crashed (state stuck at Compiling).
                     // Fall back to original AOT code instead of spinning forever.
                     CHAOS_IL2CPP_LOG_WARN_M("jit",
-                        "JitStubDispatchImpl: spin-timeout on precode %p, "
-                        "falling back to AOT", static_cast<void*>(precode));
+                                            "JitStubDispatchImpl: spin-timeout on precode %p, "
+                                            "falling back to AOT",
+                                            static_cast<void*>(precode));
                     return precode->original_direct_ptr;
                 }
-                spins = 1000;  // keep yielding, don't reset
+                spins = 1000; // keep yielding, don't reset
             }
         }
     }
@@ -517,9 +538,11 @@ static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(void*, void*) g_original_aot_ma
 // function pointer for a dispatch entry, or nullptr if this entry was never
 // replaced by JIT (i.e., runs in pure AOT mode).
 static void* GetOriginalAotPtr(HotpatchEntryV0* entry) noexcept {
-    if (!entry) return nullptr;
+    if (!entry)
+        return nullptr;
     auto it = g_original_aot_map.find(static_cast<void*>(entry));
-    if (it != g_original_aot_map.end()) return it->second;
+    if (it != g_original_aot_map.end())
+        return it->second;
     return nullptr;
 }
 
@@ -536,34 +559,38 @@ static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(void*, void*) g_precode_side_ma
 // system loses ownership.  Precode's JitStubDispatchImpl will detect
 // precode->compiled == nullptr and fall back to original_direct_ptr.
 static bool TransferPrecodeOwnership(HotpatchEntryV0* entry, void* method_key) noexcept {
-    if (!entry || !method_key) return false;
+    if (!entry || !method_key)
+        return false;
     auto it = g_precode_side_map.find(static_cast<void*>(entry));
-    if (it == g_precode_side_map.end()) return false;
+    if (it == g_precode_side_map.end())
+        return false;
 
     auto* precode = static_cast<JitPrecode*>(it->second);
-    if (!precode) return false;
+    if (!precode)
+        return false;
 
     // acquire-load to synchronize with JitStubDispatchImpl's release store.
     auto state = precode->state.load(std::memory_order_acquire);
-    if (state != kPrecodeCompiled) return false;  // not yet compiled
+    if (state != kPrecodeCompiled)
+        return false; // not yet compiled
 
     // Atomic exchange: take ownership of compiled JitMethod.
     // compiled is a raw JitMethod* (not std::atomic), so use platform atomic builtins.
 #if defined(_MSC_VER)
-    auto* jit = static_cast<JitMethod*>(_InterlockedExchangePointer(
-        reinterpret_cast<void* volatile*>(&precode->compiled), nullptr));
+    auto* jit = static_cast<JitMethod*>(
+        _InterlockedExchangePointer(reinterpret_cast<void* volatile*>(&precode->compiled), nullptr));
 #else
     auto* jit = __atomic_exchange_n(&precode->compiled, nullptr, __ATOMIC_ACQUIRE);
 #endif
-    if (!jit) return false;  // another thread already took it
+    if (!jit)
+        return false; // another thread already took it
 
     auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(method_key);
     pm->cached_native_method = jit;
     entry->direct_ptr = jit->code;
     // Release store on tier_state (after direct_ptr write) ensures the
     // direct_ptr write is visible to any thread that load-acquires tier_state.
-    pm->tier_state.store(chaos::il2cpp::runtime_core::PatchMethod::kJitted,
-                         std::memory_order_release);
+    pm->tier_state.store(chaos::il2cpp::runtime_core::PatchMethod::kJitted, std::memory_order_release);
 
     // Remove from side-map so JitRecompileToTier1 skips this entry.
     g_precode_side_map.erase(it);
@@ -586,8 +613,7 @@ static bool TransferPrecodeOwnership(HotpatchEntryV0* entry, void* method_key) n
 //
 // After this call, first invocation of each method triggers JitStubDispatchImpl
 // which calls Compile() and atomically replaces direct_ptr with compiled code.
-extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count,
-                                        const char* jit_data) noexcept {
+extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count, const char* jit_data) noexcept {
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
 
@@ -607,22 +633,19 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count,
             // New .jdata file format: json_offset is a byte offset into jit_data.
             json_ptr = jit_data + static_cast<size_t>(entry.json_offset);
         } else {
-            CHAOS_IL2CPP_LOG_ERROR_M("jit",
-                "RegisterJitEntryMethods: no jit_data provided for token 0x{:x} module {}",
-                entry.token, entry.module_id);
+            CHAOS_IL2CPP_LOG_ERROR_M("jit", "RegisterJitEntryMethods: no jit_data provided for token 0x{:x} module {}",
+                                     entry.token, entry.module_id);
             continue;
         }
 
         // Step 2: Deserialize AotCoreIr JSON → IRMethod
-        auto ir = DeserializeAotCoreIrMethod(
-            json_ptr, entry.json_len, nullptr, nullptr, nullptr, nullptr);
+        auto ir = DeserializeAotCoreIrMethod(json_ptr, entry.json_len, nullptr, nullptr, nullptr, nullptr);
 
         // Step 3: Allocate registers → RegisterMethod (independent copy)
         auto rm = AllocateRegisters(ir);
         if (rm.instructions.empty()) {
-            CHAOS_IL2CPP_LOG_WARN_M("jit",
-                "RegisterJitEntryMethods: skipping token 0x{} (empty IR — keep AOT path)",
-                entry.token);
+            CHAOS_IL2CPP_LOG_WARN_M("jit", "RegisterJitEntryMethods: skipping token 0x{} (empty IR — keep AOT path)",
+                                    entry.token);
             continue;
         }
         // ir goes out of scope — vectors auto-clean
@@ -630,12 +653,11 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count,
         // Step 4: Heap-allocate JitPrecode (lives for program lifetime)
         auto* precode = new JitPrecode();
         precode->ir = std::move(rm);
-        precode->config = CompileConfig{};
-        precode->config.enable_pgo = true;  // profile calls → trigger Tier 1 recompilation
+        precode->config = CompileConfig {};
+        precode->config.enable_pgo = true; // profile calls → trigger Tier 1 recompilation
 
         // Step 5: Look up the HotpatchEntryV0 for this method
-        precode->entry = GetHotpatchNameRegistry().GetDispatchEntry(
-            entry.module_id, entry.token);
+        precode->entry = GetHotpatchNameRegistry().GetDispatchEntry(entry.module_id, entry.token);
 
         // Skip keep-native methods (Subject_N/CustomEntrySubject_N): their
         // direct_ptr must remain pointing to the original AOT function body.
@@ -664,9 +686,8 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count,
             // Register in precode side-map for DP1-a ownership transfer.
             g_precode_side_map[static_cast<void*>(precode->entry)] = precode;
         } else {
-            CHAOS_IL2CPP_LOG_ERROR_M("jit",
-                "RegisterJitEntryMethods: failed for token 0x{:x} module {}",
-                entry.token, entry.module_id);
+            CHAOS_IL2CPP_LOG_ERROR_M("jit", "RegisterJitEntryMethods: failed for token 0x{:x} module {}", entry.token,
+                                     entry.module_id);
         }
     }
 
@@ -674,8 +695,7 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count,
     // When SetPatchedBySlot bumps version and fires the callback, this
     // updates all JIT slot tables to point at the new direct_ptr and
     // invalidates any callers that inlined the patched method.
-    RegisterSlotUpdateCallback([](uint32_t callee_token, void* new_direct_ptr,
-                                   HotpatchEntryV0* callee_entry) {
+    RegisterSlotUpdateCallback([](uint32_t callee_token, void* new_direct_ptr, HotpatchEntryV0* callee_entry) {
         // Update non-inlined call-site slots
         g_reverse_slot_map.UpdateAll(callee_token, new_direct_ptr);
         // Invalidate callers that inlined this method (version mismatch → stale)
@@ -706,11 +726,10 @@ extern "C" void* JitRecompileToTier1(JitPrecode* precode) noexcept {
 
     CompileConfig tier1_cfg = precode->config;
     tier1_cfg.compile_tier = CompileTier::kFull;
-    tier1_cfg.enable_pgo = false;  // Tier 1 is final — no further profiling
+    tier1_cfg.enable_pgo = false; // Tier 1 is final — no further profiling
     auto* jit = Compile(precode->ir, tier1_cfg);
     if (!jit) {
-        CHAOS_IL2CPP_LOG_ERROR_M("jit",
-            "JitRecompileToTier1: Compile(Tier1) failed");
+        CHAOS_IL2CPP_LOG_ERROR_M("jit", "JitRecompileToTier1: Compile(Tier1) failed");
         return nullptr;
     }
     // ── Retire the old JitMethod (deferred free via deferred-delete queue) ──
@@ -727,7 +746,8 @@ extern "C" void* JitRecompileToTier1(JitPrecode* precode) noexcept {
             std::lock_guard<std::mutex> lock(s_deferred_mutex);
             s_deferred_delete.push_back(precode->retired);
             if (++s_deferred_count >= 1024) {
-                for (auto* p : s_deferred_delete) delete p;
+                for (auto* p : s_deferred_delete)
+                    delete p;
                 s_deferred_delete.clear();
                 s_deferred_count = 0;
             }
@@ -738,4 +758,4 @@ extern "C" void* JitRecompileToTier1(JitPrecode* precode) noexcept {
     return jit->code;
 }
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit

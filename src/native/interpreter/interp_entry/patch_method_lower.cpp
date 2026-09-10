@@ -11,14 +11,16 @@ static void CacheSignature(PatchMethod* patch_method) noexcept;
 static void InlineLeafCallees(interpreter::IRMethod& ir, PatchMethod& patch_method) noexcept;
 
 void PatchMethodLowerIR(uintptr_t method_key) noexcept {
-    if (method_key == 0) return;
+    if (method_key == 0)
+        return;
 
     auto* patch_method = reinterpret_cast<PatchMethod*>(method_key);
 
     auto& state = patch_method->ir_state;
 
     // Fast path: already lowered.
-    if (state.load(std::memory_order_acquire) == 2) return;
+    if (state.load(std::memory_order_acquire) == 2)
+        return;
 
     // Try to claim the lowering slot (0 → 1 via CAS).
     uint32_t expected = 0;
@@ -28,18 +30,15 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
         // skip JSON deserialization and register allocation entirely.
         if (patch_method->reg_ir_data != nullptr && patch_method->reg_ir_instr_count > 0) {
             auto* reg_method = new interpreter::RegisterMethod();
-            auto* raw_instrs = static_cast<const interpreter::RegisterInstruction*>(
-                patch_method->reg_ir_data);
-            reg_method->instructions.assign(raw_instrs,
-                raw_instrs + patch_method->reg_ir_instr_count);
+            auto* raw_instrs = static_cast<const interpreter::RegisterInstruction*>(patch_method->reg_ir_data);
+            reg_method->instructions.assign(raw_instrs, raw_instrs + patch_method->reg_ir_instr_count);
             reg_method->max_regs = patch_method->reg_ir_max_regs;
 
             // Copy SEH clauses if present (data follows instructions).
             if (patch_method->reg_ir_seh_count > 0) {
-                const auto* seh_data = reinterpret_cast<const interpreter::SEHClause*>(
-                    raw_instrs + patch_method->reg_ir_instr_count);
-                reg_method->seh_clauses.assign(seh_data,
-                    seh_data + patch_method->reg_ir_seh_count);
+                const auto* seh_data =
+                    reinterpret_cast<const interpreter::SEHClause*>(raw_instrs + patch_method->reg_ir_instr_count);
+                reg_method->seh_clauses.assign(seh_data, seh_data + patch_method->reg_ir_seh_count);
             }
 
             patch_method->cached_reg_method = reg_method;
@@ -54,7 +53,7 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
 
             // Create a minimal IRMethod for compatibility (entry_direct.cpp expects it).
             auto* ir = new interpreter::IRMethod();
-            ir->instructions.push_back({});  // placeholder Ret
+            ir->instructions.push_back({}); // placeholder Ret
             patch_method->cached_ir = ir;
 
             state.store(2, std::memory_order_release);
@@ -63,138 +62,128 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
 
         // ── Phase 1: Deserialize AotCoreIr JSON → IRMethod (v1 path) ──
         const char* json = patch_method->aot_core_ir_json;
-    if (json == nullptr || json[0] == '\0') {
-        // No JSON — create an empty IR with Ret.
-        auto* ir = new interpreter::IRMethod();
-        ir->instructions.push_back({});
+        if (json == nullptr || json[0] == '\0') {
+            // No JSON — create an empty IR with Ret.
+            auto* ir = new interpreter::IRMethod();
+            ir->instructions.push_back({});
+            patch_method->cached_ir = ir;
+            state.store(2, std::memory_order_release);
+            return;
+        }
+
+        size_t json_length = std::strlen(json);
+        auto* ir = new interpreter::IRMethod(DeserializeAotCoreIrMethod(json, json_length, ResolveSubjectId,
+                                                                        patch_method->metadata_cache, ResolveDirectFn,
+                                                                        patch_method->metadata_cache));
+
         patch_method->cached_ir = ir;
-        state.store(2, std::memory_order_release);
-        return;
-    }
 
-    size_t json_length = std::strlen(json);
-    auto* ir = new interpreter::IRMethod(
-        DeserializeAotCoreIrMethod(
-            json,
-            json_length,
-            ResolveSubjectId,
-            patch_method->metadata_cache,
-            ResolveDirectFn,
-            patch_method->metadata_cache));
+        // Pre-cache signature so the fast path can use it immediately.
+        if (!patch_method->cached_sig_valid) {
+            CacheSignature(patch_method);
+        }
 
-    patch_method->cached_ir = ir;
+        // Pre-cache call-site metadata for every Call instruction.
+        // This eliminates TryDecodeReflectionQueryMethodHandle + ResolveParameterType
+        // + IsValueTypeByHandle + LayoutEngine at each call dispatch.
+        uint32_t instr_count = static_cast<uint32_t>(ir->instructions.size());
+        if (instr_count > 0) {
+            auto* call_cache = static_cast<runtime_instantiation::CachedCallInfo*>(
+                CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(instr_count * sizeof(runtime_instantiation::CachedCallInfo)));
+            for (uint32_t i = 0; i < instr_count; ++i) {
+                const auto& instr = ir->instructions[i];
+                if (instr.op_code == interpreter::IROpCode::Call || instr.op_code == interpreter::IROpCode::CallVirt ||
+                    instr.op_code == interpreter::IROpCode::CallBridge ||
+                    instr.op_code == interpreter::IROpCode::CallVirtConstrained) {
+                    if (instr.call_target != nullptr) {
+                        call_cache[i] = runtime_instantiation::PrecacheCallTarget(instr.call_target);
+                        // Phase 2.3: Fallback to direct_fn when PrecacheCallTarget
+                        // couldn't resolve direct_ptr but the JSON deserialization
+                        // already set direct_fn via the three-tier ResolveDirectFn
+                        // callback.  This catches cases where:
+                        //   - call_target resolves to a valid MethodInfoHandle
+                        //   - BUT PrecacheCallTarget's HotpatchNameRegistry lookup
+                        //     misses (subject_id parsing format mismatch, etc.)
+                        //   - AND ResolveDirectFn found the entry via AotDirectTable
+                        //     or ExternalRuntimeFnTable
+                        //
+                        // Without this fallback, Handle_Call goes through
+                        // method_invoke (~1500-2200ns) for every call instruction
+                        // even though the AOT function pointer is available.
+                        if (call_cache[i].ret_tag == 0xFF && instr.direct_fn != nullptr &&
+                            instr.direct_ret_tag != 0xFF) {
+                            call_cache[i].ret_tag = instr.direct_ret_tag;
+                            call_cache[i].direct_ptr = instr.direct_fn;
+                            call_cache[i].is_struct_ret = false;
+                            call_cache[i].struct_size = 0;
+                        }
 
-    // Pre-cache signature so the fast path can use it immediately.
-    if (!patch_method->cached_sig_valid) {
-        CacheSignature(patch_method);
-    }
-
-    // Pre-cache call-site metadata for every Call instruction.
-    // This eliminates TryDecodeReflectionQueryMethodHandle + ResolveParameterType
-    // + IsValueTypeByHandle + LayoutEngine at each call dispatch.
-    uint32_t instr_count = static_cast<uint32_t>(ir->instructions.size());
-    if (instr_count > 0) {
-        auto* call_cache = static_cast<runtime_instantiation::CachedCallInfo*>(
-            CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(instr_count * sizeof(runtime_instantiation::CachedCallInfo)));
-        for (uint32_t i = 0; i < instr_count; ++i) {
-            const auto& instr = ir->instructions[i];
-            if (instr.op_code == interpreter::IROpCode::Call ||
-                instr.op_code == interpreter::IROpCode::CallVirt ||
-                instr.op_code == interpreter::IROpCode::CallBridge ||
-                instr.op_code == interpreter::IROpCode::CallVirtConstrained) {
-                if (instr.call_target != nullptr) {
-                    call_cache[i] = runtime_instantiation::PrecacheCallTarget(
-                        instr.call_target);
-                    // Phase 2.3: Fallback to direct_fn when PrecacheCallTarget
-                    // couldn't resolve direct_ptr but the JSON deserialization
-                    // already set direct_fn via the three-tier ResolveDirectFn
-                    // callback.  This catches cases where:
-                    //   - call_target resolves to a valid MethodInfoHandle
-                    //   - BUT PrecacheCallTarget's HotpatchNameRegistry lookup
-                    //     misses (subject_id parsing format mismatch, etc.)
-                    //   - AND ResolveDirectFn found the entry via AotDirectTable
-                    //     or ExternalRuntimeFnTable
-                    //
-                    // Without this fallback, Handle_Call goes through
-                    // method_invoke (~1500-2200ns) for every call instruction
-                    // even though the AOT function pointer is available.
-                    if (call_cache[i].ret_tag == 0xFF &&
-                        instr.direct_fn != nullptr &&
-                        instr.direct_ret_tag != 0xFF) {
+                        // Phase 2.4: P1-B ResolveMethodTable fallback.
+                        // When PrecacheCallTarget found the method in HotpatchNameRegistry
+                        // (module_id + slot are valid) but the dispatch entry's direct_ptr
+                        // was null, try ResolveMethodTableByModuleSlot as an additional
+                        // resolution layer.  g_method_table[] is populated from ALL hotpatch
+                        // dispatch entries during BootstrapRuntime(), so it may contain
+                        // valid function pointers even when the individual dispatch entry
+                        // was null at PrecacheCallTarget time (e.g., due to population
+                        // timing differences between hotpatch dispatch tables and the
+                        // global method table).
+                        //
+                        // Non-virtual calls benefit most: the target is fixed at compile
+                        // time, and a valid method table entry eliminates the ~2000ns
+                        // MethodInvoke round-trip, replacing it with a ~30ns direct call.
+                        if (call_cache[i].direct_ptr == nullptr && call_cache[i].ret_tag != 0xFF &&
+                            !call_cache[i].is_struct_ret && call_cache[i].slot != ~0u) {
+                            void* fn = ::chaos::il2cpp::method_table::ResolveMethodTableByModuleSlot(
+                                call_cache[i].module_id, call_cache[i].slot);
+                            if (fn != nullptr) {
+                                call_cache[i].direct_ptr = fn;
+                                call_cache[i].is_patched = false;
+                            }
+                        }
+                    } else if (instr.direct_fn != nullptr && instr.direct_ret_tag != 0xFF) {
+                        // direct_fn with pre-computed return tag — fill CachedCallInfo
+                        // so Handle_Call/InterpreterDispatchRaw can call the AOT thunk
+                        // directly (MIC path) with the correct calling convention.
+                        // direct_ptr is set to direct_fn so the MIC path bypasses
+                        // MethodInvoke for Tier 3 cross-assembly calls.
                         call_cache[i].ret_tag = instr.direct_ret_tag;
                         call_cache[i].direct_ptr = instr.direct_fn;
                         call_cache[i].is_struct_ret = false;
                         call_cache[i].struct_size = 0;
+                    } else {
+                        call_cache[i].ret_tag = 0xFF; // not cached
                     }
-
-                    // Phase 2.4: P1-B ResolveMethodTable fallback.
-                    // When PrecacheCallTarget found the method in HotpatchNameRegistry
-                    // (module_id + slot are valid) but the dispatch entry's direct_ptr
-                    // was null, try ResolveMethodTableByModuleSlot as an additional
-                    // resolution layer.  g_method_table[] is populated from ALL hotpatch
-                    // dispatch entries during BootstrapRuntime(), so it may contain
-                    // valid function pointers even when the individual dispatch entry
-                    // was null at PrecacheCallTarget time (e.g., due to population
-                    // timing differences between hotpatch dispatch tables and the
-                    // global method table).
-                    //
-                    // Non-virtual calls benefit most: the target is fixed at compile
-                    // time, and a valid method table entry eliminates the ~2000ns
-                    // MethodInvoke round-trip, replacing it with a ~30ns direct call.
-                    if (call_cache[i].direct_ptr == nullptr &&
-                        call_cache[i].ret_tag != 0xFF &&
-                        !call_cache[i].is_struct_ret &&
-                        call_cache[i].slot != ~0u) {
-                        void* fn = ::chaos::il2cpp::method_table::ResolveMethodTableByModuleSlot(
-                            call_cache[i].module_id, call_cache[i].slot);
-                        if (fn != nullptr) {
-                            call_cache[i].direct_ptr = fn;
-                            call_cache[i].is_patched = false;
-                        }
-                    }
-                } else if (instr.direct_fn != nullptr && instr.direct_ret_tag != 0xFF) {
-                    // direct_fn with pre-computed return tag — fill CachedCallInfo
-                    // so Handle_Call/InterpreterDispatchRaw can call the AOT thunk
-                    // directly (MIC path) with the correct calling convention.
-                    // direct_ptr is set to direct_fn so the MIC path bypasses
-                    // MethodInvoke for Tier 3 cross-assembly calls.
-                    call_cache[i].ret_tag = instr.direct_ret_tag;
-                    call_cache[i].direct_ptr = instr.direct_fn;
-                    call_cache[i].is_struct_ret = false;
-                    call_cache[i].struct_size = 0;
                 } else {
-                    call_cache[i].ret_tag = 0xFF; // not cached
+                    call_cache[i].ret_tag = 0xFF; // not a call
                 }
-            } else {
-                call_cache[i].ret_tag = 0xFF; // not a call
             }
+            patch_method->call_cache = call_cache;
         }
-        patch_method->call_cache = call_cache;
-    }
 
-    // ── Phase 1 inlining: inline eligible leaf calls ───────────────────
-    // After IR deserialization and call_cache setup, attempt to inline
-    // callee IR for any Call instruction that meets safety conditions:
-    //   - callee IR available, leaf (no Call instructions), ≤8 instr
-    //   - no branches, no LdLoc/StLoc, no LdSFld/StSFld, no SEH
-    //   - struct returns are too complex — skip
-    //   - recursive inlining NOT attempted (single level only)
-    InlineLeafCallees(*ir, *patch_method);
+        // ── Phase 1 inlining: inline eligible leaf calls ───────────────────
+        // After IR deserialization and call_cache setup, attempt to inline
+        // callee IR for any Call instruction that meets safety conditions:
+        //   - callee IR available, leaf (no Call instructions), ≤8 instr
+        //   - no branches, no LdLoc/StLoc, no LdSFld/StSFld, no SEH
+        //   - struct returns are too complex — skip
+        //   - recursive inlining NOT attempted (single level only)
+        InlineLeafCallees(*ir, *patch_method);
 
         // ── Register allocation pass ────────────────────────────────────
         // Convert stack-based IRMethod to register-based RegisterMethod.
         // The RegisterMethod is stored in cached_reg_method for use by
         // the RegisterExecute fast path (A1.3).
-        auto* reg_method = new interpreter::RegisterMethod(
-            interpreter::AllocateRegisters(*ir));
+        auto* reg_method = new interpreter::RegisterMethod(interpreter::AllocateRegisters(*ir));
         patch_method->cached_reg_method = reg_method;
 
         // Mark as done (release so readers see complete state).
         state.store(2, std::memory_order_release);
     } else {
         // Another thread is lowering — spin-wait for completion.
-        while (state.load(std::memory_order_acquire) != 2) {}
+        while (state.load(std::memory_order_acquire) != 2) {
+        }
     }
 }
 
-}  // namespace chaos::il2cpp::runtime_core
+} // namespace chaos::il2cpp::runtime_core

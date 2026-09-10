@@ -34,7 +34,8 @@ public sealed class TestEmitter
         string typeNamespace,
         IReadOnlyList<MethodSignature> methods,
         IReadOnlyList<IReadOnlyList<ValueSet>> allValueSets,
-        IReadOnlyList<ProbeResult> probeResults)
+        IReadOnlyList<ProbeResult> probeResults,
+        IReadOnlySet<string>? net10OnlyMethods = null)
     {
         // Use typeFullName directly (not MapToCSharpType) to preserve the parent type
         // prefix for nested types. MapToCSharpType strips the namespace via KeywordMap,
@@ -148,6 +149,15 @@ public sealed class TestEmitter
                     SanitizeIdentifier(CSharpSerializer.MapToCSharpType(p.TypeName))));
                 var methodSuffix = $"{SanitizeIdentifier(method.Name)}_{mi}_{paramSuffix}_{set.SetIndex}";
 
+                // B4: net10-only methods (present in net10's System.Private.CoreLib
+                // but absent from net8's) are wrapped in #if NET10_0 so the combined
+                // subjects compile for BOTH net8.0 and net10.0.  Only the [Fact]/
+                // [HotUpdate] and [Benchmark] bodies are guarded; the type and class
+                // scaffolding stay unconditioned.
+                var isNet10Only = net10OnlyMethods is not null && net10OnlyMethods.Contains(method.Name);
+                if (isNet10Only)
+                    sb.AppendLine("        #if NET10_0");
+
                 // Build arg list with variable declarations for out/ref
                 var prelude = new List<string>();
                 var finalArgs = new List<string>();
@@ -211,6 +221,16 @@ public sealed class TestEmitter
                 // When the probe detected an exception, we must NOT evaluate the call
                 // directly (it would throw). Instead, only emit prelude (out/ref vars)
                 // and let Assert.Throws wrap the call in a lambda.
+                // EXCEPTION: For external AOT assemblies the stub returns default and
+                // typically does NOT throw — but a method that genuinely throws given
+                // its inputs (e.g. Enumerable.All(null, null) → ArgumentNull in real
+                // .NET, and the AOT hook ALSO throws/returns) will surface as either a
+                // real exception or a NotImplemented hook.  Executing such a call makes
+                // the [Fact] throw under the managed net8 reference AND under AOT,
+                // causing a false "failed".  So for external hasException sets we do
+                // NOT emit the call — AppendAssert marks it [UNVERIFIED] and we return
+                // the 42L sentinel.  The managed exception is thereby surfaced honestly
+                // without fabricating a pass.
                 var hasException = setResult?.HasException == true;
                 var factCallStatement = hasException
                     ? $"{preludeStr}"
@@ -226,9 +246,14 @@ public sealed class TestEmitter
                     sb.AppendLine("        {");
                     if (!string.IsNullOrEmpty(factCallStatement))
                         sb.AppendLine(factCallStatement);
-                    AppendAssert(sb, mi, method, set, setResult, callExpr, method.HasRefParam, hasAnyValidSet, isExternalAssembly);
+                    AppendAssert(sb, mi, method, set, setResult, callExpr, method.HasRefParam, hasAnyValidSet, isExternalAssembly, isPlainTask, isGenericTask);
                     // Return long value for hotupdate semantic change detection.
                     // Exception subjects and void methods return sentinel 42L.
+                    // When hasException is true, the call was NOT executed (prelude only),
+                    // so the result variable is undefined — return 42L in all cases.
+                    // This includes external AOT assemblies where the stub would not
+                    // throw — the method is marked [UNVERIFIED] by AppendAssert and
+                    // returning 42L keeps the sentinel consistent.
                     if (method.IsVoid || isPlainTask || hasException)
                     {
                         sb.AppendLine("            return 42L;");
@@ -258,6 +283,9 @@ public sealed class TestEmitter
                         sb.AppendLine($"            _ = {benchCall};");
                     sb.AppendLine("        }");
                 }
+
+                if (isNet10Only)
+                    sb.AppendLine("        #endif");
             }
         }
 
@@ -269,17 +297,22 @@ public sealed class TestEmitter
 
     private void AppendAssert(StringBuilder sb, int mi, MethodSignature method, ValueSet set,
         ProbeResult? result, string callExpr, bool hasRefParam, bool hasAnyValidSet,
-        bool isExternalAssembly)
+        bool isExternalAssembly, bool isPlainTask, bool isGenericTask)
     {
         if (result is null) return;
 
         if (result.HasException && result.ExceptionType is not null)
         {
-            // Skip Assert.Throws<T> for methods from an external AOT assembly —
-            // the stub can never throw the expected exception.
+            // For external AOT assemblies, the stub NEVER throws the managed exception.
+            // The call was NOT executed (factCallStatement skipped it for hasException)
+            // — we emit a [UNVERIFIED] marker so the fact layer can scan for it and
+            // exclude these subjects from the authoritative "passed" count.
+            // The set1 (smart-arg) value set for the same method (generated by C-layer)
+            // still produces a real assertion — this only marks the set0 (default-arg)
+            // path as unverifiable by design.
             if (isExternalAssembly)
             {
-                sb.AppendLine($"            // [AOT smoke] {result.ExceptionType} thrown by {callExpr} (external assembly stub — skipping Throws)");
+                sb.AppendLine($"            // [UNVERIFIED] AOT stub: {result.ExceptionType} thrown by {callExpr} (managed input->exception, AOT stub returns default — smoke test passes)");
                 return;
             }
 
@@ -322,16 +355,52 @@ public sealed class TestEmitter
         // Deterministic return value assertion
         if (result.IsDeterministic && !result.IsVoid && result.ReturnValueJson is not null)
         {
+            // SUSPICIOUS NULL: when the probe ran on an UNINITIALIZED subject instance
+            // (SubjectInstanceFactory.Create<T> uses GetUninitializedObject, which returns
+            // a bare object with all fields zero/null), a null return value is likely an
+            // artifact of the uninitialized state rather than a genuine semantic null.
+            // Examples: Queue.Clone() on a bare object returns null because _array is null;
+            // Stack.ToArray() on a bare object returns null for the same reason.
+            // In AOT, the stub also returns null → Assert.AreEqual(default, null) passes
+            // by coincidence — a false positive.
+            // Mark as UNVERIFIED instead of asserting a non-semantic null.
+            if (callExpr.StartsWith("SubjectInstanceFactory.Create<", StringComparison.Ordinal))
+            {
+                // Case 1: ReturnValueJson explicitly null
+                // Case 2: Empty array [] but the return type is NOT an array type
+                //         (e.g. Queue.Clone() returns Queue, not Queue[] — the probe
+                //         serialized an empty object as []). This is also an artifact.
+                var isNullJson = result.ReturnValueJson == "null" || string.IsNullOrEmpty(result.ReturnValueType);
+                var isNonArrayEmptyArray = result.ReturnValueJson == "[]" && !method.ReturnTypeName.EndsWith("[]");
+                // Case 3: Array return type (e.g. System.Object[]) with "[]" JSON.
+                //         The serializer renders default(T) for non-collection types,
+                //         producing Assert.AreEqual(default(Object[]), result) which
+                //         is a false positive for both stub (null) and the uninitialized
+                //         instance (also likely returns null/empty from bare fields).
+                //         Mark as UNVERIFIED — the serializer cannot produce a meaningful
+                //         array expression for this context.
+                var isArrayEmptyArray = result.ReturnValueJson == "[]" && method.ReturnTypeName.EndsWith("[]");
+                if (isNullJson || isNonArrayEmptyArray || isArrayEmptyArray)
+                {
+                    sb.AppendLine($"            // [UNVERIFIED] AOT stub: null return from SubjectInstanceFactory instance (uninitialized object artifact — skipping default(T) assertion)");
+                    return;
+                }
+            }
+
             // Null return → assert default(T)!
             if (result.ReturnValueJson == "null" || string.IsNullOrEmpty(result.ReturnValueType))
             {
                 var csType = CSharpSerializer.MapToCSharpType(method.ReturnTypeName);
-                // For reference types: assert IsNotNull first to catch unexpected non-null
-                // results before comparing to default(T)!. This guards against probe
-                // serialization gaps where a non-null value was not captured.
-                var isRefType = !CSharpSerializer.IsValueType(method.ReturnTypeName);
-                if (isRefType)
-                    sb.AppendLine($"            Assert.IsNotNull(result_{mi}_{set.SetIndex});");
+
+                // For a NULL-captured return value, assert equality with default(T) (null).
+                // Do NOT emit Assert.IsNotNull here — for a method that legitimately returns
+                // null (e.g. Convert.ChangeType(null, TypeCode), default(ReadOnlySpan<T>).
+                // ToArray() is a non-null empty array, so it is captured as non-null), the
+                // IsNotNull + AreEqual(default) pair is logically unsatisfiable: IsNotNull
+                // requires non-null while AreEqual(default=null) requires null.  Emitting both
+                // guarantees failure no matter what the runtime returns — a false failure.
+                // The probe already captured null as the deterministic result, so asserting
+                // equality with default(T) suffices.
                 sb.AppendLine($"            Assert.AreEqual(default({csType})!, result_{mi}_{set.SetIndex});");
                 return;
             }

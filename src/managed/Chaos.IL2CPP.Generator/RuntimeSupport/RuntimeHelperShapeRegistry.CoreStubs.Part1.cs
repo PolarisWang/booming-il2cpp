@@ -38,6 +38,8 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterThrowHelper(registry);
             RegisterCommonframeworkmethod(registry);
             RegisterEnvironment(registry);
+            RegisterRuntimeInteropEnvironmentstubs(registry);
+            RegisterAsnWriterScopestubs(registry);
             RegisterConsole(registry);
             RegisterOperatingSystemplatformchecks(registry);
             RegisterNumericformatting(registry);
@@ -61,6 +63,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterCustomAttributeMemberInfoIsDefined(registry);
             RegisterInterpolatedStringHandler(registry);
             RegisterRuntimeHelpers(registry);
+            RegisterXmlNameTableStubs(registry);
             RegisterMonitor(registry);
             RegisterThread(registry);
             RegisterThreadSleep(registry);
@@ -90,7 +93,9 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterAssemblyGetTypeoverload(registry);
             RegisterReflectionParameterInfo(registry);
             RegisterAsyncTaskYield(registry);
+            RegisterAsyncTaskBuilder(registry);
             RegisterDecimal(registry);
+            RegisterTaskCompletionSource(registry);
             RegisterNullableTget(registry);
             RegisterNullableTGetValueOrDefault(registry);
             RegisterConvertToChar(registry);
@@ -287,6 +292,11 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     if (pt is "System.Boolean" or "System.DateTime")
                     {
+                        // Boolean → the target numeric via static_cast of the 1/0 carrier value
+                        // (Convert.ToByte(true)=1, ToDouble(true)=1.0).  DateTime is kept as a
+                        // throwing placeholder (no DateTime→numeric semantics).
+                        if (pt is "System.Boolean")
+                            return $"static_cast<{cppCastType}>({{0}})";
                         return $"(chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<{cppCastType}>(0))";
                     }
                     return null;
@@ -485,6 +495,21 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// AsnWriter.Scope::Dispose — DirectNativeSymbol stub for the AsnWriter+Scope finalization pattern.
+        /// The ATG wrapper calls Dispose() on a default-initialized value type.
+        /// The value type has no actual managed state to clean up in AOT context.
+        /// </summary>
+        private static void RegisterAsnWriterScopestubs(RuntimeHelperShapeRegistry registry)
+        {
+            // AsnWriter.Scope::Dispose() → void (no args — default-initialized value)
+            registry.Register("AsnWriter+Scope", "Dispose", [],
+                ShapeKind.SimpleForward, "ChaosAsnWriterScopeDispose",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateVoidAbiSlot(),
+                EmptyRawArgumentIndices);
+        }
+
+        /// <summary>
         /// Register a BCrypt/NCrypt P/Invoke method as a SimpleForward stub.
         /// The type name is "Interop+BCrypt" for BCrypt methods and "Interop+NCrypt" for NCrypt methods.
         /// Each IntPtr parameter maps to a NativeInt ABI slot, and each Int32 maps to an Int32 ABI slot.
@@ -521,6 +546,65 @@ public sealed partial class NativeAotLoweringPlanner
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots),
                 returnAbi,
                 rawIndices);
+        }
+
+        /// <summary>
+        /// Register System.Xml.NameTable / XmlNameTable Add(string)/Get(string) as
+        /// SimpleForward stubs routing to the native interned-string implementations
+        /// ChaosXmlNameTableAddString / ChaosXmlNameTableGetString (xml_nametable_stubs.
+        /// {h,cpp}).
+        ///
+        /// ABI (both):
+        ///   ChaosXmlNameTable*(IntPtr this, IntPtr name) -> IntPtr
+        ///   returns a managed String pointer (tagged StringId) or 0 (null) — matches
+        ///   the stubs' contract (see xml_nametable_stubs.h).
+        ///
+        /// Honesty note: only the concrete NameTable.Add(System.String) and
+        /// NameTable.Get(System.String) subject IDs (System.Private.Xml/System.Xml.NameTable)
+        /// are wired here. The abstract XmlNameTable.Add/Get are virtual and are dispatched
+        /// through the base-typed XmlNameTable subject ID (System.Xml.XmlNameTable), which is
+        /// NOT registered → those calls fall through to the existing interpreter/IR path.
+        /// The concrete NameTable overloads that can be statically dispatched (statically
+        /// NameTable-typed `this`) resolve to these native stubs. The Add(System.Char[],...)
+        /// char-array overloads are also out of scope (no native stub) and stay on the
+        /// interpreter/IR path.
+        /// </summary>
+        private static void RegisterXmlNameTableStubs(RuntimeHelperShapeRegistry registry)
+        {
+            var stringRefAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+            var thisAbi = CreateNativeIntAbiSlot(
+                "System.Private.Xml/System.Xml.NameTable", AotCoreIrTypeShapeKind.ReferenceType);
+            var stringRetAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+
+            // Concrete NameTable.Add(string) -> string  → ChaosXmlNameTableAddString
+            registry.Register(
+                "System.Xml.NameTable",
+                "Add",
+                new[] { "System.String" },
+                ShapeKind.SimpleForward, "ChaosXmlNameTableAddString",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    thisAbi,
+                    stringRefAbi,
+                }),
+                stringRetAbi,
+                new HashSet<int> { 0, 1 });
+
+            // Concrete NameTable.Get(string) -> string?  → ChaosXmlNameTableGetString
+            registry.Register(
+                "System.Xml.NameTable",
+                "Get",
+                new[] { "System.String" },
+                ShapeKind.SimpleForward, "ChaosXmlNameTableGetString",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    thisAbi,
+                    stringRefAbi,
+                }),
+                stringRetAbi,
+                new HashSet<int> { 0, 1 });
         }
 
     }

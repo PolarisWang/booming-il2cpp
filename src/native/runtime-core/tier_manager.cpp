@@ -265,9 +265,14 @@ void TierManager::BackgroundLoop() noexcept {
                 if (new_code != nullptr) {
                     // Patch direct_ptr to Tier 1 code so future calls bypass
                     // the trampoline and go directly to the optimized code.
+                    // Release-store (B1): the native dispatch readers (entry_direct,
+                    // hotpatch_dispatch) load direct_ptr with acquire so the patched
+                    // pointer is correctly published across threads, incl. weak-memory
+                    // (ARM64) where a plain store would not be ordered vs the reader's
+                    // tier_state acquire.
                     HotpatchEntryV0* entry = je.precode->entry;
                     if (entry != nullptr) {
-                        entry->direct_ptr = new_code;
+                        std::atomic_ref<void*>(entry->direct_ptr).store(new_code, std::memory_order_release);
                         CHAOS_IL2CPP_LOG_DEBUG_M("tier",
                             "Tier1 complete: direct_ptr patched to %p", new_code);
                     }

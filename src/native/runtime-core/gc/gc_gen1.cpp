@@ -1,5 +1,6 @@
 #include "gc_gen1.h"
 
+#include <chaos/asan_interface.h>
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
@@ -18,7 +19,14 @@
 #include "gc_scheduler.h"
 #include "gc_young_gen.h"
 #include "gc_heap.h"
+#include "gc_static_roots.h"
 #include "thread_state.h"
+
+// Dense, cache-friendly address set for live_demoted (vs std::unordered_set,
+// whose per-node heap allocations + poor locality inflate gen1 STW pause).
+// Defined AFTER includes since gc_layout.h -> chaos/unordered_dense.h supplies
+// the CHAOS_IL2CPP_UNORDERED_DENSE_SET macro.
+using Gen1LiveDemotedSet = CHAOS_IL2CPP_UNORDERED_DENSE_SET(uintptr_t);
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -146,49 +154,6 @@ bool GcGen1ShouldCollect() {
 }
 
 // ======================================================================
-// ScanGen1ObjectPointers — scan a single Gen1 object for Gen2 pointers
-// Used by full GC and BGC root scanning (not by Gen1 collection itself).
-// ======================================================================
-
-void ScanGen1ObjectPointers(const char* obj_addr, CHAOS_IL2CPP_SIZE obj_size,
-                             void (*mark_callback)(void* child, void* ctx),
-                             void* ctx) {
-    auto& layout_registry = GcLayoutRegistry::Instance();
-    const void* ti = *reinterpret_cast<const void* const*>(obj_addr);
-    if (ti == nullptr) return;
-    if (!layout_registry.IsValidTypeInfoPointer(ti)) {
-        // Conservative fallback: scan all pointer-aligned slots.
-        for (uintptr_t off = 0; off + sizeof(void*) <= obj_size; off += sizeof(void*)) {
-            void* child = *reinterpret_cast<void* const*>(obj_addr + off);
-            if (child != nullptr) {
-                mark_callback(child, ctx);
-            }
-        }
-        return;
-    }
-    uint64_t sid = layout_registry.ReadStableId(ti);
-    const auto* layout = layout_registry.Lookup(sid);
-    if (layout == nullptr) {
-        // Fallback.
-        for (uintptr_t off = 0; off + sizeof(void*) <= obj_size; off += sizeof(void*)) {
-            void* child = *reinterpret_cast<void* const*>(obj_addr + off);
-            if (child != nullptr) {
-                mark_callback(child, ctx);
-            }
-        }
-        return;
-    }
-    // Precise scan using layout pointer offsets.
-    for (uint16_t i = 0; i < layout->pointer_count; i++) {
-        uint16_t off = layout->pointer_offsets[i].offset;
-        void* child = *reinterpret_cast<void**>(const_cast<char*>(obj_addr + off));
-        if (child != nullptr) {
-            mark_callback(child, ctx);
-        }
-    }
-}
-
-// ======================================================================
 // GcGen1Collection
 // ======================================================================
 
@@ -242,7 +207,7 @@ Gen1CollectionResult GcGen1Collection() {
                     obj_size = static_cast<CHAOS_IL2CPP_SIZE>(layout->instance_size);
                 }
             }
-            void* gen2_addr = g_old_gen.Allocate(obj_size, true);
+            void* gen2_addr = G_OldGen().Allocate(obj_size, true);
             if (gen2_addr != nullptr) {
                 std::memcpy(gen2_addr, tiny_cur, obj_size);
                 result.objects_promoted++;
@@ -313,7 +278,7 @@ Gen1CollectionResult GcGen1Collection() {
                         sz2 = static_cast<CHAOS_IL2CPP_SIZE>(l2->instance_size);
                     }
                 }
-                void* gen2_addr = g_old_gen.Allocate(sz2, true);
+                void* gen2_addr = G_OldGen().Allocate(sz2, true);
                 if (gen2_addr != nullptr) {
                     std::memcpy(gen2_addr, ec2_cur, sz2);
                     result.objects_promoted++;
@@ -378,7 +343,7 @@ Gen1CollectionResult GcGen1Collection() {
                     obj_size = static_cast<CHAOS_IL2CPP_SIZE>(layout->instance_size);
                 }
             }
-            void* gen2_addr = g_old_gen.Allocate(obj_size, true);
+            void* gen2_addr = G_OldGen().Allocate(obj_size, true);
             if (gen2_addr != nullptr) {
                 std::memcpy(gen2_addr, drain_cur, obj_size);
                 result.objects_promoted++;
@@ -410,6 +375,38 @@ Gen1CollectionResult GcGen1Collection() {
     std::memset(bitmap_raw, 0, bitmap_bytes);
     GcMarkBitmap mark_bm(bitmap_raw, bitmap_bytes);
 
+    // ── Phase 2.5: cross-page demoted-liveness tracking (GC-N6 #13 Phase2) ──
+    // In-place demoted objects live in OLD-GEN pages, not the gen1 region, so the
+    // gen1_begin-relative mark bitmap cannot index them.  Track live-demoted
+    // addresses in a set as root scans discover references to them.  The gen1
+    // collection then promotes / keeps / reclaims each demoted object in Phase 4.
+    Gen1LiveDemotedSet live_demoted;
+    // Mark a child pointer as gen1-live: if it's in the gen1 region, set the mark
+    // bitmap bit; if it's an in-place demoted old-gen object, record it in
+    // live_demoted (later promoted/kept/reclaimed in Phase 4).
+    //
+    // CRITICAL (base/interior asymmetry, review #1): conservative scans and
+    // interior references record a RAW pointer that may be INTERIOR to the object
+    // (IsInDemotedSet returns true for interior pointers, gc_old_gen.h:160).
+    // Phase 4f keys liveness on the object BASE (page->demoted[i].addr), so every
+    // demoted hit must be normalized to its base via IsInDemotedSetGetBase —
+    // storing the raw interior value would make a base-address lookup MISS a live
+    // demoted object, clear its old-gen mark bits, and the next sweep would
+    // reclaim an object still referenced on a thread stack (use-after-free).
+    auto mark_child = [&](void* child) {
+        if (child == nullptr) return;
+        if (IsInGen1(child)) {
+            uintptr_t child_addr = reinterpret_cast<uintptr_t>(child);
+            CHAOS_IL2CPP_SIZE slot_idx = (child_addr - gen1_begin) / sizeof(void*);
+            mark_bm.MarkRange(slot_idx, 1);
+        } else {
+            char* demoted_base = IsInDemotedSetGetBase(child);
+            if (demoted_base != nullptr) {
+                live_demoted.insert(reinterpret_cast<uintptr_t>(demoted_base));
+            }
+        }
+    };
+
     // ── Phase 3: Mark roots ──
 
     // 3a: Scan Gen0 (young half of nursery) for pointers into Gen1.
@@ -431,32 +428,20 @@ Gen1CollectionResult GcGen1Collection() {
                         for (uint16_t i = 0; i < layout->pointer_count; i++) {
                             uint16_t off = layout->pointer_offsets[i].offset;
                             void* child = *reinterpret_cast<void**>(n_cur + off);
-                            if (child != nullptr && IsInGen1(child)) {
-                                uintptr_t child_addr = reinterpret_cast<uintptr_t>(child);
-                                CHAOS_IL2CPP_SIZE slot_idx = (child_addr - gen1_begin) / sizeof(void*);
-                                mark_bm.MarkRange(slot_idx, 1);
-                            }
+                            mark_child(child);
                         }
                     } else {
                         // Fallback: scan all slots.
                         for (CHAOS_IL2CPP_SIZE off = 0; off + sizeof(void*) <= nobj_size; off += sizeof(void*)) {
                             void* child = *reinterpret_cast<void**>(n_cur + off);
-                            if (child != nullptr && IsInGen1(child)) {
-                                uintptr_t child_addr = reinterpret_cast<uintptr_t>(child);
-                                CHAOS_IL2CPP_SIZE slot_idx = (child_addr - gen1_begin) / sizeof(void*);
-                                mark_bm.MarkRange(slot_idx, 1);
-                            }
+                            mark_child(child);
                         }
                     }
                 } else {
                     // No valid TypeInfo; conservative scan.
                     for (CHAOS_IL2CPP_SIZE off = 0; off + sizeof(void*) <= nobj_size; off += sizeof(void*)) {
                         void* child = *reinterpret_cast<void**>(n_cur + off);
-                        if (child != nullptr && IsInGen1(child)) {
-                            uintptr_t child_addr = reinterpret_cast<uintptr_t>(child);
-                            CHAOS_IL2CPP_SIZE slot_idx = (child_addr - gen1_begin) / sizeof(void*);
-                            mark_bm.MarkRange(slot_idx, 1);
-                        }
+                        mark_child(child);
                     }
                 }
                 n_cur += nobj_size;
@@ -467,15 +452,11 @@ Gen1CollectionResult GcGen1Collection() {
     // 3b: Scan Gen2 dirty cards for pointers into Gen1.
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("Gen1_Root_DirtyCards");
-        g_old_gen.ScanDirtyCardsInPages(
+        G_OldGen().ScanDirtyCardsInPages(
             [&](uintptr_t /*card_idx*/, uintptr_t card_start, uintptr_t card_end) {
                 for (uintptr_t slot = card_start; slot < card_end; slot += sizeof(void*)) {
                     void* val = *reinterpret_cast<void**>(slot);
-                    if (val != nullptr && IsInGen1(val)) {
-                        uintptr_t child_addr = reinterpret_cast<uintptr_t>(val);
-                        CHAOS_IL2CPP_SIZE slot_idx = (child_addr - gen1_begin) / sizeof(void*);
-                        mark_bm.MarkRange(slot_idx, 1);
-                    }
+                    mark_child(val);
                 }
             });
     }
@@ -483,16 +464,29 @@ Gen1CollectionResult GcGen1Collection() {
     // 3c: Scan thread stacks (conservative).
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("Gen1_Root_Stacks");
-        struct StackCtx { uintptr_t gen1_begin; GcMarkBitmap* bm; };
-        StackCtx sctx{gen1_begin, &mark_bm};
+        struct StackCtx { uintptr_t gen1_begin; GcMarkBitmap* bm; Gen1LiveDemotedSet* live_demoted; };
+        StackCtx sctx{gen1_begin, &mark_bm, &live_demoted};
         threading::GcScanAllThreadRoots(
             [](void* root_addr, bool /*is_interior*/, void* user_data) {
                 auto* ctx = static_cast<StackCtx*>(user_data);
-                void* val = *reinterpret_cast<void**>(root_addr);
-                if (val != nullptr && IsInGen1(val)) {
+                // root_addr is a slot on ANOTHER thread's stack (conservative
+                // GcScanAllThreadRoots); it may sit in an ASan stack-frame
+                // redzone.  Un-instrumented read avoids a false
+                // stack-buffer-underflow (byte-identical access, ASan only
+                // elided) — see gc_gen1.cpp:655 task#16.
+                void* val = chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr);
+                if (val == nullptr) return;
+                if (IsInGen1(val)) {
                     uintptr_t child_addr = reinterpret_cast<uintptr_t>(val);
                     CHAOS_IL2CPP_SIZE slot_idx = (child_addr - ctx->gen1_begin) / sizeof(void*);
                     ctx->bm->MarkRange(slot_idx, 1);
+                } else {
+                    // Normalize interior stack pointers to the demoted object base
+                    // (same base-key rule as mark_child) — see review #1.
+                    char* demoted_base = IsInDemotedSetGetBase(val);
+                    if (demoted_base != nullptr) {
+                        ctx->live_demoted->insert(reinterpret_cast<uintptr_t>(demoted_base));
+                    }
                 }
             }, &sctx);
     }
@@ -500,17 +494,68 @@ Gen1CollectionResult GcGen1Collection() {
     // 3d: Scan GCHandles for Gen1 pointers.
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("Gen1_Root_GCHandles");
-        struct HandleCtx { uintptr_t gen1_begin; GcMarkBitmap* bm; };
-        HandleCtx hctx{gen1_begin, &mark_bm};
+        struct HandleCtx { uintptr_t gen1_begin; GcMarkBitmap* bm; Gen1LiveDemotedSet* live_demoted; };
+        HandleCtx hctx{gen1_begin, &mark_bm, &live_demoted};
         GcIterateTenuredHandles(
             [](void* obj, void* user_data) {
-                if (obj != nullptr && IsInGen1(obj)) {
-                    auto* context = static_cast<HandleCtx*>(user_data);
+                if (obj == nullptr) return;
+                auto* context = static_cast<HandleCtx*>(user_data);
+                if (IsInGen1(obj)) {
                     uintptr_t obj_addr = reinterpret_cast<uintptr_t>(obj);
                     CHAOS_IL2CPP_SIZE slot_idx = (obj_addr - context->gen1_begin) / sizeof(void*);
                     context->bm->MarkRange(slot_idx, 1);
+                } else {
+                    // GCHandles store the object base, but normalize defensively —
+                    // a handle may point at an interior offset for some projections.
+                    // Key liveness on the base so Phase 4f lookup is consistent.
+                    char* demoted_base = IsInDemotedSetGetBase(obj);
+                    if (demoted_base != nullptr) {
+                        context->live_demoted->insert(reinterpret_cast<uintptr_t>(demoted_base));
+                    }
                 }
             }, &hctx);
+    }
+
+    // ── Phase 3.5: demoted-object transitive closure (GC-N6 #13 Phase2) ──
+    // A live demoted object may reference another demoted object (demoted→demoted
+    // edge); those children must also be live.  BFS over live_demoted: scan each
+    // live demoted object's interior pointers (precise layout) and mark any demoted
+    // child live.  (Root scans in Phase 3 already added direct-reach demoted objs.)
+    {
+        CHAOS_IL2CPP_PROFILE_SCOPE("Gen1_Demoted_Closure");
+        // Every element is a demoted-object BASE address (all insert points
+        // normalize via IsInDemotedSetGetBase), so dereferencing as an object
+        // header is well-formed — a raw interior/false pointer can never reach
+        // this loop.  IsValidTypeInfoPointer below remains a defensive fallback.
+        std::vector<uintptr_t> worklist(live_demoted.begin(), live_demoted.end());
+        while (!worklist.empty()) {
+            uintptr_t addr = worklist.back();
+            worklist.pop_back();
+            const void* ti = *reinterpret_cast<const void* const*>(addr);
+            auto& lreg = GcLayoutRegistry::Instance();
+            if (ti == nullptr || !lreg.IsValidTypeInfoPointer(ti)) continue;
+            uint64_t sid = lreg.ReadStableId(ti);
+            const auto* layout = lreg.Lookup(sid);
+            if (layout == nullptr || layout->pointer_count == 0) continue;
+            for (uint16_t i = 0; i < layout->pointer_count; i++) {
+                uint16_t off = layout->pointer_offsets[i].offset;
+                void* child = *reinterpret_cast<void**>(addr + off);
+                if (child == nullptr) continue;
+                // Demoted child edge: normalize to base before inserting, so the
+                // base-key invariant of live_demoted is preserved across closure.
+                char* demoted_base = IsInDemotedSetGetBase(child);
+                if (demoted_base != nullptr) {
+                    uintptr_t child_addr = reinterpret_cast<uintptr_t>(demoted_base);
+                    if (live_demoted.insert(child_addr).second) {
+                        worklist.push_back(child_addr);
+                    }
+                } else if (IsInGen1(child)) {
+                    uintptr_t child_addr = reinterpret_cast<uintptr_t>(child);
+                    CHAOS_IL2CPP_SIZE slot_idx = (child_addr - gen1_begin) / sizeof(void*);
+                    mark_bm.MarkRange(slot_idx, 1);
+                }
+            }
+        }
     }
 
     // ── Phase 4: Walk Gen1 objects, promote old survivors / compact new ──
@@ -558,7 +603,7 @@ Gen1CollectionResult GcGen1Collection() {
                         obj_size = static_cast<CHAOS_IL2CPP_SIZE>(layout->instance_size);
                     }
                 }
-                void* gen2_addr = g_old_gen.Allocate(obj_size, true);
+                void* gen2_addr = G_OldGen().Allocate(obj_size, true);
                 if (gen2_addr != nullptr) {
                     std::memcpy(gen2_addr, drain_cur, obj_size);
                     local_promoted_count++;
@@ -587,6 +632,11 @@ Gen1CollectionResult GcGen1Collection() {
         struct PromoteEntry { char* src; CHAOS_IL2CPP_SIZE size; };
         PromoteEntry batch_buf[kPromoteBatchMax];
         int batch_count = 0;
+        // Moves: old Gen1 address → new address (old-gen for promotion, Gen1
+        // start for compaction), collected during 4b/4c and used to rewrite
+        // external references after the objects physically move.
+        std::vector<Gen1MoveEntry> moves;
+        moves.reserve(512);
 
         while (s_cur < s_bump) {
             const void* ti = *reinterpret_cast<const void* const*>(s_cur);
@@ -610,9 +660,11 @@ Gen1CollectionResult GcGen1Collection() {
                         batch_buf[batch_count++] = {s_cur, obj_size};
                     } else {
                         // Batch overflow: promote directly.
-                        void* gen2_addr = g_old_gen.Allocate(obj_size, true);
+                        void* gen2_addr = G_OldGen().Allocate(obj_size, true);
                         if (gen2_addr != nullptr) {
                             std::memcpy(gen2_addr, s_cur, obj_size);
+                            moves.push_back({reinterpret_cast<uintptr_t>(s_cur),
+                                             reinterpret_cast<uintptr_t>(gen2_addr)});
                             local_promoted_count++;
                             local_bytes_promoted += obj_size;
                         } else {
@@ -624,6 +676,10 @@ Gen1CollectionResult GcGen1Collection() {
                 } else {
                     // "New" survivor (fresh from Gen0) → compact in Gen1.
                     std::memcpy(compact_buf + local_bytes_compacted, s_cur, obj_size);
+                    // Record the move BEFORE advancing the running offset: the
+                    // object at s_cur moves to s_begin + local_bytes_compacted.
+                    moves.push_back({reinterpret_cast<uintptr_t>(s_cur),
+                                     reinterpret_cast<uintptr_t>(s_begin + local_bytes_compacted)});
                     local_compacted++;
                     local_bytes_compacted += obj_size;
                 }
@@ -636,9 +692,11 @@ Gen1CollectionResult GcGen1Collection() {
 
         // ── Phase 4c: Promote batched old objects to Gen2 ──
         for (int i = 0; i < batch_count && !local_failed; i++) {
-            void* gen2_addr = g_old_gen.Allocate(batch_buf[i].size, true);
+            void* gen2_addr = G_OldGen().Allocate(batch_buf[i].size, true);
             if (gen2_addr != nullptr) {
                 std::memcpy(gen2_addr, batch_buf[i].src, batch_buf[i].size);
+                moves.push_back({reinterpret_cast<uintptr_t>(batch_buf[i].src),
+                                 reinterpret_cast<uintptr_t>(gen2_addr)});
                 local_promoted_count++;
                 local_bytes_promoted += batch_buf[i].size;
             } else {
@@ -658,13 +716,64 @@ Gen1CollectionResult GcGen1Collection() {
 
             result.objects_promoted = local_promoted_count;
             result.bytes_promoted = local_bytes_promoted;
-            // NOTE: bytes_compacted is a BYTE count (gc_gen1.h). Assigning
-            // local_compacted (an object count) here silently under-reported the
-            // compacted bytes as 0 for single-object compaction and made the
-            // Gen1 compaction tests see bytes_compacted == 0.
+            // bytes_compacted is a BYTE count (gc_gen1.h) — must use
+            // local_bytes_compacted, not local_compacted (an object count).
             result.bytes_compacted = local_bytes_compacted;
             result.bytes_reclaimed = local_reclaimed;
             result.promotion_failed = false;
+
+            // Phase 4e: Rewrite external references to the moved Gen1 objects.
+            // After promotion/compaction the objects physically moved; any old-gen
+            // slot / static root / thread / surviving-Gen1 interior / GCHandle that
+            // still points at the OLD Gen1 address would reference recycled memory
+            // on the next Gen1 collection (cross-gen UAF, GC-N6 mode3).  Relocate
+            // exact old→new matches now, while the old addresses are still mapped.
+            RelocateGen1References(moves);
+
+            // ── Phase 4f: in-place demoted object liveness (GC-N6 #13 Phase2) ──
+            // Gen1-owned objects physically resident in old-gen pages.  Do this
+            // AFTER gen1 commit (gen1_bump/prev_compact_end stable).
+            //   Live demoted (in live_demoted via Phase 3/3.5):
+            //     - survived a prior gen1 collection (must_promote) -> PROMOTE to
+            //       gen2: remove from demoted set (mark bit already set = gen2-live;
+            //       already in old-gen, no move needed).
+            //     - first survival -> keep as gen1-owned, set must_promote=true.
+            //   Dead demoted (not in live_demoted) -> clear its old-gen mark bits so
+            //     a later old-gen sweep reclaims the space; remove from demoted set.
+            {
+                const ScopedPreemptiveMode preempt;
+                GcSpinLockGuard lock(G_OldGen().PageMutex());
+                for (auto* page = G_OldGen().PageList(); page != nullptr; page = page->next) {
+                    if (!page->in_use.load(std::memory_order_acquire)) continue;
+                    // Iterate backwards-safe: DemoteRemove swaps-with-last.
+                    for (int32_t i = 0; i < page->demoted_count.load(std::memory_order_acquire); ) {
+                        auto& e = page->demoted[i];
+                        if (live_demoted.find(reinterpret_cast<uintptr_t>(e.addr)) != live_demoted.end()) {
+                            // Live.
+                            if (e.must_promote) {
+                                // Promote in place: become a normal gen2 object →
+                                // just drop from the demoted set (mark bit already set).
+                                page->DemoteRemove(e.addr);
+                            } else {
+                                e.must_promote = true;
+                                i++;
+                            }
+                        } else {
+                            // Dead: clear this object's old-gen mark bits so sweep reclaims it.
+                            auto bm_d = GcMarkBitmap(page->MarkBitmap(), page->bitmap_bytes);
+                            char* payload = page->Payload();
+                            uintptr_t obj_addr = reinterpret_cast<uintptr_t>(e.addr);
+                            uintptr_t payload_base = reinterpret_cast<uintptr_t>(payload);
+                            if (obj_addr >= payload_base) {
+                                CHAOS_IL2CPP_SIZE slot_off = (obj_addr - payload_base) / sizeof(void*);
+                                CHAOS_IL2CPP_SIZE n_slots = (e.size + sizeof(void*) - 1) / sizeof(void*);
+                                bm_d.ClearRange(slot_off, n_slots);
+                            }
+                            page->DemoteRemove(e.addr);
+                        }
+                    }
+                }
+            }
         } else {
             // Some promotions failed — preserve Gen1 state for retry.
             // Don't update gen1_bump or gen1_prev_compact_end.

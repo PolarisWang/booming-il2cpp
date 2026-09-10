@@ -70,18 +70,6 @@ public sealed partial class NativeAotLoweringPlanner
         private readonly List<GenericShapeDescriptor> _genericDescriptors = new();
         private readonly List<InlineShapeDescriptor> _inlineDescriptors = new();
 
-        /// <summary>
-        /// Callee subject-ids that were resolved by an inline shape descriptor.
-        /// These methods get native C++ emitted directly at the call site (no
-        /// AotCoreIr method artifact, hence no .jdata entry).  The verification
-        /// pipeline needs to know about them so it can classify the wrapper as
-        /// NativeGenerated rather than NoCanonicalBody.
-        /// </summary>
-        private readonly HashSet<string> _inlineMatchedCallees = new(StringComparer.Ordinal);
-
-        /// <summary>Snapshot of callees resolved via inline shapes (sorted for stable output).</summary>
-        public IReadOnlyList<string> InlineMatchedCallees => _inlineMatchedCallees.OrderBy(s => s, StringComparer.Ordinal).ToArray();
-
         /// <summary>FNV-1a 32-bit hash — must match the C++ constexpr implementation exactly.</summary>
         public static uint Fnv1aHash(string text)
         {
@@ -244,7 +232,6 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     cppExpression = result;
                     matchedDescriptor = entry;
-                    _inlineMatchedCallees.Add(callee);
                     return true;
                 }
             }
@@ -563,6 +550,48 @@ public sealed partial class NativeAotLoweringPlanner
                         CreateInt32AbiSlot(),
                         EmptyRawArgumentIndices);
                 }));
+
+            // ── COM marshaller placeholder shapes (ComInterfaceMarshaller / UniqueComInterfaceMarshaller) ──
+            // ComInterfaceMarshaller<T>.ConvertToUnmanaged(T) and
+            // UniqueComInterfaceMarshaller<T>.ConvertToUnmanaged(T) return a COM
+            // interface pointer in real .NET.  AOT has no COM runtime; returning
+            // nullptr makes the subject wrapper (result != null ? 0L : 1L) FAIL
+            // against its 0L oracle.  Forward BOTH marshaller types to a native
+            // placeholder that returns a non-null inert IUnknown-like object, so
+            // C++ behaviour === C# (non-null) even without a COM runtime.
+            foreach (var marshallerPrefix in new[]
+                     {
+                         "System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller",
+                         "System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller",
+                     })
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: marshallerPrefix,
+                    MethodName: "ConvertToUnmanaged",
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                        bool hasManagedArg = typeArgs != null && typeArgs.Count > 0;
+                        // Placeholder ignores the managed value; but the call site still
+                        // passes it, so model a native-int slot when a type arg exists.
+                        // Was CreateInt32AbiSlot (32-bit), but the managed arg is an object
+                        // reference (pointer-sized).  On 64-bit platforms, a 32-bit slot
+                        // would misalign the ABI layout relative to the non-intrinsic
+                        // C++ signature — use NativeInt for pointer-width correctness.
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            hasManagedArg ? "CHAOS_IL2CPP_INTPTR chaos_arg_0" : "",
+                        [
+                            "    return ChaosComInterfaceMarshallerConvertToUnmanaged();",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            hasManagedArg
+                                ? new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType))
+                                : Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                            CreateNativeIntAbiSlot(),  // returns void*/native pointer
+                            hasManagedArg ? new HashSet<int> { 0 } : EmptyRawArgumentIndices);
+                    }));
+            }
 
 
 

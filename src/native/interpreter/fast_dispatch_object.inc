@@ -45,13 +45,16 @@ static void Handle_LdElem(FastFrame& frame, const interpreter::IRInstruction& in
     uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
     auto* arr = static_cast<interpreter::ArrayStorage*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
-    if (arr == nullptr) { frame.PushNull_NC(); ++frame.pc; return; }
+    // Step 3.1: null array / out-of-bounds must raise, not silently push null,
+    // per ECMA-335 (NullReferenceException / IndexOutOfRangeException).  Mirror
+    // the interpreter's existing null-throw convention (threw_exception + pc=9999).
+    if (arr == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
 
     if (arr->is_flat) {
-        if (index >= arr->flat_length) { frame.PushNull_NC(); ++frame.pc; return; }
+        if (index >= arr->flat_length) { frame.threw_exception = true; frame.pc = 9999; return; }
         PushFlatArrayElement(frame, arr, index);
     } else {
-        if (index >= arr->elements.size()) { frame.PushNull_NC(); ++frame.pc; return; }
+        if (index >= arr->elements.size()) { frame.threw_exception = true; frame.pc = 9999; return; }
         frame.PushIV(arr->elements[index]);
     }
     ++frame.pc;
@@ -104,10 +107,21 @@ static void Handle_StElemNoChk(FastFrame& frame, const interpreter::IRInstructio
         default: break;
         }
     } else {
-        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
-        arr->elements[index] = val;
-        chaos_gc_dirty_card(arr);
+        // Non-GC interpreter ArrayStorage — no GC write barrier needed unless
+        // the array itself is a real GC-managed object (mirrors Handle_StInd).
+        if (chaos_is_gc_pointer(arr)) {
+            using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+            using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
+            BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
+            // store→card in one non-preemptible critical section (A2b close).
+            {
+                BarrierCriticalSectionScope barrier;
+                arr->elements[index] = val;
+                chaos_gc_dirty_card(arr);
+            }
+        } else {
+            arr->elements[index] = val;
+        }
     }
     ++frame.pc;
 }
@@ -119,12 +133,15 @@ static void Handle_StElem(FastFrame& frame, const interpreter::IRInstruction&) n
     uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
     auto* arr = static_cast<interpreter::ArrayStorage*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
-    if (arr == nullptr) { ++frame.pc; return; }
+    // Step 3.1: null array store must raise NullReferenceException, not silently
+    // skip (ECMA-335). Mirror the null-throw convention.
+    if (arr == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
 
     if (arr->is_flat) {
         if (index >= arr->flat_length) {
-            // Flat arrays don't support dynamic resize — bounds error, skip.
-            ++frame.pc; return;
+            // Out-of-bounds array store must raise IndexOutOfRangeException, not
+            // silently skip (ECMA-335).  Consistent with Reg_StElem and LdElem.
+            frame.threw_exception = true; frame.pc = 9999; return;
         }
         void* elem_ptr = static_cast<char*>(arr->flat_data) + index * arr->flat_element_size;
         switch (arr->flat_element_size) {
@@ -146,13 +163,25 @@ static void Handle_StElem(FastFrame& frame, const interpreter::IRInstruction&) n
         }
     } else {
         if (index >= arr->elements.size()) {
-            arr->elements.resize(index + 1u);
+            // Out-of-bounds reference-array store must raise IOORR, not silently
+            // grow the array (a real .NET array store past the end throws).
+            frame.threw_exception = true; frame.pc = 9999; return;
         }
-        // SATB pre-write barrier: record old obj pointer before overwriting.
-        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
-        arr->elements[index] = val;
-        chaos_gc_dirty_card(arr);
+        // Non-GC interpreter ArrayStorage — no GC write barrier unless the array
+        // is a real GC-managed object (mirrors Handle_StInd).
+        if (chaos_is_gc_pointer(arr)) {
+            using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+            using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
+            BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
+            // store→card in one non-preemptible critical section (A2b close).
+            {
+                BarrierCriticalSectionScope barrier;
+                arr->elements[index] = val;
+                chaos_gc_dirty_card(arr);
+            }
+        } else {
+            arr->elements[index] = val;
+        }
     }
     ++frame.pc;
 }
@@ -220,12 +249,20 @@ static void Handle_StInd(FastFrame& frame, const interpreter::IRInstruction&) no
     uint64_t val = frame.stack[--frame.sp];
     void* ptr = reinterpret_cast<void*>(frame.stack[--frame.sp]);
     if (ptr != nullptr) {
-        if (chaos_is_gc_pointer(ptr)) {
+        const bool is_gc = chaos_is_gc_pointer(ptr);
+        if (is_gc) {
             using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
             BgcSatbPreWriteBarrier(reinterpret_cast<void**>(ptr));
         }
-        *static_cast<uint64_t*>(ptr) = val;
-        chaos_gc_dirty_card(ptr);
+        if (is_gc) {
+            using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
+            // store→card in one non-preemptible critical section (A2b close).
+            BarrierCriticalSectionScope barrier;
+            *static_cast<uint64_t*>(ptr) = val;
+            chaos_gc_dirty_card(ptr);
+        } else {
+            *static_cast<uint64_t*>(ptr) = val;
+        }
     }
     ++frame.pc;
 }
@@ -273,9 +310,18 @@ static void Handle_LdFtn(FastFrame& frame, const interpreter::IRInstruction& ins
     ++frame.pc;
 }
 
+extern "C" void* CodegenLdVirtFtn(void* obj, uint32_t method_token) noexcept;
+
 static void Handle_LdVirtFtn(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
-    // Complex — needs virtual dispatch resolution. Fallback.
-    Handle_Unsupported(frame, instr);
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdVirtFtn");
+    if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
+    // ldvirtftn: pop `this`, resolve the virtual slot method pointer for this
+    // receiver (Step 4.2), push the function pointer as ObjectRef.
+    void* obj = reinterpret_cast<void*>(frame.stack[--frame.sp]);
+    uint32_t method_token = static_cast<uint32_t>(instr.field_offset);
+    void* func_ptr = CodegenLdVirtFtn(obj, method_token);
+    frame.PushObj_NC(func_ptr);
+    ++frame.pc;
 }
 
 static void Handle_LdArgA(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
@@ -337,11 +383,21 @@ static void Handle_StObj(FastFrame& frame, const interpreter::IRInstruction&) no
     auto* iv = static_cast<interpreter::InterpreterValue*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
     if (iv != nullptr) {
-        // SATB pre-write barrier: record old obj pointer before overwriting.
-        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
-        *iv = val;
-        chaos_gc_dirty_card(iv);
+        // Non-GC interpreter slot — no GC write barrier unless the destination
+        // is a real GC-managed InterpreterValue (mirrors Handle_StInd).
+        if (chaos_is_gc_pointer(iv)) {
+            using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+            using chaos::il2cpp::runtime_core::threading::BarrierCriticalSectionScope;
+            BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
+            // store→card in one non-preemptible critical section (A2b close).
+            {
+                BarrierCriticalSectionScope barrier;
+                *iv = val;
+                chaos_gc_dirty_card(iv);
+            }
+        } else {
+            *iv = val;
+        }
     }
     ++frame.pc;
 }
@@ -379,13 +435,15 @@ static void Handle_LdElemA(FastFrame& frame, const interpreter::IRInstruction&) 
     uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
     auto* arr = static_cast<interpreter::ArrayStorage*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
-    if (arr == nullptr) { frame.PushNull_NC(); ++frame.pc; return; }
+    // Step 3.1: null / OOB must raise (NullReferenceException /
+    // IndexOutOfRangeException), not silently push null.
+    if (arr == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
 
     if (arr->is_flat) {
-        if (index >= arr->flat_length) { frame.PushNull_NC(); ++frame.pc; return; }
+        if (index >= arr->flat_length) { frame.threw_exception = true; frame.pc = 9999; return; }
         PushFlatArrayElement(frame, arr, index);
     } else {
-        if (index >= arr->elements.size()) { frame.PushNull_NC(); ++frame.pc; return; }
+        if (index >= arr->elements.size()) { frame.threw_exception = true; frame.pc = 9999; return; }
         frame.PushIV(arr->elements[index]);
     }
     ++frame.pc;

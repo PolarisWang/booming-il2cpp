@@ -25,8 +25,7 @@ public:
     ~LinuxSehHandler() noexcept override;
 
     // ISehHandler interface
-    void RegisterCode(void* code_start, uint32_t code_size,
-                      const JitMethod* nm,
+    void RegisterCode(void* code_start, uint32_t code_size, const JitMethod* nm,
                       uint32_t patch_method_token = 0) noexcept override;
     void UnregisterCode(void* code_start) noexcept override;
     const JitMethod* FindCodeByAddress(const void* address) noexcept override;
@@ -41,15 +40,15 @@ private:
     // Dynamic vector (no fixed cap; reserve 4096 at init).
 
     struct JitCodeEntry {
-        const void*       code_start = nullptr;
-        uint32_t          code_size  = 0;
-        const JitMethod*  nm         = nullptr;
-        uint32_t          patch_method_token = 0;
-        uint32_t          domain_id  = 0;  // 0 = core domain (never unloaded)
+        const void* code_start = nullptr;
+        uint32_t code_size = 0;
+        const JitMethod* nm = nullptr;
+        uint32_t patch_method_token = 0;
+        uint32_t domain_id = 0; // 0 = core domain (never unloaded)
     };
 
     std::vector<JitCodeEntry> entries_;
-    std::atomic<long> lock_{0};
+    std::atomic<long> lock_ {0};
 
     // RAII guard is a friend so it can call AcquireLock/ReleaseLock.
     template <typename T>
@@ -59,15 +58,15 @@ private:
     // Dynamic vector (reserve 256 at init).
 
     struct PendingFreeRegion {
-        void*    code_start = nullptr;
-        uint32_t code_size  = 0;
-        bool     active     = false;
+        void* code_start = nullptr;
+        uint32_t code_size = 0;
+        bool active = false;
     };
 
     std::vector<PendingFreeRegion> pending_free_;
 
     // ── Lookup Cache Generation ─────────────────────────────────────────
-    std::atomic<uint32_t> lookup_generation_{1};
+    std::atomic<uint32_t> lookup_generation_ {1};
 
     void AcquireLock() noexcept;
     void ReleaseLock() noexcept;
@@ -90,6 +89,6 @@ inline LinuxSehHandler& GetLinuxSehHandler() noexcept {
 }
 #endif
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_LINUXSEHHANDLER_H_
+#endif // CHAOS_IL2CPP_LINUXSEHHANDLER_H_

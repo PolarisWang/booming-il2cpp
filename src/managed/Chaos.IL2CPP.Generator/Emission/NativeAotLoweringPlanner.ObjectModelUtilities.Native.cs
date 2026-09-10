@@ -415,6 +415,27 @@ public sealed partial class NativeAotLoweringPlanner
         return !PrimitiveValueTypeSubjectIds.Contains(subjectId);
     }
 
+    /// <summary>
+    /// Check whether the given subject ID is a closed generic instantiation of
+    /// ReadOnlyCollection&lt;T&gt; (e.g. System.Private.CoreLib/System.Collections.
+    /// ObjectModel.ReadOnlyCollection&lt;System.String&gt;).
+    /// ReadOnlyCollection is a genuine reference type (GC object), NOT a value
+    /// type, so it must be routed to TrackReferenceType rather than the generic
+    /// IsStructuredValueTypeSubjectId heuristic which classifies any non-primitive
+    /// subject ID as a structured value type.
+    /// </summary>
+    private static bool IsReadOnlyCollectionTypeSubjectId(string subjectId)
+    {
+        // ReadOnlyCollection<T> is a corelib type, but a method's return-type
+        // subject id may carry the declaring method's assembly prefix (e.g.
+        // HelloWorld/...ReadOnlyCollection<System.String>). Match the TYPE PATH
+        // regardless of assembly prefix, then callers normalize the assembly to
+        // System.Private.CoreLib.
+        var slash = subjectId.IndexOf('/');
+        var typePart = slash > 0 ? subjectId[(slash + 1)..] : subjectId;
+        return typePart.StartsWith("System.Collections.ObjectModel.ReadOnlyCollection<", StringComparison.Ordinal);
+    }
+
 
 
     private static string SanitizeSubjectId(string subjectId)

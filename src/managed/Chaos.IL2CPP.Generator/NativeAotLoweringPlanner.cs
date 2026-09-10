@@ -183,6 +183,15 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private readonly Dictionary<string, string> _externalRuntimeIlDataJson = new(StringComparer.Ordinal);
 
+    /// <summary>
+    /// Value type subject IDs discovered by BuildGeneratedModuleModel's ABI slot scan
+    /// (GeneratedModule.cs:205-318). These may include types referenced via
+    /// chaos_resolve_managed_value_pointer{T} that are not in the AOT IR type
+    /// metadata. Merged into _emittedValueTypeSubjectIds during EmitObjectModelDeclarations
+    /// to prevent C2065/C2672.
+    /// </summary>
+    internal HashSet<string>? _emittedValueTypeSubjectIdsFromAbi;
+
     // Verification dispatch manifest (populated by BuildDispatchEntryCode)
     private string? _manifestJson;
 

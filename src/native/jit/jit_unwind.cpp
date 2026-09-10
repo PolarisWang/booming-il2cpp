@@ -17,17 +17,9 @@ static_assert(sizeof(void*) == 8, "x64 is required — only 64-bit targets are s
 static_assert(offsetof(UnwindCode, code_offset) == 0,
               "UnwindCode.code_offset must be at offset 0 for Win64 UNWIND_CODE layout");
 
-uint32_t EmitUnwindInfo(
-    CodeBuffer& buf,
-    uint32_t prologue_size,
-    uint32_t frame_sub_size,
-    uint32_t num_push_regs,
-    const uint8_t* push_reg_nums,
-    const uint32_t* push_reg_offsets,
-    uint32_t sub_rsp_offset,
-    uint32_t set_fpreg_offset,
-    bool has_seh) noexcept {
-
+uint32_t EmitUnwindInfo(CodeBuffer& buf, uint32_t prologue_size, uint32_t frame_sub_size, uint32_t num_push_regs,
+                        const uint8_t* push_reg_nums, const uint32_t* push_reg_offsets, uint32_t sub_rsp_offset,
+                        uint32_t set_fpreg_offset, bool has_seh) noexcept {
     uint32_t unwind_start = buf.pos();
 
     // ── Count UNWIND_CODE entries ─────────────────────────────────────
@@ -36,12 +28,12 @@ uint32_t EmitUnwindInfo(
     // 1 or 2 UWOP_ALLOC_* for sub rsp, K
     uint32_t code_count = num_push_regs + 1;
 
-    bool alloc_small = (frame_sub_size >= 8) && (frame_sub_size <= 128) &&
-                       (frame_sub_size % 8 == 0);
+    bool alloc_small = (frame_sub_size >= 8) && (frame_sub_size <= 128) && (frame_sub_size % 8 == 0);
     uint32_t alloc_code_count = alloc_small ? 1 : 2;
     code_count += alloc_code_count;
 
-    if (code_count > 255) code_count = 255;
+    if (code_count > 255)
+        code_count = 255;
 
     // ── Emit UNWIND_INFO header (4 bytes) ─────────────────────────────
     // SizeOfProlog = 255 (max uint8_t).  This is safe because:
@@ -55,7 +47,7 @@ uint32_t EmitUnwindInfo(
     uint8_t size_of_prolog = 255;
 
     // Version=1, Flags=UNW_FLAG_EHANDLER if has_seh
-    uint8_t flags = has_seh ? 0x01u : 0x00u;  // UNW_FLAG_EHANDLER = 0x01
+    uint8_t flags = has_seh ? 0x01u : 0x00u; // UNW_FLAG_EHANDLER = 0x01
     buf.EmitByte(static_cast<uint8_t>(1 | (flags << 3)));
     buf.EmitByte(size_of_prolog);
     buf.EmitByte(static_cast<uint8_t>(code_count));
@@ -84,14 +76,15 @@ uint32_t EmitUnwindInfo(
     // 1. sub rsp, K
     if (alloc_small) {
         uint32_t scale = frame_sub_size / 8;
-        if (scale < 1) scale = 1;
+        if (scale < 1)
+            scale = 1;
         uint8_t op_info = static_cast<uint8_t>(scale - 1);
         buf.EmitByte(static_cast<uint8_t>(sub_rsp_offset));
         buf.EmitByte(static_cast<uint8_t>((op_info << 4) | UWOP_ALLOC_SMALL));
     } else {
         uint32_t scaled = frame_sub_size / 8;
         buf.EmitByte(static_cast<uint8_t>(sub_rsp_offset));
-        buf.EmitByte(static_cast<uint8_t>((1 << 4) | UWOP_ALLOC_LARGE));  // OpInfo=1: scaled by 8
+        buf.EmitByte(static_cast<uint8_t>((1 << 4) | UWOP_ALLOC_LARGE)); // OpInfo=1: scaled by 8
         buf.EmitByte(static_cast<uint8_t>(scaled & 0xFF));
         buf.EmitByte(static_cast<uint8_t>((scaled >> 8) & 0xFF));
     }
@@ -132,11 +125,11 @@ uint32_t EmitUnwindInfo(
     //   JMP RAX               = FF E0
     if (has_seh) {
         uint64_t personality_addr = reinterpret_cast<uint64_t>(&JitPersonalityRoutine);
-        buf.EmitByte(0x48);  // REX.W prefix
-        buf.EmitByte(0xB8);  // MOV RAX, imm64
+        buf.EmitByte(0x48); // REX.W prefix
+        buf.EmitByte(0xB8); // MOV RAX, imm64
         buf.Emit64(personality_addr);
-        buf.EmitByte(0xFF);  // JMP
-        buf.EmitByte(0xE0);  // RAX
+        buf.EmitByte(0xFF); // JMP
+        buf.EmitByte(0xE0); // RAX
     }
 
     return unwind_start;
@@ -144,18 +137,18 @@ uint32_t EmitUnwindInfo(
 
 void DebugDumpUnwindInfo(const CodeBuffer& buf, uint32_t unwind_start, uint32_t code_size) noexcept {
     const uint8_t* d = buf.Data();
-    if (!d) return;
+    if (!d)
+        return;
     uint32_t pos = unwind_start;
     fprintf(stderr, "[unwind_dbg] UNWIND_INFO at offset=%u code_size=%u\n", unwind_start, code_size);
     fprintf(stderr, "[unwind_dbg]   header[0]=0x%02X (ver_flags)\n", d[pos]);
-    fprintf(stderr, "[unwind_dbg]   header[1]=0x%02X (size_of_prolog)\n", d[pos+1]);
-    fprintf(stderr, "[unwind_dbg]   header[2]=0x%02X (count_of_codes)\n", d[pos+2]);
-    fprintf(stderr, "[unwind_dbg]   header[3]=0x%02X (fp_reg+offset)\n", d[pos+3]);
-    uint32_t code_count = d[pos+2];
+    fprintf(stderr, "[unwind_dbg]   header[1]=0x%02X (size_of_prolog)\n", d[pos + 1]);
+    fprintf(stderr, "[unwind_dbg]   header[2]=0x%02X (count_of_codes)\n", d[pos + 2]);
+    fprintf(stderr, "[unwind_dbg]   header[3]=0x%02X (fp_reg+offset)\n", d[pos + 3]);
+    uint32_t code_count = d[pos + 2];
     for (uint32_t i = 0; i < code_count && i < 20; ++i) {
-        uint32_t off = pos + 4 + i*2;
-        fprintf(stderr, "[unwind_dbg]   code[%u] offset=%u op=0x%02X\n",
-                i, (unsigned)d[off], (unsigned)d[off+1]);
+        uint32_t off = pos + 4 + i * 2;
+        fprintf(stderr, "[unwind_dbg]   code[%u] offset=%u op=0x%02X\n", i, (unsigned)d[off], (unsigned)d[off + 1]);
     }
     uint32_t code_bytes = code_count * 2;
     uint32_t pad = (4 - (code_bytes % 4)) % 4;
@@ -170,17 +163,17 @@ void DebugDumpUnwindInfo(const CodeBuffer& buf, uint32_t unwind_start, uint32_t 
     fflush(stderr);
 }
 
-RuntimeFunction* AllocRuntimeFunction(uint32_t unwind_info_offset,
-                                      uint32_t code_size) noexcept {
+RuntimeFunction* AllocRuntimeFunction(uint32_t unwind_info_offset, uint32_t code_size) noexcept {
     auto* rf = static_cast<RuntimeFunction*>(std::malloc(sizeof(RuntimeFunction)));
-    if (rf == nullptr) return nullptr;
+    if (rf == nullptr)
+        return nullptr;
     rf->begin_address = 0;
     rf->end_address = code_size;
     rf->unwind_info_address = unwind_info_offset;
     return rf;
 }
 
-#endif  // _WIN64
+#endif // _WIN64
 
 // ── DWARF .eh_frame (Linux) ────────────────────────────────────────────────
 
@@ -199,22 +192,22 @@ RuntimeFunction* AllocRuntimeFunction(uint32_t unwind_info_offset,
 uint32_t EmitDwarfCie(CodeBuffer& buf) noexcept {
     uint32_t start = buf.pos();
     uint32_t length_off = buf.pos();
-    buf.Emit32(0);              // placeholder length
-    buf.Emit32(0);              // cie_id = 0 (CIE marker)
-    buf.EmitByte(1);            // version = 1
-    buf.EmitByte('z');          // augmentation = "zR\0"
+    buf.Emit32(0);     // placeholder length
+    buf.Emit32(0);     // cie_id = 0 (CIE marker)
+    buf.EmitByte(1);   // version = 1
+    buf.EmitByte('z'); // augmentation = "zR\0"
     buf.EmitByte('R');
     buf.EmitByte(0);
-    buf.EmitByte(1);            // code_align = ULEB128(1)
-    buf.EmitByte(0x78);         // data_align = SLEB128(-8)
-    buf.EmitByte(30);           // ret_addr_reg = ULEB128(30) = LR
-    buf.EmitByte(1);            // aug_len = ULEB128(1)
-    buf.EmitByte(0x1B);         // fde_encoding = DW_EH_PE_pcrel | DW_EH_PE_sdata4
+    buf.EmitByte(1);    // code_align = ULEB128(1)
+    buf.EmitByte(0x78); // data_align = SLEB128(-8)
+    buf.EmitByte(30);   // ret_addr_reg = ULEB128(30) = LR
+    buf.EmitByte(1);    // aug_len = ULEB128(1)
+    buf.EmitByte(0x1B); // fde_encoding = DW_EH_PE_pcrel | DW_EH_PE_sdata4
 
     // Initial: CFA = SP (caller's SP at entry, no pushed return address)
-    buf.EmitByte(0x0C);         // DW_CFA_def_cfa
-    buf.EmitByte(31);           // register 31 (SP)
-    buf.EmitByte(0);            // offset 0
+    buf.EmitByte(0x0C); // DW_CFA_def_cfa
+    buf.EmitByte(31);   // register 31 (SP)
+    buf.EmitByte(0);    // offset 0
 
     // Pad to 4-byte boundary
     uint32_t content = buf.pos() - start - 4;
@@ -225,13 +218,11 @@ uint32_t EmitDwarfCie(CodeBuffer& buf) noexcept {
     return start;
 }
 
-uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
-                      uint32_t code_body_size,
-                      uint32_t num_push_regs,
+uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset, uint32_t code_body_size, uint32_t num_push_regs,
                       const uint8_t* push_reg_nums) noexcept {
     uint32_t fde_start = buf.pos();
     uint32_t length_off = buf.pos();
-    buf.Emit32(0);              // placeholder length
+    buf.Emit32(0); // placeholder length
     uint32_t cie_ptr_val = cie_offset - (fde_start + 4);
     buf.Emit32(cie_ptr_val);
 
@@ -253,7 +244,7 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
 
     // DW_CFA_def_cfa(29, 16): CFA = X29 + 16
     buf.EmitByte(0x0C);
-    buf.EmitByte(29);           // X29 (DWARF reg 29)
+    buf.EmitByte(29); // X29 (DWARF reg 29)
     buf.EmitByte(16);
 
     // DW_CFA_offset(29, 2): X29 at CFA-16
@@ -271,8 +262,8 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
     //   (slot is 0-based; extra +1 accounts for the stack slot occupied by
     //    X1 save at [X29-16], which is caller-saved and not in push_reg_nums)
     for (uint32_t i = 1; i < num_push_regs; ++i) {
-        uint8_t dwarf_reg = push_reg_nums[i];  // ARM64: reg# == DWARF#
-        uint8_t factored = static_cast<uint8_t>(2 * (i + 2));  // slot i → CFA - 16*(i+2) → offset 2*(i+2)
+        uint8_t dwarf_reg = push_reg_nums[i];                 // ARM64: reg# == DWARF#
+        uint8_t factored = static_cast<uint8_t>(2 * (i + 2)); // slot i → CFA - 16*(i+2) → offset 2*(i+2)
         buf.EmitByte(static_cast<uint8_t>(0x80 | dwarf_reg));
         buf.EmitByte(factored);
     }
@@ -286,46 +277,46 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
     return fde_start;
 }
 
-#else  // !__aarch64__ (x64)
+#else // !__aarch64__ (x64)
 
 // x64 register number → DWARF register number mapping.
 // First 8 x64 regs have different DWARF numbers; R8-R15 map directly.
 static constexpr uint8_t kX64ToDwarfReg[16] = {
-    0,  // x64 RAX(0) → DWARF 0
-    2,  // x64 RCX(1) → DWARF 2
-    1,  // x64 RDX(2) → DWARF 1
-    3,  // x64 RBX(3) → DWARF 3
-    7,  // x64 RSP(4) → DWARF 7
-    6,  // x64 RBP(5) → DWARF 6
-    4,  // x64 RSI(6) → DWARF 4
-    5,  // x64 RDI(7) → DWARF 5
-    8, 9, 10, 11, 12, 13, 14, 15  // x64 R8-R15 → DWARF 8-15
+    0,                           // x64 RAX(0) → DWARF 0
+    2,                           // x64 RCX(1) → DWARF 2
+    1,                           // x64 RDX(2) → DWARF 1
+    3,                           // x64 RBX(3) → DWARF 3
+    7,                           // x64 RSP(4) → DWARF 7
+    6,                           // x64 RBP(5) → DWARF 6
+    4,                           // x64 RSI(6) → DWARF 4
+    5,                           // x64 RDI(7) → DWARF 5
+    8, 9, 10, 11, 12, 13, 14, 15 // x64 R8-R15 → DWARF 8-15
 };
 
 uint32_t EmitDwarfCie(CodeBuffer& buf) noexcept {
     uint32_t start = buf.pos();
     uint32_t length_off = buf.pos();
-    buf.Emit32(0);           // placeholder: total length (excluding this field)
+    buf.Emit32(0); // placeholder: total length (excluding this field)
 
-    buf.Emit32(0);           // cie_id = 0 (CIE marker)
-    buf.EmitByte(1);            // version = 1
-    buf.EmitByte('z');          // augmentation = "zR\0"
+    buf.Emit32(0);     // cie_id = 0 (CIE marker)
+    buf.EmitByte(1);   // version = 1
+    buf.EmitByte('z'); // augmentation = "zR\0"
     buf.EmitByte('R');
     buf.EmitByte(0);
-    buf.EmitByte(1);            // code_align = ULEB128(1)
-    buf.EmitByte(0x78);         // data_align = SLEB128(-8)
-    buf.EmitByte(16);           // ret_addr_reg = ULEB128(16)
-    buf.EmitByte(1);            // aug_len = ULEB128(1)
-    buf.EmitByte(0x1B);         // fde_encoding = DW_EH_PE_pcrel | DW_EH_PE_sdata4
+    buf.EmitByte(1);    // code_align = ULEB128(1)
+    buf.EmitByte(0x78); // data_align = SLEB128(-8)
+    buf.EmitByte(16);   // ret_addr_reg = ULEB128(16)
+    buf.EmitByte(1);    // aug_len = ULEB128(1)
+    buf.EmitByte(0x1B); // fde_encoding = DW_EH_PE_pcrel | DW_EH_PE_sdata4
 
     // Initial instructions: CFA = RSP + 8 (after CALL, ret addr on stack)
-    buf.EmitByte(0x0C);         // DW_CFA_def_cfa
-    buf.EmitByte(7);            // ULEB128: register 7 (RSP in DWARF)
-    buf.EmitByte(8);            // ULEB128: offset 8
+    buf.EmitByte(0x0C); // DW_CFA_def_cfa
+    buf.EmitByte(7);    // ULEB128: register 7 (RSP in DWARF)
+    buf.EmitByte(8);    // ULEB128: offset 8
 
     // DW_CFA_offset(16, 1): return address at CFA-8
-    buf.EmitByte(0x90);         // opcode = 0x80 | 16
-    buf.EmitByte(1);            // ULEB128: CFA + 1 * (-8) = CFA - 8
+    buf.EmitByte(0x90); // opcode = 0x80 | 16
+    buf.EmitByte(1);    // ULEB128: CFA + 1 * (-8) = CFA - 8
 
     // Pad to 4-byte boundary
     uint32_t content = buf.pos() - start - 4;
@@ -339,13 +330,11 @@ uint32_t EmitDwarfCie(CodeBuffer& buf) noexcept {
     return start;
 }
 
-uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
-                      uint32_t code_body_size,
-                      uint32_t num_push_regs,
+uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset, uint32_t code_body_size, uint32_t num_push_regs,
                       const uint8_t* push_reg_nums) noexcept {
     uint32_t fde_start = buf.pos();
     uint32_t length_off = buf.pos();
-    buf.Emit32(0);           // placeholder length
+    buf.Emit32(0); // placeholder length
 
     // CIE pointer: relative offset from this field back to CIE start.
     // cie_ptr = CIE_addr - (FDE_addr + 4)
@@ -371,8 +360,8 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
     // the prologue itself is incorrect, but all T4 execution is post-prologue.
 
     // DW_CFA_def_cfa(6, 16): CFA = RBP + 16
-    buf.EmitByte(0x0C);         // DW_CFA_def_cfa
-    buf.EmitByte(kX64ToDwarfReg[5]);  // RBP → DWARF 6
+    buf.EmitByte(0x0C);              // DW_CFA_def_cfa
+    buf.EmitByte(kX64ToDwarfReg[5]); // RBP → DWARF 6
     buf.EmitByte(16);
 
     // DW_CFA_offset(16, 1): return address at CFA-8
@@ -403,8 +392,8 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
     return fde_start;
 }
 
-#endif  // !__aarch64__ (closes #else block)
+#endif // !__aarch64__ (closes #else block)
 
-#endif  // __linux__
+#endif // __linux__
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit

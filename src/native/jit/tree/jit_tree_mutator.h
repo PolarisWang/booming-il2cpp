@@ -24,10 +24,12 @@ public:
     /// Mutate a single root node, returning the (possibly replaced) node.
     /// Calls Visit() pre-order, recurses into children, then PostVisit().
     ExprNode* Mutate(ExprNode* node) noexcept {
-        if (!node) return nullptr;
+        if (!node)
+            return nullptr;
 
         node = Visit(node);
-        if (!node) return nullptr;
+        if (!node)
+            return nullptr;
 
         // Recurse into children
         if (node->child_count >= 1 && node->child0)
@@ -67,7 +69,7 @@ protected:
 
 private:
     uint8_t*& arena_pos_;
-    uint8_t*  arena_end_;
+    uint8_t* arena_end_;
 };
 
 // ── CSE mutator ────────────────────────────────────────────────────────
@@ -84,6 +86,6 @@ private:
     VNTable& vn_;
 };
 
-}  // namespace chaos::il2cpp::jit::tree
+} // namespace chaos::il2cpp::jit::tree
 
-#endif  // CHAOS_IL2CPP_JIT_TREE_MUTATOR_H_
+#endif // CHAOS_IL2CPP_JIT_TREE_MUTATOR_H_

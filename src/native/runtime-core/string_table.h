@@ -88,6 +88,12 @@ StringId Register(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count, CHAOS_I
 
 StringId Intern(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count);
 
+/// Lookup-only: returns the interned StringId if the UTF-8 bytes are already
+/// present in the string table (AOT or dynamic), otherwise kStringIdNull.
+/// Never inserts — satisfies XmlNameTable::Get(query-only) semantics.
+/// Thread-safe (dynamic map is mutex-protected; AOT table is read-only).
+StringId Find(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count);
+
 void UnregisterDomain(CHAOS_IL2CPP_UINT32 domain_id);
 
 }  // namespace chaos::il2cpp::string_table

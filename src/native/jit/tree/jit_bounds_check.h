@@ -30,24 +30,22 @@ namespace chaos::il2cpp::jit::tree {
 /// LdcI4 nodes before BCE examines them.
 class BoundCheckEliminator : public Mutator {
 public:
-    BoundCheckEliminator(uint8_t*& arena_pos, uint8_t* arena_end,
-                          const TreeBuilder* builder) noexcept
-        : arena_pos_(arena_pos), arena_end_(arena_end),
-          builder_(builder) {}
+    BoundCheckEliminator(uint8_t*& arena_pos, uint8_t* arena_end, const TreeBuilder* builder) noexcept
+        : arena_pos_(arena_pos), arena_end_(arena_end), builder_(builder) {}
 
 protected:
     /// Post-order: examine array access nodes for eliminatable bounds checks.
     ExprNode* PostVisit(ExprNode* node) noexcept override;
 
 private:
-    uint8_t*&          arena_pos_;
-    uint8_t*           arena_end_;
+    uint8_t*& arena_pos_;
+    uint8_t* arena_end_;
     const TreeBuilder* builder_;
 
     /// Per-BB tracked non-null array vregs (persists across root traversals).
     bool tracked_nonnull_vregs_[64] = {};
 };
 
-}  // namespace chaos::il2cpp::jit::tree
+} // namespace chaos::il2cpp::jit::tree
 
-#endif  // CHAOS_IL2CPP_JIT_BOUNDS_CHECK_H_
+#endif // CHAOS_IL2CPP_JIT_BOUNDS_CHECK_H_

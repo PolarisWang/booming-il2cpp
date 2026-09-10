@@ -122,12 +122,6 @@ public sealed class ValueGenerator
         ["Stream"] = _ => "System.IO.Stream.Null",
         ["TextReader"] = _ => "System.IO.TextReader.Null",
         ["TextWriter"] = _ => "System.IO.TextWriter.Null",
-        // IO.Compression — ZipArchive constructed over a valid empty in-memory zip
-        // so ZipFileExtensions methods (CreateEntryFromFile, ExtractToFile, etc.)
-        // receive a non-null ZipArchive instead of default(ZipArchive)! → null →
-        // ArgumentNullException.  The 22-byte base64 zip is the minimal valid empty
-        // zip file: an end-of-central-directory record with zero entries.
-        ["ZipArchive"] = _ => "new System.IO.Compression.ZipArchive(new System.IO.MemoryStream(System.Convert.FromBase64String(\"UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA==\")), System.IO.Compression.ZipArchiveMode.Read)",
         ["IProgress"] = typeArgs => typeArgs.Length > 0
             ? $"new System.Progress<{typeArgs[0]}>(_ => {{ }})"
             : "new System.Progress<object>(_ => { })",
@@ -150,13 +144,20 @@ public sealed class ValueGenerator
         // instance methods are called.  Use Array.Empty<int>() to get a valid
         // non-null Array instance for probe subjects and verification tests.
         ["Array"] = _ => "System.Array.Empty<int>()",
-        // System.Text.Json metadata factories: JsonMetadataServices.Create*Info<T> take a
-        // JsonCollectionInfoValues<T> alongside JsonSerializerOptions.  A null (default)
-        // value throws ArgumentNullException before the factory can do anything; a real
-        // empty instance lets the options-null-check and early branches run.
-        ["JsonCollectionInfoValues"] = typeArgs => typeArgs.Length > 0
-            ? $"new System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<{typeArgs[0]}>()"
-            : "new System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<object>()",
+        // Non-generic collection classes (System.Collections).  default(Queue)! etc.
+        // causes ArgumentNullException in static wrapper methods (Queue.Synchronized
+        // etc.).  new <T>() returns a valid instance for probes and verification.
+        ["Queue"] = _ => "new System.Collections.Queue()",
+        ["Stack"] = _ => "new System.Collections.Stack()",
+        ["ArrayList"] = _ => "new System.Collections.ArrayList()",
+        ["SortedList"] = _ => "new System.Collections.SortedList()",
+        ["Hashtable"] = _ => "new System.Collections.Hashtable()",
+        ["BitArray"] = _ => "new System.Collections.BitArray(8)",
+        ["CollectionBase"] = _ => "new System.Collections.CollectionBase()",
+        // Non-generic collection interfaces resolve to their concrete impls
+        ["IEnumerable"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Linq.Enumerable.Empty<{typeArgs[0]}>()"
+            : "new System.Collections.ArrayList()",
     };
 
     public ValueGenerator(CSharpSerializer serializer, AutoFixtureAllower? autoFixture = null)
@@ -232,9 +233,32 @@ public sealed class ValueGenerator
             else if (TryGetNullGuardSafeExpression(t, out var safeExpr))
                 smartArgs[i] = safeExpr;
             else
-                smartArgs[i] = DefaultValue(t, false);
+                smartArgs[i] = TryGetResolvableInstanceExpression(t)
+                    ?? DefaultValue(t, false);
         }
         AddUnique(sets, usedSignatures, methodIndex, smartArgs);
+
+        // Semantic value sets for reflection/conversion methods whose default-argument
+        // probing would otherwise never exercise non-empty inputs.  These methods
+        // (Convert.ChangeType, Enum.TryParse) only round-trip default(null) values in
+        // the generic boundary probe, so the AOT runtime's un-implemented behavior
+        // (returning null/false) goes undetected.  Inject explicit non-default argument
+        // combinations so the generated test actually verifies real semantics.
+        AddSemanticMethodValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+
+        // 防线 4: 警告 — 如果该方法的全部值集都只包含 default 输入（所有参数都是
+        // default/null），则说明该方法的 AOT 行为可能被蒙过。这个警告被 pipeline 的
+        // fact 阶段捕获（fact_chunk.py 中的 value_suspicious 检测）。
+        // 这里不阻断 pipeline，但留下可被 grep 的标记。
+        if (sets.Count > 0 && sets.All(s => s.ArgumentExpressions.All(IsDefaultArgument)))
+        {
+            // 静默警告：该方法的所有 value set 都只含 default 输入
+            // 这不会阻断 pipeline，但会被 fact_chunk.py 的覆盖门禁捕获
+            System.Console.Error.WriteLine(
+                $"[probe-warn] ALL-DEFAULT-SETS: {method.DeclaringTypeFullName}.{method.Name} " +
+                $"({methodIndex}): {string.Join(", ", paramTypes)} — " +
+                $"all {sets.Count} value sets use only default arguments");
+        }
 
         // Collection state variant: populate the first collection-like parameter with
         // non-empty data (e.g. List<T> with 2 elements, Dictionary<K,V> with 1 entry).
@@ -287,6 +311,29 @@ public sealed class ValueGenerator
             return $"out {_serializer.DefaultExpression(baseType)}";
         }
         return _serializer.DefaultExpression(typeName);
+    }
+
+    /// <summary>
+    /// True if a C# argument expression is its type's default/null value (i.e. it
+    /// won't exercise any non-trivial branch in the callee).  Used by the coverage
+    /// gate to flag methods whose probes are all default and may therefore be masked
+    /// by a default-return stub.
+    /// </summary>
+    private static bool IsDefaultArgument(string expr)
+    {
+        if (string.IsNullOrWhiteSpace(expr)) return true;
+        var e = expr.Trim();
+        // numeric zero
+        if (e == "0" || e == "0f" || e == "0d" || e == "0m" || e == "0L" || e == "0u") return true;
+        // false / null / default(...)
+        if (e == "false" || e == "null!" || e == "null") return true;
+        if (e.StartsWith("default(", StringComparison.Ordinal)) return true;
+        if (e.StartsWith("out default", StringComparison.Ordinal)) return true;
+        // empty string vs meaningful string
+        if (e == "\"\"") return true;
+        // out-expression for ref/out params uses its default
+        if (e.StartsWith("out ", StringComparison.Ordinal)) return true;
+        return false;
     }
 
     private string BoundaryValue(string typeName, int variantIndex, bool isRefStruct = false)
@@ -526,6 +573,97 @@ public sealed class ValueGenerator
     }
 
     /// <summary>
+    /// Try to produce a non-null instance expression for a resolvable reference-type
+    /// PARAMETER so static/instance methods don't throw ArgumentNullException on default
+    /// probing (e.g. Queue.Synchronized(default(Queue)!) → new Queue()).
+    ///
+    /// Strategy mirrors CSharpExpressionBuilder.GetInstanceExpression but is argument-agnostic:
+    ///   1. A public parameterless ctor → `new T()`.
+    ///   2. Otherwise a resolvable class/abstract-constructible → SubjectInstanceFactory.Create<T>()
+    ///      (backed by RuntimeHelpers.GetUninitializedObject, no ctor needed).
+    ///   3. Reference (non-value) types that Type.GetType can't resolve in the ATG host → null
+    ///      (caller falls back to DefaultValue).
+    ///
+    /// We deliberately do NOT return instances here for generic/array/delegate/interface shapes
+    /// that the existing NullGuardSafeDefaults / TryGetInterfaceExpression / TryGetArrayExpression
+    /// / TryGetDelegateExpression already produce non-null results for — those run before this.
+    /// </summary>
+    private static string? TryGetResolvableInstanceExpression(string typeName)
+    {
+        // Only concrete class types qualify. Interfaces/abstracts/delegates/arrays are
+        // handled upstream; pointer/ref/fnptr token should stay null here.
+        if (typeName.EndsWith('*')) return null;
+        if (typeName.EndsWith('&'))
+        {
+            var baseType = typeName[..^1].Trim();
+            // out/ref locals are declared as default by the emitter; keep them null-shaped.
+            return null;
+        }
+        if (typeName.StartsWith("System.Array") || typeName.EndsWith("[]")) return null;
+        if (typeName.EndsWith('`') || typeName.Contains('`')) return null; // generic definition
+
+        string csName;
+        try { csName = CSharpSerializer.ToCSharpTypeName(typeName); }
+        catch { return null; }
+        // ToQualifiedCSharpType returns a C#-expressible type name that keeps the full
+        // namespace for non-keyword types (e.g. System.Globalization.CultureInfo) yet
+        // collapses primitives to their C# keyword (string, int, bool).  Using it (instead
+        // of namespace-stripped csName wrapped in global::) avoids two invalid forms:
+        //   global::string   — global:: cannot precede a C# keyword
+        //   global::CultureInfo — bare type not rooted in the file's usings
+        var qualifiedType = CSharpSerializer.ToQualifiedCSharpType(typeName);
+        if (string.IsNullOrEmpty(csName) || csName is "void" or "System.Void") return null;
+
+        // System.Object maps to the C# keyword `object` — `global::object()` is not
+        // valid C# (global:: only legal for namespace-qualified identifiers).  These
+        // are handled upstream; returning null keeps prior default behavior.
+        if (typeName == "System.Object") return null;
+
+        // Value types (int, DateTime, Guid...) already handled by DefaultValue as default(T)
+        // which is a VALID value — do not fabricate new instances; NULL-reference is the
+        // only defect DefaultValue introduces, and only for reference types.
+        if (IsResolvableValueType(typeName))
+            return null;
+
+        // Non-generic qualified reference types only (e.g. System.Collections.Queue).
+        // Try parameterless ctor via reflection.
+        try
+        {
+            var t = Type.GetType(typeName, false);
+            if (t is null || t.IsAbstract || t.IsInterface || t.IsArray || t.IsGenericType)
+                return null; // leave to caller DefaultValue (null!) — no blind SubjectInstanceFactory for these
+            if (t.IsValueType) return null;
+            // Ref struct types (Span<T>, ReadOnlySpan<T>, InterpolatedStringHandler, etc.)
+            // cannot be used as generic type arguments in C# — skip SubjectInstanceFactory.
+            if (t.IsByRefLike) return null;
+            // Public parameterless ctor?
+            var ctors = t.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+            if (ctors.Any(c => c.GetParameters().Length == 0))
+                return $"new {qualifiedType}()";
+            // No paramless ctor but a real class → GetUninitializedObject is the safe non-null route.
+            // Skip types where GetUninitializedObject would produce an unusable bare object
+            // that still throws later deeper (e.g. some sealed runtime types); here we accept
+            // the managed-equivalent execution and let the probe classify outcome.
+            return $"SubjectInstanceFactory.Create<{qualifiedType}>()";
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static bool IsResolvableValueType(string typeName)
+    {
+        try
+        {
+            var t = Type.GetType(typeName, false);
+            return t?.IsValueType == true;
+        }
+        catch { return false; }
+    }
+
+
+    /// <summary>
     /// Known integer value type full names for ResultToLong conversion.
     /// </summary>
     private static readonly HashSet<string> IntegerTypeNames = new(StringComparer.Ordinal)
@@ -615,5 +753,100 @@ public sealed class ValueGenerator
         // Reference types: flip null check.
         // Boxing via (object) then != null avoids CS0019/CS0037 on value types.
         return $"(object)({varName}) != null ? 0L : 1L";
+    }
+
+    /// <summary>
+    /// Inject additional non-default value sets for methods whose only probed inputs
+    /// would otherwise be default(T) — the AOT runtime's stub (returning 0/null) would
+    /// pass by coincidence.  Each added set exercises a real non-default argument so
+    /// the generated test can detect if the AOT runtime lacks real semantics.
+    /// </summary>
+    private static void AddSemanticMethodValueSets(
+        MethodSignature method,
+        string[] paramTypes,
+        List<ValueSet> sets,
+        HashSet<string> usedSignatures,
+        int methodIndex)
+    {
+        // ── Convert.ChangeType(object, TypeCode[, IFormatProvider]) — 多值探针 ──
+        // The default probe only sends default(object)+default(TypeCode), so a stub
+        // returning null would pass by coincidence.  Inject real value + TypeCode pairs;
+        // the AOT native ChaosConvertChangeType implements real IConvertible dispatch
+        // (box int32/bool, pass-through string), so these give meaningful (non-masked)
+        // coverage.  The 防线 4 build gate blocks if these stay all-default.
+        if (method.Name == "ChangeType")
+        {
+            // ChangeType has multiple overloads with the same parameter count:
+            //   ChangeType(object, Type) — 2 params
+            //   ChangeType(object, TypeCode) — 2 params
+            //   ChangeType(object, Type, IFormatProvider) — 3 params
+            //   ChangeType(object, TypeCode, IFormatProvider) — 3 params
+            // When paramTypes[1] is System.Type, use typeof(...) literals instead of
+            // TypeCode enum values (which don't implicitly convert to Type — CS1503).
+            bool isTypeCode = paramTypes.Length >= 2 && paramTypes[1] == "System.TypeCode";
+
+            if (paramTypes.Length == 2)
+            {
+                if (isTypeCode)
+                {
+                    AddUnique(sets, usedSignatures, methodIndex, ["42", "System.TypeCode.Int32"]);
+                    AddUnique(sets, usedSignatures, methodIndex, ["true", "System.TypeCode.Boolean"]);
+                    AddUnique(sets, usedSignatures, methodIndex, ["\"hello\"", "System.TypeCode.String"]);
+                }
+                else
+                {
+                    AddUnique(sets, usedSignatures, methodIndex, ["42", "typeof(int)"]);
+                    AddUnique(sets, usedSignatures, methodIndex, ["true", "typeof(bool)"]);
+                    AddUnique(sets, usedSignatures, methodIndex, ["\"hello\"", "typeof(string)"]);
+                }
+            }
+            else if (paramTypes.Length == 3)
+            {
+                if (isTypeCode)
+                {
+                    AddUnique(sets, usedSignatures, methodIndex, ["42", "System.TypeCode.Int32", "System.Globalization.CultureInfo.InvariantCulture"]);
+                    AddUnique(sets, usedSignatures, methodIndex, ["true", "System.TypeCode.Boolean", "System.Globalization.CultureInfo.InvariantCulture"]);
+                }
+                else
+                {
+                    AddUnique(sets, usedSignatures, methodIndex, ["42", "typeof(int)", "System.Globalization.CultureInfo.InvariantCulture"]);
+                    AddUnique(sets, usedSignatures, methodIndex, ["true", "typeof(bool)", "System.Globalization.CultureInfo.InvariantCulture"]);
+                }
+            }
+            return;
+        }
+
+        // ── Enum.TryParse — only for System.Enum type ──
+        // Guard against false matches on Guid.TryParse, TimeSpan.TryParse, etc.
+        // Enum.TryParse has existing natives (ChaosEnumTryParse / ChaosEnumTryParseWithIgnoreCase)
+        // that perform real enum metadata lookup, so multi-value probes will exercise
+        // the real AOT code path.
+        if (method.Name == "TryParse" && method.DeclaringTypeFullName == "System.Enum")
+        {
+            // Enum.TryParse(Type, string, out object) — 3 params
+            if (paramTypes.Length >= 3 && paramTypes[0] == "System.Type")
+            {
+                AddUnique(sets, usedSignatures, methodIndex, ["typeof(System.DayOfWeek)", "\"Monday\"", "out default(System.Object)"]);
+                AddUnique(sets, usedSignatures, methodIndex, ["typeof(System.DayOfWeek)", "\"XYZInvalid\"", "out default(System.Object)"]);
+            }
+            // Enum.TryParse(Type, string, bool, out object) — 4 params
+            if (paramTypes.Length >= 4 && paramTypes[0] == "System.Type")
+            {
+                AddUnique(sets, usedSignatures, methodIndex, ["typeof(System.DayOfWeek)", "\"monday\"", "true", "out default(System.Object)"]);
+            }
+            return;
+        }
+
+        // ── Enum.TryParse<T>(string, out T) — generic, DllScanner-resolved T ──
+        // NOTE: We do NOT inject a non-default value set here.  The generic
+        // TryParse<T>(string, out T) has only TWO parameters, but injecting
+        // ["...","true","out default(...)"] would be a 3-value set for a 2-param
+        // method → generated probe fails to compile (CS1503).  Worse, `out T` is
+        // inferred from the argument; a fixed `out default(Int32)` mismatches when
+        // T resolves to a concrete enum (e.g. DayOfWeek) → CS0029.  The non-generic
+        // System.Enum.TryParse(Type, string, out object) above already exercises
+        // real enum parsing with correctly-typed DayOfWeek literals, so this
+        // generic overload is left on the default single-value probe.
+        return;
     }
 }

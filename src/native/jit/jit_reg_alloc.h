@@ -1,5 +1,5 @@
-#ifndef CHAOS_IL2CPP_CODEGEN_REG_ALLOC_GRAPH_COLORING_H_
-#define CHAOS_IL2CPP_CODEGEN_REG_ALLOC_GRAPH_COLORING_H_
+#ifndef CHAOS_IL2CPP_JIT_REG_ALLOC_H_
+#define CHAOS_IL2CPP_JIT_REG_ALLOC_H_
 
 // ── Graph-Coloring Register Allocator ──────────────────────────────────────
 //
@@ -45,9 +45,11 @@ inline uint32_t Ctz64(uint64_t x) noexcept {
     return static_cast<uint32_t>(idx);
 #else
     // Portable fallback (rarely used).
-    if (x == 0) return 64;
+    if (x == 0)
+        return 64;
     uint32_t n = 0;
-    for (; (x & 1) == 0; x >>= 1) ++n;
+    for (; (x & 1) == 0; x >>= 1)
+        ++n;
     return n;
 #endif
 }
@@ -61,9 +63,11 @@ inline uint32_t Ctz32(uint32_t x) noexcept {
     _BitScanForward(&idx, x);
     return static_cast<uint32_t>(idx);
 #else
-    if (x == 0) return 32;
+    if (x == 0)
+        return 32;
     uint32_t n = 0;
-    for (; (x & 1) == 0; x >>= 1) ++n;
+    for (; (x & 1) == 0; x >>= 1)
+        ++n;
     return n;
 #endif
 }
@@ -83,7 +87,7 @@ inline uint32_t Popcount64(uint64_t x) noexcept {
 #endif
 }
 
-}  // namespace detail
+} // namespace detail
 
 // ── Result ─────────────────────────────────────────────────────────────────
 // Maps virtual registers to x64 physical registers.
@@ -97,12 +101,11 @@ struct GraphColoringResult {
 };
 
 // ── Allocator Entry Point ──────────────────────────────────────────────────
-GraphColoringResult AllocateRegistersGraphColoring(
-    const interpreter::RegisterMethod& rm) noexcept;
+GraphColoringResult AllocateRegistersGraphColoring(const interpreter::RegisterMethod& rm) noexcept;
 
 // ── Internal helpers ───────────────────────────────────────────────────────
 namespace detail {
-	
+
 // ── Architecture-specific register tables ──────────────────────────────────────
 // x64: 9 colors (RDI + R8-R15).  ARM64: 23 colors (13 caller-saved + 10 callee-saved).
 // V1 only uses callee-saved registers to avoid stale-color issues after
@@ -126,8 +129,8 @@ namespace detail {
 //   Color 10 -> X15  (caller)      Color 22 -> X28  (callee)
 //   Color 11 -> X16  (caller)
 static constexpr uint8_t kPhysicalGprs[] = {
-     5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17,  // caller: X5-X17
-    19, 20, 21, 22, 23, 24, 25, 26, 27, 28,               // callee: X19-X28
+    5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15, 16, 17, // caller: X5-X17
+    19, 20, 21, 22, 23, 24, 25, 26, 27, 28,             // callee: X19-X28
 };
 static constexpr uint32_t kNumColors = 23;
 static constexpr uint32_t kFirstCallerSavedColor = 0;
@@ -144,7 +147,7 @@ inline bool IsCalleeSavedColor(uint32_t color_idx) noexcept {
 
 // ARM64 NEON: V0-V31 all available. V8-V15 callee-saved (lower 64 bits).
 static constexpr uint8_t kPhysicalVregs[] = {
-     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+    0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15,
     16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
 };
 static constexpr uint32_t kNumVregColors = 32;
@@ -167,15 +170,15 @@ static constexpr uint32_t kCalleeSavedVregColorCount = 8;
 //   Color 7 -> R14  (callee)
 //   Color 8 -> R15  (callee)
 static constexpr uint8_t kPhysicalGprs[] = {
-     7,   // RDI
-     8,   // R8
-     9,   // R9
-    10,   // R10
-    11,   // R11
-    12,   // R12
-    13,   // R13
-    14,   // R14
-    15,   // R15
+    7,  // RDI
+    8,  // R8
+    9,  // R9
+    10, // R10
+    11, // R11
+    12, // R12
+    13, // R13
+    14, // R14
+    15, // R15
 };
 static constexpr uint32_t kNumColors = 9;
 static constexpr uint8_t kSpilled = 0xFF;
@@ -183,26 +186,25 @@ static constexpr uint8_t kSpilled = 0xFF;
 // Win64: RDI callee-saved. Linux SysV: RDI caller-saved.
 // kFirstCallerSavedColor and kCallerSavedColorCount differ by platform.
 #if defined(_WIN32) || defined(_WIN64)
-static constexpr uint32_t kFirstCallerSavedColor = 1;  // R8-R11
+static constexpr uint32_t kFirstCallerSavedColor = 1; // R8-R11
 static constexpr uint32_t kCallerSavedColorCount = 4;
-static constexpr uint32_t kFirstCalleeSavedColor = 5;  // R12-R15
+static constexpr uint32_t kFirstCalleeSavedColor = 5; // R12-R15
 #else
 // Linux SysV: RDI=caller-saved (color 0 joins caller group)
-static constexpr uint32_t kFirstCallerSavedColor = 0;  // RDI, R8-R11
+static constexpr uint32_t kFirstCallerSavedColor = 0; // RDI, R8-R11
 static constexpr uint32_t kCallerSavedColorCount = 5;
-static constexpr uint32_t kFirstCalleeSavedColor = 5;  // R12-R15
+static constexpr uint32_t kFirstCalleeSavedColor = 5; // R12-R15
 #endif
 
 inline bool IsCallerSavedColor(uint32_t color_idx) noexcept {
-    return color_idx >= kFirstCallerSavedColor &&
-           color_idx < kFirstCallerSavedColor + kCallerSavedColorCount;
+    return color_idx >= kFirstCallerSavedColor && color_idx < kFirstCallerSavedColor + kCallerSavedColorCount;
 }
 inline bool IsCalleeSavedColor(uint32_t color_idx) noexcept {
     return color_idx >= kFirstCalleeSavedColor && color_idx < kNumColors;
 }
 
 // x64 XMM: 16 registers (XMM0-XMM15). XMM6-XMM15 callee-saved (Win64).
-static constexpr uint8_t kPhysicalVregs[] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+static constexpr uint8_t kPhysicalVregs[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 static constexpr uint32_t kNumVregColors = 16;
 static constexpr uint32_t kFirstCalleeSavedVregColor = 6;
 static constexpr uint32_t kCalleeSavedVregColorCount = 10;
@@ -213,32 +215,23 @@ static constexpr uint32_t kMaxStackInstrs = 2048;
 
 // Returns true for unconditional branches (no fall-through).
 inline bool IsUnconditionalBranch(interpreter::IROpCode opc) noexcept {
-    return opc == interpreter::IROpCode::Br ||
-           opc == interpreter::IROpCode::Leave;
+    return opc == interpreter::IROpCode::Br || opc == interpreter::IROpCode::Leave;
 }
 
 // Returns true for conditional branches (fall-through + branch target).
 inline bool IsConditionalBranch(interpreter::IROpCode opc) noexcept {
-    return opc == interpreter::IROpCode::BrTrue ||
-           opc == interpreter::IROpCode::BrFalse ||
-           opc == interpreter::IROpCode::Beq ||
-           opc == interpreter::IROpCode::BneUn ||
-           opc == interpreter::IROpCode::Blt ||
-           opc == interpreter::IROpCode::Bgt ||
-           opc == interpreter::IROpCode::Ble ||
-           opc == interpreter::IROpCode::Bge ||
-           opc == interpreter::IROpCode::BltUn ||
-           opc == interpreter::IROpCode::BgtUn ||
-           opc == interpreter::IROpCode::BleUn ||
-           opc == interpreter::IROpCode::BgeUn;
+    return opc == interpreter::IROpCode::BrTrue || opc == interpreter::IROpCode::BrFalse ||
+           opc == interpreter::IROpCode::Beq || opc == interpreter::IROpCode::BneUn ||
+           opc == interpreter::IROpCode::Blt || opc == interpreter::IROpCode::Bgt ||
+           opc == interpreter::IROpCode::Ble || opc == interpreter::IROpCode::Bge ||
+           opc == interpreter::IROpCode::BltUn || opc == interpreter::IROpCode::BgtUn ||
+           opc == interpreter::IROpCode::BleUn || opc == interpreter::IROpCode::BgeUn;
 }
 
 // Returns true for terminators (no successors, don't propagate liveness).
 inline bool IsTerminator(interpreter::IROpCode opc) noexcept {
-    return opc == interpreter::IROpCode::Ret ||
-           opc == interpreter::IROpCode::Throw ||
-           opc == interpreter::IROpCode::Rethrow ||
-           opc == interpreter::IROpCode::EndFinally ||
+    return opc == interpreter::IROpCode::Ret || opc == interpreter::IROpCode::Throw ||
+           opc == interpreter::IROpCode::Rethrow || opc == interpreter::IROpCode::EndFinally ||
            opc == interpreter::IROpCode::EndFilter;
 }
 
@@ -246,13 +239,11 @@ inline uint32_t Popcount(uint64_t x) noexcept {
     return Popcount64(x);
 }
 
-}  // namespace detail
+} // namespace detail
 
 // ── Public API ─────────────────────────────────────────────────────────────
 
-inline GraphColoringResult AllocateRegistersGraphColoring(
-    const interpreter::RegisterMethod& rm) noexcept
-{
+inline GraphColoringResult AllocateRegistersGraphColoring(const interpreter::RegisterMethod& rm) noexcept {
     using namespace detail;
 
     GraphColoringResult result;
@@ -260,7 +251,8 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
     std::memset(result.fpr_color, 0xFF, sizeof(result.fpr_color));
 
     uint32_t n_instrs = static_cast<uint32_t>(rm.instructions.size());
-    if (n_instrs == 0 || n_instrs > kMaxStackInstrs) return result;
+    if (n_instrs == 0 || n_instrs > kMaxStackInstrs)
+        return result;
 
     const auto* instrs = rm.instructions.data();
 
@@ -270,25 +262,41 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
     uint64_t live_out[2048] = {};
     uint64_t def[2048] = {};
     uint64_t use[2048] = {};
+    // Parallel FPR liveness (float vregs 64-95).  live_in/live_out/def/use are
+    // uint64_t and cannot represent vregs >= 64, so FPR vregs are tracked in a
+    // separate 32-bit bitmap where bit k = FPR vreg (64 + k).
+    uint32_t fpr_def[2048] = {};
+    uint32_t fpr_use[2048] = {};
 
     // Pass 1: compute def/use for each instruction.
     for (uint32_t i = 0; i < n_instrs; ++i) {
         const auto& inst = instrs[i];
-        if (inst.has_dst() && inst.dst_reg() < interpreter::kGPRegisters)
+        const auto fpr_bit = [](uint8_t r) -> bool { return r >= interpreter::kGPRegisters && r < interpreter::kTotalRegisters; };
+        if (inst.has_dst() && inst.dst_reg() < interpreter::kGPRegisters) {
             def[i] |= (1ULL << inst.dst_reg());
-        if (inst.has_src1() && inst.src1_reg() < interpreter::kGPRegisters)
+        } else if (inst.has_dst() && fpr_bit(inst.dst_reg())) {
+            fpr_def[i] |= (1u << (inst.dst_reg() - interpreter::kGPRegisters));
+        }
+        if (inst.has_src1() && inst.src1_reg() < interpreter::kGPRegisters) {
             use[i] |= (1ULL << inst.src1_reg());
-        if (inst.has_src2() && inst.src2_reg() < interpreter::kGPRegisters)
+        } else if (inst.has_src1() && fpr_bit(inst.src1_reg())) {
+            fpr_use[i] |= (1u << (inst.src1_reg() - interpreter::kGPRegisters));
+        }
+        if (inst.has_src2() && inst.src2_reg() < interpreter::kGPRegisters) {
             use[i] |= (1ULL << inst.src2_reg());
+        } else if (inst.has_src2() && fpr_bit(inst.src2_reg())) {
+            fpr_use[i] |= (1u << (inst.src2_reg() - interpreter::kGPRegisters));
+        }
         // Third source operand (StElem, StObj, Cpblk, InitBlk)
         if (inst.flags() & interpreter::kRegHasSrc3) {
             uint8_t src3 = inst.src3_reg();
             if (src3 < interpreter::kGPRegisters)
                 use[i] |= (1ULL << src3);
+            else if (fpr_bit(src3))
+                fpr_use[i] |= (1u << (src3 - interpreter::kGPRegisters));
         }
         // Calli: func_ptr vreg in imm.operand_index is an implicit source
-        if (inst.op_code() == interpreter::IROpCode::Calli &&
-            inst.imm.operand_index < interpreter::kGPRegisters) {
+        if (inst.op_code() == interpreter::IROpCode::Calli && inst.imm.operand_index < interpreter::kGPRegisters) {
             use[i] |= (1ULL << inst.imm.operand_index);
         }
     }
@@ -376,6 +384,27 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
         }
     }
 
+    // ── FPR first_def / last_use (floats 64-95, compact bit k = 64+k) ────
+    uint32_t fpr_first_def[32];
+    uint32_t fpr_last_use[32];
+    std::memset(fpr_first_def, 0xFF, sizeof(fpr_first_def));
+    std::memset(fpr_last_use, 0xFF, sizeof(fpr_last_use));
+    for (uint32_t i = 0; i < n_instrs; ++i) {
+        uint32_t fb = fpr_def[i];
+        while (fb) {
+            uint32_t f = static_cast<uint32_t>(Ctz32(fb));
+            fb &= fb - 1;
+            if (fpr_first_def[f] == UINT32_MAX)
+                fpr_first_def[f] = i;
+        }
+        uint32_t ub = fpr_use[i];
+        while (ub) {
+            uint32_t u = static_cast<uint32_t>(Ctz32(ub));
+            ub &= ub - 1;
+            fpr_last_use[u] = i;
+        }
+    }
+
     // ── Build GPR interference graph ──────────────────────────────────────
     // adj[v] = bitmask of vregs that interfere with v.
     uint64_t adj[64] = {};
@@ -388,7 +417,7 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
             bits &= bits - 1;
             if (v < interpreter::kGPRegisters) {
                 adj[v] |= live_in[i];
-                adj[v] &= ~(1ULL << v);  // no self-loop
+                adj[v] &= ~(1ULL << v); // no self-loop
             }
         }
         // A vreg defined at i interferes with all vregs live across i.
@@ -482,16 +511,19 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
     uint64_t cost[64] = {};
     for (uint32_t i = 0; i < n_instrs; ++i) {
         const auto& inst = instrs[i];
-        if (inst.has_dst()  && inst.dst_reg()  < interpreter::kGPRegisters) cost[inst.dst_reg()]++;
-        if (inst.has_src1() && inst.src1_reg()  < interpreter::kGPRegisters) cost[inst.src1_reg()]++;
-        if (inst.has_src2() && inst.src2_reg()  < interpreter::kGPRegisters) cost[inst.src2_reg()]++;
+        if (inst.has_dst() && inst.dst_reg() < interpreter::kGPRegisters)
+            cost[inst.dst_reg()]++;
+        if (inst.has_src1() && inst.src1_reg() < interpreter::kGPRegisters)
+            cost[inst.src1_reg()]++;
+        if (inst.has_src2() && inst.src2_reg() < interpreter::kGPRegisters)
+            cost[inst.src2_reg()]++;
         if ((inst.flags() & interpreter::kRegHasSrc3)) {
             uint8_t src3 = inst.src3_reg();
-            if (src3 < interpreter::kGPRegisters) cost[src3]++;
+            if (src3 < interpreter::kGPRegisters)
+                cost[src3]++;
         }
         // Calli: func_ptr vreg in imm.operand_index counts as a use
-        if (inst.op_code() == interpreter::IROpCode::Calli &&
-            inst.imm.operand_index < interpreter::kGPRegisters) {
+        if (inst.op_code() == interpreter::IROpCode::Calli && inst.imm.operand_index < interpreter::kGPRegisters) {
             cost[inst.imm.operand_index]++;
         }
     }
@@ -500,7 +532,8 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
     // Build active mask (vregs with nonzero cost).
     uint64_t active = 0;
     for (uint32_t i = 0; i < 64; ++i) {
-        if (cost[i] > 0) active |= (1ULL << i);
+        if (cost[i] > 0)
+            active |= (1ULL << i);
     }
 
     uint32_t simplify_stack[64];
@@ -520,7 +553,8 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
                 best_v = static_cast<int32_t>(v);
             }
         }
-        if (best_v < 0) break;
+        if (best_v < 0)
+            break;
         uint32_t v = static_cast<uint32_t>(best_v);
 
         if (best_deg < kNumColors) {
@@ -571,57 +605,71 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
         }
     }
     for (uint32_t c = 0; c < kNumColors; ++c) {
-        if (color_used[c]) result.used_gpr_count++;
+        if (color_used[c])
+            result.used_gpr_count++;
     }
 
     // ── FPR Allocation (XMM0-XMM15) ────────────────────────────────────────
-    // Map FPR vregs (64-95) to indices 0-31.
+    // Float vregs 64-95 are mapped to compact slots 0-31 (slot k = vreg 64+k).
+    // Interference is built from conservative live ranges (first_def → last_use,
+    // tracked in the parallel fpr_def/fpr_use/fpr_first_def/fpr_last_use) — the
+    // GPR-only live_in/live_out bitmaps cannot represent vregs >= 64, which is
+    // why the original FPR pass (reading live_in for bits >= 64) never colored.
     uint64_t fpr_adj[32] = {};
-
+    uint32_t fpr_cons_live = 0;
     for (uint32_t i = 0; i < n_instrs; ++i) {
-        // Extract FPR vregs from the live_in bitmask.
-        uint64_t fpr_live = 0;
-        uint64_t bits = live_in[i];
-        while (bits) {
-            uint32_t r = static_cast<uint32_t>(Ctz64(bits));
-            bits &= bits - 1;
-            if (r >= interpreter::kGPRegisters && r < interpreter::kTotalRegisters) {
-                uint32_t fi = r - interpreter::kGPRegisters;
-                if (fi < 32) fpr_live |= (1ULL << fi);
-            }
+        // Add FPR vregs first defined at this instruction (conservative live).
+        uint32_t cbits = fpr_def[i];
+        uint32_t new_fdefs = 0;
+        while (cbits) {
+            uint32_t f = static_cast<uint32_t>(Ctz32(cbits));
+            cbits &= cbits - 1;
+            if (fpr_first_def[f] == i)
+                new_fdefs |= (1u << f);
+        }
+        fpr_cons_live |= new_fdefs;
+
+        // Transitive interference: every FPR vreg live-here interferes with
+        // every other (mirrors the GPR live_in transitive closure).  This is
+        // what makes a dst interfere with its still-live sources at the same
+        // instruction (e.g. Add v66 = v64 + v65: v66 must not reuse v64/v65's
+        // XMM).  Without it, only the def×cons rule below runs and the exclude-
+        // sources clause drops the very edge the dst needs.
+        uint64_t live_c = fpr_cons_live;
+        while (live_c) {
+            uint32_t fi = static_cast<uint32_t>(Ctz64(live_c));
+            live_c &= live_c - 1;
+            fpr_adj[fi] |= fpr_cons_live;
+            fpr_adj[fi] &= ~(1ULL << fi);
         }
 
-        // Transitive interference among live FPRs.
-        uint64_t fb = fpr_live;
-        while (fb) {
-            uint32_t fi = static_cast<uint32_t>(Ctz64(fb));
-            fb &= fb - 1;
-            if (fi < 32) {
-                fpr_adj[fi] |= fpr_live;
-                fpr_adj[fi] &= ~(1ULL << fi);
-            }
-        }
-
-        // FPR def → live-out interference (same bug fix as GPR above).
-        // A defined FPR vreg interferes with all FPR vregs that are live across i.
-        const auto& inst = instrs[i];
-        uint32_t fdst = (inst.has_dst() && inst.dst_reg() >= interpreter::kGPRegisters &&
-                         inst.dst_reg() < interpreter::kTotalRegisters)
-                            ? inst.dst_reg() - interpreter::kGPRegisters
-                            : UINT32_MAX;
-        if (fdst < 32) {
-            uint64_t fpr_live_out = 0;
-            uint64_t obits = live_out[i];
-            while (obits) {
-                uint32_t r = static_cast<uint32_t>(Ctz64(obits));
-                obits &= obits - 1;
-                if (r >= interpreter::kGPRegisters && r < interpreter::kTotalRegisters) {
-                    uint32_t fi_lo = r - interpreter::kGPRegisters;
-                    if (fi_lo < 32) fpr_live_out |= (1ULL << fi_lo);
+        // Bidirectional interference: each defined FPR vreg interferes with the
+        // conservative-live FPR set (excl. itself + its sources, which are read
+        // before the dst is written in three-address code).
+        uint32_t fbits = fpr_def[i];
+        while (fbits) {
+            uint32_t fdst = static_cast<uint32_t>(Ctz32(fbits));
+            fbits &= fbits - 1;
+            uint32_t exclude = (1u << fdst) | fpr_use[i];
+            uint32_t interfere = fpr_cons_live & ~exclude;
+            if (interfere) {
+                fpr_adj[fdst] |= interfere;
+                uint32_t ibits = interfere;
+                while (ibits) {
+                    uint32_t iv = static_cast<uint32_t>(Ctz32(ibits));
+                    ibits &= ibits - 1;
+                    fpr_adj[iv] |= (1ULL << fdst);
                 }
             }
-            fpr_adj[fdst] |= fpr_live_out;
-            fpr_adj[fdst] &= ~(1ULL << fdst);
+        }
+
+        // Remove FPR vregs that had their last use at this instruction.
+        uint32_t ub = fpr_use[i];
+        while (ub) {
+            uint32_t u = static_cast<uint32_t>(Ctz32(ub));
+            ub &= ub - 1;
+            if (fpr_last_use[u] == i)
+                fpr_cons_live &= ~(1u << u);
         }
     }
 
@@ -635,17 +683,21 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
             return UINT32_MAX;
         };
         uint32_t fdst = fpr_idx(inst.dst_reg());
-        uint32_t fs1  = fpr_idx(inst.src1_reg());
-        uint32_t fs2  = fpr_idx(inst.src2_reg());
-        if (fdst != UINT32_MAX && fdst < 32) fpr_cost[fdst]++;
-        if (fs1  != UINT32_MAX && fs1  < 32) fpr_cost[fs1]++;
-        if (fs2  != UINT32_MAX && fs2  < 32) fpr_cost[fs2]++;
+        uint32_t fs1 = fpr_idx(inst.src1_reg());
+        uint32_t fs2 = fpr_idx(inst.src2_reg());
+        if (fdst != UINT32_MAX && fdst < 32)
+            fpr_cost[fdst]++;
+        if (fs1 != UINT32_MAX && fs1 < 32)
+            fpr_cost[fs1]++;
+        if (fs2 != UINT32_MAX && fs2 < 32)
+            fpr_cost[fs2]++;
     }
 
     // FPR simplify.
     uint64_t fpr_active = 0;
     for (uint32_t fi = 0; fi < 32; ++fi) {
-        if (fpr_cost[fi] > 0) fpr_active |= (1ULL << fi);
+        if (fpr_cost[fi] > 0)
+            fpr_active |= (1ULL << fi);
     }
     uint32_t fpr_stack[32];
     uint32_t fsp = 0;
@@ -657,9 +709,13 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
             uint32_t fv = static_cast<uint32_t>(Ctz64(fbits));
             fbits &= fbits - 1;
             uint32_t deg = Popcount64(fpr_adj[fv] & fpr_active);
-            if (deg < best_deg) { best_deg = deg; best_fv = static_cast<int32_t>(fv); }
+            if (deg < best_deg) {
+                best_deg = deg;
+                best_fv = static_cast<int32_t>(fv);
+            }
         }
-        if (best_fv < 0) break;
+        if (best_fv < 0)
+            break;
         fpr_stack[fsp++] = static_cast<uint32_t>(best_fv);
         fpr_active &= ~(1ULL << static_cast<uint32_t>(best_fv));
     }
@@ -695,12 +751,13 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
         }
     }
     for (uint32_t c = 0; c < kNumVregColors; ++c) {
-        if (xmm_used[c]) result.used_fpr_count++;
+        if (xmm_used[c])
+            result.used_fpr_count++;
     }
 
     return result;
 }
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_CODEGEN_REG_ALLOC_GRAPH_COLORING_H_
+#endif // CHAOS_IL2CPP_JIT_REG_ALLOC_H_

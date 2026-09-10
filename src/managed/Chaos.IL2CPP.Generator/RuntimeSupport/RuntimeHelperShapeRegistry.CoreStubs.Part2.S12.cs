@@ -48,6 +48,14 @@ public sealed partial class NativeAotLoweringPlanner
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
+            // Math::Floor(System.Decimal) → Decimal (DecimalCarrier* in/out)
+            registry.Register("System.Math", "Floor", ["System.Decimal"],
+                ShapeKind.SimpleForward, "ChaosMathDecimalFloor",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0 });
+
         }
 
         /// <summary>

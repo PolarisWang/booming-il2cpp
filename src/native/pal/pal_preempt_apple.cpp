@@ -14,6 +14,12 @@ void PalPreemptInit(PalPreemptCallback /*callback*/) noexcept {
     // No-op: no signal handler installation on Apple.
 }
 
+bool PalCaptureReliable() noexcept {
+    // Apple: pthread_kill SIGUSR2 not reliable on Darwin; no prefixed
+    // register window is captured.
+    return false;
+}
+
 bool PalPreemptRequest(void* /*os_handle*/, uint64_t /*os_thread_id*/,
                         uint64_t /*epoch*/) noexcept {
     return false;

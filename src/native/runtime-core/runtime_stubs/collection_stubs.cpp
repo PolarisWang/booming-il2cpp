@@ -371,5 +371,81 @@ void CollectionStackClear(CHAOS_IL2CPP_INTPTR handle) noexcept
     storage->items.clear();
 }
 
+// ── Dispose helpers (free native storage when managed object is GC'd) ──
+// Each require_*_storage allocates via new; the managed object holds the
+// pointer in its embedded slot at kNativeStorageSlotOffset.
+//
+// ⚠️ NOT-CURRENTLY-WIRED (known): as of the industrial P1/P2 split, these four
+// Dispose exports have NO caller in native, managed, or codegen — they are
+// declared in collection_stubs.h but never invoked (a future managed-side
+// Dispose/Finalize chain has not been wired).  Each require_*_storage `new`
+// therefore leaks unless a caller is added; this is an accepted, tracked gap.
+//
+// PRECONDITION (must hold for any FUTURE caller): `handle` must be a live
+// managed collection-object base pointer (List/HashSet/Queue/Stack) whose
+// embedded native-storage slot at kNativeStorageSlotOffset == 0 can be
+// overwritten ONLY by the matching require_*_storage.  The slot check below
+// (`if *slot == 0 return`) prevents sequential double-free but CANNOT defend
+// against an arbitrary/dangling `handle` — dereferencing handle+16 and
+// `delete`-ing an unvalidated address is heap corruption.  A caller must not
+// pass a random/dangling/reused handle, and concurrent Dispose+use on the
+// same object is undefined (no synchronization exists here).
+//
+// 🔴 RUNTIME GUARD (not comment-only): each Dispose below begins with
+// CHAOS_IL2CPP_FAIL so that an unexpected/accidental invocation while the
+// managed Dispose/Finalize chain is unwired ABORTS loudly (verification mode:
+// SEH-managed exception, fact runner value=-1) instead of silently running an
+// unvalidated handle+16 deref + delete that would heap-corrupt.  This guard
+// MUST be removed (replaced by the real delete path below) when the managed
+// Dispose chain is actually wired and callers are known to pass a live, valid
+// collection handle per the PRECONDITION above.
+
+void CollectionListDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    CHAOS_IL2CPP_FAIL("CollectionListDispose not wired — see comment above");
+    if (handle == 0) return;
+    // NOTE: slot read/delete is only safe when `handle` satisfies PRECONDITION
+    // above.  No object-validity check is available in this subsystem today;
+    // callers are responsible for passing a live List object.
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
+    if (*slot == 0) return;
+    delete reinterpret_cast<ListRuntimeStorage*>(*slot);
+    *slot = 0;
+}
+
+void CollectionHashSetDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    CHAOS_IL2CPP_FAIL("CollectionHashSetDispose not wired — see comment above");
+    if (handle == 0) return;
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
+    if (*slot == 0) return;
+    delete reinterpret_cast<HashSetRuntimeStorage*>(*slot);
+    *slot = 0;
+}
+
+void CollectionQueueDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    CHAOS_IL2CPP_FAIL("CollectionQueueDispose not wired — see comment above");
+    if (handle == 0) return;
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
+    if (*slot == 0) return;
+    delete reinterpret_cast<QueueRuntimeStorage*>(*slot);
+    *slot = 0;
+}
+
+void CollectionStackDispose(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    CHAOS_IL2CPP_FAIL("CollectionStackDispose not wired — see comment above");
+    if (handle == 0) return;
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
+    if (*slot == 0) return;
+    delete reinterpret_cast<StackRuntimeStorage*>(*slot);
+    *slot = 0;
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core

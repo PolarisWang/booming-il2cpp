@@ -90,6 +90,18 @@ enum class GcCollectionKind {
     FULL_BGC = 3,   // Background concurrent mark (low-latency)
 };
 
+/// Why a full GC was triggered — aligns CoreCLR gcrecord.h per-GC reason
+/// tracking so tooling can attribute pause/latency to the trigger.
+enum class GcTriggerReason : uint8_t {
+    NONE = 0,             // Unknown / nominal triggering
+    ALLOC_PRESSURE = 1,   // Allocation exceeded full-GC threshold
+    PAGE_GROWTH = 2,      // Rapid page-count growth burst
+    EXPLICIT_REQUEST = 3, // GC.Collect() / RequestFullGc from another thread
+    HARD_LIMIT = 4,       // Hard-memory-limit breached
+    EXTERNAL_PRESSURE = 5,// External (unmanaged) memory pressure
+    PROVISIONAL = 6,      // Provisional (high-memory) degradation
+};
+
 class GcScheduler {
 public:
     GcScheduler() = default;
@@ -161,6 +173,19 @@ public:
     /// reallocate a fresh nursery.  Call RecordGcCompleted() after the GC
     /// finishes so the next GC can proceed.
     bool TryClaimGcSlot() noexcept;
+
+    /// True while a GC slot is actively held by some thread (between
+    /// TryClaimGcSlot returning true and RecordGcCompleted being called).
+    /// Used by the allocation slow path and OOM handler to distinguish
+    /// "another thread is running GC right now" from "too soon since last
+    /// GC, no GC in flight".  When true, callers should wait for the
+    /// in-flight GC to complete (SafepointPoll) rather than skipping
+    /// directly to old-gen / OOM (CoreCLR wait_for_gc_done alignment).
+    /// Returns false if no slot is held (the last GC finished, or none
+    /// has ever started).
+    bool GcSlotIsHeld() const noexcept {
+        return gc_slot_held_.load(std::memory_order_acquire);
+    }
 
 
     // ── Collection decision ──────────────────────────────────────
@@ -316,6 +341,52 @@ public:
         soft_limit_.store(bytes, std::memory_order_release);
     }
 
+    /// Whether provisional (high-memory-pressure) degradation mode is active.
+    bool InProvisionalMode() const noexcept {
+        return provisional_mode_.load(std::memory_order_acquire);
+    }
+
+    /// Enter/leave provisional (high-memory-pressure) degradation mode.
+    /// When active, GC degrades to forced-blocking + no old-gen expansion
+    /// (align CoreCLR gcpriv.h:4324 provisional mode).  Entering provisional also
+    /// queues an NGC2 (mandated gen2 collection) so the next GC is a required
+    /// blocking full collection once.
+    void SetProvisionalMode(bool on) noexcept {
+        provisional_mode_.store(on, std::memory_order_release);
+        if (on) {
+            ngc2_queued_.store(true, std::memory_order_release);
+        }
+    }
+
+    // ── NGC2 queue (M4/M3B: mandated gen2 collection) ──────────────
+    /// Whether a gen2 (NGC2) collection is queued/required at the next
+    /// GC decision (align CoreCLR NGC2 queued).  Set by provisional entry or
+    /// high memory pressure; consumed once by DecideCollection (forces a
+    /// blocking FULL) then cleared.
+    bool IsNgc2Queued() const noexcept {
+        return ngc2_queued_.load(std::memory_order_acquire);
+    }
+
+    /// Explicitly queue a mandated gen2 collection.
+    void QueueNgc2() noexcept {
+        ngc2_queued_.store(true, std::memory_order_release);
+    }
+
+    /// Clear the NGC2 queue (after it has been discharged by a full GC).
+    void ClearNgc2() noexcept {
+        ngc2_queued_.store(false, std::memory_order_release);
+    }
+
+    /// Reason the most recent full GC was triggered (diagnostics/tooling).
+    GcTriggerReason LastTriggerReason() const noexcept {
+        return static_cast<GcTriggerReason>(last_trigger_reason_.load(std::memory_order_acquire));
+    }
+
+    /// Record the reason a full GC was triggered (DecideCollection, const).
+    void SetLastTriggerReason(GcTriggerReason r) const noexcept {
+        last_trigger_reason_.store(static_cast<uint8_t>(r), std::memory_order_release);
+    }
+
     /// Check whether allocating @a additional_bytes would exceed the hard limit.
     /// Returns true if the hard limit is set and would be exceeded.
     bool ExceedsHardLimit(CHAOS_IL2CPP_SIZE additional_bytes = 0) const noexcept {
@@ -403,8 +474,62 @@ public:
             old_gen_fragmentation_fp_.load(std::memory_order_acquire)) / 1000.0f;
     }
 
+    // ── GC-N8 dynamic_tuning signals (Phase-1 采集) ──────────────
+    // Empty-slot accumulation first; the servo decision loop that consumes
+    // these is wired in a later phase (roadmap risk guardrail: "先加多信号
+    // 采集，再逐步接决策").  All use the same atomic fixed-point (*1000) idiom
+    // as OldGenFragmentation so the eventual servo can read them lock-free.
+
+    /// Old-gen free-list reuse rate [0.0, 1.0] — fraction of old-gen
+    /// allocations served from existing page free-lists (vs fresh page carve).
+    /// High reuse → allocator is recycling dead blocks cheaply (low pressure);
+    /// low reuse → allocations keep carving fresh pages (pressure to compact).
+    void SetFreeListReuseRate(float rate) noexcept {
+        uint32_t fp = static_cast<uint32_t>(rate * 1000.0f);
+        if (fp > 1000) fp = 1000;
+        free_list_reuse_rate_fp_.store(fp, std::memory_order_release);
+    }
+    float FreeListReuseRate() const noexcept {
+        return static_cast<float>(
+            free_list_reuse_rate_fp_.load(std::memory_order_acquire)) / 1000.0f;
+    }
+
+    /// System memory-load ratio [0.0, 1.0] — 1.0 = high scheduled-memory
+    /// pressure (little available physical memory), 0.0 = plenty free.
+    /// Fed from PalGetMemoryStatus; lets the servo prefer compaction / full
+    /// GC under genuine system pressure rather than reacting to inside-heap
+    /// signals alone (CoreCLR dynamic_tuning.cpp).
+    void SetMemoryLoad(float load) noexcept {
+        uint32_t fp = static_cast<uint32_t>(load * 1000.0f);
+        if (fp > 1000) fp = 1000;
+        memory_load_fp_.store(fp, std::memory_order_release);
+    }
+    float MemoryLoad() const noexcept {
+        return static_cast<float>(
+            memory_load_fp_.load(std::memory_order_acquire)) / 1000.0f;
+    }
+
+    // ── GC-N8 Phase-2: dynamic_tuning tension (servo 决策信号) ─────
+    /// Combine the three Phase-1 signals into a single [0, 1] "tension"
+    /// factor, CoreCLR dynamic_tuning style (fragmentation counter + free-list
+    /// rate + memory load).  High tension → old-gen is fragmented / not
+    /// reusing free memory / under system memory pressure → GC should be more
+    /// aggressive.  Called from the young-trigger path in DecideCollection to
+    /// tighten pacing closed-loop.  Pure function of the stored signals.
+    float DynamicTension() const noexcept {
+        const float frag = OldGenFragmentation();      // [0,1], higher = emptier/fragmented
+        const float reuse = FreeListReuseRate();       // [0,1], higher = reusing free blocks
+        const float mem_load = MemoryLoad();           // [0,1], higher = system pressure
+        // reuse is inverted (low reuse → high tension).  Equal weights so no
+        // single signal dominates; a genuinely healthy allocator (high reuse,
+        // low frag, low mem) yields tension → 0 and never tightens.
+        return 0.34f * frag + 0.33f * (1.0f - reuse) + 0.33f * mem_load;
+    }
+
 private:
     std::atomic<uint32_t> old_gen_fragmentation_fp_{0};
+    std::atomic<uint32_t> free_list_reuse_rate_fp_{0};
+    std::atomic<uint32_t> memory_load_fp_{0};
 
     // ── Constants ────────────────────────────────────────────────
 
@@ -501,6 +626,11 @@ private:
     // Full GC request flag (set by any thread, checked at safepoint).
     std::atomic<bool> full_gc_requested_{false};
 
+    /// Last full-GC trigger reason (diagnostics; see GcTriggerReason).  Stored
+    /// as an integral (some ABIs reject std::atomic over enum class).  Mutable
+    /// so DecideCollection (const) can record it atomically.
+    mutable std::atomic<uint8_t> last_trigger_reason_{ static_cast<uint8_t>(GcTriggerReason::NONE) };
+
     // Estimated heap size (updated after full GC).
     std::atomic<CHAOS_IL2CPP_SIZE> estimated_heap_size_{kDefaultNurserySize};
 
@@ -521,6 +651,12 @@ private:
     // Initialized to 0 (no GC has completed yet — first GC always allowed).
     std::atomic<uint64_t> last_gc_completion_ns_{0};
 
+    /// True while a GC slot is actively held (between TryClaimGcSlot and
+    /// RecordGcCompleted).  Read by the allocation slow path to detect that
+    /// another thread is in-flight with GC, so it can wait for completion
+    /// instead of jumping to old-gen / OOM (CoreCLR wait_for_gc_done).
+    std::atomic<bool> gc_slot_held_{false};
+
     /// Minimum interval between GC completions (in nanoseconds).
     /// 50 ms — reduces GC frequency from every TLAB-pool exhaustion
     /// (~500µs under heavy multi-threaded allocation) to at most
@@ -535,8 +671,6 @@ private:
     /// Accumulated by AddMemoryPressure, decremented by RemoveMemoryPressure.
     std::atomic<CHAOS_IL2CPP_INT64> external_memory_pressure_{0};
 
-    // ── Hard / soft memory limit state ─────────────────────────
-
     /// Hard memory limit in bytes (0 = disabled).
     /// Set from CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB at startup.
     std::atomic<CHAOS_IL2CPP_SIZE> hard_limit_{0};
@@ -544,6 +678,22 @@ private:
     /// Soft memory limit in bytes (0 = disabled).
     /// Set from CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB at startup.
     std::atomic<CHAOS_IL2CPP_SIZE> soft_limit_{0};
+
+    /// Provisional (high-memory-pressure) degradation flag — aligns CoreCLR's
+    /// "provisional mode" (gcpriv.h:4324).  When set, the GC degrades to a
+    /// predictable, memory-conserving shape: collections are forced toward
+    /// blocking (not deferred to BGC) and old-gen expansion is suppressed.
+    /// Entered when the hard limit is breached; exits when memory recovers.
+    /// Settable via public InProvisionalMode()/SetProvisionalMode().
+    std::atomic<bool> provisional_mode_{false};
+
+    /// NGC2 queued flag (align CoreCLR "NGC2 queued" — a gen2 collection is
+    /// mandated to run at the next safepoint/GC opportunity).  A provisional /
+    /// high-fragmentation entry queues NGC2 so the next DecideCollection forces
+    /// a blocking gen2 (full) collection once, then clears.  This is M4/M3B's
+    /// "NGC2 排队" — the gen2-queue mechanism, scheduler-level (not server-bound).
+    /// Mutable so the const DecideCollection can discharge (clear) it.
+    mutable std::atomic<bool> ngc2_queued_{false};
 
     /// Minimum absolute threshold for external memory pressure triggering.
     /// Below this, external pressure alone won't trigger a full GC.

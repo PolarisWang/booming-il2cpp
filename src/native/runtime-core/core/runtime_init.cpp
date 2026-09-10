@@ -16,6 +16,14 @@ namespace chaos::il2cpp::runtime_core {
 // Forward declarations from task_runner.cpp (threading sub-namespace)
 namespace threading {
     void RegisterAsyncTaskRun() noexcept;
+    void RegisterAsyncContinuationDispatch() noexcept;
+}
+
+// Forward declarations from thread_pool.cpp
+namespace threading {
+    void ThreadPoolInitialize() noexcept;
+    void ThreadPoolShutdown() noexcept;
+    int32_t ThreadPoolWorkerCount() noexcept;
 }
 
 RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
@@ -65,6 +73,12 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
         BgcController::Instance().Start();
     }
 
+    // Start the native ThreadPool (worker threads, gate thread, hill-climbing).
+    // Must be called after BGC start (worker threads rely on preemptive mode
+    // which requires GC safepoint to be functional) but before any Task.Run
+    // or async continuation that needs the thread pool.
+    threading::ThreadPoolInitialize();
+
     // Start the OS low-memory notification monitor.
     // Non-functional on non-Windows platforms (no-op).
     g_low_memory_monitor.Start();
@@ -75,6 +89,13 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     // Register ThreadPool-backed Task.Run so that async_task_run() in
     // chaos_common delegates to the real implementation instead of stubbing.
     threading::RegisterAsyncTaskRun();
+
+    // Register ThreadPool-backed continuation dispatch so that a completing
+    // task's continuation (state-machine MoveNext resumption) runs on a worker
+    // thread rather than the completing thread.  Without this, continuations
+    // fire inline on whatever thread calls SetResult/SetException, which can
+    // cause unexpected stack growth or reentrancy.
+    threading::RegisterAsyncContinuationDispatch();
 
     // Initialize the shared young generation (nursery + TLAB).
     // Must be called before any GC allocation — every allocation goes through
@@ -94,9 +115,11 @@ void CHAOS_RUNTIME_ABI_CALL RuntimeShutdown(RuntimeState* runtime_state) {
     //   1. BGC controller first — joins BGC concurrent-mark thread + finalizer
     //      thread so they no longer access GC data structures.
     //   2. GC worker pool — joins any parked parallel GC workers.
-    //   3. Then remaining teardown (ETW, low-mem monitor, free state).
+    //   3. Native ThreadPool — joins worker/gate/wakeable threads.
+    //   4. Then remaining teardown (ETW, low-mem monitor, free state).
     BgcController::Instance().Stop();
     GcWorkerPool::Instance().Shutdown();
+    threading::ThreadPoolShutdown();
     DestroyYoungGeneration();
     GcEtwShutdown();
     g_low_memory_monitor.Stop();

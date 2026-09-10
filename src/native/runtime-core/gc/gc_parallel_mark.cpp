@@ -1,6 +1,7 @@
 #include "gc_parallel_mark.h"
 
 #include "gc_bit_utils.h"
+#include "gc_config.h"
 #include "gc_layout.h"
 #include "thread_pool.h"
 #include "thread_state.h"
@@ -9,6 +10,7 @@
 #include <chaos/profile.h>
 
 #include <algorithm>
+#include <chrono>
 #include <cstdint>
 #include <cstdlib>
 #include <thread>
@@ -40,15 +42,29 @@ static inline bool AtomicMarkBit(unsigned char* bitmap, CHAOS_IL2CPP_SIZE byte_i
 
 ParallelMarkContext* InitParallelMarkContext(OldGenPage** pages, int page_count,
                                               int hw_concurrency) {
-    // Worker count: min(pages/32 + 1, hw_concurrency, kMaxParallelMarkWorkers)
+    // Worker count: min(pages/32 + 1, hw_concurrency, kMaxParallelMarkWorkers),
+    // then capped by the ParallelMarkWorkers config governor (task#16 S3 timeout
+    // mitigation / 方案3): setting CHAOS_GC_ParallelMarkWorkers=1 forces a fully
+    // sequential DrainMarkStack (no cross-worker steal/deq spin), eliminating the
+    // yield-spin scheduler Livelock window under extreme process oversubscription.
+    // Default 8 == kMaxParallelMarkWorkers, so default behavior is unchanged.
     int desired = (page_count / 32) + 1;
     desired = (std::min)(desired, hw_concurrency);
     desired = (std::min)(desired, kMaxParallelMarkWorkers);
+    CHAOS_IL2CPP_SIZE cfg_max = GcConfig().ParallelMarkWorkers;
+    if (cfg_max > 0 && static_cast<int>(cfg_max) < desired) {
+        desired = static_cast<int>(cfg_max);
+    }
     if (desired < 1) desired = 1;
 
     auto* ctx = static_cast<ParallelMarkContext*>(
         CHAOS_IL2CPP_MALLOC(sizeof(ParallelMarkContext)));
     if (ctx == nullptr) return nullptr;
+
+    // Placement-new: ParallelMarkContext now holds std::mutex + condition_variable
+    // (方案1 done/work 信号), which are non-trivially constructible and MUST be
+    // constructed before use.  Plain malloc leaves them indeterminate.
+    new (ctx) ParallelMarkContext();
 
     ctx->pages = pages;
     ctx->page_count = page_count;
@@ -62,6 +78,7 @@ ParallelMarkContext* InitParallelMarkContext(OldGenPage** pages, int page_count,
     ctx->page_starts = static_cast<uintptr_t*>(
         CHAOS_IL2CPP_MALLOC(static_cast<size_t>(page_count) * sizeof(uintptr_t)));
     if (ctx->page_starts == nullptr) {
+        ctx->~ParallelMarkContext();  // destroy non-trivial mutex/cv members
         CHAOS_IL2CPP_FREE(ctx);
         return nullptr;
     }
@@ -77,6 +94,7 @@ ParallelMarkContext* InitParallelMarkContext(OldGenPage** pages, int page_count,
         CHAOS_IL2CPP_MALLOC(static_cast<size_t>(desired) * sizeof(MarkWorkerState)));
     if (ctx->workers == nullptr) {
         CHAOS_IL2CPP_FREE(ctx->page_starts);
+        ctx->~ParallelMarkContext();  // destroy non-trivial mutex/cv members
         CHAOS_IL2CPP_FREE(ctx);
         return nullptr;
     }
@@ -123,6 +141,7 @@ void DestroyParallelMarkContext(ParallelMarkContext* ctx) {
     if (ctx->page_starts) {
         CHAOS_IL2CPP_FREE(ctx->page_starts);
     }
+    ctx->~ParallelMarkContext();  // destroy non-trivial mutex/cv members (方案1)
     CHAOS_IL2CPP_FREE(ctx);
 }
 
@@ -186,6 +205,26 @@ void FlushPending(MarkWorkerState* worker) {
     worker->pending.page_idx = 0;
     worker->pending.word_index = 0;
 }
+
+/// True if ANY worker's deque still holds a chunk (or a pending accumulator
+/// that hasn't been flushed yet).  Used by the last idle worker to perform a
+/// final convergence re-check before declaring termination — aligning with
+/// CoreCLR's declarative "re-scan until stable" mark termination.
+/// Each deque is read under its steal_mutex so an in-flight PushChunk
+/// (which locks the same mutex) is never missed.
+static bool AnyWorkRemaining(ParallelMarkContext* ctx) {
+    for (int i = 0; i < ctx->worker_count; i++) {
+        auto& w = ctx->workers[i];
+        std::lock_guard<std::mutex> lock(w.steal_mutex);
+        if (!w.deque.empty()) return true;
+        // Also consider an un-flushed pending accumulator as pending work:
+        // the owning worker may be about to flush it, but if that worker is
+        // idle-waiting it must not be lost across termination.
+        if (w.has_pending && w.pending.bitmap != 0) return true;
+    }
+    return false;
+}
+
 
 // ======================================================================
 // Chunk processing
@@ -307,9 +346,13 @@ void ParallelMarkWorkerLoop(ParallelMarkContext* ctx, int worker_idx) {
 
     ctx->active_workers.fetch_add(1, std::memory_order_relaxed);
 
-    // Wait for drain_started signal from the GC thread.
-    while (!ctx->drain_started.load(std::memory_order_acquire)) {
-        std::this_thread::yield();
+    // Wait for drain_started signal from the GC thread. 方案1: cv + predicate;
+    // bounded wait so a missed notify still proceeds via the store visible on
+    // acquire.  drain_started is stored before RunWorkers wakes, so the predicate
+    // is already true on the fast path (atomic visibility still guarantees it).
+    {
+        std::unique_lock<std::mutex> lock(ctx->mark_mtx_);
+        ctx->mark_cv_.wait(lock, [&]() { return ctx->drain_started.load(std::memory_order_acquire); });
     }
 
     // ====================================================================
@@ -352,8 +395,29 @@ void ParallelMarkWorkerLoop(ParallelMarkContext* ctx, int worker_idx) {
         work_found = false;
         int prev = ctx->active_workers.fetch_sub(1, std::memory_order_acq_rel);
         if (prev <= 1) {
-            // We are the LAST worker to go idle. Signal done.
+            // We are the LAST worker to go idle.  Align with CoreCLR's
+            // declarative mark termination (mark_phase.cpp:3107): before
+            // declaring parallel_done, do a final convergence re-check across
+            // ALL workers' deques + pending accumulators.  This catches work
+            // produced by another worker whose ProcessChunk flushed between
+            // that worker's last pop and this one's decrement — guaranteeing
+            // termination is provably convergent, not timing-dependent.
+            if (AnyWorkRemaining(ctx)) {
+                // Some chunk remains (e.g., in-flight flush we cannot see as
+                // empty yet).  We (the last worker) re-increment and resume
+                // to drain it rather than relying on another worker waking.
+                ctx->active_workers.fetch_add(1, std::memory_order_relaxed);
+                work_found = true;
+                continue;  // back to outer loop: pop/steal + (re)flush
+            }
             ctx->parallel_done.store(true, std::memory_order_release);
+            // 方案1: 通知其他 idle worker 退出, 不再空转等到有界周期。
+            // lock_guard 再 notify_all: predicate 在 wait 内重查 parallel_done, 不会
+            // 因 notify 早于 wait 进入而丢 (丢失唤醒保护)。
+            {
+                std::lock_guard<std::mutex> lock(ctx->mark_mtx_);
+            }
+            ctx->mark_cv_.notify_all();
             break;
         }
 
@@ -373,7 +437,16 @@ void ParallelMarkWorkerLoop(ParallelMarkContext* ctx, int worker_idx) {
                 work_found = true;
                 break;
             }
-            std::this_thread::yield();
+            // 方案1: 空闲且有界等待。非 last worker 在此等新 work/done。有界
+            // wait_for(1ms): 即便生产者漏 notify, 也会周期重探 pop/steal 消化
+            // 他人推入的 chunk; parallel_done 由 last-worker notify_all 即时醒。
+            {
+                std::unique_lock<std::mutex> lock(ctx->mark_mtx_);
+                ctx->mark_cv_.wait_for(
+                    lock, std::chrono::milliseconds(1),
+                    [&]() { return ctx->parallel_done.load(std::memory_order_acquire); });
+            }
+            // 醒来后回到内层 loop 顶部重试 pop/steal(逻辑不变, 仅等待方式变了)
         }
     }
 }

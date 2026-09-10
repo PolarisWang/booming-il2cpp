@@ -5,6 +5,8 @@
 #include "gc_api.h"
 #include "gc_card_table.h"
 #include "gc_heap.h"
+#include "gc_region.h"
+#include "../thread_state.h"  // EnterPreemptiveMode/EnterCooperativeMode (LOH mutex wait)
 
 #include <chaos/pal/pal_mem.h>
 
@@ -62,27 +64,42 @@ LohSegment* LargeObjectHeap::AllocateSegment(CHAOS_IL2CPP_SIZE min_size) {
     CHAOS_IL2CPP_SIZE seg_size = (min_size + kLohSegmentSize - 1) & ~(kLohSegmentSize - 1);
     if (seg_size < kLohSegmentSize) seg_size = kLohSegmentSize;
 
-    CHAOS_IL2CPP_SIZE total_size = sizeof(LohSegment) + seg_size;
-    auto* mem = static_cast<LohSegment*>(VirtualAllocPage(total_size));
-    if (mem == nullptr) return nullptr;
+    // Back LOH segments with a REGION_FOH region (align CoreCLR
+    // region_allocator.cpp large-region-for-UOH) instead of a raw VirtualAlloc.
+    // RegionManager::AllocateRegion uses SelectRegionSize (4/2/1MB classes).
+    // Request a region at least large enough to hold the LohSegment header plus
+    // the payload, so the header+payload never overruns the region.
+    RegionKind loh_kind = RegionKind::REGION_FOH;
+    auto* region = RegionManager::Instance().AllocateRegion(
+        loh_kind, static_cast<CHAOS_IL2CPP_SIZE>(seg_size + sizeof(LohSegment)));
+    if (region == nullptr) return nullptr;
 
+    auto* mem = reinterpret_cast<LohSegment*>(region->begin);
     mem->next = nullptr;
     mem->payload_size = seg_size;
     mem->in_use.store(true, std::memory_order_release);
     mem->marked.store(false, std::memory_order_relaxed);
+    mem->region_id = region->id;  // track for region-backed free
 
     return mem;
 }
 
 void LargeObjectHeap::FreeSegment(LohSegment* seg) {
     if (seg == nullptr) return;
-    VirtualFreePage(seg, sizeof(LohSegment) + seg->payload_size);
+    // Release the backing region (region-backed LOH from K1b).  If region_id
+    // is invalid (legacy raw-VirtualAlloc segment), fall back to VirtualFree.
+    if (seg->region_id != kRegionIdInvalid) {
+        RegionManager::Instance().FreeRegion(seg->region_id);
+    } else {
+        VirtualFreePage(seg, sizeof(LohSegment) + seg->payload_size);
+    }
 }
 
 LohSegment* LargeObjectHeap::FindSegment(const void* ptr) const {
     if (ptr == nullptr) return nullptr;
     uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
-    std::lock_guard<std::mutex> lock(mutex_);
+    // NOTE: caller must ensure preemptive mode if this spinlock may contend.
+    GcSpinLockGuard lock(mutex_);
 
     // Check active segments.
     auto* seg = segment_list_;
@@ -110,8 +127,16 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
     LohSegment* seg = nullptr;
     bool allocated = false;
 
+    // Enter preemptive mode while holding the LOH mutex (CoreCLR-aligned:
+    // the BGC/mutator loop is preemptive, and the LOH mutex may block
+    // concurrently).  std::mutex::lock is non-alertable on Windows, so a
+    // cooperative thread blocked here would never acknowledge a safepoint
+    // → coordinator counts it unresponsive → hard timeout → heap corruption.
+    // Preemptive mode tells the coordinator to skip this thread.
+    threading::EnterPreemptiveMode();
+
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        GcSpinLockGuard lock(mutex_);
 
         // Try free segment list first.
         LohSegment** pp = &free_segment_list_;
@@ -148,13 +173,31 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
                 allocated = true;
             }
         }
-    }  // mutex_ released
+
+        // Register the segment with the card table and zero-initialize the payload
+        // UNDER THE LOCK.  GcRegisterHeapRange reads seg->payload_size to compute
+        // the L2 segment allocation size; if the segment is freed concurrently by
+        // another thread (Free/Sweep), payload_size is corrupted and
+        // make_unique<CardSegment*[]> receives an absurd size → crash (cdb: "Invalid
+        // allocation size - a8a3000000034").  Holding the lock prevents the segment
+        // from being removed from segment_list_ while we register it.
+        if (seg != nullptr) {
+            void* payload = reinterpret_cast<char*>(seg) + sizeof(LohSegment);
+            GcRegisterHeapRange(
+                reinterpret_cast<uintptr_t>(payload),
+                reinterpret_cast<uintptr_t>(payload) + seg->payload_size);
+            GcMarkRangeOld(
+                reinterpret_cast<uintptr_t>(payload),
+                reinterpret_cast<uintptr_t>(payload) + seg->payload_size);
+            std::memset(payload, 0, seg->payload_size);
+        }
+    }  // mutex_ released — seg is fully registered and zeroed
 
     if (!allocated) {
-        // AllocateSegment failed (OS-level OOM).  The mutex is already
-        // released, so HandleOomCondition can safely request a safepoint
-        // without risk of deadlock (a thread waiting on the LOH mutex
-        // could not otherwise respond to the safepoint request).
+        // AllocateSegment failed (OS-level OOM).  Return to cooperative mode
+        // BEFORE HandleOomCondition (it requests a safepoint).  The retry
+        // lambda re-enters G_Loh().Allocate, which will wrap itself again.
+        threading::EnterCooperativeMode();
         struct Ctx { CHAOS_IL2CPP_SIZE s; };
         Ctx ctx{size};
         return HandleOomCondition([](void* c) -> void* {
@@ -162,21 +205,16 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
         }, &ctx, size);
     }
 
-    void* payload = reinterpret_cast<char*>(seg) + sizeof(LohSegment);
-    // Register the LOH segment payload with the card table so that
-    // DirtyCard() write barrier tracks pointer writes into LOH objects.
-    // This enables young GC Phase 1 to discover LOH→nursery references
-    // via card scanning.
-    GcRegisterHeapRange(
-        reinterpret_cast<uintptr_t>(payload),
-        reinterpret_cast<uintptr_t>(payload) + seg->payload_size);
-    std::memset(payload, 0, seg->payload_size);
-    return payload;
+    // Segment allocated under preemptive mode — switch back to cooperative.
+    threading::EnterCooperativeMode();
+
+    return seg ? reinterpret_cast<char*>(seg) + sizeof(LohSegment) : nullptr;
 }
 
 void LargeObjectHeap::Free(void* ptr) {
     if (ptr == nullptr) return;
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preemptive_guard;
+    GcSpinLockGuard lock(mutex_);
 
     LohSegment** pp = &segment_list_;
     while (*pp != nullptr) {
@@ -202,7 +240,8 @@ void LargeObjectHeap::Free(void* ptr) {
 // ======================================================================
 
 void LargeObjectHeap::UnmarkAllForTesting() {
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preemptive_guard;
+    GcSpinLockGuard lock(mutex_);
     for (auto* seg = segment_list_; seg != nullptr; seg = seg->next) {
         seg->marked.store(false, std::memory_order_relaxed);
     }
@@ -210,6 +249,9 @@ void LargeObjectHeap::UnmarkAllForTesting() {
 
 bool LargeObjectHeap::MarkObject(void* obj) {
     if (obj == nullptr) return false;
+    // MarkObject may call FindSegment which holds GcSpinLock; wrap in preemptive
+    // mode so the spin wait does not block safepoint coordination.
+    const ScopedPreemptiveMode preemptive_guard;
     auto* seg = FindSegment(obj);
     if (seg == nullptr) return false;
 
@@ -221,7 +263,8 @@ bool LargeObjectHeap::MarkObject(void* obj) {
 CHAOS_IL2CPP_SIZE LargeObjectHeap::Sweep() {
     CHAOS_IL2CPP_SIZE reclaimed = 0;
     int freed_count = 0;
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preemptive_guard;
+    GcSpinLockGuard lock(mutex_);
 
     LohSegment** pp = &segment_list_;
     while (*pp != nullptr) {
@@ -313,7 +356,8 @@ static constexpr float kLohCompactFragThreshold = 0.25f;  // 25% free = compact
 CHAOS_IL2CPP_SIZE LargeObjectHeap::Compact(std::vector<std::pair<void*, void*>>& out_relocations) {
     if (compact_mode_ == CompactMode::NONE) return 0;
 
-    std::lock_guard<std::mutex> lock(mutex_);
+    const ScopedPreemptiveMode preemptive_guard;
+    GcSpinLockGuard lock(mutex_);
 
     // Phase 1: Count live vs free segments.
     int total_segments = 0;

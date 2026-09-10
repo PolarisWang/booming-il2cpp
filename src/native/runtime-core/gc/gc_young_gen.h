@@ -37,7 +37,11 @@ static constexpr CHAOS_IL2CPP_SIZE kDefaultTlabSize = 64 * 1024;  // 64 KB
 
 /// Maximum single allocation serviced from a TLAB.
 /// Allocations larger than this bypass TLAB and go directly to old gen.
-static constexpr CHAOS_IL2CPP_SIZE kMaxTlabAlloc = 32 * 1024;  // 32 KB
+/// This is a runtime-latchable value (not constexpr): it defaults to the
+/// historical 32 KB constant but is overwritten from GcConfig().MaxTlabAlloc
+/// during GC init, so the env/API-driven CHAOS_GC_MaxTlabAlloc knob actually
+/// drives the allocation hot path.  Every consumer reads a plain machine load.
+inline CHAOS_IL2CPP_SIZE kMaxTlabAlloc = 32 * 1024;  // 32 KB
 
 // ── TLAB (Thread-Local Allocation Buffer) ────────────────────
 

@@ -28,11 +28,6 @@
 ///   eliminated.  Saves ~256 bytes of static data + dispatch overhead.
 ///   Default: ON (enabled).
 ///
-/// CHAOS_IL2CPP_GC_STRESS (=1)
-///   GC stress testing mode.  Forces frequent GCs and randomizes heap
-///   state for correctness validation.  Not intended for production use.
-///   Default: OFF (disabled).
-///
 /// CHAOS_IL2CPP_GC_LARGE_PAGES (=1)
 ///   Large page (2MB) support for GC heap allocations.  Requires
 ///   SeLockMemoryPrivilege on Windows.  Reduces TLB miss rates for

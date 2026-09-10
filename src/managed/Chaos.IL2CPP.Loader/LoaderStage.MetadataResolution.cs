@@ -95,6 +95,7 @@ public sealed partial class LoaderStage
             {
                 Name = index < parameterNames.Length ? parameterNames[index] : $"arg{index}",
                 Type = parameterType,
+                TypeSubjectId = ResolveParameterTypeSubjectId(metadataReader, typeResolver, parameterType),
                 Attributes = index < parameterFlags.Length ? parameterFlags[index] : 0,
             })
             .ToList();
@@ -511,6 +512,117 @@ public sealed partial class LoaderStage
                 typeName = string.Empty;
                 return false;
         }
+    }
+
+    /// <summary>
+    /// Resolve the full TypeSubjectId for a parameter type string by scanning the
+    /// TypeRef table in PE metadata.  The parameter type string (e.g.
+    /// "System.Data.CommandBehavior") may come from an external assembly not in the
+    /// current closure.  By walking TypeReferences, we can find the matching
+    /// TypeRef, resolve its ResolutionScope to an AssemblyRef, and build
+    /// "{assemblyName}/{namespace.typeName}" — the format needed by AOT IR lowering
+    /// for chaos_valuetype_* typedef generation.
+    ///
+    /// Primitive types and System.* single-level types return null (they never need
+    /// a chaos_valuetype_ typedef).
+    /// </summary>
+    private static string? ResolveParameterTypeSubjectId(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        string parameterType)
+    {
+        if (string.IsNullOrEmpty(parameterType))
+            return null;
+
+        // Strip array/decorator suffixes for type-resolution matching.
+        // e.g. "System.Byte[]" → "System.Byte", "System.Int32&" → "System.Int32"
+        var cleanType = parameterType;
+        var bracketIdx = cleanType.IndexOf('[');
+        var ampIdx = cleanType.IndexOf('&');
+        var stripIdx = bracketIdx >= 0 && ampIdx >= 0
+            ? Math.Min(bracketIdx, ampIdx)
+            : bracketIdx >= 0 ? bracketIdx : ampIdx >= 0 ? ampIdx : -1;
+        if (stripIdx >= 0)
+            cleanType = cleanType[..stripIdx];
+        var starIdx = cleanType.IndexOf('*');
+        if (starIdx >= 0)
+            cleanType = cleanType[..starIdx];
+
+        // Skip System.* single-level types — they are core primitives
+        // (System.Int32, System.String, etc.) that never need a chaos_valuetype_.
+        if (IsSingleLevelCoreType(cleanType))
+            return null;
+
+        // Skip generic placeholders (!!0, !0, etc.)
+        if (cleanType.StartsWith("!", StringComparison.Ordinal))
+            return null;
+
+        // Split into namespace and type name.
+        var lastDot = cleanType.LastIndexOf('.');
+        if (lastDot < 0)
+            return null; // Unqualified name — can't resolve
+
+        var ns = cleanType[..lastDot];
+        var name = cleanType[(lastDot + 1)..];
+
+        // Walk TypeRef table to find a match.
+        foreach (var typeRefHandle in metadataReader.TypeReferences)
+        {
+            var typeRef = metadataReader.GetTypeReference(typeRefHandle);
+            var refNamespace = metadataReader.GetString(typeRef.Namespace);
+            var refName = metadataReader.GetString(typeRef.Name);
+
+            if (!string.Equals(refName, name, StringComparison.Ordinal) ||
+                !string.Equals(refNamespace, ns, StringComparison.Ordinal))
+                continue;
+
+            // Resolve the ResolutionScope to find the defining assembly.
+            try
+            {
+                var assemblyName = typeResolver.ResolveAssemblyName(typeRef.ResolutionScope);
+                // System.Private.CoreLib types are always available natively;
+                // skip them to avoid unnecessary chaos_valuetype_ entries.
+                if (string.Equals(assemblyName, "System.Private.CoreLib", StringComparison.Ordinal))
+                    return null;
+                return ManagedNaming.NormalizeSubjectIdAssembly($"{assemblyName}/{cleanType}");
+            }
+            catch
+            {
+                // If resolution fails (e.g. ambiguous scope), fall through.
+                return null;
+            }
+        }
+
+        // TypeRef lookup failed — build a best-effort assembly name from the
+        // parameter type string by treating the first namespace segment as the
+        // assembly hint (e.g. "System.Data.CommandBehavior" → "System.Data").
+        // This is used only when the TypeRef is not in the current assembly's
+        // TypeRef table (e.g. forwarded types or cross-assembly references in
+        // the generic instantiation projection).
+        var firstDot = cleanType.IndexOf('.');
+        if (firstDot > 0 && firstDot != lastDot)
+        {
+            var guessedAssembly = cleanType[..firstDot];
+            return ManagedNaming.NormalizeSubjectIdAssembly($"{guessedAssembly}/{cleanType}");
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Returns true for System.* types that have at most one dot (e.g. System.Int32,
+    /// System.String, System.Object).  These are core types always present in
+    /// System.Private.CoreLib and never need chaos_valuetype_* typedefs.
+    /// </summary>
+    private static bool IsSingleLevelCoreType(string typeName)
+    {
+        if (!typeName.StartsWith("System.", StringComparison.Ordinal))
+            return false;
+        // Count dots after "System." → 0 dots = single-level core type
+        for (int i = 7; i < typeName.Length; i++)
+            if (typeName[i] == '.')
+                return false; // Multi-level: System.Data.CommandBehavior etc.
+        return true;
     }
 
     /// <summary>

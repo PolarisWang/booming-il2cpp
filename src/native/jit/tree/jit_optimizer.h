@@ -30,9 +30,9 @@ struct InlineDecision;
 struct InlineResultBuffer {
     static constexpr uint32_t kMaxInlines = 32;
 
-    uint32_t      count = 0;
-    uint32_t      callee_tokens[kMaxInlines];
-    uint32_t      snapshot_versions[kMaxInlines];
+    uint32_t count = 0;
+    uint32_t callee_tokens[kMaxInlines];
+    uint32_t snapshot_versions[kMaxInlines];
 
     void Add(uint32_t token, uint32_t version) noexcept {
         if (count < kMaxInlines) {
@@ -45,16 +45,12 @@ struct InlineResultBuffer {
 
 namespace tree {
 
-bool OptimizeWithTreeIR(
-    const std::vector<interpreter::RegisterInstruction>& instrs,
-    std::vector<interpreter::RegisterInstruction>& out_instrs,
-    bool has_seh,
-    uint32_t max_vreg = 40,
-    bool enable_inlining = false,
-    InlineResultBuffer* inline_results = nullptr) noexcept;
+bool OptimizeWithTreeIR(const std::vector<interpreter::RegisterInstruction>& instrs,
+                        std::vector<interpreter::RegisterInstruction>& out_instrs, bool has_seh, uint32_t max_vreg = 40,
+                        bool enable_inlining = false, InlineResultBuffer* inline_results = nullptr) noexcept;
 
 }
 
-}
+} // namespace chaos::il2cpp::jit
 
 #endif

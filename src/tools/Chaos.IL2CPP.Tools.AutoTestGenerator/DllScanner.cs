@@ -272,9 +272,12 @@ public sealed class DllScanner
     /// <summary>
     /// Scan a single type using a pre-loaded MetadataLoadContext and Assembly.
     /// Allows batch scanning (from ScanAll) to reuse one MLC across many types.
+    /// When mlc8/assembly8 are provided, detects which methods are net10-only
+    /// (present in the target assembly but absent from net8's System.Private.CoreLib).
     /// </summary>
     private DllScanResult ScanInContext(
-        MetadataLoadContext mlc, Assembly assembly, string assemblyName, string typeFullName)
+        MetadataLoadContext mlc, Assembly assembly, string assemblyName, string typeFullName,
+        MetadataLoadContext? mlc8 = null, Assembly? assembly8 = null)
     {
         // Read target framework from assembly metadata via MLC
         var tfm = "";
@@ -306,6 +309,17 @@ public sealed class DllScanner
             throw new InvalidOperationException(
                 $"Interface type '{typeFullName}' is not supported. " +
                 "Interface methods cannot be invoked without a concrete implementation.");
+
+        // ── Skip ref struct types ──
+        // Ref struct types (Span<T>, ReadOnlySpan<T>, MemoryExtensions+TryWriteInterpolatedStringHandler, etc.)
+        // cannot be used as generic type arguments in C# (CS9244).  They also cannot be boxed, so
+        // the fact harness's (object)(returnValue) pattern fails at compile time (CS0030).
+        // Skip the entire type rather than individual methods, since SubjectInstanceFactory.Create<T>()
+        // for the declaring type itself is invalid on a ref struct.
+        if (IsRefStructType(targetType))
+            throw new InvalidOperationException(
+                $"Ref struct type '{typeFullName}' is not supported. " +
+                "Ref struct types cannot be used as generic type arguments or boxed.");
 
         // ── Concretize generic type definitions (e.g. Stack`1 → Stack<int>) ──
         if (targetType.IsGenericTypeDefinition)
@@ -353,10 +367,44 @@ public sealed class DllScanner
         var signatures = new List<MethodSignature>();
         var skippedMethods = new List<string>();
 
-        foreach (var rawMethod in targetType.GetMethods(
-            BindingFlags.Public | BindingFlags.Static |
-            BindingFlags.Instance | BindingFlags.DeclaredOnly))
+        // ── Methods snapshot ──
+        // Materialize the method list up-front.  Some BCL static classes (e.g.
+        // System.Linq.Enumerable, System.Text.Json.JsonSerializer) expose heavily
+        // overloaded / generic methods whose canonical signatures collide under MLC's
+        // lazy token resolution.  Accessing their ReturnType/ReturnParameter etc. can
+        // throw AmbiguousMatchException.  If that aborts the whole per-type scan, the
+        // entire type is skipped and ALL its probeable methods are lost (this was the
+        // global root cause of many STANDARD families producing 0 subjects).  Catching
+        // the ambiguity per method preserves the siblings.  Enumerating into a list
+        // first also lets a GetMethods() moveNext abort be isolated from per-method
+        // processing (we still keep whatever materialized before the abort).
+        MethodInfo[] rawMethods;
+        try
         {
+            rawMethods = targetType.GetMethods(
+                BindingFlags.Public | BindingFlags.Static |
+                BindingFlags.Instance | BindingFlags.DeclaredOnly).ToArray();
+        }
+        catch (AmbiguousMatchException ex)
+        {
+            // The GetMethods() enumeration itself tripped an ambiguous overload.
+            // Cannot salvage per-method — skip the whole type with a precise reason.
+            throw new InvalidOperationException(
+                $"Type '{typeFullName}' exposes ambiguous generic overloads that MLC " +
+                $"cannot enumerate: {ex.Message}");
+        }
+
+        foreach (var rawMethod in rawMethods)
+        {
+            // ── Per-method isolation ──
+            // MLC resolves a method's return type / generic signature lazily.  For
+            // overloaded generic BCL methods the resolution can throw
+            // AmbiguousMatchException.  Isolate it so one ambiguous overload skips
+            // itself while the type's other probeable methods survive.  Without this
+            // the whole type is discarded (DllScanner.ScanAll catches at the per-type
+            // level), dropping every subject that type would otherwise produce.
+            try
+            {
             // MLC sometimes leaks interface methods on closed generic types
             // even with DeclaredOnly (e.g., List<int> appears to have MoveNext
             // from List<int>.Enumerator). Skip methods whose declaring type
@@ -747,12 +795,72 @@ public sealed class DllScanner
                 isRefStructReturn,
                 genericTypeArgs
             ));
+            } // /try per-method
+            catch (AmbiguousMatchException)
+            {
+                // MLC cannot distinguish an overloaded/generic method whose canonical
+                // signature collides with a sibling (e.g. Enumerable.Aggregate, or an
+                // overloaded instance method sharing an erased signature).  Skip this
+                // one method; the type's remaining probeable methods are still emitted.
+                skippedMethods.Add($"{rawMethod.Name} (MLC ambiguous overload — skipped)");
+            }
+            catch (Exception ex) when (ex is System.TypeLoadException ||
+                                       ex is InvalidOperationException)
+            {
+                // MLC may also fail to resolve a constructed generic's return assembly
+                // (e.g. Lookup<TKey,TElement>, KeyedCollection<TKey,TItem>) throwing
+                // TypeLoadException "Could not find assembly".  Skip that method rather
+                // than dropping the type.
+                // NOTE: AmbiguousMatchException is already caught by the catch block
+                // above (C# matches the first catch); the second block here only
+                // handles TypeLoadException/InvalidOperationException.
+                skippedMethods.Add($"{rawMethod.Name} (MLC unresolved: {ex.GetType().Name})");
+            }
+        }
+
+        // ── B4: detect net10-only methods ──
+        // When a net8 MLC is provided, walk each emitted MethodSignature and check
+        // whether the same method (declaring type + name + parameter types) exists
+        // in the net8 assembly. Methods absent from net8 are net10-only: they fail
+        // to compile when CombinedSubjects is built for net8.0, so TestEmitter wraps
+        // them in `#if NET10_0`.
+        var net10OnlyMethods = new HashSet<string>(StringComparer.Ordinal);
+        if (mlc8 is not null && assembly8 is not null)
+        {
+            foreach (var sig in signatures)
+            {
+                bool present;
+                try
+                {
+                    present = MethodExistsInNet8(mlc8, assembly8, sig);
+                }
+                catch (AmbiguousMatchException)
+                {
+                    // net8 MLC cannot disambiguate these overloads.  Treated as
+                    // present (not net10-only) so we don't wrongly guard it — the
+                    // combined build's compiler can resolve against net8 normally.
+                    present = true;
+                }
+                catch (Exception ex) when (ex is not OutOfMemoryException &&
+                                       !(ex is StackOverflowException))
+                {
+                    // Any net8 resolution failure: conservatively treat as present
+                    // (defers net10-only correctness to the compiler rather than
+                    // dropping the method).  Exclude unrecoverable system exceptions
+                    // (OOM, stack overflow) so they propagate rather than silently
+                    // masking data corruption.
+                    present = true;
+                }
+                if (!present)
+                    net10OnlyMethods.Add(sig.Name);
+            }
         }
 
         return new DllScanResult(assemblyName,
             CSharpSerializer.StripAssemblyQualification(typeFullName),
             targetType.Namespace ?? string.Empty,
-            signatures, skippedMethods, tfm);
+            signatures, skippedMethods, tfm,
+            net10OnlyMethods);
     }
 
     /// <summary>
@@ -767,13 +875,57 @@ public sealed class DllScanner
         var fullPath = Path.GetFullPath(dllPath);
         var assemblyName = Path.GetFileNameWithoutExtension(dllPath);
 
-        // Load assembly once — reuse the same MetadataLoadContext for all types
-        var probeDirs = GetProbeDirectories(fullPath);
-        var resolver = new AssemblyResolver(probeDirs);
-        using var mlc = new MetadataLoadContext(resolver, "System.Private.CoreLib");
-        var assembly = mlc.LoadFromAssemblyPath(fullPath);
+        // ── MLC #1 (net10 / primary) — existing logic ──
+        var probeDirs10 = GetProbeDirectories(fullPath);
+        var resolver10 = new AssemblyResolver(probeDirs10);
+        using var mlc10 = new MetadataLoadContext(resolver10, "System.Private.CoreLib");
+        var assembly10 = mlc10.LoadFromAssemblyPath(fullPath);
 
-        var types = ListPublicTypesCore(assembly);
+        // ── MLC #2 (net8 / comparison) — detect net10-only methods ──
+        // Use the net8 runtime's System.Private.CoreLib as the MLC host and
+        // reference assemblies for type resolution, so types/methods present
+        // only in net10+ are correctly absent. This is the core of B4 — no
+        // manual API blacklist needed.
+        using var mlc8 = CreateNet8Mlc();
+        Assembly? assembly8 = null;
+        if (mlc8 is not null)
+        {
+            // When the TARGET DLL itself is a framework assembly (e.g.
+            // System.Private.CoreLib passed straight from the net10 runtime),
+            // loading it via fullPath would hand the MLC the NET10 build — the
+            // exact thing we must NOT compare against. Always prefer loading the
+            // net8 build of the framework core as the comparison surface.
+            var net8RuntimeDir = GetNet8RuntimeDirectory();
+            var isFrameworkCore = Path.GetFileName(fullPath) == "System.Private.CoreLib.dll" ||
+                                  Path.GetFileName(fullPath) == "System.Runtime.dll";
+            if (isFrameworkCore && net8RuntimeDir is not null)
+            {
+                var net8CoreLib = Path.Combine(net8RuntimeDir, "System.Private.CoreLib.dll");
+                if (File.Exists(net8CoreLib))
+                    assembly8 = mlc8.LoadFromAssemblyPath(net8CoreLib);
+            }
+            else
+            {
+                try
+                {
+                    assembly8 = mlc8.LoadFromAssemblyPath(fullPath);
+                }
+                catch
+                {
+                    // Non-framework target may still fail to load in the net8 MLC
+                    // (e.g. a pure net10 assembly). Fall back to net8 CoreLib for
+                    // type-only resolution.
+                    if (net8RuntimeDir is not null)
+                    {
+                        var net8CoreLib = Path.Combine(net8RuntimeDir, "System.Private.CoreLib.dll");
+                        if (File.Exists(net8CoreLib))
+                            assembly8 = mlc8.LoadFromAssemblyPath(net8CoreLib);
+                    }
+                }
+            }
+        }
+
+        var types = ListPublicTypesCore(assembly10);
 
         // Parse namespace filter: comma-separated prefixes (e.g. "System.IO,System.Text")
         var nsFilters = string.IsNullOrEmpty(namespaceFilter)
@@ -808,7 +960,11 @@ public sealed class DllScanner
 
             try
             {
-                var result = ScanInContext(mlc, assembly, assemblyName, typeName);
+                // Pass the optional net8 MLC so ScanInContext can mark which
+                // methods are net10-only (present in net10, absent in net8).
+                var result = mlc8 is not null && assembly8 is not null
+                    ? ScanInContext(mlc10, assembly10, assemblyName, typeName, mlc8, assembly8)
+                    : ScanInContext(mlc10, assembly10, assemblyName, typeName);
                 if (result.Methods.Count > 0)
                 {
                     // Deduplicate: MLC may return both an open generic (concretized in
@@ -894,12 +1050,34 @@ public sealed class DllScanner
                     continue;
             }
 
-            var count = t.GetMethods(
-                BindingFlags.Public | BindingFlags.Static |
-                BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                .Count(m => m.Name is not ("get_" or "set_" or "add_" or "remove_")
-                    && !m.Name.StartsWith("op_")
-                    && !m.IsSpecialName);
+            // ── Count public methods ──
+            // MLC may throw AmbiguousMatchException when enumerating heavily
+            // overloaded/generic types (e.g. Enumerable, JsonSerializer).  The
+            // count is used only as a heuristic to skip types with no probeable
+            // methods — a missed count due to ambiguity is acceptable (the type
+            // will be discovered later by ScanInContext which has per-method
+            // isolation).  Catching here prevents the whole type from vanishing
+            // from the type list.
+            int count = 0;
+            try
+            {
+                count = t.GetMethods(
+                    BindingFlags.Public | BindingFlags.Static |
+                    BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                    .Count(m => m.Name is not ("get_" or "set_" or "add_" or "remove_")
+                        && !m.Name.StartsWith("op_")
+                        && !m.IsSpecialName);
+            }
+            catch (AmbiguousMatchException)
+            {
+                // MLC ambiguous overloads.  The type still has probeable methods
+                // — we just couldn't count them here.  Signal count=1 so the type
+                // IS included in the candidate list and ScanInContext processes it
+                // with per-method isolation.  Without this, the type vanishes from
+                // the types list and produces zero subjects (the global root cause
+                // of many STANDARD families being completely empty).
+                count = 1;
+            }
 
             if (count > 0)
                 result.Add((t.FullName ?? t.Name, count));
@@ -1543,6 +1721,7 @@ public sealed class DllScanner
     {
         "ReadOnlySpan", "ReadOnlySpan`1",
         "Span", "Span`1",
+        "TryWriteInterpolatedStringHandler",
     };
 
     /// <summary>
@@ -1736,6 +1915,118 @@ public sealed class DllScanner
         return true;
     }
 
+    /// <summary>
+    /// Check whether a method exists in the net8 framework assembly.
+    /// Uses the net8 MetadataLoadContext to resolve the declaring type and
+    /// look up the method by name. Returns false when the method is absent
+    /// from net8 (i.e. it's a net10+ exclusive API).
+    ///
+    /// Uses NAME-ONLY matching (not exact parameter types) because:
+    /// 1. Primitive type names from GetTypeName() may not round-trip through
+    ///    assembly8.GetType() (e.g. "double" vs "System.Double").
+    /// 2. Generic parameter types contain ` and < which we skip via continue,
+    ///    leaving null entries that defeat GetMethod's parameter matching.
+    /// 3. The cost of false positive (wrapping a net8 method in #if NET10_0)
+    ///    is merely missing net8 benchmark coverage for that method — the
+    ///    net10 build still includes it.  The cost of false negative (failing
+    ///    to wrap a net10-only method) is a net8 build break, which is worse.
+    /// </summary>
+    private static bool MethodExistsInNet8(
+        MetadataLoadContext mlc8, Assembly assembly8, MethodSignature sig)
+    {
+        // Resolve the declaring type in the net8 assembly.
+        // The declaring type name is in C# format (e.g.
+        // "System.Span<System.Byte>", "System.Math") which
+        // Assembly.GetType() does NOT accept for generic types.
+        // Fall back to CLR backtick format when the C# name fails.
+        var net8Type = assembly8.GetType(sig.DeclaringTypeFullName);
+        if (net8Type is null)
+        {
+            // Try CLR format: strip <...>, add backtick + arity count
+            var gaStart = sig.DeclaringTypeFullName.IndexOf('<');
+            if (gaStart >= 0)
+            {
+                var baseName = sig.DeclaringTypeFullName[..gaStart];
+                var argsPart = sig.DeclaringTypeFullName.Substring(
+                    gaStart + 1, sig.DeclaringTypeFullName.Length - gaStart - 2);
+                var arity = argsPart.Split(',').Length;
+                net8Type = assembly8.GetType($"{baseName}`{arity}");
+                if (net8Type is null)
+                    net8Type = assembly8.GetType(baseName);
+            }
+        }
+        if (net8Type is null)
+            return false;  // Type doesn't exist in net8 at all
+
+        // Name-only lookup: whether the method name exists on the type.
+        // BindingFlags: public, static+instance, declared only (no inherited).
+        var net8Method = net8Type.GetMethod(sig.Name, BindingFlags.Public | BindingFlags.Static |
+            BindingFlags.Instance | BindingFlags.DeclaredOnly);
+        return net8Method is not null;
+    }
+
+    /// <summary>
+    /// Create a MetadataLoadContext that resolves against the net8 reference
+    /// assemblies and runtime, so methods/types absent from net8 are correctly
+    /// unresolvable.  Returns null when no net8 runtime is installed.
+    /// </summary>
+    private static MetadataLoadContext? CreateNet8Mlc()
+    {
+        var net8ProbeDirs = new List<string>();
+        var net8RefPack = GetNet8RefPackDirectory();
+        if (net8RefPack is not null)
+        {
+            var refDir = Path.Combine(net8RefPack, "ref", "net8.0");
+            if (Directory.Exists(refDir))
+                net8ProbeDirs.Add(refDir);
+        }
+
+        var net8Runtime = GetNet8RuntimeDirectory();
+        if (net8Runtime is not null)
+            net8ProbeDirs.Add(net8Runtime);
+
+        if (net8ProbeDirs.Count == 0)
+            return null;
+
+        // The fallback runtime dir for the net8 MLC must point to the net8
+        // runtime, NOT the process runtime (net10). Otherwise the MLC would
+        // silently resolve against net10's System.Private.CoreLib and lose the
+        // ABI gap — the exact bug B4 exists to catch.
+        var resolver = new AssemblyResolver(net8ProbeDirs.ToArray(),
+            fallbackRuntimeDir: net8Runtime);
+        return new MetadataLoadContext(resolver, "System.Private.CoreLib");
+    }
+
+    /// <summary>
+    /// Locate the net8 runtime directory (e.g. ...Microsoft.NETCore.App\8.0.11\).
+    /// Returns null when no net8 runtime is installed.
+    /// </summary>
+    private static string? GetNet8RuntimeDirectory()
+    {
+        var sharedDir = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
+            "dotnet", "shared", "Microsoft.NETCore.App");
+        if (!Directory.Exists(sharedDir)) return null;
+        return Directory.GetDirectories(sharedDir, "8.0.*")
+            .OrderByDescending(d => d)
+            .FirstOrDefault();
+    }
+
+    /// <summary>
+    /// Locate the net8 reference-assembly pack directory
+    /// (e.g. ...Microsoft.NETCore.App.Ref\8.0.11\). Returns null when absent.
+    /// </summary>
+    private static string? GetNet8RefPackDirectory()
+    {
+        var packsDir = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
+            "dotnet", "packs", "Microsoft.NETCore.App.Ref");
+        if (!Directory.Exists(packsDir)) return null;
+        return Directory.GetDirectories(packsDir, "8.0.*")
+            .OrderByDescending(d => d)
+            .FirstOrDefault();
+    }
+
     private static string[] GetProbeDirectories(string dllPath)
     {
         var dirs = new List<string>
@@ -1794,11 +2085,13 @@ public sealed class DllScanner
     private sealed class AssemblyResolver : MetadataAssemblyResolver
     {
         private readonly string[] _probePaths;
+        private readonly string? _fallbackRuntimeDir;
         private readonly Dictionary<string, Assembly> _cache = new(StringComparer.OrdinalIgnoreCase);
 
-        public AssemblyResolver(string[] probePaths)
+        public AssemblyResolver(string[] probePaths, string? fallbackRuntimeDir = null)
         {
             _probePaths = probePaths;
+            _fallbackRuntimeDir = fallbackRuntimeDir;
         }
 
         public override Assembly? Resolve(MetadataLoadContext context, AssemblyName assemblyName)
@@ -1820,8 +2113,12 @@ public sealed class DllScanner
                 }
             }
 
-            // For core assemblies that aren't found, try the runtime directory
-            var runtimeDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
+            // For core assemblies that aren't found, try the fallback runtime dir
+            // (when scanning a specific TFM's ref pack this is that TFM's runtime
+            // dir, NOT the process runtime — otherwise the net8 MLC would silently
+            // resolve against net10's System.Private.CoreLib and lose the ABI gap,
+            // the exact bug B4 exists to catch).
+            var runtimeDir = _fallbackRuntimeDir ?? Path.GetDirectoryName(typeof(object).Assembly.Location);
             if (runtimeDir is not null)
             {
                 var runtimePath = Path.Combine(runtimeDir, $"{name}.dll");
@@ -1844,5 +2141,6 @@ public sealed record DllScanResult(
     string TypeNamespace,
     IReadOnlyList<MethodSignature> Methods,
     IReadOnlyList<string> SkippedMethods,
-    string TargetFramework
+    string TargetFramework,
+    IReadOnlySet<string> Net10OnlyMethods
 );

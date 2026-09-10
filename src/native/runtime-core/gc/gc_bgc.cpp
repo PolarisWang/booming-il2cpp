@@ -10,6 +10,7 @@
 #include "gc_gen1.h"
 #include "gc_layout.h"
 #include "gc_loh.h"
+#include "gc_config.h"
 #include "gc_numa.h"
 #include "gc_old_gen.h"
 #include "gc_region.h"
@@ -94,6 +95,23 @@ void BgcController::Stop() {
         if (finalizer_thread_.joinable())
             finalizer_thread_.join();
     }
+
+    // Review #1-test: the no-CYCLE-state cleanup below MUST run regardless of
+    // whether a BGC thread was actually running (i.e. not gated on the
+    // bgc_running_ exchange above).  A controller that was never Start()ed, or
+    // whose thread exited before Stop (phantom / mid-exit window described in
+    // PauseForYoungGc), must STILL re-assert IDLE + not-marking so no stale
+    // marking/phase flag poisons a later young-GC coordination.  These stores are
+    // idempotent when the flags are already clear.
+    //
+    // DELIBERATELY NOT clearing bgc_pause_requested_/bgc_paused_ here: those are
+    // the ACTIVE young-GC pause handshake, not cycle state.  Clearing them
+    // unconditionally could race a PauseForYoungGc that is legitimately mid-flight
+    // (wiping the ack a young GC is waiting on), which the pre-push review flagged.
+    // The handshake is torn down by the BGC thread's own exit cleanup and by the
+    // StopConcurrentMark/ResumeAfterYoungGc timeout escapes, not by Stop().
+    g_bgc_is_marking.store(false, std::memory_order_release);
+    phase_.store(BgcPhase::IDLE, std::memory_order_release);
 }
 
 void BgcController::FlushSatbBuffer(const SatbEntry* entries, uint32_t count) {
@@ -135,6 +153,20 @@ int BgcController::AllocateSatbBuffer() {
 // ── BGC cycle control ────────────────────────────────────────────────
 
 void BgcController::StartBgcCycle() {
+    // ROOT-CAUSE GUARD (task#16): a BGC cycle is meaningless without a running
+    // BGC thread.  The scheduler calls StartBgcCycle when g_bgc_enabled &&
+    // !IsBusy(), but IsBusy() only checks phase_!=IDLE — NOT bgc_running_.  In
+    // entrypoints that never call BgcController::Start() (e.g. the standalone
+    // gc_stress_test whose main() skips RuntimeInit), the scheduler can start a
+    // "phantom" cycle: phase_=CONCURRENT_MARK + g_bgc_is_marking=true with NO BGC
+    // thread alive to ack PauseForYoungGc.  Every young GC then calls
+    // PauseForYoungGc and spins on bgc_paused_ forever (the scenario-C 2/5
+    // HANG / §十 3/10 HANG).  Bail here so the phantom concurrent mark never forms.
+    if (!bgc_running_.load(std::memory_order_acquire)) {
+        CHAOS_IL2CPP_LOG_DEBUG("BGC", "start_cycle_skipped_no_thread");
+        return;
+    }
+
     // Guard against concurrent BGC start attempts.  Without this guard,
     // multiple threads calling StartBgcCycle simultaneously (e.g., when
     // 100 threads exhaust their nursery at the same time) will each call
@@ -170,6 +202,8 @@ void BgcController::StartBgcCycle() {
     // can cause the concurrent mark loop to chase garbage pointers
     // indefinitely (the "BGC hang").
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "start_cycle");
+    // GC-N11: fire BGC root-collect (STW) phase start.
+    GcFireEvent(GcEvent::BGC_ROOT_COLLECT);
     uint32_t bgc_gen = threading::RequestGlobalSafepoint();
     PopulateRootSet();
     threading::ReleaseGlobalSafepoint(bgc_gen);
@@ -182,11 +216,15 @@ void BgcController::StartBgcCycle() {
     bgc_start_requested_.store(true, std::memory_order_release);
     NotifyBgc();
 
+    // GC-N11: fire BGC concurrent-mark phase start.
+    GcFireEvent(GcEvent::BGC_CONCURRENT_MARK);
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_mark_started");
 }
 
 CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
     // Must be called under safepoint.
+    // GC-N11: fire BGC STW re-mark phase start.
+    GcFireEvent(GcEvent::BGC_STW_REMARK);
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "stw_remark_start");
 
     // Drain all thread-local SATB buffers.
@@ -217,6 +255,9 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
     // from concurrent mark phase that aren't captured by SATB alone
     // (e.g., a nursery object allocated during concurrent mark that points
     // to an unmarked old-gen object via a new field write).
+    // M5 (two-snapshot): clear each scanned card as it is consumed ("clear-as-
+    // you-scan"), so the remark is idempotent — a later young GC / next remark
+    // does not re-mark the same old-gen refs from a consumed card.
     CHAOS_IL2CPP_SIZE cards_dirty = 0;
     G_OldGen().ScanDirtyCardsInPages(
         [&](uintptr_t /*card_idx*/, uintptr_t card_start, uintptr_t card_end) {
@@ -236,6 +277,8 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
                     }
                 }
             }
+            // Consume the card (two-snapshot: clear-as-scan).
+            ClearCard(reinterpret_cast<const void*>(card_start));
         });
 
     // Drain again after dirty cards.
@@ -270,7 +313,32 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
                                 }
                             }
                         }
+                        // Consume the Gen1 card (two-snapshot clear-as-scan).
+                        ClearCard(reinterpret_cast<const void*>(card_start));
                     });
+            }
+        }
+
+        // ── In-place demoted objects as BGC roots ───────────────
+        // A gen1-owned object physically resident in an old-gen page is NOT in
+        // the gen1 region whose cards are scanned above, so the concurrent BGC
+        // sweep would otherwise reclaim it.  Re-mark every demoted object (and
+        // its transitive graph via the worker deque) so BGC sweep preserves it
+        // while it is gen1-owned (CoreCLR-aligned in-place demotion, GC-N6 #10).
+        {
+            auto& ctrl = BgcController::Instance();
+            const ScopedPreemptiveMode preempt;
+            GcSpinLockGuard lock(G_OldGen().PageMutex());
+            for (auto* page = G_OldGen().PageList(); page != nullptr; page = page->next) {
+                if (!page->in_use.load(std::memory_order_acquire)) continue;
+                for (int32_t i = 0; i < page->demoted_count.load(std::memory_order_acquire); i++) {
+                    char* obj = page->demoted[i].addr;
+                    if (obj == nullptr) continue;
+                    if (G_OldGen().BgcTryMark(obj)) {
+                        std::lock_guard<std::mutex> dl(ctrl.bgc_workers_[0].steal_mutex);
+                        ctrl.bgc_workers_[0].deque.push_back(obj);
+                    }
+                }
             }
         }
     }
@@ -290,10 +358,14 @@ void BgcController::StartConcurrentSweep() {
     bgc_start_requested_.store(true, std::memory_order_release);
     NotifyBgc();
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_sweep_started");
+    // GC-N11: fire BGC concurrent-sweep phase start.
+    GcFireEvent(GcEvent::BGC_CONCURRENT_SWEEP);
 }
 
 void BgcController::StwCompact() {
     // Must be called under safepoint.
+    // GC-N11: fire BGC STW compaction phase start.
+    GcFireEvent(GcEvent::BGC_STW_COMPACT);
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "stw_compact_start");
 
     // Run compaction using the mark bitmap left intact by BgcSweep().
@@ -602,6 +674,15 @@ void BgcController::StopConcurrentMark() {
     bgc_start_requested_.store(false, std::memory_order_release);
     phase_.store(BgcPhase::IDLE, std::memory_order_release);
     cycle_complete_.store(true, std::memory_order_release);
+    // Review #2: fully clear the young-GC pause handshake too.  A young GC that
+    // timed out waiting for the BGC to ack/clear a pause must not leave bgc_paused_
+    // =true — otherwise the NEXT PauseForYoungGc would see it as an already-acked
+    // pause and evacuate while a (not-yet-fully-stopped) BGC could still be
+    // scanning.  Reset both sides of the handshake as part of forcing BGC to a
+    // clean IDLE.  Safe: StopConcurrentMark runs under safepoint (full GC) or from
+    // the young-GC pause/resume escape, so no handshake is legitimately mid-flight.
+    bgc_pause_requested_.store(false, std::memory_order_release);
+    bgc_paused_.store(false, std::memory_order_release);
     NotifyBgc();
 
     // Free Gen1 bitmap — the full GC handles all sweeping.
@@ -700,7 +781,16 @@ void BgcController::PopulateRootSet() {
         threading::GcScanAllThreadRoots(
             [](void* root_addr, bool, void*) {
                 auto* slot = static_cast<void**>(root_addr);
-                void* ref = *slot;
+                // root_addr is a slot on ANOTHER thread's stack (conservative
+                // scan); it may sit in an ASan stack-frame redzone. Probe sheds
+                // instrumentation only for genuinely poisoned slots, keeping live
+                // root slots instrumented so a real OOB/UAF write into a root is
+                // still surfaced (review #2 / #3) — instead of unconditionally
+                // eliding for every slot and masking genuine findings.  (A prior
+                // S2 pass changed this to blanket NoCheck; that masking is not
+                // what the S2 SEGFAULT fix needed — the real fix was the self-
+                // stack RelocateRoots in gc_old_gen, which keeps NoCheck.)
+                void* ref = chaos::il2cpp::common::AsanReadPtrProbe(slot);
                 s_gte_heap++;
                 if (ref == nullptr) return;
                 if (G_OldGen().IsInOldGen(ref)) {
@@ -813,342 +903,6 @@ void BgcController::PopulateRootSet() {
     // Phase 1f: Process initial mark stack to build transitive root closure.
     // This runs under safepoint, so it's fast (no concurrent interference).
     DrainWorkerDeque(0, 0);
-}
-
-// ── BGC thread main ──────────────────────────────────────────────────
-
-void BgcController::BgcThreadMain() {
-    CHAOS_IL2CPP_LOG_DEBUG("BGC", "thread_started");
-
-    // Register as a managed thread in preemptive mode.
-    // This makes the BGC thread visible to EnumerateThreads for diagnostics
-    // and allows the safepoint initiator to wait for BGC to acknowledge
-    // before performing STW work (e.g., ForceComplete drain).
-    // Preemptive mode means BGC won't be blocked spinning during safepoints.
-    int bgc_thread_id = threading::AllocateThreadId();
-    threading::RegisterThread(bgc_thread_id, nullptr);
-    threading::EnterPreemptiveMode();
-
-    // Signal Start() that BGC thread startup is complete.
-    bgc_thread_started_.store(true, std::memory_order_release);
-
-    while (bgc_running_.load(std::memory_order_acquire)) {
-        // Wait for a start request.  Uses condition_variable for event-driven
-        // wake-up (P1-4: replaces sleep_for polling).
-        {
-            std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
-            bgc_cv_.wait(lock, [this]() {
-                return bgc_start_requested_.load(std::memory_order_acquire) ||
-                       !bgc_running_.load(std::memory_order_acquire);
-            });
-        }
-        if (!bgc_start_requested_.load(std::memory_order_acquire))
-            continue;
-
-        // ── Phase 2: Concurrent Mark ──────────────────────────────
-        // The root set was already populated by StartBgcCycle under
-        // safepoint.  Now trace transitively while mutators run.
-        // ──────────────────────────────────────────────────────────
-
-        if (phase_.load(std::memory_order_acquire) == BgcPhase::CONCURRENT_MARK) {
-            CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_mark_begin");
-
-            // Spawn parallel workers for mark stack processing.
-            // Uses per-worker deques with work-stealing (P1-1):
-            // - Worker 0 = BGC thread (coordinator)
-            // - Workers 1..N = parallel mark workers with steal support
-            int n_workers = SpawnParallelMarkWorkers();
-            CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "parallel_workers spawned={0}",
-                static_cast<unsigned>(n_workers));
-
-            constexpr CHAOS_IL2CPP_SIZE kBatchSize = 64;
-            int idle_rounds = 0;
-            bool freeze_initiated = false;
-            auto slice_start = std::chrono::steady_clock::now();
-
-            while (true) {
-                // ── BGC-YoungGC coordinated pause (G-3) ──
-                // Young GC requests pause via bgc_pause_requested_ before
-                // evacuating the nursery.  BGC acknowledges via bgc_paused_
-                // and stops parallel workers (draining all deques) to avoid
-                // races with forwarding pointer writes.
-                if (bgc_pause_requested_.load(std::memory_order_acquire)) [[unlikely]] {
-                    // Stop parallel workers before pausing so they don't race
-                    // with young GC evacuation.  All deques are drained on stop.
-                    StopParallelMarkWorkers();
-                    bgc_paused_.store(true, std::memory_order_release);
-                    // Spin-wait until the pause is lifted (young GC done).
-                    while (bgc_pause_requested_.load(std::memory_order_acquire)) {
-                        std::this_thread::yield();
-                    }
-                    bgc_paused_.store(false, std::memory_order_release);
-                    CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_released");
-                }
-
-                bool progressed = false;
-
-                // Process from worker 0's deque (BGC thread's own work).
-                if (DrainWorkerDeque(0, kBatchSize) > 0) {
-                    progressed = true;
-                }
-
-                // Drain global SATB queue — pushes newly-marked entries to
-                // worker 0's deque where they'll be picked up next round.
-                if (DrainGlobalSatbQueue() > 0) {
-                    progressed = true;
-                }
-
-                // If idle, sweep all workers' deques (coordinator drain).
-                // The BGC thread helps idle workers by draining their
-                // deques, acting as a natural load-balancing mechanism
-                // that complements worker-initiated stealing.
-                if (!progressed) {
-                    for (int i = 1; i < n_workers; i++) {
-                        if (DrainWorkerDeque(i, kBatchSize) > 0) {
-                            progressed = true;
-                            break;  // Found work — resume normal loop.
-                        }
-                    }
-                }
-
-                if (progressed) {
-                    idle_rounds = 0;
-                    freeze_initiated = false;
-                    // Yield to avoid starving mutators.
-                    std::this_thread::yield();
-
-                    // Incremental marking: if we've exceeded the time budget,
-                    // yield CPU to mutators by sleeping for the interval.
-                    // NotifyBgc() from SATB flushes will wake us early.
-                    auto slice_elapsed = std::chrono::steady_clock::now() - slice_start;
-                    if (slice_elapsed >= kMarkSliceBudget) {
-                        slice_start = std::chrono::steady_clock::now();
-                        std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
-                        bgc_cv_.wait_for(lock, kMarkSliceInterval);
-                    }
-                } else {
-                    idle_rounds++;
-                    // After several idle rounds with no progress,
-                    // initiate SATB freeze protocol (CoreCLR-aligned
-                    // convergence guarantee).  Ask all mutators to flush
-                    // their SATB buffers and stop submitting new entries,
-                    // then do a final drain.  If new work appears after
-                    // the freeze+drain, unfreeze and continue.
-                    if (idle_rounds > 20 && !freeze_initiated) {
-                        freeze_initiated = true;
-                        CHAOS_IL2CPP_LOG_DEBUG("BGC", "satb_freeze_initiating");
-
-                        int n_ack;
-                        {
-                            std::lock_guard<std::mutex> lock(satb_registry_mutex_);
-                            n_ack = registered_satb_count_;
-                        }
-                        satb_freeze_remaining_.store(n_ack, std::memory_order_release);
-                        satb_freeze_requested_.store(true, std::memory_order_release);
-
-                        constexpr int kFreezeSpinLimit = 100000;
-                        for (int f = 0; f < kFreezeSpinLimit; f++) {
-                            if (satb_freeze_remaining_.load(std::memory_order_acquire) <= 0)
-                                break;
-                            if (f < 1024) {
-                                std::this_thread::yield();
-                            } else {
-                                std::this_thread::sleep_for(std::chrono::microseconds(100));
-                            }
-                        }
-
-                        satb_freeze_requested_.store(false, std::memory_order_release);
-
-                        DrainGlobalSatbQueue();
-                        for (int i = 0; i < n_workers; i++) {
-                            DrainWorkerDeque(i, 0);
-                        }
-
-                        bool after_freeze_progress = false;
-                        for (int i = 0; i < n_workers; i++) {
-                            std::lock_guard<std::mutex> lock(bgc_workers_[i].steal_mutex);
-                            if (!bgc_workers_[i].deque.empty()) {
-                                after_freeze_progress = true;
-                                break;
-                            }
-                        }
-                        if (!after_freeze_progress) {
-                            bool satb_empty;
-                            {
-                                std::lock_guard<std::mutex> lock(global_satb_mutex_);
-                                satb_empty = global_satb_.empty();
-                            }
-                            if (satb_empty) {
-                                CHAOS_IL2CPP_LOG_DEBUG("BGC", "satb_freeze_converged");
-                                break;
-                            }
-                        }
-
-                        // New work appeared after freeze — unfreeze and continue.
-                        idle_rounds = 0;
-                        freeze_initiated = false;
-                        CHAOS_IL2CPP_LOG_DEBUG("BGC", "satb_freeze_unfrozen_new_work");
-                        continue;
-                    }
-
-                    // Check if we're truly done (all deques + SATB empty).
-                    bool all_done = true;
-                    for (int i = 0; i < n_workers; i++) {
-                        std::lock_guard<std::mutex> lock(bgc_workers_[i].steal_mutex);
-                        if (!bgc_workers_[i].deque.empty()) {
-                            all_done = false;
-                            break;
-                        }
-                    }
-
-                    bool satb_done;
-                    {
-                        std::lock_guard<std::mutex> lock(global_satb_mutex_);
-                        satb_done = global_satb_.empty();
-                    }
-
-                    if (all_done && satb_done) {
-                        break;  // Concurrent mark complete.
-                    }
-
-                    // Brief sleep to avoid busy-waiting.
-                    if (idle_rounds > 10) {
-                        std::this_thread::sleep_for(std::chrono::microseconds(100));
-                    } else {
-                        std::this_thread::yield();
-                    }
-
-                    // Safety valve after ~10s idle with no convergence.
-                    if (idle_rounds > 100000) {
-                        CHAOS_IL2CPP_LOG_WARN("BGC", "concurrent_mark_convergence_timeout");
-                        break;
-                    }
-                }
-
-                // Check if forced to stop.
-                if (!bgc_running_.load(std::memory_order_acquire))
-                    return;
-                if (phase_.load(std::memory_order_acquire) != BgcPhase::CONCURRENT_MARK)
-                    break;
-            }
-
-            // Signal parallel workers to stop and join them.
-            StopParallelMarkWorkers();
-
-            // Safety drain: any work left in deques after workers stopped.
-            for (int i = 0; i < n_workers; i++) {
-                DrainWorkerDeque(i, 0);
-            }
-
-            CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_mark_complete");
-        }
-
-        // Signal: concurrent mark done, waiting for STW re-mark.
-        if (phase_.load(std::memory_order_acquire) == BgcPhase::CONCURRENT_MARK) {
-            phase_.store(BgcPhase::REMARK_NEEDED, std::memory_order_release);
-        }
-
-        // BGC thread waits while STW re-mark happens (executed by the
-        // requesting thread under safepoint).  The phase will be set to
-        // CONCURRENT_SWEEP or FINISHED by the scheduler after re-mark.
-        {
-            std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
-            bgc_cv_.wait(lock, [this]() {
-                auto p = phase_.load(std::memory_order_acquire);
-                return p != BgcPhase::REMARK_NEEDED ||
-                       !bgc_running_.load(std::memory_order_acquire);
-            });
-        }
-
-        // ── Phase 3: Concurrent Sweep ─────────────────────────────
-        if (phase_.load(std::memory_order_acquire) == BgcPhase::CONCURRENT_SWEEP) {
-            CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_sweep_begin");
-
-            // Sweep pages uncovered by the mark bitmap.
-            // Each page is swept under the old-gen mutex, with yields between
-            // pages so that mutator allocations are not starved.
-            G_OldGen().BgcSweep();
-
-            // Collect dead finalizable objects using the mark bitmap
-            // (still valid because BgcSweep preserves it via clear_bitmap=false).
-            // The bitmap will be cleared by StwCompact() later, so we must
-            // capture the list now.
-            bgc_dead_finalizables_ = G_OldGen().CollectDeadFinalizables();
-            if (!bgc_dead_finalizables_.empty()) {
-                CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "dead_finalizables count={0}",
-                    static_cast<unsigned long long>(bgc_dead_finalizables_.size()));
-            }
-
-            // Collect dead weak handles while the mark bitmap is still valid.
-            // These will be nulled after finalization so that WeakTrackResurrection
-            // semantics are preserved (resurrected objects keep their handles).
-            bgc_dead_weak_handles_.clear();
-            CollectDeadWeakHandlesForBgc();
-            CHAOS_IL2CPP_LOG_DEBUG("BGC", "concurrent_sweep_complete");
-        }
-
-        // ── Phase 4: Signal compaction needed ────────────────────
-        if (phase_.load(std::memory_order_acquire) == BgcPhase::CONCURRENT_SWEEP) {
-            phase_.store(BgcPhase::COMPACT_NEEDED, std::memory_order_release);
-            CHAOS_IL2CPP_LOG_DEBUG("BGC", "compact_needed_waiting");
-        }
-
-        {
-            std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
-            bgc_cv_.wait(lock, [this]() {
-                auto p = phase_.load(std::memory_order_acquire);
-                return p != BgcPhase::COMPACT_NEEDED ||
-                       !bgc_running_.load(std::memory_order_acquire);
-            });
-        }
-
-        // ── Finish ────────────────────────────────────────────────
-        if (phase_.load(std::memory_order_acquire) != BgcPhase::FINISHED) {
-            phase_.store(BgcPhase::FINISHED, std::memory_order_release);
-        }
-
-        // ── Publish finalization work to finalizer thread ────────────
-        // Run BEFORE cycle_complete_ so that chaos_gc_wait_for_pending_finalizers
-        // can observe the pending batch and wait for it to drain.
-        if (!bgc_dead_finalizables_.empty() || !bgc_dead_weak_handles_.empty()) {
-            CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "publish_finalization finalizers={0} weak={1}",
-                static_cast<unsigned long long>(bgc_dead_finalizables_.size()),
-                static_cast<unsigned long long>(bgc_dead_weak_handles_.size()));
-            PublishFinalizationWork(bgc_dead_finalizables_, bgc_dead_weak_handles_);
-            bgc_dead_finalizables_.clear();
-            bgc_dead_weak_handles_.clear();
-        }
-
-        // Reset for next cycle.
-        if (phase_.load(std::memory_order_acquire) == BgcPhase::FINISHED) {
-            // Free Gen1 bitmap before signaling completion so that
-            // WaitForCycleComplete() observes a clean state.
-            FreeGen1MarkBitmap();
-            g_bgc_is_marking.store(false, std::memory_order_release);
-            bgc_start_requested_.store(false, std::memory_order_release);
-            phase_.store(BgcPhase::IDLE, std::memory_order_release);
-
-            // Replenish the emergency reserve before signaling completion,
-            // so the reserve is ready for the next cycle's allocations.
-            G_OldGen().ReplenishEmergencyReserve();
-
-            cycle_complete_.store(true, std::memory_order_release);
-            NotifyBgc();
-            CHAOS_IL2CPP_LOG_DEBUG("BGC", "cycle_finished");
-        }
-
-        // ── BGC dependent handle processing ─────────────────────────
-        {
-            int kept = GcProcessDependentHandlesAfterBgc();
-            if (kept > 0) {
-                CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "dep_handles_kept={0}",
-                    static_cast<unsigned>(kept));
-            }
-        }
-    }  // end while(bgc_running_)
-
-    threading::UnregisterThread();
-    CHAOS_IL2CPP_LOG_DEBUG("BGC", "thread_stopped");
 }
 
 // ── Dedicated finalizer thread ──────────────────────────────────────
@@ -1266,12 +1020,77 @@ void BgcController::WaitForFinalizerDrain() noexcept {
 
 void BgcController::PauseForYoungGc() noexcept {
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_requested");
-    bgc_pause_requested_.store(true, std::memory_order_release);
-    // Wait for BGC thread to acknowledge (bgc_paused_ == true).
-    while (!bgc_paused_.load(std::memory_order_acquire)) {
-        std::this_thread::yield();
+
+    // S3-A fast-path (CoreCLR background.cpp:3233 对照): if no BGC concurrent mark
+    // is currently ACTIVE (g_bgc_is_marking==false — the precise "is a scan
+    // running" signal), there is nothing to coordinate with.  Skipping the pause is
+    // correct and lets a young GC that never started a BGC (unit fixture / BGC
+    // disabled) proceed without spinning.
+    //
+    // KEY (review #1): do NOT key this on bgc_running_.  Stop() clears bgc_running_
+    // (gc_bgc.cpp:85 exchange) BEFORE the exiting BGC thread clears g_bgc_is_marking
+    // during its exit cleanup.  In that window a young GC reading bgc_running_==false
+    // would skip coordination while the exiting thread could still be scanning a work
+    // deque it had already started — a concurrent mark vs nursery-evacuation race.
+    // g_bgc_is_marking is only set true under the safepoint inside StartBgcCycle
+    // (which itself requires a running thread, line 153), so "marking==true ⟹ a
+    // coordination partner exists / is required" holds unconditionally.
+    if (!g_bgc_is_marking.load(std::memory_order_acquire)) {
+        // Safety net (review #3): even with no mark currently active, a BGC thread
+        // that marked once then exited could have left stale nursery entries in a
+        // worker's work deque.  Those would later be treated as roots pointing at
+        // already-moved addresses (dangling).  Drain unconditionally so neither the
+        // no-mark fast path nor the full wait path can leak a stale nursery root.
+        DrainNurseryFromWorkDeques();
+        CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_skipped_no_active_mark");
+        return;
     }
-    CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_paused_acknowledged");
+
+    bgc_pause_requested_.store(true, std::memory_order_release);
+    // M5-1: wake the BGC so it can ack even if it is parked in a phase-wait
+    // (REMARK_NEEDED / COMPACT_NEEDED) — otherwise the wait predicate never
+    // re-evaluates and the young GC spins on bgc_paused_ forever.
+    bgc_cv_.notify_all();
+
+    // S3-A bounded wait (CoreCLR wait_for_gc_done(timeOut) 对照): wait for the
+    // BGC ack (bgc_paused_==true) up to a deadline, then give up.  If the ack is
+    // never received the BGC is either dead or wedged; instead of spinning
+    // forever (the L2-coordination deadlock family), force the BGC out so the
+    // young GC can proceed safely without racing a possibly-still-scanning BGC.
+    using namespace std::chrono;
+    constexpr auto kPauseTimeout = milliseconds(2000);
+    constexpr auto kPauseSleep   = microseconds(500);
+    auto deadline = steady_clock::now() + kPauseTimeout;
+    int log_count = 0;
+    bool acked = false;
+    while (!bgc_paused_.load(std::memory_order_acquire) &&
+           steady_clock::now() < deadline) {
+        auto remaining = duration_cast<milliseconds>(deadline - steady_clock::now()).count();
+        if (remaining % 500 == 0 && log_count < 4) {  // throttled observability
+            CHAOS_IL2CPP_LOG_WARN_M("BGC",
+                "PauseForYoungGc waiting ack — phase={0} bgc_running={1} "
+                "bgc_paused={2} bgc_marking={3}",
+                static_cast<int>(phase_.load(std::memory_order_acquire)),
+                static_cast<int>(bgc_running_.load(std::memory_order_acquire)),
+                static_cast<int>(bgc_paused_.load(std::memory_order_acquire)),
+                static_cast<int>(g_bgc_is_marking.load(std::memory_order_acquire)));
+            ++log_count;
+        }
+        std::this_thread::sleep_for(kPauseSleep);
+    }
+    acked = bgc_paused_.load(std::memory_order_acquire);
+    if (acked) {
+        CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_paused_acknowledged");
+    } else {
+        // Deadline hit with no ack: the BGC is dead or wedged.  Force it out so
+        // the young GC proceeds without a concurrent scan racing its evacuation.
+        // StopConcurrentMark (safe under safepoint) drains workers + resets to
+        // IDLE — CoreCLR's "revert to blocking" escape, bounded + deterministic.
+        CHAOS_IL2CPP_LOG_WARN("BGC", "young_gc_pause_timeout — force-stopping BGC");
+        StopConcurrentMark();
+        bgc_pause_requested_.store(false, std::memory_order_release);
+    }
+
     // Drain any stale nursery entries from work deques as a safety net.
     DrainNurseryFromWorkDeques();
 }
@@ -1279,9 +1098,29 @@ void BgcController::PauseForYoungGc() noexcept {
 void BgcController::ResumeAfterYoungGc() noexcept {
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_resume");
     bgc_pause_requested_.store(false, std::memory_order_release);
-    // Wait for BGC thread to clear bgc_paused_ (acknowledge resume).
-    while (bgc_paused_.load(std::memory_order_acquire)) {
-        std::this_thread::yield();
+    // M5-1: wake the BGC so it can clear its pause-ack and continue, even if it
+    // is parked in a phase-wait.
+    bgc_cv_.notify_all();
+    // S3-A bounded wait: the BGC must clear bgc_paused_ (ack resume).  Bound it
+    // like the pause side — a wedged BGC must not strand the young GC forever.
+    using namespace std::chrono;
+    constexpr auto kResumeTimeout = milliseconds(2000);
+    auto deadline = steady_clock::now() + kResumeTimeout;
+    while (bgc_paused_.load(std::memory_order_acquire) &&
+           steady_clock::now() < deadline) {
+        std::this_thread::sleep_for(microseconds(500));
+    }
+    if (bgc_paused_.load(std::memory_order_acquire)) {
+        // BGC didn't clear the pause-ack in time.  Force it to a clean IDLE so
+        // the subsequent young GC phases (which assume BGC is not concurrently
+        // scanning) hold.  Same escape as the pause side.  Review #2: explicitly
+        // clear the pause-ack here too — StopConcurrentMark early-returns when
+        // phase_ is already IDLE, so relying on it alone could leave bgc_paused_
+        // =true to poison the NEXT PauseForYoungGc as a false "already acked".
+        CHAOS_IL2CPP_LOG_WARN("BGC", "young_gc_resume_timeout — force-stopping BGC");
+        StopConcurrentMark();
+        bgc_pause_requested_.store(false, std::memory_order_release);
+        bgc_paused_.store(false, std::memory_order_release);
     }
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_resumed");
 }
@@ -1305,300 +1144,6 @@ void BgcController::DrainNurseryFromWorkDeques() noexcept {
         }
     }
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "nursery_deque_drain_done");
-}
-
-// ── Parallel mark workers ──────────────────────────────────────────
-
-int BgcController::SpawnParallelMarkWorkers() {
-    int hw = static_cast<int>(std::thread::hardware_concurrency());
-    int n_workers = std::min(hw, kMaxBgcWorkers);
-    if (n_workers < 2) return 1;  // No benefit from parallel.
-
-    // Initialize per-worker deques (worker 0 = BGC thread).
-    for (int i = 0; i < n_workers; i++) {
-        std::lock_guard<std::mutex> lock(bgc_workers_[i].steal_mutex);
-        bgc_workers_[i].deque.clear();
-    }
-    bgc_worker_count_.store(n_workers, std::memory_order_release);
-
-    // Spawn N-1 additional workers (the BGC thread itself is worker 0).
-    bgc_parallel_done_.store(false, std::memory_order_release);
-    bgc_parallel_workers_.clear();
-
-    // Bind worker 0 (BGC thread) to NUMA node 0; spawned workers bind in BgcWorkerMain.
-    int numa_count = GcNumaNodeCount();
-    if (numa_count > 1) {
-        GcNumaBindThread(0);
-    }
-
-    for (int i = 1; i < n_workers; i++) {
-        bgc_parallel_workers_.emplace_back(&BgcController::BgcWorkerMain, this, i);
-    }
-    return n_workers;
-}
-
-void BgcController::StopParallelMarkWorkers() {
-    // Guards against concurrent calls from ForceComplete and BgcThreadMain.
-    // Without this, both can join the same worker — the first succeeds and
-    // CloseHandle's the handle, the second fails with ESRCH ("no such process").
-    std::lock_guard<std::mutex> lock(stop_workers_mutex_);
-
-    bgc_parallel_done_.store(true, std::memory_order_release);
-    for (auto& w : bgc_parallel_workers_) {
-        if (w.joinable()) w.join();
-    }
-    bgc_parallel_workers_.clear();
-    bgc_worker_count_.store(0, std::memory_order_relaxed);
-}
-
-namespace {
-    /// Scan pointer slots of a grey object and collect newly-marked children.
-    /// Does NOT acquire any lock — results are stored in @a out_children for
-    /// batch push by the caller.
-    void ScanObjectChildren(void* obj, std::vector<void*>& out_children) {
-        const void* type_info_ptr = *static_cast<const void* const*>(obj);
-        if (type_info_ptr == nullptr) return;
-
-        auto& layout_registry = GcLayoutRegistry::Instance();
-        if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) return;
-
-        uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
-        const auto* layout = layout_registry.Lookup(stable_id);
-
-        if (layout == nullptr) {
-            // Conservative fallback: type_info was recognized (valid pointer)
-            // but no GcLayout is registered for this stable_id.  Scan all
-            // pointer-aligned slots in the object and mark any old-gen refs.
-            // This matches the same conservative path in DrainMarkStack.
-            auto* page = G_OldGen().FindPage(obj);
-            if (page == nullptr) return;
-            auto obj_addr = reinterpret_cast<uintptr_t>(obj);
-            auto payload_start = reinterpret_cast<uintptr_t>(page->Payload());
-            CHAOS_IL2CPP_SIZE offset = static_cast<CHAOS_IL2CPP_SIZE>(obj_addr - payload_start);
-            CHAOS_IL2CPP_SIZE payload_remaining = page->payload_size - offset;
-            CHAOS_IL2CPP_SIZE max_size = kOldGenSizeClasses[kOldGenNumSizeClasses - 1];
-            if (payload_remaining < max_size) max_size = payload_remaining;
-
-            for (CHAOS_IL2CPP_SIZE slot_off = 0;
-                 slot_off + sizeof(void*) <= max_size;
-                 slot_off += sizeof(void*)) {
-                auto* slot = reinterpret_cast<void**>(static_cast<char*>(obj) + slot_off);
-                void* ref = *slot;
-                if (ref == nullptr) continue;
-                if (G_OldGen().IsInOldGen(ref)) {
-                    if (G_OldGen().BgcTryMark(ref)) {
-                        out_children.push_back(ref);
-                    }
-                } else if (G_Loh().IsInLOH(ref)) {
-                    if (G_Loh().MarkObject(ref)) {
-                        out_children.push_back(ref);
-                    }
-                }
-                // GEN1_GEN2 scope: mark live Gen1 refs during transitive
-                // tracing.  No-op when Gen1 bitmap is not allocated.
-                BgcController::Instance().BgcTryMarkGen1(ref);
-            }
-            return;
-        }
-
-        if (layout->pointer_count == 0) return;
-
-        uintptr_t obj_base = reinterpret_cast<uintptr_t>(obj);
-        for (uint16_t i = 0; i < layout->pointer_count; i++) {
-            uint16_t offset = layout->pointer_offsets[i].offset;
-            auto* slot = reinterpret_cast<void**>(obj_base + offset);
-            void* ref = *slot;
-            if (ref == nullptr) continue;
-            if (G_OldGen().IsInOldGen(ref)) {
-                if (G_OldGen().BgcTryMark(ref)) {
-                    out_children.push_back(ref);
-                }
-            } else if (G_Loh().IsInLOH(ref)) {
-                if (G_Loh().MarkObject(ref)) {
-                    out_children.push_back(ref);
-                }
-            }
-            // GEN1_GEN2 scope: mark live Gen1 refs during transitive
-            // tracing.  No-op when Gen1 bitmap is not allocated.
-            BgcController::Instance().BgcTryMarkGen1(ref);
-        }
-    }
-}
-
-void BgcController::BgcWorkerMain(int worker_idx) {
-    // Bind to NUMA node for locality.
-    int numa_count = GcNumaNodeCount();
-    if (numa_count > 1) {
-        GcNumaBindThread(worker_idx % numa_count);
-    }
-
-    // Worker loop: per-worker deque with work-stealing (P1-1).
-    // Each worker pops from its own deque (under steal_mutex).
-    // When empty, attempts up to 3 random steals from other workers.
-    // Newly-marked children are pushed to the worker's own deque.
-    auto& ws = bgc_workers_[worker_idx];
-
-    // Simple deterministic PRNG seed for random victim selection.
-    // Not thread_local (MSVC rejects capturing thread_local in lambdas).
-    // Simple linear congruential is sufficient — we don't need cryptographic
-    // randomness, just distributed victim selection.
-    uint32_t prng = static_cast<uint32_t>(
-        reinterpret_cast<uintptr_t>(&ws) ^
-        static_cast<uint32_t>(worker_idx * 0x9E3779B9));
-
-    while (!bgc_parallel_done_.load(std::memory_order_acquire)) {
-        void* obj = nullptr;
-
-        // Phase 1: Try local pop from own deque.
-        {
-            std::lock_guard<std::mutex> lock(ws.steal_mutex);
-            if (!ws.deque.empty()) {
-                obj = ws.deque.back();
-                ws.deque.pop_back();
-            }
-        }
-
-        // Phase 2: If local empty, try steal (up to 3 random attempts).
-        if (obj == nullptr) {
-            int n = bgc_worker_count_.load(std::memory_order_acquire);
-            for (int attempt = 0; attempt < 3 && n > 1; attempt++) {
-                // Simple LCG instead of XorShift32 (avoids thread_local capture issues on MSVC).
-                prng = prng * 1103515245u + 12345u;
-                int victim = static_cast<int>(prng % n);
-                if (victim == worker_idx) continue;
-
-                auto& vw = bgc_workers_[victim];
-                std::lock_guard<std::mutex> lock(vw.steal_mutex);
-                if (!vw.deque.empty()) {
-                    // Steal from front (oldest work) — victim continues
-                    // from back (newest), preserving temporal locality.
-                    obj = vw.deque.front();
-                    vw.deque.erase(vw.deque.begin());
-                    break;
-                }
-            }
-        }
-
-        if (obj == nullptr) {
-            // Brief sleep to avoid starving mutators when no work available.
-            // CoreCLR workers use a condition variable; we use a short sleep
-            // to avoid rebuilding the entire wake-up protocol.
-            std::this_thread::sleep_for(std::chrono::microseconds(50));
-            continue;
-        }
-
-        // Process object: scan children, push to own deque.
-        std::vector<void*> children;
-        ScanObjectChildren(obj, children);
-        if (!children.empty()) {
-            std::lock_guard<std::mutex> lock(ws.steal_mutex);
-            ws.deque.insert(ws.deque.end(), children.begin(), children.end());
-        }
-    }
-}
-
-// ── Grey object processing ───────────────────────────────────────────
-
-void BgcController::ProcessGreyObject(void* obj) {
-    std::vector<void*> children;
-    ScanObjectChildren(obj, children);
-    if (!children.empty()) {
-        std::lock_guard<std::mutex> lock(bgc_workers_[0].steal_mutex);
-        bgc_workers_[0].deque.insert(bgc_workers_[0].deque.end(),
-                                     children.begin(), children.end());
-    }
-}
-
-// ── Drain helpers ────────────────────────────────────────────────────
-
-CHAOS_IL2CPP_SIZE BgcController::DrainWorkerDeque(int idx, CHAOS_IL2CPP_SIZE batch_limit) {
-    /// Drain up to @a batch_limit entries from worker @a idx's deque.
-    /// Processes each entry and pushes newly-marked children to the same deque.
-    CHAOS_IL2CPP_SIZE count = 0;
-    auto& ws = bgc_workers_[idx];
-    std::vector<void*> batch;
-    std::vector<void*> children;
-    batch.reserve(kBgcPopBatchSize * 2);
-    children.reserve(kBgcPopBatchSize * 2);
-
-    while (true) {
-        batch.clear();
-        children.clear();
-        {
-            std::lock_guard<std::mutex> lock(ws.steal_mutex);
-            int n = 0;
-            while (!ws.deque.empty() && n < kBgcPopBatchSize) {
-                batch.push_back(ws.deque.back());
-                ws.deque.pop_back();
-                ++n;
-            }
-        }
-
-        if (batch.empty()) break;
-
-        for (void* obj : batch) {
-            ScanObjectChildren(obj, children);
-            ++count;
-        }
-
-        if (!children.empty()) {
-            std::lock_guard<std::mutex> lock(ws.steal_mutex);
-            ws.deque.insert(ws.deque.end(), children.begin(), children.end());
-        }
-
-        if (batch_limit > 0 && count >= batch_limit) break;
-    }
-    return count;
-}
-
-CHAOS_IL2CPP_SIZE BgcController::DrainGlobalSatbQueue() {
-    CHAOS_IL2CPP_SIZE count = 0;
-    auto& w0 = bgc_workers_[0];
-    while (true) {
-        SatbEntry entry;
-        {
-            std::lock_guard<std::mutex> lock(global_satb_mutex_);
-            if (global_satb_.empty()) break;
-            entry = global_satb_.back();
-            global_satb_.pop_back();
-        }
-        if (entry != nullptr) {
-            if (G_OldGen().IsInOldGen(entry)) {
-                if (G_OldGen().BgcTryMark(entry)) {
-                    std::lock_guard<std::mutex> lock(w0.steal_mutex);
-                    w0.deque.push_back(entry);
-                }
-            } else if (G_Loh().IsInLOH(entry)) {
-                if (G_Loh().MarkObject(entry)) {
-                    std::lock_guard<std::mutex> lock(w0.steal_mutex);
-                    w0.deque.push_back(entry);
-                }
-            }
-            // GEN1_GEN2 scope: mark live Gen1 SATB entries in the BGC
-            // Gen1 bitmap.  No-op when Gen1 bitmap is not allocated.
-            BgcTryMarkGen1(entry);
-        }
-        ++count;
-    }
-    return count;
-}
-
-CHAOS_IL2CPP_SIZE BgcController::DrainAllTlsSatbBuffers() {
-    // SAFE ONLY UNDER SAFEPOINT.
-    // Drain all registered thread-local SATB buffers.
-    // During STW re-mark, all threads are paused, so their TLS is stable.
-    CHAOS_IL2CPP_SIZE total = 0;
-    std::lock_guard<std::mutex> lock(satb_registry_mutex_);
-    for (int i = 0; i < registered_satb_count_; i++) {
-        auto* buf = registered_satb_buffers_[i];
-        if (buf == nullptr) continue;
-        uint32_t count = buf->count.load(std::memory_order_acquire);
-        if (count == 0) continue;
-        FlushSatbBuffer(buf->entries, count);
-        buf->count.store(0, std::memory_order_release);
-        total += count;
-    }
-    return total;
 }
 
 // ── Gen1 concurrent mark bitmap ───────────────────────────────────

@@ -8,24 +8,58 @@
 #include "core/gc_alloc_stubs.h"
 #include "gc_bgc.h"
 #include "gc_coordinator.h"
+#include "gc_diagnostics.h"
 #include "gc_etw.h"
 #include "gc_events.h"
 #include "gc_gen1.h"
 #include "gc_heap.h"
+#include "gc_heap_manager.h"   // M3A-1: per-heap manager lifecycle
 #include "gc_layout.h"
 #include "gc_numa.h"
+#include "gc_config.h"
 #include "gc_old_gen.h"
 #include "gc_loh.h"
+#include "gc_parallel_mark.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
-#include "gc_stress.h"
 #include "gc_api.h"
+#include "gc_helpers.h"
 #include "gc_young_collector.h"
 #include "memory_domain.h"
 #include "thread_state.h"
 #include "profile_stats.h"
 
 #include <chaos/pal/pal_mem.h>
+
+namespace chaos::il2cpp::runtime_core {
+
+// ── Region-to-generation skewed table  ───────────────────────
+// Global so the inline GetRegionGen() (write-path fast lookup) can read it
+// without invoking RegionManager.  Lazy-grown to cover the highest seen
+// region address.  Guarded by RegionManager::mutex_ (allocated under it).
+uint8_t* g_region_to_gen = nullptr;
+CHAOS_IL2CPP_SIZE g_region_gen_bytes = 0;                 // table size in bytes (bounds guard)
+static CHAOS_IL2CPP_SIZE s_region_gen_high_idx = 0;   // highest covered index (inclusive)
+
+/// Ensure g_region_to_gen covers index = @a addr >> kRegionGenShift.
+/// Called under RegionManager::mutex_ from AllocateRegion.  Grows by doubling.
+static void EnsureRegionGenCoverage(uintptr_t addr) {
+    CHAOS_IL2CPP_SIZE idx = addr >> kRegionGenShift;
+    if (idx <= s_region_gen_high_idx) return;
+    CHAOS_IL2CPP_SIZE need = idx + 1;
+    CHAOS_IL2CPP_SIZE cap = (s_region_gen_high_idx == 0) ? 1024 : s_region_gen_high_idx + 1;
+    while (cap < need) cap *= 2;
+    auto* new_tab = static_cast<uint8_t*>(std::realloc(g_region_to_gen, cap));
+    if (new_tab == nullptr) return;  // keep old coverage (fail-safe conservative)
+    // Preserve existing entries; default new entries to kRegionGenOld (so an
+    // uncovered region 查表 returns "old" → conservative card marking).
+    for (CHAOS_IL2CPP_SIZE i = s_region_gen_high_idx + 1; i < cap; i++) new_tab[i] = kRegionGenOld;
+    g_region_to_gen = new_tab;
+    g_region_gen_bytes = cap;
+    s_region_gen_high_idx = cap - 1;
+}
+
+}  // namespace chaos::il2cpp::runtime_core
 
 #include <cstdlib>
 
@@ -50,9 +84,79 @@ static void* GcTryAllocLargePages(CHAOS_IL2CPP_SIZE alloc_size) noexcept {
 
 namespace chaos::il2cpp::runtime_core {
 
+// ── Region-to-generation skipped-table synchronization ─────────
+// The skewed g_region_to_gen[] table is written by two independent
+// allocators on different locks: RegionManager::AllocateRegion takes
+// RegionManager::mutex_ then SetRegionGen(...young/gen1), while LOH
+// allocation takes LOH::mutex_ then GcMarkRangeOld(...old).  These are
+// DIFFERENT mutexes, so two mutator threads can race on the same 4MB
+// region-gen byte: LOH marks a newly-committed page OLD while the nursery
+// marks a co-located chunk YOUNG.  The final value wins nondeterministically;
+// an old page mislabelled YOUNG makes the write barrier read gen0 and skip
+// carding a genuine old→nursery edge → dropped edge / use-after-free.
+//
+// g_region_gen_lock is a LEAF lock: it always sits at the bottom of the
+// lock order (RegionManager::mutex_ or LOH::mutex_ above it), and it never
+// acquires another lock from within.  Every writer of the table takes this
+// lock, so all region-gen writes are serialized regardless of which allocator
+// owns the parent mutex.  Writers may take it more than once concurrently
+// (AllocateRegion loop + GcMarkRangeOld), but never re-entrantly on one
+// thread once the caller cannot hold it across calls.
+GcSpinLock g_region_gen_lock;
+
+/// Mark every 4MB region-gen byte covering [@a start, @a end) as OLD.  See the
+/// header comment for rationale.  Called by old-gen / LOH page allocation under
+/// their commit lock so updates are serialized with concurrent SetRegionGen
+/// (nursery/Gen1 region creation).
+void GcMarkRangeOld(uintptr_t start, uintptr_t end) noexcept {
+    if (start >= end) return;
+    // Serialize region-gen writes against concurrent nursery/Gen1 creation
+    // (AllocateRegion) and other LOH/FREE calls on a distinct lock.  Parent
+    // mutexes (LOH/RegionManager) do NOT protect against each other, so this
+    // lock is the single point that makes the table race-free.
+    GcSpinLockGuard lock(g_region_gen_lock);
+    EnsureRegionGenCoverage(start);
+    EnsureRegionGenCoverage(end - 1);
+    static constexpr CHAOS_IL2CPP_SIZE kRegionSize = CHAOS_IL2CPP_SIZE{1} << kRegionGenShift;
+    uintptr_t a = start & ~(kRegionSize - 1);
+    for (; a < end; a += kRegionSize) {
+        SetRegionGen(a, kRegionGenOld);
+    }
+}
+
 // ── Shared young generation + TLAB ──────────────────────────────
 YoungGeneration g_young_gen;
 thread_local TLAB tls_tlab;
+
+// Physical nursery/Gen1 membership for GetRegionGen: authoritative over the
+// coarse 4MB chunk table (see gc_region.h GetRegionGen rationale).  Reads the
+// live nursery and Gen1 region ranges directly.  Returns young(0)/gen1(1) if
+// physically inside, else kRegionGenInvalid.
+uint8_t GcGetRegionGenPhysical(uintptr_t addr) noexcept {
+    // Nursery: authoritative via RegionManager's registered nursery range array
+    // (IsNurseryPointer) — this covers BOTH the shared young region (wired by
+    // InitYoungGeneration) AND any independently-allocated REGION_NURSERY (tests).
+    if (RegionManager::Instance().IsNurseryPointer(reinterpret_cast<const void*>(addr))) {
+        return kRegionGenYoung;
+    }
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 != nullptr) {
+        auto* bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+        if (bump != nullptr && addr >= reinterpret_cast<uintptr_t>(gen1->begin) &&
+            addr < reinterpret_cast<uintptr_t>(bump)) {
+            return kRegionGenGen1;
+        }
+    }
+    // In-place demotion (CoreCLR-aligned, GC-N6 #10): a gen1-owned object that
+    // physically resides in an old-gen page (not the gen1 bump region) classifies
+    // as gen1 so the write barrier's ref-gen, the scavenger's condemned filter,
+    // and age tenuring treat it consistently.  Without this, it would read OLD
+    // (the 4MB chunk byte) and the barrier would drop an old->demoted edge.
+    if (IsInDemotedSet(reinterpret_cast<const void*>(addr))) {
+        return kRegionGenGen1;
+    }
+    return kRegionGenInvalid;
+}
 
 // ── Forward declarations ───────────────────────────────────────
 TLAB ClaimEmergencyTlab() noexcept;
@@ -73,7 +177,14 @@ thread_local CHAOS_IL2CPP_SIZE tls_tlab_size = kDefaultTlabSize;
 // For now, PohAllocate uses the process-wide POH context to avoid
 // per-thread POH region proliferation (pinned objects are typically few).
 static Region* s_poh_current = nullptr;  // current POH bump region
-static std::mutex s_poh_mutex;
+// GcSpinLock (not std::mutex) for POH: the lock hold is a short bump-pointer
+// critical section, and a std::mutex can park a thread in a kernel wait while
+// in cooperative mode — leaving it unable to acknowledge a safepoint (a
+// potential 3-party deadlock: thread waits mutex, coordinator waits thread's
+// suspend_ack, mutex holder may wait on safepoint).  GcSpinLock never parks
+// (spin-then-yield), and is wrapped in ScopedPreemptiveMode so the safepoint
+// coordinator skips the thread while it may be spinning.
+static GcSpinLock s_poh_lock;
 
 // Platform virtual memory helpers for region recycling.
 static void VirtualFreeRegion(void* ptr, CHAOS_IL2CPP_SIZE size) {
@@ -85,18 +196,13 @@ static void VirtualFreeRegion(void* ptr, CHAOS_IL2CPP_SIZE size) {
 // ======================================================================
 void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("NurseryAllocateSlow");
+#if CHAOS_IL2CPP_PROFILE_ENABLED
     ProfileRecordSlowPath();
 
     if (size > kMaxTlabAlloc) {
         ProfileRecordLargeObjAlloc(static_cast<int64_t>(size));
     }
-
-    // GC Stress mode: force a full GC every kStressInterval allocations.
-    if (GcStressShouldTrigger()) [[unlikely]] {
-        tls_in_gc_stress = true;
-        chaos_gc_collect();
-        tls_in_gc_stress = false;
-    }
+#endif
 
     // Flush TLS allocation counter to scheduler before making any GC decision.
     FlushTlsAllocCounter();
@@ -154,8 +260,12 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
             auto gc_start = std::chrono::high_resolution_clock::now();
             chaos_gc_collect();
             auto gc_end = std::chrono::high_resolution_clock::now();
+#if CHAOS_IL2CPP_PROFILE_ENABLED
             auto gc_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(gc_end - gc_start).count();
             ProfileRecordGcPause(static_cast<int64_t>(gc_ns));
+#else
+            (void)gc_end;
+#endif
             if (mt) {
                 mt->tlab_start = nullptr;
                 mt->tlab_current = nullptr;
@@ -177,8 +287,12 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
             auto gc1_start = std::chrono::high_resolution_clock::now();
             GcGen1Collection();
             auto gc1_end = std::chrono::high_resolution_clock::now();
+#if CHAOS_IL2CPP_PROFILE_ENABLED
             auto gc1_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(gc1_end - gc1_start).count();
             ProfileRecordGcPause(static_cast<int64_t>(gc1_ns));
+#else
+            (void)gc1_end;
+#endif
             if (mt) {
                 mt->tlab_start = nullptr;
                 mt->tlab_current = nullptr;
@@ -231,6 +345,20 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
             tls_tlab = TLAB{};
         }
     }
+    } else if (!GcIsInNoGcRegion() && G_Scheduler().GcSlotIsHeld()) {
+        // CoreCLR wait_for_gc_done alignment (a_state_retry_allocate):
+        // another thread is in-flight with GC right now (it claimed the GC
+        // slot but hasn't completed yet).  Wait for that GC to finish
+        // (SafepointPoll blocks in cooperative mode until the safepoint is
+        // released), then retry TLAB from the freshly-reset nursery.
+        threading::SafepointPoll();
+        tlab = TlabClaimFromYoungGen();
+        if (tlab.current != nullptr) {
+            tls_tlab = tlab;
+            if (size <= kMaxTlabAlloc) {
+                return NurseryAllocate(size);
+            }
+        }
     }
 
     // Phase 3: Retry from the fresh young region + new TLAB.
@@ -279,11 +407,35 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     if (old_result == nullptr) {
         // All recovery attempts failed — invoke the full OOM recovery chain:
         // blocking full GC → retry → emergency reserve → OOM event.
+        //
+        // Fix-A (recovery routing): the retry lambda RE-ENTERS the original
+        // allocation path after the full GC, rather than jumping straight to
+        // old-gen.  The full GC just reset the nursery bump pointer, so
+        // TlabClaimFromYoungGen() now succeeds — allocate from the fresh
+        // nursery first, and only fall back to old-gen if the object is
+        // oversized or the nursery retry fails.  This path runs only inside
+        // HandleOomCondition's step-2 retry (never on the normal fast path).
         struct OomRetryCtx { CHAOS_IL2CPP_SIZE size; bool scanning; };
         OomRetryCtx ctx{size, true};
         old_result = HandleOomCondition(
             [](void* ctx) -> void* {
                 auto* c = static_cast<OomRetryCtx*>(ctx);
+                // Re-enter nursery first: full GC reset the bump pointer.
+                if (c->size <= kMaxTlabAlloc) {
+                    TLAB tlab = TlabClaimFromYoungGen();
+                    if (tlab.current != nullptr) {
+                        tls_tlab = tlab;
+                        void* nursery_ptr = NurseryAllocate(c->size);
+                        if (nursery_ptr != nullptr) {
+                            return nursery_ptr;
+                        }
+                        // NurseryAllocate returned nullptr despite a fresh TLAB
+                        // (e.g. oversized for remaining TLAB slack).  Clear the
+                        // orphan TLAB so the next allocation re-claims rather than
+                        // using a stale TLS pointer (review #6).
+                        tls_tlab = TLAB{};
+                    }
+                }
                 threading::EnterPreemptiveMode();
                 void* p = G_OldGen().Allocate(c->size, c->scanning);
                 threading::EnterCooperativeMode();
@@ -298,18 +450,13 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
 
 void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("NurseryAllocateAtomicSlow");
+#if CHAOS_IL2CPP_PROFILE_ENABLED
     ProfileRecordSlowPath();
 
     if (size > kMaxTlabAlloc) {
         ProfileRecordLargeObjAlloc(static_cast<int64_t>(size));
     }
-
-    // GC Stress mode: force a full GC.
-    if (GcStressShouldTrigger()) [[unlikely]] {
-        tls_in_gc_stress = true;
-        chaos_gc_collect();
-        tls_in_gc_stress = false;
-    }
+#endif
 
     FlushTlsAllocCounter();
 
@@ -356,8 +503,12 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
             auto gc_start = std::chrono::high_resolution_clock::now();
             chaos_gc_collect();
             auto gc_end = std::chrono::high_resolution_clock::now();
+#if CHAOS_IL2CPP_PROFILE_ENABLED
             auto gc_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(gc_end - gc_start).count();
             ProfileRecordGcPause(static_cast<int64_t>(gc_ns));
+#else
+            (void)gc_end;
+#endif
             if (mt) {
                 mt->tlab_start = nullptr;
                 mt->tlab_current = nullptr;
@@ -381,6 +532,18 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
             threading::ReleaseGlobalSafepoint(gen);
             GcAdvanceBgcCycle();
             tls_tlab = TLAB{};
+        }
+    } else if (!GcIsInNoGcRegion() && G_Scheduler().GcSlotIsHeld()) {
+        // CoreCLR wait_for_gc_done alignment (mirror NurseryAllocateSlow):
+        // another thread is in-flight with GC right now.  Wait for it to
+        // complete, then retry TLAB from the freshly-reset nursery.
+        threading::SafepointPoll();
+        tlab = TlabClaimFromYoungGen();
+        if (tlab.current != nullptr) {
+            tls_tlab = tlab;
+            if (size <= kMaxTlabAlloc) {
+                return NurseryAllocateAtomic(size);
+            }
         }
     }
 
@@ -419,6 +582,21 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
         old_result = HandleOomCondition(
             [](void* ctx) -> void* {
                 auto* c = static_cast<OomRetryCtx*>(ctx);
+                // Re-enter nursery first: full GC reset the bump pointer.
+                if (c->size <= kMaxTlabAlloc) {
+                    TLAB tlab = TlabClaimFromYoungGen();
+                    if (tlab.current != nullptr) {
+                        tls_tlab = tlab;
+                        void* nursery_ptr = NurseryAllocateAtomic(c->size);
+                        if (nursery_ptr != nullptr) {
+                            return nursery_ptr;
+                        }
+                        // NurseryAllocateAtomic returned nullptr despite a fresh
+                        // TLAB — clear the orphan TLAB so the TLS pointer does not
+                        // point to a claimed-but-unused region (review #6).
+                        tls_tlab = TLAB{};
+                    }
+                }
                 threading::EnterPreemptiveMode();
                 void* p = G_OldGen().Allocate(c->size, c->scanning);
                 threading::EnterCooperativeMode();
@@ -471,7 +649,11 @@ void* PohAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
         return result;
     }
 
-    std::lock_guard<std::mutex> lock(s_poh_mutex);
+    // Switch to preemptive mode for the POH lock region (GcSpinLock spin-wait
+    // in cooperative mode would block safepoint coordination).  The lock is
+    // held only for the bump-pointer fast path + fallback, never across alloc.
+    ScopedPreemptiveMode preempt;
+    GcSpinLockGuard lock(s_poh_lock);
 
     // Try bump from current POH region.
     if (s_poh_current != nullptr) {
@@ -520,24 +702,67 @@ void TeardownTlsPoh() noexcept {
 // ======================================================================
 
 void InitYoungGeneration() noexcept {
-    // Initialize scheduler memory limits from compile-time configuration.
+    // Initialize the GC config singleton (env overrides + programmatic knobs).
+    GcConfig().Initialize();
+
+    // M3A-1: initialize the per-heap manager.  Under the WKS default
+    // (GC_SERVER=0) this is a no-op; when GC_SERVER=1 it allocates the per-heap
+    // GcHeapContext array and per-heap old-gen, so Server-GC multi-heap is
+    // actually prepared instead of crashing on a null/empty array (the previous
+    // zero-production-call gap).
+    GcHeapManager::Instance().Initialize();
+
+    // Latch config-driven hot-path knobs once, so the allocation / LOH / mark
+    // hot paths read a plain machine load (the latched values) instead of
+    // consulting the config singleton per allocation.  kMaxTlabAlloc /
+    // kLohThreshold / kMaxParallelMarkWorkers were converted from constexpr to
+    // inline mutable values (defaulting to the historical constants); this
+    // overwrites them from the env/API CHAOS_GC_* knobs so they actually drive
+    // real behavior (not just the init log).
+    kMaxTlabAlloc = GcConfig().MaxTlabAlloc;
+    kLohThreshold = GcConfig().LohThreshold;
+    kMaxParallelMarkWorkers = static_cast<int>(GcConfig().ParallelMarkWorkers);
+
+    // Initialize scheduler memory limits from config (env-driven, replaces the
+    // former compile-time #if CHAOS_IL2CPP_GC_HEAP_*_LIMIT_MB only).
+    CHAOS_IL2CPP_SIZE hard_limit_mb = GcConfig().HeapHardLimitMB;
+    if (hard_limit_mb > 0) {
+        G_Scheduler().SetHardLimit(hard_limit_mb * 1024 * 1024);
+    }
 #if defined(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB) && CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB > 0
-    G_Scheduler().SetHardLimit(
-        static_cast<CHAOS_IL2CPP_SIZE>(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB) * 1024 * 1024);
+    if (hard_limit_mb == 0) {  // fall back to compile-time when no env knob
+        G_Scheduler().SetHardLimit(
+            static_cast<CHAOS_IL2CPP_SIZE>(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB) * 1024 * 1024);
+    }
 #endif
+    CHAOS_IL2CPP_SIZE soft_limit_mb = GcConfig().HeapSoftLimitMB;
+    if (soft_limit_mb > 0) {
+        G_Scheduler().SetSoftLimit(soft_limit_mb * 1024 * 1024);
+    }
 #if defined(CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB) && CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB > 0
-    G_Scheduler().SetSoftLimit(
-        static_cast<CHAOS_IL2CPP_SIZE>(CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB) * 1024 * 1024);
+    if (soft_limit_mb == 0) {  // fall back to compile-time when no env knob
+        G_Scheduler().SetSoftLimit(
+            static_cast<CHAOS_IL2CPP_SIZE>(CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB) * 1024 * 1024);
+    }
 #endif
+
+    // Nursery / Gen1 sizes from config (env-tunable, no recompile).
+    CHAOS_IL2CPP_SIZE nursery_size = GcConfig().DefaultNurserySize;
+    CHAOS_IL2CPP_SIZE gen1_size = GcConfig().DefaultGen1Size > 0
+        ? GcConfig().DefaultGen1Size : nursery_size;
+
+    // ── Periodic GC diagnostics dump thread (if enabled) ──
+    // Start after config is initialized, so DumpStatsIntervalSec is readable.
+    StartGcPeriodicDumpThread();
 
     // Allocate an independent nursery region (no longer split 50/50 with survivor).
     auto* nursery = RegionManager::Instance().AllocateRegion(
-        RegionKind::REGION_NURSERY, kDefaultYoungRegionSize);
+        RegionKind::REGION_NURSERY, nursery_size);
     g_young_gen.region.store(nursery, std::memory_order_release);
 
     // Allocate an independent Gen1 survivor region.
     auto* gen1 = RegionManager::Instance().AllocateRegion(
-        RegionKind::REGION_GEN1, kDefaultYoungRegionSize);
+        RegionKind::REGION_GEN1, gen1_size);
     g_young_gen.gen1_region.store(gen1, std::memory_order_release);
 
     if (nursery && gen1) {
@@ -601,7 +826,15 @@ void ResizeGen1Region(CHAOS_IL2CPP_SIZE new_size) {
         return;
     }
 
-    // Publish new region atomically.
+    // Free the old Gen1 region (Gen1 is empty after collection, no migration
+    // needed).  MUST happen BEFORE publishing the new pointer + bump: FreeRegion()
+    // of a REGION_GEN1 unconditionally clears g_young_gen.{gen1_region,gen1_end,
+    // gen1_bump} (gc_region.cpp:946-950).  If we published the new region first,
+    // that clear would wipe it, silently disabling Gen1 for the rest of the
+    // process (every subsequent survivor falls straight to old-gen).
+    RegionManager::Instance().FreeRegion(old_gen1->id);
+
+    // Publish new region atomically (after the old region is gone).
     g_young_gen.gen1_region.store(new_gen1, std::memory_order_release);
     g_young_gen.gen1_bump.store(new_gen1->begin, std::memory_order_release);
     g_young_gen.gen1_end = new_gen1->end;
@@ -612,9 +845,6 @@ void ResizeGen1Region(CHAOS_IL2CPP_SIZE new_size) {
     GcRegisterHeapRange(
         reinterpret_cast<uintptr_t>(new_gen1->begin),
         reinterpret_cast<uintptr_t>(new_gen1->end));
-
-    // Free the old Gen1 region (Gen1 is empty after collection, no migration needed).
-    RegionManager::Instance().FreeRegion(old_gen1->id);
 }
 
 TLAB TlabClaimFromYoungGen() noexcept {
@@ -624,6 +854,21 @@ TLAB TlabClaimFromYoungGen() noexcept {
     // is nullptr and every allocation falls through to OldGen.
     // Use compare_exchange for thread safety — only one thread initializes.
     static std::atomic<int> s_young_gen_state{0};  // 0=uninit, 1=initing, 2=ready
+    //
+    // GC-N7 / double-init: RuntimeInit OR a test fixture (GcTestBase::SetUp) that
+    // calls InitYoungGeneration() directly leaves this private state at 0 (the
+    // fixture doesn't touch it), so the FIRST NurseryAllocate here re-ran
+    // InitYoungGeneration() — re-allocating BOTH the nursery and Gen1 regions and
+    // pointing g_young_gen.region/gen1_region at fresh addresses.  Any object
+    // allocated into the ORIGINAL regions before this point (e.g., a direct
+    // TryAllocateInGen1 in a test) is left in an orphaned region the next
+    // collection no longer scans → objects_promoted=0 / dangling (gen1
+    // SingleLiveObject bytes_promoted=0).  Make the lazy-init idempotent: if a
+    // region is already wired, InitYoungGeneration already ran — just mark ready,
+    // never re-allocate and strand live region owner.
+    if (g_young_gen.region.load(std::memory_order_acquire) != nullptr) {
+        s_young_gen_state.store(2, std::memory_order_release);
+    }
     int expected = 0;
     if (s_young_gen_state.compare_exchange_strong(expected, 1,
             std::memory_order_acq_rel, std::memory_order_acquire)) {
@@ -636,9 +881,17 @@ TLAB TlabClaimFromYoungGen() noexcept {
         }
     }
 
-    // Use the per-thread adaptive TLAB size (tuned by UpdateTlabSize).
-    CHAOS_IL2CPP_SIZE tlab_sz = tls_tlab_size;
-    // Clamp to valid range in case UpdateTlabSize produced an extreme value.
+    // Use the per-thread adaptive TLAB size (tuned by the GC's EnumerateThreads
+    // resizer).  For registered threads, read from ManagedThread::tlab_size;
+    // fall back to the TLS variable for unregistered threads (early boot).
+    CHAOS_IL2CPP_SIZE tlab_sz = kDefaultTlabSize;
+    auto* thread = threading::tls_this_thread;
+    if (thread != nullptr) {
+        tlab_sz = thread->tlab_size;
+    } else {
+        tlab_sz = tls_tlab_size;
+    }
+    // Clamp to valid range in case tlab_size produced an extreme value.
     if (tlab_sz < 16 * 1024) tlab_sz = 16 * 1024;
     if (tlab_sz > 256 * 1024) tlab_sz = 256 * 1024;
 
@@ -691,16 +944,16 @@ TLAB ClaimEmergencyTlab() noexcept {
 
 Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_size,
                                        CHAOS_IL2CPP_UINT32 domain_id) {
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
 
     CHAOS_IL2CPP_SIZE region_size = kDefaultRegionSize;
     switch (kind) {
     case RegionKind::REGION_NURSERY: region_size = kDefaultRegionSize; break;
     case RegionKind::REGION_GEN1:    region_size = kDefaultYoungRegionSize; break;
-    case RegionKind::REGION_TENURED: region_size = kTenuredRegionSize; break;
+    case RegionKind::REGION_TENURED: region_size = SelectRegionSize(kind, min_size); break;
     case RegionKind::REGION_DOMAIN:  region_size = kDomainRegionSize;  break;
     case RegionKind::REGION_POH:     region_size = kPohRegionSize;     break;
-    default:                  region_size = kDefaultRegionSize; break;
+    default:                  region_size = SelectRegionSize(kind, min_size); break;
     }
     if (min_size > region_size) region_size = min_size;
 
@@ -813,6 +1066,40 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
             reinterpret_cast<uintptr_t>(r->end));
     }
 
+    // Initialize the region's generation.  Nursery AND Gen1
+    // (survivor) are YOUNG-side regions — young GC scans them precisely
+    // (Phase 2 covers nursery; Gen1's cross-gen refs are rescanned), so the
+    // write barrier must treat them as gen0 (skip card: contents are scanned
+    // wholesale).  Everything mature (tenured/LOH/Domain/POH) → old(2).
+    // Keep the skewed region→gen table in sync for O(1) write-barrier lookups.
+    //
+    // M9-A1 (3-gen): GEN1 now gets a DISTINCT generation value (kRegionGenGen1=1)
+    // instead of sharing kRegionGenYoung(0) with the nursery.  The write barrier
+    // still treats both gen0 and gen1 as "young" for the wholesale-scan skip (via
+    // `dst_gen <= kRegionGenGen1`), so this tag makes gen1's identity observable
+    // without changing the young-scan semantics.
+    uint8_t region_gen = (kind == RegionKind::REGION_NURSERY)  ? kRegionGenYoung
+                       : (kind == RegionKind::REGION_GEN1)     ? kRegionGenGen1
+                       : kRegionGenOld;
+    r->gen = region_gen & kRegionGenMask;
+    // Mark EVERY 4MB region-gen chunk the region spans (not just begin).  A
+    // nursery/gen1 region is large (e.g. 64MB = 16 chunks); without this the
+    // chunks beyond begin default to OLD(2), so a young object in the middle/end
+    // of the nursery reads region-gen 2 → the write barrier treats it as mature
+    // and skips carding a young→old edge, and a gen>condemned filter drops it.
+    // This is the CoreCLR set_region_gen_num per-segment marking analog.
+    EnsureRegionGenCoverage(reinterpret_cast<uintptr_t>(r->begin));
+    EnsureRegionGenCoverage(reinterpret_cast<uintptr_t>(r->end) - 1);
+    constexpr CHAOS_IL2CPP_SIZE kRgSize = CHAOS_IL2CPP_SIZE{1} << kRegionGenShift;
+    // Serialize region-gen writes against LOH/other old-gen marking on the same
+    // leaf lock (see g_region_gen_lock) — RegionManager::mutex_ is NOT the lock
+    // that LOH uses, so without this the two allocators race on shared chunks.
+    GcSpinLockGuard rg_lock(g_region_gen_lock);
+    uintptr_t a = reinterpret_cast<uintptr_t>(r->begin) & ~(kRgSize - 1);
+    for (; a < reinterpret_cast<uintptr_t>(r->end); a += kRgSize) {
+        SetRegionGen(a, region_gen);
+    }
+
     total_allocated_bytes_.fetch_add(region_size, std::memory_order_relaxed);
     return r;
 }
@@ -821,7 +1108,7 @@ static constexpr int kFreeListTrimThreshold = 16;
 
 void RegionManager::FreeRegion(RegionId id) {
     if (id == kRegionIdInvalid) return;
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
 
     // O(1) lookup via region_index_.
     auto it = region_index_.find(id);
@@ -843,6 +1130,31 @@ void RegionManager::FreeRegion(RegionId id) {
         g_young_gen.gen1_region.store(nullptr, std::memory_order_release);
         g_young_gen.gen1_end = nullptr;
         g_young_gen.gen1_bump.store(nullptr, std::memory_order_release);
+    }
+
+    // If this is the shared nursery region, clear the published pointer so
+    // a concurrent allocator never reads a stale pointer to freed memory.
+    // Symmetric with the Gen1 branch above; restored by the caller that
+    // publishes a replacement nursery (InitYoungGeneration / ResizeNurseryRegion).
+    if (r->kind == RegionKind::REGION_NURSERY) {
+        g_young_gen.region.store(nullptr, std::memory_order_release);
+        g_young_gen.region_end.store(nullptr, std::memory_order_release);
+        g_young_gen.bump.store(nullptr, std::memory_order_release);
+    }
+
+    // Re-tag the freed region's 4MB region-gen chunks back to OLD.  The skewed
+    // region→gen table is per-4MB-chunk (monotonic: a chunk tagged young/gen1
+    // stays so until overwritten).  If this freed Gen1/Nursery region's chunks
+    // kept their YOUNG/GEN1 tag, an old-gen page later allocated into that
+    // address range would read GetRegionGen == young — misclassifying genuine
+    // old-gen objects (dropping old→nursery cards, failing region-gen assertions;
+    // GC-N6 mode3 gen1_resize exposes this when Gen1 shrinks).  Tag them OLD now
+    // that the region no longer owns them.  (LOH/old-gen pages already tag chunks
+    // OLD via GcMarkRangeOld at their own allocation/free.)
+    if (r->kind == RegionKind::REGION_GEN1 ||
+        r->kind == RegionKind::REGION_NURSERY) {
+        GcMarkRangeOld(reinterpret_cast<uintptr_t>(r->begin),
+                       reinterpret_cast<uintptr_t>(r->end));
     }
 
     // If this is a POH region, remove its range and unlink from POH list.
@@ -915,7 +1227,7 @@ void RegionManager::FreeRegion(RegionId id) {
 }
 
 void RegionManager::ReleaseDomainRegions(CHAOS_IL2CPP_UINT32 domain_id) {
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
 
     auto dit = domain_regions_.find(domain_id);
     if (dit == domain_regions_.end()) return;
@@ -988,6 +1300,7 @@ CHAOS_IL2CPP_SIZE RegionManager::PromoteNursery(Region* nursery) {
     //
     // The return value is the total bytes promoted from this nursery.
     YoungCollectionResult result = GcYoungCollection();
+    GcVerifyPromotedTracked(result);   // HeapVerify kFull: promoted objects in tracked old-gen
 
     if (result.objects_promoted > 0) {
         CHAOS_IL2CPP_LOG_DEBUG_M("CRAG", "promote_nursery objects={0} bytes={1}",
@@ -1030,263 +1343,23 @@ int RegionManager::AllocSlot() {
     return idx;
 }
 
-bool RegionManager::IsInDomain(CHAOS_IL2CPP_UINT32 domain_id, const void* ptr) const {
-    if (ptr == nullptr) return false;
-    uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
-
-    // Phase 1: lock-free range cache.  If the address is outside the
-    // cached bounds for this domain, reject immediately without mutex.
-    // Following the same pattern as IsNurseryPointer / IsPohPointer.
-    {
-        int count = domain_slot_count_.load(std::memory_order_acquire);
-        for (int i = 0; i < count; i++) {
-            uint32_t did = domain_range_slots_[i].domain_id.load(std::memory_order_acquire);
-            if (did == domain_id) [[unlikely]] {
-                uintptr_t b = domain_range_slots_[i].begin.load(std::memory_order_acquire);
-                uintptr_t e = domain_range_slots_[i].end.load(std::memory_order_acquire);
-                if (b >= e || addr < b || addr >= e) {
-                    return false;  // Outside cached range.
-                }
-                // Within cached range — fall through to precise check.
-                break;
-            }
-        }
-    }
-
-    // Phase 2: precise check under mutex.
-    std::lock_guard<std::mutex> lock(mutex_);
-
-    auto dit = domain_regions_.find(domain_id);
-    if (dit == domain_regions_.end()) return false;
-
-    for (int slot : dit->second) {
-        const Region& r = region_table_[slot];
-        if (r.id == kRegionIdInvalid) continue;
-        uintptr_t r_begin = reinterpret_cast<uintptr_t>(r.begin);
-        uintptr_t r_end   = reinterpret_cast<uintptr_t>(r.end);
-        if (addr >= r_begin && addr < r_end) return true;
-    }
-    return false;
-}
-
-bool RegionManager::IsNurseryPointer(const void* ptr) const {
-    if (ptr == nullptr) return false;
-    uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
-
-    // Phase 1A: O(1) global bounds check.  If the pointer is outside the
-    // conservative global nursery range, it cannot be in any nursery.
-    // The global bounds monotonically expand on AddNurseryRange and never
-    // shrink, so this is always a conservative (safe) filter.
-    uintptr_t global_begin = nursery_global_begin_.load(std::memory_order_acquire);
-    uintptr_t global_end   = nursery_global_end_.load(std::memory_order_acquire);
-    if (global_begin < global_end) {
-        if (addr < global_begin || addr >= global_end) {
-            return false;  // Definitely not in any nursery.
-        }
-    }
-
-    // Lock-free fast path: iterate the nursery range array with atomic loads.
-    // No mutex needed — each slot is published with release ordering and never
-    // modified after publication (removal zeros begin so the range is invalid).
-    int count = nursery_slot_count_.load(std::memory_order_acquire);
-    for (int i = 0; i < count; i++) {
-        uintptr_t b = nursery_slots_[i].begin.load(std::memory_order_acquire);
-        uintptr_t e = nursery_slots_[i].end.load(std::memory_order_acquire);
-        if (b < e && addr >= b && addr < e) return true;
-    }
-    return false;
-}
-
-void RegionManager::AddNurseryRange(uintptr_t begin, uintptr_t end) {
-    if (begin >= end) return;
-
-    // Expand global nursery bounds (monotonic: only ever expands outward).
-    // CAS loop ensures correctness under concurrent AddNurseryRange calls.
-    {
-        uintptr_t expected = nursery_global_begin_.load(std::memory_order_relaxed);
-        while (begin < expected) {
-            if (nursery_global_begin_.compare_exchange_weak(expected, begin,
-                    std::memory_order_release, std::memory_order_relaxed)) {
-                break;
-            }
-        }
-    }
-    {
-        uintptr_t expected = nursery_global_end_.load(std::memory_order_relaxed);
-        while (end > expected) {
-            if (nursery_global_end_.compare_exchange_weak(expected, end,
-                    std::memory_order_release, std::memory_order_relaxed)) {
-                break;
-            }
-        }
-    }
-
-    // Try to reuse a previously-freed slot (begin == 0) first.
-    int count = nursery_slot_count_.load(std::memory_order_acquire);
-    for (int i = 0; i < count; i++) {
-        uintptr_t b = nursery_slots_[i].begin.load(std::memory_order_acquire);
-        if (b == 0) {
-            nursery_slots_[i].begin.store(begin, std::memory_order_release);
-            nursery_slots_[i].end.store(end, std::memory_order_release);
-            return;
-        }
-    }
-
-    // No reusable slot — extend the array.
-    int idx = nursery_slot_count_.fetch_add(1, std::memory_order_acquire);
-    if (idx >= kMaxNurserySlots) {
-        CHAOS_IL2CPP_LOG_ERROR_M("CRAG", "nursery_slot_overflow idx={0}", idx);
-        nursery_slot_count_.fetch_sub(1, std::memory_order_release);
-        return;
-    }
-    nursery_slots_[idx].begin.store(begin, std::memory_order_release);
-    nursery_slots_[idx].end.store(end, std::memory_order_release);
-}
-
-void RegionManager::RemoveNurseryRange(uintptr_t begin, uintptr_t end) {
-    // Scan the array and zero out the slot that matches.
-    // V4-H5: Store end=0 FIRST, then begin=0.  The reader in
-    // IsNurseryPointer loads begin then end — if begin is 0 but
-    // end is still > 0, the slot looks valid (0 < old_end = true)
-    // producing a false positive.  By zeroing end first, the reader
-    // sees either (old_begin, 0) → 0 < 0 = false (skipped correctly),
-    // or (0, 0) → also false.
-    int count = nursery_slot_count_.load(std::memory_order_acquire);
-    for (int i = 0; i < count; i++) {
-        uintptr_t b = nursery_slots_[i].begin.load(std::memory_order_acquire);
-        uintptr_t e = nursery_slots_[i].end.load(std::memory_order_acquire);
-        if (b == begin && e == end) {
-            nursery_slots_[i].end.store(0, std::memory_order_release);
-            std::atomic_thread_fence(std::memory_order_release);
-            nursery_slots_[i].begin.store(0, std::memory_order_release);
-            return;
-        }
-    }
-}
-
-// ======================================================================
-// POH range tracking (lock-free, same design as nursery slots)
-// ======================================================================
-
-// (IsPohPointer is now inline in gc_region.h)
-
-void RegionManager::AddPohRange(uintptr_t begin, uintptr_t end) {
-    if (begin >= end) return;
-
-    int count = poh_slot_count_.load(std::memory_order_acquire);
-    for (int i = 0; i < count; i++) {
-        uintptr_t b = poh_slots_[i].begin.load(std::memory_order_acquire);
-        if (b == 0) {
-            poh_slots_[i].begin.store(begin, std::memory_order_release);
-            poh_slots_[i].end.store(end, std::memory_order_release);
-            return;
-        }
-    }
-
-    int idx = poh_slot_count_.fetch_add(1, std::memory_order_acquire);
-    if (idx >= kMaxPohSlots) {
-        CHAOS_IL2CPP_LOG_ERROR_M("CRAG", "poh_slot_overflow idx={0}", idx);
-        poh_slot_count_.fetch_sub(1, std::memory_order_release);
-        return;
-    }
-    poh_slots_[idx].begin.store(begin, std::memory_order_release);
-    poh_slots_[idx].end.store(end, std::memory_order_release);
-}
-
-void RegionManager::RemovePohRange(uintptr_t begin, uintptr_t end) {
-    int count = poh_slot_count_.load(std::memory_order_acquire);
-    for (int i = 0; i < count; i++) {
-        uintptr_t b = poh_slots_[i].begin.load(std::memory_order_acquire);
-        uintptr_t e = poh_slots_[i].end.load(std::memory_order_acquire);
-        if (b == begin && e == end) {
-            poh_slots_[i].end.store(0, std::memory_order_release);
-            std::atomic_thread_fence(std::memory_order_release);
-            poh_slots_[i].begin.store(0, std::memory_order_release);
-            return;
-        }
-    }
-}
-
-void RegionManager::AddDomainRange(uint32_t domain_id, uintptr_t begin, uintptr_t end) {
-    if (begin >= end) return;
-
-    // Try to reuse a freed slot (domain_id == 0) or update existing.
-    int count = domain_slot_count_.load(std::memory_order_acquire);
-    for (int i = 0; i < count; i++) {
-        uint32_t did = domain_range_slots_[i].domain_id.load(std::memory_order_acquire);
-        if (did == domain_id) {
-            // Update existing entry — expand bounds outward.
-            uintptr_t cur_begin = domain_range_slots_[i].begin.load(std::memory_order_relaxed);
-            while (begin < cur_begin) {
-                if (domain_range_slots_[i].begin.compare_exchange_weak(cur_begin, begin,
-                        std::memory_order_release, std::memory_order_relaxed)) {
-                    break;
-                }
-            }
-            uintptr_t cur_end = domain_range_slots_[i].end.load(std::memory_order_relaxed);
-            while (end > cur_end) {
-                if (domain_range_slots_[i].end.compare_exchange_weak(cur_end, end,
-                        std::memory_order_release, std::memory_order_relaxed)) {
-                    break;
-                }
-            }
-            return;
-        }
-        if (did == 0) {
-            // Reusable slot.
-            domain_range_slots_[i].domain_id.store(domain_id, std::memory_order_release);
-            domain_range_slots_[i].begin.store(begin, std::memory_order_release);
-            std::atomic_thread_fence(std::memory_order_release);
-            domain_range_slots_[i].end.store(end, std::memory_order_release);
-            return;
-        }
-    }
-
-    // Extend the array.
-    int idx = domain_slot_count_.fetch_add(1, std::memory_order_acquire);
-    if (idx >= kMaxDomainSlots) {
-        CHAOS_IL2CPP_LOG_ERROR_M("CRAG", "domain_range_slot_overflow idx={0}", idx);
-        domain_slot_count_.fetch_sub(1, std::memory_order_release);
-        return;
-    }
-    domain_range_slots_[idx].domain_id.store(domain_id, std::memory_order_release);
-    domain_range_slots_[idx].begin.store(begin, std::memory_order_release);
-    std::atomic_thread_fence(std::memory_order_release);
-    domain_range_slots_[idx].end.store(end, std::memory_order_release);
-}
-
-void RegionManager::RemoveDomainRange(uint32_t domain_id) {
-    int count = domain_slot_count_.load(std::memory_order_acquire);
-    for (int i = 0; i < count; i++) {
-        uint32_t did = domain_range_slots_[i].domain_id.load(std::memory_order_acquire);
-        if (did == domain_id) {
-            // Zero end first, then domain_id (reader checks domain_id first via load → begin then end).
-            domain_range_slots_[i].end.store(0, std::memory_order_release);
-            std::atomic_thread_fence(std::memory_order_release);
-            domain_range_slots_[i].begin.store(0, std::memory_order_release);
-            domain_range_slots_[i].domain_id.store(0, std::memory_order_release);
-            return;
-        }
-    }
-}
-
 Region* RegionManager::GetFirstPohRegion() const {
     // O(1): returns cached POH list head instead of O(R) region table scan.
     // Mutex ensures caller sees a consistent list (mutators may be allocating).
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
     return poh_region_list_;
 }
 
 int RegionManager::GetPohRegionCount() const {
     // O(1): returns cached count instead of O(R) region table scan.
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
     return poh_region_count_;
 }
 
 Region* RegionManager::GetNextPohRegion(const Region* current) const {
     // O(1): follows poh_next pointer instead of scanning the region table.
     if (current == nullptr) return nullptr;
-    std::lock_guard<std::mutex> lock(mutex_);
+    GcSpinLockGuard lock(mutex_);
     return current->poh_next;
 }
 
@@ -1306,6 +1379,7 @@ extern "C" void chaos_gc_collect() noexcept {
     GcCoordinator::Instance().RequestGlobalGc();
 #else
     CHAOS_IL2CPP_LOG_DEBUG("CRAG", "chaos_gc_collect requested");
+    GcVerifyHeap();   // entry self-check (HeapVerify level > 0)
 
     // Step 1: Young collection on the shared young generation (if any).
     // Uses g_young_gen.bump to determine if there are live nursery objects,
@@ -1348,6 +1422,8 @@ extern "C" void chaos_gc_collect() noexcept {
 
     // Step 3: Run pending finalizers.
     G_OldGen().RunFinalizers();
+
+    GcVerifyHeap();   // exit self-check (HeapVerify level > 0)
 
 #endif  // CHAOS_IL2CPP_GC_SERVER
 }

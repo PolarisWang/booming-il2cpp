@@ -169,9 +169,12 @@ void GcIterateTenuredHandles(void (*callback)(void* object, void* user_data),
         for (auto& kv : s_gc_handle_shards[s]) {
             void* obj = kv.second.object_instance;
             if (obj == nullptr) continue;
-            if (!RegionManager::Instance().IsNurseryPointer(obj)) {
-                callback(obj, user_data);
-            }
+            // Generation-aware prune (align CoreCLR handletable clump pruning):
+            // skip nursery-pointing handles using the cached bit, avoiding a
+            // RegionManager re-query per handle.  The bit is maintained on
+            // creation / GcSetHandleTarget / weak forwarding.
+            if (kv.second.points_to_nursery) continue;
+            callback(obj, user_data);
         }
     }
 }
@@ -188,8 +191,8 @@ void GcProcessWeakHandlesAfterYoungGC() noexcept {
         void* obj = kv.second.object_instance;
         if (obj == nullptr) continue;
 
-        // Only process objects that were in the nursery.
-        if (!RegionManager::Instance().IsNurseryPointer(obj)) continue;
+        // Only process objects that were in the nursery (cached gen-prune).
+        if (!kv.second.points_to_nursery) continue;
 
         // If the nursery object was forwarded (promoted), update the handle
         // to point to the tenured copy.  Otherwise, null the handle (the
@@ -200,8 +203,10 @@ void GcProcessWeakHandlesAfterYoungGC() noexcept {
         if ((first_word & 1u) != 0) {
             void* tenured = reinterpret_cast<void*>(first_word & ~1ull);
             kv.second.object_instance = tenured;
+            kv.second.points_to_nursery = false;  // promoted to old-gen/LOH
         } else {
             kv.second.object_instance = nullptr;
+            kv.second.points_to_nursery = false;
         }
     }
     }
@@ -217,7 +222,8 @@ CHAOS_IL2CPP_UINT64 GcCreateStrongHandle(void* object_instance) noexcept {
     auto* shard_map = &s_gc_handle_shards[HandleShardIndex(handle)];
     auto* shard_mutex = &s_gc_handle_shard_mutexes[HandleShardIndex(handle)];
     std::lock_guard<std::mutex> lock(*shard_mutex);
-    (*shard_map)[handle] = GcHandleEntry{ object_instance, false, false, false, false };
+    (*shard_map)[handle] = GcHandleEntry{ object_instance, false, false, false, false,
+        RegionManager::Instance().IsNurseryPointer(object_instance) };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     return handle;
 }
@@ -228,7 +234,8 @@ CHAOS_IL2CPP_UINT64 GcCreateWeakHandle(void* object_instance) noexcept {
     auto& shard_map = HandleShardMap(handle);
     auto& shard_mutex = HandleShardMutex(handle);
     std::lock_guard<std::mutex> lock(shard_mutex);
-    shard_map[handle] = GcHandleEntry{ object_instance, false, true, false, false };
+    shard_map[handle] = GcHandleEntry{ object_instance, false, true, false, false,
+        RegionManager::Instance().IsNurseryPointer(object_instance) };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     return handle;
 }
@@ -239,7 +246,8 @@ CHAOS_IL2CPP_UINT64 GcCreateLongWeakHandle(void* object_instance) noexcept {
     auto& shard_map = HandleShardMap(handle);
     auto& shard_mutex = HandleShardMutex(handle);
     std::lock_guard<std::mutex> lock(shard_mutex);
-    shard_map[handle] = GcHandleEntry{ object_instance, false, true, true, false };
+    shard_map[handle] = GcHandleEntry{ object_instance, false, true, true, false,
+        RegionManager::Instance().IsNurseryPointer(object_instance) };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     return handle;
 }
@@ -250,7 +258,8 @@ CHAOS_IL2CPP_UINT64 GcCreatePinnedHandle(void* object_instance) noexcept {
     auto& shard_map = HandleShardMap(handle);
     auto& shard_mutex = HandleShardMutex(handle);
     std::lock_guard<std::mutex> lock(shard_mutex);
-    shard_map[handle] = GcHandleEntry{ object_instance, true, false, false, false };
+    shard_map[handle] = GcHandleEntry{ object_instance, true, false, false, false,
+        RegionManager::Instance().IsNurseryPointer(object_instance) };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     GcAddPinnedObject(object_instance);
     return handle;
@@ -262,7 +271,8 @@ CHAOS_IL2CPP_UINT64 GcCreateAsyncPinnedHandle(void* object_instance) noexcept {
     auto& shard_map = HandleShardMap(handle);
     auto& shard_mutex = HandleShardMutex(handle);
     std::lock_guard<std::mutex> lock(shard_mutex);
-    shard_map[handle] = GcHandleEntry{ object_instance, true, false, false, true };
+    shard_map[handle] = GcHandleEntry{ object_instance, true, false, false, true,
+        RegionManager::Instance().IsNurseryPointer(object_instance) };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     GcAddPinnedObject(object_instance);
     return handle;
@@ -290,7 +300,13 @@ void* GcGetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id) noexcept {
     std::lock_guard<std::mutex> lock(shard_mutex);
     auto it = shard_map.find(handle_id);
     if (it == shard_map.end()) return nullptr;
-    return it->second.object_instance;
+    void* obj = it->second.object_instance;
+    if (obj == nullptr) return nullptr;
+    // WeakInterior handles point to an interior offset of the object.
+    if (it->second.interior_offset != 0) {
+        return static_cast<char*>(obj) + it->second.interior_offset;
+    }
+    return obj;
 }
 
 void GcSetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id, void* new_target) noexcept {
@@ -308,9 +324,75 @@ void GcSetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id, void* new_target) noexcept
     BgcSatbPreWriteBarrier(&it->second.object_instance);
     BgcRecordRootChange(&it->second.object_instance, old_target);
     it->second.object_instance = new_target;
+    it->second.points_to_nursery = RegionManager::Instance().IsNurseryPointer(new_target);
     if (it->second.pinned && new_target != nullptr) {
         GcAddPinnedObject(new_target);
     }
+}
+
+// ======================================================================
+// M12: RefCounted + WeakInterior handle API (CoreCLR-aligned internal types)
+//   HNDTYPE_REFCOUNTED         = 5   — runtime-managed ref lifetime
+//   HNDTYPE_WEAK_INTERIOR_POINTER = 10 — weak interior-pointing handle
+// ======================================================================
+
+CHAOS_IL2CPP_UINT64 GcCreateRefCountedHandle(void* object_instance) noexcept {
+    if (object_instance == nullptr) return 0;
+    CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
+    auto* shard_map = &s_gc_handle_shards[HandleShardIndex(handle)];
+    auto* shard_mutex = &s_gc_handle_shard_mutexes[HandleShardIndex(handle)];
+    std::lock_guard<std::mutex> lock(*shard_mutex);
+    (*shard_map)[handle] = GcHandleEntry{ object_instance, false, false, false, false,
+        RegionManager::Instance().IsNurseryPointer(object_instance),
+        /* M12 */ true, 1, 0 };
+    s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
+    return handle;
+}
+
+CHAOS_IL2CPP_INT32 GcAddRefHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept {
+    if (handle_id == 0) return 0;
+    auto& shard_mutex = HandleShardMutex(handle_id);
+    auto& shard_map = HandleShardMap(handle_id);
+    std::lock_guard<std::mutex> lock(shard_mutex);
+    auto it = shard_map.find(handle_id);
+    if (it == shard_map.end() || !it->second.refcounted) return 0;
+    it->second.refcount = static_cast<CHAOS_IL2CPP_INT32>(it->second.refcount + 1);
+    return it->second.refcount;
+}
+
+CHAOS_IL2CPP_INT32 GcReleaseHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept {
+    if (handle_id == 0) return 0;
+    auto& shard_mutex = HandleShardMutex(handle_id);
+    auto& shard_map = HandleShardMap(handle_id);
+    std::lock_guard<std::mutex> lock(shard_mutex);
+    auto it = shard_map.find(handle_id);
+    if (it == shard_map.end() || !it->second.refcounted) return 0;
+    CHAOS_IL2CPP_INT32 new_ref = static_cast<CHAOS_IL2CPP_INT32>(it->second.refcount - 1);
+    if (new_ref <= 0) {
+        // Refcount reached 0: free the handle (equivalent to GcFreeHandle).
+        if (it->second.pinned || it->second.async_pinned) {
+            GcRemovePinnedObject(it->second.object_instance);
+        }
+        shard_map.erase(it);
+        s_gc_handle_count.fetch_sub(1, std::memory_order_relaxed);
+        return 0;
+    }
+    it->second.refcount = new_ref;
+    return new_ref;
+}
+
+CHAOS_IL2CPP_UINT64 GcCreateWeakInteriorHandle(void* object_instance,
+                                               CHAOS_IL2CPP_SIZE offset) noexcept {
+    if (object_instance == nullptr) return 0;
+    CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
+    auto* shard_map = &s_gc_handle_shards[HandleShardIndex(handle)];
+    auto* shard_mutex = &s_gc_handle_shard_mutexes[HandleShardIndex(handle)];
+    std::lock_guard<std::mutex> lock(*shard_mutex);
+    (*shard_map)[handle] = GcHandleEntry{ object_instance, false, true, false, false,
+        RegionManager::Instance().IsNurseryPointer(object_instance),
+        /* M12 */ false, 0, offset };
+    s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
+    return handle;
 }
 
 // ======================================================================
@@ -403,15 +485,21 @@ void GcProcessDependentHandlesAfterYoungGC() noexcept {
 /// Process dependent handles after a full GC (fixed-point iteration).
 /// For each (primary, secondary) pair:
 ///   - If primary is marked alive in old-gen, secondary is also kept alive.
-///   - Fixed-point: repeat up to 3 rounds until the reachable set stabilizes.
+///   - Fixed-point: repeat until the reachable set stabilizes (no new
+///     secondary kept in a round).  MarkObject is idempotent (returns false
+///     for already-marked objects), so the loop provably terminates.
 /// Returns the number of secondary objects kept alive by this pass.
 int GcProcessDependentHandlesAfterFullGC() noexcept {
     std::lock_guard<std::mutex> lock(s_dep_handle_mutex);
     int total_kept = 0;
 
-    // Fixed-point iteration: up to 3 rounds (CoreCLR-aligned).
-    constexpr int kMaxFixedPointRounds = 3;
-    for (int round = 0; round < kMaxFixedPointRounds; round++) {
+    // Runtime convergence (align CoreCLR objecthandle.cpp:1203-1265 do-while
+    // "re-scan until no unpromoted-primary && no newly-promoted-secondary").
+    // NO fixed round cap: a chain of dependent handles deeper than the old
+    // kMaxFixedPointRounds=3 would otherwise lose a secondary.  Convergence is
+    // guaranteed because G_OldGen().MarkObject / G_Loh().MarkObject return
+    // false once an object is already marked, so kept_this_round must reach 0.
+    for (;;) {
         int kept_this_round = 0;
 
         for (auto& kv : s_dep_handle_table) {

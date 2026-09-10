@@ -2,9 +2,7 @@
 
 namespace chaos::il2cpp::runtime_core {
 
-ArgBuffer::ArgBuffer(void* buffer) noexcept
-    : buffer_(buffer) {
-}
+ArgBuffer::ArgBuffer(void* buffer) noexcept : buffer_(buffer) {}
 
 CHAOS_IL2CPP_INT32 ArgBuffer::ReadI32() noexcept {
     auto* ptr = static_cast<char*>(buffer_) + offset_;
@@ -71,4 +69,4 @@ void ArgBuffer::WritePtr(void* value) noexcept {
     offset_ += sizeof(void*);
 }
 
-}  // namespace chaos::il2cpp::runtime_core
+} // namespace chaos::il2cpp::runtime_core

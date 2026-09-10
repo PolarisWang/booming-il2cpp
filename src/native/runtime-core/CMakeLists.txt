@@ -36,6 +36,8 @@ add_library(chaos_runtime_core STATIC
     memory_domain.h
     memory_domain_events.h
     vtable_registry.cpp
+    vtable_registry_resolve.cpp
+    vtable_registry_internal.h
     vtable_registry.h
     convert.h
     convert.cpp
@@ -58,6 +60,7 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/random_stubs.cpp
     runtime_stubs/stream_stubs.cpp
     runtime_stubs/hashcode_stubs.cpp
+    runtime_stubs/xml_nametable_stubs.cpp
     runtime_stubs/interlocked_stubs.cpp
     runtime_stubs/string_stubs.cpp
     runtime_stubs/exception_stubs.cpp
@@ -68,14 +71,15 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/threadpool_events.cpp
     runtime_stubs/convert_stubs.cpp
     runtime_stubs/interop_stubs.cpp
+    runtime_stubs/unsafe_stubs.cpp
+    runtime_stubs/crypto_stubs.cpp
     runtime_stubs/collection_stubs.cpp
     runtime_stubs/vector_stubs.cpp
     runtime_stubs/async_stubs.cpp
+    runtime_stubs/unsafe_stubs.cpp
     runtime_stubs/misc_stubs.cpp
     runtime_stubs/interpreter_entry_direct.cpp
     runtime_stubs/registration_globals.cpp
-    runtime_stubs/pal_stubs.cpp
-    hotupdate_probe.cpp
     module_registry.cpp
     module_registry.h
     layout_engine.cpp
@@ -84,6 +88,7 @@ add_library(chaos_runtime_core STATIC
     instantiation_engine.h
     thread_state.cpp
     thread_state.h
+    thread_state_safepoint.cpp
     jit_demotion.cpp
     jit_demotion.h
     jit/jit_debug_contract.cpp
@@ -115,6 +120,8 @@ add_library(chaos_runtime_core STATIC
     hotpatch_table.cpp
     patch_loader.h
     patch_loader.cpp
+    hotpatch_api.h
+    hotpatch_api.cpp
     jit_registration.h
     jit_registration.cpp
     jit_data_loader.h
@@ -125,7 +132,6 @@ add_library(chaos_runtime_core STATIC
     assembly_manager.cpp
     static_var_store.h
     static_var_store.cpp
-    gc/gc_bump_cache.h
     gc/gc_bit_utils.h
     gc/gc_features.h
     gc/gc_helpers.h
@@ -134,6 +140,9 @@ add_library(chaos_runtime_core STATIC
     gc/gc_scheduler.cpp
     gc/gc_region.h
     gc/gc_region.cpp
+    gc/gc_region_range.cpp
+    gc/gc_diagnostics.h
+    gc/gc_diagnostics.cpp
     gc/gc_root_change.h
     gc/gc_root_change.cpp
     gc/gc_card_table.h
@@ -157,19 +166,23 @@ add_library(chaos_runtime_core STATIC
     gc/gc_parallel_mark.cpp
     gc/gc_events.h
     gc/gc_events.cpp
+    gc/gc_config.h
+    gc/gc_config.cpp
     gc/gc_etw.h
     gc/gc_etw.cpp
     gc/gc_gen1.h
     gc/gc_gen1.cpp
+    gc/gc_gen1_relocate.cpp
     gc/gc_stats.h
     gc/gc_stats.cpp
-    gc/gc_stress.h
-    gc/gc_stress.cpp
     gc/gc_worker_pool.h
     gc/gc_worker_pool.cpp
     gc/gc_bgc.h
     gc/gc_bgc.cpp
     gc/gc_bgc_inline.h
+    gc/gc_bgc_worker.cpp
+    gc/gc_runtime_gates.h
+    gc/gc_runtime_gates.cpp
     gc/gc_api.h
     gc/gc_api.cpp
     gc/gc_coordinator.h
@@ -234,9 +247,8 @@ endif()
 option(CHAOS_IL2CPP_GC_BGC          "Enable Background GC (BGC) concurrent mark-sweep"     ON)
 option(CHAOS_IL2CPP_GC_PARALLEL_MARK "Enable parallel marking in GC"                        ON)
 option(CHAOS_IL2CPP_GC_EVENTS       "Enable GC event tracing and callbacks"                 ON)
-option(CHAOS_IL2CPP_GC_STRESS       "Enable GC stress testing mode (debug/validation only)" OFF)
 option(CHAOS_IL2CPP_GC_LARGE_PAGES  "Enable large page (2MB) support (requires SeLockMemoryPrivilege)" ON)
-option(CHAOS_IL2CPP_GC_SERVER      "Enable Server GC mode with per-NUMA-node heaps"              ON)
+option(CHAOS_IL2CPP_GC_SERVER      "Enable Server GC mode with per-NUMA-node heaps"              OFF)
 
 option(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB
     "Hard memory limit in MB (0=disabled). Allocation exceeding this fails."
@@ -253,9 +265,6 @@ if(CHAOS_IL2CPP_GC_PARALLEL_MARK)
 endif()
 if(CHAOS_IL2CPP_GC_EVENTS)
     target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_EVENTS=1)
-endif()
-if(CHAOS_IL2CPP_GC_STRESS)
-    target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_STRESS=1)
 endif()
 if(CHAOS_IL2CPP_GC_LARGE_PAGES)
     target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_LARGE_PAGES=1)
@@ -301,6 +310,7 @@ elseif(UNIX AND NOT APPLE AND NOT ANDROID)
     target_link_libraries(chaos_runtime_core PUBLIC chaos_interpreter)
     target_link_libraries(chaos_runtime_core PUBLIC chaos_eventpipe)
     target_link_libraries(chaos_runtime_core PRIVATE numa)
+    target_link_libraries(chaos_runtime_core PRIVATE ssl crypto)
 endif()
 
 # Platform-specific sources

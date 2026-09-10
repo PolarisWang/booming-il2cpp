@@ -38,8 +38,8 @@ public:
 
 private:
     FastFrame frames_[kPoolSize];
-    uint32_t  free_list_[kPoolSize];
-    uint32_t  free_head_;   // index into free_list; 0 = empty
+    uint32_t free_list_[kPoolSize];
+    uint32_t free_head_; // index into free_list; 0 = empty
 };
 
 // Global thread-local pool instance (defined in fast_frame_pool.cpp).
@@ -49,13 +49,9 @@ extern thread_local FastFramePool tls_frame_pool;
 // Lightweight FastFrame field setup — replaces ~1.4KB memset + field fills.
 // Resets only the fields that change between calls (pc, sp, tracked, args,
 // dispatch, call_cache).  O(1) ~10 scalar assignments (~20ns) vs ~200ns memset.
-void SetupFastFrame(FastFrame* ff,
-                    const void* patch_method,
-                    const void* args_buf,
-                    const void* ir,
-                    void* dispatch_fn,
+void SetupFastFrame(FastFrame* ff, const void* patch_method, const void* args_buf, const void* ir, void* dispatch_fn,
                     void* dispatch_ctx) noexcept;
 
-}  // namespace chaos::il2cpp::runtime_core
+} // namespace chaos::il2cpp::runtime_core
 
-#endif  // CHAOS_IL2CPP_FAST_FRAME_POOL_H_
+#endif // CHAOS_IL2CPP_FAST_FRAME_POOL_H_

@@ -1,6 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <!-- dotnet tool metadata -->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>chaos-il2cpp</ToolCommandName>
+    <PackageId>chaos-il2cpp</PackageId>
+    <PackageDescription>chaos-il2cpp - IL2CPP toolchain CLI. Translates .NET assemblies to C++ and produces native executables.</PackageDescription>
+    <PackageTags>il2cpp;native;aot;codegen</PackageTags>
+    <PackageProjectUrl>https://github.com/PolarisWang/booming-il2cpp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/PolarisWang/booming-il2cpp</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Chaos.IL2CPP.Driver.Tests" />

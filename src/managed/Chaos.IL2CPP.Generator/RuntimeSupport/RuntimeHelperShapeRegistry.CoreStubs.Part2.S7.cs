@@ -20,6 +20,31 @@ public sealed partial class NativeAotLoweringPlanner
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0 });
 
+            // Math::Ceiling(System.Decimal) → Decimal — DecimalCarrier* in/out.
+            // Forward to the native DECIMAL impl so the ATG wrapper AOT-lowers the call
+            // to a real 1-arg native (instead of the 0-arg catch-all that drops the
+            // 16-byte Decimal carrier).
+            registry.Register("System.Math", "Ceiling", ["System.Decimal"],
+                ShapeKind.SimpleForward, "ChaosMathDecimalCeiling",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0 });
+
+        }
+
+        /// <summary>
+        /// Math::Truncate(System.Decimal) → Decimal (SimpleForward stub)
+        /// </summary>
+        private static void RegisterMathTruncate(RuntimeHelperShapeRegistry registry)
+        {
+            registry.Register("System.Math", "Truncate", ["System.Decimal"],
+                ShapeKind.SimpleForward, "ChaosMathDecimalTruncate",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0 });
+
         }
 
         /// <summary>

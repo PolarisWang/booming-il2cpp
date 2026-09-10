@@ -23,13 +23,10 @@ using interpreter::RegisterFrame;
 // ── FastFrame scanner ──────────────────────────────────────────────
 
 /// Scan a single FastFrame for ObjectRef roots in stack and locals.
-static void GcScanFastFrame(const FastFrame& frame,
-                             GcRootCallback callback,
-                             void* user_data) noexcept {
+static void GcScanFastFrame(const FastFrame& frame, GcRootCallback callback, void* user_data) noexcept {
     // Scan evaluation stack slots (0..sp-1).
     for (uint32_t i = 0; i < frame.sp; ++i) {
-        if (frame.stack_tags[i] ==
-                static_cast<uint8_t>(interpreter::ValueTag::ObjectRef)) {
+        if (frame.stack_tags[i] == static_cast<uint8_t>(interpreter::ValueTag::ObjectRef)) {
             if (frame.stack[i] != 0) {
                 callback(const_cast<uint64_t*>(&frame.stack[i]),
                          /*is_interior=*/false, user_data);
@@ -39,8 +36,7 @@ static void GcScanFastFrame(const FastFrame& frame,
 
     // Scan local variable slots (0..local_count-1).
     for (uint32_t i = 0; i < frame.local_count; ++i) {
-        if (frame.local_tags[i] ==
-                static_cast<uint8_t>(interpreter::ValueTag::ObjectRef)) {
+        if (frame.local_tags[i] == static_cast<uint8_t>(interpreter::ValueTag::ObjectRef)) {
             if (frame.locals[i] != 0) {
                 callback(const_cast<uint64_t*>(&frame.locals[i]),
                          /*is_interior=*/false, user_data);
@@ -52,13 +48,10 @@ static void GcScanFastFrame(const FastFrame& frame,
 // ── RegisterFrame scanner ──────────────────────────────────────────
 
 /// Scan a single RegisterFrame for ObjectRef roots in the GPR file.
-static void GcScanRegisterFrame(const RegisterFrame& frame,
-                                 GcRootCallback callback,
-                                 void* user_data) noexcept {
+static void GcScanRegisterFrame(const RegisterFrame& frame, GcRootCallback callback, void* user_data) noexcept {
     const auto& regs = frame.regs;
     for (uint32_t i = 0; i < interpreter::kGPRegisters; ++i) {
-        if (regs.gpr_tags[i] ==
-                static_cast<uint8_t>(interpreter::ValueTag::ObjectRef)) {
+        if (regs.gpr_tags[i] == static_cast<uint8_t>(interpreter::ValueTag::ObjectRef)) {
             if (regs.gpr[i] != 0) {
                 callback(const_cast<uint64_t*>(&regs.gpr[i]),
                          /*is_interior=*/false, user_data);
@@ -72,9 +65,7 @@ static void GcScanRegisterFrame(const RegisterFrame& frame,
 /// Walk the interpreter frame chain starting at @a root_frame and precisely
 /// scan each frame for ObjectRef roots.  Handles both FastFrame and
 /// RegisterFrame, identified by their frame_type discriminator at offset 0.
-void GcScanInterpFrameChain(void* root_frame,
-                             GcRootCallback callback,
-                             void* user_data) noexcept {
+void GcScanInterpFrameChain(void* root_frame, GcRootCallback callback, void* user_data) noexcept {
     auto* current = static_cast<uint8_t*>(root_frame);
 
     while (current != nullptr) {
@@ -91,9 +82,7 @@ void GcScanInterpFrameChain(void* root_frame,
         } else {
             // Unknown frame type — stop chain walk to prevent
             // misinterpretation of arbitrary memory as frame pointers.
-            CHAOS_IL2CPP_LOG_WARN_M("CRAG",
-                "interp_frame_unknown_type: 0x%08x, stopping chain walk",
-                frame_type);
+            CHAOS_IL2CPP_LOG_WARN_M("CRAG", "interp_frame_unknown_type: 0x%08x, stopping chain walk", frame_type);
             break;
         }
     }
@@ -107,4 +96,4 @@ void RegisterInterpFrameScanner() noexcept {
     GcSetInterpFrameScanner(GcScanInterpFrameChain);
 }
 
-}  // namespace chaos::il2cpp::runtime_core
+} // namespace chaos::il2cpp::runtime_core

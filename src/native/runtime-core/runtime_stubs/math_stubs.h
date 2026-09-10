@@ -54,4 +54,27 @@ CHAOS_IL2CPP_FLOAT64 ChaosMathCosh(CHAOS_IL2CPP_FLOAT64 x) noexcept;
 CHAOS_IL2CPP_FLOAT64 ChaosMathSinh(CHAOS_IL2CPP_FLOAT64 x) noexcept;
 CHAOS_IL2CPP_FLOAT64 ChaosMathTanh(CHAOS_IL2CPP_FLOAT64 x) noexcept;
 
+// ── Math::Ceiling/Floor/Round/Truncate(System.Decimal) ─────────────
+// DecimalCarrier* in, DecimalCarrier* out. Declared here (reachable by the
+// generated AOT C++ that forwards via SimpleForward) for a visible symbol.
+CHAOS_IL2CPP_INTPTR    ChaosMathDecimalCeiling(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosMathDecimalFloor(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+
+// ── Decimal::Add/Subtract/Multiply/Divide/Remainder/Negate(Decimal) ─
+// DecimalCarrier* in, DecimalCarrier* out. Declared here (reachable by the
+// generated AOT C++ that forwards via SimpleForward) so the symbol is visible.
+CHAOS_IL2CPP_INTPTR    ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalSubtract(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalMultiply(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalRemainder(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalNegate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+
+// ── Decimal::CopySign/MaxMagnitude/MinMagnitude(Decimal, Decimal) ────
+CHAOS_IL2CPP_INTPTR    ChaosDecimalCopySign(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalMaxMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalMinMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+
 

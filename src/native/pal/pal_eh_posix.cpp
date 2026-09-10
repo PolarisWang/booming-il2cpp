@@ -22,7 +22,6 @@
 #include <csetjmp>
 #include <csignal>
 #include <cstring>
-#include <cstdio>
 #include <new>
 
 namespace chaos::il2cpp::pal {
@@ -90,11 +89,6 @@ static std::atomic<bool> s_handler_installed{false};
 // (which should not happen in practice) is not masked.
 static void PalEhSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept {
     if (g_pal_try_active) {
-        // Log the fault address for debugging
-        if (info != nullptr) {
-            fprintf(stderr, "[PAL_SIG] sig=%d fault_addr=%p si_code=%d\n",
-                    sig, info->si_addr, info->si_code);
-        }
         // We are inside a PalTryCallNoExcept region and the callee crashed.
         // Restore the saved context — execution resumes at the sigsetjmp return
         // point with return value 1 (the "caught" path).
@@ -143,7 +137,8 @@ bool PalTryCallNoExcept(uint64_t (*fn)(uint64_t, uint64_t, uint64_t, uint64_t,
                                         uint64_t, uint64_t, uint64_t, uint64_t),
                          uint64_t a0, uint64_t a1, uint64_t a2, uint64_t a3,
                          uint64_t a4, uint64_t a5, uint64_t a6, uint64_t a7,
-                         uint64_t& out_result) noexcept
+                         uint64_t& out_result,
+                         uint64_t* out_exception_object) noexcept
 {
     EnsureHandlerInstalled();
     EnsureAltStack();

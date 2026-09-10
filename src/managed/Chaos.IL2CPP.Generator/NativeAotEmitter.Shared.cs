@@ -128,8 +128,13 @@ public sealed partial class NativeAotEmitter
             var dedupedMethods = new List<NativeAotMethodTemplateModel>(totalMethods);
             var seenNs = new HashSet<string>(StringComparer.Ordinal);
             foreach (var m in allMethods)
-                if (!string.IsNullOrEmpty(m.NativeSymbol) && seenNs.Add(m.NativeSymbol))
+            {
+                // Keep every method; only dedup non-empty NativeSymbol collisions.
+                // Methods with an empty/absent NativeSymbol (e.g. unit-test subjects)
+                // must not be dropped, or paging silently emits zero pages.
+                if (string.IsNullOrEmpty(m.NativeSymbol) || seenNs.Add(m.NativeSymbol))
                     dedupedMethods.Add(m);
+            }
             allMethods = dedupedMethods;
             totalMethods = allMethods.Count;
 
@@ -474,10 +479,122 @@ public sealed partial class NativeAotEmitter
             // No artifact ref — this is consumed internally by the verification orchestrator.
         }
 
+        // ── Post-processing: safeHeaderValuetypeTypedefs ──
+        // Scan all generated page sources for chaos_valuetype_* references that lack
+        // a corresponding typedef in the shared header (native-aot.generated.header.h).
+        // These come from extern "C" declarations in TPG Scriban templates for external
+        // runtime functions, which reference chaos_valuetype_* types not discovered by
+        // AOT IR lowering or ObjectModelEmission (e.g. System.Data.Common internal enums
+        // like DataRowVersion, ConflictOption, CommandBehavior).
+        AppendMissingVtTypedefsToHeaderPostScan(sources);
+
         return (sources, artifacts);
     }
 
+    /// <summary>
+    /// Scan all generated sources for chaos_valuetype_* references missing from the
+    /// shared header and append the needed typedefs to the header content.
+    /// This catches types referenced in TPG Scriban template extern "C" declarations
+    /// that are not part of the AOT subject methods' type closure.
+    /// </summary>
+    private static void AppendMissingVtTypedefsToHeaderPostScan(IReadOnlyList<NativeAotGeneratedSource> sources)
+    {
+        var existingVT = new HashSet<string>(StringComparer.Ordinal);
+        int headerIdx = -1;
+        string headerPath = NativeAotArtifactNames.GeneratedHeader;
+        for (int si = 0; si < sources.Count; si++)
+        {
+            if (string.Equals(sources[si].RelativePath, headerPath, StringComparison.Ordinal))
+            {
+                headerIdx = si;
+                CollectExistingValueTypeTypedefs(sources[si].Contents, existingVT);
+                break;
+            }
+        }
+        if (headerIdx < 0) return;
 
+        var missingVT = new HashSet<string>(StringComparer.Ordinal);
+        for (int si = 0; si < sources.Count; si++)
+        {
+            if (si == headerIdx) continue;
+            var text = sources[si].Contents;
+            if (string.IsNullOrEmpty(text)) continue;
+            int pos = 0;
+            while ((pos = text.IndexOf("chaos_valuetype_", pos, StringComparison.Ordinal)) >= 0)
+            {
+                int start = pos;
+                int end = pos + 16;
+                while (end < text.Length && (char.IsLetterOrDigit(text[end]) || text[end] == '_'))
+                    end++;
+                // Skip matches where no identifier characters follow "chaos_valuetype_"
+                // (e.g. matches inside "chaos_valuetype_*" comment text).
+                if (end == pos + 16) { pos = end; continue; }
+                var sym = text.Substring(start, end - start);
+                // Skip symbols containing non-identifier characters (safety net).
+                bool valid = true;
+                for (int i = 16; i < sym.Length && valid; i++)
+                    if (!char.IsLetterOrDigit(sym[i]) && sym[i] != '_')
+                        valid = false;
+                if (valid && !existingVT.Contains(sym))
+                    missingVT.Add(sym);
+                pos = end;
+            }
+        }
+        if (missingVT.Count == 0) return;
+
+        var headerSb = new System.Text.StringBuilder(sources[headerIdx].Contents);
+        headerSb.AppendLine();
+        headerSb.AppendLine("// chaos_valuetype_* typedefs (post-scan: TPG extern declarations)");
+        foreach (var name in missingVT.OrderBy(n => n, StringComparer.Ordinal))
+        {
+            headerSb.Append("typedef CHAOS_IL2CPP_INT32 ");
+            headerSb.Append(name);
+            headerSb.AppendLine(";");
+        }
+        headerSb.AppendLine();
+        var oldSrc = sources[headerIdx];
+        if (sources is IList<NativeAotGeneratedSource> mutableList)
+        {
+            mutableList[headerIdx] = new NativeAotGeneratedSource
+            {
+                RelativePath = oldSrc.RelativePath,
+                Contents = headerSb.ToString(),
+            };
+        }
+    }
+
+    /// <summary>
+    /// Collect existing chaos_valuetype_* typedef names from header content.
+    /// Matches "typedef CHAOS_IL2CPP_INT32 chaos_valuetype_XYZ;" patterns.
+    /// Also matches "struct chaos_valuetype_XYZ" definitions.
+    /// </summary>
+    private static void CollectExistingValueTypeTypedefs(string headerContent, HashSet<string> result)
+    {
+        const string typedefPrefix = "typedef CHAOS_IL2CPP_INT32 ";
+        const string valuetypePrefix = "chaos_valuetype_";
+        int pos = 0;
+        while ((pos = headerContent.IndexOf(typedefPrefix, pos, StringComparison.Ordinal)) >= 0)
+        {
+            int vtStart = pos + typedefPrefix.Length;
+            int end = headerContent.IndexOf(';', vtStart);
+            if (end < 0) break;
+            var name = headerContent.Substring(vtStart, end - vtStart).Trim();
+            if (name.StartsWith(valuetypePrefix, StringComparison.Ordinal))
+                result.Add(name);
+            pos = end + 1;
+        }
+        const string structPrefix = "struct chaos_valuetype_";
+        pos = 0;
+        while ((pos = headerContent.IndexOf(structPrefix, pos, StringComparison.Ordinal)) >= 0)
+        {
+            int end = headerContent.IndexOfAny(new[] { ' ', '{' }, pos);
+            if (end < 0) break;
+            // Store bare symbol name (strip "struct " prefix) for comparison
+            // with typedef names and references.
+            result.Add(headerContent.Substring(pos + 7, end - pos - 7));
+            pos = end + 1;
+        }
+    }
 
     private static string BuildMethodSection(NativeAotMethodTemplateModel methodModel)
     {
@@ -583,28 +700,41 @@ public sealed partial class NativeAotEmitter
         foreach (Match m in declRx.Matches(text))
         {
             string sv = m.Value;
-            // Skip declarations with empty parens "()" — they are stubs with
-            // wrong arg count and need to be replaced by corrected declarations.
             int nextIdx = m.Index + m.Length;
-            if (nextIdx < text.Length && text[nextIdx] == ')') continue;
-            // Also count params in declaration — if they differ from call site, skip it
-            int closeParen = text.IndexOf(')', nextIdx);
-            if (closeParen > nextIdx)
+            // Check if this match is for a () declaration (0 args) — if so,
+            // check if it's a DEFINITION (has "{") or a DECLARATION (ends with ";").
+            // Only skip declarations (they have wrong arg count).
+            if (nextIdx < text.Length && text[nextIdx] == ')')
             {
-                string declArgs = text.Substring(nextIdx, closeParen - nextIdx);
-                int declParamCount = declArgs.Length > 0 ? declArgs.Split(',').Length : 0;
-                // Count args at call site (first non-declaration call)
-                // If declaration param count != call site arg count, skip it
+                // Find end of this construct — scan up to 200 chars for ";" or "{"
+                int scanPos = nextIdx + 1;
+                bool isDefinition = false;
+                while (scanPos < text.Length && scanPos < m.Index + 200)
+                {
+                    char sc = text[scanPos];
+                    if (sc == ';') break;
+                    if (sc == '{') { isDefinition = true; break; }
+                    scanPos++;
+                }
+                if (!isDefinition)
+                    continue; // skip () declarations (wrong arg count)
             }
-            if (nextIdx < text.Length && text[nextIdx] == ')') continue;
             foreach (var s in missing.ToList())
                 if (sv.Contains(s)) missing.Remove(s);
         }
         if (missing.Count == 0) return;
-        var stub = new StringBuilder();
-        stub.AppendLine("// ── External runtime stubs (post-emission) ──");
+        // Pre-check: for each missing symbol, verify there's no existing definition
+        // with "()" in the file (from catch-all fallback helpers).  These definitions
+        // are valid (the call site also uses "()") and adding a second extern "C"
+        // declaration with a different arg count would cause C2733.
+        var symbolsToDeclare = new List<(string symbol, int argCount)>();
         foreach (var sym in missing.OrderBy(s => s))
         {
+            // Check if there's already a "()" definition for this symbol
+            var defMatch = System.Text.RegularExpressions.Regex.Match(text,
+                System.Text.RegularExpressions.Regex.Escape(sym) + "\\(\\) noexcept\\s*\\{");
+            if (defMatch.Success)
+                continue; // existing () definition, no need for declaration
             int argCount = 0;
             // Count arguments from first call site
             var callMatch = System.Text.RegularExpressions.Regex.Match(text,
@@ -631,7 +761,12 @@ public sealed partial class NativeAotEmitter
                 }
                 argCount++;
             }
+            symbolsToDeclare.Add((sym, argCount));
         }
+        if (symbolsToDeclare.Count == 0) return;
+        var stub = new StringBuilder();
+        stub.AppendLine("// ── External runtime stubs (post-emission) ──");
+        foreach (var (sym, argCount) in symbolsToDeclare)
         stub.AppendLine();
         string genSrc = sb.ToString();
         int anchor = genSrc.LastIndexOf("#include");

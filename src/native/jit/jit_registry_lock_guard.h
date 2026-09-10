@@ -25,14 +25,9 @@ namespace chaos::il2cpp::jit {
 template <typename Handler>
 class JitRegistryLockGuard {
 public:
-    explicit JitRegistryLockGuard(Handler* handler) noexcept
-        : handler_(handler) {
-        handler_->AcquireLock();
-    }
+    explicit JitRegistryLockGuard(Handler* handler) noexcept : handler_(handler) { handler_->AcquireLock(); }
 
-    ~JitRegistryLockGuard() noexcept {
-        handler_->ReleaseLock();
-    }
+    ~JitRegistryLockGuard() noexcept { handler_->ReleaseLock(); }
 
     JitRegistryLockGuard(const JitRegistryLockGuard&) = delete;
     JitRegistryLockGuard& operator=(const JitRegistryLockGuard&) = delete;
@@ -41,6 +36,6 @@ private:
     Handler* handler_;
 };
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_JIT_REGISTRY_LOCK_GUARD_H_
+#endif // CHAOS_IL2CPP_JIT_REGISTRY_LOCK_GUARD_H_

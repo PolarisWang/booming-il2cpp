@@ -29,8 +29,8 @@ static constexpr uint8_t kRSP = 4;
 static constexpr uint8_t kRBP = 5;
 static constexpr uint8_t kRSI = 6;
 static constexpr uint8_t kRDI = 7;
-static constexpr uint8_t kR8  = 8;
-static constexpr uint8_t kR9  = 9;
+static constexpr uint8_t kR8 = 8;
+static constexpr uint8_t kR9 = 9;
 static constexpr uint8_t kR10 = 10;
 static constexpr uint8_t kR11 = 11;
 static constexpr uint8_t kR12 = 12;
@@ -45,39 +45,52 @@ static constexpr uint32_t kMaxInstrSize = 16;
 
 // ── Condition code constants (for jcc/setcc/cmovcc) ─────────────────────────
 
-static constexpr uint8_t kCC_O  = 0;   // overflow
-static constexpr uint8_t kCC_NO = 1;   // not overflow
-static constexpr uint8_t kCC_B  = 2;   // below (unsigned <)
-static constexpr uint8_t kCC_AE = 3;   // above or equal (unsigned >=)
-static constexpr uint8_t kCC_E  = 4;   // equal
-static constexpr uint8_t kCC_NE = 5;   // not equal
-static constexpr uint8_t kCC_BE = 6;   // below or equal (unsigned <=)
-static constexpr uint8_t kCC_A  = 7;   // above (unsigned >)
-static constexpr uint8_t kCC_S  = 8;   // sign (negative)
-static constexpr uint8_t kCC_NS = 9;   // not sign (non-negative)
-static constexpr uint8_t kCC_L  = 12;  // less (signed <)
-static constexpr uint8_t kCC_GE = 13;  // greater or equal (signed >=)
-static constexpr uint8_t kCC_LE = 14;  // less or equal (signed <=)
-static constexpr uint8_t kCC_G  = 15;  // greater (signed >)
+static constexpr uint8_t kCC_O = 0;   // overflow
+static constexpr uint8_t kCC_NO = 1;  // not overflow
+static constexpr uint8_t kCC_B = 2;   // below (unsigned <)
+static constexpr uint8_t kCC_AE = 3;  // above or equal (unsigned >=)
+static constexpr uint8_t kCC_E = 4;   // equal
+static constexpr uint8_t kCC_NE = 5;  // not equal
+static constexpr uint8_t kCC_BE = 6;  // below or equal (unsigned <=)
+static constexpr uint8_t kCC_A = 7;   // above (unsigned >)
+static constexpr uint8_t kCC_S = 8;   // sign (negative)
+static constexpr uint8_t kCC_NS = 9;  // not sign (non-negative)
+static constexpr uint8_t kCC_L = 12;  // less (signed <)
+static constexpr uint8_t kCC_GE = 13; // greater or equal (signed >=)
+static constexpr uint8_t kCC_LE = 14; // less or equal (signed <=)
+static constexpr uint8_t kCC_G = 15;  // greater (signed >)
 
 /// Map comparison opcode to jcc condition code for signed compare.
 using chaos::il2cpp::interpreter::IROpCode;
 inline uint8_t CmpToJccSigned(IROpCode op) noexcept {
     switch (op) {
-    default:
-    case IROpCode::Beq:    return kCC_E;
-    case IROpCode::BneUn:  return kCC_NE;
-    case IROpCode::Blt:    return kCC_L;
-    case IROpCode::Bgt:    return kCC_G;
-    case IROpCode::Ble:    return kCC_LE;
-    case IROpCode::Bge:    return kCC_GE;
-    case IROpCode::BltUn:  return kCC_B;
-    case IROpCode::BgtUn:  return kCC_A;
-    case IROpCode::BleUn:  return kCC_BE;
-    case IROpCode::BgeUn:  return kCC_AE;
-    case IROpCode::Ceq:    return kCC_E;
-    case IROpCode::Clt:    return kCC_L;
-    case IROpCode::Cgt:    return kCC_G;
+        default:
+        case IROpCode::Beq:
+            return kCC_E;
+        case IROpCode::BneUn:
+            return kCC_NE;
+        case IROpCode::Blt:
+            return kCC_L;
+        case IROpCode::Bgt:
+            return kCC_G;
+        case IROpCode::Ble:
+            return kCC_LE;
+        case IROpCode::Bge:
+            return kCC_GE;
+        case IROpCode::BltUn:
+            return kCC_B;
+        case IROpCode::BgtUn:
+            return kCC_A;
+        case IROpCode::BleUn:
+            return kCC_BE;
+        case IROpCode::BgeUn:
+            return kCC_AE;
+        case IROpCode::Ceq:
+            return kCC_E;
+        case IROpCode::Clt:
+            return kCC_L;
+        case IROpCode::Cgt:
+            return kCC_G;
     }
 }
 
@@ -251,15 +264,26 @@ public:
 
     // ── ARM64-specific (stub on x64 — only called from #if __aarch64__) ──
     /// Emit ADR Xreg, #imm (ARM64 PC-relative address, ±1MB range).
-    virtual void EmitAdr(uint8_t reg, int32_t imm) noexcept { (void)reg; (void)imm; }
+    virtual void EmitAdr(uint8_t reg, int32_t imm) noexcept {
+        (void)reg;
+        (void)imm;
+    }
     /// Emit BR Xreg (ARM64 unconditional branch to register).
     virtual void EmitBr(uint8_t reg) noexcept { (void)reg; }
     /// Emit ADD Xdst, Xsrc, #imm (3-operand ADD immediate).
-    virtual void EmitAddRI(uint8_t dst, uint8_t src, int32_t imm) noexcept { (void)dst; (void)src; (void)imm; }
+    virtual void EmitAddRI(uint8_t dst, uint8_t src, int32_t imm) noexcept {
+        (void)dst;
+        (void)src;
+        (void)imm;
+    }
     /// Emit STR Xdata, [Xbase, #imm] (scaled 8-byte store, imm in units of 8).
-    virtual void EmitStr64(uint8_t base, uint16_t scaled_offset, uint8_t data) noexcept { (void)base; (void)scaled_offset; (void)data; }
+    virtual void EmitStr64(uint8_t base, uint16_t scaled_offset, uint8_t data) noexcept {
+        (void)base;
+        (void)scaled_offset;
+        (void)data;
+    }
 };
 
-}  // namespace chaos::il2cpp::jit
+} // namespace chaos::il2cpp::jit
 
-#endif  // CHAOS_IL2CPP_IENCODER_H_
+#endif // CHAOS_IL2CPP_IENCODER_H_

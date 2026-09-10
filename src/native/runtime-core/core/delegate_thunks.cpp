@@ -1,6 +1,7 @@
 #include <chaos/native_types.h>
 #include <runtime_abi.h>
 #include "../gc/gc_old_gen.h"
+#include "../thread_state.h"  // EnterPreemptiveMode/EnterCooperativeMode for G_OldGen().Allocate
 #include <hotpatch_table.h>
 #include <interpreter_entry.h>
 #include <cstring>
@@ -168,11 +169,13 @@ void* MarshalGetDelegateForFunctionPointerImpl(
 
     void* dispatch_thunk = kNativeDfnThunks[param_count];
 
-    // Allocate via old-gen GC so the GC scans the node for managed object refs.
+        // Allocate via old-gen GC so the GC scans the node for managed object refs.
     // target_instance stores the native_fn_ptr; DfnDispatch<true> passes it as
     // the third argument to the dispatch thunk.
+    threading::EnterPreemptiveMode();
     auto* node = static_cast<NativeFunctionDelegate*>(
         G_OldGen().Allocate(sizeof(NativeFunctionDelegate), true));
+    threading::EnterCooperativeMode();
     node->method_token = 0;
     node->method_pointer = dispatch_thunk;
     node->target_instance = reinterpret_cast<void*>(native_fn_ptr);

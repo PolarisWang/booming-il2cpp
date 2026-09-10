@@ -7,11 +7,58 @@ public sealed partial class AotCoreIrLowering
 
     private static IReadOnlyList<AotCoreIrAbiSlotArtifact> ResolveParameterAbis(
         ManagedMethodModel method,
-        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes)
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, ManagedMethodModel>? managedMethods = null,
+        IReadOnlyDictionary<string, ManagedTypeModel>? allManagedTypes = null)
     {
         return method.Parameters
-            .Select(parameter => ResolveAbiSlot(parameter.Type, method.AssemblyName, managedTypes))
+            .Select(parameter =>
+            {
+                var fullTypeSubjectId = ResolveFullTypeSubjectId(parameter, method.AssemblyName, managedTypes, allManagedTypes);
+                return ResolveAbiSlot(parameter.Type, method.AssemblyName, managedTypes, fullTypeSubjectId);
+            })
             .ToList();
+    }
+
+    /// <summary>
+    /// Resolve the full TypeSubjectId for a parameter type, including external types.
+    /// Uses managedTypes first; falls back to allManagedTypes (which may contain types
+    /// from closure/assembly references not in the current AOT IR managedTypes scope).
+    /// Returns null when the type cannot be resolved (caller falls back to NativeInt).
+    ///
+    /// Priority order:
+    /// 1. parameter.TypeSubjectId — pre-resolved by LoaderStage from PE metadata TypeRef
+    /// 2. managedTypes lookup — fast path for types in the current closure
+    /// 3. allManagedTypes lookup — broader search across all closure assemblies
+    /// 4. null — caller falls back to NativeInt
+    /// </summary>
+    private static string? ResolveFullTypeSubjectId(
+        ManagedParameterModel parameter,
+        string assemblyName,
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, ManagedTypeModel>? allManagedTypes = null)
+    {
+        // Priority 1: pre-resolved TypeSubjectId from LoaderStage (most accurate for
+        // external types whose assembly is determined from PE metadata TypeRef).
+        if (!string.IsNullOrEmpty(parameter.TypeSubjectId))
+            return parameter.TypeSubjectId;
+
+        // Priority 2+3: try managedTypes then allManagedTypes
+        foreach (var candidateTypes in new[] { managedTypes, allManagedTypes })
+        {
+            if (candidateTypes == null) continue;
+            // Try matching by DisplayName or Name
+            foreach (var t in candidateTypes.Values)
+            {
+                if (string.Equals(t.DisplayName, parameter.Type, StringComparison.Ordinal) ||
+                    string.Equals(t.Name, parameter.Type, StringComparison.Ordinal) ||
+                    string.Equals(t.SubjectId, parameter.Type, StringComparison.Ordinal))
+                {
+                    return t.SubjectId;
+                }
+            }
+        }
+        return null;
     }
 
 
@@ -19,7 +66,8 @@ public sealed partial class AotCoreIrLowering
     private static AotCoreIrAbiSlotArtifact ResolveAbiSlot(
         string typeIdentity,
         string assemblyName,
-        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes)
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        string? fullTypeSubjectId = null)
     {
         // Strip byref suffix (&) for underlying type resolution;
         // the caller uses CarrierKindCode to determine the native ABI type.
@@ -192,11 +240,40 @@ public sealed partial class AotCoreIrLowering
         return new AotCoreIrAbiSlotArtifact
         {
             CarrierKindCode = AotCoreIrAbiCarrierKind.NativeInt,
-            TypeSubjectId = managedType?.SubjectId,
+            TypeSubjectId = managedType?.SubjectId
+                ?? fullTypeSubjectId
+                ?? FallbackTypeSubjectId(assemblyName, innerType),
             TypeShape = resolvedTypeShape,
         };
     }
 
+    /// <summary>
+    /// Build TypeSubjectId for unresolvable external types.
+    /// When managedType is null (type not in managedTypes, e.g. external
+    /// assemblies like System.Data.Common), this constructs
+    /// "{assemblyName}/{typeIdentity}" so downstream code can generate
+    /// correct chaos_valuetype_* typedef names.
+    /// Only triggers for qualified type names (contain '.') to avoid
+    /// simple names like "int" or "string".
+    /// CarrierKindCode remains NativeInt — the type identity is used
+    /// solely by MapAbiSlotParameterType to decide whether to emit
+    /// chaos_valuetype_X vs CHAOS_IL2CPP_INTPTR.
+    /// </summary>
+    private static string? FallbackTypeSubjectId(string assemblyName, string typeIdentity)
+    {
+        if (string.IsNullOrEmpty(typeIdentity) || !typeIdentity.Contains('.'))
+            return null;
+        // Skip System.* single-level types (e.g. System.Int32, System.String)
+        // which have explicit handling in ResolveAbiSlot above.
+        if (typeIdentity.StartsWith("System.", StringComparison.Ordinal))
+        {
+            int dotCount = 0;
+            for (int i = 7; i < typeIdentity.Length; i++)
+                if (typeIdentity[i] == '.') dotCount++;
+            if (dotCount == 0) return null; // System.Int32 etc.
+        }
+        return ManagedNaming.NormalizeSubjectIdAssembly($"{assemblyName}/{typeIdentity}");
+    }
 
 
     private static ManagedTypeModel? TryResolveManagedType(

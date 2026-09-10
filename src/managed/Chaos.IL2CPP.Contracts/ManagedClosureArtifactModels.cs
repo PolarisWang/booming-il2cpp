@@ -36,6 +36,18 @@ public sealed record AotManifestEntry
     public required string SubjectId { get; init; }
 
     public required string Reason { get; init; }
+
+    /// <summary>
+    /// Translation capability for a method-kind AOT manifest entry, derived from
+    /// <see cref="ManagedMethodModel.BodyAvailabilityCode"/> during MetadataWriter
+    /// emission.  Serialized into aot-manifest.json so the foundation-dll pipeline can
+    /// track each BCL subject method's translation state (real native AOT body vs
+    /// interpreter/ExternalRuntime fallback) — the wrapper-level tracking added in
+    /// AotCoreIrMethodArtifact.BodyAvailability cannot see past the CombinationSubjects
+    /// probe wrappers to the underlying BCL method.  Null for non-method entries
+    /// (field/type/dependency), which have no method body to classify.
+    /// </summary>
+    public string? BodyAvailability { get; init; }
 }
 
 public sealed record MetadataRegistrationArtifact

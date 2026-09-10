@@ -294,6 +294,12 @@ RuntimeNumericsVector2Carrier Vector2Normalize(RuntimeNumericsVector2Carrier val
 RuntimeNumericsVector2Carrier Vector2Lerp(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVector2Carrier right_value, float amount);
 RuntimeNumericsVector2Carrier Vector2Reflect(RuntimeNumericsVector2Carrier vector, RuntimeNumericsVector2Carrier normal);
 bool Vector2Equals(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVector2Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector2GreaterThanAll(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVector2Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector2GreaterThanOrEqualAll(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVector2Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector2LessThanAll(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVector2Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector2LessThanOrEqualAll(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVector2Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector2EqualsAll(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVector2Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector2EqualsAny(RuntimeNumericsVector2Carrier left_value, RuntimeNumericsVector2Carrier right_value);
 CHAOS_IL2CPP_INT32 Vector2GetHashCode(RuntimeNumericsVector2Carrier value);
 float Vector2Length(RuntimeNumericsVector2Carrier value);
 float Vector2GetElement(RuntimeNumericsVector2Carrier value, CHAOS_IL2CPP_INT32 index);
@@ -329,6 +335,12 @@ RuntimeNumericsVector3Carrier Vector3Lerp(RuntimeNumericsVector3Carrier left_val
 RuntimeNumericsVector3Carrier Vector3Reflect(RuntimeNumericsVector3Carrier vector, RuntimeNumericsVector3Carrier normal);
 RuntimeNumericsVector3Carrier Vector3Cross(RuntimeNumericsVector3Carrier left_value, RuntimeNumericsVector3Carrier right_value);
 bool Vector3Equals(RuntimeNumericsVector3Carrier left_value, RuntimeNumericsVector3Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector3GreaterThanAll(RuntimeNumericsVector3Carrier left_value, RuntimeNumericsVector3Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector3GreaterThanOrEqualAll(RuntimeNumericsVector3Carrier left_value, RuntimeNumericsVector3Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector3LessThanAll(RuntimeNumericsVector3Carrier left_value, RuntimeNumericsVector3Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector3LessThanOrEqualAll(RuntimeNumericsVector3Carrier left_value, RuntimeNumericsVector3Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector3EqualsAll(RuntimeNumericsVector3Carrier left_value, RuntimeNumericsVector3Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector3EqualsAny(RuntimeNumericsVector3Carrier left_value, RuntimeNumericsVector3Carrier right_value);
 CHAOS_IL2CPP_INT32 Vector3GetHashCode(RuntimeNumericsVector3Carrier value);
 float Vector3Length(RuntimeNumericsVector3Carrier value);
 float Vector3GetElement(RuntimeNumericsVector3Carrier value, CHAOS_IL2CPP_INT32 index);
@@ -361,6 +373,12 @@ RuntimeNumericsVector4Carrier Vector4SquareRoot(RuntimeNumericsVector4Carrier va
 RuntimeNumericsVector4Carrier Vector4Normalize(RuntimeNumericsVector4Carrier value);
 RuntimeNumericsVector4Carrier Vector4Lerp(RuntimeNumericsVector4Carrier left_value, RuntimeNumericsVector4Carrier right_value, float amount);
 bool Vector4Equals(RuntimeNumericsVector4Carrier left_value, RuntimeNumericsVector4Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector4GreaterThanAll(RuntimeNumericsVector4Carrier left_value, RuntimeNumericsVector4Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector4GreaterThanOrEqualAll(RuntimeNumericsVector4Carrier left_value, RuntimeNumericsVector4Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector4LessThanAll(RuntimeNumericsVector4Carrier left_value, RuntimeNumericsVector4Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector4LessThanOrEqualAll(RuntimeNumericsVector4Carrier left_value, RuntimeNumericsVector4Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector4EqualsAll(RuntimeNumericsVector4Carrier left_value, RuntimeNumericsVector4Carrier right_value);
+CHAOS_IL2CPP_INT32 Vector4EqualsAny(RuntimeNumericsVector4Carrier left_value, RuntimeNumericsVector4Carrier right_value);
 CHAOS_IL2CPP_INT32 Vector4GetHashCode(RuntimeNumericsVector4Carrier value);
 float Vector4Length(RuntimeNumericsVector4Carrier value);
 float Vector4GetElement(RuntimeNumericsVector4Carrier value, CHAOS_IL2CPP_INT32 index);
@@ -413,6 +431,30 @@ inline void chaos_decimal_ctor_int32(DecimalCarrier* carrier, CHAOS_IL2CPP_INT32
 inline void chaos_decimal_ctor_int32(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 value) {
     chaos_decimal_ctor_int32(reinterpret_cast<DecimalCarrier*>(carrier_ptr), value);
 }
+
+// ── Decimal arithmetic / rounding native declarations ──────────────
+// Declared here (runtime_core.h is included by chaos_pch.h, which every generated
+// AOT TU includes) so page TUs that emit a direct-native call to these (via
+// SimpleForward DirectNativeSymbol) can see the symbol.  Implemented in
+// parse_convert.cpp.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalSubtract(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMultiply(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRemainder(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalCopySign(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMaxMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMinMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalNegate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromOACurrency(CHAOS_IL2CPP_INT64 value) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt32(CHAOS_IL2CPP_INT32 value) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalCeiling(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalFloor(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigits(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 mode) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigitsMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits, CHAOS_IL2CPP_INT32 mode) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

@@ -34,6 +34,34 @@ public sealed partial class NativeAotLoweringPlanner
                             CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                             new HashSet<int> { 0 });
                     }
+                    // Single(Single) — delegate to ChaosBitConverterGetBytesFromSingle
+                    if (paramTypes.Count == 1 && paramTypes[0] == "System.Single")
+                    {
+                        var srcSingle = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_FLOAT32 chaos_arg_0",
+                        [
+                            "    return ChaosBitConverterGetBytesFromSingle(chaos_arg_0);",
+                        ]);
+                        return new GenericShapeResolution(srcSingle, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float32, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0 });
+                    }
+                    // Double(Double) — delegate to ChaosBitConverterGetBytesFromDouble
+                    if (paramTypes.Count == 1 && paramTypes[0] == "System.Double")
+                    {
+                        var srcDbl = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_FLOAT64 chaos_arg_0",
+                        [
+                            "    return ChaosBitConverterGetBytesFromDouble(chaos_arg_0);",
+                        ]);
+                        return new GenericShapeResolution(srcDbl, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0 });
+                    }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>();
                     foreach (var pt in paramTypes)
                     {

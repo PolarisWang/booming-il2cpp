@@ -17,10 +17,10 @@
 
 #include "bootstrap/bootstrap.h"
 
-#include <aot_core_ir_reader.h>   // DeserializeAotCoreIrMethod
-#include <interpreter_vm.h>       // ExecutionFrame, InterpreterVM, IRMethod, InterpreterValue
+#include <aot_core_ir_reader.h> // DeserializeAotCoreIrMethod
+#include <interpreter_vm.h>     // ExecutionFrame, InterpreterVM, IRMethod, InterpreterValue
 
-#include <ir_reg_alloc.h>         // AllocateRegisters, RegisterExecute, RegisterFrame
+#include <ir_reg_alloc.h> // AllocateRegisters, RegisterExecute, RegisterFrame
 
 #include <atomic>
 #include <cstring>

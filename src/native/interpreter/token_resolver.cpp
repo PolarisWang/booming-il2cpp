@@ -16,12 +16,9 @@ using namespace chaos::il2cpp::runtime_core;
 /// the type's field array.
 ///
 /// Returns nullptr if no type owns the field token.
-static const runtime_core::ReflectionQueryTypeDescriptor*
-FindDeclaringTypeByFieldToken(
-    const runtime_core::ReflectionQueryImageDescriptor* image,
-    CHAOS_IL2CPP_UINT32 field_token,
-    CHAOS_IL2CPP_UINT32* out_field_index)
-{
+static const runtime_core::ReflectionQueryTypeDescriptor* FindDeclaringTypeByFieldToken(
+    const runtime_core::ReflectionQueryImageDescriptor* image, CHAOS_IL2CPP_UINT32 field_token,
+    CHAOS_IL2CPP_UINT32* out_field_index) {
     if (image == nullptr || image->types == nullptr) {
         return nullptr;
     }
@@ -42,17 +39,14 @@ FindDeclaringTypeByFieldToken(
     return nullptr;
 }
 
-}  // anonymous namespace
+} // anonymous namespace
 
 // ════════════════════════════════════════════════════════════════════════════
 // Default token resolver callback
 // ════════════════════════════════════════════════════════════════════════════
 
-bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
-    CHAOS_IL2CPP_UINT32  token,
-    IRInstruction&        instruction,
-    void*                 user_data)
-{
+bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(CHAOS_IL2CPP_UINT32 token, IRInstruction& instruction,
+                                                 void* user_data) {
     CHAOS_IL2CPP_LOG_TRACE("runtime", "DefaultTokenResolver", "\"token\"=0x%x", token);
     if (user_data == nullptr) {
         return false;
@@ -70,21 +64,20 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
         // ELEMENT_TYPE_VAR — class-level type parameter (!N)
         const CHAOS_IL2CPP_UINT32 index = token & 0x00FFFFFFu;
         if (ctx->type_args != nullptr && index < ctx->arg_count) {
-            instruction.call_target = reinterpret_cast<void*>(
-                static_cast<CHAOS_IL2CPP_UINTPTR>(ctx->type_args[index]));
+            instruction.call_target = reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(ctx->type_args[index]));
             return true;
         }
-        return false;  // index out of range or no type_args
+        return false; // index out of range or no type_args
     }
     if ((token & 0xFF000000u) == 0x12000000u) {
         // ELEMENT_TYPE_MVAR — method-level type parameter (!!N)
         const CHAOS_IL2CPP_UINT32 index = token & 0x00FFFFFFu;
         if (ctx->method_type_args != nullptr && index < ctx->method_arg_count) {
-            instruction.call_target = reinterpret_cast<void*>(
-                static_cast<CHAOS_IL2CPP_UINTPTR>(ctx->method_type_args[index]));
+            instruction.call_target =
+                reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(ctx->method_type_args[index]));
             return true;
         }
-        return false;  // index out of range or no method_type_args
+        return false; // index out of range or no method_type_args
     }
 
     // ── Standard metadata token resolution (requires bridge) ──
@@ -101,13 +94,11 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
             if (ctx->bridge->resolve_method_by_token == nullptr) {
                 return false;
             }
-            MethodInfoHandle method_handle = ctx->bridge->resolve_method_by_token(
-                ctx->source_image, token);
+            MethodInfoHandle method_handle = ctx->bridge->resolve_method_by_token(ctx->source_image, token);
             if (method_handle == 0u) {
                 return false;
             }
-            instruction.call_target = reinterpret_cast<void*>(
-                static_cast<CHAOS_IL2CPP_UINTPTR>(method_handle));
+            instruction.call_target = reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(method_handle));
 
             // Set arg_count and instance flag from the method descriptor.
             // arg_count = total values on the evaluation stack (including 'this'
@@ -116,14 +107,14 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
             // depending on the method's calling convention.
             const auto* method_desc = TryDecodeReflectionQueryMethodHandle(method_handle);
             if (method_desc != nullptr) {
-                const bool is_cv = (instruction.op_code == IROpCode::CallVirt ||
-                                    instruction.op_code == IROpCode::CallVirtConstrained);
+                const bool is_cv =
+                    (instruction.op_code == IROpCode::CallVirt || instruction.op_code == IROpCode::CallVirtConstrained);
                 // For now, `call` opcode is conservatively treated as static.
                 // Phase 5b: add calling-convention detection from the method
                 // signature to handle instance `call` correctly.
                 instruction.is_instance_call = is_cv;
-                instruction.arg_count = static_cast<CHAOS_IL2CPP_UINT32>(
-                    method_desc->parameter_count + (is_cv ? 1 : 0));
+                instruction.arg_count =
+                    static_cast<CHAOS_IL2CPP_UINT32>(method_desc->parameter_count + (is_cv ? 1 : 0));
             }
 
             // For newobj, try to determine the declaring type's field count
@@ -151,13 +142,11 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
             if (ctx->bridge->resolve_type_by_token == nullptr) {
                 return false;
             }
-            TypeInfoHandle type_handle = ctx->bridge->resolve_type_by_token(
-                ctx->source_image, token);
+            TypeInfoHandle type_handle = ctx->bridge->resolve_type_by_token(ctx->source_image, token);
             if (type_handle == 0u) {
                 return false;
             }
-            instruction.call_target = reinterpret_cast<void*>(
-                static_cast<CHAOS_IL2CPP_UINTPTR>(type_handle));
+            instruction.call_target = reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(type_handle));
             return true;
         }
 
@@ -169,15 +158,13 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
             if (ctx->bridge->resolve_field_by_token == nullptr) {
                 return false;
             }
-            FieldInfoHandle field_handle = ctx->bridge->resolve_field_by_token(
-                ctx->source_image, token);
+            FieldInfoHandle field_handle = ctx->bridge->resolve_field_by_token(ctx->source_image, token);
             if (field_handle == 0u) {
                 return false;
             }
             // Store the field handle; the interpreter or layout pass will
             // extract the byte offset via the layout engine at execution time.
-            instruction.call_target = reinterpret_cast<void*>(
-                static_cast<CHAOS_IL2CPP_UINTPTR>(field_handle));
+            instruction.call_target = reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_UINTPTR>(field_handle));
 
             // ── Resolve real field offset via LayoutEngine ──
             // For instance fields (LdFld/StFld), compute the declaring type's
@@ -185,27 +172,21 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
             // (LdSFld/StSFld) use a separate global offset scheme and don't
             // participate in struct layout.
             instruction.field_offset = 0u;
-            if (instruction.op_code == IROpCode::LdFld ||
-                instruction.op_code == IROpCode::StFld) {
+            if (instruction.op_code == IROpCode::LdFld || instruction.op_code == IROpCode::StFld) {
                 if (ctx->layout_engine != nullptr) {
-                    const auto* image_desc =
-                        TryDecodeReflectionQueryImageHandle(ctx->source_image);
+                    const auto* image_desc = TryDecodeReflectionQueryImageHandle(ctx->source_image);
                     if (image_desc != nullptr) {
                         // Find the declaring type by scanning types for the
                         // field token.
                         CHAOS_IL2CPP_UINT32 field_idx = 0u;
-                        const auto* declaring_type = FindDeclaringTypeByFieldToken(
-                            image_desc, token, &field_idx);
+                        const auto* declaring_type = FindDeclaringTypeByFieldToken(image_desc, token, &field_idx);
                         if (declaring_type != nullptr) {
                             TypeInfoHandle decl_handle =
                                 chaos::il2cpp::runtime_core::EncodeReflectionQueryTypeHandle(declaring_type);
                             const auto* layout =
-                                ctx->layout_engine->GetOrComputeLayout(
-                                    decl_handle, ctx->type_args, ctx->arg_count);
-                            if (layout != nullptr &&
-                                field_idx < layout->field_count) {
-                                instruction.field_offset =
-                                    layout->fields[field_idx].offset;
+                                ctx->layout_engine->GetOrComputeLayout(decl_handle, ctx->type_args, ctx->arg_count);
+                            if (layout != nullptr && field_idx < layout->field_count) {
+                                instruction.field_offset = layout->fields[field_idx].offset;
                             }
                         }
                     }
@@ -218,8 +199,7 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
             if (ctx->bridge->resolve_string_by_token == nullptr) {
                 return false;
             }
-            const char* str = ctx->bridge->resolve_string_by_token(
-                ctx->source_image, token);
+            const char* str = ctx->bridge->resolve_string_by_token(ctx->source_image, token);
             if (str == nullptr) {
                 return false;
             }
@@ -233,4 +213,4 @@ bool CHAOS_RUNTIME_ABI_CALL DefaultTokenResolver(
     }
 }
 
-}  // namespace chaos::il2cpp::interpreter
+} // namespace chaos::il2cpp::interpreter

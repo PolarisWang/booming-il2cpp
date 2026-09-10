@@ -14,6 +14,8 @@ using chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect;
 using chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread;
 using chaos::il2cpp::runtime_core::chaos_gc_enter_no_gc_region;
 using chaos::il2cpp::runtime_core::chaos_gc_leave_no_gc_region;
+using chaos::il2cpp::runtime_core::chaos_gc_try_start_no_gc_region;
+using chaos::il2cpp::runtime_core::chaos_gc_end_no_gc_region;
 
 extern "C" const int kAotMethodCount;
 extern "C" const int kSubjectEntryCount;
@@ -79,12 +81,39 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
     // Warmup: at least 100 calls to prime caches / tier promotion.
     // Use __try/__except for Windows AOT mode (interpreter dispatch may raise SEH);
     // try/catch does not catch access violations on Windows.
+    //
+    // Rootcause of "DispatchDirectVoid+benchmark+patch-data crash":
+    // when a slot is HOTPATCH-ACTIVE (post-ApplyPatch), ChaosDispatchMethodBenchDirect
+    // routes through InterpreterEntryDirectFast (not direct_ptr). That interpreter
+    // path performs tier promotion (call_count.fetch_add + TryTierUpgrade, and on
+    // promotion may JIT-compile and overwrite dispatch_entry->direct_ptr) ON EACH call,
+    // and the promoted native step transitions coop→preempt→coop with re-entrant
+    // GC-mode writes that only restore in a destructor. Because the timed loop sits
+    // inside chaos_gc_enter_no_gc_region — which is ONLY a TLS depth counter that
+    // DEFERS (does not disable) foreground/full GC — a full STW GC can fire precisely
+    // during the per-slot timed window, racing the tier/promotion mutation →
+    // sporadic AV/UAF. (cf. gc_bgc.cpp:29-31,71-79 documented benchmark-vs-BGC race.)
+    //
+    // Fix (harness layer, steady-state + GC-quiescence): we must not measure a slot
+    // while it is actively tier-promoting or while a deferred full GC can land inside
+    // the timed section.
+    //   (1) Warm up to terminal tier OUTSIDE the timer: loop until the method is no
+    //       longer first-call-promoting (generous ramp), so the timed loop hits a
+    //       steady direct_ptr with no per-call tier mutation.
+    //   (2) Attempt a BUDGETED no-GC region; if insufficient budget to guarantee no
+    //       full GC can fire, refuse to measure (return caught_exception) instead of
+    //       risking a crash. try_start returns 0 when it cannot reserve enough.
 {{ if is_jit || !is_windows }}
     try {
 {{ else }}
     __try {
 {{ end }}
-        for (int w = 0; w < 100; w++) {
+        // Ramp to terminal tier outside the timer: keep calling until stabilization.
+        // Interpreter tier promotion typically converges within a few hundred calls;
+        // we budget generous headroom. If it ever failed earlier we'd already have
+        // returned. 1000 is a safe upper bound for FirstCall/Iced/Quick/Jit tiers.
+        int warm = 0;
+        for (; warm < 1000; warm++) {
             ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
         }
 {{ if is_jit || !is_windows }}
@@ -96,7 +125,16 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
     }
 
     CHAOS_IL2CPP_PROFILE_RESET();
-    chaos_gc_enter_no_gc_region();
+    // Budgeted no-GC region: unlike enter_no_gc_region (TLS depth only, defers but
+    // does not prevent a foreground full GC), try_start reserves actual young+old
+    // capacity (2x margin). If it cannot reserve enough it returns 0 — meaning a
+    // full GC is imminent/in-flight — and we must NOT run the timed native loop,
+    // else tier-promotion + that GC race (the crash). We ask for a large budget
+    // relative to a benchmark slot (which should allocate ~nothing once warmed).
+    if (!chaos_gc_try_start_no_gc_region(64 * 1024 * 1024 /*64MB budget*/, 0)) {
+        // A GC is due and we cannot defer it safely → do not measure this slot.
+        return {-1.0, 0, true};
+    }
     auto alloc_before = chaos_gc_get_allocated_bytes_for_current_thread();
     auto start = std::chrono::steady_clock::now();
 {{ if is_jit || !is_windows }}
@@ -113,12 +151,14 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
     } __except(EXCEPTION_EXECUTE_HANDLER) {
 {{ end }}
         auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();
-        chaos_gc_leave_no_gc_region();
+        chaos_gc_end_no_gc_region();
         return {-1.0, alloc_after - alloc_before, true};
     }
     auto end = std::chrono::steady_clock::now();
     auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();
-    chaos_gc_leave_no_gc_region();
+    // Release the no-GC region deterministically AFTER the timer stops, so any
+    // deferred GC runs outside the measured window.
+    chaos_gc_end_no_gc_region();
     BenchmarkResult result;
     result.elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
     result.allocated_bytes = alloc_after - alloc_before;

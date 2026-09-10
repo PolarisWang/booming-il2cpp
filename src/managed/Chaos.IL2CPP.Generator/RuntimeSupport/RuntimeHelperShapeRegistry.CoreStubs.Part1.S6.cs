@@ -19,9 +19,14 @@ public sealed partial class NativeAotLoweringPlanner
                 Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    // Unsafe.As<U>(ref T source) → reinterpret the same address as U.
+                    // Semantically a no-op pointer reinterpretation: the source ref's
+                    // address is passed through unchanged.  A2-1 (cross-platform-unify):
+                    // replaces the previous CHAOS_IL2CPP_FAIL() stub which forced every
+                    // Unsafe.As call to the fallback return-0 (A1 gap: UnsafeTests::As*).
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                        ["    (void)chaos_arg_0;", "    CHAOS_IL2CPP_FAIL();", "    return 0;"]);
+                        ["    return chaos_arg_0;"]);
                     return new GenericShapeResolution(src, symbol,
                         new AotCoreIrAbiSlotArtifact[] { CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType) },
                         CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType), EmptyRawArgumentIndices);
@@ -33,10 +38,10 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     // Unsafe.SkipInit<T>(ref T value) — no-op: leave ref uninitialized.
-                    // CHAOS_IL2CPP_INTPTR return + () params avoids C2733 with
-                    // AddExternalRuntimeStubs' separate extern declaration.
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
-                        ["    return 0;"]);
+                    // Accept the ref parameter as CHAOS_IL2CPP_INTPTR (by-ref pointer)
+                    // to match the call site which passes one argument via ABI slot.
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR", ["    return 0;"]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                             CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
@@ -75,6 +80,62 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// System.Runtime.InteropServices.RuntimeEnvironment stubs
+        /// </summary>
+        private static void RegisterRuntimeInteropEnvironmentstubs(RuntimeHelperShapeRegistry registry)
+        {
+            // RuntimeEnvironment.GetRuntimeDirectory() → string.
+            // NOTE: the callee is normalized by ManagedNaming.NormalizeSubjectIdAssembly to
+            // System.Private.CoreLib/RuntimeEnvironment, and GetTypeDisplayNameFromSubjectId
+            // strips the assembly prefix → typeDisplayName == "RuntimeEnvironment".
+            registry.Register("RuntimeEnvironment", "GetRuntimeDirectory", [],
+                ShapeKind.SimpleForward, "ChaosRuntimeEnvironmentGetRuntimeDirectory",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                EmptyRawArgumentIndices);
+
+            // RuntimeEnvironment.FromGlobalAccessCache(Assembly) → bool
+            registry.Register("RuntimeEnvironment", "FromGlobalAccessCache",
+                ["System.Reflection.Assembly"],
+                ShapeKind.SimpleForward, "ChaosRuntimeEnvironmentFromGlobalAccessCache",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            // RuntimeEnvironment.GetRuntimeInterfaceAsIntPtr(Guid, Guid) → IntPtr
+            registry.Register("RuntimeEnvironment", "GetRuntimeInterfaceAsIntPtr",
+                ["System.Guid", "System.Guid"],
+                ShapeKind.SimpleForward, "ChaosRuntimeEnvironmentGetRuntimeInterfaceAsIntPtr",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(), // Guid struct on stack - IntPtr slot
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            // RuntimeEnvironment.GetSystemVersion() → string
+            registry.Register("RuntimeEnvironment", "GetSystemVersion", [],
+                ShapeKind.SimpleForward, "ChaosRuntimeEnvironmentGetSystemVersion",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                EmptyRawArgumentIndices);
+
+            // RuntimeEnvironment.GetRuntimeInterfaceAsObject(Guid, Guid) → object
+            registry.Register("RuntimeEnvironment", "GetRuntimeInterfaceAsObject",
+                ["System.Guid", "System.Guid"],
+                ShapeKind.SimpleForward, "ChaosRuntimeEnvironmentGetRuntimeInterfaceAsObject",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+        }
+
+        /// <summary>
         /// Console (stubs for verification pipelines — tests track via ChaosAssertState.ExitCode)
         /// </summary>
         private static void RegisterConsole(RuntimeHelperShapeRegistry registry)
@@ -104,11 +165,24 @@ public sealed partial class NativeAotLoweringPlanner
                             CreateVoidAbiSlot(),
                             EmptyRawArgumentIndices);
                     }
-                    // WriteLine(string) — 1-arg static
+                    // WriteLine(string) — 1-arg static: print to stdout
                     var src1 = RenderSimpleExternalRuntimeHelper("void", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    (void)chaos_arg_0;",
+                        "    if (chaos_arg_0 == 0) { std::fputs(\"[null]\\n\", stdout); return; }",
+                        "    const void* str_arg = reinterpret_cast<const void*>(chaos_arg_0);",
+                        "    if (!chaos_is_string_id(chaos_arg_0))",
+                        "    {",
+                        "        auto data = stub_string_data(str_arg);",
+                        "        if (data != nullptr) { std::fputs(data, stdout); std::fputc('\\n', stdout); }",
+                        "        return;",
+                        "    }",
+                        "    auto view = string_table::Resolve(chaos_extract_string_id(chaos_arg_0));",
+                        "    if (view.utf8_data != nullptr)",
+                        "    {",
+                        "        std::fwrite(view.utf8_data, sizeof(char), view.byte_count, stdout);",
+                        "        std::fputc('\\n', stdout);",
+                        "    }",
                     ]);
                     return new GenericShapeResolution(src1, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(

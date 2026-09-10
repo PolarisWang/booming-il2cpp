@@ -74,14 +74,15 @@ static CHAOS_IL2CPP_SIZE ScanAndClearCrossDomainRefs(CHAOS_IL2CPP_UINT32 domain_
     if (heap_base == 0) return 0;
 
     // Walk the two-level card table: L1 segments (64K entries, lazily
-    // allocated) × L2 cards (128 cards per segment, 512B each).
+    // allocated) × L2 cards (256 cards per segment, 256B each, bit-per-word).
     uintptr_t l1_max = g_card_l1_size.load(std::memory_order_acquire);
     for (uintptr_t seg_idx = 0; seg_idx < l1_max; seg_idx++) {
         auto* seg = g_card_l1[seg_idx].load(std::memory_order_acquire);
         if (seg == nullptr) continue;  // no segment allocated
 
         for (uintptr_t ci = 0; ci < static_cast<uintptr_t>(kCardsPerSegment); ci++) {
-            if (seg->cards[ci] == 0) continue;  // clean card
+            uint32_t bit_mask = 1u << (ci % kCardsPerWord);
+            if ((seg->words[ci / kCardsPerWord] & bit_mask) == 0) continue;  // clean card
 
             uintptr_t global_card_idx = seg_idx * kCardsPerSegment + ci;
             uintptr_t card_start = heap_base + (global_card_idx << kCardShift);

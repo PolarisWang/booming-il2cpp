@@ -19,112 +19,108 @@ using namespace ::chaos::il2cpp::runtime_instantiation;
 
 static bool IsCalleeEligibleForInline(
     const interpreter::IRMethod& callee_ir,
-    const ::chaos::il2cpp::runtime_instantiation::CachedCallInfo& call_info) noexcept
-{
+    const ::chaos::il2cpp::runtime_instantiation::CachedCallInfo& call_info) noexcept {
     // Must have IR, no calls, no branches, no Loc, no SFld.
     uint32_t max_sp = 0;
     uint32_t cur_sp = 0;
     uint32_t idx = 0;
     for (const auto& instr : callee_ir.instructions) {
         switch (instr.op_code) {
-        case interpreter::IROpCode::Call:
-        case interpreter::IROpCode::CallVirt:
-        case interpreter::IROpCode::CallBridge:
-        case interpreter::IROpCode::CallVirtConstrained:
-            return false;  // not a leaf
-        case interpreter::IROpCode::Br:
-        case interpreter::IROpCode::BrTrue:
-        case interpreter::IROpCode::BrFalse:
-        case interpreter::IROpCode::Beq:
-        case interpreter::IROpCode::Blt:
-        case interpreter::IROpCode::Bgt:
-        case interpreter::IROpCode::Ble:
-        case interpreter::IROpCode::Bge:
-        case interpreter::IROpCode::BneUn:
-        case interpreter::IROpCode::BgeUn:
-        case interpreter::IROpCode::BgtUn:
-        case interpreter::IROpCode::BleUn:
-        case interpreter::IROpCode::BltUn:
-        case interpreter::IROpCode::Leave:
-            // Allow forward-only branches (null-check pattern).
-            // branch_target will be remapped during splicing.
-            if (static_cast<uint32_t>(instr.branch_target) <= idx ||
-                static_cast<uint32_t>(instr.branch_target) >= static_cast<uint32_t>(callee_ir.instructions.size())) {
-                return false;  // backward or out-of-range
-            }
-            break;
-        case interpreter::IROpCode::Switch:
-            return false;  // Switch is too complex for inlining
-        case interpreter::IROpCode::LdSFld:
-        case interpreter::IROpCode::StSFld:
-            return false;  // has static field access
-        case interpreter::IROpCode::Throw:
-        case interpreter::IROpCode::Rethrow:
-        case interpreter::IROpCode::EndFinally:
-        case interpreter::IROpCode::EndFilter:
-            return false;  // SEH/internal control flow
-        case interpreter::IROpCode::Box:
-        case interpreter::IROpCode::NewObj:
-        case interpreter::IROpCode::NewArr:
-            // Allocations are allowed but increase complexity
-            break;
-        case interpreter::IROpCode::Ret:
-            // Ret pops nothing (returns top-of-stack). For inlining we
-            // delete the Ret, so sp stays unchanged.
-            break;
-        case interpreter::IROpCode::Pop:
-            if (cur_sp > 0) --cur_sp;
-            if (cur_sp > max_sp) max_sp = cur_sp;
-            break;
-        case interpreter::IROpCode::Dup:
-            ++cur_sp;
-            if (cur_sp > max_sp) max_sp = cur_sp;
-            break;
-        case interpreter::IROpCode::LdArg:
-            // LdArg pushes 1 (will read from caller's stack)
-            ++cur_sp;
-            if (cur_sp > max_sp) max_sp = cur_sp;
-            break;
-        default:
-            // Many opcodes pop 0-2 and push 1; worst-case assume +1.
-            // Conservatively count Ld* as push, binary ops as pop-2-push-1.
-            if (instr.op_code == interpreter::IROpCode::LdNull ||
-                instr.op_code == interpreter::IROpCode::LdStr ||
-                instr.op_code == interpreter::IROpCode::LdcI4 ||
-                instr.op_code == interpreter::IROpCode::LdcI8 ||
-                instr.op_code == interpreter::IROpCode::LdcR4 ||
-                instr.op_code == interpreter::IROpCode::LdcR8 ||
-                instr.op_code == interpreter::IROpCode::LdFld ||
-                instr.op_code == interpreter::IROpCode::LdLoc ||
-                instr.op_code == interpreter::IROpCode::LdLocA ||
-                instr.op_code == interpreter::IROpCode::LdLen) {
+            case interpreter::IROpCode::Call:
+            case interpreter::IROpCode::CallVirt:
+            case interpreter::IROpCode::CallBridge:
+            case interpreter::IROpCode::CallVirtConstrained:
+                return false; // not a leaf
+            case interpreter::IROpCode::Br:
+            case interpreter::IROpCode::BrTrue:
+            case interpreter::IROpCode::BrFalse:
+            case interpreter::IROpCode::Beq:
+            case interpreter::IROpCode::Blt:
+            case interpreter::IROpCode::Bgt:
+            case interpreter::IROpCode::Ble:
+            case interpreter::IROpCode::Bge:
+            case interpreter::IROpCode::BneUn:
+            case interpreter::IROpCode::BgeUn:
+            case interpreter::IROpCode::BgtUn:
+            case interpreter::IROpCode::BleUn:
+            case interpreter::IROpCode::BltUn:
+            case interpreter::IROpCode::Leave:
+                // Allow forward-only branches (null-check pattern).
+                // branch_target will be remapped during splicing.
+                if (static_cast<uint32_t>(instr.branch_target) <= idx ||
+                    static_cast<uint32_t>(instr.branch_target) >=
+                        static_cast<uint32_t>(callee_ir.instructions.size())) {
+                    return false; // backward or out-of-range
+                }
+                break;
+            case interpreter::IROpCode::Switch:
+                return false; // Switch is too complex for inlining
+            case interpreter::IROpCode::LdSFld:
+            case interpreter::IROpCode::StSFld:
+                return false; // has static field access
+            case interpreter::IROpCode::Throw:
+            case interpreter::IROpCode::Rethrow:
+            case interpreter::IROpCode::EndFinally:
+            case interpreter::IROpCode::EndFilter:
+                return false; // SEH/internal control flow
+            case interpreter::IROpCode::Box:
+            case interpreter::IROpCode::NewObj:
+            case interpreter::IROpCode::NewArr:
+                // Allocations are allowed but increase complexity
+                break;
+            case interpreter::IROpCode::Ret:
+                // Ret pops nothing (returns top-of-stack). For inlining we
+                // delete the Ret, so sp stays unchanged.
+                break;
+            case interpreter::IROpCode::Pop:
+                if (cur_sp > 0)
+                    --cur_sp;
+                if (cur_sp > max_sp)
+                    max_sp = cur_sp;
+                break;
+            case interpreter::IROpCode::Dup:
                 ++cur_sp;
-                if (cur_sp > max_sp) max_sp = cur_sp;
-            } else if (instr.op_code == interpreter::IROpCode::StLoc) {
-                if (cur_sp > 0) --cur_sp;
-            } else if (instr.op_code == interpreter::IROpCode::StFld ||
-                       instr.op_code == interpreter::IROpCode::StArg) {
-                if (cur_sp >= 2) cur_sp -= 2;
-            }
-            // Add/Sub/etc pop 2 push 1 → net -1
-            else if (instr.op_code == interpreter::IROpCode::Add ||
-                     instr.op_code == interpreter::IROpCode::Sub ||
-                     instr.op_code == interpreter::IROpCode::Mul ||
-                     instr.op_code == interpreter::IROpCode::Div ||
-                     instr.op_code == interpreter::IROpCode::Rem ||
-                     instr.op_code == interpreter::IROpCode::Ceq ||
-                     instr.op_code == interpreter::IROpCode::Clt ||
-                     instr.op_code == interpreter::IROpCode::Cgt ||
-                     instr.op_code == interpreter::IROpCode::And ||
-                     instr.op_code == interpreter::IROpCode::Or ||
-                     instr.op_code == interpreter::IROpCode::Xor ||
-                     instr.op_code == interpreter::IROpCode::Shl ||
-                     instr.op_code == interpreter::IROpCode::Shr ||
-                     instr.op_code == interpreter::IROpCode::ShrUn) {
-                // pop 2 push 1 → net -1
-                if (cur_sp >= 2) cur_sp -= 1;
-            }
-            break;
+                if (cur_sp > max_sp)
+                    max_sp = cur_sp;
+                break;
+            case interpreter::IROpCode::LdArg:
+                // LdArg pushes 1 (will read from caller's stack)
+                ++cur_sp;
+                if (cur_sp > max_sp)
+                    max_sp = cur_sp;
+                break;
+            default:
+                // Many opcodes pop 0-2 and push 1; worst-case assume +1.
+                // Conservatively count Ld* as push, binary ops as pop-2-push-1.
+                if (instr.op_code == interpreter::IROpCode::LdNull || instr.op_code == interpreter::IROpCode::LdStr ||
+                    instr.op_code == interpreter::IROpCode::LdcI4 || instr.op_code == interpreter::IROpCode::LdcI8 ||
+                    instr.op_code == interpreter::IROpCode::LdcR4 || instr.op_code == interpreter::IROpCode::LdcR8 ||
+                    instr.op_code == interpreter::IROpCode::LdFld || instr.op_code == interpreter::IROpCode::LdLoc ||
+                    instr.op_code == interpreter::IROpCode::LdLocA || instr.op_code == interpreter::IROpCode::LdLen) {
+                    ++cur_sp;
+                    if (cur_sp > max_sp)
+                        max_sp = cur_sp;
+                } else if (instr.op_code == interpreter::IROpCode::StLoc) {
+                    if (cur_sp > 0)
+                        --cur_sp;
+                } else if (instr.op_code == interpreter::IROpCode::StFld ||
+                           instr.op_code == interpreter::IROpCode::StArg) {
+                    if (cur_sp >= 2)
+                        cur_sp -= 2;
+                }
+                // Add/Sub/etc pop 2 push 1 → net -1
+                else if (instr.op_code == interpreter::IROpCode::Add || instr.op_code == interpreter::IROpCode::Sub ||
+                         instr.op_code == interpreter::IROpCode::Mul || instr.op_code == interpreter::IROpCode::Div ||
+                         instr.op_code == interpreter::IROpCode::Rem || instr.op_code == interpreter::IROpCode::Ceq ||
+                         instr.op_code == interpreter::IROpCode::Clt || instr.op_code == interpreter::IROpCode::Cgt ||
+                         instr.op_code == interpreter::IROpCode::And || instr.op_code == interpreter::IROpCode::Or ||
+                         instr.op_code == interpreter::IROpCode::Xor || instr.op_code == interpreter::IROpCode::Shl ||
+                         instr.op_code == interpreter::IROpCode::Shr || instr.op_code == interpreter::IROpCode::ShrUn) {
+                    // pop 2 push 1 → net -1
+                    if (cur_sp >= 2)
+                        cur_sp -= 1;
+                }
+                break;
         }
         ++idx;
     }
@@ -148,40 +144,39 @@ static bool IsCalleeEligibleForInline(
 /// Inline eligible leaf callees into the caller's IR instruction stream.
 /// Called from PatchMethodLowerIR after IR deserialization and call_cache setup.
 /// Modifies ir.instructions in-place and rebuilds call_cache for the caller.
-static void InlineLeafCallees(
-    interpreter::IRMethod& ir,
-    PatchMethod& patch_method) noexcept
-{
+static void InlineLeafCallees(interpreter::IRMethod& ir, PatchMethod& patch_method) noexcept {
     auto* cache = patch_method.metadata_cache;
-    if (cache == nullptr) return;
+    if (cache == nullptr)
+        return;
 
     uint32_t instr_count = static_cast<uint32_t>(ir.instructions.size());
-    if (instr_count == 0) return;
+    if (instr_count == 0)
+        return;
 
     auto* call_cache = static_cast<::chaos::il2cpp::runtime_instantiation::CachedCallInfo*>(patch_method.call_cache);
-    if (call_cache == nullptr) return;
+    if (call_cache == nullptr)
+        return;
 
     // Build new instruction list: iterate caller's instructions,
     // replacing eligible Call instructions with callee's IR body.
     std::vector<interpreter::IRInstruction> new_instrs;
-    new_instrs.reserve(instr_count * 2);  // conservative pre-alloc
+    new_instrs.reserve(instr_count * 2); // conservative pre-alloc
 
     // Compute caller's max local slot index for local remapping during inline.
     uint32_t caller_local_count = 0;
     for (uint32_t i = 0; i < instr_count; ++i) {
         const auto& instr = ir.instructions[i];
-        if (instr.op_code == interpreter::IROpCode::LdLoc ||
-            instr.op_code == interpreter::IROpCode::StLoc ||
+        if (instr.op_code == interpreter::IROpCode::LdLoc || instr.op_code == interpreter::IROpCode::StLoc ||
             instr.op_code == interpreter::IROpCode::LdLocA) {
             uint32_t idx = static_cast<uint32_t>(instr.operand_index);
-            if (idx >= caller_local_count) caller_local_count = idx + 1;
+            if (idx >= caller_local_count)
+                caller_local_count = idx + 1;
         }
     }
 
     for (uint32_t i = 0; i < instr_count; ++i) {
         const auto& instr = ir.instructions[i];
-        if (instr.op_code != interpreter::IROpCode::Call ||
-            instr.call_target == nullptr) {
+        if (instr.op_code != interpreter::IROpCode::Call || instr.call_target == nullptr) {
             new_instrs.push_back(instr);
             continue;
         }
@@ -206,8 +201,8 @@ static void InlineLeafCallees(
         // Cross-module calls (to AOT-only methods) are NOT inlined.
 
         // Try to decode the call_target as a ReflectionQueryMethodHandle.
-        const auto* method_desc = runtime_core::TryDecodeReflectionQueryMethodHandle(
-            reinterpret_cast<MethodInfoHandle>(instr.call_target));
+        const auto* method_desc =
+            runtime_core::TryDecodeReflectionQueryMethodHandle(reinterpret_cast<MethodInfoHandle>(instr.call_target));
         if (method_desc == nullptr) {
             new_instrs.push_back(instr);
             continue;
@@ -277,8 +272,7 @@ static void InlineLeafCallees(
 
         // For now: if FindInliningTarget returns nullptr, skip inlining.
         // Build the key from method_desc->metadata_token and patch_method.module_id.
-        PatchMethod* callee = cache->FindInliningTarget(
-            patch_method.module_id, method_desc->metadata_token);
+        PatchMethod* callee = cache->FindInliningTarget(patch_method.module_id, method_desc->metadata_token);
         if (callee == nullptr) {
             new_instrs.push_back(instr);
             continue;
@@ -303,19 +297,17 @@ static void InlineLeafCallees(
         // Replace the Call instruction with callee's IR body.
         // LdArg(K) → mark secondary_index = callee_arg_count (stack peek mapping)
         // Ret → skip (don't copy)
-        uint32_t callee_arg_count = (cc.ret_tag != 0xFF)
-            ? static_cast<uint32_t>(instr.arg_count)
-            : 0u;
+        uint32_t callee_arg_count = (cc.ret_tag != 0xFF) ? static_cast<uint32_t>(instr.arg_count) : 0u;
         uint32_t callee_start_pos = static_cast<uint32_t>(new_instrs.size());
 
         // Compute callee's max local slot index for remapping.
         uint32_t callee_local_count = 0;
         for (const auto& ci : callee_ir.instructions) {
-            if (ci.op_code == interpreter::IROpCode::LdLoc ||
-                ci.op_code == interpreter::IROpCode::StLoc ||
+            if (ci.op_code == interpreter::IROpCode::LdLoc || ci.op_code == interpreter::IROpCode::StLoc ||
                 ci.op_code == interpreter::IROpCode::LdLocA) {
                 uint32_t idx = static_cast<uint32_t>(ci.operand_index);
-                if (idx >= callee_local_count) callee_local_count = idx + 1;
+                if (idx >= callee_local_count)
+                    callee_local_count = idx + 1;
             }
         }
         // Reject if remapped locals would overflow FastFrame capacity.
@@ -339,26 +331,18 @@ static void InlineLeafCallees(
                 inlined.secondary_index = callee_arg_count;
             }
             // Remap local slots so callee locals don't collide with caller locals.
-            if (inlined.op_code == interpreter::IROpCode::LdLoc ||
-                inlined.op_code == interpreter::IROpCode::StLoc ||
+            if (inlined.op_code == interpreter::IROpCode::LdLoc || inlined.op_code == interpreter::IROpCode::StLoc ||
                 inlined.op_code == interpreter::IROpCode::LdLocA) {
                 inlined.operand_index += static_cast<int32_t>(local_offset);
             }
             // Remap forward branch targets to their absolute positions.
-            if (inlined.op_code == interpreter::IROpCode::Br ||
-                inlined.op_code == interpreter::IROpCode::BrTrue ||
-                inlined.op_code == interpreter::IROpCode::BrFalse ||
-                inlined.op_code == interpreter::IROpCode::Beq ||
-                inlined.op_code == interpreter::IROpCode::Blt ||
-                inlined.op_code == interpreter::IROpCode::Bgt ||
-                inlined.op_code == interpreter::IROpCode::Ble ||
-                inlined.op_code == interpreter::IROpCode::Bge ||
-                inlined.op_code == interpreter::IROpCode::BneUn ||
-                inlined.op_code == interpreter::IROpCode::BgeUn ||
-                inlined.op_code == interpreter::IROpCode::BgtUn ||
-                inlined.op_code == interpreter::IROpCode::BleUn ||
-                inlined.op_code == interpreter::IROpCode::BltUn ||
-                inlined.op_code == interpreter::IROpCode::Leave) {
+            if (inlined.op_code == interpreter::IROpCode::Br || inlined.op_code == interpreter::IROpCode::BrTrue ||
+                inlined.op_code == interpreter::IROpCode::BrFalse || inlined.op_code == interpreter::IROpCode::Beq ||
+                inlined.op_code == interpreter::IROpCode::Blt || inlined.op_code == interpreter::IROpCode::Bgt ||
+                inlined.op_code == interpreter::IROpCode::Ble || inlined.op_code == interpreter::IROpCode::Bge ||
+                inlined.op_code == interpreter::IROpCode::BneUn || inlined.op_code == interpreter::IROpCode::BgeUn ||
+                inlined.op_code == interpreter::IROpCode::BgtUn || inlined.op_code == interpreter::IROpCode::BleUn ||
+                inlined.op_code == interpreter::IROpCode::BltUn || inlined.op_code == interpreter::IROpCode::Leave) {
                 inlined.branch_target += callee_start_pos;
             }
             new_instrs.push_back(inlined);
@@ -367,7 +351,7 @@ static void InlineLeafCallees(
 
     // Only replace if any inlining actually happened.
     if (new_instrs.size() == instr_count)
-        return;  // no inlining occurred
+        return; // no inlining occurred
 
     // Replace the caller's instructions.
     ir.instructions.clear();
@@ -383,13 +367,14 @@ static void InlineLeafCallees(
         CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(patch_method.call_cache);
     }
     uint32_t new_count = static_cast<uint32_t>(ir.instructions.size());
-    auto* new_cc = static_cast<::chaos::il2cpp::runtime_instantiation::CachedCallInfo*>(
-        CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(new_count * sizeof(::chaos::il2cpp::runtime_instantiation::CachedCallInfo)));
-    if (new_cc == nullptr) return;
+    auto* new_cc =
+        static_cast<::chaos::il2cpp::runtime_instantiation::CachedCallInfo*>(CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(
+            new_count * sizeof(::chaos::il2cpp::runtime_instantiation::CachedCallInfo)));
+    if (new_cc == nullptr)
+        return;
     for (uint32_t i = 0; i < new_count; ++i) {
         const auto& ci = ir.instructions[i];
-        if (ci.op_code == interpreter::IROpCode::Call ||
-            ci.op_code == interpreter::IROpCode::CallVirt ||
+        if (ci.op_code == interpreter::IROpCode::Call || ci.op_code == interpreter::IROpCode::CallVirt ||
             ci.op_code == interpreter::IROpCode::CallBridge ||
             ci.op_code == interpreter::IROpCode::CallVirtConstrained) {
             if (ci.call_target != nullptr) {
@@ -404,4 +389,4 @@ static void InlineLeafCallees(
     patch_method.call_cache = new_cc;
 }
 
-}  // namespace chaos::il2cpp::runtime_core
+} // namespace chaos::il2cpp::runtime_core

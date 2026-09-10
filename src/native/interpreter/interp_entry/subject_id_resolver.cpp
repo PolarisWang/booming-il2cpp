@@ -9,11 +9,9 @@ void* ResolveDirectFnSafe(const char* subject_id) noexcept;
 // Maps subject IDs to call_target pointers using PatchMetadataCache + AOT reflection query.
 // This replaces the old PatchTokenResolver which resolved raw metadata tokens.
 
-static void* ResolveSubjectId(
-    const char* subject_id,
-    void* user_data) noexcept
-{
-    if (subject_id == nullptr || user_data == nullptr) return nullptr;
+static void* ResolveSubjectId(const char* subject_id, void* user_data) noexcept {
+    if (subject_id == nullptr || user_data == nullptr)
+        return nullptr;
 
     auto* cache = static_cast<PatchMetadataCache*>(user_data);
     const auto* bridge = cache->GetBridge();
@@ -28,12 +26,11 @@ static void* ResolveSubjectId(
             // Search types by subject_id.
             for (CHAOS_IL2CPP_UINT32 ti = 0; ti < image->type_count; ++ti) {
                 const auto* type_desc = image->types[ti];
-                if (type_desc == nullptr) continue;
-                if (type_desc->subject_id_utf8 != nullptr &&
-                    std::strcmp(type_desc->subject_id_utf8, subject_id) == 0) {
+                if (type_desc == nullptr)
+                    continue;
+                if (type_desc->subject_id_utf8 != nullptr && std::strcmp(type_desc->subject_id_utf8, subject_id) == 0) {
                     return reinterpret_cast<void*>(
-                        static_cast<CHAOS_IL2CPP_UINTPTR>(
-                            EncodeReflectionQueryTypeHandle(type_desc)));
+                        static_cast<CHAOS_IL2CPP_UINTPTR>(EncodeReflectionQueryTypeHandle(type_desc)));
                 }
                 // Search methods in this type.
                 if (type_desc->methods != nullptr) {
@@ -72,8 +69,7 @@ static void* ResolveSubjectId(
                             //   runtime_state/thread_state as managed args
                             //   corrupts the call.
                             return reinterpret_cast<void*>(
-                                static_cast<CHAOS_IL2CPP_UINTPTR>(
-                                    EncodeReflectionQueryMethodHandle(method_desc)));
+                                static_cast<CHAOS_IL2CPP_UINTPTR>(EncodeReflectionQueryMethodHandle(method_desc)));
                         }
                     }
                 }
@@ -94,4 +90,4 @@ static void* ResolveSubjectId(
     return ResolveDirectFnSafe(subject_id);
 }
 
-}  // namespace chaos::il2cpp::runtime_core
+} // namespace chaos::il2cpp::runtime_core

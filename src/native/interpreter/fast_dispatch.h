@@ -30,8 +30,8 @@ namespace chaos::il2cpp::runtime_core {
 // Values chosen to be recognizable in memory dumps: ASCII "FAST" / "REG\0"
 // in little-endian uint32_t.
 enum InterpFrameType : uint32_t {
-    kInterpFrameType_FastFrame     = 0x54534146u,  // "FAST" in LE
-    kInterpFrameType_RegisterFrame = 0x00474552u,  // "REG\0" in LE
+    kInterpFrameType_FastFrame = 0x54534146u,     // "FAST" in LE
+    kInterpFrameType_RegisterFrame = 0x00474552u, // "REG\0" in LE
 };
 
 // ── FastFrame ──────────────────────────────────────────────────────────
@@ -39,98 +39,98 @@ enum InterpFrameType : uint32_t {
 // with a separate tag byte. No heap allocation during execution.
 struct FastFrame {
     // Must be first field — read by GC scanner to identify frame type.
-    InterpFrameType  frame_type    = kInterpFrameType_FastFrame;
+    InterpFrameType frame_type = kInterpFrameType_FastFrame;
 
-    static constexpr uint32_t kMaxStack  = 64;
+    static constexpr uint32_t kMaxStack = 64;
     static constexpr uint32_t kMaxLocals = 32;
 
-    uint64_t  stack[kMaxStack]        = {};
-    uint8_t   stack_tags[kMaxStack]   = {};
+    uint64_t stack[kMaxStack] = {};
+    uint8_t stack_tags[kMaxStack] = {};
     // LazyBox type tokens: parallel to stack[] — stores type_token for each
     // LazyBoxInt32/LazyBoxInt64 stack slot.  Set by Handle_Box, read during
     // materialization in PopCallArgs / Handle_Ret / Handle_StFld.
     // Value is 0 for non-LazyBox slots.
-    uint32_t  lazybox_type_tokens[kMaxStack] = {};
-    uint32_t  sp                      = 0;
+    uint32_t lazybox_type_tokens[kMaxStack] = {};
+    uint32_t sp = 0;
 
-    uint64_t  locals[kMaxLocals]      = {};
-    uint8_t   local_tags[kMaxLocals]  = {};
-    uint32_t  local_count             = 0;
+    uint64_t locals[kMaxLocals] = {};
+    uint8_t local_tags[kMaxLocals] = {};
+    uint32_t local_count = 0;
 
-    const void* args                  = nullptr;
-    uint32_t    arg_count             = 0;
+    const void* args = nullptr;
+    uint32_t arg_count = 0;
 
     // Optional pointer to per-argument type tags (from PatchMethod::cached_arg_types).
     // Used by Handle_LdArg to emit the correct ValueTag instead of assuming ObjectRef.
     // nullptr = all args treated as ObjectRef (legacy behavior).
-    const uint8_t* arg_type_tags       = nullptr;
+    const uint8_t* arg_type_tags = nullptr;
 
-    uint64_t    ret_val               = 0;
-    uint8_t     ret_tag               = 0;
-    bool        has_ret               = false;
-    bool        threw_exception       = false;
-    void*       exception_obj_val     = nullptr;
+    uint64_t ret_val = 0;
+    uint8_t ret_tag = 0;
+    bool has_ret = false;
+    bool threw_exception = false;
+    void* exception_obj_val = nullptr;
 
     // Frame linkage for InterpreterEntryDirect multi-step dispatch.
-    void*       prev_frame            = nullptr;
-    const void* ir_instrs             = nullptr;
-    uint32_t    instr_count           = 0;
+    void* prev_frame = nullptr;
+    const void* ir_instrs = nullptr;
+    uint32_t instr_count = 0;
 
     // Dispatch callback for Call instructions.
     // Set by InterpreterEntryDirect before calling FastExecute.
-    void*       dispatch_fn           = nullptr;
-    void*       dispatch_ctx          = nullptr;
+    void* dispatch_fn = nullptr;
+    void* dispatch_ctx = nullptr;
 
     // Optional call-site metadata cache (CachedCallInfo[]).
     // Populated during IR lowering. One entry per IR instruction.
     // Handle_Call reads cache[pc] to skip runtime reflection.
-    const void* call_cache             = nullptr;
-    uint32_t    call_count             = 0;
+    const void* call_cache = nullptr;
+    uint32_t call_count = 0;
 
-    uint32_t    pc                    = 0;
+    uint32_t pc = 0;
 
     // ── OSR (On-Stack Replacement) state ─────────────────────────────
     // Pointer to PatchMethod for tier state access during backedge OSR.
     // Set by SetupFastFrame; nullptr when the method has no patch_method.
-    void*       patch_method          = nullptr;
-    uint32_t    loop_counter          = 0;      // backedge count for hot-loop detection
-    bool        osr_reenable          = false;  // set after T4 deopt: immediate OSR on first backedge
+    void* patch_method = nullptr;
+    uint32_t loop_counter = 0; // backedge count for hot-loop detection
+    bool osr_reenable = false; // set after T4 deopt: immediate OSR on first backedge
 
     // Last program counter before a branch instruction. Set by branch handlers,
     // read by kOp_Epilogue for backward-branch detection. Reset to 0 after
     // epilogue check to prevent re-trigger for non-branch opcodes.
-    uint32_t    last_pc               = 0;
+    uint32_t last_pc = 0;
 
     // ── PGO branch profile counters (per-execution) ─────────────────────
     // Incremented by conditional branch handlers (BrTrue/BrFalse/Beq/Blt/...).
     // Reset at frame setup. Accumulated into PatchMethod on method exit.
-    uint32_t    pgo_branch_taken      = 0;
-    uint32_t    pgo_branch_not_taken  = 0;
+    uint32_t pgo_branch_taken = 0;
+    uint32_t pgo_branch_not_taken = 0;
 
     // ── SEH (Structured Exception Handling) state ──────────────────────
     // Set by SetupFastFrame when the method has SEH clauses.
     // FastExecute handles Throw/Leave/EndFinally in-place instead of
     // falling back to InterpreterVM.
-    const interpreter::SEHClause* seh_clauses       = nullptr;
-    uint32_t                      seh_clause_count  = 0;
+    const interpreter::SEHClause* seh_clauses = nullptr;
+    uint32_t seh_clause_count = 0;
 
     // Two-phase exception unwind state (mirrors InterpreterVM pattern).
-    bool        exception_in_flight       = false;
-    int32_t     unwind_catch_clause       = -1;
-    static constexpr int kMaxUnwindDepth  = 8;
-    int32_t     unwind_finally_list[kMaxUnwindDepth]{};
-    int32_t     unwind_finally_count      = 0;
-    int32_t     unwind_finally_current    = 0;
+    bool exception_in_flight = false;
+    int32_t unwind_catch_clause = -1;
+    static constexpr int kMaxUnwindDepth = 8;
+    int32_t unwind_finally_list[kMaxUnwindDepth] {};
+    int32_t unwind_finally_count = 0;
+    int32_t unwind_finally_current = 0;
 
     // Pending leave target (for Leave inside try with finally).
-    bool        pending_leave             = false;
-    uint32_t    pending_leave_target      = 0;
+    bool pending_leave = false;
+    uint32_t pending_leave_target = 0;
 
     // ── SEH filter state ────────────────────────────────────
-    bool        filter_evaluating         = false;
-    int32_t     filter_active_clause      = -1;
-    int32_t     filter_search_resume_idx  = -1;
-    uint32_t    filter_throw_pc           = 0;
+    bool filter_evaluating = false;
+    int32_t filter_active_clause = -1;
+    int32_t filter_search_resume_idx = -1;
+    uint32_t filter_throw_pc = 0;
 
     // ── Tracked object cleanup for interpreter heap objects ──────────
     // Fast dispatch heap-allocates InterpreterObject/ArrayStorage via
@@ -144,42 +144,43 @@ struct FastFrame {
     // up (~64 objects in a single method), a warning is emitted and the
     // excess object leaks — an extremely unlikely edge case.
     static constexpr uint32_t kMaxTracked = 32;
-    void*     tracked_objs[kMaxTracked]{};
-    void (*tracked_dtors[kMaxTracked])(void*){};
-    bool      tracked_is_pool[kMaxTracked]{};  // true = pool-allocated (skip free)
-    uint32_t  tracked_cnt            = 0;
+    void* tracked_objs[kMaxTracked] {};
+    void (*tracked_dtors[kMaxTracked])(void*) {};
+    bool tracked_is_pool[kMaxTracked] {}; // true = pool-allocated (skip free)
+    uint32_t tracked_cnt = 0;
 
     struct TrackedBlock {
         static constexpr uint32_t kSize = 32;
         uint32_t count = 0;
-        void*     objs[kSize]{};
-        void (*dtors[kSize])(void*){};
-        bool      is_pool[kSize]{};
+        void* objs[kSize] {};
+        void (*dtors[kSize])(void*) {};
+        bool is_pool[kSize] {};
     };
-    TrackedBlock* tracked_overflow    = nullptr;
+    TrackedBlock* tracked_overflow = nullptr;
 
-    template<typename T>
-    static void Dtor(void* p) noexcept { static_cast<T*>(p)->~T(); }
+    template <typename T>
+    static void Dtor(void* p) noexcept {
+        static_cast<T*>(p)->~T();
+    }
 
     void Track(void* ptr, void (*dtor)(void*)) noexcept {
         if (tracked_cnt < kMaxTracked) {
-            tracked_objs[tracked_cnt]    = ptr;
-            tracked_dtors[tracked_cnt]   = dtor;
+            tracked_objs[tracked_cnt] = ptr;
+            tracked_dtors[tracked_cnt] = dtor;
             tracked_is_pool[tracked_cnt] = false;
             ++tracked_cnt;
         } else if (tracked_overflow != nullptr && tracked_overflow->count < TrackedBlock::kSize) {
             auto& blk = *tracked_overflow;
-            blk.objs[blk.count]    = ptr;
-            blk.dtors[blk.count]   = dtor;
+            blk.objs[blk.count] = ptr;
+            blk.dtors[blk.count] = dtor;
             blk.is_pool[blk.count] = false;
             ++blk.count;
         } else if (tracked_overflow == nullptr) {
-            tracked_overflow = static_cast<TrackedBlock*>(
-                CHAOS_IL2CPP_MALLOC(sizeof(TrackedBlock)));
+            tracked_overflow = static_cast<TrackedBlock*>(CHAOS_IL2CPP_MALLOC(sizeof(TrackedBlock)));
             if (tracked_overflow != nullptr) {
                 tracked_overflow->count = 1;
-                tracked_overflow->objs[0]    = ptr;
-                tracked_overflow->dtors[0]   = dtor;
+                tracked_overflow->objs[0] = ptr;
+                tracked_overflow->dtors[0] = dtor;
                 tracked_overflow->is_pool[0] = false;
             }
         } else {
@@ -192,23 +193,22 @@ struct FastFrame {
     /// skips the CHAOS_IL2CPP_FREE (the object returns to its pool).
     void TrackPool(void* ptr, void (*dtor)(void*)) noexcept {
         if (tracked_cnt < kMaxTracked) {
-            tracked_objs[tracked_cnt]    = ptr;
-            tracked_dtors[tracked_cnt]   = dtor;
+            tracked_objs[tracked_cnt] = ptr;
+            tracked_dtors[tracked_cnt] = dtor;
             tracked_is_pool[tracked_cnt] = true;
             ++tracked_cnt;
         } else if (tracked_overflow != nullptr && tracked_overflow->count < TrackedBlock::kSize) {
             auto& blk = *tracked_overflow;
-            blk.objs[blk.count]    = ptr;
-            blk.dtors[blk.count]   = dtor;
+            blk.objs[blk.count] = ptr;
+            blk.dtors[blk.count] = dtor;
             blk.is_pool[blk.count] = true;
             ++blk.count;
         } else if (tracked_overflow == nullptr) {
-            tracked_overflow = static_cast<TrackedBlock*>(
-                CHAOS_IL2CPP_MALLOC(sizeof(TrackedBlock)));
+            tracked_overflow = static_cast<TrackedBlock*>(CHAOS_IL2CPP_MALLOC(sizeof(TrackedBlock)));
             if (tracked_overflow != nullptr) {
                 tracked_overflow->count = 1;
-                tracked_overflow->objs[0]    = ptr;
-                tracked_overflow->dtors[0]   = dtor;
+                tracked_overflow->objs[0] = ptr;
+                tracked_overflow->dtors[0] = dtor;
                 tracked_overflow->is_pool[0] = true;
             }
         } else {
@@ -240,7 +240,10 @@ struct FastFrame {
     // ── Push helpers ─────────────────────────────────────────────────
     CHAOS_IL2CPP_FORCEINLINE void PushI32(int32_t v) noexcept {
         CHAOS_IL2CPP_ASSERT(sp < kMaxStack && "FastFrame stack overflow");
-        if (sp >= kMaxStack) { threw_exception = true; return; }
+        if (sp >= kMaxStack) {
+            threw_exception = true;
+            return;
+        }
         stack[sp] = static_cast<uint64_t>(v);
         stack_tags[sp] = static_cast<uint8_t>(interpreter::ValueTag::Int32);
         ++sp;
@@ -254,7 +257,10 @@ struct FastFrame {
 
     CHAOS_IL2CPP_FORCEINLINE void PushI64(int64_t v) noexcept {
         CHAOS_IL2CPP_ASSERT(sp < kMaxStack && "FastFrame stack overflow");
-        if (sp >= kMaxStack) { threw_exception = true; return; }
+        if (sp >= kMaxStack) {
+            threw_exception = true;
+            return;
+        }
         stack[sp] = static_cast<uint64_t>(v);
         stack_tags[sp] = static_cast<uint8_t>(interpreter::ValueTag::Int64);
         ++sp;
@@ -267,7 +273,10 @@ struct FastFrame {
 
     CHAOS_IL2CPP_FORCEINLINE void PushF32(float v) noexcept {
         CHAOS_IL2CPP_ASSERT(sp < kMaxStack && "FastFrame stack overflow");
-        if (sp >= kMaxStack) { threw_exception = true; return; }
+        if (sp >= kMaxStack) {
+            threw_exception = true;
+            return;
+        }
         std::memcpy(&stack[sp], &v, sizeof(float));
         stack_tags[sp] = static_cast<uint8_t>(interpreter::ValueTag::Float32);
         ++sp;
@@ -280,7 +289,10 @@ struct FastFrame {
 
     CHAOS_IL2CPP_FORCEINLINE void PushF64(double v) noexcept {
         CHAOS_IL2CPP_ASSERT(sp < kMaxStack && "FastFrame stack overflow");
-        if (sp >= kMaxStack) { threw_exception = true; return; }
+        if (sp >= kMaxStack) {
+            threw_exception = true;
+            return;
+        }
         std::memcpy(&stack[sp], &v, sizeof(double));
         stack_tags[sp] = static_cast<uint8_t>(interpreter::ValueTag::Float64);
         ++sp;
@@ -293,7 +305,10 @@ struct FastFrame {
 
     CHAOS_IL2CPP_FORCEINLINE void PushObj(void* v) noexcept {
         CHAOS_IL2CPP_ASSERT(sp < kMaxStack && "FastFrame stack overflow");
-        if (sp >= kMaxStack) { threw_exception = true; return; }
+        if (sp >= kMaxStack) {
+            threw_exception = true;
+            return;
+        }
         stack[sp] = reinterpret_cast<uint64_t>(v);
         stack_tags[sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
         ++sp;
@@ -306,7 +321,10 @@ struct FastFrame {
 
     CHAOS_IL2CPP_FORCEINLINE void PushNull() noexcept {
         CHAOS_IL2CPP_ASSERT(sp < kMaxStack && "FastFrame stack overflow");
-        if (sp >= kMaxStack) { threw_exception = true; return; }
+        if (sp >= kMaxStack) {
+            threw_exception = true;
+            return;
+        }
         stack[sp] = 0;
         stack_tags[sp] = static_cast<uint8_t>(interpreter::ValueTag::Null);
         ++sp;
@@ -359,9 +377,7 @@ struct FastFrame {
 //
 // On normal return: frame.has_ret indicates whether a value was produced.
 // On exception: frame.threw_exception is set.
-bool FastExecute(FastFrame& frame,
-                 const interpreter::IRInstruction* instrs,
-                 uint32_t instr_count) noexcept;
+bool FastExecute(FastFrame& frame, const interpreter::IRInstruction* instrs, uint32_t instr_count) noexcept;
 
 // ── Fallback: check if FastExecute can handle this method ───────────────
 // FastExecute now supports methods WITH SEH (handles Throw/Leave/EndFinally
@@ -370,7 +386,7 @@ bool FastExecute(FastFrame& frame,
 // correctly route SEH methods to FastExecute.
 inline bool CanFastExecute(const interpreter::IRMethod& ir) noexcept {
     (void)ir;
-    return true;  // All methods can now use FastExecute (SEH included).
+    return true; // All methods can now use FastExecute (SEH included).
 }
 
 /// Dump the per-opcode FastExecute frequency histogram to stdout.
@@ -378,6 +394,6 @@ inline bool CanFastExecute(const interpreter::IRMethod& ir) noexcept {
 /// so this reflects the current thread's counters only.
 void DumpFastExecuteOpcodeHistogram() noexcept;
 
-}  // namespace chaos::il2cpp::runtime_core
+} // namespace chaos::il2cpp::runtime_core
 
-#endif  // CHAOS_IL2CPP_FAST_DISPATCH_H_
+#endif // CHAOS_IL2CPP_FAST_DISPATCH_H_

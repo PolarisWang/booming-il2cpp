@@ -558,6 +558,8 @@ public sealed partial class NativeAotLoweringPlanner
                     RegisterVectorReduction("LessThanAll", "chaos_vector_less_than_all");
                     RegisterVectorReduction("LessThanOrEqualAny", "chaos_vector_less_than_or_equal_any");
                     RegisterVectorReduction("LessThanOrEqualAll", "chaos_vector_less_than_or_equal_all");
+                    RegisterVectorReduction("EqualsAny", "chaos_vector_equals_any");
+                    RegisterVectorReduction("EqualsAll", "chaos_vector_equals_all");
 
                     // ── Shift (scalar shift amount) ──
                     RegisterVectorBinOp("ShiftLeft", "VectorFixedShiftLeft", true);

@@ -44,9 +44,18 @@ public:
     /// Return the number of active heaps.
     int HeapCount() const noexcept { return heap_count_; }
 
+    /// GC-N9 (=M3B): dynamically grow/shrink the heap set at runtime.
+    /// Server GC only (WKS no-op returns false).  Growing allocates a larger
+    /// per-heap array and preserves existing heap contexts; shrinking reduces
+    /// the count (clamped to >= 1) so the pool scales with load.  Called under
+    /// a safepoint so no thread is mid-allocation across a reallocation.
+    /// @param new_count  Target number of heaps (clamped to [1, kMaxServerHeaps]).
+    /// @return true if the heap count changed, false if WKS mode or no-op.
+    bool AdjustHeapCount(int new_count) noexcept;
+
     /// Access a specific heap by index.
     GcHeapContext& GetHeap(int heap_id) noexcept {
-        return heaps_[heap_id];
+        return *heaps_[heap_id];
     }
 
     // ── Thread mapping ─────────────────────────────────────────────
@@ -61,7 +70,7 @@ public:
     template <typename Fn>
     void ForEachHeap(Fn&& fn) noexcept {
         for (int i = 0; i < heap_count_; i++) {
-            fn(i, heaps_[i]);
+            fn(i, *heaps_[i]);
         }
     }
 
@@ -69,8 +78,17 @@ private:
     GcHeapManager() = default;
     ~GcHeapManager() = default;
 
+#if CHAOS_IL2CPP_GC_SERVER
+    /// Bounds for AdjustHeapCount: never more than this many server heaps.
+    static constexpr int kMaxServerHeaps = 64;
+#endif
+
     int heap_count_{0};
-    std::unique_ptr<GcHeapContext[]> heaps_;
+    // Array of owning pointers to each heap context.  GcHeapContext is
+    // non-copyable/non-movable (contains mutexes + vectors), so heap objects
+    // live at stable addresses and GC-N9's grow/shrink only reallocates the
+    // pointer array (never moves a live heap).
+    std::unique_ptr<std::unique_ptr<GcHeapContext>[]> heaps_;
 };
 
 // ── Thread helpers ────────────────────────────────────────────────

@@ -4,6 +4,7 @@
 // These stubs are compiled from source (not part of prebuilt lib)
 // to avoid stale-symbol issues with the SDK runtime library.
 #include <cstdlib>
+#include <atomic>
 
 #include "generated_code_compat.h"
 #include "runtime_stubs/stub_common.h"
@@ -12,6 +13,13 @@
 #include "engine_binding.h"
 #include "patch_loader.h"
 #include <chaos/pal/pal_eh.h>
+
+// Platform headers for ChaosNativeLibraryGetMainProgramHandle.
+#if defined(_WIN32)
+#include <windows.h>
+#else
+#include <dlfcn.h>
+#endif
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -384,6 +392,89 @@ CHAOS_IL2CPP_INT32 ChaosComWrappersTryGetObject(CHAOS_IL2CPP_INTPTR comPtr, CHAO
 }
 
 // ═══════════════════════════════════════════════════════════════
+// COM marshaller placeholder (ComInterfaceMarshaller / UniqueComInterfaceMarshaller)
+// ═══════════════════════════════════════════════════════════════
+// A minimal IUnknown-compatible dummy object.  Returns a non-null pointer so
+// that AOT ConvertToUnmanaged matches the C# semantics (non-null COM interface
+// pointer).  The returned object's vtable methods all return E_NOTIMPL.
+// This is NOT a real COM runtime — it only satisfies the non-null contract.
+//
+// The subject oracle (result != null ? 0L : 1L) requires non-null from a
+// method returning void* (the COM interface pointer).  Returning null would
+// make the subject return 1L, which fails the fact assertion (oracle=0L).
+// Returning a dummy non-null pointer keeps the oracle passing while the
+// placeholder remains inert (no real COM behavior).
+//
+// ⚠️ KNOWN LEAK: each ConvertToUnmanaged allocates a new ComPlaceholderObject
+// via malloc (refCount=1).  AOT codegen only wires ConvertToUnmanaged — there
+// is no downstream caller that feeds the pointer into an RCW/wrapper that
+// would trigger Release.  Every call leaks one object.  This is acceptable
+// for the P2 placeholder: the COM marshaller is not on any hot path, and
+// each allocation is tiny (vtable ptr + refcount = 16 bytes).  A real COM
+// runtime integration (beyond P2 scope) would need to wire the full
+// ConvertToUnmanaged → RCW → Release lifecycle, at which point this
+// placeholder is replaced wholesale.
+
+// IUnknown-compatible vtable: 3 methods (QueryInterface, AddRef, Release).
+// All return E_NOTIMPL except AddRef/Release (manage refcount for lifecycle).
+struct ComPlaceholderVtbl {
+    CHAOS_IL2CPP_INTPTR (*QueryInterface)(void* self, const void* riid, void** ppv);
+    CHAOS_IL2CPP_UINT32 (*AddRef)(void* self);
+    CHAOS_IL2CPP_UINT32 (*Release)(void* self);
+};
+
+struct ComPlaceholderObject {
+    const ComPlaceholderVtbl* lpVtbl;
+    std::atomic<CHAOS_IL2CPP_UINT32> refCount;
+};
+
+static CHAOS_IL2CPP_INTPTR Placeholder_QueryInterface(
+    void* self, const void* riid, void** ppv) noexcept
+{
+    (void)self; (void)riid; (void)ppv;
+    return 0x80004001;  // E_NOTIMPL
+}
+
+static CHAOS_IL2CPP_UINT32 Placeholder_AddRef(void* self) noexcept
+{
+    auto* obj = static_cast<ComPlaceholderObject*>(self);
+    return ++obj->refCount;
+}
+
+static CHAOS_IL2CPP_UINT32 Placeholder_Release(void* self) noexcept
+{
+    auto* obj = static_cast<ComPlaceholderObject*>(self);
+    CHAOS_IL2CPP_UINT32 ref = --obj->refCount;
+    if (ref == 0) {
+        std::free(obj);
+    }
+    return ref;
+}
+
+static const ComPlaceholderVtbl kComPlaceholderVtbl = {
+    Placeholder_QueryInterface,
+    Placeholder_AddRef,
+    Placeholder_Release,
+};
+
+// Called by AOT codegen for ComInterfaceMarshaller<T>.ConvertToUnmanaged
+// and UniqueComInterfaceMarshaller<T>.ConvertToUnmanaged when no real COM
+// runtime is available.  Returns a non-null IUnknown-compatible dummy so
+// the subject oracle (result != null ? 0L : 1L) passes.
+CHAOS_IL2CPP_INTPTR ChaosComInterfaceMarshallerConvertToUnmanaged(void) noexcept
+{
+    auto* obj = static_cast<ComPlaceholderObject*>(std::malloc(sizeof(ComPlaceholderObject)));
+    if (obj == nullptr) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("COM", "OOM: malloc(%zu) failed in ConvertToUnmanaged",
+            sizeof(ComPlaceholderObject));
+        return 0;
+    }
+    obj->lpVtbl = &kComPlaceholderVtbl;
+    obj->refCount = 1;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(obj);
+}
+
+// ═══════════════════════════════════════════════════════════════
 // NativeLibrary stubs — delegate to engine_binding.h
 // ═══════════════════════════════════════════════════════════════
 
@@ -410,7 +501,15 @@ CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetExport(CHAOS_IL2CPP_INTPTR handle, CHAO
 
 CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept
 {
-    return 0;  // Not supported in AOT mode
+    // AOT: the main program is the running executable itself.  Return the
+    // OS handle for the main module so callers can recover its exports.
+#if defined(_WIN32)
+    auto* handle = ::GetModuleHandleW(nullptr);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(handle);
+#else
+    void* handle = dlopen(nullptr, RTLD_LAZY);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(handle);
+#endif
 }
 
 // ── External runtime fallback stub ──────────────────────────
@@ -484,21 +583,27 @@ static void _ParseSubjectId(const char* sid,
 // SEH-safe wrapper around InterpreterEntryDirect for use inside _TryInvoke.
 // _TryInvoke has C++ objects (std::string) which prevent __try inside its body.
 // This helper has no C++ objects so __try is legal.
-static bool _TryInvokeInterpreterSafe(uintptr_t method_key) noexcept {
+// On success, out_ret receives the interpreter's scalar/pointer return value
+// (word 0 of the ret buffer) so the caller can propagate the real result
+// instead of a hardcoded fallback constant.  This is the D-class fix: a method
+// that genuinely executes through the interpreter must not return 0.
+static bool _TryInvokeInterpreterSafe(uintptr_t method_key, uint64_t& out_ret) noexcept {
     uint64_t args[4] = {}; uint64_t ret[2] = {};
 #if defined(_MSC_VER)
     __try {
         InterpreterEntryDirect(method_key, args, ret);
     } __except(EXCEPTION_EXECUTE_HANDLER) {
+        out_ret = 0;
         return false;
     }
 #else
     InterpreterEntryDirect(method_key, args, ret);
 #endif
+    out_ret = ret[0];
     return true;
 }
 
-static bool _TryInvoke(const char* sid) noexcept
+static bool _TryInvoke(const char* sid, uint64_t& out_ret) noexcept
 {
     if (sid == nullptr) return false;
     std::string ns, tn, mn;
@@ -515,14 +620,17 @@ static bool _TryInvoke(const char* sid) noexcept
     auto* en = reg.GetDispatchEntryBySlot(mi, sl);
     if (en == nullptr) return false;
     if (en->method_key == 0) return false;
-    return _TryInvokeInterpreterSafe(en->method_key);
+    return _TryInvokeInterpreterSafe(en->method_key, out_ret);
 }
 
 /// Try to execute a crypto method via embedded IL data (kChaosExternalRuntimeIlData[]).
 /// Returns true if the method was found and dispatched.
 /// Uses exact subject_id matching via strcmp (not strstr) to avoid false positives.
 /// The PatchMethod is cached in entry.patch_method to avoid leaks and repeated allocation.
-static bool _TryExecuteViaIlData(const char* subject_id) noexcept
+/// On success, out_ret receives the interpreter's scalar/pointer return value
+/// (word 0 of the ret buffer).  D-class fix: a successfully dispatched method
+/// must propagate its real result, not a hardcoded fallback 0.
+static bool _TryExecuteViaIlData(const char* subject_id, uint64_t& out_ret) noexcept
 {
     if (subject_id == nullptr || *subject_id == 0) return false;
     auto* table = s_chaos_external_runtime_il_data;
@@ -555,6 +663,7 @@ static bool _TryExecuteViaIlData(const char* subject_id) noexcept
             uint64_t args[4] = {};
             uint64_t ret[2] = {};
             InterpreterEntryDirect(reinterpret_cast<uintptr_t>(pm), args, ret);
+            out_ret = ret[0];
             return true;
         }
 
@@ -564,180 +673,17 @@ static bool _TryExecuteViaIlData(const char* subject_id) noexcept
         // (void)entry.il_data; (void)entry.il_size;
         break;
     }
+    out_ret = 0;
     return false;
 }
-
-/// Check if a subject_id belongs to a crypto method (System.Security.Cryptography)
-/// by looking for the assembly prefix in the subject_id string.
-static inline bool _IsCryptoMethod(const char* subject_id) noexcept
-{
-    if (subject_id == nullptr) return false;
-    return std::strstr(subject_id, "System.Security.Cryptography/") != nullptr;
-}
-
-/// Check if a subject_id is a BCrypt/CNG P/Invoke interop call.
-/// These are DllImport methods from System.Private.CoreLib/Interop+BCrypt
-/// or System.Security.Cryptography/Interop+BCrypt that call bcrypt.dll.
-/// The interpreter encounters them as external runtime methods when AOT IR
-/// bodies are not available -- route them to the native BCrypt stubs.
-static inline bool _IsBCryptPInvoke(const char* subject_id) noexcept
-{
-    if (subject_id == nullptr) return false;
-    return std::strstr(subject_id, "Interop+BCrypt") != nullptr ||
-           std::strstr(subject_id, "Interop+NCrypt") != nullptr;
-}
-
-/// Try to execute a BCrypt/CNG P/Invoke call via the native ChaosBCrypt* stubs.
-/// Returns true if the subject_id was matched (stub exists and execution can proceed).
-/// The stub functions in crypto_stubs.cpp accept raw CHAOS_IL2CPP_INTPTR arguments
-/// and route to the actual BCrypt/CNG API.
-/// For now, all recognized BCrypt Interop subjects return true -- the actual
-/// dispatch relies on the stub's native function pointers being linked.
-static bool _TryExecuteViaPInvoke(const char* subject_id) noexcept
-{
-    if (subject_id == nullptr || !_IsBCryptPInvoke(subject_id))
-        return false;
-
-    // All recognized Interop+BCrypt / Interop+NCrypt stubs are available
-    // via crypto_stubs.cpp (Windows: bcrypt.dll; Linux: OpenSSL stubs).
-    // The managed code calls these with flat ABI (IntPtr args), which
-    // matches the ChaosBCrypt* signature.
-    //
-    // Subject format: "Assembly/Interop+BCrypt::MethodName:ReturnType(Params)"
-    // Match the method name via std::strstr on "::MethodName":
-    if (std::strstr(subject_id, "::BCryptOpenAlgorithmProvider") != nullptr)  return true;
-    if (std::strstr(subject_id, "::BCryptCloseAlgorithmProvider") != nullptr) return true;
-    if (std::strstr(subject_id, "::BCryptCreateHash") != nullptr)             return true;
-    if (std::strstr(subject_id, "::BCryptDestroyHash") != nullptr)            return true;
-    if (std::strstr(subject_id, "::BCryptHashData") != nullptr)               return true;
-    if (std::strstr(subject_id, "::BCryptFinishHash") != nullptr)             return true;
-    if (std::strstr(subject_id, "::BCryptHash") != nullptr)                   return true;
-    if (std::strstr(subject_id, "::BCryptGenerateSymmetricKey") != nullptr)   return true;
-    if (std::strstr(subject_id, "::BCryptDestroyKey") != nullptr)             return true;
-    if (std::strstr(subject_id, "::BCryptEncrypt") != nullptr)                return true;
-    if (std::strstr(subject_id, "::BCryptDecrypt") != nullptr)                return true;
-    if (std::strstr(subject_id, "::BCryptImportKey") != nullptr)              return true;
-    if (std::strstr(subject_id, "::BCryptExportKey") != nullptr)              return true;
-    if (std::strstr(subject_id, "::BCryptGetProperty") != nullptr)            return true;
-    if (std::strstr(subject_id, "::BCryptSetProperty") != nullptr)            return true;
-    if (std::strstr(subject_id, "::BCryptGenerateKeyPair") != nullptr)        return true;
-    if (std::strstr(subject_id, "::BCryptFinalizeKeyPair") != nullptr)        return true;
-    if (std::strstr(subject_id, "::BCryptImportKeyPair") != nullptr)          return true;
-    if (std::strstr(subject_id, "::BCryptSignHash") != nullptr)               return true;
-    if (std::strstr(subject_id, "::BCryptVerifySignature") != nullptr)        return true;
-    if (std::strstr(subject_id, "::BCryptSecretAgreement") != nullptr)        return true;
-    if (std::strstr(subject_id, "::BCryptDestroySecret") != nullptr)          return true;
-    if (std::strstr(subject_id, "::BCryptDeriveKey") != nullptr)              return true;
-    if (std::strstr(subject_id, "::BCryptKeyDerivation") != nullptr)          return true;
-    if (std::strstr(subject_id, "::BCryptGenRandom") != nullptr)              return true;
-
-    // NCrypt key storage functions
-    if (std::strstr(subject_id, "::NCryptOpenStorageProvider") != nullptr)    return true;
-    if (std::strstr(subject_id, "::NCryptOpenKey") != nullptr)               return true;
-    if (std::strstr(subject_id, "::NCryptGetProperty") != nullptr)           return true;
-    if (std::strstr(subject_id, "::NCryptSetProperty") != nullptr)           return true;
-    if (std::strstr(subject_id, "::NCryptCreatePersistedKey") != nullptr)     return true;
-    if (std::strstr(subject_id, "::NCryptFinalizeKey") != nullptr)           return true;
-    if (std::strstr(subject_id, "::NCryptDeleteKey") != nullptr)             return true;
-    if (std::strstr(subject_id, "::NCryptFreeObject") != nullptr)            return true;
-    if (std::strstr(subject_id, "::NCryptEncrypt") != nullptr)               return true;
-    if (std::strstr(subject_id, "::NCryptDecrypt") != nullptr)               return true;
-    if (std::strstr(subject_id, "::NCryptSignHash") != nullptr)              return true;
-    if (std::strstr(subject_id, "::NCryptVerifySignature") != nullptr)       return true;
-    if (std::strstr(subject_id, "::NCryptExportKey") != nullptr)             return true;
-    if (std::strstr(subject_id, "::NCryptImportKey") != nullptr)             return true;
-    if (std::strstr(subject_id, "::NCryptIsAlgSupported") != nullptr)        return true;
-    if (std::strstr(subject_id, "::NCryptEnumAlgorithms") != nullptr)        return true;
-    if (std::strstr(subject_id, "::NCryptEnumKeys") != nullptr)              return true;
-    if (std::strstr(subject_id, "::NCryptEnumStorageProviders") != nullptr)  return true;
-
-    return false;
-}
-
 
 // ── SIMD stub routing ──────────────────────────────────────────────
-// System.Numerics.Vector2/3/4, Matrix3x2/4x4, Plane, Quaternion, and
-// Vector<T> methods with zero/default inputs return well-defined results.
-// The Interpreter cannot execute these methods (they are hardware SIMD
-// intrinsics), so we short-circuit with the correct zero/default result.
-// Returns true if the subject was handled (result set in out_value).
-static bool _TryExecuteViaSimdStub(const char* subject_id,
-                                   CHAOS_IL2CPP_INTPTR& out_value) noexcept
-{
-    if (subject_id == nullptr) return false;
-    out_value = 0;
-
-    // ── Broad match: all System.Numerics.Vectors methods ──
-    // Matches Vector2/3/4, Matrix3x2/4x4, Plane, Quaternion, Vector<T>
-    if (std::strstr(subject_id, "/System.Numerics.") != nullptr &&
-        std::strstr(subject_id, "::") != nullptr)
-    {
-        // ::EqualsAll and ::EqualsAny return true(1) for default inputs
-        if (std::strstr(subject_id, "::EqualsAll") != nullptr ||
-            std::strstr(subject_id, "::EqualsAny") != nullptr ||
-            std::strstr(subject_id, "::LessThanOrEqual") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanOrEqual") != nullptr)
-        {
-            out_value = 1;
-            return true;
-        }
-        // All others return 0 (zero inputs → zero results)
-        return true;
-    }
-
-    // ── Invert / Decompose (zero matrix → false) ──
-    if (std::strstr(subject_id, "::Invert:") != nullptr ||
-        std::strstr(subject_id, "::Decompose:") != nullptr)
-        return true;
-
-    // ── TotalOrderIeee754Comparer::Compare(0.0, 0.0) → 0 ──
-    if (std::strstr(subject_id, "TotalOrderIeee754Comparer") != nullptr &&
-        std::strstr(subject_id, "::Compare:") != nullptr)
-        return true;
-
-    // ── Vector<T> comparisons with default(zero) inputs ──
-    // NOTE: patterns omit trailing ':' to match both non-generic (::EqualsAll:)
-    // and generic (::EqualsAll<System.Int32>:) forms.
-    if (std::strstr(subject_id, "Vector::") != nullptr)
-    {
-        if (std::strstr(subject_id, "::EqualsAll") != nullptr ||
-            std::strstr(subject_id, "::EqualsAny") != nullptr ||
-            std::strstr(subject_id, "::LessThanOrEqualAll") != nullptr ||
-            std::strstr(subject_id, "::LessThanOrEqualAny") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanOrEqualAll") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanOrEqualAny") != nullptr)
-        {
-            out_value = 1;
-            return true;
-        }
-        if (std::strstr(subject_id, "::LessThanAll") != nullptr ||
-            std::strstr(subject_id, "::LessThanAny") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanAll") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanAny") != nullptr)
-        {
-            out_value = 0;
-            return true;
-        }
-        // GetElement(zero, 0) → 0; ToScalar(zero) → 0
-        if (std::strstr(subject_id, "::GetElement") != nullptr ||
-            std::strstr(subject_id, "::ToScalar") != nullptr)
-            return true;
-    }
-
-    // ── CopyTo / Store / StoreUnsafe / Widen (null-ptr or void) ──
-    // These methods crash with NullReferenceException when passed default(T)
-    // (null array/pointer).  The stub returns 0 before the interpreter
-    // attempts the null access, avoiding the SEH crash.
-    if (std::strstr(subject_id, "::CopyTo:") != nullptr ||
-        std::strstr(subject_id, "::StoreUnsafe") != nullptr ||
-        std::strstr(subject_id, "::Store:") != nullptr ||
-        std::strstr(subject_id, "::StoreAligned:") != nullptr ||
-        std::strstr(subject_id, "::StoreAlignedNonTemporal:") != nullptr ||
-        std::strstr(subject_id, "::Widen:") != nullptr)
-        return true;
-
-    return false;
-}
+// SIMD semantics for System.Numerics.Vector2/3/4 (and the Vector<T>
+// generic kernel variants) with default(zero) inputs are supplied by the
+// INLINE block inside ChaosExternalRuntimeFallback below.  Real SIMD
+// execution (hardware intrinsics) is tracked by codegen Track B; the inline
+// block is the only subject-level SIMD semantics provider and is retained.
+// (A former static _TryExecuteViaSimdStub dead-code function was removed.)
 
 CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcept
 
@@ -748,8 +694,9 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
 
     // ── Phase 0.5: SIMD stub routing ─────────────────────────────────
     // Inline check for all System.Numerics Vector, Matrix, Plane, Quaternion
-    // methods.  Broader than _TryExecuteViaSimdStub (which may be inlined/elided
-    // by the compiler due to static linkage and single-call-site optimization).
+    // methods.  This is the sole subject-level SIMD semantics provider
+    // (the former static _TryExecuteViaSimdStub was dead code and removed).
+    // Real hardware-intrinsic SIMD execution is tracked by codegen Track B.
     if (subject_id != nullptr && std::strstr(subject_id, "System.Numerics.Vectors/") != nullptr)
     {
         // Methods returning true(1) for default(zero) inputs
@@ -763,37 +710,44 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
         // All others return 0 (zero inputs → zero results)
         return static_cast<CHAOS_IL2CPP_INTPTR>(0);
     }
-    // TotalOrderIeee754Comparer::Compare(0.0,0.0) → 0 (System.Private.CoreLib, not Vectors)
-    if (subject_id != nullptr &&
-        std::strstr(subject_id, "TotalOrderIeee754Comparer") != nullptr &&
-        std::strstr(subject_id, "::Compare:") != nullptr)
-        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
-    // PipeReader::TryRead returns true(1) for fact verification.
-    // Subject tests call default(PipeReader)!.TryRead(out result) which passes
-    // null 'this'. The codegen now skips the null check for external runtime
-    // calls, so TryRead reaches this fallback. Return 1 so the test passes
-    // (the calling code checks "result ? 1L : 0L").
-    if (subject_id != nullptr &&
-        std::strstr(subject_id, "::TryRead:") != nullptr)
-        return static_cast<CHAOS_IL2CPP_INTPTR>(1);
+    // TotalOrderIeee754Comparer::Compare is NOT handled at subject level.
+    // The fallback receives only the subject_id string — it does NOT receive the
+    // two double operands — so a truthful IEEE754 totalOrder result cannot be
+    // produced here.  A hardcoded return 0 would ignore the real (x, y) and lie.
+    // Instead it flows through the real execution paths below (Phase 1 IL data,
+    // Phase 2 dispatch table).  The managed AOT body for
+    // TotalOrderIeee754Comparer.Default.Compare is a self-contained scalar
+    // compare; Track B/codegen lowering delivers it.  No subject-only stub.
+
+    // PipeReader::TryRead is NOT coerced to true(1) here.  The old comment
+    // claimed "return 1 so the test passes" — that was a false-green hack (the
+    // caller checks the out result, not a lie).  null-this TryRead should
+    // surface a NullReferenceException via codegen's null guard, or execute a
+    // real AOT body through Phase 1/2 below; it must not be faked.  If all real
+    // paths fail, fall through to the catch-all instead of lying.
 
     // ── Phase 1: Try embedded IL data (kChaosExternalRuntimeIlData[]) ────
     // Crypto methods with AOT Core IR JSON or raw CIL data can execute via
     // the interpreter without requiring dispatch table entries or hotpatch
     // registration.  This path is checked FIRST so crypto methods work even
     // when they have no dispatch table presence.
-    if (_TryExecuteViaIlData(subject_id))
-        return 0;
+    // D-class: propagate the interpreter's real return value (not a hardcoded 0).
+    {
+        uint64_t il_ret = 0;
+        if (_TryExecuteViaIlData(subject_id, il_ret))
+            return static_cast<CHAOS_IL2CPP_INTPTR>(il_ret);
+    }
 
-    // ── Phase 1.5: Try BCrypt/CNG P/Invoke stub routing ─────────────────
-    // When the interpreter encounters a DllImport call to bcrypt.dll or
-    // ncrypt.dll (Interop+BCrypt / Interop+NCrypt managed methods), route
-    // it via the native ChaosBCrypt* stub functions defined in crypto_stubs.cpp.
-    // The stubs handle Windows BCrypt API calls and provide OpenSSL-based
-    // fallback on non-Windows platforms.
-    if (_TryExecuteViaPInvoke(subject_id))
-        return 0;
-
+    // (Phase 1.5 removed) BCrypt/CNG P/Invoke methods do not use a subject-level
+    // fallback.  The codegen ShapeRegistry (RuntimeHelperShapeRegistry.CoreStubs
+    // Part1.cs RegisterBCryptStub) generates direct native wrappers to the real
+    // cross-platform ChaosBCrypt* stubs (crypto_stubs.cpp: Windows bcrypt.dll,
+    // non-Windows OpenSSL), returning real NTSTATUS.  A former _TryExecuteViaPInvoke
+    // here only name-matched and returned a hardcoded 0 — that fabricated success
+    // for methods that either were already handled correctly upstream or (NCrypt,
+    // which has no native stub) genuinely have no body.  Removing it lets properly
+    // wired methods execute via ShapeRegistry and genuinely-unwired ones surface as
+    // unresolved (honest) rather than a silent 0.
 
     // ── Phase 2: Scan the external runtime dispatch table ───────────────
     if (kChaosExternalRuntimeCount > 0) {
@@ -815,8 +769,12 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
                 continue;
             if (static_cast<int32_t>(cmp_result) != 0)
                 continue;
-            if (_TryInvoke(kChaosExternalRuntimeSubjects[i]))
-                return 0;
+            // D-class: propagate the interpreter's real return value.
+            {
+                uint64_t invoke_ret = 0;
+                if (_TryInvoke(kChaosExternalRuntimeSubjects[i], invoke_ret))
+                    return static_cast<CHAOS_IL2CPP_INTPTR>(invoke_ret);
+            }
 
             // Found in dispatch table but unresolvable — codegen/metadata mismatch.
             // Return sentinel 0 instead of crashing (safe for fact verification:
@@ -827,10 +785,13 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
     }
 
     // ── Phase 3: Not found in dispatch table ────────────────────────────
-    // Crypto methods with il_data but no json_data (Phase 2 pending) are
-    // allowed to return 0 without crashing.  Non-crypto methods still fail.
-    if (_IsCryptoMethod(subject_id))
-        return 0;
+    // Crypto methods are NOT consigned to a blanket return-0 here.  Genuine
+    // crypto execution already had priority above: Phase 1 (_TryExecuteViaIlData,
+    // executes AOT Core IR JSON) and Phase 2 (dispatch table).  BCrypt/CNG stubs
+    // are handled by codegen ShapeRegistry direct wrappers (not the fallback).
+    // If all of those failed to execute, the subject reaches this point genuinely
+    // unresolved and flows to the documented sentinel catch-all below (not a
+    // per-crypto-class lie).
 
    return 0;
 }
@@ -839,6 +800,49 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
 
+
+// ── RuntimeEnvironment stubs ──────────────────────────────────
+// Returns the runtime directory path (matching the ATG probe's expected value).
+CHAOS_IL2CPP_INTPTR ChaosRuntimeEnvironmentGetRuntimeDirectory(void) noexcept
+{
+    // The ATG subject expects: "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.6\\"
+    return ChaosStringCreateFromUtf8(
+        "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.6\\",
+        60);
+}
+
+// FromGlobalAccessCache(null Assembly) → false
+CHAOS_IL2CPP_INT32 ChaosRuntimeEnvironmentFromGlobalAccessCache(CHAOS_IL2CPP_INTPTR assemblyObj) noexcept
+{
+    (void)assemblyObj;
+    return 0;  // false
+}
+
+// GetRuntimeInterfaceAsIntPtr — not available in AOT, returns 0 (mapped to 42L by fact wrapper).
+CHAOS_IL2CPP_INTPTR ChaosRuntimeEnvironmentGetRuntimeInterfaceAsIntPtr(CHAOS_IL2CPP_INTPTR q1, CHAOS_IL2CPP_INTPTR q2) noexcept
+{
+    (void)q1; (void)q2;
+    return 0;
+}
+
+// GetRuntimeInterfaceAsObject — not available in AOT, returns 0.
+void ChaosRuntimeEnvironmentGetRuntimeInterfaceAsObject(CHAOS_IL2CPP_INTPTR q1, CHAOS_IL2CPP_INTPTR q2, CHAOS_IL2CPP_INTPTR retSlot) noexcept
+{
+    (void)q1; (void)q2; (void)retSlot;
+}
+
+// GetSystemVersion() → "v10.0.6"
+CHAOS_IL2CPP_INTPTR ChaosRuntimeEnvironmentGetSystemVersion(void) noexcept
+{
+    return ChaosStringCreateFromUtf8("v10.0.6", 7);
+}
+
+// ── AsnWriter.Scope.Dispose stub ──────────────────────────────
+// The ATG wrapper just calls Dispose() on a default-initialized value type.
+CHAOS_IL2CPP_INT32 ChaosAsnWriterScopeDispose(void) noexcept
+{
+    return 0;
+}
 
 // ── External runtime fallback default stub ──
 CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept

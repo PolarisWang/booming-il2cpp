@@ -11,7 +11,8 @@
 namespace chaos::il2cpp::jit::tree {
 
 ExprNode* BoundCheckEliminator::PostVisit(ExprNode* node) noexcept {
-    if (!node) return nullptr;
+    if (!node)
+        return nullptr;
 
     NodeKind k = node->kind();
     if (k != kLdElem && k != kLdElemA && k != kStElem)
@@ -28,7 +29,8 @@ ExprNode* BoundCheckEliminator::PostVisit(ExprNode* node) noexcept {
         idx_node = node->child1;
     }
 
-    if (!idx_node) return node;
+    if (!idx_node)
+        return node;
 
     // ── Constant index elimination ──────────────────────────────────────
     // If the index is LdcI4 and the array was allocated by NewArr with a
@@ -78,4 +80,4 @@ ExprNode* BoundCheckEliminator::PostVisit(ExprNode* node) noexcept {
     return node;
 }
 
-}  // namespace chaos::il2cpp::jit::tree
+} // namespace chaos::il2cpp::jit::tree
