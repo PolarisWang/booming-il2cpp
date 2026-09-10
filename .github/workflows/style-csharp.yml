@@ -53,12 +53,17 @@ jobs:
               continue
             fi
 
-            # Run dotnet format style check on this single file
-            if ! dotnet format "$proj" style \
-                 --include "$fpath" --verify-no-changes --verbosity minimal \
-                 2>&1 | tee /tmp/dotnetfmt.log; then
-              # dotnet format exits non-zero when violations exist
-              echo "::error::dotnet format style violation in $fpath"
+            # Run dotnet format style check on this single file.
+            # NOTE: `if ! cmd | tee log` would test tee's exit status (always 0),
+            # masking real violations. Capture dotnet format's own status via
+            # PIPESTATUS[0]; `set -o pipefail` above + explicit PIPESTATUS keeps
+            # the gate genuinely red on violations.
+            dotnet format "$proj" style \
+              --include "$fpath" --verify-no-changes --verbosity minimal \
+              2>&1 | tee /tmp/dotnetfmt.log
+            fmt_rc=${PIPESTATUS[0]}
+            if [ "$fmt_rc" -ne 0 ]; then
+              echo "::error::dotnet format style violation in $fpath (rc=$fmt_rc)"
               FAILED=1
             fi
           done
