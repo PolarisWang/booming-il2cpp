@@ -210,6 +210,103 @@ public sealed class CSharpExpressionBuilder
     };
 
     /// <summary>
+    /// Abstract types that ATG cannot instantiate directly, mapped to a concrete
+    /// subclass it can emit into the generated test class.
+    ///
+    /// Background: for an abstract type, GetInstanceExpression falls back to
+    /// SubjectInstanceFactory.Create&lt;T&gt;() which uses GetUninitializedObject —
+    /// a bare object with null internal state.  Every instance method then throws
+    /// (KeyedCollection.Contains → InvalidOperationException because the key
+    /// extractor was never supplied), so the whole subject degrades to smoke-42.
+    ///
+    /// Fix: emit a minimal concrete subclass inline (see
+    /// <see cref="SynthesizedSubclasses"/>) and construct *that* instead.  The
+    /// subclass only needs to satisfy the abstract members; behaviour comes from
+    /// the base type's real implementation.
+    ///
+    /// Key = the abstract type's full name as it appears in a subject id
+    /// (namespace-qualified, generic args preserved e.g.
+    /// "System.Collections.ObjectModel.KeyedCollection&lt;System.Int32,System.Int32&gt;").
+    /// Prefix matching (before any '&lt;') is used so one entry covers every
+    /// instantiation.
+    /// </summary>
+    private static readonly Dictionary<string, string> AbstractSubclassMap = new(StringComparer.Ordinal)
+    {
+        // KeyedCollection<TKey,TItem> is abstract: it requires GetKeyForItem.
+        // For the generic-instantiated form ATG actually sees, key on the prefix
+        // and synthesise a subclass with an identity key extractor — correct for
+        // any TItem where the item is its own key (true for int/string/int-like).
+        ["System.Collections.ObjectModel.KeyedCollection"] = "TestKeyedCollection",
+    };
+
+    /// <summary>
+    /// Source for each synthesized concrete subclass, keyed by the class name in
+    /// <see cref="AbstractSubclassMap"/>.  Emitted once per generated file by
+    /// <see cref="EmitSynthesizedSubclasses"/>.  Only the abstract members are
+    /// implemented; everything else is inherited from the real base type.
+    /// </summary>
+    internal static readonly Dictionary<string, string> SynthesizedSubclasses = new(StringComparer.Ordinal)
+    {
+        ["TestKeyedCollection"] = """
+            // Synthesized by ATG: concrete KeyedCollection so instance methods
+            // (Contains/TryGetValue/Remove/…) run on a real backing dictionary
+            // instead of a GetUninitializedObject bare instance.
+            internal sealed class TestKeyedCollection<TKey, TItem> : System.Collections.ObjectModel.KeyedCollection<TKey, TItem>
+                where TKey : notnull
+            {
+                protected override TKey GetKeyForItem(TItem item) => (TKey)(object)item!;
+            }
+            """,
+    };
+
+    /// <summary>
+    /// Concrete subclass expression for an abstract type, or null when the type
+    /// is not (or not yet) covered.  Uses prefix matching so a single entry
+    /// covers every generic instantiation.
+    /// </summary>
+    public static string? TryGetAbstractSubclassExpression(string typeFullName, string csType)
+    {
+        foreach (var (prefix, className) in AbstractSubclassMap)
+        {
+            if (!typeFullName.StartsWith(prefix, StringComparison.Ordinal))
+                continue;
+            // Preserve the generic argument list (if any) so the synthesized
+            // generic subclass gets the same type arguments.
+            var gaStart = csType.IndexOf('<');
+            var ga = gaStart >= 0 ? csType[gaStart..] : "";
+            return $"new {className}{ga}()";
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Emit every synthesized subclass into the generated file (once).
+    /// </summary>
+    public static void EmitSynthesizedSubclasses(System.Text.StringBuilder sb, string indent)
+    {
+        foreach (var (name, source) in SynthesizedSubclasses)
+        {
+            foreach (var line in source.Split('\n'))
+                sb.AppendLine(indent + line.TrimEnd('\r'));
+            sb.AppendLine();
+        }
+    }
+
+    /// <summary>
+    /// Names of the synthesized subclasses that are actually referenced, so the
+    /// emitter only writes the ones a given file uses.
+    /// </summary>
+    internal static IEnumerable<string> UsedSubclassNames(IEnumerable<string> instanceExpressions)
+    {
+        var used = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var expr in instanceExpressions)
+            foreach (var name in SynthesizedSubclasses.Keys)
+                if (expr.Contains("new " + name, StringComparison.Ordinal))
+                    used.Add(name);
+        return used;
+    }
+
+    /// <summary>
     /// Describes how to construct an instance of a known type.
     /// </summary>
     private enum FactoryKind { Collection, Dictionary, EnumerableCtor, CustomExpr }
@@ -280,6 +377,15 @@ public sealed class CSharpExpressionBuilder
         var factoryResult = TryBuildFactoryExpression(typeFullName, csType);
         if (factoryResult is not null)
             return factoryResult;
+
+        // Check the abstract-subclass map before falling back to
+        // SubjectInstanceFactory.  Abstract types (KeyedCollection, etc.)
+        // cannot be instantiated via GetUninitializedObject — all instance
+        // methods throw because abstract members are missing.  For known
+        // types we emit a real synthesized subclass.
+        var subclassExpr = TryGetAbstractSubclassExpression(typeFullName, csType);
+        if (subclassExpr is not null)
+            return subclassExpr;
 
         // For types with namespace qualification, use global:: prefix.
         var qualified = CSharpSerializer.StripAssemblyQualification(typeFullName);
