@@ -70,7 +70,6 @@ jobs:
         run: |
           dotnet test tests/unit/managed/codegen/Chaos.IL2CPP.CodeGen.Tests.csproj `
             --configuration Release `
-            --settings tests/unit/managed/codegen/coverlet.runsettings `
             /p:CollectCoverage=true `
             /p:CoverletOutputFormat=cobertura `
             /p:CoverletOutput=coverage-results/coverage.cobertura.xml `
