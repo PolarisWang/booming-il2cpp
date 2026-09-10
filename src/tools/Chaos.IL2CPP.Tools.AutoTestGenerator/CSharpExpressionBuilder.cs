@@ -164,6 +164,14 @@ public sealed class CSharpExpressionBuilder
         // System.Net.ServerSentEvents
         ["System.Net.ServerSentEvents.SseParser"] =
             "System.Net.ServerSentEvents.SseParser.Create<int>(System.IO.Stream.Null)",
+        // System.IO.Compression — ZipArchive over a valid in-memory empty zip.
+        // A 22-byte end-of-central-directory-only zip is a fully valid, readable
+        // archive with zero entries; constructing ZipArchive over it yields a real
+        // instance whose Entries is empty (non-throwing), letting instance-method
+        // subjects (ZipFileExtensions.*) run with deterministic semantics instead
+        // of ArgumentNullException on a bare GetUninitializedObject.
+        ["System.IO.Compression.ZipArchive"] =
+            "new System.IO.Compression.ZipArchive(new System.IO.MemoryStream(System.Convert.FromBase64String(\"UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA==\")), System.IO.Compression.ZipArchiveMode.Read)",
     };
 
     // Types with a static `Shared` property that returns a valid instance.

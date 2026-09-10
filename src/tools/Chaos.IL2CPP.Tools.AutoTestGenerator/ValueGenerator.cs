@@ -122,6 +122,12 @@ public sealed class ValueGenerator
         ["Stream"] = _ => "System.IO.Stream.Null",
         ["TextReader"] = _ => "System.IO.TextReader.Null",
         ["TextWriter"] = _ => "System.IO.TextWriter.Null",
+        // IO.Compression — ZipArchive constructed over a valid empty in-memory zip
+        // so ZipFileExtensions methods (CreateEntryFromFile, ExtractToFile, etc.)
+        // receive a non-null ZipArchive instead of default(ZipArchive)! → null →
+        // ArgumentNullException.  The 22-byte base64 zip is the minimal valid empty
+        // zip file: an end-of-central-directory record with zero entries.
+        ["ZipArchive"] = _ => "new System.IO.Compression.ZipArchive(new System.IO.MemoryStream(System.Convert.FromBase64String(\"UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA==\")), System.IO.Compression.ZipArchiveMode.Read)",
         ["IProgress"] = typeArgs => typeArgs.Length > 0
             ? $"new System.Progress<{typeArgs[0]}>(_ => {{ }})"
             : "new System.Progress<object>(_ => { })",
