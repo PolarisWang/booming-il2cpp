@@ -1,0 +1,99 @@
+# Pipeline profile: pr — validation before merge on every PR / push to main.
+#
+# Each stage name maps 1:1 to a file in .github/workflows/stages/<name>.yml.
+# Per-PR runs the medium-weight gates that must hold BEFORE merge.  Heavy tiers
+# (gc-stress scale=100, jit-baseline, arm64, full foundation, publish-smoke,
+# extended foundation) are deferred to nightly/release so PR feedback stays fast.
+
+profile: pr
+description: "PR / push-to-main fast-to-medium validation"
+
+stages:
+  hygiene:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 15
+
+  style-csharp:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 15
+
+  secret-scan:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 15
+
+  gc-unit:
+    enabled: true
+    os: windows-latest
+    timeout: 120
+    stress_scale: 50          # safe per-PR stress; heavy 100 deferred to nightly
+
+  gc-server-smoke:
+    enabled: true
+    os: windows-latest
+    timeout: 180
+
+  gc-asan:
+    enabled: true
+    os: windows-latest
+    timeout: 240
+
+  gc-linux-tsan:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 600
+
+  codegen-unit:
+    enabled: true
+    os: windows-latest
+    timeout: 240
+
+  metadata-writer-unit:
+    enabled: true
+    os: windows-latest
+    timeout: 120
+
+  snapshot-unit:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 60
+
+  jit-unit:
+    enabled: true
+    os: windows-latest
+    timeout: 180
+
+  hybrid-jit:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 300
+
+  aot-smoke:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 120
+
+  clang-tidy:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 120
+
+  ubsan:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 240
+
+  # ── Foundation-dll e2e smoke (core families only, no hotupdate/benchmark) ──
+  # Added as part of translation-tracking + hotupdate correctness audit (2026-09-07).
+  # PR-level smoke ensures codegen/runtime changes that break the build→fact→coverage-audit
+  # pipeline for System.Private.CoreLib are caught before merge, NOT deferred to push-to-main
+  # or nightly.  mode=smoke → only core families (1 family: CoreLib), 3 stages (build, fact,
+  # coverage-audit).  Heavy/hotupdate/benchmark/aggregate stages are deferred to foundation-dll
+  # full in nightly.  Timeout is ~30min actual, 120min guard.
+  foundation-dll:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 120
+    mode: smoke

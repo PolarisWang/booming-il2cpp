@@ -1,0 +1,104 @@
+# .github/workflows/triggers/pr.yml
+# PR trigger → pipeline.yml --profile pr
+name: PR Pipeline
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/native/**'
+      - 'src/managed/**'
+      - 'src/tools/**'
+      - 'CMakeLists.txt'
+      - '**/*.cmake'
+      - 'build/**'
+      - 'tests/e2e/translation/**'
+      - 'tests/suite_contract.yaml'
+      - '.github/workflows/**'
+      - '.github/pipelines/**'
+      - '.editorconfig'
+      - 'docs/**'
+  push:
+    branches: [main]
+    paths:
+      - 'src/native/**'
+      - 'src/managed/**'
+      - 'src/tools/**'
+      - 'CMakeLists.txt'
+      - '**/*.cmake'
+      - 'build/**'
+      - 'tests/e2e/translation/**'
+      - 'tests/suite_contract.yaml'
+      - '.github/workflows/**'
+      - '.github/pipelines/**'
+      - '.editorconfig'
+      - 'docs/**'
+
+jobs:
+  pr-pipeline:
+    uses: ./.github/workflows/pipeline.yml
+    with:
+      profile: pr
+
+  # Pr-notify: post a PR comment when at least one enabled stage failed, naming
+  # exactly which stage(s).  Green / all-skipped runs post nothing.
+  pr-notify:
+    runs-on: ubuntu-latest
+    needs: [pr-pipeline]
+    # only comment on a real failure (failed_stages non-empty); success/skip post nothing
+    if: ${{ always() && needs.pr-pipeline.outputs.failed_stages != '' }}
+    permissions:
+      issues: write     # commenting on the PR uses the issues write scope
+      pull-requests: write
+    steps:
+      - name: Comment failing-stages on PR
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const failed = '${{ needs.pr-pipeline.outputs.failed_stages }}';
+            const parts = failed.split(',').filter(Boolean);
+            const prNumber = context.issue.number || context.payload.pull_request?.number;
+            if (!prNumber) {
+              console.log('No PR context; skipping comment.');
+              return;
+            }
+            const headSha = context.payload.pull_request?.head?.sha;
+            const shortSha = headSha ? headSha.slice(0, 7) : 'n/a';
+            const names = parts.map(s => `\`${s}\``).join(', ');
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            // Marker lets dedup find OUR previous failure comment (scoped to this
+            // commit) instead of sweeping unrelated human/CI comments.  A real HTML
+            // comment is used so the marker is hidden in the rendered PR comment.
+            const marker = `<!-- pr-ci-fail ${shortSha} -->`;
+            const body =
+              `${marker}\n` +
+              `## ❌ CI stage failure (commit ${shortSha})\n\n` +
+              `The Pipeline run failed on commit ${shortSha}:\n\n` +
+              `**Failed stage(s):** ${names}\n\n` +
+              `See [the run](${runUrl}) for details.`;
+            // Dedup: if we already commented for this exact commit (e.g. a retry /
+            // re-push of the same SHA re-ran the pipeline), update that comment
+            // rather than posting yet another one → no per-run spam on one commit.
+            const { data: existing } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+            const prior = existing.find(c => c.body && c.body.startsWith(marker));
+            if (prior) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: prior.id,
+                body,
+              });
+              console.log(`Updated prior failure comment #${prior.id} for ${shortSha}`);
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body
+              });
+              console.log(`Posted new failure comment for ${shortSha}`);
+            }

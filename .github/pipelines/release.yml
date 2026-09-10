@@ -1,0 +1,120 @@
+profile: release
+description: "Pre-release verification (heavy gates before tag publish)"
+
+stages:
+  hygiene:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 15
+
+  style-csharp:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 15
+
+  secret-scan:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 15
+
+  codegen-unit:
+    enabled: true
+    os: windows-latest
+    timeout: 240
+
+  metadata-writer-unit:
+    enabled: true
+    os: windows-latest
+    timeout: 120
+
+  snapshot-unit:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 60
+
+  gc-unit:
+    enabled: true
+    os: windows-latest
+    timeout: 120
+    stress_scale: 100
+
+  gc-server-smoke:
+    enabled: true
+    os: windows-latest
+    timeout: 180
+
+  gc-asan:
+    enabled: true
+    os: windows-latest
+    timeout: 240
+
+  gc-linux-tsan:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 600
+
+  gc-stress:
+    enabled: true
+    os: windows-latest
+    timeout: 3600
+
+  gc-perf:
+    enabled: true
+    os: windows-latest
+    timeout: 600
+
+  aot-smoke:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 120
+
+  jit-unit:
+    enabled: true
+    os: windows-latest
+    timeout: 180
+
+  jit-baseline:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 1800
+
+  hybrid-jit:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 300
+
+  arm64-jit:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 1200
+
+  foundation-verify:
+    enabled: true
+    os: windows-latest
+    timeout: 120
+
+  foundation-dll:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 1800
+    mode: extended
+
+  native-integration:
+    enabled: true
+    os: windows-latest
+    timeout: 2400
+
+  clang-tidy:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 120
+
+  ubsan:
+    enabled: true
+    os: ubuntu-latest
+    timeout: 240
+
+  publish-smoke:
+    enabled: true
+    os: windows-latest
+    timeout: 3600
