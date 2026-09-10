@@ -195,6 +195,14 @@ public sealed class CSharpExpressionBuilder
             "new System.Runtime.Serialization.SurrogateSelector()",
         ["System.Runtime.Serialization.Formatters.Binary.BinaryFormatter"] =
             "new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter()",
+        // System.Runtime.Serialization — abstract subclasses constructed
+        // NOTE: Formatter deliberately excluded — ~20 abstract members
+        // (WriteDouble, WriteChar, …) vary by framework version.
+        ["System.Runtime.Serialization.SerializationBinder"] = "new TestSerializationBinder()",
+        // System.Xml — XsltContext and XPathExpression are abstract; the
+        // synthesized subclasses give permissive default behaviour.
+        ["System.Xml.Xsl.XsltContext"] = "new TestXsltContext()",
+        ["System.Xml.XPath.XPathExpression"] = "new TestXPathExpression()",
     };
 
     // Types with a static `Shared` property that returns a valid instance.
@@ -237,6 +245,9 @@ public sealed class CSharpExpressionBuilder
         // and synthesise a subclass with an identity key extractor — correct for
         // any TItem where the item is its own key (true for int/string/int-like).
         ["System.Collections.ObjectModel.KeyedCollection"] = "TestKeyedCollection",
+        // System.Runtime.Serialization — both are abstract with a single
+        // abstract member that has a trivial passthrough implementation.
+        ["System.Runtime.Serialization.SerializationBinder"] = "TestSerializationBinder",
     };
 
     /// <summary>
@@ -255,6 +266,45 @@ public sealed class CSharpExpressionBuilder
                 where TKey : notnull
             {
                 protected override TKey GetKeyForItem(TItem item) => (TKey)(object)item!;
+            }
+            """,
+        ["TestSerializationBinder"] = """
+            // Synthesized by ATG: concrete SerializationBinder.  BindToType passes
+            // the type name through Assembly.GetType, which is the documented
+            // default behaviour; BindToName writes the assembly-qualified name.
+            internal sealed class TestSerializationBinder : System.Runtime.Serialization.SerializationBinder
+            {
+                public override System.Type? BindToType(string assemblyName, string typeName)
+                    => System.Type.GetType(typeName, throwOnError: false);
+
+                public override void BindToName(System.Type serializedType, out string? assemblyName, out string? typeName)
+                {
+                    assemblyName = serializedType.Assembly.FullName;
+                    typeName = serializedType.FullName;
+                }
+            }
+            """,
+        ["TestXPathExpression"] = """
+            internal sealed class TestXPathExpression : System.Xml.XPath.XPathExpression
+            {
+                public override string Expression => "/";
+                public override System.Xml.XPath.XPathResultType ReturnType => System.Xml.XPath.XPathResultType.NodeSet;
+                public override void SetContext(System.Xml.XmlNamespaceManager nsManager) { }
+                public override void SetContext(System.Xml.IXmlNamespaceResolver nsResolver) { }
+                public override object Evaluate(System.Xml.XPath.XPathNodeIterator nodeIterator)
+                    => throw new System.NotSupportedException("TestXPathExpression is a construction fixture");
+            }
+            """,
+        ["TestXsltContext"] = """
+            internal sealed class TestXsltContext : System.Xml.Xsl.XsltContext
+            {
+                public override System.Xml.Xsl.IXsltContextFunction ResolveFunction(string prefix, string name, System.Xml.XPath.XPathResultType[] argTypes)
+                    => throw new System.NotSupportedException("TestXsltContext is a construction fixture");
+                public override System.Xml.Xsl.IXsltContextVariable ResolveVariable(string prefix, string name)
+                    => throw new System.NotSupportedException("TestXsltContext is a construction fixture");
+                public override int CompareDocument(string baseUriA, string baseUriB) => 0;
+                public override bool PreserveWhitespace(System.Xml.XPath.XPathNavigator node) => true;
+                public override bool Whitespace => true;
             }
             """,
     };
@@ -282,10 +332,13 @@ public sealed class CSharpExpressionBuilder
     /// <summary>
     /// Emit every synthesized subclass into the generated file (once).
     /// </summary>
-    public static void EmitSynthesizedSubclasses(System.Text.StringBuilder sb, string indent)
+    public static void EmitSynthesizedSubclasses(System.Text.StringBuilder sb, string indent, IEnumerable<string> usedNames)
     {
+        var used = new HashSet<string>(usedNames, StringComparer.Ordinal);
         foreach (var (name, source) in SynthesizedSubclasses)
         {
+            if (!used.Contains(name))
+                continue;
             foreach (var line in source.Split('\n'))
                 sb.AppendLine(indent + line.TrimEnd('\r'));
             sb.AppendLine();

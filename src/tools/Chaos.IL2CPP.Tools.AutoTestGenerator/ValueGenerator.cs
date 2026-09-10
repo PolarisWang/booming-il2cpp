@@ -496,6 +496,16 @@ public sealed class ValueGenerator
         ["ReadOnlySequence"] = "new System.Buffers.ReadOnlySequence<System.Byte>(new byte[] { 0x7B, 0x7D })",
         ["ArraySegment"] = "new System.ArraySegment<System.Byte>(new byte[] { 0x7B, 0x7D })",
         ["IBufferWriter"] = "new System.Buffers.ArrayBufferWriter<System.Byte>()",
+        // ── System.Net.Sockets ──
+        // AsyncCallback needs a non-null lambda or the APM methods throw.
+        ["AsyncCallback"] = "_ => { }",
+        // EndPoint is abstract; IPEndPoint is the most common concrete variant.
+        ["EndPoint"] = "new System.Net.IPEndPoint(System.Net.IPAddress.Loopback, 0)",
+        ["IPAddress"] = "System.Net.IPAddress.Loopback",
+        ["IPEndPoint"] = "new System.Net.IPEndPoint(System.Net.IPAddress.Loopback, 0)",
+        ["LingerOption"] = "new System.Net.Sockets.LingerOption(true, 0)",
+        ["MulticastOption"] = "new System.Net.Sockets.MulticastOption(System.Net.IPAddress.Loopback)",
+        // SocketFlags default None is fine; the boundary set already covers it.
     };
 
     /// <summary>
