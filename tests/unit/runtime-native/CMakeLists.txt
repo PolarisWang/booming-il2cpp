@@ -1,3 +1,10 @@
+cmake_minimum_required(VERSION 3.20)
+# CMake 4.x requires an explicit cmake_minimum_required + direct project() call at
+# the top of every top-level CMakeLists (CMP0000 is a hard error, not a warning).
+# ASM_MASM is enabled conditionally in the jit subdir (MSVC x64 only), so it is not
+# declared here — that would break the Linux configuration.
+project(chaos_native_unit_tests LANGUAGES CXX)
+
 # tests/unit/runtime-native/CMakeLists.txt — native CTest unit-test root.
 #
 # Target home for the native gtest unit suites (formerly under testing/src/native).
