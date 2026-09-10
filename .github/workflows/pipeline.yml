@@ -356,6 +356,11 @@ jobs:
     name: docs-deploy
     needs: [resolve, docs-build]
     if: ${{ always() && contains(fromJson(needs.resolve.outputs.stages), 'docs-deploy') }}
+    # deploy-pages needs OIDC token; reusable callee can't request more than the
+    # caller grants — the caller must mirror the callee's permissions.
+    permissions:
+      pages: write
+      id-token: write
     uses: ./.github/workflows/docs-deploy.yml
     with:
       os: ubuntu-latest
