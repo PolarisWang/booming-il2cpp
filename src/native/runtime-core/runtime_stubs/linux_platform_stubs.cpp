@@ -41,10 +41,12 @@ extern "C" __attribute__((weak)) const void* const kChaosExternalRuntimeFnTable[
 #include <cstdint>
 
 namespace chaos::il2cpp::diagnostics {
-// (extern std::atomic<bool>).  Plain `bool` here mangles differently and leaves
-// the real consumers with unresolved externals on Linux.
-std::atomic<bool> g_dbg_any_breakpoints{false};
-std::atomic<bool> g_dbg_pause_requested{false};
+
+// These must match the declarations in diagnostics/debugger/dbg_runtime.h
+// (extern std::atomic<bool>).  A plain `bool` definition here mangles differently
+// and leaves the real consumers with unresolved externals on Linux.
+std::atomic<bool> g_dbg_any_breakpoints{ false };
+std::atomic<bool> g_dbg_pause_requested{ false };
 
 bool DbgIsStepping() noexcept { return false; }
 void DbgClearFrameSnapshot() noexcept {}
