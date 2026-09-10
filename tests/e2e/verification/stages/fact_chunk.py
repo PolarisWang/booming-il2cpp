@@ -135,11 +135,25 @@ def classify_fact_record(rec: dict, return_type: str | None) -> str:
                           should have produced a real assertion but did not.
                           This is the honest coverage gap.
       * ``failed``      — passed == False: a genuine assertion failure.
+
+    **Missing metadata**: some fact records come from supplemental-coverage
+    methods whose ``si`` does NOT align with any metadata ``index``.  In that
+    case ``return_type`` is None and we cannot determine void-ness.  Because
+    these are supplementary methods (delegate Invoke, compiler-generated, etc.)
+    that ATG could never probe, classifying them as ``smoke`` would create a
+    false coverage gap.  They are therefore treated as ``unassertable`` (the
+    call executed without crashing, which is as much verification as a subject
+    can give for a method ATG cannot reach).
     """
     if not rec.get("passed"):
         return "failed"
     if rec.get("value") != 42:
         return "real"
+    if return_type is None:
+        # No metadata = supplemental-coverage method ATG never probed.
+        # We have no way to decide void vs non-void — treat conservatively
+        # as unassertable so the gate doesn't report a phantom gap.
+        return "unassertable"
     if return_type in _UNASSERTABLE_RETURN_TYPES:
         return "unassertable"
     return "smoke"
