@@ -37,10 +37,14 @@ extern "C" __attribute__((weak)) const void* const kChaosExternalRuntimeFnTable[
 // Debugger stubs (normally in chaos_debugger, Windows-only)
 // ════════════════════════════════════════════════════════════════════════════
 
-namespace chaos::il2cpp::diagnostics {
+#include <atomic>
+#include <cstdint>
 
-bool g_dbg_any_breakpoints = false;
-bool g_dbg_pause_requested = false;
+namespace chaos::il2cpp::diagnostics {
+// (extern std::atomic<bool>).  Plain `bool` here mangles differently and leaves
+// the real consumers with unresolved externals on Linux.
+std::atomic<bool> g_dbg_any_breakpoints{false};
+std::atomic<bool> g_dbg_pause_requested{false};
 
 bool DbgIsStepping() noexcept { return false; }
 void DbgClearFrameSnapshot() noexcept {}
