@@ -82,6 +82,10 @@ extern GcEventSlot g_gc_event_slots[kMaxGcEventCallbacks];
 /// @param user_data  Opaque data passed back to the callback.
 bool GcRegisterEventCallback(GcEventCallback callback, void* user_data);
 
+/// Clear ALL registered event callbacks.
+/// Safe only when no concurrent GcFireEvent is active (STW safepoint callers).
+void GcClearEventCallbacks();
+
 /// Fire a GC event to all registered callbacks.
 /// Called from within the GC safepoint (STW).
 inline void GcFireEvent(GcEvent event) noexcept {

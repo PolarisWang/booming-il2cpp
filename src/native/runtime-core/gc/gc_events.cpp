@@ -28,4 +28,11 @@ bool GcRegisterEventCallback(GcEventCallback callback, void* user_data) {
     return false;
 }
 
+void GcClearEventCallbacks() {
+    for (int i = 0; i < kMaxGcEventCallbacks; i++) {
+        g_gc_event_slots[i].user_data = nullptr;
+        g_gc_event_slots[i].callback.store(nullptr, std::memory_order_release);
+    }
+}
+
 }  // namespace chaos::il2cpp::runtime_core

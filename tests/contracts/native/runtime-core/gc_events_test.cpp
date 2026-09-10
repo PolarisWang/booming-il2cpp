@@ -41,6 +41,9 @@ void TestRegisterFireCallback() {
 
     // Should have been called once.
     GC_CHECK(callback_count.load() >= 1, "callback fired for events");
+    // Clear registrations so the stack-local user_data does not dangle
+    // into a later test (GcFireEvent would otherwise write a dead frame).
+    GcClearEventCallbacks();
 }
 
 // ── Test 2: Multiple callbacks ──────────────────────────────────────
@@ -63,6 +66,9 @@ void TestMultipleCallbacks() {
 
     GC_CHECK(count1.load() >= 1, "first callback fired");
     GC_CHECK(count2.load() >= 1, "second callback fired");
+    // Clear registrations so the stack-local user_data does not dangle
+    // into a later test (GcFireEvent would otherwise write a dead frame).
+    GcClearEventCallbacks();
 }
 
 // ── Test 3: Fire multiple events ────────────────────────────────────
@@ -80,6 +86,9 @@ void TestFireMultipleEvents() {
     GcFireEvent(GcEvent::SWEEP_DONE);
 
     GC_CHECK(count.load() >= 1, "callback fired for multiple events");
+    // Clear registrations so the stack-local user_data does not dangle
+    // into a later test (GcFireEvent would otherwise write a dead frame).
+    GcClearEventCallbacks();
 }
 
 // ── Test 4: Pinned object lifecycle ─────────────────────────────────
