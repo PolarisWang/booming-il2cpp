@@ -65,8 +65,11 @@ jobs:
       - name: Locate & copy ASan runtime DLL
         shell: bash
         run: |
-          dll=$(find "/c/Program Files/Microsoft Visual Studio/2022" -iname "clang_rt.asan_dynamic-x86_64.dll" 2>/dev/null | head -1)
-          if [ -z "$dll" ]; then echo "::error::clang_rt.asan_dynamic-x86_64.dll not found under VS 2022"; exit 1; fi
+          # The runner may host VS 2022 (17) or VS 2026 (18); search both rather than
+          # hard-coding the 2022 tree, and fall back to a whole-VS-dir search.
+          dll=$(find "/c/Program Files/Microsoft Visual Studio/2022" "/c/Program Files/Microsoft Visual Studio/18" -iname "clang_rt.asan_dynamic-x86_64.dll" 2>/dev/null | head -1)
+          if [ -z "$dll" ]; then dll=$(find "/c/Program Files/Microsoft Visual Studio" -iname "clang_rt.asan_dynamic-x86_64.dll" 2>/dev/null | head -1); fi
+          if [ -z "$dll" ]; then echo "::error::clang_rt.asan_dynamic-x86_64.dll not found under any Visual Studio install"; exit 1; fi
           echo "ASan DLL: $dll"
           # Multi-config Debug output dirs (new tree exes) + the contracts-tree
           # absolute output dir (tests/contracts/native/runtime-core/CMakeLists.txt).
