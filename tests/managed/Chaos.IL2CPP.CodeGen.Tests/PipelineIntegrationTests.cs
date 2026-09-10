@@ -19,8 +19,20 @@ public sealed class PipelineIntegrationTests
         return Path.GetFullPath(Path.Combine(
             repoRoot,
             "tests", "managed", "Chaos.IL2CPP.CodeGen.Tests",
-            "StubAssembly", "bin", "Debug", "net8.0",
+            "StubAssembly", "bin", ResolveConfigurationDir(), "net8.0",
             "StubAssembly.dll"));
+    }
+
+    /// <summary>Derive build configuration from test assembly output path.</summary>
+    private static string ResolveConfigurationDir()
+    {
+        var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+        foreach (var cfg in new[] { "Debug", "Release", "RelWithDebInfo", "Check" })
+        {
+            if (baseDir.Contains($"/bin/{cfg}/") || baseDir.Contains($"\\bin\\{cfg}\\"))
+                return cfg;
+        }
+        return "Debug";
     }
 
     /// <summary>Creates a temp output root cleaned up after the test.</summary>

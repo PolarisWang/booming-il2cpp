@@ -19,8 +19,24 @@ public sealed class PipelineIntegrationTests
         return Path.GetFullPath(Path.Combine(
             repoRoot,
             "tests", "unit", "managed", "codegen",
-            "StubAssembly", "bin", "Debug", "net8.0",
+            "StubAssembly", "bin", ResolveConfigurationDir(), "net8.0",
             "StubAssembly.dll"));
+    }
+
+    /// <summary>
+    /// Derive the active build configuration from this test assembly's output path
+    /// (.../bin/&lt;config&gt;/&lt;tfm&gt;/).  Hardcoding "Debug" broke every test that
+    /// consumed the stub DLL whenever the suite ran with --configuration Release.
+    /// </summary>
+    private static string ResolveConfigurationDir()
+    {
+        var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+        foreach (var cfg in new[] { "Debug", "Release", "RelWithDebInfo", "Check" })
+        {
+            if (baseDir.Contains($"/bin/{cfg}/") || baseDir.Contains($"\\bin\\{cfg}\\"))
+                return cfg;
+        }
+        return "Debug";
     }
 
     /// <summary>Creates a temp output root cleaned up after the test.</summary>

@@ -26,10 +26,21 @@ internal sealed class PlannerFixture
         var repoRoot = dir?.FullName ?? throw new DirectoryNotFoundException(
             "Could not locate repository root (.git directory).");
 
+        // Derive configuration from test output path, not hardcoded "Debug".
+        // This makes tests work under any --configuration (Release, RelWithDebInfo, etc.).
+        var testAsmDir = AppDomain.CurrentDomain.BaseDirectory;
+        var configDir = "Debug";
+        var knownConfigs = new[] { "Debug", "Release", "RelWithDebInfo", "Check" };
+        foreach (var kc in knownConfigs)
+        {
+            if (testAsmDir.Contains($"/bin/{kc}/") || testAsmDir.Contains($"\\bin\\{kc}\\"))
+            { configDir = kc; break; }
+        }
+
         return Path.GetFullPath(Path.Combine(
             repoRoot,
             "tests", "managed", "Chaos.IL2CPP.CodeGen.Tests",
-            "StubAssembly", "bin", "Debug", "net8.0",
+            "StubAssembly", "bin", configDir, "net8.0",
             "StubAssembly.dll"));
     }
 
