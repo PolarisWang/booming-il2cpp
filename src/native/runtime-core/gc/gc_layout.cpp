@@ -215,11 +215,23 @@ uint64_t GcLayoutRegistry::ReadStableId(const void* type_info_ptr) const {
 
     uint64_t stable_id = 0;
 
-    // Try TypeInfoHot layout: stable_id at offset +16
-    // (parent* [8] + vtable_array* [8] + stable_id [8]).
-    std::memcpy(&stable_id,
-        reinterpret_cast<const char*>(type_info_ptr) + 16, sizeof(stable_id));
-    if (Lookup(stable_id) != nullptr) return stable_id;
+    // TypeInfoHot-safe read: only probe offset+16 when the pointer falls inside a
+    // registered range with at least 24 bytes (parent*[8] + vtable_array*[8] +
+    // stable_id[8]) before the range end.  An unprotected memcpy at offset+16 into
+    // a small stack/heap typeinfo (e.g. an 8-byte TestFakeTypeInfo in gc_layout_test)
+    // reads past the object and triggers an ASan stack-buffer-overflow.
+    const uintptr_t addr = reinterpret_cast<uintptr_t>(type_info_ptr);
+    const int count = typeinfo_range_count_.load(std::memory_order_acquire);
+    for (int i = 0; i < count; i++) {
+        const auto& r = typeinfo_ranges_[i];
+        if (addr >= r.begin && addr < r.end &&
+            addr + 24u <= r.end) {
+            std::memcpy(&stable_id,
+                reinterpret_cast<const char*>(type_info_ptr) + 16, sizeof(stable_id));
+            if (Lookup(stable_id) != nullptr) return stable_id;
+            break;
+        }
+    }
 
     // Fallback: FakeTypeInfo layout: stable_id at offset +0
     // (stable_id [8] + padding [8]).
