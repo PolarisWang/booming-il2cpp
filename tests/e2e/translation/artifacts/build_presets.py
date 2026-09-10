@@ -101,6 +101,55 @@ def _write_source_hash(preset_name: str) -> None:
     (sdk_dir / ".source_hash").write_text(_get_source_hash(), encoding="utf-8")
 
 
+def _win_msvc_env_cmd(cmd: list[str]) -> list[str]:
+    """On Windows, wrap `cmd` so MSVC (vcvars64) is loaded first.
+
+    cmake's `--preset ...` for windows-x64-reference requires the MSVC
+    toolchain on PATH/INCLUDE/LIB.  When build_presets.py is invoked from a
+    context that never loaded vcvars (e.g. a Jenkins agent running as a
+    service, or a nested nightly subprocess), cmake configure fails with
+    "could not find any instance of Visual Studio" and every native build
+    fails.  Locate vcvars64.bat (vswhere first, then the common install
+    paths) and prefix the command with a `call`.  No-op on non-Windows or
+    when vcvars cannot be found (the command still runs).
+    """
+    if sys.platform != "win32":
+        return cmd
+    if os.environ.get("VSCMD_ARG_TGT_ARCH"):   # vcvars already loaded
+        return cmd
+    vswhere = Path(os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)")) \
+        / "Microsoft Visual Studio" / "Installer" / "vswhere.exe"
+    vcvars = None
+    if vswhere.exists():
+        try:
+            out = subprocess.run(
+                [str(vswhere), "-latest", "-products", "*",
+                 "-requires", "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+                 "-property", "installationPath"],
+                capture_output=True, text=True, timeout=20,
+            ).stdout.strip().splitlines()
+            if out:
+                cand = Path(out[0].strip()) / "VC" / "Auxiliary" / "Build" / "vcvars64.bat"
+                if cand.exists():
+                    vcvars = cand
+        except (OSError, subprocess.TimeoutExpired):
+            pass
+    if vcvars is None:
+        for base in (r"C:\Program Files\Microsoft Visual Studio\2022\Professional",
+                     r"C:\Program Files\Microsoft Visual Studio\2022\Community",
+                     r"C:\Program Files\Microsoft Visual Studio\2022\Enterprise",
+                     r"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools"):
+            cand = Path(base) / "VC" / "Auxiliary" / "Build" / "vcvars64.bat"
+            if cand.exists():
+                vcvars = cand
+                break
+    if vcvars is None:
+        return cmd
+    # cmd /c "call vcvars64.bat && <cmd ...>"
+    joined = " ".join(f'"{c}"' if " " in c else c for c in cmd)
+    return ["cmd", "/c", f'call "{vcvars}" >nul && {joined}']
+
+
 def build_preset(preset_name: str, force: bool = False) -> bool:
     """Configure and build a single preset. Returns True on success."""
     info = PRESETS.get(preset_name)
@@ -126,7 +175,7 @@ def build_preset(preset_name: str, force: bool = False) -> bool:
     elif cmake_preset:
         # Step 1: cmake --preset (configure)
         result = subprocess.run(
-            ["cmake", "--preset", cmake_preset],
+            _win_msvc_env_cmd(["cmake", "--preset", cmake_preset]),
             cwd=_REPO_ROOT, capture_output=True, text=True, timeout=120,
         )
         if result.returncode != 0:
@@ -152,7 +201,7 @@ def build_preset(preset_name: str, force: bool = False) -> bool:
         if config:
             build_args += ["--config", config]
         result = subprocess.run(
-            build_args,
+            _win_msvc_env_cmd(build_args),
             capture_output=True, text=True, timeout=600,
         )
         if result.returncode != 0:
