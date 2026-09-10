@@ -127,6 +127,14 @@ struct PatchMethod {
     // when the patch method's IL is identical to the AOT version.
     bool keep_native = false;
 
+    // ── IL-change marker (hotupdate semantic verification) ─────────────
+    // Set by ApplyPatchFromMemory when the patch body_data carries a
+    // Tiny-format sentinel body (7 bytes: "ldc.i4 <sentinel>; ret"),
+    // indicating this Subject_N method has new IL that must execute through
+    // the interpreter to make its semantic change observable.
+    // When true, Phase 3 skips keep-native restoration.
+    bool il_changed = false;
+
     // ── Lazy IR lowering state ───────────────────────────────────────────
     // 0=uninitialized, 1=lowering-in-progress, 2=done.
     // CAS-based to avoid global mutex contention across threads.

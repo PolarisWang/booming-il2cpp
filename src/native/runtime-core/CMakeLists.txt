@@ -74,6 +74,7 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/misc_stubs.cpp
     runtime_stubs/interpreter_entry_direct.cpp
     runtime_stubs/registration_globals.cpp
+    hotupdate_probe.cpp
     module_registry.cpp
     module_registry.h
     layout_engine.cpp
