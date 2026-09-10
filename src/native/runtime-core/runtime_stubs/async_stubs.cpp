@@ -47,6 +47,42 @@ void ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) noexcept
     // For test pipeline, assume the task completed successfully.
 }
 
+// ── Task.Delay / Task.GetAwaiter / TaskAwaiter.get_IsCompleted ──
+// Without these, all three fell through to ChaosExternalRuntimeFallback → 0,
+// which made `await Task.Delay(n)` hang forever: GetAwaiter returned 0, so
+// get_IsCompleted read false, the state machine suspended, and
+// AwaitUnsafeOnCompleted saw task_handle==0 and returned without registering
+// a continuation — the machine was never resumed and Main never completed.
+
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskDelay(CHAOS_IL2CPP_INT32 millisecondsDelay) noexcept
+{
+    (void)millisecondsDelay;
+    auto handle = chaos::il2cpp::common::async_task_create();
+    if (handle == 0) return 0;
+    chaos::il2cpp::common::finish_async_task(handle);
+    return handle;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskGetAwaiter(CHAOS_IL2CPP_INTPTR task_handle) noexcept
+{
+    return task_handle;
+}
+
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskAwaiterGetIsCompleted(CHAOS_IL2CPP_INTPTR awaiter_ref) noexcept
+{
+    (void)awaiter_ref;
+    return 1;  // Always completed → state machine takes the synchronous resume path.
+}
+
+// TaskAwaiter<T>::GetResult — returns the result payload as INTPTR (0 in stub
+// mode; the value is unused by the sample's fire-and-forget awaits).  Separate
+// from ChaosAsyncAwaiterGetResult because that one is void-returning.
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultValue(CHAOS_IL2CPP_INTPTR awaiter) noexcept
+{
+    (void)awaiter;
+    return 0;
+}
+
 // ── TaskCompletionSource<T> native helpers (Phase 3 P3-1) ──
 // These delegate to the TaskSource proxy in async.h; the "TCS handle" is
 // a CHAOS_IL2CPP_INTPTR pointing to a TaskSource allocated in async_stubs.cpp.

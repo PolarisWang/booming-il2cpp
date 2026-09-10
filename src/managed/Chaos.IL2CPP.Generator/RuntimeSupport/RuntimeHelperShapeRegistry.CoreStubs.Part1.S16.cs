@@ -86,6 +86,81 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
 
+            // ── Task.Delay / TaskAwaiter (non-generic Task await path) ──
+            // Without these, Task.Delay/Task.GetAwaiter/TaskAwaiter.get_IsCompleted
+            // all fell through to ChaosExternalRuntimeFallback → 0, which made
+            // `await Task.Delay(n)` hang: GetAwaiter returned 0, so IsCompleted
+            // read false, the machine suspended, and AwaitUnsafeOnCompleted saw
+            // task_handle==0 and returned without registering a continuation.
+            registry.Register("System.Threading.Tasks.Task", "Delay", ["System.Int32"],
+                ShapeKind.SimpleForward, "ChaosAsyncTaskDelay",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Threading.Tasks.Task", "GetAwaiter", [],
+                ShapeKind.SimpleForward, "ChaosAsyncTaskGetAwaiter",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Runtime.CompilerServices.TaskAwaiter", "get_IsCompleted", [],
+                ShapeKind.SimpleForward, "ChaosAsyncTaskAwaiterGetIsCompleted",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── Task<T> / TaskAwaiter<T> (generic await path) ──
+            // `await Task.Delay(n)` lowers against Task<Int32>::GetAwaiter and
+            // TaskAwaiter<Int32>::get_IsCompleted / GetResult, not the non-generic
+            // overloads.  Use DirectNativeSymbol so the codegen emits a direct call
+            // to the native function, avoiding inline-code template issues with
+            // parameter naming in the shared header.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "GetAwaiter",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    return new GenericShapeResolution("", symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "ChaosAsyncTaskGetAwaiter");
+                }));
+
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.CompilerServices.TaskAwaiter",
+                MethodName: "get_IsCompleted",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    return new GenericShapeResolution("", symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "ChaosAsyncTaskAwaiterGetIsCompleted");
+                }));
+
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.CompilerServices.TaskAwaiter",
+                MethodName: "GetResult",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    return new GenericShapeResolution("", symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "ChaosAsyncTaskAwaiterGetResultValue");
+                }));
+
         }
 
         /// <summary>
