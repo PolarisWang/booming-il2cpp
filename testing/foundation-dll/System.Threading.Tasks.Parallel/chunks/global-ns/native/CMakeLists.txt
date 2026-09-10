@@ -167,6 +167,7 @@ set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
     "verification_dispatch.generated.cpp"
+    "patch-host-arrays.cpp"
     ${CHAOS_NATIVE_STUBS}
     ${CHAOS_PROFILE_GLOBALS}
     ${CHAOS_ARRAY_STUBS}

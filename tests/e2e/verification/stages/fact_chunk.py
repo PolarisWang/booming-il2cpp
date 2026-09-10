@@ -149,6 +149,12 @@ def classify_fact_record(rec: dict, return_type: str | None) -> str:
         return "failed"
     if rec.get("value") != 42:
         return "real"
+    # The runner now stamps assertFailed=true when the subject's own Assert.*
+    # executed and left a non-zero exit code (the AOT body returned a different
+    # value than the managed probe expected).  Such a record is a genuine
+    # verification failure, not a smoke gap — report it as "failed".
+    if rec.get("assertFailed"):
+        return "failed"
     if return_type is None:
         # No metadata = supplemental-coverage method ATG never probed.
         # We have no way to decide void vs non-void — treat conservatively

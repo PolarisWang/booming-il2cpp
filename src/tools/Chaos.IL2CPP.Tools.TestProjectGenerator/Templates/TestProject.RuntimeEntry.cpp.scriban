@@ -406,9 +406,26 @@ static int RunFactJsonMode() {
             caught = true;
         }
 
+        // Distinguish "the subject's assertion executed and failed" from
+        // "the subject never ran".  An escaped exception (caught) is already a
+        // failure; a *clean* dispatch that nevertheless left the managed
+        // assertion exit code set is ALSO a failure — e.g. the AOT body
+        // returned default while the managed probe expected a real value, so
+        // Assert.AreEqual threw and was swallowed by the dispatcher's EH.
+        // Reporting that as passed would hide a genuine verification failure.
+#ifndef CHAOS_IL2CPP_JIT_MODE
+        bool assertFailed = !caught &&
+            (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0);
+        Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset();
+#else
+        bool assertFailed = false;
+#endif
+        bool passed = !caught && !assertFailed;
+
         if (!first) printf(",");
-        printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
-               si, i, caught ? "false" : "true", caught ? result : result);
+        printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 ",\"assertFailed\":%s}",
+               si, i, passed ? "true" : "false", result,
+               assertFailed ? "true" : "false");
         first = false;
     }
     printf("]}
