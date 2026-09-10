@@ -166,6 +166,10 @@ jobs:
             --output hotupdate-report.json \
             --markdown hotupdate-report.md 2>&1 || echo "[report] hotupdate_report failed (non-fatal)"
           python -m verification.nightly_delta --foundation-dll "$CHAOS_FOUNDATION_DLL" --output nightly-delta.json 2>&1 || echo "[report] nightly-delta failed (non-fatal)"
+          python -m verification.reporting.degradation_report \
+            --delta nightly-delta.json \
+            --output nightly-degradation.json \
+            --markdown nightly-degradation.md 2>&1 || echo "[report] degradation_report failed (non-fatal)"
           python -m verification.nightly_summary --delta nightly-delta.json --output nightly-summary.md 2>&1 || echo "[report] nightly-summary failed (non-fatal)"
           if [ -f nightly-summary.md ]; then
             cat nightly-summary.md >> "$GITHUB_STEP_SUMMARY"
@@ -181,6 +185,9 @@ jobs:
           fi
           if [ -f hotupdate-report.md ]; then
             cat hotupdate-report.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f nightly-degradation.md ]; then
+            cat nightly-degradation.md >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Upload Foundation-DLL Results
@@ -199,6 +206,8 @@ jobs:
             hotupdate-report.json
             hotupdate-report.md
             nightly-delta.json
+            nightly-degradation.json
+            nightly-degradation.md
             nightly-summary.md
             pipeline_output.txt
 
