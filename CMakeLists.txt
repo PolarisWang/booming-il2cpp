@@ -37,6 +37,11 @@ set(
 if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1)
     include(cmake/config-tier.cmake)
+    # Unified native-test factory: provides chaos_native_add_test() /
+    # chaos_compile_only_smoke() / chaos_native_glob_add_tests() used by the
+    # tests/contracts/native/** and tests/unit/runtime-native/** CMakeLists.
+    # Must be included before those add_subdirectory() calls below.
+    include(cmake/chaos_native_test.cmake)
     find_package(Python3 QUIET)
 
     add_subdirectory(third_party/fmt fmt_build)
@@ -70,7 +75,7 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     # ── Native testing suite (GoogleTest-based unit/stress/benchmark) ─────
     # Windows only: imports prebuilt .lib files, uses MSVC-specific flags.
     if(MSVC)
-        add_subdirectory(testing)
+        add_subdirectory(tests/unit/runtime-native)
     endif()
 
     # ── Architecture check targets ─────────────────────────────────────
@@ -137,7 +142,7 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference")
     # ── Native testing suite (GoogleTest-based unit/stress/benchmark) ─────
     # Windows only: imports prebuilt .lib files, uses MSVC-specific flags.
     if(MSVC OR UNIX)
-        add_subdirectory(testing)
+        add_subdirectory(tests/unit/runtime-native)
     endif()
 
     # ── Architecture check targets ─────────────────────────────────────
