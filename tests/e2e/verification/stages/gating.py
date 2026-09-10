@@ -37,7 +37,26 @@ def classify_gate(fact: dict | None, *, min_ratio: float = GATE_REAL_RATIO) -> s
         fact: per-chunk fact summary dict.  New producers carry the runtime
               triple (realVerified / unassertable / smokeUnknown); legacy
               producers only carry realTotal/realPassed — handled below.
-        min_ratio: minimum realVerified/total to be 'pass'.
+        min_ratio: minimum realVerified/assertable-ratio to be 'pass'.
+
+    Judgement model
+    ---------------
+    A chunk's records fall into four buckets (see fact_chunk.classify_fact_record):
+
+        real          value != 42 — a genuine assertion produced a real value
+        unassertable  void / async-void — the 42 is structural, there is
+                      nothing to assert, so this is NOT a coverage gap
+        smoke         has a return type but returned 42 — the honest gap
+        failed        passed == False — a real failure
+
+    `unassertable` records must not sink a chunk: an assembly that is entirely
+    `Task`-returning (e.g. System.Net.ServerSentEvents, whose whole fact surface
+    is `SseFormatter.WriteAsync`) has no assertable method at all — grading it
+    'fail' would report a coverage gap that does not exist.
+
+    So the denominator excludes unassertable records.  A chunk passes when
+    either (a) there is nothing to assert, or (b) the assertable records have a
+    real-verified ratio >= min_ratio.
     """
     if not fact:
         return "skip"
@@ -45,13 +64,17 @@ def classify_gate(fact: dict | None, *, min_ratio: float = GATE_REAL_RATIO) -> s
     if total == 0:
         return "skip"  # no dispatched methods -> nothing to gate
 
-    # ── Preferred: runtime-derived realVerified (fact_chunk.py stamps this) ──
+    # ── Preferred: runtime-derived buckets (fact_chunk.py stamps these) ──
     real_v = fact.get("realVerified")
     if real_v is not None:
+        unassertable = fact.get("unassertable") or 0
+        assertable = total - unassertable
+        # Nothing to assert anywhere -> the chunk is as verified as it can be.
+        if assertable <= 0:
+            return "pass"
         if real_v <= 0:
-            # nothing produced a genuine assertion value → not verified.
             return "fail"
-        return "pass" if (real_v / total) >= min_ratio else "fail"
+        return "pass" if (real_v / assertable) >= min_ratio else "fail"
 
     # ── Legacy fallback: realTotal/realPassed (pre-runtime-enrichment runs) ──
     real_t = fact.get("realTotal")
@@ -64,7 +87,7 @@ def classify_gate(fact: dict | None, *, min_ratio: float = GATE_REAL_RATIO) -> s
 
 
 def fact_real_ratio(fact: dict | None) -> float:
-    """Real-verified fraction of dispatched records (0..1).
+    """Real-verified fraction of the *assertable* records (0..1).
 
     Prefers the runtime-derived realVerified/total; falls back to the legacy
     realPassed/realTotal for older fact.json files.

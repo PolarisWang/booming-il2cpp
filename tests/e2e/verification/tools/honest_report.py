@@ -184,6 +184,10 @@ def main() -> int:
         smoke_u = f["smokeUnknown"] if f else 0
         fail_ct = f["failed"] if f else 0
         pct = real_v / f["total"] * 100 if f and f["total"] > 0 else 0.0
+        # Use *assertable* total (total - unassertable) for the percentage so
+        # a chunk of all-void methods shows "100%" instead of lying at 0%.
+        assertable = max(1, f["total"] - (f.get("unassertable") or 0))
+        pct = real_v / assertable * 100
 
         b_stub = b["stub"] if b else 0
         b_total = (b["nonStub"] or 0) if b else 0
