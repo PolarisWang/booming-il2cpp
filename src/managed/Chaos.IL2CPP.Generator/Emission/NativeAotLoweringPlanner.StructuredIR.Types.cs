@@ -67,16 +67,32 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrInstructionArtifact> Instructions,
         AotCoreIrInstructionArtifact? Terminator,
         int NextPcValue,
-        int FallthroughPcValue = -1); // -1 = fall-through path not applicable (for ret/throw/br/exit)
+        int FallthroughPcValue = -1, // -1 = fall-through path not applicable (for ret/throw/br/exit)
+        int ExitTargetOffset = -1);  // leave/br target outside this CFG; -1 = none
 
     /// <summary>
     /// pc-dispatch state machine node. Generated for irreducible CFGs that
     /// cannot be made reducible by interval analysis + node splitting.
     /// Emitted as: int32_t chaos_pc = N; while (chaos_pc >= 0) { switch(chaos_pc) { case ... } }
     /// </summary>
+    /// <param name="ExitTargetOffsets">
+    /// IL offsets this dispatch jumps to that are NOT blocks in its own CFG — i.e. real
+    /// continuations in another partition (typically the EH tail). A <c>leave</c> out of an
+    /// EH region lands here, and the target is NOT the tail's first block in general.
+    /// The enclosing region must forward the taken target so the tail resumes at the
+    /// right block; dropping it makes every post-region continuation fall into the tail's
+    /// entry and silently execute the wrong arm.
+    /// </param>
+    /// <param name="OffsetToPc">
+    /// IL offset → pc value for this dispatch's own blocks. The emitter uses it to turn
+    /// an incoming <c>chaos_continuation</c> offset (set by an upstream region's exit) into
+    /// the pc this dispatch must start at.
+    /// </param>
     internal sealed record IRPcDispatch(
         IReadOnlyList<PcDispatchCase> Cases,
-        int PcVariableInit
+        int PcVariableInit,
+        IReadOnlyList<int>? ExitTargetOffsets = null,
+        IReadOnlyDictionary<int, int>? OffsetToPc = null
     ) : StructuredIRNode;
 
     // 鈹€鈹€ Leaf control-flow nodes 鈹€鈹€

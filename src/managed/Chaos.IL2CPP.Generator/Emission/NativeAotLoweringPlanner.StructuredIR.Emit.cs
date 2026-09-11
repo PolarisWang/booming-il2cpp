@@ -1844,10 +1844,12 @@ public sealed partial class NativeAotLoweringPlanner
             CatchTypeSubjectId: catchTypeSubjectId,
             FilterInstructions: filterInstructions));
 
-        // Build IR tree for tail (instructions after the handler)
+        // Build IR tree for tail (instructions after the handler).
+        // NOTE: isTailPartition: true — the tail's br/leave are REAL method exits, not
+        // partition-exit scaffolding. See RecoverPartitionStructure.
         if (tail.Count > 0)
         {
-            var tailTree = BuildExceptionPartitionTree(tail, offsets);
+            var tailTree = BuildExceptionPartitionTree(tail, offsets, isTailPartition: true);
             nodes.Add(tailTree);
         }
 
@@ -1874,7 +1876,7 @@ public sealed partial class NativeAotLoweringPlanner
             nodes.Add(BuildExceptionPartitionTree(finallyOnly.PrefixInstructions, offsets));
         nodes.Add(inner);
         if (finallyOnly.TailInstructions.Count > 0)
-            nodes.Add(BuildExceptionPartitionTree(finallyOnly.TailInstructions, offsets));
+            nodes.Add(BuildExceptionPartitionTree(finallyOnly.TailInstructions, offsets, isTailPartition: true));
         return nodes.Count == 1 ? nodes[0] : new IRSequence(nodes);
     }
 
@@ -1921,7 +1923,7 @@ public sealed partial class NativeAotLoweringPlanner
             nodes.Add(BuildExceptionPartitionTree(catchAndFinally.PrefixInstructions, offsets));
         nodes.Add(wrapped);
         if (catchAndFinally.TailInstructions.Count > 0)
-            nodes.Add(BuildExceptionPartitionTree(catchAndFinally.TailInstructions, offsets));
+            nodes.Add(BuildExceptionPartitionTree(catchAndFinally.TailInstructions, offsets, isTailPartition: true));
         return nodes.Count == 1 ? nodes[0] : new IRSequence(nodes);
     }
 
@@ -1952,7 +1954,7 @@ public sealed partial class NativeAotLoweringPlanner
             nodes.Add(BuildExceptionPartitionTree(filterAndFinally.PrefixInstructions, offsets));
         nodes.Add(wrapped);
         if (filterAndFinally.TailInstructions.Count > 0)
-            nodes.Add(BuildExceptionPartitionTree(filterAndFinally.TailInstructions, offsets));
+            nodes.Add(BuildExceptionPartitionTree(filterAndFinally.TailInstructions, offsets, isTailPartition: true));
         return nodes.Count == 1 ? nodes[0] : new IRSequence(nodes);
     }
 
@@ -1995,7 +1997,7 @@ public sealed partial class NativeAotLoweringPlanner
         // Build IR tree for tail (instructions after all handlers)
         if (multiCatch.TailInstructions.Count > 0)
         {
-            var tailTree = BuildExceptionPartitionTree(multiCatch.TailInstructions, offsets);
+            var tailTree = BuildExceptionPartitionTree(multiCatch.TailInstructions, offsets, isTailPartition: true);
             nodes.Add(tailTree);
         }
 
@@ -2062,7 +2064,7 @@ public sealed partial class NativeAotLoweringPlanner
             nodes.Add(BuildExceptionPartitionTree(shape.PrefixInstructions, offsets));
         nodes.Add(inner);
         if (shape.TailInstructions.Count > 0)
-            nodes.Add(BuildExceptionPartitionTree(shape.TailInstructions, offsets));
+            nodes.Add(BuildExceptionPartitionTree(shape.TailInstructions, offsets, isTailPartition: true));
 
         return nodes.Count == 1 ? nodes[0] : new IRSequence(nodes);
     }
@@ -2076,7 +2078,8 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private static StructuredIRNode BuildExceptionPartitionTree(
         IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
-        IReadOnlySet<int> offsets)
+        IReadOnlySet<int> offsets,
+        bool isTailPartition = false)
     {
         if (instructions.Count == 0)
             return new IRSequence(Array.Empty<StructuredIRNode>());
@@ -2096,8 +2099,8 @@ public sealed partial class NativeAotLoweringPlanner
             var splitCfg = MakeCfgReducibleViaIntervalAnalysis(cfg);
             if (splitCfg.IsReducible)
             {
-                return StripExceptionPartitionExitTerminators(
-                    RecoverStructure(splitCfg, 0, splitCfg.Blocks.Count - 1));
+                return RecoverPartitionStructure(
+                    RecoverStructure(splitCfg, 0, splitCfg.Blocks.Count - 1), isTailPartition);
             }
 
             // The CFG is still irreducible — typically because a branch target falls
@@ -2115,7 +2118,33 @@ public sealed partial class NativeAotLoweringPlanner
             return BuildPcDispatchBody(cfg);
         }
 
-        return StripExceptionPartitionExitTerminators(RecoverStructure(cfg, 0, cfg.Blocks.Count - 1));
+        return RecoverPartitionStructure(RecoverStructure(cfg, 0, cfg.Blocks.Count - 1), isTailPartition);
+    }
+
+    /// <summary>
+    /// Applies the partition-exit terminator treatment appropriate to the partition kind.
+    ///
+    /// <para>
+    /// For TRY / HANDLER partitions a trailing <c>br</c>/<c>leave</c> is scaffolding: it
+    /// is the branch out of the partition, and the enclosing
+    /// <c>IRExceptionRegion</c> emitter supplies that edge itself. Leaving it in would
+    /// emit a second, wrong jump — so it is stripped.
+    /// </para>
+    /// <para>
+    /// The TAIL partition is different: its instructions are the method's real
+    /// continuation (the code after the handler), and a <c>leave</c>/<c>ret</c> there is
+    /// a GENUINE method exit that separates mutually exclusive arms. Stripping it
+    /// concatenates those arms into straight-line code, making every arm after the
+    /// first <c>return</c> unreachable — a silently different program. Observed on
+    /// <c>&lt;YieldOne&gt;d__0::MoveNext</c>, where the "exhausted" arm
+    /// (<c>SetResult(false)</c> + <c>ret</c>) swallowed the "yielded" arm
+    /// (<c>SetResult(true)</c>), so the iterator always reported "no more elements".
+    /// </para>
+    /// </summary>
+    private static StructuredIRNode RecoverPartitionStructure(
+        StructuredIRNode recovered, bool isTailPartition)
+    {
+        return isTailPartition ? recovered : StripExceptionPartitionExitTerminators(recovered);
     }
 
 
@@ -2140,7 +2169,18 @@ public sealed partial class NativeAotLoweringPlanner
     {
         Interlocked.Increment(ref s_pcDispatchCount);
 
+        bool hasExits = pcDispatch.Cases.Any(c => c.ExitTargetOffset >= 0);
+        string contVar = "chaos_continuation";
+
         builder.AppendLine(indentation + "// pc-dispatch state machine for irreducible CFG");
+        if (hasExits)
+        {
+            // Continuations in ANOTHER partition (the EH tail). A `leave` out of this
+            // region records the taken target here; the tail's dispatch reads it as its
+            // entry pc. Without this the tail always starts at its FIRST block, which is
+            // only correct when the region's sole exit happens to target that block.
+            builder.AppendLine(indentation + "CHAOS_IL2CPP_INT32 " + contVar + " = -1;");
+        }
         builder.AppendLine(indentation + "CHAOS_IL2CPP_INT32 chaos_pc = " + pcDispatch.PcVariableInit.ToString() + ";");
         builder.AppendLine(indentation + "while (chaos_pc >= 0)");
         builder.AppendLine(indentation + "{");
@@ -2182,6 +2222,8 @@ public sealed partial class NativeAotLoweringPlanner
                         }
                         else
                         {
+                            if (pcCase.ExitTargetOffset >= 0)
+                                builder.AppendLine(indentation + "        " + contVar + " = " + pcCase.ExitTargetOffset.ToString() + ";");
                             builder.AppendLine(indentation + "        chaos_pc = -1;");
                         }
                         break;
@@ -2193,6 +2235,8 @@ public sealed partial class NativeAotLoweringPlanner
             }
             else
             {
+                if (pcCase.ExitTargetOffset >= 0)
+                    builder.AppendLine(indentation + "        " + contVar + " = " + pcCase.ExitTargetOffset.ToString() + ";");
                 builder.AppendLine(indentation + "        chaos_pc = -1;");
             }
 
@@ -2219,6 +2263,10 @@ public sealed partial class NativeAotLoweringPlanner
     {
         var cases = new List<PcDispatchCase>(cfg.Blocks.Count);
         int entryPc = 0;
+        // IL offsets this dispatch jumps to that are NOT blocks in this CFG. These are
+        // real continuations living in another partition (typically the EH tail); the
+        // enclosing region must hand them across. See IRPcDispatch.ExitTargetOffsets.
+        var exitTargetOffsets = new SortedSet<int>();
 
         var blockIndexToPc = new Dictionary<int, int>(cfg.Blocks.Count);
         for (int i = 0; i < cfg.Blocks.Count; i++)
@@ -2236,6 +2284,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             int nextPcValue = -1;
             int fallthroughPcValue = -1;
+            int exitTargetOffset = -1;
 
             if (block.Terminator != null)
             {
@@ -2248,6 +2297,30 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var targetBlockIdx = cfg.OffsetToBlockIndex.GetValueOrDefault(block.BranchTarget.Value, -1);
                     nextPcValue = targetBlockIdx >= 0 ? blockIndexToPc[targetBlockIdx] : -1;
+                    if (targetBlockIdx < 0 && block.BranchTarget.HasValue)
+                    {
+                        exitTargetOffset = block.BranchTarget.Value;
+                        exitTargetOffsets.Add(exitTargetOffset);
+                    }
+                }
+                else if (op == "leave")
+                {
+                    // `leave` exits an EH region. Within this CFG it is either an internal
+                    // jump (rare) or — far more commonly — a jump to an offset that lives in
+                    // a DIFFERENT partition (the tail). The latter is a real continuation:
+                    // record the target so the enclosing region can hand it to the tail.
+                    // Treating it as a plain loop-exit (the old behaviour) silently dropped
+                    // the target and made every post-region continuation fall into the tail's
+                    // first block.
+                    var targetBlockIdx = block.BranchTarget.HasValue
+                        ? cfg.OffsetToBlockIndex.GetValueOrDefault(block.BranchTarget.Value, -1)
+                        : -1;
+                    nextPcValue = targetBlockIdx >= 0 ? blockIndexToPc[targetBlockIdx] : -1;
+                    if (targetBlockIdx < 0 && block.BranchTarget.HasValue)
+                    {
+                        exitTargetOffset = block.BranchTarget.Value;
+                        exitTargetOffsets.Add(exitTargetOffset);
+                    }
                 }
                 else if (IsConditionalBranchOpcode(op))
                 {
@@ -2255,6 +2328,8 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         var targetBlockIdx = cfg.OffsetToBlockIndex.GetValueOrDefault(block.ConditionalTarget.Value, -1);
                         nextPcValue = targetBlockIdx >= 0 ? blockIndexToPc[targetBlockIdx] : -1;
+                        if (targetBlockIdx < 0)
+                            exitTargetOffsets.Add(block.ConditionalTarget.Value);
                     }
                     else
                     {
@@ -2281,10 +2356,11 @@ public sealed partial class NativeAotLoweringPlanner
                 Instructions: block.BodyInstructions,
                 Terminator: block.Terminator,
                 NextPcValue: nextPcValue,
-                FallthroughPcValue: fallthroughPcValue));
+                FallthroughPcValue: fallthroughPcValue,
+                ExitTargetOffset: exitTargetOffset));
         }
 
-        return new IRPcDispatch(cases, entryPc);
+        return new IRPcDispatch(cases, entryPc, exitTargetOffsets.ToArray());
     }
 
 
