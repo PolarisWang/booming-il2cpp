@@ -67,4 +67,23 @@ public static class AsyncMethods
     {
         await Task.Run(work);
     }
+
+    // Task.ContinueWith(Action<Task>) — the single ContinueWith overload whose
+    // full semantics the native helper honours (ASYNC-P2-4).  A non-async
+    // method so the subject reaches the AOT IR as a plain lowered call.
+    public static Task ContinueWithAction(Task antecedent, Action<Task> body)
+    {
+        return antecedent.ContinueWith(body);
+    }
+
+    // Task.ContinueWith(Action<Task>, TaskContinuationOptions) — NOT wired: the
+    // native helper discards the options argument, so routing it would run the
+    // body when the caller may have asked it not to.  The registry resolver
+    // deliberately returns null for this shape, so codegen must fall through to
+    // the interpreter rather than emit a call to chaos_task_continue_with.
+    public static Task ContinueWithOptions(Task antecedent, Action<Task> body,
+                                           TaskContinuationOptions options)
+    {
+        return antecedent.ContinueWith(body, options);
+    }
 }

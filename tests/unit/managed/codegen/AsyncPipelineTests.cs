@@ -497,6 +497,109 @@ public sealed class AsyncPipelineTests
     }
 
     /// <summary>
+    /// ASYNC-P2-4: the two ContinueWith overload families must take DIFFERENT
+    /// paths through emission, and the difference must be visible in the emitted
+    /// C++.
+    ///
+    /// <para>
+    /// Registry-level tests (RuntimeHelperShapeRegistryTests.ContinueWith_*)
+    /// pin the resolver's decision; this test pins its consequence. A resolver
+    /// that returned null but was never consulted, or an emitter that rewrote
+    /// the call anyway, would leave the earlier tests green while the generated
+    /// code still ran the body with the options argument discarded.
+    /// </para>
+    /// </summary>
+    [Fact]
+    public void ContinueWith_OverloadFamilies_EmitDifferentCode()
+    {
+        Assert.True(File.Exists(s_asyncAssemblyPath),
+            $"AsyncTestAssembly.dll not built at {s_asyncAssemblyPath}");
+
+        using var ctx = new TempCtx();
+        var request = new ManagedClosureRequest(
+            InputAssemblyPath: s_asyncAssemblyPath,
+            OutputRootPath: ctx.OutputRoot,
+            EntryPointSubjectIdOverride: null,
+            AdditionalAssemblyPaths: null,
+            FullAssemblyClosure: true);
+
+        var exec = new PipelinePlan().Execute(request);
+        if (exec.IsFailure)
+        {
+            Assert.Fail($"Pipeline failed: {exec.Error?.Code}: {exec.Error?.Message}");
+        }
+        var result = exec.Value!;
+
+        var outputRoot = Path.Combine(ctx.OutputRoot, "asyncgen");
+        var emitted = new NativeAotEmitter().GenerateFromArtifacts(
+            result.NativeAotLoweringPlan,
+            result.AotCoreIr,
+            result.ClosureManifest!,
+            result.MetadataRegistration,
+            result.SupplementalMetadataTemplate,
+            outputRoot,
+            mode: CodegenMode.Aot,
+            subjectMethods: null,
+            goldProfilePath: null,
+            allManagedMethods: result.AllManagedMethods);
+
+        var allGenerated = string.Join("\n",
+            emitted.GeneratedSources.Select(source =>
+                source.Contents ?? source.ContentsBuilder?.ToString() ?? string.Empty));
+
+        // Both ContinueWith methods must reach the AOT IR as lowered call sites —
+        // otherwise the assertions below pass vacuously.
+        var subjectIds = result.AotCoreIr.Methods.Select(m => m.SubjectId).ToList();
+        Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::ContinueWithAction"));
+        Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::ContinueWithOptions"));
+
+        // Slice out one emitted C++ function body by name. A previous revision
+        // split on "\n\n" and took the first chunk containing the name, which can
+        // span two adjacent functions — the wired method's call then "appeared"
+        // in the rejected method's chunk and the anti-fake-green assertion fired
+        // on a false positive. Anchor on the function signature and take up to
+        // its closing brace at column 0.
+        static string ExtractFunctionBody(string source, string functionName)
+        {
+            // Anchor on the emitted DEFINITION, not the header declaration: the
+            // symbol also appears in the header extern block and the dispatch
+            // table, and slicing from the first hit runs past the function into
+            // unrelated code (which is how an earlier revision of this test
+            // reported the wired call inside the rejected method's body).
+            // The definition is the LAST occurrence, introduced by "// Managed method:".
+            var marker = "// Managed method: ";
+            var nameIdx = source.IndexOf("::" + functionName + "(", StringComparison.Ordinal);
+            if (nameIdx < 0) return string.Empty;
+            var lineStart = source.LastIndexOf('\n', nameIdx);
+            lineStart = lineStart < 0 ? 0 : lineStart + 1;
+            // Walk back over the "// Managed method:" comment line if present.
+            var prevLineStart = source.LastIndexOf('\n', lineStart - 2);
+            if (prevLineStart >= 0 &&
+                source.Substring(prevLineStart, lineStart - prevLineStart).Contains(marker))
+            {
+                lineStart = prevLineStart + 1;
+            }
+            var end = source.IndexOf("\n}", nameIdx, StringComparison.Ordinal);
+            return end < 0 ? source[lineStart..] : source[lineStart..end];
+        }
+
+        var actionBody = ExtractFunctionBody(allGenerated, "ContinueWithAction");
+        Assert.False(string.IsNullOrEmpty(actionBody),
+            "the wired ContinueWith overload must have an emitted body");
+        Assert.Contains("chaos_task_continue_with", actionBody);
+
+        // Anti-fake-green for the REJECTED overload. It has a DIFFERENT arity (3
+        // params); a resolver matching on method name alone would route it too and
+        // emit a call that runs the body with `options` silently discarded —
+        // the caller asked for TaskContinuationOptions and got none. Its lowered
+        // body must not reach the native helper.
+        var optionsBody = ExtractFunctionBody(allGenerated, "ContinueWithOptions");
+        Assert.False(string.IsNullOrEmpty(optionsBody),
+            "the rejected ContinueWith overload must still have an emitted body (via the interpreter fallback)");
+        Assert.DoesNotContain("chaos_task_continue_with", optionsBody);
+    }
+
+    /// <summary>
     /// Repo-relative stable output dir for R2-full native round-trip proof.
     /// Emitted C++ (native-aot.generated.*.h/cpp etc.) and the hand-written
     /// driver + CMakeLists.txt live here, ready for a bounded native compile.

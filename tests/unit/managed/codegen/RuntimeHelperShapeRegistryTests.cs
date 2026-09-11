@@ -785,4 +785,79 @@ public sealed class RuntimeHelperShapeRegistryTests
             Assert.Contains("ChaosComInterfaceMarshallerConvertToUnmanaged()", resolution!.CppSource);
         }
     }
+
+    // ── Task.ContinueWith overload surface (ASYNC-P2-4) ────────────────────
+    //
+    // Task.ContinueWith has 20 public overloads on .NET 8 (enumerated from the
+    // shipped CoreLib; see the test-class comment).  Only ONE was wired
+    // (Action<Task>), so every other overload silently fell through to the
+    // interpreter.  The correct routing is not "wire all 20" — it is a
+    // per-family decision, and the decision is what these tests pin:
+    //
+    //   WIRED  — overloads whose full semantics the native helper honours:
+    //            Action<Task> / Func<Task,TResult> (the return value becomes the
+    //            continuation task's result, which is what makes ContinueWith
+    //            chainable).
+    //   NULL   — overloads carrying CancellationToken / TaskContinuationOptions
+    //            / TaskScheduler / object-state.  Routing these to the native
+    //            helper would RUN THE CONTINUATION ANYWAY while ignoring the
+    //            argument the caller supplied — the exact fake-green this phase
+    //            exists to eliminate.  They return null and fall through to the
+    //            interpreter until Phase 3 provides real CT/options semantics.
+    //
+    // This mirrors TaskRun_CancellationTokenOverload_ResolvesToNull: an
+    // unhonoured argument must be a visible gap, not a plausible-looking call.
+
+    [Theory]
+    // NOTE: the callee strings here are the form the REAL pipeline produces for
+    // a cross-assembly BCL callee — angle-bracket generics, not backtick arity.
+    // Using the backtick form let an earlier revision of this test stay green
+    // while every overload resolved to null in the actual pipeline.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>)")]
+    // Assembly-qualified generic arguments, the form real subject ids actually
+    // use: note the comma INSIDE the brackets.  A naive Split(',') turns this
+    // one parameter into two fragments and the overload never matches.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task`1[[System.Int32]]::ContinueWith:System.Threading.Tasks.Task`1[[System.Int32]](System.Func`2[[System.Threading.Tasks.Task`1[[System.Int32]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])")]
+    public void ContinueWith_DelegateOnlyOverloads_RouteToNative(string callee)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"ContinueWith callee '{callee}' should match a generic registry descriptor");
+        Assert.NotNull(descriptor);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_task_continue_with", resolution!.DirectNativeSymbol);
+        Assert.Contains("chaos_task_continue_with", resolution.CppSource);
+    }
+
+    [Theory]
+    // CancellationToken overloads — CT cannot be honoured yet.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>,System.Threading.CancellationToken)")]
+    // TaskContinuationOptions overloads — OnlyOn* would change whether the body
+    // runs at all; ignoring it would run the body when the caller asked it not to.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>,System.Threading.Tasks.TaskContinuationOptions)")]
+    // TaskScheduler overloads — the body must run on the caller's scheduler.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>,System.Threading.Tasks.TaskScheduler)")]
+    // The 4-argument kitchen sink.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>,System.Threading.CancellationToken,System.Threading.Tasks.TaskContinuationOptions,System.Threading.Tasks.TaskScheduler)")]
+    public void ContinueWith_UnhonouredArgumentOverloads_ResolveToNull(string callee)
+    {
+        // These MUST NOT produce a resolution. Returning C++ that calls
+        // chaos_task_continue_with would run the continuation while silently
+        // discarding the CT/options/scheduler the caller passed — a task that
+        // appears to work and does the wrong thing. Falling through to the
+        // interpreter leaves the gap visible and honest.
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"ContinueWith callee '{callee}' should match the generic descriptor");
+        Assert.NotNull(descriptor);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.Null(resolution);
+    }
 }

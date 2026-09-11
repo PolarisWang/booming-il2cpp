@@ -205,24 +205,76 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
-            // ── Task.ContinueWith (Phase 2 P2-2) ──
+            // ── Task.ContinueWith (Phase 2 P2-2 / P2-4) ──
             // `antecedent.ContinueWith(body)` registers `body` to run when the
             // antecedent completes and returns a NEW task carrying the
-            // continuation's return value.  Two reference args (antecedent +
-            // continuation delegate).  Unlike the WhenAll/WhenAny combinators
-            // there is no generic overload split to guard against here — the
-            // Task<TResult> return is erased to a native int handle, matching
-            // FromResult above.
-            registry.Register("System.Threading.Tasks.Task", "ContinueWith",
-                ["System.Action`1<System.Threading.Tasks.Task>"],
-                ShapeKind.SimpleForward, "chaos_task_continue_with",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+            // continuation's return value — that return value is what makes
+            // ContinueWith chainable rather than fire-and-forget.
+            //
+            // .NET 8 exposes 20 public ContinueWith overloads.  Routing is a
+            // per-family decision taken in the resolver below, because the
+            // native helper honours only the delegate argument:
+            //
+            //   honoured  → Action<Task> / Func<Task,TResult>, exactly one
+            //               parameter, routed to chaos_task_continue_with.
+            //   rejected  → anything carrying CancellationToken,
+            //               TaskContinuationOptions, TaskScheduler or an
+            //               object-state argument.  Those return null and fall
+            //               through to the interpreter.  Routing them to the
+            //               native helper would RUN THE BODY ANYWAY while
+            //               discarding the argument the caller supplied —
+            //               a continuation that appears to work and does the
+            //               wrong thing.  (TaskContinuationOptions.OnlyOnFaulted
+            //               is the sharpest case: the caller asked for the body
+            //               NOT to run, and it would run regardless.)
+            //
+            // Same discipline as RegisterTaskRun's CancellationToken rejection
+            // and TaskRun_CancellationTokenOverload_ResolvesToNull.
+            //
+            // The Task<TResult> return is erased to a native int handle,
+            // matching FromResult above.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "ContinueWith",
+                Resolver: (planner, callee, typeArgs) =>
                 {
-                    CreateNativeIntAbiSlot(),
-                    CreateNativeIntAbiSlot(),
-                }),
-                CreateNativeIntAbiSlot(),
-                new HashSet<int> { 0, 1 });
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    // Delegate-only overloads take exactly one parameter, the
+                    // continuation delegate, passed as a native int handle.
+                    //
+                    // This arity test is what actually rejects the CT / options /
+                    // scheduler / object-state overloads — proven by in-place
+                    // revert: disabling it makes all four
+                    // ContinueWith_UnhonouredArgumentOverloads_ResolveToNull cases
+                    // fail and routes the options overload in the real pipeline.
+                    if (paramTypes.Count != 1) return null;
+
+                    // A single-parameter overload whose parameter is not a
+                    // delegate must not be routed either.  NOTE: this check is
+                    // currently REDUNDANT — the BCL has no 1-parameter
+                    // non-delegate ContinueWith, and disabling it alone leaves
+                    // every test green (verified by in-place revert).  It is kept
+                    // deliberately as a guard for a future overload, and is
+                    // labelled redundant rather than described as load-bearing.
+                    var only = paramTypes[0];
+                    if (!IsAnyContinuationDelegate(only)) return null;
+
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return chaos_task_continue_with(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(),
+                            CreateNativeIntAbiSlot(),
+                        }),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: "chaos_task_continue_with");
+                }));
 
             // ── Task.Wait / Task<T>.Result (blocking) ──
             // Block the calling thread until completion.  Wait() = infinite
