@@ -238,17 +238,25 @@ CHAOS_IL2CPP_INT32 ChaosAsyncTaskWait(CHAOS_IL2CPP_INTPTR task_handle, CHAOS_IL2
     auto* task = reinterpret_cast<AsyncTask*>(task_handle);
 
     // Timeout.Infinite (-1) → wait indefinitely; >= 0 → bounded wait.
-    const bool infinite = (timeout_ms < 0);
-    const auto deadline = std::chrono::steady_clock::now() +
-        std::chrono::milliseconds(infinite ? 0 : timeout_ms);
-
-    while (!task->completed.load(std::memory_order_acquire))
+    //
+    // Park on the task's condition variable rather than spinning on yield().
+    // A spin loop burns a full core for the whole wait and, when there are more
+    // blocked waiters than free cores, starves the worker thread the waited-for
+    // task needs — a livelock that presents as a hang.  park_until_completed
+    // holds wait_mtx across the completion check, so a completion published
+    // between the check and the sleep cannot be lost.
+    if (timeout_ms < 0)
     {
-        if (!infinite && std::chrono::steady_clock::now() >= deadline)
+        chaos::il2cpp::common::park_until_completed(task, nullptr);
+    }
+    else
+    {
+        const auto deadline = std::chrono::steady_clock::now() +
+            std::chrono::milliseconds(timeout_ms);
+        if (!chaos::il2cpp::common::park_until_completed(task, &deadline))
         {
             return 0;  // timed out — caller decides whether to throw
         }
-        std::this_thread::yield();
     }
 
     // Completed: propagate the terminal state before returning so
@@ -358,6 +366,7 @@ struct DelayCompletion {
 void DelayTimerCallback(void* state) noexcept {
     auto* dc = static_cast<DelayCompletion*>(state);
     dc->task->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::notify_task_completed(dc->task);
     chaos::il2cpp::common::finish_async_task(dc->handle);
     delete dc;
 }
@@ -451,6 +460,7 @@ void WhenChildContinuation(CHAOS_IL2CPP_INTPTR task_handle, void* ctx) noexcept 
             st->aggregate->exception = ex;
             st->aggregate->faulted.store(any_faulted, std::memory_order_relaxed);
             st->aggregate->completed.store(true, std::memory_order_release);
+            chaos::il2cpp::common::notify_task_completed(st->aggregate);
             finish_async_task(st->aggregate_handle);
             delete st;
         }
@@ -467,6 +477,7 @@ void WhenChildContinuation(CHAOS_IL2CPP_INTPTR task_handle, void* ctx) noexcept 
     st->aggregate->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
     st->aggregate->faulted.store(false, std::memory_order_relaxed);
     st->aggregate->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::notify_task_completed(st->aggregate);
     finish_async_task(st->aggregate_handle);
     delete st;
 }
@@ -497,6 +508,7 @@ static CHAOS_IL2CPP_INTPTR WhenAllAnyInternal(
         // Empty WhenAll completes immediately (empty WhenAny is invalid → caller
         // guards; keep symmetric: complete immediately, result undefined).
         agg->completed.store(true, std::memory_order_release);
+        chaos::il2cpp::common::notify_task_completed(agg);
         finish_async_task(agg_handle);
         delete st;
         return agg_handle;

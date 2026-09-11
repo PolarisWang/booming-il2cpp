@@ -67,6 +67,17 @@ chaos_native_add_test(test_async_task_run_e2e
     LABELS "unit;threading"
 )
 
+# async_task_blocking_test — ASYNC-P1-2: Wait must really block (≥ task
+# duration) and must PARK rather than spin a core while blocked.
+chaos_native_add_test(test_async_task_blocking
+    async_task_blocking_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/task_runner.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/thread_pool.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/execution_context.cpp
+    LABELS "unit;threading"
+)
+
 # queue_backpressure_test — Global queue backpressure verification (T2-QUEUE)
 chaos_native_add_test(test_queue_backpressure
     queue_backpressure_test.cpp

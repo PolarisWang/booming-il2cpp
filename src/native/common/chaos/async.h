@@ -4,8 +4,11 @@
 #include "ptr_tag.h"
 
 #include <atomic>
+#include <chrono>
+#include <condition_variable>
 #include <cstdint>
 #include <cstdlib>
+#include <mutex>
 
 namespace chaos::il2cpp::common {
 
@@ -66,6 +69,18 @@ struct AsyncTask
     void*             continuation_ctx = nullptr;
     std::atomic<bool> has_continuation{false};
     std::atomic<bool> continuation_fired{false};
+
+    // ── Blocking-wait park/unpark ────────────────────────────────────────────
+    // A thread blocked in ChaosAsyncTaskWait parks here instead of spinning.
+    // The waiter holds wait_mtx, re-checks `completed`, and only then waits on
+    // wait_cv — so completion published between the check and the wait cannot
+    // be missed (the completer must take the same mutex to signal).
+    //
+    // Spinning instead is not merely wasteful: on a machine with fewer free
+    // cores than blocked waiters it starves the worker thread the waited-for
+    // task needs, turning a busy-wait into a livelock that presents as a hang.
+    CHAOS_IL2CPP_MUTEX              wait_mtx;
+    CHAOS_IL2CPP_CONDITION_VARIABLE wait_cv;
 };
 
 inline AsyncTask* require_async_task(CHAOS_IL2CPP_INTPTR handle)
@@ -75,6 +90,38 @@ inline AsyncTask* require_async_task(CHAOS_IL2CPP_INTPTR handle)
         CHAOS_IL2CPP_ABORT();
     }
     return reinterpret_cast<AsyncTask*>(handle);
+}
+
+/// Wake any thread parked in ChaosAsyncTaskWait on this task.  Must be called
+/// AFTER `completed` is published, so a waiter that re-checks under wait_mtx
+/// either sees the flag or is already parked and will be woken here.
+///
+/// Cheap when nobody is waiting (one uncontended mutex acquire), so it is safe
+/// to call unconditionally on every completion path.
+inline void notify_task_completed(AsyncTask* task) noexcept
+{
+    std::lock_guard<CHAOS_IL2CPP_MUTEX> guard(task->wait_mtx);
+    task->wait_cv.notify_all();
+}
+
+/// Park the calling thread until this task completes, or until `deadline`
+/// passes (nullptr = wait forever).  Returns true if the task completed.
+///
+/// Note this waits on the condition variable rather than spinning: see the
+/// wait_mtx/wait_cv comment on AsyncTask.
+inline bool park_until_completed(AsyncTask* task,
+                                 const std::chrono::steady_clock::time_point* deadline)
+{
+    std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(task->wait_mtx);
+    if (deadline == nullptr) {
+        task->wait_cv.wait(lock, [task] {
+            return task->completed.load(std::memory_order_acquire);
+        });
+        return true;
+    }
+    return task->wait_cv.wait_until(lock, *deadline, [task] {
+        return task->completed.load(std::memory_order_acquire);
+    });
 }
 
 /// Internal: deliver the registered continuation (box resumption) exactly once
@@ -166,6 +213,7 @@ inline void async_task_builder_set_result_raw(CHAOS_IL2CPP_INTPTR builder_ref, C
     task->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
     task->faulted.store(false, std::memory_order_relaxed);
     task->completed.store(true, std::memory_order_release);
+    notify_task_completed(task);
     finish_async_task(handle);
 }
 
@@ -176,6 +224,7 @@ inline void async_task_builder_set_exception(CHAOS_IL2CPP_INTPTR builder_ref, CH
     task->exception = exception;
     task->faulted.store(true, std::memory_order_relaxed);
     task->completed.store(true, std::memory_order_release);
+    notify_task_completed(task);
     finish_async_task(handle);
 }
 
@@ -301,6 +350,7 @@ inline CHAOS_IL2CPP_INTPTR async_task_from_result(CHAOS_IL2CPP_INTPTR value) noe
     task->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
     task->faulted.store(false, std::memory_order_relaxed);
     task->completed.store(true, std::memory_order_release);
+    notify_task_completed(task);
     return handle;
 }
 
@@ -314,6 +364,7 @@ inline CHAOS_IL2CPP_INTPTR async_task_from_exception(CHAOS_IL2CPP_INTPTR excepti
     task->exception = exception;
     task->faulted.store(true, std::memory_order_relaxed);
     task->completed.store(true, std::memory_order_release);
+    notify_task_completed(task);
     return handle;
 }
 
@@ -330,6 +381,7 @@ inline CHAOS_IL2CPP_INTPTR async_task_from_canceled() noexcept
     task->faulted.store(false, std::memory_order_relaxed);
     task->canceled.store(true, std::memory_order_relaxed);
     task->completed.store(true, std::memory_order_release);
+    notify_task_completed(task);
     return handle;
 }
 
@@ -513,7 +565,9 @@ struct TaskSource {
         task->result = value;
         task->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
         task->faulted.store(false, std::memory_order_relaxed);
+        task->canceled.store(false, std::memory_order_relaxed);
         task->completed.store(true, std::memory_order_release);
+        notify_task_completed(task);
         finish_async_task(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task));
     }
 
@@ -522,7 +576,9 @@ struct TaskSource {
     void set_exception(CHAOS_IL2CPP_INTPTR exception) noexcept {
         task->exception = exception;
         task->faulted.store(true, std::memory_order_relaxed);
+        task->canceled.store(false, std::memory_order_relaxed);
         task->completed.store(true, std::memory_order_release);
+        notify_task_completed(task);
         finish_async_task(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task));
     }
 
@@ -535,6 +591,8 @@ struct TaskSource {
             task->result = value;
             task->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
             task->faulted.store(false, std::memory_order_relaxed);
+            task->canceled.store(false, std::memory_order_relaxed);
+            notify_task_completed(task);
             finish_async_task(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task));
             return static_cast<CHAOS_IL2CPP_INTPTR>(1);
         }
@@ -549,6 +607,8 @@ struct TaskSource {
                 expected, true, std::memory_order_acq_rel)) {
             task->exception = exception;
             task->faulted.store(true, std::memory_order_relaxed);
+            task->canceled.store(false, std::memory_order_relaxed);
+            notify_task_completed(task);
             finish_async_task(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task));
             return static_cast<CHAOS_IL2CPP_INTPTR>(1);
         }
@@ -561,8 +621,12 @@ struct TaskSource {
         bool expected = false;
         if (task->completed.compare_exchange_strong(
                 expected, true, std::memory_order_acq_rel)) {
-            task->faulted.store(true, std::memory_order_relaxed);
-            task->completed.store(true, std::memory_order_release);
+            // Cancellation is its own terminal state, NOT a fault: setting both
+            // faulted and canceled would collapse the two, which is exactly the
+            // conflation ASYNC-P1-4 removed (a cancelled await must surface as
+            // TaskCanceledException, not as a generic fault).
+            task->canceled.store(true, std::memory_order_relaxed);
+            notify_task_completed(task);
             finish_async_task(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task));
             return static_cast<CHAOS_IL2CPP_INTPTR>(1);
         }

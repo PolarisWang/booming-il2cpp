@@ -36,8 +36,10 @@ static void TaskRunCallback(void* state) noexcept {
             chaos_delegate_object_invoke(inner->delegate, nullptr, nullptr, 0);
         }
         // Publish completion + fire any registered continuation (box resumption)
-        // so an awaiting state machine's MoveNext can re-enter.
+        // so an awaiting state machine's MoveNext can re-enter, then wake any
+        // thread parked in Task.Wait.
         inner->task->completed.store(true, std::memory_order_release);
+        chaos::il2cpp::common::notify_task_completed(inner->task);
         chaos::il2cpp::common::finish_async_task(
             reinterpret_cast<CHAOS_IL2CPP_INTPTR>(inner->task));
     }, rc);
