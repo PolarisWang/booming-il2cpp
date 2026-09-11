@@ -104,16 +104,34 @@ public sealed partial class NativeAotLoweringPlanner
             if (!sid.Contains(">d__", StringComparison.Ordinal)) continue;
             isEntry = true;
             // Find the stloc that consumes the newobj result.
+            int boxSlot = -1;
+            int boxStlocIndex = -1;
             for (int j = i + 1; j < instructions.Count; j++)
             {
                 if (instructions[j].Op is "stloc" or "stloc.s")
                 {
-                    result.Add(GetRequiredIntOperand(instructions[j]));
+                    boxSlot = GetRequiredIntOperand(instructions[j]);
+                    boxStlocIndex = j;
                     break;
                 }
                 if (instructions[j].Op is "dup" or "call" or "callvirt" or "nop") continue;
                 break; // Unknown intervening instruction — stop.
             }
+            // Not every `newobj` on a `>d__` type is an *escaping entry* box. Roslyn also
+            // emits this shape in the state machine's own factory methods — most notably
+            // `IAsyncEnumerable<T>::GetAsyncEnumerator`, whose whole body is
+            // `newobj <T>d__0::.ctor(int32); stloc.0; ldloc.0; ret`. There the box is the
+            // RETURN VALUE: freshly constructed, never passed by-ref to a builder, and it
+            // must be emitted as an ordinary local slot (&chaos_locals[N]) or the caller
+            // receives a dangling address.
+            //
+            // The discriminator is consumption, not construction: an entry box is handed to
+            // an async builder (Start / AwaitUnsafeOnCompleted / SetResult ...) or is
+            // `this`-propagated in MoveNext. A factory box is merely returned. Follow the
+            // value forward from the stloc through ldloca/ldloc/ldfld until it is either
+            // given to a builder call or consumed some other way.
+            if (boxSlot >= 0 && IsConsumedByAsyncBuilderCall(instructions, boxStlocIndex))
+                result.Add(boxSlot);
             break; // only one async state machine per method
         }
 
@@ -130,41 +148,44 @@ public sealed partial class NativeAotLoweringPlanner
         // state-machine slot; treat it as the durable GC box.
         if (!isEntry)
         {
+            // Which ldloca is the state machine? For a call, the generic-argument list in the
+            // postfix names the FIRST by-ref position as TAwaiter and the LAST as TStateMachine:
+            //   AsyncTaskMethodBuilder::AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(!!0&, !!1&)
+            //   AsyncTaskMethodBuilder::Start<TStateMachine>(!!0&)
+            // Argument pushes are left-to-right, so the state machine is the LAST `ldloca` pushed
+            // before the call — not the first.  Recording the first would capture the AWAITER's
+            // slot (a YieldAwaiter is not a GC-tracked state machine; a value/address flip there
+            // corrupts the emitted code).
+            int pendingSlot = -1;
             for (int i = 0; i < instructions.Count; i++)
             {
-                if (instructions[i].Op != "ldloca") continue;
-                int slot = GetRequiredIntOperand(instructions[i]);
-                // Scan forward for the builder call that consumes this address.  Only
-                // intervening eval-stack-neutral ops (ldflda, ldarg, ldloc, ldc) may sit
-                // between the ldloca and the call; anything that consumes the address for
-                // a different purpose ends the search.
-                for (int j = i + 1; j < instructions.Count; j++)
+                var op = instructions[i].Op;
+                if (op == "ldloca")
                 {
-                    var op = instructions[j].Op;
-                    if (op is "call" or "callvirt")
-                    {
-                        var callee = instructions[j].Callee;
-                        if (callee is not null &&
-                            (callee.Contains("AsyncTaskMethodBuilder", StringComparison.Ordinal)
-                             || callee.Contains("AsyncValueTaskMethodBuilder", StringComparison.Ordinal)
-                             || callee.Contains("AsyncVoidMethodBuilder", StringComparison.Ordinal))
-                            && (callee.Contains("::Start", StringComparison.Ordinal)
-                                || callee.Contains("AwaitUnsafeOnCompleted", StringComparison.Ordinal)))
-                        {
-                            isEntry = true;
-                            result.Add(slot);
-                        }
-                        break;
-                    }
-                    // Ops that leave the pushed address on the stack (or push something
-                    // else without touching it) — keep scanning past them.
-                    if (op is "nop" or "ldflda" or "ldarg" or "ldarga" or "ldloc" or "ldloca"
-                        or "ldc.i4" or "ldc.i4.s" or "ldc.i4.m1" or "ldc.i4.0" or "ldc.i4.1"
-                        or "ldc.i4.2" or "ldc.i4.3" or "ldc.i4.4" or "ldc.i4.5"
-                        or "ldc.i4.6" or "ldc.i4.7" or "ldc.i4.8" or "dup")
-                        continue;
-                    break;
+                    pendingSlot = GetRequiredIntOperand(instructions[i]);
+                    continue;
                 }
+                if (op is "call" or "callvirt")
+                {
+                    var callee = instructions[i].Callee;
+                    if (pendingSlot >= 0 && callee is not null
+                        && (callee.Contains("AsyncTaskMethodBuilder", StringComparison.Ordinal)
+                            || callee.Contains("AsyncValueTaskMethodBuilder", StringComparison.Ordinal)
+                            || callee.Contains("AsyncVoidMethodBuilder", StringComparison.Ordinal))
+                        && (callee.Contains("::Start", StringComparison.Ordinal)
+                            || callee.Contains("AwaitUnsafeOnCompleted", StringComparison.Ordinal)))
+                    {
+                        isEntry = true;
+                        result.Add(pendingSlot);
+                    }
+                    pendingSlot = -1;
+                    continue;
+                }
+                // Any op that itself pushes a value establishes a NEW top-of-stack, so an
+                // earlier ldloca is no longer the last argument pushed.  `ldfld`/`unbox`/
+                // `isinst` derivations deliberately keep the slot alive: the builder may
+                // legitimately receive an address derived from the state-machine local.
+                if (PushesAValue(op)) pendingSlot = -1;
             }
         }
 
@@ -256,6 +277,73 @@ public sealed partial class NativeAotLoweringPlanner
 #endif
         return result;
     }
+
+    /// <summary>
+    /// True when <paramref name="valueIndex"/> (a local write) is followed, before the value is
+    /// consumed or the method returns, by an async builder call. This distinguishes the two
+    /// `newobj` shapes Roslyn emits for a `>d__` type:
+    /// <list type="bullet">
+    ///   <item><b>Escaping entry box</b> — the box is handed to a builder (directly, or via a
+    ///   MoveNext call that reads it from the local). Durable heap address; emit by value.</item>
+    ///   <item><b>Factory construction</b> — <c>GetAsyncEnumerator</c> builds the enumerator
+    ///   only to return it (<c>newobj; stloc.0; ldloc.0; ret</c>). The box belongs to the
+    ///   caller; emit it as an ordinary local slot.</item>
+    /// </list>
+    /// </summary>
+    private static bool IsConsumedByAsyncBuilderCall(
+        IReadOnlyList<AotCoreIrInstructionArtifact> instructions, int valueIndex)
+    {
+        for (int j = valueIndex + 1; j < instructions.Count; j++)
+        {
+            var op = instructions[j].Op;
+            // The value is consumed / replaced without reaching a builder.
+            if (op is "stloc" or "stloc.s" or "stfld" or "stind.i4" or "stind.ref"
+                or "stobj" or "ret" or "throw" or "endfinally" or "endfilter")
+                return false;
+            if (op is "call" or "callvirt")
+            {
+                var callee = instructions[j].Callee;
+                if (IsAsyncBuilderCallSpelling(callee)) return true;
+            }
+            // `ldloc` of the constructed local re-pushes it; keep scanning.
+            if (op is "ldloc" or "ldloc.s" or "ldfld" or "castclass" or "isinst" or "nop")
+                continue;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// True when the callee spelling names an async builder entry point that takes a state
+    /// machine (by reference, or as a MoveNext receiver).
+    /// </summary>
+    private static bool IsAsyncBuilderCallSpelling(string? callee)
+    {
+        if (string.IsNullOrEmpty(callee)) return false;
+        return callee.Contains("AsyncTaskMethodBuilder", StringComparison.Ordinal)
+            || callee.Contains("AsyncValueTaskMethodBuilder", StringComparison.Ordinal)
+            || callee.Contains("AsyncVoidMethodBuilder", StringComparison.Ordinal)
+            || callee.Contains("AsyncIteratorMethodBuilder", StringComparison.Ordinal)
+            || callee.Contains("ManualResetValueTaskSourceCore", StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// True when <paramref name="op"/> pushes a value, which supersedes any earlier
+    /// <c>ldloca</c> as the "last argument pushed" for Pattern A'.
+    /// <para/>
+    /// Deliberately excludes <c>ldfld</c>/<c>unbox</c>/<c>isinst</c>/<c>castclass</c>: those
+    /// derive a value from the state-machine address (e.g. <c>ldloca V; ldflda F</c>) and the
+    /// builder may legitimately receive that derived address. Excluding them can only miss a
+    /// slot, never mis-record one.
+    /// </summary>
+    private static bool PushesAValue(string op) => op is
+        "ldarg" or "ldarga" or "ldloc" or "ldloca" or "ldnull" or "ldstr" or "ldflda"
+        or "ldc.i4" or "ldc.i4.s" or "ldc.i4.m1" or "ldc.i4.0" or "ldc.i4.1" or "ldc.i4.2"
+        or "ldc.i4.3" or "ldc.i4.4" or "ldc.i4.5" or "ldc.i4.6" or "ldc.i4.7" or "ldc.i4.8"
+        or "ldc.i8" or "ldc.r4" or "ldc.r8" or "ldtoken" or "newobj" or "newarr"
+        or "call" or "callvirt" or "dup" or "box" or "box.any" or "ldobj"
+        or "add" or "sub" or "mul" or "div" or "rem" or "and" or "or" or "xor"
+        or "shl" or "shr" or "neg" or "not" or "ceq" or "cgt" or "clt"
+        or "ldind.i4" or "ldind.ref";
 
     /// <summary>
     /// Pre-scan the instruction list to identify which local slots hold
