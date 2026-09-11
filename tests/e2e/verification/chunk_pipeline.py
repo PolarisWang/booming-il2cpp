@@ -518,6 +518,27 @@ def main():
         print(f"  [preflight] ⚠️  check_layer_boundaries not importable — treating as gate FAILURE")
         overall_status = "failed"
 
+    # ── Preflight: verification tree singularity (hard gate) ───────
+    # The engine was relocated to tests/e2e/verification by 323e8c279; the old
+    # testing/foundation-dll/verification path was left behind and later revived
+    # by a parallel agent's clean checkout.  Running the stale twin silently
+    # produces wrong conclusions, so its reappearance is a hard failure.
+    try:
+        from verification.preflight.check_verification_tree_singular import (
+            check_verification_tree_singular_ci,
+        )
+        tree_issues = check_verification_tree_singular_ci()
+        if tree_issues:
+            print(f"  [preflight] ❌  {len(tree_issues)} verification tree issue(s):")
+            for issue in tree_issues:
+                print(f"      {issue}")
+            overall_status = "failed"
+        else:
+            print(f"  [preflight] ✅ verification tree singularity check passed")
+    except ImportError:
+        print(f"  [preflight] ⚠️  check_verification_tree_singular not importable — treating as gate FAILURE")
+        overall_status = "failed"
+
     # Use the config's stage timeout (look up benchmark first as most time-sensitive; fall back to any)
     timeouts = _PIPELINE_CONFIG.get("timeouts", {})
     stage_timeout_seconds = timeouts.get("benchmark",

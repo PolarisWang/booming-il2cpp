@@ -126,14 +126,14 @@ classification: domains=[优化] mode=knowledge-inject expert=dev-il2cpp-foundat
 ### Step 0.1: chaos-aot benchmark
 
 ```bash
-python testing/foundation-dll/verification/chunk_pipeline.py \
+python tests/e2e/verification/chunk_pipeline.py \
   --chunks <target> --stages build,benchmark,benchmark_report
 ```
 
 ### Step 0.2: CoreCLR benchmark
 
 ```bash
-python testing/foundation-dll/verification/chunk_pipeline.py \
+python tests/e2e/verification/chunk_pipeline.py \
   --chunks <target> --stages managed_benchmark
 ```
 
@@ -255,7 +255,7 @@ P3 热更: 影响 hotpatch dispatch ? 需要 patch data 变更 ?
 ### Step 3.2: 重跑 benchmark
 
 ```bash
-python testing/foundation-dll/verification/chunk_pipeline.py \
+python tests/e2e/verification/chunk_pipeline.py \
   --chunks <affected> --stages build,benchmark,benchmark_report
 ```
 
