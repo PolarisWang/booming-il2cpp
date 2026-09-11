@@ -20,6 +20,41 @@ public sealed class AsyncPipelineTests
 
     public static string AsyncAssemblyPath => s_asyncAssemblyPath;
 
+    /// <summary>
+    /// Slice one emitted C++ function body out of the generated source by name.
+    ///
+    /// <para>
+    /// Anchors on the emitted DEFINITION, not the first textual hit: the symbol
+    /// also appears in the header extern block and the dispatch table, and
+    /// slicing from the first hit runs past the function into unrelated code.
+    /// The definition is introduced by the "// Managed method:" marker, so walk
+    /// back over it when present, then take up to the closing brace at column 0.
+    /// </para>
+    ///
+    /// <para>
+    /// Splitting on "\n\n" instead (an earlier revision) produced chunks that
+    /// spanned two adjacent functions, which made a wired method's call appear
+    /// inside a rejected method's chunk and fired an anti-fake-green assertion
+    /// on a false positive.
+    /// </para>
+    /// </summary>
+    internal static string ExtractFunctionBody(string source, string functionName)
+    {
+        var marker = "// Managed method: ";
+        var nameIdx = source.IndexOf("::" + functionName + "(", StringComparison.Ordinal);
+        if (nameIdx < 0) return string.Empty;
+        var lineStart = source.LastIndexOf('\n', nameIdx);
+        lineStart = lineStart < 0 ? 0 : lineStart + 1;
+        var prevLineStart = source.LastIndexOf('\n', lineStart - 2);
+        if (prevLineStart >= 0 &&
+            source.Substring(prevLineStart, lineStart - prevLineStart).Contains(marker))
+        {
+            lineStart = prevLineStart + 1;
+        }
+        var end = source.IndexOf("\n}", nameIdx, StringComparison.Ordinal);
+        return end < 0 ? source[lineStart..] : source[lineStart..end];
+    }
+
     private static string LocateAsyncAssemblyDll()
     {
         var repoRoot = RepoRootLocator.FindFromBaseDirectory();
@@ -559,30 +594,6 @@ public sealed class AsyncPipelineTests
         // in the rejected method's chunk and the anti-fake-green assertion fired
         // on a false positive. Anchor on the function signature and take up to
         // its closing brace at column 0.
-        static string ExtractFunctionBody(string source, string functionName)
-        {
-            // Anchor on the emitted DEFINITION, not the header declaration: the
-            // symbol also appears in the header extern block and the dispatch
-            // table, and slicing from the first hit runs past the function into
-            // unrelated code (which is how an earlier revision of this test
-            // reported the wired call inside the rejected method's body).
-            // The definition is the LAST occurrence, introduced by "// Managed method:".
-            var marker = "// Managed method: ";
-            var nameIdx = source.IndexOf("::" + functionName + "(", StringComparison.Ordinal);
-            if (nameIdx < 0) return string.Empty;
-            var lineStart = source.LastIndexOf('\n', nameIdx);
-            lineStart = lineStart < 0 ? 0 : lineStart + 1;
-            // Walk back over the "// Managed method:" comment line if present.
-            var prevLineStart = source.LastIndexOf('\n', lineStart - 2);
-            if (prevLineStart >= 0 &&
-                source.Substring(prevLineStart, lineStart - prevLineStart).Contains(marker))
-            {
-                lineStart = prevLineStart + 1;
-            }
-            var end = source.IndexOf("\n}", nameIdx, StringComparison.Ordinal);
-            return end < 0 ? source[lineStart..] : source[lineStart..end];
-        }
-
         var actionBody = ExtractFunctionBody(allGenerated, "ContinueWithAction");
         Assert.False(string.IsNullOrEmpty(actionBody),
             "the wired ContinueWith overload must have an emitted body");
@@ -597,6 +608,95 @@ public sealed class AsyncPipelineTests
         Assert.False(string.IsNullOrEmpty(optionsBody),
             "the rejected ContinueWith overload must still have an emitted body (via the interpreter fallback)");
         Assert.DoesNotContain("chaos_task_continue_with", optionsBody);
+    }
+
+    /// <summary>
+    /// ASYNC-P2-5: <c>Task.Factory.StartNew(Action)</c> defaults to the SAME
+    /// execution semantics as <c>Task.Run(Action)</c> — both queue the delegate on
+    /// the default scheduler. Routing the factory overload onto the existing
+    /// ThreadPool-backed <c>async_task_run</c> is therefore not an approximation:
+    /// it is what .NET does.
+    ///
+    /// <para>
+    /// The alternative — leaving Task.Factory unwired — is the defect: it resolves
+    /// to the interpreter's return-0 fallback, so <c>Task.Factory.StartNew(work)</c>
+    /// yields a bogus task and <c>work</c> never runs.
+    /// </para>
+    ///
+    /// <para>
+    /// This test pairs with the resolver test in
+    /// RuntimeHelperShapeRegistryTests.TaskFactoryStartNew_*. The registry test
+    /// pins the decision; this one pins that the decision is actually consulted
+    /// by the real pipeline, using the callee spelling the pipeline emits.
+    /// </para>
+    /// </summary>
+    [Fact]
+    public void TaskFactoryStartNew_ResolvesToThreadPoolRunner()
+    {
+        Assert.True(File.Exists(s_asyncAssemblyPath),
+            $"AsyncTestAssembly.dll not built at {s_asyncAssemblyPath}");
+
+        using var ctx = new TempCtx();
+        var request = new ManagedClosureRequest(
+            InputAssemblyPath: s_asyncAssemblyPath,
+            OutputRootPath: ctx.OutputRoot,
+            EntryPointSubjectIdOverride: null,
+            AdditionalAssemblyPaths: null,
+            FullAssemblyClosure: true);
+
+        var exec = new PipelinePlan().Execute(request);
+        if (exec.IsFailure)
+        {
+            Assert.Fail($"Pipeline failed: {exec.Error?.Code}: {exec.Error?.Message}");
+        }
+        var result = exec.Value!;
+
+        var subjectIds = result.AotCoreIr.Methods.Select(m => m.SubjectId).ToList();
+        Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::FactoryStartNew"));
+
+        var outputRoot = Path.Combine(ctx.OutputRoot, "factorygen");
+        var emitted = new NativeAotEmitter().GenerateFromArtifacts(
+            result.NativeAotLoweringPlan,
+            result.AotCoreIr,
+            result.ClosureManifest!,
+            result.MetadataRegistration,
+            result.SupplementalMetadataTemplate,
+            outputRoot,
+            mode: CodegenMode.Aot,
+            subjectMethods: null,
+            goldProfilePath: null,
+            allManagedMethods: result.AllManagedMethods);
+
+        var allGenerated = string.Join("\n",
+            emitted.GeneratedSources.Select(source =>
+                source.Contents ?? source.ContentsBuilder?.ToString() ?? string.Empty));
+
+        var body = ExtractFunctionBody(allGenerated, "FactoryStartNew");
+        Assert.False(string.IsNullOrEmpty(body),
+            "Task.Factory.StartNew caller must have an emitted body");
+
+        // Wired: the call reaches the native TaskFactory entry point, which is a
+        // thin shim over the same ThreadPool runner Task.Run uses
+        // (chaos_task_factory_start_new -> async_task_run in async_stubs.cpp).
+        // The native shim is asserted separately by the smoke test; here we are
+        // pinning the CODEGEN decision, i.e. that this call site lowered to the
+        // native symbol rather than the interpreter.
+        Assert.Contains("chaos_task_factory_start_new", body);
+
+        // Anti-fake-green: NOT the interpreter's return-0 fallback. If the
+        // resolver never fired, the body would carry the external-runtime stub
+        // instead of a real call, and StartNew would silently return a bogus task.
+        Assert.DoesNotContain("ChaosExternalRuntimeFallback", body);
+        Assert.DoesNotContain("chaos_external_runtime_", body);
+
+        // The factory property itself must also be routed — if get_Factory is not
+        // wired, the factory receiver arrives from the interpreter as a null/0
+        // handle, and StartNew on it is meaningless even when StartNew resolves.
+        var factoryGetter = ExtractFunctionBody(allGenerated, "get_Factory");
+        if (!string.IsNullOrEmpty(factoryGetter))
+        {
+            Assert.DoesNotContain("ChaosExternalRuntimeFallback", factoryGetter);
+        }
     }
 
     /// <summary>

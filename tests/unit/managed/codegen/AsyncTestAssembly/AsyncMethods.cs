@@ -86,4 +86,13 @@ public static class AsyncMethods
     {
         return antecedent.ContinueWith(body, options);
     }
+
+    // Task.Factory.StartNew(Action) — the TaskFactory entry point (ASYNC-P2-5).
+    // AsyncFactoryStartNew exercises Task.get_Factory followed by a delegate-only
+    // StartNew; the factory object model does not exist in the runtime yet, so
+    // this is expected to reach the interpreter rather than a native helper.
+    public static Task FactoryStartNew(Action work)
+    {
+        return Task.Factory.StartNew(work);
+    }
 }

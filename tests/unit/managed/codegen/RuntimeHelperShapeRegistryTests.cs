@@ -484,6 +484,72 @@ public sealed class RuntimeHelperShapeRegistryTests
         Assert.Null(resolution);
     }
 
+    // ── Task.Factory registration (ASYNC-P2-5) ─────────────────────────────
+    // Task.Factory.StartNew(delegate) queues on the default scheduler, which is
+    // exactly where Task.Run queues, so the delegate-only StartNew overloads are
+    // routed to chaos_task_factory_start_new (a shim over async_task_run).
+    //
+    // NOTE on callee spelling: these use the angle-bracket form the real
+    // pipeline emits for cross-assembly BCL callees. Using the backtick form
+    // let an earlier revision of the ContinueWith tests stay green while the
+    // pipeline resolved everything to null — see ASYNC-P2-4.
+
+    [Theory]
+    // The form the real pipeline produces, verified by dumping the lowered
+    // callees of AsyncMethods::FactoryStartNew.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.TaskFactory::StartNew:System.Threading.Tasks.Task(System.Action)")]
+    public void TaskFactoryStartNew_DelegateOnlyOverload_RoutesToNative(string callee)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"TaskFactory::StartNew callee '{callee}' should match a generic registry descriptor");
+        Assert.NotNull(descriptor);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_task_factory_start_new", resolution!.DirectNativeSymbol);
+        Assert.Contains("chaos_task_factory_start_new", resolution.CppSource);
+    }
+
+    [Theory]
+    // Overloads whose argument the runner cannot honour. Each must resolve to
+    // null so the call falls through to the interpreter rather than silently
+    // dropping the options / token / state / result-type argument.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.TaskFactory::StartNew:System.Threading.Tasks.Task(System.Action,System.Threading.CancellationToken)")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.TaskFactory::StartNew:System.Threading.Tasks.Task(System.Action,System.Threading.Tasks.TaskCreationOptions)")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.TaskFactory::StartNew:System.Threading.Tasks.Task(System.Action,System.Object)")]
+    public void TaskFactoryStartNew_UnhonouredArgumentOverloads_ResolveToNull(string callee)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        if (!registry.TryMatchGenericShape(callee, out var descriptor, out _))
+        {
+            // No descriptor matched at all — also an acceptable outcome (the call
+            // falls to the interpreter either way), but it must not be silent.
+            return;
+        }
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.Null(resolution);
+    }
+
+    [Fact]
+    public void TaskFactory_GetFactoryProperty_RoutesToNativeToken()
+    {
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::get_Factory:System.Threading.Tasks.TaskFactory()";
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _));
+        Assert.NotNull(descriptor);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_task_default_factory", resolution!.DirectNativeSymbol);
+    }
+
     [Fact]
     public void BuildDefault_TryMatchShape_GcGetTotalMemory_ReturnsEntry()
     {

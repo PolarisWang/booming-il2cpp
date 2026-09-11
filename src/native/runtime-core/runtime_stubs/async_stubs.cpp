@@ -702,4 +702,30 @@ CHAOS_IL2CPP_INTPTR chaos_task_continue_with(
     return st->continuation_task;
 }
 
+// ══════════════════════════════════════════════════════════════════════════════
+// TaskFactory (Phase 2 P2-5)
+// ══════════════════════════════════════════════════════════════════════════════
+
+/// Task.get_Factory — see the header for why this is a bare non-null token.
+CHAOS_IL2CPP_INTPTR chaos_task_default_factory() noexcept
+{
+    return 1;
+}
+
+/// TaskFactory::StartNew(Action) — delegates to the same ThreadPool-backed
+/// runner Task.Run uses (async_task_run).
+///
+/// This is a correct match, not a shortcut: the default TaskFactory schedules
+/// StartNew on TaskScheduler.Current, which outside a scheduler context is the
+/// default (ThreadPool) scheduler — the very scheduler Task.Run targets.  The
+/// non-delegate / options / token overloads are rejected at the codegen registry
+/// and never reach here.
+CHAOS_IL2CPP_INTPTR chaos_task_factory_start_new(
+    CHAOS_IL2CPP_INTPTR /*factory*/, CHAOS_IL2CPP_INTPTR delegate_fn) noexcept
+{
+    using namespace chaos::il2cpp::common;
+    if (delegate_fn == 0) return 0;
+    return async_task_run(delegate_fn);
+}
+
 }  // extern "C"

@@ -94,4 +94,22 @@ CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) 
 CHAOS_IL2CPP_INTPTR chaos_task_continue_with(
     CHAOS_IL2CPP_INTPTR antecedent, CHAOS_IL2CPP_INTPTR continuation) noexcept;
 
+// ── TaskFactory native surface (Phase 2 P2-5) ──
+// Task.get_Factory.  The runtime has no TaskFactory object model and does not
+// need one: the default factory's StartNew queues on the default scheduler,
+// which is what chaos_task_factory_start_new does directly.  Returns a non-null
+// opaque token so a caller that stores or passes Task.Factory does not receive
+// a bogus 0 handle; the token is never dereferenced.
+CHAOS_IL2CPP_INTPTR chaos_task_default_factory() noexcept;
+
+// TaskFactory::StartNew(Action) — the delegate-only overloads.  Semantically
+// identical to Task.Run(Action) for the default factory, so this queues the
+// delegate on the same ThreadPool runner and returns the task handle (0 on
+// invalid args / scheduling failure).
+//
+// The `factory` handle is accepted for arity only and deliberately unused; see
+// the note on chaos_task_default_factory.
+CHAOS_IL2CPP_INTPTR chaos_task_factory_start_new(
+    CHAOS_IL2CPP_INTPTR factory, CHAOS_IL2CPP_INTPTR delegate_fn) noexcept;
+
 }  // extern "C"

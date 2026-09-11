@@ -902,6 +902,100 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// Task.Factory.StartNew — route the delegate-only overloads of the
+        /// default TaskFactory onto the SAME native ThreadPool runner as
+        /// Task.Run (async_task_run).
+        ///
+        /// <para>
+        /// This is not an approximation.  .NET's default TaskFactory (the one
+        /// Task.Factory returns) uses TaskScheduler.Current for StartNew, which
+        /// outside a scheduler context is the default (ThreadPool) scheduler —
+        /// exactly where Task.Run queues.  So for the delegate-only overloads the
+        /// two APIs are semantically identical, and sharing the runner is what
+        /// .NET does, not a shortcut.
+        /// </para>
+        ///
+        /// <para>
+        /// Only SINGLE-parameter overloads are routed.  The remaining StartNew
+        /// shapes each carry an argument whose semantics the runner cannot honour:
+        /// </para>
+        /// <list type="bullet">
+        /// <item><c>StartNew(Action, TaskCreationOptions)</c> — the options are
+        /// dropped, so a caller asking for LongRunning/AttachedToParent would
+        /// silently get the default behaviour.</item>
+        /// <item><c>StartNew(Action, CancellationToken)</c> — needs the Phase 3
+        /// cancellation wiring; passing the token through unchanged would make
+        /// cancellation a no-op.</item>
+        /// <item><c>StartNew&lt;TResult&gt;(Func&lt;TResult&gt;)</c> — a
+        /// result-producing factory; the runner returns a plain Task handle and
+        /// never stores the func's return value.</item>
+        /// <item><c>StartNew(Action, state)</c> — the state object is dropped.</item>
+        /// </list>
+        /// <para>
+        /// Those fall through to the interpreter (resolver returns null), which is
+        /// the honest outcome — the same precedent P2-4 set for ContinueWith.
+        /// </para>
+        /// </summary>
+        private static void RegisterTaskFactory(RuntimeHelperShapeRegistry registry)
+        {
+            // Task.Factory's static property.  The runtime has no TaskFactory
+            // object model, and none is needed: the factory's StartNew maps onto
+            // the default scheduler, so the getter returns a non-null opaque
+            // token purely so a caller that stores or passes Task.Factory does
+            // not receive a bogus 0 handle.  The token is never dereferenced.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "get_Factory",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "",
+                    [
+                        "    return 1;",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(Array.Empty<AotCoreIrAbiSlotArtifact>()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int>(),
+                        DirectNativeSymbol: "chaos_task_default_factory");
+                }));
+
+            // TaskFactory::StartNew — delegate-only overloads (exactly one
+            // parameter, and it is a delegate) route to the ThreadPool runner.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.TaskFactory",
+                MethodName: "StartNew",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+
+                    // Delegate-only: exactly one parameter, and it must BE the
+                    // delegate.  The non-delegate 1-parameter overloads
+                    // (state object) and the multi-parameter overloads
+                    // (options / token / state) are rejected here.
+                    if (paramTypes.Count != 1) return null;
+                    if (!IsAnyContinuationDelegate(paramTypes[0])) return null;
+
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return chaos_task_factory_start_new(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(),
+                            CreateNativeIntAbiSlot(),
+                        }),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: "chaos_task_factory_start_new");
+                }));
+        }
+
+        /// <summary>
         /// Task.Delay — route the static Task::Delay overloads to the native
         /// timer-backed chaos_task_delay_stub so codegen-emitted C++ calls them
         /// directly (instead of falling to the interpreter stub → 0).

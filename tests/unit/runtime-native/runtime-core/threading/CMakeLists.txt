@@ -120,6 +120,20 @@ chaos_native_add_test(test_async_when_array
     LABELS "unit;threading"
 )
 
+# async_task_factory_test — ASYNC-P2-5: TaskFactory.get_Factory / StartNew.
+# chaos_task_factory_start_new drops the (opaque) factory receiver and forwards
+# the delegate to the production ThreadPool runner, so this links the same
+# sources as task_run_e2e to exercise the real delegate-invocation path rather
+# than a stand-in.
+chaos_native_add_test(test_async_task_factory
+    async_task_factory_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/task_runner.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/thread_pool.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/execution_context.cpp
+    LABELS "unit;threading"
+)
+
 # queue_backpressure_test — Global queue backpressure verification (T2-QUEUE)
 chaos_native_add_test(test_queue_backpressure
     queue_backpressure_test.cpp
