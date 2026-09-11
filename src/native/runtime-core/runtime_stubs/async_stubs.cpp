@@ -108,6 +108,30 @@ void chaos_tcs_set_result(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR va
     ts->set_result(value);
 }
 
+// Non-generic TaskCompletionSource.SetResult() — the managed overload takes no
+// value.  Forwarding it to chaos_tcs_set_result (2-arg) would read a garbage
+// `value` off the ABI slot that was never set, so the void overload passes the
+// 0 sentinel explicitly.
+void chaos_tcs_set_result_void(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept
+{
+    if (tcs_handle == 0) return;
+    auto* ts = reinterpret_cast<chaos::il2cpp::common::TaskSource*>(tcs_handle);
+    ts->set_result(static_cast<CHAOS_IL2CPP_INTPTR>(0));
+}
+
+// TaskCompletionSource.SetCanceled() — completion with cancel semantics.
+// Previously wired to chaos_tcs_set_exception, which faults the task rather
+// than cancelling it.  TaskSource exposes only the Try* cancel primitive
+// (no void set_canceled), so the return value is discarded here — SetCanceled
+// is documented as always completing (it throws only when the source was
+// already completed, which the interpreter path handles).
+void chaos_tcs_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept
+{
+    if (tcs_handle == 0) return;
+    auto* ts = reinterpret_cast<chaos::il2cpp::common::TaskSource*>(tcs_handle);
+    (void)ts->try_set_canceled();
+}
+
 void chaos_tcs_set_exception(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR exception) noexcept
 {
     if (tcs_handle == 0) return;
@@ -120,6 +144,16 @@ CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_result(CHAOS_IL2CPP_INTPTR tcs_handle, CHA
     if (tcs_handle == 0) return 0;
     auto* ts = reinterpret_cast<chaos::il2cpp::common::TaskSource*>(tcs_handle);
     return ts->try_set_result(value);
+}
+
+// Non-generic TaskCompletionSource.TrySetResult() — same 0-arg overload issue
+// as chaos_tcs_set_result_void: the managed signature carries no value, so the
+// 2-arg form would read an unset ABI slot.
+CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_result_void(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept
+{
+    if (tcs_handle == 0) return 0;
+    auto* ts = reinterpret_cast<chaos::il2cpp::common::TaskSource*>(tcs_handle);
+    return ts->try_set_result(static_cast<CHAOS_IL2CPP_INTPTR>(0));
 }
 
 CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_exception(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR exception) noexcept

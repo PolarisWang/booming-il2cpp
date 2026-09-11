@@ -418,7 +418,7 @@ public sealed partial class NativeAotLoweringPlanner
             // Non-generic TaskCompletionSource (no generic param).
             // SetResult() — void completion, value=0 sentinel.
             registry.Register("System.Threading.Tasks.TaskCompletionSource", "SetResult", [],
-                ShapeKind.SimpleForward, "chaos_tcs_set_result",
+                ShapeKind.SimpleForward, "chaos_tcs_set_result_void",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot()),
                 CreateVoidAbiSlot(),
@@ -439,7 +439,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             // TrySetResult() — returns bool
             registry.Register("System.Threading.Tasks.TaskCompletionSource", "TrySetResult", [],
-                ShapeKind.SimpleForward, "chaos_tcs_try_set_result",
+                ShapeKind.SimpleForward, "chaos_tcs_try_set_result_void",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot()),
                 CreateInt32AbiSlot(),
@@ -458,9 +458,10 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateInt32AbiSlot(),
                 new HashSet<int> { 0, 1 });
 
-            // SetCanceled() — void.
+            // SetCanceled() — void.  Previously pointed at chaos_tcs_set_exception,
+            // which faults the task instead of cancelling it.
             registry.Register("System.Threading.Tasks.TaskCompletionSource", "SetCanceled", [],
-                ShapeKind.SimpleForward, "chaos_tcs_set_exception",
+                ShapeKind.SimpleForward, "chaos_tcs_set_canceled",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot()),
                 CreateVoidAbiSlot(),
@@ -485,18 +486,22 @@ public sealed partial class NativeAotLoweringPlanner
                     var symbol = GetExternalRuntimeHelperSymbol(callee);
                     if (paramTypes.Count == 0)
                     {
-                        // Non-generic void SetResult (fallback — unlikely here but safe).
+                        // Non-generic void SetResult.  Normally handled by the direct
+                        // registration in RegisterTaskCompletionSource (inline descriptors
+                        // are matched first); this branch is the safety net for subject IDs
+                        // that reach here, and forwards to the dedicated 0-arg native
+                        // helper rather than reusing the 2-arg one.
                         var src = RenderSimpleExternalRuntimeHelper("void", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
-                            "    chaos_tcs_set_result(chaos_arg_0, static_cast<CHAOS_IL2CPP_INTPTR>(0));",
+                            "    chaos_tcs_set_result_void(chaos_arg_0);",
                         ]);
                         return new GenericShapeResolution(src, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot()),
                             CreateVoidAbiSlot(),
                             new HashSet<int> { 0 },
-                            DirectNativeSymbol: "chaos_tcs_set_result");
+                            DirectNativeSymbol: "chaos_tcs_set_result_void");
                     }
                     // Generic T SetResult(T) — T resolved to native int.
                     var src2 = RenderSimpleExternalRuntimeHelper("void", symbol,
@@ -529,14 +534,14 @@ public sealed partial class NativeAotLoweringPlanner
                         var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
-                            "    return chaos_tcs_try_set_result(chaos_arg_0, static_cast<CHAOS_IL2CPP_INTPTR>(0));",
+                            "    return chaos_tcs_try_set_result_void(chaos_arg_0);",
                         ]);
                         return new GenericShapeResolution(src, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot()),
                             CreateInt32AbiSlot(),
                             new HashSet<int> { 0 },
-                            DirectNativeSymbol: "chaos_tcs_try_set_result");
+                            DirectNativeSymbol: "chaos_tcs_try_set_result_void");
                     }
                     var src2 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
@@ -613,14 +618,14 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    chaos_tcs_try_set_canceled(chaos_arg_0);",
+                        "    chaos_tcs_set_canceled(chaos_arg_0);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                             CreateNativeIntAbiSlot()),
                         CreateVoidAbiSlot(),
                         new HashSet<int> { 0 },
-                        DirectNativeSymbol: "chaos_tcs_try_set_canceled");
+                        DirectNativeSymbol: "chaos_tcs_set_canceled");
                 }));
 
             // TrySetCanceled() — generic variant returns bool.

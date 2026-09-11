@@ -43,4 +43,11 @@ CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_result(CHAOS_IL2CPP_INTPTR tcs_handle, CHA
 CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_exception(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR exception) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
 
+// Non-generic TaskCompletionSource overloads whose managed signature carries no
+// value argument.  Kept separate from the 2-arg forms above because the ABI slot
+// for `value` is never populated on those call sites.
+void chaos_tcs_set_result_void(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
+void chaos_tcs_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_result_void(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
+
 }  // extern "C"

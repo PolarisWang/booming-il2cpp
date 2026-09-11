@@ -1809,13 +1809,13 @@ void DispatchVoid(Args... args) {
         MarshalReleaseRcw(args...);
     }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_TASKS_TASKCOMPLETIONSOURCE_SETCANCELED) {
-        chaos_tcs_set_exception(args...);
+        chaos_tcs_set_canceled(args...);
     }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_TASKS_TASKCOMPLETIONSOURCE_SETEXCEPTION_SYSTEM_EXCEPTION) {
         chaos_tcs_set_exception(args...);
     }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_TASKS_TASKCOMPLETIONSOURCE_SETRESULT) {
-        chaos_tcs_set_result(args...);
+        chaos_tcs_set_result_void(args...);
     }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_ABORT_SYSTEM_OBJECT) {
         chaos_thread_abort(args...);
@@ -2297,7 +2297,7 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
     }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_TASKS_TASKCOMPLETIONSOURCE_TRYSETRESULT) {
         return static_cast<CHAOS_IL2CPP_INT32>(
-            chaos_tcs_try_set_result(args...));
+            chaos_tcs_try_set_result_void(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_GET_ISBACKGROUND) {
         return static_cast<CHAOS_IL2CPP_INT32>(
