@@ -325,11 +325,18 @@ public sealed class AsyncPipelineTests
             m.SubjectId.Contains("AsyncMethods::GetOne") || m.SubjectId.Contains("AsyncMethods::DoVoid"));
         Assert.NotNull(entry);
 
-        // R2b: async entry must allocate the >d__ box on the GC heap — not on the C++
-        // stack — so the box survives the entry frame returning and is alive when the
-        // continuation resumes on another thread.
-        Assert.DoesNotContain("__chaos_stack_obj", entry!.MethodSource);
-        Assert.Contains("CHAOS_IL2CPP_NEW_GC", entry.MethodSource);
+        // ASYNC-P2-7: the async entry allocates the >d__ state machine and hands its
+        // address to AsyncTaskMethodBuilder::Start, which drives the first MoveNext.
+        // A Task.Yield inside that MoveNext parks the address on the thread pool as the
+        // resume target, so it must OUTLIVE the entry frame — a GC-heap box.  Roslyn's
+        // common Release shape emits no newobj for the state machine (the local is a
+        // plain valuetype fed to Start by ldloca), so nothing else allocates one and
+        // chaos_locals[V] would stay 0 while the body dereferenced it as a full struct.
+        Assert.Contains("CHAOS_IL2CPP_NEW_GC", entry!.MethodSource);
+        // ...and the box must be passed BY VALUE (the durable heap address), never as
+        // &chaos_locals[0] (a stack slot that dies with the frame).
+        Assert.DoesNotContain("&chaos_locals[0]", entry.MethodSource);
+        Assert.DoesNotContain("__chaos_stack_obj", entry.MethodSource);
     }
 
     [Fact]
@@ -386,16 +393,27 @@ public sealed class AsyncPipelineTests
 
         string entrySrc = entry!.MethodSource;
 
-        // The entry must contain "chaos_locals[0]" (the box pointer value).
-        Assert.Contains("chaos_locals[0]", entrySrc);
+        // The entry must actually ALLOCATE the box.  Without this the assertions below
+        // pass vacuously: the buggy emission emits `_s2 = &chaos_locals[0]`, which still
+        // contains the substring "chaos_locals[0]", so a Contains check alone cannot tell
+        // the two apart.  Requiring the allocation is what makes this test discriminating
+        // — verified by in-place revert (see the commit's regression_check).
+        Assert.Contains("CHAOS_IL2CPP_NEW_GC", entrySrc);
         // It must NOT use "&chaos_locals[0]" (stack slot address) for the box pointer.
         // The pattern "&chaos_locals[0]" would be the old buggy emission.
         Assert.DoesNotContain("&chaos_locals[0]", entrySrc);
+        // The box value must be read back out of the slot when handed to Start.
+        Assert.Contains("chaos_locals[0]", entrySrc);
 
-        // However, other ldloca uses (e.g. &chaos_locals[2] for the awaiter slot)
-        // must still use "&chaos_locals" — so verify the async helpers still work.
-        // For the MoveNext body, the AwaitUnsafeOnCompleted box arg (slot 4) must
-        // also be passed by value, not by stack-slot address.
+        // However, the general ldloca path must NOT be disabled: locals that genuinely
+        // hold a value type still need their slot ADDRESS.  The MoveNext body's awaiter
+        // local (YieldAwaiter, a valuetype) is ldloca'd into get_IsCompleted, so "&chaos_locals"
+        // must still appear somewhere in the body.
+        //
+        // Asserted as a property, not against a fixed index: the awaiter's slot number is
+        // an allocation detail that shifts when the entry's local layout changes, and
+        // pinning "&chaos_locals[2]" specifically made this test fail for a reason
+        // unrelated to what it is defending.
         var (_, _, movenext) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
         string mnSrc = movenext.MethodSource;
 
@@ -413,9 +431,8 @@ public sealed class AsyncPipelineTests
         // It should NOT contain &chaos_locals[4] (the old buggy pattern).
         Assert.DoesNotContain("&chaos_locals[4]", preAoc);
 
-        // Reference-type locals (&chaos_locals[2] for awaiter slots) should STILL
-        // use & — verify that the general ldloca pattern is not disabled.
-        Assert.Contains("&chaos_locals[2]", mnSrc);
+        // Value-type awaiter locals must still be addressed, not dereferenced as values.
+        Assert.Contains("&chaos_locals[", mnSrc);
     }
 
     [Fact]

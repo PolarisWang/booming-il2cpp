@@ -70,10 +70,19 @@ public sealed partial class NativeAotLoweringPlanner
     /// (the address of the C++ stack slot holding the pointer), because the pointer
     /// must survive cross-thread continuation resumption.
     /// <para/>
-    /// Two detection patterns:
+    /// Three detection patterns:
     /// <list type="bullet">
-    ///   <item><b>Entry methods</b> (async callers such as GetOne): a <c>newobj</c> on a
-    ///   type whose SubjectId contains <c>&gt;d__</c>, whose result is <c>stloc</c>'d.</item>
+    ///   <item><b>Entry methods, boxing form</b>: a <c>newobj</c> on a type whose
+    ///   SubjectId contains <c>&gt;d__</c>, whose result is <c>stloc</c>'d.  Roslyn emits
+    ///   this when the state machine escapes the method (e.g. it is captured).</item>
+    ///   <item><b>Entry methods, non-boxing form</b>: no <c>newobj</c> at all — the
+    ///   compiler declares the state machine as a plain <c>valuetype</c> local and
+    ///   passes <c>ldloca V</c> straight to
+    ///   <c>AsyncTaskMethodBuilder::Start&lt;T&gt;(ref T)</c>.  This is the common
+    ///   Release shape.  The slot still must be a durable GC box: <c>Start</c>
+    ///   drives the first MoveNext, which may suspend (Task.Yield) and register the
+    ///   address with the thread pool as a resume target.  Treating it as a stack
+    ///   slot would hand the pool a pointer that dies with the entry frame.</item>
     ///   <item><b>MoveNext methods</b> (the state machine proper): an <c>ldarg.0 + stloc</c>
     ///   pair at the method entry — the <c>stloc</c> slot receives the <c>this</c> pointer
     ///   (the box address) and propagates it to <c>ldfld/stfld</c> call sites.</item>
@@ -106,6 +115,57 @@ public sealed partial class NativeAotLoweringPlanner
                 break; // Unknown intervening instruction — stop.
             }
             break; // only one async state machine per method
+        }
+
+        // Pattern A': async ENTRY, non-boxing form.  Roslyn's common Release shape
+        // declares the state machine as a plain valuetype local and never emits a
+        // newobj — the entry is then just a chain of `ldloca V` feeding
+        // AsyncTaskMethodBuilder::Start<T>(ref T) / AwaitUnsafeOnCompleted<T>(..., ref T).
+        // Pattern A above only matches the boxing form, so without this branch such an
+        // entry falls through entirely and `V` is emitted as a raw `&chaos_locals[V]`
+        // stack slot.  Start() drives MoveNext synchronously and a Task.Yield inside it
+        // parks that address on the thread pool as the resume target — so the stack slot
+        // becomes a dangling pointer the moment the entry returns.  Any local that is
+        // ldloca'd into a generic async-builder Start/AwaitUnsafeOnCompleted call is the
+        // state-machine slot; treat it as the durable GC box.
+        if (!isEntry)
+        {
+            for (int i = 0; i < instructions.Count; i++)
+            {
+                if (instructions[i].Op != "ldloca") continue;
+                int slot = GetRequiredIntOperand(instructions[i]);
+                // Scan forward for the builder call that consumes this address.  Only
+                // intervening eval-stack-neutral ops (ldflda, ldarg, ldloc, ldc) may sit
+                // between the ldloca and the call; anything that consumes the address for
+                // a different purpose ends the search.
+                for (int j = i + 1; j < instructions.Count; j++)
+                {
+                    var op = instructions[j].Op;
+                    if (op is "call" or "callvirt")
+                    {
+                        var callee = instructions[j].Callee;
+                        if (callee is not null &&
+                            (callee.Contains("AsyncTaskMethodBuilder", StringComparison.Ordinal)
+                             || callee.Contains("AsyncValueTaskMethodBuilder", StringComparison.Ordinal)
+                             || callee.Contains("AsyncVoidMethodBuilder", StringComparison.Ordinal))
+                            && (callee.Contains("::Start", StringComparison.Ordinal)
+                                || callee.Contains("AwaitUnsafeOnCompleted", StringComparison.Ordinal)))
+                        {
+                            isEntry = true;
+                            result.Add(slot);
+                        }
+                        break;
+                    }
+                    // Ops that leave the pushed address on the stack (or push something
+                    // else without touching it) — keep scanning past them.
+                    if (op is "nop" or "ldflda" or "ldarg" or "ldarga" or "ldloc" or "ldloca"
+                        or "ldc.i4" or "ldc.i4.s" or "ldc.i4.m1" or "ldc.i4.0" or "ldc.i4.1"
+                        or "ldc.i4.2" or "ldc.i4.3" or "ldc.i4.4" or "ldc.i4.5"
+                        or "ldc.i4.6" or "ldc.i4.7" or "ldc.i4.8" or "dup")
+                        continue;
+                    break;
+                }
+            }
         }
 
         // Pattern B: async MoveNext — `this` (ldarg.0) copied into a local via an adjacent

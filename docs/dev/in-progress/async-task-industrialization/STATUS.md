@@ -93,6 +93,7 @@ auto_continue: true
 | P2-4 | ContinueWith 重载面（20 个重载逐族路由）+ subject-id 参数切分 | `6f28100a3` | 3 处 in-place revert 各命中不同测试（见下） |
 | P2-5 | `Task.Factory.StartNew` 接线 + `get_Factory` 占位 token | `dd66e912f` | 移除注册 → 管线 FAIL；native shim revert → 4 FAIL/2 PASS |
 | P2-6 | `Task.WhenAll<TResult>` 泛型重载接线 + emitter 崩溃修复 + fixture 定位修复 | `f3593d72f` | 恢复旧 guard → 恰 2 FAIL（无关项绿）；revert emitter 修复 → ArgumentOutOfRangeException 崩溃 |
+| P2-7 | async entry 状态机 box 上 GC heap（P2-6 暴露的预存在缺陷） | 见下 | 注释掉分配 → 2 FAIL（85 项 async/registry 保持绿） |
 
 ### Phase 2 附带修复的真实缺陷（P2-4）
 
@@ -126,18 +127,60 @@ method-name 与 type-prefix 同时命中的描述符；描述符命中后 resolv
 `ExternalRuntimeHelpers.cs` 中已有一个同类补丁（`System.Numerics.Vector` 前缀吃掉 `Vector2/3/4`，
 用 `TryCreateVectorAllComparerHelper` 特判）。本次不修，登记为已知风险。
 
-### 🔴 P2-6 暴露的预存在缺陷（**不是** P2-6 引入，未修复，单独跟踪）
+### 🔴 P2-6 暴露的预存在缺陷（P2-7 已修复）
 
 修好 fixture 定位（见下）后，两个测试变红 —— 它们此前靠**读陈旧 Debug DLL** 而假绿：
 
-| 测试 | 断言 | 实际 |
+| 测试 | 断言 | 修复前实际 |
 |------|------|------|
 | `GetOneEntry_AllocatesOnGcHeapNotStack` | async entry 用 `CHAOS_IL2CPP_NEW_GC` 分配 `>d__` box | entry 把状态机放在**栈局部** `&chaos_locals[0]`（`chaos_resolve_managed_value_pointer`），**没有** `CHAOS_IL2CPP_NEW_GC` |
 | `MovenextEmittedSource_BoxPointerPassedByValueNotStackSlot` | 同上（box 按值传，非栈槽） | 同上 |
 
 **已证明与 P2-6 无关**：用 pristine 测试文件复现两例皆红；把 emitter 修复 revert 掉也两例皆红。
-即这是一条**真实的 async lowering 缺口**（R2b 声称已修但实际未生效），需独立子任务修复。
-**不在此处掩盖**，也不允许把断言放宽来"变绿"。
+即这是一条**真实的 async lowering 缺口**（R2b 声称已修但实际未生效）。**已由 P2-7 修复**（见下）。
+
+### P2-7 根因（比测试名描述的更严重）
+
+`IdentifyAsyncBoxPointerLocalSlots` 只有两条检测模式，**两条都不匹配真实 entry**：
+
+- Pattern A 要求 `newobj` 一个 `>d__` 类型 → 但 Roslyn 对**不逃逸**的 async 方法（Release，全部
+  4 个 fixture entry 都是）**根本不发 `newobj`**：状态机就是普通 `valuetype` 局部，entry 体
+  只有 `ldloca.0` → `AsyncTaskMethodBuilder::Start<T>(ref T)`。实测 IL 确认（`ilspycmd -il`）。
+- Pattern B 只覆盖 MoveNext（`IsAsyncStateMachineMoveNext`），entry 不走。
+
+后果**不只是悬垂指针，而是栈缓冲溢出**：
+
+```
+_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);   // 裸栈地址，无 local_slot_tag
+...
+auto* owner = chaos_resolve_managed_value_pointer<T>(_s2);        // 见 ChaosGeneratedRuntimePrelude.h:91
+```
+
+`chaos_resolve_managed_value_pointer` 只对**带 tag**的槽指针才做惰性分配；裸 `&chaos_locals[N]`
+不带 tag，于是直接 `reinterpret_cast<T*>` —— 把一个 8 字节栈槽当成整个 `>d__` 结构体写入。
+字段存储越过槽边界（栈溢出），且 `Start` 收到的是**只活到 entry 返回**的地址，而
+`async_await_yield_resume` 会把它作为 resume target 排进线程池 → 悬垂。
+
+**修法（两处）**：
+
+1. `IdentifyAsyncBoxPointerLocalSlots` 增加 Pattern A'：无 `newobj` 的 entry 形态 —— 任何被
+   `ldloca V` 喂给 `AsyncTaskMethodBuilder[<T>]::Start` / `AwaitUnsafeOnCompleted` 的局部槽
+   都判定为状态机槽。
+2. `MethodEmission` 在 prologue（body 之前）发出真正的分配：
+   `chaos_locals[V] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NEW_GC(<smType>, {}));`
+   类型取自 `Start<T>` callee 的泛型实参，并按本方法程序集名补全前缀（callee 里的拼写
+   **不带** `AsyncTestAssembly/`，直接用会生成不存在的符号）。
+
+两处配合后：`_s2 = chaos_locals[0]`（box 值），不再是 `&chaos_locals[0]`。
+
+**顺带修正一条假绿断言**：`MovenextEmittedSource_BoxPointerPassedByValueNotStackSlot` 的
+`Assert.Contains("chaos_locals[0]", ...)` 在缺陷代码下**也通过** —— 因为 `&chaos_locals[0]`
+包含子串 `chaos_locals[0]`。该断言本来就不具鉴别力。已改为必须同时含 `CHAOS_IL2CPP_NEW_GC`，
+revert 验证后两测试**都**变红。
+
+同时把该测试里硬编码的 `Assert.Contains("&chaos_locals[2]", ...)` 改成性质断言
+`Assert.Contains("&chaos_locals[", ...)` —— 原断言钉死了 awaiter 的槽号，而槽号是局部布局的
+实现细节，会随无关改动漂移（本次就漂到 `[3]`）。
 
 ### 附带修复的真实缺陷（P2-6）
 
@@ -164,13 +207,13 @@ method-name 与 type-prefix 同时命中的描述符；描述符命中后 resolv
 | `WhenEach` | ❌ 无实现 |
 | `Task.Factory` | ⚠️ 部分接线：`get_Factory` + 委托版 `StartNew` 已接；余下 `StartNew` 变体(CT/Options/state/TResult) 显式走解释器。**接口真实规模 74 个公共实例方法**（设计文档写 21，是错的）；`FromAsync`(22) 无原生模型(APM/IAsyncResult)，`ContinueWhenAll/Any`(16+16) 未接 |
 | `ContinueWith` 20 overloads | ✅ 逐族路由已定（1 族接线 / 4 族显式拒绝）；余下 15 个重载走同一 resolver 的 arity 判断，无需逐个登记 |
-| **async entry box 栈分配** 🔴 | ❌ 预存在缺口（P2-6 暴露）：entry 把 `>d__` 状态机放栈局部而非 GC heap，跨线程 resume 有悬垂风险。见上表 |
+| **async entry box 栈分配** | ✅ 已修（P2-7）：entry prologue 用 `CHAOS_IL2CPP_NEW_GC` 分配 `>d__`，并按值传给 `Start` |
 
 ## 当前通过测试
 
 | 测试套 | 结果 |
 |--------|------|
-| codegen 全量 | **2186/2188**（2 项为 P2-6 暴露的预存在缺口，见上） |
+| codegen 全量 | **2188/2188** |
 | `test_async_task_state` (1-4) | **8/8 PASS** |
 | `test_async_task_exception` (1-3) | **8/8 PASS** |
 | `test_async_task_run_e2e` (1-1) | **5/5 PASS** |
@@ -201,10 +244,6 @@ async 线合计 **101 项全绿**。
 
 ## 下一步
 
-**最高优先（先做）**：修复 async entry box 栈分配缺口（P2-6 暴露的预存在缺陷）。
-entry 必须用 `CHAOS_IL2CPP_NEW_GC` 把 `>d__` 放到 GC heap，否则跨线程 resume 悬垂。
-这是正确性问题而非性能问题，按 P1>P2>P3 应最先处理。
-
 Phase 2 剩余：`WhenEach` + `Task.Factory` 剩余族（`ContinueWhenAll/Any` 32 个、
 `FromAsync` 22 个无原生模型、4 个属性需真实 factory 对象模型）。
 
@@ -219,6 +258,13 @@ P2-6 经验：**测试的 fixture 解析本身要有反例意识**。`LocateAsyn
 使 Release 跑测读到陈旧 DLL —— 全绿是假绿，且掩盖了两个真实缺陷。
 定位类 helper 必须修成"解析不到就报错"，而不是"解析不到就用默认值"。
 
+P2-7 经验：**检测器的"形状假设"要靠真实 IL 验证**。
+`IdentifyAsyncBoxPointerLocalSlots` 假定 async entry 一定有 `newobj`，而 Roslyn 对不逃逸的
+async 方法从不发 `newobj` —— 检测器静默不匹配，两个 R2b 测试却因读陈旧 fixture 而假绿。
+**断言要用 `ilspycmd -il` 对拍真实 IL，而不是从源码语义推断 IL 形状**。
+另：`Assert.Contains("chaos_locals[0]")` 在 `&chaos_locals[0]` 面前**也通过**（子串）；
+"断言某个坏模式不存在" 之外还要 "断言好模式存在"，否则断言不具鉴别力。
+
 ```yaml
-recommended_next_child: ASYNC-P2-7
+recommended_next_child: ASYNC-P2-8
 ```
