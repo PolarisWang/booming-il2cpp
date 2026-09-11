@@ -91,6 +91,7 @@ auto_continue: true
 | P2-2 | `Task.ContinueWith` native 实现 + codegen 接线 | `4887d7556` | 不调用委托 → 9 FAIL（3 个 null 用例保持绿）；传 0 代 antecedent → 7 FAIL |
 | P2-3 | WhenAll 结果集 `[1,2,3]` + 子数组 use-after-free | `1be6aa15b` | 恢复 `delete[] mem` → **进程崩溃**；不建结果集 → 3 FAIL；结果轮转 → 2 FAIL |
 | P2-4 | ContinueWith 重载面（20 个重载逐族路由）+ subject-id 参数切分 | `6f28100a3` | 3 处 in-place revert 各命中不同测试（见下） |
+| P2-5 | `Task.Factory.StartNew` 接线 + `get_Factory` 占位 token | `dd66e912f` | 移除注册 → 管线 FAIL；native shim revert → 4 FAIL/2 PASS |
 
 ### Phase 2 附带修复的真实缺陷（P2-4）
 
@@ -103,6 +104,26 @@ auto_continue: true
 ### 诚实负数结果（P2-4）
 
 `IsAnyContinuationDelegate` 单独禁用**不改变任何测试结果** —— 当前 BCL 上没有"单参数但非委托"的 ContinueWith，arity 判断已经覆盖。该检查保留作为未来重载的守卫，注释已标注为**冗余**而非"承重"，不再声称其有效。
+
+### 诚实负数结果（P2-5）🔴 假设被证伪
+
+初始假设是**前缀碰撞**：`TypeDisplayNamePrefix: "System.Threading.Tasks.Task"` 用 `StartsWith` 匹配，
+因此也会命中 `System.Threading.Tasks.TaskFactory`，导致 `Task.Run` 规则劫持 `TaskFactory::StartNew`。
+
+**该假设是错的。** 它来自诊断代码里直接用手写 callee 调用 `TryMatchGenericShape()` —— 那是测量伪影，
+不是真实管线行为。在真实管线路径上，去掉"按前缀长度排序"的重排、clean rebuild 后测试**依然通过**。
+
+真实根因只是：**当时根本没有任何 `StartNew` 规则**。用"删掉 `RegisterTaskFactory` → 测试变红"直接证实。
+
+因此那个"按前缀长度排序优先最具体匹配"的改动**不承重**，已**完整回退**（`RuntimeHelperShapeRegistry.cs`
+最终无 diff）。把未证实的改动塞进共享匹配热路径、并以一个不存在的 bug 作理由，是不该做的事。
+
+复现过的真实顺序事实（供将来参考，非本次修复依据）：`TryMatchGenericShape` 按注册序返回**首个**
+method-name 与 type-prefix 同时命中的描述符；描述符命中后 resolver 返回 null 时**不会重试下一个**候选。
+`TryMatchGenericShape` 也**不校验** `TypeDisplayNamePrefix` 是否真的前缀匹配 callee 的完整类型名
+（只有 angle-bracket 回退分支做了该检查），所以前缀过捕获是该模块**确有**的隐患类别 ——
+`ExternalRuntimeHelpers.cs` 中已有一个同类补丁（`System.Numerics.Vector` 前缀吃掉 `Vector2/3/4`，
+用 `TryCreateVectorAllComparerHelper` 特判）。本次不修，登记为已知风险。
 
 ### 更正此前记录
 
@@ -121,14 +142,14 @@ auto_continue: true
 |-----|------|
 | `WhenAll<TResult>` 泛型重载 | ❌ 仅非泛型 `Task[]` 已接线 |
 | `WhenEach` | ❌ 无实现 |
-| `Task.Factory` 21 methods | ❌ 无实现 |
+| `Task.Factory` | ⚠️ 部分接线：`get_Factory` + 委托版 `StartNew` 已接；余下 `StartNew` 变体(CT/Options/state/TResult) 显式走解释器。**接口真实规模 74 个公共实例方法**（设计文档写 21，是错的）；`FromAsync`(22) 无原生模型(APM/IAsyncResult)，`ContinueWhenAll/Any`(16+16) 未接 |
 | `ContinueWith` 20 overloads | ✅ 逐族路由已定（1 族接线 / 4 族显式拒绝）；余下 15 个重载走同一 resolver 的 arity 判断，无需逐个登记 |
 
 ## 当前通过测试
 
 | 测试套 | 结果 |
 |--------|------|
-| codegen 全量 | **2179/2179**（P2-4 +7；此前记的 3 项"预存在失败"实为环境/顺序相关，全量跑通过） |
+| codegen 全量 | **2185/2185**（P2-5 +5） |
 | `test_async_task_state` (1-4) | **8/8 PASS** |
 | `test_async_task_exception` (1-3) | **8/8 PASS** |
 | `test_async_task_run_e2e` (1-1) | **5/5 PASS** |
@@ -137,9 +158,15 @@ auto_continue: true
 | `test_async_when_async` (P2-1) | **7/7 PASS** |
 | `test_async_when_array` (P2-3) | **8/8 PASS** |
 | `test_async_continue_with` (P2-2) | **12/12 PASS** |
+| `test_async_task_factory` (P2-5) | **6/6 PASS** |
 | `test_async_integration_smoke` | **28/28 PASS** |
 
-async 线合计 **95 项全绿**。
+async 线合计 **101 项全绿**。
+
+> ⚠️ native 构建注意：`artifacts/build/rtnative` 未设 `ROADMAP0_PRESET_TARGET`，
+> 因此顶层 CMakeLists 的 googletest FetchContent 块被跳过，**该树下所有 gtest 目标
+> 都编译失败**（C1083 gtest/gtest.h）—— 与本次改动无关，是预存在的构建树配置问题。
+> 跑 native async 测试请用 `artifacts/presets/windows-x64-reference`（已设该变量且有 `_deps`）。
 
 基线修正：此前文档记的 codegen 2165/2165 是在**主检出**上跑出的数字；worktree 内正确
 解析后为 **2172/2172**（1-6 修复后）。
@@ -153,13 +180,16 @@ async 线合计 **95 项全绿**。
 
 ## 下一步
 
-Phase 2 剩余：`WhenAll<TResult>` 泛型重载 + `WhenEach` + `Task.Factory` 21 methods。
-其中 `Task.Factory` 是最大的未接线块（21 methods），需先确认 codegen 侧 `TaskFactory`
-的 subject 是否可探测（查 ATG manifest），再决定 native 接线面。
+Phase 2 剩余：`WhenAll<TResult>` 泛型重载 + `WhenEach` + `Task.Factory` 剩余族
+（`ContinueWhenAll/Any` 32 个、`FromAsync` 22 个无原生模型、4 个属性需真实 factory 对象模型）。
 
 P2-4 已建立的可复用经验：**registry 级测试必须用管线真实产生的 callee 拼写**，
 否则会出现"单测绿、管线 null"的假绿。新增 ContinueWith 类 helper 时照此办理。
 
+P2-5 追加经验：**诊断结论必须在真实管线上复核**。直接调用内部匹配函数并喂手写 callee
+得到的"命中/顺序"结果，与管线真实行为可能不一致（P2-5 的前缀碰撞假设就是这样被误导的）。
+反例验证（删注册看是否变红）比阅读代码更能确定承重点。
+
 ```yaml
-recommended_next_child: ASYNC-P2-5
+recommended_next_child: ASYNC-P2-6
 ```
