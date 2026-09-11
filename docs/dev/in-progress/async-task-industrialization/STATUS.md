@@ -312,7 +312,80 @@ lowering"，而要先**按声明类型**（`>d__` 且实现 `IAsyncEnumerable`�
 | **A1** | 显式检测 + 诊断：识别 `AsyncIteratorMethodBuilder` 状态机，**显式记录**而非静默返 0 | 反例：去掉检测 → 未支持形态静默返 0（gate 必须变红） | ✅ `bd77bcd73` |
 | **A2** | native `AsyncIteratorBuilder` + **池化** `ValueTask<bool>` source（`IValueTaskSource`） | P1 硬约束：池化非可选 | ✅ 本轮（见下） |
 | A3 | codegen：registry 5-op 注册（Create/MoveNext/AwaitOnCompleted/AwaitUnsafeOnCompleted/Complete）、classify、await 侧目录 | — | ✅ 本轮（见下） |
-| A4 | yield-return IR lowering（state=-4 续跑）、`IAsyncEnumerable`/`IAsyncEnumerator` 接口 vtable（slot 必须来自反射，不得手写常量）、`await foreach` 消费侧、`IAsyncDisposable`/`<>w__disposeMode` | **端到端可运行**（`Iterate<T>` 真跑通，`await foreach` 能消费） | 🟡 **取证已完成，前置缺陷已修（`87b3d21eb`）**；lowering 本体待做 |
+| A4 | yield-return IR lowering（state=-4 续跑）、`IAsyncEnumerable`/`IAsyncEnumerator` 接口 vtable、`await foreach` 消费侧、`IAsyncDisposable`/`<>w__disposeMode` | **端到端可运行**（`Iterate<T>` 真跑通，`await foreach` 能消费） | 🟡 **Step 3（接口 vtable）已完成 `ddf8b144b`；Step 1 取证实测：CFG 不可恢复，lowering 本体待做** |
+
+#### A4 Step 3 —— 接口 vtable 接线（`ddf8b144b`）✅
+
+**症状**：`async IAsyncEnumerable<T>` 状态机的 6 个接口全部 emit
+`{ stable_id, 0, 0 }`。运行时 `ScanIfaceMapForMethod`
+（`vtable_registry_resolve.cpp:18-33`）的守卫是
+`declared_method_token < entries[ifi].method_count`；`method_count == 0` 时
+**每个 token 都被拒 → 返 nullptr** —— 在 bloom filter 已报"存在"的接口上的
+**静默空分派**。这正是 plan Step 3 预言的"静默空洞"。
+
+**根因**：`ComputeInterfaceVtableInfo` 只查 `_methodsByDeclaringType`（仅含
+module-local 声明类型）。外部闭包接口经 `ImplementedInterfaceSubjectIds` →
+`TrackInterfaceType` 只 emit type_id + bitmap，不贡献 `MethodDefinition` → 查询
+miss → 返回 `(0,0)`。
+
+**修复中由实测逼出来的三个坑（全部先猜错了）**：
+
+1. **slot map 的 key 是 `::` 之后的整段显式拼写，qualifier 不被剥离**：
+   `System.Collections.Generic.IAsyncEnumerator<System.Int32>.MoveNextAsync:...`。
+   `GetMethodSignatureSuffix` 不剥 qualifier —— 与直觉相反，按"bare member name"
+   查找必然全 MISS。
+2. **同一 subject 可经多个字典出现**，不按 spelling 去重 → `method_count` 膨胀
+   （`IValueTaskSource<bool>` 的 3 个成员报成 9），窗口越过 vtable 末尾。
+3. **隐式实现的成员 subject id 完全没有 qualifier**：`IAsyncStateMachine` 的
+   `MoveNext` / `SetStateMachine` 就是普通 `MoveNext:System.Void()`，拼写法无法识别，
+   需一张 curated 表（且只在 slot map 真含该 key 时才采纳，不能凭空造窗口）。
+
+前缀碰撞是真实的：`IValueTaskSource` 是 `IValueTaskSource<System.Boolean>` 的严格
+前缀，必须按**最长 tracked interface** 归属，否则非泛型接口吞掉泛型接口的成员窗口。
+
+**验证**：新增 `IteratorIfaceMapWindowsResolveToTheirOwnMembers` 断言
+`vtable[offset+i]` 的**符号身份**（round-trip identity），而非仅 bounds。
+实测 emitted 窗口全部连续且非零：`IAsyncStateMachine` 1/2、
+`IAsyncEnumerable<int>` 4/1、`IAsyncEnumerator<int>` 5/2、`IAsyncDisposable` 7/1、
+`IValueTaskSource` 8/3、`IValueTaskSource<bool>` 11/3。
+**反例（已实机执行）**：(a) 还原 helper → Failed 1/Passed 4（原始 RED 态）；
+(b) 把窗口基址 +1（**in-range 但错位**）→ Failed 2/Passed 4。
+即"看似合理的错误 offset"会被抓到，不只是"缺失"。
+codegen 全量 **2213 通过 / 0 失败**。
+
+#### 🔴 A4 Step 1 取证实测：`YieldOne::MoveNext` 的 CFG 不可恢复
+
+plan 把"`YieldOne::MoveNext` 走不通结构化路径"列为**头号风险并要求最先测量**。
+实测结论比 plan 的假设**更极端**：
+
+临时绕过 A1 分支（把 `YieldOne` 的 `AsyncMethodKind.AsyncIterator` 强改为
+`AsyncTaskOfT`）后 dump emitted C++，`<YieldOne>d__0::MoveNext` 的真实形态是：
+
+- **不是 pc-dispatch 回退，而是 linear lowering，且控制流被整体抹除**。
+- 所有分支退化成**注释**：`// beq (structured EH branch)` /
+  `// br (handled via structured EH branches)` /
+  `// leave (handled via structured EH branches)`。没有真实 control flow。
+- 于是执行**直落穿**：`state=-1` → `current=1` → `state=-4` → 又 `state=-1`
+  → 一直落到尾部 `state=-2` / `complete()` / `SetResult(false)`。
+- yield 路径的 `SetResult(true)` 落在**无条件 `return;` 之后**，**不可达**。
+
+**后果**：emit 出的 `MoveNext` 无论 `state` 为何都报"没有更多元素"——
+一个**静默错误的可枚举**。故 A4 **不能**按"接口 vtable 修好了"就宣告完成。
+
+**为什么 plan 的 Step 1 方案（补一个 `state=-4` 挂起判据）不够**：
+`AppendSuspendReturnsForAsyncMoveNext`（`StructuredIR.Emit.cs:2480`）与
+`IsSuspendContinuationCall`（`:2472`）操作的是 `StructuredIRNode` 树
+（`IRBlock`/`IRSequence`）。这个方法**根本没形成结构化树**，所以"再加一个
+yield-suspend 谓词"**无处可挂** —— 注入点在其上游就缺失了。
+
+**A4 的真实工作量**因此是：让迭代器 `MoveNext` **走通结构化路径**（或为 iterator
+形态实现等效的控制流重建），而不是补谓词。这与 plan Step 1.1 的备份判断一致
+（"若回退到 pc-dispatch，A4 的工作重心从'挂起判据'转为'迭代器 MoveNext 的 CFG 恢复'"）。
+
+**可复现的测量方法**：备份 `MethodEmission.cs` → 在 `ClassifyAsyncMethod` 之后临时把
+`YieldOne` 的 kind 改成 `AsyncMethodKind.AsyncTaskOfT` → dump
+`model.Methods` 中 `YieldOne::MoveNext` 的 `MethodSource` → 还原（已 diff 校验干净）。
+
 
 **A1 的关键发现（值得全项目记住）**：emission 跑在 `BuildMethodSourceSafe` 之下，
 它捕获**一切**异常并替换成 `BuildAotUnreachableMethodStub`。A1 的第一版实现是
