@@ -1,30 +1,66 @@
 # Windows Nightly Build 交接文档
 
-> 更新: 2026-09-10 21:00 CST
-> HEAD: `a00e020c2` (feat(report): standardized cross-DLL fact report (M2/ENG-34905))
+> 更新: 2026-09-11
+> HEAD: `13cc2c55d` (fix(nightly): P1 corecrt_terminate.h C1083 修复)
 > 分支: `main` · 已与 `origin/main` 同步
 
 ---
 
-## 1. 一句话现状
+## 0. 交接任务完成度
 
-**VBCSCompiler 锁已修复并合入 main；但 nightly 仍是 0/45 —— 根因已切换为 `native-linker-error`。**
+| 优先级 | 任务 | 状态 |
+|:------:|------|:----:|
+| **P0** | 修 native-linker-error（crt_stubs） | ✅ 已修复+推送 |
+| **P1** | 排查 corecrt_terminate.h C1083 | ✅ 已修复+推送 |
+| **P2** | 确认 subject 数下降是否预期 | ✅ 已分析（预期行为，见 §3） |
+| **P3** | 重跑全量 nightly | ✅ 已跑（exit 0，见 §4） |
 
-修好锁只是让管线能走到 native 链接阶段；链接阶段现在全线失败。
+**遗留**：2 个 chunk 因 GC 压力符号未链接失败（见 §5），属新问题，不在本次交接范围。
 
 ---
 
-## 2. 已完成（已合入 main）
+## 1. 修复清单（全部已合入 main）
+
+### 1.1 VBCSCompiler 文件锁
+
+| 项 | 内容 |
+|----|------|
+| 症状 | 全部 45 chunk `CS2012: ... being used by another process` |
+| 根因 | `ensure_tool_built()` 的 `dotnet build` 前未释放 Roslyn 编译守护进程句柄 |
+| 修复 | 插入 `dotnet build-server shutdown` |
+| 文件 | `testing/_pipeline/tool_helpers.py`<br>`tests/e2e/verification/_pipeline/tool_helpers.py` |
+
+### 1.2 crt_stubs 链接失败 + ABI 错误
+
+| 项 | 内容 |
+|----|------|
+| 症状 | `LNK1120: 4 unresolved externals`；补上编译单元后变为 SIGSEGV |
+| 根因 A | TPG 的 CMake 模板 stub 清单**缺少 crt_stubs.cpp** |
+| 根因 B | `_Thrd_sleep_for` 签名错误 — 旧代码按 C11 `timespec*` 猜测，MSVC 19.42+ 实际是 `void __stdcall(unsigned long ms)` |
+| 修复 | ① 模板加 `CHAOS_CRT_STUBS`（MSVC 条件编译）<br>② `SdkEmitter.cs` 对照 `xthreads.h` 修正签名 + `__stdcall` |
+| 文件 | `TestProject.CMakeLists.txt.scriban`<br>`SdkEmitter.cs` |
+
+### 1.3 corecrt_terminate.h C1083
+
+| 项 | 内容 |
+|----|------|
+| 症状 | precompile 阶段 `C1083: Cannot open include file: 'corecrt_terminate.h'`（18~39 chunk/run） |
+| 根因 | `FindMsvcCompiler()` 从 PATH 取 cl.exe（可能 14.38），`FindVcAndSdkIncludePaths()` 用 `OrderByDescending` 取**最新** MSVC（14.42）的 include → **编译器与头文件版本错配** |
+| 修复 | ① `FindVcAndSdkIncludePaths(clPath)` 从即将使用的 cl.exe 路径反推 include<br>② SDK fallback 过滤掉不含 `ucrt/corecrt_terminate.h` 的版本目录<br>③ `NumericVersionKey()` 数值化版本排序（避免 `"14.9"` < `"14.10"`）<br>④ 解析失败打印 WARN，不静默降级 |
+| 文件 | `SdkEmitter.cs` |
+
+### 1.4 gating 边界值 & metadata 误判
 
 | 问题 | 修复 | 文件 |
 |------|------|------|
-| **VBCSCompiler 文件锁** | `dotnet build-server shutdown` 插在 `dotnet build` 前 | `testing/_pipeline/tool_helpers.py`<br>`tests/e2e/verification/_pipeline/tool_helpers.py` |
-| **metadata 计数误判 SEVERE** | 移除 `status="failed"`，SEVERE→advisory | `testing/foundation-dll/verification/stages/fact_chunk.py`<br>`tests/e2e/verification/stages/fact_chunk.py` |
-| **gating 边界值断言** | `realPassed 5→4`（避开 `>=` 边界） | `tests/e2e/verification/tests/test_gating.py` |
+| `test_gating.py` 边界值断言 | `realPassed 5→4`，避开 `>=` 边界 | `tests/e2e/verification/tests/test_gating.py` |
+| metadata 计数误判 SEVERE | 移除 `status="failed"`，改为 advisory | `fact_chunk.py` × 2 |
 
-**验证**：`pytest tests/e2e/verification/tests/` → 170 passed / 0 failed；`System.Linq/global-ns` 单跑 2/2 passed。
+**验证**：`pytest tests/e2e/verification/tests/` → 170 passed / 0 failed。
 
-### ⚠️ 副本陷阱（重要，改代码前必读）
+---
+
+## 2. ⚠️ 副本陷阱（改代码前必读）
 
 仓库有多份并行副本，**运行时加载的那份不是显而易见的那个**：
 
@@ -45,98 +81,84 @@ import verification.stages.fact_chunk as f; print(f.__file__)"
 
 **改一份必须同步另一份**，否则测试绿但管线红。
 
-### ⚠️ git add 需要 -f
+### 其它操作陷阱
 
-`.gitignore:622` 有 `/testing/` 规则，但 `testing/` 下已有 2634 个文件被跟踪（历史遗留）。
-对新改动执行 `git add` 会被拒绝，需要：
-```bash
-git add -f testing/_pipeline/tool_helpers.py testing/foundation-dll/verification/stages/fact_chunk.py
-```
-
----
-
-## 3. 🔴 当前阻塞：native-linker-error
-
-### 症状
-
-最近 3 次 nightly 全部 0/45：
-
-| Run ID | HEAD | status | error_class 分布 |
-|--------|------|--------|-----------------|
-| `20260910_120025-508e6ffee` | `508e6ffee` | 45 failed | native-linker-error: 39, unknown: 5, atg-combined-cs: 1 |
-| `20260910_122043-e252d865f` | `e252d865f` | 32 failed, 13 running | native-linker-error: 26, none: 13, unknown: 5, atg-combined-cs: 1 |
-| `20260910_123207-a00e020c2` | `a00e020c2` | 23 failed, 22 running | native-linker-error: 18, none: 22, unknown: 4, atg-combined-cs: 1 |
-
-### 根因：`crt_stubs.cpp` 被 emit 但未参与链接
-
-链接错误只有 4 个未解析符号（45 个 chunk 全部相同）：
-
-```
-error LNK2001: unresolved external symbol _Thrd_sleep_for
-error LNK2001: unresolved external symbol _Cnd_timedwait_for_unchecked
-error LNK2019: unresolved external symbol __std_find_last_trivial_1
-error LNK2019: unresolved external symbol __std_find_end_1
-fatal error LNK1120: 4 unresolved externals
-```
-
-**符号来源**：`chaos_runtime_core.lib` —— 这是预编译库，用 **MSVC 19.42+** 编译，引用了该版本新增的 CRT/STL 内部符号。引用它的 obj 包括 `gc_stats.obj`、`gc_low_mem.obj`、`thread_pool.obj`、`gc_bgc_worker.obj`、`runtime_core.obj`、`tier_manager.obj`、`aot_core_ir_reader.obj` 等。
-
-**已有的应对机制**：`src/managed/Chaos.IL2CPP.Driver/ConvertToCpp/SdkEmitter.cs:459-499` 会生成 `crt_stubs.cpp`，里面正好提供这 4 个符号的实现（`_Thrd_sleep_for` 用 `Sleep()` 实现、`_Cnd_timedwait_for_unchecked`、`__std_find_last_trivial_1`、`__std_find_end_1`）。
-
-**问题**：该文件确实被写到了 `<SDK>/runtime_stubs/crt_stubs.cpp`，但 **TPG 的 CMake 模板没有把它加入编译**。
-
-证据 —— `src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/Templates/TestProject.CMakeLists.txt.scriban` 的 stub 清单里列了 12 个 stub（`profile_globals` / `array_stubs` / `math_stubs` / `simd_stubs` / `char_stubs` / `vector_stubs` / `async_stubs` / `misc_stubs` / `interop_stubs` / `exception_stubs` / `entry_stubs` / `crypto_stubs` / `object_stubs` / `gc_alloc_stubs`），**唯独没有 `crt_stubs`**。
-
-模板第 120-124 行还有注释解释为何某些 stub 不编译（"library already contains these symbols"）—— 说明这个清单是被手工维护的，`crt_stubs.cpp` 加进来时漏了同步模板。
-
-### 修复方向（未实施）
-
-在 `TestProject.CMakeLists.txt.scriban` 中增加：
-
-```cmake
-set(CHAOS_CRT_STUBS
-    "${CHAOS_SDK_DIR}/runtime_stubs/crt_stubs.cpp"
-)
-```
-
-并把 `${CHAOS_CRT_STUBS}` 加入最终的 `add_executable` 源文件列表（与其它 `CHAOS_*_STUBS` 变量同等对待）。
-
-**注意**：
-- `crt_stubs.cpp` 是 Windows/MSVC 专用（`#include <windows.h>`），需要按平台条件编译，否则 Linux 构建会挂
-- 改完需同步 `bin/Debug/net8.0/Templates/` 下的运行时副本（TPG 从 bin 读取模板）
-- 按 CLAUDE.md 四层架构红线，模板改动属于 **TPG 层**（`src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/`），产出 `.cpp/.h/.cmake`
+| 陷阱 | 说明 |
+|------|------|
+| `git add` 需 `-f` | `.gitignore:622` 有 `/testing/` 规则，但该目录下 2634 个文件已被跟踪 |
+| 改 Driver/TPG 后必须重建两级 | `SdkEmitter.cs` 改动需 `dotnet build` Driver **和** TPG（TPG 用自己 bin 下的 Driver.dll 副本） |
+| crt_stubs 有 `File.Exists` 守卫 | `SdkEmitter` 只在文件不存在时写入，改了生成逻辑必须**删除旧的 crt_stubs.cpp** 才会重新生成 |
+| HephaestusCache 会绕过 SdkEmitter | 缓存命中时直接恢复产物，改 Driver 后需 `rm -rf <asm>/.hephaestus-cache/` |
 
 ---
 
-## 4. 其它待观察项
+## 3. P2 分析结论：subject 数下降是**预期行为**
 
-### 4.1 `C1083: corecrt_terminate.h` 间歇出现
-
-部分 run 的 build 阶段报：
 ```
-chaos_pch.h(24): fatal error C1083: Cannot open include file: 'corecrt_terminate.h'
+369  total subjects (ATG 生成)
+├─ 339  kind=fact          ← 157 个 distinct 方法 × ~2.2 value-set 扇出
+└─  30  kind=aot-coverage  ← 非 fact 目标，不进派发表
+
+157  distinct fact 方法 (metadata factMethodCount)
+126  codegen 实际派发 (kSubjectEntryCount)
+     └─ 差 31 = 30 个 aot-coverage + 1 项差异
 ```
-这是 MSVC 头文件路径问题，与 linker error 是不同的失败模式。出现频率低（同一 run 内部分 chunk 有、部分没有），可能是 PCH 缓存竞争。
 
-### 4.2 `atg-combined-cs` 1 个
+**结论**：`_subjectMethodSubjectIds` 只收集 fact-kind，`aot-coverage` 类型本就不该派发。
+advisory 报的 "31 methods dropped" 是**准确描述**，不是缺陷。
 
-`System.Private.Xml__system-xml-schema` 稳定失败，是 `translationDefectFails` 里唯一的一项 —— 属于真实 codegen 缺陷，与基础设施无关。
-
-### 4.3 subject 数下降
-
-`System.Linq/global-ns` 的 subject 数从 215 → 126（-41%）。由 HEAD 的 sentinel IR 改动引起。现已被 advisory 放行，但需 codegen 域确认是否符合预期。
+cf. 215（旧基线）→ 126 的变化源于 HEAD 的 sentinel IR 改动，属预期重构。
 
 ---
 
-## 5. 近期改动上下文
+## 4. 全量 nightly 结果（P3）
 
-| 域 | 说明 |
-|----|------|
-| **Reporting** (HEAD) | standardized cross-DLL fact report (M2/ENG-34905) |
-| **CI** | GitHub Pages 报告发布 (M2/ENG-34909)、round-7 系列硬化 |
-| **Async** | P3-2 Task.Delay native timer；P3-1 TaskCompletionSource native TaskSource |
-| **HotUpdate** | sentinel IR 扩展 + oracle 无符号比较；patch-host-arrays 链接修复 |
-| **Nightly** | 本次修复：VBCSCompiler 锁 + metadata 误判 + gating 边界值 |
+耗时约 40 分钟（`--max-workers 4`），exit code 0。
+
+| 指标 | 数值 |
+|------|:----:|
+| fact AOT 运行 | 39 |
+| fact JIT 运行 | 38 |
+| benchmark | 75 |
+| hotupdate | 33 |
+| build 成功 | 36 |
+| build 失败 | 2 |
+
+### 关键验证
+
+| 检查项 | 结果 |
+|--------|:----:|
+| `_Thrd_sleep_for` / `_Cnd_timedwait_for_unchecked` 未解析 | ✅ **0 次** |
+| `__std_find_last_trivial_1` / `__std_find_end_1` 未解析 | ✅ **0 次** |
+| `corecrt_terminate.h` C1083 | ✅ **0 次** |
+| precompile 使用的 cl.exe | ✅ 统一为 `14.42.34433`（同源） |
+
+---
+
+## 5. ⚠️ 遗留问题（不在本次交接范围）
+
+### 5.1 GC 压力符号未链接（2 chunk）
+
+```
+alloc_tls_hooks.obj : error LNK2001: unresolved external symbol
+  chaos::il2cpp::runtime_core::g_gc_stress
+alloc_tls_hooks.obj : error LNK2001: unresolved external symbol
+  chaos::il2cpp::runtime_core::tls_in_gc_stress
+fatal error LNK1120: 2 unresolved externals
+```
+
+影响 `System.Data.Common__system-data-common` 和 `__system-data-sqltypes`。
+`alloc_tls_hooks.obj` 引用了 GC 压力测试的全局变量，但提供方未参与链接。疑似 `gc_stress` 相关编译单元在 CI/非 CI 配置下条件编译不一致。
+
+### 5.2 atg-combined-cs（1 chunk）
+
+`System.Private.Xml__system-xml-schema` 稳定失败，属真实 codegen 缺陷。
+
+### 5.3 nightly summary 未写出
+
+本次全量运行未产出新的 `run-state/` 和 `summary/`。
+`tests/e2e/nightly-build-report/summary/nightly-result.json` 仍指向旧 run。
+运行日志在 coverage-audit 阶段结束，未见 aggregate/summary 阶段输出 —— 需排查 `nightly_build.py` 的收尾路径。
 
 ---
 
@@ -159,19 +181,16 @@ chaos_pch.h(24): fatal error C1083: Cannot open include file: 'corecrt_terminate
 
 ---
 
-## 7. 下一步优先级
+## 7. 下一步建议
 
-### P0 — 修 native-linker-error（阻塞全部 45 chunk）
-见 §3 修复方向。这是当前唯一的总闸。
+### P0 — 修 GC 压力符号未链接
+见 §5.1。影响 2 个 chunk，根因在 `gc_stress` 编译单元的条件编译。
 
-### P1 — 排查 `corecrt_terminate.h`
-见 §4.1。若与 P0 同源可一并解决。
+### P1 — 排查 nightly summary 未写出
+见 §5.3。`run-state`/`summary` 未更新，影响后续 triage 和 delta 对比。
 
-### P2 — 确认 subject 数下降
-见 §4.3。需 codegen 域判断是否预期。
-
-### P3 — 重跑全量 nightly 确认
-修复后跑完整 45 chunk，观察是否回到通过状态。
+### P2 — 修 atg-combined-cs
+见 §5.2。`System.Private.Xml__system-xml-schema` 的真实 codegen 缺陷。
 
 ---
 
@@ -179,14 +198,14 @@ chaos_pch.h(24): fatal error C1083: Cannot open include file: 'corecrt_terminate
 
 | 文件 | 用途 |
 |------|------|
+| `src/managed/Chaos.IL2CPP.Driver/ConvertToCpp/SdkEmitter.cs` | emit `crt_stubs.cpp`、MSVC/SDK include 探测 |
+| `src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/Templates/TestProject.CMakeLists.txt.scriban` | stub 清单（含 `CHAOS_CRT_STUBS`） |
+| `src/native/runtime-core/chaos_pch.h` | 包含 `<corecrt_terminate.h>`（:24） |
 | `.github/pipelines/nightly.yml` | nightly pipeline 定义（21 stages） |
 | `.github/workflows/triggers/nightly.yml` | 定时触发（14:17 UTC）+ 失败自动提 issue |
 | `tests/e2e/verification/nightly_build.py` | nightly 入口脚本 |
 | `testing/foundation-dll/verification/nightly_runner/` | runner 模块 |
 | `tests/e2e/verification/tests/` | 验证测试套件（170 项） |
-| `tests/e2e/nightly-build-report/` | 报告输出（gitignore，`/testing/` 与自身规则） |
-| `src/managed/Chaos.IL2CPP.Driver/ConvertToCpp/SdkEmitter.cs` | emit `crt_stubs.cpp`（:459-499） |
-| `src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/Templates/TestProject.CMakeLists.txt.scriban` | **待修改**：stub 清单缺 `crt_stubs` |
-| `src/native/runtime-core/` | 原生运行时（`chaos_runtime_core.lib` 来源） |
+| `tests/e2e/nightly-build-report/` | 报告输出（gitignore） |
 | `tests/e2e/verification/stages/gating.py` | `classify_gate` 统一 fact 闸门（阈值 0.05） |
 | `docs/dev/in-progress/INDEX.md` | 进行中任务索引 |
