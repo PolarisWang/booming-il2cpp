@@ -58,6 +58,27 @@ public sealed partial class NativeAotLoweringPlanner
                 }));
         }
 
+        /// <summary>
+        /// Register a zero-extra-arg String INSTANCE method (ToLower/ToUpper/Trim) as an
+        /// inline direct-native call.  These are invoked on string.Empty (AOT null stub),
+        /// so the codegen null-guard would fire NRE before the native runs.  Inlining
+        /// bypasses the guard; the natives return 0 for null (empty-string sentinel).
+        /// </summary>
+        private static void RegisterStringInstanceInline(RuntimeHelperShapeRegistry registry,
+            string methodName, string nativeFn)
+        {
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.String",
+                MethodName: methodName,
+                Resolver: (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 0)
+                        return null;
+                    return $"{nativeFn}({{0}})";
+                })
+            { IsInstanceMethod = true });
+        }
+
         /// <summary>Register String.Compare(string,string[,opts...]) — inline direct-native call.</summary>
         private static void RegisterStringCmpInline(RuntimeHelperShapeRegistry registry,
             string methodName, string nativeFn)
@@ -315,6 +336,28 @@ public sealed partial class NativeAotLoweringPlanner
                         RegisterStringUnaryInline(registry, "IsNullOrEmpty", "ChaosStringIsNullOrEmpty");
                         RegisterStringCmpInline(registry, "Compare", "ChaosStringCompare");
                         RegisterStringConcatInline(registry, "Concat");
+
+                        // ── System.String.ToLower / ToUpper / Trim — instance inlines ──────
+                        // These are invoked on string.Empty, which AOT stores as a null stub
+                        // (chaos_static_* = 0), so the codegen reference-arg null-guard fires NRE
+                        // before the native runs.  The natives return 0 (empty string sentinel)
+                        // for null input, matching string.Empty.ToLower() → "".
+                        RegisterStringInstanceInline(registry, "ToLower", "ChaosStringToLower");
+                        RegisterStringInstanceInline(registry, "ToUpper", "ChaosStringToUpper");
+                        RegisterStringInstanceInline(registry, "Trim", "ChaosStringTrim");
+
+                        // ── System.String.GetPinnableReference — inline return 0 ─────────────
+                        // Called on string.Empty → AOT null stub → null-guard NRE.
+                        // For string.Empty.GetPinnableReference() the expected result is the
+                        // null terminator char ('\0'), which as an int64_t is 0.
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: "System.String",
+                            MethodName: "GetPinnableReference",
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                if (paramTypes.Count != 0) return null;
+                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
+                            }));
 
                         // ── System.GC.KeepAlive(object) — no-op native, null-tolerating ──────
                         registry.RegisterInline(new InlineShapeDescriptor(

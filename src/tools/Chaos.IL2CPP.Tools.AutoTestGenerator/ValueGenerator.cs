@@ -525,9 +525,12 @@ public sealed class ValueGenerator
     {
         // ── ReadOnlyMemory<T> — produce a buffer of the correct element type ──
         ["ReadOnlyMemory"] = args => BuildMemoryFixture("ReadOnlyMemory", args),
+        ["Memory"] = args => BuildMemoryFixture("Memory", args),
         ["ReadOnlySequence"] = args => BuildMemoryFixture("ReadOnlySequence", args),
         ["ArraySegment"] = args => BuildMemoryFixture("ArraySegment", args),
         ["IBufferWriter"] = args => BuildMemoryFixture("ArrayBufferWriter", args),
+        ["ReadOnlySpan"] = args => BuildMemoryFixture("ReadOnlySpan", args),
+        ["Span"] = args => BuildMemoryFixture("Span", args),
     };
 
     /// <summary>
@@ -542,6 +545,9 @@ public sealed class ValueGenerator
             "byte" or "System.Byte" => kind switch
             {
                 "ReadOnlyMemory" => "new System.ReadOnlyMemory<System.Byte>(new byte[] { 0x7B, 0x7D })",
+                "Memory" => "new System.Memory<System.Byte>(new byte[] { 0x7B, 0x7D })",
+                "ReadOnlySpan" => "(new byte[] { 0x7B, 0x7D }).AsSpan()",
+                "Span" => "new System.Span<System.Byte>(new byte[] { 0x7B, 0x7D })",
                 "ReadOnlySequence" => "new System.Buffers.ReadOnlySequence<System.Byte>(new byte[] { 0x7B, 0x7D })",
                 "ArraySegment" => "new System.ArraySegment<System.Byte>(new byte[] { 0x7B, 0x7D })",
                 "ArrayBufferWriter" => "new System.Buffers.ArrayBufferWriter<System.Byte>()",
@@ -550,6 +556,9 @@ public sealed class ValueGenerator
             "char" or "System.Char" => kind switch
             {
                 "ReadOnlyMemory" => "new System.ReadOnlyMemory<System.Char>(new char[] { '{', '}' })",
+                "Memory" => "new System.Memory<System.Char>(new char[] { '{', '}' })",
+                "ReadOnlySpan" => "(new char[] { '{', '}' }).AsSpan()",
+                "Span" => "new System.Span<System.Char>(new char[] { '{', '}' })",
                 "ReadOnlySequence" => "new System.Buffers.ReadOnlySequence<System.Char>(new char[] { '{', '}' })",
                 "ArraySegment" => "new System.ArraySegment<System.Char>(new char[] { '{', '}' })",
                 "ArrayBufferWriter" => "new System.Buffers.ArrayBufferWriter<System.Char>()",
@@ -558,6 +567,9 @@ public sealed class ValueGenerator
             "int" or "System.Int32" => kind switch
             {
                 "ReadOnlyMemory" => "new System.ReadOnlyMemory<System.Int32>(new int[] { 0, 1 })",
+                "Memory" => "new System.Memory<System.Int32>(new int[] { 0, 1 })",
+                "ReadOnlySpan" => "(new int[] { 0, 1 }).AsSpan()",
+                "Span" => "new System.Span<System.Int32>(new int[] { 0, 1 })",
                 "ArraySegment" => "new System.ArraySegment<System.Int32>(new int[] { 0, 1 })",
                 _ => null,
             },
