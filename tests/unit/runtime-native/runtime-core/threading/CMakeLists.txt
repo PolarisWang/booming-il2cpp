@@ -98,6 +98,18 @@ chaos_native_add_test(test_async_when_async
     LABELS "unit;threading"
 )
 
+# async_continue_with_test — ASYNC-P2-2: Task.ContinueWith.  The continuation
+# must receive the antecedent (and its result), run for BOTH completion orders,
+# run on a faulted/cancelled antecedent, and resolve its own task with the
+# continuation's return value.  Links delegate_helpers.cpp so the continuation
+# delegate is really invoked rather than assumed to be.
+chaos_native_add_test(test_async_continue_with
+    async_continue_with_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/core/delegate_helpers.cpp
+    LABELS "unit;threading"
+)
+
 # queue_backpressure_test — Global queue backpressure verification (T2-QUEUE)
 chaos_native_add_test(test_queue_backpressure
     queue_backpressure_test.cpp

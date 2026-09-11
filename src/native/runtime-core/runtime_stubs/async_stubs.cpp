@@ -14,6 +14,7 @@
 #include "async_stubs.h"
 #include "exception_helpers.h"
 #include "exception_jmp.h"
+#include "core/delegate_helpers.h"
 #include "timer_queue.h"
 #include "runtime_stubs/stub_common.h"
 
@@ -572,6 +573,81 @@ CHAOS_IL2CPP_INTPTR chaos_task_when_all_array(CHAOS_IL2CPP_INTPTR tasks_handle) 
 CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept
 {
     return WhenAllAnyManagedArray(tasks_handle, /*when_all=*/false);
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Task.ContinueWith (Phase 2 P2-2)
+// ══════════════════════════════════════════════════════════════════════════════
+
+namespace {
+
+// State for one ContinueWith registration.  Held until the continuation has
+// run; the continuation task is owned by the caller (see the comment on
+// chaos_task_continue_with).
+struct ContinueWithState {
+    CHAOS_IL2CPP_INTPTR antecedent;    // task the continuation observes
+    CHAOS_IL2CPP_INTPTR continuation;  // DelegateObject* for the body
+    CHAOS_IL2CPP_INTPTR continuation_task;
+};
+
+// Deliver the continuation exactly once.
+//
+// The continuation delegate takes the ANTECEDENT handle as its single argument
+// (so `t.ContinueWith(a => a.Result)` can inspect the prior task) and returns a
+// native int, which becomes the continuation task's result — that is what makes
+// ContinueWith chainable rather than a fire-and-forget callback.
+void ContinueWithDelivery(CHAOS_IL2CPP_INTPTR /*antecedent_handle*/, void* ctx) noexcept {
+    auto* st = static_cast<ContinueWithState*>(ctx);
+    if (st == nullptr) return;
+
+    CHAOS_IL2CPP_INTPTR args[1] = {st->antecedent};
+    CHAOS_IL2CPP_INTPTR ret = 0;
+    chaos::il2cpp::runtime_core::chaos_delegate_object_invoke(
+        st->continuation, args, &ret, 1);
+
+    auto* cont = chaos::il2cpp::common::require_async_task(st->continuation_task);
+    cont->result = ret;
+    cont->exception = 0;
+    cont->faulted.store(false, std::memory_order_relaxed);
+    cont->canceled.store(false, std::memory_order_relaxed);
+    cont->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::notify_task_completed(cont);
+    chaos::il2cpp::common::finish_async_task(st->continuation_task);
+    delete st;
+}
+
+}  // anonymous namespace
+
+/// Register `continuation` to run when `antecedent` completes.
+///
+/// Runs unconditionally — a faulted or cancelled antecedent still invokes the
+/// continuation (with the antecedent's fault observable through the handle it
+/// receives).  Only TaskContinuationOptions.OnlyOn* variants would restrict
+/// this, and those are not modelled here.
+///
+/// Ownership: the returned continuation task is heap-allocated and is NOT
+/// reference-counted or GC-owned in this standalone path, so it persists for
+/// the process lifetime.  Making AsyncTask GC-owned is defect D1 (Phase 6).
+CHAOS_IL2CPP_INTPTR chaos_task_continue_with(
+    CHAOS_IL2CPP_INTPTR antecedent, CHAOS_IL2CPP_INTPTR continuation) noexcept
+{
+    using namespace chaos::il2cpp::common;
+    if (antecedent == 0 || continuation == 0) return 0;
+
+    auto* st = new (std::nothrow) ContinueWithState();
+    if (st == nullptr) return 0;
+    st->antecedent = antecedent;
+    st->continuation = continuation;
+    st->continuation_task = async_task_create();
+
+    // async_task_on_completed fires inline when the antecedent already
+    // completed, and stores + delivers via finish_async_task otherwise — so
+    // both completion orders are covered without a branch here.
+    if (async_task_on_completed(antecedent, ContinueWithDelivery, st) == 0) {
+        delete st;
+        return 0;
+    }
+    return st->continuation_task;
 }
 
 }  // extern "C"

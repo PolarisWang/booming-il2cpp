@@ -205,6 +205,25 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
+            // ── Task.ContinueWith (Phase 2 P2-2) ──
+            // `antecedent.ContinueWith(body)` registers `body` to run when the
+            // antecedent completes and returns a NEW task carrying the
+            // continuation's return value.  Two reference args (antecedent +
+            // continuation delegate).  Unlike the WhenAll/WhenAny combinators
+            // there is no generic overload split to guard against here — the
+            // Task<TResult> return is erased to a native int handle, matching
+            // FromResult above.
+            registry.Register("System.Threading.Tasks.Task", "ContinueWith",
+                ["System.Action`1<System.Threading.Tasks.Task>"],
+                ShapeKind.SimpleForward, "chaos_task_continue_with",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
             // ── Task.Wait / Task<T>.Result (blocking) ──
             // Block the calling thread until completion.  Wait() = infinite
             // wait; Wait(int) = bounded timeout (returns false on timeout).

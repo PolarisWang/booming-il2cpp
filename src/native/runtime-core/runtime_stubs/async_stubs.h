@@ -83,4 +83,15 @@ CHAOS_IL2CPP_INTPTR chaos_task_when_any(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2
 CHAOS_IL2CPP_INTPTR chaos_task_when_all_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
 
+// ── Task.ContinueWith native combinator (Phase 2 P2-2) ──
+// Registers `continuation` (a DelegateObject taking the antecedent task handle
+// and returning a native int) to run when `antecedent` completes — whether it
+// has already completed, faults, or is cancelled.  Returns a NEW task handle
+// that resolves with the continuation's return value (0 on invalid args).
+//
+// The continuation is unconditional: it runs for a faulted or cancelled
+// antecedent too, so a cleanup/logging continuation is never silently dropped.
+CHAOS_IL2CPP_INTPTR chaos_task_continue_with(
+    CHAOS_IL2CPP_INTPTR antecedent, CHAOS_IL2CPP_INTPTR continuation) noexcept;
+
 }  // extern "C"
