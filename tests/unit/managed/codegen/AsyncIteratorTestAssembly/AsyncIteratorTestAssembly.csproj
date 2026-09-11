@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- ASYNC-P2-8 A1: async iterators (async IAsyncEnumerable<T>) require .NET 9 —
+         Task.WhenEach and the AsyncIteratorMethodBuilder lowering shape do not exist
+         in net8.0.  This fixture is deliberately a SEPARATE project from
+         AsyncTestAssembly (which stays on net8.0) so the existing 2188-test baseline
+         is unaffected. -->
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>13.0</LangVersion>
+    <IsPackable>false</IsPackable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+  </PropertyGroup>
+</Project>

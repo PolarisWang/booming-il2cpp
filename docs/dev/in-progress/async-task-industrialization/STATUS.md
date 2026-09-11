@@ -269,6 +269,37 @@ verification-tree 守卫引用一个**未被 git 跟踪**的脚本
 `testing/foundation-dll/verification/` 在本 worktree 中**确实存在**。
 两者均与本改动无关，不在此处掩盖。
 
+### 🔴 A4 取证实测：A1 只门控了 MoveNext，其余 12 个成员在静默 emit
+
+detector 修复（`87b3d21eb`）后重跑实测，得到 A4 的真实工作面。`YieldOne` 相关
+subject 共 14 个，**只有 1 个**被标记 unsupported：
+
+```
+UNSUP | <YieldOne>d__0::MoveNext
+EMIT  | AsyncIteratorMethods::YieldOne()                        ← 外层工厂
+EMIT  | <YieldOne>d__0::.ctor
+EMIT  | <YieldOne>d__0::SetStateMachine
+EMIT  | <YieldOne>d__0::IAsyncEnumerable<Int32>.GetAsyncEnumerator
+EMIT  | <YieldOne>d__0::IAsyncEnumerator<Int32>.get_Current
+EMIT  | <YieldOne>d__0::IAsyncEnumerator<Int32>.MoveNextAsync
+EMIT  | <YieldOne>d__0::IAsyncDisposable.DisposeAsync
+EMIT  | <YieldOne>d__0::IValueTaskSource.GetResult / GetStatus / OnCompleted
+EMIT  | <YieldOne>d__0::IValueTaskSource<Boolean>.GetResult / GetStatus / OnCompleted
+```
+
+**根因**：`ClassifyAsyncMethod` 的 `AsyncIterator` 分支被 `IsAsyncStateMachineMoveNext`
+门控（subject 须含 `>d__` **且** `::MoveNext`）。因此 A1 的显式检测**只覆盖 MoveNext**，
+其余 12 个成员进不了该分支，全部静默走普通结构化路径。**这正是 A1 注释警告的
+"silent wrong iterable"，只是发生在 A1 未覆盖的兄弟方法上。**
+
+**对 A4 形状的修正**（原计划的画像偏窄）：A4 不只是"把 MoveNext 从 stub 换成真实
+lowering"，而要先**按声明类型**（`>d__` 且实现 `IAsyncEnumerable`）而非方法名识别
+整组迭代器成员，再逐成员 lowering。**注意两套 `IValueTaskSource` 面（泛型
+`<bool>` 与非泛型）共 6 个方法都在**，A2 的 `AsyncIteratorSourceCore` 需两套都接。
+
+同时确认（同一次实测）：`CodegenFailureCount: 0`、`PcDispatchCount: 0`（detector
+修复后仍成立，头号风险保持关闭）；`GlobalDeclarations` 长度仅 902。
+
 ### Phase 2 / ASYNC-P2-8 — async iterator 分期（A1 已落地）
 
 侦察（`async-iterator-recon-2026-09-11.md`）确认真实成本远超设计文档画像：
