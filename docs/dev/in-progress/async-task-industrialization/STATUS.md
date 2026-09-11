@@ -204,16 +204,40 @@ revert 验证后两测试**都**变红。
 | API | 状态 |
 |-----|------|
 | `WhenAll<TResult>` 泛型重载 | ✅ 已接线（P2-6）；`WhenAll<TReturn>(Task<T>[])` 与非泛型共用 `chaos_task_when_all_array` |
-| `WhenEach` | ❌ 无实现 |
+| `WhenEach` | 🟡 **A1 已完成**（显式检测+诊断，`bd77bcd73`）；A2-A4（native builder / codegen 注册 / yield-return IR）待做 |
 | `Task.Factory` | ⚠️ 部分接线：`get_Factory` + 委托版 `StartNew` 已接；余下 `StartNew` 变体(CT/Options/state/TResult) 显式走解释器。**接口真实规模 74 个公共实例方法**（设计文档写 21，是错的）；`FromAsync`(22) 无原生模型(APM/IAsyncResult)，`ContinueWhenAll/Any`(16+16) 未接 |
 | `ContinueWith` 20 overloads | ✅ 逐族路由已定（1 族接线 / 4 族显式拒绝）；余下 15 个重载走同一 resolver 的 arity 判断，无需逐个登记 |
 | **async entry box 栈分配** | ✅ 已修（P2-7）：entry prologue 用 `CHAOS_IL2CPP_NEW_GC` 分配 `>d__`，并按值传给 `Start` |
+
+### Phase 2 / ASYNC-P2-8 — async iterator 分期（A1 已落地）
+
+侦察（`async-iterator-recon-2026-09-11.md`）确认真实成本远超设计文档画像：
+`Task.WhenEach` 的 `WhenEachState.Iterate<T>` 是 `async IAsyncEnumerable<T>`，其完整函数体
+还依赖 Monitor.Enter/Exit、`ValueTask.AsTask`、`WaitAsync(CancellationToken)`、
+`CancellationTokenSource` —— "完整 async iterator" 不是"再造一遍 Phase 2"，而是 ≥ Phase 2。
+
+| 期 | 内容 | 验收 | 状态 |
+|----|------|------|------|
+| **A1** | 显式检测 + 诊断：识别 `AsyncIteratorMethodBuilder` 状态机，**显式记录**而非静默返 0 | 反例：去掉检测 → 未支持形态静默返 0（gate 必须变红） | ✅ `bd77bcd73` |
+| A2 | native `AsyncIteratorBuilder` + **池化** `ValueTask<bool>` source（`IValueTaskSource`） | P1 硬约束：池化非可选 | ⬜ |
+| A3 | codegen：registry 5-op 注册（Create/MoveNext/AwaitOnCompleted/AwaitUnsafeOnCompleted/Complete）、classify、await 侧目录 | — | ⬜ |
+| A4 | yield-return IR lowering（state=-4 续跑）、`IAsyncEnumerable`/`IAsyncEnumerator` 接口 vtable（slot 必须来自反射，不得手写常量）、`await foreach` 消费侧、`IAsyncDisposable`/`<>w__disposeMode` | **端到端可运行**（`Iterate<T>` 真跑通，`await foreach` 能消费） | ⬜ |
+
+**A1 的关键发现（值得全项目记住）**：emission 跑在 `BuildMethodSourceSafe` 之下，
+它捕获**一切**异常并替换成 `BuildAotUnreachableMethodStub`。A1 的第一版实现是
+"抛 `NotSupportedException`"，测试正确地失败了——异常被吞掉、`CodegenFailureCount` 静默 +1、
+构建保持绿色。**在这个位置用抛异常实现"响亮失败"，本身就是一种假绿。**
+信号只能是"被记录的值"，不能是异常。故 A1 用 `UnsupportedAsyncIteratorSubjectIds` 记录，
+并**无条件**（干净时为 0）emit `kUnsupportedAsyncIteratorCount` /
+`kUnsupportedAsyncIteratorSubjects` 到生成 C++，镜像既有 `kCodegenFailureCount` 通道；
+条件 emit 会让"无 iterator"与"信号未接线"无法区分。
 
 ## 当前通过测试
 
 | 测试套 | 结果 |
 |--------|------|
-| codegen 全量 | **2188/2188** |
+| codegen 全量 | **2186 通过 / 5 失败（均为预存在）**；详见下方基线说明 |
+| `AsyncIteratorDetectionTests` (A1) | **3/3 PASS** |
 | `test_async_task_state` (1-4) | **8/8 PASS** |
 | `test_async_task_exception` (1-3) | **8/8 PASS** |
 | `test_async_task_run_e2e` (1-1) | **5/5 PASS** |
@@ -226,6 +250,17 @@ revert 验证后两测试**都**变红。
 | `test_async_integration_smoke` | **28/28 PASS** |
 
 async 线合计 **101 项全绿**。
+
+> ⚠️ codegen 基线修正：此前记的 **2188/2188** 是在**主检出**上跑出的数字。worktree 内
+> 实跑为 **2186 通过 / 5 失败 / 2191 总计**。5 个失败
+> （`AsyncPipelineTests.MovenextEmittedSource_*`：`ContainsStateMachineFields` /
+> `SetResultAndSetExceptionRouteToNativeAsyncBuilder` /
+> `ContainsSetResultAndAwaitUnsafeOnCompleted` / `BoxPointerPassedByValueNotStackSlot` /
+> `SuspendReturnsAfterAwaitUnsafeOnCompleted`）是**预存在**的：在 HEAD 的干净 detached
+> worktree（无任何 A1 改动）上逐一复现同一组 5 个失败，**已验证，不是推断**。
+> 症状是 emission 产出 `// AOT-unreachable stub` 而非真实 MoveNext 体——
+> 与 A1 的 "BuildMethodSourceSafe 吞异常" 是同一机制的不同受害面，值得单独专项。
+> 新增的 codegen 测试计数（2191 = 2188 + A1 的 3 项）也确认 A1 未误伤既有用例。
 
 > ⚠️ native 构建注意：`artifacts/build/rtnative` 未设 `ROADMAP0_PRESET_TARGET`，
 > 因此顶层 CMakeLists 的 googletest FetchContent 块被跳过，**该树下所有 gtest 目标
@@ -265,6 +300,17 @@ async 方法从不发 `newobj` —— 检测器静默不匹配，两个 R2b 测�
 另：`Assert.Contains("chaos_locals[0]")` 在 `&chaos_locals[0]` 面前**也通过**（子串）；
 "断言某个坏模式不存在" 之外还要 "断言好模式存在"，否则断言不具鉴别力。
 
+A1 经验（两条，都值得推广）：
+1. **在 `BuildMethodSourceSafe` 之下，抛异常 ≠ 响亮失败。** 任何从 emission 抛出的异常
+   都会被吞掉并替换成 stub，构建保持绿。要造"显式失败"，必须走**非抛异常**通道
+   （记录 + emit 符号）。反过来说：凡是"A1 式响亮失败"的设计，先问一句
+   "这个抛会被谁吞掉"。
+2. **"这个失败是预存在的吗"必须实测，不能推断。** A1 提交前 codegen 全量出现 5 个
+   与 async 相关的失败，第一反应是"我改的"。用 `git worktree add --detach HEAD` 建一个
+   干净基线树跑同一组测试，逐一复现同样 5 个失败，才敢断定与本次改动无关。
+   注意：**不要用 `git stash` 做这件事**——stash 栈与其他 worktree/会话共享，
+   可能 pop 掉别人的改动。`git worktree` 是安全且零共享状态的替代。
+
 ```yaml
-recommended_next_child: ASYNC-P2-8
+recommended_next_child: ASYNC-P2-8-A2
 ```
