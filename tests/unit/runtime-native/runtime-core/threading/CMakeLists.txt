@@ -78,6 +78,26 @@ chaos_native_add_test(test_async_task_blocking
     LABELS "unit;threading"
 )
 
+# async_when_test — ASYNC-P2-1: WhenAll / WhenAny combinators.  The aggregate
+# must reflect the children's real outcomes (fault propagation, winner index),
+# not merely report "completed".  Compiles async_stubs.cpp directly so the real
+# chaos_task_when_* entry points are under test.
+chaos_native_add_test(test_async_when
+    async_when_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    LABELS "unit;threading"
+)
+
+# async_when_async_test — ASYNC-P2-1 (cont.): WhenAll/WhenAny where the children
+# complete ASYNCHRONOUSLY.  async_when_test.cpp covers only already-completed
+# children, which fire the continuation inline and finish in 0 ms; these exercise
+# the finish_async_task delivery path, which is what real composition uses.
+chaos_native_add_test(test_async_when_async
+    async_when_async_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    LABELS "unit;threading"
+)
+
 # queue_backpressure_test — Global queue backpressure verification (T2-QUEUE)
 chaos_native_add_test(test_queue_backpressure
     queue_backpressure_test.cpp
