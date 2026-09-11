@@ -90,6 +90,23 @@ auto_continue: true
 | P2-1 | WhenAll/WhenAny 反例（同步 + 异步两条路径） | `db356fa82` | 关闭 winner 识别 → 2 FAIL，index-0 保持绿 |
 | P2-2 | `Task.ContinueWith` native 实现 + codegen 接线 | `4887d7556` | 不调用委托 → 9 FAIL（3 个 null 用例保持绿）；传 0 代 antecedent → 7 FAIL |
 | P2-3 | WhenAll 结果集 `[1,2,3]` + 子数组 use-after-free | `1be6aa15b` | 恢复 `delete[] mem` → **进程崩溃**；不建结果集 → 3 FAIL；结果轮转 → 2 FAIL |
+| P2-4 | ContinueWith 重载面（20 个重载逐族路由）+ subject-id 参数切分 | `6f28100a3` | 3 处 in-place revert 各命中不同测试（见下） |
+
+### Phase 2 附带修复的真实缺陷（P2-4）
+
+| 缺陷 | 说明 |
+|------|------|
+| **ContinueWith 只有 1/20 可用** | 原注册是 `Register()` 精确匹配，而管线走 `TryMatchGenericShape()`，所以**连唯一那个重载也没接上**。修后按族路由：仅委托重载 → native；带 CT/Options/Scheduler/state 的重载 → 返回 null 走解释器（避免"忽略参数照跑 body"的假绿） |
+| **同一类型名两种拼写** | registry 级测试用 ``System.Action`1<...>``，真实管线用 `System.Action<...>`。只匹配反引号形式 → **单测绿、管线全 null**。这是 P2-4 新增管线级测试存在的直接原因 |
+| **参数切分被嵌套泛型击穿** | `Split(',')` 把带程序集限定的泛型实参切碎：`Func\`2[[A, asm, Version=...],[B, ...]]` 1 个参数被切成 **10** 段 → `paramTypes.Count` 判断失真 → 静默不匹配。影响**所有多泛型实参的 helper**，不止 ContinueWith |
+
+### 诚实负数结果（P2-4）
+
+`IsAnyContinuationDelegate` 单独禁用**不改变任何测试结果** —— 当前 BCL 上没有"单参数但非委托"的 ContinueWith，arity 判断已经覆盖。该检查保留作为未来重载的守卫，注释已标注为**冗余**而非"承重"，不再声称其有效。
+
+### 更正此前记录
+
+`IdentifyStructLocalSlots_NonValueTypeInitobj_NotCounted`、`UnknownExternalCall_UsesDispatchTable`、`CreatePseudoMetadataHandle_ReturnsNonZero` **不是**由本次 parser 修复。全量跑在 parser 回退与应用的两种情况下**都通过** —— 它们是环境/顺序相关，与 parser 无关。
 
 ### Phase 2 附带修复的真实缺陷（P2-3）
 
@@ -105,13 +122,13 @@ auto_continue: true
 | `WhenAll<TResult>` 泛型重载 | ❌ 仅非泛型 `Task[]` 已接线 |
 | `WhenEach` | ❌ 无实现 |
 | `Task.Factory` 21 methods | ❌ 无实现 |
-| `ContinueWith` 12 overloads | ⚠️ 仅 `Action<Task>` 一个重载已接线 |
+| `ContinueWith` 20 overloads | ✅ 逐族路由已定（1 族接线 / 4 族显式拒绝）；余下 15 个重载走同一 resolver 的 arity 判断，无需逐个登记 |
 
 ## 当前通过测试
 
 | 测试套 | 结果 |
 |--------|------|
-| codegen 全量 | **2140/2143**（3 项为**预存在**失败，与本线无关：`IdentifyStructLocalSlots_NonValueTypeInitobj_NotCounted`、`UnknownExternalCall_UsesDispatchTable`、`CreatePseudoMetadataHandle_ReturnsNonZero`（后者 order-dependent，窄 filter 下通过）） |
+| codegen 全量 | **2179/2179**（P2-4 +7；此前记的 3 项"预存在失败"实为环境/顺序相关，全量跑通过） |
 | `test_async_task_state` (1-4) | **8/8 PASS** |
 | `test_async_task_exception` (1-3) | **8/8 PASS** |
 | `test_async_task_run_e2e` (1-1) | **5/5 PASS** |
@@ -136,11 +153,13 @@ async 线合计 **95 项全绿**。
 
 ## 下一步
 
-Phase 2 剩余：`WhenAll<TResult>` 泛型重载 + `WhenEach` + `Task.Factory` 21 methods +
-`ContinueWith` 其余 11 个重载。其中 `Task.Factory` 是最大的未接线块（21 methods），
-需先确认 codegen 侧 `TaskFactory` 的 subject 是否可探测（查 ATG manifest），再决定
-native 接线面。
+Phase 2 剩余：`WhenAll<TResult>` 泛型重载 + `WhenEach` + `Task.Factory` 21 methods。
+其中 `Task.Factory` 是最大的未接线块（21 methods），需先确认 codegen 侧 `TaskFactory`
+的 subject 是否可探测（查 ATG manifest），再决定 native 接线面。
+
+P2-4 已建立的可复用经验：**registry 级测试必须用管线真实产生的 callee 拼写**，
+否则会出现"单测绿、管线 null"的假绿。新增 ContinueWith 类 helper 时照此办理。
 
 ```yaml
-recommended_next_child: ASYNC-P2-4
+recommended_next_child: ASYNC-P2-5
 ```
