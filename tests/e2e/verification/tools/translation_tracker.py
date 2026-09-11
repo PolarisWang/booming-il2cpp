@@ -42,6 +42,7 @@ def _scan_family(root: Path, family: str) -> dict:
         "annotatedWrappers": 0,
         "nativeGenerated": 0,
         "noCanonicalBody": 0,
+        "phantomSubject": 0,
         "methodKindHistogram": Counter(),
         "failedByAvailability": Counter(),
         "byChunk": {},
@@ -74,8 +75,14 @@ def _scan_family(root: Path, family: str) -> dict:
         view["declaredMethods"] += entry["declared"]
         view["annotatedWrappers"] += annotated
         view["nativeGenerated"] += cs.get("nativeGenerated", 0)
-        no_canon = max(0, annotated - cs.get("nativeGenerated", 0))
+        # PhantomSubject entries were never emitted by the ATG, so they are not
+        # translation debt — exclude them from the NoCanonicalBody residual or a
+        # generator crash would be counted as coverage that still needs writing.
+        phantoms = cs.get("phantomSubject", 0)
+        view["phantomSubject"] += phantoms
+        no_canon = max(0, annotated - cs.get("nativeGenerated", 0) - phantoms)
         view["noCanonicalBody"] += no_canon
+        entry["phantomSubjectDeclared"] = phantoms
         if annotated:
             view["chunks_with_data"] += 1
 
@@ -103,11 +110,17 @@ def _print_view(view: dict) -> None:
     a = view["annotatedWrappers"]
     ng = view["nativeGenerated"]
     ncb = view["noCanonicalBody"]
+    phantom = view["phantomSubject"]
     print(f"\nFamily: {fam}")
     print(f"  declared methods      : {d}")
     print(f"  annotated wrappers(fact): {a}")
     print(f"  NativeGenerated        : {ng}")
     print(f"  NoCanonicalBody/fallback: {ncb}")
+    if phantom:
+        # Not translation debt: the ATG skipped the declaring type mid-generation, so
+        # these wrappers were never emitted.  Printed separately so a generator crash
+        # is never mistaken for coverage that still needs translating.
+        print(f"  PhantomSubject (ATG skip): {phantom}")
     if a:
         print(f"  native share of annotated: {ng / a * 100:.1f}%")
     print(f"  method-kind histogram    : {dict(view['methodKindHistogram'])}")
