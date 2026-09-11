@@ -5,7 +5,7 @@
 ```yaml
 task_id: async-task-industrialization
 task_type: roadmap
-phase: phase-0-止血
+phase: phase-1-核心执行语义
 roadmap_or_plan: docs/dev/in-progress/async-task-industrialization/roadmap-v1-01.md
 design: docs/dev/in-progress/async-task-industrialization/design-v1-01.md
 created: 2026-09-07
@@ -47,13 +47,53 @@ auto_continue: true
 |------|------|
 | 非泛型 `SetResult[]` / `TrySetResult[]` 声明 1 个 slot 但 native 函数要 2 arg | registry 改为 2-slot、`rawArgumentIndices: {0,1}` |
 
+## Phase 1 — 核心执行语义
+
+设计验收点（design-v1-01.md Phase 1）：**退出 = 1-3 反例通过（这一条是整条路径最重要的验收点）**
+
+| # | 内容 | 反例 | 状态 |
+|---|------|------|------|
+| 1-1 | `Task.Run` 端到端 | 委托真的在线程池上执行（不只"任务完成"） | ✅ `4ae78ede3` |
+| 1-2 | `Task<T>::Result` / `Task::Wait` 阻塞语义 | Wait 阻塞 ≥ 任务时长；且**不得自旋占核** | ✅ `4830b6064` |
+| 1-3 | **异常传播** 🔴 | faulted 任务 `Wait()`/`Result` **必须抛**，不得静默返 0 | ✅ `da19ca0d0` |
+| 1-4 | 三态区分 | cancelled / faulted / resolved 互斥且可区分 | ✅ `fae9f4071` |
+
+配套测试修复：
+| # | 内容 | 状态 |
+|---|------|------|
+| 1-5 | 测试 repo-root 遍历跳过 worktree 根 → 读到主检出陈旧 DLL | ✅ `f80aada50` |
+| 1-6 | `SubjectIdDiscovery` 硬编码 `bin/Release` | ✅ `d39244fae` |
+| 1-7 | `Task.Run` emission 层端到端断言（替换假 "KNOWN LIMITATION"） | ✅ `f96d838fb` |
+
+**Phase 1 反例验证方式（决策2=A）**：每个反例都做过 in-place revert 反证 —— 复原缺陷后
+对应测试必须失败，且不依赖该性质的测试保持绿。逐条记录在各 commit message。
+
+- 1-4：恢复 `canceled := faulted&&!exception` → 3 FAIL（含 `PayloadLessFaultIsNotCancellation`）
+- 1-3：恢复 Wait 静默 `return 1` → `PayloadLessFaultRaisesFromWaitToo` FAIL
+- 1-1：注释掉 `chaos_delegate_object_invoke` → 3 FAIL / 2 PASS（不依赖委托的仍绿）
+- 1-2：恢复 yield() 自旋 → `BlockedWaitDoesNotSpinACore` FAIL（157ms CPU / 150ms 等待）
+
+### Phase 1 附带修复的真实缺陷
+
+| 缺陷 | 说明 | commit |
+|------|------|--------|
+| Wait 自旋占核 + 饥饿活锁 | busy-wait 在 waiter 多于空闲核时饿死 worker → 表现为挂起 | `4830b6064` |
+| TCS `try_set_canceled` 置 `faulted` | 三态回退（把取消上报为普通 fault） | `4830b6064` |
+| `set_*`/`try_set_*` 未维护 `canceled` | 任务可能同时报告两种状态 | `4830b6064` |
+
 ## 当前通过测试
 
 | 测试套 | 结果 |
 |--------|------|
-| codegen 全量 | **2165/2165 PASS** |
-| native async smoke | **28/28 PASS** (27 async + 1 D3 re-init) |
-| threading-tasks chunk build | 待 foundation-dll pipeline 确认（依赖 uncommitted 改动） |
+| codegen 全量 | **2172/2172 PASS** |
+| `test_async_task_state` (1-4) | **8/8 PASS** |
+| `test_async_task_exception` (1-3) | **8/8 PASS** |
+| `test_async_task_run_e2e` (1-1) | **5/5 PASS** |
+| `test_async_task_blocking` (1-2) | **5/5 PASS** |
+| `test_async_integration_smoke` | **28/28 PASS**（无回归） |
+
+基线修正：此前文档记的 codegen 2165/2165 是在**主检出**上跑出的数字；worktree 内正确
+解析后为 **2172/2172**（1-6 修复后）。
 
 ## 关键文档
 
@@ -64,9 +104,13 @@ auto_continue: true
 
 ## 下一步
 
-Phase 1（核心执行语义）：`Task.Run` / `Task.Wait` / `Task.Result` / **异常传播**。
-首个子任务：`ASYNC-P1-1` — `Task.Run` registry 接线（已有完整 native 实现）。
+Phase 2 — 组合子：`WhenAll` / `WhenAny` / `WhenEach` + `ContinueWith` 12 overloads
++ `Task.From*` + `Task.Factory` 21 methods。
+
+native 侧 `chaos_task_when_all` / `chaos_task_when_any` 已存在（P3-3），但**尚无反例测试**，
+且 `WhenEach` / `ContinueWith` / `Task.Factory` 需逐个接线。先建 WhenAll/WhenAny 反例
+（结果集 = `[1,2,3]`、winner index 正确、子 fault → 聚合 fault）。
 
 ```yaml
-recommended_next_child: ASYNC-P1-1
+recommended_next_child: ASYNC-P2-1
 ```
