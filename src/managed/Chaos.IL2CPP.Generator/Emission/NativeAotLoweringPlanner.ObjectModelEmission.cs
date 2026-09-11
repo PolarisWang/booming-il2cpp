@@ -26,25 +26,180 @@ public sealed partial class NativeAotLoweringPlanner
 		if (_vtableSlotMap == null)
 			return (0, 0);
 
-		if (!_methodsByDeclaringType.TryGetValue(ifaceSubjectId, out var ifaceMethods))
+		// ── Interface methods supplied directly (module-local interfaces) ──────
+		// When the interface itself is part of this module its MethodDefinitions are
+		// present, so we can read its method list exactly.
+		if (_methodsByDeclaringType.TryGetValue(ifaceSubjectId, out var ifaceMethods))
+		{
+			var directSlots = new List<int>();
+			foreach (var method in ifaceMethods)
+			{
+				if (method.IsStatic) continue;
+
+				var sig = GetMethodSignatureSuffix(method.SubjectId);
+				if (_vtableSlotMap.TryGetValue(sig, out int slot))
+				{
+					directSlots.Add(slot);
+				}
+			}
+
+			if (directSlots.Count > 0)
+				return (directSlots.Min(), directSlots.Count);
+		}
+
+		// ── Interface methods supplied indirectly (external closure interfaces) ─
+		//
+		// ASYNC-P2-8 A4. For an interface from the external closure (e.g.
+		// System.Private.CoreLib's IAsyncEnumerator<T>) no MethodDefinition carries it
+		// as declaring type, so the branch above misses and this helper used to return
+		// (0, 0). That is NOT a conservative placeholder: at runtime
+		// ScanIfaceMapForMethod (vtable_registry_resolve.cpp) requires
+		// `declared_method_token < entries[ifi].method_count` before indexing
+		// `vtable_array[vtable_offset + declared_method_token]`. A zero method_count
+		// makes that guard reject every token and return nullptr — a silent null
+		// dispatch on an interface the bloom filter has ALREADY reported as present
+		// (iface_bitmap is computed independently and is correctly non-zero).
+		//
+		// Recover the interface's members from the types in this module that implement
+		// it explicitly. A subject id of the form
+		//   <declaring>::<IFace>.<Member>:<Signature>
+		// names an explicit implementation of <IFace>.<Member>. The vtable slot map is
+		// keyed on the whole explicit spelling (GetMethodSignatureSuffix returns
+		// everything after `::` and does NOT strip the interface qualifier — verified
+		// against an emitted slot map), so the recovered slots must be looked up with
+		// that same spelling, not with a bare member name.
+		// Distinct member spellings only: a subject can be reachable through several
+		// dictionaries, and counting it twice would inflate method_count past the real
+		// number of members and push the window past the end of the vtable.
+		var memberSpellings = new HashSet<string>(StringComparer.Ordinal);
+		string? qualifier = BuildShortInterfaceQualifier(ifaceSubjectId);
+		if (qualifier is null)
 			return (0, 0);
 
-		var slots = new List<int>();
-		foreach (var method in ifaceMethods)
+		foreach (var method in _methodsBySubjectId.Values)
 		{
-			if (method.IsStatic) continue;
+			var sid = method.SubjectId;
+			if (string.IsNullOrEmpty(sid)) continue;
 
-			var sig = GetMethodSignatureSuffix(method.SubjectId);
-			if (_vtableSlotMap.TryGetValue(sig, out int slot))
+			int sep = sid.IndexOf("::", StringComparison.Ordinal);
+			if (sep <= 0) continue;
+			var afterSep = sid.Substring(sep + 2);
+
+			if (!afterSep.StartsWith(qualifier, StringComparison.Ordinal)) continue;
+
+			// `IValueTaskSource` is a strict prefix of `IValueTaskSource<System.Boolean>`,
+			// so a plain StartsWith also matches the generic interface's members. Attribute
+			// each member to the longest tracked interface that qualifies it, otherwise the
+			// non-generic interface would absorb the generic one's window.
+			var owner = LongestInterfaceOwner(sid, sep);
+			if (!string.Equals(owner, qualifier, StringComparison.Ordinal)) continue;
+
+			memberSpellings.Add(afterSep);
+		}
+
+		var recoveredSlots = new List<int>();
+		foreach (var spelling in memberSpellings)
+		{
+			if (_vtableSlotMap.TryGetValue(spelling, out int slot))
+				recoveredSlots.Add(slot);
+		}
+
+		// ── Implicitly-implemented members of well-known runtime interfaces ──────
+		//
+		// A member implemented implicitly has no interface qualifier in its subject id
+		// — `IAsyncStateMachine`'s two members appear as plain `MoveNext:System.Void()`
+		// and `SetStateMachine:System.Void(...)`, indistinguishable by spelling from any
+		// other method of the type. The explicit-implementation recovery above cannot see
+		// them, so an interface implemented entirely implicitly would still emit a zero
+		// method_count and silently null-dispatch.
+		//
+		// Only interfaces with a KNOWN member list are handled, and each candidate is
+		// taken only if the slot map actually contains it, so this cannot invent a window
+		// for an interface the type does not really implement.
+		if (recoveredSlots.Count == 0
+		    && s_implicitInterfaceMembers.TryGetValue(ifaceSubjectId, out var implicitMembers))
+		{
+			foreach (var member in implicitMembers)
 			{
-				slots.Add(slot);
+				if (_vtableSlotMap.TryGetValue(member, out int slot))
+					recoveredSlots.Add(slot);
 			}
 		}
 
-		if (slots.Count == 0)
+		if (recoveredSlots.Count == 0)
 			return (0, 0);
 
-		return (slots.Min(), slots.Count);
+		// Slots are assigned per-type in sorted-subject-id order (see the slot allocation
+		// loop), so this interface's members occupy a contiguous run and `min(slots)` is
+		// the window base the runtime's `vtable_offset + declared_method_token` needs.
+		return (recoveredSlots.Min(), recoveredSlots.Count);
+	}
+
+	/// <summary>
+	/// Members of runtime interfaces that C# implements <em>implicitly</em>, keyed by
+	/// interface subject id and expressed as vtable slot-map keys (the subject id's text
+	/// after <c>::</c>). Implicit implementations carry no interface qualifier, so they
+	/// are invisible to the explicit-implementation recovery in
+	/// <see cref="ComputeInterfaceVtableInfo"/>; without this table such an interface
+	/// emits <c>{ stable_id, 0, 0 }</c> and every dispatch through it returns null.
+	/// </summary>
+	private static readonly Dictionary<string, string[]> s_implicitInterfaceMembers =
+		new(StringComparer.Ordinal)
+		{
+			["System.Private.CoreLib/System.Runtime.CompilerServices.IAsyncStateMachine"] =
+			[
+				"MoveNext:System.Void()",
+				"SetStateMachine:System.Void(System.Runtime.CompilerServices.IAsyncStateMachine)",
+			],
+		};
+
+	/// <summary>
+	/// Given a method subject id and the index of its <c>::</c>, returns the longest
+	/// tracked interface qualifier that the subject's explicit-implementation part
+	/// matches, in the <c>Ns.IFace&lt;Args&gt;.</c> form. This is "the interface this
+	/// member implements", resolved by longest match so that a non-generic interface
+	/// cannot claim a generic sibling's members.
+	/// </summary>
+	private string? LongestInterfaceOwner(string methodSubjectId, int separatorIndex)
+	{
+		var afterSep = methodSubjectId.Substring(separatorIndex + 2);
+
+		// Candidates are the tracked interface types. The member name that follows the
+		// qualifier must be one identifier, so the longest candidate whose remainder is
+		// a bare identifier is the owner.
+		if (_interfaceTypeSubjectIds is null) return null;
+		string? best = null;
+		foreach (var ifaceId in _interfaceTypeSubjectIds)
+		{
+			var q = BuildShortInterfaceQualifier(ifaceId);
+			if (q is null) continue;
+			if (!afterSep.StartsWith(q, StringComparison.Ordinal)) continue;
+
+			var rest = afterSep.Substring(q.Length);
+			int colon = rest.IndexOf(':');
+			if (colon <= 0) continue;
+			var name = rest.Substring(0, colon);
+			if (name.Contains('.') || name.Contains('<')) continue;
+
+			if (best is null || q.Length > best.Length) best = q;
+		}
+		return best;
+	}
+
+	/// <summary>
+	/// Rewrites a tracked interface subject id into the qualifier form C# uses for an
+	/// explicit interface implementation: drop the <c>AssemblyName/</c> prefix and
+	/// append the <c>.</c> that separates the interface from the member name.
+	/// <c>System.Private.CoreLib/Ns.IAsyncEnumerator&lt;System.Int32&gt;</c> →
+	/// <c>Ns.IAsyncEnumerator&lt;System.Int32&gt;.</c>
+	/// </summary>
+	private static string? BuildShortInterfaceQualifier(string ifaceSubjectId)
+	{
+		if (string.IsNullOrEmpty(ifaceSubjectId)) return null;
+
+		int slash = ifaceSubjectId.IndexOf('/');
+		var text = slash >= 0 ? ifaceSubjectId.Substring(slash + 1) : ifaceSubjectId;
+		return text.Length == 0 ? null : text + ".";
 	}
 
 	private void EmitObjectModelDeclarations(

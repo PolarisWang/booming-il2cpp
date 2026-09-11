@@ -421,6 +421,21 @@ public sealed partial class NativeAotLoweringPlanner
     internal List<string> UnsupportedAsyncIteratorSubjectIds = new();
 
     /// <summary>
+    /// ASYNC-P2-8 A4. Subject ids of async-iterator state-machine members that went
+    /// through the REAL iterator lowering path rather than the A1 refusal stub.
+    ///
+    /// <para>
+    /// This exists so the A4 completion criterion is checkable from the outside: adding
+    /// support for one iterator shape must not silently widen into another. A test can
+    /// assert that a shape which is supposed to remain unsupported (e.g.
+    /// <c>YieldAfterAwait</c>, whose await-side lowering A4 does not implement) never
+    /// appears here — a bare "it is not in the unsupported list" check would also pass
+    /// for a method that was silently dropped.
+    /// </para>
+    /// </summary>
+    internal List<string> LoweredAsyncIteratorSubjectIds = new();
+
+    /// <summary>
     /// Maps unresolvable cross-assembly subjectId → index in kChaosExternalRuntimeFnTable.
     /// Populated by <see cref="PrebuildExternalRuntimeDispatchTable"/> before method body emission.
     /// </summary>
