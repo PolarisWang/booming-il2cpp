@@ -403,6 +403,24 @@ public sealed partial class NativeAotLoweringPlanner
     internal Dictionary<string, int> CodegenFailureByChunk = new();
 
     /// <summary>
+    /// ASYNC-P2-8 A1. Subject ids of async-ITERATOR state machines
+    /// (async IAsyncEnumerable&lt;T&gt; / async IAsyncEnumerator&lt;T&gt;) encountered during
+    /// emission. These are not yet supported and are recorded here rather than left to
+    /// degrade silently.
+    ///
+    /// <para>
+    /// <b>Why a dedicated list and not just a thrown exception:</b> emission runs behind
+    /// <c>BuildMethodSourceSafe</c>, which catches EVERY exception and substitutes an
+    /// unreachable stub. A throw from the emission site is therefore swallowed and the
+    /// build stays green — the exact fake-green shape A1 exists to remove. Recording the
+    /// subject ids here lets the generator surface them through
+    /// <c>kUnsupportedAsyncIteratorCount</c> / <c>kUnsupportedAsyncIterator0</c> in the
+    /// generated C++, which the build/verification layer can gate on.
+    /// </para>
+    /// </summary>
+    internal List<string> UnsupportedAsyncIteratorSubjectIds = new();
+
+    /// <summary>
     /// Maps unresolvable cross-assembly subjectId → index in kChaosExternalRuntimeFnTable.
     /// Populated by <see cref="PrebuildExternalRuntimeDispatchTable"/> before method body emission.
     /// </summary>
@@ -1288,6 +1306,8 @@ public sealed partial class NativeAotLoweringPlanner
         {
             globalDeclarations += $"// Codegen stub count — pipeline checks this\nextern \"C\" const int kCodegenFailureCount = {CodegenFailureCount};\n";
         }
+
+        globalDeclarations += EmitUnsupportedAsyncIteratorDeclarations();
 
         // Always define ChaosJitRegisterAll so runtime-entry.cpp can call it unconditionally.
         // In JIT mode (guarded by CHAOS_IL2CPP_JIT_MODE), it registers all methods for

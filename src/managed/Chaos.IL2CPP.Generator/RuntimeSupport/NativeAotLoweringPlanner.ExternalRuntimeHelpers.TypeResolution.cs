@@ -30,6 +30,17 @@ public sealed partial class NativeAotLoweringPlanner
 	private static bool TryGetAsyncStateMachineTypeName(string callee, out string? stateMachineTypeName)
 	{
 		stateMachineTypeName = null;
+		// ASYNC-P2-8 A1: an async-ITERATOR builder call is NOT a supported async shape, and
+		// must not be mistaken for one.  This method is only a name parser, so it returns
+		// false here rather than throwing: its callers run inside BuildMethodSourceSafe,
+		// which catches every exception and substitutes a silent stub — a throw would be
+		// invisible.  The authoritative "we do not support iterators" signal is raised in
+		// ClassifyAsyncMethod / EmitManagedMethod, which records the subject id so the
+		// generator can surface kUnsupportedAsyncIterator* in the generated C++.
+		if (IsAsyncIteratorBuilderCallee(callee))
+		{
+			return false;
+		}
 		if (TryParseAsyncTaskBuilderStartStateMachineType(callee, out stateMachineTypeName))
 		{
 			return true;
@@ -52,6 +63,26 @@ public sealed partial class NativeAotLoweringPlanner
 	private static bool TryParseAsyncTaskBuilderStartStateMachineType(string callee, out string? stateMachineTypeName)
 	{
 		return TryParseAsyncTaskBuilderStartStateMachineType(callee, out _, out stateMachineTypeName);
+	}
+
+	/// <summary>
+	/// ASYNC-P2-8 A1. True if <paramref name="callee"/> is an
+	/// <c>AsyncIteratorMethodBuilder</c> call — i.e. the enclosing method is an
+	/// <c>async IAsyncEnumerable&lt;T&gt;</c> / <c>async IEnumerator&lt;T&gt;</c> iterator
+	/// state machine. Such calls reach the lowering planner for the iterator's own
+	/// <c>MoveNext</c> (the builder is driven from inside the state machine, not from a
+	/// separate entry method as <c>AsyncTaskMethodBuilder::Start</c> is).
+	/// <para>
+	/// Detecting on the method subject id would be more precise, but this helper is
+	/// static and only has the callee spelling; every <c>AsyncIteratorMethodBuilder</c>
+	/// member is declared on that one type, so a substring test cannot false-positive on
+	/// a different builder.  It CAN false-positive on a user type with coincidentally
+	/// matching text — accepted, because the alternative is a silent wrong answer.
+	/// </para>
+	/// </summary>
+	private static bool IsAsyncIteratorBuilderCallee(string callee)
+	{
+		return callee.Contains("AsyncIteratorMethodBuilder", StringComparison.Ordinal);
 	}
 
 	private static bool TryParseAsyncTaskBuilderAwaitUnsafeOnCompleted(string callee, out string? awaiterTypeName, out string? stateMachineTypeName)

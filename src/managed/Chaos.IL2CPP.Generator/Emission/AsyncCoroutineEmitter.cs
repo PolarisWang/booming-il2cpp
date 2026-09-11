@@ -30,10 +30,21 @@ public sealed partial class NativeAotLoweringPlanner
             && subjectId.Contains("d__", StringComparison.Ordinal)
             && !subjectId.Contains("::", StringComparison.Ordinal); // type, not method
     }
-    internal enum AsyncMethodKind { NotAsync, AsyncTask, AsyncTaskOfT, AsyncValueTask, AsyncValueTaskOfT, AsyncVoid, Complex }
+    internal enum AsyncMethodKind { NotAsync, AsyncTask, AsyncTaskOfT, AsyncValueTask, AsyncValueTaskOfT, AsyncVoid, AsyncIterator, Complex }
     private AsyncMethodKind ClassifyAsyncMethod(AotCoreIrMethodArtifact m)
     {
         if (!IsAsyncStateMachineMoveNext(m.SubjectId)) return AsyncMethodKind.NotAsync;
+        foreach (var i in m.Instructions)
+        {
+            var c = i.Callee; if (string.IsNullOrEmpty(c)) continue;
+            // ASYNC-P2-8 A1: must precede the AsyncTaskMethodBuilder test — checked in a
+            // separate pass because the iterator decision depends on the STATE MACHINE TYPE
+            // (`d__` vs `d__` with an IAsyncEnumerable interface), not merely on which
+            // builder name appears first in the instruction stream.  Falling through to the
+            // AsyncTask default below would emit task-shaped C++ (get_Task/SetResult) for an
+            // iterator state machine, which has neither.
+            if (c.Contains("AsyncIteratorMethodBuilder", StringComparison.Ordinal)) return AsyncMethodKind.AsyncIterator;
+        }
         foreach (var i in m.Instructions)
         {
             var c = i.Callee; if (string.IsNullOrEmpty(c)) continue;
