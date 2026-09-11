@@ -399,28 +399,32 @@ public sealed class AsyncPipelineTests
     }
 
     /// <summary>
-    /// ASYNC-P1-1: Task.Run registration smoke.
+    /// ASYNC-P1-1: Task.Run reaches the AOT IR end to end, and the lowered call
+    /// routes to the native ThreadPool runner rather than the interpreter
+    /// fallback.
     ///
-    /// The authoritative assertion for ASYNC-P1-1 lives in
-    /// RuntimeHelperShapeRegistryTests.TaskRun_WiredToNative, which proves the
-    /// registry routes Task::Run → the native async_task_run symbol (and that the
-    /// CancellationToken overloads deliberately do NOT match).
+    /// <para>
+    /// This was previously unwritable. An earlier revision of this test asserted
+    /// only that the async surface was intact and carried a comment declaring a
+    /// "known limitation: AsyncTestAssembly's non-async methods (RunAction) do
+    /// not reach the extracted AOT IR". That limitation was never real — it was
+    /// an artifact of the repo-root walk reading a stale fixture from the main
+    /// checkout (see ASYNC-P1-5, commit f80aada50). With the fixture resolving
+    /// to this tree, RunAction loads and lowers normally.
+    /// </para>
     ///
-    /// This test covers the pipeline-level view and documents a KNOWN LIMITATION:
-    /// AsyncTestAssembly's non-async methods (RunAction) do not currently reach the
-    /// extracted AOT IR — only the async methods and their compiler-generated state
-    /// machines do.  That is a pre-existing loader/link behaviour unrelated to the
-    /// Task.Run wiring, so this test asserts the async surface is intact rather than
-    /// asserting RunAction is present (which would fail for reasons that have nothing
-    /// to do with this change).
+    /// <para>
+    /// The registry-level assertion for the same wiring lives in
+    /// RuntimeHelperShapeRegistryTests.TaskRun_WiredToGenericShape. This test
+    /// covers the pipeline-level view: the subject is present, and the emitted
+    /// C++ for it calls the native symbol.
+    /// </para>
     /// </summary>
     [Fact]
-    public void TaskRun_SubjectAssemblyAsyncSurfaceIntact()
+    public void TaskRun_LowersToNativeAsyncTaskRun()
     {
-        if (!File.Exists(s_asyncAssemblyPath))
-        {
-            Assert.Fail($"AsyncTestAssembly.dll not built at {s_asyncAssemblyPath}");
-        }
+        Assert.True(File.Exists(s_asyncAssemblyPath),
+            $"AsyncTestAssembly.dll not built at {s_asyncAssemblyPath}");
 
         using var ctx = new TempCtx();
         var request = new ManagedClosureRequest(
@@ -439,10 +443,57 @@ public sealed class AsyncPipelineTests
 
         var subjectIds = result.AotCoreIr.Methods.Select(m => m.SubjectId).ToList();
 
-        // The async surface (which Task.Run feeds into) must be intact.
+        // The async surface must be intact.
         Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::GetOne"));
         Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::AwaitTcs"));
         Assert.Contains(subjectIds, id => id.Contains(">d__") && id.Contains("::MoveNext"));
+
+        // ...and the plain non-async method that calls Task.Run must also be there.
+        Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::RunAction"));
+
+        // The Task.Run call inside RunAction must lower to the native runner.
+        var runAction = result.AotCoreIr.Methods
+            .Single(m => m.SubjectId.Contains("AsyncMethods::RunAction"));
+
+        // At the AOT IR layer the call is still recorded against the MANAGED target
+        // (Task::Run). Substitution to the native symbol happens later, during
+        // emission, driven by the ShapeRegistry's DirectNativeSymbol. So the IR layer
+        // proves only that the call site survived lowering.
+        var loweredCalls = runAction.Instructions
+            .Select(i => i.TargetSymbol ?? i.Callee ?? i.TargetReference?.SubjectId)
+            .Where(s => !string.IsNullOrEmpty(s))
+            .ToList();
+        Assert.Contains(loweredCalls, s => s!.Contains("System.Threading.Tasks.Task::Run"));
+
+        // The load-bearing assertion is at the emission layer. This must emit the
+        // WHOLE assembly closure; the registry helper is emitted where the invocation
+        // is lowered, and slicing to a single subject is how an earlier revision of
+        // this test fooled itself into a weaker claim.
+        var outputRoot = Path.Combine(ctx.OutputRoot, "asyncgen");
+        var emitted = new NativeAotEmitter().GenerateFromArtifacts(
+            result.NativeAotLoweringPlan,
+            result.AotCoreIr,
+            result.ClosureManifest!,
+            result.MetadataRegistration,
+            result.SupplementalMetadataTemplate,
+            outputRoot,
+            mode: CodegenMode.Aot,
+            subjectMethods: null,
+            goldProfilePath: null,
+            allManagedMethods: result.AllManagedMethods);
+
+        var allGenerated = string.Join("\n",
+            emitted.GeneratedSources.Select(source =>
+                source.Contents ?? source.ContentsBuilder?.ToString() ?? string.Empty));
+
+        // Task.Run is wired: the lowered invocation calls the native ThreadPool runner.
+        Assert.Contains("async_task_run", allGenerated);
+
+        // Anti-fake-green: the call must NOT fall through to the interpreter's
+        // return-0 fallback. If it did, awaiting the result would silently yield 0
+        // (or null) instead of running the action — the exact class of defect this
+        // phase exists to eliminate.
+        Assert.DoesNotContain("ChaosExternalRuntimeFallback(async_task_run", allGenerated);
     }
 
     /// <summary>
