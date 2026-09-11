@@ -747,12 +747,21 @@ internal sealed class SdkEmitter
             Path.Combine(repoRoot, "third_party", "unordered_dense", "include"),
         };
 
-        // Add MSVC CRT include path and Windows SDK include paths for standard library headers
-        var (vcIncludeDir, sdkIncludeDirs) = FindVcAndSdkIncludePaths();
+        // Add MSVC CRT include path and Windows SDK include paths for standard library headers.
+        // Pass clPath so the MSVC include dir is derived from the SAME toolchain that
+        // will compile — otherwise `where cl.exe` may resolve one version (e.g. 14.38
+        // from PATH) while the include probe picks the newest on disk (14.42), and the
+        // mismatch surfaces as C1083 on corecrt_terminate.h.
+        var (vcIncludeDir, sdkIncludeDirs) = FindVcAndSdkIncludePaths(clPath);
         if (vcIncludeDir != null)
             includePaths.Add(vcIncludeDir);
         if (sdkIncludeDirs != null)
             includePaths.AddRange(sdkIncludeDirs);
+
+        if (vcIncludeDir == null)
+            Console.WriteLine("    WARN: MSVC include dir not resolved — precompile may fail (C1083)");
+        if (sdkIncludeDirs == null)
+            Console.WriteLine("    WARN: Windows SDK include dirs not resolved — precompile may fail (C1083)");
 
         var includeArgs = string.Join(" ", includePaths.Select(p => $"/I\"{p}\""));
 
@@ -986,23 +995,45 @@ internal sealed class SdkEmitter
     /// Returns (vcIncludeDir, sdkIncludeDirs) where sdkIncludeDirs contains
     /// the ucrt, um, and shared subdirectories of the Windows SDK.
     /// </summary>
-    private static (string? VcIncludeDir, List<string>? SdkIncludeDirs) FindVcAndSdkIncludePaths()
+    /// <param name="clPath">
+    /// Path to the cl.exe that will actually run the precompile.  Used to derive the
+    /// MSVC include dir from THAT toolchain's version, so compiler and headers stay in
+    /// lockstep.  Pass null to fall back to environment-based probing.
+    /// </param>
+    private static (string? VcIncludeDir, List<string>? SdkIncludeDirs) FindVcAndSdkIncludePaths(
+        string? clPath = null)
     {
         string? vcToolsRoot = null;
         string? vcVersion = null;
 
-        // 1. From VCToolsInstallDir
-        var vcToolsDir = Environment.GetEnvironmentVariable("VCToolsInstallDir");
-        if (!string.IsNullOrEmpty(vcToolsDir))
+        // 0. Derive from the cl.exe we will actually invoke.  Layout is
+        //    <MSVC>/<version>/bin/Host<x>/<arch>/cl.exe → up 4 levels to <MSVC>/<version>.
+        if (!string.IsNullOrEmpty(clPath))
         {
-            var di = new DirectoryInfo(vcToolsDir);
-            vcToolsRoot = di.Parent?.Parent?.FullName; // VCToolsInstallDir/bin/Hostx64/x64 → up 3 levels
-            if (vcToolsRoot != null)
+            var versionDir = new DirectoryInfo(Path.GetDirectoryName(clPath)!)
+                .Parent?.Parent?.Parent;
+            var candidate = versionDir == null ? null : Path.Combine(versionDir.FullName, "include");
+            if (candidate != null && Directory.Exists(candidate))
             {
-                // The version is the leaf name under VC/Tools/MSVC/<version>/
-                var msvcDir = new DirectoryInfo(Path.Combine(vcToolsRoot, ".."));
-                if (msvcDir.Exists)
-                    vcVersion = msvcDir.Name;
+                vcToolsRoot = versionDir!.FullName;
+                vcVersion = versionDir.Name;
+            }
+        }
+
+        // 1. From VCToolsInstallDir
+        if (vcToolsRoot == null)
+        {
+            var vcToolsDir = Environment.GetEnvironmentVariable("VCToolsInstallDir");
+            if (!string.IsNullOrEmpty(vcToolsDir))
+            {
+                var di = new DirectoryInfo(vcToolsDir);
+                vcToolsRoot = di.Parent?.Parent?.FullName;
+                if (vcToolsRoot != null)
+                {
+                    var msvcDir = new DirectoryInfo(Path.Combine(vcToolsRoot, ".."));
+                    if (msvcDir.Exists)
+                        vcVersion = msvcDir.Name;
+                }
             }
         }
 
@@ -1020,13 +1051,15 @@ internal sealed class SdkEmitter
             {
                 if (!Directory.Exists(basePath))
                     continue;
+                // Version-aware ordering: "14.9.0" must sort above "14.10.0" by numeric
+                // field, not lexically (string sort puts "14.10" < "14.9").
                 var versions = Directory.GetDirectories(basePath)
-                    .OrderByDescending(v => v)
+                    .OrderByDescending(v => NumericVersionKey(Path.GetFileName(v)))
                     .ToList();
                 if (versions.Count > 0)
                 {
                     vcToolsRoot = Path.Combine(basePath, versions[0]);
-                    vcVersion = versions[0];
+                    vcVersion = Path.GetFileName(versions[0]);
                     break;
                 }
             }
@@ -1045,7 +1078,6 @@ internal sealed class SdkEmitter
         var sdkDir = Environment.GetEnvironmentVariable("WindowsSdkDir");
         if (string.IsNullOrEmpty(sdkDir))
         {
-            // Fallback: common Windows Kits install path
             var sdkRoots = new[]
             {
                 @"C:\Program Files (x86)\Windows Kits\10",
@@ -1072,18 +1104,20 @@ internal sealed class SdkEmitter
                     sdkVerDir = null;
             }
 
-            // Fallback: probe for latest SDK version
+            // Fallback: probe for latest SDK version.  Filter to directories that
+            // actually contain ucrt/corecrt_terminate.h — an SDK version folder can
+            // exist without the UCRT payload installed, picking it yields C1083.
             if (sdkVerDir == null)
             {
                 var includeDir = Path.Combine(sdkDir, "Include");
                 if (Directory.Exists(includeDir))
                 {
                     var versions = Directory.GetDirectories(includeDir)
-                        .Select(Path.GetFileName)
-                        .OrderByDescending(v => v)
+                        .Where(d => File.Exists(Path.Combine(d, "ucrt", "corecrt_terminate.h")))
+                        .OrderByDescending(d => NumericVersionKey(Path.GetFileName(d)))
                         .ToList();
                     if (versions.Count > 0)
-                        sdkVerDir = Path.Combine(includeDir, versions[0]);
+                        sdkVerDir = versions[0];
                 }
             }
 
@@ -1100,6 +1134,18 @@ internal sealed class SdkEmitter
         }
 
         return (vcIncludeDir, sdkIncludeDirs);
+    }
+
+    /// <summary>
+    /// Sort key for dotted numeric version strings ("14.42.34433", "10.0.22621.0").
+    /// Lexical ordering mis-ranks unequal-width fields ("14.9" vs "14.10"), so compare
+    /// field-by-field numerically and fall back to the raw string for non-numeric parts.
+    /// </summary>
+    private static string NumericVersionKey(string version)
+    {
+        var parts = version.Split('.');
+        var keyed = parts.Select(p => int.TryParse(p, out var n) ? n.ToString("D10") : p);
+        return string.Join(".", keyed);
     }
 
     /// <summary>
