@@ -88,6 +88,16 @@ TestResults/
 # Debug/ad-hoc scripts (moved from root to scripts/debug/)
 scripts/debug/
 
+# One-shot scratch scripts.  `scripts/debug/` is already ignored above, but
+# agents keep force-adding (git add -f) tmp_* files there during debugging and
+# they then trip the hygiene gate's scripts-hygiene check.  A pattern that
+# matches the filename anywhere makes the intent explicit and survives -f
+# being used for a different file in the same directory.
+tmp_*.py
+tmp_*.cmd
+tmp_*.ps1
+tmp_*.sh
+
 # Generated codegen output and profiling data
 output/
 output_test_string/
