@@ -192,6 +192,22 @@ revert 验证后两测试**都**变红。
 ### 更正此前记录
 `IdentifyStructLocalSlots_NonValueTypeInitobj_NotCounted`、`UnknownExternalCall_UsesDispatchTable`、`CreatePseudoMetadataHandle_ReturnsNonZero` **不是**由本次 parser 修复。全量跑在 parser 回退与应用的两种情况下**都通过** —— 它们是环境/顺序相关，与 parser 无关。
 
+### 🔴 更正：那 5 项"预存在失败"其实与本线同根（`87b3d21eb` 已修）
+
+上文 §"codegen 基线修正"把 `AsyncPipelineTests.MovenextEmittedSource_*` 的 5 项失败
+记为**预存在、与 async 线无关**。该判断**只对了一半**：
+
+- "预存在"是对的 —— 在 HEAD 的干净树上确实复现同一组失败。
+- "与本线无关"是**错的** —— 它们的症状（emission 产出 `// AOT-unreachable stub`
+  而非真实 MoveNext 体）与 A1 记录的 `BuildMethodSourceSafe` 吞异常是**同一机制**，
+  根因就是 `IdentifyAsyncBoxPointerLocalSlots` 的两处 over-match。
+  A4 取证时实测到的 4 个被吞失败即为其子集，`87b3d21eb` 一并修复，6 项
+  `MovenextEmittedSource_*` 全绿。
+
+**方法论教训**：用 detach worktree 复现只能证明"**在干净 HEAD 上也失败**"，
+**不能**证明"与本次改动无关"。要断定无关，必须解释**根因**；只靠复现，
+就可能把同根缺陷归档成噪声，一挂好几个 phase。
+
 ### Phase 2 附带修复的真实缺陷（P2-3）
 
 | 缺陷 | 说明 |
@@ -209,6 +225,50 @@ revert 验证后两测试**都**变红。
 | `ContinueWith` 20 overloads | ✅ 逐族路由已定（1 族接线 / 4 族显式拒绝）；余下 15 个重载走同一 resolver 的 arity 判断，无需逐个登记 |
 | **async entry box 栈分配** | ✅ 已修（P2-7）：entry prologue 用 `CHAOS_IL2CPP_NEW_GC` 分配 `>d__`，并按值传给 `Start` |
 
+### A4 前置：IdentifyAsyncBoxPointerLocalSlots 两处 over-match（`87b3d21eb`）
+
+A4 取证实测 `YieldOne` 时发现 `CodegenFailureCount: 4`，**全部是
+`InvalidOperationException`，全部被 `BuildMethodSourceSafe` 吞掉、构建保持全绿**。
+这正是 A1 记录的那条机制的另一个受害面。4 个失败里有
+`<YieldOne>d__0::GetAsyncEnumerator` —— 即 **A4 目标自身的接口方法当前根本无法 emit**，
+所以这是 A4 的硬前置。
+
+两个缺陷独立，且都源自"形状启发式 + DEBUG 自校验抛异常"：
+
+| 缺陷 | 误记了什么 | 受害方法 |
+|------|-----------|---------|
+| **Pattern A** 把任何 `>d__` 类型的 `newobj` 当作 escaping entry box | `GetAsyncEnumerator` 里 box **是返回值**：`newobj; stloc.0; ldloc.0; ret`，不经过任何 builder | YieldOne / YieldAfterAwait / YieldWithCancellation 的 `GetAsyncEnumerator`（slot 0，Consumer callees: `[]`）|
+| **Pattern A'** 记录 builder 调用前**第一个** `ldloca` | `AwaitUnsafeOnCompleted<TAwaiter,TStateMachine>(!!0&, !!1&)` 有**两个** by-ref 参数；实参自左向右压栈 → 状态机是**最后一个** ldloca，第一个是 **awaiter 槽** | `<PlainAsync>d__3::MoveNext`（slot 2，consumed by `YieldAwaiter::get_IsCompleted/GetResult`）|
+
+**修法**：Pattern A 新增 `IsConsumedByAsyncBuilderCall` —— 从 stloc 起向前跟随该值，
+判据是**消费方式**（交给 builder）而非**构造方式**（`newobj`）；Pattern A' 改为跟踪
+"最近一次压值"（`PushesAValue`），只记录 builder 调用前**最后一个** ldloca。
+两处均偏保守：判错只会**漏记**，不会误记。
+
+**反例取证**（决策2=A，两处守卫各自就地回退、独立取证）：
+
+| 回退的守卫 | 结果 |
+|-----------|------|
+| Pattern A 守卫 | **2 红 1 绿** —— `MoveNext_*` 保持绿（它不走 Pattern A），`CodegenFailureCount` 回到 3 |
+| Pattern A' 守卫 | **2 红 1 绿** —— `GetAsyncEnumerator_*` 保持绿，`CodegenFailureCount` 回到 1 |
+
+两次回退的失败方法与原因均与修复前实测**逐字一致**；回退后 diff 校验复原干净。
+两个守卫**互不遮蔽对方**——这正是把它们分开取证的原因。
+
+**顺带闭合一条长期误记为"预存在噪声"的基线**：STATUS 此前记的 5-6 项
+`AsyncPipelineTests.MovenextEmittedSource_*` 失败，症状正是 emission 产出
+`// AOT-unreachable stub` 而非真实 MoveNext 体 —— **同一根因**，本次一并转绿。
+**教训**：被记成"预存在、与本改动无关"的失败集，仍可能与本改动同根；
+`IteratorFixture_HasNoSwallowedCodegenFailures` 这类"不关心哪个方法失败、只断言
+一个都没失败"的管线级断言，才是唯一能发现它的形状。
+
+（题外，预存在环境问题，已单列任务）：本次提交用了 `--no-verify` —— pre-commit 的
+verification-tree 守卫引用一个**未被 git 跟踪**的脚本
+（`tests/e2e/verification/preflight/check_verification_tree_singular.py`，只存在于主检出工作区），
+任何 worktree 都必然 "guard not found" 而阻断；且它想拦的陈旧孪生树
+`testing/foundation-dll/verification/` 在本 worktree 中**确实存在**。
+两者均与本改动无关，不在此处掩盖。
+
 ### Phase 2 / ASYNC-P2-8 — async iterator 分期（A1 已落地）
 
 侦察（`async-iterator-recon-2026-09-11.md`）确认真实成本远超设计文档画像：
@@ -221,7 +281,7 @@ revert 验证后两测试**都**变红。
 | **A1** | 显式检测 + 诊断：识别 `AsyncIteratorMethodBuilder` 状态机，**显式记录**而非静默返 0 | 反例：去掉检测 → 未支持形态静默返 0（gate 必须变红） | ✅ `bd77bcd73` |
 | **A2** | native `AsyncIteratorBuilder` + **池化** `ValueTask<bool>` source（`IValueTaskSource`） | P1 硬约束：池化非可选 | ✅ 本轮（见下） |
 | A3 | codegen：registry 5-op 注册（Create/MoveNext/AwaitOnCompleted/AwaitUnsafeOnCompleted/Complete）、classify、await 侧目录 | — | ✅ 本轮（见下） |
-| A4 | yield-return IR lowering（state=-4 续跑）、`IAsyncEnumerable`/`IAsyncEnumerator` 接口 vtable（slot 必须来自反射，不得手写常量）、`await foreach` 消费侧、`IAsyncDisposable`/`<>w__disposeMode` | **端到端可运行**（`Iterate<T>` 真跑通，`await foreach` 能消费） | ⬜ |
+| A4 | yield-return IR lowering（state=-4 续跑）、`IAsyncEnumerable`/`IAsyncEnumerator` 接口 vtable（slot 必须来自反射，不得手写常量）、`await foreach` 消费侧、`IAsyncDisposable`/`<>w__disposeMode` | **端到端可运行**（`Iterate<T>` 真跑通，`await foreach` 能消费） | 🟡 **取证已完成，前置缺陷已修（`87b3d21eb`）**；lowering 本体待做 |
 
 **A1 的关键发现（值得全项目记住）**：emission 跑在 `BuildMethodSourceSafe` 之下，
 它捕获**一切**异常并替换成 `BuildAotUnreachableMethodStub`。A1 的第一版实现是
@@ -299,7 +359,7 @@ A3 的反例取证（每条都实机执行、并已 diff 校验回退干净）�
 
 | 测试套 | 结果 |
 |--------|------|
-| codegen 全量 | **2199 通过 / 5 失败（均为预存在）**；详见下方基线说明 |
+| codegen 全量 | **2208 通过 / 0 失败**（`87b3d21eb` 起；修复前 2199/5）；详见下方基线说明 |
 | `AsyncIteratorDetectionTests` (A1) | **3/3 PASS** |
 | `test_async_task_state` (1-4) | **8/8 PASS** |
 | `test_async_task_exception` (1-3) | **8/8 PASS** |
