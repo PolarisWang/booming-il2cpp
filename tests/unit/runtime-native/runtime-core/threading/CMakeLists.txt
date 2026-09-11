@@ -134,6 +134,22 @@ chaos_native_add_test(test_async_task_factory
     LABELS "unit;threading"
 )
 
+# async_iterator_test — ASYNC-P2-8 A2: the native iterator source pool +
+# AsyncIteratorMethodBuilder ops.  A2's only new failure mode is POOL RECYCLING (a
+# stale awaiter observing a recycled source's new value — silently wrong, not a
+# crash), so the tests target the token/version boundary and the overflow path rather
+# than the happy path.
+#
+# Compiles async_stubs.cpp directly: the second half of the file drives the extern "C"
+# chaos_async_iterator_* entry points that codegen actually binds to, and a bug
+# confined to that translation layer (int16↔int32 token, INTPTR↔fn-pointer) would be
+# invisible if only the header classes were exercised.
+chaos_native_add_test(test_async_iterator
+    async_iterator_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    LABELS "unit;threading"
+)
+
 # queue_backpressure_test — Global queue backpressure verification (T2-QUEUE)
 chaos_native_add_test(test_queue_backpressure
     queue_backpressure_test.cpp

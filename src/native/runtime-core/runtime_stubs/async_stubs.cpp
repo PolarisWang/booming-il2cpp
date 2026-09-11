@@ -11,6 +11,7 @@
 
 #include <chaos/native_types.h>
 #include <chaos/async.h>
+#include <chaos/async_iterator.h>
 #include "async_stubs.h"
 #include "exception_helpers.h"
 #include "exception_jmp.h"
@@ -726,6 +727,177 @@ CHAOS_IL2CPP_INTPTR chaos_task_factory_start_new(
     using namespace chaos::il2cpp::common;
     if (delegate_fn == 0) return 0;
     return async_task_run(delegate_fn);
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// AsyncIteratorMethodBuilder (ASYNC-P2-8 A2).
+//
+// The thin extern "C" shell over chaos/async_iterator.h.  The logic lives in the
+// header so the standalone iterator tests can exercise it without linking
+// runtime_core; these wrappers exist so codegen-emitted calls have a real symbol
+// to bind to instead of an external-runtime stub.
+//
+// The builder handle IS a source pool; `sm_box` is the iterator state machine and
+// `move_next_fn` its native MoveNext.  Both are carried as CHAOS_IL2CPP_INTPTR and
+// reinterpret_cast at the boundary, matching how the AsyncTaskMethodBuilder
+// helpers in chaos/async.h take their state machine.
+// ══════════════════════════════════════════════════════════════════════════════
+
+CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_create(void) noexcept
+{
+    return chaos::il2cpp::common::async_iterator_builder_create();
+}
+
+CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_move_next(
+    CHAOS_IL2CPP_INTPTR builder_handle,
+    CHAOS_IL2CPP_INTPTR move_next_fn,
+    CHAOS_IL2CPP_INTPTR sm_box) noexcept
+{
+    return chaos::il2cpp::common::async_iterator_builder_move_next(
+        builder_handle,
+        reinterpret_cast<chaos::il2cpp::common::AsyncIteratorMoveNextFn>(move_next_fn),
+        reinterpret_cast<void*>(sm_box));
+}
+
+CHAOS_IL2CPP_INTPTR chaos_async_iterator_source_acquire(
+    CHAOS_IL2CPP_INTPTR builder_handle, CHAOS_IL2CPP_INT32* out_token) noexcept
+{
+    auto* pool = chaos::il2cpp::common::as_iterator_pool(builder_handle);
+    CHAOS_IL2CPP_INT16 token = 0;
+    auto* core = pool->Acquire(&token);
+    if (out_token != nullptr) *out_token = static_cast<CHAOS_IL2CPP_INT32>(token);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(core);
+}
+
+void chaos_async_iterator_source_release(
+    CHAOS_IL2CPP_INTPTR builder_handle, CHAOS_IL2CPP_INTPTR source) noexcept
+{
+    chaos::il2cpp::common::as_iterator_pool(builder_handle)->Release(
+        reinterpret_cast<chaos::il2cpp::common::AsyncIteratorSourceCore*>(source));
+}
+
+void chaos_async_iterator_source_set_result(
+    CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 value) noexcept
+{
+    reinterpret_cast<chaos::il2cpp::common::AsyncIteratorSourceCore*>(source)
+        ->SetResult(value != 0);
+}
+
+void chaos_async_iterator_source_set_exception(
+    CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR exception) noexcept
+{
+    reinterpret_cast<chaos::il2cpp::common::AsyncIteratorSourceCore*>(source)
+        ->SetException(exception);
+}
+
+CHAOS_IL2CPP_INT32 chaos_async_iterator_source_get_status(
+    CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 token) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INT32>(
+        reinterpret_cast<chaos::il2cpp::common::AsyncIteratorSourceCore*>(source)
+            ->GetStatus(static_cast<CHAOS_IL2CPP_INT16>(token)));
+}
+
+CHAOS_IL2CPP_INT32 chaos_async_iterator_source_get_result(
+    CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 token) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INT32>(
+        reinterpret_cast<chaos::il2cpp::common::AsyncIteratorSourceCore*>(source)
+            ->GetResult(static_cast<CHAOS_IL2CPP_INT16>(token)));
+}
+
+// AwaitOnCompleted / AwaitUnsafeOnCompleted.
+//
+// NOT a second continuation mechanism.  The awaiter here is the thing the iterator
+// is currently awaiting (Task.Yield, Task.Delay, ...) — an AsyncTask handle — and
+// resumption must be registered on THAT object via async_task_on_completed, exactly
+// as the AsyncTaskMethodBuilder path does.  Routing it to the pooled iterator source
+// instead would register the continuation against the wrong object and the state
+// machine would never resume.
+//
+// Both entry points share this body: the unsafe/on-completed distinction in .NET
+// governs whether the awaiter may resume the state machine on an arbitrary thread,
+// which native code does not enforce.
+//
+// The resume context is a one-shot heap box because the callback signature
+// (task_handle, ctx) differs from the builder's (sm_box), and because the same
+// state machine may be awaiting from several call sites in sequence — a static
+// slot would be clobbered by a later registration before an earlier one fires.
+
+namespace {
+
+struct AsyncIteratorResumeCtx {
+    chaos::il2cpp::common::AsyncIteratorMoveNextFn move_next;
+    void*                                        sm_box;
+};
+
+void AsyncIteratorResumeTrampoline(CHAOS_IL2CPP_INTPTR /*task_handle*/, void* ctx) noexcept
+{
+    auto* c = static_cast<AsyncIteratorResumeCtx*>(ctx);
+    if (c == nullptr) return;
+    auto move_next = c->move_next;
+    void* sm_box = c->sm_box;
+    delete c;
+    if (move_next != nullptr) move_next(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(sm_box));
+}
+
+CHAOS_IL2CPP_INTPTR AsyncIteratorAwaitOnCompleted(
+    CHAOS_IL2CPP_INTPTR awaiter_handle,
+    CHAOS_IL2CPP_INTPTR move_next_fn,
+    CHAOS_IL2CPP_INTPTR sm_box) noexcept
+{
+    using namespace chaos::il2cpp::common;
+    if (awaiter_handle == 0 || move_next_fn == 0) return 0;
+
+    auto* ctx = new (std::nothrow)
+        AsyncIteratorResumeCtx{reinterpret_cast<AsyncIteratorMoveNextFn>(move_next_fn),
+                               reinterpret_cast<void*>(sm_box)};
+    if (ctx == nullptr) CHAOS_IL2CPP_ABORT();
+
+    // async_task_on_completed returns 0 for an invalid handle — which here means the
+    // caller handed us something that is not an awaited task.  Treat that as a loud
+    // failure rather than a dropped continuation: a silently dropped resumption is
+    // an iterator that stops mid-sequence with no error, the exact class of failure
+    // this effort exists to eliminate.
+    if (async_task_on_completed(awaiter_handle, &AsyncIteratorResumeTrampoline, ctx) == 0)
+    {
+        delete ctx;
+        CHAOS_IL2CPP_ABORT();
+    }
+    return 1;
+}
+
+}  // namespace
+
+CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_await_on_completed(
+    CHAOS_IL2CPP_INTPTR awaiter_handle,
+    CHAOS_IL2CPP_INTPTR move_next_fn,
+    CHAOS_IL2CPP_INTPTR sm_box) noexcept
+{
+    return AsyncIteratorAwaitOnCompleted(awaiter_handle, move_next_fn, sm_box);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_await_unsafe_on_completed(
+    CHAOS_IL2CPP_INTPTR awaiter_handle,
+    CHAOS_IL2CPP_INTPTR move_next_fn,
+    CHAOS_IL2CPP_INTPTR sm_box) noexcept
+{
+    return AsyncIteratorAwaitOnCompleted(awaiter_handle, move_next_fn, sm_box);
+}
+
+void chaos_async_iterator_builder_complete(CHAOS_IL2CPP_INTPTR builder_handle) noexcept
+{
+    chaos::il2cpp::common::async_iterator_builder_complete(builder_handle);
+}
+
+void chaos_async_iterator_builder_destroy(CHAOS_IL2CPP_INTPTR builder_handle) noexcept
+{
+    // Create() heap-allocates the pool; nothing else owns it, so without this the
+    // pool leaks once per iterator.  Kept separate from Complete() deliberately: a
+    // state machine can be re-enumerated (GetAsyncEnumerator called twice), and
+    // Complete() runs at the end of the FIRST iteration — freeing there would leave
+    // the second enumeration holding a dangling builder.
+    chaos::il2cpp::common::async_iterator_builder_destroy(builder_handle);
 }
 
 }  // extern "C"

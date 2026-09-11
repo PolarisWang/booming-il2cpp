@@ -112,4 +112,69 @@ CHAOS_IL2CPP_INTPTR chaos_task_default_factory() noexcept;
 CHAOS_IL2CPP_INTPTR chaos_task_factory_start_new(
     CHAOS_IL2CPP_INTPTR factory, CHAOS_IL2CPP_INTPTR delegate_fn) noexcept;
 
+// ── AsyncIteratorMethodBuilder native surface (ASYNC-P2-8 A2) ──
+// The 5 ops the `async IAsyncEnumerable<T>` / `async IAsyncEnumerator<T>` state
+// machine calls, plus the source-pool accessors codegen needs.  Implemented in
+// async_stubs.cpp over chaos/async_iterator.h.
+//
+// These exist so the codegen ShapeRegistry can route AsyncIteratorMethodBuilder
+// calls to real semantics instead of degrading to an external-runtime stub.  A1
+// (kUnsupportedAsyncIterator*) detects the shape and refuses to emit silently;
+// A2 supplies the runtime it was refusing to fake.
+//
+// AwaitOnCompleted and AwaitUnsafeOnCompleted are BOTH declared — the original
+// plan registered only the former, which is why a `await Task.Yield()` inside an
+// iterator would still have fallen through.
+//
+// The builder handle is a source-pool pointer; `sm_box` is the iterator state
+// machine box and `move_next` its native MoveNext.
+CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_create(void) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_move_next(
+    CHAOS_IL2CPP_INTPTR builder_handle,
+    CHAOS_IL2CPP_INTPTR move_next_fn,
+    CHAOS_IL2CPP_INTPTR sm_box) noexcept;
+
+// Acquire a pooled source for one MoveNextAsync; the iteration token is written
+// through out_token (see below for why it is split out rather than a second return).
+// Never returns 0 and never blocks (overflow allocates) — see chaos/async_iterator.h
+// for why both properties are contractual.
+CHAOS_IL2CPP_INTPTR chaos_async_iterator_source_acquire(
+    CHAOS_IL2CPP_INTPTR builder_handle, CHAOS_IL2CPP_INT32* out_token) noexcept;
+void chaos_async_iterator_source_release(
+    CHAOS_IL2CPP_INTPTR builder_handle, CHAOS_IL2CPP_INTPTR source) noexcept;
+
+// Publish one iteration step's outcome (true = element available, false = done).
+void chaos_async_iterator_source_set_result(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 value) noexcept;
+void chaos_async_iterator_source_set_exception(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR exception) noexcept;
+CHAOS_IL2CPP_INT32 chaos_async_iterator_source_get_status(
+    CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 token) noexcept;
+CHAOS_IL2CPP_INT32 chaos_async_iterator_source_get_result(
+    CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 token) noexcept;
+
+// AwaitOnCompleted / AwaitUnsafeOnCompleted — one native implementation, two
+// entry points (native code does not enforce the unsafe/on-completed split).
+//
+// NOTE ON THE HANDLE.  The await path does NOT take the source handle + token: the
+// awaiter really being awaited is `<>v__promiseOfValueOrEnd`'s awaited task (e.g. a
+// Task.Yield inside the iterator), not the iterator's own pooled source.  The awaiter
+// is therefore an opaque AsyncTask handle, and resumption is registered on it through
+// the existing async.h machinery.  Passing a pooled source here instead would register
+// the continuation on the wrong object and the state machine would never resume.
+CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_await_on_completed(
+    CHAOS_IL2CPP_INTPTR awaiter_handle,
+    CHAOS_IL2CPP_INTPTR move_next_fn,
+    CHAOS_IL2CPP_INTPTR sm_box) noexcept;
+
+CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_await_unsafe_on_completed(
+    CHAOS_IL2CPP_INTPTR awaiter_handle,
+    CHAOS_IL2CPP_INTPTR move_next_fn,
+    CHAOS_IL2CPP_INTPTR sm_box) noexcept;
+
+void chaos_async_iterator_builder_complete(CHAOS_IL2CPP_INTPTR builder_handle) noexcept;
+
+// Pairs Create().  Complete() runs at the end of each iteration and deliberately does
+// NOT free the builder — a state machine can be enumerated twice.  Destroy() is the
+// single release point, called when the state machine's own lifetime ends.
+void chaos_async_iterator_builder_destroy(CHAOS_IL2CPP_INTPTR builder_handle) noexcept;
+
 }  // extern "C"

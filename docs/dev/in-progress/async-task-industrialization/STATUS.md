@@ -219,7 +219,7 @@ revert 验证后两测试**都**变红。
 | 期 | 内容 | 验收 | 状态 |
 |----|------|------|------|
 | **A1** | 显式检测 + 诊断：识别 `AsyncIteratorMethodBuilder` 状态机，**显式记录**而非静默返 0 | 反例：去掉检测 → 未支持形态静默返 0（gate 必须变红） | ✅ `bd77bcd73` |
-| A2 | native `AsyncIteratorBuilder` + **池化** `ValueTask<bool>` source（`IValueTaskSource`） | P1 硬约束：池化非可选 | ⬜ |
+| **A2** | native `AsyncIteratorBuilder` + **池化** `ValueTask<bool>` source（`IValueTaskSource`） | P1 硬约束：池化非可选 | ✅ 本轮（见下） |
 | A3 | codegen：registry 5-op 注册（Create/MoveNext/AwaitOnCompleted/AwaitUnsafeOnCompleted/Complete）、classify、await 侧目录 | — | ⬜ |
 | A4 | yield-return IR lowering（state=-4 续跑）、`IAsyncEnumerable`/`IAsyncEnumerator` 接口 vtable（slot 必须来自反射，不得手写常量）、`await foreach` 消费侧、`IAsyncDisposable`/`<>w__disposeMode` | **端到端可运行**（`Iterate<T>` 真跑通，`await foreach` 能消费） | ⬜ |
 
@@ -231,6 +231,32 @@ revert 验证后两测试**都**变红。
 并**无条件**（干净时为 0）emit `kUnsupportedAsyncIteratorCount` /
 `kUnsupportedAsyncIteratorSubjects` 到生成 C++，镜像既有 `kCodegenFailureCount` 通道；
 条件 emit 会让"无 iterator"与"信号未接线"无法区分。
+
+**A2 交付**：`chaos/async_iterator.h`（`AsyncIteratorSourceCore` ≙
+`ManualResetValueTaskSourceCore<bool>`、`AsyncIteratorSourcePool`、5 个 builder op）
++ `async_stubs.{h,cpp}` 的 extern C 入口 + `test_async_iterator`（14 项）。
+
+执行中的三处修正，都是"先验设计被实测推翻"：
+
+1. **await 入口的 handle 语义写错了**。A2 初稿的
+   `await_on_completed(source, token, ...)` 把 continuation 注册到**迭代器自己的池化
+   source** 上；实际该注册的是"迭代器当前 await 的对象"（`await Task.Yield()` 里的那个
+   Task）。挂在 source 上等于挂错对象，状态机永不恢复。已改为 `AsyncTask` handle +
+   `async_task_on_completed`，并补上原计划遗漏的 `AwaitUnsafeOnCompleted` 独立入口。
+2. **A2-5 并发反例的预测错了**。"去掉 mutex → 不稳定"是错的验收标准：前两版测试去掉
+   mutex 后 50/50、40/40 **全绿**（零判别力），第三版改用计数式别名 oracle 才 6/6
+   确定性变红。详见设计文档 §3 的修正表。
+3. **`Create()` 泄漏**。池是堆分配的，`Complete()` 不释放（状态机可二次枚举）。
+   补 `destroy` 入口作为唯一释放点。
+
+A2 的反例取证（每条都实机执行、并已 diff 校验回退干净）：
+
+| 反例 | 结果 |
+|------|------|
+| 去掉 `Reset()` 的 `++version` | **3 项确定性变红**（Recycled/Stale/TokenFromEntryPoints） |
+| 去掉池 mutex | `ConcurrentAcquireNeverDoubleHandsASlot` **6/6 确定性变红** |
+| 去掉池溢出分配路径 | **别名被直接检出**（6 组指针相同） |
+| 去掉 await 的注册调用 | resume 测试 + `EXPECT_DEATH` 守卫 **双红** |
 
 ## 当前通过测试
 
@@ -245,11 +271,20 @@ revert 验证后两测试**都**变红。
 | `test_async_when` (P2-1) | **14/14 PASS** |
 | `test_async_when_async` (P2-1) | **7/7 PASS** |
 | `test_async_when_array` (P2-3) | **8/8 PASS** |
-| `test_async_continue_with` (P2-2) | **12/12 PASS** |
+| `test_async_continue_with` (P2-2) | ⚠️ **10 通过 / 2 失败（均为预存在）** — 见下方修正 |
 | `test_async_task_factory` (P2-5) | **6/6 PASS** |
+| `test_async_iterator` (P2-8 A2) | **14/14 PASS**（5 次重复） |
 | `test_async_integration_smoke` | **28/28 PASS** |
 
-async 线合计 **101 项全绿**。
+async 线合计 **115 项**：113 绿 + 2 预存在红。
+
+> ⚠️ `test_async_continue_with` 基线修正：此前记的 **12/12** 有误。A2 期间实跑为
+> **10 通过 / 2 失败**（`AsyncContinueWith.ContinuationTaskCarriesTheContinuationsReturnValue`、
+> `AsyncContinueWith.ContinuationsChain`）。**这两个失败是预存在的**：在 HEAD `db68e9ad1`
+> 的干净 detached worktree（无任何 A2 改动）上实跑复现同一组 2 个失败，**已验证，不是推断**。
+> A2 未触碰 `async.h` / `continue_with` 路径，这两个用例从未在干净基线上核对过——
+> 与 A1 那次"12/12"一样，是把主检出或更早的记录当成了 worktree 基线。
+> 教训同 A1 第 2 条：**基线数字必须在本 worktree 实跑获得。**
 
 > ⚠️ codegen 基线修正：此前记的 **2188/2188** 是在**主检出**上跑出的数字。worktree 内
 > 实跑为 **2186 通过 / 5 失败 / 2191 总计**。5 个失败
