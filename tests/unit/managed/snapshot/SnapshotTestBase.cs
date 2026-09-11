@@ -114,19 +114,24 @@ public abstract class SnapshotTestBase
 
     /// <summary>
     /// Locate the repository root by walking up from the assembly
-    /// directory until we find a .git directory.
+    /// directory until we find a .git entry.
+    ///
+    /// NOTE: this must accept a .git FILE as well as a directory. Inside a git
+    /// worktree .git is a file holding "gitdir: ...", and testing only for a
+    /// directory makes the walk skip past the worktree root and resolve to the
+    /// main checkout instead — tests then read the wrong tree's fixtures.
     /// </summary>
     private static string LocateRepoRoot()
     {
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
         while (dir != null)
         {
-            if (Directory.Exists(Path.Combine(dir.FullName, ".git")))
+            if (File.Exists(Path.Combine(dir.FullName, ".git")))
                 return dir.FullName;
             dir = dir.Parent;
         }
         throw new DirectoryNotFoundException(
-            "Could not locate repository root (.git directory). " +
+            "Could not locate repository root (.git entry). " +
             "Run tests from within the booming-il2cpp repository.");
     }
 

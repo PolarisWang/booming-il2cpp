@@ -121,12 +121,12 @@ public abstract class SnapshotTestBase
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
         while (dir != null)
         {
-            if (Directory.Exists(Path.Combine(dir.FullName, ".git")))
+            if (File.Exists(Path.Combine(dir.FullName, ".git")))
                 return dir.FullName;
             dir = dir.Parent;
         }
         throw new DirectoryNotFoundException(
-            "Could not locate repository root (.git directory). " +
+            "Could not locate repository root (.git entry). " +
             "Run tests from within the booming-il2cpp repository.");
     }
 

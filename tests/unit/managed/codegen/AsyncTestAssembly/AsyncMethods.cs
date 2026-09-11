@@ -51,6 +51,16 @@ public static class AsyncMethods
         return Task.Run(work);
     }
 
+    // ALIVE_ACTION_SENTINEL: a non-async method whose body is a plain constant
+    // return, used by the loader-coverage diagnostic to prove that plain (non-
+    // async) methods do reach the AOT IR.  If this one is also missing from a
+    // loaded world while the async methods are present, the drop is not about
+    // `async` at all.
+    public static int AliveSentinel()
+    {
+        return 0xA11FE;
+    }
+
     // await Task.Run(Action) — the awaited form, combining the Run entry with
     // the standard TaskAwaiter resume path.
     public static async Task AwaitRunAction(Action work)

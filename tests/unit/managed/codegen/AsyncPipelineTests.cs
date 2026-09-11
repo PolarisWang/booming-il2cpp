@@ -22,11 +22,7 @@ public sealed class AsyncPipelineTests
 
     private static string LocateAsyncAssemblyDll()
     {
-        var dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-        while (dir != null && !Directory.Exists(Path.Combine(dir.FullName, ".git")))
-            dir = dir.Parent;
-        var repoRoot = dir?.FullName ?? throw new DirectoryNotFoundException(
-            "Could not locate repository root (.git directory).");
+        var repoRoot = RepoRootLocator.FindFromBaseDirectory();
 
         // Detect build configuration (Debug/Release) and TFM from the test runner's
         // output directory. BaseDirectory is typically:
@@ -456,11 +452,7 @@ public sealed class AsyncPipelineTests
     /// </summary>
     private static string R2FullOutputRoot()
     {
-        var dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-        while (dir != null && !Directory.Exists(Path.Combine(dir.FullName, ".git")))
-            dir = dir.Parent;
-        var repoRoot = dir?.FullName ?? throw new DirectoryNotFoundException(
-            "Could not locate repository root (.git directory).");
+        var repoRoot = RepoRootLocator.FindFromBaseDirectory();
         return Path.Combine(repoRoot, "artifacts", "r2full", "asyncgen");
     }
 
