@@ -204,6 +204,94 @@ public sealed partial class NativeAotLoweringPlanner
                     CreateNativeIntAbiSlot()),
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
+
+            // ── Task.Wait / Task<T>.Result (blocking) ──
+            // Block the calling thread until completion.  Wait() = infinite
+            // wait; Wait(int) = bounded timeout (returns false on timeout).
+            // Both propagate faults the same way `await` does.
+            // Use RegisterGeneric so the wrapper can inject the timeout value.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "Wait",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var isVoid = (paramTypes.Count == 0);
+                    if (isVoid)
+                    {
+                        var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                        [
+                            "    ChaosAsyncTaskWait(chaos_arg_0, -1);",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                CreateNativeIntAbiSlot()),
+                            CreateVoidAbiSlot(),
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: "ChaosAsyncTaskWait");
+                    }
+                    else if (paramTypes.Count == 1 && paramTypes[0] == "System.Int32")
+                    {
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1",
+                        [
+                            "    return ChaosAsyncTaskWait(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact[2]
+                                {
+                                    CreateNativeIntAbiSlot(),
+                                    CreateInt32AbiSlot(),
+                                }),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int> { 0, 1 },
+                            DirectNativeSymbol: "ChaosAsyncTaskWait");
+                    }
+                    return null; // other overloads (TimeSpan, CT) → interpreter
+                }));
+
+            // Task<T>.Result — blocks until complete, returns the result payload.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "get_Result",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    return ChaosAsyncTaskGetResultBlocking(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "ChaosAsyncTaskGetResultBlocking");
+                }));
+
+            // Task<T>.get_Exception — read the stored exception or 0 if not faulted.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "get_Exception",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    return async_task_awaiter_get_exception(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "async_task_awaiter_get_exception");
+                }));
         }
 
         /// <summary>

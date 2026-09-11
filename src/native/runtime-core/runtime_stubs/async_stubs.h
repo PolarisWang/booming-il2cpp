@@ -39,6 +39,14 @@ CHAOS_IL2CPP_INTPTR ChaosAsyncTaskGetAwaiter(CHAOS_IL2CPP_INTPTR task_handle) no
 CHAOS_IL2CPP_INT32 ChaosAsyncTaskAwaiterGetIsCompleted(CHAOS_IL2CPP_INTPTR awaiter_ref) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultValue(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
 
+// ── Task.Wait / Task<T>.Result (blocking semantics) ──
+// Block the calling thread until the task completes, propagating faults the
+// same way `await` does.  ChaosAsyncTaskWait returns 1 on completion, 0 on
+// timeout (timeout_ms < 0 means wait indefinitely).
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskGetIsCompleted(CHAOS_IL2CPP_INTPTR task_handle) noexcept;
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskWait(CHAOS_IL2CPP_INTPTR task_handle, CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskGetResultBlocking(CHAOS_IL2CPP_INTPTR task_handle) noexcept;
+
 // ── TaskCompletionSource<T> native helpers (Phase 3 P3-1) ──
 // Each takes a TCS object handle as the first argument.
 // Implemented in async_stubs.cpp via the async.h TaskSource proxy.

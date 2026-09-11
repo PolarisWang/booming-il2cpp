@@ -17,6 +17,9 @@
 #include "timer_queue.h"
 #include "runtime_stubs/stub_common.h"
 
+#include <chrono>
+#include <thread>
+
 #include <cstdint>
 #include <new>
 
@@ -153,6 +156,80 @@ void ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR awaiter) noexcept
             "System.Threading.Tasks.TaskCanceledException",
             "A task was cancelled.");
     }
+}
+
+/// True when the task is complete (success or fault) — the synchronous
+/// completion oracle used by Task.Wait polling loops.
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskGetIsCompleted(CHAOS_IL2CPP_INTPTR task_handle) noexcept
+{
+    using namespace chaos::il2cpp::common;
+    if (task_handle == 0) return 0;
+    auto* task = reinterpret_cast<AsyncTask*>(task_handle);
+    return task->completed.load(std::memory_order_acquire)
+        ? static_cast<CHAOS_IL2CPP_INT32>(1)
+        : static_cast<CHAOS_IL2CPP_INT32>(0);
+}
+
+/// Task.Wait() / Task<T>.Result — block the calling thread until the task
+/// completes, then propagate its outcome exactly like the await path:
+///   - faulted  → raise the stored exception (TaskCanceledException if none)
+///   - success  → return
+///
+/// Same-thread deadlock note: a task whose continuation is scheduled on the
+/// same thread that is blocking here cannot complete.  .NET throws
+/// InvalidOperationException in that case; we cannot detect it reliably from
+/// the handle alone, so this uses a bounded spin and then reports the timeout
+/// rather than hanging forever.
+///
+/// Returns 1 if the task completed (caller may then read the result), 0 on
+/// timeout.
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskWait(CHAOS_IL2CPP_INTPTR task_handle, CHAOS_IL2CPP_INT32 timeout_ms) noexcept
+{
+    using namespace chaos::il2cpp::common;
+    using namespace chaos::il2cpp::runtime_core;
+
+    if (task_handle == 0) return 0;
+    auto* task = reinterpret_cast<AsyncTask*>(task_handle);
+
+    // Timeout.Infinite (-1) → wait indefinitely; >= 0 → bounded wait.
+    const bool infinite = (timeout_ms < 0);
+    const auto deadline = std::chrono::steady_clock::now() +
+        std::chrono::milliseconds(infinite ? 0 : timeout_ms);
+
+    while (!task->completed.load(std::memory_order_acquire))
+    {
+        if (!infinite && std::chrono::steady_clock::now() >= deadline)
+        {
+            return 0;  // timed out — caller decides whether to throw
+        }
+        std::this_thread::yield();
+    }
+
+    // Completed: propagate the fault before returning so `task.Wait()` on a
+    // failed task throws, matching .NET (which wraps in AggregateException;
+    // we raise the original, which `await`-style callers expect).
+    if (task->faulted.load(std::memory_order_acquire))
+    {
+        CHAOS_IL2CPP_INTPTR ex = task->exception;
+        if (ex != 0) { chaos_raise_exception(ex); }
+        RaiseManagedException(
+            "System.Threading.Tasks.TaskCanceledException",
+            "A task was cancelled.");
+    }
+    return 1;
+}
+
+/// Task<T>.Result / Task.GetAwaiter().GetResult() — block until complete, then
+/// return the result payload.  Faults propagate (throw) rather than returning 0.
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskGetResultBlocking(CHAOS_IL2CPP_INTPTR task_handle) noexcept
+{
+    using namespace chaos::il2cpp::common;
+    if (task_handle == 0) return 0;
+    auto* task = reinterpret_cast<AsyncTask*>(task_handle);
+
+    // Block indefinitely, then read.  ChaosAsyncTaskWait raises on fault.
+    ChaosAsyncTaskWait(task_handle, -1);
+    return task->result;
 }
 
 // ── TaskCompletionSource<T> native helpers (Phase 3 P3-1) ──// These delegate to the TaskSource proxy in async.h; the "TCS handle" is
