@@ -45,6 +45,15 @@ chaos_native_add_test(test_async_task_state
     LABELS "unit;threading"
 )
 
+# async_task_exception_test — ASYNC-P1-3: exception propagation (Phase 1 exit
+# gate).  Links async_stubs.cpp directly so the real ChaosAsyncTask* entry
+# points are under test.
+chaos_native_add_test(test_async_task_exception
+    async_task_exception_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    LABELS "unit;threading"
+)
+
 # queue_backpressure_test — Global queue backpressure verification (T2-QUEUE)
 chaos_native_add_test(test_queue_backpressure
     queue_backpressure_test.cpp
