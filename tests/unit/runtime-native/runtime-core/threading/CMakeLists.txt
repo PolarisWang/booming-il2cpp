@@ -54,6 +54,19 @@ chaos_native_add_test(test_async_task_exception
     LABELS "unit;threading"
 )
 
+# async_task_run_e2e_test — ASYNC-P1-1: Task.Run end-to-end against the
+# PRODUCTION task_runner.cpp (registered by runtime_init).  Every other Task.Run
+# test substitutes a test-local stand-in, so the shipping delegate-invocation
+# path was untested.  Compiles task_runner.cpp + thread_pool.cpp directly.
+chaos_native_add_test(test_async_task_run_e2e
+    async_task_run_e2e_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/task_runner.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/thread_pool.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/execution_context.cpp
+    LABELS "unit;threading"
+)
+
 # queue_backpressure_test — Global queue backpressure verification (T2-QUEUE)
 chaos_native_add_test(test_queue_backpressure
     queue_backpressure_test.cpp
