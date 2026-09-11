@@ -62,16 +62,30 @@ public sealed class AsyncPipelineTests
         // Detect build configuration (Debug/Release) and TFM from the test runner's
         // output directory. BaseDirectory is typically:
         //   <repo>/tests/unit/managed/codegen/bin/<Configuration>/<TFM>/
+        //
+        // The previous heuristic walked up TWO levels from the TFM dir and required
+        // that directory's parent to be named "bin" — but from
+        // .../codegen/bin/Release/net8.0 that lands on .../codegen, whose parent is
+        // the test project dir, not "bin".  The check therefore never matched and
+        // the config silently fell back to "Debug", so a Release test run read a
+        // stale Debug fixture (methods added since the last Debug build were simply
+        // absent from the loader's world — which looks like a linker/codegen bug and
+        // is not one).  Anchor on the directory named "bin" instead of assuming a
+        // fixed depth.
         string config = "Debug";
         string tfm = "net8.0";
         var baseDir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-        if (baseDir?.Parent?.Parent is { } configDir &&
-            configDir.Parent?.Name == "bin")
+        if (baseDir is not null)
         {
             tfm = baseDir.Name;
-            string configName = configDir.Name;
-            if (configName is "Debug" or "Release" or "RelWithDebInfo")
-                config = configName;
+            var configDir = baseDir.Parent;
+            var binDir = configDir?.Parent;
+            if (binDir is not null &&
+                string.Equals(binDir.Name, "bin", StringComparison.OrdinalIgnoreCase) &&
+                configDir!.Name is "Debug" or "Release" or "RelWithDebInfo")
+            {
+                config = configDir.Name;
+            }
         }
 
         return Path.Combine(
@@ -689,14 +703,87 @@ public sealed class AsyncPipelineTests
         Assert.DoesNotContain("ChaosExternalRuntimeFallback", body);
         Assert.DoesNotContain("chaos_external_runtime_", body);
 
-        // The factory property itself must also be routed — if get_Factory is not
-        // wired, the factory receiver arrives from the interpreter as a null/0
-        // handle, and StartNew on it is meaningless even when StartNew resolves.
+        // The factory property itself should also be routed, so that the receiver
+        // handed to StartNew is the native token rather than an interpreter 0.
+        //
+        // This check is GUARDED and may be vacuous: Roslyn elides the source-level
+        // local in `TaskFactory f = Task.Factory; f.StartNew(work)` (the value is
+        // used once), so get_Factory is inlined into the StartNew call site and no
+        // separate get_Factory body is emitted for this fixture.  Asserting the
+        // body's presence would fail on a correct pipeline.  The property's own
+        // routing IS pinned non-vacuously by
+        // RuntimeHelperShapeRegistryTests.TaskFactory_GetFactoryProperty_RoutesToNativeToken.
         var factoryGetter = ExtractFunctionBody(allGenerated, "get_Factory");
         if (!string.IsNullOrEmpty(factoryGetter))
         {
             Assert.DoesNotContain("ChaosExternalRuntimeFallback", factoryGetter);
         }
+    }
+
+    /// <summary>
+    /// ASYNC-P2-6 — Task.WhenAll&lt;TResult&gt;(Task&lt;T&gt;[]) must lower to the same
+    /// native array combinator as the non-generic Task[] overload.
+    ///
+    /// <para>
+    /// Both overloads unpack a managed array and produce an aggregate whose
+    /// result is the child result set, so they share chaos_task_when_all_array.
+    /// The resolver's guard used to require the literal non-generic return type
+    /// (<c>::WhenAll:System.Threading.Tasks.Task(</c>), which the generic
+    /// overload's <c>Task&lt;int[]&gt;</c> return never matches — so
+    /// <c>Task.WhenAll(tasks)</c> on <c>Task&lt;int&gt;[]</c> silently fell through to
+    /// the interpreter's return-0 fallback and the caller awaited a bogus task.
+    /// </para>
+    /// </summary>
+    [Fact]
+    public void WhenAllGeneric_ResolvesToArrayCombinator()
+    {
+        Assert.True(File.Exists(s_asyncAssemblyPath),
+            $"AsyncTestAssembly.dll not built at {s_asyncAssemblyPath}");
+
+        using var ctx = new TempCtx();
+        var request = new ManagedClosureRequest(
+            InputAssemblyPath: s_asyncAssemblyPath,
+            OutputRootPath: ctx.OutputRoot,
+            EntryPointSubjectIdOverride: null,
+            AdditionalAssemblyPaths: null,
+            FullAssemblyClosure: true);
+
+        var exec = new PipelinePlan().Execute(request);
+        if (exec.IsFailure)
+        {
+            Assert.Fail($"Pipeline failed: {exec.Error?.Code}: {exec.Error?.Message}");
+        }
+        var result = exec.Value!;
+
+        Assert.Contains(result.AotCoreIr.Methods.Select(m => m.SubjectId),
+            id => id.Contains("AsyncMethods::WhenAllOfInt"));
+
+        var emitted = new NativeAotEmitter().GenerateFromArtifacts(
+            result.NativeAotLoweringPlan,
+            result.AotCoreIr,
+            result.ClosureManifest!,
+            result.MetadataRegistration,
+            result.SupplementalMetadataTemplate,
+            Path.Combine(ctx.OutputRoot, "whenallgen"),
+            mode: CodegenMode.Aot,
+            subjectMethods: null,
+            goldProfilePath: null,
+            allManagedMethods: result.AllManagedMethods);
+
+        var allGenerated = string.Join("\n",
+            emitted.GeneratedSources.Select(source =>
+                source.Contents ?? source.ContentsBuilder?.ToString() ?? string.Empty));
+
+        var body = ExtractFunctionBody(allGenerated, "WhenAllOfInt");
+        Assert.False(string.IsNullOrEmpty(body),
+            "Task.WhenAll<int> caller must have an emitted body");
+
+        Assert.Contains("chaos_task_when_all_array", body);
+
+        // Anti-fake-green: not the interpreter's return-0 fallback.  Without the
+        // wiring the awaited aggregate would be a null handle.
+        Assert.DoesNotContain("ChaosExternalRuntimeFallback", body);
+        Assert.DoesNotContain("chaos_external_runtime_", body);
     }
 
     /// <summary>

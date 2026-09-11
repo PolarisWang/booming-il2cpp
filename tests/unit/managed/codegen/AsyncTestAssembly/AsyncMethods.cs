@@ -88,11 +88,23 @@ public static class AsyncMethods
     }
 
     // Task.Factory.StartNew(Action) — the TaskFactory entry point (ASYNC-P2-5).
-    // AsyncFactoryStartNew exercises Task.get_Factory followed by a delegate-only
-    // StartNew; the factory object model does not exist in the runtime yet, so
-    // this is expected to reach the interpreter rather than a native helper.
+    // A source-level `TaskFactory f = Task.Factory;` local does NOT help here:
+    // Roslyn elides it because the value is used once, so get_Factory is inlined
+    // into this call site and never gets its own emitted body.  The property's
+    // routing is therefore pinned at the registry level instead (see
+    // RuntimeHelperShapeRegistryTests.TaskFactory_GetFactoryProperty_*).
     public static Task FactoryStartNew(Action work)
     {
         return Task.Factory.StartNew(work);
+    }
+
+    // Task.WhenAll(Task<T>[]) — the generic overload (ASYNC-P2-6).  The
+    // non-generic Task[] form is already wired to chaos_task_when_all_array;
+    // this one returns Task<T[]> instead of Task, so the previously-used
+    // "return type contains Task[]" test could not distinguish them and the
+    // generic form silently fell through to the interpreter.
+    public static Task<int[]> WhenAllOfInt(Task<int>[] tasks)
+    {
+        return Task.WhenAll(tasks);
     }
 }

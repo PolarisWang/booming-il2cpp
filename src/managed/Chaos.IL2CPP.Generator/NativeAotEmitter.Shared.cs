@@ -587,11 +587,17 @@ public sealed partial class NativeAotEmitter
         pos = 0;
         while ((pos = headerContent.IndexOf(structPrefix, pos, StringComparison.Ordinal)) >= 0)
         {
-            int end = headerContent.IndexOfAny(new[] { ' ', '{' }, pos);
+            // Search for the name terminator AFTER the prefix.  Starting at `pos`
+            // finds the space inside "struct chaos_valuetype_" itself, so
+            // `end - pos - 7` goes negative and Substring throws
+            // ArgumentOutOfRangeException — the emitter crashes on any header
+            // whose value-type struct appears before a spaced token.
+            int nameStart = pos + structPrefix.Length;
+            int end = headerContent.IndexOfAny(new[] { ' ', '{', ';' }, nameStart);
             if (end < 0) break;
             // Store bare symbol name (strip "struct " prefix) for comparison
             // with typedef names and references.
-            result.Add(headerContent.Substring(pos + 7, end - pos - 7));
+            result.Add(headerContent.Substring(nameStart, end - nameStart));
             pos = end + 1;
         }
     }

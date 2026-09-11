@@ -551,6 +551,53 @@ public sealed class RuntimeHelperShapeRegistryTests
     }
 
     [Fact]
+    // ASYNC-P2-6. The generic overload returns Task<int[]> where the non-generic
+    // one returns Task, so both must reach the SAME array combinator. The guard
+    // used to require the non-generic return type verbatim, which silently sent
+    // Task.WhenAll<int> to the interpreter's return-0 fallback.
+    //
+    // The callee is copied VERBATIM from what the real pipeline hands the resolver
+    // (dumped from the pipeline run over AsyncTestAssembly), not hand-written. Note
+    // the generic form carries the type argument on the METHOD name —
+    // `::WhenAll<System.Int32>:` — which is why a guard anchored on `::WhenAll(`
+    // missed it. (P2-4/P2-5 lesson: hand-written callees diverge from the real
+    // pipeline; a guessed non-generic spelling does not even match a descriptor.)
+    public void WhenAll_GenericArrayOverload_RoutesToArrayCombinator()
+    {
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll<System.Int32>:System.Threading.Tasks.Task<System.Int32[]>(System.Threading.Tasks.Task<System.Int32>[])";
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"WhenAll callee '{callee}' should match a generic registry descriptor");
+        Assert.NotNull(descriptor);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_task_when_all_array", resolution!.DirectNativeSymbol);
+        Assert.Contains("chaos_task_when_all_array", resolution.CppSource);
+    }
+
+    [Fact]
+    // The single-argument guard must still reject multi-argument overloads —
+    // Task.WhenAll(IEnumerable<Task>) and friends take something other than a
+    // plain array, and the native shim only understands a contiguous array.
+    public void WhenAll_NonArrayArgument_ResolvesToNull()
+    {
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task>)";
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        if (!registry.TryMatchGenericShape(callee, out var descriptor, out _))
+        {
+            // No descriptor at all is also acceptable — it falls to the interpreter.
+            return;
+        }
+
+        var planner = new NativeAotLoweringPlanner();
+        Assert.Null(descriptor!.Resolver(planner, callee, Array.Empty<string>()));
+    }
+
+    [Fact]
     public void BuildDefault_TryMatchShape_GcGetTotalMemory_ReturnsEntry()
     {
         var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();

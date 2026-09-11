@@ -1046,14 +1046,36 @@ public sealed partial class NativeAotLoweringPlanner
                     Resolver: (planner, callee, typeArgs) =>
                     {
                         var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                        // Only the concrete Task[] single-arg overload.  Generic
-                        // WhenAll<TReturn>(Task[]) variants have a different return;
-                        // keep those null (conservative → interpreter).
                         if (paramTypes.Count != 1 || !paramTypes[0].Contains("[]", StringComparison.Ordinal))
                             return null;
-                        if (!callee.Contains("::" + method + ":System.Threading.Tasks.Task(", StringComparison.Ordinal)
-                            && !callee.Contains("Task[]", StringComparison.Ordinal))
+
+                        // Only the single-argument overload: <method>(Task[]).
+                        //
+                        // The previous guard tested `::<method>:System.Threading.Tasks.Task(`
+                        // — the NON-generic return type.  That rejected
+                        // Task.WhenAll<int>(Task<int>[]) (return type
+                        // `Task<int[]>`) AND any overload the declaration record
+                        // spelled fully-qualified (`...Tasks.Task(...)`), i.e. the
+                        // generic overload silently fell through to the
+                        // interpreter's return-0 fallback.  Anchor on the method
+                        // signature instead, which is what we actually mean.
+                        //
+                        // The name may carry an explicit generic argument list
+                        // (`::WhenAll<System.Int32>(`), so match the `::<method>`
+                        // prefix and accept either `(` or `<` next.  `Task[]`
+                        // remains as the fallback for the reference-only form.
+                        var methodAnchor = "::" + method;
+                        var anchorIdx = callee.IndexOf(methodAnchor, StringComparison.Ordinal);
+                        if (anchorIdx >= 0)
+                        {
+                            var afterName = callee[(anchorIdx + methodAnchor.Length)..];
+                            if (!afterName.StartsWith('(') && !afterName.StartsWith('<'))
+                                return null;
+                        }
+                        else if (!callee.Contains("Task[]", StringComparison.Ordinal))
+                        {
                             return null;
+                        }
                         var symbol2 = GetExternalRuntimeHelperSymbol(callee);
                         var src2 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol2,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
