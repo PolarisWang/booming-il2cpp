@@ -438,6 +438,52 @@ public sealed class RuntimeHelperShapeRegistryTests
         Assert.NotNull(entry);
     }
 
+    // ── Task.Run registration (ASYNC-P1-1) ─────────────────────────────────
+    // Task::Run delegates to the native async_task_run (already fully
+    // implemented in task_runner.cpp, registered at RuntimeInit, but had no
+    // codegen entry point — making it dead code from managed callers).
+    // Task.Run is registered via RegisterGeneric, so it is matched through
+    // TryMatchGenericShape, and the resolver emits a wrapper calling
+    // async_task_run.
+
+    [Theory]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task`1[[System.Int32]]::Run:System.Threading.Tasks.Task(System.Func`1<System.Int32>)")]
+    public void TaskRun_WiredToGenericShape(string callee)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"Task::Run callee '{callee}' should match a generic registry descriptor");
+        Assert.NotNull(descriptor);
+
+        // The resolver must produce C++ that calls the native async_task_run symbol.
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("async_task_run", resolution!.DirectNativeSymbol);
+        Assert.Contains("async_task_run", resolution.CppSource);
+    }
+
+    [Fact]
+    public void TaskRun_CancellationTokenOverload_ResolvesToNull()
+    {
+        // CT overloads deliberately fall through to the interpreter until
+        // Phase 3 (CancellationToken wiring) — their resolver must return null
+        // so codegen does not route them to async_task_run (which ignores the CT).
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(registry.TryMatchGenericShape(
+            "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action,System.Threading.CancellationToken)",
+            out var descriptor, out _));
+        Assert.NotNull(descriptor);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner,
+            "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action,System.Threading.CancellationToken)",
+            Array.Empty<string>());
+        Assert.Null(resolution);
+    }
+
     [Fact]
     public void BuildDefault_TryMatchShape_GcGetTotalMemory_ReturnsEntry()
     {

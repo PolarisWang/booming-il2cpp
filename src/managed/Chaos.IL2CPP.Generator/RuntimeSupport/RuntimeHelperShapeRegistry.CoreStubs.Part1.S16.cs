@@ -661,6 +661,44 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// Task.Run — route the static Task::Run overloads to the native
+        /// ThreadPool-backed task_runner (async_task_run), which was fully
+        /// implemented in task_runner.cpp and registered at RuntimeInit but had
+        /// no codegen entry point, leaving it dead code from managed callers.
+        ///
+        /// Only the delegate-only overloads are routed.  The CancellationToken
+        /// variants need cancellation wiring (Phase 3) and deliberately fall
+        /// through to the interpreter until then.
+        /// </summary>
+        private static void RegisterTaskRun(RuntimeHelperShapeRegistry registry)
+        {
+            // Task.Run(Action) / Task.Run(Func<Task>) — single delegate argument.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "Run",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    // Delegate-only overloads: exactly one parameter, and it is the
+                    // Action / Func<Task> delegate (passed as a native int handle).
+                    if (paramTypes.Count != 1) return null;
+                    if (paramTypes[0] == "System.Threading.CancellationToken") return null;
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    return async_task_run(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "async_task_run");
+                }));
+        }
+
+        /// <summary>
         /// Task.Delay — route the static Task::Delay overloads to the native
         /// timer-backed chaos_task_delay_stub so codegen-emitted C++ calls them
         /// directly (instead of falling to the interpreter stub → 0).

@@ -41,4 +41,20 @@ public static class AsyncMethods
         // a continuation on the TCS's inner Task.
         return await tcs.Task;
     }
+
+    // Task.Run(Action) — fire-and-forget scheduling on the native ThreadPool.
+    // Exercises the Task::Run static overload routing (ASYNC-P1-1): the call
+    // must lower to the native async_task_run symbol rather than the
+    // interpreter fallback.
+    public static Task RunAction(Action work)
+    {
+        return Task.Run(work);
+    }
+
+    // await Task.Run(Action) — the awaited form, combining the Run entry with
+    // the standard TaskAwaiter resume path.
+    public static async Task AwaitRunAction(Action work)
+    {
+        await Task.Run(work);
+    }
 }
