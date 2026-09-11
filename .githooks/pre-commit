@@ -62,8 +62,18 @@ STAGED_PY=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.py$' |
 if [ -z "$STAGED_PY" ]; then
     echo "=== [layer-boundary] No Python files staged, skipping ==="
 else
-    # Run the boundary check script
-    BOUNDARY_OUTPUT=$(python testing/foundation-dll/verification/preflight/check_layer_boundaries.py 2>&1 | cat)
+    # Run the boundary check script.
+    # NOTE: the engine lives at tests/e2e/verification (relocated in 323e8c279).
+    # This previously pointed at the pre-relocation path, so the script was
+    # missing, produced no "FAIL" line, and the gate silently passed everything.
+    BOUNDARY_SCRIPT="tests/e2e/verification/preflight/check_layer_boundaries.py"
+    if [ ! -f "$BOUNDARY_SCRIPT" ]; then
+        echo "ERROR: layer boundary checker not found at $BOUNDARY_SCRIPT"
+        echo "The verification engine should live at tests/e2e/verification/."
+        echo "Use 'git commit --no-verify' to bypass (not recommended)."
+        exit 1
+    fi
+    BOUNDARY_OUTPUT=$(python "$BOUNDARY_SCRIPT" 2>&1 | cat)
     echo "$BOUNDARY_OUTPUT"
     if echo "$BOUNDARY_OUTPUT" | grep -q "FAIL"; then
         echo ""
@@ -73,5 +83,28 @@ else
     fi
     echo "=== [layer-boundary] All staged files pass layer boundary checks ==="
 fi
+
+# ── Verification tree singularity ────────────────────────────────────────
+# The stale twin at testing/foundation-dll/verification/ was removed in
+# b4ae15122; it produced silently-wrong pipeline results for a full round of
+# work.  A reappearance (e.g. a parallel agent's clean-checkout reviving it)
+# must fail loudly at commit time rather than be discovered by a bad result.
+echo "=== [verification-tree] Checking engine tree singularity ==="
+
+TREE_SCRIPT="tests/e2e/verification/preflight/check_verification_tree_singular.py"
+if [ ! -f "$TREE_SCRIPT" ]; then
+    echo "ERROR: verification tree guard not found at $TREE_SCRIPT"
+    exit 1
+fi
+TREE_OUTPUT=$(python "$TREE_SCRIPT" 2>&1)
+TREE_STATUS=$?
+echo "$TREE_OUTPUT"
+if [ "$TREE_STATUS" -ne 0 ] || echo "$TREE_OUTPUT" | grep -q "issue(s)"; then
+    echo ""
+    echo "ERROR: verification tree check FAILED — a stale engine tree is present."
+    echo "Use 'git commit --no-verify' to bypass (not recommended)."
+    exit 1
+fi
+echo "=== [verification-tree] Engine tree singularity confirmed ==="
 
 exit 0
