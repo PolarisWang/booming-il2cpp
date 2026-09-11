@@ -120,9 +120,21 @@ CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultValue(CHAOS_IL2CPP_INTPTR awai
     if (awaiter == 0) return 0;
     auto* task = reinterpret_cast<AsyncTask*>(awaiter);
 
+    // Cancellation is its own terminal state, checked FIRST and independently of
+    // whether an exception payload happens to be present.  Inferring cancellation
+    // from (faulted && exception == 0) would misreport a payload-less fault as
+    // TaskCanceledException, and a cancelled task carrying a payload as a plain
+    // fault.
+    if (task->canceled.load(std::memory_order_acquire))
+    {
+        RaiseManagedException(
+            "System.Threading.Tasks.TaskCanceledException",
+            "A task was cancelled.");
+    }
+
     // Faulted → propagate the stored exception (C# await throws on faulted
     // tasks, it does NOT return a default value).  This is the critical path
-    // for `Try await taskThatFails()` semantics.
+    // for `await taskThatFails()` semantics.
     if (task->faulted.load(std::memory_order_acquire))
     {
         CHAOS_IL2CPP_INTPTR ex = task->exception;
@@ -130,10 +142,11 @@ CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultValue(CHAOS_IL2CPP_INTPTR awai
         {
             chaos_raise_exception(ex);
         }
-        // Cancelled (faulted=true, exception=0): raise TaskCanceledException.
+        // A fault with no payload cannot be rethrown as a managed object.  Surface
+        // it as a fault, NOT as cancellation — the two are distinct states.
         RaiseManagedException(
-            "System.Threading.Tasks.TaskCanceledException",
-            "A task was cancelled.");
+            "System.Exception",
+            "A task faulted without an exception payload.");
     }
 
     if (!task->completed.load(std::memory_order_acquire)) return 0;
@@ -141,6 +154,8 @@ CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultValue(CHAOS_IL2CPP_INTPTR awai
 }
 
 /// TaskAwaiter non-generic GetResult — void-returning, same fault propagation.
+/// TaskAwaiter non-generic GetResult — void-returning, same three-state
+/// fault/cancel propagation as the value-returning form.
 void ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR awaiter) noexcept
 {
     using namespace chaos::il2cpp::common;
@@ -148,13 +163,20 @@ void ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR awaiter) noexcept
     if (awaiter == 0) return;
     auto* task = reinterpret_cast<AsyncTask*>(awaiter);
 
+    if (task->canceled.load(std::memory_order_acquire))
+    {
+        RaiseManagedException(
+            "System.Threading.Tasks.TaskCanceledException",
+            "A task was cancelled.");
+    }
+
     if (task->faulted.load(std::memory_order_acquire))
     {
         CHAOS_IL2CPP_INTPTR ex = task->exception;
         if (ex != 0) { chaos_raise_exception(ex); }
         RaiseManagedException(
-            "System.Threading.Tasks.TaskCanceledException",
-            "A task was cancelled.");
+            "System.Exception",
+            "A task faulted without an exception payload.");
     }
 }
 
@@ -166,6 +188,30 @@ CHAOS_IL2CPP_INT32 ChaosAsyncTaskGetIsCompleted(CHAOS_IL2CPP_INTPTR task_handle)
     if (task_handle == 0) return 0;
     auto* task = reinterpret_cast<AsyncTask*>(task_handle);
     return task->completed.load(std::memory_order_acquire)
+        ? static_cast<CHAOS_IL2CPP_INT32>(1)
+        : static_cast<CHAOS_IL2CPP_INT32>(0);
+}
+
+/// True when the task faulted.  Cancellation is a separate state and reports
+/// false here, so a caller can distinguish faulted from cancelled even when the
+/// fault carries no exception payload.
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskGetIsFaulted(CHAOS_IL2CPP_INTPTR task_handle) noexcept
+{
+    using namespace chaos::il2cpp::common;
+    if (task_handle == 0) return 0;
+    auto* task = reinterpret_cast<AsyncTask*>(task_handle);
+    return task->faulted.load(std::memory_order_acquire)
+        ? static_cast<CHAOS_IL2CPP_INT32>(1)
+        : static_cast<CHAOS_IL2CPP_INT32>(0);
+}
+
+/// True when the task was cancelled.
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskGetIsCanceled(CHAOS_IL2CPP_INTPTR task_handle) noexcept
+{
+    using namespace chaos::il2cpp::common;
+    if (task_handle == 0) return 0;
+    auto* task = reinterpret_cast<AsyncTask*>(task_handle);
+    return task->canceled.load(std::memory_order_acquire)
         ? static_cast<CHAOS_IL2CPP_INT32>(1)
         : static_cast<CHAOS_IL2CPP_INT32>(0);
 }
@@ -205,16 +251,23 @@ CHAOS_IL2CPP_INT32 ChaosAsyncTaskWait(CHAOS_IL2CPP_INTPTR task_handle, CHAOS_IL2
         std::this_thread::yield();
     }
 
-    // Completed: propagate the fault before returning so `task.Wait()` on a
-    // failed task throws, matching .NET (which wraps in AggregateException;
-    // we raise the original, which `await`-style callers expect).
+    // Completed: propagate the terminal state before returning so
+    // `task.Wait()` on a failed task throws, matching .NET (which wraps in
+    // AggregateException; we raise the original, which `await`-style callers
+    // expect).  Cancellation is checked first and independently of the payload.
+    if (task->canceled.load(std::memory_order_acquire))
+    {
+        RaiseManagedException(
+            "System.Threading.Tasks.TaskCanceledException",
+            "A task was cancelled.");
+    }
     if (task->faulted.load(std::memory_order_acquire))
     {
         CHAOS_IL2CPP_INTPTR ex = task->exception;
         if (ex != 0) { chaos_raise_exception(ex); }
         RaiseManagedException(
-            "System.Threading.Tasks.TaskCanceledException",
-            "A task was cancelled.");
+            "System.Exception",
+            "A task faulted without an exception payload.");
     }
     return 1;
 }

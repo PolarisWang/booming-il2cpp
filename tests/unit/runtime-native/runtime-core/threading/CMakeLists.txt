@@ -36,6 +36,15 @@ chaos_native_add_test(test_execution_context_smoke
     LABELS "unit;threading"
 )
 
+# async_task_state_test — ASYNC-P1-4: three-state distinction (resolved/faulted/
+# cancelled).  Compiles async_stubs.cpp directly so the test exercises the real
+# ChaosAsyncTask* entry points rather than a stale prebuilt copy.
+chaos_native_add_test(test_async_task_state
+    async_task_state_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    LABELS "unit;threading"
+)
+
 # queue_backpressure_test — Global queue backpressure verification (T2-QUEUE)
 chaos_native_add_test(test_queue_backpressure
     queue_backpressure_test.cpp

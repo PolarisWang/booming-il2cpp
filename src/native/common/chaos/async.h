@@ -51,6 +51,15 @@ struct AsyncTask
     std::atomic<bool> completed{false};
     std::atomic<bool> faulted{false};
 
+    // Cancellation is a THIRD terminal state, tracked separately from `faulted`.
+    // It must not be inferred from (faulted && exception == 0): a legitimate
+    // `Task.FromException(null)` or a fault carrying no payload would then be
+    // misreported to the awaiter as a TaskCanceledException, and a genuinely
+    // cancelled task would surface as a generic fault whenever the payload
+    // happened to be non-null.  Mutually exclusive with a plain fault: a task
+    // that is cancelled has canceled == true and faulted == false.
+    std::atomic<bool> canceled{false};
+
     // Continuation (single-slot box): registered by AwaitUnsafeOnCompleted.
     // fired exactly once on first completion.
     AsyncContinueFn   continuation_cb = nullptr;
@@ -237,12 +246,23 @@ inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_exception(CHAOS_IL2CPP_INTPTR 
     return task->exception;
 }
 
-/// True if the task behind this awaiter faulted.  C# `await` semantics require
-/// the awaiter to THROW on a faulted task rather than return a default value.
+/// True if the task behind this awaiter faulted.  Cancellation is reported by
+/// `async_task_awaiter_get_is_canceled` instead, so awaiting a cancelled task
+/// raises TaskCanceledException and awaiting a faulted one rethrows the stored
+/// exception.
 inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_is_faulted(CHAOS_IL2CPP_INTPTR awaiter_ref)
 {
     auto* task = require_async_task(*resolve_native_int_slot(awaiter_ref));
     return task->faulted.load(std::memory_order_acquire)
+        ? static_cast<CHAOS_IL2CPP_INTPTR>(1)
+        : static_cast<CHAOS_IL2CPP_INTPTR>(0);
+}
+
+/// True if the task behind this awaiter was cancelled.
+inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_is_canceled(CHAOS_IL2CPP_INTPTR awaiter_ref)
+{
+    auto* task = require_async_task(*resolve_native_int_slot(awaiter_ref));
+    return task->canceled.load(std::memory_order_acquire)
         ? static_cast<CHAOS_IL2CPP_INTPTR>(1)
         : static_cast<CHAOS_IL2CPP_INTPTR>(0);
 }
@@ -297,19 +317,39 @@ inline CHAOS_IL2CPP_INTPTR async_task_from_exception(CHAOS_IL2CPP_INTPTR excepti
     return handle;
 }
 
-/// Task.FromCanceled(CancellationToken): a cancelled task.  Cancellation is
-/// modelled as a fault whose exception payload is null; callers that need to
-/// distinguish cancellation from a generic fault should carry a
-/// TaskCanceledException instance as the exception payload instead.
+/// Task.FromCanceled(CancellationToken): a cancelled task — a distinct terminal
+/// state from a fault.  `canceled` is set and `faulted` is left false so the
+/// awaiter raises TaskCanceledException specifically, rather than conflating
+/// cancellation with a payload-less fault.
 inline CHAOS_IL2CPP_INTPTR async_task_from_canceled() noexcept
 {
     CHAOS_IL2CPP_INTPTR handle = async_task_create();
     auto* task = require_async_task(handle);
     task->result = static_cast<CHAOS_IL2CPP_INTPTR>(0);
     task->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-    task->faulted.store(true, std::memory_order_relaxed);
+    task->faulted.store(false, std::memory_order_relaxed);
+    task->canceled.store(true, std::memory_order_relaxed);
     task->completed.store(true, std::memory_order_release);
     return handle;
+}
+
+/// True when the task was cancelled (as opposed to faulted or completed).
+inline CHAOS_IL2CPP_INTPTR async_task_get_is_canceled(CHAOS_IL2CPP_INTPTR task_handle) noexcept
+{
+    auto* task = require_async_task(task_handle);
+    return task->canceled.load(std::memory_order_acquire)
+        ? static_cast<CHAOS_IL2CPP_INTPTR>(1)
+        : static_cast<CHAOS_IL2CPP_INTPTR>(0);
+}
+
+/// True when the task faulted.  Excludes cancellation, so a caller can tell the
+/// three terminal states apart: completed / faulted / canceled.
+inline CHAOS_IL2CPP_INTPTR async_task_get_is_faulted(CHAOS_IL2CPP_INTPTR task_handle) noexcept
+{
+    auto* task = require_async_task(task_handle);
+    return task->faulted.load(std::memory_order_acquire)
+        ? static_cast<CHAOS_IL2CPP_INTPTR>(1)
+        : static_cast<CHAOS_IL2CPP_INTPTR>(0);
 }
 
 /// True when the task is complete (success or fault) — the synchronous
