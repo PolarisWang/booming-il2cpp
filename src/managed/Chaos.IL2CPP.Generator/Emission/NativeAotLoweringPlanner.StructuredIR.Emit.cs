@@ -2100,40 +2100,22 @@ public sealed partial class NativeAotLoweringPlanner
                     RecoverStructure(splitCfg, 0, splitCfg.Blocks.Count - 1));
             }
 
-            // The CFG can become irreducible when a branch target falls
-            // between partition boundaries (the target instruction is in
-            // a different partition).  Emit the instructions as a flat
-            // sequence instead of dropping them silently.
-            // TRACE:EMIT disabled — was flooding stderr
-            if (instructions.Count >= 3)
-                // TRACE:EMIT disabled
-                return EmitExceptionPartitionFallback(instructions);
+            // The CFG is still irreducible — typically because a branch target falls
+            // outside this partition (the target instruction lives in a different
+            // partition). Such a partition cannot be RecoverStructure'd, and it must
+            // NOT be flattened: the linear EH emitter renders every branch opcode as a
+            // comment (`// brfalse (structured EH branch)`), so a flattened body falls
+            // straight through every arm of the conditional. That is a silently
+            // different program, not a "flat but correct" one.
+            //
+            // Use the same pc-dispatch state machine the non-EH path uses for
+            // irreducible CFGs (see the `pc-dispatch` fallback in
+            // TryBuildStructuredMethodBody). It preserves real control flow by
+            // threading an explicit `chaos_pc` through a switch.
+            return BuildPcDispatchBody(cfg);
         }
 
         return StripExceptionPartitionExitTerminators(RecoverStructure(cfg, 0, cfg.Blocks.Count - 1));
-    }
-
-
-
-    /// <summary>
-    /// Fallback emission for an exception partition whose CFG is irreducible
-    /// (typically because branch targets cross partition boundaries).  Produces
-    /// a single IRBlock containing all instructions without structured control
-    /// flow, preserving correctness at the cost of flat linear emission.
-    /// </summary>
-    private static StructuredIRNode EmitExceptionPartitionFallback(
-        IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
-    {
-        // Separate trailing terminator from body instructions.
-        // Only opcodes handled by EmitIRBlockTerminator need separation.
-        int last = instructions.Count - 1;
-        if (last >= 0)
-        {
-            var op = instructions[last].Op;
-            if (op is "ret" or "throw" or "rethrow" or "leave" or "br" or "endfinally" or "endfilter")
-                return new IRBlock(instructions.Take(last).ToList(), instructions[last]);
-        }
-        return new IRBlock(instructions, null);
     }
 
 
