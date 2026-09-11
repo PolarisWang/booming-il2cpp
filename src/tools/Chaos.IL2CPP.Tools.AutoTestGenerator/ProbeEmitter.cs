@@ -147,6 +147,24 @@ public sealed class ProbeEmitter
 
             foreach (var set in allValueSets[mi])
             {
+                // Defensive arity check.  A value set must supply exactly one argument
+                // expression per parameter: the loop below reads
+                // set.ArgumentExpressions[pi] for every pi in method.Parameters.
+                // A malformed set (short array) would otherwise throw
+                // IndexOutOfRange here, and the per-type catch in Program.cs escalates
+                // that into a whole-type skip — silently deleting the type's generated
+                // test class.  That is how System.Enum lost all 71 of its subjects.
+                // Dropping just this set keeps the rest of the type alive.
+                if (set.ArgumentExpressions.Count != method.Parameters.Count)
+                {
+                    Console.Error.WriteLine(
+                        $"[probe-skip] {typeFullName}.{method.Name}: value set " +
+                        $"{set.SetIndex} has {set.ArgumentExpressions.Count} argument(s) " +
+                        $"but the method has {method.Parameters.Count} parameter(s); " +
+                        $"set dropped.");
+                    continue;
+                }
+
                 // Generate variable declarations for out/ref params
                 var prelude = new List<string>();
                 var finalArgs = new List<string>();

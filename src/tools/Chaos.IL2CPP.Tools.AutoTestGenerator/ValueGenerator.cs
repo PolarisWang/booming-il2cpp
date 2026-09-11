@@ -1038,18 +1038,29 @@ public sealed class ValueGenerator
         // Enum.TryParse has existing natives (ChaosEnumTryParse / ChaosEnumTryParseWithIgnoreCase)
         // that perform real enum metadata lookup, so multi-value probes will exercise
         // the real AOT code path.
+        //
+        // The arity checks below must be EXACT (==, never >=).  A value set's length
+        // has to equal the method's parameter count: ProbeEmitter reads
+        // set.ArgumentExpressions[pi] for every pi in method.Parameters.  A `>=`
+        // guard lets a shorter set reach a longer overload, and the probe generator
+        // then throws IndexOutOfRange, which the per-type catch in Program.cs turns
+        // into a whole-type skip — silently wiping the type's generated test class
+        // (System.Enum lost 71 subjects this way).
         if (method.Name == "TryParse" && method.DeclaringTypeFullName == "System.Enum")
         {
-            // Enum.TryParse(Type, string, out object) — 3 params
-            if (paramTypes.Length >= 3 && paramTypes[0] == "System.Type")
+            bool takesType = paramTypes.Length > 0 && paramTypes[0] == "System.Type";
+
+            // Enum.TryParse(Type, string, out object) — exactly 3 params
+            if (paramTypes.Length == 3 && takesType)
             {
                 AddUnique(sets, usedSignatures, methodIndex, ["typeof(System.DayOfWeek)", "\"Monday\"", "out default(System.Object)"]);
                 AddUnique(sets, usedSignatures, methodIndex, ["typeof(System.DayOfWeek)", "\"XYZInvalid\"", "out default(System.Object)"]);
             }
-            // Enum.TryParse(Type, string, bool, out object) — 4 params
-            if (paramTypes.Length >= 4 && paramTypes[0] == "System.Type")
+            // Enum.TryParse(Type, string, bool, out object) — exactly 4 params
+            else if (paramTypes.Length == 4 && takesType)
             {
                 AddUnique(sets, usedSignatures, methodIndex, ["typeof(System.DayOfWeek)", "\"monday\"", "true", "out default(System.Object)"]);
+                AddUnique(sets, usedSignatures, methodIndex, ["typeof(System.DayOfWeek)", "\"XYZInvalid\"", "false", "out default(System.Object)"]);
             }
             return;
         }

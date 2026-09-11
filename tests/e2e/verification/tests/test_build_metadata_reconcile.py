@@ -162,6 +162,64 @@ def test_enrich_stamps_no_canonical_when_absent_from_ir(tmp_path: Path) -> None:
     assert meta["methods"][0]["bodyAvailability"] == "NoCanonicalBody"
 
 
+def test_enrich_flags_phantom_when_no_wrapper_emitted(tmp_path: Path) -> None:
+    """A fact entry with no IR match AND no CombinedSubjects wrapper is phantom.
+
+    ATG wraps per-type processing in try/catch: when a type blows up mid-generation
+    it is skipped entirely and its CombinedSubjects.cs class is never emitted — but
+    the metadata pass runs afterwards over ALL types, so it still writes kind=fact
+    entries for the skipped type's methods.  Those entries describe wrappers that do
+    not exist anywhere; counting them as merely NoCanonicalBody hides a generation
+    failure behind a translation-coverage label.
+
+    Observed real case: System.Enum, 71 entries, ATG crashed in
+    ProbeEmitter.GenerateProbeSource (IndexOutOfRange) and System_EnumTests was
+    absent from CombinedSubjects.cs.
+
+    The wrapper-name set is authoritative: an entry whose generatedMethodId is not
+    among the emitted wrappers never had a chance to be lowered, so it is phantom.
+    """
+    from stages.build import _enrich_metadata_body_availability
+
+    meta = {
+        "methods": [
+            # Real wrapper: present in CombinedSubjects.cs, but no IR (interpreted).
+            {"index": 0, "kind": "fact", "generatedMethodId": "Real_0__0"},
+            # Phantom: type was skipped by ATG, so no wrapper was ever emitted.
+            {"index": 1, "kind": "fact", "generatedMethodId": "GetName_0_System_DayOfWeek_0"},
+        ]
+    }
+    ir_methods: list[dict] = []
+    wrapper_names = {"Real_0__0"}
+
+    annotated = _enrich_metadata_body_availability(
+        meta, ir_methods, wrapper_names=wrapper_names)
+
+    assert annotated == 2
+    # Present in the emitted source but never lowered -> honest "no canonical body".
+    assert meta["methods"][0]["bodyAvailability"] == "NoCanonicalBody"
+    # Never emitted at all -> phantom, distinct from a translation gap.
+    assert meta["methods"][1]["bodyAvailability"] == "PhantomSubject"
+
+
+def test_enrich_phantom_detection_skipped_when_no_wrapper_names() -> None:
+    """Without the wrapper-name set, behaviour is unchanged (back-compat).
+
+    Callers that cannot supply CombinedSubjects.cs (cached builds, older chunks)
+    must keep the previous NoCanonicalBody classification rather than have every
+    unmatched entry become phantom.
+    """
+    from stages.build import _enrich_metadata_body_availability
+
+    meta = {"methods": [
+        {"index": 0, "kind": "fact", "generatedMethodId": "Anything_0__0"},
+    ]}
+    annotated = _enrich_metadata_body_availability(meta, [], wrapper_names=None)
+
+    assert annotated == 1
+    assert meta["methods"][0]["bodyAvailability"] == "NoCanonicalBody"
+
+
 def test_enrich_stamps_bcl_coverage_layer_from_manifest(tmp_path: Path) -> None:
     """aot-coverage entries (BCL raw methods) are annotated from aot-manifest."""
     from stages.build import _enrich_metadata_body_availability

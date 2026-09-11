@@ -406,11 +406,52 @@ def _load_inline_native_subject_ids(codegen_dir: Path) -> set[str]:
     return {c for c in callees if isinstance(c, str) and c}
 
 
+def _load_wrapper_names(combined_cs_path: Path) -> set[str] | None:
+    """Wrapper method names actually emitted into CombinedSubjects.cs, or None.
+
+    This is the authority on "did this subject ever get generated".  The ATG wraps
+    per-type processing in try/catch (Program.cs): a type that throws mid-generation
+    is skipped and its CombinedSubjects.cs class is never written — while the
+    metadata pass that runs afterwards still walks every type and stamps kind=fact
+    entries for the skipped one.  Those entries name wrappers that exist nowhere.
+    Comparing against the emitted source is the only way to tell them apart from a
+    genuine "wrapper exists but was never lowered to AOT" translation gap.
+
+    Returns None when the file is absent/unreadable, so callers fall back to the
+    pre-existing classification rather than flagging every unmatched entry.
+    """
+    if not combined_cs_path.exists():
+        return None
+    try:
+        text = combined_cs_path.read_text(encoding="utf-8")
+    except OSError:
+        return None
+
+    # Wrapper methods are declared as e.g. `public unsafe long GetName_0_...()`;
+    # Benchmark_* variants and ctors are not fact subjects.
+    names: set[str] = set()
+    for line in text.splitlines():
+        m = _WRAPPER_DECL_RE.search(line)
+        if not m:
+            continue
+        name = m.group(1)
+        if name.startswith("Benchmark_") or name == ".ctor":
+            continue
+        names.add(name)
+    return names
+
+
+_WRAPPER_DECL_RE = re.compile(
+    r"\bpublic\s+(?:unsafe\s+)?(?:long|void|int|bool|string|object)\s+([A-Za-z_]\w*)\s*\("
+)
+
+
 def _enrich_metadata_body_availability(
     metadata: dict,
     ir_methods: list[dict],
     bcl_manifest: list[dict] | None = None,
     inline_subject_ids: set[str] | None = None,
+    wrapper_names: set[str] | None = None,
 ) -> int:
     """Annotate each metadata method with its codegen translation category.
 
@@ -426,6 +467,15 @@ def _enrich_metadata_body_availability(
       ``bodyAvailability`` by the MetadataWriter emitter): has-canonical-body ⇒
       NativeGenerated, else no-canonical-body ⇒ NoCanonicalBody.  This is the layer that
       lets the tracking see past the probe wrappers down to the underlying BCL methods.
+
+    ``wrapper_names`` (from CombinedSubjects.cs) separates two very different causes
+    of an unmatched fact wrapper:
+
+    * wrapper WAS emitted but has no IR  → NoCanonicalBody (real translation gap)
+    * wrapper was NEVER emitted         → PhantomSubject (upstream ATG failure)
+
+    Conflating them hides a generator crash behind a coverage label, so the phantom
+    case is reported distinctly instead of being counted as a translation residual.
 
     Returns the number of methods annotated.
     """
@@ -491,6 +541,12 @@ def _enrich_metadata_body_availability(
             subj = mm.get("methodSubjectId")
             if subj and inline_subject_ids and subj in inline_subject_ids:
                 mm["bodyAvailability"] = "NativeGenerated"
+            elif wrapper_names is not None and gid not in wrapper_names:
+                # No IR *and* the wrapper was never emitted by the ATG.  The type that
+                # declares it was skipped mid-generation, so this entry describes a
+                # method that exists nowhere.  Reporting it as NoCanonicalBody would
+                # dress a generator failure up as a translation-coverage gap.
+                mm["bodyAvailability"] = "PhantomSubject"
             else:
                 mm["bodyAvailability"] = "NoCanonicalBody"
             annotated += 1
@@ -508,6 +564,7 @@ def _merge_codegen_body_availability(
     metadata_path: Path,
     aot_core_ir_path: Path,
     aot_manifest_path: Path | None = None,
+    combined_cs_path: Path | None = None,
 ) -> int:
     """Reconcile subjects.metadata.json against the codegen AOT IR + manifest.
 
@@ -516,6 +573,11 @@ def _merge_codegen_body_availability(
     manifest layer annotates aot-coverage entries (BCL raw methods) that the wrapper
     IR cannot see — this is the BCL-original-method resolution that makes the tracking
     useful for fact-266 residual auditing.
+
+    ``combined_cs_path`` supplies the emitted wrapper-name set, letting a fact entry
+    with no IR be classified as a genuine translation gap (wrapper exists) versus a
+    phantom left behind by an ATG type skip (wrapper never emitted).  See
+    ``_load_wrapper_names``.
     """
     if not metadata_path.exists() or not aot_core_ir_path.exists():
         return 0
@@ -533,25 +595,39 @@ def _merge_codegen_body_availability(
             print(f"  [build] WARNING: unreadable aot-manifest.json ({e}), Layer 2 BCL coverage skipped")
     annotated = _enrich_metadata_body_availability(
         metadata, ir_methods, bcl_manifest,
-        inline_subject_ids=_load_inline_native_subject_ids(aot_core_ir_path.parent.parent))
-    total = len(metadata.get("methods") or [])
-    native_count = sum(
-        1 for m in metadata.get("methods") or []
-        if m.get("bodyAvailability") == "NativeGenerated"
-    )
+        inline_subject_ids=_load_inline_native_subject_ids(aot_core_ir_path.parent.parent),
+        wrapper_names=_load_wrapper_names(combined_cs_path) if combined_cs_path else None)
+    methods = metadata.get("methods") or []
+    total = len(methods)
+
+    def _count(category: str) -> int:
+        return sum(1 for m in methods if m.get("bodyAvailability") == category)
+
+    native_count = _count("NativeGenerated")
+    phantom_count = _count("PhantomSubject")
     metadata["capabilitySummary"] = {
         "totalMethods": total,
         "annotated": annotated,
         "nativeGenerated": native_count,
-        "externalRuntimeOrFallback": total - native_count,
+        # Reported separately from the fallback residual: a phantom is an upstream
+        # ATG generation failure, not a native-translation gap, and tallying it as
+        # one would dress a crash up as coverage debt.
+        "phantomSubject": phantom_count,
+        "externalRuntimeOrFallback": total - native_count - phantom_count,
     }
     if annotated:
         metadata_path.write_text(
             json.dumps(metadata, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
         )
+        phantom_note = f", {phantom_count} PhantomSubject" if phantom_count else ""
         print(f"  [build] Stamped bodyAvailability on {annotated}/{total} methods "
-              f"({native_count} NativeGenerated, capabilitySummary added)")
+              f"({native_count} NativeGenerated{phantom_note}, capabilitySummary added)")
+    if phantom_count:
+        print(f"  [build] WARNING: {phantom_count} phantom subject(s) — declared in the "
+              f"manifest but never emitted into CombinedSubjects.cs. The AutoTestGenerator "
+              f"skipped the declaring type mid-generation; check its stdout for "
+              f"'[SKIP] Type processing failed'.")
     return annotated
 
 
@@ -1541,7 +1617,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     # -- 8b. Stamp bodyAvailability into subjects.metadata.json from codegen IR --
     aot_core_ir_path = ctx.native_dir / "codegen" / "generated" / "aot-core-ir.json"
     aot_manifest_path = ctx.native_dir / "codegen" / "generated" / "aot-manifest.json"
-    _merge_codegen_body_availability(metadata_path, aot_core_ir_path, aot_manifest_path)
+    # CombinedSubjects.cs is the authority on which wrappers actually exist; it lets
+    # the stamp distinguish a real translation gap from a phantom left by an ATG skip.
+    combined_cs_path = ctx.chunk_dir / "managed" / "combined" / "CombinedSubjects.cs"
+    _merge_codegen_body_availability(
+        metadata_path, aot_core_ir_path, aot_manifest_path, combined_cs_path)
 
     # -- 8c. Inject --profile mode into runtime-entry.cpp --
     _inject_profile_mode(ctx.native_dir)
