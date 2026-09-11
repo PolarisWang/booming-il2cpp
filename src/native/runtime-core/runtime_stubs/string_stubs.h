@@ -4,6 +4,14 @@
 extern "C" {
 
 CHAOS_IL2CPP_INTPTR ChaosStringContains(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR value) noexcept;
+// String.Contains(char) — single UTF-16 code unit search.  Distinct from
+// ChaosStringContains, which is the substring overload and dereferences its second
+// argument as a string pointer.  The char arrives by value in the low 16 bits.
+CHAOS_IL2CPP_INTPTR ChaosStringContainsChar(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_UINT16 value) noexcept;
+// String.Contains(char, StringComparison) — same search, but the culture-based
+// comparisons first treat a collation-ignorable char as matching everywhere.
+CHAOS_IL2CPP_INTPTR ChaosStringContainsCharCmp(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_UINT16 value,
+                                               CHAOS_IL2CPP_INT32 comparison) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR separator, CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosStringStartsWith(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosStringEndsWith(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR value) noexcept;

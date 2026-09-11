@@ -102,6 +102,99 @@ CHAOS_IL2CPP_INTPTR ChaosStringContains(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_IN
     return 0;
 }
 
+// A character is "collation-ignorable" when the culture comparers skip it
+// entirely, in which case it matches at every position of every string — even
+// the empty one.  .NET's Contains(char, Culture/InvariantCulture) therefore
+// returns true for "".Contains('\0'), while the ordinal overloads return false.
+// Verified against .NET 10: the ignorable set in the BMP is 323 chars, dominated
+// by the C0/C1 control ranges, DEL, and the format/annotation characters.
+// Only these ranges are modelled below; an exotic ignorable outside them will
+// fall back to an ordinal (false) result rather than matching.
+static bool is_collation_ignorable(CHAOS_IL2CPP_UINT16 c) noexcept
+{
+    if (c < 0x20) return true;                  // U+0000..U+001F C0 controls
+    if (c >= 0x7F && c <= 0x9F) return true;    // DEL + U+0080..U+009F C1 controls
+    if (c == 0x00AD) return true;               // soft hyphen
+    if (c >= 0x200B && c <= 0x200F) return true; // zero-width space..RLM
+    if (c == 0x2028 || c == 0x2029) return true; // line/paragraph separator
+    if (c >= 0x202A && c <= 0x202E) return true; // bidi embedding controls
+    if (c >= 0x2060 && c <= 0x2064) return true; // word joiner + invisible ops
+    if (c >= 0x206A && c <= 0x206F) return true; // deprecated format chars
+    if (c == 0xFEFF) return true;               // BOM / zero-width no-break space
+    if (c >= 0xFFF9 && c <= 0xFFFB) return true; // interlinear annotation
+    return false;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosStringContainsChar(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_UINT16 value) noexcept
+{
+    str = resolve_string_arg(str);
+    if (str == 0) return 0;
+
+    // A null receiver raises NullReferenceException in .NET; let the caller's
+    // null check handle that.  An empty receiver contains no code units, so it
+    // is a plain false — .NET returns false for "".Contains(c) for every char,
+    // including '\0' (which is a real UTF-16 unit, not a terminator here).
+    auto* hdr = reinterpret_cast<const StubStringHeader*>(str);
+    if (hdr->byte_count == 0) return 0;
+    // The AOT string layout stores UTF-8 bytes, so multi-byte code units must be
+    // compared as decoded code points rather than raw bytes.  ASCII fast path
+    // covers the common case; the decoder handles the rest.
+    const auto* data = reinterpret_cast<const unsigned char*>(
+        stub_string_data(reinterpret_cast<const void*>(str)));
+
+    if (value < 0x80)
+    {
+        for (CHAOS_IL2CPP_UINTPTR i = 0; i < hdr->byte_count; ++i)
+        {
+            if (data[i] == static_cast<unsigned char>(value)) return 1;
+        }
+        return 0;
+    }
+
+    // Decode UTF-8 and compare code points.  Surrogate-pair inputs (0xD800-0xDFFF)
+    // can never match a decoded scalar, mirroring .NET's char-overload behaviour.
+    CHAOS_IL2CPP_UINTPTR i = 0;
+    while (i < hdr->byte_count)
+    {
+        unsigned char c = data[i];
+        CHAOS_IL2CPP_UINT32 cp = 0;
+        CHAOS_IL2CPP_UINTPTR adv = 1;
+        if (c < 0x80) { cp = c; adv = 1; }
+        else if ((c & 0xE0) == 0xC0) { cp = c & 0x1Fu; adv = 2; }
+        else if ((c & 0xF0) == 0xE0) { cp = c & 0x0Fu; adv = 3; }
+        else if ((c & 0xF8) == 0xF0) { cp = c & 0x07u; adv = 4; }
+        else { ++i; continue; }  // invalid lead byte — resync
+
+        if (i + adv > hdr->byte_count) break;  // truncated sequence
+        for (CHAOS_IL2CPP_UINTPTR k = 1; k < adv; ++k) {
+            cp = (cp << 6) | (data[i + k] & 0x3Fu);
+        }
+        if (cp == value) return 1;
+        i += adv;
+    }
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosStringContainsCharCmp(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_UINT16 value,
+                                               CHAOS_IL2CPP_INT32 comparison) noexcept
+{
+    str = resolve_string_arg(str);
+    if (str == 0) return 0;
+
+    // StringComparison: 0=CurrentCulture 1=CurrentCultureIgnoreCase
+    //                   2=InvariantCulture 3=InvariantCultureIgnoreCase
+    //                   4=Ordinal 5=OrdinalIgnoreCase
+    // Only the culture/ordinal split changes the answer for a char search: case
+    // never matters (a char always equals itself), so 1/3 behave as 0/2 and 5 as 4.
+    // Under the culture comparers an ignorable character matches at every
+    // position of every string, including the empty one — that is why .NET
+    // returns true for "".Contains('\0', CurrentCulture) but false for the
+    // ordinal overload.  Verified against .NET 10.
+    if (comparison < 4 && is_collation_ignorable(value)) return 1;
+
+    return ChaosStringContainsChar(str, value);
+}
+
 CHAOS_IL2CPP_INTPTR ChaosStringStartsWith(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR value) noexcept
 {
     str = resolve_string_arg(str);

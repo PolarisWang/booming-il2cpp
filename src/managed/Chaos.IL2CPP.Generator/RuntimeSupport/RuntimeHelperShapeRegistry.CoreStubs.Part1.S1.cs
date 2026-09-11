@@ -341,8 +341,66 @@ public sealed partial class NativeAotLoweringPlanner
                 Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                    if (paramTypes.Count != 2) return null;
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+
+                    // Contains(char) / Contains(char, StringComparison): the body below is an
+                    // ordinal *substring* search — it dereferences chaos_arg_1 as a string
+                    // pointer.  A char parameter travels by value in the INTPTR slot (see
+                    // ChaosStringSplit), so routing a char overload here made the helper read
+                    // char value 0 as a null string pointer and hit CHAOS_IL2CPP_FAIL(), which
+                    // the wrapper's catch turns into `false`.  .NET returns true for
+                    // "".Contains('\0', StringComparison.Ordinal) (empty substring), so the
+                    // fact failed.  `char` is a UTF-16 code unit, so the correct semantics is
+                    // a single-unit search — never a substring scan.
+                    if (paramTypes.Count >= 1 && paramTypes[0] == "System.Char")
+                    {
+                        if (paramTypes.Count == 1)
+                        {
+                            // Contains(char): scan the receiver's UTF-16 units for the char.
+                            var srcChar = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                                "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1",
+                            [
+                                "    return ChaosStringContainsChar(chaos_arg_0, static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_1));",
+                            ]);
+                            return new GenericShapeResolution(srcChar, symbol,
+                                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                                {
+                                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                                    CreateInt32AbiSlot(),
+                                }),
+                                CreateNativeIntAbiSlot(),
+                                new HashSet<int> { 0, 1 });
+                        }
+
+                        if (paramTypes.Count == 2)
+                        {
+                            // Contains(char, StringComparison): the search itself is a
+                            // single-code-unit scan, but the culture-based comparisons
+                            // treat a collation-ignorable char (e.g. U+0000) as matching
+                            // everywhere — .NET returns true for
+                            // "".Contains('\0', CurrentCulture) while the ordinal overload
+                            // returns false.  ChaosStringContainsCharCmp encodes that split.
+                            var srcCharCmp = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                                "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2",
+                            [
+                                "    return ChaosStringContainsCharCmp(chaos_arg_0, static_cast<CHAOS_IL2CPP_UINT16>(chaos_arg_1), chaos_arg_2);",
+                            ]);
+                            return new GenericShapeResolution(srcCharCmp, symbol,
+                                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                                {
+                                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                                    CreateInt32AbiSlot(),
+                                    CreateInt32AbiSlot(),
+                                }),
+                                CreateNativeIntAbiSlot(),
+                                new HashSet<int> { 0, 1, 2 });
+                        }
+
+                        // Other arities are not modelled here.
+                        return null;
+                    }
+
+                    if (paramTypes.Count != 2) return null;
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2",
                     [
