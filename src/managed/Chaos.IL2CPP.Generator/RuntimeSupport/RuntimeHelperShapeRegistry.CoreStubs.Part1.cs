@@ -96,6 +96,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterAsyncTaskBuilder(registry);
             RegisterDecimal(registry);
             RegisterTaskCompletionSource(registry);
+            RegisterTaskDelay(registry);
             RegisterNullableTget(registry);
             RegisterNullableTGetValueOrDefault(registry);
             RegisterConvertToChar(registry);

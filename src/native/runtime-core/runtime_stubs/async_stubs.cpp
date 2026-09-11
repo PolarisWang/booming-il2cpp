@@ -11,6 +11,13 @@
 
 #include <chaos/native_types.h>
 #include <chaos/async.h>
+#include "async_stubs.h"
+#include "exception_helpers.h"
+#include "timer_queue.h"
+#include "runtime_stubs/stub_common.h"
+
+#include <cstdint>
+#include <new>
 
 extern "C" {
 
@@ -47,40 +54,65 @@ void ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) noexcept
     // For test pipeline, assume the task completed successfully.
 }
 
-// ── Task.Delay / Task.GetAwaiter / TaskAwaiter.get_IsCompleted ──
-// Without these, all three fell through to ChaosExternalRuntimeFallback → 0,
-// which made `await Task.Delay(n)` hang forever: GetAwaiter returned 0, so
-// get_IsCompleted read false, the state machine suspended, and
-// AwaitUnsafeOnCompleted saw task_handle==0 and returned without registering
-// a continuation — the machine was never resumed and Main never completed.
+// ── Task.Delay / Task.GetAwaiter / TaskAwaiter.get_IsCompleted (non-generic) ──
+// The await path for a Task<T>/Task handle.  These MUST reflect real task state:
+// a constant `is_completed → 1` would make every await take the synchronous
+// resume path (no real suspension), and a constant `GetResult → 0` would
+// silently corrupt the result of every `await Task<T>`.
 
+// chaos_task_delay_stub (the TimerQueue-backed delay) is declared in
+// async_stubs.h, which is included above, so it is visible here.
 CHAOS_IL2CPP_INTPTR ChaosAsyncTaskDelay(CHAOS_IL2CPP_INT32 millisecondsDelay) noexcept
 {
-    (void)millisecondsDelay;
-    auto handle = chaos::il2cpp::common::async_task_create();
-    if (handle == 0) return 0;
-    chaos::il2cpp::common::finish_async_task(handle);
-    return handle;
+    // Task.Delay(int) contract (System.Threading.Tasks.Task):
+    //   -1    → Timeout.Infinite: never completes on its own
+    //   < -1  → ArgumentOutOfRangeException
+    //   >= 0  → delay, then complete
+    if (millisecondsDelay < -1) {
+        chaos::il2cpp::runtime_core::RaiseManagedException(
+            "System.ArgumentOutOfRangeException",
+            "The value needs to be either -1 (signifying an infinite timeout), 0 or"
+            " the correct amount of milliseconds otherwise.");
+    }
+
+    if (millisecondsDelay == -1) {
+        // Infinite: hand back a live, never-completing task.
+        return chaos::il2cpp::common::async_task_create();
+    }
+
+    // Real timed delay through the existing TimerQueue-backed helper.
+    return chaos_task_delay_stub(millisecondsDelay);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosAsyncTaskGetAwaiter(CHAOS_IL2CPP_INTPTR task_handle) noexcept
 {
+    // A TaskAwaiter is represented by the task handle itself (matches
+    // async_task_get_awaiter in async.h), so field access resolves through
+    // resolve_native_int_slot to the underlying AsyncTask.
     return task_handle;
 }
 
 CHAOS_IL2CPP_INT32 ChaosAsyncTaskAwaiterGetIsCompleted(CHAOS_IL2CPP_INTPTR awaiter_ref) noexcept
 {
-    (void)awaiter_ref;
-    return 1;  // Always completed → state machine takes the synchronous resume path.
+    using namespace chaos::il2cpp::common;
+    if (awaiter_ref == 0) return 0;
+    auto* task = reinterpret_cast<AsyncTask*>(awaiter_ref);
+    return task->completed.load(std::memory_order_acquire)
+        ? static_cast<CHAOS_IL2CPP_INT32>(1)
+        : static_cast<CHAOS_IL2CPP_INT32>(0);
 }
 
-// TaskAwaiter<T>::GetResult — returns the result payload as INTPTR (0 in stub
-// mode; the value is unused by the sample's fire-and-forget awaits).  Separate
-// from ChaosAsyncAwaiterGetResult because that one is void-returning.
+/// TaskAwaiter<T>.GetResult — returns the real result payload of a completed
+/// task.  Returns 0 for an incomplete or faulted task; callers gate on
+/// IsCompleted and propagate the fault before reading the result.
 CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultValue(CHAOS_IL2CPP_INTPTR awaiter) noexcept
 {
-    (void)awaiter;
-    return 0;
+    using namespace chaos::il2cpp::common;
+    if (awaiter == 0) return 0;
+    auto* task = reinterpret_cast<AsyncTask*>(awaiter);
+    if (!task->completed.load(std::memory_order_acquire)) return 0;
+    if (task->faulted.load(std::memory_order_acquire)) return 0;
+    return task->result;
 }
 
 // ── TaskCompletionSource<T> native helpers (Phase 3 P3-1) ──
@@ -129,11 +161,236 @@ CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_exception(CHAOS_IL2CPP_INTPTR tcs_handle, 
     return ts->try_set_exception(exception);
 }
 
+void chaos_tcs_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept
+{
+    if (tcs_handle == 0) return;
+    auto* ts = reinterpret_cast<chaos::il2cpp::common::TaskSource*>(tcs_handle);
+    ts->try_set_canceled();
+}
+
 CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept
 {
     if (tcs_handle == 0) return 0;
     auto* ts = reinterpret_cast<chaos::il2cpp::common::TaskSource*>(tcs_handle);
     return ts->try_set_canceled();
+}
+
+// ── Task.Delay native helpers (Phase 3 P3-2) ──
+// These use the existing TimerQueue to schedule delayed completion.
+// TimerQueueInitialize must have been called (via ThreadPoolInitialize).
+
+namespace {
+
+struct DelayCompletion {
+    chaos::il2cpp::common::AsyncTask* task;
+    CHAOS_IL2CPP_INTPTR handle;
+};
+
+void DelayTimerCallback(void* state) noexcept {
+    auto* dc = static_cast<DelayCompletion*>(state);
+    dc->task->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(dc->handle);
+    delete dc;
+}
+
+} // anonymous namespace
+
+/// Core delay internal: create an AsyncTask, register one-shot timer,
+/// complete the task when the timer fires.  Returns task handle (0 on failure).
+static CHAOS_IL2CPP_INTPTR ChaosTaskDelayCore(uint32_t due_time_ms) noexcept {
+    using namespace chaos::il2cpp::common;
+    using namespace chaos::il2cpp::runtime_core::threading;
+    auto* task = new (std::nothrow) AsyncTask();
+    if (task == nullptr) return 0;
+    CHAOS_IL2CPP_INTPTR handle = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task);
+    auto* dc = new (std::nothrow) DelayCompletion{task, handle};
+    if (dc == nullptr) {
+        delete task;
+        return 0;
+    }
+    uint32_t timer_id = TimerQueueCreate(DelayTimerCallback, dc, due_time_ms, 0);
+    if (timer_id == kTimerQueueInvalidId) {
+        delete dc;
+        delete task;
+        return 0;
+    }
+    return handle;
+}
+
+CHAOS_IL2CPP_INTPTR chaos_task_delay_stub(CHAOS_IL2CPP_INT32 millisecondsTimeout) noexcept
+{
+    if (millisecondsTimeout <= 0) {
+        return ChaosTaskDelayCore(0);
+    }
+    return ChaosTaskDelayCore(static_cast<uint32_t>(millisecondsTimeout));
+}
+
+CHAOS_IL2CPP_INTPTR chaos_task_delay_timespan_stub(CHAOS_IL2CPP_INT64 ticks) noexcept
+{
+    constexpr int64_t kTicksPerMs = 10000;
+    CHAOS_IL2CPP_INT32 ms = 0;
+    if (ticks > 0) {
+        int64_t cnt = ticks / kTicksPerMs;
+        if (cnt > static_cast<int64_t>(INT32_MAX)) cnt = INT32_MAX;
+        ms = static_cast<CHAOS_IL2CPP_INT32>(cnt);
+    }
+    return ChaosTaskDelayCore(static_cast<uint32_t>(ms));
+}
+
+// ── Task.WhenAll / WhenAny native combinators (Phase 3 P3-3) ──
+// Given a contiguous array of child AsyncTask handles, produce a NEW aggregate
+// AsyncTask handle whose completion the combinator drives:
+//   WhenAll: aggregate completes when ALL children complete (faults if any
+//            child faulted — first observed exception propagates).
+//   WhenAny: aggregate completes when the FIRST child completes; the 1-based
+//            winner index is published as aggregate->result.
+// The aggregate handle is an ordinary AsyncTask, awaitable via the single-slot
+// async_task_on_completed continuation.
+
+namespace {
+
+// Shared completion state across the N child continuations.
+struct WhenState {
+    chaos::il2cpp::common::AsyncTask*    aggregate;
+    CHAOS_IL2CPP_INTPTR                  aggregate_handle;
+    std::atomic<int>                     remaining;
+    bool                                 mode_when_all;      // true=WhenAll
+    std::atomic<bool>                    won;                // WhenAny single-fire
+    CHAOS_IL2CPP_INTPTR*                 children;           // child handles array
+    int                                  n;                  // child count
+};
+
+// Delivered when a child completes; task_handle = the completing child.
+void WhenChildContinuation(CHAOS_IL2CPP_INTPTR task_handle, void* ctx) noexcept {
+    using namespace chaos::il2cpp::common;
+    auto* st = static_cast<WhenState*>(ctx);
+
+    if (st->mode_when_all) {
+        int rem = st->remaining.fetch_sub(1, std::memory_order_acq_rel) - 1;
+        if (rem == 0) {
+            // All children done: fault iff any faulted.
+            bool any_faulted = false;
+            CHAOS_IL2CPP_INTPTR ex = 0;
+            for (int i = 0; i < st->n; ++i) {
+                auto* child = require_async_task(st->children[i]);
+                if (child->faulted.load(std::memory_order_acquire)) {
+                    any_faulted = true;
+                    ex = child->exception;
+                    break;
+                }
+            }
+            st->aggregate->exception = ex;
+            st->aggregate->faulted.store(any_faulted, std::memory_order_relaxed);
+            st->aggregate->completed.store(true, std::memory_order_release);
+            finish_async_task(st->aggregate_handle);
+            delete st;
+        }
+        return;
+    }
+
+    // WhenAny: first-to-complete wins → find its index by handle.
+    if (st->won.exchange(true, std::memory_order_acq_rel)) return;  // lost
+    int winner = 0;
+    for (int i = 0; i < st->n; ++i) {
+        if (st->children[i] == task_handle) { winner = i; break; }
+    }
+    st->aggregate->result = static_cast<CHAOS_IL2CPP_INTPTR>(winner + 1);  // 1-based
+    st->aggregate->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    st->aggregate->faulted.store(false, std::memory_order_relaxed);
+    st->aggregate->completed.store(true, std::memory_order_release);
+    finish_async_task(st->aggregate_handle);
+    delete st;
+}
+
+} // anonymous namespace
+
+/// Shared internal: build aggregate + register a continuation on every child.
+static CHAOS_IL2CPP_INTPTR WhenAllAnyInternal(
+    CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n, bool when_all) noexcept
+{
+    using namespace chaos::il2cpp::common;
+    if (n < 0) return 0;
+    if (children == nullptr && n > 0) return 0;
+    auto* agg = new (std::nothrow) AsyncTask();
+    if (agg == nullptr) return 0;
+    auto* st = new (std::nothrow) WhenState();
+    if (st == nullptr) { delete agg; return 0; }
+    CHAOS_IL2CPP_INTPTR agg_handle = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(agg);
+    st->aggregate = agg;
+    st->aggregate_handle = agg_handle;
+    st->remaining.store(n, std::memory_order_relaxed);
+    st->mode_when_all = when_all;
+    st->won.store(false, std::memory_order_relaxed);
+    st->children = children;
+    st->n = n;
+
+    if (n == 0) {
+        // Empty WhenAll completes immediately (empty WhenAny is invalid → caller
+        // guards; keep symmetric: complete immediately, result undefined).
+        agg->completed.store(true, std::memory_order_release);
+        finish_async_task(agg_handle);
+        delete st;
+        return agg_handle;
+    }
+
+    for (int i = 0; i < n; ++i) {
+        CHAOS_IL2CPP_INTPTR child = children[i];
+        if (child == static_cast<CHAOS_IL2CPP_INTPTR>(0)) { continue; }
+        // A fully-synchronous completed child fires its continuation inline here,
+        // decrementing `remaining`.  Aggregate handles that correctly.
+        async_task_on_completed(child, WhenChildContinuation, st);
+    }
+    return agg_handle;
+}
+
+/// Task.WhenAll(Task[] children, int n).  children is a non-null contiguous
+/// array of n AsyncTask handles (owned by caller for the duration; the internal
+/// only reads them during synchronous scan on completion).  Returns the
+/// aggregate handle (0 on bad args / alloc failure).
+CHAOS_IL2CPP_INTPTR chaos_task_when_all(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept
+{
+    return WhenAllAnyInternal(children, n, /*when_all=*/true);
+}
+
+/// Task.WhenAny(Task[] children, int n).  Returns an aggregate handle whose
+/// result is 1 + the index of the first child to complete.
+CHAOS_IL2CPP_INTPTR chaos_task_when_any(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept
+{
+    return WhenAllAnyInternal(children, n, /*when_all=*/false);
+}
+
+// ── Managed-array overloads used by ShapeRegistry (codegen passes Task[] as INTPTR) ──
+// The contraining method unpack the managed handle array and delegate to
+// chaos_task_when_all/any which expect a flat element handle array.
+static CHAOS_IL2CPP_INTPTR WhenAllAnyManagedArray(
+    CHAOS_IL2CPP_INTPTR tasks_handle, bool when_all) noexcept
+{
+    if (tasks_handle == 0) {
+        return when_all ? chaos_task_when_all(nullptr, 0) : 0;
+    }
+    auto* arr = get_managed_array(tasks_handle);
+    if (arr == nullptr) return 0;
+    CHAOS_IL2CPP_INT32 n = static_cast<CHAOS_IL2CPP_INT32>(arr->length);
+    auto* elements = accessor_get_elements(
+        const_cast<ManagedArrayAccessor*>(arr));
+    auto* mem = new (std::nothrow) CHAOS_IL2CPP_INTPTR[static_cast<size_t>(n)];
+    if (mem == nullptr) return 0;
+    for (CHAOS_IL2CPP_INT32 i = 0; i < n; ++i) mem[i] = elements[i];
+    auto agg = WhenAllAnyInternal(mem, n, when_all);
+    delete[] mem;
+    return agg;
+}
+
+/// ShapeRegistry symbol for WhenAll(Task[]): extract from managed array handle.
+CHAOS_IL2CPP_INTPTR chaos_task_when_all_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept
+{
+    return WhenAllAnyManagedArray(tasks_handle, /*when_all=*/true);
+}
+
+/// ShapeRegistry symbol for WhenAny(Task[]): extract from managed array handle.
+CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept
+{
+    return WhenAllAnyManagedArray(tasks_handle, /*when_all=*/false);
 }
 
 }  // extern "C"

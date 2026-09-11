@@ -22,11 +22,17 @@ void chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
 // Generated code calls these when lowering async Task.GetResult() patterns.
 void ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
 
-// ── Task.Delay / TaskAwaiter await path ──
+// ── Task.Delay / TaskAwaiter await path (non-generic Task) ──
 // Without these, Task.Delay / Task.GetAwaiter / TaskAwaiter.get_IsCompleted
 // fell through to ChaosExternalRuntimeFallback → 0, so `await Task.Delay(n)`
 // suspended forever: GetAwaiter returned 0, IsCompleted read false, and
 // AwaitUnsafeOnCompleted saw task_handle==0 → no continuation registered.
+//
+// NOTE: these are the await-path proxies over the real AsyncTask handle, NOT
+// constant-return stubs.  ChaosAsyncTaskAwaiterGetIsCompleted reflects the
+// task's actual completion state and ChaosAsyncTaskAwaiterGetResultValue
+// returns the real result payload — a constant 1/0 here would silently defeat
+// suspension and corrupt every `await Task<T>` result.
 CHAOS_IL2CPP_INTPTR ChaosAsyncTaskDelay(CHAOS_IL2CPP_INT32 millisecondsDelay) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosAsyncTaskGetAwaiter(CHAOS_IL2CPP_INTPTR task_handle) noexcept;
 CHAOS_IL2CPP_INT32 ChaosAsyncTaskAwaiterGetIsCompleted(CHAOS_IL2CPP_INTPTR awaiter_ref) noexcept;
@@ -39,8 +45,25 @@ CHAOS_IL2CPP_INTPTR chaos_task_completion_source_create(void) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_tcs_get_task(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
 void chaos_tcs_set_result(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR value) noexcept;
 void chaos_tcs_set_exception(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR exception) noexcept;
+void chaos_tcs_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_result(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_exception(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR exception) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
+
+// ── Task.Delay native helpers (Phase 3 P3-2) ──
+// TimerQueue-backed delayed task completion (implemented in async_stubs.cpp).
+// Requires TimerQueueInitialize (via ThreadPoolInitialize / gate thread).
+CHAOS_IL2CPP_INTPTR chaos_task_delay_stub(CHAOS_IL2CPP_INT32 millisecondsTimeout) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_delay_timespan_stub(CHAOS_IL2CPP_INT64 ticks) noexcept;
+
+// ── Task.WhenAll / WhenAny native combinators (Phase 3 P3-3) ──
+// `children` is a contiguous array of CHAOS_IL2CPP_INTPTR Task handles; n = count.
+// Each returns a NEW aggregate AsyncTask handle (0 on invalid args/allocation failure).
+CHAOS_IL2CPP_INTPTR chaos_task_when_all(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_when_any(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept;
+
+// Managed-array overloads (codegen passes Task[] as an opaque CHAOS_IL2CPP_INTPTR):
+CHAOS_IL2CPP_INTPTR chaos_task_when_all_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
 
 }  // extern "C"

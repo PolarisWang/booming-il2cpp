@@ -47,8 +47,12 @@ std::queue<WorkItem>                      s_global_queue;
 /// Signalled when new work arrives or shutdown is requested.
 CHAOS_IL2CPP_CONDITION_VARIABLE           s_work_available;
 
-/// Active worker threads.
+/// Active worker threads.  Mutations (push_back / clear) occur under s_mutex
+/// in EnsureWorkerCount and ThreadPoolShutdown.  s_worker_count mirrors
+/// s_workers.size() and is safe to read without the mutex for heuristic paths
+/// (idle reclaim, gate tick, ThreadPoolWorkerCount).
 std::vector<std::thread>                  s_workers;
+static std::atomic<int32_t>               s_worker_count{0};
 
 /// Per-worker local queues for work-stealing.
 std::vector<WorkerLocalQueue*>            s_worker_queues;
@@ -183,7 +187,7 @@ void WorkerLoop() noexcept {
             std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(s_mutex);
 
             // Tier 2D: Idle reclamation — exit if idle for 30s and above min.
-            if (has_ever_done_work && s_workers.size() > kThreadPoolMinWorkerCount) {
+            if (has_ever_done_work && s_worker_count.load(std::memory_order_relaxed) > kThreadPoolMinWorkerCount) {
                 auto now = std::chrono::steady_clock::now();
                 if (now - last_work_time >= kThreadPoolIdleTimeout) {
                     // Before exiting, check one more time if work appeared.
@@ -252,6 +256,7 @@ void EnsureWorkerCount(int32_t desired) noexcept {
     while (static_cast<int32_t>(s_workers.size()) < desired) {
         s_workers.emplace_back(WorkerLoop);
     }
+    s_worker_count.store(static_cast<int32_t>(s_workers.size()), std::memory_order_release);
 }
 
 void WakeableWorkerLoop() noexcept {
@@ -679,6 +684,7 @@ void ThreadPoolShutdown() noexcept {
             if (t.joinable()) t.join();
         }
         s_workers.clear();
+        s_worker_count.store(0, std::memory_order_release);
 
         // Clean up worker queues.
         for (auto* q : s_worker_queues) DestroyWorkerQueue(q);
@@ -693,6 +699,15 @@ void ThreadPoolShutdown() noexcept {
         while (!s_global_queue.empty()) s_global_queue.pop();
         s_queue_depth.store(0, std::memory_order_relaxed);
     }
+
+    // Clear the singleton guard LAST, so the pool can be re-initialized after a
+    // shutdown (same-process hot-reload / repeated test setup).  Without this,
+    // a subsequent ThreadPoolInitialize() early-returns and the pool stays dead:
+    // no workers, no gate thread, so every timer/async_task_run callback hangs.
+    // Release-store pairs with the acquire-load at the top of Initialize, and
+    // all teardown above has completed, so a re-initializing thread observes a
+    // fully-joined pool.
+    s_initialized.store(false, std::memory_order_release);
 }
 
 void ThreadPoolQueueUserWorkItem(void (*callback)(void*), void* context) noexcept {
@@ -735,7 +750,7 @@ void ThreadPoolQueueUserWorkItemUnsafe(void (*callback)(void*), void* context) n
     // (every 15 ms) via HillClimbing, which makes optimal decisions based on
     // throughput, CPU utilization, and frequency-domain analysis.
     int32_t depth = s_queue_depth.load(std::memory_order_relaxed);
-    int32_t current_workers = static_cast<int32_t>(s_workers.size());
+    int32_t current_workers = s_worker_count.load(std::memory_order_acquire);
     if (depth > current_workers * 3 && current_workers < kThreadPoolMaxWorkerCount) {
         s_desired_workers.store(
             (std::min)(current_workers + 1, kThreadPoolMaxWorkerCount),
@@ -748,7 +763,7 @@ void ThreadPoolGateTick() noexcept {
     int32_t completed = s_completed_since_tick.exchange(0, std::memory_order_relaxed);
     completed += s_wakeable_completions.exchange(0, std::memory_order_relaxed);
 
-    int32_t current = static_cast<int32_t>(s_workers.size());
+    int32_t current = s_worker_count.load(std::memory_order_acquire);
     int32_t target;
 
     // Starving detection: if queue depth is more than 2× active workers,
@@ -787,7 +802,7 @@ void ThreadPoolGateTick() noexcept {
 }
 
 int32_t ThreadPoolWorkerCount() noexcept {
-    return static_cast<int32_t>(s_workers.size());
+    return s_worker_count.load(std::memory_order_acquire);
 }
 
 }  // namespace chaos::il2cpp::runtime_core::threading
