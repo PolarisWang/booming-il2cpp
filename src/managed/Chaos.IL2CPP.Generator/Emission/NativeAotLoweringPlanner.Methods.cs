@@ -994,6 +994,10 @@ public sealed partial class NativeAotLoweringPlanner
         // initializers inside __try/__except.  The array sits at namespace
         // scope so method bodies inside CHAOS_EH_TRY can reference it without
         // triggering the compiler error.
+        //
+        // NOT `static`: with TU paging the bake call sites live in page TUs, so an
+        // internal-linkage array would be invisible to them (C2065).  External linkage
+        // plus the matching `extern` in the shared header keeps it accessible everywhere.
         _enumAotBakeCacheArraySize = _enumAotBakeMap.Values.Count(e => e.ConstantInt != null);
         _enumAotBakeCacheCount = 0;  // reset counter for sequential indexing
         if (_enumAotBakeCacheArraySize > 0)
@@ -1001,7 +1005,7 @@ public sealed partial class NativeAotLoweringPlanner
             objectModelBuilder.AppendLine();
             objectModelBuilder.AppendLine("// File-scope cache for AOT-baked enum box values");
             objectModelBuilder.AppendLine($"// (avoids MSVC C2712 from function-local static inside __try/__except)");
-            objectModelBuilder.AppendLine($"static CHAOS_IL2CPP_INTPTR _g_bake_cache_[{_enumAotBakeCacheArraySize}] = {{}};");
+            objectModelBuilder.AppendLine($"CHAOS_IL2CPP_INTPTR _g_bake_cache_[{_enumAotBakeCacheArraySize}] = {{}};");
             objectModelBuilder.AppendLine();
         }
         // A2.6: Pre-scan for typeof(T).IsAssignableFrom(typeof(U)) → *Ptr direct API

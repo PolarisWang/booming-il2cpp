@@ -405,11 +405,28 @@ public sealed partial class NativeAotLoweringPlanner
             }
             else if (isTryParse)
             {
-                // TryParse (AOT-baked): emit cached box via file-scope static array
+                // TryParse (AOT-baked): emit cached box via file-scope array
                 // (avoids MSVC C2712 from function-local static with dynamic initializer
-                // inside __try/__except).  The _bake_cache_ array is declared at namespace
-                // scope in the generated file preamble.
+                // inside __try/__except).  _g_bake_cache_ has external linkage and is
+                // mirrored by an extern in the shared header, so page TUs can see it.
                 int cacheIdx = Interlocked.Increment(ref _enumAotBakeCacheCount) - 1;
+                if (cacheIdx >= _enumAotBakeCacheArraySize)
+                {
+                    // The array is sized from the bake-table entry count in the object-model
+                    // pass while indices come from this emission-site counter; a duplicate
+                    // emission would drift them.  Degrade to an uncached construction rather
+                    // than index past the end.
+                    var boxExpr = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>([]() -> void* { "
+                        + $"auto* box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}}); "
+                        + $"box->header.type_info = {GetNativeBoxTypeInfoSymbol(bakeEntry.EnumTypeId)}; "
+                        + $"box->value = static_cast<CHAOS_IL2CPP_INT64>({bakeEntry.ConstantInt.Value}); "
+                        + "return box; }())";
+                    if (resultSlotExpr != null)
+                        builder.AppendLine($"{indentation}    *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>({resultSlotExpr}) = {boxExpr};");
+                    EmitEvalStackPush(builder, indentation + "    ", "1");
+                    builder.AppendLine($"{indentation}}}");
+                    return;
+                }
                 builder.AppendLine($"{indentation}    // AOT-baked: {bakeEntry.Callee}");
                 builder.AppendLine($"{indentation}    if (!_g_bake_cache_[{cacheIdx}]) {{");
                 builder.AppendLine($"{indentation}        auto* box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}});");
@@ -426,6 +443,19 @@ public sealed partial class NativeAotLoweringPlanner
                 // Other value-returning baked calls (e.g. Enum.Parse): emit cached box,
                 // push the box pointer as the return value.  Uses file-scope cache array.
                 int cacheIdx = Interlocked.Increment(ref _enumAotBakeCacheCount) - 1;
+                if (cacheIdx >= _enumAotBakeCacheArraySize)
+                {
+                    // Same drift guard as the TryParse branch above: construct inline
+                    // instead of writing past the end of the shared cache.
+                    var boxExpr = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>([]() -> void* { "
+                        + $"auto* box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}}); "
+                        + $"box->header.type_info = {GetNativeBoxTypeInfoSymbol(bakeEntry.EnumTypeId)}; "
+                        + $"box->value = static_cast<CHAOS_IL2CPP_INT64>({bakeEntry.ConstantInt.Value}); "
+                        + "return box; }())";
+                    EmitEvalStackPush(builder, indentation + "    ", boxExpr);
+                    builder.AppendLine($"{indentation}}}");
+                    return;
+                }
                 builder.AppendLine($"{indentation}    // AOT-baked: {bakeEntry.Callee}");
                 builder.AppendLine($"{indentation}    if (!_g_bake_cache_[{cacheIdx}]) {{");
                 builder.AppendLine($"{indentation}        auto* box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}});");

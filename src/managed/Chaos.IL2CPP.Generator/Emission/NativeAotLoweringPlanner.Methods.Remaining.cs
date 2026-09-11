@@ -459,6 +459,20 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("void chaos_materialize_string_empty();");
         sb.AppendLine();
 
+        // _g_bake_cache_: file-scope cache of AOT-baked enum box values.  Defined in the
+        // object model (page 0) but REFERENCED from whichever page emits the baked
+        // Enum.Parse/TryParse call site.  A bare `static` at namespace scope has internal
+        // linkage and is therefore invisible across TUs — every page that used it failed
+        // with C2065 "'_g_bake_cache_': undeclared identifier".  The definition is
+        // emitted with external linkage; this declaration makes it visible to all pages.
+        // `extern` with the same namespace placement as the definition avoids an
+        // LNK2019 global-vs-namespace mismatch.
+        if (_enumAotBakeCacheArraySize > 0)
+        {
+            sb.AppendLine($"extern CHAOS_IL2CPP_INTPTR _g_bake_cache_[{_enumAotBakeCacheArraySize}];");
+            sb.AppendLine();
+        }
+
         // chaos_is_array_store_compatible: always emitted in object model
         sb.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
         sb.AppendLine();
