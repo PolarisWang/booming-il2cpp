@@ -387,6 +387,41 @@ yield-suspend 谓词"**无处可挂** —— 注入点在其上游就缺失了�
 `model.Methods` 中 `YieldOne::MoveNext` 的 `MethodSource` → 还原（已 diff 校验干净）。
 
 
+#### 🔴 A4 取证附带发现：builder `MoveNext` 产出**未定义符号**（独立缺陷，非 A1 门控）
+
+同一次 dump（`AsyncIteratorTestAssembly`，不改任何代码）里还实测到第 14 个成员面
+之外的第二个真实缺口：`<YieldOne>d__0::…IAsyncEnumerator<System.Int32>.MoveNextAsync`
+**不在 A1 门控内**（它不是 `>d__::MoveNext`），所以它今天就照常走普通路径 —— 而产出的
+C++ 里调用了：
+
+```
+chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_AsyncIteratorMethodBuilder__MoveNext_AsyncIteratorMethods__YieldOne_d__0__System_Void_AsyncIteratorMethods__YieldOne_d__0__
+```
+
+**该符号在整个 translation unit 里没有任何定义**（调用点有 2 处，定义 0 处）。
+对照：同一份 A3 注册（`RegisterAsyncIteratorBuilder`，
+`RuntimeHelperShapeRegistry.CoreStubs.Part1.S16.cs:~610`，调用点 `Part1.cs:97`）
+的 `Create` op **工作正常** —— emitted C++ 里是真实的
+`chaos_async_iterator_builder_create();`。
+
+**为什么值得单独登记**：这不是"未实现所以 stub 返回 0"的形态，而是**未定义符号**——
+若 A4 只盯着 `MoveNext` stub，这个缺口会被当作"已经接线好了"而静默漏过。
+（符合本 STATUS 反复记录的假绿形态：**registry 级注册存在 ≠ 管线真的命中**。）
+
+**已确认的事实**（供接手者省去重测）：
+- 真实 callee 拼写（AOT Core IR 实测）：
+  `System.Private.CoreLib/System.Runtime.CompilerServices.AsyncIteratorMethodBuilder::MoveNext<AsyncIteratorMethods+<YieldOne>d__0>:System.Void(AsyncIteratorMethods+<YieldOne>d__0&)`
+- 注册存在且被调用；`Create` 走通，`MoveNext` 不走通。
+- 临时埋点（**均已还原**）三处全静默：
+  `TryGetAsyncStateMachineTypeName` 解析失败路径、
+  `TryMatchGenericShape`（`callee.Contains("AsyncIteratorMethodBuilder")` 守卫）、
+  `TryResolveAsyncRuntimeContinuationMethod` 失败路径。
+  测试工程对 Generator 是 `ProjectReference`，源码改动**确实**生效 —— 故"三处静默"是真信号：
+  该 callee 很可能**根本没走到** `TryMatchGenericShape`（另有一条直接产出
+  `chaos_external_runtime_*` 名字的路径）。
+- 根因**尚未定论**，诊断进行中（专项排查中，未做任何修复）。
+
+
 **A1 的关键发现（值得全项目记住）**：emission 跑在 `BuildMethodSourceSafe` 之下，
 它捕获**一切**异常并替换成 `BuildAotUnreachableMethodStub`。A1 的第一版实现是
 "抛 `NotSupportedException`"，测试正确地失败了——异常被吞掉、`CodegenFailureCount` 静默 +1、
