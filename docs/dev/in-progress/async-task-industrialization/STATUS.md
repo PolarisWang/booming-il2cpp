@@ -5,7 +5,7 @@
 ```yaml
 task_id: async-task-industrialization
 task_type: roadmap
-phase: phase-1-核心执行语义
+phase: phase-2-组合子
 roadmap_or_plan: docs/dev/in-progress/async-task-industrialization/roadmap-v1-01.md
 design: docs/dev/in-progress/async-task-industrialization/design-v1-01.md
 created: 2026-09-07
@@ -81,16 +81,48 @@ auto_continue: true
 | TCS `try_set_canceled` 置 `faulted` | 三态回退（把取消上报为普通 fault） | `4830b6064` |
 | `set_*`/`try_set_*` 未维护 `canceled` | 任务可能同时报告两种状态 | `4830b6064` |
 
+## Phase 2 — 组合子
+
+### 已完成的子任务
+
+| # | 内容 | commit | 反例验证 |
+|---|------|--------|---------|
+| P2-1 | WhenAll/WhenAny 反例（同步 + 异步两条路径） | `db356fa82` | 关闭 winner 识别 → 2 FAIL，index-0 保持绿 |
+| P2-2 | `Task.ContinueWith` native 实现 + codegen 接线 | `4887d7556` | 不调用委托 → 9 FAIL（3 个 null 用例保持绿）；传 0 代 antecedent → 7 FAIL |
+| P2-3 | WhenAll 结果集 `[1,2,3]` + 子数组 use-after-free | `1be6aa15b` | 恢复 `delete[] mem` → **进程崩溃**；不建结果集 → 3 FAIL；结果轮转 → 2 FAIL |
+
+### Phase 2 附带修复的真实缺陷（P2-3）
+
+| 缺陷 | 说明 |
+|------|------|
+| **use-after-free** | `WhenAllAnyManagedArray` 拷贝子句柄到堆缓冲后立即 `delete[]`，而聚合的 continuation 在**每个子任务完成时**解引用该指针。异步完成的子任务读到已释放内存（ASan 可直接抓；无 ASan 时表现为错误的 winner/fault 或崩溃）。既有测试全部用同步完成的子任务，恰好走 inline 快路径而未触发 |
+| **结果集缺失** | 聚合只记录完成/异常，从不收集子结果 → `agg->result` 恒为 0。旧 smoke 测试甚至断言 `result == 0` 并注释 "result not used"，把缺口编码成了期望行为 |
+
+### Phase 2 剩余的缺口（尚需实现）
+
+| API | 状态 |
+|-----|------|
+| `WhenAll<TResult>` 泛型重载 | ❌ 仅非泛型 `Task[]` 已接线 |
+| `WhenEach` | ❌ 无实现 |
+| `Task.Factory` 21 methods | ❌ 无实现 |
+| `ContinueWith` 12 overloads | ⚠️ 仅 `Action<Task>` 一个重载已接线 |
+
 ## 当前通过测试
 
 | 测试套 | 结果 |
 |--------|------|
-| codegen 全量 | **2172/2172 PASS** |
+| codegen 全量 | **2140/2143**（3 项为**预存在**失败，与本线无关：`IdentifyStructLocalSlots_NonValueTypeInitobj_NotCounted`、`UnknownExternalCall_UsesDispatchTable`、`CreatePseudoMetadataHandle_ReturnsNonZero`（后者 order-dependent，窄 filter 下通过）） |
 | `test_async_task_state` (1-4) | **8/8 PASS** |
 | `test_async_task_exception` (1-3) | **8/8 PASS** |
 | `test_async_task_run_e2e` (1-1) | **5/5 PASS** |
 | `test_async_task_blocking` (1-2) | **5/5 PASS** |
-| `test_async_integration_smoke` | **28/28 PASS**（无回归） |
+| `test_async_when` (P2-1) | **14/14 PASS** |
+| `test_async_when_async` (P2-1) | **7/7 PASS** |
+| `test_async_when_array` (P2-3) | **8/8 PASS** |
+| `test_async_continue_with` (P2-2) | **12/12 PASS** |
+| `test_async_integration_smoke` | **28/28 PASS** |
+
+async 线合计 **95 项全绿**。
 
 基线修正：此前文档记的 codegen 2165/2165 是在**主检出**上跑出的数字；worktree 内正确
 解析后为 **2172/2172**（1-6 修复后）。
@@ -104,13 +136,11 @@ auto_continue: true
 
 ## 下一步
 
-Phase 2 — 组合子：`WhenAll` / `WhenAny` / `WhenEach` + `ContinueWith` 12 overloads
-+ `Task.From*` + `Task.Factory` 21 methods。
-
-native 侧 `chaos_task_when_all` / `chaos_task_when_any` 已存在（P3-3），但**尚无反例测试**，
-且 `WhenEach` / `ContinueWith` / `Task.Factory` 需逐个接线。先建 WhenAll/WhenAny 反例
-（结果集 = `[1,2,3]`、winner index 正确、子 fault → 聚合 fault）。
+Phase 2 剩余：`WhenAll<TResult>` 泛型重载 + `WhenEach` + `Task.Factory` 21 methods +
+`ContinueWith` 其余 11 个重载。其中 `Task.Factory` 是最大的未接线块（21 methods），
+需先确认 codegen 侧 `TaskFactory` 的 subject 是否可探测（查 ATG manifest），再决定
+native 接线面。
 
 ```yaml
-recommended_next_child: ASYNC-P2-1
+recommended_next_child: ASYNC-P2-4
 ```
