@@ -220,7 +220,7 @@ revert 验证后两测试**都**变红。
 |----|------|------|------|
 | **A1** | 显式检测 + 诊断：识别 `AsyncIteratorMethodBuilder` 状态机，**显式记录**而非静默返 0 | 反例：去掉检测 → 未支持形态静默返 0（gate 必须变红） | ✅ `bd77bcd73` |
 | **A2** | native `AsyncIteratorBuilder` + **池化** `ValueTask<bool>` source（`IValueTaskSource`） | P1 硬约束：池化非可选 | ✅ 本轮（见下） |
-| A3 | codegen：registry 5-op 注册（Create/MoveNext/AwaitOnCompleted/AwaitUnsafeOnCompleted/Complete）、classify、await 侧目录 | — | ⬜ |
+| A3 | codegen：registry 5-op 注册（Create/MoveNext/AwaitOnCompleted/AwaitUnsafeOnCompleted/Complete）、classify、await 侧目录 | — | ✅ 本轮（见下） |
 | A4 | yield-return IR lowering（state=-4 续跑）、`IAsyncEnumerable`/`IAsyncEnumerator` 接口 vtable（slot 必须来自反射，不得手写常量）、`await foreach` 消费侧、`IAsyncDisposable`/`<>w__disposeMode` | **端到端可运行**（`Iterate<T>` 真跑通，`await foreach` 能消费） | ⬜ |
 
 **A1 的关键发现（值得全项目记住）**：emission 跑在 `BuildMethodSourceSafe` 之下，
@@ -258,11 +258,48 @@ A2 的反例取证（每条都实机执行、并已 diff 校验回退干净）�
 | 去掉池溢出分配路径 | **别名被直接检出**（6 组指针相同） |
 | 去掉 await 的注册调用 | resume 测试 + `EXPECT_DEATH` 守卫 **双红** |
 
+**A3 交付**：`AsyncIteratorMethodBuilder` 的 5 个 op 全部注册进
+`RuntimeHelperShapeRegistry`（`Create` / `Complete` / `MoveNext<SM>` /
+`AwaitOnCompleted<Ta,SM>` / `AwaitUnsafeOnCompleted<Ta,SM>`），并**放宽**
+A1 加的 `TryGetAsyncStateMachineTypeName` 全量拒绝——只对 MoveNext/Await 解析 `<SM>`，
+Create/Complete 仍返回 false（它们不带泛型参数，乱接受会让符号解析指向错误状态机）。
+
+A3 的三处关键设计（都是"先验被实测逼出来"的）：
+
+1. **A1 的一刀切必须被精确化，不能直接删**。A1 让
+   `TryGetAsyncStateMachineTypeName` 对**所有** iterator callee 返回 false，这同时打断了
+   `TryResolveAsyncRuntimeContinuationMethod` → 使 iterator 的 MoveNext 符号不可解析。
+   A3 不是"恢复旧行为"，而是按 op 分辨：MoveNext/Await 解析，Create/Complete 拒绝。
+2. **`AwaitUnsafeOnCompleted` 必须独立注册**。两个拼写签名相同、共用一个 native 实现，
+   但只注册一个会让另一个的 await 落到 `ChaosExternalRuntimeFallback` → 0，
+   迭代器在该 await 处**静默停止推进**。
+3. **await 入口注册在"被 await 的对象"上**，不是迭代器自己的池化 source——
+   这条在 A2 已修正过一次，A3 的 registry 侧沿用同一语义
+   （`*resolve_native_int_slot(chaos_arg_0)` 取出 awaited task handle）。
+
+A3 的反例取证（每条都实机执行、并已 diff 校验回退干净）：
+
+| 反例 | 结果 |
+|------|------|
+| 从注册 `foreach` 数组删掉 `AwaitUnsafeOnCompleted` | `BothAwaitSpellings(AwaitUnsafeOnCompleted)` **变红，另一行保持绿** |
+| 把 MoveNext resolver 的 native 符号改成 `chaos_BOGUS_*` | `MoveNextResolverEmitsTheRealNativeSymbol` **变红** |
+| 把 await resolver 体内的 `{mnSym}` 换成 `0` | `BothAwaitSpellings` **两行全红** |
+| 从解析器数组删掉 `"AwaitOnCompleted"` | 解析层 **2 项变红** |
+| 解析器改成"全接受"（返回假名 `"Bogus"`） | Create/Complete 负向断言 **1 项变红** |
+
+> **A3 的测试教训（值得记住）**：registry 层最初的 MoveNext 测试**只断言 descriptor**
+> （`Assert.Equal("MoveNext", descriptor.MethodName)`），**不断言产出的符号**。
+> 反例实测打脸——把 native 符号改成 `chaos_BOGUS_*` 后该测试**仍然全绿**：
+> 注册照常匹配，只有真正链接时才会炸。断言"匹配上了"与断言"产出正确"是两回事，
+> 前者对符号错误零判别力。已改为驱动**真实 `Create()`** 构造 planner、
+> 解析并断言 `CppSource` 内的真实符号（`CreatePlannerWithIteratorMoveNext`）。
+> 最初版本还传了 `null` planner，那只是证明 resolver 会崩——同样是假绿。
+
 ## 当前通过测试
 
 | 测试套 | 结果 |
 |--------|------|
-| codegen 全量 | **2186 通过 / 5 失败（均为预存在）**；详见下方基线说明 |
+| codegen 全量 | **2199 通过 / 5 失败（均为预存在）**；详见下方基线说明 |
 | `AsyncIteratorDetectionTests` (A1) | **3/3 PASS** |
 | `test_async_task_state` (1-4) | **8/8 PASS** |
 | `test_async_task_exception` (1-3) | **8/8 PASS** |
@@ -274,9 +311,10 @@ A2 的反例取证（每条都实机执行、并已 diff 校验回退干净）�
 | `test_async_continue_with` (P2-2) | ⚠️ **10 通过 / 2 失败（均为预存在）** — 见下方修正 |
 | `test_async_task_factory` (P2-5) | **6/6 PASS** |
 | `test_async_iterator` (P2-8 A2) | **14/14 PASS**（5 次重复） |
+| codegen A3 注册/解析（P2-8 A3） | **13/13 PASS**（6 解析层 + 3 registry 层 + 2 await 拼写 + 2 负向） |
 | `test_async_integration_smoke` | **28/28 PASS** |
 
-async 线合计 **115 项**：113 绿 + 2 预存在红。
+async 线合计 **128 项**：126 绿 + 2 预存在红（A3 新增 13 项 codegen 测试）。
 
 > ⚠️ `test_async_continue_with` 基线修正：此前记的 **12/12** 有误。A2 期间实跑为
 > **10 通过 / 2 失败**（`AsyncContinueWith.ContinuationTaskCarriesTheContinuationsReturnValue`、
@@ -291,11 +329,18 @@ async 线合计 **115 项**：113 绿 + 2 预存在红。
 > （`AsyncPipelineTests.MovenextEmittedSource_*`：`ContainsStateMachineFields` /
 > `SetResultAndSetExceptionRouteToNativeAsyncBuilder` /
 > `ContainsSetResultAndAwaitUnsafeOnCompleted` / `BoxPointerPassedByValueNotStackSlot` /
-> `SuspendReturnsAfterAwaitUnsafeOnCompleted`）是**预存在**的：在 HEAD 的干净 detached
+> `SuspendReturnsAfterAwaitUnsafeOnCompleted`）是**预存在的**：在 HEAD 的干净 detached
 > worktree（无任何 A1 改动）上逐一复现同一组 5 个失败，**已验证，不是推断**。
 > 症状是 emission 产出 `// AOT-unreachable stub` 而非真实 MoveNext 体——
 > 与 A1 的 "BuildMethodSourceSafe 吞异常" 是同一机制的不同受害面，值得单独专项。
 > 新增的 codegen 测试计数（2191 = 2188 + A1 的 3 项）也确认 A1 未误伤既有用例。
+>
+> **A3 复核方式**：这次不再建 detached worktree（在 `/tmp` 下 `dotnet test` 会因
+> `Could not locate repository root (.git directory)` 而**全量假红**——该路径下 386 项
+> 报错，完全不可用；上一轮 codegen 基线修正用的就是这种方式，其数字同样不可信）。
+> 改为**就地回退**：备份 5 个文件 → `git checkout --` → 跑基线
+> （**2186 通过 / 5 失败**，失败集与 A3 后**逐一相同**）→ 回填复核。A3 后为
+> **2199 通过 / 5 失败**，即 +13 项新测试、0 回归。
 
 > ⚠️ native 构建注意：`artifacts/build/rtnative` 未设 `ROADMAP0_PRESET_TARGET`，
 > 因此顶层 CMakeLists 的 googletest FetchContent 块被跳过，**该树下所有 gtest 目标

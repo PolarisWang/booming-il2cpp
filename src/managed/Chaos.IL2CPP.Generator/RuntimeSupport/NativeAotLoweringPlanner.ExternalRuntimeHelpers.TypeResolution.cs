@@ -30,15 +30,32 @@ public sealed partial class NativeAotLoweringPlanner
 	private static bool TryGetAsyncStateMachineTypeName(string callee, out string? stateMachineTypeName)
 	{
 		stateMachineTypeName = null;
-		// ASYNC-P2-8 A1: an async-ITERATOR builder call is NOT a supported async shape, and
-		// must not be mistaken for one.  This method is only a name parser, so it returns
-		// false here rather than throwing: its callers run inside BuildMethodSourceSafe,
-		// which catches every exception and substitutes a silent stub — a throw would be
-		// invisible.  The authoritative "we do not support iterators" signal is raised in
-		// ClassifyAsyncMethod / EmitManagedMethod, which records the subject id so the
-		// generator can surface kUnsupportedAsyncIterator* in the generated C++.
+		// ASYNC-P2-8 A1/A3.  Iterators take their own branch here.
+		//
+		// A1 returned false unconditionally for every AsyncIteratorMethodBuilder callee,
+		// which was right when there was no runtime to lower them onto — but it also made
+		// the iterator's OWN state machine name unresolvable, and A3 needs that name to
+		// find the iterator's MoveNext symbol (the same lookup the async Task path uses).
+		// A3 therefore resolves the name for the ops that embed an <SM> argument, and
+		// keeps returning false for the rest.
+		//
+		// What A1 was actually protecting is unchanged and still enforced: the
+		// "we do not support this shape" signal is raised in ClassifyAsyncMethod /
+		// EmitManagedMethod, which record the subject id so the generator surfaces
+		// kUnsupportedAsyncIterator*.  Resolving a NAME here has never been the signal.
+		//
+		// This must not throw: callers run inside BuildMethodSourceSafe, which catches
+		// every exception and substitutes a silent stub — a throw would be invisible.
 		if (IsAsyncIteratorBuilderCallee(callee))
 		{
+			if (TryParseAsyncIteratorBuilderMoveNextStateMachineType(callee, out stateMachineTypeName))
+			{
+				return true;
+			}
+			if (TryParseAsyncIteratorBuilderAwaitOnCompleted(callee, out _, out stateMachineTypeName))
+			{
+				return true;
+			}
 			return false;
 		}
 		if (TryParseAsyncTaskBuilderStartStateMachineType(callee, out stateMachineTypeName))
@@ -118,6 +135,92 @@ public sealed partial class NativeAotLoweringPlanner
 	private static bool TryParseAsyncValueTaskBuilderAwaitUnsafeOnCompleted(string callee, out string? builderResultTypeName, out string? awaiterTypeName, out string? stateMachineTypeName)
 	{
 		return TryParseAsyncBuilderAwaitUnsafeOnCompleted(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder", out builderResultTypeName, out awaiterTypeName, out stateMachineTypeName);
+	}
+
+	/// <summary>
+	/// ASYNC-P2-8 A3. The builder type prefix for
+	/// <c>System.Runtime.CompilerServices.AsyncIteratorMethodBuilder</c>.
+	/// <para>
+	/// Spellings verified against the committed contract artifact
+	/// <c>runtime-helper-contracts-v1-01.json</c> (not written by hand):
+	/// <c>AsyncIteratorMethodBuilder::Create/0</c>, <c>::MoveNext`1/1</c>,
+	/// <c>::AwaitOnCompleted`2/2</c>, <c>::AwaitUnsafeOnCompleted`2/2</c>, <c>::Complete/0</c>.
+	/// </para>
+	/// </summary>
+	private const string AsyncIteratorBuilderTypePrefix =
+		"System.Private.CoreLib/System.Runtime.CompilerServices.AsyncIteratorMethodBuilder";
+
+	/// <summary>
+	/// ASYNC-P2-8 A3. Parse <c>AsyncIteratorMethodBuilder::MoveNext&lt;TStateMachine&gt;</c>.
+	/// <para>
+	/// Shape differs from <c>AsyncTaskMethodBuilder::Start&lt;SM&gt;</c> only in the method
+	/// name — both take exactly one state-machine type argument and no builder result type
+	/// (the iterator builder is non-generic; its element type lives on the state machine).
+	/// So the existing <c>Start</c> parser is reused with the method name swapped, rather
+	/// than duplicating the generic-argument scanning.
+	/// </para>
+	/// </summary>
+	private static bool TryParseAsyncIteratorBuilderMoveNextStateMachineType(string callee, out string? stateMachineTypeName)
+	{
+		return TryParseAsyncBuilderStateMachineTypeArg(
+			callee, AsyncIteratorBuilderTypePrefix, "MoveNext", out stateMachineTypeName);
+	}
+
+	/// <summary>
+	/// ASYNC-P2-8 A3. Parse
+	/// <c>AsyncIteratorMethodBuilder::AwaitOnCompleted&lt;TAwaiter,TStateMachine&gt;</c> /
+	/// <c>::AwaitUnsafeOnCompleted&lt;TAwaiter,TStateMachine&gt;</c>.
+	/// <para>
+	/// Deliberately does NOT delegate to <see cref="TryParseAsyncBuilderAwaitUnsafeOnCompleted"/>:
+	/// that helper hardcodes the method name <c>AwaitUnsafeOnCompleted</c> and would therefore
+	/// silently fail on <c>AwaitOnCompleted</c>. Both must parse — the iterator state machine
+	/// emits whichever the awaiter permits, and missing one leaves that await unresolvable.
+	/// </para>
+	/// </summary>
+	private static bool TryParseAsyncIteratorBuilderAwaitOnCompleted(
+		string callee, out string? awaiterTypeName, out string? stateMachineTypeName)
+	{
+		awaiterTypeName = null;
+		stateMachineTypeName = null;
+		foreach (string methodName in new[] { "AwaitOnCompleted", "AwaitUnsafeOnCompleted" })
+		{
+			string marker = $"{AsyncIteratorBuilderTypePrefix}::{methodName}<";
+			if (TryReadGenericArgumentList(callee, marker, out string genericArgumentList))
+			{
+				IReadOnlyList<string> args = SplitTopLevelGenericArguments(genericArgumentList);
+				if (args.Count == 2)
+				{
+					awaiterTypeName = args[0];
+					stateMachineTypeName = args[1];
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/// <summary>
+	/// Parse a <c>Builder::MethodName&lt;TStateMachine&gt;</c> callee down to its single
+	/// state-machine type argument. Shared by the iterator <c>MoveNext</c> parser; kept
+	/// separate from the literal-reading <c>Start</c> parser so the two can diverge if the
+	/// managed shape ever changes.
+	/// </summary>
+	private static bool TryParseAsyncBuilderStateMachineTypeArg(
+		string callee, string builderTypePrefix, string methodName, out string? stateMachineTypeName)
+	{
+		stateMachineTypeName = null;
+		string marker = $"{builderTypePrefix}::{methodName}<";
+		if (!TryReadGenericArgumentList(callee, marker, out string genericArgumentList))
+		{
+			return false;
+		}
+		IReadOnlyList<string> args = SplitTopLevelGenericArguments(genericArgumentList);
+		if (args.Count != 1)
+		{
+			return false;
+		}
+		stateMachineTypeName = args[0];
+		return true;
 	}
 
 	private static bool TryParseAsyncBuilderStartStateMachineType(string callee, string openGenericBuilderTypePrefix, out string? builderResultTypeName, out string? stateMachineTypeName)

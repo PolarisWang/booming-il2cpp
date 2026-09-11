@@ -94,6 +94,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterReflectionParameterInfo(registry);
             RegisterAsyncTaskYield(registry);
             RegisterAsyncTaskBuilder(registry);
+            RegisterAsyncIteratorBuilder(registry);
             RegisterDecimal(registry);
             RegisterTaskCompletionSource(registry);
             RegisterTaskRun(registry);

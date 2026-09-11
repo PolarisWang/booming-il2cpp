@@ -605,6 +605,176 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// ASYNC-P2-8 A3. AsyncIteratorMethodBuilder native wiring — the
+        /// <c>async IAsyncEnumerable&lt;T&gt;</c> / <c>async IAsyncEnumerator&lt;T&gt;</c>
+        /// counterpart of <see cref="RegisterAsyncTaskBuilder"/>.
+        ///
+        /// Routes the 5 builder operations to the A2 native surface
+        /// (<c>chaos/async_iterator.h</c>, committed 624c3682f):
+        /// <code>
+        ///   Create/0                        -> chaos_async_iterator_builder_create()
+        ///   MoveNext`1/1                    -> chaos_async_iterator_builder_move_next(...)
+        ///   AwaitOnCompleted`2/2            -> chaos_async_iterator_builder_await_on_completed(...)
+        ///   AwaitUnsafeOnCompleted`2/2      -> chaos_async_iterator_builder_await_unsafe_on_completed(...)
+        ///   Complete/0                      -> chaos_async_iterator_builder_complete(...)
+        /// </code>
+        /// Spellings are the committed contract artifact's
+        /// (<c>runtime-helper-contracts-v1-01.json</c>), not a hand-written guess.
+        ///
+        /// <para>
+        /// <b>Why BOTH AwaitOnCompleted and AwaitUnsafeOnCompleted are registered.</b>
+        /// They are distinct members on the managed type, and the C# compiler emits
+        /// whichever the awaiter permits — <c>await Task.Yield()</c> inside an iterator
+        /// can reach the unsafe form.  The original A2 plan registered only
+        /// <c>AwaitOnCompleted</c>; the recon doc flagged that omission (§1.1) and both
+        /// are wired here to one native implementation (native code does not enforce the
+        /// unsafe/on-completed distinction).
+        /// </para>
+        ///
+        /// <para>
+        /// <b>These are NOT stubs.</b> Each forwards to real native semantics over the
+        /// pooled source.  A constant-return body here would reproduce exactly the
+        /// silent-wrong-answer shape A1 was built to eliminate, while looking greener
+        /// than falling through to ChaosExternalRuntimeFallback.
+        /// </para>
+        /// </summary>
+        private static void RegisterAsyncIteratorBuilder(RuntimeHelperShapeRegistry registry)
+        {
+            const string Prefix = "System.Runtime.CompilerServices.AsyncIteratorMethodBuilder";
+
+            // ── Create (static, returns builder handle) ──
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: Prefix,
+                MethodName: "Create",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
+                    [
+                        "    return chaos_async_iterator_builder_create();",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                        CreateNativeIntAbiSlot(),
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "chaos_async_iterator_builder_create");
+                }));
+
+            // ── Complete (instance, void()) ──
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: Prefix,
+                MethodName: "Complete",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    // Complete() ends an iteration but must NOT free the builder: the state",
+                        "    // machine can be enumerated again (GetAsyncEnumerator called twice).",
+                        "    // Release happens through chaos_async_iterator_builder_destroy at the",
+                        "    // state machine's own lifetime end.",
+                        "    chaos_async_iterator_builder_complete(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "chaos_async_iterator_builder_complete");
+                }));
+
+            // ── MoveNext<TStateMachine> (instance; drives the iterator's MoveNext) ──
+            // Needs the state machine's native MoveNext symbol, exactly as Start<SM> does.
+            // Resolver parses the <SM> type argument, resolves its MoveNext method, and
+            // embeds the native symbol in the emitted body.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: Prefix,
+                MethodName: "MoveNext",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    if (!TryParseAsyncIteratorBuilderMoveNextStateMachineType(callee, out var smName) ||
+                        string.IsNullOrEmpty(smName))
+                    {
+                        return null;
+                    }
+                    if (!planner.TryResolveAsyncRuntimeContinuationMethod(callee, out var mm) ||
+                        mm?.NativeSymbol is not { Length: > 0 } mnSym)
+                    {
+                        return null;
+                    }
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = $@"extern ""C"" CHAOS_IL2CPP_INTPTR {symbol}(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1) {{
+    // MoveNext<TStateMachine>(ref stateMachine): drive the iterator one step.
+    // chaos_arg_0 = builder handle (the source pool), chaos_arg_1 = ref state machine.
+    return chaos_async_iterator_builder_move_next(chaos_arg_0, reinterpret_cast<CHAOS_IL2CPP_INTPTR>({mnSym}), chaos_arg_1);
+}}";
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(),
+                                CreateNativeIntAbiSlot(),
+                            }),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: symbol);
+                }));
+
+            // ── AwaitOnCompleted / AwaitUnsafeOnCompleted<TAwaiter,TStateMachine> ──
+            // Both spellings register the SAME resolver — the two managed members share one
+            // native implementation (see the class doc).  Registering only one would leave
+            // the other's awaits routing to ChaosExternalRuntimeFallback -> 0, i.e. an
+            // iterator that silently stops advancing at that await.
+            foreach (string methodName in new[] { "AwaitOnCompleted", "AwaitUnsafeOnCompleted" })
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: Prefix,
+                    MethodName: methodName,
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        if (!TryParseAsyncIteratorBuilderAwaitOnCompleted(callee, out _, out var smName) ||
+                            string.IsNullOrEmpty(smName))
+                        {
+                            return null;
+                        }
+                        if (!planner.TryResolveAsyncRuntimeContinuationMethod(callee, out var mm) ||
+                            mm?.NativeSymbol is not { Length: > 0 } mnSym)
+                        {
+                            return null;
+                        }
+                        var symbol = GetExternalRuntimeHelperSymbol(callee);
+                        string nativeEntry = methodName == "AwaitOnCompleted"
+                            ? "chaos_async_iterator_builder_await_on_completed"
+                            : "chaos_async_iterator_builder_await_unsafe_on_completed";
+                        var src = $@"extern ""C"" CHAOS_IL2CPP_INTPTR {symbol}(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2) {{
+    // {methodName}<TAwaiter,TStateMachine>(ref awaiter, ref stateMachine).
+    // chaos_arg_0 = ref awaiter (the awaited AsyncTask handle lives in this slot),
+    // chaos_arg_1 = ref state machine, chaos_arg_2 unused (kept for ABI symmetry with
+    // the native entry point's move_next/sm_box pair).
+    //
+    // The continuation is registered on the AWAITED TASK, not on the iterator's own
+    // pooled source: registering on the pool would resume the wrong object and the
+    // state machine would never re-enter.
+    CHAOS_IL2CPP_INTPTR awaited = *resolve_native_int_slot(chaos_arg_0);
+    if (awaited == static_cast<CHAOS_IL2CPP_INTPTR>(0)) return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    return {nativeEntry}(awaited, reinterpret_cast<CHAOS_IL2CPP_INTPTR>({mnSym}), chaos_arg_1);
+}}";
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact[3]
+                                {
+                                    CreateNativeIntAbiSlot(),
+                                    CreateNativeIntAbiSlot(),
+                                    CreateNativeIntAbiSlot(),
+                                }),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0, 1 });
+                    }));
+            }
+        }
+
+        /// <summary>
         /// TaskCompletionSource (non-generic and generic) — route SetResult/TrySetResult/
         /// SetException/TrySetException/SetCanceled/TrySetCanceled to native chaos_tcs_*
         /// helpers so generated C++ calls them directly instead of falling through to the
