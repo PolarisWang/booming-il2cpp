@@ -492,10 +492,11 @@ public sealed class ValueGenerator
         // Stream.Null is already handled in NullGuardSafeDefaults; the ones below
         // give non-empty content so read/path methods take their real branch.
         ["MemoryStream"] = "new System.IO.MemoryStream(new byte[] { 0x7B, 0x7D })",
-        ["ReadOnlyMemory"] = "new System.ReadOnlyMemory<System.Byte>(new byte[] { 0x7B, 0x7D })",
-        ["ReadOnlySequence"] = "new System.Buffers.ReadOnlySequence<System.Byte>(new byte[] { 0x7B, 0x7D })",
-        ["ArraySegment"] = "new System.ArraySegment<System.Byte>(new byte[] { 0x7B, 0x7D })",
-        ["IBufferWriter"] = "new System.Buffers.ArrayBufferWriter<System.Byte>()",
+        // NOTE: ReadOnlyMemory / ReadOnlySequence / ArraySegment / IBufferWriter
+        // are deliberately NOT listed here — their element type must match the
+        // declared generic parameter, so they live in GenericAwareFixtures above.
+        // A static entry hardcoded to <System.Byte> produced CS1503 for every
+        // method taking e.g. ReadOnlyMemory<char> (MemoryExtensions.Trim et al).
         // ── System.Net.Sockets ──
         // AsyncCallback needs a non-null lambda or the APM methods throw.
         ["AsyncCallback"] = "_ => { }",
@@ -509,15 +510,106 @@ public sealed class ValueGenerator
     };
 
     /// <summary>
+    /// Generic-aware fixture builders, keyed by SHORT base name (same key space
+    /// as <see cref="FixtureValues"/>).  Unlike the static-expression table above,
+    /// each entry receives the full generic type arguments and produces a C#
+    /// expression that matches the required element type.  This prevents CS1503
+    /// errors when a method parameter is e.g. <c>ReadOnlyMemory&lt;char&gt;</c>
+    /// but the fixture hardcodes <c>ReadOnlyMemory&lt;byte&gt;</c>.
+    ///
+    /// Returns <c>null</c> when the builder cannot produce a valid expression for
+    /// the given type arguments — the caller falls through to <c>default(T)!</c>.
+    /// </summary>
+    private static readonly Dictionary<string, Func<string[], string?>> GenericAwareFixtures =
+        new(StringComparer.Ordinal)
+    {
+        // ── ReadOnlyMemory<T> — produce a buffer of the correct element type ──
+        ["ReadOnlyMemory"] = args => BuildMemoryFixture("ReadOnlyMemory", args),
+        ["ReadOnlySequence"] = args => BuildMemoryFixture("ReadOnlySequence", args),
+        ["ArraySegment"] = args => BuildMemoryFixture("ArraySegment", args),
+        ["IBufferWriter"] = args => BuildMemoryFixture("ArrayBufferWriter", args),
+    };
+
+    /// <summary>
+    /// Build a fixture expression for a memory-/segment-/buffer-like type whose
+    /// element type must match the declared generic parameter.
+    /// </summary>
+    private static string? BuildMemoryFixture(string kind, string[] args)
+    {
+        var elem = args.Length >= 1 ? CSharpSerializer.ToCSharpTypeName(args[0]) : "System.Byte";
+        return elem switch
+        {
+            "byte" or "System.Byte" => kind switch
+            {
+                "ReadOnlyMemory" => "new System.ReadOnlyMemory<System.Byte>(new byte[] { 0x7B, 0x7D })",
+                "ReadOnlySequence" => "new System.Buffers.ReadOnlySequence<System.Byte>(new byte[] { 0x7B, 0x7D })",
+                "ArraySegment" => "new System.ArraySegment<System.Byte>(new byte[] { 0x7B, 0x7D })",
+                "ArrayBufferWriter" => "new System.Buffers.ArrayBufferWriter<System.Byte>()",
+                _ => null,
+            },
+            "char" or "System.Char" => kind switch
+            {
+                "ReadOnlyMemory" => "new System.ReadOnlyMemory<System.Char>(new char[] { '{', '}' })",
+                "ReadOnlySequence" => "new System.Buffers.ReadOnlySequence<System.Char>(new char[] { '{', '}' })",
+                "ArraySegment" => "new System.ArraySegment<System.Char>(new char[] { '{', '}' })",
+                "ArrayBufferWriter" => "new System.Buffers.ArrayBufferWriter<System.Char>()",
+                _ => null,
+            },
+            "int" or "System.Int32" => kind switch
+            {
+                "ReadOnlyMemory" => "new System.ReadOnlyMemory<System.Int32>(new int[] { 0, 1 })",
+                "ArraySegment" => "new System.ArraySegment<System.Int32>(new int[] { 0, 1 })",
+                _ => null,
+            },
+            // Unknown element type — fall through to default(T) at the caller.
+            _ => null,
+        };
+    }
+
+    /// <summary>
     /// Resolve a real fixture expression for a parameter type, or false when the
     /// type has no registered fixture.  Matched on the short base name so a
     /// single entry covers every generic instantiation.
+    ///
+    /// Checks <see cref="GenericAwareFixtures"/> first (which uses the full
+    /// generic type arguments), then falls back to the static-expression table
+    /// for non-generic types.
     /// </summary>
     private static bool TryGetFixtureExpression(string typeName, out string expr)
     {
         expr = null!;
         var baseName = GetShortBaseName(typeName);
+
+        // Generic-aware path: parse type arguments so the builder can match
+        // element types (e.g. ReadOnlyMemory<char> ≠ ReadOnlyMemory<byte>).
+        if (GenericAwareFixtures.TryGetValue(baseName, out var builder))
+        {
+            var args = ExtractGenericTypeArgs(typeName);
+            var built = builder(args);
+            if (built is not null)
+            {
+                expr = built;
+                return true;
+            }
+        }
+
         return FixtureValues.TryGetValue(baseName, out expr!);
+    }
+
+    /// <summary>
+    /// Extract the generic type argument strings from a type name.
+    /// "ReadOnlyMemory&lt;char&gt;" → ["char"]
+    /// "ReadOnlyMemory" → []
+    /// "IBufferWriter&lt;System.Byte&gt;" → ["System.Byte"]
+    /// </summary>
+    private static string[] ExtractGenericTypeArgs(string typeName)
+    {
+        var gaStart = typeName.IndexOf('<');
+        if (gaStart < 0) return [];
+        var argsPart = typeName[(gaStart + 1)..^1];
+        return CSharpSerializer.SplitGenericArgs(argsPart)
+            .Select(CSharpSerializer.ToCSharpTypeName)
+            .ToArray();
     }
 
     private static bool TryGetDelegateExpression(string typeName, out string expr)
