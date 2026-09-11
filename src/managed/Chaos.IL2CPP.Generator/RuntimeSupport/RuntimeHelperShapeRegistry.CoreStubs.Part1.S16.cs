@@ -160,6 +160,50 @@ public sealed partial class NativeAotLoweringPlanner
                         EmptyRawArgumentIndices,
                         DirectNativeSymbol: "ChaosAsyncTaskAwaiterGetResultValue");
                 }));
+
+            // ── Non-generic TaskAwaiter.GetResult (void) ──
+            // `await someTask` (no result) lowers against the non-generic
+            // TaskAwaiter, whose GetResult returns void.  It must still
+            // propagate a fault, so it routes to the void-returning helper
+            // rather than sharing the value-returning one above.
+            registry.Register("System.Runtime.CompilerServices.TaskAwaiter", "GetResult", [],
+                ShapeKind.SimpleForward, "ChaosAsyncTaskAwaiterGetResultVoid",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── Task.FromResult / FromException / FromCanceled ──
+            // Already-completed task factories.  FromResult carries a value;
+            // FromException/FromCanceled produce a faulted task whose await
+            // throws (see ChaosAsyncTaskAwaiterGetResultValue).
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "FromResult",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    return async_task_from_result(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "async_task_from_result");
+                }));
+
+            registry.Register("System.Threading.Tasks.Task", "FromException",
+                ["System.Exception"],
+                ShapeKind.SimpleForward, "async_task_from_exception",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
         }
 
         /// <summary>

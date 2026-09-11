@@ -13,6 +13,7 @@
 #include <chaos/async.h>
 #include "async_stubs.h"
 #include "exception_helpers.h"
+#include "exception_jmp.h"
 #include "timer_queue.h"
 #include "runtime_stubs/stub_common.h"
 
@@ -103,20 +104,58 @@ CHAOS_IL2CPP_INT32 ChaosAsyncTaskAwaiterGetIsCompleted(CHAOS_IL2CPP_INTPTR await
 }
 
 /// TaskAwaiter<T>.GetResult — returns the real result payload of a completed
-/// task.  Returns 0 for an incomplete or faulted task; callers gate on
-/// IsCompleted and propagate the fault before reading the result.
+/// task.  If the task FAULTED, raises the stored exception instead of returning
+/// a value — this is what gives C# `await` its throw-on-fault semantics.
+///
+/// Callers must gate on IsCompleted before calling GetResult; the fault check
+/// is the last safety layer (the one that makes `await taskThatFaults()` throw
+/// rather than silently return 0).
 CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultValue(CHAOS_IL2CPP_INTPTR awaiter) noexcept
 {
     using namespace chaos::il2cpp::common;
+    using namespace chaos::il2cpp::runtime_core;
     if (awaiter == 0) return 0;
     auto* task = reinterpret_cast<AsyncTask*>(awaiter);
+
+    // Faulted → propagate the stored exception (C# await throws on faulted
+    // tasks, it does NOT return a default value).  This is the critical path
+    // for `Try await taskThatFails()` semantics.
+    if (task->faulted.load(std::memory_order_acquire))
+    {
+        CHAOS_IL2CPP_INTPTR ex = task->exception;
+        if (ex != 0)
+        {
+            chaos_raise_exception(ex);
+        }
+        // Cancelled (faulted=true, exception=0): raise TaskCanceledException.
+        RaiseManagedException(
+            "System.Threading.Tasks.TaskCanceledException",
+            "A task was cancelled.");
+    }
+
     if (!task->completed.load(std::memory_order_acquire)) return 0;
-    if (task->faulted.load(std::memory_order_acquire)) return 0;
     return task->result;
 }
 
-// ── TaskCompletionSource<T> native helpers (Phase 3 P3-1) ──
-// These delegate to the TaskSource proxy in async.h; the "TCS handle" is
+/// TaskAwaiter non-generic GetResult — void-returning, same fault propagation.
+void ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR awaiter) noexcept
+{
+    using namespace chaos::il2cpp::common;
+    using namespace chaos::il2cpp::runtime_core;
+    if (awaiter == 0) return;
+    auto* task = reinterpret_cast<AsyncTask*>(awaiter);
+
+    if (task->faulted.load(std::memory_order_acquire))
+    {
+        CHAOS_IL2CPP_INTPTR ex = task->exception;
+        if (ex != 0) { chaos_raise_exception(ex); }
+        RaiseManagedException(
+            "System.Threading.Tasks.TaskCanceledException",
+            "A task was cancelled.");
+    }
+}
+
+// ── TaskCompletionSource<T> native helpers (Phase 3 P3-1) ──// These delegate to the TaskSource proxy in async.h; the "TCS handle" is
 // a CHAOS_IL2CPP_INTPTR pointing to a TaskSource allocated in async_stubs.cpp.
 
 CHAOS_IL2CPP_INTPTR chaos_task_completion_source_create(void) noexcept

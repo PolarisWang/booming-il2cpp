@@ -21,6 +21,7 @@ void chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
 // TaskAwaiter stubs (DirectNativeSymbol for async state machine dispatch).
 // Generated code calls these when lowering async Task.GetResult() patterns.
 void ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+void ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
 
 // ── Task.Delay / TaskAwaiter await path (non-generic Task) ──
 // Without these, Task.Delay / Task.GetAwaiter / TaskAwaiter.get_IsCompleted

@@ -237,6 +237,16 @@ inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_exception(CHAOS_IL2CPP_INTPTR 
     return task->exception;
 }
 
+/// True if the task behind this awaiter faulted.  C# `await` semantics require
+/// the awaiter to THROW on a faulted task rather than return a default value.
+inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_is_faulted(CHAOS_IL2CPP_INTPTR awaiter_ref)
+{
+    auto* task = require_async_task(*resolve_native_int_slot(awaiter_ref));
+    return task->faulted.load(std::memory_order_acquire)
+        ? static_cast<CHAOS_IL2CPP_INTPTR>(1)
+        : static_cast<CHAOS_IL2CPP_INTPTR>(0);
+}
+
 /// Task.Run: queue a delegate for execution on the thread pool.
 /// The task is created, queued, and the task handle is returned.
 /// When the delegate completes, the task is marked as completed.
@@ -251,6 +261,65 @@ inline CHAOS_IL2CPP_INTPTR async_task_run(CHAOS_IL2CPP_INTPTR delegate_fn) noexc
     }
     (void)delegate_fn;
     return 0;
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Task already-completed factories (System.Threading.Tasks.Task.From*).
+//
+// These produce an AsyncTask that is complete at construction time, matching
+// the .NET contract: FromResult/FromException/FromCanceled never suspend, and
+// an await on them observes the value/fault immediately.
+// ══════════════════════════════════════════════════════════════════════════════
+
+/// Task.FromResult<T>(T result): a successfully-completed task carrying `value`.
+/// The caller's await resumes synchronously (is_completed == true).
+inline CHAOS_IL2CPP_INTPTR async_task_from_result(CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    CHAOS_IL2CPP_INTPTR handle = async_task_create();
+    auto* task = require_async_task(handle);
+    task->result = value;
+    task->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    task->faulted.store(false, std::memory_order_relaxed);
+    task->completed.store(true, std::memory_order_release);
+    return handle;
+}
+
+/// Task.FromException(Exception ex): a faulted task carrying `exception`.
+/// Awaiting it must THROW — see async_task_awaiter_get_is_faulted.
+inline CHAOS_IL2CPP_INTPTR async_task_from_exception(CHAOS_IL2CPP_INTPTR exception) noexcept
+{
+    CHAOS_IL2CPP_INTPTR handle = async_task_create();
+    auto* task = require_async_task(handle);
+    task->result = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    task->exception = exception;
+    task->faulted.store(true, std::memory_order_relaxed);
+    task->completed.store(true, std::memory_order_release);
+    return handle;
+}
+
+/// Task.FromCanceled(CancellationToken): a cancelled task.  Cancellation is
+/// modelled as a fault whose exception payload is null; callers that need to
+/// distinguish cancellation from a generic fault should carry a
+/// TaskCanceledException instance as the exception payload instead.
+inline CHAOS_IL2CPP_INTPTR async_task_from_canceled() noexcept
+{
+    CHAOS_IL2CPP_INTPTR handle = async_task_create();
+    auto* task = require_async_task(handle);
+    task->result = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    task->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    task->faulted.store(true, std::memory_order_relaxed);
+    task->completed.store(true, std::memory_order_release);
+    return handle;
+}
+
+/// True when the task is complete (success or fault) — the synchronous
+/// completion oracle used by Task.Wait polling loops.
+inline CHAOS_IL2CPP_INTPTR async_task_get_is_completed(CHAOS_IL2CPP_INTPTR task_handle) noexcept
+{
+    auto* task = require_async_task(task_handle);
+    return task->completed.load(std::memory_order_acquire)
+        ? static_cast<CHAOS_IL2CPP_INTPTR>(1)
+        : static_cast<CHAOS_IL2CPP_INTPTR>(0);
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
