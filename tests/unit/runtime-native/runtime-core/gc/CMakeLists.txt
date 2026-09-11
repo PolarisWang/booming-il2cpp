@@ -55,7 +55,7 @@ chaos_native_add_test(test_gc_region
     gc_region_test.cpp
     LABELS "unit;gc"
 )
-target_link_options(test_gc_region PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_region)
 
 # gc_card_table_ext_test — Card table edge case tests
 chaos_native_add_test(test_gc_card_table_ext
@@ -114,7 +114,7 @@ chaos_native_add_test(test_gc_profile_stats
     LIBS chaos_runtime_core chaos_fmt chaos_common
     LABELS "unit;gc"
 )
-target_link_options(test_gc_profile_stats PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_profile_stats)
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Batch B2 — Memory Domain stress, benchmark, proof tests
@@ -193,7 +193,7 @@ target_include_directories(test_gc_young_collector PRIVATE
 # gc_young_collector.cpp symbols are also in chaos_runtime_core.lib (GNU ar
 # format that MSVC link.exe cannot search for COMDAT).  /FORCE:MULTIPLE lets
 # the directly-compiled symbols override the archive copies.
-target_link_options(test_gc_young_collector PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_young_collector)
 
 # gc_old_gen_unit_test — OldGen allocate/free/reallocate/mark
 chaos_native_add_test(test_gc_old_gen
@@ -226,7 +226,7 @@ chaos_native_add_test(test_gc_finalizer_integration
 )
 target_include_directories(test_gc_finalizer_integration PRIVATE
     ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
-target_link_options(test_gc_finalizer_integration PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_finalizer_integration)
 
 # gc_max_promote_test — kMaxPromoteObjects guard verification
 # NOTE: gc_young_collector.cpp + gc_layout.cpp compiled directly.
@@ -240,7 +240,7 @@ chaos_native_add_test(test_gc_max_promote
 )
 target_include_directories(test_gc_max_promote PRIVATE
     ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
-target_link_options(test_gc_max_promote PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_max_promote)
 
 # gc_full_gc_test — Full GC collection channel tests
 chaos_native_add_test(test_gc_full_gc
@@ -264,7 +264,7 @@ chaos_native_add_test(test_gc_managed_api
 )
 target_include_directories(test_gc_managed_api PRIVATE
     ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
-target_link_options(test_gc_managed_api PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_managed_api)
 
 # gc_safepoint_test — Safepoint protocol unit tests
 chaos_native_add_test(test_gc_safepoint
@@ -327,14 +327,14 @@ set_tests_properties(test_gc_stress PROPERTIES LABELS "stress;gc")
 chaos_native_add_test(test_gc_gen1_benchmark
     gc_gen1_benchmark.cpp ${CHAOS_GC_BASE}
 )
-target_link_options(test_gc_gen1_benchmark PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_gen1_benchmark)
 set_tests_properties(test_gc_gen1_benchmark PROPERTIES LABELS "benchmark;gc")
 
 # gc_throughput_benchmark — Native GC throughput (allocation + GC pause + BGC latency)
 chaos_native_add_test(test_gc_throughput_benchmark
     gc_throughput_benchmark.cpp ${CHAOS_GC_BASE}
 )
-target_link_options(test_gc_throughput_benchmark PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_throughput_benchmark)
 set_tests_properties(test_gc_throughput_benchmark PROPERTIES LABELS "benchmark;gc")
 
 # gc_regression_benchmark — GC regression benchmark suite (G-15)
@@ -342,7 +342,7 @@ set_tests_properties(test_gc_throughput_benchmark PROPERTIES LABELS "benchmark;g
 chaos_native_add_test(test_gc_regression_benchmark
     gc_regression_benchmark.cpp ${CHAOS_GC_BASE}
 )
-target_link_options(test_gc_regression_benchmark PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_regression_benchmark)
 set_tests_properties(test_gc_regression_benchmark PROPERTIES LABELS "benchmark;gc")
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -375,7 +375,7 @@ chaos_native_add_test(test_gc_monitor_stress
 )
 target_include_directories(test_gc_monitor_stress PRIVATE
     ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
-target_link_options(test_gc_monitor_stress PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_monitor_stress)
 set_tests_properties(test_gc_monitor_stress PROPERTIES LABELS "stress;gc")
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -415,7 +415,7 @@ chaos_native_add_test(test_gc_bgc_smoke
 )
 target_include_directories(test_gc_bgc_smoke PRIVATE
     ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
-target_link_options(test_gc_bgc_smoke PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_bgc_smoke)
 set_tests_properties(test_gc_bgc_smoke PROPERTIES LABELS "stress;gc")
 
 # gc_bgc_root_scan_test — Young-to-old root scan during BGC
@@ -423,7 +423,7 @@ chaos_native_add_test(test_gc_bgc_root_scan
     gc_bgc_root_scan_test.cpp ${CHAOS_GC_BASE}
     RESOURCE_LOCK bgc
 )
-target_link_options(test_gc_bgc_root_scan PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_bgc_root_scan)
 set_tests_properties(test_gc_bgc_root_scan PROPERTIES LABELS "stress;gc")
 
 # gc_bgc_unit_test — BGC subsystem unit tests (SATB, phase, worker deque)
@@ -438,14 +438,14 @@ chaos_native_add_test(test_gc_bgc_unit
 )
 target_include_directories(test_gc_bgc_unit PRIVATE
     ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
-target_link_options(test_gc_bgc_unit PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_bgc_unit)
 
 # gc_bgc_stress_test — BGC concurrent stress, work-stealing, graph mutation
 chaos_native_add_test(test_gc_bgc_stress
     gc_bgc_stress_test.cpp ${CHAOS_GC_BASE}
     RESOURCE_LOCK bgc
 )
-target_link_options(test_gc_bgc_stress PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_bgc_stress)
 set_tests_properties(test_gc_bgc_stress PROPERTIES LABELS "stress;gc")
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -530,14 +530,14 @@ chaos_native_add_test(test_gc_coordinator
     gc_coordinator_test.cpp ${CHAOS_GC_BASE}
     LABELS "unit;gc"
 )
-target_link_options(test_gc_coordinator PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_coordinator)
 
 # gc_heap_manager_test — GcHeapManager initialization + heap iteration
 chaos_native_add_test(test_gc_heap_manager
     gc_heap_manager_test.cpp ${CHAOS_GC_BASE}
     LABELS "unit;gc"
 )
-target_link_options(test_gc_heap_manager PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_heap_manager)
 
 # gc_root_change_test — BGC root change ring buffer recording + draining
 # NOTE: gc_root_change.cpp compiled directly (same pattern as gc_bgc for
@@ -550,4 +550,4 @@ chaos_native_add_test(test_gc_root_change
 )
 target_include_directories(test_gc_root_change PRIVATE
     ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc)
-target_link_options(test_gc_root_change PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_gc_root_change)

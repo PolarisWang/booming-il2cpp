@@ -17,9 +17,18 @@ set(CHAOS_CODEGEN_LIBS
 # rather than the Win64 C ABI.  Tests that invoke a compiled entry through their
 # own ExecuteNative() (rather than through JitStubDispatch) link this x64 thunk
 # to re-bind RBX/RSI so the return value lands in the caller's ret_buf.
-set(CHAOS_T4_THUNK_ASM
-    ${CHAOS_CMAKE_ROOT}/tests/contracts/native/runtime-core/t4_jit_call.asm)
+#
+# The thunk is MASM (ml64) syntax and is MSVC/x64-only.  On other platforms the
+# file must NOT be added as a source: without LANGUAGE ASM_MASM gcc treats the
+# bare token as a linker input, emits
+#   c++: warning: ...t4_jit_call.asm: linker input file unused because linking not done
+# and produces no object, so the link then fails with
+#   /usr/bin/ld: cannot find CMakeFiles/.../t4_jit_call.asm.o: No such file or directory
+# Empty list on non-matching platforms = the tests link without the thunk.
+set(CHAOS_T4_THUNK_ASM)
 if(MSVC AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+    set(CHAOS_T4_THUNK_ASM
+        ${CHAOS_CMAKE_ROOT}/tests/contracts/native/runtime-core/t4_jit_call.asm)
     enable_language(ASM_MASM)
     set_source_files_properties(${CHAOS_T4_THUNK_ASM} PROPERTIES LANGUAGE ASM_MASM)
 endif()

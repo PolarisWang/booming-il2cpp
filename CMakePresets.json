@@ -10,7 +10,6 @@
       "name": "debug",
       "displayName": "Debug (CHECK)",
       "description": "Debug build — full assertions, trace, DEBUG log level. Default tier.",
-      "generator": "Visual Studio 17 2022",
       "binaryDir": "artifacts/presets/debug",
       "cacheVariables": {
         "CHAOS_IL2CPP_CONFIG_TIER": "debug",
@@ -26,7 +25,6 @@
       "name": "asan",
       "displayName": "ASan (AddressSanitizer)",
       "description": "Debug build with AddressSanitizer enabled for memory error detection.",
-      "generator": "Visual Studio 17 2022",
       "binaryDir": "artifacts/presets/asan",
       "cacheVariables": {
         "CHAOS_IL2CPP_CONFIG_TIER": "debug",
@@ -40,7 +38,6 @@
       "name": "profile",
       "displayName": "Profile (PROFILE)",
       "description": "Performance profiling — INFO+ logging, trace, PROFILE_SCOPE enabled.",
-      "generator": "Visual Studio 17 2022",
       "binaryDir": "artifacts/presets/profile",
       "cacheVariables": {
         "CHAOS_IL2CPP_CONFIG_TIER": "profile",
@@ -51,7 +48,6 @@
       "name": "ship",
       "displayName": "Ship (SHIP)",
       "description": "Release build — ERROR-only logging, no trace, no assertions, no profile.",
-      "generator": "Visual Studio 17 2022",
       "binaryDir": "artifacts/presets/ship",
       "cacheVariables": {
         "CHAOS_IL2CPP_CONFIG_TIER": "ship",
@@ -62,7 +58,6 @@
       "name": "windows-x64-reference",
       "displayName": "Roadmap0 Windows x64 Reference",
       "description": "Windows reference desktop gate baseline for roadmap-0.",
-      "generator": "Visual Studio 17 2022",
       "binaryDir": "artifacts/presets/windows-x64-reference",
       "toolchainFile": "build/toolchains/windows-x64-reference.cmake",
       "cacheVariables": {

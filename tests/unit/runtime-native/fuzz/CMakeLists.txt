@@ -45,7 +45,7 @@ target_include_directories(test_fuzz_gc PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../runtime-core/gc"
     "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/gc"
 )
-target_link_options(test_fuzz_gc PRIVATE /FORCE:MULTIPLE)
+chaos_native_force_multiple(test_fuzz_gc)
 set_tests_properties(test_fuzz_gc PROPERTIES TIMEOUT 600)
 
 # VTable dispatch fuzzer: random slot lookups + type instantiation.

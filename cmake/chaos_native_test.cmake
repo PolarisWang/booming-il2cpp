@@ -175,6 +175,23 @@ function(chaos_native_add_test name)
     endif()
 endfunction()
 
+# ── /FORCE:MULTIPLE helper ──
+#   chaos_native_force_multiple(<target>)
+#
+# Several GC test targets link a codegen-generated symbol stub alongside the
+# runtime libs, which produces duplicate definitions MSVC's link.exe refuses by
+# default — hence /FORCE:MULTIPLE.  That flag is MSVC-only; on Linux the
+# equivalent is -Wl,--allow-multiple-definition (already applied by the test
+# factory).  Calling target_link_options(<t> PRIVATE /FORCE:MULTIPLE) directly
+# makes gcc treat the bare token as an input FILE and the link dies with
+#   /usr/bin/ld: cannot find /FORCE:MULTIPLE: No such file or directory
+# Use this helper instead of the raw flag so the guard can never be forgotten.
+function(chaos_native_force_multiple target)
+    if(MSVC)
+        target_link_options(${target} PRIVATE /FORCE:MULTIPLE)
+    endif()
+endfunction()
+
 # ── Auto-discovery helper ──
 #   chaos_native_glob_add_tests(TARGET_PREFIX GLOB_PATTERN
 #                               [EXCLUDE a.cpp b.cpp] [EXTRA_NAME_WE ...])
