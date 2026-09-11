@@ -92,6 +92,7 @@ auto_continue: true
 | P2-3 | WhenAll 结果集 `[1,2,3]` + 子数组 use-after-free | `1be6aa15b` | 恢复 `delete[] mem` → **进程崩溃**；不建结果集 → 3 FAIL；结果轮转 → 2 FAIL |
 | P2-4 | ContinueWith 重载面（20 个重载逐族路由）+ subject-id 参数切分 | `6f28100a3` | 3 处 in-place revert 各命中不同测试（见下） |
 | P2-5 | `Task.Factory.StartNew` 接线 + `get_Factory` 占位 token | `dd66e912f` | 移除注册 → 管线 FAIL；native shim revert → 4 FAIL/2 PASS |
+| P2-6 | `Task.WhenAll<TResult>` 泛型重载接线 + emitter 崩溃修复 + fixture 定位修复 | `f3593d72f` | 恢复旧 guard → 恰 2 FAIL（无关项绿）；revert emitter 修复 → ArgumentOutOfRangeException 崩溃 |
 
 ### Phase 2 附带修复的真实缺陷（P2-4）
 
@@ -125,8 +126,27 @@ method-name 与 type-prefix 同时命中的描述符；描述符命中后 resolv
 `ExternalRuntimeHelpers.cs` 中已有一个同类补丁（`System.Numerics.Vector` 前缀吃掉 `Vector2/3/4`，
 用 `TryCreateVectorAllComparerHelper` 特判）。本次不修，登记为已知风险。
 
-### 更正此前记录
+### 🔴 P2-6 暴露的预存在缺陷（**不是** P2-6 引入，未修复，单独跟踪）
 
+修好 fixture 定位（见下）后，两个测试变红 —— 它们此前靠**读陈旧 Debug DLL** 而假绿：
+
+| 测试 | 断言 | 实际 |
+|------|------|------|
+| `GetOneEntry_AllocatesOnGcHeapNotStack` | async entry 用 `CHAOS_IL2CPP_NEW_GC` 分配 `>d__` box | entry 把状态机放在**栈局部** `&chaos_locals[0]`（`chaos_resolve_managed_value_pointer`），**没有** `CHAOS_IL2CPP_NEW_GC` |
+| `MovenextEmittedSource_BoxPointerPassedByValueNotStackSlot` | 同上（box 按值传，非栈槽） | 同上 |
+
+**已证明与 P2-6 无关**：用 pristine 测试文件复现两例皆红；把 emitter 修复 revert 掉也两例皆红。
+即这是一条**真实的 async lowering 缺口**（R2b 声称已修但实际未生效），需独立子任务修复。
+**不在此处掩盖**，也不允许把断言放宽来"变绿"。
+
+### 附带修复的真实缺陷（P2-6）
+
+| 缺陷 | 说明 |
+|------|------|
+| **emitter 硬崩溃** | `NativeAotEmitter.CollectExistingValueTypeTypedefs` 从 `struct chaos_valuetype_` 前缀**自身位置**开始找名字终止符，命中前缀内的空格 → `end - pos - 7` 为负 → `Substring` 抛 `ArgumentOutOfRangeException`。任何含值类型 struct 的 header 都会让 emitter 崩溃 |
+| **fixture 定位解析错配置** | `LocateAsyncAssemblyDll` 从 `.../bin/Release/net8.0` 上溯两级到 `.../codegen`，再要求其父名为 `bin` —— 永不成立，静默回退 `Debug`。**Release 跑测读的是陈旧 Debug fixture**（方法新增后不出现，看起来像 linker/codegen bug，其实不是）。与 `f80aada50` 同一类缺陷，深了一层 |
+
+### 更正此前记录
 `IdentifyStructLocalSlots_NonValueTypeInitobj_NotCounted`、`UnknownExternalCall_UsesDispatchTable`、`CreatePseudoMetadataHandle_ReturnsNonZero` **不是**由本次 parser 修复。全量跑在 parser 回退与应用的两种情况下**都通过** —— 它们是环境/顺序相关，与 parser 无关。
 
 ### Phase 2 附带修复的真实缺陷（P2-3）
@@ -140,16 +160,17 @@ method-name 与 type-prefix 同时命中的描述符；描述符命中后 resolv
 
 | API | 状态 |
 |-----|------|
-| `WhenAll<TResult>` 泛型重载 | ❌ 仅非泛型 `Task[]` 已接线 |
+| `WhenAll<TResult>` 泛型重载 | ✅ 已接线（P2-6）；`WhenAll<TReturn>(Task<T>[])` 与非泛型共用 `chaos_task_when_all_array` |
 | `WhenEach` | ❌ 无实现 |
 | `Task.Factory` | ⚠️ 部分接线：`get_Factory` + 委托版 `StartNew` 已接；余下 `StartNew` 变体(CT/Options/state/TResult) 显式走解释器。**接口真实规模 74 个公共实例方法**（设计文档写 21，是错的）；`FromAsync`(22) 无原生模型(APM/IAsyncResult)，`ContinueWhenAll/Any`(16+16) 未接 |
 | `ContinueWith` 20 overloads | ✅ 逐族路由已定（1 族接线 / 4 族显式拒绝）；余下 15 个重载走同一 resolver 的 arity 判断，无需逐个登记 |
+| **async entry box 栈分配** 🔴 | ❌ 预存在缺口（P2-6 暴露）：entry 把 `>d__` 状态机放栈局部而非 GC heap，跨线程 resume 有悬垂风险。见上表 |
 
 ## 当前通过测试
 
 | 测试套 | 结果 |
 |--------|------|
-| codegen 全量 | **2185/2185**（P2-5 +5） |
+| codegen 全量 | **2186/2188**（2 项为 P2-6 暴露的预存在缺口，见上） |
 | `test_async_task_state` (1-4) | **8/8 PASS** |
 | `test_async_task_exception` (1-3) | **8/8 PASS** |
 | `test_async_task_run_e2e` (1-1) | **5/5 PASS** |
@@ -180,16 +201,24 @@ async 线合计 **101 项全绿**。
 
 ## 下一步
 
-Phase 2 剩余：`WhenAll<TResult>` 泛型重载 + `WhenEach` + `Task.Factory` 剩余族
-（`ContinueWhenAll/Any` 32 个、`FromAsync` 22 个无原生模型、4 个属性需真实 factory 对象模型）。
+**最高优先（先做）**：修复 async entry box 栈分配缺口（P2-6 暴露的预存在缺陷）。
+entry 必须用 `CHAOS_IL2CPP_NEW_GC` 把 `>d__` 放到 GC heap，否则跨线程 resume 悬垂。
+这是正确性问题而非性能问题，按 P1>P2>P3 应最先处理。
 
-P2-4 已建立的可复用经验：**registry 级测试必须用管线真实产生的 callee 拼写**，
+Phase 2 剩余：`WhenEach` + `Task.Factory` 剩余族（`ContinueWhenAll/Any` 32 个、
+`FromAsync` 22 个无原生模型、4 个属性需真实 factory 对象模型）。
+
+P2-4 经验：**registry 级测试必须用管线真实产生的 callee 拼写**，
 否则会出现"单测绿、管线 null"的假绿。新增 ContinueWith 类 helper 时照此办理。
 
-P2-5 追加经验：**诊断结论必须在真实管线上复核**。直接调用内部匹配函数并喂手写 callee
+P2-5 经验：**诊断结论必须在真实管线上复核**。直接调用内部匹配函数并喂手写 callee
 得到的"命中/顺序"结果，与管线真实行为可能不一致（P2-5 的前缀碰撞假设就是这样被误导的）。
 反例验证（删注册看是否变红）比阅读代码更能确定承重点。
 
+P2-6 经验：**测试的 fixture 解析本身要有反例意识**。`LocateAsyncAssemblyDll` 静默回退 Debug，
+使 Release 跑测读到陈旧 DLL —— 全绿是假绿，且掩盖了两个真实缺陷。
+定位类 helper 必须修成"解析不到就报错"，而不是"解析不到就用默认值"。
+
 ```yaml
-recommended_next_child: ASYNC-P2-6
+recommended_next_child: ASYNC-P2-7
 ```

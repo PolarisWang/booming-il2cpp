@@ -88,11 +88,26 @@ public sealed class AsyncPipelineTests
             }
         }
 
-        return Path.Combine(
+        // Fail loudly rather than silently defaulting.  A silent fallback is how
+        // this locator hid a stale-Debug-fixture read for an unknown number of
+        // revisions: the tests still passed, against the wrong DLL.  If the shape
+        // of the output directory changes, that must surface as an error here, not
+        // as a green run over stale inputs.
+        var resolved = Path.Combine(
             repoRoot,
             "tests", "unit", "managed", "codegen",
             "AsyncTestAssembly", "bin", config, tfm,
             "AsyncTestAssembly.dll");
+        if (!File.Exists(resolved))
+        {
+            throw new FileNotFoundException(
+                $"AsyncTestAssembly fixture not resolved. Looked for '{resolved}'. "
+                + $"Test output dir was '{AppDomain.CurrentDomain.BaseDirectory}' "
+                + $"(parsed config='{config}', tfm='{tfm}'). "
+                + "Build the fixture for this configuration before running.",
+                resolved);
+        }
+        return resolved;
     }
 
     private sealed class TempCtx : IDisposable
