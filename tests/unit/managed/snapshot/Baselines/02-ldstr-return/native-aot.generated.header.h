@@ -293,6 +293,8 @@ extern "C" void chaos_ensure_type_initialized_SnapshotTestFixtures_Helper__Consu
 
 CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;
 
+void chaos_materialize_string_empty();
+
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept;
 
 void chaos_default_interpolated_string_handler_reset(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INT32 chaos_literal_length, CHAOS_IL2CPP_INT32 chaos_trailing_count);
