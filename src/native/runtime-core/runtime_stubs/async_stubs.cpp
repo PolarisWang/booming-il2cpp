@@ -428,6 +428,32 @@ CHAOS_IL2CPP_INTPTR chaos_task_delay_timespan_stub(CHAOS_IL2CPP_INT64 ticks) noe
 
 namespace {
 
+// Build a managed array holding each child's result, in declaration order.
+//
+// The elements live contiguously after the 32-byte ManagedArrayAccessor header,
+// matching what codegen's array accessors expect (see stub_common.h).  Returns 0
+// on allocation failure — the aggregate still completes, it just has no result
+// set, which the caller observes as a null rather than a wrong value.
+inline CHAOS_IL2CPP_INTPTR BuildResultArrayFromHandles(
+    const CHAOS_IL2CPP_INTPTR* children, int n) noexcept
+{
+    if (n <= 0) return 0;
+    const size_t bytes = sizeof(ManagedArrayAccessor)
+        + static_cast<size_t>(n) * sizeof(CHAOS_IL2CPP_INTPTR);
+    auto* raw = static_cast<uint8_t*>(std::malloc(bytes));
+    if (raw == nullptr) return 0;
+    auto* arr = reinterpret_cast<ManagedArrayAccessor*>(raw);
+    arr->element_type_shape = 0;
+    arr->element_type_info = nullptr;
+    arr->length = static_cast<CHAOS_IL2CPP_INTPTR>(n);
+    auto* elements = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        raw + sizeof(ManagedArrayAccessor));
+    for (int i = 0; i < n; ++i) {
+        elements[i] = chaos::il2cpp::common::require_async_task(children[i])->result;
+    }
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
+}
+
 // Shared completion state across the N child continuations.
 struct WhenState {
     chaos::il2cpp::common::AsyncTask*    aggregate;
@@ -437,6 +463,9 @@ struct WhenState {
     std::atomic<bool>                    won;                // WhenAny single-fire
     CHAOS_IL2CPP_INTPTR*                 children;           // child handles array
     int                                  n;                  // child count
+    // Set when this state owns `children` (the managed-array overload copies the
+    // element handles and must keep them alive until the aggregate completes).
+    bool                                 owns_children;
 };
 
 // Delivered when a child completes; task_handle = the completing child.
@@ -447,7 +476,7 @@ void WhenChildContinuation(CHAOS_IL2CPP_INTPTR task_handle, void* ctx) noexcept 
     if (st->mode_when_all) {
         int rem = st->remaining.fetch_sub(1, std::memory_order_acq_rel) - 1;
         if (rem == 0) {
-            // All children done: fault iff any faulted.
+            // All children done: fault iff any faulted, and collect the results.
             bool any_faulted = false;
             CHAOS_IL2CPP_INTPTR ex = 0;
             for (int i = 0; i < st->n; ++i) {
@@ -460,9 +489,23 @@ void WhenChildContinuation(CHAOS_IL2CPP_INTPTR task_handle, void* ctx) noexcept 
             }
             st->aggregate->exception = ex;
             st->aggregate->faulted.store(any_faulted, std::memory_order_relaxed);
+
+            // Result SET: build a managed array holding each child's result in
+            // DECLARATION order (not completion order).  Task.WhenAll's contract
+            // is that the i-th element is the i-th task's result; appending as
+            // children arrive would reorder them.  Skipped when a child faulted —
+            // WhenAll's value is not meaningful then, matching .NET, where the
+            // caller gets the exception instead.
+            if (!any_faulted && st->n > 0) {
+                st->aggregate->result = BuildResultArrayFromHandles(st->children, st->n);
+            } else {
+                st->aggregate->result = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+            }
+
             st->aggregate->completed.store(true, std::memory_order_release);
             chaos::il2cpp::common::notify_task_completed(st->aggregate);
             finish_async_task(st->aggregate_handle);
+            if (st->owns_children) delete[] st->children;
             delete st;
         }
         return;
@@ -480,22 +523,27 @@ void WhenChildContinuation(CHAOS_IL2CPP_INTPTR task_handle, void* ctx) noexcept 
     st->aggregate->completed.store(true, std::memory_order_release);
     chaos::il2cpp::common::notify_task_completed(st->aggregate);
     finish_async_task(st->aggregate_handle);
+    if (st->owns_children) delete[] st->children;
     delete st;
 }
 
 } // anonymous namespace
 
 /// Shared internal: build aggregate + register a continuation on every child.
+/// `take_ownership` — the caller allocated `children` and transfers it to the
+/// aggregate, which frees it on completion.  The public flat-pointer overload
+/// passes false because its caller owns the array.
 static CHAOS_IL2CPP_INTPTR WhenAllAnyInternal(
-    CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n, bool when_all) noexcept
+    CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n, bool when_all,
+    bool take_ownership = false) noexcept
 {
     using namespace chaos::il2cpp::common;
-    if (n < 0) return 0;
-    if (children == nullptr && n > 0) return 0;
+    if (n < 0) { if (take_ownership) delete[] children; return 0; }
+    if (children == nullptr && n > 0) { if (take_ownership) delete[] children; return 0; }
     auto* agg = new (std::nothrow) AsyncTask();
-    if (agg == nullptr) return 0;
+    if (agg == nullptr) { if (take_ownership) delete[] children; return 0; }
     auto* st = new (std::nothrow) WhenState();
-    if (st == nullptr) { delete agg; return 0; }
+    if (st == nullptr) { delete agg; if (take_ownership) delete[] children; return 0; }
     CHAOS_IL2CPP_INTPTR agg_handle = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(agg);
     st->aggregate = agg;
     st->aggregate_handle = agg_handle;
@@ -504,6 +552,7 @@ static CHAOS_IL2CPP_INTPTR WhenAllAnyInternal(
     st->won.store(false, std::memory_order_relaxed);
     st->children = children;
     st->n = n;
+    st->owns_children = take_ownership;
 
     if (n == 0) {
         // Empty WhenAll completes immediately (empty WhenAny is invalid → caller
@@ -511,6 +560,7 @@ static CHAOS_IL2CPP_INTPTR WhenAllAnyInternal(
         agg->completed.store(true, std::memory_order_release);
         chaos::il2cpp::common::notify_task_completed(agg);
         finish_async_task(agg_handle);
+        if (take_ownership) delete[] children;
         delete st;
         return agg_handle;
     }
@@ -558,9 +608,11 @@ static CHAOS_IL2CPP_INTPTR WhenAllAnyManagedArray(
     auto* mem = new (std::nothrow) CHAOS_IL2CPP_INTPTR[static_cast<size_t>(n)];
     if (mem == nullptr) return 0;
     for (CHAOS_IL2CPP_INT32 i = 0; i < n; ++i) mem[i] = elements[i];
-    auto agg = WhenAllAnyInternal(mem, n, when_all);
-    delete[] mem;
-    return agg;
+    // take_ownership: the aggregate's continuation reads these handles when each
+    // child completes, which may be LATER than this call.  Freeing `mem` here
+    // left the aggregate dereferencing freed memory, so the copy must live as
+    // long as the aggregate; the aggregate frees it on completion.
+    return WhenAllAnyInternal(mem, n, when_all, /*take_ownership=*/true);
 }
 
 /// ShapeRegistry symbol for WhenAll(Task[]): extract from managed array handle.

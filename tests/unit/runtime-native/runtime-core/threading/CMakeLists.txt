@@ -110,6 +110,16 @@ chaos_native_add_test(test_async_continue_with
     LABELS "unit;threading"
 )
 
+# async_when_array_test — ASYNC-P2-3: the managed-array WhenAll/WhenAny overload
+# that codegen actually calls.  Asserts the result SET [1,2,3] (not just
+# "completed") and that the aggregate owns its copy of the child handles, so a
+# child completing later is still observed.
+chaos_native_add_test(test_async_when_array
+    async_when_array_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    LABELS "unit;threading"
+)
+
 # queue_backpressure_test — Global queue backpressure verification (T2-QUEUE)
 chaos_native_add_test(test_queue_backpressure
     queue_backpressure_test.cpp

@@ -14,6 +14,7 @@
 #include <thread_state.h>
 #include <thread_pool.h>
 #include <timer_queue.h>
+#include "runtime_stubs/stub_common.h"
 
 #include <atomic>
 #include <chrono>
@@ -968,7 +969,18 @@ TEST_F(AsyncIntegrationTest, WhenAll_AllChildrenComplete_CompletesAggregate) {
     chaos::il2cpp::common::finish_async_task(h2);
     EXPECT_TRUE(WaitFor([aggTask] { return aggTask->completed.load(); }));
     EXPECT_FALSE(aggTask->faulted.load());
-    EXPECT_EQ(0, aggTask->result);  // WhenAll(Task[]) returns a Task, result not used
+    // The aggregate now carries the result SET (ASYNC-P2-3): c2 resolved to 42
+    // and c1 was left at its default 0, so the array is {0, 42}.  This used to
+    // assert `result == 0` with the comment "result not used" — that was the gap
+    // ASYNC-P2-3 closed, not a contract.
+    {
+        auto* results = get_managed_array(aggTask->result);
+        ASSERT_NE(nullptr, results) << "WhenAll must expose the children's results";
+        ASSERT_EQ(2u, results->length);
+        auto* elems = accessor_get_elements(results);
+        EXPECT_EQ(0, elems[0]);
+        EXPECT_EQ(42, elems[1]);
+    }
     delete c1; delete c2;
 }
 
