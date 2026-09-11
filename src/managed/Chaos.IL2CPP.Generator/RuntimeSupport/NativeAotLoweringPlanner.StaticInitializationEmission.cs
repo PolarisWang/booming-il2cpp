@@ -62,6 +62,28 @@ public sealed partial class NativeAotLoweringPlanner
         AppendStaticInitializationCall(builder, GetNativeTypeInitializationFunctionSymbol(plan.TypeSubjectId), indentation);
     }
 
+    /// <summary>
+    /// Emits the lazy materializer call for System.String::Empty, if this field is it.
+    ///
+    /// The field is declared "= 0" (a constant can't safely reference the GC heap at
+    /// static-init time), so the first load must upgrade it to a real empty System.String.
+    /// This runs at the load site, BEFORE any receiver null-guard on the loaded value —
+    /// otherwise <c>string.Empty.ToLower()</c> raises NullReferenceException and the
+    /// (correctly inlined) native call is never reached.
+    /// </summary>
+    private void EmitStringEmptyMaterializationForField(
+        StringBuilder builder,
+        string fieldSubjectId,
+        string indentation)
+    {
+        if (!IsStringEmptyStaticFieldSubjectId(fieldSubjectId))
+            return;
+
+        // Name must avoid the `chaos_static_` prefix (reserved for static fields —
+        // the extern-declaration emitter would declare it as a variable, not a function).
+        builder.AppendLine($"{indentation}chaos_materialize_string_empty();");
+    }
+
     private void EmitStaticInitializationAction(
         StringBuilder builder,
         StaticInitializationAction action,

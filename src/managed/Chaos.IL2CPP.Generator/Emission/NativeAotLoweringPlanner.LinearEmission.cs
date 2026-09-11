@@ -102,6 +102,7 @@ public sealed partial class NativeAotLoweringPlanner
         if (instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.LoadStaticField)
         {
             EmitStaticInitializationForField(builder, requiredTargetReference.SubjectId, indentation);
+            EmitStringEmptyMaterializationForField(builder, requiredTargetReference.SubjectId, indentation);
             if (_staticFieldDeclarations == null)
                 _staticFieldDeclarations = new Dictionary<string, string?>(System.StringComparer.Ordinal);
             _staticFieldDeclarations.TryAdd(requiredTargetReference.SubjectId, requiredTargetReference.FieldTypeSubjectId);

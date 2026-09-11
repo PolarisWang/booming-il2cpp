@@ -1117,7 +1117,13 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     if caps_path.exists():
         cmd.extend(["--capabilities", str(caps_path)])
         print(f"  [build] Capabilities: {caps_path.name}")
-    result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=1200)
+    # ATG runs per-type over the whole chunk partition and always restarts from
+    # scratch (see the rmtree above), so the wall time scales with chunk size.
+    # CoreLib's `system` chunk (~500 methods across hundreds of types) exceeds
+    # 1200s on a cold run and was being killed mid-generation.  Allow an env
+    # override for large chunks; default stays conservative for small ones.
+    atg_timeout = int(os.environ.get("CHAOS_ATG_TIMEOUT", "1200"))
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=atg_timeout)
 
     if result.returncode != 0:
         print(f"  [build] AutoTestGenerator FAILED (rc={result.returncode})")

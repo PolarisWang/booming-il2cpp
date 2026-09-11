@@ -346,19 +346,6 @@ public sealed partial class NativeAotLoweringPlanner
                         RegisterStringInstanceInline(registry, "ToUpper", "ChaosStringToUpper");
                         RegisterStringInstanceInline(registry, "Trim", "ChaosStringTrim");
 
-                        // ── System.String.GetPinnableReference — inline return 0 ─────────────
-                        // Called on string.Empty → AOT null stub → null-guard NRE.
-                        // For string.Empty.GetPinnableReference() the expected result is the
-                        // null terminator char ('\0'), which as an int64_t is 0.
-                        registry.RegisterInline(new InlineShapeDescriptor(
-                            TypeDisplayNamePrefix: "System.String",
-                            MethodName: "GetPinnableReference",
-                            Resolver: (callee, paramTypes) =>
-                            {
-                                if (paramTypes.Count != 0) return null;
-                                return "static_cast<CHAOS_IL2CPP_INTPTR>(0)";
-                            }));
-
                         // ── System.GC.KeepAlive(object) — no-op native, null-tolerating ──────
                         registry.RegisterInline(new InlineShapeDescriptor(
                             TypeDisplayNamePrefix: "System.GC",

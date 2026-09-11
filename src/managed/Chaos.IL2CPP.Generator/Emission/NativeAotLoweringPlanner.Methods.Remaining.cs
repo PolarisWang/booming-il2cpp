@@ -452,6 +452,13 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
         sb.AppendLine();
 
+        // chaos_materialize_string_empty: defined in the object model (page 0), called
+        // from every page that loads System.String::Empty.  Must be declared here or
+        // page files fail with C3861.  Name deliberately avoids the `chaos_static_`
+        // prefix, which is reserved for static fields.
+        sb.AppendLine("void chaos_materialize_string_empty();");
+        sb.AppendLine();
+
         // chaos_is_array_store_compatible: always emitted in object model
         sb.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
         sb.AppendLine();

@@ -1349,6 +1349,37 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 			// Math.Ceiling(Decimal.Zero) passes a null carrier and the wrapper null-guard throws → return 0.
 			builder.AppendLine("    static chaos::il2cpp::runtime_core::DecimalCarrier g_chaos_decimal_zero{};");
 		}
+		bool anyStringEmptyStatic = hashSet2.Keys.Any(IsStringEmptyStaticFieldSubjectId);
+		if (anyStringEmptyStatic)
+		{
+			// String.Empty must be a REAL empty System.String object, not 0.
+			//
+			// Field type here is CHAOS_IL2CPP_INTPTR (MapFieldTypeToCppType erases string types),
+			// and a constant initializer cannot safely reference the GC heap.  So the field keeps
+			// the "= 0" constant initializer and is lazily upgraded on first load via
+			// EmitStringEmptyMaterializationForField(), which runs at the load site
+			// before any receiver null-guard can fire.
+			//
+			// Without this, an instance call on String.Empty (e.g. string.Empty.ToLower())
+			// loads 0 → the receiver null-guard raises NullReferenceException before the
+			// (correctly inlined) native call is ever reached.
+			// NOTE: the name must NOT start with `chaos_static_` — that prefix is
+			// reserved for static fields, and the extern-declaration emitter keys off
+			// it, producing `extern CHAOS_IL2CPP_INTPTR <name>;` (a variable) which
+			// makes every call site fail with C2064 "term does not evaluate to a
+			// function taking 0 arguments".
+			// Non-static (external linkage) so the header declaration binds: page files
+			// call it but only the object-model TU defines it — a `static` definition
+			// would be invisible across TUs and fail with C3861.
+			builder.AppendLine("    void chaos_materialize_string_empty()");
+			builder.AppendLine("    {");
+			builder.AppendLine("        if (" + GetNativeStaticFieldSymbol(StringEmptyStaticFieldSubjectId) + " == 0)");
+			builder.AppendLine("        {");
+			builder.AppendLine("            const auto chaos_empty_id = chaos::il2cpp::string_table::Intern(\"\", 0u);");
+			builder.AppendLine("            " + GetNativeStaticFieldSymbol(StringEmptyStaticFieldSubjectId) + " = chaos_string_materialize(chaos_make_string_id_value(chaos_empty_id));");
+			builder.AppendLine("        }");
+			builder.AppendLine("    }");
+		}
 		foreach (KeyValuePair<string, string?> item11 in hashSet2.OrderBy<KeyValuePair<string, string?>, string>((KeyValuePair<string, string?> result) => result.Key, StringComparer.Ordinal))
 		{
 			var cppType = MapFieldTypeToCppType(item11.Value);
@@ -1808,6 +1839,32 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 			if (idx >= 0)
 				return true;
 			return staticFieldSubjectId.StartsWith("System.Decimal", StringComparison.Ordinal);
+		}
+
+		/// <summary>
+		/// SubjectId of the one static field that must materialize a real empty string:
+		/// System.String::Empty.
+		/// </summary>
+		private const string StringEmptyStaticFieldSubjectId = "System.Private.CoreLib/System.String::Empty";
+
+		/// <summary>
+		/// True when a static-field SubjectId denotes System.String::Empty.  The field is typed
+		/// CHAOS_IL2CPP_INTPTR by MapFieldTypeToCppType (string types erase to a pointer), so a
+		/// constant "= 0" initializer means "null" — and any instance call on it (string.Empty.ToLower())
+		/// trips the receiver null-guard before the translated body runs.  Emitting a lazy
+		/// materializer gives it a real empty System.String.
+		/// </summary>
+		private static bool IsStringEmptyStaticFieldSubjectId(string staticFieldSubjectId)
+		{
+			if (string.IsNullOrEmpty(staticFieldSubjectId))
+				return false;
+			// Field SubjectId forms: "System.Private.CoreLib/System.String::Empty",
+			// "System.Private.CoreLib/System.String.Empty", or bare "System.String::Empty".
+			if (staticFieldSubjectId.EndsWith("System.String::Empty", StringComparison.Ordinal) ||
+			    staticFieldSubjectId.EndsWith("System.String.Empty", StringComparison.Ordinal))
+				return true;
+			return string.Equals(staticFieldSubjectId, "System.String::Empty", StringComparison.Ordinal) ||
+			       string.Equals(staticFieldSubjectId, "System.String.Empty", StringComparison.Ordinal);
 		}
 
 		private void EmitStructMarshallingDescriptors(

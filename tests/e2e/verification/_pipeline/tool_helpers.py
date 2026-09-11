@@ -55,9 +55,25 @@ def _referenced_projects(proj: Path, _seen: set | None = None) -> set[Path]:
 
 
 def _project_sources(proj: Path) -> list[Path]:
-    """All .cs files under a project, plus the project file itself (used to detect
-    csproj edits, e.g. new ProjectReference includes)."""
-    return list(proj.parent.rglob("*.cs")) + [proj]
+    """All hand-written .cs files under a project, plus the project file itself
+    (used to detect csproj edits, e.g. new ProjectReference includes).
+
+    `obj/` and `bin/` are excluded: MSBuild writes generated sources
+    (AssemblyInfo.cs, *.AssemblyAttributes.cs, ref/refint assemblies) into
+    `obj/` *during* the build, so their mtimes land just after the output DLL's.
+    Including them made the newest-source timestamp always exceed the DLL's,
+    permanently reporting "up to date" and skipping rebuilds — a modified
+    Generator then left a stale bundled Generator.dll in the tool's bin and the
+    pipeline silently ran old codegen.
+    """
+    out: list[Path] = []
+    for s in proj.parent.rglob("*.cs"):
+        parts = s.parts
+        if "obj" in parts or "bin" in parts:
+            continue
+        out.append(s)
+    out.append(proj)
+    return out
 
 
 def ensure_tool_built(tool_name: str) -> bool:
@@ -93,10 +109,16 @@ def ensure_tool_built(tool_name: str) -> bool:
         ["dotnet", "build-server", "shutdown"],
         capture_output=True, text=True, timeout=30)
 
-    # Rebuild
-    result = subprocess.run(
-        ["dotnet", "build", str(proj), "-nologo"],
-        capture_output=True, text=True, timeout=120)
+    # Rebuild.  A cold build of TPG transitively builds Generator + 10 other
+    # projects and can far exceed a couple of minutes on a clean tree, so the
+    # timeout is generous and a TimeoutExpired is reported rather than raised.
+    try:
+        result = subprocess.run(
+            ["dotnet", "build", str(proj), "-nologo"],
+            capture_output=True, text=True, timeout=900)
+    except subprocess.TimeoutExpired:
+        print(f"      [tool_helpers] TIMEOUT rebuilding {proj.name} (900s)")
+        return False
     if result.returncode != 0:
         for line in (result.stderr.splitlines() + result.stdout.splitlines())[-5:]:
             print(f"      {line}")
