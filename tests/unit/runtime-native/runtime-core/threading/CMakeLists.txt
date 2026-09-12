@@ -120,6 +120,19 @@ chaos_native_add_test(test_async_when_array
     LABELS "unit;threading"
 )
 
+# async_when_each_test — ASYNC-P2-8: Task.WhenEach's completion-ORDERED stream.
+# Distinct contract from the two tests above: WhenAll yields the aggregate once
+# and WhenAny yields the first completed once, whereas WhenEach yields EVERY
+# task as it completes.  The central test completes children in an order
+# different from their array order and asserts the drain observes COMPLETION
+# order — an array-order implementation would pass a count-only test and be a
+# silently different program.
+chaos_native_add_test(test_async_when_each
+    async_when_each_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    LABELS "unit;threading"
+)
+
 # async_task_factory_test — ASYNC-P2-5: TaskFactory.get_Factory / StartNew.
 # chaos_task_factory_start_new drops the (opaque) factory receiver and forwards
 # the delegate to the production ThreadPool runner, so this links the same
