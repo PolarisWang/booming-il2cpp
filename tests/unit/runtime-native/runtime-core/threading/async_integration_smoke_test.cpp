@@ -13,6 +13,8 @@
 #include <chaos/async.h>
 #include <thread_state.h>
 #include <thread_pool.h>
+#include <timer_queue.h>
+#include "runtime_stubs/stub_common.h"
 
 #include <atomic>
 #include <chrono>
@@ -79,6 +81,7 @@ class AsyncIntegrationTest : public ::testing::Test {
 protected:
     void SetUp() override {
         threading::RegisterThread(threading::kMainThreadId, nullptr);
+        threading::TimerQueueInitialize();
         threading::ThreadPoolInitialize();
         register_async_task_run_fn(TestTaskRun);
     }
@@ -86,6 +89,7 @@ protected:
     void TearDown() override {
         register_async_task_run_fn(nullptr);
         threading::ThreadPoolShutdown();
+        threading::TimerQueueShutdown();
         threading::UnregisterThread();
     }
 };
@@ -889,4 +893,195 @@ TEST_F(AsyncIntegrationTest, TaskSource_SetResultFromWorkerThread) {
     EXPECT_FALSE(task->faulted.load());
 
     chaos::il2cpp::common::task_source_destroy(tcs);
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Phase 3 P3-2: Task.Delay — native timer-backed delayed task completion.
+// chaos_task_delay_stub returns an AsyncTask handle that the TimerQueue gate
+// thread completes a short time after creation (NOT immediately).  The smoke TU
+// forwards to it via a small extern declaration (stub lib is linked already).
+// ══════════════════════════════════════════════════════════════════════════════
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_task_delay_stub(CHAOS_IL2CPP_INT32 millisecondsTimeout) noexcept;
+
+TEST_F(AsyncIntegrationTest, TaskDelay_CompletesAfterElapsedTime) {
+    // ~80 ms delay; well above the ~15 ms TimerQueue gate tick so the timer
+    // is actually scheduled and fires on the gate thread (not a measurement hack).
+    constexpr int kPollIntervalMs = 5;
+    constexpr int kMaxPoll = 600;  // 5ms * 600 = 3s
+    auto start = std::chrono::steady_clock::now();
+
+    CHAOS_IL2CPP_INTPTR handle = chaos_task_delay_stub(80);
+    ASSERT_NE(0, handle);
+    auto* task = chaos::il2cpp::common::require_async_task(handle);
+
+    // Manual timer tick: the gate thread may not be running (ThreadPool singleton
+    // guard skips re-init after a prior test's TearDown called Shutdown).  Tick
+    // the timer queue ourselves in the poll loop to fire due timers.
+    for (int i = 0; i < kMaxPoll; ++i) {
+        if (task->completed.load()) break;
+        threading::TimerQueueOnTick();
+        std::this_thread::sleep_for(std::chrono::milliseconds(kPollIntervalMs));
+    }
+
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+        std::chrono::steady_clock::now() - start).count();
+    EXPECT_TRUE(task->completed.load()) << "Task.Delay handle did not complete in time";
+    EXPECT_FALSE(task->faulted.load());
+    // The timer must NOT have completed instantly — the earliest a real fire
+    // could happen is ~the delay (we allow roughly 1.5x for gate tick scheduling).
+    if (task->completed.load()) {
+        EXPECT_GE(elapsed_ms, 40) << "Task.Delay completed before the requested delay elapsed";
+    }
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Phase 3 P3-3: Task.WhenAll / WhenAny native combinators.
+// chaos_task_when_all(children[], n) / chaos_task_when_any(children[], n):
+// produce an aggregate AsyncTask from a contiguous array of child Task handles.
+// ══════════════════════════════════════════════════════════════════════════════
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_task_when_all(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_task_when_any(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept;
+
+TEST_F(AsyncIntegrationTest, WhenAll_AllChildrenComplete_CompletesAggregate) {
+    using namespace chaos::il2cpp::common;
+    // One instantly-complete child + two live ones we complete afterward.
+    auto* c1 = new AsyncTask();   // live
+    auto* c2 = new AsyncTask();   // live
+    auto h1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(c1);
+    auto h2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(c2);
+
+    CHAOS_IL2CPP_INTPTR children[2] = {h1, h2};
+    auto agg = chaos_task_when_all(children, 2);
+    ASSERT_NE(0, agg);
+    auto* aggTask = require_async_task(agg);
+    ASSERT_FALSE(aggTask->completed.load());  // neither child done yet
+
+    // Complete c1.
+    c1->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(h1);
+    EXPECT_FALSE(aggTask->completed.load());  // still c2 pending
+
+    // Complete c2 → aggregate done.
+    c2->result = 42;
+    c2->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(h2);
+    EXPECT_TRUE(WaitFor([aggTask] { return aggTask->completed.load(); }));
+    EXPECT_FALSE(aggTask->faulted.load());
+    // The aggregate now carries the result SET (ASYNC-P2-3): c2 resolved to 42
+    // and c1 was left at its default 0, so the array is {0, 42}.  This used to
+    // assert `result == 0` with the comment "result not used" — that was the gap
+    // ASYNC-P2-3 closed, not a contract.
+    {
+        auto* results = get_managed_array(aggTask->result);
+        ASSERT_NE(nullptr, results) << "WhenAll must expose the children's results";
+        ASSERT_EQ(2u, results->length);
+        auto* elems = accessor_get_elements(results);
+        EXPECT_EQ(0, elems[0]);
+        EXPECT_EQ(42, elems[1]);
+    }
+    delete c1; delete c2;
+}
+
+TEST_F(AsyncIntegrationTest, WhenAll_ChildFaults_AggregateFaults) {
+    using namespace chaos::il2cpp::common;
+    auto* good = new AsyncTask();
+    auto* bad = new AsyncTask();
+    auto hg = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(good);
+    auto hb = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(bad);
+
+    CHAOS_IL2CPP_INTPTR children[2] = {hg, hb};
+    auto agg = chaos_task_when_all(children, 2);
+    ASSERT_NE(0, agg);
+    auto* aggTask = require_async_task(agg);
+
+    good->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(hg);
+
+    bad->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0xDEAD);
+    bad->faulted.store(true, std::memory_order_relaxed);
+    bad->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(hb);
+
+    EXPECT_TRUE(WaitFor([aggTask] { return aggTask->completed.load(); }));
+    EXPECT_TRUE(aggTask->faulted.load());
+    EXPECT_EQ(0xDEAD, aggTask->exception);
+    delete good; delete bad;
+}
+
+TEST_F(AsyncIntegrationTest, WhenAny_FirstChildToComplete_Wins) {
+    using namespace chaos::il2cpp::common;
+    // Two live children. Child #1 completes first → aggregate won idx=2 (1-based).
+    auto* slow = new AsyncTask();
+    auto* fast = new AsyncTask();
+    auto hs = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(slow);
+    auto hf = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(fast);
+
+    CHAOS_IL2CPP_INTPTR children[2] = {hs, hf};
+    auto agg = chaos_task_when_any(children, 2);
+    ASSERT_NE(0, agg);
+    auto* aggTask = require_async_task(agg);
+    ASSERT_FALSE(aggTask->completed.load());
+
+    // Complete the SECOND child (index 1) first → winner idx 1 (0-based) → result 2.
+    fast->result = 99;
+    fast->completed.store(true, std::memory_order_release);
+    chaos::il2cpp::common::finish_async_task(hf);
+
+    EXPECT_TRUE(WaitFor([aggTask] { return aggTask->completed.load(); }));
+    EXPECT_EQ(2, aggTask->result);  // 1-based winner index of child[1]
+    delete slow; delete fast;
+}
+
+TEST_F(AsyncIntegrationTest, WhenAll_EmptyChildren_CompletesImmediately) {
+    using namespace chaos::il2cpp::common;
+    auto agg = chaos_task_when_all(nullptr, 0);
+    ASSERT_NE(0, agg);
+    auto* aggTask = require_async_task(agg);
+    EXPECT_TRUE(aggTask->completed.load());  // empty WhenAll completes immediately
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Phase 0 regression: ThreadPool re-initialization after shutdown (defect D3)
+//
+// ThreadPoolShutdown() must clear the singleton guard so a subsequent
+// ThreadPoolInitialize() actually restarts the workers and gate thread.  Before
+// the fix, the guard stayed set and re-init silently no-op'd, leaving the pool
+// dead — every timer / async_task_run callback would then hang forever.
+//
+// This test must NOT use the AsyncIntegrationTest fixture (which manages pool
+// lifecycle in SetUp/TearDown) so it can drive init/shutdown cycles explicitly.
+// ══════════════════════════════════════════════════════════════════════════════
+
+TEST(ThreadPoolLifecycle, ReinitializeAfterShutdownRestartsWorkers) {
+    using namespace chaos::il2cpp::runtime_core::threading;
+
+    // Cycle 1: standalone bring-up.
+    ThreadPoolInitialize();
+    EXPECT_GE(ThreadPoolWorkerCount(), 1)
+        << "first Initialize should have created at least one worker";
+
+    ThreadPoolShutdown();
+    EXPECT_EQ(0, ThreadPoolWorkerCount())
+        << "Shutdown should have joined and cleared all workers";
+
+    // Cycle 2: this is the regression — re-init must not be a silent no-op.
+    ThreadPoolInitialize();
+    EXPECT_GE(ThreadPoolWorkerCount(), 1)
+        << "re-Initialize after Shutdown did not restart workers "
+           "(s_initialized guard was not reset)";
+
+    // Prove the restarted pool actually executes work, not just reports a count.
+    std::atomic<bool> ran{false};
+    ThreadPoolQueueUserWorkItemUnsafe(
+        [](void* state) { static_cast<std::atomic<bool>*>(state)->store(true); },
+        &ran);
+    for (int i = 0; i < 400 && !ran.load(); ++i) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(5));
+    }
+    EXPECT_TRUE(ran.load()) << "restarted pool did not execute a queued work item";
+
+    ThreadPoolShutdown();
+    EXPECT_EQ(0, ThreadPoolWorkerCount());
 }

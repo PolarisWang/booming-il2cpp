@@ -116,7 +116,8 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
         IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
         IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
+        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions,
+        IReadOnlyList<int>? ExitTargetOffsets = null);
 
     private sealed record FilterOnlyExceptionMethodShape(
         AotCoreIrExceptionRegionArtifact FilterRegion,

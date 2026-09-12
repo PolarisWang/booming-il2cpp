@@ -41,6 +41,12 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
     </ProjectReference>
+    <!-- ASYNC-P2-8 A1: net9.0 async-ITERATOR fixture (separate TFM from
+         AsyncTestAssembly so the existing baseline is unaffected). -->
+    <ProjectReference Include="AsyncIteratorTestAssembly\AsyncIteratorTestAssembly.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>

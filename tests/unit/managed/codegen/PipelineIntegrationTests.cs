@@ -10,11 +10,7 @@ public sealed class PipelineIntegrationTests
 
     private static string LocateStubAssemblyDll()
     {
-        var dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-        while (dir != null && !Directory.Exists(Path.Combine(dir.FullName, ".git")))
-            dir = dir.Parent;
-        var repoRoot = dir?.FullName ?? throw new DirectoryNotFoundException(
-            "Could not locate repository root (.git directory).");
+        var repoRoot = RepoRootLocator.FindFromBaseDirectory();
 
         return Path.GetFullPath(Path.Combine(
             repoRoot,

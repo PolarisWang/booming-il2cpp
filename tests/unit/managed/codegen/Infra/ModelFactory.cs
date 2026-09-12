@@ -175,6 +175,30 @@ internal static class ModelFactory
     }
 
     /// <summary>
+    /// Creates a catch-only exception region artifact. Offsets and lengths are CIL
+    /// byte offsets (so <c>leave</c> occupies 2, <c>br.s</c> occupies 2, etc.) and
+    /// are matched against <see cref="AotCoreIrInstructionArtifact.IlOffset"/> by the
+    /// planner's partition helpers.
+    /// </summary>
+    internal static AotCoreIrExceptionRegionArtifact CatchRegion(
+        int tryOffset,
+        int tryLength,
+        int handlerOffset,
+        int handlerLength,
+        string catchTypeSubjectId = "System.Private.CoreLib/System.Exception")
+    {
+        return new AotCoreIrExceptionRegionArtifact
+        {
+            HandlingKindCode = AotCoreIrExceptionRegionKind.Catch,
+            TryOffset = tryOffset,
+            TryLength = tryLength,
+            HandlerOffset = handlerOffset,
+            HandlerLength = handlerLength,
+            CatchTypeSubjectId = catchTypeSubjectId,
+        };
+    }
+
+    /// <summary>
     /// Creates an AotCoreIrArtifact containing the given methods.
     /// </summary>
     internal static AotCoreIrArtifact CreateArtifact(params AotCoreIrMethodArtifact[] methods)

@@ -36,13 +36,38 @@ public sealed partial class NativeAotLoweringPlanner
 
 
 
-    private static void StripTrailingLeaveInstructions(List<AotCoreIrInstructionArtifact> instructions)
+    /// <summary>
+    /// Removes trailing <c>leave</c> instructions from a TRY/HANDLER partition, returning
+    /// the IL offsets they targeted (<c>-1</c> for a malformed/missing operand).
+    ///
+    /// <para>
+    /// Dropping the <c>leave</c> itself is correct: it is the branch out of the partition and
+    /// the enclosing <c>IRExceptionRegion</c> emitter supplies that edge. But the <c>leave</c>'s
+    /// TARGET OPERAND is the only record of WHERE the region's exit resumes, and it must not be
+    /// discarded with the instruction. A <c>leave</c> out of a try routinely targets a block
+    /// INSIDE the tail rather than the tail's first block — e.g. a <c>try</c> whose
+    /// <c>leave</c> skips over the "error" arm straight to the "success" arm. If the operand is
+    /// dropped, every region exit falls into the tail's first block and silently runs the wrong
+    /// arm (observed on <c>&lt;YieldOne&gt;d__0::MoveNext</c>: the "exhausted" arm swallowed the
+    /// "yielded" arm, so the iterator always reported "no more elements").
+    /// </para>
+    /// <para>
+    /// Callers collect these offsets and pass them to the tail builder so the tail can resume at
+    /// the named block. See <c>BuildExceptionPartitionTree</c>'s <c>resumeOffsets</c> parameter.
+    /// </para>
+    /// </summary>
+    private static List<int> StripTrailingLeaveInstructions(
+        List<AotCoreIrInstructionArtifact> instructions)
     {
+        var targets = new List<int>();
         while (instructions.Count > 0 &&
                string.Equals(instructions[^1].Op, "leave", StringComparison.Ordinal))
         {
+            var stripped = instructions[^1];
             instructions.RemoveAt(instructions.Count - 1);
+            targets.Add(GetRequiredIntOperand(stripped));
         }
+        return targets;
     }
 
 

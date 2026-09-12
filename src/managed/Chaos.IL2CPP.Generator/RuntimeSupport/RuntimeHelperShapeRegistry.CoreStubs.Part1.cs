@@ -94,8 +94,14 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterReflectionParameterInfo(registry);
             RegisterAsyncTaskYield(registry);
             RegisterAsyncTaskBuilder(registry);
+            RegisterAsyncIteratorBuilder(registry);
+            RegisterManualResetValueTaskSourceCore(registry);
             RegisterDecimal(registry);
             RegisterTaskCompletionSource(registry);
+            RegisterTaskRun(registry);
+            RegisterTaskFactory(registry);
+            RegisterTaskFactoryContinueWhen(registry);
+            RegisterTaskDelay(registry);
             RegisterNullableTget(registry);
             RegisterNullableTGetValueOrDefault(registry);
             RegisterConvertToChar(registry);
@@ -105,6 +111,29 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterInt32GetHashCodeinline(registry);
             RegisterArrayCopy(registry);
 
+        }
+
+        /// <summary>
+        /// True when <paramref name="paramType"/> names one of the delegate types
+        /// a Task.ContinueWith overload accepts for its continuation argument.
+        /// </summary>
+        /// <remarks>
+        /// Both spellings of a generic type name occur in subject ids and BOTH
+        /// must be accepted:
+        /// <list type="bullet">
+        /// <item>backtick arity — <c>System.Action`1&lt;System.Threading.Tasks.Task&gt;</c></item>
+        /// <item>angle brackets — <c>System.Action&lt;System.Threading.Tasks.Task&gt;</c></item>
+        /// </list>
+        /// The second is what the real pipeline emits for a cross-assembly BCL
+        /// callee; matching only the backtick form made every ContinueWith
+        /// overload resolve to null in the pipeline while the registry-level
+        /// test — which happened to use the backtick form — stayed green. That
+        /// divergence is exactly why the pipeline-level test exists.
+        /// </remarks>
+        private static bool IsAnyContinuationDelegate(string paramType)
+        {
+            return paramType.StartsWith("System.Action", StringComparison.Ordinal)
+                || paramType.StartsWith("System.Func", StringComparison.Ordinal);
         }
 
         private static string GetTypeDisplayNameFromSubjectId(string subjectId)
@@ -153,7 +182,49 @@ public sealed partial class NativeAotLoweringPlanner
             if (parenOpen < 0 || parenClose <= parenOpen) return [];
             var paramsPart = subjectId[(parenOpen + 1)..parenClose];
             if (string.IsNullOrEmpty(paramsPart)) return [];
-            return paramsPart.Split(',');
+            return SplitTopLevelTypeList(paramsPart);
+        }
+
+        /// <summary>
+        /// Split a parameter-type list on the commas that separate PARAMETERS,
+        /// ignoring commas nested inside a generic argument list.
+        /// </summary>
+        /// <remarks>
+        /// A plain <c>Split(',')</c> is wrong for any parameter whose type is a
+        /// delegate or generic with more than one type argument, because the
+        /// real subject-id form spells those inline with assembly-qualified
+        /// arguments and a comma inside the brackets:
+        ///
+        /// <code>
+        /// ...RemoveAll:System.Int32(System.Func`2[[...JsonNode, System.Text.Json, Version=10.0.0.0, ...],[System.Boolean, ...]])
+        /// </code>
+        ///
+        /// <c>Split(',')</c> turns that single <c>Func`2</c> parameter into four
+        /// fragments, so a resolver testing <c>paramTypes.Count</c> sees 4 where
+        /// the method has 1 — the overload silently fails to match and falls
+        /// through.  Depth-tracking on <c>[ ]</c> and <c>&lt; &gt;</c> keeps each
+        /// parameter whole; the fragments themselves are left exactly as the
+        /// caller's string had them, so existing <c>paramTypes[i] ==</c> equality
+        /// checks against simple type names are unaffected.
+        /// </remarks>
+        private static IReadOnlyList<string> SplitTopLevelTypeList(string paramsPart)
+        {
+            var result = new List<string>(4);
+            var depth = 0;
+            var start = 0;
+            for (var i = 0; i < paramsPart.Length; i++)
+            {
+                var ch = paramsPart[i];
+                if (ch is '[' or '<') depth++;
+                else if (ch is ']' or '>') { if (depth > 0) depth--; }
+                else if (ch == ',' && depth == 0)
+                {
+                    result.Add(paramsPart[start..i]);
+                    start = i + 1;
+                }
+            }
+            result.Add(paramsPart[start..]);
+            return result;
         }
 
         /// <summary>Map Convert.ToChar parameter type to the corresponding chaos_convert_tochar_* native function.</summary>

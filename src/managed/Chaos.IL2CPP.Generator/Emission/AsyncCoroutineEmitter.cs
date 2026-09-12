@@ -30,10 +30,21 @@ public sealed partial class NativeAotLoweringPlanner
             && subjectId.Contains("d__", StringComparison.Ordinal)
             && !subjectId.Contains("::", StringComparison.Ordinal); // type, not method
     }
-    internal enum AsyncMethodKind { NotAsync, AsyncTask, AsyncTaskOfT, AsyncValueTask, AsyncValueTaskOfT, AsyncVoid, Complex }
+    internal enum AsyncMethodKind { NotAsync, AsyncTask, AsyncTaskOfT, AsyncValueTask, AsyncValueTaskOfT, AsyncVoid, AsyncIterator, Complex }
     private AsyncMethodKind ClassifyAsyncMethod(AotCoreIrMethodArtifact m)
     {
         if (!IsAsyncStateMachineMoveNext(m.SubjectId)) return AsyncMethodKind.NotAsync;
+        foreach (var i in m.Instructions)
+        {
+            var c = i.Callee; if (string.IsNullOrEmpty(c)) continue;
+            // ASYNC-P2-8 A1: must precede the AsyncTaskMethodBuilder test — checked in a
+            // separate pass because the iterator decision depends on the STATE MACHINE TYPE
+            // (`d__` vs `d__` with an IAsyncEnumerable interface), not merely on which
+            // builder name appears first in the instruction stream.  Falling through to the
+            // AsyncTask default below would emit task-shaped C++ (get_Task/SetResult) for an
+            // iterator state machine, which has neither.
+            if (c.Contains("AsyncIteratorMethodBuilder", StringComparison.Ordinal)) return AsyncMethodKind.AsyncIterator;
+        }
         foreach (var i in m.Instructions)
         {
             var c = i.Callee; if (string.IsNullOrEmpty(c)) continue;
@@ -44,6 +55,22 @@ public sealed partial class NativeAotLoweringPlanner
         return AsyncMethodKind.AsyncTask;
     }
     internal int AsyncMethodCount;
+    /// <summary>
+    /// True when the async-iterator state machine's body contains a <c>GetAwaiter</c> call.
+    /// Await-free iterators (like <c>YieldOne</c>) can be lowered through the normal
+    /// structured IR path; iterators that await (like <c>YieldAfterAwait</c>) depend on
+    /// await-side lowering that A4 does not implement and must stay on the explicit stub.
+    /// </summary>
+    internal static bool AsyncIteratorBodyHasAwait(AotCoreIrMethodArtifact method)
+    {
+        foreach (var i in method.Instructions)
+        {
+            if ((i.Op == "call" || i.Op == "callvirt") && i.Callee is string c
+                && c.Contains("GetAwaiter", StringComparison.Ordinal))
+                return true;
+        }
+        return false;
+    }
     /// <summary>
     /// Count of non-complex async state machine MoveNext methods emitted via the
     /// normal structured IR path (not via GenPromise/GenCoro). Historical name

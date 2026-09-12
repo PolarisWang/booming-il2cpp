@@ -41,4 +41,70 @@ public static class AsyncMethods
         // a continuation on the TCS's inner Task.
         return await tcs.Task;
     }
+
+    // Task.Run(Action) — fire-and-forget scheduling on the native ThreadPool.
+    // Exercises the Task::Run static overload routing (ASYNC-P1-1): the call
+    // must lower to the native async_task_run symbol rather than the
+    // interpreter fallback.
+    public static Task RunAction(Action work)
+    {
+        return Task.Run(work);
+    }
+
+    // ALIVE_ACTION_SENTINEL: a non-async method whose body is a plain constant
+    // return, used by the loader-coverage diagnostic to prove that plain (non-
+    // async) methods do reach the AOT IR.  If this one is also missing from a
+    // loaded world while the async methods are present, the drop is not about
+    // `async` at all.
+    public static int AliveSentinel()
+    {
+        return 0xA11FE;
+    }
+
+    // await Task.Run(Action) — the awaited form, combining the Run entry with
+    // the standard TaskAwaiter resume path.
+    public static async Task AwaitRunAction(Action work)
+    {
+        await Task.Run(work);
+    }
+
+    // Task.ContinueWith(Action<Task>) — the single ContinueWith overload whose
+    // full semantics the native helper honours (ASYNC-P2-4).  A non-async
+    // method so the subject reaches the AOT IR as a plain lowered call.
+    public static Task ContinueWithAction(Task antecedent, Action<Task> body)
+    {
+        return antecedent.ContinueWith(body);
+    }
+
+    // Task.ContinueWith(Action<Task>, TaskContinuationOptions) — NOT wired: the
+    // native helper discards the options argument, so routing it would run the
+    // body when the caller may have asked it not to.  The registry resolver
+    // deliberately returns null for this shape, so codegen must fall through to
+    // the interpreter rather than emit a call to chaos_task_continue_with.
+    public static Task ContinueWithOptions(Task antecedent, Action<Task> body,
+                                           TaskContinuationOptions options)
+    {
+        return antecedent.ContinueWith(body, options);
+    }
+
+    // Task.Factory.StartNew(Action) — the TaskFactory entry point (ASYNC-P2-5).
+    // A source-level `TaskFactory f = Task.Factory;` local does NOT help here:
+    // Roslyn elides it because the value is used once, so get_Factory is inlined
+    // into this call site and never gets its own emitted body.  The property's
+    // routing is therefore pinned at the registry level instead (see
+    // RuntimeHelperShapeRegistryTests.TaskFactory_GetFactoryProperty_*).
+    public static Task FactoryStartNew(Action work)
+    {
+        return Task.Factory.StartNew(work);
+    }
+
+    // Task.WhenAll(Task<T>[]) — the generic overload (ASYNC-P2-6).  The
+    // non-generic Task[] form is already wired to chaos_task_when_all_array;
+    // this one returns Task<T[]> instead of Task, so the previously-used
+    // "return type contains Task[]" test could not distinguish them and the
+    // generic form silently fell through to the interpreter.
+    public static Task<int[]> WhenAllOfInt(Task<int>[] tasks)
+    {
+        return Task.WhenAll(tasks);
+    }
 }

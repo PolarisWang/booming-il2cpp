@@ -144,6 +144,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     private void EmitManagedMethod(StringBuilder builder, AotCoreIrMethodArtifact method)
     {
+
         ValidateMethod(method);
         _state.Value!.LinearScratchCounter = 0;
         _state.Value!.NextInlineId = 0;
@@ -208,6 +209,19 @@ public sealed partial class NativeAotLoweringPlanner
         {
             AsyncMethodCount++;
             var ak = ClassifyAsyncMethod(method);
+            if (ak == AsyncMethodKind.AsyncIterator)
+            {
+                // ASYNC-P2-8 A5: ALL async iterators route through the real structured IR
+                // path, including those with awaits (YieldAfterAwait, WhenEachState.Iterate<T>).
+                // The await-side machinery is in place: YieldAwaiter is in AsyncAwaiterCatalog,
+                // AwaitUnsafeOnCompleted routes via A3, and the structured IR path correctly
+                // emits the yield / yield-after-await / yield-with-cancellation shapes from
+                // their IL.
+                //
+                // Recorded as LOWERED, not unsupported: the diagnostic must distinguish
+                // "we lowered this" from "we stubbed this", and only the latter is a gap.
+                LoweredAsyncIteratorSubjectIds.Add(method.SubjectId ?? "<null>");
+            }
             if (ak == AsyncMethodKind.Complex)
             {
                 // State machine whose resume graph cannot be lowered to a structured
@@ -262,8 +276,7 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
-        ValidateInstructions(method, instructions);
-        IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
+        ValidateInstructions(method, instructions);        IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
         HashSet<int> offsets = new HashSet<int>(instructions.Count);
         for (int idx = 0; idx < instructions.Count; idx++)
         {
@@ -297,6 +310,17 @@ public sealed partial class NativeAotLoweringPlanner
         stringBuilder5.AppendLine(ref handler);
         EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
         EmitStaticInitializationPrologue(builder, method);
+        // ASYNC-P2-7: an async ENTRY allocates the >d__ state machine and hands its
+        // address to AsyncTaskMethodBuilder::Start, which drives the first MoveNext.
+        // A Task.Yield (or any real suspension) inside that MoveNext parks the address
+        // on the thread pool as the resume target, so it MUST outlive the entry frame —
+        // it has to be a GC-heap box.  Roslyn's common Release shape never emits a
+        // `newobj` for the state machine (the local is a plain valuetype and only
+        // `ldloca` is used), so the generic newobj path never allocates one and
+        // `chaos_locals[V]` would stay 0 — turning every field store through
+        // chaos_resolve_managed_value_pointer into a write to a null-tagged stack slot.
+        // Allocate the box here, before the body runs.
+        EmitAsyncEntryStateMachineBoxAllocation(builder, method, instructions);
         // Emit structured IR body FIRST to capture actual slot depth via
         // slotContext, since ComputeMaxEvalStackDepth may undercount for
         // generic methods where inlined code or StringId emission expands
@@ -442,5 +466,144 @@ public sealed partial class NativeAotLoweringPlanner
     /// Auto is treated as Unicode (Windows default).
     /// </summary>
     private const bool IsWindowsTarget = true;
+
+    /// <summary>
+    /// ASYNC-P2-7. For an async ENTRY method, allocate the <c>&gt;d__</c> state machine
+    /// on the GC heap into the local slot the IL uses as <c>ref stateMachine</c>, so the
+    /// address handed to <c>AsyncTaskMethodBuilder::Start</c> survives the entry frame.
+    ///
+    /// <para>
+    /// Roslyn's common Release shape for a non-escaping async method declares the state
+    /// machine as a plain <c>valuetype</c> local and never emits a <c>newobj</c> — the
+    /// entry is just <c>ldloca V</c> feeding <c>Start&lt;T&gt;(ref T)</c>. Without this
+    /// allocation the emitted <c>chaos_locals[V]</c> stays 0 while the body takes
+    /// <c>&amp;chaos_locals[V]</c> and calls
+    /// <c>chaos_resolve_managed_value_pointer&lt;T&gt;</c> on it — that helper only
+    /// auto-allocates for <i>tagged</i> slot pointers, and a bare <c>&amp;chaos_locals[V]</c>
+    /// carries no tag, so the cast treats the 8-byte slot as a full state-machine struct
+    /// (field stores run past the slot) and the address reaches the thread pool as a
+    /// resume target that dies with the frame.
+    /// </para>
+    ///
+    /// <para>
+    /// No-op unless the method is a recognized async entry: a local that is
+    /// <c>ldloca</c>'d into <c>AsyncTaskMethodBuilder[&lt;T&gt;]::Start</c> /
+    /// <c>AwaitUnsafeOnCompleted</c>. The state-machine type symbol is taken from that
+    /// callee's generic argument, which is the authoritative spelling — deriving it from
+    /// the local's declared type is not available at this layer.
+    /// </para>
+    /// </summary>
+    private void EmitAsyncEntryStateMachineBoxAllocation(
+        StringBuilder builder,
+        AotCoreIrMethodArtifact method,
+        IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+    {
+        // A MoveNext is the state machine itself, not an entry that allocates one.
+        if (method.SubjectId is not null && IsAsyncStateMachineMoveNext(method.SubjectId))
+            return;
+
+        for (int i = 0; i < instructions.Count; i++)
+        {
+            if (instructions[i].Op != "ldloca") continue;
+            int slot = GetRequiredIntOperand(instructions[i]);
+
+            for (int j = i + 1; j < instructions.Count; j++)
+            {
+                var op = instructions[j].Op;
+                if (op is "call" or "callvirt")
+                {
+                    var callee = instructions[j].Callee;
+                    if (callee is null)
+                        break;
+                    bool isBuilder = callee.Contains("AsyncTaskMethodBuilder", StringComparison.Ordinal)
+                        || callee.Contains("AsyncValueTaskMethodBuilder", StringComparison.Ordinal)
+                        || callee.Contains("AsyncVoidMethodBuilder", StringComparison.Ordinal);
+                    bool isStart = callee.Contains("::Start", StringComparison.Ordinal)
+                        || callee.Contains("AwaitUnsafeOnCompleted", StringComparison.Ordinal);
+                    if (!isBuilder || !isStart)
+                        break;
+
+                    // The state machine type is the call's generic argument: the callee
+                    // reads "...AsyncTaskMethodBuilder<...>::Start<NS+<M>d__N>:System.Void(NS+<M>d__N&)".
+                    // Prefer the parameter spelling (it is assembly-qualified in the same
+                    // form as the IR's TargetReference SubjectIds); fall back to the
+                    // generic-argument spelling.  The callee carries the type WITHOUT its
+                    // assembly prefix, so re-qualify it with this method's assembly before
+                    // building the native symbol — the unprefixed form has no emitted
+                    // valuetype typedef and would not compile.
+                    string? smSubjectId = ExtractStateMachineSubjectIdFromCallee(callee);
+                    if (smSubjectId is null)
+                        break;
+                    if (!smSubjectId.Contains('/', StringComparison.Ordinal)
+                        && !string.IsNullOrEmpty(_assemblyName))
+                    {
+                        smSubjectId = _assemblyName + "/" + smSubjectId;
+                    }
+                    string smType = GetNativeValueTypeSymbol(smSubjectId);
+                    builder.AppendLine($"\tchaos_locals[{slot}] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NEW_GC({smType}, {{}}));");
+                    return;                }
+                // Eval-stack-neutral ops may sit between the ldloca and the builder call
+                // (see IdentifyAsyncBoxPointerLocalSlots, which uses the same allow-list).
+                if (op is "nop" or "ldflda" or "ldarg" or "ldarga" or "ldloc" or "ldloca"
+                    or "ldc.i4" or "ldc.i4.s" or "ldc.i4.m1" or "ldc.i4.0" or "ldc.i4.1"
+                    or "ldc.i4.2" or "ldc.i4.3" or "ldc.i4.4" or "ldc.i4.5"
+                    or "ldc.i4.6" or "ldc.i4.7" or "ldc.i4.8" or "dup")
+                    continue;
+                break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Pull the state-machine type SubjectId out of an
+    /// <c>AsyncTaskMethodBuilder::Start&lt;SM&gt;</c> /
+    /// <c>AwaitUnsafeOnCompleted&lt;A, SM&gt;</c> callee string.  Returns null when the
+    /// spelling is not one this method recognizes, so the caller can leave the entry
+    /// untouched rather than emit an allocation for the wrong type.
+    /// </summary>
+    private static string? ExtractStateMachineSubjectIdFromCallee(string callee)
+    {
+        // Preferred: "<method>(<fullType>&)" — the by-ref parameter names the state
+        // machine exactly as the IR spells it.  Pick the LAST parameter so
+        // AwaitUnsafeOnCompleted(TAwaiter&, TStateMachine&) yields the state machine.
+        int open = callee.LastIndexOf('(');
+        int close = callee.LastIndexOf(')');
+        if (open >= 0 && close > open)
+        {
+            var paramList = callee.Substring(open + 1, close - open - 1);
+            var parts = paramList.Split(',');
+            if (parts.Length > 0)
+            {
+                var last = parts[^1].Trim();
+                if (last.EndsWith("&", StringComparison.Ordinal))
+                {
+                    last = last[..^1].Trim();
+                    if (last.Contains(">d__", StringComparison.Ordinal))
+                        return last;
+                }
+            }
+        }
+
+        // Fallback: the generic argument on the method name.
+        int lt = callee.IndexOf("::Start<", StringComparison.Ordinal);
+        if (lt >= 0)
+        {
+            int argStart = lt + "::Start<".Length;
+            int depth = 1;
+            int k = argStart;
+            for (; k < callee.Length && depth > 0; k++)
+            {
+                if (callee[k] == '<') depth++;
+                else if (callee[k] == '>') depth--;
+            }
+            if (depth == 0)
+            {
+                var arg = callee.Substring(argStart, k - 1 - argStart);
+                if (arg.Contains(">d__", StringComparison.Ordinal))
+                    return arg;
+            }
+        }
+        return null;
+    }
 
 }

@@ -20,34 +20,94 @@ public sealed class AsyncPipelineTests
 
     public static string AsyncAssemblyPath => s_asyncAssemblyPath;
 
+    /// <summary>
+    /// Slice one emitted C++ function body out of the generated source by name.
+    ///
+    /// <para>
+    /// Anchors on the emitted DEFINITION, not the first textual hit: the symbol
+    /// also appears in the header extern block and the dispatch table, and
+    /// slicing from the first hit runs past the function into unrelated code.
+    /// The definition is introduced by the "// Managed method:" marker, so walk
+    /// back over it when present, then take up to the closing brace at column 0.
+    /// </para>
+    ///
+    /// <para>
+    /// Splitting on "\n\n" instead (an earlier revision) produced chunks that
+    /// spanned two adjacent functions, which made a wired method's call appear
+    /// inside a rejected method's chunk and fired an anti-fake-green assertion
+    /// on a false positive.
+    /// </para>
+    /// </summary>
+    internal static string ExtractFunctionBody(string source, string functionName)
+    {
+        var marker = "// Managed method: ";
+        var nameIdx = source.IndexOf("::" + functionName + "(", StringComparison.Ordinal);
+        if (nameIdx < 0) return string.Empty;
+        var lineStart = source.LastIndexOf('\n', nameIdx);
+        lineStart = lineStart < 0 ? 0 : lineStart + 1;
+        var prevLineStart = source.LastIndexOf('\n', lineStart - 2);
+        if (prevLineStart >= 0 &&
+            source.Substring(prevLineStart, lineStart - prevLineStart).Contains(marker))
+        {
+            lineStart = prevLineStart + 1;
+        }
+        var end = source.IndexOf("\n}", nameIdx, StringComparison.Ordinal);
+        return end < 0 ? source[lineStart..] : source[lineStart..end];
+    }
+
     private static string LocateAsyncAssemblyDll()
     {
-        var dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-        while (dir != null && !Directory.Exists(Path.Combine(dir.FullName, ".git")))
-            dir = dir.Parent;
-        var repoRoot = dir?.FullName ?? throw new DirectoryNotFoundException(
-            "Could not locate repository root (.git directory).");
+        var repoRoot = RepoRootLocator.FindFromBaseDirectory();
 
         // Detect build configuration (Debug/Release) and TFM from the test runner's
         // output directory. BaseDirectory is typically:
         //   <repo>/tests/unit/managed/codegen/bin/<Configuration>/<TFM>/
+        //
+        // The previous heuristic walked up TWO levels from the TFM dir and required
+        // that directory's parent to be named "bin" — but from
+        // .../codegen/bin/Release/net8.0 that lands on .../codegen, whose parent is
+        // the test project dir, not "bin".  The check therefore never matched and
+        // the config silently fell back to "Debug", so a Release test run read a
+        // stale Debug fixture (methods added since the last Debug build were simply
+        // absent from the loader's world — which looks like a linker/codegen bug and
+        // is not one).  Anchor on the directory named "bin" instead of assuming a
+        // fixed depth.
         string config = "Debug";
         string tfm = "net8.0";
         var baseDir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-        if (baseDir?.Parent?.Parent is { } configDir &&
-            configDir.Parent?.Name == "bin")
+        if (baseDir is not null)
         {
             tfm = baseDir.Name;
-            string configName = configDir.Name;
-            if (configName is "Debug" or "Release" or "RelWithDebInfo")
-                config = configName;
+            var configDir = baseDir.Parent;
+            var binDir = configDir?.Parent;
+            if (binDir is not null &&
+                string.Equals(binDir.Name, "bin", StringComparison.OrdinalIgnoreCase) &&
+                configDir!.Name is "Debug" or "Release" or "RelWithDebInfo")
+            {
+                config = configDir.Name;
+            }
         }
 
-        return Path.Combine(
+        // Fail loudly rather than silently defaulting.  A silent fallback is how
+        // this locator hid a stale-Debug-fixture read for an unknown number of
+        // revisions: the tests still passed, against the wrong DLL.  If the shape
+        // of the output directory changes, that must surface as an error here, not
+        // as a green run over stale inputs.
+        var resolved = Path.Combine(
             repoRoot,
             "tests", "unit", "managed", "codegen",
             "AsyncTestAssembly", "bin", config, tfm,
             "AsyncTestAssembly.dll");
+        if (!File.Exists(resolved))
+        {
+            throw new FileNotFoundException(
+                $"AsyncTestAssembly fixture not resolved. Looked for '{resolved}'. "
+                + $"Test output dir was '{AppDomain.CurrentDomain.BaseDirectory}' "
+                + $"(parsed config='{config}', tfm='{tfm}'). "
+                + "Build the fixture for this configuration before running.",
+                resolved);
+        }
+        return resolved;
     }
 
     private sealed class TempCtx : IDisposable
@@ -265,11 +325,18 @@ public sealed class AsyncPipelineTests
             m.SubjectId.Contains("AsyncMethods::GetOne") || m.SubjectId.Contains("AsyncMethods::DoVoid"));
         Assert.NotNull(entry);
 
-        // R2b: async entry must allocate the >d__ box on the GC heap — not on the C++
-        // stack — so the box survives the entry frame returning and is alive when the
-        // continuation resumes on another thread.
-        Assert.DoesNotContain("__chaos_stack_obj", entry!.MethodSource);
-        Assert.Contains("CHAOS_IL2CPP_NEW_GC", entry.MethodSource);
+        // ASYNC-P2-7: the async entry allocates the >d__ state machine and hands its
+        // address to AsyncTaskMethodBuilder::Start, which drives the first MoveNext.
+        // A Task.Yield inside that MoveNext parks the address on the thread pool as the
+        // resume target, so it must OUTLIVE the entry frame — a GC-heap box.  Roslyn's
+        // common Release shape emits no newobj for the state machine (the local is a
+        // plain valuetype fed to Start by ldloca), so nothing else allocates one and
+        // chaos_locals[V] would stay 0 while the body dereferenced it as a full struct.
+        Assert.Contains("CHAOS_IL2CPP_NEW_GC", entry!.MethodSource);
+        // ...and the box must be passed BY VALUE (the durable heap address), never as
+        // &chaos_locals[0] (a stack slot that dies with the frame).
+        Assert.DoesNotContain("&chaos_locals[0]", entry.MethodSource);
+        Assert.DoesNotContain("__chaos_stack_obj", entry.MethodSource);
     }
 
     [Fact]
@@ -326,16 +393,27 @@ public sealed class AsyncPipelineTests
 
         string entrySrc = entry!.MethodSource;
 
-        // The entry must contain "chaos_locals[0]" (the box pointer value).
-        Assert.Contains("chaos_locals[0]", entrySrc);
+        // The entry must actually ALLOCATE the box.  Without this the assertions below
+        // pass vacuously: the buggy emission emits `_s2 = &chaos_locals[0]`, which still
+        // contains the substring "chaos_locals[0]", so a Contains check alone cannot tell
+        // the two apart.  Requiring the allocation is what makes this test discriminating
+        // — verified by in-place revert (see the commit's regression_check).
+        Assert.Contains("CHAOS_IL2CPP_NEW_GC", entrySrc);
         // It must NOT use "&chaos_locals[0]" (stack slot address) for the box pointer.
         // The pattern "&chaos_locals[0]" would be the old buggy emission.
         Assert.DoesNotContain("&chaos_locals[0]", entrySrc);
+        // The box value must be read back out of the slot when handed to Start.
+        Assert.Contains("chaos_locals[0]", entrySrc);
 
-        // However, other ldloca uses (e.g. &chaos_locals[2] for the awaiter slot)
-        // must still use "&chaos_locals" — so verify the async helpers still work.
-        // For the MoveNext body, the AwaitUnsafeOnCompleted box arg (slot 4) must
-        // also be passed by value, not by stack-slot address.
+        // However, the general ldloca path must NOT be disabled: locals that genuinely
+        // hold a value type still need their slot ADDRESS.  The MoveNext body's awaiter
+        // local (YieldAwaiter, a valuetype) is ldloca'd into get_IsCompleted, so "&chaos_locals"
+        // must still appear somewhere in the body.
+        //
+        // Asserted as a property, not against a fixed index: the awaiter's slot number is
+        // an allocation detail that shifts when the entry's local layout changes, and
+        // pinning "&chaos_locals[2]" specifically made this test fail for a reason
+        // unrelated to what it is defending.
         var (_, _, movenext) = BuildPlannerForMoveNext(ctx, s_asyncAssemblyPath);
         string mnSrc = movenext.MethodSource;
 
@@ -353,9 +431,8 @@ public sealed class AsyncPipelineTests
         // It should NOT contain &chaos_locals[4] (the old buggy pattern).
         Assert.DoesNotContain("&chaos_locals[4]", preAoc);
 
-        // Reference-type locals (&chaos_locals[2] for awaiter slots) should STILL
-        // use & — verify that the general ldloca pattern is not disabled.
-        Assert.Contains("&chaos_locals[2]", mnSrc);
+        // Value-type awaiter locals must still be addressed, not dereferenced as values.
+        Assert.Contains("&chaos_locals[", mnSrc);
     }
 
     [Fact]
@@ -403,17 +480,352 @@ public sealed class AsyncPipelineTests
     }
 
     /// <summary>
+    /// ASYNC-P1-1: Task.Run reaches the AOT IR end to end, and the lowered call
+    /// routes to the native ThreadPool runner rather than the interpreter
+    /// fallback.
+    ///
+    /// <para>
+    /// This was previously unwritable. An earlier revision of this test asserted
+    /// only that the async surface was intact and carried a comment declaring a
+    /// "known limitation: AsyncTestAssembly's non-async methods (RunAction) do
+    /// not reach the extracted AOT IR". That limitation was never real — it was
+    /// an artifact of the repo-root walk reading a stale fixture from the main
+    /// checkout (see ASYNC-P1-5, commit f80aada50). With the fixture resolving
+    /// to this tree, RunAction loads and lowers normally.
+    /// </para>
+    ///
+    /// <para>
+    /// The registry-level assertion for the same wiring lives in
+    /// RuntimeHelperShapeRegistryTests.TaskRun_WiredToGenericShape. This test
+    /// covers the pipeline-level view: the subject is present, and the emitted
+    /// C++ for it calls the native symbol.
+    /// </para>
+    /// </summary>
+    [Fact]
+    public void TaskRun_LowersToNativeAsyncTaskRun()
+    {
+        Assert.True(File.Exists(s_asyncAssemblyPath),
+            $"AsyncTestAssembly.dll not built at {s_asyncAssemblyPath}");
+
+        using var ctx = new TempCtx();
+        var request = new ManagedClosureRequest(
+            InputAssemblyPath: s_asyncAssemblyPath,
+            OutputRootPath: ctx.OutputRoot,
+            EntryPointSubjectIdOverride: null,
+            AdditionalAssemblyPaths: null,
+            FullAssemblyClosure: true);
+
+        var exec = new PipelinePlan().Execute(request);
+        if (exec.IsFailure)
+        {
+            Assert.Fail($"Pipeline failed: {exec.Error?.Code}: {exec.Error?.Message}");
+        }
+        var result = exec.Value!;
+
+        var subjectIds = result.AotCoreIr.Methods.Select(m => m.SubjectId).ToList();
+
+        // The async surface must be intact.
+        Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::GetOne"));
+        Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::AwaitTcs"));
+        Assert.Contains(subjectIds, id => id.Contains(">d__") && id.Contains("::MoveNext"));
+
+        // ...and the plain non-async method that calls Task.Run must also be there.
+        Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::RunAction"));
+
+        // The Task.Run call inside RunAction must lower to the native runner.
+        var runAction = result.AotCoreIr.Methods
+            .Single(m => m.SubjectId.Contains("AsyncMethods::RunAction"));
+
+        // At the AOT IR layer the call is still recorded against the MANAGED target
+        // (Task::Run). Substitution to the native symbol happens later, during
+        // emission, driven by the ShapeRegistry's DirectNativeSymbol. So the IR layer
+        // proves only that the call site survived lowering.
+        var loweredCalls = runAction.Instructions
+            .Select(i => i.TargetSymbol ?? i.Callee ?? i.TargetReference?.SubjectId)
+            .Where(s => !string.IsNullOrEmpty(s))
+            .ToList();
+        Assert.Contains(loweredCalls, s => s!.Contains("System.Threading.Tasks.Task::Run"));
+
+        // The load-bearing assertion is at the emission layer. This must emit the
+        // WHOLE assembly closure; the registry helper is emitted where the invocation
+        // is lowered, and slicing to a single subject is how an earlier revision of
+        // this test fooled itself into a weaker claim.
+        var outputRoot = Path.Combine(ctx.OutputRoot, "asyncgen");
+        var emitted = new NativeAotEmitter().GenerateFromArtifacts(
+            result.NativeAotLoweringPlan,
+            result.AotCoreIr,
+            result.ClosureManifest!,
+            result.MetadataRegistration,
+            result.SupplementalMetadataTemplate,
+            outputRoot,
+            mode: CodegenMode.Aot,
+            subjectMethods: null,
+            goldProfilePath: null,
+            allManagedMethods: result.AllManagedMethods);
+
+        var allGenerated = string.Join("\n",
+            emitted.GeneratedSources.Select(source =>
+                source.Contents ?? source.ContentsBuilder?.ToString() ?? string.Empty));
+
+        // Task.Run is wired: the lowered invocation calls the native ThreadPool runner.
+        Assert.Contains("async_task_run", allGenerated);
+
+        // Anti-fake-green: the call must NOT fall through to the interpreter's
+        // return-0 fallback. If it did, awaiting the result would silently yield 0
+        // (or null) instead of running the action — the exact class of defect this
+        // phase exists to eliminate.
+        Assert.DoesNotContain("ChaosExternalRuntimeFallback(async_task_run", allGenerated);
+    }
+
+    /// <summary>
+    /// ASYNC-P2-4: the two ContinueWith overload families must take DIFFERENT
+    /// paths through emission, and the difference must be visible in the emitted
+    /// C++.
+    ///
+    /// <para>
+    /// Registry-level tests (RuntimeHelperShapeRegistryTests.ContinueWith_*)
+    /// pin the resolver's decision; this test pins its consequence. A resolver
+    /// that returned null but was never consulted, or an emitter that rewrote
+    /// the call anyway, would leave the earlier tests green while the generated
+    /// code still ran the body with the options argument discarded.
+    /// </para>
+    /// </summary>
+    [Fact]
+    public void ContinueWith_OverloadFamilies_EmitDifferentCode()
+    {
+        Assert.True(File.Exists(s_asyncAssemblyPath),
+            $"AsyncTestAssembly.dll not built at {s_asyncAssemblyPath}");
+
+        using var ctx = new TempCtx();
+        var request = new ManagedClosureRequest(
+            InputAssemblyPath: s_asyncAssemblyPath,
+            OutputRootPath: ctx.OutputRoot,
+            EntryPointSubjectIdOverride: null,
+            AdditionalAssemblyPaths: null,
+            FullAssemblyClosure: true);
+
+        var exec = new PipelinePlan().Execute(request);
+        if (exec.IsFailure)
+        {
+            Assert.Fail($"Pipeline failed: {exec.Error?.Code}: {exec.Error?.Message}");
+        }
+        var result = exec.Value!;
+
+        var outputRoot = Path.Combine(ctx.OutputRoot, "asyncgen");
+        var emitted = new NativeAotEmitter().GenerateFromArtifacts(
+            result.NativeAotLoweringPlan,
+            result.AotCoreIr,
+            result.ClosureManifest!,
+            result.MetadataRegistration,
+            result.SupplementalMetadataTemplate,
+            outputRoot,
+            mode: CodegenMode.Aot,
+            subjectMethods: null,
+            goldProfilePath: null,
+            allManagedMethods: result.AllManagedMethods);
+
+        var allGenerated = string.Join("\n",
+            emitted.GeneratedSources.Select(source =>
+                source.Contents ?? source.ContentsBuilder?.ToString() ?? string.Empty));
+
+        // Both ContinueWith methods must reach the AOT IR as lowered call sites —
+        // otherwise the assertions below pass vacuously.
+        var subjectIds = result.AotCoreIr.Methods.Select(m => m.SubjectId).ToList();
+        Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::ContinueWithAction"));
+        Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::ContinueWithOptions"));
+
+        // Slice out one emitted C++ function body by name. A previous revision
+        // split on "\n\n" and took the first chunk containing the name, which can
+        // span two adjacent functions — the wired method's call then "appeared"
+        // in the rejected method's chunk and the anti-fake-green assertion fired
+        // on a false positive. Anchor on the function signature and take up to
+        // its closing brace at column 0.
+        var actionBody = ExtractFunctionBody(allGenerated, "ContinueWithAction");
+        Assert.False(string.IsNullOrEmpty(actionBody),
+            "the wired ContinueWith overload must have an emitted body");
+        Assert.Contains("chaos_task_continue_with", actionBody);
+
+        // Anti-fake-green for the REJECTED overload. It has a DIFFERENT arity (3
+        // params); a resolver matching on method name alone would route it too and
+        // emit a call that runs the body with `options` silently discarded —
+        // the caller asked for TaskContinuationOptions and got none. Its lowered
+        // body must not reach the native helper.
+        var optionsBody = ExtractFunctionBody(allGenerated, "ContinueWithOptions");
+        Assert.False(string.IsNullOrEmpty(optionsBody),
+            "the rejected ContinueWith overload must still have an emitted body (via the interpreter fallback)");
+        Assert.DoesNotContain("chaos_task_continue_with", optionsBody);
+    }
+
+    /// <summary>
+    /// ASYNC-P2-5: <c>Task.Factory.StartNew(Action)</c> defaults to the SAME
+    /// execution semantics as <c>Task.Run(Action)</c> — both queue the delegate on
+    /// the default scheduler. Routing the factory overload onto the existing
+    /// ThreadPool-backed <c>async_task_run</c> is therefore not an approximation:
+    /// it is what .NET does.
+    ///
+    /// <para>
+    /// The alternative — leaving Task.Factory unwired — is the defect: it resolves
+    /// to the interpreter's return-0 fallback, so <c>Task.Factory.StartNew(work)</c>
+    /// yields a bogus task and <c>work</c> never runs.
+    /// </para>
+    ///
+    /// <para>
+    /// This test pairs with the resolver test in
+    /// RuntimeHelperShapeRegistryTests.TaskFactoryStartNew_*. The registry test
+    /// pins the decision; this one pins that the decision is actually consulted
+    /// by the real pipeline, using the callee spelling the pipeline emits.
+    /// </para>
+    /// </summary>
+    [Fact]
+    public void TaskFactoryStartNew_ResolvesToThreadPoolRunner()
+    {
+        Assert.True(File.Exists(s_asyncAssemblyPath),
+            $"AsyncTestAssembly.dll not built at {s_asyncAssemblyPath}");
+
+        using var ctx = new TempCtx();
+        var request = new ManagedClosureRequest(
+            InputAssemblyPath: s_asyncAssemblyPath,
+            OutputRootPath: ctx.OutputRoot,
+            EntryPointSubjectIdOverride: null,
+            AdditionalAssemblyPaths: null,
+            FullAssemblyClosure: true);
+
+        var exec = new PipelinePlan().Execute(request);
+        if (exec.IsFailure)
+        {
+            Assert.Fail($"Pipeline failed: {exec.Error?.Code}: {exec.Error?.Message}");
+        }
+        var result = exec.Value!;
+
+        var subjectIds = result.AotCoreIr.Methods.Select(m => m.SubjectId).ToList();
+        Assert.Contains(subjectIds, id => id.Contains("AsyncMethods::FactoryStartNew"));
+
+        var outputRoot = Path.Combine(ctx.OutputRoot, "factorygen");
+        var emitted = new NativeAotEmitter().GenerateFromArtifacts(
+            result.NativeAotLoweringPlan,
+            result.AotCoreIr,
+            result.ClosureManifest!,
+            result.MetadataRegistration,
+            result.SupplementalMetadataTemplate,
+            outputRoot,
+            mode: CodegenMode.Aot,
+            subjectMethods: null,
+            goldProfilePath: null,
+            allManagedMethods: result.AllManagedMethods);
+
+        var allGenerated = string.Join("\n",
+            emitted.GeneratedSources.Select(source =>
+                source.Contents ?? source.ContentsBuilder?.ToString() ?? string.Empty));
+
+        var body = ExtractFunctionBody(allGenerated, "FactoryStartNew");
+        Assert.False(string.IsNullOrEmpty(body),
+            "Task.Factory.StartNew caller must have an emitted body");
+
+        // Wired: the call reaches the native TaskFactory entry point, which is a
+        // thin shim over the same ThreadPool runner Task.Run uses
+        // (chaos_task_factory_start_new -> async_task_run in async_stubs.cpp).
+        // The native shim is asserted separately by the smoke test; here we are
+        // pinning the CODEGEN decision, i.e. that this call site lowered to the
+        // native symbol rather than the interpreter.
+        Assert.Contains("chaos_task_factory_start_new", body);
+
+        // Anti-fake-green: NOT the interpreter's return-0 fallback. If the
+        // resolver never fired, the body would carry the external-runtime stub
+        // instead of a real call, and StartNew would silently return a bogus task.
+        Assert.DoesNotContain("ChaosExternalRuntimeFallback", body);
+        Assert.DoesNotContain("chaos_external_runtime_", body);
+
+        // The factory property itself should also be routed, so that the receiver
+        // handed to StartNew is the native token rather than an interpreter 0.
+        //
+        // This check is GUARDED and may be vacuous: Roslyn elides the source-level
+        // local in `TaskFactory f = Task.Factory; f.StartNew(work)` (the value is
+        // used once), so get_Factory is inlined into the StartNew call site and no
+        // separate get_Factory body is emitted for this fixture.  Asserting the
+        // body's presence would fail on a correct pipeline.  The property's own
+        // routing IS pinned non-vacuously by
+        // RuntimeHelperShapeRegistryTests.TaskFactory_GetFactoryProperty_RoutesToNativeToken.
+        var factoryGetter = ExtractFunctionBody(allGenerated, "get_Factory");
+        if (!string.IsNullOrEmpty(factoryGetter))
+        {
+            Assert.DoesNotContain("ChaosExternalRuntimeFallback", factoryGetter);
+        }
+    }
+
+    /// <summary>
+    /// ASYNC-P2-6 — Task.WhenAll&lt;TResult&gt;(Task&lt;T&gt;[]) must lower to the same
+    /// native array combinator as the non-generic Task[] overload.
+    ///
+    /// <para>
+    /// Both overloads unpack a managed array and produce an aggregate whose
+    /// result is the child result set, so they share chaos_task_when_all_array.
+    /// The resolver's guard used to require the literal non-generic return type
+    /// (<c>::WhenAll:System.Threading.Tasks.Task(</c>), which the generic
+    /// overload's <c>Task&lt;int[]&gt;</c> return never matches — so
+    /// <c>Task.WhenAll(tasks)</c> on <c>Task&lt;int&gt;[]</c> silently fell through to
+    /// the interpreter's return-0 fallback and the caller awaited a bogus task.
+    /// </para>
+    /// </summary>
+    [Fact]
+    public void WhenAllGeneric_ResolvesToArrayCombinator()
+    {
+        Assert.True(File.Exists(s_asyncAssemblyPath),
+            $"AsyncTestAssembly.dll not built at {s_asyncAssemblyPath}");
+
+        using var ctx = new TempCtx();
+        var request = new ManagedClosureRequest(
+            InputAssemblyPath: s_asyncAssemblyPath,
+            OutputRootPath: ctx.OutputRoot,
+            EntryPointSubjectIdOverride: null,
+            AdditionalAssemblyPaths: null,
+            FullAssemblyClosure: true);
+
+        var exec = new PipelinePlan().Execute(request);
+        if (exec.IsFailure)
+        {
+            Assert.Fail($"Pipeline failed: {exec.Error?.Code}: {exec.Error?.Message}");
+        }
+        var result = exec.Value!;
+
+        Assert.Contains(result.AotCoreIr.Methods.Select(m => m.SubjectId),
+            id => id.Contains("AsyncMethods::WhenAllOfInt"));
+
+        var emitted = new NativeAotEmitter().GenerateFromArtifacts(
+            result.NativeAotLoweringPlan,
+            result.AotCoreIr,
+            result.ClosureManifest!,
+            result.MetadataRegistration,
+            result.SupplementalMetadataTemplate,
+            Path.Combine(ctx.OutputRoot, "whenallgen"),
+            mode: CodegenMode.Aot,
+            subjectMethods: null,
+            goldProfilePath: null,
+            allManagedMethods: result.AllManagedMethods);
+
+        var allGenerated = string.Join("\n",
+            emitted.GeneratedSources.Select(source =>
+                source.Contents ?? source.ContentsBuilder?.ToString() ?? string.Empty));
+
+        var body = ExtractFunctionBody(allGenerated, "WhenAllOfInt");
+        Assert.False(string.IsNullOrEmpty(body),
+            "Task.WhenAll<int> caller must have an emitted body");
+
+        Assert.Contains("chaos_task_when_all_array", body);
+
+        // Anti-fake-green: not the interpreter's return-0 fallback.  Without the
+        // wiring the awaited aggregate would be a null handle.
+        Assert.DoesNotContain("ChaosExternalRuntimeFallback", body);
+        Assert.DoesNotContain("chaos_external_runtime_", body);
+    }
+
+    /// <summary>
     /// Repo-relative stable output dir for R2-full native round-trip proof.
     /// Emitted C++ (native-aot.generated.*.h/cpp etc.) and the hand-written
     /// driver + CMakeLists.txt live here, ready for a bounded native compile.
     /// </summary>
     private static string R2FullOutputRoot()
     {
-        var dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-        while (dir != null && !Directory.Exists(Path.Combine(dir.FullName, ".git")))
-            dir = dir.Parent;
-        var repoRoot = dir?.FullName ?? throw new DirectoryNotFoundException(
-            "Could not locate repository root (.git directory).");
+        var repoRoot = RepoRootLocator.FindFromBaseDirectory();
         return Path.Combine(repoRoot, "artifacts", "r2full", "asyncgen");
     }
 

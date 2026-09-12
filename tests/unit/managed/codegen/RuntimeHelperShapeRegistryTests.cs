@@ -438,6 +438,470 @@ public sealed class RuntimeHelperShapeRegistryTests
         Assert.NotNull(entry);
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    // ASYNC-P2-8 A3 — AsyncIteratorMethodBuilder registration.
+    //
+    // This is the layer the parser tests (NativeAotPlannerHelperTests) do NOT
+    // reach: those check that a callee can be PARSED, these check that the real
+    // production registry (BuildDefault) actually MATCHES the form the pipeline
+    // emits and routes it to the A2 native symbol.
+    //
+    // A registration keyed on a plausible-looking but wrong prefix is the exact
+    // failure P2-4 cost us before: the registry simply never fires, the call
+    // falls through to ChaosExternalRuntimeFallback -> 0, and everything stays
+    // green.  So every assertion here names the native symbol — matching without
+    // checking the destination would pass even against a stub registration.
+    // ══════════════════════════════════════════════════════════════════════
+
+    private const string IteratorBuilderCalleePrefix =
+        "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncIteratorMethodBuilder";
+
+    [Fact]
+    public void BuildDefault_IteratorBuilder_CreateResolverEmitsTheRealNativeSymbol()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(
+                IteratorBuilderCalleePrefix + "::Create()",
+                out var descriptor, out _));
+        Assert.Equal("Create", descriptor.MethodName);
+        Assert.Equal(
+            "System.Runtime.CompilerServices.AsyncIteratorMethodBuilder",
+            descriptor.TypeDisplayNamePrefix);
+
+        // Matching is not the claim under test — ROUTING is.  Invoke the resolver and
+        // assert the emitted C++ calls the A2 native entry point.  Without this, a
+        // registration whose body is a constant-return stub would still pass.
+        var resolution = descriptor.Resolver(null!, IteratorBuilderCalleePrefix + "::Create()",
+            Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_async_iterator_builder_create", resolution.DirectNativeSymbol);
+        Assert.Contains("chaos_async_iterator_builder_create", resolution.CppSource);
+    }
+
+    /// <summary>
+    /// MoveNext resolves the state machine's native symbol through the planner, so it
+    /// cannot be driven without one — but its registration must still MATCH, otherwise
+    /// the iterator never advances.  (Resolution behaviour is covered by the parser
+    /// tests plus the A2 runtime tests.)
+    /// </summary>
+    [Fact]
+    public void BuildDefault_TryMatchGenericShape_IteratorBuilder_MoveNext()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(
+                IteratorBuilderCalleePrefix + "::MoveNext<StateMachine>(StateMachine&)",
+                out var descriptor, out _));
+        Assert.Equal("MoveNext", descriptor.MethodName);
+    }
+
+    /// <summary>
+    /// Complete must match and route to its native entry point.  An iterator that never
+    /// calls Complete leaves its pooled sources unreleased (the A2 `destroy` note).
+    /// </summary>
+    [Fact]
+    public void BuildDefault_IteratorBuilder_CompleteResolverEmitsTheRealNativeSymbol()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(
+                IteratorBuilderCalleePrefix + "::Complete()",
+                out var descriptor, out _));
+
+        var resolution = descriptor.Resolver(null!, IteratorBuilderCalleePrefix + "::Complete()",
+            Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_async_iterator_builder_complete", resolution.DirectNativeSymbol);
+        Assert.Contains("chaos_async_iterator_builder_complete", resolution.CppSource);
+    }
+
+    /// <summary>
+    /// BOTH await spellings must be REGISTERED (not merely parseable).
+    ///
+    /// This is the registry-level counterpart of the recon doc's §1.1 finding: the
+    /// original A2 plan registered only AwaitOnCompleted, so `await Task.Yield()`
+    /// inside an iterator — which can reach the unsafe form — would have had no
+    /// registration and silently fallen through to ChaosExternalRuntimeFallback.
+    ///
+    /// Counterexample: delete either entry from the registration loop's array and that
+    /// row goes red while the other stays green.
+    /// </summary>
+    [Theory]
+    [InlineData("AwaitOnCompleted")]
+    [InlineData("AwaitUnsafeOnCompleted")]
+    public void BuildDefault_TryMatchGenericShape_IteratorBuilder_BothAwaitSpellings(string methodName)
+    {
+        const string smSubjectId = "System.Private.CoreLib/IteratorSm";
+        var planner = CreatePlannerWithIteratorMoveNext(smSubjectId);
+
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string callee =
+            $"{IteratorBuilderCalleePrefix}::{methodName}<Awaiter,IteratorSm>(Awaiter&,IteratorSm&)";
+        Assert.True(
+            registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"{methodName} is not registered — an iterator awaiting through this "
+            + "spelling would fall through to the external-runtime stub and stall");
+        Assert.Equal(methodName, descriptor.MethodName);
+
+        // Both spellings route to the SAME native entry, wired to the state machine's
+        // real MoveNext so the resume continues the right iterator.
+        var resolution = descriptor.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Contains("chaos_async_iterator_builder_await", resolution!.CppSource);
+        Assert.Contains(IteratorSmMoveNextSymbol, resolution.CppSource);
+    }
+
+    /// <summary>
+    /// The iterator registrations must NOT answer for the async TASK builder.
+    ///
+    /// Both builders declare MoveNext / AwaitOnCompleted / AwaitUnsafeOnCompleted with
+    /// identical signatures, so an over-broad prefix would capture the async Task path
+    /// and route it through the iterator runtime — corrupting every ordinary
+    /// `async Task` method in the program.  This asserts the prefixes stay disjoint.
+    /// </summary>
+    [Fact]
+    public void BuildDefault_TryMatchGenericShape_TaskBuilder_IsNotAnsweredByIteratorRegistration()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string taskBuilderStart =
+            "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder::Start<StateMachine>(StateMachine&)";
+
+        Assert.True(registry.TryMatchGenericShape(taskBuilderStart, out var descriptor, out _));
+        Assert.Equal(
+            "System.Runtime.CompilerServices.AsyncTaskMethodBuilder",
+            descriptor.TypeDisplayNamePrefix);
+        Assert.DoesNotContain("Iterator", descriptor.TypeDisplayNamePrefix, StringComparison.Ordinal);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // ASYNC-P2-8 A4 — ManualResetValueTaskSourceCore<bool> completion signals.
+    //
+    // The async-iterator MoveNext ends each arm with a completion signal:
+    //   yield arm     -> <>v__promiseOfValueOrEnd.SetResult(true)
+    //   exhausted arm -> <>v__promiseOfValueOrEnd.SetResult(false)
+    //   handler path  -> .SetException(ex)
+    //
+    // Before this registration those calls fell through to
+    // ChaosExternalRuntimeFallback with ZERO arguments forwarded — the signal was
+    // computed, pushed, and then discarded.  Measured on <YieldOne>d__0::MoveNext:
+    //     chaos_external_runtime_..._SetResult_..._System_Boolean_()
+    // with `_s4 = 0` / `_s7 = 1` sitting unused on the stack.
+    //
+    // The callee spellings below are the pipeline's REAL emitted strings (captured
+    // by dumping call instructions from the AotCoreIr), not hand-written guesses —
+    // P2-4's lesson: a registration keyed on a plausible-but-wrong spelling simply
+    // never fires and everything stays green.
+    // ══════════════════════════════════════════════════════════════════════
+
+    private const string MrvtscCalleePrefix =
+        "System.Private.CoreLib/System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore<System.Boolean>";
+
+    /// <summary>
+    /// SetResult(bool) must match and route to the A2 native source, carrying BOTH the
+    /// receiver (the promise field address) and the boolean payload.  Asserting only that
+    /// the match succeeds would pass against a zero-arg stub — which is exactly the defect.
+    /// </summary>
+    [Fact]
+    public void BuildDefault_IteratorPromise_SetResultRoutesToNativeSourceWithPayload()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string callee = MrvtscCalleePrefix + "::SetResult:System.Void(System.Boolean)";
+
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            "the measured SetResult callee must match the A4 registration");
+        Assert.Equal("SetResult", descriptor.MethodName);
+
+        var resolution = descriptor.Resolver(null!, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_async_iterator_source_set_result", resolution.DirectNativeSymbol);
+
+        // Two carrier slots: receiver + payload.  One slot would emit a 1-arg call and
+        // silently drop the boolean — the original defect's shape.
+        Assert.Equal(2, resolution.ParameterAbis.Count);
+        Assert.Contains("chaos_async_iterator_source_set_result", resolution.CppSource);
+        Assert.Contains("chaos_arg_1", resolution.CppSource);
+    }
+
+    /// <summary>
+    /// SetException(Exception) must match and forward the exception object, so a faulted
+    /// iterator resumes its awaiter with the exception instead of hanging forever.
+    /// </summary>
+    [Fact]
+    public void BuildDefault_IteratorPromise_SetExceptionRoutesToNativeSource()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string callee = MrvtscCalleePrefix + "::SetException:System.Void(System.Exception)";
+
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            "the measured SetException callee must match the A4 registration");
+        Assert.Equal("SetException", descriptor.MethodName);
+
+        var resolution = descriptor.Resolver(null!, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_async_iterator_source_set_exception", resolution.DirectNativeSymbol);
+        Assert.Equal(2, resolution.ParameterAbis.Count);
+        Assert.Contains("chaos_async_iterator_source_set_exception", resolution.CppSource);
+    }
+
+    /// <summary>
+    /// The promise registration must not swallow the async TASK builder's own
+    /// SetResult/SetException.  AsyncTaskMethodBuilder&lt;T&gt; also declares SetResult(T)
+    /// and SetException(Exception); an over-broad prefix would reroute every ordinary
+    /// `async Task&lt;T&gt;` completion through the iterator's pooled source — corrupting
+    /// the whole async surface.  The prefixes must stay disjoint.
+    /// </summary>
+    [Fact]
+    public void BuildDefault_TaskBuilderSetResult_IsNotAnsweredByIteratorPromiseRegistration()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string taskBuilderSetResult =
+            "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1[[System.Int32]]"
+            + "::SetResult:System.Void(System.Int32)";
+
+        Assert.True(registry.TryMatchGenericShape(taskBuilderSetResult, out var descriptor, out _));
+        Assert.DoesNotContain("ManualResetValueTaskSourceCore", descriptor.TypeDisplayNamePrefix, StringComparison.Ordinal);
+    }
+
+    // ── Task.Run registration (ASYNC-P1-1) ─────────────────────────────────
+    // Task::Run delegates to the native async_task_run (already fully
+    // implemented in task_runner.cpp, registered at RuntimeInit, but had no
+    // codegen entry point — making it dead code from managed callers).
+    // Task.Run is registered via RegisterGeneric, so it is matched through
+    // TryMatchGenericShape, and the resolver emits a wrapper calling
+    // async_task_run.
+
+    [Theory]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task`1[[System.Int32]]::Run:System.Threading.Tasks.Task(System.Func`1<System.Int32>)")]
+    public void TaskRun_WiredToGenericShape(string callee)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"Task::Run callee '{callee}' should match a generic registry descriptor");
+        Assert.NotNull(descriptor);
+
+        // The resolver must produce C++ that calls the native async_task_run symbol.
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("async_task_run", resolution!.DirectNativeSymbol);
+        Assert.Contains("async_task_run", resolution.CppSource);
+    }
+
+    [Fact]
+    public void TaskRun_CancellationTokenOverload_ResolvesToNull()
+    {
+        // CT overloads deliberately fall through to the interpreter until
+        // Phase 3 (CancellationToken wiring) — their resolver must return null
+        // so codegen does not route them to async_task_run (which ignores the CT).
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(registry.TryMatchGenericShape(
+            "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action,System.Threading.CancellationToken)",
+            out var descriptor, out _));
+        Assert.NotNull(descriptor);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner,
+            "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action,System.Threading.CancellationToken)",
+            Array.Empty<string>());
+        Assert.Null(resolution);
+    }
+
+    // ── Task.Factory registration (ASYNC-P2-5) ─────────────────────────────
+    // Task.Factory.StartNew(delegate) queues on the default scheduler, which is
+    // exactly where Task.Run queues, so the delegate-only StartNew overloads are
+    // routed to chaos_task_factory_start_new (a shim over async_task_run).
+    //
+    // NOTE on callee spelling: these use the angle-bracket form the real
+    // pipeline emits for cross-assembly BCL callees. Using the backtick form
+    // let an earlier revision of the ContinueWith tests stay green while the
+    // pipeline resolved everything to null — see ASYNC-P2-4.
+
+    [Theory]
+    // The form the real pipeline produces, verified by dumping the lowered
+    // callees of AsyncMethods::FactoryStartNew.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.TaskFactory::StartNew:System.Threading.Tasks.Task(System.Action)")]
+    public void TaskFactoryStartNew_DelegateOnlyOverload_RoutesToNative(string callee)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"TaskFactory::StartNew callee '{callee}' should match a generic registry descriptor");
+        Assert.NotNull(descriptor);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_task_factory_start_new", resolution!.DirectNativeSymbol);
+        Assert.Contains("chaos_task_factory_start_new", resolution.CppSource);
+    }
+
+    [Theory]
+    // Overloads whose argument the runner cannot honour. Each must resolve to
+    // null so the call falls through to the interpreter rather than silently
+    // dropping the options / token / state / result-type argument.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.TaskFactory::StartNew:System.Threading.Tasks.Task(System.Action,System.Threading.CancellationToken)")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.TaskFactory::StartNew:System.Threading.Tasks.Task(System.Action,System.Threading.Tasks.TaskCreationOptions)")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.TaskFactory::StartNew:System.Threading.Tasks.Task(System.Action,System.Object)")]
+    public void TaskFactoryStartNew_UnhonouredArgumentOverloads_ResolveToNull(string callee)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        if (!registry.TryMatchGenericShape(callee, out var descriptor, out _))
+        {
+            // No descriptor matched at all — also an acceptable outcome (the call
+            // falls to the interpreter either way), but it must not be silent.
+            return;
+        }
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.Null(resolution);
+    }
+
+    [Fact]
+    public void TaskFactory_GetFactoryProperty_RoutesToNativeToken()
+    {
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::get_Factory:System.Threading.Tasks.TaskFactory()";
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _));
+        Assert.NotNull(descriptor);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_task_default_factory", resolution!.DirectNativeSymbol);
+    }
+
+    [Fact]
+    // ASYNC-P2-6. The generic overload returns Task<int[]> where the non-generic
+    // one returns Task, so both must reach the SAME array combinator. The guard
+    // used to require the non-generic return type verbatim, which silently sent
+    // Task.WhenAll<int> to the interpreter's return-0 fallback.
+    //
+    // The callee is copied VERBATIM from what the real pipeline hands the resolver
+    // (dumped from the pipeline run over AsyncTestAssembly), not hand-written. Note
+    // the generic form carries the type argument on the METHOD name —
+    // `::WhenAll<System.Int32>:` — which is why a guard anchored on `::WhenAll(`
+    // missed it. (P2-4/P2-5 lesson: hand-written callees diverge from the real
+    // pipeline; a guessed non-generic spelling does not even match a descriptor.)
+    public void WhenAll_GenericArrayOverload_RoutesToArrayCombinator()
+    {
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll<System.Int32>:System.Threading.Tasks.Task<System.Int32[]>(System.Threading.Tasks.Task<System.Int32>[])";
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"WhenAll callee '{callee}' should match a generic registry descriptor");
+        Assert.NotNull(descriptor);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_task_when_all_array", resolution!.DirectNativeSymbol);
+        Assert.Contains("chaos_task_when_all_array", resolution.CppSource);
+    }
+
+    [Fact]
+    // The single-argument guard must still reject multi-argument overloads —
+    // Task.WhenAll(IEnumerable<Task>) and friends take something other than a
+    // plain array, and the native shim only understands a contiguous array.
+    public void WhenAll_NonArrayArgument_ResolvesToNull()
+    {
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task>)";
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        if (!registry.TryMatchGenericShape(callee, out var descriptor, out _))
+        {
+            // No descriptor at all is also acceptable — it falls to the interpreter.
+            return;
+        }
+
+        var planner = new NativeAotLoweringPlanner();
+        Assert.Null(descriptor!.Resolver(planner, callee, Array.Empty<string>()));
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // ASYNC-P2-8 WhenEach — the ORDER-PRESERVING completion stream.
+    //
+    // Distinct from WhenAll/WhenAny: those are one-shot aggregates. WhenEach
+    // returns IAsyncEnumerable<Task> that yields as each task completes, in
+    // COMPLETION order. The native side therefore must not reuse
+    // chaos_task_when_all_array (all) or chaos_task_when_any_array (first only).
+    //
+    // The callee spellings are copied VERBATIM from what the pipeline emits —
+    // the contracts artifact lists Task::WhenEach/1 (3 overloads) and
+    // Task::WhenEach`1/1 (3 overloads).  Hand-written spellings diverge from
+    // the pipeline (P2-4/P2-5 lesson), so these name the real surface shape.
+    // ══════════════════════════════════════════════════════════════════════
+
+    [Fact]
+    public void WhenEach_ArrayOverload_RoutesToItsOwnNativeCombinator()
+    {
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::WhenEach:"
+            + "System.Collections.Generic.IAsyncEnumerable`1<System.Threading.Tasks.Task>(System.Threading.Tasks.Task[])";
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"WhenEach callee '{callee}' should match a WhenEach registry descriptor");
+        Assert.Equal("WhenEach", descriptor.MethodName);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+
+        // Routing is the claim under test.  The destination must be the WhenEach
+        // combinator — NOT when_all (which awaits everything before yielding) and
+        // NOT when_any (which yields once).  Either would be a silently different
+        // enumerable that still looks like a successful registration.
+        Assert.Equal("chaos_task_when_each_array", resolution!.DirectNativeSymbol);
+        Assert.Contains("chaos_task_when_each_array", resolution.CppSource);
+        Assert.DoesNotContain("when_all", resolution.CppSource);
+        Assert.DoesNotContain("when_any", resolution.CppSource);
+    }
+
+    [Fact]
+    public void WhenEach_GenericArrayOverload_RoutesToItsOwnNativeCombinator()
+    {
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::WhenEach<System.Int32>:"
+            + "System.Collections.Generic.IAsyncEnumerable`1<System.Threading.Tasks.Task`1<System.Int32>>"
+            + "(System.Threading.Tasks.Task`1<System.Int32>[])";
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"generic WhenEach callee '{callee}' should match a WhenEach registry descriptor");
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_task_when_each_array", resolution!.DirectNativeSymbol);
+    }
+
+    /// <summary>
+    /// WhenEach must not swallow WhenAll/WhenAny, and vice versa.  The three
+    /// descriptors share the "System.Threading.Tasks.Task" type prefix, so an
+    /// over-broad method-name guard would cross-route them and silently change
+    /// aggregate semantics.
+    /// </summary>
+    [Fact]
+    public void WhenEach_DoesNotCapture_WhenAllOrWhenAny()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        const string whenAllCallee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:"
+            + "System.Threading.Tasks.Task(System.Threading.Tasks.Task[])";
+        const string whenAnyCallee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAny:"
+            + "System.Threading.Tasks.Task(System.Threading.Tasks.Task[])";
+
+        Assert.True(registry.TryMatchGenericShape(whenAllCallee, out var allDesc, out _));
+        Assert.Equal("WhenAll", allDesc.MethodName);
+
+        Assert.True(registry.TryMatchGenericShape(whenAnyCallee, out var anyDesc, out _));
+        Assert.Equal("WhenAny", anyDesc.MethodName);
+    }
+
     [Fact]
     public void BuildDefault_TryMatchShape_GcGetTotalMemory_ReturnsEntry()
     {
@@ -738,5 +1202,193 @@ public sealed class RuntimeHelperShapeRegistryTests
             Assert.NotNull(resolution);
             Assert.Contains("ChaosComInterfaceMarshallerConvertToUnmanaged()", resolution!.CppSource);
         }
+    }
+
+    // ── Task.ContinueWith overload surface (ASYNC-P2-4) ────────────────────
+    //
+    // Task.ContinueWith has 20 public overloads on .NET 8 (enumerated from the
+    // shipped CoreLib; see the test-class comment).  Only ONE was wired
+    // (Action<Task>), so every other overload silently fell through to the
+    // interpreter.  The correct routing is not "wire all 20" — it is a
+    // per-family decision, and the decision is what these tests pin:
+    //
+    //   WIRED  — overloads whose full semantics the native helper honours:
+    //            Action<Task> / Func<Task,TResult> (the return value becomes the
+    //            continuation task's result, which is what makes ContinueWith
+    //            chainable).
+    //   NULL   — overloads carrying CancellationToken / TaskContinuationOptions
+    //            / TaskScheduler / object-state.  Routing these to the native
+    //            helper would RUN THE CONTINUATION ANYWAY while ignoring the
+    //            argument the caller supplied — the exact fake-green this phase
+    //            exists to eliminate.  They return null and fall through to the
+    //            interpreter until Phase 3 provides real CT/options semantics.
+    //
+    // This mirrors TaskRun_CancellationTokenOverload_ResolvesToNull: an
+    // unhonoured argument must be a visible gap, not a plausible-looking call.
+
+    [Theory]
+    // NOTE: the callee strings here are the form the REAL pipeline produces for
+    // a cross-assembly BCL callee — angle-bracket generics, not backtick arity.
+    // Using the backtick form let an earlier revision of this test stay green
+    // while every overload resolved to null in the actual pipeline.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>)")]
+    // Assembly-qualified generic arguments, the form real subject ids actually
+    // use: note the comma INSIDE the brackets.  A naive Split(',') turns this
+    // one parameter into two fragments and the overload never matches.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task`1[[System.Int32]]::ContinueWith:System.Threading.Tasks.Task`1[[System.Int32]](System.Func`2[[System.Threading.Tasks.Task`1[[System.Int32]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])")]
+    public void ContinueWith_DelegateOnlyOverloads_RouteToNative(string callee)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"ContinueWith callee '{callee}' should match a generic registry descriptor");
+        Assert.NotNull(descriptor);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_task_continue_with", resolution!.DirectNativeSymbol);
+        Assert.Contains("chaos_task_continue_with", resolution.CppSource);
+    }
+
+    [Theory]
+    // CancellationToken overloads — CT cannot be honoured yet.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>,System.Threading.CancellationToken)")]
+    // TaskContinuationOptions overloads — OnlyOn* would change whether the body
+    // runs at all; ignoring it would run the body when the caller asked it not to.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>,System.Threading.Tasks.TaskContinuationOptions)")]
+    // TaskScheduler overloads — the body must run on the caller's scheduler.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>,System.Threading.Tasks.TaskScheduler)")]
+    // The 4-argument kitchen sink.
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>,System.Threading.CancellationToken,System.Threading.Tasks.TaskContinuationOptions,System.Threading.Tasks.TaskScheduler)")]
+    public void ContinueWith_UnhonouredArgumentOverloads_ResolveToNull(string callee)
+    {
+        // These MUST NOT produce a resolution. Returning C++ that calls
+        // chaos_task_continue_with would run the continuation while silently
+        // discarding the CT/options/scheduler the caller passed — a task that
+        // appears to work and does the wrong thing. Falling through to the
+        // interpreter leaves the gap visible and honest.
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"ContinueWith callee '{callee}' should match the generic descriptor");
+        Assert.NotNull(descriptor);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.Null(resolution);
+    }
+
+    /// <summary>
+    /// The MoveNext resolver must embed the state machine's REAL native MoveNext symbol.
+    /// Asserting only the descriptor would let a wrong symbol through: the registration
+    /// would still MATCH while the emitted call named a symbol that does not exist,
+    /// turning every iterator into a link error.
+    ///
+    /// This drives a real planner through Create() rather than passing a null one — the
+    /// resolver legitimately dereferences the planner to resolve the continuation method,
+    /// so null only proves the resolver crashes.  (Counterexample: rename the symbol in the
+    /// MoveNext resolver body and this goes red.)
+    /// </summary>
+    [Fact]
+    public void BuildDefault_IteratorBuilder_MoveNextResolverEmitsTheRealNativeSymbol()
+    {
+        const string smSubjectId = "System.Private.CoreLib/IteratorSm";
+        var planner = CreatePlannerWithIteratorMoveNext(smSubjectId);
+
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string callee = IteratorBuilderCalleePrefix + "::MoveNext<IteratorSm>(IteratorSm&)";
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _));
+
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Contains("chaos_async_iterator_builder_move_next", resolution!.CppSource);
+        // The embedded symbol is the state machine's own MoveNext, not a placeholder.
+        Assert.Contains(IteratorSmMoveNextSymbol, resolution.CppSource);
+    }
+
+    private const string IteratorSmMoveNextSymbol = "chaos_iterator_sm_move_next";
+
+    /// <summary>
+    /// Builds a planner whose MoveNext index contains a MoveNext for <paramref name="smSubjectId"/>.
+    /// `_asyncMoveNextMethods` is populated by Create() from the AOT IR's method list, and
+    /// `TryResolveAsyncRuntimeContinuationMethod` matches by DeclaringTypeSubjectId suffix —
+    /// so the artifact's Identity.DeclaringTypeSubjectId is what makes the resolver succeed.
+    /// </summary>
+    private static NativeAotLoweringPlanner CreatePlannerWithIteratorMoveNext(string smSubjectId)
+    {
+        var moveNext = new Chaos.IL2CPP.Contracts.AotCoreIrMethodArtifact
+        {
+            MethodId = smSubjectId + "::MoveNext",
+            SubjectId = smSubjectId + "::MoveNext:System.Void()",
+            Signature = "System.Void()",
+            NativeSymbol = IteratorSmMoveNextSymbol,
+            IsStatic = false,
+            BodyAvailability = "Full",
+            ReturnType = "System.Void",
+            ReturnAbi = new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Void },
+            ParameterCount = 0,
+            ParameterAbis = Array.Empty<AotCoreIrAbiSlotArtifact>(),
+            LocalCount = 0,
+            ExceptionRegionCount = 0,
+            ExceptionRegions = Array.Empty<Chaos.IL2CPP.Contracts.AotCoreIrExceptionRegionArtifact>(),
+            Instructions = new Chaos.IL2CPP.Contracts.AotCoreIrInstructionArtifact[]
+            {
+                new() { Op = "ret", IlOffset = 0 },
+            },
+            Identity = new Chaos.IL2CPP.Contracts.ManagedMethodIdentityArtifact
+            {
+                AssemblyName = "System.Private.CoreLib",
+                DeclaringTypeSubjectId = smSubjectId,
+                DefinitionSubjectId = smSubjectId + "::MoveNext",
+                SubjectId = smSubjectId + "::MoveNext:System.Void()",
+                MethodId = smSubjectId + "::MoveNext",
+                Signature = "System.Void()",
+            },
+        };
+
+        var ir = new Chaos.IL2CPP.Contracts.AotCoreIrArtifact
+        {
+            FormatVersion = "v0",
+            ArtifactKind = "aotCoreIr",
+            Methods = new[] { moveNext },
+        };
+
+        var plan = new Chaos.IL2CPP.Contracts.NativeAotLoweringPlanArtifact
+        {
+            PlanKind = "fullAssembly",
+            AssemblyName = "System.Private.CoreLib",
+            EntrySubjectId = smSubjectId + "::MoveNext",
+            NativeEntryFunctionName = "chaos_entry",
+            EntrySymbol = "chaos_entry",
+            EntryMethodToken = "0",
+            WorkloadAbi = "v1",
+        };
+
+        var planner = new NativeAotLoweringPlanner();
+        planner.Create(
+            plan,
+            ir,
+            moveNext,
+            new Chaos.IL2CPP.Contracts.ManagedClosureManifestArtifact
+            {
+                AssemblyName = "System.Private.CoreLib",
+                EntrySubjectId = smSubjectId + "::MoveNext",
+                InputAssemblyPath = typeof(RuntimeHelperShapeRegistryTests).Assembly.Location,
+                InputModuleVersionId = "00000000-0000-0000-0000-000000000000",
+                Artifacts = Array.Empty<Chaos.IL2CPP.Contracts.ManagedClosureArtifactRef>(),
+            },
+            new Chaos.IL2CPP.Contracts.MetadataRegistrationArtifact
+            {
+                Registrations = Array.Empty<Chaos.IL2CPP.Contracts.MetadataRegistrationEntry>(),
+            },
+            new Chaos.IL2CPP.Contracts.SupplementalMetadataTemplateArtifact
+            {
+                RegisteredTypes = Array.Empty<Chaos.IL2CPP.Contracts.SupplementalMetadataTypeTemplateEntry>(),
+                RegisteredMethods = Array.Empty<Chaos.IL2CPP.Contracts.SupplementalMetadataMethodTemplateEntry>(),
+                ReservedSlots = new Chaos.IL2CPP.Contracts.SupplementalMetadataReservedSlots(),
+            },
+            fullAssemblyMode: true);
+        return planner;
     }
 }

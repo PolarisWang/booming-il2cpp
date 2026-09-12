@@ -48,7 +48,7 @@ static string FindRepoRoot()
     var dir = new DirectoryInfo(AppContext.BaseDirectory);
     while (dir != null)
     {
-        if (Directory.Exists(Path.Combine(dir.FullName, ".git")))
+        if (File.Exists(Path.Combine(dir.FullName, ".git")))
             return dir.FullName;
         dir = dir.Parent;
     }

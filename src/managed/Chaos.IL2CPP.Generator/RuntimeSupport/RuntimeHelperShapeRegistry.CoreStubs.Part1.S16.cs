@@ -113,9 +113,9 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
-            // ── Task<T> / TaskAwaiter<T> (generic await path) ──
-            // `await Task.Delay(n)` lowers against Task<Int32>::GetAwaiter and
-            // TaskAwaiter<Int32>::get_IsCompleted / GetResult, not the non-generic
+            // ── Task&lt;T&gt; / TaskAwaiter&lt;T&gt; (generic await path) ──
+            // `await Task.Delay(n)` lowers against Task&lt;Int32&gt;::GetAwaiter and
+            // TaskAwaiter&lt;Int32&gt;::get_IsCompleted / GetResult, not the non-generic
             // overloads.  Use DirectNativeSymbol so the codegen emits a direct call
             // to the native function, avoiding inline-code template issues with
             // parameter naming in the shared header.
@@ -161,6 +161,208 @@ public sealed partial class NativeAotLoweringPlanner
                         DirectNativeSymbol: "ChaosAsyncTaskAwaiterGetResultValue");
                 }));
 
+            // ── Non-generic TaskAwaiter.GetResult (void) ──
+            // `await someTask` (no result) lowers against the non-generic
+            // TaskAwaiter, whose GetResult returns void.  It must still
+            // propagate a fault, so it routes to the void-returning helper
+            // rather than sharing the value-returning one above.
+            registry.Register("System.Runtime.CompilerServices.TaskAwaiter", "GetResult", [],
+                ShapeKind.SimpleForward, "ChaosAsyncTaskAwaiterGetResultVoid",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── Task.FromResult / FromException / FromCanceled ──
+            // Already-completed task factories.  FromResult carries a value;
+            // FromException/FromCanceled produce a faulted task whose await
+            // throws (see ChaosAsyncTaskAwaiterGetResultValue).
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "FromResult",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    return async_task_from_result(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "async_task_from_result");
+                }));
+
+            registry.Register("System.Threading.Tasks.Task", "FromException",
+                ["System.Exception"],
+                ShapeKind.SimpleForward, "async_task_from_exception",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── Task.ContinueWith (Phase 2 P2-2 / P2-4) ──
+            // `antecedent.ContinueWith(body)` registers `body` to run when the
+            // antecedent completes and returns a NEW task carrying the
+            // continuation's return value — that return value is what makes
+            // ContinueWith chainable rather than fire-and-forget.
+            //
+            // .NET 8 exposes 20 public ContinueWith overloads.  Routing is a
+            // per-family decision taken in the resolver below, because the
+            // native helper honours only the delegate argument:
+            //
+            //   honoured  → Action<Task> / Func<Task,TResult>, exactly one
+            //               parameter, routed to chaos_task_continue_with.
+            //   rejected  → anything carrying CancellationToken,
+            //               TaskContinuationOptions, TaskScheduler or an
+            //               object-state argument.  Those return null and fall
+            //               through to the interpreter.  Routing them to the
+            //               native helper would RUN THE BODY ANYWAY while
+            //               discarding the argument the caller supplied —
+            //               a continuation that appears to work and does the
+            //               wrong thing.  (TaskContinuationOptions.OnlyOnFaulted
+            //               is the sharpest case: the caller asked for the body
+            //               NOT to run, and it would run regardless.)
+            //
+            // Same discipline as RegisterTaskRun's CancellationToken rejection
+            // and TaskRun_CancellationTokenOverload_ResolvesToNull.
+            //
+            // The Task<TResult> return is erased to a native int handle,
+            // matching FromResult above.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "ContinueWith",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    // Delegate-only overloads take exactly one parameter, the
+                    // continuation delegate, passed as a native int handle.
+                    //
+                    // This arity test is what actually rejects the CT / options /
+                    // scheduler / object-state overloads — proven by in-place
+                    // revert: disabling it makes all four
+                    // ContinueWith_UnhonouredArgumentOverloads_ResolveToNull cases
+                    // fail and routes the options overload in the real pipeline.
+                    if (paramTypes.Count != 1) return null;
+
+                    // A single-parameter overload whose parameter is not a
+                    // delegate must not be routed either.  NOTE: this check is
+                    // currently REDUNDANT — the BCL has no 1-parameter
+                    // non-delegate ContinueWith, and disabling it alone leaves
+                    // every test green (verified by in-place revert).  It is kept
+                    // deliberately as a guard for a future overload, and is
+                    // labelled redundant rather than described as load-bearing.
+                    var only = paramTypes[0];
+                    if (!IsAnyContinuationDelegate(only)) return null;
+
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return chaos_task_continue_with(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(),
+                            CreateNativeIntAbiSlot(),
+                        }),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: "chaos_task_continue_with");
+                }));
+
+            // ── Task.Wait / Task<T>.Result (blocking) ──
+            // Block the calling thread until completion.  Wait() = infinite
+            // wait; Wait(int) = bounded timeout (returns false on timeout).
+            // Both propagate faults the same way `await` does.
+            // Use RegisterGeneric so the wrapper can inject the timeout value.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "Wait",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var isVoid = (paramTypes.Count == 0);
+                    if (isVoid)
+                    {
+                        var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                        [
+                            "    ChaosAsyncTaskWait(chaos_arg_0, -1);",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                CreateNativeIntAbiSlot()),
+                            CreateVoidAbiSlot(),
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: "ChaosAsyncTaskWait");
+                    }
+                    else if (paramTypes.Count == 1 && paramTypes[0] == "System.Int32")
+                    {
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1",
+                        [
+                            "    return ChaosAsyncTaskWait(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact[2]
+                                {
+                                    CreateNativeIntAbiSlot(),
+                                    CreateInt32AbiSlot(),
+                                }),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int> { 0, 1 },
+                            DirectNativeSymbol: "ChaosAsyncTaskWait");
+                    }
+                    return null; // other overloads (TimeSpan, CT) → interpreter
+                }));
+
+            // Task<T>.Result — blocks until complete, returns the result payload.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "get_Result",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    return ChaosAsyncTaskGetResultBlocking(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "ChaosAsyncTaskGetResultBlocking");
+                }));
+
+            // Task<T>.get_Exception — read the stored exception or 0 if not faulted.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "get_Exception",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    return async_task_awaiter_get_exception(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "async_task_awaiter_get_exception");
+                }));
         }
 
         /// <summary>
@@ -403,6 +605,269 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// ASYNC-P2-8 A3. AsyncIteratorMethodBuilder native wiring — the
+        /// <c>async IAsyncEnumerable&lt;T&gt;</c> / <c>async IAsyncEnumerator&lt;T&gt;</c>
+        /// counterpart of <see cref="RegisterAsyncTaskBuilder"/>.
+        ///
+        /// Routes the 5 builder operations to the A2 native surface
+        /// (<c>chaos/async_iterator.h</c>, committed 624c3682f):
+        /// <code>
+        ///   Create/0                        -> chaos_async_iterator_builder_create()
+        ///   MoveNext`1/1                    -> chaos_async_iterator_builder_move_next(...)
+        ///   AwaitOnCompleted`2/2            -> chaos_async_iterator_builder_await_on_completed(...)
+        ///   AwaitUnsafeOnCompleted`2/2      -> chaos_async_iterator_builder_await_unsafe_on_completed(...)
+        ///   Complete/0                      -> chaos_async_iterator_builder_complete(...)
+        /// </code>
+        /// Spellings are the committed contract artifact's
+        /// (<c>runtime-helper-contracts-v1-01.json</c>), not a hand-written guess.
+        ///
+        /// <para>
+        /// <b>Why BOTH AwaitOnCompleted and AwaitUnsafeOnCompleted are registered.</b>
+        /// They are distinct members on the managed type, and the C# compiler emits
+        /// whichever the awaiter permits — <c>await Task.Yield()</c> inside an iterator
+        /// can reach the unsafe form.  The original A2 plan registered only
+        /// <c>AwaitOnCompleted</c>; the recon doc flagged that omission (§1.1) and both
+        /// are wired here to one native implementation (native code does not enforce the
+        /// unsafe/on-completed distinction).
+        /// </para>
+        ///
+        /// <para>
+        /// <b>These are NOT stubs.</b> Each forwards to real native semantics over the
+        /// pooled source.  A constant-return body here would reproduce exactly the
+        /// silent-wrong-answer shape A1 was built to eliminate, while looking greener
+        /// than falling through to ChaosExternalRuntimeFallback.
+        /// </para>
+        /// </summary>
+        private static void RegisterAsyncIteratorBuilder(RuntimeHelperShapeRegistry registry)
+        {
+            const string Prefix = "System.Runtime.CompilerServices.AsyncIteratorMethodBuilder";
+
+            // ── Create (static, returns builder handle) ──
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: Prefix,
+                MethodName: "Create",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
+                    [
+                        "    return chaos_async_iterator_builder_create();",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                        CreateNativeIntAbiSlot(),
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "chaos_async_iterator_builder_create");
+                }));
+
+            // ── Complete (instance, void()) ──
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: Prefix,
+                MethodName: "Complete",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    // Complete() ends an iteration but must NOT free the builder: the state",
+                        "    // machine can be enumerated again (GetAsyncEnumerator called twice).",
+                        "    // Release happens through chaos_async_iterator_builder_destroy at the",
+                        "    // state machine's own lifetime end.",
+                        "    chaos_async_iterator_builder_complete(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "chaos_async_iterator_builder_complete");
+                }));
+
+            // ── MoveNext<TStateMachine> (instance; drives the iterator's MoveNext) ──
+            // Needs the state machine's native MoveNext symbol, exactly as Start<SM> does.
+            // Resolver parses the <SM> type argument, resolves its MoveNext method, and
+            // embeds the native symbol in the emitted body.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: Prefix,
+                MethodName: "MoveNext",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    if (!TryParseAsyncIteratorBuilderMoveNextStateMachineType(callee, out var smName) ||
+                        string.IsNullOrEmpty(smName))
+                    {
+                        return null;
+                    }
+                    if (!planner.TryResolveAsyncRuntimeContinuationMethod(callee, out var mm) ||
+                        mm?.NativeSymbol is not { Length: > 0 } mnSym)
+                    {
+                        return null;
+                    }
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = $@"extern ""C"" CHAOS_IL2CPP_INTPTR {symbol}(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1) {{
+    // MoveNext<TStateMachine>(ref stateMachine): drive the iterator one step.
+    // chaos_arg_0 = builder handle (the source pool), chaos_arg_1 = ref state machine.
+    return chaos_async_iterator_builder_move_next(chaos_arg_0, reinterpret_cast<CHAOS_IL2CPP_INTPTR>({mnSym}), chaos_arg_1);
+}}";
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(),
+                                CreateNativeIntAbiSlot(),
+                            }),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: symbol);
+                }));
+
+            // ── AwaitOnCompleted / AwaitUnsafeOnCompleted<TAwaiter,TStateMachine> ──
+            // Both spellings register the SAME resolver — the two managed members share one
+            // native implementation (see the class doc).  Registering only one would leave
+            // the other's awaits routing to ChaosExternalRuntimeFallback -> 0, i.e. an
+            // iterator that silently stops advancing at that await.
+            foreach (string methodName in new[] { "AwaitOnCompleted", "AwaitUnsafeOnCompleted" })
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: Prefix,
+                    MethodName: methodName,
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        if (!TryParseAsyncIteratorBuilderAwaitOnCompleted(callee, out _, out var smName) ||
+                            string.IsNullOrEmpty(smName))
+                        {
+                            return null;
+                        }
+                        if (!planner.TryResolveAsyncRuntimeContinuationMethod(callee, out var mm) ||
+                            mm?.NativeSymbol is not { Length: > 0 } mnSym)
+                        {
+                            return null;
+                        }
+                        var symbol = GetExternalRuntimeHelperSymbol(callee);
+                        string nativeEntry = methodName == "AwaitOnCompleted"
+                            ? "chaos_async_iterator_builder_await_on_completed"
+                            : "chaos_async_iterator_builder_await_unsafe_on_completed";
+                        var src = $@"extern ""C"" CHAOS_IL2CPP_INTPTR {symbol}(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2) {{
+    // {methodName}<TAwaiter,TStateMachine>(ref awaiter, ref stateMachine).
+    // chaos_arg_0 = ref awaiter (the awaited AsyncTask handle lives in this slot),
+    // chaos_arg_1 = ref state machine, chaos_arg_2 unused (kept for ABI symmetry with
+    // the native entry point's move_next/sm_box pair).
+    //
+    // The continuation is registered on the AWAITED TASK, not on the iterator's own
+    // pooled source: registering on the pool would resume the wrong object and the
+    // state machine would never re-enter.
+    CHAOS_IL2CPP_INTPTR awaited = *resolve_native_int_slot(chaos_arg_0);
+    if (awaited == static_cast<CHAOS_IL2CPP_INTPTR>(0)) return static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    return {nativeEntry}(awaited, reinterpret_cast<CHAOS_IL2CPP_INTPTR>({mnSym}), chaos_arg_1);
+}}";
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact[3]
+                                {
+                                    CreateNativeIntAbiSlot(),
+                                    CreateNativeIntAbiSlot(),
+                                    CreateNativeIntAbiSlot(),
+                                }),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0, 1 });
+                    }));
+            }
+        }
+
+        /// <summary>
+        /// ASYNC-P2-8 A4. <c>ManualResetValueTaskSourceCore&lt;bool&gt;</c> — the
+        /// <c>IValueTaskSource</c> body the iterator state machine feeds.
+        ///
+        /// <para>
+        /// The async-iterator <c>MoveNext</c> ends each arm with a completion signal:
+        /// <c>&lt;&gt;v__promiseOfValueOrEnd.SetResult(true)</c> on the yield arm and
+        /// <c>.SetResult(false)</c> on the exhausted arm (plus <c>SetException</c> on the
+        /// handler path).  <c>promiseOfValueOrEnd</c> is a
+        /// <c>ManualResetValueTaskSourceCore&lt;bool&gt;</c> whose address is passed as the
+        /// receiver.
+        /// </para>
+        ///
+        /// <para>
+        /// Without this registration those calls fall through to
+        /// <c>ChaosExternalRuntimeFallback</c> with <b>zero arguments forwarded</b> — so
+        /// the yielded/exhausted signal is computed and then discarded, and every
+        /// <c>MoveNextAsync</c> observes an unset source.  That is a silently wrong
+        /// enumerable, not a missing feature: the state machine looks correct and the
+        /// value never arrives.  The gap was measured on
+        /// <c>&lt;YieldOne&gt;d__0::MoveNext</c>, where both arms emitted
+        /// <c>chaos_external_runtime_..._SetResult_..._System_Boolean_()</c> with an empty
+        /// argument list while <c>_s4 = 0</c> / <c>_s7 = 1</c> sat unused on the stack.
+        /// </para>
+        ///
+        /// <para>
+        /// Maps to the A2 native surface over the pooled source
+        /// (<c>chaos/async_iterator.h</c>): <c>AsyncIteratorSourceCore</c> is the
+        /// documented <c>ManualResetValueTaskSourceCore&lt;bool&gt;</c> equivalent.
+        /// "core" handle = address of the promise field = <c>chaos_arg_0</c>.
+        /// </para>
+        /// </summary>
+        private static void RegisterManualResetValueTaskSourceCore(RuntimeHelperShapeRegistry registry)
+        {
+            const string Prefix = "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore";
+
+            // ── SetResult(bool) — instance; receiver + the bool payload ──
+            // The bool crosses as a widened INTPTR slot (ABI carrier), matching how the
+            // iterator's `__current` store carries it; native narrows to int32.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: Prefix,
+                MethodName: "SetResult",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    // SetResult(bool value): chaos_arg_0 = &promiseOfValueOrEnd (the",
+                        "    // AsyncIteratorSourceCore), chaos_arg_1 = the completion value",
+                        "    // (true = element yielded, false = iteration exhausted).",
+                        "    chaos_async_iterator_source_set_result(chaos_arg_0,",
+                        "        static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(),
+                                CreateNativeIntAbiSlot(),
+                            }),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: "chaos_async_iterator_source_set_result");
+                }));
+
+            // ── SetException(Exception) — instance; receiver + exception object ──
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: Prefix,
+                MethodName: "SetException",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    // SetException(Exception): fault the source so the awaiting",
+                        "    // MoveNextAsync observes the exception instead of hanging.",
+                        "    chaos_async_iterator_source_set_exception(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(),
+                                CreateNativeIntAbiSlot(),
+                            }),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: "chaos_async_iterator_source_set_exception");
+                }));
+        }
+
+        /// <summary>
         /// TaskCompletionSource (non-generic and generic) — route SetResult/TrySetResult/
         /// SetException/TrySetException/SetCanceled/TrySetCanceled to native chaos_tcs_*
         /// helpers so generated C++ calls them directly instead of falling through to the
@@ -416,13 +881,16 @@ public sealed partial class NativeAotLoweringPlanner
         private static void RegisterTaskCompletionSource(RuntimeHelperShapeRegistry registry)
         {
             // Non-generic TaskCompletionSource (no generic param).
-            // SetResult() — void completion, value=0 sentinel.
+            // SetResult() — void completion.  .NET's non-generic TaskCompletionSource
+            // has no result payload, but the shared native chaos_tcs_set_result takes
+            // (handle, value), so the sentinel 0 is passed as a second carrier slot.
+            // Declaring only one slot here emits a 1-arg call → C2660.
             registry.Register("System.Threading.Tasks.TaskCompletionSource", "SetResult", [],
                 ShapeKind.SimpleForward, "chaos_tcs_set_result_void",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot()),
                 CreateVoidAbiSlot(),
-                new HashSet<int> { 0 });
+                new HashSet<int> { 0, 1 });
 
             // SetException(Exception)
             registry.Register("System.Threading.Tasks.TaskCompletionSource", "SetException",
@@ -437,13 +905,13 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0, 1 });
 
-            // TrySetResult() — returns bool
+            // TrySetResult() — returns bool.  Same 2-slot reason as SetResult above.
             registry.Register("System.Threading.Tasks.TaskCompletionSource", "TrySetResult", [],
                 ShapeKind.SimpleForward, "chaos_tcs_try_set_result_void",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot()),
                 CreateInt32AbiSlot(),
-                new HashSet<int> { 0 });
+                new HashSet<int> { 0, 1 });
 
             // TrySetException(Exception) — returns bool
             registry.Register("System.Threading.Tasks.TaskCompletionSource", "TrySetException",
@@ -458,7 +926,7 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateInt32AbiSlot(),
                 new HashSet<int> { 0, 1 });
 
-            // SetCanceled() — void.  Previously pointed at chaos_tcs_set_exception,
+// SetCanceled() — void.  Previously pointed at chaos_tcs_set_exception,
             // which faults the task instead of cancelling it.
             registry.Register("System.Threading.Tasks.TaskCompletionSource", "SetCanceled", [],
                 ShapeKind.SimpleForward, "chaos_tcs_set_canceled",
@@ -608,12 +1076,16 @@ public sealed partial class NativeAotLoweringPlanner
                         DirectNativeSymbol: "chaos_tcs_try_set_exception");
                 }));
 
-            // SetCanceled() — generic variant.
+            // SetCanceled() — generic variant (TCS<T>.SetCanceled: throwing per
+            // managed contract — InvalidOperationException if already completed).
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Threading.Tasks.TaskCompletionSource",
                 MethodName: "SetCanceled",
                 Resolver: (planner, callee, typeArgs) =>
                 {
+                    // Guard: only match generic TCS`1, not the non-generic concrete
+                    // shape (review #5).  typeArgs is empty for the non-generic type.
+                    if (typeArgs == null || typeArgs.Count == 0) return null;
                     var symbol = GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
@@ -628,12 +1100,14 @@ public sealed partial class NativeAotLoweringPlanner
                         DirectNativeSymbol: "chaos_tcs_set_canceled");
                 }));
 
-            // TrySetCanceled() — generic variant returns bool.
+            // TrySetCanceled() — generic variant returns bool.  Only matches
+            // generic TCS`1 (not the concrete non-generic shape above, review #5).
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Threading.Tasks.TaskCompletionSource",
                 MethodName: "TrySetCanceled",
                 Resolver: (planner, callee, typeArgs) =>
                 {
+                    if (typeArgs == null || typeArgs.Count == 0) return null;
                     var symbol = GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
@@ -647,6 +1121,362 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 },
                         DirectNativeSymbol: "chaos_tcs_try_set_canceled");
                 }));
+        }
+
+        /// <summary>
+        /// Task.Run — route the static Task::Run overloads to the native
+        /// ThreadPool-backed task_runner (async_task_run), which was fully
+        /// implemented in task_runner.cpp and registered at RuntimeInit but had
+        /// no codegen entry point, leaving it dead code from managed callers.
+        ///
+        /// Only the delegate-only overloads are routed.  The CancellationToken
+        /// variants need cancellation wiring (Phase 3) and deliberately fall
+        /// through to the interpreter until then.
+        /// </summary>
+        private static void RegisterTaskRun(RuntimeHelperShapeRegistry registry)
+        {
+            // Task.Run(Action) / Task.Run(Func<Task>) — single delegate argument.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "Run",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    // Delegate-only overloads: exactly one parameter, and it is the
+                    // Action / Func<Task> delegate (passed as a native int handle).
+                    if (paramTypes.Count != 1) return null;
+                    if (paramTypes[0] == "System.Threading.CancellationToken") return null;
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    return async_task_run(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "async_task_run");
+                }));
+        }
+
+        /// <summary>
+        /// Task.Factory.StartNew — route the delegate-only overloads of the
+        /// default TaskFactory onto the SAME native ThreadPool runner as
+        /// Task.Run (async_task_run).
+        ///
+        /// <para>
+        /// This is not an approximation.  .NET's default TaskFactory (the one
+        /// Task.Factory returns) uses TaskScheduler.Current for StartNew, which
+        /// outside a scheduler context is the default (ThreadPool) scheduler —
+        /// exactly where Task.Run queues.  So for the delegate-only overloads the
+        /// two APIs are semantically identical, and sharing the runner is what
+        /// .NET does, not a shortcut.
+        /// </para>
+        ///
+        /// <para>
+        /// Only SINGLE-parameter overloads are routed.  The remaining StartNew
+        /// shapes each carry an argument whose semantics the runner cannot honour:
+        /// </para>
+        /// <list type="bullet">
+        /// <item><c>StartNew(Action, TaskCreationOptions)</c> — the options are
+        /// dropped, so a caller asking for LongRunning/AttachedToParent would
+        /// silently get the default behaviour.</item>
+        /// <item><c>StartNew(Action, CancellationToken)</c> — needs the Phase 3
+        /// cancellation wiring; passing the token through unchanged would make
+        /// cancellation a no-op.</item>
+        /// <item><c>StartNew&lt;TResult&gt;(Func&lt;TResult&gt;)</c> — a
+        /// result-producing factory; the runner returns a plain Task handle and
+        /// never stores the func's return value.</item>
+        /// <item><c>StartNew(Action, state)</c> — the state object is dropped.</item>
+        /// </list>
+        /// <para>
+        /// Those fall through to the interpreter (resolver returns null), which is
+        /// the honest outcome — the same precedent P2-4 set for ContinueWith.
+        /// </para>
+        /// </summary>
+        private static void RegisterTaskFactory(RuntimeHelperShapeRegistry registry)
+        {
+            // Task.Factory's static property.  The runtime has no TaskFactory
+            // object model, and none is needed: the factory's StartNew maps onto
+            // the default scheduler, so the getter returns a non-null opaque
+            // token purely so a caller that stores or passes Task.Factory does
+            // not receive a bogus 0 handle.  The token is never dereferenced.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "get_Factory",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "",
+                    [
+                        "    return 1;",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(Array.Empty<AotCoreIrAbiSlotArtifact>()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int>(),
+                        DirectNativeSymbol: "chaos_task_default_factory");
+                }));
+
+            // TaskFactory::StartNew — delegate-only overloads (exactly one
+            // parameter, and it is a delegate) route to the ThreadPool runner.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.TaskFactory",
+                MethodName: "StartNew",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+
+                    // Delegate-only: exactly one parameter, and it must BE the
+                    // delegate.  The non-delegate 1-parameter overloads
+                    // (state object) and the multi-parameter overloads
+                    // (options / token / state) are rejected here.
+                    if (paramTypes.Count != 1) return null;
+                    if (!IsAnyContinuationDelegate(paramTypes[0])) return null;
+
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    return chaos_task_factory_start_new(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(),
+                            CreateNativeIntAbiSlot(),
+                        }),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: "chaos_task_factory_start_new");
+                }));
+        }
+
+        /// <summary>
+        /// Task.Delay — route the static Task::Delay overloads to the native
+        /// timer-backed chaos_task_delay_stub so codegen-emitted C++ calls them
+        /// directly (instead of falling to the interpreter stub → 0).
+        ///
+        /// Only the single-Int32 overload is routed currently.  The CancellationToken
+        /// / TimeProvider variants deliberately return null → interpreter fallback
+        /// (they need a real cancellation source, deferred).
+        /// </summary>
+        private static void RegisterTaskDelay(RuntimeHelperShapeRegistry registry)
+        {
+            // Task.Delay(int) — Int32 ms.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "Delay",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 1 || paramTypes[0] != "System.Int32")
+                        return null;
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INT32 chaos_arg_0",
+                    [
+                        "    return chaos_task_delay_stub(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateInt32AbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "chaos_task_delay_stub");
+                }));
+
+            // Task.WhenAll(Task[])/Task.WhenAny(Task[]) — route the array combinator
+            // to the native async_stubs helpers (which unpack the managed array and
+            // produce an aggregate AsyncTask handle).  Returns the aggregate handle
+            // as a native int so the awaiting state machine can continue on it.
+            IEnumerable<(string Method, string Native)> combinators =
+            [
+                (Method: "WhenAll", Native: "chaos_task_when_all_array"),
+                (Method: "WhenAny", Native: "chaos_task_when_any_array"),
+            ];
+            foreach (var (method, native) in combinators)
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                    MethodName: method,
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        if (paramTypes.Count != 1 || !paramTypes[0].Contains("[]", StringComparison.Ordinal))
+                            return null;
+
+                        // Only the single-argument overload: <method>(Task[]).
+                        //
+                        // The previous guard tested `::<method>:System.Threading.Tasks.Task(`
+                        // — the NON-generic return type.  That rejected
+                        // Task.WhenAll<int>(Task<int>[]) (return type
+                        // `Task<int[]>`) AND any overload the declaration record
+                        // spelled fully-qualified (`...Tasks.Task(...)`), i.e. the
+                        // generic overload silently fell through to the
+                        // interpreter's return-0 fallback.  Anchor on the method
+                        // signature instead, which is what we actually mean.
+                        //
+                        // The name may carry an explicit generic argument list
+                        // (`::WhenAll<System.Int32>(`), so match the `::<method>`
+                        // prefix and accept either `(` or `<` next.  `Task[]`
+                        // remains as the fallback for the reference-only form.
+                        var methodAnchor = "::" + method;
+                        var anchorIdx = callee.IndexOf(methodAnchor, StringComparison.Ordinal);
+                        if (anchorIdx >= 0)
+                        {
+                            var afterName = callee[(anchorIdx + methodAnchor.Length)..];
+                            if (!afterName.StartsWith('(') && !afterName.StartsWith('<'))
+                                return null;
+                        }
+                        else if (!callee.Contains("Task[]", StringComparison.Ordinal))
+                        {
+                            return null;
+                        }
+                        var symbol2 = GetExternalRuntimeHelperSymbol(callee);
+                        var src2 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol2,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                        [
+                            $"    return {native}(chaos_arg_0);",
+                        ]);
+                        return new GenericShapeResolution(src2, symbol2,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ReferenceType }),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: native);
+                    }));
+            }
+
+            // Task.WhenEach(Task[]) / Task.WhenEach<TResult>(Task<TResult>[]) — the
+            // ORDER-PRESERVING completion stream.
+            //
+            // Not a variant of the two above: WhenEach returns IAsyncEnumerable<Task>
+            // that yields each task AS IT COMPLETES, so a caller awaiting the
+            // enumerable observes completion ORDER.  Routing it to when_all would
+            // defer every element until the last task finished; routing it to
+            // when_any would yield exactly once.  Both are silently different
+            // programs that still look like a successful registration — which is
+            // why the registry test asserts the destination symbol by name and
+            // asserts the other two are absent.
+            //
+            // The native side owns the queue semantics (a re-armed completion
+            // source drained in completion order); codegen only has to name it.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "WhenEach",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    // Same array-only guard as WhenAll/WhenAny: the native shim
+                    // unpacks a contiguous managed array.  The IEnumerable<Task>
+                    // overload has no native model and must fall through to the
+                    // interpreter rather than be silently approximated.
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 1 || !paramTypes[0].Contains("[]", StringComparison.Ordinal))
+                        return null;
+
+                    // The name may carry a generic argument list
+                    // (`::WhenEach<System.Int32>(`), so accept `(` or `<` after the
+                    // `::WhenEach` anchor — the same shape WhenAll/WhenAny needed.
+                    var whenEachAnchor = "::WhenEach";
+                    var weIdx = callee.IndexOf(whenEachAnchor, StringComparison.Ordinal);
+                    if (weIdx >= 0)
+                    {
+                        var afterName = callee[(weIdx + whenEachAnchor.Length)..];
+                        // Accept `(` (no return type), `<` (generic args), or `:` (return type)
+                        // after the method name.
+                        if (!afterName.StartsWith('(') && !afterName.StartsWith('<') && !afterName.StartsWith(':'))
+                            return null;
+                    }
+                    else if (!callee.Contains("Task[]", StringComparison.Ordinal))
+                    {
+                        return null;
+                    }
+
+                    const string WhenEachNative = "chaos_task_when_each_array";
+                    var weSymbol = GetExternalRuntimeHelperSymbol(callee);
+                    var weSrc = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", weSymbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        $"    return {WhenEachNative}(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(weSrc, weSymbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ReferenceType }),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: WhenEachNative);
+                }));
+        }
+
+        /// <summary>
+        /// TaskFactory.ContinueWhenAll / ContinueWhenAny — the array overloads.
+        ///
+        /// Composition rather than new mechanism: the native entry point builds the
+        /// WhenAll/WhenAny aggregate over the task array and registers the
+        /// continuation on THAT aggregate (see chaos_task_continue_when_*_array).
+        ///
+        /// <para>
+        /// The distinction that matters is which object the continuation observes.
+        /// Registering it on each CHILD would fire it once per task — for
+        /// ContinueWhenAll that is N invocations where the caller asked for one.
+        /// It looks correct on a single-element array and multiplies side effects
+        /// on every other, so the guard here routes the whole array through the
+        /// aggregate and the native test pins the invocation count.
+        /// </para>
+        ///
+        /// <para>
+        /// Only the <c>(Task[], Action&lt;Task[]&gt;)</c>-shaped overloads are routed:
+        /// exactly two parameters, the first an array and the second a delegate.
+        /// The <c>TaskCreationOptions</c> / <c>CancellationToken</c> / state-object
+        /// variants carry arguments with no native model and return null, falling
+        /// to the interpreter — the honest outcome, same precedent as StartNew.
+        /// </para>
+        /// </summary>
+        private static void RegisterTaskFactoryContinueWhen(RuntimeHelperShapeRegistry registry)
+        {
+            IEnumerable<(string Method, string Native)> continuations =
+            [
+                (Method: "ContinueWhenAll", Native: "chaos_task_continue_when_all_array"),
+                (Method: "ContinueWhenAny", Native: "chaos_task_continue_when_any_array"),
+            ];
+            foreach (var (method, native) in continuations)
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: "System.Threading.Tasks.TaskFactory",
+                    MethodName: method,
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        // (Task[] tasks, Action<Task[]> continuation) — two params,
+                        // the array first and a delegate second.  Anything else
+                        // (options / token / state / IEnumerable overloads) has no
+                        // native model.
+                        var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        if (paramTypes.Count != 2) return null;
+                        if (!paramTypes[0].Contains("[]", StringComparison.Ordinal)) return null;
+                        if (!IsAnyContinuationDelegate(paramTypes[1])) return null;
+
+                        var cwSymbol = GetExternalRuntimeHelperSymbol(callee);
+                        var cwSrc = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", cwSymbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            $"    return {native}(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(cwSrc, cwSymbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact[2]
+                                {
+                                    CreateNativeIntAbiSlot(),
+                                    CreateNativeIntAbiSlot(),
+                                }),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0, 1 },
+                            DirectNativeSymbol: native);
+                    }));
+            }
         }
 
         /// <summary>

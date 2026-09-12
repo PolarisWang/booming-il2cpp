@@ -111,6 +111,12 @@ public sealed partial class NativeAotLoweringPlanner
     /// <summary>
     /// Build basic blocks from the flat instruction list.
     /// </summary>
+    /// <param name="extraLeaders">
+    /// Additional IL offsets that must start a block even though nothing inside
+    /// <paramref name="instructions"/> branches to them — e.g. a TAIL partition's resume
+    /// points, which are entered from another partition via the EH handoff slot. Without
+    /// these the resume point is absorbed into a preceding block and cannot be selected.
+    /// </param>
     private static IReadOnlyList<BasicBlock> BuildBasicBlocks(
         IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
         HashSet<int> branchTargets)
@@ -210,10 +216,14 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private static ControlFlowGraph BuildControlFlowGraph(
         IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
-        IReadOnlySet<int> offsets)
+        IReadOnlySet<int> offsets,
+        IReadOnlySet<int>? extraLeaders = null)
     {
         var branchTargets = EnumerateBranchTargets(instructions);
-        var blocks = BuildBasicBlocks(instructions, branchTargets);
+        var mergedLeaders = extraLeaders is { Count: > 0 }
+            ? new HashSet<int>(branchTargets.Concat(extraLeaders))
+            : branchTargets;
+        var blocks = BuildBasicBlocks(instructions, mergedLeaders);
         var offsetToBlockIndex = new Dictionary<int, int>();
         for (int i = 0; i < blocks.Count; i++)
             offsetToBlockIndex[blocks[i].StartOffset] = i;

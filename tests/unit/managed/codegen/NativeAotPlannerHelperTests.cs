@@ -3159,4 +3159,130 @@ public sealed class NativeAotPlannerHelperTests
         var result = (string)method.Invoke(null, new object[] { name })!;
         Assert.Equal(expected, result);
     }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // ASYNC-P2-8 A3 — async iterator builder callee parsing.
+    //
+    // The callee spellings below are taken from the committed contract artifact
+    // (runtime-helper-contracts-v1-01.json), which records the real pipeline's
+    // forms as `AsyncIteratorMethodBuilder::Create/0`, `::MoveNext`1/1`,
+    // `::AwaitOnCompleted`2/2`, `::AwaitUnsafeOnCompleted`2/2`, `::Complete/0`.
+    // Writing a convenience spelling here instead would make these tests pass
+    // against a registry the real pipeline never reaches (the P2-4 lesson).
+    //
+    // SubjectId convention in these parsers uses direct angle brackets, matching
+    // the AsyncTaskMethodBuilder tests above.
+    // ══════════════════════════════════════════════════════════════════════
+
+    private const string IteratorBuilderPrefix =
+        "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncIteratorMethodBuilder";
+
+    // ── TypeResolution.cs: TryParseAsyncIteratorBuilderMoveNextStateMachineType ──
+
+    [Fact]
+    public void TryParseAsyncIteratorBuilderMoveNext_Matches()
+    {
+        var method = s_plannerType.GetMethod("TryParseAsyncIteratorBuilderMoveNextStateMachineType", s_static,
+            new[] { typeof(string), typeof(string).MakeByRefType() })!;
+        var callee = IteratorBuilderPrefix + "::MoveNext<StateMachine>(StateMachine&)";
+        var args = new object?[] { callee, null };
+
+        Assert.True((bool)method.Invoke(null, args)!);
+        Assert.Equal("StateMachine", (string)args[1]!);
+    }
+
+    /// <summary>
+    /// A5/negative: the ASYNC TASK builder's Start must NOT parse as an iterator
+    /// MoveNext, and vice versa.  Without this, a registration could answer for the
+    /// wrong builder and route an async Task through the iterator runtime.
+    /// </summary>
+    [Fact]
+    public void TryParseAsyncIteratorBuilderMoveNext_RejectsTaskBuilderStart()
+    {
+        var method = s_plannerType.GetMethod("TryParseAsyncIteratorBuilderMoveNextStateMachineType", s_static,
+            new[] { typeof(string), typeof(string).MakeByRefType() })!;
+        var taskStart = "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder::Start<StateMachine>(StateMachine&)";
+        var args = new object?[] { taskStart, null };
+
+        Assert.False((bool)method.Invoke(null, args)!);
+        Assert.Null(args[1]);
+    }
+
+    // ── TypeResolution.cs: TryParseAsyncIteratorBuilderAwaitOnCompleted ──
+
+    /// <summary>
+    /// BOTH await spellings must parse.  This is the A3 version of the recon doc's
+    /// §1.1 finding: the original plan registered only AwaitOnCompleted, so an
+    /// `await Task.Yield()` inside an iterator would have stayed unresolvable.
+    /// Counterexample: drop either InlineData row's method name from the parser's
+    /// candidate list and that row goes red.
+    /// </summary>
+    [Theory]
+    [InlineData("AwaitOnCompleted")]
+    [InlineData("AwaitUnsafeOnCompleted")]
+    public void TryParseAsyncIteratorBuilderAwaitOnCompleted_MatchesBothSpellings(string methodName)
+    {
+        var method = s_plannerType.GetMethod("TryParseAsyncIteratorBuilderAwaitOnCompleted", s_static,
+            new[] { typeof(string), typeof(string).MakeByRefType(), typeof(string).MakeByRefType() })!;
+        var callee = $"{IteratorBuilderPrefix}::{methodName}<Awaiter,StateMachine>(Awaiter&,StateMachine&)";
+        var args = new object?[] { callee, null, null };
+
+        Assert.True((bool)method.Invoke(null, args)!);
+        Assert.Equal("Awaiter", (string)args[1]!);
+        Assert.Equal("StateMachine", (string)args[2]!);
+    }
+
+    /// <summary>
+    /// The iterator await parser must not answer for the async Task builder — and
+    /// specifically must not confuse AsyncTaskMethodBuilder's
+    /// AwaitUnsafeOnCompleted (which it shares a method name with).
+    /// </summary>
+    [Fact]
+    public void TryParseAsyncIteratorBuilderAwaitOnCompleted_RejectsTaskBuilder()
+    {
+        var method = s_plannerType.GetMethod("TryParseAsyncIteratorBuilderAwaitOnCompleted", s_static,
+            new[] { typeof(string), typeof(string).MakeByRefType(), typeof(string).MakeByRefType() })!;
+        var taskAwait = "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder::AwaitUnsafeOnCompleted<Awaiter,SM>(Awaiter&,SM&)";
+        var args = new object?[] { taskAwait, null, null };
+
+        Assert.False((bool)method.Invoke(null, args)!);
+    }
+
+    // ── TypeResolution.cs: TryGetAsyncStateMachineTypeName (A1 -> A3 relaxation) ──
+
+    /// <summary>
+    /// A3 relaxed A1's blanket suppression of AsyncIteratorMethodBuilder callees so the
+    /// iterator's own state-machine name becomes resolvable (A1 returned false for all
+    /// of them, which also blocked the MoveNext lookup A3 needs).
+    ///
+    /// This asserts the relaxation did NOT go too far: ops that embed no &lt;SM&gt;
+    /// argument — Create and Complete — still resolve to nothing rather than to a bogus
+    /// name.  A blanket "return true with whatever we found" would leave
+    /// stateMachineTypeName null while reporting success, and the caller would index a
+    /// MoveNext lookup with null.
+    /// </summary>
+    [Fact]
+    public void TryGetAsyncStateMachineTypeName_ResolvesIteratorMoveNext_ButNotCreateOrComplete()
+    {
+        var method = s_plannerType.GetMethod("TryGetAsyncStateMachineTypeName", s_static,
+            new[] { typeof(string), typeof(string).MakeByRefType() })!;
+
+        // MoveNext carries <StateMachine>: resolvable.
+        var moveNextArgs = new object?[] { IteratorBuilderPrefix + "::MoveNext<SM>(SM&)", null };
+        Assert.True((bool)method.Invoke(null, moveNextArgs)!);
+        Assert.Equal("SM", (string)moveNextArgs[1]!);
+
+        // Await: resolvable (awaiter is arg 0, state machine is arg 1).
+        var awaitArgs = new object?[] { IteratorBuilderPrefix + "::AwaitOnCompleted<Awaiter,SM>(Awaiter&,SM&)", null };
+        Assert.True((bool)method.Invoke(null, awaitArgs)!);
+        Assert.Equal("SM", (string)awaitArgs[1]!);
+
+        // Create / Complete carry no type argument: must stay unresolvable.
+        foreach (string stateless in new[] { "Create", "Complete" })
+        {
+            var args = new object?[] { $"{IteratorBuilderPrefix}::{stateless}()", null };
+            Assert.False((bool)method.Invoke(null, args)!) ;
+            Assert.Null(args[1]);
+        }
+    }
 }

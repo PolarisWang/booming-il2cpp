@@ -209,6 +209,71 @@ public sealed partial class NativeAotLoweringPlanner
             .Replace("\t", "\\t");
     }
 
+    /// <summary>
+    /// ASYNC-P2-8 A1. Emit the async-iterator "unsupported" signal into the generated C++.
+    ///
+    /// <para>
+    /// <b>Why this exists.</b> An <c>async IAsyncEnumerable&lt;T&gt;</c> /
+    /// <c>async IAsyncEnumerator&lt;T&gt;</c> state machine cannot be lowered yet (see
+    /// <c>docs/dev/in-progress/async-task-industrialization/async-iterator-recon-2026-09-11.md</c>).
+    /// Before A1 those methods degraded to <c>chaos_external_runtime_*</c> stubs returning 0 —
+    /// a silently-wrong iterable, which is exactly the fake-green shape this effort removes.
+    /// The emitter now records each such subject id in
+    /// <see cref="UnsupportedAsyncIteratorSubjectIds"/> and this method surfaces them as
+    /// link-time-visible C++ symbols, mirroring the existing <c>kCodegenFailureCount</c>
+    /// channel so the build/verification layer can gate on them.
+    /// </para>
+    ///
+    /// <para>
+    /// <b>Why not throw instead.</b> Emission runs behind <c>BuildMethodSourceSafe</c>, which
+    /// catches EVERY exception and substitutes an unreachable stub. A throw from the emission
+    /// site is swallowed and the build stays green. The non-throwing channel is the only one
+    /// that actually reaches the outside world.
+    /// </para>
+    ///
+    /// <para>
+    /// The declarations are emitted <b>unconditionally</b>, with count 0 when nothing was
+    /// detected. A conditional emit would let a consumer that references the symbol fail to
+    /// link in exactly the clean case, and would make "no iterators present" indistinguishable
+    /// from "the signal was never wired" — the assertion-shape defect D1/D2 from the recon doc.
+    /// </para>
+    ///
+    /// Generated C++:
+    /// <code>
+    /// extern "C" const int kUnsupportedAsyncIteratorCount = 0;
+    /// extern "C" const char* const kUnsupportedAsyncIteratorSubjects[1] = { nullptr };
+    /// </code>
+    /// </summary>
+    private string EmitUnsupportedAsyncIteratorDeclarations()
+    {
+        var sb = new System.Text.StringBuilder();
+        sb.Append("// ASYNC-P2-8 A1: async iterator shapes encountered during codegen.\n");
+        sb.Append("// Non-zero means an `async IAsyncEnumerable<T>` / `async IAsyncEnumerator<T>`\n");
+        sb.Append("// state machine reached emission and could not be lowered. Those methods were\n");
+        sb.Append("// emitted as explicitly-labelled stubs; gate on this count rather than trusting\n");
+        sb.Append("// a green build. See docs/dev/in-progress/async-task-industrialization/\n");
+        sb.Append("// async-iterator-recon-2026-09-11.md.\n");
+        sb.Append($"extern \"C\" const int kUnsupportedAsyncIteratorCount = {UnsupportedAsyncIteratorSubjectIds.Count};\n");
+
+        // Always a one-element array so the symbol exists even at count 0 — a zero-length
+        // array is not valid C++ and a missing symbol would break the consumer in the
+        // clean case, hiding the signal's own wiring.
+        if (UnsupportedAsyncIteratorSubjectIds.Count == 0)
+        {
+            sb.Append("extern \"C\" const char* const kUnsupportedAsyncIteratorSubjects[1] = { nullptr };\n");
+        }
+        else
+        {
+            sb.Append($"extern \"C\" const char* const kUnsupportedAsyncIteratorSubjects[{UnsupportedAsyncIteratorSubjectIds.Count}] = {{\n");
+            foreach (var sid in UnsupportedAsyncIteratorSubjectIds)
+            {
+                sb.Append($"    \"{EscapeCppStringLiteral(sid)}\",\n");
+            }
+            sb.Append("};\n");
+        }
+        return sb.ToString();
+    }
+
 
 
     /// <summary>
