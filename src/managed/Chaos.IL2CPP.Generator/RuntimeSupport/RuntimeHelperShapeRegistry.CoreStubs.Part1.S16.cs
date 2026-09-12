@@ -1663,6 +1663,52 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// Phase 3: SynchronizationContext.
+        ///
+        /// This runtime is headless — there is no UI message pump — so the
+        /// placeholder context created by the parameterless constructor posts and
+        /// sends INLINE on the calling thread.  That is the semantically correct
+        /// behaviour for a placeholder, not a stub: the alternative is blocking
+        /// the caller until a pump that does not exist drains the callback.
+        ///
+        /// <para>
+        /// <b>What actually has to be right is SetCurrent/GetCurrent.</b>  Whether
+        /// a continuation resumes on its original context is decided by reading
+        /// <c>Current</c> at completion time.  If SetSynchronizationContext
+        /// silently discarded its argument, ConfigureAwait(true) and
+        /// ConfigureAwait(false) would become indistinguishable — the Phase 3
+        /// acceptance counter-example ("resume thread != original thread" under
+        /// ConfigureAwait(false)) could not tell them apart.
+        /// </para>
+        /// </summary>
+        private static void RegisterSynchronizationContext(RuntimeHelperShapeRegistry registry)
+        {
+            // .ctor() — creates the placeholder context.
+            registry.Register("System.Threading.SynchronizationContext", ".ctor", [],
+                ShapeKind.SimpleForward, "chaos_synchronization_context_create",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateNativeIntAbiSlot(),
+                EmptyRawArgumentIndices);
+
+            // get_Current — static; the current thread's installed context.
+            registry.Register("System.Threading.SynchronizationContext", "get_Current", [],
+                ShapeKind.SimpleForward, "chaos_synchronization_context_get_current",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateNativeIntAbiSlot(),
+                EmptyRawArgumentIndices);
+
+            // SetSynchronizationContext(ctx) — static; returns the previous context
+            // so a caller (or the awaiter machinery) can restore it.
+            registry.Register("System.Threading.SynchronizationContext", "SetSynchronizationContext",
+                [],
+                ShapeKind.SimpleForward, "chaos_synchronization_context_set_current",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+        }
+
+        /// <summary>
         /// Decimal
         /// </summary>
         private static void RegisterDecimal(RuntimeHelperShapeRegistry registry)

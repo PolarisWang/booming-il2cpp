@@ -918,6 +918,25 @@ public sealed class RuntimeHelperShapeRegistryTests
         Assert.Equal(expectedSymbol, entry!.NativeFnSymbol);
     }
 
+    /// <summary>
+    /// SynchronizationContext lifecycle.  The placeholder created by .ctor() is
+    /// a headless-AOT context: Post and Send invoke inline on the calling thread.
+    /// The critical path is get_Current / SetSynchronizationContext — without them
+    /// ConfigureAwait(true) and ConfigureAwait(false) are indistinguishable.
+    /// </summary>
+    [Theory]
+    [InlineData(".ctor", "chaos_synchronization_context_create")]
+    [InlineData("get_Current", "chaos_synchronization_context_get_current")]
+    [InlineData("SetSynchronizationContext", "chaos_synchronization_context_set_current")]
+    public void SynchronizationContext_Lifecycle_RoutesToNative(string method, string expectedSymbol)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string callee = $"System.Private.CoreLib/System.Threading.SynchronizationContext::{method}()";
+        Assert.True(registry.TryMatchShape(callee, out var entry),
+            $"SynchronizationContext::{method} should match a registered shape");
+        Assert.Equal(expectedSymbol, entry!.NativeFnSymbol);
+    }
+
     // ══════════════════════════════════════════════════════════════════════
     // ASYNC-P2-8 WhenEach — the ORDER-PRESERVING completion stream.
     //

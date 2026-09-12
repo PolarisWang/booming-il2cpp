@@ -105,6 +105,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterCancellationToken(registry);
             RegisterCancellationTokenSource(registry);
             RegisterExecutionContext(registry);
+            RegisterSynchronizationContext(registry);
             RegisterTaskDelay(registry);
             RegisterNullableTget(registry);
             RegisterNullableTGetValueOrDefault(registry);

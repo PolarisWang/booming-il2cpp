@@ -104,6 +104,7 @@ add_library(chaos_runtime_core STATIC
     execution_context.cpp
     execution_context.h
     cancellation_token.cpp
+    synchronization_context.cpp
     cancellation_token.h
     task_runner.cpp
     generic_method_instantiation.cpp

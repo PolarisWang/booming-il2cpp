@@ -257,3 +257,12 @@ chaos_native_add_test(native_static_var_test native_static_var_test.cpp
     ../../../../src/native/runtime-core/static_var_store.cpp
     LABELS "unit;core"
 )
+
+# synchronization_context_test — Phase 3: SynchronizationContext placeholder.
+# Asserts set/get round-trip (the proposition that must hold for the awaiter
+# machinery to distinguish ConfigureAwait(true) from ConfigureAwait(false)),
+# per-thread isolation (thread-affine by definition), and Post/Send invoke.
+chaos_native_add_test(test_synchronization_context
+    synchronization_context_test.cpp
+    LABELS "unit;threading"
+)
