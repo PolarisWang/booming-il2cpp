@@ -1527,6 +1527,47 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// Phase 3: CancellationToken state queries.
+        ///
+        /// A managed CancellationToken is (source_id, version) in this runtime, and the
+        /// value crossing the ABI is the source id; 0 means CancellationToken.None.
+        /// These are the three queries generated code needs to branch on cancellation
+        /// state (the acceptance counter-example is `Task.Delay(10s, ct)` after
+        /// `Cancel()` completing in ~10ms rather than the full 10s).
+        ///
+        /// <para>
+        /// <b>Why CanBeCanceled is not the same question as IsCancellationRequested.</b>
+        /// A live-but-uncancelled token reports CanBeCanceled = true and
+        /// IsCancellationRequested = false; None reports false for both.  Conflating
+        /// them makes ThrowIfCancellationRequested a no-op on real tokens — cancellation
+        /// silently stops working while every "is it cancelled?" test still looks right.
+        /// </para>
+        /// </summary>
+        private static void RegisterCancellationToken(RuntimeHelperShapeRegistry registry)
+        {
+            registry.Register("System.Threading.CancellationToken", "get_IsCancellationRequested", [],
+                ShapeKind.SimpleForward, "chaos_cancellation_token_is_cancellation_requested",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Threading.CancellationToken", "get_CanBeCanceled", [],
+                ShapeKind.SimpleForward, "chaos_cancellation_token_can_be_canceled",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Threading.CancellationToken", "ThrowIfCancellationRequested", [],
+                ShapeKind.SimpleForward, "chaos_cancellation_token_throw_if_cancellation_requested",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+        }
+
+        /// <summary>
         /// Decimal
         /// </summary>
         private static void RegisterDecimal(RuntimeHelperShapeRegistry registry)

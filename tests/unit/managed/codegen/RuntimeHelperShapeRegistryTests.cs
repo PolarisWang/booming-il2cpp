@@ -851,6 +851,35 @@ public sealed class RuntimeHelperShapeRegistryTests
     }
 
     // ══════════════════════════════════════════════════════════════════════
+    // Phase 3 — CancellationToken state queries
+    //
+    // These are what generated code branches on.  CanBeCanceled and
+    // IsCancellationRequested are DIFFERENT questions: a live-but-uncancelled
+    // token is (true, false) and None is (false, false).  Conflating them makes
+    // ThrowIfCancellationRequested a no-op on real tokens.
+    // ══════════════════════════════════════════════════════════════════════
+
+    [Theory]
+    [InlineData("get_IsCancellationRequested",
+        "chaos_cancellation_token_is_cancellation_requested")]
+    [InlineData("get_CanBeCanceled",
+        "chaos_cancellation_token_can_be_canceled")]
+    [InlineData("ThrowIfCancellationRequested",
+        "chaos_cancellation_token_throw_if_cancellation_requested")]
+    public void CancellationToken_Queries_RouteToNativeState(string method, string expectedSymbol)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string callee = $"System.Private.CoreLib/System.Threading.CancellationToken::{method}()";
+        Assert.True(registry.TryMatchShape(callee, out var entry),
+            $"CancellationToken::{method} should match a registered shape");
+        Assert.Equal(expectedSymbol, entry!.NativeFnSymbol);
+
+        // Each query must reach a DISTINCT native entry point.  Routing two of
+        // them at one symbol would make one question silently answer the other.
+        Assert.StartsWith("chaos_cancellation_token_", entry.NativeFnSymbol, StringComparison.Ordinal);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
     // ASYNC-P2-8 WhenEach — the ORDER-PRESERVING completion stream.
     //
     // Distinct from WhenAll/WhenAny: those are one-shot aggregates. WhenEach

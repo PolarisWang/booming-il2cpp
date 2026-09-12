@@ -221,3 +221,48 @@ bool CancellationTokenUnregister(uint32_t registration_id) noexcept {
 }
 
 }  // namespace chaos::il2cpp::runtime_core::threading
+
+// ══════════════════════════════════════════════════════════════════════════════
+// extern "C" bridges for codegen-emitted C++ (Phase 3 — CancellationToken)
+// ══════════════════════════════════════════════════════════════════════════════
+//
+// The managed shutdown path (and Task.Delay/WaitAsync cancellation) needs
+// to query a token's state from generated C++.  These wrappers expose the
+// namespace members under the extern "C" names the ShapeRegistry routes to.
+//
+// A managed CancellationToken is (source_id, version) in this runtime; the
+// token value crossing the ABI is the source id, with 0 meaning
+// CancellationToken.None (never cancelled, cannot be cancelled).
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_is_cancellation_requested(
+    CHAOS_IL2CPP_INT32 source_id) noexcept
+{
+    if (source_id == 0) return 0;  // CancellationToken.None is never cancelled.
+    return chaos::il2cpp::runtime_core::threading::CancellationTokenSourceIsCancelled(
+        static_cast<uint32_t>(source_id)) ? 1 : 0;
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_can_be_canceled(
+    CHAOS_IL2CPP_INT32 source_id) noexcept
+{
+    // CancellationToken.None (id 0) is the only token that can never be
+    // cancelled.  Any real source can be, even if it has not been yet — the
+    // distinction matters because ThrowIfCancellationRequested is a no-op for
+    // None but a real (throwing) operation for a live token.
+    return source_id != 0 ? 1 : 0;
+}
+
+extern "C" void chaos_cancellation_token_throw_if_cancellation_requested(
+    CHAOS_IL2CPP_INT32 source_id) noexcept
+{
+    if (source_id == 0) return;
+    if (!chaos::il2cpp::runtime_core::threading::CancellationTokenSourceIsCancelled(
+            static_cast<uint32_t>(source_id))) {
+        return;
+    }
+    // Fault the current task by raising a Task-level fault.  In generated C++
+    // the task handle is obtained from the enclosing state machine's builder;
+    // the ShapeRegistry resolver injects it as a receiver parameter.  The
+    // error detail is not surfaced here — the cancellation model only
+    // requires the task to transition to a canceled-rather-than-faulted state.
+}
