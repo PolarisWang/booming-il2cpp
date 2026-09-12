@@ -144,6 +144,14 @@ chaos_native_add_test(test_async_continue_when
     LABELS "unit;threading"
 )
 
+# async_stress_test — Phase 5: 100k Task lifecycle + concurrent + deep chain.
+# Links async_stubs.cpp for the task create/completion API surface.
+chaos_native_add_test(test_async_stress
+    async_stress_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    LABELS "unit;threading;stress"
+)
+
 # async_task_factory_test — ASYNC-P2-5: TaskFactory.get_Factory / StartNew.
 # chaos_task_factory_start_new drops the (opaque) factory receiver and forwards
 # the delegate to the production ThreadPool runner, so this links the same
