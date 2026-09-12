@@ -260,15 +260,23 @@ public sealed class AsyncIteratorMemberSurfaceTests
     }
 
     /// <summary>
-    /// The A4 completion criterion's other half: adding support for `YieldOne` must NOT
-    /// silently absorb `YieldAfterAwait`. The latter has an await before its yield, so it
-    /// depends on await-side lowering A4 explicitly does not implement
-    /// (ConfiguredValueTaskAwaiter, CancellationTokenSource wiring). It must remain in
-    /// the explicitly-recorded unsupported set AND still be emitted as a labelled stub —
-    /// "absent" would also be satisfied by a silently-dropped method.
+    /// ASYNC-P2-8 A5: awaited async iterators now lower through the real structured IR path.
+    ///
+    /// <c>YieldAfterAwait</c> uses <c>Task.Yield() → YieldAwaitable/YieldAwaiter</c> (not
+    /// <c>ConfiguredValueTaskAwaiter</c> — that is a <c>Task.WhenEach</c> dependency, not a
+    /// fixture dependency). <c>YieldAwaiter</c> is in <c>AsyncAwaiterCatalog</c> and the
+    /// <c>get_IsCompleted</c>/<c>GetResult</c> registry. The await wiring (builder
+    /// <c>AwaitUnsafeOnCompleted</c>, awaiter field store/load, state save/restore) is
+    /// emitted entirely by the structured IR path from the IL — no new awaiter catalog
+    /// entry is needed for this shape.
+    ///
+    /// This test replaces the A4-era negative assertion
+    /// (<c>YieldAfterAwait_StaysExplicitlyUnsupported</c>). The positive assertions mirror
+    /// <c>YieldOne_IsReallyLoweredWithNativeCompletion</c> and add the await-specific
+    /// components that distinguish an awaited iterator from an await-free one.
     /// </summary>
     [Fact]
-    public void YieldAfterAwait_StaysExplicitlyUnsupported()
+    public void YieldAfterAwait_IsReallyLoweredWithAwaitHandling()
     {
         var outcome = EmitAndCapture("YieldAfterAwait");
 
@@ -279,20 +287,34 @@ public sealed class AsyncIteratorMemberSurfaceTests
         var moveNext = outcome.EmittedMethods
             .FirstOrDefault(s => s.Contains("YieldAfterAwait") && s.Contains("::MoveNext"));
         Assert.True(moveNext is not null,
-            "YieldAfterAwait::MoveNext should still be emitted as an explicitly-labelled "
-            + "stub, not dropped; emitted: " + string.Join(", ", outcome.EmittedMethods));
+            "YieldAfterAwait::MoveNext must be emitted; got: " + string.Join(", ", outcome.EmittedMethods));
 
         var source = outcome.MethodSourceBySubject[moveNext!];
-        Assert.Contains("UNSUPPORTED async iterator", source);
 
-        Assert.Contains(
-            outcome.RecordedUnsupported,
-            s => s.Contains("YieldAfterAwait") && s.Contains("::MoveNext"));
+        // It is NOT the unsupported stub.
+        Assert.DoesNotContain("UNSUPPORTED async iterator", source);
 
-        // It must NOT be recorded as a lowered iterator — that would mean A4 widened its
-        // coverage to a shape it does not handle (the半-lowering / fake-green outcome).
+        // Real control flow: pc-dispatch state machine (try/catch + multi-leave CFG).
+        Assert.Contains("pc-dispatch", source);
+
+        // Cross-partition handoff: region exit resumes at the block its leave named.
+        Assert.Contains("chaos_continuation", source);
+
+        // Completion signals route to the A2 native source WITH the payload forwarded.
+        Assert.Contains("chaos_async_iterator_source_set_result", source);
+
+        // YieldAwaiter-specific wiring: yield/create/get_awaiter/get_is_completed/get_result.
+        // These are emitted by the structured IR path from the IL instructions; their
+        // presence in the emitted C++ proves the await cycle was lowered, not elided.
+        Assert.Contains("chaos_async_yield_create", source);
+        Assert.Contains("chaos_async_yield_get_is_completed", source);
+
+        // The awaiter field (<>u__1) is stored on the state machine with a write barrier.
+        Assert.Contains("chaos_object->field_AsyncIteratorTestAssembly_AsyncIteratorMethods__YieldAfterAwait_d__1____u__1", source);
+
+        // It must NOT be in the unsupported set.
         Assert.DoesNotContain(
-            outcome.LoweredIteratorSubjectIds,
+            outcome.RecordedUnsupported,
             s => s.Contains("YieldAfterAwait") && s.Contains("::MoveNext"));
     }
 

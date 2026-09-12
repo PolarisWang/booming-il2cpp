@@ -1,24 +1,30 @@
-// ASYNC-P2-8 A1: explicit detection + diagnostic for async iterator shapes.
+// ASYNC-P2-8 A1 (detection) + A5 (lowering): async iterator shapes.
 //
-// WHY THIS TEST EXISTS
-// --------------------
+// WHY THIS TEST EXISTS — and how its contract CHANGED in A5
+// ---------------------------------------------------------
 // Before A1, an `async IAsyncEnumerable<T>` method produced NO loud signal. Its
 // AsyncIteratorMethodBuilder calls were unrecognised by the shape registry, so they
 // degraded to a chaos_external_runtime_* stub returning 0 — a silently-wrong
 // iterable that only misbehaves much later (null iterable, or a crash inside
-// await foreach). A1 converts that into an explicit, recorded signal at lowering time.
+// await foreach). A1 converted that into an explicit, recorded signal at lowering time.
 //
-// WHY THE SIGNAL IS A RECORDED LIST, NOT AN EXCEPTION
-// ---------------------------------------------------
-// The first cut of A1 threw NotSupportedException from EmitManagedMethod and these
-// tests asserted the throw. That was WRONG, and the tests failed for the right reason:
-// emission runs behind BuildMethodSourceSafe, which catches EVERY exception and
+// A5 completes the arc: iterators are now REALLY LOWERED, so the recorded signal moved
+// from UnsupportedAsyncIteratorSubjectIds to LoweredAsyncIteratorSubjectIds. The
+// assertions below were rewritten accordingly — as the A1 header said they would be:
+// "they encode today's contract, not a permanent one."
+//
+// What A5 did NOT change: the detection itself. The iterator state machine is still
+// recognised and still recorded; only the LABEL changed from "unsupported" to "lowered".
+// This matters because the two sets are the codegen's only account of which iterator
+// shapes are covered, and a lowering that silently stopped being recorded would be
+// indistinguishable from one that never ran.
+//
+// WHY A RECORDED LIST, NOT AN EXCEPTION (unchanged from A1)
+// ---------------------------------------------------------
+// The first cut of A1 threw NotSupportedException from EmitManagedMethod. That was
+// WRONG: emission runs behind BuildMethodSourceSafe, which catches EVERY exception and
 // substitutes an unreachable stub. The throw was swallowed, the build stayed green, and
 // the "loud failure" was itself a fake green — the exact defect A1 exists to remove.
-//
-// So A1 records the offending subject ids and the generator surfaces them as
-// kUnsupportedAsyncIteratorCount / kUnsupportedAsyncIteratorSubjects in the generated
-// C++. These tests assert on that recorded signal.
 //
 // WHERE THE GUARD LIVES, AND WHY THIS TEST DRIVES THE PLANNER DIRECTLY
 // --------------------------------------------------------------------
@@ -26,13 +32,7 @@
 // during the *emission* stage, which PipelinePlan.Execute does NOT reach for a
 // closure-only request — a first attempt at this test called Execute(), got
 // IsFailure=false, and proved only that the artifact stage was clean, not that the
-// guard worked. (Diagnosed with a temporary probe in EmitManagedMethod: it was never
-// entered.) So the test drives NativeAotLoweringPlanner.Create() directly, the same
-// route AsyncPipelineTests.BuildPlannerForMoveNext uses.
-//
-// These tests assert the DETECTION, not a successful lowering. When A2-A4 land and
-// iterators actually lower, they must be rewritten — that is intentional: they encode
-// today's contract ("we do not support this yet, and we say so"), not a permanent one.
+// guard worked. So the test drives NativeAotLoweringPlanner.Create() directly.
 
 using System;
 using System.Collections.Generic;
@@ -183,75 +183,70 @@ public sealed class AsyncIteratorDetectionTests
         return new EmitOutcome(failure, planner, emission?.GlobalDeclarations ?? string.Empty);
     }
 
-    /// <summary>
-    /// The load-bearing test. Emitting an async-iterator state machine must RECORD the
-    /// subject as unsupported and surface it into the generated C++ — not succeed while
-    /// silently carrying a chaos_external_runtime_* stub (the pre-A1 behaviour).
+/// <summary>
+    /// A5: emitting an async-iterator state machine must record the subject as LOWERED —
+    /// not silently accept it and not silently stub it. The detection channel is the same
+    /// one A1 built; only the label changed (unsupported → lowered) once the lowering
+    /// actually landed.
     ///
     /// <para>
-    /// COUNTEREXAMPLE (决策2=A): comment out the `AsyncMethodKind.AsyncIterator` branch in
-    /// NativeAotLoweringPlanner.MethodEmission.cs (and the IsAsyncIteratorBuilderCallee
-    /// guard in ...ExternalRuntimeHelpers.TypeResolution.cs), rebuild the Generator, and
-    /// re-run. The subject id is then never recorded, the emitted source carries no
-    /// kUnsupportedAsyncIteratorCount and no subject literal, and every assertion below
-    /// goes RED. Verified — see the commit's regression_check.
+    /// COUNTEREXAMPLE (决策2=A): remove the `AsyncMethodKind.AsyncIterator` branch in
+    /// NativeAotLoweringPlanner.MethodEmission.cs, rebuild the Generator, and re-run. The
+    /// subject id is then never recorded and the assertion below goes RED. Verified.
     /// </para>
     /// </summary>
     [Fact]
-    public void AsyncIteratorMoveNext_IsRecordedAndSurfaced_NotSilentlyStubbed()
+    public void AsyncIteratorMoveNext_IsRecordedAsLowered_NotSilentlyStubbed()
     {
         var outcome = EmitAndCapture("YieldOne", "YieldOne");
 
-        // Detection happened at all. A throw would ALSO be swallowed by
-        // BuildMethodSourceSafe in production, so a null here is not itself a pass —
-        // but an exception at this level means the planner is doing something
-        // unmodelled, which the assertions below would misread.
+        // A throw would ALSO be swallowed by BuildMethodSourceSafe in production, so a
+        // null here is not itself a pass — but an exception at this level means the
+        // planner is doing something unmodelled.
         Assert.True(outcome.Failure is null,
-            "Emission of an async iterator must be handled by the A1 branch, not by an "
-            + "uncaught exception at the planner level: "
+            "Emission of an async iterator must not raise an uncaught planner exception: "
             + outcome.Failure?.GetType().Name + ": " + outcome.Failure?.Message);
 
-        var recorded = outcome.Planner.UnsupportedAsyncIteratorSubjectIds;
-        Assert.True(recorded.Count > 0,
-            "Emitting an async-iterator state machine must record the subject as unsupported. "
-            + "An empty list means AsyncIteratorMethodBuilder was silently accepted — the "
-            + "pre-A1 behaviour this change removes.");
+        // A5: recorded in the LOWERED set.
+        var lowered = outcome.Planner.LoweredAsyncIteratorSubjectIds;
+        Assert.True(lowered.Count > 0,
+            "Emitting an async-iterator state machine must record the subject as lowered. "
+            + "An empty list means the iterator was emitted without being accounted for — "
+            + "a lowering that cannot be audited is indistinguishable from one that never ran.");
 
-        // Discriminating assertion: the RECORDED id must be the iterator state machine,
+        // Discriminating assertion: the recorded id must be the iterator state machine,
         // not some incidental other method. Without this, ANY recording would satisfy the
         // test and removing the detection could leave it green — the non-discriminating
         // assertion shape P2-7 fixed.
-        Assert.Contains(recorded, s => s.Contains("YieldOne") && s.Contains(">d__"));
+        Assert.Contains(lowered, s => s.Contains("YieldOne") && s.Contains(">d__"));
 
-        // The signal must reach the generated C++. Asserting on the in-memory list alone
-        // would pass even if EmitUnsupportedAsyncIteratorDeclarations were never called —
-        // i.e. even if the signal went nowhere. This is the assertion that makes the
-        // channel real.
-        Assert.Contains("kUnsupportedAsyncIteratorCount", outcome.GlobalDeclarations);
-        Assert.Contains("kUnsupportedAsyncIteratorSubjects", outcome.GlobalDeclarations);
-        Assert.Contains("YieldOne", outcome.GlobalDeclarations);
-
-        // And it must NOT claim the count is zero while a subject is listed.
-        Assert.DoesNotContain("kUnsupportedAsyncIteratorCount = 0", outcome.GlobalDeclarations);
+        // A5: it must NOT be in the unsupported set. The two sets are the codegen's only
+        // account of coverage; a shape in both would be self-contradictory.
+        Assert.DoesNotContain(
+            outcome.Planner.UnsupportedAsyncIteratorSubjectIds,
+            s => s.Contains("YieldOne") && s.Contains(">d__"));
     }
 
     /// <summary>
     /// Same contract for an iterator that both awaits and yields — the shape
-    /// Task.WhenEach's WhenEachState.Iterate&lt;T&gt; actually uses.
+    /// Task.WhenEach's WhenEachState.Iterate&lt;T&gt; actually uses, and the shape A4
+    /// deliberately left unsupported.
     /// </summary>
     [Fact]
-    public void AsyncIteratorWithAwait_IsRecordedAndSurfaced()
+    public void AsyncIteratorWithAwait_IsRecordedAsLowered()
     {
         var outcome = EmitAndCapture("YieldAfterAwait", "YieldAfterAwait");
 
         Assert.True(outcome.Failure is null,
-            "Emission must be handled by the A1 branch: "
+            "Emission of an awaited async iterator must not raise a planner exception: "
             + outcome.Failure?.GetType().Name + ": " + outcome.Failure?.Message);
 
-        Assert.Contains(outcome.Planner.UnsupportedAsyncIteratorSubjectIds,
+        Assert.Contains(
+            outcome.Planner.LoweredAsyncIteratorSubjectIds,
             s => s.Contains("YieldAfterAwait") && s.Contains(">d__"));
-        Assert.Contains("kUnsupportedAsyncIteratorCount", outcome.GlobalDeclarations);
-        Assert.Contains("YieldAfterAwait", outcome.GlobalDeclarations);
+        Assert.DoesNotContain(
+            outcome.Planner.UnsupportedAsyncIteratorSubjectIds,
+            s => s.Contains("YieldAfterAwait") && s.Contains(">d__"));
     }
 
     /// <summary>
