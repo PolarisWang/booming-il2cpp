@@ -133,6 +133,17 @@ chaos_native_add_test(test_async_when_each
     LABELS "unit;threading"
 )
 
+# async_continue_when_test — TaskFactory.ContinueWhenAll/ContinueWhenAny.
+# The composition's one plausible-but-wrong implementation registers the
+# continuation on each CHILD rather than on the aggregate, firing it once per
+# task.  The tests use three tasks and assert exactly ONE invocation — a
+# single-element array (what a naive test would use) cannot tell them apart.
+chaos_native_add_test(test_async_continue_when
+    async_continue_when_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    LABELS "unit;threading"
+)
+
 # async_task_factory_test — ASYNC-P2-5: TaskFactory.get_Factory / StartNew.
 # chaos_task_factory_start_new drops the (opaque) factory receiver and forwards
 # the delegate to the production ThreadPool runner, so this links the same
