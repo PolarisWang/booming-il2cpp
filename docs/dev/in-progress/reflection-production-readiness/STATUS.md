@@ -90,12 +90,34 @@ roadmap P0–P4 全部子任务已归档至 `docs/dev/completed/reflection-produ
 
 ## 下一步
 
-遗留工作按优先级：
+### 增量推进进度（P3-1 后续，2026-09-12 续）
+
+`real` 档从 26 → **187**（分母 558，覆盖率 4.7% → **33.5%**）。已合入的增量：
+
+| commit | 内容 | real 变化 |
+|---|---|---|
+| `d41dafbad` | CustomAttributeExtensions 接线 + 结构化 EH 补 `stelem.ref` | — |
+| `a61127ab1` | PropertyInfo/EventInfo 描述符访问器 | 73 → 89 |
+| `7844a5307` | Module.Resolve* + ParameterInfo/MethodBase/FieldInfo | 101 → 109 |
+| `d433ce973` | TypeInfo.Declared* + AssemblyName | 109 → 147 |
+| `273de37a7` | Assembly 身份/元数据访问器 | 147 → 168 |
+| `7d8ae9663` | Module 成员查找/身份访问器 | 168 → 187 |
+
+**剩余 211 项 real-planned 构成**：CustomAttributeExtensions（36，managed 接线）、
+PropertyInfo/EventInfo/MethodInfo 剩余项、CustomAttributeData/NamedArgument/
+TypedArgument、TypeInfo 剩余、ModuleResolve 的 `ResolveString`/`ResolveSignature` 等。
+
+### 遗留工作（按优先级）
 
 1. 🔴 **REF-RISK-7 codegen 接线** —— native 基建已就位，需在 codegen 发射方法体时插入 `ChaosReflectionPushExecutingImage`/`PopExecutingImage`。**注意 P1 约束**：应仅对实际引用该访问器的方法插入，避免全量方法热路径开销。
-2. 🔴 **325 项 `real-planned` 访问器实现** —— 按 Phase 3 已建立的 `CHAOS_DEFINE_*_FLAG_ACCESSOR` 模式继续。
+2. 🟡 **211 项 `real-planned` 访问器实现** —— 按已建立的模式继续增量（每批约 20-40 项，隔离 worktree 验证后提交）。
 3. 🟡 flag 位全量重建使 descriptor 携带新位。
 4. 🟡 修复 ATG 参数生成（为反射类型产出有效输入）以解锁 425 个 `[UNVERIFIED]`。
 5. 🟡 将语义断言接入 Chaos AOT 路径。
+
+### 协作注意（本仓库多 agent 并发）
+
+- `main` 工作树的 index 常被并行 async 线占用，导致 `git rebase` 受阻（`git stash` 项目规则禁用）。改用 **`git merge origin/main`** 或 **`git worktree add --detach`** 隔离验证。
+- 构建偶被并行线的在制品阻断（如 async 线的 `chaos_continuation` 未声明、此前的 `chaos_tcs_set_canceled` 重复定义）。此时用 worktree 基于自己的父提交验证，并在 commit message 中如实记录。
 
 **建议入口**：新建 roadmap 子任务承接上述遗留，或按用户优先级另立任务。
