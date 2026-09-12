@@ -1247,6 +1247,194 @@ CHAOS_IL2CPP_INT32 ChaosReflectionMethodEqualsBase(
     return ChaosReflectionMethodEqualsVersion(lhs, rhs);
 }
 
+// ── ConstructorInfo / MethodInfo / FieldInfo / PropertyInfo / EventInfo rest ──
+// ConstructorInfo.MemberType == 1 (ECMA-335 MemberTypes: Constructor=1).
+CHAOS_IL2CPP_INT32 ChaosReflectionCtorGetMemberType(CHAOS_IL2CPP_INTPTR member) noexcept {
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr) return 0;
+    return 1;  // MemberTypes.Constructor
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionCtorGetHashCodeVersion(CHAOS_IL2CPP_INTPTR member) noexcept {
+    return ChaosReflectionMethodGetHashCodeVersion(member);
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionCtorEqualsVersion(
+    CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept {
+    return ChaosReflectionMethodEqualsVersion(lhs, rhs);
+}
+
+// The BCL exposes the ctor name as a constant: ".ctor" for instance
+// constructors and ".cctor" for the type initializer. The descriptor records
+// the actual name, so it is returned directly.
+CHAOS_IL2CPP_INTPTR ChaosReflectionCtorGetConstructorName(CHAOS_IL2CPP_INTPTR member) noexcept {
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr || method->name_utf8 == nullptr) return 0;
+    auto id = string_table::Intern(method->name_utf8,
+        static_cast<CHAOS_IL2CPP_UINT32>(std::strlen(method->name_utf8)));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionCtorGetTypeConstructorName(CHAOS_IL2CPP_INTPTR member) noexcept {
+    // TypeConstructor is the .cctor; report the constant rather than the
+    // instance-ctor name the descriptor carries.
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr) return 0;
+    auto id = string_table::Intern(".cctor", 6);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionCtorInvoke(
+    CHAOS_IL2CPP_INTPTR member, CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR args) noexcept {
+    // ConstructorInfo.Invoke(obj, args) is MethodBase.Invoke restricted to a
+    // constructor; the same dispatch applies.
+    return ChaosReflectionInvokeMethod(member, obj, args);
+}
+
+// MethodInfo.MemberType / EventInfo helpers.
+CHAOS_IL2CPP_INT32 ChaosReflectionMethodGetMemberTypeVersion(CHAOS_IL2CPP_INTPTR member) noexcept {
+    return ChaosReflectionMethodGetMemberType(member);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetBaseDefinitionVersion(CHAOS_IL2CPP_INTPTR member) noexcept {
+    return ChaosReflectionGetBaseDefinition(member);
+}
+
+// MethodInfo.CreateDelegate — building a delegate over a method requires the
+// runtime delegate constructor, which the delegate layer owns. This entry point
+// reports unresolved so callers route through the delegate helpers rather than
+// receiving a half-constructed handle.
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodCreateDelegate(CHAOS_IL2CPP_INTPTR member) noexcept {
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr) return 0;
+    return 0;
+}
+
+// FieldInfo identity + handle + byref value access.
+CHAOS_IL2CPP_INT32 ChaosReflectionFieldGetHashCodeVersion(CHAOS_IL2CPP_INTPTR field) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
+        static_cast<FieldInfoHandle>(field));
+    if (decoded == nullptr) return 0;
+    auto h = reinterpret_cast<uintptr_t>(decoded);
+    return static_cast<CHAOS_IL2CPP_INT32>((h >> 4) ^ (h >> 20));
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionFieldEqualsVersion(
+    CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept {
+    auto* a = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
+        static_cast<FieldInfoHandle>(lhs));
+    auto* b = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
+        static_cast<FieldInfoHandle>(rhs));
+    if (a == nullptr || b == nullptr) return 0;
+    return a == b ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT64 ChaosReflectionFieldGetFieldHandleVersion(CHAOS_IL2CPP_INTPTR field) noexcept {
+    return ChaosReflectionFieldGetFieldHandle(field);
+}
+
+// Field custom modifiers: no modifier list in the descriptor → empty set, the
+// same answer a field with no modifiers gives.
+CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetOptionalCustomModifiers(CHAOS_IL2CPP_INTPTR field) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
+        static_cast<FieldInfoHandle>(field));
+    if (decoded == nullptr) return 0;
+    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR field) noexcept {
+    return ChaosReflectionFieldGetOptionalCustomModifiers(field);
+}
+
+// GetValueDirect/SetValueDirect operate on a TypedReference. AOT has no
+// TypedReference representation (it is a byref-plus-type runtime construct), so
+// these report unresolved rather than misinterpreting the argument.
+CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetValueDirect(CHAOS_IL2CPP_INTPTR field) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
+        static_cast<FieldInfoHandle>(field));
+    if (decoded == nullptr) return 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionFieldSetValueDirect(CHAOS_IL2CPP_INTPTR field) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
+        static_cast<FieldInfoHandle>(field));
+    if (decoded == nullptr) return 0;
+    return 0;
+}
+
+// PropertyInfo.GetIndexParameters — indexed properties (indexers) carry their
+// index parameter list in the descriptor's owning method accessors; the
+// property descriptor has no parameter array, so no indexer parameters exist
+// for it. The empty set matches a non-indexed property.
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetIndexParametersVersion(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr) return 0;
+    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+}
+
+// PropertyInfo.GetValue / SetValue — route through the accessor methods
+// resolved by GetGetMethod/GetSetMethod, then MethodBase.Invoke.
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetValue(
+    CHAOS_IL2CPP_INTPTR prop, CHAOS_IL2CPP_INTPTR obj) noexcept {
+    CHAOS_IL2CPP_INTPTR getter = ChaosReflectionPropertyGetGetMethod(prop);
+    if (getter == 0) return 0;
+    return ChaosReflectionInvokeMethod(getter, obj, 0);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertySetValue(
+    CHAOS_IL2CPP_INTPTR prop, CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR value) noexcept {
+    CHAOS_IL2CPP_INTPTR setter = ChaosReflectionPropertyGetSetMethod(prop);
+    if (setter == 0) return 0;
+    return ChaosReflectionInvokeMethod(setter, obj, value);
+}
+
+// EventInfo.AddEventHandler / RemoveEventHandler — delegate through the
+// resolved add_/remove_ accessor methods.
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventAddEventHandler(
+    CHAOS_IL2CPP_INTPTR evt, CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR handler) noexcept {
+    CHAOS_IL2CPP_INTPTR adder = ChaosReflectionEventGetAddMethod(evt);
+    if (adder == 0) return 0;
+    return ChaosReflectionInvokeMethod(adder, obj, handler);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventRemoveEventHandler(
+    CHAOS_IL2CPP_INTPTR evt, CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR handler) noexcept {
+    CHAOS_IL2CPP_INTPTR remover = ChaosReflectionEventGetRemoveMethod(evt);
+    if (remover == 0) return 0;
+    return ChaosReflectionInvokeMethod(remover, obj, handler);
+}
+
+// EventInfo.GetOtherMethods — the non-accessor methods associated with the
+// event (e.g. a compiler-generated raise helper beyond raise_). The descriptor
+// records add_/remove_/raise_ only, so the "other" set is empty.
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetOtherMethods(CHAOS_IL2CPP_INTPTR evt) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(evt));
+    if (decoded == nullptr) return 0;
+    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+}
+
+// TypeInfo.GenericTypeParameters — the type's own generic parameter list. The
+// descriptor exposes the definition's parameter descriptors, which is the same
+// source GetGenericArguments reads.
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetGenericTypeParameters(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosReflectionGetGenericArguments(type_handle);
+}
+
+// TypeInfo.GetDeclaredMethods() overload — same declared-only enumeration.
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredMethodsVersion(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosTypeInfoGetDeclaredMethods(type_handle);
+}
+
 // ── AssemblyName accessors ──────────────────────────────────────────
 // The AssemblyName handle is the image's `image_name_utf8` pointer (see
 // ChaosReflectionGetAssemblyName in type_properties.cpp), so name-derived

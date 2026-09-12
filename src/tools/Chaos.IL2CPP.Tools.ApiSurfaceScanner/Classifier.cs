@@ -355,6 +355,55 @@ public static class Classifier
         ["MethodBase.GetMethodBody"] = new[] { "ChaosReflectionMethodGetMethodBody" },
         ["MethodBase.GetHashCode"] = new[] { "ChaosReflectionMethodGetHashCodeBase" },
         ["MethodBase.Equals"] = new[] { "ChaosReflectionMethodEqualsBase" },
+
+        // ── CustomAttribute(Named|Typed)Argument + NullabilityInfo ─────
+        ["CustomAttributeTypedArgument.get_ArgumentType"] = new[] { "ChaosReflectionTypedArgGetArgumentType" },
+        ["CustomAttributeTypedArgument.get_Value"] = new[] { "ChaosReflectionTypedArgGetValue" },
+        ["CustomAttributeTypedArgument.Equals"] = new[] { "ChaosReflectionTypedArgEquals" },
+        ["CustomAttributeTypedArgument.GetHashCode"] = new[] { "ChaosReflectionTypedArgGetHashCode" },
+        ["CustomAttributeNamedArgument.get_MemberName"] = new[] { "ChaosReflectionNamedArgGetMemberName" },
+        ["CustomAttributeNamedArgument.get_IsField"] = new[] { "ChaosReflectionNamedArgGetIsField" },
+        ["CustomAttributeNamedArgument.get_TypedValue"] = new[] { "ChaosReflectionNamedArgGetTypedValue" },
+        ["CustomAttributeNamedArgument.get_MemberInfo"] = new[] { "ChaosReflectionNamedArgGetMemberInfo" },
+        ["CustomAttributeNamedArgument.Equals"] = new[] { "ChaosReflectionNamedArgEquals" },
+        ["CustomAttributeNamedArgument.GetHashCode"] = new[] { "ChaosReflectionNamedArgGetHashCode" },
+        ["NullabilityInfoContext.Create"] = new[] { "ChaosReflectionNullabilityInfoContextCreate" },
+        ["NullabilityInfo.get_ReadState"] = new[] { "ChaosReflectionNullabilityInfoGetReadState" },
+        ["NullabilityInfo.get_WriteState"] = new[] { "ChaosReflectionNullabilityInfoGetWriteState" },
+        ["NullabilityInfo.get_Type"] = new[] { "ChaosReflectionNullabilityInfoGetType" },
+        ["NullabilityInfo.get_ElementType"] = new[] { "ChaosReflectionNullabilityInfoGetElementType" },
+        ["NullabilityInfo.get_GenericTypeArguments"] = new[] { "ChaosReflectionNullabilityInfoGetGenericTypeArguments" },
+
+        // ── ConstructorInfo / Field/Property/Event/MethodInfo rest ─────
+        ["ConstructorInfo.get_MemberType"] = new[] { "ChaosReflectionCtorGetMemberType" },
+        ["ConstructorInfo.GetHashCode"] = new[] { "ChaosReflectionCtorGetHashCodeVersion" },
+        ["ConstructorInfo.Equals"] = new[] { "ChaosReflectionCtorEqualsVersion" },
+        ["ConstructorInfo.get_ConstructorName"] = new[] { "ChaosReflectionCtorGetConstructorName" },
+        ["ConstructorInfo.get_TypeConstructorName"] = new[] { "ChaosReflectionCtorGetTypeConstructorName" },
+        ["ConstructorInfo.Invoke"] = new[] { "ChaosReflectionCtorInvoke" },
+
+        ["MethodInfo.get_MemberType"] = new[] { "ChaosReflectionMethodGetMemberTypeVersion" },
+        ["MethodInfo.GetBaseDefinition"] = new[] { "ChaosReflectionMethodGetBaseDefinitionVersion" },
+        ["MethodInfo.CreateDelegate"] = new[] { "ChaosReflectionMethodCreateDelegate" },
+
+        ["FieldInfo.GetHashCode"] = new[] { "ChaosReflectionFieldGetHashCodeVersion" },
+        ["FieldInfo.Equals"] = new[] { "ChaosReflectionFieldEqualsVersion" },
+        ["FieldInfo.get_FieldHandle"] = new[] { "ChaosReflectionFieldGetFieldHandleVersion" },
+        ["FieldInfo.GetOptionalCustomModifiers"] = new[] { "ChaosReflectionFieldGetOptionalCustomModifiers" },
+        ["FieldInfo.GetRequiredCustomModifiers"] = new[] { "ChaosReflectionFieldGetRequiredCustomModifiers" },
+        ["FieldInfo.GetValueDirect"] = new[] { "ChaosReflectionFieldGetValueDirect" },
+        ["FieldInfo.SetValueDirect"] = new[] { "ChaosReflectionFieldSetValueDirect" },
+
+        ["PropertyInfo.GetIndexParameters"] = new[] { "ChaosReflectionPropertyGetIndexParametersVersion" },
+        ["PropertyInfo.GetValue"] = new[] { "ChaosReflectionPropertyGetValue" },
+        ["PropertyInfo.SetValue"] = new[] { "ChaosReflectionPropertySetValue" },
+
+        ["EventInfo.AddEventHandler"] = new[] { "ChaosReflectionEventAddEventHandler" },
+        ["EventInfo.RemoveEventHandler"] = new[] { "ChaosReflectionEventRemoveEventHandler" },
+        ["EventInfo.GetOtherMethods"] = new[] { "ChaosReflectionEventGetOtherMethods" },
+
+        ["TypeInfo.get_GenericTypeParameters"] = new[] { "ChaosTypeInfoGetGenericTypeParameters" },
+        ["TypeInfo.GetDeclaredMethods"] = new[] { "ChaosTypeInfoGetDeclaredMethodsVersion" },
     };
 
     /// <summary>

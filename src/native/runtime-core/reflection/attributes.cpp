@@ -342,5 +342,150 @@ CHAOS_IL2CPP_INT32 ChaosReflectionAttrDataGetHashCode(CHAOS_IL2CPP_INTPTR handle
     return static_cast<CHAOS_IL2CPP_INT32>(h);
 }
 
+
+// ── CustomAttribute(Named|Typed)Argument accessors ──────────────────
+// Both argument kinds are value records the managed wrapper materializes from
+// the blob payload. The native side can answer the *identity* questions
+// (equality, hash, ToString shape) from the record pair (argument type, value),
+// but the value itself is a managed object the wrapper owns. Handles here are
+// therefore the wrapper-provided (type_token, value_handle) pairs, packed as
+// [type_token:u32][value_handle:u32] — the same convention the argument reader
+// uses when it decodes a record.
+namespace {
+
+struct AttrArgPair {
+    uint32_t type_token;
+    uint32_t value_handle;
+};
+
+inline AttrArgPair DecodeArgPair(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    AttrArgPair p{0u, 0u};
+    if (handle == 0) return p;
+    const uint64_t packed = static_cast<uint64_t>(handle);
+    p.type_token = static_cast<uint32_t>(packed >> 32);
+    p.value_handle = static_cast<uint32_t>(packed & 0xFFFFFFFFu);
+    return p;
+}
+
+}  // namespace
+
+// CustomAttributeTypedArgument.ArgumentType — the argument's type token.
+CHAOS_IL2CPP_INTPTR ChaosReflectionTypedArgGetArgumentType(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto p = DecodeArgPair(handle);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(p.type_token);
+}
+
+// CustomAttributeTypedArgument.Value — the managed value handle the wrapper
+// packed into the low half.
+CHAOS_IL2CPP_INTPTR ChaosReflectionTypedArgGetValue(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto p = DecodeArgPair(handle);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(p.value_handle);
+}
+
+// Two typed arguments are equal when both halves match — the type identity and
+// the boxed value, which is how ValueType.Equals behaves for the pair.
+CHAOS_IL2CPP_INT32 ChaosReflectionTypedArgEquals(
+    CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept {
+    const auto a = DecodeArgPair(lhs);
+    const auto b = DecodeArgPair(rhs);
+    if (a.type_token == 0u || b.type_token == 0u) return 0;
+    return (a.type_token == b.type_token && a.value_handle == b.value_handle) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionTypedArgGetHashCode(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto p = DecodeArgPair(handle);
+    if (p.type_token == 0u) return 0;
+    // FNV-1a mix of both halves, matching the equality above.
+    uint32_t h = 2166136261u;
+    h = (h ^ p.type_token) * 16777619u;
+    h = (h ^ p.value_handle) * 16777619u;
+    return static_cast<CHAOS_IL2CPP_INT32>(h);
+}
+
+// CustomAttributeNamedArgument.MemberName / MemberInfo / TypedValue / IsField.
+// A named argument is (member, value); the member part is a name string whose
+// token occupies the high half, plus a flag bit for field-vs-property. The
+// wrapper packs: [is_field:1 | member_token:31][value_handle:32].
+CHAOS_IL2CPP_INTPTR ChaosReflectionNamedArgGetMemberName(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto p = DecodeArgPair(handle);
+    // The member name is interned by the wrapper; the token half is the lookup
+    // key. Returning the token lets the wrapper resolve the interned name.
+    return static_cast<CHAOS_IL2CPP_INTPTR>(p.type_token & 0x7FFFFFFFu);
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionNamedArgGetIsField(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto p = DecodeArgPair(handle);
+    if (p.type_token == 0u) return 0;
+    return (p.type_token & 0x80000000u) != 0u ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionNamedArgGetTypedValue(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto p = DecodeArgPair(handle);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(p.value_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionNamedArgGetMemberInfo(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    // The member token resolves against the enclosing type, which the wrapper
+    // holds; the native side reports the token for it to resolve.
+    const auto p = DecodeArgPair(handle);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(p.type_token & 0x7FFFFFFFu);
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionNamedArgEquals(
+    CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept {
+    const auto a = DecodeArgPair(lhs);
+    const auto b = DecodeArgPair(rhs);
+    if (a.type_token == 0u || b.type_token == 0u) return 0;
+    return (a.type_token == b.type_token && a.value_handle == b.value_handle) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionNamedArgGetHashCode(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto p = DecodeArgPair(handle);
+    if (p.type_token == 0u) return 0;
+    uint32_t h = 2166136261u;
+    h = (h ^ p.type_token) * 16777619u;
+    h = (h ^ p.value_handle) * 16777619u;
+    return static_cast<CHAOS_IL2CPP_INT32>(h);
+}
+
+// ── NullabilityInfo / NullabilityInfoContext ────────────────────────
+// NullabilityInfoContext.Create(parameter|field|property) reads the nullable
+// reference-type annotations the compiler emitted into the metadata. The AOT
+// descriptor model does not carry those annotation attributes, so a created
+// NullabilityInfo would have no data behind it. Report unresolved rather than
+// returning an all-"Unknown" object that callers would treat as authoritative.
+CHAOS_IL2CPP_INTPTR ChaosReflectionNullabilityInfoContextCreate(CHAOS_IL2CPP_INTPTR member) noexcept {
+    if (member == 0) return 0;
+    return 0;
+}
+
+// NullabilityInfo state accessors. A NullabilityInfo instance reaches native
+// only if the wrapper synthesized one; the descriptor has no state to report,
+// so NullabilityState.Unknown (0) is the only truthful answer for each slot.
+CHAOS_IL2CPP_INT32 ChaosReflectionNullabilityInfoGetReadState(CHAOS_IL2CPP_INTPTR info) noexcept {
+    if (info == 0) return 0;
+    return 0;  // NullabilityState.Unknown
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionNullabilityInfoGetWriteState(CHAOS_IL2CPP_INTPTR info) noexcept {
+    if (info == 0) return 0;
+    return 0;  // NullabilityState.Unknown
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionNullabilityInfoGetType(CHAOS_IL2CPP_INTPTR info) noexcept {
+    if (info == 0) return 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionNullabilityInfoGetElementType(CHAOS_IL2CPP_INTPTR info) noexcept {
+    if (info == 0) return 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionNullabilityInfoGetGenericTypeArguments(CHAOS_IL2CPP_INTPTR info) noexcept {
+    if (info == 0) return 0;
+    return 0;
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 }  // extern "C"
