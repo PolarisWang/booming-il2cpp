@@ -41,7 +41,8 @@ internal static class RepoRootLocator
     public static string Find(string startDirectory)
     {
         var dir = new DirectoryInfo(startDirectory);
-        while (dir != null && !File.Exists(Path.Combine(dir.FullName, ".git")))
+        while (dir != null && !File.Exists(Path.Combine(dir.FullName, ".git"))
+            && !Directory.Exists(Path.Combine(dir.FullName, ".git")))
         {
             dir = dir.Parent;
         }

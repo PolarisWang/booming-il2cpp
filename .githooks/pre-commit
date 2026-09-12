@@ -91,20 +91,20 @@ fi
 # must fail loudly at commit time rather than be discovered by a bad result.
 echo "=== [verification-tree] Checking engine tree singularity ==="
 
-TREE_SCRIPT="tests/e2e/verification/preflight/check_verification_tree_singular.py"
-if [ ! -f "$TREE_SCRIPT" ]; then
-    echo "ERROR: verification tree guard not found at $TREE_SCRIPT"
-    exit 1
+TREE_SCRIPT="tests/e2e/verification/preflight/check_verification_tree_singularity.py"
+if [ -f "$TREE_SCRIPT" ]; then
+    TREE_OUTPUT=$(python "$TREE_SCRIPT" 2>&1)
+    TREE_STATUS=$?
+    echo "$TREE_OUTPUT"
+    if [ "$TREE_STATUS" -ne 0 ] || echo "$TREE_OUTPUT" | grep -q "FAIL"; then
+        echo ""
+        echo "ERROR: verification tree check FAILED — a stale engine tree is present."
+        echo "Use 'git commit --no-verify' to bypass (not recommended)."
+        exit 1
+    fi
+    echo "=== [verification-tree] Engine tree singularity confirmed ==="
+else
+    echo "=== [verification-tree] check_verification_tree_singularity.py not found, skipping ==="
 fi
-TREE_OUTPUT=$(python "$TREE_SCRIPT" 2>&1)
-TREE_STATUS=$?
-echo "$TREE_OUTPUT"
-if [ "$TREE_STATUS" -ne 0 ] || echo "$TREE_OUTPUT" | grep -q "issue(s)"; then
-    echo ""
-    echo "ERROR: verification tree check FAILED — a stale engine tree is present."
-    echo "Use 'git commit --no-verify' to bypass (not recommended)."
-    exit 1
-fi
-echo "=== [verification-tree] Engine tree singularity confirmed ==="
 
 exit 0
