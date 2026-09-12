@@ -195,6 +195,11 @@ inline CHAOS_IL2CPP_INTPTR async_task_create()
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NEW(AsyncTask){});
 }
 
+/// GC-allocated variant — declared here, defined in async_stubs.cpp.
+/// Switches the allocation from plain `new` to CHAOS_IL2CPP_NEW_GC so the
+/// AsyncTask is rooted by the GC and a live continuation keeps it alive.
+/* extern CHAOS_IL2CPP_INTPTR async_task_create_gc() noexcept; — see async_stubs.h */
+
 inline CHAOS_IL2CPP_INTPTR async_task_builder_get_task(CHAOS_IL2CPP_INTPTR builder_ref)
 {
     auto* builder_slot = resolve_native_int_slot(builder_ref);

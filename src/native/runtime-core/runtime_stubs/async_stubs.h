@@ -121,6 +121,13 @@ CHAOS_IL2CPP_INT32 chaos_value_task_is_canceled(CHAOS_IL2CPP_INTPTR vt_handle) n
 CHAOS_IL2CPP_INTPTR chaos_value_task_as_task(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_value_task_get_awaiter(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
 
+// Phase 6: GC-allocated AsyncTask.  Switches allocation from plain `new`
+// to CHAOS_IL2CPP_NEW_GC so the GC roots the task and a live continuation
+// prevents collection.  Used by concrete paths (async_stubs.cpp, task_runner)
+// that link the GC allocator.  The header-only inline (async.h:189) keeps
+// plain `new` for standalone TU compatibility.
+CHAOS_IL2CPP_INTPTR async_task_create_gc() noexcept;
+
 // TaskExtensions.Unwrap — flatten Task<Task<T>> to Task<T>.  The outer task's
 // result is the inner handle, so this is the identity once the outer completed;
 // the entry point exists so the call does not fall through to a numeric

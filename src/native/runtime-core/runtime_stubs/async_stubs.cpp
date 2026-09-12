@@ -22,6 +22,15 @@
 #include <chrono>
 #include <thread>
 
+// Phase 6: GC-allocated AsyncTask.  Defined here (not in the header) because
+// the GC allocator macros are only available to TUs that link the GC runtime;
+// async.h stays header-only so standalone subject/fixture TUs keep compiling.
+CHAOS_IL2CPP_INTPTR async_task_create_gc() noexcept
+{
+    auto* task = CHAOS_IL2CPP_NEW_GC(chaos::il2cpp::common::AsyncTask);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task);
+}
+
 #include <cstdint>
 #include <new>
 #include <mutex>

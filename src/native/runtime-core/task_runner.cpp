@@ -13,6 +13,8 @@
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
+#include "async_stubs.h"
+
 #include <cstdlib>
 #include <new>
 
@@ -53,7 +55,11 @@ static void TaskRunCallback(void* state) noexcept {
 CHAOS_IL2CPP_INTPTR TaskRun(CHAOS_IL2CPP_INTPTR delegate_fn) noexcept {
     if (delegate_fn == 0) return 0;
 
-    CHAOS_IL2CPP_INTPTR handle = chaos::il2cpp::common::async_task_create();
+    // Phase 6: GC-allocated so a live continuation (which stores the handle)
+    // roots the task for the GC.  Falls back to the plain-new header inline
+    // only if the GC path is unavailable.
+    CHAOS_IL2CPP_INTPTR handle = async_task_create_gc();
+    if (handle == 0) return 0;
     auto* task = chaos::il2cpp::common::require_async_task(handle);
 
     auto* ctx = new (std::nothrow) TaskRunContext();
