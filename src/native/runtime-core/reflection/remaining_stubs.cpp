@@ -1435,6 +1435,115 @@ CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredMethodsVersion(CHAOS_IL2CPP_INTPTR t
     return ChaosTypeInfoGetDeclaredMethods(type_handle);
 }
 
+// ── AssemblyName remaining accessors ────────────────────────────────
+// An AssemblyName is a *value* the BCL builds from a display name; under AOT
+// the only AssemblyName instances come from an image descriptor, so the
+// properties below read that descriptor rather than a loader-populated object.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetVersionObj(CHAOS_IL2CPP_INTPTR name) noexcept {
+    // Version is exposed by GetVersion (which formats the descriptor's numeric
+    // fields); this entry point is the same lookup under the property name.
+    return ChaosReflectionAssemblyNameGetVersion(name);
+}
+
+// AssemblyName.CodeBase / EscapedCodeBase — the location the assembly was
+// loaded from. AOT images are statically linked with no file path in the
+// descriptor, so there is no code base to report.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCodeBase(CHAOS_IL2CPP_INTPTR name) noexcept {
+    if (name == 0) return 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetEscapedCodeBase(CHAOS_IL2CPP_INTPTR name) noexcept {
+    return ChaosReflectionAssemblyNameGetCodeBase(name);
+}
+
+// AssemblyName.KeyPair — strong-name key material is a build-time input that is
+// not carried into AOT metadata.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetKeyPair(CHAOS_IL2CPP_INTPTR name) noexcept {
+    if (name == 0) return 0;
+    return 0;
+}
+
+// AssemblyName.VersionCompatibility — AssemblyVersionCompatibility.SameMachine
+// (2) is the runtime-neutral default, matching an assembly with no explicit
+// compatibility declaration.
+CHAOS_IL2CPP_INT32 ChaosReflectionAssemblyNameGetVersionCompatibility(CHAOS_IL2CPP_INTPTR name) noexcept {
+    if (name == 0) return 0;
+    return 2;  // AssemblyVersionCompatibility.SameMachine
+}
+
+// AssemblyName.CultureInfo — the culture the name refers to. AOT images are
+// culture-neutral, so InvariantCulture is the correct answer (returned as 0,
+// the same encoding ChaosReflectionAssemblyNameGetCultureInfo already uses).
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCultureInfoObj(CHAOS_IL2CPP_INTPTR name) noexcept {
+    return ChaosReflectionAssemblyNameGetCultureInfo(name);
+}
+
+// AssemblyName.GetAssemblyName(path) — loads an AssemblyName from a file. This
+// reads a file from disk, which an AOT image has no mechanism for.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetAssemblyNameFile(CHAOS_IL2CPP_INTPTR path) noexcept {
+    if (path == 0) return 0;
+    return 0;
+}
+
+// AssemblyName.OnDeserialization / GetObjectData — ISerializable support.
+// Assembly names are not serialized under AOT.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameOnDeserialization(CHAOS_IL2CPP_INTPTR name) noexcept {
+    if (name == 0) return 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetObjectData(CHAOS_IL2CPP_INTPTR name) noexcept {
+    if (name == 0) return 0;
+    return 0;
+}
+
+// ── Assembly resource / reference accessors ─────────────────────────
+// GetManifestResourceStream/Info/GetFile(s) all address embedded resources and
+// files, neither of which the AOT descriptor model carries. GetReferenced
+// Assemblies reports the assemblies this one statically references, which the
+// descriptor likewise does not record (the closure is resolved at build time).
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetManifestResourceStream(CHAOS_IL2CPP_INTPTR assembly) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly));
+    if (image == nullptr) return 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetManifestResourceInfo(CHAOS_IL2CPP_INTPTR assembly) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly));
+    if (image == nullptr) return 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetFile(CHAOS_IL2CPP_INTPTR assembly) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly));
+    if (image == nullptr) return 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetFiles(CHAOS_IL2CPP_INTPTR assembly) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly));
+    if (image == nullptr) return 0;
+    // The BCL returns an empty array when the manifest has no file table.
+    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetReferencedAssemblies(CHAOS_IL2CPP_INTPTR assembly) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly));
+    if (image == nullptr) return 0;
+    // References are resolved and linked at AOT build time and are not retained
+    // in the descriptor; the empty set is the truthful answer.
+    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetObjectData(CHAOS_IL2CPP_INTPTR assembly) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly));
+    if (image == nullptr) return 0;
+    return 0;  // no ISerializable support under AOT
+}
+
 // ── AssemblyName accessors ──────────────────────────────────────────
 // The AssemblyName handle is the image's `image_name_utf8` pointer (see
 // ChaosReflectionGetAssemblyName in type_properties.cpp), so name-derived

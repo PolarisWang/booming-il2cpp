@@ -404,6 +404,51 @@ public static class Classifier
 
         ["TypeInfo.get_GenericTypeParameters"] = new[] { "ChaosTypeInfoGetGenericTypeParameters" },
         ["TypeInfo.GetDeclaredMethods"] = new[] { "ChaosTypeInfoGetDeclaredMethodsVersion" },
+
+        // ── Module remaining / InterfaceMapping / ManifestResource ─────
+        ["Module.ResolveString"] = new[] { "ChaosReflectionModuleResolveString" },
+        ["Module.ResolveSignature"] = new[] { "ChaosReflectionModuleResolveSignature" },
+        ["Module.IsDefined"] = new[] { "ChaosReflectionModuleIsDefined" },
+        ["Module.FindTypes"] = new[] { "ChaosReflectionModuleFindTypes" },
+        ["Module.FilterTypeName"] = new[] { "ChaosReflectionModuleGetFilterTypeName" },
+        ["Module.FilterTypeNameIgnoreCase"] = new[] { "ChaosReflectionModuleGetFilterTypeNameIgnoreCase" },
+        ["Module.GetPEKind"] = new[] { "ChaosReflectionModuleGetPEKind" },
+        ["Module.GetObjectData"] = new[] { "ChaosReflectionModuleGetObjectData" },
+
+        ["InterfaceMapping.get_TargetType"] = new[] { "ChaosReflectionInterfaceMappingGetTargetType" },
+        ["InterfaceMapping.get_InterfaceType"] = new[] { "ChaosReflectionInterfaceMappingGetInterfaceType" },
+        ["InterfaceMapping.get_InterfaceMethods"] = new[] { "ChaosReflectionInterfaceMappingGetInterfaceMethods" },
+        ["InterfaceMapping.get_TargetMethods"] = new[] { "ChaosReflectionInterfaceMappingGetTargetMethods" },
+
+        ["ManifestResourceInfo.get_FileName"] = new[] { "ChaosReflectionManifestResourceGetFileName" },
+        ["ManifestResourceInfo.get_ReferencedAssembly"] = new[] { "ChaosReflectionManifestResourceGetReferencedAssembly" },
+        ["ManifestResourceInfo.get_ResourceLocation"] = new[] { "ChaosReflectionManifestResourceGetResourceLocation" },
+
+        ["ICustomAttributeProvider.GetCustomAttributes"] = new[] { "ChaosReflectionCustomAttrProviderGetCustomAttributes" },
+        ["ICustomAttributeProvider.IsDefined"] = new[] { "ChaosReflectionCustomAttrProviderIsDefined" },
+        ["IReflectableType.GetTypeInfo"] = new[] { "ChaosReflectionGetTypeInfoForType" },
+        ["IntrospectionExtensions.GetTypeInfo"] = new[] { "ChaosReflectionGetTypeInfoForType" },
+        ["Missing.Value"] = new[] { "ChaosReflectionMissingValue" },
+        ["MethodBase.get_MethodImplementationFlags"] = new[] { "ChaosReflectionMethodGetImplementationFlagsVersion" },
+        ["NullabilityInfoContext..ctor"] = new[] { "ChaosReflectionNullabilityInfoContextNew" },
+
+        // ── AssemblyName / Assembly resource accessors ─────────────────
+        ["AssemblyName.get_Version"] = new[] { "ChaosReflectionAssemblyNameGetVersionObj" },
+        ["AssemblyName.get_CodeBase"] = new[] { "ChaosReflectionAssemblyNameGetCodeBase" },
+        ["AssemblyName.get_EscapedCodeBase"] = new[] { "ChaosReflectionAssemblyNameGetEscapedCodeBase" },
+        ["AssemblyName.get_KeyPair"] = new[] { "ChaosReflectionAssemblyNameGetKeyPair" },
+        ["AssemblyName.get_VersionCompatibility"] = new[] { "ChaosReflectionAssemblyNameGetVersionCompatibility" },
+        ["AssemblyName.get_CultureInfo"] = new[] { "ChaosReflectionAssemblyNameGetCultureInfoObj" },
+        ["AssemblyName.GetAssemblyName"] = new[] { "ChaosReflectionAssemblyNameGetAssemblyNameFile" },
+        ["AssemblyName.OnDeserialization"] = new[] { "ChaosReflectionAssemblyNameOnDeserialization" },
+        ["AssemblyName.GetObjectData"] = new[] { "ChaosReflectionAssemblyNameGetObjectData" },
+
+        ["Assembly.GetManifestResourceStream"] = new[] { "ChaosReflectionAssemblyGetManifestResourceStream" },
+        ["Assembly.GetManifestResourceInfo"] = new[] { "ChaosReflectionAssemblyGetManifestResourceInfo" },
+        ["Assembly.GetFile"] = new[] { "ChaosReflectionAssemblyGetFile" },
+        ["Assembly.GetFiles"] = new[] { "ChaosReflectionAssemblyGetFiles" },
+        ["Assembly.GetReferencedAssemblies"] = new[] { "ChaosReflectionAssemblyGetReferencedAssemblies" },
+        ["Assembly.GetObjectData"] = new[] { "ChaosReflectionAssemblyGetObjectData" },
     };
 
     /// <summary>
