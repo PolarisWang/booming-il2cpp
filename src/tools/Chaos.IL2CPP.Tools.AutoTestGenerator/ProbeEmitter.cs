@@ -370,6 +370,32 @@ public sealed class ProbeEmitter
         sb.AppendLine("    }");
         sb.AppendLine("}");
         sb.AppendLine();
+        // Sample type that backs the reflection-subject factories in
+        // CSharpExpressionBuilder.KnownTypeFactories. Reflection member types
+        // (MethodInfo, FieldInfo, ParameterInfo, ...) are views over metadata;
+        // GetUninitializedObject produces instances with no metadata behind
+        // them, so every accessor returns null/0 and the probe verifies nothing.
+        // Factoring instances off a real type lets those accessors be asserted
+        // against actual metadata.
+        sb.AppendLine("/// <summary>Metadata donor for reflection-subject probe instances.</summary>");
+        sb.AppendLine("[global::System.AttributeUsage(global::System.AttributeTargets.All)]");
+        sb.AppendLine("public sealed class ReflectionSubjectMarkerAttribute : global::System.Attribute { }");
+        sb.AppendLine();
+        sb.AppendLine("public interface IReflectionSubject { int SampleProperty { get; } }");
+        sb.AppendLine();
+        sb.AppendLine("[ReflectionSubjectMarker]");
+        sb.AppendLine("public class ReflectionSubjectSample : IReflectionSubject");
+        sb.AppendLine("{");
+        sb.AppendLine("    public int SampleField;");
+        sb.AppendLine("    public const string SampleConst = \"sample\";");
+        sb.AppendLine("    public int SampleProperty { get; set; }");
+        sb.AppendLine("    public event global::System.EventHandler? SampleEvent;");
+        sb.AppendLine("    public void SampleMethod(int sampleParameter)");
+        sb.AppendLine("    {");
+        sb.AppendLine("        SampleEvent?.Invoke(this, global::System.EventArgs.Empty);");
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
         sb.AppendLine("/// <summary>Creates a subject instance for probing, tolerating types without a");
         sb.AppendLine("/// public parameterless constructor (e.g. System.String, collection types).</summary>");
         sb.AppendLine("public static class SubjectInstanceFactory");

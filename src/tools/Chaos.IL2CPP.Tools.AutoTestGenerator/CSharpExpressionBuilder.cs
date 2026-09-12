@@ -392,6 +392,53 @@ public sealed class CSharpExpressionBuilder
         // Special constructor expressions
         ["System.IO.MemoryStream"] =                   new(FactoryKind.CustomExpr, 0,
             "new MemoryStream(new byte[] { 1, 2, 3 })"),
+
+        // ── Reflection subjects ─────────────────────────────────────────
+        // Reflection member types are *views* over metadata: a bare
+        // GetUninitializedObject instance has no metadata behind it, so every
+        // accessor returns null/0 and the probe records either a bogus
+        // exception or a value that verifies nothing. Each factory below
+        // obtains a real, metadata-backed instance from a local sample type,
+        // which is what gives the resulting assertions something to check.
+        //
+        // The seed type (`ReflectionSubjectSample`) is emitted by ProbeEmitter
+        // into the probe project alongside these expressions.
+        ["System.Reflection.Assembly"] =               new(FactoryKind.CustomExpr, 0,
+            "global::System.Reflection.Assembly.GetExecutingAssembly()"),
+        ["System.Reflection.Module"] =                 new(FactoryKind.CustomExpr, 0,
+            "global::System.Reflection.Assembly.GetExecutingAssembly().ManifestModule"),
+        ["System.Reflection.AssemblyName"] =           new(FactoryKind.CustomExpr, 0,
+            "global::System.Reflection.Assembly.GetExecutingAssembly().GetName()"),
+        ["System.Type"] =                              new(FactoryKind.CustomExpr, 0,
+            "typeof(global::Chaos.Probe.ReflectionSubjectSample)"),
+        ["System.Reflection.MemberInfo"] =             new(FactoryKind.CustomExpr, 0,
+            "typeof(global::Chaos.Probe.ReflectionSubjectSample)"),
+        ["System.Reflection.MethodBase"] =             new(FactoryKind.CustomExpr, 0,
+            "typeof(global::Chaos.Probe.ReflectionSubjectSample).GetMethod(\"SampleMethod\")!"),
+        ["System.Reflection.MethodInfo"] =             new(FactoryKind.CustomExpr, 0,
+            "typeof(global::Chaos.Probe.ReflectionSubjectSample).GetMethod(\"SampleMethod\")!"),
+        ["System.Reflection.ConstructorInfo"] =        new(FactoryKind.CustomExpr, 0,
+            "typeof(global::Chaos.Probe.ReflectionSubjectSample).GetConstructor(global::System.Type.EmptyTypes)!"),
+        ["System.Reflection.FieldInfo"] =              new(FactoryKind.CustomExpr, 0,
+            "typeof(global::Chaos.Probe.ReflectionSubjectSample).GetField(\"SampleField\")!"),
+        ["System.Reflection.PropertyInfo"] =           new(FactoryKind.CustomExpr, 0,
+            "typeof(global::Chaos.Probe.ReflectionSubjectSample).GetProperty(\"SampleProperty\")!"),
+        ["System.Reflection.EventInfo"] =              new(FactoryKind.CustomExpr, 0,
+            "typeof(global::Chaos.Probe.ReflectionSubjectSample).GetEvent(\"SampleEvent\")!"),
+        ["System.Reflection.ParameterInfo"] =          new(FactoryKind.CustomExpr, 0,
+            "typeof(global::Chaos.Probe.ReflectionSubjectSample).GetMethod(\"SampleMethod\")!.GetParameters()[0]"),
+        ["System.Reflection.CustomAttributeData"] =    new(FactoryKind.CustomExpr, 0,
+            "global::System.Reflection.CustomAttributeData.GetCustomAttributes(typeof(global::Chaos.Probe.ReflectionSubjectSample))[0]"),
+        ["System.Reflection.CustomAttributeNamedArgument"] = new(FactoryKind.CustomExpr, 0,
+            "default(global::System.Reflection.CustomAttributeNamedArgument)"),
+        ["System.Reflection.CustomAttributeTypedArgument"] = new(FactoryKind.CustomExpr, 0,
+            "default(global::System.Reflection.CustomAttributeTypedArgument)"),
+        ["System.Reflection.InterfaceMapping"] =       new(FactoryKind.CustomExpr, 0,
+            "typeof(global::Chaos.Probe.ReflectionSubjectSample).GetInterfaceMap(typeof(global::Chaos.Probe.IReflectionSubject))"),
+        ["System.Reflection.ManifestResourceInfo"] =   new(FactoryKind.CustomExpr, 0,
+            "default(global::System.Reflection.ManifestResourceInfo)!"),
+        ["System.Reflection.TypeInfo"] =               new(FactoryKind.CustomExpr, 0,
+            "typeof(global::Chaos.Probe.ReflectionSubjectSample)"),
     };
 
     public CSharpExpressionBuilder(CSharpSerializer serializer)
