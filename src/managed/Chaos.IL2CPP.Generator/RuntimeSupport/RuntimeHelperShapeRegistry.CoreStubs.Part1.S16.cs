@@ -1618,6 +1618,51 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// Phase 3: ExecutionContext flow control.
+        ///
+        /// SuppressFlow / RestoreFlow / IsFlowSuppressed.  These control whether the
+        /// runtime's AsyncLocal values are captured for a newly spawned thread or
+        /// work item.  Capture/Run are invoked from the runtime's own thread-start
+        /// and thread-pool paths (threading_stubs.cpp), NOT from generated code, so
+        /// they are deliberately not registered here.
+        ///
+        /// <para>
+        /// <b>SuppressFlow must return a cookie and RestoreFlow must consume it.</b>
+        /// Treating SuppressFlow as fire-and-forget (routing it to a void fallback)
+        /// leaves flow suppressed for the rest of the thread's life — every later
+        /// thread or task on that thread silently loses its AsyncLocal values, and
+        /// the loss is invisible because each individual call still returns.
+        /// </para>
+        /// </summary>
+        private static void RegisterExecutionContext(RuntimeHelperShapeRegistry registry)
+        {
+            // SuppressFlow() — returns a cookie that RestoreFlow consumes.
+            registry.Register("System.Threading.ExecutionContext", "SuppressFlow", [],
+                ShapeKind.SimpleForward, "chaos_execution_context_suppress_flow",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateInt32AbiSlot(),
+                EmptyRawArgumentIndices);
+
+            // RestoreFlow() — .NET's parameterless form restores the depth to 0.
+            // Passing 0 as the cookie matches that: the runtime's restore takes the
+            // depth to set, and the parameterless API means "not suppressed".
+            registry.Register("System.Threading.ExecutionContext", "RestoreFlow", [],
+                ShapeKind.SimpleForward, "chaos_execution_context_restore_flow",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // IsFlowSuppressed() — observable state; a constant would make every
+            // assertion about suppression vacuous.
+            registry.Register("System.Threading.ExecutionContext", "IsFlowSuppressed", [],
+                ShapeKind.SimpleForward, "chaos_execution_context_is_flow_suppressed",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateInt32AbiSlot(),
+                EmptyRawArgumentIndices);
+        }
+
+        /// <summary>
         /// Decimal
         /// </summary>
         private static void RegisterDecimal(RuntimeHelperShapeRegistry registry)

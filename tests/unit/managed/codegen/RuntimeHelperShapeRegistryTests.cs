@@ -899,6 +899,25 @@ public sealed class RuntimeHelperShapeRegistryTests
         Assert.Equal(expectedSymbol, entry!.NativeFnSymbol);
     }
 
+    /// <summary>
+    /// ExecutionContext flow control.  SuppressFlow returns a cookie the runtime
+    /// consumes on RestoreFlow — treating it as fire-and-forget would leave flow
+    /// suppressed for the thread's lifetime, silently dropping AsyncLocal values
+    /// on every later thread/task.
+    /// </summary>
+    [Theory]
+    [InlineData("SuppressFlow", "chaos_execution_context_suppress_flow")]
+    [InlineData("RestoreFlow", "chaos_execution_context_restore_flow")]
+    [InlineData("IsFlowSuppressed", "chaos_execution_context_is_flow_suppressed")]
+    public void ExecutionContext_FlowControl_RoutesToNative(string method, string expectedSymbol)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string callee = $"System.Private.CoreLib/System.Threading.ExecutionContext::{method}()";
+        Assert.True(registry.TryMatchShape(callee, out var entry),
+            $"ExecutionContext::{method} should match a registered shape");
+        Assert.Equal(expectedSymbol, entry!.NativeFnSymbol);
+    }
+
     // ══════════════════════════════════════════════════════════════════════
     // ASYNC-P2-8 WhenEach — the ORDER-PRESERVING completion stream.
     //
