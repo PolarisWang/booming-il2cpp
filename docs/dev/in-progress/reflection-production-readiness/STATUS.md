@@ -129,6 +129,24 @@ roadmap P0–P4 全部子任务已归档至 `docs/dev/completed/reflection-produ
 4. 🟡 修复 ATG 参数生成（为反射类型产出有效输入）以解锁 425 个 `[UNVERIFIED]`。
 5. 🟡 将语义断言接入 Chaos AOT 路径。
 
+### ⚠️ Pipeline 现状说明（诚实记录）
+
+最近一次 reflection chunk pipeline：**build 1/2 通过**（470 subjects → entry.exe），
+**fact 16/29 verified**，13 项失败（基线 9 项 + 新增 4 项）。
+
+**新增的 4 项失败**（`si=316/317/321/322`：ParameterInfo 的
+GetCustomAttributesData/GetCustomAttributes/GetOptional|RequiredCustomModifiers）
+**不是实现缺陷**：其断言调用 `SubjectInstanceFactory.Create<ParameterInfo>()`——
+一个**未初始化实例**——然后期望非 null 结果。我的访问器对无法解码的句柄正确地返回 0。
+ATG 自身的注释即为 `[UNVERIFIED] ... uninitialized object artifact`。
+
+这 4 项**因本轮实现而首次真正执行**（此前落在 codegen stub），因此从"沉默"变为"可观测
+失败"。根因是 Phase 1 已定性的 **ATG 参数生成缺陷**（为反射类型产出无效输入），
+修复它才能解锁这 4 项与其余 425 个 `[UNVERIFIED]`。
+
+**判据**：AOT 与 JIT 结果完全一致（同为 441/454、同为这 13 项），确认是确定性问题
+而非竞态或环境差异。
+
 ### 协作注意（本仓库多 agent 并发）
 
 - `main` 工作树的 index 常被并行 async 线占用，导致 `git rebase` 受阻（`git stash` 项目规则禁用）。改用 **`git merge origin/main`** 或 **`git worktree add --detach`** 隔离验证。
