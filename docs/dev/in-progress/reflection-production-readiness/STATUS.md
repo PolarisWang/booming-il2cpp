@@ -129,6 +129,33 @@ roadmap P0–P4 全部子任务已归档至 `docs/dev/completed/reflection-produ
 4. 🟡 修复 ATG 参数生成（为反射类型产出有效输入）以解锁 425 个 `[UNVERIFIED]`。
 5. 🟡 将语义断言接入 Chaos AOT 路径。
 
+### 🎯 验证真实性突破：real 16/29 → 45/58（2026-09-12 续）
+
+**根因**：ATG 对反射成员类型统一用 `SubjectInstanceFactory.Create<T>()`
+（= `GetUninitializedObject`）作探测主体。反射类型是**元数据的视图**，未初始化实例背后
+没有元数据 → 每个访问器返回 null/0 → 探针要么记录虚假异常、要么给出什么都验证不了的
+默认值。
+
+**修复**（`c61ba23d6`）：为 19 个反射类型提供**真实实例**工厂表达式
+（`typeof(...)` / `GetMethod(...)` / `GetExecutingAssembly()` 等），并在探针前导发射
+种子类型 `ReflectionSubjectSample` 供其取用。
+
+**效果**：
+
+| 指标 | 修复前 | 修复后 |
+|---|---|---|
+| fact `real` verified | 16/29 | **45/58** |
+| `[UNVERIFIED]` smoke | 425 | **396** |
+
+**验证纪律**：首次运行因 `.autogen` 复用 **Sep 9 的陈旧探针**而数字未变——必须清除
+gitignored 缓存后强制重建，否则会把"没生效"误判为"无效"。生成物已核对为真实实例
+（如 `typeof(string).GetMethod("IndexOf", ...)!.GetParameters()[0].GetOptionalCustomModifiers()`）。
+
+**新暴露的陈旧基线**：4 个 ParameterInfo 方法首次以真实实例执行，其断言为
+`Assert.AreEqual(default(Type[]), result)`（期望 **null**），但**真实 BCL 返回空数组**
+（已实测 len=0）。该期望由旧探针在未初始化实例上生成。**native 实现与 BCL 一致**，
+是 ATG 的期望值陈旧。396 项 `[UNVERIFIED]` 中可能还有同类。
+
 ### ⚠️ Pipeline 现状说明（诚实记录）
 
 最近一次 reflection chunk pipeline：**build 1/2 通过**（470 subjects → entry.exe），
