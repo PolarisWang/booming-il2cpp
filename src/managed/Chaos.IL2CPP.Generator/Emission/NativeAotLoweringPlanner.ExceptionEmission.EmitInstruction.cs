@@ -1432,6 +1432,13 @@ public sealed partial class NativeAotLoweringPlanner
             case "stelem.r8":
                 EmitLinearArrayStore(builder, instruction, "ChaosStoreFloat64(static_cast<CHAOS_IL2CPP_FLOAT64>(chaos_value_raw))", indentation, isReferenceElement: false);
                 break;
+            case "stelem.ref":
+                // Store an object reference into an array slot. Unlike the
+                // primitive forms above this is a GC-relevant store: the helper
+                // emits the card-marking write barrier when isReferenceElement is
+                // set, so a cross-generation reference is not lost.
+                EmitLinearArrayStore(builder, instruction, "chaos_value_raw", indentation, isReferenceElement: true);
+                break;
             case "stelem":
                 {
                     var targetRef = instruction.TargetReference;

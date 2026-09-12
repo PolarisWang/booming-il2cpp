@@ -49,6 +49,39 @@ public sealed partial class NativeAotLoweringPlanner
                 }), CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0, 1 });
 
+            // IsDefined(MemberInfo|Module|ParameterInfo, Type) — the MemberInfo-family
+            // overloads. These route to the token-matching collection API so the
+            // answer reflects the real attribute blob rather than an assembly-only
+            // lookup. (The Assembly overload above keeps its existing entry point.)
+            registry.Register("System.Reflection.CustomAttributeExtensions", "IsDefined",
+                ["System.Reflection.MemberInfo", "System.Type"],
+                ShapeKind.SimpleForward, "ChaosReflectionMemberIsDefinedByToken",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Reflection.MemberInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                }), CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Reflection.CustomAttributeExtensions", "IsDefined",
+                ["System.Reflection.Module", "System.Type"],
+                ShapeKind.SimpleForward, "ChaosReflectionMemberIsDefinedByToken",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Reflection.Module", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                }), CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Reflection.CustomAttributeExtensions", "IsDefined",
+                ["System.Reflection.ParameterInfo", "System.Type"],
+                ShapeKind.SimpleForward, "ChaosReflectionMemberIsDefinedByToken",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Reflection.ParameterInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                }), CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
         }
 
         /// <summary>

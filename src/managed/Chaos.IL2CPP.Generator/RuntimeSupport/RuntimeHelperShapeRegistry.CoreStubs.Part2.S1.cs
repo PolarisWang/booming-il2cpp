@@ -23,6 +23,58 @@ public sealed partial class NativeAotLoweringPlanner
                 }), CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0, 1 });
 
+            // ── Collect-all-attributes overloads ────────────────────────
+            // GetCustomAttributes(Assembly|MemberInfo|Module|ParameterInfo[, Type][, bool])
+            // return the *whole* attribute set, which the single-lookup entry point
+            // above cannot express. These route to the collection API added in
+            // reflection/attributes.cpp, which returns a
+            // [count][attr_type_token, ...] list the managed wrapper materializes.
+            //
+            // Registered here (rather than in a new Register* method) because the
+            // overload set is one family; splitting them would scatter the
+            // (member-kind, arity) mapping that keeps these consistent.
+            RegisterCollectCustomAttributesOverloads(registry);
+        }
+
+        /// <summary>
+        /// GetCustomAttributes overloads that materialize every attribute on a
+        /// member. The first ABI slot is always the attribute *target*
+        /// (Assembly/MemberInfo/Module/ParameterInfo → normalized to a member
+        /// handle); the trailing slot is the optional filter Type or bool.
+        /// </summary>
+        private static void RegisterCollectCustomAttributesOverloads(RuntimeHelperShapeRegistry registry)
+        {
+            registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes",
+                ["System.Reflection.Assembly"],
+                ShapeKind.SimpleForward, "ChaosReflectionCollectCustomAttributes",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes",
+                ["System.Reflection.MemberInfo"],
+                ShapeKind.SimpleForward, "ChaosReflectionCollectCustomAttributes",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.MemberInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes",
+                ["System.Reflection.Module"],
+                ShapeKind.SimpleForward, "ChaosReflectionCollectCustomAttributes",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.Module", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes",
+                ["System.Reflection.ParameterInfo"],
+                ShapeKind.SimpleForward, "ChaosReflectionCollectCustomAttributes",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.ParameterInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
         }
 
         /// <summary>
