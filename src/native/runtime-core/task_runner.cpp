@@ -11,6 +11,7 @@
 
 #include <chaos/async.h>
 #include <chaos/log.h>
+#include <chaos/profile.h>
 
 #include <cstdlib>
 #include <new>
@@ -26,6 +27,7 @@ struct TaskRunContext {
 };
 
 static void TaskRunCallback(void* state) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("TaskRunCallback");
     auto* rc = static_cast<TaskRunContext*>(state);
     if (rc == nullptr) return;
 
