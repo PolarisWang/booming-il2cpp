@@ -121,6 +121,12 @@ CHAOS_IL2CPP_INT32 chaos_value_task_is_canceled(CHAOS_IL2CPP_INTPTR vt_handle) n
 CHAOS_IL2CPP_INTPTR chaos_value_task_as_task(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_value_task_get_awaiter(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
 
+// TaskExtensions.Unwrap — flatten Task<Task<T>> to Task<T>.  The outer task's
+// result is the inner handle, so this is the identity once the outer completed;
+// the entry point exists so the call does not fall through to a numeric
+// fallback that would replace a real inner task with a null handle.
+CHAOS_IL2CPP_INTPTR chaos_task_unwrap(CHAOS_IL2CPP_INTPTR outer) noexcept;
+
 // ── Task.ContinueWith native combinator (Phase 2 P2-2) ──
 // Registers `continuation` (a DelegateObject taking the antecedent task handle
 // and returning a native int) to run when `antecedent` completes — whether it

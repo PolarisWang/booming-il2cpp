@@ -1150,3 +1150,11 @@ CHAOS_IL2CPP_INTPTR chaos_value_task_get_awaiter(CHAOS_IL2CPP_INTPTR vt_handle) 
 {
     return vt_handle;
 }
+
+// ── TaskExtensions.Unwrap ──
+// Flatten Task<Task<T>> → Task<T>.  The outer's result IS the inner task's
+// handle once completed, so the fallback/identity is trivial.
+CHAOS_IL2CPP_INTPTR chaos_task_unwrap(CHAOS_IL2CPP_INTPTR outer) noexcept
+{
+    return outer;
+}

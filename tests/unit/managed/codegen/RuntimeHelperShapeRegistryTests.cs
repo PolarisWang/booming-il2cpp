@@ -986,6 +986,26 @@ public sealed class RuntimeHelperShapeRegistryTests
         }
         Assert.Equal(4, symbols.Distinct(StringComparer.Ordinal).Count());
     }
+
+    /// <summary>
+    /// TaskExtensions.Unwrap — identity in this runtime (the outer's result IS
+    /// the inner handle), but must not fall to the interpreter which returns 0
+    /// (turning every Task&lt;Task&gt; into a null inner).
+    /// </summary>
+    [Fact]
+    public void TaskUnwrap_RoutesToNative()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.TaskExtensions::Unwrap"
+            + ":System.Threading.Tasks.Task(System.Threading.Tasks.Task)";
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"TaskExtensions::Unwrap should match a GenericShapeDescriptor");
+        Assert.NotNull(descriptor);
+        var resolution = descriptor.Resolver(null!, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Contains("chaos_task_unwrap", resolution!.CppSource);
+    }
     //
     // Distinct from WhenAll/WhenAny: those are one-shot aggregates. WhenEach
     // returns IAsyncEnumerable<Task> that yields as each task completes, in

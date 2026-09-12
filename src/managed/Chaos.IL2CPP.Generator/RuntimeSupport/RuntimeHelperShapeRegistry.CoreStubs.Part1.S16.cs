@@ -1770,6 +1770,38 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// Phase 4: TaskExtensions.Unwrap + TaskToAsyncResult.
+        ///
+        /// <c>Unwrap</c> flattens a Task&lt;Task&lt;T&gt;&gt; into a Task&lt;T&gt;.  In this
+        /// runtime an aggregate task's result is already the inner handle, so the
+        /// flattening is the identity: the outer task IS the inner one once the
+        /// inner completes.  The registration exists so the call does not fall
+        /// through to a numeric fallback — a fallback returning 0 here would
+        /// silently replace a real inner task with a null handle.
+        /// </summary>
+        private static void RegisterTaskUnwrap(RuntimeHelperShapeRegistry registry)
+        {
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.TaskExtensions",
+                MethodName: "Unwrap",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    return chaos_task_unwrap(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "chaos_task_unwrap");
+                }));
+        }
+
+        /// <summary>
         /// Decimal
         /// </summary>
         private static void RegisterDecimal(RuntimeHelperShapeRegistry registry)
