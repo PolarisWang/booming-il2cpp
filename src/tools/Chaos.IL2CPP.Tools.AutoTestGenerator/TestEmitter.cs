@@ -406,11 +406,31 @@ public sealed class TestEmitter
                     return;
                 }
             }
+            // NOTE: factories that yield a REAL instance (typeof(...), GetMethod(...),
+            // GetExecutingAssembly(), ...) are deliberately excluded from the guard
+            // above. Their null/empty results are genuine metadata answers rather than
+            // zeroed-field artifacts, so the assertions below are meaningful for them.
 
             // Null return → assert default(T)!
             if (result.ReturnValueJson == "null" || string.IsNullOrEmpty(result.ReturnValueType))
             {
                 var csType = CSharpSerializer.MapToCSharpType(method.ReturnTypeName);
+
+                // Array-typed returns that the probe captured as null are ambiguous:
+                // the BCL convention for "no items" is an EMPTY ARRAY, not null (e.g.
+                // ParameterInfo.GetOptionalCustomModifiers() on an unmodified parameter
+                // returns Type[0], and the reference runtime was measured to do exactly
+                // that). Asserting strict equality with default(T) would then reject a
+                // correct empty-array implementation. Accept either null or an empty
+                // array — both mean "no items" — so the assertion tests the semantics
+                // rather than the null-vs-empty representation choice.
+                if (method.ReturnTypeName.EndsWith("[]", StringComparison.Ordinal))
+                {
+                    sb.AppendLine($"            Assert.IsTrue(result_{mi}_{set.SetIndex} is null"
+                                + $" || ((global::System.Array)result_{mi}_{set.SetIndex}!).Length == 0,"
+                                + $" \"expected null or empty array\");");
+                    return;
+                }
 
                 // For a NULL-captured return value, assert equality with default(T) (null).
                 // Do NOT emit Assert.IsNotNull here — for a method that legitimately returns
