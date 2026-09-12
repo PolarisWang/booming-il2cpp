@@ -195,6 +195,25 @@ CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyGetSecurityRuleSet(CHAOS_IL2CPP_INTPT
 CHAOS_IL2CPP_INT64  ChaosReflectionAssemblyGetHostContext(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyGetHashCode(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyEqualsVersion(CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept;
+
+/* ── Module member lookup / remaining identity ───────────────────────
+ * Module.GetField/GetMethod search every type in the module (unlike the
+ * Type-scoped forms). MDStreamVersion reports metadata stream 2.0; the AOT
+ * descriptor carries no MVID, so ModuleVersionId yields an all-zero Guid block
+ * (Guid.Empty) rather than a null pointer.
+ */
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetField(CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetMethod(CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetFields(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetMethods(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionModuleIsResource(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionModuleGetMDStreamVersion(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetModuleVersionId(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleToString(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetCustomAttributesData(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetCustomAttributes(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionModuleGetHashCode(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionModuleEqualsVersion(CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept;
 // ── Additional reflection API functions (implemented in reflection_api.cpp) ──
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseType(CHAOS_IL2CPP_INTPTR type_handle) noexcept;

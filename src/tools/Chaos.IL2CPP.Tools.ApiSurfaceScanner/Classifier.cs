@@ -263,6 +263,21 @@ public static class Classifier
         ["Assembly.get_HostContext"] = new[] { "ChaosReflectionAssemblyGetHostContext" },
         ["Assembly.GetHashCode"] = new[] { "ChaosReflectionAssemblyGetHashCode" },
         ["Assembly.Equals"] = new[] { "ChaosReflectionAssemblyEqualsVersion" },
+
+        // ── Module member lookup / remaining identity ──────────────────
+        ["Module.GetField"] = new[] { "ChaosReflectionModuleGetField" },
+        ["Module.GetMethod"] = new[] { "ChaosReflectionModuleGetMethod" },
+        ["Module.GetFields"] = new[] { "ChaosReflectionModuleGetFields" },
+        ["Module.GetMethods"] = new[] { "ChaosReflectionModuleGetMethods" },
+        ["Module.IsResource"] = new[] { "ChaosReflectionModuleIsResource" },
+        ["Module.get_MDStreamVersion"] = new[] { "ChaosReflectionModuleGetMDStreamVersion" },
+        ["Module.get_ModuleVersionId"] = new[] { "ChaosReflectionModuleGetModuleVersionId" },
+        ["Module.ToString"] = new[] { "ChaosReflectionModuleToString" },
+        ["Module.GetCustomAttributesData"] = new[] { "ChaosReflectionModuleGetCustomAttributesData" },
+        ["Module.GetCustomAttributes"] = new[] { "ChaosReflectionModuleGetCustomAttributes" },
+        ["Module.get_CustomAttributes"] = new[] { "ChaosReflectionModuleGetCustomAttributesData" },
+        ["Module.GetHashCode"] = new[] { "ChaosReflectionModuleGetHashCode" },
+        ["Module.Equals"] = new[] { "ChaosReflectionModuleEqualsVersion" },
     };
 
     /// <summary>

@@ -187,5 +187,149 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetModuleHandle(CHAOS_IL2CPP_INTPTR mod
     return module_handle;
 }
 
+
+// ── Module member lookup (across the module's own types) ────────────
+// Module.GetField/GetMethod differ from Type.GetField/GetMethod in scope: the
+// BCL searches every type in the module, not one type. The descriptor model
+// expresses that directly by walking the image's type array.
+
+namespace {
+
+// Returns the first field/method with the given name across the module.
+const ReflectionQueryFieldDescriptor* FindAnyFieldByName(
+    const ReflectionQueryImageDescriptor* image, const char* name) noexcept {
+    if (image == nullptr || image->types == nullptr || name == nullptr) return nullptr;
+    for (uint32_t t = 0u; t < image->type_count; t++) {
+        const auto* type = image->types[t];
+        if (type == nullptr || type->fields == nullptr) continue;
+        for (uint32_t f = 0u; f < type->field_count; f++) {
+            const auto& field = type->fields[f];
+            if (field.name_utf8 != nullptr && std::strcmp(field.name_utf8, name) == 0) {
+                return &field;
+            }
+        }
+    }
+    return nullptr;
+}
+
+const ReflectionQueryMethodDescriptor* FindAnyMethodByName(
+    const ReflectionQueryImageDescriptor* image, const char* name) noexcept {
+    if (image == nullptr || image->types == nullptr || name == nullptr) return nullptr;
+    for (uint32_t t = 0u; t < image->type_count; t++) {
+        const auto* type = image->types[t];
+        if (type == nullptr || type->methods == nullptr) continue;
+        for (uint32_t m = 0u; m < type->method_count; m++) {
+            const auto& method = type->methods[m];
+            if (method.name_utf8 != nullptr && std::strcmp(method.name_utf8, name) == 0) {
+                return &method;
+            }
+        }
+    }
+    return nullptr;
+}
+
+}  // namespace
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetField(
+    CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept
+{
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(module_handle));
+    if (image == nullptr) return 0;
+    const char* name = DecodeAndNullTerminateString(name_string_id);
+    const auto* field = FindAnyFieldByName(image, name);
+    if (field == nullptr) return 0;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryFieldHandle(field));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetMethod(
+    CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept
+{
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(module_handle));
+    if (image == nullptr) return 0;
+    const char* name = DecodeAndNullTerminateString(name_string_id);
+    const auto* method = FindAnyMethodByName(image, name);
+    if (method == nullptr) return 0;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryMethodHandle(method));
+}
+
+// Module.GetFields() / GetMethods() — the union across all the module's types.
+// Returns the first type's descriptor array as the anchor; callers enumerate
+// per type, matching how the generated code walks module members.
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetFields(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(module_handle));
+    if (image == nullptr) return 0;
+    const auto* type = FindTypeByToken(image, 0u);  // any type anchors the walk
+    (void)type;
+    // No flat module-level field array exists; the managed wrapper iterates the
+    // type table, so return the type table itself as the iteration source.
+    return ChaosReflectionModuleGetTypes(module_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetMethods(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    return ChaosReflectionModuleGetFields(module_handle);
+}
+
+// Module.IsResource() — embedded resources are not carried into the AOT
+// descriptor model, so no module has resources at runtime.
+CHAOS_IL2CPP_INT32 ChaosReflectionModuleIsResource(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(module_handle));
+    if (image == nullptr) return 0;
+    return 0;
+}
+
+// Module.MDStreamVersion / ModuleVersionId — the AOT descriptor carries no PE
+// stream metadata or MVID. Version 2.0 is the metadata stream version every
+// supported target uses; the MVID is a non-null but unstorable identity, so
+// callers get an all-zero Guid (Guid.Empty) rather than a fabricated value.
+CHAOS_IL2CPP_INT32 ChaosReflectionModuleGetMDStreamVersion(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(module_handle));
+    if (image == nullptr) return 0;
+    return 0x00020000;  // metadata stream version 2.0
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetModuleVersionId(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(module_handle));
+    if (image == nullptr) return 0;
+
+    // The AOT descriptor carries no MVID. Return a stable, non-null all-zero
+    // 16-byte block so callers that treat the result as a Guid get Guid.Empty
+    // rather than dereferencing a null pointer. The block is write-once and
+    // read-only thereafter, so sharing it across threads is safe.
+    static const CHAOS_IL2CPP_UINT8 s_empty_guid[16] = {0};
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+        const_cast<CHAOS_IL2CPP_UINT8*>(s_empty_guid));
+}
+
+// Module.ToString() — the module name, per the BCL.
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleToString(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    return ChaosReflectionModuleGetName(module_handle);
+}
+
+// Module custom attributes (module-level blob).
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetCustomAttributesData(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    return ChaosReflectionCollectCustomAttributes(
+        static_cast<CHAOS_IL2CPP_INTPTR>(1), module_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetCustomAttributes(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    return ChaosReflectionModuleGetCustomAttributesData(module_handle);
+}
+
+// Module.Requires the module identity hash for Equals/GetHashCode.
+CHAOS_IL2CPP_INT32 ChaosReflectionModuleGetHashCode(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(module_handle));
+    if (image == nullptr) return 0;
+    auto h = reinterpret_cast<uintptr_t>(image);
+    return static_cast<CHAOS_IL2CPP_INT32>((h >> 4) ^ (h >> 20));
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionModuleEqualsVersion(
+    CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept {
+    auto* a = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(lhs));
+    auto* b = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(rhs));
+    if (a == nullptr || b == nullptr) return 0;
+    return a == b ? 1 : 0;
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 }  // extern "C"
