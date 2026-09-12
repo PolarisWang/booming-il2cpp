@@ -137,6 +137,39 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetFieldFromHandle(CHAOS_IL2CPP_INTPTR h
 CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetModifiedFieldType(CHAOS_IL2CPP_INTPTR field) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetModifiedPropertyType(CHAOS_IL2CPP_INTPTR prop) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetModifiedParameterType(CHAOS_IL2CPP_INTPTR param) noexcept;
+
+/* ── TypeInfo.Declared* family ───────────────────────────────────────
+ * TypeInfo.DeclaredX is Type.GetX restricted to the type's own declaration.
+ * The AOT type descriptor already lists only the type's own members, so these
+ * delegate to the corresponding enumerators; the symbols exist so codegen has
+ * one entry point per TypeInfo property.
+ */
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredMethods(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredFields(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredProperties(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredConstructors(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredEvents(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredNestedTypes(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredMembers(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetImplementedInterfaces(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredMethod(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredField(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredProperty(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredEvent(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredNestedType(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoAsType(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoIsAssignableFrom(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR candidate) noexcept;
+
+/* ── AssemblyName accessors ──────────────────────────────────────────
+ * The AssemblyName handle is the image's image_name_utf8 pointer. FullName is
+ * composed from the image descriptor's version fields; AOT images are
+ * culture-neutral, so CultureName is the empty string.
+ */
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetName(CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetFullName(CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCultureName(CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameToString(CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyNameReferenceMatchesDefinition(CHAOS_IL2CPP_INTPTR reference, CHAOS_IL2CPP_INTPTR definition) noexcept;
 // ── Additional reflection API functions (implemented in reflection_api.cpp) ──
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseType(CHAOS_IL2CPP_INTPTR type_handle) noexcept;

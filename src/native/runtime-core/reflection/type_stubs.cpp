@@ -454,5 +454,112 @@ CHAOS_IL2CPP_INTPTR ChaosTypeMakePointerType(CHAOS_IL2CPP_INTPTR type) noexcept 
     return 0;
 }
 
+
+// ── TypeInfo.Declared* family ───────────────────────────────────────
+// TypeInfo.DeclaredX is Type.GetX restricted to the type's own declaration
+// (BindingFlags.DeclaredOnly). The AOT descriptor for a type lists exactly its
+// own members, so "declared only" is precisely what the enumerators already
+// return — these entry points exist so codegen has a symbol per TypeInfo
+// property rather than re-deriving the flag at each call site.
+
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredMethods(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosReflectionGetMethods(type_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredFields(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosReflectionGetFields(type_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredProperties(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosReflectionGetProperties(type_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredConstructors(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    // Constructors are methods named ".ctor"; GetConstructorsDefault already
+    // filters to that name over the declared method set.
+    return ChaosReflectionGetConstructorsDefault(type_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredEvents(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosTypeGetEvents(type_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredNestedTypes(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosReflectionGetNestedTypes(type_handle);
+}
+
+// DeclaredMembers = declared fields + methods + properties + events + nested.
+// The BCL concatenates the five sets; the descriptor model can express this by
+// delegating to GetMembers, which already unions the member kinds for the type.
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredMembers(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosReflectionGetMembers(type_handle);
+}
+
+// ImplementedInterfaces — the AOT iface_map carries exactly the interfaces the
+// type implements (as opposed to GetInterfaces, which the BCL also restricts to
+// the implemented set), so this resolves through the same accessor.
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetImplementedInterfaces(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosReflectionGetInterfaces(type_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredMethod(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept {
+    return ChaosReflectionGetMethod(type_handle, name_string_id, 0);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredField(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept {
+    return ChaosReflectionGetField(type_handle, name_string_id);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredProperty(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept {
+    return ChaosTypeGetProperty(type_handle, name_string_id);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredEvent(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept {
+    return ChaosTypeGetEvent(type_handle, name_string_id);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoGetDeclaredNestedType(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept {
+    // Nested types are addressed by simple name within the declaring type.
+    auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
+    if (desc == nullptr) return 0;
+
+    const char* want = DecodeAndNullTerminateString(name_string_id);
+    if (want == nullptr) return 0;
+
+    // The descriptor enumerates nested types via the module registry rather
+    // than a per-type child list, so match on the "Outer+Inner" subject-id
+    // convention produced by codegen.
+    const uint32_t module_count = GetModuleCount();
+    for (uint32_t i = 0u; i < module_count; i++) {
+        const auto* mod = GetModuleByIndex(i);
+        if (mod == nullptr || mod->image == nullptr) continue;
+        for (uint32_t t = 0u; t < mod->image->type_count; t++) {
+            const auto* candidate = mod->image->types[t];
+            if (candidate == nullptr || candidate->name_utf8 == nullptr) continue;
+            if (std::strcmp(candidate->name_utf8, want) != 0) continue;
+            // Require the candidate to be nested inside this type: its
+            // subject_id must extend the declaring type's with a nested marker.
+            if (candidate->subject_id_utf8 == nullptr || desc->subject_id_utf8 == nullptr) continue;
+            const size_t outer_len = std::strlen(desc->subject_id_utf8);
+            if (std::strncmp(candidate->subject_id_utf8, desc->subject_id_utf8, outer_len) != 0) continue;
+            const char next = candidate->subject_id_utf8[outer_len];
+            if (next != '+' && next != '/') continue;  // nested separator
+            return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(candidate));
+        }
+    }
+    return 0;
+}
+
+// TypeInfo.AsType — TypeInfo is a Type; the handle is already a type handle.
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoAsType(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return type_handle;
+}
+
+// TypeInfo.IsAssignableFrom(Type) — the unqualified form delegates to the
+// same relation used by Type.IsAssignableFrom.
+CHAOS_IL2CPP_INTPTR ChaosTypeInfoIsAssignableFrom(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR candidate) noexcept {
+    return ChaosReflectionIsAssignableFrom(type_handle, candidate);
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 }  // extern "C"

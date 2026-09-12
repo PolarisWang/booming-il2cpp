@@ -198,6 +198,50 @@ public static class Classifier
         ["ParameterInfo.get_IsOptional"] = new[] { "ChaosReflectionParamGetIsOptional" },
         ["ParameterInfo.get_IsRetval"] = new[] { "ChaosReflectionParamGetIsRetval" },
         ["ParameterInfo.ToString"] = new[] { "ChaosReflectionParamToString" },
+
+        // ── MethodBase / FieldInfo remaining (Phase 3 cont.) ───────────
+        ["MethodBase.get_MemberType"] = new[] { "ChaosReflectionMethodGetMemberType" },
+        ["MethodBase.get_IsGenericMethod"] = new[] { "ChaosReflectionMethodGetIsGenericMethod" },
+        ["MethodBase.get_IsGenericMethodDefinition"] = new[] { "ChaosReflectionMethodGetIsGenericMethodDefinition" },
+        ["MethodBase.get_IsConstructedGenericMethod"] = new[] { "ChaosReflectionMethodGetIsConstructedGenericMethod" },
+        ["MethodBase.get_IsSecurityCritical"] = new[] { "ChaosReflectionMethodGetIsSecurityCritical" },
+        ["MethodBase.get_IsSecuritySafeCritical"] = new[] { "ChaosReflectionMethodGetIsSecuritySafeCritical" },
+        ["MethodBase.get_IsSecurityTransparent"] = new[] { "ChaosReflectionMethodGetIsSecurityTransparent" },
+        ["MethodBase.GetMethodFromHandle"] = new[] { "ChaosReflectionMethodGetMethodFromHandle" },
+        ["MethodBase.get_MethodHandle"] = new[] { "ChaosReflectionMethodGetMethodHandle" },
+
+        ["FieldInfo.get_MemberType"] = new[] { "ChaosReflectionFieldGetMemberType" },
+        ["FieldInfo.get_IsSecurityCritical"] = new[] { "ChaosReflectionFieldGetIsSecurityCritical" },
+        ["FieldInfo.get_IsSecuritySafeCritical"] = new[] { "ChaosReflectionFieldGetIsSecuritySafeCritical" },
+        ["FieldInfo.get_IsSecurityTransparent"] = new[] { "ChaosReflectionFieldGetIsSecurityTransparent" },
+        ["FieldInfo.GetFieldFromHandle"] = new[] { "ChaosReflectionFieldGetFieldFromHandle" },
+        ["FieldInfo.GetModifiedFieldType"] = new[] { "ChaosReflectionFieldGetModifiedFieldType" },
+        ["PropertyInfo.GetModifiedPropertyType"] = new[] { "ChaosReflectionPropertyGetModifiedPropertyType" },
+        ["ParameterInfo.GetModifiedParameterType"] = new[] { "ChaosReflectionParamGetModifiedParameterType" },
+
+        // ── TypeInfo.Declared* family ──────────────────────────────────
+        ["TypeInfo.get_DeclaredMethods"] = new[] { "ChaosTypeInfoGetDeclaredMethods" },
+        ["TypeInfo.get_DeclaredFields"] = new[] { "ChaosTypeInfoGetDeclaredFields" },
+        ["TypeInfo.get_DeclaredProperties"] = new[] { "ChaosTypeInfoGetDeclaredProperties" },
+        ["TypeInfo.get_DeclaredConstructors"] = new[] { "ChaosTypeInfoGetDeclaredConstructors" },
+        ["TypeInfo.get_DeclaredEvents"] = new[] { "ChaosTypeInfoGetDeclaredEvents" },
+        ["TypeInfo.get_DeclaredNestedTypes"] = new[] { "ChaosTypeInfoGetDeclaredNestedTypes" },
+        ["TypeInfo.get_DeclaredMembers"] = new[] { "ChaosTypeInfoGetDeclaredMembers" },
+        ["TypeInfo.get_ImplementedInterfaces"] = new[] { "ChaosTypeInfoGetImplementedInterfaces" },
+        ["TypeInfo.GetDeclaredMethod"] = new[] { "ChaosTypeInfoGetDeclaredMethod" },
+        ["TypeInfo.GetDeclaredField"] = new[] { "ChaosTypeInfoGetDeclaredField" },
+        ["TypeInfo.GetDeclaredProperty"] = new[] { "ChaosTypeInfoGetDeclaredProperty" },
+        ["TypeInfo.GetDeclaredEvent"] = new[] { "ChaosTypeInfoGetDeclaredEvent" },
+        ["TypeInfo.GetDeclaredNestedType"] = new[] { "ChaosTypeInfoGetDeclaredNestedType" },
+        ["TypeInfo.get_AsType"] = new[] { "ChaosTypeInfoAsType" },
+        ["TypeInfo.IsAssignableFrom"] = new[] { "ChaosTypeInfoIsAssignableFrom" },
+
+        // ── AssemblyName accessors ─────────────────────────────────────
+        ["AssemblyName.get_Name"] = new[] { "ChaosReflectionAssemblyNameGetName" },
+        ["AssemblyName.get_FullName"] = new[] { "ChaosReflectionAssemblyNameGetFullName" },
+        ["AssemblyName.get_CultureName"] = new[] { "ChaosReflectionAssemblyNameGetCultureName" },
+        ["AssemblyName.ToString"] = new[] { "ChaosReflectionAssemblyNameToString" },
+        ["AssemblyName.ReferenceMatchesDefinition"] = new[] { "ChaosReflectionAssemblyNameReferenceMatchesDefinition" },
     };
 
     /// <summary>

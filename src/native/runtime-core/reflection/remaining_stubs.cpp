@@ -820,6 +820,87 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetAddMethod(CHAOS_IL2CPP_INTPTR evt) no
     return 0;
 }
 
+// ── AssemblyName accessors ──────────────────────────────────────────
+// The AssemblyName handle is the image's `image_name_utf8` pointer (see
+// ChaosReflectionGetAssemblyName in type_properties.cpp), so name-derived
+// values are resolved by scanning registered modules for the matching image —
+// the same lookup GetVersion below already performs.
+namespace {
+
+const ReflectionQueryImageDescriptor* FindImageByName(const char* image_name) noexcept {
+    if (image_name == nullptr) return nullptr;
+    const uint32_t mod_count = GetModuleCount();
+    for (uint32_t mid = 0; mid < mod_count; mid++) {
+        const auto* mod = GetModuleByIndex(mid);
+        if (mod == nullptr || mod->image == nullptr) continue;
+        if (mod->image->image_name_utf8 != nullptr &&
+            std::strcmp(mod->image->image_name_utf8, image_name) == 0) {
+            return mod->image;
+        }
+    }
+    return nullptr;
+}
+
+}  // namespace
+
+// AssemblyName.Name — the simple name (assembly short name without the
+// ", Version=..., Culture=..." qualification).
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetName(CHAOS_IL2CPP_INTPTR name) noexcept {
+    const char* image_name = reinterpret_cast<const char*>(name);
+    if (image_name == nullptr) return 0;
+    // AOT image names are plain assembly simple names, so the value interns
+    // directly.
+    auto id = string_table::Intern(image_name,
+        static_cast<CHAOS_IL2CPP_UINT32>(std::strlen(image_name)));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
+}
+
+// AssemblyName.FullName — the display name: "Name, Version=X.Y.Z.W,
+// Culture=neutral, PublicKeyToken=null". Built from the image descriptor's
+// version fields, mirroring how the BCL composes it.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetFullName(CHAOS_IL2CPP_INTPTR name) noexcept {
+    const char* image_name = reinterpret_cast<const char*>(name);
+    const auto* image = FindImageByName(image_name);
+    if (image == nullptr) return ChaosReflectionAssemblyNameGetName(name);
+
+    char buf[512];
+    auto result = fmt::format_to_n(buf, sizeof(buf) - 1,
+        "{}, Version={}.{}.{}.{}, Culture=neutral, PublicKeyToken=null",
+        image_name,
+        static_cast<unsigned>(image->version_major),
+        static_cast<unsigned>(image->version_minor),
+        static_cast<unsigned>(image->version_build),
+        static_cast<unsigned>(image->version_revision));
+    auto id = string_table::Intern(buf, static_cast<uint32_t>(result.size));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
+}
+
+// AssemblyName.CultureName — AOT images are culture-neutral by construction
+// (satellite assemblies are not part of the AOT closure), so the empty string
+// is the correct answer, matching AssemblyName.GetCultureName() for a
+// neutral assembly.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCultureName(CHAOS_IL2CPP_INTPTR name) noexcept {
+    if (name == 0) return 0;
+    auto id = string_table::Intern("", 0);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
+}
+
+// AssemblyName.ToString() — for an AssemblyName, ToString returns FullName.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameToString(CHAOS_IL2CPP_INTPTR name) noexcept {
+    return ChaosReflectionAssemblyNameGetFullName(name);
+}
+
+// AssemblyName.ReferenceMatchesDefinition(a, b) — true when both refer to the
+// same simple name. The AOT model has no versioned binding, so simple-name
+// equality is the strongest correct answer.
+CHAOS_IL2CPP_INT32 ChaosReflectionAssemblyNameReferenceMatchesDefinition(
+    CHAOS_IL2CPP_INTPTR reference, CHAOS_IL2CPP_INTPTR definition) noexcept {
+    const char* a = reinterpret_cast<const char*>(reference);
+    const char* b = reinterpret_cast<const char*>(definition);
+    if (a == nullptr || b == nullptr) return 0;
+    return std::strcmp(a, b) == 0 ? 1 : 0;
+}
+
 // ── AssemblyName stubs ──────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCultureInfo(CHAOS_IL2CPP_INTPTR /*name*/) noexcept {
     return 0;  // Invariant culture = nullptr/0. Non-invariant culture deferred to Phase 3+.
