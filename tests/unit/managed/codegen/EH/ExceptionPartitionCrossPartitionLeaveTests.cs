@@ -95,22 +95,32 @@ public sealed class ExceptionPartitionCrossPartitionLeaveTests
         Assert.Contains("static_cast<CHAOS_IL2CPP_INTPTR>(2)", source);
 
         // THE LOAD-BEARING ASSERTION: the tail block the try's `leave` selects (payload 3)
-        // must not be emitted as dead code behind an unconditional `return`.
+        // must be reachable. Under the fix the tail is emitted as a pc-dispatch state machine
+        // that reads `chaos_continuation` to select its entry block, so payload 3 lives
+        // inside a case of that dispatch and is reachable when chaos_continuation == 0x0C.
         //
-        // Under the defect the region's exit falls into the tail's FIRST block and that
-        // block ends in `return;`, so everything after it (including payload 3) is
-        // unreachable. We assert on text order: payload 3 must appear BEFORE the return
-        // that the tail's first block emits, or the tail must carry real control flow
-        // (pc-dispatch) that can reach it.
-        int payload2Idx = source.IndexOf("static_cast<CHAOS_IL2CPP_INTPTR>(3)", StringComparison.Ordinal);
-        Assert.True(payload2Idx >= 0, "payload 3 (the try's leave target) vanished:\n" + source);
+        // Before the fix the tail was flat sequential: region exit fell into the tail's first
+        // block (payload 1), which ended in `return;`, making everything after it dead code.
+        // We assert the presence of the handoff mechanism rather than text order.
+        Assert.Contains("static_cast<CHAOS_IL2CPP_INTPTR>(3)", source);
+        Assert.Contains("static_cast<CHAOS_IL2CPP_INTPTR>(1)", source);
+        Assert.Contains("static_cast<CHAOS_IL2CPP_INTPTR>(2)", source);
 
-        // Find the LAST `return;` in the emitted body. Anything after it is dead.
-        int lastReturnIdx = source.LastIndexOf("return;", StringComparison.Ordinal);
-        Assert.True(payload2Idx < lastReturnIdx,
-            "The try's `leave` targets a tail block that is emitted AFTER the tail's first "
-            + "block returns — so it is unreachable dead code and the method silently "
-            + "returns the wrong arm's value. The region-to-tail handoff has no way to "
-            + "express 'resume in the tail at offset 0x0C'.\n" + source);
+        // The fix must produce TWO pc-dispatch sections (try + tail).
+        int d1 = source.IndexOf("// pc-dispatch state machine", StringComparison.Ordinal);
+        int d2 = d1 < 0 ? -1 : source.IndexOf("// pc-dispatch state machine", d1 + 1, StringComparison.Ordinal);
+        Assert.True(d2 > d1,
+            "The tail must be emitted as a pc-dispatch (second state machine) so the "
+            + "entry block can be selected at runtime from the handoff slot.\n" + source);
+
+        // The tail dispatch must read chaos_continuation to choose its entry.
+        Assert.Contains("chaos_continuation ==", source);
+
+        // Payload 3 (the try's leave target at 0x0C) must appear inside the TAIL dispatch
+        // (after the second pc-dispatch), not inside the try dispatch or the handler.
+        int payload3Idx = source.IndexOf("static_cast<CHAOS_IL2CPP_INTPTR>(3)", d2, StringComparison.Ordinal);
+        Assert.True(payload3Idx > d2,
+            "Payload 3 must live in the TAIL dispatch, reachable from the handoff slot.\n"
+            + source);
     }
 }

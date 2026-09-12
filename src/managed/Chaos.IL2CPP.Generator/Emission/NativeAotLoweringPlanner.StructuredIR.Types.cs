@@ -88,11 +88,20 @@ public sealed partial class NativeAotLoweringPlanner
     /// an incoming <c>chaos_continuation</c> offset (set by an upstream region's exit) into
     /// the pc this dispatch must start at.
     /// </param>
+    /// <param name="ResumeOffsets">
+    /// IL offsets at which control from OUTSIDE this dispatch may enter it (a TAIL partition
+    /// entered by a <c>leave</c> out of the try/handler). When non-empty the emitter must open
+    /// with a runtime selection on the handoff slot rather than the constant
+    /// <paramref name="PcVariableInit"/>, because the entry block is not known at emission time.
+    /// Empty/absent means "always enter at <paramref name="PcVariableInit"/>" (the common case).
+    /// </param>
     internal sealed record IRPcDispatch(
         IReadOnlyList<PcDispatchCase> Cases,
         int PcVariableInit,
         IReadOnlyList<int>? ExitTargetOffsets = null,
-        IReadOnlyDictionary<int, int>? OffsetToPc = null
+        IReadOnlyDictionary<int, int>? OffsetToPc = null,
+        IReadOnlyList<int>? ResumeOffsets = null,
+        int FallOutExitTargetOffset = -1
     ) : StructuredIRNode;
 
     // 鈹€鈹€ Leaf control-flow nodes 鈹€鈹€
@@ -111,7 +120,8 @@ public sealed partial class NativeAotLoweringPlanner
         StructuredIRNode TryBody,
         StructuredIRNode HandlerBody,
         string? CatchTypeSubjectId = null,
-        IReadOnlyList<AotCoreIrInstructionArtifact>? FilterInstructions = null
+        IReadOnlyList<AotCoreIrInstructionArtifact>? FilterInstructions = null,
+        IReadOnlyList<int>? RegionExitTargetOffsets = null
     ) : StructuredIRNode;
     // Async IR nodes (F6)
     internal enum AsyncAwaiterKind { TaskAwaiter, TaskAwaiterOfT, ValueTaskAwaiter, YieldAwaitable, ConfiguredTaskAwaiter, CustomAwaiter }

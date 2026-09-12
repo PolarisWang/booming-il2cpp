@@ -17,7 +17,7 @@ public sealed partial class NativeAotLoweringPlanner
         if (region.HandlingKindCode != AotCoreIrExceptionRegionKind.Catch)
             return false;
 
-        var (prefix, tryBody, handler, tail) = PartitionInstructionsByOffset(
+        var (prefix, tryBody, handler, tail, exitTargets) = PartitionInstructionsByOffset(
             method.Instructions,
             region.TryOffset, region.TryLength,
             region.HandlerOffset, region.HandlerLength);
@@ -29,7 +29,7 @@ public sealed partial class NativeAotLoweringPlanner
             !ValidatePartitionStackBalance(tail, initialDepth: 0))
             return false;
 
-        catchOnlyShape = new CatchOnlyExceptionMethodShape(region, prefix, tryBody, handler, tail);
+        catchOnlyShape = new CatchOnlyExceptionMethodShape(region, prefix, tryBody, handler, tail, exitTargets);
         return true;
     }
 
@@ -456,7 +456,8 @@ public sealed partial class NativeAotLoweringPlanner
     private static (IReadOnlyList<AotCoreIrInstructionArtifact> Prefix,
                     IReadOnlyList<AotCoreIrInstructionArtifact> TryBody,
                     IReadOnlyList<AotCoreIrInstructionArtifact> Handler,
-                    IReadOnlyList<AotCoreIrInstructionArtifact> Tail)
+                    IReadOnlyList<AotCoreIrInstructionArtifact> Tail,
+                    IReadOnlyList<int> ExitTargets)
         PartitionInstructionsByOffset(
             IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
             int tryOffset, int tryLength,
@@ -485,10 +486,12 @@ public sealed partial class NativeAotLoweringPlanner
 
         // Remove trailing leave instructions from tryBody — structured IR
         // handles control flow via block terminators, not explicit leave.
-        StripTrailingLeaveInstructions(tryBody);
-        StripTrailingLeaveInstructions(handler);
+        // Their TARGETS are retained: they are the only record of where the
+        // region's exit resumes (see StripTrailingLeaveInstructions).
+        var exitTargets = StripTrailingLeaveInstructions(tryBody);
+        exitTargets.AddRange(StripTrailingLeaveInstructions(handler));
 
-        return (prefix, tryBody, handler, tail);
+        return (prefix, tryBody, handler, tail, exitTargets);
     }
 
     private static (IReadOnlyList<AotCoreIrInstructionArtifact> Prefix,
