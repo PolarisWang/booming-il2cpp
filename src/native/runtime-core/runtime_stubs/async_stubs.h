@@ -110,6 +110,17 @@ CHAOS_IL2CPP_INT32 chaos_task_when_each_may_have_next(CHAOS_IL2CPP_INTPTR stream
 CHAOS_IL2CPP_INTPTR chaos_task_when_each_try_dequeue(CHAOS_IL2CPP_INTPTR stream) noexcept;
 void chaos_task_when_each_destroy(CHAOS_IL2CPP_INTPTR stream) noexcept;
 
+// ── Phase 4: ValueTask state queries + helpers (ASYNC-P2-8) ──
+// A managed ValueTask crosses the ABI as its backing Task handle.
+// The four predicates must stay distinct: a faulted ValueTask is
+// (completed, !completed_successfully, faulted, !canceled).
+CHAOS_IL2CPP_INT32 chaos_value_task_is_completed(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
+CHAOS_IL2CPP_INT32 chaos_value_task_is_completed_successfully(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
+CHAOS_IL2CPP_INT32 chaos_value_task_is_faulted(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
+CHAOS_IL2CPP_INT32 chaos_value_task_is_canceled(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_value_task_as_task(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_value_task_get_awaiter(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
+
 // ── Task.ContinueWith native combinator (Phase 2 P2-2) ──
 // Registers `continuation` (a DelegateObject taking the antecedent task handle
 // and returning a native int) to run when `antecedent` completes — whether it

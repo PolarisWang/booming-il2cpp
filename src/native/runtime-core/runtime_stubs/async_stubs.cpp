@@ -1097,3 +1097,56 @@ void chaos_async_iterator_builder_destroy(CHAOS_IL2CPP_INTPTR builder_handle) no
 }
 
 }  // extern "C"
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Phase 4: ValueTask state queries + AsTask
+// ══════════════════════════════════════════════════════════════════════════════
+//
+// A managed ValueTask crosses the ABI as its backing task handle (0 = completed
+// void).  The four predicates delegate to the AsyncTask struct's atomic flags,
+// and AsTask is the identity (the backing IS the task in this runtime).
+
+CHAOS_IL2CPP_INT32 chaos_value_task_is_completed(CHAOS_IL2CPP_INTPTR vt_handle) noexcept
+{
+    if (vt_handle == 0) return 1;  // default/void -> trivially completed
+    auto* task = require_async_task(vt_handle);
+    if (task == nullptr) return 1;
+    return task->completed.load(std::memory_order_acquire) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 chaos_value_task_is_completed_successfully(CHAOS_IL2CPP_INTPTR vt_handle) noexcept
+{
+    if (vt_handle == 0) return 1;
+    auto* task = require_async_task(vt_handle);
+    if (task == nullptr) return 0;
+    bool done = task->completed.load(std::memory_order_acquire);
+    bool err = task->faulted.load(std::memory_order_acquire);
+    return (done && !err && task->exception == 0) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 chaos_value_task_is_faulted(CHAOS_IL2CPP_INTPTR vt_handle) noexcept
+{
+    if (vt_handle == 0) return 0;
+    auto* task = require_async_task(vt_handle);
+    if (task == nullptr) return 0;
+    return task->faulted.load(std::memory_order_acquire) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 chaos_value_task_is_canceled(CHAOS_IL2CPP_INTPTR vt_handle) noexcept
+{
+    if (vt_handle == 0) return 0;
+    auto* task = require_async_task(vt_handle);
+    if (task == nullptr) return 0;
+    bool err = task->faulted.load(std::memory_order_acquire);
+    return (err && task->exception == 0) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INTPTR chaos_value_task_as_task(CHAOS_IL2CPP_INTPTR vt_handle) noexcept
+{
+    return vt_handle;
+}
+
+CHAOS_IL2CPP_INTPTR chaos_value_task_get_awaiter(CHAOS_IL2CPP_INTPTR vt_handle) noexcept
+{
+    return vt_handle;
+}

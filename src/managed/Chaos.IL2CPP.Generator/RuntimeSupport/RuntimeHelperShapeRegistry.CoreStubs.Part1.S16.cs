@@ -1709,6 +1709,67 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// Phase 4: ValueTask state queries + AsTask.
+        ///
+        /// The six members the design designates: AsTask, GetAwaiter, and the
+        /// four state predicates (IsCompleted / IsCompletedSuccessfully /
+        /// IsFaulted / IsCanceled).
+        ///
+        /// <para>
+        /// <b>The four predicates must stay distinct.</b>  A ValueTask that
+        /// completed with an exception is IsCompleted=true,
+        /// IsCompletedSuccessfully=false, IsFaulted=true, IsCanceled=false;
+        /// one cancelled by a token is the same but with IsCanceled=true and
+        /// IsFaulted=false.  Collapsing them (e.g. routing all four at one
+        /// "is completed" helper) would make a faulted ValueTask take the
+        /// success path — the exact silent-wrong-answer shape Phase 1's
+        /// three-state counter-example exists to catch.
+        /// </para>
+        ///
+        /// <para>
+        /// In this runtime a managed ValueTask crosses the ABI as its backing
+        /// task handle (0 = default/completed-void), which is why the
+        /// predicates take one INTPTR slot and return an Int32.
+        /// </para>
+        /// </summary>
+        private static void RegisterValueTask(RuntimeHelperShapeRegistry registry)
+        {
+            // AsTask() — materialize a Task from the ValueTask.
+            registry.Register("System.Threading.Tasks.ValueTask", "AsTask", [],
+                ShapeKind.SimpleForward, "chaos_value_task_as_task",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // GetAwaiter() — yields the ValueTaskAwaiter the state machine drives.
+            registry.Register("System.Threading.Tasks.ValueTask", "GetAwaiter", [],
+                ShapeKind.SimpleForward, "chaos_value_task_get_awaiter",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // The four state predicates.  Each gets its OWN native entry point so
+            // that no two questions can be answered by the same computation.
+            foreach (var (method, symbol) in new[]
+            {
+                ("get_IsCompleted", "chaos_value_task_is_completed"),
+                ("get_IsCompletedSuccessfully", "chaos_value_task_is_completed_successfully"),
+                ("get_IsFaulted", "chaos_value_task_is_faulted"),
+                ("get_IsCanceled", "chaos_value_task_is_canceled"),
+            })
+            {
+                registry.Register("System.Threading.Tasks.ValueTask", method, [],
+                    ShapeKind.SimpleForward, symbol,
+                    new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                        CreateNativeIntAbiSlot()),
+                    CreateInt32AbiSlot(),
+                    new HashSet<int> { 0 });
+            }
+        }
+
+        /// <summary>
         /// Decimal
         /// </summary>
         private static void RegisterDecimal(RuntimeHelperShapeRegistry registry)

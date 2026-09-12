@@ -938,7 +938,54 @@ public sealed class RuntimeHelperShapeRegistryTests
     }
 
     // ══════════════════════════════════════════════════════════════════════
-    // ASYNC-P2-8 WhenEach — the ORDER-PRESERVING completion stream.
+    // Phase 4 — ValueTask state queries + AsTask
+    //
+    // The four state predicates MUST stay distinct.  A faulted ValueTask is
+    // (IsCompleted=true, IsCompletedSuccessfully=false, IsFaulted=true,
+    // IsCanceled=false); a cancelled one differs only in the last two.  If any
+    // two routes land on one symbol, a fault silently takes the success path —
+    // the same class of silent-wrong-answer the Phase 1 three-state
+    // counter-example (1-4) exists to catch.
+    // ══════════════════════════════════════════════════════════════════════
+
+    [Theory]
+    [InlineData("AsTask", "chaos_value_task_as_task")]
+    [InlineData("GetAwaiter", "chaos_value_task_get_awaiter")]
+    [InlineData("get_IsCompleted", "chaos_value_task_is_completed")]
+    [InlineData("get_IsCompletedSuccessfully", "chaos_value_task_is_completed_successfully")]
+    [InlineData("get_IsFaulted", "chaos_value_task_is_faulted")]
+    [InlineData("get_IsCanceled", "chaos_value_task_is_canceled")]
+    public void ValueTask_Members_RouteToNative(string method, string expectedSymbol)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string callee = $"System.Private.CoreLib/System.Threading.Tasks.ValueTask::{method}()";
+        Assert.True(registry.TryMatchShape(callee, out var entry),
+            $"ValueTask::{method} should match a registered shape");
+        Assert.Equal(expectedSymbol, entry!.NativeFnSymbol);
+    }
+
+    /// <summary>
+    /// The four predicates must resolve to FOUR DIFFERENT symbols.  Asserting
+    /// each route individually would still pass if two of them shared a symbol
+    /// (each test would just be asserting the same destination twice).
+    /// </summary>
+    [Fact]
+    public void ValueTask_StatePredicates_AreFourDistinctSymbols()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        var symbols = new List<string>();
+        foreach (var method in new[]
+        {
+            "get_IsCompleted", "get_IsCompletedSuccessfully",
+            "get_IsFaulted", "get_IsCanceled",
+        })
+        {
+            string callee = $"System.Private.CoreLib/System.Threading.Tasks.ValueTask::{method}()";
+            Assert.True(registry.TryMatchShape(callee, out var entry));
+            symbols.Add(entry!.NativeFnSymbol);
+        }
+        Assert.Equal(4, symbols.Distinct(StringComparer.Ordinal).Count());
+    }
     //
     // Distinct from WhenAll/WhenAny: those are one-shot aggregates. WhenEach
     // returns IAsyncEnumerable<Task> that yields as each task completes, in
