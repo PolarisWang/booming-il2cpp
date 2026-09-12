@@ -1179,17 +1179,24 @@ public sealed partial class NativeAotLoweringPlanner
         string inner = indentation + "    ";
         string bodyIndent = inner + "    ";
 
+        // The handoff slot: a `leave` out of the try names where the region's exit resumes.
+        // The try's dispatch writes the taken target here and the tail's dispatch (a SIBLING
+        // node, emitted after the region) reads it as its entry pc. Declared BEFORE the region
+        // so it spans both sides.
+        //
+        // Gate on whether anything in the region can actually WRITE the slot, not on
+        // RegionExitTargetOffsets. The latter describes the REGION's own leave targets, but an
+        // inner pc-dispatch's exit target is a property of the DISPATCH — and the finally/filter
+        // shape builders never populate it. Gating on the region property left such dispatches
+        // writing an undeclared name (C2065).
+        bool needsContinuation = WritesHandoffSlot(er.TryBody) || WritesHandoffSlot(er.HandlerBody);
+
         switch (er.Kind)
         {
             case IRExceptionKind.TryCatch:
                 {
                     int preTryDepth = _state.Value!.ActiveStructuredSlotContext?.Depth ?? 0;
-                    // The handoff slot: a `leave` out of the try names where the region's
-                    // exit resumes. The try's dispatch writes the taken target here and the
-                    // tail's dispatch reads it as its entry. Declared BEFORE the region so
-                    // it spans both sides (the tail is emitted as a sibling).
-                    bool hasRegionExits = er.RegionExitTargetOffsets is { Count: > 0 };
-                    if (hasRegionExits)
+                    if (needsContinuation)
                         builder.AppendLine(indentation + "CHAOS_IL2CPP_INT32 chaos_continuation = -1;");
                     builder.AppendLine(indentation + "CHAOS_EH_TRY");
                     EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
@@ -1215,6 +1222,10 @@ public sealed partial class NativeAotLoweringPlanner
 
             case IRExceptionKind.TryFinally:
                 {
+                    // Declared OUTSIDE the CHAOS_EH_TRY_FINALLY brace (that macro opens a scope),
+                    // so the sibling tail dispatch can still read what the try body wrote.
+                    if (needsContinuation)
+                        builder.AppendLine(indentation + "CHAOS_IL2CPP_INT32 chaos_continuation = -1;");
                     builder.AppendLine(inner + "auto _chaos_finally = [&]()");
                     builder.AppendLine(inner + "{");
                     EmitStructuredIRNode(builder, er.HandlerBody, method, inner + "    ");
@@ -1227,6 +1238,8 @@ public sealed partial class NativeAotLoweringPlanner
 
             case IRExceptionKind.TryFilter:
                 {
+                    if (needsContinuation)
+                        builder.AppendLine(indentation + "CHAOS_IL2CPP_INT32 chaos_continuation = -1;");
                     builder.AppendLine(indentation + "CHAOS_EH_TRY");
                     EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
                     builder.AppendLine(indentation + "CHAOS_EH_CATCH_BEGIN");
@@ -2242,13 +2255,6 @@ public sealed partial class NativeAotLoweringPlanner
         bool hasResume = resumeOffsets is { Count: > 0 };
 
         builder.AppendLine(indentation + "// pc-dispatch state machine for irreducible CFG");
-        if (hasExits && !hasResume)
-        {
-            // Write to the handoff slot (declared by the enclosing region, not here — see
-            // EmitIRExceptionRegion). This slot is read by the TAIL dispatch as its entry pc.
-            // The declaration is hoisted to region scope so it's visible to BOTH the region
-            // body and the tail sibling. Do NOT redeclare it here.
-        }
 
         if (hasResume)
         {
@@ -2339,6 +2345,44 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine(indentation + "        break;");
         builder.AppendLine(indentation + "    }");
         builder.AppendLine(indentation + "}");
+    }
+
+    /// <summary>
+    /// Returns true when any IRPcDispatch in the subtree would WRITE the chaos_continuation
+    /// handoff slot — i.e. it can fall out of its own CFG with a non-negative exit target.
+    /// Used by EmitIRExceptionRegion to decide whether to declare the slot at region scope.
+    /// The region is the only C++ scope shared by the writer (a dispatch inside the try body)
+    /// and the reader (the sibling tail dispatch emitted after the region).
+    /// </summary>
+    private static bool WritesHandoffSlot(StructuredIRNode? node)
+    {
+        switch (node)
+        {
+            case null:
+                return false;
+            case IRPcDispatch d:
+                return d.FallOutExitTargetOffset >= 0
+                    || d.Cases.Any(c => c.ExitTargetOffset >= 0);
+            case IRSequence seq:
+                return seq.Nodes.Any(WritesHandoffSlot);
+            case IRIfThenElse ite:
+                return WritesHandoffSlot(ite.ThenBody)
+                    || WritesHandoffSlot(ite.ElseBody)
+                    || WritesHandoffSlot(ite.PostMergeBody);
+            case IRWhileLoop w:
+                return WritesHandoffSlot(w.Body);
+            case IRDoWhileLoop dw:
+                return WritesHandoffSlot(dw.Body);
+            case IRSwitch sw:
+                return sw.CaseBodies.Values.Any(WritesHandoffSlot)
+                    || WritesHandoffSlot(sw.DefaultBody);
+            case IRExceptionRegion er:
+                return WritesHandoffSlot(er.TryBody) || WritesHandoffSlot(er.HandlerBody);
+            case IRAwait aw:
+                return WritesHandoffSlot(aw.Cont);
+            default:
+                return false;
+        }
     }
 
 

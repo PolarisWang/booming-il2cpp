@@ -199,6 +199,26 @@ internal static class ModelFactory
     }
 
     /// <summary>
+    /// Creates a finally region. Unlike a catch region there is no catch type, and the
+    /// handler is the finally body that runs on both the normal and exceptional paths.
+    /// </summary>
+    internal static AotCoreIrExceptionRegionArtifact FinallyRegion(
+        int tryOffset,
+        int tryLength,
+        int handlerOffset,
+        int handlerLength)
+    {
+        return new AotCoreIrExceptionRegionArtifact
+        {
+            HandlingKindCode = AotCoreIrExceptionRegionKind.Finally,
+            TryOffset = tryOffset,
+            TryLength = tryLength,
+            HandlerOffset = handlerOffset,
+            HandlerLength = handlerLength,
+        };
+    }
+
+    /// <summary>
     /// Creates an AotCoreIrArtifact containing the given methods.
     /// </summary>
     internal static AotCoreIrArtifact CreateArtifact(params AotCoreIrMethodArtifact[] methods)
