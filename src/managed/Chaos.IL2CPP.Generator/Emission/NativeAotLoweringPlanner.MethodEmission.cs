@@ -211,41 +211,50 @@ public sealed partial class NativeAotLoweringPlanner
             var ak = ClassifyAsyncMethod(method);
             if (ak == AsyncMethodKind.AsyncIterator)
             {
-                // ASYNC-P2-8 A1: an async-ITERATOR state machine is NOT an async Task state
-                // machine.  Both carry a `>d__` type and a `::MoveNext`, so
-                // IsAsyncStateMachineMoveNext cannot tell them apart — but the iterator
-                // state machine drives AsyncIteratorMethodBuilder from ITS OWN
-                // MoveNextAsync and implements IAsyncEnumerable/IAsyncEnumerator +
-                // IValueTaskSource<bool> + IAsyncDisposable.  Emitting it through the
-                // normal structured path (below) would produce task-shaped C++
-                // (get_Task/SetResult) for a type that has neither, then degrade to the
-                // interpreter stub returning 0 at the first unresolved builder call —
-                // a silent wrong iterable.
+                // ASYNC-P2-8 A4: iterator state machines whose body contains NO await can now
+                // be lowered through the normal structured IR path.  All the machinery they
+                // need is in place:
+                //   * the try/catch + multi-leave irreducible CFG lowers via pc-dispatch with
+                //     cross-partition handoff (aba7851f4)
+                //   * <>v__promiseOfValueOrEnd completion signals route to the A2 native
+                //     AsyncIteratorSourceCore (bf1d94138)
+                //   * the builder ops (Create/MoveNext/AwaitOnCompleted/Complete) route via A3
                 //
-                // Record it and emit an explicitly-labelled unsupported stub.  Do NOT
-                // throw: BuildMethodSourceSafe catches every exception and substitutes a
-                // generic unreachable stub, which would hide the signal entirely — the
-                // fake-green shape this task exists to remove.  The recorded subject ids
-                // are surfaced as kUnsupportedAsyncIterator* in the generated C++ (see
-                // EmitUnsupportedAsyncIteratorDeclarations) so the build can gate on them.
-                UnsupportedAsyncIteratorSubjectIds.Add(method.SubjectId ?? "<null>");
-                builder.AppendLine("// UNSUPPORTED async iterator: " + method.SubjectId);
-                builder.AppendLine("// async IAsyncEnumerable<T> / async IAsyncEnumerator<T> lowering is not implemented.");
-                builder.AppendLine("// Requires native AsyncIteratorBuilder + pooled ValueTask<bool> source, yield-return");
-                builder.AppendLine("// IR lowering (state=-4 resume), and an IAsyncEnumerable<T>/IAsyncEnumerator<T>");
-                builder.AppendLine("// interface object model. See docs/dev/in-progress/async-task-industrialization/"
-                    + "async-iterator-recon-2026-09-11.md (increments A2-A4).");
-                var iterDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
-                builder.AppendLine(iterDecl.Length > 0 && iterDecl[^1] == ';' ? iterDecl[..^1] : iterDecl);
-                builder.AppendLine("{");
-                builder.AppendLine("    (void)ChaosExternalRuntimeFallback(\""
-                    + EscapeCppStringLiteral(method.SubjectId ?? string.Empty) + "\");");
-                if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
+                // An iterator with an await is a DIFFERENT shape: it additionally needs
+                // await-side lowering that A4 does not implement (ConfiguredValueTaskAwaiter
+                // for Task.Yield, CancellationTokenSource wiring).  Routing it through the
+                // normal path would emit C++ that references unresolved await helpers and
+                // degrade to a silent wrong iterable.  Keep it on the explicitly-labelled
+                // unsupported stub so the gap stays visible.
+                if (!AsyncIteratorBodyHasAwait(method))
                 {
-                    builder.AppendLine("    return {};");
+                    // Falls through to TryBuildStructuredMethodBody below.
+                    UnsupportedAsyncIteratorSubjectIds.Add(method.SubjectId ?? "<null>");
                 }
-                builder.AppendLine("}");
-                return;
+                else
+                {
+                    // Record it and emit an explicitly-labelled unsupported stub.  Do NOT
+                    // throw: BuildMethodSourceSafe catches every exception and substitutes a
+                    // generic unreachable stub, which would hide the signal entirely.
+                    UnsupportedAsyncIteratorSubjectIds.Add(method.SubjectId ?? "<null>");
+                    builder.AppendLine("// UNSUPPORTED async iterator: " + method.SubjectId);
+                    builder.AppendLine("// async IAsyncEnumerable<T> / async IAsyncEnumerator<T> lowering is not implemented.");
+                    builder.AppendLine("// Requires native AsyncIteratorBuilder + pooled ValueTask<bool> source, yield-return");
+                    builder.AppendLine("// IR lowering (state=-4 resume), and an IAsyncEnumerable<T>/IAsyncEnumerator<T>");
+                    builder.AppendLine("// interface object model. See docs/dev/in-progress/async-task-industrialization/"
+                        + "async-iterator-recon-2026-09-11.md (increments A2-A4).");
+                    var iterDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
+                    builder.AppendLine(iterDecl.Length > 0 && iterDecl[^1] == ';' ? iterDecl[..^1] : iterDecl);
+                    builder.AppendLine("{");
+                    builder.AppendLine("    (void)ChaosExternalRuntimeFallback(\""
+                        + EscapeCppStringLiteral(method.SubjectId ?? string.Empty) + "\");");
+                    if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
+                    {
+                        builder.AppendLine("    return {};");
+                    }
+                    builder.AppendLine("}");
+                    return;
+                }
             }
             if (ak == AsyncMethodKind.Complex)
             {

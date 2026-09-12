@@ -56,6 +56,22 @@ public sealed partial class NativeAotLoweringPlanner
     }
     internal int AsyncMethodCount;
     /// <summary>
+    /// True when the async-iterator state machine's body contains a <c>GetAwaiter</c> call.
+    /// Await-free iterators (like <c>YieldOne</c>) can be lowered through the normal
+    /// structured IR path; iterators that await (like <c>YieldAfterAwait</c>) depend on
+    /// await-side lowering that A4 does not implement and must stay on the explicit stub.
+    /// </summary>
+    internal static bool AsyncIteratorBodyHasAwait(AotCoreIrMethodArtifact method)
+    {
+        foreach (var i in method.Instructions)
+        {
+            if ((i.Op == "call" || i.Op == "callvirt") && i.Callee is string c
+                && c.Contains("GetAwaiter", StringComparison.Ordinal))
+                return true;
+        }
+        return false;
+    }
+    /// <summary>
     /// Count of non-complex async state machine MoveNext methods emitted via the
     /// normal structured IR path (not via GenPromise/GenCoro). Historical name
     /// "AsyncCoroutine" is misleading — these state machines no longer map to

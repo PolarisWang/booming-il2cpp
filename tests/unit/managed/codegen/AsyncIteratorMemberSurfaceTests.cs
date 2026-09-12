@@ -217,6 +217,49 @@ public sealed class AsyncIteratorMemberSurfaceTests
     }
 
     /// <summary>
+    /// The A4 completion criterion's positive half: <c>YieldOne</c> (await-free iterator)
+    /// must now be REALLY lowered — a real MoveNext body carrying genuine control flow and
+    /// routing its completion signal to the A2 native source — not merely "no longer
+    /// stubbed".  Asserting only the absence of the UNSUPPORTED marker would pass on an
+    /// empty body, so every clause here names a positive mechanism.
+    /// </summary>
+    [Fact]
+    public void YieldOne_IsReallyLoweredWithNativeCompletion()
+    {
+        var outcome = EmitAndCapture("YieldOne");
+
+        Assert.True(outcome.Failure is null,
+            "Emission must not throw at the planner level: "
+            + outcome.Failure?.GetType().Name + ": " + outcome.Failure?.Message);
+
+        var moveNext = outcome.EmittedMethods
+            .FirstOrDefault(s => s.Contains("YieldOne") && s.Contains("::MoveNext"));
+        Assert.True(moveNext is not null,
+            "YieldOne::MoveNext must be emitted; got: " + string.Join(", ", outcome.EmittedMethods));
+
+        var source = outcome.MethodSourceBySubject[moveNext!];
+
+        // Positive mechanism 1: it is NOT the explicit unsupported stub.
+        Assert.DoesNotContain("UNSUPPORTED async iterator", source);
+
+        // Positive mechanism 2: real control flow. The yield/exhausted arms live in a
+        // pc-dispatch state machine (the iterator's try/catch + multi-leave CFG).
+        Assert.Contains("pc-dispatch", source);
+
+        // Positive mechanism 3: the cross-partition handoff, so the region exit resumes at
+        // the block its `leave` named instead of the tail's first block.
+        Assert.Contains("chaos_continuation", source);
+
+        // Positive mechanism 4: completion signals route to the A2 native source WITH the
+        // payload forwarded. A zero-arg external fallback here would discard the
+        // yielded/exhausted value — the defect this wiring removes.
+        Assert.Contains("chaos_async_iterator_source_set_result", source);
+        Assert.DoesNotContain(
+            "chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Sources_"
+            + "ManualResetValueTaskSourceCore", source);
+    }
+
+    /// <summary>
     /// The A4 completion criterion's other half: adding support for `YieldOne` must NOT
     /// silently absorb `YieldAfterAwait`. The latter has an await before its yield, so it
     /// depends on await-side lowering A4 explicitly does not implement
