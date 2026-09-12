@@ -1860,6 +1860,63 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// E2 (Phase 6): Parallel.For / Parallel.ForEach — the data-parallel loops.
+        ///
+        /// <para>
+        /// These were the single largest measured cost in the Parallel chunk: the
+        /// two hot <c>ForEach</c> stubs alone were 585us of the chunk's 1175us
+        /// benchmark total (52%), each running every delegate invocation through
+        /// the interpreter (MarshalDelegateInvoke → reflection → call) at ~1us per
+        /// call against ~30ns for a direct native call.
+        /// </para>
+        ///
+        /// <para>
+        /// <b>Scope: the range overload only.</b>  <c>Parallel.For(int,int,Action&lt;int&gt;)</c>
+        /// is a range partitioner — it has no managed-side state beyond the bounds
+        /// and the delegate, so the native implementation can partition it across
+        /// the ThreadPool and call the delegate's method_ptr directly.  The
+        /// <c>IEnumerable</c>/<c>ForEachAsync</c> overloads need a partitioner over
+        /// an arbitrary enumerator (and, for the Async form, cancellation and
+        /// ExecutionContext flow), which is a separate piece of work.  They keep
+        /// returning null here and stay on the interpreter — the honest outcome,
+        /// not a partial lowering.
+        /// </para>
+        /// </summary>
+        private static void RegisterParallelLoops(RuntimeHelperShapeRegistry registry)
+        {
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Parallel",
+                MethodName: "For",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    // (int from, int to, Action<int> body) — exactly three
+                    // parameters, two Int32 bounds and a delegate body.
+                    if (paramTypes.Count != 3) return null;
+                    if (paramTypes[0] != "System.Int32" || paramTypes[1] != "System.Int32") return null;
+                    if (!IsAnyContinuationDelegate(paramTypes[2])) return null;
+
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INT32 chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
+                    [
+                        "    return chaos_parallel_for_range_int(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact[3]
+                            {
+                                CreateInt32AbiSlot(),
+                                CreateInt32AbiSlot(),
+                                CreateNativeIntAbiSlot(),
+                            }),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0, 1, 2 },
+                        DirectNativeSymbol: "chaos_parallel_for_range_int");
+                }));
+        }
+
+        /// <summary>
         /// Phase 4: TaskExtensions.Unwrap + TaskToAsyncResult.
         ///
         /// <c>Unwrap</c> flattens a Task&lt;Task&lt;T&gt;&gt; into a Task&lt;T&gt;.  In this

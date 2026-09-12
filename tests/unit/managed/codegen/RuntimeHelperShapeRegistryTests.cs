@@ -969,6 +969,55 @@ public sealed class RuntimeHelperShapeRegistryTests
             $"{delegateType}::.ctor should match a delegate-ctor descriptor");
         Assert.Equal(".ctor", descriptor.MethodName);
     }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // Phase 6 / E2 — Parallel.For range partitioner
+    //
+    // The measured hot spot: the two ForEach stubs were 585us of the Parallel
+    // chunk's 1175us benchmark total (52%), each paying ~1us per delegate
+    // invocation through the interpreter.  The RANGE overload has no managed
+    // state beyond its bounds and delegate, so it can be partitioned natively.
+    // The IEnumerable/Async overloads cannot (partitioner + cancellation), and
+    // must keep returning null rather than be partially lowered.
+    // ══════════════════════════════════════════════════════════════════════
+
+    [Fact]
+    public void ParallelFor_RangeOverload_RoutesToNativePartitioner()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Parallel::For<System.Int32>:"
+            + "System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action<System.Int32>)";
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            "Parallel.For(int,int,Action<int>) should match a Parallel descriptor");
+        Assert.Equal("For", descriptor.MethodName);
+
+        var resolution = descriptor.Resolver(null!, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_parallel_for_range_int", resolution!.DirectNativeSymbol);
+        Assert.Contains("chaos_parallel_for_range_int", resolution.CppSource);
+    }
+
+    /// <summary>
+    /// The IEnumerable overload must NOT be captured by the range registration.
+    /// It needs a partitioner over an arbitrary enumerator — routing it to the
+    /// range helper would pass an IEnumerable handle where a from/to pair is
+    /// expected, silently iterating the wrong thing.
+    /// </summary>
+    [Fact]
+    public void ParallelFor_IEnumerableOverload_IsNotCapturedByRangeRegistration()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Parallel::ForEach<System.Int32>:"
+            + "System.Threading.Tasks.ParallelLoopResult("
+            + "System.Collections.Generic.IEnumerable<System.Int32>,System.Action<System.Int32>)";
+        if (!registry.TryMatchGenericShape(callee, out var descriptor, out _))
+            return;  // no descriptor at all is also acceptable
+
+        var resolution = descriptor.Resolver(null!, callee, Array.Empty<string>());
+        Assert.Null(resolution);
+    }
     //
     // The four state predicates MUST stay distinct.  A faulted ValueTask is
     // (IsCompleted=true, IsCompletedSuccessfully=false, IsFaulted=true,

@@ -108,6 +108,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterSynchronizationContext(registry);
             RegisterValueTask(registry);
             RegisterHotBclNoOps(registry);
+            RegisterParallelLoops(registry);
             RegisterTaskUnwrap(registry);
             RegisterTaskDelay(registry);
             RegisterNullableTget(registry);
