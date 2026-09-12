@@ -775,6 +775,99 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// ASYNC-P2-8 A4. <c>ManualResetValueTaskSourceCore&lt;bool&gt;</c> — the
+        /// <c>IValueTaskSource</c> body the iterator state machine feeds.
+        ///
+        /// <para>
+        /// The async-iterator <c>MoveNext</c> ends each arm with a completion signal:
+        /// <c>&lt;&gt;v__promiseOfValueOrEnd.SetResult(true)</c> on the yield arm and
+        /// <c>.SetResult(false)</c> on the exhausted arm (plus <c>SetException</c> on the
+        /// handler path).  <c>promiseOfValueOrEnd</c> is a
+        /// <c>ManualResetValueTaskSourceCore&lt;bool&gt;</c> whose address is passed as the
+        /// receiver.
+        /// </para>
+        ///
+        /// <para>
+        /// Without this registration those calls fall through to
+        /// <c>ChaosExternalRuntimeFallback</c> with <b>zero arguments forwarded</b> — so
+        /// the yielded/exhausted signal is computed and then discarded, and every
+        /// <c>MoveNextAsync</c> observes an unset source.  That is a silently wrong
+        /// enumerable, not a missing feature: the state machine looks correct and the
+        /// value never arrives.  The gap was measured on
+        /// <c>&lt;YieldOne&gt;d__0::MoveNext</c>, where both arms emitted
+        /// <c>chaos_external_runtime_..._SetResult_..._System_Boolean_()</c> with an empty
+        /// argument list while <c>_s4 = 0</c> / <c>_s7 = 1</c> sat unused on the stack.
+        /// </para>
+        ///
+        /// <para>
+        /// Maps to the A2 native surface over the pooled source
+        /// (<c>chaos/async_iterator.h</c>): <c>AsyncIteratorSourceCore</c> is the
+        /// documented <c>ManualResetValueTaskSourceCore&lt;bool&gt;</c> equivalent.
+        /// "core" handle = address of the promise field = <c>chaos_arg_0</c>.
+        /// </para>
+        /// </summary>
+        private static void RegisterManualResetValueTaskSourceCore(RuntimeHelperShapeRegistry registry)
+        {
+            const string Prefix = "System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore";
+
+            // ── SetResult(bool) — instance; receiver + the bool payload ──
+            // The bool crosses as a widened INTPTR slot (ABI carrier), matching how the
+            // iterator's `__current` store carries it; native narrows to int32.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: Prefix,
+                MethodName: "SetResult",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    // SetResult(bool value): chaos_arg_0 = &promiseOfValueOrEnd (the",
+                        "    // AsyncIteratorSourceCore), chaos_arg_1 = the completion value",
+                        "    // (true = element yielded, false = iteration exhausted).",
+                        "    chaos_async_iterator_source_set_result(chaos_arg_0,",
+                        "        static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(),
+                                CreateNativeIntAbiSlot(),
+                            }),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: "chaos_async_iterator_source_set_result");
+                }));
+
+            // ── SetException(Exception) — instance; receiver + exception object ──
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: Prefix,
+                MethodName: "SetException",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    // SetException(Exception): fault the source so the awaiting",
+                        "    // MoveNextAsync observes the exception instead of hanging.",
+                        "    chaos_async_iterator_source_set_exception(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(),
+                                CreateNativeIntAbiSlot(),
+                            }),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0, 1 },
+                        DirectNativeSymbol: "chaos_async_iterator_source_set_exception");
+                }));
+        }
+
+        /// <summary>
         /// TaskCompletionSource (non-generic and generic) — route SetResult/TrySetResult/
         /// SetException/TrySetException/SetCanceled/TrySetCanceled to native chaos_tcs_*
         /// helpers so generated C++ calls them directly instead of falling through to the

@@ -574,6 +574,95 @@ public sealed class RuntimeHelperShapeRegistryTests
         Assert.DoesNotContain("Iterator", descriptor.TypeDisplayNamePrefix, StringComparison.Ordinal);
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    // ASYNC-P2-8 A4 — ManualResetValueTaskSourceCore<bool> completion signals.
+    //
+    // The async-iterator MoveNext ends each arm with a completion signal:
+    //   yield arm     -> <>v__promiseOfValueOrEnd.SetResult(true)
+    //   exhausted arm -> <>v__promiseOfValueOrEnd.SetResult(false)
+    //   handler path  -> .SetException(ex)
+    //
+    // Before this registration those calls fell through to
+    // ChaosExternalRuntimeFallback with ZERO arguments forwarded — the signal was
+    // computed, pushed, and then discarded.  Measured on <YieldOne>d__0::MoveNext:
+    //     chaos_external_runtime_..._SetResult_..._System_Boolean_()
+    // with `_s4 = 0` / `_s7 = 1` sitting unused on the stack.
+    //
+    // The callee spellings below are the pipeline's REAL emitted strings (captured
+    // by dumping call instructions from the AotCoreIr), not hand-written guesses —
+    // P2-4's lesson: a registration keyed on a plausible-but-wrong spelling simply
+    // never fires and everything stays green.
+    // ══════════════════════════════════════════════════════════════════════
+
+    private const string MrvtscCalleePrefix =
+        "System.Private.CoreLib/System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore<System.Boolean>";
+
+    /// <summary>
+    /// SetResult(bool) must match and route to the A2 native source, carrying BOTH the
+    /// receiver (the promise field address) and the boolean payload.  Asserting only that
+    /// the match succeeds would pass against a zero-arg stub — which is exactly the defect.
+    /// </summary>
+    [Fact]
+    public void BuildDefault_IteratorPromise_SetResultRoutesToNativeSourceWithPayload()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string callee = MrvtscCalleePrefix + "::SetResult:System.Void(System.Boolean)";
+
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            "the measured SetResult callee must match the A4 registration");
+        Assert.Equal("SetResult", descriptor.MethodName);
+
+        var resolution = descriptor.Resolver(null!, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_async_iterator_source_set_result", resolution.DirectNativeSymbol);
+
+        // Two carrier slots: receiver + payload.  One slot would emit a 1-arg call and
+        // silently drop the boolean — the original defect's shape.
+        Assert.Equal(2, resolution.ParameterAbis.Count);
+        Assert.Contains("chaos_async_iterator_source_set_result", resolution.CppSource);
+        Assert.Contains("chaos_arg_1", resolution.CppSource);
+    }
+
+    /// <summary>
+    /// SetException(Exception) must match and forward the exception object, so a faulted
+    /// iterator resumes its awaiter with the exception instead of hanging forever.
+    /// </summary>
+    [Fact]
+    public void BuildDefault_IteratorPromise_SetExceptionRoutesToNativeSource()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string callee = MrvtscCalleePrefix + "::SetException:System.Void(System.Exception)";
+
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            "the measured SetException callee must match the A4 registration");
+        Assert.Equal("SetException", descriptor.MethodName);
+
+        var resolution = descriptor.Resolver(null!, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_async_iterator_source_set_exception", resolution.DirectNativeSymbol);
+        Assert.Equal(2, resolution.ParameterAbis.Count);
+        Assert.Contains("chaos_async_iterator_source_set_exception", resolution.CppSource);
+    }
+
+    /// <summary>
+    /// The promise registration must not swallow the async TASK builder's own
+    /// SetResult/SetException.  AsyncTaskMethodBuilder&lt;T&gt; also declares SetResult(T)
+    /// and SetException(Exception); an over-broad prefix would reroute every ordinary
+    /// `async Task&lt;T&gt;` completion through the iterator's pooled source — corrupting
+    /// the whole async surface.  The prefixes must stay disjoint.
+    /// </summary>
+    [Fact]
+    public void BuildDefault_TaskBuilderSetResult_IsNotAnsweredByIteratorPromiseRegistration()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string taskBuilderSetResult =
+            "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1[[System.Int32]]"
+            + "::SetResult:System.Void(System.Int32)";
+
+        Assert.True(registry.TryMatchGenericShape(taskBuilderSetResult, out var descriptor, out _));
+        Assert.DoesNotContain("ManualResetValueTaskSourceCore", descriptor.TypeDisplayNamePrefix, StringComparison.Ordinal);
+    }
+
     // ── Task.Run registration (ASYNC-P1-1) ─────────────────────────────────
     // Task::Run delegates to the native async_task_run (already fully
     // implemented in task_runner.cpp, registered at RuntimeInit, but had no
