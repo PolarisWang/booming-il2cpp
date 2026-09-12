@@ -23,3 +23,28 @@ CHAOS_IL2CPP_INTPTR chaos_delegate_remove(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2C
 {
     return chaos::il2cpp::runtime_core::DelegateRemove(source, value);
 }
+
+// ── Delegate constructor (Phase 6 / E1) ──
+// System.Func<T>/System.Action<T>::.ctor(object, IntPtr) pattern.
+// The runtime represents a delegate as a DelegateObject handle; the ctor
+// binds exactly (target, method-ptr) — a store, not an interpretation.
+// Without this, every delegate construction in generated code falls through
+// to the interpreter at ~20us/call.
+CHAOS_IL2CPP_INTPTR chaos_delegate_ctor(
+    CHAOS_IL2CPP_INTPTR this_ref,
+    CHAOS_IL2CPP_INTPTR target,
+    CHAOS_IL2CPP_INTPTR method_ptr) noexcept
+{
+    // The DelegateObject representation:
+    //   chaos_delegate_target = target (the object the closure captures)
+    //   chaos_delegate_method_ptr = the native function pointer to call
+    if (this_ref == 0) return 0;
+    auto* del = reinterpret_cast<chaos::il2cpp::runtime_core::DelegateObject*>(this_ref);
+    del->chaos_delegate_target = target;
+    del->chaos_delegate_method_ptr = method_ptr;
+    del->chaos_delegate_invocation_list = 0;
+    del->chaos_delegate_invocation_count = 0;
+    del->chaos_delegate_method_token = 0;
+    // type_info must be set by the managed side before calling .ctor.
+    return this_ref;
+}

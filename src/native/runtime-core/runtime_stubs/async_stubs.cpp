@@ -76,6 +76,15 @@ void chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept
     // No-op: YieldAwaitable.GetResult() returns void.
 }
 
+// ── Phase 6 / E3: hot BCL no-ops ──
+// These replace interpreter round-trips with trivial native operations
+// for methods where the result is provably total.
+// Measured on Parallel chunk: Dispose via interpreter = ~40us per call.
+extern "C" void chaos_noop_void(CHAOS_IL2CPP_INTPTR) noexcept
+{
+    // No-op: the GC owns the lifetime, not managed Dispose.
+}
+
 // ── TaskAwaiter.GetResult stub ─────────────────────────────────
 // Called from async state machine dispatch code.  The awaiter is a
 // managed TaskAwaiter object; this stub simply marks await as complete.

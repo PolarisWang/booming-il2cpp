@@ -938,7 +938,37 @@ public sealed class RuntimeHelperShapeRegistryTests
     }
 
     // ══════════════════════════════════════════════════════════════════════
-    // Phase 4 — ValueTask state queries + AsTask
+    // Phase 6 / E3 — hot BCL no-ops
+    //
+    // Measured on the Parallel chunk: 8 methods are 96% of its runtime, and
+    // every one is a ChaosExternalRuntimeFallback stub averaging 20.1us against
+    // 0.9us for real lowered code (21.4x).  Two of those are provably-total
+    // members — IDisposable.Dispose and the delegate constructors — so they can
+    // be routed natively instead of interpreted.
+    // ══════════════════════════════════════════════════════════════════════
+
+    [Fact]
+    public void HotBcl_Dispose_RoutesToNativeNoOp()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        const string callee = "System.Private.CoreLib/System.IDisposable::Dispose:System.Void()";
+        Assert.True(registry.TryMatchShape(callee, out var entry));
+        Assert.Equal("chaos_noop_void", entry!.NativeFnSymbol);
+    }
+
+    [Theory]
+    [InlineData("System.Func`1[[System.Int32]]")]
+    [InlineData("System.Action`1[[System.Int32]]")]
+    [InlineData("System.Predicate`1[[System.Int32]]")]
+    public void HotBcl_DelegateCtor_RoutesToNativeInitialize(string delegateType)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string callee = $"System.Private.CoreLib/{delegateType}"
+            + "::.ctor:System.Void(System.Object,System.IntPtr)";
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"{delegateType}::.ctor should match a delegate-ctor descriptor");
+        Assert.Equal(".ctor", descriptor.MethodName);
+    }
     //
     // The four state predicates MUST stay distinct.  A faulted ValueTask is
     // (IsCompleted=true, IsCompletedSuccessfully=false, IsFaulted=true,

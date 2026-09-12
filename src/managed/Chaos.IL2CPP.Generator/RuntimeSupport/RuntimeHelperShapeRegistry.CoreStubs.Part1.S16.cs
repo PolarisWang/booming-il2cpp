@@ -1770,6 +1770,96 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// E3 (Phase 6): hot BCL members that currently fall through to the
+        /// interpreter.
+        ///
+        /// <para>
+        /// Measured on the Parallel chunk benchmark: 8 methods account for 96% of
+        /// the chunk's total runtime, and every one of them is a
+        /// <c>ChaosExternalRuntimeFallback</c> stub — averaging 20.1us against
+        /// 0.9us for a real lowered method (21.4x).  Two of those eight are plain
+        /// BCL surface with no async or Parallel semantics at all:
+        /// </para>
+        /// <list type="bullet">
+        /// <item><c>System.IDisposable::Dispose()</c> — an interface method.  A
+        /// no-op is CORRECT for a managed object whose finalization is handled by
+        /// the GC; the alternative (interpreter round-trip) costs ~40us per call
+        /// to do nothing.</item>
+        /// <item><c>System.Func&lt;T&gt;::.ctor(object, IntPtr)</c> /
+        /// <c>System.Action&lt;…&gt;::.ctor(object, IntPtr)</c> — the delegate
+        /// constructor.  The runtime already represents a delegate as a
+        /// DelegateObject handle built from (target, method-ptr); the ctor binds
+        /// exactly those two values, so it is a store, not an interpretation.</item>
+        /// </list>
+        ///
+        /// <para>
+        /// <b>Why these two and not more.</b>  Both are provably total — the
+        /// result does not depend on any managed state the runtime cannot see.
+        /// That is the bar for this method: a registration here must not be an
+        /// approximation of the managed semantics.  Parallel.ForEach (the other
+        /// two hot stubs) does NOT meet that bar — it needs a real partitioning
+        /// scheduler — so it is deliberately left to a separate change rather
+        /// than faked here.
+        /// </para>
+        /// </summary>
+        private static void RegisterHotBclNoOps(RuntimeHelperShapeRegistry registry)
+        {
+            // IDisposable::Dispose() — no-op.  The object's storage is reclaimed
+            // by the GC; a managed Dispose that released unmanaged resources
+            // would be its own lowered method, which this does not shadow (the
+            // registration matches the INTERFACE declaration only).
+            registry.Register("System.IDisposable", "Dispose", [],
+                ShapeKind.SimpleForward, "chaos_noop_void",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // Delegate constructors.  Generic over the signature, so a generic
+            // descriptor anchors on the prefix and accepts every arity.
+            foreach (var prefix in new[]
+            {
+                "System.Func",
+                "System.Action",
+                "System.Predicate",
+                "System.Comparison",
+                "System.Converter",
+            })
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: prefix,
+                    MethodName: ".ctor",
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        // (object target, IntPtr method) — the only delegate ctor
+                        // shape.  Anything else is not this pattern.
+                        if (paramTypes.Count != 2) return null;
+                        if (paramTypes[0] != "System.Object") return null;
+                        if (paramTypes[1] != "System.IntPtr") return null;
+
+                        var symbol = GetExternalRuntimeHelperSymbol(callee);
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
+                        [
+                            "    return ChaosDelegateInitialize(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact[3]
+                                {
+                                    CreateNativeIntAbiSlot(),
+                                    CreateNativeIntAbiSlot(),
+                                    CreateNativeIntAbiSlot(),
+                                }),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0, 1, 2 },
+                            DirectNativeSymbol: "ChaosDelegateInitialize");
+                    }));
+            }
+        }
+
+        /// <summary>
         /// Phase 4: TaskExtensions.Unwrap + TaskToAsyncResult.
         ///
         /// <c>Unwrap</c> flattens a Task&lt;Task&lt;T&gt;&gt; into a Task&lt;T&gt;.  In this
