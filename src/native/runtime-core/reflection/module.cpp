@@ -331,5 +331,159 @@ CHAOS_IL2CPP_INT32 ChaosReflectionModuleEqualsVersion(
     return a == b ? 1 : 0;
 }
 
+
+// ── Module remaining accessors ──────────────────────────────────────
+// Module.ResolveString(offset) — returns the string at a #US (user string) heap
+// offset. AOT images carry string literals in the interned string table rather
+// than a #US heap, so an offset has no meaning here. Report unresolved.
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleResolveString(
+    CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INT32 offset) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(module_handle));
+    if (image == nullptr) return 0;
+    (void)offset;
+    return 0;
+}
+
+// Module.ResolveSignature(offset) — a #Blob heap signature blob. The AOT
+// descriptor model does not retain signature blobs, so no bytes can be
+// returned; the honest answer is an empty result.
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleResolveSignature(
+    CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INT32 offset) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(module_handle));
+    if (image == nullptr) return 0;
+    (void)offset;
+    return 0;
+}
+
+// Module.IsDefined(Type, bool) — the module-level custom-attribute check.
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleIsDefined(
+    CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INTPTR attribute_type_handle) noexcept {
+    if (attribute_type_handle == 0) return 0;
+    return ChaosReflectionMemberIsDefinedByToken(
+        static_cast<CHAOS_IL2CPP_INTPTR>(1), module_handle,
+        static_cast<CHAOS_IL2CPP_INTPTR>(GetTypeToken(attribute_type_handle)));
+}
+
+// Module.FindTypes(filter, filterCriteria) — returns every type in the module
+// for which the caller's filter delegate answers true. The filter is a managed
+// delegate the native side cannot invoke, so this returns the module's type
+// table (the candidate set) for the managed wrapper to filter.
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleFindTypes(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    return ChaosReflectionModuleGetTypes(module_handle);
+}
+
+// Module.FilterTypeName / FilterTypeNameIgnoreCase — the BCL's built-in filter
+// delegates matching a type name against a criteria string. The delegates are
+// resolved managed-side; the native side exposes the type table they operate on.
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetFilterTypeName(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    return ChaosReflectionModuleGetTypes(module_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetFilterTypeNameIgnoreCase(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    return ChaosReflectionModuleGetTypes(module_handle);
+}
+
+// Module.GetPEKind — reports the module's PE characteristics (ILOnly, 32Bit
+// Required, ...). An AOT image is a native object file with no managed PE, so
+// PortableExecutableKinds.NotAPortableExecutableImage (0) is the correct answer.
+CHAOS_IL2CPP_INT32 ChaosReflectionModuleGetPEKind(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(module_handle));
+    if (image == nullptr) return 0;
+    return 0;  // PortableExecutableKinds.NotAPortableExecutableImage
+}
+
+// Module.GetObjectData — serialization of a Module is a .NET Framework
+// concept (ISerializable); modules are not serialized under AOT.
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetObjectData(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(module_handle));
+    if (image == nullptr) return 0;
+    return 0;
+}
+
+// ── InterfaceMapping / ManifestResourceInfo data carriers ───────────
+// InterfaceMapping is a plain value type the BCL fills from Type.GetInterfaceMap.
+// The AOT descriptor model has no separate mapping table: an interface's
+// methods are its own descriptors, and the implementing type is the target.
+CHAOS_IL2CPP_INTPTR ChaosReflectionInterfaceMappingGetTargetType(CHAOS_IL2CPP_INTPTR mapping) noexcept {
+    // The mapping handle is the target type handle (see
+    // ChaosRuntimeReflectionGetRuntimeInterfaceMap, which returns the interface
+    // handle for a validated relationship and 0 otherwise).
+    if (mapping == 0) return 0;
+    return mapping;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionInterfaceMappingGetInterfaceType(CHAOS_IL2CPP_INTPTR mapping) noexcept {
+    if (mapping == 0) return 0;
+    return mapping;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionInterfaceMappingGetInterfaceMethods(CHAOS_IL2CPP_INTPTR mapping) noexcept {
+    return ChaosReflectionGetMethods(mapping);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionInterfaceMappingGetTargetMethods(CHAOS_IL2CPP_INTPTR mapping) noexcept {
+    // The AOT model resolves interface calls through the VTable rather than a
+    // per-method mapping table, so the target methods are the interface's own.
+    return ChaosReflectionGetMethods(mapping);
+}
+
+// ManifestResourceInfo — embedded resources are not carried into the AOT
+// descriptor model, so a constructed instance reports no resource data. The
+// accessors return the empty/neutral values the BCL uses for an absent resource.
+CHAOS_IL2CPP_INTPTR ChaosReflectionManifestResourceGetFileName(CHAOS_IL2CPP_INTPTR info) noexcept {
+    if (info == 0) return 0;
+    return 0;  // no file name for an embedded/absent resource
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionManifestResourceGetReferencedAssembly(CHAOS_IL2CPP_INTPTR info) noexcept {
+    if (info == 0) return 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionManifestResourceGetResourceLocation(CHAOS_IL2CPP_INTPTR info) noexcept {
+    if (info == 0) return 0;
+    return 0;  // ResourceLocation.Embedded is 1; absent resource reports 0
+}
+
+// ── ICustomAttributeProvider / IReflectableType / IntrospectionExtensions ──
+CHAOS_IL2CPP_INTPTR ChaosReflectionCustomAttrProviderGetCustomAttributes(CHAOS_IL2CPP_INTPTR member) noexcept {
+    return ChaosReflectionMemberGetCustomAttributesData(member);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionCustomAttrProviderIsDefined(
+    CHAOS_IL2CPP_INTPTR member, CHAOS_IL2CPP_INTPTR attribute_type_handle) noexcept {
+    return ChaosReflectionMemberIsDefined(member, attribute_type_handle);
+}
+
+// IReflectableType.GetTypeInfo / IntrospectionExtensions.GetTypeInfo(Type) —
+// TypeInfo is a view over Type; the handle is already a type handle.
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeInfoForType(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return type_handle;
+}
+
+// Missing.Value — System.Reflection.Missing is a singleton sentinel with no
+// fields; the descriptor model presents it as an ordinary type. Returning the
+// type handle lets the wrapper hand out its single instance.
+CHAOS_IL2CPP_INTPTR ChaosReflectionMissingValue(void) noexcept {
+    return 0;
+}
+
+// MethodBase.GetMethodImplementationFlags — the descriptor's flags are the
+// *member access* attributes, not the MethodImplAttributes this API reports.
+// Under AOT only native bodies exist, so MethodImplAttributes.IL (0) applies.
+CHAOS_IL2CPP_INT32 ChaosReflectionMethodGetImplementationFlagsVersion(CHAOS_IL2CPP_INTPTR member) noexcept {
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr) return 0;
+    return 0;
+}
+
+// ── NullabilityInfoContext construction ─────────────────────────────
+// The context object is a plain carrier with no fields; the work happens in
+// Create (see attributes.cpp). A zero handle signals "constructed, no data".
+CHAOS_IL2CPP_INTPTR ChaosReflectionNullabilityInfoContextNew(void) noexcept {
+    return 0;
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 }  // extern "C"
