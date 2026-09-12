@@ -1480,6 +1480,53 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// Phase 3: AsyncLocal&lt;T&gt;.Value getter/setter.
+        ///
+        /// AsyncLocal&lt;T&gt; is a generic class whose native storage is thread-local (see
+        /// execution_context.cpp).  The getter &amp; setter each take a KEY (the async local's
+        /// stable instance id, an opaque int64) and read/write that thread-local storage.
+        ///
+        /// <para>
+        /// Registered via SimpleForward rather than GenericShapeDescriptor: the native
+        /// bridge is non-generic (the key and the boxed value both cross as flat INTPTR),
+        /// so expanding the type argument into a per-T wrapper would add nothing.
+        /// </para>
+        ///
+        /// <para>
+        /// Without this registration every <c>AsyncLocal&lt;T&gt;.Value</c> read/write falls
+        /// through to ChaosExternalRuntimeFallback → 0, meaning the value silently resets
+        /// across an await — which is exactly the behaviour the Phase 3 AsyncLocal
+        /// counter-example (set 1 → await → still 1) is designed to catch.
+        /// </para>
+        /// </summary>
+        private static void RegisterAsyncLocal(RuntimeHelperShapeRegistry registry)
+        {
+            // AsyncLocal<T>::get_Value() — instance, returns the stored boxed value.
+            registry.Register(
+                "System.Threading.AsyncLocal`1",
+                "get_Value", [],
+                ShapeKind.SimpleForward, "chaos_async_local_get_value",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // AsyncLocal<T>::set_Value(T) — instance, takes the boxed value.
+            registry.Register(
+                "System.Threading.AsyncLocal`1",
+                "set_Value", [],
+                ShapeKind.SimpleForward, "chaos_async_local_set_value",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact[2]
+                    {
+                        CreateNativeIntAbiSlot(),
+                        CreateNativeIntAbiSlot(),
+                    }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+        }
+
+        /// <summary>
         /// Decimal
         /// </summary>
         private static void RegisterDecimal(RuntimeHelperShapeRegistry registry)

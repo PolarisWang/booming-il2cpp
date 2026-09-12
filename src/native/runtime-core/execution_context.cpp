@@ -317,3 +317,20 @@ extern "C" void chaos_execution_context_restore_flow(CHAOS_IL2CPP_INT32 cookie) 
 extern "C" bool chaos_execution_context_is_flow_suppressed() noexcept {
     return chaos::il2cpp::runtime_core::threading::ExecutionContextIsFlowSuppressed() ? 1 : 0;
 }
+
+// ── Phase 3: AsyncLocal<T> value access (extern "C" bridge for codegen) ──
+// The C++ namespace members aren't callable from codegen-emitted C++, so these
+// thin wrappers exist for the ShapeRegistry to name as DirectNativeSymbol.
+extern "C" void chaos_async_local_set_value(
+    CHAOS_IL2CPP_INT64 key, CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    chaos::il2cpp::runtime_core::threading::AsyncLocalSetValue(
+        static_cast<uint64_t>(key), value);
+}
+
+extern "C" CHAOS_IL2CPP_INTPTR chaos_async_local_get_value(
+    CHAOS_IL2CPP_INT64 key) noexcept
+{
+    return chaos::il2cpp::runtime_core::threading::AsyncLocalGetValue(
+        static_cast<uint64_t>(key));
+}

@@ -90,4 +90,16 @@ extern "C" CHAOS_IL2CPP_INT32 chaos_execution_context_suppress_flow() noexcept;
 extern "C" void chaos_execution_context_restore_flow(CHAOS_IL2CPP_INT32 cookie) noexcept;
 extern "C" bool chaos_execution_context_is_flow_suppressed() noexcept;
 
+// ── AsyncLocal<T> value access (extern "C" bridge for codegen) ──
+// `key` is the AsyncLocal<T> instance's stable id; `value` is the boxed value
+// (0 clears the entry, which is what AsyncLocal<T>.Value = null does).
+//
+// Why this bridge exists: AsyncLocalGetValue/SetValue are C++ namespace members,
+// so codegen-emitted C++ (which calls extern "C" symbols) could not reach them.
+// Without the bridge every `AsyncLocal<T>.Value` read/write falls through to
+// ChaosExternalRuntimeFallback → 0, i.e. the value silently resets across an
+// await — the exact defect the AsyncLocal acceptance counter-example targets.
+extern "C" void chaos_async_local_set_value(CHAOS_IL2CPP_INT64 key, CHAOS_IL2CPP_INTPTR value) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_async_local_get_value(CHAOS_IL2CPP_INT64 key) noexcept;
+
 #endif  // CHAOS_IL2CPP_EXECUTION_CONTEXT_H_

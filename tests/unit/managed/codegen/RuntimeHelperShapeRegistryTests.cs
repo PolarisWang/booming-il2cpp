@@ -823,6 +823,34 @@ public sealed class RuntimeHelperShapeRegistryTests
     }
 
     // ══════════════════════════════════════════════════════════════════════
+    // Phase 3 — AsyncLocal<T>.Value access
+    //
+    // Without these registrations every AsyncLocal<T>.Value read/write falls
+    // through to ChaosExternalRuntimeFallback → 0, meaning the value silently
+    // resets across an await — the defect the Phase 3 counter-example targets.
+    // ══════════════════════════════════════════════════════════════════════
+
+    [Fact]
+    public void AsyncLocal_GetValue_RoutesToNativeStorage()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        const string callee =
+            "System.Private.CoreLib/System.Threading.AsyncLocal`1::get_Value:!0()";
+        Assert.True(registry.TryMatchShape(callee, out var entry));
+        Assert.Equal("chaos_async_local_get_value", entry!.NativeFnSymbol);
+    }
+
+    [Fact]
+    public void AsyncLocal_SetValue_RoutesToNativeStorage()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        const string callee =
+            "System.Private.CoreLib/System.Threading.AsyncLocal`1::set_Value:!0()";
+        Assert.True(registry.TryMatchShape(callee, out var entry));
+        Assert.Equal("chaos_async_local_set_value", entry!.NativeFnSymbol);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
     // ASYNC-P2-8 WhenEach — the ORDER-PRESERVING completion stream.
     //
     // Distinct from WhenAll/WhenAny: those are one-shot aggregates. WhenEach
