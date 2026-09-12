@@ -129,17 +129,37 @@ public sealed partial class NativeAotLoweringPlanner
                             catch { }
                         }
 
-                        // Compute field flags from PE FieldAttributes
+                        // Compute field flags from PE FieldAttributes.
+                        // Bit layout must stay in sync with reflection_query_model.h
+                        // (kFieldFlag*). Existing bits 0..3 keep their meaning; the
+                        // access/modifier bits below were added in Phase 3 of
+                        // reflection-production-readiness and are consumed by the
+                        // ChaosReflectionFieldGetIs* accessors in remaining_stubs.cpp.
                         var fa = fieldDef.Attributes;
                         uint fieldFlags = 0;
-                        if ((fa & System.Reflection.FieldAttributes.FieldAccessMask) == System.Reflection.FieldAttributes.Public)
-                            fieldFlags |= 1u << 0; // kFieldFlagIsPublic
+
+                        // Access level (MemberAccessMask is a 3-bit field, not a flag)
+                        switch (fa & System.Reflection.FieldAttributes.FieldAccessMask)
+                        {
+                            case System.Reflection.FieldAttributes.Public:            fieldFlags |= 1u << 0; break;  // kFieldFlagIsPublic
+                            case System.Reflection.FieldAttributes.Private:           fieldFlags |= 1u << 4; break;  // kFieldFlagIsPrivate
+                            case System.Reflection.FieldAttributes.Assembly:          fieldFlags |= 1u << 5; break;  // kFieldFlagIsAssembly
+                            case System.Reflection.FieldAttributes.Family:            fieldFlags |= 1u << 6; break;  // kFieldFlagIsFamily
+                            case System.Reflection.FieldAttributes.FamANDAssem:       fieldFlags |= 1u << 7; break;  // kFieldFlagIsFamilyAndAssembly
+                            case System.Reflection.FieldAttributes.FamORAssem:        fieldFlags |= 1u << 8; break;  // kFieldFlagIsFamilyOrAssembly
+                        }
                         if (fa.HasFlag(System.Reflection.FieldAttributes.Static))
                             fieldFlags |= 1u << 1; // kFieldFlagIsStatic
                         if (fa.HasFlag(System.Reflection.FieldAttributes.InitOnly))
                             fieldFlags |= 1u << 2; // kFieldFlagIsInitOnly
                         if (fa.HasFlag(System.Reflection.FieldAttributes.Literal))
                             fieldFlags |= 1u << 3; // kFieldFlagIsLiteral
+                        if (fa.HasFlag(System.Reflection.FieldAttributes.NotSerialized))
+                            fieldFlags |= 1u << 9;  // kFieldFlagIsNotSerialized
+                        if (fa.HasFlag(System.Reflection.FieldAttributes.PinvokeImpl))
+                            fieldFlags |= 1u << 10; // kFieldFlagIsPinvokeImpl
+                        if (fa.HasFlag(System.Reflection.FieldAttributes.SpecialName))
+                            fieldFlags |= 1u << 11; // kFieldFlagIsSpecialName
 
                         var fieldSubjectId = candidateId + "::" + fieldName;
                         fields.Add((fieldSubjectId, fieldName, "System.Int32", fieldValue, fieldToken, fieldFlags));
@@ -155,12 +175,29 @@ public sealed partial class NativeAotLoweringPlanner
                         uint mToken = (uint)MetadataTokens.GetToken(methodHandle);
                         var ma = methodDef.Attributes;
                         uint methodFlags = 0;
-                        if ((ma & System.Reflection.MethodAttributes.MemberAccessMask) == System.Reflection.MethodAttributes.Public)
-                            methodFlags |= 1u << 0; // kMethodFlagIsPublic
+
+                        // Access level (MemberAccessMask is a 3-bit field, not a flag)
+                        switch (ma & System.Reflection.MethodAttributes.MemberAccessMask)
+                        {
+                            case System.Reflection.MethodAttributes.Public:      methodFlags |= 1u << 0;  break;  // kMethodFlagIsPublic
+                            case System.Reflection.MethodAttributes.Private:     methodFlags |= 1u << 3;  break;  // kMethodFlagIsPrivate
+                            case System.Reflection.MethodAttributes.Assembly:    methodFlags |= 1u << 4;  break;  // kMethodFlagIsAssembly
+                            case System.Reflection.MethodAttributes.Family:      methodFlags |= 1u << 5;  break;  // kMethodFlagIsFamily
+                            case System.Reflection.MethodAttributes.FamANDAssem: methodFlags |= 1u << 6;  break;  // kMethodFlagIsFamilyAndAssembly
+                            case System.Reflection.MethodAttributes.FamORAssem:  methodFlags |= 1u << 7;  break;  // kMethodFlagIsFamilyOrAssembly
+                        }
                         if (ma.HasFlag(System.Reflection.MethodAttributes.Static))
-                            methodFlags |= 1u << 1; // kMethodFlagIsStatic
+                            methodFlags |= 1u << 1;  // kMethodFlagIsStatic
                         if (ma.HasFlag(System.Reflection.MethodAttributes.Virtual))
-                            methodFlags |= 1u << 2; // kMethodFlagIsVirtual
+                            methodFlags |= 1u << 2;  // kMethodFlagIsVirtual
+                        if (ma.HasFlag(System.Reflection.MethodAttributes.Final))
+                            methodFlags |= 1u << 8;  // kMethodFlagIsFinal
+                        if (ma.HasFlag(System.Reflection.MethodAttributes.HideBySig))
+                            methodFlags |= 1u << 9;  // kMethodFlagIsHideBySig
+                        if (ma.HasFlag(System.Reflection.MethodAttributes.SpecialName))
+                            methodFlags |= 1u << 10; // kMethodFlagIsSpecialName
+                        if (ma.HasFlag(System.Reflection.MethodAttributes.Abstract))
+                            methodFlags |= 1u << 11; // kMethodFlagIsAbstract
                         methodTokenFlags[mToken] = methodFlags;
                     }
                     typeMethodAttrMap[candidateId] = methodTokenFlags;

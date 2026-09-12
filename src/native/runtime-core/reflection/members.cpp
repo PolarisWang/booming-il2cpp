@@ -33,7 +33,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembers(CHAOS_IL2CPP_INTPTR type_handle) {
     if (total == 0 || total > 128) return 0;
 
     // Buffer entries: [count, (kind, handle) x total] = 1 + 2*total
-    static CHAOS_IL2CPP_INTPTR s_buffer[257];
+    thread_local CHAOS_IL2CPP_INTPTR s_buffer[257];
     s_buffer[0] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<intptr_t>(total));
 
     constexpr CHAOS_IL2CPP_INTPTR kField      = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -78,7 +78,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetNestedTypes(CHAOS_IL2CPP_INTPTR type_handl
     uint32_t count = end - start;
     if (count == 0 || count > 32) return 0;
 
-    static CHAOS_IL2CPP_INTPTR buffer[33];
+    thread_local CHAOS_IL2CPP_INTPTR buffer[33];
     buffer[0] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<intptr_t>(count));
     for (uint32_t i = 0; i < count; i++) {
         uint32_t child_token = tr.module->nested_type_children[start + i];

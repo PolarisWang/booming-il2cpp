@@ -37,11 +37,22 @@ struct ReflectionQueryMethodDescriptor {
     const void* default_value_blob;
     CHAOS_IL2CPP_UINT32 flags;          // Method attribute flags (kMethodFlag*), must be last for ABI compat
 };
-
 // Method descriptor flags (populated from managed metadata)
 static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsPublic  = 1u << 0;
 static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsStatic  = 1u << 1;
 static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsVirtual = 1u << 2;
+// Access-level and modifier bits, mirroring System.Reflection.MethodAttributes.
+// Bits 3..12 are reserved for the remaining ECMA-335 MethodAttributes values.
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsPrivate           = 1u << 3;
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsAssembly          = 1u << 4;
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsFamily            = 1u << 5;
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsFamilyAndAssembly = 1u << 6;
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsFamilyOrAssembly  = 1u << 7;
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsFinal             = 1u << 8;
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsHideBySig         = 1u << 9;
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsSpecialName       = 1u << 10;
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsAbstract          = 1u << 11;
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsConstructor       = 1u << 12;
 
 struct ReflectionQueryFieldDescriptor {
     CHAOS_IL2CPP_UINT32 metadata_token;
@@ -57,6 +68,15 @@ static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsPublic   = 1u << 0;
 static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsStatic   = 1u << 1;
 static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsInitOnly = 1u << 2;  // readonly
 static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsLiteral  = 1u << 3;  // const
+// Access-level and modifier bits, mirroring System.Reflection.FieldAttributes.
+static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsPrivate           = 1u << 4;
+static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsAssembly          = 1u << 5;
+static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsFamily            = 1u << 6;
+static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsFamilyAndAssembly = 1u << 7;
+static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsFamilyOrAssembly  = 1u << 8;
+static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsNotSerialized     = 1u << 9;
+static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsPinvokeImpl       = 1u << 10;
+static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsSpecialName       = 1u << 11;
 
 struct ReflectionQueryPropertyDescriptor {
     const char* subject_id_utf8;

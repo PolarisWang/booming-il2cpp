@@ -255,7 +255,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetInterfaces(CHAOS_IL2CPP_INTPTR type_handle
     if (type_info == nullptr) return 0;
 
     // ReturnValueBuffer: [0]=count, [1..N]=handles (up to 32 interfaces)
-    static CHAOS_IL2CPP_INTPTR s_buffer[33];
+    thread_local CHAOS_IL2CPP_INTPTR s_buffer[33];
     uint32_t count = 0;
 
     auto try_add = [&](uint64_t stable_id) {
@@ -329,7 +329,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamConstraints(CHAOS_IL2CPP_INTPT
                 }
                 if (match_count == 0) return 0;
 
-                static CHAOS_IL2CPP_INTPTR buffer[33];
+                thread_local CHAOS_IL2CPP_INTPTR buffer[33];
                 buffer[0] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<intptr_t>(match_count));
                 for (uint32_t i = 0; i < match_count; i++) {
                     buffer[1 + i] = static_cast<CHAOS_IL2CPP_INTPTR>(

@@ -48,7 +48,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericArguments(CHAOS_IL2CPP_INTPTR type_
         auto* rti = reinterpret_cast<const rt_type*>(desc);
         if (rti == nullptr || rti->type_args == nullptr || rti->arg_count == 0) return 0;
 
-        static CHAOS_IL2CPP_INTPTR s_buffer[33];
+        thread_local CHAOS_IL2CPP_INTPTR s_buffer[33];
         uint32_t count = rti->arg_count > 32 ? 32 : rti->arg_count;
         for (uint32_t i = 0; i < count; i++) {
             s_buffer[1 + i] = static_cast<CHAOS_IL2CPP_INTPTR>(rti->type_args[i]);
@@ -63,7 +63,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericArguments(CHAOS_IL2CPP_INTPTR type_
     {
         TypeInfoHandle closed_handle = static_cast<TypeInfoHandle>(static_cast<uint64_t>(type_handle));
         if (closed_handle != 0) {
-            static CHAOS_IL2CPP_INTPTR s_args_buffer[33];
+            thread_local CHAOS_IL2CPP_INTPTR s_args_buffer[33];
             uint32_t count = generic_context::GetClosedTypeGenericArgs(
                 closed_handle,
                 reinterpret_cast<TypeInfoHandle*>(s_args_buffer + 1),

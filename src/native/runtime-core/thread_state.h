@@ -237,6 +237,12 @@ extern thread_local ManagedThread* tls_this_thread;
 extern thread_local int32_t        tls_this_thread_id;
 extern thread_local int32_t        tls_preemptive_depth;
 
+/// The image currently executing on this thread (nullptr when outside any
+/// translated method).  Maintained by generated code via
+/// ChaosReflectionPushExecutingImage / ChaosReflectionPopExecutingImage and
+/// consumed by Assembly.GetCallingAssembly / GetExecutingAssembly.
+extern thread_local const void*    tls_executing_image;
+
 /// Set thread state with debug validation.
 /// In PROFILE/SHIP, compiles to a plain assignment.
 inline void SetThreadState(ManagedThread& thread, ManagedThreadState new_state) noexcept {

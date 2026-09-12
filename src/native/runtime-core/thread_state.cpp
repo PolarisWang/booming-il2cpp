@@ -77,6 +77,20 @@ thread_local int32_t        tls_forbid_suspend_depth = 0;
 /// ScopedPreemptiveMode guards and the GcSpinLock safepoint-aware spin loop.
 thread_local int32_t        tls_preemptive_depth = 0;
 
+/// Pointer to the image currently executing on this thread.
+///
+/// Assembly.GetCallingAssembly / GetExecutingAssembly need to attribute a
+/// reflection query to an assembly (REF-RISK-7).  AOT frames carry no managed
+/// stack-walk metadata, so instead of unwinding we track the executing image
+/// explicitly: generated code brackets each translated method with
+/// ChaosReflectionPushExecutingImage / PopExecutingImage, and the reflection
+/// accessors read this slot.
+///
+/// Nesting is a stack, but callers only ever need the *caller's* image, so a
+/// single saved-previous slot suffices: Push returns the previous value for the
+/// caller to restore on Pop, which keeps the discipline allocation-free.
+thread_local const void*    tls_executing_image = nullptr;
+
 namespace {
 
 /// Lock-free singly-linked list of all registered ManagedThread entries.

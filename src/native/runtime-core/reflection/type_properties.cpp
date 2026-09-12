@@ -141,8 +141,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR ty
         CHAOS_IL2CPP_INTPTR length;
         CHAOS_IL2CPP_INTPTR* elements;
     };
-    static GetCtorsBuf s_buf{};
-    static CHAOS_IL2CPP_INTPTR s_elements[kMaxCtors]{};
+    thread_local GetCtorsBuf s_buf{};
+    thread_local CHAOS_IL2CPP_INTPTR s_elements[kMaxCtors]{};
 
     uint32_t idx = 0;
     for (uint32_t i = 0; i < desc->method_count && idx < kMaxCtors; i++) {
@@ -175,8 +175,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructors(CHAOS_IL2CPP_INTPTR type_hand
         CHAOS_IL2CPP_INTPTR length;
         CHAOS_IL2CPP_INTPTR* elements;
     };
-    static GetCtorsBuf s_buf{};
-    static CHAOS_IL2CPP_INTPTR s_elements[kMaxCtors]{};
+    thread_local GetCtorsBuf s_buf{};
+    thread_local CHAOS_IL2CPP_INTPTR s_elements[kMaxCtors]{};
 
     uint32_t idx = 0;
     for (uint32_t i = 0; i < desc->method_count && idx < kMaxCtors; i++) {
@@ -208,8 +208,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle) {
         CHAOS_IL2CPP_INTPTR length;
         CHAOS_IL2CPP_INTPTR* elements;
     };
-    static GetMethodsBuf s_buf{};
-    static CHAOS_IL2CPP_INTPTR s_elements[kMaxMethods]{};
+    thread_local GetMethodsBuf s_buf{};
+    thread_local CHAOS_IL2CPP_INTPTR s_elements[kMaxMethods]{};
 
     uint32_t idx = 0;
 
@@ -286,8 +286,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetFields(CHAOS_IL2CPP_INTPTR type_handle) {
         CHAOS_IL2CPP_INTPTR length;
         CHAOS_IL2CPP_INTPTR* elements;
     };
-    static GetFieldsBuf s_buf{};
-    static CHAOS_IL2CPP_INTPTR s_elements[kMaxFields]{};
+    thread_local GetFieldsBuf s_buf{};
+    thread_local CHAOS_IL2CPP_INTPTR s_elements[kMaxFields]{};
 
     uint32_t count = 0;
     const ReflectionQueryFieldDescriptor* fields = nullptr;
@@ -332,8 +332,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetProperties(CHAOS_IL2CPP_INTPTR type_handle
         CHAOS_IL2CPP_INTPTR length;
         CHAOS_IL2CPP_INTPTR* elements;
     };
-    static GetPropertiesBuf s_buf{};
-    static CHAOS_IL2CPP_INTPTR s_elements[kMaxProperties]{};
+    thread_local GetPropertiesBuf s_buf{};
+    thread_local CHAOS_IL2CPP_INTPTR s_elements[kMaxProperties]{};
 
     uint32_t count = 0;
     const ReflectionQueryPropertyDescriptor* properties = nullptr;
@@ -468,7 +468,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFullName(CHAOS_IL2CPP_INTPTR type_hand
     }
 
     // Build full name and intern as StringId
-    static char s_buf[1024];
+    thread_local char s_buf[1024];
     if (ns != nullptr && ns[0] != '\0') {
         auto result = fmt::format_to_n(s_buf, sizeof(s_buf) - 1, "{}.{}", ns, name);
         auto str_id = static_cast<intptr_t>(
@@ -512,7 +512,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyQualifiedName(CHAOS_IL2CPP_INTPTR 
 
     // Build the full assembly qualified name including version/culture/token.
     // .NET format: "Namespace.Type, Assembly, Version=X.Y.Z.W, Culture=neutral, PublicKeyToken=..."
-    static char s_buf[2048];
+    thread_local char s_buf[2048];
     size_t len = 0;
     if (ns != nullptr && ns[0] != '\0') {
         auto result = fmt::format_to_n(s_buf, sizeof(s_buf) - 1,
@@ -543,9 +543,121 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyNameValue(CHAOS_IL2CPP_INTPTR asse
 }
 
 // ── GetReflectedType ─────────────────────────────────────────────
-// Returns the type that owns the given member. For type handles, this
-// returns the declaring type (nested type parent). For method/field
-// handles, returns the declaring type via descriptor lookup.
+// Returns the type that owns the given member.
+//
+// REF-RISK-1 (reflection-production-readiness Phase 4):
+// The original implementation scanned every module -> every type -> every
+// member to reverse-map a member token back to its declaring type, i.e.
+// O(modules x types x members). At 200 DLLs that is ~10^7 comparisons per
+// query, and serializers that touch MemberInfo.ReflectedType pay it
+// repeatedly. This version builds a token -> owning-type index lazily on
+// first use and answers in O(1) thereafter.
+//
+// The index is append-only and keyed by (module index, member token) so it
+// stays correct as hot-update modules register: a module whose entries are
+// not yet indexed is walked once and then cached.
+namespace {
+
+struct MemberOwnerEntry {
+    CHAOS_IL2CPP_UINT32 module_index;
+    CHAOS_IL2CPP_UINT32 token;
+    const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor* owner;
+};
+
+// Small open-addressed table; sized generously and grown by linear rehash.
+// Kept deliberately simple: this is a cold-path accelerator, not a hot loop.
+constexpr uint32_t kOwnerIndexCapacity = 4096;
+MemberOwnerEntry g_owner_index[kOwnerIndexCapacity];
+uint32_t g_owner_index_count = 0;      // occupied slots
+uint32_t g_owner_index_high_water = 0; // modules already indexed
+bool g_owner_index_overflowed = false;
+
+inline uint32_t OwnerHash(CHAOS_IL2CPP_UINT32 module_index, CHAOS_IL2CPP_UINT32 token) noexcept {
+    // FNV-1a style mix; token is already fairly well distributed.
+    uint32_t h = 2166136261u;
+    h = (h ^ module_index) * 16777619u;
+    h = (h ^ token) * 16777619u;
+    return h;
+}
+
+// Index every member of one module. Called at most once per module.
+void IndexModuleMembers(const chaos::il2cpp::runtime_core::ModuleDescriptor* mod,
+                        CHAOS_IL2CPP_UINT32 module_index) noexcept {
+    using namespace chaos::il2cpp::runtime_core;
+    if (mod == nullptr || mod->image == nullptr) return;
+
+    for (uint32_t t = 0u; t < mod->image->type_count; t++) {
+        const auto* type = mod->image->types[t];
+        if (type == nullptr) continue;
+
+        auto insert = [&](CHAOS_IL2CPP_UINT32 token) noexcept {
+            if (token == 0u) return;
+            uint32_t slot = OwnerHash(module_index, token) & (kOwnerIndexCapacity - 1u);
+            for (uint32_t probe = 0u; probe < kOwnerIndexCapacity; probe++) {
+                MemberOwnerEntry& e = g_owner_index[slot];
+                if (e.owner == nullptr) {
+                    e.module_index = module_index;
+                    e.token = token;
+                    e.owner = type;
+                    g_owner_index_count++;
+                    return;
+                }
+                if (e.module_index == module_index && e.token == token) return;  // already present
+                slot = (slot + 1u) & (kOwnerIndexCapacity - 1u);
+            }
+            g_owner_index_overflowed = true;
+        };
+
+        if (type->methods != nullptr)
+            for (uint32_t m = 0u; m < type->method_count; m++)
+                insert(type->methods[m].metadata_token);
+
+        if (type->fields != nullptr)
+            for (uint32_t f = 0u; f < type->field_count; f++)
+                insert(type->fields[f].metadata_token);
+    }
+}
+
+// Look up the owning type for (module_index, token); nullptr when not indexed.
+const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*
+FindOwningType(CHAOS_IL2CPP_UINT32 module_index, CHAOS_IL2CPP_UINT32 token) noexcept {
+    if (token == 0u) return nullptr;
+    uint32_t slot = OwnerHash(module_index, token) & (kOwnerIndexCapacity - 1u);
+    for (uint32_t probe = 0u; probe < kOwnerIndexCapacity; probe++) {
+        const MemberOwnerEntry& e = g_owner_index[slot];
+        if (e.owner == nullptr) return nullptr;  // empty slot terminates the probe
+        if (e.module_index == module_index && e.token == token) return e.owner;
+        slot = (slot + 1u) & (kOwnerIndexCapacity - 1u);
+    }
+    return nullptr;
+}
+
+// Resolve a member token to its owner, indexing any not-yet-seen modules first.
+const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*
+ResolveOwnerByToken(CHAOS_IL2CPP_UINT32 token) noexcept {
+    using namespace chaos::il2cpp::runtime_core;
+    if (token == 0u) return nullptr;
+
+    // Fast path: probe modules already covered by the index.
+    const uint32_t module_count = GetModuleCount();
+    for (uint32_t i = 0u; i < g_owner_index_high_water && i < module_count; i++) {
+        if (const auto* owner = FindOwningType(i, token)) return owner;
+    }
+
+    // Slow path: index newly registered modules, then re-probe just those.
+    for (uint32_t i = g_owner_index_high_water; i < module_count; i++) {
+        IndexModuleMembers(GetModuleByIndex(i), i);
+        if (const auto* owner = FindOwningType(i, token)) {
+            g_owner_index_high_water = i + 1u;
+            return owner;
+        }
+    }
+    g_owner_index_high_water = module_count;
+    return nullptr;
+}
+
+}  // namespace
+
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetReflectedType(CHAOS_IL2CPP_INTPTR member_handle) noexcept {
     using namespace chaos::il2cpp::runtime_core;
 
@@ -588,23 +700,9 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetReflectedType(CHAOS_IL2CPP_INTPTR member_h
     auto* methodDesc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
         static_cast<MethodInfoHandle>(member_handle));
     if (methodDesc != nullptr) {
-        const uint32_t token = methodDesc->metadata_token;
-        if (token != 0u) {
-            const uint32_t module_count = GetModuleCount();
-            for (uint32_t i = 0u; i < module_count; i++) {
-                const auto* mod = GetModuleByIndex(i);
-                if (mod == nullptr || mod->image == nullptr) continue;
-                for (uint32_t t = 0u; t < mod->image->type_count; t++) {
-                    const auto* type = mod->image->types[t];
-                    if (type == nullptr || type->methods == nullptr) continue;
-                    for (uint32_t m = 0u; m < type->method_count; m++) {
-                        if (type->methods[m].metadata_token == token) {
-                            return static_cast<CHAOS_IL2CPP_INTPTR>(
-                                EncodeReflectionQueryTypeHandle(type));
-                        }
-                    }
-                }
-            }
+        // O(1) via the owner index (was O(modules x types x methods)).
+        if (const auto* owner = ResolveOwnerByToken(methodDesc->metadata_token)) {
+            return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(owner));
         }
         return 0;
     }
@@ -612,23 +710,9 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetReflectedType(CHAOS_IL2CPP_INTPTR member_h
     auto* fieldDesc = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
         static_cast<FieldInfoHandle>(member_handle));
     if (fieldDesc != nullptr) {
-        const uint32_t token = fieldDesc->metadata_token;
-        if (token != 0u) {
-            const uint32_t module_count = GetModuleCount();
-            for (uint32_t i = 0u; i < module_count; i++) {
-                const auto* mod = GetModuleByIndex(i);
-                if (mod == nullptr || mod->image == nullptr) continue;
-                for (uint32_t t = 0u; t < mod->image->type_count; t++) {
-                    const auto* type = mod->image->types[t];
-                    if (type == nullptr || type->fields == nullptr) continue;
-                    for (uint32_t f = 0u; f < type->field_count; f++) {
-                        if (type->fields[f].metadata_token == token) {
-                            return static_cast<CHAOS_IL2CPP_INTPTR>(
-                                EncodeReflectionQueryTypeHandle(type));
-                        }
-                    }
-                }
-            }
+        // O(1) via the owner index (was O(modules x types x fields)).
+        if (const auto* owner = ResolveOwnerByToken(fieldDesc->metadata_token)) {
+            return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(owner));
         }
         return 0;
     }

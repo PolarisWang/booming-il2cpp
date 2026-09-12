@@ -1,7 +1,7 @@
 # 当前进行中的任务
 
 当前 active 任务：
-- none
+- [reflection-production-readiness](reflection-production-readiness/STATUS.md) — 反射生产机品质补齐（roadmap, 5 阶段串行）
 
 | task_id | task_type | phase | updated_at | next_step | active |
 | --- | --- | --- | --- | --- | --- |
@@ -11,3 +11,4 @@
 | [20260525-hotupdate-dml-pipeline](20260525-hotupdate-dml-pipeline/STATUS.md) | roadmap | planning | 2026-05-25 | 修复 foundation-dll hotupdate DML 管线 — 使 hotupdate 验证走真实 interpreter 路径 | true |
 | [foundation-dll-phase-1-corelib](foundation-dll-phase-1-corelib/STATUS.md) | plan | in-progress | 2026-05-05 | Phase 1 System.Private.CoreLib 全量 il2cpp 开发 | false |
 | [runtime-external-reflection-type](runtime-external-reflection-type/STATUS.md) | plan | completed | 2026-05-05 | Runtime External 依赖实现 — Reflection/Type + Exception | false |
+| [reflection-production-readiness](reflection-production-readiness/STATUS.md) | roadmap | roadmap | 2026-09-12 | 启动 P0-1 建 ApiSurfaceScanner，先出反射 API 总量数字以定 Phase 2–3 粒度 | true |

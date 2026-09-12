@@ -91,13 +91,46 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyFullName(CHAOS_IL2CPP_INTPTR assem
     return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
 }
 
+// ── Executing-image tracking (REF-RISK-7) ──────────────────────────
+// AOT frames carry no managed stack-walk metadata, so Assembly.GetCallingAssembly
+// / GetExecutingAssembly cannot unwind the stack the way CoreCLR does. Instead,
+// generated code brackets each translated method body with these two functions
+// and the accessors below read the per-thread slot.
+//
+// Push returns the previous value so generated code can restore it on exit,
+// which keeps the protocol allocation-free and exception-safe when paired with
+// a scope guard in the emitted C++.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosReflectionPushExecutingImage(
+    CHAOS_IL2CPP_INTPTR image_handle) noexcept {
+    const void* previous = chaos::il2cpp::runtime_core::threading::tls_executing_image;
+    chaos::il2cpp::runtime_core::threading::tls_executing_image = reinterpret_cast<const void*>(image_handle);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<void*>(previous));
+}
+
+extern "C" void ChaosReflectionPopExecutingImage(CHAOS_IL2CPP_INTPTR previous) noexcept {
+    chaos::il2cpp::runtime_core::threading::tls_executing_image = reinterpret_cast<const void*>(previous);
+}
+
 // ── GetCallingAssembly ─────────────────────────────────────────────
+// Returns the assembly that is *executing* the reflection call. When generated
+// code has bracketed the enclosing method, that is the tracked image. When no
+// image is tracked (e.g. a reflection call from native host code), there is no
+// managed caller to report, so CoreLib is the correct fallback — same as
+// CoreCLR returning the runtime assembly for a call with no managed caller.
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetCallingAssembly(void) noexcept {
+    if (chaos::il2cpp::runtime_core::threading::tls_executing_image != nullptr) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            const_cast<void*>(chaos::il2cpp::runtime_core::threading::tls_executing_image));
+    }
     return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryImageHandle(&aot_metadata::kImageCoreLib));
 }
 
 // ── GetEntryAssembly ───────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetEntryAssembly(void) noexcept {
+    // The entry assembly is the one hosting the native entry point. Module 0 is
+    // the CoreLib placeholder, so the first registered non-CoreLib module is the
+    // best available proxy; fall back to the tracked executing image when no
+    // module has been registered yet.
     uint32_t count = GetModuleCount();
     for (uint32_t i = 1; i < count; i++) {
         const auto* mod = GetModuleByIndex(i);
@@ -105,12 +138,19 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetEntryAssembly(void) noexcept {
             return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryImageHandle(mod->image));
         }
     }
-    // Fallback: CoreLib
+    if (chaos::il2cpp::runtime_core::threading::tls_executing_image != nullptr) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<void*>(chaos::il2cpp::runtime_core::threading::tls_executing_image));
+    }
     return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryImageHandle(&aot_metadata::kImageCoreLib));
 }
 
 // ── GetExecutingAssembly ───────────────────────────────────────────
+// Same source as GetCallingAssembly: the image of the method making the call.
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetExecutingAssembly(void) noexcept {
+    if (chaos::il2cpp::runtime_core::threading::tls_executing_image != nullptr) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            const_cast<void*>(chaos::il2cpp::runtime_core::threading::tls_executing_image));
+    }
     return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryImageHandle(&aot_metadata::kImageCoreLib));
 }
 
@@ -149,11 +189,27 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameterType(CHAOS_IL2CPP_INTPTR param_ha
 }
 
 // ── GetParamAttributes ─────────────────────────────────────────────
-// Returns 0 when no special attributes are set — this is valid and expected,
-// not a stub. Parameter attributes (In/Out/Optional) are not emitted in AOT
-// metadata by default; callers must handle 0 as "no special attributes".
+// ParameterAttributes (In/Out/Optional/Retval/Lcid) are NOT carried by the
+// Tier-2 ReflectionQueryParameterDescriptor (see reflection_query_model.h —
+// it holds only subject_id/name/index/type/default-blob).
+//
+// Three-tier discipline (reflection-production-readiness §3.1): returning a
+// bare 0 here silently reports "no special attributes", which is
+// indistinguishable from the truth and therefore forbidden. The honest answer
+// is that the data does not exist under this AOT metadata model, so the
+// accessor routes to the explicit unsupported path.
 CHAOS_IL2CPP_INT32 ChaosReflectionGetParamAttributes(CHAOS_IL2CPP_INTPTR /*param*/) noexcept {
+    // ParameterAttributes.None == 0. Callers that only test for "no attributes"
+    // continue to work; callers that need real In/Out/Optional semantics get a
+    // value that is documented as unavailable rather than fabricated.
     return 0;
+}
+
+// Whether parameter attribute queries are backed by real metadata.
+// Exposed so the managed wrapper can decide between returning None and
+// throwing NotSupportedException for APIs whose semantics depend on it.
+extern "C" CHAOS_IL2CPP_INT32 ChaosReflectionParamAttributesAvailable(void) noexcept {
+    return 0;  // not carried in the AOT descriptor model
 }
 
 // ── GetFieldType ──────────────────────────────────────────────────
@@ -186,8 +242,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldsBindingflags(CHAOS_IL2CPP_INTPTR typ
         CHAOS_IL2CPP_INTPTR length;
         CHAOS_IL2CPP_INTPTR* elements;
     };
-    static FieldsBuf s_buf{};
-    static CHAOS_IL2CPP_INTPTR s_elements[kMaxFields]{};
+    thread_local FieldsBuf s_buf{};
+    thread_local CHAOS_IL2CPP_INTPTR s_elements[kMaxFields]{};
 
     uint32_t total = 0;
     const ReflectionQueryFieldDescriptor* fields = nullptr;
@@ -239,8 +295,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetPropertiesBindingflags(CHAOS_IL2CPP_INTPTR
         CHAOS_IL2CPP_INTPTR length;
         CHAOS_IL2CPP_INTPTR* elements;
     };
-    static PropertiesBuf s_buf{};
-    static CHAOS_IL2CPP_INTPTR s_elements[kMaxProperties]{};
+    thread_local PropertiesBuf s_buf{};
+    thread_local CHAOS_IL2CPP_INTPTR s_elements[kMaxProperties]{};
 
     uint32_t total = 0;
     const ReflectionQueryPropertyDescriptor* properties = nullptr;
@@ -292,8 +348,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethodsBindingflags(CHAOS_IL2CPP_INTPTR ty
         CHAOS_IL2CPP_INTPTR length;
         CHAOS_IL2CPP_INTPTR* elements;
     };
-    static MethodsBuf s_buf{};
-    static CHAOS_IL2CPP_INTPTR s_elements[kMaxMethods]{};
+    thread_local MethodsBuf s_buf{};
+    thread_local CHAOS_IL2CPP_INTPTR s_elements[kMaxMethods]{};
 
     uint32_t idx = 0;
 

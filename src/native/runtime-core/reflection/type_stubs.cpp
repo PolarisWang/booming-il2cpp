@@ -72,7 +72,7 @@ CHAOS_IL2CPP_INTPTR ChaosTypeGetProperties(CHAOS_IL2CPP_INTPTR type) noexcept {
     auto* desc = GetTypeDescriptorFromHandle(type);
     if (desc == nullptr || desc->properties == nullptr) return 0;
 
-    static CHAOS_IL2CPP_INTPTR s_buffer[65];
+    thread_local CHAOS_IL2CPP_INTPTR s_buffer[65];
     uint32_t count = desc->property_count > 32 ? 32 : desc->property_count;
     s_buffer[0] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<intptr_t>(count));
     for (uint32_t i = 0; i < count; i++) {
@@ -86,7 +86,7 @@ CHAOS_IL2CPP_INTPTR ChaosTypeGetEvents(CHAOS_IL2CPP_INTPTR type) noexcept {
     auto* desc = GetTypeDescriptorFromHandle(type);
     if (desc == nullptr || desc->events == nullptr) return 0;
 
-    static CHAOS_IL2CPP_INTPTR s_buffer[65];
+    thread_local CHAOS_IL2CPP_INTPTR s_buffer[65];
     uint32_t count = desc->event_count > 32 ? 32 : desc->event_count;
     s_buffer[0] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<intptr_t>(count));
     for (uint32_t i = 0; i < count; i++) {
@@ -263,7 +263,7 @@ static bool FindTypeRefByName(const char* target_name,
 
 CHAOS_IL2CPP_INTPTR ChaosTypeGetElementType(CHAOS_IL2CPP_INTPTR type) noexcept {
     // Shared static buffer for constructing element type name/subject_id
-    static char s_elem_buf[1024];
+    thread_local char s_elem_buf[1024];
 
     // ── Path 1: ModuleRegistry handle (TypeRef) ──
     TypeRef tr;
@@ -335,7 +335,7 @@ CHAOS_IL2CPP_INTPTR ChaosTypeGetElementType(CHAOS_IL2CPP_INTPTR type) noexcept {
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeMakeArrayType(CHAOS_IL2CPP_INTPTR type) noexcept {
-    static char s_buf[1024];
+    thread_local char s_buf[1024];
 
     // Path 1: ModuleRegistry TypeRef handle — append "[]" and search type_names
     TypeRef tr;
@@ -375,7 +375,7 @@ CHAOS_IL2CPP_INTPTR ChaosTypeMakeArrayType(CHAOS_IL2CPP_INTPTR type) noexcept {
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeMakeByRefType(CHAOS_IL2CPP_INTPTR type) noexcept {
-    static char s_buf[1024];
+    thread_local char s_buf[1024];
 
     // Path 1: ModuleRegistry TypeRef handle — append "&" and search type_names
     TypeRef tr;
@@ -415,7 +415,7 @@ CHAOS_IL2CPP_INTPTR ChaosTypeMakeByRefType(CHAOS_IL2CPP_INTPTR type) noexcept {
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeMakePointerType(CHAOS_IL2CPP_INTPTR type) noexcept {
-    static char s_buf[1024];
+    thread_local char s_buf[1024];
 
     // Path 1: ModuleRegistry TypeRef handle — append "*" and search type_names
     TypeRef tr;

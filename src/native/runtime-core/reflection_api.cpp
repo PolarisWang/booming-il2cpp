@@ -31,6 +31,9 @@
 #include "instantiation_engine.h"
 #include "generic_context.h"
 #include "eeclass.h"
+// tls_executing_image — consumed by GetCallingAssembly/GetExecutingAssembly
+// (REF-RISK-7) and maintained by generated code via the push/pop helpers.
+#include "thread_state.h"
 
 #include <cstring>
 #include <fmt/format.h>

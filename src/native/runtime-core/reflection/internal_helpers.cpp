@@ -226,7 +226,7 @@ static inline const ReflectionQueryImageDescriptor* GetImageFromTypeDescriptor(
 // caller must consume before next call into this translation unit).
 
 static const char* DecodeAndNullTerminateString(CHAOS_IL2CPP_INTPTR value) {
-    static char s_buf[4096];
+    thread_local char s_buf[4096];
     if (value == 0) return nullptr;
 
     const char* source = nullptr;
@@ -278,7 +278,7 @@ static void SplitTypeName(const char* full_name, const char*& ns, const char*& t
     }
 
     // Namespace portion needs a null-terminated copy
-    static char s_ns_buf[4096];
+    thread_local char s_ns_buf[4096];
     ptrdiff_t ns_len = dot - full_name;
     if (ns_len >= static_cast<ptrdiff_t>(sizeof(s_ns_buf)))
         ns_len = sizeof(s_ns_buf) - 1;

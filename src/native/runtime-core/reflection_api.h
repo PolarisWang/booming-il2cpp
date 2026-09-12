@@ -69,6 +69,18 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetModuleName(CHAOS_IL2CPP_INTPTR module_hand
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetModuleNameOnly(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyFullName(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetCallingAssembly(void) noexcept;
+
+/* ── Executing-image tracking (REF-RISK-7) ───────────────────────────
+ * AOT frames carry no managed stack-walk metadata, so generated code brackets
+ * each translated method body with these helpers; the assembly accessors then
+ * read the per-thread slot instead of unwinding the stack.
+ *
+ *   intptr_t prev = ChaosReflectionPushExecutingImage(kMyImage);
+ *   ... method body ...
+ *   ChaosReflectionPopExecutingImage(prev);
+ */
+CHAOS_IL2CPP_INTPTR ChaosReflectionPushExecutingImage(CHAOS_IL2CPP_INTPTR image_handle) noexcept;
+void ChaosReflectionPopExecutingImage(CHAOS_IL2CPP_INTPTR previous) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetEntryAssembly(void) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetExecutingAssembly(void) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetImageRuntimeVersion(CHAOS_IL2CPP_INTPTR assembly) noexcept;
