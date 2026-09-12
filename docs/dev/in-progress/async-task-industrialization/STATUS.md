@@ -220,8 +220,8 @@ revert 验证后两测试**都**变红。
 | API | 状态 |
 |-----|------|
 | `WhenAll<TResult>` 泛型重载 | ✅ 已接线（P2-6）；`WhenAll<TReturn>(Task<T>[])` 与非泛型共用 `chaos_task_when_all_array` |
-| `WhenEach` | ❌ **A4 已完成，但 WhenEach 依赖 awaited-iterator lowering + `ConfiguredValueTaskAwaiter` + `ValueTask.AsTask()` + 消费侧 `MoveNextAwaiter`，未开始实现**。详见下方分析。 |
-| `Task.Factory` | ⚠️ 部分接线：`get_Factory` + 委托版 `StartNew` 已接；余下 `StartNew` 变体(CT/Options/state/TResult) 显式走解释器。**接口真实规模 74 个公共实例方法**（设计文档写 21，是错的）；`FromAsync`(22) 无原生模型(APM/IAsyncResult)，`ContinueWhenAll/Any`(16+16) 未接 |
+| `WhenEach` | ✅ 已完成：native `chaos_task_when_each_array`（completion-ordered FIFO）+ registry 注册 + 4 个 gtest 验收（含 completion-order 反例）`8a08a459a`、`653d45d3c` |
+| `Task.Factory` | ⚠️ 部分接线：`get_Factory` + 委托版 `StartNew` 已接；`ContinueWhenAll/Any` 数组重载已接（`64472529a`）；余下 `StartNew` 变体(CT/Options/state/TResult) 显式走解释器。**`FromAsync`(22)** 无原生模型(APM/IAsyncResult)，标注为永不可能（非 `Task` 包装器，是 `IAsyncResult` APM 模式，AOT 下没有 `Begin/End` 对的原生等价），余下 4 个属性需真实 factory 对象模型 |
 | `ContinueWith` 20 overloads | ✅ 逐族路由已定（1 族接线 / 4 族显式拒绝）；余下 15 个重载走同一 resolver 的 arity 判断，无需逐个登记 |
 | **async entry box 栈分配** | ✅ 已修（P2-7）：entry prologue 用 `CHAOS_IL2CPP_NEW_GC` 分配 `>d__`，并按值传给 `Start` |
 
