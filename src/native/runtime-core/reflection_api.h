@@ -80,6 +80,63 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyQualifiedName(CHAOS_IL2CPP_INTPTR 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetReflectedType(CHAOS_IL2CPP_INTPTR member_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetType(CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetTypes(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+
+/* ── Module.Resolve* / metadata identity ─────────────────────────────
+ * Token → member resolution inside a module's own type table. Tokens are
+ * matched against each descriptor's metadata_token; property descriptors carry
+ * no token field, so ResolveProperty-like lookups report unresolved rather
+ * than returning an unrelated member.
+ */
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleResolveType(CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INT32 metadata_token) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleResolveField(CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INT32 metadata_token) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleResolveMethod(CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INT32 metadata_token) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleResolveMember(CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INT32 metadata_token) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetName(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetFullyQualifiedName(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetScopeName(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetMetadataToken(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetModuleHandle(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+
+/* ── ParameterInfo descriptor accessors ──────────────────────────────
+ * Backed by the Tier-2 parameter descriptor. ParameterAttributes (In/Out/
+ * Retval/Lcid) are not carried in AOT metadata; ChaosReflectionParamAttributes
+ * Available() lets callers distinguish "no attributes" from "unavailable".
+ */
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetMetadataToken(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetName(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetMember(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionParamGetIsIn(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionParamGetIsOut(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionParamGetIsLcid(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionParamGetIsOptional(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionParamGetIsRetval(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamToString(CHAOS_IL2CPP_INTPTR param) noexcept;
+
+/* ── MethodBase / FieldInfo remaining accessors ──────────────────────
+ * MemberType constants follow ECMA-335 MemberTypes (Method=8, Field=4,
+ * Constructor=1). Security-transparency queries answer with the .NET Core
+ * reference behaviour (every member SecurityCritical) rather than an
+ * unavailable attribute. GetMethodFromHandle / GetFieldFromHandle are
+ * identity round-trips because the Runtime*Handle IS the descriptor handle.
+ */
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodGetMemberType(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodGetIsGenericMethod(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodGetIsGenericMethodDefinition(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodGetIsConstructedGenericMethod(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodGetIsSecurityCritical(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodGetIsSecuritySafeCritical(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodGetIsSecurityTransparent(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetMethodFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INT64  ChaosReflectionMethodGetMethodHandle(CHAOS_IL2CPP_INTPTR member) noexcept;
+
+CHAOS_IL2CPP_INT32  ChaosReflectionFieldGetMemberType(CHAOS_IL2CPP_INTPTR field) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionFieldGetIsSecurityCritical(CHAOS_IL2CPP_INTPTR field) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionFieldGetIsSecuritySafeCritical(CHAOS_IL2CPP_INTPTR field) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionFieldGetIsSecurityTransparent(CHAOS_IL2CPP_INTPTR field) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetFieldFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetModifiedFieldType(CHAOS_IL2CPP_INTPTR field) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetModifiedPropertyType(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetModifiedParameterType(CHAOS_IL2CPP_INTPTR param) noexcept;
 // ── Additional reflection API functions (implemented in reflection_api.cpp) ──
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseType(CHAOS_IL2CPP_INTPTR type_handle) noexcept;

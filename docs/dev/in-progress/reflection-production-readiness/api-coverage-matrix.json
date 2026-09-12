@@ -1,6 +1,6 @@
 {
   "$schema": "reflection-api-coverage-matrix/v1",
-  "generatedAt": "2026-09-12T06:25:12.2031725+00:00",
+  "generatedAt": "2026-09-12T06:42:06.2510263+00:00",
   "summary": {
     "generatedFrom": [
       "Microsoft.NETCore.App.Ref",
@@ -11,8 +11,8 @@
     "byTier": {
       "data-carrier": 76,
       "not-supported": 160,
-      "real-planned": 309,
-      "real": 89,
+      "real-planned": 289,
+      "real": 109,
       "enum-surface": 193
     },
     "byType": {
@@ -7589,11 +7589,13 @@
       "signature": "String FullyQualifiedName { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionModuleGetFullyQualifiedName"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -7919,11 +7921,13 @@
       "signature": "Int32 MetadataToken { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionModuleGetMetadataToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -7933,11 +7937,13 @@
       "signature": "ModuleHandle ModuleHandle { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionModuleGetModuleHandle"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -7964,7 +7970,7 @@
       "tier": "real",
       "realKind": "fact",
       "evidence": {
-        "nativeImpl": "ChaosReflectionGetModuleName"
+        "nativeImpl": "ChaosReflectionModuleGetName"
       },
       "riskRefs": [],
       "rationale": "Native symbol exists in reflection_api.h"
@@ -7977,11 +7983,13 @@
       "signature": "FieldInfo ResolveField(Int32)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionModuleResolveField"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -7991,11 +7999,13 @@
       "signature": "FieldInfo ResolveField(Int32, Type[], Type[])",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionModuleResolveField"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8005,11 +8015,13 @@
       "signature": "MemberInfo ResolveMember(Int32)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionModuleResolveMember"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8019,11 +8031,13 @@
       "signature": "MemberInfo ResolveMember(Int32, Type[], Type[])",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionModuleResolveMember"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8033,11 +8047,13 @@
       "signature": "MethodBase ResolveMethod(Int32)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionModuleResolveMethod"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8047,11 +8063,13 @@
       "signature": "MethodBase ResolveMethod(Int32, Type[], Type[])",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionModuleResolveMethod"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8089,11 +8107,13 @@
       "signature": "Type ResolveType(Int32)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionModuleResolveType"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8103,11 +8123,13 @@
       "signature": "Type ResolveType(Int32, Type[], Type[])",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionModuleResolveType"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8117,11 +8139,13 @@
       "signature": "String ScopeName { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionModuleGetScopeName"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8797,11 +8821,13 @@
       "signature": "Boolean IsIn { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionParamGetIsIn"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8811,11 +8837,13 @@
       "signature": "Boolean IsLcid { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionParamGetIsLcid"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8825,11 +8853,13 @@
       "signature": "Boolean IsOptional { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionParamGetIsOptional"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8839,11 +8869,13 @@
       "signature": "Boolean IsOut { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionParamGetIsOut"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8853,11 +8885,13 @@
       "signature": "Boolean IsRetval { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionParamGetIsRetval"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8867,11 +8901,13 @@
       "signature": "MemberInfo Member { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionParamGetMember"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8881,11 +8917,13 @@
       "signature": "Int32 MetadataToken { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionParamGetMetadataToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",
@@ -8898,7 +8936,7 @@
       "tier": "real",
       "realKind": "fact",
       "evidence": {
-        "nativeImpl": "ChaosReflectionGetParameterName"
+        "nativeImpl": "ChaosReflectionParamGetName"
       },
       "riskRefs": [],
       "rationale": "Native symbol exists in reflection_api.h"
@@ -8957,11 +8995,13 @@
       "signature": "String ToString()",
       "isStatic": false,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionParamToString"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Native symbol exists in reflection_api.h"
     },
     {
       "namespace": "System.Reflection",

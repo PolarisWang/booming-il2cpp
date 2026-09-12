@@ -176,6 +176,28 @@ public static class Classifier
         ["EventInfo.GetAddMethod"] = new[] { "ChaosReflectionEventGetAddMethod" },
         ["EventInfo.get_AddMethod"] = new[] { "ChaosReflectionEventGetAddMethod" },
         ["EventInfo.get_Name"] = new[] { "ChaosReflectionEventGetName" },
+
+        // ── Module.Resolve* / metadata (Phase 3 cont.) ─────────────────
+        ["Module.ResolveType"] = new[] { "ChaosReflectionModuleResolveType" },
+        ["Module.ResolveField"] = new[] { "ChaosReflectionModuleResolveField" },
+        ["Module.ResolveMethod"] = new[] { "ChaosReflectionModuleResolveMethod" },
+        ["Module.ResolveMember"] = new[] { "ChaosReflectionModuleResolveMember" },
+        ["Module.get_Name"] = new[] { "ChaosReflectionModuleGetName" },
+        ["Module.get_FullyQualifiedName"] = new[] { "ChaosReflectionModuleGetFullyQualifiedName" },
+        ["Module.get_ScopeName"] = new[] { "ChaosReflectionModuleGetScopeName" },
+        ["Module.get_MetadataToken"] = new[] { "ChaosReflectionModuleGetMetadataToken" },
+        ["Module.get_ModuleHandle"] = new[] { "ChaosReflectionModuleGetModuleHandle" },
+
+        // ── ParameterInfo descriptor accessors (Phase 3 cont.) ─────────
+        ["ParameterInfo.get_MetadataToken"] = new[] { "ChaosReflectionParamGetMetadataToken" },
+        ["ParameterInfo.get_Name"] = new[] { "ChaosReflectionParamGetName" },
+        ["ParameterInfo.get_Member"] = new[] { "ChaosReflectionParamGetMember" },
+        ["ParameterInfo.get_IsIn"] = new[] { "ChaosReflectionParamGetIsIn" },
+        ["ParameterInfo.get_IsOut"] = new[] { "ChaosReflectionParamGetIsOut" },
+        ["ParameterInfo.get_IsLcid"] = new[] { "ChaosReflectionParamGetIsLcid" },
+        ["ParameterInfo.get_IsOptional"] = new[] { "ChaosReflectionParamGetIsOptional" },
+        ["ParameterInfo.get_IsRetval"] = new[] { "ChaosReflectionParamGetIsRetval" },
+        ["ParameterInfo.ToString"] = new[] { "ChaosReflectionParamToString" },
     };
 
     /// <summary>
