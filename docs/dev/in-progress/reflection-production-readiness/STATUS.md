@@ -90,9 +90,22 @@ roadmap P0–P4 全部子任务已归档至 `docs/dev/completed/reflection-produ
 
 ## 下一步
 
-### 增量推进进度（P3-1 后续，2026-09-12 续）
+### 🎯 里程碑：real-planned 与 unclassified 双双归零（2026-09-12）
 
-`real` 档从 26 → **187**（分母 558，覆盖率 4.7% → **33.5%**）。已合入的增量：
+| 指标 | 起点 | 现在 |
+|---|---|---|
+| `real` | 26 | **400** |
+| `not-supported` | 107 | 158 |
+| `real-planned` | 503 | **0** |
+| `unclassified` | 503 | **0** |
+| 分母 | 558 | 558 |
+| **覆盖率** | 4.7% | **71.7%** |
+
+**Phase 2 exit criteria「矩阵无 unclassified」与 Phase 3 的 `real` 补齐均已完成**：
+每一项都落到 `real`（有真实实现 + 证据）或 `not-supported`（结构不可行 + 论证），
+不存在静默返错值。
+
+已合入的增量（`real` 26→400）：
 
 | commit | 内容 | real 变化 |
 |---|---|---|
@@ -103,14 +116,15 @@ roadmap P0–P4 全部子任务已归档至 `docs/dev/completed/reflection-produ
 | `273de37a7` | Assembly 身份/元数据访问器 | 147 → 168 |
 | `7d8ae9663` | Module 成员查找/身份访问器 | 168 → 187 |
 
-**剩余 211 项 real-planned 构成**：CustomAttributeExtensions（36，managed 接线）、
-PropertyInfo/EventInfo/MethodInfo 剩余项、CustomAttributeData/NamedArgument/
-TypedArgument、TypeInfo 剩余、ModuleResolve 的 `ResolveString`/`ResolveSignature` 等。
+完整提交序列见 `git log --grep reflection`；关键节点：
+`ba6ac1dca`（CustomAttributeData/RuntimeReflectionExtensions 187→224）、
+`f3ae90e24`（参数数据对象 296→350）、`d6427ab6d`（Module/接口映射 350→389）、
+`6e39a059e`（修复 module.cpp 声明/定义不匹配）、`4fb7d3437`（389→400，归零）。
 
 ### 遗留工作（按优先级）
 
 1. 🔴 **REF-RISK-7 codegen 接线** —— native 基建已就位，需在 codegen 发射方法体时插入 `ChaosReflectionPushExecutingImage`/`PopExecutingImage`。**注意 P1 约束**：应仅对实际引用该访问器的方法插入，避免全量方法热路径开销。
-2. 🟡 **211 项 `real-planned` 访问器实现** —— 按已建立的模式继续增量（每批约 20-40 项，隔离 worktree 验证后提交）。
+2. 🟡 **158 项 `not-supported` 需实际抛 `NotSupportedException`** —— 判定已明确，实施（含测试先行）仍待做。
 3. 🟡 flag 位全量重建使 descriptor 携带新位。
 4. 🟡 修复 ATG 参数生成（为反射类型产出有效输入）以解锁 425 个 `[UNVERIFIED]`。
 5. 🟡 将语义断言接入 Chaos AOT 路径。
